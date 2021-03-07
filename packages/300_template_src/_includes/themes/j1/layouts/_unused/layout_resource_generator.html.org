@@ -1,0 +1,58 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/_includes/themes/j1/layouts/layout_resource_generator.html
+ # Liquid template to generate all resource entries defined for a layout
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+ #  NOTE:
+ #    Do NOT add any RESOURCES here. Go for ...
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #    liquid_var:  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %} 
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture resource_writer %}themes/{{site.template.name}}/procedures/layouts/resource_writer.proc{% endcapture %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign resource_placement = include.region %}
+{% assign items_collate      = site.data.resources %} 
+
+
+{% comment %} Main 
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% if page.debug2 %}
+<!-- [DEBUG2 ] [j1.layout_resource_generator.html     ] [ resource DATA to be loaded: {{items_collate}} ] -->
+{% endif %}
+
+<!-- [INFO   ] [j1.layout_resource_generator.html     ] [ start processing: region: {{resource_placement}}, layout: {{page.layout}} ] -->
+{% for item in items_collate %}
+
+  {% assign array_name  = item[0] %}
+  {% assign array_value = item[1] %}
+
+  {% if array_name == 'globals' %}
+    {% assign global_array  = array_value %}
+  {% endif %}
+
+  {% if page.debug2 %}
+  <!-- [DEBUG2 ] [j1.layout_resource_generator.html     ] [ generate item: {{array_name}} ] -->
+  <!-- [DEBUG2 ] [j1.layout_resource_generator.html     ] [ place DATA: {{array_value}} ] -->
+  {% endif %}
+
+    <!-- [INFO   ] [j1.layout_resource_generator.html     ] [ call resource writer for: {{array_name}} ] -->
+    {% include {{ resource_writer }}  region=resource_placement globals=global_array resources=array_value %}
+
+{% endfor %}
+  <!-- [INFO   ] [j1.layout_resource_generator.html     ] [ end processing ] -->

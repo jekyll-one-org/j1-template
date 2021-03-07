@@ -1,0 +1,502 @@
+---
+title:                                  Using Docker
+tagline:                                docker on windows
+description:                            Docker on Windows
+
+date:                                   2018-11-01 00:00:00 +0100
+series:                                 Docker
+adsense:                                false
+comments:                               false
+toc:                                    true
+
+tags:                                   [ Tutorial, kickstarter ]
+index:                                  [ Docker, Windows, Shared, Folder, Folders ]
+categories:                             []
+
+regenerate:                             false
+
+resources:                              []
+resource_options:
+  - toccer:
+      collapseDepth:                    3
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/modules/attics/banner/docker-1280x600-bw.jpg
+          alt:                          docker_banner_r-1280x500-bw
+---
+
+// NOTE:  General Asciidoc page attributes settings
+// -----------------------------------------------------------------------------
+:page-liquid:
+
+
+// Additional Asciidoc page attributes goes here
+// -----------------------------------------------------------------------------
+:page-imagesdir: {{page.images.dir}}/j1_using_docker
+
+// Place an excerpt at the most top position
+// -----------------------------------------------------------------------------
+How to run Docker smooth on Windows? Sounds like a quite simple question
+follwed by a simple answer: go for *Docker for Windows*. Unfortunately,
+the answer is *not* that easy. As often: it depends (on the use case).
+
+// [role="clearfix mb-3"]
+excerpt__end
+
+// Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture set_env_entry_document %}themes/{{site.template.name}}/procedures/global/set_env_entry_document.proc{%endcapture%}
+
+// Initialize entry document paths
+//
+{% include {{set_env_entry_document}} init_folders=all %}
+
+// Load tags and urls
+//
+include::{includedir}/attributes.asciidoc[tag=tags]
+include::{includedir}/attributes.asciidoc[tag=urls]
+include::{includedir}/attributes.asciidoc[tag=data]
+
+// Additional debug output (if :debug: set to true)
+// -----------------------------------------------------------------------------
+:debug: false
+include::{tabledir}/debug_variables.asciidoc[]
+
+// Page content
+// -----------------------------------------------------------------------------
+//include::{documentdir}/100-docker-using-shared-folders.asciidoc[]
+
+
+[[readmore]]
+== Docker smooth on Windows
+
+// [role="mb-3"]
+// image::/assets/images/collections/blog/series/j1_using_docker/windows_docker_banner.1280x500.png[{{page.title}}]
+
+In general, two incarnations of Docker for Windows are available:
+
+* Legacy solution: *Docker Toolbox*
+* Native solution: *Docker for Windows*
+
+Before the native version of Docker *Docker for Windows* was available,
+a *cross-platform* solution called *Docker Toolbox* could be used.
+*Docker Toolbox* is a bundle of *current* Docker software based on
+*Docker Machine* combined with the *Docker Engine* bundled with
+*VirtualBox* as a Hypervisor to run Linux boxes as virtual machines
+on Windows.
+
+What the Docker team recomments: Update to the newer package, if possible.
+This should be discussed, especially for Windows, in more detail ...
+
+[WARNING]
+====
+*The Docker Team mentions the following about Docker Toolbox:*
+
+Docker Toolbox is for *older Windows* systems (or *Apple MacOS* versions)
+that *does not meet* the requirements of the *native* Docker version.
+====
+
+Docker won't never run *natively* on Windows. The *Container Technology*
+used by Docker depends on *Linux* (at least on a Unix flavour of the host
+operating system). For all non-Linux (or Unix) platforms, a *Hypervisor* is
+needed to make it possible to run the needed *Linux OS* for Docker.
+
+Yes, Windows support a *native* Hypervisor layer: `Hyper-V`. Using the Windows
+component `Hyper-V`, any operating system can be run as *virtual machines* on
+Windows. But it should be kept in mind: the Hypervisor layer is *always* needed;
+as well as for the so-called the *native* Docker version on Windows. But:
+real *native* Docker versions does *not* need a Hypervisor layer; they run
+containers direcly on the host OS! This should be kept on mind.
+
+They are some pittfals using *Docker for Windows* if you go for:
+
+* Stability - found quite often issues running containers on *Docker for Windows*.
+If you're  not a Windows specialist, it is hard to findout issues for `Hyper-V`
+, the VM and|or both.
+* Flexibility - it is *NOT* possible to use the Hypervisor `Hyper-V` in
+parallel to *VirtualBox* as an alternative
+* Incompatibility - on some Windows installations, and for sure they met the
+requirements of the *native* Docker version, the installaton was *NOT*
+successful and Docker fails to start
+
+Again: the software included in the *Docker Toolbox* are *current* versions.
+The latest Toolbox contains:
+
+* the Docker Engine Docker, version 18.03.0-ce, build 0520e24302
+* the Docker Machine, version 0.14.0, build 89b8332
+* the Docker Composer, version 1.20.1, build 5d8c71b2
+* a current MINGW64-based GNU bash, version 4.4.19(2)-release (x86_64-pc-msys)
+
+For all the people having their (IT) roots on Unix respectively Linux, the
+*Docker Toolbox* is the better solution on Windows (for now). No need to go
+for the Windows Hypervisor `Hyper-V` - Oracle *VirtualBox* can be used
+instead; as quite often used for testing and development.
+
+Let's have a look how to *Manage Linux on Windows*, to use Docker on the
+Windows platform.
+
+== Installing Docker Toolbox
+
+As discussed ealier, *Docker Toolbox* is using *VirtualBox* for the
+Hypervisor to create the Linux VMs needed. To get the latest version,
+install VirtualBox first (Docker Toolbox includes a installer package
+for VBox but not nessesarily at their latets version).
+
+Go for the link:{virtualbox-install-on-windows}[VirtualBox Download Page]
+and select under *VirtualBox 5.x.y platform packages* the latest version
+for Windows (Windows hosts). Install the package - the installation process
+is quite simple supported by an build in installer wizard.
+
+If done, go for the installation of the Toolbox. A current package can be
+retrieved from link:{docker-install-toolbox-on-windows}[Docker Documents].
+The page includes all the info needed to install the software.
+
+NOTE: For the installation of the *Docker Toolbox*, please deselect the
+installation of *VirtualBox* included as the software has been already
+installed.
+
+NOTE: The commandline interface used by *Docker Toolbox* is based on
+*Git MSYS-git UNIX tools*. If you have *Git* installed already for your
+Windows host, please deselect the installation of *Git* included.
+
+*Docker Toolbox* comes with *NO* graphical user interface (GUI). To manage
+Docker, the included GNU bash of the *Git MSYS-git UNIX tools* shoud be used.
+A very first version of a (native) Docker UI on Windows is *Kitematic*,
+currently in a alpha version included.
+
+ifdef::backend-html5[]
+.Docker UI Kinematic on Windows
+lightbox::docker-windows-kinematic-alpha[800, {data-docker-windows-kinematic-alpha}]
+endif::[]
+
+TIP: You should check *Kitematic*. If started for *Docker Toolbox* on Windows,
+change (the Hypervisor) to Virtualbox.
+
+For Windows users a commandline interface to manage a complex system like
+Docker may sound a bit stone age. It's not for good reasons:
+
+* the knowlegde of the base Docker commands is essential to understand the
+Container Technology better
+
+* Blalal blaaa
+
+
+
+== Manage Linux on Windows
+
+VirtualBox is a greate piece of software for desktop and workstation
+virtualization. A huge number of IT specialist and developers are using VB
+for: testing and development environments. Sometimes for production
+environments – if it's applicable.
+
+One good idea for VirtualBox is, if you are Web|App developer for Linux you
+can keep *Windows* as your primary OS - yeah, yeah those people are living on
+our planet! One can install a Linux distribution of choice in VirtualBox VM
+and reap both benefits of Windows as primary OS and Linux as a server
+platform for good reasons.
+
+=== Create a Linux VM
+
+lorem:sentences[5]
+
+lorem:sentences[3]
+
+
+=== Sharing Data
+
+For (real) native Docker installations, it is easy to share data between then
+host OS and containers managed by Docker. It is simple this:
+
+[source, sh]
+----
+docker run --rm \
+  --volume=$PWD:/srv/jekyll \
+  -p 35729:35729 -p 40000:40000 \
+  -it jekyll-one/j1:latest \
+  j1 serve --incremental --livereload
+----
+
+The container, instructed by `--volume=$PWD:/srv/jekyll` shares the
+filesystem of the host - the *native* way to bring in data into a
+container for processing. In the example a static Jekyll Web is created
+by J1 Template (j1), served by the ports 35729 for livereload and 40000
+serving the web.
+
+For the Windows platform, using a virtual Linux Box for Docker containers,
+this is *NOT* possible. The virtual system is managed by Virtualbox and no
+direct relationship is in between the VBox and the host operating system
+Windows! No (direct) access to the host filesystem is possible. Bad luck so
+far.
+
+Generally spoken, there are 3 ways of sharing files between a Windows host
+and Linux guest boxes; keep files:
+
+* in the guest (Linux) and share them with host through Samba
+* on host (Windows) and use VirtualBox *Shared Folders*
+* on host (Windows) and mount Windows *Public Folders* via CIFS
+from within guest (Linux)
+
+For all people experienced on the Linux platform, the first option is
+probably the easiest. But it has it’s drawbacks. In most cases for testing,
+it's *NOT* wanted to keep files in a VM. In case of corruption of the VM,
+reinstallation needs, or whatever yor data is *lost* in most cases. Truly,
+not an option.
+
+Typically developers want them kept on native Windows *disks* as they are
+expected as more safely stored on physical devices and easier to backup.
+So first option is clearly out.
+
+*Shared Folders* are really a great idea. After installing the *VirtualBox
+Guest Additions* (which brings the mount.vboxsf binary and vboxsf kernel
+module) the guest can mount automatically a Windows OS folder inside the VM.
+Some klicks further the guest start's, mount the *shared folder* in guest and
+voila: you're done! Sounds really great.
+
+But there's a catch – performance. Shared Folders are really, really horrible
+slow. Which in turn kills the idea of programming and testing code without
+loosing hair because of the slowness. You can find tons of articles around
+slow shared folders on the Internet; both for the Big Dogs: VMware and
+VirtualBox. But no solution. Since decades.
+
+Analyzing the performance, it's obvious that kernel spends really large
+amount of time in IO mode – so the vboxsf CIFS emulation of VirtualBoxis
+behaving something like a slug. Birds love slugs but IT professionals don’t
+like that, do they?
+
+It seems that the only viable solution is sharing folders though Windows and
+mounting them via CIFS on the guest, the virtual Linux box. This way, a
+similiar flexible solution for sharing folders can be achived but at a much
+better performance.
+
+
+=== Performance tests
+
+Anyway, *shared folders* will be always slow as the are of type *NAS* - network
+attached storage. For a local network nowadays, typically at Gigabit level and
+quite low in latency, an acceptable performance cab be achived.
+
+I did some simple tests to show the performance differences. There are three
+directories I did for my tests:
+
+* /mnt/media/repo1, data on a physical (local) disk on the host
+* /mnt/media/repo2, data on a physical (local) disk in the guest
+* /mnt/media/repo3, data on a Windows share mounted via cifs in the guest
+
+I've been using simple (bash) script based on *dd* commands for testing.
+The *dd* commands used as a base are shown below. For sure not a quite
+sophisticated test scenario but it's giving a general impression what can
+achived in real world.
+
+NOTE: For multi-platform testing, on Windows the `dd` command is used as well.
+For *Docker Toolbox*, beside the GNU bash, a full set of *GNU CoreUtils* are
+available as well (accessible out of the *Docker Quickstart Terminal*). The
+used (bash) test script needs to be run out of *Docker Quickstart Terminal*.
+Download the tester script from here.
+
+The test script *docker_perf_test.sh* supports a test scenario for
+*General System Performance*. This is focussing on pure CPU|Memory power.
+On both systems (host and guest) these tests are using pure *kernel services*
+for creating input and output data. One is creating random input data as
+fast as possible, the other discards everything it gets as fast as it can.
+
+.General System Performance
+[source, sh]
+----
+dd if=/dev/urandom of=/dev/null bs=1M count=10000
+----
+
+Please see those tests for *General System Performance* for the background
+*What could be achived in therory*. These tests may helpful to compare your
+current setup for the host and the guest same way.
+
+As mentioned, all tests for *docker_perf_test.sh* are based on the `dd`
+command. For *real world* measures, standard *dd tests* are used. You'll
+find a lot of those on the Internet. All tests for *docker_perf_test.sh* are
+changed (from `/dev/zero`) to `/dev/urandom` for the input to put some
+*pressure* on the CPU while processing data for reading or writing from the
+filesystem to be checked. All the tests are *rules of thumb*, no technical
+measures.
+
+NOTE: Zum Messen der Schreibperformance liest man die zu Schreibenden
+Daten am besten aus /dev/zero und schreibt eine normale Datei im Filesystem
+(z.B. mit of=/root/testfile). Die folgenden Beispiele verwenden ein Testdatei,
+um irrtümlichen Datenverlust zu vermeiden. Die dabei erzielbare Performance
+Werte sind etwas geringer (da dadurch auch Metadaten im Filesystem geschrieben
+werden).
+
+Find the base `dd` commands for read an write performance tests below. The
+exported shared folder on Windows is *C:\Users\Public* mapped to the Unix
+(POSIX) folder scheme of */c/Users/Public* on the guest OS.
+
+.Write Performance - Windows host (local disk), Linux guest (shared disk)
+[source, sh]
+----
+dd if=/dev/urandom bs=1M count=1024 | split -b 1M - name.
+----
+.Write Performance (local disk), Linux guest
+[source, sh]
+----
+dd if=/dev/urandom of=/var/tmp/test/samplefile bs=1M count=1024
+----
+
+.Read Performance - Windows host (local disk), Linux guest (shared disk)
+[source, sh]
+----
+dd if=/c/Users/Public/test/samplefile of=/dev/null bs=1M count=1024 iflag=direct
+----
+.Read Performance (local disk), Linux guest
+[source, sh]
+----
+dd if=/var/tmp/test/samplefile of=/dev/null bs=1M count=1024 iflag=direct
+----
+
+Have a look at the table below for the measures found on a *Windows 10*
+desktop host (Intel Core Quad Q9550) using a *SATA-300* disk for the local
+physical disk and a Gigabit network interface (*Realtek PCIe GBE* familiy)
+running a *CentOS 7 Linux* (version 3.10.0-862) as a guest:
+
+.Data transfer rates for 1 GB of data
+[cols="2,2,4,3, options="header", role="table-responsive, full-width"]
+|===============================================================================
+|direction |mountpoint |source |througput [MB/s]
+
+|`read`
+|/mnt/media/repo1
+|physical (local) disk on the *host*
+|85.20
+
+|`read`
+|/mnt/media/repo2
+|physical (local) disk on the *guest*
+|147.00
+
+|`read`
+|/mnt/media/repo3
+|shared disk on the *guest*
+|30.3
+
+|`write`
+|/mnt/media/repo1
+|physical (local) disk on the *host*
+|234.00
+
+|`write`
+|/mnt/media/repo2
+|physical (local) disk on the *guest*
+|34.00
+
+|`write`
+|/mnt/media/repo3
+|shared disk on the *guest*
+|39.9
+
+|===============================================================================
+
+WARNING: Bei Verwendung von if=/dev/zero und bs=1G benötigt das Linuxsystem
+1GB freien Platz im RAM. Falls Ihr Testsystem nicht ausreichend RAM ...
+
+NOTE: Um praxisnahe Ergebnisse zu erhalten empfehlen wir die beschrieben Tests
+mehrmals (z.B. 3 bis 10x) durchzuführen. Damit können Sie Ausreißer rechtzeitig
+erkennen.
+
+
+lorem:sentences[5]
+
+== Publish a Shared Folder
+
+lorem:sentences[5]
+
+lorem:sentences[3]
+
+
+== Mount Shared Folders on Linux
+
+lorem:sentences[5]
+
+=== Installing CIFS
+
+For the Linux VM, a current Ubunt Server of version 18.06 is used. To mount
+CIFS shares, the package `cifs-utils` needs to be installed:
+
+[source, bash]
+----
+sudo apt-get -y install cifs-utils
+----
+
+Mounting filesystems in general, therefor the same to the CIFS share, are
+done as root. This ends up in the situation this folder cannot (accessed??)
+written as normal user.
+
+. Create the `cifs` group
++
+[source, bash]
+----
+sudo groupadd cifs
+----
+
+[start=2]
+.  Add your user to the `cifs` group
++
+[source, bash]
+----
+sudo usermod -aG cifs $USER
+----
+
+[start=3]
+.  Create the mountpoint (to be used by Docker) as root
++
+[source, bash]
+----
+mkdir -p /c/Users/Public
+----
+
+[start=4]
+.  Change the ownership of the mountpoint
++
+[source, bash]
+----
+chown -R root:cifs  /c/Users/Public
+----
+
+[start=5]
+.  Create a credentials file to place user|password data safe.
++
+[source, bash]
+----
+touch ~/.smbcredentials
+----
+
+.smbcredentials
+----
+username=<your_windows_user>
+password=<windows_user_password>
+----
+
+=== Mount the share manually
+
+To enable non-authorized users to read and write the shared files, specify
+user and group ID that the mounted shares folders should use. This would
+allow particular users and group members to read|write to the share.
+
+To do so, the following options are used for a public mount:
+
+* username
+* password
+* uid
+* gid
+
+Add the Windows host IP address to the hosts file
+
+./etc/hosts
+<ip_v4_address>  <name_of_the windows_box>  <alias_name>
+
+
+=== Mount the share at boot-time
+
+lorem:sentences[3]
+
+./etc/fstab
+&#47;&#47;win10pc/Public /c/Users/Public cifs uid=1000,gid=5555,credentials=/home/jadams/.smbcredentials,iocharset=utf8,rw  0 0

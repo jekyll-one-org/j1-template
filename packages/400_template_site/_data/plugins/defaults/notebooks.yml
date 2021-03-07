@@ -1,0 +1,61 @@
+# ------------------------------------------------------------------------------
+# ~/_data/plugins/defaults/notebooks.yml
+# User configuration for J1 Jupyter Notebooks (jn)
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2021 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# About this configuration (used for J1 CC only)
+#
+about_config:
+
+  title:                                Jupyter Notebooks
+  scope:                                User settings
+  location:                             _data/plugins/defaults/notebooks.yml
+
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+settings:
+
+  # ----------------------------------------------------------------------------
+  # GENERAL notebook settings 
+  #
+  # enabled
+  # ----------------------------------------------------------------------------
+  #   Enables|Disables the use of a gallery
+  #
+  # notebook_path
+  # ----------------------------------------------------------------------------
+  #   All data items displayed by a gallery are being read from a
+  #   JSON file automatically generated from that configuration.
+  #
+  #   values:                           string
+  #   default:                          /assets/data/jupyter/notebooks
+  #
+  enabled:                              false
+
+  git_repo:                             jekyll-one-org/jupyter_notebooks        # jekyll-one/jupyter_notebooks
+  gist:                                 https://gist.github.com/j1juergen/af7ee9bbc079e4e18b1aac71c887cdb1/5f7818bc92bde00fb9ee34102cd5eed966c05599
+  binder_repo_url:                      https://mybinder.org/v2/gh/jekyll-one-org/jupyter_notebooks/master
+  binder_jupyter_url:                   https://mybinder.org/v2/gh/jekyll-one-org/jupyter_notebooks/bbd66f447731094198f7452949b49902c1afb1a6
+
+  html_converter:                       nbinteract
+  html_convert_type:                    plain                                   # plain | partial
+  notebook_path:                        /assets/data/jupyter/notebooks
+  html_path:                            /assets/data/jupyter/notebooks/html
+  partials_path:                        /assets/data/jupyter/notebooks/partials
+  template_path:                        /assets/data/jupyter/notebooks/html
+  template_file:                        template.html
+  beautify_html:                        true
+
+  
+# ------------------------------------------------------------------------------
+# END config

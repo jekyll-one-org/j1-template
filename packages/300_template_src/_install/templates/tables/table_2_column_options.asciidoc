@@ -1,0 +1,28 @@
+
+.Title
+[cols="1h,5*^", options="header", width="100%", role="rtable mt-3"]
+|===============================================================================
+|{empty} 2+|Float 3+|Align
+
+|Role
+|left
+|right
+|text-left
+|text-right
+|text-center
+
+|Block Image
+|{y}
+|{y}
+|{y}
+|{y}
+|{y}
+
+|Inline Image
+|{y}
+|{y}
+|{n}
+|{n}
+|{n}
+
+|===============================================================================

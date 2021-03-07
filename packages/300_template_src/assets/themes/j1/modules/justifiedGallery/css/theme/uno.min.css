@@ -1,0 +1,15 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/justified_gallery/css/theme/uno.min.css
+ # Provides JustifiedGallery styles for Theme Uno
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+.jg-gallery-title{color:#212121;line-height:1.25rem;font-size:1.125rem;font-weight:500;margin-bottom:.5rem}.justified-gallery img.img-overlay{height:64px;width:64px;bottom:0;left:50%;margin-left:-35px;margin-top:-35px;position:absolute;right:0;top:50%;-webkit-transition:background-color .15s ease 0s;-o-transition:background-color .15s ease 0s;transition:background-color .15s ease 0s}

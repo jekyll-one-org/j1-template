@@ -1,0 +1,45 @@
+# Linter Documentation:
+# https://github.com/brigade/scss-lint/blob/master/lib/scss_lint/linter/README.md
+
+linters:
+  # Reports when you use improper spacing around ! (the "bang") in !default,
+  # !global, !important, and !optional flags.
+
+  QualifyingElement:
+    enabled: false
+
+  LeadingZero:
+    enabled: false
+
+  StringQuotes:
+    enabled: false
+
+  SingleLinePerSelector:
+    enabled: false
+
+  EmptyLineBetweenBlocks:
+    enabled: false
+
+  PropertySortOrder:
+    enabled: false
+
+  DeclarationOrder:
+    enabled: false
+
+  SelectorDepth:
+    enabled: false
+
+  ImportantRule:
+    enabled: false
+
+  PlaceholderInExtend:
+    enabled: false
+
+  MergeableSelector:
+    enabled: false
+
+  ColorVariable:
+    enabled: false
+
+  NestingDepth:
+    enabled: false

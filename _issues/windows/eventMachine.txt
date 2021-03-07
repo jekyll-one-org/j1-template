@@ -1,0 +1,62 @@
+Issue:
+--------------------------------------------------------------------------------
+
+Error message
+-------------
+
+  Unable to load the EventMachine C extension; To use
+  the pure-ruby reactor, require 'em/pure_ruby'
+
+NOTE
+----
+
+Currently, Gem Eventmachine version > 1.2, is broken for the Windows
+platform (e.g. eventmachine-1.2.7-x64-mingw32) for Ruby versions
+> 2.3.
+
+See: https://github.com/eventmachine/eventmachine/issues/820
+
+
+Fix:
+--------------------------------------------------------------------------------
+To use EventMachine on Windows, the C extensions needs to be rebuild.
+
+Procedure
+---------
+
+1. Install the bundle for package 400
+
+  cd packages\400_template_site
+  bundle install
+
+2. Delete unusable gem eventmachine (Windows, x64-mingw32 version)
+
+  gem uninstall eventmachine -v 1.2.7 --force
+
+or
+
+  gem uninstall eventmachine
+
+    Select gem to uninstall:
+     1. eventmachine-1.2.7
+-->  2. eventmachine-1.2.7-x64-mingw32
+     3. All versions
+
+Select/Uninstall  2
+
+NOTE: The needed pure-ruby reactor (em/pure_ruby) remains installed
+
+3. Compile eventmachine on the Windows host:
+
+  gem install eventmachine -v 1.2.7 --platform ruby --no-document
+
+  NOTE: In case a bundle (that requires eventmachine) needs to
+        (re-)installed (bundle update|install), step 1./2. needs
+        to be done AGAIN (always).
+
+
+Local Installation
+
+Repo:           https://github.com/eventmachine/eventmachine
+Latest version: 1.3.0.dev.1
+Main fixes:     Ruby reactor ('em/pure_ruby')

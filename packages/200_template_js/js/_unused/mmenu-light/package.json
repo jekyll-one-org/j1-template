@@ -1,0 +1,73 @@
+{
+  "_from": "mmenu-light@^3.0.4",
+  "_id": "mmenu-light@3.0.4",
+  "_inBundle": false,
+  "_integrity": "sha512-baVIKUkcO6oHsfBrSmgsyOFS9AlPjfryJHcp+x0Ut9CxNlS5CuufkrJBCAriGz6lLsKAG3NopNIR93s81zdXBA==",
+  "_location": "/mmenu-light",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "mmenu-light@^3.0.4",
+    "name": "mmenu-light",
+    "escapedName": "mmenu-light",
+    "rawSpec": "^3.0.4",
+    "saveSpec": null,
+    "fetchSpec": "^3.0.4"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/mmenu-light/-/mmenu-light-3.0.4.tgz",
+  "_shasum": "846a8acc645e207d5d8b03055025b4bf59119d2f",
+  "_spec": "mmenu-light@^3.0.4",
+  "_where": "X:\\j1\\github\\j1-template\\packages\\200_template_js",
+  "author": {
+    "name": "Fred Heusschen",
+    "email": "info@frebsite.nl"
+  },
+  "bugs": {
+    "url": "https://github.com/FrDH/mmenu-light/issues"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "description": "The (extremely) lightweight alternative to the mmenu.js plugin for creating off-canvas mobile menus with the exact look and feel.",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^6.1.0",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^4.0.2",
+    "gulp-typescript": "^5.0.1",
+    "typescript": "^3.7.2",
+    "webpack-stream": "^5.2.1"
+  },
+  "homepage": "https://github.com/FrDH/mmenu-light#readme",
+  "keywords": [
+    "app",
+    "list",
+    "listview",
+    "megamenu",
+    "menu",
+    "mmenu",
+    "mobile",
+    "navigation",
+    "off-canvas",
+    "drawer",
+    "curtain",
+    "panels",
+    "submenu"
+  ],
+  "license": "CC-BY-4.0",
+  "main": "dist/mmenu-light.js",
+  "module": "src/mmenu-light.js",
+  "name": "mmenu-light",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FrDH/mmenu-light.git"
+  },
+  "scripts": {
+    "build": "gulp default"
+  },
+  "version": "3.0.4"
+}

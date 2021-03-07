@@ -1,0 +1,64 @@
+---
+title:                                  Fantasy
+tagline:                                Fantasy Literature in the Book Shelf
+date:                                   2020-11-04 00:00:00
+
+exclude_from_search:                    true
+
+fam:                                    true
+fam_menu_id:                            open_toc
+
+permalink:                              /pages/public/collections/bookshelf/fantasy/
+regenerate:                             false
+
+resources:                              []
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
+          alt:                          giammarco-boscaro-1920x1280
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+{% capture create_collection_article_preview %}themes/{{site.template.name}}/procedures/collections/create_collection_article_preview.proc{% endcapture %}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="none" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents
+// -----------------------------------------------------------------------------
+
+== Fantasy
+
+The fantasy genre has become popular the past few years. Once a genre
+restricted to a few Tolkien fanatics and literature freaks, Fantasy has
+now gone mainstream in a big way, from the mega-popular Harry Potter series
+capturing the world's attention for a decade; brought Fantasy to readers of
+all ages.
+
+++++
+<div class="row mb-4">
+  <div class="col-md-12 col-xs-12">
+    {% include {{create_collection_article_preview}} collection=site.fantasy %}
+  </div>
+</div>
+++++

@@ -1,0 +1,117 @@
+{% comment %}
+# ------------------------------------------------------------------------------
+# ~/_includes/themes/j1/layouts/layout_theme_generator.html
+# Liquid template to generate|add the HTML markup to load
+# CSS theme files dynamically for the 'ThemeLoader' (on a page re-load)
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2021 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+# NOTE
+#   Themes are currently in state EXPERIMENTAL
+# ------------------------------------------------------------------------------
+# Test data:
+#    liquid_var:  {{ liquid_var | debug }}
+# ------------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% include themes/{{site.template.name}}/procedures/global/setup.proc %}
+
+{% comment %} Process YML config data
+================================================================================ {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign template_config   = site.data.j1_config %}
+{% assign modules           = site.data.modules %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign switcher_defaults = modules.defaults.theme_switcher.defaults %}
+{% assign switcher_settings = modules.theme_switcher.settings %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign switcher_options  = switcher_defaults | merge: switcher_settings %}
+
+<!-- switcher_options:  {{ switcher_options }} -->
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment     = site.environment %}
+{% assign default_theme   = template_config.bootstrap.default_theme %}
+{% assign themeExtension  = switcher_options.themeExtension %}
+{% assign theme_base      = "core/css" %}
+{% assign theme_ext       = "css" %}
+
+{% if environment == "development" or environment == "test" %}
+  {% assign theme_ext     = "css" %}
+{% else %}
+  {% assign theme_ext     = "min.css" %}
+{% endif %}
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+
+<!-- [INFO   ] [j1.layout_theme_generator.html        ] [ start processing: load Theme CSS for all pages ] -->
+{% if switcher_options.enabled %}
+  <!-- [INFO   ] [j1.layout_theme_generator.html        ] [ load the previously selected theme from cookie ] -->
+  <script>
+  // NOTE: to generate logs (from a looger), this script may should fired on 'Document Ready' ???
+  // jadams, 2019-07-16: don't see any benefit of fired at 'Document Ready' - no logging at all
+  $(document).ready(function() {
+    var logger                    = log4javascript.getLogger('j1.layout_theme_generator');
+    var cookie_names              = j1.getCookieNames();
+    const user_state_cookie_name  = cookie_names.user_session;
+
+    var id                        = 'default';
+    var cssFile                   = '{{switcher_options.defaultCssFile}}';
+    var themeName;
+    var themeCss;
+    var themeCssHtml;
+    var themeExtensionCss;
+    var themeExtensionCssHtml;
+
+    var user_state = {};
+    var user_state_json;
+    var user_state_cookie;
+
+    logger.info('processing theme');
+
+    // Detect|Set J1 UserState
+    user_state_detected = j1.existsCookie(user_state_cookie_name);
+    if ( user_state_detected ) {
+      user_state                = j1.readCookie(user_state_cookie_name);
+      themeName                 = user_state.theme_name;
+      themeCss                  = user_state.theme_css;
+      themeExtensionCss         = user_state.theme_extension_css;
+    }
+    if (themeCss) {
+      themeCssHtml              = "<link rel='stylesheet' id='" + id + "' href='" + themeCss + "' type='text/css' />";
+      themeExtensionCssHtml     = "<link rel='stylesheet' id='" + id + "' href='" + themeExtensionCss + "' type='text/css' />";
+    } else {
+      themeCssHtml              = '<link rel="stylesheet" type="text/css" id="default" href="{{asset_path}}/{{theme_base}}/{{default_theme}}.{{theme_ext}}" />';
+    }
+    $('head').append(themeCssHtml);
+
+    // Append|Remove theme extentions
+    // TODO: Make default theme name 'Uno' configurable
+    if ( themeName === 'Uno'  ) {
+      $('head link[href*="' +themeExtensionCss+ '"]').remove();
+    } else {
+      $('head').append(themeExtensionCssHtml);
+    }
+  });
+  </script>
+{% else %}
+  <!-- [INFO   ] [j1.layout_theme_generator.html        ] [ no cookie found. Load default theme CSS from asset|theme path ] -->
+  <link rel="stylesheet" href="{{asset_path}}/{{theme_base}}/{{default_theme}}.{{theme_ext}}" />
+{% endif %}
+<!-- [INFO   ] [j1.layout_theme_generator.html        ] [ end processing ] -->

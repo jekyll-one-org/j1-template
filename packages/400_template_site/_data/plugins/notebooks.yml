@@ -1,0 +1,70 @@
+# ------------------------------------------------------------------------------
+# ~/_data/plugins/notebooks.yml
+# User configuration for J1 Jupyter Notebooks (jn)
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2021 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# About this configuration (used for J1 CC only)
+#
+about_config:
+
+  title:                                Jupyter Notebooks
+  scope:                                User settings
+  location:                             _data/plugins/notebooks.yml
+
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+settings:
+
+  # ----------------------------------------------------------------------------
+  # GENERAL notebook settings
+  #
+  # enabled
+  # ----------------------------------------------------------------------------
+  #   Enables|Disables the use of a gallery
+  #
+  # notebook_path
+  # ----------------------------------------------------------------------------
+  #   All data items displayed by a gallery are being read from a
+  #   JSON file automatically generated from that configuration.
+  #
+  #   values:                           string
+  #   default:                          /assets/data/jupyther/notebooks
+  #
+  enabled:                              false
+  
+  # ----------------------------------------------------------------------------
+  # INSTANCE configuration (notebook)
+  #
+  notebooks:
+
+    # --------------------------------------------------------------------------
+    # Tutorial
+    #
+    - notebook:
+        enabled:                        true
+     
+        src:                            tutorial.ipynb
+        id:                             nb_tutorial
+
+    # --------------------------------------------------------------------------
+    # Visualisation
+    #
+    - notebook:
+        enabled:                        true
+     
+        src:                            visualisation.ipynb
+        id:                             nb_visualisation
+
+
+# ------------------------------------------------------------------------------
+# END config

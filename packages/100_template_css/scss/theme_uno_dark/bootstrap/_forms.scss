@@ -1,0 +1,57 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/100_template_css/scss/theme_uno_dark/theme/_forms.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+legend {
+  color: $white;
+}
+
+.form-control {
+    border: 0;
+}
+
+.input-group-addon {
+  background-image: unset;
+//@include btn-shadow($secondary);
+  text-shadow: 1px 1px 1px $darken-300;
+  color: $white;
+}
+
+.list-group {
+  &-item:hover {
+    background-color: darken($gray-900, 5%);
+  }
+}
+
+// Overload styles for (B)MD
+// -----------------------------------------------------------------------------
+.bmd-form-group .checkbox label,
+.bmd-form-group .radio label,
+.bmd-form-group label {
+    font-size: .825rem;
+}
+
+[class^='bmd-label'],
+[class*=' bmd-label'] {
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.form-control,
+.form-control:focus {
+    background-color: $grey-300;
+}
+
+select.form-control[size],
+select.form-control[multiple] {
+    overflow-y: hidden;
+}

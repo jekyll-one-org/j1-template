@@ -1,0 +1,22 @@
+
+.title_text
+[cols="2,3,2,5a", options="header", width="100%", role="rtable mt-3"]
+|===============================================================================
+|Property | Value |Default |Description
+
+|`flex-flow`
+|`flex-direction` `flex-wrap`
+|`row nowrap`
+|The `flex-flow` property is a *shorthand* propery for setting both the
+`flex-direction` and `flex-wrap` properties.
+
+.Example
+[source, css]
+----
+.flex-container {
+  display: flex;
+  flex-flow: row wrap;
+}
+----
+
+|===============================================================================

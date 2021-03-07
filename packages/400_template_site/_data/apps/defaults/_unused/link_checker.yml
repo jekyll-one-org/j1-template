@@ -1,0 +1,32 @@
+# ------------------------------------------------------------------------------
+# ~/_data/apps/defaults/link_checker.yml
+# Default settings for J1 Link Checker
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2021 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# About this configuration (used for J1 CC only)
+#
+about_config:
+
+  title:                                Link Checker
+  scope:                                Default settings
+  location:                             _data/modules/defaults/link_checker.yml
+
+# ------------------------------------------------------------------------------
+# Default configuration settings
+#
+defaults:
+
+  enabled:                                true
+
+
+# ------------------------------------------------------------------------------
+# END config

@@ -1,0 +1,110 @@
+
+/*
+ # -----------------------------------------------------------------------------
+ # ~/100_template_css/scss/theme_uno_dark/theme/_navs.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+// jadams, 2020-09-05: removed border on the right
+.navbar-brand {
+  border-right: 0 !important;
+}
+
+// jadams, 2020-09-05: removed bg image in nav menu
+// jadams, 2020-09-05: removed border on the left
+.navbar .nav-link:hover, .navbar .nav-link:focus {
+    background-image: unset !important;
+    box-shadow: unset  !important;
+    border-left: 0 !important;
+}
+
+.nav-tabs {
+  .nav-link {
+    @include btn-shadow-inverse($gray-800);
+    // border: 1px solid $darken-600;
+    &:not([disabled]):not(.disabled):hover,
+    &:not([disabled]):not(.disabled):focus,
+    &:not([disabled]):not(.disabled):active,
+    &:not([disabled]):not(.disabled).active {
+      @include btn-shadow($gray-800);
+    }
+    &.disabled {
+      // border: 1px solid $darken-600;
+    }
+  }
+  .nav-link,
+  .nav-link:hover {
+    color: $grey-100;
+  }
+}
+.nav-pills {
+  .nav-link {
+    @include btn-shadow($gray-800);
+    // border: 1px solid $darken-600;
+    text-shadow: 1px 1px 1px $darken-300;
+    box-shadow: unset !important;
+    color: $grey-100;
+    &:hover {
+      @include btn-shadow-inverse($gray-800);
+      // border: 1px solid $darken-600;
+    }
+  }
+  .nav-link.active,
+  .nav-link:hover {
+    background-color: transparent;
+    @include btn-shadow-inverse($gray-800);
+    // border: 1px solid $darken-600;
+  }
+  .nav-link.disabled,
+  .nav-link.disabled:hover {
+    @include btn-shadow($gray-800);
+    color: $nav-link-disabled-color;
+  }
+}
+
+// jadams, 2020-10-04: caret on top of the menu
+.nav-tabs .dropdown-menu:after,
+.nav-pills .dropdown-menu:after {
+    border-bottom: 6px solid $grey-800 !important;
+}
+
+.pagination {
+  .page-link {
+    border: 1px solid $gray-600 !important;
+    text-shadow: 1px 1px 1px $darken-300;
+    @include btn-shadow($gray-800);
+    &:hover {
+      @include btn-shadow-inverse($gray-800);
+      text-decoration: none;
+    }
+  }
+  .page-item.active .page-link {
+    border: 1px !important;
+    border-color: $darken-600 !important;
+    @include btn-shadow-inverse($gray-800);
+  }
+  .page-item.disabled .page-link {
+    border: 1px !important;
+    border-color: $darken-600 !important;
+    @include btn-shadow($gray-800);
+  }
+}
+
+.breadcrumb {
+  // border: 1px solid $darken-600;
+  text-shadow: 1px 1px 1px $darken-300;
+  background-color: transparent;
+  @include btn-shadow($gray-800);
+  a,
+  a:hover {
+    color: $grey-100;
+  }
+}

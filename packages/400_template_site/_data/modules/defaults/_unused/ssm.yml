@@ -1,0 +1,50 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/ssm.yml
+# Default Configuration of the SSC Module (Sticky Side Menu)
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2021 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+#
+# ------------------------------------------------------------------------------
+# NOTE:
+#
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# About this configuration (used for J1 CC only)
+#
+about_config:
+  title:                                Sticky Side Menu
+  scope:                                Default settings
+  location:                             _data/modules/defaults/ssm.yml
+
+# ------------------------------------------------------------------------------
+# Default settings
+#
+defaults:
+  enabled:                              false
+
+  xhr_container_id:                     ssm-container
+  xhr_data_path:                        /assets/data/ssm/index.html
+  menu_id:                              ssm_menu
+
+  icon_family:                          MDI
+  icon_color:                           mdi-md-grey
+  icon_size:                            mdi-2x
+
+  min_width:                            200
+  margin:                               -140
+  mode:                                 menu
+
+  # ----------------------------------------------------------------------------
+  # CONTAINER elements (empty for default)
+  #
+  items:
+
+# ------------------------------------------------------------------------------
+# END config

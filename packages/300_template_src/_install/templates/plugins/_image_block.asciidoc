@@ -1,0 +1,15 @@
+
+
+[subs=attributes]
+++++
+  <div class="imageblock">
+    <a href="{imagesdir}/image_name.png"
+       data-lightbox="master_header-mobile" data-title="image_title">
+      <img src="{imagesdir}/image_name.png"
+           alt="image_title" width="800">
+    </a>
+  </div>
+  <div class="title-bottom">
+    <p>image_title</p>
+  </div>
+++++

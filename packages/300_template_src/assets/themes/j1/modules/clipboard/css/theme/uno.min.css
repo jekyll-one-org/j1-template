@@ -1,0 +1,15 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/clipboard/css/theme/uno.min.css
+ # Provides Clipboard styles for J1 Theme Uno (v2.0.6)
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+.j1-clipboard{position:relative;display:block;float:right}.btn-clipboard{position:absolute;top:.6rem;right:.5rem;z-index:3;display:block;padding:.25rem .5rem;font-size:.75rem;color:#212121;cursor:pointer;text-transform:uppercase;background-color:transparent;border-radius:.25rem}.btn-clipboard:hover{color:#fff;background-color:#2196f3}@media(min-width:320px) and (max-width:767px){.j1-clipboard{display:none}}

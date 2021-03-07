@@ -1,0 +1,146 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/defaults/back2top.yml
+# Default configuration settings for J1 Back2Top module
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2021 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1_template/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# About this configuration (used for J1 CC only)
+#
+about_config:
+
+  title:                                Back2Top
+  scope:                                Default settings
+  location:                             _data/modules/defaults/back2top.yml
+
+# ------------------------------------------------------------------------------
+# Back2Top settings
+# If enabled, a Back2Top button at the bottom of every page is displayed
+#
+#   enabled
+#   ----------------------------------------------------------------------------
+#   Enables|Disables the use of Back2Top (button)
+#
+#   values:                         boolean (true|false)
+#   default:                        true
+#
+#   color
+#   ----------------------------------------------------------------------------
+#   Set the color of the Back2Top icon for an hover event. Possible
+#   values are the RGB code like "#204a87" or a color name taken from
+#   file ~/_data/modules/j1_colors.yml
+#
+#   values:                         string
+#   default:                        j1_darkblue
+#
+#   icon
+#   ----------------------------------------------------------------------------
+#   Set the font icon used with the Back2Top button. Possible values
+#   depend on the icon family defined by "icon_family". Use the
+#   respective hex value for the icon to be used
+#
+#   values:                         string
+#   default:                        "f102"
+#
+#   icon_family
+#   ----------------------------------------------------------------------------
+#   Set the icon familiy from what the icon should be taken from. Be
+#   aware that the CSS file for the font icon set needs to be
+#   included as a resource.
+#
+#   values:                         string (FontAwesome|Glyphicons Halflings)
+#   default:                        FontAwesome
+#
+#   startline
+#   ----------------------------------------------------------------------------
+#   Number of pixels from top of doc scrollbar is scrolled before
+#   showing control.
+#
+#   values:                         integer (px)
+#   default:                        100
+#
+#   scrollto
+#   ----------------------------------------------------------------------------
+#   Integer or "Scroll_to_Element_ID". Specifies how far to scroll
+#   a page up when control is clicked on (0=top).
+#   showing control.
+#
+#   values:                         integer (px)
+#   default:                        0
+#
+#   scrollduration
+#   ----------------------------------------------------------------------------
+#   Time (Duration) measured in msec to scroll the whole page
+#
+#   values:                         integer (msec)
+#   default:                        1000
+#
+#   fadeduration
+#   ----------------------------------------------------------------------------
+#   Fade effect (durationd) measured in msec to show|hide
+#   the control button
+#
+#   values:                         integer (msec)
+#   default:                        500
+#
+#   controlHTML
+#   ----------------------------------------------------------------------------
+#   HTML code for the control button which is AUTO wrapped in an
+#   DIV element tha is automatically placed (ID = #topcontrol).
+#   the control button
+#
+#   values:                         string (HTML)
+#   default:                        '<img src="assets/img/up.png" style="width:51px; height:42px'
+#
+#   controlattrs
+#   ----------------------------------------------------------------------------
+#   Offset measured in pixels to place the control (button) relative
+#   to right|bottom of the window corner.
+#
+#   values:                         array (integer|px)
+#   default:                        [5, 5]
+#
+#   anchorkeyword
+#   ----------------------------------------------------------------------------
+#   Anchor|href value of HTML anchors on the page that should be
+#   used for a "Scroll Up" link.
+#
+#   values:                         string (ID)
+#   default:                        "#top"
+#
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Default configuration settings
+#
+defaults:
+  enabled:                              false
+
+  active_color:                         "#0D47A1"                               # md-blue-900
+  background_color:                     "#212121"                               # md-grey-900
+
+  icon:                                 "f05d"
+  icon_family:                          Material Design Icons
+  icon_position:                        absolute
+
+  startline:                            100
+  scrollto:                             0
+
+  scrollduration:                       1000
+  fadeduration:
+    fadeIn:                             500
+    fadeOut:                            500
+
+  controlattrs:
+    offsetx:                            5
+    offsety:                            5
+
+# ------------------------------------------------------------------------------
+# END config

@@ -1,0 +1,26 @@
+## Login
+
+ssh jadams@j1-docker
+
+## Commands
+
+/usr/sbin/haproxy -c -V -f /etc/haproxy/haproxy.cfg
+ls -l /etc/ssl/jekyll.one/jekyll.one.pem
+clear && cat /etc/ssl/jekyll.one/jekyll.one.pem
+ps -ef | grep netlify-cms
+systemctl status nginx-j1
+history | grep stop
+systemctl stop haproxy
+systemctl start haproxy
+vi /etc/haproxy/haproxy.cfg
+systemctl stop nginx-j1
+systemctl start nginx-j1
+
+
+## Passenger
+
+### Passenger start
+--> local, builtin web server
+
+
+passenger start --engine builtin

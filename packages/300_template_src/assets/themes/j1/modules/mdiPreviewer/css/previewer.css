@@ -1,0 +1,97 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/mdiPreviewer/css/previewer.css
+ # Provides styles for the MDI Icon Previewer
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+.icons {
+    //display: none;
+    //padding: 0 20px 10px 20px;
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+    -webkit-column-gap: 2rem;
+    -moz-column-gap: 2rem;
+    column-gap: 2rem;
+}
+
+.icons div {
+    line-height: 3rem;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.icons div span {
+    cursor: pointer;
+    font-size: 1rem;
+    text-overflow: ellipsis;
+    display: inline-block;
+    max-width: calc(100% - 90px);
+    overflow: hidden;
+    vertical-align: middle;
+    white-space: nowrap;
+    margin-left: .5rem;
+}
+
+.icons div code:hover,
+.icons div span:hover,
+.icons div i:hover {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.icons div code:hover {
+    border-color: #2196F3;
+}
+
+.icons div code {
+    color:  #424242;
+    background-color: #E0E0E0;
+    border: 1px solid #9E9E9E;
+    width: 80px;
+    margin-left: 2px;
+    margin-right: 4px;
+    border-radius: 4px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 24px;
+    cursor: pointer;
+}
+
+.icons div i {
+    display: inline-block;
+    width: 32px;
+    height: 24px;
+    margin-right: .5rem;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    line-height: 24px;
+}
+
+.icons .mdi:before {
+    font-size: 24px;
+}
+
+div.copied {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    width: 200px;
+    text-align: center;
+    color: #FAFAFA;
+    background-color: #2196F3;
+    border: 1px solid #0D47A1;
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-left: -100px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}

@@ -1,0 +1,10 @@
+
+.title_text
+[cols="6a,6a", options="header", width="100%", role="rtable mt-3"]
+|===============================================================================
+|Setting |Options and Flags
+
+|*Site Source*
+|Change the directory where Jekyll will read files
+
+|===============================================================================

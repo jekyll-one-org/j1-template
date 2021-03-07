@@ -1,0 +1,12 @@
+[Fixed] Google Chrome shows wrong colors after update
+--------------------------------------------------------------------------------
+
+Step 1: Open the Chrome Browser settings. Enter the URL:
+  chrome://flags/
+in the address bar of your Chrome Browser.
+
+Step 2: Change the Color profile. Scroll down the page until the point "Force Color Profile". In my case, I had to change the value from "Default" to "sRGB".
+
+See:
+
+  https://www.designernews.co/stories/86411-google-chrome-rendering-colors-inaccurately

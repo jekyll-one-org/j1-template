@@ -1,0 +1,80 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_includes/themes/j1/procedures/global/get_page_path.proc
+ #  Liquid PROCEDURE to calculate the path of a page (page_path)
+ #
+ #  https://jekyll.one
+ #
+ #  Copyright (C) 2021 Juergen Adams
+ #
+ #  J1 Template is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ #
+ # -----------------------------------------------------------------------------
+ #   Global procedure. Calculates the absolute path of the current page
+ #   relative to the web root. The path is resturned by the liquid variable
+ #   page_path.
+ #
+ #    Usage:
+ #      1)  include the get_page_path.proc procedure
+ #      2)  set mode to full|short
+ #      3)  assign|use the page_path variable
+ #
+ #  Example:
+ #
+ #    {% capture get_page_path %}themes/{{site.template.name}}/procedures/global/get_page_path.proc{% endcapture %}
+ #
+ #    {% include {{get_page_path}} %}
+ #    {% assign my_page_path = page_path %}
+ # -----------------------------------------------------------------------------
+ #  Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign mode          = include.mode %}
+
+{% comment %} extend path for posts|collections if collections_dir is used|set
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if page.collection and site.collections_dir.size > 0 %}
+  {% assign page_path     = page.path | prepend: "/" | prepend: site.collections_dir %}
+  {% assign path_elements = page_path | split: "/" %}
+{% else %}
+  {% assign path_elements = page.path | split: "/" %}
+{% endif %}
+
+{% assign length          = path_elements.size | minus: 2 %}
+{% assign _page_path      = "" %}
+
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+{% for c in (0..length) %}
+  {% capture _page_path %}{{_page_path}}/{{path_elements[c]}}{% endcapture %}
+{% endfor %}
+
+{% comment %} Check if source path defined relative (dot) seems wrong or unneeded
+--------------------------------------------------------------------------------
+{% if site.source.size %}
+  {% assign source_path = site.source %}
+{% else %}
+  {% assign source_path = "." %}
+{% endif %}
+-------------------------------------------------------------------------------- {% endcomment %}
+
+
+{% capture bla_path %}{{_page_path | remove_first:'/'}}{{_page_path}}{% endcapture %}
+
+{% capture page_path %}{{source_path | remove_first:'/'}}{{_page_path}}{% endcapture %}
+
+source_path:  {{ source_path | debug }}
+bla_path:  {{ bla_path | debug }}
+_page_path:  {{ _page_path | debug }}
+
+

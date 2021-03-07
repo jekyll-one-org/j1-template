@@ -1,0 +1,6 @@
+{
+  "plugins": [
+    ["remark-lint-list-item-indent", false],
+    ["remark-lint-no-unused-definitions", false]
+  ]
+}

@@ -1,0 +1,38 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_includes/templates/j1/blocks/footer/boxes/issue.proc
+ #  Liquid PROCEDURE to create an issue line for the footer
+ #
+ #  Product/Info:
+ #  http://jekyll.one
+ #
+ #  Copyright (C) 2021 Juergen Adams
+ #
+ #  Licensed under the Creative Commons Attribution 3.0 Unported License.
+ #  See: http://creativecommons.org/licenses/by/3.0/.
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture date_template %}{{footer_options.issue.date}} | date: "{{footer_options.issue.date_format}}" {% endcapture %}
+{% assign  date = site.time | date: "%A, %-d %B %Y" %}
+
+<!-- date_template:    {{date_template}} -->
+<!-- date:             {{date}} -->
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+
+<!-- [INFO   ] [issue.proc                         ] [ issue date information ] -->
+{% if footer_options.issue.enabled %}
+<!-- [INFO   ] [issue.proc                         ] [ place issue ] -->
+<p style="color: rgba(255, 255, 255, 0.5)">{{footer_options.issue.text}} {{date}}</p>
+{% endif %}

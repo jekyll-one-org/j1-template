@@ -1,0 +1,1794 @@
+[
+  {
+    "code": "32",  
+    "character": "space",
+    "dec": "#32",
+    "hex": "x20",
+    "html": "na",
+    "description": "Space, white space"
+  },
+  {
+    "code": "33",   
+    "character": "!",
+    "dec": "#33",
+    "hex": "x21",
+    "html": "excl;",
+    "description": "Exclamation mark"
+  },
+  {
+    "code": "34",   
+    "character": "\"",
+    "dec": "#34",
+    "hex": "x22",
+    "html": "quot;",
+    "description": "Double quotes, speech marks"
+  },
+  {
+    "code": "35",   
+    "character": "#",
+    "dec": "#35",
+    "hex": "x23",
+    "html": "num;",
+    "description": "Hash or number"
+  },
+  {
+    "code": "36", 
+    "character": "$",
+    "dec": "#36",
+    "hex": "x24",
+    "html": "dollar;",
+    "description": "Dollar sign"
+  },
+  {
+    "code": "37",   
+    "character": "%",
+    "dec": "#37",
+    "hex": "x25",
+    "html": "percnt;",
+    "description": "Percent sign"
+  },
+  {
+    "code": "38",   
+    "character": "&",
+    "dec": "#38",
+    "hex": "x26",
+    "html": "amp;",
+    "description": "Ampersand sign"
+  },
+  {
+    "code": "39",   
+    "character": "'",
+    "dec": "#39",
+    "hex": "x27",
+    "html": "apos;",
+    "description": "Single quote, Apostrophe"
+  },
+  {
+    "code": "40",   
+    "character": "(",
+    "dec": "#40",
+    "hex": "x28",
+    "html": "lpar;",
+    "description": "Opening parenthesis, opening round bracket"
+  },
+  {
+    "code": "41",   
+    "character": ")",
+    "dec": "#41",
+    "hex": "x29",
+    "html": "rpar;",
+    "description": "Closing parenthesis, closeing round bracket"
+  },
+  {
+    "code": "42", 
+    "character": "*",
+    "dec": "#42",
+    "hex": "x2A",
+    "html": "ast;",
+    "description": "Asterisk sign"
+  },
+  {
+    "code": "43",   
+    "character": "+",
+    "dec": "#43",
+    "hex": "x2B",
+    "html": "plus;",
+    "description": "Plus sign"
+  },
+  {
+    "code": "44",   
+    "character": ",",
+    "dec": "#44",
+    "hex": "x2C",
+    "html": "comma;",
+    "description": "Comma sign"
+  },
+  {
+    "code": "45",   
+    "character": "-",
+    "dec": "#45",
+    "hex": "x2D",
+    "html": "na",
+    "description": "Hyphen, minus sign"
+  },
+  {
+    "code": "46",   
+    "character": ".",
+    "dec": "#46",
+    "hex": "x2E",
+    "html": "period;",
+    "description": "Period, dot or full stop"
+  },
+  {
+    "code": "47",   
+    "character": "/",
+    "dec": "#47",
+    "hex": "x2F",
+    "html": "frasl;",
+    "description": "Slash, forward slash, division slash"
+  },
+  {
+    "code": "48",   
+    "character": 0,
+    "dec": "#48",
+    "hex": "x30",
+    "html": "na",
+    "description": "Zero"
+  },
+  {
+    "code": "49",   
+    "character": 1,
+    "dec": "#49",
+    "hex": "x31",
+    "html": "na",
+    "description": "One"
+  },
+  {
+    "code": "50",   
+    "character": 2,
+    "dec": "#50",
+    "hex": "x32",
+    "html": "na",
+    "description": "Two"
+  },
+  {
+    "code": "51",   
+    "character": 3,
+    "dec": "#51",
+    "hex": "x33",
+    "html": "na",
+    "description": "Three"
+  },
+  {
+    "code": "52",   
+    "character": 4,
+    "dec": "#52",
+    "hex": "x34",
+    "html": "na",
+    "description": "Four"
+  },
+  {
+    "code": "53",   
+    "character": 5,
+    "dec": "#53",
+    "hex": "x35",
+    "html": "na",
+    "description": "Five"
+  },
+  {
+    "code": "54", 
+    "character": 6,
+    "dec": "#54",
+    "hex": "x36",
+    "html": "na",
+    "description": "Six"
+  },
+  {
+    "code": "55",   
+    "character": 7,
+    "dec": "#55",
+    "hex": "x37",
+    "html": "na",
+    "description": "Seven"
+  },
+  {
+    "code": "56",   
+    "character": 8,
+    "dec": "#56",
+    "hex": "x38",
+    "html": "na",
+    "description": "Eight"
+  },
+  {
+    "code": "57",   
+    "character": 9,
+    "dec": "#57",
+    "hex": "x39",
+    "html": "na",
+    "description": "Nine"
+  },
+  {
+    "code": "58", 
+    "character": ":",
+    "dec": "#58",
+    "hex": "x3A",
+    "html": "colon;",
+    "description": "Colon"
+  },
+  {
+    "code": "59",   
+    "character": ";",
+    "dec": "#59",
+    "hex": "x3B",
+    "html": "semi;",
+    "description": "Semicolon sign"
+  },
+  {
+    "code": "60", 
+    "character": "<",
+    "dec": "#60",
+    "hex": "x3C",
+    "html": "lt;",
+    "description": "Lower, Less than sign"
+  },
+  {
+    "code": "61",   
+    "character": "=",
+    "dec": "#61",
+    "hex": "x3D",
+    "html": "equals;",
+    "description": "Equals sign"
+  },
+  {
+    "code": "62",   
+    "character": ">",
+    "dec": "#62",
+    "hex": "x3E",
+    "html": "gt;",
+    "description": "Larger, Greater or Greater than sign"
+  },
+  {
+    "code": "63",   
+    "character": "?",
+    "dec": "#63",
+    "hex": "x3F",
+    "html": "quest;",
+    "description": "Question mark"
+  },
+  {
+    "code": "64",   
+    "character": "@",
+    "dec": "#64",
+    "hex": "x40",
+    "html": "commat;",
+    "description": "At symbol"
+  },
+  {
+    "code": "65",   
+    "character": "A",
+    "dec": "#65",
+    "hex": "x41",
+    "html": "na",
+    "description": "Uppercase A"
+  },
+  {
+    "code": "66", 
+    "character": "B",
+    "dec": "#66",
+    "hex": "x42",
+    "html": "na",
+    "description": "Uppercase B"
+  },
+  {
+    "code": "67",   
+    "character": "C",
+    "dec": "#67",
+    "hex": "x43",
+    "html": "na",
+    "description": "Uppercase C"
+  },
+  {
+    "code": "68",   
+    "character": "D",
+    "dec": "#68",
+    "hex": "x44",
+    "html": "na",
+    "description": "Uppercase D"
+  },
+  {
+    "code": "69",    
+    "character": "E",
+    "dec": "#69",
+    "hex": "x45",
+    "html": "na",
+    "description": "Uppercase E"
+  },
+  {
+    "code": "70",   
+    "character": "F",
+    "dec": "#70",
+    "hex": "x46",
+    "html": "na",
+    "description": "Uppercase F"
+  },
+  {
+    "code": "71",   
+    "character": "G",
+    "dec": "#71",
+    "hex": "x47",
+    "html": "na",
+    "description": "Uppercase G"
+  },
+  {
+    "code": "72", 
+    "character": "H",
+    "dec": "#72",
+    "hex": "x48",
+    "html": "na",
+    "description": "Uppercase H"
+  },
+  {
+    "code": "73",   
+    "character": "I",
+    "dec": "#73",
+    "hex": "x49",
+    "html": "na",
+    "description": "Uppercase I"
+  },
+  {
+    "code": "74",   
+    "character": "J",
+    "dec": "#74",
+    "hex": "x4A",
+    "html": "na",
+    "description": "Uppercase J"
+  },
+  {
+    "code": "75",   
+    "character": "K",
+    "dec": "#75",
+    "hex": "x4B",
+    "html": "na",
+    "description": "Uppercase K"
+  },
+  {
+    "code": "77",   
+    "character": "L",
+    "dec": "#76",
+    "hex": "x4C",
+    "html": "na",
+    "description": "Uppercase L"
+  },
+  {
+    "code": "77",   
+    "character": "M",
+    "dec": "#77",
+    "hex": "x4D",
+    "html": "na",
+    "description": "Uppercase M"
+  },
+  {
+    "code": "78",   
+    "character": "N",
+    "dec": "#78",
+    "hex": "x4E",
+    "html": "na",
+    "description": "Uppercase N"
+  },
+  {
+    "code": "79",   
+    "character": "O",
+    "dec": "#79",
+    "hex": "x4F",
+    "html": "na",
+    "description": "Uppercase O"
+  },
+  {
+    "code": "80",   
+    "character": "P",
+    "dec": "#80",
+    "hex": "x50",
+    "html": "na",
+    "description": "Uppercase P"
+  },
+  {
+    "code": "81",   
+    "character": "Q",
+    "dec": "#81",
+    "hex": "x51",
+    "html": "na",
+    "description": "Uppercase Q"
+  },
+  {
+    "code": "82",   
+    "character": "R",
+    "dec": "#82",
+    "hex": "x52",
+    "html": "na",
+    "description": "Uppercase R"
+  },
+  {
+    "code": "83",   
+    "character": "S",
+    "dec": "#83",
+    "hex": "x53",
+    "html": "na",
+    "description": "Uppercase S"
+  },
+  {
+    "code": "84",   
+    "character": "T",
+    "dec": "#84",
+    "hex": "x54",
+    "html": "na",
+    "description": "Uppercase T"
+  },
+  {
+    "code": "85",   
+    "character": "U",
+    "dec": "#85",
+    "hex": "x55",
+    "html": "na",
+    "description": "Uppercase U"
+  },
+  {
+    "code": "86",   
+    "character": "V",
+    "dec": "#86",
+    "hex": "x56",
+    "html": "na",
+    "description": "Uppercase V"
+  },
+  {
+    "code": "87",   
+    "character": "W",
+    "dec": "#87",
+    "hex": "x57",
+    "html": "na",
+    "description": "Uppercase W"
+  },
+  {
+    "code": "88",   
+    "character": "X",
+    "dec": "#88",
+    "hex": "x58",
+    "html": "na",
+    "description": "Uppercase X"
+  },
+  {
+    "code": "89",   
+    "character": "Y",
+    "dec": "#89",
+    "hex": "x59",
+    "html": "na",
+    "description": "Uppercase Y"
+  },
+  {
+    "code": "90",   
+    "character": "Z",
+    "dec": "#90",
+    "hex": "x5A",
+    "html": "na",
+    "description": "Uppercase Z"
+  },
+  {
+    "code": "91",   
+    "character": "[",
+    "dec": "#91",
+    "hex": "x5B",
+    "html": "lbrack;",
+    "description": "Bracket, Square bracket or box bracket, opening bracket"
+  },
+  {
+    "code": "92", 
+    "character": "\\",
+    "dec": "#92",
+    "hex": "x5C",
+    "html": "bsol;",
+    "description": "Backslash, reverse slash"
+  },
+  {
+    "code": "93",   
+    "character": "]",
+    "dec": "#93",
+    "hex": "x5D",
+    "html": "rbrack;",
+    "description": "Bracket, Square bracket or box bracket, closing bracket"
+  },
+  {
+    "code": "94",   
+    "character": "^",
+    "dec": "#94",
+    "hex": "x5E",
+    "html": "hat;",
+    "description": "Caret, Circumflex accent"
+  },
+  {
+    "code": "95",   
+    "character": "_",
+    "dec": "#95",
+    "hex": "x5F",
+    "html": "lowbar;",
+    "description": "Underscore, understrike, underbar or low line"
+  },
+  {
+    "code": "96",   
+    "character": "`",
+    "dec": "#96",
+    "hex": "x60",
+    "html": "grave;",
+    "description": "Grave accent"
+  },
+  {
+    "code": "97",   
+    "character": "a",
+    "dec": "#97",
+    "hex": "x61",
+    "html": "na",
+    "description": "Lowercase a"
+  },
+  {
+    "code": "98",   
+    "character": "b",
+    "dec": "#98",
+    "hex": "x62",
+    "html": "na",
+    "description": "Lowercase b"
+  },
+  {
+    "code": "99",   
+    "character": "c",
+    "dec": "#99",
+    "hex": "x63",
+    "html": "na",
+    "description": "Lowercase c"
+  },
+  {
+    "code": "100",   
+    "character": "d",
+    "dec": "#100",
+    "hex": "x64",
+    "html": "na",
+    "description": "Lowercase d"
+  },
+  {
+    "code": "101",   
+    "character": "e",
+    "dec": "#101",
+    "hex": "x65",
+    "html": "na",
+    "description": "Lowercase e"
+  },
+  {
+    "code": "102",   
+    "character": "f",
+    "dec": "#102",
+    "hex": "x66",
+    "html": "na",
+    "description": "Lowercase f"
+  },
+  {
+    "code": "103",   
+    "character": "g",
+    "dec": "#103",
+    "hex": "x67",
+    "html": "na",
+    "description": "Lowercase g"
+  },
+  {
+    "code": "104",   
+    "character": "h",
+    "dec": "#104",
+    "hex": "x68",
+    "html": "na",
+    "description": "Lowercase h"
+  },
+  {
+    "code": "105",   
+    "character": "i",
+    "dec": "#105",
+    "hex": "x69",
+    "html": "na",
+    "description": "Lowercase i"
+  },
+  {
+    "code": "106",   
+    "character": "j",
+    "dec": "#106",
+    "hex": "x6A",
+    "html": "na",
+    "description": "Lowercase j"
+  },
+  {
+    "code": "107",   
+    "character": "k",
+    "dec": "#107",
+    "hex": "x6B",
+    "html": "na",
+    "description": "Lowercase k"
+  },
+  {
+    "code": "108",   
+    "character": "l",
+    "dec": "#108",
+    "hex": "x6C",
+    "html": "na",
+    "description": "Lowercase l"
+  },
+  {
+    "code": "109",   
+    "character": "m",
+    "dec": "#109",
+    "hex": "x6D",
+    "html": "na",
+    "description": "Lowercase m"
+  },
+  {
+    "code": "110",   
+    "character": "n",
+    "dec": "#110",
+    "hex": "x6E",
+    "html": "na",
+    "description": "Lowercase n"
+  },
+  {
+    "code": "111",   
+    "character": "o",
+    "dec": "#111",
+    "hex": "x6F",
+    "html": "na",
+    "description": "Lowercase o"
+  },
+  {
+    "code": "112",   
+    "character": "p",
+    "dec": "#112",
+    "hex": "x70",
+    "html": "na",
+    "description": "Lowercase p"
+  },
+  {
+    "code": "113",   
+    "character": "q",
+    "dec": "#113",
+    "hex": "x71",
+    "html": "na",
+    "description": "Lowercase q"
+  },
+  {
+    "code": "114",   
+    "character": "r",
+    "dec": "114",
+    "hex": "x72",
+    "html": "na",
+    "description": "Lowercase r"
+  },
+  {
+    "code": "115",   
+    "character": "s",
+    "dec": "#115",
+    "hex": "x73",
+    "html": "na",
+    "description": "Lowercase s"
+  },
+  {
+    "code": "116",   
+    "character": "t",
+    "dec": "#116",
+    "hex": "x74",
+    "html": "na",
+    "description": "Lowercase t"
+  },
+  {
+    "code": "117",   
+    "character": "u",
+    "dec": "#117",
+    "hex": "x75",
+    "html": "na",
+    "description": "Lowercase u"
+  },
+  {
+    "code": "118",   
+    "character": "v",
+    "dec": "#118",
+    "hex": "x76",
+    "html": "na",
+    "description": "Lowercase v"
+  },
+  {
+    "code": "119",   
+    "character": "w",
+    "dec": "#119",
+    "hex": "x77",
+    "html": "na",
+    "description": "Lowercase w"
+  },
+  {
+    "code": "120",   
+    "character": "x",
+    "dec": "#120",
+    "hex": "x78",
+    "html": "na",
+    "description": "Lowercase x"
+  },
+  {
+    "code": "121",   
+    "character": "y",
+    "dec": "#121",
+    "hex": "x79",
+    "html": "na",
+    "description": "Lowercase y"
+  },
+  {
+    "code": "122",   
+    "character": "z",
+    "dec": "#122",
+    "hex": "x7A",
+    "html": "na",
+    "description": "Lowercase z"
+  },
+  {
+    "code": "123",   
+    "character": "{",
+    "dec": "#123",
+    "hex": "x7B",
+    "html": "na",
+    "description": "Opening brace"
+  },
+  {
+    "code": "124",   
+    "character": "{",
+    "dec": "#124",
+    "hex": "x7B",
+    "html": "lbrace;",
+    "description": "Braces or curly brackets, opening braces"
+  },
+  {
+    "code": "125",   
+    "character": "}",
+    "dec": "#125",
+    "hex": "x7D",
+    "html": "rbrace;",
+    "description": "Braces or curly brackets, closing braces"
+  },
+  {
+    "code": "126",   
+    "character": "~",
+    "dec": "#126",
+    "hex": "x7E",
+    "html": "tilde;",
+    "description": "Tilde, swung dash, equivalency sign"
+  },
+  {
+    "code": "127",   
+    "character": "n/a",
+    "dec": "#127",
+    "hex": "x7F",
+    "html": "n/a",
+    "description": "Delete"
+  },
+  {
+    "code": "128",   
+    "character": "€",
+    "dec": "#128",
+    "hex": "x80",
+    "html": "euro;",
+    "description": "Euro symbol"
+  },
+  {
+    "code": "129",   
+    "character": "ü",
+    "dec": "#129",
+    "hex": "x81",
+    "html": "uuml;",
+    "description": "Latin small letter u with umlaut or diaeresis, u-umlaut"
+  },
+  {
+    "code": "130",   
+    "character": "é",
+    "dec": "#130",
+    "hex": "x82",
+    "html": "eacute;",
+    "description": "Latin small letter e with acute accent or e-acute"
+  },
+  {
+    "code": "131",   
+    "character": "â",
+    "dec": "#131",
+    "hex": "x83",
+    "html": "acirc;",
+    "description": "Latin small letter a with circumflex accent or a-circumflex"
+  },
+  {
+    "code": "132",   
+    "character": "ä",
+    "dec": "#132",
+    "hex": "x84",
+    "html": "auml:",
+    "description": "Latin small letter a with umlaut or diaeresis, a-umlauts"
+  },
+  {
+    "code": "133",   
+    "character": "à",
+    "dec": "#133",
+    "hex": "x85",
+    "html": "agrave;",
+    "description": "Latin small letter a with grave accent"
+  },
+  {
+    "code": "134",   
+    "character": "å",
+    "dec": "#134",
+    "hex": "x86",
+    "html": "aring;",
+    "description": "Latin small letter a with a ring"
+  },
+  {
+    "code": "135",   
+    "character": "ç",
+    "dec": "#135",
+    "hex": "x87",
+    "html": "ccedil;",
+    "description": "Minuscule c-cedilla"
+  },
+  {
+    "code": "136",   
+    "character": "ê",
+    "dec": "#136",
+    "hex": "x88",
+    "html": "ecirc;",
+    "description": "Latin small letter e with circumflex accent or e-circumflex"
+  },
+  {
+    "code": "137",   
+    "character": "ë",
+    "dec": "#137",
+    "hex": "x89",
+    "html": "euml;",
+    "description": "Latin small letter e with umlaut or diaeresis, e-umlaut"
+  },
+  {
+    "code": "138",   
+    "character": "è",
+    "dec": "#138",
+    "hex": "x8A",
+    "html": "egrave;",
+    "description": "Latin small letter e with grave accent"
+  },
+  {
+    "code": "139",   
+    "character": "ï",
+    "dec": "#139",
+    "hex": "x8B",
+    "html": "iuml;",
+    "description": "Latin small letter i with umlaut or diaeresis, i-umlaut"
+  },
+  {
+    "code": "140",   
+    "character": "î",
+    "dec": "#140",
+    "hex": "x8C",
+    "html": "icirc;",
+    "description": "Latin small letter i with circumflex accent, i-circumflex"
+  },
+  {
+    "code": "141",   
+    "character": "ì",
+    "dec": "#141",
+    "hex": "x8D",
+    "html": "igrave;",
+    "description": "Latin small letter i with grave accent, i-grave"
+  },
+  {
+    "code": "142",   
+    "character": "Ä",
+    "dec": "#142",
+    "hex": "x8E",
+    "html": "&Auml;",
+    "description": "Latin captial letter A with umlaut or diaeresis, A-umlaut"
+  },
+  {
+    "code": "143",   
+    "character": "Å",
+    "dec": "#143",
+    "hex": "x8F",
+    "html": "Aring;",
+    "description": "Latin captial letter A with a ring, A-ring"
+  },
+  {
+    "code": "144",   
+    "character": "É",
+    "dec": "#144",
+    "hex": "x90",
+    "html": "Eacute;",
+    "description": "Latin captial letter E with acute accent, E-acute"
+  },
+  {
+    "code": "145",   
+    "character": "æ",
+    "dec": "#145",
+    "hex": "x91",
+    "html": "aelig;",
+    "description": "Latin small letter diphthong ae"
+  },
+  {
+    "code": "146",   
+    "character": "Æ",
+    "dec": "#146",
+    "hex": "x92",
+    "html": "AElig;",
+    "description": "Latin capital letter diphthong ae"
+  },
+  {
+    "code": "147",   
+    "character": "ô",
+    "dec": "#147",
+    "hex": "x93",
+    "html": "ocirc;",
+    "description": "Latin small letter o with circumflex accent, o-circumflex"
+  },
+  {
+    "code": "148",   
+    "character": "ö",
+    "dec": "#148",
+    "hex": "x94",
+    "html": "ouml;",
+    "description": "Latin small letter o with umlaut or diaeresis, o-umlaut"
+  },
+  {
+    "code": "149",   
+    "character": "ò",
+    "dec": "#149",
+    "hex": "x95",
+    "html": "ograve;",
+    "description": "Latin small letter o with grave accent, o-grave"
+  },
+  {
+    "code": "150",   
+    "character": "–",
+    "dec": "#150",
+    "hex": "x96",
+    "html": "ndash",
+    "description": ""
+  },
+  {
+    "code": "151",   
+    "character": "—",
+    "dec": "#151",
+    "hex": "x97",
+    "html": "mdash",
+    "description": ""
+  },
+  {
+    "code": "152",   
+    "character": "˜",
+    "dec": "#152",
+    "hex": "x98",
+    "html": "tilde",
+    "description": ""
+  },
+  {
+    "code": "153",   
+    "character": "™",
+    "dec": "#153",
+    "hex": "x99",
+    "html": "trade",
+    "description": ""
+  },
+  {
+    "code": "154",   
+    "character": "š",
+    "dec": "#154",
+    "hex": "x9A",
+    "html": "scaron",
+    "description": ""
+  },
+  {
+    "code": "155",   
+    "character": "›",
+    "dec": "#155",
+    "hex": "x9B",
+    "html": "rsaquo",
+    "description": ""
+  },
+  {
+    "code": "156",   
+    "character": "œ",
+    "dec": "#156",
+    "hex": "x9C",
+    "html": "oelig",
+    "description": ""
+  },
+  {
+    "code": "157",   
+    "character": "",
+    "dec": "#157",
+    "hex": "x9D",
+    "html": "na",
+    "description": ""
+  },
+  {
+    "code": "158",   
+    "character": "ž",
+    "dec": "#158",
+    "hex": "x9E",
+    "html": "na",
+    "description": "Latin small letter z with caron"
+  },
+  {
+    "code": "159",   
+    "character": "Ÿ",
+    "dec": "159",
+    "hex": "x9F",
+    "html": "yuml",
+    "description": ""
+  },
+  {
+    "code": "160",   
+    "character": "",
+    "dec": "#160",
+    "hex": "xA0",
+    "html": "nbsp",
+    "description": ""
+  },
+  {
+    "code": "161",   
+    "character": "¡",
+    "dec": "#161",
+    "hex": "xA1",
+    "html": "iexcl",
+    "description": ""
+  },
+  {
+    "code": "162", 
+    "character": "¢",
+    "dec": "#162",
+    "hex": "xA2",
+    "html": "cent",
+    "description": ""
+  },
+  {
+    "code": "163",   
+    "character": "£",
+    "dec": "#163",
+    "hex": "xA3",
+    "html": "pound",
+    "description": ""
+  },
+  {
+    "code": "164",   
+    "character": "¤",
+    "dec": "#164",
+    "hex": "xA4",
+    "html": "curren",
+    "description": ""
+  },
+  {
+    "code": "165",   
+    "character": "¥",
+    "dec": "#165",
+    "hex": "xA5",
+    "html": "yen",
+    "description": ""
+  },
+  {
+    "code": "166",   
+    "character": "¦",
+    "dec": "#166",
+    "hex": "xA6",
+    "html": "brvbar",
+    "description": ""
+  },
+  {
+    "code": "167",   
+    "character": "§",
+    "dec": "#167",
+    "hex": "xA7",
+    "html": "sect",
+    "description": ""
+  },
+  {
+    "code": "168",   
+    "character": "¨",
+    "dec": "#168",
+    "hex": "xA8",
+    "html": "uml",
+    "description": ""
+  },
+  {
+    "code": "169",   
+    "character": "©",
+    "dec": "#169",
+    "hex": "xA9",
+    "html": "copy",
+    "description": ""
+  },
+  {
+    "code": "170",   
+    "character": "ª",
+    "dec": "#170",
+    "hex": "xAA",
+    "html": "ordf",
+    "description": ""
+  },
+  {
+    "code": "171",   
+    "character": "«",
+    "dec": "#171",
+    "hex": "xAB",
+    "html": "laquo",
+    "description": ""
+  },
+  {
+    "code": "172",   
+    "character": "¬",
+    "dec": "#172",
+    "hex": "xAC",
+    "html": "not",
+    "description": ""
+  },
+  {
+    "code": "173",   
+    "character": "­",
+    "dec": "#173",
+    "hex": "xAD",
+    "html": "shy",
+    "description": ""
+  },
+  {
+    "code": "174",   
+    "character": "®",
+    "dec": "#174",
+    "hex": "xAE",
+    "html": "reg",
+    "description": ""
+  },
+  {
+    "code": "175",   
+    "character": "¯",
+    "dec": "#175",
+    "hex": "xAF",
+    "html": "macr",
+    "description": ""
+  },
+  {
+    "code": "176",   
+    "character": "°",
+    "dec": "#176",
+    "hex": "xB0",
+    "html": "deg",
+    "description": ""
+  },
+  {
+    "code": "177",   
+    "character": "±",
+    "dec": "#177",
+    "hex": "xB1",
+    "html": "plusmn",
+    "description": ""
+  },
+  {
+    "code": "178",   
+    "character": "²",
+    "dec": "#178",
+    "hex": "xB2",
+    "html": "sup2",
+    "description": ""
+  },
+  {
+    "code": "179",   
+    "character": "³",
+    "dec": "#179",
+    "hex": "xB3",
+    "html": "sup3",
+    "description": ""
+  },
+  {
+    "code": "180",   
+    "character": "´",
+    "dec": "#180",
+    "hex": "xB4",
+    "html": "acute",
+    "description": ""
+  },
+  {
+    "code": "181",   
+    "character": "µ",
+    "dec": "#181",
+    "hex": "xB5",
+    "html": "micro",
+    "description": ""
+  },
+  {
+    "code": "182",   
+    "character": "¶",
+    "dec": "#182",
+    "hex": "xB6",
+    "html": "para",
+    "description": ""
+  },
+  {
+    "code": "183",   
+    "character": "·",
+    "dec": "#183",
+    "hex": "xB7",
+    "html": "middot",
+    "description": ""
+  },
+  {
+    "code": "184",   
+    "character": "¸",
+    "dec": "#184",
+    "hex": "xB8",
+    "html": "cedil",
+    "description": ""
+  },
+  {
+    "code": "185",   
+    "character": "¹",
+    "dec": "#185",
+    "hex": "xB9",
+    "html": "sup1",
+    "description": ""
+  },
+  {
+    "code": "186",   
+    "character": "º",
+    "dec": "#186",
+    "hex": "xBA",
+    "html": "ordm",
+    "description": ""
+  },
+  {
+    "code": "187",   
+    "character": "»",
+    "dec": "#187",
+    "hex": "xBB",
+    "html": "raquo",
+    "description": ""
+  },
+  {
+    "code": "188",   
+    "character": "¼",
+    "dec": "#188",
+    "hex": "xBC",
+    "html": "frac14",
+    "description": ""
+  },
+  {
+    "code": "189",   
+    "character": "½",
+    "dec": "#189",
+    "hex": "xBD",
+    "html": "frac12",
+    "description": ""
+  },
+  {
+    "code": "190",   
+    "character": "¾",
+    "dec": "#190",
+    "hex": "xBE",
+    "html": "frac34",
+    "description": ""
+  },
+  {
+    "code": "191",   
+    "character": "¿",
+    "dec": "#191",
+    "hex": "xBF",
+    "html": "iquest",
+    "description": ""
+  },
+  {
+    "code": "192",   
+    "character": "À",
+    "dec": "#192",
+    "hex": "xC0",
+    "html": "Agrave",
+    "description": ""
+  },
+  {
+    "code": "193",   
+    "character": "Á",
+    "dec": "#193",
+    "hex": "xC1",
+    "html": "Aacute",
+    "description": ""
+  },
+  {
+    "code": "194",   
+    "character": "Â",
+    "dec": "#194",
+    "hex": "xC2",
+    "html": "Acirc",
+    "description": ""
+  },
+  {
+    "code": "195",   
+    "character": "Ã",
+    "dec": "#195",
+    "hex": "xC3",
+    "html": "Atilde",
+    "description": ""
+  },
+  {
+    "code": "196",   
+    "character": "Ä",
+    "dec": "#196",
+    "hex": "xC4",
+    "html": "Auml",
+    "description": ""
+  },
+  {
+    "code": "197",   
+    "character": "Å",
+    "dec": "#197",
+    "hex": "xC5",
+    "html": "Aring",
+    "description": ""
+  },
+  {
+    "code": "198",   
+    "character": "Æ",
+    "dec": "#198",
+    "hex": "xC6",
+    "html": "AElig",
+    "description": ""
+  },
+  {
+    "code": "199",   
+    "character": "Ç",
+    "dec": "#199",
+    "hex": "xC7",
+    "html": "Ccedil",
+    "description": ""
+  },
+  {
+    "code": "200",   
+    "character": "È",
+    "dec": "#200",
+    "hex": "xC8",
+    "html": "Egrave",
+    "description": ""
+  },
+  {
+    "code": "201",   
+    "character": "É",
+    "dec": "#201",
+    "hex": "xC9",
+    "html": "Eacute",
+    "description": ""
+  },
+  {
+    "code": "202",   
+    "character": "Ê",
+    "dec": "#202",
+    "hex": "xCA",
+    "html": "Ecirc",
+    "description": ""
+  },
+  {
+    "code": "203",   
+    "character": "Ë",
+    "dec": "#203",
+    "hex": "xCB",
+    "html": "Euml",
+    "description": ""
+  },
+  {
+    "code": "204",   
+    "character": "Ì",
+    "dec": "#204",
+    "hex": "xCC",
+    "html": "Igrave",
+    "description": ""
+  },
+  {
+    "code": "205", 
+    "character": "Í",
+    "dec": "#205",
+    "hex": "xCD",
+    "html": "Iacute",
+    "description": ""
+  },
+  {
+    "code": "206",   
+    "character": "Î",
+    "dec": "#206",
+    "hex": "xCE",
+    "html": "Icirc",
+    "description": ""
+  },
+  {
+    "code": "207",   
+    "character": "Ï",
+    "dec": "#207",
+    "hex": "xCF",
+    "html": "Iuml",
+    "description": ""
+  },
+  {
+    "code": "208",   
+    "character": "Ð",
+    "dec": "#208",
+    "hex": "xD0",
+    "html": "ETH",
+    "description": ""
+  },
+  {
+    "code": "209",   
+    "character": "Ñ",
+    "dec": "#209",
+    "hex": "xD1",
+    "html": "Ntilde",
+    "description": ""
+  },
+  {
+    "code": "210",   
+    "character": "Ò",
+    "dec": "#210",
+    "hex": "xD2",
+    "html": "Ograve",
+    "description": ""
+  },
+  {
+    "code": "211",   
+    "character": "Ó",
+    "dec": "#211",
+    "hex": "xD3",
+    "html": "Oacute",
+    "description": ""
+  },
+  {
+    "code": "212",   
+    "character": "Ô",
+    "dec": "#212",
+    "hex": "xD4",
+    "html": "Ocirc",
+    "description": ""
+  },
+  {
+    "code": "213",   
+    "character": "Õ",
+    "dec": "#213",
+    "hex": "xD5",
+    "html": "Otilde",
+    "description": ""
+  },
+  {
+    "code": "214",   
+    "character": "Ö",
+    "dec": "#214",
+    "hex": "xD6",
+    "html": "Ouml",
+    "description": ""
+  },
+  {
+    "code": "215",   
+    "character": "×",
+    "dec": "#215",
+    "hex": "xD7",
+    "html": "times",
+    "description": ""
+  },
+  {
+    "code": "216",   
+    "character": "Ø",
+    "dec": "#216",
+    "hex": "xD8",
+    "html": "Oslash",
+    "description": ""
+  },
+  {
+    "code": "217",   
+    "character": "Ù",
+    "dec": "#217",
+    "hex": "xD9",
+    "html": "Ugrave",
+    "description": ""
+  },
+  {
+    "code": "218",   
+    "character": "Ú",
+    "dec": "#218",
+    "hex": "xDA",
+    "html": "Uacute",
+    "description": ""
+  },
+  {
+    "code": "219",   
+    "character": "Û",
+    "dec": "#219",
+    "hex": "xDB",
+    "html": "Ucirc",
+    "description": ""
+  },
+  {
+    "code": "220",   
+    "character": "Ü",
+    "dec": "#220",
+    "hex": "xDC",
+    "html": "Uuml",
+    "description": ""
+  },
+  {
+    "code": "221",   
+    "character": "Ý",
+    "dec": "#221",
+    "hex": "xDD",
+    "html": "Yacute",
+    "description": ""
+  },
+  {
+    "code": "222",   
+    "character": "Þ",
+    "dec": "#222",
+    "hex": "xDE",
+    "html": "THORN",
+    "description": ""
+  },
+  {
+    "code": "223",   
+    "character": "ß",
+    "dec": "#223",
+    "hex": "xDF",
+    "html": "szlig",
+    "description": ""
+  },
+  {
+    "code": "224",   
+    "character": "à",
+    "dec": "#224",
+    "hex": "xE0",
+    "html": "agrave",
+    "description": ""
+  },
+  {
+    "code": "225",   
+    "character": "á",
+    "dec": "#225",
+    "hex": "xE1",
+    "html": "aacute",
+    "description": ""
+  },
+  {
+    "code": "226",   
+    "character": "â",
+    "dec": "#226",
+    "hex": "xE2",
+    "html": "acirc",
+    "description": ""
+  },
+  {
+    "code": "227",   
+    "character": "ã",
+    "dec": "#227",
+    "hex": "xE3",
+    "html": "atilde",
+    "description": ""
+  },
+  {
+    "code": "228",   
+    "character": "ä",
+    "dec": "#228",
+    "hex": "xE4",
+    "html": "auml",
+    "description": ""
+  },
+  {
+    "code": "229",   
+    "character": "å",
+    "dec": "#229",
+    "hex": "xE5",
+    "html": "aring",
+    "description": ""
+  },
+  {
+    "code": "230",   
+    "character": "æ",
+    "dec": "#230",
+    "hex": "xE6",
+    "html": "aelig",
+    "description": ""
+  },
+  {
+    "code": "231",   
+    "character": "ç",
+    "dec": "#231",
+    "hex": "xE7",
+    "html": "ccedil",
+    "description": ""
+  },
+  {
+    "code": "232", 
+    "character": "è",
+    "dec": "#232",
+    "hex": "xE8",
+    "html": "egrave",
+    "description": ""
+  },
+  {
+    "code": "233", 
+    "character": "é",
+    "dec": "#233",
+    "hex": "xE9",
+    "html": "eacute",
+    "description": ""
+  },
+  {
+    "code": "234",   
+    "character": "ê",
+    "dec": "#234",
+    "hex": "xEA",
+    "html": "ecirc",
+    "description": ""
+  },
+  {
+    "code": "235", 
+    "character": "ë",
+    "dec": "#235",
+    "hex": "xEB",
+    "html": "euml",
+    "description": ""
+  },
+  {
+    "code": "236",   
+    "character": "ì",
+    "dec": "#236",
+    "hex": "xEC",
+    "html": "igrave",
+    "description": ""
+  },
+  {
+    "code": "237",   
+    "character": "í",
+    "dec": "#237",
+    "hex": "xED",
+    "html": "iacute",
+    "description": ""
+  },
+  {
+    "code": "238",   
+    "character": "î",
+    "dec": "#238",
+    "hex": "xEE",
+    "html": "icirc",
+    "description": ""
+  },
+  {
+    "code": "239",   
+    "character": "ï",
+    "dec": "#239",
+    "hex": "xEF",
+    "html": "iuml",
+    "description": ""
+  },
+  {
+    "code": "240",   
+    "character": "ð",
+    "dec": "#240",
+    "hex": "xF0",
+    "html": "eth",
+    "description": ""
+  },
+  {
+    "code": "241",   
+    "character": "ñ",
+    "dec": "#241",
+    "hex": "xF1",
+    "html": "ntilde",
+    "description": ""
+  },
+  {
+    "code": "242",   
+    "character": "ò",
+    "dec": "#242",
+    "hex": "xF2",
+    "html": "ograve",
+    "description": ""
+  },
+  {
+    "code": "243",   
+    "character": "ó",
+    "dec": "#243",
+    "hex": "xF3",
+    "html": "oacute",
+    "description": ""
+  },
+  {
+    "code": "244",   
+    "character": "ô",
+    "dec": "#244",
+    "hex": "xF4",
+    "html": "ocirc",
+    "description": ""
+  },
+  {
+    "code": "245",   
+    "character": "õ",
+    "dec": "#245",
+    "hex": "xF5",
+    "html": "otilde",
+    "description": ""
+  },
+  {
+    "code": "246",   
+    "character": "ö",
+    "dec": "#246",
+    "hex": "xF6",
+    "html": "ouml",
+    "description": ""
+  },
+  {
+    "code": "247",   
+    "character": "÷",
+    "dec": "#247",
+    "hex": "xF7",
+    "html": "divide",
+    "description": ""
+  },
+  {
+    "code": "248",   
+    "character": "ø",
+    "dec": "#248",
+    "hex": "xF8",
+    "html": "oslash",
+    "description": ""
+  },
+  {
+    "code": "249",   
+    "character": "ù",
+    "dec": "#249",
+    "hex": "xF9",
+    "html": "ugrave",
+    "description": ""
+  },
+  {
+    "code": "250",   
+    "character": "ú",
+    "dec": "#250",
+    "hex": "xFA",
+    "html": "uacute",
+    "description": ""
+  },
+  {
+    "code": "251",   
+    "character": "û",
+    "dec": "#251",
+    "hex": "xFB",
+    "html": "ucirc",
+    "description": ""
+  },
+  {
+    "code": "252",   
+    "character": "ü",
+    "dec": "#252",
+    "hex": "xFC",
+    "html": "uuml",
+    "description": ""
+  },
+  {
+    "code": "253",   
+    "character": "ý",
+    "dec": "#253",
+    "hex": "xFD",
+    "html": "yacute",
+    "description": ""
+  },
+  {
+    "code": "254",   
+    "character": "þ",
+    "dec": "#254",
+    "hex": "xFE",
+    "html": "thorn",
+    "description": ""
+  },
+  {
+    "code": "255",   
+    "character": "ÿ",
+    "dec": "#255",
+    "hex": "xFF",
+    "html": "yuml",
+    "description": ""
+  }
+]

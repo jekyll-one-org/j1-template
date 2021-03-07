@@ -1,0 +1,63 @@
+// -----------------------------------------------------------------------------
+//   ~/vendor/algolia/algolia.scss
+//   Vendor Algolia CSS index file
+// 
+//   Product/Info:
+//   https://jekyll.one
+// 
+//   Copyright (C) 2021 Juergen Adams
+// 
+//   J1 Template is licensed under the MIT License.
+//   See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+//  -----------------------------------------------------------------------------
+// This is the main scss file, provided as an underscored file so that 
+// variable contexts remain in-tact when importing from the source
+
+//@import "variables";
+//@import "mixins";
+
+/*
+ # -----------------------------------------------------------------------------
+ #  ~/vendor/algolia/base.scss
+ #  Provides styles for the RefinementList widget (instantsearch.js)
+ #
+ #  Product/Info:
+ #  https://jekyll.one
+ #  https://github.com/algolia/instantsearch.js
+ #  https://community.algolia.com/instantsearch.js/v2/getting-started.html#add-a-refinementlist
+ #
+ #  Copyright (C) 2021 Juergen Adams
+ #  Copyright (C) 2015-present Algolia, Inc.
+ #
+ #  J1 Template is licensed under the MIT License
+ #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ #  instantsearch.js is licensed under the MIT License
+ #  See: https://github.com/algolia/instantsearch.js/blob/develop/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+// @import 'variables';
+
+@import 'base';
+// @import 'clear-all';
+// @import 'current-refined-values';
+// @import 'hierarchical-menu';
+// @import 'hits-per-page';
+// @import 'menu';
+@import 'refinement-list';
+// @import 'numeric-selector';
+// @import 'pagination';
+// @import 'price-ranges';
+// @import 'range-input';
+// @import 'range-slider';
+// @import 'search-box';
+// @import 'sort-by-selector';
+// @import 'star-rating';
+// @import 'stats';
+// @import 'toggle';
+// @import 'menu-select';
+// @import 'breadcrumb';
+// @import 'geo-search';
+
+
+

@@ -1,0 +1,56 @@
+# ------------------------------------------------------------------------------
+# ~/_data/asciidoc2pdf/j1-theme.yml
+# J1 Theme definitions for PDF output
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2021 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+#
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Additional font (catalog) settings
+#
+font:
+  catalog:
+    Roboto:
+      normal:                           Roboto-Regular.ttf
+      italic:                           Roboto-Regular-Italic.ttf
+      bold:                             Roboto-Bold.ttf
+      bold_italic:                      Roboto-Bold-Italic.ttf
+
+# ------------------------------------------------------------------------------
+# Base page settings
+#
+page:
+  layout:                               landscape
+  size:                                 A4
+
+base:
+  font_color:                           #333333
+# font_family:                          Helvetica   #Roboto
+  font_size:                            12
+  line_height_length:                   17
+  line_height:                          $base_line_height_length / $base_font_size
+  vertical_spacing:                     $base_line_height_length
+
+heading:
+  font_color:                           #262626
+  font_size:                            17
+  font_style:                           bold
+  line_height:                          1.2
+  margin_bottom:                        $vertical_spacing
+
+link:
+  font_color:                           #002FA7
+
+outline_list:
+  indent:                               $base_font_size * 1.5
+
+
+# ------------------------------------------------------------------------------
+# END config

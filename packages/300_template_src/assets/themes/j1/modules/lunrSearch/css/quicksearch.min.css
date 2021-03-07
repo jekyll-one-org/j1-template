@@ -1,0 +1,32 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/lunrSearch/css/lunr_search.min.css
+ # Provides styles for J1 Module lunrSearch (result styles)
+ #
+ # Product/Info:
+ # http://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+.search-results {
+  max-height: 450px;
+  width: 98%;
+  background-color: unset;
+  overflow-y: scroll!important;
+  margin-top: .25rem;
+  /* margin-right: 3rem; */
+  margin-bottom: .25rem;
+  /* margin-left: 1rem; */
+}
+
+p.result-item-text {
+    font-size: .875rem;
+    margin-bottom: .5rem;
+    text-align: justify;
+    line-height: 1.25rem;
+}

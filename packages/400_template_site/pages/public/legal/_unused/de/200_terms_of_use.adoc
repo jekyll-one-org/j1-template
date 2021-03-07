@@ -1,0 +1,55 @@
+---
+title:                                  Nutzungsbedingungen
+tagline:                                Copyright für Software und Inhalte
+description:                            Copyright für Software und Inhalte
+
+tags:                                   [ Nutzungsbedingungen, Copyright ]
+index:                                  []
+categories:                             [ pages ]
+
+permalink:                              /pages/public/legal/de/terms_of_use/
+regenerate:                             false
+exclude_from_search:                    true
+
+resources:                              []
+resource_options:                       []
+---
+
+== Nutzungsbedingungen
+
+Die Inhalte des Internetauftritts wurden mit größtmöglicher Sorgfalt und nach
+bestem Gewissen erstellt. Dennoch übernimmt der Anbieter dieser Webseite keine
+Gewähr für die Aktualität, Vollständigkeit und Richtigkeit der bereitgestellten
+Seiten und Inhalte.
+
+=== Haftungsbeschränkung
+
+Als Diensteanbieter ist der Anbieter dieser Webseite gemäß § 7 Abs. 1 TMG für
+eigene Inhalte und bereitgestellte Informationen auf diesen Seiten nach den
+allgemeinen Gesetzen verantwortlich; nach den §§ 8 bis 10 TMG jedoch nicht
+verpflichtet, die übermittelten oder gespeicherten fremden Informationen zu
+überwachen. Eine Entfernung oder Sperrung dieser Inhalte erfolgt umgehend ab
+dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung. Eine Haftung ist
+erst ab dem Zeitpunkt der Kenntniserlangung möglich.
+
+=== Externe Links
+
+Die Webseite enthält sog. *externe Links* (Verlinkungen) zu anderen Webseiten,
+auf deren Inhalt der Anbieter der Webseite keinen Einfluss hat. Aus diesem
+Grund kann der Anbieter für diese Inhalte auch keine Gewähr übernehmen.
+
+Für die Inhalte und Richtigkeit der bereitgestellten Informationen ist der
+jeweilige Anbieter der verlinkten Webseite verantwortlich. Zum Zeitpunkt der
+Verlinkung waren keine Rechtsverstöße erkennbar. Bei Bekanntwerden einer
+solchen Rechtsverletzung wird der Link umgehend entfernen.
+
+== Urheber- und Leistungsschutzrecht
+
+Die auf dieser Webseite veröffentlichten Inhalte, Werke und bereitgestellten
+Informationen unterliegen dem deutschen Urheberrecht und Leistungsschutzrecht.
+Jede Art der Vervielfältigung, Bearbeitung, Verbreitung, Einspeicherung und
+jede Art der Verwertung außerhalb der Grenzen des Urheberrechts bedarf der
+vorherigen schriftlichen Zustimmung des jeweiligen Rechteinhabers.
+
+Das unerlaubte Kopieren/Speichern der bereitgestellten Informationen auf
+diesen Webseiten ist nicht gestattet und strafbar.

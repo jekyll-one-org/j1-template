@@ -1,0 +1,55 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_includes/themes/j1/blocks/footer/boxes/contacts_box.proc
+ #  Liquid PROCEDURE to create a contacts box for the footer
+ #
+ #  Product/Info:
+ #  http://jekyll.one
+ #
+ #  Copyright (C) 2021 Juergen Adams
+ #
+ #  Licensed under the Creative Commons Attribution 3.0 Unported License.
+ #  See: http://creativecommons.org/licenses/by/3.0/.
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+--------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Variables
+--------------------------------------------------------------- {% endcomment %}
+
+
+{% comment %} Main
+--------------------------------------------------------------- {% endcomment %}
+<!-- [INFO   ] [j1.assets.data.footer              ] [Found ContactsBox. Process ContactsBox] --> 
+<div class="col-md-{{footer_box_width_md}}"> <!-- ContactsBox -->
+  <div class="heading-footer"><h2 class="notoc">{{ title }}</h2></div>
+  <ul class="list-unstyled contacts">
+    {% if address %}
+    <li>
+      <i class="radius-3x fa fa-map-marker"></i>
+      <p>{{ address_1 }}</p>
+      <p>{{ address_2 }}</p>
+    </li>
+    {% endif %}
+    {% if phone %}
+    <li>
+      <i class="radius-3x fa fa-phone"></i>
+      <p>{{ phone_1 }}</p>
+      <p>{{ phone_2 }}</p>
+    </li>
+    {% endif %}
+    {% if internet %}
+    <li>
+      <i class="radius-3x fa fa-globe"></i>
+      <p><a href="mailto:{{ mail }}">{{ mail }}</a></p>
+      <p><a href="#">{{ www }}</a></p>
+    </li>
+    {% endif %}
+  </ul>
+</div> <!-- End ContactsBox -->

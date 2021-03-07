@@ -1,0 +1,12 @@
+See:
+https://github.com/JeremyEnglert/JointsWP/issues/317
+https://programmer.help/blogs/gyp-verb-check-python-checking-for-python-executable-python2-in-the-path.html
+https://stackoverflow.com/questions/54262174/i-am-getting-python2-failed-errors-on-npm-install
+
+So running this command worked:
+
+  npm install --global windows-build-tools
+
+I thought I had tried that already but I guess I needed to do it in 
+powershell administrative mode
+

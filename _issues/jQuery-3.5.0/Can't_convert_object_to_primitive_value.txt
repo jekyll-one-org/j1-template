@@ -1,0 +1,14 @@
+This issue seems to be related to jQuery 3.5.0. It is a breaking change
+that affects many plugins. Temporarily reverting to a previous versio
+of jQuery (like 3.4.1) fixed the issue for me.
+
+Source: jQuery Issue #4665
+
+0
+
+At today's answer, jquery already fix the issue and you don't have to do
+any regression.
+
+Just uninstall jquery, install it again and the latest 3.5.1 version,
+released on 2020-05-04, should fix the problem - for me it did, and I'm
+also using Angular 9 and BS4*.

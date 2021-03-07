@@ -1,0 +1,37 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_includes/themes/j1/blocks/footer/boxes/social_media_icons.proc
+ #  Liquid PROCEDURE to create a icon line (social media) for the footer
+ #
+ #  Product/Info:
+ #  http://jekyll.one
+ #
+ #  Copyright (C) 2021 Juergen Adams
+ #
+ #  Licensed under the Creative Commons Attribution 3.0 Unported License.
+ #  See: http://creativecommons.org/licenses/by/3.0/.
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign icons          = include.icons %}
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+<!-- [INFO   ] [social_media_icons.proc            ] [ place icons configured ] -->
+<ul class="social-icons">
+{% for icon in icons %}
+  {% assign key             = icon[0] %}
+  {% assign value           = icon[1] %}
+    {% if key == 'facebook' and value.enabled  %}<li><a id="footerFacebookButton" href="{{value.href}}" data-original-title="Facebook" class="rounded-circle social_facebook"></a></li>{% endif %}
+    {% if key == 'twitter'  and value.enabled  %}<li><a id="footerTwitterButton" href="{{value.href}}" data-original-title="Twitter" class="rounded-circle social_twitter"></a></li>{% endif %}
+{% endfor %}
+</ul>

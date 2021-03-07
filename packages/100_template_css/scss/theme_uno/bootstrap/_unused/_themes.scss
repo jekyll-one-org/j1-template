@@ -1,0 +1,22 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/bootstrap/_themes.scss
+ #
+ # Product/Info:
+ # https://github.com/FezVrasta/bootstrap-material-design
+ #
+ # Copyright (C) 2020 Federico Zivolo and Contributors
+ #
+ # Bootstrap Material Design is licensed under the MIT License.
+ # See: https://github.com/FezVrasta/bootstrap-material-design/blob/master/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+// By default, assume light-theme, no need for a marker class.
+
+// This is mostly a marker class, add it to something like the body or
+// container. Subordinates will look for this marker - see buttons
+
+.bg-inverse {
+  // foo
+}

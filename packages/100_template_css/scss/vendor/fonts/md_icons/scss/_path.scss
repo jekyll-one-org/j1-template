@@ -1,0 +1,30 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/vendor/fonts/md_icons/scss/_path.scss
+ # Path settings for MD Icons v5.9.55
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+// FONT PATH
+// -----------------------------------------------------------------------------
+
+@font-face {
+  src: url('#{$mdi-font-path}/#{$mdi-filename}-webfont.woff') format('woff');
+  src: url('#{$mdi-font-path}/#{$mdi-filename}-webfont.woff2') format('woff2');
+  src: url('#{$mdi-font-path}/eot/#{$mdi-filename}-webfont.eot?v=#{$mdi-version}');
+  src: url('#{$mdi-font-path}/eot/#{$mdi-filename}-webfont.eot?#iefix&v=#{$mdi-version}') format('embedded-opentype');
+  src: url('#{$mdi-font-path}/svg/#{$mdi-filename}-webfont.svg?v=#{$mdi-version}##{$mdi-filename}#{$mdi-font-weight}') format('svg');
+  src: url('#{$mdi-font-path}/ttf/#{$mdi-filename}-webfont.ttf?v=#{$mdi-version}') format('truetype');
+
+  font-family: '#{$mdi-font-name}';
+  font-weight: normal;
+  font-style: normal;
+}

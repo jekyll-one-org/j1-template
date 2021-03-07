@@ -1,0 +1,79 @@
+---
+title:                                  Impress
+tagline:                                legal data
+date:                                   2020-10-23 00:00:00
+description: >
+                                        Impressum
+
+tags:                                   [ Impressum ]
+categories:                             [ Legal, Info ]
+
+toc:                                    false
+fam:                                    false
+fam_menu_id:                            page_ctrl
+scrollbar:                              false
+indexed:                                false
+exclude_from_search:                    true
+
+permalink:                              /pages/public/legal/en/impress/
+regenerate:                             false
+
+resources:                              []
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/modules/attics/runner-1920x1200.jpg
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:eu-region:                             false
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+WARNING: This document *does not* constitute any *legal advice*. It is
+highly recommended to verify legal aspects and implications.
+
+// Include sub-documents
+// -----------------------------------------------------------------------------
+
+
+ifeval::[eu-region} == true]
+.Postal address
+----
+  Your Name
+  Your Postal Address
+----
+endif::[]
+
+.Contact
+----
+  your@email.domain
+----
+
+ifeval::[eu-region} == true]
+.Responsible for the content according to § 55 Abs. 2 RStV:
+----
+  Your Name
+  Your Postal Address
+----
+endif::[]

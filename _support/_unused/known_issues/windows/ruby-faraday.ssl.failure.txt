@@ -1,0 +1,40 @@
+See: https://github.com/lostisland/faraday/issues/807
+
+faraday-0.12.2
+ruby 2.3.3p222 (2016-11-21 revision 56859) [x64-mingw32]
+
+Trying the oAuth flow on a new App @Github and this comes up:
+
+Faraday::SSLError at /auth/github/callback
+SSL_connect returned=1 errno=0 state=error: certificate verify failed
+
+So my Chrome browser version 67 seems to like my certificate, no
+trouble with HTTPS in the browser for my domain... but in the oAuth
+callback the calls choke.
+
+Solution:
+
+Unfortunately browser and Faraday (actually, Net::HTTP) use different
+tools to check certificates, so it may be that the latter doesn't like
+your certificate or couldn't find the SSL_CERT_FILE (cacert.pem) some
+reason.
+
+SSL_CERT_FILE (cacert.pem)
+------------
+--> Bundle of CA Root Certificates. Provided e.g by OpenSSL.
+
+cacert.pem is a bundle of X.509 certificates of public Certificate
+Authorities (CA).
+
+It contains the certificates in PEM format and therefore can be directly
+used with e.g. curl|libcurl|php_curl, or with a webserver for SSL
+client authentication.
+
+Download: https://github.com/jeroen/openssl/blob/master/inst/cacert.pem
+
+Set environment variables WINDOWS (SYSTEM):
+
+
+
+OPENSSL_CONF=C:\J1_QuickStart\openSSL\bin\openssl.cfg
+SSL_CERT_FILE=C:\Users\jadams\.ssh\other\cacert.pem

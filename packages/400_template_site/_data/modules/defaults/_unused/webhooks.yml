@@ -1,0 +1,49 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/defaults/webhooks.yml
+# Default configuration settings for J1 Webhooks module
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2021 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one/J1 Template/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# About this configuration (used for J1 CC only)
+#
+about_config:
+  title:                                J1 Webhooks
+  scope:                                Default settings
+  location:                             _data/modules/defaults/webhooks.yml
+
+# ------------------------------------------------------------------------------
+# Default configuration settings
+#
+defaults:
+  enabled:                              false                                   # needed for j1.layout_shim_generator.html
+
+  xhr_container_id:                     web_hook_modals
+  xhr_data_path:                        /assets/data/webhook/index.html
+
+  mode:                                 silent                                  # interactive|silent
+
+  # Webhooks client UI (BS Modals)
+  # ----------------------------------------------------------------------------
+  commit_detection:
+
+    modal_commit_detected:
+      enabled:                          false
+      autohide:                         false
+      timeout:                          5000
+
+    modal_pull_response:
+      enabled:                          false
+      autohide:                         true
+      timeout:                          5000
+
+  
+# ------------------------------------------------------------------------------
+# END config

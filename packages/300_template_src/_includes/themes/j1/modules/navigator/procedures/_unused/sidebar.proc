@@ -1,0 +1,243 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_includes/templates/j1/modules/navigator/procedures/sidebar.proc
+ #  Liquid PROCEDURE template to create the side menu for the quicklink bar
+ #
+ #  Product/Info:
+ #  https://jekyll.one
+ #
+ #  Copyright (C) 2021 Juergen Adams
+ #
+ #  J1 Template is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ #
+ # -----------------------------------------------------------------------------
+ #  Test data:
+ #   liquid_var: {{ liquid_var | debug }}
+ #
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedure parameter|s
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign sidebar_options = include.options %}
+
+
+{% comment %} Liquid procedures 
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture select_color     %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %}
+{% capture select_icon_size %}themes/{{site.template.name}}/procedures/global/select_icon_size.proc{% endcapture %}
+
+
+{% comment %} Liquid var initialization
+-------------------------------------------------------------------------------- {% endcomment %}
+
+  {% comment %} Set config files
+  ------------------------------------------------------------------------------ {% endcomment %}
+  {% assign navigator_config  = site.data.modules.j1_navigator %}
+  {% assign sidebar_config    = navigator_config.nav_sidebar %}
+  {% assign theme_switcher    = site.data.modules.j1_theme_switcher %}
+ 
+
+  {% comment %} Set sidebar properties
+  ------------------------------------------------------------------------------ {% endcomment %}
+  {% assign display_user_info = sidebar_options.display_user_info %}
+  {% assign display_theme     = sidebar_options.display_theme %}
+  {% assign close_icon        = sidebar_options.close_icon %}
+
+  {% if sidebar_options.icon_family == 'FontAwesome' or sidebar_options.icon_family == 'FontAwesome4' or sidebar_options.icon_family == 'FontAwesome5' %}
+    {% assign icon_family = 'fa' %}
+  {% elsif sidebar_options.icon_family == 'MDI' or sidebar_options.icon_family == 'Material Design Icons'%}
+    {% assign icon_family = 'mdi' %}
+  {% else %}
+    {% assign icon_family = 'mdi' %}
+  {% endif %}
+
+  {% include {{select_color}} color=sidebar_options.icon_color fallback="#9E9E9E" %}
+  {% capture icon_color %}style="color: {{color}}"{% endcapture %}
+
+  {% include {{select_icon_size}} family=icon_family size=sidebar_options.icon_size %}
+  {% assign icon_size = size %}
+
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+
+<!-- [INFO   ] [j1.modules.navigator.sidebar.proc     ] [Start processing: sidebar] -->
+<div id="mod_sidebar" class="side">
+  <a href="#" class="close-side"><i class="{{icon_family}} {{icon_family}}-{{close_icon}} mdi-48px" {{icon_color}}></i></a>
+
+  {% for boxes in sidebar_config.boxes %}
+    {% for box in boxes %}
+
+      {% for item in box[1] %}
+        {% assign key   = item[0] %}
+        {% assign value = item[1] %}
+        {% if key == 'enabled' %}  {% assign enabled = value %} {% endif %}
+        {% if key == 'type' %}     {% assign type    = value %} {% endif %}
+        {% if key == 'title' %}    {% assign title   = value %} {% endif %}
+        {% if key == 'type' %}     {% assign type    = value %} {% endif %}
+        {% if key == 'links' %}    {% assign links   = value %} {% endif %}      
+      {% endfor %}
+
+      {% if enabled %}
+        {% case type %}
+
+          {% comment %} Collect USER info
+          ---------------------------------------------------------------------- {% endcomment %}
+          {% when 'user_info' %}
+            <!-- [INFO   ] [j1.modules.navigator.sidebar.proc     ] [USER info enabled] -->
+            <!-- [INFO   ] [j1.modules.navigator.sidebar.proc     ] [Write widged placeholder: USER info] -->
+            <div id="user-info" class="widget">
+              <h4 class="heading">{{title}}</h4>
+              <ul id="display_user_details" class="link">
+                {% for link in links %}
+
+                  {% if link.icon == null %}
+                    {% assign icon = '' %}
+                  {% else %}
+                    {% capture icon %}<i class="{{icon_family}} {{icon_family}}-{{link.icon}} {{icon_size}} mr-2" {{icon_color}}></i>{% endcapture %}
+                  {% endif %}
+
+                  {% if link.target == "" %}
+                    {% assign target = "" %}
+                  {% else %}
+                    {% capture target %}target="{{link.target}}"{% endcapture %}
+                  {% endif %}  
+
+                  {% if link.value == null %}
+                    {% assign link_text = link.title %}
+                  {% else %}
+                    {% if link.value contains '??' %} 
+                      {% capture macro_name %}{{link.value|replace: '?',''|downcase}}{% endcapture %}
+                      {% capture macro_id %}id="macro-{{macro_name}}"{% endcapture %}                      
+                    {% else %}
+                      {% assign macro_id = '' %}
+                    {% endif %}
+                    {% capture link_text %}{{link.title}}: {{link.value}}{% endcapture %}
+                  {% endif %}
+                   
+                  <li><a {{macro_id}} href="{{link.href|strip}}" {{target}}>{{icon}} {{link_text}}</a></li>
+
+                {% endfor %}
+              </ul>
+            </div>
+
+          {% comment %} END Collect USER info
+          ---------------------------------------------------------------------- {% endcomment %}
+
+          {% comment %} Reset element variables
+          ---------------------------------------------------------------------- {% endcomment %}
+          {% assign enabled = nil %}
+          {% assign type    = nil %}
+          {% assign title   = nil %}
+          {% assign type    = nil %}
+          {% assign links   = nil %}
+
+          {% comment %} Collect THEME info
+          ---------------------------------------------------------------------- {% endcomment %}
+          {% when 'theme_info' %}
+            <!-- [INFO   ] [j1.modules.navigator.sidebar.proc     ] [THEME info detected] -->            
+            <!-- [INFO   ] [j1.modules.navigator.sidebar.proc     ] [Write widged placeholder: USER info] -->
+            <div id="theme-info" class="widget">
+              <h4 class="heading">{{title}}</h4>
+              <ul class="link"> 
+              {% for link in links %}
+
+                {% if link.icon == null %}
+                  {% assign icon = '' %}
+                {% else %}
+                  {% capture icon %}<i class="{{icon_family}} {{icon_family}}-{{link.icon}} {{icon_size}} mr-2" {{icon_color}}></i>{% endcapture %}
+                {% endif %}
+                
+                {% if link.target == null %}
+                  {% assign target = '' %}
+                {% else %}
+                  {% capture target %}target="{{link.target}}"{% endcapture %}
+                {% endif %}  
+
+                {% if link.value == null %}
+                  {% assign link_text = link.title %}
+                {% else %}
+                  {% if link.value contains '??' %} 
+                    {% capture macro_name %}{{link.value|replace: '?',''|downcase}}{% endcapture %}
+                    {% capture macro_id %}id="macro-{{macro_name}}"{% endcapture %}                      
+                  {% else %}
+                    {% assign macro_id = '' %}
+                  {% endif %}
+                  {% capture link_text %}{{link.title}}: {{link.value}}{% endcapture %}
+                {% endif %}
+                 
+                <li><a {{macro_id}} href="{{link.href|strip}}" {{target}}>{{icon}} {{link_text}}</a></li>
+
+              {% endfor %}
+              </ul>
+            </div>
+            <!-- [INFO   ] [j1.modules.navigator.sidebar.proc     ] [End processing: THEME info] -->
+
+          {% comment %} END Collect THEME info
+          ---------------------------------------------------------------------- {% endcomment %}
+
+          {% comment %} Reset element variables
+          ---------------------------------------------------------------------- {% endcomment %}
+          {% assign enabled = nil %}
+          {% assign type    = nil %}
+          {% assign title   = nil %}
+          {% assign type    = nil %}
+          {% assign links   = nil %}
+
+          {% comment %} Collect SITE info
+          ---------------------------------------------------------------------- {% endcomment %}
+          {% when 'site_info' %}
+            <!-- [INFO   ] [j1.modules.navigator.sidebar.proc     ] [Start processing SITE info] -->
+
+            <div id="site-info" class="widget">
+              <h4 class="heading">{{title}}</h4>
+              <ul class="link">
+                {% for link in links %}
+                  {% if link.icon == null %}
+                    {% assign icon = "" %}
+                  {% else %}
+                    {% capture icon %}<i class="{{icon_family}} {{icon_family}}-{{link.icon}} {{icon_size}} mr-2" {{icon_color}}></i>{% endcapture %}
+                  {% endif %}
+                  {% if link.target == null %}
+                    {% assign target = "" %}
+                  {% else %}
+                    {% capture target %}target="{{link.target}}"{% endcapture %}
+                  {% endif %} 
+                  {% if link.value == null %}
+                    {% assign link_text = link.title %}
+                  {% else %}
+                    {% capture link_text %}"{{link.title}}: {{link.title}}"{% endcapture %}
+                  {% endif %}
+
+                  <li><a href="{{link.href|strip}}" {{target}}>{{icon}}{{link_text}}</a></li>
+
+                {% endfor %}
+              </ul>
+            </div>
+
+          {% comment %} END Collect SITE info
+          ---------------------------------------------------------------------- {% endcomment %}
+
+          {% comment %} Reset element variables
+          ---------------------------------------------------------------------- {% endcomment %}
+          {% assign enabled = nil %}
+          {% assign type    = nil %}
+          {% assign title   = nil %}
+          {% assign type    = nil %}
+          {% assign links   = nil %}        
+
+        {% endcase %}
+      {% endif %}
+
+    {% endfor %}  
+  {% endfor %}
+  <!-- [INFO   ] [j1.modules.navigator.sidebar.proc     ] [End processing sidebar boxes] -->
+
+</div>
+<!-- [INFO   ] [j1.modules.navigator.sidebar.proc     ] [End processing: sidebar] -->
+
+
+
+

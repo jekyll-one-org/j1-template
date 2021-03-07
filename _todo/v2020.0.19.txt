@@ -1,0 +1,20 @@
+Set colors for theme switch:
+
+== timeline
+
+should: bg-primary
+
+.timeline > li > .timeline-panel:after
+
+    border-left: 14px solid #2196f3;
+    border-right: 0 solid #2196f3;
+
+.tmicon <-- already set dynamically (<style>), unknown from what component!
+background: #2196f3 !important;
+
+.tmicon {
+    background: rgba(0, 0, 0, 0) !important;
+}
+
+should: bg-primary
+background: #2196f3 !important;

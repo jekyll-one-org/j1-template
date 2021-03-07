@@ -1,0 +1,37 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/_includes/themes/j1/procedures/global/set_base_vars_folders.proc
+ # Liquid PROCEDURE to initialize variables for URLs and Paths dynamically
+ # used by several Liquid procedures
+ #
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} liquid procedures 
+jadams, 2019-08-23: no procedures should be used for initial setup
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} set base config files and folders
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign data                = site.data %}
+{% assign apps                = data.apps %}
+{% assign blocks              = data.blocks %}
+{% assign builder             = data.builder %}
+{% assign layouts             = data.layouts %}
+{% assign modules             = data.modules %}
+{% assign pages               = data.pages %}
+{% assign tables              = data.tables %}
+
+{% comment %} set base variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment         = site.environment %}
+{% assign template_name       = site.template.name %}

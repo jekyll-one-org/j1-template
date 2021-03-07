@@ -1,0 +1,21 @@
+packages\400_template_site\package.json
+--------------------------------------------------------------------------------
+
+Task jekyll_post_built fails on Unix|Linux
+
+From setup task
+---------------
+
+$ run-p -s jekyll_post_built:*
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
+
+lerna ERR! yarn run built stderr:
+cp: dest is not a directory (too many sources)
+error Command failed with exit code 1.
+error Command failed with exit code 1.
+
+lerna ERR! yarn run built exited 1 in 'site'
+lerna WARN complete Waiting for 1 child process to exit. CTRL-C to exit immediately.
+error Command failed with exit code 1.
+error Command failed with exit code 1.
+info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command

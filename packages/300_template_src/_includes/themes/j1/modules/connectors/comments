@@ -1,0 +1,46 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_includes/themes/j1/modules/connectors/comments
+ #  Liquid CONNECTOR for comment providers supported by J1 Template
+ #
+ #  Product/Info:
+ #  https://jekyll.one
+ #
+ #  Copyright (C) 2021 Juergen Adams
+ #
+ #  J1 Template is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign comments          = site.data.j1_config.comments.enabled %}
+{% assign comment_provider  = site.data.j1_config.comments.provider %}
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+
+<!-- [INFO   ] [j1.layout.connectors.comments         ] [ start processing load region head, layout: {{page.layout}} ] -->
+{% if comments and page.comments %}
+
+  {% case comment_provider %}
+    {% when "disqus" %}
+      <!-- [INFO   ] [j1.layout.connectors.comments         ] [ place comment provider DISQUS ] -->
+      {% include themes/{{site.template.name}}/modules/connectors/comment/disqus.html %}
+    {% when "facebook" %}
+      <!-- [INFO   ] [j1.layout.connectors.comments         ] [ place comment provider FACEBOOK ] -->
+      {% include themes/{{site.template.name}}/procedures/provider/comment/facebook.html %}
+    {% when "custom" %}
+      <!-- [INFO   ] [j1.layout.connectors.comments         ] [ place comment provider CUSTOM ] -->
+      {% include themes/{{site.template.name}}/procedures/provider/comment/custom-provider.html %}
+  {% endcase %}
+
+{% endif %}
+<!-- [INFO   ] [j1.layout.connectors.comments         ] [ end processing ] -->

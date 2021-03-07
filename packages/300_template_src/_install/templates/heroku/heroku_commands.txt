@@ -1,0 +1,25 @@
+heroku apps:destroy omniauth-starter
+
+heroku apps:create omniauth-starter
+--
+Creating omniauth-starter... done
+https://omniauth-starter.herokuapp.com/ | https://git.heroku.com/omniauth-starter.git
+
+heroku logs -a omniauth-starter --tail
+
+git remote add heroku https://git.heroku.com/omniauth-starter.git
+git push heroku master
+
+heroku apps:errors -a omniauth-starter
+=== Errors on omniauth-starter in the last 24 hours
+source  name  level     desc              count
+──────  ────  ────────  ────────────────  ─────
+router  H10   critical  App Crashed       7
+router  H20   critical  App boot timeout  3
+
+heroku dyno:restart -a omniauth-starter
+
+heroku dyno:kill DYNO -a omniauth-starter
+
+heroku run bash -a omniauth-starter
+

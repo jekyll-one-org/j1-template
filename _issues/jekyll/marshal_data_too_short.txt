@@ -1,0 +1,8 @@
+~/ruby26/lib/ruby/gems/2.6.0/gems/jekyll-4.0.1/lib/jekyll/cache.rb:171:in
+`load': marshal data too short (ArgumentError)
+
+--> .jekyll-cache corrupted
+
+Solution
+--------------------------------------------------------------------------------
+Delete folder: .jekyll-cache

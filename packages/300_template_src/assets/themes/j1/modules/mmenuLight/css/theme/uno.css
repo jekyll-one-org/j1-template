@@ -1,0 +1,178 @@
+/*
+ # -----------------------------------------------------------------------------
+ #  ~/assets/themes/j1/modules/mmenu_light/css/theme/uno.css
+ #  Provides theme styles (Uno) for Mobile Menu light (v3.0.5)
+ #
+ #  Product/Info:
+ #  https://jekyll.one
+ #  https://github.com/FrDH/mmenu-light
+ #
+ #  Copyright (C) 2021 Juergen Adams
+ #  Copyright (C) 2015-2020 Fred Heusschen
+ #
+ #  J1 Template is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ #  Mmenu Light is licensed under the CC-BY-4.0 License.
+ #  See: http://creativecommons.org/licenses/by/4.0/
+ # -----------------------------------------------------------------------------
+*/
+
+/*
+  jadams, 2020-06-20: CSS/Offset to the NAV bar should be calculated
+  at runtime as a dyn style
+*/
+
+/* CSS overwrites
+   ----------------------------------------------------------------------------- */
+
+/* Drawer */
+
+.mm-ocd--left .mm-ocd__content {
+  background-color: #191919;
+}
+
+.mm-ocd--right .mm-ocd__content {
+  background-color: #191919;
+}
+
+/* Additional CSS styles for BS Theme Switcher
+   ----------------------------------------------------------------------------- */
+.mmenu-item.active, .mmenu-item:active {
+    /* color: #fff; */
+    text-decoration: none;
+    background-color: #607d8b;
+}
+
+/* Responsive */
+/* jadams, 2020-07-02: media query for MMenu
+--------------------------------------------------------------------------------
+NOTE: For unknown reason, style "mm-ocd--left" is NOT applied correctly
+      like "mm-ocd--right" what cause the wrong background-color
+      As a workaround, the background-color is added to the media
+      queries as well (but MUST be removed if fixed!!!)
+-------------------------------------------------------------------------------- */
+
+/* Large desktop */
+@media only screen and (min-width: 1200px) {
+  .mm-ocd {
+    top: 80px; /* drawer top offset to NAV bar */
+  }
+  .mm-ocd__content {
+      background-color: #191919;
+  }
+}
+
+/* Desktop */
+@media only screen and (min-width: 992px) {
+  .mm-ocd {
+    top: 80px; /* drawer top offset to NAV bar */
+  }
+  .mm-ocd__content {
+      background-color: #191919;
+  }
+}
+
+/* Desktop 2 (intermediate|responsive size) */
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+  .mm-ocd {
+    top: 48px; /* drawer top offset to NAV bar */
+  }
+  .mm-ocd__content {
+      background-color: #191919;
+  }
+}
+/* Landscape iPad, 768px */
+@media only screen and (min-width: 576px) and (max-width: 768px){
+  .mm-ocd {
+    top: 48px; /* drawer top offset to NAV bar */
+  }
+  .mm-ocd__content {
+      background-color: #191919;
+  }
+}
+
+/* Small devices (landscape phones, up to 576px) */
+@media only screen and (max-width: 576px) {
+  .mm-ocd {
+    top: 48px; /* drawer top offset to NAV bar */
+  }
+  .mm-ocd__content {
+      background-color: #191919;
+  }
+}
+
+/* Navigator */
+.mm-spn.mm-spn--navbar:after {
+  text-align: left;  /* jadams, 2020-06-20: set menu title to the left */
+  font-size: x-large; /* jadams, 2020-06-20: increase size of the menu title */
+}
+
+/* Themes */
+/* jadams, 2020-06-20: set j1 template colors (dark theme) */
+.mm-spn.mm-spn--dark {
+  color: #e3e3e3;
+  background: #191919
+}
+
+/* Sidebar (Drawer)
+   ----------------------------------------------------------------------------- */
+.mm-side {
+    margin: 1.5rem;
+}
+
+.mm-side .widget {
+    position: relative;
+    z-index: 1;
+    margin-bottom: 25px
+}
+
+.mm-side .widget .title {
+    color: #fff;
+    margin-bottom: 15px;
+    border-left: 3px solid #204a87;
+    padding-left: 5px
+}
+
+.mm-side .widget .heading {
+    text-align: left;
+    color: #eee;
+    font-size: 18px;
+    text-transform: uppercase;
+    position: relative;
+    margin-bottom: 10px;
+    padding-bottom: 10px
+}
+
+.mm-side .widget ul.link {
+    font-family: Open Sans,Helvetica Neue,Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    line-height: 1.5rem;
+}
+
+.mm-side .widget ul.link li a {
+    color: #aaa
+}
+
+.mm-side .widget ul.link li a:focus,.mm-side .widget ul.link li a:hover {
+    color: #fafafa;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* Navigation (Menu)
+   ----------------------------------------------------------------------------- */
+.mm-spn a:hover {
+    color: #fafafa;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* jadams, 2020-07-03: added hover to global style */
+a.toc-link:hover {
+    color: #fafafa;
+    text-decoration: none;
+    font-weight: 500;
+}

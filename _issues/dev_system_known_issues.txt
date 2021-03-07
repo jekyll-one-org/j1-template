@@ -1,0 +1,27 @@
+2019-02-19, NodeGit Installation Error with gyp
+--------------------------------------------------------------------------------
+
+Installation of NodeGit requires Python 2 (2.7)
+
+Error
+--------------------------------------------------------------------------------
+
+node-pre-gyp ERR! cwd X:\j1\github\j1-template\node_modules\nodegit
+node-pre-gyp ERR! node -v v11.13.0
+node-pre-gyp ERR! node-pre-gyp -v v0.11.0
+node-pre-gyp ERR! not ok
+...
+[nodegit] ERROR - Could not finish install
+[nodegit] ERROR - finished with error code: 1
+
+
+
+Solution
+--------------------------------------------------------------------------------
+
+See: https://github.com/nodegit/nodegit/issues/1620
+
+You need to make sure node knows where python 2.7 is:
+
+  which python - make sure its 2.7
+  npm config set python {path to python2.7}

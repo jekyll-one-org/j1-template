@@ -1,0 +1,96 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/tocbot/css/theme/uno.css
+ # Provides Tocbot styles for theme Uno
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+ # NOTE: Several styles are moved to ~/assets/themes/j1/adapter/js/toccer.js
+ # 			 to set CSS styles fo selected theme dynamically
+ # -----------------------------------------------------------------------------
+*/
+
+/* overload settings for class toc */
+.toc {
+  overflow: hidden;
+}
+
+/* enable scrollbar for toccer */
+.toc > .toc-list {
+  overflow-y: scroll;
+  position: relative;
+}
+
+/* hide scrollbar for FF browser */
+.toc > .toc-list {
+  scrollbar-width: none;
+}
+
+/* hide scrollbar for webkit based browsers */
+.toc-list::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+
+.toc > .toc-list li {
+  list-style: none;
+}
+
+.toc-list {
+  margin: 0;
+  padding-left: 10px;
+}
+
+a.toc-link {
+  color: #BDBDBD;	                                                              /* md-grey-400 */
+  height: 100%;
+  font-size: 1rem;                                                              /* jadams, 2017-12-13: added font-size for toc-link */
+}
+
+/* jadams, 2020-07-03: added hover to global style */
+a.toc-link:hover {
+  color: #757575 !important;                                                    /* md-grey-600 */
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.is-collapsible {
+  max-height: 1000px;
+  overflow: hidden;
+  transition: all 300ms ease-in-out;
+}
+
+.is-collapsed {
+  max-height: 0;
+}
+
+.is-position-fixed {
+  position: fixed !important;
+  top: 0;
+}
+
+.is-active-link {
+  font-weight: 700 !important;
+  color: #2196f3 !important;
+}
+
+.toc-link::before {
+  background-color: #E0E0E0;	                                                  /* md-grey-300 */
+  content: ' ';
+  display: inline-block;
+  height: inherit;
+  left: 0;
+  margin-top: -1px;
+  position: absolute;
+  width: 2px;
+}
+
+.is-active-link::before {
+  background-color: #757575;	                                                  /* md-grey-600, was: #54BC4B */
+}

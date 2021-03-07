@@ -1,0 +1,41 @@
+X:\j1\github\j1_template\packages\100_template_css>npm audit
+
+                       === npm audit security report ===
+
+                                 Manual Review
+             Some vulnerabilities require your attention to resolve
+          Visit https://go.npm.me/audit-guide for additional guidance
+
+
+  Moderate        Denial of Service
+  Package         js-yaml
+  Patched in      >=3.13.0
+  Dependency of   cssnano-cli [dev]
+  Path            cssnano-cli > cssnano > postcss-svgo > svgo > js-yaml
+  More info       https://nodesecurity.io/advisories/788
+
+  High            Arbitrary File Overwrite
+  Package         tar
+  Patched in      >=4.4.2
+  Dependency of   node-sass [dev]
+  Path            node-sass > node-gyp > tar
+
+  More info       https://nodesecurity.io/advisories/803
+
+  High            Code Injection
+  Package         js-yaml
+  Patched in      >=3.13.1
+  Dependency of   cssnano-cli [dev]
+  Path            cssnano-cli > cssnano > postcss-svgo > svgo > js-yaml
+  More info       https://nodesecurity.io/advisories/813
+
+  High            Arbitrary File Overwrite
+  Package         tar
+  Patched in      >=4.4.2
+
+  Dependency of   node-sass [dev]
+  Path            node-sass > node-gyp > tar
+  More info       https://nodesecurity.io/advisories/803
+
+found 3 vulnerabilities (1 moderate, 2 high) in 1743 scanned packages
+  3 vulnerabilities require manual review. See the full report for details.

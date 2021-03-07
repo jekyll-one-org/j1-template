@@ -1,0 +1,27 @@
+// ~/document_base_folder/000_includes
+//  Asciidoc attribute includes:                 attributes.asciidoc
+// -----------------------------------------------------------------------------
+
+// URLs - Internal references and/or sources on the Internet
+// -----------------------------------------------------------------------------
+tag::urls[]
+:j1-home:                                         https://jekyll.one
+end::urls[]
+
+// Tags - Asciidoc attributes used internally
+// -----------------------------------------------------------------------------
+tag::tags[]
+end::tags[]
+
+// DATA, global references to data elements (asciidoc extensions)
+// -----------------------------------------------------------------------------
+tag::data[]
+:data-lightbox--example:                          "pages/roundtrip/100_present_images/lightbox-image-1.jpg, Golden Gate Bridge"
+end::data[]
+
+
+// IMAGES,  global references to template images (assets)
+// -----------------------------------------------------------------------------
+tag::images[]
+:image-attic--cookies:                            "collections/blog/wikipedia/minneapolis.1200x400.jpg"
+end::images[]

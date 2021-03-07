@@ -1,0 +1,74 @@
+Problem:
+
+gem install/compile of nokogiri fails on macOS Mojave (10.14.3) because
+of missing/invalid libxml2 libraries.
+
+
+Solution:
+
+gem install nokogiri -- --use-system-libraries=true --with-xml2-include="$(xcrun --show-sdk-path)"/usr/include/libxml2
+--
+uilding native extensions with: '--use-system-libraries=true --with-xml2-include=/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/include/libxml2'
+This could take a while...
+Successfully installed nokogiri-1.10.3
+1 gem installed
+
+
+See:
+
+	https://github.com/sparklemotion/nokogiri/issues/1801
+
+
+brew install libxml2 libxslt pkg-config
+
+...
+
+
+
+libxml2 is keg-only, which means it was not symlinked into /usr/local,
+because macOS already provides this software and installing another version in
+parallel can cause all kinds of trouble.
+
+If you need to have libxml2 first in your PATH run:
+  echo 'export PATH="/usr/local/opt/libxml2/bin:$PATH"' >> ~/.bash_profile
+
+For compilers to find libxml2 you may need to set:
+  export LDFLAGS="-L/usr/local/opt/libxml2/lib"
+  export CPPFLAGS="-I/usr/local/opt/libxml2/include"
+
+For pkg-config to find libxml2 you may need to set:
+  export PKG_CONFIG_PATH="/usr/local/opt/libxml2/lib/pkgconfig"
+
+==> libxslt
+To allow the nokogiri gem to link against this libxslt run:
+  gem install nokogiri -- --with-xslt-dir=/usr/local/opt/libxslt
+
+libxslt is keg-only, which means it was not symlinked into /usr/local,
+because macOS already provides this software and installing another version in
+parallel can cause all kinds of trouble.
+
+If you need to have libxslt first in your PATH run:
+  echo 'export PATH="/usr/local/opt/libxslt/bin:$PATH"' >> ~/.bash_profile
+
+For compilers to find libxslt you may need to set:
+  export LDFLAGS="-L/usr/local/opt/libxslt/lib"
+  export CPPFLAGS="-I/usr/local/opt/libxslt/include"
+
+For pkg-config to find libxslt you may need to set:
+  export PKG_CONFIG_PATH="/usr/local/opt/libxslt/lib/pkgconfig"
+
+
+
+gem install nokogiri -- --use-system-libraries=true   # --with-xml2-include="$(xcrun --show-sdk-path)"/usr/include/libxml2
+
+
+See:
+  https://github.com/sparklemotion/nokogiri/issues/1801
+
+I was successful with
+
+gem install nokogiri -- --use-system-libraries=true --with-xml2-include="$(xcrun --show-sdk-path)"/usr/include/libxml2
+
+But not with libxml2 from Homebrew.
+
+This worked for me. Tried almost all the suggestions available on google, stackoverflow, github but failed. This is like life saver for me.

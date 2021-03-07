@@ -1,0 +1,30 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/back2top.yml
+# User configuration settings for J1 Back2Top module
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2021 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1_template/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# About this configuration (used for J1 CC only)
+#
+about_config:
+
+  title:                                Back2Top
+  scope:                                User settings
+  location:                             _data/modules/back2top.yml
+
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+settings:
+  enabled:                              true
+
+# ------------------------------------------------------------------------------
+# END config

@@ -1,0 +1,13 @@
+
+.title_text
+[cols="3,3,6a", options="header", width="100%", role="rtable mt-3"]
+|===============================================================================
+|Element |Description |Example
+
+|`element`
+|lorem:words[5]
+|
+[role="r-text-100"]
+lorem:sentences[2]
+
+|===============================================================================

@@ -1,0 +1,61 @@
+// ~/document_base_folder/000_includes
+//  Asciidoc attribute includes:                 attributes.asciidoc
+// -----------------------------------------------------------------------------
+
+// URLs - Internal references and/or sources on the Internet
+// -----------------------------------------------------------------------------
+tag::urls[]
+
+:teamup-home:                                     https://www.teamup.com/
+:teamup-help:                                     https://www.teamup.com/help/general-help/
+:teamup-faq:                                      https://calendar.teamup.com/kb-tags/faq/
+end::urls[]
+
+// Tags - Asciidoc attributes used internally
+// -----------------------------------------------------------------------------
+tag::tags[]
+
+:window:                                          window="_blank"
+:no-clipboard:                                    noclip
+:figure-caption:                                  Figure
+:images-dir:                                      pages/roundtrip
+:y:                                               icon:check[role="green"]
+:n:                                               icon:times[role="red"]
+:c:                                               icon:file-alt[role="blue"]
+:beginner:                                        icon:battery-quarter[role="md-blue"]
+:inter:                                           icon:battery-half[role="md-blue"]
+:advanced:                                        icon:battery-full[role="md-blue"]
+:emdash:                                          &#8212;
+:bullet:                                          &bull;
+:bigbullet:                                       &#9679;
+:bigbigbullet:                                    &#11044;
+:dot:                                             &#46;
+:dotdot:                                          &#46;&#46;
+:middot:                                          &middot;
+
+end::tags[] 
+
+// Data - Data elements for Asciidoctor extensions
+// -----------------------------------------------------------------------------
+tag::data[]
+
+:data-images-standalone:                          "{images-dir}/100_present_images/image-2.jpg, Two men in bicycle jerseys sitting outside at table having coffee, {images-dir}/100_present_images/image-1.jpg, Young lady looking at the beach"
+
+end::data[]
+
+// Product - Document (e.g release) information
+// -----------------------------------------------------------------------------
+tag::product_info[]
+:license:                                         MIT License
+:revdate:                                         2018
+:revnumber:                                       1.0.0
+end::product_info[]
+
+
+// Author - Author information
+// -----------------------------------------------------------------------------
+tag::authors[]
+:uri-author-juergen-adams                         https://jekyll.one
+end::authors[]
+
+

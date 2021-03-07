@@ -1,0 +1,40 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_includes/themes/j1/modules/footers/boxes/about_box.proc
+ #  Liquid PROCEDURE to create a news box for the footer
+ #
+ #  Product/Info:
+ #  http://jekyll.one
+ #
+ #  Copyright (C) 2021 Juergen Adams
+ #
+ #  Licensed under the Creative Commons Attribution 3.0 Unported License.
+ #  See: http://creativecommons.org/licenses/by/3.0/.
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign title   = include.title %}
+{% assign text    = include.text %}
+{% assign justify = include.justify %}
+
+
+{% comment %} Main
+================================================================================ {% endcomment %}
+<!-- [INFO   ] [about_box.proc                     ] [ place about box ] -->
+<div class="col-md-{{footer_box_width_md}}">
+  <div class="heading-footer"><h2 class="notoc">{{title}}</h2></div>
+  {% if justify %}
+    <p class="text-justify">{{text}}</p>
+  {% else %}
+    <p>{{text}}</p>
+  {% endif %}
+</div>

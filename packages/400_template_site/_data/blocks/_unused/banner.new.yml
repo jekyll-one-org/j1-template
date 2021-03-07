@@ -1,0 +1,297 @@
+# ------------------------------------------------------------------------------
+#  ~/_data/blocks/banner.yml
+#  User configuration settings for BANNER lanes
+#
+#  Product/Info:
+#  https://jekyll.one
+#
+#  Copyright (C) 2021 Juergen Adams
+#
+#  J1 Template is licensed under the MIT License.
+#  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+#
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# About this configuration (used for CC only)
+#
+about_config:
+  title:                                Banner
+  scope:                                User settings
+  location:                             _data/blocks/banner.yml
+
+# ------------------------------------------------------------------------------
+# SETTINGS
+#
+settings:
+
+  # ------------------------------------------------------------------------------
+  # General parallax settings
+  #
+  # Global configuration for parallax|banner quotes. These settings are
+  # side-wide and should match your theme not individual images. Be careful
+  # for the selection of banner images.
+  #
+  # Individual settings (e.g. page placement, cite, source) are configured
+  # with the panels configuration (j1_panels.yml).
+  #
+  #   gridify
+  #   ----------------------------------------------------------------------------
+  #   If enabled, a grit pattern is placed over the background image. This
+  #   puts some "noise" on the image to focus more on the quote|text rather
+  #   than the image.
+  #
+  #   values:                         boolean (true|false)
+  #   default:                        true
+  #
+  #   gridifier
+  #   ----------------------------------------------------------------------------
+  #   Pixel image used to gridify the background image of the banner.
+  #
+  #   values:                         image path|name (string)
+  #   default:                        /assets/images/modules/patterns/gridtile.png
+  #
+  #   darken
+  #   ----------------------------------------------------------------------------
+  #   Sets the lightning for the banner|background image. As higher the value
+  #   for darken as less is the (background) light. Values are out of the
+  #   range from 1 (light) to 9 (dark). Useful to focus on the quote|text
+  #   rather than the background image.
+  #
+  #   values:                         number [1 .. 9]
+  #   default:                        3
+  #
+  #   background
+  #   ----------------------------------------------------------------------------
+  #   Default background image of the banner if no other image is specified with
+  #   the panels configuration (j1_panels.yml).
+  #
+  #   values:                         image path|name (string)
+  #   default:                        /assets/images/quotes/default.png
+  # ------------------------------------------------------------------------------
+  parallax_settings:
+
+    gridify:                          true
+    gridifier:                        /assets/images/modules/patterns/gridtile.png
+    text_color:                       rgba_lighten
+    cite_color:                       rgba_lighten
+    darken:                           3
+    background:                       /assets/images/quotes/default.png
+    background_pos_x:                 50%
+    background_pos_y:                 0
+
+  # ----------------------------------------------------------------------------
+  # DIVIDER Banner
+  #
+  divider:
+
+    # --------------------------------------------------------------------------
+    # DIVIDER banner properties
+    #
+    - name:                               Divider Banner 1
+      banner:
+        id:                               divider-1
+        enabled:                          true
+        type:                             divider
+        comment:                          Divider Banner 1
+
+    - name:                               Divider Banner 2
+      banner:
+        id:                               divider-2
+        enabled:                          true
+        type:                             divider
+        comment:                          Divider Banner 2
+
+    - name:                               Divider Banner 3
+      banner:
+        id:                               divider-3
+        enabled:                          true
+        type:                             divider
+        comment:                          Divider Banner 3
+
+
+  # ----------------------------------------------------------------------------
+  # TEASER Banner
+  #
+  teaser:
+
+    # --------------------------------------------------------------------------
+    # home_teaser_banner
+    #
+    - name:                               Home Teaser Banner
+      banner:
+        id:                               home_teaser_banner
+        enabled:                          true
+        comment:                          Top teaser shown on home page
+        type:                             teaser
+        icon_family:                      MDI
+        style:                            light
+        background_color_1:               md_gray_50
+        background_color_2:               md_gray_50
+        lane_span:                        fixed
+        properties:                   mt-4 mb-4
+
+        cards:
+
+          - name:                         Teaser Content
+            card:
+
+              enabled:                    true
+              width:                      12
+              type:                       text
+              animate:                    fadeInUp
+              title:                      What you need for your amazing site
+              tagline:                    <large><b>Create powerful modern static webs</b></large>
+              description: >
+                                          Jekyll meets Bootstrap - and makes a lot of friends.
+                                          J1 Template combines the best of OpenSource software for
+                                          the Web and the Web site generator Jekyll. J1 is Open
+                                          Source and the modules packed as well - no pain for private
+                                          or professional use.
+                                          Explore this site to learn what's possible if you go the
+                                          Jekyll Way.<br/>
+              buttons:
+
+                - name:                   Start button
+                  button:
+                    text:                 Start
+                    class:                btn btn-xl u-btn-indigo g-mr-10 g-mb-15
+                    icon:                 rocket
+                    icon_color:           md_white
+                    icon_size:            24px
+                    href:                 /pages/public/learn/kickstarter/web_in_a_day/intro/
+
+                - name:                   Download button
+                  button:
+                    text:                 Download
+                    class:                btn btn-xl u-btn-indigo g-mr-10 g-mb-15
+                    icon:                 download
+                    icon_color:           md_white
+                    icon_size:            24px
+                    href:                 /pages/public/learn/downloads/linux_starter/
+
+                - name:                   Patreon button
+                  button:
+                    text:                 Become a Patron
+                    class:                btn btn-xl u-btn-indigo g-mr-10 g-mb-15
+                    icon:                 patreon
+                    icon_color:           md_white
+                    icon_size:            24px
+                    href:                 https://www.patreon.com/join/jekyll_one
+                    target:               _blank
+
+  # ----------------------------------------------------------------------------
+  # IMAGE Banner
+  #
+  image:
+    # --------------------------------------------------------------------------
+    # home_image_banner
+    #
+    - name:                               Home Image Banner
+      banner:
+        id:                               home_image_banner
+        enabled:                          true
+        type:                             image
+        comment:                          Main image banner shown on home page
+        background_color_1:               md_gray_300
+        background_color_2:               md_gray_50
+        lane_span:                        fluid
+        properties:                   mt-4 mb-4
+
+        cards:
+
+          - name:                         Image settings
+            card:
+              enabled:                    true
+              gridify:                    false
+              size_y:                     450
+              darken:                     1
+              background_image:           /assets/images/modules/attics/ideas-start-here-1920x1200.png
+
+
+  # ----------------------------------------------------------------------------
+  # PARALLAX Banner
+  #
+  parallax:
+    # --------------------------------------------------------------------------
+    # home_parallax_banner
+    #
+    - name:                               Home Parallax Banner v1
+      banner:
+        id:                               home_parallax_banner
+        enabled:                          true
+        type:                             parallax
+        comment:                          Main parallax banner shown on home page
+        style:                            dark
+        background_color_1:               md_gray_300
+        background_color_2:               md_gray_50
+        lane_span:                        fluid
+        properties:                   mt-4 mb-4
+
+        cards:
+
+          - name:                         Quote settings
+            card:
+              enabled:                    true
+              type:                       quote
+              cite_text_size:             300%
+              cite_text_quotes:           false
+              cite_text: >
+                                          Making is like Wanting,
+                                          <br> but even <span style="color:red">Better</span>
+              cite_size:                  200%
+              cite:                       J1 Team
+              text_color:                 rgba_lighten_900
+              cite_color:                 rgba_lighten
+              gridify:                    true
+              size_y:                     450
+              darken:                     6
+              background_image:           /assets/images/modules/attics/ideas-start-here-1920x1200.png   #/assets/images/quotes/people.png
+
+    # --------------------------------------------------------------------------
+    # parallax_banner_einstein
+    #
+    - name:                               Home Parallax Banner v2
+      banner:
+        id:                               parallax_banner_einstein
+        enabled:                          false
+        type:                             parallax
+        comment:                          Main parallax banner shown on home page
+        style:                            dark
+        lane_span:                        fluid
+        properties:                   mt-4 mb-4
+
+        cards:
+
+          - name:                         Quote settings
+            card:
+              enabled:                    true
+              type:                       quote
+              cite_text: >
+                                          Everything should be made as <b><span class="color-red">simple</span></b>
+                                          as possible,<br>
+                                          but not <b><span class="color-red">simpler</span></b>
+              cite:                       Albert Einstein
+              text_color:                 rgba_lighten_900
+              cite_color:                 rgba_lighten
+              gridify:                    true
+              darken:                     7
+              background_image:           /assets/images/quotes/albert_einstein.png
+
+  # ----------------------------------------------------------------------------
+  # FOO Banner
+  #
+  foo:
+    # --------------------------------------------------------------------------
+    # foo_banner
+    #
+    - name:                               Foo Banner
+      banner:
+        id:                               foo_banner
+        enabled:                          false
+        type:                             foo
+        comment:                          Banner (type) to test config issues/exceptions
+
+
+# END config
+# ------------------------------------------------------------------------------

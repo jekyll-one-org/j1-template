@@ -1,0 +1,42 @@
+---
+regenerate:                             false
+---
+
+{% capture cache %}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/colors.json
+ # Liquid JSON template to translate "logical" color names in their
+ # (hexadecimal) RGB values
+ #
+ # Product/Info:
+ # http://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% assign colors = site.data.colors %}
+
+{
+  {% for color in colors %}
+
+    {% if forloop.last %}
+    "{{color[0]}}": "{{color[1]}}"
+    {% else %}
+    "{{color[0]}}": "{{color[1]}}",
+    {% endif %}
+
+  {% endfor %}
+}
+{% endcapture %}
+
+{{ cache | strip_empty_lines }}
+{% assign cache = nil %}

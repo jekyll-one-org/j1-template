@@ -1,0 +1,13 @@
+about_config:
+  location: _data/modules/back2top.yml
+  scope: User settings
+  title: Back2Top
+settings:
+  active_color: md_indigo
+  background_color: md_grey_900
+  enabled: true
+  icon: f05d
+  icon_family: MDI
+  scrollduration: 1000
+  scrollto: 0
+  startline: 100

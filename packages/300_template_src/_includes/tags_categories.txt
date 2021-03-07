@@ -1,0 +1,26 @@
+title:                                  Jekyll URLs
+tagline:                                what is baseurl
+date:                                   2020-05-01 14:00:00
+
+
+tags:                                   [ Jekyll, Features ]
+categories:                             [ Configuration ]
+
+
+--------------------------------------------------------------------------------
+title:                                  What's up
+tagline:                                Jekyll Collections Overview
+date:                                   2020-03-01 00:00:00
+description: >
+
+tags:                                   [ Jekyll, Features ]
+categories:                             [ Configuration ]
+
+--------------------------------------------------------------------------------
+title:                                  Web in a Day
+tagline:                                meet & greet jekyll
+date:                                   2020-08-01 09:00:00
+description: >
+
+tags:                                   [ Jekyll, Knowledge ]
+categories:                             [ Tutorial ]

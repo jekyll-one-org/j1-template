@@ -1,0 +1,189 @@
+---
+regenerate:                             false
+---
+
+{% capture cache %}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/web_hook.html
+ # Liquid PROCEDURE to generate the HTML (data) portion of all modals used
+ # by J1 WebHooks module
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+ #  Test data:
+ #   liquid_var: {{ liquid_var | debug }}
+ #   config: {{ config | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture select_color     %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %}
+{% capture select_icon_size %}themes/{{site.template.name}}/procedures/global/select_icon_size.proc{% endcapture %}
+
+{% comment %} Set global settings
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment                   = site.environment %}
+
+
+{% comment %} Process YML config data
+================================================================================ {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign webhook_defaults              = site.data.modules.defaults.webhooks.defaults %}
+{% assign webhook_settings              = site.data.modules.webhooks.settings %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign webhook_options               = webhook_defaults | merge: webhook_settings %}
+
+
+{% comment %} Main
+================================================================================ {% endcomment %}
+
+{% comment %} Modal webhookResponseDetected
+-------------------------------------------------------------------------------- {% endcomment %}
+<!-- Modal 'webhookResponseDetected' -->
+<div class="modal fade top" id="webhookCommitDetected" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+  <div class="modal-dialog modal-lg modal-notify modal-info" role="document">
+    <!-- Content -->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="lead">J1 Webhooks</p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="mdi mdi-close mdi-dark mdi-48px"></i>
+        </button>
+      </div>
+      <!-- Body -->
+      <div class="modal-body">
+        <div class="px-3">
+          <p class="pt-1 pr-2">
+            Payload received from provider:
+          </p>
+        </div>
+
+        <pre class="json-payload ml-4" style="font-family: monospace; font-size: .95rem;"></pre>
+
+        <div class="px-3">
+          <p class="pt-1 pr-2">
+            In order to pull the current changes to your local working copy,
+            click on button "Yes, please".
+          </p>
+        </div>
+      </div>
+      <!-- Footer -->
+      <div class="modal-footer">
+        <a type="button" id="acceptGitPullButton"  class="btn btn btn-raised btn-flex btn-md btn-info mr-3" data-dismiss="modal">Yes, please</a>
+        <a type="button" id="declineGitPullButton" class="btn btn btn-raised btn-flex btn-md btn-secondary" data-dismiss="modal">No, thanks</a>
+      </div>
+    </div>
+    <!-- END Content -->
+  </div>
+</div>
+<!-- END Modal 'webhookResponseDetected' -->
+
+{% comment %} Modal gitPullSuccess
+-------------------------------------------------------------------------------- {% endcomment %}
+<!-- Modal gitPullSuccess -->
+<div class="modal fade right" id="gitPullSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+  <div class="modal-dialog modal-side modal-top-right modal-notify modal-success" role="document">
+    <!-- Content -->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="lead">J1 Webhooks - Git client</p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="mdi mdi-close mdi-dark mdi-48px"></i>
+        </button>
+      </div>
+      <!-- Body -->
+      <div class="modal-body">
+        <div class="text-center">
+          <i class="mdi mdi-4x mdi-check mdi-rotateIn mb-1"></i>
+          <p class="pull-message"></p>
+        </div>
+      </div>
+      <!-- Footer -->
+      <div class="modal-footer justify-content-center">
+        <a type="button" id="gitPullOkButton" class="btn btn btn-raised btn-flex btn-md btn-success" data-dismiss="modal">Ok, thanks</a>
+      </div>
+    </div>
+    <!-- END Content -->
+  </div>
+</div>
+<!-- END Side Modal gitPullSuccess -->
+
+{% comment %} Modal npmScriptSuccess
+-------------------------------------------------------------------------------- {% endcomment %}
+<!-- Modal 'npmScriptSuccess' -->
+<div class="modal fade right" id="npmScriptSuccess" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+  <div class="modal-dialog modal-side modal-top-right modal-notify modal-success" role="document">
+    <!-- Content -->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="lead">J1 Webhooks - NPM client</p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="mdi mdi-close mdi-dark mdi-48px"></i>
+        </button>
+      </div>
+      <!-- Body -->
+      <div class="modal-body">
+        <div class="text-center">
+          <i class="mdi mdi-4x mdi-check mdi-rotateIn mb-1"></i>
+          <p class="pull-message"></p>
+        </div>
+      </div>
+      <!-- Footer -->
+      <div class="modal-footer justify-content-center">
+        <a type="button" id="gitPullOkButton" class="btn btn btn-raised btn-flex btn-md btn-success" data-dismiss="modal">Ok, thanks</a>
+      </div>
+    </div>
+    <!-- END Content -->
+  </div>
+</div>
+<!-- END Modal 'npmScriptSuccess' -->
+
+<!-- Side Modal 'requestFailed' -->
+<div class="modal fade right" id="requestFailed" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+  <div class="modal-dialog modal-side modal-bottom-right modal-notify modal-danger" role="document">
+    <!-- Content -->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="lead">J1 Webhooks - Request failed</p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <i class="mdi mdi-close mdi-dark mdi-48px"></i>
+        </button>
+      </div>
+      <!-- Body -->
+      <div class="modal-body">
+        <div class="text-center">
+          <i class="mdi mdi-4x mdi-check mdi-rotateIn mb-1"></i>
+          <p class="pull-message"></p>
+        </div>
+      </div>
+      <!-- Footer -->
+      <div class="modal-footer justify-content-center">
+        <a type="button" id="requestFailedOkButton" class="btn btn-outline-secondary-modal" data-dismiss="modal">Ok, thanks</a>
+      </div>
+    </div>
+    <!-- END Content -->
+  </div>
+</div>
+<!-- END Side Modal 'requestFailed' -->
+
+{% endcapture %}
+
+{{ cache | pretty_print | remove:'<html><body>' | remove:'</body></html>' | strip_empty_lines }}
+{% assign cache = nil %}

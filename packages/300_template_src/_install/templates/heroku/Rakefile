@@ -1,0 +1,21 @@
+# ------------------------------------------------------------------------------
+# ~/Rakefile (production)
+# This file is used to precompile the Jekyll site for deployments
+# on Heroku.
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2021 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+#
+# ------------------------------------------------------------------------------
+# NOTE:
+#   This Rakefile config is used for PRODUCTION only.
+# ------------------------------------------------------------------------------
+
+task "assets:precompile" do
+  exec("bundle exec jekyll build")
+end

@@ -1,0 +1,42 @@
+  <div>
+    <form class="bd-search d-flex align-items-center">
+      <span class="algolia-autocomplete algolia-autocomplete-left" style="position: relative; display: inline-block; direction: ltr;">
+        <span class="bmd-form-group"><input type="search" class="form-control ds-input" id="search-input" placeholder="Search..." autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-owns="algolia-autocomplete-listbox-0" dir="auto" style="position: relative; vertical-align: top;"></span>
+        <pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre; font-family: Roboto, Helvetica, Arial, sans-serif; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: normal; text-indent: 0px; text-rendering: auto; text-transform: none;">c</pre>
+        <span class="ds-dropdown-menu ds-with-1" role="listbox" id="algolia-autocomplete-listbox-0" style="position: absolute; top: 100%; z-index: 100; left: 0px; right: auto; display: none;">
+          <div class="ds-dataset-1"></div>
+        </span>
+      </span>
+      <button class="btn-link bd-search-docs-toggle d-md-none p-0 ml-3" type="button" data-toggle="collapse" data-target="#bd-docs-nav" aria-controls="bd-docs-nav" aria-expanded="false" aria-label="Toggle docs avigation">
+        <svg class="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30 30" width="30" height="30" focusable="false">
+          <title>Menu</title>
+          <path stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-miterlimit="10" d="M4 7h22M4 15h22M4 23h22"></path>
+        </svg>
+      </button>
+    </form>
+  </div>
+
+  {% if page.layout == "page" %}
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/docsearch.js/2/docsearch.min.js"></script>
+  <script type="text/javascript">
+    var docsearch = docsearch({
+      apiKey: 'b5c13bef25101d81f781cc15f4485a52',
+      indexName: 'fezvrasta_bootstrap_material_design',
+      inputSelector: '#search-input',
+      handleSelected: function (input, event, suggestion) {
+        var url = suggestion.url;
+        url = suggestion.isLvl1 ? url.split('#')[0]: url;
+        // If it's a title we remove the anchor so it does not jump.
+        window.location.href = url;
+      },
+      transformData: function (hits) {
+        return hits.map(function (hit) {
+          console.log(hit.url);
+          hit.url = hit.url.replace('http://localhost:41000/', '/');
+          return hit;
+        });
+      },
+      debug: false // Set debug to true if you want to inspect the dropdown
+    });
+  </script>
+  {% endif %}

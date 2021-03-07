@@ -1,0 +1,181 @@
+++++
+<div id="search-searchbar"></div>
+
+<div class="post-list" id="search-hits">
+   {% for post in site.posts %}
+     <div class="post-item">
+       {% assign date_format = site.minima.date_format | default: "%b %-d, %Y" %}
+       <span class="post-meta">{{ post.date | date: date_format }}</span>
+ 
+       <h2>
+         <a class="post-link" href="{{ post.url | relative_url }}">
+           {{ post.title | escape }}
+         </a>
+       </h2>
+ 
+       <div class="post-snippet">{{ post.excerpt }}</div>
+     </div>
+   {% endfor %}
+</div>
+++++
+
+++++
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch.min.css">
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch-theme-algolia.min.css">
+
+<script>
+
+  const hitTemplate = function(hit) {
+    // var re = new RegExp("^\/posts");
+    // var re = new RegExp("^\/pages");
+    var re = new RegExp("^\/pages|^\/collections");    
+    if ( re.test(hit.url) ) {
+      let date = '';
+      if (hit.date) {
+        date = moment.unix(hit.date).format('MMM D, YYYY');
+      }
+      // let url = `/jekyll-algolia-example${hit.url}#${hit.anchor}`;
+      let url = `${hit.url}`;
+
+      const title = hit._highlightResult.title.value;
+      let breadcrumbs = '';
+
+      if (hit._highlightResult.headings) {
+        breadcrumbs = hit._highlightResult.headings.map(match => {
+          return `<span class="post-breadcrumb">${match.value}</span>`
+        }).join(' > ')
+      }
+
+      const content = hit._highlightResult.html.value;
+
+      return `
+        <div class="search-result-item">
+          <div class="card">
+            <div class="card-body">
+              <span class="post-meta">${date}</span>
+              <h2 class="card-title">${title}</h2>
+              <h6 class="card-subtitle mb-2 text-muted">${hit.tagline}</h6>
+              <div class="card-text">${content}</div>
+              <div class="card-footer">
+                <a class="card-link" href="${url}" target="blank">Read more ..</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+  }
+
+  <!-- Access credentials and index -->
+  const search = instantsearch({
+    appId: '{{ site.algolia.application_id }}',
+    apiKey: '{{ site.algolia.search_only_api_key }}',
+    indexName: '{{ site.algolia.index_name }}',
+    routing: true
+  });
+  // initialize SearchBox
+  search.addWidget(
+    instantsearch.widgets.searchBox({
+      container: '#search-searchbar',
+      placeholder: 'Search this site ..',
+      poweredBy: true // This is required if you're on the free Community plan
+    })
+  );
+  // initialize hits widget
+  search.addWidget(
+    instantsearch.widgets.hits({
+      container: '#search-hits',
+      templates: {
+        empty: 'No results',
+        item: hitTemplate
+      }
+    })
+  );
+  // initialize RefinementList
+  search.addWidget(
+    instantsearch.widgets.refinementList({
+      container: '#refinement-list',
+      attributeName: 'outsideDiameter.description',
+      collapsible: true,
+      operator: "and",
+      limit: 5,
+      sortBy: ["isRefined","count:asc","name:asc"],
+      showMore: true,
+      attributeName: 'tags'
+      // cssClasses: {
+    	// 	"root": "ais-refinement-list",
+    	// 	"header": "ais-refinement-list--header",
+    	// 	"body": "ais-refinement-list--body",
+    	// 	"footer": "ais-refinement-list--footer",
+    	// 	"list": "ais-refinement-list--list",
+    	// 	"item": "ais-refinement-list--item",
+    	// 	"active": "ais-refinement-list--item__active",
+    	// 	"label": "ais-refinement-list--label",
+    	// 	"checkbox": "ais-refinement-list--checkbox",
+    	// 	"count": "ais-refinement-list--count"
+      // }
+    })
+  );
+
+  search.start();
+</script>
+
+
+<style>
+.ais-search-box {
+  max-width: 100%;
+  margin-bottom: 15px;
+}
+
+.ais-search-box--input {
+  padding-left: 2rem !important;
+}
+
+.ais-search-box--magnifier {
+  top: 0 !important;
+  right: 0 !important;
+}
+
+.ais-search-box--reset {
+  top: 0 !important;
+  right: 0 !important;
+}
+
+.search-result-item {
+  margin-bottom: 30px;
+}
+
+/*
+.post-item {
+  margin-bottom: 30px;
+}
+.post-link .ais-Highlight {
+  color: #111;
+  font-style: normal;
+  text-decoration: underline;
+}
+.post-breadcrumbs {
+  color: #424242;
+  display: block;
+}
+.post-breadcrumb {
+  font-size: 18px;
+  color: #424242;
+}
+.post-breadcrumb .ais-Highlight {
+  font-weight: bold;
+  font-style: normal;
+}
+.post-snippet .ais-Highlight {
+  color: #2a7ae2;
+  font-style: normal;
+  font-weight: bold;
+}
+.post-snippet img {
+  display: none;
+}
+*/
+
+</style>

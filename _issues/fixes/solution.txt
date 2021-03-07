@@ -1,0 +1,73 @@
+Solution (Workaround)
+=====================
+  Modifiy package-lock.json
+  See: https://github.com/sass/node-sass/issues/2625
+
+
+node-sass
+---------
+
+  Modified package-lock.json for:
+    npm show tar version -> 4.4.8
+
+    "node-gyp": {
+    		"version": "3.8.0",
+    		"resolved": "https://registry.npmjs.org/node-gyp/-/node-gyp-3.8.0.tgz",
+    		"integrity": "sha512-3g8l...",
+    		"requires": {
+    			"fstream": "^1.0.0",
+    			"glob": "^7.0.3",
+    			"graceful-fs": "^4.1.2",
+    			"mkdirp": "^0.5.0",
+    			"nopt": "2 || 3",
+    			"npmlog": "0 || 1 || 2 || 3 || 4",
+    			"osenv": "0",
+    			"request": "^2.87.0",
+    			"rimraf": "2",
+    			"semver": "~5.3.0",
+    			"which": "1"
+    		},
+    		"dependencies": {
+    			"semver": {
+    				"version": "5.3.0",
+    				"resolved": "https://registry.npmjs.org/semver/-/semver-5.3.0.tgz",
+    				"integrity": "sha1-myzl..."
+    			},
+    			"tar": {
+    				"version": "^4.4.8"
+    			}
+    		}
+    },
+
+  
+cssnano-cli
+-----------
+
+  Modified package-lock.json for:
+    npm show js-yaml version -> 3.13.1
+
+
+    "svgo": {
+      "version": "0.7.2",
+      "resolved": "https://registry.npmjs.org/svgo/-/svgo-0.7.2.tgz",
+      "integrity": "sha1-n1dyQTlSE1xv779Ar+ak+qiLS7U=",
+      "dev": true,
+      "requires": {
+        "coa": "~1.0.1",
+        "colors": "~1.1.2",
+        "csso": "~2.3.1",
+        "mkdirp": "~0.5.1",
+        "sax": "~1.2.1",
+        "whet.extend": "~0.9.9"
+      },
+      "dependencies": {
+        "js-yaml": {
+          "version": "3.13.1",
+          "resolved": "https://registry.npmjs.org/js-yaml/-/js-yaml-3.13.1.tgz",
+          "integrity": "sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==",
+          "requires": {
+            "argparse": "^1.0.7"
+          }
+        }
+      }
+    }

@@ -1,0 +1,64 @@
+---
+title:                                  Romance
+tagline:                                Romance Literature in the Book Shelf
+date:                                   2020-11-03 00:00:00
+
+exclude_from_search:                    true
+
+fam:                                    true
+fam_menu_id:                            open_toc
+
+permalink:                              /pages/public/collections/bookshelf/romance/
+regenerate:                             false
+
+resources:                              []
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
+          alt:                          giammarco-boscaro-1920x1280
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+{% capture create_collection_article_preview %}themes/{{site.template.name}}/procedures/collections/create_collection_article_preview.proc{% endcapture %}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="none" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents
+// -----------------------------------------------------------------------------
+
+== Romance
+
+The romance genre is a popular category of books that consistently churns out
+bestsellers. The aim of the genre is simple, showcasing a love story where
+two people overcome adversity to obtain their happily ever after. According to
+the Romance Writers of America, women count for 82% percent of the genre’s
+readership.
+
+++++
+<div class="row mb-4">
+  <div class="col-md-12 col-xs-12">
+    {% include {{create_collection_article_preview}} collection=site.romance %}
+  </div>
+</div>
+++++

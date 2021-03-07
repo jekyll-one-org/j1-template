@@ -1,0 +1,163 @@
+# Unneeded files used/created by NPM
+# ------------------------------------------------------------------------------
+node_modules/
+
+yarn.lock
+
+package-lock.json
+
+# Unneeded files created by you or helper processes
+# Ignore symbolic links as simple files!!!
+# ------------------------------------------------------------------------------
+log
+
+Gemfile
+
+Gemfile.lock
+
+tmp/
+
+\.bundle/
+
+\.idea/
+
+\.jekyll-cache/
+
+\.vscode/
+
+\.sass-cache/
+
+**/*.old
+
+**/*.tmp
+
+**/*.log
+
+**/*.pdf
+
+**/*.swp
+
+**/*_backup
+
+
+# Never publish your sensitive personal and/or OAuth
+# data to any repo - not to public, not to any private.
+# ------------------------------------------------------------------------------
+.env
+
+starter-app.env
+
+myDot.env
+
+
+# Unneeded files for package 100_template_css
+# ------------------------------------------------------------------------------
+packages/100_template_css/dist/
+
+packages/100_template_css/node_modules/
+
+packages/100_template_css/yarn.lock
+
+packages/100_template_css/package-lock.json
+
+packages/100_template_css/report*.json
+
+
+# Unneeded files for package 200_template_js
+# ------------------------------------------------------------------------------
+packages/200_template_js/dist/
+
+packages/200_template_js/node_modules/
+
+packages/200_template_js/yarn.lock
+
+packages/200_template_js/package-lock.json
+
+
+# Unneeded files for package 300_template_src
+# ------------------------------------------------------------------------------
+packages/300_template_src/assets/themes/j1/core/css/
+
+packages/300_template_src/assets/themes/j1/core/js/template*
+
+
+# Unneeded files for package 400_template_site
+# Ignore symbolic links as simple files!!!
+# ------------------------------------------------------------------------------
+packages/400_template_site/_includes
+
+packages/400_template_site/_layouts
+
+packages/400_template_site/_plugins
+
+packages/400_template_site/_install
+
+packages/400_template_site/apps
+
+packages/400_template_site/assets
+
+packages/400_template_site/_data/modules/cc.yml
+
+
+# Ignore files and folders
+# ------------------------------------------------------------------------------
+packages/400_template_site/.idea/
+
+packages/400_template_site/.eslintrc.json
+
+packages/400_template_site/.sass-cache/
+
+packages/400_template_site/.jekyll-cache/
+
+packages/400_template_site/_sass/
+
+packages/400_template_site/node_modules/
+
+packages/400_template_site/vendor/
+
+packages/400_template_site/_site/
+
+packages/400_template_site/_tmp/
+
+packages/400_template_site/.bundle/
+
+packages/400_template_site/yarn.lock
+
+packages/400_template_site/package-lock.json
+
+packages/400_template_site/Gemfile.lock
+
+packages/400_template_site/.jekyll-metadata
+
+packages/400_template_site/.jekyll-cache/
+
+packages/400_template_site/_config.yml
+
+packages/400_template_site/_data/private.yml
+
+packages/400_template_site/collections/posts/featured/_posts/*welcome-to-J1 Template.adoc
+
+
+# Unneeded files for package 500_template_gem
+# ------------------------------------------------------------------------------
+packages/500_template_gem/.bundle/
+
+packages/500_template_gem/.idea/
+
+packages/500_template_gem/apps/
+
+packages/500_template_gem/_*/
+
+packages/500_template_gem/node_modules/
+
+packages/500_template_gem/assets/
+
+packages/500_template_gem/.git/
+
+packages/500_template_gem/yarn.lock
+
+packages/500_template_gem/package-lock.json
+
+packages/500_template_gem/lib/starter_web/
+
+packages/500_template_gem/**/_unused

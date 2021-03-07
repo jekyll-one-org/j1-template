@@ -1,0 +1,80 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/cookiebar.yml
+# Default configuration settings for J1 Cookiebar module
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2021 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+#
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# About this configuration (used for J1 CC only)
+#
+about_config:
+  title:                                Cookiebar
+  scope:                                Default settings
+  location:                             _data/modules/defaults/cookiebar.yml
+
+# ------------------------------------------------------------------------------
+# Default settings
+#
+defaults:
+
+  enabled:                            false
+  load:                               sync
+  autoEnable:                         true
+  background_color:                   '#354A60'
+  text_color:                         '#EEEEEE'
+
+  message: >
+                                      </br>
+                                        <p>
+                                        Some of these pages use so-called Cookies,
+                                        which serve the content of this site to be
+                                        user-friendly, more effective and safer.
+                                        </p>
+                                      </br>
+
+  message_de: >
+                                      </br>
+                                        <p>Diese Internetseiten verwenden zum Teil so genannte
+                                        Cookies, die dazu dienen das Angebot nutzerfreundlicher,
+                                        effektiver und sicherer zu machen.</p>
+                                      </br>
+
+  acceptButton:                       true
+  stopScrolling:                      true
+  acceptText:                         I understand and agree
+  acceptText_de:                      Ich habe den Hinweis verstanden und stimme zu
+  acceptFunction:                     null
+  declineButton:                      false
+  declineText:                        Disable Cookies
+  declineFunction:                    null
+  policyButton:                       true
+  policyText:                         Privacy
+  policyText_de:                      Datenschutzbestimmungen
+  policyURL:                          /pages/public/legal/en/privacy/
+  policyURL_de:                       /pages/public/legal/de/privacy/
+  acceptOnContinue:                   false
+  acceptOnScroll:                     false
+  acceptAnyClick:                     false
+  expireDays:                         3650
+  renewOnVisit:                       false
+  forceShow:                          false
+  effect:                             slide
+  element:                            "#no_flicker"  #body #nav
+  append:                             false
+  fixed:                              false
+  bottom:                             false
+  zindex:
+  domain:                             www.example.com
+  referrer:                           www.example.com
+
+
+# END config
+# ------------------------------------------------------------------------------

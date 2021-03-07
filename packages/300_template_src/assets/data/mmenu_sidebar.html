@@ -1,0 +1,263 @@
+---
+regenerate:                             true
+---
+
+{% capture cache %}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/mmenu_sidebar.html
+ # Liquid PROCEDURE template to create the HTML portion of the MMenu Sidebar
+ # NOTE: Loaded dynamically by J1 NAV Manager module (AJAX)
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #   liquid_var: {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Liquid var initialization
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign navigator_defaults          = site.data.modules.defaults.navigator.defaults %}
+{% assign navigator_settings          = site.data.modules.navigator.settings %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment                 = site.environment %}
+
+{% assign nav_mmenu_defaults          = navigator_defaults.nav_mmenu %}
+{% assign nav_mmenu_settings          = navigator_settings.nav_mmenu %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign navigator_options           = navigator_defaults | merge: navigator_settings %}
+{% assign nav_mmenu_options           = nav_mmenu_defaults | merge: nav_mmenu_settings %}
+
+{% comment %} Set global settings
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign nav_bar_id                  = navigator_defaults.id %}
+
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% for item in nav_mmenu_options.menus %}
+{% if item.menu.xhr_container_id == "navigator_sidebar_mmenu" %}
+<!-- [INFO   ] [ j1.modules.navigator.mmenu_sidebar.html ] [ collect data for mmenu sitebar ] -->
+{% assign sidebar_options = item.menu.content %}
+{% endif %}
+{% endfor %}
+
+{% comment %} Set icons and sizes
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if navigator_options.icon_family == 'FA' or navigator_options.icon_family == 'FontAwesome' or navigator_options.icon_family == 'FontAwesome4' or navigator_options.icon_family == 'FontAwesome5' %}
+  {% assign icon_family = 'fa' %}
+{% elsif navigator_options.icon_family == 'MDI' or navigator_options.icon_family == 'Material Design Icons'%}
+  {% assign icon_family = 'mdi' %}
+{% else %}
+  {% assign icon_family = 'mdi' %}
+{% endif %}
+
+{% assign icon_size   = navigator_options.icon_size %}
+{% assign icon_color  = navigator_options.icon_color %}
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+
+<!-- [INFO   ] [ j1.modules.navigator.mmenu_sidebar.html ] [Start processing: sidebar] -->
+<div id="{{sidebar_options.id}}" class="mm-side" style="display:none">
+{% for boxes in sidebar_options.boxes %}
+  {% for box in boxes %}
+
+    {% for item in box[1] %}
+      {% assign key   = item[0] %}
+      {% assign value = item[1] %}
+      {% if key == 'enabled' %}  {% assign enabled = value %} {% endif %}
+      {% if key == 'type' %}     {% assign type    = value %} {% endif %}
+      {% if key == 'title' %}    {% assign title   = value %} {% endif %}
+      {% if key == 'type' %}     {% assign type    = value %} {% endif %}
+      {% if key == 'links' %}    {% assign links   = value %} {% endif %}
+    {% endfor %}
+
+    {% if enabled %}
+      {% case type %}
+
+        {% comment %} Collect USER info
+        ------------------------------------------------------------------------ {% endcomment %}
+        {% when 'user_info' %}
+          <!-- [INFO   ] [ j1.modules.navigator.mmenu_sidebar.html ] [USER info enabled] -->
+          <!-- [INFO   ] [ j1.modules.navigator.mmenu_sidebar.html ] [Write widget placeholder: USER info] -->
+          <div id="user-info" class="widget">
+            <h3 class="heading">{{title}}</h3>
+            <ul id="display_user_details" class="link">
+              {% for link in links %}
+
+                {% if link.icon == null %}
+                  {% assign icon = '' %}
+                {% else %}
+                  {% capture icon %}<i class="{{icon_family}} {{icon_family}}-{{link.icon}} {{icon_size}} {{icon_color}} mr-2"></i>{% endcapture %}
+                {% endif %}
+
+                {% if link.target == nil or link.target == "" or link.target == "none" %}
+                  {% assign target = "" %}
+                {% else %}
+                  {% capture target %}target="{{link.target}}"{% endcapture %}
+                {% endif %}
+
+                {% if link.value == nil or link.value == "" or link.value == "none" %}
+                  {% assign link_text = link.title %}
+                {% else %}
+                  {% if link.value contains '??' %}
+                    {% capture macro_name %}{{link.value|replace: '?',''|downcase}}{% endcapture %}
+                    {% capture macro_id %}id="macro-{{macro_name}}"{% endcapture %}
+                  {% else %}
+                    {% assign macro_id = '' %}
+                  {% endif %}
+                  {% capture link_text %}{{link.title}}: {{link.value}}{% endcapture %}
+                {% endif %}
+
+                <li><a {{macro_id}} href="{{link.href|strip}}" {{target}} rel="noopener noreferrer">{{icon}} {{link_text}}</a></li>
+
+              {% endfor %}
+            </ul>
+          </div>
+
+        {% comment %} END Collect USER info
+        ------------------------------------------------------------------------ {% endcomment %}
+
+        {% comment %} Reset element variables
+        ------------------------------------------------------------------------ {% endcomment %}
+        {% assign enabled = nil %}
+        {% assign type    = nil %}
+        {% assign title   = nil %}
+        {% assign type    = nil %}
+        {% assign links   = nil %}
+
+        {% comment %} Collect THEME info
+        ------------------------------------------------------------------------ {% endcomment %}
+        {% when 'theme_info' %}
+          <!-- [INFO   ] [ j1.modules.navigator.mmenu_sidebar.html ] [THEME info detected] -->
+          <!-- [INFO   ] [ j1.modules.navigator.mmenu_sidebar.html ] [Write widget placeholder: USER info] -->
+          <div id="theme-info" class="widget">
+            <h3 class="heading">{{title}}</h3>
+            <ul class="link">
+            {% for link in links %}
+
+              {% if link.icon == null %}
+                {% assign icon = '' %}
+              {% else %}
+                {% capture icon %}<i class="{{icon_family}} {{icon_family}}-{{link.icon}} {{icon_size}} {{icon_color}} mr-2"></i>{% endcapture %}
+              {% endif %}
+
+              {% if link.target == nil or link.target == "" or link.target == "none" %}
+                {% assign target = "" %}
+              {% else %}
+                {% capture target %}target="{{link.target}}"{% endcapture %}
+              {% endif %}
+
+              {% if link.value == nil or link.value == "" or link.value == "none" %}
+                {% assign link_text = link.title %}
+              {% else %}
+                {% if link.value contains '??' %}
+                  {% capture macro_name %}{{link.value|replace: '?',''|downcase}}{% endcapture %}
+                  {% capture macro_id %}id="macro-{{macro_name}}"{% endcapture %}
+                {% else %}
+                  {% assign macro_id = '' %}
+                {% endif %}
+                {% capture link_text %}{{link.title}}: {{link.value}}{% endcapture %}
+              {% endif %}
+
+              <li><a {{macro_id}} href="{{link.href|strip}}" {{target}} rel="noopener noreferrer">{{icon}} {{link_text}}</a></li>
+
+            {% endfor %}
+            </ul>
+          </div>
+          <!-- [INFO   ] [ j1.modules.navigator.mmenu_sidebar.html ] [End processing: THEME info] -->
+
+        {% comment %} END Collect THEME info
+        ------------------------------------------------------------------------ {% endcomment %}
+
+        {% comment %} Reset element variables
+        ------------------------------------------------------------------------ {% endcomment %}
+        {% assign enabled = nil %}
+        {% assign type    = nil %}
+        {% assign title   = nil %}
+        {% assign type    = nil %}
+        {% assign links   = nil %}
+
+        {% comment %} Collect SITE info
+        ------------------------------------------------------------------------ {% endcomment %}
+        {% when 'site_info' %}
+          <!-- [INFO   ] [ j1.modules.navigator.mmenu_sidebar.html ] [Start processing SITE info] -->
+
+          <div id="site-info" class="widget">
+            <h3 class="heading">{{title}}</h3>
+            <ul class="link">
+              {% for link in links %}
+                {% if link.icon == null %}
+                  {% assign icon = "" %}
+                {% else %}
+                  {% capture icon %}<i class="{{icon_family}} {{icon_family}}-{{link.icon}} {{icon_size}} {{icon_color}} mr-2"></i>{% endcapture %}
+                {% endif %}
+
+                {% if link.target == nil or link.target == "" or link.target == "none" %}
+                  {% assign target = "" %}
+                {% else %}
+                  {% capture target %}target="{{link.target}}"{% endcapture %}
+                {% endif %}
+
+                {% if link.value == nil or link.value == "" or link.value == "none" %}
+                  {% assign link_text = link.title %}
+                {% else %}
+                  {% capture link_text %}"{{link.title}}: {{link.title}}"{% endcapture %}
+                {% endif %}
+
+                <li><a href="{{link.href|strip}}" {{target}} rel="noopener noreferrer">{{icon}}{{link_text}}</a></li>
+
+              {% endfor %}
+            </ul>
+          </div>
+
+        {% comment %} END Collect SITE info
+        ------------------------------------------------------------------------ {% endcomment %}
+
+        {% comment %} Reset element variables
+        ------------------------------------------------------------------------ {% endcomment %}
+        {% assign enabled = nil %}
+        {% assign type    = nil %}
+        {% assign title   = nil %}
+        {% assign type    = nil %}
+        {% assign links   = nil %}
+
+      {% endcase %}
+    {% endif %}
+
+  {% endfor %}
+{% endfor %}
+<!-- [INFO   ] [ j1.modules.navigator.mmenu_sidebar.html ] [End processing sidebar boxes] -->
+<!-- [INFO   ] [ j1.modules.navigator.mmenu_sidebar.html ] [End processing: sidebar] -->
+</div>
+{% endcapture %}
+{% if production %}
+  {% capture _LINE_FEED %}{% endcapture %}{% if site.compress_html.ignore.envs contains jekyll.environment %}{{ cache | strip_html_comments }}{% else %}{% capture _content %}{{ cache | strip_html_comments }}{% endcapture %}{% assign _profile = site.compress_html.profile %}{% if site.compress_html.endings == "all" %}{% assign _endings = "html head body li dt dd p rt rp optgroup option colgroup caption thead tbody tfoot tr td th" | split: " " %}{% else %}{% assign _endings = site.compress_html.endings %}{% endif %}{% for _element in _endings %}{% capture _end %}</{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _end %}{% endfor %}{% if _profile and _endings %}{% assign _profile_endings = _content | size | plus: 1 %}{% endif %}{% for _element in site.compress_html.startings %}{% capture _start %}<{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _start %}{% endfor %}{% if _profile and site.compress_html.startings %}{% assign _profile_startings = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.comments == "all" %}{% assign _comments = "<!-- -->" | split: " " %}{% else %}{% assign _comments = site.compress_html.comments %}{% endif %}{% if _comments.size == 2 %}{% capture _comment_befores %}.{{ _content }}{% endcapture %}{% assign _comment_befores = _comment_befores | split: _comments.first %}{% for _comment_before in _comment_befores %}{% if forloop.first %}{% continue %}{% endif %}{% capture _comment_outside %}{% if _carry %}{{ _comments.first }}{% endif %}{{ _comment_before }}{% endcapture %}{% capture _comment %}{% unless _carry %}{{ _comments.first }}{% endunless %}{{ _comment_outside | split: _comments.last | first }}{% if _comment_outside contains _comments.last %}{{ _comments.last }}{% assign _carry = false %}{% else %}{% assign _carry = true %}{% endif %}{% endcapture %}{% assign _content = _content | remove_first: _comment %}{% endfor %}{% if _profile %}{% assign _profile_comments = _content | size | plus: 1 %}{% endif %}{% endif %}{% assign _pre_befores = _content | split: "<pre" %}{% assign _content = "" %}{% for _pre_before in _pre_befores %}{% assign _pres = _pre_before | split: "</pre>" %}{% assign _pres_after = "" %}{% if _pres.size != 0 %}{% if site.compress_html.blanklines %}{% assign _lines = _pres.last | split: _LINE_FEED %}{% capture _pres_after %}{% for _line in _lines %}{% assign _trimmed = _line | split: " " | join: " " %}{% if _trimmed != empty or forloop.last %}{% unless forloop.first %}{{ _LINE_FEED }}{% endunless %}{{ _line }}{% endif %}{% endfor %}{% endcapture %}{% else %}{% assign _pres_after = _pres.last | split: " " | join: " " %}{% endif %}{% endif %}{% capture _content %}{{ _content }}{% if _pre_before contains "</pre>" %}<pre{{ _pres.first }}</pre>{% endif %}{% unless _pre_before contains "</pre>" and _pres.size == 1 %}{{ _pres_after }}{% endunless %}{% endcapture %}{% endfor %}{% if _profile %}{% assign _profile_collapse = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.clippings == "all" %}{% assign _clippings = "html head title base link meta style body article section nav aside h1 h2 h3 h4 h5 h6 hgroup header footer address p hr blockquote ol ul li dl dt dd figure figcaption main div table caption colgroup col tbody thead tfoot tr td th" | split: " " %}{% else %}{% assign _clippings = site.compress_html.clippings %}{% endif %}{% for _element in _clippings %}{% assign _edges = " <e;<e; </e>;</e>;</e> ;</e>" | replace: "e", _element | split: ";" %}{% assign _content = _content | replace: _edges[0], _edges[1] | replace: _edges[2], _edges[3] | replace: _edges[4], _edges[5] %}{% endfor %}{% if _profile and _clippings %}{% assign _profile_clippings = _content | size | plus: 1 %}{% endif %}{{ _content }}{% if _profile %} <table id="compress_html_profile_{{ site.time | date: "%Y%m%d" }}" class="compress_html_profile"> <thead> <tr> <td>Step <td>Bytes <tbody> <tr> <td>raw <td>{{ cache | strip_html_comments | size }}{% if _profile_endings %} <tr> <td>endings <td>{{ _profile_endings }}{% endif %}{% if _profile_startings %} <tr> <td>startings <td>{{ _profile_startings }}{% endif %}{% if _profile_comments %} <tr> <td>comments <td>{{ _profile_comments }}{% endif %}{% if _profile_collapse %} <tr> <td>collapse <td>{{ _profile_collapse }}{% endif %}{% if _profile_clippings %} <tr> <td>clippings <td>{{ _profile_clippings }}{% endif %} </table>{% endif %}{% endif %}
+{% else %}
+  {{ cache | pretty_print | remove:'<html><body>' | remove:'</body></html>' | strip_empty_lines }}
+{% endif %}
+{% assign cache = nil %}

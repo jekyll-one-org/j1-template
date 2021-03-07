@@ -1,0 +1,53 @@
+== Gem build notes
+
+create:                               gem build j1-template.gemspec
+list all (local):                     gem list j1-template --local --all
+list all (remote):                    gem list j1-template --remote --all
+publish (RubyGems):                   gem push j1-template-2021.1.0.gem
+unpublish (RubyGems):                 gem yank j1-template -v 2021.1.0
+install (manually, system):           gem install --local j1-template
+install (manually, user):             gem install --local j1-template --user-install --no-document
+install (project):                    yarn gem install
+install (remote):                     gem install j1-template --no-document
+uninstall (all):                      gem uninstall j1-template --force
+uninstall (version):                  gem uninstall j1-template -v 2021.1.0
+uninstall (version/forced):           gem uninstall j1-template -v 2021.1.0 --force
+uninstall (version/user/forced):      gem uninstall j1-template -v 2021.1.0 --user --force
+install binstub:                      bundle binstubs j1-template
+list bundle:                          bundle list j1-template
+run j1 exe (help):                    bundle exec j1 --help
+
+=== Push a new tag
+
+When modifying remember to issue a new tag command in git before committing,
+then push the new tag
+
+# git tag -a v2021.1.0 -m "v2021.1.0"
+  git push origin --tags
+
+
+=== Clear GEM project folder (packages\500_template_gem)
+
+  lerna --scope gem run clean
+
+== Gem issues
+
+Uninstall X86 version:        gem uninstall eventmachine
+List dependencies:            gem dependency eventmachine --reverse-dependencies
+Or visit the site:            [https://rubygems.org/gems/{gem_name}/reverse_dependencies]
+
+== Windows OS
+
+cd X:\j1\github\j1-template
+cd packages\500_template_gem
+
+cd C:\temp
+cd C:\temp\starter
+
+mklink /D "ziel" "quelle"
+mklink /D "C:\Temp\starter" "C:\Temp\starter 2021.1.0"
+
+
+== Gem build
+
+gem build j1-template.gemspec

@@ -1,0 +1,45 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_includes/themes/j1/modules/connectors/analytics
+ #  Liquid CONNECTOR for analytic providers supported by J1 Template
+ #
+ #  Product/Info:
+ #  http://jekyll.one
+ #
+ #  Copyright (C) 2021 Juergen Adams
+ #
+ #  J1 Template is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign analytics           = site.data.j1_config.analytics.enabled %}
+{% assign analytics_provider  = site.data.j1_config.analytics.provider %}
+
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+
+<!-- [INFO   ] [j1.modules.connectors.analytics       ] [ start processing load region head, layout: {{page.layout}} ] -->              
+{% if analytics and page.analytics %}
+
+  {% case analytics_provider %}
+    {% when "google" %}
+      <!-- [INFO   ] [j1.modules.connectors.analytics       ] [ place Google Analytics ] -->
+      {% include themes/{{site.template.name}}/modules/connectors/analytic/google-analytics.html %}
+    {% when "custom" %}
+      <!-- [INFO   ] [j1.modules.connectors.analytics       ] [ place Custom Provider ] -->
+      {% include themes/{{site.template.name}}/modules/connectors/analytic/custom-analytics.html %}
+  {% endcase %}
+
+{% endif %}
+<!-- [INFO   ] [j1.modules.connectors.analytics       ] [ end processing ] -->
+

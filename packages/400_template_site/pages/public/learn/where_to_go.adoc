@@ -1,0 +1,78 @@
+---
+title:                                  Where to go
+tagline:                                fasten your way
+date:                                   2020-11-03 00:00:00
+description: >
+                                        Welcome to the pages of J1 Template. If your here
+                                        first time, a good decision you get on that page first.
+                                        For sure, there is no better place to go.
+
+tags:                                   [ Roundtrip, Introduction ]
+categories:                             [ Info ]
+
+comments:                               false
+fam_menu_id:                            open_toc
+
+permalink:                              /pages/public/learn/where_to_go/
+regenerate:                             false
+
+resources:                              []
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/modules/attics/tldr-1920x800.jpg
+          alt:                          Photo by Alexander Redl on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Alexander Redl
+            href:                       https://unsplash.com/@alexanderredl
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Welcome to the pages of J1 Template. If your here first time, a good decision
+you get on that page first. For sure, there is no better place to go.
+The crucial first step in to find your way to Jekyll is done. Congratulations.
+The *Learn* section contains all you need to learn what Jekyll and J1 can do
+for your website. For your new static web - if you like.
+
+Roundtrip::
+With this section you'll find a *tour* to show some of the main features of
+the template system *J1*. The tour covers how image data can be managed using
+J1, some background of the typography the template is using, discuss important
+extensions and some more what J1 can do. The roundtrip is a *visual* tour.
+No technical stuff, nothing academic. See what you will get. As an
+overview of some of the main features of *J1*.  If you like, continue by
+walking through the roundtrip examples
+link:/pages/public/learn/roundtrip/present_images/[by starting the tour here].
+
+Web in a Day::
+To go deeper, your're invited to *Web in a Day*. This tutorial guides you
+through all the steps to build a website using Jekyll and the template system
+J1. The guide let you go more in-depth and make things real. You dive into
+the world of Jekyll. You'll have learned a lot at the end of that day about
+what Jekyll is, static webs and the template system J1 is all about. To go
+deeper, your're invited, try out the journey having some hours of fun at
+{url-j1-web-in-a-day--meet-and-greet}[Web in a Day, {browser-window--new}].

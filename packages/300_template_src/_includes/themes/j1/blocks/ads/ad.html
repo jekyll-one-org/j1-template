@@ -1,0 +1,64 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_includes/themes/j1/blocks/ad.html
+ #  Liquid PROCEDURE template to create an advertising block                    for Advertising
+ #
+ #  Product/Info:
+ #  http://jekyll.one
+ #
+ #  Copyright (C) 2021 Juergen Adams
+ #
+ #  J1 Template is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign advertising           = site.data.j1_config.advertising.enabled %}
+{% assign advertising_provider  = site.data.j1_config.advertising.provider %}
+
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+<!-- [INFO   ] [j1.blocks.ad.html                     ] [ detected advertising (page): {{page.advertising}}} ] -->
+<!-- [INFO   ] [j1.blocks.ad.html                     ] [ detected advertising (provider): {{advertising_provider}}} ] -->
+<!-- [INFO   ] [j1.blocks.ad.html                     ] [ start processing load region body, layout: {{page.layout}} ] -->
+
+{% if advertising and page.advertising %}
+
+  {% case advertising_provider %}
+    {% when "google" %}
+      <!-- [INFO   ] [j1.blocks.ad.html                     ] [ place advertising block for provider: Google ] -->
+    <div id="adblock" class="advertising mb-3">
+      <div class="advertising mb-3">
+        <button type="button" class="btn btn-primary btn-raised">Primary</button>
+        <button type="button" class="btn btn-secondary btn-raised">Secondary</button>
+        <button type="button" class="btn btn-success btn-raised">Success</button>
+        <button type="button" class="btn btn-info btn-raised">Info</button>
+        <button type="button" class="btn btn-warning btn-raised">Warning</button>
+        <button type="button" class="btn btn-danger btn-raised">Danger</button>
+        <button type="button" class="btn btn-link btn-raised">Link</button>
+      </div>
+    </div>
+    {% when "custom" %}
+      <!-- [INFO   ] [j1.blocks.ad.html                     ] [ place advertising block for provider: Custom ] -->
+      <div id="adblock" class="advertising mb-3">
+        <button type="button" class="btn btn-primary btn-raised">Primary</button>
+        <button type="button" class="btn btn-secondary btn-raised">Secondary</button>
+        <button type="button" class="btn btn-success btn-raised">Success</button>
+        <button type="button" class="btn btn-info btn-raised">Info</button>
+        <button type="button" class="btn btn-warning btn-raised">Warning</button>
+        <button type="button" class="btn btn-danger btn-raised">Danger</button>
+        <button type="button" class="btn btn-link btn-raised">Link</button>
+      </div>
+  {% endcase %}
+
+{% endif %}
+<!-- [INFO   ] [j1.blocks.ad.html                     ] [ end processing ] -->

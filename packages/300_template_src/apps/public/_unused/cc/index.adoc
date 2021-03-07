@@ -1,0 +1,107 @@
+---
+layout:                                 page
+
+title:                                  Control Center
+tagline:                                site management
+description:                            A CMS environment based on Netlify CMS
+
+tags:                                   [ App, Control Center ]
+index:                                  [ Control, Center, Netlify, CMS ]
+categories:                             [ apps ]
+
+toc:                                    false
+scrollbar:                              true
+permalink:                              /apps/public/cc/
+regenerate:                             false
+
+resources:                              [ framer ]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/modules/attics/banner/admin-dashboard-bootstrap-1280x800-bw.jpg
+          alt:                          admin-dashboard-bootstrap-1280x800-bw
+---
+
+// TODO
+// -----------------------------------------------------------------------------
+// jadams, 2019-08-31: Removing GitHub credentials should be configurable
+// See: ~/packages/400_template_site/_data/apps/cc.yml
+// See: https://stackoverflow.com/questions/9943220/how-to-delete-a-localstorage-item-when-the-browser-window-tab-is-closed
+
+// Enable the Liquid Preprocessor
+// -----------------------------------------------------------------------------
+:page-liquid:
+
+// Set other global page attributes here
+// -----------------------------------------------------------------------------
+
+// Liquid procedures
+// -----------------------------------------------------------------------------
+
+// Initialize entry document paths
+// -----------------------------------------------------------------------------
+
+// Load tags and urls
+// -----------------------------------------------------------------------------
+
+// Additional Asciidoc page attributes goes here
+// -----------------------------------------------------------------------------
+
+// Include documents
+// -----------------------------------------------------------------------------
+
+++++
+<div id="cms-manager" class="row mt-3">
+  <!--p id="callback" class="ml-2"></p -->
+
+  <iframe
+    src="/assets/data/cc/index.html"
+    width="100%"
+    style="border-width:0;">
+  </iframe>
+</div>
+
+<script>
+  var cookie_names              = j1.getCookieNames();
+  var cookie_user_state_name    = cookie_names.user_state;
+  var user_state                = j1.readCookie(cookie_user_state_name);
+  var bg_primary                = j1.getStyleValue('bg-primary', 'background-color');
+
+  // $('head').append('<style>div#nc-root { background-color: ' +bg_primary+ ' !important; }</style>');
+  
+  if (!user_state.cc_authenticated) {
+    // Remove GitHub credentials to enforce explicit login
+    localStorage.removeItem('netlify-cms-user');
+    user_state.cc_authenticated = true;
+
+    j1.writeCookie({
+        name:    cookie_user_state_name,
+        data:    user_state,
+        expires: 365
+    });
+  }
+
+	iFrameResize({
+		log:                      false,
+		inPageLinks:              true,
+    heightCalculationMethod:  'lowestElement',
+    minHeight:                512,
+		resizedCallback:          function(messageData) {
+			$('p#callback').html(
+				'<b>Frame ID:</b> '    + messageData.iframe.id +
+				' <b>Height:</b> '     + messageData.height +
+				' <b>Width:</b> '      + messageData.width +
+				' <b>Event type:</b> ' + messageData.type
+			);
+		}
+	});
+
+</script>
+++++
+
+
+
+

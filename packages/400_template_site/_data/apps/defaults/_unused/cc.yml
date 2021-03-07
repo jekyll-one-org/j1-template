@@ -1,0 +1,100 @@
+# ------------------------------------------------------------------------------
+# ~/_data/apps/cc.yml
+# Default configuration settings for J1 Control Center
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2021 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+
+# ==============================================================================
+# J1 settings
+#
+
+# ------------------------------------------------------------------------------
+# GENERAL settings
+#
+# enabled
+# ------------------------------------------------------------------------------
+#   Enables|Disables the use of the CC
+#
+#   type:                               boolean
+#   value|s:                            true|false
+#   default:                            true
+#
+# remove_netlify_cms_user
+# ------------------------------------------------------------------------------
+#   Remove GitHub credentials from localStorage to enforce explicit login
+#
+#   type:                               boolean
+#   value|s:                            true|false
+#   default:                            true
+#
+# xhr_container_id
+# ------------------------------------------------------------------------------
+#   All data ..
+#
+#   type:                               string
+#   value|s:                            tbd
+#   default:                            control-center
+#
+# xhr_data_path
+# ------------------------------------------------------------------------------
+#   All data items displayed by a gallery are being read from a
+#
+# quicklink
+# ------------------------------------------------------------------------------
+#   Enables|Disables the CC icon for the QuickLinks bar
+#
+#   type:                               boolean
+#   value|s:                            true|false
+#   default:                            true
+#
+# icon
+# ------------------------------------------------------------------------------
+#   Icon used for accessing CC for the QuickLinks bar
+#
+#   type:                               icon name
+#   value|s:                            all MDI icons
+#   default:                            git (mdi-git)
+#
+# url
+# ------------------------------------------------------------------------------
+#   Page URL called for CC
+#
+#   type:                               url
+#   value|s:                            local path
+#   default:                            /apps/public/cc/page/#control-center            
+#
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# About this configuration (used for J1 CC only)
+#
+about_config:
+
+  title:                                Control Center
+  scope:                                Default settings
+  location:                             _data/apps/defaults/cc.yml
+
+# ------------------------------------------------------------------------------
+# Default configuration settings
+#
+defaults:
+  enabled:                              false
+
+  remove_netlify_cms_user:              true
+
+  xhr_container_id:                     control-center
+  xhr_data_path:                        /assets/data/cc.html
+
+  quicklinks_icon:                      git
+  quicklinks_url:                       /apps/public/cc/
+
+
+# ------------------------------------------------------------------------------
+# END config

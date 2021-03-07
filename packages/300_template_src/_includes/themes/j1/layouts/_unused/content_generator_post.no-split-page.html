@@ -1,0 +1,142 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/_includes/themes/j1/layouts/content_generator_post.html
+ # Liquid template to create the content portion for pages of type POST
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #    liquid_var:  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture create_series_header %}themes/{{site.template.name}}/procedures/posts/create_series_header.proc{% endcapture %}
+{% capture create_ad_block %}themes/{{site.template.name}}/procedures/posts/create_ad_block.proc{% endcapture %}
+{% capture pager %}themes/{{site.template.name}}/procedures/global/pager.proc{% endcapture %}
+
+{% comment %} Process YML config data
+================================================================================ {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign template_config   = site.data.j1_config %}
+{% assign blocks            = site.data.blocks %}
+{% assign modules           = site.data.modules %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign toccer_defaults   = modules.defaults.toccer.defaults %}
+{% assign toccer_settings   = modules.toccer.settings %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign toccer_options    = toccer_defaults | merge: toccer_settings %}
+{% assign tocbot_enabled    = toccer_options.enabled %}
+
+ {% assign rtext            = site.data.j1_config.typography.rtext %}
+ {% assign page_rtext       = page.rtext %}
+ {% assign page_rtext_size  = page.rtext_size %}
+ {% assign page_toccer      = page.toccer %}
+ {% assign page_toc         = page.toc %}
+
+ {% if page_toc and tocbot_enabled %}
+   {% assign sidebar  = true %}
+ {% else %}
+   {% assign sidebar  = false %}
+ {% endif %}
+
+ {% assign sidebar  = false %}
+
+ {% if rtext %}
+   {% assign rtext_size = site.data.j1_config.typography.rtext_size %}
+ {% else %}
+   {% assign rtext_size = 0 %}
+ {% endif %}
+
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+<!-- [INFO   ] [j1.layout.content_generator_post.html ] [ begin content ] -->
+{% if page.comments %}
+  <!-- div class="container mr-5 mb-0" -->
+  <!-- no sidebar, mr-* disabled -->
+  <div class="container mb-0">
+{% else %}
+  <!-- div class="container mr-5 mb-5" -->
+  <!-- no sidebar, mr-* disabled -->
+  <div class="container mb-5"> <!-- Add additional space between end of article and the footer -->
+{% endif %}
+
+  {% comment %} Blog post CONTENT
+  ------------------------------------------------------------------------------ {% endcomment %}
+  <!-- FULL page - no sidebar for page toc -->
+  <div class="row">
+    <main class="r-text-{{rtext_size}} js-toc-content">
+      <!-- Include a pager at top position -->
+      {% include {{pager}} %}
+      <!-- div class="featured-headline" -->
+      <div class="post-headline mt-4">
+        <h2 class="notoc">{{ page.date | date_to_long_string }}</h2>
+      </div>
+
+      {% comment %} Place Blog post SERIES Navigation
+      ------------------------------------------------------------------------ {% endcomment %}
+      {% if page.series %}
+      <header class="bmd-layout-header">
+        <!-- div class="navbar navbar-dark bg-primary raised-z2 mb-4" -->
+        <div class="navbar navbar-dark bg-primary raised-z2">
+          <button class="bmd-drawer drawer-toggler animated fadeIn" type="button" data-toggle="drawer" data-target="#post_navigator">
+            <span class="mdi mdi-menu mdi-2x"></span>
+          </button>
+          <ul class="nav navbar-nav">
+            <li class="nav-item">
+              <span class="navbar-text">Series: {{page.series}}</span>
+            </li>
+          </ul>
+        </div>
+      </header>
+
+      <nav class="nav bmd-layout-container custom-size-350 bmd-drawer-f-l">
+        <!-- Drawer content -->
+        <div id="post_navigator" class="bmd-layout-drawer bg-faded">
+          <!-- header><a class="navbar-brand ml-3 mb-3">{{page.title}}</a></header -->
+          <header><a class="navbar-brand mb-3">{{page.title}}</a></header>
+          <!--  Series Navigator -->
+          {% comment %}{% include {{create_series_header}} page=page post=post readmore=page.readmore %}{% endcomment %}
+          {% include {{create_series_header}} page=page post=post readmore=false %}
+        </div>
+      {% endif %}
+      {% comment %} END SERIES Navigation
+      ------------------------------------------------------------------------ {% endcomment %}
+
+      {% comment %} Inherit CONTENT
+      ------------------------------------------------------------------------ {% endcomment %}
+      <!-- Content placed by post_content.html -->
+      <main class="bmd-layout-content">
+      {{content}}
+
+      {% comment %} Place additional headline for comments
+      ------------------------------------------------------------------------ {% endcomment %}
+      {% if page.comments %}
+      <h2 id="comments_leave_comment"> Leave a Comment </h2>
+      {% endif %}
+      </main>
+      <!-- End Content placed by post_content.html -->
+
+    {% if page.series %}</nav>{% endif %}
+
+    </div> <!-- end col-md-12 -->
+  </div> <!-- end row -->
+
+  {% comment %} END Blog post CONTENT
+  ------------------------------------------------------------------------------ {% endcomment %}
+</div> <!-- end container -->
+<!-- [INFO   ] [j1.layout.content_generator_post.html ] [End content] -->

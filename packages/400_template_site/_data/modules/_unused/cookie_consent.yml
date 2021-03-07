@@ -1,0 +1,36 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/cookie_consent.yml
+# User configuration settings for J1 Cookie Consent module
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2021 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one/J1 Template/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description (used for J1 CC only)
+#
+description:
+
+  title:                                Cookie Consent
+  scope:                                User settings
+  location:                             _data/modules/cookie_consent.yml
+
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+settings:
+  enabled:                              false
+
+  modal_type:                           full
+  modal_position:                       top
+  stop_scrolling:                       true
+  consent_modals_title:                 Privacy
+  whitelisted_pages:                    []
+
+# ------------------------------------------------------------------------------
+# END config

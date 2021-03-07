@@ -1,0 +1,23 @@
+/*
+ # -----------------------------------------------------------------------------
+ #  ~/assets/themes/j1/modules/justified_gallery/css/theme/uno.css
+ #  Provides J1 JustifiedGallery styles for J1 Theme Uno
+ #
+ #  Product/Info:
+ #  https://jekyll.one
+ #
+ #  Copyright (C) 2021 Juergen Adams
+ #
+ #  J1 Template is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ #
+ # -----------------------------------------------------------------------------
+*/
+
+ /* Gallery title */
+ .jg-gallery-title {
+   font-style: italic;
+   font-weight: 400;
+   color: rgba(0, 0, 0, 0.5);
+   overflow: hidden;
+ }

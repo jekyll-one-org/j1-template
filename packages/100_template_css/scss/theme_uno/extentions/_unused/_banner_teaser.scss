@@ -1,0 +1,57 @@
+/*
+// -----------------------------------------------------------------------------
+//  ~/theme_uno/extentions/_banner_teaser.scss
+//  Provides styles for the J1 Teaser Banner
+//
+//  Product/Info:
+//  https://jekyll.one
+//
+//  Copyright (C) 2021 Juergen Adams
+//
+//  J1 Template is licensed under the MIT License.
+//  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+// -----------------------------------------------------------------------------
+*/
+
+// Content
+// -------------------------------------------------------------------
+.banner-teaser {
+  padding-bottom: 1.25rem;
+  // border-bottom: solid 1px #eee; // Replaced by dividers
+  // background: linear-gradient(0deg, #C5CAE9 0%, #FFF 100%); // created dynamically
+}
+
+.banner-teaser p {
+	margin-bottom: 0;
+  text-align: justify;
+}
+
+.banner-teaser h3 {
+	margin-bottom: 0.75rem;
+}
+
+// Buttons
+// -------------------------------------------------------------------
+.btn-row {
+	text-align: initial;
+}
+
+// Media Queries
+// -------------------------------------------------------------------
+@media screen and (max-width: 768px) {
+	.btn-row {
+		text-align: center;
+	}
+}
+
+@media screen and (max-width: 640px) {
+	.btn-row {
+		text-align: center;
+	}
+}
+
+@media screen and (max-width: 480px) {
+  .banner-teaser {
+    padding: 1rem;
+	}
+}
