@@ -11,7 +11,7 @@ A static website uses server-side rendering to serve *pre-built* HTML, CSS,
 and JavaScript files to a web browser, in contrast to traditional dynamic
 sites that work by *rendering* the webpage *at the time of the request*.
 
-.Static Website
+.Accessing a static website
 lightbox::kickstart-wiad--client-server-web[ 800, {data-kickstart-wiad--client-server-web} ]
 
 callout::1[Web Browser]
