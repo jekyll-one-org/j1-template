@@ -1,3 +1,30 @@
+# ------------------------------------------------------------------------------
+# ~/_plugins/asciidoctor-extensions/conum.rb
+# Asciidoctor extension for conums
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2021 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+#
+# ------------------------------------------------------------------------------
+require 'asciidoctor/extensions' unless RUBY_ENGINE == 'opal'
+include Asciidoctor
+
+# A inline macro that embeds a conum into the output document
+#
+# Usage
+# ------------------------------------------------------------------------------
+#   conum::<num>[]
+#
+# Example:
+#
+#   conum:1[]
+#
+# ------------------------------------------------------------------------------
 Asciidoctor::Extensions.register do
   inline_macro do
     named :conum

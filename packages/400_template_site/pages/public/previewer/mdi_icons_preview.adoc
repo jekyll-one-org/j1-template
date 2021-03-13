@@ -89,21 +89,19 @@ include equivalent text either inside the `<i>` tag or right next to it
 click to reply, the link is usable if CSS doesn't load, and human readers
 with good eyesight and a decent browser see a pretty icon.
 
-/////
 == Asciidoc Markup
+
+For pages using Asciidoc for the source (default), a easier solution is to
+use  Markups from Asciidoc.
 
 [source, html]
 ----
-pass:[<i class="mdi mdi-3x mdi-star"></i>] <1>
-mdi:star[3x] <2>
+pass:[<i class="mdi mdi-<name> mdi-<size> mdi-<modifier>"></i>] <1>
+mdi:<name>[<size>, <modifier>] <2>
 ----
 <1> Markup using a pass block
-<2> Markup using the Asciidoc extension
+<2> Markup using the Asciidoc extension (mdi:)
 
-NOTE: The `<i>` tag provides more meaning to machines because of the HTML spec,
-it provides more meaning to *humans* because the `i` can easily associated with
-`icon`.
-/////
 
 == Sizes
 

@@ -58,6 +58,7 @@ window.j1.adapter                       = require('./js/adapter/adapter.js');
 window.j1.core                          = require('./js/core/core.js');
 window.j1.core.navigator                = require('./js/navigator/navigator.js');
 window.j1.core.cookiebar                = require('./js/cookiebar/cookiebar.js');
+window.j1.core.asciidoctor              = require('./js/asciidoctor/asciidoctor.js');
 window.j1.core.scrollSmooth             = require('./js/scroll-smooth/scroll-smooth.js');
 window.j1.anime                         = require('./js/anime/anime.js');       // added for fam
 // window.j1.fam                        = require('./js/fam/fam.js');           // cannot used until NOT rewritten to jQuery

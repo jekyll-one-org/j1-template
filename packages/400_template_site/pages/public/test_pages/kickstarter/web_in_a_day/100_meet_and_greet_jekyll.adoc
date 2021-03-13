@@ -1,0 +1,57 @@
+---
+title:                                  Web in a Day
+tagline:                                meet & greet jekyll
+date:                                   2020-08-01 09:00:00
+description: >
+                                        Web in a Day is the first in a series of tutorials to
+                                        learn how to create modern websites using Jekyll. This
+                                        Kickstarter focus on the basics of Jekyll and the
+                                        J1 Template which all people needs to know for a successful
+                                        way to a modern static website using Jekyll and J1 Template
+
+categories:                             [ Knowledge ]
+tags:                                   [ Jekyll, J1, Tutorial ]
+
+permalink:                              /pages/public/test/meet_and_greet/
+regenerate:                             true
+
+resources:                              [ lightbox, carousel ]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/pages/kickstarter/web_in_a_day/get-started-1920x1280-bw.jpg
+          alt:                          Photo by JESHOOTS.COM on Unsplash
+          alignY:                       top
+          badge:
+            type:                       unsplash
+            author:                     JESHOOTS.COM
+            href:                       https://unsplash.com/@jeshoots/portfolio
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set page (local) attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="all" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents
+// -----------------------------------------------------------------------------
+include::{documentdir}/100_meet_and_greet_jekyll.asciidoc[]

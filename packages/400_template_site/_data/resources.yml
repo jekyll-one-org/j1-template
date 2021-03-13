@@ -698,6 +698,27 @@ resources:
 # ------------------------------------------------------------------------------
 
   # ----------------------------------------------------------------------------
+  # HTML modifier for Asciidoctor
+  #
+  - name:                               Asciidoctor
+    resource:
+      id:                               asciidoctor
+      enabled:                          true
+      comment:                          HTML modifier for Asciidoctor
+      region:                           head
+      layout:                           [ page, post, collection ]
+      required:                         always
+      preload:                          false                                   # property currently unused
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            []
+        files:                          [ adapter/js/asciidoctor.js ]
+        js:                             []
+        init_function:                  [ j1.adapter.asciidoctor.init ]
+
+  # ----------------------------------------------------------------------------
   # Rouge, pure Ruby themeable code highlighter
   # https://github.com/rouge-ruby/rouge
   #
