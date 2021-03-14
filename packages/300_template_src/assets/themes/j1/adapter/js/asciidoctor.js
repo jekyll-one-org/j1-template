@@ -1,5 +1,5 @@
 ---
-regenerate:                             false
+regenerate:                             true
 ---
 
 {% capture cache %}
@@ -24,7 +24,7 @@ regenerate:                             false
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/asciidoctor.js
- # J1 Adapter for rtable
+ # J1 Adapter for Asciidoctor
  #
  # Product/Info:
  # https://jekyll.one
