@@ -149,7 +149,7 @@ settings:
               - name:                   Jekyll Home
                 link:
                   title:                Jekyll Home
-                  tagline:              First addresss for latest news
+                  tagline:              First address for latest news
                   href:                 http://jekyllrb.com/
                   target:               _blank
                   rel:                  noopener noreferrer

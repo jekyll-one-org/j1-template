@@ -12,10 +12,6 @@
  #  See: https://github.com/jekyll-one/J1 Template/blob/master/LICENSE
  # -----------------------------------------------------------------------------
  #  NOTE:
- #  cb cookie disabled. Instead, j1 user state cookie is used.
- # -----------------------------------------------------------------------------
- #  TODO:
- #  Module needs to be rewritten to use j1 native BS modals.
  # -----------------------------------------------------------------------------
 */
 
@@ -64,6 +60,7 @@ module.exports = function asciidoctor (options) {
     // -------------------------------------------------------------------------
     // manage callouts (HTML)
     // -------------------------------------------------------------------------
+    // see: https://stackoverflow.com/questions/19393493/add-colgroup-for-each-table-column
     callouts: function( options ) {
       var colgroupList = '';
 
