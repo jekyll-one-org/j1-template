@@ -238,6 +238,7 @@ var j1 = (function () {
       var logger        = log4javascript.getLogger('j1.init');
       var url           = new liteURL(window.location.href);
       var baseUrl       = url.origin;
+//    moment not used anymore
 //    var epoch         = Math.floor(Date.now()/1000);
 //    var timestamp_now = moment.unix(epoch).format('YYYY-MM-DD HH:mm:ss');
       var date          = new Date();
@@ -275,6 +276,7 @@ var j1 = (function () {
         var cookie_names              = j1.getCookieNames();
         var cookie_user_state_name    = cookie_names.user_state;
         var cookie_user_session_name  = cookie_names.user_session;
+//      moment not used anymore
 //      var epoch                     = Math.floor(Date.now()/1000);
 //      var timestamp_now             = moment.unix(epoch).format('YYYY-MM-DD HH:mm:ss');
         var date                      = new Date();
@@ -284,14 +286,19 @@ var j1 = (function () {
         var url;
         var baseUrl;
 
-        user_state.session_active     = false;
-        user_state.last_session_ts    = timestamp_now;
+        // update cookie only, if (already) exists
+        //
+        if (user_state) {
+          user_state.session_active     = false;
+          user_state.last_session_ts    = timestamp_now;
 
-        j1.writeCookie({
-          name: cookie_user_state_name,
-          data: user_state,
-          expires: 365
-        });
+          j1.writeCookie({
+            name: cookie_user_state_name,
+            data: user_state,
+            expires: 365
+          });
+        }
+
       });
 
       // -----------------------------------------------------------------------
@@ -1246,6 +1253,12 @@ var j1 = (function () {
     //    Config to use this attribute should be configurable
     //    (what config file?).
     //    Disabled use for now in general.
+    //
+    //    The SameSite attribute of the Set-Cookie HTTP response header
+    //    allows you to declare if your cookie should be restricted to a
+    //    first-party or same-site context. Cookies with SameSite=None
+    //    must now also specify the Secure attribute (they require a secure
+    //    context/HTTPS).
     // -------------------------------------------------------------------------
     //
     writeCookie: function (options /*name, data, [path, expires, SameSite, secure]*/) {
@@ -1255,10 +1268,12 @@ var j1 = (function () {
           expires: 0,
           path: '/',
 //        SameSite: 'Strict',
+          SameSite: 'Lax',
+          http_only: false,
           secure: false
       };
       var settings = $.extend(defaults, options);
-
+//    moment not used anymore
 //    var epoch         = Math.floor(Date.now()/1000);
 //    var timestamp_now = moment.unix(epoch).format('YYYY-MM-DD HH:mm:ss');
       var date          = new Date();
@@ -1277,11 +1292,11 @@ var j1 = (function () {
         if (settings.expires > 0) {
           Cookies.set(settings.name, data_encoded, {
             expires: settings.expires,
-//          SameSite: settings.SameSite
+            SameSite: settings.SameSite
           });
         } else {
           Cookies.set(settings.name, data_encoded, {
-//          SameSite: settings.SameSite
+          SameSite: settings.SameSite
           });
         }
       } else {
@@ -1291,11 +1306,11 @@ var j1 = (function () {
         if (settings.expires > 0) {
           Cookies.set(settings.name, data_encoded, {
             expires: settings.expires,
-//          SameSite: settings.SameSite
+            SameSite: settings.SameSite
           });
         } else {
           Cookies.set(settings.name, data_encoded, {
-//          SameSite: settings.SameSite
+            SameSite: settings.SameSite
           });
         }
       }

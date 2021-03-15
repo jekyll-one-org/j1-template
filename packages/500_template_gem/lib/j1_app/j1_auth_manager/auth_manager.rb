@@ -152,6 +152,8 @@ module J1App
     use Rack::Session::Cookie,
         http_only: true,   # if set to 'true', make session cookie visible to the browser (document) for HTTP
         key: 'j1.app.session',
+#       same_site: 'None',
+        same_site: 'Lax',
         secret: ENV['J1_SESSION_SECRET'] || SecureRandom.hex
 
     # use Rack::Cache do |config|
