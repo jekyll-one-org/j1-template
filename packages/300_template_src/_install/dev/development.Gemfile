@@ -181,11 +181,20 @@ gem 'rack-protection', '~> 2.0'
 gem 'rack-ssl-enforcer', '~> 0.2'
 gem 'rest-client', '~> 2.0'
 
-gem 'omniauth', '>= 2.0'
+# NOTE: For the base gem omniauth, the currtent version >= 2 cannot be
+#       used. For unknown reason, a WRONG redirect URL is calculated
+#       e.g. for strategy oauth2/github
+#
+#       Wrong:    http://localhost:xxx/auth/github
+#       Correct:  https://github.com/login?client_id=xx&return=yyy
+#
+# gem 'omniauth', '~> 2.0'
+
+gem 'omniauth', '~> 1.0'                                                        # latest: 1.9.1
 gem 'omniauth-oauth2', '~> 1.7'
 
 gem 'sinatra', '~> 2.0'
-gem 'sinatra-cross_origin', '~> 0.3.1'
+gem 'sinatra-cross_origin', '~> 0.3'
 
 gem 'warden', '~> 1.2'
 

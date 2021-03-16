@@ -27,7 +27,7 @@ about_config:
 settings:
 
   j1_auth:
-    enabled:                            false
+    enabled:                            true
     ssl:                                false
 
     content:
@@ -40,7 +40,8 @@ settings:
         - \W*((?i)private(?-i))\W*
 
     providers:
-      activated:                        [ github, disqus ]
+      activated:                        [ disqus, github ]
+#     activated:                        [ github ]
 
       disqus:
         provider_url:                   https://disqus.com

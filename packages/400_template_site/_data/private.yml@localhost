@@ -88,27 +88,14 @@ middleware:
       # J1 Auth client (mode APP, development system)
       # ------------------------------------------------------------------------
       comment:
-        name:                           j1-starter-local-5k
+        name:                           starter@localhost
         user:                           juergen.adams@jekyll-one.com
         strategy:                       members
 
-      client_url:                       http://localhost:5000
-      client_redirect_url:              http://localhost:5000/auth/disqus/callback
-      client_id:                        ssPdlHsww2Kz6MFHsKkJNWvO5kzGpjcPf0AnGkbgMiXobsz29Va9yIGkNZaex1z3
-      client_secret:                    lZFhPYlTRiKd5pl9KAMM9QumbpkLi15TR0Bx0T6wwRZ97ndvvO7b9RmSKHleNHR4
-
-      # J1 Auth client (mode APP, production)
-      # ------------------------------------------------------------------------
-#     comment:
-#       name:                           j1-starter-app
-#       user:                           juergen.adams@jekyll-one.com
-#       strategy:                       members
-#
-#     client_url:                       https://app.jekyll.one
-#     client_redirect_url:              http://app.jekyll.one/auth/disqus/callback
-#     client_id:                        nxfGmVWvtPHhv2XqXMDZShOwwlEyCyxCvx36xMG1DEv0WfcsKb5Y83yV0CE045X4
-#     client_secret:                    72vMIfD7RXfPQ9T1hxbwvUOkycWofa14apUOLoYkfJ8ZVDFqjBTrOIjDHzkBQFuw
-
+      client_url:                       http://localhost:41010
+      client_redirect_url:              http://localhost:41010/auth/disqus/callback
+      client_id:                        6JCzzU8t2yr11JLps0IWbslWvJJz1s07Q6W9XUBjzJa3zc6ziRlGCJWssslzoj3i
+      client_secret:                    7e36hTTenfAV2wH2csw8ZXj1HY6QhwzvGbImPLTxvMeX5psQHdXOJWDD37KHJ2rw
 
     # --------------------------------------------------------------------------
     # GITHUB credentials
@@ -118,31 +105,16 @@ middleware:
       # J1 Auth client (mode APP, development system)
       # ------------------------------------------------------------------------
       comment:
-        name:                           j1-starter@local-5k
+        name:                           starter@localhost
         user:                           jekyll-one
         org:                            jekyll-one-org
         strategy:                       members
         members:                        all
 
-      client_url:                       http://localhost:5000
-      client_redirect_url:              http://localhost:5000/auth/github/callback
+      client_url:                       http://localhost:41010
+      client_redirect_url:              http://localhost:41010/auth/github/callback
       client_id:                        4759b4d27a5f526c632a
       client_secret:                    8472988317760fd097d1e80e996f4ec410c1857a
-
-      # J1 Auth client (mode APP, prod system)
-      # ------------------------------------------------------------------------
-#     comment:
-#       name:                           https://docs.jekyll.one
-#       user:                           jekyll-one
-#       org:                            jekyll-one-org
-#       strategy:                       members
-#       members:                        all
-#
-#     client_url:                       https://docs.jekyll.one/
-#     client_redirect_url:              https://docs.jekyll.one/auth/github/callback
-#     client_id:                        9bf5e62056aabee42898
-#     client_secret:                    e9c70921603e56dc38cf05b53868417172b35c2e
-
 
     # --------------------------------------------------------------------------
     # PATREON credentials
@@ -161,21 +133,6 @@ middleware:
 #     client_redirect_url:              http://localhost:5000/auth/github/callback
 #     client_id:                        bDuEYHyKjtypxb5wQKMILCCUw-x5XtYD-_9MsDAO22agQGoaB2CRKtP5UReRVflS
 #     client_secret:                    uDRsD1dwWSLPUCeBrjz4umjsNMD04drCtTqy7xSEjkqIVACGa-h-n1w8t9o2mW42
-
-      # J1 Auth client (mode APP, production)
-      # ------------------------------------------------------------------------
-#     comment:
-#       name:                           j1-starter-app-heroku
-#       user:                           juergen@jekyll.one
-#       strategy:                       members
-#       api:                            v1
-#
-#     client_url:                       https://j1-starter-app.herokuapp.com
-#     client_redirect_url:              https://j1-starter-app.herokuapp.com/auth/patreon/callback
-#     client_id:                        HOgyFtiKA_wwgL-PkwwrQszs3LXJdnw28JYrX28-MvCkhx5dyp8kRW8RC4WnzdVE
-#     client_secret:                    ofh0yfPNtJzzFoCMDW0miHbf7CWJ-JSaOkvXkqyOdczkmNBk-16Gf2GFP3ihD8Gd
-
-
 
     # --------------------------------------------------------------------------
     # TWITTER credentials (currently NOT supported)
