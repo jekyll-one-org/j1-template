@@ -1808,8 +1808,8 @@ var j1 = (function () {
     }, // END checkUserAgent
 
     // -------------------------------------------------------------------------
-    // checkUserAgent()
-    // Returns the name (UA) of the web browser
+    // generateId()
+    // Generate a unique (page) id used by the logger
     // -------------------------------------------------------------------------
     generateId: function (length) {
      var result           = '';
@@ -1819,7 +1819,7 @@ var j1 = (function () {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
      }
    return result;
-    }, // END checkUserAgent
+    }, // END generateId
 
     // -------------------------------------------------------------------------
     // getTrue()

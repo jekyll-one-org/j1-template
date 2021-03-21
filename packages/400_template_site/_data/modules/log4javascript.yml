@@ -26,6 +26,8 @@ about_config:
 #
 settings:
 
+  tz_offset:                            GMT+01:00
+
   # ============================================================================
   # APPENDER configurations
   #
@@ -37,32 +39,17 @@ settings:
       appender:
         name:                         consoleAppender
         enabled:                      true
-        type:                         BrowserConsoleAppender
-        layout:                       PatternLayout
-        custom_fields:                [ file, line, path ]
-        pattern_string:               '[%d{HH:mm:ss.SSS}] [%f{4}] [%-5p] [%-40c] [%f{1}:%f{2}] %m%n[%f{3}]'
 
     # --------------------------------------------------------------------------
     # AJAX appender
     - name:                           Ajax Appender
       appender:
         name:                         ajaxAppender
-        enabled:                      false
-        type:                         BrowserAjaxAppender
-        layout:                       JsonLayout
-        custom_fields:                [ file, line, path ]
 
-        payload_url_app:              http://localhost:5000/log2disk?request=write
-        payload_url_web:              http://localhost:44444/log2disk?request=write
-
-        log_folder:                   log
-        log_file_name:                messages
-        log_file_ext:                 log
-
-        create_on_start:              true
-        reset_on_start:               true
-        rolling_files:                false
-        file_mode:                    append
+#       if enabled, make sure that the >>logger_client<< (util_srv) is
+#       enabled ar well
+        enabled:                      true
+        payload_url:                  http://localhost:40020/log2disk?request=write
 
     # --------------------------------------------------------------------------
     # POPUP appender
@@ -70,61 +57,6 @@ settings:
       appender:
         name:                         popupAppender
         enabled:                      false
-        type:                         PopUpAppender
-        width:                        600
-        height:                       400
-        lazyInit:                     false
-        initiallyMinimized:           false
-        layout:                       PatternLayout
-        custom_fields:                []
-        pattern_string:               '[%d{HH:mm:ss}] [ %-5p] - [%m{1}]%n'
-
-
-  # ============================================================================
-  # LOGGER configurations
-  #
-  loggers:
-
-    # --------------------------------------------------------------------------
-    # J1 PARENT logger (j1)
-    - name:                           Parent Logger
-      logger:
-        type:                         parent
-        name:                         j1
-        appender:                     [ consoleAppender, ajaxAppender ]
-        level:
-          production:                 warn
-          development:                debug
-
-    # --------------------------------------------------------------------------
-    # ADAPTER CHILD logger (j1.adapter)
-    # - log:
-    #     type:                         child
-    #     name:                         adapter
-    #     appender:                     [ consoleAppender ]
-    #     level:
-    #       production:                 warn
-    #       development:                debug
-
-    # --------------------------------------------------------------------------
-    # LOADER CHILD logger (j1.loader)
-    # - log:
-    #     type:                         child
-    #     name:                         loader
-    #     appender:                     [ consoleAppender ]
-    #     level:
-    #       production:                 warn
-    #       development:                debug
-
-    # --------------------------------------------------------------------------
-    # MODULE CHILD logger (j1.module)
-    # - log:
-    #     type:                         child
-    #     name:                         module
-    #     appender:                     [ consoleAppender ]
-    #     level:
-    #       production:                 warn
-    #       development:                debug
 
 # ------------------------------------------------------------------------------
 # END config

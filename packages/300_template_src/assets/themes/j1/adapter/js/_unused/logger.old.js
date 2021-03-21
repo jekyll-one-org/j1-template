@@ -1,5 +1,5 @@
 ---
-regenerate:                             true
+regenerate:                             false
 ---
 
 {% capture cache %}
@@ -36,21 +36,17 @@ regenerate:                             true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config       = site.data.j1_config %}
-{% assign modules               = site.data.modules %}
-{% assign utilities             = site.data.utilities %}
+{% assign template_config   = site.data.j1_config %}
+{% assign modules           = site.data.modules %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign util_server_defaults  = utilities.defaults.util_srv.defaults %}
-{% assign util_server_settings  = utilities.util_srv.settings %}
-{% assign logger_defaults       = modules.defaults.log4javascript.defaults %}
-{% assign logger_settings       = modules.log4javascript.settings %}
+{% assign logger_defaults   = modules.defaults.log4javascript.defaults %}
+{% assign logger_settings   = modules.log4javascript.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign logger_options        = logger_defaults | merge: logger_settings %}
-{% assign util_server_options   = util_server_defaults | merge: util_server_settings %}
+{% assign logger_options    = logger_defaults | merge: logger_settings %}
 
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
@@ -87,16 +83,16 @@ j1.adapter['logger'] = (function (j1, window) {
   // globals
   // ---------------------------------------------------------------------------
   var environment           = '{{environment}}';
-  var page_id               = j1.generateId(11);
+  var page_id               = j1.generateId(12);
   var cookie_names          = j1.getCookieNames();
   var loggerRequestCallback = false;
   var loggerOptions         = {};
-  var utilServerOptions     = {};
   var ajaxAppenderOptions   = {};
   var user_session;
   var appDetected;
   var _this;
   var logger;
+  var log2disk;
   var ajaxAppender;
   var consoleAppender;
   var jsonLayout;
@@ -111,7 +107,7 @@ j1.adapter['logger'] = (function (j1, window) {
 
   // ---------------------------------------------------------------------------
   // helper functions
-  //
+  // ---------------------------------------------------------------------------
 
   // ---------------------------------------------------------------------------
   // getCustomData
@@ -166,7 +162,7 @@ j1.adapter['logger'] = (function (j1, window) {
 
   // ---------------------------------------------------------------------------
   // main object
-  //
+  // ---------------------------------------------------------------------------
   return {
 
     // -------------------------------------------------------------------------
@@ -179,15 +175,15 @@ j1.adapter['logger'] = (function (j1, window) {
       // load module DEFAULTS|CONFIG to js object
       /* eslint-disable */
       loggerOptions       = $.extend({}, {{logger_options | replace: '=>', ':' | replace: 'nil', '""'}});
-      utilServerOptions   = $.extend({}, {{util_server_options | replace: '=>', ':' | replace: 'nil', '""'}});
       /* eslint-enable */
       ajaxAppenderOptions = loggerOptions.appenders[1].appender;
 
       // -----------------------------------------------------------------------
       // setup logger instances
-      //
+      // -----------------------------------------------------------------------
       _this       = j1.adapter.logger;
       logger      = log4javascript.getLogger('j1.adapter.logger');
+      log2disk    = log4javascript.getLogger('j1.adapter.log2disk');
 
       // wait until user_session.mode is detected by j1.init()
       //
@@ -204,36 +200,31 @@ j1.adapter['logger'] = (function (j1, window) {
           } else {
             payloadURL = ajaxAppenderOptions.payload_url_web;
           }
-          payloadURL = 'http://localhost:' + utilServerOptions.port + '/log2disk?request=write';
 
           // -------------------------------------------------------------------
           // setup appenders
           // -------------------------------------------------------------------
 
           // consoleAppender (browser console)
-          //
           consoleAppender = new log4javascript.BrowserConsoleAppender();
           consoleAppender.setThreshold(log4javascript.Level.DEBUG);
 
           // ajaxAppender (XHR)
           // HTTP POST log data on the utility server (write log to disk)
-          //
           ajaxAppender = new log4javascript.AjaxAppender(payloadURL);
           ajaxAppender.setThreshold(log4javascript.Level.DEBUG);
           ajaxAppender.setWaitForResponse(true);
           ajaxAppender.setSendAllOnUnload(true);
           ajaxAppender.addHeader('X-Page-ID', page_id);
-          ajaxAppender.addHeader('X-TZ-Offset', loggerOptions.tz_offset);
 
           // success callback for testing (disabled for default)
-          //
           if (loggerRequestCallback) {
             ajaxAppender.setRequestSuccessCallback(requestCallback);
           }
 
-          // -----------------------------------------------------------------------
+          // -------------------------------------------------------------------
           // setup layouts
-          //
+          // -------------------------------------------------------------------
           patternLayout       = new log4javascript.PatternLayout('[%d{HH:mm:ss.SSS}] [%f{4}] [%-5p] [%-40c] [%f{1}:%f{2}] %m%n[%f{3}]');
           httpPostDataLayout  = new log4javascript.HttpPostDataLayout();
           xmlLayout           = new log4javascript.XmlLayout();
@@ -242,7 +233,6 @@ j1.adapter['logger'] = (function (j1, window) {
           simpleLayout        = new log4javascript.SimpleLayout();
 
           // Use the method getLineNumber() as the value for the 0th custom field
-          //
           patternLayout.setCustomField('file',    getCustomData);
           patternLayout.setCustomField('line',    getCustomData);
           patternLayout.setCustomField('path',    getCustomData);
@@ -252,9 +242,9 @@ j1.adapter['logger'] = (function (j1, window) {
           consoleAppender.setLayout(patternLayout);
           ajaxAppender.setLayout(httpPostDataLayout);
 
-          // -----------------------------------------------------------------------
+          // -------------------------------------------------------------------
           // setup log levels
-          //
+          // -------------------------------------------------------------------
           if (environment == 'production') {
             log4javascript.getLogger('j1').setLevel(log4javascript.Level.WARN);
           }
@@ -265,19 +255,16 @@ j1.adapter['logger'] = (function (j1, window) {
             log4javascript.getLogger('j1').setLevel(log4javascript.Level.WARN);
           }
 
-          // -----------------------------------------------------------------------
+          // -------------------------------------------------------------------
           // setup (root) loggers
-          //
+          // -------------------------------------------------------------------
           log4javascript.getRootLogger().addAppender(consoleAppender);
 
-          // to use the ajaxAppender (write logs to disk), the logger_client
-          // ( and the utility server) needs to be enabled
-          //
-          if (ajaxAppenderOptions.enabled && utilServerOptions.logger_client.enabled) {
+          if (ajaxAppenderOptions.enabled) {
             log4javascript.getRootLogger().addAppender(ajaxAppender);
-            logger.info('ajax appender/util server detected as: enabled');
+            logger.info('ajax appender detected as: enabled');
           } else {
-            logger.info('ajax appender/util server detected as: disabled');
+            logger.info('ajax appender detected as: disabled');
           }
 
           _this.setState('finished');
@@ -287,6 +274,7 @@ j1.adapter['logger'] = (function (j1, window) {
           return true;
         }
       }, 25); // END 'mode detected'
+
     }, // END init
 
     // -------------------------------------------------------------------------
@@ -301,7 +289,7 @@ j1.adapter['logger'] = (function (j1, window) {
 
       // -----------------------------------------------------------------------
       //  process commands|actions
-      //
+      // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
         //
         // place handling of command|action here

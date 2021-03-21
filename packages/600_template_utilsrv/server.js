@@ -17,7 +17,7 @@
  # Netlify-cms-github-oauth-provider is licensed under UNKNOWN License.
  # See: https://github.com/vencax/netlify-cms-github-oauth-provider/blob/master/README.md
  # -----------------------------------------------------------------------------
- # NOTE:  
+ # NOTE:
  #  To fix Webstorm NodeJS API issue see:
  #  https://stackoverflow.com/questions/19532660/webstorm-7-cannot-recognize-node-api-methods
  # -----------------------------------------------------------------------------
@@ -68,7 +68,7 @@ const vsprintf          = require('sprintf-js').vsprintf;
 const daemon_home   = path.resolve(__dirname);
 const environment   = daemon_home.indexOf('packages') !== -1 ? 'dev' : 'prod';
 const current_date  = moment().format('YYYY-MM-DD');
-// let dotenv_home;
+
 let config_home;
 let project_home;
 let log_home;
@@ -87,17 +87,12 @@ moment().format('YYYY-MM-DD hh:mm:ss.SSS');
 if (environment === 'dev') {
   project_home    = daemon_home + '/../400_template_site';
   config_home     = daemon_home + '/../400_template_site/_data';
-//dotenv_home     = daemon_home + '/../400_template_site';
   log_home        = daemon_home + '/../..';
 } else {
   project_home    = daemon_home + '/..';
   config_home     = daemon_home + '/../_data';
-//dotenv_home     = daemon_home + '/..';
   log_home        = daemon_home + '/..';
 }
-
-// const dotenv      = require('dotenv').config({ path: dotenv_home + '/.env', silent: true });
-// const dotenv_json = JSON.stringify( dotenv, null, 2 );                          // JSON pretty print
 
 // =============================================================================
 // load configuration data
@@ -118,16 +113,16 @@ const utilsrv_defaults_file         = util_defaults + '/' + 'util_srv.yml';
 const utilsrv_settings_file         = util_settings + '/' + 'util_srv.yml';
 
 try {
-  const log4javascript_defaults     = yaml.safeLoad(fs.readFileSync(log4javascript_defaults_file, 'utf8'));
-  const log4javascript_settings     = yaml.safeLoad(fs.readFileSync(log4javascript_settings_file, 'utf8'));
-  const utilsrv_defaults            = yaml.safeLoad(fs.readFileSync(utilsrv_defaults_file, 'utf8'));
-  const utilsrv_settings            = yaml.safeLoad(fs.readFileSync(utilsrv_settings_file, 'utf8'));
-  const private_data_settings       = yaml.safeLoad(fs.readFileSync(private_data_file, 'utf8'));
+  const log4javascript_defaults     = yaml.load(fs.readFileSync(log4javascript_defaults_file, 'utf8'));
+  const log4javascript_settings     = yaml.load(fs.readFileSync(log4javascript_settings_file, 'utf8'));
+  const utilsrv_defaults            = yaml.load(fs.readFileSync(utilsrv_defaults_file, 'utf8'));
+  const utilsrv_settings            = yaml.load(fs.readFileSync(utilsrv_settings_file, 'utf8'));
+  const private_data_settings       = yaml.load(fs.readFileSync(private_data_file, 'utf8'));
 
+  // noinspection JSUnresolvedVariable
   private_data                      = private_data_settings.util_srv;
-  log4javascript_options            = mergeData(log4javascript_defaults.defaults, log4javascript_settings_file.settings);
   utilsrv_options                   = mergeData(utilsrv_defaults.defaults, utilsrv_settings.settings);
-
+  log4javascript_options            = mergeData(log4javascript_defaults.defaults, utilsrv_settings.settings);
 } catch (e) {
   console.log(e);
 }
@@ -136,6 +131,7 @@ const ajaxAppenderOptions           = log4javascript_options.appenders[1].append
 // -----------------------------------------------------------------------------
 // utility server (daemon) settings
 //
+const enabled         = utilsrv_options.enabled || false;
 const ssl             = utilsrv_options.ssl || false;
 const port            = utilsrv_options.port || 44444;
 const origin          = utilsrv_options.origin || 'localhost';
@@ -151,6 +147,7 @@ const util_srv_url    = ssl ? 'https://' +  origin + ':' +  port : 'http://' +  
 // print utility server issue
 //
 if (environment === 'dev') {
+  console.log('Server enabled:          ' + enabled);
   console.log('Environment detected as: ' + environment);
   console.log('Daemon path set to:      ' + daemon_home);
   console.log('Daemon verbosity set to: ' + verbose);
@@ -197,7 +194,7 @@ const oauthProviderClientSecret   = private_data.oauth.client_secret;
 // -----------------------------------------------------------------------------
 // cors settings
 //
-var corsSettings = {
+let corsSettings = {
   origin:               '*',
   optionsSuccessStatus: 200                                                     // Some legacy browsers (IE11, various SmartTVs) choke on 204
 }
@@ -524,6 +521,10 @@ app.post('/log2disk', (req, res) => {
   // ---------------------------------------------------------------------------
   // globals
   let pageID   = req.headers['x-page-id'];
+  let tzOffset = req.headers['x-tz-offset'];
+  const tz_offset = tzOffset.replace(/GMT/g, '');
+  let tz_factor;
+  let tz_offset_milli;
   let logLine;
   let msgDate2Int;
   let timestamp;
@@ -532,6 +533,7 @@ app.post('/log2disk', (req, res) => {
 
   // ---------------------------------------------------------------------------
   // process the POST response body
+  //
   if (req.body.layout === 'XmlLayout') {
     logLine = req.body.data;
   } else if (req.body.layout === 'JsonLayout' || req.body.layout === 'PatternLayout' || req.body.layout === 'SimpleLayout' || req.body.layout === 'NullLayout') {
@@ -539,18 +541,35 @@ app.post('/log2disk', (req, res) => {
   } else if (req.body.layout === 'HttpPostDataLayout') {
     url = new parseURL(req.body.url);
     path = url.pathname;
-    msgDate2Int = parseInt(req.body.timestamp, 10);                              // ISOString: ±YYYY-MM-DDTHH:mm:ss.sssZ
+
+    msgDate2Int = parseInt(req.body.timestamp, 10);
+
+    // calculate TZ offset
+    //
+    let tz_split = tz_offset.split(':');
+    let tz_offset_hours = eval(tz_split[0]*1);
+    let tz_offset_minutes = eval(tz_split[1]*1);
+
+    tz_factor = tz_offset_hours < 0 ? -1 : 1;
+
+    tz_offset_hours = tz_factor*tz_offset_hours;
+    tz_offset_milli = tz_factor*((3600*1000*tz_offset_hours) + (tz_offset_minutes*60*1000));
+    msgDate2Int += tz_offset_milli;
+
+    // ISOString: yyyy-MM-ddThh:mm:ss.sssZ
     timestamp   = new Date(msgDate2Int).toISOString().slice(0, 23).replace('T', ' ');
+
     // [10:05:12.666] [INFO ] [j1.logger.writer                   ] [logger.js:154] [state: finished]
     // [http://localhost:41000/assets/themes/j1/adapter/js/logger.js:154]
-    logLine     = sprintf('[%s] [%s] [%-5s] [%-25s] [%-35s] %s\n', timestamp, pageID, req.body.level, path, req.body.logger, req.body.message);
+    logLine = sprintf('[%s] [%s] [%-5s] [%-25s] [%-35s] %s\n', timestamp, pageID, req.body.level, path, req.body.logger, req.body.message);
   } else {
     logLine = req.body + '\n';
   }
 
-  // if (verbose) console.log('Utility Server: endpoint /log2disk entered');
-  // if (verbose) console.log('Utility Server: processing request: ' + req.query.request);
-  if (verbose) console.log('Utility Server: write message: ' + logLine);
+//  if (verbose) console.log('Utility Server: endpoint /log2disk entered');
+//  if (verbose) console.log('Utility Server: processing request: ' + req.query.request);
+//  if (verbose) console.log('Utility Server: write message: ' + logLine);
+
   logStream.write(logLine);
   res.send('');
 
@@ -594,8 +613,13 @@ process.on('uncaughtException', function(err) {
   process.exit;
 });
 
-// run the daemon (use IPV4, all interfaces)
-// see https://github.com/expressjs/express/issues/3528
-app.listen(port, hostName, () => {
-  console.log("Utility Server is listening on port: " + port);
-});
+if (utilsrv_options.enabled) {
+  // run the daemon (use IPV4, all interfaces)
+  // see https://github.com/expressjs/express/issues/3528
+  app.listen(port, hostName, () => {
+    console.log("Utility Server is listening on port: " + port);
+  });
+} else {
+  console.log('Utility disabled. Exiting ...');
+  process.exit;
+}

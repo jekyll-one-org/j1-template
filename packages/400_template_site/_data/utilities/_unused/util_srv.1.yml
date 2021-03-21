@@ -28,7 +28,7 @@ about_config:
 #
 settings:
 
-  enabled:                              true
+  enabled:                              false
 
   commit_detection:
 
@@ -44,16 +44,15 @@ settings:
 
   utility_server:
 
-    enabled:                            true
     ssl:                                false
     origin:                             localhost
     host_name:                          0.0.0.0
     port:                               44444
     verbose:                            false
-    
+
     oauth_client:
       enabled:                          true
-      provider:                         github      
+      provider:                         github
       provider_url:                     https://github.com                      # PROVIDER_URL needed for enterprise github installs
       token_path:                       /login/oauth/access_token
       authorize_path:                   /login/oauth/authorize
@@ -71,19 +70,19 @@ settings:
     npm_client:
       enabled:                          true
 
-      built:                              
+      built:
         execute:                        false                                   # rebuild disabled for testing (as Jekyll is running in parallel)
         response_success:               The built request to your local site finished successfully.
         response_failed:                "The built request to your local fite has failed. Reason: "
 
     logger_client:
-      enabled:                          false
+      enabled:                          true
       payload_url_app:                  http://localhost:5000/log2disk?request=write
       payload_url_web:                  http://localhost:44444/log2disk?request=write
 
       log_folder:                       log
       log_file_name:                    messages
-      log_file_ext:                     log      
+      log_file_ext:                     log
 
       create_on_start:                  true
       reset_on_start:                   true

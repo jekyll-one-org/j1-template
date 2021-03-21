@@ -393,11 +393,8 @@ resources:
       pass_init_data:                   false
       data:
         css:                            []
-        files:                          [
-                                          modules/util/js/log4javascript.js,
-                                          adapter/js/logger.js
-                                        ]
-        js:                             []
+        files:                          [ adapter/js/logger.js ]
+        js:                             [ modules/log4javascript/js/log4javascript ]
         init_function:                  [ j1.adapter.logger.init ]
 
   # ----------------------------------------------------------------------------

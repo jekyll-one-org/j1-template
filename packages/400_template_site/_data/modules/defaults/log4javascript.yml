@@ -36,7 +36,7 @@ defaults:
     - name:                           Console Appender
       appender:
         name:                         consoleAppender
-        enabled:                      true
+        enabled:                      false
         type:                         BrowserConsoleAppender
         layout:                       PatternLayout
         custom_fields:                [ file, line, path ]
@@ -51,9 +51,6 @@ defaults:
         type:                         BrowserAjaxAppender
         layout:                       JsonLayout
         custom_fields:                [ file, line, path ]
-
-        payload_url_app:              http://localhost:5000/log2disk?request=write
-        payload_url_web:              http://localhost:44444/log2disk?request=write
 
         log_folder:                   log
         log_file_name:                messages

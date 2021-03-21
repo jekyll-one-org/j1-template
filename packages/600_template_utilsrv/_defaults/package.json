@@ -19,15 +19,15 @@
     "yarn": ">=1.6"
   },
   "utilsrv": {
-    "enabled": "true",
+    "enabled": "true"
   },
   "scripts": {
     "clean": "shx rm -f *.lock && shx rm -f package-lock.json",
-    "start": "run-s utilsrv-run",
-    "develop": "run-s utilsrv",
-    "utilsrv": "cross-env UTILSRV_ENABLED=$npm_package_utilsrv_enabled if-env UTILSRV_ENABLED=true && run-s -s utilsrv-run || run-s -s utilsrv-exit",
-    "utilsrv-run": "echo Startup utility server .. && node server.js",
-    "utilsrv-exit": "echo Startup utility server globally disabled, not started."
+    "start": "run-p -s utilsrv-run",
+    "develop": "run-p -s utilsrv",
+    "utilsrv": "cross-env UTILSRV_ENABLED=$npm_package_utilsrv_enabled if-env UTILSRV_ENABLED=true && run-p -s utilsrv-run || run-p -s utilsrv-exit",
+    "utilsrv-run": "echo Startup UTILSRV .. && node server.js",
+    "utilsrv-exit": "echo UTILSRV disabled. Not started."
   },
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -38,12 +38,12 @@
     "express": "^4.15.2",
     "fs": "0.0.1-security",
     "if-env": "^1.0.4",
-    "js-yaml": "^3.13.1",
+    "js-yaml": "^4.0",
     "lite-url": "^1.0.5",
     "moment": "^2.24.0",
     "npm-run-all": "^4.1.5",
     "randomstring": "^1.1.5",
-    "shx": "^0.2.2",
+    "shx": "^0.3.3",
     "simple-git": "^1.113.0",
     "simple-oauth2": "^1.6.0",
     "sprintf-js": "^1.1.2",
