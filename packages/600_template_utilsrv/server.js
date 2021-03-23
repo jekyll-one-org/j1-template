@@ -61,6 +61,9 @@ const exec              = util.promisify(require('child_process').exec);
 const moment            = require('moment');
 const sprintf           = require('sprintf-js').sprintf;
 const vsprintf          = require('sprintf-js').vsprintf;
+const cron              = require('node-cron');
+const log4js            = require('log4js');
+
 
 // =============================================================================
 // base settings
@@ -76,6 +79,7 @@ let utilsrv_options;
 let log4javascript_options;
 let private_data;
 let logStream;
+let fsStats;
 
 // timestamp settings
 //
@@ -129,19 +133,153 @@ try {
 const ajaxAppenderOptions           = log4javascript_options.appenders[1].appender;
 
 // -----------------------------------------------------------------------------
-// utility server (daemon) settings
+// utility server settings
 //
-const enabled         = utilsrv_options.enabled || false;
-const ssl             = utilsrv_options.ssl || false;
-const port            = utilsrv_options.port || 44444;
-const origin          = utilsrv_options.origin || 'localhost';
-const hostName        = utilsrv_options.host_name || '0.0.0.0';
-const verbose         = utilsrv_options.verbose || false;
-const logFileName     = ajaxAppenderOptions.log_file_name  + '_' + current_date || 'messages' + '_' + current_date;
-const logFileExt      = ajaxAppenderOptions.log_file_ext || 'log';
-const logFolder       = ajaxAppenderOptions.log_folder || 'log';
-const logFileNamePath = log_home + '/' + logFolder + '/' + logFileName + '.' +  logFileExt;
-const util_srv_url    = ssl ? 'https://' +  origin + ':' +  port : 'http://' +  origin + ':' +  port;
+const enabled             = utilsrv_options.enabled || false;
+const ssl                 = utilsrv_options.ssl || false;
+const port                = utilsrv_options.port || 40020;
+const origin              = utilsrv_options.origin || 'localhost';
+const hostName            = utilsrv_options.host_name || '0.0.0.0';
+const verbose             = utilsrv_options.verbose || false;
+const logFileName         = ajaxAppenderOptions.log_file_name  + '_' + current_date || 'messages' + '_' + current_date;
+const logFileExt          = ajaxAppenderOptions.log_file_ext || 'log';
+const logFolder           = ajaxAppenderOptions.log_folder || 'log';
+const logFileNamePath     = log_home + '/' + logFolder + '/' + logFileName + '.' +  logFileExt;
+const current_logFile     = log_home + '/' + logFolder + '/' + 'messages.current';
+const util_srv_url        = ssl ? 'https://' +  origin + ':' +  port : 'http://' +  origin + ':' +  port;
+const thread_id           = generateId (11);
+const page                = '/util_srv';
+
+// -----------------------------------------------------------------------------
+// logger settings
+// See: https://github.com/log4js-node/log4js-node/blob/master/docs/layouts.md
+//
+log4js.configure({
+  appenders: {
+    stdout: {
+      type: 'stdout',
+      layout: {
+        type: 'pattern',
+        pattern: '[%d{yyyy-MM-dd hh:mm:ss.SSS}] [%p] [%-40c] %m%n'
+      }
+    },
+    file: {
+      type: 'file',
+      filename: logFileNamePath,
+      layout: {
+        type: 'pattern',
+        pattern: '[%d{yyyy-MM-dd hh:mm:ss.SSS}] [%-11x{thread}] [%-5p] [%-25x{page}] [%-35c] %m',
+        tokens: {
+          thread: thread_id,
+          page: page
+        }
+      }
+    }
+  },
+  categories: {
+    default: {
+      appenders: ['stdout'],
+      level: 'info'
+    },
+    'j1.util_srv': {
+      appenders: ['file'],
+      level: 'info'
+    },
+    'j1.util_srv.preflight': {
+      appenders: ['file'],
+      level: 'info'
+    },
+    'j1.util_srv.task': {
+      appenders: ['file'],
+      level: 'info'
+    }
+  }
+});
+
+// -----------------------------------------------------------------------------
+// create loggers
+//
+let stdout    = log4js.getLogger('stdout');
+let preflight = log4js.getLogger('j1.util_srv.preflight');
+let logger    = log4js.getLogger('j1.util_srv');
+
+// -----------------------------------------------------------------------------
+// scheduler task settings
+// See: https://github.com/node-cron/node-cron
+//
+let test_per_minute = cron.schedule('* * * * *', () =>  {
+  let timestamp = moment().format('YYYY-MM-DD HH:mm');
+  console.log(timestamp + ': scheduled test task running every minute');
+}, {
+  scheduled: false
+});
+
+let rolling_logs = cron.schedule('* * * * *', () =>  {
+  let logger = log4js.getLogger( 'j1.util_srv.task');
+//  logger_stdout.info('rolling log task running every minute');
+  logger.info('rolling log task running every minute');
+  let timestamp = moment().format('YYYY-MM-DD HH:mm');
+  console.log(timestamp + ': rolling log task running every minute');
+}, {
+  scheduled: false
+});
+
+// -----------------------------------------------------------------------------
+// initialize the logfile
+
+// check if the logfile exists
+try {
+  fsStats = fs.statSync(logFileNamePath);
+  console.log('Log file exists :        ' + logFileName);
+  preflight.info('log file exists: ' + logFileName)
+
+  if ( ajaxAppenderOptions.reset_on_start === true) {
+    fs.truncate(logFileNamePath, 0, function(){console.log('Reset file: ' + logFileName)});
+  }
+}
+catch (e) {
+  console.log('Create Log file :' + logFileName);
+  preflight.info('create log file  :' + logFileName);
+  // create empty logfile
+  touch(logFileNamePath);
+}
+
+// (Re-)Create symlink to current logfile
+//
+fs.unlink(current_logFile, (err => {
+  if (err) {
+    fs.symlink (
+        logFileNamePath,
+        current_logFile,
+        function (err) { console.log(err || 'Symlink to current log created.'); }
+    );
+  } else {
+    // See: https://stackoverflow.com/questions/29777506/create-relative-symlinks-using-absolute-paths-in-node-js
+    //
+    fs.symlink (
+        logFileNamePath,
+        current_logFile,
+        function (err) { console.log(err || 'Symlink to current log re-created.'); }
+    );
+  }
+}));
+
+// check if logs should be appended
+//
+preflight.info('appender options,  append :' + ajaxAppenderOptions.mode);
+if (ajaxAppenderOptions.mode === 'append') {
+  logStream = fs.createWriteStream(logFileNamePath, {'flags': 'a'});
+} else {
+  fs.truncate(logFileNamePath, 0, function(){console.log('Reset file: ' + logFileName)});
+  logStream = fs.createWriteStream(logFileNamePath, {'flags': 'a'});
+}
+
+// check if logs should be rolled (daily)
+//
+preflight.info('appender options,  append :' + ajaxAppenderOptions.rolling_files);
+if (ajaxAppenderOptions.rolling_files === true) {
+  rolling_logs.start();
+}
 
 // -----------------------------------------------------------------------------
 // print utility server issue
@@ -157,27 +295,6 @@ if (environment === 'dev') {
 }
 
 // -----------------------------------------------------------------------------
-// initialize log client
-// fs.writeFile(logFileNamePath, '',  function(){console.log('Reset file: ' +logFileNamePath)});
-//
-
-if ( ajaxAppenderOptions.create_on_start === 'true') {
-  touch(logFileNamePath);
-} else {
-  touch(logFileNamePath);
-}
-
-if ( ajaxAppenderOptions.reset_on_start === 'true') {
-  fs.truncate(logFileNamePath, 0, function(){console.log('Reset file: ' + logFileNamePath)});
-}
-
-if ( ajaxAppenderOptions.mode === 'append') {
-  logStream = fs.createWriteStream(logFileNamePath, {'flags': 'a'});
-} else {
-  logStream = fs.createWriteStream(logFileNamePath, {'flags': 'a'});
-}
-
-// -----------------------------------------------------------------------------
 // Github OAuth client settings (used for CC)
 //
 const loginAuthTarget             = '_self';
@@ -189,7 +306,6 @@ const oauthProviderRedirectUrl    = private_data.oauth.site_redirect_url;
 const oauthProviderClientScope    = private_data.oauth.client_scope;
 const oauthProviderClientId       = private_data.oauth.client_id;
 const oauthProviderClientSecret   = private_data.oauth.client_secret;
-
 
 // -----------------------------------------------------------------------------
 // cors settings
@@ -208,7 +324,7 @@ let corsSettings = {
 //
 
 // =============================================================================
-// initialize libraries
+// initialize runtime libraries
 // -----------------------------------------------------------------------------
 const app    = express();
 const oauth2 = simpleOauthModule.create({
@@ -596,6 +712,20 @@ function mergeData () {
   return o;
 }
 
+// -------------------------------------------------------------------------
+// generateId()
+// Generate a unique (thread) id used by the logger
+// -------------------------------------------------------------------------
+function generateId (length) {
+  let result           = '';
+  let characters       = 'abcdefghijklmnopqrstuvwxyz0123456789';
+  let charactersLength = characters.length;
+  for ( let i = 0; i < length; i++ ) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+  return result;
+} // END generateId
+
 
 // =============================================================================
 // main
@@ -614,12 +744,17 @@ process.on('uncaughtException', function(err) {
 });
 
 if (utilsrv_options.enabled) {
+  // test_per_minute.start();
+
+  logger.info('utility server is starting');
+
   // run the daemon (use IPV4, all interfaces)
   // see https://github.com/expressjs/express/issues/3528
   app.listen(port, hostName, () => {
     console.log("Utility Server is listening on port: " + port);
+    logger.info('utility server is listening on port: ' + port);
   });
 } else {
   console.log('Utility disabled. Exiting ...');
-  process.exit;
+  logger.info('utility server disabled: stop the server');
 }

@@ -7,25 +7,44 @@ Changes not staged for commit:
   (use "git restore <file>..." to discard changes in working directory)
         modified:   packages/300_template_src/assets/themes/j1/adapter/js/j1.js
         modified:   packages/300_template_src/assets/themes/j1/adapter/js/logger.js
-        deleted:    packages/300_template_src/assets/themes/j1/modules/util/js/log4javascript.js
-        deleted:    packages/400_template_site/_data/_unused/utilities/defaults/util_asciidoc/default-theme.yml
-        deleted:    packages/400_template_site/_data/_unused/utilities/defaults/util_asciidoc/j1-theme.yml
-        deleted:    packages/400_template_site/_data/_unused/utilities/defaults/util_srv.yml
-        deleted:    packages/400_template_site/_data/_unused/utilities/util_asciidoc2pdf/j1-theme.yml
-        deleted:    packages/400_template_site/_data/_unused/utilities/util_srv.yml
-        modified:   packages/400_template_site/_data/modules/defaults/log4javascript.yml
-        modified:   packages/400_template_site/_data/modules/log4javascript.yml
-        modified:   packages/400_template_site/_data/resources.yml
-        modified:   packages/600_template_utilsrv/_defaults/package.json
-        modified:   packages/600_template_utilsrv/package.json
-        modified:   packages/600_template_utilsrv/server.js
+#       deleted:    packages/300_template_src/assets/themes/j1/modules/util/js/log4javascript.js
+#       deleted:    packages/400_template_site/_data/_unused/utilities/defaults/util_asciidoc/default-theme.yml
+#       deleted:    packages/400_template_site/_data/_unused/utilities/defaults/util_asciidoc/j1-theme.yml
+#       deleted:    packages/400_template_site/_data/_unused/utilities/defaults/util_srv.yml
+#       deleted:    packages/400_template_site/_data/_unused/utilities/util_asciidoc2pdf/j1-theme.yml
+#       deleted:    packages/400_template_site/_data/_unused/utilities/util_srv.yml
+-->     modified:   packages/400_template_site/_data/modules/defaults/log4javascript.yml
+-->     modified:   packages/400_template_site/_data/modules/log4javascript.yml
+
+-->     modified:   packages/400_template_site/_data/resources.yml
+
+-->     modified:   packages/600_template_utilsrv/_defaults/package.json
+-->     modified:   packages/600_template_utilsrv/package.json
+-->     modified:   packages/600_template_utilsrv/server.js
 
 Untracked files:
   (use "git add <file>..." to include in what will be committed)
         packages/300_template_src/assets/themes/j1/adapter/js/_unused/logger.old.js
         packages/300_template_src/assets/themes/j1/modules/log4javascript/
         packages/400_template_site/_data/_unused/util_asciidoc2pdf/
-        packages/400_template_site/_data/utilities/
-        packages/600_template_utilsrv/readme
+-->     packages/400_template_site/_data/utilities/
+-->     packages/600_template_utilsrv/readme
 
 no changes added to commit (use "git add" and/or "git commit -a")
+
+
+Migrated
+--------------------------------------------------------------------------------
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+        modified:   _data/_defaults/resources.yml
+        modified:   _data/modules/defaults/log4javascript.yml
+        modified:   _data/modules/log4javascript.yml
+        modified:   _data/resources.yml
+        modified:   _data/utilities/defaults/util_srv.yml
+        modified:   _data/utilities/util_srv.yml
+        modified:   utilsrv/_defaults/package.json
+        modified:   utilsrv/package.json
+        modified:   utilsrv/server.js

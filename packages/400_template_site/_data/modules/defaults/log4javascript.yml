@@ -33,49 +33,49 @@ defaults:
 
     # --------------------------------------------------------------------------
     # CONSOLE appender
-    - name:                           Console Appender
+    - name:                             Console Appender
       appender:
-        name:                         consoleAppender
-        enabled:                      false
-        type:                         BrowserConsoleAppender
-        layout:                       PatternLayout
-        custom_fields:                [ file, line, path ]
-        pattern_string:               "[%d{HH:mm:ss.SSS}] [%-5p] [%-40c] [%f{1}:%f{2}] [%m]%n                       [%f{3}]"
+        name:                           consoleAppender
+        enabled:                        false
+        type:                           BrowserConsoleAppender
+        layout:                         PatternLayout
+        custom_fields:                  [ file, line, path ]
+        pattern_string:                 "[%d{HH:mm:ss.SSS}] [%-5p] [%-40c] [%f{1}:%f{2}] [%m]%n                       [%f{3}]"
 
     # --------------------------------------------------------------------------
     # AJAX appender
-    - name:                           Ajax Appender
+    - name:                             Ajax Appender
       appender:
-        name:                         ajaxAppender
-        enabled:                      false
-        type:                         BrowserAjaxAppender
-        layout:                       JsonLayout
-        custom_fields:                [ file, line, path ]
+        name:                           ajaxAppender
+        enabled:                        false
+        type:                           BrowserAjaxAppender
+        layout:                         JsonLayout
+        custom_fields:                  [ file, line, path ]
 
-        log_folder:                   log
-        log_file_name:                messages
-        log_file_ext:                 log
+        log_folder:                     log
+        log_file_name:                  messages
+        log_file_ext:                   log
 
-        create_on_start:              true
-        reset_on_start:               true
-        rolling_files:                false
-        file_mode:                    append
+        create_on_start:                true
+        reset_on_start:                 true
+        rolling_files:                  true
+        mode:                           append
 
 
     # --------------------------------------------------------------------------
     # POPUP appender
-    - name:                           Popup Appender
+    - name:                             Popup Appender
       appender:
-        name:                         popupAppender
-        enabled:                      false
-        type:                         PopUpAppender
-        width:                        600
-        height:                       400
-        lazyInit:                     false
-        initiallyMinimized:           false
-        layout:                       PatternLayout
-        custom_fields:                []
-        pattern_string:               "[%d{HH:mm:ss}] [ %-5p] - [%m{1}]%n"
+        name:                           popupAppender
+        enabled:                        false
+        type:                           PopUpAppender
+        width:                          600
+        height:                         400
+        lazyInit:                       false
+        initiallyMinimized:             false
+        layout:                         PatternLayout
+        custom_fields:                  []
+        pattern_string:                 "[%d{HH:mm:ss}] [ %-5p] - [%m{1}]%n"
 
   # ----------------------------------------------------------------------------
   # LOGGER configurations
@@ -84,14 +84,14 @@ defaults:
 
     # --------------------------------------------------------------------------
     # J1 PARENT logger (j1)
-    - name:                           Parent Logger
+    - name:                             Parent Logger
       logger:
-        type:                         parent
-        name:                         j1
-        appender:                     [ consoleAppender, ajaxAppender ]
+        type:                           parent
+        name:                           j1
+        appender:                       [ consoleAppender, ajaxAppender ]
         level:
-          production:                 warn
-          development:                debug
+          production:                   warn
+          development:                  debug
 
     # --------------------------------------------------------------------------
     # ADAPTER CHILD logger (j1.adapter)

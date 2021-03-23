@@ -1,28 +1,29 @@
 # ------------------------------------------------------------------------------
 # ~/_data/private.yml
-# The private.yml file is used to set private data used by several J1 apps
-# and modules to configure e.g. security and/or authentication settings.
+# The private.yml file is used to set sensitive private data used by
+# J1 components to configure security and authentication settings
 #
 # Product/Info:
 # https://jekyll.one
 #
-# Copyright (C) 2021 Juergen Adams
+# Copyright (C) 2019 Juergen Adams
 #
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/j1_template/blob/master/LICENSE
 # ------------------------------------------------------------------------------
 # NOTE:
-#   As this file contains highly confidential data, never publish this
-#   file to the public. A productive private.yml file should ALWAYS be
-#   excluded from ANY source published to the public (e.g. a repo at Github).
+#   As this file contains very confidential data, a productive private.yml
+#   file should ALWAYS be excluded from ANY source published to the public
+#   (e.g. a repo at Github)
 # ------------------------------------------------------------------------------
+
 
 # ==============================================================================
 # GLOBAL settings
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 global:
 
-  # used by J1 e.g. to encrypt cookies
+  # used by J1 to encrypt cookies
   session_secret:                       <your-secret-string>
 
 
@@ -42,8 +43,8 @@ modules:
       repo:                             <your-gh-repo>
       server_url:                       <your-gh-webhook-url>
 
-    secret:                             <your-gh-secret>
-    payload_url:                        <your-payload-url>
+    secret:                             <your-gh-secret>                        # secret used at GH Webhooks
+    payload_url:                        <your-payload-url>                      # payload url (e.g channel at smee.io)
 
 
 # ==============================================================================
@@ -54,7 +55,7 @@ util_srv:
   oauth:
 
     # GH OAuth settings used for J1 Control Center (NetlifyCMS) for the
-    # external OAuth client
+    # external OAuth client (base_url)
     # --------------------------------------------------------------------------
     comment:
       name:                           <your-config-name>
@@ -79,69 +80,40 @@ middleware:
   # ----------------------------------------------------------------------------
   oauth:
 
-    # DISQUS credentials
     # --------------------------------------------------------------------------
+    # DISQUS credentials
+    # ==========================================================================
     disqus:
 
-      # J1 Auth client (mode WEB, development system)
-      # ------------------------------------------------------------------------
-      comment:
-        name:                           <your-config-name>
-        user:                           <your-gh-user>
-        org:                            <your-gh-organisation>
-        strategy:                       members
-        members:                        all
-
-      client_url:                       http://localhost:5000
-      client_redirect_url:              http://localhost:5000/auth/disqus/callback
-      client_id:                        <your-client-id>
-      client_secret:                    <your-client-secret>
-
       # J1 Auth client (mode APP, development system)
       # ------------------------------------------------------------------------
       comment:
-        name:                           <your-config-name>
-        user:                           <your-gh-user>
-        org:                            <your-gh-organisation>
-        strategy:                       members
-        members:                        all
+        name:                           <your-disqus-config-name>
+        user:                           <your-disqus-user>
 
-      client_url:                       http://localhost:5000
-      client_redirect_url:              http://localhost:5000/auth/disqus/callback
-      client_id:                        <your-client-id>
-      client_secret:                    <your-client-secret>
+      client_url:                       http://localhost:41010
+      client_redirect_url:              http://localhost:41010/auth/disqus/callback
+      client_id:                        <your-disqus-client-id>
+      client_secret:                    <your-disqus-client-secret>
 
-    # GITHUB credentials
     # --------------------------------------------------------------------------
+    # GITHUB credentials
+    # ==========================================================================
     github:
 
-      # J1 Auth client (mode WEB, development system)
-      # ------------------------------------------------------------------------
-      comment:
-        name:                           <your-config-name>
-        user:                           <your-gh-user>
-        org:                            <your-gh-organisation>
-        strategy:                       members
-        members:                        all
-
-      client_url:                       http://localhost:5000
-      client_redirect_url:              http://localhost:5000/auth/github/callback
-      client_id:                        <your-client-id>
-      client_secret:                    <your-client-secret>
-
       # J1 Auth client (mode APP, development system)
       # ------------------------------------------------------------------------
       comment:
-        name:                           <your-config-name>
+        name:                           <your-gh-config-name>
         user:                           <your-gh-user>
-        org:                            <your-gh-organisation>
+        org:                            <your-gh-org>
         strategy:                       members
         members:                        all
 
-      client_url:                       http://localhost:5000
-      client_redirect_url:              http://localhost:5000/auth/github/callback
-      client_id:                        <your-client-id>
-      client_secret:                    <your-client-secret>
+      client_url:                       http://localhost:41010
+      client_redirect_url:              http://localhost:41010/auth/github/callback
+      client_id:                        <your-gh-client-id>
+      client_secret:                    <your-gh-client-secret>
 
 # ------------------------------------------------------------------------------
 # END

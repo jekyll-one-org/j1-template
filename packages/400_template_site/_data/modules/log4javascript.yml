@@ -35,28 +35,24 @@ settings:
 
     # --------------------------------------------------------------------------
     # CONSOLE appender
-    - name:                           Console Appender
+    - name:                             Console Appender
       appender:
-        name:                         consoleAppender
-        enabled:                      true
+        name:                           consoleAppender
+        enabled:                        true
 
     # --------------------------------------------------------------------------
     # AJAX appender
-    - name:                           Ajax Appender
+    - name:                             Ajax Appender
       appender:
-        name:                         ajaxAppender
-
-#       if enabled, make sure that the >>logger_client<< (util_srv) is
-#       enabled ar well
-        enabled:                      true
-        payload_url:                  http://localhost:40020/log2disk?request=write
-
+        name:                           ajaxAppender
+        enabled:                        true                                    # if enabled, make sure that the >>logger_client<< (util_srv) is enabled ar well
+        
     # --------------------------------------------------------------------------
     # POPUP appender
-    - name:                           Popup Appender
+    - name:                             Popup Appender
       appender:
-        name:                         popupAppender
-        enabled:                      false
+        name:                           popupAppender
+        enabled:                        false
 
 # ------------------------------------------------------------------------------
 # END config

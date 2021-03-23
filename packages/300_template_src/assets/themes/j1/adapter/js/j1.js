@@ -1809,7 +1809,7 @@ var j1 = (function () {
 
     // -------------------------------------------------------------------------
     // generateId()
-    // Generate a unique (page) id used by the logger
+    // Generate a unique (thread) id used by the logger
     // -------------------------------------------------------------------------
     generateId: function (length) {
      var result           = '';
