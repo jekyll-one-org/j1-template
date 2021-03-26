@@ -58,6 +58,7 @@
     "app:rackup": "cross-env SINATRA_ACTIVESUPPORT_WARNING=false WEBSERVER=$npm_package_jekyll_opt_webserver INTERFACE=$npm_package_jekyll_opt_interface PORT=$npm_package_jekyll_opt_app_port j1 rackup",
     "app:jekyll": "cross-var cross-env JEKYLL_ENV=$npm_package_config_mode BUNDLE_GEMFILE=$npm_package_ruby_gemfile bundle exec jekyll b -c $npm_package_jekyll_configfile $npm_package_jekyll_opt_incremental --watch",
     "app:open": "npm run delay-3s && cross-var opn $npm_package_jekyll_opt_app_url",
+
     "delay-1s": "node ./node_modules/npm-delay 1000",
     "delay-2s": "node ./node_modules/npm-delay 2000",
     "delay-3s": "node ./node_modules/npm-delay 3000",
@@ -123,7 +124,7 @@
     "setup:detect-os": "echo Detect OS .. && cross-env if-env OS=Windows_NT && cross-var echo \"OS detected: $OS\" || OS=$(echo $(getos)) && echo \"OS detected: $OS\" && echo done.",
     "setup:site": "run-s -s build",
 
-    "site": "run-s site:*",
+    "site": "run-p -s site:*",
     "site:jekyll": "echo Startup the site .. && cross-env SINATRA_ACTIVESUPPORT_WARNING=false bundle exec jekyll s --incremental --livereload --livereload-port $npm_package_jekyll_opt_livereload_port --open",
     "site:utilsrv": "npm --prefix ./utilsrv --silent run utilsrv",
 

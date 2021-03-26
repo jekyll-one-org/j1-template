@@ -26,6 +26,7 @@
     "start": "run-p -s utilsrv-run",
     "app": "run-p -s utilsrv",
     "develop": "run-p -s utilsrv",
+    "site": "run-p -s utilsrv",
     "utilsrv": "cross-env UTILSRV_ENABLED=$npm_package_utilsrv_enabled if-env UTILSRV_ENABLED=true && run-p -s utilsrv-run || run-p -s utilsrv-exit",
     "utilsrv-run": "echo Startup UTILSRV .. && node server.js",
     "utilsrv-exit": "echo UTILSRV disabled. Not started."
