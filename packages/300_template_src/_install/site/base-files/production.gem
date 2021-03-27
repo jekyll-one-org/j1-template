@@ -194,7 +194,7 @@ gem 'omniauth', '~> 1.0'                                                        
 gem 'omniauth-oauth2', '~> 1.7'
 
 gem 'sinatra', '~> 2.0'
-gem 'sinatra-cross_origin', '~> 0.3'
+# gem 'sinatra-cross_origin', '~> 0.3'                                          # currently NOT used
 
 gem 'warden', '~> 1.2'
 

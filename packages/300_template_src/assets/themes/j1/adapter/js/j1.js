@@ -509,7 +509,7 @@ var j1 = (function () {
       var cb_load_closure = function(banner_id) {
         return function ( responseTxt, statusTxt, xhr ) {
           if ( statusTxt ==  'success' ) {
-            var logger = log4javascript.getLogger('j1.xhrData');
+            var logger = log4javascript.getLogger('j1.adapter.xhrData');
             logText = 'loading banner completed on id: ' +banner_id;
             logger.info(logText);
             j1.setXhrDataState(banner_id, statusTxt);
@@ -619,7 +619,7 @@ var j1 = (function () {
       -------------------------------------------------------------------------- {% endcomment %}
       var cb_load_closure = function(panel_id) {
         return function ( responseTxt, statusTxt, xhr ) {
-          var logger = log4javascript.getLogger('j1.xhrData');
+          var logger = log4javascript.getLogger('j1.adapter.xhrData');
           if ( statusTxt == 'success' ) {
             logText = 'loading panel completed on id: ' +panel_id;
             logger.info(logText);
@@ -715,7 +715,7 @@ var j1 = (function () {
 
       var cb_load_closure = function(footer_id) {
         return function ( responseTxt, statusTxt, xhr ) {
-          var logger = log4javascript.getLogger('j1.xhrData');
+          var logger = log4javascript.getLogger('j1.adapter.xhrData');
           if ( statusTxt ==  'success' ) {
             logText = 'footer loaded successfully on id: ' + footer_id;
             logger.info(logText);
@@ -772,7 +772,7 @@ var j1 = (function () {
     //  to load the current state from the middleware (skipped in WEB mode)
     // -------------------------------------------------------------------------
     displayPage: function (options) {
-      var logger              = log4javascript.getLogger('j1.displayPage');
+      var logger              = log4javascript.getLogger('j1.adapter.displayPage');
       var flickerTimeout      = {{template_config.flicker_timeout}};
       var url                 = new liteURL(window.location.href);
       var baseUrl             = url.origin;
@@ -1117,7 +1117,7 @@ var j1 = (function () {
     // specified by xhr_container_id, xhr_data_path (options)
     // -------------------------------------------------------------------------
     xhrData: function (options, mod, status) {
-      var logger            = log4javascript.getLogger('j1.xhrData');
+      var logger            = log4javascript.getLogger('j1.adapter.xhrData');
       var selector          = $('#' + options.xhr_container_id);
       var state             = status;
       var observer_options  = {
@@ -1131,7 +1131,7 @@ var j1 = (function () {
 
       var cb_load_closure = function(mod, id) {
         return function (responseTxt, statusTxt, xhr) {
-          var logger = log4javascript.getLogger('j1.xhrData');
+          var logger = log4javascript.getLogger('j1.adapter.xhrData');
           if ( statusTxt === 'success' ) {
             // jadams, 2020-07-21: intermediate state should DISABLED
             // if (state) {

@@ -270,10 +270,10 @@ j1.adapter['logger'] = (function (j1, window) {
           //
           log4javascript.getRootLogger().addAppender(consoleAppender);
 
-          // to use the ajaxAppender (write logs to disk), the logger_client
-          // ( and the utility server) needs to be enabled
+          // to use the ajaxAppender (write logs to disk), the utility server
+          // needs to be enabled (util_srv.yml) as well
           //
-          if (ajaxAppenderOptions.enabled && utilServerOptions.logger_client.enabled) {
+          if (ajaxAppenderOptions.enabled) {
             log4javascript.getRootLogger().addAppender(ajaxAppender);
             logger.info('ajax appender/util server detected as: enabled');
           } else {

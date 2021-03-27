@@ -28,16 +28,13 @@ about_config:
 #
 settings:
 
-  enabled:                              true
+  enabled:                              true                                    # if set to true, util server will be started
 
   ssl:                                  false
   origin:                               localhost
   host_name:                            0.0.0.0
   port:                                 40020
   verbose:                              false
-
-  logger_client:
-    enabled:                            true
 
 # ------------------------------------------------------------------------------
 # END config

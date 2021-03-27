@@ -77,7 +77,6 @@
 #      ...
 #    ]
 #
-#
 #   NOTE:
 #   The key|value pair for LOCAL should ALWAYS specified, respectively
 #   ALL resources should be available locally at least. This allows to

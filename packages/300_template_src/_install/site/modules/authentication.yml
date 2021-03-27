@@ -120,80 +120,6 @@ settings:
               whitelist:                [ all ]
               blacklist:                []
 
-    # facebook:
-    #   provider_url:                   https://facebook.com
-    #   strategy:                       member
-    #   scope:                          []
-    #   users:                          [ all ]
-    #   permissions:                    [ protected ]
-    #   data_fields:                    []
-    #   conditions:
-    #     protected:
-    #       enabled:                    true
-    #       users:
-    #         whitelist:                [ all ]
-    #         blacklist:                []
-    #
-    # github:
-    #   provider_url:                   https://github.com
-    #   strategy:                       member
-    #   scope:                          []
-    #   users:                          [ all ]
-    #   permissions:                    [ protected ]
-    #   data_fields:                    []
-    #   conditions:
-    #     protected:
-    #       enabled:                    true
-    #       users:
-    #         whitelist:                [ all ]
-    #         blacklist:                []
-    #
-    # patreon:
-    #   provider_url:                   https://patreon.com
-    #   strategy:                       member
-    #   scope:                          [ users, pledges-to-me ]
-    #   users:                          [ all ]
-    #   permissions:                    [ protected, private ]
-    #   data_fields:                    [
-    #                                     email, name, first_name, nickname,
-    #                                     amount_cents, created_at, declined_since
-    #                                   ]
-    #   conditions:
-    #     protected:
-    #       enabled:                    true
-    #       users:
-    #         blacklist:                []
-    #     private:
-    #       enabled:                    true
-    #       users:
-    #         whitelist:                [ juergen_adams ]
-    #         blacklist:                []
-    #       payment:
-    #         activated:                [ "Premium Content", "Value Content" ]
-    #         tiers:
-    #           - tier:
-    #               name:               "Premium Content"
-    #               amount:             500,
-    #               state:              paid
-    #           - tier:
-    #               name:               "Value Content"
-    #               amount:             100,
-    #               state:              paid
-    #
-    # twitter:
-    #   provider_url:                   https://twitter.com
-    #   strategy:                       member
-    #   scope:                          []
-    #   users:                          [ all ]
-    #   permissions:                    [ protected ]
-    #   data_fields:                    []
-    #   conditions:
-    #     protected:
-    #       enabled:                    true
-    #       users:
-    #         blacklist:                []
-
-
   # ----------------------------------------------------------------------------
   # Auth CLIENT
   #
@@ -212,32 +138,6 @@ settings:
                                         NOTE: To get access to secured pages of this site,
                                         authentication with a provider is needed only *once*.
 
-    auth_disqus:
-      id:                               1
-      title:                            Disqus
-      text: >
-                                        SignIn to Disqus. Get access to all *PROTECTED* content pages of this site.
-    auth_facebook:
-      id:                               2
-      title:                            Facebook
-      text: >
-                                        SignIn to Facebook. Get access to all *PROTECTED* content pages of this site.
-    auth_github:
-      id:                               3
-      title:                            Github
-      text: >
-                                        SignIn to Github. Get access to all *PROTECTED* content pages of this site.
-    auth_patreon:
-      id:                               4
-      title:                            Patreon
-      text: >
-                                        SignIn to Patreon. Get access to all *PROTECTED* and *PRIVATE* content pages of this site.
-    auth_twitter:
-      id:                               5
-      title:                            Twitter
-      text: >
-                                        SignIn to Twitter. Get access to all *PROTECTED* content pages of this site.
-
     auth_signout_modal:
       title:                            SignOut
       body_text: >
@@ -248,6 +148,17 @@ settings:
 
                                         NOTE: In order to signing out *completely*, check the switch
                                         below to *on*.
+
+    auth_disqus:
+      id:                               1
+      title:                            Disqus
+      text:                             SignIn to Disqus. Get access to all *PROTECTED* content pages of this site.
+
+    auth_github:
+      id:                               2
+      title:                            Github
+      text:                             SignIn to Github. Get access to all *PROTECTED* content pages of this site.
+
 
 # ------------------------------------------------------------------------------
 # END config

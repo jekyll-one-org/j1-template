@@ -5,7 +5,7 @@ list all (local):                     gem list j1-template --local --all
 list all (remote):                    gem list j1-template --remote --all
 publish (RubyGems):                   gem push j1-template-2021.1.0.gem
 unpublish (RubyGems):                 gem yank j1-template -v 2021.1.0
-install (manually, system):           gem install --local j1-template
+install (manually, system):           gem install --local j1-template --no-document
 install (manually, user):             gem install --local j1-template --user-install --no-document
 install (project):                    yarn gem install
 install (remote):                     gem install j1-template --no-document

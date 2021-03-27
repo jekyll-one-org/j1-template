@@ -58,7 +58,7 @@ defaults:
 
         create_on_start:                true
         reset_on_start:                 true
-        rolling_files:                  true
+        rolling_files:                  false
         mode:                           append
 
 

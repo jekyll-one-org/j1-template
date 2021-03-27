@@ -24,74 +24,17 @@ about_config:
   location:                             _data/utilities/util_srv.yml
 
 # ------------------------------------------------------------------------------
-# User configuration settings
+# USER configuration settings
 #
 settings:
-  enabled:                              true
 
-  commit_detection:
+  enabled:                              false                                   # if set to true, util server will be started
 
-    modal_commit_detected:
-      enabled:                          true
-      autohide:                         false
-      autohidden:                       5000
-
-    modal_pull_response:
-      enabled:                          true
-      autohide:                         false
-      autohidden:                       5000
-
-  utility_server:
-    enabled:                            true
-
-    ssl:                                false
-    origin:                             localhost
-    host_name:                          0.0.0.0
-    port:                               44444
-    verbose:                            false
-    
-    oauth_client:
-      enabled:                          false
-
-      provider:                         github      
-      provider_url:                     https://github.com                      # PROVIDER_URL needed for enterprise github installs
-      token_path:                       /login/oauth/access_token
-      authorize_path:                   /login/oauth/authorize
-
-    git_client:
-      enabled:                          false
-
-      secret:                           <your-gh-webhook-secret>
-      payload_url:                      <your-payload-url>                      # e.g from smee.io
-
-      pull:
-        execute:                        true                                    # true|false
-        response_success:               The pull request to your local working copy finished successfully.
-        response_failed:                "The pull request to your local working copy has failed. Reason: "
-
-    npm_client:
-      enabled:                          false
-
-      built:                              
-        execute:                        false                                   # rebuild disabled for testing (as Jekyll is running in parallel)
-        response_success:               The built request to your local site finished successfully.
-        response_failed:                "The built request to your local fite has failed. Reason: "
-
-    logger_client:
-      enabled:                          false
-
-      payload_url_app:                  http://localhost:5000/log2disk?request=write
-      payload_url_web:                  http://localhost:44444/log2disk?request=write
-
-      log_folder:                       log
-      log_file_name:                    messages
-      log_file_ext:                     log      
-
-      create_on_start:                  true
-      reset_on_start:                   true
-      rolling_files:                    false
-      file_mode:                        append
-
+  ssl:                                  false
+  origin:                               localhost
+  host_name:                            0.0.0.0
+  port:                                 40020
+  verbose:                              false
 
 # ------------------------------------------------------------------------------
 # END config

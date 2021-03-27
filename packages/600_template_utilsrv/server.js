@@ -201,7 +201,7 @@ log4js.configure({
 //
 let stdout    = log4js.getLogger('stdout');
 let preflight = log4js.getLogger('j1.util_srv.preflight');
-let logger    = log4js.getLogger('j1.util_srv');
+let logger    = log4js.getLogger('j1.util_srv.core');
 
 // -----------------------------------------------------------------------------
 // scheduler task settings
@@ -266,7 +266,7 @@ fs.unlink(current_logFile, (err => {
 
 // check if logs should be appended
 //
-preflight.info('appender options,  append :' + ajaxAppenderOptions.mode);
+preflight.info('appender options, mode: ' + ajaxAppenderOptions.mode);
 if (ajaxAppenderOptions.mode === 'append') {
   logStream = fs.createWriteStream(logFileNamePath, {'flags': 'a'});
 } else {
@@ -274,10 +274,12 @@ if (ajaxAppenderOptions.mode === 'append') {
   logStream = fs.createWriteStream(logFileNamePath, {'flags': 'a'});
 }
 
-// check if logs should be rolled (daily)
+// check if logs should be rolled (e.g. daily)
 //
-preflight.info('appender options,  append :' + ajaxAppenderOptions.rolling_files);
+preflight.info('appender options, rolling files: ' + ajaxAppenderOptions.rolling_files);
 if (ajaxAppenderOptions.rolling_files === true) {
+  // start the scheduled task for rolling (log) files
+  //
   rolling_logs.start();
 }
 
@@ -435,6 +437,7 @@ app.get('/auth/github/callback', (req, res) => {
     }
 
     // see: http://usefulangle.com/post/4/javascript-communication-parent-child-window
+    //
     const script = `
     <script>
     (function() {
@@ -744,6 +747,7 @@ process.on('uncaughtException', function(err) {
 });
 
 if (utilsrv_options.enabled) {
+
   // test_per_minute.start();
 
   logger.info('utility server is starting');
@@ -755,6 +759,10 @@ if (utilsrv_options.enabled) {
     logger.info('utility server is listening on port: ' + port);
   });
 } else {
-  console.log('Utility disabled. Exiting ...');
-  logger.info('utility server disabled: stop the server');
+  logger.info('found utility server: disabled');
+  logger.info('stop the server');
+  console.log('Stop the server. Exiting ...');
 }
+
+// END main
+// -----------------------------------------------------------------------------

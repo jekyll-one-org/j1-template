@@ -55,7 +55,7 @@ module.exports = function scrollSmooth ( options ) {
       var logger;
       var logText;
 
-      logger = log4javascript.getLogger('j1.scrollSmooth.core');
+      logger = log4javascript.getLogger('j1.core.scrollSmooth');
 
       // indicator|check currently NOT used
       // if (isCssSmoothScrollSupported()) { }

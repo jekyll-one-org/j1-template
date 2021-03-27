@@ -47,7 +47,7 @@ module.exports = function cookiebar (options) {
     init: function (options) {
 
       var moduleOptions       = options;
-      var logger              = log4javascript.getLogger('j1.cookiebar');
+      var logger              = log4javascript.getLogger('j1.core.cookiebar');
       var cookie_names        = j1.getCookieNames();
       const cookie_user_state = cookie_names.user_state;
       var user_state          = {};
@@ -67,10 +67,10 @@ module.exports = function cookiebar (options) {
           // Set|Detect J1 UserState
           user_state_detected = j1.existsCookie (cookie_user_state);
           if ( user_state_detected ) {
-            logger.info('User state cookie found');
+            logger.info('user state cookie found');
             user_state = j1.readCookie(cookie_user_state);
           } else {
-            logger.error('User state NOT cookie found');
+            logger.error('user state NOT cookie found');
           }
 
           // Show cookie (consent) icon
@@ -108,7 +108,7 @@ module.exports = function cookiebar (options) {
     // See: https://www.nickang.com/add-event-listener-for-loop-problem-in-javascript/
     // -------------------------------------------------------------------------
     eventHandler: function (options) {
-      var logger              = log4javascript.getLogger('cookiebar.eventHandler');
+      var logger              = log4javascript.getLogger('j1.core.cookiebar.eventHandler');
       var current_page        = window.location.pathname;
       var modalButtons        = document.querySelectorAll('a.btn');
       var appDetected         = j1.appDetected();

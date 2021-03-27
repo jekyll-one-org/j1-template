@@ -60,7 +60,7 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'pathutil', '~> 0.16'
   spec.add_runtime_dependency 'mercenary', '~> 0.4'
   spec.add_runtime_dependency 'colorator', '~> 1.0'
-# spec.add_runtime_dependency 'dotenv', '~> 2.0'                            # should be removed, not longer needed (data loaded replaced by private.yml)
+# spec.add_runtime_dependency 'dotenv', '~> 2.0'                                # should be removed, not longer needed (data loaded replaced by private.yml)
 
   # Dependencies: Logging
   #
@@ -75,17 +75,29 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'rack-ssl-enforcer', '~> 0.2'
   spec.add_runtime_dependency 'rest-client', '~> 2.0'
 
-  spec.add_runtime_dependency 'omniauth', '~> 2.0'
+  # NOTE: For the base gem omniauth, the currtent version >= 2 cannot be
+  #       used. For unknown reason, a WRONG redirect URL is calculated
+  #       e.g. for strategy oauth2/github
+  #
+  #       Wrong:    http://localhost:xxx/auth/github
+  #       Correct:  https://github.com/login?client_id=xx&return=yyy
+  #
+  # spec.add_runtime_dependency 'omniauth', '~> 2.0'
+
+  spec.add_runtime_dependency 'omniauth', '~> 1.0'
   spec.add_runtime_dependency 'omniauth-oauth2', '~> 1.7'
 
   spec.add_runtime_dependency 'sinatra', '~> 2.0'
-# spec.add_runtime_dependency 'sinatra-cross_origin', '~> 0.3.1'
+# spec.add_runtime_dependency 'sinatra-cross_origin', '~> 0.3.1'                # currently NOT used
 
   spec.add_runtime_dependency 'warden', '~> 1.2'
 
   # Dev Dependencies: Development/Test
   #
   spec.add_runtime_dependency 'bump', '~> 0.8'
+
+  # Additional dev Rubies NOT used
+  #
   # spec.add_runtime_dependency 'pry', '~> 0.10'
   # spec.add_runtime_dependency 'rack-test', '~> 0.6'
   # spec.add_runtime_dependency 'rspec', '~> 3.1'
