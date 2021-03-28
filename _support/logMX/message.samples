@@ -1,0 +1,6 @@
+[2021-01-01 00:10:00.000] [mxfpjf6jf4g] [FATAL] [/       ] [j1.adapter.log_test  ] sample message in level FATAL
+[2021-01-01 00:11:00.000] [mxfpjf6jf4g] [ERROR] [/       ] [j1.adapter.log_test  ] sample message in level ERROR
+[2021-01-01 00:12:00.000] [mxfpjf6jf4g] [WARN ] [/       ] [j1.adapter.log_test  ] sample message in level WARN
+[2021-01-01 00:13:00.000] [mxfpjf6jf4g] [INFO ] [/       ] [j1.adapter.log_test  ] sample message in level INFO
+[2021-01-01 00:14:00.000] [mxfpjf6jf4g] [DEBUG] [/       ] [j1.adapter.log_test  ] sample message in level DEBUG
+[2021-01-01 00:15:00.000] [mxfpjf6jf4g] [TRACE] [/       ] [j1.adapter.log_test  ] sample message in level TRACE

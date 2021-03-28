@@ -765,9 +765,9 @@ resources:
   #
   - name:                               J1 Gallery Customizer
     resource:
-      id:                               gallery_customizer
+      id:                               justifiedGalleryCustomizer
       enabled:                          true
-      comment:                          Gallery Customizer
+      comment:                          Justified Gallery Customizer
       layout:                           [ app, raw ]
       region:                           head
       required:                         ondemand
@@ -777,9 +777,9 @@ resources:
       pass_init_data:                   true
       data:
         css:                            []
-        files:                          [ adapter/js/gallery_customizer.js ]
+        files:                          [ adapter/js/justifiedGalleryCustomizer.js ]
         js:                             []
-        init_function:                  [ j1.adapter.gallery_customizer.init ]
+        init_function:                  [ j1.adapter.justifiedGalleryCustomizer.init ]
 
   # ----------------------------------------------------------------------------
   # iFrameResizer, creates dynamic, configurable, client|server
@@ -990,9 +990,9 @@ resources:
   #
   - name:                               Justified Gallery
     resource:
-      id:                               justified_gallery
+      id:                               justifiedGallery
       enabled:                          true
-      comment:                          module justified gallery
+      comment:                          module justifiedGallery
       region:                           head
       layout:                           [ home, page, post, collection, raw, app ]
       required:                         ondemand
@@ -1005,18 +1005,18 @@ resources:
                                           modules/justifiedGallery/css/justifiedGallery,
                                           modules/justifiedGallery/css/theme/uno
                                         ]
-        files:                          [ adapter/js/jf_gallery.js ]
+        files:                          [ adapter/js/justifiedGallery.js ]
         js:                             [ modules/justifiedGallery/js/justifiedGallery ]
-        init_function:                  [ j1.adapter.jf_gallery.init ]
+        init_function:                  [ j1.adapter.justifiedGallery.init ]
 
   # ----------------------------------------------------------------------------
   # LightGallery
   #
   - name:                               LightGallery
     resource:
-      id:                               light_gallery
+      id:                               lightGallery
       enabled:                          true
-      comment:                          module lightgallery
+      comment:                          module lightGallery
       region:                           head
       layout:                           [ home, page, post, collection, raw, app ]
       required:                         ondemand

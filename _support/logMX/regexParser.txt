@@ -1,0 +1,8 @@
+J1 Messages Parser
+--------------------------------------------------------------------------------
+
+regex
+^\[(\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2}:\d{2}.\d{3})\]\s+\[([0-9a-z]*)\]\s+\[(FATAL|ERROR|WARN|INFO|DEBUG|TRACE)\s*\]\s+\[(.*)\]\s+\[(.*)\]\s+(.*)$
+
+date format (DE)
+YYYY-MM-dd HH:mm:ss.SSS

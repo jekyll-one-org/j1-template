@@ -6,7 +6,7 @@ description: >
                                         This page show some of quite useful features of J1 Template to manage your
                                         image-based content using lightboxes, carousels (slider) and galleries.
                                         The image module offers complex functionality based on powerful OpenSource
-                                        libraries like Justified Gallery for high-end, masonry styled preview maps.
+                                        libraries like JustifiedGallery for high-end, masonry styled preview maps.
                                         A carousel app, using the jQuery plugin Owl Carousel as a base, let you
                                         present your images as slide shows.
                                         Lightboxes like LightGallery or Lightbox V2 support your web for full image
@@ -21,7 +21,7 @@ regenerate:                             false
 
 resources:                              [
                                           clipboard, rouge, carousel, lightbox,
-                                          justified_gallery, light_gallery
+                                          justifiedGallery, lightGallery
                                         ]
 resource_options:
   - attic:
@@ -66,7 +66,7 @@ some of quite useful features of J1 Template to manage your image-based content
 using lightboxes, carousels (slider) and galleries.
 
 The image module offers complex functionality based on powerful OpenSource
-libraries like Justified Gallery for high-end, masonry styled preview maps.
+libraries like JustifiedGallery for high-end, masonry styled preview maps.
 A carousel app, using the jQuery plugin Owl Carousel as a base, let you
 present your images as slide shows.
 
@@ -215,27 +215,27 @@ plugin JustifiedGallery as the main gallery module. Beside Justified
 Gallery, a gallery based on pure _Bootstrap_ code is available with the
 built-in gallery app *gallery*.
 
-Justified Gallery is a great jQuery plugin to create responsive, infinite,
+JustifiedGallery is a great jQuery plugin to create responsive, infinite,
 and high quality justified image galleries. J1 Template combines the Gallery
 with the lightboxes supported to enlarge the images of a gallery.
 
-See Justified Gallery in action - and for sure all that you see is even
+See JustifiedGallery in action - and for sure all that you see is even
 responsive. Change the size of your current browser window, by width or height,
 to see what will happen!
 
-=== Justified Gallery
+=== JustifiedGallery
 
 Pictures you've made are typically not even in size. Images may have the
 same size (resolution), but some of them are orientated landscape or other
 may portrait. For that reason, a more powerful gallery is needed to create
 so-called justified views.
 
-Justified Gallery is using a so-called masonry grid layout. It works by
+JustifiedGallery is using a so-called masonry grid layout. It works by
 placing elements in an optimal position based on available horizontal and
 vertical space. Sort of like mason fitting stones in a wall. You’ll have
 seen it in use all over the Internet!
 
-.Masonry grid layout of Justified Gallery
+.Masonry grid layout of JustifiedGallery
 gallery::jg_customizer[]
 
 == Whats next

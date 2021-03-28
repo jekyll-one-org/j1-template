@@ -101,7 +101,7 @@ regenerate:                             true
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
-j1.adapter['gallery_customizer'] = (function (j1, window) {
+j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
@@ -125,8 +125,8 @@ j1.adapter['gallery_customizer'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       // globals
       // -----------------------------------------------------------------------
-      _this   = j1.adapter.gallery_customizer;
-      logger  = log4javascript.getLogger('j1.adapter.gallery_customizer');
+      _this   = j1.adapter.justifiedGalleryCustomizer;
+      logger  = log4javascript.getLogger('j1.adapter.justifiedGalleryCustomizer');
 
       // initialize state flag
       _this.setState('started');
@@ -137,7 +137,7 @@ j1.adapter['gallery_customizer'] = (function (j1, window) {
       // Default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.gallery_customizer',
+        module_name: 'j1.adapter.justifiedGalleryCustomizer',
         generated:   '{{site.time}}'
       }, options);
 
@@ -174,7 +174,7 @@ j1.adapter['gallery_customizer'] = (function (j1, window) {
 
           // -------------------------------------------------------------------
           // load gallery data
-          j1.adapter.jf_gallery.initialize(galleryOptions);
+          j1.adapter.justifiedGallery.initialize(galleryOptions);
 
           logger.info('initialize customizer ui|forms');
 

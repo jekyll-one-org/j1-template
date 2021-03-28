@@ -79,7 +79,7 @@ regenerate:                             true
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
-j1.adapter['jf_gallery'] = (function (j1, window) {
+j1.adapter['justifiedGallery'] = (function (j1, window) {
 
   {% comment %} Global variables
   ------------------------------------------------------------------------------ {% endcomment %}
@@ -105,8 +105,8 @@ j1.adapter['jf_gallery'] = (function (j1, window) {
 
       {% comment %} Set global variables
       -------------------------------------------------------------------------- {% endcomment %}
-      _this = j1.adapter.jf_gallery;
-      logger = log4javascript.getLogger('j1.adapter.jf_gallery');
+      _this = j1.adapter.justifiedGallery;
+      logger = log4javascript.getLogger('j1.adapter.justifiedGallery');
 
       // initialize state flag
       _this.setState('started');
@@ -117,7 +117,7 @@ j1.adapter['jf_gallery'] = (function (j1, window) {
       // Default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.jf_gallery',
+        module_name: 'j1.adapter.justifiedGallery',
         generated:   '{{site.time}}'
       }, options);
 
@@ -144,7 +144,7 @@ j1.adapter['jf_gallery'] = (function (j1, window) {
     // Load AJAX data and initialize the jg gallery
     // -----------------------------------------------------------------------
     initialize: function (options) {
-      logger = log4javascript.getLogger('j1.adapter.jf_gallery.init');
+      logger = log4javascript.getLogger('j1.adapter.justifiedGallery');
 
       _this.setState('running');
       logger.info('state: ' + _this.getState());

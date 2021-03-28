@@ -234,7 +234,7 @@ j1.adapter['logger'] = (function (j1, window) {
           // -----------------------------------------------------------------------
           // setup layouts
           //
-          patternLayout       = new log4javascript.PatternLayout('[%d{HH:mm:ss.SSS}] [%f{4}] [%-5p] [%-40c] [%f{1}:%f{2}] %m%n[%f{3}]');
+          patternLayout       = new log4javascript.PatternLayout('[%d{HH:mm:ss.SSS}] [%f{4}] [%-5p] [%-60c] [%f{1}:%f{2}] %m%n[%f{3}]');
           httpPostDataLayout  = new log4javascript.HttpPostDataLayout();
           xmlLayout           = new log4javascript.XmlLayout();
           jsonLayout          = new log4javascript.JsonLayout();

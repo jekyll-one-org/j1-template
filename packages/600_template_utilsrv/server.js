@@ -168,7 +168,7 @@ log4js.configure({
       filename: logFileNamePath,
       layout: {
         type: 'pattern',
-        pattern: '[%d{yyyy-MM-dd hh:mm:ss.SSS}] [%-11x{thread}] [%-5p] [%-25x{page}] [%-35c] %m',
+        pattern: '[%d{yyyy-MM-dd hh:mm:ss.SSS}] [%-11x{thread}] [%-5p] [%-60x{page}] [%-40c] %m',
         tokens: {
           thread: thread_id,
           page: page
@@ -680,7 +680,7 @@ app.post('/log2disk', (req, res) => {
 
     // [10:05:12.666] [INFO ] [j1.logger.writer                   ] [logger.js:154] [state: finished]
     // [http://localhost:41000/assets/themes/j1/adapter/js/logger.js:154]
-    logLine = sprintf('[%s] [%s] [%-5s] [%-25s] [%-35s] %s\n', timestamp, pageID, req.body.level, path, req.body.logger, req.body.message);
+    logLine = sprintf('[%s] [%s] [%-5s] [%-60s] [%-40s] %s\n', timestamp, pageID, req.body.level, path, req.body.logger, req.body.message);
   } else {
     logLine = req.body + '\n';
   }
