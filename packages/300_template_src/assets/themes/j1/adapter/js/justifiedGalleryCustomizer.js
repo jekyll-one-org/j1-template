@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/gallery_customizer.js
+ # ~/assets/themes/j1/adapter/js/justifiedGalleryCustomizer.js
  # Liquid template to adapt Gallery Customizer JS functions
  #
  # Product/Info:
@@ -55,10 +55,10 @@ regenerate:                             true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign jf_gallery_defaults         = apps.defaults.justified_gallery.defaults %}
-{% assign jf_gallery_settings         = apps.justified_gallery.settings %}
-{% assign gallery_customizer_defaults = site.data.apps.defaults.gallery_customizer.defaults %}
-{% assign gallery_customizer_settings = site.data.apps.gallery_customizer.settings %}
+{% assign jf_gallery_defaults         = apps.defaults.justifiedGallery.defaults %}
+{% assign jf_gallery_settings         = apps.justifiedGallery.settings %}
+{% assign gallery_customizer_defaults = site.data.apps.defaults.justifiedGalleryCustomizer.defaults %}
+{% assign gallery_customizer_settings = site.data.apps.justifiedGalleryCustomizer.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -77,7 +77,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/gallery_customizer.js
+ # ~/assets/themes/j1/adapter/js/justifiedGalleryCustomizer.js
  # J1 Adapter for Gallery Customizer
  #
  # Product/Info:

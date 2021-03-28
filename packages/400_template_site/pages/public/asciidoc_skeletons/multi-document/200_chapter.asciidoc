@@ -14,7 +14,7 @@ tags:                                   [ Skeleton, Document ]
 permalink:                              /pages/public/skeleton/book/chapter_2/
 regenerate:                             false
 
-resources:                              [ lightbox, light_gallery, justified_gallery ]
+resources:                              [ lightbox, lightGallery, justifiedGallery ]
 resource_options:
   - toccer:
       collapseDepth:                    3

@@ -17,7 +17,7 @@ permalink:                              /pages/public/learn/roundtrip/present_vi
 regenerate:                             false
 
 resources:                              [
-                                          light_gallery, justified_gallery, video_js,
+                                          lightGallery, justifiedGallery, video_js,
                                           vimeo_player, vimeo_froogaloop
                                         ]
 resource_options:

@@ -1,10 +1,10 @@
 ---
 title:                                  Welcome
 tagline:                                jekyll for everyone
-date:                                   2021-01-01 00:00:00
+date:                                   2021-03-01 00:00:00
 
-tags:                                   [ Example, Post ]
-categories:                             [ Featured ]
+categories:                             [ Featured, Knowledge ]
+tags:                                   [ J1, Jekyll ]
 
 series:                                 false
 adsense:                                false
@@ -16,8 +16,6 @@ regenerate:                             false
 resources:                              []
 resource_options:
   - attic:
-      padding_top:                      400
-      padding_bottom:                   50
       opacity:                          0.5
       slides:
         - url:                          /assets/images/modules/attics/katie-moum-1920x1280.jpg
@@ -34,14 +32,18 @@ resource_options:
 // Enable the Liquid Preprocessor
 :page-liquid:
 
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
 // Place an excerpt at the most top position
 // -----------------------------------------------------------------------------
-All you're doing at the end of the day is writing your content and Jekyll does
-all the tricky things needed for a website: putting out HTML, Javascript and
-CSS. As a result, the site creation process gets out of your way. Sounds fun,
-isn't it?
+All you're doing at the end of the day is writing your content and J1 Template
+does all the tricky things: putting out HTML, Javascript and CSS. As a result,
+the site creation process gets out of your way.
+Sounds fun, isn't it?
 
-// [role="clearfix mb-3"]
+[role="clearfix mb-3"]
 excerpt__end
 
 //  Load Liquid procedures
@@ -59,7 +61,7 @@ excerpt__end
 // Include sub-documents
 // -----------------------------------------------------------------------------
 
-[[readmore]]
+// [[readmore]]
 == What is a static site?
 
 A static site serves the content straight to the user as it is stored on

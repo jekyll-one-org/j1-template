@@ -50,8 +50,8 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment         = site.environment %}
 
-{% assign jg_config_defaults  = apps.defaults.justified_gallery.defaults %}
-{% assign jg_config_settings  = apps.justified_gallery.settings %}
+{% assign jg_config_defaults  = apps.defaults.justifiedGallery.defaults %}
+{% assign jg_config_settings  = apps.justifiedGallery.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}

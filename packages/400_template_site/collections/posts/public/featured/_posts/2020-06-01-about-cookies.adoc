@@ -3,8 +3,8 @@ title:                                  Cookies
 tagline:                                good to know
 date:                                   2020-06-01 00:00:00
 
-tags:                                   [ About, Cookies ]
 categories:                             [ Featured ]
+tags:                                   [ About, Cookies ]
 
 series:
 adsense:                                false
@@ -49,10 +49,9 @@ resource_options:
 // -----------------------------------------------------------------------------
 Is it needed for visitors to know what cookies are about? No doubts, your're
 requested to inform - in Europe for legal reasons. All users visiting web sites
-are bothered all the time to accept on cookies. Cookies are used by sites
-of today. For good reasons?
+are bothered all the time to accept on cookies. For good reasons?
 
-// [role="clearfix mb-3"]
+[role="clearfix mb-3"]
 excerpt__end
 
 //  Load Liquid procedures
@@ -70,7 +69,7 @@ excerpt__end
 // Include sub-documents
 // -----------------------------------------------------------------------------
 
-[[readmore]]
+// [[readmore]]
 == What are cookies technically
 
 In short words. A cookie is a small piece of data that a website asks your
@@ -162,6 +161,7 @@ Third-party cookies are stored by a *different* domain to the visited page.
 This can happen when the webpage references a files located outside its domain.
 Third-party cookies let advertisers or analytics companies track the user's
 browsing history across the web on *any* sites that contain their ads.
+
 
 == Security aspects on using cookies
 

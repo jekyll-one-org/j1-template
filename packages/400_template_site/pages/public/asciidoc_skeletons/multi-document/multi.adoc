@@ -15,7 +15,7 @@ tags:                                   [ Knowledge, Skeleton, Document ]
 permalink:                              /pages/public/skeleton/multi/
 regenerate:                             false
 
-resources:                              [ lightbox, light_gallery, justified_gallery ]
+resources:                              [ lightbox, lightGallery, justifiedGallery ]
 resource_options:
   - toccer:
       collapseDepth:                    4

@@ -16,7 +16,7 @@ tags:                                   [ Knowledge, Skeleton, Book ]
 permalink:                              /pages/public/skeleton/book/
 regenerate:                             false
 
-resources:                              [ lightbox, light_gallery, justified_gallery ]
+resources:                              [ lightbox, lightGallery, justifiedGallery ]
 resource_options:
   - toccer:
       collapseDepth:                    4

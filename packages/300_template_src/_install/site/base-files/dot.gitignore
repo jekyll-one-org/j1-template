@@ -14,6 +14,8 @@ Gemfile.lock
 
 Passengerfile.json
 
+google*.html
+
 tmp/
 
 \.bundle/
@@ -30,6 +32,8 @@ tmp/
 
 **/*.log
 
+**/*.current
+
 **/*.swp
 
 **/*_backup
@@ -38,7 +42,7 @@ tmp/
 # Never publish your sensitive personal and/or OAuth
 # data to any repo - not to public, not to any private.
 # ------------------------------------------------------------------------------
-.env
+private.yml
 
 
 # Unneeded files for the generated site

@@ -154,9 +154,9 @@ settings:
                   target:               _blank
                   rel:                  noopener noreferrer
 
-              - name:                   Jekyll Tips
+              - name:                   CloudCannon
                 link:
-                  title:                Jekyll Tips
+                  title:                Jekyll Tips on CloudCannon
                   tagline:              Learn from experts
                   href:                 http://jekyll.tips/
                   target:               _blank

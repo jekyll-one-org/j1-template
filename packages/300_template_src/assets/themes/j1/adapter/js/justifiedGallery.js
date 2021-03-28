@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/justified_gallery.js
+ # ~/assets/themes/j1/adapter/js/justifiedGallery.js
  # Liquid template to create the J1 Adapter for Justified Gallery
  #
  # Product/Info:
@@ -37,8 +37,8 @@ regenerate:                             true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign jf_gallery_defaults   = apps.defaults.justified_gallery.defaults %}
-{% assign jf_gallery_settings   = apps.justified_gallery.settings %}
+{% assign jf_gallery_defaults   = apps.defaults.justifiedGallery.defaults %}
+{% assign jf_gallery_settings   = apps.justifiedGallery.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -51,7 +51,7 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/justified_gallery.js
+ # ~/assets/themes/j1/adapter/js/justifiedGallery.js
  # JS Adapter for JustifiedGallery
  #
  # Product/Info:

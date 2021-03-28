@@ -20,7 +20,7 @@ regenerate:                             false
 
 resources:                              [
                                           clipboard, rouge, carousel, lightbox,
-                                          justified_gallery, light_gallery
+                                          justifiedGallery, lightGallery
                                         ]
 resource_options:
   - attic:

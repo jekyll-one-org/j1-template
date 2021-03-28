@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# ~/_data/apps/justified_gallery.yml
+# ~/_data/apps/justifiedGallery.yml
 # User configuration for J1 Justified Gallery (jg)
 #
 # Product/Info:
@@ -18,7 +18,7 @@ about_config:
 
   title:                                Justified Gallery
   scope:                                User settings
-  location:                             _data/apps/justified_gallery.yml
+  location:                             _data/apps/justifiedGallery.yml
 
 # ------------------------------------------------------------------------------
 # User configuration settings
