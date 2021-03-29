@@ -18,6 +18,10 @@ end::tags[]
 // DATA, local references to data elements (asciidoc extensions)
 // -----------------------------------------------------------------------------
 tag::data[]
+
+:data-kickstart-wiad--static-web-access:          "collections/blog/featured/static-web-access.png, Accessing scheme for a static web"
+:data-kickstart-wiad--dynamic-web-access:         "collections/blog/featured/dynamic-web-access.png, Accessing scheme for a CMS (dynamic web)"
+
 end::data[]
 
 // DOCUMENTS, local document resources (macro include::)
