@@ -141,15 +141,14 @@ And offers a lot of great features!
 
 A slider or carousel typically is used for displaying images but the
 implementation for J1 Template support a lot more sources to be displayed
-as a slide show: simple text, for example.
+as a slide show. For example: *simple text*.
 
 .Simple text carousel
 carousel::demo_text_carousel[role="mb-3"]
 
 Important statements or topics can be placed e.g. on top of an article or a
 paragraph to give them better visibility. In one line, you can present
-a bunch of facts to know animated for the reader's attention within as single
-line - no much space is needed.
+a bunch of facts to know animated for the reader's attention.
 
 === Parallax Text Carousel
 

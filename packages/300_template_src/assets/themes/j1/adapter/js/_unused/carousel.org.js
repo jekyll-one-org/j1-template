@@ -191,30 +191,6 @@ j1.adapter['carousel'] = (function (j1, window) {
                 // set space between the slides
                 $('head').append('<style>.{{slider_id}}-item{margin: {{slide_space}}px;}</style>');
 
-                // place additional text carousel styles (border/margin)
-                {% unless parallax %} {% if slider_type == 'text' %}
-                  $('head').append('<style>#{{slider_id}}{border-left: 3px solid #0072ff;}</style>');
-                  // wait until carousel has been initialized
-                  var dependency_met_owl_initialized = setInterval (function () {
-                    if ($('#{{slider_id}} > .owl-wrapper-outer').length) {
-                      {% if font_size %}
-                      $('head').append('<style>#{{slider_id}}{font-size:{{font_size}}}</style>');
-                      {% else %}
-                      $('head').append('<style>#{{slider_id}}{font-size:1.5rem}</style>');
-                      {% endif %}
-
-                      {% if font_weight %}
-                      $('head').append('<style>#{{slider_id}}{font-weight:{{font_weight}}}</style>');
-                      {% else %}
-                      $('head').append('<style>#{{slider_id}}{font-weight:400}</style>');
-                      {% endif %}
-
-                      $('#{{slider_id}} > .owl-wrapper-outer').addClass('ml-3');
-                      clearInterval(dependency_met_owl_initialized);
-                    }
-                  }, 25); // END dependency_met_owl_initialized
-                {% endif %} {% endunless %}
-
                 // place additional parallax styles if enabled
                 {% if parallax %}
 

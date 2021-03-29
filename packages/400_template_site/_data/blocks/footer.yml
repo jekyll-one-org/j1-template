@@ -156,7 +156,7 @@ settings:
 
               - name:                   CloudCannon
                 link:
-                  title:                Jekyll Tips on CloudCannon
+                  title:                Jekyll Tips at CloudCannon
                   tagline:              Learn from experts
                   href:                 http://jekyll.tips/
                   target:               _blank
