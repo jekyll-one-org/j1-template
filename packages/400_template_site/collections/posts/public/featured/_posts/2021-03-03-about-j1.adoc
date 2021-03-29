@@ -1,7 +1,7 @@
 ---
-title:                                  About J1
+title:                                  J1 Template
 tagline:                                first version is out
-date:                                   2021-01-02 00:00:00
+date:                                   2021-03-03 00:00:00
 
 categories:                             [ Featured ]
 tags:                                   [ About, J1 ]

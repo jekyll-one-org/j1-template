@@ -1,0 +1,104 @@
+---
+title:                                  Site Generators
+tagline:                                top open source tools
+date:                                   2021-03-01 00:00:00
+
+tags:                                   [ Jekyll, Generators ]
+categories:                             [ Featured ]
+
+series:
+adsense:                                false
+image:                                  /assets/images/modules/attics/machine-generator-1920x1280.jpg
+toc:                                    true
+
+regenerate:                             false
+
+resources:                              []
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/modules/attics/machine-generator-1920x1280.jpg
+          alt:                          Photo by Isis Françal on Unsplash
+#         caption:
+#           text:                       Photo by Isis Françal on Unsplash
+#           href:                       https://unsplash.com/@isisfra
+          badge:
+            type:                       unsplash
+            author:                     Isis França
+            href:                       https://unsplash.com/@isisfra
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+// Place an excerpt at the most top position
+// -----------------------------------------------------------------------------
+This article highlights top OpenSource projects providing static site
+generators, in many different programming languages. And Jekyll is only one of
+them. Have a look if an flull-blown CMS is (really) needed for your project!
+
+// [role="clearfix mb-3"]
+excerpt__end
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents
+// -----------------------------------------------------------------------------
+
+[[readmore]]
+== Static Site Generators
+
+[role="mb-3"]
+image::/assets/images/collections/blog/featured/markus-spiske-2.jpg[{{page.title}}]
+
+A typical CMS driven website works by building each and every page dynamically.
+That means fetching the content from a database to pass them over to a template
+system for adding the required structure information (e.g. CSS styles).
+This means each page is assembled on demand.
+
+=== Is an CMS needed?
+
+For many, many websites dynamic page generation is entirely unnecessary and
+adds unwanted risks in terms of complexity, performance losses and security
+issues. After all, the content of most websites changes only, when the content
+authors make changes. Why the hell should a web page always assembled on
+demand if there are no changes?
+
+NOTE: To be fair, most CMS are providing caching systems for web pages to
+prevent unnecessary creation processes. It is not easy to implement such
+a caching strategy, and in the very end, it adds the next level of
+complexity.
+
+A Static Site Generator takes a different approach and generates all the pages
+of the website upfront. That does not necessarily mean that a static website
+is always built from scratch. Modern generators support a so-called
+incremental build; like Jekyll does. When there are changes detected to the
+content, only selected pages will rebuild.
+
+This means overall, statically build web pages having no moving parts in the
+deployed website. This results in browser-side caching only, the performance
+goes up, and static sites are far more secure because they build already.
+To find out what OpenSource Static Site Generators are available today and
+their ranking in terms of popularity go for Jamstack You'll find the most
+complete list of generators used today.
+
+Check with {url-jamstack--generators}[Jamstack, {browser-window--new}]!
