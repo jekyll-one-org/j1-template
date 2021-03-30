@@ -10,7 +10,7 @@ categories:                             [ Legal, Info ]
 
 toc:                                    false
 fam:                                    false
-fam_menu_id:                            page_ctrl
+fam_menu_id:                            page_ctrl_simple
 scrollbar:                              false
 indexed:                                false
 exclude_from_search:                    true
@@ -37,7 +37,7 @@ resource_options:
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
 :disclaimer:                            true
-
+:legal-warning:                         true
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
 {% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
@@ -50,8 +50,10 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+ifeval::[{legal-warning} == true]
 WARNING: This document *does not* constitute any *legal advice*. It is
 highly recommended to verify legal aspects and implications.
+endif::[]
 
 // Include sub-documents
 // -----------------------------------------------------------------------------

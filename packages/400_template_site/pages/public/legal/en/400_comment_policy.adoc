@@ -5,14 +5,14 @@ date:                                   2021-03-30 00:00:00
 description: >
                                         First things first: We love comments and appreciate the time that our
                                         visitors spend to share ideas and give feedback. Thank you to everyone
-                                        who comments at Jekyll One.
+                                        who comments at {j1--site-name}.
 
 tags:                                   [ Comments ]
 categories:                             [ Policy, Info ]
 
 toc:                                    true
 fam:                                    true
-fam_menu_id:                            page_ctrl
+fam_menu_id:                            page_ctrl_simple
 scrollbar:                              false
 indexed:                                false
 comments:                               true
@@ -63,12 +63,12 @@ resource_options:
 
 First things first: We love comments and appreciate the time that our
 visitors spend to share ideas and give feedback. Thank you to everyone
-who place a comment at Jekyll One.
+who place a comment at {j1--site-name}.
 
 ifeval::[{disqus} == true]
 To access the public commenting feature you will need to register for
 an account as an individual at _Disqus_. One of the main purposes of
-encouraging comments on Jekyll One is to promote a sense of community.
+encouraging comments on {j1--site-name} is to promote a sense of community.
 
 NOTE: _Disqus_ (/dɪsˈkʌs/) is a blog comment hosting service for web
 sites and online communities that use a networked platform. The company's

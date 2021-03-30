@@ -10,7 +10,7 @@ categories:                             [ Legal, Info ]
 
 toc:                                    true
 fam:                                    false
-fam_menu_id:                            page_ctrl
+fam_menu_id:                            page_ctrl_simple
 scrollbar:                              false
 indexed:                                false
 exclude_from_search:                    true
@@ -36,14 +36,15 @@ resource_options:
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
+:legal-warning:                         true
 
 // Attribute settings for section control
 //
-:cookies:
-:revoke_cookie_consent:
-:delete_cookies:
-:content_permissions:
-:server-logs:
+:cookies:                               true
+:revoke-cookie-consent:                 true
+:delete-cookies:                        true
+:content-permissions:                   true
+:server-logs:                           true
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -57,12 +58,13 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+ifeval::[{legal-warning} == true]
 WARNING: This document *does not* constitute any *legal advice*. It is
 highly recommended to verify legal aspects and implications.
+endif::[]
 
 // Include sub-documents
 // -----------------------------------------------------------------------------
-
 
 The operators of this website take protection of your personal data extremely
 seriously. We treat your personal data as confidential and comply with the
@@ -73,7 +75,7 @@ data. Where personal data (for example a user name, page visits) is collected
 on our website, this is voluntary insofar as is possible. This data is never
 disclosed to third parties without your express consent.
 
-ifdef::cookies[]
+ifeval::[{cookies} == true]
 == Cookies
 
 A cookie is a commonly used automated data collection method. Cookies are
@@ -124,7 +126,7 @@ existing cookies from your browser.
 endif::[]
 
 
-ifdef::revoke_cookie_consent[]
+ifeval::[{revoke-cookie-consent} == true]
 == Revoke Cookie Consent
 
 If you do *not* wish to receive *cookies* anymore from *this site*, you can
@@ -201,7 +203,7 @@ all cookies left.
 ++++
 endif::[]
 
-ifdef::delete_cookies[]
+ifeval::[{delete-cookies} == true]
 == Delete cookies
 
 If you have previously visited our website -- or any pages this
@@ -249,7 +251,7 @@ deleted.
 ++++
 endif::[]
 
-ifdef::server-logs[]
+ifeval::[{server-logs} == true]
 == Server log files
 
 We gather certain information automatically by our webservers and store it in
@@ -274,7 +276,7 @@ upon your web browsing activity also use HTML5 to collect and store information.
 Various browsers may offer their own management tools for removing HTML5.
 endif::[]
 
-ifdef::google-analytics[]
+ifeval::[{google-analytics} == true]
 == Use of Google Analytics
 
 This website uses Google Analytics, a web analytics service provided by:
@@ -312,7 +314,7 @@ from the following link: http://tools.google.com/dlpage/gaoptout?hl=de
 endif::[]
 
 
-ifdef::facebook[]
+ifeval::[{facebook} == true]
 == Use of Facebook Plug-ins
 
 We have integrated plug-ins (Like-Button) by the social network *Facebook*,
@@ -346,7 +348,7 @@ please log out of your Facebook account before visiting our website.
 endif::[]
 
 
-ifdef::twitter[]
+ifeval::[{twitter} == true]
 == Use of Twitter
 
 We have integrated functions by the service provider Twitter into our website.
@@ -370,7 +372,7 @@ settings in your account settings at http://twitter.com/account/settings.
 endif::[]
 
 
-ifdef::instagram[]
+ifeval::[{instagram} == true]
 == Use of Instagram
 
 Auf unseren Seiten sind Funktionen des Dienstes Instagram eingebunden. Diese
@@ -393,8 +395,7 @@ Weitere Informationen hierzu finden Sie in der
 http://instagram.com/about/legal/privacy/[Datenschutzerklärung von Instagram, window="_blank"].
 endif::[]
 
-
-ifdef::youtube[]
+ifeval::[{youtube} == true]
 == Use of YouTube
 
 Unsere Webseite nutzt Plugins der von Google betriebenen Seite *YouTube*.
