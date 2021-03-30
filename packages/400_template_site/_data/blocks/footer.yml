@@ -71,36 +71,48 @@ settings:
               type:                     copyright
               statement:                J1 · Copyright © 2021 · All rights reserved
               href:                     /pages/public/legal/en/copyright/
+
           - name:                       Impress
             legal:
               enabled:                  true
               type:                     impress
               statement:                Impress
               href:                     /pages/public/legal/en/impress/
+
           - name:                       Terms Of Use
             legal:
               enabled:                  false
               type:                     terms
               statement:                Terms Of Use
               href:                     /pages/public/legal/en/terms_of_use/
+
           - name:                       Privacy
             legal:
               enabled:                  true
               type:                     privacy
               statement:                Privacy
               href:                     /pages/public/legal/en/privacy/
+
           - name:                       License
             legal:
               enabled:                  true
               type:                     license
               statement:                License
               href:                     /pages/public/legal/en/license_agreement/
+
           - name:                       Support
             legal:
               enabled:                  false
               type:                     support
               statement:                Support
               href:                     /pages/public/legal/en/terms_of_use/
+
+          - name:                       Comments
+            legal:
+              enabled:                  true
+              type:                     comments
+              statement:                Comments
+              href:                     /pages/public/legal/en/comment_policy/
 
         # ----------------------------------------------------------------------
         # BOXES

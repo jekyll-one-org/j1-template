@@ -59,5 +59,9 @@
     <li><a href="{{legal_item.legal.href}}">{{legal_item.legal.statement}}</a></li>
   {% endif %}
 
+  {% if legal_item.legal.enabled and legal_item.legal.type == 'comments' %}
+    <li><a href="{{legal_item.legal.href}}">{{legal_item.legal.statement}}</a></li>
+  {% endif %}
+
 {% endfor %}
 </ul>
