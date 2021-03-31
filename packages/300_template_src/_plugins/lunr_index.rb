@@ -99,15 +99,30 @@ module Jekyll
       # or with frontmatter settings (exclude_from_search: true)
       #
       def generate(site)
-        Jekyll.logger.info 'J1 QuickSearch:', 'creating search index ...'
 
         @site = site
+        index_dest = @site.instance_variable_get(:@dest)
+        rebuild = @module_config['rebuild']
+        index_file = index_dest + @module_config['index_file']
+
+        if @module_config['rebuild'] == false
+          if File.exist?(index_file)
+            Jekyll.logger.info 'J1 QuickSearch:', 'recreate index disabled.'
+            # Keep the index file from being cleaned by Jekyll
+            #
+            site.static_files << SearchIndexFile.new(site, site.dest, '/', @module_config['index_file'])
+            return
+          end
+        end
+
+        Jekyll.logger.info 'J1 QuickSearch:', 'creating search index ...'
 
         # gather posts and pages
         #
         items = pages_to_index(site)
         content_renderer = PageRenderer.new(site)
         # index = []
+        # rebuild = @module_config['rebuild']
 
         index_js = open(@lunr_path).read
 

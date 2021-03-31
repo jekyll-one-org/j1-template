@@ -28,6 +28,7 @@ settings:
   enabled:                              true
   placement:                            navbar
   target:                               _blank
+  rebuild:                              false
 
   stopwords_locale:                     en
   min_length:                           3
