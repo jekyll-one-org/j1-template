@@ -111,15 +111,15 @@ gem 'wdm', '>= 0.1.1' if Gem.win_platform?
 #  asciidoctor-rouge output. Currently, older/latest version v1.x is used
 #
 group :jekyll_plugins do
+# gem 'algolia', '~> 2.0', '>= 2.0.4'                                           # New/latest (Jekyll-)Algolia gem
   gem 'asciidoctor', '= 1.5.8'                                                  # See notes!!!
-# gem 'asciidoctor-pdf', '>= 1.5.4'                                             # Needed ???
+# gem 'asciidoctor-pdf', '>= 1.5.4'                                             # Used for PDF creation only
   gem 'asciidoctor-rouge', '>= 0.4.0'
   gem 'jekyll-asciidoc', '>= 3.0.0'
-# gem 'jekyll-algolia', '~> 1.6'                                                # Needed ??? Supported ???
 # gem 'jekyll-feed', ">= 0.15.1"
-# gem 'jekyll-gist', '>= 1.5.0'                                                 # Needed ???, Gist supported asciidoc-extention
+# gem 'jekyll-gist', '>= 1.5.0'                                                 # Needed ???
 # gem 'jekyll-redirect-from', '>= 0.16.0'                                       # Needed ???
-# gem 'jekyll-sass-converter', '>= 2.1.0'                                       # Needed ??? Supported ???
+# gem 'jekyll-sass-converter', '>= 2.1.0'                                       # Used if SASS (file) conversion is enabled
   gem 'jekyll-sitemap', '>= 1.2.0'
   gem 'j1-paginator', '>= 2020.0.2'
 end

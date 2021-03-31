@@ -440,10 +440,10 @@ liquid:
 # PLUGIN configuration
 #
 plugins:
+# - algolia
   - asciidoctor
 # - asciidoctor-pdf
   - jekyll-asciidoc
-# - jekyll-algolia
 # - jekyll-feed
 # - jekyll-gist
 # - jekyll-redirect-from

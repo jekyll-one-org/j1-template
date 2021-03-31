@@ -1,0 +1,53 @@
+See:
+
+* https://bloggie.io/@kinopyo/how-to-fix-ruby-2-7-warning-using-the-last-argument-as-keyword-parameters-is-deprecated
+* https://bugs.ruby-lang.org/issues/16345
+
+== Issue
+
+After upgrading to Ruby 2.7, these warnings are raised:
+
+    warning: Using the last argument as keyword parameters is deprecated
+
+e.g. for  execjs v2.7.0 on Windows.
+
+=== Background
+
+In Ruby 2.7, the way it handles the positional arguments and keyword
+arguments is changed, aiming to provide a smooth transition to Ruby 3.
+
+The reason why the Ruby team made the change is because the automatic
+conversion "too complex and troublesome". It had caused confusions and
+many bug report tickets in the past. So now we as the developers need
+to code it explicitly.
+
+Learn more from the official ruby doc: Separation of positional and
+keyword arguments in Ruby 3.0:
+
+https://www.ruby-lang.org/en/news/2019/12/12/separation-of-positional-and-keyword-arguments-in-ruby-3-0/
+
+
+== Ways to suppress the warnings for Rails
+
+Many gems have been updated to the newly recommended style.
+
+To temporarily suppress the warnings.
+
+1. Start the rails server with RUBYOPT='-W:no-deprecated' rails s
+2. Set export RUBYOPT='-W:no-deprecated' in your bash/zsh profile
+3. Set Warning[:deprecated] = false in your ruby code
+
+== Set as env var
+
+  export RUBYOPT=""-W:no-deprecated -W:no-experimental"
+
+== Patch version execjs-2.7.0
+
+A new version execjs-2.7.2 is planned but currently NOT available (March 2021).
+To fix the issue, a patched version of the file:
+
+  execjs-2.7.0\lib\execjs\external_runtime.rb
+
+is needed.
+
+See sources at: https://github.com/rails/execjs

@@ -13,7 +13,7 @@ module J1
             c.description 'Generates a starter site scaffold in PATH'
             c.option 'force', '--force', 'Force a site to be created even the PATH already exists'
             c.option 'skip-bundle', '--skip-bundle', "Skip 'bundle install'"
-            c.option "skip-patches", "--skip-patches", "Skip to install any PATCHES buildin with J1"
+            c.option "skip-_patches", "--skip-_patches", "Skip to install any PATCHES buildin with J1"
             c.option "system", "--system", "Run 'bundle install' for the Ruby SYSTEM gem folder"
             c.action do |args, options|
               J1::Commands::Generate.process(args, options)
@@ -93,10 +93,10 @@ module J1
         def after_install(path, options = {})
           unless options['skip-bundle']
             bundle_install(path, options)
-            unless options['skip-patches']
+            unless options['skip-_patches']
               patch_install(options)
             else
-              J1.logger.info "Install patches skipped ..."
+              J1.logger.info "Install _patches skipped ..."
             end
           end
           unless options['force']
@@ -127,28 +127,51 @@ module J1
 
         def patch_install(options)
           if is_windows?
+            major, minor = RUBY_VERSION.split('.')
+            lib_version = major + '.' + minor
             curr_path = File.expand_path(File.dirname(File.dirname(__FILE__)))
-            patch_gem = 'eventmachine-1.2.7-x64-mingw32'
-            patch_source_path = curr_path + '/../patches/rubygems' + '/' + patch_gem + '/lib/2.6'
+            patch_gem_eventmachine = 'eventmachine-1.2.7-x64-mingw32'
+            patch_gem_execjs = 'execjs-2.7.0'
+            patch_eventmachine_source_path = curr_path + '/patches/rubygems' + '/' + patch_gem_eventmachine + '/lib/' + lib_version
+            patch_execjs_source_path = curr_path + '/patches/rubygems' + '/' + patch_gem_execjs + '/lib/execjs/external_runtime.rb'
 
-            J1.logger.info "Install patches in USER gem folder ~/.gem ..."
             process, output = J1::Utils::Exec.run('gem', 'env', 'gempath')
             raise SystemExit unless process.success?
 
             result = output.split(';')
             user_path = result[0]
             system_path = result[1]
+
             if options['system']
+              J1.logger.info "Install patches in SYSTEM folder ..."
               J1.logger.info "Install patches on path #{system_path} ..."
-              dest = system_path + '/gems/' + patch_gem + '/lib'
+              dest = system_path + '/gems/' + patch_gem_eventmachine + '/lib'
             else
+              J1.logger.info "Install patches in USER gem folder ~/.gem ..."
               J1.logger.info "Install patches on path #{user_path} ..."
-              dest = user_path + '/gems/' + patch_gem + '/lib'
+              dest = user_path + '/gems/' + patch_gem_eventmachine + '/lib'
             end
-            src = patch_source_path
+            src = patch_eventmachine_source_path
             FileUtils.cp_r(src, dest)
+
+            if lib_version === '2.7'
+              if options['system']
+#               J1.logger.info "Install patches on path #{system_path} ..."
+                dest = system_path + '/gems/' + patch_gem_execjs + '/lib/execjs'
+              else
+#               J1.logger.info "Install patches on path #{user_path} ..."
+                dest = user_path + '/gems/' + patch_gem_execjs + '/lib/execjs'
+              end
+              src = patch_execjs_source_path
+              FileUtils.cp(src, dest)
+            end
+
           end
         end
+
+        def install_patch(options)
+        end
+
 
       end
     end

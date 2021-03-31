@@ -17,7 +17,7 @@ Mercenary.program(:j1) do |p|
     c.description 'Generates a starter site scaffold in PATH'
     c.option 'force', '--force', 'Force a site to be created even the PATH already exists'
     c.option "skip-bundle", "--skip-bundle", "Skip 'bundle install'"
-    c.option "skip-patches", "--skip-patches", "Skip to install any PATCHES buildin with J1"
+    c.option "skip-_patches", "--skip-_patches", "Skip to install any PATCHES buildin with J1"
     c.option "system", "--system", "Run 'bundle install' for the Ruby SYSTEM gem folder"
     c.action do |args, options|
       J1::Commands::Generate.process(args, options)
