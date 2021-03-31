@@ -42,11 +42,13 @@ settings:
   #
   pagination:
     enabled:                            true
+    rebuild:                            false                                   # currently NOT used
 
   # AUTOPAGE settings
   #
   autopages:
     enabled:                            false
+    rebuild:                            false                                   # currently NOT used
 
 # ------------------------------------------------------------------------------
 # END config

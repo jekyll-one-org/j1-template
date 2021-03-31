@@ -117,11 +117,11 @@ group :jekyll_plugins do
   gem 'asciidoctor-rouge', '>= 0.4.0'
   gem 'jekyll-asciidoc', '>= 3.0.0'
 # gem 'jekyll-feed', ">= 0.15.1"
-# gem 'jekyll-gist', '>= 1.5.0'                                                 # Needed ???
-# gem 'jekyll-redirect-from', '>= 0.16.0'                                       # Needed ???
+# gem 'jekyll-gist', '>= 1.5.0'                                                 # Useful ???
+# gem 'jekyll-redirect-from', '>= 0.16.0'                                       # Useful ???
 # gem 'jekyll-sass-converter', '>= 2.1.0'                                       # Used if SASS (file) conversion is enabled
   gem 'jekyll-sitemap', '>= 1.2.0'
-  gem 'j1-paginator', '>= 2020.0.2'
+  gem 'j1-paginator', '>= 2021.1.0'                                             # New version !!!
 end
 
 # ------------------------------------------------------------------------------

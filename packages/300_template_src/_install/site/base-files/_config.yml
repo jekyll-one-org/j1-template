@@ -526,39 +526,6 @@ whitelist:
 excerpt_separator:                      excerpt__end
 
 # ------------------------------------------------------------------------------
-# PAGINATION settings (Jekyll Paginate V2)
-#
-pagination:
-  enabled:                              true
-  permalink:                            /page:num/
-  per_page:                             4
-  limit:                                0
-  sort_field:                           date
-  sort_reverse:                         true
-  trail:
-    before:                             2
-    after:                              2
-
-# AUTOPAGE settings
-#
-autopages:
-  enabled:                              false
-
-  tags:
-    enabled:                            false
-    layouts:                            [
-                                          paginator/autopage_collections_tags.html,
-                                          paginator/autopage_tags.html
-                                        ]
-  categories:
-    enabled:                            false
-    layouts:                            [ paginator/autopage_category.html ]
-
-  collections:
-    enabled:                            false
-    layouts:                            [ paginator/autopage_collection.html ]
-
-# ------------------------------------------------------------------------------
 # COLLECTION settings
 # See: https://jekyllrb.com/docs/collections/#collections
 #
