@@ -29,6 +29,7 @@ settings:
   placement:                            navbar
   target:                               _blank
   rebuild:                              false
+  full_index:                           false
 
   stopwords_locale:                     en
   min_length:                           3
