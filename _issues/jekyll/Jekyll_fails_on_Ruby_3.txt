@@ -1,0 +1,25 @@
+See: https://github.com/jekyll/jekyll/issues/8523
+
+== Error
+
+  bundle exec jekyll serve fails
+
+== Background
+
+This happens because webrick is no longer a bundled gem in Ruby 3.0.
+From https://www.ruby-lang.org/en/news/2020/12/25/ruby-3-0-0-released/:
+
+The following libraries are no longer bundled gems or standard libraries.
+Install the corresponding gems to use these features.
+
+sdbm
+webrick
+net-telnet
+xmlrpc
+
+== Solution
+
+Adding gem "webrick" to my Gemfile solves the problem, but Jekyll
+should include it in its gemspec.
+
+gem 'webrick', '>=1.7.0'

@@ -30,7 +30,7 @@ about_config:
 #   values:                             true|false (boolean)
 #   default:                            false
 #
-enabled:                                false
+#enabled:                                false
 
 # ------------------------------------------------------------------------------
 # User configuration settings
@@ -42,15 +42,14 @@ settings:
   #
   # enabled
   # ----------------------------------------------------------------------------
-  #   Enables|Disables the use of a gallery
+  #   Enables|Disables the use of a pagination
   #
-  # notebook_path
+  # title
   # ----------------------------------------------------------------------------
-  #   All data items displayed by a gallery are being read from a
-  #   JSON file automatically generated from that configuration.
+  #   Customizable (pagination) page title
   #
   #   values:                           string
-  #   default:                          /assets/data/jupyther/notebooks
+  #   default:                          :title - page :num
   #
 
   # ----------------------------------------------------------------------------
@@ -59,7 +58,7 @@ settings:
   pagination:
     enabled:                            false
 
-    title:                              :title                                  # currently NOT used
+    title:                              :title
     rebuild:                            true                                    # currently NOT used
 
     permalink:                          /page:num/

@@ -30,14 +30,14 @@ about_config:
 #   values:                             true|false (boolean)
 #   default:                            false
 #
-enabled:                                true
+#enabled:                                true
 
 # ------------------------------------------------------------------------------
 # User configuration settings
 #
 settings:
 
-  # ------------------------------------------------------------------------------
+  # ----------------------------------------------------------------------------
   # PAGINATION settings
   #
   pagination:

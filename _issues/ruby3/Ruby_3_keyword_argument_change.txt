@@ -1,0 +1,15 @@
+See:  https://github.com/instacart/makara/pull/283
+
+== Issue (e.g. asciidoctor-rouge)
+
+C:/Users/jadams/.gem/ruby/3.0.0/gems/asciidoctor-rouge-0.4.0/lib/asciidoctor/rouge/treeprocessor.rb:30:in
+`initialize': asciidoctor: FAILED: <stdin>: Failed to load AsciiDoc document -
+wrong number of arguments (given 1, expected 0) (ArgumentError)
+
+== Background
+
+Because of how much method delegation and metaprogramming this gem uses,
+there were a number of issues due to the Ruby 3 keyword argument change.
+
+Most are resolvable by adding ruby2_keywords, but the stuff using
+instance_eval is a bit more involved.
