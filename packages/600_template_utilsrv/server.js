@@ -149,6 +149,7 @@ const current_logFile     = log_home + '/' + logFolder + '/' + 'messages.current
 const util_srv_url        = ssl ? 'https://' +  origin + ':' +  port : 'http://' +  origin + ':' +  port;
 const thread_id           = generateId (11);
 const page                = '/util_srv';
+const isWin               = process.platform === "win32";
 
 // -----------------------------------------------------------------------------
 // logger settings
@@ -244,25 +245,30 @@ catch (e) {
   touch(logFileNamePath);
 }
 
-// (Re-)Create symlink to current logfile
+// symlinks on Windows are only supported by elevated user rights
 //
-fs.unlink(current_logFile, (err => {
-  if (err) {
-    fs.symlink (
-        logFileNamePath,
-        current_logFile,
-        function (err) { console.log(err || 'Symlink to current log created.'); }
-    );
-  } else {
-    // See: https://stackoverflow.com/questions/29777506/create-relative-symlinks-using-absolute-paths-in-node-js
-    //
-    fs.symlink (
-        logFileNamePath,
-        current_logFile,
-        function (err) { console.log(err || 'Symlink to current log re-created.'); }
-    );
-  }
-}));
+if (isWin === false) {
+  // (Re-)Create symlink to current logfile
+  //
+  fs.unlink(current_logFile, (err => {
+    if (err) {
+      fs.symlink (
+          logFileNamePath,
+          current_logFile,
+          function (err) { console.log(err || 'Symlink to current log created.'); }
+      );
+    } else {
+      // See: https://stackoverflow.com/questions/29777506/create-relative-symlinks-using-absolute-paths-in-node-js
+      //
+      fs.symlink (
+          logFileNamePath,
+          current_logFile,
+          function (err) { console.log(err || 'Symlink to current log re-created.'); }
+      );
+    }
+  }));
+}
+
 
 // check if logs should be appended
 //

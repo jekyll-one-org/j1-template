@@ -1,0 +1,19 @@
+See:
+
+* https://security.stackexchange.com/questions/10194/why-do-you-have-to-be-an-admin-to-create-a-symlink-in-windows
+* https://www.howtogeek.com/howto/16226/complete-guide-to-symbolic-links-symlinks-on-windows-or-linux/
+* https://www.wintellect.com/non-admin-users-can-now-create-symlinks-windows-10/
+* https://blogs.windows.com/windowsdeveloper/2016/12/02/symlinks-windows-10/#oY8xkzvmiRr4M6ue.97
+
+
+How to use Symlinks
+Symlinks are created either using the mklink command or the CreateSymbolicLink API
+
+mklink
+
+There is no change in how to call mklink.  For users who have
+Developer Mode enabled, the mklink command will now successfully
+create a symlink if the user is not running as an administrator.
+
+
+https://docs.microsoft.com/en-us/windows/apps/get-started/enable-your-device-for-development

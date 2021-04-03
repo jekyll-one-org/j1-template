@@ -76,7 +76,6 @@
     "reset:clean-files": "npm --silent run clean",
     "reset:clean": "echo Remove js modules from all packages .. && lerna clean --yes",
     "reset:done": "echo done.",
-    "setup:files": "echo Create starter config files .. && lerna run --parallel jekyll_files",
     "setup:node-modules": "echo Bootstrap project modules .. && echo J1 Project modules: >> install.log && npm install --silent >> install.log && echo done.",
     "setup:lerna": "echo Initialize development packages .. && lerna init && lerna bootstrap && echo done.",
     "setup:detect-os": "echo Detect operating system .. && cross-var cross-env if-env OS=Windows_NT && cross-var echo \"OS detected as: $OS\" || OS=$(echo $(getos)) && echo \"OS detected as: $OS\"",
