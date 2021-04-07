@@ -52,7 +52,7 @@
   "scripts": {
     "app": "run-p -s app:*",
     "app:rackup": "cross-env SINATRA_ACTIVESUPPORT_WARNING=false WEBSERVER=$npm_package_jekyll_opt_webserver INTERFACE=$npm_package_jekyll_opt_interface PORT=$npm_package_jekyll_opt_app_port j1 rackup",
-    "app:jekyll": "cross-var cross-env JEKYLL_ENV=$npm_package_config_mode BUNDLE_GEMFILE=$npm_package_ruby_gemfile bundle exec jekyll s -c $npm_package_jekyll_configfile $npm_package_jekyll_opt_incremental",
+    "_app:jekyll": "cross-var cross-env JEKYLL_ENV=$npm_package_config_mode BUNDLE_GEMFILE=$npm_package_ruby_gemfile bundle exec jekyll s -c $npm_package_jekyll_configfile $npm_package_jekyll_opt_incremental",
     "app:open": "npm run delay-3s && cross-var opn $npm_package_jekyll_opt_app_url",
     "algolia": "cross-env ALGOLIA_API_KEY=$npm_package_algolia_admin_key bundle exec jekyll algolia",
     "algolia-check": "cross-env ALGOLIA_API_KEY=$npm_package_algolia_admin_key bundle exec jekyll algolia --dry-run --verbose",
@@ -78,7 +78,8 @@
     "build": "run-s -s jekyll_build:*",
     "postbuild": "run-s -s jekyll_post_build:*",
     "lint": "run-s -s lint:*",
-    "lint:link_es_conf": "shx rm -f _site/assets/themes/j1/adapter/js/.eslintrc.json && lnk -s .eslintrc.json _site/assets/themes/j1/adapter/js",
+    "_lint:link_es_conf": "shx rm -f _site/assets/themes/j1/adapter/js/.eslintrc.json && lnk -s .eslintrc.json _site/assets/themes/j1/adapter/js",
+    "lint:cp-es-lint-conf": "shx rm -f _site/assets/themes/j1/adapter/js/.eslintrc.json && cp .eslintrc.json _site/assets/themes/j1/adapter/js",
     "lint:adapter_js": "eslint --color _site/assets/themes/j1/adapter/js/*.js",
     "rebuild": "run-s -s rebuild:*",
     "rebuild:clean": "bundle exec jekyll clean",

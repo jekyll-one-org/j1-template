@@ -15,7 +15,7 @@ module J1App
 
     # Sinatra extension 'sinatra-cross_origin' to enable CORS
     # See: https://github.com/britg/sinatra-cross_origin
-    # Resource Sharing (CORS).
+    # Resource Sharing (CORS). 
     # See more on cross domain resource sharing with:
     #   https://developer.mozilla.org/En/HTTP_access_control
     # --------------------------------------------------------------------------
@@ -29,10 +29,10 @@ module J1App
     # NOTE: for the static content 'Access-Control-Allow-Origin'
     # is NOT needed
     # --------------------------------------------------------------------------
-    before do
-      response.headers['Access-Control-Allow-Origin']   = '*'
-      response.headers['X-Powered-By']                  = 'J1 Template'
-    end
+    # before do
+    #   response.headers['Access-Control-Allow-Origin']   = '*'
+    #   response.headers['X-Powered-By']                  = 'J1 Template'
+    # end
 
     # OPTION BLOCK for Sinatra extension 'sinatra-cross_origin'
     # Send a HTTP 200 response on the CORS preflight request (browser)

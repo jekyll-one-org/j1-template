@@ -88,8 +88,12 @@ module J1App
     # ==========================================================================
     # Initialize J1 logger settings
     # ==========================================================================
-    uuid = UUID.new.generate
-    page_id = uuid[25, 37]
+#   uuid = UUID.new.generate
+#   page_id = uuid[25, 37]
+
+    chars = [('a'..'z'), ('A'..'Z'), ('0'..'9')].map(&:to_a).flatten
+    page_id = (0...11).map { chars[rand(chars.length)] }.join
+
     MDC.put('pageID', page_id)
     MDC.put('path', '/')
 

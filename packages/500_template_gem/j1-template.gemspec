@@ -89,6 +89,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'sinatra', '~> 2.0'
 # spec.add_runtime_dependency 'sinatra-cross_origin', '~> 0.3.1'                # currently NOT used
+  spec.add_runtime_dependency 'sinatra-cross_origin', '~> 0.3.1'
 
   spec.add_runtime_dependency 'warden', '~> 1.2'
 
