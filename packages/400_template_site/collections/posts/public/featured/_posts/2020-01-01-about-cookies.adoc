@@ -47,9 +47,9 @@ resource_options:
 
 // Place an excerpt at the most top position
 // -----------------------------------------------------------------------------
-Is it needed for visitors to know what cookies are about? No doubts, your're
-requested to inform - in Europe for legal reasons. All users visiting web sites
-are bothered all the time to accept on cookies. For good reasons?
+Is it needed for visitors to know what cookies are about? No doubts, you're
+requested to inform - in Europe for legal reasons. All users visiting websites
+are bothered all the time to accept cookies. For good reasons?
 
 [role="clearfix mb-3"]
 excerpt__end
@@ -72,7 +72,7 @@ excerpt__end
 // [[readmore]]
 == What are cookies technically
 
-In short words. A cookie is a small piece of data that a website asks your
+In short: a  cookie is a small piece of data that a website asks your
 browser to store on your computer or mobile device. The cookie allows the
 website to "remember" your actions or preferences over time. All modern
 browsers support cookies, but users can set their browsers to decline them
@@ -87,35 +87,35 @@ General information storage::
 Remember users' custom preferences
 
 Support::
-Help users complete tasks without having to re‑enter information
-when browsing from one page to another or when visiting the site later.
+Help users complete tasks without re-entering information when browsing from
+one page to another or when visiting the site later.
 
-Track behavioural::
-Cookies can also be used for online behavioural target advertising and to
+Track behavioral::
+Cookies can also be used for online behavioral target advertising and to
 show adverts relevant to something that the user searched for in the past.
-The web server supplying the webpage can store a cookie on the user's
+The webserver supplying the webpage can store a cookie on the user's
 computer or mobile device.
 
-All these cookies are called http header cookies. Another way of storing
-cookies is through JavaScript code contained or referenced in that page.
-Each time the user requests a new page, the web server can receive the
+All these cookies are called HTTP header cookies. Another way of storing
+cookies is through JavaScript code contained or referenced on that page.
+Each time the user requests a new page, the webserver can receive the
 values of the cookies it previously set and return the page with content
-relating to these values. Similarly, JavaScript code is able to read a
-cookie belonging to its domain and perform an action accordingly.
+relating to these values. Similarly, JavaScript code can read a
+cookie belonging to its domain and act accordingly.
 
 .How are they used
 [NOTE]
 ====
 The web server supplying the webpage can store a cookie on the user's
-computer or mobile device. An external web server that manages files included
-or referenced in the webpage is also able to store cookies. All these
-cookies are called http header cookies. Another way of storing cookies is
-through JavaScript code contained or referenced in that page.
+computer or mobile device. An external web server that manages files
+included or referenced in the web page can store cookies. All these
+cookies are called HTTP header cookies. Another way of storing cookies
+is through JavaScript code contained or referenced on that page.
 
 Each time the user requests a new page, the web server can receive the
 values of the cookies it previously set and return the page with content
-relating to these values. Similarly, JavaScript code is able to read a
-cookie belonging to its domain and perform an action accordingly.
+relating to these values. Similarly, JavaScript code can read a
+cookie belonging to its domain and act accordingly.
 ====
 
 == Types of cookies
@@ -123,7 +123,7 @@ cookie belonging to its domain and perform an action accordingly.
 HTTP cookies are essential to the modern Internet but potentially a
 vulnerability to your privacy. As a necessary part of web browsing, cookies
 help web developers give you more personal, convenient website visits.
-Cookies let websites remember you, your website logins, shopping carts and
+Cookies let websites remember you, your website logins, shopping carts, and
 more. But they can also be a treasure trove of private info for criminals
 to spy on.
 
@@ -151,38 +151,38 @@ period of time.
 Cookies classified by the *domain* to which it belongs, are either of:
 
 First-party cookie::
-First-party cookie cookies are set by the web server of the visited page
-and share the *same domain* you're visting. These are generally safer, as
+First-party cookie cookies are set by the webserver of the visited page
+and share the *same domain* you're visiting. These are generally safer, as
 long as users are browsing reputable websites or ones that have not been
 compromised.
 
 Third-party cookies::
 Third-party cookies are stored by a *different* domain to the visited page.
-This can happen when the webpage references a files located outside its domain.
+This can happen when the webpage references a file located outside its domain.
 Third-party cookies let advertisers or analytics companies track the user's
 browsing history across the web on *any* sites that contain their ads.
 
 
 == Security aspects on using cookies
 
-Without cookies the web would not work as it does today. However, since the
-mid 90ies when cookies were invented, the web changed quite a lot and so did
-the attack methods on web applications; as mentioned the internet is not a
+Without cookies, the web would not work as it does today. However, since the
+mid 90ies when cookies were invented, the web changed quite a lot, and so did
+the attack methods on web applications; as mentioned, the Internet is not a
 friendly place.
 
-A well-known attack method is known as Cross Site Request Forgery, or short
+A well-known attack method is known as Cross-Site Request Forgery or short
 *CSRF*. CSRF is an attack, a criminal act, that forces an end user to execute
-unwanted actions. Cookie may play a *role* in such scenarios but they are
-not generally *unsafe*. If you want you can read more about that in the
+unwanted actions. A cookie may play a *role* in such scenarios, but they are
+not generally *unsafe* if you want, you can read more about that on the
 CRSF Page on {url-owasp-attacks--csrf}[OWASP, {browser-window--new}].
 
 == How to control cookies
 
 Users can take control, used or *not* used, or delete cookies. For more
 details, see {url-about-cookies--home}[AboutCookies]. You can delete
-all cookies that are already on your computer and you can set most
+all cookies that are already on your computer, and you can set most
 browsers to prevent them from being placed.
 
 If you do this, however, you may have to manually adjust some preferences
-every time you visit a site and some services and functionalities may not
+every time you visit a site, and some services and functionalities may not
 work.

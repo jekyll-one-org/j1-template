@@ -8,8 +8,12 @@ description: >
                                         take on an important role of acting not only as plain text but will also serve
                                         as something like images.
 
-tags:                                   [ Roundtrip, Introduction ]
 categories:                             [ Typography, Module ]
+tags:                                   [ Roundtrip, Introduction ]
+
+
+comments:                               true
+fam_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/learn/roundtrip/typography/
 regenerate:                             false
@@ -250,3 +254,5 @@ J1 Template supports popular icons font sets like:
 
 Would you like learn more about icons? The next example page focus on what's
 possible using link:{roundtrip-icon-fonts}[icon fonts, {browser-window--new}].
+
+== Leave a comment

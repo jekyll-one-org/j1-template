@@ -2,7 +2,7 @@
 
 Code snippets may helpful to support your readers for existing code examples.
 An excellent place for code snippets is Gist at Github. To embed an existing
-gist into your documents, the Asciidoc extention *Gist block* provides the
+gist into your documents, the Asciidoc Extention *Gist block* provides the
 block macro `gist::` to do so.
 
 The following gist snippet is taken from {asciidoc-extensions-gist-example}[this example, window="_blank"]:

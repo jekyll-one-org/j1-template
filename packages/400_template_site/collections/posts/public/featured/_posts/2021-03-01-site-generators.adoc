@@ -43,8 +43,9 @@ resource_options:
 // Place an excerpt at the most top position
 // -----------------------------------------------------------------------------
 This article highlights top OpenSource projects providing static site
-generators, in many different programming languages. And Jekyll is only one of
-them. Have a look if an flull-blown CMS is (really) needed for your project!
+generators in many different programming languages. And Jekyll is only
+one of them. Have a look if a full-blown CMS is (really) needed for your
+project!
 
 // [role="clearfix mb-3"]
 excerpt__end
@@ -70,10 +71,10 @@ excerpt__end
 // [role="mb-3"]
 // image::/assets/images/collections/blog/featured/markus-spiske-2.jpg[{{page.title}}]
 
-A typical CMS driven website works by building each and every page
+A typical CMS-driven website works by building each and every page
 *dynamically*. That means fetching the content from a database to pass them
 over to a template system (engine) to load the page content, adding the
-required structure information (e.g. CSS styles) and Javascript components if
+required structure information (e.g., CSS styles) and Javascript components if
 needed. This means every page is assembled *on demand*.
 
 .Accessing scheme for a CMS (dynamic web)
@@ -87,21 +88,21 @@ callout::5["Static content (Images, Videos, JS- and CSS files) and Caches", ml-2
 
 == Is a CMS needed?
 
-For many, many websites dynamic page generation is entirely unnecessary and
-adds unwanted risks in terms of complexity, performance losses and security
-issues. After all, the content of most websites changes only, when the content
-authors make changes. Why the hell should a web page always assembled on
+For many websites, dynamic page generation is entirely unnecessary and
+adds unwanted risks in terms of complexity, performance losses, and security
+issues. After all, the content of most websites changes, when the content
+authors make changes. Why the hell should a web page always assemble on
 demand if there are no changes?
 
 NOTE: To be fair, most CMS are providing caching systems for web pages to
 prevent unnecessary creation processes. It is not easy to implement such
-a caching strategy, and in the very end it adds the next level of
+a caching strategy, and in the very end, it adds the next level of
 complexity.
 
 A Static Site Generator takes a different approach and generates all the pages
 of the website *upfront*. That does not necessarily mean that a static website
 is always built from scratch. Modern generators support a so-called
-incremental build; like Jekyll does. When there are changes detected to the
+incremental build, as does. When there are changes detected to the
 content, only selected pages will rebuild.
 
 .Accessing scheme for a static web
@@ -115,10 +116,10 @@ callout::3["Server-side rendered (prepared) static content", ml-2 mb-3]
 
 Overall, statically build web pages having no moving parts in the deployed
 website. This results in browser-side caching only, the performance
-goes up, and static sites are far more secure because they are *build already*.
+goes up, and static sites are far more secure because they *build already*.
 To find out what OpenSource Static Site Generators are available today and
-their ranking in terms of popularity go for _Jamstack_ You'll find the most
-complete list of generators used today.
+their ranking in terms of popularity, go for _Jamstack_. You'll find a
+comprehensive list of staic site generators used today.
 
 Check popular static site generators at {url-jamstack--generators}[Jamstack, {browser-window--new}]!
 

@@ -9,10 +9,11 @@ tags:                                   [ Impressum ]
 categories:                             [ Legal, Info ]
 
 toc:                                    false
-fam:                                    false
-fam_menu_id:                            page_ctrl_simple
+fam:                                    true
+fam_menu_id:                            default
 scrollbar:                              false
 indexed:                                false
+comments:                               false
 exclude_from_search:                    true
 
 permalink:                              /pages/public/legal/en/impress/
@@ -36,8 +37,8 @@ resource_options:
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
-:eu-region:                             false
-:legal-warning:                         true
+:eu-region:                             true
+:legal-warning:                         false
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
 {% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
@@ -59,23 +60,27 @@ endif::[]
 // -----------------------------------------------------------------------------
 
 
-ifeval::[eu-region} == true]
+ifeval::[{eu-region} == true]
 .Postal address
 ----
-  Your Name
-  Your Postal Address
+  Jürgen Adams
+
+  Erasmusstrasse 28
+  40223 Düsseldorf
 ----
 endif::[]
 
 .Contact
 ----
-  your@email.domain
+  webmaster@jekyll.one
 ----
 
-ifeval::[eu-region} == true]
+ifeval::[{eu-region} == true]
 .Responsible for the content according to § 55 Abs. 2 RStV:
 ----
-  Your Name
-  Your Postal Address
+  Jürgen Adams
+
+  Erasmusstrasse 28
+  40223 Düsseldorf
 ----
 endif::[]

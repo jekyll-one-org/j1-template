@@ -5,16 +5,18 @@ date:                                   2020-11-04 00:00:00
 description: >
                                         Playing video on web pages seems not that special since you can already
                                         watch videos on web pages through plugins like Flash Player, Quicktime
-                                        or Silverlight.
-                                        A new standard goes to HTML5 Video, a pure HTML way to
+                                        or Silverlight. A new standard goes to HTML5 Video, a pure HTML way to
                                         show video on the web; instead of the previous de facto standard of using
                                         proprietary software.
 
-tags:                                   [ Roundtrip, Introduction ]
 categories:                             [ Video, Modules ]
+tags:                                   [ Roundtrip, Introduction ]
 
 permalink:                              /pages/public/learn/roundtrip/present_videos/
 regenerate:                             false
+
+comments:                               true
+fam_menu_id:                            page_ctrl_simple
 
 resources:                              [
                                           lightGallery, justifiedGallery, video_js,
@@ -69,14 +71,14 @@ resource_options:
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Playing video on web pages seems not that special since you can already
-watch videos on web pages through plugins like _Flash Player_, _Quicktime_
+watch videos on web pages through plugins like _Flash Player_, _Quicktime_,
 or _Silverlight_. A new standard goes to HTML5 Video, a pure HTML way to
-show video on the web; instead of the previous de facto standard of using
+show video on the web, instead of the previous de facto standard of using
 proprietary software.
 
 == Video Galleries
 
-HTML5 Video opens the doors to your way presenting video content. Modern
+HTML5 Video opens the doors to your way of presenting video content. Modern
 browsers support the video tag `<video>` for the HTML5 video standard.
 Browsers have a built-in multimedia framework already for decoding and displaying
 video content. No need to use such proprietary software components anymore!
@@ -86,21 +88,21 @@ LightGallery.
 
 Two types of video sources are supported:
 
-. videos from local files (your web space)
+. videos from local files (your webspace)
 . videos from online sources (on the Internet) like YouTube, Vimeo, etc.
 
 The combination of the App gallery and the lightbox LightGallery is entirely
 usable for all the video content you want to present on your site. Galleries
 can be placed elsewhere with your content. You can use them for video blogs
-by putting them into your blog articles content.
+by putting them into your blog article's  content.
 
-WARNING: LightGallery can be used for free for private use but for
-business use, a commercial license is needed. See link:{light-gallery-license}[Light Gallery license]
-how to use LightGallery for commercial webs and projects.
+WARNING: LightGallery can be used for free for private use, but a commercial
+license is needed for business use. See link:{light-gallery-license}[Light Gallery license]
+how to use LightGallery for commercial websites and projects.
 
 == Local video content
 
-Digital image content, simple pictures or vidoe, are easy to make. Today, each
+Digital image content, simple pictures or videos, are easy to make. Today, each
 and every mobile has a camera - not that bad! Presenting a bunch
 of (digital) pictures is very easy by using Justified Gallery, for example.
 Videos created by a digicam or a mobile can be played by J1 Template using the
@@ -112,17 +114,16 @@ Two players are available with LightGallery:
 . http://videojs.com/[video.js], a excellent Javascript video library
 
 NOTE: The HTML5 specification does _not_ define which video and audio formats
-browsers _should_ support. J1 LightGallery supports all _typical_ types of
-HTML5 Video formats browsers support today such as MP4, WebM, and Ogg.
+browsers _should_ support. J1 LightGallery can play all types of standard
+HTML5 Video formats on modern browsers today (MP4, WebM, and Ogg).
 
-.HTML5 video gallery
 gallery::jg_video_html5[role="mb-5"]
 
 == Online video content
 
 The Internet is full of inspiring content. Video content is popular,
-the number of channels at _YouTube_ is enormous. If you want to present
-video content from the Internet, e.g. your channel, the online video
+the number of channels on _YouTube_ is enormous. If you want to present
+video content from the Internet, e.g., your channel, the online video
 support of J1 Template may be the right choice. Find some enjoyable videos
 from James Cordon's channel: Carpool Karaoke.
 
@@ -134,9 +135,11 @@ gallery::jg_video_online_vimeo[role="mb-5"]
 
 == Whats next
 
-Images and videos are quite visual - and could be impressive, for sure.
+Images and videos are pretty visual. And it can be impressive, for sure.
 But the most visual component is the text for all pages, for all sites on the
 Internet. To see how text could be presented great for modern responsive
 websites, check the section Typography next.
 
 What? Find out how it works. go for: link:{roundtrip-typography}[Typography].
+
+== Leave a comment

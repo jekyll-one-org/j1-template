@@ -11,6 +11,8 @@ tags:                                   [ Roundtrip, Introduction ]
 categories:                             [ Bootstrap, Table, Extension ]
 
 flowtext:                               false
+comments:                               true
+fam_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/learn/roundtrip/responsive_tables/
 regenerate:                             false
@@ -58,7 +60,7 @@ simplicity and portability to be viewed best on all devices and browsers.
 
 == Table types
 
-But, for sure, the solution provided is a compromise. To fit the common needs
+But, for sure, the solution provided is a compromise. To fit the everyday needs
 for tables viewed on desktop and mobile devices, three types of responsive
 tables are implemented:
 
@@ -182,7 +184,7 @@ Post's front matter by specifying a new date/time in the format
 
 === Responsive tables
 
-Responsive tables *rebuilds* a table. The header is set to invisible and
+Responsive tables *rebuild* a table. The header is set to invisible, and
 all columns gets vertically *stacked as rows*.
 
 .Example, R Table using responsive text size
@@ -254,7 +256,7 @@ Responsive Bootstrap tables support tables to be scrolled horizontally
 on smaller viewports. Making any table responsive across all viewports,
 the additional class `rtable` is used. For specific (Bootstrap)
 breakpoints, the classes `rtable{-sm|-md|-lg|-xl}` are available
-to have better control over what viewport sizes table are transformed.
+to better control over what viewport sizes table are transformed.
 From a specified breakpoint and up, the table will behave normally and do
 not scroll horizontally.
 
@@ -410,9 +412,11 @@ the form `#RRGGBB`
 
 == Whats next
 
-Expectedly you've enjoyed exploring all the possibilities J1 offers sofar.
-An interesting feature may using themes. But much, much more can the J1 do
+Expectedly you've enjoyed exploring all the possibilities J1 offers so far.
+An exciting feature may the use of themes. But much, much more can the J1 do
 for your Web Site.
 
-Check out what themes can do. Have a look at link:{roundtrip-themes}[BS themes]
-feature!
+Check out what themes can do. Have a look at the
+link:{roundtrip-themes}[BS themes] feature!
+
+== Leave a comment

@@ -3,16 +3,17 @@ title:                                  Roundtrip
 tagline:                                asciidoc extensions
 date:                                   2020-11-07 00:00:00
 description: >
-                                        J1 Template implements some incubating Ruby-based extensions
-                                        for Asciidoctor. Most extensions are based on the examples
-                                        given with the Asciidoctor Extensions Lab.
-                                        All implemented Asciidoctor Extensions can be found in this article.
-                                        A set of useful extensions to the Markup language Asciidoc are made
-                                        especially for documents of the Jekyll content type pages, but can
-                                        be used for post or collections as well.
+                                        J1 Template implements some incubating Ruby-based
+                                        extensions for Asciidoctor. Most extensions are based
+                                        on the examples given with the Asciidoctor Extensions
+                                        Lab. All implemented Asciidoctor Extensions can be
+                                        found in this article.
 
-tags:                                   [ Roundtrip, Introduction ]
 categories:                             [ Asciidoc, Extension ]
+tags:                                   [ Roundtrip, Introduction ]
+
+comments:                               true
+fam_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/learn/roundtrip/asciidoc_extensions/
 regenerate:                             false
@@ -60,27 +61,27 @@ Most extensions are based on the examples given with the
 If you simply want to use the extensions from this repository, go ahead to
 {asciidoctor-extensions-use-extension}[Using an extension, {browser-window--new}].
 
-To create extensions on your own, it is highly recommended to read first the
+To create extensions on your own, it is highly recommended to read the
 {asciidoctor-user-manual-extensions}[extensions section, {browser-window--new}] in
 the Asciidoctor user manual.
 
 == Asciidoc Extensions
 
-All already implemented Asciidoctor Extensions can be found below. A set of
-additional useful extensions to the Markup language Asciidoc are made
-especially for documents of the Jekyll content type pages (but can be used
-for post or collections as well).
+All already implemented Asciidoctor Extensions can be found below. Additional
+valuable extensions to the Markup language Asciidoc to the Markup language
+Asciidoc are made especially for documents of the Jekyll content type pages
+(but can be used for posts or collections as well).
 
 == Asciidoc Code
 
 J1 Template adds a simple Javascript based on the `View Result Extension` to
 any `listingblock`. The extension adds an interactive toggle button `VIEW`
-to the output of an Asciidoc listingblock box placed to the top right of
+to the output of an Asciidoc listing block box placed to the top right of
 the example box. If a result block `[.result]` is placed under a `listingblock`,
 clicking the toggle button `VIEW` displays (or hide) the content given by the
 `result block`.
 
-The `View Result Extension` is quite useful for example sections discussing
+The `View Result Extension` is quite helpful, for sections discussing
 Asciidoc code and how the resulting (HTML) code would look alike.
 
 .This example place a button `VIEW` top right of the example box
@@ -118,8 +119,8 @@ CAUTION: Icon background-color: red
 == Q&A Blocks
 
 Q&A sections are used quite often to answer popular questions. To make
-such a Q&A section more eye-minded, the additional Admonition Blocks
-`[QUESTION]` and `[ANSWER]` are available for J1 Template as Asciidoctor
+such a Q&A section more eye-minded. The additional Admonition Blocks
+`[QUESTION]` and `[ANSWER]` are available through the J1 Template Asciidoctor
 extensions.
 
 === Question block
@@ -145,7 +146,7 @@ What's the main tool for selecting colors used for J1 Template?
 
 The Admonition Answer block is an extension to the Asciidoc admonition
 block types that introduce an admonition type of answer in conjunction
-to the admonition of type question.
+with the type question's admonition.
 
 .Example of a answer block
 [source, prometheus, role="noclip"]
@@ -165,11 +166,11 @@ You'll find the full color scheme for Material Design.
 
 == Lightboxes
 
-To make the use of the built-in Lightbox easier, J1 Template offers an Asciidoc
-extension: the LightBox block macro. The `lightbox::` block macro embeds one or
-more images into the output document and puts the default Lightbox (lightbox)
-for J1 automatically on. For all images, the `size` (width) and individual
-`caption text` can be configured.
+To make the use of the built-in Lightbox easier, the J1 Template offers an
+Asciidoc extension: the LightBox block macro. The `lightbox::` block macro
+embeds one or more images into the output document and puts the default
+Lightbox for J1 automatically on. For all images, the `size` (width) and
+individual `caption text` can be configured.
 
 .Lightbox Block
 [source, prometheus, role="noclip"]
@@ -182,11 +183,11 @@ NOTE: For a `lightbox::` block, images are placed in the output document
 without any other scaling than in width - they are placed using simple
 HTML `img` tags. This is fine for images that are even in size. For images in
 different sizes, a gallery should be used as a J1 Gallery Apps to rearrange
-images and make them fit at its best for the available space.
+images and make them fit at their best for the available space.
 
 === Standalone Images
 
-For your convenience, and better readability, the image data should be
+For your convenience and better readability, the image data should be
 defined as Asciidoc attributes. The image data is given as a string
 of data pairs:
 
@@ -209,7 +210,7 @@ default asset path for images, a relative path needs to be given for
 `path/to/image`.
 
 WARNING: If an absolute path is configured, like `/path/to/image`, the base
-path gets ignored - this is the default behaviour of the Asciidoc Markup
+path gets ignored - this is the default behavior of the Asciidoc Markup
 processor. If an absolute path is given, the full path to the images
 used has to be configured.
 
@@ -245,7 +246,7 @@ lightbox::images-group[ 400, {data-images-group}, group_name ]
 
 == Icon Fonts
 
-J1 Template comes with full icon support for Asciidoc documents included.
+The J1 Template comes with full icon support for Asciidoc documents included.
 All icon fonts are supported:
 
 * FA (FontAwesome)
@@ -390,17 +391,17 @@ and Twitter Emoji emoji:smile[].
 
 == Blind Text (Lorem)
 
-The Ruby Gem Middleman, a Ruby-gem based static site generator, provides a
-set of powerful helpers for generating random text content. The Lorem
+The Ruby Gem Middleman, a Ruby-based static site generator, provides a
+set of great helpers for generating random text content. The Lorem
 inline macro `lorem:` adapted this functionality from Middleman for the use
 of Asciidoc-based documents processed by Jekyll.
 
 If you start writing larger documents having several chapters, not all of the
 content is available at the beginning. It is quite useful to place blind text
-first to get a better impression how a page will look-alike that is not
+first to get a better impression of how a page will look-alike that is not
 finished yet.
 
-Placeholders for blind text comes in several flavours given by `macro`. The
+Placeholders for blind text comes in several flavors given by `macro`. The
 syntax for the `lorem:` inline macro is simple like this:
 
 [source, prometheus]
@@ -491,13 +492,16 @@ include::{documentdir}/100_gistblock.asciidoc[]
 
 Asciidoc, respectively Asciidoctor, extensions open up the Markup language to
 new use cases. Using the full power of programming languages to extend what's
-needed whether it be Ruby, Java, Groovy or JavaScript. The number of extensions
-will grow - to get handy and powerful functionality that is needed for modern
-web pages based on the Asciidoc Markup language generated by Jekyll. For sure!
+needed, whether it be Ruby, Java, Groovy, or JavaScript. The number of
+extensions will grow - to get handy and powerful functionality that is needed
+for modern web pages based on the Asciidoc Markup language generated by Jekyll.
+For sure!
 
-The next preview is focussing advanced Bootstrap Modals. The modals feature
+The next preview is focussing on advanced Bootstrap Modals. The modals feature
 is currently in beta status, but it is a great option to customize your
 user dialogues using them!
 
 Have a look for the link:{roundtrip-extended-modals}[BS modal extensions]
 feature of J1 Template.
+
+== Leave a comment

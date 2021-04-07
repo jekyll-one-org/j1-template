@@ -15,11 +15,11 @@ fam:                                    true
 fam_menu_id:                            page_ctrl_simple
 scrollbar:                              false
 indexed:                                false
-comments:                               true
+comments:                               false
 exclude_from_search:                    true
 
 permalink:                              /pages/public/legal/en/comment_policy/
-regenerate:                             false
+regenerate:                             true
 
 resources:                              []
 resource_options:
@@ -61,17 +61,18 @@ resource_options:
 // Include sub-documents
 // -----------------------------------------------------------------------------
 
-First things first: We love comments and appreciate the time that our
-visitors spend to share ideas and give feedback. Thank you to everyone
-who place a comment at {j1--site-name}.
+We love comments and appreciate our visitor's time to share ideas and give
+feedback. Thank you to everyone who places a comment on the {j1--site-name}
+website.
 
 ifeval::[{disqus} == true]
-To access the public commenting feature you will need to register for
-an account as an individual at _Disqus_. One of the main purposes of
-encouraging comments on {j1--site-name} is to promote a sense of community.
+To access the public commenting feature, you will need to register for
+an account as an individual at _Disqus_. One of the primary purposes of
+encouraging comments on the {j1--site-name} website is to promote a sense
+of community.
 
-NOTE: _Disqus_ (/dɪsˈkʌs/) is a blog comment hosting service for web
-sites and online communities that use a networked platform. The company's
+NOTE: _Disqus_ (/dɪsˈkʌs/) is a blog comment hosting service for websites
+and online communities that use a networked platform. The company's
 platform includes various features, such as social integration, social
 networking, user profiles, spam and moderation tools, analytics,
 email notifications, and mobile commenting.
@@ -79,10 +80,10 @@ endif::[]
 
 == Discuss with Respect
 
-One of the most important aspects of a useful blog is the conversation
+One of the most important aspects of a helpful blog is the conversation
 that occurs through comments that visitors publish on blog posts. However,
 comment conversations can sometimes take a negative turn or feature spam
-links. That's why it's helpful to have a blog comment policy so visitors
+links. That's why it's helpful to have a blog comment policy. Visitors
 understand what is and is not acceptable when commenting on your blog posts.
 
 == Comments are Welcome
@@ -105,18 +106,16 @@ Comments including profanity will be deleted.
 Roughly language::
 Comments containing language or concepts that could be deemed offensive
 will be deleted. Note this may include abusive, threatening, pornographic,
-offensive, misleading or libelous language.
+offensive, misleading, or libelous language.
 
 Attack::
 Comments that attack an individual directly will be deleted.
 
 Harassing::
 Comments that harass other posters will be deleted. While conversation and
-the sharing of different ideas is encouraged, all comments need to be
+the sharing of different ideas are encouraged, all comments need to be
 respectful towards our contributors and those leaving comments.
 
 Anonymous::
 Anonymous comments will be deleted. We only accept comments from people who
 identify themselves.
-
-== Leave a Comment

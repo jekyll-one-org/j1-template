@@ -13,6 +13,7 @@ fam:                                    false
 fam_menu_id:                            page_ctrl_simple
 scrollbar:                              false
 indexed:                                false
+comments:                               false
 exclude_from_search:                    true
 
 permalink:                              /pages/public/legal/en/privacy/
@@ -36,7 +37,7 @@ resource_options:
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
-:legal-warning:                         true
+:legal-warning:                         false
 
 // Attribute settings for section control
 //
@@ -66,28 +67,28 @@ endif::[]
 // Include sub-documents
 // -----------------------------------------------------------------------------
 
-The operators of this website take protection of your personal data extremely
+The operators of this website take the protection of your personal data extremely
 seriously. We treat your personal data as confidential and comply with the
 data protection legislation and this privacy policy.
 
 It is generally *not* possible to use our website without disclosing personal
-data. Where personal data (for example a user name, page visits) is collected
-on our website, this is voluntary insofar as is possible. This data is never
-disclosed to third parties without your express consent.
+data. Personal data (for example page visits) is collected on our website.
+This is voluntary insofar as possible. This data is never disclosed to third
+parties without your express consent.
 
 ifeval::[{cookies} == true]
 == Cookies
 
 A cookie is a commonly used automated data collection method. Cookies are
-small text files that are placed on your computer or device by websites that
-you visit in order to make websites work, or work more efficiently.
+small text files placed on your computer or device by websites that you
+visit to make websites work or work more efficiently.
 
-We, may our partners, make use of cookies, web beacons, pixel tags, scripts
+We, may our partners, make use of cookies, web beacons, pixel tags, scripts,
 or other similar technologies on our websites to improve the browsing
 experience of our pages:
 
 * Tailor information presented to you based on your browsing preferences,
-  such as language, user account data, selected content and geographical
+  such as language, user account data, selected content, and geographical
   region
 
 * Collect statistics regarding your website usage
@@ -99,7 +100,7 @@ which it belongs.
 Session Cookie::
 Classified by *lifespan*. Necessary to provide you with services and
 features available through our websites for the time of your visit. If you
-leave our pages, these Cookies are automatically deleted by your web browser.
+leave our pages, these cookies are automatically deleted by your web browser.
 Without these cookies, services you may need cannot be provided.
 
 Persistent Cookie::
@@ -113,13 +114,13 @@ We are using both types: Session Cookies *and* Persistent Cookies.
 
 Second-party Cookie::
 Classified by the *domain*. Used to integrate services from *other* sites
-like Github, Patreon, Disqus and others.
+like Github, Disqus, and others.
 
 [NOTE]
 ====
-If you do not wish to receive cookies you may be able to refuse them by
-adjusting your browser settings to reject cookies. If you do so, we may
-*not* unable to offer you *any* of our functionalities, services or support.
+If you do not wish to receive cookies, you may be able to refuse them by
+adjusting your browser settings to reject cookies. If you do so, we may *not*
+able to offer you *any* of our functionalities, services, or support.
 If you have previously visited our websites, you may also have to delete any
 existing cookies from your browser.
 ====
@@ -131,12 +132,11 @@ ifeval::[{revoke-cookie-consent} == true]
 
 If you do *not* wish to receive *cookies* anymore from *this site*, you can
 revoke the cookie consent you've given. Furthermore, you may be able to refuse
-them by adjusting your *browser* settings to *reject on cookies*.
+them by adjusting your *browser* settings to *reject cookies*.
 
-CAUTION: If you have previously visited our website -- or any pages this
-session -- *and* agreed on the use of cookies, you may also have to
-*delete* already existing *cookies* by your *browser* in order to clean
-all cookies left.
+CAUTION: Suppose you have previously visited our website — or any pages this
+session — and agreed on the use of cookies. In that case, you may also have
+to delete already-existing cookies by your browser to clear all cookies left.
 
 ++++
 <div class="ml-0 mb-0">
@@ -206,10 +206,9 @@ endif::[]
 ifeval::[{delete-cookies} == true]
 == Delete cookies
 
-If you have previously visited our website -- or any pages this
-session -- *and* agreed on the use of cookies, you may also have to
-*delete* already existing *cookies* by your *browser* in order to clean
-all cookies left.
+Suppose you have previously visited our website — or any pages this session —
+and agreed on the use of cookies. In that case, you may also have to delete
+already-existing cookies by your browser to clear all cookies left.
 
 By clicking the button below, all cookies related to *this* site will be
 deleted.
@@ -268,10 +267,10 @@ These are:
 * Timestamp of page requests
 
 We may combine this log information with other information we collect about
-you. We do this to improve services we offer you, to improve marketing,
+you. We do this to improve the services we offer you, to improve marketing,
 analytics, or site functionality. We use Local Storage, such as HTML5, to
 store content information and preferences. Third parties with whom we partner
-to provide certain features on our website or to display advertising based
+to provide certain features on our website or display advertising based
 upon your web browsing activity also use HTML5 to collect and store information.
 Various browsers may offer their own management tools for removing HTML5.
 endif::[]

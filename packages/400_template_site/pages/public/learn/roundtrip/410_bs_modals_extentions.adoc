@@ -3,15 +3,18 @@ title:                                  Roundtrip
 tagline:                                advanced bootstrap modals
 date:                                   2020-11-08 00:00:00
 description: >
-                                        Bootstrap modals are used to add dialogues to your web pages for user
-                                        notifications. To highlight important information to your visitor's. Modals
-                                        are positioned over everything else in the document so that messages
-                                        get the users attention.
+                                        Bootstrap modals are used to add dialogs to your
+                                        web pages for user notifications. To highlight important
+                                        information to your visitors. Modals are positioned over
+                                        everything else in the document so that messages get the
+                                        user's attention.
 
-tags:                                   [ Roundtrip, Introduction ]
 categories:                             [ Bootstrap, Modal, Extension ]
+tags:                                   [ Roundtrip, Introduction ]
 
 flowtext:                               false
+comments:                               true
+fam_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/learn/roundtrip/modals/
 regenerate:                             false
@@ -56,17 +59,17 @@ link:{mdb-bs-modals-legacy}[Enhanced Bootstrap Modals, {browser-window--new}]. A
 current version is available from here: link:{mdb-bs-modals}[Modal examples & templates, {browser-window--new}].
 
 Bootstrap modals are used to add dialogues to your web pages for user
-notifications. To highlight important information to your visitor's. Modals
+notifications. To highlight important information to your visitors. Modals
 are positioned over everything else in the document so that messages
-get the users attention.
+get the user's attention.
 
 == BS advanced Modals
 
 To improve your visitor's experience on important information that shouldn't
-missed, modals are a great choice to bring the users attention on. Using J1
-Template BS enhanced predefined modal styles, some emotional weight is added
-to the information displayed - ranging from an info level, a simple warning to
-critical messages.
+be missed, modals are a great choice to bring the user's attention. Using the
+J1 Template BS enhanced predefined modal styles, some emotional weight is
+added to the information displayed - ranging from an info level, a simple
+warning to critical messages.
 
 NOTE: For more information on how to use Bootstrap’s JavaScript modal
 plugin, refer to: link:{bs_doc_components_modal}[Bootstrap Docs, {browser-window--new}].
@@ -83,10 +86,11 @@ needs some enhancement to display tables on low-resolution devices or smaller
 (browser-) window sizes.
 
 The first version for improved responsive tables that scale better is available
-for J1 Template on top of the classic BS CSS styles. Check out what from here
+for J1 Template on top of the classic BS CSS styles. Check out from here
 what the link:{roundtrip-responsive-tables}[BS tables extensions] can do!
-
 
 // Include the modals HTML portion
 // -----------------------------------------------------------------------------
 include::{documentdir}/419_advanced_modals_demo.asciidoc[]
+
+== Leave a comment
