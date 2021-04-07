@@ -7,12 +7,15 @@ module J1App
 
     # Additional (response) header properties managed by Sinatra::Base
     # NOTE: for the static content 'Access-Control-Allow-Origin'
-    # is NOT needed ????
+    # is NOT needed ???
     # --------------------------------------------------------------------------
-    before do
-      response.headers['Access-Control-Allow-Origin']   = '*'
-      response.headers['X-Powered-By']                  = 'J1 Template'
-    end
+    # NOTE: Response header properties are currently set
+    # by HAProxy for production !!!
+    # --------------------------------------------------------------------------
+    # before do
+    #   response.headers['Access-Control-Allow-Origin']   = '*'
+    #   response.headers['X-Powered-By']                  = 'J1 Template'
+    # end
 
     # NOTE: https://stackoverflow.com/questions/7847536/sinatra-in-facebook-iframe
     #
