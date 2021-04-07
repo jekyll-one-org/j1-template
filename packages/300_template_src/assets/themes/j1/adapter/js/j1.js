@@ -1268,7 +1268,7 @@ var j1 = (function () {
           expires: 0,
           path: '/',
 //        SameSite: 'Strict',
-//        SameSite: 'Lax',
+          SameSite: 'Lax',
           http_only: false,
           secure: false
       };
