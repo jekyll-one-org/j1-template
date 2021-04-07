@@ -5,6 +5,15 @@ module J1App
     # Sinatra Framework settings
     # ==========================================================================
 
+    # Additional (response) header properties managed by Sinatra::Base
+    # NOTE: for the static content 'Access-Control-Allow-Origin'
+    # is NOT needed ????
+    # --------------------------------------------------------------------------
+    before do
+      response.headers['Access-Control-Allow-Origin']   = '*'
+      response.headers['X-Powered-By']                  = 'J1 Template'
+    end
+
     # NOTE: https://stackoverflow.com/questions/7847536/sinatra-in-facebook-iframe
     #
     #set :protection, :except => :frame_options
@@ -23,16 +32,6 @@ module J1App
     # configure do
     #   enable :cross_origin
     # end
-
-    # Additional (response) headers  managed by Sinatra extension
-    # 'sinatra-cross_origin'
-    # NOTE: for the static content 'Access-Control-Allow-Origin'
-    # is NOT needed
-    # --------------------------------------------------------------------------
-    before do
-      response.headers['Access-Control-Allow-Origin']   = '*'
-      response.headers['X-Powered-By']                  = 'J1 Template'
-    end
 
     # OPTION BLOCK for Sinatra extension 'sinatra-cross_origin'
     # Send a HTTP 200 response on the CORS preflight request (browser)

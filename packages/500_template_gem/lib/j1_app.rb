@@ -12,7 +12,7 @@
 
 # Require RubyGems
 # ------------------------------------------------------------------------------
-require 'uuid'
+# require 'uuid'
 require 'date'
 
 require 'json'

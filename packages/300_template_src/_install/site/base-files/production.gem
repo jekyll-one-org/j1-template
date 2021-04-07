@@ -202,7 +202,7 @@ gem 'warden', '~> 1.2'
 # Gem needed for J1 logger based on log4r (middleware)
 #
 gem 'log4r', '~> 1.1', '>= 1.1.10'
-gem 'uuid', '~> 2.3', '>= 2.3.8'
+# gem 'uuid', '~> 2.3', '>= 2.3.8'                                              # should be removed, not longer needed
 gem 'date', '~> 2.0'
 
 # ------------------------------------------------------------------------------
