@@ -14,8 +14,8 @@ book:
   ISBN13:                               9780440221661
   rank:                                 820
 
-tags:                                   [ Romance, Historical,  Fantasy, Fiction ]
 categories:                             [ Book, Romance ]
+tags:                                   [ Romance, Historical,  Fantasy, Fiction ]
 
 toc:                                    false
 

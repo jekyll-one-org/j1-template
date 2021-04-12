@@ -14,8 +14,8 @@ book:
   ISBN13:                               9780099560432
   rank:                                 142
 
-tags:                                   [ Fantasy, Thrillers, Adventure, Science, Fiction ]
 categories:                             [ Book, Fantasy ]
+tags:                                   [ Fantasy, Thrillers, Adventure, Science, Fiction ]
 
 toc:                                    false
 

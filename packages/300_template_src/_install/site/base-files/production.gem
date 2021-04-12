@@ -133,7 +133,7 @@ end
 # web application, e.g. on Docker or a Heroku Dyno, to define and use
 # of identical Ruby runtime environments.
 #
-# ruby '2.6.5'
+# ruby '2.7.2'
 
 # ------------------------------------------------------------------------------
 # Enable the `rake` Gem if needed. For container-based apps, Rake can
@@ -194,15 +194,12 @@ gem 'omniauth', '~> 1.0'                                                        
 gem 'omniauth-oauth2', '~> 1.7'
 
 gem 'sinatra', '~> 2.0'
-# gem 'sinatra-cross_origin', '~> 0.3'                                          # currently NOT used
-
 gem 'warden', '~> 1.2'
 
 # ------------------------------------------------------------------------------
 # Gem needed for J1 logger based on log4r (middleware)
 #
 gem 'log4r', '~> 1.1', '>= 1.1.10'
-# gem 'uuid', '~> 2.3', '>= 2.3.8'                                              # should be removed, not longer needed
 gem 'date', '~> 2.0'
 
 # ------------------------------------------------------------------------------

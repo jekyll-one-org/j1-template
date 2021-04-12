@@ -315,8 +315,18 @@ layout:                                 compress
     {% endif %}
     });
   </script>
-  <!-- [INFO   ] [j1.layout.default.html                ] [ end page processing ] -->
 
+  {% comment %} Initialize Window History (back on <ESC>)
+  ------------------------------------------------------------------------------ {% endcomment %}
+  <!-- [INFO   ] [j1.layout.default.html                ] [ initialize window.history.back ] -->
+  <script>
+  // Redirect on KEY <ESC>
+  window.onkeyup = function (e)
+  {
+   if (e.keyCode == 27) window.history.back();
+  }
+  </script>
+  <!-- [INFO   ] [j1.layout.default.html                ] [ end page processing ] -->
 </html>
 
 {% endcapture %}

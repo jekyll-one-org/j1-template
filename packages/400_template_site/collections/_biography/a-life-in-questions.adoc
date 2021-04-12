@@ -14,8 +14,9 @@ book:
   ISBN13:                               9780008128302
   rank:                                 16817
 
-tags:                                   [ Memoirs, Political, Journalism ]
 categories:                             [ Book, Biography ]
+tags:                                   [ Memoirs, Political, Journalism ]
+
 
 toc:                                    false
 

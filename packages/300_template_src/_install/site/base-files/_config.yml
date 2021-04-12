@@ -312,22 +312,15 @@ permalink:                              pretty
 # domain http|s://your-site.domain here. Accessible in Liquid as
 # "site.url". For the development environment there is an EXCEPTION:
 # if you are running jekyll serve in a development environment,
-# site.url will be set to the value of host, port. This defaults to
-# url: http://localhost:4000.
+# site.url will be set to the value of host, port.
 #
-url:                                    "http://localhost:44440/"
+url:                                    ""
 
 # The subpath of your site, e.g. /blog/. Used in conjunction with
 # site.url (see above) when you want a link to something with the
 # full URL to it.
 #
 baseurl:                                ""
-
-# TODO: Following parameters should moved to header or panel that uses
-# these values (production_url, download_url, base_path)
-#
-#production_url:                        http://jekyll.one
-#download_url:                          http://jekyll.one/downloads
 
 # The production_url is only used when full-domain names are needed
 # such as sitemap.txt. For most places will/should use base_path to
@@ -336,14 +329,12 @@ baseurl:                                ""
 base_path:                              ""
 
 # ------------------------------------------------------------------------------
-# TODO: Following parameters should moved to the components that uses
-# these values (protocol, host, port)
 # Base hostname and protocol for the site
 #
 #  Defaults:
 #   protocol:                           http
 #   host:                               localhost
-#   port:                               4000
+#   port:                               40000
 #   timezone:                           Europe/Berlin
 #   encoding:                           UTF-8
 #
@@ -484,6 +475,7 @@ asciidoc_attributes:                    &asciidoc_attributes
   icons:                                font
   imagesdir:                            /assets/images
   iconsdir:                             '{imagesdir}/icons/asciidoc'
+# experimental:                         true                                    # enable the UI macros, e.g kbd:[], for Asciidoctor globally
 
 asciidoc:
   processor:                            asciidoctor

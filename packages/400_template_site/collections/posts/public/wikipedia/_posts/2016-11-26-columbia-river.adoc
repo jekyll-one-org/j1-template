@@ -3,8 +3,8 @@ title:                                  Columbia River
 tagline:                                largest river in the pacific northwest region
 date:                                   2016-11-26 00:00:00 +0100
 
-tags:                                   [ USA, Rivers ]
 categories:                             [ Wikipedia ]
+tags:                                   [ USA, Rivers ]
 
 regenerate:                             false
 

@@ -5,8 +5,8 @@ date:                                   2020-01-03 00:00:00
 description: >
                                         Testing series elements
 
-tags:                                   [ Post, Test ]
 categories:                             [ Series ]
+tags:                                   [ Post, Test ]
 
 series:                                 test-series
 adsense:                                false

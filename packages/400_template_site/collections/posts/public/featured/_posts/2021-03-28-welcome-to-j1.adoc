@@ -3,8 +3,8 @@ title:                                  Welcome
 tagline:                                jekyll for everyone
 date:                                   2021-03-28 00:00:00
 
-categories:                             [ Featured, Knowledge ]
-tags:                                   [ J1, Jekyll ]
+categories:                             [ Featured ]
+tags:                                   [ J1, Jekyll, Knowledge ]
 
 series:                                 false
 adsense:                                false

@@ -239,6 +239,10 @@
     - title:                            Sites
       icon:                             #web
       column:
+        - title:                        Jekyll Home
+          href:                         https://jekyllrb.com/
+          target:                       _blank
+          icon:                         flask
         - title:                        Bootstrap Home
           href:                         http://getbootstrap.com/
           target:                       _blank
@@ -268,14 +272,14 @@
     - title:                            Knowledge
       icon:                             #lightbulb-on
       column:
-        - title:                        Jekyll Home
-          href:                         https://jekyllrb.com/
-          target:                       _blank
-          icon:                         flask
         - title:                        Jekyll Tips at CloudCannon
           href:                         http://jekyll.tips/
           target:                       _blank
           icon:                         flask
+        - title:                        Jekyll Cheat Sheet
+          href:                         https://learn.cloudcannon.com/jekyll-cheat-sheet/
+          target:                       _blank
+          icon:                         flask          
         - title:                        Jekyll Stackoverflow
           href:                         https://stackoverflow.com/questions/tagged/jekyll
           target:                       _blank

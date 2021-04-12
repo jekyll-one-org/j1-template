@@ -14,8 +14,8 @@ book:
   ISBN13:                               9780440225805
   rank:                                 844
 
-tags:                                   [ Romance, Historical ]
 categories:                             [ Book, Romance ]
+tags:                                   [ Romance, Historical ]
 
 toc:                                    false
 

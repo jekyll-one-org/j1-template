@@ -15,8 +15,8 @@ book:
   ISBN13:                               9781847923677
   rank:                                 40
 
-tags:                                   [ Memoirs, Neurosurgery, Life, Doctor ]
 categories:                             [ Book, Biography ]
+tags:                                   [ Memoirs, Neurosurgery, Life, Doctor ]
 
 toc:                                    false
 

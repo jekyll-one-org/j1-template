@@ -14,8 +14,8 @@ book:
   ISBN13:                               9781473213692
   rank:                                 731
 
-tags:                                   [ Fantasy, Magic, Heroes ]
 categories:                             [ Book, Fantasy ]
+tags:                                   [ Fantasy, Magic, Heroes ]
 
 toc:                                    false
 

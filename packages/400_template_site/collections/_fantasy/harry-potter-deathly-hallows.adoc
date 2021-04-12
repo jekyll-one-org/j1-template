@@ -14,8 +14,8 @@ book:
   ISBN13:                               9781408855713
   rank:                                 797
 
-tags:                                   [ Fantasy, Magic, Harry, Potter ]
 categories:                             [ Book, Fantasy ]
+tags:                                   [ Fantasy, Magic, Harry, Potter ]
 
 toc:                                    false
 

@@ -14,8 +14,8 @@ book:
   ISBN13:                               9781780896618
   rank:                                 701
 
-tags:                                   [ Romance, Historical, Adventure ]
 categories:                             [ Book, Romance ]
+tags:                                   [ Romance, Historical, Adventure ]
 
 toc:                                    false
 

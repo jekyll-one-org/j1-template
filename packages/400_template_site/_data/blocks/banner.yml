@@ -154,6 +154,7 @@ settings:
                                           Explore what's possible if you go for static websites.
                                         </p>
               buttons:
+                
                 - name:                 Roundtrip button
                   button:
                     text:               Roundtrip
@@ -163,17 +164,6 @@ settings:
                     icon_color:         md_white
                     icon_size:          24px
                     href:               /pages/public/learn/roundtrip/present_images/
-                    target:
-
-                - name:                 Kickstarter button
-                  button:
-                    text:               Kickstart
-                    class:              btn btn-raised btn-flex btn-md btn-primary mr-2 mb-2
-                    style:              "min-width: 12rem"
-                    icon:               rocket
-                    icon_color:         md_white
-                    icon_size:          24px
-                    href:               /pages/public/learn/kickstarter/web_in_a_day/meet_and_greet/
                     target:
 
                 - name:                 Download button

@@ -604,7 +604,7 @@ div.admonitionblock.warning, div.admonitionblock.caution {
 
 .admonitionblock td.icon .icon-answer:before {
   content: "\f0a4";
-  color: $blue;
+  color: $green;
 }
 
 //  Example blocks
@@ -696,23 +696,29 @@ span.footnoteref a:active {
 .mono {
   font-family: "Droid Sans Mono", "DejaVu Sans Mono", "Monospace", monospace
 }
-div.unbreakable {
-  page-break-inside: avoid
+.unbreakable {
+  page-break-inside: avoid;
 }
 .big {
-  font-size: larger
+  font-size: larger;
 }
 .small {
-  font-size: smaller
+  font-size: smaller;
+}
+.bold {
+  font-weight: bold;
+}
+.italic {
+  font-style: italic;
 }
 .underline {
-  text-decoration: underline
+  text-decoration: underline;
 }
 .overline {
-  text-decoration: overline
+  text-decoration: overline;
 }
 .line-through {
-  text-decoration: line-through
+  text-decoration: line-through;
 }
 
 //  Web colors
@@ -745,6 +751,12 @@ div.unbreakable {
   color: #606060
 }
 .gray-background {
+  background-color: #7d7d7d
+}
+.grey {
+  color: #606060
+}
+.grey-background {
   background-color: #7d7d7d
 }
 .green {

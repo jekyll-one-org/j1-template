@@ -1,0 +1,9 @@
+
+== Install a bundle *userized*
+
+// set the install path
+//
+bundle config set --local path ~/.gem
+
+// install bundle
+bundle install

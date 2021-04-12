@@ -133,7 +133,7 @@ end
 # web application, e.g. on Docker or a Heroku Dyno, to define and use
 # of identical Ruby runtime environments.
 #
-# ruby '2.6.5'
+# ruby '2.7.2'
 
 # ------------------------------------------------------------------------------
 # Enable the `rake` Gem if needed. For container-based apps, Rake can

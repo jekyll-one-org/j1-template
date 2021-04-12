@@ -15,8 +15,8 @@ book:
   ISBN13:                               9781408845646
   rank:                                 39
 
-tags:                                   [ Fantasy, Magic, Harry, Potter ]
 categories:                             [ Book, Fantasy ]
+tags:                                   [ Fantasy, Magic, Harry, Potter ]
 
 toc:                                    false
 

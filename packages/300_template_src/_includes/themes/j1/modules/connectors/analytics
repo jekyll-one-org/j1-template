@@ -1,7 +1,7 @@
 {% comment %}
  # -----------------------------------------------------------------------------
  #  ~/_includes/themes/j1/modules/connectors/analytics
- #  Liquid CONNECTOR for analytic providers supported by J1 Template
+ #  Liquid CONNECTOR for Analytic Providers supported by J1 Template
  #
  #  Product/Info:
  #  http://jekyll.one
@@ -28,7 +28,7 @@
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
 
-<!-- [INFO   ] [j1.modules.connectors.analytics       ] [ start processing load region head, layout: {{page.layout}} ] -->              
+<!-- [INFO   ] [j1.modules.connectors.analytics       ] [ start processing load region head, layout: {{page.layout}} ] -->
 {% if analytics and page.analytics %}
 
   {% case analytics_provider %}
@@ -42,4 +42,3 @@
 
 {% endif %}
 <!-- [INFO   ] [j1.modules.connectors.analytics       ] [ end processing ] -->
-

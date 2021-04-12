@@ -382,11 +382,11 @@ body:
 #
 # ------------------------------------------------------------------------------
 comments:
-  enabled:                              true
+  enabled:                              false
   provider:                             disqus
 
   disqus:
-    short_name:                         jekyll-one
+    short_name:                         '<your-site-short-name>'
 
 # facebook:
 #   appid:                              123
@@ -406,8 +406,10 @@ comments:
 analytics:
   enabled:                              false
   provider:                             google
+
   google:
-    tracking_id:                        'UA-138160879-1'
+    tracking_id:                        '<your-tracking_id>'
+
   custom:
     custom_data:
 
@@ -418,10 +420,10 @@ analytics:
 # Set 'provider' to the analytics provider you want to use
 #
 advertising:
-  enabled:                              true
-  provider:                             custom
+  enabled:                              false
+  provider:                             google
   google:
-    publisher_id:                       ca-pub-6537273267695855
+    publisher_id:                       '<your-publisher_id>'
   custom:
     custom_data:
 

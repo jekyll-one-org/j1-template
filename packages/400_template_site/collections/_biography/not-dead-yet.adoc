@@ -15,8 +15,8 @@ book:
   ISBN13:                               9781780895123
   rank:                                 1367
 
-tags:                                   [ Memoirs, Musicians ]
 categories:                             [ Book, Biography ]
+tags:                                   [ Memoirs, Musicians ]
 
 toc:                                    false
 

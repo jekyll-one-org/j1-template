@@ -14,8 +14,8 @@ book:
   ISBN13:                               9781846689949
   rank:                                 80
 
-tags:                                   [ Romance, Historical,  Fantasy, Fiction ]
 categories:                             [ Book, Romance ]
+tags:                                   [ Romance, Historical,  Fantasy, Fiction ]
 
 toc:                                    false
 
