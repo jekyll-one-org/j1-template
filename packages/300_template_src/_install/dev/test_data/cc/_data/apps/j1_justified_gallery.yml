@@ -200,7 +200,7 @@ galleries:
       id:                           jg_old_times
 #     title:                        Old Times
       show_delay:                   300
-      title:                        Grand Pa around the 1930th
+      title:                        GrandPa around the 1930th
       css_classes:                  mb-5
       images_path:                  /assets/images/modules/gallery/old_times
       thumb_path:                   /assets/images/modules/gallery/old_times
@@ -209,16 +209,16 @@ galleries:
                                       image_03.jpg, image_04.jpg
                                     ]
       captions_gallery:             [
-                                      "Grand Pa's 80th Birthday",
-                                      "Grand Pa's 80th Birthday",
-                                      "Grand Pa's annual journey",
-                                      "Grand Pa's annual journey"
+                                      "GrandPa's 80th Birthday",
+                                      "GrandPa's 80th Birthday",
+                                      "GrandPa's annual journey",
+                                      "GrandPa's annual journey"
                                     ]
       captions_lightbox:            [
-                                      "<p>Grand Pa's 80th Birthday</p><p>Collegues from the Painters Union</p>",
-                                      "<p>Grand Pa's 80th Birthday</p><p>Family and Friends at the restaurant</p>",
-                                      "<p>Grand Pa's annual journey</p><p>Down the Rhine</p>",
-                                      "<p>Grand Pa's annual journey<p><p>Having some Wine</p>"
+                                      "<p>GrandPa's 80th Birthday</p><p>Collegues from the Painters Union</p>",
+                                      "<p>GrandPa's 80th Birthday</p><p>Family and Friends at the restaurant</p>",
+                                      "<p>GrandPa's annual journey</p><p>Down the Rhine</p>",
+                                      "<p>GrandPa's annual journey<p><p>Having some Wine</p>"
                                     ]
       gallery_options:
         rowHeight:                  200
