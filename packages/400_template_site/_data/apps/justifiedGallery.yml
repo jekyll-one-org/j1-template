@@ -129,7 +129,7 @@ settings:
         type:                           image
         id:                             jg_old_times
         show_delay:                     200
-        title:                          Grand Pa around the 1930th
+        title:                          GrandPa around the 1930th
         css_classes:                    mb-3
         images_path:                    /assets/images/modules/gallery/old_times
         thumb_path:                     /assets/images/modules/gallery/old_times
@@ -138,10 +138,10 @@ settings:
                                           image_03.jpg, image_04.jpg
                                         ]
         captions_gallery:               [
-                                          "Grand Pa's 80th Birthday",
-                                          "Grand Pa's 80th Birthday",
-                                          "Grand Pa's annual journey",
-                                          "Grand Pa's annual journey"
+                                          "GrandPa's 80th Birthday",
+                                          "GrandPa's 80th Birthday",
+                                          "GrandPa's annual journey",
+                                          "GrandPa's annual journey"
                                         ]
         captions_lightbox:              []
         gallery_options:

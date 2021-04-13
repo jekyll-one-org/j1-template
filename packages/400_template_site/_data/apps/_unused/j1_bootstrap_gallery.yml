@@ -68,7 +68,7 @@ galleries:
       enabled:                      true
       type:                         image
       id:                           bg_old_times
-#     title:                        Grand Pa around the 1930th
+#     title:                        GrandPa around the 1930th
       thumb_items:                  2
       thumb_spacing:                5
       thumb_bordered:               true
@@ -80,16 +80,16 @@ galleries:
                                       image_03.jpg, image_04.jpg
                                     ]
       captions_gallery:             [
-                                      "Grand Pa's 80th Birthday",
-                                      "Grand Pa's 80th Birthday",
-                                      "Grand Pa's annual journey",
-                                      "Grand Pa's annual journey"
+                                      "GrandPa's 80th Birthday",
+                                      "GrandPa's 80th Birthday",
+                                      "GrandPa's annual journey",
+                                      "GrandPa's annual journey"
                                     ]
       captions_lightbox:            [
-                                      "<p>Grand Pa's 80th Birthday</p><p>Collegues from the Painters Union</p>",
-                                      "<p>Grand Pa's 80th Birthday</p><p>Family and Friends at the restaurant</p>",
-                                      "<p>Grand Pa's annual journey</p><p>Down the Rhine</p>",
-                                      "<p>Grand Pa's annual journey<p><p>Having some Wine</p>"
+                                      "<p>GrandPa's 80th Birthday</p><p>Collegues from the Painters Union</p>",
+                                      "<p>GrandPa's 80th Birthday</p><p>Family and Friends at the restaurant</p>",
+                                      "<p>GrandPa's annual journey</p><p>Down the Rhine</p>",
+                                      "<p>GrandPa's annual journey<p><p>Having some Wine</p>"
                                     ]
       options:
         mode:                       lg-fade

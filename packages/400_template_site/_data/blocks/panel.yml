@@ -72,9 +72,8 @@ settings:
               icon_size:                3x
               icon_color:               md-white
               text: >
-                                        The Web is everywhere. J1 Template supports modern
-                                        web browsers on all devices. For best results on PCs,
-                                        Tablets and SmartPhones.
+                                        The Web is everywhere. J1 Template supports modern web browsers
+                                        on all devices for best results on PCs, Tablets, and SmartPhones.
 
               buttons:
 
@@ -99,9 +98,8 @@ settings:
               icon_size:                3x
               icon_color:               md-white
               text: >
-                                        Current Technology and Design. Excellent performance to
-                                        run a website. Use Jekyll One to present your content
-                                        at it's best.
+                                        Current Technology and Design. Excellent performance in running
+                                        a website. Use Jekyll One to present your content at its best.
 
               buttons:
                 - name:                 Read More

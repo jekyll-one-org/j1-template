@@ -77,9 +77,9 @@ of web development, languages, and tools.
 
 === Coding web pages
 
-J1 uses HTML5, the latest major version of HTML, for structuring content
-on the World Wide Web. The HTML standard's current version offers a lot
-of new features, including detailed processing models to support more
+J1 uses HTML5, the latest major HTML version, for structuring content
+on the World Wide Web. The HTML standard's current version many new features,
+including detailed processing models to support more
 interoperable implementations. It extends and improves HTML markups available
 in older versions.
 
@@ -107,14 +107,13 @@ Separation of formatting and content also makes it feasible to present the
 same page in different styles. For example, the *themes feature* of the J1
 Template makes use of this.
 
-*CSS3*, the current standard for cascadeded style sheets, is divided into
-several separated components called *modules*. Each module adds new capabilities
-or extends features defined in the former CSS2 standard. HTML5 in combination
-with CSS3 allows creating modern and modular code for web pages that can be
+*CSS3*, the current standard for cascaded style sheets, is divided into
+several separate components called *modules*. Each module adds new
+capabilities or extends features defined in the former CSS2 standard. HTML5,
+in combination with CSS3, allows creating modern and modular code for web pages
 viewed on all current devices like Mobiles, Tablets, or the classic Desktop PC.
-The new HTML5 elements plus CSS3 modules can be used as a replacement for
-proprietary solutions like _Adobe Flash_ to build modern webpages based on
-open standards.
+The new HTML5 elements plus CSS3 modules can replace proprietary solutions
+like _Adobe Flash_ to build modern web pages based on open standards
 
 *CSS3*, the current standard for cascading style sheets, is divided into
 several separate components called modules. Each module adds new capabilities
@@ -131,9 +130,9 @@ solutions like Adobe Flash to build modern web pages based on open standards.
 image::/assets/images/pages/panels/modules-apps-1920x800.jpg[{{page.title}}]
 
 JavaScript is a text-based programming language used on the client-side and
-server-side that allows you to make web pages interactive. HTML and CSS are
-languages that give structure and style to web pages, and JavaScript provides
-web pages interactive elements that engage a user.
+server-side to make web pages interactive. HTML and CSS are languages that
+give structure and style to web pages, and JavaScript provides web pages
+interactive elements that engage a user.
 
 Content placement and basic methods for the dynamic of elements can be done
 using pure HTML5 and CSS3. For more complex solutions like *modules* (to
@@ -174,15 +173,15 @@ not earning the deep of web development technologies.
 
 === Create your Web
 
-J1 is highly customizable. Based on a pure configuration, a website can be
+J1 is highly customizable. Based on a pure configuration, websites are
 created. The template system creates static web pages using Jekyll as the
 base HTML code generator. Static websites are fast and secure but
 straightforward to manage. No complex database systems and PHP interfaces
 are needed.
 
-To manage a static website, only a web server environment is needed. To
-publish a website on the Internet, many possible platforms can be used like
-Github, Netlify, or Heroku, for example - for free!
+For managing static websites, only a web server environment is needed. Publish
+a site on the Internet, possible platforms can be used like Github, Netlify,
+or Heroku, for free!
 
 The Internet is not a peaceful place. Every site accessible from the public
 is attacked from the first second if published. Static websites are robust,
