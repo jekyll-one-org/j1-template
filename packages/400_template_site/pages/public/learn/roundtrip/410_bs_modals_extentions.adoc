@@ -9,8 +9,8 @@ description: >
                                         everything else in the document so that messages get the
                                         user's attention.
 
-categories:                             [ Bootstrap, Extension ]
-tags:                                   [ Roundtrip, Modals ]
+categories:                             [ Bootstrap, Modals ]
+tags:                                   [ Roundtrip, Introduction ]
 
 flowtext:                               false
 comments:                               false

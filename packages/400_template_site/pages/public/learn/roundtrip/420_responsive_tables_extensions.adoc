@@ -7,8 +7,8 @@ description: >
                                         J1 Template is based on pure CSS on top of the classic Bootstrap styles for
                                         simplicity and portability to be viewed best on all devices and browsers.
 
-categories:                             [ Bootstrap, Extension ]
-tags:                                   [ Roundtrip, Tables ]
+categories:                             [ Bootstrap, Tables ]
+tags:                                   [ Roundtrip, Introduction ]
 
 flowtext:                               false
 comments:                               false

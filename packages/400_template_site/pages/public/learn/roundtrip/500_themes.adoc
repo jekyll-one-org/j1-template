@@ -8,8 +8,8 @@ description: >
                                         sense to present what is possible using different
                                         versions of Bootstrap's CSS styles for a website.
 
-categories:                             [ Bootstrap, Extension ]
-tags:                                   [ Roundtrip, Themes ]
+categories:                             [ Bootstrap, Themes ]
+tags:                                   [ Roundtrip, Introduction ]
 
 scrollbar:                              false
 comments:                               false

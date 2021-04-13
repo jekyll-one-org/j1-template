@@ -10,8 +10,8 @@ description: >
                                         server-sided search engines or commercial services
                                         on the Internet like Google.
 
-categories:                             [ Search ]
-tags:                                   [ Roundtrip, QuickSearch ]
+categories:                             [ QuickSearch, Lunr ]
+tags:                                   [ Roundtrip, Introduction ]
 
 toc:                                    true
 scrollbar:                              false
