@@ -35,3 +35,28 @@ translation:
   enabled:                          false
 
 was MISING!
+
+
+Stop compressing for JA adapters
+--------------------------------------------------------------------------------
+
+{% comment %} process adapter COMPRESSED for production DISABLED
+NOTE: for unknown reason, minifyJS detect JS/ES6 code
+      SyntaxError: Unexpected token: punc ())
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = true %}
+{% endcapture %}
+{% if production %}
+  {{ cache | minifyJS }}
+{% else %}
+  {{ cache | strip_empty_lines }}
+{% endif %}
+{% assign cache = nil %}
+
+
+{% comment %} process adapter UNCOMPRESSED
+--------------------------------------------------------------------------------
+{% endcapture %}
+{{ cache | strip_empty_lines }}
+{% assign cache = nil %}
+-------------------------------------------------------------------------------- {% endcomment %}
