@@ -669,22 +669,10 @@ j1.adapter['fam'] = (function (j1, window) {
   }; // END return
 })(j1, window);
 
-{% comment %} process adapter COMPRESSED for production DISABLED
-NOTE: for unknown reason, minifyJS detect JS/ES6 code
-      SyntaxError: Unexpected token: punc ())
---------------------------------------------------------------------------------
-{% assign production = true %}
 {% endcapture %}
 {% if production %}
   {{ cache | minifyJS }}
 {% else %}
   {{ cache | strip_empty_lines }}
 {% endif %}
-{% assign cache = nil %}
--------------------------------------------------------------------------------- {% endcomment %}
-
-{% comment %} process adapter UNCOMPRESSED
--------------------------------------------------------------------------------- {% endcomment %}
-{% endcapture %}
-{{ cache | strip_empty_lines }}
 {% assign cache = nil %}
