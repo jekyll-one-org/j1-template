@@ -9,6 +9,7 @@ install (manually, system):           gem install --local j1-template --no-docum
 install (manually, user):             gem install --local j1-template --user-install --no-document
 install (project):                    yarn gem install
 install (remote):                     gem install j1-template --no-document
+install (remote, userized):           gem install j1-template --user-install --no-document
 uninstall (all):                      gem uninstall j1-template --force
 uninstall (version):                  gem uninstall j1-template -v 2021.1.0
 uninstall (version/forced):           gem uninstall j1-template -v 2021.1.0 --force
