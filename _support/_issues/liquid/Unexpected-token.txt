@@ -1,0 +1,37 @@
+Error
+--------------------------------------------------------------------------------
+
+    J1 Paginator: finished, processed 1 pagination page|s
+--> Liquid Exception: Unexpected token: punc (;) --
+    95 var current_page;
+    96 var previous_page;
+    97 var last_pager;
+    98 var last_pager_url;
+    99 var app_detected;
+    100 var user_session_detected;
+    101
+--> 102 // Connector settings  =>  var translation_enabled = ;
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+...
+
+== in assets/themes/j1/adapter/js/j1.js
+
+------------------------------------------------
+Jekyll 4.2.0   Please append `--trace` to the `build` command
+ for any additional information or backtrace.
+------------------------------------------------
+
+Reason
+--------------------------------------------------------------------------------
+
+From adapter j1.js
+
+// Connector settings
+var translation_enabled = {{template_config.translation.enabled}};
+
+Variable setting in template_config (j1_config.yml)
+
+translation:
+  enabled:                          false
+
+was MISING!

@@ -1,6 +1,6 @@
 ---
 title: "J1 Template Starter"
-github: https://github.com/jekyll-one-org/j1-template
+github: https://github.com/jekyll-one-org/j1-template-starter
 demo: https://jekyll-one-org.github.io/
 author: Jürgen Adams
 date: 2021-03-01

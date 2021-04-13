@@ -334,7 +334,7 @@ body:
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
-# COMMENTS settings
+# COMMENT settings
 #
 # Set 'enabled' to false to turn commenting off globally
 # Set 'provider' to the comment provider you want to use
@@ -381,5 +381,21 @@ advertising:
   custom:
     custom_data:
 
+# ------------------------------------------------------------------------------
+# TRANSLATOR settings
+#
+# Set 'enabled' to false to turn translators off globally
+# Set 'provider' to the translation provider you want to use
+#
+translation:
+  enabled:                              false
+  provider:                             google
+
+  google:
+    layout:                             default
+    meta_data:                          [google-translate-customization]
+    page_language:                      en
+    translation_languages:              [all]
+    
 # ------------------------------------------------------------------------------
 # END config

@@ -154,7 +154,7 @@ settings:
                                           Explore what's possible if you go for static websites.
                                         </p>
               buttons:
-                
+
                 - name:                 Roundtrip button
                   button:
                     text:               Roundtrip
@@ -174,7 +174,7 @@ settings:
                     icon:               download
                     icon_color:         md_white
                     icon_size:          24px
-                    href:               "https://rubygems.org/gems/j1-template/versions/2021.0.16"
+                    href:               "https://rubygems.org/gems/j1-template"
                     target:             blank
 
     # --------------------------------------------------------------------------

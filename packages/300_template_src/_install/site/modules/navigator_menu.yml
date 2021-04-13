@@ -102,6 +102,22 @@
     - title:                            Sites
       icon:                             #web
       column:
+        - title:                        Jekyll Home
+          href:                         https://jekyllrb.com/
+          target:                       _blank
+          icon:                         flask
+        - title:                        Ruby
+          href:                         https://www.ruby-lang.org/en/
+          target:                       _blank
+          icon:                         language-ruby
+        - title:                        RubyGems
+          href:                         https://rubygems.org/gems/j1-template/
+          target:                       _blank
+          icon:                         language-ruby
+        - title:                        NpmJS
+          href:                         https://www.npmjs.com/
+          target:                       _blank
+          icon:                         language-javascript
         - title:                        Bootstrap Home
           href:                         http://getbootstrap.com/
           target:                       _blank
@@ -116,7 +132,6 @@
           icon:                         font-awesome
         - title:                        MD Icons
           href:                         https://materialdesignicons.com/
-#         href:                         http://zavoloklom.github.io/material-design-iconic-font/cheatsheet.html
           target:                       _blank
           icon:                         google
         - title:                        Fonts
@@ -131,12 +146,12 @@
     - title:                            Knowledge
       icon:                             #lightbulb-on
       column:
-        - title:                        Jekyll Home
-          href:                         https://jekyllrb.com/
+        - title:                        Learn Jekyll at CloudCannon
+          href:                         http://jekyll.tips/
           target:                       _blank
           icon:                         flask
-        - title:                        Jekyll Tips
-          href:                         http://jekyll.tips/
+        - title:                        Jekyll Cheat Sheet
+          href:                         https://learn.cloudcannon.com/jekyll-cheat-sheet/
           target:                       _blank
           icon:                         flask
         - title:                        Jekyll Stackoverflow
@@ -154,7 +169,11 @@
         - title:                        SelfHTML
           href:                         https://wiki.selfhtml.org/
           target:                       _blank
-          icon:                         xml
+          icon:                         language-html5
+        - title:                        LearnCSS
+          href:                         https://developer.mozilla.org/en-US/docs/Learn/CSS
+          target:                       _blank
+          icon:                         language-css3
         - title:                        Asciidoc Language
           href:                         https://docs.asciidoctor.org/asciidoc/latest/
           target:                       _blank

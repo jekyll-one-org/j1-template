@@ -152,6 +152,7 @@ tag::urls[]
 :url-j1--versions:                                https://rubygems.org/gems/j1-template/versions/
 :url-j1-rubydoc--home:                            https://www.rubydoc.info/gems/j1-template/
 :url-j1--preview:                                 https://preview.jekyll.one/
+:url-j1--quickstart:                              https://jekyll.one/pages/public/learn/quickstart/
 
 :url-j1-kickstarter--web-in-a-day:                https://jekyll.one/pages/public/learn/kickstarter/web_in_a_day/meet_and_greet/
 :url-j1-web-in-a-day--meet-and-greet:             https://jekyll.one/pages/public/learn/kickstarter/web_in_a_day/meet_and_greet/

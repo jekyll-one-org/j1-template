@@ -1,0 +1,4 @@
+Use Netlify to deploy this theme. This theme contains a valid and tested
+netlify.toml - Feel free to use the 1-click deploy below.
+
+https://app.netlify.com/start/deploy?repository=https://github.com/zerostaticthemes/jekyll-serif-theme
