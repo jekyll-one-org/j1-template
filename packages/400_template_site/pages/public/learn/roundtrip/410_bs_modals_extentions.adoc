@@ -9,11 +9,11 @@ description: >
                                         everything else in the document so that messages get the
                                         user's attention.
 
-categories:                             [ Bootstrap, Modal, Extension ]
-tags:                                   [ Roundtrip, Introduction ]
+categories:                             [ Bootstrap, Extension ]
+tags:                                   [ Roundtrip, Modals ]
 
 flowtext:                               false
-comments:                               true
+comments:                               false
 fam_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/learn/roundtrip/modals/
@@ -92,5 +92,3 @@ what the link:{roundtrip-responsive-tables}[BS tables extensions] can do!
 // Include the modals HTML portion
 // -----------------------------------------------------------------------------
 include::{documentdir}/419_advanced_modals_demo.asciidoc[]
-
-== Leave a comment

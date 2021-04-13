@@ -7,11 +7,11 @@ description: >
                                         first time, a good decision you get on that page first.
                                         For sure, there is no better place to go.
 
-tags:                                   [ Roundtrip, Introduction ]
 categories:                             [ Info ]
+tags:                                   [ Roundtrip, Introduction ]
 
-comments:                               true
-fam_menu_id:                            open_toc
+comments:                               false
+fam_menu_id:                            default
 
 permalink:                              /pages/public/learn/where_to_go/
 regenerate:                             false
@@ -103,5 +103,3 @@ learn what Jekyll and J1 Template is all about. Now, it's on you where
 you start.
 
 Anyway, have a good start using *Jekyll and J1*!
-
-== Leave a comment

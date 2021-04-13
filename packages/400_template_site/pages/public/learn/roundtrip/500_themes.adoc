@@ -8,11 +8,11 @@ description: >
                                         sense to present what is possible using different
                                         versions of Bootstrap's CSS styles for a website.
 
-tags:                                   [ Bootstrap, Themes ]
-categories:                             [ Introduction, Features ]
+categories:                             [ Bootstrap, Extension ]
+tags:                                   [ Roundtrip, Themes ]
 
 scrollbar:                              false
-comments:                               true
+comments:                               false
 fam_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/learn/roundtrip/themes/
@@ -251,5 +251,3 @@ your own theme, anyway.
 An important feature for larger webs is searching. The visitors should be able
 to search your site to find pages and posts they are interested in. Check what
 is searching a J1 website all about at link:{roundtrip-quicksearch}[Quicksearch].
-
-== Leave a comment
