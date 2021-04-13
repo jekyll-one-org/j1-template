@@ -6,11 +6,13 @@ date:                                   2020-01-01 00:00:00
 categories:                             [ Featured ]
 tags:                                   [ About, Cookies ]
 
-series:
-adsense:                                false
+series:                                 false
 image:                                  /assets/images/modules/attics/cookies-1920x1200-bw.jpg
-comments:                               true
-advertising:                            true
+
+adsense:                                false
+comments:                               false
+advertising:                            false
+toc:                                    true
 
 regenerate:                             false
 

@@ -5,8 +5,8 @@ date:                                   2020-10-23 00:00:00
 description: >
                                         Protection of your personal data
 
+categories:                             [ Legal ]
 tags:                                   [ Privacy, Statement ]
-categories:                             [ Legal, Info ]
 
 toc:                                    true
 fam:                                    false

@@ -5,8 +5,9 @@ date:                                   2020-10-23 00:00:00
 description: >
                                         Impressum
 
-tags:                                   [ Impressum ]
-categories:                             [ Legal, Info ]
+categories:                             [ Legal ]
+tags:                                   [ Impressum, Info ]
+
 
 toc:                                    false
 fam:                                    true
@@ -63,24 +64,18 @@ endif::[]
 ifeval::[{eu-region} == true]
 .Postal address
 ----
-  Jürgen Adams
-
-  Erasmusstrasse 28
-  40223 Düsseldorf
+<your-postal-address>
 ----
 endif::[]
 
 .Contact
 ----
-  webmaster@jekyll.one
+  webmaster@<your-site>
 ----
 
 ifeval::[{eu-region} == true]
 .Responsible for the content according to § 55 Abs. 2 RStV:
 ----
-  Jürgen Adams
-
-  Erasmusstrasse 28
-  40223 Düsseldorf
+<responsbile-postal-address>
 ----
 endif::[]

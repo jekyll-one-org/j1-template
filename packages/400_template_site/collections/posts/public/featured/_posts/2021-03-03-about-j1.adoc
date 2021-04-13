@@ -6,11 +6,14 @@ date:                                   2021-03-03 00:00:00
 categories:                             [ Featured ]
 tags:                                   [ About, J1 ]
 
-series:
-adsense:                                false
+series:                                 false
 image:                                  /assets/images/modules/attics/runner-1920x1200.jpg
-comments:                               true
-advertising:                            true
+
+adsense:                                false
+comments:                               false
+advertising:                            false
+fam_menu_id:                            default
+toc:                                    false
 
 regenerate:                             false
 
