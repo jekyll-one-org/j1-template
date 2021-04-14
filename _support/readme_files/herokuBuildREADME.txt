@@ -59,3 +59,8 @@ GITHUB_CLIENT_SECRET=
 
 # On Heroku
 #   heroku config:set J1_PROJECT_HOME="/app"
+
+
+== Download homepage via cron
+
+  curl https://j1-preview.herokuapp.com//index.html --output /dev/null --silent
