@@ -104,6 +104,7 @@ Then:
 
   git commit -am "Cleanup files"
   git commit -am "New version 2021.1.0"
+  git commit -am "Latest files of version 2021.1.0"
 
 # Add file permissions on Windows
 

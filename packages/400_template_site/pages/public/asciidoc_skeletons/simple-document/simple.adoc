@@ -1,7 +1,7 @@
 ---
 title:                                  Skeleton
 tagline:                                simple document
-date:                                   2021-01-01 00:00:00
+date:                                   2021-01-01 00:00:00 +100
 description: >
                                         Simple documents are used quite often. If the number
                                         of chapters is about or less than three and the document

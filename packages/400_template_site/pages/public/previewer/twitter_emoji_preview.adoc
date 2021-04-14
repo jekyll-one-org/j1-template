@@ -1,7 +1,7 @@
 ---
 title:                                  Emoji Previewer
 tagline:                                search and select twitter emojis
-date:                                   2020-11-08 00:00:00
+date:                                   2020-11-08 00:00:00 +100
 description: >
                                         Twitter Emoji Icons V1 Previewer.Twitter Emoji is a colored
                                         icon font developed by Twitter. The full icon set  is fully

@@ -1,0 +1,12 @@
+== Setting the date in the front matter
+
+To specify the UTC offset for each post use the following format:
+YYYY-MM-DD HH:MM:SS +/-TTTT, e.g. 2016-06-12 11:04:00 +0200. This
+might be useful if you want to specify the offset for some specific
+posts.
+
+---
+title: "Your title"
+layout: post
+date: 2016-06-12 11:04 +0200
+---

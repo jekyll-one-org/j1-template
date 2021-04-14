@@ -1,7 +1,7 @@
 ---
 title:                                  J1 Colors
 tagline:                                md color palette
-date:                                   2021-01-08 00:00:00
+date:                                   2021-01-08 00:00:00 +100
 description: >
                                         The color palette used by J1 Template is based on
                                         the definitions of Google's Material Design (MD).

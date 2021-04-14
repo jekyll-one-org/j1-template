@@ -1,7 +1,7 @@
 ---
 title:                                  Framer
 tagline:                                automagic iframes
-date:                                   2020-11-08 00:00:00
+date:                                   2020-11-08 00:00:00 +100
 description: >
                                         Test page for J1 module framer. Framer enables the automatic
                                         resizing of the height and width of both same and cross domain
