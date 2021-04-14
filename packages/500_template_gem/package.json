@@ -104,6 +104,7 @@
     "template-gem-template:clean": "shx rm -f lib/starter_web/collections/posts/public/featured/_posts/*welcome-to-j1.adoc",
     "posttemplate-gem-files": "run-s posttemplate-gem-site-files:*",
     "posttemplate-gem-site-files:config": "shx rm -f lib/starter_web/_data/modules/cc.yml",
+    "posttemplate-gem-site-files:private": "shx rm -f lib/starter_web/_data/private@*.yml",
     "posttemplate-gem-site-files:assets": "shx cp -r ../300_template_src/assets/error_pages ./assets && shx rm -rf ./lib/starter_web/assets/error_pages && shx cp -r ../300_template_src/assets/data ./assets && shx rm -rf ./lib/starter_web/assets/data",
     "posttemplate-gem-site-files:includes": "shx rm -rf ./lib/starter_web/_includes/themes",
     "posttemplate-gem-site-files:collections": "shx rm -rf ./lib/starter_web/collections/_* && shx rm -rf ./lib/starter_web/pages/public/bookshelf",

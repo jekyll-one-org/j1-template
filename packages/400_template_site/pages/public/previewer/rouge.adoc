@@ -1,7 +1,7 @@
 ---
 title:                                  Rouge
 tagline:                                preview rouge themes
-date:                                   2020-11-08 00:00:00
+date:                                   2020-11-08 00:00:00 +100
 description: >
                                         Previewer page for J1 module Rouge. Rouge is a pure Ruby
                                         syntax highlighter. It can highlight over 100 different

@@ -1,7 +1,6 @@
 ---
 title:                                  Site Generators
 tagline:                                top open source tools
-date:                                   2021-03-01 00:00:00
 
 categories:                             [ Featured ]
 tags:                                   [ Jekyll, Generators ]

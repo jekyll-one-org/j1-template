@@ -1,9 +1,6 @@
 ---
 title:                                  Test Post 2
 tagline:                                testing series elements
-date:                                   2020-01-02 00:00:00
-description: >
-                                        Testing series elements
 
 categories:                             [ Series ]
 tags:                                   [ Post, Test ]
@@ -25,8 +22,8 @@ resource_options:
       padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/images/modules/attics/banner/docker-1280x600-bw.jpg
-          alt:                          docker_banner_r-1280x500-bw
+        - url:                          /assets/images/modules/attics/admin-dashboard-bootstrap-1280x600.jpg
+          alt:                          admin-dashboard-bootstrap
 ---
 
 // Page Initializer

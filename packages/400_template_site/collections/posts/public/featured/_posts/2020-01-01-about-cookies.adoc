@@ -1,7 +1,6 @@
 ---
 title:                                  Cookies
 tagline:                                good to know
-date:                                   2020-01-01 00:00:00
 
 categories:                             [ Featured ]
 tags:                                   [ About, Cookies ]

@@ -1,7 +1,6 @@
 ---
 title:                                  Minneapolis
 tagline:                                largest city in the state of minnesota
-date:                                   2016-11-20 19:16:49 +0100
 
 categories:                             [ Wikipedia ]
 tags:                                   [ USA, Minnesota, City, Minneapolis ]

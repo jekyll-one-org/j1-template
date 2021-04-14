@@ -17,6 +17,11 @@
     "bumplevel": "patch",
     "mode": "development"
   },
+  "engines": {
+    "node": ">=12.0",
+    "npm": ">=6.0",
+    "yarn": ">=1.22"
+  },  
   "npm": {
     "loglevel": "silent",
     "prepend_nodepath": "true"
