@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "site",
-  "version": "2021.1.1",
+  "version": "2021.1.0",
   "description": "Web/Content sources for J1 Starter",
   "main": "_config.yml",
   "config": {
@@ -85,18 +85,15 @@
     "rebuild:clean": "bundle exec jekyll clean",
     "rebuild:jekyll": "cross-var cross-env JEKYLL_ENV=$npm_package_config_mode BUNDLE_GEMFILE=$npm_package_ruby_gemfile bundle exec jekyll b --profile -c $npm_package_jekyll_configfile $npm_package_jekyll_opt_incremental",
     "rebuild:lint": "npm run lint",
-
     "jekyll_files": "run-s -s jekyll_files:*",
     "jekyll_files:gemfile": "shx cp -f ../300_template_src/_install/dev/development.Gemfile ./Gemfile",
     "jekyll_files:conf": "shx cat ../../packages/300_template_src/_install/site/base-files/_config.yml | shx sed \"s/^port:.*/#port:/\" | shx sed \"s/^environment:.*/environment:                            development/\" | shx sed \"s/^theme:.*/#theme:/\" | shx sed \"s/^source:.*/source:                                 ./\" > _config.yml",
     "jekyll_files:private-config": "shx cp -f ../../packages/300_template_src/_install/dev/private.yml  ./_data",
     "jekyll_files:eslintfile": "shx cp -f ../300_template_src/_install/dev/adapter.eslintrc.json ./.eslintrc.json",
-
     "_jekyll_build:conf": "shx cat ../../packages/300_template_src/_install/site/base-files/_config.yml | shx sed \"s/^port:.*/#port:/\" | shx sed \"s/^environment:.*/environment:                            development/\" | shx sed \"s/^theme:.*/#theme:/\" | shx sed \"s/^source:.*/source:                                 ./\" > _config.yml",
     "_jekyll_build:gemfile": "shx cp -f ../300_template_src/_install/dev/development.Gemfile ./Gemfile",
     "_jekyll_build:private-config": "shx cp -f ../../packages/300_template_src/_install/dev/private.yml  ./_data",
     "_jekyll_build:eslintfile": "shx cp -f ../300_template_src/_install/dev/adapter.eslintrc.json ./.eslintrc.json",
-
     "jekyll_build:bundle": "cross-env BUNDLE_USERIZE=$npm_package_jekyll_userize npm run bundle",
     "jekyll_build:build": "cross-var cross-env JEKYLL_ENV=$npm_package_config_mode BUNDLE_GEMFILE=$npm_package_ruby_gemfile bundle exec jekyll b --profile -c $npm_package_jekyll_configfile $npm_package_jekyll_opt_incremental",
     "jekyll_post_build:make_sure_css_files_copied": "shx cp -rf ../100_template_css/dist/* ../400_template_site/assets/themes/j1/core/css",
