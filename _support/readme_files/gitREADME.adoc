@@ -69,12 +69,20 @@ Also removing ignored files :
 git clean -dfx
 
 
-== Delete a local Git tag
+== Delete a Git tag
 
 Use the “git tag” command with the “-d” option
 
+== From local
+
   git tag -d v2021.1.1
 
+=== From remote
+
+git push -d origin v2021.1.1
+
+
+== Set a Git tag
 
 # When modifying remember to issue a new tag command in git before committing,
 # then push the new tag
