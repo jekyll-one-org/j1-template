@@ -130,9 +130,9 @@ packages/400_template_site/.jekyll-metadata
 
 packages/400_template_site/.jekyll-cache/
 
-packages/400_template_site/_config.yml
+#packages/400_template_site/_config.yml
 
-packages/400_template_site/_data/private.yml
+packages/400_template_site/_data/private*.yml
 
 packages/400_template_site/collections/posts/featured/_posts/*welcome-to-J1 Template.adoc
 
