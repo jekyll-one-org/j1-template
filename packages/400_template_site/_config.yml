@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
 # ~/_config.yml
-# Global Jekyll site configuration (runtime)
+# Global Jekyll site configuration (development)
 #
 # Product/Info:
 # https://jekyll.one
@@ -47,7 +47,7 @@
 #   values:                             development|production
 #   default:                            production
 #
-environment:                            production
+environment:                            development
 
 # version
 # ------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ copyright:                              J1 · Copyright © 2021
 #
 #   default:                            j1-template
 #
-theme:                                  j1-template
+#theme:
 
 # ------------------------------------------------------------------------------
 #   J1 Template configuration
@@ -117,7 +117,6 @@ theme:                                  j1-template
 template:
   name:                                 j1
   config:                               j1_config
-
 
 # ==============================================================================
 # 3. SITE configuration
@@ -229,8 +228,8 @@ description: >
                                         Made for Jekyll · Made for Your Web
 
 keywords:                               Jekyll, One, Template, Ruby, Asciidoctor,
-                                        Asciidoc, Bootstrap, Javascript,
-                                        JS, JS3, CSS, CSS3, HTML5, Material, Design
+                                        Asciidoc, Bootstrap, Javascript, JS, JS3,
+                                        CSS, CSS3, HTML5, Material, Design
 author:
   name:                                 username
   email:                                username@email.domain
@@ -264,7 +263,6 @@ brand:
 favicon:
   image:                                modules/icons/j1/j1-32x32.ico
   type:                                 image/ico
-
 
 # ==============================================================================
 # 4. JEKYLL specific site configuration
@@ -318,7 +316,7 @@ permalink:                              pretty
 # if you are running jekyll serve in a development environment,
 # site.url will be set to the value of host, port.
 #
-url:                                    ""
+url:                                    "http://localhost:41000"
 
 # The subpath of your site, e.g. /blog/. Used in conjunction with
 # site.url (see above) when you want a link to something with the
@@ -338,19 +336,18 @@ base_path:                              ""
 #  Defaults:
 #   protocol:                           http
 #   host:                               localhost
-#   port:                               40000
+#   port:                               41000
 #   timezone:                           Europe/Berlin
 #   encoding:                           UTF-8
 #
 protocol:                               http
 host:                                   localhost
-port:                                   40000
+port:                                   41000
 timezone:                               Europe/Berlin
 encoding:                               UTF-8
 
 detach:                                 false
 show_dir_listing:                       false
-
 
 # ------------------------------------------------------------------------------
 # PATH configuration
@@ -360,7 +357,7 @@ show_dir_listing:                       false
 #   source:                             .
 #   destination:                        _site
 #
-source:   .
+source:                                 .
 destination:                            _site
 plugins_dir:                            _plugins
 layouts_dir:                            _layouts
@@ -573,6 +570,15 @@ defaults:
       sitemap:                          false
 
   # ----------------------------------------------------------------------------
+  # Module docs and examples excluded from sitemap
+  #
+  - scope:
+      path:                             assets/themes/j1/modules/**/*.html
+
+    values:
+      sitemap:                          false
+
+  # ----------------------------------------------------------------------------
   # Pages
   #
   - scope:
@@ -584,7 +590,7 @@ defaults:
       author:                           J1 Team
 
 #     robots:
-#       index:                          false
+#       index:                          true
 #       follow:                         true
 
       analytics:                        false
@@ -623,7 +629,7 @@ defaults:
       author:                           J1 Team
 
 #     robots:
-#       index:                          false
+#       index:                          true
 #       follow:                         true
 
       analytics:                        false
@@ -662,7 +668,7 @@ defaults:
       author:                           J1 Team
 
 #     robots:
-#       index:                          false
+#       index:                          true
 #       follow:                         true
 
       analytics:                        false
@@ -697,7 +703,7 @@ defaults:
       author:                           Wikipedia
 
 #     robots:
-#       index:                          false
+#       index:                          true
 #       follow:                         true
 
       analytics:                        false
@@ -720,7 +726,6 @@ defaults:
         category-image:
         dir:                            /assets/images/collections/blog/wikipedia
 
-
   # ----------------------------------------------------------------------------
   # Collections
   #
@@ -735,6 +740,78 @@ defaults:
     values:
       layout:                           page
       sitemap:                          false
+
+  # ----------------------------------------------------------------------------
+  # Biography (Book Shelf)
+  #
+  - scope:
+      type:                             biography
+      path:                             collections/_biography
+
+    values:
+      layout:                           collection
+      author:                           J1 Team
+
+      robots:
+        index:                          false
+        follow:                         false
+
+      sitemap:                          false
+      analytics:                        false
+      advertising:                      false
+      comments:                         false
+
+      toc:                              false
+      fam_menu_id:                      default
+      scrollbar:                        false
+
+  # ----------------------------------------------------------------------------
+  # Fantasy (Book Shelf)
+  #
+  - scope:
+      type:                             fantasy
+      path:                             collections/_fantasy
+
+    values:
+      layout:                           collection
+      author:                           J1 Team
+
+      robots:
+        index:                          false
+        follow:                         false
+
+      sitemap:                          false
+      analytics:                        false
+      advertising:                      false
+      comments:                         false
+
+      toc:                              false
+      fam_menu_id:                      default
+      scrollbar:                        false
+
+  # ----------------------------------------------------------------------------
+  # Romance (Book Shelf)
+  #
+  - scope:
+      type:                             romance
+      path:                             collections/_romance
+
+    values:
+      layout:                           collection
+      author:                           J1 Team
+
+      robots:
+        index:                          false
+        follow:                         false
+
+      sitemap:                          false
+      analytics:                        false
+      advertising:                      false
+      comments:                         false
+
+      toc:                              false
+      fam_menu_id:                      default
+      scrollbar:                        false
 
 # ==============================================================================
 # 6. LAYOUT configuration

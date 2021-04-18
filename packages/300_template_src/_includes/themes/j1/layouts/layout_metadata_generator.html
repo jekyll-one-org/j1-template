@@ -47,17 +47,17 @@
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ start processing: place meta tags (taken from site config|page frontmatter) ] -->
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ page|content encoding ] -->
-<meta http-equiv="Content-Type" content="text/html;charset={{site.coding}}">
+<meta http-equiv="Content-Type" content="text/html;charset={{site.coding}}" />
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ added for MS Edge Browser ] -->
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ initial zoom level when the page is first loaded by the browser ] -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 {% if template_config.translation.enabled %}
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ add google translator meta tag to enable customized translations ] -->
-<meta name="google-translate-customization">
+<meta name="google-translate-customization" />
 {% endif %}
 
 {% if page.layout == 'home' %}
@@ -75,7 +75,7 @@
     {% else %}
     <!-- [SEO    ] [j1.layout.meta_data_generator.html    ] [ Consider! IMPROVE|INCREASE your site description, recommended: 70-160 characters ] -->
     {% endif %}
-    <meta name="description" content="{{site.description}}">
+    <meta name="description" content="{{site.description}}" />
   {% endif %}
 {% else %}
   {% if page.description %}
@@ -86,42 +86,42 @@
     {% else %}
     <!-- [SEO    ] [j1.layout.meta_data_generator.html    ] [ Consider!  to IMPROVE|INCREASE your page description ] -->
     {% endif %}
-    <meta name="description" content="{{page.description}}">
+    <meta name="description" content="{{page.description}}" />
   {% endif %}
 {% endif %}
 
 {% if site.favicon.image %}
-  <link rel="icon" type="{{site.favicon.type}}" href="{{site.data.j1_config.image_path}}/{{site.favicon.image}}">
+  <link rel="icon" type="{{site.favicon.type}}" href="{{site.data.j1_config.image_path}}/{{site.favicon.image}}" />
 {% endif %}
 
 {% if page.layout == 'home' %}
   {% if page.author %}
-    <meta name="author" content="{{page.author}}">
+    <meta name="author" content="{{page.author}}" />
   {% else %}
-    <meta name="author" content="{{site.author.name}}">
+    <meta name="author" content="{{site.author.name}}" />
   {% endif %}
 {% else %}
   {% if page.author %}
-    <meta name="author" content="{{page.author}}">
+    <meta name="author" content="{{page.author}}" />
   {% else %}
-    <meta name="author" content="{{site.author.name}}">
+    <meta name="author" content="{{site.author.name}}" />
   {% endif %}
 {% endif %}
 
 {% if page.layout == 'home' %}
   {% if page.keywords %}
-    <meta name="keywords" content="{{page.keywords}}">
+    <meta name="keywords" content="{{page.keywords}}" />
   {% else %}
     {% if site.keywords %}
-      <meta name="keywords" content="{{site.keywords}}">
+      <meta name="keywords" content="{{site.keywords}}" />
     {% endif %}
   {% endif %}
 {% else %}
   {% if page.keywords %}
-    <meta name="keywords" content="{{page.keywords}}">
+    <meta name="keywords" content="{{page.keywords}}" />
   {% else %}
     {% if site.keywords %}
-      <meta name="keywords" content="{{site.keywords}}">
+      <meta name="keywords" content="{{site.keywords}}" />
     {% endif %}
   {% endif %}
 {% endif %}
@@ -129,15 +129,15 @@
 {% comment %} Check robot settings from site configuration
 -------------------------------------------------------------------------------- {% endcomment %}
 {% if site.robots.index %}
-  {% capture robots_index %}<meta name="robots" content="index">{% endcapture %}
+  {% capture robots_index %}<meta name="robots" content="index" />{% endcapture %}
 {% else %}
-  {% capture robots_index %}<meta name="robots" content="noindex">{% endcapture %}
+  {% capture robots_index %}<meta name="robots" content="noindex" />{% endcapture %}
 {% endif %}
 
 {% if site.robots.follow %}
-  {% capture robots_follow %}<meta name="robots" content="follow">{% endcapture %}
+  {% capture robots_follow %}<meta name="robots" content="follow" />{% endcapture %}
 {% else %}
-  {% capture robots_follow %}<meta name="robots" content="nofollow">{% endcapture %}
+  {% capture robots_follow %}<meta name="robots" content="nofollow" />{% endcapture %}
 {% endif %}
 
 {% comment %} Check robot settings from page (or default SCOPE)
@@ -169,7 +169,7 @@
   {% assign cors  = template_config.preload.font.cors %}
   {% assign fonts = template_config.preload.font.fonts %}
   {% for font in fonts %}
-    <link rel="preload" as="font" href="{{font}}" {{cors}}>
+    <link rel="preload" as="font" href="{{font}}" {{cors}} />
   {% endfor %}
 {% else %}
   <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ PRELOAD of fonts: disabled ] -->
@@ -184,12 +184,12 @@
   {% assign css   = template_config.preload.css.css %}
   {% assign files = template_config.preload.css.files %}
   {% for file in css %}
-    <link rel="preload" as="style" href="{{file}}.{{ext_css}}">
+    <link rel="preload" as="style" href="{{file}}.{{ext_css}}" />
   {% endfor %}
 
   {% for file in files %}
     <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ PRELOAD css as FILE ] -->
-    <link rel="preload" as="style" href="{{file}}">
+    <link rel="preload" as="style" href="{{file}}" />
   {% endfor %}
 {% else %}
   <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ PRELOAD of css: disabled ] -->
@@ -204,12 +204,12 @@
   {% assign js    = template_config.preload.js.js %}
   {% assign files = template_config.preload.js.files %}
   {% for file in js %}
-    <link rel="preload" as="script" href="{{file}}.{{ext_js}}">
+    <link rel="preload" as="script" href="{{file}}.{{ext_js}}" />
   {% endfor %}
 
   {% for file in files %}
     <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ PRELOAD js as FILE ] -->
-    <link rel="preload" as="script" href="{{file}}">
+    <link rel="preload" as="script" href="{{file}}" />
   {% endfor %}
 {% else %}
   <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ PRELOAD of js: disabled ] -->
@@ -223,7 +223,7 @@
   <!-- [SEO    ] [j1.layout.meta_data_generator.html    ] [ request PRELOAD of images to prioritize fetching ] -->
   {% assign files = template_config.preload.image.files %}
   {% for file in files %}
-    <link rel="preload" as="image" href="{{file}}">
+    <link rel="preload" as="image" href="{{file}}" />
   {% endfor %}
 {% else %}
   <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ PRELOAD of images: disabled ] -->
@@ -238,8 +238,8 @@
   {% assign urls = template_config.preconnect.urls %}
   {% for url in urls %}
     <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ establish early connection: {{url}} ] -->
-    <link rel="dns-prefetch" href="{{url}}">
-    <link rel="preconnect"   href="{{url}}">
+    <link rel="dns-prefetch" href="{{url}}" />
+    <link rel="preconnect"   href="{{url}}" />
   {% endfor %}
 {% else %}
   <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ PRECONNECT remote URLs: disabled ] -->
