@@ -73,13 +73,13 @@ git clean -dfx
 
 Use the “git tag” command with the “-d” option
 
-  git tag -d v2021.1.0
+  git tag -d v2021.1.1
 
 
 # When modifying remember to issue a new tag command in git before committing,
 # then push the new tag
 #
-# git tag -a v2021.1.0 -m "v2021.1.0"
+# git tag -a v2021.1.1 -m "v2021.1.1"
   git push origin --tags
 
 == Update Git Index (cache) completely
@@ -103,8 +103,8 @@ or forced
 Then:
 
   git commit -am "Cleanup files"
-  git commit -am "New version 2021.1.0"
-  git commit -am "Latest files of version 2021.1.0"
+  git commit -am "New version 2021.1.1"
+  git commit -am "Latest files of version 2021.1.1"
 
 # Add file permissions on Windows
 

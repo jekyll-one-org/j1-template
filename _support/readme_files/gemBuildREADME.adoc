@@ -3,17 +3,17 @@
 create:                               gem build j1-template.gemspec
 list all (local):                     gem list j1-template --local --all
 list all (remote):                    gem list j1-template --remote --all
-publish (RubyGems):                   gem push j1-template-2021.1.0.gem
-unpublish (RubyGems):                 gem yank j1-template -v 2021.1.0
+publish (RubyGems):                   gem push j1-template-2021.1.1.gem
+unpublish (RubyGems):                 gem yank j1-template -v 2021.1.1
 install (manually, system):           gem install --local j1-template --no-document
 install (manually, user):             gem install --local j1-template --user-install --no-document
 install (project):                    yarn gem install
 install (remote):                     gem install j1-template --no-document
 install (remote, userized):           gem install j1-template --user-install --no-document
 uninstall (all):                      gem uninstall j1-template --force
-uninstall (version):                  gem uninstall j1-template -v 2021.1.0
-uninstall (version/forced):           gem uninstall j1-template -v 2021.1.0 --force
-uninstall (version/user/forced):      gem uninstall j1-template -v 2021.1.0 --user --force
+uninstall (version):                  gem uninstall j1-template -v 2021.1.1
+uninstall (version/forced):           gem uninstall j1-template -v 2021.1.1 --force
+uninstall (version/user/forced):      gem uninstall j1-template -v 2021.1.1 --user --force
 install binstub:                      bundle binstubs j1-template
 list bundle:                          bundle list j1-template
 run j1 exe (help):                    bundle exec j1 --help
@@ -23,7 +23,7 @@ run j1 exe (help):                    bundle exec j1 --help
 When modifying remember to issue a new tag command in git before committing,
 then push the new tag
 
-# git tag -a v2021.1.0 -m "v2021.1.0"
+# git tag -a v2021.1.1 -m "v2021.1.1"
   git push origin --tags
 
 
@@ -46,7 +46,7 @@ cd C:\temp
 cd C:\temp\starter
 
 mklink /D "ziel" "quelle"
-mklink /D "C:\Temp\starter" "C:\Temp\starter 2021.1.0"
+mklink /D "C:\Temp\starter" "C:\Temp\starter 2021.1.1"
 
 
 == Gem build
