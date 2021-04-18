@@ -78,13 +78,9 @@ regenerate:                             true
 {% assign icon_size   = navigator_options.icon_size %}
 {% assign icon_color  = navigator_options.icon_color %}
 
-<!-- [INFO   ] [j1.assets.data.mmenu.html             ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
-<head data-proofer-ignore>
-  <meta name="robots" content="noindex, nofollow">
-</head>
-
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
+
 <!-- [INFO   ] [ j1.modules.navigator.mmenu_sidebar.html ] [Start processing: sidebar] -->
 <div id="{{sidebar_options.id}}" class="mm-side" style="display:none">
 {% for boxes in sidebar_options.boxes %}

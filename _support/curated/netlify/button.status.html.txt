@@ -1,6 +1,0 @@
-
-<a
-	href="https://app.netlify.com/sites/j1-template-starter/deploys">
-	<img src="https://api.netlify.com/api/v1/badges/1c7d492e-76ce-482f-a8d2-8925266ac34a/deploy-status"
-	alt="Netlify Status">
-</a>
