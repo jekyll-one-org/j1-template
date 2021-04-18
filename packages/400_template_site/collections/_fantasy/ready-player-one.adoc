@@ -1,8 +1,7 @@
 ---
-layout:                                 collection
 title:                                  Ready Player One
 tagline:                                It's the year 2044, and the real world has become an ugly place ..
-date:                                   2016-11-20 00:00:00
+date:                                   2016-11-20 00:00:00 +100
 
 book:
   cover:                                https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9780/0995/9780099560432.jpg
@@ -16,8 +15,6 @@ book:
 
 categories:                             [ Book, Fantasy ]
 tags:                                   [ Fantasy, Thrillers, Adventure, Science, Fiction ]
-
-toc:                                    false
 
 regenerate:                             false
 

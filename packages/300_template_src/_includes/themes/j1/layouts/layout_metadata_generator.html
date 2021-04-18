@@ -126,36 +126,37 @@
   {% endif %}
 {% endif %}
 
-{% comment %} site check DISABLED
---------------------------------------------------------------------------------
+{% comment %} Check robot settings from site configuration
+-------------------------------------------------------------------------------- {% endcomment %}
 {% if site.robots.index %}
-  <meta name="robots" content="index">
+  {% capture robots_index %}<meta name="robots" content="index">{% endcapture %}
 {% else %}
-  <meta name="robots" content="noindex">
+  {% capture robots_index %}<meta name="robots" content="noindex">{% endcapture %}
 {% endif %}
 
 {% if site.robots.follow %}
-  <meta name="robots" content="follow">
+  {% capture robots_follow %}<meta name="robots" content="follow">{% endcapture %}
 {% else %}
-  <meta name="robots" content="nofollow">
+  {% capture robots_follow %}<meta name="robots" content="nofollow">{% endcapture %}
 {% endif %}
--------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Check robot settings from page (or default SCOPE)
-NOTE: for layout home (home page, the keys are to be set!!!)
 -------------------------------------------------------------------------------- {% endcomment %}
 {% if page.robots.index %}
-  <meta name="robots" content="index">
+  {% capture robots_index %}<meta name="robots" content="index">{% endcapture %}
 {% else %}
-  <meta name="robots" content="noindex">
+  {% capture robots_index %}<meta name="robots" content="noindex">{% endcapture %}
 {% endif %}
 
 {% if page.robots.follow %}
-  <meta name="robots" content="follow">
+  {% capture robots_follow %}<meta name="robots" content="follow">{% endcapture %}
 {% else %}
-  <meta name="robots" content="nofollow">
+  {% capture robots_follow %}<meta name="robots" content="nofollow">{% endcapture %}
 {% endif %}
 
+<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [place meta tags for robots ] -->
+{{robots_index}}
+{{robots_follow}}
 
 {% comment %} SEO settings (optimization)
 -------------------------------------------------------------------------------- {% endcomment %}

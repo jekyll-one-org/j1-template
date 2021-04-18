@@ -1,5 +1,4 @@
 ---
-layout:                                 collection
 title:                                  The Terry Pratchett Diary 2017
 tagline:                                Sir Terry Pratchett left us, far too early ...
 date:                                   2016-11-23 00:00:00
@@ -16,8 +15,6 @@ book:
 
 categories:                             [ Book, Fantasy ]
 tags:                                   [ Fantasy, Thrillers, Adventure, Knight ]
-
-toc:                                    false
 
 regenerate:                             false
 

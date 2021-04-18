@@ -1,8 +1,7 @@
 ---
-layout:                                 collection
 title:                                  Becoming
 tagline:                                Memoir by the former First Lady of the USA
-date:                                   2018-11-13 00:00:00
+date:                                   2018-11-13 00:00:00 +100
 
 book:
   cover:                                https://images-na.ssl-images-amazon.com/images/I/414JfiBCutL.jpg
@@ -16,8 +15,6 @@ book:
 
 categories:                             [ Book, Biography ]
 tags:                                   [ Memoirs, Political, Journalism ]
-
-toc:                                    false
 
 regenerate:                             false
 

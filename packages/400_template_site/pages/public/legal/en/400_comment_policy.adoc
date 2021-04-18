@@ -10,13 +10,10 @@ description: >
 tags:                                   [ Legal ]
 categories:                             [ Comments, Policy ]
 
-toc:                                    true
-fam:                                    true
 fam_menu_id:                            page_ctrl_simple
 scrollbar:                              false
-indexed:                                false
 comments:                               false
-exclude_from_search:                    true
+toc:                                    true
 
 permalink:                              /pages/public/legal/en/comment_policy/
 regenerate:                             true

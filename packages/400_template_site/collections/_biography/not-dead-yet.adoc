@@ -1,9 +1,7 @@
 ---
-layout:                                 collection
-
 title:                                  Not Dead Yet
 tagline:                                Phil Collins - The Autobiography
-date:                                   2016-10-27 00:00:00
+date:                                   2016-10-27 00:00:00  +100
 
 book:
   cover:                                https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/7808/9781780895123.jpg
@@ -17,8 +15,6 @@ book:
 
 categories:                             [ Book, Biography ]
 tags:                                   [ Memoirs, Musicians ]
-
-toc:                                    false
 
 regenerate:                             false
 

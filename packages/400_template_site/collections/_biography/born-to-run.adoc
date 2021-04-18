@@ -1,8 +1,7 @@
 ---
-layout:                                 collection
 title:                                  Born to Run
 tagline:                                A legendary Rock Star’s Memoir
-date:                                   2016-10-27 00:00:00
+date:                                   2016-10-27 00:00:00 +100
 
 book:
   cover:                                https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/4711/9781471157790.jpg
@@ -16,8 +15,6 @@ book:
 
 categories:                             [ Book, Biography ]
 tags:                                   [ Memoirs, Musicians, Autobiography ]
-
-toc:                                    false
 
 regenerate:                             false
 

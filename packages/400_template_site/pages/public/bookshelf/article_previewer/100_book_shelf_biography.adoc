@@ -3,13 +3,10 @@ title:                                  Biography
 tagline:                                Today's People in the Book Shelf
 date:                                   2020-11-03 00:00:00 +100
 
-exclude_from_search:                    true
-
-fam:                                    true
-fam_menu_id:                            open_toc
-
 permalink:                              /pages/public/collections/bookshelf/biography/
 regenerate:                             false
+
+fam_menu_id:                            open_toc
 
 resources:                              []
 resource_options:

@@ -1,8 +1,7 @@
 ---
-layout:                                 collection
 title:                                  Outlander
 tagline:                                The Land and Lore of Scotland
-date:                                   2016-11-28 00:00:00
+date:                                   2016-11-28 00:00:00  +100
 
 book:
   cover:                                https://d4rri9bdfuube.cloudfront.net/assets/images/book/large/9781/7808/9781780896618.jpg
@@ -16,8 +15,6 @@ book:
 
 categories:                             [ Book, Romance ]
 tags:                                   [ Romance, Historical, Adventure ]
-
-toc:                                    false
 
 regenerate:                             false
 
