@@ -1,0 +1,7 @@
+
+<a
+	href="/hosting/netlify/deploy/">
+	<img alt="Deploy to Netlify"
+	src="https://www.netlify.com/img/deploy/button.svg"
+	title="Deploy to Netlify">
+</a>

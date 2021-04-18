@@ -1,25 +1,25 @@
 ---
-title: "J1 Template Starter"
-github: https://github.com/jekyll-one-org/j1-template-starter
-demo: https://jekyll-one-org.github.io/
-author: j1juergen
-date: 2021-04-01
-ssg:
+title: Jekyll One Template - Create powerful modern static websites
+repo: https://github.com/jekyll-one-org/j1-template-starter
+preview: starter-screenshot.jpg
+example: https://j1-template-starter.netlify.app/
+tags:
   - Jekyll
-cms:
-  - No CMS
-css:
   - Bootstrap
-archetype:
-  - Website
-  - Blog
-  - Multi Purpose
-  - Documentation
-  - Business
-description: J1 - Create powerful modern static websites.
+  - Desktop Navigation
+  - Mobile Navigation
+  - Fully configurable
+  - Responsive Design
+  - Material Design
+  - Asciidoc Support
+  - Markdown Support
+  - Themes Support
+  - Icon Font Support
 ---
 
-# A fully configurable Jekyll Theme
+![Screenshot](https://jekyll.one/starter-screenshot.jpg)
+
+Jekyll One Template - Create powerful modern static websites.
 
 * Fully Responsive. J1 Template supports modern web browsers on all
   devices for best results on PCs, Tablets, and SmartPhones.

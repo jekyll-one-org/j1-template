@@ -63,6 +63,10 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% capture footer_config_file_name %}~/_data/modules/footer.yml{% endcapture %}
 
+<!-- [INFO   ] [j1.assets.data.footer.html             ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
+<head data-proofer-ignore>
+  <meta name="robots" content="noindex, nofollow">
+</head>
 
 {% comment %} Main
 ================================================================================ {% endcomment %}
