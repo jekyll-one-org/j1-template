@@ -98,12 +98,12 @@
 #
 # ------------------------------------------------------------------------------
 
-# -------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Layout configuration settings
 #
 lanes:
 
-  # ------------------------------------------------------------------
+  # ----------------------------------------------------------------------------
   # META data (head)
   - lane:
       enabled:                          true
@@ -113,7 +113,7 @@ lanes:
       path:                             layouts
       file:                             layout_metadata_generator.html
 
-  # ------------------------------------------------------------------
+  # ----------------------------------------------------------------------------
   # CONNECTORS (Google Analytics)
   - lane:
       enabled:                          true
@@ -133,7 +133,7 @@ lanes:
       path:                             modules/connectors
       file:                             translator
 
-  # ------------------------------------------------------------------
+  # ----------------------------------------------------------------------------
   # CONNECTORS (Google Ads)
   - lane:
       enabled:                          true
@@ -143,7 +143,7 @@ lanes:
       path:                             modules/connectors
       file:                             ads
 
-  # ------------------------------------------------------------------
+  # ----------------------------------------------------------------------------
   # RESOURCE loader (head)
   - lane:
       enabled:                          true
@@ -153,7 +153,7 @@ lanes:
       path:                             layouts
       file:                             layout_resource_generator.html
 
-  # ------------------------------------------------------------------
+  # ----------------------------------------------------------------------------
   #   NAVIGATOR (body-navigation)
   #
   #   NOTE:
@@ -184,7 +184,7 @@ lanes:
       type:                             async
       class:                            container-fluid no-padding
 
-  # ------------------------------------------------------------------
+  # ----------------------------------------------------------------------------
   #   FOOTER (body-footer)
   #
   #   NOTE:
@@ -200,31 +200,7 @@ lanes:
       type:                             async
       class:
 
-  # ------------------------------------------------------------------
-  # SHIM loader (body-footer)
-  #   NOTE: UNUSED as it is moved to ???
-  #
-  # - lane:
-  #     enabled:                          false
-  #     region:                           body-footer
-  #     type:                             sync
-  #     base:                             _includes/themes/j1
-  #     path:                             layouts
-  #     file:                             layout_shim_generator.html
-
-  # ------------------------------------------------------------------
-  # THEME loader (body-footer)
-  #   NOTE: UNUSED as it is moved to themer.js
-  #
-  # - lane:
-  #     enabled:                          false
-  #     region:                           body-footer
-  #     type:                             sync
-  #     base:                             _includes/themes/j1
-  #     path:                             layouts
-  #     file:                             layout_theme_generator.html
-
-  # ------------------------------------------------------------------
+  # ----------------------------------------------------------------------------
   #   MODULE generator (body-footer)
   #
   #   NOTE:
