@@ -560,6 +560,15 @@ collections:
 defaults:
 
   # ----------------------------------------------------------------------------
+  # HTML partials (loaded via XHR) excluded from sitemap
+  #
+  - scope:
+      path:                             assets/data
+
+    values:
+      sitemap:                          false
+
+  # ----------------------------------------------------------------------------
   # Pages
   #
   - scope:
