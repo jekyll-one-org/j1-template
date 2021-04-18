@@ -1,8 +1,7 @@
 ---
-layout:                                 collection
 title:                                  The Princess Diarist
 tagline:                                Behind the scenes on one of the most famous film sets
-date:                                   2016-10-27 00:00:00
+date:                                   2016-10-27 00:00:00 +100
 
 book:
   cover:                                https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9780/5930/9780593077566.jpg
@@ -16,8 +15,6 @@ book:
 
 categories:                             [ Book, Biography ]
 tags:                                   [ Memoirs, Films, Actors, Science, Fiction ]
-
-toc:                                    false
 
 regenerate:                             false
 

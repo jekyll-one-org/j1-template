@@ -1,5 +1,4 @@
 ---
-layout:                                 collection
 title:                                  Outlander
 tagline:                                The Land and Lore of Scotland
 date:                                   2016-11-28 00:00:0
@@ -16,8 +15,6 @@ book:
 
 categories:                             [ Book, Romance ]
 tags:                                   [ Romance, Historical, Fiction ]
-
-toc:                                    false
 
 regenerate:                             false
 

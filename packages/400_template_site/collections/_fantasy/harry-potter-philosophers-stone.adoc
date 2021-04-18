@@ -1,9 +1,7 @@
 ---
-layout:                                 collection
-
 title:                                  Harry Potter and the Philosopher's Stone
 tagline:                                Full-color illustrated hardback edition
-date:                                   2016-11-18 00:00:00
+date:                                   2016-11-18 00:00:00 +100
 
 book:
   cover:                                https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/4088/9781408845646.jpg
@@ -17,8 +15,6 @@ book:
 
 categories:                             [ Book, Fantasy ]
 tags:                                   [ Fantasy, Magic, Harry, Potter ]
-
-toc:                                    false
 
 regenerate:                             false
 

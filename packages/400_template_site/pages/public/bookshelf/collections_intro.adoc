@@ -13,7 +13,6 @@ description: >
 tags:                                   [ Collections ]
 categories:                             [ Jekyll, Configuration ]
 
-fam:                                    true
 fam_menu_id:                            open_toc
 
 permalink:                              /pages/public/collections/intro/

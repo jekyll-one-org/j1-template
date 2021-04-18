@@ -1,8 +1,7 @@
 ---
-layout:                                 collection
 title:                                  Sword of Destiny
 tagline:                                Geralt is a witcher ...
-date:                                   2016-11-21 00:00:00
+date:                                   2016-11-21 00:00:00 +100
 
 book:
   cover:                                https://d4rri9bdfuube.cloudfront.net/assets/images/book/large/9781/4732/9781473211544.jpg
@@ -16,8 +15,6 @@ book:
 
 categories:                             [ Book, Fantasy ]
 tags:                                   [ Fantasy, Thriller, Adventure, Knight ]
-
-toc:                                    false
 
 regenerate:                             false
 

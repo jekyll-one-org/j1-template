@@ -1,8 +1,7 @@
 ---
-layout:                                 collection
 title:                                  A Life in Questions
 tagline:                                Jeremy Paxman, Britain’s most incisive political interviewer
-date:                                   2016-10-27 00:00:00
+date:                                   2016-10-27 00:00:00 +100
 
 book:
   cover:                                https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9780/0081/9780008128302.jpg
@@ -16,9 +15,6 @@ book:
 
 categories:                             [ Book, Biography ]
 tags:                                   [ Memoirs, Political, Journalism ]
-
-
-toc:                                    false
 
 regenerate:                             false
 

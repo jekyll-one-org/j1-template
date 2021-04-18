@@ -1,9 +1,7 @@
 ---
-layout:                                 collection
-
 title:                                  When Breath Becomes Air
 tagline:                                Paul Kalanithi was diagnosed with inoperable lung cancer ...
-date:                                   2016-10-27 00:00:00
+date:                                   2016-10-27 00:00:00 +100
 
 book:
   cover:                                https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9781/8479/9781847923677.jpg
@@ -17,8 +15,6 @@ book:
 
 categories:                             [ Book, Biography ]
 tags:                                   [ Memoirs, Neurosurgery, Life, Doctor ]
-
-toc:                                    false
 
 regenerate:                             false
 

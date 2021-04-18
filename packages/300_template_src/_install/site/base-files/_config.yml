@@ -241,9 +241,13 @@ author:
 webmaster:
   email:                                webmaster@example.domain
 
+# crawling/indexing DISABLED for default. Settings managed page-wise using
+# frontmatter defaults or by page settings to make sure that only WANTED
+# pages gets crawled.
+#
 robots:
   index:                                false
-  follow:                               true
+  follow:                               false
 
 # ------------------------------------------------------------------------------
 # BRAND configuration
@@ -251,7 +255,7 @@ robots:
 
 brand:
   image:                                modules/icons/j1/j1-512x512.png
-  image_height:                         48                                      # was: 64
+  image_height:                         48
   text:                                 Starter Web
   text_color:                           "#9E9E9E"
 
@@ -578,22 +582,22 @@ defaults:
     values:
       layout:                           page
       author:                           J1 Team
-      toc:                              true
-      fam_menu_id:                      page_ctrl_simple
-      resources:                        toccer
+
+#     robots:
+#       index:                          false
+#       follow:                         true
+
       analytics:                        false
       advertising:                      false
       comments:                         false
-      scrollbar:                        false
-      indexed:                          true
 
-      robots:
-        index:                          true
-        follow:                         true
+      toc:                              true
+      fam_menu_id:                      page_ctrl_simple
+      scrollbar:                        false
 
       icons:
         family:                         MDI
-        color:                          md-indigo
+        color:                          md-blue
         size:                           5x
 
       images:
@@ -601,7 +605,7 @@ defaults:
 
       resource_options:
         - toccer:
-            collapseDepth:              2
+            collapseDepth:              3
 
   # ----------------------------------------------------------------------------
   # Posts
@@ -616,23 +620,26 @@ defaults:
 
     values:
       layout:                           post
-      scrollbar:                        false
       author:                           J1 Team
-      toc:                              true
-      fam_menu_id:                      page_ctrl_simple
-      resources:                        toccer
+
+#     robots:
+#       index:                          false
+#       follow:                         true
+
       analytics:                        false
       advertising:                      false
       comments:                         true
 
-      robots:
-        index:                          true
-        follow:                         true
+      series:                           false
+
+      toc:                              true
+      fam_menu_id:                      page_ctrl_simple
+      scrollbar:                        false
 
       icons:
 #       category-icon:                  comment-text-outline
         family:                         MDI
-        color:                          md-indigo
+        color:                          md-blue
         size:                           5x
 
       images:
@@ -641,7 +648,7 @@ defaults:
 
       resource_options:
         - toccer:
-            collapseDepth:              2
+            collapseDepth:              3
 
   # ----------------------------------------------------------------------------
   # PUBLIC - SERIES
@@ -652,18 +659,21 @@ defaults:
 
     values:
       layout:                           post
-      scrollbar:                        false
       author:                           J1 Team
-      toc:                              true
-      fam_menu_id:                      page_ctrl_simple
-      resources:                        toccer
+
+#     robots:
+#       index:                          false
+#       follow:                         true
+
       analytics:                        false
       advertising:                      false
       comments:                         true
 
-      robots:
-        index:                          true
-        follow:                         true
+      series:                           true
+
+      toc:                              true
+      fam_menu_id:                      page_ctrl_simple
+      scrollbar:                        false
 
       icons:
 #       category-icon:                  dots-horizontal-circle
@@ -684,19 +694,21 @@ defaults:
 
     values:
       layout:                           post
-      scrollbar:                        false
       author:                           Wikipedia
-      resources:                        toccer
-      toc:                              true
-      fam_menu_id:                      page_ctrl_simple
-      resources:                        toccer
+
+#     robots:
+#       index:                          false
+#       follow:                         true
+
       analytics:                        false
       advertising:                      false
       comments:                         false
 
-      robots:
-        index:                          false
-        follow:                         false
+      series:                           false
+
+      toc:                              true
+      fam_menu_id:                      page_ctrl_simple
+      scrollbar:                        false
 
       icons:
 #       category-icon:                  wikipedia
@@ -707,6 +719,7 @@ defaults:
       images:
         category-image:
         dir:                            /assets/images/collections/blog/wikipedia
+
 
   # ----------------------------------------------------------------------------
   # Collections
@@ -721,37 +734,7 @@ defaults:
 
     values:
       layout:                           page
-
-  # ----------------------------------------------------------------------------
-  # Biography (Book Shelf)
-  #
-  - scope:
-      type:                             biography
-      path:                             collections/_biography
-
-    values:
-      layout:                           page
-
-  # ----------------------------------------------------------------------------
-  # Fantasy (Book Shelf)
-  #
-  - scope:
-      type:                             fantasy
-      path:                             collections/_fantasy
-
-    values:
-      layout:                           page
-
-  # ----------------------------------------------------------------------------
-  # Romance (Book Shelf)
-  #
-  - scope:
-      type:                             romance
-      path:                             collections/_romance
-
-    values:
-      layout:                           page
-
+      sitemap:                          false
 
 # ==============================================================================
 # 6. LAYOUT configuration

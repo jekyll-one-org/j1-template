@@ -1,8 +1,7 @@
 ---
-layout:                                 collection
 title:                                  Harry Potter and the Deathly Hallows
 tagline:                                Lord Voldemort and the Death Eaters are not far ..
-date:                                   2016-11-17 00:00:00
+date:                                   2016-11-17 00:00:00 +100
 
 book:
   cover:                                https://d4rri9bdfuube.cloudfront.net/assets/images/book/large/9781/4088/9781408855713.jpg
@@ -16,8 +15,6 @@ book:
 
 categories:                             [ Book, Fantasy ]
 tags:                                   [ Fantasy, Magic, Harry, Potter ]
-
-toc:                                    false
 
 regenerate:                             false
 

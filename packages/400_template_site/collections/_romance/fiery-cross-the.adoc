@@ -1,8 +1,7 @@
 ---
-layout:                                 collection
 title:                                  The Fiery Cross
 tagline:                                Crossing the boundaries of genre, unrivalled storytelling
-date:                                   2016-11-26 00:00:00
+date:                                   2016-11-26 00:00:00 +100
 
 book:
   cover:                                https://d20eq91zdmkqd.cloudfront.net/assets/images/book/large/9780/4402/9780440221661.jpg
@@ -16,8 +15,6 @@ book:
 
 categories:                             [ Book, Romance ]
 tags:                                   [ Romance, Historical,  Fantasy, Fiction ]
-
-toc:                                    false
 
 regenerate:                             false
 

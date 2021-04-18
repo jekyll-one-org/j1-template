@@ -1,8 +1,7 @@
 ---
-layout:                                 collection
 title:                                  Mistborn Trilogy
 tagline:                                The Final Empire, the Well of Ascension, the Hero of Ages
-date:                                   2016-11-19 00:00:00
+date:                                   2016-11-19 00:00:00 +100
 
 book:
   cover:                                https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/4732/9781473213692.jpg
@@ -16,8 +15,6 @@ book:
 
 categories:                             [ Book, Fantasy ]
 tags:                                   [ Fantasy, Magic, Heroes ]
-
-toc:                                    false
 
 regenerate:                             false
 
