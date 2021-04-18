@@ -573,6 +573,15 @@ defaults:
       sitemap:                          false
 
   # ----------------------------------------------------------------------------
+  # Module docs and examples excluded from sitemap
+  #
+  - scope:
+      path:                             assets/themes/j1/modules/**/*.html
+
+    values:
+      sitemap:                          false
+
+  # ----------------------------------------------------------------------------
   # Pages
   #
   - scope:
@@ -584,7 +593,7 @@ defaults:
       author:                           J1 Team
 
 #     robots:
-#       index:                          false
+#       index:                          true
 #       follow:                         true
 
       analytics:                        false
@@ -623,7 +632,7 @@ defaults:
       author:                           J1 Team
 
 #     robots:
-#       index:                          false
+#       index:                          true
 #       follow:                         true
 
       analytics:                        false
@@ -662,7 +671,7 @@ defaults:
       author:                           J1 Team
 
 #     robots:
-#       index:                          false
+#       index:                          true
 #       follow:                         true
 
       analytics:                        false
@@ -695,10 +704,6 @@ defaults:
     values:
       layout:                           post
       author:                           Wikipedia
-
-#     robots:
-#       index:                          false
-#       follow:                         true
 
       analytics:                        false
       advertising:                      false

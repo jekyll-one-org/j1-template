@@ -121,7 +121,7 @@ group :jekyll_plugins do
 # gem 'jekyll-redirect-from', '>= 0.16.0'                                       # Useful ???
 # gem 'jekyll-sass-converter', '>= 2.1.0'                                       # Used if SASS (file) conversion is enabled
   gem 'jekyll-sitemap', '>= 1.2.0'
-  gem 'j1-paginator', '>= 2021.1.1'                                             # New version !!!
+  gem 'j1-paginator', '>= 2021.1.0'                                             # New version !!!
 end
 
 # ------------------------------------------------------------------------------
