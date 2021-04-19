@@ -749,7 +749,7 @@ var j1 = (function () {
       var id = '#' + '{{footer_id}}';
       var selector = $(id);
       if ( selector.length ) {
-        var footer_data_path = '{{footer_data_path}}';
+        var footer_data_path = '{{footer_data_path}}' + id + ' > *';
         selector.load(footer_data_path, cb_load_closure(id));
       } else {
         logText = 'data not loaded';
@@ -1268,7 +1268,7 @@ var j1 = (function () {
           expires: 0,
           path: '/',
 //        SameSite: 'Strict',
-          SameSite: 'Lax',
+//        SameSite: 'Lax',
           http_only: false,
           secure: false
       };

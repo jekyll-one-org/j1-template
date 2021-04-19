@@ -10,6 +10,10 @@ description: >
 categories:                             [ Asciidoc, Knowledge ]
 tags:                                   [ Skeleton, Book ]
 
+sitemap:                                false
+robots:
+  index:                                false
+  follow:                               false
 
 permalink:                              /pages/public/skeleton/book/chapter_1/
 regenerate:                             false

@@ -10,6 +10,11 @@ description: >
 tags:                                   [ Legal ]
 categories:                             [ Comments, Policy ]
 
+sitemap:                                false
+robots:
+  index:                                false
+  follow:                               false
+
 fam_menu_id:                            page_ctrl_simple
 scrollbar:                              false
 comments:                               false

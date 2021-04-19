@@ -318,7 +318,7 @@ permalink:                              pretty
 # if you are running jekyll serve in a development environment,
 # site.url will be set to the value of host, port.
 #
-url:                                    ""
+url:                                    "http://localhost:40000"
 
 # The subpath of your site, e.g. /blog/. Used in conjunction with
 # site.url (see above) when you want a link to something with the
@@ -360,7 +360,7 @@ show_dir_listing:                       false
 #   source:                             .
 #   destination:                        _site
 #
-source:   .
+source:                                 .
 destination:                            _site
 plugins_dir:                            _plugins
 layouts_dir:                            _layouts
@@ -443,7 +443,7 @@ plugins:
 # - jekyll-gist
 # - jekyll-redirect-from
 # - jekyll-sass-converter
-  - jekyll-sitemap
+# - jekyll-sitemap
   - j1-paginator
 
 # ------------------------------------------------------------------------------
@@ -573,10 +573,10 @@ defaults:
       sitemap:                          false
 
   # ----------------------------------------------------------------------------
-  # Module docs and examples excluded from sitemap
+  # Module HTML docs and examples excluded from sitemap
   #
   - scope:
-      path:                             assets/themes/j1/modules/**/*.html
+      path:                             assets/themes/j1
 
     values:
       sitemap:                          false
@@ -724,7 +724,6 @@ defaults:
       images:
         category-image:
         dir:                            /assets/images/collections/blog/wikipedia
-
 
   # ----------------------------------------------------------------------------
   # Collections

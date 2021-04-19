@@ -316,7 +316,7 @@ permalink:                              pretty
 # if you are running jekyll serve in a development environment,
 # site.url will be set to the value of host, port.
 #
-url:                                    "http://localhost:41000"
+url:                                    "http://localhost:4000"
 
 # The subpath of your site, e.g. /blog/. Used in conjunction with
 # site.url (see above) when you want a link to something with the
@@ -336,13 +336,13 @@ base_path:                              ""
 #  Defaults:
 #   protocol:                           http
 #   host:                               localhost
-#   port:                               41000
+#   port:                               4000
 #   timezone:                           Europe/Berlin
 #   encoding:                           UTF-8
 #
 protocol:                               http
 host:                                   localhost
-port:                                   41000
+port:                                   4000
 timezone:                               Europe/Berlin
 encoding:                               UTF-8
 
@@ -440,7 +440,7 @@ plugins:
 # - jekyll-gist
 # - jekyll-redirect-from
 # - jekyll-sass-converter
-  - jekyll-sitemap
+# - jekyll-sitemap
   - j1-paginator
 
 # ------------------------------------------------------------------------------
@@ -570,10 +570,10 @@ defaults:
       sitemap:                          false
 
   # ----------------------------------------------------------------------------
-  # Module docs and examples excluded from sitemap
+  # Module HTML docs and examples excluded from sitemap
   #
   - scope:
-      path:                             assets/themes/j1/modules/**/*.html
+      path:                             assets/themes/j1
 
     values:
       sitemap:                          false

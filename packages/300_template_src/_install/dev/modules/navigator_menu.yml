@@ -72,7 +72,7 @@
         - title:                        Multi-Document
           href:                         /pages/public/skeleton/multi/
           icon:                         file-document-multiple-outline
-        - title:                        Book
+        - title:                        Documentation
           href:                         /pages/public/skeleton/book/
           icon:                         book-open-blank-variant
 

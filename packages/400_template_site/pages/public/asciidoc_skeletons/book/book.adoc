@@ -13,6 +13,11 @@ description: >
 categories:                             [ Asciidoc, Skeleton ]
 tags:                                   [ Knowledge, Skeleton, Book ]
 
+sitemap:                                false
+robots:
+  index:                                false
+  follow:                               false
+
 permalink:                              /pages/public/skeleton/book/
 regenerate:                             false
 
