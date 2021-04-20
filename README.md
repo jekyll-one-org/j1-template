@@ -57,7 +57,7 @@ issues for private or professional use.
 
 * Bootstrap extensions included
 * Asciidoctor extensions included
-* Smooth-scoll support
+* Smooth-srcoll support
 * Full-text search engine included (Lunr)
 * Blog Post navigation included
 * Clipboard module included
