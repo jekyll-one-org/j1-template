@@ -26,6 +26,20 @@
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
 
+<!-- Google Adsense -->
+<script data-ad-client="{{publisher_id}}"
+    async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
+</script>
+
+{% comment %} to be checked
+--------------------------------------------------------------------------------
+<script data-ad-client="{{publisher_id}}"
+    async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
+</script>
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} to be checked
+--------------------------------------------------------------------------------
 <script data-ad-client="{{publisher_id}}"
   $(document).ready(function() {
     var dependencies_met_page_finished = setInterval (function () {
@@ -34,12 +48,6 @@
         clearInterval(dependencies_met_page_finished);
       }
   }, 25); // END dependencies_met_page_finished
-</script>
-
-{% comment %} to be checked
---------------------------------------------------------------------------------
-<script data-ad-client="{{publisher_id}}"
-    async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
 </script>
 -------------------------------------------------------------------------------- {% endcomment %}
 
