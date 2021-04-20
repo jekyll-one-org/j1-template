@@ -24,16 +24,14 @@
 {% assign advertising           = site.data.j1_config.advertising.enabled %}
 {% assign advertising_provider  = site.data.j1_config.advertising.provider %}
 
-
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
-<!-- [INFO   ] [j1.modules.connectors.ads             ] [ detected advertising (global): {{advertising}} ] -->
+<!-- [INFO   ] [j1.modules.connectors.ads             ] [ detected advertising (j1_config): {{advertising}} ] -->
 <!-- [INFO   ] [j1.modules.connectors.ads             ] [ detected advertising (page): {{page.advertising}}} ] -->
-<!-- [INFO   ] [j1.modules.connectors.ads             ] [ detected advertising (provider): {{advertising_provider}}} ] -->
-<!-- [INFO   ] [j1.modules.connectors.ads             ] [ start processing load region head, layout: {{page.layout}} ] -->
 
 {% if advertising and page.advertising %}
-
+  <!-- [INFO   ] [j1.modules.connectors.ads             ] [ detected advertising provider (j1_config): {{advertising_provider}}} ] -->
+  <!-- [INFO   ] [j1.modules.connectors.ads             ] [ start processing load region head, layout: {{page.layout}} ] -->
   {% case advertising_provider %}
     {% when "google" %}
       <!-- [INFO   ] [j1.modules.connectors.ads             ] [ place provider: Google Adsense ] -->

@@ -26,21 +26,22 @@
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
+<!-- [INFO   ] [j1.modules.connectors.comments        ] [ detected comments (j1_config): {{comments}} ] -->
+<!-- [INFO   ] [j1.modules.connectors.comments        ] [ detected comments (page): {{page.comments}}} ] -->
 
-<!-- [INFO   ] [j1.layout.connectors.comments         ] [ start processing load region head, layout: {{page.layout}} ] -->
 {% if comments and page.comments %}
-
+  <!-- [INFO   ] [j1.modules.connectors.comments       ] [ start processing load region head, layout: {{page.layout}} ] -->
   {% case comment_provider %}
     {% when "disqus" %}
-      <!-- [INFO   ] [j1.layout.connectors.comments         ] [ place comment provider DISQUS ] -->
+      <!-- [INFO   ] [j1.modules.connectors.comments        ] [ place comment provider DISQUS ] -->
       {% include themes/{{site.template.name}}/modules/connectors/comment/disqus.html %}
     {% when "facebook" %}
-      <!-- [INFO   ] [j1.layout.connectors.comments         ] [ place comment provider FACEBOOK ] -->
+      <!-- [INFO   ] [j1.modules.connectors.comments        ] [ place comment provider FACEBOOK ] -->
       {% include themes/{{site.template.name}}/procedures/provider/comment/facebook.html %}
     {% when "custom" %}
-      <!-- [INFO   ] [j1.layout.connectors.comments         ] [ place comment provider CUSTOM ] -->
+      <!-- [INFO   ] [j1.modules.connectors.comments        ] [ place comment provider CUSTOM ] -->
       {% include themes/{{site.template.name}}/procedures/provider/comment/custom-provider.html %}
   {% endcase %}
 
 {% endif %}
-<!-- [INFO   ] [j1.layout.connectors.comments         ] [ end processing ] -->
+<!-- [INFO   ] [j1.modules.connectors.comments        ] [ end processing ] -->

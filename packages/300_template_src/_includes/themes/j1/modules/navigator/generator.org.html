@@ -50,8 +50,22 @@
 {% assign navigator_defaults          = site.data.modules.defaults.navigator.defaults %}
 {% assign navigator_settings          = site.data.modules.navigator.settings %}
 
+{% comment %} Cookie Consent module NOT used anymore
+--------------------------------------------------------------------------------
+{% assign consent_defaults            = site.data.modules.defaults.cookie_consent.defaults %}
+{% assign consent_settings            = site.data.modules.cookie_consent.settings %}
+{% assign cookie_consent_options      = consent_defaults | merge: consent_settings %}
+-------------------------------------------------------------------------------- {% endcomment %}
+
 {% assign cookiebar_defaults          = site.data.modules.defaults.cookiebar.defaults %}
 {% assign cookiebar_settings          = site.data.modules.cookiebar.settings %}
+
+{% comment %} SSM module NOT used anymore
+--------------------------------------------------------------------------------
+{% assign ssm_settings                = modules.ssm.settings %}
+{% assign ssm_defaults                = modules.defaults.ssm.defaults %}
+{% assign ssm_options                 = ssm_defaults | merge: ssm_settings %}
+-------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -77,6 +91,7 @@
 {% assign authentication_options      = authentication_defaults | merge: authentication_settings %}
 {% assign auth_manager_options        = authentication_options.j1_auth %}
 {% assign nav_mmenu_options           = nav_mmenu_defaults | merge: nav_mmenu_settings %}
+
 
 {% comment %} Set navBarOptions
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -111,7 +126,16 @@
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
 
-{% comment %} Generate search container
+{% comment %} Generate SSM container (not used anymore)
+--------------------------------------------------------------------------------
+<!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ check for ssm ] -->
+{% if ssm_options.enabled %}
+<!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ place ssm container for AJAX load ] -->
+<nav id="ssm-container" class="ssm-btns-right ssm-anim-slide no-r-text"></nav>
+{% endif %}
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Generate TopSearch container
 -------------------------------------------------------------------------------- {% endcomment %}
 <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ check for topsearch ] -->
 {% if topsearch_options.enabled %}
@@ -124,8 +148,19 @@
 -------------------------------------------------------------------------------- {% endcomment %}
 <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ start processing: mmenu ] -->
 {% for item in nav_mmenu_options.menus %}
-<!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ place mmenu container {{item.menu.xhr_container_id}} for AJAX load ] -->
+<!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ processing: {{item.menu.xhr_container_id}} ] -->
+
+{% comment %} Condition DISABLED for testing
+--------------------------------------------------------------------------------
+{% if item.menu.enabled %}
+<!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ place mmenu container for AJAX load ] -->
 <nav id="{{item.menu.xhr_container_id}}"></nav>
+{% endif %}
+-------------------------------------------------------------------------------- {% endcomment %}
+
+<!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ place mmenu container for AJAX load ] -->
+<nav id="{{item.menu.xhr_container_id}}"></nav>
+
 {% endfor %}
 
 <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ start processing: navigation ] -->
@@ -133,6 +168,7 @@
 
   {% comment %} Place brand image
   ------------------------------------------------------------------------------ {% endcomment %}
+  <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ end processing: sidebar ] -->
   <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ start processing: main menue ] -->
   {% if brand_position == "left" %}
     <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ place brand image to the: left ] -->

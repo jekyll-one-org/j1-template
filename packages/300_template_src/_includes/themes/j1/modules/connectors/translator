@@ -24,13 +24,13 @@
 {% assign translation          = site.data.j1_config.translation.enabled %}
 {% assign translation_provider = site.data.j1_config.translation.provider %}
 
-
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
+<!-- [INFO   ] [j1.modules.connectors.translation     ] [ detected translation (j1_config): {{translation}} ] -->
+<!-- [INFO   ] [j1.modules.connectors.translation     ] [ detected translation (page): {{page.translation}}} ] -->
 
-<!-- [INFO   ] [j1.modules.connectors.translator      ] [ start processing load region head, layout: {{page.layout}} ] -->              
 {% if translation %}
-
+<!-- [INFO   ] [j1.modules.connectors.translator      ] [ start processing load region head, layout: {{page.layout}} ] -->
   {% case translation_provider %}
     {% when "google" %}
       <!-- [INFO   ] [j1.modules.connectors.translator      ] [ place Google Translator ] -->
@@ -42,4 +42,3 @@
 
 {% endif %}
 <!-- [INFO   ] [j1.modules.connectors.translator      ] [ end processing ] -->
-

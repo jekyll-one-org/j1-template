@@ -27,10 +27,12 @@
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
+<!-- [INFO   ] [j1.modules.connectors.analytics       ] [ detected analytics (j1_config): {{analytics}} ] -->
+<!-- [INFO   ] [j1.modules.connectors.analytics       ] [ detected analytics (page): {{page.analytics}}} ] -->
 
-<!-- [INFO   ] [j1.modules.connectors.analytics       ] [ start processing load region head, layout: {{page.layout}} ] -->
 {% if analytics and page.analytics %}
-
+  <!-- [INFO   ] [j1.modules.connectors.analytics       ] [ detected analytics provider (j1_config): {{analytics_provider}}} ] -->
+  <!-- [INFO   ] [j1.modules.connectors.analytics       ] [ start processing load region head, layout: {{page.layout}} ] -->
   {% case analytics_provider %}
     {% when "google" %}
       <!-- [INFO   ] [j1.modules.connectors.analytics       ] [ place Google Analytics ] -->
