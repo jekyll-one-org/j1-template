@@ -14,31 +14,45 @@
  # -----------------------------------------------------------------------------
 */
 
+// background images
+// ------------------------------------------------------------------------------
+
+// The image will fill its given area, even if it  means losing
+// its aspect ratio.
+.img-bg--fill {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+// (foreground) images
+// ------------------------------------------------------------------------------
+
 // The image keeps its original aspect ratio, but resized so that the
 // longest of either the height or width can fit in the given dimensions.
-.img__object--contain {
+.img-object--contain {
     object-fit: contain;
 }
 
 // The image keeps its original aspect ratio and the image area is
 // completely covered.
-.img__object--cover {
+.img-object--cover {
     object-fit: cover;
 }
 
-// The initial value. The image will fill its given area, even if it
-// means losing its aspect ratio.
-.img__object--fill {
+// The image will fill its given area, even if it
+// means losing its aspect ratio (default initial value).
+.img-object--fill {
     object-fit: fill;
 }
 
 // The image is not resized at all, and the original image size fills
 // the given area.
-.img__object--none {
+.img-object--none {
     object-fit: fill;
 }
 
 // The smaller of either contain or none.
-.img__object--scale-down {
+.img-object--scale-down {
     object-fit: scale-down;
 }

@@ -23,16 +23,69 @@
   padding: .5rem 1rem .5rem 1rem;
 }
 
+// jadams, 2021-04-24: button sizes
+// Button Sizes
+// -----------------------------------------------------------------------------
+
+// Extra Small
+.btn.btn-xs {
+  line-height: 1.4;
+  padding: 0.14286rem 0.5rem;
+  font-size: 0.78571rem;
+}
+
+// Medium
+.btn.btn-md {
+  line-height: 1.4;
+  padding: 0.57143rem 1.42857rem;
+  font-size: 1.07143rem;
+}
+
+// Large
+.btn.btn-xl {
+  line-height: 1.4;
+  padding: 0.92857rem 1.85714rem;
+  font-size: 1.28571rem;
+}
+
+// Huge
+.btn.btn-xxl {
+  line-height: 1.4;
+  padding: 1.07143rem 2.14286rem;
+  font-size: 1.5rem;
+}
+
+// jadams, 2021-04-24: button styles
+// Button Styles
+// -----------------------------------------------------------------------------
+
+// Rounded
 .btn.btn-round {
   border-radius: 30px;
 }
 
+// Skew
+.btn.btn-skew {
+  -webkit-transform: skewX(-20deg);
+      -ms-transform: skewX(-20deg);
+          transform: skewX(-20deg);
+}
+
+.btn.skew__inner {
+  -webkit-transform: skewX(20deg);
+      -ms-transform: skewX(20deg);
+          transform: skewX(20deg);
+  display: block;
+}
+
 // jadams, 2018-01-16: Added flex for aligned font icons
 .btn.btn-flex {
+// Flex
   display: inline-flex !important;
   align-items: center;
   }
 
+/*
 .btn:not(.btn-just-icon):not(.btn-fab):not(.btn-text) .fa {
   // margin-right: .5rem;
 }
@@ -44,8 +97,10 @@
 .btn:not(.btn-just-icon):not(.btn-fab):not(.btn-text) .zmdi {
   // margin-right: .5rem;
 }
+*/
 
-/* jadams: social media button styles */
+// Social media buttons
+// -----------------------------------------------------------------------------
 
 .btn.btn-facebook {
   background-color: #3b5998;

@@ -118,7 +118,7 @@
     # Roundtrip
     #
     - title:                            Roundtrip
-      icon:                             wallet-travel
+      icon:                             briefcase-search-outline
       dropdown:
 
         - title:                        Present images

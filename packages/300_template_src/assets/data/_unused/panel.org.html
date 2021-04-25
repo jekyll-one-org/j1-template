@@ -209,7 +209,7 @@ regenerate:                             true
 
               {% if card_type == 'text' and card_enabled %}
                 {% assign card_raised = 'raised-z5' %}
-                <article class="card raised-z3 mb-3">
+                <article class="card raised-z5 mb-3">
                   <div class="card-header bg-primary pt-2 pb-2">
                     <div class="d-flex flex-row align-items-center">
                       <div class="mr-3">
@@ -234,7 +234,7 @@ regenerate:                             true
                   </div>
 
                   <div class="card-body g-min-height-200 r-text-300">{{card_text}}</div>
-                  <div class="card-footer r-text-200 text-lowercase">
+                  <div class="card-footer r-text-200">
                   {% for data in card_buttons %} {% for item in data %} {% for button in item[1] %}
                     {% assign key   = button[0] %}
                     {% assign value = button[1] %}
@@ -248,12 +248,10 @@ regenerate:                             true
                     {% if key == 'target' %}      {% assign button_target       = value %} {% endif %}
                   {% endfor %} {% endfor %}{% endfor %}
 
-                  <hr class="my-3">
-
                   {% if button_target == null %}
-                    <a class="card-link md-grey-500" href="{{button_href}}">{{button_text}}</a>
+                    <a class="card-link md-grey-800 font-weight-bold g-font-size-12 text-uppercase" href="{{button_href}}">{{button_text}}</a>
                   {% else %}
-                    <a class="card-link  md-grey-500" href="{{button_href}}" target="{{button_target}}">{{button_text}}</a>
+                    <a class="card-link  md-grey-800 font-weight-bold g-font-size-12 text-uppercase" href="{{button_href}}" target="{{button_target}}">{{button_text}}</a>
                   {% endif %}
                   </div>
 
@@ -474,9 +472,9 @@ regenerate:                             true
                 {% if category == post_category and last_post_written != true %}
                   {% assign posts_written = posts_written|plus:1 %}
                   <!-- Post -->
-                    <article class="card raised-z3 mb-3">
+                    <article class="card raised-z5 mb-3">
                       {% if post.image %}
-                        <img class="img-fluid img-object--cover g-height-200" src="{{post.image}}" alt="{{post.title}}">
+                        <img class="img-fluid img__object--cover g-height-200" src="{{post.image}}" alt="{{post.title}}">
                         {% assign post_width = '80x' %}
                       {% else %}
                         <img class="mt-2" src="" alt="">
@@ -488,13 +486,12 @@ regenerate:                             true
                         {{post.excerpt|truncatewords:50|replace:'...',' ...'|remove:'<div class="paragraph">'|remove:'</div>'|remove:'<p>'|remove:'</p>'}}
                       </div>
                       <!-- End Body|Excerpt -->
-                      <div class="card-footer r-text-200 text-lowercase">
-                        <hr class="my-3">
+                      <div class="card-footer r-text-200">
                         <div class="card-footer-text">
-                          <i class="mdi mdi-calendar-blank mdi-md-grey mr-1"></i>
+                          <i class="mdi mdi-calendar-blank mr-1"></i>
                           {{post.date|date:"%Y %B, %e"}}
                         </div>
-                        <a class="card-link md-grey-500"
+                        <a class="card-link md-grey-800 font-weight-bold g-font-size-12 text-uppercase"
                            href="{{post.url}}">
                            {{readmore_text}} · {{post.tagline}}
                         </a>

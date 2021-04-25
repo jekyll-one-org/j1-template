@@ -52,8 +52,13 @@ button:focus {
 }
 
 // jadams, 2020-10-04: set hover for button links
+// jadams, 2021-04-24: added transition styles
 a.btn:hover {
-    color: $darken-800 !important;
+  color: $darken-800 !important;
+  -webkit-transition: background-color .5s ease-out;
+  -moz-transition: background-color .5s ease-out;
+  -o-transition: background-color .5s ease-out;
+  transition: background-color .5s ease-out;
 }
 
 // MD default buttons are flat by default
