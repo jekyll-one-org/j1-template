@@ -6,6 +6,18 @@ the best of OpenSource software for the Web and the Web site generator
 private or professional use. Explore this site to learn what's possible if
 you go to the Jekyll Way.
 
+![Screenshot](https://github.com/jekyll-one-org/j1-template/raw/main/home-screenshot.jpg "J1 Starter Web")
+
+* Fully Responsive. J1 Template supports modern web browsers on all
+  devices for best results on PCs, Tablets, and SmartPhones.
+* Full Bootstpap V4 support. Current Technology and Design. Excellent
+  performance running desktop and mobile websites. Use Jekyll One to
+  present your content at its best.
+* Start in no time. No programming is needed to start using J1. The
+  Template provides a large number of building blocks to create modern
+  web pages in minutes.
+
+
 **Create powerful modern Static Webs: Secure, Flexible and Fast.**
 
 Have fun!
