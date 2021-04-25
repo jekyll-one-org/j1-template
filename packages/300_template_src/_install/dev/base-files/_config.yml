@@ -634,7 +634,7 @@ defaults:
 
       analytics:                        false
       advertising:                      false
-      comments:                         true
+      comments:                         false
 
       series:                           false
 
@@ -673,7 +673,7 @@ defaults:
 
       analytics:                        false
       advertising:                      false
-      comments:                         true
+      comments:                         false
 
       series:                           true
 

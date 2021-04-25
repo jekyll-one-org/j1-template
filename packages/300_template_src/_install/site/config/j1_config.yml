@@ -362,7 +362,7 @@ analytics:
   provider:                             google
 
   google:
-    tracking_id:                        '<your-tracking_id>'
+    tracking_id:                        '<your-tracking-id>'
 
   custom:
     custom_data:
@@ -377,7 +377,7 @@ advertising:
   enabled:                              false
   provider:                             google
   google:
-    publisher_id:                       '<your-publisher_id>'
+    publisher_id:                       '<your-publisher-id>'
   custom:
     custom_data:
 
@@ -396,6 +396,6 @@ translation:
     meta_data:                          [google-translate-customization]
     page_language:                      en
     translation_languages:              [all]
-    
+
 # ------------------------------------------------------------------------------
 # END config
