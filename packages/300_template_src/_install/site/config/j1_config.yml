@@ -15,17 +15,30 @@
 # THEME configuration
 #
 # ------------------------------------------------------------------------------
-#   Sets the name of the (bootstrap) theme used for J1 Template
-#   for default
+#   Sets the default theme used for J1 Template for default
 #
 #   Note: Themes from Bootswatch cannot used currently as default theme
 #
 # ------------------------------------------------------------------------------
+#   theme.name
 #
 #   values                              Uno light|Uno dark
 #   default:                            Uno light
+# ------------------------------------------------------------------------------
+#   theme.author
 #
-theme:                                  Uno light
+#   values                              <string>
+#   default:                            J1 Team
+# ------------------------------------------------------------------------------
+#   theme.url
+#
+#   values                              <url>
+#   default:                            https://jekyll.one/
+# ------------------------------------------------------------------------------
+theme:
+  name:                                 Uno light
+  author:                               J1 Team
+  author_url:                           https://jekyll.one/
 
 # ------------------------------------------------------------------------------
 # CSS and SASS settings
@@ -183,6 +196,18 @@ user:
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
+# cards.card-deck (responsive card decks)
+#
+#   Bootstrap card decks are NOT responsive by default. Additional breakpoint
+#   classes for J1 Template introduce support on card decks for responsiveness.
+#   With the values for `break_on_XX`, the number of cards can be specified
+#   to be shown on a deck per *row*.
+#
+#   default:                          no defaults
+#   values:                           integer (num of cards)
+#
+# ------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # popovers.trigger (tooltips.trigger)
 #
 #   How a popover is triggered. You may pass multiple triggers.
@@ -202,6 +227,14 @@ user:
 bootstrap:
   default_theme:                        bootstrap
 
+  cards:
+     card_deck:
+      break_on_sm:                      1
+      break_on_md:                      2
+      break_on_lg:                      3
+      break_on_xl:                      3
+
+
   tooltips:
     enabled:                            true
     trigger:                            hover
@@ -215,6 +248,8 @@ bootstrap:
 #
 rouge:
   theme_light:                          igorpro
+
+  # may github, pastie
   theme_dark:                           monokai.sublime
 
 # ------------------------------------------------------------------------------
@@ -262,38 +297,40 @@ rouge:
 #                                           /assets/themes/j1/core/fonts/material_design_icons/fonts/materialdesignicons-webfont.woff,
 #                                           /assets/themes/j1/core/fonts/material_design_icons/fonts/materialdesignicons-webfont.woff2
 #                                         ]
+preload:
 
-font:
-  preload:                              true
-  cors:                                 crossorigin
-  fonts:                                [
-                                          /assets/themes/j1/core/fonts/roboto/fonts/Roboto-Regular.woff,
-                                          /assets/themes/j1/core/fonts/material_design_icons/fonts/materialdesignicons-webfont.woff
-                                        ]
-css:
-  preload:                              true
-  css:                                  [
-                                          /assets/themes/j1/core/css/themes/uno-light/bootstrap,
-                                          /assets/themes/j1/core/css/vendor
-                                        ]
-  files:                                []
+  font:
+    preload:                              false
+    cors:                                 crossorigin
+    fonts:                                []
+    # fonts:                              [
+    #                                         /assets/themes/j1/core/fonts/roboto/fonts/Roboto-Regular.woff,
+    #                                         /assets/themes/j1/core/fonts/material_design_icons/fonts/materialdesignicons-webfont.woff
+    #                                     ]
+  css:
+    preload:                              true
+    css:                                  [
+                                            /assets/themes/j1/core/css/themes/uno-light/bootstrap,
+                                            /assets/themes/j1/core/css/vendor
+                                          ]
+    files:                                []
 
-js:
-  preload:                              true
-  js:                                   [
-                                          /assets/themes/j1/modules/bmd/js/bootstrap-material-design,
-                                          /assets/themes/j1/modules/backstretch/js/backstretch,
-                                          /assets/themes/j1/core/js/template
-                                        ]
-  files:                                [
-                                          /assets/themes/j1/adapter/js/attic.js,
-                                          /assets/themes/j1/adapter/js/logger.js,
-                                          /assets/themes/j1/adapter/js/bmd.js,
-                                          /assets/themes/j1/adapter/js/navigator.js
-                                        ]
-image:
-  preload:                              true
-  files:                                [ /assets/images/modules/icons/j1/j1-512x512.png ]
+  js:
+    preload:                              true
+    js:                                   [
+                                            /assets/themes/j1/modules/bmd/js/bootstrap-material-design,
+                                            /assets/themes/j1/modules/backstretch/js/backstretch,
+                                            /assets/themes/j1/core/js/template
+                                          ]
+    files:                                [
+                                            /assets/themes/j1/adapter/js/attic.js,
+                                            /assets/themes/j1/adapter/js/logger.js,
+                                            /assets/themes/j1/adapter/js/bmd.js,
+                                            /assets/themes/j1/adapter/js/navigator.js
+                                          ]
+  image:
+    preload:                              false
+    files:                                [ /assets/images/modules/icons/j1/j1-512x512.png ]
 
 # ------------------------------------------------------------------------------
 # PRECONNECT settings
@@ -334,14 +371,14 @@ body:
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
-# COMMENT settings
+# COMMENTS settings
 #
 # Set 'enabled' to false to turn commenting off globally
 # Set 'provider' to the comment provider you want to use
 # ------------------------------------------------------------------------------
 # disqus
 #
-#   short_name: your-site-short-name (w/o disqus.com)
+#   short_name: your-disqus-short-name (w/o disqus.com)
 #
 # ------------------------------------------------------------------------------
 comments:
@@ -350,6 +387,15 @@ comments:
 
   disqus:
     short_name:                         '<your-site-short-name>'
+
+# facebook:
+#   appid:                              123
+#   num_posts:                          5
+#   width:                              580
+#   colorscheme:                        light
+
+# custom:
+#   custom_data:
 
 # ------------------------------------------------------------------------------
 # ANALYTICS settings
@@ -396,6 +442,20 @@ translation:
     meta_data:                          [google-translate-customization]
     page_language:                      en
     translation_languages:              [all]
+
+# ------------------------------------------------------------------------------
+# SHARING settings (currently NOT supported)
+#
+# Settings for sharing helper. Sharing is for things like tweet, plusone,
+# like, reddit buttons etc. Set 'provider' to the sharing provider you
+# want to use. Set 'provider' to false to turn sharing off globally.
+#
+# Set 'enabled' to false to turn sharing off globally
+# Set 'provider' to the sharing provider you want to use
+#
+# sharing:
+#   enabled:                            false
+#   provider:
 
 # ------------------------------------------------------------------------------
 # END config
