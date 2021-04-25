@@ -235,7 +235,16 @@ j1.adapter['navigator'] = (function (j1, window) {
       var navAuthClientOptions                      = {};
       var navAuthMAnagerConfig                      = {};
 
+      var user_state                                = {};
+      var cookie_names                              = j1.getCookieNames();
+      var cookie_user_state_name                    = cookie_names.user_state;
+
       var themerOptions                             = {};
+      var interval_count                            = 0;
+      var user_state_detected;
+      var themes_count;
+      var max_count                                 = 100;
+
 
       navDefaults                                   = $.extend({}, {{navigator_defaults | replace: '=>', ':' }});
       navBarConfig                                  = $.extend({}, {{nav_bar_options | replace: '=>', ':' }});
@@ -339,10 +348,17 @@ j1.adapter['navigator'] = (function (j1, window) {
 
           // load themes (to menu) if themer is enabled|finished
           if (themerEnabled) {
+
+            // Detect|Set J1 UserState
+            user_state_detected = j1.existsCookie(cookie_user_state_name);
+            if (user_state_detected) {
+              user_state        = j1.readCookie(cookie_user_state_name);
+            }
+
             var dependencies_met_page_finished = setInterval(function() {
-              // jadams, 2020-10-03: NOT needed to wait for j1 finished
-//            if (j1.getState() == 'finished') {
-              if (j1.adapter.themer.getState() == 'finished') {
+               // jadams, 2020-10-03: NOT needed to wait for j1 finished
+//             if (j1.getState() == 'finished') {
+               if (j1.adapter.themer.getState() == 'finished') {
                 // initialize theme switcher menus
                 logText = 'theme switcher detect: enabled';
                 logger.info(logText);
@@ -350,19 +366,48 @@ j1.adapter['navigator'] = (function (j1, window) {
                 logText = 'load themes';
                 logger.info(logText);
 
-                // load REMOTE themes from Bootswatch API (localFeed EMPTY!)
-                $('#remote_themes').bootstrapThemeSwitcher({
-                  localFeed: '',
-                  bootswatchApiVersion: themerOptions.bootswatchApiVersion
-                });
-
                 // load LOCAL themes from JSON data
                 logText = 'load local themes (json file)';
                 logger.info(logText);
                 $('#local_themes').bootstrapThemeSwitcher({
                   localFeed: themerOptions.localThemes
                 });
-                clearInterval(dependencies_met_page_finished);
+
+                // load REMOTE themes from Bootswatch API (localFeed EMPTY!)
+                $('#remote_themes').bootstrapThemeSwitcher({
+                  localFeed: '',
+                  bootswatchApiVersion: themerOptions.bootswatchApiVersion
+                });
+
+                // jadams, 2021-04-22: Up to now, it is unclear why in some
+                // cases the menu bar is NOT fully loaded for THEMES
+                // TODO: Add additional checks to find the reason
+
+                // added same checks (as already done by adapter themer) to
+                // check if remote theme menu detected as LOADED
+                //
+                var dependencies_met_remote_themes_loaded = setInterval(function() {
+                  interval_count += 1;
+                  themes_count = document.getElementById("remote_themes").getElementsByTagName("li").length;
+                  if ( themes_count > 0  ) {
+                    logger.info('remote themes loaded: successfully');
+                    logger.info('remote themes loaded: successfully after: ' + interval_count * 25 + ' ms');
+
+                    clearInterval(dependencies_met_remote_themes_loaded);
+//                  clearInterval(dependencies_met_page_finished);
+                  } else {
+                      logger.debug('wait for theme to be loaded: ' + user_state.theme_name);
+                  }
+                  if (interval_count > max_count) {
+                    logger.warn('remote themes loading: failed');
+                    logger.warn('continue processing');
+                    clearInterval(dependencies_met_remote_themes_loaded);
+//                  clearInterval(dependencies_met_page_finished);
+                  }
+                  clearInterval(dependencies_met_page_finished);
+                }, 25);
+
+//              clearInterval(dependencies_met_page_finished);
               }
               _this.setState('initialized');
             }, 25); // END 'dependencies_met_page_finished'

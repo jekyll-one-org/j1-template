@@ -53,7 +53,7 @@ environment:                            development
 # ------------------------------------------------------------------------------
 #   Sets the build version of J1 Template Gem
 #
-version:                                2021.1.1
+version:                                2021.1.2
 
 # version
 # ------------------------------------------------------------------------------
@@ -415,12 +415,12 @@ sass:
 
 # ------------------------------------------------------------------------------
 # POSTS Management
-# Set the post articles to include, exclude and ignore
+# Control how post articles are generated
 #
-#future:                                false
-#show_drafts:                           false
-#unpublished:                           false
-#limit_posts:                           10
+future:                                 true                                    # workaround (non US) TZ issues (of April 2021)
+show_drafts:                            false
+unpublished:                            false
+limit_posts:                            1000000                                 # set to UNLIMITED
 
 # ------------------------------------------------------------------------------
 # LIQUID template engine
@@ -621,7 +621,7 @@ defaults:
   # PUBLIC - FEATURED
   #
   - scope:
-      path:                             posts/public/featured/_posts
+      path:                             posts/public/featured
       type:                             posts
 
     values:
@@ -643,13 +643,13 @@ defaults:
       scrollbar:                        false
 
       icons:
-#       category-icon:                  comment-text-outline
+        category-icon:                  false                                   # comment-text-outline
         family:                         MDI
         color:                          md-blue
         size:                           5x
 
       images:
-#       category-image:                 img26.jpg
+        category-image:                 false                                   # img26.jpg
         dir:                            /assets/images/collections/blog/featured
 
       resource_options:
@@ -661,7 +661,7 @@ defaults:
   #
   - scope:
       type:                             posts
-      path:                             posts/public/series/_posts
+      path:                             posts/public/series
 
     values:
       layout:                           post
@@ -671,24 +671,14 @@ defaults:
 #       index:                          true
 #       follow:                         true
 
-      analytics:                        false
-      advertising:                      false
-      comments:                         true
-
-      series:                           true
-
-      toc:                              true
-      fam_menu_id:                      page_ctrl_simple
-      scrollbar:                        false
-
       icons:
-#       category-icon:                  dots-horizontal-circle
+        category-icon:                  false                                   # dots-horizontal-circle
         family:                         MDI
         color:                          md-indigo
         size:                           5x
 
       images:
-#       category-image:                 img26.jpg
+        category-image:                 false                                   # img26.jpg
         dir:                            /assets/images/collections/blog/series
 
   # ----------------------------------------------------------------------------
@@ -696,7 +686,7 @@ defaults:
   #
   - scope:
       type:                             posts
-      path:                             posts/public/wikipedia/_posts
+      path:                             posts/public/wikipedia
 
     values:
       layout:                           post
@@ -717,13 +707,13 @@ defaults:
       scrollbar:                        false
 
       icons:
-#       category-icon:                  wikipedia
+        category-icon:                  false                                   # wikipedia
         family:                         MDI
         color:                          md-indigo
         size:                           5x
 
       images:
-        category-image:
+        category-image:                 false
         dir:                            /assets/images/collections/blog/wikipedia
 
   # ----------------------------------------------------------------------------

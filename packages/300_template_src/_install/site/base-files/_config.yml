@@ -53,7 +53,7 @@ environment:                            production
 # ------------------------------------------------------------------------------
 #   Sets the build version of J1 Template Gem
 #
-version:                                2021.1.1
+version:                                2021.1.2
 
 # version
 # ------------------------------------------------------------------------------
@@ -637,7 +637,7 @@ defaults:
 
       analytics:                        false
       advertising:                      false
-      comments:                         true
+      comments:                         false
 
       series:                           false
 
@@ -676,7 +676,7 @@ defaults:
 
       analytics:                        false
       advertising:                      false
-      comments:                         true
+      comments:                         false
 
       series:                           true
 

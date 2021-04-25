@@ -40,8 +40,19 @@
   border-radius: 0 !important;
 }
 
+/*
 .card .card-footer {
   background-color: $grey-100;
+}
+*/
+
+.card .card-footer {
+	padding-top: 0;
+	padding-right: 1.25rem;
+	padding-bottom: 1.25rem;
+	padding-left: 1.25rem;
+	border-top: 0;
+	background-color: transparent;
 }
 
 /* jadams: Overwrite Bootstraps heading margins for cards */

@@ -317,35 +317,35 @@ lerna info Executing command in 3 packages: "yarn run build"
 js: $ npm run clean && npm run lint
 css: $ npm run clean
 site: $ run-s -s clean:jekyll-conf && run-s -s jekyll_build:*
-css: > css@2021.1.1 clean D:\j1\github\j1-template\packages\100_template_css
+css: > css@2021.1.2 clean D:\j1\github\j1-template\packages\100_template_css
 css: > run-p -s clean:*
-js: > js@2021.1.1 clean D:\j1\github\j1-template\packages\200_template_js
+js: > js@2021.1.2 clean D:\j1\github\j1-template\packages\200_template_js
 js: > run-p -s clean:*
 css: $ npm run build_css && npm run uglify_css
-css: > css@2021.1.1 build_css D:\j1\github\j1-template\packages\100_template_css
+css: > css@2021.1.2 build_css D:\j1\github\j1-template\packages\100_template_css
 css: > run-p -s theme_css:*
-js: > js@2021.1.1 lint D:\j1\github\j1-template\packages\200_template_js
+js: > js@2021.1.2 lint D:\j1\github\j1-template\packages\200_template_js
 js: > run-p -s lint:*
 css: Rendering Complete, saving .css file...
 css: Rendering Complete, saving .css file...
 css: Wrote CSS to D:\j1\github\j1-template\packages\100_template_css\dist\vendor.css
 ..
 js: $ npm run build-js
-js: > js@2021.1.1 build-js D:\j1\github\j1-template\packages\200_template_js
+js: > js@2021.1.2 build-js D:\j1\github\j1-template\packages\200_template_js
 js: > cross-var webpack --mode production --config $npm_package_wp_build
-js: > js@2021.1.1 uglify-js D:\j1\github\j1-template\packages\200_template_js
+js: > js@2021.1.2 uglify-js D:\j1\github\j1-template\packages\200_template_js
 js: > terser dist/template.js -o dist/template.min.js -m
-css: > css@2021.1.1 deploy D:\j1\github\j1-template\packages\100_template_css
+css: > css@2021.1.2 deploy D:\j1\github\j1-template\packages\100_template_css
 css: > run-p -s mkdir:* && run-p -s deploy:*
-js: > js@2021.1.1 deploy D:\j1\github\j1-template\packages\200_template_js
+js: > js@2021.1.2 deploy D:\j1\github\j1-template\packages\200_template_js
 js: > run-s -s deploy:*
 ..
 css: Rendering Complete, saving .css file...
 css: Wrote CSS to D:\j1\github\j1-template\packages\100_template_css\dist\themes\uno-light\bootstrap.css
-css: > css@2021.1.1 uglify_css D:\j1\github\j1-template\packages\100_template_css
+css: > css@2021.1.2 uglify_css D:\j1\github\j1-template\packages\100_template_css
 css: > run-p -s uglify_css:*
 ..
-site: > site@2021.1.1 bundle D:\j1\github\j1-template\packages\400_template_site
+site: > site@2021.1.2 bundle D:\j1\github\j1-template\packages\400_template_site
 site: > run-s -s bundler:*
 site: Create bundle ..
 site: Fetching gem metadata from https://rubygems.org/..........
