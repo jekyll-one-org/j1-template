@@ -2,16 +2,10 @@
 title:                                  Welcome
 tagline:                                jekyll for everyone
 
-categories:                             [ Featured ]
+categories:                             [ Featured, Post ]
 tags:                                   [ J1, Jekyll, Knowledge ]
 
-series:                                 false
 image:                                  /assets/images/modules/attics/katie-moum-1920x1280.jpg
-
-adsense:                                false
-comments:                               false
-advertising:                            false
-toc:                                    true
 
 regenerate:                             false
 

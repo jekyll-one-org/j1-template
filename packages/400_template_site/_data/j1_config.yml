@@ -386,7 +386,7 @@ comments:
   provider:                             disqus
 
   disqus:
-    short_name:                         '<your-site-short-name>'
+    short_name:                         'jekyll-one'
 
 # facebook:
 #   appid:                              123
