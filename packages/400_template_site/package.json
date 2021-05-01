@@ -78,7 +78,7 @@
     "postbuild": "run-s -s jekyll_post_build:*",
     "lint": "run-s -s lint:*",
     "_lint:link_es_conf": "shx rm -f _site/assets/themes/j1/adapter/js/.eslintrc.json && lnk -s .eslintrc.json _site/assets/themes/j1/adapter/js",
-    "lint:cp-es-lint-conf": "shx rm -f _site/assets/themes/j1/adapter/js/.eslintrc.json && cp .eslintrc.json _site/assets/themes/j1/adapter/js",
+    "lint:cp-es-lint-conf": "shx rm -f _site/assets/themes/j1/adapter/js/.eslintrc.json && shx cp .eslintrc.json _site/assets/themes/j1/adapter/js",
     "lint:adapter_js": "eslint --color _site/assets/themes/j1/adapter/js/*.js",
     "rebuild": "run-s -s rebuild:*",
     "rebuild:clean": "bundle exec jekyll clean",
