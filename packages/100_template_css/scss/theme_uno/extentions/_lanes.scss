@@ -1,0 +1,63 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/theme_uno/extentions/_lane.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+ # NOTE: Styles for J1 Template Lanes
+ # -----------------------------------------------------------------------------
+*/
+
+.elevated-z0 {
+  background-color: transparent;
+  padding-top: 0;
+  padding-bottom: 0;
+  border-top: 0;
+  border-bottom: 0;
+}
+
+.elevated-z1 {
+  background-color: $grey-50;
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.01);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.01);
+}
+
+.elevated-z2 {
+  background-color: $grey-100;
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.01);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.01);
+}
+
+.elevated-z3 {
+  background-color: #F7F7F7;
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.02);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.02);
+}
+
+.elevated-z4 {
+  background-color: $grey-200;
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+.elevated-z5 {
+  background-color: $grey-300;
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.04);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+}

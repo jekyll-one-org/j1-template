@@ -137,257 +137,259 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 <!-- [INFO   ] [j1.assets.data.authclient.html             ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
-  <meta name="robots" content="noindex, nofollow" \>
+  <meta name="robots" content="noindex, nofollow" />
 </head>
 
-{% comment %} Modal SignIn
--------------------------------------------------------------------------------- {% endcomment %}
-<!-- [INFO   ] [j1.authclient.html                    ] [START: Modal signin|signup] -->
-<div id="modalOmniSignIn"
-    class="modal fade"
-    role="dialog"
-    tabindex="-1"
-    aria-labelledby="modalOmniSignIn" aria-hidden="true">
-  <div class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
+<div id="{{authclient_options.xhr_data_element}}">
 
-    <!-- Content -->
-    <div class="modal-content">
+  {% comment %} Modal SignIn
+  -------------------------------------------------------------------------------- {% endcomment %}
+  <!-- [INFO   ] [j1.authclient.html                    ] [START: Modal signin|signup] -->
+  <div id="modalOmniSignIn"
+      class="modal fade"
+      role="dialog"
+      tabindex="-1"
+      aria-labelledby="modalOmniSignIn" aria-hidden="true">
+    <div class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
 
-      <!--Header-->
-      <div class="modal-header">
-        <p class="lead">
-          <!-- i class="mdi mdi-2x mdi-account mdi-md-grey-100"></i -->
-          {{signin_modal_title}}
-        </p>
-      </div>
+      <!-- Content -->
+      <div class="modal-content">
 
-      <!-- Body -->
-      <div class="modal-body mr-5 ml-5 mb-0">
-        <p style="text-align: justify;">{{signin_modal_body_text | asciidocify}}</p>
-        <h5 class="mt-1 mb-3 notoc">Available options</h5>
-
-        <!-- Modal nav pills -->
-        <div class="row ml-2 mr-2">
-          <ul class="nav nav-pills nav-pills-icons mt-2" role="tablist">
-
-          {% comment %} Array used to order the (provider) tabs
-          ---------------------------------------------------------------------- {% endcomment %}
-          {% for provider in providers %}
-
-            {% if provider == active_provider %}
-              {% assign active_flag = " active" %}
-            {% else %}
-              {% assign active_flag = "" %}
-            {% endif %}
-
-            {% if provider == 'disqus' and auth_disqus_enabled %}
-            <li class="nav-item">
-              <a class="nav-link{{active_flag}}" href="#h-tabs-{{ auth_disqus_id }}" role="tab" data-toggle="tab" aria-expanded="false" aria-selected="false">
-                <i class="mdi mdi-disqus mt-1 mb-2"></i> {{ auth_disqus_title }}
-              </a>
-            </li>
-            {% endif %}
-
-            {% if provider == 'github' and auth_github_enabled %}
-            <li class="nav-item">
-              <a class="nav-link{{active_flag}}" href="#h-tabs-{{ auth_github_id }}" role="tab" data-toggle="tab" aria-expanded="false" aria-selected="true">
-                <i class="mdi mdi-github mt-1 mb-2"></i> {{ auth_github_title }}
-              </a>
-            </li>
-            {% endif %}
-
-            {% if provider == 'facebook' and auth_facebook_enabled %}
-            <li class="nav-item">
-              <a class="nav-link{{active_flag}}" href="#h-tabs-{{ auth_facebook_id }}" role="tab" data-toggle="tab" aria-expanded="false" aria-selected="false">
-                <i class="mdi mdi-facebook mt-1 mb-2"></i> {{ auth_facebook_title }}
-              </a>
-            </li>
-            {% endif %}
-
-            {% if provider == 'twitter' and auth_twitter_enabled %}
-            <li class="nav-item">
-              <a class="nav-link{{active_flag}}" href="#h-tabs-{{ auth_twitter_id }}" role="tab" data-toggle="tab" aria-expanded="false" aria-selected="false">
-                <i class="mdi mdi-twitter mt-1 mb-2"></i> {{ auth_twitter_title }}
-              </a>
-            </li>
-            {% endif %}
-
-            {% if provider == 'patreon' and auth_patreon_enabled %}
-            <li class="nav-item">
-              <a class="nav-link{{active_flag}}" href="#h-tabs-{{ auth_patreon_id }}" role="tab" data-toggle="tab" aria-expanded="true" aria-selected="false">
-                <i class="mdi mdi-patreon mt-1 mb-2"></i>
-                {{ auth_patreon_title }}
-              </a>
-            </li>
-            {% endif %}
-
-          {% endfor %}
-          </ul>
-
-          <div class="tab-content tab-space">
-          {% for provider in providers %}
-
-            {% if provider == active_provider %}
-              {% assign active_flag = " active" %}
-            {% else %}
-              {% assign active_flag = "" %}
-            {% endif %}
-
-            {% if provider == 'disqus' and auth_disqus_enabled %}
-              <div class="tab-pane{{active_flag}}" id="h-tabs-{{ auth_disqus_id }}">{{ auth_disqus_text | asciidocify }}</div>
-            {% endif %}
-            {% if provider == 'github' and auth_github_enabled %}
-              <div class="tab-pane{{active_flag}}" id="h-tabs-{{ auth_github_id }}">{{ auth_github_text | asciidocify }}</div>
-            {% endif %}
-            {% if provider == 'facebook' and auth_facebook_enabled %}
-              <div class="tab-pane{{active_flag}}" id="h-tabs-{{ auth_facebook_id }}">{{ auth_facebook_text | asciidocify }}</div>
-            {% endif %}
-            {% if provider == 'patreon' and auth_patreon_enabled %}
-              <div class="tab-pane{{active_flag}}" id="h-tabs-{{ auth_patreon_id }}">{{ auth_patreon_text | asciidocify }}</div>
-            {% endif %}
-            {% if provider == 'twitter' and auth_twitter_enabled %}
-              <div class="tab-pane{{active_flag}}" id="h-tabs-{{ auth_twitter_id }}">{{ auth_twitter_text | asciidocify }}</div>
-            {% endif %}
-          {% endfor %}
-          </div>
-
-        </div>
-      </div>
-
-      <!-- Footer -->
-      <div class="modal-footer justify-content-center">
-        <a type="button" id="signInButton" class="btn btn btn-raised btn-flex btn-md btn-primary mr-3" data-dismiss="modal">
-          <i class="mdi mdi-18px mdi-login mr-1"></i>
-          Yes, please
-        </a>
-        <a type="button" id="exitButton" class="btn btn btn-raised btn-flex btn-md btn-secondary" data-dismiss="modal">
-          <i class="mdi mdi-18px mdi-close mr-1"></i>
-          No, thanks
-        </a>
-      </div>
-    </div>
-    <!-- END Content -->
-
-  </div>
-</div> <!-- Modal SignIn -->
-<!-- [INFO   ] [j1.authclient.html                    ] [END: Modal signin] -->
-
-{% comment %} Modal SignOut
--------------------------------------------------------------------------------- {% endcomment %}
-<!-- [INFO   ] [j1.authclient.html                    ] [START: Modal signout] -->
-<div id="modalOmniSignOut"
-    class="modal fade top"
-    role="dialog" tabindex="-1"
-    aria-labelledby="modalOmniSignOut" aria-hidden="true" data-backdrop="false">
-  <div class="modal-dialog modal-frame modal-top modal-notify modal-danger" role="document">
-    <!-- Content -->
-    <div class="modal-content">
-
-      <!-- Header -->
-      <div class="modal-header">
-        <p class="lead">
-          <!-- i class="mdi mdi-2x mdi-account"></i -->
-          {{signout_modal_title}}
-        </p>
-      </div> <!-- END Header -->
-
-      <!-- Body -->
-      <div class="modal-body mr-5 ml-5 mb-0">
-        <!-- User info placed dynamically -->
-        <div id="user_state_info" class="text-left mb-3">
-          <h4 class="user-info">You are signed in to provider: </h4>
+        <!--Header-->
+        <div class="modal-header">
+          <p class="lead">
+            <!-- i class="mdi mdi-2x mdi-account mdi-md-grey-100"></i -->
+            {{signin_modal_title}}
+          </p>
         </div>
 
-        <!-- p style="text-align: justify;">
-              {{signout_modal_body_text | asciidocify}}
-        </p -->
-        <div>{{signout_modal_body_text | asciidocify}}</div>
+        <!-- Body -->
+        <div class="modal-body mr-5 ml-5 mb-0">
+          <p style="text-align: justify;">{{signin_modal_body_text | asciidocify}}</p>
+          <h5 class="mt-1 mb-3 notoc">Available options</h5>
 
-        <!-- Options DISABLED for now
-        <h5 class="mt-1 mb-3 notoc">Available options</h5>
-        <form id="authclient-form" class="form-horizontal">
-          <div class="mdc-list-group">
-            <div class="ml-5 mt-0 mr-0 mb-5">
+          <!-- Modal nav pills -->
+          <div class="row ml-2 mr-2">
+            <ul class="nav nav-pills nav-pills-icons mt-2" role="tablist">
 
-              <div class="switch">
-                <label>
-                  <input id="providerSignOut" name="providerSignOut" type="checkbox">
-                  <span class="bmd-switch-track"></span>
-                  SignOut completely (Provider)
-                </label>
-              </div>
+            {% comment %} Array used to order the (provider) tabs
+            ---------------------------------------------------------------------- {% endcomment %}
+            {% for provider in providers %}
 
+              {% if provider == active_provider %}
+                {% assign active_flag = " active" %}
+              {% else %}
+                {% assign active_flag = "" %}
+              {% endif %}
+
+              {% if provider == 'disqus' and auth_disqus_enabled %}
+              <li class="nav-item">
+                <a class="nav-link{{active_flag}}" href="#h-tabs-{{ auth_disqus_id }}" role="tab" data-toggle="tab" aria-expanded="false" aria-selected="false">
+                  <i class="mdi mdi-disqus mt-1 mb-2"></i> {{ auth_disqus_title }}
+                </a>
+              </li>
+              {% endif %}
+
+              {% if provider == 'github' and auth_github_enabled %}
+              <li class="nav-item">
+                <a class="nav-link{{active_flag}}" href="#h-tabs-{{ auth_github_id }}" role="tab" data-toggle="tab" aria-expanded="false" aria-selected="true">
+                  <i class="mdi mdi-github mt-1 mb-2"></i> {{ auth_github_title }}
+                </a>
+              </li>
+              {% endif %}
+
+              {% if provider == 'facebook' and auth_facebook_enabled %}
+              <li class="nav-item">
+                <a class="nav-link{{active_flag}}" href="#h-tabs-{{ auth_facebook_id }}" role="tab" data-toggle="tab" aria-expanded="false" aria-selected="false">
+                  <i class="mdi mdi-facebook mt-1 mb-2"></i> {{ auth_facebook_title }}
+                </a>
+              </li>
+              {% endif %}
+
+              {% if provider == 'twitter' and auth_twitter_enabled %}
+              <li class="nav-item">
+                <a class="nav-link{{active_flag}}" href="#h-tabs-{{ auth_twitter_id }}" role="tab" data-toggle="tab" aria-expanded="false" aria-selected="false">
+                  <i class="mdi mdi-twitter mt-1 mb-2"></i> {{ auth_twitter_title }}
+                </a>
+              </li>
+              {% endif %}
+
+              {% if provider == 'patreon' and auth_patreon_enabled %}
+              <li class="nav-item">
+                <a class="nav-link{{active_flag}}" href="#h-tabs-{{ auth_patreon_id }}" role="tab" data-toggle="tab" aria-expanded="true" aria-selected="false">
+                  <i class="mdi mdi-patreon mt-1 mb-2"></i>
+                  {{ auth_patreon_title }}
+                </a>
+              </li>
+              {% endif %}
+
+            {% endfor %}
+            </ul>
+
+            <div class="tab-content tab-space">
+            {% for provider in providers %}
+
+              {% if provider == active_provider %}
+                {% assign active_flag = " active" %}
+              {% else %}
+                {% assign active_flag = "" %}
+              {% endif %}
+
+              {% if provider == 'disqus' and auth_disqus_enabled %}
+                <div class="tab-pane{{active_flag}}" id="h-tabs-{{ auth_disqus_id }}">{{ auth_disqus_text | asciidocify }}</div>
+              {% endif %}
+              {% if provider == 'github' and auth_github_enabled %}
+                <div class="tab-pane{{active_flag}}" id="h-tabs-{{ auth_github_id }}">{{ auth_github_text | asciidocify }}</div>
+              {% endif %}
+              {% if provider == 'facebook' and auth_facebook_enabled %}
+                <div class="tab-pane{{active_flag}}" id="h-tabs-{{ auth_facebook_id }}">{{ auth_facebook_text | asciidocify }}</div>
+              {% endif %}
+              {% if provider == 'patreon' and auth_patreon_enabled %}
+                <div class="tab-pane{{active_flag}}" id="h-tabs-{{ auth_patreon_id }}">{{ auth_patreon_text | asciidocify }}</div>
+              {% endif %}
+              {% if provider == 'twitter' and auth_twitter_enabled %}
+                <div class="tab-pane{{active_flag}}" id="h-tabs-{{ auth_twitter_id }}">{{ auth_twitter_text | asciidocify }}</div>
+              {% endif %}
+            {% endfor %}
             </div>
+
           </div>
-        </form>
-        -->
-      </div> <!-- END Body -->
+        </div>
 
-      <!-- Footer -->
-      <div class="modal-footer">
-        <a type="button" id="signOutButton" class="btn btn btn-raised btn-flex btn-md btn-danger mr-3" data-dismiss="modal">
-          <i class="mdi mdi-18px mdi-logout mr-1"></i>
-          Yes, please
-        </a>
-        <a type="button" id="exitButton" class="btn btn btn-raised btn-flex btn-md btn-secondary" data-dismiss="modal">
-          <i class="mdi mdi-18px mdi-close mr-1"></i>
-          No, thanks
-        </a>
-      </div> <!-- END Footer -->
-
-    </div> <!-- END Modal content -->
-  </div> <!-- END Modal dialog -->
-</div> <!-- END Modal SignOut -->
-
-{% comment %} Modal UserStateInfo
--------------------------------------------------------------------------------- {% endcomment %}
-<!-- [INFO   ] [j1.authclient.html                    ] [START: Modal SIDE INFO signed in] -->
-<div class="modal fade right" id="sideModalAlreadySigneIn" tabindex="-1" role="dialog" aria-labelledby="sideModalAlreadySigneIn" aria-hidden="true" data-backdrop="false">
-  <div class="modal-dialog modal-side modal-top-right modal-notify modal-success" role="document">
-    <!-- Content -->
-    <div class="modal-content">
-      <!-- Header -->
-      <div class="modal-header">
-        <i class="mdi mdi-2x mdi-account mdi-md-grey-100"></i>
-        <p class="lead">Info</p>
-      </div>
-      <!-- Body -->
-      <div class="modal-body">
-        <div class="text-center">
-          <p>You're already signed in</p>
+        <!-- Footer -->
+        <div class="modal-footer justify-content-center">
+          <a type="button" id="signInButton" class="btn btn btn-raised btn-flex btn-md btn-primary mr-3" data-dismiss="modal">
+            <i class="mdi mdi-18px mdi-login mr-1"></i>
+            Yes, please
+          </a>
+          <a type="button" id="exitButton" class="btn btn btn-raised btn-flex btn-md btn-secondary" data-dismiss="modal">
+            <i class="mdi mdi-18px mdi-close mr-1"></i>
+            No, thanks
+          </a>
         </div>
       </div>
-      <!-- Footer -->
-      <div class="modal-footer justify-content-center">
-        <a type="button" class="btn btn btn-raised btn-flex btn-md btn-primary" data-dismiss="modal">OK</a>
-      </div>
-    </div>
-    <!-- END Content -->
-  </div>
-</div> <!-- END Modal UserStateInfo -->
-<!-- [INFO   ] [j1.authclient.html                    ] [END: Modal SIDE INFO signed in] -->
+      <!-- END Content -->
 
-{% comment %} Modal TOP INFO signed in
---------------------------------------------------------------------------------
-<!-- [INFO   ] [j1.authclient.html                    ] [START: Modal TOP INFO signed in] -->
-<div class="modal fade top" id="modalTopInfoSignedIn" tabindex="-1" role="dialog" aria-labelledby="modalTopInfoSignedIn" aria-hidden="true" data-backdrop="false">
-  <div class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
-    <!-- Content -->
-    <div class="modal-content">
-      <!-- Body -->
-      <div class="modal-body">
-        <div class="row px-4">
-          <p class="pt-1 pr-2">You're already signed in</p>
-          <a type="button" class="btn btn btn-raised btn-flex btn-md btn-primary" data-dismiss="modal"OK</a>
+    </div>
+  </div> <!-- Modal SignIn -->
+  <!-- [INFO   ] [j1.authclient.html                    ] [END: Modal signin] -->
+
+  {% comment %} Modal SignOut
+  -------------------------------------------------------------------------------- {% endcomment %}
+  <!-- [INFO   ] [j1.authclient.html                    ] [START: Modal signout] -->
+  <div id="modalOmniSignOut"
+      class="modal fade top"
+      role="dialog" tabindex="-1"
+      aria-labelledby="modalOmniSignOut" aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog modal-frame modal-top modal-notify modal-danger" role="document">
+      <!-- Content -->
+      <div class="modal-content">
+
+        <!-- Header -->
+        <div class="modal-header">
+          <p class="lead">
+            <!-- i class="mdi mdi-2x mdi-account"></i -->
+            {{signout_modal_title}}
+          </p>
+        </div> <!-- END Header -->
+
+        <!-- Body -->
+        <div class="modal-body mr-5 ml-5 mb-0">
+          <!-- User info placed dynamically -->
+          <div id="user_state_info" class="text-left mb-3">
+            <h4 class="user-info">You are signed in to provider: </h4>
+          </div>
+
+          <!-- p style="text-align: justify;">
+                {{signout_modal_body_text | asciidocify}}
+          </p -->
+          <div>{{signout_modal_body_text | asciidocify}}</div>
+
+          <!-- Options DISABLED for now
+          <h5 class="mt-1 mb-3 notoc">Available options</h5>
+          <form id="authclient-form" class="form-horizontal">
+            <div class="mdc-list-group">
+              <div class="ml-5 mt-0 mr-0 mb-5">
+
+                <div class="switch">
+                  <label>
+                    <input id="providerSignOut" name="providerSignOut" type="checkbox">
+                    <span class="bmd-switch-track"></span>
+                    SignOut completely (Provider)
+                  </label>
+                </div>
+
+              </div>
+            </div>
+          </form>
+          -->
+        </div> <!-- END Body -->
+
+        <!-- Footer -->
+        <div class="modal-footer">
+          <a type="button" id="signOutButton" class="btn btn btn-raised btn-flex btn-md btn-danger mr-3" data-dismiss="modal">
+            <i class="mdi mdi-18px mdi-logout mr-1"></i>
+            Yes, please
+          </a>
+          <a type="button" id="exitButton" class="btn btn btn-raised btn-flex btn-md btn-secondary" data-dismiss="modal">
+            <i class="mdi mdi-18px mdi-close mr-1"></i>
+            No, thanks
+          </a>
+        </div> <!-- END Footer -->
+
+      </div> <!-- END Modal content -->
+    </div> <!-- END Modal dialog -->
+  </div> <!-- END Modal SignOut -->
+
+  {% comment %} Modal UserStateInfo
+  -------------------------------------------------------------------------------- {% endcomment %}
+  <!-- [INFO   ] [j1.authclient.html                    ] [START: Modal SIDE INFO signed in] -->
+  <div class="modal fade right" id="sideModalAlreadySigneIn" tabindex="-1" role="dialog" aria-labelledby="sideModalAlreadySigneIn" aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog modal-side modal-top-right modal-notify modal-success" role="document">
+      <!-- Content -->
+      <div class="modal-content">
+        <!-- Header -->
+        <div class="modal-header">
+          <i class="mdi mdi-2x mdi-account mdi-md-grey-100"></i>
+          <p class="lead">Info</p>
+        </div>
+        <!-- Body -->
+        <div class="modal-body">
+          <div class="text-center">
+            <p>You're already signed in</p>
+          </div>
+        </div>
+        <!-- Footer -->
+        <div class="modal-footer justify-content-center">
+          <a type="button" class="btn btn btn-raised btn-flex btn-md btn-primary" data-dismiss="modal">OK</a>
         </div>
       </div>
+      <!-- END Content -->
     </div>
-    <!-- END Content -->
+  </div> <!-- END Modal UserStateInfo -->
+  <!-- [INFO   ] [j1.authclient.html                    ] [END: Modal SIDE INFO signed in] -->
+
+  {% comment %} Modal TOP INFO signed in
+  --------------------------------------------------------------------------------
+  <!-- [INFO   ] [j1.authclient.html                    ] [START: Modal TOP INFO signed in] -->
+  <div class="modal fade top" id="modalTopInfoSignedIn" tabindex="-1" role="dialog" aria-labelledby="modalTopInfoSignedIn" aria-hidden="true" data-backdrop="false">
+    <div class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
+      <!-- Content -->
+      <div class="modal-content">
+        <!-- Body -->
+        <div class="modal-body">
+          <div class="row px-4">
+            <p class="pt-1 pr-2">You're already signed in</p>
+            <a type="button" class="btn btn btn-raised btn-flex btn-md btn-primary" data-dismiss="modal"OK</a>
+          </div>
+        </div>
+      </div>
+      <!-- END Content -->
+    </div>
   </div>
+  <!-- [INFO   ] [j1.authclient.html                    ] [END: Modal TOP INFO signed in] -->
+  -------------------------------------------------------------------------------- {% endcomment %}
 </div>
-<!-- [INFO   ] [j1.authclient.html                    ] [END: Modal TOP INFO signed in] -->
--------------------------------------------------------------------------------- {% endcomment %}
-
 {% endcapture %}
 
 {% if production %}

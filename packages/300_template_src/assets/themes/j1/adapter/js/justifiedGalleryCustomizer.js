@@ -152,8 +152,9 @@ j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
       // data loader
       // ---------------------------------------------------------------------
       j1.xhrData ({
-        xhr_container_id: customizerOptions.xhr_container_id,
-        xhr_data_path:    customizerOptions.xhr_data_path },
+        xhr_container_id:   customizerOptions.xhr_container_id,
+        xhr_data_path:      customizerOptions.xhr_data_path,
+        xhr_data_element:   customizerOptions.xhr_data_element },
         'j1.adapter.gallery_customizer',
         'null'
       );

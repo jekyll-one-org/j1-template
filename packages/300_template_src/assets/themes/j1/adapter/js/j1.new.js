@@ -1164,19 +1164,16 @@ var j1 = (function () {
           }
         };
       };
-
       // see: https://stackoverflow.com/questions/20420577/detect-added-element-to-dom-with-mutation-observer
-      //
       var html_data_path;
       var id        = '#' + options.xhr_container_id;
       var $selector = $(id);
 
       if ( $selector.length ) {
         if (options.xhr_data_element) {
-          html_data_path = options.xhr_data_path + ' #' + options.xhr_data_element;
-          logger.info('XHR data element found: ' + options.xhr_data_element);
+          html_data_path = options.xhr_data_path + ' #' + options.xhr_data_element + ' > *';
+//        html_data_path = options.xhr_data_path + ' #' + options.xhr_data_element;
         } else  {
-          logger.warn('no XHR data element found. HTML data loaded full page.');
           html_data_path = options.xhr_data_path + ' > *';
         }
         $selector.load( html_data_path, cb_load_closure( mod, id ) );

@@ -160,13 +160,17 @@ j1.adapter['navigator'] = (function (j1, window) {
 
   var nav_menu_id                 = '{{nav_menu_id}}';
   var nav_quicklinks_id           = '{{nav_quicklinks_id}}';
+
   var authclient_modals_id        = '{{authclient_modals_id}}';
+  var authclient_xhr_data_element = '{{authclient_options.xhr_data_element}}';
+  var authclient_modals_data_path = '{{authclient_options.xhr_data_path}}';
+
+  var nav_menu_data_path          = '{{nav_menu_options.data_path}}';
+  var nav_quicklinks_data_path    = '{{quicklinks_options.data_path}}';
 
   var colors_data_path            = '{{template_config.colors_data_path}}';
   var font_size_data_path         = '{{template_config.font_size_data_path}}';
-  var nav_menu_data_path          = '{{nav_menu_options.data_path}}';
-  var nav_quicklinks_data_path    = '{{quicklinks_options.data_path}}';
-  var authclient_modals_data_path = '{{authclient_options.xhr_data_path}}';
+
 
   var cookie_names                = j1.getCookieNames();
   var cookie_user_session_name    = cookie_names.user_session;
@@ -291,24 +295,27 @@ j1.adapter['navigator'] = (function (j1, window) {
       // Workaround: Set 'data_loaded' to be returned by all Deferred in
       // the chain.
       // See: https://stackoverflow.com/questions/5436327/jquery-deferreds-and-promises-then-vs-done
-      //
+      // authclient_xhr_data_element
       // -----------------------------------------------------------------------
       // data loader
       // -----------------------------------------------------------------------
 
       j1.xhrData({
-        xhr_container_id: navQuicklinksOptions.xhr_container_id,
-        xhr_data_path:    navQuicklinksOptions.xhr_data_path },
+        xhr_container_id:   navQuicklinksOptions.xhr_container_id,
+        xhr_data_path:      navQuicklinksOptions.xhr_data_path,
+        xhr_data_element:   navQuicklinksOptions.xhr_data_element },
         'j1.adapter.navigator',
         null);
       j1.xhrData({
-        xhr_container_id: navAuthClientConfig.xhr_container_id,
-        xhr_data_path:    navAuthClientConfig.xhr_data_path },
+        xhr_container_id:   navAuthClientConfig.xhr_container_id,
+        xhr_data_path:      navAuthClientConfig.xhr_data_path,
+        xhr_data_element:   navAuthClientConfig.xhr_data_element },
         'j1.adapter.navigator',
         null);
       j1.xhrData({
-        xhr_container_id: navMenuOptions.xhr_container_id,
-        xhr_data_path:    navMenuOptions.xhr_data_path },
+        xhr_container_id:   navMenuOptions.xhr_container_id,
+        xhr_data_path:      navMenuOptions.xhr_data_path,
+        xhr_data_element:   navMenuOptions.xhr_data_element },
         'j1.adapter.navigator',
         'null');
 

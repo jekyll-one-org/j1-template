@@ -17,5 +17,6 @@
 
 .post-headline h1,
 .post-headline h2 {
-    border-bottom: 1px dotted  #0d47a1 !important;
+    color: $grey-400;
+    border-bottom: 1px dotted  $grey-800 !important;
 }

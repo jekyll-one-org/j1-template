@@ -112,7 +112,7 @@ resource_options:
             <div class="card-footer-text">
               <hr class="my-3">
               {% if post.date %}
-              <i class="mdi mdi-calendar-blank mdi-md-grey mr-1"></i> {{post.date | date: "%Y %B, %e"}}
+              <i class="mdi mdi-calendar-blank mr-1"></i> {{post.date | date: "%Y %B, %e"}}
               {% endif %}
               {% if likes_count %}
               <span class="font-weight-bold"> · </span>

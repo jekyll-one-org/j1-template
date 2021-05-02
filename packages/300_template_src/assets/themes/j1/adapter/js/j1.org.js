@@ -586,8 +586,7 @@ var j1 = (function () {
           if (selector.length) {
             logText = 'loading banner on id: ' +banner[i];
             logger.info(logText);
-//          var banner_data_path = '{{banner_data_path}} ' + id + ' > *';
-            var banner_data_path = '{{banner_data_path}} ' + id;
+            var banner_data_path = '{{banner_data_path}} ' + id + ' > *';
             selector.load(banner_data_path, cb_load_closure(id));
           }
         } // END for
@@ -690,8 +689,7 @@ var j1 = (function () {
           if ( selector.length ) {
             logText = 'loading panel on id: ' +panel[i];
             logger.info(logText);
-//          var panel_data_path = '{{panel_data_path}} ' + id + ' > *';
-            var panel_data_path = '{{panel_data_path}} ' + id;
+            var panel_data_path = '{{panel_data_path}} ' + id + ' > *';
             selector.load(panel_data_path, cb_load_closure(id));
           }
         } // END for
@@ -751,8 +749,7 @@ var j1 = (function () {
       var id = '#' + '{{footer_id}}';
       var selector = $(id);
       if ( selector.length ) {
-//      var footer_data_path = '{{footer_data_path}} ' + id + ' > *';
-        var footer_data_path = '{{footer_data_path}} ' + id;
+        var footer_data_path = '{{footer_data_path}}' + id + ' > *';
         selector.load(footer_data_path, cb_load_closure(id));
       } else {
         logText = 'data not loaded';
@@ -1164,19 +1161,15 @@ var j1 = (function () {
           }
         };
       };
-
       // see: https://stackoverflow.com/questions/20420577/detect-added-element-to-dom-with-mutation-observer
-      //
       var html_data_path;
       var id        = '#' + options.xhr_container_id;
       var $selector = $(id);
 
       if ( $selector.length ) {
         if (options.xhr_data_element) {
-          html_data_path = options.xhr_data_path + ' #' + options.xhr_data_element;
-          logger.info('XHR data element found: ' + options.xhr_data_element);
+          html_data_path = options.xhr_data_path + ' #' + options.xhr_data_element + ' > *';
         } else  {
-          logger.warn('no XHR data element found. HTML data loaded full page.');
           html_data_path = options.xhr_data_path + ' > *';
         }
         $selector.load( html_data_path, cb_load_closure( mod, id ) );

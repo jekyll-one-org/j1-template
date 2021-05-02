@@ -27,6 +27,7 @@ defaults:
   enabled:                              false
 
   xhr_container_id:                     cookiebar_modals
+  xhr_data_element:                     cookieConsentModals
   xhr_data_path:                        /assets/data/cookiebar/index.html
 
   modal_type:                           full

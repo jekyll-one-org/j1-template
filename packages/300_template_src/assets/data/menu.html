@@ -139,7 +139,7 @@ regenerate:                             true
 
 <!-- [INFO   ] [j1.assets.data.menu.html             ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
-  <meta name="robots" content="noindex, nofollow" \>
+  <meta name="robots" content="noindex, nofollow" />
 </head>
 
 {% comment %} Main
@@ -149,9 +149,9 @@ regenerate:                             true
 <!-- div id="{{nav_menu_id}}" class="{{dropdown_collapse}}" -->
 <!-- div class="{{dropdown_collapse}}" -->
   {% if nav_menu_animation %}
-  <ul id="desktop_menu" class="nav navbar-nav navigator navbar-{{nav_bar_position}}" data-in="{{animate_in}}" data-out="{{animate_out}}">
+  <ul id="{{nav_menu_options.xhr_data_element}}" class="nav navbar-nav navigator navbar-{{nav_bar_position}}" data-in="{{animate_in}}" data-out="{{animate_out}}">
   {% else %}
-  <ul id="desktop_menu" class="nav navbar-nav navigator navbar-{{nav_bar_position}}" data-in="fadeIn" data-out="fadeOut">
+  <ul id="{{nav_menu_options.xhr_data_element}}" class="nav navbar-nav navigator navbar-{{nav_bar_position}}" data-in="fadeIn" data-out="fadeOut">
   {% endif %}
 
   {% for menu in navigator_menu_config %}

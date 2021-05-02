@@ -34,6 +34,7 @@
 
 .card .card-header {
   background-color: $blue;
+  border-bottom: 0;
 }
 
 .card-header:first-child {
@@ -119,9 +120,10 @@
 .card h4.card-header,
 .card h5.card-header,
 .card h6.card-header {
-  color: $white;
+  color: $grey-300;
+  font-size: 1.75rem !important;
+  font-weight: 500;
 }
-
 
 .card [data-background-color="purple"] {
   background: linear-gradient(60deg, #ab47bc, #8e24aa);

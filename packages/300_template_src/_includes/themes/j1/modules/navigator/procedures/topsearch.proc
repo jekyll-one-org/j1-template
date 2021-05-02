@@ -45,7 +45,7 @@
 
 {% comment %} Set quicksearch properties
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign topsearch_id        = topsearch_options.xhr_container_id %}
+{% assign topsearch_id        = topsearch_options.container_id %}
 {% assign icon_family         = topsearch_options.icon_family | downcase %}
 {% assign placeholder         = topsearch_options.placeholder %}
 {% assign search_heading_lead = topsearch_options.search_heading_lead %}
@@ -89,7 +89,7 @@
   ------------------------------------------------------------------------------ {% endcomment %}
   {% if quick_search %}
     <!-- [INFO   ] [j1.modules.navigator.topsearch.proc   ] [ start processing: top search ] -->
-    <div id="navigator_nav_topsearch" class="top-search ml-4 mr-4" style="display: none;">
+    <div id="{{topsearch_id}}" class="top-search ml-4 mr-4" style="display: none;">
     	<div class="input-group">
     	  <span class="input-group-addon"><i class="mdi mdi-magnify mdi-2x" style="color:#9E9E9E"></i></span>
     	  <input id="search-query" type="text" name="q" placeholder="QuickSearch" autocomplete="off" class="form-control">

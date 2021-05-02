@@ -57,223 +57,226 @@ regenerate:                             true
 ================================================================================ {% endcomment %}
 <!-- [INFO   ] [j1.assets.data.cookiebar.html             ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
-  <meta name="robots" content="noindex, nofollow" \>
+  <meta name="robots" content="noindex, nofollow" />
 </head>
 
-{% comment %} Modal cookie consent dialog
--------------------------------------------------------------------------------- {% endcomment %}
-<div id="topFullCookieConsent" class="modal fade top"
-  tabindex="-1"
-  role="dialog"
-  data-backdrop="false"
-  aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
+<div id="{{cookie_options.xhr_data_element}}">
 
-    <!-- Content -->
-    <div class="modal-content">
+  {% comment %} Modal cookie consent dialog
+  -------------------------------------------------------------------------------- {% endcomment %}
+  <div id="topFullCookieConsent" class="modal fade top"
+    tabindex="-1"
+    role="dialog"
+    data-backdrop="false"
+    aria-labelledby="myModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
 
-      <!--Header-->
-      <div class="modal-header">
-        <p class="lead">{{cookie_options.consent_modals_title}}</p>
-      </div>
+      <!-- Content -->
+      <div class="modal-content">
 
-      <!-- Body -->
-      <div class="modal-body">
-
-        <!-- About cookies -->
-        <div class="px-2">
-          <p class="pt-1 pr-2">{{cookie_options.policy_about}}</p>
+        <!--Header-->
+        <div class="modal-header">
+          <p class="lead">{{cookie_options.consent_modals_title}}</p>
         </div>
-      </div> <!-- END Body -->
 
-      <!-- Footer -->
-      <div class="modal-footer justify-content-center">
-        {% if cookie_options.buttons.policy_button %}
-        <a id="policyButton" type="button"
-           class="btn btn-raised btn-flex btn-primary mb-2 mr-2" style="width: 20rem">
-           <i class="mdi mdi-18px mdi-white mdi-read mr-2"></i>
-           {{cookie_options.buttons.policy_button_text}}
-        </a>
+        <!-- Body -->
+        <div class="modal-body">
+
+          <!-- About cookies -->
+          <div class="px-2">
+            <p class="pt-1 pr-2">{{cookie_options.policy_about}}</p>
+          </div>
+        </div> <!-- END Body -->
+
+        <!-- Footer -->
+        <div class="modal-footer justify-content-center">
+          {% if cookie_options.buttons.policy_button %}
+          <a id="policyButton" type="button"
+             class="btn btn-raised btn-flex btn-primary mb-2 mr-2" style="width: 20rem">
+             <i class="mdi mdi-18px mdi-white mdi-read mr-2"></i>
+             {{cookie_options.buttons.policy_button_text}}
+          </a>
+          {% endif %}
+          <a id="acceptButton" type="button"
+             class="btn btn-raised btn-flex btn-primary mb-2 mr-2" style="width: 20rem"
+             data-dismiss="modal">
+             <i class="mdi mdi-18px mdi-white mdi-check mr-2"></i>
+             {{cookie_options.buttons.accept_button_text}}
+          </a>
+          {% if cookie_options.buttons.decline_button %}
+          <a id="declineButton" type="button"
+             class="btn btn-raised btn-flex btn-primary mb-2 mr-2" style="width: 20rem"
+             data-dismiss="modal">
+             <i class="mdi mdi-18px mdi-white mdi-close mr-2"></i>
+             {{cookie_options.buttons.decline_button_text}}
+          </a>
+          {% endif %}
+        </div> <!-- END Footer -->
+
+        <!-- Hidden Content -->
+        <div class="cookie-policy">
+          {% if cookie_options.buttons.policy_button_text %}
+          <div id="modal-footer" class="modal-footer-hidden">
+            <div id="cookiePolicyInfo" class="card card-flat" style="display: none">
+              <div class="content">
+                <h4 class="notoc card-title">{{cookie_options.cookie_policy_title}}</h4>
+                <h6 class="notoc category text-gray">{{cookie_options.cookie_policy_tagline | asciidocify}}</h6>
+
+                <!-- Cookie categories -->
+                {% if cookie_options.categories.enabled %}
+                <div class="px-2">
+                  <h6 class="card-subtitle text-muted mb-2 mr-2">{{cookie_options.categories.category_title}}</h6>
+                  <table class="tableblock frame-all grid-all stretch table-responsive-stacked-lg">
+                    <colgroup>
+                      <col style="width: 33.3333%;">
+                      <col style="width: 16.6666%;">
+                      <col style="width: 50.0001%;">
+                    </colgroup>
+                    <thead>
+                      <tr>
+                        <th class="tableblock halign-left valign-top">Cookie</th>
+                        <th class="tableblock halign-left valign-top">Usage</th>
+                        <th class="tableblock halign-left valign-top">Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="tableblock halign-left valign-top">
+                          <p class="tableblock">{{cookie_options.categories.category_session}}</p>
+                        </td>
+                        <td class="tableblock halign-left valign-top">
+                          <div class="content"><i class="fa md-green fa-check"></i></div>
+                        </td>
+                        <td class="tableblock halign-left valign-top">
+                          <p class="tableblock">{{cookie_options.categories.category_description_text}}</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="tableblock halign-left valign-top">
+                          <p class="tableblock">{{cookie_options.categories.category_persistent}}</p>
+                        </td>
+                        <td class="tableblock halign-left valign-top">
+                          <div class="content"><i class="fa md-green fa-check"></i></div>
+                        </td>
+                        <td class="tableblock halign-left valign-top">
+                          <p class="tableblock">{{cookie_options.categories.category_description_text}}</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="tableblock halign-left valign-top">
+                          <p class="tableblock">{{cookie_options.categories.category_first_party}}</p>
+                        </td>
+                        <td class="tableblock halign-left valign-top">
+                          <div class="content"><i class="fa md-green fa-check"></i></div>
+                        </td>
+                        <td class="tableblock halign-left valign-top">
+                          <p class="tableblock">{{cookie_options.categories.category_description_text}}</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="tableblock halign-left valign-top">
+                          <p class="tableblock">{{cookie_options.categories.category_second_party}}</p>
+                        </td>
+                        <td class="tableblock halign-left valign-top">
+                          <div class="content"><i class="fa md-green fa-check"></i></div>
+                        </td>
+                        <td class="tableblock halign-left valign-top">
+                          <p class="tableblock">{{cookie_options.categories.category_description_text}}</p>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                {% endif %}
+                <div class="card-description">{{ cookie_options.cookie_policy_text | asciidocify}}</div>
+              </div>
+            </div>
+          </div>
         {% endif %}
-        <a id="acceptButton" type="button"
-           class="btn btn-raised btn-flex btn-primary mb-2 mr-2" style="width: 20rem"
-           data-dismiss="modal">
-           <i class="mdi mdi-18px mdi-white mdi-check mr-2"></i>
-           {{cookie_options.buttons.accept_button_text}}
-        </a>
-        {% if cookie_options.buttons.decline_button %}
-        <a id="declineButton" type="button"
-           class="btn btn-raised btn-flex btn-primary mb-2 mr-2" style="width: 20rem"
-           data-dismiss="modal">
-           <i class="mdi mdi-18px mdi-white mdi-close mr-2"></i>
-           {{cookie_options.buttons.decline_button_text}}
-        </a>
-        {% endif %}
-      </div> <!-- END Footer -->
+        </div> <!-- END Hidden Content -->
+      </div> <!-- END Content -->
+    </div>
+  </div> <!-- END Modal -->
+  {% comment %} END Modal cookie consent dialog
+  -------------------------------------------------------------------------------- {% endcomment %}
 
-      <!-- Hidden Content -->
-      <div class="cookie-policy">
-        {% if cookie_options.buttons.policy_button_text %}
-        <div id="modal-footer" class="modal-footer-hidden">
-          <div id="cookiePolicyInfo" class="card card-flat" style="display: none">
-            <div class="content">
-              <h4 class="notoc card-title">{{cookie_options.cookie_policy_title}}</h4>
-              <h6 class="notoc category text-gray">{{cookie_options.cookie_policy_tagline | asciidocify}}</h6>
-
-              <!-- Cookie categories -->
-              {% if cookie_options.categories.enabled %}
-              <div class="px-2">
-                <h6 class="card-subtitle text-muted mb-2 mr-2">{{cookie_options.categories.category_title}}</h6>
-                <table class="tableblock frame-all grid-all stretch table-responsive-stacked-lg">
-                  <colgroup>
-                    <col style="width: 33.3333%;">
-                    <col style="width: 16.6666%;">
-                    <col style="width: 50.0001%;">
-                  </colgroup>
-                  <thead>
-                    <tr>
-                      <th class="tableblock halign-left valign-top">Cookie</th>
-                      <th class="tableblock halign-left valign-top">Usage</th>
-                      <th class="tableblock halign-left valign-top">Description</th>
-                    </tr>
-                  </thead>
+  {% comment %} Modal revoke cookies dialog
+  -------------------------------------------------------------------------------- {% endcomment %}
+  <div id="cookieRevokeCentralDanger"
+       class="modal fade top"
+       tabindex="-1"
+       role="dialog"
+       data-backdrop="false"
+       aria-modal="true"
+       aria-labelledby="RevokeCookieConsent">
+    <div class="modal-dialog modal-frame modal-top modal-notify modal-danger" role="document">
+      <!-- Content -->
+      <div class="modal-content">
+        <!--Header-->
+        <div class="modal-header">
+          <p class="lead">Revoke Cookie Consent</p>
+        </div>
+        <!--END Header-->
+        <!-- Body -->
+        <div class="modal-body">
+          <div class="text-left">
+            <div class="sectionbody">
+              <div class="paragraph">
+                <p>If you do <strong>not</strong> wish to receive <strong>cookies</strong> anymore from <strong>this site</strong>, you can
+                  revoke the cookie consent you’ve given. Furthermore, you may be able to refuse
+                  them by adjusting your <strong>browser</strong> settings to <strong>reject on cookies</strong>.
+                </p>
+              </div>
+              <!-- div class="admonitionblock caution">
+                <table>
                   <tbody>
                     <tr>
-                      <td class="tableblock halign-left valign-top">
-                        <p class="tableblock">{{cookie_options.categories.category_session}}</p>
+                      <td class="icon">
+                        <i class="fa icon-caution" title="Caution"></i>
                       </td>
-                      <td class="tableblock halign-left valign-top">
-                        <div class="content"><i class="fa md-green fa-check"></i></div>
-                      </td>
-                      <td class="tableblock halign-left valign-top">
-                        <p class="tableblock">{{cookie_options.categories.category_description_text}}</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="tableblock halign-left valign-top">
-                        <p class="tableblock">{{cookie_options.categories.category_persistent}}</p>
-                      </td>
-                      <td class="tableblock halign-left valign-top">
-                        <div class="content"><i class="fa md-green fa-check"></i></div>
-                      </td>
-                      <td class="tableblock halign-left valign-top">
-                        <p class="tableblock">{{cookie_options.categories.category_description_text}}</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="tableblock halign-left valign-top">
-                        <p class="tableblock">{{cookie_options.categories.category_first_party}}</p>
-                      </td>
-                      <td class="tableblock halign-left valign-top">
-                        <div class="content"><i class="fa md-green fa-check"></i></div>
-                      </td>
-                      <td class="tableblock halign-left valign-top">
-                        <p class="tableblock">{{cookie_options.categories.category_description_text}}</p>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="tableblock halign-left valign-top">
-                        <p class="tableblock">{{cookie_options.categories.category_second_party}}</p>
-                      </td>
-                      <td class="tableblock halign-left valign-top">
-                        <div class="content"><i class="fa md-green fa-check"></i></div>
-                      </td>
-                      <td class="tableblock halign-left valign-top">
-                        <p class="tableblock">{{cookie_options.categories.category_description_text}}</p>
+                      <td class="content">
+                        If you have previously visited our website&thinsp;—&thinsp;or any pages this
+                        session&thinsp;—&thinsp;<strong>and</strong> agreed on the use of cookies, you may also have to
+                        <strong>delete</strong> already existing <strong>cookies</strong> by your <strong>browser</strong> in order to clean
+                        all cookies left.
                       </td>
                     </tr>
                   </tbody>
                 </table>
-              </div>
-              {% endif %}
-              <div class="card-description">{{ cookie_options.cookie_policy_text | asciidocify}}</div>
+              </div -->
+              <!-- div class="paragraph">
+                <p>
+                  You are about to <strong>disagree</strong> on cookies used by this site.
+                  If you do so, this site is <strong>unable</strong> to offer you any of our
+                  <strong>functionalities</strong>, <strong>services</strong> or <strong>support</strong>.
+                </p>
+              </div -->
             </div>
           </div>
-        </div>
-      {% endif %}
-      </div> <!-- END Hidden Content -->
-    </div> <!-- END Content -->
-  </div>
-</div> <!-- END Modal -->
-{% comment %} END Modal cookie consent dialog
--------------------------------------------------------------------------------- {% endcomment %}
-
-{% comment %} Modal revoke cookies dialog
--------------------------------------------------------------------------------- {% endcomment %}
-<div id="cookieRevokeCentralDanger"
-     class="modal fade top"
-     tabindex="-1"
-     role="dialog"
-     data-backdrop="false"
-     aria-modal="true"
-     aria-labelledby="RevokeCookieConsent">
-  <div class="modal-dialog modal-frame modal-top modal-notify modal-danger" role="document">
-    <!-- Content -->
-    <div class="modal-content">
-      <!--Header-->
-      <div class="modal-header">
-        <p class="lead">Revoke Cookie Consent</p>
-      </div>
-      <!--END Header-->
-      <!-- Body -->
-      <div class="modal-body">
-        <div class="text-left">
-          <div class="sectionbody">
-            <div class="paragraph">
-              <p>If you do <strong>not</strong> wish to receive <strong>cookies</strong> anymore from <strong>this site</strong>, you can
-                revoke the cookie consent you’ve given. Furthermore, you may be able to refuse
-                them by adjusting your <strong>browser</strong> settings to <strong>reject on cookies</strong>.
-              </p>
-            </div>
-            <!-- div class="admonitionblock caution">
-              <table>
-                <tbody>
-                  <tr>
-                    <td class="icon">
-                      <i class="fa icon-caution" title="Caution"></i>
-                    </td>
-                    <td class="content">
-                      If you have previously visited our website&thinsp;—&thinsp;or any pages this
-                      session&thinsp;—&thinsp;<strong>and</strong> agreed on the use of cookies, you may also have to
-                      <strong>delete</strong> already existing <strong>cookies</strong> by your <strong>browser</strong> in order to clean
-                      all cookies left.
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div -->
-            <!-- div class="paragraph">
-              <p>
-                You are about to <strong>disagree</strong> on cookies used by this site.
-                If you do so, this site is <strong>unable</strong> to offer you any of our
-                <strong>functionalities</strong>, <strong>services</strong> or <strong>support</strong>.
-              </p>
-            </div -->
-          </div>
-        </div>
-        <!-- END Body -->
-        <!-- Footer -->
-        <div class="modal-footer justify-content-center">
-          <a id="revokeCookies" type="button"
-            class="btn btn-raised btn-flex btn-danger mb-2 mr-2" style="width: 25rem"
-            data-dismiss="modal">
-            <i class="mdi mdi-18px mdi-white mdi-check mr-2"></i>
-            {{cookie_options.buttons.revoke_button_text}}
-          </a>
-          <a id="remainCookies" type="button"
-            class="btn btn-raised btn-flex btn-primary mb-2 mr-2" style="width: 25rem"
-            data-dismiss="modal">
-            <i class="mdi mdi-18px mdi-white mdi-close mr-2"></i>
-            {{cookie_options.buttons.do_nothing_button_text}}
-          </a>
-        </div> <!-- END Footer -->
-      </div> <!-- END Body -->
-    </div> <!-- END Content -->
-  </div>
-</div> <!-- END Modal -->
-{% comment %} END Modal revoke cookies dialog
--------------------------------------------------------------------------------- {% endcomment %}
+          <!-- END Body -->
+          <!-- Footer -->
+          <div class="modal-footer justify-content-center">
+            <a id="revokeCookies" type="button"
+              class="btn btn-raised btn-flex btn-danger mb-2 mr-2" style="width: 25rem"
+              data-dismiss="modal">
+              <i class="mdi mdi-18px mdi-white mdi-check mr-2"></i>
+              {{cookie_options.buttons.revoke_button_text}}
+            </a>
+            <a id="remainCookies" type="button"
+              class="btn btn-raised btn-flex btn-primary mb-2 mr-2" style="width: 25rem"
+              data-dismiss="modal">
+              <i class="mdi mdi-18px mdi-white mdi-close mr-2"></i>
+              {{cookie_options.buttons.do_nothing_button_text}}
+            </a>
+          </div> <!-- END Footer -->
+        </div> <!-- END Body -->
+      </div> <!-- END Content -->
+    </div>
+  </div> <!-- END Modal -->
+  {% comment %} END Modal revoke cookies dialog
+  -------------------------------------------------------------------------------- {% endcomment %}
+</div>
 
 {% endcapture %}
 

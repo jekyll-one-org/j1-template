@@ -209,13 +209,17 @@ j1.adapter['mmenu'] = (function (j1, window) {
       to
         {% if forloop.last %}'data_loaded'{% else %}'data_loaded'{% endif %}){% if forloop.last %}{% else %},{% endif %}
       -------------------------------------------------------------------------- {% endcomment %}
+
       {% for item in nav_mmenu_options.menus %} {% if item.menu.enabled %}
-      {% assign menu_id       = item.menu.xhr_container_id %}
-      {% assign xhr_data_path = item.menu.xhr_data_path %}
+
+      {% assign menu_id           = item.menu.xhr_container_id %}
+      {% assign xhr_data_path     = item.menu.xhr_data_path %}
+      {% assign xhr_data_element  = item.menu.xhr_data_element %}
 
       j1.xhrData ({
-        xhr_container_id: '{{menu_id}}',
-        xhr_data_path:    '{{xhr_data_path}}'},
+        xhr_container_id:   '{{menu_id}}',
+        xhr_data_path:      '{{xhr_data_path}}',
+        xhr_data_element:   '{{xhr_data_element}}' },
         'j1.adapter.mmenu',
         {% if forloop.last %}'data_loaded'{% else %}'null'{% endif %}){% if forloop.last %};{% else %};{% endif %}
 

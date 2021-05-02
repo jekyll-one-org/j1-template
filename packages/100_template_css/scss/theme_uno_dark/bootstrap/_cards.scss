@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/100_template_css/scss/theme_uno_dark/theme/_cards.scss
+ # ~/100_template_css/scss/theme_uno_dark/bootstrap/_cards.scss
  #
  # Product/Info:
  # https://jekyll.one
@@ -16,10 +16,14 @@
   border: 0;
   border-radius: 0;
   .card-header {
-      border-bottom: 1px solid $grey-600;
+    // border-bottom: 1px solid $grey-600;
+    border-bottom: 0;
   }
   .card-footer {
-    background-color: $primary !important;
-    border-top: 1px solid $grey-600;
+    background-color: transparent !important;
+    border-top: 0;
+  }
+  hr {
+    border-top: 1px solid  $grey-600 !important;
   }
 }

@@ -143,15 +143,15 @@
 {% comment %} Check robot settings from page (or default SCOPE)
 -------------------------------------------------------------------------------- {% endcomment %}
 {% if page.robots.index %}
-  {% capture robots_index %}<meta name="robots" content="index">{% endcapture %}
+  {% capture robots_index %}<meta name="robots" content="index" />{% endcapture %}
 {% else %}
-  {% capture robots_index %}<meta name="robots" content="noindex">{% endcapture %}
+  {% capture robots_index %}<meta name="robots" content="noindex" />{% endcapture %}
 {% endif %}
 
 {% if page.robots.follow %}
-  {% capture robots_follow %}<meta name="robots" content="follow">{% endcapture %}
+  {% capture robots_follow %}<meta name="robots" content="follow" />{% endcapture %}
 {% else %}
-  {% capture robots_follow %}<meta name="robots" content="nofollow">{% endcapture %}
+  {% capture robots_follow %}<meta name="robots" content="nofollow" />{% endcapture %}
 {% endif %}
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [place meta tags for robots ] -->

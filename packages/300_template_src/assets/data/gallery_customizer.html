@@ -49,12 +49,15 @@ regenerate:                             true
 
 <!-- [INFO   ] [j1.assets.data.banner.html             ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
-  <meta name="robots" content="noindex, nofollow" \>
+  <meta name="robots" content="noindex, nofollow" />
 </head>
 
-{% comment %} Main
--------------------------------------------------------------------------------- {% endcomment %}
-<!-- [INFO   ] [j1.gallery_customizer              ] [Placement of the Drawer] -->
+<!-- div id="galleryCustomizer" -->
+<div id="{{customizer_options.xhr_data_element}}">
+
+  {% comment %} Main
+  -------------------------------------------------------------------------------- {% endcomment %}
+  <!-- [INFO   ] [j1.gallery_customizer              ] [Placement of the Drawer] -->
 
   <nav class="nav bmd-layout-container bmd-drawer-f-l">
 
@@ -165,7 +168,9 @@ regenerate:                             true
     </div>
 
   </nav>
-<!-- [INFO   ] [j1.gallery_customizer.html         ] [END: Drawer|Form] -->
+  <!-- [INFO   ] [j1.gallery_customizer.html         ] [END: Drawer|Form] -->
+
+</div>
 
 {% endcapture %}
 {% if production %}

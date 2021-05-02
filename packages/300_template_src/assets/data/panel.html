@@ -65,7 +65,7 @@ regenerate:                             true
 
 <!-- [INFO   ] [j1.assets.data.panel.html             ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
-  <meta name="robots" content="noindex, nofollow" \>
+  <meta name="robots" content="noindex, nofollow" />
 </head>
 
 {% comment %} Main
@@ -98,7 +98,7 @@ regenerate:                             true
           {% assign tagline         = panel_settings.tagline|strip_newlines %}
           {% assign buttons         = panel_settings.buttons %}
           {% assign header          = panel_settings.header %}
-          {% assign properties  = panel_settings.properties %}
+          {% assign properties      = panel_settings.properties %}
           {% assign cards           = panel_settings.cards %}
         {% endif %}
       {% endfor %}
@@ -150,7 +150,7 @@ regenerate:                             true
         <!-- Panel {{panel_settings.id}} -->
         <section id="{{panel_settings.id}}">
           <!-- Main Container -->
-          <div class="container">
+          <div class="container {{panel_settings.properties}}">
 
             <!-- Heading -->
             <div class="row">
@@ -229,7 +229,7 @@ regenerate:                             true
                           </span>
                         {% endif %}
                       </div>
-                      <h3 class="m-0 md-white">{{card_title}}</h3>
+                      <h3 class="m-0">{{card_title}}</h3>
                     </div>
                   </div>
 
@@ -251,9 +251,9 @@ regenerate:                             true
                   <hr class="my-3">
 
                   {% if button_target == null %}
-                    <a class="card-link md-grey-500" href="{{button_href}}">{{button_text}}</a>
+                    <a class="card-link text-muted" href="{{button_href}}">{{button_text}}</a>
                   {% else %}
-                    <a class="card-link  md-grey-500" href="{{button_href}}" target="{{button_target}}">{{button_text}}</a>
+                    <a class="card-link  md-grey-600" href="{{button_href}}" target="{{button_target}}">{{button_text}}</a>
                   {% endif %}
                   </div>
 
@@ -402,8 +402,9 @@ regenerate:                             true
 
         {% assign panel_options = panel_config_defaults.news|merge: panel_settings %}
         {% if debug %}<!-- panel_options:  {{panel_options}} -->{% endif %}
+        <!-- Panel {{panel_settings.id}} -->
         <section id="{{panel_settings.id}}">
-          <div class="container">
+          <div class="container {{panel_settings.properties}}">
 
             {% if panel_options.title %}
             <!-- Heading -->
@@ -494,7 +495,7 @@ regenerate:                             true
                           <i class="mdi mdi-calendar-blank mdi-md-grey mr-1"></i>
                           {{post.date|date:"%Y %B, %e"}}
                         </div>
-                        <a class="card-link md-grey-500"
+                        <a class="card-link text-muted"
                            href="{{post.url}}">
                            {{readmore_text}} · {{post.tagline}}
                         </a>

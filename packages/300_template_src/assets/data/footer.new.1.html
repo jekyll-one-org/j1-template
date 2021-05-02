@@ -39,21 +39,28 @@ regenerate:                             true
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment               = site.environment %}
+
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign footer_config_defaults = site.data.blocks.defaults.footer %}
-{% assign footer_config_settings = site.data.blocks.footer %}
+{% assign blocks                    = site.data.blocks %}
+{% assign footer_defaults           = blocks.defaults.footer %}
+{% assign footer_settings           = blocks.footer %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment            = site.environment %}
+{% assign footer_config_defaults    = footer_defaults %}
+{% assign footer_config_settings    = footer_settings %}
 
-{% assign footer_config_defaults = footer_config_defaults.defaults %}
-{% assign footer_config_settings = footer_config_settings.settings %}
+{% comment %} Set config options (disabled for now)
+--------------------------------------------------------------------------------
+{% assign footer_options            = footer_defaults | merge: footer_settings %}
+-------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
