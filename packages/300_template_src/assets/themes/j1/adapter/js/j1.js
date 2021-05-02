@@ -1169,6 +1169,7 @@ var j1 = (function () {
       //
       var html_data_path;
       var id        = '#' + options.xhr_container_id;
+      var container = '#' + options.xhr_container_id + '_container';
       var $selector = $(id);
 
       if ( $selector.length ) {

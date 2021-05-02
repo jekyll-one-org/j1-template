@@ -148,9 +148,9 @@ regenerate:                             true
         {% assign panel_options = panel_config_defaults.intro | merge: panel_settings %}
         {% if debug %}<!-- panel_options:  {{panel_options}} -->{% endif %}
         <!-- Panel {{panel_settings.id}} -->
-        <section id="{{panel_settings.id}}">
+        <section id="{{panel_settings.id}}" class="container">
           <!-- Main Container -->
-          <div class="container {{panel_settings.properties}}">
+          <div class="row {{panel_settings.properties}}">
 
             <!-- Heading -->
             <div class="row">
@@ -403,8 +403,8 @@ regenerate:                             true
         {% assign panel_options = panel_config_defaults.news|merge: panel_settings %}
         {% if debug %}<!-- panel_options:  {{panel_options}} -->{% endif %}
         <!-- Panel {{panel_settings.id}} -->
-        <section id="{{panel_settings.id}}">
-          <div class="container {{panel_settings.properties}}">
+        <section id="{{panel_settings.id}}" class="container">
+          <div class="row {{panel_settings.properties}}">
 
             {% if panel_options.title %}
             <!-- Heading -->

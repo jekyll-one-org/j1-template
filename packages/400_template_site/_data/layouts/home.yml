@@ -173,7 +173,7 @@ lanes:
       id:                               home_teaser_banner
       region:                           body-main
       type:                             async
-      properties:                       mt-3 mr-5 mb-5 ml-3
+      properties:                       elevated-z1
 
   # ----------------------------------------------------------------------------
   # DIVIDER banner
@@ -203,7 +203,7 @@ lanes:
       id:                               home_parallax_banner
       region:                           body-main
       type:                             async
-      properties:                       mt-5 mb-5
+      properties:                       elevated-z1
 
   # ----------------------------------------------------------------------------
   # IMAGE banner

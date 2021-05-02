@@ -39,7 +39,7 @@ settings:
         comment:                        Home Intro Panel
         type:                           intro
         animate:
-        properties:                     mt-5 mr-5 mb-5 ml-3
+        properties:                     mt-5 mr-3 mb-5 ml-3
 
         title:                          All in One
         tagline:                        top features
@@ -306,7 +306,7 @@ settings:
         comment:                        Home News Panel
         type:                           news
         animate:
-        properties:                     mt-5 mr-5 mb-5 ml-3
+        properties:                     mt-5 mr-3 mb-5 ml-3
 
         title:                          Creators Blog
         tagline:                        latest news

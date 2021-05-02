@@ -121,6 +121,7 @@ settings:
         enabled:                        true
         comment:                        Top teaser shown on home page
         type:                           teaser
+        properties:                     mt-3 mr-3 mb-5 ml-3
         icon_family:                    MDI
 
         style:                          light
@@ -297,6 +298,7 @@ settings:
         id:                               home_parallax_banner
         enabled:                          true
         type:                             parallax
+        properties:                       mt-5 mb-5
         comment:                          Main parallax banner shown on home page
 
         style:                            dark
