@@ -209,7 +209,7 @@ regenerate:                             true
 
             <!-- Body -->
             <div class="row {{animate}}">
-              <div class="mt-5 mr-3 mb-5 ml-3">{{card_description}}</div>
+              <div class="{{properties}}">{{card_description}}</div>
               {% if card_buttons %}
               <!-- Footer -->
               <div class="mt-1">
@@ -354,7 +354,7 @@ regenerate:                             true
                   .{{banner_settings.id}}-parallax-quote:before{top:0;left:0;width:100%;height:100%;content:" ";position:absolute;{% if gridify == true %}background: url("{{gridifier}}") repeat;{% endif %}}
                   .{{banner_settings.id}}-parallax-quote:after{top:0;left:0;width:100%;height:100%;content:" ";position:absolute;background:rgba(0,0,0,{{darken}})}
                   .{{banner_settings.id}}-parallax-quote-in{z-index: 2;position:absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; padding: 20px; text-align: center; }
-                  .{{banner_settings.id}}-parallax-quote-in p{color:{{text_color}};font-size:{{card_cite_text_size}};text-transform:uppercase;}
+                  .{{banner_settings.id}}-parallax-quote-in p{color:{{text_color}};font-size:{{card_cite_text_size}};text-transform:uppercase;line-height: 1.25;}
                   {% if card_text and card_cite_text_quotes %}
                   .{{banner_settings.id}}-parallax-quote-in p:after,.{{banner_settings.id}}-parallax-quote-in p:before{content:' " ';}
                   {% endif %}

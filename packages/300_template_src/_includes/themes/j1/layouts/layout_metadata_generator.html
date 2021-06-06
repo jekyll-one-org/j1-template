@@ -127,7 +127,7 @@
 {% endif %}
 
 {% comment %} Check robot settings from site configuration
--------------------------------------------------------------------------------- {% endcomment %}
+--------------------------------------------------------------------------------
 {% if site.robots.index %}
   {% capture robots_index %}<meta name="robots" content="index" />{% endcapture %}
 {% else %}
@@ -139,9 +139,10 @@
 {% else %}
   {% capture robots_follow %}<meta name="robots" content="nofollow" />{% endcapture %}
 {% endif %}
+-------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Check robot settings from page (or default SCOPE)
--------------------------------------------------------------------------------- {% endcomment %}
+--------------------------------------------------------------------------------
 {% if page.robots.index %}
   {% capture robots_index %}<meta name="robots" content="index" />{% endcapture %}
 {% else %}
@@ -153,6 +154,7 @@
 {% else %}
   {% capture robots_follow %}<meta name="robots" content="nofollow" />{% endcapture %}
 {% endif %}
+-------------------------------------------------------------------------------- {% endcomment %}
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [place meta tags for robots ] -->
 {{robots_index}}

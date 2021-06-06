@@ -1,0 +1,37 @@
+# Github authentication
+
+## gh auth login
+
+Authenticate with a GitHub host
+
+### Synopsis
+
+Authenticate with a GitHub host.
+
+The default authentication mode is a web-based browser flow.
+
+Alternatively, pass in a token on standard input by using --with-token. The minimum required scopes for the token are: "repo", "read:org".
+
+The --scopes flag accepts a comma separated list of scopes you want your gh credentials to have. If absent, this command ensures that gh has access to a minimum set of scopes.
+
+gh auth login [flags]
+Examples
+# start interactive setup
+$ gh auth login
+
+# authenticate against github.com by reading the token from a file
+$ gh auth login --with-token < mytoken.txt
+
+# authenticate with a specific GitHub Enterprise Server instance
+$ gh auth login --hostname enterprise.internal
+
+Options
+  -h, --hostname string   The hostname of the GitHub instance to authenticate with
+  -s, --scopes strings    Additional authentication scopes for gh to have
+  -w, --web               Open a browser to authenticate
+      --with-token        Read token from standard input
+Options inherited from parent commands
+      --help   Show help for command
+
+
+gh auth login --hostname github.com/jekyll-one-org/digitization

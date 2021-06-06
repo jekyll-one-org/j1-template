@@ -240,13 +240,13 @@ author:
 webmaster:
   email:                                webmaster@example.domain
 
-# crawling/indexing DISABLED for default. Settings managed page-wise using
-# frontmatter defaults or by page settings to make sure that only WANTED
-# pages gets crawled.
+# Crawling/Indexing ENABLED for default. Settings managed page-wise using
+# frontmatter defaults or by page default settings to make sure that only
+# WANTED pages gets crawled.
 #
 robots:
-  index:                                false
-  follow:                               false
+  index:                                true
+  follow:                               true
 
 # ------------------------------------------------------------------------------
 # BRAND configuration
@@ -346,8 +346,8 @@ port:                                   4000
 timezone:                               Europe/Berlin
 encoding:                               UTF-8
 
-detach:                                 false
-show_dir_listing:                       false
+# detach:                               false
+# show_dir_listing:                     true
 
 # ------------------------------------------------------------------------------
 # PATH configuration

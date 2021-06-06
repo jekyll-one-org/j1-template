@@ -39,7 +39,7 @@ settings:
         comment:                        Home Intro Panel
         type:                           intro
         animate:
-        properties:                     mt-5 mr-3 mb-5 ml-3
+        properties:                     mt-3 mr-3 mb-5 ml-3
 
         title:                          All in One
         tagline:                        top features

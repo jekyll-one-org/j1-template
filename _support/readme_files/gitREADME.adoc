@@ -135,3 +135,13 @@ yet committed:
 Lists all of the already committed files being tracked by the repo:
 
   git ls-tree --full-tree -r --name-only HEAD
+
+# Turn off warnings
+
+## Disable warning: CRLF will be replaced by LF
+
+You can turn off the warning with
+
+  git config --global core.safecrlf false
+
+This will only turn off the warning, not the function itself.
