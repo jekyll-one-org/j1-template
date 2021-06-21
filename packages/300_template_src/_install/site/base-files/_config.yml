@@ -520,6 +520,7 @@ whitelist:
 # EXCERPT settings
 #
 excerpt_separator:                      excerpt__end
+excerpt_truncate_words:                 100
 
 # ------------------------------------------------------------------------------
 # COLLECTION settings
