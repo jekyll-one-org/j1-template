@@ -145,30 +145,27 @@
   {% capture robots_follow %}<meta name="robots" content="nofollow" />{% endcapture %}
 {% endif %}
 
-{% comment %} page.robots.index:  {{ page.robots.index | debug }} {% endcomment %}
-
 {% comment %} Check robot settings from page (or default SCOPE)
 -------------------------------------------------------------------------------- {% endcomment %}
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ Check robot settings from PAGE configuration ] -->
-<!-- [DEBUG  ] [j1.layout.meta_data_generator.html    ] [ Found PAGE configuration robots_index: {{page.robots.index}} ] -->
-<!-- [DEBUG  ] [j1.layout.meta_data_generator.html    ] [ Found PAGE configuration robots_follow: {{page.robots.follow}} ] -->
-{% if page.robots.index %}
+{% if page.robots.index and page.robots.index <> nil %}
+  <!-- [DEBUG  ] [j1.layout.meta_data_generator.html    ] [ Found PAGE configuration robots_index: {{page.robots.index}} ] -->
   {% capture robots_index %}<meta name="robots" content="index" />{% endcapture %}
-{% endif %}
-
-{% if page.robots.index == false %}
+{% elsif page.robots.follow and page.robots.follow <> nil and
+  robots_index <> '' %}
+  <!-- [DEBUG  ] [j1.layout.meta_data_generator.html    ] [ Set DEFAULT configuration robots_index: noindex  ] -->
   {% capture robots_index %}<meta name="robots" content="noindex" />{% endcapture %}
 {% endif %}
 
-{% if page.robots.follow %}
+{% if page.robots.follow and page.robots.follow <> nil %}
+  <!-- [DEBUG  ] [j1.layout.meta_data_generator.html    ] [ Found PAGE configuration robots_follow: {{page.robots.follow}} ] -->
   {% capture robots_follow %}<meta name="robots" content="follow" />{% endcapture %}
-{% endif %}
-
-{% if page.robots.follow == false %}
+{% elsif page.robots.follow and page.robots.follow <> nil and robots_follow <> '' %}
+  <!-- [DEBUG  ] [j1.layout.meta_data_generator.html    ] [ Set DEFAULT configuration robots_follow: nofollow  ] -->
   {% capture robots_follow %}<meta name="robots" content="nofollow" />{% endcapture %}
 {% endif %}
 
-<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ Place detected/overloaded meta tags for robots ] -->
+<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [place meta tags for robots ] -->
 {{robots_index}}
 {{robots_follow}}
 

@@ -1,3 +1,4 @@
+
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/_includes/themes/j1/layouts/meta_data_generator.html
@@ -127,48 +128,55 @@
 {% endif %}
 
 {% comment %} Check robot settings from site configuration
--------------------------------------------------------------------------------- {% endcomment %}
+--------------------------------------------------------------------------------
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ Check robot settings from SITE configuration ] -->
-{% if site.robots.index and site.robots.index <> nil %}
-  <!-- [DEBUG  ] [j1.layout.meta_data_generator.html    ] [ Found SITE configuration robots_index: {{site.robots.index}} ] -->
-  {% capture robots_index %}<meta name="robots" content="index" />{% endcapture %}
+{% if site.robots.index %}
+  {% capture robots_index_site %}<meta name="robots" content="index" />{% endcapture %}
 {% else %}
-  <!-- [DEBUG  ] [j1.layout.meta_data_generator.html    ] [ Set DEFAULT configuration robots_index: noindex  ] -->
-  {% capture robots_index %}<meta name="robots" content="noindex" />{% endcapture %}
+  {% capture robots_index_site %}<meta name="robots" content="noindex" />{% endcapture %}
 {% endif %}
 
-{% if site.robots.follow and site.robots.follow <> nil %}
-  <!-- [DEBUG  ] [j1.layout.meta_data_generator.html    ] [ Found SITE configuration robots_follow: {{site.robots.index}} ] -->
-  {% capture robots_follow %}<meta name="robots" content="follow" />{% endcapture %}
+{% if site.robots.follow %}
+  {% capture robots_follow_site %}<meta name="robots" content="follow" />{% endcapture %}
 {% else %}
-  <!-- [DEBUG  ] [j1.layout.meta_data_generator.html    ] [ Set DEFAULT configuration robots_follow: nofollow  ] -->
-  {% capture robots_follow %}<meta name="robots" content="nofollow" />{% endcapture %}
+  {% capture robots_follow_site %}<meta name="robots" content="nofollow" />{% endcapture %}
 {% endif %}
 
-{% comment %} page.robots.index:  {{ page.robots.index | debug }} {% endcomment %}
+{% robots_index =         robots_index_site %}
+{% robots_index_follow =  robots_follow_site %}
+-------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Check robot settings from page (or default SCOPE)
--------------------------------------------------------------------------------- {% endcomment %}
+--------------------------------------------------------------------------------
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ Check robot settings from PAGE configuration ] -->
-<!-- [DEBUG  ] [j1.layout.meta_data_generator.html    ] [ Found PAGE configuration robots_index: {{page.robots.index}} ] -->
-<!-- [DEBUG  ] [j1.layout.meta_data_generator.html    ] [ Found PAGE configuration robots_follow: {{page.robots.follow}} ] -->
 {% if page.robots.index %}
-  {% capture robots_index %}<meta name="robots" content="index" />{% endcapture %}
-{% endif %}
-
-{% if page.robots.index == false %}
-  {% capture robots_index %}<meta name="robots" content="noindex" />{% endcapture %}
+  {% capture robots_index_page %}<meta name="robots" content="index" />{% endcapture %}
+{% else %}
+  {% capture robots_index_page %}<meta name="robots" content="noindex" />{% endcapture %}
 {% endif %}
 
 {% if page.robots.follow %}
-  {% capture robots_follow %}<meta name="robots" content="follow" />{% endcapture %}
+  {% capture robots_follow_page %}<meta name="robots" content="follow" />{% endcapture %}
+{% else %}
+  {% capture robots_follow_page %}<meta name="robots" content="nofollow" />{% endcapture %}
+{% endif %}
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Overload robots settings
+--------------------------------------------------------------------------------
+<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ Overload robots settings ] -->
+{% if robots_index_page %}
+  <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ Overload robots_index settings ] -->
+  {% robots_index = robots_index_page %}
 {% endif %}
 
-{% if page.robots.follow == false %}
-  {% capture robots_follow %}<meta name="robots" content="nofollow" />{% endcapture %}
+{% if robots_follow_page %}
+  <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ Overload robots_follow settings ] -->
+  {% robots_index_follow =  robots_follow_page %}
 {% endif %}
+-------------------------------------------------------------------------------- {% endcomment %}
 
-<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ Place detected/overloaded meta tags for robots ] -->
+<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [place meta tags for robots ] -->
 {{robots_index}}
 {{robots_follow}}
 

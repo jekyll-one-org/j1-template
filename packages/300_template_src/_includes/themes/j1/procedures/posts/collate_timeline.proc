@@ -43,6 +43,7 @@
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign builder_config  = site.data.builder.blog_navigator.collate_timeline %}
+{% assign truncate_words  = site.excerpt_truncate_words %}
 {% assign header_title    = false %}
 {% assign header_tagline  = false %}
 {% assign posts_collate   = include.items %}
@@ -140,7 +141,7 @@
                 <p class="card-subtitle text-muted">{{post.tagline}}</p>
               </div>
               <div class="timeline-excerpt mb-4">
-                {% assign excerpt = post.excerpt|truncatewords: 50|replace:'...',' ...'|strip_html|strip_newlines|strip %}
+                {% assign excerpt = post.excerpt|truncatewords: truncate_words|replace:'...',' ...'|strip_html|strip_newlines|strip %}
                 <i class="timeline-icon {{icon_family}} {{icon_family}}-{{icon_name}} {{icon_family}}-{{icon_size}} {{icon_family}}-{{icon_color}}"></i>
                 {{excerpt}}
               </div>
@@ -163,7 +164,7 @@
                 <p class="card-subtitle text-muted">{{post.tagline}}</p>
               </div>
               <div class="timeline-excerpt mb-4">
-                {% assign excerpt = post.excerpt|truncatewords: 50|replace:'...',' ...'|strip_html|strip_newlines|strip %}
+                {% assign excerpt = post.excerpt|truncatewords: truncate_words|replace:'...',' ...'|strip_html|strip_newlines|strip %}
                 {{excerpt}}
               </div>
               <div class="card-footer r-text-200 text-lowercase">
@@ -183,7 +184,7 @@
                 <p class="card-subtitle text-muted">{{post.tagline}}</p>
               </div -->
               <div class="excerpt">
-                {% assign excerpt = post.excerpt|truncatewords: 50|replace:'...',' ...'|strip_html|strip_newlines|strip %}
+                {% assign excerpt = post.excerpt|truncatewords: truncate_words|replace:'...',' ...'|strip_html|strip_newlines|strip %}
                 {{excerpt}}
               </div>
             </div>

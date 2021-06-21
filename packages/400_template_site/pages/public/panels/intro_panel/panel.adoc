@@ -13,11 +13,16 @@ description: >
 tags:                                   [ Jekyll, Template ]
 categories:                             [ Info, Introduction ]
 
+robots:
+  index:                                false
+  follow:                               false
+
+
 comments:                               false
 fam_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/panels/intro_panel/
-regenerate:                             false
+regenerate:                             true
 
 resources:                              [
                                           clipboard, rouge, carousel, lightbox,

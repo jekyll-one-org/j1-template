@@ -169,6 +169,7 @@ archive_view:
 category_view:
   enabled:                              true
   word_cloud:                           true
+  skip_categories:                      Posts, Public
   description: >
                                         Check out <b>all</b> articles in the blog posts <b>archive</b>.
                                         Below, find articles available this site <b>grouped</b> by
