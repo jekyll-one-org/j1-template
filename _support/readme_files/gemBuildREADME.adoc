@@ -24,10 +24,11 @@ When modifying remember to issue a new tag command in git before committing,
 then push the new tag
 
 # git tag -a v2021.1.4 -m "v2021.1.4"
+
   git push origin --tags
 
 
-=== Clear GEM project folder (packages\500_template_gem)
+=== Clear GEM project folder (packages\500_template_gem) 
 
   lerna --scope gem run clean
 

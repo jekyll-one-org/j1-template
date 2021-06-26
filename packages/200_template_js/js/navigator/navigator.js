@@ -43,9 +43,9 @@ module.exports = function navigator ( options ) {
   // ---------------------------------------------------------------------------
   // global vars
   // ---------------------------------------------------------------------------
-  var cookie_names              = j1.getCookieNames();
-  var cookie_consent_name       = cookie_names.cookie_consent;
-  var cookie_user_session_name  = cookie_names.user_session;
+  // var cookie_names              = j1.getCookieNames();
+  // var cookie_consent_name       = cookie_names.cookie_consent;
+  // var cookie_user_session_name  = cookie_names.user_session;
   var message                   = {};
   var state;
   var logger;
@@ -74,7 +74,8 @@ module.exports = function navigator ( options ) {
       logger.info(logText);
       this.manageDropdownMenu(defaultOptions, menuOptions);
       this.navbarSticky();
-      // this.navbarScrollspy();
+
+//    this.navbarScrollspy();
 
       message.type    = 'command';
       message.action  = 'module_initialized';
@@ -90,13 +91,13 @@ module.exports = function navigator ( options ) {
     eventHandler: function() {
       var logger            = log4javascript.getLogger('j1.core.navigator.eventHandler');
       var $getNav           = $('nav.navbar.navigator');
+      var json_data;
       // const seeMe           = 'https://smee.io/wlNIFNiJN0GClm2';
       // const middleware      = 'localhost:5000/state';
       // const web_server_dev  = 'http://localhost:41000/status';
       // const utility_server  = 'http://localhost:41001/git?request=pull';
       // var sender            = seeMe;
       // var payload;
-      var json_data;
 
       // if (j1.checkUserAgent('IE') || j1.checkUserAgent('Edge')) {
       //   logger.warn('HTML5 server side events (SSE) not supported for: ' + userAgent);

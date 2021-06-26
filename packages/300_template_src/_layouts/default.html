@@ -62,8 +62,6 @@ layout:                                 compress
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign cookiebar_settings  = modules.cookiebar.settings %}
-{% assign cookiebar_defaults  = modules.defaults.cookiebar.defaults %}
 
 {% comment %} Webhooks disabled
 --------------------------------------------------------------------------------
@@ -73,7 +71,6 @@ layout:                                 compress
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign cookiebar_options   = cookiebar_defaults | merge: cookiebar_settings %}
 {% assign tooltips_options    = template_config.bootstrap.tooltips %}
 {% assign popovers_options    = template_config.bootstrap.popovers %}
 
@@ -160,14 +157,14 @@ layout:                                 compress
   </body>
 
   {% comment %} Place|Initialize module components
+  ------------------------------------------------------------------------------
+  NOTE: xhr_container should be DYNAMICALLY placed by
+        the module using it !!!
+        Example CookieConsent
   ------------------------------------------------------------------------------ {% endcomment %}
 
   {% comment %} Place container for Cookiebar modals
   ------------------------------------------------------------------------------ {% endcomment %}
-  {% if cookiebar_options.enabled %}
-  <!-- [INFO   ] [j1.layout.default.html                ] [ place container for Cookiebar modals ] -->
-  <div id="{{cookiebar_options.xhr_container_id}}"></div>
-  {% endif %}
 
   {% comment %} Place container for WebHook modals
   ------------------------------------------------------------------------------ {% endcomment %}

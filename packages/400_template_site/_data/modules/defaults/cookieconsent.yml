@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-#  ~/_data/modules/defaults/cookiebar.yml
-#  Default configuration settings for J1 Cookiebar module
+#  ~/_data/modules/defaults/cookieconsent.yml
+#  Default configuration settings for J1 Cookie Consent module
 #
 #  Product/Info:
 #  https://jekyll.one
@@ -15,9 +15,9 @@
 # About this configuration (used for J1 CC only)
 #
 about_config:
-  title:                                Cookiebar
+  title:                                CookieConsent
   scope:                                Default settings
-  location:                             _data/modules/defaults/cookiebar.yml
+  location:                             _data/modules/defaults/cookieconsent.yml
 
 # ------------------------------------------------------------------------------
 # Default settings
@@ -26,26 +26,18 @@ defaults:
 
   enabled:                              false
 
-  xhr_container_id:                     cookiebar_modals
-  xhr_data_element:                     cookieConsentModals
-  xhr_data_path:                        /assets/data/cookiebar/index.html
-
   modal_type:                           full
   modal_position:                       top
-  consent_modal_id:                     cookiebar_consent_modals
+  consent_modal_id:                     bccs-modal
   consent_modals_title:                 Privacy
 
-  show_cookie_icon:                     false
-  expireDays:                           365
-  renewOnVisit:                         false
-  forceShow:                            false
-  referrer:                             www.example.com
-
-  strict:                               false                                   # all pages requires a consent (currently NOT supported)
-  show_consent_icon:                    true                                    # show the consent icon (in quicklinks)
-  show_consent_on_pending:              false                                   # on first visit, whitelisted pages does NOT require a consent (overloaded by strict)
-  delete_cookies_on_decline:            false                                   # currently NOT supported
-  whitelisted_pages:                    []
+  autoShowDialog:                       true                                    # disable autoShowModal on the privacy policy and legal notice pages, to make these pages readable
+  lang:                                 navigator.language                      # the language, in which the modal is shown
+  languages:                            [en, de]                                # supported languages (in ./content/), defaults to first in array
+  contentURL:                           /assets/data/bsCookieConsent            # this URL must contain the dialogs content in the needed languages
+  cookieName:                           j1.user.consent                         # the name of the cookie in which the configuration is stored as JSON
+  cookieStorageDays:                    365                                     # the duration the cookie configuration is stored on the client
+  postSelectionCallback:                undefined                               # callback function, called after the user has made his selection
 
   categories:
     enabled:                            true
