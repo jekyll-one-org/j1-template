@@ -549,13 +549,13 @@ resources:
         init_function:                  [ j1.adapter.back2top.init ]
 
   # ----------------------------------------------------------------------------
-  # CookieBar
+  #  GDPR compatible Cookie Consent for J1 Template
   #
-  - name:                               CookieBar
+  - name:                               J1 CookieConsent
     resource:
-      id:                               cookiebar
+      id:                               cookieConsent
       enabled:                          true
-      comment:                          module cookiebar
+      comment:                          module cookieConsent
       region:                           head
       layout:                           [ all ]
       required:                         always
@@ -565,9 +565,9 @@ resources:
       pass_init_data:                   false
       data:
         css:                            []
-        files:                          [ adapter/js/cookiebar.js ]
-        js:                             []
-        init_function:                  [ j1.adapter.cookiebar.init ]
+        files:                          [ adapter/js/cookieConsent.js ]
+        js:                             [ modules/cookieConsent/js/cookieConsent ]
+        init_function:                  [ j1.adapter.cookieConsent.init ]
 
   # ----------------------------------------------------------------------------
   # jqMouseWheel, jQuery plugin to add cross-browser mouse wheel support

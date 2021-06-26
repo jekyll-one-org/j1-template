@@ -317,7 +317,7 @@ j1.adapter['navigator'] = (function (j1, window) {
         xhr_data_path:      navMenuOptions.xhr_data_path,
         xhr_data_element:   navMenuOptions.xhr_data_element },
         'j1.adapter.navigator',
-        'data_loaded');
+        'null');
 
       var dependencies_met_load_menu_finished = setInterval (function () {
         if (j1.xhrDOMState['#'+navQuicklinksOptions.xhr_container_id] == 'not loaded' ||
@@ -356,9 +356,6 @@ j1.adapter['navigator'] = (function (j1, window) {
           // load themes (to menu) if themer is enabled|finished
           if (themerEnabled) {
 
-            logText = 'theme switcher: enabled';
-            logger.info(logText);
-
             // Detect|Set J1 UserState
             user_state_detected = j1.existsCookie(cookie_user_state_name);
             if (user_state_detected) {
@@ -366,12 +363,12 @@ j1.adapter['navigator'] = (function (j1, window) {
             }
 
             var dependencies_met_page_finished = setInterval(function() {
-//            jadams, 2020-10-03: NOT needed to wait for j1 get finished
-//            if (j1.getState() == 'finished') {
-//            jadams, 2021-06-22: disabled check on themer get finished
-//            if (j1.adapter.themer.getState() == 'finished') {
-              if ('true' === 'true') {
+               // jadams, 2020-10-03: NOT needed to wait for j1 finished
+//             if (j1.getState() == 'finished') {
+               if (j1.adapter.themer.getState() == 'finished') {
                 // initialize theme switcher menus
+                logText = 'theme switcher detect: enabled';
+                logger.info(logText);
 
                 logText = 'load themes';
                 logger.info(logText);

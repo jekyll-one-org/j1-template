@@ -200,7 +200,7 @@ module.exports = function cookiebar (options) {
 
             if (deleteOnDecline) {
               // Delete cookies
-              logger.warn('delete all cookies');
+              logger.warn('delete cookie_user_state cookie');
               j1.deleteCookie(cookie_user_state);
             }
 

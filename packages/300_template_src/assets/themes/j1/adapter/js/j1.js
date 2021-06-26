@@ -132,12 +132,14 @@ var j1 = (function () {
   var user_session_detected;
 
   // Connector settings
-  var translation_enabled = {{template_config.translation.enabled}};
+  var translation_enabled       = {{template_config.translation.enabled}};
 
   // Theme information
   var themeName;
   var themeCss;
-  var themeExtensionCss = environment === 'production' ? '/assets/themes/j1/core/css/themes/theme-extensions.min.css' : '/assets/themes/j1/core/css/themes/theme-extensions.css';
+  var themeExtensionCss         = environment === 'production'
+                                  ? '/assets/themes/j1/core/css/themes/theme-extensions.min.css'
+                                  : '/assets/themes/j1/core/css/themes/theme-extensions.css';
 
   // Pathes of J1 data files
   var colors_data_path          = '{{template_config.colors_data_path}}';
@@ -162,12 +164,13 @@ var j1 = (function () {
   // var default_theme_name          = 'uno-light';
   // var default_theme_author        = 'J1 Team';
   // var default_theme_link          = 'https://jekyll.one/';
-  var default_white_listed_pages  = [];
+  // var default_white_listed_pages  = [];
 
   var cookie_names = {
     'app_session':  '{{template_config.cookies.app_session}}',
     'user_session': '{{template_config.cookies.user_session}}',
-    'user_state':   '{{template_config.cookies.user_state}}'
+    'user_state':   '{{template_config.cookies.user_state}}',
+    'user_consent': 'j1.user.consent'
   };
 
   // user SESSION cookie (initial values)
@@ -190,19 +193,29 @@ var j1 = (function () {
   };
 
   // user STATE cookie (initial values)
+  // var user_state = {
+  //   'theme_css':            "",
+  //   'theme_name':           "",
+  //   'theme_author':         "",
+  //   'theme_version':        '{{site.version}}',
+  //   'cookies_accepted':     'pending',
+  //   'whitelistedPages':     default_white_listed_pages,
+  //   'deleteOnDecline':      false,
+  //   'showConsentOnPending': false,
+  //   'stopScrolling':        true,
+  //   'session_active':       false,
+  //   'last_session_ts':      '',
+  //   'cc_authenticated':     false
+  // };
+
   var user_state = {
     'theme_css':            "",
     'theme_name':           "",
     'theme_author':         "",
     'theme_version':        '{{site.version}}',
-    'cookies_accepted':     'pending',
-    'whitelistedPages':     default_white_listed_pages,
-    'deleteOnDecline':      false,
-    'showConsentOnPending': false,
     'stopScrolling':        true,
     'session_active':       false,
-    'last_session_ts':      '',
-    'cc_authenticated':     false
+    'last_session_ts':      ''
   };
 
   // ---------------------------------------------------------------------------
@@ -838,7 +851,7 @@ var j1 = (function () {
             $('#no_flicker').css('display', 'block');
 
             // show|hide cookie icon (should MOVED to Cookiebar ???)
-            if (user_state.cookies_accepted === 'accepted') {
+            if (j1.existsCookie(cookie_names.user_consent)) {
               // Display cookie icon
               logText = 'show cookie icon';
               logger.info(logText);
@@ -932,7 +945,7 @@ var j1 = (function () {
           }
 
           // show|hide cookie icon (should MOVED to Cookiebar ???)
-          if (user_state.cookies_accepted === 'accepted') {
+          if (j1.existsCookie(cookie_names.user_consent)) {
             // Display cookie icon
             logText = 'show cookie icon';
             logger.info(logText);

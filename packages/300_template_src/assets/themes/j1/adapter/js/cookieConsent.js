@@ -6,8 +6,8 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/cookiebar.js
- # Liquid template to create the Template Adapter for J1 Cookiebar
+ # ~/assets/themes/j1/adapter/js/cookieConsent.js
+ # Liquid template to create the Template Adapter for J1 CookieConsent
  #
  # Product/Info:
  # http://jekyll.one
@@ -27,17 +27,17 @@ regenerate:                             true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment           = site.environment %}
-{% assign modules               = site.data.modules %}
+{% assign environment         = site.environment %}
+{% assign modules             = site.data.modules %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign cookiebar_settings    = modules.cookiebar.settings %}
-{% assign cookiebar_defaults    = modules.defaults.cookiebar.defaults %}
+{% assign consent_defaults    = modules.defaults.cookieconsent.defaults %}
+{% assign consent_settings    = modules.cookieconsent.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign cookiebar_options     = cookiebar_defaults | merge: cookiebar_settings %}
+{% assign consent_options     = consent_defaults | merge: consent_settings %}
 
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
@@ -46,21 +46,20 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/cookiebar.js
- # JS Adapter for Cookiebar
+ # ~/assets/themes/j1/adapter/js/cookieConsent.js
+ # JS Adapter for J1 CookieConsent
  #
- # Product/Info:
- # http://jekyll.one
- # http://www.primebox.co.uk/projects/jquery-cookiebar/
+ #  Product/Info:
+ #  https://shaack.com
+ #  http://jekyll.one
  #
- # Copyright (C) 2021 Juergen Adams
- # Copyright (C) 2016 Ant Parsons (primebox.co.uk)
+ #  Copyright (C) 2020 Stefan Haack
+ #  Copyright (C) 2021 Juergen Adams
  #
- # J1 Template is licensed under the MIT License.
- # For details, see https://jekyll.one
- # jQuery Cookibar is licensed under Creative Commons Attribution 3.0 Unported License.
- # For details, see http://www.primebox.co.uk/projects/jquery-cookiebar/
- #
+ #  bootstrap-cookie-banner is licensed under MIT License.
+ #  See: https://github.com/shaack/bootstrap-cookie-banner/blob/master/LICENSE
+ #  J1 Template is licensed under MIT License.
+ #  See: https://github.com/jekyll-one/J1 Template/blob/master/LICENSE
  # -----------------------------------------------------------------------------
  #  Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
@@ -76,14 +75,14 @@ regenerate:                             true
 
 {% comment %} Main
 --------------------------------------------------------------- {% endcomment %}
-j1.adapter['cookiebar'] = (function (j1, window) {
+j1.adapter['cookieConsent'] = (function (j1, window) {
 
   var environment   = '{{environment}}';
   var moduleOptions = {};
   var _this;
+  var $modal;
   var logger;
   var logText;
-
   // ---------------------------------------------------------------------------
   // Helper functions
   // ---------------------------------------------------------------------------
@@ -99,10 +98,19 @@ j1.adapter['cookiebar'] = (function (j1, window) {
     init: function (options) {
 
       // -----------------------------------------------------------------------
+      // globals
+      // -----------------------------------------------------------------------
+      _this   = j1.adapter.cookieConsent;
+      logger  = log4javascript.getLogger('j1.adapter.cookieConsent');
+
+      // initialize state flag
+      _this.state = 'pending';
+
+      // -----------------------------------------------------------------------
       // Default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.algolia',
+        module_name: 'j1.adapter.cookieConsent',
         generated:   '{{site.time}}'
       }, options);
 
@@ -110,7 +118,7 @@ j1.adapter['cookiebar'] = (function (j1, window) {
       -------------------------------------------------------------------------- {% endcomment %}
       // Load  module DEFAULTS|CONFIG
       /* eslint-disable */
-      moduleOptions = $.extend({}, {{cookiebar_options | replace: '=>', ':' | replace: 'nil', '""'}});
+      moduleOptions = $.extend({}, {{consent_options | replace: '=>', ':' | replace: 'nil', '""'}});
       /* eslint-enable */
 
       if (typeof settings !== 'undefined') {
@@ -120,46 +128,25 @@ j1.adapter['cookiebar'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
-      _this   = j1.adapter.cookiebar;
-      logger  = log4javascript.getLogger('j1.adapter.cookiebar');
-
       _this.setState('started');
       logger.info('state: ' + _this.getState());
       logger.info('module is being initialized');
 
-      j1.core.cookiebar.init({
-        expireDays:             {{ cookiebar_options.expireDays | json }},
-        renewOnVisit:           {{ cookiebar_options.renewOnVisit | json }},
-        forceShow:              {{ cookiebar_options.forceShow | json }},
-        domain:                 {{ cookiebar_options.domain | json }},
-        referrer:               {{ cookiebar_options.referrer | json }}
+      j1.cookieConsent = new BootstrapCookieConsent({
+        contentURL: '/assets/data/bsCookieConsent',
+        cookieName: 'j1.user.consent'
       });
 
-      j1.xhrData(moduleOptions, 'j1.adapter.cookiebar', 'data_loaded');
+      var dependencies_met_page_ready = setInterval (function (options) {
+        if ( j1.cookieConsent && j1.getState() === 'finished' ) {
+          _this.setState('finished');
+          logger.info('state: ' + _this.getState());
+          logger.info('module initialized');
+          clearInterval(dependencies_met_page_ready);
+        }
+      });
 
-      // ---------------------------------------------------------------------
-      // Initialize events if all modals loaded
-      // ---------------------------------------------------------------------
-      var dependencies_met_modals_loaded = setInterval (function () {
-        if (j1.xhrDataState['#{{cookiebar_options.xhr_container_id}}'] == 'success') {
-          logger.info('load HTML data (AJAX): finished');
-          j1.core.cookiebar.eventHandler(moduleOptions);
-          _this.setState('finished');
-          logger.info('state: ' + _this.getState());
-          logger.info('initializing module finished');
-          clearInterval(dependencies_met_modals_loaded);
-          logger.info('met dependencies for: xhrData');
-        }
-        if (j1.xhrDataState['#{{cookiebar_options.xhr_container_id}}'] == 'not loaded') {
-          logger.error('load HTML data (AJAX): failed');
-          _this.setState('finished');
-          logger.info('state: ' + _this.getState());
-          logger.info('initializing module finished');
-          clearInterval(dependencies_met_modals_loaded);
-        }
-      }, 25); // END dependencies_met_modals_loaded
     }, // END init
-
 
     // -------------------------------------------------------------------------
     // messageHandler: MessageHandler for J1 CookieConsent module

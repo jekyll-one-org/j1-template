@@ -388,7 +388,7 @@ resources:
         css:                            [ core/css/vendor ]
         files:                          [
                                            core/js/adapter/template.js,
-                                           core/js/adapter/back2top.js,                                           
+                                           core/js/adapter/back2top.js,
                                            core/js/adapter/logger.js,
                                            core/js/adapter/scroller.js,
                                            core/js/adapter/searcher.js,
@@ -431,7 +431,7 @@ resources:
   # J1 Navigator
   #
   - name:                               J1 Navigator
-    resource:      
+    resource:
       id:                               navigator
       enabled:                          true
       comment:                          Resources used by Navigator
@@ -550,7 +550,7 @@ resources:
   # Stickyfill (CSS polyfill, https://github.com/wilddeer/stickyfill)
   #
   - name:                               Stickyfill
-    resource:      
+    resource:
       id:                               stickyfill
       enabled:                          true
       comment:                          Polyfill for CSS position sticky
@@ -618,7 +618,7 @@ resources:
   # J1 LightGallery (Lightbox used by Bootstrap Gallery|Justified Gallery)
   #
   - name:                               LightGallery
-    resource:      
+    resource:
       id:                               light_gallery
       enabled:                          true
       comment:                          Resources used by LightGallery
@@ -673,7 +673,7 @@ resources:
                                           extensions/carousel/js/carousel.js
                                         ]
         js:                             []
-        init_function:                  [j1.Carousel.init]                  
+        init_function:                  [j1.Carousel.init]
 
   # ----------------------------------------------------------------------------
   # J1 Justified Gallery
@@ -719,26 +719,22 @@ resources:
         init_function:                  []
 
   # ----------------------------------------------------------------------------
-  # J1 Cookiebar
+  #  GDPR compatible Cookie Consent for J1 Template
   #
-  - name:                               J1 Cookiebar
+  - name:                               J1 CookieConsent
     resource:
-      enabled:                          false
-      id:                               cookiebar
-      comment:                          Resources used by Cookiebar
+      id:                               cookieConsent
+      enabled:                          true
+      comment:                          module cookieConsent
       region:                           head
-      layout:                           [ home, page, post, collection ]
+      layout:                           [ all ]
       required:                         always
+      preload:                          false                                   # property currently unused
       script_load:                      sync
+      dependencies:                     false
       pass_init_data:                   false
       data:
         css:                            []
-        files:                          [
-                                          extensions/cookiebar/js/cookiebar.js,
-                                          extensions/cookiebar/js/j1cookiebar.js
-                                        ]
-        js:                             []
-        init_function:                  [j1.Cookiebar.init]
-
-
-  
+        files:                          [ adapter/js/cookieConsent.js ]
+        js:                             [ modules/cookieConsent/js/cookieConsent ]
+        init_function:                  [ j1.adapter.cookieConsent.init ]
