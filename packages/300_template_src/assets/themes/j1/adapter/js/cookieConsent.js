@@ -133,8 +133,10 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       logger.info('module is being initialized');
 
       j1.cookieConsent = new BootstrapCookieConsent({
-        contentURL: '/assets/data/bsCookieConsent',
-        cookieName: 'j1.user.consent'
+        contentURL:         moduleOptions.contentURL,
+        cookieName:         moduleOptions.cookieName,
+        whitelisted:        moduleOptions.whitelisted,
+        xhr_data_element:   moduleOptions.xhr_data_element
       });
 
       var dependencies_met_page_ready = setInterval (function (options) {

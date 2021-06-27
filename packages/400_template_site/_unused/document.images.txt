@@ -4,8 +4,8 @@
 ./collections/posts/public/featured/_posts/2020-05-01-top-open-source-static-site-generators.adoc:image: /assets/images/modules/attics/machine-generator-1920x1280.jpg
 ./collections/posts/public/featured/_posts/2020-05-01-top-open-source-static-site-generators.adoc: /assets/images/modules/attics/machine-generator-1920x1280.jpg
 ./collections/posts/public/featured/_posts/2020-05-01-top-open-source-static-site-generators.adoc:/assets/images/collections/blog/featured/staticgen.jpg[{{page.title}}]
-./collections/posts/public/featured/_posts/2020-06-01-about-cookies.adoc:image: /assets/images/modules/attics/cookies-1920x1200-bw.jpg
-./collections/posts/public/featured/_posts/2020-06-01-about-cookies.adoc: /assets/images/modules/attics/cookies-1920x1200-bw.jpg
+./collections/posts/public/featured/_posts/2020-06-01-about-cookies.adoc:image: /assets/images/modules/attics/cookies-1920x1200.jpg
+./collections/posts/public/featured/_posts/2020-06-01-about-cookies.adoc: /assets/images/modules/attics/cookies-1920x1200.jpg
 ./collections/posts/public/featured/_posts/2021-01-01-welcome-to-j1-template.adoc:image: /assets/images/modules/attics/katie-moum-1920x1280.jpg
 ./collections/posts/public/featured/_posts/2021-01-01-welcome-to-j1-template.adoc: /assets/images/modules/attics/katie-moum-1920x1280.jpg
 ./collections/posts/public/series/_posts/2020-01-01-post-test-series.adoc: /assets/images/modules/attics/banner/docker-1280x600-bw.jpg

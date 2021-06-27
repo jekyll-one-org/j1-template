@@ -7,10 +7,10 @@
 /assets/images/collections/blog/wikipedia/narcise-snake-pits.1200x400.jpg
 /assets/images/collections/blog/featured/what-is-a-baseurl.jpg
 
-/assets/images/modules/attics/cookies-1920x1200-bw.jpg
+/assets/images/modules/attics/cookies-1920x1200.jpg
 /assets/images/modules/attics/katie-moum-1920x1280.jpg
 /assets/images/modules/attics/machine-generator-1920x1280.jpg
-/assets/images/modules/attics/cookies-1920x1200-bw.jpg
+/assets/images/modules/attics/cookies-1920x1200.jpg
 /assets/images/modules/attics/machine-generator-1920x1280.jpg
 /assets/images/modules/attics/aditya-joshi-1920x1280.jpg
 /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg

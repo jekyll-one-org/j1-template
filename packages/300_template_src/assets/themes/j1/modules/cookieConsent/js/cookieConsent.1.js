@@ -6,8 +6,6 @@
 
 function BootstrapCookieConsent(props) {
   var logText;
-  var current_page;
-  var whitelisted;
   var logger                = log4javascript.getLogger('j1.core.bsCookieConsent');
   var modalId               = "bccs-modal"
   var self                  = this
@@ -15,13 +13,11 @@ function BootstrapCookieConsent(props) {
 
   this.props = {
     autoShowDialog:         true,                                               // disable autoShowModal on the privacy policy and legal notice pages, to make these pages readable
-    language:               navigator.language,                                 // the language, in which the modal is shown
+    lang:                   navigator.language,                                 // the language, in which the modal is shown
     languages:              ["en", "de"],                                       // supported languages (in ./content/), defaults to first in array
     contentURL:             "./content",                                        // this URL must contain the dialogs content in the needed languages
     cookieName:             "j1.cookie.consent",                                // the name of the cookie in which the configuration is stored as JSON
     cookieStorageDays:      365,                                                // the duration the cookie configuration is stored on the client
-    whitelisted:            [],                                                 // pages NO consent modal page is issued
-    xhr_data_element:       "",
     postSelectionCallback:  undefined                                           // callback function, called after the user has made his selection
   }
 
@@ -30,13 +26,13 @@ function BootstrapCookieConsent(props) {
     this.props[property] = props[property];
   }
 
-  this.language = this.props.language
-  if (this.language.indexOf("-") !== -1) {
-    this.language = this.language.split("-")[0];
+  this.lang = this.props.lang
+  if (this.lang.indexOf("-") !== -1) {
+    this.lang = this.lang.split("-")[0];
   }
 
-  if (!this.props.languages.includes(this.language)) {
-    this.language = this.props.languages[0];                                    // fallback on default language
+  if (!this.props.languages.includes(this.lang)) {
+    this.lang = this.props.languages[0];                                    // fallback
   }
 
   var Cookie = {
@@ -96,25 +92,22 @@ function BootstrapCookieConsent(props) {
 
         // load modal content
         //
+        // var templateUrl = self.props.contentURL + "/" + self.lang + ".html";
         var templateUrl = self.props.contentURL + '/' + 'index.html';
         $.get(templateUrl)
         .done(function (data) {
           self.modal.innerHTML = data;
-          self.modal.innerHTML = $('#' + self.props.xhr_data_element).eq(0).html();
-
+          self.modal.innerHTML = $('#container-de').eq(0).html();
           $(self.modal).modal({
             backdrop: "static",
             keyboard: false
           });
-
           self.$buttonDoNotAgree = $("#bccs-buttonDoNotAgree");
           self.$buttonAgree = $("#bccs-buttonAgree");
           self.$buttonSave = $("#bccs-buttonSave");
           self.$buttonAgreeAll = $("#bccs-buttonAgreeAll");
-
           updateButtons();
           updateOptionsFromCookie();
-
           $("#bccs-options").on("hide.bs.collapse", function () {
             detailedSettingsShown = false;
             updateButtons();
@@ -127,15 +120,12 @@ function BootstrapCookieConsent(props) {
           });
           self.$buttonAgree.click(function () {
             agreeAll();
-            location.reload();
           });
           self.$buttonSave.click(function () {
             saveSettings();
-            location.reload();
           });
           self.$buttonAgreeAll.click(function () {
             agreeAll();
-            location.reload();
           });
         })
         .fail(function () {
@@ -210,10 +200,9 @@ function BootstrapCookieConsent(props) {
     self.$modal.modal("hide");
   }
 
-  // call consent dialog if no cookie found (except pages whitelisted)
+  // call consent dialog if no cookie found
   //
-  whitelisted  = (this.props['whitelisted'].indexOf("window.location.pathname") > -1);
-  if (Cookie.get(this.props.cookieName) === undefined && this.props.autoShowDialog && !whitelisted) {
+  if (Cookie.get(this.props.cookieName) === undefined && this.props.autoShowDialog) {
     showDialog();
   }
 
@@ -223,8 +212,7 @@ function BootstrapCookieConsent(props) {
   // show the consent dialog (modal)
   // -------------------------------------------------------------------------
   this.showDialog = function () {
-    whitelisted = (this.props['whitelisted'].indexOf(window.location.pathname) > -1);
-    if (!whitelisted) { showDialog(); }
+    showDialog();
   }
 
   // collect settings from consent cookie

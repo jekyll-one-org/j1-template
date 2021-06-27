@@ -81,12 +81,11 @@ resource_options:
       j1.cookieConsent.showDialog();
     }
 
-    var dependencies_met_page_ready = setInterval (function (options) {
-//    if ( j1.adapter.bsCookieConsent.getState() === 'finished' && j1.getState() === 'finished' ) {
-      if ( j1.getState() === 'finished' ) {
+    var dependencies_met_cookie_consent_ready = setInterval (function (options) {
+      if ( typeof j1.cookieConsent !== 'undefined' ) {
         $("#settingsOutput").text(JSON.stringify(j1.cookieConsent.getSettings()))
         $("#settingsAnalysisOutput").text(j1.cookieConsent.getSettings('analyses'))
-        clearInterval(dependencies_met_page_ready);
+        clearInterval(dependencies_met_cookie_consent_ready);
       }
     });
 
