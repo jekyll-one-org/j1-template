@@ -1,8 +1,41 @@
-/**
- * Author and copyright: Stefan Haack (https://shaack.com)
- * Repository: https://github.com/shaack/bootstrap-cookie-banner
- * License: MIT, see file 'LICENSE'
- */
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/cookieConsent/js/cookieConsent.js
+ # Provides JS Core for J1 Module BS Cookie Consent
+ #
+ #  Product/Info:
+ #  https://shaack.com
+ #  http://jekyll.one
+ #
+ #  Copyright (C) 2020 Stefan Haack
+ #  Copyright (C) 2021 Juergen Adams
+ #
+ #  bootstrap-cookie-banner is licensed under MIT License.
+ #  See: https://github.com/shaack/bootstrap-cookie-banner/blob/master/LICENSE
+ #  J1 Template is licensed under MIT License.
+ #  See: https://github.com/jekyll-one/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+ # TODO:
+ #
+ # -----------------------------------------------------------------------------
+ # NOTE:
+ #  BS Cookie Consent is an MODIFIED version of bootstrap-cookie-banner
+ #  for the use with J1 Template. This modiefied version cannot be used
+ #  outside of J1 Template!
+  # -----------------------------------------------------------------------------
+*/
+'use strict';
+
+// -----------------------------------------------------------------------------
+// ESLint shimming
+// -----------------------------------------------------------------------------
+/* eslint indent: "off"                                                       */
+/* eslint no-unused-vars: "off"                                               */
+/* eslint no-undef: "off"                                                     */
+/* eslint no-redeclare: "off"                                                 */
+/* eslint indent: "off"                                                       */
+/* eslint JSUnfilteredForInLoop: "off"                                        */
+// -----------------------------------------------------------------------------
 
 function BootstrapCookieConsent(props) {
   var logText;
@@ -15,18 +48,18 @@ function BootstrapCookieConsent(props) {
 
   this.props = {
     autoShowDialog:         true,                                               // disable autoShowModal on the privacy policy and legal notice pages, to make these pages readable
+    reloadPageOnChange:     false,                                              // reload current page if any user settings has been changed
     language:               navigator.language,                                 // the language, in which the modal is shown
     languages:              ["en", "de"],                                       // supported languages (in ./content/), defaults to first in array
     contentURL:             "./content",                                        // this URL must contain the dialogs content in the needed languages
-    cookieName:             "j1.cookie.consent",                                // the name of the cookie in which the configuration is stored as JSON
+    cookieName:             "cookie-consent-settings",                          // the name of the cookie in which the configuration is stored as JSON
     cookieStorageDays:      365,                                                // the duration the cookie configuration is stored on the client
+    postSelectionCallback:  undefined,                                          // callback function, called after the user has made his selection
     whitelisted:            [],                                                 // pages NO consent modal page is issued
-    xhr_data_element:       "",
-    postSelectionCallback:  undefined                                           // callback function, called after the user has made his selection
+    xhr_data_element:       ""                                                  // container for the language-specific consent modal taken from /assets/data/cookieconsent.html
   }
 
   for (var property in props) {
-    // noinspection JSUnfilteredForInLoop
     this.props[property] = props[property];
   }
 
@@ -41,13 +74,14 @@ function BootstrapCookieConsent(props) {
 
   var Cookie = {
     set: function (name, value, days) {
+      var value_encoded = window.btoa(value);
       var expires = "";
       if (days) {
         var date = new Date();
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         expires = "; expires=" + date.toUTCString();
       }
-      document.cookie = name + "=" + (value || "") + expires + "; Path=/; SameSite=Strict;";
+      document.cookie = name + "=" + (value_encoded || "") + expires + "; Path=/; SameSite=Strict;";
     },
     get: function (name) {
     var nameEQ = name + "=";
@@ -58,7 +92,9 @@ function BootstrapCookieConsent(props) {
         c = c.substring(1, c.length);
       }
       if (c.indexOf(nameEQ) === 0) {
-        return c.substring(nameEQ.length, c.length);
+        var value_encoded = c.substring(nameEQ.length, c.length);
+        var value         = window.atob(value_encoded);
+        return value;
       }
     }
     return undefined
@@ -75,9 +111,10 @@ function BootstrapCookieConsent(props) {
     }
   }
 
-  function showDialog() {
+  function showDialog(options) {
     Events.documentReady(function () {
-      this.modal = document.getElementById(modalId);
+      self.modal = document.getElementById(modalId);
+
       if (!self.modal) {
         self.modal = document.createElement("div");
         self.modal.id = modalId;
@@ -127,15 +164,19 @@ function BootstrapCookieConsent(props) {
           });
           self.$buttonAgree.click(function () {
             agreeAll();
-            location.reload();
+            if (options.reloadPageOnChange) {location.reload();}
           });
           self.$buttonSave.click(function () {
+            $("#bccs-options").collapse('hide');
             saveSettings();
-            location.reload();
+            updateOptionsFromCookie();
+            if (options.reloadPageOnChange) {location.reload();}
           });
           self.$buttonAgreeAll.click(function () {
+            $("#bccs-options").collapse('hide');
             agreeAll();
-            location.reload();
+            updateOptionsFromCookie();
+            if (options.reloadPageOnChange) {location.reload();}
           });
         })
         .fail(function () {
@@ -152,7 +193,6 @@ function BootstrapCookieConsent(props) {
     if (settings) {
       for (var setting in settings) {
         var $checkbox = self.$modal.find("#bccs-options .bccs-option[data-name='" + setting + "'] input[type='checkbox']");
-        // noinspection JSUnfilteredForInLoop
         $checkbox.prop("checked", settings[setting]);
       }
     }
@@ -197,9 +237,10 @@ function BootstrapCookieConsent(props) {
 
   function doNotAgree() {
     Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), self.props.cookieStorageDays);
-    logger.warn('delete cookie consent');
-    j1.deleteCookie("j1.user.consent");
-    self.$modal.modal("hide")
+    logger.warn('delete cookie: j1.user.consent');
+//  j1.deleteCookie('j1.user.consent');
+    j1.removeCookie('j1.user.consent');
+    self.$modal.modal('hide')
     j1.goHome();
 //  window.home();
 //  location.href = "about:home";
@@ -212,19 +253,24 @@ function BootstrapCookieConsent(props) {
 
   // call consent dialog if no cookie found (except pages whitelisted)
   //
-  whitelisted  = (this.props['whitelisted'].indexOf("window.location.pathname") > -1);
+  whitelisted  = (this.props.whitelisted.indexOf(window.location.pathname) > -1);
   if (Cookie.get(this.props.cookieName) === undefined && this.props.autoShowDialog && !whitelisted) {
-    showDialog();
+    showDialog({
+      reloadPageOnChange: this.props.reloadPageOnChange
+    });
   }
-
   // API functions
   // -------------------------------------------------------------------------
 
   // show the consent dialog (modal)
   // -------------------------------------------------------------------------
   this.showDialog = function () {
-    whitelisted = (this.props['whitelisted'].indexOf(window.location.pathname) > -1);
-    if (!whitelisted) { showDialog(); }
+    whitelisted  = (this.props.whitelisted.indexOf(window.location.pathname) > -1);
+    if (!whitelisted) {
+      showDialog({
+        reloadPageOnChange: this.props.reloadPageOnChange
+      });
+    }
   }
 
   // collect settings from consent cookie

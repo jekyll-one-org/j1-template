@@ -60,22 +60,108 @@ regenerate:                             true
   <meta name="robots" content="noindex, nofollow" />
 </head>
 
-{% comment %} Modal cookie consent dialog (de-DE)
+{% comment %} Modal cookie consent dialog (default: en-EN)
 -------------------------------------------------------------------------------- {% endcomment %}
-<div id="consent-de">
-  <div id="cookie-consent-de" class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
+<div id="consent-data-en">
+  <div id="modal-consent-en" class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <p class="lead">{{consent_options.consent_modal_title}}</p>
+        <p class="lead">{{consent_options.consent_modal_title.en}}</p>
       </div>
       <div class="modal-body">
         <div class="bccs-body-text" style="font-size: 90%">
-          <p class="mb-5">{{consent_options.body_text}}</p>
+          <p class="mb-4">{{consent_options.body_text.en}}</p>
+        </div>
+        <p><a href="/pages/public/legal/en/privacy/" target="_blank" rel="noopener">Privacy Notice</a>
+          <a href="#bccs-options" data-toggle="collapse" class="float-right">Settings</a>
+        </p>
+        <div id="bccs-options" class="collapse">
+          <p class="tagline mt-4 mb-1"><b>Your settings</b></p>
+          <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-3"></div>
+
+          <div class="bccs-option" data-name="necessary">
+            <div class="switch">
+              <label>
+                <input id="bccs-checkboxNecessary" type="checkbox" name="bccs-checkboxNecessary" disabled="" checked="">
+                <span class="bmd-switch-track"></span>
+                Necessary
+              </label>
+              <ul>
+                <li>Required to run the website</li>
+              </ul>
+            </div>
+          </div>
+          <div class="bccs-option" data-name="analyses">
+            <div class="switch">
+              <label>
+                <input id="bccs-checkboxAnalyses" type="checkbox" name="bccs-checkboxAnalyses" checked="">
+                <span class="bmd-switch-track"></span>
+                Analyses
+              </label>
+              <ul>
+                <li>Monitoring website usage and optimizing the user experience</li>
+                <li>Evaluation of marketing actions</li>
+              </ul>
+            </div>
+          </div>
+          <div class="bccs-option" data-name="personalization">
+            <div class="switch">
+              <label>
+                <input id="bccs-checkboxPersonalization" type="checkbox"  name="bccs-checkboxPersonalization" checked="">
+                <span class="bmd-switch-track"></span>
+                Personalization
+              </label>
+              <ul>
+                <li>Storage of your preferences from previous visits</li>
+                <li>Collecting user feedback to improve our website</li>
+                <li>Recording of your interests in order to provide customised content and offers</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button id="bccs-buttonDoNotAgree" type="button" class="btn btn-link text-decoration-none" style="">
+        I do not agree
+        </button>
+        <button id="bccs-buttonAgree" type="button" class="btn btn-primary btn-raised" style="">
+        Agree
+        </button>
+        <button id="bccs-buttonSave" type="button" class="btn btn-primary" style="display: none;">
+        Save selection
+        </button>
+        <button id="bccs-buttonAgreeAll" type="button" class="btn btn-primary btn-raised" style="display: none;">
+        Agree on all
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% comment %} END Modal cookie consent dialog (en-EN)
+-------------------------------------------------------------------------------- {% endcomment %}
+
+
+
+{% comment %} Modal cookie consent dialog (de-DE)
+-------------------------------------------------------------------------------- {% endcomment %}
+<div id="consent-data-de">
+  <div id="modal-consent-de" class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="lead">{{consent_options.consent_modal_title.de}}</p>
+      </div>
+      <div class="modal-body">
+        <div class="bccs-body-text" style="font-size: 90%">
+          <p class="mb-4">{{consent_options.body_text.de}}</p>
         </div>
         <p><a href="/pages/public/legal/en/privacy/" target="_blank" rel="noopener">Datenschutzerklärung</a>
           <a href="#bccs-options" data-toggle="collapse" class="float-right">Einstellungen</a>
         </p>
         <div id="bccs-options" class="collapse">
+          <p class="tagline mt-4 mb-1"><b>Ihre Einstellungen</b></p>
+          <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-3"></div>
+
           <div class="bccs-option" data-name="necessary">
             <div class="switch">
               <label>
@@ -135,14 +221,6 @@ regenerate:                             true
   </div>
 </div>
 {% comment %} END Modal cookie consent dialog (de-DE)
--------------------------------------------------------------------------------- {% endcomment %}
-
-{% comment %} Modal cookie consent dialog (en-EN)
--------------------------------------------------------------------------------- {% endcomment %}
-<div id="cookie_consent_en_container">
-</div>
-
-{% comment %} END Modal cookie consent dialog (en-EN)
 -------------------------------------------------------------------------------- {% endcomment %}
 
 {% endcapture %}

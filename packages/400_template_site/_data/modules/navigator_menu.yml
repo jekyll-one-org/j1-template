@@ -114,10 +114,6 @@
       href:                             /pages/public/learn/where_to_go/
       icon:                             paw
 
-    - title:                            bsCookieConsent
-      href:                             /pages/public/cookieConsent/
-      icon:                             cookie
-
     # --------------------------------------------------------------------------
     # Roundtrip
     #

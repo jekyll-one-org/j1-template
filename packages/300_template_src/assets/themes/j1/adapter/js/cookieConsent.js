@@ -34,6 +34,7 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign consent_defaults    = modules.defaults.cookieconsent.defaults %}
 {% assign consent_settings    = modules.cookieconsent.settings %}
+{% assign tracking_id         = site.data.j1_config.analytics.google.tracking_id %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -133,17 +134,22 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       logger.info('module is being initialized');
 
       j1.cookieConsent = new BootstrapCookieConsent({
-        contentURL:         moduleOptions.contentURL,
-        cookieName:         moduleOptions.cookieName,
-        whitelisted:        moduleOptions.whitelisted,
-        xhr_data_element:   moduleOptions.xhr_data_element
+        contentURL:             moduleOptions.contentURL,
+        cookieName:             moduleOptions.cookieName,
+        language:               moduleOptions.language,
+        whitelisted:            moduleOptions.whitelisted,
+        reloadPageOnChange:     moduleOptions.reloadCurrentPage,
+        xhr_data_element:       moduleOptions.xhr_data_element + '-' + moduleOptions.language,
+        postSelectionCallback:  function () {
+            j1.adapter.cookieConsent.cbCookie()
+        }
       });
 
       var dependencies_met_page_ready = setInterval (function (options) {
         if ( j1.cookieConsent && j1.getState() === 'finished' ) {
           _this.setState('finished');
           logger.info('state: ' + _this.getState());
-          logger.info('module initialized');
+          logger.debug('module initialized successfully');
           clearInterval(dependencies_met_page_ready);
         }
       });
@@ -191,7 +197,43 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
     // -------------------------------------------------------------------------
     getState: function () {
       return _this.state;
-    } // END getState
+    }, // END getState
+
+    // -------------------------------------------------------------------------
+    // cbCookie()
+    // Callback function called by CookieConsent module after the user has
+    // made his selection
+    // -------------------------------------------------------------------------
+    // TODO:
+    // If ONLY required setting selected, make j1.user.consent
+    // a SESSION cookie!!!
+    // -------------------------------------------------------------------------
+    cbCookie: function () {
+      logger.info('Entered post selection callback from CookieConsent');
+      var user_cookie = j1.readCookie('j1.user.consent');
+      var json = JSON.stringify(user_cookie);
+      logger.info('Current values from CookieConsent: ' + json);
+
+      // Manage Google Analytics OptIn/Out
+      // See: https://github.com/luciomartinez/gtag-opt-in/wiki
+      GTagOptIn.register('{{tracking_id}}');
+      if (user_cookie.analyses)  {
+        logger.info('Google Analytics: enabled');
+        GTagOptIn.optIn();
+      } else {
+        logger.warn('Google Analytics: disabled');
+        GTagOptIn.optOut();
+      }
+
+      // enable cookie button if not visible
+      //
+      if ($('#quickLinksCookieButton').css('display') === 'none')  {
+        $('#quickLinksCookieButton').css('display', 'block');
+      }
+
+      // location.reload() // reload after selection
+
+    } // END cbCookie
 
   }; // END return
 })(j1, window);

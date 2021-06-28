@@ -26,19 +26,40 @@ defaults:
 
   enabled:                              false
 
-  consent_modal_title:                  Ihre Privatsphäre
-
   autoShowDialog:                       true                                    # disable autoShowModal on the privacy policy and legal notice pages, to make these pages readable
-  language:                             navigator.language                      # the language, in which the modal is shown
+  language:                             en                                      # the language, in which the modal is shown. Default navigator.language
   languages:                            [en, de]                                # supported languages, defaults to first language in array (en)
   contentURL:                           /assets/data/cookieconsent              # this URL must contain the dialogs content in the needed languages
   cookieName:                           j1.user.consent                         # the name of the cookie in which the configuration is stored as JSON
   cookieStorageDays:                    365                                     # the duration the cookie configuration is stored on the client
-  xhr_data_element:                     consent-de                              # container element that contains the modal content
-  whitelisted:                          [ /pages/public/legal/en/privacy ]      # pages no consent issued
-  postSelectionCallback:                undefined                               # callback function, called after the user has made his selection
 
-  body_text: >
+  reloadPageOnChange:                   false                                   # reload current page if any user settings has been changed
+  xhr_data_element:                     consent-data                            # container for the language-specific consent modal taken from /assets/data/cookieconsent.html
+  whitelisted:                          [ "/pages/public/legal/en/privacy" ]    # pages no consent issued
+
+  consent_modal_title:
+    de:                                 Ihre Privatsphäre
+    en:                                 Your Privacy
+
+  body_text:
+    en: >
+                                        This website is using cookies and similar technologies that
+                                        are required for operation. You are free to decide to give,
+                                        refuse or withdraw your consent at any time by clicking
+                                        the <code>My Settings</code> button. Subsequent changes are
+                                        possible at any time by clicking on the <code>cookie icon</code>
+                                        in the menu bar.
+                                        <br><br>
+                                        Extended cookies are only used with your consent. Additional
+                                        cookies are used to analyze the usage of this website.
+                                        Analysis of the use of this website help gives you a better
+                                        user experience of the website to offer. More information
+                                        about what data is collected and how they may be passed on
+                                        to partners can be found in the <code>Privacy Policy</code>.
+                                        <br><br>
+                                        Visiting this website, you consent to the use of by clicking the
+                                        <code>I agree</code> button.
+    de: >
                                         Diese Website nutzt Cookies und ähnliche Technologien, die
                                         zum Betrieb erforderlich sind. Es steht Ihnen frei, Ihre
                                         Zustimmung jederzeit zu geben, zu verweigern oder zurückzuziehen,
