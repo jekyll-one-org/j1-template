@@ -102,8 +102,8 @@ defaults:
                                         <br><br>
                                         <code>Personalization</code> is used e.g. to collect user feedback or running
                                         advertising campaigns to provide you a website free of charge. Partners like
-                                        Disqus or Google enables us to provide you personalized services and enables us
-                                        to finance the costs for running this site.
+                                        Disqus or Google enables us to provide you excellent personalized services and
+                                        enables us to finance the costs for running this site.
     de: >
                                         Die Betreiber dieser Website nehmen den Schutz Ihrer persönlichen Daten ernst.
                                         Wir behandeln Ihre Daten vertraulich und halten uns zum Schutz Ihrer Privatsphäre
@@ -127,8 +127,9 @@ defaults:
                                         <br><br>
                                         <code>Personalisierung</code> wird z.B. um Benutzerfeedback zu sammeln oder
                                         Werbekampagnen durchzuführen, um Ihnen eine Website kostenlos zur Verfügung zu
-                                        stellen. Partner wie Disqus oder Google ermöglichen es uns, Ihnen personalisierte
-                                        Dienste anzubieten und die Kosten für den Betrieb dieser Website zu finanzieren.
+                                        stellen. Partner wie Disqus oder Google ermöglichen es uns, Ihnen exzellente
+                                        personalisierte Dienste anzubieten und die Kosten für den Betrieb dieser Website
+                                        zu finanzieren.
 
 # ------------------------------------------------------------------------------
 # END config
