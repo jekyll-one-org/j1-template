@@ -48,7 +48,6 @@ function BootstrapCookieConsent(props) {
 
   this.props = {
     autoShowDialog:         true,                                               // disable autoShowModal on the privacy policy and legal notice pages, to make these pages readable
-    reloadPageOnChange:     false,                                              // reload current page if any user settings has been changed
     language:               navigator.language,                                 // the language, in which the modal is shown
     languages:              ["en", "de"],                                       // supported languages (in ./content/), defaults to first in array
     contentURL:             "./content",                                        // this URL must contain the dialogs content in the needed languages
@@ -164,19 +163,16 @@ function BootstrapCookieConsent(props) {
           });
           self.$buttonAgree.click(function () {
             agreeAll();
-            if (options.reloadPageOnChange) {location.reload();}
           });
           self.$buttonSave.click(function () {
             $("#bccs-options").collapse('hide');
             saveSettings();
             updateOptionsFromCookie();
-            if (options.reloadPageOnChange) {location.reload();}
           });
           self.$buttonAgreeAll.click(function () {
             $("#bccs-options").collapse('hide');
             agreeAll();
             updateOptionsFromCookie();
-            if (options.reloadPageOnChange) {location.reload();}
           });
         })
         .fail(function () {
@@ -239,11 +235,9 @@ function BootstrapCookieConsent(props) {
     Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), self.props.cookieStorageDays);
     logger.warn('delete cookie: j1.user.consent');
 //  j1.deleteCookie('j1.user.consent');
-    j1.removeCookie('j1.user.consent');
+    j1.deleteCookie('all');
     self.$modal.modal('hide')
     j1.goHome();
-//  window.home();
-//  location.href = "about:home";
   }
 
   function saveSettings() {
@@ -255,10 +249,9 @@ function BootstrapCookieConsent(props) {
   //
   whitelisted  = (this.props.whitelisted.indexOf(window.location.pathname) > -1);
   if (Cookie.get(this.props.cookieName) === undefined && this.props.autoShowDialog && !whitelisted) {
-    showDialog({
-      reloadPageOnChange: this.props.reloadPageOnChange
-    });
+    showDialog();
   }
+
   // API functions
   // -------------------------------------------------------------------------
 
@@ -267,9 +260,7 @@ function BootstrapCookieConsent(props) {
   this.showDialog = function () {
     whitelisted  = (this.props.whitelisted.indexOf(window.location.pathname) > -1);
     if (!whitelisted) {
-      showDialog({
-        reloadPageOnChange: this.props.reloadPageOnChange
-      });
+      showDialog();
     }
   }
 

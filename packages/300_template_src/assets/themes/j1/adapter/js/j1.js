@@ -1256,6 +1256,19 @@ var j1 = (function () {
     }, // END readCookie
 
     // -------------------------------------------------------------------------
+    // findCookie()
+    // Search for cookies (names) in the page header that matches
+    // a given regex string. Returns all names found as an array.
+    // -------------------------------------------------------------------------
+    // See: https://stackoverflow.com/questions/52287989/javascript-cookie-remove-or-delete-with-regex-regular-expression
+    // -------------------------------------------------------------------------
+    findCookie: function (regex) {
+      var r=[];
+      document.cookie.replace(new RegExp(regex + "[^= ]*", "g"), function(a){ r.push(a.trim()); });
+      return r;
+    }, // END findCookie
+
+    // -------------------------------------------------------------------------
     // writeCookie()
     // Write 'data' to a cookie 'name'. If not exists, the cookie gets
     // created. Returns 'true' if cookie was written, otherwise 'false'.
@@ -1370,8 +1383,7 @@ var j1 = (function () {
     // by the browser if the last session (browser window) is closed.
     // See: https://stackoverflow.com/questions/179355/clearing-all-cookies-with-javascript
     // -------------------------------------------------------------------------
-    deleteCookie: function (options) {
-      var name        = options;
+    deleteCookie: function (name) {
       var all_cookies = document.cookie.split('; ');
 
       if ( name === 'all' ) {

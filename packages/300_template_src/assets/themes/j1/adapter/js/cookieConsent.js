@@ -82,6 +82,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
   var moduleOptions = {};
   var _this;
   var $modal;
+  var user_cookie;
   var logger;
   var logText;
   // ---------------------------------------------------------------------------
@@ -209,20 +210,33 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
     // a SESSION cookie!!!
     // -------------------------------------------------------------------------
     cbCookie: function () {
+      var gaCookies     = j1.findCookie('_ga');
+      var user_cookie   = j1.readCookie('j1.user.consent');
+      var json          = JSON.stringify(user_cookie);
+
       logger.info('Entered post selection callback from CookieConsent');
-      var user_cookie = j1.readCookie('j1.user.consent');
-      var json = JSON.stringify(user_cookie);
       logger.info('Current values from CookieConsent: ' + json);
+
+      // gaCookies.forEach(item => console.log('cookieConsent: ' + item));
 
       // Manage Google Analytics OptIn/Out
       // See: https://github.com/luciomartinez/gtag-opt-in/wiki
+      //
       GTagOptIn.register('{{tracking_id}}');
       if (user_cookie.analyses)  {
-        logger.info('Google Analytics: enabled');
+        logger.info('Enable: GA');
         GTagOptIn.optIn();
       } else {
-        logger.warn('Google Analytics: disabled');
+        logger.warn('Disable: GA');
         GTagOptIn.optOut();
+        var gaCookies = j1.findCookie('_ga');
+        gaCookies.forEach(function (item) {
+          logger.warn('Delete GA cookie: ' + item);
+          j1.removeCookie({
+            name: item,
+            path: '/'
+          });
+        });
       }
 
       // enable cookie button if not visible
@@ -231,7 +245,10 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
         $('#quickLinksCookieButton').css('display', 'block');
       }
 
-      // location.reload() // reload after selection
+      // reload page after selection
+      //
+      // $('#no_flicker').css('display', 'none');
+      location.reload();
 
     } // END cbCookie
 
