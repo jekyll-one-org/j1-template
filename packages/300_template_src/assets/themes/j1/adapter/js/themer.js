@@ -101,32 +101,34 @@ j1.adapter['themer'] = (function (j1, window) {
   // ---------------------------------------------------------------------------
   // globals
   // ---------------------------------------------------------------------------
-  var environment                 = '{{environment}}';
-  var themerOptions               = $.extend({}, {{themer_options | replace: '=>', ':' | replace: 'nil', '""' }});
-  var user_state                  = {};
-  var cookie_names                = j1.getCookieNames();
-  var cookie_user_state_name      = cookie_names.user_state;
-  var user_state_detected         = false;
-  var styleLoaded                 = false;
-  var id                          = 'default';
+  var environment               = '{{environment}}';
+  var themerOptions             = $.extend({}, {{themer_options | replace: '=>', ':' | replace: 'nil', '""' }});
+  var user_state                = {};
+  var user_consent              = {};
+  var cookie_names              = j1.getCookieNames();
+  var user_state_detected       = false;
+  var styleLoaded               = false;
+  var id                        = 'default';
   var user_state_cookie;
   var theme_css_html;
   var _this;
   var logger;
   var logText;
 
+  var cssExtension              = (environment === 'production')
+                                  ? '.min.css'
+                                  : '.css';
+
   var default_theme_name        = '{{default_theme.name}}';
   var default_theme_author      = '{{default_theme.author}}';
-  var default_theme_author_url  = '{{default_theme.theme_author_url}}';
+  var default_theme_author_url  = '{{default_theme.author_url}}';
   var default_theme_css_name    = default_theme_name.toLowerCase().replace(' ', '-');
-  var default_theme_css         = (environment == 'production')
-                                  ? '{{asset_path}}/{{theme_base}}/' +default_theme_css_name+ '/bootstrap.min.css'
-                                  : '{{asset_path}}/{{theme_base}}/' +default_theme_css_name+ '/bootstrap.css';
+  var default_theme_css         = '{{asset_path}}/{{theme_base}}/' + default_theme_css_name + '/bootstrap' + cssExtension;
 
   // ---------------------------------------------------------------------------
   // helper functions
   // ---------------------------------------------------------------------------
-  // Example: var styleLoaded = styleSheetLoaded('');
+
   function styleSheetLoaded(styleSheet) {
     var sheets = document.styleSheets, stylesheet = sheets[(sheets.length - 1)];
 
@@ -157,15 +159,15 @@ j1.adapter['themer'] = (function (j1, window) {
       _this.state = 'started';
       logger.info('state: ' + _this.getState());
 
-      // Detect|Set J1 UserState
-      user_state_detected = j1.existsCookie(cookie_user_state_name);
+      // detect|set user state cookie
+      user_state_detected = j1.existsCookie(cookie_names.user_state);
       if (user_state_detected) {
-        user_state            = j1.readCookie(cookie_user_state_name);
+        user_state        = j1.readCookie(cookie_names.user_state);
+        user_consent       = j1.readCookie(cookie_names.user_consent);
       }
 
-      // initial user_state cookie
-      //
-      if ( user_state.theme_name == '') {
+      // initial theme data
+      if (user_state.theme_css === '') {
         user_state.theme_name       = default_theme_name;
         user_state.theme_css        = default_theme_css;
         user_state.theme_author     = default_theme_author;
@@ -175,29 +177,33 @@ j1.adapter['themer'] = (function (j1, window) {
       styleLoaded     = styleSheetLoaded(user_state.theme_css);
       theme_css_html  = '<link rel="stylesheet" id="' + id + '" href="' + user_state.theme_css + '" type="text/css" />';
 
-      // skip loading UNO CSS file except it is NOT loaded
-      //
+      // skip loading theme UNO css file except NOT loaded
       if (!user_state.theme_name.includes('Uno') || !styleLoaded) {
         $('head').append(theme_css_html);
       }
 
       // store if theme_switcher is enabled
-      //
       user_state.theme_switcher = themerOptions.enabled;
-
-      j1.writeCookie({
-        name: cookie_user_state_name,
-        data: user_state,
-        expires: 365                                                            // was missing
-      });
-
+      if (!user_consent.analyses || !user_consent.personalization)  {
+        // expire consent|state cookies to session
+        j1.writeCookie({
+          name:     cookie_names.user_consent,
+          data:     user_state,
+          samesite: 'Strict'
+        });
+      } else {
+        j1.writeCookie({
+          name:     cookie_names.user_state,
+          data:     user_state,
+          samesite: 'Strict',
+          expires:  365
+        });
+      }
       // jadams, 2021-01-03: dependency has to be checked in more detail
-      //
       var dependencies_met_j1_finished = setInterval (function () {
         if (j1.getState() == 'finished') {
           if (themerOptions.enabled) {
             // enable BS ThemeSwitcher
-            //
             logger.info('themes detected as: enabled');
             logger.info('theme is being initialized: ' + user_state.theme_name);
 

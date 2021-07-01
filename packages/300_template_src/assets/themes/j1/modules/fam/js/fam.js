@@ -40,12 +40,7 @@
   // jadams, 2020-10-10, added class from main (materialize.js)
   //
   class Component {
-    /**
-     * Generic constructor for all components
-     * @constructor
-     * @param {Element} el
-     * @param {Object} options
-     */
+
     constructor(classDef, el, options) {
       // Display error if el is valid HTML Element
       if (!(el instanceof Element)) {

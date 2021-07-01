@@ -154,10 +154,9 @@ module J1App
     # --------------------------------------------------------------------------
     j1_mw_auth_mgr.info 'initialize web session cookie'
     use Rack::Session::Cookie,
-        http_only: true,   # if set to 'true', make session cookie visible to the browser (document) for HTTP
+        http_only: true,
         key: 'j1.app.session',
-#       same_site: 'None',
-        same_site: 'Lax',
+        same_site: 'Strict',
         secret: ENV['J1_SESSION_SECRET'] || SecureRandom.hex
 
     # use Rack::Cache do |config|

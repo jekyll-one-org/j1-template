@@ -462,9 +462,9 @@ resources:
         init_function:                  [ j1.adapter.navigator.init ]
 
   # ----------------------------------------------------------------------------
-  # MMenu Light
+  # Mobile Menu (Light)
   #
-  - name:                               Mobile Menu
+  - name:                               MMenu
     resource:
       id:                               mmenu
       enabled:                          true
@@ -478,8 +478,8 @@ resources:
       pass_init_data:                   false
       data:
         css:                            [
-                                          modules/mmenuLight/css/mmenu,
-                                          modules/mmenuLight/css/theme/uno
+                                          modules/mmenuLight/css/mmenu-light,
+                                          modules/mmenuLight/css/theme/uno/mmenu
                                         ]
         files:                          [
                                           modules/mmenuLight/js/mmenu.js,
@@ -678,7 +678,7 @@ resources:
       dependencies:                     false
       pass_init_data:                   false
       data:
-        css:                            [ modules/rtable/css/theme/uno ]
+        css:                            [ modules/rtable/css/theme/uno/rtable ]
         files:                          [ adapter/js/rtable.js ]
         js:                             [ modules/rtable/js/rtable ]
         init_function:                  [ j1.adapter.rtable.init ]
@@ -1182,9 +1182,8 @@ resources:
       dependencies:                     false
       pass_init_data:                   true
       data:
-        css:                            []
+        css:                            [ modules/fam/css/theme/uno/fam ]             # styles for (J1) theme Uno]
         files:                          [
-                                          modules/fam/css/uno/fam.css,          # styles for (J1) theme Uno
 #                                         modules/cash/js/cash.js,              # current version|s of Cash NOT usable
                                           modules/materialize/js/cash.js,       # adapted|old (1.3.5) version from Materialize
                                           modules/fam/js/fam.js,                # modified version for J1 (former: button.js)

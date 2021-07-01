@@ -93,7 +93,6 @@ regenerate:                             true
  # For details, see https://jekyll.one
  # -----------------------------------------------------------------------------
  #  TODO:
- #    MANAGE themeExtensionCss is to be checked
  #
  # -----------------------------------------------------------------------------
  # Adapter generated: {{site.time}}
@@ -114,14 +113,14 @@ var j1 = (function () {
   // ---------------------------------------------------------------------------
   // globals
   // ---------------------------------------------------------------------------
-  var rePager         = new RegExp('navigator|dateview|tagview|archive');
-  var environment     = '{{environment}}';
-  var moduleOptions   = {};
-  var j1_runtime_data = {};
+  var rePager                   =  new RegExp('navigator|dateview|tagview|archive');
+  var environment               = '{{environment}}';
+  var moduleOptions             = {};
+  var j1_runtime_data           = {};
 
   // Status information
-  var state         = 'not_started';
-  var mode          = 'not_detected';
+  var state                     = 'not_started';
+  var mode                      = 'not_detected';
 
   var current_user_data;
   var current_page;
@@ -137,11 +136,11 @@ var j1 = (function () {
   // Theme information
   var themeName;
   var themeCss;
-  var themeExtensionCss         = environment === 'production'
-                                  ? '/assets/themes/j1/core/css/themes/theme-extensions.min.css'
-                                  : '/assets/themes/j1/core/css/themes/theme-extensions.css';
+  var cssExtension              = (environment === 'production')
+                                  ? '.min.css'
+                                  : '.css';
 
-  // Pathes of J1 data files
+   // Pathes of J1 data files
   var colors_data_path          = '{{template_config.colors_data_path}}';
   var font_size_data_path       = '{{template_config.font_size_data_path}}';
   var runtime_data_path         = '{{template_config.runtime_data_path}}';
@@ -158,19 +157,11 @@ var j1 = (function () {
   var baseUrl;
   var referrer;
 
-  // var default_theme_css           = environment === 'production' ? '/assets/themes/j1/core/css/themes/uno-light/bootstrap.min.css' : '/assets/themes/j1/core/css/themes/uno-light/bootstrap.css';
-  // // TODO: check what property is used default_theme|default_theme_name ?
-  // var default_theme_display_name  = 'Uno (light)';
-  // var default_theme_name          = 'uno-light';
-  // var default_theme_author        = 'J1 Team';
-  // var default_theme_link          = 'https://jekyll.one/';
-  // var default_white_listed_pages  = [];
-
   var cookie_names = {
     'app_session':  '{{template_config.cookies.app_session}}',
     'user_session': '{{template_config.cookies.user_session}}',
     'user_state':   '{{template_config.cookies.user_state}}',
-    'user_consent': 'j1.user.consent'
+    'user_consent': '{{template_config.cookies.user_consent}}'
   };
 
   // user SESSION cookie (initial values)
@@ -208,15 +199,29 @@ var j1 = (function () {
   //   'cc_authenticated':     false
   // };
 
+  // var user_state = {
+  //   'environment':          '{{environment}}',
+  //   'theme_css':            '',
+  //   'theme_name':           '',
+  //   'theme_author':         '',
+  //   'cssExtension':         cssExtension,
+  //   'theme_version':        '{{site.version}}',
+  //   'stopScrolling':        true,
+  //   'session_active':       false,
+  //   'last_session_ts':      ''
+  // };
+
   var user_state = {
-    'theme_css':            "",
-    'theme_name':           "",
-    'theme_author':         "",
+    'theme_css':            '',
+    'theme_name':           '',
+    'theme_author':         '',
     'theme_version':        '{{site.version}}',
     'stopScrolling':        true,
     'session_active':       false,
     'last_session_ts':      ''
   };
+
+  var user_consent;
 
   // ---------------------------------------------------------------------------
   // helper functions
@@ -280,51 +285,53 @@ var j1 = (function () {
       j1['xhrDOMState']  = {};
 
       // -----------------------------------------------------------------------
-      // session ON_CLOSE event
-      // wrapup if ALL browser windows get closed. Update user STATE
-      // cookie on window CLOSE.
+      // update cookies if browser window get closed
       // see: https://stackoverflow.com/questions/3888902/detect-browser-or-tab-closing
       // -----------------------------------------------------------------------
       window.addEventListener('beforeunload', function (event) {
         var cookie_names              = j1.getCookieNames();
-        var cookie_user_state_name    = cookie_names.user_state;
-        var cookie_user_session_name  = cookie_names.user_session;
-//      moment not used anymore
-//      var epoch                     = Math.floor(Date.now()/1000);
-//      var timestamp_now             = moment.unix(epoch).format('YYYY-MM-DD HH:mm:ss');
         var date                      = new Date();
         var timestamp_now             = date.toISOString();
-        var user_state                = j1.readCookie(cookie_user_state_name);
+        var user_state                = j1.readCookie(cookie_names.user_state);
+        var user_consent              = j1.readCookie(cookie_names.user_consent);
         var ep_status;
         var url;
         var baseUrl;
 
-        // update cookie only, if (already) exists
-        //
-        if (user_state) {
-          user_state.session_active     = false;
-          user_state.last_session_ts    = timestamp_now;
+        user_state.session_active     = false;
+        user_state.last_session_ts    = timestamp_now;
 
+        if (!user_consent.analyses || !user_consent.personalization)  {
+          // expire consent|state cookies to session
           j1.writeCookie({
-            name: cookie_user_state_name,
-            data: user_state,
-            expires: 365
+            name:     cookie_names.user_consent,
+            data:     user_state,
+            samesite: 'Strict'
+          });
+        } else {
+          j1.writeCookie({
+            name:     cookie_names.user_state,
+            data:     user_state,
+            samesite: 'Strict',
+            expires:  365
           });
         }
 
-      });
+      }); // END beforeunload
 
       // -----------------------------------------------------------------------
-      // initialize|load (existing) user cookies
+      // initialize|load user cookies
       // -----------------------------------------------------------------------
       user_session.created    = timestamp_now;
       user_session.timestamp  = timestamp_now;
 
+      user_consent  = j1.readCookie(cookie_names.user_consent);
       user_session  =  j1.existsCookie(cookie_names.user_session)
                         ? j1.readCookie(cookie_names.user_session)
                         : j1.writeCookie({
                             name:     cookie_names.user_session,
                             data:     user_session,
+                            samesite: 'Strict'
                           });
 
       user_state    =  j1.existsCookie(cookie_names.user_state)
@@ -332,15 +339,27 @@ var j1 = (function () {
                         : j1.writeCookie({
                             name:     cookie_names.user_state,
                             data:     user_state,
+                            samesite: 'Strict',
                             expires:  365
                           });
 
       user_state.session_active = true;
-      j1.writeCookie({
-        name:     cookie_names.user_state,
-        data:     user_state,
-        expires:  365
-      });
+
+      if (!user_consent.analyses || !user_consent.personalization)  {
+        // expire consent|state cookies to session
+        j1.writeCookie({
+          name:     cookie_names.user_state,
+          data:     user_state,
+          samesite: 'Strict'
+        });
+      } else {
+        j1.writeCookie({
+          name:     cookie_names.user_state,
+          data:     user_state,
+          samesite: 'Strict',
+          expires:  365
+        });
+      }
 
       // detect middleware (mode 'app') and update user session cookie
       // -----------------------------------------------------------------------
@@ -350,7 +369,7 @@ var j1 = (function () {
         var ep_status     = baseUrl + '/status' + '?page=' + window.location.pathname;
         var detectTimeout =  50;
 
-        baseUrl       = url.origin;
+        baseUrl = url.origin;
 
         // see: https://stackoverflow.com/questions/3709597/wait-until-all-jquery-ajax-requests-are-done
         $.when (
@@ -369,13 +388,11 @@ var j1 = (function () {
           logger.info('update user session cookie');
           j1.writeCookie({
             name:     cookie_names.user_session,
-            data:     user_session
+            data:     user_session,
+            samesite: 'Strict'
           });
           j1.setState(curr_state);
           logger.info('state: ' + j1.getState());
-
-
-
 
           var dependencies_met_page_displayed = setInterval (function () {
             if (j1.getState() == 'finished') {
@@ -411,8 +428,9 @@ var j1 = (function () {
 
             logger.info(logText);
             j1.writeCookie({
-              name: cookie_names.user_session,
-              data: user_session
+              name:     cookie_names.user_session,
+              data:     user_session,
+              samesite: 'Strict'
             });
             j1.setState(curr_state);
             logger.info('state: ' + j1.getState());
@@ -443,7 +461,6 @@ var j1 = (function () {
       // process|update user state cookie
       themeName                 = user_session.theme_name;
       themeCss                  = user_session.theme_css;
-      themeExtensionCss         = user_session.theme_extension_css;
 
       // save last page access
       // see: https://stackoverflow.com/questions/3528324/how-to-get-the-previous-url-in-javascript
@@ -468,18 +485,15 @@ var j1 = (function () {
         last_pager                = user_session.last_pager;
       }
 
-      // jadams: for testing only
-      // display page
-      //$('#no_flicker').css('display', 'block');
-
       logger.info('update user session cookie');
       j1.writeCookie({
-        name: cookie_names.user_session,
-        data: user_session
+        name:     cookie_names.user_session,
+        data:     user_session,
+        samesite: 'Strict'
       });
 
+      // NOTE: asynchronous calls should be rewitten to xhrData
       // initialize page resources for blocks
-      // (asynchronous, should be rewitten to xhrData)
       j1.initBanner(settings);
       j1.initPanel(settings);
       j1.initFooter(settings);
@@ -490,8 +504,9 @@ var j1 = (function () {
 
       user_session.timestamp = timestamp_now;
       j1.writeCookie({
-        name: cookie_names.user_session,
-        data: user_session
+        name:     cookie_names.user_session,
+        data:     user_session,
+        samesite: 'Strict'
       });
 
       // -----------------------------------------------------------------------
@@ -820,7 +835,8 @@ var j1 = (function () {
           user_session.current_page = current_url.pathname;
           j1.writeCookie({
             name:     cookie_names.user_session,
-            data:     user_session
+            data:     user_session,
+            samesite: 'Strict'
           });
 
           providerPermissions = user_session.provider_permissions;
@@ -934,7 +950,8 @@ var j1 = (function () {
           user_session.current_page = current_url.pathname;
           j1.writeCookie({
               name:     cookie_names.user_session,
-              data:     user_session
+              data:     user_session,
+              samesite: 'Strict'
           });
 
           // show|hide translator icon
@@ -1295,21 +1312,17 @@ var j1 = (function () {
     //    context/HTTPS).
     // -------------------------------------------------------------------------
     //
-    writeCookie: function (options /*name, data, [path, expires, SameSite, secure]*/) {
+    writeCookie: function (options /*name, data, [path, expires, samesite, http_only, secure]*/) {
       var defaults = {
           data: {},
           name: '',
-          expires: 0,
           path: '/',
-//        SameSite: 'Strict',
-//        SameSite: 'Lax',
+          expires: 0,
+          samesite: 'Lax',
           http_only: false,
           secure: false
       };
       var settings = $.extend(defaults, options);
-//    moment not used anymore
-//    var epoch         = Math.floor(Date.now()/1000);
-//    var timestamp_now = moment.unix(epoch).format('YYYY-MM-DD HH:mm:ss');
       var date          = new Date();
       var timestamp_now = date.toISOString();
       var cookie_data   = {};
@@ -1326,25 +1339,26 @@ var j1 = (function () {
         if (settings.expires > 0) {
           Cookies.set(settings.name, data_encoded, {
             expires: settings.expires,
-            SameSite: settings.SameSite
+            SameSite: settings.samesite
           });
         } else {
           Cookies.set(settings.name, data_encoded, {
-          SameSite: settings.SameSite
+          SameSite: settings.samesite
           });
         }
       } else {
         cookie_data   = settings.data;
         data_json     = JSON.stringify(settings.data);
         data_encoded  = window.btoa(data_json);
+
         if (settings.expires > 0) {
           Cookies.set(settings.name, data_encoded, {
             expires: settings.expires,
-            SameSite: settings.SameSite
+            SameSite: settings.samesite
           });
         } else {
           Cookies.set(settings.name, data_encoded, {
-            SameSite: settings.SameSite
+            SameSite: settings.samesite
           });
         }
       }

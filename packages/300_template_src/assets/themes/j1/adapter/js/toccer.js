@@ -156,34 +156,15 @@ j1.adapter['toccer'] = (function () {
       /* eslint-enable */
 
       // save config settings into the toccer object for global access
-      //
       _this['moduleOptions'] = moduleOptions;
 
-      // if (options  !== undefined) {
-      //   var settings = $.extend({}, options);
-      // } else {
-      //   var settings = false;
-      // }
-
       // cast text-based booleans
-      var  isToc = (moduleOptions.toc === 'true');
-      var  isComments = (moduleOptions.comments === 'true');
+      var isToc = (moduleOptions.toc === 'true');
+      var isComments = (moduleOptions.comments === 'true');
 
-      if (moduleOptions.collapseDepth === undefined) {
+      if ( typeof moduleOptions.collapseDepth === 'undefined') {
         moduleOptions.collapseDepth = 3;
       }
-
-      // if (settings.scrollSmoothOffset === undefined) {
-      //   settings.scrollSmoothOffset = {{toccer_options.scrollSmoothOffset}};
-      // }
-      //
-      // if (settings.enabled === undefined) {
-      //   settings.enabled = true;
-      // }
-
-      // save config settings into the toccer object for global|later access
-      //
-      // _this['moduleOptions'] = settings;
 
       if (isToc) {
         var dependencies_met_navigator = setInterval(function() {
@@ -191,30 +172,9 @@ j1.adapter['toccer'] = (function () {
           if ( j1.getState() == 'finished' ) {
             var settings = j1.adapter.toccer.moduleOptions;
 
-            // calculate (tocbot page) offset DYMICALLY for correct
-            // smoothscroll position
-            //
-            // var $pagehead       = $('.attic');
-            // var $navbar         = $('nav.navbar');
-            // var $adblock        = $('#adblock');
-            //
-            // var navbarType      = $navbar.hasClass('navbar-fixed') ? 'fixed' : 'scrolled';
-            // var fontSize        = $('body').css('font-size').replace('px','');
-            // var start           = window.pageYOffset;
-            //
-            // var l               = parseInt(fontSize);
-            //
-            // var h               = $pagehead.length ? $pagehead.height() : 0;
-            // var n               = $navbar.length ? $navbar.height() : 0;
-            // var a               = $adblock.length ? $adblock.height() : 0;
-            //
-            // var o               = navbarType == 'fixed' ? -1*(n + a + l) : -1*(h + n + a + l);
-            //
-            // settings.scrollSmoothOffset = o;
-
             _this.initToccerCore(settings);
-
             _this.setState('finished');
+
             logger.info('state: ' + _this.getState());
             logger.info('module initialized successfully');
             logger.info('met dependencies for: j1');
@@ -322,7 +282,6 @@ j1.adapter['toccer'] = (function () {
         scrollOffset        = navbarType == 'fixed' ? -1*(n + a + l) : -1*(h + n + a + l);
 
         // static offset, to be checked why this is needed
-        //
         scrollOffset        = scrollOffset + moduleOptions.scrollSmoothOffset
 
         tocbot.refresh({

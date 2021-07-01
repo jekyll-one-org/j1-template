@@ -19,10 +19,10 @@
  #
  # -----------------------------------------------------------------------------
  # NOTE:
- #  BS Cookie Consent is an MODIFIED version of bootstrap-cookie-banner
- #  for the use with J1 Template. This modiefied version cannot be used
+ #  BS Cookie Consent is a MODIFIED version of bootstrap-cookie-banner
+ #  for the use with J1 Template. This modified version cannot be used
  #  outside of J1 Template!
-  # -----------------------------------------------------------------------------
+ # -----------------------------------------------------------------------------
 */
 'use strict';
 

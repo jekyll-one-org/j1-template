@@ -66,16 +66,7 @@
     this.settings = $.extend({}, $.fn.bootstrapThemeSwitcher.defaults, options);
     this.themesList = [];
 
-    // $.when (
-    //   this.getThemes()
-    // )
-    // .then(function(data) {
-    //   logger.info('loading local themes (json) finished');
-    // })
-    // .catch(function(error) {
-    //   logger.error('loading local themes (json) failed: ' + error);
-    // });
-
+    // loading local themes
     this.getThemes();
     return this;
   };
@@ -98,9 +89,9 @@
     //  checkStyleSheetByName
     // -------------------------------------------------------------------------
     checkStyleSheetByName: function (name) {
-      var found  = false;
-      var test = '\/' + name + '\/';
-      var re     = new RegExp(test, 'i');
+      var found   = false;
+      var test    = '\/' + name + '\/';
+      var re      = new RegExp(test, 'i');
 
       for(var i = 0; i < document.styleSheets.length; i++){
         if(re.test(document.styleSheets[i].href)){
@@ -131,29 +122,26 @@
       var debug             = settings.debug;
       var includeCSS        = this.settings.includeBootswatch;
 
-      // Detect|Set J1 UserState
+      // detect|set user state cookie
       user_state_detected = j1.existsCookie ( 'j1.user.state' );
       if ( user_state_detected ) {
-        logger.debug('user state cookie found');
+        logger.debug('cookie found: j1.user.state');
         j1_user_state = j1.readCookie(user_state_cookie_name);
       } else {
-        logger.error('user state NOT cookie found');
+        logger.error('cookie not found: j1.user.state');
       }
 
       themeName           = j1_user_state.theme_name;
       theme_css           = j1_user_state.theme_css;
-      theme_extension_css = j1_user_state.theme_extension_css;
 
-      if ( cssFile === undefined ) { cssFile = this.settings.defaultCssFile; }
-      if ( name === undefined ) { name = cssFile; }
-      // Clear 'includeCSS' if NO theme extension CSS is needed
-      if ( name === this.settings.skipIncludeBootswatch ) { includeCSS = ''; }
+      if (typeof cssFile === 'undefined') { cssFile = this.settings.defaultCssFile; }
+      if (typeof name === 'undefined') { name = cssFile; }
 
       // check if theme is to be saved to cookie
-      if ( settings.saveToCookie ) {
-        if ( Cookies === undefined ) {
+      if (settings.saveToCookie) {
+        if ( typeof Cookies === 'undefined' ) {
           if ( debug === 'true' ) {
-            logger.error('saveToCookie is set to true but Cookies library is not present');
+            logger.error('cookies library not present');
           }
           return false;
         }
@@ -162,17 +150,18 @@
         j1_user_state.theme_css   = cssFile;
 
         if (!(j1_user_state.theme_name.includes('Uno') || j1_user_state.theme_name == 'Bootstrap')) {
-          j1_user_state.theme_author = 'Bootswatch';
-          j1_user_state.theme_author_url   = 'https://bootswatch.com/';
+          j1_user_state.theme_author        = 'Bootswatch';
+          j1_user_state.theme_author_url    = 'https://bootswatch.com/';
         } else {
-          j1_user_state.theme_author = 'J1 Team';
-          j1_user_state.theme_author_url   = 'https://jekyll.one/';
+          j1_user_state.theme_author        = 'J1 Team';
+          j1_user_state.theme_author_url    = 'https://jekyll.one/';
         }
 
         j1.writeCookie({
           name: user_state_cookie_name,
           data: j1_user_state
         });
+
         // force reload the page from the server (skip cache)
         // and detect selected theme from cookie
         location.reload(true);
@@ -188,20 +177,21 @@
     // -------------------------------------------------------------------------
     loadThemeFromCookie: function (options) {
 
-      if ( Cookies === undefined ) {
-        logger.error('loadThemeFromCookie was called but Cookies library is not present');
+      if ( typeof Cookies === 'undefined' ) {
+        logger.error('cookies library not present');
         return false;
       }
 
       var settings = $.extend({}, $.fn.bootstrapThemeSwitcher.defaults, options);
 
-      // Detect|Set J1 UserState
+      // detect|set user state cookie
       user_state_detected = j1.existsCookie ( 'j1.user.state' );
+
       if ( user_state_detected ) {
-        logger.info('User state cookie found');
+        logger.info('cookie found: j1.user.state');
         j1_user_state = j1.readCookie(user_state_cookie_name);
       } else {
-        logger.error('User state NOT cookie found');
+        logger.error('cookie not found: j1.user.state');
       }
 
       var themeName = j1_user_state.theme_name;
@@ -214,8 +204,8 @@
     //  addTheme
     // -------------------------------------------------------------------------
     addTheme: function(name, cssFile, start, deleteCount) {
-      if (start === undefined) { start = 0; }
-      if (deleteCount === undefined) { deleteCount = 0; }
+      if (typeof start === 'undefined') { start = 0; }
+      if (typeof deleteCount === 'undefined') { deleteCount = 0; }
       this.themesList.splice(start, deleteCount, {name: name, css: cssFile});
       this.addThemesToControl();
     }, // END addTheme
@@ -224,11 +214,11 @@
     //  addThemesToControl
     // -------------------------------------------------------------------------
     addThemesToControl: function() {
-      if (this.$element === undefined) {
+      if (typeof this.$element === 'undefined') {
         logger.error('bootstrapThemeSelector|addThemesToControl: Element is undefined');
         return false;
       }
-      if (this.themesList === undefined) {
+      if (typeof this.themesList === 'undefined') {
         logger.error('bootstrapThemeSelector|addThemesToControl: Themes is undefined');
         return false;
       }
@@ -264,7 +254,7 @@
         var themeName;
         var debug             = settings.debug;
 
-        // Detect|Set J1 UserState
+        // detect|set user state cookie
         user_state_detected = j1.existsCookie ( 'j1.user.state' );
         if ( user_state_detected ) {
           logger.debug('User state cookie found');
@@ -308,7 +298,7 @@
                 } else {
                   base.switchTheme(value.name, value.cssCdn);
                 }
-                //Remove previous "active" class and apply to latest clicked element
+                // remove previous "active" class and apply to latest clicked element
                 $(this).parent().find('li').removeClass('active');
                 $(this).addClass('active');
               });
@@ -355,8 +345,6 @@
         $.ajax({
           url: this.settings.localFeed,
           // jadams 2016-10-10: removed the setting for sychronous XMLHttpRequest
-          // because deprecated by jQuery on the MAIN thread. Because the Theme Manager
-          // is initialized very early, no blocking (sychronous) AJAX call is needed
           // async: false,
           dataType: 'json',
           success: function (data) {
@@ -373,12 +361,10 @@
         $.ajax({
           url: this.settings.bootswatchApiUrl + '/' + this.settings.bootswatchApiVersion + '.json',
           // jadams 2016-10-10: removed the setting for sychronous XMLHttpRequest
-          // because deprecated by jQuery on the main thread. Because the Theme Manager
-          // is initialized very early, no blocking|sychronous AJAX call is needed
           // async: false,
           dataType: 'json',
           success: function (data) {
-            if (data.themes === undefined) {
+            if (typeof data.themes === 'undefined') {
               return null;
             }
             base.themesList = data.themes;
@@ -393,7 +379,7 @@
     //  themes
     // -------------------------------------------------------------------------
     themes : function (newThemeList) {
-      if (newThemeList === undefined) {
+      if (typeof newThemeList === 'undefined') {
         return this.themesList;
       }
       else {
@@ -419,7 +405,7 @@
     if (typeof option === 'string') {
       methodReturn = data[ option ].apply(data, args);
     }
-    return ( methodReturn === undefined ) ? $this : methodReturn;
+    return ( typeof methodReturn === 'undefined' ) ? $this : methodReturn;
   };
 
   $.fn.bootstrapThemeSwitcher.defaults = {
@@ -430,7 +416,7 @@
     cookieThemeCss:         'boostrapTheme.css',
     cookieExpiration:       365,
     cookiePath:             '/',
-    defaultCssFile:         'https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css',
+    defaultCssFile:         'https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css',
     bootswatchApiUrl:       'https://bootswatch.com/api/',
     bootswatchApiVersion:   '4',
     loadFromBootswatch:     true,

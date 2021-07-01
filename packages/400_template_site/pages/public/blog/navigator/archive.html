@@ -145,10 +145,11 @@ resource_options:
     var user_state                  = j1.readCookie(user_state_cookie_name);
     var user_state_last_page        = "{{browser_page_url}}";
     user_state.last_page            = user_state_last_page;
-//  j1.setUserState( {last_page:user_state_last_page} );
+
     j1.writeCookie({
       name: user_state_cookie_name,
-      data: user_state
+      data: user_state,
+      samesite: 'Strict'
     });
     logger.info('Saved current Post Browser page to cookie: {{browser_page_url}}');
   }

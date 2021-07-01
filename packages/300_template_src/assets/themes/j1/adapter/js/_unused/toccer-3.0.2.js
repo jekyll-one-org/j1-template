@@ -122,17 +122,17 @@ j1.adapter['toccer'] = (function () {
       var  isToc = (options.toc === 'true');
       var  isComments = (options.comments === 'true');
 
-      if (settings.collapseDepth === undefined) {
+      if (typeof settings.collapseDepth === 'undefined') {
         settings.collapseDepth = {{toccer_options.collapseDepth}};
       }
 
-      if (settings.headingsOffset === undefined) {
+      if (typeof settings.headingsOffset === 'undefined') {
         settings.scrollOffset = {{toccer_options.smoothScrollOffset}};
       } else {
         settings.scrollOffset = settings.headingsOffset
       }
 
-      if (settings.enabled === undefined) {
+      if (typeof settings.enabled === 'undefined') {
         settings.enabled = true;
       }
 

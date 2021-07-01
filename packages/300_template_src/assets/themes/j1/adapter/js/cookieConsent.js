@@ -202,28 +202,25 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
 
     // -------------------------------------------------------------------------
     // cbCookie()
-    // Callback function called by CookieConsent module after the user has
-    // made his selection
-    // -------------------------------------------------------------------------
-    // TODO:
-    // If ONLY required setting selected, make j1.user.consent
-    // a SESSION cookie!!!
+    // Called by CookieConsent module after the user has
+    // made his selection (callback)
     // -------------------------------------------------------------------------
     cbCookie: function () {
       var gaCookies     = j1.findCookie('_ga');
-      var user_cookie   = j1.readCookie('j1.user.consent');
-      var json          = JSON.stringify(user_cookie);
+      var user_state    = j1.readCookie('j1.user.state');
+      var user_consent  = j1.readCookie('j1.user.consent');
+      var json          = JSON.stringify(user_consent);
 
       logger.info('Entered post selection callback from CookieConsent');
       logger.info('Current values from CookieConsent: ' + json);
 
+      // for debugging
       // gaCookies.forEach(item => console.log('cookieConsent: ' + item));
 
       // Manage Google Analytics OptIn/Out
       // See: https://github.com/luciomartinez/gtag-opt-in/wiki
-      //
       GTagOptIn.register('{{tracking_id}}');
-      if (user_cookie.analyses)  {
+      if (user_consent.analyses)  {
         logger.info('Enable: GA');
         GTagOptIn.optIn();
       } else {
@@ -240,14 +237,25 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       }
 
       // enable cookie button if not visible
-      //
       if ($('#quickLinksCookieButton').css('display') === 'none')  {
         $('#quickLinksCookieButton').css('display', 'block');
       }
 
+      if (!user_consent.analyses || !user_consent.personalization)  {
+        // expire consent|state cookies to session
+        j1.writeCookie({
+          name:     'j1.user.state',
+          data:     user_state,
+          samesite: 'Strict'
+        });
+        j1.writeCookie({
+          name:     'j1.user.consent',
+          data:     user_consent,
+          samesite: 'Strict'
+        });
+      }
+
       // reload page after selection
-      //
-      // $('#no_flicker').css('display', 'none');
       location.reload();
 
     } // END cbCookie

@@ -140,6 +140,7 @@ cookies:
   app_session:                          j1.app.session
   user_session:                         j1.user.session
   user_state:                           j1.user.state
+  user_consent:                         j1.user.consent
 
 
 # ==============================================================================
