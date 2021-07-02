@@ -184,10 +184,11 @@ j1.adapter['themer'] = (function (j1, window) {
 
       // store if theme_switcher is enabled
       user_state.theme_switcher = themerOptions.enabled;
+
       if (!user_consent.analyses || !user_consent.personalization)  {
-        // expire consent|state cookies to session
+        // expire state cookie to session
         j1.writeCookie({
-          name:     cookie_names.user_consent,
+          name:     cookie_names.user_state,
           data:     user_state,
           samesite: 'Strict'
         });
@@ -199,6 +200,7 @@ j1.adapter['themer'] = (function (j1, window) {
           expires:  365
         });
       }
+
       // jadams, 2021-01-03: dependency has to be checked in more detail
       var dependencies_met_j1_finished = setInterval (function () {
         if (j1.getState() == 'finished') {

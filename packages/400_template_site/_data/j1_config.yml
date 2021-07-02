@@ -409,7 +409,7 @@ analytics:
   provider:                             google
 
   google:
-    tracking_id:                        'G-8ZGNE0WE42'                          # '<your-tracking_id>'
+    tracking_id:                        'G-8ZGNE0WE42'                          # '<your-tracking-id>'
 
   custom:
     custom_data:

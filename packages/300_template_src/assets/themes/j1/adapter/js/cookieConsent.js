@@ -34,6 +34,7 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign consent_defaults    = modules.defaults.cookieconsent.defaults %}
 {% assign consent_settings    = modules.cookieconsent.settings %}
+{% assign tracking_enabled    = site.data.j1_config.analytics.enabled %}
 {% assign tracking_id         = site.data.j1_config.analytics.google.tracking_id %}
 
 {% comment %} Set config options
@@ -78,13 +79,20 @@ regenerate:                             true
 --------------------------------------------------------------- {% endcomment %}
 j1.adapter['cookieConsent'] = (function (j1, window) {
 
-  var environment   = '{{environment}}';
-  var moduleOptions = {};
+  var environment       = '{{environment}}';
+  var tracking_enabled  = ('{{tracking_enabled}}' === 'true') ? true: false;
+  var tracking_id       = '{{tracking_id}}';
+  var tracking_id_valid = (tracking_id.includes('tracking-id')) ? false : true;
+  var moduleOptions     = {};
   var _this;
   var $modal;
   var user_cookie;
   var logger;
   var logText;
+
+  // NOTE: RegEx for tracking_id: ^(G|UA|YT|MO)-[a-zA-Z0-9-]+$
+  // See: https://stackoverflow.com/questions/20411767/how-to-validate-google-analytics-tracking-id-using-a-javascript-function/20412153
+
   // ---------------------------------------------------------------------------
   // Helper functions
   // ---------------------------------------------------------------------------
@@ -214,27 +222,37 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       logger.info('Entered post selection callback from CookieConsent');
       logger.info('Current values from CookieConsent: ' + json);
 
+      // NOTE: Warning needs to be moved to another module
+      // because page is reloaded after selection
+      //
+      if (tracking_enabled && !tracking_id_valid) {
+        logger.warn('tracking enabled, but invalid tracking id found: ' + tracking_id);
+      }
+
       // for debugging
       // gaCookies.forEach(item => console.log('cookieConsent: ' + item));
 
       // Manage Google Analytics OptIn/Out
       // See: https://github.com/luciomartinez/gtag-opt-in/wiki
-      GTagOptIn.register('{{tracking_id}}');
-      if (user_consent.analyses)  {
-        logger.info('Enable: GA');
-        GTagOptIn.optIn();
-      } else {
-        logger.warn('Disable: GA');
-        GTagOptIn.optOut();
-        var gaCookies = j1.findCookie('_ga');
-        gaCookies.forEach(function (item) {
-          logger.warn('Delete GA cookie: ' + item);
-          j1.removeCookie({
-            name: item,
-            path: '/'
+      if (tracking_enabled && tracking_id_valid) {
+        GTagOptIn.register(tracking_id);
+        if (user_consent.analyses)  {
+          logger.info('Enable: GA');
+          GTagOptIn.optIn();
+        } else {
+          logger.warn('Disable: GA');
+          GTagOptIn.optOut();
+          var gaCookies = j1.findCookie('_ga');
+          gaCookies.forEach(function (item) {
+            logger.warn('Delete GA cookie: ' + item);
+            j1.removeCookie({
+              name: item,
+              path: '/'
+            });
           });
-        });
+        }
       }
+
 
       // enable cookie button if not visible
       if ($('#quickLinksCookieButton').css('display') === 'none')  {

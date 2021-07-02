@@ -130,8 +130,8 @@ var j1 = (function () {
   var app_detected;
   var user_session_detected;
 
-  // Connector settings
-  var translation_enabled       = {{template_config.translation.enabled}};
+  // Translatior settings (currently NOT supported)
+  // var translation_enabled       = {{template_config.translation.enabled}};
 
   // Theme information
   var themeName;
@@ -183,40 +183,11 @@ var j1 = (function () {
     'last_pager':           '/pages/public/blog/navigator/'
   };
 
-  // user STATE cookie (initial values)
-  // var user_state = {
-  //   'theme_css':            "",
-  //   'theme_name':           "",
-  //   'theme_author':         "",
-  //   'theme_version':        '{{site.version}}',
-  //   'cookies_accepted':     'pending',
-  //   'whitelistedPages':     default_white_listed_pages,
-  //   'deleteOnDecline':      false,
-  //   'showConsentOnPending': false,
-  //   'stopScrolling':        true,
-  //   'session_active':       false,
-  //   'last_session_ts':      '',
-  //   'cc_authenticated':     false
-  // };
-
-  // var user_state = {
-  //   'environment':          '{{environment}}',
-  //   'theme_css':            '',
-  //   'theme_name':           '',
-  //   'theme_author':         '',
-  //   'cssExtension':         cssExtension,
-  //   'theme_version':        '{{site.version}}',
-  //   'stopScrolling':        true,
-  //   'session_active':       false,
-  //   'last_session_ts':      ''
-  // };
-
   var user_state = {
     'theme_css':            '',
     'theme_name':           '',
     'theme_author':         '',
     'theme_version':        '{{site.version}}',
-    'stopScrolling':        true,
     'session_active':       false,
     'last_session_ts':      ''
   };
@@ -227,9 +198,9 @@ var j1 = (function () {
   // helper functions
   // ---------------------------------------------------------------------------
 
+  // See: https://stackoverflow.com/questions/359788/how-to-execute-a-javascript-function-when-i-have-its-name-as-a-string
+  //
   function executeFunctionByName(functionName, context /*, args */) {
-    // See: https://stackoverflow.com/questions/359788/how-to-execute-a-javascript-function-when-i-have-its-name-as-a-string
-    //
     var args = Array.prototype.slice.call(arguments, 2);
     var namespaces = functionName.split('.');
     var func = namespaces.pop();
@@ -246,7 +217,6 @@ var j1 = (function () {
 
     // -------------------------------------------------------------------------
     // init()
-    // initializer
     // -------------------------------------------------------------------------
     init: function (options) {
 
@@ -256,15 +226,9 @@ var j1 = (function () {
       var logger        = log4javascript.getLogger('j1.init');
       var url           = new liteURL(window.location.href);
       var baseUrl       = url.origin;
-//    moment not used anymore
-//    var epoch         = Math.floor(Date.now()/1000);
-//    var timestamp_now = moment.unix(epoch).format('YYYY-MM-DD HH:mm:ss');
       var date          = new Date();
       var timestamp_now = date.toISOString();
       var curr_state    = 'started';
-      // var date          = new Date();
-      // var my_timestamp  = date.toISOString();
-
 
       // -----------------------------------------------------------------------
       // options loader
@@ -305,6 +269,11 @@ var j1 = (function () {
           // expire consent|state cookies to session
           j1.writeCookie({
             name:     cookie_names.user_consent,
+            data:     user_state,
+            samesite: 'Strict'
+          });
+          j1.writeCookie({
+            name:     cookie_names.user_state,
             data:     user_state,
             samesite: 'Strict'
           });
@@ -363,7 +332,6 @@ var j1 = (function () {
 
       // detect middleware (mode 'app') and update user session cookie
       // -----------------------------------------------------------------------
-      // if (user_session.mode === 'na' || user_session.mode === 'app') {
       if (user_session.mode === 'app') {
         var url           = new liteURL(window.location.href);
         var ep_status     = baseUrl + '/status' + '?page=' + window.location.pathname;
@@ -371,7 +339,7 @@ var j1 = (function () {
 
         baseUrl = url.origin;
 
-        // see: https://stackoverflow.com/questions/3709597/wait-until-all-jquery-ajax-requests-are-done
+        // See: https://stackoverflow.com/questions/3709597/wait-until-all-jquery-ajax-requests-are-done
         $.when (
           $.ajax(ep_status)
         )
@@ -441,10 +409,6 @@ var j1 = (function () {
         logger.info('state: ' + state);
         logger.info('page is being initialized');
       }
-
-      // jadams: for testing only
-      // display page
-      // $('#no_flicker').css('display', 'block');
 
       state = 'started';
       logger.info('state: ' + state);
@@ -614,7 +578,6 @@ var j1 = (function () {
           if (selector.length) {
             logText = 'loading banner on id: ' +banner[i];
             logger.info(logText);
-//          var banner_data_path = '{{banner_data_path}} ' + id + ' > *';
             var banner_data_path = '{{banner_data_path}} ' + id;
             selector.load(banner_data_path, cb_load_closure(id));
           }
@@ -718,7 +681,6 @@ var j1 = (function () {
           if ( selector.length ) {
             logText = 'loading panel on id: ' +panel[i];
             logger.info(logText);
-//          var panel_data_path = '{{panel_data_path}} ' + id + ' > *';
             var panel_data_path = '{{panel_data_path}} ' + id;
             selector.load(panel_data_path, cb_load_closure(id));
           }
@@ -752,12 +714,6 @@ var j1 = (function () {
             j1.setXhrDataState(footer_id, statusTxt);
             j1.setXhrDomState(footer_id, statusTxt);
             logger.info('XHR data loaded in the DOM: ' + footer_id);
-
-            // jadams, 2020-07-21: intermediate state DISABLED
-            // state = 'footer_loaded';
-            // logger.info('set state for module ' + mod + ': ' + state);
-            // executeFunctionByName(mod + '.setState', window, state);
-
             logText = 'initialization finished';
             logger.info(logText);
           }
@@ -779,7 +735,6 @@ var j1 = (function () {
       var id = '#' + '{{footer_id}}';
       var selector = $(id);
       if ( selector.length ) {
-//      var footer_data_path = '{{footer_data_path}} ' + id + ' > *';
         var footer_data_path = '{{footer_data_path}} ' + id;
         selector.load(footer_data_path, cb_load_closure(id));
       } else {
@@ -879,14 +834,14 @@ var j1 = (function () {
               $('#quickLinksCookieButton').css('display', 'none');
             }
 
-            // show|hide translator icon
-            if (translation_enabled) {
-              logger.info('translator detected: google');
-              logger.info('initialize language selector');
-              $('.goog-te-combo').addClass('form-control');
-            }
+            // show|hide translator icon (currently NOT supported)
+            // if (translation_enabled) {
+            //   logger.info('translator detected: google');
+            //   logger.info('initialize language selector');
+            //   $('.goog-te-combo').addClass('form-control');
+            // }
 
-            // show cc icon
+            // show cc icon (currently NOT supported)
             // $('#quickLinksControlCenterButton').css('display', 'block');
 
             if (j1.authEnabled()) {
@@ -954,14 +909,17 @@ var j1 = (function () {
               samesite: 'Strict'
           });
 
-          // show|hide translator icon
-          if (translation_enabled) {
-            logger.info('translator detected: google');
-            logger.info('initialize language selector');
-            $('.goog-te-combo').addClass('form-control');
-          }
+          // show|hide translator icon (currently NOT supported)
+          // if (translation_enabled) {
+          //   logger.info('translator detected: google');
+          //   logger.info('initialize language selector');
+          //   $('.goog-te-combo').addClass('form-control');
+          // }
 
-          // show|hide cookie icon (should MOVED to Cookiebar ???)
+          // show cc icon (currently NOT supported)
+          // $('#quickLinksControlCenterButton').css('display', 'block');
+
+          // show|hide cookie icon
           if (j1.existsCookie(cookie_names.user_consent)) {
             // Display cookie icon
             logText = 'show cookie icon';
@@ -975,7 +933,7 @@ var j1 = (function () {
           }
 
           // If the page requested contains an anchor element,
-          // do a smooth scroll to
+          // do a smooth scroll
           j1.scrollTo();
 
           if (user_session.previous_page !== user_session.current_page) {
@@ -1068,7 +1026,6 @@ var j1 = (function () {
       var toccerScrollOffset   = {{toccer_options.scrollSmoothOffset}};
 
       // calculate offset for correct (smooth) scroll position
-      //
       var $pagehead       = $('.attic');
       var $navbar         = $('nav.navbar');
       var $adblock        = $('#adblock');
@@ -1086,7 +1043,6 @@ var j1 = (function () {
       var scrollOffset    = navbarType == 'fixed' ? -1*(n + a + l) : -1*(h + n + a + l);
 
       // static offset, to be checked why this is needed
-      //
       scrollOffset        = scrollOffset + toccerScrollOffset;
 
       if (anchor_id && anchor_id !== '#') {
@@ -1166,11 +1122,6 @@ var j1 = (function () {
         return function (responseTxt, statusTxt, xhr) {
           var logger = log4javascript.getLogger('j1.adapter.xhrData');
           if ( statusTxt === 'success' ) {
-            // jadams, 2020-07-21: intermediate state should DISABLED
-            // if (state) {
-            //   logger.info('set state for ' +mod+ ' to: ' + state);
-            //   executeFunctionByName(mod + '.setState', window, state);
-            // }
             j1.setXhrDataState(id, statusTxt);
             j1.setXhrDomState(id, 'pending');
 
@@ -1719,12 +1670,6 @@ var j1 = (function () {
       // -----------------------------------------------------------------------
       $('head').append('<style>.g-bg-primary { background-color: ' +bg_primary+ ' !important; }</style>');
 
-      // Set color of timeline bullet
-      // -----------------------------------------------------------------------
-      // $('head').append('<style>.tmicon { background: ' +bg_primary+ ' !important; }</style>');
-      // $('head').append('<style>.timeline-panel:after { border-left-color: ' +bg_primary+ ' !important; }</style>');
-      // $('head').append('<style>.timeline-panel:after { border-right-color: ' +bg_primary+ ' !important; }</style>');
-
       // mdi icons
       // -----------------------------------------------------------------------
       $('head').append('<style>.iconify-md-bg-primary { color: ' +bg_primary+ ' !important; }</style>');
@@ -1865,7 +1810,7 @@ var j1 = (function () {
      for ( var i = 0; i < length; i++ ) {
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
      }
-   return result;
+     return result;
     }, // END generateId
 
     // -------------------------------------------------------------------------
@@ -1912,9 +1857,19 @@ var j1 = (function () {
   }; // END j1 (return)
 }) (j1, window);
 
-{% endcapture %}
+{% comment %} NOTE: Unexpected token: punc (;) errors if compressed
+--------------------------------------------------------------------------------
 {% if production %}
   {{ cache | minifyJS }}
+{% else %}
+  {{ cache | strip_empty_lines }}
+{% endif %}
+{% assign cache = nil %}
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% endcapture %}
+{% if production %}
+  {{ cache | strip_empty_lines }}
 {% else %}
   {{ cache | strip_empty_lines }}
 {% endif %}

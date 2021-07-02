@@ -15,8 +15,6 @@ Gemfile
 
 Gemfile.lock
 
-google*.html
-
 tmp/
 
 \.bundle/
