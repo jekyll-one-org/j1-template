@@ -299,6 +299,7 @@ j1.adapter['navigator'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       // data loader
       // -----------------------------------------------------------------------
+
       j1.xhrData({
         xhr_container_id:   navQuicklinksOptions.xhr_container_id,
         xhr_data_path:      navQuicklinksOptions.xhr_data_path,
@@ -319,10 +320,22 @@ j1.adapter['navigator'] = (function (j1, window) {
         'data_loaded');
 
         var dependencies_met_load_menu_finished = setInterval (function () {
-  	      if (j1.xhrDOMState['#'+navQuicklinksOptions.xhr_container_id] === 'success' &&
-            j1.xhrDOMState['#'+navAuthClientConfig.xhr_container_id] === 'success' &&
-            j1.xhrDOMState['#'+navMenuOptions.xhr_container_id] === 'success' ) {
-            // continue if all AJAX loads (xhrData) has finished
+          if (j1.xhrDOMState['#'+navQuicklinksOptions.xhr_container_id] == 'not loaded' ||
+              j1.xhrDOMState['#'+navAuthClientConfig.xhr_container_id] == 'not loaded' ||
+              j1.xhrDOMState['#'+navMenuOptions.xhr_container_id] == 'not loaded')
+          {
+  		      // load HTML data (AJAX) failed
+            logger.error('load HTML data (AJAX): failed');
+            _this.setState('finished');
+            logger.info('state: ' + _this.getState());
+            logger.info('initializing module: failed');
+            logger.info('met dependencies for: xhrData');
+            clearInterval(dependencies_met_load_menu_finished);
+          } else if (j1.xhrDOMState['#'+navQuicklinksOptions.xhr_container_id] == 'success' &&
+            j1.xhrDOMState['#'+navAuthClientConfig.xhr_container_id] == 'success' &&
+            j1.xhrDOMState['#'+navMenuOptions.xhr_container_id] == 'success' )
+          {
+  		      // AJAX loads (xhrData) has finished successfully
             _this.setState('processing');
             logger.info('status: ' + _this.getState());
             logger.info('initialize navigator core');
@@ -334,8 +347,9 @@ j1.adapter['navigator'] = (function (j1, window) {
 
             j1.core.navigator.init (_this.navDefaults, _this.navMenuOptions);
 
-            // load themes (to menu) if themer is enabled|finished
+            // load themes (to menu) if themer is enabled
             if (themerEnabled) {
+
               logText = 'theme switcher: enabled';
               logger.info(logText);
 
@@ -345,117 +359,113 @@ j1.adapter['navigator'] = (function (j1, window) {
                 user_state        = j1.readCookie(cookie_user_state_name);
               }
 
-              // jadams, 2021-07-03: wait until navigator CORE get finished
-              var dependencies_met_page_finished = setInterval(function() {
-                if (j1.adapter.navigator.getState() == 'core_initialized') {
-                  logText = 'load themes';
-                  logger.info(logText);
+        			logText = 'load themes';
+        			logger.info(logText);
 
-                  // load LOCAL themes from JSON data
-                  logText = 'load local themes (json file)';
-                  logger.info(logText);
-                  $('#local_themes').bootstrapThemeSwitcher({
-                    localFeed: themerOptions.localThemes
-                  });
+        			// load LOCAL themes from JSON data
+        			logText = 'load local themes (json file)';
+        			logger.info(logText);
+        			$('#local_themes').bootstrapThemeSwitcher({
+        			  localFeed: themerOptions.localThemes
+        			});
 
-                  // load REMOTE themes from Bootswatch API (localFeed EMPTY!)
-                  $('#remote_themes').bootstrapThemeSwitcher({
-                    localFeed: '',
-                    bootswatchApiVersion: themerOptions.bootswatchApiVersion
-                  });
+        			// load REMOTE themes from Bootswatch API (localFeed EMPTY!)
+        			$('#remote_themes').bootstrapThemeSwitcher({
+        			  localFeed: '',
+        			  bootswatchApiVersion: themerOptions.bootswatchApiVersion
+        			});
 
-                  // jadams, 2021-04-22: Up to now, it is unclear why in some
-                  // cases the menu bar is NOT fully loaded for THEMES
-                  // TODO: Add additional checks to find the reason
+        			// jadams, 2021-04-22: Up to now, it is unclear why in some
+        			// cases the menu bar is NOT fully loaded for THEMES
+        			// TODO: Add additional checks to find the reason
+        			var dependencies_met_remote_themes_loaded = setInterval(function() {
+                // jadams, 2021-07-03: check for themer get finished loading
+        			  interval_count += 1;
+        			  themes_count = document.getElementById("remote_themes").getElementsByTagName("li").length;
+        			  if ( themes_count > 0  ) {
+        				logger.info('remote themes loaded: successfully');
+        				logger.info('remote themes loaded: successfully after: ' + interval_count * 25 + ' ms');
 
-                  // added same checks (as already done by adapter themer) to
-                  // check if remote theme menu detected as LOADED
-                  //
-                  var dependencies_met_remote_themes_loaded = setInterval(function() {
-                    interval_count += 1;
-                    themes_count = document.getElementById("remote_themes").getElementsByTagName("li").length;
-                    if ( themes_count > 0  ) {
-                      logger.info('remote themes loaded: successfully');
-                      logger.info('remote themes loaded: successfully after: ' + interval_count * 25 + ' ms');
-
-                      clearInterval(dependencies_met_remote_themes_loaded);
-                    } else {
-                        logger.debug('wait for theme to be loaded: ' + user_state.theme_name);
-                    }
-                    if (interval_count > max_count) {
-                      logger.warn('remote themes loading: failed');
-                      logger.warn('continue processing');
-                      clearInterval(dependencies_met_remote_themes_loaded);
-                    }
-                    clearInterval(dependencies_met_page_finished);
-                  }, 25);
-                }
-                _this.setState('initialized');
-              }, 25); // END 'dependencies_met_page_finished'
+        				clearInterval(dependencies_met_remote_themes_loaded);
+        			  } else {
+        				  logger.debug('wait for theme to be loaded: ' + user_state.theme_name);
+        			  }
+        			  if (interval_count > max_count) {
+        				logger.warn('remote themes loading: failed');
+        				logger.warn('continue processing');
+        				clearInterval(dependencies_met_remote_themes_loaded);
+        			  }
+        			  clearInterval(dependencies_met_page_finished);
+        			}, 25);	// END dependencies_met_remote_themes_loaded
             } else {
-              logText = 'theme switcher detected as: disabled';
-              logger.info(logText);
-            }
+              logger.info('theme switcher detected as: disabled');
+            } // END if themerEnabled
 
-            // -----------------------------------------------------------------
+            // -------------------------------------------------------------------
             // event handler|css styles
-            // -----------------------------------------------------------------
-            // continue if themer|navigator are INITIALIZED
-            var dependencies_met_initialized = setInterval(function() {
-              if (themerEnabled) {
-                if (j1.adapter.navigator.getState() === 'initialized') {
-                  _this.setState('processing');
+            // -------------------------------------------------------------------
+            // jadams, 2021-07-03: unclear why to wait for the themer ???
+            // continue to apply the theme CSS
+      			if (themerEnabled) {
+      				_this.setState('processing');
 
-                  // set general|global theme colors
-                  logger.info('initializing dynamic CSS styles');
-                  _this.setCSS (
-                    navDefaults, navBarOptions, navMenuOptions,
-                    navQuicklinksOptions, navTopsearchOptions
-                  );
+      				logger.info('initialize eventHandler');
+      				j1.core.navigator.eventHandler();
 
-                  logger.info('init auth client');
-                  _this.initAuthClient(_this.navAuthManagerConfig);
+      				logger.info('initializing dynamic CSS styles');
+      				_this.setCSS (
+      				  navDefaults, navBarOptions, navMenuOptions,
+      				  navQuicklinksOptions, navTopsearchOptions
+      				);
 
-                  _this.setState('finished');
-                  logger.info('state: ' + _this.getState());
-                  logger.info('module initialized successfully');
-                  logger.info('met dependencies for: j1');
-                  clearInterval(dependencies_met_initialized);
-                }
-              } else {
-                _this.setState('processing');
+      				logger.info('init auth client');
+      				_this.initAuthClient(_this.navAuthManagerConfig);
 
-                // set general|global theme colors
-                logger.info('apply dynamic CSS styles');
-                _this.setCSS (
-                  navDefaults, navBarOptions, navMenuOptions,
-                  navQuicklinksOptions, navTopsearchOptions
-                );
+      				_this.setState('finished');
+      				logger.info('state: ' + _this.getState());
+      				logger.info('module initialized successfully');
+      				logger.info('met dependencies for: j1');
+      				clearInterval(dependencies_met_themer_finished);
+      			} else {
+      			  _this.setState('processing');
 
-                logger.info('init auth client');
-                _this.initAuthClient(_this.navAuthManagerConfig);
-                _this.setState('finished');
-                logger.info('state: ' + _this.getState());
-                clearInterval(dependencies_met_initialized);
-              }
-            }, 25); // END 'dependencies_met_initialized'
-            logger.info('met dependencies for: themer');
+      			  logger.info('initialize eventHandler');
+      			  j1.core.navigator.eventHandler();
+
+      			  // set general|global theme colors
+      			  logger.info('apply dynamic CSS styles');
+      			  _this.setCSS (
+      				navDefaults, navBarOptions, navMenuOptions,
+      				navQuicklinksOptions, navTopsearchOptions
+      			  );
+
+      			  logger.info('init auth client');
+      			  _this.initAuthClient(_this.navAuthManagerConfig);
+      			  _this.setState('finished');
+      			  logger.info('state: ' + _this.getState());
+      			  clearInterval(dependencies_met_themer_finished);
+      			}
+          } else {
+  		      // load HTML data (AJAX) failed for unknown reason
+            logger.error('initializing module: failed for unlnown reason');
+            _this.setState('finished');
+            logger.info('state: ' + _this.getState());
             clearInterval(dependencies_met_load_menu_finished);
-          }
-        }, 25); // END 'dependencies_met_load_menu_finished'
+    		  }
+      }, 25); // END dependencies_met_load_menu_finished
 
-      // --------------------------------------------------------------------
+      // -----------------------------------------------------------------------
       // Register event 'reset on resize' to call j1.core.navigator on
       // manageDropdownMenu to manage the (current) NAV menu for
       // desktop or mobile
-      // ---------------------------------------------------------------------
+      // -----------------------------------------------------------------------
       $(window).on('resize', function() {
         j1.core.navigator.manageDropdownMenu(navDefaults, navMenuOptions);
 
         // jadams, 2020-07-10: cause severe trouble on mobile devices if
         // OnScreen Kbd comes up and reduces the window size (resize event)
         // DISABLED
-        // -------------------------------------------------------------------
+        // ---------------------------------------------------------------------
         // Hide|Close topSearch on resize event
         // $('.top-search').slideUp();
 
@@ -465,9 +475,16 @@ j1.adapter['navigator'] = (function (j1, window) {
         }, 500);
 
         // Scroll the page one pixel back and forth to get
-        // the right position for the toccer
+        // the right position for Toccer (trigger) and SSM
         $(window).scrollTop($(window).scrollTop()+1);
         $(window).scrollTop($(window).scrollTop()-1);
+
+        // jadams, 2020-06-21: unclear|forgotten what I'm doing here!
+        // Looks like the old BS3 implementation
+        //
+        // $('.navbar-collapse').removeClass('in');
+        // $('.navbar-collapse').removeClass('on');
+        // $('.navbar-collapse').removeClass('bounceIn');
       });
     }, // END init
 
@@ -637,19 +654,17 @@ j1.adapter['navigator'] = (function (j1, window) {
       var gridBreakpoint_sm   = '576px';
       var navPrimaryColor     = navDefaults.nav_primary_color;
 
-      logger.info('set dynamic styles for the theme loaded');
-
-      // Set|Resolve navMenuOptions
-      // ------------------------------------------------------------------------
+      {% comment %} Set|Resolve navMenuOptions
+      -------------------------------------------------------------------------- {% endcomment %}
       navMenuOptions.dropdown_font_size               = navMenuOptions.dropdown_font_size;
       navMenuOptions.megamenu_font_size               = navMenuOptions.megamenu_font_size;
 
-      // Set|Resolve navBarOptions
-      // -----------------------------------------------------------------------
+      {% comment %} Set|Resolve navBarOptions
+      -------------------------------------------------------------------------- {% endcomment %}
       navBarOptions.background_color_full             = navBarOptions.background_color_full;
 
-      // Set|Resolve navMenuOptions
-      // -----------------------------------------------------------------------
+      {% comment %} Set|Resolve navMenuOptions
+      -------------------------------------------------------------------------- {% endcomment %}
       navMenuOptions.menu_item_color                  = navMenuOptions.menu_item_color;
       navMenuOptions.menu_item_color_hover            = navMenuOptions.menu_item_color_hover;
       navMenuOptions.menu_item_dropdown_color         = navMenuOptions.menu_item_dropdown_color;
@@ -658,23 +673,24 @@ j1.adapter['navigator'] = (function (j1, window) {
       navMenuOptions.dropdown_background_color_active = navMenuOptions.dropdown_background_color_active;
       navMenuOptions.dropdown_border_color            = navMenuOptions.dropdown_border_color;
 
-      // Set|Resolve navQuicklinksOptions
-      // -----------------------------------------------------------------------
+      {% comment %} Set|Resolve navQuicklinksOptions
+      -------------------------------------------------------------------------- {% endcomment %}
       navQuicklinksOptions.icon_color                 = navQuicklinksOptions.icon_color;
       navQuicklinksOptions.icon_color_hover           = navQuicklinksOptions.icon_color_hover;
       navQuicklinksOptions.background_color           = navQuicklinksOptions.background_color;
 
-      // Set|Resolve navTopsearchOptions
-      // -----------------------------------------------------------------------
+      {% comment %} Set|Resolve navTopsearchOptions
+      -------------------------------------------------------------------------- {% endcomment %}
       navTopsearchOptions.input_color                 = navTopsearchOptions.input_color;
       navTopsearchOptions.background_color            = navTopsearchOptions.background_color;
 
-      // Set dymanic styles
-      // -----------------------------------------------------------------------
+      {% comment %} Set dymanic styles
+      -------------------------------------------------------------------------- {% endcomment %}
       // $('nav-primary').css({"background-color": "navPrimaryColor"});
 
-      // navBar styles
-      // -----------------------------------------------------------------------
+
+      {% comment %} navBar styles
+      -------------------------------------------------------------------------- {% endcomment %}
       var bg_primary    = j1.getStyleValue('bg-primary', 'background-color');
       var bg_scrolled   = bg_primary;
       var bg_collapsed  = bg_primary;
@@ -696,13 +712,13 @@ j1.adapter['navigator'] = (function (j1, window) {
       $('head').append('<style id="dynNav">@media (max-width: ' +gridBreakpoint_sm+ ') { nav.navbar.navigator.navbar-transparent.light { background-color: ' +navBarOptions.background_color_full+ ' !important; border-bottom: solid 0px !important; } }</style>');
       $('head').append('<style id="dynNav">@media (max-width: ' +gridBreakpoint_sm+ ') { nav.navbar.navigator.navbar-scrolled.light { background-color: ' +bg_scrolled+ ' !important; } }</style>');
 
-      // navQuicklinks styles
-      // -----------------------------------------------------------------------
+      {% comment %} navQuicklinks styles
+      -------------------------------------------------------------------------- {% endcomment %}
       $('head').append('<style>.attr-nav> ul > li > a { color: ' +navQuicklinksOptions.icon_color+ ' !important; }</style>');
       $('head').append('<style>.attr-nav> ul > li > a:hover { color: ' +navQuicklinksOptions.icon_color_hover+ ' !important; }</style>');
 
-      // navMenu styles
-      // -----------------------------------------------------------------------
+      {% comment %} navMenu styles
+      -------------------------------------------------------------------------- {% endcomment %}
       // Remove background for anchor
       $('head').append('<style>.dropdown-menu > .active > a { background-color: transparent !important; }</style>');
       // hover menu-item|menu-sub-item
@@ -731,40 +747,40 @@ j1.adapter['navigator'] = (function (j1, window) {
       $('head').append('<style>@media (min-width: ' +gridBreakpoint_lg+ ') { nav.navbar.navigator li.dropdown ul.dropdown-menu > li > a { color: ' +navMenuOptions.dropdown_item_color+ ' !important; font-size: ' +navMenuOptions.dropdown_font_size+ ' !important; font-weight: 400; } }</style>');
       $('head').append('<style>@media (min-width: ' +gridBreakpoint_lg+ ') { nav.navbar.navigator ul.dropdown-menu.megamenu-content .content ul.menu-col li a { color: ' +navMenuOptions.dropdown_item_color+ ' !important; font-size: ' +navMenuOptions.megamenu_font_size+ ' !important; font-weight: 400; } }</style>');
 
-      // navQuicklinks styles
-      // -----------------------------------------------------------------------
+      {% comment %} navQuicklinks styles
+      -------------------------------------------------------------------------- {% endcomment %}
 
-      // navTopSearch Styles
-      // -----------------------------------------------------------------------
-      // jadams, 2020-07-08: disabled because colors for icons set by the icon font settings
+      {% comment %} navTopSearch Styles
+      -------------------------------------------------------------------------- {% endcomment %}
+//    jadams, 2020-07-08: disabled because colors for icons set by the icon font settings
 //    $('head').append('<style>.top-search .input-group-addon { color: ' +navTopsearchOptions.input_color+ ' !important; }</style>');
       $('head').append('<style>.top-search { background-color: ' +navTopsearchOptions.background_color+ ' !important; }</style>');
       $('head').append('<style>.top-search input.form-control { color: ' +navTopsearchOptions.input_color+ ' !important; }</style>');
 
-      // Timeline styles
-      // -----------------------------------------------------------------------
+      {% comment %} Timeline styles
+      -------------------------------------------------------------------------- {% endcomment %}
   	  $('head').append('<style>.timeline > li > .timeline-panel:after {border-right-color: ' +bg_scrolled+ '; border-left-color: ' +bg_scrolled+ ';}</style>');
       $('head').append('<style>.tmicon {background: ' +bg_scrolled+ ';}</style>');
 
-      // Heading styles
-      // -----------------------------------------------------------------------
+      {% comment %} Heading styles
+      -------------------------------------------------------------------------- {% endcomment %}
       $('head').append('<style>.heading:after {background: ' +bg_scrolled+ ' !important;}</style>');
 
-      // Tag Cloud styles
-      // -----------------------------------------------------------------------
+      {% comment %} Tag Cloud styles
+      -------------------------------------------------------------------------- {% endcomment %}
       $('head').append('<style>.tag-cloud ul li a {background-color: ' +bg_scrolled+ ' !important;}</style>');
       // $('head').append('<style>.tag-cloud ul li a:hover {background-color: #212121 !important;}</style>');
 
-      // Toccer styles
-      // -----------------------------------------------------------------------
+      {% comment %} Toccer styles
+      -------------------------------------------------------------------------- {% endcomment %}
       $('head').append('<style>.is-active-link::before {background-color: ' +bg_scrolled+ ' !important;}</style>');
 
-      // BS extended Modal styles
-      // -----------------------------------------------------------------------
+      {% comment %} BS extended Modal styles
+      -------------------------------------------------------------------------- {% endcomment %}
       $('head').append('<style>.modal-dialog.modal-notify.modal-primary .modal-header {background-color: ' +bg_scrolled+ ';}</style>');
 
-      // BS nav|pills styles
-      // -----------------------------------------------------------------------
+      {% comment %} BS nav|pills styles
+      -------------------------------------------------------------------------- {% endcomment %}
       $('head').append('<style>.nav-pills .nav-link.active, .nav-pills .show > .nav-link {background-color: ' +bg_scrolled+ ' !important;}</style>');
 
       return true;
@@ -828,13 +844,9 @@ j1.adapter['navigator'] = (function (j1, window) {
     messageHandler: function (sender, message) {
       // var json_message = JSON.stringify(message, undefined, 2);              // multiline
       var json_message = JSON.stringify(message);
-      _this.setState(message.action);
 
       logText = 'received message from ' + sender + ': ' + json_message;
-      logger.info(logText);
-
-      logText = 'set state to: ' + message.action;
-      logger.info(logText);
+      logger.debug(logText);
 
       // -----------------------------------------------------------------------
       //  Process commands|actions

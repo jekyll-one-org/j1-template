@@ -318,131 +318,168 @@ j1.adapter['navigator'] = (function (j1, window) {
         'j1.adapter.navigator',
         'data_loaded');
 
-        var dependencies_met_load_menu_finished = setInterval (function () {
-  	      if (j1.xhrDOMState['#'+navQuicklinksOptions.xhr_container_id] === 'success' &&
+      var dependencies_met_load_menu_finished = setInterval (function () {
+        if (j1.xhrDOMState['#'+navQuicklinksOptions.xhr_container_id] === 'not loaded' ||
+            j1.xhrDOMState['#'+navAuthClientConfig.xhr_container_id] === 'not loaded' ||
+            j1.xhrDOMState['#'+navMenuOptions.xhr_container_id] === 'not loaded' ){
+          logger.error('load HTML data (AJAX): failed');
+          _this.setState('finished');
+          logger.info('state: ' + _this.getState());
+          logger.info('initializing module: failed');
+          logger.info('met dependencies for: xhrData');
+          clearInterval(dependencies_met_load_menu_finished);
+        } else if (j1.xhrDOMState['#'+navQuicklinksOptions.xhr_container_id] === 'success' &&
             j1.xhrDOMState['#'+navAuthClientConfig.xhr_container_id] === 'success' &&
             j1.xhrDOMState['#'+navMenuOptions.xhr_container_id] === 'success' ) {
-            // continue if all AJAX loads (xhrData) has finished
-            _this.setState('processing');
-            logger.info('status: ' + _this.getState());
-            logger.info('initialize navigator core');
+          // continue if all AJAX loads (xhrData) has finished
+          _this.setState('processing');
+          logger.info('status: ' + _this.getState());
+          logger.info('initialize navigator core');
 
-            // Detect|Set J1 App status
-            appDetected       = j1.appDetected();
-            authClientEnabled = j1.authEnabled();
-            logger.info('application status detected: ' + appDetected);
+          // Detect|Set J1 App status
+          appDetected       = j1.appDetected();
+          authClientEnabled = j1.authEnabled();
+          logger.info('application status detected: ' + appDetected);
 
-            j1.core.navigator.init (_this.navDefaults, _this.navMenuOptions);
+          j1.core.navigator.init (_this.navDefaults, _this.navMenuOptions);
 
-            // load themes (to menu) if themer is enabled|finished
-            if (themerEnabled) {
-              logText = 'theme switcher: enabled';
-              logger.info(logText);
+          // load themes (to menu) if themer is enabled|finished
+          if (themerEnabled) {
+            logText = 'theme switcher: enabled';
+            logger.info(logText);
 
-              // Detect|Set J1 UserState
-              user_state_detected = j1.existsCookie(cookie_user_state_name);
-              if (user_state_detected) {
-                user_state        = j1.readCookie(cookie_user_state_name);
-              }
-
-              // jadams, 2021-07-03: wait until navigator CORE get finished
-              var dependencies_met_page_finished = setInterval(function() {
-                if (j1.adapter.navigator.getState() == 'core_initialized') {
-                  logText = 'load themes';
-                  logger.info(logText);
-
-                  // load LOCAL themes from JSON data
-                  logText = 'load local themes (json file)';
-                  logger.info(logText);
-                  $('#local_themes').bootstrapThemeSwitcher({
-                    localFeed: themerOptions.localThemes
-                  });
-
-                  // load REMOTE themes from Bootswatch API (localFeed EMPTY!)
-                  $('#remote_themes').bootstrapThemeSwitcher({
-                    localFeed: '',
-                    bootswatchApiVersion: themerOptions.bootswatchApiVersion
-                  });
-
-                  // jadams, 2021-04-22: Up to now, it is unclear why in some
-                  // cases the menu bar is NOT fully loaded for THEMES
-                  // TODO: Add additional checks to find the reason
-
-                  // added same checks (as already done by adapter themer) to
-                  // check if remote theme menu detected as LOADED
-                  //
-                  var dependencies_met_remote_themes_loaded = setInterval(function() {
-                    interval_count += 1;
-                    themes_count = document.getElementById("remote_themes").getElementsByTagName("li").length;
-                    if ( themes_count > 0  ) {
-                      logger.info('remote themes loaded: successfully');
-                      logger.info('remote themes loaded: successfully after: ' + interval_count * 25 + ' ms');
-
-                      clearInterval(dependencies_met_remote_themes_loaded);
-                    } else {
-                        logger.debug('wait for theme to be loaded: ' + user_state.theme_name);
-                    }
-                    if (interval_count > max_count) {
-                      logger.warn('remote themes loading: failed');
-                      logger.warn('continue processing');
-                      clearInterval(dependencies_met_remote_themes_loaded);
-                    }
-                    clearInterval(dependencies_met_page_finished);
-                  }, 25);
-                }
-                _this.setState('initialized');
-              }, 25); // END 'dependencies_met_page_finished'
-            } else {
-              logText = 'theme switcher detected as: disabled';
-              logger.info(logText);
+            // Detect|Set J1 UserState
+            user_state_detected = j1.existsCookie(cookie_user_state_name);
+            if (user_state_detected) {
+              user_state        = j1.readCookie(cookie_user_state_name);
             }
 
-            // -----------------------------------------------------------------
-            // event handler|css styles
-            // -----------------------------------------------------------------
-            // continue if themer|navigator are INITIALIZED
-            var dependencies_met_initialized = setInterval(function() {
-              if (themerEnabled) {
-                if (j1.adapter.navigator.getState() === 'initialized') {
-                  _this.setState('processing');
+            var dependencies_met_page_finished = setInterval(function() {
+//            jadams, 2020-10-03: NOT needed to wait for j1 get finished
+//            if (j1.getState() == 'finished') {
+//            jadams, 2021-06-22: disabled check on themer get finished
+              if (j1.adapter.navigator.getState() == 'core_initialized') {
+//            if ('true' === 'true') {
+                // initialize theme switcher menus
 
-                  // set general|global theme colors
-                  logger.info('initializing dynamic CSS styles');
-                  _this.setCSS (
-                    navDefaults, navBarOptions, navMenuOptions,
-                    navQuicklinksOptions, navTopsearchOptions
-                  );
+                logText = 'load themes';
+                logger.info(logText);
 
-                  logger.info('init auth client');
-                  _this.initAuthClient(_this.navAuthManagerConfig);
+                // load LOCAL themes from JSON data
+                logText = 'load local themes (json file)';
+                logger.info(logText);
+                $('#local_themes').bootstrapThemeSwitcher({
+                  localFeed: themerOptions.localThemes
+                });
 
-                  _this.setState('finished');
-                  logger.info('state: ' + _this.getState());
-                  logger.info('module initialized successfully');
-                  logger.info('met dependencies for: j1');
-                  clearInterval(dependencies_met_initialized);
-                }
-              } else {
+                // load REMOTE themes from Bootswatch API (localFeed EMPTY!)
+                $('#remote_themes').bootstrapThemeSwitcher({
+                  localFeed: '',
+                  bootswatchApiVersion: themerOptions.bootswatchApiVersion
+                });
+
+                // jadams, 2021-04-22: Up to now, it is unclear why in some
+                // cases the menu bar is NOT fully loaded for THEMES
+                // TODO: Add additional checks to find the reason
+
+                // added same checks (as already done by adapter themer) to
+                // check if remote theme menu detected as LOADED
+                //
+                var dependencies_met_remote_themes_loaded = setInterval(function() {
+                  interval_count += 1;
+                  themes_count = document.getElementById("remote_themes").getElementsByTagName("li").length;
+                  if ( themes_count > 0  ) {
+                    logger.info('remote themes loaded: successfully');
+                    logger.info('remote themes loaded: successfully after: ' + interval_count * 25 + ' ms');
+
+                    clearInterval(dependencies_met_remote_themes_loaded);
+//                  clearInterval(dependencies_met_page_finished);
+                  } else {
+                      logger.debug('wait for theme to be loaded: ' + user_state.theme_name);
+                  }
+                  if (interval_count > max_count) {
+                    logger.warn('remote themes loading: failed');
+                    logger.warn('continue processing');
+                    clearInterval(dependencies_met_remote_themes_loaded);
+//                  clearInterval(dependencies_met_page_finished);
+                  }
+                  clearInterval(dependencies_met_page_finished);
+                }, 25);
+
+//              clearInterval(dependencies_met_page_finished);
+              }
+              _this.setState('initialized');
+            }, 25); // END 'dependencies_met_page_finished'
+          } else {
+            logText = 'theme switcher detected as: disabled';
+            logger.info(logText);
+          }
+
+          // -----------------------------------------------------------------
+          // event handler|css styles
+          // -----------------------------------------------------------------
+          // continue if Theme CSS is applied
+          var dependencies_met_themer_finished = setInterval(function() {
+            if (themerEnabled) {
+              if (j1.adapter.themer.getState() === 'finished') {
                 _this.setState('processing');
 
-                // set general|global theme colors
-                logger.info('apply dynamic CSS styles');
-                _this.setCSS (
-                  navDefaults, navBarOptions, navMenuOptions,
-                  navQuicklinksOptions, navTopsearchOptions
-                );
+                // logger.info('initialize eventHandler');
+                // j1.core.navigator.eventHandler();
+
+                var dependencies_met_page_finished = setInterval(function() {
+//                if (j1.getState() == 'finished') {
+                  if (true) {
+                    // set general|global theme colors
+                    logger.info('initializing dynamic CSS styles: started');
+                    _this.setCSS (
+                      navDefaults, navBarOptions, navMenuOptions,
+                      navQuicklinksOptions, navTopsearchOptions
+                    );
+                    clearInterval(dependencies_met_page_finished);
+                  }
+                  logger.info('initializing dynamic CSS styles: finished');
+                }, 25); // END 'dependencies_met_page_finished'
 
                 logger.info('init auth client');
                 _this.initAuthClient(_this.navAuthManagerConfig);
+
                 _this.setState('finished');
                 logger.info('state: ' + _this.getState());
-                clearInterval(dependencies_met_initialized);
+                logger.info('module initialized successfully');
+                logger.info('met dependencies for: j1');
+                clearInterval(dependencies_met_themer_finished);
               }
-            }, 25); // END 'dependencies_met_initialized'
-            logger.info('met dependencies for: themer');
-            clearInterval(dependencies_met_load_menu_finished);
-          }
-        }, 25); // END 'dependencies_met_load_menu_finished'
+            } else {
+              _this.setState('processing');
+
+              // logger.info('initialize eventHandler');
+              // j1.core.navigator.eventHandler();
+
+              // set general|global theme colors
+              logger.info('apply dynamic CSS styles');
+              _this.setCSS (
+                navDefaults, navBarOptions, navMenuOptions,
+                navQuicklinksOptions, navTopsearchOptions
+              );
+
+              logger.info('init auth client');
+              _this.initAuthClient(_this.navAuthManagerConfig);
+              _this.setState('finished');
+              logger.info('state: ' + _this.getState());
+              clearInterval(dependencies_met_themer_finished);
+            }
+          }, 25); // END 'dependencies_met_themer_finished'
+          logger.info('met dependencies for: themer');
+          clearInterval(dependencies_met_load_menu_finished);
+        } else {
+          logger.error('load HTML data (AJAX) failed for unknown reason');
+          _this.setState('finished');
+          logger.info('state: ' + _this.getState());
+          logger.info('met dependencies for: xhrData');
+          clearInterval(dependencies_met_load_menu_finished);
+        }
+      }, 25); // END 'dependencies_met_load_menu_finished'
 
       // --------------------------------------------------------------------
       // Register event 'reset on resize' to call j1.core.navigator on
@@ -465,9 +502,16 @@ j1.adapter['navigator'] = (function (j1, window) {
         }, 500);
 
         // Scroll the page one pixel back and forth to get
-        // the right position for the toccer
+        // the right position for Toccer (trigger) and SSM
         $(window).scrollTop($(window).scrollTop()+1);
         $(window).scrollTop($(window).scrollTop()-1);
+
+        // jadams, 2020-06-21: unclear|forgotten what I'm doing here!
+        // Looks like the old BS3 implementation
+        //
+        // $('.navbar-collapse').removeClass('in');
+        // $('.navbar-collapse').removeClass('on');
+        // $('.navbar-collapse').removeClass('bounceIn');
       });
     }, // END init
 

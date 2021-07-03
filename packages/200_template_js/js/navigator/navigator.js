@@ -43,10 +43,7 @@ module.exports = function navigator ( options ) {
   // ---------------------------------------------------------------------------
   // global vars
   // ---------------------------------------------------------------------------
-  // var cookie_names              = j1.getCookieNames();
-  // var cookie_consent_name       = cookie_names.cookie_consent;
-  // var cookie_user_session_name  = cookie_names.user_session;
-  var message                   = {};
+  var message = {};
   var state;
   var logger;
   var logText;
@@ -74,12 +71,11 @@ module.exports = function navigator ( options ) {
       logger.info(logText);
       this.manageDropdownMenu(defaultOptions, menuOptions);
       this.navbarSticky();
-
-//    this.navbarScrollspy();
+      this.eventHandler(); // jadams, 2021-07-03: initialize events early
 
       message.type    = 'command';
-      message.action  = 'module_initialized';
-      message.text    = 'navigator core initialized successfully';
+      message.action  = 'core_initialized';
+      message.text    = 'navigator core initialized';
       j1.sendMessage( 'j1.core.navigator', 'j1.adapter.navigator', message );
 
       return true;
@@ -193,17 +189,6 @@ module.exports = function navigator ( options ) {
       }
 
       // -----------------------------------------------------------------------
-      // Navbar Sidebar
-      // -----------------------------------------------------------------------
-      // if( $getNav.hasClass('navbar-sidebar')) {
-      //   // Add Class to body
-      //   $('body').addClass('wrap-nav-sidebar');
-      //   $getNav.wrapInner('<div class=\'scroller\'></div>');
-      // } else {
-      //   $('.navigator').addClass('on');
-      // }
-
-      // -----------------------------------------------------------------------
       // Menu Center
       // -----------------------------------------------------------------------
       if( $getNav.find('ul.nav').hasClass('navbar-center')) {
@@ -223,23 +208,6 @@ module.exports = function navigator ( options ) {
       } else {
         $getNav.addClass('no-full');
       }
-
-      // -----------------------------------------------------------------------
-      // Navbar Mobile
-      // -----------------------------------------------------------------------
-      // if( $getNav.hasClass('navbar-mobile')) {
-      //   // Add Class to body
-      //   $('.navbar-collapse').on('shown.bs.collapse', function() {
-      //     $('body').addClass('side-right');
-      //   });
-      //   $('.navbar-collapse').on('hide.bs.collapse', function() {
-      //     $('body').removeClass('side-right');
-      //   });
-      //
-      //   $(window).on('resize', function() {
-      //     $('body').removeClass('side-right');
-      //   });
-      // }
 
       // -----------------------------------------------------------------------
       // Navbar Fixed
@@ -278,7 +246,8 @@ module.exports = function navigator ( options ) {
       // https://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily
       // https://stackoverflow.com/questions/5963669/whats-the-difference-between-event-stoppropagation-and-event-preventdefault
       // -----------------------------------------------------------------------
-      $('nav.navbar.navigator .attr-nav').each(function() {
+//    $('nav.navbar.navigator .attr-nav').each(function() {
+      $('.attr-nav').each(function() {
         logger.debug('register OPEN event|s for QuickSearch');
         $('li.search > a', this).on('click', function(e) {
           // e.preventDefault(); // don't do the default browser action
@@ -331,32 +300,6 @@ module.exports = function navigator ( options ) {
           // e.stopPropagation(); // don't bubble up the event
         });
       });
-
-      // Navbar Sidebar
-      // jadams, 2021-03-05: Sidebar NOT used anymore
-
-      // -----------------------------------------------------------------------
-      // Toggle Side Menu
-      // -----------------------------------------------------------------------
-      // $('nav.navbar.navigator .attr-nav').each(function() {
-      //   logger.debug('register OPEN event|s for SideBar');
-      //   $('li.side-menu > a', this).on('click', function(e) {
-      //     // e.preventDefault(); // don't do the default browser action
-      //     logger.debug('manage sidebar action OPEN');
-      //     // e.stopPropagation(); // don't bubble up the event
-      //     $('nav.navbar.navigator > .side').toggleClass('on');
-      //     $('body').toggleClass('on-side');
-      //     // e.stopPropagation(); // don't bubble up the event
-      //   });
-      // });
-      // logger.debug('register CLOSE event|s for SideBar');
-      // $('.side .close-side').on('click', function(e) {
-      //   e.preventDefault(); // don't do the default browser action
-      //   logger.debug('manage sidebar action CLOSE');
-      //   $('nav.navbar.navigator > .side').removeClass('on');
-      //   $('body').removeClass('on-side');
-      //   // e.stopPropagation(); // don't bubble up the event
-      // });
 
       // -----------------------------------------------------------------------
       // Wrapper
@@ -659,76 +602,6 @@ module.exports = function navigator ( options ) {
         });
       }
     }, // end navbarSticky
-
-    // -------------------------------------------------------------------------
-    // Navbar Scrollspy
-    // -------------------------------------------------------------------------
-    // navbarScrollspy : function() {
-    //   var navScrollSpy = $('.navbar-scrollspy'),
-    //     $body   = $('body'),
-    //     $getNav = $('nav.navbar.navigator'),
-    //     offset  = $getNav.outerHeight();
-    //
-    //   if( navScrollSpy.length ){
-    //     $body.scrollspy({target: '.navbar', offset: offset });
-    //
-    //     // Animation Scrollspy
-    //     $('.scroll').on('click', function(event) {
-    //       event.preventDefault();
-    //
-    //       // Active link
-    //       $('.scroll').removeClass('active');
-    //       $(this).addClass('active');
-    //
-    //       // Remove navbar collapse
-    //       $('.navbar-collapse').removeClass('in');
-    //
-    //       // Toggle Bars
-    //       $('.navbar-toggle').each(function(){
-    //         $('.mdi', this).removeClass('mdi-close');
-    //         $('.mdi', this).addClass('mdi-menu');
-    //       });
-    //
-    //       // Scroll
-    //       var scrollTop = $(window).scrollTop(),
-    //         $anchor = $(this).find('a'),
-    //         $section = $($anchor.attr('href')).offset().top,
-    //         $window = $(window).width(),
-    //         $minusDesktop = $getNav.data('minus-value-desktop'),
-    //         $minusMobile = $getNav.data('minus-value-mobile'),
-    //         $speed = $getNav.data('speed'),
-    //         $position;
-    //
-    //       if( $window > 992 ){
-    //         $position = $section - $minusDesktop;
-    //       }else{
-    //         $position = $section - $minusMobile;
-    //       }
-    //
-    //       $('html, body').stop().animate({
-    //         scrollTop: $position
-    //       }, $speed);
-    //     });
-    //
-    //     // Activate Navigation
-    //     var fixSpy = function() {
-    //       var data = $body.data('bs.scrollspy');
-    //       if (data) {
-    //         offset = $getNav.outerHeight();
-    //         data.options.offset = offset;
-    //         $body.data('bs.scrollspy', data);
-    //         $body.scrollspy('refresh');
-    //       }
-    //     };
-    //
-    //     // Activate Navigation on resize
-    //     var resizeTimer;
-    //     $(window).on('resize', function() {
-    //       clearTimeout(resizeTimer);
-    //       var resizeTimer = setTimeout(fixSpy, 200);
-    //     });
-    //   }
-    // }, // end navbarScrollspy
 
     // -------------------------------------------------------------------------
     // updateSidebar

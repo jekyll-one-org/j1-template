@@ -28,7 +28,7 @@ about_config:
 #
 settings:
 
-  enabled:                              true                                    # if set to true, util server will be started
+  enabled:                              false                                   # if set to true, util server will be started
 
   ssl:                                  false
   origin:                               localhost
