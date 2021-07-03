@@ -162,8 +162,7 @@
           data: j1_user_state
         });
 
-        // force reload the page from the server (skip cache)
-        // and detect selected theme from cookie
+        // reload current page (skip cache)
         location.reload(true);
       } else {
         logger.warn('write to cookie : disabled');

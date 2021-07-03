@@ -26,16 +26,17 @@ defaults:
 
   enabled:                              false
 
-  autoShowDialog:                       true                                    # disable autoShowModal on the privacy policy and legal notice pages, to make these pages readable
-  language:                             en                                      # the language, in which the modal is shown. Default navigator.language
-  languages:                            [en, de]                                # supported languages, defaults to first language in array (en)
-  contentURL:                           /assets/data/cookieconsent              # this URL must contain the dialogs content in the needed languages
-  cookieName:                           j1.user.consent                         # the name of the cookie in which the configuration is stored as JSON
-  cookieStorageDays:                    365                                     # the duration the cookie configuration is stored on the client
+  autoShowDialog:                       true                                    # show consent dialog if NO consent cookie found
+  language:                             en                                      # language of the modal is shown. Default: navigator.language
+  languages:                            [en, de]                                # supported languages, defaults to FIRST language defined by languages
+  contentURL:                           /assets/data/cookieconsent              # dialogs content for all languages
+  cookieName:                           j1.user.consent                         # name of the consent cookie
+  cookieStorageDays:                    365                                     # duration the consent cookie is stored
+  reloadPageOnChange:                   true                                    # reload current page if user settings has been changed
+  postSelectionCallback:                j1.adapter.cookieConsent.cbCookie       # currently hardcoded
 
-  reloadPageOnChange:                   false                                   # reload current page if any user settings has been changed
-  xhr_data_element:                     consent-data                            # container for the language-specific consent modal taken from /assets/data/cookieconsent.html
-  whitelisted:                          [ "/pages/public/legal/en/privacy" ]    # pages no consent issued
+  xhr_data_element:                     consent-data                            # container for the language-specific consent modal (taken from /assets/data/cookieconsent.html)
+  whitelisted:                          [ /pages/public/legal/en/privacy ]      # pages NO consent issued, currently NOT supported
 
   consent_modal_title:
     de:                                 Ihre Privatsphäre

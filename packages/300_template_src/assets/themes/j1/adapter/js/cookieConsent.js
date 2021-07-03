@@ -147,11 +147,9 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
         cookieName:             moduleOptions.cookieName,
         language:               moduleOptions.language,
         whitelisted:            moduleOptions.whitelisted,
-        reloadPageOnChange:     moduleOptions.reloadCurrentPage,
+        reloadPageOnChange:     moduleOptions.reloadPageOnChange,
         xhr_data_element:       moduleOptions.xhr_data_element + '-' + moduleOptions.language,
-        postSelectionCallback:  function () {
-            j1.adapter.cookieConsent.cbCookie()
-        }
+        postSelectionCallback:  function () {j1.adapter.cookieConsent.cbCookie()}
       });
 
       var dependencies_met_page_ready = setInterval (function (options) {
@@ -273,8 +271,8 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
         });
       }
 
-      // reload page after selection
-      location.reload();
+      // reload current page (skip cache)
+      location.reload(true)();
 
     } // END cbCookie
 

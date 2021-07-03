@@ -287,7 +287,8 @@ j1.adapter['ssm'] = (function (j1, window) {
     // reload page
     // -------------------------------------------------------------------------
     reload_page: function () {
-      location.reload();
+      // reload current page (skip cache)
+      location.reload(true)();
     }, // END open_ssm_toc
     // -------------------------------------------------------------------------
     // scroll to previous section

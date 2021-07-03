@@ -393,7 +393,8 @@ j1.adapter['fam'] = (function (j1, window) {
     // reload page
     // -------------------------------------------------------------------------
     reload_page: function () {
-      location.reload();
+      // reload current page (skip cache)
+      location.reload(true)();
     }, // END reload_page
 
     // -------------------------------------------------------------------------
