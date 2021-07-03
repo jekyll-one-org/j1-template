@@ -404,7 +404,6 @@ j1.adapter['navigator'] = (function (j1, window) {
                     logger.info('remote themes loaded: successfully after: ' + interval_count * 25 + ' ms');
 
                     clearInterval(dependencies_met_remote_themes_loaded);
-//                  clearInterval(dependencies_met_page_finished);
                   } else {
                       logger.debug('wait for theme to be loaded: ' + user_state.theme_name);
                   }
@@ -412,13 +411,10 @@ j1.adapter['navigator'] = (function (j1, window) {
                     logger.warn('remote themes loading: failed');
                     logger.warn('continue processing');
                     clearInterval(dependencies_met_remote_themes_loaded);
-//                  clearInterval(dependencies_met_page_finished);
                   }
                   clearInterval(dependencies_met_page_finished);
                 }, 25);
-
-//              clearInterval(dependencies_met_page_finished);
-              }
+              } // END dependencies_met_remote_themes_loaded
               _this.setState('initialized');
             }, 25); // END 'dependencies_met_page_finished'
           } else {
@@ -426,20 +422,25 @@ j1.adapter['navigator'] = (function (j1, window) {
             logger.info(logText);
           }
 
-          // -----------------------------------------------------------------
+          // -------------------------------------------------------------------
           // event handler|css styles
-          // -----------------------------------------------------------------
+          // -------------------------------------------------------------------
+          // jadams, 2021-07-03: ??? unclear why to wait for the themer ???
           // continue if Theme CSS is applied
           var dependencies_met_themer_finished = setInterval(function() {
-            if (themerEnabled) {
-              if (j1.adapter.themer.getState() === 'finished') {
+//          if (themerEnabled) {
+            if (true) {
+              // jadams, 2021-07-03
+//            if (j1.adapter.themer.getState() === 'finished') {
+              if (true) {
                 _this.setState('processing');
 
                 logger.info('initialize eventHandler');
                 j1.core.navigator.eventHandler();
 
                 var dependencies_met_page_finished = setInterval(function() {
-                  if (j1.getState() == 'finished') {
+//                if (j1.getState() == 'finished') {
+                  if (true) {
                     // set general|global theme colors
                     logger.info('initializing dynamic CSS styles: started');
                     _this.setCSS (
@@ -485,18 +486,18 @@ j1.adapter['navigator'] = (function (j1, window) {
         }
       }, 25); // END 'dependencies_met_load_menu_finished'
 
-      // --------------------------------------------------------------------
+      // -----------------------------------------------------------------------
       // Register event 'reset on resize' to call j1.core.navigator on
       // manageDropdownMenu to manage the (current) NAV menu for
       // desktop or mobile
-      // ---------------------------------------------------------------------
+      // -----------------------------------------------------------------------
       $(window).on('resize', function() {
         j1.core.navigator.manageDropdownMenu(navDefaults, navMenuOptions);
 
         // jadams, 2020-07-10: cause severe trouble on mobile devices if
         // OnScreen Kbd comes up and reduces the window size (resize event)
         // DISABLED
-        // -------------------------------------------------------------------
+        // ---------------------------------------------------------------------
         // Hide|Close topSearch on resize event
         // $('.top-search').slideUp();
 

@@ -1148,24 +1148,19 @@ var j1 = (function () {
 
       // see: https://stackoverflow.com/questions/20420577/detect-added-element-to-dom-with-mutation-observer
       //
-      var html_data_path = options.xhr_data_path + ' #' + options.xhr_data_element;
+      var html_data_path;
       var id        = '#' + options.xhr_container_id;
       var container = '#' + options.xhr_container_id + '_container';
       var $selector = $(id);
 
-      // NOTE: Unclear why some pages (e.g. about/site) affected (fam button).
-      // All pages should have FRONTMATTER defaults (by _config.yml) setting
-      // all relevant defaults.
-
-      // failsafe - prevent XHR load errors
-      if (options.xhr_data_element !== '') {
-        logger.info('XHR data element found: ' + options.xhr_data_element);
-      } else  {
-        logger.warn('no XHR data element found, loading data aborted');
-        return;
-      }
-
       if ( $selector.length ) {
+        if (options.xhr_data_element) {
+          html_data_path = options.xhr_data_path + ' #' + options.xhr_data_element;
+          logger.info('XHR data element found: ' + options.xhr_data_element);
+        } else  {
+          logger.warn('no XHR data element found. HTML data loaded full page.');
+          html_data_path = options.xhr_data_path + ' > *';
+        }
         $selector.load( html_data_path, cb_load_closure( mod, id ) );
 
         var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
@@ -1178,7 +1173,7 @@ var j1 = (function () {
 
         selector.each(function(){
             xhrObserver.observe(this, obsConfig);
-        });
+        } );
 
         function mutationHandler (mutationRecords) {
           mutationRecords.forEach ( function (mutation) {
@@ -1190,8 +1185,6 @@ var j1 = (function () {
         }
       } else {
         // jadams, 2020-07-21: To be clarified why a id is "undefined"
-
-        // failsafe - prevent XHR load errors
         if (id != '#undefined') {
           logText = 'data not loaded on id:' + id;
           logger.warn(logText);
