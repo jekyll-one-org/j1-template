@@ -593,9 +593,9 @@ defaults:
       layout:                           page
       author:                           J1 Team
 
-#     robots:
-#       index:                          true
-#       follow:                         true
+      robots:
+        index:                          false
+        follow:                         false
 
       analytics:                        false
       advertising:                      false
@@ -632,9 +632,9 @@ defaults:
       layout:                           post
       author:                           J1 Team
 
-#     robots:
-#       index:                          true
-#       follow:                         true
+      robots:
+        index:                          false
+        follow:                         false
 
       analytics:                        false
       advertising:                      false
@@ -671,9 +671,9 @@ defaults:
       layout:                           post
       author:                           J1 Team
 
-#     robots:
-#       index:                          true
-#       follow:                         true
+      robots:
+        index:                          false
+        follow:                         false
 
       analytics:                        false
       advertising:                      false
@@ -705,6 +705,10 @@ defaults:
     values:
       layout:                           post
       author:                           Wikipedia
+
+      robots:
+        index:                          false
+        follow:                         false
 
       analytics:                        false
       advertising:                      false
@@ -740,6 +744,10 @@ defaults:
     values:
       layout:                           page
       sitemap:                          false
+
+      robots:
+        index:                          false
+        follow:                         false
 
 # ==============================================================================
 # 6. LAYOUT configuration
