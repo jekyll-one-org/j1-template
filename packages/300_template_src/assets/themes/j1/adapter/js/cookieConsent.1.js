@@ -212,19 +212,13 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
     // made his selection (callback)
     // -------------------------------------------------------------------------
     cbCookie: function () {
-      var gaCookies           = j1.findCookie('_ga');
-      var user_state          = j1.readCookie('j1.user.state');
-      var user_consent        = j1.readCookie('j1.user.consent');
-      var json                = JSON.stringify(user_consent);
-      var user_agent          = platform.ua;
+      var gaCookies     = j1.findCookie('_ga');
+      var user_state    = j1.readCookie('j1.user.state');
+      var user_consent  = j1.readCookie('j1.user.consent');
+      var json          = JSON.stringify(user_consent);
 
       logger.info('Entered post selection callback from CookieConsent');
       logger.info('Current values from CookieConsent: ' + json);
-
-      // enable cookie button if not visible
-      if ($('#quickLinksCookieButton').css('display') === 'none')  {
-        $('#quickLinksCookieButton').css('display', 'block');
-      }
 
       // NOTE: Warning needs to be moved to another module
       // because page is reloaded after selection
@@ -233,14 +227,8 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
         logger.warn('tracking enabled, but invalid tracking id found: ' + tracking_id);
       }
 
-      // local adapter
-
       // for debugging
       // gaCookies.forEach(item => console.log('cookieConsent: ' + item));
-
-      if (user_agent.includes('iPad'))  {
-        logger.warn('Product detected : ' + platform.product);
-      }
 
       // Manage Google Analytics OptIn/Out
       // See: https://github.com/luciomartinez/gtag-opt-in/wiki
@@ -252,39 +240,38 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
         } else {
           logger.warn('Disable: GA');
           GTagOptIn.optOut();
-
-        // jadams, 2021-07-06: Found that 'j1.removeCookie' MAY not
-        // work on on all browers for MOBILE devices. For Android it
-        // seems to work, but found severe issues for browsers on iPad (iOS).
-        // Disabled 'j1.removeCookie' on iPad for now.
-
-         if (!user_agent.includes('iPad')) {
-            gaCookies.forEach(function (item) {
-              logger.warn('Delete GA cookie: ' + item);
-              j1.removeCookie({name: item, path: '/'});
+          var gaCookies = j1.findCookie('_ga');
+          gaCookies.forEach(function (item) {
+            logger.warn('Delete GA cookie: ' + item);
+            j1.removeCookie({
+              name: item,
+              path: '/'
             });
-         }
-        }
-
-        if (!user_consent.analyses || !user_consent.personalization)  {
-          // expire consent|state cookies to session
-          j1.writeCookie({
-            name:     'j1.user.state',
-            data:     user_state,
-            samesite: 'Strict'
-          });
-          j1.writeCookie({
-            name:     'j1.user.consent',
-            data:     user_consent,
-            samesite: 'Strict'
           });
         }
+      }
 
-        if (moduleOptions.reloadPageOnChange)  {
-          // reload current page (skip cache)
-          location.reload(true)();
-        }
-      } // END if tracking_enabled
+      // enable cookie button if not visible
+      if ($('#quickLinksCookieButton').css('display') === 'none')  {
+        $('#quickLinksCookieButton').css('display', 'block');
+      }
+
+      if (!user_consent.analyses || !user_consent.personalization)  {
+        // expire consent|state cookies to session
+        j1.writeCookie({
+          name:     'j1.user.state',
+          data:     user_state,
+          samesite: 'Strict'
+        });
+        j1.writeCookie({
+          name:     'j1.user.consent',
+          data:     user_consent,
+          samesite: 'Strict'
+        });
+      }
+
+      // reload current page (skip cache)
+      location.reload(true);
 
     } // END cbCookie
 

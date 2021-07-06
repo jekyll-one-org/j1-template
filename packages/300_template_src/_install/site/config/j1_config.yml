@@ -162,7 +162,7 @@ cookies:
 #   NOTE: Used for developent mode ONLY
 #   NOTE: See ~/packages/300_template_src/_layouts/default.html
 # ------------------------------------------------------------------------------
-flicker_timeout:                        250
+flicker_timeout:                        150
 
 # ------------------------------------------------------------------------------
 # HTML PrettyPrint

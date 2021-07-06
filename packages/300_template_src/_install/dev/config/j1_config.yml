@@ -149,10 +149,12 @@ cookies:
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
-#   flicker_timeout (2019-08-06: currently NOT used anymore)
+#   flicker_timeout
 #   ----------------------------------------------------------------------------
 #   Number of milliseconds (ms) the current page is hidden (display: none)
 #   to prevent "DOM flicker" (aka "FOUC": Flash of unstyled content)
+#
+#   TODO: To be checked if needed
 #
 #   prettify
 #   ----------------------------------------------------------------------------
@@ -162,7 +164,7 @@ cookies:
 #   NOTE: Used for developent mode ONLY
 #   NOTE: See ~/packages/300_template_src/_layouts/default.html
 # ------------------------------------------------------------------------------
-flicker_timeout:                        250
+flicker_timeout:                        150
 
 # ------------------------------------------------------------------------------
 # HTML PrettyPrint
