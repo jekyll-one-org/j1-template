@@ -138,28 +138,29 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
+      _this.setState('started');
+      logger.info('state: ' + _this.getState());
+      logger.info('module is being initialized');
+
+      j1.cookieConsent = new BootstrapCookieConsent({
+        contentURL:             moduleOptions.contentURL,
+        cookieName:             moduleOptions.cookieName,
+        language:               moduleOptions.language,
+        whitelisted:            moduleOptions.whitelisted,
+        reloadPageOnChange:     moduleOptions.reloadPageOnChange,
+        xhr_data_element:       moduleOptions.xhr_data_element + '-' + moduleOptions.language,
+        postSelectionCallback:  function () {j1.adapter.cookieConsent.cbCookie()}
+      });
+
       var dependencies_met_page_ready = setInterval (function (options) {
-        if ( j1.getState() === 'finished' ) {
-          _this.setState('started');
-          logger.info('state: ' + _this.getState());
-          logger.info('module is being initialized');
-
-          j1.cookieConsent = new BootstrapCookieConsent({
-            contentURL:             moduleOptions.contentURL,
-            cookieName:             moduleOptions.cookieName,
-            language:               moduleOptions.language,
-            whitelisted:            moduleOptions.whitelisted,
-            reloadPageOnChange:     moduleOptions.reloadPageOnChange,
-            xhr_data_element:       moduleOptions.xhr_data_element + '-' + moduleOptions.language,
-            postSelectionCallback:  function () {j1.adapter.cookieConsent.cbCookie()}
-          });
-
+        if ( j1.cookieConsent && j1.getState() === 'finished' ) {
           _this.setState('finished');
           logger.info('state: ' + _this.getState());
           logger.debug('module initialized successfully');
           clearInterval(dependencies_met_page_ready);
         }
       });
+
     }, // END init
 
     // -------------------------------------------------------------------------
@@ -252,12 +253,17 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
           logger.warn('Disable: GA');
           GTagOptIn.optOut();
 
-          if (!user_agent.includes('iPad')) {
+        // jadams, 2021-07-06: Found that 'j1.removeCookie' MAY not
+        // work on on all browers for MOBILE devices. For Android it
+        // seems to work, but found severe issues for browsers on iPad (iOS).
+        // Disabled 'j1.removeCookie' on iPad for now.
+
+         if (!user_agent.includes('iPad')) {
             gaCookies.forEach(function (item) {
               logger.warn('Delete GA cookie: ' + item);
               j1.removeCookie({name: item, path: '/'});
             });
-          }
+         }
         }
 
         if (!user_consent.analyses || !user_consent.personalization)  {
@@ -276,7 +282,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
 
         if (moduleOptions.reloadPageOnChange)  {
           // reload current page (skip cache)
-          location.reload(true);
+          location.reload(true)();
         }
       } // END if tracking_enabled
 

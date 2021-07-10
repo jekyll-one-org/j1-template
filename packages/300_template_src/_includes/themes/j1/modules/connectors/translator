@@ -22,23 +22,37 @@
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign translation          = site.data.j1_config.translation.enabled %}
+{% assign translation_page     = page.translation.enabled %}
 {% assign translation_provider = site.data.j1_config.translation.provider %}
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
-<!-- [INFO   ] [j1.modules.connectors.translation     ] [ detected translation (j1_config): {{translation}} ] -->
-<!-- [INFO   ] [j1.modules.connectors.translation     ] [ detected translation (page): {{page.translation}}} ] -->
+
+{% comment %} Check translation settings from SITE configuration
+-------------------------------------------------------------------------------- {% endcomment %}
+<!-- [INFO   ] [j1.modules.connectors.translation     ] [ Check translation settings from SITE configuration ] -->
+<!-- [INFO   ] [j1.modules.connectors.translation     ] [ detected translation (site): {{translation}} ] -->
+
+{% comment %} Check translation settings from PAGE configuration
+-------------------------------------------------------------------------------- {% endcomment %}
+<!-- [INFO   ] [j1.modules.connectors.translation     ] [ Check translation settings from PAGE configuration ] -->
+<!-- [INFO   ] [j1.modules.connectors.translation     ] [ detected translation (page): {{page.translation}} ] -->
+
+{% if translation_page <> nil %}
+  <!-- [INFO   ] [j1.modules.connectors.translation     ] [ overload translation settings from PAGE ] -->
+  {% assign translation = translation_page %}
+{% endif %}
 
 {% if translation %}
-<!-- [INFO   ] [j1.modules.connectors.translator      ] [ start processing load region head, layout: {{page.layout}} ] -->
+<!-- [INFO   ] [j1.modules.connectors.translation     ] [ start processing load region head, layout: {{page.layout}} ] -->
   {% case translation_provider %}
     {% when "google" %}
-      <!-- [INFO   ] [j1.modules.connectors.translator      ] [ place Google Translator ] -->
+      <!-- [INFO   ] [j1.modules.connectors.translation     ] [ place Google Translator ] -->
       {% include themes/{{site.template.name}}/modules/connectors/translators/google-translator.html %}
     {% when "custom" %}
-      <!-- [INFO   ] [j1.modules.connectors.translator      ] [ place Custom Translation Provider ] -->
+      <!-- [INFO   ] [j1.modules.connectors.translation     ] [ place Custom Translation Provider ] -->
       {% include themes/{{site.template.name}}/modules/connectors/translators/custom-translator.html %}
   {% endcase %}
 
 {% endif %}
-<!-- [INFO   ] [j1.modules.connectors.translator      ] [ end processing ] -->
+<!-- [INFO   ] [j1.modules.connectors.translation     ] [ end processing ] -->

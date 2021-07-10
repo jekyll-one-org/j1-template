@@ -81,7 +81,7 @@
           <!-- [INFO   ] [j1.procedures.select_location.proc    ] [ fallback location LOCAL selected: {{location_local}} ] -->
           {% capture location_source %}{{base_path}}/{{location_local}}{% endcapture %}
       {% else %}
-          <!-- [FATAL  ] [j1.procedures.select_location.proc    ] [ no valid resource locator for REMOTE found ] -->
+          <!-- [ERROR  ] [j1.procedures.select_location.proc    ] [ no valid resource locator for REMOTE found ] -->
           <!-- [WARN   ] [j1.procedures.select_location.proc    ] [ fallback location LOCAL selected ] -->
           {% capture location_source %}{{base_path}}/{{location_local}}{% endcapture %}
           {% comment %} DISABLED !!!
@@ -97,7 +97,7 @@
          <!-- [INFO   ] [j1.procedures.select_location.proc    ] [ preferred location LOCAL detected: {{location_local}} ] -->
          {% capture location_source %}{{base_path}}/{{location_local}}{% endcapture %}
       {% else %}
-          <!-- [FATAL  ] [j1.procedures.select_location.proc    ] [ no valid resource locator for LOCAL found ] -->
+          <!-- [ERROR  ] [j1.procedures.select_location.proc    ] [ no valid resource locator for LOCAL found ] -->
           <!-- [WARN   ] [j1.procedures.select_location.proc    ] [ fallback location LOCAL selected ] -->
           {% capture location_source %}{{base_path}}/{{locator}}{% endcapture %}
           {% comment %} DISABLED !!!
@@ -109,7 +109,7 @@
       {% comment %} NO valid locator detected
       -------------------------------------------------------------------------- {% endcomment %}
       {% else %}
-        <!-- [FATAL  ] [j1.procedures.select_location.proc    ] [ no valid resource locator found ] -->
+        <!-- [ERROR  ] [j1.procedures.select_location.proc    ] [ no valid resource locator found ] -->
         <!-- [WARN   ] [j1.procedures.select_location.proc    ] [ fallback location LOCAL selected ] -->
         {% capture location_source %}{{base_path}}/{{locator}}{% endcapture %}
         {% comment %} DISABLED !!!
