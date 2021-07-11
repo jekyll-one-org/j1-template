@@ -41,9 +41,9 @@ regenerate:                             true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config         = site.data.j1_config %}
 {% assign blocks                  = site.data.blocks %}
 {% assign modules                 = site.data.modules %}
+{% assign template_config         = site.data.j1_config %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -56,6 +56,8 @@ regenerate:                             true
 {% assign toccer_settings         = modules.toccer.settings %}
 {% assign themer_defaults         = modules.defaults.themer.defaults %}
 {% assign themer_settings         = modules.themer.settings %}
+{% assign tracking_enabled        = template_config.analytics.enabled %}
+{% assign tracking_id             = template_config.analytics.google.tracking_id %}
 
 {% assign authentication_defaults = modules.defaults.authentication.defaults %}
 {% assign authentication_settings = modules.authentication.settings %}
@@ -121,6 +123,11 @@ var j1 = (function () {
   // Status information
   var state                     = 'not_started';
   var mode                      = 'not_detected';
+
+  // Tracking information (GA)
+  var tracking_enabled          = ('{{tracking_enabled}}' === 'true') ? true: false;
+  var tracking_id               = '{{tracking_id}}';
+  var tracking_id_valid         = (tracking_id.includes('tracking-id')) ? false : true;
 
   var current_user_data;
   var current_page;
@@ -220,12 +227,12 @@ var j1 = (function () {
       // -----------------------------------------------------------------------
       // global var (function)
       // -----------------------------------------------------------------------
-      var logger        = log4javascript.getLogger('j1.init');
-      var url           = new liteURL(window.location.href);
-      var baseUrl       = url.origin;
-      var date          = new Date();
-      var timestamp_now = date.toISOString();
-      var curr_state    = 'started';
+      var logger            = log4javascript.getLogger('j1.init');
+      var url               = new liteURL(window.location.href);
+      var baseUrl           = url.origin;
+      var date              = new Date();
+      var timestamp_now     = date.toISOString();
+      var curr_state        = 'started';
 
       // -----------------------------------------------------------------------
       // options loader
@@ -826,6 +833,15 @@ var j1 = (function () {
             // display page
             $('#no_flicker').css('display', 'block');
 
+            // NOTE: Placed tracking warning/info here because page may reloaded
+            // after cookie consent selection
+            //
+            if (tracking_enabled && !tracking_id_valid) {
+              logger.error('tracking enabled, but invalid tracking id found: ' + tracking_id);
+            } else {
+              logger.warn('tracking enabled, tracking id found: ' + tracking_id);
+            }
+
             // show|hide cookie icon (should MOVED to Cookiebar ???)
             if (j1.existsCookie(cookie_names.user_consent)) {
               // Display cookie icon
@@ -902,6 +918,15 @@ var j1 = (function () {
 
           // display page
           $('#no_flicker').css('display', 'block');
+
+          // NOTE: Placed tracking warning/info here because page may reloaded
+          // after cookie consent selection
+          //
+          if (tracking_enabled && !tracking_id_valid) {
+            logger.error('tracking enabled, but invalid tracking id found: ' + tracking_id);
+          } else {
+            logger.warn('tracking enabled, tracking id found: ' + tracking_id);
+          }
 
           logger.info('mode detected: web');
           logger.info('hide signin icon');

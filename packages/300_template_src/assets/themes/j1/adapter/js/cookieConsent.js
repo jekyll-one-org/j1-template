@@ -28,14 +28,16 @@ regenerate:                             true
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment         = site.environment %}
+{% assign blocks              = site.data.blocks %}
 {% assign modules             = site.data.modules %}
+{% assign template_config     = site.data.j1_config %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign consent_defaults    = modules.defaults.cookieconsent.defaults %}
 {% assign consent_settings    = modules.cookieconsent.settings %}
-{% assign tracking_enabled    = site.data.j1_config.analytics.enabled %}
-{% assign tracking_id         = site.data.j1_config.analytics.google.tracking_id %}
+{% assign tracking_enabled    = template_config.analytics.enabled %}
+{% assign tracking_id         = template_config.analytics.google.tracking_id %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -225,20 +227,25 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
         $('#quickLinksCookieButton').css('display', 'block');
       }
 
+      // jadams, 2021-07-11: moded to j1 adapter (displayPage)
+      //
       // NOTE: Warning needs to be moved to another module
       // because page is reloaded after selection
       //
-      if (tracking_enabled && !tracking_id_valid) {
-        logger.warn('tracking enabled, but invalid tracking id found: ' + tracking_id);
+      // if (tracking_enabled && !tracking_id_valid) {
+      //   logger.error('tracking enabled, but invalid tracking id found: ' + tracking_id);
+      // } else {
+      //   logger.warn('tracking enabled, tracking id found: ' + tracking_id);
+      // }
+
+      // for development only
+      if (environment === 'development') {
+        gaCookies.forEach(item => console.log('cookieConsent: ' + item));
       }
-
-      // local adapter
-
-      // for debugging
-      // gaCookies.forEach(item => console.log('cookieConsent: ' + item));
 
       if (user_agent.includes('iPad'))  {
         logger.warn('Product detected : ' + platform.product);
+        logger.warn('Skip deleting (unwanted) cookies for this platform');
       }
 
       // Manage Google Analytics OptIn/Out
