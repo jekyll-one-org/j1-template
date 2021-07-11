@@ -27,7 +27,7 @@ defaults:
   enabled:                              false
 
   autoShowDialog:                       true                                    # show consent dialog if NO consent cookie found
-  language:                             de                                      # language of the modal is shown. Default: navigator.language
+  language:                             en                                      # language of the modal is shown. Default: navigator.language
   languages:                            [en, de]                                # supported languages, defaults to FIRST language defined by languages
   contentURL:                           /assets/data/cookieconsent              # dialogs content for all languages
   cookieName:                           j1.user.consent                         # name of the consent cookie

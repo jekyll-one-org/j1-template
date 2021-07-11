@@ -157,14 +157,13 @@ var j1 = (function () {
   var baseUrl;
   var referrer;
 
+  // initial cookie values
   var cookie_names = {
     'app_session':  '{{template_config.cookies.app_session}}',
     'user_session': '{{template_config.cookies.user_session}}',
     'user_state':   '{{template_config.cookies.user_state}}',
     'user_consent': '{{template_config.cookies.user_consent}}'
   };
-
-  // user SESSION cookie (initial values)
   var user_session = {
     'mode':                 'web',
     'writer':               'web',
@@ -182,7 +181,6 @@ var j1 = (function () {
     'previous_page':        'na',
     'last_pager':           '/pages/public/blog/navigator/'
   };
-
   var user_state = {
     'theme_css':            '',
     'theme_name':           '',
@@ -191,8 +189,7 @@ var j1 = (function () {
     'session_active':       false,
     'last_session_ts':      ''
   };
-
-  var user_consent;
+  var user_consent = {};
 
   // ---------------------------------------------------------------------------
   // helper functions
@@ -312,7 +309,15 @@ var j1 = (function () {
                             expires:  365
                           });
 
-      user_state.session_active = true;
+      // jadams, 2021-07-11: Found situation that user_state NOT initialized
+      // correctly (user_state == false).
+      // TODO: Check if/why user state (cookie NOT created?) NOT initialized
+      // for what reason.
+      if (!user_state) {
+        logger.warn('user session cookie NOT found');
+        user_state = j1.readCookie(cookie_names.user_state);
+        user_state.session_active = true;
+      }
 
       if (!user_consent.analyses || !user_consent.personalization)  {
         // expire consent|state cookies to session
