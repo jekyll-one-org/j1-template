@@ -215,6 +215,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
     // -------------------------------------------------------------------------
     cbCookie: function () {
       var gaCookies           = j1.findCookie('_ga');
+      var j1Cookies           = j1.findCookie('j1');
       var cookie_names        = j1.getCookieNames();
       var user_state          = j1.readCookie(cookie_names.user_state);
       var user_consent        = j1.readCookie(cookie_names.user_consent);
@@ -243,6 +244,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       // for development only
       if (environment === 'development') {
         gaCookies.forEach(item => console.log('cookieConsent: ' + item));
+        j1Cookies.forEach(item => console.log('cookieConsent: ' + item));
       }
 
       if (user_agent.includes('iPad'))  {

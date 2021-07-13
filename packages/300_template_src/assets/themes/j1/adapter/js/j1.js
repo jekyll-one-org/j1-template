@@ -1313,14 +1313,17 @@ var j1 = (function () {
 
     // -------------------------------------------------------------------------
     // findCookie()
-    // Search for cookies (names) in the page header that matches
-    // a given regex string. Returns all names found as an array.
+    // Search for cookies (names) in the page header that matches a given
+    // name. Cookie name can be give as full name, like 'j1.user.state', or
+    // as partials like 'j1'
+    // Returns all names found as an array.
     // -------------------------------------------------------------------------
     // See: https://stackoverflow.com/questions/52287989/javascript-cookie-remove-or-delete-with-regex-regular-expression
     // -------------------------------------------------------------------------
-    findCookie: function (regex) {
+    findCookie: function (name) {
       var r=[];
-      document.cookie.replace(new RegExp(regex + "[^= ]*", "g"), function(a){ r.push(a.trim()); });
+
+      document.cookie.replace(new RegExp(name + '[^= ]*', 'g'), function(a){ r.push(a.trim()); });
       return r;
     }, // END findCookie
 

@@ -129,6 +129,9 @@ j1.adapter['themer'] = (function (j1, window) {
   var interval_count            = 0;
   var max_count                 = themerOptions.retries;
 
+  var j1Cookies;
+  var gaCookies;
+
   var url;
   var baseUrl;
   var error_page;
@@ -164,6 +167,8 @@ j1.adapter['themer'] = (function (j1, window) {
       url         = new liteURL(window.location.href);
       baseUrl     = url.origin;
       error_page  = url.origin + '/204.html';
+      j1Cookies   = j1.findCookie('j1');
+      gaCookies   = j1.findCookie('_ga');
       logger      = log4javascript.getLogger('j1.adapter.themer');
 
       // initialize state flag
@@ -278,6 +283,12 @@ j1.adapter['themer'] = (function (j1, window) {
           logger.error('check failed after: ' + interval_count * 25 + ' ms');
           logger.fatal('loading cookie failed: ' + cookie_names.user_state);
 
+          // for development only
+          if (environment === 'development') {
+            gaCookies.forEach(item => console.log('cookieConsent: ' + item));
+            j1Cookies.forEach(item => console.log('cookieConsent: ' + item));
+          }
+          
           // jadams, 2021-07-13: display error page instead to continue
           //
           logger.warn('redirect to error page');
