@@ -249,7 +249,6 @@ j1.adapter['navigator'] = (function (j1, window) {
       var themes_count;
       var max_count                                 = 100;
 
-
       navDefaults                                   = $.extend({}, {{navigator_defaults | replace: '=>', ':' }});
       navBarConfig                                  = $.extend({}, {{nav_bar_options | replace: '=>', ':' }});
       navMenuConfig                                 = $.extend({}, {{nav_menu_options | replace: '=>', ':' }});
@@ -339,10 +338,12 @@ j1.adapter['navigator'] = (function (j1, window) {
               logText = 'theme switcher: enabled';
               logger.info(logText);
 
-              // Detect|Set J1 UserState
+              // detect j1 user state cookie
               user_state_detected = j1.existsCookie(cookie_user_state_name);
               if (user_state_detected) {
                 user_state        = j1.readCookie(cookie_user_state_name);
+              }  else {
+                logger.error('cookie not found: j1.user.state');
               }
 
               // jadams, 2021-07-03: wait until navigator CORE get finished

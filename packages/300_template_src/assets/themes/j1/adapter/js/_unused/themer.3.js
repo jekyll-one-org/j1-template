@@ -201,24 +201,18 @@ j1.adapter['themer'] = (function (j1, window) {
         });
       }
 
-      // jadams, 2021-01-03: dependency has to be checked in more detail
       var dependencies_met_j1_finished = setInterval (function () {
-        if (j1.getState() == 'finished') {
+        // jadams, 2021-01-03: dependency has to be checked in more detail
+//      if (j1.getState() == 'finished') {
+        if (true) {
           if (themerOptions.enabled) {
             // enable BS ThemeSwitcher
             logger.info('themes detected as: enabled');
             logger.info('theme is being initialized: ' + user_state.theme_name);
 
-            // jadams, 2021-02-22: make sure that remote themes are loaded
-            // max retries = max_count
-
             // load list of remote themes
             //
-            if ( $('#remote_themes').length ) {
-              var themes_count;
-              var interval_count = 0;
-              var max_count      = themerOptions.retries;
-
+            if ($('#remote_themes').length) {
               /* eslint-disable */
               // initialize Bootswatch Theme Switcher
               $('#remote_themes').bootstrapThemeSwitcher.defaults = {
@@ -241,24 +235,6 @@ j1.adapter['themer'] = (function (j1, window) {
                 skipIncludeBootswatch:    themerOptions.skipIncludeBootswatch
               }
               /* eslint-enable */
-
-              // var dependencies_met_remote_themes_loaded = setInterval(function() {
-              //   interval_count += 1;
-              //   themes_count = document.getElementById("remote_themes").getElementsByTagName("li").length;
-              //   if ( themes_count > 0  ) {
-              //     logger.info('remote themes loaded: successfully');
-              //     logger.info('remote themes loaded: successfully after: ' + interval_count * 25 + ' ms');
-              //
-              //     clearInterval(dependencies_met_remote_themes_loaded);
-              //   } else {
-              //       logger.debug('wait for theme to be loaded: ' + user_state.theme_name);
-              //   }
-              //   if (interval_count > max_count) {
-              //     logger.warn('remote themes loading: failed');
-              //     logger.warn('continue processing');
-              //     clearInterval(dependencies_met_remote_themes_loaded);
-              //   }
-              // }, 25);
 
               logger.info('theme loaded: ' + user_state.theme_name);
               logger.info('theme css file: ' + user_state.theme_css);

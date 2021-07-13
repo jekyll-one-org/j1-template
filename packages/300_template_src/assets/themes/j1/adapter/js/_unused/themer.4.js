@@ -114,7 +114,6 @@ j1.adapter['themer'] = (function (j1, window) {
   var _this;
   var logger;
   var logText;
-  var cookie_written;
 
   var cssExtension              = (environment === 'production')
                                   ? '.min.css'
@@ -125,9 +124,6 @@ j1.adapter['themer'] = (function (j1, window) {
   var default_theme_author_url  = '{{default_theme.author_url}}';
   var default_theme_css_name    = default_theme_name.toLowerCase().replace(' ', '-');
   var default_theme_css         = '{{asset_path}}/{{theme_base}}/' + default_theme_css_name + '/bootstrap' + cssExtension;
-
-  var interval_count            = 0;
-  var max_count                 = themerOptions.retries;
 
   // ---------------------------------------------------------------------------
   // helper functions
@@ -168,14 +164,9 @@ j1.adapter['themer'] = (function (j1, window) {
       var dependencies_met_user_state_available = setInterval (function () {
         user_state_detected = j1.existsCookie(cookie_names.user_state);
 
-        // counter how often the check should be done for the existence
-        // of the user state cookie
-        interval_count += 1;
         if (user_state_detected) {
            user_state        = j1.readCookie(cookie_names.user_state);
            user_consent      = j1.readCookie(cookie_names.user_consent);
-
-           logger.info('cookie ' +  cookie_names.user_state + ' successfully loaded after: ' + interval_count * 25 + ' ms');
 
            // initial theme data
            if (user_state.theme_css === '') {
@@ -188,14 +179,9 @@ j1.adapter['themer'] = (function (j1, window) {
            styleLoaded     = styleSheetLoaded(user_state.theme_css);
            theme_css_html  = '<link rel="stylesheet" id="' + id + '" href="' + user_state.theme_css + '" type="text/css" />';
 
-           // check cookie consistency
-           if (Object.keys(user_state).length > 2)  {
-             // loading theme CSS file except on UNO
-             if (!user_state.theme_name.includes('Uno') || !styleLoaded) {
-               $('head').append(theme_css_html);
-             }
-           } else {
-             logger.fatal('inconsistent state detected for cookie: ' + cookie_names.user_state);
+           // skip loading theme UNO css file except NOT loaded
+           if (!user_state.theme_name.includes('Uno') || !styleLoaded) {
+             $('head').append(theme_css_html);
            }
 
            // set the theme switcher state
@@ -204,24 +190,18 @@ j1.adapter['themer'] = (function (j1, window) {
            // jadams, 2021-07-11: unclear why the cookie consent is checked here
            if (!user_consent.analyses || !user_consent.personalization)  {
              // expire state cookie to session
-             cookie_written = j1.writeCookie({
+             j1.writeCookie({
                name:     cookie_names.user_state,
                data:     user_state,
                samesite: 'Strict'
              });
-             if (!cookie_written) {
-             	logger.error('failed to write cookie: ' + cookie_names.user_state);
-             }
            } else {
-             cookie_written = j1.writeCookie({
+             j1.writeCookie({
                name:     cookie_names.user_state,
                data:     user_state,
                samesite: 'Strict',
                expires:  365
              });
-             if (!cookie_written) {
-             	logger.error('failed to write cookie: ' + cookie_names.user_state);
-             }
            }
 
            if (themerOptions.enabled) {
@@ -249,7 +229,7 @@ j1.adapter['themer'] = (function (j1, window) {
              excludeBootswatch:        themerOptions.excludeBootswatch,
              includeBootswatch:        themerOptions.includeBootswatch,
              skipIncludeBootswatch:    themerOptions.skipIncludeBootswatch
-           };
+           }
            /* eslint-enable */
 
            logger.info('theme loaded: ' + user_state.theme_name);
@@ -262,16 +242,6 @@ j1.adapter['themer'] = (function (j1, window) {
            logger.info('state: ' + _this.getState());
            logger.info('themes detected as: disabled');
          }
-          clearInterval(dependencies_met_user_state_available);
-        } else {
-          logger.info('wait for cookie to be loaded: ' + cookie_names.user_state);
-        }
-        if (interval_count > max_count) {
-          logger.fatal('loading cookie failed: ' + cookie_names.user_state);
-
-          // jadams, 2021-07-13: display error page instead to continue
-          //
-          logger.warn('continue processing');
           clearInterval(dependencies_met_user_state_available);
         }
       }, 25); // END dependencies_met_user_state_available

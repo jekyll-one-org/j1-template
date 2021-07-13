@@ -136,7 +136,6 @@ var j1 = (function () {
   var last_pager_url;
   var app_detected;
   var user_session_detected;
-  var cookie_written;
 
   // Translatior settings (currently NOT supported)
   // var translation_enabled       = {{template_config.translation.enabled}};
@@ -174,7 +173,7 @@ var j1 = (function () {
   };
   var user_session = {
     'mode':                 'web',
-    'writer':               'j1.adapter',
+    'writer':               'web',
     'locale':               navigator.language || navigator.userLanguage,
     'user_name':            '{{template_config.user.user_name}}',
     'provider':             '{{template_config.user.provider}}',
@@ -190,12 +189,10 @@ var j1 = (function () {
     'last_pager':           '/pages/public/blog/navigator/'
   };
   var user_state = {
-    'writer':               'j1.adapter',
-    'theme_css':            '',
     'theme_css':            '',
     'theme_name':           '',
     'theme_author':         '',
-    'theme_version':        '{{template_version}}',
+    'theme_version':        '{{site.version}}',
     'session_active':       false,
     'last_session_ts':      ''
   };
@@ -269,44 +266,30 @@ var j1 = (function () {
         var url;
         var baseUrl;
 
-        if (user_state) {
-          user_state.session_active     = false;
-          user_state.last_session_ts    = timestamp_now;
+        user_state.session_active     = false;
+        user_state.last_session_ts    = timestamp_now;
 
-          if (!user_consent.analyses || !user_consent.personalization)  {
-            // expire consent|state cookies to session
-            cookie_written = j1.writeCookie({
-              name:     cookie_names.user_consent,
-              data:     user_state,
-              samesite: 'Strict'
-            });
-            if (!cookie_written) {
-              logger.error('failed to write cookie: ' + cookie_names.user_consent);
-            }
-            cookie_written = j1.writeCookie({
-              name:     cookie_names.user_state,
-              data:     user_state,
-              samesite: 'Strict'
-            });
-            if (!cookie_written) {
-            	logger.error('failed to write cookie: ' + cookie_names.user_consent);
-            }
-          } else {
-            cookie_written = j1.writeCookie({
-              name:     cookie_names.user_state,
-              data:     user_state,
-              samesite: 'Strict',
-              expires:  365
-            });
-            if (!cookie_written) {
-            	logger.error('failed to write cookie: ' + cookie_names.user_state);
-            }
-          }
+        if (!user_consent.analyses || !user_consent.personalization)  {
+          // expire consent|state cookies to session
+          j1.writeCookie({
+            name:     cookie_names.user_consent,
+            data:     user_state,
+            samesite: 'Strict'
+          });
+          j1.writeCookie({
+            name:     cookie_names.user_state,
+            data:     user_state,
+            samesite: 'Strict'
+          });
         } else {
-          // jadams, 2021-07-11: on beforeunload, a vaild state cookie
-          // is expected
-          logger.fatal('missing cookie detected for: ' + cookie_names.user_state);
+          j1.writeCookie({
+            name:     cookie_names.user_state,
+            data:     user_state,
+            samesite: 'Strict',
+            expires:  365
+          });
         }
+
       }); // END beforeunload
 
       // -----------------------------------------------------------------------
@@ -318,57 +301,45 @@ var j1 = (function () {
       user_consent  = j1.readCookie(cookie_names.user_consent);
       user_session  =  j1.existsCookie(cookie_names.user_session)
                         ? j1.readCookie(cookie_names.user_session)
-                        : cookie_written = j1.writeCookie({
+                        : j1.writeCookie({
                             name:     cookie_names.user_session,
                             data:     user_session,
                             samesite: 'Strict'
                           });
-      if (!cookie_written) {
-      	logger.error('failed to write cookie: ' + cookie_names.user_session);
-      }
 
       user_state    =  j1.existsCookie(cookie_names.user_state)
                         ? j1.readCookie(cookie_names.user_state)
-                        : cookie_written = j1.writeCookie({
+                        : j1.writeCookie({
                             name:     cookie_names.user_state,
                             data:     user_state,
                             samesite: 'Strict',
                             expires:  365
                           });
-      if (!cookie_written) {
-      	logger.error('failed to write cookie: ' + cookie_names.user_state);
-      }
 
       // jadams, 2021-07-11: Found situation that user_state NOT initialized
       // correctly (user_state == false).
       // TODO: Check if/why user state (cookie NOT created?) NOT initialized
       // for what reason.
       if (!user_state) {
-        logger.warn('cookie not found: ' + cookie_names.user_state);
+        logger.warn('user session cookie NOT found');
         user_state = j1.readCookie(cookie_names.user_state);
         user_state.session_active = true;
       }
 
       if (!user_consent.analyses || !user_consent.personalization)  {
         // expire consent|state cookies to session
-        cookie_written = j1.writeCookie({
+        j1.writeCookie({
           name:     cookie_names.user_state,
           data:     user_state,
           samesite: 'Strict'
         });
-        if (!cookie_written) {
-        	logger.error('failed to write cookie: ' + cookie_names.user_state);
-        }
       } else {
-        cookie_written = j1.writeCookie({
+        j1.writeCookie({
           name:     cookie_names.user_state,
           data:     user_state,
           samesite: 'Strict',
           expires:  365
         });
-        if (!cookie_written) {
-        	logger.error('failed to write cookie: ' + cookie_names.user_state);
-        }
       }
 
       // detect middleware (mode 'app') and update user session cookie
@@ -395,16 +366,11 @@ var j1 = (function () {
 
           logger.info(logText);
           logger.info('update user session cookie');
-          cookie_written = j1.writeCookie({
+          j1.writeCookie({
             name:     cookie_names.user_session,
             data:     user_session,
             samesite: 'Strict'
           });
-
-          if (!cookie_written) {
-          	logger.error('failed to write cookie: ' + cookie_names.user_session);
-          }
-
           j1.setState(curr_state);
           logger.info('state: ' + j1.getState());
 
@@ -441,20 +407,16 @@ var j1 = (function () {
             logText                     = 'mode detected: ' + user_session.mode;
 
             logger.info(logText);
-            cookie_written = j1.writeCookie({
+            j1.writeCookie({
               name:     cookie_names.user_session,
               data:     user_session,
               samesite: 'Strict'
             });
-            if (!cookie_written) {
-            	logger.error('failed to write cookie: ' + cookie_names.user_session);
-            }
-
             j1.setState(curr_state);
             logger.info('state: ' + j1.getState());
           }, detectTimeout);
         });
-      } else { // web mode
+      } else { // app mode
         state = 'started';
         logger.info('state: ' + state);
         logger.info('page is being initialized');
@@ -500,15 +462,11 @@ var j1 = (function () {
       }
 
       logger.info('update user session cookie');
-      cookie_written = j1.writeCookie({
+      j1.writeCookie({
         name:     cookie_names.user_session,
         data:     user_session,
         samesite: 'Strict'
       });
-
-      if (!cookie_written) {
-      	logger.error('failed to write cookie: ' + cookie_names.user_session);
-      }
 
       // NOTE: asynchronous calls should be rewitten to xhrData
       // initialize page resources for blocks
@@ -521,14 +479,11 @@ var j1 = (function () {
       logger.info(logText);
 
       user_session.timestamp = timestamp_now;
-      cookie_written = j1.writeCookie({
+      j1.writeCookie({
         name:     cookie_names.user_session,
         data:     user_session,
         samesite: 'Strict'
       });
-      if (!cookie_written) {
-      	logger.error('failed to write cookie: ' + cookie_names.user_session);
-      }
 
       // -----------------------------------------------------------------------
       // additional BS helpers from j1.core
@@ -845,14 +800,11 @@ var j1 = (function () {
           user_session = j1.mergeData(user_session, data);
 
           user_session.current_page = current_url.pathname;
-          cookie_written = j1.writeCookie({
+          j1.writeCookie({
             name:     cookie_names.user_session,
             data:     user_session,
             samesite: 'Strict'
           });
-          if (!cookie_written) {
-          	logger.error('failed to write cookie: ' + cookie_names.user_session);
-          }
 
           providerPermissions = user_session.provider_permissions;
           categoryAllowed     = providerPermissions.includes(user_session.page_permission);
@@ -981,14 +933,11 @@ var j1 = (function () {
           $('#quickLinksSignInOutButton').css('display', 'none');
 
           user_session.current_page = current_url.pathname;
-          cookie_written = j1.writeCookie({
+          j1.writeCookie({
               name:     cookie_names.user_session,
               data:     user_session,
               samesite: 'Strict'
           });
-          if (!cookie_written) {
-          	logger.error('failed to write cookie: ' + cookie_names.user_session);
-          }
 
           // show|hide translator icon (currently NOT supported)
           // if (translation_enabled) {
