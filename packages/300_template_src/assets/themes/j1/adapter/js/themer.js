@@ -129,6 +129,10 @@ j1.adapter['themer'] = (function (j1, window) {
   var interval_count            = 0;
   var max_count                 = themerOptions.retries;
 
+  var url;
+  var baseUrl;
+  var error_page;
+
   // ---------------------------------------------------------------------------
   // helper functions
   // ---------------------------------------------------------------------------
@@ -156,8 +160,11 @@ j1.adapter['themer'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       // globals
       // -----------------------------------------------------------------------
-      _this     = j1.adapter.themer;
-      logger    = log4javascript.getLogger('j1.adapter.themer');
+      _this       = j1.adapter.themer;
+      url         = new liteURL(window.location.href);
+      baseUrl     = url.origin;
+      error_page  = url.origin + '/204.html';
+      logger      = log4javascript.getLogger('j1.adapter.themer');
 
       // initialize state flag
       _this.state = 'started';
@@ -267,11 +274,14 @@ j1.adapter['themer'] = (function (j1, window) {
           logger.info('wait for cookie to be loaded: ' + cookie_names.user_state);
         }
         if (interval_count > max_count) {
+          logger.error('interval max count loading cookie reached: ' + interval_count);
+          logger.error('check failed after: ' + interval_count * 25 + ' ms');
           logger.fatal('loading cookie failed: ' + cookie_names.user_state);
 
           // jadams, 2021-07-13: display error page instead to continue
           //
-          logger.warn('continue processing');
+          logger.warn('redirect to error page');
+          window.location.href = error_page;
           clearInterval(dependencies_met_user_state_available);
         }
       }, 25); // END dependencies_met_user_state_available
