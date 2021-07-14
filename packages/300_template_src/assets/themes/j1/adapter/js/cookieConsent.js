@@ -230,8 +230,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
         $('#quickLinksCookieButton').css('display', 'block');
       }
 
-      // jadams, 2021-07-11: moded to j1 adapter (displayPage)
-      //
+      // jadams, 2021-07-11: moved to j1 adapter (displayPage)
       // NOTE: Warning needs to be moved to another module
       // because page is reloaded after selection
       //
