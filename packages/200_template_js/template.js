@@ -41,10 +41,10 @@
 // Following objects (native node modules) are *explicitely* forced to be
 // exposed for run-time to the global namespace (window).
 // -----------------------------------------------------------------------------
-// window.Cookies                       = require('js-cookie');
-// window.log4javascript                = require('log4javascript');
-// window.parseURL                      = require('lite-url');
-// window.platform                      = require('platform');
+window.Cookies                          = require('js-cookie');
+window.log4javascript                   = require('log4javascript');
+window.liteURL                          = require('lite-url');
+window.platform                         = require('platform');
 // window.yaml                          = require('js-yaml');
 // window.uuid                          = require('uuid/v4');
 

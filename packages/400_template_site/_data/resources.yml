@@ -362,10 +362,6 @@ resources:
 
                                         ]
         files:                          [
-                                          modules/util/js/js.cookie.js,
-                                          modules/util/js/lite-url.js,
-                                          modules/util/js/platform.js,
-                                          modules/util/js/domready.js,
                                           modules/util/js/gtag-opt-in.js,
                                           adapter/js/j1.js
                                         ]

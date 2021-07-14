@@ -340,6 +340,8 @@ j1.adapter['navigator'] = (function (j1, window) {
 
               // detect j1 user state cookie
               user_state_detected = j1.existsCookie(cookie_user_state_name);
+
+
               if (user_state_detected) {
                 user_state        = j1.readCookie(cookie_user_state_name);
               }  else {

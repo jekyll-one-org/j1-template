@@ -175,7 +175,7 @@ j1.adapter['themer'] = (function (j1, window) {
       _this.state = 'started';
       logger.info('state: ' + _this.getState());
 
-      // jadams, 2021-07-11: added dependecy on the user stae cookie
+      // jadams, 2021-07-11: added dependecy on the user state cookie
       // Found timing issues testing mobile devices (iPad)
       var dependencies_met_user_state_available = setInterval (function () {
         user_state_detected = j1.existsCookie(cookie_names.user_state);
@@ -288,7 +288,7 @@ j1.adapter['themer'] = (function (j1, window) {
             gaCookies.forEach(item => console.log('cookieConsent: ' + item));
             j1Cookies.forEach(item => console.log('cookieConsent: ' + item));
           }
-          
+
           // jadams, 2021-07-13: display error page instead to continue
           //
           logger.warn('redirect to error page');
