@@ -48,12 +48,14 @@ sitemap:                                false
 
 {% if language == 'en' %}
   {% assign title             = "Bad Request" %}
+  {% assign back_url_text     = "Back Home" %}
   {% assign reason            = "The server cannot process the request. <br/> Something had happenend that is perceived to be a client error." %}
   {% assign contact_issue     = "Technical Contact" %}
 {% endif %}
 
 {% if language == 'de' %}
   {% assign title             = "Anfrage ungültig" %}
+  {% assign back_url_text     = "Zurück zur Startseite" %}
   {% assign reason            = "Die Nachricht war fehlerhaft aufgebaut. <br/> Der Webserver konnte die gewünschte Anfrages des Browsers nicht bearbeiten. Die Nachricht war fehlerhaft aufgebaut." %}
   {% assign contact_issue     = "Technischer Kontakt" %}
 {% endif %}
@@ -77,6 +79,7 @@ sitemap:                                false
     <div class="cover attic">
       <h1>{{title}} <small>{{page.http_error}}</small></h1>
       <p class="lead">{{reason}}</p>
+      <div><a href="/">{{back_url_text}}</a></div>
     </div>
     <footer>
       <p>{{copyright_info}} · {{contact_issue}}: <a href="mailto:{{webmaster_email}}?subject={{title}}">{{webmaster_email}}</a></p>

@@ -48,12 +48,14 @@ sitemap:                                false
 
 {% if language == 'en' %}
   {% assign title             = "Page not found" %}
+  {% assign back_url_text     = "Back Home" %}
   {% assign reason            = "The page you requested could not found. <br/> Sorry about that, this shoud not happen." %}
   {% assign contact_issue     = "Technical Contact" %}
 {% endif %}
 
 {% if language == 'de' %}
   {% assign title             = "Seite nicht gefunden" %}
+  {% assign back_url_text     = "Zurück zur Startseite" %}
   {% assign reason            = "Die angeforderte Seite konnte nicht gefunden werden. <br/> Wir bitten um Entschuldigung, dass sollte nicht passieren." %}
   {% assign contact_issue     = "Technischer Kontakt" %}
 {% endif %}
@@ -77,6 +79,7 @@ sitemap:                                false
     <div class="cover attic">
       <h1>{{title}} <small>{{page.http_error}}</small></h1>
       <p class="lead">{{reason}}</p>
+      <div><a href="/">{{back_url_text}}</a></div>
     </div>
     <footer>
       <p>{{copyright_info}} · {{contact_issue}}: <a href="mailto:{{webmaster_email}}?subject={{title}}">{{webmaster_email}}</a></p>
