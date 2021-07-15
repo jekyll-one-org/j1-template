@@ -269,6 +269,8 @@ var j1 = (function () {
         var url;
         var baseUrl;
 
+        // final update of the user state cookie before browser page|tab
+        // get closed
         if (user_state) {
           user_state.session_active     = false;
           user_state.last_session_ts    = timestamp_now;
@@ -277,7 +279,7 @@ var j1 = (function () {
             // expire consent|state cookies to session
             cookie_written = j1.writeCookie({
               name:     cookie_names.user_consent,
-              data:     user_state,
+              data:     user_consent,
               samesite: 'Strict'
             });
             if (!cookie_written) {
@@ -305,7 +307,7 @@ var j1 = (function () {
         } else {
           // jadams, 2021-07-11: on beforeunload, a vaild state cookie
           // is expected
-          logger.fatal('missing cookie detected for: ' + cookie_names.user_state);
+          logger.fatal('missing cookie detected: ' + cookie_names.user_state);
         }
       }); // END beforeunload
 
@@ -344,7 +346,7 @@ var j1 = (function () {
       // TODO: Check if/why user state (cookie NOT created?) NOT initialized
       // for what reason.
       if (!user_state) {
-        logger.warn('cookie not found: ' + cookie_names.user_state);
+        logger.error('cookie not found: ' + cookie_names.user_state);
         user_state = j1.readCookie(cookie_names.user_state);
         user_state.session_active = true;
       }
@@ -1290,7 +1292,7 @@ var j1 = (function () {
     }, // END xhrData
 
     // -------------------------------------------------------------------------
-    //  readCookie()
+    //  readCookie (Vanilla JS)
     // -------------------------------------------------------------------------
     readCookie: function (name) {
       var data;
@@ -1312,23 +1314,7 @@ var j1 = (function () {
     }, // END readCookie
 
     // -------------------------------------------------------------------------
-    // findCookie()
-    // Search for cookies (names) in the page header that matches a given
-    // name. Cookie name can be give as full name, like 'j1.user.state', or
-    // as partials like 'j1'
-    // Returns all names found as an array.
-    // -------------------------------------------------------------------------
-    // See: https://stackoverflow.com/questions/52287989/javascript-cookie-remove-or-delete-with-regex-regular-expression
-    // -------------------------------------------------------------------------
-    findCookie: function (name) {
-      var r=[];
-
-      document.cookie.replace(new RegExp(name + '[^= ]*', 'g'), function(a){ r.push(a.trim()); });
-      return r;
-    }, // END findCookie
-
-    // -------------------------------------------------------------------------
-    // writeCookie()
+    // writeCookie (Cookie lib)
     // Write 'data' to a cookie 'name'. If not exists, the cookie gets
     // created. Returns 'true' if cookie was written, otherwise 'false'.
     // -------------------------------------------------------------------------
@@ -1354,56 +1340,120 @@ var j1 = (function () {
     //    context/HTTPS).
     // -------------------------------------------------------------------------
     //
+    // writeCookie: function (options /*name, data, [path, expires, samesite, http_only, secure]*/) {
+    //   var defaults = {
+    //       data: {},
+    //       name: '',
+    //       path: '/',
+    //       expires: 0,
+    //       samesite: 'Lax',
+    //       http_only: false,
+    //       secure: false
+    //   };
+    //   var settings = $.extend(defaults, options);
+    //   var date          = new Date();
+    //   var timestamp_now = date.toISOString();
+    //   var cookie_data   = {};
+    //   var data_json;
+    //   var data_encoded;
+    //
+    //   if (j1.existsCookie(settings.name)) {
+    //     cookie_data           = j1.readCookie(settings.name);
+    //     cookie_data.timestamp = timestamp_now;
+    //     cookie_data           = j1.mergeData(cookie_data, settings.data);
+    //     data_json             = JSON.stringify( cookie_data );
+    //     data_encoded          = window.btoa(data_json);
+    //
+    //     if (settings.expires > 0) {
+    //       Cookies.set(settings.name, data_encoded, {
+    //         expires: settings.expires,
+    //         SameSite: settings.samesite
+    //       });
+    //     } else {
+    //       Cookies.set(settings.name, data_encoded, {
+    //       SameSite: settings.samesite
+    //       });
+    //     }
+    //   } else {
+    //     cookie_data   = settings.data;
+    //     data_json     = JSON.stringify(settings.data);
+    //     data_encoded  = window.btoa(data_json);
+    //
+    //     if (settings.expires > 0) {
+    //       Cookies.set(settings.name, data_encoded, {
+    //         expires: settings.expires,
+    //         SameSite: settings.samesite
+    //       });
+    //     } else {
+    //       Cookies.set(settings.name, data_encoded, {
+    //         SameSite: settings.samesite
+    //       });
+    //     }
+    //   }
+    //
+    //   if (j1.existsCookie(settings.name)) {
+    //     return cookie_data;
+    //   } else {
+    //     return false;
+    //   }
+    //
+    // }, // END writeCookie
+
+
     writeCookie: function (options /*name, data, [path, expires, samesite, http_only, secure]*/) {
       var defaults = {
           data: {},
           name: '',
           path: '/',
           expires: 0,
-          samesite: 'Lax',
+          samesite: 'Strict',
           http_only: false,
           secure: false
       };
       var settings = $.extend(defaults, options);
+
       var date          = new Date();
       var timestamp_now = date.toISOString();
       var cookie_data   = {};
       var data_json;
       var data_encoded;
+      var expires;
+      var stringifiedAttributes = '';
+
+      cookie_data.timestamp = timestamp_now;
 
       if (j1.existsCookie(settings.name)) {
-        cookie_data           = j1.readCookie(settings.name);
-        cookie_data.timestamp = timestamp_now;
-        cookie_data           = j1.mergeData(cookie_data, settings.data);
-        data_json             = JSON.stringify( cookie_data );
-        data_encoded          = window.btoa(data_json);
-
-        if (settings.expires > 0) {
-          Cookies.set(settings.name, data_encoded, {
-            expires: settings.expires,
-            SameSite: settings.samesite
-          });
-        } else {
-          Cookies.set(settings.name, data_encoded, {
-          SameSite: settings.samesite
-          });
-        }
+        cookie_data   = j1.readCookie(settings.name);
+        cookie_data   = j1.mergeData(cookie_data, settings.data);
+        data_json     = JSON.stringify( cookie_data );
+        data_encoded  = window.btoa(data_json);
       } else {
         cookie_data   = settings.data;
         data_json     = JSON.stringify(settings.data);
         data_encoded  = window.btoa(data_json);
-
-        if (settings.expires > 0) {
-          Cookies.set(settings.name, data_encoded, {
-            expires: settings.expires,
-            SameSite: settings.samesite
-          });
-        } else {
-          Cookies.set(settings.name, data_encoded, {
-            SameSite: settings.samesite
-          });
-        }
       }
+
+//    if (settings.path !== '/') {
+        stringifiedAttributes += '; ' + 'path=' + settings.path;
+//    }
+
+      if (settings.expires > 0) {
+        settings.expires = new Date(new Date() * 1 + settings.expires * 864e+5);
+        stringifiedAttributes += '; ' + 'expires=' + settings.expires;
+      }
+
+//    if (settings.samesite !== 'Strict') {
+        stringifiedAttributes += '; ' + 'SameSite=' + settings.samesite;
+//    }
+
+      // stringify cookie attributes
+      if (settings.secure) {
+        stringifiedAttributes += '; ' + 'secure=' + settings.secure;
+        // document.cookie = settings.name + '=' + content +'; path=' + settings.path + '; ' + 'SameSite=' + settings.samesite + '; secure';
+      }
+
+      // write the cookie
+      document.cookie = settings.name + '=' + data_encoded + stringifiedAttributes;
 
       if (j1.existsCookie(settings.name)) {
         return cookie_data;
@@ -1414,63 +1464,116 @@ var j1 = (function () {
     }, // END writeCookie
 
     // -------------------------------------------------------------------------
-    // Clears all given cookies by name (except cookies set to httpOnly).
-    // For all cookies the expire date is set in the past, those cookies
-    // are 'session' cookies. All session cookies are deleted (automatically)
-    // by the browser if the last session (browser window) is closed.
-    // See: https://stackoverflow.com/questions/179355/clearing-all-cookies-with-javascript
+    // findCookie (Vanilla JS)
+    // Search for cookies (names) in the page header that matches a given
+    // name. Cookie name can be give as full name, like 'j1.user.state', or
+    // as a partial like 'j1'
+    // Returns all names found as an array.
     // -------------------------------------------------------------------------
-    removeCookie: function (options /*name [, path]*/) {
-      var cookieExists;
-      var defaults = {
-          name: '',
-          path: '/'
-      };
-      var settings = $.extend(defaults, options);
+    // See: https://stackoverflow.com/questions/52287989/javascript-cookie-remove-or-delete-with-regex-regular-expression
+    // -------------------------------------------------------------------------
+    findCookie: function (name) {
+      var rCookie=[];
+      document.cookie.replace(new RegExp(name + '[^= ]*', 'g'), function(a){ rCookie.push(a.trim()); });
 
-      Cookies.remove(settings.name, { path: settings.path });
+      return rCookie;
+    }, // END findCookie
 
+    // -------------------------------------------------------------------------
+    // removeCookie (Vanilla JS)
+    // -------------------------------------------------------------------------
+    // removeCookie: function (options /*name [, path]*/) {
+    //   var cookieExists;
+    //   var defaults = {
+    //       name: '',
+    //       path: '/'
+    //   };
+    //   var settings = $.extend(defaults, options);
+    //
+    //   Cookies.remove(settings.name, { path: settings.path });
+    //
+    // }, // END removeCookie
+    removeCookie: function (name) {
+      if (j1.findCookie(name)) {
+        // clear cookie content and set expiry date in the past
+        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        return true;
+      } else {
+        return false;
+      }
     }, // END removeCookie
 
     // -------------------------------------------------------------------------
-    // Clears all given cookies by name (except cookies set to httpOnly).
-    // For all cookies the expire date is set in the past, those cookies
-    // are 'session' cookies. All session cookies are deleted (automatically)
-    // by the browser if the last session (browser window) is closed.
-    // See: https://stackoverflow.com/questions/179355/clearing-all-cookies-with-javascript
+    // expireCookie (Vanilla JS)
+    // Expires given cookies by name except cookies set to httpOnly. For all
+    // cookies the expiry date is REMOVED. This results in cookies are set
+    // to 'session' for the expiry date. All session cookies are deleted
+    // automatically by the browser if the last session (browser tab|window)
+    // is closed.
     // -------------------------------------------------------------------------
-    deleteCookie: function (name) {
-      var all_cookies = document.cookie.split('; ');
+    // expireCookie() returns 'true' if cookie is set successfully,
+    // otherwise 'false' (e.g NOT found)
+    // -------------------------------------------------------------------------
+    // NOTE:
+    // See: https://stackoverflow.com/questions/179355/clearing-all-cookies-with-javascript
+    // NOTE:
+    // There is NO way you could get a trace of Path, Domain and other
+    // attributes of cookies as they are only read by browsers and NOT shown
+    // to JavaScript. For that reason, attributes needs to be set explicitly.
+    // -------------------------------------------------------------------------
+    expireCookie: function (options /*name [,path, samesite, secure]*/) {
+      var defaults = {
+          path: '/',
+          samesite: 'Strict',
+          secure: false
+      };
+      var settings  = $.extend(defaults, options);
 
-      if ( name === 'all' ) {
-        for (var c = 0; c < all_cookies.length; c++) {
-          var d = window.location.hostname.split('.');
-          while (d.length > 0) {
-            var cookieBase = encodeURIComponent(all_cookies[c].split(';')[0].split('=')[0]) + '=; expires=Thu, 01-Jan-1970 00:00:01 GMT; domain=' + d.join('.') + ' ;path=';
-            var p = location.pathname.split('/');
-            document.cookie = cookieBase + '/';
-            while (p.length > 0) {
-              document.cookie = cookieBase + p.join('/');
-              p.pop();
-            };
-            d.shift();
-          }
-        }
+      var dc        = document.cookie;                                            // all cookies in page
+      var end       = dc.length;                                                  // default to end of the string
+      var prefix    = settings.name + '=';                                                 // search string for the cookie name given
+      var begin     = dc.indexOf('; ' + prefix);
+      var content   = '';
+
+      // collect the cookie content
+      //
+      // found, and not in the first position
+      if (begin !== -1) {
+        // exclude the "; "
+        begin += 2;
       } else {
-        document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:00 GMT';
+        // see if cookie is in first position
+        begin = dc.indexOf(prefix);
+        // not found at all or found as a portion of another cookie name
+        if (begin === -1 || begin !== 0 ) return false;
+      }
+
+      // if ";" is found somewhere after the prefix position then "end" is
+      // that position, otherwise it defaults to the end of the string
+      if (dc.indexOf(';', begin) !== -1) {
+        end = dc.indexOf(';', begin);
+      }
+
+      // expire cookie to session
+      content = decodeURI(dc.substring(begin + prefix.length, end) ).replace(/"/g, '');
+      if (settings.secure) {
+        document.cookie = settings.name + '=' + content +'; path=' + settings.path + '; ' + 'SameSite=' + settings.samesite + '; secure';
+      } else {
+        document.cookie = settings.name + '=' + content +'; path=' + settings.path + '; ' + 'SameSite=' + settings.samesite;
       }
 
       return true;
-    }, // END deleteCookie
+    }, // END expireCookie
 
     // -------------------------------------------------------------------------
-    //  returns true if a given cookie exists
+    // existsCookie (Vanilla JS)
+    // returns true if a given cookie exists
     // -------------------------------------------------------------------------
     existsCookie: function (name) {
       var dc            = document.cookie;
       var prefix        = name + '=';
       var begin         = dc.indexOf('; ' + prefix);
-      var end           = dc.length; // default to end of the string
+      var end           = dc.length;                                            // default to end of the string
       var cookieExists  = false;
       var cookieContent = '';
 

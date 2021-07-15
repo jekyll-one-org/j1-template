@@ -275,12 +275,11 @@ j1.adapter['themer'] = (function (j1, window) {
            logger.info('themes detected as: disabled');
          }
           clearInterval(dependencies_met_user_state_available);
-        } else {
-          logger.info('wait for cookie to be loaded: ' + cookie_names.user_state);
         }
+
         if (interval_count > max_count) {
-          logger.error('interval max count loading cookie reached: ' + interval_count);
-          logger.error('check failed after: ' + interval_count * 25 + ' ms');
+          logger.error('interval max count reached: ' + max_count);
+          logger.error('check failed after: ' + max_count * 25 + ' ms');
           logger.fatal('loading cookie failed: ' + cookie_names.user_state);
 
           // for development only
@@ -289,10 +288,13 @@ j1.adapter['themer'] = (function (j1, window) {
             j1Cookies.forEach(item => console.log('cookieConsent: ' + item));
           }
 
-          // jadams, 2021-07-13: display error page instead to continue
+          // jadams, 2021-07-15: redirect to homepage
+          // NOTE: UNCLEAR why it is needed to create the user state
+          // cookie THIS way
           //
-          logger.warn('redirect to error page');
-          window.location.href = error_page;
+          logger.warn('redirect to home page');
+//        window.location.href = error_page;
+          window.location.href = '/';
           clearInterval(dependencies_met_user_state_available);
         }
       }, 25); // END dependencies_met_user_state_available

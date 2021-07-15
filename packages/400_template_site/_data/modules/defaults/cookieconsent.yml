@@ -35,6 +35,7 @@ defaults:
   postSelectionCallback:                j1.adapter.cookieConsent.cbCookie       # currently hardcoded
 
   reloadPageOnChange:                   false                                   # reload current page if user settings has been changed
+  sameSite:                             Strict                                  # restrict consent cookie to first-party, do NOT send cookie to other domains
   xhr_data_element:                     consent-data                            # container for the language-specific consent modal (taken from /assets/data/cookieconsent.html)
   whitelisted:                          [ /pages/public/legal/en/privacy ]      # pages NO consent issued, currently NOT supported
 

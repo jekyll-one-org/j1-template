@@ -154,6 +154,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
             whitelisted:            moduleOptions.whitelisted,
             reloadPageOnChange:     moduleOptions.reloadPageOnChange,
             xhr_data_element:       moduleOptions.xhr_data_element + '-' + moduleOptions.language,
+            sameSite:               moduleOptions.sameSite,
             postSelectionCallback:  function () {j1.adapter.cookieConsent.cbCookie()}
           });
 
@@ -265,38 +266,21 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
           if (!user_agent.includes('iPad')) {
             gaCookies.forEach(function (item) {
               logger.warn('Delete GA cookie: ' + item);
-              j1.removeCookie({name: item, path: '/'});
+              j1.removeCookie(item);
             });
           }
         }
-
         if (!user_consent.analyses || !user_consent.personalization)  {
           // expire consent|state cookies to session
-          cookie_written = j1.writeCookie({
-            name:     cookie_names.user_state,
-            data:     user_state,
-            samesite: 'Strict'
-          });
-          if (!cookie_written) {
-          	logger.error('failed to write cookie: ' + cookie_names.user_state);
-          }
-
-          cookie_written = j1.writeCookie({
-            name:     cookie_names.user_consent,
-            data:     user_consent,
-            samesite: 'Strict'
-          });
-          if (!cookie_written) {
-          	logger.error('failed to write cookie: ' + cookie_names.user_consent);
-          }
+          j1.expireCookie({ name: cookie_names.user_state });
+          j1.expireCookie({ name: cookie_names.user_consent });
         }
-
-        if (moduleOptions.reloadPageOnChange)  {
+        if (moduleOptions.reloadPageOnChange) {
           // reload current page (skip cache)
           location.reload(true);
         }
-      } // END if tracking_enabled
 
+      } // END if tracking_enabled
     } // END cbCookie
 
   }; // END return

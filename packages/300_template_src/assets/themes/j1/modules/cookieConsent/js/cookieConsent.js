@@ -58,7 +58,8 @@ function BootstrapCookieConsent(props) {
     cookieStorageDays:      365,                                                // the duration the cookie configuration is stored on the client
     postSelectionCallback:  undefined,                                          // callback function, called after the user has made his selection
     whitelisted:            [],                                                 // pages NO consent modal page is issued
-    xhr_data_element:       ""                                                  // container for the language-specific consent modal taken from /assets/data/cookieconsent.html
+    xhr_data_element:       "",                                                 // container for the language-specific consent modal taken from /assets/data/cookieconsent.html
+    sameSite:               "Strict"                                            // restrict consent cookie to first-party, do NOT send cookie to other domains
   }
 
   for (var property in props) {
@@ -75,7 +76,7 @@ function BootstrapCookieConsent(props) {
   }
 
   var Cookie = {
-    set: function (name, value, days) {
+    set: function (name, value, days, samesite) {
       var value_encoded = window.btoa(value);
       var expires = "";
       if (days) {
@@ -83,7 +84,7 @@ function BootstrapCookieConsent(props) {
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         expires = "; expires=" + date.toUTCString();
       }
-      document.cookie = name + "=" + (value_encoded || "") + expires + "; Path=/; SameSite=Strict;";
+      document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + samesite + ';';
     },
     get: function (name) {
     var nameEQ = name + "=";
@@ -238,21 +239,25 @@ function BootstrapCookieConsent(props) {
   }
 
   function agreeAll() {
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(true)), self.props.cookieStorageDays);
+    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(true)), self.props.cookieStorageDays, self.props.sameSite);
     self.$modal.modal("hide");
   }
 
   function doNotAgree() {
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), self.props.cookieStorageDays);
-    logger.warn('delete cookie: j1.user.consent');
-//  j1.deleteCookie('j1.user.consent');
-    j1.deleteCookie('all');
+    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), self.props.cookieStorageDays, self.props.sameSite);
+
+    // jadams, 2021-07-15: all cookies NOT longer supported by j1.expireCookie
+    // TODO: Create loop over all cookies found in page
+    //
+    // logger.warn('expire all cookies');
+    // j1.expireCookie('all');
+
     self.$modal.modal('hide')
     j1.goHome();
   }
 
   function saveSettings() {
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions()), self.props.cookieStorageDays);
+    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions()), self.props.cookieStorageDays, self.props.sameSite);
     self.$modal.modal("hide");
   }
 
