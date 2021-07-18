@@ -21,12 +21,20 @@
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
+{% assign disqus_short_name = site.data.j1_config.comments.disqus.short_name %}
 
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
 <!-- [INFO   ] [j1.modules.connectors.disqus          ] [ place the thread container: start ] -->
 <div id="disqus_thread"></div>
+
 <!-- [INFO   ] [j1.modules.connectors.disqus          ] [ connector depends on the cookie consent (personalization) ] -->
 <!-- [INFO   ] [j1.modules.connectors.disqus          ] [ connector (dynamic) JS is enabled/disabled on OptIn/Out ] -->
+<!-- [INFO   ] [j1.modules.connectors.disqus          ] [ place static JS parts for the connector ] -->
+<noscript>
+  Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+</noscript>
+
+<!-- script async id="dsq-count-scr" src="//{{disqus_short_name}}.disqus.com/count.js"></script -->
 <!-- [INFO   ] [j1.modules.connectors.disqus          ] [ place the thread container: end ] -->

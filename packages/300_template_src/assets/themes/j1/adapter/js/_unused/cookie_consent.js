@@ -176,7 +176,7 @@ j1.adapter['cookie_consent'] = (function (j1, window) {
         // data loader
         // ---------------------------------------------------------------------
         $.when (
-          j1.xhrData('j1.adapter.cookie_consent', moduleOptions, 'data_loaded')
+          j1.loadHTML('j1.adapter.cookie_consent', moduleOptions, 'data_loaded')
         )
         .then (function (success) {
           if (success) {

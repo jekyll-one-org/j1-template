@@ -210,8 +210,8 @@ j1.adapter['navigator'] = (function (j1, window) {
 
       // initialize state flag
       _this.setState('started');
-      logger.info('state: ' + _this.getState());
-      logger.info('module is being initialized');
+      logger.info('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'module is being initialized');
 
       // -----------------------------------------------------------------------
       // defaults
@@ -298,19 +298,19 @@ j1.adapter['navigator'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       // data loader
       // -----------------------------------------------------------------------
-      j1.xhrData({
+      j1.loadHTML({
         xhr_container_id:   navQuicklinksOptions.xhr_container_id,
         xhr_data_path:      navQuicklinksOptions.xhr_data_path,
         xhr_data_element:   navQuicklinksOptions.xhr_data_element },
         'j1.adapter.navigator',
         null);
-      j1.xhrData({
+      j1.loadHTML({
         xhr_container_id:   navAuthClientConfig.xhr_container_id,
         xhr_data_path:      navAuthClientConfig.xhr_data_path,
         xhr_data_element:   navAuthClientConfig.xhr_data_element },
         'j1.adapter.navigator',
         null);
-      j1.xhrData({
+      j1.loadHTML({
         xhr_container_id:   navMenuOptions.xhr_container_id,
         xhr_data_path:      navMenuOptions.xhr_data_path,
         xhr_data_element:   navMenuOptions.xhr_data_element },
@@ -321,21 +321,21 @@ j1.adapter['navigator'] = (function (j1, window) {
   	      if (j1.xhrDOMState['#'+navQuicklinksOptions.xhr_container_id] === 'success' &&
             j1.xhrDOMState['#'+navAuthClientConfig.xhr_container_id] === 'success' &&
             j1.xhrDOMState['#'+navMenuOptions.xhr_container_id] === 'success' ) {
-            // continue if all AJAX loads (xhrData) has finished
+            // continue if all AJAX loads (loadHTML) has finished
             _this.setState('processing');
-            logger.info('status: ' + _this.getState());
-            logger.info('initialize navigator core');
+            logger.info('\n' + 'status: ' + _this.getState());
+            logger.info('\n' + 'initialize navigator core');
 
             // Detect|Set J1 App status
             appDetected       = j1.appDetected();
             authClientEnabled = j1.authEnabled();
-            logger.info('application status detected: ' + appDetected);
+            logger.info('\n' + 'application status detected: ' + appDetected);
 
             j1.core.navigator.init (_this.navDefaults, _this.navMenuOptions);
 
             // load themes (to menu) if themer is enabled|finished
             if (themerEnabled) {
-              logText = 'theme switcher: enabled';
+              logText = '\n' + 'theme switcher: enabled';
               logger.info(logText);
 
               // detect j1 user state cookie
@@ -345,17 +345,17 @@ j1.adapter['navigator'] = (function (j1, window) {
               if (user_state_detected) {
                 user_state        = j1.readCookie(cookie_user_state_name);
               }  else {
-                logger.error('cookie not found: j1.user.state');
+                logger.error('\n' + 'cookie not found: j1.user.state');
               }
 
               // jadams, 2021-07-03: wait until navigator CORE get finished
               var dependencies_met_page_finished = setInterval(function() {
                 if (j1.adapter.navigator.getState() == 'core_initialized') {
-                  logText = 'load themes';
+                  logText = '\n' + 'load themes';
                   logger.info(logText);
 
                   // load LOCAL themes from JSON data
-                  logText = 'load local themes (json file)';
+                  logText = '\n' + 'load local themes (json file)';
                   logger.info(logText);
                   $('#local_themes').bootstrapThemeSwitcher({
                     localFeed: themerOptions.localThemes
@@ -378,16 +378,16 @@ j1.adapter['navigator'] = (function (j1, window) {
                     interval_count += 1;
                     themes_count = document.getElementById("remote_themes").getElementsByTagName("li").length;
                     if ( themes_count > 0  ) {
-                      logger.info('remote themes loaded: successfully');
-                      logger.info('remote themes loaded: successfully after: ' + interval_count * 25 + ' ms');
+                      logger.info('\n' + 'remote themes loaded: successfully');
+                      logger.info('\n' + 'remote themes loaded: successfully after: ' + interval_count * 25 + ' ms');
 
                       clearInterval(dependencies_met_remote_themes_loaded);
                     } else {
-                        logger.debug('wait for theme to be loaded: ' + user_state.theme_name);
+                        logger.debug('\n' + 'wait for theme to be loaded: ' + user_state.theme_name);
                     }
                     if (interval_count > max_count) {
-                      logger.warn('remote themes loading: failed');
-                      logger.warn('continue processing');
+                      logger.warn('\n' + 'remote themes loading: failed');
+                      logger.warn('\n' + 'continue processing');
                       clearInterval(dependencies_met_remote_themes_loaded);
                     }
                     clearInterval(dependencies_met_page_finished);
@@ -396,7 +396,7 @@ j1.adapter['navigator'] = (function (j1, window) {
                 _this.setState('initialized');
               }, 25); // END 'dependencies_met_page_finished'
             } else {
-              logText = 'theme switcher detected as: disabled';
+              logText = '\n' + 'theme switcher detected as: disabled';
               logger.info(logText);
             }
 
@@ -410,39 +410,39 @@ j1.adapter['navigator'] = (function (j1, window) {
                   _this.setState('processing');
 
                   // set general|global theme colors
-                  logger.info('initializing dynamic CSS styles');
+                  logger.info('\n' + 'initializing dynamic CSS styles');
                   _this.setCSS (
                     navDefaults, navBarOptions, navMenuOptions,
                     navQuicklinksOptions, navTopsearchOptions
                   );
 
-                  logger.info('init auth client');
+                  logger.info('\n' + 'init auth client');
                   _this.initAuthClient(_this.navAuthManagerConfig);
 
                   _this.setState('finished');
-                  logger.info('state: ' + _this.getState());
-                  logger.info('module initialized successfully');
-                  logger.info('met dependencies for: j1');
+                  logger.info('\n' + 'state: ' + _this.getState());
+                  logger.info('\n' + 'module initialized successfully');
+                  logger.info('\n' + 'met dependencies for: j1');
                   clearInterval(dependencies_met_initialized);
                 }
               } else {
                 _this.setState('processing');
 
                 // set general|global theme colors
-                logger.info('apply dynamic CSS styles');
+                logger.info('\n' + 'apply dynamic CSS styles');
                 _this.setCSS (
                   navDefaults, navBarOptions, navMenuOptions,
                   navQuicklinksOptions, navTopsearchOptions
                 );
 
-                logger.info('init auth client');
+                logger.info('\n' + 'init auth client');
                 _this.initAuthClient(_this.navAuthManagerConfig);
                 _this.setState('finished');
-                logger.info('state: ' + _this.getState());
+                logger.info('\n' + 'state: ' + _this.getState());
                 clearInterval(dependencies_met_initialized);
               }
             }, 25); // END 'dependencies_met_initialized'
-            logger.info('met dependencies for: themer');
+            logger.info('\n' + 'met dependencies for: themer');
             clearInterval(dependencies_met_load_menu_finished);
           }
         }, 25); // END 'dependencies_met_load_menu_finished'
@@ -529,7 +529,7 @@ j1.adapter['navigator'] = (function (j1, window) {
         do:               false
       };
 
-      logText = 'initialize button click events';
+      logText = '\n' + 'initialize button click events';
       logger.info(logText);
 
       // Manage button click events for modal "signInOutButton"
@@ -559,7 +559,7 @@ j1.adapter['navigator'] = (function (j1, window) {
         e.stopPropagation();
         signOut.providerSignOut = $('input:checkbox[name="providerSignOut"]').is(':checked');
         if(environment === 'development') {
-          logText = 'provider signout set to: ' + signOut.providerSignOut;
+          logText = '\n' + 'provider signout set to: ' + signOut.providerSignOut;
           logger.info(logText);
         }
       });
@@ -568,7 +568,7 @@ j1.adapter['navigator'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       $('#modalOmniSignOut').on('show.bs.modal', function() {
           var modal = $(this);
-          logger.info('place current user data');
+          logger.info('\n' + 'place current user data');
           user_session = j1.readCookie(cookie_user_session_name);
           modal.find('.user-info').text('You are signed in to provider: ' + user_session.provider);
       }); // END SHOW modalOmniSignOut
@@ -579,18 +579,18 @@ j1.adapter['navigator'] = (function (j1, window) {
         if (signIn.do == true) {
           provider      = signIn.provider.toLowerCase();
           allowed_users = signIn.users.toString();
-          logText       = 'provider detected: ' + provider;
+          logText       = '\n' + 'provider detected: ' + provider;
           logger.info(logText);
 
           var route = '/authentication?request=signin&provider=' +provider+ '&allowed_users=' +allowed_users;
-          logText = 'call middleware for signin on route: ' + route;
+          logText = '\n' + 'call middleware for signin on route: ' + route;
           logger.info(logText);
           window.location.href = route;
         } else {
           provider = signIn.provider.toLowerCase();
-          logText = 'provider detected: ' + provider;
+          logText = '\n' + 'provider detected: ' + provider;
           logger.info(logText);
-          logText = 'login declined for provider: ' +provider;
+          logText = '\n' + 'login declined for provider: ' +provider;
           logger.info(logText);
         }
       }); // END post events "modalOmniSignIn"
@@ -599,31 +599,31 @@ j1.adapter['navigator'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       $('#modalOmniSignOut').on('hidden.bs.modal', function() {
         if (signOut.do == true) {
-          logger.info('load active provider from cookie: ' + cookie_user_session_name);
+          logger.info('\n' + 'load active provider from cookie: ' + cookie_user_session_name);
 
           user_session  = j1.readCookie(cookie_user_session_name);
           provider      = user_session.provider;
           provider_url  = user_session.provider_site_url;
 
-          logText = 'provider detected: ' + provider;
+          logText = '\n' + 'provider detected: ' + provider;
           logger.info(logText);
-          logText = 'initiate signout for provider: ' +provider;
+          logText = '\n' + 'initiate signout for provider: ' +provider;
           logger.info(logText);
 
           var route = '/authentication?request=signout&provider=' + provider + '&provider_signout=' + signOut.providerSignOut; // + '/logout/';
-          logText = 'call middleware on route : ' +route;
+          logText = '\n' + 'call middleware on route : ' +route;
           logger.info(logText);
           window.location.href = route;
         } else {
           provider = signOut.provider.toLowerCase();
-          logText = 'provider detected: ' + provider;
+          logText = '\n' + 'provider detected: ' + provider;
           logger.info(logText);
-          logText = 'signout declined for provider: ' +provider ;
+          logText = '\n' + 'signout declined for provider: ' +provider ;
           logger.info(logText);
         }
       }); // END post events "modalSignOut"
 
-      logText = 'initialize button click events completed';
+      logText = '\n' + 'initialize button click events completed';
       logger.info(logText);
 
       return true;
@@ -640,7 +640,7 @@ j1.adapter['navigator'] = (function (j1, window) {
       var gridBreakpoint_sm   = '576px';
       var navPrimaryColor     = navDefaults.nav_primary_color;
 
-      logger.info('set dynamic styles for the theme loaded');
+      logger.info('\n' + 'set dynamic styles for the theme loaded');
 
       // Set|Resolve navMenuOptions
       // ------------------------------------------------------------------------
@@ -784,7 +784,7 @@ j1.adapter['navigator'] = (function (j1, window) {
       var theElement = null;
       var theLastPosition = {x:0,y:0};
 
-      logText ='entered delayShowMenu';
+      logText = '\n' + 'entered delayShowMenu';
       logger.info(logText);
 
       // $('#navigator_nav_menu')
@@ -833,10 +833,10 @@ j1.adapter['navigator'] = (function (j1, window) {
       var json_message = JSON.stringify(message);
       _this.setState(message.action);
 
-      logText = 'received message from ' + sender + ': ' + json_message;
+      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.info(logText);
 
-      logText = 'set state to: ' + message.action;
+      logText = '\n' + 'set state to: ' + message.action;
       logger.info(logText);
 
       // -----------------------------------------------------------------------
@@ -846,10 +846,10 @@ j1.adapter['navigator'] = (function (j1, window) {
         //
         // Place handling of command|action here
         //
-        logger.info(message.text);
+        logger.info('\n' + message.text);
       }
       if (message.type === 'command' && message.action === 'status') {
-        logger.info('messageHandler: received - ' + message.action);
+        logger.info('\n' + 'messageHandler: received - ' + message.action);
       }
 
       //

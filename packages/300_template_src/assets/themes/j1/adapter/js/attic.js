@@ -121,8 +121,8 @@ j1.adapter['attic'] = (function (j1, window) {
       _this['frontmatterOptions'] = frontmatterOptions;
 
       _this.setState('started');
-      logger.info('state: ' + _this.getState());
-      logger.info('module is being initialized');
+      logger.info('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'module is being initialized');
 
       _this.loadHeader(frontmatterOptions);
     }, // END init
@@ -183,7 +183,7 @@ j1.adapter['attic'] = (function (j1, window) {
             -------------------------------------------------------------------- {% endcomment %}
            $(window).on('backstretch.before', function (e, instance, index) {
               _this.setState('backstretch_before');
-              logger.debug('state: ' + _this.getState());
+              logger.debug('\n' + 'state: ' + _this.getState());
             });
 
             {% comment %} Add a caption (c) or badge (b) if configured
@@ -192,8 +192,8 @@ j1.adapter['attic'] = (function (j1, window) {
             $(window).on('backstretch.after', function (e, instance, index) {
               logText ='add caption text';
               _this.setState('backstretch_after');
-              logger.debug('state: ' + status);
-              logger.debug(logText);
+              logger.debug('\n' + 'state: ' + status);
+              // logger.debug(logText);
 
               if (typeof atticOptions.slides[index].caption != 'undefined') {
                 var cText = atticOptions.slides[index].caption.text;
@@ -233,8 +233,8 @@ j1.adapter['attic'] = (function (j1, window) {
                 }
               }
               _this.setState('finished');
-              logger.info('state: ' + _this.getState());
-              logger.info('module initialized successfully');
+              logger.info('\n' + 'state: ' + _this.getState());
+              logger.info('\n' + 'module initialized successfully');
             });
 
             {% comment %} Detect how show should run (only once|infinite loop)
@@ -242,7 +242,7 @@ j1.adapter['attic'] = (function (j1, window) {
             {% if image_loop %}
             $(window).on('backstretch.before', function (e, instance, index) {
               _this.setState('backstretch_before_image_loop');
-              logger.debug('state: ' + _this.getState());
+              logger.debug('\n' + 'state: ' + _this.getState());
               // remove class for the backstretch_intro background
               if (index === backstretch_instance_data.images.length -1) {
                 $('.backstretch').removeClass(atticOptions.spinner);
@@ -251,7 +251,7 @@ j1.adapter['attic'] = (function (j1, window) {
             {% else %}
             $(window).on('backstretch.before', function (e, instance, index) {
               _this.setState('backstretch_before_image_once');
-              logger.debug('state: ' + _this.getState());
+              logger.debug('\n' + 'state: ' + _this.getState());
               // Stop the slideshow after reached the last image
               if (index === backstretch_instance_data.images.length -1) {
                 $('#{{attic_id}}').backstretch('pause');
@@ -494,18 +494,18 @@ j1.adapter['attic'] = (function (j1, window) {
             $('head').append(attic_opacity);
 
             _this.setState('initialized');
-            logger.info('state: ' + _this.getState());
+            logger.info('\n' + 'state: ' + _this.getState());
 
             {% comment %} Run the image header if any
             -------------------------------------------------------------------- {% endcomment %}
             if (typeof atticOptions.slides != 'undefined') {
               // Load the image header if the page is ready (visible)
               $(function() {
-                // logger.debug('Load image header on: ' + {{attic_id}});
-                logger.debug('Load image header');
+                // logger.debug('\n' + 'Load image header on: ' + {{attic_id}});
+                logger.debug('\n' + 'Load image header');
                 {{attic_id}}(atticOptions);
                 _this.setState('completed');
-                logger.info('state: ' + _this.getState());
+                logger.info('\n' + 'state: ' + _this.getState());
               });
             }
           } // END if header id found in page
@@ -515,8 +515,8 @@ j1.adapter['attic'] = (function (j1, window) {
       // NO header found in page
       if ($('#no_header').length) {
         _this.setState('completed');
-        logger.info('state: ' + _this.getState());
-        logger.warn('No header configured or found in page');
+        logger.info('\n' + 'state: ' + _this.getState());
+        logger.warn('\n' + 'no header configured or found in page');
       }
 
       return true;
@@ -529,7 +529,7 @@ j1.adapter['attic'] = (function (j1, window) {
     messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = 'received message from ' + sender + ': ' + json_message;
+      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -537,7 +537,7 @@ j1.adapter['attic'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
         status = 'completed';
-        logger.info(message.text);
+        logger.info('\n' + message.text);
       }
 
       //

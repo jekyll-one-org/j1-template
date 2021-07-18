@@ -111,8 +111,8 @@ j1.adapter['rouge'] = (function (j1, window) {
 
       // initialize state flag
       _this.setState('started');
-      logger.info('state: ' + _this.getState());
-      logger.info('module is being initialized');
+      logger.info('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'module is being initialized');
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -125,7 +125,7 @@ j1.adapter['rouge'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       // rouge initializer
       // -----------------------------------------------------------------------
-      var log_text = 'Rouge is being initialized';
+      var log_text = '\n' + 'module is being initialized';
       logger.info(log_text);
 
       // Detect|Set J1 UserState
@@ -139,7 +139,7 @@ j1.adapter['rouge'] = (function (j1, window) {
                                 themeCss.includes('slate') ||
                                 themeCss.includes('superhero');
       } else {
-        log_text = 'user_state cookie not found';
+        log_text = '\n' + 'user_state cookie not found';
         logger.warn(log_text);
       }
 
@@ -149,7 +149,7 @@ j1.adapter['rouge'] = (function (j1, window) {
             $('#selected').html("Current Selection: <div class='bg-primary mt-1 p-2'>"+$(this).text()+"</div>");
          });
           _this.setState('finished');
-          logger.info('state: ' + _this.getState());
+          logger.info('\n' + 'state: ' + _this.getState());
           clearInterval(dependencies_met_j1_finished);
         } // END dependencies_met_j1_finished
       }, 25);
@@ -200,7 +200,7 @@ j1.adapter['rouge'] = (function (j1, window) {
     messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = 'received message from ' + sender + ': ' + json_message;
+      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -210,7 +210,7 @@ j1.adapter['rouge'] = (function (j1, window) {
         //
         // Place handling of command|action here
         //
-        logger.info(message.text);
+        logger.info('\n' + message.text);
       }
 
       //

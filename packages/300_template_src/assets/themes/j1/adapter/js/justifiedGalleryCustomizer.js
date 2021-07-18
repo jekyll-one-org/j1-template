@@ -130,8 +130,8 @@ j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
 
       // initialize state flag
       _this.setState('started');
-      logger.info('state: ' + _this.getState());
-      logger.info('module is being initialized');
+      logger.info('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'module is being initialized');
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -151,7 +151,7 @@ j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
       // ---------------------------------------------------------------------
       // data loader
       // ---------------------------------------------------------------------
-      j1.xhrData ({
+      j1.loadHTML ({
         xhr_container_id:   customizerOptions.xhr_container_id,
         xhr_data_path:      customizerOptions.xhr_data_path,
         xhr_data_element:   customizerOptions.xhr_data_element },
@@ -171,13 +171,13 @@ j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
           var kbdDelay        = 750;
           var imageHeightMin  = 40;
 
-          logger.info('loading customizer finished on id: #' + customizerOptions.xhr_container_id);
+          logger.info('\n' + 'loading customizer finished on id: #' + customizerOptions.xhr_container_id);
 
           // -------------------------------------------------------------------
           // load gallery data
           j1.adapter.justifiedGallery.initialize(galleryOptions);
 
-          logger.info('initialize customizer ui|forms');
+          logger.info('\n' + 'initialize customizer ui|forms');
 
           if ($formId.length) {
             var timerid;
@@ -194,7 +194,7 @@ j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
                   timerid = setTimeout(function() {
                     $instance.justifiedGallery({rowHeight: value});
                     if (environment === 'development') {
-                      logText = 'Gallery on ID ' +galleryId+ ' changed rowHeight to: ' +value;
+                      logText = '\n' + 'gallery on ID ' +galleryId+ ' changed rowHeight to: ' +value;
                       logger.info(logText);
                     }
                   }, kbdDelay);
@@ -212,7 +212,7 @@ j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
                   timerid = setTimeout(function() {
                     $instance.justifiedGallery({maxRowHeight: value});
                     if(environment === 'development') {
-                      logText = 'Gallery on ID ' +galleryId+ ' changed maxRowHeight to: ' +value;
+                      logText = '\n' + 'gallery on ID ' +galleryId+ ' changed maxRowHeight to: ' +value;
                       logger.info(logText);
                     }
                   }, kbdDelay);
@@ -230,7 +230,7 @@ j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
                   timerid = setTimeout(function() {
                     $instance.justifiedGallery({margins: value});
                     if(environment === 'development') {
-                      logText = 'Gallery on ID ' +galleryId+ ' changed margins to: ' +value;
+                      logText = '\n' + 'gallery on ID ' +galleryId+ ' changed margins to: ' +value;
                       logger.info(logText);
                     }
                   }, kbdDelay);
@@ -248,7 +248,7 @@ j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
                   timerid = setTimeout(function() {
                     $instance.justifiedGallery({border: value});
                     if(environment === 'development') {
-                      logText = 'Gallery on ID ' +galleryId+ ' changed padding to: ' +value;
+                      logText = '\n' + 'gallery on ID ' +galleryId+ ' changed padding to: ' +value;
                       logger.info(logText);
                     }
                   }, kbdDelay);
@@ -261,7 +261,7 @@ j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
 
               $instance.justifiedGallery({captions: value});
               if(environment === 'development') {
-                logText = 'Gallery on ID ' +galleryId+ ' changed captions to: ' +value;
+                logText = '\n' + 'gallery on ID ' +galleryId+ ' changed captions to: ' +value;
                 logger.info(logText);
               }
               e.stopPropagation();
@@ -272,7 +272,7 @@ j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
 
               $instance.justifiedGallery({randomize: value});
               if(environment === 'development') {
-                logText = 'Gallery on ID ' +galleryId+ ' changed randomize to: ' +value;
+                logText = '\n' + 'gallery on ID ' +galleryId+ ' changed randomize to: ' +value;
                 logger.info(logText);
               }
               e.stopPropagation();
@@ -289,7 +289,7 @@ j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
                 $instance.justifiedGallery({lastRow: value});
               }
               if(environment === 'development') {
-                logText = 'Gallery on ID ' +galleryId+ ' changed lastRow to: ' +value;
+                logText = '\n' + 'gallery on ID ' +galleryId+ ' changed lastRow to: ' +value;
                 logger.info(logText);
               }
               e.stopPropagation();
@@ -306,7 +306,7 @@ j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
                 $instance.justifiedGallery({lastRow: value});
               }
               if(environment === 'development') {
-                logText = 'Gallery on ID ' +galleryId+ ' changed lastRow to: ' +value;
+                logText = '\n' + 'gallery on ID ' +galleryId+ ' changed lastRow to: ' +value;
                 logger.info(logText);
               }
               e.stopPropagation();
@@ -338,7 +338,7 @@ j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
               });
 
               if(environment === 'development') {
-                logText = 'Gallery on ID ' +galleryId+ ' reset to default values';
+                logText = '\n' + 'gallery on ID ' +galleryId+ ' reset to default values';
                 logger.info(logText);
               }
               e.stopPropagation();
@@ -355,9 +355,9 @@ j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
           });
 
           _this.setState('finished');
-          logger.info('state: ' + _this.getState());
-          logger.info('initializing module finished');
-          logger.info('met dependencies for: xhrData');
+          logger.info('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'initializing module finished');
+          logger.info('\n' + 'met dependencies for: loadHTML');
           clearInterval(dependencies_met_data_loaded);
         } // END dependencies_met_data_loaded
       }, 25);
@@ -370,7 +370,7 @@ j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
     messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = 'received message from ' + sender + ': ' + json_message;
+      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -380,7 +380,7 @@ j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
         //
         // Place handling of command|action here
         //
-        logger.info(message.text);
+        logger.info('\n' + message.text);
       }
 
       //

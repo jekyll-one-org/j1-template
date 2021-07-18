@@ -154,7 +154,7 @@
       //
       if (docs.length > 0) {
         var logger =    log4javascript.getLogger("j1.searcher");
-        var log_text =  'cleanup tags and categories';
+        var log_text =  '\n' + 'cleanup tags and categories';
         logger.info(log_text);
         $('.sr-tags').each(function() {
           var sr_tags = $(this).html().replace(/^\s+(.*)(\s+·\s+$)/, "$1");

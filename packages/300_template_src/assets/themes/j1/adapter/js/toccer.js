@@ -127,8 +127,8 @@ j1.adapter['toccer'] = (function () {
 
       // initialize state flag
       _this.setState('started');
-      logger.info('state: ' + _this.getState());
-      logger.info('Module is being initialized');
+      logger.info('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'module is being initialized');
 
       // create settings object from frontmatterOptions
       var frontmatterOptions = options != null ? $.extend({}, options) : {};
@@ -175,9 +175,9 @@ j1.adapter['toccer'] = (function () {
             _this.initToccerCore(settings);
             _this.setState('finished');
 
-            logger.info('state: ' + _this.getState());
-            logger.info('module initialized successfully');
-            logger.info('met dependencies for: j1');
+            logger.info('\n' + 'state: ' + _this.getState());
+            logger.info('\n' + 'module initialized successfully');
+            logger.info('\n' + 'met dependencies for: j1');
             clearInterval(dependencies_met_navigator);
           }
         }, 25);
@@ -219,7 +219,7 @@ j1.adapter['toccer'] = (function () {
       scrollOffset        = scrollOffset + moduleOptions.scrollSmoothOffset
 
       _this.setState('running');
-      logger.info('state: ' + _this.getState());
+      logger.info('\n' + 'state: ' + _this.getState());
 
       // tocbot get fired if HTML portion is loaded (AJAX load finished)
       //
@@ -256,7 +256,7 @@ j1.adapter['toccer'] = (function () {
             throttleTimeout:        moduleOptions.throttleTimeout
           });
           /* eslint-enable */
-          logger.info('met dependencies for: xhrData');
+          logger.info('\n' + 'met dependencies for: loadHTML');
           clearInterval(dependencies_met_ajax_load_finished);
         } // END AJAX load finished
       }, 25); // END dependencies_met_ajax_load_finished
@@ -323,7 +323,7 @@ j1.adapter['toccer'] = (function () {
     messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = 'received message from ' + sender + ': ' + json_message;
+      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -333,7 +333,7 @@ j1.adapter['toccer'] = (function () {
         //
         // Place handling of command|action here
         //
-        logger.info(message.text);
+        logger.info('\n' + message.text);
       }
 
       //

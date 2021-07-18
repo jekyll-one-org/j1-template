@@ -196,7 +196,7 @@ j1.adapter['logger'] = (function (j1, window) {
 
         if (user_session.mode !== 'na') {
           clearInterval(dependencies_met_mode_detected);
-          logger.info('met dependencies for: mode detected');
+          logger.info('\n' + 'met dependencies for: mode detected');
           appDetected = user_session.mode === 'app' ? true : false;
 
           if (appDetected) {
@@ -275,14 +275,14 @@ j1.adapter['logger'] = (function (j1, window) {
           //
           if (ajaxAppenderOptions.enabled) {
             log4javascript.getRootLogger().addAppender(ajaxAppender);
-            logger.info('ajax appender/util server detected as: enabled');
+            logger.info('\n' + 'ajax appender/util server detected as: enabled');
           } else {
-            logger.info('ajax appender/util server detected as: disabled');
+            logger.info('\n' + 'ajax appender/util server detected as: disabled');
           }
 
           _this.setState('finished');
-          logger.info('state: ' + _this.getState());
-          logger.info('module initialized successfully');
+          logger.info('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module initialized successfully');
 
           return true;
         }
@@ -296,7 +296,7 @@ j1.adapter['logger'] = (function (j1, window) {
     messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = 'received message from ' + sender + ': ' + json_message;
+      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -306,7 +306,7 @@ j1.adapter['logger'] = (function (j1, window) {
         //
         // place handling of command|action here
         //
-        logger.info(message.text);
+        logger.info('\n' + message.text);
       }
 
       //

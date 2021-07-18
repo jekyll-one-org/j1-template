@@ -113,7 +113,7 @@ j1.adapter['octokit'] = (function (j1, window) {
 
         // Load webhook modals
         logger.info('loading html data for modals');
-        $.when (j1.xhrData('j1.adapter.octokit', moduleOptions , 'data_loaded'))
+        $.when (j1.loadHTML('j1.adapter.octokit', moduleOptions , 'data_loaded'))
         .then (function (success) {
           if (success) {
             // Run initializers if webhook modals are LOADED
@@ -137,7 +137,7 @@ j1.adapter['octokit'] = (function (j1, window) {
           return true;
         })
         .catch(function(error) {
-          logger.error('loading html data for modals failed at: j1.xhrData');
+          logger.error('loading html data for modals failed at: j1.loadHTML');
           return false;
         });
 

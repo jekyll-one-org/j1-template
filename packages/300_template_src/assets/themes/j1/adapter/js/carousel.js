@@ -131,8 +131,8 @@ j1.adapter['carousel'] = (function (j1, window) {
       }
 
       _this.setState('started');
-      logger.info('state: ' + _this.getState());
-      logger.info('module is being initialized');
+      logger.info('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'module is being initialized');
 
       var dependencies_met_page_finished = setInterval(function() {
         if (j1.getState() == 'finished') {
@@ -157,11 +157,11 @@ j1.adapter['carousel'] = (function (j1, window) {
               if ($('#{{slider_id}}').length) {
 
                 {% if environment == 'development' %}
-                  logText = 'slider is being initialized on id: #{{slider_id}}';
+                  logText = '\n' + 'slider is being initialized on id: #{{slider_id}}';
                   logger.info(logText);
                   _this.setState('running');
-                  logger.info('state: ' + _this.getState());
-                  logger.info('module is being initialized');
+                  logger.info('\n' + 'state: ' + _this.getState());
+                  logger.info('\n' + 'module is being initialized');
                 {% endif %}
 
                 {% if item.show.slide_height != null %}
@@ -336,7 +336,7 @@ j1.adapter['carousel'] = (function (j1, window) {
                     {% endif %}
                   }
                   $('#{{slider_id}}').html(content);
-                  logText = 'initializing slider finished on id: {{slider_id}}';
+                  logText = '\n' + 'initializing slider finished on id: {{slider_id}}';
                   logger.info(logText);
                 } // END customDataSuccess_{{forloop.index}}
               } // END if carousel exists
@@ -345,8 +345,8 @@ j1.adapter['carousel'] = (function (j1, window) {
           clearInterval(dependencies_met_page_finished);
         }
         _this.setState('finished');
-        logger.info('state: ' + _this.getState());
-        logger.info('initializing module finished');
+        logger.info('\n' + 'state: ' + _this.getState());
+        logger.info('\n' + 'initializing module finished');
       }, 25); // END 'dependencies_met_adapter_finished'
     }, // END init
 
@@ -357,7 +357,7 @@ j1.adapter['carousel'] = (function (j1, window) {
     messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = 'received message from ' + sender + ': ' + json_message;
+      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -367,7 +367,7 @@ j1.adapter['carousel'] = (function (j1, window) {
         //
         // Place handling of command|action here
         //
-        logger.info(message.text);
+        logger.info('\n' + message.text);
       }
 
       //

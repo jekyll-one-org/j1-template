@@ -173,7 +173,7 @@ j1.adapter['themer'] = (function (j1, window) {
 
       // initialize state flag
       _this.state = 'started';
-      logger.info('state: ' + _this.getState());
+      logger.info('\n' + 'state: ' + _this.getState());
 
       // jadams, 2021-07-11: added dependecy on the user state cookie
       // Found timing issues testing mobile devices (iPad)
@@ -187,7 +187,7 @@ j1.adapter['themer'] = (function (j1, window) {
            user_state        = j1.readCookie(cookie_names.user_state);
            user_consent      = j1.readCookie(cookie_names.user_consent);
 
-           logger.info('cookie ' +  cookie_names.user_state + ' successfully loaded after: ' + interval_count * 25 + ' ms');
+           logger.info('\n' + 'cookie ' +  cookie_names.user_state + ' successfully loaded after: ' + interval_count * 25 + ' ms');
 
            // initial theme data
            if (user_state.theme_css === '') {
@@ -207,7 +207,7 @@ j1.adapter['themer'] = (function (j1, window) {
                $('head').append(theme_css_html);
              }
            } else {
-             logger.fatal('inconsistent state detected for cookie: ' + cookie_names.user_state);
+             logger.fatal('\n' + 'inconsistent state detected for cookie: ' + cookie_names.user_state);
            }
 
            // set the theme switcher state
@@ -222,7 +222,7 @@ j1.adapter['themer'] = (function (j1, window) {
                samesite: 'Strict'
              });
              if (!cookie_written) {
-             	logger.error('failed to write cookie: ' + cookie_names.user_state);
+             	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
              }
            } else {
              cookie_written = j1.writeCookie({
@@ -232,14 +232,14 @@ j1.adapter['themer'] = (function (j1, window) {
                expires:  365
              });
              if (!cookie_written) {
-             	logger.error('failed to write cookie: ' + cookie_names.user_state);
+             	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
              }
            }
 
            if (themerOptions.enabled) {
            // enable BS ThemeSwitcher
-           logger.info('themes detected as: enabled');
-           logger.info('theme is being initialized: ' + user_state.theme_name);
+           logger.info('\n' + 'themes detected as: enabled');
+           logger.info('\n' + 'theme is being initialized: ' + user_state.theme_name);
 
            /* eslint-disable */
            // load list of remote themes
@@ -264,23 +264,23 @@ j1.adapter['themer'] = (function (j1, window) {
            };
            /* eslint-enable */
 
-           logger.info('theme loaded: ' + user_state.theme_name);
-           logger.info('theme css file: ' + user_state.theme_css);
+           logger.info('\n' + 'theme loaded: ' + user_state.theme_name);
+           logger.info('\n' + 'theme css file: ' + user_state.theme_css);
            _this.setState('finished');
-           logger.info('state: ' + _this.getState());
-           logger.info('module initialized successfully');
+           logger.info('\n' + 'state: ' + _this.getState());
+           logger.info('\n' + 'module initialized successfully');
          } else {
            _this.setState('finished');
-           logger.info('state: ' + _this.getState());
-           logger.info('themes detected as: disabled');
+           logger.info('\n' + 'state: ' + _this.getState());
+           logger.info('\n' + 'themes detected as: disabled');
          }
           clearInterval(dependencies_met_user_state_available);
         }
 
         if (interval_count > max_count) {
-          logger.error('interval max count reached: ' + max_count);
-          logger.error('check failed after: ' + max_count * 25 + ' ms');
-          logger.fatal('loading cookie failed: ' + cookie_names.user_state);
+          logger.error('\n' + 'interval max count reached: ' + max_count);
+          logger.error('\n' + 'check failed after: ' + max_count * 25 + ' ms');
+          logger.error('\n' + 'loading cookie failed: ' + cookie_names.user_state);
 
           // for development only
           if (environment === 'development') {
@@ -292,7 +292,7 @@ j1.adapter['themer'] = (function (j1, window) {
           // NOTE: UNCLEAR why it is needed to create the user state
           // cookie THIS way
           //
-          logger.warn('redirect to home page');
+          logger.warn('\n' + 'redirect to home page');
 //        window.location.href = error_page;
           window.location.href = '/';
           clearInterval(dependencies_met_user_state_available);
@@ -307,14 +307,14 @@ j1.adapter['themer'] = (function (j1, window) {
     messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = 'received message from ' + sender + ': ' + json_message;
+      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.info(logText);
 
       // -----------------------------------------------------------------------
       //  Process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
-        logger.info(message.text);
+        logger.info('\n' + message.text);
         //
         // Place handling of other command|action here
         //

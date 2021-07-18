@@ -117,8 +117,8 @@ j1.adapter['lightbox'] = (function (j1, window) {
       logger  = log4javascript.getLogger('j1.adapter.lightbox');
 
       _this.setState('started');
-      logger.info('state: ' + _this.getState());
-      logger.info('module is being initialized');
+      logger.info('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'module is being initialized');
 
       /* eslint-disable */
       lightbox.option({
@@ -138,8 +138,8 @@ j1.adapter['lightbox'] = (function (j1, window) {
       /* eslint-enable */
 
       _this.setState('finished');
-      logger.info('state: ' + _this.getState());
-      logger.info('initializing module finished');
+      logger.info('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'initializing module finished');
 
       return true;
     }, // END init lightbox
@@ -151,7 +151,7 @@ j1.adapter['lightbox'] = (function (j1, window) {
     messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = 'received message from ' + sender + ': ' + json_message;
+      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -161,7 +161,7 @@ j1.adapter['lightbox'] = (function (j1, window) {
         //
         // Place handling of command|action here
         //
-        logger.info(message.text);
+        logger.info('\n' + message.text);
       }
 
       //

@@ -135,13 +135,13 @@ j1.adapter['cookiebar'] = (function (j1, window) {
         referrer:               {{ cookiebar_options.referrer | json }}
       });
 
-      j1.xhrData(moduleOptions, 'j1.adapter.cookiebar', 'data_loaded');
+      j1.loadHTML(moduleOptions, 'j1.adapter.cookiebar', 'data_loaded');
 
       // ---------------------------------------------------------------------
       // Initialize events if all modals loaded
       // ---------------------------------------------------------------------
       var dependencies_met_modals_loaded = setInterval (function () {
-        if (j1.xhrDataState['#{{cookiebar_options.xhr_container_id}}'] == 'success') {
+        if (j1.loadHTMLState['#{{cookiebar_options.xhr_container_id}}'] == 'success') {
           logger.info('load HTML data (AJAX): finished');
           j1.core.cookiebar.eventHandler(moduleOptions);
           _this.setState('finished');
@@ -150,7 +150,7 @@ j1.adapter['cookiebar'] = (function (j1, window) {
           clearInterval(dependencies_met_modals_loaded);
           logger.info('met dependencies for: xhrData');
         }
-        if (j1.xhrDataState['#{{cookiebar_options.xhr_container_id}}'] == 'not loaded') {
+        if (j1.loadHTMLState['#{{cookiebar_options.xhr_container_id}}'] == 'not loaded') {
           logger.error('load HTML data (AJAX): failed');
           _this.setState('finished');
           logger.info('state: ' + _this.getState());

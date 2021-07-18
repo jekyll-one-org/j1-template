@@ -143,8 +143,8 @@ j1.adapter['mmenu'] = (function (j1, window) {
 
       // initialize state flag
       _this.setState('started');
-      logger.info('state: ' + _this.getState());
-      logger.info('module is being initialized');
+      logger.info('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'module is being initialized');
 
       // -----------------------------------------------------------------------
       // defaults
@@ -173,8 +173,8 @@ j1.adapter['mmenu'] = (function (j1, window) {
       if (options != null) { var frontmatterOptions = $.extend({}, options); }
 
       _this.setState('started');
-      logger.info('state: ' + _this.getState());
-      logger.info('module is being initialized');
+      logger.info('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'module is being initialized');
       _this.mmenuLoader(navMenuOptions);
     }, // END init
 
@@ -186,8 +186,8 @@ j1.adapter['mmenu'] = (function (j1, window) {
       var xhr_data_path;
 
       _this.setState('loading');
-      logger.info('status: ' + _this.getState());
-      logger.info('load HTML data for navs and drawers');
+      logger.info('\n' + 'status: ' + _this.getState());
+      logger.info('\n' + 'load HTML data for navs and drawers');
 
       {% assign id_list = "" %}
 
@@ -216,7 +216,7 @@ j1.adapter['mmenu'] = (function (j1, window) {
       {% assign xhr_data_path     = item.menu.xhr_data_path %}
       {% assign xhr_data_element  = item.menu.xhr_data_element %}
 
-      j1.xhrData ({
+      j1.loadHTML ({
         xhr_container_id:   '{{menu_id}}',
         xhr_data_path:      '{{xhr_data_path}}',
         xhr_data_element:   '{{xhr_data_element}}' },
@@ -227,11 +227,11 @@ j1.adapter['mmenu'] = (function (j1, window) {
       {% capture id_list %}{{id_list}}{{menu_id}}{% if forloop.last %}{% else %},{% endif %} {% endcapture %}
       {% endfor %} // ENDFOR menus
 
-      logger.info('initialize navs and drawers');
+      logger.info('\n' + 'initialize navs and drawers');
       _this.mmenuInitializer(mmOptions);
       _this.setState('finished');
-      logger.info('state: ' + _this.getState());
-      logger.info('module initialized successfully');
+      logger.info('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'module initialized successfully');
 
     }, // END dataLoader
 
@@ -251,20 +251,20 @@ j1.adapter['mmenu'] = (function (j1, window) {
       // Create an mmenu instance if id exists: {{menu_id}}
       if ($('#{{menu_id}}').length) {
 
-        logger.info('mmenu is being initialized on id: {{menu_id}}');
+        logger.info('\n' + 'mmenu is being initialized on id: {{menu_id}}');
 
         {% if item.menu.content.type == "navigation" %}
         // Create an mmenu instance of type NAVIGATION
-        logger.info('found content type: NAVIGATION');
+        logger.info('\n' + 'found content type: NAVIGATION');
         // ---------------------------------------------------------------------
         // menu initializer (NAVIGATION)
         // ---------------------------------------------------------------------
         // NOTE: Run load check (j1.xhrDataState) before initialization
         //
-        logger.info('initialize mmenu on id: #{{menu_id}}');
+        logger.info('\n' + 'initialize mmenu on id: #{{menu_id}}');
         var dependencies_met_{{menu_id}}_loaded = setInterval (function () {
           if (j1.xhrDataState['#{{menu_id}}'] == 'success' ) {
-            logger.info('met dependencies for: xhrData/{{menu_id}}');
+            logger.info('\n' + 'met dependencies for: {{menu_id}}');
             const menu_selector = document.querySelector('#{{menu_id}}');
             const mmenu_{{menu_id}} = new MmenuLight (
               menu_selector,
@@ -327,29 +327,29 @@ j1.adapter['mmenu'] = (function (j1, window) {
             }
 
             $('#{{item.menu.content.id}}').show();
-            logger.info('initializing mmenu finished on id: #{{menu_id}}');
-            logger.info('met dependencies for: {{menu_id}} loaded');
+            logger.info('\n' + 'initializing mmenu finished on id: #{{menu_id}}');
+            logger.info('\n' + 'met dependencies for: {{menu_id}} loaded');
             clearInterval(dependencies_met_{{menu_id}}_loaded);
             $('#{{item.menu.content.id}}').show();
-            logger.info('initializing mmenu finished on id: #{{menu_id}}');
+            logger.info('\n' + 'initializing mmenu finished on id: #{{menu_id}}');
           }; // END mmenu_loaded
         }, 25); // END dependencies_met_mmenu_loaded
         {% endif %} // ENDIF content_type: NAVIGATION
 
         {% if item.menu.content.type == "drawer" %}
           // Create an mmenu instance of type HTML
-          logger.info('found content type: DRAWER');
+          logger.info('\n' + 'found content type: DRAWER');
           // -------------------------------------------------------------------
           // menu initializer (DRAWER)
           // -------------------------------------------------------------------
           // TODO: Check if Toggle button make sense/should be implemented
           // NOTE: Run load check (j1.xhrDataState) before initialization
           //
-          logger.info('initialize mmenu on id: #{{menu_id}}');
+          logger.info('\n' + 'initialize mmenu on id: #{{menu_id}}');
           var dependencies_met_{{menu_id}}_loaded = setInterval (function () {
             if (j1.xhrDataState['#{{menu_id}}'] == 'success' &&
                 $('{{item.menu.content.button}}').length) {
-              logger.info('met dependencies for: xhrData/{{menu_id}}');
+              logger.info('\n' + 'met dependencies for: xhrData/{{menu_id}}');
 
               const menu_selector = document.querySelector('#{{menu_id}}');
               const mmenu_{{menu_id}} = new MmenuLight (
@@ -395,12 +395,12 @@ j1.adapter['mmenu'] = (function (j1, window) {
                   } // END if hasclass
                 });
               });
-              logger.info('met dependencies for: {{menu_id}} loaded');
+              logger.info('\n' + 'met dependencies for: {{menu_id}} loaded');
               clearInterval(dependencies_met_{{menu_id}}_loaded);
               $('#{{item.menu.content.id}}').show();
           }; // END if menu_loaded
         }, 25); // END dependencies_met_mmenu_loaded
-        logger.info('initializing mmenu finished on id: #{{menu_id}}');
+        logger.info('\n' + 'initializing mmenu finished on id: #{{menu_id}}');
         {% endif %} // ENDIF content_type: DRAWER
         } // END menus|drawers
       {% endif %} // ENDIF menu enabled
@@ -415,7 +415,7 @@ j1.adapter['mmenu'] = (function (j1, window) {
       // var json_message = JSON.stringify(message, undefined, 2);              // multiline
       var json_message = JSON.stringify(message);
 
-      logText = 'received message from ' + sender + ': ' + json_message;
+      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -425,10 +425,10 @@ j1.adapter['mmenu'] = (function (j1, window) {
         //
         // Place handling of command|action here
         //
-        logger.info(message.text);
+        logger.info('\n' + message.text);
       }
       if (message.type === 'command' && message.action === 'status') {
-        logger.info('messageHandler: received - ' + message.action);
+        logger.info('\n' + 'messageHandler: received - ' + message.action);
       }
 
       //

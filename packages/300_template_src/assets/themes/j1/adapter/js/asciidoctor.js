@@ -79,8 +79,8 @@ j1.adapter['asciidoctor'] = (function (j1, window) {
 
       // initialize state flag
       _this.setState('started');
-      logger.info('state: ' + _this.getState());
-      logger.info('module is being initialized');
+      logger.info('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'module is being initialized');
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -93,7 +93,7 @@ j1.adapter['asciidoctor'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       // asciidoctor initializer
       // -----------------------------------------------------------------------
-      var log_text = 'asciidoctor is being initialized';
+      var log_text = '\n' + 'asciidoctor is being initialized';
       logger.info(log_text);
 
 
@@ -103,7 +103,7 @@ j1.adapter['asciidoctor'] = (function (j1, window) {
         	j1.core.asciidoctor.init();
 
           _this.setState('finished');
-          logger.info('state: ' + _this.getState());
+          logger.info('\n' + 'state: ' + _this.getState());
 
           clearInterval(dependencies_met_j1_finished);
         } // END dependencies_met_j1_finished
@@ -118,7 +118,7 @@ j1.adapter['asciidoctor'] = (function (j1, window) {
     messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = 'received message from ' + sender + ': ' + json_message;
+      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -128,7 +128,7 @@ j1.adapter['asciidoctor'] = (function (j1, window) {
         //
         // Place handling of command|action here
         //
-        logger.info(message.text);
+        logger.info('\n' + message.text);
       }
 
       //

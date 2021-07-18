@@ -39,6 +39,8 @@ regenerate:                             true
 {% assign tracking_enabled    = template_config.analytics.enabled %}
 {% assign tracking_id         = template_config.analytics.google.tracking_id %}
 
+{% assign comment_provider        = site.data.j1_config.comments.provider %}
+
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign consent_options     = consent_defaults | merge: consent_settings %}
@@ -78,18 +80,24 @@ regenerate:                             true
 'use strict';
 
 {% comment %} Main
---------------------------------------------------------------- {% endcomment %}
+-------------------------------------------------------------------------------- {% endcomment %}
 j1.adapter['cookieConsent'] = (function (j1, window) {
 
   var environment       = '{{environment}}';
   var tracking_enabled  = ('{{tracking_enabled}}' === 'true') ? true: false;
   var tracking_id       = '{{tracking_id}}';
   var tracking_id_valid = (tracking_id.includes('tracking-id')) ? false : true;
+  var comment_provider  = '{{comment_provider}}';
   var moduleOptions     = {};
   var _this;
   var $modal;
   var user_cookie;
   var logger;
+  var url;
+  var baseUrl;
+  var hostname;
+  var domain;
+  var secure;
   var logText;
   var cookie_written;
 
@@ -113,8 +121,13 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       // globals
       // -----------------------------------------------------------------------
-      _this   = j1.adapter.cookieConsent;
-      logger  = log4javascript.getLogger('j1.adapter.cookieConsent');
+      _this     = j1.adapter.cookieConsent;
+      logger    = log4javascript.getLogger('j1.adapter.cookieConsent');
+      url       = new liteURL(window.location.href);
+      baseUrl   = url.origin;
+      hostname  = url.hostname;
+      domain    = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+      secure    = (url.protocol.includes('https')) ? true : false;
 
       // initialize state flag
       _this.state = 'pending';
@@ -144,8 +157,8 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       var dependencies_met_page_ready = setInterval (function (options) {
         if ( j1.getState() === 'finished' ) {
           _this.setState('started');
-          logger.info('state: ' + _this.getState());
-          logger.info('module is being initialized');
+          logger.info('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module is being initialized');
 
           j1.cookieConsent = new BootstrapCookieConsent({
             contentURL:             moduleOptions.contentURL,
@@ -159,8 +172,8 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
           });
 
           _this.setState('finished');
-          logger.info('state: ' + _this.getState());
-          logger.debug('module initialized successfully');
+          logger.info('\n' + 'state: ' + _this.getState());
+          logger.debug('\n' + 'module initialized successfully');
           clearInterval(dependencies_met_page_ready);
         }
       });
@@ -173,7 +186,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
     messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = 'received message from ' + sender + ': ' + json_message;
+      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -183,7 +196,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
         //
         // Place handling of command|action here
         //
-        logger.info(message.text);
+        logger.info('\n' + message.text);
       }
 
       //
@@ -223,8 +236,8 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       var json                = JSON.stringify(user_consent);
       var user_agent          = platform.ua;
 
-      logger.info('Entered post selection callback from CookieConsent');
-      logger.info('Current values from CookieConsent: ' + json);
+      logger.info('\n' + 'entered post selection callback from CookieConsent');
+      logger.info('\n' + 'current values from CookieConsent: ' + json);
 
       // enable cookie button if not visible
       if ($('#quickLinksCookieButton').css('display') === 'none')  {
@@ -236,9 +249,9 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       // because page is reloaded after selection
       //
       // if (tracking_enabled && !tracking_id_valid) {
-      //   logger.error('tracking enabled, but invalid tracking id found: ' + tracking_id);
+      //   logger.error('\n' + 'tracking enabled, but invalid tracking id found: ' + tracking_id);
       // } else {
-      //   logger.warn('tracking enabled, tracking id found: ' + tracking_id);
+      //   logger.warn('\n' + 'tracking enabled, tracking id found: ' + tracking_id);
       // }
 
       // for development only
@@ -248,8 +261,8 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       }
 
       if (user_agent.includes('iPad'))  {
-        logger.warn('Product detected : ' + platform.product);
-        logger.warn('Skip deleting (unwanted) cookies for this platform');
+        logger.warn('\n' + 'product detected : ' + platform.product);
+        logger.warn('\n' + 'skip deleting (unwanted) cookies for this platform');
       }
 
       // Manage Google Analytics OptIn/Out
@@ -257,20 +270,24 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       if (tracking_enabled && tracking_id_valid) {
         GTagOptIn.register(tracking_id);
         if (user_consent.analyses)  {
-          logger.info('Enable: GA');
+          logger.info('\n' + 'enable: GA');
           GTagOptIn.optIn();
         } else {
-          logger.warn('Disable: GA');
+          logger.warn('\n' + 'disable: GA');
           GTagOptIn.optOut();
 
           if (!user_agent.includes('iPad')) {
             gaCookies.forEach(function (item) {
-              logger.warn('Delete GA cookie: ' + item);
-              j1.removeCookie(item);
+              logger.warn('\n' + 'delete GA cookie: ' + item);
+              j1.removeCookie({ name: item, domain: domain });
             });
           }
         }
-        if (!user_consent.analyses || !user_consent.personalization)  {
+
+        // Managing providers for personalization OptIn/Out (Comments|Ads)
+        // moved to J1 adapter
+
+        if (!user_consent.analyses || !user_consent.personalization) {
           // expire consent|state cookies to session
           j1.expireCookie({ name: cookie_names.user_state });
           j1.expireCookie({ name: cookie_names.user_consent });

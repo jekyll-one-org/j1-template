@@ -290,17 +290,17 @@ j1.adapter['navigator'] = (function (j1, window) {
       // data loader
       // -----------------------------------------------------------------------
 
-      j1.xhrData({
+      j1.loadHTML({
         xhr_container_id: navQuicklinksOptions.xhr_container_id,
         xhr_data_path:    navQuicklinksOptions.xhr_data_path },
         'j1.adapter.navigator',
         null);
-      j1.xhrData({
+      j1.loadHTML({
         xhr_container_id: navAuthClientConfig.xhr_container_id,
         xhr_data_path:    navAuthClientConfig.xhr_data_path },
         'j1.adapter.navigator',
         null);
-      j1.xhrData({
+      j1.loadHTML({
         xhr_container_id: navMenuOptions.xhr_container_id,
         xhr_data_path:    navMenuOptions.xhr_data_path },
         'j1.adapter.navigator',

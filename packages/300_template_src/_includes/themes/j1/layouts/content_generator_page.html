@@ -30,6 +30,8 @@
 {% comment %} set config data
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign template_config   = site.data.j1_config %}
+{% assign comments          = site.data.j1_config.comments.enabled %}
+
 
 {% comment %} set config options
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -45,10 +47,11 @@
   {% assign rtext_size = 0 %}
 {% endif %}
 
+
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
 <!-- [INFO   ] [j1.layout.content_generator_page.html ] [ start main for full page ] -->
-<main class="r-text-{{rtext_size}} js-toc-content">
+<main id="main-content" class="r-text-{{rtext_size}} js-toc-content">
   <!-- [INFO   ] [j1.layout.content_generator_page.html ] [ begin place content ] -->
   {{content}}
   <!-- [INFO   ] [j1.layout.content_generator_page.html ] [ end place content ] -->

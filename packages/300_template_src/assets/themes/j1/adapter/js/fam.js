@@ -127,8 +127,8 @@ j1.adapter['fam'] = (function (j1, window) {
 
       // initialize state flag
       _this.setState('started');
-      logger.info('set module state to: ' + _this.getState());
-      logger.info('module is being initialized');
+      logger.info('\n' + 'set module state to: ' + _this.getState());
+      logger.info('\n' + 'module is being initialized');
 
       // create settings object from frontmatterOptions
       var frontmatterOptions = options != null ? $.extend({}, options) : {};
@@ -161,7 +161,7 @@ j1.adapter['fam'] = (function (j1, window) {
 
       var dependencies_met_navigator = setInterval(function() {
         if (j1.adapter.navigator.getState() == 'finished') {
-          logger.info('met dependencies for: navigator');
+          logger.info('\n' + 'met dependencies for: navigator');
           _this.famLoader(moduleOptions);
           clearInterval(dependencies_met_navigator);
         }
@@ -175,10 +175,10 @@ j1.adapter['fam'] = (function (j1, window) {
     famLoader: function (famOptions) {
 
       _this.setState('loading');
-      logger.info('set module state to: ' + _this.getState());
-      logger.info('load HTML data for fam');
+      logger.info('\n' + 'set module state to: ' + _this.getState());
+      logger.info('\n' + 'load HTML data for fam');
 
-      j1.xhrData ({
+      j1.loadHTML({
         xhr_container_id: famOptions.xhr_container_id,
         xhr_data_path:    famOptions.xhr_data_path,
         xhr_data_element: famOptions.fam_menu_id },
@@ -192,15 +192,15 @@ j1.adapter['fam'] = (function (j1, window) {
       var dependencies_met_fam_initialized = setInterval (function () {
         if (j1.xhrDOMState['#' + famOptions.xhr_container_id] == 'success' && j1.getState() == 'finished') {
           _this.setState('loaded');
-          logger.info('set module state to: ' + _this.getState());
-          logger.info('HTML data for fam: ' + _this.getState());
+          logger.info('\n' + 'set module state to: ' + _this.getState());
+          logger.info('\n' + 'HTML data for fam: ' + _this.getState());
 
 //        _this.scrollSpy(famOptions);
           _this.buttonInitializer(famOptions);
 
           _this.setState('finished');
-          logger.info('state: ' + _this.getState());
-          logger.info('module initialized successfully');
+          logger.info('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module initialized successfully');
 
           $('.fam-btn').show();
 
@@ -231,14 +231,14 @@ j1.adapter['fam'] = (function (j1, window) {
       //
       $('a[href="#void"]').click(function(e) {
         e.preventDefault ? e.preventDefault() : e.returnValue = false;
-        logger.info('bound click event to "#void", suppress default action');
+        logger.info('\n' + 'bound click event to "#void", suppress default action');
       });
 
       // check if multiple buttons detected
       if ( famButtons.length == 1 ) {
         _this.setState('processing');
-        logger.info('set module state to: ' + _this.getState());
-        logger.info('initialize fam menu');
+        logger.info('\n' + 'set module state to: ' + _this.getState());
+        logger.info('\n' + 'initialize fam menu');
 
         actionButtonId  = famButtons[0].firstElementChild.id;
         actionMenuId    = actionButtonId.replace('_button', '');
@@ -281,25 +281,25 @@ j1.adapter['fam'] = (function (j1, window) {
               eventHandler = item.event_handler;
               // check if eventhandler configured is a SINGLE word
               if (eventHandler.split(' ').length == 1) {
-                logger.info('register pre-configured eventhandler ' +eventHandler+ ' on id: #' + item.id);
+                logger.info('\n' + 'register pre-configured eventhandler ' +eventHandler+ ' on id: #' + item.id);
 
                 if ( eventHandler === 'open_mmenu_toc' ) {
                   if ($('#j1-toc-mgr').length) {
-                    logger.info('found toc in page: enabled');
+                    logger.info('\n' + 'found toc in page: enabled');
                     var dependencies_met_toccer_finished = setInterval (function () {
                       if ( j1.adapter.toccer.getState() == 'finished' ) {
-                        logger.info('met dependencies for: toccer');
+                        logger.info('\n' + 'met dependencies for: toccer');
 
                         // famOptions.mode === 'icon'
-                        //   ? logger.info('fam mode detected: icon')
-                        //   : logger.info('fam mode detected: menu');
+                        //   ? logger.info('\n' + 'fam mode detected: icon')
+                        //   : logger.info('\n' + 'fam mode detected: menu');
 
                         $('#open_mmenu_toc').show();
                         clearInterval(dependencies_met_toccer_finished);
                       }
                     }, 25); // END dependencies_met_toccer_finished
                   } else {
-                    logger.info('found toc in page: disabled');
+                    logger.info('\n' + 'found toc in page: disabled');
                   }
                 } else {
                   $('#' + item.id).show();
@@ -313,16 +313,16 @@ j1.adapter['fam'] = (function (j1, window) {
                   });
                 });
               } else {
-                logger.info('register custom eventhandler on id: #' + item.id);
+                logger.info('\n' + 'register custom eventhandler on id: #' + item.id);
               }
             } else {
   //          alert ('Creating Eventhandler failed on id: #' + item.id);
-              logger.error('Creating Eventhandler failed on id: #' + item.id);
+              logger.error('\n' + 'creating Eventhandler failed on id: #' + item.id);
             } // END if items (action buttons)
           });
         } else {
           // single action, create FAB
-          logger.info('single action found for FAM, create: FAB');
+          logger.info('\n' + 'single action found for FAM, create: FAB');
 
           // disable hover event (CSS)
           // $actionButton.css({'pointer-events': 'none'})
@@ -331,7 +331,7 @@ j1.adapter['fam'] = (function (j1, window) {
             eventHandler = item.event_handler;
             // check if eventhandler configured is a SINGLE word
             if (eventHandler.split(' ').length == 1) {
-              logger.info('register pre-configured eventhandler ' +eventHandler+ ' on id: #' + actionButtonId);
+              logger.info('\n' + 'register pre-configured eventhandler ' +eventHandler+ ' on id: #' + actionButtonId);
 
               if (eventHandler === 'scroll_to_top') {
                 // register click event
@@ -346,10 +346,10 @@ j1.adapter['fam'] = (function (j1, window) {
               if ( eventHandler === 'open_mmenu_toc' ) {
                 // check if toccer (toc_mgr) is available
                 if ($('#j1-toc-mgr').length) {
-                  logger.info('found toc in page: enabled');
+                  logger.info('\n' + 'found toc in page: enabled');
                   var dependencies_met_toccer_finished = setInterval (function () {
                     if ( j1.adapter.toccer.getState() == 'finished' ) {
-                      logger.info('met dependencies for toccer: finished');
+                      logger.info('\n' + 'met dependencies for toccer: finished');
                       // change the id of the $actionButton to the already
                       // registered id by mmenu adapter of ('open_mmenu_toc')
                       // to open the TOC sidebar
@@ -359,8 +359,8 @@ j1.adapter['fam'] = (function (j1, window) {
                     }
                   }, 25); // END dependencies_met_toccer_finished
                 } else {
-                  logger.info('found toc in page: disabled');
-                  logger.info('eventhandler: disabled');
+                  logger.info('\n' + 'found toc in page: disabled');
+                  logger.info('\n' + 'eventhandler: disabled');
                 }
               } // END if eventHandler == open_mmenu_toc
             }
@@ -368,8 +368,8 @@ j1.adapter['fam'] = (function (j1, window) {
         } // END else
       } else {
 //      alert ('Multiple FAM buttons found: ' + famButtons.length);
-        logger.error('Multiple FAM buttons found: ' + famButtons.length);
-        logger.info('FAM container set to hidden: ' + $famContainer);
+        logger.error('\n' + 'multiple FAM buttons found: ' + famButtons.length);
+        logger.info('\n' + 'FAM container set to hidden: ' + $famContainer);
         $famContainer.hide();
       } // END if famButton
     }, // END buttonInitializer
@@ -573,7 +573,7 @@ j1.adapter['fam'] = (function (j1, window) {
       // var json_message = JSON.stringify(message, undefined, 2);              // multiline
       var json_message = JSON.stringify(message);
 
-      logText = 'received message from ' + sender + ': ' + json_message;
+      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -583,10 +583,10 @@ j1.adapter['fam'] = (function (j1, window) {
         //
         // Place handling of command|action here
         //
-        logger.info(message.text);
+        logger.info('\n' + message.text);
       }
       if (message.type === 'command' && message.action === 'status') {
-        logger.info('messageHandler: received - ' + message.action);
+        logger.info('\n' + 'messageHandler: received - ' + message.action);
       }
 
       //
@@ -645,8 +645,8 @@ j1.adapter['fam'] = (function (j1, window) {
           ? $famContainer.css('display','block')
           : $famContainer.css('display','none');
 
-        // logger.debug('content pos detected as: ' + m + 'px');
-        // logger.debug('scroll pos detected as: ' + scrollPos + 'px');
+        // logger.debug('\n' + 'content pos detected as: ' + m + 'px');
+        // logger.debug('\n' + 'scroll pos detected as: ' + scrollPos + 'px');
       }); // END setTop on scroll
 
     }, // END scrollSpy

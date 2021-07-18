@@ -76,6 +76,9 @@ regenerate:                             true
 
 {% assign hideOnReload            = modules.themer_options.hideOnReload %}
 
+{% assign comment_provider        = site.data.j1_config.comments.provider %}
+{% assign disqus_short_name       = site.data.j1_config.comments.disqus.short_name %}
+
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
@@ -124,10 +127,17 @@ var j1 = (function () {
   var state                     = 'not_started';
   var mode                      = 'not_detected';
 
-  // Tracking information (GA)
+  // Default tracking provider information
   var tracking_enabled          = ('{{tracking_enabled}}' === 'true') ? true: false;
   var tracking_id               = '{{tracking_id}}';
   var tracking_id_valid         = (tracking_id.includes('tracking-id')) ? false : true;
+
+  // Default comment provider information
+  var comment_provider          = '{{comment_provider}}';
+  var disqus_short_name         = '{{disqus_short_name}}';
+
+  // Default translator settings (currently NOT supported)
+  // var translation_enabled       = {{template_config.translation.enabled}};
 
   var current_user_data;
   var current_page;
@@ -137,9 +147,6 @@ var j1 = (function () {
   var app_detected;
   var user_session_detected;
   var cookie_written;
-
-  // Translatior settings (currently NOT supported)
-  // var translation_enabled       = {{template_config.translation.enabled}};
 
   // Theme information
   var themeName;
@@ -165,7 +172,7 @@ var j1 = (function () {
   var baseUrl;
   var referrer;
 
-  // initial cookie values
+  // initial cookie settings
   var cookie_names = {
     'app_session':  '{{template_config.cookies.app_session}}',
     'user_session': '{{template_config.cookies.user_session}}',
@@ -233,6 +240,9 @@ var j1 = (function () {
       var logger            = log4javascript.getLogger('j1.init');
       var url               = new liteURL(window.location.href);
       var baseUrl           = url.origin;
+      var hostname          = url.hostname;
+      var domain            = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+      var secure            = (url.protocol.includes('https')) ? true : false;
       var date              = new Date();
       var timestamp_now     = date.toISOString();
       var curr_state        = 'started';
@@ -283,7 +293,7 @@ var j1 = (function () {
               samesite: 'Strict'
             });
             if (!cookie_written) {
-              logger.error('failed to write cookie: ' + cookie_names.user_consent);
+              logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_consent);
             }
             cookie_written = j1.writeCookie({
               name:     cookie_names.user_state,
@@ -291,7 +301,7 @@ var j1 = (function () {
               samesite: 'Strict'
             });
             if (!cookie_written) {
-            	logger.error('failed to write cookie: ' + cookie_names.user_consent);
+            	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_consent);
             }
           } else {
             cookie_written = j1.writeCookie({
@@ -301,13 +311,13 @@ var j1 = (function () {
               expires:  365
             });
             if (!cookie_written) {
-            	logger.error('failed to write cookie: ' + cookie_names.user_state);
+            	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
             }
           }
         } else {
           // jadams, 2021-07-11: on beforeunload, a vaild state cookie
           // is expected
-          logger.fatal('missing cookie detected: ' + cookie_names.user_state);
+          logger.fatal('\n' + 'missing cookie detected: ' + cookie_names.user_state);
         }
       }); // END beforeunload
 
@@ -326,7 +336,7 @@ var j1 = (function () {
                             samesite: 'Strict'
                           });
       if (!cookie_written) {
-      	logger.error('failed to write cookie: ' + cookie_names.user_session);
+      	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
       }
 
       user_state    =  j1.existsCookie(cookie_names.user_state)
@@ -338,7 +348,7 @@ var j1 = (function () {
                             expires:  365
                           });
       if (!cookie_written) {
-      	logger.error('failed to write cookie: ' + cookie_names.user_state);
+      	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
       }
 
       // jadams, 2021-07-11: Found situation that user_state NOT initialized
@@ -346,7 +356,7 @@ var j1 = (function () {
       // TODO: Check if/why user state (cookie NOT created?) NOT initialized
       // for what reason.
       if (!user_state) {
-        logger.error('cookie not found: ' + cookie_names.user_state);
+        logger.error('\n' + 'cookie not found: ' + cookie_names.user_state);
         user_state = j1.readCookie(cookie_names.user_state);
         user_state.session_active = true;
       }
@@ -359,7 +369,7 @@ var j1 = (function () {
           samesite: 'Strict'
         });
         if (!cookie_written) {
-        	logger.error('failed to write cookie: ' + cookie_names.user_state);
+        	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
         }
       } else {
         cookie_written = j1.writeCookie({
@@ -369,7 +379,7 @@ var j1 = (function () {
           expires:  365
         });
         if (!cookie_written) {
-        	logger.error('failed to write cookie: ' + cookie_names.user_state);
+        	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
         }
       }
 
@@ -393,10 +403,10 @@ var j1 = (function () {
           user_session.requested_page = window.location.pathname;
           user_session.timestamp      = timestamp_now;
           user_session                = j1.mergeData(user_session, data);
-          logText                     = 'mode detected: ' + user_session.mode;
+          logText                     = '\n' + 'mode detected: ' + user_session.mode;
 
           logger.info(logText);
-          logger.info('update user session cookie');
+          logger.info('\n' + 'update user session cookie');
           cookie_written = j1.writeCookie({
             name:     cookie_names.user_session,
             data:     user_session,
@@ -404,29 +414,29 @@ var j1 = (function () {
           });
 
           if (!cookie_written) {
-          	logger.error('failed to write cookie: ' + cookie_names.user_session);
+          	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
           }
 
           j1.setState(curr_state);
-          logger.info('state: ' + j1.getState());
+          logger.info('\n' + 'state: ' + j1.getState());
 
           var dependencies_met_page_displayed = setInterval (function () {
             if (j1.getState() == 'finished') {
               if (j1.authEnabled()) {
                 if (user_session.authenticated === 'true') {
                   // set signout
-                  logger.info('show signout icon');
+                  logger.info('\n' + 'show signout icon');
                   $('#navLinkSignInOut').attr('data-target','#modalOmniSignOut');
                   $('#iconSignInOut').removeClass('mdi-login').addClass('mdi-logout');
                 } else {
                   // set signin
-                  logger.info('show signin icon');
+                  logger.info('\n' + 'show signin icon');
                   $('#navLinkSignInOut').attr('data-target','#modalOmniSignIn');
                   $('#iconSignInOut').removeClass('mdi-logout').addClass('mdi-login');
                 }
-                logger.info('authentication detected as: ' + user_session.authenticated);
+                logger.info('\n' + 'authentication detected as: ' + user_session.authenticated);
                 $('#quickLinksSignInOutButton').css('display', 'block');
-                logger.info('met dependencies for: j1');
+                logger.info('\n' + 'met dependencies for: j1');
                 clearInterval(dependencies_met_page_displayed);
               }
             }
@@ -440,7 +450,7 @@ var j1 = (function () {
             user_session.mode           = 'web';
             user_session.requested_page = window.location.pathname;
             user_session.timestamp      = timestamp_now;
-            logText                     = 'mode detected: ' + user_session.mode;
+            logText                     = '\n' + 'mode detected: ' + user_session.mode;
 
             logger.info(logText);
             cookie_written = j1.writeCookie({
@@ -449,29 +459,29 @@ var j1 = (function () {
               samesite: 'Strict'
             });
             if (!cookie_written) {
-            	logger.error('failed to write cookie: ' + cookie_names.user_session);
+            	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
             }
 
             j1.setState(curr_state);
-            logger.info('state: ' + j1.getState());
+            logger.info('\n' + 'state: ' + j1.getState());
           }, detectTimeout);
         });
       } else { // web mode
         state = 'started';
-        logger.info('state: ' + state);
-        logger.info('page is being initialized');
+        logger.info('\n' + 'state: ' + state);
+        logger.info('\n' + 'page is being initialized');
       }
 
       state = 'started';
-      logger.info('state: ' + state);
-      logger.info('page is being initialized');
+      logger.info('\n' + 'state: ' + state);
+      logger.info('\n' + 'page is being initialized');
 
       if ( settings.scrollbar === 'false'  ) {
         $('body').addClass('hide-scrollbar');
         $('html').addClass('hide-scrollbar-moz');
       }
 
-      logger.info('read user state from cookie');
+      logger.info('\n' + 'read user state from cookie');
       user_session = j1.readCookie(cookie_names.user_session);
 
       // process|update user state cookie
@@ -501,7 +511,7 @@ var j1 = (function () {
         last_pager                = user_session.last_pager;
       }
 
-      logger.info('update user session cookie');
+      logger.info('\n' + 'update user session cookie');
       cookie_written = j1.writeCookie({
         name:     cookie_names.user_session,
         data:     user_session,
@@ -509,7 +519,7 @@ var j1 = (function () {
       });
 
       if (!cookie_written) {
-      	logger.error('failed to write cookie: ' + cookie_names.user_session);
+      	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
       }
 
       // NOTE: asynchronous calls should be rewitten to xhrData
@@ -519,8 +529,8 @@ var j1 = (function () {
       j1.initFooter(settings);
 
       state = 'running';
-      logger.info('state: ' + state);
-      logger.info(logText);
+      logger.info('\n' + 'state: ' + state);
+      // logger.info(logText);
 
       user_session.timestamp = timestamp_now;
       cookie_written = j1.writeCookie({
@@ -529,7 +539,7 @@ var j1 = (function () {
         samesite: 'Strict'
       });
       if (!cookie_written) {
-      	logger.error('failed to write cookie: ' + cookie_names.user_session);
+      	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
       }
 
       // -----------------------------------------------------------------------
@@ -561,20 +571,20 @@ var j1 = (function () {
         return function ( responseTxt, statusTxt, xhr ) {
           if ( statusTxt ==  'success' ) {
             var logger = log4javascript.getLogger('j1.adapter.xhrData');
-            logText = 'loading banner completed on id: ' +banner_id;
+            logText = '\n' + 'loading banner completed on id: ' +banner_id;
             logger.info(logText);
             j1.setXhrDataState(banner_id, statusTxt);
             j1.setXhrDomState(banner_id, statusTxt);
-            logger.info('XHR data loaded in the DOM: ' + banner_id);
+            logger.info('\n' + 'XHR data loaded in the DOM: ' + banner_id);
           }
           if ( statusTxt == 'error' ) {
-            logText = 'loading banner failed on id: ' +banner_id+ ', error: ' + xhr.status + ': ' + xhr.statusText;
+            logText = '\n' + 'loading banner failed on id: ' +banner_id+ ', error: ' + xhr.status + ': ' + xhr.statusText;
             logger.error(logText);
             j1.setXhrDataState(banner_id, statusTxt);
             j1.setXhrDomState(banner_id, statusTxt);
             // Set|Log status
             state = 'failed';
-            logger.error('state: ' + state);
+            logger.error('\n' + 'state: ' + state);
           }
         };
       };
@@ -635,15 +645,15 @@ var j1 = (function () {
           var id = '#' + banner[i];
           var selector = $(id);
           if (selector.length) {
-            logText = 'loading banner on id: ' +banner[i];
+            logText = '\n' + 'loading banner on id: ' +banner[i];
             logger.info(logText);
             var banner_data_path = '{{banner_data_path}} ' + id;
             selector.load(banner_data_path, cb_load_closure(id));
           }
         } // END for
       }  else {
-        logText = 'no banner found in site';
-        logger.info(logText);
+        logText = '\n' + 'no banner found in site';
+        logger.warn(logText);
         return false;
       }
       return true;
@@ -672,20 +682,20 @@ var j1 = (function () {
         return function ( responseTxt, statusTxt, xhr ) {
           var logger = log4javascript.getLogger('j1.adapter.xhrData');
           if ( statusTxt == 'success' ) {
-            logText = 'loading panel completed on id: ' +panel_id;
+            logText = '\n' + 'loading panel completed on id: ' +panel_id;
             logger.info(logText);
             j1.setXhrDataState(panel_id, statusTxt);
             j1.setXhrDomState(panel_id, statusTxt);
-            logger.info('XHR data loaded in the DOM: ' + panel_id);
+            logger.info('\n' + 'XHR data loaded in the DOM: ' + panel_id);
           }
           if ( statusTxt == 'error' ) {
-            logText = 'loading panel failed on id: ' +panel_id+ ', error ' + xhr.status + ': ' + xhr.statusText;
+            logText = '\n' + 'loading panel failed on id: ' +panel_id+ ', error ' + xhr.status + ': ' + xhr.statusText;
             logger.error(logText);
             j1.setXhrDataState(panel_id, statusTxt);
             j1.setXhrDomState(panel_id, statusTxt);
             // Set|Log status
             state = 'Error';
-            logger.error('state: ' + state);
+            logger.error('\n' + 'state: ' + state);
           }
         };
       };
@@ -738,15 +748,15 @@ var j1 = (function () {
           var id = '#' + panel[i];
           var selector = $(id);
           if ( selector.length ) {
-            logText = 'loading panel on id: ' +panel[i];
+            logText = '\n' + 'loading panel on id: ' +panel[i];
             logger.info(logText);
             var panel_data_path = '{{panel_data_path}} ' + id;
             selector.load(panel_data_path, cb_load_closure(id));
           }
         } // END for
       } else {
-        logText = 'no panel found in site';
-        logger.info(logText);
+        logText = '\n' + 'no panel found in site';
+        logger.warn(logText);
         return false;
       }
       return true;
@@ -761,31 +771,31 @@ var j1 = (function () {
       var mod               = 'j1';
       var logText;
 
-      logText = 'loading footer started';
+      logText = '\n' + 'loading footer started';
       logger.info(logText);
 
       var cb_load_closure = function(footer_id) {
         return function ( responseTxt, statusTxt, xhr ) {
           var logger = log4javascript.getLogger('j1.adapter.xhrData');
           if ( statusTxt ==  'success' ) {
-            logText = 'footer loaded successfully on id: ' + footer_id;
+            logText = '\n' + 'footer loaded successfully on id: ' + footer_id;
             logger.info(logText);
             j1.setXhrDataState(footer_id, statusTxt);
             j1.setXhrDomState(footer_id, statusTxt);
-            logger.info('XHR data loaded in the DOM: ' + footer_id);
-            logText = 'initialization finished';
+            logger.info('\n' + 'XHR data loaded in the DOM: ' + footer_id);
+            logText = '\n' + 'initialization finished';
             logger.info(logText);
           }
           if ( statusTxt == 'error' ) {
-            logText = 'loading footer failed on id: ' +footer_id+ ', error ' + xhr.status + ': ' + xhr.statusText;
+            logText = '\n' + 'loading footer failed on id: ' +footer_id+ ', error ' + xhr.status + ': ' + xhr.statusText;
             logger.error(logText);
             j1.setXhrDataState(footer_id, statusTxt);
             j1.setXhrDomState(footer_id, statusTxt);
 
             // Set|Log status
             state = 'failed';
-            logger.error('state: ' + state);
-            logText = 'initialization finished';
+            logger.error('\n' + 'state: ' + state);
+            logText = '\n' + 'initialization finished';
             logger.info(logText);
           }
         };
@@ -797,7 +807,7 @@ var j1 = (function () {
         var footer_data_path = '{{footer_data_path}} ' + id;
         selector.load(footer_data_path, cb_load_closure(id));
       } else {
-        logText = 'data not loaded';
+        logText = '\n' + 'data not loaded';
         logger.warn(logText);
         j1.setXhrDataState(id, 'not loaded');
         j1.setXhrDomState(id, 'pending');
@@ -824,6 +834,8 @@ var j1 = (function () {
       var ep_status           = baseUrl + '/status' + '?page=' + window.location.pathname;
       var user_session        = j1.readCookie(cookie_names.user_session);
       var user_state          = j1.readCookie(cookie_names.user_state);
+      var user_consent        = j1.readCookie(cookie_names.user_consent);
+      var tracking_enabled    = (user_consent.analyses === 'true') ? true : false;
       var current_url         = new liteURL(window.location.href);
       var providerPermissions = {};
       var provider;
@@ -831,14 +843,14 @@ var j1 = (function () {
       var appDetected;
       var categoryAllowed;
 
-      logger.info('finalize page');
+      logger.info('\n' + 'finalize page');
       j1.setCss();
 
-      logText= 'loading page partials: started';
+      logText= '\n' + 'loading page partials: started';
       logger.info(logText);
 
       if (j1.appDetected()) { // app mode
-        logger.info('mode detected: app');
+        logger.info('\n' + 'mode detected: app');
 
         $.when ($.ajax(ep_status))
         .then(function(data) {
@@ -853,7 +865,7 @@ var j1 = (function () {
             samesite: 'Strict'
           });
           if (!cookie_written) {
-          	logger.error('failed to write cookie: ' + cookie_names.user_session);
+          	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
           }
 
           providerPermissions = user_session.provider_permissions;
@@ -880,26 +892,49 @@ var j1 = (function () {
 
           // show the page delayed
           setTimeout (function() {
+
+            // Manage providers for personalization OptIn/Out (Comments|Ads)
+            if (!user_consent.personalization) {
+              logger.warn('\n' + 'disable comment provider: ' + comment_provider);
+              $('#leave-a-comment').remove();
+              if (comment_provider === 'disqus') {
+                $('#dsq-count-scr').remove();
+                $('#disqus-thread').remove();
+              }
+            } else {
+              logger.warn('\n' + 'enable comment provider: ' + comment_provider);
+              $('body').append('<div id="disqus_thread"></div>');
+              $('body').append('<script async id="dsq-count-scr" src="//' + disqus_short_name + '.disqus.com/count.js"></script>');
+              $('#main-content').append('<h2 id="leave-a-comment" class="mt-4">Leave a comment</h2>');
+              if (comment_provider === 'disqus') {
+                logger.info('\n' + 'load comment provider code: ' + comment_provider);
+                j1.loadJS({
+                  xhr_data_path:    '/assets/data/' + comment_provider + '.js',
+                  xhr_data_element: comment_provider
+                });
+              }
+            }
             // display page
-            $('#no_flicker').css('display', 'block');
+           $('#no_flicker').css('display', 'block');
 
             // NOTE: Placed tracking warning/info here because page may reloaded
             // after cookie consent selection
-            //
             if (tracking_enabled && !tracking_id_valid) {
-              logger.error('tracking enabled, but invalid tracking id found: ' + tracking_id);
+              logger.error('\n' + 'tracking enabled, but invalid tracking id found: ' + tracking_id);
+            } else if (tracking_enabled && tracking_id_valid) {
+              logger.warn('\n' + 'tracking enabled, tracking id found: ' + tracking_id);
             } else {
-              logger.warn('tracking enabled, tracking id found: ' + tracking_id);
+              logger.warn('\n' + 'tracking disabled, tracking id found: ' + tracking_id);
             }
 
             // show|hide cookie icon (should MOVED to Cookiebar ???)
             if (j1.existsCookie(cookie_names.user_consent)) {
               // Display cookie icon
-              logText = 'show cookie icon';
+              logText = '\n' + 'show cookie icon';
               logger.info(logText);
               $('#quickLinksCookieButton').css('display', 'block');
             } else {
-              logText = 'hide cookie icon';
+              logText = '\n' + 'hide cookie icon';
               logger.info(logText);
               // Display cookie icon
               $('#quickLinksCookieButton').css('display', 'none');
@@ -907,8 +942,8 @@ var j1 = (function () {
 
             // show|hide translator icon (currently NOT supported)
             // if (translation_enabled) {
-            //   logger.info('translator detected: google');
-            //   logger.info('initialize language selector');
+            //   logger.info('\n' + 'translator detected: google');
+            //   logger.info('\n' + 'initialize language selector');
             //   $('.goog-te-combo').addClass('form-control');
             // }
 
@@ -918,16 +953,16 @@ var j1 = (function () {
             if (j1.authEnabled()) {
               if (user_session.authenticated === 'true') {
                 // set signout
-                logger.info('show signout icon');
+                logger.info('\n' + 'show signout icon');
                 $('#navLinkSignInOut').attr('data-target','#modalOmniSignOut');
                 $('#iconSignInOut').removeClass('mdi-login').addClass('mdi-logout');
               } else {
                 // set signin
-                logger.info('show signin icon');
+                logger.info('\n' + 'show signin icon');
                 $('#navLinkSignInOut').attr('data-target','#modalOmniSignIn');
                 $('#iconSignInOut').removeClass('mdi-logout').addClass('mdi-login');
               }
-              logger.info('authentication detected as: ' + user_session.authenticated);
+              logger.info('\n' + 'authentication detected as: ' + user_session.authenticated);
               $('#quickLinksSignInOutButton').css('display', 'block');
             }
 
@@ -936,25 +971,25 @@ var j1 = (function () {
             j1.scrollTo();
 
             if (user_session.previous_page !== user_session.current_page) {
-              logText = 'page change detected';
+              logText = '\n' + 'page change detected';
               logger.info(logText);
-              logText = 'previous page: ' + user_session.previous_page;
+              logText = '\n' + 'previous page: ' + user_session.previous_page;
               logger.info(logText);
-              logText = 'current page: ' + user_session.current_page;
+              logText = '\n' + 'current page: ' + user_session.current_page;
               logger.info(logText);
             }
 
             // update sidebar for changed theme data
-            logger.info('update sidebar');
+            logger.info('\n' + 'update sidebar');
             user_state        = j1.readCookie(cookie_names.user_state);
             current_user_data = j1.mergeData(user_session, user_state);
             j1.core.navigator.updateSidebar(current_user_data);
 
             // Set|Log status
             state = 'finished';
-            logText = 'state: ' + state;
+            logText = '\n' + 'state: ' + state;
             logger.info(logText);
-            logText = 'page finalized successfully';
+            logText = '\n' + 'page finalized successfully';
             logger.info(logText);
 
           }, flickerTimeout);
@@ -963,23 +998,46 @@ var j1 = (function () {
         // show the page delayed
         setTimeout (function() {
           j1.setState('finished');
-          logger.info('state: finished');
-          logger.info('page initialization: finished');
+          logger.info('\n' + 'state: finished');
+          logger.info('\n' + 'page initialization: finished');
+
+          // Manage providers for personalization OptIn/Out (Comments|Ads)
+          if (!user_consent.personalization) {
+            logger.warn('\n' + 'disable comment provider: ' + comment_provider);
+            $('#leave-a-comment').remove();
+            if (comment_provider === 'disqus') {
+              $('#dsq-count-scr').remove();
+              $('#disqus-thread').remove();
+            }
+          } else {
+            logger.warn('\n' + 'enable comment provider: ' + comment_provider);
+            $('body').append('<div id="disqus_thread"></div>');
+            $('body').append('<script async id="dsq-count-scr" src="//' + disqus_short_name + '.disqus.com/count.js"></script>');
+            $('#main-content').append('<h2 id="leave-a-comment" class="mt-4">Leave a comment</h2>');
+            if (comment_provider === 'disqus') {
+              logger.info('\n' + 'load comment provider code: ' + comment_provider);
+              j1.loadJS({
+                xhr_data_path:    '/assets/data/' + comment_provider + '.js',
+                xhr_data_element: comment_provider
+              });
+            }
+          }
 
           // display page
           $('#no_flicker').css('display', 'block');
 
           // NOTE: Placed tracking warning/info here because page may reloaded
           // after cookie consent selection
-          //
           if (tracking_enabled && !tracking_id_valid) {
-            logger.error('tracking enabled, but invalid tracking id found: ' + tracking_id);
+            logger.error('\n' + 'tracking enabled, but invalid tracking id found: ' + tracking_id);
+          } else if (tracking_enabled && tracking_id_valid) {
+            logger.warn('\n' + 'tracking enabled, tracking id found: ' + tracking_id);
           } else {
-            logger.warn('tracking enabled, tracking id found: ' + tracking_id);
+            logger.warn('\n' + 'tracking disabled, tracking id found: ' + tracking_id);
           }
 
-          logger.info('mode detected: web');
-          logger.info('hide signin icon');
+          logger.info('\n' + 'mode detected: web');
+          logger.info('\n' + 'hide signin icon');
           $('#quickLinksSignInOutButton').css('display', 'none');
 
           user_session.current_page = current_url.pathname;
@@ -989,13 +1047,13 @@ var j1 = (function () {
               samesite: 'Strict'
           });
           if (!cookie_written) {
-          	logger.error('failed to write cookie: ' + cookie_names.user_session);
+          	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
           }
 
           // show|hide translator icon (currently NOT supported)
           // if (translation_enabled) {
-          //   logger.info('translator detected: google');
-          //   logger.info('initialize language selector');
+          //   logger.info('\n' + 'translator detected: google');
+          //   logger.info('\n' + 'initialize language selector');
           //   $('.goog-te-combo').addClass('form-control');
           // }
 
@@ -1005,11 +1063,11 @@ var j1 = (function () {
           // show|hide cookie icon
           if (j1.existsCookie(cookie_names.user_consent)) {
             // Display cookie icon
-            logText = 'show cookie icon';
+            logText = '\n' + 'show cookie icon';
             logger.info(logText);
             $('#quickLinksCookieButton').css('display', 'block');
           } else {
-            logText = 'hide cookie icon';
+            logText = '\n' + 'hide cookie icon';
             logger.info(logText);
             // Display cookie icon
             $('#quickLinksCookieButton').css('display', 'none');
@@ -1020,25 +1078,25 @@ var j1 = (function () {
           j1.scrollTo();
 
           if (user_session.previous_page !== user_session.current_page) {
-            logText = 'page change detected';
+            logText = '\n' + 'page change detected';
             logger.info(logText);
-            logText = 'previous page: ' + user_session.previous_page;
+            logText = '\n' + 'previous page: ' + user_session.previous_page;
             logger.info(logText);
-            logText = 'current page: ' + user_session.current_page;
+            logText = '\n' + 'current page: ' + user_session.current_page;
             logger.info(logText);
           }
 
           // update sidebar for changed theme data
-          logger.info('update sidebar');
+          logger.info('\n' + 'update sidebar');
           user_state        = j1.readCookie(cookie_names.user_state);
           current_user_data = j1.mergeData(user_session, user_state);
           j1.core.navigator.updateSidebar(current_user_data);
 
           // set|log status
           state = 'finished';
-          logText = 'state: ' + state;
+          logText = '\n' + 'state: ' + state;
           logger.info(logText);
-          logText = 'page finalized successfully';
+          logText = '\n' + 'page finalized successfully';
           logger.info(logText);
 
         }, flickerTimeout);
@@ -1146,7 +1204,7 @@ var j1 = (function () {
           $(window).scrollTop($(window).scrollTop()-1);
         } // END if anchor_id
       } else if (anchor_id === '#') {
-        logger.info('bound click event to "#", suppress default action');
+        logger.info('\n' + 'bound click event to "#", suppress default action');
         $(window).scrollTop($(window).scrollTop()+1);
         $(window).scrollTop($(window).scrollTop()-1);
         return false;
@@ -1184,12 +1242,12 @@ var j1 = (function () {
     }, // END appDetected
 
     // -------------------------------------------------------------------------
-    // xhrData()
-    // Load data asychronously using XHR|jQuery on an HTML element (e.g. <div>)
+    // loadHTML()
+    // Load HTML data asychronously using XHR|jQuery on an element (e.g. <div>)
     // specified by xhr_container_id, xhr_data_path (options)
     // -------------------------------------------------------------------------
-    xhrData: function (options, mod, status) {
-      var logger            = log4javascript.getLogger('j1.adapter.xhrData');
+    loadHTML: function (options, mod, status) {
+      var logger            = log4javascript.getLogger('j1.adapter.loadHTML');
       var selector          = $('#' + options.xhr_container_id);
       var state             = status;
       var observer_options  = {
@@ -1203,12 +1261,12 @@ var j1 = (function () {
 
       var cb_load_closure = function(mod, id) {
         return function (responseTxt, statusTxt, xhr) {
-          var logger = log4javascript.getLogger('j1.adapter.xhrData');
+          var logger = log4javascript.getLogger('j1.adapter.loadHTML');
           if ( statusTxt === 'success' ) {
             j1.setXhrDataState(id, statusTxt);
             j1.setXhrDomState(id, 'pending');
 
-            logText = 'data loaded successfully on id: ' +id;
+            logText = '\n' + 'data loaded successfully on id: ' +id;
             logger.info(logText);
             state = true;
           }
@@ -1216,12 +1274,12 @@ var j1 = (function () {
             // jadams, 2020-07-21: to be checked why id could be UNDEFINED
             if (typeof(id) != "undefined") {
               state = 'failed';
-              logger.info('set state for ' +mod+ ' to: ' + state);
+              logger.info('\n' + 'set state for ' +mod+ ' to: ' + state);
               // jadams, 2020-07-21: intermediate state should DISABLED
               // executeFunctionByName(mod + '.setState', window, state);
               j1.setXhrDataState(id, statusTxt);
               j1.setXhrDomState(id, 'pending');
-              logText = 'loading data failed on id: ' +id+ ', error ' + xhr.status + ': ' + xhr.statusText;
+              logText = '\n' + 'loading data failed on id: ' +id+ ', error ' + xhr.status + ': ' + xhr.statusText;
               logger.error(logText);
               state = false;
             }
@@ -1242,9 +1300,9 @@ var j1 = (function () {
 
       // failsafe - prevent XHR load errors
       if (options.xhr_data_element !== '') {
-        logger.info('XHR data element found: ' + options.xhr_data_element);
+        logger.info('\n' + 'XHR data element found: ' + options.xhr_data_element);
       } else  {
-        logger.warn('no XHR data element found, loading data aborted');
+        logger.warn('\n' + 'no XHR data element found, loading data aborted');
         return;
       }
 
@@ -1266,30 +1324,78 @@ var j1 = (function () {
         function mutationHandler (mutationRecords) {
           mutationRecords.forEach ( function (mutation) {
             if (mutation.addedNodes.length) {
-              logger.info('XHR data loaded in the DOM: ' + id);
+              logger.info('\n' + 'XHR data loaded in the DOM: ' + id);
               j1.setXhrDomState(id, 'success');
             }
           });
         }
       } else {
         // jadams, 2020-07-21: To be clarified why a id is "undefined"
-
         // failsafe - prevent XHR load errors
         if (id != '#undefined') {
-          logText = 'data not loaded on id:' + id;
+          logText = '\n' + 'data not loaded on id:' + id;
           logger.warn(logText);
           j1.setXhrDataState(id, 'not loaded');
           j1.setXhrDomState(id, 'not loaded');
           // Set processing state to 'finished' to complete module load
           state = 'finished';
-          logger.info('state: ' + state);
+          logger.info('\n' + 'state: ' + state);
           // jadams, 2020-07-21: intermediate state should DISABLED
           // executeFunctionByName(mod + '.setState', window, state);
           state = false;
         }
       }
       return state;
-    }, // END xhrData
+    }, // END loadHTML
+
+    // -------------------------------------------------------------------------
+    // loadJS()
+    // Load JS data asychronously using XHR|jQuery
+    // -------------------------------------------------------------------------
+    loadJS: function (options, mod, status) {
+      var logger  = log4javascript.getLogger('j1.adapter.loadJS');
+      var state   = status;
+      var logText;
+
+      var cb_load_closure = function(mod, id) {
+        return function (responseTxt, statusTxt, xhr) {
+          var logger = log4javascript.getLogger('j1.adapter.loadJS');
+          if ( statusTxt === 'success' ) {
+            j1.setXhrDataState(id, statusTxt);
+
+            logText = '\n' + 'data loaded successfully on id: ' +id;
+            logger.info(logText);
+            state = true;
+          }
+          if ( statusTxt === 'error' ) {
+            // jadams, 2020-07-21: to be checked why id could be UNDEFINED
+            if (typeof(id) != "undefined") {
+              state = 'failed';
+              logger.info('\n' + 'set state for ' +mod+ ' to: ' + state);
+              j1.setXhrDataState(id, statusTxt);
+              logText = '\n' + 'loading data failed on id: ' +id+ ', error ' + xhr.status + ': ' + xhr.statusText;
+              logger.error(logText);
+              state = false;
+            }
+          }
+        };
+      };
+
+      var html_data_path = options.xhr_data_path + ' #' + options.xhr_data_element;
+      var id        = '#' + options.xhr_container_id;
+      var container = '#' + options.xhr_container_id + '_container';
+
+      $.ajax({
+        url:      '/assets/data/disqus.js',
+        dataType: 'script',
+        success:  cb_load_closure(mod, id),
+        error:    function (jqXHR, textStatus, errorThrown) {
+          logger.error('\n' + 'Failed to retrieve JS data: ' + textStatus);
+        }
+      });
+
+      return state;
+    }, // END loadJS
 
     // -------------------------------------------------------------------------
     //  readCookie (Vanilla JS)
@@ -1339,67 +1445,6 @@ var j1 = (function () {
     //    must now also specify the Secure attribute (they require a secure
     //    context/HTTPS).
     // -------------------------------------------------------------------------
-    //
-    // writeCookie: function (options /*name, data, [path, expires, samesite, http_only, secure]*/) {
-    //   var defaults = {
-    //       data: {},
-    //       name: '',
-    //       path: '/',
-    //       expires: 0,
-    //       samesite: 'Lax',
-    //       http_only: false,
-    //       secure: false
-    //   };
-    //   var settings = $.extend(defaults, options);
-    //   var date          = new Date();
-    //   var timestamp_now = date.toISOString();
-    //   var cookie_data   = {};
-    //   var data_json;
-    //   var data_encoded;
-    //
-    //   if (j1.existsCookie(settings.name)) {
-    //     cookie_data           = j1.readCookie(settings.name);
-    //     cookie_data.timestamp = timestamp_now;
-    //     cookie_data           = j1.mergeData(cookie_data, settings.data);
-    //     data_json             = JSON.stringify( cookie_data );
-    //     data_encoded          = window.btoa(data_json);
-    //
-    //     if (settings.expires > 0) {
-    //       Cookies.set(settings.name, data_encoded, {
-    //         expires: settings.expires,
-    //         SameSite: settings.samesite
-    //       });
-    //     } else {
-    //       Cookies.set(settings.name, data_encoded, {
-    //       SameSite: settings.samesite
-    //       });
-    //     }
-    //   } else {
-    //     cookie_data   = settings.data;
-    //     data_json     = JSON.stringify(settings.data);
-    //     data_encoded  = window.btoa(data_json);
-    //
-    //     if (settings.expires > 0) {
-    //       Cookies.set(settings.name, data_encoded, {
-    //         expires: settings.expires,
-    //         SameSite: settings.samesite
-    //       });
-    //     } else {
-    //       Cookies.set(settings.name, data_encoded, {
-    //         SameSite: settings.samesite
-    //       });
-    //     }
-    //   }
-    //
-    //   if (j1.existsCookie(settings.name)) {
-    //     return cookie_data;
-    //   } else {
-    //     return false;
-    //   }
-    //
-    // }, // END writeCookie
-
-
     writeCookie: function (options /*name, data, [path, expires, samesite, http_only, secure]*/) {
       var defaults = {
           data: {},
@@ -1482,21 +1527,17 @@ var j1 = (function () {
     // -------------------------------------------------------------------------
     // removeCookie (Vanilla JS)
     // -------------------------------------------------------------------------
-    // removeCookie: function (options /*name [, path]*/) {
-    //   var cookieExists;
-    //   var defaults = {
-    //       name: '',
-    //       path: '/'
-    //   };
-    //   var settings = $.extend(defaults, options);
-    //
-    //   Cookies.remove(settings.name, { path: settings.path });
-    //
-    // }, // END removeCookie
-    removeCookie: function (name) {
-      if (j1.findCookie(name)) {
-        // clear cookie content and set expiry date in the past
-        document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    removeCookie: function (options /*name, [path, domain]*/) {
+      var cookieExists;
+      var defaults = {
+          domain: 'localhost',
+          path: '/'
+      };
+      var settings = $.extend(defaults, options);
+
+      if (j1.findCookie(settings.name)) {
+        // clear cookie CONTENT and set expiry date in the PAST
+        document.cookie = settings.name + '=; domain=' + settings.domain + '; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
         return true;
       } else {
         return false;
@@ -1666,11 +1707,11 @@ var j1 = (function () {
               });
 
             });
-            logger.info('met dependencies for: sidebarLoaded');
+            logger.info('\n' + 'met dependencies for: sidebarLoaded');
             clearInterval(sidebarLoaded);
             return true;
           } else {
-            logger.error('no user data provided');
+            logger.error('\n' + 'no user data provided');
             clearInterval(sidebarLoaded);
             return false;
           }
@@ -1724,11 +1765,11 @@ var j1 = (function () {
               });
 
             });
-            logger.info('met dependencies for: sidebarLoaded');
+            logger.info('\n' + 'met dependencies for: sidebarLoaded');
             clearInterval(sidebarLoaded);
             return true;
           } else {
-            logger.error('no user data provided');
+            logger.error('\n' + 'no user data provided');
             clearInterval(sidebarLoaded);
             return false;
           }
@@ -1767,11 +1808,11 @@ var j1 = (function () {
       var json_message  = JSON.stringify(message);
 
       if ( receiver === 'j1' ) {
-        logText = 'send message from ' + sender + ' to' + receiver + ': ' + json_message;
+        logText = '\n' + 'send message from ' + sender + ' to' + receiver + ': ' + json_message;
         logger.debug(logText);
         executeFunctionByName('j1' + '.messageHandler', window, sender, message);
       } else {
-        logText = 'send message from ' + sender + ' to ' + receiver + ': ' + json_message;
+        logText = '\n' + 'send message from ' + sender + ' to ' + receiver + ': ' + json_message;
         logger.debug(logText);
         //executeFunctionByName('j1.' + receiver + '.messageHandler', window, sender, message)
         executeFunctionByName(receiver + '.messageHandler', window, sender, message);
@@ -1787,7 +1828,7 @@ var j1 = (function () {
       // var json_message  = JSON.stringify(message, undefined, 2);             // multiline
       var json_message  = JSON.stringify(message);
 
-      logText = 'received message from ' + sender + ': ' + json_message;
+      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -1795,7 +1836,7 @@ var j1 = (function () {
       // -----------------------------------------------------------------------
       if ( message.type === 'command' && message.action === 'module_initialized' ) {
         _this.setState('finished');
-        logger.info(message.text);
+        logger.info('\n' + message.text);
       }
 
       //
@@ -1858,7 +1899,7 @@ var j1 = (function () {
       var bg_primary    = j1.getStyleValue('bg-primary', 'background-color');
       var bg_secondary  = j1.getStyleValue('bg-secondary', 'background-color');
 
-      logger.info('set color scheme for selected theme');
+      logger.info('\n' + 'set color scheme for selected theme');
 
       // globals
       // -----------------------------------------------------------------------

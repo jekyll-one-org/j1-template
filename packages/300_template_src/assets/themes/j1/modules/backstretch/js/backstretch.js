@@ -861,12 +861,12 @@
 
           // jadams, 2017-12-07: Added log for testing
           if(this.options.debug) {
-            logText = 'resize: boxHeight x boxWidth: ' + boxHeight + ' x ' + boxWidth;
+            logText = '\n' + 'resize: boxHeight x boxWidth: ' + boxHeight + ' x ' + boxWidth;
             logger.debug(logText);
           }
 
           if ( boxHeight == 0 || boxWidth == 0 ) {
-            logText = 'Kacke am Schuh';
+            logText = '\n' + 'Kacke am Schuh';
             logger.warn(logText);
           }
 
@@ -1083,7 +1083,7 @@
             if ($(myID).is(':visible')) {
               // clear interval checking
               clearInterval(isVisible);
-              logger.info('container visible on id: ' + myID);
+              logger.info('\n' + 'container visible on id: ' + myID);
               that.resize();
             }
           }, 50); // END 'isVisible'

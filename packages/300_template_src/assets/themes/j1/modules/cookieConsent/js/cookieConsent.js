@@ -46,8 +46,8 @@ function BootstrapCookieConsent(props) {
   var self                  = this
   var detailedSettingsShown = false
 
-  logger.info('Initializing core module: started');
-  logger.info('state: started');
+  logger.info('\n' + 'initializing core module: started');
+  logger.info('\n' + 'state: started');
 
   this.props = {
     autoShowDialog:         true,                                               // disable autoShowModal on the privacy policy and legal notice pages, to make these pages readable
@@ -119,7 +119,7 @@ function BootstrapCookieConsent(props) {
 
       self.modal = document.getElementById(modalId);
       if (!self.modal) {
-        logger.info('Load consent modal');
+        logger.info('\n' +  'load consent modal');
         self.modal = document.createElement("div");
         self.modal.id = modalId;
         self.modal.setAttribute("class", "modal fade");
@@ -140,7 +140,7 @@ function BootstrapCookieConsent(props) {
         var templateUrl = self.props.contentURL + '/' + 'index.html';
         $.get(templateUrl)
         .done(function (data) {
-          logger.info('Loading Consent modal: successfully');
+          logger.info('\n' + 'loading consent modal: successfully');
           self.modal.innerHTML = data;
           self.modal.innerHTML = $('#' + self.props.xhr_data_element).eq(0).html();
 
@@ -154,7 +154,7 @@ function BootstrapCookieConsent(props) {
           self.$buttonSave = $("#bccs-buttonSave");
           self.$buttonAgreeAll = $("#bccs-buttonAgreeAll");
 
-          logger.info('Load/Initialze options from cookie');
+          logger.info('\n' + 'load/initialze options from cookie');
 
           updateButtons();
           updateOptionsFromCookie();
@@ -167,7 +167,7 @@ function BootstrapCookieConsent(props) {
             updateButtons();
           });
 
-          logger.info('Initialze event handler');
+          logger.info('\n' + 'initialze event handler');
 
           self.$buttonDoNotAgree.click(function () {
             doNotAgree();
@@ -187,8 +187,8 @@ function BootstrapCookieConsent(props) {
           });
         })
         .fail(function () {
-          logger.error('Loading Consent modal: failed');
-          logger.info('Probably no `contentURL` set');
+          logger.error('\n' + 'loading consent modal: failed');
+          logger.warn('\n' + 'probably no `contentURL` set');
         })
       } else {
         self.$modal.modal("show")
@@ -271,8 +271,8 @@ function BootstrapCookieConsent(props) {
   // API functions
   // ---------------------------------------------------------------------------
 
-  logger.info('Initializing core module finished');
-  logger.info('state: finished');
+  logger.info('\n' + 'initializing core module finished');
+  logger.info('\n' + 'state: finished');
 
   // show the consent dialog (modal)
   // ---------------------------------------------------------------------------

@@ -119,8 +119,8 @@ j1.adapter['algolia'] = (function (j1, window) {
       }, options);
 
       _this.setState('started');
-      logger.info('state: ' + _this.getState());
-      logger.info('module is being initialized');
+      logger.info('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'module is being initialized');
 
       {% comment %} Load module config from yml data
       -------------------------------------------------------------------------- {% endcomment %}
@@ -142,7 +142,7 @@ j1.adapter['algolia'] = (function (j1, window) {
 
       var hitTemplate = function(hit) {
         // state = 'start search';
-        // logger.info('state: ' + state);
+        // logger.info('\n' + 'state: ' + state);
         // var re = new RegExp('^\/posts');
         // var re = new RegExp('^\/pages');
         var re = new RegExp('^\/pages|^\/posts|^\/collections');
@@ -182,7 +182,7 @@ j1.adapter['algolia'] = (function (j1, window) {
           `;
         }
         // state = 'finished search';
-        // logger.info('state: ' + state);
+        // logger.info('\n' + 'state: ' + state);
       };
 
       if (moduleOptions.enabled == true) {
@@ -272,14 +272,14 @@ j1.adapter['algolia'] = (function (j1, window) {
         $('#searcher').addClass('row');
 
         _this.setState('finished');
-        logger.info('state: ' + _this.getState());
-        logger.info('module initialized successfully');
+        logger.info('\n' + 'state: ' + _this.getState());
+        logger.info('\n' + 'module initialized successfully');
 
       } else {
         $('#algolia-site-search').append('<p class="ml-5 mt-5 mb-5 "> <strong>Algolia Search DISABLED</strong> </p>');
         _this.setState('finished');
-        logger.info('state: ' + _this.getState());
-        logger.warn('module disabled');
+        logger.info('\n' + 'state: ' + _this.getState());
+        logger.warn('\n' + 'module disabled');
       }
 
       return true;
@@ -292,7 +292,7 @@ j1.adapter['algolia'] = (function (j1, window) {
     messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = 'received message from ' + sender + ': ' + json_message;
+      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -302,7 +302,7 @@ j1.adapter['algolia'] = (function (j1, window) {
         //
         // Place handling of command|action here
         //
-        logger.info(message.text);
+        logger.info('\n' + message.text);
       }
 
       //

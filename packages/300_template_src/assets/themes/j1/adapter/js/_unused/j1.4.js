@@ -1779,7 +1779,7 @@ var j1 = (function () {
     // Set the final (loading) state of an element (partial) loaded via Xhr
     // -------------------------------------------------------------------------
     setXhrDataState: function (obj, stat) {
-      j1.xhrDataState[obj] = stat;
+      j1.loadHTMLState[obj] = stat;
     }, // END setXhrDataState
 
     // -------------------------------------------------------------------------
@@ -1787,7 +1787,7 @@ var j1 = (function () {
     // Returns the final (loading) state of an element (partial) loaded via Xhr
     // -------------------------------------------------------------------------
     getXhrDataState: function (obj) {
-      return j1.xhrDataState[obj];
+      return j1.loadHTMLState[obj];
     }, // END getXhrDataState
 
     // -------------------------------------------------------------------------

@@ -75,13 +75,13 @@
   // ---------------------------------------------------------------------------
   BootstrapThemeSwitcher.prototype = {
     clear: function () {
-      logger.debug('bootstrapThemeSwitcher.clear');
+      logger.debug('\n' + 'bootstrapThemeSwitcher.clear');
       return this.$element.each(function () {
         this.$element.empty();
       });
     },
     update: function () {
-      logger.debug('bootstrapThemeSwitcher.update');
+      logger.debug('\n' + 'bootstrapThemeSwitcher.update');
       this.getThemes();
     },
 
@@ -125,10 +125,10 @@
       // detect|set user state cookie
       user_state_detected = j1.existsCookie ( 'j1.user.state' );
       if ( user_state_detected ) {
-        logger.debug('cookie found: j1.user.state');
+        logger.debug('\n' + 'cookie found: j1.user.state');
         j1_user_state = j1.readCookie(user_state_cookie_name);
       } else {
-        logger.error('cookie not found: j1.user.state');
+        logger.error('\n' + 'cookie not found: j1.user.state');
       }
 
       themeName           = j1_user_state.theme_name;
@@ -141,7 +141,7 @@
       if (settings.saveToCookie) {
         if ( typeof Cookies === 'undefined' ) {
           if ( debug === 'true' ) {
-            logger.error('cookies library not present');
+            logger.error('\n' + 'cookies library not present');
           }
           return false;
         }
@@ -165,8 +165,8 @@
         // reload current page (skip cache)
         location.reload(true);
       } else {
-        logger.warn('write to cookie : disabled');
-        logger.warn('selected theme not activated: ' + name);
+        logger.warn('\n' + 'write to cookie : disabled');
+        logger.warn('\n' + 'selected theme not activated: ' + name);
       } // END if saveToCookie
 
     }, // END switchTheme
@@ -177,7 +177,7 @@
     loadThemeFromCookie: function (options) {
 
       if ( typeof Cookies === 'undefined' ) {
-        logger.error('cookies library not present');
+        logger.error('\n' + 'cookies library not present');
         return false;
       }
 
@@ -187,10 +187,10 @@
       user_state_detected = j1.existsCookie ( 'j1.user.state' );
 
       if ( user_state_detected ) {
-        logger.info('cookie found: j1.user.state');
+        logger.info('\n' + 'cookie found: j1.user.state');
         j1_user_state = j1.readCookie(user_state_cookie_name);
       } else {
-        logger.error('cookie not found: j1.user.state');
+        logger.error('\n' + 'cookie not found: j1.user.state');
       }
 
       var themeName = j1_user_state.theme_name;
@@ -214,11 +214,11 @@
     // -------------------------------------------------------------------------
     addThemesToControl: function() {
       if (typeof this.$element === 'undefined') {
-        logger.error('bootstrapThemeSelector|addThemesToControl: Element is undefined');
+        logger.error('\n' + 'bootstrapThemeSelector|addThemesToControl: Element is undefined');
         return false;
       }
       if (typeof this.themesList === 'undefined') {
-        logger.error('bootstrapThemeSelector|addThemesToControl: Themes is undefined');
+        logger.error('\n' + 'bootstrapThemeSelector|addThemesToControl: Themes is undefined');
         return false;
       }
 
@@ -256,16 +256,16 @@
         // detect|set user state cookie
         user_state_detected = j1.existsCookie ( 'j1.user.state' );
         if ( user_state_detected ) {
-          logger.debug('User state cookie found');
+          logger.debug('\n' + 'user state cookie found');
           j1_user_state = j1.readCookie(user_state_cookie_name);
         } else {
-          logger.error('User state NOT cookie found');
+          logger.error('\n' + 'user state NOT cookie found');
         }
 
         themeName = j1_user_state.theme_name;
 
         if ( debug === 'true' ) {
-          logger.debug('bootstrapThemeSelector: UL element selected');
+          logger.debug('\n' + 'bootstrapThemeSelector: UL element selected');
         }
         this.$element.empty();
 
@@ -305,7 +305,7 @@
         });
 
       } else if (this.$element.is('select')) {
-        logger.debug('bootstrapThemeSelector: SELECT element selected');
+        logger.debug('\n' + 'bootstrapThemeSelector: SELECT element selected');
         this.$element.empty();
 
         var optionSelectedMarker;
@@ -327,8 +327,8 @@
 
       } else {
         // no container found to add Theme list
-        logger.info('bootstrapThemeSelector: no UL or SELECT element found');
-        logger.error('bootstrapThemeSelector: failed');
+        logger.info('\n' + 'bootstrapThemeSelector: no UL or SELECT element found');
+        logger.error('\n' + 'bootstrapThemeSelector: failed');
         // console.warn('bootstrapThemeSelector only works with ul or select elements');
       }
     }, // END addThemesToControl
@@ -351,7 +351,7 @@
             base.addThemesToControl();
           },
           error: function (jqXHR, textStatus, errorThrown) {
-            logger.error('Failed to retrieve the local feed from: \'' + base.settings.localFeed + '\'');
+            logger.error('\n' + 'failed to retrieve the local feed from: \'' + base.settings.localFeed + '\'');
           }
         });
       } else {

@@ -215,7 +215,7 @@ j1.adapter['mmenu'] = (function (j1, window) {
       {% assign menu_id       = item.menu.xhr_container_id %}
       {% assign xhr_data_path = item.menu.xhr_data_path %}
 
-        j1.xhrData ({
+        j1.loadHTML ({
           xhr_container_id: '{{menu_id}}',
           xhr_data_path:    '{{xhr_data_path}}'},
           'j1.adapter.mmenu',

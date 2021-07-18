@@ -110,8 +110,8 @@ j1.adapter['justifiedGallery'] = (function (j1, window) {
 
       // initialize state flag
       _this.setState('started');
-      logger.info('state: ' + _this.getState());
-      logger.info('module is being initialized');
+      logger.info('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'module is being initialized');
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -136,8 +136,8 @@ j1.adapter['justifiedGallery'] = (function (j1, window) {
       _this.initialize(moduleOptions);
 
       _this.setState('finished');
-      logger.info('state: ' + _this.getState());
-      logger.info('module initialized successfully');
+      logger.info('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'module initialized successfully');
     },
 
     // -----------------------------------------------------------------------
@@ -147,7 +147,7 @@ j1.adapter['justifiedGallery'] = (function (j1, window) {
       logger = log4javascript.getLogger('j1.adapter.justifiedGallery');
 
       _this.setState('running');
-      logger.info('state: ' + _this.getState());
+      logger.info('\n' + 'state: ' + _this.getState());
 
       {% for item in jf_gallery_options.galleries %}
         {% if item.gallery.enabled %}
@@ -192,14 +192,14 @@ j1.adapter['justifiedGallery'] = (function (j1, window) {
           {% if lb_options.video.enabled %} {% assign lb_video      = lb_options.video.enabled %} {% endif %}
 
           {% if lb_options.video.enabled %}
-            logText = 'Video not supported';
+            logText = '\n' + 'type video not supported';
             logger.error(logText);
           {% endif %}
 
           // Create an gallery instance if id: {{gallery_id}} exists
           if ($('#{{gallery_id}}').length) {
 
-          logText = 'gallery is being initialized on id: #{{gallery_id}}';
+          logText = '\n' + 'gallery is being initialized on id: #{{gallery_id}}';
           logger.info(logText);
 
           // Place HTML markup for the title
@@ -332,7 +332,7 @@ j1.adapter['justifiedGallery'] = (function (j1, window) {
                     // lightbox is initialized (delayed)
                     setTimeout(function() {
                       $('#{{gallery_id}}').show();
-                      logText = 'initializing gallery finished on id: #{{gallery_id}}';
+                      logText = '\n' + 'initializing gallery finished on id: #{{gallery_id}}';
                       logger.info(logText);
                     }, {{show_delay}});
                   });
@@ -360,7 +360,7 @@ j1.adapter['justifiedGallery'] = (function (j1, window) {
                     // lightbox is initialized (delayed)
                     setTimeout(function() {
                       $('#{{gallery_id}}').show();
-                      logText = 'initializing gallery finished on id: #{{gallery_id}}';
+                      logText = '\n' + 'initializing gallery finished on id: #{{gallery_id}}';
                       logger.info(logText);
                       }, {{show_delay}});
                   });
@@ -384,7 +384,7 @@ j1.adapter['justifiedGallery'] = (function (j1, window) {
     messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = 'received message from ' + sender + ': ' + json_message;
+      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
       logger.debug(logText);
 
       // -----------------------------------------------------------------------
@@ -392,7 +392,7 @@ j1.adapter['justifiedGallery'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
         _this.setState('finished');
-        logger.info(message.text);
+        logger.info('\n' + message.text);
       }
 
       //

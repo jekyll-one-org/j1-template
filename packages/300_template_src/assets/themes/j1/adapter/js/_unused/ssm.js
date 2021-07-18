@@ -182,7 +182,7 @@ j1.adapter['ssm'] = (function (j1, window) {
 
       {% assign id_list = "" %}
 
-      j1.xhrData ({
+      j1.loadHTML ({
         xhr_container_id: '{{ssm_options.xhr_container_id}}',
         xhr_data_path:    '{{ssm_options.xhr_data_path}}' },
         'j1.adapter.ssm',

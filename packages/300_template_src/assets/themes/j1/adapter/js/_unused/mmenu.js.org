@@ -148,7 +148,7 @@ j1.adapter['mmenu'] = (function (j1, window) {
       // data loader
       // -----------------------------------------------------------------------
       $.when (
-        j1.xhrData ( // mmenu
+        j1.loadHTML ( // mmenu
           'j1.adapter.mmenu', {
           xhr_container_id: navMenuOptions.xhr_container_id,
           xhr_data_path:    navMenuOptions.xhr_data_path },

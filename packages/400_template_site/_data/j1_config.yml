@@ -385,11 +385,15 @@ body:
 #
 # ------------------------------------------------------------------------------
 comments:
-  enabled:                              false
+  enabled:                              true
+  xhr_data_path:                        /assets/data/comment-providers/index.html
   provider:                             disqus
 
   disqus:
-    short_name:                         'jekyll-one'
+    short_name:                         jekyll-one
+    xhr_container_id:                   fam-container
+
+
 
 # facebook:
 #   appid:                              123
