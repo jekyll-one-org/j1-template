@@ -11,7 +11,6 @@ categories:                             [ Bootstrap, Tables ]
 tags:                                   [ Roundtrip, Introduction ]
 
 flowtext:                               false
-comments:                               false
 fam_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/learn/roundtrip/responsive_tables/

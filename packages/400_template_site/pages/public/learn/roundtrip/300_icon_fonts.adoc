@@ -13,8 +13,6 @@ description: >
 categories:                             [ Icon, Module ]
 tags:                                   [ Roundtrip, Introduction ]
 
-
-comments:                               false
 fam_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/learn/roundtrip/mdi_icon_font/

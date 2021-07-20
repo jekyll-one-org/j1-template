@@ -386,23 +386,30 @@ body:
 # ------------------------------------------------------------------------------
 comments:
   enabled:                              true
-  xhr_data_path:                        /assets/data/comment-providers/index.html
-  provider:                             disqus
+
+  xhr_data_path:                        /assets/data
+  provider:                             hyvor                                   # disqus | hyvor | commento | just-comments
 
   disqus:
-    short_name:                         jekyll-one
-    xhr_container_id:                   fam-container
+    site_id:                            jekyll-one
 
+  hyvor:
+    site_id:                            4612
 
+  # commento:                                                                   # currently NOT supported
+  #   site_id:                            'commento-site-id'
+  #
+  # just-comments:                                                              # currently NOT supported
+  #   site_id:                            'just-comments-site-id'
 
-# facebook:
-#   appid:                              123
-#   num_posts:                          5
-#   width:                              580
-#   colorscheme:                        light
+  # facebook:                                                                   # currently NOT supported
+  #   appid:                              'facebook-app-id'
+  #   num_posts:                          5
+  #   width:                              580
+  #   colorscheme:                        light
 
-# custom:
-#   custom_data:
+  # custom:                                                                     # currently NOT supported
+  #   custom_data:
 
 # ------------------------------------------------------------------------------
 # ANALYTICS settings

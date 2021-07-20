@@ -37,8 +37,13 @@ regenerate:                             true
 
 {% comment %} Set variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign comment_provider = 'disqus' %}
-{% assign site_id          = j1_config.comments.disqus.site_id %}
+{% assign comment_provider = 'hyvor' %}
+{% assign site_id          = j1_config.comments.hyvor.site_id %}
+
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
 
 {% comment %} Main
 ================================================================================ {% endcomment %}
@@ -46,32 +51,18 @@ regenerate:                             true
 $(document).ready(function() {
   var dependencies_met_page_finished = setInterval (function () {
     if (j1.getState() === 'finished') {
-      var disqus_shortname = '{{site_id}}';
-      // -----------------------------------------------------------------
-      // RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE
-      // SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-      // LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT:
-      // https://disqus.com/admin/universalcode/#configuration-variables
-      // -----------------------------------------------------------------
-      //
-      // var disqus_config = function () {
-      // this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-      // Replace PAGE_IDENTIFIER with your page's unique
-      // identifier variable
-      // this.page.identifier = PAGE_IDENTIFIER;
-      // };
-      //
       // DON'T EDIT BELOW THIS LINE
-      // -----------------------------------------------------------------
+      // -----------------------------------------------------------------------
+      var site_id = {{site_id}};
       (function() {
-          var d = document,
-              s = d.createElement('script');
-          s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-          s.setAttribute('data-timestamp', +new Date());
-          (d.head || d.body).appendChild(s);
+        var HYVOR_TALK_WEBSITE = site_id;
+        var HYVOR_TALK_CONFIG = {
+            url: false,
+            id: false
+        };
       })();
-      clearInterval(dependencies_met_page_finished);
     }
+    clearInterval(dependencies_met_page_finished);
   }, 25);
 });
 

@@ -15,8 +15,10 @@ robots:
 
 fam_menu_id:                            page_ctrl_simple
 scrollbar:                              false
-comments:                               false
 toc:                                    true
+
+advertising:                            false
+comments:                               false
 
 permalink:                              /pages/public/legal/en/privacy/
 regenerate:                             false
@@ -47,6 +49,8 @@ resource_options:
 :cookie-consent:                        true
 :logs-files:                            false
 :google-analytics:                      true
+:hyvor:                                 true
+:disqus:                                false
 :facebook:                              false
 :twitter:                               false
 :instagram:                             false
@@ -90,7 +94,6 @@ website help gives you a better user experience of the website to offer. More
 information about what data is collected and how they may be passed on
 to partners can be found in the privacy dialog by clicking on the
 `Privacy Policy` button.
-
 
 Necessary::
 data is stored to run base services of this site. This website is based on
@@ -211,8 +214,8 @@ endif::[]
 ifeval::[{facebook} == true]
 == Use of Facebook Plug-ins
 
-We have integrated plug-ins (Like-Button) by the social network *Facebook*,
-provided by:
+Commenting on *Facebook* is available if you have *agreed* on
+*personalization* with your privacy settings to use this site provided by:
 
 ----
   Facebook Inc.
@@ -221,8 +224,6 @@ provided by:
   California 94025
   USA
 ----
-
-into our website.
 
 When you visit our website, the plug-in will establish a direct connection
 between your browser and the Facebook server. Thereby Facebook will be informed
@@ -243,8 +244,8 @@ endif::[]
 ifeval::[{twitter} == true]
 == Use of Twitter
 
-We have integrated functions by the service provider Twitter into our website.
-These functions are offered by:
+Commenting on *Twitter* is available if you have *agreed* on
+*personalization* with your privacy settings to use this site provided by:
 
 ----
   Twitter Inc.
@@ -256,15 +257,16 @@ These functions are offered by:
 
 When using Twitter and the "re-tweet" function, the websites you have visited
 will be linked to your Twitter account and made available to other users.
-Data will also be transmitted to Twitter.
+Data will also be transmitted to Twitter. We would like to point out that as
+provider of the website we possess no knowledge of the contents of the data
+transmitted or its use by Twitter.
 
-We would like to point out that as provider of the website we possess no
-knowledge of the contents of the data transmitted or its use by Twitter.
-You can find further information on this topic in the Twitter privacy
-policy at link:{url-twitter--privacy-en}[Privacy Police, {browser-window--new}].
-You can change your Twitter privacy
-settings in your account settings at
+Further information on the handling of user data can be found in the
+link:{url-twitter--privacy-en}[Privacy Police, {browser-window--new}].
+
+You can change your Twitter privacy settings in your account settings at
 link:{url-twitter--login}[Login, {browser-window--new}].
+
 endif::[]
 
 ifeval::[{instagram} == true]
@@ -290,13 +292,15 @@ deren Nutzung durch Instagram erhalten.
 
 Weitere Informationen hierzu finden Sie in der
 link:{url-instagram--privacy-policy}[Privacy Police Instagram, {browser-window--new}].
+
 endif::[]
 
 ifeval::[{youtube} == true]
 == Use of YouTube
 
 We have integrated functions by the service provider *YouTube* into our
-website on selected pages. These functions are offered by:
+website on selected pages. *YouTube* is available if you have *agreed* on
+*personalization* with your privacy settings to use this site provided by:
 
 ----
   YouTube LLC,
@@ -315,4 +319,61 @@ by logging out of your YouTube account.
 
 Further information on the handling of user data can be found in the
 link:{url-google--privacy-policy-en}[Privacy Police Google/YouTube, {browser-window--new}].
+
+endif::[]
+
+
+ifeval::[{disqus} == true]
+== Use of Disqus
+
+We have integrated the social network|commenting platform *Disqus* into our
+website. Commenting on *Disqus* is available if you have *agreed* on
+*personalization* with your privacy settings to use this site provided by:
+
+----
+  Disqus, Inc.
+  301 Howard Street
+  Suite 300
+  CA 94105
+  USA
+----
+
+When you visit our website, the plug-in will establish a direct connection
+between your browser and the Disqus server. Thereby Disqus will be informed
+about your visit on our website with your IP address and other data tracked
+by cookies and similiar technologies. Your personal data is shared by partners
+of the provider *Disqus* with third-party advertising platforms.
+
+Further information on the handling of user data can be found in the
+https://help.disqus.com/en/articles/1717103-disqus-privacy-policy[Privacy Policy, {browser-window--new}].
+
+endif::[]
+
+ifeval::[{hyvor} == true]
+== Use of Hyvor Talk
+
+We have integrated the social network|commenting platform *Hyvor Talk* into
+our website. Commenting on *Hyvor Talk* is available if you have *agreed* on
+*personalization* with your privacy settings to use this site provided by:
+
+----
+No 130
+Green Mount State
+Madawa, Pilessa
+Kurunegala
+Sri Lanka
+----
+
+Hyvor Talk is a *privacy-first*, no ads, no tracking platform to support a
+visitors for comments on this website. When you visit our website, the
+commenting platform will establish a direct connection between your browser
+and the Hyvor servers, but does *not* sell any of your personal data to
+third-parties or advertisers.
+
+Further information on the handling of user data can be found in the
+https://hyvor.com/privacy-policy[Privacy Policy, {browser-window--new}].
+
+NOTE: Hyvor Talk does not place any tracking, advertising, affiliate, or any
+third-party codes.
+
 endif::[]

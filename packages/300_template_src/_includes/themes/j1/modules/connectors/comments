@@ -49,6 +49,9 @@
     {% when "disqus" %}
       <!-- [INFO   ] [j1.modules.connectors.comments      ] [ place comment provider DISQUS ] -->
       {% include themes/{{site.template.name}}/modules/connectors/comment/disqus.html %}
+    {% when "hyvor" %}
+      <!-- [INFO   ] [j1.modules.connectors.comments      ] [ place comment provider HYVOR ] -->
+      {% include themes/{{site.template.name}}/modules/connectors/comment/hyvor.html %}
     {% when "facebook" %}
       <!-- [INFO   ] [j1.modules.connectors.comments      ] [ place comment provider FACEBOOK ] -->
       {% include themes/{{site.template.name}}/procedures/provider/comment/facebook.html %}

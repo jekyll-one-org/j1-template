@@ -15,7 +15,8 @@ tags:                                   [ Roundtrip, Introduction ]
 permalink:                              /pages/public/learn/roundtrip/present_videos/
 regenerate:                             false
 
-comments:                               false
+personalization:                        true
+
 fam_menu_id:                            page_ctrl_simple
 
 resources:                              [

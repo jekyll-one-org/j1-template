@@ -386,19 +386,30 @@ body:
 # ------------------------------------------------------------------------------
 comments:
   enabled:                              false
-  provider:                             disqus
+
+  xhr_data_path:                        /assets/data
+  provider:                             hyvor                                   # hyvor | disqus
+
+  hyvor:
+    site_id:                            'hyvor-site-id'
 
   disqus:
-    short_name:                         '<your-site-id>'
+    site_id:                            '<your-site-short-name>'
 
-# facebook:
-#   appid:                              123
-#   num_posts:                          5
-#   width:                              580
-#   colorscheme:                        light
+  # commento:                                                                   # currently NOT supported
+  #   site_id:                            'commento-site-id'
+  #
+  # just-comments:                                                              # currently NOT supported
+  #   site_id:                            'just-comments-site-id'
 
-# custom:
-#   custom_data:
+  # facebook:                                                                   # currently NOT supported
+  #   appid:                              'facebook-app-id'
+  #   num_posts:                          5
+  #   width:                              580
+  #   colorscheme:                        light
+
+  # custom:                                                                     # currently NOT supported
+  #   custom_data:
 
 # ------------------------------------------------------------------------------
 # ANALYTICS settings

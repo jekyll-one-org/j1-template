@@ -12,7 +12,6 @@ categories:                             [ Bootstrap, Themes ]
 tags:                                   [ Roundtrip, Introduction ]
 
 scrollbar:                              false
-comments:                               false
 fam_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/learn/roundtrip/themes/

@@ -594,9 +594,13 @@ defaults:
         index:                          false
         follow:                         false
 
+      personalization:                  false
+
       analytics:                        true
+      comments:                         true
       advertising:                      false
-      comments:                         false
+      youtube:                          true
+      vimeo:                            true
 
       toc:                              true
       fam_menu_id:                      page_ctrl_simple
@@ -633,9 +637,13 @@ defaults:
         index:                          false
         follow:                         false
 
-      analytics:                        false
-      advertising:                      false
+      personalization:                  false
+
+      analytics:                        true
       comments:                         true
+      advertising:                      false
+      youtube:                          true
+      vimeo:                            true
 
       series:                           false
 
@@ -672,6 +680,14 @@ defaults:
         index:                          false
         follow:                         false
 
+      personalization:                  false
+
+      analytics:                        true
+      comments:                         true
+      advertising:                      false
+      youtube:                          true
+      vimeo:                            true
+
       icons:
         category-icon:                  false                                   # dots-horizontal-circle
         family:                         MDI
@@ -697,9 +713,13 @@ defaults:
         index:                          false
         follow:                         false
 
-      analytics:                        false
-      advertising:                      false
+      personalization:                  false
+
+      analytics:                        true
       comments:                         false
+      advertising:                      false
+      youtube:                          false
+      vimeo:                            false
 
       series:                           false
 
@@ -736,6 +756,16 @@ defaults:
         index:                          false
         follow:                         false
 
+      sitemap:                          false
+
+      personalization:                  false
+
+      analytics:                        false
+      comments:                         false
+      advertising:                      false
+      youtube:                          false
+      vimeo:                            false
+
   # ----------------------------------------------------------------------------
   # Biography (Book Shelf)
   #
@@ -752,9 +782,14 @@ defaults:
         follow:                         false
 
       sitemap:                          false
+
+      personalization:                  false
+
       analytics:                        false
-      advertising:                      false
       comments:                         false
+      advertising:                      false
+      youtube:                          false
+      vimeo:                            false
 
       toc:                              false
       fam_menu_id:                      default
@@ -776,9 +811,14 @@ defaults:
         follow:                         false
 
       sitemap:                          false
+
+      personalization:                  false
+
       analytics:                        false
-      advertising:                      false
       comments:                         false
+      advertising:                      false
+      youtube:                          false
+      vimeo:                            false
 
       toc:                              false
       fam_menu_id:                      default
@@ -800,9 +840,14 @@ defaults:
         follow:                         false
 
       sitemap:                          false
+
+      personalization:                  false
+
       analytics:                        false
-      advertising:                      false
       comments:                         false
+      advertising:                      false
+      youtube:                          false
+      vimeo:                            false
 
       toc:                              false
       fam_menu_id:                      default

@@ -75,9 +75,23 @@ regenerate:                             true
 {% assign panel_data_path         = panel_config_defaults.data_path %}
 
 {% assign hideOnReload            = modules.themer_options.hideOnReload %}
+{% assign comment_provider        = template_config.comments.provider %}
 
-{% assign comment_provider        = site.data.j1_config.comments.provider %}
-{% assign disqus_short_name       = site.data.j1_config.comments.disqus.short_name %}
+{% comment %} Set variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if comment_provider == 'disqus' %}
+  {% assign site_id = template_config.comments.disqus.site_id %}
+{% elsif comment_provider == 'hyvor' %}
+  {% assign site_id = template_config.comments.hyvor.site_id %}
+{% elsif comment_provider == 'commento' %}
+  {% assign site_id = template_config.comments.commento.site_id %}
+{% elsif comment_provider == 'just-comments' %}
+  {% assign site_id = template_config.comments.just-comments.site_id %}
+{% elsif comment_provider == 'facebook' %}
+  {% assign site_id = template_config.comments.facebook.site_id %}
+{% else %}
+  {% assign site_id = false %}
+{% endif %}
 
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
@@ -134,7 +148,7 @@ var j1 = (function () {
 
   // Default comment provider information
   var comment_provider          = '{{comment_provider}}';
-  var disqus_short_name         = '{{disqus_short_name}}';
+  var site_id                   = '{{site_id}}';
 
   // Default translator settings (currently NOT supported)
   // var translation_enabled       = {{template_config.translation.enabled}};
@@ -843,6 +857,28 @@ var j1 = (function () {
       var appDetected;
       var categoryAllowed;
 
+      // provider APIs require user consent
+      var meta_analytics        = $('meta[name=analytics]').attr('content');
+      var analytics             = (meta_analytics === 'true') ? true: false;
+      var meta_comments         = $('meta[name=comments]').attr('content');
+      var comments              = (meta_comments === 'true') ? true: false;
+      var meta_advertising      = $('meta[name=advertising]').attr('content');
+      var advertising           = (meta_advertising === 'true') ? true: false;
+      var meta_youtube          = $('meta[name=youtube]').attr('content');
+      var youtube               = (meta_youtube === 'true') ? true: false;
+      var meta_vimeo            = $('meta[name=vimeo]').attr('content');
+      var vimeo                 = (meta_vimeo === 'true') ? true: false;
+
+      // personalized content require user consent
+      var meta_personalization  = $('meta[name=personalization]').attr('content');
+      var personalization       = (meta_personalization === 'true') ? true: false;
+
+      // if personalized content detected, page requires user consent
+      if (personalization && !user_consent.personalization) {
+        // redirect to error paged (blocked content)
+        window.location.href = "/444.html";
+      }
+
       logger.info('\n' + 'finalize page');
       j1.setCss();
 
@@ -901,19 +937,31 @@ var j1 = (function () {
                 $('#dsq-count-scr').remove();
                 $('#disqus-thread').remove();
               }
-            } else {
-              logger.warn('\n' + 'enable comment provider: ' + comment_provider);
-              $('body').append('<div id="disqus_thread"></div>');
-              $('body').append('<script async id="dsq-count-scr" src="//' + disqus_short_name + '.disqus.com/count.js"></script>');
-              $('#main-content').append('<h2 id="leave-a-comment" class="mt-4">Leave a comment</h2>');
-              if (comment_provider === 'disqus') {
-                logger.info('\n' + 'load comment provider code: ' + comment_provider);
-                j1.loadJS({
-                  xhr_data_path:    '/assets/data/' + comment_provider + '.js',
-                  xhr_data_element: comment_provider
-                });
+              if (comment_provider === 'hyvor') {
+                $('#hyvor-embed').remove();
+                $('#hyvor-talk-view').remove();
               }
-            }
+            } else {
+              if (comments) {
+                logger.warn('\n' + 'enable comment provider: ' + comment_provider);
+                $('#main-content').append('<h2 id="leave-a-comment" class="mt-4">Leave a comment</h2>');
+                if (comment_provider === 'disqus') {
+                  logger.info('\n' + 'load comment provider code: ' + comment_provider);
+                  $('#main-content').append('<div id="disqus_thread"></div>');
+                  $('body').append('<script async id="dsq-count-scr" src="//' + site_id + '.disqus.com/count.js"></script>');
+                  j1.loadJS({
+                    xhr_data_path:    '/assets/data/' + comment_provider + '.js',
+                    xhr_data_element: comment_provider
+                  });
+                }
+                if (comment_provider === 'hyvor') {
+                  $('body').append('<script> var HYVOR_TALK_WEBSITE = ' + site_id + '; var HYVOR_TALK_CONFIG = { url: false, id: false };');
+                  $('#main-content').append('<div id="hyvor-talk-view"></div>');
+                  $('body').append('<script async id="hyvor-embed" type="text/javascript" src="//talk.hyvor.com/web-api/embed.js"></script>');
+                }
+              } // END comments
+            } // END personalization
+
             // display page
            $('#no_flicker').css('display', 'block');
 
@@ -1009,19 +1057,30 @@ var j1 = (function () {
               $('#dsq-count-scr').remove();
               $('#disqus-thread').remove();
             }
-          } else {
-            logger.warn('\n' + 'enable comment provider: ' + comment_provider);
-            $('body').append('<div id="disqus_thread"></div>');
-            $('body').append('<script async id="dsq-count-scr" src="//' + disqus_short_name + '.disqus.com/count.js"></script>');
-            $('#main-content').append('<h2 id="leave-a-comment" class="mt-4">Leave a comment</h2>');
-            if (comment_provider === 'disqus') {
-              logger.info('\n' + 'load comment provider code: ' + comment_provider);
-              j1.loadJS({
-                xhr_data_path:    '/assets/data/' + comment_provider + '.js',
-                xhr_data_element: comment_provider
-              });
+            if (comment_provider === 'hyvor') {
+              $('#hyvor-embed').remove();
+              $('#hyvor-talk-view').remove();
             }
-          }
+          } else {
+            if (comments) {
+              logger.warn('\n' + 'enable comment provider: ' + comment_provider);
+              $('#main-content').append('<h2 id="leave-a-comment" class="mt-4">Leave a comment</h2>');
+              if (comment_provider === 'disqus') {
+                logger.info('\n' + 'load comment provider code: ' + comment_provider);
+                $('#main-content').append('<div id="disqus_thread"></div>');
+                $('body').append('<script async id="dsq-count-scr" src="//' + site_id + '.disqus.com/count.js"></script>');
+                j1.loadJS({
+                  xhr_data_path:    '/assets/data/' + comment_provider + '.js',
+                  xhr_data_element: comment_provider
+                });
+              }
+              if (comment_provider === 'hyvor') {
+                $('body').append('<script> var HYVOR_TALK_WEBSITE = ' + site_id + '; var HYVOR_TALK_CONFIG = { url: false, id: false };');
+                $('#main-content').append('<div id="hyvor-talk-view"></div>');
+                $('body').append('<script async id="hyvor-embed" type="text/javascript" src="//talk.hyvor.com/web-api/embed.js"></script>');
+              }
+            } // END comments
+          } // END personalization
 
           // display page
           $('#no_flicker').css('display', 'block');
@@ -1350,7 +1409,7 @@ var j1 = (function () {
 
     // -------------------------------------------------------------------------
     // loadJS()
-    // Load JS data asychronously using XHR|jQuery
+    // Load JS data asychronously using jQuery (XHR)
     // -------------------------------------------------------------------------
     loadJS: function (options, mod, status) {
       var logger  = log4javascript.getLogger('j1.adapter.loadJS');
@@ -1363,35 +1422,25 @@ var j1 = (function () {
           if ( statusTxt === 'success' ) {
             j1.setXhrDataState(id, statusTxt);
 
-            logText = '\n' + 'data loaded successfully on id: ' +id;
+            logText = '\n' + 'data loaded successfully for: ' +id;
             logger.info(logText);
             state = true;
           }
           if ( statusTxt === 'error' ) {
-            // jadams, 2020-07-21: to be checked why id could be UNDEFINED
-            if (typeof(id) != "undefined") {
-              state = 'failed';
-              logger.info('\n' + 'set state for ' +mod+ ' to: ' + state);
-              j1.setXhrDataState(id, statusTxt);
-              logText = '\n' + 'loading data failed on id: ' +id+ ', error ' + xhr.status + ': ' + xhr.statusText;
-              logger.error(logText);
-              state = false;
-            }
+            state = 'failed';
+            logger.info('\n' + 'set state for ' +mod+ ' to: ' + state);
+            j1.setXhrDataState(id, statusTxt);
+            logText = '\n' + 'loading data failed for: ' +id+ ', error ' + xhr.status + ': ' + xhr.statusText;
+            logger.error(logText);
+            state = false;
           }
         };
       };
 
-      var html_data_path = options.xhr_data_path + ' #' + options.xhr_data_element;
-      var id        = '#' + options.xhr_container_id;
-      var container = '#' + options.xhr_container_id + '_container';
-
       $.ajax({
-        url:      '/assets/data/disqus.js',
+        url:      options.xhr_data_path,
         dataType: 'script',
-        success:  cb_load_closure(mod, id),
-        error:    function (jqXHR, textStatus, errorThrown) {
-          logger.error('\n' + 'Failed to retrieve JS data: ' + textStatus);
-        }
+        success:  cb_load_closure(mod, options.xhr_data_element)
       });
 
       return state;

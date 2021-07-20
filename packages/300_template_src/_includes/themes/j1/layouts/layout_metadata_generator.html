@@ -172,6 +172,61 @@
 {{robots_index}}
 {{robots_follow}}
 
+<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ meta tag for provider APIs: analytics ] -->
+{% if page.analytics %}
+  {% capture analytics %}<meta name="analytics" content="true" />{% endcapture %}
+{% else %}
+  {% capture analytics %}<meta name="analytics" content="false" />{% endcapture %}
+{% endif %}
+
+{{analytics}}
+
+<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ meta tag for provider APIs: comments ] -->
+{% if page.comments %}
+  {% capture comments %}<meta name="comments" content="true" />{% endcapture %}
+{% else %}
+  {% capture comments %}<meta name="comments" content="false" />{% endcapture %}
+{% endif %}
+
+{{comments}}
+
+<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ meta tag for provider APIs: advertising ] -->
+{% if page.advertising %}
+  {% capture advertising %}<meta name="advertising" content="true" />{% endcapture %}
+{% else %}
+  {% capture advertising %}<meta name="advertising" content="false" />{% endcapture %}
+{% endif %}
+
+{{advertising}}
+
+<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ meta tag for provider APIs: youtube ] -->
+{% if page.youtube %}
+  {% capture youtube %}<meta name="youtube" content="true" />{% endcapture %}
+{% else %}
+  {% capture youtube %}<meta name="youtube" content="false" />{% endcapture %}
+{% endif %}
+
+{{youtube}}
+
+<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ meta tag for provider APIs: vimeo ] -->
+{% if page.vimeo %}
+  {% capture vimeo %}<meta name="vimeo" content="true" />{% endcapture %}
+{% else %}
+  {% capture vimeo %}<meta name="vimeo" content="false" />{% endcapture %}
+{% endif %}
+
+{{vimeo}}
+
+<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ meta tag for privacy settings: personalization ] -->
+{% if page.personalization %}
+  {% capture personalization %}<meta name="personalization" content="true" />{% endcapture %}
+{% else %}
+  {% capture personalization %}<meta name="personalization" content="false" />{% endcapture %}
+{% endif %}
+
+{{personalization}}
+
+
 {% comment %} SEO settings (optimization)
 -------------------------------------------------------------------------------- {% endcomment %}
 

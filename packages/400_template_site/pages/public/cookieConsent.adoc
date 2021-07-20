@@ -12,6 +12,9 @@ tags:                                   [ Cookie, Consent ]
 scrollbar:                              false
 fam_menu_id:                            default
 
+advertising:                            false
+comments:                               false
+
 permalink:                              /pages/public/cookieConsent/
 regenerate:                             true
 

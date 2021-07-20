@@ -15,7 +15,6 @@ tags:                                   [ Roundtrip, Introduction ]
 
 toc:                                    true
 scrollbar:                              false
-comments:                               false
 fam_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/learn/roundtrip/quicksearch/

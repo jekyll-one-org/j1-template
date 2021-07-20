@@ -17,8 +17,10 @@ robots:
 
 fam_menu_id:                            page_ctrl_simple
 scrollbar:                              false
-comments:                               false
 toc:                                    true
+
+advertising:                            false
+comments:                               false
 
 permalink:                              /pages/public/legal/en/comment_policy/
 regenerate:                             true
