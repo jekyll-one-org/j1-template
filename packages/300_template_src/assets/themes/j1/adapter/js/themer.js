@@ -103,6 +103,8 @@ j1.adapter['themer'] = (function (j1, window) {
   // ---------------------------------------------------------------------------
   var environment               = '{{environment}}';
   var themerOptions             = $.extend({}, {{themer_options | replace: '=>', ':' | replace: 'nil', '""' }});
+  var url                       = new liteURL(window.location.href);
+  var secure                    = (url.protocol.includes('https')) ? true : false;
   var user_state                = {};
   var user_consent              = {};
   var cookie_names              = j1.getCookieNames();
@@ -219,7 +221,8 @@ j1.adapter['themer'] = (function (j1, window) {
              cookie_written = j1.writeCookie({
                name:     cookie_names.user_state,
                data:     user_state,
-               samesite: 'Strict'
+               samesite: 'Strict',
+               secure:   secure
              });
              if (!cookie_written) {
              	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
@@ -229,6 +232,7 @@ j1.adapter['themer'] = (function (j1, window) {
                name:     cookie_names.user_state,
                data:     user_state,
                samesite: 'Strict',
+               secure:   secure,
                expires:  365
              });
              if (!cookie_written) {
