@@ -175,7 +175,7 @@ This website uses Google Analytics, a web analytics service provided by:
 
 ----
    Google Inc.
-   1600 Amphitheatre Parkway Mountain View
+   1600 Amphitheatre Parkway
    CA 94043
    USA
 ----
@@ -250,7 +250,7 @@ Commenting on *Twitter* is available if you have *agreed* on
 ----
   Twitter Inc.
   1355 Market Street
-  Suite 900, San Francisco
+  Suite 900
   CA 94103
   USA
 ----
@@ -303,7 +303,7 @@ website on selected pages. *YouTube* is available if you have *agreed* on
 *personalization* with your privacy settings to use this site provided by:
 
 ----
-  YouTube LLC,
+  YouTube LLC
   901 Cherry Ave San Bruno
   CA 94066
   USA
@@ -357,9 +357,9 @@ our website. Commenting on *Hyvor Talk* is available if you have *agreed* on
 *personalization* with your privacy settings to use this site provided by:
 
 ----
-No 130
 Green Mount State
 Madawa, Pilessa
+No 130
 Kurunegala
 Sri Lanka
 ----
