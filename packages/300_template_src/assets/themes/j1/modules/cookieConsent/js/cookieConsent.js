@@ -38,13 +38,15 @@
 // -----------------------------------------------------------------------------
 
 function BootstrapCookieConsent(props) {
+  var logger                = log4javascript.getLogger('j1.core.bsCookieConsent');
+  var modalId               = 'bccs-modal';
+  var self                  = this;
+  var detailedSettingsShown = false;
+  var url                   = new liteURL(window.location.href);
+  var secure                = (url.protocol.includes('https')) ? true : false;
   var logText;
   var current_page;
   var whitelisted;
-  var logger                = log4javascript.getLogger('j1.core.bsCookieConsent');
-  var modalId               = "bccs-modal"
-  var self                  = this
-  var detailedSettingsShown = false
 
   logger.info('\n' + 'initializing core module: started');
   logger.info('\n' + 'state: started');
@@ -59,7 +61,8 @@ function BootstrapCookieConsent(props) {
     postSelectionCallback:  undefined,                                          // callback function, called after the user has made his selection
     whitelisted:            [],                                                 // pages NO consent modal page is issued
     xhr_data_element:       "",                                                 // container for the language-specific consent modal taken from /assets/data/cookieconsent.html
-    sameSite:               "Strict"                                            // restrict consent cookie to first-party, do NOT send cookie to other domains
+    sameSite:               "Strict",                                           // restrict consent cookie to first-party, do NOT send cookie to other domains
+    secure:                 false                                               //
   }
 
   for (var property in props) {
@@ -76,7 +79,7 @@ function BootstrapCookieConsent(props) {
   }
 
   var Cookie = {
-    set: function (name, value, days, samesite) {
+    set: function (name, value, days, samesite, secure) {
       var value_encoded = window.btoa(value);
       var expires = "";
       if (days) {
@@ -84,7 +87,11 @@ function BootstrapCookieConsent(props) {
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         expires = "; expires=" + date.toUTCString();
       }
-      document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + samesite + ';';
+      if (secure) {
+        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + samesite + '; ' + 'secure=' + secure + ';';
+      } else {
+        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + samesite + ';';
+      }
     },
     get: function (name) {
     var nameEQ = name + "=";
@@ -239,12 +246,12 @@ function BootstrapCookieConsent(props) {
   }
 
   function agreeAll() {
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(true)), self.props.cookieStorageDays, self.props.sameSite);
+    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(true)), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
     self.$modal.modal("hide");
   }
 
   function doNotAgree() {
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), self.props.cookieStorageDays, self.props.sameSite);
+    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
 
     // jadams, 2021-07-15: all cookies NOT longer supported by j1.expireCookie
     // TODO: Create loop over all cookies found in page
@@ -257,7 +264,7 @@ function BootstrapCookieConsent(props) {
   }
 
   function saveSettings() {
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions()), self.props.cookieStorageDays, self.props.sameSite);
+    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions()), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
     self.$modal.modal("hide");
   }
 

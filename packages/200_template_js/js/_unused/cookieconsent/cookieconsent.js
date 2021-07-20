@@ -60,6 +60,7 @@ module.exports = function BootstrapCookieConsent(options) {
           // noinspection JSUnfilteredForInLoop
           this.options[property] = options[property]
       }
+
       this.lang = this.options.lang
       if (this.lang.indexOf("-") !== -1) {
           this.lang = this.lang.split("-")[0]
@@ -69,14 +70,14 @@ module.exports = function BootstrapCookieConsent(options) {
       }
 
       var Cookie = {
-          set: function (name, value, days) {
+          set: function (name, value, days, samesite, secure) {
               var expires = ""
               if (days) {
                   var date = new Date()
                   date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000))
                   expires = "; expires=" + date.toUTCString()
               }
-              document.cookie = name + "=" + (value || "") + expires + "; Path=/; SameSite=Strict;"
+              document.cookie = name + '=' + (value || '') + expires + '; Path=/; SameSite=' + samesite + '; ' + 'secure=' + secure + ';';
           },
           get: function (name) {
               var nameEQ = name + "="
@@ -217,12 +218,12 @@ module.exports = function BootstrapCookieConsent(options) {
       }
 
       function agreeAll() {
-          Cookie.set(self.options.cookieName, JSON.stringify(gatherOptions(true)), self.options.cookieStorageDays)
+          Cookie.set(self.options.cookieName, JSON.stringify(gatherOptions(true)), self.options.cookieStorageDays, self.options.sameSite, secure)
           self.$modal.modal("hide")
       }
 
       function doNotAgree() {
-          Cookie.set(self.options.cookieName, JSON.stringify(gatherOptions(false)), self.options.cookieStorageDays)
+          Cookie.set(self.options.cookieName, JSON.stringify(gatherOptions(false)), self.options.cookieStorageDays, self.options.sameSite, secure)
   //      logger.warn('delete cookie consent');
           j1.deleteCookie("j1.cookie.consent");
           self.$modal.modal("hide")
@@ -232,7 +233,7 @@ module.exports = function BootstrapCookieConsent(options) {
       }
 
       function saveSettings() {
-          Cookie.set(self.options.cookieName, JSON.stringify(gatherOptions()), self.options.cookieStorageDays)
+          Cookie.set(self.options.cookieName, JSON.stringify(gatherOptions()), self.options.cookieStorageDays, self.options.sameSite, secure)
           self.$modal.modal("hide")
       }
 

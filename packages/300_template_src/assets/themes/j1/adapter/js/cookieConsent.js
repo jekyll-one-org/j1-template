@@ -176,6 +176,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
             reloadPageOnChange:     moduleOptions.reloadPageOnChange,
             xhr_data_element:       moduleOptions.xhr_data_element + '-' + moduleOptions.language,
             sameSite:               moduleOptions.sameSite,
+            secure:                 secure,
             postSelectionCallback:  function () {j1.adapter.cookieConsent.cbCookie()}
           });
 
