@@ -849,7 +849,6 @@ var j1 = (function () {
       var user_session        = j1.readCookie(cookie_names.user_session);
       var user_state          = j1.readCookie(cookie_names.user_state);
       var user_consent        = j1.readCookie(cookie_names.user_consent);
-      var tracking_enabled    = (user_consent.analyses === 'true') ? true : false;
       var current_url         = new liteURL(window.location.href);
       var providerPermissions = {};
       var provider;
@@ -967,12 +966,17 @@ var j1 = (function () {
 
             // NOTE: Placed tracking warning/info here because page may reloaded
             // after cookie consent selection
-            if (tracking_enabled && !tracking_id_valid) {
-              logger.error('\n' + 'tracking enabled, but invalid tracking id found: ' + tracking_id);
-            } else if (tracking_enabled && tracking_id_valid) {
-              logger.warn('\n' + 'tracking enabled, tracking id found: ' + tracking_id);
+            if (user_consent.analyses) {
+              logger.info('\n' + 'tracking allowed, privacy settings for analysis: ' + user_consent.analyses);
+              if (tracking_enabled && !tracking_id_valid) {
+                logger.error('\n' + 'tracking enabled, but invalid tracking id found: ' + tracking_id);
+              } else if (tracking_enabled && tracking_id_valid) {
+                logger.warn('\n' + 'tracking enabled, tracking id found: ' + tracking_id);
+              } else {
+                logger.warn('\n' + 'tracking disabled, tracking id found: ' + tracking_id);
+              }
             } else {
-              logger.warn('\n' + 'tracking disabled, tracking id found: ' + tracking_id);
+              logger.warn('\n' + 'tracking not allowed, privacy settings for analysis: ' + user_consent.analyses);
             }
 
             // show|hide cookie icon (should MOVED to Cookiebar ???)
@@ -1087,12 +1091,17 @@ var j1 = (function () {
 
           // NOTE: Placed tracking warning/info here because page may reloaded
           // after cookie consent selection
-          if (tracking_enabled && !tracking_id_valid) {
-            logger.error('\n' + 'tracking enabled, but invalid tracking id found: ' + tracking_id);
-          } else if (tracking_enabled && tracking_id_valid) {
-            logger.warn('\n' + 'tracking enabled, tracking id found: ' + tracking_id);
+          if (user_consent.analyses) {
+            logger.info('\n' + 'tracking allowed, privacy settings for analysis: ' + user_consent.analyses);
+            if (tracking_enabled && !tracking_id_valid) {
+              logger.error('\n' + 'tracking enabled, but invalid tracking id found: ' + tracking_id);
+            } else if (tracking_enabled && tracking_id_valid) {
+              logger.warn('\n' + 'tracking enabled, tracking id found: ' + tracking_id);
+            } else {
+              logger.warn('\n' + 'tracking disabled, tracking id found: ' + tracking_id);
+            }
           } else {
-            logger.warn('\n' + 'tracking disabled, tracking id found: ' + tracking_id);
+            logger.warn('\n' + 'tracking not allowed, privacy settings for analysis: ' + user_consent.analyses);
           }
 
           logger.info('\n' + 'mode detected: web');

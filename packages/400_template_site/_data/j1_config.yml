@@ -424,8 +424,8 @@ analytics:
   google:
     tracking_id:                        'G-8ZGNE0WE42'                          # '<your-tracking-id>'
 
-  custom:
-    custom_data:
+# custom:                                                                       # currently NOT supported
+#   custom_data:
 
 # ------------------------------------------------------------------------------
 # ADVERTISING settings
@@ -436,10 +436,12 @@ analytics:
 advertising:
   enabled:                              false
   provider:                             google
+
   google:
     publisher_id:                       '<your-publisher_id>'
-  custom:
-    custom_data:
+
+# custom:                                                                       # currently NOT supported
+#   custom_data:
 
 # ------------------------------------------------------------------------------
 # TRANSLATOR settings
@@ -456,6 +458,9 @@ translation:
     meta_data:                          [google-translate-customization]
     page_language:                      en
     translation_languages:              [all]
+
+# custom:                                                                       # currently NOT supported
+#   custom_data:
 
 # ------------------------------------------------------------------------------
 # SHARING settings (currently NOT supported)
