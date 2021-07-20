@@ -97,6 +97,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
   var baseUrl;
   var hostname;
   var domain;
+  var cookie_domain;
   var secure;
   var logText;
   var cookie_written;
@@ -121,13 +122,14 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       // globals
       // -----------------------------------------------------------------------
-      _this     = j1.adapter.cookieConsent;
-      logger    = log4javascript.getLogger('j1.adapter.cookieConsent');
-      url       = new liteURL(window.location.href);
-      baseUrl   = url.origin;
-      hostname  = url.hostname;
-      domain    = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
-      secure    = (url.protocol.includes('https')) ? true : false;
+      _this         = j1.adapter.cookieConsent;
+      logger        = log4javascript.getLogger('j1.adapter.cookieConsent');
+      url           = new liteURL(window.location.href);
+      baseUrl       = url.origin;
+      hostname      = url.hostname;
+      cookie_domain = '.' + hostname
+      domain        = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+      secure        = (url.protocol.includes('https')) ? true : false;
 
       // initialize state flag
       _this.state = 'pending';
@@ -279,7 +281,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
           if (!user_agent.includes('iPad')) {
             gaCookies.forEach(function (item) {
               logger.warn('\n' + 'delete GA cookie: ' + item);
-              j1.removeCookie({ name: item, domain: domain });
+              j1.removeCookie({ name: item, domain: cookie_domain });
             });
           }
         }
