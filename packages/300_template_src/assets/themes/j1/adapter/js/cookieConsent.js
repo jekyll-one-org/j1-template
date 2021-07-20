@@ -127,10 +127,15 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       url           = new liteURL(window.location.href);
       baseUrl       = url.origin;
       hostname      = url.hostname;
-      cookie_domain = '.' + hostname
       domain        = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
       secure        = (url.protocol.includes('https')) ? true : false;
 
+
+      if(domain !== 'localhost') {
+        cookie_domain = '.' + hostname;
+      } else {
+        cookie_domain = hostname;
+      }
       // initialize state flag
       _this.state = 'pending';
 
