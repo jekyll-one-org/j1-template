@@ -260,6 +260,8 @@ var j1 = (function () {
       var date              = new Date();
       var timestamp_now     = date.toISOString();
       var curr_state        = 'started';
+      var gaCookies         = j1.findCookie('_ga');
+      var j1Cookies         = j1.findCookie('j1');
 
       // -----------------------------------------------------------------------
       // options loader
@@ -376,6 +378,8 @@ var j1 = (function () {
       // for what reason.
       if (!user_state) {
         logger.error('\n' + 'cookie not found: ' + cookie_names.user_state);
+        gaCookies.forEach(item => console.log('j1.adapter: ' + item));
+        j1Cookies.forEach(item => console.log('j1.adapter: ' + item));
         user_state = j1.readCookie(cookie_names.user_state);
         user_state.session_active = true;
       }

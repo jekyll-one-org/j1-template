@@ -249,6 +249,9 @@ j1.adapter['navigator'] = (function (j1, window) {
       var themes_count;
       var max_count                                 = 100;
 
+      var gaCookies                                 = j1.findCookie('_ga');
+      var j1Cookies                                 = j1.findCookie('j1');
+
       navDefaults                                   = $.extend({}, {{navigator_defaults | replace: '=>', ':' }});
       navBarConfig                                  = $.extend({}, {{nav_bar_options | replace: '=>', ':' }});
       navMenuConfig                                 = $.extend({}, {{nav_menu_options | replace: '=>', ':' }});
@@ -346,6 +349,8 @@ j1.adapter['navigator'] = (function (j1, window) {
                 user_state        = j1.readCookie(cookie_user_state_name);
               }  else {
                 logger.error('\n' + 'cookie not found: j1.user.state');
+                gaCookies.forEach(item => console.log('j1.adapter.navigator: ' + item));
+                j1Cookies.forEach(item => console.log('j1.adapter.navigator: ' + item));
               }
 
               // jadams, 2021-07-03: wait until navigator CORE get finished

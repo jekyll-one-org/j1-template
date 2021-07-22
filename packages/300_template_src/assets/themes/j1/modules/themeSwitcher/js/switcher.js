@@ -49,6 +49,8 @@
 
   var cookie_names              = j1.getCookieNames();
   const user_state_cookie_name  = cookie_names.user_state;
+  var gaCookies                 = j1.findCookie('_ga');
+  var j1Cookies                 = j1.findCookie('j1');
 
   var logger = log4javascript.getLogger('j1.core.switcher');
   var logText;
@@ -129,6 +131,8 @@
         j1_user_state = j1.readCookie(user_state_cookie_name);
       } else {
         logger.error('\n' + 'cookie not found: j1.user.state');
+        gaCookies.forEach(item => console.log('j1.core.switcher: ' + item));
+        j1Cookies.forEach(item => console.log('j1.core.switcher: ' + item));
       }
 
       themeName           = j1_user_state.theme_name;

@@ -364,7 +364,7 @@ Kurunegala
 Sri Lanka
 ----
 
-Hyvor Talk is a *privacy-first*, no ads, no tracking platform to support a
+Hyvor Talk is a *privacy-first*, no ads, no tracking platform to support
 visitors for comments on this website. When you visit our website, the
 commenting platform will establish a direct connection between your browser
 and the Hyvor servers, but does *not* sell any of your personal data to
