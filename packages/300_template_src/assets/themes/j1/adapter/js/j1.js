@@ -378,8 +378,10 @@ var j1 = (function () {
       // for what reason.
       if (!user_state) {
         logger.error('\n' + 'cookie not found: ' + cookie_names.user_state);
-        gaCookies.forEach(item => console.log('j1.adapter: ' + item));
-        j1Cookies.forEach(item => console.log('j1.adapter: ' + item));
+        logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
+        j1Cookies.forEach(item => console.log('j1.core.switcher: ' + item));
+        logger.debug('\n' + 'ga cookies found:' + gaCookies.length);
+        gaCookies.forEach(item => console.log('j1.core.switcher: ' + item));
         user_state = j1.readCookie(cookie_names.user_state);
         user_state.session_active = true;
       }

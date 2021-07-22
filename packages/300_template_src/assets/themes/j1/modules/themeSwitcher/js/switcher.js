@@ -131,8 +131,10 @@
         j1_user_state = j1.readCookie(user_state_cookie_name);
       } else {
         logger.error('\n' + 'cookie not found: j1.user.state');
-        gaCookies.forEach(item => console.log('j1.core.switcher: ' + item));
+        logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
         j1Cookies.forEach(item => console.log('j1.core.switcher: ' + item));
+        logger.debug('\n' + 'ga cookies found:' + gaCookies.length);
+        gaCookies.forEach(item => console.log('j1.core.switcher: ' + item));
       }
 
       themeName           = j1_user_state.theme_name;
@@ -195,6 +197,10 @@
         j1_user_state = j1.readCookie(user_state_cookie_name);
       } else {
         logger.error('\n' + 'cookie not found: j1.user.state');
+        logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
+        j1Cookies.forEach(item => console.log('j1.core.switcher: ' + item));
+        logger.debug('\n' + 'ga cookies found:' + gaCookies.length);
+        gaCookies.forEach(item => console.log('j1.core.switcher: ' + item));
       }
 
       var themeName = j1_user_state.theme_name;
@@ -264,6 +270,10 @@
           j1_user_state = j1.readCookie(user_state_cookie_name);
         } else {
           logger.error('\n' + 'user state NOT cookie found');
+          logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
+          j1Cookies.forEach(item => console.log('j1.core.switcher: ' + item));
+          logger.debug('\n' + 'ga cookies found:' + gaCookies.length);
+          gaCookies.forEach(item => console.log('j1.core.switcher: ' + item));
         }
 
         themeName = j1_user_state.theme_name;

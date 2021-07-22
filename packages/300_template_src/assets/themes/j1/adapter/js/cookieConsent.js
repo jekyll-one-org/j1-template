@@ -263,11 +263,10 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       //   logger.warn('\n' + 'tracking enabled, tracking id found: ' + tracking_id);
       // }
 
-      // for development only
-      if (environment === 'development') {
-        gaCookies.forEach(item => console.log('j1.adapter.cookieConsent: ' + item));
-        j1Cookies.forEach(item => console.log('j1.adapter.cookieConsent: ' + item));
-      }
+      logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
+      j1Cookies.forEach(item => console.log('j1.core.switcher: ' + item));
+      logger.debug('\n' + 'ga cookies found:' + gaCookies.length);
+      gaCookies.forEach(item => console.log('j1.core.switcher: ' + item));
 
       if (user_agent.includes('iPad'))  {
         logger.warn('\n' + 'product detected : ' + platform.product);
