@@ -265,8 +265,8 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
 
       // for development only
       if (environment === 'development') {
-        gaCookies.forEach(item => console.log('cookieConsent: ' + item));
-        j1Cookies.forEach(item => console.log('cookieConsent: ' + item));
+        gaCookies.forEach(item => console.log('j1.adapter.cookieConsent: ' + item));
+        j1Cookies.forEach(item => console.log('j1.adapter.cookieConsent: ' + item));
       }
 
       if (user_agent.includes('iPad'))  {
