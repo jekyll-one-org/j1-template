@@ -185,7 +185,8 @@ j1.adapter['themer'] = (function (j1, window) {
         // counter how often the check should be done for the existence
         // of the user state cookie
         interval_count += 1;
-        if (user_state_detected) {
+//      if (user_state_detected) {
+        if (j1.getState() === 'finished') {
            user_state        = j1.readCookie(cookie_names.user_state);
            user_consent      = j1.readCookie(cookie_names.user_consent);
 
