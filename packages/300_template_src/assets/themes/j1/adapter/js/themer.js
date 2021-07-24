@@ -186,7 +186,6 @@ j1.adapter['themer'] = (function (j1, window) {
         // of the user state cookie
         interval_count += 1;
         if (user_state_detected) {
-//        if (j1.getState() === 'finished') {
            user_state        = j1.readCookie(cookie_names.user_state);
            user_consent      = j1.readCookie(cookie_names.user_consent);
 
@@ -223,7 +222,8 @@ j1.adapter['themer'] = (function (j1, window) {
                name:     cookie_names.user_state,
                data:     user_state,
                samesite: 'Strict',
-               secure:   secure
+               secure:   secure,
+               expires:  1
              });
              if (!cookie_written) {
              	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);

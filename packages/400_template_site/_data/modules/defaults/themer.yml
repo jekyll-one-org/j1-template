@@ -144,6 +144,8 @@ defaults:
 
   enabled:                              false
 
+  personalization:                      true                                    # if set to true, API is categorized as personalized
+  reloadPageOnChange:                   false                                   # reload current page, if the theme has been changed
   retries:                              30                                      # retry to load theme list from API
   saveToCookie:                         true
   debug:                                false

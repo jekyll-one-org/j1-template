@@ -165,7 +165,9 @@
 
         j1.writeCookie({
           name: user_state_cookie_name,
-          data: j1_user_state
+          data: j1_user_state,
+          samesite: 'Strict',
+          expires:  365
         });
 
         // reload current page (skip cache)

@@ -102,10 +102,11 @@ defaults:
                                         This website does <b>not</b> transfer any personal data to GA. Implicit
                                         personal information, like IP addresses, is anonymized to protect your privacy.
                                         <br><br>
-                                        <code>Personalization</code> is used e.g. to collect user feedback or running
-                                        advertising campaigns to provide you a website free of charge. Partners like
-                                        Disqus or Google enables us to provide you excellent personalized services and
-                                        enables us to finance the costs for running this site.
+                                        <code>Personalization</code> is used e.g. to provide personal themes, collect
+                                        visitors feedback or running advertising campaigns to provide you a website
+                                        free of charge. Partners like Bootswatch, Disqus or Google enables us to provide
+                                        you excellent personalized services and enables us to finance the costs for
+                                        running this site.
     de: >
                                         Die Betreiber dieser Website nehmen den Schutz Ihrer persönlichen Daten ernst.
                                         Wir behandeln Ihre Daten vertraulich und halten uns zum Schutz Ihrer Privatsphäre
@@ -127,11 +128,11 @@ defaults:
                                         übermittelt keine personenbezogenen Daten an GA. Implizite personenbezogene Daten wie
                                         IP-Adressen werden zum Schutz Ihrer Privatsphäre anonymisiert.
                                         <br><br>
-                                        <code>Personalisierung</code> wird z.B. um Benutzerfeedback zu sammeln oder
-                                        Werbekampagnen durchzuführen, um Ihnen eine Website kostenlos zur Verfügung zu
-                                        stellen. Partner wie Disqus oder Google ermöglichen es uns, Ihnen exzellente
-                                        personalisierte Dienste anzubieten und die Kosten für den Betrieb dieser Website
-                                        zu finanzieren.
+                                        <code>Personalisierung</code> wird eingesetzt um Ihnen z.B. personalierte Ansichten der
+                                        Webseite (Themen) anzubieten, Benutzerfeedback zu sammeln oder Werbekampagnen durchzuführen,
+                                        um Ihnen diese Website kostenlos zur Verfügung zu stellen. Partner wie Bootswatch, Disqus
+                                        oder Google ermöglichen es uns, Ihnen exzellente personalisierte Dienste anzubieten sowie
+                                        die Kosten für den Betrieb dieser Website zu finanzieren.
 
 # ------------------------------------------------------------------------------
 # END config
