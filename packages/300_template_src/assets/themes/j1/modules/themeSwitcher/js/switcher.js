@@ -52,6 +52,11 @@
   var gaCookies                 = j1.findCookie('_ga');
   var j1Cookies                 = j1.findCookie('j1');
 
+  var url               = new liteURL(window.location.href);
+  var hostname          = url.hostname;
+  var domain            = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+  var secure            = (url.protocol.includes('https')) ? true : false;
+
   var logger = log4javascript.getLogger('j1.core.switcher');
   var logText;
 
@@ -167,6 +172,7 @@
           name: user_state_cookie_name,
           data: j1_user_state,
           samesite: 'Strict',
+          secure:   secure,
           expires:  365
         });
 
