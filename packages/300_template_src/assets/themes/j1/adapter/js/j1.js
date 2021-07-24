@@ -405,8 +405,7 @@ var j1 = (function () {
                             name:     cookie_names.user_session,
                             data:     user_session,
                             samesite: 'Strict',
-                            secure:   secure,
-                            expires:  0
+                            secure:   secure
                           });
       if (!cookie_written) {
       	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
