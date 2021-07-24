@@ -393,7 +393,7 @@ var j1 = (function () {
       // initialize|load user cookies
       // -----------------------------------------------------------------------
 
-      initCookies(user_state);
+      // initCookies(user_state);
 
       user_session.created    = timestamp_now;
       user_session.timestamp  = timestamp_now;
@@ -405,7 +405,8 @@ var j1 = (function () {
                             name:     cookie_names.user_session,
                             data:     user_session,
                             samesite: 'Strict',
-                            secure:   secure
+                            secure:   secure,
+                            expires:  0
                           });
       if (!cookie_written) {
       	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
@@ -1563,6 +1564,14 @@ var j1 = (function () {
     //    https://developer.mozilla.org/de/docs/Web/HTTP/Headers/Set-Cookie/SameSite
     //    https://www.smarketer.de/blog/chrome-update-80-cookies/
     // -------------------------------------------------------------------------
+    // SESSION Cookies:
+    // NOT putting an EXPIRES part in will create a session cookie.
+    // -------------------------------------------------------------------------
+    // REMOVING Cookies: Cookies get removed immediately, if the expires
+    // part points to a PAST date (e.g. 01 Jan 1970 00:00:00 UTC).
+    // -------------------------------------------------------------------------
+    // MAX-AGE Cookies: To leave cookies for a specific time, set the expires
+    // part into a FUTUTE date. FOR GDPR compliance, MAX-AGE is 365 days.
     // TODO:
     //    Change attribute "Secure" to true, if HTTPS is used.
     //    Checks and config changes are to be done.
@@ -1579,18 +1588,7 @@ var j1 = (function () {
     //    must now also specify the Secure attribute (they require a secure
     //    context/HTTPS).
     // -------------------------------------------------------------------------
-    writeCookie: function (options /*name, data, [path, expires, samesite, http_only, secure]*/) {
-      var defaults = {
-          data: {},
-          name: '',
-          path: '/',
-          expires: 0,
-          samesite: 'Strict',
-          http_only: false,
-          secure: false
-      };
-      var settings = $.extend(defaults, options);
-
+    writeCookie: function (options /*name, data, [path, expires, domain, samesite, http_only, secure]*/) {
       var date          = new Date();
       var timestamp_now = date.toISOString();
       var cookie_data   = {};
@@ -1598,6 +1596,19 @@ var j1 = (function () {
       var data_encoded;
       var expires;
       var stringifiedAttributes = '';
+
+      var defaults = {
+          data: {},
+          name: '',
+          path: '/',
+          expires: 0,
+          domain: 'localhost',
+          samesite: 'Strict',
+          http_only: false,
+          secure: false
+      };
+
+      var settings = $.extend(defaults, options);
 
       cookie_data.timestamp = timestamp_now;
 
@@ -1612,26 +1623,21 @@ var j1 = (function () {
         data_encoded  = window.btoa(data_json);
       }
 
-//    if (settings.path !== '/') {
-        stringifiedAttributes += '; ' + 'path=' + settings.path;
-//    }
+      stringifiedAttributes += '; ' + 'path=' + settings.path;
 
       if (settings.expires > 0) {
-        settings.expires = new Date(new Date() * 1 + settings.expires * 864e+5);
-        stringifiedAttributes += '; ' + 'expires=' + settings.expires;
+        date.setTime(date.getTime() + (settings.expires * 24 * 60 * 60 * 1000));
+        stringifiedAttributes += '; ' + 'expires=' + date.toUTCString();
       }
 
-//    if (settings.samesite !== 'Strict') {
-        stringifiedAttributes += '; ' + 'SameSite=' + settings.samesite;
-//    }
+      stringifiedAttributes += '; ' + 'SameSite=' + settings.samesite;
 
-      // stringify cookie attributes
       if (settings.secure) {
         stringifiedAttributes += '; ' + 'secure=' + settings.secure;
-        // document.cookie = settings.name + '=' + content +'; path=' + settings.path + '; ' + 'SameSite=' + settings.samesite + '; secure';
       }
 
       // write the cookie
+//    document.cookie = settings.name + '=' + content + '; path=' + settings.path + '; domain=' + settings.domain + '; ' + 'SameSite=' + settings.samesite + '; secure';
       document.cookie = settings.name + '=' + data_encoded + stringifiedAttributes;
 
       if (j1.existsCookie(settings.name)) {
