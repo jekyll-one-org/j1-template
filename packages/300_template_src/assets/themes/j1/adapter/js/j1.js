@@ -212,9 +212,8 @@ var j1 = (function () {
   };
   var user_state = {
     'writer':               'j1.adapter',
-    'theme_css':            '',
-    'theme_css':            '',
     'theme_name':           '',
+    'theme_css':            '',
     'theme_author':         '',
     'theme_version':        '{{template_version}}',
     'session_active':       false,
