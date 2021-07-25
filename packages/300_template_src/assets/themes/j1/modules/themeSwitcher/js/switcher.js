@@ -164,7 +164,7 @@
           user_state.theme_author_url    = 'https://jekyll.one/';
         }
 
-        logger.warn('\n' + 'write to cookie : ' + cookie_names.user_state);
+        logger.debug('\n' + 'write to cookie : ' + cookie_names.user_state);
         j1.writeCookie({
           name: cookie_names.user_state,
           data: user_state,
@@ -176,7 +176,7 @@
         // reload current page (skip cache)
         location.reload(true);
       } else {
-        logger.warn('\n' + 'write to cookie : disabled');
+        logger.debug('\n' + 'write to cookie : disabled');
         logger.warn('\n' + 'selected theme not activated: ' + name);
       } // END if saveToCookie
 

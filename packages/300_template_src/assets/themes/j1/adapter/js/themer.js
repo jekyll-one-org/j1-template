@@ -218,19 +218,19 @@ j1.adapter['themer'] = (function (j1, window) {
            // jadams, 2021-07-11: unclear why the cookie consent is checked here
            if (!user_consent.analyses || !user_consent.personalization)  {
              // expire state cookie to session
-             logger.warn('\n' + 'write to cookie : ' + cookie_names.user_state);
+             logger.debug('\n' + 'write to cookie : ' + cookie_names.user_state);
              cookie_written = j1.writeCookie({
                name:     cookie_names.user_state,
                data:     user_state,
                samesite: 'Strict',
                secure:   secure,
-               expires:  1
+               expires:  0
              });
              if (!cookie_written) {
              	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
              }
            } else {
-             logger.warn('\n' + 'write to cookie : ' + cookie_names.user_state);
+             logger.debug('\n' + 'write to cookie : ' + cookie_names.user_state);
              cookie_written = j1.writeCookie({
                name:     cookie_names.user_state,
                data:     user_state,
