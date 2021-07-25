@@ -280,17 +280,6 @@ var j1 = (function () {
       j1['xhrDataState'] = {};
       j1['xhrDOMState']  = {};
 
-      // window.addEventListener('beforeload', function (user_state_data) {
-      //   var state_defaults = user_state_data;
-      //   var user_state = j1.readCookie('j1.user.state');
-      //
-      //   if (!user_state) {
-      //     logger.error('\n' + 'cookie not found: ' + cookie_names.user_state);
-      //     logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
-      //     j1Cookies.forEach(item => console.log('j1.adapter: ' + item));
-      //   }
-      // }); // END beforeload
-
       // -----------------------------------------------------------------------
       // update cookies if browser window get closed
       // see: https://stackoverflow.com/questions/3888902/detect-browser-or-tab-closing
@@ -304,7 +293,6 @@ var j1 = (function () {
         var ep_status;
         var url;
         var baseUrl;
-
 
         // final update of the user state cookie before browser page|tab
         // get closed
@@ -358,7 +346,6 @@ var j1 = (function () {
       // -----------------------------------------------------------------------
       // initialize|load user cookies
       // -----------------------------------------------------------------------
-
       user_session.created    = timestamp_now;
       user_session.timestamp  = timestamp_now;
 
