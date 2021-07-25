@@ -314,27 +314,30 @@ var j1 = (function () {
 
           if (!user_consent.analyses || !user_consent.personalization)  {
             // rewrite consent|state cookies to session
+            logger.warn('\n' + 'write to cookie : ' + cookie_names.user_consent);
             cookie_written = j1.writeCookie({
               name:     cookie_names.user_consent,
               data:     user_consent,
               samesite: 'Strict',
               secure:   secure,
-              expires:  1
+              expires:  10
             });
             if (!cookie_written) {
               logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_consent);
             }
+            logger.warn('\n' + 'write to cookie : ' + cookie_names.user_state);
             cookie_written = j1.writeCookie({
               name:     cookie_names.user_state,
               data:     user_state,
               samesite: 'Strict',
               secure:   secure,
-              expires:  1
+              expires:  10
             });
             if (!cookie_written) {
             	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_consent);
             }
           } else {
+            logger.warn('\n' + 'write to cookie : ' + cookie_names.user_state);
             cookie_written = j1.writeCookie({
               name:     cookie_names.user_state,
               data:     user_state,
@@ -367,7 +370,7 @@ var j1 = (function () {
                             data:     user_session,
                             samesite: 'Strict',
                             secure:   secure,
-                            expires:  1
+                            expires:  10
                           });
       if (!cookie_written) {
       	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
@@ -402,17 +405,19 @@ var j1 = (function () {
 
       if (!user_consent.analyses || !user_consent.personalization)  {
         // rewrite consent|state cookies to session
+        logger.warn('\n' + 'write to cookie : ' + cookie_names.user_state);
         cookie_written = j1.writeCookie({
           name:     cookie_names.user_state,
           data:     user_state,
           samesite: 'Strict',
           secure:   secure,
-          expires:  1
+          expires:  10
         });
         if (!cookie_written) {
         	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
         }
       } else {
+        logger.warn('\n' + 'write to cookie : ' + cookie_names.user_state);
         cookie_written = j1.writeCookie({
           name:     cookie_names.user_state,
           data:     user_state,
@@ -449,12 +454,13 @@ var j1 = (function () {
 
           logger.info(logText);
           logger.info('\n' + 'update user session cookie');
+          logger.warn('\n' + 'write to cookie : ' + cookie_names.user_session);
           cookie_written = j1.writeCookie({
             name:     cookie_names.user_session,
             data:     user_session,
             samesite: 'Strict',
             secure:   secure,
-            expires:  1
+            expires:  10
           });
 
           if (!cookie_written) {
@@ -497,12 +503,13 @@ var j1 = (function () {
             logText                     = '\n' + 'mode detected: ' + user_session.mode;
 
             logger.info(logText);
+            logger.warn('\n' + 'write to cookie : ' + cookie_names.user_session);
             cookie_written = j1.writeCookie({
               name:     cookie_names.user_session,
               data:     user_session,
               samesite: 'Strict',
               secure:   secure,
-              expires:  1
+              expires:  10
             });
             if (!cookie_written) {
             	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
@@ -558,12 +565,13 @@ var j1 = (function () {
       }
 
       logger.info('\n' + 'update user session cookie');
+      logger.warn('\n' + 'write to cookie : ' + cookie_names.user_session);
       cookie_written = j1.writeCookie({
         name:     cookie_names.user_session,
         data:     user_session,
         samesite: 'Strict',
         secure:   secure,
-        expires:  1
+        expires:  10
       });
 
       if (!cookie_written) {
@@ -581,12 +589,13 @@ var j1 = (function () {
       // logger.info(logText);
 
       user_session.timestamp = timestamp_now;
+      logger.warn('\n' + 'write to cookie : ' + cookie_names.user_session);
       cookie_written = j1.writeCookie({
         name:     cookie_names.user_session,
         data:     user_session,
         samesite: 'Strict',
         secure:   secure,
-        expires:  1
+        expires:  10
       });
       if (!cookie_written) {
       	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
@@ -931,12 +940,13 @@ var j1 = (function () {
           user_session = j1.mergeData(user_session, data);
 
           user_session.current_page = current_url.pathname;
+          logger.warn('\n' + 'write to cookie : ' + cookie_names.user_session);
           cookie_written = j1.writeCookie({
             name:     cookie_names.user_session,
             data:     user_session,
             samesite: 'Strict',
             secure:   secure,
-            expires:  1
+            expires:  10
           });
           if (!cookie_written) {
           	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
@@ -1148,12 +1158,13 @@ var j1 = (function () {
           $('#quickLinksSignInOutButton').css('display', 'none');
 
           user_session.current_page = current_url.pathname;
+          logger.warn('\n' + 'write to cookie : ' + cookie_names.user_session);
           cookie_written = j1.writeCookie({
               name:     cookie_names.user_session,
               data:     user_session,
               samesite: 'Strict',
               secure:   secure,
-              expires:  1
+              expires:  10
           });
           if (!cookie_written) {
           	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);

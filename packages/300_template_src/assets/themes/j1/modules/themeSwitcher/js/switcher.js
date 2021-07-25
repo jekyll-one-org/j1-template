@@ -47,11 +47,9 @@
 
   var old = $.fn.bootstrapThemeSwitcher;
 
-  var cookie_names              = j1.getCookieNames();
-  const user_state_cookie_name  = cookie_names.user_state;
-  var gaCookies                 = j1.findCookie('_ga');
-  var j1Cookies                 = j1.findCookie('j1');
-
+  var cookie_names      = j1.getCookieNames();
+  var gaCookies         = j1.findCookie('_ga');
+  var j1Cookies         = j1.findCookie('j1');
   var url               = new liteURL(window.location.href);
   var hostname          = url.hostname;
   var domain            = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
@@ -61,9 +59,9 @@
   var logText;
 
   var user_state_detected;
-  var j1_user_state = {};
-  var j1_user_state_json;
-  var j1_user_state_cookie;
+  var user_state = {};
+  var user_state_json;
+  var user_state_cookie;
 
   // Constructor
   // ---------------------------------------------------------------------------
@@ -119,31 +117,29 @@
     // -------------------------------------------------------------------------
     switchTheme: function (name, cssFile) {
 
-      var $this             = $(this);
-      var settings          = $.extend({}, $.fn.bootstrapThemeSwitcher.defaults, $this.data('bootstrapThemeSwitcher'));
+      var $this      = $(this);
+      var settings   = $.extend({}, $.fn.bootstrapThemeSwitcher.defaults, $this.data('bootstrapThemeSwitcher'));
+      var id         = settings.cssThemeLink;
+      var debug      = settings.debug;
+      var includeCSS = this.settings.includeBootswatch;
       var themeName;
       var theme_css;
-      var theme_extension_css;
-
-      var id                = settings.cssThemeLink;
-      var debug             = settings.debug;
-      var includeCSS        = this.settings.includeBootswatch;
 
       // detect|set user state cookie
-      user_state_detected = j1.existsCookie ( 'j1.user.state' );
+      user_state_detected = j1.existsCookie (cookie_names.user_state);
       if ( user_state_detected ) {
-        logger.debug('\n' + 'cookie found: j1.user.state');
-        j1_user_state = j1.readCookie(user_state_cookie_name);
+        logger.debug('\n' + 'cookie found: ' + cookie_names.user_state);
+        user_state = j1.readCookie(cookie_names.user_state);
       } else {
-        logger.error('\n' + 'cookie not found: j1.user.state');
+        logger.error('\n' + 'cookie not found: ' + cookie_names.user_state);
         logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
         j1Cookies.forEach(item => console.log('j1.core.switcher: ' + item));
         logger.debug('\n' + 'ga cookies found:' + gaCookies.length);
         gaCookies.forEach(item => console.log('j1.core.switcher: ' + item));
       }
 
-      themeName           = j1_user_state.theme_name;
-      theme_css           = j1_user_state.theme_css;
+      themeName = user_state.theme_name;
+      theme_css = user_state.theme_css;
 
       if (typeof cssFile === 'undefined') { cssFile = this.settings.defaultCssFile; }
       if (typeof name === 'undefined') { name = cssFile; }
@@ -157,20 +153,21 @@
           return false;
         }
 
-        j1_user_state.theme_name  = name;
-        j1_user_state.theme_css   = cssFile;
+        user_state.theme_name  = name;
+        user_state.theme_css   = cssFile;
 
-        if (!(j1_user_state.theme_name.includes('Uno') || j1_user_state.theme_name == 'Bootstrap')) {
-          j1_user_state.theme_author        = 'Bootswatch';
-          j1_user_state.theme_author_url    = 'https://bootswatch.com/';
+        if (!(user_state.theme_name.includes('Uno') || user_state.theme_name == 'Bootstrap')) {
+          user_state.theme_author        = 'Bootswatch';
+          user_state.theme_author_url    = 'https://bootswatch.com/';
         } else {
-          j1_user_state.theme_author        = 'J1 Team';
-          j1_user_state.theme_author_url    = 'https://jekyll.one/';
+          user_state.theme_author        = 'J1 Team';
+          user_state.theme_author_url    = 'https://jekyll.one/';
         }
 
+        logger.warn('\n' + 'write to cookie : ' + cookie_names.user_state);
         j1.writeCookie({
-          name: user_state_cookie_name,
-          data: j1_user_state,
+          name: cookie_names.user_state,
+          data: user_state,
           samesite: 'Strict',
           secure:   secure,
           expires:  365
@@ -198,21 +195,21 @@
       var settings = $.extend({}, $.fn.bootstrapThemeSwitcher.defaults, options);
 
       // detect|set user state cookie
-      user_state_detected = j1.existsCookie ( 'j1.user.state' );
+      user_state_detected = j1.existsCookie (cookie_names.user_state);
 
       if ( user_state_detected ) {
-        logger.info('\n' + 'cookie found: j1.user.state');
-        j1_user_state = j1.readCookie(user_state_cookie_name);
+        logger.info('\n' + 'cookie found: ' + cookie_names.user_state);
+        user_state = j1.readCookie(cookie_names.user_state);
       } else {
-        logger.error('\n' + 'cookie not found: j1.user.state');
+        logger.error('\n' + 'cookie not found: ' + cookie_names.user_state);
         logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
         j1Cookies.forEach(item => console.log('j1.core.switcher: ' + item));
         logger.debug('\n' + 'ga cookies found:' + gaCookies.length);
         gaCookies.forEach(item => console.log('j1.core.switcher: ' + item));
       }
 
-      var themeName = j1_user_state.theme_name;
-      var themeCss  = j1_user_state.theme_css;
+      var themeName = user_state.theme_name;
+      var themeCss  = user_state.theme_css;
       this.switchTheme(themeName, themeCss);
 
     }, // END loadThemeFromCookie
@@ -265,17 +262,17 @@
       var base = this;
 
       if (this.$element.is('ul')) {
-        var $this             = $(this);
-        var settings          = $.extend({}, $.fn.bootstrapThemeSwitcher.defaults, $this.data('bootstrapThemeSwitcher'));
-        var id                = settings.cssThemeLink;
+        var $this    = $(this);
+        var settings = $.extend({}, $.fn.bootstrapThemeSwitcher.defaults, $this.data('bootstrapThemeSwitcher'));
+        var id       = settings.cssThemeLink;
+        var debug    = settings.debug;
         var themeName;
-        var debug             = settings.debug;
 
         // detect|set user state cookie
-        user_state_detected = j1.existsCookie ( 'j1.user.state' );
+        user_state_detected = j1.existsCookie (cookie_names.user_state);
         if ( user_state_detected ) {
           logger.debug('\n' + 'user state cookie found');
-          j1_user_state = j1.readCookie(user_state_cookie_name);
+          user_state = j1.readCookie(cookie_names.user_state);
         } else {
           logger.error('\n' + 'user state NOT cookie found');
           logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
@@ -284,7 +281,7 @@
           gaCookies.forEach(item => console.log('j1.core.switcher: ' + item));
         }
 
-        themeName = j1_user_state.theme_name;
+        themeName = user_state.theme_name;
 
         if ( debug === 'true' ) {
           logger.debug('\n' + 'bootstrapThemeSelector: UL element selected');
