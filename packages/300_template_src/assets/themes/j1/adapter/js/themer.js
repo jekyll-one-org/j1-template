@@ -177,6 +177,10 @@ j1.adapter['themer'] = (function (j1, window) {
       _this.state = 'started';
       logger.info('\n' + 'state: ' + _this.getState());
 
+      // jadams, 2021-07-25: problem seems NOT an timing issue on the iPad
+      // platform. (General) Dependency should be REMOVED!!!
+      // TODO: Isolate redirect for iPad ONLY!!!
+      //
       // jadams, 2021-07-11: added dependecy on the user state cookie
       // Found timing issues testing mobile devices (iPad)
       var dependencies_met_user_state_available = setInterval (function () {
@@ -215,32 +219,16 @@ j1.adapter['themer'] = (function (j1, window) {
            // set the theme switcher state
            user_state.theme_switcher = themerOptions.enabled;
 
-           // jadams, 2021-07-11: unclear why the cookie consent is checked here
+           // jadams, 2021-07-25: hide|show themes menu on cookie consent
+           // (analyses|personalization) settings. BootSwatch is a 3rd party
+           // is using e.g GA. Because NO control is possible on 3rd parties,
+           // for GDPR compliance, themes feature may disabled on
+           // privacy settings
            if (!user_consent.analyses || !user_consent.personalization)  {
-             // expire state cookie to session
-             logger.debug('\n' + 'write to cookie : ' + cookie_names.user_state);
-             cookie_written = j1.writeCookie({
-               name:     cookie_names.user_state,
-               data:     user_state,
-               samesite: 'Strict',
-               secure:   secure,
-               expires:  0
-             });
-             if (!cookie_written) {
-             	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
-             }
+             logger.warn('\n' + 'disable themes feature because of privacy settings');
+             $("#themes_menu").hide();
            } else {
-             logger.debug('\n' + 'write to cookie : ' + cookie_names.user_state);
-             cookie_written = j1.writeCookie({
-               name:     cookie_names.user_state,
-               data:     user_state,
-               samesite: 'Strict',
-               secure:   secure,
-               expires:  365
-             });
-             if (!cookie_written) {
-             	logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
-             }
+             $("#themes_menu").show();
            }
 
            if (themerOptions.enabled) {

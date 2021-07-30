@@ -407,7 +407,7 @@ regenerate:                             true
           {% when 'theme_select' %}
           {% if themer_options.enabled %}
             <!-- [INFO   ] [j1.modules.navigator.menu.html  ] [found menu-type: theme_select] -->
-            <li class="dropdown nav-item">
+            <li id="themes_menu" class="dropdown nav-item">
               <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">{{menu.item}} </a>
               {% if nav_menu_animation %}
               <ul class="dropdown-menu raised-z{{raised_level}}">

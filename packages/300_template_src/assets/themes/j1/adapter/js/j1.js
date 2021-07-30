@@ -41,41 +41,44 @@ regenerate:                             true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign blocks                  = site.data.blocks %}
-{% assign modules                 = site.data.modules %}
-{% assign template_config         = site.data.j1_config %}
+{% assign blocks                    = site.data.blocks %}
+{% assign modules                   = site.data.modules %}
+{% assign template_config           = site.data.j1_config %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign banner_config_defaults  = blocks.defaults.banner.defaults %}
-{% assign banner_config_settings  = blocks.banner.settings %}
-{% assign panel_config_defaults   = blocks.defaults.panel.defaults %}
-{% assign panel_config_settings   = blocks.panel.settings %}
-{% assign footer_config_defaults  = blocks.defaults.footer.defaults %}
-{% assign toccer_defaults         = modules.defaults.toccer.defaults %}
-{% assign toccer_settings         = modules.toccer.settings %}
-{% assign themer_defaults         = modules.defaults.themer.defaults %}
-{% assign themer_settings         = modules.themer.settings %}
-{% assign tracking_enabled        = template_config.analytics.enabled %}
-{% assign tracking_id             = template_config.analytics.google.tracking_id %}
+{% assign banner_config_defaults    = blocks.defaults.banner.defaults %}
+{% assign banner_config_settings    = blocks.banner.settings %}
+{% assign panel_config_defaults     = blocks.defaults.panel.defaults %}
+{% assign panel_config_settings     = blocks.panel.settings %}
+{% assign footer_config_defaults    = blocks.defaults.footer.defaults %}
+{% assign toccer_defaults           = modules.defaults.toccer.defaults %}
 
-{% assign authentication_defaults = modules.defaults.authentication.defaults %}
-{% assign authentication_settings = modules.authentication.settings %}
+{% assign themer_defaults           = modules.defaults.themer.defaults %}
+{% assign themer_settings           = modules.themer.settings %}
+
+{% assign tracking_enabled          = template_config.analytics.enabled %}
+{% assign tracking_id               = template_config.analytics.google.tracking_id %}
+
+{% assign authentication_defaults   = modules.defaults.authentication.defaults %}
+{% assign authentication_settings   = modules.authentication.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign toccer_options          = toccer_defaults | merge: toccer_settings %}
-{% assign themer_options          = themer_defaults | merge: themer_settings %}
+{% assign toccer_options            = toccer_defaults | merge: toccer_settings %}
+{% assign themer_options            = themer_defaults| merge: themer_settings %}
 
-{% assign authentication_options  = authentication_defaults | merge: authentication_settings %}
+{% assign authentication_options    = authentication_defaults | merge: authentication_settings %}
 
-{% assign footer_id               = footer_config_defaults.container-id %}
-{% assign footer_data_path        = footer_config_defaults.data_path %}
-{% assign banner_data_path        = banner_config_defaults.data_path %}
-{% assign panel_data_path         = panel_config_defaults.data_path %}
+{% assign footer_id                 = footer_config_defaults.container-id %}
+{% assign footer_data_path          = footer_config_defaults.data_path %}
+{% assign banner_data_path          = banner_config_defaults.data_path %}
+{% assign panel_data_path           = panel_config_defaults.data_path %}
 
-{% assign hideOnReload            = modules.themer_options.hideOnReload %}
-{% assign comment_provider        = template_config.comments.provider %}
+{% assign themer_enabled            = modules.themer_options.enabled %}
+{% assign themer_reloadPageOnChange = modules.themer_options.reloadPageOnChange %}
+{% assign themer_hideOnReload       = modules.themer_options.hideOnReload %}
+{% assign comment_provider          = template_config.comments.provider %}
 
 {% comment %} Set variables
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -167,7 +170,7 @@ var j1 = (function () {
   var themeCss;
   var cssExtension              = (environment === 'production')
                                   ? '.min.css'
-                                  : '.css';
+                                  : '.css'
 
    // Pathes of J1 data files
   var colors_data_path          = '{{template_config.colors_data_path}}';
@@ -261,6 +264,7 @@ var j1 = (function () {
       var curr_state        = 'started';
       var gaCookies         = j1.findCookie('_ga');
       var j1Cookies         = j1.findCookie('j1');
+      var themerOptions     = $.extend({}, {{themer_options | replace: '=>', ':' | replace: 'nil', '""' }});
 
       // -----------------------------------------------------------------------
       // options loader
