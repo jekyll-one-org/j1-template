@@ -1,0 +1,28 @@
+#!/usr/bin/env ruby
+
+STDOUT.sync = true
+$LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+
+require 'j1'
+require 'mercenary'
+
+Mercenary.program(:j1) do |p|
+
+  p.version J1::VERSION
+  p.description 'J1 Template MDE 4 is a gem-based Template made for Jekyll powered by Bootstrap v4'
+  p.syntax 'j1 <subcommand> [options]'
+
+  p.command(:generate) do |c|
+    c.syntax 'generate PATH' # do not include the program name or super commands
+    c.description 'Generates a starter site scaffold in PATH'
+    c.option 'force', '--force', 'Force a site to be created even the PATH already exists'
+    c.option "skip-bundle", "--skip-bundle", "Skip 'bundle install'"
+    c.option "skip-_patches", "--skip-_patches", "Skip to install any PATCHES buildin with J1"
+    c.option "system", "--system", "Run 'bundle install' for the Ruby SYSTEM gem folder"
+    c.action do |args, options|
+      J1::Commands::Generate.process(args, options)
+    end
+  end
+
+  p.default_command(:generate)
+end
