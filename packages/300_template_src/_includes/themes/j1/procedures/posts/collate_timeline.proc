@@ -49,6 +49,15 @@
 {% assign posts_collate   = include.items %}
 {% assign limit_excerpt   = include.limit_excerpt %}
 
+{% comment %} language detection
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if site.language == "en" %}
+  {% assign language = "en" %}
+{% elsif site.language == "de"%}
+  {% assign language = "de" %}
+{% else %}
+  {% assign language = "en" %}
+{% endif %}
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -196,11 +205,16 @@
               {% assign comment_count = sharing.comment_count %}
             {% endfor %}
 
-            <div class="card-footer r-text-200 text-lowercase">
+            <div class="card-footer r-text-200">
               <hr class="my-3">
               <div class="card-footer-text">
                 {% if post.date %}
-                <i class="mdi mdi-calendar-blank md-grey-600 mr-1"></i> {{post.date | date: "%Y %B, %e"}}
+                  {% if language == "en" %}
+                    <i class="mdi mdi-calendar-blank md-grey-600 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
+                  {% endif %}
+                  {% if language == "de" %}
+                    <i class="mdi mdi-calendar-blank md-grey-600 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
+                  {% endif %}
                 {% endif %}
                 {% if likes_count %}
                 <span class="font-weight-bold"> · </span>

@@ -1,11 +1,13 @@
 ---
 layout:                                 page
 title:                                  Creators Blog
-tagline:                                posts by category
-description:                            Browse articles by category
+tagline:                                articles by category
+date:                                   2023-01-01 01:00:00 +100
+description: >
+                                        articles by category
 
-categories:                             [ Navigator ]
-tags:                                   [ Blog, Categories, Viewer ]
+categories:                             [ Blog ]
+tags:                                   [ Navigator, Categories ]
 
 sort:                                   date
 toc:                                    true
@@ -37,10 +39,6 @@ resource_options:
             href:                       https://unsplash.com/@matthaeus123
 ---
 
-{% comment %} Debugging|Helpers
--------------------------------------------------------------------------------- {% endcomment %}
-{% comment %} site_category_word_list:  {{site_category_word_list|debug}} {% endcomment %}
-
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
 {% capture get_page_path %}themes/{{site.template.name}}/procedures/global/get_page_path.proc{% endcapture %}
@@ -48,12 +46,28 @@ resource_options:
 {% capture get_category_item %}themes/{{site.template.name}}/procedures/global/get_category_item.proc{% endcapture %}
 {% capture create_word_cloud %}themes/{{site.template.name}}/procedures/global/create_word_cloud.proc{% endcapture %}
 
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign template_config               = site.data.j1_config %}
+{% assign blocks                        = site.data.blocks %}
+{% assign modules                       = site.data.modules %}
+{% assign builder                       = site.data.builder %}
+{% assign plugins                       = site.data.plugins %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign blog_navigator_defaults       = builder.defaults.blog_navigator.defaults %}
+{% assign blog_navigator_settings       = builder.blog_navigator.settings %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign blog_navigator_options        = blog_navigator_defaults | merge: blog_navigator_settings %}
+
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign view_config         = site.data.builder.blog_navigator.category_view %}
+{% assign view_config         = blog_navigator_options.category_view %}
 {% assign truncate_words      = site.excerpt_truncate_words %}
 {% assign view_description    = view_config.description %}
-{% assign defaults            = site.data.builder.blog_navigator.defaults %}
 
 {% if site.permalink == 'none' %}
   {% capture browser_page_url %}{{page.url}}.html{% endcapture %}
@@ -78,13 +92,16 @@ resource_options:
   {% assign sorted_posts = site.posts|sort: 'date' %}
 {% endif %}
 
-{% comment %} TODO: skip_words configured by yaml data file?
--------------------------------------------------------------------------------- {% endcomment %}
+{% comment %} TODO: skip_words NOT longer needed? Already done
+by processing of categories
+--------------------------------------------------------------------------------
 {% capture skip_words %} Posts Public {% endcapture %}
+--------------------------------------------------------------------------------
+{% endcomment %}
 
+{% comment %} category processing
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign skip_categories = view_config.skip_categories | split: ", " | join: " " %}
-
-{% comment %} skip_categories:  {{skip_categories | debug}} {% endcomment %}
 
 {% capture site_category_word_list %}{% for category in site.categories %}{{category|first|capitalize|lstrip|rstrip}}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
 {% assign category_words = site_category_word_list|split:',' %}
@@ -95,25 +112,65 @@ resource_options:
   {% capture category_list %}{{category_list|append: category}}{% unless forloop.last %},{% endunless %}{% endcapture %}
 {% endfor %}
 
+
+{% comment %} language detection
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if site.language == "en" %}
+  {% assign language = "en" %}
+{% elsif site.language == "de"%}
+  {% assign language = "de" %}
+{% else %}
+  {% assign language = "en" %}
+{% endif %}
+
+{% if language == "en" %}
+  {% assign category_view_button_text = blog_navigator_options.button_text.view_selector.category_view.en %}
+  {% assign date_view_button_text     = blog_navigator_options.button_text.view_selector.date_view.en %}
+  {% assign archive_view_button_text  = blog_navigator_options.button_text.view_selector.archive_view.en %}
+  {% assign tag_view_button_text      = blog_navigator_options.button_text.view_selector.tag_view.en %}
+
+  {% assign view_headline             = blog_navigator_options.category_view.page_text.en.headline %}
+  {% assign view_description_text     = blog_navigator_options.category_view.page_text.en.description %}
+{% endif %}
+
+{% if language == "de" %}
+  {% assign category_view_button_text = blog_navigator_options.button_text.view_selector.category_view.de %}
+  {% assign date_view_button_text     = blog_navigator_options.button_text.view_selector.date_view.de %}
+  {% assign archive_view_button_text  = blog_navigator_options.button_text.view_selector.archive_view.de %}
+  {% assign tag_view_button_text      = blog_navigator_options.button_text.view_selector.tag_view.de %}
+
+  {% assign view_headline             = blog_navigator_options.category_view.page_text.de.headline %}
+  {% assign view_description_text     = blog_navigator_options.category_view.page_text.de.description %}
+{% endif %}
+
+{% comment %} Debugging
+--------------------------------------------------------------------------------
+skip_categories:            {{skip_categories | debug}}
+site_category_word_list:    {{site_category_word_list | debug}}
+--------------------------------------------------------------------------------
+{% endcomment %}
+
+
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
 <!-- [INFO   ] [ {{page.url}} ] [Generate HTML}] -->
-{% include {{create_word_cloud}} word_list=category_list source="categories" skip_words=skip_words %}
+{% include {{create_word_cloud}} word_list=category_list source="categories" skip_words=skip_categories %}
 
+<!-- [INFO   ] [ {{page.url}} ] [Generate HTML}] -->
 <div class="paginator ml-3">
   <ul class="pagination raised-z0">
-    <li class="page-item"><a class="page-link" href="{{navigator|prepend: site.baseurl}}" title="Blog View">Navigator</a></li>
-    <li class="page-item"><a class="page-link" href="{{date_view|prepend: site.baseurl}}" title="View by Date">By Date</a></li>
-    <!-- li class="page-item"><a class="page-link" href="{{tag_view |prepend: site.baseurl}}" title="View by Tag">By Tag</a></li -->
-    <li class="page-item"><a class="page-link" href="{{all_view |prepend: site.baseurl}}" title="View All">All Posts</a></li>
+    <li class="page-item"><a class="page-link" href="{{navigator|prepend: site.baseurl}}" alt="Blog Navigator">Navigator</a></li>
+    <li class="page-item"><a class="page-link" href="{{date_view}}" alt="View by Date">{{date_view_button_text}}</a></li>
+    <!-- li class="page-item"><a class="page-link" href="{{tag_view}}" alt="{{tag_view_button_text}}">By Tag</a></li -->
+    <li class="page-item"><a class="page-link" href="{{all_view}}" alt="View All">{{archive_view_button_text}}</a></li>
   </ul>
 </div>
 
 <div class="post-search-results ml-3">
 
-  <div class="view-description">{{view_description}}</div>
+  <div class="view-description">{{view_description_text}}</div>
   <div class="post-headline">
-    <h2 id="post-headline" class="mt-5">Posts by Category</h2>
+    <h2 id="post-headline" class="mt-5">{{view_headline}}</h2>
   </div>
   {% assign tags = site.categories|sort %}
   {% for tag in tags %}
@@ -149,7 +206,7 @@ resource_options:
               {% else %}
               <!-- [INFO   ] [j1.pages.blog.navigator.archive          ] [Post image missing, using configured default image] -->
               <div class="col-md-6 img-bg--fill px-0"
-                style="background-image: url({{defaults.post_image}});">
+                style="background-image: url({{blog_navigator_options.post_image}});">
               </div>
               {% endif %}
 
@@ -159,7 +216,12 @@ resource_options:
                   <div class="card-footer-text">
                     <hr class="my-3">
                     {% if post.date %}
-                    <i class="mdi mdi-calendar-blank mr-1"></i> {{post.date | date: "%Y %B, %e"}}
+                      {% if language == "en" %}
+                        <i class="mdi mdi-calendar-blank md-grey-600 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
+                      {% endif %}
+                      {% if language == "de" %}
+                        <i class="mdi mdi-calendar-blank md-grey-600 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
+                      {% endif %}
                     {% endif %}
                     {% if likes_count %}
                     <span class="font-weight-bold"> · </span>

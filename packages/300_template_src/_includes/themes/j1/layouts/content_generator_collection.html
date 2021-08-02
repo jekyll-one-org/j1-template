@@ -18,7 +18,7 @@
 
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
-{% capture pager %}themes/{{site.template.name}}/procedures/global/pager.proc{% endcapture %}
+{% capture pager %}themes/{{site.template.name}}/procedures/posts/pager.proc{% endcapture %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
@@ -39,6 +39,8 @@
 {% assign toccer_options    = toccer_defaults | merge: toccer_settings %}
 {% assign tocbot_enabled    = toccer_options.enabled %}
 
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign rtext             = template_config.typography.rtext %}
 {% assign page_rtext        = page.rtext %}
 {% assign page_rtext_size   = page.rtext_size %}

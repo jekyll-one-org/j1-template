@@ -39,7 +39,7 @@ regenerate:                             true
 {% assign tracking_enabled    = template_config.analytics.enabled %}
 {% assign tracking_id         = template_config.analytics.google.tracking_id %}
 
-{% assign comment_provider        = site.data.j1_config.comments.provider %}
+{% assign comment_provider    = site.data.j1_config.comments.provider %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}

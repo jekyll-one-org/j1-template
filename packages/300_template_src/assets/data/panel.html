@@ -63,6 +63,17 @@ regenerate:                             true
   {% assign production = true %}
 {% endif %}
 
+{% comment %} language detection
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if site.language == "en" %}
+  {% assign language = "en" %}
+{% elsif site.language == "de"%}
+  {% assign language = "de" %}
+{% else %}
+  {% assign language = "en" %}
+{% endif %}
+
+
 <!-- [INFO   ] [j1.assets.data.panel.html             ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />
@@ -489,13 +500,17 @@ regenerate:                             true
                         {{post.excerpt|truncatewords:50|replace:'...',' ...'|remove:'<div class="paragraph">'|remove:'</div>'|remove:'<p>'|remove:'</p>'}}
                       </div>
                       <!-- End Body|Excerpt -->
-                      <div class="card-footer r-text-200 text-lowercase">
+                      <div class="card-footer r-text-200">
                         <hr class="my-3">
                         <div class="card-footer-text">
-                          <i class="mdi mdi-calendar-blank mdi-md-grey mr-1"></i>
-                          {{post.date|date:"%Y %B, %e"}}
+                          {% if language == "en" %}
+                            <i class="mdi mdi-calendar-blank md-grey-600 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
+                          {% endif %}
+                          {% if language == "de" %}
+                            <i class="mdi mdi-calendar-blank md-grey-600 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
+                          {% endif %}
                         </div>
-                        <a class="card-link text-muted"
+                        <a class="card-link text-muted text-lowercase"
                            href="{{post.url}}">
                            {{readmore_text}} · {{post.tagline}}
                         </a>

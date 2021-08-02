@@ -2,8 +2,8 @@
 title:                                  Welcome
 tagline:                                jekyll for everyone
 
-categories:                             [ Featured, Post ]
-tags:                                   [ J1, Jekyll, Knowledge ]
+categories:                             [ Info ]
+tags:                                   [ J1, Template, Jekyll ]
 
 image:                                  /assets/images/modules/attics/katie-moum-1920x1280.jpg
 

@@ -28,6 +28,16 @@
 {% assign posts_max       = include.max_posts %}
 {% assign posts           = include.posts %}
 
+{% comment %} language detection
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if site.language == "en" %}
+  {% assign language = "en" %}
+{% elsif site.language == "de"%}
+  {% assign language = "de" %}
+{% else %}
+  {% assign language = "en" %}
+{% endif %}
+
 {% comment %} post loop counter correction
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign max_posts       = posts_max | minus:'1' %}
@@ -52,7 +62,12 @@
         {% assign posts_written = posts_written | plus:'1' %}
         <li>
           <a href="{{post.url}}">{{post.title}}</a>
-          <small class="text-uppercase">{{post.date | date: "%Y %B, %e"}}</small>
+          {% if language == "en" %}
+            <small class="text-uppercase">{{post.date | localize: "%Y %B, %-d"}}</small>
+          {% endif %}
+          {% if language == "de" %}
+            <small class="text-uppercase">{{post.date | localize: "%-d. %B %Y"}}</small>
+          {% endif %}
         </li>
         {% endif %}
       {% endfor %}

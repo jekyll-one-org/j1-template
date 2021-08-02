@@ -45,9 +45,12 @@ settings:
         #
         issue:
           enabled:                      true
-          date:                         site.time
-          date_format:                  "%A, %-d %B %Y"
-          text:                         Last modified
+          en:
+            date_format:                "%A, %-d %B %Y"
+            issue_text:                 Last modified
+          de:
+            date_format:                "%A, %-d %B %Y"
+            issue_text:                 Letzte Änderung
 
         # ----------------------------------------------------------------------
         # ICON settings
@@ -69,50 +72,78 @@ settings:
             legal:
               enabled:                  true
               type:                     copyright
-              statement:                J1 · Copyright © 2021 · All rights reserved
-              href:                     /pages/public/legal/en/copyright/
+              en:
+                href:                   /pages/public/legal/en/copyright/
+                statement:              J1 © 2021 all rights reserved
+              de:
+                href:                   /pages/public/legal/de/copyright/
+                statement:              J1 © 2021 alle Rechte vorbehalten
 
           - name:                       Impress
             legal:
               enabled:                  true
               type:                     impress
-              statement:                Impress
-              href:                     /pages/public/legal/en/impress/
+              en:
+                href:                   /pages/public/legal/en/impress/
+                statement:              Impress
+              de:
+                href:                   /pages/public/legal/de/impress/
+                statement:              Impressum
 
           - name:                       Terms Of Use
             legal:
               enabled:                  false
               type:                     terms
-              statement:                Terms Of Use
-              href:                     /pages/public/legal/en/terms_of_use/
+              en:
+                href:                   /pages/public/legal/en/terms_of_use/
+                statement:              Terms Of Use
+              de:
+                href:                   /pages/public/legal/de/terms_of_use/
+                statement:              Nutzungsbedingungen
 
           - name:                       Privacy
             legal:
               enabled:                  true
               type:                     privacy
-              statement:                Privacy
-              href:                     /pages/public/legal/en/privacy/
+              en:
+                href:                   /pages/public/legal/en/privacy/
+                statement:              Privacy
+              de:
+                href:                   /pages/public/legal/de/privacy/
+                statement:              Privatsphäre
 
           - name:                       License
             legal:
-              enabled:                  true
+              enabled:                  false
               type:                     license
-              statement:                License
-              href:                     /pages/public/legal/en/license_agreement/
+              en:
+                href:                   /pages/public/legal/en/license_agreement/
+                statement:              License agreement
+              de:
+                href:                   /pages/public/legal/de/license_agreement/
+                statement:              Lizenbedingungen
 
           - name:                       Support
             legal:
               enabled:                  false
               type:                     support
-              statement:                Support
-              href:                     /pages/public/legal/en/terms_of_use/
+              en:
+                href:                   /pages/public/legal/en/support/
+                statement:              Support
+              de:
+                href:                   /pages/public/legal/de/support/
+                statement:              Support
 
           - name:                       Comments
             legal:
               enabled:                  true
               type:                     comments
-              statement:                Comments
-              href:                     /pages/public/legal/en/comment_policy/
+              en:
+                href:                   /pages/public/legal/en/comment_policy/
+                statement:              Comment policy
+              de:
+                href:                   /pages/public/legal/de/comment_policy/
+                statement:              Kommentarrichtlinie
 
         # ----------------------------------------------------------------------
         # BOXES

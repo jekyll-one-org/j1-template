@@ -90,10 +90,10 @@ resource_options:
 
 <div class="paginator ml-3">
   <ul class="pagination raised-z0">
-    <li class="page-item"><a class="page-link" href="{{navigator | prepend: site.baseurl}}" title="Blog View">Navigator</a></li>
-    <li class="page-item"><a class="page-link" href="{{date_view | prepend: site.baseurl}}" title="View by Date">By Date</a></li>
-    <li class="page-item"><a class="page-link" href="{{category_view | prepend: site.baseurl}}" title="View by Category">By Category</a></li>
-    <li class="page-item"><a class="page-link" href="{{all_view | prepend: site.baseurl}}" title="View All">All Posts</a></li>
+    <li class="page-item"><a class="page-link" href="{{navigator | prepend: site.baseurl}}" alt="Blog View">Navigator</a></li>
+    <li class="page-item"><a class="page-link" href="{{date_view | prepend: site.baseurl}}" alt="View by Date">By Date</a></li>
+    <li class="page-item"><a class="page-link" href="{{category_view | prepend: site.baseurl}}" alt="View by Category">By Category</a></li>
+    <li class="page-item"><a class="page-link" href="{{all_view | prepend: site.baseurl}}" alt="View All">All Posts</a></li>
   </ul>
 </div>
 
@@ -120,7 +120,7 @@ resource_options:
       --------------------------------------------------------------------------
       <!-- jadams, 2018-01-17: logic seems NOT work. Disabled. -->
       {% if letter_group_written == false %}
-        <h3 id="id_{{letter_group}}" class="toc-link mt-5 mb-5"><a title="Back to top" href="#"><i class="fa fa-tags mr-2"></i></a>{{letter_group | upcase}}</h3>
+        <h3 id="id_{{letter_group}}" class="toc-link mt-5 mb-5"><a alt="Back to top" href="#"><i class="fa fa-tags mr-2"></i></a>{{letter_group | upcase}}</h3>
         {% assign letter_group_written = true %}
       {% endif %}
       -------------------------------------------------------------------------- {% endcomment %}
@@ -133,7 +133,7 @@ resource_options:
       -------------------------------------------------------------------------- {% endcomment %}
       {% if letter_group %}
       <h3 id="id_{{letter_group}}" class="toc-link mb-3">
-        <a title="Back to top" href="#">
+        <a alt="Back to top" href="#">
           <i class="fa fa-tags mr-2"></i>
         </a>{{letter_group | upcase}}
       </h3>
@@ -147,7 +147,7 @@ resource_options:
     first_letter: {{first_letter | debug}}
     {% endcomment %}
 
-    <h4 id="{{this_word | replace: '+','_' | replace: ' ','_' | downcase}}" class="toc-link"><a title="Back to top" href="#"><i class="fa fa-tag mr-2"></i></a>{{this_word}}</h4>
+    <h4 id="{{this_word | replace: '+','_' | replace: ' ','_' | downcase}}" class="toc-link"><a alt="Back to top" href="#"><i class="fa fa-tag mr-2"></i></a>{{this_word}}</h4>
 
     {% for post in site.tags[this_word] %}{% if post.title != null %}
       {% include {{get_category}} post=post %}
@@ -158,22 +158,6 @@ resource_options:
       {% assign icon_size = size %}
 
       {% assign excerpt = post.excerpt|truncatewords:truncate_words|replace:'...',' ...'|strip_html|strip_newlines|strip %}
-
-      <!-- place post  -->
-      <!--div class="card card-flat mb-4">
-        <div class="card-body">
-
-          <h5 id="{{ 100000 | rand }}" class="card-title">{{ post.title }}</h5>
-          <h6 class="notoc card-subtitle text-muted mb-2">{{ post.tagline }}</h6>
-          <div class="card-text"><p>{{ excerpt }}</p></div>
-        </div>
-        <div class="card-footer">
-          <a class="btn btn-primary btn-raised btn-flex" href="{{post.url}}#readmore">
-            <i class="fa fa-eye fa-lg" style="color:#FFFFFF;"></i>
-            Read more
-          </a>
-        </div>
-      </div -->
 
       <!-- place post  -->
       <article class="card raised-z3 mb-5">
@@ -199,7 +183,12 @@ resource_options:
               <div class="card-footer-text">
                 <hr class="my-3">
                 {% if post.date %}
-                <i class="mdi mdi-calendar-blank mr-1"></i> {{post.date | date: "%Y %B, %e"}}
+                  {% if language == "en" %}
+                    <i class="mdi mdi-calendar-blank md-grey-600 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
+                  {% endif %}
+                  {% if language == "de" %}
+                    <i class="mdi mdi-calendar-blank md-grey-600 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
+                  {% endif %}
                 {% endif %}
                 {% if likes_count %}
                 <span class="font-weight-bold"> · </span>

@@ -2,7 +2,7 @@
 title:                                  Cookies
 tagline:                                good to know
 
-categories:                             [ Featured, Post ]
+categories:                             [ Knowledge ]
 tags:                                   [ Cookies ]
 
 image:                                  /assets/images/modules/attics/cookies-1920x1200.jpg

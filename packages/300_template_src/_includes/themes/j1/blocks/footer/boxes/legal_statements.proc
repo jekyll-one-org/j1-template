@@ -24,44 +24,87 @@
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign legals = include.legals %}
 
-<!-- [INFO   ] [legal_statements.proc              ] [ process legal statements configured ] -->
+{% comment %} language detection
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if site.language == "en" %}
+  {% assign language = "en" %}
+{% elsif site.language == "de"%}
+  {% assign language = "de" %}
+{% else %}
+  {% assign language = "en" %}
+{% endif %}
+
+{% comment %} Debugging
+--------------------------------------------------------------------------------
+legal_item: {{legal_item.legal | debug}}
+--------------------------------------------------------------------------------
+{% endcomment %}
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
+<!-- [INFO   ] [legal_statements.proc              ] [ process legal statements configured ] -->
 <ul class="list-inline terms-menu">
 {% for legal_item in legals %}
 
-  {% comment %}
-  <!-- [INFO   ] [legal_statements.proc              ] [ legal_item: {{legal_item.legal}} ] -->
-  {% endcomment %}
+  {% if language == "en" %}
+    {% if legal_item.legal.enabled and legal_item.legal.type == 'copyright' %}
+      <li><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
+    {% endif %}
 
-  {% if legal_item.legal.enabled and legal_item.legal.type == 'copyright' %}
-    <li><a href="{{legal_item.legal.href}}">{{legal_item.legal.statement}}</a></li>
+    {% if legal_item.legal.enabled and legal_item.legal.type == 'impress' %}
+      <li><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
+    {% endif %}
+
+    {% if legal_item.legal.enabled and legal_item.legal.type == 'terms' %}
+      <li><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
+    {% endif %}
+
+    {% if legal_item.legal.enabled and legal_item.legal.type == 'privacy' %}
+      <li><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
+    {% endif %}
+
+    {% if legal_item.legal.enabled and legal_item.legal.type == 'licence' %}
+      <li><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
+    {% endif %}
+
+    {% if legal_item.legal.enabled and legal_item.legal.type == 'support' %}
+      <li><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
+    {% endif %}
+
+    {% if legal_item.legal.enabled and legal_item.legal.type == 'comments' %}
+      <li><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
+    {% endif %}
   {% endif %}
 
-  {% if legal_item.legal.enabled and legal_item.legal.type == 'impress' %}
-    <li><a href="{{legal_item.legal.href}}">{{legal_item.legal.statement}}</a></li>
-  {% endif %}
+  {% if language == "de" %}
+    {% if legal_item.legal.enabled and legal_item.legal.type == 'copyright' %}
+      <li><a href="{{legal_item.legal.de.href}}">{{legal_item.legal.de.statement}}</a></li>
+    {% endif %}
 
-  {% if legal_item.legal.enabled and legal_item.legal.type == 'terms' %}
-    <li><a href="{{legal_item.legal.href}}">{{legal_item.legal.statement}}</a></li>
-  {% endif %}
+    {% if legal_item.legal.enabled and legal_item.legal.type == 'impress' %}
+      <li><a href="{{legal_item.legal.de.href}}">{{legal_item.legal.de.statement}}</a></li>
+    {% endif %}
 
-  {% if legal_item.legal.enabled and legal_item.legal.type == 'privacy' %}
-    <li><a href="{{legal_item.legal.href}}">{{legal_item.legal.statement}}</a></li>
-  {% endif %}
+    {% if legal_item.legal.enabled and legal_item.legal.type == 'terms' %}
+      <li><a href="{{legal_item.legal.de.href}}">{{legal_item.legal.de.statement}}</a></li>
+    {% endif %}
 
-  {% if legal_item.legal.enabled and legal_item.legal.type == 'licence' %}
-    <li><a href="{{legal_item.legal.href}}">{{legal_item.legal.statement}}</a></li>
-  {% endif %}
+    {% if legal_item.legal.enabled and legal_item.legal.type == 'privacy' %}
+      <li><a href="{{legal_item.legal.de.href}}">{{legal_item.legal.de.statement}}</a></li>
+    {% endif %}
 
-  {% if legal_item.legal.enabled and legal_item.legal.type == 'support' %}
-    <li><a href="{{legal_item.legal.href}}">{{legal_item.legal.statement}}</a></li>
-  {% endif %}
+    {% if legal_item.legal.enabled and legal_item.legal.type == 'licence' %}
+      <li><a href="{{legal_item.legal.de.href}}">{{legal_item.legal.de.statement}}</a></li>
+    {% endif %}
 
-  {% if legal_item.legal.enabled and legal_item.legal.type == 'comments' %}
-    <li><a href="{{legal_item.legal.href}}">{{legal_item.legal.statement}}</a></li>
-  {% endif %}
+    {% if legal_item.legal.enabled and legal_item.legal.type == 'support' %}
+      <li><a href="{{legal_item.legal.de.href}}">{{legal_item.legal.de.statement}}</a></li>
+    {% endif %}
 
+    {% if legal_item.legal.enabled and legal_item.legal.type == 'comments' %}
+      <li><a href="{{legal_item.legal.de.href}}">{{legal_item.legal.de.statement}}</a></li>
+    {% endif %}
+  {% endif %}
+  
 {% endfor %}
 </ul>

@@ -199,7 +199,7 @@
   sublevel:
     - title:                            Creators Blog
       href:                             /pages/public/blog/navigator/
-      icon:                             navigation
+      icon:                             near-me
     - title:                            Categories
       href:                             /pages/public/blog/navigator/archive/categoryview/
       icon:                             pin

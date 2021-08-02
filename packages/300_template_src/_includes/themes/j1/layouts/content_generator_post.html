@@ -20,7 +20,7 @@
 -------------------------------------------------------------------------------- {% endcomment %}
 {% capture create_series_header %}themes/{{site.template.name}}/procedures/posts/create_series_header.proc{% endcapture %}
 {% capture create_ad_block %}themes/{{site.template.name}}/procedures/posts/create_ad_block.proc{% endcapture %}
-{% capture pager %}themes/{{site.template.name}}/procedures/global/pager.proc{% endcapture %}
+{% capture pager %}themes/{{site.template.name}}/procedures/posts/pager.proc{% endcapture %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
@@ -30,6 +30,8 @@
 {% assign template_config   = site.data.j1_config %}
 {% assign blocks            = site.data.blocks %}
 {% assign modules           = site.data.modules %}
+{% assign builder           = site.data.builder %}
+{% assign plugins           = site.data.plugins %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -37,44 +39,58 @@
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
 
-{% assign rtext            = site.data.j1_config.typography.rtext %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign rtext            = template_config.typography.rtext %}
 {% assign page_rtext       = page.rtext %}
 {% assign page_rtext_size  = page.rtext_size %}
 
 {% if rtext %}
- {% assign rtext_size = site.data.j1_config.typography.rtext_size %}
+ {% assign rtext_size = template_config.typography.rtext_size %}
 {% else %}
  {% assign rtext_size = 0 %}
 {% endif %}
 
+{% comment %} language detection
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if site.language == "en" %}
+  {% assign language = "en" %}
+{% elsif site.language == "de"%}
+  {% assign language = "de" %}
+{% else %}
+  {% assign language = "en" %}
+{% endif %}
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
 <!-- [INFO   ] [j1.layout.content_generator_post.html ] [ begin content ] -->
 {% if page.comments %}
-  <!-- div class="container mr-5 mb-0" -->
-  <!-- no sidebar, mr-* disabled -->
+  <!-- No space between set if comments enabled -->
   <div class="container mb-0">
 {% else %}
-  <!-- div class="container mr-5 mb-5" -->
-  <!-- no sidebar, mr-* disabled -->
-  <div class="container mb-5"> <!-- Add additional space between end of article and the footer -->
+  <!-- Add additional space between end of article and the footer -->
+  <div class="container mb-5">
 {% endif %}
 
   {% comment %} Blog post CONTENT
   ------------------------------------------------------------------------------ {% endcomment %}
-  <!-- FULL page - no sidebar for page toc -->
+  <!-- Blog post CONTENT -->
   <div class="row">
     <main id="main-content" class="r-text-{{rtext_size}} js-toc-content">
       <!-- Include a pager at top position -->
       {% include {{pager}} %}
-      <!-- div class="featured-headline" -->
       <div class="post-headline mt-4">
-        <h2 class="notoc">{{ page.date | date_to_long_string }}</h2>
+        {% if language == "en" %}
+          <h2 class="notoc">{{ page.date | localize: "%Y %B, %e" }}</h2>
+        {% endif %}
+        {% if language == "de" %}
+          <h2 class="notoc">{{ page.date | localize: "%-d. %B %Y" }}</h2>
+        {% endif %}
       </div>
 
       {% comment %} Place Blog post SERIES Navigation
-      ------------------------------------------------------------------------ {% endcomment %}
+      -------------------------------------------------------------------------- {% endcomment %}
       {% if page.series %}
       <header class="bmd-layout-header">
         <!-- jadams, 2021-02-28 added mb-3 to the navbar -->
@@ -103,20 +119,12 @@
         </div>
       {% endif %}
       {% comment %} END SERIES Navigation
-      ------------------------------------------------------------------------ {% endcomment %}
+      -------------------------------------------------------------------------- {% endcomment %}
 
       {% comment %} Inherit CONTENT
-      ------------------------------------------------------------------------ {% endcomment %}
+      -------------------------------------------------------------------------- {% endcomment %}
       <!-- Content placed by post_content.html -->
-
       {{content}}
-
-      {% comment %} Place additional headline for comments
-      ------------------------------------------------------------------------ {% endcomment %}
-      {% if page.comments %}
-      <h2 id="comments_leave_comment"> Leave a comment </h2>
-      {% endif %}
-      <!-- End Content placed by post_content.html -->
 
     {% if page.series %}</nav>{% endif %}
 
