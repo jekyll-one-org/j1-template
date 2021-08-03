@@ -105,6 +105,6 @@ legal_item: {{legal_item.legal | debug}}
       <li><a href="{{legal_item.legal.de.href}}">{{legal_item.legal.de.statement}}</a></li>
     {% endif %}
   {% endif %}
-  
+
 {% endfor %}
 </ul>

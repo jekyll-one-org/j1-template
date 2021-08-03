@@ -46,8 +46,12 @@ settings:
         issue:
           enabled:                      true
           date:                         site.time
-          date_format:                  "%A, %-d %B %Y"
-          text:                         Last modified
+          en:
+            date_format:                "%A, %-d %B %Y"
+            text:                       Last modified
+          de:
+            date_format:                "%A, %-d %B %Y"
+            text:                       Letzte Änderung
 
         # ----------------------------------------------------------------------
         # ICON settings
@@ -69,50 +73,78 @@ settings:
             legal:
               enabled:                  true
               type:                     copyright
-              statement:                J1 · Copyright © 2021 · Alle Rechte vorbehalten
-              href:                     /pages/public/legal/de/copyright/
+              en:
+                statement:              J1 © 2021 · All rights reserved
+                href:                   /pages/public/legal/en/copyright/
+              de:
+                statement:              J1 © 2021 · Alle Rechte vorbehalten
+                href:                   /pages/public/legal/de/copyright/
 
           - name:                       Impress
             legal:
               enabled:                  true
               type:                     impress
-              statement:                Impressum
-              href:                     /pages/public/legal/de/impress/
+              en:
+                statement:              Impress
+                href:                   /pages/public/legal/en/impress/
+              de:
+                statement:              Impressum
+                href:                   /pages/public/legal/de/impress/
 
           - name:                       Terms Of Use
             legal:
               enabled:                  false
               type:                     terms
-              statement:                Terms Of Use
-              href:                     /pages/public/legal/de/terms_of_use/
+              en:
+                statement:              Terms Of Use
+                href:                   /pages/public/legal/en/terms_of_use/
+              de:
+                statement:              Nutzungsbedingungen
+                href:                   /pages/public/legal/de/terms_of_use/
 
           - name:                       privacy
             legal:
               enabled:                  true
               type:                     privacy
-              statement:                Privatsphäre
-              href:                     /pages/public/legal/de/privacy/
+              en:
+                statement:              Privacy
+                href:                   /pages/public/legal/en/privacy/
+              de:
+                statement:              Privatsphäre
+                href:                   /pages/public/legal/de/privacy/
 
           - name:                       License
             legal:
               enabled:                  true
               type:                     license
-              statement:                License
-              href:                     /pages/public/legal/de/license_agreement/
+              en:
+                statement:              License
+                href:                   /pages/public/legal/en/license_agreement/
+              de:
+                statement:              Lizensbedingungen
+                href:                   /pages/public/legal/de/license_agreement/
 
           - name:                       Support
             legal:
               enabled:                  false
               type:                     support
-              statement:                Support
-              href:                     /pages/public/legal/dn/terms_of_use/
+              en:
+                statement:              Support
+                href:                   /pages/public/legal/en/support/
+              de:
+                statement:              Support
+                href:                   /pages/public/legal/en/support/
 
           - name:                       Comments
             legal:
               enabled:                  true
               type:                     comments
-              statement:                Kommentarrichtlinie
-              href:                     /pages/public/legal/de/comment_policy/
+              en:
+                statement:              Comment policy
+                href:                   /pages/public/legal/en/comment_policy/
+              de:
+                statement:              Kommentarrichtlinie
+                href:                   /pages/public/legal/de/comment_policy/
 
         # ----------------------------------------------------------------------
         # BOXES
@@ -159,27 +191,27 @@ settings:
             tagline:                    top sites
             links:
 
-              - name:                   3i-Report
+              - name:                   Jekyll Home
                 link:
-                  title:                The Inclusive Internet Index
-                  tagline:              Daten zur weltweiten Internetnutzung
-                  href:                 https://theinclusiveinternet.eiu.com/
+                  title:                Jekyll Home
+                  tagline:              First address for latest news
+                  href:                 http://jekyllrb.com/
                   target:               _blank
                   rel:                  noopener noreferrer
 
-              - name:                   Initiative D21
+              - name:                   CloudCannon
                 link:
-                  title:                Digital-Index Deutschland
-                  tagline:              Lagebild zur Digitalen Gesellschaft
-                  href:                 https://initiatived21.de/d21-digital-index/
+                  title:                Jekyll Tips at CloudCannon
+                  tagline:              Learn from experts
+                  href:                 http://jekyll.tips/
                   target:               _blank
                   rel:                  noopener noreferrer
 
-              - name:                   Deutsches-Schulportal
+              - name:                   Stackoverflow
                 link:
-                  title:                Deutsches Schulportal
-                  tagline:              Entwicklung von Schule und Unterricht
-                  href:                 https://deutsches-schulportal.de/
+                  title:                Stackoverflow
+                  tagline:              Get help from the community
+                  href:                 http://stackoverflow.com/questions/tagged/jekyll
                   target:               _blank
                   rel:                  noopener noreferrer
 
