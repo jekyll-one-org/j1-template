@@ -101,6 +101,24 @@ regenerate:                             true
   {% assign production = true %}
 {% endif %}
 
+{% comment %} language detection
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if site.language == "en" %}
+  {% assign language = "en" %}
+{% elsif site.language == "de"%}
+  {% assign language = "de" %}
+{% else %}
+  {% assign language = "en" %}
+{% endif %}
+
+{% if language == "en" %}
+  {% assign comments_headline = template_config.comments.comments_headline.en %}
+{% endif %}
+
+{% if language == "de" %}
+  {% assign comments_headline = template_config.comments.comments_headline.de %}
+{% endif %}
+
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/j1_template.js
@@ -983,7 +1001,7 @@ var j1 = (function () {
             } else {
               if (comments) {
                 logger.warn('\n' + 'enable comment provider: ' + comment_provider);
-                $('#main-content').append('<h2 id="leave-a-comment" class="mt-4">Leave a comment</h2>');
+                $('#main-content').append('<h2 id="leave-a-comment" class="mt-4">{{comments_headline}}</h2>');
                 if (comment_provider === 'disqus') {
                   logger.info('\n' + 'load comment provider code: ' + comment_provider);
                   $('#main-content').append('<div id="disqus_thread"></div>');
@@ -1108,7 +1126,7 @@ var j1 = (function () {
           } else {
             if (comments) {
               logger.warn('\n' + 'enable comment provider: ' + comment_provider);
-              $('#main-content').append('<h2 id="leave-a-comment" class="mt-4">Leave a comment</h2>');
+              $('#main-content').append('<h2 id="leave-a-comment" class="mt-4">{{comments_headline}}</h2>');
               if (comment_provider === 'disqus') {
                 logger.info('\n' + 'load comment provider code: ' + comment_provider);
                 $('#main-content').append('<div id="disqus_thread"></div>');

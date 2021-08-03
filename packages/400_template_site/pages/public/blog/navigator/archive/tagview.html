@@ -1,11 +1,12 @@
 ---
 layout:                                 page
 title:                                  Creators Blog
-tagline:                                blog posts by tag
-description:                            Browse articles by tag
+tagline:                                posts by tag
+description: >
+                                        Browse articles by tag
 
-categories:                             [ Navigator ]
-tags:                                   [ Blog, Tags, Viewer ]
+categories:                             [ Blog ]
+tags:                                   [ Navigator, Tags ]
 
 sort:                                   date
 toc:                                    true
@@ -23,10 +24,17 @@ regenerate:                             false
 
 resource_options:
   - attic:
+      padding_top:                      400
+      padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/images/modules/attics/library-1920x1280-bw.jpg
-          alt:                          library-1920x1280-bw
+        - url:                          /assets/images/modules/attics/matthaeus-1920x1280.jpg
+          alt:                          Photo by Matthaeus
+          alignY:                       top
+          badge:
+            type:                       unsplash
+            author:                     Matthaeus
+            href:                       https://unsplash.com/@matthaeus123
 ---
 
 {% comment %} TODO: logic for "letter_group_written == false" to be fixed
@@ -40,12 +48,26 @@ resource_options:
 {% capture get_category_item %}themes/{{site.template.name}}/procedures/global/get_category_item.proc{% endcapture %}
 {% capture create_word_cloud %}themes/{{site.template.name}}/procedures/global/create_word_cloud.proc{% endcapture %}
 
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign template_config               = site.data.j1_config %}
+{% assign blocks                        = site.data.blocks %}
+{% assign modules                       = site.data.modules %}
+{% assign builder                       = site.data.builder %}
+{% assign plugins                       = site.data.plugins %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign blog_navigator_defaults       = builder.defaults.blog_navigator.defaults %}
+{% assign blog_navigator_settings       = builder.blog_navigator.settings %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign blog_navigator_options        = blog_navigator_defaults | merge: blog_navigator_settings %}
+
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign view_config         = site.data.builder.blog_navigator.category_view %}
-{% assign truncate_words      = site.excerpt_truncate_words %}
-{% assign view_description    = view_config.description %}
-{% assign defaults            = site.data.builder.blog_navigator.defaults %}
+{% assign truncate_words                 = site.excerpt_truncate_words %}
 
 {% if site.permalink == 'none' %}
   {% capture browser_page_url %}{{page.url}}.html{% endcapture %}
@@ -82,6 +104,42 @@ resource_options:
   {% capture tag_list %}{{tag_list | append: tag}}{% unless forloop.last %},{% endunless %}{% endcapture %}
 {% endfor %}
 
+{% comment %} language detection
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if site.language == "en" %}
+  {% assign language = "en" %}
+{% elsif site.language == "de"%}
+  {% assign language = "de" %}
+{% else %}
+  {% assign language = "en" %}
+{% endif %}
+
+{% if language == "en" %}
+  {% assign category_view_button_text = blog_navigator_options.button_text.view_selector.category_view.en %}
+  {% assign date_view_button_text     = blog_navigator_options.button_text.view_selector.date_view.en %}
+  {% assign archive_view_button_text  = blog_navigator_options.button_text.view_selector.archive_view.en %}
+  {% assign tag_view_button_text      = blog_navigator_options.button_text.view_selector.tag_view.en %}
+
+  {% assign view_headline             = blog_navigator_options.tag_view.page_text.en.headline %}
+  {% assign view_description_text     = blog_navigator_options.tag_view.page_text.en.description %}
+{% endif %}
+
+{% if language == "de" %}
+  {% assign category_view_button_text = blog_navigator_options.button_text.view_selector.category_view.de %}
+  {% assign date_view_button_text     = blog_navigator_options.button_text.view_selector.date_view.de %}
+  {% assign archive_view_button_text  = blog_navigator_options.button_text.view_selector.archive_view.de %}
+  {% assign tag_view_button_text      = blog_navigator_options.button_text.view_selector.tag_view.de %}
+
+  {% assign view_headline             = blog_navigator_options.tag_view.page_text.de.headline %}
+  {% assign view_description_text     = blog_navigator_options.tag_view.page_text.de.description %}
+{% endif %}
+
+{% comment %} Debugging
+--------------------------------------------------------------------------------
+skip_categories:            {{skip_categories | debug}}
+site_category_word_list:    {{site_category_word_list | debug}}
+--------------------------------------------------------------------------------
+{% endcomment %}
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -98,7 +156,10 @@ resource_options:
 </div>
 
 <div class="post-search-results ml-3">
-  <div class="view-description mb-1">{{view_description}}</div>
+  {% if blog_navigator_options.tag_view.page_text.enabled %}
+  <div class="view-description">{{view_description_text}}</div>
+  {% endif %}
+
   <div class="post-headline"> <h2 id="post-headline" class="mt-5">Posts By Tag</h2></div>
   {% assign letter_group = letter_group_array[letter_group_counter] %}
 
@@ -173,7 +234,7 @@ resource_options:
           {% else %}
           <!-- [INFO   ] [j1.pages.blog.navigator.archive          ] [Post image missing, using configured default image] -->
           <div class="col-md-6 img-bg--fill px-0"
-            style="background-image: url({{defaults.post_image}});">
+            style="background-image: url({{blog_navigator_options.post_image}});">
           </div>
           {% endif %}
 

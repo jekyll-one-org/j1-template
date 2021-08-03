@@ -387,8 +387,11 @@ body:
 comments:
   enabled:                              true
 
-  xhr_data_path:                        /assets/data
   provider:                             hyvor                                   # disqus | hyvor | commento | just-comments
+  xhr_data_path:                        /assets/data
+  comments_headline:
+    en:                                 Leave a comment
+    de:                                 Kommentieren
 
   disqus:
     site_id:                            jekyll-one

@@ -35,6 +35,25 @@ regenerate:                             true
   {% assign production = true %}
 {% endif %}
 
+{% comment %} language detection
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if site.language == "en" %}
+  {% assign language = "en" %}
+{% elsif site.language == "de"%}
+  {% assign language = "de" %}
+{% else %}
+  {% assign language = "en" %}
+{% endif %}
+
+{% if language == "en" %}
+  {% assign toc_text = "Table of contents" %}
+{% endif %}
+
+{% if language == "de" %}
+  {% assign toc_text = "Inhaltsverzeichnis" %}
+{% endif %}
+
+
 <!-- [INFO   ] [j1.assets.data.mmenu_toc.html           ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />
@@ -45,7 +64,7 @@ regenerate:                             true
 <!-- [INFO   ] [ j1.modules.navigator.mmenu_toc.html ] [Start processing: toc] -->
 <div id="toc_mmenu" class="mm-side" style="display:none">
   <div class="widget">
-    <h1 class="heading">Table of Contents</h1>
+    <h1 class="heading">{{toc_text}}</h1>
   </div>
   <!-- use BS4 class d-block to make sure, the sidebar is VISIBLE on ALL @media -->
   <!-- use class sticky for BS4 as a replacement for former BS3 ScrollSpy -->

@@ -65,9 +65,7 @@ resource_options:
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign view_config         = blog_navigator_options.category_view %}
 {% assign truncate_words      = site.excerpt_truncate_words %}
-{% assign view_description    = view_config.description %}
 
 {% if site.permalink == 'none' %}
   {% capture browser_page_url %}{{page.url}}.html{% endcapture %}
@@ -111,7 +109,6 @@ by processing of categories
   {% if skip_categories contains category %} {% continue %} {% endif %}
   {% capture category_list %}{{category_list|append: category}}{% unless forloop.last %},{% endunless %}{% endcapture %}
 {% endfor %}
-
 
 {% comment %} language detection
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -167,8 +164,10 @@ site_category_word_list:    {{site_category_word_list | debug}}
 </div>
 
 <div class="post-search-results ml-3">
-
+  {% if blog_navigator_options.category_view.page_text.enabled %}
   <div class="view-description">{{view_description_text}}</div>
+  {% endif %}
+
   <div class="post-headline">
     <h2 id="post-headline" class="mt-5">{{view_headline}}</h2>
   </div>

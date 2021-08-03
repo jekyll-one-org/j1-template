@@ -192,51 +192,58 @@ defaults:
         de:                             Nach Tag
 
   article_navigator:
-    enabled:                            true
     page_text:
+      enabled:                          true
+
       en:
-        headline:                       Preview
         description: >
                                         Navigate through all of the articles available on this site. To do this,
                                         use the various display pages to find the articles that interest you.
                                         The <b>By Category</b> page lists articles on a specific <b>topic</b>.
                                         If you are looking for articles by publication date, you can use the view
-                                        Use <b>By Date </b>.
+                                        Use <b>By Date</b>. All articles in reverse order of appearance can be
+                                        found in the view <b>All Posts</b>.
       de:
-        headline:                       Vorschau
         description: >
                                         Navigieren Sie durch alle auf dieser Site verfügbaren Artikel. Verenden Sie
                                         dazu die verschiedenen Anzeigeseiten um die Beitäge finden, die Sie interessieren.
                                         Die Seite <b>Nach Kategorie</b> listet Artikel zu einem bestimmten <b>Thema</b>.
                                         Suchen Sie nach Artikeln nach einem Erscheinungsdatum, könne Sie die Ansicht
-                                        <b>Nach Datum</b> verwenden.
+                                        <b>Nach Datum</b> verwenden. Alle Artikel in umgekehrter Reihenfolge ihres
+                                        Erscheinens sind in der Ansicht <b>Alle Beiträge</b> zu finden.
 
   article_previewer:
-    enabled:                            true
     page_text:
+      enabled:                          true
+
       en:
         headline:                       Preview
         description: >
                                         All articles are reverse ordered by date. The current articles are displayed
                                         first. From the FAM button <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-plus"></i>FAM button</a> you can reach a table of contents
-                                        of all available articles in the same order. To preview older posts, use the
-                                        button <b>Older Posts</b> from the Preview Bar. For newer posts use the button
-                                        <b>Newer Posts</b> for more recent articles.
-      en:
+                                        <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
+                                        <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> of all available articles
+                                        in the same order. To preview older posts, use the button <b>Older Posts</b> from
+                                        the Preview Bar. For newer posts use the button <b>Newer Posts</b> for more recent
+                                        articles.
+      de:
         headline:                       Vorschau
         description: >
                                         Alle Artikel sind in umgekehrter Reihenfolge ihres Erscheinens
                                         gruppiert. Aktuellere Beiträge werden zuerst angezeigt. Über den FAM-Button
                                         <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-plus"></i>FAM button</a> erreichen Sie ein
-                                        Inhaltsverzeichnis über alle verfübaren Artikel in gleicher Reihenfolge.
-                                        Zur Anzeige älterer Artikel, verwenden Sie die Schältfläche <b>Ältere Beiträge</b>
-                                        Für jüngere Posts klicken Sie auf die Schältfläche <b>Neuere Beiträge</b>.
+                                        Inhaltsverzeichnis <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
+                                        <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> über alle verfübaren Artikel
+                                        in gleicher Reihenfolge. Zur Anzeige älterer Artikel, verwenden Sie die Schältfläche
+                                        <b>Ältere Beiträge</b>. Für jüngere Posts klicken Sie auf die Schältfläche
+                                        <b>Neuere Beiträge</b>.
 
   archive_view:
-    enabled:                            true
     page_text:
+      enabled:                          true
+
       en:
         headline:                       All Posts
         description: >
@@ -245,7 +252,9 @@ defaults:
                                         to the oldest. From the FAM button <a href="#void"
                                         class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-plus"></i>FAM button</a> you can reach a
-                                        table of contents of all available articles in the same order.
+                                        table of contents <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
+                                        <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> of all available
+                                        articles in the same order.
                                         <br/><br/>
                                         From the navigation bar, <b>Navigator</b> takes you back to the
                                         <b>main page</b> of the Navigator. Articles ordered by <b>category</b>
@@ -259,7 +268,9 @@ defaults:
                                         gruppiert. Aktuellere Beiträge werden zuerst angezeigt. Über den FAM-Button
                                         <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-plus"></i>FAM button</a> erreichen Sie ein
-                                        Inhaltsverzeichnis über alle verfübaren Artikel in gleicher Reihenfolge.
+                                        Inhaltsverzeichnis <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
+                                        <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> über alle verfübaren Artikel
+                                        in gleicher Reihenfolge.
                                         <br/><br/>
                                         In der <b>Navigationszeile</b> gelangen Sie zurück zur <b>Hauptseite</b>
                                         des Navigators. Artikel nach ihrer Kategorie sind über die Seite
@@ -267,9 +278,10 @@ defaults:
                                         zu durchsuchen, rufen Sie die Anzeige <b>Nach Datum</b> auf.
 
   category_view:
-    enabled:                            true
     skip_categories:                    Posts, Public, Featured, Series
     page_text:
+      enabled:                          true
+
       en:
         headline:                       Posts by category
         description: >
@@ -277,7 +289,9 @@ defaults:
                                         of the blog posts. The articles are grouped by <b>category</b>.
                                         From the FAM button <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-plus"></i>FAM button</a> you can reach a
-                                        table of contents of all available articles in the same order.
+                                        table of contents <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
+                                        <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> of all available articles
+                                        in the same order.
                                         <br/><br/>
                                         From the navigation bar, <b>Navigator</b> takes you back to the
                                         <b>main page</b> of the Navigator. To search for articles in the
@@ -290,7 +304,9 @@ defaults:
                                         Blog-Beiträge. Die Artikel sind nach <b>Kategorie</b> gruppiert.
                                         Über den FAM-Button <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-plus"></i>FAM button</a> erreichen Sie ein
-                                        Inhaltsverzeichnis über alle verfübaren Artikel in gleicher Reihenfolge.
+                                        Inhaltsverzeichnis <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
+                                        <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> über alle verfübaren Artikel
+                                        in gleicher Reihenfolge.
                                         <br/><br/>
                                         In der <b>Navigationszeile</b> gelangen Sie zurück zur <b>Hauptseite</b>
                                         des Navigators. Um Artikel im Archiv nach <b>Datum</b> zu durchsuchen,
@@ -298,8 +314,9 @@ defaults:
                                         Reihenfolge ihres Erscheinens sind in der Ansicht <b>Alle Beiträge</b>
                                         zu finden.
   date_view:
-    enabled:                            true
     page_text:
+      enabled:                          true
+
       en:
         headline:                       Posts by date
         description: >
@@ -307,7 +324,9 @@ defaults:
                                         of the blog posts. The articles are grouped by <b>Date</b>.
                                         From the FAM button <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-plus"></i>FAM button</a> you can reach a
-                                        table of contents of all available articles in the same order.
+                                        table of contents <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
+                                        <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> of all available articles
+                                        in the same order.
                                         <br/><br/>
                                         From the navigation bar, <b>Navigator</b> takes you back to the
                                         <b>main page</b> of the Navigator. To search for articles in the
@@ -320,7 +339,9 @@ defaults:
                                         Blog-Beiträge. Die Artikel sind nach <b>Datum</b> gruppiert.
                                         Über den FAM-Button <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-plus"></i>FAM button</a> erreichen Sie ein
-                                        Inhaltsverzeichnis über alle verfübaren Artikel in gleicher Reihenfolge.
+                                        Inhaltsverzeichnis <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
+                                        <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> über alle verfübaren Artikel
+                                        in gleicher Reihenfolge.
                                         <br/><br/>
                                         In der <b>Navigationszeile</b> gelangen Sie zurück zur <b>Hauptseite</b>
                                         des Navigators. Um Artikel im Archiv nach <b>Kategorien</b> zu durchsuchen,
@@ -328,8 +349,9 @@ defaults:
                                         Reihenfolge ihres Erscheinens sind in der Ansicht <b>Alle Beiträge</b>
                                         zu finden.
   tag_view:
-    enabled:                            false
     page_text:
+      enabled:                          true
+
       en:
         headline:                       Posts by tag
         description: >
@@ -337,10 +359,11 @@ defaults:
                                         of the blog posts. The articles are grouped by <b>Tag</b>.
                                         From the FAM button <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-plus"></i>FAM button</a> you can reach a
-                                        table of contents of all available articles in the same order.
+                                        table of contents <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
+                                        <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> of all available articles
+                                        in the same order.
                                         <br/><br/>
-
-                                        From the navigation bar, <b>Navigator</> takes you back to the
+                                        From the navigation bar, <b>Navigator</b> takes you back to the
                                         <b>main page</b> of the Navigator. To search for articles in the
                                         archive by <b>category</b>, go for the view <b>By Category</b>.
                                         All articles in reverse order of appearance can be found in the
@@ -352,7 +375,9 @@ defaults:
                                         Blog-Beiträge. Die Artikel sind nach <b>Tag</b> gruppiert.
                                         Über den FAM-Button <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-plus"></i>FAM button</a> erreichen Sie ein
-                                        Inhaltsverzeichnis über alle verfübaren Artikel in gleicher Reihenfolge.
+                                        Inhaltsverzeichnis <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
+                                        <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> über alle verfübaren Artikel
+                                        in gleicher Reihenfolge.
                                         <br/><br/>
                                         In der <b>Navigationszeile</b> gelangen Sie zurück zur <b>Hauptseite</b>
                                         des Navigators. Um Artikel im Archiv nach <b>Kategorien</b> zu durchsuchen,

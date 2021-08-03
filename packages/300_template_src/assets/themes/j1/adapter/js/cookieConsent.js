@@ -101,6 +101,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
   var secure;
   var logText;
   var cookie_written;
+  var language;
 
   // NOTE: RegEx for tracking_id: ^(G|UA|YT|MO)-[a-zA-Z0-9-]+$
   // See: https://stackoverflow.com/questions/20411767/how-to-validate-google-analytics-tracking-id-using-a-javascript-function/20412153
@@ -129,6 +130,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       hostname      = url.hostname;
       domain        = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
       secure        = (url.protocol.includes('https')) ? true : false;
+      language      = "{{site.language}}";
 
       // set domain used by cookies
       if(domain !== 'localhost') {
@@ -171,10 +173,10 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
           j1.cookieConsent = new BootstrapCookieConsent({
             contentURL:             moduleOptions.contentURL,
             cookieName:             moduleOptions.cookieName,
-            language:               moduleOptions.language,
+            language:               language,
             whitelisted:            moduleOptions.whitelisted,
             reloadPageOnChange:     moduleOptions.reloadPageOnChange,
-            xhr_data_element:       moduleOptions.xhr_data_element + '-' + moduleOptions.language,
+            xhr_data_element:       moduleOptions.xhr_data_element + '-' + language,
             sameSite:               moduleOptions.sameSite,
             secure:                 secure,
             postSelectionCallback:  function () {j1.adapter.cookieConsent.cbCookie()}
