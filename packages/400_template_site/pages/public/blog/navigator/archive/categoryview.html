@@ -99,7 +99,7 @@ by processing of categories
 
 {% comment %} category processing
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign skip_categories = view_config.skip_categories | split: ", " | join: " " %}
+{% assign skip_categories = blog_navigator_options.category_view.skip_categories | split: ", " | join: " " %}
 
 {% capture site_category_word_list %}{% for category in site.categories %}{{category|first|capitalize|lstrip|rstrip}}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
 {% assign category_words = site_category_word_list|split:',' %}
