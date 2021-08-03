@@ -63,7 +63,7 @@ regenerate:                             true
   {% assign production = true %}
 {% endif %}
 
-{% comment %} language detection
+{% comment %} language detection|i18n
 -------------------------------------------------------------------------------- {% endcomment %}
 {% if site.language == "en" %}
   {% assign language = "en" %}
@@ -73,6 +73,13 @@ regenerate:                             true
   {% assign language = "en" %}
 {% endif %}
 
+{% if language == "en" %}
+  {% assign readmore_text = "read" %}
+{% endif %}
+
+{% if language == "de" %}
+  {% assign readmore_text = "lesen" %}
+{% endif %}
 
 <!-- [INFO   ] [j1.assets.data.panel.html             ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
@@ -262,9 +269,9 @@ regenerate:                             true
                   <hr class="my-3">
 
                   {% if button_target == null %}
-                    <a class="card-link text-muted" href="{{button_href}}">{{button_text}}</a>
+                    <a class="card-link text-muted" href="{{button_href}}">{{readmore_text}} · {{button_text}}</a>
                   {% else %}
-                    <a class="card-link  md-grey-600" href="{{button_href}}" target="{{button_target}}">{{button_text}}</a>
+                    <a class="card-link  md-grey-600" href="{{button_href}}" target="{{button_target}}">{{readmore_text}} · {{button_text}}</a>
                   {% endif %}
                   </div>
 
@@ -445,7 +452,6 @@ regenerate:                             true
                   {% if key == 'category' %}      {% assign post_category = value %} {% endif %}
                   {% if key == 'max_rows' %}      {% assign rows_max      = value %} {% endif %}
                   {% if key == 'max_posts' %}     {% assign posts_max     = value %} {% endif %}
-                  {% if key == 'readmore_text' %} {% assign readmore_text = value %} {% endif %}
                   {% if key == 'truncatewords' %} {% assign truncatewords = value %} {% endif %}
                   {% if key == 'buttons' %}       {% assign card_buttons  = value %} {% endif %}
                 {% endfor %}

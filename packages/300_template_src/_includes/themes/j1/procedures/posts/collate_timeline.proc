@@ -59,6 +59,14 @@
   {% assign language = "en" %}
 {% endif %}
 
+{% if language == "en" %}
+  {% assign readmore_text = "read" %}
+{% endif %}
+
+{% if language == "de" %}
+  {% assign readmore_text = "lesen" %}
+{% endif %}
+
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
 
@@ -159,7 +167,7 @@
                 <a href="{{post.url}}#readmore"
                    class="btn btn-secondary btn-raised btn-flex mb-0">
                    <i class="mdi mdi-eye mdi-lg mr-1" style="color:#FFFFFF;">
-                   </i> Read · {{post.tagline}}
+                   </i> {{readmore_text}} · {{post.tagline}}
                 </a>
               </div>
             </div>
@@ -181,7 +189,7 @@
                 <a href="{{post.url}}#readmore"
                    class="btn btn-secondary btn-raised btn-flex mb-0">
                    <i class="mdi mdi-eye mdi-lg mr-1" style="color:#FFFFFF;">
-                   </i> Read · {{post.tagline}}
+                   </i> {{readmore_text}} · {{post.tagline}}
                 </a>
               </div>
             </div>
@@ -227,7 +235,7 @@
               </div>
               <a class="card-link text-muted text-lowercase"
                 href="{{post.url}}#readmore">
-                Read · {{post.tagline}}
+                {{readmore_text}} · {{post.tagline}}
               </a>
             </div>
           {% endif %}

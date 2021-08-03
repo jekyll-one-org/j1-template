@@ -115,6 +115,8 @@ resource_options:
 {% endif %}
 
 {% if language == "en" %}
+  {% assign readmore_text              = "read" %}
+
   {% assign category_view_button_text = blog_navigator_options.button_text.view_selector.category_view.en %}
   {% assign date_view_button_text     = blog_navigator_options.button_text.view_selector.date_view.en %}
   {% assign archive_view_button_text  = blog_navigator_options.button_text.view_selector.archive_view.en %}
@@ -125,6 +127,8 @@ resource_options:
 {% endif %}
 
 {% if language == "de" %}
+  {% assign readmore_text              = "lesen" %}
+
   {% assign category_view_button_text = blog_navigator_options.button_text.view_selector.category_view.de %}
   {% assign date_view_button_text     = blog_navigator_options.button_text.view_selector.date_view.de %}
   {% assign archive_view_button_text  = blog_navigator_options.button_text.view_selector.archive_view.de %}
@@ -262,7 +266,7 @@ site_category_word_list:    {{site_category_word_list | debug}}
               </div>
               <a class="card-link text-muted text-lowercase"
                  href="{{post.url}}#readmore">
-                 Read · {{post.tagline}}
+                 {{readmore_text}} · {{post.tagline}}
               </a>
             </div>
           </div>
