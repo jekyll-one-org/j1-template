@@ -384,9 +384,12 @@ body:
 # ------------------------------------------------------------------------------
 comments:
   enabled:                              false
-  
+
+  provider:                             hyvor                                   # disqus | hyvor | commento | just-comments
   xhr_data_path:                        /assets/data
-  provider:                             hyvor                                   # hyvor | disqus
+  comments_headline:
+    en:                                 Leave a comment
+    de:                                 Kommentieren
 
   hyvor:
     site_id:                            'hyvor-site-id'

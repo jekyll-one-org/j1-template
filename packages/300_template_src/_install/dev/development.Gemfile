@@ -32,8 +32,7 @@
 #         gem cleanup
 #
 # ------------------------------------------------------------------------------
-source "https://rubygems.org"
-ruby RUBY_VERSION
+source 'https://rubygems.org'
 
 # ------------------------------------------------------------------------------
 # Jekyll
@@ -121,7 +120,7 @@ group :jekyll_plugins do
 # gem 'jekyll-redirect-from', '>= 0.16.0'                                       # Useful ???
 # gem 'jekyll-sass-converter', '>= 2.1.0'                                       # Used if SASS (file) conversion is enabled
   gem 'jekyll-sitemap', '>= 1.2.0'
-  gem 'j1-paginator', '>= 2021.1.0'                                             # New version !!!
+  gem 'j1-paginator', '>= 2021.1.1'                                             # New version !!!
 end
 
 # ------------------------------------------------------------------------------
@@ -167,7 +166,7 @@ end
 # running # tasks defined by a Rakefile prior running the app|web.
 #
 # gem 'passenger', '>= 5.3'
-gem "puma", '>= 4.3.1'
+gem 'puma', '>= 4.3.1'
 
 # ------------------------------------------------------------------------------
 # If J1 is transformed into a (Rack and Sinatra based) Web
