@@ -1022,6 +1022,16 @@ var j1 = (function () {
             // display page
            $('#no_flicker').css('display', 'block');
 
+             // add recommended title to hyvor iframe for SEO optimization (if loadad)
+            if (comment_provider === 'hyvor') {
+              var dependencies_met_load_finished = setInterval (function () {
+              	if ($('#hyvor-talk-view').children().length) {
+              		$('#hyvor-talk-iframe').prop('title', 'Hyvor talk iframe');
+              		clearInterval(dependencies_met_load_finished);
+              	}
+              }, 25);
+            }
+
             // NOTE: Placed tracking warning/info here because page may reloaded
             // after cookie consent selection
             if (user_consent.analyses) {
@@ -1146,6 +1156,16 @@ var j1 = (function () {
 
           // display page
           $('#no_flicker').css('display', 'block');
+
+            // add recommended title to hyvor iframe for SEO optimization (if loadad)
+           if (comment_provider === 'hyvor') {
+             var dependencies_met_load_finished = setInterval (function () {
+               if ($('#hyvor-talk-view').children().length) {
+                 $('#hyvor-talk-iframe').prop('title', 'Hyvor talk iframe');
+                 clearInterval(dependencies_met_load_finished);
+               }
+             }, 25);
+           }
 
           // NOTE: Placed tracking warning/info here because page may reloaded
           // after cookie consent selection

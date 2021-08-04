@@ -371,16 +371,25 @@ body:
 #
 # ------------------------------------------------------------------------------
 
+# ==============================================================================
+# CONNECTOR configuration settings
+#
+# ------------------------------------------------------------------------------
+
 # ------------------------------------------------------------------------------
 # COMMENTS settings
 #
-# Set 'enabled' to false to turn commenting off globally
-# Set 'provider' to the comment provider you want to use
+# Set 'enabled' to false to turn off globally. Affects all pages independently
+# from what is set pagewise!
+# Set 'provider' to the provider you want to use.
+# ------------------------------------------------------------------------------
+# hyvor
+#
+#   site_id: your-website-id
 # ------------------------------------------------------------------------------
 # disqus
 #
-#   short_name: your-disqus-short-name (w/o disqus.com)
-#
+#   site_id: your-disqus-short-name
 # ------------------------------------------------------------------------------
 comments:
   enabled:                              false
@@ -389,7 +398,7 @@ comments:
   xhr_data_path:                        /assets/data
   comments_headline:
     en:                                 Leave a comment
-    de:                                 Kommentieren
+    de:                                 Kommentieren                                # hyvor | disqus
 
   hyvor:
     site_id:                            'hyvor-site-id'
@@ -398,16 +407,16 @@ comments:
     site_id:                            '<your-site-short-name>'
 
   # commento:                                                                   # currently NOT supported
-  #   site_id:                            'commento-site-id'
+  #   site_id:                          'commento-site-id'
   #
   # just-comments:                                                              # currently NOT supported
-  #   site_id:                            'just-comments-site-id'
+  #   site_id:                          'just-comments-site-id'
 
   # facebook:                                                                   # currently NOT supported
-  #   appid:                              'facebook-app-id'
-  #   num_posts:                          5
-  #   width:                              580
-  #   colorscheme:                        light
+  #   appid:                            'facebook-app-id'
+  #   num_posts:                        5
+  #   width:                            580
+  #   colorscheme:                      light
 
   # custom:                                                                     # currently NOT supported
   #   custom_data:
@@ -415,9 +424,10 @@ comments:
 # ------------------------------------------------------------------------------
 # ANALYTICS settings
 #
-# Set 'enabled' to false to turn analytics off globally
-# Set 'provider' to the analytics provider you want to use
-#
+# Set 'enabled' to false to turn off globally. Affects all pages independently
+# from what is set pagewise!
+# Set 'provider' to the provider you want to use.
+# ------------------------------------------------------------------------------
 analytics:
   enabled:                              false
   provider:                             google
@@ -425,40 +435,40 @@ analytics:
   google:
     tracking_id:                        '<your-tracking-id>'
 
-# custom:                                                                       # currently NOT supported
-#   custom_data:
+  custom:
+    custom_data:
 
 # ------------------------------------------------------------------------------
 # ADVERTISING settings
 #
-# Set 'enabled' to false to turn advertising off globally
-# Set 'provider' to the analytics provider you want to use
-#
+# Set 'enabled' to false to turn off globally. Affects all pages independently
+# from what is set pagewise!
+# Set 'provider' to the provider you want to use.
+# ------------------------------------------------------------------------------
 advertising:
+  enabled:                              false
+  provider:                             google
+  google:
+    publisher_id:                       '<your-publisher-id>'
+  custom:
+    custom_data:
+
+# ------------------------------------------------------------------------------
+# TRANSLATOR settings
+#
+# Set 'enabled' to false to turn off globally. Affects all pages independently
+# from what is set pagewise!
+# Set 'provider' to the provider you want to use.
+# ------------------------------------------------------------------------------
+translation:
   enabled:                              false
   provider:                             google
 
   google:
-    publisher_id:                       '<your-publisher-id>'
-
-# custom:                                                                       # currently NOT supported
-#   custom_data:
-
-# ------------------------------------------------------------------------------
-# TRANSLATOR settings (currently NOT supported)
-#
-# Set 'enabled' to false to turn translators off globally
-# Set 'provider' to the translation provider you want to use
-#
-# translation:
-#   enabled:                              false
-#   provider:                             google
-#
-#   google:
-#     layout:                             default
-#     meta_data:                          [google-translate-customization]
-#     page_language:                      en
-#     translation_languages:              [all]
+    layout:                             default
+    meta_data:                          [google-translate-customization]
+    page_language:                      en
+    translation_languages:              [all]
 
 # ------------------------------------------------------------------------------
 # SHARING settings (currently NOT supported)
@@ -467,9 +477,10 @@ advertising:
 # like, reddit buttons etc. Set 'provider' to the sharing provider you
 # want to use. Set 'provider' to false to turn sharing off globally.
 #
-# Set 'enabled' to false to turn sharing off globally
-# Set 'provider' to the sharing provider you want to use
-#
+# Set 'enabled' to false to turn off globally. Affects all pages independently
+# from what is set pagewise!
+# Set 'provider' to the provider you want to use.
+# ------------------------------------------------------------------------------
 # sharing:
 #   enabled:                            false
 #   provider:

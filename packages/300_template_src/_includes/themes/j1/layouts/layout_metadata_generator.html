@@ -79,14 +79,28 @@
   {% endif %}
 {% else %}
   {% if page.description %}
+    <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ detected content type: PAGE ] -->
     {% assign size = site.description|size %}
-    <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ SIZE of page description: {{size}} ] -->
-    {% if size >= 15 %}
-    <!-- [SEO    ] [j1.layout.meta_data_generator.html    ] [ GRATULATIONS. Your page description has more than 15 word. (Recommended: 70-160 characters  ) ] -->
+    <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ SIZE of page description: {{size}} chars ] -->
+    {% if size >= 70 %}
+    <!-- [SEO    ] [j1.layout.meta_data_generator.html    ] [ GRATULATIONS. Your page description has more than 70 characters. (Recommended: 70-160 characters) ] -->
     {% else %}
-    <!-- [SEO    ] [j1.layout.meta_data_generator.html    ] [ Consider!  to IMPROVE|INCREASE your page description ] -->
+    <!-- [SEO    ] [j1.layout.meta_data_generator.html    ] [ Consider to IMPROVE|INCREASE your page description! ] -->
     {% endif %}
     <meta name="description" content="{{page.description}}" />
+  {% elsif page.excerpt %}
+    <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ detected content type: POST ] -->
+    {% assign size = page.excerpt|size %}
+    <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ SIZE of page exerpt: {{size}} chars ] -->
+    {% if size >= 70 %}
+    <!-- [SEO    ] [j1.layout.meta_data_generator.html    ] [ GRATULATIONS. Your page description (exerpt) has more than 70 characters. (Recommended: 70-160 characters) ] -->
+    {% else %}
+    <!-- [SEO    ] [j1.layout.meta_data_generator.html    ] [ Consider to IMPROVE|INCREASE your post excerpt for a valid page description! ] -->
+    {% endif %}
+    <meta name="description" content="{{page.excerpt|strip_html}}" />
+  {% else %}
+    <!-- [WARNING] [j1.layout.meta_data_generator.html    ] [ NO page description detected ] -->
+    <!-- [SEO    ] [j1.layout.meta_data_generator.html    ] [ Consider to add a page description! ] -->
   {% endif %}
 {% endif %}
 
@@ -173,7 +187,7 @@
 {{robots_follow}}
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ meta tag for provider APIs: analytics ] -->
-{% if page.analytics %}
+{% if page.analytics and site.data.j1_config.analytics.enabled %}
   {% capture analytics %}<meta name="analytics" content="true" />{% endcapture %}
 {% else %}
   {% capture analytics %}<meta name="analytics" content="false" />{% endcapture %}
@@ -182,7 +196,7 @@
 {{analytics}}
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ meta tag for provider APIs: comments ] -->
-{% if page.comments %}
+{% if page.comments and site.data.j1_config.comments.enabled %}
   {% capture comments %}<meta name="comments" content="true" />{% endcapture %}
 {% else %}
   {% capture comments %}<meta name="comments" content="false" />{% endcapture %}
@@ -191,13 +205,22 @@
 {{comments}}
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ meta tag for provider APIs: advertising ] -->
-{% if page.advertising %}
+{% if page.advertising and site.data.j1_config.advertising.enabled %}
   {% capture advertising %}<meta name="advertising" content="true" />{% endcapture %}
 {% else %}
   {% capture advertising %}<meta name="advertising" content="false" />{% endcapture %}
 {% endif %}
 
 {{advertising}}
+
+<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ meta tag for provider APIs: advertising ] -->
+{% if page.translation and site.data.j1_config.translation.enabled %}
+  {% capture translation %}<meta name="translation" content="true" />{% endcapture %}
+{% else %}
+  {% capture translation %}<meta name="translation" content="false" />{% endcapture %}
+{% endif %}
+
+{{translation}}
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ meta tag for provider APIs: youtube ] -->
 {% if page.youtube %}

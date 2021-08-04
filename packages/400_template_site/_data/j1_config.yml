@@ -376,13 +376,17 @@ body:
 # ------------------------------------------------------------------------------
 # COMMENTS settings
 #
-# Set 'enabled' to false to turn commenting off globally
-# Set 'provider' to the comment provider you want to use
+# Set 'enabled' to false to turn off globally. Affects all pages independently
+# from what is set pagewise!
+# Set 'provider' to the provider you want to use.
+# ------------------------------------------------------------------------------
+# hyvor
+#
+#   site_id: your-website-id
 # ------------------------------------------------------------------------------
 # disqus
 #
-#   short_name: your-disqus-short-name (w/o disqus.com)
-#
+#   site_id: your-disqus-short-name
 # ------------------------------------------------------------------------------
 comments:
   enabled:                              true
@@ -400,16 +404,16 @@ comments:
     site_id:                            4612
 
   # commento:                                                                   # currently NOT supported
-  #   site_id:                            'commento-site-id'
+  #   site_id:                          'commento-site-id'
   #
   # just-comments:                                                              # currently NOT supported
-  #   site_id:                            'just-comments-site-id'
+  #   site_id:                          'just-comments-site-id'
 
   # facebook:                                                                   # currently NOT supported
-  #   appid:                              'facebook-app-id'
-  #   num_posts:                          5
-  #   width:                              580
-  #   colorscheme:                        light
+  #   appid:                            'facebook-app-id'
+  #   num_posts:                        5
+  #   width:                            580
+  #   colorscheme:                      light
 
   # custom:                                                                     # currently NOT supported
   #   custom_data:
@@ -417,8 +421,10 @@ comments:
 # ------------------------------------------------------------------------------
 # ANALYTICS settings
 #
-# Set 'enabled' to false to turn analytics off globally
-# Set 'provider' to the analytics provider you want to use
+# Set 'enabled' to false to turn off globally. Affects all pages independently
+# from what is set pagewise!
+# Set 'provider' to the provider you want to use.
+# ------------------------------------------------------------------------------
 #
 analytics:
   enabled:                              true
@@ -433,8 +439,10 @@ analytics:
 # ------------------------------------------------------------------------------
 # ADVERTISING settings
 #
-# Set 'enabled' to false to turn advertising off globally
-# Set 'provider' to the analytics provider you want to use
+# Set 'enabled' to false to turn off globally. Affects all pages independently
+# from what is set pagewise!
+# Set 'provider' to the provider you want to use.
+# ------------------------------------------------------------------------------
 #
 advertising:
   enabled:                              false
@@ -449,8 +457,10 @@ advertising:
 # ------------------------------------------------------------------------------
 # TRANSLATOR settings
 #
-# Set 'enabled' to false to turn translators off globally
-# Set 'provider' to the translation provider you want to use
+# Set 'enabled' to false to turn off globally. Affects all pages independently
+# from what is set pagewise!
+# Set 'provider' to the provider you want to use.
+# ------------------------------------------------------------------------------
 #
 translation:
   enabled:                              false
@@ -472,8 +482,10 @@ translation:
 # like, reddit buttons etc. Set 'provider' to the sharing provider you
 # want to use. Set 'provider' to false to turn sharing off globally.
 #
-# Set 'enabled' to false to turn sharing off globally
-# Set 'provider' to the sharing provider you want to use
+# Set 'enabled' to false to turn off globally. Affects all pages independently
+# from what is set pagewise!
+# Set 'provider' to the provider you want to use.
+# ------------------------------------------------------------------------------
 #
 # sharing:
 #   enabled:                            false
