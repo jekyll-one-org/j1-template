@@ -688,6 +688,10 @@ defaults:
       youtube:                          true
       vimeo:                            true
 
+      toc:                              true
+      fam_menu_id:                      page_ctrl_simple
+      scrollbar:                        false
+
       icons:
         category-icon:                  false                                   # dots-horizontal-circle
         family:                         MDI
