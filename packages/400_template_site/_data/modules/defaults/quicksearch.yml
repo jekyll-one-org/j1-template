@@ -27,7 +27,7 @@ defaults:
   enabled:                              false
   placement:                            navbar
   target:                               _blank
-  rebuild:                              true
+  rebuild:                              false
   full_index:                           true
 
   excludes:                             [

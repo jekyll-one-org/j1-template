@@ -7,8 +7,8 @@ description: >
                                         spend to share ideas and give feedback. Thank you to everyone
                                         who comments at {j1--site-name}.
 
-tags:                                   [ Legal ]
-categories:                             [ Comments, Policy ]
+categories:                             [ Site ]
+tags:                                   [ Comments, Policy ]
 
 sitemap:                                false
 robots:

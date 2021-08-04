@@ -8,8 +8,8 @@ description: >
                                         people, what companies has contributed
                                         to make a project like J1 Template real.
 
-tags:                                   [ Overview ]
-categories:                             [ Software, Platforms, Contributers ]
+categories:                             [ About ]
+tags:                                   [ J1, Template, Features ]
 
 scrollbar:                              false
 comments:                               true

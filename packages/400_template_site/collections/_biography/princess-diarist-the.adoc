@@ -13,7 +13,7 @@ book:
   ISBN13:                               9780593077566
   rank:                                 5690
 
-categories:                             [ Book, Biography ]
+categories:                             [ Collections ]
 tags:                                   [ Memoirs, Films, Actors, Science, Fiction ]
 
 regenerate:                             false

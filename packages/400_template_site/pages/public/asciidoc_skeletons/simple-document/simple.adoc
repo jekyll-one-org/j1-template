@@ -8,8 +8,8 @@ description: >
                                         is small in size. This document type does not use any
                                         (local) Asciidoc include files or attributes.
 
-categories:                             [ Asciidoc, Skeleton ]
-tags:                                   [ Knowledge, Skeleton, Document ]
+categories:                             [ Knowledge ]
+tags:                                   [ Asciidoc, Skeleton, Document ]
 
 sitemap:                                false
 advertising:                            false

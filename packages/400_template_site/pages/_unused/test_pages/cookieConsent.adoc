@@ -6,11 +6,14 @@ description: >
                                         Bootstrap Cookie Consent Module
                                         for J1 Template
 
-categories:                             [ Software ]
-tags:                                   [ Cookie, Consent ]
+categories:                             [ Testpages ]
+tags:                                   [ Example ]
 
 scrollbar:                              false
 fam_menu_id:                            default
+
+advertising:                            false
+comments:                               false
 
 permalink:                              /pages/public/cookieConsent/
 regenerate:                             true

@@ -10,8 +10,8 @@ description: >
                                         best user experience on all modern devices.
 
 
-tags:                                   [ Jekyll, Template ]
-categories:                             [ Info, Introduction ]
+categories:                             [ Info ]
+tags:                                   [ Info, Jekyll, Template ]
 
 robots:
   index:                                false

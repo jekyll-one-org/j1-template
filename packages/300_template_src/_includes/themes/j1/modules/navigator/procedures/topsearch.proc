@@ -114,8 +114,8 @@
             </p>
             <p class="result-item-text">{{description}}</p>
             <p class="result-item-text small text-muted mb-3">
-              <i class="mdi mdi-tag mdi-18px mr-1"></i><span class="sr-tags">{{#tags}} {{.}} · {{/tags}}</span>
-              <i class="mdi mdi-tag-text-outline mdi-18px mr-1 ml-2"></i><span class="sr-categories">{{#categories}} {{.}} · {{/categories}}</span>
+              <i class="mdi mdi-tag-text-outline mdi-18px mr-1"></i><span class="sr-categories">{{#categories}} {{.}} · {{/categories}}</span>
+              <i class="mdi mdi-tag mdi-18px mr-1 ml-2"></i><span class="sr-tags">{{#tags}} {{.}} · {{/tags}}</span>
             </p>
           </li>
         {{/docs}}

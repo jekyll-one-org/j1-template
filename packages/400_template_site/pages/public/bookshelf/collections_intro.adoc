@@ -10,8 +10,9 @@ description: >
                                         aren't ordered as with posts (ordered by date), but have a set relationship
                                         with one another - hence the name: collection.
 
-tags:                                   [ Collections ]
-categories:                             [ Jekyll, Configuration ]
+categories:                             [ Collections ]
+tags:                                   [ Jekyll, Configuration ]
+
 
 fam_menu_id:                            open_toc
 

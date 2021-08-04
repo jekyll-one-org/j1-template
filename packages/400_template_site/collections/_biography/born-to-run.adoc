@@ -13,7 +13,7 @@ book:
   ISBN13:                               9781471157790
   rank:                                 23
 
-categories:                             [ Book, Biography ]
+categories:                             [ Collections ]
 tags:                                   [ Memoirs, Musicians, Autobiography ]
 
 regenerate:                             false

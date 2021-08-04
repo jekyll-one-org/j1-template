@@ -3980,171 +3980,149 @@ a.md-black-darker:focus {
 
 // MD Button colors (MD main colors only)
 // -----------------------------------------------------------------------------
-
+// jadams, 2021-08-04: removed property focus
 .btn-md-red {
   background-color: $red !important;
 }
-.btn-md-red:hover,
-.btn-md-red:focus {
+.btn-md-red:hover {
   background-color: $red-800 !important;
 }
 
 .btn-md-pink {
   background-color: $pink !important;
 }
-.btn-md-pink:hover,
-.btn-md-pink:focus {
+.btn-md-pink:hover {
   background-color: $pink-800 !important;
 }
 
 .btn-md-purple {
   background-color: $purple !important;
 }
-.btn-md-purple:hover,
-.btn-md-purple:focus {
+.btn-md-purple:hover{
   background-color: $purple-800 !important;
 }
 
 .btn-md-deep-purple {
   background-color: $deep-purple !important;
 }
-.btn-md-deep-purple:hover,
-.btn-md-deep-purple:focus {
+.btn-md-deep-purple:hover {
   background-color: $deep-purple-800 !important;
 }
 
 .btn-md-indigo {
   background-color: $indigo !important;
 }
-.btn-md-indigo:hover,
-.btn-md-indigo:focus {
+.btn-md-indigo:hover {
   background-color: $indigo-800 !important;
 }
 
 .btn-md-blue {
   background-color: $blue !important;
 }
-.btn-md-blue:hover,
-.btn-md-blue:focus {
+.btn-md-blue:hover {
   background-color: $blue-800 !important;
 }
-
 .btn-md-light-blue {
   background-color: $light-blue !important;
 }
-.btn-md-light-blue:hover,
-.btn-md-light-blue:focus {
+.btn-md-light-blue:hover {
   background-color: $light-blue-800 !important;
 }
 
 .btn-md-cyan {
   background-color: $cyan !important;
 }
-.btn-md-cyan:hover,
-.btn-md-cyan:focus {
+.btn-md-cyan:hover {
   background-color: $cyan-800 !important;
 }
 
 .btn-md-teal {
   background-color: $teal !important;
 }
-.btn-md-teal:hover,
-.btn-md-teal:focus {
+.btn-md-teal:hover {
   background-color: $teal-800 !important;
 }
 
 .btn-md-green {
   background-color: $green !important;
 }
-.btn-md-green:hover,
-.btn-md-green:focus {
+.btn-md-green:hover {
   background-color: $green-800 !important;
 }
 
 .btn-md-light-green {
   background-color: $light-green !important;
 }
-.btn-md-light-green:hover,
-.btn-md-light-green:focus {
+.btn-md-light-green:hover {
   background-color: $light-green-800 !important;
 }
 
 .btn-md-lime {
   background-color: $lime !important;
 }
-.btn-md-lime:hover,
-.btn-md-lime:focus {
+.btn-md-lime:hover {
   background-color: $lime-800 !important;
 }
 
 .btn-md-yellow {
   background-color: $yellow !important;
 }
-.btn-md-yellow:hover,
-.btn-md-yellow:focus {
+.btn-md-yellow:hover {
   background-color: $yellow-800 !important;
 }
 
 .btn-md-amber {
   background-color: $amber !important;
 }
-.btn-md-amber:hover,
-.btn-md-amber:focus {
+.btn-md-amber:hover {
   background-color: $amber-800 !important;
 }
 
 .btn-md-orange {
   background-color: $orange !important;
 }
-.btn-md-orange:hover,
-.btn-md-orange:focus {
+.btn-md-orange:hover {
   background-color: $orange-800 !important;
 }
 
 .btn-md-deep-orange {
   background-color: $deep-orange !important;
 }
-.btn-md-deep-orange:hover,
-.btn-md-deep-orange:focus {
+.btn-md-deep-orange:hover {
   background-color: $deep-orange-800 !important;
 }
 
 .btn-md-brown {
   background-color: $brown !important;
 }
-.btn-md-brown:hover,
-.btn-md-brown:focus {
+.btn-md-brown:hover {
   background-color: $brown-800 !important;
 }
 
 .btn-md-grey {
   background-color: $grey !important;
 }
-.btn-md-grey:hover,
-.btn-md-grey:focus {
+.btn-md-grey:hover {
   background-color: $grey-800 !important;
 }
 
 .btn-md-blue-grey {
   background-color: $blue-grey !important;
 }
-.btn-md-blue-grey:hover,
-.btn-md-blue-grey:focus {
+.btn-md-blue-grey:hover{
   background-color: $blue-grey-800 !important;
 }
 
 .btn-md-gray {
   background-color: $grey !important;
 }
-.btn-md-gray:hover,
-.btn-md-gray:focus {
+.btn-md-gray:hover{
   background-color: $grey-800 !important;
 }
 
 .btn-md-blue-gray {
   background-color: $blue-grey !important;
 }
-.btn-md-blue-gray:hover,
-.btn-md-blue-gray:focus {
+.btn-md-blue-gray:hover {
   background-color: $blue-grey-800 !important;
 }

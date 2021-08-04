@@ -8,7 +8,7 @@ description: >
                                         For sure, there is no better place to go.
 
 categories:                             [ Knowledge ]
-tags:                                   [ Quickstart ]
+tags:                                   [ J1, Template, Quickstart ]
 
 comments:                               true
 fam_menu_id:                            page_ctrl_simple

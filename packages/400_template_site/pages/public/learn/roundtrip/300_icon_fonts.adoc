@@ -10,8 +10,8 @@ description: >
                                         loaded over the Internet using the so-called Unified OpenSource Icon
                                         Framework.
 
-categories:                             [ Icon, Module ]
-tags:                                   [ Roundtrip, Introduction ]
+categories:                             [ Roundtrip ]
+tags:                                   [ Introduction, Module, Icon, Fonts ]
 
 fam_menu_id:                            page_ctrl_simple
 

@@ -13,7 +13,7 @@ book:
   ISBN13:                               9780440212560
   rank:                                 297
 
-categories:                             [ Book, Romance ]
+categories:                             [ Collection, Books ]
 tags:                                   [ Romance, Historical, Fiction ]
 
 regenerate:                             false

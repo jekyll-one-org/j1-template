@@ -13,7 +13,7 @@ book:
   ISBN13:                               9781408707265
   rank:                                 106052
 
-categories:                             [ Book, Biography ]
+categories:                             [ Collections ]
 tags:                                   [ Memoirs, Historical, Autobiography ]
 
 regenerate:                             false

@@ -5,8 +5,8 @@ date:                                   2020-10-23 00:00:00 +100
 description: >
                                         Impressum
 
-categories:                             [ Legal ]
-tags:                                   [ Impressum, Info ]
+categories:                             [ Site ]
+tags:                                   [ Impressum ]
 
 sitemap:                                false
 robots:

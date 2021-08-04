@@ -13,7 +13,7 @@ book:
   ISBN13:                               9781473211544
   rank:                                 1305
 
-categories:                             [ Book, Fantasy ]
+categories:                             [ Collection, Books ]
 tags:                                   [ Fantasy, Thriller, Adventure, Knight ]
 
 regenerate:                             false

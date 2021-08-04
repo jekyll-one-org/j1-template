@@ -13,7 +13,7 @@ book:
   ISBN13:                               9781471156267
   rank:                                 355
 
-categories:                             [ Book, Romance ]
+categories:                             [ Collection, Books ]
 tags:                                   [ Romance, Historical, Tragic ]
 
 regenerate:                             false

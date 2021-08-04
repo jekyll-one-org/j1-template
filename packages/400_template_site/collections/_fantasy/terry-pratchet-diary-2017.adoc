@@ -13,7 +13,7 @@ book:
   ISBN13:                               9781473208339
   rank:                                 4576
 
-categories:                             [ Book, Fantasy ]
+categories:                             [ Collection, Books ]
 tags:                                   [ Fantasy, Thrillers, Adventure, Knight ]
 
 regenerate:                             false

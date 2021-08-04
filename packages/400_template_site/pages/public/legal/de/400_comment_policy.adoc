@@ -8,7 +8,7 @@ description: >
                                         Kommentar geschrieben haben.
 
 categories:                             [ Site ]
-tags:                                   [ Kommentarrichtlinie ]
+tags:                                   [ Kommentar, Richtlinie ]
 
 sitemap:                                false
 robots:

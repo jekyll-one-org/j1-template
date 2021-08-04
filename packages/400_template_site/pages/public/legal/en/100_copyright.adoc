@@ -3,10 +3,10 @@ title:                                  Copyright
 tagline:                                software and content
 date:                                   2020-10-23 00:00:00 +100
 description: >
-                                        Copyright for Software and Content
+                                        Copyright policy for Software and Content
 
-categories:                             [ Legal ]
-tags:                                   [ License, Copyright ]
+categories:                             [ Site ]
+tags:                                   [ Copyright ]
 
 sitemap:                                false
 robots:
@@ -64,7 +64,7 @@ endif::[]
 // -----------------------------------------------------------------------------
 
 
-== Copyright
+== Copyright policy
 
 The content and works published on this website are governed by the copyright
 laws of Germany. Any duplication, processing, distribution, or any form of
