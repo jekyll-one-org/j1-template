@@ -34,7 +34,7 @@ settings:
   stopwords_locale:                     en
   min_length:                           3
 
-  excludes:                             [ /pages/public/blog/**, /pages/public/skeleton/** ]
+  excludes:                             [ /pages/public/blog/*, /pages/public/skeleton/* ]
 
 # ------------------------------------------------------------------------------
 # END config
