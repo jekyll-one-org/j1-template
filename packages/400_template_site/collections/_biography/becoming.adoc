@@ -13,7 +13,7 @@ book:
   ISBN13:                               978-3-442-31487-4
   rank:                                 817
 
-categories:                             [ Collections ]
+categories:                             [ Collection, Books ]
 tags:                                   [ Memoirs, Political, Journalism ]
 
 regenerate:                             false

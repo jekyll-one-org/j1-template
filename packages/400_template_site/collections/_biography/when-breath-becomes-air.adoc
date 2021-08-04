@@ -13,7 +13,7 @@ book:
   ISBN13:                               9781847923677
   rank:                                 40
 
-categories:                             [ Collections ]
+categories:                             [ Collection, Books ]
 tags:                                   [ Memoirs, Neurosurgery, Life, Doctor ]
 
 regenerate:                             false

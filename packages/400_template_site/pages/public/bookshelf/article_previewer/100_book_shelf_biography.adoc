@@ -2,6 +2,11 @@
 title:                                  Biography
 tagline:                                Today's People in the Book Shelf
 date:                                   2020-11-03 00:00:00 +100
+description: >
+                                        Today's People in the Book Shelf
+
+categories:                             [ Collection, Template ]
+tags:                                   [ Books ]
 
 permalink:                              /pages/public/collections/bookshelf/biography/
 regenerate:                             false
