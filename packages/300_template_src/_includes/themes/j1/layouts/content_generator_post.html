@@ -82,10 +82,10 @@
       {% include {{pager}} %}
       <div class="post-headline mt-4">
         {% if language == "en" %}
-          <h2 class="notoc">{{ page.date | localize: "%Y %B, %e" }}</h2>
+          <h1 class="notoc">{{ page.date | localize: "%Y %B, %e" }}</h1>
         {% endif %}
         {% if language == "de" %}
-          <h2 class="notoc">{{ page.date | localize: "%-d. %B %Y" }}</h2>
+          <h1 class="notoc">{{ page.date | localize: "%-d. %B %Y" }}</h1>
         {% endif %}
       </div>
 
