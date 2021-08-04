@@ -34,7 +34,8 @@ settings:
   stopwords_locale:                     en
   min_length:                           3
 
-  excludes:                             [ /pages/public/blog/*, /pages/public/skeleton/* ]
+  # currently NOT supported, use pagewise exclude_from_search: true|false
+  # excludes:                             [ /pages/public/blog/*, /pages/public/skeleton/* ]
 
 # ------------------------------------------------------------------------------
 # END config

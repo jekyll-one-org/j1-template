@@ -1,5 +1,6 @@
 ---
 regenerate:                             false
+exclude_from_search:                    true
 ---
 
 {% capture cache %}

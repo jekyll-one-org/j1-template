@@ -594,6 +594,7 @@ defaults:
         index:                          false
         follow:                         false
 
+      exclude_from_search:              false
       personalization:                  false
 
       analytics:                        true
@@ -637,6 +638,7 @@ defaults:
         index:                          false
         follow:                         false
 
+      exclude_from_search:              false
       personalization:                  false
 
       analytics:                        true
@@ -680,6 +682,7 @@ defaults:
         index:                          false
         follow:                         false
 
+      exclude_from_search:              false
       personalization:                  false
 
       analytics:                        true
@@ -717,6 +720,7 @@ defaults:
         index:                          false
         follow:                         false
 
+      exclude_from_search:              false
       personalization:                  false
 
       analytics:                        true
@@ -762,6 +766,7 @@ defaults:
 
       sitemap:                          false
 
+      exclude_from_search:              false
       personalization:                  false
 
       analytics:                        false
@@ -787,6 +792,7 @@ defaults:
 
       sitemap:                          false
 
+      exclude_from_search:              false
       personalization:                  false
 
       analytics:                        false
@@ -816,6 +822,7 @@ defaults:
 
       sitemap:                          false
 
+      exclude_from_search:              false
       personalization:                  false
 
       analytics:                        false
@@ -845,6 +852,7 @@ defaults:
 
       sitemap:                          false
 
+      exclude_from_search:              false
       personalization:                  false
 
       analytics:                        false
