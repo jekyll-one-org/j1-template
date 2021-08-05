@@ -397,11 +397,11 @@ comments:
     en:                                 Leave a comment
     de:                                 Kommentieren
 
-  disqus:
-    site_id:                            jekyll-one
-
   hyvor:
     site_id:                            4612
+
+  disqus:
+    site_id:                            '<your-site-short-name>'                # jekyll-one
 
   # commento:                                                                   # currently NOT supported
   #   site_id:                          'commento-site-id'

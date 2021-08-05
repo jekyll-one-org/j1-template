@@ -427,6 +427,7 @@ comments:
 # ------------------------------------------------------------------------------
 analytics:
   enabled:                              false
+
   provider:                             google
 
   google:
@@ -444,9 +445,12 @@ analytics:
 # ------------------------------------------------------------------------------
 advertising:
   enabled:                              false
+
   provider:                             google
+
   google:
     publisher_id:                       '<your-publisher-id>'
+    
   custom:
     custom_data:
 

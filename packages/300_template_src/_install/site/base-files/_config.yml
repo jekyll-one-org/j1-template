@@ -598,6 +598,7 @@ defaults:
         follow:                         false
 
       personalization:                  false
+      exclude_from_search:              false
 
       analytics:                        true
       comments:                         true
@@ -641,6 +642,7 @@ defaults:
         follow:                         false
 
       personalization:                  false
+      exclude_from_search:              false
 
       analytics:                        true
       comments:                         true
@@ -684,6 +686,7 @@ defaults:
         follow:                         false
 
       personalization:                  false
+      exclude_from_search:              false
 
       analytics:                        true
       comments:                         true
@@ -717,6 +720,7 @@ defaults:
         follow:                         false
 
       personalization:                  false
+      exclude_from_search:              false
 
       analytics:                        true
       comments:                         false
@@ -760,12 +764,14 @@ defaults:
         follow:                         false
 
       personalization:                  false
+      exclude_from_search:              false
 
       analytics:                        false
       comments:                         false
       advertising:                      false
       youtube:                          false
       vimeo:                            false
+
 
 # ==============================================================================
 # 6. LAYOUT configuration

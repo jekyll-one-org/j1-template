@@ -8,10 +8,12 @@ description: >
 categories:                             [ Site ]
 tags:                                   [ Privatsphäre ]
 
-sitemap:                                false
 robots:
   index:                                false
   follow:                               false
+
+sitemap:                                false
+exclude_from_search:                    true
 
 fam_menu_id:                            page_ctrl_simple
 scrollbar:                              false

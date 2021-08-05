@@ -595,6 +595,7 @@ defaults:
         follow:                         false
 
       personalization:                  false
+      exclude_from_search:              false
 
       analytics:                        true
       comments:                         true
@@ -638,6 +639,7 @@ defaults:
         follow:                         false
 
       personalization:                  false
+      exclude_from_search:              false
 
       analytics:                        true
       comments:                         true
@@ -681,6 +683,7 @@ defaults:
         follow:                         false
 
       personalization:                  false
+      exclude_from_search:              false
 
       analytics:                        true
       comments:                         true
@@ -714,6 +717,7 @@ defaults:
         follow:                         false
 
       personalization:                  false
+      exclude_from_search:              false
 
       analytics:                        true
       comments:                         false
@@ -756,9 +760,8 @@ defaults:
         index:                          false
         follow:                         false
 
-      sitemap:                          false
-
       personalization:                  false
+      exclude_from_search:              false
 
       analytics:                        false
       comments:                         false
@@ -766,93 +769,7 @@ defaults:
       youtube:                          false
       vimeo:                            false
 
-  # ----------------------------------------------------------------------------
-  # Biography (Book Shelf)
-  #
-  - scope:
-      type:                             biography
-      path:                             collections/_biography
-
-    values:
-      layout:                           collection
-      author:                           J1 Team
-
-      robots:
-        index:                          false
-        follow:                         false
-
-      sitemap:                          false
-
-      personalization:                  false
-
-      analytics:                        false
-      comments:                         false
-      advertising:                      false
-      youtube:                          false
-      vimeo:                            false
-
-      toc:                              false
-      fam_menu_id:                      default
-      scrollbar:                        false
-
-  # ----------------------------------------------------------------------------
-  # Fantasy (Book Shelf)
-  #
-  - scope:
-      type:                             fantasy
-      path:                             collections/_fantasy
-
-    values:
-      layout:                           collection
-      author:                           J1 Team
-
-      robots:
-        index:                          false
-        follow:                         false
-
-      sitemap:                          false
-
-      personalization:                  false
-
-      analytics:                        false
-      comments:                         false
-      advertising:                      false
-      youtube:                          false
-      vimeo:                            false
-
-      toc:                              false
-      fam_menu_id:                      default
-      scrollbar:                        false
-
-  # ----------------------------------------------------------------------------
-  # Romance (Book Shelf)
-  #
-  - scope:
-      type:                             romance
-      path:                             collections/_romance
-
-    values:
-      layout:                           collection
-      author:                           J1 Team
-
-      robots:
-        index:                          false
-        follow:                         false
-
-      sitemap:                          false
-
-      personalization:                  false
-
-      analytics:                        false
-      comments:                         false
-      advertising:                      false
-      youtube:                          false
-      vimeo:                            false
-
-      toc:                              false
-      fam_menu_id:                      default
-      scrollbar:                        false
-
+  
 # ==============================================================================
 # 6. LAYOUT configuration
 #

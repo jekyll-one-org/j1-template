@@ -159,7 +159,7 @@ template:
 #   values:                             HTML doc types
 #   default:                            html
 #
-language:                               de
+language:                               en
 coding:                                 UTF-8
 doctype:                                html
 
@@ -594,7 +594,6 @@ defaults:
         index:                          false
         follow:                         false
 
-      exclude_from_search:              false
       personalization:                  false
 
       analytics:                        true
@@ -638,7 +637,6 @@ defaults:
         index:                          false
         follow:                         false
 
-      exclude_from_search:              false
       personalization:                  false
 
       analytics:                        true
@@ -682,7 +680,6 @@ defaults:
         index:                          false
         follow:                         false
 
-      exclude_from_search:              false
       personalization:                  false
 
       analytics:                        true
@@ -690,10 +687,6 @@ defaults:
       advertising:                      false
       youtube:                          true
       vimeo:                            true
-
-      toc:                              true
-      fam_menu_id:                      page_ctrl_simple
-      scrollbar:                        false
 
       icons:
         category-icon:                  false                                   # dots-horizontal-circle
@@ -720,7 +713,6 @@ defaults:
         index:                          false
         follow:                         false
 
-      exclude_from_search:              false
       personalization:                  false
 
       analytics:                        true
@@ -766,7 +758,6 @@ defaults:
 
       sitemap:                          false
 
-      exclude_from_search:              false
       personalization:                  false
 
       analytics:                        false
@@ -792,7 +783,6 @@ defaults:
 
       sitemap:                          false
 
-      exclude_from_search:              false
       personalization:                  false
 
       analytics:                        false
@@ -822,7 +812,6 @@ defaults:
 
       sitemap:                          false
 
-      exclude_from_search:              false
       personalization:                  false
 
       analytics:                        false
@@ -852,7 +841,6 @@ defaults:
 
       sitemap:                          false
 
-      exclude_from_search:              false
       personalization:                  false
 
       analytics:                        false
