@@ -52,8 +52,14 @@ sitemap:                                false
 
 {% capture brand_image %}{{images_dir}}/{{brand_image_source}}{% endcapture %}
 
-{% if language != 'en' or language != 'de' %}
-  {% assign language          = 'en' %}
+{% comment %} language detection
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if site.language == "en" %}
+  {% assign language = "en" %}
+{% elsif site.language == "de"%}
+  {% assign language = "de" %}
+{% else %}
+  {% assign language = "en" %}
 {% endif %}
 
 {% if language == 'en' %}
