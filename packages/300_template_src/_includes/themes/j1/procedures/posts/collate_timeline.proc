@@ -77,6 +77,8 @@
     <!-- Use custom collator -->
     {% include themes/{{site.template.name}}/procedures/custom/posts_collate %}
   {% else %}
+    {% comment %} NOTE: header_title NOT used
+    ---------------------------------------------------------------------------- {% endcomment %}
     <!-- Use j1 blog timeline collator -->
     {% if header_title %}
     <div class="row timeline-header-box">
@@ -107,14 +109,14 @@
 
       <li class="{{blog_position}}">
         <div class="timeline-badge"><i class="tmicon rounded-x hidden-xs"></i></div>
-
         <div class="card raised-z5 timeline-panel">
 
+          {% comment %} jadams, 2021-08-05:
+          NOTE: Changed headerlevel form h3 -> h2
+          ---------------------------------------------------------------------- {% endcomment %}
           <!-- div class="timeline-title" -->
           <div class="card-header bg-primary pt-4 pb-3">
-            <!-- a href="{{post.url}}" -->
-              <h3 id="{{1000000 | rand}}" class="md-white">{{post.title}}</h3>
-            <!-- /a -->
+            <h2 id="{{1000000 | rand}}" class="md-white">{{post.title}}</h2>
           </div>
 
           <!-- Collect icon data from frontmatter -->
