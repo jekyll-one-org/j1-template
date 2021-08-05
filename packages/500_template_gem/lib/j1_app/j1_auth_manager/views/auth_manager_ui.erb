@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <title>AuthManager</title>
+    <meta name="description" content="J1 Template AuthManager">
+    <meta name="author" content="jekyll.one">
+
+    <!-- Loaded J1|CSS resources -->
+    <link rel="stylesheet" type="text/css" href="/assets/themes/j1/core/css/uno.min.css">
+    <link rel="stylesheet" type="text/css" href="/assets/themes/j1/core/css/vendor.min.css">
+    <!-- Loaded J1|JS resources -->
+    <script src="/assets/themes/j1/modules/jquery/js/jquery.min.js"></script>
+    <script src="/assets/themes/j1/modules/popper/js/popper.min.js"></script -->
+    <script src="/assets/themes/j1/modules/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/themes/j1/modules/util/js/log4javascript.js"></script>
+    <script src="/assets/themes/j1/modules/util/js/js.cookie.js"></script>
+  </head>
+
+  <body class="r-text-300">
+
+    <!-- Modal Central Success -->
+    <div id="centralModalInfo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-frame modal-top modal-notify modal-<%= @info_type %>" role="document">
+        <!-- Content -->
+        <div class="modal-content">
+          <!--Header-->
+          <div class="modal-header">
+            <p class="lead">
+              <i class="mdi mdi-2x mdi-dark mdi-<%= @modal_icon %>"></i>
+              <%= @modal_title %></p>
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <i class="mdi mdi-dark mdi-48px mdi-close"></i>
+            </button> -->
+          </div>
+          <!-- Body -->
+          <div class="modal-body">
+            <div class="text-center">
+              <p style="text-align: justify"><%= @modal_description %></p>
+            </div>
+          </div>
+          <!-- Footer -->
+          <div class="modal-footer justify-content-center">
+            <a type="button" id="okButton" class="btn btn btn-raised btn-flex btn-md btn-primary" data-dismiss="modal"><%= @modal_ok_text %></a>
+          </div>
+        </div>
+        <!-- END Content -->
+      </div>
+    </div>
+    <!-- END Central Success -->
+
+    <!-- Modal TopInfo -->
+    <div id="topInfo" class="modal fade top" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="false">
+      <div class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
+        <!-- Content -->
+        <div class="modal-content">
+
+          <!-- Body -->
+          <div class="modal-body">
+            <div class="row px-4">
+              <p class="pt-1 pr-2"><%= @modal_description %></p>
+            </div>
+            <div class="row px-4">
+              <a type="button" id="okButton" class="btn btn btn-raised btn-flex btn-md btn-primary" data-dismiss="modal"><%= @modal_ok_text %></a>
+            </div>
+          </div> <!-- END Body -->
+
+        </div>
+        <!-- END Content -->
+      </div>
+    </div>
+    <!-- END Modal TopInfo -->
+
+    <!-- Modal SignInProtectedContent -->
+    <div id="signInProtectedContent" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
+        <!-- Content -->
+        <div class="modal-content">
+
+          <!--Header-->
+          <div class="modal-header">
+            <p class="lead">
+              <i class="mdi mdi-2x mdi-dark mdi-account"></i>
+              <%= @modal_title %>
+            </p>
+            <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <i class="mdi mdi-dark mdi-48px mdi-close"></i>
+            </button> -->
+          </div>
+
+          <!-- Body -->
+          <div class="modal-body">
+            <div class="text-center">
+              <p style="text-align: justify"><%= @modal_description %></p>
+            </div>
+            <!-- img src="<%= @modal_image %>" alt="<%= @modal_title %>" class="img-fluid" -->
+          </div>
+
+          <!-- Footer -->
+          <div class="modal-footer justify-content-center">
+            <a type="button" id="signInButton" class="btn btn btn-raised btn-flex btn-md btn-primary mr-3" data-dismiss="modal">
+              <i class="mdi mdi-18px mdi-dark mdi-login"></i>
+              <%= @modal_agreed_text %>
+            </a>
+            <a type="button" id="exitButton" class="btn btn btn-raised btn-flex btn-md btn-secondary" data-dismiss="modal">
+              <i class="mdi mdi-18px mdi-dark mdi-close"></i>
+              <%= @modal_disagreed_text %>
+            </a>
+          </div>
+
+        </div> <!-- END Content -->
+      </div>
+    </div>
+    <!-- END Modal SignInProtectedContent -->
+
+  </body>
+
+  <!-- Dialog (modal) management
+  ------------------------------------------------------------------------------ -->
+  <script>
+    // -------------------------------------------------------------------------
+    // globals
+    // -------------------------------------------------------------------------
+    // const cookie_names  = j1.getCookieNames();
+    var environment                 = '{{environment}}';
+    var page_id                     = 'j1app1234567';                                      // j1.generateId(12);                                    // uuid().slice(25, 37);
+    var j1_mw_auth_mgr_api_validate = log4javascript.getLogger('j1.mw.auth_mgr.api.validate');
+    var payloadURL                  = 'http://localhost:5000/log2disk?request=write';
+    var allModalButtons             = document.querySelectorAll('a.btn');                   // Collect $.selectors for all dialog (modal) buttons
+    var log2disk;
+    var ajaxAppender;
+    var consoleAppender;
+    var jsonLayout;
+    var httpPostDataLayout;
+    var patternLayout;
+    var logText;
+
+    // -------------------------------------------------------------------------
+    // helper functions
+    // -------------------------------------------------------------------------
+
+    // -------------------------------------------------------------------------
+    // getCustomData
+    // throw a 'fake' exception to retrieve the stack trace and analyze
+    // to find the line from which this function was called
+    // -------------------------------------------------------------------------
+    var getCustomData = function(layout, loggingReference) {
+      var customData = [];
+
+      try {(0)()} catch (e) {
+        var pattern = /^(.+?) ?\(?((?:file|https?|chrome-extension):.*?):(\d+)(?::(\d+))?\)?\s*$/ig;
+        // Split the stack trace
+        var output = e.stack.replace(/^.*?\n/,'').replace(/(?:\n@:0)?\s+$/m,'').replace(/^\(/gm,'{anon}(').split('\n');
+        // The last trace in the array is the line this function was called
+        var logger_trace = output.pop();
+        // Extract the full path:line number from this trace
+        var path = logger_trace.replace(pattern, '$2:$3');
+        // Extract the filename and line number from this trace
+        var logger_location = logger_trace.split(':');
+        var file = logger_location[logger_location.length - 3];
+        var splitString = file.split('/');
+        // The filename is (in array) at position length - 1
+        file = splitString[splitString.length - 1];
+        // If no file(name) found in the array, the file is the index document
+        if (file == '') file = '(index)';
+        var line = logger_location[logger_location.length - 2];
+        // Push resulting fields on an Object|Array to identify
+        // the first custom field (%f{1}) by index [0]
+        customData.push( { 'name':  'file', 'value':file } );
+        customData.push( { 'name':  'line', 'value': line } );
+        customData.push( { 'name':  'path', 'value': path } );
+        customData.push( { 'name':  'id',   'value': page_id } );
+      }
+
+      // set all custom fields > %f{1}
+      for (var i = 1, len = layout.customFields.length; i < len; i++) {
+        var name = layout.customFields[i].name;
+        if (customData[i].value) layout.customFields[i].value = customData[i].value;
+      }
+
+      // return custom field %f{1}
+      return customData[0].value
+    }
+
+    // -------------------------------------------------------------------------
+    // setup appenders
+    // -------------------------------------------------------------------------
+
+    // consoleAppender (browser console)
+    // -------------------------------------------------------------------------
+    consoleAppender = new log4javascript.BrowserConsoleAppender();
+    consoleAppender.setThreshold(log4javascript.Level.DEBUG);
+
+    // ajaxAppender (XHR)
+    ajaxAppender = new log4javascript.AjaxAppender(payloadURL);                 // HTTP POST log data on the utility server (write log to disk)
+    ajaxAppender.setThreshold(log4javascript.Level.DEBUG);
+  	ajaxAppender.setWaitForResponse(true);
+    ajaxAppender.setSendAllOnUnload(true);
+
+    // -------------------------------------------------------------------------
+    // setup layouts
+    // -------------------------------------------------------------------------
+    patternLayout       = new log4javascript.PatternLayout('[%d{HH:mm:ss.SSS}] [%f{4}] [%-5p] [%-40c] [%f{1}:%f{2}] %m%n[%f{3}]');
+    httpPostDataLayout  = new log4javascript.HttpPostDataLayout();
+
+    // Use the method getLineNumber() as the value for the 0th custom field
+    patternLayout.setCustomField('file',      getCustomData);
+    patternLayout.setCustomField('line',      getCustomData);
+    patternLayout.setCustomField('path',      getCustomData);
+    patternLayout.setCustomField('id',        getCustomData);
+
+    httpPostDataLayout.setCustomField('id',   page_id);
+
+    consoleAppender.setLayout(patternLayout);
+    ajaxAppender.setLayout(httpPostDataLayout);
+
+    // -------------------------------------------------------------------------
+    // setup (root) logger
+    // -------------------------------------------------------------------------
+    log4javascript.getRootLogger().addAppender(consoleAppender);
+    log4javascript.getRootLogger().addAppender(ajaxAppender);
+    log4javascript.getLogger('j1').setLevel(log4javascript.Level.DEBUG);
+
+    // -------------------------------------------------------------------------
+    // Initialize ACTION objects ALL modals
+    // -------------------------------------------------------------------------
+    var signIn = {
+      provider: '<%= @provider %>',
+      do:       'disabled'
+    }
+    var passBack = {
+      provider: '<%= @provider %>',
+      do:       'disabled'
+    }
+
+    // Present dialog (modal)
+    // -------------------------------------------------------------------------
+    $(window).on('load', function() {
+      $('#<%= @modal %>').modal('show')
+    });
+
+    // -------------------------------------------------------------------------
+    // eventHandler ALL modals
+    // -------------------------------------------------------------------------
+
+    // Manage PRE SHOW events
+    // -------------------------------------------------------------------------
+    $(document).on('show.bs.modal','#<%= @modal %>', function () {
+      // j1_mw_auth_mgr_api_validate.info('entered modal SHOW from <%= @modal %>');
+    });
+
+    // Manage POST SHOW events (button click events)
+    // -------------------------------------------------------------------------
+    $(document).on('shown.bs.modal','#<%= @modal %>', function () {
+      j1_mw_auth_mgr_api_validate.info('entered modal SHOWN from <%= @modal %>');
+
+      allModalButtons.forEach(function(button, index) {
+        button.addEventListener('click', function() {
+
+          // check buttons|actions
+          // -----------------------------------------------------------------
+          if (this.id === 'okButton') {
+            // Modal topInfo|centralModalInfo
+            // -----------------------------------------------------------------
+            j1_mw_auth_mgr_api_validate.info('clicked OK button on modal: <%= @modal %>');
+            passBack.do = true;
+          } else if (this.id === 'signInButton') {
+            // Modal SignInProtectedContent, signIn accepted
+            // -----------------------------------------------------------------
+            j1_mw_auth_mgr_api_validate.info('user clicked signInButton button on modal: <%= @modal %>');
+            signIn.do = true;
+          } else if (this.id === 'exitButton') {
+            // Modal SignInProtectedContent, signIn declined
+            // -----------------------------------------------------------------
+            j1_mw_auth_mgr_api_validate.info('user clicked exitButton button on modal: <%= @modal %>');
+            signIn.do = false;
+          } else {
+            // NO button clicked on ANY modal
+            // -----------------------------------------------------------------
+            j1_mw_auth_mgr_api_validate.info('user clicked NO button on modal: <%= @modal %>');
+            j1_mw_auth_mgr_api_validate.info('set default action on modal <%= @modal %> to: passBack');
+            passBack.do = true;
+          }
+
+        });
+      });
+
+      return;
+    });
+
+    // -------------------------------------------------------------------------
+    // actionHandler ALL modals (HIDDEN event)
+    // process action objects
+    // -------------------------------------------------------------------------
+    // $(document).on('hide.bs.modal','#<%= @modal %>', function () {
+    $(document).on('hidden.bs.modal','#<%= @modal %>', function () {
+      var pagePermission            = 'disabled';
+      var currentPagePermission     = 'disabled';
+      var categoryAllowed           = false;
+      var pageAccessAllowed         = false;
+      var currentPageAccessAllowed  = false;
+      var providerPermissions       = [];
+//    var user_session              = j1.readCookie(cookie_names.user_session);
+      var user_session              = 'j1.user.session';
+
+      data_json     = window.atob(Cookies.get(user_session));
+      user_session  = JSON.parse(data_json);
+
+      providerPermissions = user_session.provider_permissions;
+
+      j1_mw_auth_mgr_api_validate.info('entered modal HIDDEN from <%= @modal %>');
+      j1_mw_auth_mgr_api_validate.info('current page detected as: ' + user_session.current_page);
+      j1_mw_auth_mgr_api_validate.info('previous page detected as: ' + user_session.previous_page);
+      j1_mw_auth_mgr_api_validate.info('requested page detected as: ' + user_session.requested_page);
+
+      if (providerPermissions.indexOf('public') > -1) {
+        j1_mw_auth_mgr_api_validate.info('current provider permissions contains: public');
+      } else {
+        j1_mw_auth_mgr_api_validate.info('add missing provider permission: public');
+        providerPermissions.push('public');
+      }
+
+      if (user_session.requested_page === '/') {
+        pagePermission = 'public';
+      } else if (user_session.requested_page.indexOf('public') > -1) {
+        pagePermission = 'public';
+      } else if (user_session.requested_page.indexOf('protected') > -1) {
+        pagePermission = 'protected';
+      } if (user_session.requested_page.indexOf('private') > -1) {
+        pagePermission = 'private';
+      }
+
+      // Additional checks if the page permission for a current_page is valid.
+      // In some cases, the current_page has invalid permission (???).
+      // To prevent dead loop situations the current_page is
+      // checked|corrected as well
+      // -----------------------------------------------------------------------
+      if (user_session.current_page.indexOf('protected') > -1) {
+          currentPagePermission = 'protected';
+      } if (user_session.current_page.indexOf('private') > -1) {
+          currentPagePermission = 'private';
+      } else {
+          currentPagePermission = 'public';
+      }
+
+      currentPageAccessAllowed  = providerPermissions.includes(currentPagePermission);
+      user_session.current_page = currentPageAccessAllowed ? user_session.current_page : '/';
+      if (!currentPageAccessAllowed) {
+          j1_mw_auth_mgr_api_validate.warn('modified current_page to: /');
+      }
+
+      categoryAllowed = providerPermissions.includes(pagePermission);
+      pageAccessAllowed = categoryAllowed && user_session.authenticated === 'true' ? true : false;
+
+      j1_mw_auth_mgr_api_validate.info('current page: ' + user_session.current_page);
+      j1_mw_auth_mgr_api_validate.info('requested page: ' + user_session.requested_page);
+      j1_mw_auth_mgr_api_validate.info('page permissions detected for current_page: ' + currentPageAccessAllowed);
+      j1_mw_auth_mgr_api_validate.info('page permissions detected for requested_page: ' + pagePermission);
+      j1_mw_auth_mgr_api_validate.info('provider permissions detected for requested_page: ' + providerPermissions);
+      j1_mw_auth_mgr_api_validate.info('category allowed for requested_page: ' + categoryAllowed);
+      j1_mw_auth_mgr_api_validate.info('page access allowed for requested_page: ' + pageAccessAllowed);
+      j1_mw_auth_mgr_api_validate.info('user authenticated: ' + user_session.authenticated);
+
+      // Manage actions
+      // -----------------------------------------------------------------------
+      if (signIn.do == true) {
+        // pass to authentication
+        route = "<%= @route %>"
+      } else if (signIn.do == false) {
+        // pass to (unchanged) current page
+        // route = user_session.current_page;
+        route = pageAccessAllowed ? user_session.requested_page : user_session.current_page;
+      } else if (passBack.do == true) {
+        // calculate possible route to pass
+        route = pageAccessAllowed ? user_session.requested_page : user_session.current_page;
+      } else {
+        // Modal closed w/o clear action, default route calculated|taken
+        j1_mw_auth_mgr_api_validate.warn('no action detected');
+        route = pageAccessAllowed ? user_session.requested_page : user_session.current_page;
+      }
+
+      // Redirect detected route
+      // -----------------------------------------------------------------------
+      j1_mw_auth_mgr_api_validate.info('redirect, pass to route: ' + route);
+      location.replace(route);
+
+    });
+  </script>
+
+</html>
