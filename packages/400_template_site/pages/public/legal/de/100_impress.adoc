@@ -71,26 +71,20 @@ endif::[]
 
 
 ifeval::[{eu-region} == true]
-.Postal address
+.Postanschrift
 ----
-  Jürgen Adams
-
-  Erasmusstrasse 28
-  40223 Düsseldorf
+  <ihre-post-anschrift>
 ----
 endif::[]
 
-.Contact
+.Kontakt
 ----
-  webmaster@digitization.one
+  webmaster@<ihr-mail-server.domain>
 ----
 
 ifeval::[{eu-region} == true]
-.Responsible for the content according to § 55 Abs. 2 RStV:
+.Verantwortlich im Sinne von § 55 Abs. 2 RStV:
 ----
-  Jürgen Adams
-
-  Erasmusstrasse 28
-  40223 Düsseldorf
+  <ihre-post-anschrift>
 ----
 endif::[]

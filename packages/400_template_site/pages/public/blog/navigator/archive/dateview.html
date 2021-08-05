@@ -140,7 +140,7 @@ site_category_word_list:    {{site_category_word_list | debug}}
   {% endif %}
 
   <div class="post-headline">
-    <h2 id="post-headline" class="mt-5">{{view_headline}}</h2>
+    <h1 id="post-headline notoc" class="mt-5">{{view_headline}}</h1>
   </div>
   {% assign openList = '<ul class="list-unstyled link-news">' %}
   {% assign closeList = '</ul>' %}
@@ -152,19 +152,19 @@ site_category_word_list:    {{site_category_word_list | debug}}
     {% capture monthHead %}
       {% if month != nmonth %}
       {% if forloop.index != 1  %}{{closeList}}{%endif %}
-      <h3 id="{{100000|rand}}" class="toc-link mt-5 mb-3">
+      <h2 id="{{100000|rand}}" class="toc-link mt-5 mb-3">
         {% comment %}
         ------------------------------------------------------------------------
         {% if year != nyear %}
-        <a href="#" id="{{post.date|date:'%Y'}}">
+        <a href="#" id="{{post.date|localize: "%Y"}}">
         {% else %}
-        <a href="#" id="{{post.date|date:'%Y-%m' }}">
+        <a href="#" id="{{post.date|localize: "%Y-%m" }}">
         {% endif %}
         ------------------------------------------------------------------------ {% endcomment %}
         <i class="mdi mdi-calendar-blank"></i>
-        {{post.date|date:'%B %Y'}}
+        {{post.date|localize:'%B %Y'}}
         </a>
-      </h3>
+      </h2>
       {{openList}}
       {% endif %}
     {% endcapture %}
@@ -180,7 +180,7 @@ site_category_word_list:    {{site_category_word_list | debug}}
       {% assign excerpt = post.excerpt|truncatewords:truncate_words|replace:'...',' ...'|strip_html|strip_newlines|strip %}
       <li>
         <article class="card raised-z3 mb-5">
-          <h4 id="{{100000|rand}}" class="card-header bg-primary">{{post.title}}</h4>
+          <h3 id="{{100000|rand}}" class="card-header bg-primary">{{post.title}}</h3>
           <div class="row mx-0">
 
             <!-- [INFO   ] [j1.pages.blog.navigator.archive          ] [Check if post image is available] -->
@@ -203,10 +203,10 @@ site_category_word_list:    {{site_category_word_list | debug}}
                   <hr class="my-3">
                   {% if post.date %}
                     {% if language == "en" %}
-                      <i class="mdi mdi-calendar-blank md-grey-600 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
+                      <i class="mdi mdi-calendar-blank md-grey-600 mr-1"></i>{{post.date|localize: "%Y %B, %e"}}
                     {% endif %}
                     {% if language == "de" %}
-                      <i class="mdi mdi-calendar-blank md-grey-600 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
+                      <i class="mdi mdi-calendar-blank md-grey-600 mr-1"></i>{{post.date|localize: "%-d. %B %Y"}}
                     {% endif %}
                   {% endif %}
                   {% if likes_count %}

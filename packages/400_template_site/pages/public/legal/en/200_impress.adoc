@@ -69,7 +69,7 @@ endif::[]
 ifeval::[{eu-region} == true]
 .Postal address
 ----
-<your-postal-address>
+  <your-postal-address>
 ----
 endif::[]
 
@@ -81,6 +81,6 @@ endif::[]
 ifeval::[{eu-region} == true]
 .Responsible for the content according to § 55 Abs. 2 RStV:
 ----
-<responsbile-postal-address>
+  <responsbile-postal-address>
 ----
 endif::[]

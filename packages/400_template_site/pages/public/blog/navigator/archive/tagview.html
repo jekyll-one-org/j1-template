@@ -164,7 +164,10 @@ site_category_word_list:    {{site_category_word_list | debug}}
   <div class="view-description">{{view_description_text}}</div>
   {% endif %}
 
-  <div class="post-headline"> <h2 id="post-headline" class="mt-5">Posts By Tag</h2></div>
+  <div class="post-headline">
+    <h1 id="post-headline notoc" class="mt-5">Posts By Tag</h1>
+  </div>
+
   {% assign letter_group = letter_group_array[letter_group_counter] %}
 
   {% for item in (0..site.tags.size) %}{% unless forloop.last %}
@@ -185,7 +188,7 @@ site_category_word_list:    {{site_category_word_list | debug}}
       --------------------------------------------------------------------------
       <!-- jadams, 2018-01-17: logic seems NOT work. Disabled. -->
       {% if letter_group_written == false %}
-        <h3 id="id_{{letter_group}}" class="toc-link mt-5 mb-5"><a alt="Back to top" href="#"><i class="fa fa-tags mr-2"></i></a>{{letter_group | upcase}}</h3>
+        <h2 id="id_{{letter_group}}" class="toc-link mt-5 mb-5"><a alt="Back to top" href="#"><i class="fa fa-tags mr-2"></i></a>{{letter_group | upcase}}</h2>
         {% assign letter_group_written = true %}
       {% endif %}
       -------------------------------------------------------------------------- {% endcomment %}
@@ -197,11 +200,11 @@ site_category_word_list:    {{site_category_word_list | debug}}
                     Added workaround by checking if letter_group has a value
       -------------------------------------------------------------------------- {% endcomment %}
       {% if letter_group %}
-      <h3 id="id_{{letter_group}}" class="toc-link mb-3">
+      <h2 id="id_{{letter_group}}" class="toc-link mb-3">
         <a alt="Back to top" href="#">
           <i class="fa fa-tags mr-2"></i>
         </a>{{letter_group | upcase}}
-      </h3>
+      </h2>
       {% endif %}
       {% assign letter_group_written = true %}
     {% endif %}
@@ -212,7 +215,7 @@ site_category_word_list:    {{site_category_word_list | debug}}
     first_letter: {{first_letter | debug}}
     {% endcomment %}
 
-    <h4 id="{{this_word | replace: '+','_' | replace: ' ','_' | downcase}}" class="toc-link"><a alt="Back to top" href="#"><i class="fa fa-tag mr-2"></i></a>{{this_word}}</h4>
+    <h3 id="{{this_word | replace: '+','_' | replace: ' ','_' | downcase}}" class="toc-link"><a alt="Back to top" href="#"><i class="fa fa-tag mr-2"></i></a>{{this_word}}</h3>
 
     {% for post in site.tags[this_word] %}{% if post.title != null %}
       {% include {{get_category}} post=post %}
@@ -226,7 +229,7 @@ site_category_word_list:    {{site_category_word_list | debug}}
 
       <!-- place post  -->
       <article class="card raised-z3 mb-5">
-        <h3 id="{{100000|rand}}" class="card-header bg-primary">{{post.title}}</h3>
+        <h4 id="{{100000|rand}}" class="card-header bg-primary">{{post.title}}</h4>
         <div class="row mx-0">
 
           <!-- [INFO   ] [j1.pages.blog.navigator.archive          ] [Check if post image is available] -->

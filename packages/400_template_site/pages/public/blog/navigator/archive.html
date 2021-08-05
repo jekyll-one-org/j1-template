@@ -140,7 +140,7 @@ site_category_word_list:    {{site_category_word_list | debug}}
   {% endif %}
 
   <div class="post-headline">
-    <h2 id="post-headline" class="mt-5">{{view_headline}}</h2>
+    <h1 id="post-headline notoc" class="mt-5">{{view_headline}}</h1>
   </div>
 
   <!-- ul class="list-unstyled link-news" -->
@@ -155,7 +155,7 @@ site_category_word_list:    {{site_category_word_list | debug}}
     {% endfor %}
 
     <article class="card raised-z3 mb-5">
-      <h3 id="{{100000|rand}}" class="card-header bg-primary">{{post.title}}</h3>
+      <h2 id="{{100000|rand}}" class="card-header bg-primary">{{post.title}}</h2>
       <div class="row mx-0">
 
         <!-- [INFO   ] [j1.pages.blog.navigator.archive          ] [Check if post image is available] -->
@@ -167,7 +167,7 @@ site_category_word_list:    {{site_category_word_list | debug}}
         {% else %}
         <!-- [INFO   ] [j1.pages.blog.navigator.archive          ] [Post image missing, using configured default image] -->
         <div class="col-md-6 img-bg--fill px-0"
-          style="background-image: url({{defaults.post_image}});">
+          style="background-image: url({{blog_navigator_options.post_image}});">
         </div>
         {% endif %}
 

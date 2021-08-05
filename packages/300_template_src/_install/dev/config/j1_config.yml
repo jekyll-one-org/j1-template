@@ -395,7 +395,7 @@ comments:
   xhr_data_path:                        /assets/data
   comments_headline:
     en:                                 Leave a comment
-    de:                                 Kommentieren                                # hyvor | disqus
+    de:                                 Kommentieren
 
   hyvor:
     site_id:                            'hyvor-site-id'
@@ -450,7 +450,7 @@ advertising:
 
   google:
     publisher_id:                       '<your-publisher-id>'
-    
+
   custom:
     custom_data:
 
@@ -463,6 +463,7 @@ advertising:
 # ------------------------------------------------------------------------------
 translation:
   enabled:                              false
+  
   provider:                             google
 
   google:

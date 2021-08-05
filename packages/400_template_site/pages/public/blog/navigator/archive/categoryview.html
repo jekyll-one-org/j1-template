@@ -172,13 +172,13 @@ site_category_word_list:    {{site_category_word_list | debug}}
   {% endif %}
 
   <div class="post-headline">
-    <h2 id="post-headline" class="mt-5">{{view_headline}}</h2>
+    <h1 id="post-headline notoc" class="mt-5">{{view_headline}}</h1>
   </div>
   {% assign tags = site.categories|sort %}
   {% for tag in tags %}
     {% assign category = tag|first %}
     {% unless category_list contains category %} {% continue %} {% endunless %}
-    <h3 id="{{tag|first|downcase}}" class="anchor-link mb-4"><i class="mdi mdi-pin mr-1"></i>{{tag|first|capitalize}}</h3>
+    <h2 id="{{tag|first|downcase}}" class="anchor-link mb-4"><i class="mdi mdi-pin mr-1"></i>{{tag|first|capitalize}}</h2>
 
       {% for post in sorted_posts %}
         {%if post.categories contains tag[0]%}
@@ -196,7 +196,7 @@ site_category_word_list:    {{site_category_word_list | debug}}
           {% endfor %}
 
           <article class="card raised-z3 mb-5">
-            <h4 id="{{100000|rand}}" class="card-header bg-primary">{{post.title}}</h4>
+            <h3 id="{{100000|rand}}" class="card-header bg-primary">{{post.title}}</h3>
             <div class="row mx-0">
 
               <!-- [INFO   ] [j1.pages.blog.navigator.archive          ] [Check if post image is available] -->
