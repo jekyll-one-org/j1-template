@@ -219,17 +219,21 @@ j1.adapter['themer'] = (function (j1, window) {
            // set the theme switcher state
            user_state.theme_switcher = themerOptions.enabled;
 
+           // jadams, 2021-08-10: moved hide|show themes menu to
+           // j1 adapter (displayPage)
+           //
            // jadams, 2021-07-25: hide|show themes menu on cookie consent
            // (analyses|personalization) settings. BootSwatch is a 3rd party
            // is using e.g GA. Because NO control is possible on 3rd parties,
            // for GDPR compliance, themes feature may disabled on
            // privacy settings
-           if (!user_consent.analyses || !user_consent.personalization)  {
-             logger.warn('\n' + 'disable themes feature because of privacy settings');
-             $("#themes_menu").hide();
-           } else {
-             $("#themes_menu").show();
-           }
+           //
+           // if (!user_consent.analyses || !user_consent.personalization)  {
+           //   logger.warn('\n' + 'disable themes feature because of privacy settings');
+           //   $("#themes_menu").hide();
+           // } else {
+           //   $("#themes_menu").show();
+           // }
 
            if (themerOptions.enabled) {
            // enable BS ThemeSwitcher

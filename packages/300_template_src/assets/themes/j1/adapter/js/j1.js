@@ -1086,6 +1086,18 @@ var j1 = (function () {
               $('#quickLinksSignInOutButton').css('display', 'block');
             }
 
+            // jadams, 2021-07-25: hide|show themes menu on cookie consent
+            // (analyses|personalization) settings. BootSwatch is a 3rd party
+            // is using e.g GA. Because NO control is possible on 3rd parties,
+            // for GDPR compliance, themes feature may disabled on
+            // privacy settings
+            if (!user_consent.analyses || !user_consent.personalization)  {
+              logger.warn('\n' + 'disable themes feature because of privacy settings');
+              $("#themes_menu").hide();
+            } else {
+              $("#themes_menu").show();
+            }
+            
             // if the page requested contains an anchor element,
             // do a smooth scroll to
             j1.scrollTo();
@@ -1220,6 +1232,18 @@ var j1 = (function () {
             logger.info(logText);
             // Display cookie icon
             $('#quickLinksCookieButton').css('display', 'none');
+          }
+
+          // jadams, 2021-07-25: hide|show themes menu on cookie consent
+          // (analyses|personalization) settings. BootSwatch is a 3rd party
+          // is using e.g GA. Because NO control is possible on 3rd parties,
+          // for GDPR compliance, themes feature may disabled on
+          // privacy settings
+          if (!user_consent.analyses || !user_consent.personalization)  {
+            logger.warn('\n' + 'disable themes feature because of privacy settings');
+            $("#themes_menu").hide();
+          } else {
+            $("#themes_menu").show();
           }
 
           // If the page requested contains an anchor element,

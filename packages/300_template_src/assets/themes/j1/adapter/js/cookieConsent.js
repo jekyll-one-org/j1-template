@@ -295,8 +295,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
         }
 
         // Managing providers for personalization OptIn/Out (Comments|Ads)
-        // moved to J1 adapter
-
+        //
         if (!user_consent.analyses || !user_consent.personalization) {
           // expire consent|state cookies to session
           j1.expireCookie({ name: cookie_names.user_state });
@@ -306,7 +305,25 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
           // reload current page (skip cache)
           location.reload(true);
         }
+      } else {
+        // jadams, 2021-08-10: remove cookies on invalid GA config or left
+        // cookies from previous session if they exists
+        gaCookies.forEach(function (item) {
+          logger.warn('\n' + 'delete GA cookie: ' + item);
+          j1.removeCookie({ name: item, domain: cookie_domain });
+        });
 
+        // Managing providers for personalization OptIn/Out (Comments|Ads)
+        //
+        if (!user_consent.analyses || !user_consent.personalization) {
+          // expire consent|state cookies to session
+          j1.expireCookie({ name: cookie_names.user_state });
+          j1.expireCookie({ name: cookie_names.user_consent });
+        }
+        if (moduleOptions.reloadPageOnChange) {
+          // reload current page (skip cache)
+          location.reload(true);
+        }
       } // END if tracking_enabled
     } // END cbCookie
 
