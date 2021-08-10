@@ -76,11 +76,11 @@ Use the “git tag” command with the “-d” option
 
 == From local
 
-  git tag -d v2021.1.18
+  git tag -d v2021.1.19
 
 === From remote
 
-git push -d origin v2021.1.18
+git push -d origin v2021.1.19
 
 
 == Set a Git tag
@@ -88,7 +88,7 @@ git push -d origin v2021.1.18
 # When modifying remember to issue a new tag command in git before committing,
 # then push the new tag
 #
-# git tag -a v2021.1.18 -m "v2021.1.18"
+# git tag -a v2021.1.19 -m "v2021.1.19"
   git push origin --tags
 
 == Update Git Index (cache) completely
@@ -112,8 +112,8 @@ or forced
 Then:
 
   git commit -am "Cleanup files"
-  git commit -am "New version 2021.1.18"
-  git commit -am "Latest files of version 2021.1.18"
+  git commit -am "New version 2021.1.19"
+  git commit -am "Latest files of version 2021.1.19"
 
 # Add file permissions on Windows
 
