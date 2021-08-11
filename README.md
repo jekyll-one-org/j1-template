@@ -125,7 +125,7 @@ For some of the componentsJ1 is using, a working C/C++ development environment
 is needed to compile platform-specific libraries. Ensure that all dev packages
 are installed for your OS (Linux, OSX, or Windows).
 
-### Development packages on Windows
+### Development packages for Windows
 
 For Ruby on Windows, a installation using RubyInstaller is recommended. A
 current Ruby version of 2.7 is available at the
