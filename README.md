@@ -106,10 +106,10 @@ platforms.
 To run the Development System for J1 Template, the following languages and
 tools expected to be in place with your OS:
 
-*   Ruby language, version >= 2.6 < 2.7
+*   Ruby language, version >= 2.6 < 3.x
 *   RubyGems >= 3.2.4
 *   Bundler >= 2.2.4
-*   Javascript language (NodeJS), version >= 12.x < 13
+*   Javascript language (NodeJS), version >= 12.x < 13.x
 *   NPM, version >= 6.14
 *   YARN, version >= 1.22
 *   Git, version >= 2.29
@@ -300,16 +300,20 @@ Bootstrap base modules ..
 done.
 Create project folders ..
 done.
+
+Create starter config files ..
+lerna info Executing command in 1 package: "yarn run jekyll_files"
+site: $ run-s -s jekyll_files:*
+lerna success run Ran npm script 'jekyll_files' in 1 package in 2.2s:
+lerna success - site
 Bootstrap project modules ..
 done.
 
 Initialize development packages ..
-lerna notice cli v3.22.1
 lerna info Updating package.json
 lerna info Updating lerna.json
 lerna info Creating packages directory
 lerna success Initialized Lerna files
-lerna notice cli v3.22.1
 lerna info Bootstrapping 6 packages
 lerna info Installing external dependencies
 lerna info Symlinking packages and binaries
@@ -319,101 +323,109 @@ done.
 Detect operating system ..
 OS detected as: Windows_NT
 Create links for shared resources ..
-lerna notice cli v3.22.1
 lerna info Executing command in 1 package: "yarn run setup-links"
 site: $ cross-var if-env OS=Windows_NT && run-s -s link-default || cross-env OS=$(echo $(getos)) run-s -s switch-links
 lerna success run Ran npm script 'setup-links' in 1 package in 2.4s:
 lerna success - site
-lerna notice cli v3.22.1
 lerna info Executing command in 3 packages: "yarn run build"
-js: $ npm run clean && npm run lint
 css: $ npm run clean
-site: $ run-s -s clean:jekyll-conf && run-s -s jekyll_build:*
-css: > css@2021.1.19 clean D:\j1\github\j1-template\packages\100_template_css
+js: $ npm run clean && npm run lint
+site: $ run-s -s jekyll_build:*
+css: > css@2021.1.19 clean path_to_\j1-template\packages\100_template_css
 css: > run-p -s clean:*
-js: > js@2021.1.19 clean D:\j1\github\j1-template\packages\200_template_js
+js: > js@2021.1.19 clean path_to_\j1-template\packages\200_template_js
 js: > run-p -s clean:*
+site: > site@2021.1.19 bundle path_to_\j1-template\packages\400_template_site
+site: > run-s -s bundler:*
 css: $ npm run build_css && npm run uglify_css
-css: > css@2021.1.19 build_css D:\j1\github\j1-template\packages\100_template_css
+site: Create bundle ..
+css: > css@2021.1.19 build_css path_to_\j1-template\packages\100_template_css
 css: > run-p -s theme_css:*
-js: > js@2021.1.19 lint D:\j1\github\j1-template\packages\200_template_js
+js: > js@2021.1.19 lint path_to_\j1-template\packages\200_template_js
 js: > run-p -s lint:*
 css: Rendering Complete, saving .css file...
+css: Wrote CSS to path_to_\j1-template\packages\100_template_css\dist\icon-fonts\fontawesome.css
 css: Rendering Complete, saving .css file...
-css: Wrote CSS to D:\j1\github\j1-template\packages\100_template_css\dist\vendor.css
+css: Wrote CSS to path_to_\j1-template\packages\100_template_css\dist\icon-fonts\iconify.css
+css: Rendering Complete, saving .css file...
+css: Rendering Complete, saving .css file...
+css: Wrote CSS to path_to_\j1-template\packages\100_template_css\dist\animate.css
 ..
 js: $ npm run build-js
-js: > js@2021.1.19 build-js D:\j1\github\j1-template\packages\200_template_js
-js: > cross-var webpack --mode production --config $npm_package_wp_build
-js: > js@2021.1.19 uglify-js D:\j1\github\j1-template\packages\200_template_js
-js: > terser dist/template.js -o dist/template.min.js -m
-css: > css@2021.1.19 deploy D:\j1\github\j1-template\packages\100_template_css
-css: > run-p -s mkdir:* && run-p -s deploy:*
-js: > js@2021.1.19 deploy D:\j1\github\j1-template\packages\200_template_js
-js: > run-s -s deploy:*
-..
 css: Rendering Complete, saving .css file...
-css: Wrote CSS to D:\j1\github\j1-template\packages\100_template_css\dist\themes\uno-light\bootstrap.css
-css: > css@2021.1.19 uglify_css D:\j1\github\j1-template\packages\100_template_css
+css: Wrote CSS to path_to_\j1-template\packages\100_template_css\dist\themes\uno-dark\bootstrap.css
+css: Rendering Complete, saving .css file...
+css: Wrote CSS to path_to_\j1-template\packages\100_template_css\dist\icon-fonts\materialdesign.css
+css: Rendering Complete, saving .css file...
+css: Wrote CSS to path_to_\j1-template\packages\100_template_css\dist\themes\uno-light\bootstrap.css
+js: > js@2021.1.19 build-js path_to_\j1-template\packages\200_template_js
+js: > cross-var webpack --mode production --config $npm_package_wp_build
+site: Bundle Rubies using user path ..
+css: > css@2021.1.19 uglify_css path_to_\j1-template\packages\100_template_css
 css: > run-p -s uglify_css:*
+js: $ npm run uglify-js && npm run deploy
+js: > js@2021.1.19 uglify-js path_to_\j1-template\packages\200_template_js
+js: > terser dist/template.js -o dist/template.min.js -m --source-map
 ..
-site: > site@2021.1.19 bundle D:\j1\github\j1-template\packages\400_template_site
-site: > run-s -s bundler:*
-site: Create bundle ..
 site: Fetching gem metadata from https://rubygems.org/..........
 site: Fetching gem metadata from https://rubygems.org/.
 site: Resolving dependencies...
-site: Fetching rake 12.3.3
-site: Installing rake 12.3.3
-site: Fetching public_suffix 4.0.6
-site: Installing public_suffix 4.0.6
+site: Using rake 12.3.3
+site: Using public_suffix 4.0.6
+site: Using addressable 2.8.0
+site: Using asciidoctor 1.5.8
+site: Using rouge 3.26.0
 ..
-site: Configuration file: D:/j1/github/j1-template/packages/400_template_site/_config.yml
-site:             Source: D:/j1/github/j1-template/packages/400_template_site
-site:        Destination: D:/j1/github/j1-template/packages/400_template_site/_site
+site: Bundle complete! 31 Gemfile dependencies, 88 gems now installed.
+..
+site: Configuration file: path_to_/j1-template/packages/400_template_site/_config.yml
+site:             Source: path_to_/j1-template/packages/400_template_site
+site:        Destination: path_to_/j1-template/packages/400_template_site/_site
 site:  Incremental build: enabled
 site:       Generating...
-site:      J1 LunrSearch: creating search index ...
-site:      J1 LunrSearch: finished, index ready
+site:     J1 QuickSearch: creating search index ...
+site:     J1 QuickSearch: finished, index ready.
 site:       J1 Paginator: autopages, disabled|not configured
 site:       J1 Paginator: pagination enabled, start processing ...
 site:       J1 Paginator: finished, processed 1 pagination page|s
-..
+
 site: Build Process Summary:
 site: | PHASE      |    TIME |
 site: +------------+---------+
-site: | RESET      |  0.0045 |
-site: | READ       |  1.2372 |
-site: | GENERATE   |  1.0914 |
-site: | RENDER     | 36.4321 |
-site: | CLEANUP    |  0.0233 |
-site: | WRITE      |  1.2013 |
+site: | RESET      |  0.0053 |
+site: | READ       |  1.5589 |
+site: | GENERATE   |  1.6977 |
+site: | RENDER     | 31.5453 |
+site: | CLEANUP    |  0.0241 |
+site: | WRITE      |  1.1489 |
 site: +------------+---------+
-site: | TOTAL TIME | 39.9898 |
+site: | TOTAL TIME | 35.9802 |
 site:
 site: Site Render Stats:
 site: | Filename                                                                          | Count |     Bytes |    Time |
 site: +-----------------------------------------------------------------------------------+-------+-----------+---------+
-site: | _layouts/default.html                                                             |    78 |  5471.71K |  34.751 |
-site: | _includes/themes/j1/procedures/layouts/default_writer.proc                        |   312 |  6293.71K |  33.301 |
-site: | _includes/themes/j1/layouts/layout_module_generator.html                          |    78 |  1968.77K |  30.002 |
+site: | _layouts/default.html                                                             |    60 |  5269.94K |  29.702 |
+site: | _includes/themes/j1/procedures/layouts/default_writer.proc                        |   240 |  5299.72K |  28.394 |
+site: | _includes/themes/j1/layouts/layout_module_generator.html                          |    60 |  1609.43K |  25.946 |
+site: | _includes/themes/j1/procedures/layouts/module_writer.proc                         |  2280 |  1290.96K |  25.672 |
+site: | _includes/themes/j1/procedures/global/set_base_vars_folders.proc                  |  2340 |    38.85K |  22.121 |
 ..
-site: | _includes/themes/j1/layouts/content_generator_blog_archive.html                   |     3 |    41.11K |   0.008 |
+site: | _includes/themes/j1/procedures/global/get_category_item.proc                      |    72 |     3.59K |   0.009 |
+site: | _layouts/home.html                                                                |     1 |     5.95K |   0.009 |
 site: +-----------------------------------------------------------------------------------+-------+-----------+---------+
-site: | TOTAL (for 50 files)                                                              | 17250 | 32823.55K | 162.778 |
+site: | TOTAL (for 50 files)                                                              | 14138 | 31708.37K | 140.026 |
 site:
-site: done in 40.019 seconds.
-site: Auto-regeneration: disabled. Use --watch to enable.
+site:                     done in 36.018 seconds.
+site:  Auto-regeneration: disabled. Use --watch to enable.
 ..
 site: $ run-s -s jekyll_post_build:*
-lerna success run Ran npm script 'build' in 3 packages in 160.1s:
+lerna success run Ran npm script 'build' in 3 packages in 55.8s:
 lerna success - css
 lerna success - js
 lerna success - site
 Configure environment ..
 done.
-
-Done in 240.84s.
+Done in 139.92s.
 ```
 
 The `setup` process will take a while - typically five to ten minutes for the
@@ -437,36 +449,42 @@ build the Web content, and finally run the webite in a browser.
 Go, go, go ..
 
 ``` sh
-$ lerna run --parallel develop
-lerna notice cli v3.22.1
-lerna info Executing command in 2 packages: "yarn run develop"
-..
-utls: $ run-p -s utilsrv
-utls: UTILSRV disabled. Not started.
-..
 site: $ run-p -s develop:*
-site: i ｢wds｣: Project is running at http://localhost:44000/
+utls: $ run-p -s utilsrv
+utls: Startup UTILSRV ..
+utls: Log file exists :        messages_2021-08-11
+utls: Server enabled:          false
+utls: Environment detected as: dev
+utls: Daemon path set to:      path_to_\j1-template\packages\600_template_utilsrv
+utls: Daemon verbosity set to: false
+utls: Project path set to:     path_to_\j1-template\packages\600_template_utilsrv/../400_template_site
+utls: Data path set to:        path_to_\j1-template\packages\600_template_utilsrv/../400_template_site/_data
+utls: Log file set to:         path_to_\j1-template\packages\600_template_utilsrv/../../log/messages_2021-08-11.log
+utls: Stop the server. Exiting ...
+utls: Reset file: messages_2021-08-11
+site: i ｢wds｣: Project is running at http://localhost:41000/
 site: i ｢wds｣: webpack output is served from /assets/themes/j1/core/js
-site: i ｢wds｣: Content not from webpack is served from D:\j1\github\j1-template\packages\400_template_site\_site
-site: Configuration file: D:/j1/github/j1-template/packages/400_template_site/_config.yml
+site: i ｢wds｣: Content not from webpack is served from path_to_\j1-template\packages\400_template_site\_site
+site: Configuration file: C:/Temp/j1-template/packages/400_template_site/_config.yml
 site: i ｢wdm｣: wait until bundle finished: /assets/themes/j1/core/js/template.js
-site:             Source: D:/j1/github/j1-template/packages/400_template_site
-site:        Destination: D:/j1/github/j1-template/packages/400_template_site/_site
+site: i ｢wdm｣:    53 modules
+site: i ｢wdm｣: Compiled successfully.
+site:             Source: C:/Temp/j1-template/packages/400_template_site
+site:        Destination: C:/Temp/j1-template/packages/400_template_site/_site
 site:  Incremental build: enabled
 site:       Generating...
-site: i ｢wdm｣:    49 modules
-site: i ｢wdm｣: Compiled successfully.
-site:      J1 LunrSearch: creating search index ...
-site:      J1 LunrSearch: finished, index ready
+site:     J1 QuickSearch: creating search index ...
+site:     J1 QuickSearch: finished, index ready.
 site:       J1 Paginator: autopages, disabled|not configured
 site:       J1 Paginator: pagination enabled, start processing ...
 site:       J1 Paginator: finished, processed 1 pagination page|s
-site:                     done in 6.295 seconds.
+site:                     done in 10.093 seconds.
 site:  Auto-regeneration: enabled for '.'
 site:     Server address: http://localhost:4000/
 site:   Server running... press ctrl-c to stop.
 ```
-Finally,  J1 starter web get openend in your default browser.
+
+Finally, the J1 starter web get openend in your default browser.
 
 
 ## Reset the Development System
@@ -492,7 +510,6 @@ Remove log folder ..
 Remove log files ..
 
 Clean up project packages ..
-lerna notice cli v3.22.1
 lerna info Executing command in 6 packages: "yarn run clean"
 js: $ run-p -s clean:*
 css: $ run-p -s clean:*
@@ -510,13 +527,12 @@ lerna success - gem
 lerna success - utls
 
 Remove js modules from all packages ..
-lerna notice cli v3.22.1
-lerna info clean removing D:\j1\github\j1-template\packages\100_template_css\node_modules
-lerna info clean removing D:\j1\github\j1-template\packages\200_template_js\node_modules
-lerna info clean removing D:\j1\github\j1-template\packages\300_template_src\node_modules
-lerna info clean removing D:\j1\github\j1-template\packages\400_template_site\node_modules
-lerna info clean removing D:\j1\github\j1-template\packages\500_template_gem\node_modules
-lerna info clean removing D:\j1\github\j1-template\packages\600_template_utilsrv\node_modules
+lerna info clean removing path_to_\j1-template\packages\100_template_css\node_modules
+lerna info clean removing path_to_\j1-template\packages\200_template_js\node_modules
+lerna info clean removing path_to_\j1-template\packages\300_template_src\node_modules
+lerna info clean removing path_to_\j1-template\packages\400_template_site\node_modules
+lerna info clean removing path_to_\j1-template\packages\500_template_gem\node_modules
+lerna info clean removing path_to_\j1-template\packages\600_template_utilsrv\node_modules
 lerna success clean finished
 done.
 
