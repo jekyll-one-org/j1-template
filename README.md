@@ -128,7 +128,7 @@ are installed for your OS (Linux, OSX, or Windows).
 ### Development packages on Windows
 
 For Ruby on Windows, a installation using RubyInstaller is recommended. A
-current Ruby version of 2.7 is available at
+current Ruby version of 2.7 is available at the
 [RubyInstaller](https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-2.7.4-1/rubyinstaller-devkit-2.7.4-1-x64.exe).
 
 Note, to automatically install a development environment for Ruby on Windows,
