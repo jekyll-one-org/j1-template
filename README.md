@@ -63,7 +63,7 @@ issues for private or professional use.
 * Themeable source code highlighting (Rouge)
 * Desktop and Mobile Web and Navigation ready
 * Fully configurable
-* 100/100 Google Lighthouse scores
+* 100/100/100 Google Lighthouse scores
 
 ## Modules and Extensions
 
@@ -72,6 +72,7 @@ issues for private or professional use.
 * Smooth-srcoll support
 * Full-text search engine included (Lunr)
 * Blog Post navigation included
+* GDPR compatible cookie consent module included
 * Clipboard module included
 * Floating Action Buttons included
 * Navigation modules included
@@ -84,9 +85,9 @@ issues for private or professional use.
 
 * Featured example content included
 * Royalty free images included
-* Disqus support
+* Comment provider support for Hyvor and Disqus
 * Google Analytics support
-* Deploy to Github Pages, Netlify and Heroku ready
+* Deploy on Github Pages (source only), Netlify and Heroku ready
 
 # Supported platforms
 
@@ -114,7 +115,8 @@ tools expected to be in place with your OS:
 *   YARN, version >= 1.22
 *   Git, version >= 2.29
 
-More current or older versions may work, but not tested.
+Note, Ruby **3.x** versions are **not** supported for Jekyll and J1 either.
+More current or older versions of **NodeJS** may work, but not tested.
 
 
 ## Development packages
