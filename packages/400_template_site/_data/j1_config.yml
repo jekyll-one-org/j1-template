@@ -389,7 +389,7 @@ body:
 #   site_id: your-disqus-short-name
 # ------------------------------------------------------------------------------
 comments:
-  enabled:                              true
+  enabled:                              false
 
   provider:                             hyvor                                   # disqus | hyvor | commento | just-comments
   xhr_data_path:                        /assets/data
@@ -398,10 +398,10 @@ comments:
     de:                                 Kommentieren
 
   hyvor:
-    site_id:                            4612
+    site_id:                            'hyvor-site-id'
 
   disqus:
-    site_id:                            '<your-site-short-name>'                # jekyll-one
+    site_id:                            '<your-site-short-name>'
 
   # commento:                                                                   # currently NOT supported
   #   site_id:                          'commento-site-id'
@@ -425,16 +425,16 @@ comments:
 # from what is set pagewise!
 # Set 'provider' to the provider you want to use.
 # ------------------------------------------------------------------------------
-#
 analytics:
-  enabled:                              true
+  enabled:                              false
+
   provider:                             google
 
   google:
-    tracking_id:                        'G-8ZGNE0WE42'                          # '<your-tracking-id>'
+    tracking_id:                        '<your-tracking-id>'
 
-# custom:                                                                       # currently NOT supported
-#   custom_data:
+  custom:
+    custom_data:
 
 # ------------------------------------------------------------------------------
 # ADVERTISING settings
@@ -443,16 +443,16 @@ analytics:
 # from what is set pagewise!
 # Set 'provider' to the provider you want to use.
 # ------------------------------------------------------------------------------
-#
 advertising:
   enabled:                              false
+
   provider:                             google
 
   google:
-    publisher_id:                       '<your-publisher_id>'
+    publisher_id:                       '<your-publisher-id>'
 
-# custom:                                                                       # currently NOT supported
-#   custom_data:
+  custom:
+    custom_data:
 
 # ------------------------------------------------------------------------------
 # TRANSLATOR settings
@@ -461,9 +461,9 @@ advertising:
 # from what is set pagewise!
 # Set 'provider' to the provider you want to use.
 # ------------------------------------------------------------------------------
-#
 translation:
   enabled:                              false
+  
   provider:                             google
 
   google:
@@ -471,9 +471,6 @@ translation:
     meta_data:                          [google-translate-customization]
     page_language:                      en
     translation_languages:              [all]
-
-# custom:                                                                       # currently NOT supported
-#   custom_data:
 
 # ------------------------------------------------------------------------------
 # SHARING settings (currently NOT supported)
@@ -486,7 +483,6 @@ translation:
 # from what is set pagewise!
 # Set 'provider' to the provider you want to use.
 # ------------------------------------------------------------------------------
-#
 # sharing:
 #   enabled:                            false
 #   provider:
