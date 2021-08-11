@@ -98,7 +98,7 @@ J1 is supported on all current x64-based OS:
 * Linux, kernel version >= 4.15 (e.g. Ubuntu  18.x LTS)
 * OSX, version >= 10.10.5 (Yosemite)
 
-Note that 32-bit versions (x32) are generally NOT supported for all
+Note that 32-bit versions (x32) are generally **not** supported for all
 platforms.
 
 
@@ -121,22 +121,23 @@ More current or older versions of **NodeJS** may work, but not tested.
 
 ## Development packages
 
-For some of the components, a working C/C++ development environment is needed
-for compiling platform-specific libraries. Ensure that all dev packages are
-installed for your OS (Linux, OSX, or Windows).
+For some of the componentsJ1 is using, a working C/C++ development environment
+is needed to compile platform-specific libraries. Ensure that all dev packages
+are installed for your OS (Linux, OSX, or Windows).
 
 ### Development packages on Windows
 
 For Ruby on Windows, a installation using RubyInstaller is recommended. A
-current Ruby version of 2.6 is available with
-[RubyInstaller, Downloads](https://rubyinstaller.org/downloads/)
+current Ruby versions of 2.7 is available with
+[RubyInstaller, v2.7](https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-2.7.4-1/rubyinstaller-devkit-2.7.4-1-x64.exe){:target="_blank"}.
 To automatically install a development environment for Ruby on Windows, a
-x64 version should be installed that is already bundled with a DEVKIT
+x64 version should be installed that is already bundled with a **DEVKIT**
 (MSYS2 toolchain).
 
 ### Development packages on Linux (Ubuntu)
 
-In order to install all required development chain on Ubuntu, you can run:
+In order to install all required development components on e.g. Ubuntu
+you run:
 
 ``` sh
 sudo apt-get -y install \
@@ -151,8 +152,8 @@ libffi-dev \
 libgdbm-dev
 ```
 
-To install the required languages and tools - if not already in place - the
-following command can be used to do so:
+To install the required languages and tools, if not already in place, the
+following commands can be used to do so:
 
 ``` sh
 sudo apt-get -y install \
@@ -162,9 +163,8 @@ nodejs \
 ruby
 ```
 
-Additionally, for Ruy and NodeJS the dev-packages are to be installed as
-well to make all header files available for a working C/C++ development
-environment:
+Additionally, for Ruby and NodeJS the dev-packages are to be installed to
+make all header files available for a working C/C++ development environment:
 
 ``` sh
 sudo apt-get -y install \
@@ -178,9 +178,9 @@ system-wide software packages for the OS.
 ### Development packages on OSX
 
 For all OSX system, the installation of the Apple Developer Tools (XCode)
-is expected. Development tools like Ruby, NodeJS, or the bash, comes
-with the OS are NOT recommended to use. Most of the software comes in very
-old and therefor unusable version for J1 development.
+is expected. Development tools like Ruby, NodeJS, or the bash comes
+with the OS are **not** recommended to use. Most of the software comes in
+quite old versions and therefor unusable for J1 development.
 
 To install recommended versions, the easiest way to install the missing
 software is [Homebrew](https://brew.sh/). A lot of helpful information
@@ -200,14 +200,17 @@ product installation pathes.
 
 Install latest bundler for Ruby:
 
+``` sh
   gem install bundler --no-document
+```
 
 Install latest RubyGems for Ruby:
 
+``` sh
   gem install rubygems-update --no-document
   update_rubygems --no-document
   gem update --system
-
+```
 
 ### Upgrades needed for NodeJS
 
@@ -226,9 +229,10 @@ those add-ons are neither needed nor used.
 
 Install latest NPM and Yarn packages for NodeJS:
 
+``` sh
   npm install -g npm@latest
   npm install -g yarn@latest
-
+```
 
 # Setting up the project
 
@@ -270,15 +274,15 @@ j1 development repo
 
 J1 template is a so-called *multi-package* project, a *Monorepo* managed by
 Lerna. A Monorepo is a strategy where multiple (sub-)projects are stored in a
-single repository instead of handling individual repositories.
+single repository instead of putting them into individual repositories.
 
 All development *tasks* are defined as NPM *scripts* with the top-level project
 config file `package.json`. For each package, package-level config files
 are used having the same name `package.json` to manage specific tasks like
 the generation of CSS and JS files, or creating the buildin starter web.
 
-All base development *tasks* are defined with the top-level project
-configuration; no need to dive into the package-level configurations.
+All **base** development *tasks* are defined with the top-level project
+configuration; no need to dive into all the package-level configurations.
 All is managed by Lerna, based on simple top-level *tasks*.
 
 
@@ -430,23 +434,23 @@ done.
 Done in 139.92s.
 ```
 
-The `setup` process will take a while - typically five to ten minutes for the
+The `setup` process will take a while - typically up to ten minutes for the
 first run (depending on the performances of your Internet connection and your
-workstation). A bunch of NPM modules and Ruby Gems are downloaded and linked
-for the packages part of the repo. See `setup` as an extended `install` and
-`build` process to manage an initial setup for the (Lerna) Monorepo.
+workstations power). A bunch of NPM modules and Ruby Gems are downloaded and
+linked for the packages part of the repo. See `setup` as an extended `install`
+and `build` process to manage an initial setup for the (Lerna) Monorepo.
 
 ## Running the Starter Web
 
-Running the buildin Starter Web for development is done like so:
+Running the buildin **starter web** for development is done like so:
 
 ``` sh
 yarn site
 ```
 
-The task `site` does a lot for you; whatever is necessary for a full-stack
+The task `site` does a lot for you. Whatever is necessary for a full-stack
 Web development. The task will put in place all needed CSS and JS components,
-build the Web content, and finally run the webite in a browser.
+build the content, and finally run the website in a browser.
 
 Go, go, go ..
 
@@ -491,9 +495,9 @@ Finally, the J1 starter web get openend in your default browser.
 
 ## Reset the Development System
 
-To start from the beginning, you can reset the Development System to the
+To start from the beginning, you can reset the development system to the
 factory state. The top-level task `reset` does the resetting work for you
-and cleans up each and everything except the Git repo and the NPM modules
+and cleans up each and everything except the **Git repo** and the NPM modules
 folder `node_modules` stored in the project root. Both are kept untouched
 by a reset.
 
@@ -542,7 +546,7 @@ Done in 11.20s.
 ```
 
 To reset the Development System *completely*, delete the folder `node_modules`
-manually and start from scratch by running the `setup` task again:
+manually and start from the scratch by running the `setup` task again:
 
 ``` sh
 yarn setup
