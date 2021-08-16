@@ -176,7 +176,7 @@ Simple like that!
 <script>
   $('#twemoji-picker').twemojiPicker({
     init: '',
-    language: "de",
+    language: "{{site.language}}",
     size: '3.5rem',
     iconSize: '2rem',
     height: '100px',
