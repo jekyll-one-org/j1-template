@@ -159,7 +159,7 @@ template:
 #   values:                             HTML doc types
 #   default:                            html
 #
-language:                               en
+language:                               de
 coding:                                 UTF-8
 doctype:                                html
 
@@ -769,7 +769,7 @@ defaults:
       youtube:                          false
       vimeo:                            false
 
-  
+
 # ==============================================================================
 # 6. LAYOUT configuration
 #

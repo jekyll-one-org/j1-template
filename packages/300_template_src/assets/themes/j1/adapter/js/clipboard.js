@@ -74,6 +74,10 @@ j1.adapter['clipboard'] = (function (j1, window) {
   var logText;
   var _this;
   var clipboardJS;
+  var language;
+  var btnTitle;
+  var btnText;
+  var btnResponseText;
 
   // ---------------------------------------------------------------------------
   // main object
@@ -88,8 +92,9 @@ j1.adapter['clipboard'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       // globals
       // -----------------------------------------------------------------------
-      _this   = j1.adapter.clipboard;
-      logger  = log4javascript.getLogger('j1.adapter.clipboard');
+      _this     = j1.adapter.clipboard;
+      language  = '{{site.language}}';
+      logger    = log4javascript.getLogger('j1.adapter.clipboard');
 
       // -----------------------------------------------------------------------
       // defaults
@@ -103,6 +108,20 @@ j1.adapter['clipboard'] = (function (j1, window) {
       _this.state = 'started';
       logText = '\n' + 'initialization: started';
       logger.info(logText);
+
+      if (language == 'en') {
+        btnTitle        = 'to clipboard';
+        btnText         = 'Copy';
+        btnResponseText = 'copied!';
+      } else if (language == 'de') {
+        btnTitle        = 'zur Zwischenablage';
+        btnText         = 'Kopieren';
+        btnResponseText = 'kopiert!';
+      } else {
+        btnTitle        = 'to clipboard';
+        btnText         = 'Copy';
+        btnResponseText = 'copied!';
+      }
 
       // initialize ClipboardJS if page is loaded
       var dependencies_met_j1_finished = setInterval(function() {
@@ -139,7 +158,10 @@ j1.adapter['clipboard'] = (function (j1, window) {
         // Check if no clipboard should be applied
         var isNoClip = $(this).closest('.noclip');
         if ( isNoClip.length == 0) {
-          var btnHtml = '<div class="j1-clipboard"><span class="btn-clipboard j1-tooltip" data-toggle="tooltip" data-placement="left" title="Copy to clipboard">Copy</span></div>';
+          var btnHtml = '';
+
+          btnHtml = '<div class="j1-clipboard"><span class="btn-clipboard j1-tooltip" data-toggle="tooltip" data-placement="left" title="' + btnTitle +'">' + btnText + '</span></div>';
+
           $(this).before(btnHtml);
           $('.btn-clipboard').tooltip();
         }
@@ -152,7 +174,7 @@ j1.adapter['clipboard'] = (function (j1, window) {
     initEventHandler: function (clipboard) {
       // Manage clipboard events
       clipboard.on('success', function (e) {
-        $(e.trigger).attr('title', 'copied!').tooltip('_fixTitle').tooltip('show').attr('title', 'Copy to clipboard').tooltip('_fixTitle');
+        $(e.trigger).attr('title', btnResponseText).tooltip('_fixTitle').tooltip('show').attr('title', btnTitle).tooltip('_fixTitle');
         var logger = log4javascript.getLogger('j1.initClipboard');
         var logText = '\n' + 'initialization copy-to-clipboard sucessfull';
         logger.debug(logText);
