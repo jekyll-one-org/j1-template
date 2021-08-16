@@ -159,7 +159,7 @@ template:
 #   values:                             HTML doc types
 #   default:                            html
 #
-language:                               de
+language:                               en
 coding:                                 UTF-8
 doctype:                                html
 

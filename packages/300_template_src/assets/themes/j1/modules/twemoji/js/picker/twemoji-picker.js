@@ -20,6 +20,8 @@
   var b = 150;
   var d = {};
   var twa_database = "/assets/data/twa_v1.json";
+  var responseText;
+  var placeholder;
 
   $.TwemojiPicker = function (element, options) {
     var h = this;
@@ -30,6 +32,7 @@
   };
   $.TwemojiPicker.defaults = {
     init: null,
+    language: "en",
     size: 25,
     icon: "grinning",
     iconSize: 25,
@@ -40,7 +43,7 @@
     pickerPosition: null,
     pickerHeight: 150,
     pickerWidth: null,
-    placeholder: "",
+    placeholder: "Click Picker to select Emoji's from a Category",
   };
   $.TwemojiPicker.prototype = {
     _init: function (h) {
@@ -67,13 +70,39 @@
     },
     _initPicker: function () {
       var h = this;
+      var clearText;
+      var buttonsHTML;
+
+      if (h.options.language == 'en') {
+        clearText    = 'Clear';
+        responseText = 'in Clipboard';
+        placeholder  = h.options.placeholder;
+      } else if (h.options.language == 'de') {
+        clearText    = 'Löschen';
+        responseText = 'in Zwischenablage';
+        placeholder  = "Klicken Sie auf Picker zur Auswahl von Emoji's aus einer Kategorie";
+      } else {
+        clearText    = 'Clear';
+        responseText = 'in Clipboard';
+        placeholder  = h.options.placeholder;
+      }
+
+      buttonsHTML =  '<div class="twemoji-icon-picker">';
+      buttonsHTML +=   '<span id="open-group" class="mr-2" style="width: 2rem; height: 2rem;">';
+      buttonsHTML +=     '<button type="button" name="open-group" class="btn btn-raised btn-flex btn-primary mr-2"><i class="toggle-button mdi mdi-lg mr-1 mdi-toggle-switch-off"></i> Picker </button>';
+      buttonsHTML +=   '</span>';
+      buttonsHTML +=   '<span id="clear-textarea" style="width: 2rem; height: 2rem;">';
+      buttonsHTML +=     '<button type="button" name="clear-textarea" class="btn btn-raised btn-flex btn-primary"><i class="mdi mdi-close mdi-lg mr-1"></i>' + clearText + '</button>';
+      buttonsHTML +=   '</span>';
+      buttonsHTML += '</div>';
+
       h.$id = "#" + h.$el["0"].id;
       h.$pickerHeigth = h.options.height.replace("px", "");
       h.$pickerHeigth = Number(h.$pickerHeigth);
       h.$wrapper = h.$el.wrap('<div class="twemoji-wrap"></div>').parent();
-      h.$wrapper.append('<div class="twemoji-textarea" contentEditable="true" placeholder="' + h.options.placeholder + '"></div>');
+      h.$wrapper.append('<div class="twemoji-textarea" contentEditable="true" placeholder="' + placeholder + '"></div>');
       h.$wrapper.append('<div class="twemoji-textarea-duplicate"></div>');
-      h.$wrapper.append('<div class="twemoji-icon-picker"><span id="open-group" class="mr-2" style="width: 2rem; height: 2rem;"><button type="button" name="open-group" class="btn btn-raised btn-flex btn-primary mr-2"><i class="toggle-button mdi mdi-lg mr-1 mdi-toggle-switch-off"></i> Picker <div class="ripple-container"></div></button></span><span id="clear-textarea" style="width: 2rem; height: 2rem;"><button type="button" name="clear-textarea" class="btn btn-raised btn-flex btn-primary"><i class="mdi mdi-close mdi-lg mr-1"></i> Clear </button></span></div>');
+      h.$wrapper.append(buttonsHTML);
       h.$wrapper.append('<div class="twemoji-picker"></div>');
       h.$el.hide();
       h.$textarea = h.$wrapper.find(".twemoji-textarea");
@@ -161,8 +190,8 @@
         }
       });
       this.$clearTextarea.on("click", function () {
-        h.copyTextArea("");
-        $(h.$id).val("");
+        h.copyTextArea('');
+        $(h.$id).val('');
         $(".twemoji-textarea > .emoji-span").remove()
       });
       this.$pickerCategory.find("span").on("click", function () {
@@ -187,7 +216,8 @@
         document.execCommand('copy');
         var copied = document.createElement('div');
         copied.setAttribute('class', 'copied');
-        copied.appendChild(document.createTextNode('Copied to Clipboard'));
+//      copied.appendChild(document.createTextNode('Copied to Clipboard'));
+        copied.appendChild(document.createTextNode(responseText));
         document.body.appendChild(copied);
         setTimeout(function () {
             document.body.removeChild(copyFrom);
