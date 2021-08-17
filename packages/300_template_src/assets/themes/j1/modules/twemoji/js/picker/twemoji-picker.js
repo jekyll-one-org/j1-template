@@ -216,7 +216,6 @@
         document.execCommand('copy');
         var copied = document.createElement('div');
         copied.setAttribute('class', 'copied');
-//      copied.appendChild(document.createTextNode('Copied to Clipboard'));
         copied.appendChild(document.createTextNode(responseText));
         document.body.appendChild(copied);
         setTimeout(function () {
