@@ -17,7 +17,7 @@ fam_menu_id:                            page_ctrl_simple
 permalink:                              /pages/public/learn/roundtrip/themes/
 regenerate:                             false
 
-resources:                              [ rouge, clipboard ]
+resources:                              [ rouge, clipboard, lightbox ]
 resource_options:
   - attic:
       padding_top:                      400
@@ -95,6 +95,9 @@ link:{w3org-css-spec}[the CSS technology] to do so. We encourage you to spend
 some time first on learning CSS. To learn what is the
 link:{w3schools-css-tutorial}[design base, {browser-window--new}] of each and
 every website.
+
+.Themes menu (Bootswatch)
+lightbox::images--themes-menu[ 1024, {data-images--themes-menu} ]
 
 Thanks to the people at link:{bootswatch-home}[Bootswatch, {browser-window--new}],
 a great set of already prepared Bootstrap stylesheets in various designs are

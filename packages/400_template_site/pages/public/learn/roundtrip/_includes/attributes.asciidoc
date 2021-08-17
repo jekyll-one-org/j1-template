@@ -78,6 +78,8 @@ tag::data[]
 :data-images-standalone:                          "pages/roundtrip/100_present_images/lightbox-image-1.jpg, Golden Gate Bridge with San Francisco in distance, pages/roundtrip/100_present_images/lightbox-image-2.jpg, Forest with mountains behind"
 :data-images-group:                               "pages/roundtrip/100_present_images/lightbox-image-1.jpg, Golden Gate Bridge with San Francisco in distance, pages/roundtrip/100_present_images/lightbox-image-2.jpg, Forest with mountains behind"
 
+:data-images--themes-menu:                        "pages/roundtrip/500_themes/themes-menu-1280x800.jpg, Themes menu (Bootswatch)"
+
 :data-quicksearch-icon:                           "pages/roundtrip/600_quicksearch/quicksearch_icon-800x200.jpg, Search button (magnifier) in the quick access area"
 :data-quicksearch-input:                          "pages/roundtrip/600_quicksearch/quicksearch_input-800x200.jpg, Input bar for a QuickSearch"
 

@@ -48,6 +48,14 @@ exclude_from_search:                    true
   {% assign production = true %}
 {% endif %}
 
+{% comment %} Language selection (supported languages: en|de)
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if site.language == 'en' or site.language == 'de' %}
+  {% assign language = site.language %}
+{% else %}
+  {% assign language = 'en' %}
+{% endif %}
+
 <!-- [INFO   ] [j1.assets.data.banner.html             ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />
@@ -57,10 +65,10 @@ exclude_from_search:                    true
 <div id="{{customizer_options.xhr_data_element}}">
 
   {% comment %} Main
-  -------------------------------------------------------------------------------- {% endcomment %}
+  ------------------------------------------------------------------------------ {% endcomment %}
   <!-- [INFO   ] [j1.gallery_customizer              ] [Placement of the Drawer] -->
 
-  <nav class="nav bmd-layout-container bmd-drawer-f-l">
+  <nav class="nav bmd-layout-container custom-size-300 bmd-drawer-f-l">
 
     <header class="bmd-layout-header">
       <div class="navbar navbar-dark bg-primary raised-z2 mb-2">
@@ -69,43 +77,46 @@ exclude_from_search:                    true
         </button>
         <ul class="nav navbar-nav">
           <li class="nav-item">
-            <span class="navbar-text md-grey-900">Gallery: {{customizer_options.title}}</span>
+            <span class="navbar-text md-grey-900" style="font-size: x-large;">{{customizer_options.title}}</span>
           </li>
         </ul>
       </div>
     </header>
 
+    {% comment %} Menu translations
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% if language == 'en' %}
     <div id="drw_customizer" class="bmd-layout-drawer bg-faded">
-      <span class="navbar-brand ml-2 mb-3">Gallery Settings</span>
+      <span class="navbar-brand ml-2 mb-3">Settings</span>
       <form id="jg-customizer-form" class="form-horizontal">
 
         <div class="mdc-list-group">
-          <div class="col-md-12">
 
+          <div class="col-md-12 mb-4">
             <div class="form-group">
               <label class="bmd-label-floating" for="rowHeight">Row Height [px]</label>
               <input id="rowHeight" name="rowHeight" class="form-control" type="number" value="{{customizer_options.gallery_settings.rowHeight}}">
-              <span class="bmd-help">Preferred row height (min: 40px)</span>
+              <span class="bmd-help">Image line height (min: 40px)</span>
             </div>
           </div>
 
-          <div class="col-md-12">
+          <!-- div class="col-md-12">
             <div class="form-group">
               <label class="bmd-label-floating" for="rowHeightMax">Row Height Max [px]</label>
               <input id="rowHeightMax" name="rowHeightMax" class="form-control" type="number" value="{{customizer_options.gallery_settings.maxRowHeight}}">
               <span class="bmd-help">Maximum row height</span>
             </div>
-          </div>
+          </div-->
 
-          <div class="col-md-12">
+          <div class="col-md-12 mb-4">
             <div class="form-group">
               <label class="bmd-label-floating" for="margins">Thumb Spacing [px]</label>
               <input id="margins" name="margins" class="form-control" type="number" value="{{customizer_options.gallery_settings.margins}}">
-              <span class="bmd-help">Space between the images</span>
+              <span class="bmd-help">Space between the preview images</span>
             </div>
           </div>
 
-          <div class="col-md-12">
+          <div class="col-md-12 mb-4">
             <div class="form-group">
               <label class="bmd-label-floating" for="border">Gallery Padding [px]</label>
               <input id="border" name="border" class="form-control" type="number" value="{{customizer_options.gallery_settings.border}}">
@@ -113,7 +124,7 @@ exclude_from_search:                    true
             </div>
           </div>
 
-          <div class="ml-3 mt-5 mb-5">
+          <div class="ml-1 mt-5 mb-5">
             <div class="switch">
               <label>
                 <input id="captions" name="captions" type="checkbox" checked>
@@ -143,12 +154,12 @@ exclude_from_search:                    true
         </div>
 
         <button type="button" name="reset-defaults"
-                class="btn btn-raised btn-flex btn-primary ml-2"
-                aria-label="Reset Button"
-                style="min-width: 12rem">
-                <i class="mdi mdi-close mdi-24px mdi-md_white mr-1"></i>Reset
+          class="btn btn-raised btn-flex btn-primary ml-2"
+          aria-label="Reset Button"
+          style="min-width: 12rem">
+          <i class="mdi mdi-close mdi-24px mdi-md_white mr-1"></i>
+          Reset
         </button>
-
 
         <!-- div class="mt-1">
           <a  id="reset-defaults" href="#"
@@ -160,6 +171,79 @@ exclude_from_search:                    true
 
       </form>
     </div>
+    {% endif %}
+
+    {% if language == 'de' %}
+    <div id="drw_customizer" class="bmd-layout-drawer bg-faded">
+      <span class="navbar-brand ml-2 mb-3">Einstellungen</span>
+      <form id="jg-customizer-form" class="form-horizontal">
+
+        <div class="mdc-list-group">
+          <div class="col-md-12 mb-4">
+
+            <div class="form-group">
+              <label class="bmd-label-floating" for="rowHeight">Zeilenhöhe [px]</label>
+              <input id="rowHeight" name="rowHeight" class="form-control" type="number" value="{{customizer_options.gallery_settings.rowHeight}}">
+              <span class="bmd-help">Höhe einer Bildzeile (min: 40px)</span>
+            </div>
+          </div>
+
+          <div class="col-md-12 mb-4">
+            <div class="form-group">
+              <label class="bmd-label-floating" for="margins">Bildabstand [px]</label>
+              <input id="margins" name="margins" class="form-control" type="number" value="{{customizer_options.gallery_settings.margins}}">
+              <span class="bmd-help">Abstände der Vorschaubilder</span>
+            </div>
+          </div>
+
+          <div class="col-md-12 mb-4">
+            <div class="form-group">
+              <label class="bmd-label-floating" for="border">Gallerierahmen [px]</label>
+              <input id="border" name="border" class="form-control" type="number" value="{{customizer_options.gallery_settings.border}}">
+              <span class="bmd-help">Randgröße um die Gallerie</span>
+            </div>
+          </div>
+
+          <div class="ml-1 mt-5 mb-5">
+            <div class="switch">
+              <label>
+                <input id="captions" name="captions" type="checkbox" checked>
+                Untertitel aktivieren
+              </label>
+            </div>
+            <div class="switch">
+              <label>
+                <input id="random" name="random" type="checkbox">
+                Zufällige Bildanzeige
+              </label>
+            </div>
+            <div class="switch">
+              <label>
+                <input id="justify_last_row" name="justify_last_row" type="checkbox">
+                Letzte Reihe ausrichten
+              </label>
+            </div>
+            <div class="switch">
+              <label>
+                <input id="hide_last_row" name="hide_last_row" type="checkbox">
+                Letzte Reihe ausblenden
+              </label>
+            </div>
+          </div>
+
+        </div>
+
+        <button type="button" name="reset-defaults"
+          class="btn btn-raised btn-flex btn-primary ml-2"
+          aria-label="Reset Button"
+          style="min-width: 12rem">
+          <i class="mdi mdi-close mdi-24px mdi-md_white mr-1"></i>
+          Zurücksetzen
+        </button>
+
+      </form>
+    </div>
+    {% endif %}
 
     <!-- main content -->
     <div class="bmd-layout-content">
