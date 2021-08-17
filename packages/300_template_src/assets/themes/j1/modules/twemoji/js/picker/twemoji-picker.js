@@ -43,7 +43,7 @@
     pickerPosition: null,
     pickerHeight: 150,
     pickerWidth: null,
-    placeholder: "Click Picker to select Emoji's from a Category",
+    placeholder: "Click on Picker to select Emoji's from a Category",
   };
   $.TwemojiPicker.prototype = {
     _init: function (h) {
@@ -75,11 +75,11 @@
 
       if (h.options.language == 'en') {
         clearText    = 'Clear';
-        responseText = 'in Clipboard';
+        responseText = 'Copied to Clipboard';
         placeholder  = h.options.placeholder;
       } else if (h.options.language == 'de') {
         clearText    = 'Löschen';
-        responseText = 'in Zwischenablage';
+        responseText = 'Kopiert zur Zwischenablage';
         placeholder  = "Klicken Sie auf Picker zur Auswahl von Emoji's aus einer Kategorie";
       } else {
         clearText    = 'Clear';

@@ -518,6 +518,7 @@ better reading or orientation.
   function copyText(id) {
     var copyText = id.toUpperCase();
     var copyFrom = document.createElement('textarea');
+//  var language = 'de';
     var language = '{{site.language}}';
 
     if (language == 'en') {
