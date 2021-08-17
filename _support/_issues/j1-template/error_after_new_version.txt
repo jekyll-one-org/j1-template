@@ -1,0 +1,49 @@
+Nach bump auf neue version scheint Folder "400_template_site/apps " verschwunden
+Folder sollte ein Link auf "packages\300_template_src\apps" sein!
+
+! Es scheine ALLE Links "400_template_site" nicht mehr korrekt.
+
+
+site:                     ------------------------------------------------
+site:       Jekyll 4.2.0   Please append `--trace` to the `serve` command
+site:                      for any additional information or backtrace.
+site:                     ------------------------------------------------
+site: C:/Users/jadams/.gem/ruby/2.7.0/gems/jekyll-4.2.0/lib/jekyll/utils.rb:141:in `initialize':
+Is a directory @ rb_sysopen - D:/j1/github/j1-template-2021.1.20/packages/400_template_site/apps (Errno::EISDIR)
+
+
+Verzeichnis von D:\j1\github\j1-template-2021.1.20\packages\400_template_site
+
+17.08.2021  19:36    <DIR>          .
+17.08.2021  19:36    <DIR>          ..
+17.08.2021  19:35    <DIR>          .bundle
+17.08.2021  19:34                91 .eslintrc.json
+17.08.2021  19:35    <DIR>          .jekyll-cache
+17.08.2021  19:36           124.044 .jekyll-metadata
+17.08.2021  19:35    <JUNCTION>     apps [D:\j1\github\j1-template-2021.1.20\packages\300_template_src\apps]
+17.08.2021  19:35    <JUNCTION>     assets [D:\j1\github\j1-template-2021.1.20\packages\300_template_src\assets]
+11.08.2021  18:26    <DIR>          collections
+11.08.2021  16:28             1.042 config.ru
+11.08.2021  16:28             4.286 favicon.ico
+17.08.2021  19:34             8.066 Gemfile
+17.08.2021  19:35             5.167 Gemfile.lock
+11.08.2021  16:28             2.244 index.html
+17.08.2021  19:34    <DIR>          log
+17.08.2021  19:35    <DIR>          node_modules
+17.08.2021  19:35           258.858 package-lock.json
+17.08.2021  19:02             8.112 package.json
+11.08.2021  18:26    <DIR>          pages
+17.08.2021  19:34            32.515 _config.yml
+11.08.2021  18:26    <DIR>          _data
+17.08.2021  19:35    <JUNCTION>     _includes [D:\j1\github\j1-template-2021.1.20\packages\300_template_src\_includes]
+17.08.2021  19:35    <JUNCTION>     _install [D:\j1\github\j1-template-2021.1.20\packages\300_template_src\_install]
+17.08.2021  19:35    <JUNCTION>     _layouts [D:\j1\github\j1-template-2021.1.20\packages\300_template_src\_layouts]
+17.08.2021  19:35    <JUNCTION>     _plugins [D:\j1\github\j1-template-2021.1.20\packages\300_template_src\_plugins]
+17.08.2021  19:35    <DIR>          _sass
+17.08.2021  19:36    <DIR>          _site
+11.08.2021  18:26    <DIR>          _unused
+             10 Datei(en),        444.425 Bytes
+             18 Verzeichnis(se), 124.892.561.408 Bytes frei
+
+
+             
