@@ -1238,5 +1238,27 @@ resources:
         js:                             [ modules/datatables/js/datatables ]
         init_function:                  []
 
+  # ----------------------------------------------------------------------------
+  # rtextResizer
+  # NOTE: This module is in state EXPERIMENTAL
+  #
+  - name:                               rtextResizer
+    resource:
+      id:                               rtextresizer
+      enabled:                          false
+      comment:                          J1 rtextResizer
+      region:                           head
+      layout:                           [ home, page, post, collection ]
+      required:                         always                                  # always | ondemand
+      preload:                          false                                   # property currently unused
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            []
+        files:                          [ adapter/js/rtextResizer.js ]
+        js:                             []
+        init_function:                  [ j1.adapter.rtextResizer.init ]
+
 # ------------------------------------------------------------------------------
 # END config

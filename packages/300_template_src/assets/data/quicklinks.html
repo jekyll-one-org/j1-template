@@ -64,8 +64,6 @@ exclude_from_search:                    true
 {% assign quicklinks_options      = nav_quicklinks_defaults | merge: nav_quicklinks_settings %}
 {% assign consent_options         = consent_defaults | merge: consent_settings %}
 
-consent_options: {{ consent_options | debug }}
-
 {% comment %} Control Center disabled
 --------------------------------------------------------------------------------
 {% assign cc_app_config_options   = cc_app_config_defaults | merge: cc_app_config_settings %}

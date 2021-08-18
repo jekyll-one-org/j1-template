@@ -6,8 +6,8 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/justifiedGalleryCustomizer.js
- # Liquid template to adapt Gallery Customizer JS functions
+ # ~/assets/themes/j1/adapter/js/rtextResizer.js
+ # Liquid template to adapt rtextResizer functions
  #
  # Product/Info:
  # https://jekyll.one
@@ -68,8 +68,8 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/justifiedGalleryCustomizer.js
- # J1 Adapter for Gallery Customizer
+ # ~/assets/themes/j1/adapter/js/rtextResizer.js
+ # Liquid template to adapt rtextResizer functions
  #
  # Product/Info:
  # https://jekyll.one
@@ -92,7 +92,7 @@ regenerate:                             true
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
-j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
+j1.adapter['rtextResizer'] = (function (j1, window) {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
@@ -116,8 +116,8 @@ j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       // globals
       // -----------------------------------------------------------------------
-      _this   = j1.adapter.justifiedGalleryCustomizer;
-      logger  = log4javascript.getLogger('j1.adapter.justifiedGalleryCustomizer');
+      _this   = j1.adapter.rtextResizer;
+      logger  = log4javascript.getLogger('j1.adapter.rtextResizer');
 
       // initialize state flag
       _this.setState('started');
@@ -128,7 +128,7 @@ j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
       // Default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.justifiedGalleryCustomizer',
+        module_name: 'j1.adapter.rtextResizer',
         generated:   '{{site.time}}'
       }, options);
 
@@ -143,10 +143,10 @@ j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
       // data loader
       // -----------------------------------------------------------------------
       j1.loadHTML ({
-        xhr_container_id:   customizerOptions.xhr_container_id,
-        xhr_data_path:      customizerOptions.xhr_data_path,
-        xhr_data_element:   customizerOptions.xhr_data_element },
-        'j1.adapter.gallery_customizer',
+        xhr_container_id:   'rtext_resizer_container',
+        xhr_data_path:      '/assets/data/rtext_resizer/index.html',
+        xhr_data_element:   'rtext_resizer_modal' },
+        'j1.adapter.rtextResizer',
         'null'
       );
 
@@ -154,195 +154,80 @@ j1.adapter['justifiedGalleryCustomizer'] = (function (j1, window) {
       // initializer
       // -----------------------------------------------------------------------
       var dependencies_met_data_loaded = setInterval(function() {
-        if (j1.xhrDOMState['#customizer'] == 'success') {
-          var galleryId       = '#jg_customizer';
-          var $formId         = $('#jg-customizer-form');
-          var $instance       = $('#jg_customizer');
-          var kbdDelay        = 750;
-          var imageHeightMin  = 100;
+        var logger = log4javascript.getLogger('j1.adapter.rtextResizer');
 
-          logger.info('\n' + 'loading customizer finished on id: #' + customizerOptions.xhr_container_id);
+        if (j1.xhrDOMState['#rtext_resizer_container'] == 'success') {
+          var $modalContainer = $('#rtext_resizer_modal');
 
-          // -------------------------------------------------------------------
-          // load gallery data
-          j1.adapter.justifiedGallery.initialize(galleryOptions);
+          logger.info('\n' + 'loading rtext resizer modal finished on id: #' + 'rtext_resizer');
+          logger.info('\n' + 'initialize resizer ui');
 
-          logger.info('\n' + 'initialize customizer ui|forms');
+          if ($modalContainer.length) {
+            var environment     = '{{environment}}';
+            var logger          = log4javascript.getLogger('j1.template.rtext-resizer');
+            var $el             = $("main[class*='r-text']");
+            var base_classes    = $("main[class*='r-text']").attr('class').replace(/r-text-[0-9]*/g, '');
+            var r_text_default  = ' r-text-300';
+            var r_text_larger   = ' r-text-400';
+            var r_text_largest  = ' r-text-500';
+            var cl;
+            var value;
 
-          if ($formId.length) {
-            var timerid;
+            $('input:checkbox[name="textsize-300"]').on('click', function (e) {
+              value = $(this).is(':checked');
 
-            $('input[name="rowHeight"]').on('input', function (e) {
-              var value = $(this).val();
-
-              if (value < imageHeightMin) { return false; }
-
-              if($(this).data('lastval') != value){
-                  $(this).data('lastval', value);
-                  clearTimeout(timerid);
-                  //change action
-                  timerid = setTimeout(function() {
-                    $instance.justifiedGallery({rowHeight: value});
-                    if (environment === 'development') {
-                      logText = '\n' + 'gallery on ID ' +galleryId+ ' changed rowHeight to: ' +value;
-                      logger.info(logText);
-                    }
-                  }, kbdDelay);
-              };
-              e.stopPropagation();
-            });
-
-            $('input[name="rowHeightMax"]').on('input', function (e) {
-              var value = $(this).val();
-
-              if($(this).data('lastval') != value){
-                  $(this).data('lastval', value);
-                  clearTimeout(timerid);
-                  //change action
-                  timerid = setTimeout(function() {
-                    $instance.justifiedGallery({maxRowHeight: value});
-                    if(environment === 'development') {
-                      logText = '\n' + 'gallery on ID ' +galleryId+ ' changed maxRowHeight to: ' +value;
-                      logger.info(logText);
-                    }
-                  }, kbdDelay);
-              };
-              e.stopPropagation();
-            });
-
-            $('input[name="margins"]').on('input', function (e) {
-              var value = $(this).val();
-
-              if($(this).data('lastval') != value){
-                  $(this).data('lastval', value);
-                  clearTimeout(timerid);
-                  //change action
-                  timerid = setTimeout(function() {
-                    $instance.justifiedGallery({margins: value});
-                    if(environment === 'development') {
-                      logText = '\n' + 'gallery on ID ' +galleryId+ ' changed margins to: ' +value;
-                      logger.info(logText);
-                    }
-                  }, kbdDelay);
-              };
-              e.stopPropagation();
-            });
-
-            $('input[name="border"]').on('input', function (e) {
-              var value = $(this).val();
-
-              if($(this).data('lastval') != value){
-                  $(this).data('lastval', value);
-                  clearTimeout(timerid);
-                  //change action
-                  timerid = setTimeout(function() {
-                    $instance.justifiedGallery({border: value});
-                    if(environment === 'development') {
-                      logText = '\n' + 'gallery on ID ' +galleryId+ ' changed padding to: ' +value;
-                      logger.info(logText);
-                    }
-                  }, kbdDelay);
-              };
-              e.stopPropagation();
-            });
-
-            $('input:checkbox[name="captions"]').on('click', function (e) {
-              var value = $(this).is(':checked');
-
-              $instance.justifiedGallery({captions: value});
-              if(environment === 'development') {
-                logText = '\n' + 'gallery on ID ' +galleryId+ ' changed captions to: ' +value;
-                logger.info(logText);
-              }
-              e.stopPropagation();
-            });
-
-            $('input:checkbox[name="random"]').on('click', function (e) {
-              var value = $(this).is(':checked');
-
-              $instance.justifiedGallery({randomize: value});
-              if(environment === 'development') {
-                logText = '\n' + 'gallery on ID ' +galleryId+ ' changed randomize to: ' +value;
-                logger.info(logText);
-              }
-              e.stopPropagation();
-            });
-
-            $('input:checkbox[name="justify_last_row"]').on('click', function (e) {
-              var value = $(this).is(':checked');
+              $('input:checkbox[name="textsize-400"]').prop('checked', false);
+              $('input:checkbox[name="textsize-500"]').prop('checked', false);
 
               if (value == true) {
-                value = 'justify';
-                $instance.justifiedGallery({lastRow: value});
-              } else {
-                value = 'nojustify';
-                $instance.justifiedGallery({lastRow: value});
+                cl = r_text_default;
               }
+              $el.attr('class', base_classes + cl);
+
               if(environment === 'development') {
-                logText = '\n' + 'gallery on ID ' +galleryId+ ' changed lastRow to: ' +value;
+                logText = 'Changed textsize to: ' +cl;
                 logger.info(logText);
               }
               e.stopPropagation();
             });
 
-            $('input:checkbox[name="hide_last_row"]').on('click', function (e) {
-              var value = $(this).is(':checked');
+            $('input:checkbox[name="textsize-400"]').on('click', function (e) {
+              value = $(this).is(':checked');
+
+              $('input:checkbox[name="textsize-300"]').prop('checked', false);
+              $('input:checkbox[name="textsize-500"]').prop('checked', false);
 
               if (value == true) {
-                value = 'hide';
-                $instance.justifiedGallery({lastRow: value});
-              } else {
-                value = 'nojustify';
-                $instance.justifiedGallery({lastRow: value});
+                cl = r_text_larger;
               }
+              $el.attr('class', base_classes + cl);
+
               if(environment === 'development') {
-                logText = '\n' + 'gallery on ID ' +galleryId+ ' changed lastRow to: ' +value;
+                logText = 'Changed textsize to: ' +cl;
                 logger.info(logText);
               }
               e.stopPropagation();
             });
 
-            $('#jg-customizer-form button[name="reset-defaults"]').on('click', function (e) {
+            $('input:checkbox[name="textsize-500"]').on('click', function (e) {
+              value = $(this).is(':checked');
 
-              $('#rowHeight').val(customizerOptions.gallery_settings.rowHeight);
-              $('#rowHeightMax').val(customizerOptions.gallery_settings.maxRowHeight);
-              $('#margins').val(customizerOptions.gallery_settings.margins);
-              $('#border').val(customizerOptions.gallery_settings.border);
-              $('input:checkbox[name="captions"]').val('on').filter('[value="on"]').prop('checked', customizerOptions.gallery_settings.captions);
-              $('input:checkbox[name="random"]').val('off').filter('[value="off"]').prop('checked', customizerOptions.gallery_settings.randomize);
-              $('input:checkbox[name="justify_last_row"]').val('on').filter('[value="on"]').prop('checked', customizerOptions.gallery_settings.justifyLastRow);
-              $('input:checkbox[name="hide_last_row"]').val('off').filter('[value="off"]').prop('checked', customizerOptions.gallery_settings.hideLastRow);
+              $('input:checkbox[name="textsize-300"]').prop('checked', false);
+              $('input:checkbox[name="textsize-400"]').prop('checked', false);
 
-              $instance.justifiedGallery({
-                rowHeight:          customizerOptions.gallery_settings.rowHeight,
-                maxRowHeight:       customizerOptions.gallery_settings.maxRowHeight,
-                lastRow:            customizerOptions.gallery_settings.lastRow,
-                margins:            customizerOptions.gallery_settings.margins,
-                border:             customizerOptions.gallery_settings.border,
-                randomize:          customizerOptions.gallery_settings.randomize,
-                sort:               customizerOptions.gallery_settings.sort,
-                refreshTime:        customizerOptions.gallery_settings.refreshTime,
-                refreshSensitivity: customizerOptions.gallery_settings.refreshSensitivity,
-                justifyThreshold:   customizerOptions.gallery_settings.justifyThreshold,
-                captions:           customizerOptions.gallery_settings.captions
-              });
+              if (value == true) {
+                cl = r_text_largest;
+              }
+              $el.attr('class', base_classes + cl);
 
               if(environment === 'development') {
-                logText = '\n' + 'gallery on ID ' +galleryId+ ' reset to default values';
+                logText = 'Changed textsize to: ' +cl;
                 logger.info(logText);
               }
               e.stopPropagation();
             });
 
           } // END form events
-
-          // See: https://jsfiddle.net/prathviraj080/vbbbw46a/1/
-          $('button.drawer-toggler').click(function(){
-            $('button.drawer-toggler span.mdi').toggleClass('mdi-menu mdi-close');
-          });
-          $('button.drawer-toggler').click(function(){
-            $('button.drawer-toggler').toggleClass('fadeIn rotateIn');
-          });
 
           _this.setState('finished');
           logger.info('\n' + 'state: ' + _this.getState());

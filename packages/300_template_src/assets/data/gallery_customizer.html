@@ -27,6 +27,10 @@ exclude_from_search:                    true
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
 
+{% comment %} Set global settings
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment         = site.environment %}
+
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign apps                = site.data.apps %}
@@ -34,8 +38,6 @@ exclude_from_search:                    true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment         = site.environment %}
-
 {% assign customizer_defaults = apps.defaults.justifiedGalleryCustomizer.defaults %}
 {% assign customizer_settings = apps.justifiedGalleryCustomizer.settings %}
 
@@ -48,7 +50,7 @@ exclude_from_search:                    true
   {% assign production = true %}
 {% endif %}
 
-{% comment %} Language selection (supported languages: en|de)
+{% comment %} i18n: language selection (supported languages: en|de)
 -------------------------------------------------------------------------------- {% endcomment %}
 {% if site.language == 'en' or site.language == 'de' %}
   {% assign language = site.language %}
@@ -83,8 +85,9 @@ exclude_from_search:                    true
       </div>
     </header>
 
-    {% comment %} Menu translations
+    {% comment %} i18n: translations
     ---------------------------------------------------------------------------- {% endcomment %}
+
     {% if language == 'en' %}
     <div id="drw_customizer" class="bmd-layout-drawer bg-faded">
       <span class="navbar-brand ml-2 mb-3">Settings</span>
@@ -96,7 +99,7 @@ exclude_from_search:                    true
             <div class="form-group">
               <label class="bmd-label-floating" for="rowHeight">Row Height [px]</label>
               <input id="rowHeight" name="rowHeight" class="form-control" type="number" value="{{customizer_options.gallery_settings.rowHeight}}">
-              <span class="bmd-help">Image line height (min: 40px)</span>
+              <span class="bmd-help">Image line height (min: 100px)</span>
             </div>
           </div>
 
@@ -184,7 +187,7 @@ exclude_from_search:                    true
             <div class="form-group">
               <label class="bmd-label-floating" for="rowHeight">Zeilenhöhe [px]</label>
               <input id="rowHeight" name="rowHeight" class="form-control" type="number" value="{{customizer_options.gallery_settings.rowHeight}}">
-              <span class="bmd-help">Höhe einer Bildzeile (min: 40px)</span>
+              <span class="bmd-help">Höhe einer Bildzeile (min: 100px)</span>
             </div>
           </div>
 
