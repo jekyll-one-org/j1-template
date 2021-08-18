@@ -1186,7 +1186,6 @@ resources:
                                           adapter/js/fam.js                     # adapter adopted from ssm module
                                         ]
         js:                             []
-        init_function:                  []
         init_function:                  [ j1.adapter.fam.init ]
 
   # ----------------------------------------------------------------------------

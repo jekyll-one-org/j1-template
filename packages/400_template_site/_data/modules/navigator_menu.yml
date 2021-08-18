@@ -331,6 +331,10 @@
           href:                         http://www.freeformatter.com/
           target:                       _blank
           icon:                         cached
+        - title:                        AppDevTools
+          href:                         https://www.appdevtools.com/
+          target:                       _blank
+          icon:                         cached
         - title:                        Convert CSS to Sass
           href:                         http://sebastianpontow.de/css2compass/
           target:                       _blank
@@ -347,10 +351,6 @@
           href:                         http://yaml-online-parser.appspot.com/
           target:                       _blank
           icon:                         code-braces
-        - title:                        XML-YAML Converter
-          href:                         http://codebeautify.org/xml-to-yaml
-          target:                       _blank
-          icon:                         xml
         - title:                        Character Codes
           href:                         http://character-code.com/
           target:                       _blank
