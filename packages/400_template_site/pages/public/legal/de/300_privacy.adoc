@@ -1,5 +1,5 @@
 ---
-title:                                  Privatheit
+title:                                  Persönliche Daten
 tagline:                                ihre privatsphäre
 date:                                   2023-01-01 01:00:00 +100
 description: >

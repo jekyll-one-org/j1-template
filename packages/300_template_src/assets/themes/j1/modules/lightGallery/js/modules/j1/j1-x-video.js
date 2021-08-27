@@ -21,15 +21,16 @@
 }(this, function ($) {
 
 (function() {
-    
+
         'use strict';
-    
+
         var defaults = {
             videoMaxWidth: '855px',
-
             autoplayFirstVideo: true,
 
             youtubePlayerParams: false,
+            tiktokPlayerParams: false,
+            youpornPlayerParams: false,
             vimeoPlayerParams: false,
             dailymotionPlayerParams: false,
             vkPlayerParams: false,
@@ -37,55 +38,55 @@
             videojs: false,
             videojsOptions: {}
         };
-    
+
         var Video = function(element) {
-    
+
             this.core = $(element).data('lightGallery');
-    
+
             this.$el = $(element);
             this.core.s = $.extend({}, defaults, this.core.s);
             this.videoLoaded = false;
-    
+
             this.init();
-    
+
             return this;
         };
-    
+
         Video.prototype.init = function() {
             var _this = this;
-    
+
             // Event triggered when video url found without poster
             _this.core.$el.on('hasVideo.lg.tm', onHasVideo.bind(this));
-    
+
             // Set max width for video
             _this.core.$el.on('onAferAppendSlide.lg.tm', onAferAppendSlide.bind(this));
-    
+
             if (_this.core.doCss() && (_this.core.$items.length > 1) && (_this.core.s.enableSwipe || _this.core.s.enableDrag)) {
                 _this.core.$el.on('onSlideClick.lg.tm', function() {
                     var $el = _this.core.$slide.eq(_this.core.index);
                     _this.loadVideoOnclick($el);
                 });
             } else {
-    
+
                 // For IE 9 and bellow
                 _this.core.$slide.on('click.lg', function() {
                     _this.loadVideoOnclick($(this));
                 });
             }
-    
+
             _this.core.$el.on('onBeforeSlide.lg.tm', onBeforeSlide.bind(this));
-    
+
             _this.core.$el.on('onAfterSlide.lg.tm', function(event, prevIndex) {
                 _this.core.$slide.eq(prevIndex).removeClass('lg-video-playing');
             });
         };
-    
+
         Video.prototype.loadVideo = function(src, addClass, noPoster, index, html) {
             var video = '';
             var autoplay = 1;
             var a = '';
             var isVideo = this.core.isVideo(src, index) || {};
-    
+
             // Enable autoplay based on setting for first video if poster doesn't exist
             if (noPoster) {
                 if (this.videoLoaded) {
@@ -94,63 +95,74 @@
                     autoplay = this.core.s.autoplayFirstVideo ? 1 : 0;
                 }
             }
-    
+
             // jadams
             if (isVideo.youtube) {
-    
+
                 a = '?wmode=opaque&autoplay=' + autoplay + '&enablejsapi=1';
                 if (this.core.s.youtubePlayerParams) {
                     a = a + '&' + $.param(this.core.s.youtubePlayerParams);
                 }
-    
+
                 video = '<iframe class="lg-video-object lg-youtube ' + addClass + '" width="560" height="315" src="//www.youtube.com/embed/' + isVideo.youtube[1] + a + '" frameborder="0" allowfullscreen></iframe>';
             // jadams
-            } else if (isVideo.youporn) {
-    
+            } else if (isVideo.tiktok) {
+
                 a = '?wmode=opaque&autoplay=' + autoplay + '&enablejsapi=1';
                 if (this.core.s.youtubePlayerParams) {
                     a = a + '&' + $.param(this.core.s.youtubePlayerParams);
                 }
-    
+//              video = '<iframe loading="lazy" class="lg-video-object lg-youtube lg-tiktok' + addClass + '" width="340" height="700"  src="https://www.tiktok.com/embed/' + isVideo.tiktok[2] + a + '" frameborder="0" scrolling=no allow="fullscreen"></iframe>';
+//              video = '<iframe class="lg-video-object lg-youtube ' + addClass + '" width="560" height="315"  src="https://www.tiktok.com/embed/' + isVideo.tiktok[2] + a + '" frameborder="0" scrolling=no allowfullscreen name="yp_embed_video" frameborder="0"></iframe>';
+//              video = '<iframe loading="lazy" class="lg-video-object lg-tiktok ' + addClass + '" width="340" height="700"  src="https://www.tiktok.com/embed/' + isVideo.tiktok[2] + '" frameborder="0" scrolling=no allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" name="yp_embed_video" frameborder="0"></iframe>';
+                video = '<iframe class="lg-video-object lg-tiktok ' + addClass + '" height="700" width="340" src="https://www.tiktok.com/embed/' + isVideo.tiktok[2] + '" frameborder="0" scrolling="no" allow="allowfullscreen"></iframe>';
+
+              } else if (isVideo.youporn) {
+
+                a = '?wmode=opaque&autoplay=' + autoplay + '&enablejsapi=1';
+                if (this.core.s.youtubePlayerParams) {
+                    a = a + '&' + $.param(this.core.s.youtubePlayerParams);
+                }
+
                 video = '<iframe class="lg-video-object lg-youtube ' + addClass + '" width="560" height="315"  src="https://www.youporn.com/embed/' + isVideo.youporn[1] + a + '" frameborder="0" scrolling=no allowfullscreen name="yp_embed_video" frameborder="0"></iframe>';
-                
-            } else if (isVideo.vimeo) {
-    
+
+              } else if (isVideo.vimeo) {
+
                 a = '?autoplay=' + autoplay + '&api=1';
                 if (this.core.s.vimeoPlayerParams) {
                     a = a + '&' + $.param(this.core.s.vimeoPlayerParams);
                 }
-    
+
                 video = '<iframe class="lg-video-object lg-vimeo ' + addClass + '" width="560" height="315"  src="//player.vimeo.com/video/' + isVideo.vimeo[1] + a + '" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>';
-    
-            } else if (isVideo.dailymotion) {
-    
+
+              } else if (isVideo.dailymotion) {
+
                 a = '?wmode=opaque&autoplay=' + autoplay + '&api=postMessage';
                 if (this.core.s.dailymotionPlayerParams) {
                     a = a + '&' + $.param(this.core.s.dailymotionPlayerParams);
                 }
-    
+
                 video = '<iframe class="lg-video-object lg-dailymotion ' + addClass + '" width="560" height="315" src="//www.dailymotion.com/embed/video/' + isVideo.dailymotion[1] + a + '" frameborder="0" allowfullscreen></iframe>';
-    
-            } else if (isVideo.html5) {
+
+              } else if (isVideo.html5) {
                 var fL = html.substring(0, 1);
                 if (fL === '.' || fL === '#') {
                     html = $(html).html();
                 }
-    
+
                 video = html;
-    
-            } else if (isVideo.vk) {
-    
+
+              } else if (isVideo.vk) {
+
                 a = '&autoplay=' + autoplay;
                 if (this.core.s.vkPlayerParams) {
                     a = a + '&' + $.param(this.core.s.vkPlayerParams);
                 }
-    
+
                 video = '<iframe class="lg-video-object lg-vk ' + addClass + '" width="560" height="315" src="http://vk.com/video_ext.php?' + isVideo.vk[1] + a + '" frameborder="0" allowfullscreen></iframe>';
-    
+
             }
-    
+
             return video;
         };
 
@@ -249,7 +261,7 @@
                 }
             }
         };
-    
+
         Video.prototype.destroy = function() {
             this.videoLoaded = false;
         };
@@ -331,14 +343,14 @@
 
             // jadams
             var _isVideo = _this.core.isVideo(_src, index) || {};
-            if (_isVideo.youtube || _isVideo.youporn || _isVideo.vimeo || _isVideo.dailymotion || _isVideo.vk) {
+            if (_isVideo.youtube || _isVideo.tiktok || _isVideo.youporn || _isVideo.vimeo || _isVideo.dailymotion || _isVideo.vk) {
                 _this.core.$outer.addClass('lg-hide-download');
             }
 
         }
-    
+
         $.fn.lightGallery.modules.video = Video;
-    
+
     })();
 
 }));

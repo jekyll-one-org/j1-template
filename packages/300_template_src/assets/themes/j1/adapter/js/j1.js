@@ -1097,7 +1097,7 @@ var j1 = (function () {
             } else {
               $("#themes_menu").show();
             }
-            
+
             // if the page requested contains an anchor element,
             // do a smooth scroll to
             j1.scrollTo();
@@ -1331,7 +1331,8 @@ var j1 = (function () {
     // -------------------------------------------------------------------------
     scrollTo: function () {
       var anchor    = window.location.href.split('#')[1];
-      var anchor_id = '#' + anchor;
+      var anchor_id = typeof anchor !== 'undefined' ? '#' + anchor : false;
+      var isSlider  = false;
       var selector;
 
       var logger        = log4javascript.getLogger('j1.scrollTo');
@@ -1359,7 +1360,12 @@ var j1 = (function () {
       // static offset, to be checked why this is needed
       scrollOffset        = scrollOffset + toccerScrollOffset;
 
-      if (anchor_id && anchor_id !== '#') {
+      // Check if the anchor is an slider/gallery element
+      if (typeof anchor !== 'undefined') {
+        isSlider  = anchor.includes('slide');
+      }
+
+      if (anchor_id && anchor_id !== '#' && !isSlider) {
         // scroll only, if an anchor is given with URL
         selector = $(anchor_id);
         if (selector.length) {

@@ -447,6 +447,7 @@
         }
 
         var youtube     = src.match(/\/\/(?:www\.)?youtu(?:\.be|be\.com|be-nocookie\.com)\/(?:watch\?v=|embed\/)?([a-z0-9\-\_\%]+)/i);
+        var tiktok      = src.match(/\/\/(?:www\.)?tiktok.com\/(@[0-9a-z\.\-_]+)\/video\/([0-9]+\/)/i);
         var youporn     = src.match(/\/\/(?:www\.)?youporn.com\/embed\/([0-9]+\/[0-9a-z\-_]+\/)/i);
         var vimeo       = src.match(/\/\/(?:www\.)?vimeo.com\/([0-9a-z\-_]+)/i);
         var dailymotion = src.match(/\/\/(?:www\.)?dai.ly\/([0-9a-z\-_]+)/i);
@@ -460,6 +461,10 @@
             return {
                 youporn: youporn
             };
+        } else if (tiktok) {
+            return {
+                tiktok: tiktok
+            }
         } else if (vimeo) {
             return {
                 vimeo: vimeo
@@ -681,6 +686,8 @@
                 var videoClass = '';
                 if (_isVideo && _isVideo.youtube) {
                     videoClass = 'lg-has-youtube';
+                } else if (_isVideo && _isVideo.tiktok) {
+                    videoClass = 'lg-has-tiktok';
                 } else if (_isVideo && _isVideo.vimeo) {
                     videoClass = 'lg-has-vimeo';
                 } else {
