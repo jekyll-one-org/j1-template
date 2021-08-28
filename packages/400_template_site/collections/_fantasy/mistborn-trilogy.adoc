@@ -47,7 +47,6 @@ have now become a massive hit in the UK, introducing readers to the work of
 one of the genre's great talents. A master of world building, sweeping plots,
 believable characters and engrossing magic systems.
 
-// [role="clearfix mb-3"]
 excerpt__end
 
 //  Load Liquid procedures

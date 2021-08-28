@@ -45,7 +45,6 @@ at skewering mammoth egos with his relentless grilling. Few figures in public
 life have escaped. From John Major to Theresa May, from Tony Blair to Ed Miliband,
 Paxman had them quaking in their boots.
 
-// [role="clearfix mb-3"]
 excerpt__end
 
 //  Load Liquid procedures

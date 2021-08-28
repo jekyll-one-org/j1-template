@@ -46,7 +46,6 @@ bestselling saga, featuring eighteenth-century Scotsman James Fraser and
 his twentieth-century, time-travelling wife, Claire Randall, boasts nearly
 5 million copies in the U.S.
 
-// [role="clearfix mb-3"]
 excerpt__end
 
 //  Load Liquid procedures

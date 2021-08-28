@@ -49,7 +49,6 @@ inextricably intertwined with Clan MacKenzie and the forbidden Castle Leoch.
 She is catapulted without warning into the intrigues of lairds and spies that
 may threaten her life ...and shatter her heart.
 
-// [role="clearfix mb-3"]
 excerpt__end
 
 //  Load Liquid procedures

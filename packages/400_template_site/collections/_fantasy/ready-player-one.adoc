@@ -46,7 +46,6 @@ reality: OASIS founder James Halliday, who dies with no heir, has promised
 that control of the OASIS - and his massive fortune - will go to the person
 who can solve the riddles he has left scattered throughout his creation.
 
-// [role="clearfix mb-3"]
 excerpt__end
 
 //  Load Liquid procedures

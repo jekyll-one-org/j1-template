@@ -20,6 +20,7 @@ analytics:                              true
 advertising:                            false
 comments:                               false
 
+exclude_from_search:                    true
 regenerate:                             false
 
 resource_options:
@@ -225,7 +226,7 @@ site_category_word_list:    {{site_category_word_list | debug}}
       {% include {{select_icon_size}} family=icon_family size=icon_size %}
       {% assign icon_size = size %}
 
-      {% assign excerpt = post.excerpt|truncatewords:truncate_words|replace:'...',' ...'|strip_html|strip_newlines|strip %}
+      {% assign excerpt = post.excerpt|truncatewords:truncate_words|replace:'...',' ...'|strip_html %}
 
       <!-- place post  -->
       <article class="card raised-z3 mb-5">

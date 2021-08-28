@@ -45,7 +45,6 @@ assertive, stubborn, maybe even a little arrogant. He's also sensitive,
 brilliant, and has a total soft spot for Lily, but Ryle's complete aversion
 to relationships is disturbing.
 
-// [role="clearfix mb-3"]
 excerpt__end
 
 //  Load Liquid procedures

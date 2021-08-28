@@ -46,7 +46,6 @@ classic and internationally bestselling, multi-award-winning series feature
 instantly pick-up-able new jackets by Jonny Duddle, with huge child appeal,
 to bring Harry Potter to the next generation of readers.
 
-// [role="clearfix mb-3"]
 excerpt__end
 
 //  Load Liquid procedures

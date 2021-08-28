@@ -47,7 +47,6 @@ revenge.
 Packed with memorable characters, acid humour and luscious clothes,
 The Dressmaker is an irresistible gothic tale of small-town revenge.
 
-// [role="clearfix mb-3"]
 excerpt__end
 
 //  Load Liquid procedures

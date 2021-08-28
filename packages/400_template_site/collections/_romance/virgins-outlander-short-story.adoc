@@ -48,7 +48,6 @@ Find out what happened before Jamie met Claire in this brilliant new Outlander
 short story. What neither know is that their lives and their friendships are
 about to become infinitely more complicated - and a lot more dangerous...
 
-// [role="clearfix mb-3"]
 excerpt__end
 
 //  Load Liquid procedures

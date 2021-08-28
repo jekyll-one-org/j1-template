@@ -19,6 +19,7 @@ analytics:                              true
 advertising:                            false
 comments:                               false
 
+exclude_from_search:                    true
 regenerate:                             true
 
 resources:                              []
@@ -177,7 +178,7 @@ site_category_word_list:    {{site_category_word_list | debug}}
     {% endfor %}
 
     {% capture link %}
-      {% assign excerpt = post.excerpt|truncatewords:truncate_words|replace:'...',' ...'|strip_html|strip_newlines|strip %}
+      {% assign excerpt = post.excerpt|truncatewords:truncate_words|replace:'...',' ...'|strip_html %}
       <li>
         <article class="card raised-z3 mb-5">
           <h3 id="{{100000|rand}}" class="card-header bg-primary">{{post.title}}</h3>

@@ -40,7 +40,6 @@ As a result, the site creation process gets out of your way.
 
 Sounds fun, isn't it?
 
-// [role="clearfix mb-3"]
 excerpt__end
 
 //  Load Liquid procedures

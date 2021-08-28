@@ -46,7 +46,6 @@ bookseller Rog Peyton, and many more.
 With an introduction from his daughter Rhianna Pratchett and an afterword from
 longtime friend and colleague Rob Wilkins.
 
-// [role="clearfix mb-3"]
 excerpt__end
 
 //  Load Liquid procedures

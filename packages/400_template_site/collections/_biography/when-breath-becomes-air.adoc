@@ -47,7 +47,6 @@ The *NEW YORK TIMES* Number One Bestseller, the *SUNDAY TIMES* Bestseller:
 Finishing this book and then forgetting about it is simply not an
 option: *Unmissable*.
 
-// [role="clearfix mb-3"]
 excerpt__end
 
 //  Load Liquid procedures

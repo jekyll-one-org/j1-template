@@ -42,7 +42,6 @@ Shortly after the end of the Second World War, as the Soviets took control
 of the eastern part of Germany, Hanna, a schoolteacher's daughter, escaped
 with nothing more than a small suitcase and the clothes on her back.
 
-// [role="clearfix mb-3"]
 excerpt__end
 
 

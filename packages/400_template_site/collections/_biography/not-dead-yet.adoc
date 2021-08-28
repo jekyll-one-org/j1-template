@@ -45,7 +45,6 @@ his talent for crafting songs that touch listeners around the globe.
 This is the story of his epic career, from child actor to one of the most
 successful songwriters of the pop music era.
 
-// [role="clearfix mb-3"]
 excerpt__end
 
 

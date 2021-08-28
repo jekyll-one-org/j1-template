@@ -52,7 +52,6 @@ in the U.S. and around the world, dramatically changing the ways that families
 pursue healthier and more active lives, and standing with her husband as he
 led America through some of its most harrowing moments.
 
-// [role="clearfix mb-3"]
 excerpt__end
 
 //  Load Liquid procedures

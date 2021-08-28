@@ -44,7 +44,6 @@ had preserved-plaintive love poems, unbridled musings with youthful naivete,
 and a vulnerability that she barely
 recognized.
 
-// [role="clearfix mb-3"]
 excerpt__end
 
 //  Load Liquid procedures

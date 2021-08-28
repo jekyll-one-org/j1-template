@@ -48,7 +48,6 @@ New Jersey, amid the poetry, danger and darkness that fuelled his imagination,
 leading up to the moment he refers to as *The Big Bang*: seeing
 Elvis Presley's debut on The Ed Sullivan Show.
 
-// [role="clearfix mb-3"]
 excerpt__end
 
 //  Load Liquid procedures

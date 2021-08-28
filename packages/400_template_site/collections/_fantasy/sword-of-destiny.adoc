@@ -48,7 +48,6 @@ In this collection of short stories, following the adventures of the hit
 collection THE LAST WISH, join Geralt as he battles monsters, demons and
 prejudices alike ...
 
-// [role="clearfix mb-3"]
 excerpt__end
 
 //  Load Liquid procedures

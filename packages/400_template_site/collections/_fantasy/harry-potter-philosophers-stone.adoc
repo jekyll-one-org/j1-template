@@ -44,7 +44,6 @@ Brimming with rich detail and humour that perfectly complements J.K. Rowling's
 timeless classic, Jim Kay's glorious illustrations will captivate fans and new
 readers alike.
 
-// [role="clearfix mb-3"]
 excerpt__end
 
 //  Load Liquid procedures

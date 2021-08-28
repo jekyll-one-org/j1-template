@@ -44,7 +44,6 @@ and sold more than twelve million books. Now, A Breath of Snow and Ashes
 continues the extraordinary story of 18th-century Scotsman Jamie Fraser and
 his 20th-century wife, Claire.
 
-// [role="clearfix mb-3"]
 excerpt__end
 
 //  Load Liquid procedures
