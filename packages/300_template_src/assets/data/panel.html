@@ -106,19 +106,20 @@ exclude_from_search:                    true
         {% if data_type == 'hash' %}
           {% assign panel_settings  = panel %}
 
-          {% assign id              = panel_settings.id %}
-          {% assign enabled         = panel_settings.enabled %}
-          {% assign type            = panel_settings.type %}
-          {% assign icon_family     = panel_settings.icon_family | downcase %}
-          {% assign style           = panel_settings.style %}
-          {% assign raised          = panel_settings.raised %}
-          {% assign lane_span       = panel_settings.lane_span %}
-          {% assign title           = panel_settings.title|strip_newlines %}
-          {% assign tagline         = panel_settings.tagline|strip_newlines %}
-          {% assign buttons         = panel_settings.buttons %}
-          {% assign header          = panel_settings.header %}
-          {% assign properties      = panel_settings.properties %}
-          {% assign cards           = panel_settings.cards %}
+          {% assign id                      = panel_settings.id %}
+          {% assign enabled                 = panel_settings.enabled %}
+          {% assign type                    = panel_settings.type %}
+          {% assign icon_family             = panel_settings.icon_family | downcase %}
+          {% assign style                   = panel_settings.style %}
+          {% assign raised                  = panel_settings.raised %}
+          {% assign lane_span               = panel_settings.lane_span %}
+          {% assign title                   = panel_settings.title|strip_newlines %}
+          {% assign tagline                 = panel_settings.tagline|strip_newlines %}
+          {% assign buttons                 = panel_settings.buttons %}
+          {% assign header                  = panel_settings.header %}
+          {% assign properties              = panel_settings.properties %}
+          {% assign description_properties  = panel_settings.description_properties %}
+          {% assign cards                   = panel_settings.cards %}
         {% endif %}
       {% endfor %}
 
@@ -178,7 +179,8 @@ exclude_from_search:                    true
                 <p class="tagline mb-0"><b>{{panel_settings.tagline}}</b></p>
                 <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-2"></div>
               </div>
-              <div class="{{properties}}">{{panel_settings.description}}</div>
+              <!-- Description -->
+              <div class="{{description_properties}}">{{panel_settings.description}}</div>
             </div>
             <!-- End Heading -->
 
@@ -193,6 +195,7 @@ exclude_from_search:                    true
                   {% assign value = item[1] %}
                   {% if key == 'enabled' %}     {% assign card_enabled      = value %}                   {% endif %}
                   {% if key == 'type' %}        {% assign card_type         = value %}                   {% endif %}
+                  {% if key == 'properties' %}  {% assign card_properties   = value %}                   {% endif %}
                   {% if key == 'icon' %}        {% assign card_icon         = value %}                   {% endif %}
                   {% if key == 'icon_size' %}   {% assign card_icon_size    = value %}                   {% endif %}
                   {% if key == 'icon_family' %} {% assign card_icon_family  = value | downcase %}        {% endif %}
@@ -433,7 +436,10 @@ exclude_from_search:                    true
                 <p class="tagline mb-0"><b>{{panel_options.tagline}}</b></p>
                 <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-2"></div>
               </div>
-              <p class="{{properties}}">{{panel_options.description}}</p>
+              <!-- Description -->
+              <div class="{{panel_settings.description_properties}}">
+                {{panel_options.description}}
+              </div>
             </div>
             <!-- End Heading -->
             {% endif %}

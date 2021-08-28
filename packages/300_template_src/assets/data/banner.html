@@ -145,19 +145,20 @@ exclude_from_search:                    true
               {% for item in items[1] %}
                 {% assign key   = item[0] %}
                 {% assign value = item[1] %}
-                {% if key == 'enabled' %}     {% assign card_enabled      = value %}                   {% endif %}
-                {% if key == 'width' %}       {% assign card_width        = value %}                   {% endif %}
-                {% if key == 'type' %}        {% assign card_type         = value %}                   {% endif %}
-                {% if key == 'icon' %}        {% assign icon              = value %}                   {% endif %}
-                {% if key == 'icon_size' %}   {% assign icon_size         = value %}                   {% endif %}
-                {% if key == 'icon_color' %}  {% assign icon_color        = value %}                   {% endif %}
-                {% if key == 'image_path' %}  {% assign card_image_path   = value %}                   {% endif %}
-                {% if key == 'animate' %}     {% assign card_animate      = value %}                   {% endif %}
-                {% if key == 'title' %}       {% assign card_title        = value | strip_newlines%}   {% endif %}
-                {% if key == 'description' %} {% assign card_description  = value | strip_newlines%}   {% endif %}
-                {% if key == 'tagline' %}     {% assign card_tagline      = value | strip_newlines%}   {% endif %}
-                {% if key == 'text' %}        {% assign card_text         = value | strip_newlines %}  {% endif %}
-                {% if key == 'buttons' %}     {% assign card_buttons      = value %}                   {% endif %}
+                {% if key == 'enabled' %}                 {% assign card_enabled      = value %}                   {% endif %}
+                {% if key == 'width' %}                   {% assign card_width        = value %}                   {% endif %}
+                {% if key == 'type' %}                    {% assign card_type         = value %}                   {% endif %}
+                {% if key == 'icon' %}                    {% assign icon              = value %}                   {% endif %}
+                {% if key == 'icon_size' %}               {% assign icon_size         = value %}                   {% endif %}
+                {% if key == 'icon_color' %}              {% assign icon_color        = value %}                   {% endif %}
+                {% if key == 'image_path' %}              {% assign card_image_path   = value %}                   {% endif %}
+                {% if key == 'animate' %}                 {% assign card_animate      = value %}                   {% endif %}
+                {% if key == 'description_properties' %}  {% assign card_properties   = value %}                   {% endif %}
+                {% if key == 'title' %}                   {% assign card_title        = value | strip_newlines%}   {% endif %}
+                {% if key == 'description' %}             {% assign card_description  = value | strip_newlines%}   {% endif %}
+                {% if key == 'tagline' %}                 {% assign card_tagline      = value | strip_newlines%}   {% endif %}
+                {% if key == 'text' %}                    {% assign card_text         = value | strip_newlines %}  {% endif %}
+                {% if key == 'buttons' %}                 {% assign card_buttons      = value %}                   {% endif %}
               {% endfor %}
               {% if card_enabled == false %} {% assign card_items = card_items | minus:1 %} {% endif %}
             {% endfor %}
@@ -210,10 +211,10 @@ exclude_from_search:                    true
 
             <!-- Body -->
             <div class="row {{animate}}">
-              <div class="{{properties}}">{{card_description}}</div>
+              <div class="{{card_properties}}">{{card_description}}</div>
               {% if card_buttons %}
-              <!-- Footer -->
-              <div class="mt-1">
+              <!-- Footer|Button row -->
+              <div class="mt-1 text-center">
                 {% for button_hash in card_buttons %}
                   {% include {{create_bs_button}} button_data=button_hash button_type="link" %}
                   {{bs_button_html}}

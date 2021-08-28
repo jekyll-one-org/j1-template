@@ -43,6 +43,7 @@ settings:
 
         title:                          All in One
         tagline:                        top features
+        description_properties:         mr-3 mb-3
         description: >
                                         <p>
                                           People quite often ask if static websites make sense
@@ -310,11 +311,12 @@ settings:
 
         title:                          Creators Blog
         tagline:                        latest news
+        description_properties:         mr-3 mb-4
         description: >
                                         Explore the blog and find interesting articles around Jekyll and
                                         website creation processes in general. And this blog is an excellent
                                         example of how J1 and Jekyll can be used for blogging.
-                                        <br/>
+                                        <br/><br/>
                                         Have fun!
 
         cards:
