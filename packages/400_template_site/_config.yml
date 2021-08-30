@@ -769,7 +769,7 @@ defaults:
       youtube:                          false
       vimeo:                            false
 
-
+  
 # ==============================================================================
 # 6. LAYOUT configuration
 #

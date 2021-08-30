@@ -146,7 +146,8 @@ site_category_word_list:    {{site_category_word_list | debug}}
 
   <!-- ul class="list-unstyled link-news" -->
   {% for post in site.posts %}
-    {% assign excerpt = post.excerpt|truncatewords:truncate_words|replace:'...',' ...'|strip_html %}
+    {% comment %} {% assign excerpt = post.excerpt|truncatewords: truncate_words|replace:'...',' ...'|strip_html %} {% endcomment %}
+    {% assign excerpt = post.excerpt|truncatewords: truncate_words|replace:'...',' ...' %}
 
     <!-- Collect comment provider details -->
     {% for sharing in builder_config.sharing_provider %}

@@ -178,7 +178,8 @@ site_category_word_list:    {{site_category_word_list | debug}}
     {% endfor %}
 
     {% capture link %}
-      {% assign excerpt = post.excerpt|truncatewords:truncate_words|replace:'...',' ...'|strip_html %}
+      {% comment %} {% assign excerpt = post.excerpt|truncatewords: truncate_words|replace:'...',' ...'|strip_html %} {% endcomment %}
+      {% assign excerpt = post.excerpt|truncatewords: truncate_words|replace:'...',' ...' %}
       <li>
         <article class="card raised-z3 mb-5">
           <h3 id="{{100000|rand}}" class="card-header bg-primary">{{post.title}}</h3>

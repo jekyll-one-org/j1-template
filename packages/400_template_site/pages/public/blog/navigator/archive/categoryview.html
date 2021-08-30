@@ -187,7 +187,8 @@ site_category_word_list:    {{site_category_word_list | debug}}
           {% include {{get_category_item}} category=category %}
           {% include {{select_icon_size}} family=icon_family size=icon_size %}
           {% assign icon_size = size %}
-          {% assign excerpt = post.excerpt|truncatewords: truncate_words|replace:'...',' ...'|strip_html %}
+          {% comment %} {% assign excerpt = post.excerpt|truncatewords: truncate_words|replace:'...',' ...'|strip_html %} {% endcomment %}
+          {% assign excerpt = post.excerpt|truncatewords: truncate_words|replace:'...',' ...' %}
 
           <!-- Collect comment provider details -->
           {% for sharing in builder_config.sharing_provider %}

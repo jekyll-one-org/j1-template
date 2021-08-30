@@ -159,8 +159,10 @@
               <div class="timeline-tagline">
                 <p class="card-subtitle text-muted">{{post.tagline}}</p>
               </div>
+              <!-- place excerpt -->
               <div class="timeline-excerpt mb-4">
-                {% assign excerpt = post.excerpt|truncatewords: truncate_words|replace:'...',' ...'|strip_html %}
+                {% comment %} {% assign excerpt = post.excerpt|truncatewords: truncate_words|replace:'...',' ...'|strip_html %} {% endcomment %}
+                {% assign excerpt = post.excerpt|truncatewords: truncate_words|replace:'...',' ...' %}
                 <i class="timeline-icon {{icon_family}} {{icon_family}}-{{icon_name}} {{icon_family}}-{{icon_size}} {{icon_family}}-{{icon_color}}"></i>
                 {{excerpt}}
               </div>
@@ -203,7 +205,8 @@
                 <p class="card-subtitle text-muted">{{post.tagline}}</p>
               </div -->
               <div class="excerpt">
-                {% assign excerpt = post.excerpt|truncatewords: truncate_words|replace:'...',' ...'|strip_html %}
+                {% comment %} {% assign excerpt = post.excerpt|truncatewords: truncate_words|replace:'...',' ...'|strip_html %} {% endcomment %}
+                {% assign excerpt = post.excerpt|truncatewords: truncate_words|replace:'...',' ...' %}
                 {{excerpt}}
               </div>
             </div>
