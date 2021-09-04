@@ -341,6 +341,15 @@ tag::urls[]
 end::urls[]
 
 
+// FOOTNOTES, global asciidoc attributes (variables)
+// -----------------------------------------------------------------------------
+tag::footnotes[]
+
+:fn-wikipedia--open_data:                         footnote:[link:https://de.wikipedia.org/wiki/Open_Data[Wikipedia · OpenOata, window="_blank"]]
+
+end::footnotes[]
+
+
 // TAGS, global asciidoc attributes (variables)
 // -----------------------------------------------------------------------------
 tag::tags[]

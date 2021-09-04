@@ -74,10 +74,10 @@ settings:
               enabled:                  true
               type:                     copyright
               en:
-                statement:              J1 © 2021 · All rights reserved
+                statement:              © 2021 J1 · All rights reserved
                 href:                   /pages/public/legal/en/copyright/
               de:
-                statement:              J1 © 2021 · Alle Rechte vorbehalten
+                statement:              © 2021 J1 · Alle Rechte vorbehalten
                 href:                   /pages/public/legal/de/copyright/
 
           - name:                       Impress

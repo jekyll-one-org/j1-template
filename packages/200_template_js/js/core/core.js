@@ -102,7 +102,28 @@ module.exports = (function (options) {
       //   $('#search-results').hide();
       //   $('#search-results').html('');
       // });
-    }
+    }, // END bsFormClearButton
+
+    // -------------------------------------------------------------------------
+    // Initialize Backdrops on all <p> elements of class "dropcap"
+    // -------------------------------------------------------------------------
+    createDropCap: function () {
+
+      // add class dropcap
+      $('.paragraph.dropcap').children('p').addClass('dropcap');
+
+      //
+      if ($('p.dropcap').length) {
+        $('p.dropcap').each(function() {
+          var $p = $(this);
+          var text = $.trim($p.text());
+          var firstLetter = text[0];
+          var marginalDropCap = '<span class="j1-dropcap">' + firstLetter + '</span>';
+
+          $p.html(text.replace(firstLetter, marginalDropCap));
+        });
+      }
+    } // END createDropCap
 
   }; // end return (object)
 

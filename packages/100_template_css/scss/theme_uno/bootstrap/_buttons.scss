@@ -75,7 +75,9 @@ a.btn:hover {
   cursor: pointer;
   background-color: transparent;
   border: 0;
-  outline: 0;
+  // jadams, 2021-09-03: added border-radius
+  // border-radius: .25rem; $border-radius
+  // border-radius: $border-radius;
   transition: box-shadow 0.2s $bmd-animation-curve-fast-out-linear-in,
     background-color 0.2s $bmd-animation-curve-default,
     color 0.2s $bmd-animation-curve-default;

@@ -2,16 +2,23 @@
 //  Asciidoc attribute includes:                 attributes.asciidoc
 // -----------------------------------------------------------------------------
 
-
 // URLs - Internal references and/or sources on the Internet
 // -----------------------------------------------------------------------------
 tag::urls[]
 end::urls[]
 
+
+// FOOTNOTES, global asciidoc attributes (variables)
+// -----------------------------------------------------------------------------
+tag::footnotes[]
+end::footnotes[]
+
+
 // Tags - Asciidoc attributes used internally
 // -----------------------------------------------------------------------------
 tag::tags[]
 end::tags[]
+
 
 // Data - Data elements for Asciidoctor extensions
 // -----------------------------------------------------------------------------
@@ -27,6 +34,7 @@ end::data[]
 // -----------------------------------------------------------------------------
 tag::images[]
 end::images[]
+
 
 // DOCUMENTS, local document resources
 // -----------------------------------------------------------------------------

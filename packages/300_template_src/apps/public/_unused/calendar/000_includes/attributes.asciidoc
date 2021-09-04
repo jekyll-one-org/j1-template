@@ -11,6 +11,13 @@ tag::urls[]
 :teamup-faq:                                      https://calendar.teamup.com/kb-tags/faq/
 end::urls[]
 
+
+// FOOTNOTES, global asciidoc attributes (variables)
+// -----------------------------------------------------------------------------
+tag::footnotes[]
+end::footnotes[]
+
+
 // Tags - Asciidoc attributes used internally
 // -----------------------------------------------------------------------------
 tag::tags[]
@@ -33,7 +40,8 @@ tag::tags[]
 :dotdot:                                          &#46;&#46;
 :middot:                                          &middot;
 
-end::tags[] 
+end::tags[]
+
 
 // Data - Data elements for Asciidoctor extensions
 // -----------------------------------------------------------------------------
@@ -42,6 +50,7 @@ tag::data[]
 :data-images-standalone:                          "{images-dir}/100_present_images/image-2.jpg, Two men in bicycle jerseys sitting outside at table having coffee, {images-dir}/100_present_images/image-1.jpg, Young lady looking at the beach"
 
 end::data[]
+
 
 // Product - Document (e.g release) information
 // -----------------------------------------------------------------------------
@@ -57,5 +66,3 @@ end::product_info[]
 tag::authors[]
 :uri-author-juergen-adams                         https://jekyll.one
 end::authors[]
-
-

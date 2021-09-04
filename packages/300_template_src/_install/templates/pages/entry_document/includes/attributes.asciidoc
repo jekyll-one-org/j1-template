@@ -8,10 +8,18 @@ tag::urls[]
 :j1-home:                                         https://jekyll.one
 end::urls[]
 
+
+// FOOTNOTES, global asciidoc attributes (variables)
+// -----------------------------------------------------------------------------
+tag::footnotes[]
+end::footnotes[]
+
+
 // Tags - Asciidoc attributes used internally
 // -----------------------------------------------------------------------------
 tag::tags[]
 end::tags[]
+
 
 // DATA, global references to data elements (asciidoc extensions)
 // -----------------------------------------------------------------------------

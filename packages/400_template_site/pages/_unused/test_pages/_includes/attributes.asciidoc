@@ -66,10 +66,18 @@ tag::urls[]
 :kickstarter-web-in-a-day:                        /pages/public/learn/kickstarter/web_in_a_day/meet_and_greet/
 end::urls[]
 
+
+// FOOTNOTES, global asciidoc attributes (variables)
+// -----------------------------------------------------------------------------
+tag::footnotes[]
+end::footnotes[]
+
+
 // Tags - Asciidoc attributes used internally
 // -----------------------------------------------------------------------------
 tag::tags[]
 end::tags[]
+
 
 // Data - Data elements for Asciidoctor extensions
 // -----------------------------------------------------------------------------
@@ -88,6 +96,7 @@ end::data[]
 // -----------------------------------------------------------------------------
 tag::images[]
 end::images[]
+
 
 // PRODUCTS, local product information (e.g. release)
 // -----------------------------------------------------------------------------

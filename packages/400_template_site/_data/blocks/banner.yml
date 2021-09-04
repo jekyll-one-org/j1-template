@@ -139,7 +139,7 @@ settings:
               tagline:                  <b>powerful modern static websites</b>
               description_properties:   mr-3 mb-3
               description: >
-                                        <p>
+                                        <p class="dropcap">
                                           Jekyll One Template is the first toolbox to create modern webs and a
                                           learning platform to experience what is behind current Internet
                                           Technologies for the World Wide Web. J1 provides creative people

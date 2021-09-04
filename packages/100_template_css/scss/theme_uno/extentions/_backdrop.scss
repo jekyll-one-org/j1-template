@@ -1,0 +1,45 @@
+/*
+// -----------------------------------------------------------------------------
+// ~/theme_uno/extentions/_bbackdrop.scss
+// Provides general styles for the J1 Backdrops
+//
+// Product/Info:
+// https://jekyll.one
+//
+// Copyright (C) 2021 Juergen Adams
+//
+// J1 Template is licensed under the MIT License.
+// See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+// -----------------------------------------------------------------------------
+*/
+
+// Content
+// -----------------------------------------------------------------------------
+
+.j1-dropcap {
+  font: 2em/0.8 "Roboto Slab", sans-serif;
+  line-height: 1.25rem;
+  color: #757575;
+  float: left;
+  padding-right: .125rem;
+}
+
+/* Media breakpoints
+-------------------------------------------------------------------------------- */
+@media screen and (min-width: 992px) {
+  .j1-dropcap {
+    font-size: 3rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .j1-dropcap {
+    font-size: 2rem;    
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .j1-dropcap {
+    font-size: 2rem;
+  }
+}

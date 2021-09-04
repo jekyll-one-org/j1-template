@@ -1022,6 +1022,9 @@ var j1 = (function () {
             // display page
            $('#no_flicker').css('display', 'block');
 
+           // initialize backdrops
+           j1.core.createDropCap();
+
              // add recommended title to hyvor iframe for SEO optimization (if loadad)
             if (comment_provider === 'hyvor') {
               var dependencies_met_load_finished = setInterval (function () {
@@ -1168,6 +1171,9 @@ var j1 = (function () {
 
           // display page
           $('#no_flicker').css('display', 'block');
+
+          // initialize backdrops
+          j1.core.createDropCap();
 
             // add recommended title to hyvor iframe for SEO optimization (if loadad)
            if (comment_provider === 'hyvor') {

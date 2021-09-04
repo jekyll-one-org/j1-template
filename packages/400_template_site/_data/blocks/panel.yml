@@ -38,14 +38,14 @@ settings:
         id:                             home_intro_panel
         comment:                        Home Intro Panel
         type:                           intro
-        animate:
+        animate:                        fadeInUp
         properties:                     mt-3 mr-3 mb-5 ml-3
 
         title:                          All in One
         tagline:                        top features
         description_properties:         mr-3 mb-3
         description: >
-                                        <p>
+                                        <p class="dropcap">
                                           People quite often ask if static websites make sense
                                           for anything beyond a one-page website. Some others see in
                                           static websites the stone age of the World Wide Web. What's
@@ -74,8 +74,10 @@ settings:
               icon_size:                3x
               icon_color:
               text: >
-                                        The Web is everywhere. J1 Template supports modern web browsers
-                                        on all devices for best results on PCs, Tablets, and SmartPhones.
+                                        <p class="dropcap">
+                                          The Web is everywhere. J1 Template supports modern web browsers
+                                          on all devices for best results on PCs, Tablets, and SmartPhones.
+                                        </p>
 
               buttons:
 
@@ -100,8 +102,10 @@ settings:
               icon_size:                3x
               icon_color:
               text: >
-                                        Current Technology and Design. Excellent performance in running
-                                        a website. Use Jekyll One to present your content at its best.
+                                        <p class="dropcap">
+                                          Current Technology and Design. Excellent performance in running
+                                          a website. Use Jekyll One to present your content at its best.
+                                        </p>
 
               buttons:
                 - name:                 Read More
@@ -126,9 +130,11 @@ settings:
               icon_size:                3x
               icon_color:
               text: >
-                                        No programming is needed to start using J1. The Template
-                                        provides a large number of building blocks to create
-                                        modern web pages in minutes.
+                                        <p class="dropcap">
+                                          No programming is needed to start using J1. The Template
+                                          provides a large number of building blocks to create
+                                          modern web pages in minutes.
+                                        </p>
 
               buttons:
                 - name:                 Read More
@@ -155,7 +161,7 @@ settings:
         id:                             home_service_panel
         comment:                        Home Service Panel
         type:                           service
-        animate:
+        animate:                        fadeInUp
         icon_family:                    MDI
 
         style:                          flat
@@ -306,19 +312,21 @@ settings:
         id:                             home_news_panel
         comment:                        Home News Panel
         type:                           news
-        animate:
+        animate:                        fadeInUp
         properties:                     mt-5 mr-3 mb-5 ml-3
 
         title:                          Creators Blog
         tagline:                        latest news
         description_properties:         mr-3 mb-4
         description: >
-                                        Explore the blog and find interesting articles around Jekyll and
-                                        website creation processes in general. And this blog is an excellent
-                                        example of how J1 and Jekyll can be used for blogging.
-                                        <br/><br/>
-                                        Have fun!
-
+                                        <p class="dropcap">
+                                          Explore the blog and find interesting articles around Jekyll and
+                                          website creation processes in general. And this blog is an excellent
+                                          example of how J1 and Jekyll can be used for blogging.
+                                        </p>
+                                        <p>
+                                          Have fun!
+                                        </p>
         cards:
 
           - name:                       Recent Posts

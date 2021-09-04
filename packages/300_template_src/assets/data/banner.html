@@ -201,7 +201,7 @@ exclude_from_search:                    true
             {% if card_animate %} {% capture animate %}animated {{card_animate}}{% endcapture %} {% endif %}
             <!-- Heading -->
             <div class="row">
-              <div class="{{animate}}">
+              <div class="{{animate}} mb-2">
                 <h2 class="g-font-weight-500 mb-0">{{card_title}}</h2>
                 <p class="tagline mb-0">{{card_tagline}}</p>
                 <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-2"></div>
@@ -355,7 +355,7 @@ exclude_from_search:                    true
                   .{{banner_settings.id}}-parallax-quote{color:#fff;padding:100px 0;position:relative;text-align:center}
                   .{{banner_settings.id}}-parallax-quote:before{top:0;left:0;width:100%;height:100%;content:" ";position:absolute;{% if gridify == true %}background: url("{{gridifier}}") repeat;{% endif %}}
                   .{{banner_settings.id}}-parallax-quote:after{top:0;left:0;width:100%;height:100%;content:" ";position:absolute;background:rgba(0,0,0,{{darken}})}
-                  .{{banner_settings.id}}-parallax-quote-in{z-index: 2;position:absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; padding: 20px; text-align: center; }
+                  .{{banner_settings.id}}-parallax-quote-in{z-index: 2;position:absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80%; padding: 20px; text-align: center; font-family: "Roboto Slab", Helvetica, Arial, sans-serif; }
                   .{{banner_settings.id}}-parallax-quote-in p{color:{{text_color}};font-size:{{card_cite_text_size}};text-transform:uppercase;line-height: 1.25;}
                   {% if card_text and card_cite_text_quotes %}
                   .{{banner_settings.id}}-parallax-quote-in p:after,.{{banner_settings.id}}-parallax-quote-in p:before{content:' " ';}

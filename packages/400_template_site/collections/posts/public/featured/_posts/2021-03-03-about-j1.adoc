@@ -39,6 +39,7 @@ resource_options:
 
 // Place an excerpt at the most top position
 // -----------------------------------------------------------------------------
+[role="dropcap"]
 The template system was initially developed to create a simple but fully
 configurable website creation toolset for document servers. Document servers
 provide websites or other content formats like PDF, projects, software
