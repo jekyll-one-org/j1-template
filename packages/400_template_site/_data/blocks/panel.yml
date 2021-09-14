@@ -147,184 +147,6 @@ settings:
                     icon_color:
                     href:               /pages/public/panels/intro_panel#launch-ready
 
-
-  # ----------------------------------------------------------------------------
-  # SERVICE Panel
-  #
-  service:
-    # --------------------------------------------------------------------------
-    # Panel properties
-    #
-    - name:                             Home Service Panel
-      panel:
-        enabled:                        true
-        id:                             home_service_panel
-        comment:                        Home Service Panel
-        type:                           service
-        animate:                        false
-        properties:                     mt-5 mr-3 mb-5 ml-3
-
-        title:                          Projekte
-        tagline:                        selber machen
-        description_properties:         mt-3 mr-3 mb-4
-        description: >
-                                        <p class="dropcap">
-                                          Eigene Projekte zur Digitalisierung erscheinen sehr schwierig. Angesichts der
-                                          Tatsache, dass sich viele Unternehmenn mit der digitalen Transformation schwer
-                                          tun könnte man glauben: Eigene Projekte sind kaum möglich.
-                                        </p>
-                                        <p>
-                                          Das dem nicht so ist, sollen Beispiele zeigen.
-                                        </p>
-        cards:
-
-          - name:                       Einsteiger
-            card:
-              enabled:                  true
-              id:                       card_1
-              type:                     service
-              icon:                     account
-              icon_size:                mdi-6x
-              icon_color:               md-white
-              href:                     /pages/public/projects/beginner/all/
-              title:                    Projekte
-              tagline:                  einsteiger
-              text: >
-                                        <p class="dropcap mt-3">
-                                          Ein erster Zugang zur digitalisierten Welt erfordert keine besonderen
-                                          technischen Kenntnisse. Zusätztliche Software wird nicht gebraucht. Alle
-                                          Experimente erforden lediglich einen Web-Browser.
-                                        </p>
-
-              services:
-
-                - name:                 Digitale Spuren
-                  service:
-                    id:                 A1
-                    description: >
-                                        <p>
-                                          Das Internet wird vielfach unmittelbar mit dem World-Wide-Web verbunden. Das
-                                          WWW gehört zu den wichtigsten Diensten - keine Frage. Mit "Ich gehe mal ins
-                                          Internet" meint in den meisten Fällen eine Website ansurfen, sie zu besuchen.
-                                        </p>
-                                        <p>
-                                          Das kann man auch durchaus ganz anders verstehen: Eine eigene Website
-                                          veröffenlichen. Damit ist man im Internet, ein Teil dieser virtuellen
-                                          digitalen Welt.
-                                        </p>
-                    title:              Digitale Spuren
-                    href:               /pages/public/projects/beginner/cookies/
-
-                - name:                 Öffentliche Daten
-                  service:
-                    id:                 A2
-                    description: >
-                                        <p>
-                                          Das Internet wird vielfach unmittelbar mit dem World-Wide-Web verbunden. Das
-                                          WWW gehört zu den wichtigsten Diensten - keine Frage. Mit "Ich gehe mal ins
-                                          Internet" meint in den meisten Fällen eine Website ansurfen, sie zu besuchen.
-                                        </p>
-                                        <p>
-                                          Das kann man auch durchaus ganz anders verstehen: Eine eigene Website
-                                          veröffenlichen. Damit ist man im Internet, ein Teil dieser virtuellen
-                                          digitalen Welt.
-                                        </p>
-                    title:              Öffentliche Daten
-                    href:               /pages/public/projects/beginner/opendata/
-
-                - name:                 Öffentliche Daten 2
-                  service:
-                    id:                 A3
-                    description: >
-                                        <p>
-                                          Das Internet wird vielfach unmittelbar mit dem World-Wide-Web verbunden. Das
-                                          WWW gehört zu den wichtigsten Diensten - keine Frage. Mit "Ich gehe mal ins
-                                          Internet" meint in den meisten Fällen eine Website ansurfen, sie zu besuchen.
-                                        </p>
-                                        <p>
-                                          Das kann man auch durchaus ganz anders verstehen: Eine eigene Website
-                                          veröffenlichen. Damit ist man im Internet, ein Teil dieser virtuellen
-                                          digitalen Welt.
-                                        </p>
-                    title:              Öffentliche Daten 2
-                    href:               /pages/public/projects/beginner/opendata/
-
-          - name:                       Fortgeschrittene
-            card:
-              enabled:                  true
-              id:                       card_2
-              type:                     service
-              icon:                     account-tie
-              icon_size:                mdi-6x
-              icon_color:               md-white
-              href:                     /pages/public/projects/advanced/all/
-              title:                    Projekte
-              tagline:                  fortgeschrittene
-              text: >
-                                        <p class="dropcap mt-3">
-                                          Projekte für Fortgeschrittene richten sich an erfahrene Anwender:innen bzw.
-                                          Leute die mehr erfahren wollen. Die Bearbeitung wird einige Zeit brauchen.
-                                          Gut investierte Zeit, Einblicke die sich lohnen. Erfahrungen die man nicht
-                                          so leicht vergessen wird.
-                                        </p>
-              services:
-
-                - name:                 Websites
-                  service:
-                    id:                 B1
-                    description: >
-                                        <p>
-                                          Dank guter Werkzeuge ist die Erstellung von Webseiten einfacher geworden.
-                                          Nicht unbedingt simpel, aber auch keine Wissenschaft die nur wenige beherrschen.
-                                          Mit Generatoren für Webseiten ist ein Basisweb in wenigen Minuten  erstellt.
-                                          Für die vorgeschlagenen Experimente reichen solche Webs völlig aus.
-                                          Dazu die gute Nachricht: Die meisten dieser Tools stehen als OpenSource Allen
-                                          kostenlos zur Verfügung.
-                                        </p>
-                                        <p>
-                                          Mit dem Generator für Webseiten J1-Template ist ein Basisweb in wenigen
-                                          Minuten erstellt. Dieses Site ist mit J1 generiert und kann kostenlos
-                                          verwendet werden. Nicht schlecht, oder?
-                                        </p>
-
-                    title:              Websites herstellen
-                    href:               /pages/public/projects/advanced/web/create_websites/
-
-                - name:                 Zusammenarbeit
-                  service:
-                    id:                 B2
-                    description: >
-                                        <p>
-                                          Das Internet wird vielfach unmittelbar mit dem World-Wide-Web verbunden. Das
-                                          WWW gehört zu den wichtigsten Diensten - keine Frage. Mit "Ich gehe mal ins
-                                          Internet" meint in den meisten Fällen eine Website ansurfen, sie zu besuchen.
-                                        </p>
-                                        <p>
-                                          Das kann man auch durchaus ganz anders verstehen: Eine eigene Website
-                                          veröffenlichen. Damit ist man im Internet, ein Teil dieser virtuellen
-                                          digitalen Welt.
-                                        </p>
-                    title:              Zusammenarbeit
-                    href:               /pages/public/projects/advanced/web/share_code/
-
-                - name:                 Webs veröffentlichen
-                  service:
-                    id:                 B3
-                    description: >
-                                        <p>
-                                          Das Internet wird vielfach unmittelbar mit dem World-Wide-Web verbunden. Das
-                                          WWW gehört zu den wichtigsten Diensten - keine Frage. Mit "Ich gehe mal ins
-                                          Internet" meint in den meisten Fällen eine Website ansurfen, sie zu besuchen.
-                                        </p>
-                                        <p>
-                                          Das kann man auch durchaus ganz anders verstehen: Eine eigene Website
-                                          veröffenlichen. Damit ist man im Internet, ein Teil dieser virtuellen
-                                          digitalen Welt.
-                                        </p>
-                    title:              Webs veröffentlichen
-                    href:               /pages/public/projects/advanced/web/publishing/
-
-
   # ----------------------------------------------------------------------------
   # NEWS Panel
   #
@@ -362,6 +184,183 @@ settings:
               block:                    card-list                               # card-deck | card-list
               num_per_row:              2                                       # card-list only: [1 .. 4]
               max_posts:                2
+
+  # # ----------------------------------------------------------------------------
+  # # SERVICE Panel
+  # #
+  # service:
+  #   # --------------------------------------------------------------------------
+  #   # Panel properties
+  #   #
+  #   - name:                             Home Service Panel
+  #     panel:
+  #       enabled:                        true
+  #       id:                             home_service_panel
+  #       comment:                        Home Service Panel
+  #       type:                           service
+  #       animate:                        false
+  #       properties:                     mt-5 mr-3 mb-5 ml-3
+  #
+  #       title:                          Projekte
+  #       tagline:                        selber machen
+  #       description_properties:         mt-3 mr-3 mb-4
+  #       description: >
+  #                                       <p class="dropcap">
+  #                                         Eigene Projekte zur Digitalisierung erscheinen sehr schwierig. Angesichts der
+  #                                         Tatsache, dass sich viele Unternehmenn mit der digitalen Transformation schwer
+  #                                         tun könnte man glauben: Eigene Projekte sind kaum möglich.
+  #                                       </p>
+  #                                       <p>
+  #                                         Das dem nicht so ist, sollen Beispiele zeigen.
+  #                                       </p>
+  #       cards:
+  #
+  #         - name:                       Einsteiger
+  #           card:
+  #             enabled:                  true
+  #             id:                       card_1
+  #             type:                     service
+  #             icon:                     account
+  #             icon_size:                mdi-6x
+  #             icon_color:               md-white
+  #             href:                     /pages/public/projects/beginner/all/
+  #             title:                    Projekte
+  #             tagline:                  einsteiger
+  #             text: >
+  #                                       <p class="dropcap mt-3">
+  #                                         Ein erster Zugang zur digitalisierten Welt erfordert keine besonderen
+  #                                         technischen Kenntnisse. Zusätztliche Software wird nicht gebraucht. Alle
+  #                                         Experimente erforden lediglich einen Web-Browser.
+  #                                       </p>
+  #
+  #             services:
+  #
+  #               - name:                 Digitale Spuren
+  #                 service:
+  #                   id:                 A1
+  #                   description: >
+  #                                       <p>
+  #                                         Das Internet wird vielfach unmittelbar mit dem World-Wide-Web verbunden. Das
+  #                                         WWW gehört zu den wichtigsten Diensten - keine Frage. Mit "Ich gehe mal ins
+  #                                         Internet" meint in den meisten Fällen eine Website ansurfen, sie zu besuchen.
+  #                                       </p>
+  #                                       <p>
+  #                                         Das kann man auch durchaus ganz anders verstehen: Eine eigene Website
+  #                                         veröffenlichen. Damit ist man im Internet, ein Teil dieser virtuellen
+  #                                         digitalen Welt.
+  #                                       </p>
+  #                   title:              Digitale Spuren
+  #                   href:               /pages/public/projects/beginner/cookies/
+  #
+  #               - name:                 Öffentliche Daten
+  #                 service:
+  #                   id:                 A2
+  #                   description: >
+  #                                       <p>
+  #                                         Das Internet wird vielfach unmittelbar mit dem World-Wide-Web verbunden. Das
+  #                                         WWW gehört zu den wichtigsten Diensten - keine Frage. Mit "Ich gehe mal ins
+  #                                         Internet" meint in den meisten Fällen eine Website ansurfen, sie zu besuchen.
+  #                                       </p>
+  #                                       <p>
+  #                                         Das kann man auch durchaus ganz anders verstehen: Eine eigene Website
+  #                                         veröffenlichen. Damit ist man im Internet, ein Teil dieser virtuellen
+  #                                         digitalen Welt.
+  #                                       </p>
+  #                   title:              Öffentliche Daten
+  #                   href:               /pages/public/projects/beginner/opendata/
+  #
+  #               - name:                 Öffentliche Daten 2
+  #                 service:
+  #                   id:                 A3
+  #                   description: >
+  #                                       <p>
+  #                                         Das Internet wird vielfach unmittelbar mit dem World-Wide-Web verbunden. Das
+  #                                         WWW gehört zu den wichtigsten Diensten - keine Frage. Mit "Ich gehe mal ins
+  #                                         Internet" meint in den meisten Fällen eine Website ansurfen, sie zu besuchen.
+  #                                       </p>
+  #                                       <p>
+  #                                         Das kann man auch durchaus ganz anders verstehen: Eine eigene Website
+  #                                         veröffenlichen. Damit ist man im Internet, ein Teil dieser virtuellen
+  #                                         digitalen Welt.
+  #                                       </p>
+  #                   title:              Öffentliche Daten 2
+  #                   href:               /pages/public/projects/beginner/opendata/
+  #
+  #         - name:                       Fortgeschrittene
+  #           card:
+  #             enabled:                  true
+  #             id:                       card_2
+  #             type:                     service
+  #             icon:                     account-tie
+  #             icon_size:                mdi-6x
+  #             icon_color:               md-white
+  #             href:                     /pages/public/projects/advanced/all/
+  #             title:                    Projekte
+  #             tagline:                  fortgeschrittene
+  #             text: >
+  #                                       <p class="dropcap mt-3">
+  #                                         Projekte für Fortgeschrittene richten sich an erfahrene Anwender:innen bzw.
+  #                                         Leute die mehr erfahren wollen. Die Bearbeitung wird einige Zeit brauchen.
+  #                                         Gut investierte Zeit, Einblicke die sich lohnen. Erfahrungen die man nicht
+  #                                         so leicht vergessen wird.
+  #                                       </p>
+  #             services:
+  #
+  #               - name:                 Websites
+  #                 service:
+  #                   id:                 B1
+  #                   description: >
+  #                                       <p>
+  #                                         Dank guter Werkzeuge ist die Erstellung von Webseiten einfacher geworden.
+  #                                         Nicht unbedingt simpel, aber auch keine Wissenschaft die nur wenige beherrschen.
+  #                                         Mit Generatoren für Webseiten ist ein Basisweb in wenigen Minuten  erstellt.
+  #                                         Für die vorgeschlagenen Experimente reichen solche Webs völlig aus.
+  #                                         Dazu die gute Nachricht: Die meisten dieser Tools stehen als OpenSource Allen
+  #                                         kostenlos zur Verfügung.
+  #                                       </p>
+  #                                       <p>
+  #                                         Mit dem Generator für Webseiten J1-Template ist ein Basisweb in wenigen
+  #                                         Minuten erstellt. Dieses Site ist mit J1 generiert und kann kostenlos
+  #                                         verwendet werden. Nicht schlecht, oder?
+  #                                       </p>
+  #
+  #                   title:              Websites herstellen
+  #                   href:               /pages/public/projects/advanced/web/create_websites/
+  #
+  #               - name:                 Zusammenarbeit
+  #                 service:
+  #                   id:                 B2
+  #                   description: >
+  #                                       <p>
+  #                                         Das Internet wird vielfach unmittelbar mit dem World-Wide-Web verbunden. Das
+  #                                         WWW gehört zu den wichtigsten Diensten - keine Frage. Mit "Ich gehe mal ins
+  #                                         Internet" meint in den meisten Fällen eine Website ansurfen, sie zu besuchen.
+  #                                       </p>
+  #                                       <p>
+  #                                         Das kann man auch durchaus ganz anders verstehen: Eine eigene Website
+  #                                         veröffenlichen. Damit ist man im Internet, ein Teil dieser virtuellen
+  #                                         digitalen Welt.
+  #                                       </p>
+  #                   title:              Zusammenarbeit
+  #                   href:               /pages/public/projects/advanced/web/share_code/
+  #
+  #               - name:                 Webs veröffentlichen
+  #                 service:
+  #                   id:                 B3
+  #                   description: >
+  #                                       <p>
+  #                                         Das Internet wird vielfach unmittelbar mit dem World-Wide-Web verbunden. Das
+  #                                         WWW gehört zu den wichtigsten Diensten - keine Frage. Mit "Ich gehe mal ins
+  #                                         Internet" meint in den meisten Fällen eine Website ansurfen, sie zu besuchen.
+  #                                       </p>
+  #                                       <p>
+  #                                         Das kann man auch durchaus ganz anders verstehen: Eine eigene Website
+  #                                         veröffenlichen. Damit ist man im Internet, ein Teil dieser virtuellen
+  #                                         digitalen Welt.
+  #                                       </p>
+  #                   title:              Webs veröffentlichen
+  #                   href:               /pages/public/projects/advanced/web/publishing/
+
 
   # # ----------------------------------------------------------------------------
   # # STEP Panel

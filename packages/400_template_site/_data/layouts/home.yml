@@ -179,7 +179,7 @@ lanes:
   # SERVICE panel
   #
   - lane:
-      enabled:                          true
+      enabled:                          false
       id:                               home_service_panel
       region:                           body-main
       type:                             async
