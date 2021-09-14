@@ -11,12 +11,14 @@
  # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
  # -----------------------------------------------------------------------------
  # NOTE: Styles for (extended) cards
+ # NOTE: Cards|Styles, inspired by BS3 Material-Kit
+ # -----------------------------------------------------------------------------
+ # TODO: Should be moved|integrated to|with ~/scss/theme_uno/bootstrap/_cards.scss
+ # TODO: CSS styles should rewritten to SCSS
+ # -----------------------------------------------------------------------------
+ # SPEC:
  # -----------------------------------------------------------------------------
 */
-
-// NOTE: Cards|Styles, inspired by BS3 Material-Kit
-// TODO: Should be moved|integrated to|with ~/scss/theme_uno/bootstrap/_cards.scss
-// SPEC:
 
 //  BS Overloads
 // -----------------------------------------------------------------------------
@@ -32,6 +34,13 @@
 }
 */
 
+// jadams, 2021-09-00: make (J1) cards same height
+.card {
+  &.card-same-height {
+    height: calc(100% - 1.75rem);
+  }
+}
+
 .card .card-header {
   background-color: $blue;
   border-bottom: 0;
@@ -41,19 +50,29 @@
   border-radius: 0 !important;
 }
 
+.card-body {
+    text-align: initial;
+}
+
 /*
 .card .card-footer {
   background-color: $grey-100;
 }
 */
 
+// .card .card-footer {
+// 	padding-top: 0;
+// 	padding-right: 1.25rem;
+// 	padding-bottom: 1.25rem;
+// 	padding-left: 1.25rem;
+// 	border-top: 0;
+// 	background-color: transparent;
+// }
+
 .card .card-footer {
-	padding-top: 0;
-	padding-right: 1.25rem;
-	padding-bottom: 1.25rem;
-	padding-left: 1.25rem;
-	border-top: 0;
+	padding: 1.25rem;
 	background-color: transparent;
+  border-top: 1px dotted rgba(0, 0, 0, 0.25);
 }
 
 /* jadams: Overwrite Bootstraps heading margins for cards */
@@ -143,7 +162,7 @@
 }
 
 .card .card-title {
-  color: $grey;
+  color: $grey-900;
 }
 
 a.card-title:hover {
@@ -157,7 +176,7 @@ a.card-title:hover {
 .card h5.card-title,
 .card h6.card-title {
   font-size: 1.75rem !important;
-  font-weight: 300;
+  font-weight: 500;
 }
 
 .card .card-title a {
@@ -239,7 +258,7 @@ a.card-title:hover {
   border-radius: 50%;
   //text-align: center;
   //vertical-align: middle;
-  line-height: 100px;
+  line-height: 120px;
   display: inline-block; // jadams, 2018-01-05: Added for other icons than zmdi
 }
 
@@ -528,9 +547,11 @@ a.card-title:hover {
 /*  Profile Cards
 ------------------------------------------------------------------- */
 
+// jadams, 2021-09-12
+//
 .card-profile,
 .card-testimonial {
-  margin-top: 60px;
+  // margin-top: 60px;
   text-align: center;
 }
 

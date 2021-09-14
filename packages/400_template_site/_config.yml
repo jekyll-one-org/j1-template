@@ -520,6 +520,23 @@ excerpt_separator:                      excerpt__end
 excerpt_truncate_words:                 100
 
 # ------------------------------------------------------------------------------
+# Paginator settings (NOT longer used with site config)
+#
+# pagination:
+#   enabled:                              false
+#   per_page:                             3
+#   offset:                               2
+#   permalink:                            '/page/:num/'
+#   title:                                ':title - page :num of :max'
+#   limit:                                0
+#   sort_field:                           'date'
+#   sort_reverse:                         true
+#
+# # Explicitly turn off the old code
+# paginate:                               nil
+# paginate_path:                          nil
+
+# ------------------------------------------------------------------------------
 # COLLECTION settings
 # See: https://jekyllrb.com/docs/collections/#collections
 #

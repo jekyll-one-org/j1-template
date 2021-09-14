@@ -70,7 +70,12 @@ end::urls[]
 // FOOTNOTES, global asciidoc attributes (variables)
 // -----------------------------------------------------------------------------
 tag::footnotes[]
+
+:fn-bootstrap-v5--responsive-text:                footnote:[https://getbootstrap.com/docs/5.0/content/typography/#responsive-font-sizes[Supported with Bootstrap V5 · Responsive font sizes, window="_blank"]]
+:fn-mdi-icons--home:                              footnote:[https://materialdesignicons.com/[MDI icons · Home, window="_blank"]]
+
 end::footnotes[]
+
 
 
 // Tags - Asciidoc attributes used internally

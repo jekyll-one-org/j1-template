@@ -134,10 +134,10 @@ settings:
               enabled:                  true
               width:                    12
               type:                     text
-              animate:                  fadeInUp
+              animate:                  false
               title:                    Jekyll One Template
               tagline:                  <b>powerful modern static websites</b>
-              description_properties:   mr-3 mb-3
+              description_properties:   mt-3 mr-3 mb-3
               description: >
                                         <p class="dropcap">
                                           Jekyll One Template is the first toolbox to create modern webs and a
@@ -298,7 +298,7 @@ settings:
         id:                               home_parallax_banner
         enabled:                          true
         type:                             parallax
-        properties:                       mt-5 mb-5
+        properties:                       mt-6 mb-6
         comment:                          Main parallax banner shown on home page
 
         style:                            dark
@@ -313,9 +313,9 @@ settings:
               cite_text_size:             300%
               cite_text_quotes:           false
               cite_text: >
-                                          <span style="color: #2196f3">Making is</span>
+                                          <strong><span style="color: #2196f3">Making is</span>
                                           like Wanting, <br> but even
-                                          <span style="color: #2196f3">Better</span>
+                                          <span style="color: #2196f3">Better</span></strong>
               cite_size:                  200%
 #             cite:                       J1 Team
               text_color:                 rgba_lighten_900

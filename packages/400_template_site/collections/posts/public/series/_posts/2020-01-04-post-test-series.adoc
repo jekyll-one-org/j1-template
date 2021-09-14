@@ -6,6 +6,7 @@ categories:                             [ Examples ]
 tags:                                   [ Series, Test ]
 
 series:                                 test-series
+image:                                  /assets/images/modules/attics/admin-dashboard-bootstrap-1280x600.jpg
 
 regenerate:                             false
 
@@ -33,7 +34,7 @@ resource_options:
 
 // Place an excerpt at the most top position
 // -----------------------------------------------------------------------------
-[role="dropcap"]
+[role="dropcap mt-3"]
 This post is a *test series element*. Post series can help to split larger
 posts into a group of smaller articles. This may helpful, if a large post
 should be split into several *main chapters* but grouped together.

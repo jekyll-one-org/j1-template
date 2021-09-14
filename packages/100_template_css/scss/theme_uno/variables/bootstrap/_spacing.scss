@@ -46,6 +46,8 @@
 // variables. Mostly focused on spacing.
 // You can add more entries to the $spacers map, should you need more variation.
 
+// jadams, 2021-09-12: added additional spacers
+//
 $spacer: 1rem !default;
 $spacers: () !default;
 $spacers: map-merge(
@@ -56,12 +58,11 @@ $spacers: map-merge(
     3: $spacer,
     4: ($spacer * 1.5),
     5: ($spacer * 3),
-    6: ($spacer * 6),
-    7: ($spacer * 7),
-    8: ($spacer * 8),
-    9: ($spacer * 9),
+    6: ($spacer * 4.75),
+    7: ($spacer * 6),
+    8: ($spacer * 7.25),
+    9: ($spacer * 8.50),
    10: ($spacer * 10),
-
   ),
   $spacers
 );

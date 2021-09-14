@@ -1,0 +1,66 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/infiniteScroll.yml
+# User configuration for J1 infiniteScroll
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2021 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# About this configuration (used for J1 CC only)
+#
+about_config:
+
+  title:                                infiniteScroll
+  scope:                                User settings
+  location:                             _data/modules/infiniteScroll.yml
+
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+settings:
+  enabled:                              true
+
+  scrollers:
+
+    # ==========================================================================
+    # Image Galleries
+    #
+
+    # --------------------------------------------------------------------------
+    # News Panel
+    #
+    - scroller:
+        enabled:                        true
+        id:                             home_news_panel
+        data_path:                      /assets/data/news_panel_posts
+        pages:                          "page${pageNumber}/index.html"
+        lastPage:                       4
+        history:                        false
+        scrollThreshold:                10
+        scrollOffset:                   470
+        checkLastPage:                  true
+        check_status:                   true
+
+    # --------------------------------------------------------------------------
+    # Article Navigator
+    #
+    - scroller:
+        enabled:                        true
+        id:                             article_navigator
+        data_path:                      /assets/data/article_navigator
+        pages:                          "page${pageNumber}/index.html"
+        lastPage:                       4
+        history:                        false
+        scrollThreshold:                10
+        scrollOffset:                   470
+        checkLastPage:                  true
+        check_status:                   true
+
+# ------------------------------------------------------------------------------
+# END config

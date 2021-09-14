@@ -1260,5 +1260,48 @@ resources:
         js:                             []
         init_function:                  [ j1.adapter.rtextResizer.init ]
 
+  # ----------------------------------------------------------------------------
+  # infiniteScroll
+  # NOTE: https://infinite-scroll.com/
+  #
+  - name:                               infiniteScroll
+    resource:
+      id:                               infinitescroll
+      enabled:                          true
+      comment:                          J1 infiniteScroll
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand                                # always | ondemand
+      preload:                          false                                   # property currently unused
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            [ modules/infiniteScroll/css/theme/uno ]
+        files:                          [ adapter/js/infiniteScroll.js ]
+        js:                             [ modules/infiniteScroll/js/infiniteScroll ]
+        init_function:                  [ j1.adapter.infiniteScroll.init ]
+
+  # ----------------------------------------------------------------------------
+  # infiniteScroll
+  # NOTE: https://infinite-scroll.com/
+  #
+  - name:                               showOnScroll
+    resource:
+      id:                               showonscroll
+      enabled:                          true
+      comment:                          J1 showOnScroll
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand                                # always | ondemand
+      preload:                          false                                   # property currently unused
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            []
+        files:                          []
+        js:                             [ modules/showOnScroll/js/showOnScroll ]
+        init_function:                  []
 # ------------------------------------------------------------------------------
 # END config

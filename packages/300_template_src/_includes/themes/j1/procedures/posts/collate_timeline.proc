@@ -167,7 +167,7 @@
                 {{excerpt}}
               </div>
               <div class="card-footer r-text-200 text-lowercase">
-                <hr class="my-3">
+
                 <a href="{{post.url}}#readmore"
                    class="btn btn-secondary btn-raised btn-flex mb-0">
                    <i class="mdi mdi-eye mdi-lg mr-1" style="color:#FFFFFF;">
@@ -189,7 +189,7 @@
                 {{excerpt}}
               </div>
               <div class="card-footer r-text-200 text-lowercase">
-                <hr class="my-3">
+
                 <a href="{{post.url}}#readmore"
                    class="btn btn-secondary btn-raised btn-flex mb-0">
                    <i class="mdi mdi-eye mdi-lg mr-1" style="color:#FFFFFF;">
@@ -200,7 +200,7 @@
           {% else %}
             <!-- !place_icon && !place_image -->
             <!-- div class="timeline-body" -->
-            <div class="card-body r-text-300">
+            <div class="card-body r-text-300 mt-4">
               <!-- div class="tagline">
                 <p class="card-subtitle text-muted">{{post.tagline}}</p>
               </div -->
@@ -219,7 +219,7 @@
             {% endfor %}
 
             <div class="card-footer r-text-200">
-              <hr class="my-3">
+
               <div class="card-footer-text">
                 {% if post.date %}
                   {% if language == "en" %}
