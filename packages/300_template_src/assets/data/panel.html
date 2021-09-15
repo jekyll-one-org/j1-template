@@ -402,7 +402,7 @@ exclude_from_search:                    true
                         <div class="row {{panel_settings.id}}">
                         	<div id="{{card_id}}" class="accordion">
                             {% for list in services %}
-                        	  <div class="card mb-4">
+                        	  <div class="card">
                           		<div class="card-header" id="headingOne">
                           		  <h2 class="clearfix mb-0">
                             			<a class="btn btn-link collapsed" data-toggle="collapse" data-target="#{{list.service.id}}" aria-expanded="false" aria-controls="{{list.service.id}}">
@@ -411,7 +411,7 @@ exclude_from_search:                    true
                                   </a>
                           		  </h2>
                           		</div>
-                          		<div id="{{list.service.id}}" class="collapse" aria-labelledby="{{list.service.id}}" data-parent="#{{card_id}}">
+                          		<div id="{{list.service.id}}" class="collapse mb-4" aria-labelledby="{{list.service.id}}" data-parent="#{{card_id}}">
                           		  <div class="card-body r-text-200">
                                   {{list.service.description}}
                                   <hr>
