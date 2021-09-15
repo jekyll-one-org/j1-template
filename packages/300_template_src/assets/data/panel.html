@@ -539,7 +539,7 @@ exclude_from_search:                    true
                           {% endif %}
                           <h3 class="card-header bg-primary notoc">{{post.title}}</h3>
                           <!-- Body|Excerpt -->
-                          <div class="card-body r-text-300">
+                          <div class="card-body r-text-300 mt-4">
                             {% comment %} {{post.excerpt|truncatewords: 50|replace:'...',' ...'|remove:'<div class="paragraph">'|remove:'</div>'|remove:'<p>'|remove:'</p>'}} {% endcomment %}
                             {{post.excerpt|truncatewords: truncate_words}}
                           </div>
