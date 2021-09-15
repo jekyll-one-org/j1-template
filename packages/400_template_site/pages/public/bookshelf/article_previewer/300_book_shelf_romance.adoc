@@ -25,7 +25,11 @@ resource_options:
       opacity:                          0.5
       slides:
         - url:                          /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
-          alt:                          giammarco-boscaro-1920x1280
+          alt:                          Photo by Giammarco on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Giammarco
+            href:                       https://unsplash.com/@giamboscaro
 ---
 
 // Page Initializer

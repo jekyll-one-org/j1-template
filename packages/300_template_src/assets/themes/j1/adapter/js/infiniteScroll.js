@@ -124,10 +124,10 @@ j1.adapter['infiniteScroll'] = (function (j1, window) {
 
           // jadams, 2021-09-12
           //
-          var scrollOffset = 450 + 20;
+          // var scrollOffset = 450 + 20;
           // var article_height = $('#home_news_panel-scroll-item').height();
-          var article_height = document.getElementById('home_news_panel-scroll-item').clientHeight;
-          var scrollThreshold = (article_height -200) * -1;
+          // var article_height = document.getElementById('home_news_panel-scroll-item').clientHeight;
+          // var scrollThreshold = (article_height -200) * -1;
 
           $('#home_news_panel-scroll-group').infiniteScroll({
             path: getPosts,
@@ -156,24 +156,26 @@ j1.adapter['infiniteScroll'] = (function (j1, window) {
           });
 
           $('.list-group').on( 'load.infiniteScroll', function( event, body, path, response ) {
-            var elm = document.getElementById("home_news_panel-scroll-group");
             var logger = log4javascript.getLogger('j1.adapter.infiniteScroll');
             var log_text = `\n loaded data from path: ${path}`;
             logger.info(log_text);
 
-            var ww = $(window).width();
-            var wh = $(window).height();
+            //var elm = document.getElementById("home_news_panel-scroll-group");
+            //
+            // var ww = $(window).width();
+            // var wh = $(window).height();
+            //
+            // var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
+            // var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
+            //
+            // var article_height = $('#home_news_panel-scroll-item').height();
+            //
+            // // if (user_agent.includes('iPad') || user_agent.includes('Windows') || user_agent.includes('OS X')) {
+            // if (user_agent.includes('Windows') || !user_agent.includes('OS X')) {
+            //   // on desktops, scroll the page to view appended elements
+            //   window.scrollBy(0, article_height);
+            // }
 
-            var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
-            var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
-
-            var article_height = $('#home_news_panel-scroll-item').height();
-
-            // if (user_agent.includes('iPad') || user_agent.includes('Windows') || user_agent.includes('OS X')) {
-            if (user_agent.includes('Windows') || !user_agent.includes('OS X')) {
-              // on desktops, scroll the page to view appended elements
-              // window.scrollBy(0, article_height);
-            }
           });
 
           $('.list-group').on( 'request.infiniteScroll', function( event, path, fetchPromise ) {
