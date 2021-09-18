@@ -166,6 +166,9 @@
 		  items.forEach(function (item) {
 		    _this.element.appendChild(item);
 		  });
+
+			// initialize backdrops
+			j1.core.createDropCap();
 		}
 
 	}); // END prototype

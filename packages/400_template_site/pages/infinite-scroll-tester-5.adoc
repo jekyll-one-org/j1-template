@@ -55,12 +55,12 @@ resource_options:
 // Include sub-documents
 // -----------------------------------------------------------------------------
 
-== Infinite scroll example 3
+== Infinite scroll example 5
 
 lorem:sentences[5]
 
 ++++
-<div class="row">
+<div class="noClass">
   <ul id="home_news_panel-scroll-group" class="list-group list-group-horizontal align-items-stretch flex-wrap">
   	<!-- [INFO   ] [j1.assets.data.panel.html             ] [ write post items ] -->
   	<li id="home_news_panel-scroll-item" class="list-group-item items-2 p-0">

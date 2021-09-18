@@ -115,14 +115,38 @@ j1.adapter['j1Scroll'] = (function (j1, window) {
           var paginatePath  = '/assets/data/news_panel_posts/page';
 
           // status:           '.page-scroll-last',
+
           $(postWrapperId).j1Scroll({
-            type:             'infiniteScroll',
-            path:             paginatePath,
-            elementScroll:    false,
-            scrollThreshold:  300,
-            checkLastPage:    true,
-            status:           true,
+            type:                 'infiniteScroll',
+            path:                 paginatePath,
+            elementScroll:        false,
+            scrollThreshold:      300,
+            checkLastPage:        true,
+            status:               true,
+            onInit:               function(){},					                        // Callback after plugin has loaded
+            beforeContentLoaded:  function(link){},	                            // Callback before new content is loaded
+            afterContentLoaded:   function(html){}	                            // Callback after new content has been loaded
           });
+
+          $('.list-group').on( 'load.j1Scroll', function( event, body, path, response ) {
+            var logger = log4javascript.getLogger('j1.adapter.infiniteScroll');
+            var log_text = `\n loaded data from path: ${path}`;
+            logger.info(log_text);
+
+            var log_text = "\n initialize backdrops on load";
+            logger.info(log_text);
+
+            // initialize backdrops
+            j1.core.createDropCap();
+
+          });
+
+          $('.list-group').on( 'request.j1Scroll', function( event, path, fetchPromise ) {
+            var logger = log4javascript.getLogger('j1.adapter.infiniteScroll');
+            var log_text = `\n request for the next page to be loaded from path: ${path}`;
+            logger.info(log_text);
+          });
+
           clearInterval(dependencies_met_page_ready);
         }
       });
