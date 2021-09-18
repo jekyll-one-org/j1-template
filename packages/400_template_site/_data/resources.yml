@@ -1303,5 +1303,31 @@ resources:
         files:                          []
         js:                             [ modules/showOnScroll/js/showOnScroll ]
         init_function:                  []
+
+  # ----------------------------------------------------------------------------
+  # j1Scroll
+  # NOTE: https://github.com/jquery-boilerplate/jquery-boilerplate
+  #
+  - name:                               j1Scroll
+    resource:
+      id:                               j1scroll
+      enabled:                          true
+      comment:                          j1Scroll
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand                                # always | ondemand
+      preload:                          false                                   # property currently unused
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            [ modules/j1Scroll/css/theme/uno ]
+        files:                          [
+                                          modules/j1Scroll/js/j1scroll.js,
+                                          adapter/js/j1scroll.js
+                                        ]
+        js:                             []
+        init_function:                  [ j1.adapter.j1Scroll.init ]
+
 # ------------------------------------------------------------------------------
 # END config

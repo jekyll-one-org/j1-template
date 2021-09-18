@@ -6,8 +6,8 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/infiniteScroll.js
- # Liquid template to adapt infiniteScroll
+ # ~/assets/themes/j1/adapter/js/j1Scroll.js
+ # Liquid template to adapt j1Scroll
  #
  # Product/Info:
  # https://jekyll.one
@@ -23,8 +23,8 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/infiniteScroll.js
- # J1 Adapter for infiniteScroll
+ # ~/assets/themes/j1/adapter/js/j1Scroll.js
+ # J1 Adapter for j1Scroll
  #
  # Product/Info:
  # https://jekyll.one
@@ -47,7 +47,7 @@ regenerate:                             true
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
-j1.adapter['infiniteScroll'] = (function (j1, window) {
+j1.adapter['j1Scroll'] = (function (j1, window) {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
@@ -84,8 +84,8 @@ j1.adapter['infiniteScroll'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       // globals
       // -----------------------------------------------------------------------
-      _this   = j1.adapter.infiniteScroll;
-      logger  = log4javascript.getLogger('j1.adapter.infiniteScroll');
+      _this   = j1.adapter.j1Scroll;
+      logger  = log4javascript.getLogger('j1.adapter.j1Scroll');
 
       // initialize state flag
       _this.setState('started');
@@ -96,112 +96,36 @@ j1.adapter['infiniteScroll'] = (function (j1, window) {
       // Default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.infiniteScroll',
+        module_name: 'j1.adapter.j1Scroll',
         generated:   '{{site.time}}'
       }, options);
 
       // -----------------------------------------------------------------------
-      // infiniteScroll initializer
+      // j1Scroll initializer
       // -----------------------------------------------------------------------
-      var log_text = '\n' + 'infiniteScroll is being initialized';
+      var log_text = '\n' + 'j1Scroll is being initialized';
       logger.info(log_text);
 
-      // Add data attribute for tablesaw to all tables of a page
       var dependencies_met_page_ready = setInterval (function (options) {
-        var lastPage = 3;
-
-        if ( j1.getState() === 'finished' ) {
-          var logger = log4javascript.getLogger('j1.infiniteScroll');
-          var log_text = '\n module infiniteScroll is being initialized';
+        if (j1.getState() === 'finished') {
+          var log_text = '\n' + 'j1Scroll is being initialized';
           logger.info(log_text);
 
-          function getPosts() {
-            var pageNumber = ( this.loadCount + 1 ) + 1;                          // +1: offset for j1-paginator
-            if ( pageNumber <= lastPage) {
-              return `/assets/data/news_panel_posts/page${pageNumber}/index.html`;
-            }
-          }
+          var postWrapperId = '#home_news_panel-scroll-group';
+          var paginatePath  = '/assets/data/news_panel_posts/page';
 
-          // jadams, 2021-09-12
-          //
-          // var scrollOffset = 450 + 20;
-          // var article_height = $('#home_news_panel-scroll-item').height();
-          // var article_height = document.getElementById('home_news_panel-scroll-item').clientHeight;
-          // var scrollThreshold = (article_height -200) * -1;
-
-          // infiniteScroll options
-          //
-          // elementScroll: true,
-          // elementScroll: "#home_news_panel-scroll-group",
-
-          $('#home_news_panel-scroll-group').infiniteScroll({
-            path: getPosts,
-            append: '#home_news_panel-scroll-item',
-            history: false,
-            checkLastPage: true,
-            status: '.page-scroll-last',
+          // status:           '.page-scroll-last',
+          $(postWrapperId).j1Scroll({
+            type:             'infiniteScroll',
+            path:             paginatePath,
+            elementScroll:    false,
+            scrollThreshold:  300,
+            checkLastPage:    true,
+            status:           true,
           });
-
-          $('.list-group').on( 'error.infiniteScroll', function( event, error, path, response ) {
-            var logger = log4javascript.getLogger('j1.adapter.infiniteScroll');
-            var log_text = `\n could not load next items: ${path}. ${error}`;
-            logger.info(log_text);
-          });
-
-          $('.list-group').on( 'last.infiniteScroll', function( event, body, path ) {
-            var logger = log4javascript.getLogger('j1.adapter.infiniteScroll');
-            var log_text = `\n last page reached on ${path}`;
-            logger.info(log_text);
-          });
-
-          $('.list-group').on( 'scrollThreshold.infiniteScroll', function( event ) {
-            var logger = log4javascript.getLogger('j1.adapter.infiniteScroll');
-            var log_text = '\n scroll position is less than scrollThreshold option distance';
-            logger.info(log_text);
-          });
-
-          $('.list-group').on( 'load.infiniteScroll', function( event, body, path, response ) {
-            var logger = log4javascript.getLogger('j1.adapter.infiniteScroll');
-            var log_text = `\n loaded data from path: ${path}`;
-            logger.info(log_text);
-
-            var log_text = "\n initialize backdrops on load";
-            logger.info(log_text);
-
-            // initialize backdrops
-            j1.core.createDropCap();
-
-            //var elm = document.getElementById("home_news_panel-scroll-group");
-            //
-            // var ww = $(window).width();
-            // var wh = $(window).height();
-            //
-            // var vw = Math.max(document.documentElement.clientWidth || 0, window.innerWidth || 0)
-            // var vh = Math.max(document.documentElement.clientHeight || 0, window.innerHeight || 0)
-            //
-            // var article_height = $('#home_news_panel-scroll-item').height();
-            //
-            // // if (user_agent.includes('iPad') || user_agent.includes('Windows') || user_agent.includes('OS X')) {
-            // if (user_agent.includes('Windows') || !user_agent.includes('OS X')) {
-            //   // on desktops, scroll the page to view appended elements
-            //   window.scrollBy(0, article_height);
-            // }
-
-          });
-
-          $('.list-group').on( 'request.infiniteScroll', function( event, path, fetchPromise ) {
-            var logger = log4javascript.getLogger('j1.adapter.infiniteScroll');
-            var log_text = `\n request for the next page to be loaded from path: ${path}`;
-            logger.info(log_text);
-          });
-
-          var log_text = '\n' + 'infiniteScroll finished for init';
-          logger.info(log_text);
-
           clearInterval(dependencies_met_page_ready);
         }
       });
-
     }, // END init
 
     // -------------------------------------------------------------------------

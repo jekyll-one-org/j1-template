@@ -455,7 +455,23 @@ advertising:
     custom_data:
 
 # ------------------------------------------------------------------------------
-# TRANSLATOR settings
+# SURVEY settings (currently NOT supported)
+#
+# Set 'enabled' to false to turn off globally. Affects all pages independently
+# from what is set pagewise!
+# Set 'provider' to the provider you want to use.
+# ------------------------------------------------------------------------------
+survey:
+  enabled:                              false
+
+  provider:                             jotform
+
+  jotform:
+    default_form:                       '<your-form-id>'
+    container:                          page                                    # page | modal
+
+# ------------------------------------------------------------------------------
+# TRANSLATOR settings (currently NOT supported)
 #
 # Set 'enabled' to false to turn off globally. Affects all pages independently
 # from what is set pagewise!
@@ -468,31 +484,9 @@ translation:
 
   google:
     layout:                             default
-    meta_data:                          [google-translate-customization]
+    meta_data:                          [ google-translate-customization ]
     page_language:                      en
-    translation_languages:              [all]
-
-# ------------------------------------------------------------------------------
-# SURVEY settings
-#
-# Set 'enabled' to false to turn off globally. Affects all pages independently
-# from what is set pagewise!
-# Set 'provider' to the provider you want to use.
-# ------------------------------------------------------------------------------
-survey:
-  enabled:                              false
-
-  provider:                             JotForm
-
-  jotform:
-    forms:
-
-      form:
-        form_name:                      '<your-form-name>'
-        form_id:                        '<your-form-id>'
-
-  custom:
-    custom_data:
+    translation_languages:              [ all ]
 
 # ------------------------------------------------------------------------------
 # SHARING settings (currently NOT supported)

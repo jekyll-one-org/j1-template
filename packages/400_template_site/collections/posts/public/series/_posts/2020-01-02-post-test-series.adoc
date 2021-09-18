@@ -1,5 +1,5 @@
 ---
-title:                                  Test Post 2
+title:                                  Series Post 2
 tagline:                                testing series elements
 
 categories:                             [ Examples ]

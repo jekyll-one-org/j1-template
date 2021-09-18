@@ -38,6 +38,19 @@ $(document).ready( function() {
   var yOffset 	=  500;
 	var logger  	= log4javascript.getLogger('j1.core.showOnScroll');
 
+	// var eventHandler_news_panel = function (event) {
+	// 	var clientHeight = $('#home_news_panel-scroll-group').height();
+	// 	var inViewport = isInViewport ($('#home_news_panel-scroll-group'), clientHeight);
+	//
+  //   if (inViewport) {
+	// 		logger.info('\n' + 'The specified container end reached: home_news_panel-scroll-group');
+  //     //console.log('The specified container is in view.');
+  //     // $(".home_service_panel").show(showDelay);
+  //     // window.removeEventListener('scroll', eventHandler_news_panel);
+  //   }
+  // }
+	// window.addEventListener('scroll', eventHandler_news_panel);
+
   var eventHandler_service_panel = function (event) {
     if (isInViewport ($('#home_service_panel'), yOffset)) {
 			logger.info('\n' + 'The specified container is in view: home_service_panel');

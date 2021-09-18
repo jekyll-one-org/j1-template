@@ -1095,6 +1095,9 @@ Object.assign( InfiniteScroll.defaults, {
   // elementScroll: null,
 } );
 
+// jadams
+// create watchDog
+//
 InfiniteScroll.create.scrollWatch = function() {
   // events
   this.pageScrollHandler = this.onPageScroll.bind( this );
@@ -1140,6 +1143,9 @@ proto.onPageScroll = InfiniteScroll.throttle( function() {
   }
 } );
 
+// jadams
+// calculate distances
+//
 proto.getBottomDistance = function() {
   let bottom, scrollY;
   if ( this.options.elementScroll ) {

@@ -209,6 +209,9 @@
     - title:                            Archive
       href:                             /pages/public/blog/navigator/archive/
       icon:                             archive
+    - title:                            Post pages
+      href:                             /assets/data/news_panel_posts/
+      icon:                             archive
 
 # Currently NOT used
 #
