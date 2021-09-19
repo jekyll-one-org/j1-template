@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "js",
-  "version": "2021.1.26",
+  "version": "2021.1.27",
   "description": "JS bundle for J1 Template",
   "main": "template.js",
   "config": {
