@@ -21,18 +21,25 @@
 
 	'use strict';
 
-	// Create the defaults
+	// undefined is used here as the undefined global variable in ECMAScript 3 is
+	// mutable (ie. it can be changed by someone else). undefined isn't really being
+	// passed in so we can ensure the value of it is truly undefined. In ES5, undefined
+	// can no longer be modified.
+
+	// window and document are passed through as local variable rather than global
+	// as this (slightly) quickens the resolution process and can be more efficiently
+	// minified (especially when both are regularly referenced in your plugin).
+
+	// Create the defaults once
 	var pluginName = 'j1Scroll',
 	defaults = {
 	    type:               	'infiniteScroll',
-	    scrollThreshold:    	400,
+	    scrollThreshold:    	100,
 	    elementScroll:      	false,
-			firstPage:            2,
-			lastPage:             false,
-			loadStatus:           true,
-			onInit:               function (){},					                        		// callback after plugin has initialized
-			onBeforeLoad:         function (){},	                            				// callback before new items are loaded
-			onAfterLoad:          function (){}																				// callback after new items are loaded
+			checkLastPage:        false,
+			status:               false,
+	    pNum:               	2,
+	    pMax:            			false,
 	};
 
 	// Plugin constructor
@@ -40,15 +47,20 @@
 		this.element            = element;
 		this.settings           = $.extend( {}, defaults, options);
 		this.settings.elementID = '#' + this.element["id"]
+		this._defaults          = defaults;
+		this._name              = pluginName;
+		this.enable = 					true;
 
 		// call the initializer
 		this.init(this.settings);
 	}
 
 	// Avoid Plugin.prototype conflicts
+	//
 	$.extend(Plugin.prototype, {
 		// -------------------------------------------------------------------------
 		// init: initializer
+		//
 		// -------------------------------------------------------------------------
 		init: function(options) {
 		  var logger = log4javascript.getLogger('j1Scroll');
@@ -56,51 +68,33 @@
 			logger.info('\n' + 'initializing plugin: started');
 			logger.info('\n' + 'state: started');
 
-			if (options.loadStatus) {
-				var spinner = '<div class="loader-ellips" style="display: none"> <span class="loader-ellips__dot"></span> <span class="loader-ellips__dot"></span> <span class="loader-ellips__dot"></span> <span class="loader-ellips__dot"></span> </div>';
-				$(spinner).insertAfter(options.elementID);
+			if ( this.settings.elementScroll ) {
+				this.scroller = this.element;
+				logger.info('\n' + 'element for scrolling set to: element');
+			} else {
+				this.scroller = window;
+				logger.info('\n' + 'element for scrolling set to: window');
 			}
-
-			if (options.infoLastPage ) {
-				var scroll_last_en = 'More articles can be found with the ';
-				var scroll_last_de = 'Weitere Artikel finden Sie im ';
-				var scroll_last;
-
-				if (document.documentElement.lang === 'en') {
-					scroll_last = scroll_last_en;
-				} else if (document.documentElement.lang === 'de') {
-					scroll_last = scroll_last_de;
-				} else {
-					scroll_last = scroll_last_en;
-				}
-
-				if ( this.settings.elementScroll ) {
-					this.scroller = this.element;
-				} else {
-					this.scroller = window;
-				}
-				var message = '<div class="page-scroll-last"><p class="infinite-scroll-last">' + scroll_last + '<a href="/pages/public/blog/navigator/">Blog Navigator</a></p>	</div>';
-				$(message).insertAfter(options.elementID);
-			}
-
 
 		  // initialize infinite scroll
 		  if ( options.type === 'infiniteScroll') {
-					logger.info('\n' + 'processing mode: infiniteScroll');
-					logger.info('\n' + 'loading items from path: ' + options.path + "#");
-					logger.info('\n' + 'monitoring element set to: ' + this.scroller);
-		      this.registerScrollEvent(options);
+					logger.info('\n' + 'strategy detected :' + options.type);
+
+		      this.detectScroll(options);
 		  }
+
 			logger.info('\n' + 'initializing plugin: finished');
 			logger.info('\n' + 'state: finished');
 		},
 		// -------------------------------------------------------------------------
 		// bottomReached: detect final scroll position
+		//
 		// -------------------------------------------------------------------------
 		isBottomReached: function (options) {
-		  var _this = this;
-		  let bottom, scrollY;
-			var clientHeight = $(options.elementID).height();
+		  var _this 				= this;
+			var logger 				= log4javascript.getLogger('j1Scroll');
+			var clientHeight 	= $(options.elementID).height();
+			var bottom, scrollY;
 
 		  if ( _this.settings.elementScroll ) {
 				var $window = $(window);
@@ -121,27 +115,31 @@
 		  }
 		},
 		// -------------------------------------------------------------------------
+		// eventHandler:
+		//
+		// -------------------------------------------------------------------------
+		// eventHandler: function (options) {
+		// 	var _this 	= this;
+		//
+		// 	if (_this.isBottomReached(options)) _this.getNewPost(options);
+		// },
+		// -------------------------------------------------------------------------
 		// detectScroll: EventHandler to load new items for infinite scroll
 		// if final scroll position reached
 		// -------------------------------------------------------------------------
-		registerScrollEvent: function (options) {
-		  var _this = this;
+		detectScroll: function (options) {
+		  var _this 	= this;
 		  var logger = log4javascript.getLogger('j1Scroll');
 
-		  logger.info('\n' + 'scroll event: register');
+		  logger.info('\n' + 'register event: scroll');
 
 			var eventHandler_onscroll = function (event) {
 				var options = _this.settings;
 
 				if (_this.isBottomReached(options)) {
-					if (options.firstPage > options.lastPage ) {
-						logger.info('\n' + 'last page detected on: ' + options.lastPage);
+					if (options.pNum > options.pMax ) {
+						logger.info('\n' + 'last page detected on: ' + options.pNum);
 						window.removeEventListener('scroll', eventHandler_onscroll);
-						logger.info('\n' + 'scroll event: removed');
-
-						if (options.infoLastPage ) {
-							_this.infoLastPage(options);
-						}
 						return false;
 					}
 					_this.getNewPost(options);
@@ -149,103 +147,109 @@
 		  }
 			window.addEventListener('scroll', eventHandler_onscroll);
 
-			logger.info('\n' + 'scroll event: registered');
+		  // window.onscroll = function (ev) {
+			// 	if (_this.isBottomReached(options)) _this.getNewPost(options);
+		  // };
 		},
 		// -------------------------------------------------------------------------
-		// getNewPost: load new items (from current path)
-		// Note: loader flag prevents to load items if AJAX load in progress
-		// is NOT finished
+		// getNewPost: load/append new items
+		//
 		// -------------------------------------------------------------------------
 		getNewPost: function (options) {
-		  var _this = this;
-			var logger = log4javascript.getLogger('j1Scroll');
+		  var _this 	= this;
+			var logger 	= log4javascript.getLogger('j1Scroll');
 
-			// display spinner while loading
-			if (options.loadStatus) {
-				$('.loader-ellips').show();
-			}
+			if (options.pNum = options.pMax ) {
+				logger.info('\n' + 'last page detected on: ' + options.pNum);
+		  }
 
-			// initialze loader flag
-		  if (this.itemsLoaded === false) return false;
+			logger.info('\n' + 'loading next items');
 
-			// set loader flag (false == not loaded)
-		  this.itemsLoaded = false;
+		  if (this.enable === false) return false;
+		  this.enable = false;
 		  var xmlhttp = new XMLHttpRequest();
 		  xmlhttp.onreadystatechange = function () {
 		    if (xmlhttp.readyState == XMLHttpRequest.DONE) {
 		      if (xmlhttp.status == 200) {
-		        options.firstPage++;
+		        options.pNum++;
 		        var childItems = _this.getChildItemsByAjaxHTML(options, xmlhttp.responseText);
 		        _this.appendNewItems(childItems);
-						// set loader flag (true == loaded)
-						logger.info('\n' + 'loading new items: successful');
-
-						// hide the spinner after loading
-						if (options.loadStatus) {
-							$('.loader-ellips').hide();
-						}
-						// set loader flag (true == loaded)
-			      return _this.itemsLoaded = true;
-		      } else {
-						logger.error('\n' + 'loading new items failed, HTTP response: ' + xmlhttp.status );
-						// set loader flag (true == loaded)
-			      return _this.itemsLoaded = false;
-					}
+		      }
+		      return _this.enable = true;
 		    }
 		  };
-			logger.info('\n' + 'loading new items from path: ' + options.path + options.firstPage);
-		  xmlhttp.open("GET", location.origin + options.path + options.firstPage + '/index.html', true);
+		  xmlhttp.open("GET", location.origin + options.path + options.pNum + '/index.html', true);
 		  xmlhttp.send();
 		},
 		// -------------------------------------------------------------------------
-		// getChildItemsByAjaxHTML: extract items from page loaded
+		// getChildItemsByAjaxHTML:
+		//
 		// -------------------------------------------------------------------------
 		getChildItemsByAjaxHTML: function (options, HTMLText) {
 		  var newHTML = document.createElement('html');
-			var logger = log4javascript.getLogger('j1Scroll');
+			var logger 	= log4javascript.getLogger('j1Scroll');
 
-			logger.info('\n' + 'load new items');
 		  newHTML.innerHTML = HTMLText;
 		  var childItems = newHTML.querySelectorAll(options.elementID + ' > *');
+
+			logger.info('\n' + 'items loaded sucessfully');
 		  return childItems;
 		},
 		// -------------------------------------------------------------------------
-		// appendNewItems: append items and run post processing
+		// appendNewItems:
+		//
 		// -------------------------------------------------------------------------
 		appendNewItems: function (items) {
-		  var _this = this;
-			var logger = log4javascript.getLogger('j1Scroll');
+		  var _this 	= this;
+			var logger 	= log4javascript.getLogger('j1Scroll');
 
 			logger.info('\n' + 'append new items');
+
 		  items.forEach(function (item) {
 		    _this.element.appendChild(item);
 		  });
 
-			logger.info('\n' + 'post processing: createDropCap');
+			logger.info('\n' + 'run post processing on new items');
 			// initialize backdrops
 			j1.core.createDropCap();
 		},
 		// -------------------------------------------------------------------------
-		// getNewPost: load/append new items
-		// Note: loader flag prevents to load items if AJAX load in progress
-		// is NOT finished
+		// isInViewport:
+		// Detects if an element is visible in an viewport specified
 		// -------------------------------------------------------------------------
-		infoLastPage: function (options) {
-		  var _this 		= this;
-			var logger		= log4javascript.getLogger('j1Scroll');
+		isInViewport: function (elm, offset) {
+			var logger 	= log4javascript.getLogger('j1Scroll');
 
-			logger.info('\n' + 'post processing: infoLastPage');
-			$('.page-scroll-last').show();
+			// if the element doesn't exist, abort
+			if( elm.length == 0 ) {
+				return;
+			}
+			var $window = jQuery(window);
+			var viewport_top = $window.scrollTop();
+			var viewport_height = $window.height();
+			var viewport_bottom = viewport_top + viewport_height;
+			var $elm = jQuery(elm);
+			var top = $elm.offset().top + offset;
+			var height = $elm.height();
+			var bottom = top + height;
+
+			return (top >= viewport_top && top < viewport_bottom) ||
+			(bottom > viewport_top && bottom <= viewport_bottom) ||
+			(height > viewport_height && top <= viewport_top && bottom >= viewport_bottom);
 		}
+
 	}); // END prototype
 
-	// wrapper around the constructor to prevent multiple instantiations
+	// ---------------------------------------------------------------------------
+	// lightweight plugin wrapper around the constructor, preventing
+	// multiple instantiations
+	// ---------------------------------------------------------------------------
 	$.fn [pluginName] = function(options) {
 	  return this.each(function() {
-	    if (!$.data( this, "plugin_" + pluginName)) {
-	      $.data(this, "plugin_" +
-	        pluginName, new Plugin(this, options));
-	    }
+	      if (!$.data( this, "plugin_" + pluginName)) {
+	          $.data(this, "plugin_" +
+	              pluginName, new Plugin(this, options));
+	      }
 	  });
 	};
 

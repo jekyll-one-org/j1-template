@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/modules/showOnScroll/js/showOnScroll.js
- # J1 implementation for showOnScroll
+ # Very simple J1 implementation for showOnScroll
  #
  # Product/Info:
  # https://jekyll.one
@@ -12,7 +12,10 @@
  # For details, see https://jekyll.one
  # -----------------------------------------------------------------------------
 */
-
+// -------------------------------------------------------------------------
+// isInViewport:
+// Detects if an element is visible in an viewport specified
+// -------------------------------------------------------------------------
 function isInViewport(elm, offset) {
 	// if the element doesn't exist, abort
 	if( elm.length == 0 ) {
@@ -32,40 +35,36 @@ function isInViewport(elm, offset) {
 	(height > viewport_height && top <= viewport_top && bottom >= viewport_bottom);
 }
 
+// -----------------------------------------------------------------------------
+// Initializer
+// -----------------------------------------------------------------------------
 $(document).ready( function() {
 
   var showDelay =   700;
   var yOffset 	=  500;
-	var logger  	= log4javascript.getLogger('j1.core.showOnScroll');
+	var logger  	= log4javascript.getLogger('j1ShowOnScroll');
 
-	// var eventHandler_news_panel = function (event) {
-	// 	var clientHeight = $('#home_news_panel-scroll-group').height();
-	// 	var inViewport = isInViewport ($('#home_news_panel-scroll-group'), clientHeight);
-	//
-  //   if (inViewport) {
-	// 		logger.info('\n' + 'The specified container end reached: home_news_panel-scroll-group');
-  //     //console.log('The specified container is in view.');
-  //     // $(".home_service_panel").show(showDelay);
-  //     // window.removeEventListener('scroll', eventHandler_news_panel);
-  //   }
-  // }
-	// window.addEventListener('scroll', eventHandler_news_panel);
-
+	// ---------------------------------------------------------------------------
+	// EventHandler: Service Panel
+	// ---------------------------------------------------------------------------
   var eventHandler_service_panel = function (event) {
     if (isInViewport ($('#home_service_panel'), yOffset)) {
-			logger.info('\n' + 'The specified container is in view: home_service_panel');
-      //console.log('The specified container is in view.');
+			logger.info('\n' + 'specified container is in view: home_service_panel');
       $(".home_service_panel").show(showDelay);
+			logger.info('\n' + 'remove eventHandler');
       window.removeEventListener('scroll', eventHandler_service_panel);
     }
   }
 	window.addEventListener('scroll', eventHandler_service_panel);
 
+	// ---------------------------------------------------------------------------
+	// EventHandler: Intro Panel
+	// ---------------------------------------------------------------------------
 	var eventHandler_intro_panel = function (event) {
 		if (isInViewport ($('#home_intro_panel'), yOffset)) {
-			logger.info('\n' + 'The specified container is in view: home_intro_panel');
-			//console.log('The specified container is in view.');
+			logger.info('\n' + 'specified container is in view: home_intro_panel');
 			$(".home_intro_panel").show(showDelay);
+			logger.info('\n' + 'remove eventHandler');
 			window.removeEventListener('scroll', eventHandler_intro_panel);
 		}
 	}

@@ -455,23 +455,7 @@ advertising:
     custom_data:
 
 # ------------------------------------------------------------------------------
-# SURVEY settings (currently NOT supported)
-#
-# Set 'enabled' to false to turn off globally. Affects all pages independently
-# from what is set pagewise!
-# Set 'provider' to the provider you want to use.
-# ------------------------------------------------------------------------------
-survey:
-  enabled:                              false
-
-  provider:                             jotform
-
-  jotform:
-    default_form:                       '<your-form-id>'
-    container:                          page                                    # page | modal
-
-# ------------------------------------------------------------------------------
-# TRANSLATOR settings (currently NOT supported)
+# TRANSLATOR settings
 #
 # Set 'enabled' to false to turn off globally. Affects all pages independently
 # from what is set pagewise!
@@ -479,14 +463,14 @@ survey:
 # ------------------------------------------------------------------------------
 translation:
   enabled:                              false
-
+  
   provider:                             google
 
   google:
     layout:                             default
-    meta_data:                          [ google-translate-customization ]
+    meta_data:                          [google-translate-customization]
     page_language:                      en
-    translation_languages:              [ all ]
+    translation_languages:              [all]
 
 # ------------------------------------------------------------------------------
 # SHARING settings (currently NOT supported)

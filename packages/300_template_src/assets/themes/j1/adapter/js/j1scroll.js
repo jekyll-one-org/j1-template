@@ -114,18 +114,18 @@ j1.adapter['j1Scroll'] = (function (j1, window) {
           var postWrapperId = '#home_news_panel-scroll-group';
           var paginatePath  = '/assets/data/news_panel_posts/page';
 
-          // status:           '.page-scroll-last',
+          // status:              '.page-scroll-last',
+          // firstPage:            2,
+          // onInit:               function(){},				                        // Callback after plugin has loaded
+          // onBeforeLoad:         function(link){},	                          // Callback before new content is loaded
+          // onAfterLoad:          function(html){}	                            // Callback after new content has been loaded
 
           $(postWrapperId).j1Scroll({
-            type:                 'infiniteScroll',
             path:                 paginatePath,
             elementScroll:        false,
             scrollThreshold:      300,
-            checkLastPage:        true,
-            status:               true,
-            onInit:               function(){},					                        // Callback after plugin has loaded
-            beforeContentLoaded:  function(link){},	                            // Callback before new content is loaded
-            afterContentLoaded:   function(html){}	                            // Callback after new content has been loaded
+            lastPage:             4,
+            infoLastPage:         true,
           });
 
           $('.list-group').on( 'load.j1Scroll', function( event, body, path, response ) {

@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/modules/infiniteScroll/css/uno.css
- # Provides styles for J1 Module infiniteScroll
+ # ~/assets/themes/j1/modules/j1Scroll/css/uno.css
+ # Provides styles for J1 Module j1Scroll
  #
  # Product/Info:
  # https://jekyll.one
@@ -32,53 +32,7 @@ span {
 }
 */
 
-/*  groups and items
--------------------------------------------------------------------------------- */
-.list-group-item {
-  width: 96%;
-  margin-right: 1% !important;
-  }
-
-/*  Media breakpoints */
-@media only screen and (min-width: 576px) {
-  .list-group-item.items-auto {
-    width: 48.3%; }
-  .list-group-item.items-1 {
-    width: 96%; }
-  .list-group-item.items-2 {
-    width: 48.3%; }
-  .list-group-item.items-3 {
-    width: 48.3%; }
-  .list-group-item.items-4 {
-    width: 48.3%; } }
-
-@media only screen and (min-width: 768px) {
-  .list-group-item.items-auto {
-    width: 31.333%; }
-  .list-group-item.items-1 {
-    width: 96%; }
-  .list-group-item.items-2 {
-    width: 48.3%; }
-  .list-group-item.items-3 {
-    width: 48.3%; }
-  .list-group-item.items-4 {
-    width: 48.3%; } }
-
-@media only screen and (min-width: 992px) {
-  .list-group-item.items-auto {
-    width: 23.8%; }
-  .list-group-item.items-1 {
-    width: 96%; }
-  .list-group-item.items-2 {
-    width: 48.3%;
-    }
-  .list-group-item.items-3 {
-    width: 31.333%; }
-  .list-group-item.items-4 {
-    width: 23.8%; } }
-
-
-/*  controls
+/* plugin controls
 -------------------------------------------------------------------------------- */
 .page-load-status, .page-scroll-last {
   display: none; /* hidden by default */
@@ -97,7 +51,7 @@ span.infinite-scroll-last {
     padding: 10px 3px;
 }
 
-/*  spinner
+/* plugin spinner
 -------------------------------------------------------------------------------- */
 .loader-ellips {
   font-size: 20px; /* change size here */
