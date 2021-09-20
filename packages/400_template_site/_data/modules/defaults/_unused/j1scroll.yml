@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/infiniteScroll.yml
-# User configuration for J1 infiniteScroll
+# ~/_data/modules/j1Scroll.yml
+# User configuration for J1 j1Scroll
 #
 # Product/Info:
 # https://jekyll.one
@@ -16,9 +16,9 @@
 #
 about_config:
 
-  title:                                infiniteScroll
+  title:                                j1Scroll
   scope:                                Default settings
-  location:                             _data/modules/defaults/infiniteScroll.yml
+  location:                             _data/modules/defaults/j1Scroll.yml
 
 # ------------------------------------------------------------------------------
 # Default configuration settings
@@ -26,7 +26,7 @@ about_config:
 settings:
 
   # ----------------------------------------------------------------------------
-  # GENERAL gallery settings
+  # GENERAL j1Scroll settings
   #
   # enabled
   # ----------------------------------------------------------------------------
@@ -65,9 +65,8 @@ settings:
   # ----------------------------------------------------------------------------
 
   enabled:                              false
-  history:                              false
-  checkLastPage:                        true
-  check_status:                         true
+
+  scrollers:
 
 # ------------------------------------------------------------------------------
 # END config

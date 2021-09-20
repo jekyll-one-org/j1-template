@@ -83,7 +83,6 @@
 				$(message).insertAfter(options.elementID);
 			}
 
-
 		  // initialize infinite scroll
 		  if ( options.type === 'infiniteScroll') {
 					logger.info('\n' + 'processing mode: infiniteScroll');
@@ -160,16 +159,17 @@
 		  var _this = this;
 			var logger = log4javascript.getLogger('j1Scroll');
 
-			// display spinner while loading
-			if (options.loadStatus) {
-				$('.loader-ellips').show();
-			}
-
 			// initialze loader flag
 		  if (this.itemsLoaded === false) return false;
 
 			// set loader flag (false == not loaded)
 		  this.itemsLoaded = false;
+
+			// display spinner while loading
+			if (options.loadStatus) {
+				$('.loader-ellips').show();
+			}
+
 		  var xmlhttp = new XMLHttpRequest();
 		  xmlhttp.onreadystatechange = function () {
 		    if (xmlhttp.readyState == XMLHttpRequest.DONE) {
@@ -177,16 +177,22 @@
 		        options.firstPage++;
 		        var childItems = _this.getChildItemsByAjaxHTML(options, xmlhttp.responseText);
 		        _this.appendNewItems(childItems);
-						// set loader flag (true == loaded)
+
 						logger.info('\n' + 'loading new items: successful');
 
 						// hide the spinner after loading
 						if (options.loadStatus) {
 							$('.loader-ellips').hide();
 						}
+
 						// set loader flag (true == loaded)
-			      return _this.itemsLoaded = true;
+						return _this.itemsLoaded = true;
 		      } else {
+						// hide the spinner
+						if (options.loadStatus) {
+							$('.loader-ellips').hide();
+						}
+
 						logger.error('\n' + 'loading new items failed, HTTP response: ' + xmlhttp.status );
 						// set loader flag (true == loaded)
 			      return _this.itemsLoaded = false;
@@ -196,6 +202,7 @@
 			logger.info('\n' + 'loading new items from path: ' + options.path + options.firstPage);
 		  xmlhttp.open("GET", location.origin + options.path + options.firstPage + '/index.html', true);
 		  xmlhttp.send();
+
 		},
 		// -------------------------------------------------------------------------
 		// getChildItemsByAjaxHTML: extract items from page loaded

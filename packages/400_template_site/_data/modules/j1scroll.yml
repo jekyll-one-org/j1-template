@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/infiniteScroll.yml
+# ~/_data/modules/j1Scroll.yml
 # User configuration for J1 infiniteScroll
 #
 # Product/Info:
@@ -16,9 +16,9 @@
 #
 about_config:
 
-  title:                                infiniteScroll
+  title:
   scope:                                User settings
-  location:                             _data/modules/infiniteScroll.yml
+  location:                             _data/modules/j1Scroll.yml
 
 # ------------------------------------------------------------------------------
 # User configuration settings
@@ -27,40 +27,31 @@ settings:
   enabled:                              true
 
   scrollers:
-
-    # ==========================================================================
-    # Image Galleries
-    #
-
     # --------------------------------------------------------------------------
     # News Panel
     #
     - scroller:
         enabled:                        true
         id:                             home_news_panel
-        data_path:                      /assets/data/news_panel_posts
-        pages:                          "page${pageNumber}/index.html"
+        container:                      home_news_panel-scroll-group
+        path:                           /assets/data/news_panel_posts/page
+        elementScroll:                  true
+        scrollThreshold:                300
         lastPage:                       4
-        history:                        false
-        scrollThreshold:                10
-        scrollOffset:                   470
-        checkLastPage:                  true
-        check_status:                   true
+        infoLastPage:                   true
 
     # --------------------------------------------------------------------------
-    # Article Navigator
+    # Blog Navigator Preview
     #
     - scroller:
-        enabled:                        true
-        id:                             article_navigator
-        data_path:                      /assets/data/article_navigator
-        pages:                          "page${pageNumber}/index.html"
-        lastPage:                       4
-        history:                        false
-        scrollThreshold:                10
-        scrollOffset:                   470
-        checkLastPage:                  true
-        check_status:                   true
+        enabled:                        false
+        id:                             blog_navigator_preview
+        container:                      .timeline-panel
+        path:                           /pages/public/blog/navigator/page
+        elementScroll:                  true
+        scrollThreshold:                100
+        lastPage:                       3
+        infoLastPage:                   false
 
 # ------------------------------------------------------------------------------
 # END config
