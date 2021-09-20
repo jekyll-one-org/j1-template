@@ -35,8 +35,8 @@ settings:
         id:                             home_news_panel
         container:                      home_news_panel-scroll-group
         path:                           /assets/data/news_panel_posts/page
-        elementScroll:                  true
-        scrollThreshold:                300
+        elementScroll:                  true                                    # false = window, true = container
+        scrollOffset:                   100
         lastPage:                       4
         infoLastPage:                   true
 
@@ -44,13 +44,13 @@ settings:
     # Blog Navigator Preview
     #
     - scroller:
-        enabled:                        false
+        enabled:                        true
         id:                             blog_navigator_preview
-        container:                      .timeline-panel
+        container:                      timeline
         path:                           /pages/public/blog/navigator/page
         elementScroll:                  true
-        scrollThreshold:                100
-        lastPage:                       3
+        scrollOffset:                   200
+        lastPage:                       6
         infoLastPage:                   false
 
 # ------------------------------------------------------------------------------

@@ -25,7 +25,7 @@
 	var pluginName = 'j1Scroll',
 	defaults = {
 	    type:               	'infiniteScroll',
-	    scrollThreshold:    	400,
+	    scrollOffset:    	400,
 	    elementScroll:      	false,
 			firstPage:            2,
 			lastPage:             false,
@@ -95,28 +95,37 @@
 		},
 		// -------------------------------------------------------------------------
 		// bottomReached: detect final scroll position
+		// NOTE: 	the calculation for BOTTOM position is different for
+		// 				elementScroll and windowScroll. For elementScroll, the
+		//				trigger isBottomReached is TRUE, if the scroll position has
+		//        the end of the container PLUS a given scrollOffset.
+		//        For windowScroll, the trigger isBottomReached is TRUE, if
+		//        the scroll position has the end of the window MINUS
+		//        a given scrollOffset.
 		// -------------------------------------------------------------------------
 		isBottomReached: function (options) {
 		  var _this = this;
-		  let bottom, scrollY;
+		  var bottom, scrollY;
 			var clientHeight = $(options.elementID).height();
 
 		  if ( _this.settings.elementScroll ) {
+				// check scroll position of the container items are to be added
 				var $window = $(window);
 				var viewport_top = $window.scrollTop();
 				var viewport_height = $window.height();
-				var viewport_bottom = viewport_top + viewport_height;
+				var viewport_bottom = viewport_top + viewport_height - options.scrollOffset;
 				var $elm = $(options.elementID);
 				var top = $elm.offset().top + clientHeight;
 				var height = $elm.height();
-				// bottom = top + height - options.scrollThreshold
 				bottom = top + height;
+
 
 				return (top >= viewport_top && top < viewport_bottom) ||
 				(bottom > viewport_top && bottom <= viewport_bottom) ||
 				(height > viewport_height && top <= viewport_top && bottom >= viewport_bottom);
 		  } else {
-				return (window.innerHeight + window.pageYOffset + options.scrollThreshold >= document.body.offsetHeight);
+				// check scroll position of the (overall) window
+				return (window.innerHeight + window.pageYOffset + options.scrollOffset >= document.body.offsetHeight);
 		  }
 		},
 		// -------------------------------------------------------------------------
@@ -159,6 +168,8 @@
 		  var _this = this;
 			var logger = log4javascript.getLogger('j1Scroll');
 
+			logger.info('\n' + 'trigger loading ');
+
 			// initialze loader flag
 		  if (this.itemsLoaded === false) return false;
 
@@ -167,6 +178,7 @@
 
 			// display spinner while loading
 			if (options.loadStatus) {
+				logger.info('\n' + 'show: spinner');
 				$('.loader-ellips').show();
 			}
 
@@ -182,6 +194,7 @@
 
 						// hide the spinner after loading
 						if (options.loadStatus) {
+							logger.info('\n' + 'hide: spinner');
 							$('.loader-ellips').hide();
 						}
 
@@ -190,6 +203,7 @@
 		      } else {
 						// hide the spinner
 						if (options.loadStatus) {
+							logger.info('\n' + 'hide: spinner');
 							$('.loader-ellips').hide();
 						}
 
@@ -241,7 +255,7 @@
 		  var _this 		= this;
 			var logger		= log4javascript.getLogger('j1Scroll');
 
-			logger.info('\n' + 'post processing: infoLastPage');
+			logger.info('\n' + 'show: infoLastPage');
 			$('.page-scroll-last').show();
 		}
 	}); // END prototype

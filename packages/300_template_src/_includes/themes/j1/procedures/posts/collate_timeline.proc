@@ -93,7 +93,7 @@
     </div>
     {% endif %}
 
-    <ul class="timeline">
+    <ul id="timeline" class="timeline">
       {% for post in posts_collate %}
 
       {% assign place_image = false %}

@@ -7,7 +7,7 @@ regenerate:                             true
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/j1Scroll.js
- # Liquid template to adapt j1Scroll
+ # Liquid template to adapt j1Scroll plugin
  #
  # Product/Info:
  # https://jekyll.one
@@ -39,14 +39,13 @@ regenerate:                             true
 {% assign blocks            = site.data.blocks %}
 {% assign modules           = site.data.modules %}
 
-{% comment %} Set config data
+{% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign scroll_settings   = modules.j1scroll.settings %}
 
-{% comment %} Set config options
+{% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign scroll_options    = scroll_settings %}
-
 
 /*
  # -----------------------------------------------------------------------------
@@ -107,7 +106,6 @@ j1.adapter['j1Scroll'] = (function (j1, window) {
     // Initializer
     // -------------------------------------------------------------------------
     init: function (options) {
-
       {% comment %} Set global variables
       -------------------------------------------------------------------------- {% endcomment %}
       _this = j1.adapter.j1Scroll;
@@ -149,53 +147,57 @@ j1.adapter['j1Scroll'] = (function (j1, window) {
     }, // END init
 
     // -----------------------------------------------------------------------
-    // Load AJAX data and initialize the jg gallery
+    // Generate scrollers configured/enabled
     // -----------------------------------------------------------------------
     initialize: function () {
-      logger = logger  = log4javascript.getLogger('j1.adapter.j1Scroll');
+      logger = log4javascript.getLogger('j1.adapter.j1Scroll');
 
       var log_text = '\n' + 'j1Scroll is being initialized';
       logger.info(log_text);
-      // START generate scroller
-      {% for item in scroll_options.scrollers %} {% if item.scroller.enabled %}
 
-      {% assign scroller_id     = item.scroller.id %}
-      {% assign container       = item.scroller.container %}
-      {% assign path            = item.scroller.path  %}
-      {% assign elementScroll   = item.scroller.elementScroll %}
-      {% assign scrollThreshold = item.scroller.scrollThreshold %}
-      {% assign lastPage        = item.scroller.lastPage %}
-      {% assign infoLastPage    = item.scroller.infoLastPage %}
-
-      // scroller_id: {{ scroller_id }}
+      // START generate scrollers
       var dependencies_met_page_ready = setInterval (function (options) {
         if (j1.getState() === 'finished') {
 
+          {% for item in scroll_options.scrollers %} {% if item.scroller.enabled %}
+
+          {% assign scroller_id     = item.scroller.id %}
+          {% assign container       = item.scroller.container %}
+          {% assign path            = item.scroller.path  %}
+          {% assign elementScroll   = item.scroller.elementScroll %}
+          {% assign scrollOffset    = item.scroller.scrollOffset %}
+          {% assign lastPage        = item.scroller.lastPage %}
+          {% assign infoLastPage    = item.scroller.infoLastPage %}
+
+          // scroller_id: {{ scroller_id }}
           var log_text = '\n' + 'j1Scroll is being initialized on: ' + '{{scroller_id}}';
           logger.info(log_text);
 
           {% comment %} Unused options
-          ------------------------------------------------------------------
+          ----------------------------------------------------------------------
           // status:              '.page-scroll-last',
           // firstPage:            2,
-          // onInit:               function(){},				                    // Callback after plugin has loaded
-          // onBeforeLoad:         function(link){},	                      // Callback before new content is loaded
-          // onAfterLoad:          function(html){}	                        // Callback after new content has been loaded
-          ------------------------------------------------------------------ {% endcomment %}
+          // onInit:               function(){},				                        // Callback after plugin has loaded
+          // onBeforeLoad:         function(link){},	                          // Callback before new content is loaded
+          // onAfterLoad:          function(html){}	                            // Callback after new content has been loaded
+          ---------------------------------------------------------------------- {% endcomment %}
 
           var container = '#' + '{{container}}';
           var pagePath  = '{{path}}';
 
-          $(container).j1Scroll({
-            path:                 pagePath,
-            elementScroll:        {{elementScroll}},
-            scrollThreshold:      {{scrollThreshold}},
-            lastPage:             {{lastPage}},
-            infoLastPage:         {{infoLastPage}},
-          });
+          // Create an j1Scroll instance if container exists
+          if ($(container).length) {
+            $(container).j1Scroll({
+              path:                 pagePath,
+              elementScroll:        {{elementScroll}},
+              scrollOffset:         {{scrollOffset}},
+              lastPage:             {{lastPage}},
+              infoLastPage:         {{infoLastPage}},
+            });
+          }
 
-          {% comment %} Unused callbacks
-          ------------------------------------------------------------------
+          {% comment %} Unused callbacks (disabled)
+          ----------------------------------------------------------------------
           // $('.list-group').on( 'load.j1Scroll', function( event, body, path, response ) {
           //   var logger = log4javascript.getLogger('j1.adapter.infiniteScroll');
           //   var log_text = `\n loaded data from path: ${path}`;
@@ -214,17 +216,18 @@ j1.adapter['j1Scroll'] = (function (j1, window) {
           //   var log_text = `\n request for the next page to be loaded from path: ${path}`;
           //   logger.info(log_text);
           // });
-          ------------------------------------------------------------------ {% endcomment %}
+          ---------------------------------------------------------------------- {% endcomment %}
 
+          // END scroller_id: {{ scroller_id }}
+          {% endif %} {% endfor %}
           clearInterval(dependencies_met_page_ready);
         }
       });
-      // END scroller_id: {{ scroller_id }}
-      {% endif %} {% endfor %}
-      // END generate scroller
+      // END generate scrollers
     },
+
     // -------------------------------------------------------------------------
-    // messageHandler: MessageHandler for J1 CookieConsent module
+    // messageHandler: MessageHandler for j1Scroll module
     // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
     messageHandler: function (sender, message) {

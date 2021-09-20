@@ -55,6 +55,7 @@
 
 {% assign previewer                           = blog_navigator_options.previewer %}
 {% assign paginate                            = paginator_options.pagination.enabled %}
+{% assign scroller                            = blog_navigator_options.scroller %}
 {% assign rtext                               = template_config.typography.rtext %}
 {% assign page_rtext                          = page.rtext %}
 {% assign page_rtext_size                     = page.rtext_size %}
@@ -165,7 +166,8 @@
             <h1 id="previewer" class="notoc mt-4">{{previewer_headline}}</h1>
           </div>
 
-          {% if paginator.total_pages > 1 %}
+          <!-- Add Jekyll Paginator if enabled: {{scroller}} -->
+          {% if scroller == 'jekyll' %} {% if paginator.total_pages > 1 %}
           <nav class="paginator mb-4">
             <ul class="pagination raised-z0">
               {% if paginator.previous_page %}
@@ -185,11 +187,11 @@
               {% endif %}
             </ul>
           </nav>
-          {% endif %}
+          {% endif %} {% endif %}
 
-          {% if blog_navigator_options.article_previewer.page_text.enabled %}
+          {% if scroller == 'jekyll' %} {% if blog_navigator_options.article_previewer.page_text.enabled %}
           <div class="view-description mb-3">{{previewer_description_text}}</div>
-          {% endif %}
+          {% endif %} {% endif %}
 
         </div>
 
