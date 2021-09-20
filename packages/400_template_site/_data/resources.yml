@@ -700,7 +700,7 @@ resources:
       enabled:                          true
       comment:                          HTML modifier for Asciidoctor
       region:                           head
-      layout:                           [ page, post, collection ]
+      layout:                           [ home, page, post, collection, blog_archive, app ]
       required:                         always
       preload:                          false                                   # property currently unused
       script_load:                      defer
@@ -722,7 +722,7 @@ resources:
       enabled:                          true
       comment:                          theme rouge
       region:                           head
-      layout:                           [ page, post, collection ]
+      layout:                           [ home, page, post, collection, blog_archive, raw, app ]
       required:                         ondemand
       preload:                          false                                   # property currently unused
       script_load:                      defer
@@ -788,7 +788,7 @@ resources:
       id:                               framer
       enabled:                          true
       comment:                          module framer
-      layout:                           [ page, post, collection, app, raw ]
+      layout:                           [ home, page, post, collection, blog_archive, raw, app ]
       region:                           head
       required:                         ondemand
       preload:                          false                                   # property currently unused
@@ -811,7 +811,7 @@ resources:
       id:                               lightbox
       enabled:                          true
       comment:                          module lightbox
-      layout:                           [ home, page, post, collection ]
+      layout:                           [ home, page, post, collection, blog_archive ]
       region:                           head
       required:                         ondemand
       preload:                          false                                   # property currently unused
@@ -835,7 +835,7 @@ resources:
       id:                               twemoji
       enabled:                          true
       comment:                          module twemoji
-      layout:                           [ home, page, post, collection ]
+      layout:                           [ home, page, post, collection, blog_archive ]
       region:                           head
       required:                         ondemand
       preload:                          false                                   # property currently unused
@@ -902,7 +902,7 @@ resources:
       enabled:                          true
       comment:                          Iconify framework
       region:                           head
-      layout:                           [ home, page, post, collection ]
+      layout:                           [ home, page, post, collection, blog_archive ]
       required:                         ondemand
       preload:                          false                                   # property currently unused
       script_load:                      defer
@@ -965,7 +965,7 @@ resources:
       enabled:                          true
       comment:                          module carousel
       region:                           head
-      layout:                           [ home, page, post, collection ]
+      layout:                           [ home, page, post, collection, blog_archive ]
       required:                         ondemand
       preload:                          false                                   # property currently unused
       script_load:                      defer
@@ -992,7 +992,7 @@ resources:
       enabled:                          true
       comment:                          module justifiedGallery
       region:                           head
-      layout:                           [ home, page, post, collection, raw, app ]
+      layout:                           [ home, page, post, collection, blog_archive, raw, app ]
       required:                         ondemand
       preload:                          false                                   # property currently unused
       script_load:                      defer
@@ -1016,7 +1016,7 @@ resources:
       enabled:                          true
       comment:                          module lightGallery
       region:                           head
-      layout:                           [ home, page, post, collection, raw, app ]
+      layout:                           [ home, page, post, collection, blog_archive, raw, app ]
       required:                         ondemand
       preload:                          false                                   # property currently unused
       script_load:                      defer
@@ -1052,7 +1052,7 @@ resources:
       enabled:                          true
       comment:                          module videojs
       region:                           head
-      layout:                           [ home, page, post, collection ]
+      layout:                           [ home, page, post, collection, blog_archive ]
       required:                         ondemand
       preload:                          false                                   # property currently unused
       script_load:                      defer
@@ -1081,7 +1081,7 @@ resources:
       enabled:                          true
       comment:                          module vimeo_froogaloop
       region:                           head
-      layout:                           [ home, page, post, collection ]
+      layout:                           [ home, page, post, collection, blog_archive ]
       required:                         ondemand
       preload:                          false                                   # property currently unused
       script_load:                      defer
@@ -1102,7 +1102,7 @@ resources:
       enabled:                          true
       comment:                          module vimeo_player
       region:                           head
-      layout:                           [ home, page, post, collection ]
+      layout:                           [ home, page, post, collection, blog_archive ]
       required:                         ondemand
       preload:                          false                                   # property currently unused
       script_load:                      defer
@@ -1146,7 +1146,7 @@ resources:
       enabled:                          false                                   # currently NOT used
       comment:                          module stacker
       region:                           head
-      layout:                           [ page, post, collection, app, raw ]
+      layout:                           [ home, page, post, collection, blog_archive, app, raw ]
       required:                         ondemand
       preload:                          false                                   # property currently unused
       script_load:                      sync
@@ -1248,7 +1248,7 @@ resources:
       enabled:                          false
       comment:                          J1 rtextResizer
       region:                           head
-      layout:                           [ home, page, post, collection ]
+      layout:                           [ home, page, post, collection, blog_archive ]
       required:                         always                                  # always | ondemand
       preload:                          false                                   # property currently unused
       script_load:                      defer
@@ -1261,30 +1261,8 @@ resources:
         init_function:                  [ j1.adapter.rtextResizer.init ]
 
   # ----------------------------------------------------------------------------
-  # infiniteScroll
-  # NOTE: https://infinite-scroll.com/
+  # showOnScroll
   #
-  - name:                               infiniteScroll
-    resource:
-      id:                               infinitescroll
-      enabled:                          true
-      comment:                          J1 infiniteScroll
-      region:                           head
-      layout:                           [ all ]
-      required:                         ondemand                                # always | ondemand
-      preload:                          false                                   # property currently unused
-      script_load:                      defer
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            [ modules/infiniteScroll/css/theme/uno ]
-        files:                          [ adapter/js/infiniteScroll.js ]
-        js:                             [ modules/infiniteScroll/js/infiniteScroll ]
-        init_function:                  [ j1.adapter.infiniteScroll.init ]
-
-  # ----------------------------------------------------------------------------
-  # infiniteScroll
-  # NOTE: https://infinite-scroll.com/
   #
   - name:                               showOnScroll
     resource:
@@ -1292,7 +1270,7 @@ resources:
       enabled:                          true
       comment:                          J1 showOnScroll
       region:                           head
-      layout:                           [ all ]
+      layout:                           [ home, page, post, collection, blog_archive ]
       required:                         ondemand                                # always | ondemand
       preload:                          false                                   # property currently unused
       script_load:                      defer
@@ -1314,7 +1292,7 @@ resources:
       enabled:                          true
       comment:                          j1Scroll
       region:                           head
-      layout:                           [ all ]
+      layout:                           [ home, page, post, collection, blog_archive ]
       required:                         ondemand                                # always | ondemand
       preload:                          false                                   # property currently unused
       script_load:                      defer
@@ -1322,11 +1300,8 @@ resources:
       pass_init_data:                   false
       data:
         css:                            [ modules/j1Scroll/css/theme/uno ]
-        files:                          [
-                                          modules/j1Scroll/js/j1scroll.js,
-                                          adapter/js/j1scroll.js
-                                        ]
-        js:                             []
+        files:                          [ adapter/js/j1scroll.js ]
+        js:                             [ modules/j1Scroll/js/j1scroll ]
         init_function:                  [ j1.adapter.j1Scroll.init ]
 
 # ------------------------------------------------------------------------------

@@ -47,6 +47,11 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign scroll_options    = scroll_settings %}
 
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/j1Scroll.js
