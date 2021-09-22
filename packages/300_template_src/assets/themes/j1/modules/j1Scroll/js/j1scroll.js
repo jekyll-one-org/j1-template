@@ -25,11 +25,12 @@
 	var pluginName = 'j1Scroll',
 	defaults = {
 	    type:               	'infiniteScroll',
-	    scrollOffset:    	400,
+	    scrollOffset:    			100,
 	    elementScroll:      	false,
 			firstPage:            2,
 			lastPage:             false,
-			loadStatus:           true,
+			infoLastPage:         false,
+			loadStatus:           false,
 			onInit:               function (){},					                        		// callback after plugin has initialized
 			onBeforeLoad:         function (){},	                            				// callback before new items are loaded
 			onAfterLoad:          function (){}																				// callback after new items are loaded
@@ -56,30 +57,19 @@
 			logger.info('\n' + 'initializing plugin: started');
 			logger.info('\n' + 'state: started');
 
+			if ( options.elementScroll ) {
+				this.scroller = this.element;
+			} else {
+				this.scroller = window;
+			}
+
 			if (options.loadStatus) {
 				var spinner = '<div class="loader-ellips" style="display: none"> <span class="loader-ellips__dot"></span> <span class="loader-ellips__dot"></span> <span class="loader-ellips__dot"></span> <span class="loader-ellips__dot"></span> </div>';
 				$(spinner).insertAfter(options.elementID);
 			}
 
-			if (options.infoLastPage ) {
-				var scroll_last_en = 'More articles can be found with the ';
-				var scroll_last_de = 'Weitere Artikel finden Sie im ';
-				var scroll_last;
-
-				if (document.documentElement.lang === 'en') {
-					scroll_last = scroll_last_en;
-				} else if (document.documentElement.lang === 'de') {
-					scroll_last = scroll_last_de;
-				} else {
-					scroll_last = scroll_last_en;
-				}
-
-				if ( this.settings.elementScroll ) {
-					this.scroller = this.element;
-				} else {
-					this.scroller = window;
-				}
-				var message = '<div class="page-scroll-last"><p class="infinite-scroll-last">' + scroll_last + '<a href="/pages/public/blog/navigator/">Blog Navigator</a></p>	</div>';
+			if (options.infoLastPage) {
+				var message = options.lastPageInfo;
 				$(message).insertAfter(options.elementID);
 			}
 

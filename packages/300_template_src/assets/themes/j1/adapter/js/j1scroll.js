@@ -27,7 +27,6 @@ regenerate:                             true
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment       = site.environment %}
-{% assign template_version  = site.version %}
 {% assign asset_path        = "/assets/themes/j1" %}
 
 {% comment %} Process YML config data
@@ -83,9 +82,11 @@ j1.adapter['j1Scroll'] = (function (j1, window) {
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment   = '{{environment}}';
+  var language      = '{{site.language}}';
   var user_agent    = platform.ua;
   var moduleOptions = {};
   var _this;
+  var lastPageInfo;
   var logger;
   var logText;
 
@@ -173,6 +174,8 @@ j1.adapter['j1Scroll'] = (function (j1, window) {
           {% assign scrollOffset    = item.scroller.scrollOffset %}
           {% assign lastPage        = item.scroller.lastPage %}
           {% assign infoLastPage    = item.scroller.infoLastPage %}
+          {% assign lastPageInfo_en = item.scroller.lastPageInfo_en %}
+          {% assign lastPageInfo_de = item.scroller.lastPageInfo_de %}
 
           // scroller_id: {{ scroller_id }}
           var log_text = '\n' + 'j1Scroll is being initialized on: ' + '{{scroller_id}}';
@@ -190,6 +193,20 @@ j1.adapter['j1Scroll'] = (function (j1, window) {
           var container = '#' + '{{container}}';
           var pagePath  = '{{path}}';
 
+          if (language === 'en') {
+            lastPageInfo =  '<div class="page-scroll-last"><p class="infinite-scroll-last">';
+            lastPageInfo += '{{lastPageInfo_en|strip_newlines}}';
+            lastPageInfo += '</p></div>';
+          } else if (language === 'de') {
+            lastPageInfo =  '<div class="page-scroll-last"><p class="infinite-scroll-last">';
+            lastPageInfo += '{{lastPageInfo_de|strip_newlines}}';
+            lastPageInfo += '</p></div>';
+          } else {
+            lastPageInfo =  '<div class="page-scroll-last"><p class="infinite-scroll-last">';
+            lastPageInfo += '{{lastPageInfo_en|strip_newlines}}';
+            lastPageInfo += '</p></div>';
+          }
+
           // Create an j1Scroll instance if container exists
           if ($(container).length) {
             $(container).j1Scroll({
@@ -198,6 +215,7 @@ j1.adapter['j1Scroll'] = (function (j1, window) {
               scrollOffset:         {{scrollOffset}},
               lastPage:             {{lastPage}},
               infoLastPage:         {{infoLastPage}},
+              lastPageInfo:         lastPageInfo,
             });
           }
 

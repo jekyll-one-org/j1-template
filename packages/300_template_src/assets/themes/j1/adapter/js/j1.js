@@ -1000,7 +1000,7 @@ var j1 = (function () {
               }
             } else {
               if (comments) {
-                logger.warn('\n' + 'enable comment provider: ' + comment_provider);
+                logger.info('\n' + 'enable comment provider: ' + comment_provider);
                 $('#main-content').append('<h2 id="leave-a-comment" class="mt-4">{{comments_headline}}</h2>');
                 if (comment_provider === 'disqus') {
                   logger.info('\n' + 'load comment provider code: ' + comment_provider);
@@ -1042,9 +1042,9 @@ var j1 = (function () {
               if (tracking_enabled && !tracking_id_valid) {
                 logger.error('\n' + 'tracking enabled, but invalid tracking id found: ' + tracking_id);
               } else if (tracking_enabled && tracking_id_valid) {
-                logger.warn('\n' + 'tracking enabled, tracking id found: ' + tracking_id);
+                logger.info('\n' + 'tracking enabled, tracking id found: ' + tracking_id);
               } else {
-                logger.warn('\n' + 'tracking disabled, tracking id found: ' + tracking_id);
+                logger.info('\n' + 'tracking disabled, tracking id found: ' + tracking_id);
               }
             } else {
               logger.warn('\n' + 'tracking not allowed, privacy settings for analysis: ' + user_consent.analyses);
@@ -1150,7 +1150,7 @@ var j1 = (function () {
             }
           } else {
             if (comments) {
-              logger.warn('\n' + 'enable comment provider: ' + comment_provider);
+              logger.info('\n' + 'enable comment provider: ' + comment_provider);
               $('#main-content').append('<h2 id="leave-a-comment" class="mt-4">{{comments_headline}}</h2>');
               if (comment_provider === 'disqus') {
                 logger.info('\n' + 'load comment provider code: ' + comment_provider);
@@ -1203,9 +1203,9 @@ var j1 = (function () {
             if (tracking_enabled && !tracking_id_valid) {
               logger.error('\n' + 'tracking enabled, but invalid tracking id found: ' + tracking_id);
             } else if (tracking_enabled && tracking_id_valid) {
-              logger.warn('\n' + 'tracking enabled, tracking id found: ' + tracking_id);
+              logger.info('\n' + 'tracking enabled, tracking id found: ' + tracking_id);
             } else {
-              logger.warn('\n' + 'tracking disabled, tracking id found: ' + tracking_id);
+              logger.info('\n' + 'tracking disabled, tracking id found: ' + tracking_id);
             }
           } else {
             logger.warn('\n' + 'tracking not allowed, privacy settings for analysis: ' + user_consent.analyses);
