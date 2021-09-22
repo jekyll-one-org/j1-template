@@ -13,8 +13,6 @@ git commit -m "first commit"
 git remote add origin https://github.com/jekyll-one-org/heroku_starter_app.git
 git push -u origin master
 
-
-
 == List branches
 
 git branch -a zeigt alle lokalen und entfernten Branches an, hingegen -r
