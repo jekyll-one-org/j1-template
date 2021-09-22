@@ -351,12 +351,12 @@ resources:
   #   5   log4javascript                log4javascript@1.4.15
   #   6   Bootstrap                     bootstrap@4.4.1
   #   6   bs_material_design            bootstrap-material-design@4.0.0-beta.4
-  #   7   j1_template                   j1_template_4@2021.1.28
+  #   7   j1_template                   j1_template_4@2021.1.29
   #   8   tocbot                        tocbot@4.11.2
   #   9   jekyll_search                 simple_jekyll_search@1.1.5
   #   10  bs_theme_switcher             bs_theme_switcher@1.1.5
   #   11  backstretch                   backstretch@2.1.16
-  #   12  cookiebar                     cookiebar@2021.1.28
+  #   12  cookiebar                     cookiebar@2021.1.29
   #
   # ----------------------------------------------------------------------------
   #   J1 Template Core, integrated CSS Resources
