@@ -11,7 +11,9 @@ description: >
 categories:                             [ Preview ]
 tags:                                   [ MDIL, Icons, Fonts ]
 
-scrollbar:                              true
+fam_menu_id:                            default
+scrollbar:                              false
+toc:                                    false
 
 permalink:                              /pages/public/previewer/mdil_font/
 regenerate:                             false
@@ -56,8 +58,8 @@ _Material Design Light_ (MDIL) is a helpful design resource for Web Sites that
 follow _Google's_ specification of Material Design. *MDIL* is a subset of the
 Material Design Icons (MDI) set managed by *Austin Andrews* and contributors.
 
-NOTE: The icon set is still work in progress. The team is in the process of
-building the icon set into a fully fledged alternative to MDI. Have a look at
+The icon set is still work in progress. The team is in the process of building
+the icon set into a fully fledged alternative to MDI. Have a look at
 https://github.com/Templarian/MaterialDesignLight[MaterialDesignLight, {browser-window--new}]
 for latest versions.
 

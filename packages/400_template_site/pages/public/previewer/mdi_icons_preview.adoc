@@ -11,7 +11,7 @@ description: >
 categories:                             [ Preview ]
 tags:                                   [ MDI, Icons, Fonts ]
 
-scrollbar:                              true
+scrollbar:                              false
 
 permalink:                              /pages/public/previewer/mdi_font/
 regenerate:                             false
