@@ -357,6 +357,7 @@ resources:
         css:                            [
                                           core/css/themes/uno-light/bootstrap,
                                           core/css/icon-fonts/materialdesign,
+                                          core/css/icon-fonts/materialdesign-light,
                                           core/css/icon-fonts/fontawesome,
                                           core/css/vendor
 
@@ -873,7 +874,7 @@ resources:
         init_function:                  []
 
   # ----------------------------------------------------------------------------
-  # MDI Previewer
+  # MDI Previewer (regular)
   #
   - name:                               MDI Previewer
     resource:
@@ -891,6 +892,27 @@ resources:
         css:                            [ modules/mdiPreviewer/css/previewer ]
         files:                          []
         js:                             [ modules/mdiPreviewer/js/previewer ]
+        init_function:                  []
+
+  # ----------------------------------------------------------------------------
+  # MDIl Previewer (light)
+  #
+  - name:                               MDIL Previewer
+    resource:
+      id:                               mdil_previewer
+      enabled:                          true
+      comment:                          module mdil_previewer
+      layout:                           [ page ]
+      region:                           head
+      required:                         ondemand
+      preload:                          false                                   # property currently unused
+      script_load:                      deferred
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            [ modules/mdilPreviewer/css/previewer ]
+        files:                          []
+        js:                             [ modules/mdilPreviewer/js/previewer ]
         init_function:                  []
 
   # ----------------------------------------------------------------------------

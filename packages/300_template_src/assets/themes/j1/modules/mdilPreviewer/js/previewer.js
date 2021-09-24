@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/modules/mdiPreviewer/css/previewer.js
+ # ~/assets/themes/j1/modules/mdilPreviewer/js/previewer.js
  # Provides JS functions for the MDI Icon Previewer
  #
  # Product/Info:
@@ -14,8 +14,10 @@
 */
 ;(function () {
 
-  var icons = {};
-  var icon_database = '/assets/data/mdi_icons.json';
+  var icons         = {};
+  var icon_database = '/assets/data/mdil_icons.json';
+  var language      = document.documentElement.lang;
+  var responseText;
 
   function load_data_database() {
     // Returns the icon database object
@@ -37,7 +39,7 @@
 
       icons.push({
         "name": "blank",
-        "codepoint": "F068C"
+        "codepoint": "F68C"
       });
 
       var copyText = function (text) {
@@ -47,6 +49,14 @@
         //          var reference = document.querySelector("#mdi-icon");
         //          var popper = document.querySelector(".my-popper");
 
+        if (language == 'en') {
+          responseText = 'Copied to Clipboard';
+        } else if (language == 'de') {
+          responseText = 'Kopiert zur Zwischenablage';
+        } else {
+          responseText = 'Copied to Clipboard';
+        }
+
         var copyFrom = document.createElement('textarea');
         copyFrom.setAttribute("style", "position:fixed;opacity:0;top:100px;left:100px;");
         copyFrom.value = text;
@@ -55,7 +65,7 @@
         document.execCommand('copy');
         var copied = document.createElement('div');
         copied.setAttribute('class', 'copied');
-        copied.appendChild(document.createTextNode('Copied to Clipboard'));
+        copied.appendChild(document.createTextNode(responseText));
         document.body.appendChild(copied);
 
         //          Popper currently NOT used
@@ -77,7 +87,7 @@
           i = document.createElement('i');
         div.setAttribute("id", "mdi-icon");
 
-        i.className = 'mdi mdi-' + icons[j].name;
+        i.className = 'mdil mdil-2x mdil-' + icons[j].name;
         div.appendChild(i);
         var code = document.createElement('code');
         code.appendChild(document.createTextNode('#' + icons[j].codepoint));
@@ -104,11 +114,11 @@
         // click on icon-name: copy MDI icon name
         span.onmouseup = (function (icon) {
           return function () {
-            copyText('mdi-' + icon.name);
+            copyText('mdil-' + icon.name);
           };
         })(icons[j]);
 
-        document.getElementById('mdi-icons').appendChild(div);
+        document.getElementById('mdil-icons').appendChild(div);
       }
     });
 

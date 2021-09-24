@@ -1,5 +1,5 @@
 ---
-title:                                  MDI Icon Previewer
+title:                                  MDI Previewer
 tagline:                                search and select mdi icons
 date:                                   2020-11-08 00:00:00 +100
 description: >
@@ -11,7 +11,7 @@ description: >
 categories:                             [ Preview ]
 tags:                                   [ MDI, Icons, Fonts ]
 
-scrollbar:                              false
+scrollbar:                              true
 
 permalink:                              /pages/public/previewer/mdi_font/
 regenerate:                             false
@@ -216,5 +216,5 @@ NOTE: Click on the elements below to copy icon data to clipboard
 
 ++++
 <!-- div class="my-popper">Popper element</div -->
-<div id="icons" class="icons"></div>
+<div id="mdi-icons" class="icons"></div>
 ++++

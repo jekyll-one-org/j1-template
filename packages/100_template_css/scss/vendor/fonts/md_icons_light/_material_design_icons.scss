@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/packages/100_template_css/material_design_icons.scss
- # CSS index file for Material Design Icons v5.9.55
+ # ~/vendor/fonts/md_icons/_material_design_icons.scss
+ # Material Design Icons v5.9.55
  #
  # Product/Info:
  # https://jekyll.one
@@ -18,10 +18,6 @@
  # -----------------------------------------------------------------------------
 */
 
-// NOTE:
-// TODO:
-// SPEC:
-
-// Import cascaded index files and partials
+// FONT VARS|FUNCTIONS
 // -----------------------------------------------------------------------------
-@import "scss/vendor/fonts/md_icons/material_design_icons";
+@import "scss/materialdesignicons-light";

@@ -173,9 +173,12 @@
     - title:                            Gallery Previewer
       href:                             /pages/public/previewer/justified_gallery/
       icon:                             view-dashboard
-    - title:                            MDI Icon Previewer
+    - title:                            MDI Previewer (regular)
       href:                             /pages/public/previewer/mdi_font/
-      icon:                             fan
+      icon:                             alarm-light
+    - title:                            MDI Previewer (light)
+      href:                             /pages/public/previewer/mdil_font/
+      icon:                             alarm-light-outline
     - title:                            Twitter Emoji Previewer
       href:                             /pages/public/previewer/twitter_emoji/
       icon:                             emoticon-cool-outline
@@ -209,9 +212,9 @@
     - title:                            Archive
       href:                             /pages/public/blog/navigator/archive/
       icon:                             archive
-    - title:                            Post pages
-      href:                             /assets/data/news_panel_posts/
-      icon:                             archive
+    # - title:                            Post pages
+    #   href:                             /assets/data/news_panel_posts/
+    #   icon:                             archive
 
 # Currently NOT used
 #

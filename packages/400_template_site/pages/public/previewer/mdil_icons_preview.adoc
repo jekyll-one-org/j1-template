@@ -1,0 +1,74 @@
+---
+title:                                  MDI Light Previewer
+tagline:                                search and select mdil icons
+date:                                   2020-11-08 00:00:00 +100
+description: >
+                                        Previewer for the light Material Design Icons (MDIL) for J1 Template.
+                                        Material Design Icons is a growing icon collection allows
+                                        designers and developers targeting various platforms to download
+                                        icons in the format, color and size they need for any project.
+
+categories:                             [ Preview ]
+tags:                                   [ MDIL, Icons, Fonts ]
+
+scrollbar:                              true
+
+permalink:                              /pages/public/previewer/mdil_font/
+regenerate:                             false
+
+resources:                              [ clipboard, lightbox, rouge, mdil_previewer ]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/pages/roundtrip/icon-fonts-1920x1280-bw.jpg
+          alt:                          icon-fonts-1920x1280-bw
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+//:my-asciidoc-attribute:
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// https://github.com/Templarian/MaterialDesignLight
+
+// Include sub-documents
+// -----------------------------------------------------------------------------
+
+_Material Design Light_ (MDIL) is a helpful design resource for Web Sites that
+follow _Google's_ specification of Material Design. *MDIL* is a subset of the
+Material Design Icons (MDI) set managed by *Austin Andrews* and contributors.
+
+NOTE: The icon set is still work in progress. The team is in the process of
+building the icon set into a fully fledged alternative to MDI. Have a look at
+https://github.com/Templarian/MaterialDesignLight[MaterialDesignLight, {browser-window--new}]
+for latest versions.
+
+==  Icon Overview
+
+The Material Design Light Icon Font support a growing set of 250+ icons
+(v0.2.63) from a wide varity of topics.
+
+NOTE: Click on the elements below to copy icon data to clipboard.
+
+++++
+<!-- div class="my-popper">Popper element</div -->
+<div id="mdil-icons" class="icons"></div>
+++++
