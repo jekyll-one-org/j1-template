@@ -71,7 +71,7 @@ module.exports = function navigator ( options ) {
       logger.info(logText);
       this.manageDropdownMenu(defaultOptions, menuOptions);
       this.navbarSticky();
-      this.eventHandler(); // jadams, 2021-07-03: initialize events early
+      this.eventHandler(defaultOptions); // jadams, 2021-07-03: initialize events early
 
       message.type    = 'command';
       message.action  = 'core_initialized';
@@ -84,10 +84,12 @@ module.exports = function navigator ( options ) {
     // -------------------------------------------------------------------------
     // event handler
     // -------------------------------------------------------------------------
-    eventHandler: function() {
+    eventHandler: function(options) {
+      var defaultOptions    = options;
       var logger            = log4javascript.getLogger('j1.core.navigator.eventHandler');
       var $getNav           = $('nav.navbar.navigator');
       var json_data;
+
       // const seeMe           = 'https://smee.io/wlNIFNiJN0GClm2';
       // const middleware      = 'localhost:5000/state';
       // const web_server_dev  = 'http://localhost:41000/status';
@@ -259,11 +261,15 @@ module.exports = function navigator ( options ) {
               $('body').addClass('stop-scrolling');
               // disable scrolling (mobile)
               $('body').bind('touchmove', function(e){e.preventDefault();});
+              // disable navbar
+              $('#' + defaultOptions.nav_bar.container_id).hide();
             } else {
               // enable scrolling (desktop)
               $('body').removeClass('stop-scrolling');
               // enable scrolling (mobile)
               $('body').unbind('touchmove');
+              // enable navbar
+              $('#' + defaultOptions.nav_bar.container_id).show();
             }
           });
           // e.stopPropagation(); // don't bubble up the event
@@ -279,6 +285,8 @@ module.exports = function navigator ( options ) {
         $('body').removeClass('stop-scrolling');
         // enable scrolling (mobile)
         $('body').unbind('touchmove');
+        // enable navbar
+        $('#' + defaultOptions.nav_bar.container_id).show();
         e.stopPropagation(); // don't bubble up the event
       });
 

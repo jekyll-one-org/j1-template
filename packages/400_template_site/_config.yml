@@ -591,8 +591,8 @@ defaults:
       author:                           J1 Team
 
       robots:
-        index:                          true
-        follow:                         true
+        index:                          false
+        follow:                         false
 
       personalization:                  false
       exclude_from_search:              false
@@ -635,8 +635,8 @@ defaults:
       author:                           J1 Team
 
       robots:
-        index:                          true
-        follow:                         true
+        index:                          false
+        follow:                         false
 
       personalization:                  false
       exclude_from_search:              false
@@ -679,8 +679,8 @@ defaults:
       author:                           J1 Team
 
       robots:
-        index:                          true
-        follow:                         true
+        index:                          false
+        follow:                         false
 
       personalization:                  false
       exclude_from_search:              false
