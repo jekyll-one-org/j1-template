@@ -434,7 +434,7 @@ liquid:
 plugins:
 # - algolia
   - asciidoctor
-  - asciidoctor-pdf
+# - asciidoctor-pdf
   - jekyll-asciidoc
 # - jekyll-feed
 # - jekyll-gist
