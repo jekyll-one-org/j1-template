@@ -222,8 +222,8 @@ doctype:                                html
 #   values:                             boolean (true|false)
 #   default:                            false
 #
-title:                                  J1
-slogan:                                 starter
+title:                                  Jekyll One
+slogan:                                 starter web
 description: >
                                         Made for Jekyll · Made for Your Web
 

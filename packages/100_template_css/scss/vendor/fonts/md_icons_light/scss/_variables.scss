@@ -1,3 +1,17 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/vendor/fonts/md_icons_light/scss/_variables.scss
+ # Variable settings for MDIL Icons v0.2.63
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
 $mdil-filename:         "materialdesignicons-light";
 $mdil-font-name:        "Material Design Icons Light";
 $mdil-font-family:      "materialdesignicons";
@@ -5,7 +19,7 @@ $mdil-font-weight:      "light";
 $mdil-font-path:        "/assets/themes/j1/core/fonts/material_design_icons_light/fonts" !default;
 $mdil-font-size-base:   24px !default;
 $mdil-css-prefix:       mdil !default;
-$mdil-version:          "0.2.63" !default;
+$mdil-version:          "" !default;
 
 $mdil-icons: (
     "account": F004,

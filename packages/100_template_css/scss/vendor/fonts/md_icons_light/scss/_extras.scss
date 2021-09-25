@@ -1,3 +1,17 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/vendor/fonts/md_icons_light/scss/_extra.scss
+ # Extra settings of sizes for MDIL Icons v0.2.63
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
 $mdil-sizes: 18 24 36 48;
 @each $mdil-size in $mdil-sizes {
     .#{$mdil-css-prefix}-#{$mdil-size}px {
