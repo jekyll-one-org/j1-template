@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "css",
-  "version": "2021.1.29",
+  "version": "2021.1.30",
   "description": "CSS bundle for J1 Template",
   "main": "theme_uno.scss",
   "config": {
@@ -54,7 +54,7 @@
     "uglify_css:icons_fontawesome": "postcss dist/icon-fonts/fontawesome.css -o dist/icon-fonts/fontawesome.min.css",
     "uglify_css:icons_iconify": "postcss dist/icon-fonts/iconify.css -o dist/icon-fonts/iconify.min.css",
     "uglify_css:icons_materialdesign": "postcss dist/icon-fonts/materialdesign.css -o dist/icon-fonts/materialdesign.min.css",
-    "uglify_css:icons_materialdesign_light": "postcss dist/icon-fonts/materialdesign-light.css -o dist/icon-fonts/materialdesign-light.min.css",    
+    "uglify_css:icons_materialdesign_light": "postcss dist/icon-fonts/materialdesign-light.css -o dist/icon-fonts/materialdesign-light.min.css",
     "uglify_css:icons_twemoji": "postcss dist/icon-fonts/twemoji.css -o dist/icon-fonts/twemoji.min.css",
     "uglify_css:animate": "postcss dist/animate.css -o dist/animate.min.css",
     "uglify_css:vendor": "postcss dist/vendor.css -o dist/vendor.min.css",

@@ -1,5 +1,5 @@
 {
-  "version": "2021.1.29",
+  "version": "2021.1.30",
   "description": "Multi-package repository for J1 Template",
   "command": {
     "run": {
