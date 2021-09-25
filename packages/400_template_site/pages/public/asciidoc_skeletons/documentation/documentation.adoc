@@ -34,7 +34,7 @@ resource_options:
       padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/images/pages/skeleton/humble-lamb-1920x1280.jpg
+        - url:                          /assets/images/modules/attics/humble-lamb-1920x1280.jpg
           alt:                          Photo by Humble Lamb on Unsplash
           alignY:                       top
           badge:
