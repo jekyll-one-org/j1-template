@@ -1,0 +1,112 @@
+
+[width="100%", cols="3,4,5", options="header", role="table-responsive no-rtext"]
+|===
+|Key |Value Type |Example
+
+3+|[#key-prefix-sidebar]*Key Prefix:* <<key-prefix-sidebar,sidebar>>
+
+|background_color
+|<<colors,Color>> +
+(default: #eeeeee)
+|sidebar:
+  background_color: #eeeeee
+
+|border_color
+|<<colors,Color>> +
+(default: _not set_)
+|sidebar:
+  border_color: #ffffff
+
+|border_radius
+|<<values,Number>> +
+(default: _not set_)
+|sidebar:
+  border_radius: 4
+
+|border_width
+|<<values,Number>> +
+(default: _not set_)
+|sidebar:
+  border_width: 0.5
+
+|font_color
+|<<colors,Color>> +
+(default: _inherit_)
+|sidebar:
+  font_color: #262626
+
+|font_family
+|<<fonts,Font family name>> +
+(default: _inherit_)
+|sidebar:
+  font_family: M+ 1p
+
+|font_size
+|<<values,Number>> +
+(default: _inherit_)
+|sidebar:
+  font_size: 13
+
+|font_style
+|<<font-styles,Font style>> +
+(default: _inherit_)
+|sidebar:
+  font_style: italic
+
+|text_transform
+|<<text-transforms,Text transform>> +
+(default: _inherit_)
+|sidebar:
+  text_transform: uppercase
+
+|padding
+|<<measurement-units,Measurement>> {vbar} <<measurement-units,Measurement[top,right,bottom,left]>> +
+(default: [12, 12, 0, 12])
+|sidebar:
+  padding: [12, 15, 0, 15]
+
+3+|[#key-prefix-sidebar-title]*Key Prefix:* <<key-prefix-sidebar-title,sidebar_title>>
+
+|align
+|<<text-alignments,Text alignment>> +
+(default: center)
+|sidebar:
+  title:
+    align: center
+
+|font_color
+|<<colors,Color>> +
+(default: _inherit_)
+|sidebar:
+  title:
+    font_color: #333333
+
+|font_family
+|<<fonts,Font family name>> +
+(default: _inherit_)
+|sidebar:
+  title:
+    font_family: Noto Serif
+
+|font_size
+|<<values,Number>> +
+(default: _inherit_)
+|sidebar:
+  title:
+    font_size: 13
+
+|font_style
+|<<font-styles,Font style>> +
+(default: bold)
+|sidebar:
+  title:
+    font_style: bold
+
+|text_transform
+|<<text-transforms,Text transform>> +
+(default: _inherit_)
+|sidebar:
+  title:
+    text_transform: uppercase
+
+|===

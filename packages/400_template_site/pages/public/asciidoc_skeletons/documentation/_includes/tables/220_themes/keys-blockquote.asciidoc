@@ -1,0 +1,95 @@
+
+[width="100%", cols="3,4,5", options="header", role="table-responsive no-rtext"]
+|===
+|Key |Value Type |Example
+
+3+|[#key-prefix-blockquote]*Key Prefix:* <<key-prefix-blockquote,blockquote>>
+
+|border_width^[1]^
+|<<values,Number>> +
+(default: 4)
+|blockquote:
+  border_width: 5
+
+|border_color^[1]^
+|<<colors,Color>> +
+(default: #eeeeee)
+|blockquote:
+  border_color: #eeeeee
+
+|font_color
+|<<colors,Color>> +
+(default: _inherit_)
+|blockquote:
+  font_color: #333333
+
+|font_family
+|<<fonts,Font family name>> +
+(default: _inherit_)
+|blockquote:
+  font_family: Noto Serif
+
+|font_size
+|<<values,Number>> +
+(default: _inherit_)
+|blockquote:
+  font_size: 13
+
+|font_style
+|<<font-styles,Font style>> +
+(default: _inherit_)
+|blockquote:
+  font_style: bold
+
+|text_transform
+|<<text-transforms,Text transform>> +
+(default: _inherit_)
+|blockquote:
+  text_transform: uppercase
+
+|padding
+|<<measurement-units,Measurement>> {vbar} <<measurement-units,Measurement[top,right,bottom,left]>> +
+(default: [6, 12, -6, 14])
+|blockquote:
+  padding: [5, 10, -5, 12]
+
+3+|[#key-prefix-blockquote-cite]*Key Prefix:* <<key-prefix-blockquote-cite,blockquote_cite>>
+
+|font_size
+|<<values,Number>> +
+(default: _inherit_)
+|blockquote:
+  cite:
+    font_size: 9
+
+|font_color
+|<<colors,Color>> +
+(default: _inherit_)
+|blockquote:
+  cite:
+    font_color: #999999
+
+|font_family
+|<<fonts,Font family name>> +
+(default: _inherit_)
+|blockquote:
+  cite:
+    font_family: Noto Serif
+
+|font_style
+|<<font-styles,Font style>> +
+(default: _inherit_)
+|blockquote:
+  cite:
+    font_style: bold
+
+|text_transform
+|<<text-transforms,Text transform>> +
+(default: _inherit_)
+|blockquote:
+  cite:
+    text_transform: uppercase
+
+|===
+
+. Only applies to the left side.

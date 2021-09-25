@@ -1,0 +1,6 @@
+
+//////////
+== Resources for Extending Asciidoctor PDF
+
+* {uri-prawn-pdf-typesetting}[Hackable PDF typesetting in Ruby with Prawn, {browser-window--new}]
+//////////

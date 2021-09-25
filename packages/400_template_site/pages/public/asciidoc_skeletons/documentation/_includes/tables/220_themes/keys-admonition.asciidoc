@@ -1,0 +1,163 @@
+
+// [width="100%", cols="3,4,5", options="header", role="table-responsive no-rtext"]
+[cols="3,4,5", options="header", width="100%", role="table-responsive no-rtext"]
+|===
+|Key |Value Type |Example
+
+3+|[#key-prefix-admonition]*Key Prefix:* <<key-prefix-admonition,admonition>>
+
+|column_rule_color
+|<<colors,Color>> +
+(default: #eeeeee)
+|admonition:
+  column_rule_color: #aa0000
+
+|column_rule_style
+|solid {vbar} double {vbar} dashed {vbar} dotted +
+(default: solid)
+|admonition:
+  column_rule_style: double
+
+|column_rule_width
+|<<values,Number>> +
+(default: 0.5)
+|admonition:
+  column_rule_width: 0.5
+
+|font_color
+|<<colors,Color>> +
+(default: _inherit_)
+|admonition:
+  font_color: #999999
+
+|font_family
+|<<fonts,Font family name>> +
+(default: _inherit_)
+|admonition:
+  font_family: Noto Sans
+
+|font_size
+|<<values,Number>> +
+(default: _inherit_)
+|admonition:
+  font_size: $base_font_size_large
+
+|font_style
+|<<font-styles,Font style>> +
+(default: _inherit_)
+|admonition:
+  font_style: italic
+
+|text_transform
+|<<text-transforms,Text transform>> +
+(default: _inherit_)
+|admonition:
+  text_transform: none
+
+|padding
+|<<measurement-units,Measurement>> {vbar} <<measurement-units,Measurement[top,right,bottom,left]>> +
+(default: [0, 12, 0, 12])
+|admonition:
+  padding: [0, 12, 0, 12]
+
+3+|[#key-prefix-admonition-label]*Key Prefix:* <<key-prefix-admonition-label,admonition_label>>
+
+|align
+|<<text-alignments,Text alignment>> +
+(default: center)
+|admonition:
+  label:
+    align: center
+
+|min_width
+|<<measurement-units,Measurement>> +
+(default: _not set_)
+|admonition:
+  label:
+    min_width: 48
+
+|padding^[1]^
+|<<measurement-units,Measurement>> {vbar} <<measurement-units,Measurement[top,right,bottom,left]>> +
+(default: $admonition_padding)
+|admonition:
+  padding: [0, 12, 0, 12]
+
+|vertical_align
+|top {vbar} middle {vbar} bottom +
+(default: middle)
+|admonition:
+  label:
+    vertical_align: top
+
+3+|*Key Prefix:* admonition_label, admonition_label_<name>^[2]^
+
+|font_color
+|<<colors,Color>> +
+(default: _inherit_)
+|admonition:
+  label:
+    font_color: #262626
+
+|font_family
+|<<fonts,Font family name>> +
+(default: _inherit_)
+|admonition:
+  label:
+    font_family: M+ 1p
+
+|font_size
+|<<values,Number>> +
+(default: _inherit_)
+|admonition:
+  label:
+    font_size: 12
+
+|font_style
+|<<font-styles,Font style>> +
+(default: bold)
+|admonition:
+  label:
+    font_style: bold_italic
+
+|text_transform
+|<<text-transforms,Text transform>> +
+(default: uppercase)
+|admonition:
+  label:
+    text_transform: lowercase
+
+3+|[#key-prefix-admonition-icon]*Key Prefix:* <<key-prefix-admonition-icon,admonition_icon_<name> >>^[2]^
+
+|name
+|<icon set>-<icon name>^[3]^ +
+(default: _not set_)
+|admonition:
+  icon:
+    tip:
+      name: fa-fire
+
+|stroke_color
+|<<colors,Color>> +
+(default: caution=#bf3400; important=#bf0000; note=#19407c; tip=#111111; warning=#bf6900)
+|admonition:
+  icon:
+    important:
+      stroke_color: ff0000
+
+|size
+|<<values,Number>> +
+(default: 24)
+|admonition:
+  icon:
+    note:
+      size: 24
+
+|===
+
+. The top and bottom padding values are ignored on admonition_label_padding.
+. `<name>` can be `note`, `tip`, `warning`, `important`, or `caution`.
+The subkeys in the icon category cannot be flattened (e.g.,
+`tip_name: fa-lightbulb-o` is not valid syntax).
+. Required. See the `.yml` files in the https://github.com/jessedoyle/prawn-icon/tree/master/data/fonts[prawn-icon repository]
+for a list of valid icon names. The prefix (e.g., `fa-`) determines which
+font set to use.

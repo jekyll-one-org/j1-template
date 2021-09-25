@@ -1,0 +1,224 @@
+
+[width="100%", cols="3,4,5", options="header", role="table-responsive no-rtext"]
+|===
+|Key |Value Type |Example
+
+3+|[#key-prefix-header]*Key Prefix:* <<key-prefix-header,header>>
+
+|background_color^[1]^
+|<<colors,Color>> +
+(default: _not set_)
+|header:
+  background_color: #eeeeee
+
+|border_color
+|<<colors,Color>> +
+(default: _not set_)
+|header:
+  border_color: #dddddd
+
+|border_style
+|solid {vbar} double {vbar} dashed {vbar} dotted +
+(default: solid)
+|header:
+  border_style: dashed
+
+|border_width
+|<<measurement-units,Measurement>> +
+(default: $base_border_width)
+|header:
+  border_width: 0.25
+
+|font_color
+|<<colors,Color>> +
+(default: _inherit_)
+|header:
+  font_color: #333333
+
+|font_family
+|<<fonts,Font family name>> +
+(default: _inherit_)
+|header:
+  font_family: Noto Serif
+
+|font_size
+|<<values,Number>> +
+(default: _inherit_)
+|header:
+  font_size: 9
+
+|font_style
+|<<font-styles,Font style>> +
+(default: _inherit_)
+|header:
+  font_style: italic
+
+|height^[2]^
+|<<measurement-units,Measurement>> +
+(default: _not set_)
+|header:
+  height: 0.75in
+
+|line_height
+|<<values,Number>> +
+(default: $base_line_height)
+|header:
+  line_height: 1.2
+
+|padding
+|<<measurement-units,Measurement>> {vbar} <<measurement-units,Measurement[top,right,bottom,left]>> +
+(default: 0)
+|header:
+  padding: [0, 3, 0, 3]
+
+|image_vertical_align
+|top {vbar} middle {vbar} bottom {vbar} <<measurement-units,Measurement>> +
+(default: _not set_)
+|header:
+  image_vertical_align: 4
+
+|vertical_align
+|top {vbar} middle {vbar} bottom +
+(default: middle)
+|header:
+  vertical_align: center
+
+|<side>_columns^[3]^
+|Column specs triple +
+(default: _not set_)
+|header:
+  recto:
+    columns: <25% =50% >25%
+
+|<side>_<position>_content^[3,4]^
+|<<quoted-string,Quoted string>> +
+(default: '\{page-number}')
+|header:
+  recto:
+    left:
+      content: '\{page-number}'
+
+3+|[#key-prefix-footer]*Key Prefix:* <<key-prefix-footer,footer>>
+
+|background_color^[1]^
+|<<colors,Color>> +
+(default: _not set_)
+|footer:
+  background_color: #eeeeee
+
+|border_color
+|<<colors,Color>> +
+(default: _not set_)
+|footer:
+  border_color: #dddddd
+
+|border_style
+|solid {vbar} double {vbar} dashed {vbar} dotted +
+(default: solid)
+|footer:
+  border_style: dashed
+
+|border_width
+|<<measurement-units,Measurement>> +
+(default: $base_border_width)
+|footer:
+  border_width: 0.25
+
+|font_color
+|<<colors,Color>> +
+(default: _inherit_)
+|footer:
+  font_color: #333333
+
+|font_family
+|<<fonts,Font family name>> +
+(default: _inherit_)
+|footer:
+  font_family: Noto Serif
+
+|font_size
+|<<values,Number>> +
+(default: _inherit_)
+|footer:
+  font_size: 9
+
+|font_style
+|<<font-styles,Font style>> +
+(default: _inherit_)
+|footer:
+  font_style: italic
+
+|height^[2]^
+|<<measurement-units,Measurement>> +
+(default: _not set_)
+|footer:
+  height: 0.75in
+
+|line_height
+|<<values,Number>> +
+(default: $base_line_height)
+|footer:
+  line_height: 1.2
+
+|padding
+|<<measurement-units,Measurement>> {vbar} <<measurement-units,Measurement[top,right,bottom,left]>> +
+(default: 0)
+|footer:
+  padding: [0, 3, 0, 3]
+
+|image_vertical_align
+|top {vbar} middle {vbar} bottom {vbar} <<measurement-units,Measurement>> +
+(default: _not set_)
+|footer:
+  image_vertical_align: 4
+
+|vertical_align
+|top {vbar} middle {vbar} bottom +
+(default: middle)
+|footer:
+  vertical_align: top
+
+|<side>_columns^[3]^
+|Column specs triple +
+(default: _not set_)
+|footer:
+  verso:
+    columns: <50% =0% <50%
+
+|<side>_<position>_content^[3,4]^
+|<<quoted-string,Quoted string>> +
+(default: '\{page-number}')
+|footer:
+  verso:
+    center:
+      content: '\{page-number}'
+
+|===
+
+. The background color spans the width of the page, as does the border when
+a background color is specified.
+. If the height is not set, the running content at this periphery is disabled.
+. `<side>` can be `recto` (right-hand, odd-numbered pages) or `verso`
+(left-hand, even-numbered pages). Where the page sides fall in relation to
+the physical or printed page number is controlled using the `pdf-folio-placement`
+attribute (except when `media=prepress`, which implies `physical`).
+. `<position>` can be `left`, `center` or `right`.
+
+IMPORTANT: You must define a height for the running header or footer,
+respectively, or it will not be shown.
+
+If you define running header and footer content in your theme, you can still
+disable this content per document by setting the `noheader` and `nofooter`
+attributes in the AsciiDoc document header, respectively.
+
+If content is not specified for the running footer, the page number (i.e.
+`\{page-number}`) is shown on the left on verso pages and the right on recto
+pages. You can disable this behavior by defining the attribute `nofooter` in
+the AsciiDoc document header or by defining the key `footer_<side>_content: none`
+in the theme.
+
+TIP: Although not listed in the table above, you can control the font
+properties used for running content for each column position on each
+page side (e.g., `footer_<side>_<position>_font_color`). For example, you
+can set the font color used for the right-hand column on recto pages by
+setting `footer_recto_right_font_color: 6CC644`.

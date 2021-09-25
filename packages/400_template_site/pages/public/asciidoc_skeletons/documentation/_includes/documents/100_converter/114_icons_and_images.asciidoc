@@ -1,0 +1,259 @@
+== Icons and Images
+
+lorem:sentences[5]
+
+=== Font-Based Icons
+
+You can use icons in your PDF document using any of the following icon sets:
+
+* *fa* - {uri-font-font-awesome}[Font Awesome, {browser-window--new}] (default)
+* *fi* - {uri-font-foundation-icon-fonts-3}[Foundation Icons, {browser-window--new}]
+* *pf* - {uri-font-paymentfont}[Payment font, {browser-window--new}]
+* *octicon* - {uri-font-octicons}[Octicons, {browser-window--new}]
+
+You can enable font-based icons by setting the following attribute in the
+header of your document:
+
+[source,asciidoc]
+----
+:icons: font
+----
+
+If you want to override the font set globally, also set the `icon-set` attribute:
+
+[source,asciidoc]
+----
+:icons: font
+:icon-set: pf
+----
+
+Here's an example that shows how to use the Amazon icon from the payment
+font (pf) icon set in a sentence:
+
+[source,asciidoc]
+----
+Available now at icon:amazon[].
+----
+
+You can use the `set` attribute on the icon macro to override the icon
+set for a given icon.
+
+[source,asciidoc]
+----
+Available now at icon:amazon[set=pf].
+----
+
+In addition to the sizes supported in the HTML backend (lg, 1x, 2x, etc),
+you can enter any relative value in the size attribute (e.g., 1.5em, 150%,
+etc).
+
+[source,asciidoc]
+----
+icon:android[size=40em]
+----
+
+You can enable use of fonts during PDF generation (instead of in the document
+header) by passing the `icons` attribute to the `asciidoctor-pdf` command.
+
+ $ asciidoctor-pdf -a icons=font -a icon-set=octicon sample.adoc
+
+Icon-based fonts are handled by the `prawn-icon` gem. To find a complete list
+of available icons, consult the {uri-font-prawn-icon}[prawn-icon, {browser-window--new}]
+repository.
+
+=== Image Paths
+
+Images are resolved relative to the value of the `imagesdir` attribute at the
+time the converter is run. This is effectively the same as how the built-in
+HTML converter works when the `data-uri` attribute is set. The `imagesdir` is
+blank by default, which means images are resolved relative to the input
+document.
+
+If the image is an SVG, and the SVG includes a nested raster image (PNG or
+JPG) with a relative path, that path is resolved relative to the directory
+that contains the SVG.
+
+The converter will refuse to include an image if the target is a URI unless
+the `allow-uri-read` attribute is enabled via the CLI or API.
+
+=== Image Scaling
+
+Since PDF is a fixed-width canvas, you almost always need to specify a width
+to get the image to fit properly on the page. There are five ways to specify
+the width of an image, listed here in order of precedence:
+
+[cols="1s,3d"]
+|===
+|Attribute{nbsp}Name | Description
+
+|pdfwidth
+|The display width of the image as an absolute size (e.g., 2in), percentage
+of the content area width (e.g., 75%), or percentage of the page width
+(e.g., 100vw).
+If a unit of measurement is not specified (or not recognized), pt (points)
+is assumed. _Intended to be used for the PDF converter only._
+
+|scaledwidth
+|The display width of the image as an absolute size (e.g., 2in) or percentage
+of the content area width (e.g., 75%). If a unit of measurement is not
+specified, % (percentage) is assumed. If a unit of measurement is recognized,
+pt (points) is assumed. _Intended to be used for print output such as PDF._
+
+|image_width key from theme
+|Accepts the same values as pdfwidth.
+_Only applies to block images._
+
+|width
+|The unitless display width of the image (assumed to be pixels), typically
+matching the intrinsic width of the image. If the width exceeds the content
+area width, the image is scaled down to the content area width.
+
+|_unspecified_
+|If you don't specify one of the aforementioned width settings, the intrinsic
+width of the image is used (the px value is multiplied by 75% to convert to pt,
+assuming canvas is 96 dpi) unless the width exceeds the content area width, in
+which case the image is scaled down to the content area width.
+
+|===
+
+The image is always sized according to the explicit or intrinsic width and
+its height is scaled proportionally. The height of the image is ignored by the
+PDF converter unless the height of the image exceeds the content height of
+the page. In this case, the image is scaled down to fit on a single page.
+
+Images in running content also support the `fit` attribute. If the value of
+this attribute is `contain`, the image size is increased or decreased to fill
+the available space while preserving its aspect ratio. If the value of this
+attribute is `scaled-down`, the image size is first resolved in the normal
+way, then scaled down further to fit within the available space, if necessary.
+
+Page background images are automatically scaled to fit the bounds of the page.
+Any explicit sizing is ignored for those images.
+
+==== Using the pdfwidth Attribute
+
+The pdfwidth attribute is the recommended way to set the image size for the
+PDF output. This attribute is provided for two reasons. First, the fixed-width
+canvas often calls for a width that is distinct from other output formats, such
+as HTML. Second, this attribute allows the width to be expressed using a
+variety of units.
+
+The pdfwidth attribute supports the following units:
+
+* pt (default)
+* in
+* cm
+* mm
+* px
+* pc
+* vw (percentage of page width)
+* % (percentage of content area width)
+
+In all cases, the width is converted to pt.
+
+==== Specifying a default width
+
+If you want to scale all block images that don't have a pdfwidth or
+scaledwidth attribute specified, assign a value to the image_width key in
+your theme.
+
+[source,yaml]
+----
+image:
+  width: 100%
+----
+
+==== Inline Image Sizing
+
+Inline images can be sized in much the same way as block images (using the
+pdfwidth, scaledwidth or width attributes), with the following exceptions:
+
+* The viewport width unit (i.e., vw) is not recognized in this context.
+* The image will be scaled down, if necessary, to fit the width and height of the content area.
+* Inline images do not currently support a default width controlled from the theme.
+
+If the resolved height of the image is less than or equal to 1.5 times the line
+height, the image won't disrupt the line height and is centered vertically in
+the line.
+
+This is done to maximize the use of available space. Once the resolved height
+exceeds this amount, the height of the line is increased (by increasing the
+font size of the invisible placeholder text) to accommodate the image. In this
+case, the surrounding text will be aligned to the bottom of the image. If the
+image height exceeds the height of the page, the image will be scaled down to
+fit on a single page (this may cause the image to advance to the subsequent
+page).
+
+=== Fonts in SVG Images
+
+_Asciidoctor PDF_ uses {uri-prawn-svg}[prawn-svg, {browser-window--new}] to embed SVGs in
+the PDF document, including SVGs generated by Asciidoctor Diagram.
+
+Actually, it's not accurate to say that prawn-svg embeds the SVG. Rather,
+prawn-svg is an SVG _renderer_. prawn-svg translates an SVG into native PDF
+text and graphic objects. You can think of the SVG as a sequence of drawing
+commands. The result becomes indistinguishable from other PDF objects.
+
+What that means for text is that any font family used for text in the SVG
+_must_ be registered in the _Asciidoctor PDF_ theme file (and thus with Prawn).
+Otherwise, _Prawn_ will fallback to using the closest matching built-in (afm)
+font from PDF (e.g., sans-serif becomes Helvetica). Recall that afm fonts only
+support basic Latin.
+
+If you're using Asciidoctor Diagram to generate SVGs to embed in the PDF,
+you likely need to specify the default font the diagramming tool uses. Let's
+assume you are making a plantuml diagram.
+
+To set the font used in the diagram, first create a file named [.path]_plantuml.cfg_
+and populate it with the following content:
+
+----
+skinparam defaultFontName Noto Serif
+----
+
+TIP: You can choose any font name that is registered in your _Asciidoctor PDF_
+theme file. When using the default theme, your options are "Noto Serif",
+"M+ 1mn", and "M+ 1p Fallback".
+
+Next, pass that path to the `plantumlconfig` attribute in your AsciiDoc
+document (or set the attribute via the CLI or API):
+
+----
+:plantumlconfig: plantuml.cfg
+----
+
+Clear the cache of your diagrams and run _Asciidoctor PDF_ with Asciidoctor
+Diagram enabled. The diagrams will be generated using Noto Serif as the
+default font, and _Asciidoctor PDF_ will know what to do.
+
+The bottom line is this:
+If you're using fonts in your SVG, and you want those fonts to be preserved,
+those fonts must be defined in the _Asciidoctor PDF_ theme file.
+
+=== Additional Image Formats
+
+In order to embed an image into a PDF, _Asciidoctor PDF_ must understand how
+to read it. To perform this work, _Asciidoctor_ delegates to the underlying
+libraries. {uri-prawn}[Prawn, {browser-window--new}] provides support for reading JPG and
+PNG images. {uri-prawn-svg}[prawn-svg, {browser-window--new}] brings support for SVG images.
+Without any additional libraries, those are the only supported image file
+formats.
+
+If you need support for additional image formats, such as GIF, TIFF, or
+interlaced PNG--and you don't want to convert those images to a supported
+format--you must install the {uri-prawn-gmagick}[prawn-gmagick, {browser-window--new}]
+Ruby gem. _prawn-gmagick_ is an extension for _Prawn_ based on
+{uri-graphicsmagick}[GraphicsMagick, {browser-window--new}] that adds support for all
+the image formats recognized by that library. prawn-gmagick has the added
+benefit of significantly reducing the time it takes to generate a PDF
+containing a lot of images.
+
+The _prawn-gmagick_ gem uses native extensions to compile against _GraphicsMagick_.
+This system prerequisite limits installation to Linux and OSX. Please refer
+to the {uri-prawn-gmagick}[README for prawn-gmagick, {browser-window--new}] to learn how
+to install it.
+
+Once this gem is installed, _Asciidoctor_ automatically switches over to it to
+handle embedding of all images. In addition to support for more additional
+image file formats, this gem also speeds up image processing considerably,
+so we highly recommend using it if you can.

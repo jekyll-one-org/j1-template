@@ -1,0 +1,26 @@
+
+[width="100%", cols="3,4,5", options="header", role="table-responsive no-rtext"]
+|===
+|Key |Value Type |Example
+
+3+|[#key-prefix-description-list]*Key Prefix:* <<key-prefix-description-list,description_list>>
+
+|term_font_style
+|<<font-styles,Font style>> +
+(default: bold)
+|description_list:
+  term_font_style: italic
+
+|term_spacing
+|<<measurement-units,Measurement>> +
+(default: 4)
+|description_list:
+  term_spacing: 5
+
+|description_indent
+|<<values,Number>> +
+(default: 30)
+|description_list:
+  description_indent: 15
+
+|===

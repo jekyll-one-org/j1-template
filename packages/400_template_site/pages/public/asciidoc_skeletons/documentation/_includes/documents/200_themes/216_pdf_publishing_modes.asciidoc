@@ -1,0 +1,71 @@
+== PDF Publishing Modes
+
+*Asciidoctor PDF* provides the following features to assist with publishing:
+
+* Double-sided (mirror) page margins
+* Automatic facing pages
+
+These features are activated when you set the `media` attribute to `prepress`
+in the header of your AsciiDoc document or from the CLI or API. The following
+sections describe the behaviors that this setting activates.
+
+=== Double-Sided Page Margins
+
+The page margins for the recto (right-hand, odd-numbered) and verso
+(left-hand, even-numbered) pages are automatically calculated by replacing
+the side page margins with the values of the `page_margin_inner` and
+`page_margin_outer` keys.
+
+For example, let's assume you've defined the following settings in your theme:
+
+[source,yaml]
+----
+page:
+  margin: [0.5in, 0.67in, 0.67in, 0.67in]
+  margin_inner: 0.75in
+  margin_outer: 0.59in
+----
+
+The page margins for the recto and verso pages will be resolved as follows:
+
+recto page margin:: [0.5in, *0.59in*, 0.67in, *0.75in*]
+verso page margin:: [0.5in, *0.75in*, 0.67in, *0.59in*]
+
+The page margins alternate between recto and verso.
+The first page in the document is a recto page.
+
+
+=== Automatic Facing Pages
+
+When converting the book doctype using the prepress media setting, a blank
+page will be inserted when necessary to ensure the following elements start
+on a recto page:
+
+* Title page
+* Table of contents
+* First page of body
+* Parts and chapters
+
+Other "`facing`" pages may be added in the future.
+
+It's possible to disable the automatic facing feature for a given part or
+chapter. This can be done by adding the nonfacing option to the section node.
+When the nonfacing option is present, the part or chapter title will be placed
+on the following page.
+
+[source,asciidoc]
+----
+[%nonfacing]
+= Minor Chapter
+
+content
+----
+
+For documents that use the article doctype, *Asciidoctor PDF* incorrectly places
+the document title and table of contents on their own pages. This can result
+in the page numbering and the page facing to be out of sync. As a workaround,
+*Asciidoctor PDF* inserts a blank page, if necessary, to ensure the first page
+of body content is a recto-facing page.
+
+You can check on the status of this defect by following issue track
+{uri-asciidoctor-pdf-issues-95}[issue #95, {browser-window--new}].

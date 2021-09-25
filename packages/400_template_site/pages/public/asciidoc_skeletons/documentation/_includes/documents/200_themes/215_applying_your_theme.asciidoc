@@ -1,0 +1,65 @@
+== Applying Your Theme
+
+After creating a theme, you'll need to tell *Asciidoctor PDF* where to find it.
+This is done using AsciiDoc attributes.
+
+There are three AsciiDoc attributes that tell *Asciidoctor PDF* how to locate
+and apply your theme.
+
+pdf-stylesdir:: The directory where the theme file is located.
+_Specifying an absolute path is recommended._
++
+If you use images in your theme, image paths are resolved relative to this
+directory.
+
+pdf-style:: The name of the YAML theme file to load.
+If the name ends with `.yml`, it's assumed to be the complete name of a file.
+Otherwise, `-theme.yml` is appended to the name to make the file name (i.e.
+`<name>-theme.yml`).
+
+pdf-fontsdir:: The directory where the fonts used by your theme, if any, are
+located. _Specifying an absolute path is recommended._
+
+Let's assume that you've put your theme files inside a directory named
+`resources` with the following layout:
+
+....
+document.adoc
+resources/
+  themes/
+    basic-theme.yml
+  fonts/
+    roboto-normal.ttf
+    roboto-italic.ttf
+    roboto-bold.ttf
+    roboto-bold_italic.ttf
+....
+
+Here's how you'd load your theme when calling *Asciidoctor PDF*:
+
+ $ asciidoctor-pdf -a pdf-stylesdir=resources/themes -a pdf-style=basic -a pdf-fontsdir=resources/fonts
+
+If all goes well, *Asciidoctor PDF* should run without an error or warning.
+
+NOTE: You only need to specify the `pdf-fontsdir` if you are using custom
+fonts in your theme.
+
+You can skip setting the `pdf-stylesdir` attribute and just pass the absolute
+path of your theme file to the `pdf-style` attribute.
+
+ $ asciidoctor-pdf -a pdf-style=resources/themes/basic-theme.yml -a pdf-fontsdir=resources/fonts
+
+However, in this case, image paths in your theme won't be resolved properly.
+
+Paths are resolved relative to the current directory. However, in the future,
+this may change so that paths are resolved relative to the base directory
+(typically the document's directory). Therefore, it's recommend that you
+specify absolute paths for now to future-proof your configuration.
+
+  $ asciidoctor-pdf -a pdf-stylesdir=/path/to/resources/themes -a pdf-style=basic -a pdf-fontsdir=/path/to/resources/fonts
+
+As usual, you can also use build tools like Maven and Gradle to build a themed PDF.
+The only thing you need to add to an existing build is the attributes mentioned above.
+
+* {uri-asciidoctor-theme-example-for-maven}[Maven Example, {browser-window--new}]
+* {uri-asciidoctor-theme-example-for-gradle}[Gradle Example, {browser-window--new}]

@@ -1,0 +1,38 @@
+
+[width="100%", cols="3,4,5", options="header", role="table-responsive no-rtext"]
+|===
+|Key |Value Type |Example
+
+3+|[#key-prefix-link]*Key Prefix:* <<key-prefix-link,link>>
+
+|font_color
+|<<colors,Color>> +
+(default: #0000ee)
+|link:
+  font_color: #428bca
+
+|font_family
+|<<fonts,Font family name>> +
+(default: _inherit_)
+|link:
+  font_family: Roboto
+
+|font_size
+|<<values,Number>> +
+(default: _inherit_)
+|link:
+  font_size: 9
+
+|font_style
+|<<font-styles,Font style>> +
+(default: _inherit_)
+|link:
+  font_style: italic
+
+|text_decoration
+|none {vbar} underline {vbar} line-through +
+(default: none)
+|link:
+  text_decoration: underline
+
+|===

@@ -1,0 +1,89 @@
+
+
+[cols="3,4,5", options="header", width="100%", role="table-responsive no-rtext"]
+|===
+|Key |Value Type |Example
+
+3+|[#key-prefix-abstract]*Key Prefix:*
+
+|font_color
+|Color +
+(default: $base_font_color)
+|abstract:
+  font_color: #5c6266
+
+|font_size
+|<<values,Number>> +
+(default: 13.5)
+|abstract:
+  font_size: 13
+
+|font_style
+|Font style +
+(default: $base_font_style)
+|abstract:
+  font_style: italic
+
+|text_transform
+|Text transform +
+(default: $base_text_transform)
+|abstract:
+  text_transform: uppercase
+
+|line_height
+|<<values,Number>> +
+(default: 1.4)
+|abstract:
+  line_height: 1.4
+
+|padding
+|Measurement {vbar} +
+(default: 0)
+|abstract:
+  padding: [0, 12, 0, 12]
+
+3+|[#key-prefix-abstract-title]*Key Prefix:* abstract_title
+
+|align
+|Text alignment +
+(default: center)
+|abstract:
+  title:
+    align: center
+
+|font_color
+|<<colors,Color>> +
+(default: $base_font_color)
+|abstract:
+  title:
+    font_color: #333333
+
+|font_family
+|Font family name +
+(default: $base_font_family)
+|abstract:
+  title:
+    font_family: Noto Serif
+
+|font_size
+|<<values,Number>> +
+(default: $base_font_size)
+|abstract:
+  title:
+    font_size: 13
+
+|font_style
+|<<font-styles,Font style>> +
+(default: bold)
+|abstract:
+  title:
+    font_style: bold
+
+|text_transform
+|<<text-transforms,Text transform>> +
+(default: $base_text_transform)
+|abstract:
+  title:
+    text_transform: uppercase
+
+|===

@@ -1,0 +1,29 @@
+
+[width="100%", cols="3,4,5", options="header", role="table-responsive no-rtext"]
+|===
+|Key |Value Type |Example
+
+3+|[#key-prefix-outline-list]*Key Prefix:* <<key-prefix-outline-list,outline_list>>
+
+|indent
+|<<measurement-units,Measurement>> +
+(default: 30)
+|outline_list:
+  indent: 40
+
+|item_spacing
+|<<measurement-units,Measurement>> +
+(default: 6)
+|outline_list:
+  item_spacing: 4
+
+|marker_font_color^[1]^
+|<<colors,Color>> +
+(default: _inherit_)
+|outline_list:
+  marker_font_color: #3c763d
+
+|===
+
+. Controls the color of the bullet glyph that marks items in unordered lists
+and the number for items in ordered lists.

@@ -1,0 +1,258 @@
+
+[width="100%", cols="3,4,5", options="header", role="table-responsive no-rtext"]
+|===
+|Key |Value Type |Example
+
+3+|[#key-prefix-table]*Key Prefix:* <<key-prefix-table,table>>
+
+|background_color
+|<<colors,Color>> +
+(default: transparent)
+|table:
+  background_color: #ffffff
+
+|border_color
+|<<colors,Color>> +
+(default: #000000)
+|table:
+  border_color: #dddddd
+
+|border_style
+|solid {vbar} dashed {vbar} dotted +
+(default: solid)
+|table:
+  border_style: solid
+
+|border_width
+|<<values,Number>> +
+(default: 0.5)
+|table:
+  border_width: 0.5
+
+|caption_side
+|top {vbar} bottom +
+(default: top)
+|table:
+  caption_side: bottom
+
+|font_color
+|<<colors,Color>> +
+(default: _inherit_)
+|table:
+  font_color: #333333
+
+|font_family
+|<<fonts,Font family name>> +
+(default: _inherit_)
+|table:
+  font_family: Helvetica
+
+|font_size
+|<<values,Number>> +
+(default: _inherit_)
+|table:
+  font_size: 9.5
+
+|font_style
+|<<font-styles,Font style>> +
+(default: _inherit_)
+|table:
+  font_style: italic
+
+|grid_color
+|<<colors,Color>> +
+(default: $table_border_color)
+|table:
+  grid_color: #eeeeee
+
+|grid_style
+|solid {vbar} dashed {vbar} dotted +
+(default: solid)
+|table:
+  grid_style: dashed
+
+|grid_width
+|<<values,Number>> +
+(default: $table_border_width)
+|table:
+  grid_width: 0.5
+
+3+|[#key-prefix-table-head]*Key Prefix:* <<key-prefix-table-head,table_head>>
+
+//|align
+//|<<text-alignments,Text alignment>> +
+//(default: _inherit_)
+//|table:
+//  head:
+//    align: center
+
+|background_color
+|<<colors,Color>> +
+(default: $table_background_color)
+|table:
+  head:
+    background_color: #f0f0f0
+
+|font_color
+|<<colors,Color>> +
+(default: $table_font_color)
+|table:
+  head:
+    font_color: #333333
+
+|font_family
+|<<fonts,Font family name>> +
+(default: $table_font_family)
+|table:
+  head:
+    font_family: Noto Serif
+
+|font_size
+|<<values,Number>> +
+(default: $table_font_size)
+|table:
+  head:
+    font_size: 10
+
+|font_style
+|<<font-styles,Font style>> +
+(default: bold)
+|table:
+  head:
+    font_style: normal
+
+|text_transform
+|<<text-transforms,Text transform>> +
+(default: _inherit_)
+|table:
+  head:
+    text_transform: uppercase
+
+3+|[#key-prefix-table-body]*Key Prefix:* <<key-prefix-table-body,table_body>>
+
+|background_color
+|<<colors,Color>> +
+(default: $table_background_color)
+|table:
+  body:
+    background_color: #fdfdfd
+
+|stripe_background_color^[1]^
+|<<colors,Color>> +
+(default: #eeeeee)
+|table:
+  body:
+    stripe_background_color: #efefef
+
+3+|[#key-prefix-table-foot]*Key Prefix:* <<key-prefix-table-foot,table_foot>>
+
+|background_color
+|<<colors,Color>> +
+(default: $table_background_color)
+|table:
+  foot:
+    background_color: #f0f0f0
+
+|font_color
+|<<colors,Color>> +
+(default: $table_font_color)
+|table:
+  foot:
+    font_color: #333333
+
+|font_family
+|<<fonts,Font family name>> +
+(default: $table_font_family)
+|table:
+  foot:
+    font_family: Noto Serif
+
+|font_size
+|<<values,Number>> +
+(default: $table_font_size)
+|table:
+  foot:
+    font_size: 10
+
+|font_style
+|<<font-styles,Font style>> +
+(default: normal)
+|table:
+  foot:
+    font_style: italic
+
+//deprecated
+//3+|[#key-prefix-table-row]*Key Prefix:* <<key-prefix-table-row,table_<parity>_row>>^[1]^
+//
+//|background_color
+//|<<colors,Color>> +
+//(default: $table_background_color)
+//|table:
+//  even_row:
+//    background_color: #f9f9f9
+
+3+|[#key-prefix-table-cell]*Key Prefix:* <<key-prefix-table-cell,table_cell>>
+
+|padding
+|<<measurement-units,Measurement>> {vbar} <<measurement-units,Measurement[top,right,bottom,left]>> +
+(default: 2)
+|table:
+  cell:
+    padding: 3
+
+3+|[#key-prefix-table-header-cell]*Key Prefix:* <<key-prefix-table-header-cell,table_header_cell>>
+
+//|align
+//|<<text-alignments,Text alignment>> +
+//(default: $table_head_align)
+//|table:
+//  header_cell:
+//    align: center
+
+|background_color
+|<<colors,Color>> +
+(default: $table_head_background_color)
+|table:
+  header_cell:
+    background_color: #f0f0f0
+
+|font_color
+|<<colors,Color>> +
+(default: $table_head_font_color)
+|table:
+  header_cell:
+    font_color: #1a1a1a
+
+|font_family
+|<<fonts,Font family name>> +
+(default: $table_head_font_family)
+|table:
+  header_cell:
+    font_family: Noto Sans
+
+|font_size
+|<<values,Number>> +
+(default: $table_head_font_size)
+|table:
+  header_cell:
+    font_size: 12
+
+|font_style
+|<<font-styles,Font style>> +
+(default: $table_head_font_style)
+|table:
+  header_cell:
+    font_style: italic
+
+|text_transform
+|<<text-transforms,Text transform>> +
+(default: $table_head_text_transform)
+|table:
+  header_cell:
+    text_transform: uppercase
+
+|===
+
+. Applied to even rows by default; controlled using `stripes` attribute
+(even, odd, all, none) on table.
+//. `<parity>` can be `odd` (odd rows) or `even` (even rows).

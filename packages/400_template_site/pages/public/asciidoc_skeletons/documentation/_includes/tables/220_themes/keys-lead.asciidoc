@@ -1,0 +1,44 @@
+
+[width="100%", cols="3,4,5", options="header", role="table-responsive no-rtext"]
+|===
+|Key |Value Type |Example
+
+3+|[#key-prefix-lead]*Key Prefix:* <<key-prefix-lead,lead>>
+
+|font_color
+|<<colors,Color>> +
+(default: _inherit_)
+|lead:
+  font_color: #262626
+
+|font_family
+|<<fonts,Font family name>> +
+(default: _inherit_)
+|lead:
+  font_family: M+ 1p
+
+|font_size
+|<<values,Number>> +
+(default: 13.5)
+|lead:
+  font_size: 13
+
+|font_style
+|<<font-styles,Font style>> +
+(default: _inherit_)
+|lead:
+  font_style: bold
+
+|text_transform
+|<<text-transforms,Text transform>> +
+(default: _inherit_)
+|lead:
+  text_transform: uppercase
+
+|line_height
+|<<values,Number>> +
+(default: 1.4)
+|lead:
+  line_height: 1.4
+
+|===

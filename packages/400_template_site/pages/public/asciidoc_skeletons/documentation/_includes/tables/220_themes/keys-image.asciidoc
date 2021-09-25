@@ -1,0 +1,24 @@
+
+[width="100%", cols="3,4,5", options="header", role="table-responsive no-rtext"]
+|===
+|Key |Value Type |Example
+
+3+|[#key-prefix-image]*Key Prefix:* <<key-prefix-image,image>>
+
+|align
+|<<image-alignments,Image alignment>> +
+(default: left)
+|image:
+  align: left
+
+|width^[1]^
+|<<measurement-units,Measurement>> +
+(default: _not set_)
+|image:
+  width: 100%
+
+|===
+
+. Only applies to block images. If specified, this value takes precedence
+over the value of the `width` attribute on the image macro, but not over
+the value of the `pdfwidth` attribute.

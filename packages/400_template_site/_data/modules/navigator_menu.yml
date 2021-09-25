@@ -153,7 +153,7 @@
     # Asciidoc Skeletons
     #
     - title:                            Asciidoc Skeletons
-      icon:                             television-guide
+      icon:                             application-settings
       dropdown:
         - title:                        Simple-Document
           href:                         /pages/public/skeleton/simple/
@@ -162,7 +162,7 @@
           href:                         /pages/public/skeleton/multi/
           icon:                         file-document-multiple-outline
         - title:                        Documentation
-          href:                         /pages/public/skeleton/book/
+          href:                         /pages/public/skeleton/documentation/
           icon:                         book-open-blank-variant
 
 # ------------------------------------------------------------------------------

@@ -1,0 +1,14 @@
+
+[width="100%", cols="3,4,5", options="header", role="table-responsive no-rtext"]
+|===
+|Key |Value Type |Example
+
+3+|[#key-prefix-menu]*Key Prefix:* <<key-prefix-menu,menu>>
+
+|caret_content
+|<<quoted-string,Quoted string>> +
+(default: " \u203a ")
+|menu:
+  caret_content: ' > '
+
+|===

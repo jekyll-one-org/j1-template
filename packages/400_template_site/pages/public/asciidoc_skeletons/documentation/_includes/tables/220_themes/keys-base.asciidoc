@@ -1,0 +1,99 @@
+[width="100%", cols="3,4,5", options="header", role="table-responsive no-rtext"]
+|===
+|Key |Value Type |Example
+
+3+|[#key-prefix-base]*Key Prefix:* <<key-prefix-base,base>>
+
+|align
+|<<text-alignments,Text alignment>> +
+(default: left)
+|base:
+  align: justify
+
+|border_color
+|<<colors,Color>> +
+(default: #eeeeee)
+|base:
+  border_color: #eeeeee
+
+// border_radius is variable, not an official key
+//|border_radius
+//|<<values,Number>>
+//|base:
+//  border_radius: 4
+
+|border_width
+|<<values,Number>> +
+(default: 0.5)
+|base:
+  border_width: 0.5
+
+|font_color
+|<<colors,Color>> +
+(default: #000000)
+|base:
+  font_color: #333333
+
+|font_family
+|<<fonts,Font family name>> +
+(default: Helvetica)
+|base:
+  font_family: Noto Serif
+
+|font_size
+|<<values,Number>> +
+(default: 12)
+|base:
+  font_size: 10.5
+
+// font_size_large is a variable, not an official key
+//|font_size_large
+//|<<values,Number>>
+//|base:
+//  font_size_large: 13
+
+|font_size_min
+|<<values,Number>> +
+(default: 9)
+|base:
+  font_size_min: 6
+
+// font_size_small is a variable, not an official key
+//|font_size_small
+//|<<values,Number>>
+//|base:
+//  font_size_small: 9
+
+|font_style
+|<<font-styles,Font style>> +
+(default: normal)
+|base:
+  font_style: normal
+
+|text_transform^[1]^
+|none +
+(default: none)
+|base:
+  text_transform: none
+
+|line_height_length^[2]^
+|<<values,Number>> +
+(default: 13.8)
+|base:
+  line_height_length: 12
+
+|line_height^[2]^
+|<<values,Number>> +
+(default: 1.15)
+|base:
+  line_height: >
+    $base_line_height_length /
+    $base_font_size
+
+|===
+
+. The `text_transform` key cannot be set globally.
+Therefore, this key should not be used.
+The value of `none` is implicit and is documented here for completeness.
+. You should set one of `line_height` or `line_height_length`, then derive the value of the other using a calculation as these are correlated values.
+For instance, if you set `line_height_length`, then use `$base_line_height_length / $base_font_size` as the value of `line_height`.

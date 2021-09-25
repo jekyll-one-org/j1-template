@@ -1,0 +1,68 @@
+
+[width="100%", cols="3,4,5", options="header", role="table-responsive no-rtext"]
+|===
+|Key |Value Type |Example
+
+3+|[#key-prefix-example]*Key Prefix:* <<key-prefix-example,example>>
+
+|background_color
+|<<colors,Color>> +
+(default: #ffffff)
+|example:
+  background_color: #fffef7
+
+|border_color
+|<<colors,Color>> +
+(default: #eeeeee)
+|example:
+  border_color: #eeeeee
+
+|border_radius
+|<<values,Number>> +
+(default: _not set_)
+|example:
+  border_radius: 4
+
+|border_width
+|<<values,Number>> +
+(default: 0.5)
+|example:
+  border_width: 0.75
+
+|font_color
+|<<colors,Color>> +
+(default: _inherit_)
+|example:
+  font_color: #262626
+
+|font_family
+|<<fonts,Font family name>> +
+(default: _inherit_)
+|example:
+  font_family: M+ 1p
+
+|font_size
+|<<values,Number>> +
+(default: _inherit_)
+|example:
+  font_size: 13
+
+|font_style
+|<<font-styles,Font style>> +
+(default: _inherit_)
+|example:
+  font_style: italic
+
+|text_transform
+|<<text-transforms,Text transform>> +
+(default: _inherit_)
+|example:
+  text_transform: uppercase
+
+|padding
+|<<measurement-units,Measurement>> {vbar} <<measurement-units,Measurement[top,right,bottom,left]>> +
+(default: [12, 12, 0, 12])
+|example:
+  padding: [15, 15, 0, 15]
+
+|===
