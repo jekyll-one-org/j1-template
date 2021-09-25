@@ -23,7 +23,7 @@ robots:
   follow:                               false
 
 permalink:                              /pages/public/skeleton/documentation/
-regenerate:                             true
+regenerate:                             false
 
 resources:                              [ clipboard, lightbox, rouge ]
 resource_options:

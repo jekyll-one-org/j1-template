@@ -3,14 +3,13 @@ title:                                  Asciidoctor PDF Themes
 tagline:                                Theming Guide for the Asciidoctor PDF Converter
 description:                            Asciidoctor PDF Theming Guide
 
-tags:                                   [ Asciidoctor, Guide, PDF, Converter, Theme, Theming ]
-index:                                  []
-categories:                             [ pages, manuals ]
+categories:                             [ Knowledge ]
+tags:                                   [ Asciidoctor, PDF, Converter ]
 
 permalink:                              /pages/public/skeleton/documentation/200_themes/
-regenerate:                             true
+regenerate:                             false
 
-resources:                              [ lightbox, flex_starter_guide ]
+resources:                              [ lightbox, clipboard, rouge ]
 resource_options:
   - toccer:
       collapseDepth:                    2

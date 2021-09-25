@@ -3,14 +3,14 @@ title:                                  Asciidoctor PDF Converter
 tagline:                                A native PDF converter for AsciiDoc
 description:                            Native PDF Converter for Asciidoctor
 
+categories:                             [ Knowledge ]
 tags:                                   [ Asciidoctor, PDF, Converter ]
-index:                                  []
-categories:                             [ pages, manuals ]
+
 
 permalink:                              /pages/public/skeleton/documentation/100_converter/
-regenerate:                             true
+regenerate:                             false
 
-resources:                              [ lightbox, flex_starter_guide ]
+resources:                              [ lightbox, clipboard, rouge ]
 resource_options:
   - toccer:
       collapseDepth:                    2

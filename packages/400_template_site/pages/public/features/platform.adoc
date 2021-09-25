@@ -49,7 +49,6 @@ resource_options:
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
 :url-fontawesome--home:                 https://fontawesome.com/
-
 :url-roundtrip--mdi-icons:              /pages/public/learn/roundtrip/mdi_icon_font/#material-design-icons
 
 //  Load Liquid procedures
@@ -58,7 +57,7 @@ resource_options:
 
 // Load page attributes
 // -----------------------------------------------------------------------------
-{% include {{load_attributes}} scope="global" %}
+{% include {{load_attributes}} scope="all" %}
 
 
 // Page content

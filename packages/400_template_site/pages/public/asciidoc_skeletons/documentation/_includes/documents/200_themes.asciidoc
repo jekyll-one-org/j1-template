@@ -6,15 +6,3 @@ include::200_themes/211_language_overview.asciidoc[]
 include::200_themes/212_values.asciidoc[]
 
 include::200_themes/213_fonts.asciidoc[]
-
-include::200_themes/214_asciidoctor_pdf_themes_keys.asciidoc[]
-
-include::200_themes/215_theme_related_attributes.asciidoc[]
-
-include::200_themes/215_applying_your_theme.asciidoc[]
-
-include::200_themes/216_pdf_publishing_modes.asciidoc[]
-
-include::200_themes/216_custom_highlightning.asciidoc[]
-
-include::200_themes/217_extending_asciidoctor_pdf.asciidoc[]

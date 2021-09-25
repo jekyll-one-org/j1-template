@@ -15,19 +15,20 @@ The following is a reference of the available data.
 |`site` |Sitewide information + configuration settings from
 `_config.yml`. See below for details.
 
-|`page` |Page specific information + the link:../frontmatter/[YAML front
-matter]. Custom variables set via the YAML Front Matter will be
+|`page` |Page specific information + the YAML front
+matter. Custom variables set via the YAML Front Matter will be
 available here. See below for details.
 
-|`layout` |Layout specific information + the link:../frontmatter/[YAML
-front matter]. Custom variables set via the YAML Front Matter in layouts
+|`layout`
+|Layout specific information + the YAML
+front matter. Custom variables set via the YAML Front Matter in layouts
 will be available here.
 
 |`content` |In layout files, the rendered content of the Post or Page
 being wrapped. Not defined in Post or Page files.
 
 |`paginator` |When the `paginate` configuration option is set, this
-variable becomes available for use. See link:../pagination/[Pagination]
+variable becomes available for use. See Pagination
 for details.
 |=======================================================================
 
@@ -110,14 +111,14 @@ Categories are derived from the directory structure above the `_posts`
 directory. For example, a post at
 `/work/code/_posts/2008-12-24-closures.md` would have this field set to
 `['work', 'code']`. These can also be specified in the
-link:../frontmatter/[YAML Front Matter].
+YAML Front Matter.
 
 |`page.tags` |The list of tags to which this post belongs. These can be
-specified in the link:../frontmatter/[YAML Front Matter].
+specified in the YAML Front Matter.
 
 |`page.path` |The path to the raw post or page. Example usage: Linking
 back to the page or post's source on GitHub. This can be overridden in
-the link:../frontmatter/[YAML Front Matter].
+the YAML Front Matter.
 
 |`page.next` |The next post relative to the position of the current post
 in `site.posts`. Returns `nil` for the last entry.

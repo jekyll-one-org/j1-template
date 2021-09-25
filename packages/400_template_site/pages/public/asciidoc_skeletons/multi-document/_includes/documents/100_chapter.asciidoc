@@ -39,7 +39,7 @@ Change the directory where Jekyll will write files
 a|
 *Safe*
 
-Disable link:../plugins/[custom plugins, and ignore symbolic links].
+Disable custom plugins, and ignore symbolic links.
 
  a|
 `safe: BOOL`
@@ -101,9 +101,9 @@ encodings can be shown by the command
 a|
 *Defaults*
 
-Set defaults for link:../frontmatter/[YAML Front Matter] variables.
+Set defaults for YAML Front Matter variables.
 
- |see link:#front-matter-defaults[below]
+ |see below
 |=======================================================================
 
 
@@ -377,13 +377,13 @@ An overview of what each of these does:
 [width="100%", cols="6,6", options="header", role="table-responsive mt-3"]
 |=======================================================================
 |File / Directory |Description
-|`_config.yml` |Stores link:../configuration/[configuration] data. Many
+|`_config.yml`
+|Stores configuration data. Many
 of these options can be specified from the command line executable but
 it's easier to specify them here so you don't have to remember them.
 
 |`_drafts` |Drafts are unpublished posts. The format of these files is
-without a date: `title.MARKUP`. Learn how to link:../drafts/[work with
-drafts].
+without a date: `title.MARKUP`. Learn how to work with drafts.
 
 |`_includes` |These are the partials that can be mixed and matched by
 your layouts and posts to facilitate reuse. The liquid tag
@@ -391,14 +391,14 @@ your layouts and posts to facilitate reuse. The liquid tag
 partial in `_includes/file.ext`.
 
 |`_layouts` |These are the templates that wrap posts. Layouts are chosen
-on a post-by-post basis in the link:../frontmatter/[YAML Front Matter],
+on a post-by-post basis in the YAML Front Matter,
 which is described in the next section. The liquid tag
 `{{ content }}` is used to inject content into the
 web page.
 
 |`_posts` |Your dynamic content, so to speak. The naming convention of
 these files is important, and must follow the format:
-`YEAR-MONTH-DAY-title.MARKUP`. The link:../permalinks/[permalinks] can
+`YEAR-MONTH-DAY-title.MARKUP`. The permalinks can
 be customized for each post, but the date and markup language are
 determined solely by the file name.
 
@@ -420,7 +420,7 @@ in the generated site. It's probably a good idea to add this to your
 `.gitignore` file.
 
 |`index.html` and other HTML, Markdown, Textile files |Provided that the
-file has a link:../frontmatter/[YAML Front Matter] section, it will be
+file has a YAML Front Matter section, it will be
 transformed by Jekyll. The same will happen for any `.html`,
 `.markdown`, `.md`, or `.textile` file in your site's root directory or
 directories not listed above.
@@ -428,7 +428,7 @@ directories not listed above.
 |Other Files/Folders |Every other directory and file except for those
 listed above such as `css` and `images` folders, `favicon.ico` files,
 and so forthÔÇöwill be copied verbatim to the generated site. There are
-plenty of link:../sites/[sites already using Jekyll] if you're curious
+plenty of sites already using Jekyll if you're curious
 to see how they're laid out.
 |=======================================================================
 
