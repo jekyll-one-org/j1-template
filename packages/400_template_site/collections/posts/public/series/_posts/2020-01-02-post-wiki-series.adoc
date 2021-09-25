@@ -2,16 +2,18 @@
 title:                                  Narcisse Snake Dens
 tagline:                                largest snake population
 
-categories:                             [ Wikipedia ]
-tags:                                   [ Canada, Cities, Narcisse ]
+categories:                             [ Examples ]
+tags:                                   [ Series, Canada, Cities, Narcisse ]
 
+series:                                 wiki-series
 image:                                  /assets/images/collections/blog/wikipedia/narcise-snake-pits.1200x400.jpg
 
-sitemap:                                false
 regenerate:                             false
 
 resources:                              []
 resource_options:
+  - toccer:
+      collapseDepth:                    3
   - attic:
       padding_top:                      400
       padding_bottom:                   50
@@ -21,14 +23,14 @@ resource_options:
           alt:                          Narcisse Snake Pits
 ---
 
-// NOTE:  General Asciidoc page attributes settings
-// -----------------------------------------------------------------------------
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
 :page-liquid:
 
-// Additional Asciidoc page attributes goes here
+// Set (local) page attributes here
 // -----------------------------------------------------------------------------
-:page-imagesdir: {{page.images.dir}}
-:wikipedia-article:                     https://en.wikipedia.org/wiki/Narcisse_Snake_Pits
+// :page--attr:                         <attr-value>
 
 // Place an excerpt at the most top position
 // -----------------------------------------------------------------------------
@@ -46,23 +48,22 @@ excerpt__end
 
 // Load page attributes
 // -----------------------------------------------------------------------------
-{% include {{load_attributes}} scope="all" %}
+{% include {{load_attributes}} scope="none" %}
 
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Read: link:{wikipedia-article}[From Wikipedia, the free encyclopedia, window="_blank"].
 
 // Include sub-documents
 // -----------------------------------------------------------------------------
-
 [[readmore]]
 == Conservation
 
-[role="mb-3"]
+[role="mt-3 mb-5"]
 image::/assets/images/collections/blog/wikipedia/narcise-snake-pits.1200x400.jpg[{{page.title}}]
 
-// Read: link:{wikipedia-article}[From Wikipedia, the free encyclopedia, window="_blank"].
-
+[role="dropcap mt-4"]
 These pits are the largest concentration in the world of this particular type
 of snake. Their winter dens are subterranean caverns formed by the area's
 water-worn limestone bedrock. In the spring, they come up from their dens to
@@ -89,6 +90,7 @@ season are killed on the highway.
 
 == Visiting
 
+[role="dropcap mt-4"]
 The conservation area is open to the public. The snakes are most active
 during the spring and fall - in late April to early May, which is the mating
 season, and also in early September, when the snakes slither back down to

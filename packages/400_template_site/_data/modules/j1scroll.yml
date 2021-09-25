@@ -37,7 +37,7 @@ settings:
         path:                           /assets/data/news_panel_posts/page
         elementScroll:                  true                                    # false = window, true = container
         scrollOffset:                   100
-        lastPage:                       4
+        lastPage:                       3
         infoLastPage:                   true
 
         lastPageInfo_en: >
@@ -57,7 +57,7 @@ settings:
         path:                           /pages/public/blog/navigator/page
         elementScroll:                  true
         scrollOffset:                   200
-        lastPage:                       6
+        lastPage:                       4
         infoLastPage:                   false
 
         lastPageInfo_en:                ""

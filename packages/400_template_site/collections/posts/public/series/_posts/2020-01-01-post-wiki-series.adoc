@@ -2,16 +2,17 @@
 title:                                  Minneapolis
 tagline:                                largest city in the state of minnesota
 
-categories:                             [ Wikipedia ]
-tags:                                   [ USA, Minnesota, Cities, Minneapolis ]
+categories:                             [ Examples ]
+tags:                                   [ Series, USA, Minnesota, Cities, Minneapolis ]
 
+series:                                 wiki-series
 image:                                  /assets/images/collections/blog/wikipedia/minneapolis.1200x400.jpg
-
-sitemap:                                false
 regenerate:                             false
 
 resources:                              []
 resource_options:
+  - toccer:
+      collapseDepth:                    3
   - attic:
       padding_top:                      400
       padding_bottom:                   50
@@ -39,7 +40,6 @@ and the county seat of Hennepin County. According to the United States Census
 Bureau, the city has a total area of 151.3 km² (58.4 mi²). 142.2 km² (54.9 mi²)
 of it is land and 9.1 km² (3.5 mi²) of it (6.01%) is water.
 
-
 excerpt__end
 
 //  Load Liquid procedures
@@ -48,23 +48,22 @@ excerpt__end
 
 // Load page attributes
 // -----------------------------------------------------------------------------
-{% include {{load_attributes}} scope="all" %}
+{% include {{load_attributes}} scope="none" %}
 
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Read: link:{wikipedia-article}[From Wikipedia, the free encyclopedia, window="_blank"].
 
 // Include sub-documents
 // -----------------------------------------------------------------------------
-
 [[readmore]]
 == Physical
 
-[role="mb-3"]
+[role="mt-3 mb-5"]
 image::collections/blog/wikipedia/minneapolis.1200x400.jpg[{{page.title}}]
 
-// Read: link:{wikipedia-article}[From Wikipedia, the free encyclopedia, window="_blank"].
-
+[role="dropcap mt-4"]
 The Mississippi, which runs to the southeast, directed the early growth of the
 city. Most early streets ran parallel to the river to maximize the amount of
 land that could be used. Eventually, growth of Minneapolis turned to north-south
@@ -77,6 +76,7 @@ and Nicollet Avenue, have both orientations at different points.
 
 == Parks and lakes
 
+[role="dropcap mt-4"]
 Minneapolis has a large park system consisting of ten square miles (26 km²)
 of land and water that is interlinked in many places. Theodore Wirth is often
 credited with the development of this system that brought a playground within
@@ -104,6 +104,7 @@ paths, Minneapolis lakes are used for swimming, fishing, picnics and boating.
 
 == Flora and fauna
 
+[role="dropcap mt-4"]
 The area now occupied by the Twin Cities generally consisted of a 155 foot
 (47 m) thick layer of St. Peter Sandstone, under a 16 foot (5 m) thick layer
 of shale, under a 35 foot (11 m) thick layer of Platteville limestone.[4]

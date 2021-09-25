@@ -66,13 +66,13 @@
      <div class="row">
        <div style="width: calc(100% - 5px)">
          {% if site.language == "en" %}
-           {% assign series_heading = "This article is <strong>part <<idx>> </strong> in a <strong><<count>>-part</strong> series:" %}
+           {% assign series_heading = "This is <strong>part <<idx>> </strong> in a <strong><<count>>-part</strong> series:" %}
          {% elsif site.language == "de" %}
-           {% assign series_heading = "Dieser Artikel ist <strong>Teil <<idx>> </strong> einer <strong><<count>>-er</strong> Serie:" %}
+           {% assign series_heading = "indigenous ist <strong>Teil <<idx>> </strong> einer <strong><<count>>-er</strong> Serie:" %}
          {% endif %}
          <!-- series heading -->
          <h4 id="blog_series_list" class="notoc mt-2 mr-2 mb-4">{{series_heading}}</h4>
-         <ul class="side-nav" style="width: calc(100% - 5px)">
+         <ul class="side-nav" style="width: calc(100% - 15px)">
  {% endcapture %}
          {% for post in site.posts reversed %}
            {% if post.series == page.series %}
@@ -91,11 +91,11 @@
        </div>
 
        <!-- place excerpt -->
-       <div class="mt-2">
+       <div class="mt-5 mr-3">
          <h5 class="notoc series-exerpt-title">{{excerpt_title}}</h5>
          <div class="series-exerpt">
-           <div class="paragraph">
-             <p>{{excerpt}}</p>
+           <div class="paragraph mt-3">
+             <p>{{excerpt|strip_html}}</p>
            </div>
            {% if readmore %}
            <div class="card-footer">
