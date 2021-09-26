@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
 # ~/_config.yml
-# Global Jekyll site configuration (development)
+# Global Jekyll site configuration (runtime)
 #
 # Product/Info:
 # https://jekyll.one
@@ -53,7 +53,7 @@ environment:                            production
 # ------------------------------------------------------------------------------
 #   Sets the build version of J1 Template Gem
 #
-version:                                2021.1.30
+version:                                2021.2.0
 
 # version
 # ------------------------------------------------------------------------------
@@ -84,7 +84,7 @@ copyright:                              © 2021 J1 · All rights reserved
 #
 #   default:                            j1-template
 #
-#theme:
+theme:                                  j1-template
 
 # ------------------------------------------------------------------------------
 #   J1 Template configuration
@@ -117,6 +117,7 @@ copyright:                              © 2021 J1 · All rights reserved
 template:
   name:                                 j1
   config:                               j1_config
+
 
 # ==============================================================================
 # 3. SITE configuration
@@ -228,8 +229,8 @@ description: >
                                         Made for Jekyll · Made for Your Web
 
 keywords:                               Jekyll, One, Template, Ruby, Asciidoctor,
-                                        Asciidoc, Bootstrap, Javascript, JS, JS3,
-                                        CSS, CSS3, HTML5, Material, Design
+                                        Asciidoc, Bootstrap, Javascript,
+                                        JS, JS3, CSS, CSS3, HTML5, Material, Design
 author:
   name:                                 username
   email:                                username@email.domain
@@ -240,13 +241,13 @@ author:
 webmaster:
   email:                                webmaster@example.domain
 
-# Crawling/Indexing ENABLED for default. Settings managed page-wise using
-# frontmatter defaults or by page default settings to make sure that only
-# WANTED pages gets crawled.
+# crawling/indexing DISABLED for default. Settings managed page-wise using
+# frontmatter defaults or by page settings to make sure that only WANTED
+# pages gets crawled.
 #
 robots:
-  index:                                true
-  follow:                               true
+  index:                                false
+  follow:                               false
 
 # ------------------------------------------------------------------------------
 # BRAND configuration
@@ -263,6 +264,7 @@ brand:
 favicon:
   image:                                modules/icons/j1/j1-32x32.ico
   type:                                 image/ico
+
 
 # ==============================================================================
 # 4. JEKYLL specific site configuration
@@ -316,7 +318,7 @@ permalink:                              pretty
 # if you are running jekyll serve in a development environment,
 # site.url will be set to the value of host, port.
 #
-url:                                    "http://localhost:4000"
+url:                                    "http://localhost:40000"
 
 # The subpath of your site, e.g. /blog/. Used in conjunction with
 # site.url (see above) when you want a link to something with the
@@ -336,18 +338,19 @@ base_path:                              ""
 #  Defaults:
 #   protocol:                           http
 #   host:                               localhost
-#   port:                               4000
+#   port:                               40000
 #   timezone:                           Europe/Berlin
 #   encoding:                           UTF-8
 #
 protocol:                               http
 host:                                   localhost
-port:                                   4000
+port:                                   40000
 timezone:                               Europe/Berlin
 encoding:                               UTF-8
 
-# detach:                               false
-# show_dir_listing:                     true
+detach:                                 false
+show_dir_listing:                       false
+
 
 # ------------------------------------------------------------------------------
 # PATH configuration
@@ -415,7 +418,7 @@ sass:
 
 # ------------------------------------------------------------------------------
 # POSTS Management
-# Control how post articles are generated
+# Set the post articles to include, exclude and ignore
 #
 future:                                 true                                    # workaround (non US) TZ issues (of April 2021)
 show_drafts:                            false
@@ -440,7 +443,7 @@ plugins:
 # - jekyll-gist
 # - jekyll-redirect-from
 # - jekyll-sass-converter
-  - jekyll-sitemap
+# - jekyll-sitemap
   - j1-paginator
 
 # ------------------------------------------------------------------------------
@@ -691,10 +694,6 @@ defaults:
       youtube:                          true
       vimeo:                            true
 
-      toc:                              true
-      fam_menu_id:                      open_toc
-      scrollbar:                        false
-
       icons:
         category-icon:                  false                                   # dots-horizontal-circle
         family:                         MDI
@@ -704,6 +703,46 @@ defaults:
       images:
         category-image:                 false                                   # img26.jpg
         dir:                            /assets/images/collections/blog/series
+
+  # ----------------------------------------------------------------------------
+  # PUBLIC - WIKIPEDIA
+  #
+  - scope:
+      type:                             posts
+      path:                             posts/public/wikipedia
+
+    values:
+      layout:                           post
+      author:                           Wikipedia
+
+      robots:
+        index:                          false
+        follow:                         false
+
+      personalization:                  false
+      exclude_from_search:              false
+
+      analytics:                        true
+      comments:                         false
+      advertising:                      false
+      youtube:                          false
+      vimeo:                            false
+
+      series:                           false
+
+      toc:                              true
+      fam_menu_id:                      page_ctrl_simple
+      scrollbar:                        false
+
+      icons:
+        category-icon:                  false                                   # wikipedia
+        family:                         MDI
+        color:                          md-indigo
+        size:                           5x
+
+      images:
+        category-image:                 false
+        dir:                            /assets/images/collections/blog/wikipedia
 
   # ----------------------------------------------------------------------------
   # Collections
@@ -867,8 +906,8 @@ compress_html:
   startings:                            []
   clippings:                            []
   endings:                              []
-  ignore:                               []
-  envs:                                 []
+  ignore:
+    envs:                               []
 
 # ------------------------------------------------------------------------------
 # END config

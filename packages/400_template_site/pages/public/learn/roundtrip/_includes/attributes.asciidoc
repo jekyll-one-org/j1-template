@@ -67,7 +67,7 @@ tag::urls[]
 end::urls[]
 
 
-// FOOTNOTES, local asciidoc attributes (variables)
+// FOOTNOTES, global asciidoc attributes (variables)
 // -----------------------------------------------------------------------------
 tag::footnotes[]
 

@@ -156,23 +156,20 @@ module J1
 
             if lib_version === '2.7'
               if options['system']
-#               J1.logger.info "Install patches on path #{system_path} ..."
                 dest = system_path + '/gems/' + patch_gem_execjs + '/lib/execjs'
               else
-#               J1.logger.info "Install patches on path #{user_path} ..."
                 dest = user_path + '/gems/' + patch_gem_execjs + '/lib/execjs'
               end
               src = patch_execjs_source_path
-              FileUtils.cp(src, dest)
+              if Dir.exist?(dest)
+                FileUtils.cp(src, dest)
+              else
+                J1.logger.info "Skipped install patches for execjs-2.7.0 ..."
+              end
             end
 
           end
         end
-
-        def install_patch(options)
-        end
-
-
       end
     end
   end

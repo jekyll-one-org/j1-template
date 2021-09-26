@@ -16,95 +16,6 @@
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
-# Menu 3-level
-#
-# - item:                                 3-Level
-#   sublevel:
-#
-#     - title:                            This site
-#       icon:                             home-variant-outline
-#       href:                             /pages/public/about/site
-#     - title:                            Privacy
-#       icon:                             heart
-#       href:                             /pages/public/legal/en/privacy/
-#     - title:                            Impress
-#       icon:                             gavel
-#       href:                             /pages/public/legal/en/impress/
-#     - title:                            Jekyll
-#       icon:                             flask
-#     - title:                            Privacy
-#       icon:                             heart
-#       href:                             /pages/public/legal/en/privacy/
-#
-#     - title:                            Jekyll
-#       icon:                             flask
-#       dropdown:
-#
-#         - title:                        User Guide
-#           icon:                         book-open-page-variant
-#           dropdown:
-#
-#             - title:                    Commandline
-#               href:                     /pages/protected/manuals/jekyll/user_guide/commandline/
-#               icon:                     console-line
-#             - title:                    Configuration
-#               href:                     /pages/protected/manuals/jekyll/user_guide/configuration/
-#               icon:                     code-braces
-#             - title:                    Managing Pages
-#               href:                     /pages/protected/manuals/jekyll/user_guide/managing_pages/
-#               icon:                     book-open-page-variant
-#             - title:                    Managing Posts
-#               href:                     /pages/protected/manuals/jekyll/user_guide/managing_posts/
-#               icon:                     blogger
-#             - title:                    Managing Collections
-#               href:                     /pages/protected/manuals/jekyll/user_guide/managing_collections/
-#               icon:                     collage
-#             - title:                    Jekyll Date formats
-#               href:                     /pages/protected/manuals/jekyll/user_guide/date_formats/
-#               icon:                     calendar-blank
-#             - title:                    Commandline
-#               href:                     /pages/protected/manuals/jekyll/user_guide/commandline/
-#               icon:                     console-line
-#             - title:                    Configuration
-#               href:                     /pages/protected/manuals/jekyll/user_guide/configuration/
-#               icon:                     code-braces
-#             - title:                    Managing Pages
-#               href:                     /pages/protected/manuals/jekyll/user_guide/managing_pages/
-#               icon:                     book-open-page-variant
-#             - title:                    Managing Posts
-#               href:                     /pages/protected/manuals/jekyll/user_guide/managing_posts/
-#               icon:                     blogger
-#             - title:                    Managing Collections
-#               href:                     /pages/protected/manuals/jekyll/user_guide/managing_collections/
-#               icon:                     collage
-#             - title:                    Jekyll Date formats
-#               href:                     /pages/protected/manuals/jekyll/user_guide/date_formats/
-#               icon:                     calendar-blank
-#
-#
-#         - title:                        Where to go
-#           href:                         /pages/public/learn/where_to_go/
-#           icon:                         paw
-#         - title:                        Where to go
-#           href:                         /pages/public/learn/where_to_go/
-#           icon:                         paw
-#         - title:                        Where to go
-#           href:                         /pages/public/learn/where_to_go/
-#           icon:                         paw
-#         - title:                        Where to go
-#           href:                         /pages/public/learn/where_to_go/
-#           icon:                         paw
-#         - title:                        Where to go
-#           href:                         /pages/public/learn/where_to_go/
-#           icon:                         paw
-#         - title:                        Where to go
-#           href:                         /pages/public/learn/where_to_go/
-#           icon:                         paw
-#         - title:                        Where to go
-#           href:                         /pages/public/learn/where_to_go/
-#           icon:                         paw
-
-# ------------------------------------------------------------------------------
 # Menu LEARN
 #
 - item:                                 Learn
@@ -173,12 +84,9 @@
     - title:                            Gallery Previewer
       href:                             /pages/public/previewer/justified_gallery/
       icon:                             view-dashboard
-    - title:                            MDI Previewer (regular)
+    - title:                            MDI Icon Previewer
       href:                             /pages/public/previewer/mdi_font/
-      icon:                             alarm-light
-    - title:                            MDI Previewer (light)
-      href:                             /pages/public/previewer/mdil_font/
-      icon:                             alarm-light-outline
+      icon:                             fan
     - title:                            Twitter Emoji Previewer
       href:                             /pages/public/previewer/twitter_emoji/
       icon:                             emoticon-cool-outline
@@ -212,9 +120,6 @@
     - title:                            Archive
       href:                             /pages/public/blog/navigator/archive/
       icon:                             archive
-    # - title:                            Post pages
-    #   href:                             /assets/data/news_panel_posts/
-    #   icon:                             archive
 
 # Currently NOT used
 #
@@ -337,10 +242,6 @@
           href:                         http://www.freeformatter.com/
           target:                       _blank
           icon:                         cached
-        - title:                        AppDevTools
-          href:                         https://www.appdevtools.com/
-          target:                       _blank
-          icon:                         cached
         - title:                        Convert CSS to Sass
           href:                         http://sebastianpontow.de/css2compass/
           target:                       _blank
@@ -357,6 +258,10 @@
           href:                         http://yaml-online-parser.appspot.com/
           target:                       _blank
           icon:                         code-braces
+        - title:                        XML-YAML Converter
+          href:                         http://codebeautify.org/xml-to-yaml
+          target:                       _blank
+          icon:                         xml
         - title:                        Character Codes
           href:                         http://character-code.com/
           target:                       _blank
@@ -404,10 +309,6 @@
     - title:                            Impress
       icon:                             gavel
       href:                             /pages/public/legal/en/impress/
-    - title:                            Comments
-      icon:                             comment
-      href:                             /pages/public/legal/en/comment_policy/
-
 
 # ------------------------------------------------------------------------------
 # END config
