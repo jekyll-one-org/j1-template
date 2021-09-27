@@ -702,46 +702,6 @@ defaults:
         dir:                            /assets/images/collections/blog/series
 
   # ----------------------------------------------------------------------------
-  # PUBLIC - WIKIPEDIA
-  #
-  - scope:
-      type:                             posts
-      path:                             posts/public/wikipedia
-
-    values:
-      layout:                           post
-      author:                           Wikipedia
-
-      robots:
-        index:                          false
-        follow:                         false
-
-      personalization:                  false
-      exclude_from_search:              false
-
-      analytics:                        true
-      comments:                         false
-      advertising:                      false
-      youtube:                          false
-      vimeo:                            false
-
-      series:                           false
-
-      toc:                              true
-      fam_menu_id:                      page_ctrl_simple
-      scrollbar:                        false
-
-      icons:
-        category-icon:                  false                                   # wikipedia
-        family:                         MDI
-        color:                          md-indigo
-        size:                           5x
-
-      images:
-        category-image:                 false
-        dir:                            /assets/images/collections/blog/wikipedia
-
-  # ----------------------------------------------------------------------------
   # Collections
   #
 
