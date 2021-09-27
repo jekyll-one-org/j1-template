@@ -68,7 +68,7 @@ environment:                            development
 #   anything here because version information is bumped-in by
 #   the build process
 #
-version:                                2021.2.0
+version:                                2021.2.1
 
 
 # ==============================================================================
