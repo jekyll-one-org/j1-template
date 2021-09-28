@@ -21,7 +21,8 @@
   }
   .card-footer {
     background-color: transparent !important;
-    border-top: 0;
+    // border-top: 0;
+    border-top: 1px dotted rgba(0, 0, 0, 0.7);
   }
   hr {
     border-top: 1px solid  $grey-600 !important;

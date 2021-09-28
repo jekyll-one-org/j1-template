@@ -302,13 +302,13 @@
 
                         <div class="card-footer-text">
                           {% if language == "en" %}
-                            <i class="mdi mdi-calendar-blank md-grey-600 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
+                            <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
                           {% endif %}
                           {% if language == "de" %}
-                            <i class="mdi mdi-calendar-blank md-grey-600 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
+                            <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
                           {% endif %}
                         </div>
-                        <a class="card-link text-muted text-lowercase"
+                        <a class="card-link md-grey-900 text-lowercase"
                            href="{{post.url}}">
                            {{readmore_text}} · {{post.tagline}}
                         </a>
@@ -350,13 +350,13 @@
 
                         <div class="card-footer-text">
                           {% if language == "en" %}
-                            <i class="mdi mdi-calendar-blank md-grey-600 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
+                            <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
                           {% endif %}
                           {% if language == "de" %}
-                            <i class="mdi mdi-calendar-blank md-grey-600 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
+                            <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
                           {% endif %}
                         </div>
-                        <a class="card-link text-muted text-lowercase"
+                        <a class="card-link md-grey-900 text-lowercase"
                            href="{{post.url}}">
                            {{readmore_text}} · {{post.tagline}}
                         </a>

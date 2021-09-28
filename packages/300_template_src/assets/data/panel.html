@@ -262,7 +262,7 @@ exclude_from_search:                    true
                   </div>
 
                   <div class="card-body g-min-height-200 r-text-300">{{card_text}}</div>
-                  <div class="card-footer r-text-200 text-lowercase">
+                  <div class="card-footer r-text-200 md-grey-900 text-lowercase">
                   {% for data in card_buttons %} {% for item in data %} {% for button in item[1] %}
                     {% assign key   = button[0] %}
                     {% assign value = button[1] %}
@@ -277,9 +277,9 @@ exclude_from_search:                    true
                   {% endfor %} {% endfor %}{% endfor %}
 
                   {% if button_target == null %}
-                    <a class="card-link text-muted" href="{{button_href}}">{{readmore_text}} · {{button_text}}</a>
+                    <a class="card-link md-grey-900" href="{{button_href}}">{{readmore_text}} · {{button_text}}</a>
                   {% else %}
-                    <a class="card-link  md-grey-600" href="{{button_href}}" target="{{button_target}}">{{readmore_text}} · {{button_text}}</a>
+                    <a class="card-link md-grey-900" href="{{button_href}}" target="{{button_target}}">{{readmore_text}} · {{button_text}}</a>
                   {% endif %}
                   </div>
 
@@ -548,13 +548,13 @@ exclude_from_search:                    true
 
                             <div class="card-footer-text">
                               {% if language == "en" %}
-                                <i class="mdi mdi-calendar-blank md-grey-600 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
+                                <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
                               {% endif %}
                               {% if language == "de" %}
-                                <i class="mdi mdi-calendar-blank md-grey-600 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
+                                <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
                               {% endif %}
                             </div>
-                            <a class="card-link text-muted text-lowercase"
+                            <a class="card-link md-grey-900 text-lowercase"
                                href="{{post.url}}">
                                {{readmore_text}} · {{post.tagline}}
                             </a>
@@ -596,13 +596,13 @@ exclude_from_search:                    true
 
                         <div class="card-footer-text">
                           {% if language == "en" %}
-                            <i class="mdi mdi-calendar-blank md-grey-600 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
+                            <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
                           {% endif %}
                           {% if language == "de" %}
-                            <i class="mdi mdi-calendar-blank md-grey-600 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
+                            <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
                           {% endif %}
                         </div>
-                        <a class="card-link text-muted text-lowercase"
+                        <a class="card-link md-grey-900 text-lowercase"
                            href="{{post.url}}">
                            {{readmore_text}} · {{post.tagline}}
                         </a>
