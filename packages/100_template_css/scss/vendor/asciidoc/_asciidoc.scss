@@ -193,14 +193,14 @@ table tfoot tr th,
 table tfoot tr td {
   padding: 0.5em 0.625em 0.625em;
   font-size: inherit;
-  color: $darken-800 !important;
+  // color: $darken-800 !important;
   text-align: left;
 }
 table tr th,
 table tr td {
   padding: .5rem 1rem 0.5rem 1rem;
   font-size: inherit;
-  color: $darken-800 !important;
+  // color: $darken-800 !important;
   border-right:  1px solid $grey-400;
   border-bottom: 1px solid $grey-400;
 }
@@ -335,7 +335,7 @@ tbody tr th,
 tbody tr th p,
 tfoot tr th,
 tfoot tr th p {
-  color: $darken-800;
+  // color: $darken-800;
   font-weight: bold;
 }
 p.tableblock > code:only-child {
@@ -364,7 +364,7 @@ p.tableblock {
 }
 .quoteblock blockquote,
 .quoteblock blockquote p {
-    color: $darken-800;
+    // color: $darken-800;
 /*  font-size: 1.125rem; */                                                     // was: 1.8rem
     line-height: 1.30;
     word-spacing: 0.1em;
@@ -535,7 +535,7 @@ div.admonitionblock.warning, div.admonitionblock.caution {
     border-right: 1px;
     border-left: 1px dotted $grey;
     font-size: inherit;
-    color: $darken-800;
+    // color: $darken-800;
     text-align: justify;
     border-bottom: 0px;
     min-width: 20em;
@@ -614,7 +614,7 @@ div.admonitionblock.warning, div.admonitionblock.caution {
 .exampleblock {
   	margin-bottom: 1.25rem;
     border-radius: $border--radius;
-    color: $darken-800;
+    // color: $darken-800;
     background: $grey-50;
 //  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
@@ -977,7 +977,7 @@ kbd {
 
 kbd:not(.keyseq) {
     display: inline-block;
-    color: $darken-800;
+    // color: $darken-800;
     font-size: 0.75em;
     // line-height: 1.4; jadams,2020-04-18
     background-color: $grey-300;

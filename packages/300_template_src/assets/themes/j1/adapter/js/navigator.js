@@ -685,10 +685,16 @@ j1.adapter['navigator'] = (function (j1, window) {
 
       // navBar styles
       // -----------------------------------------------------------------------
-      // read current bg-primary/background-color from color selector
+      // read current background colors
       var bg_primary    = $('#bg-primary').css('background-color');
+      var bg_table      = $('body').css('background-color');
+
+      // set navbar background colors
       var bg_scrolled   = bg_primary;
       var bg_collapsed  = bg_primary;
+
+      // set current body background color for all tables
+      $('table').css('background', bg_table);
 
       $('head').append('<style>.mdi-bg-primary {color: ' +bg_scrolled+ ';}</style>');
 
