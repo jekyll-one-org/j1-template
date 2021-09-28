@@ -410,10 +410,10 @@ j1.adapter['navigator'] = (function (j1, window) {
             // -----------------------------------------------------------------
             // event handler|css styles
             // -----------------------------------------------------------------
-            // continue if themer|navigator are INITIALIZED
             var dependencies_met_initialized = setInterval(function() {
               if (themerEnabled) {
-                if (j1.adapter.navigator.getState() === 'initialized') {
+                // for themes, initialize if page is visible (DOM ready)
+                if (j1.getState() === 'finished') {
                   _this.setState('processing');
 
                   // set general|global theme colors
@@ -433,6 +433,7 @@ j1.adapter['navigator'] = (function (j1, window) {
                   clearInterval(dependencies_met_initialized);
                 }
               } else {
+                // no themes used
                 _this.setState('processing');
 
                 // set general|global theme colors
@@ -685,7 +686,8 @@ j1.adapter['navigator'] = (function (j1, window) {
 
       // navBar styles
       // -----------------------------------------------------------------------
-      var bg_primary    = j1.getStyleValue('bg-primary', 'background-color');
+      // var bg_primary    = j1.getStyleValue('bg-primary', 'background-color');
+      var bg_primary    = $(".card-header").css("background-color");
       var bg_scrolled   = bg_primary;
       var bg_collapsed  = bg_primary;
 

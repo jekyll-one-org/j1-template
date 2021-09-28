@@ -33,9 +33,20 @@ i {
     font-style: italic;
 }
 
+
+.btn.bmd-btn-fab.btn-primary,
+.btn.btn-raised.btn-primary,
+.btn-group-raised
+.btn.btn-primary {
+    border-color: $blue !important;
+}
+
 // jadams, 2020-11-15: set text color for (all) buttons (Google optimisation)
-.btn.bmd-btn-fab.btn-primary, .btn.btn-raised.btn-primary, .btn-group-raised .btn.btn-primary {
-    color: #212121 !important;
+.btn.bmd-btn-fab.btn-primary,
+.btn.btn-raised.btn-primary,
+.btn-group-raised
+.btn.btn-primary {
+    color: $grey-900 !important;
 }
 
 // jadams, 2020-11-15: set hover for (all) buttons (Google optimisation)
