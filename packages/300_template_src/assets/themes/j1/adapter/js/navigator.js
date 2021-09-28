@@ -452,7 +452,7 @@ j1.adapter['navigator'] = (function (j1, window) {
             }, 25); // END 'dependencies_met_initialized'
             logger.info('\n' + 'met dependencies for: themer');
             clearInterval(dependencies_met_load_menu_finished);
-          }
+          }          
         }, 25); // END 'dependencies_met_load_menu_finished'
 
       // --------------------------------------------------------------------
