@@ -130,8 +130,7 @@ layout:                                 compress
   ------------------------------------------------------------------------------ {% endcomment %}
     <!-- [INFO   ] [j1.layout.default.html                ] [ start page processing for region: 'body' ] -->
     <!-- [INFO   ] [j1.layout.default.html                ] [ place wrapper to prevent "DOM flicker" ] -->
-    <!-- [INFO   ] [j1.layout.default.html                ] [ make page hidden ] -->
-    <!-- div id="no_flicker" class="nojs" -->
+    <!-- [INFO   ] [j1.layout.default.html                ] [ make page hidden (suppress flicker) ] -->
     <div id="no_flicker" style="display: none">
 
       {% comment %} collect the BODY-NAVIGATION region
@@ -153,6 +152,7 @@ layout:                                 compress
       <!-- [INFO   ] [j1.layout.default.html                ] [ end content_writer default_writer for region: 'body-footer' ] -->
 
     </div>
+    <!-- [INFO   ] [j1.layout.default.html                ] [ end suppress flicker ] -->
     <!-- [INFO   ] [j1.layout.default.html                ] [ end default writer] -->
 
     <!-- [INFO   ] [j1.layout.default.html                ] [ place noscript info|error page ] -->
@@ -206,6 +206,10 @@ layout:                                 compress
         </body>
       </html>
     </noscript>
+
+    <!-- [INFO   ] [j1.layout.default.html                ] [ place hidden color selector/themes: bg-primary ] -->
+    <div id="bg-primary" class="bg-primary" style="display: none"></div>
+
   </body>
 
   {% comment %} Place|Initialize module components

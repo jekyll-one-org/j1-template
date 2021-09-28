@@ -1289,7 +1289,8 @@ var j1 = (function () {
           logText = '\n' + 'page finalized successfully';
           logger.info(logText);
 
-        }, flickerTimeout);
+//        }, flickerTimeout);
+        }, 500);
       } // END WEB mode
     }, // END displayPage
 

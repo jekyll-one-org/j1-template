@@ -686,8 +686,13 @@ j1.adapter['navigator'] = (function (j1, window) {
 
       // navBar styles
       // -----------------------------------------------------------------------
+      // $('body').append('<div id="bg-primary" class="bg-primary" style="display: none"></div>');
       // var bg_primary    = j1.getStyleValue('bg-primary', 'background-color');
+      // var bg_primary    = $(".card-header").css("background-color");
       var bg_primary    = $('#bg-primary').css('background-color');
+      if (typeof bg_primary === 'undefined') {
+        var bg_primary    = navPrimaryColor;                                    # j1.getStyleValue('bg-primary', 'background-color');
+      }
       var bg_scrolled   = bg_primary;
       var bg_collapsed  = bg_primary;
 
