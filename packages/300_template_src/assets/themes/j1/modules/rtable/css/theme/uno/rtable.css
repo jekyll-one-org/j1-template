@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- #  ~/assets/themes/j1/modules/mmenu_light/css/theme/uno.js
+ #  ~/assets/themes/j1/modules/rtable/css/theme/uno/rtable.css
  #  Tablesaw v3.1.2 Theme for J1 Template
  #
  #  Product/Info:
@@ -157,8 +157,8 @@ $breakpoint-xs:                        	575px;
   .tablesaw-stack tbody td,
   .tablesaw-stack tbody th {
     display: block;
-/*  float: left; */
-/*  clear: left; */
+    /* float: left;
+    clear: left; */
     width: 100%;
   }
 

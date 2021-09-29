@@ -1,25 +1,21 @@
 /*
  # -----------------------------------------------------------------------------
- #  ~/assets/themes/j1/modules/mmenu_light/js/mmenu.js
- #  Tablesaw v3.1.2 implementation for J1 Template
+ # ~/assets/themes/j1/modules/rtable/js/rtable.js
+ # Tablesaw v3.1.2 implementation for J1 Template
  #
- #  Product/Info:
- #  https://jekyll.one
- #  https://github.com/filamentgroup/tablesaw
+ # Product/Info:
+ # https://jekyll.one
+ # https://github.com/filamentgroup/tablesaw
  #
- #  Copyright (C) 2021 Juergen Adams
- #  Copyright (c) 2013 Filament Group
+ # Copyright (C) 2021 Juergen Adams
+ # Copyright (c) 2013 Filament Group
  #
- #  J1 Template is licensed under the MIT License.
- #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
- #  Tablesaw is licensed under the MIT License.
- #  See: https://github.com/filamentgroup/tablesaw/blob/master/LICENSE
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # Tablesaw is licensed under the MIT License.
+ # See: https://github.com/filamentgroup/tablesaw/blob/master/LICENSE
  # -----------------------------------------------------------------------------
 */
-
-/*! Tablesaw - v3.1.2 - 2019-03-19
-* https://github.com/filamentgroup/tablesaw
-* Copyright (c) 2019 Filament Group; Licensed MIT */
 
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -76,26 +72,34 @@
   		(!window.blackberry || window.WebKitPoint) && // only WebKit Blackberry (OS 6+)
   		!window.operamini,
   	$: $,
-  	_init: function(element) {
+  	_init: function(element, options) {
   		Tablesaw.$(element || document).trigger("enhance.tablesaw");
+      Tablesaw.options = options;
   	},
-  	init: function(element) {
+
+    // -------------------------------------------------------------------------
+    // initializer
+    // -------------------------------------------------------------------------
+  	init: function(element, options) {
   		// Account for Tablesaw being loaded either before or after the DOMContentLoaded event is fired.
   		domContentLoadedTriggered =
   			domContentLoadedTriggered || /complete|loaded/.test(document.readyState);
   		if (!domContentLoadedTriggered) {
   			if ("addEventListener" in document) {
-  				// Use raw DOMContentLoaded instead of shoestring (may have issues in Android 2.3, exhibited by stack table)
+  				// Use raw DOMContentLoaded instead of Tablesaw (may have issues in Android 2.3, exhibited by stack table)
   				document.addEventListener("DOMContentLoaded", function() {
-  					Tablesaw._init(element);
+  					Tablesaw._init(element, options);
   				});
   			}
   		} else {
-  			Tablesaw._init(element);
+  			Tablesaw._init(element, options);
   		}
   	}
   };
 
+  // ---------------------------------------------------------------------------
+  // event handler
+  // ---------------------------------------------------------------------------
   $(document).on("enhance.tablesaw", function() {
 
   	// Extend i18n config, if one exists.
@@ -110,10 +114,16 @@
   	];
   });
 
+  // ---------------------------------------------------------------------------
+  // enhance ???
+  // ---------------------------------------------------------------------------
   if (Tablesaw.mustard) {
   	$(document.documentElement).addClass("tablesaw-enhanced");
   }
 
+  // -------------------------------------------------------------------------
+  // plugin
+  // -------------------------------------------------------------------------
   (function() {
   	var pluginName = "tablesaw";
   	var classes = {
@@ -125,16 +135,18 @@
   		refresh:  "tablesawrefresh",
   		resize:   "tablesawresize"
   	};
-  	var defaultMode =        "stack";
-  	var initSelector =       "table";
-  	var initFilterSelector = "[data-tablesaw],[data-tablesaw-mode],[data-tablesaw-sortable]";
-  	var defaultConfig = {};
+  	var defaultMode         = "stack";
+  	var initSelector        = "table";
+  	var initFilterSelector  = "[data-tablesaw],[data-tablesaw-mode],[data-tablesaw-sortable]";
+  	var defaultConfig       = {};
+    var logger              = log4javascript.getLogger('j1.rtable');
 
   	Tablesaw.events = events;
 
   	var Table = function(element) {
   		if (!element) {
   			throw new Error("Tablesaw requires an element.");
+        logger.error("Tablesaw requires an element.");
   		}
 
   		this.table = element;
@@ -182,7 +194,7 @@
   	};
 
   	Table.prototype.getConfig = function(pluginSpecificConfig) {
-  		// shoestring extend doesn’t support arbitrary args
+  		// Tablesaw extend doesn’t support arbitrary args
   		var configs = $.extend(defaultConfig, pluginSpecificConfig || {});
   		return $.extend(configs, typeof TablesawConfig !== "undefined" ? TablesawConfig : {});
   	};
@@ -548,12 +560,34 @@
 
   	var resizeTimeout;
   	$(window).on("resize", function() {
+      var winWidth;
+      $('table').each(function() {
+        var curTable = $(this);
+        var log_text;
+
+        if ($(curTable).hasClass('rtable')) {
+          winWidth = $(window).width();
+          // set show/hide all table/colgroup elements
+          //
+          if ($(window).width() < Tablesaw.options.breakpoint) {
+            log_text = '\n' + 'hide colgroups: ' + curTable.attr('id')
+            curTable.find('colgroup').hide();
+            logger.debug(log_text);
+          } else {
+            log_text = '\n' + 'show colgroup: ' + curTable.attr('id')
+            curTable.find('colgroup').show();
+            logger.debug(log_text);
+          }
+    	  }
+      });
+
   		if (!isScrolling) {
   			window.clearTimeout(resizeTimeout);
   			resizeTimeout = window.setTimeout(function() {
   				$doc.trigger(events.resize);
   			}, 150); // must be less than the scrolling timeout above.
   		}
+
   	});
 
   	Tablesaw.Table = Table;

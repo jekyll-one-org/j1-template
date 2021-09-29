@@ -48,10 +48,11 @@
     background: $lighten-200 !important;
 }
 
-table.frame-all {
-  border-width: 0px;
-  border-left: 1px solid $grey-300;
-}
+// table.frame-all {
+//   border-width: 0px;
+//   border-left: 1px solid #e0e0e0;
+//   border-top: 1px solid #e0e0e0;
+// }
 
 table tr th, table tr td {
   color: $lighten;

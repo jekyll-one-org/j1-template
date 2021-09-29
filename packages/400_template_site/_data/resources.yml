@@ -357,7 +357,7 @@ resources:
         css:                            [
                                           core/css/themes/uno-light/bootstrap,
                                           core/css/icon-fonts/materialdesign,
-                                          core/css/icon-fonts/materialdesign-light,                                          
+                                          core/css/icon-fonts/materialdesign-light,
                                           core/css/icon-fonts/fontawesome,
                                           core/css/vendor
 

@@ -685,6 +685,10 @@ defaults:
         index:                          true
         follow:                         true
 
+      toc:                              true
+      fam_menu_id:                      page_ctrl_simple
+      scrollbar:                        false
+
       personalization:                  false
       exclude_from_search:              false
 

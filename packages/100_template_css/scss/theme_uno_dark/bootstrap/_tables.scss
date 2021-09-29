@@ -30,7 +30,7 @@ table {
 }
 
 table tr.even, table tr.alt, table tr:nth-of-type(even) {
-    background: $grey-300 !important;
+    background: rgba(0, 0, 0, 0.1) !important;
 }
 
 .table {

@@ -1,5 +1,5 @@
 ---
-regenerate:                             false
+regenerate:                             true
 ---
 
 {% capture cache %}
@@ -20,6 +20,37 @@ regenerate:                             false
  #  {{ liquid_var | debug }}
  # -----------------------------------------------------------------------------
 {% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Set global settings
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment       = site.environment %}
+{% assign asset_path        = "/assets/themes/j1" %}
+
+{% comment %} Process YML config data
+================================================================================ {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign template_config   = site.data.j1_config %}
+{% assign blocks            = site.data.blocks %}
+{% assign modules           = site.data.modules %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign rtable_defaults = modules.defaults.rtable.defaults %}
+{% assign rtable_settings = modules.rtable.settings %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign rtable_options  = rtable_defaults | merge: rtable_settings %}
+
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
 
 /*
  # -----------------------------------------------------------------------------
@@ -53,6 +84,7 @@ j1.adapter['rtable'] = (function (j1, window) {
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment   = '{{environment}}';
   var moduleOptions = {};
+  var frontmatterOptions;
   var _this;
   var logger;
   var logText;
@@ -90,34 +122,55 @@ j1.adapter['rtable'] = (function (j1, window) {
         generated:   '{{site.time}}'
       }, options);
 
-      // -----------------------------------------------------------------------
-      // rtable initializer
-      // -----------------------------------------------------------------------
-      var log_text = '\n' + 'rtable is being initialized';
-      logger.info(log_text);
+      // create settings object from frontmatterOptions
+      frontmatterOptions = options != null ? $.extend({}, options) : {};
+      moduleOptions = $.extend({}, {{rtable_options | replace: 'nil', 'null' | replace: '=>', ':' }});
 
-      // Add data attribute for tablesaw to all tables of a page
-      // as Asciidoctor has NO option to pass 'data attributes'
-      // See: https://stackoverflow.com/questions/50600405/how-to-add-custom-data-attributes-with-asciidoctor
-      //
-      $('table').each(function(){
-        var curTable = $(this);
-        // jadams, 2020-09-16: class 'rtable' indicate use of 'tablesaw'
-        if ($(curTable).hasClass('rtable')) {
-          // jadams, 2020-09-17: add BS responsive class in case of an overflow
-          // jadams, 2020-11-21: BS responsive class disabled, bcause the
-          // table doesn't stretch full page width
-          //$(curTable).addClass('table-responsive')
-          // jadams, 2020-09-16: add needed CSS class/attribute for tablesaw
-          $(curTable).addClass('tablesaw');
-          $(curTable).attr('data-tablesaw-mode','stack');
-        }
-      });
+      if (typeof frontmatterOptions !== 'undefined') {
+        moduleOptions = j1.mergeData(moduleOptions, frontmatterOptions);
+      }
 
       var dependencies_met_j1_finished = setInterval(function() {
         if (j1.getState() == 'finished') {
 
-        	Tablesaw.init();
+          // -----------------------------------------------------------------------
+          // rtable initializer
+          // -----------------------------------------------------------------------
+          var log_text = '\n' + 'rtable is being initialized';
+          // -----------------------------------------------------------------------
+          // rtable initializer
+          // -----------------------------------------------------------------------
+          var log_text = '\n' + 'rtable is being initialized';
+          logger.info(log_text);
+
+          // Add data attributes for tablesaw to all tables of a page
+          // as Asciidoctor has NO option to pass 'data attributes'
+          // See: https://stackoverflow.com/questions/50600405/how-to-add-custom-data-attributes-with-asciidoctor
+          //
+          $('table').each(function(){
+            var curTable = $(this);
+            var log_text;
+            // jadams, 2020-09-16: class 'rtable' indicate use of 'tablesaw'
+            if ($(curTable).hasClass('rtable')) {
+              // jadams, 2020-09-16: add needed CSS class/attribute for tablesaw
+              $(curTable).addClass('tablesaw');
+              $(curTable).attr('data-tablesaw-mode','stack');
+
+              Tablesaw.init(curTable, moduleOptions);
+
+              // set initial state for all table/colgroup elements
+              //
+              if ($(window).width() < moduleOptions.breakpoint) {
+                log_text = '\n' + 'hide colgroups: ' + curTable.attr('id')
+                curTable.find('colgroup').hide();
+                logger.debug(log_text);
+              } else {
+                log_text = '\n' + 'show colgroup: ' + curTable.attr('id')
+                curTable.find('colgroup').show();
+                logger.debug(log_text);
+              }
+            } // END if hasClass 'rtable'
+          });
 
           _this.setState('finished');
           logger.info('\n' + 'state: ' + _this.getState());

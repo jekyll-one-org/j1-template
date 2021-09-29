@@ -88,7 +88,8 @@ code {
     word-break: break-word;
     padding: 0.125em 0.275em 0.125em 0.275em !important;
     border-radius: $border--radius;
-    background-color: $grey-300 !important;
+    // background-color: rgba(0, 0, 0, 0.1) !important;
+    background-color: $darken-100 !important;
 }
 
 /*
@@ -184,8 +185,9 @@ table {
 }
 table thead,
 table tfoot {
-  background: $grey-200;
+  background: rgba(0, 0, 0, 0.1);
   font-weight: bold;
+  font-size: large;
 }
 table thead tr th,
 table thead tr td,
@@ -207,7 +209,8 @@ table tr td {
 table tr.even,
 table tr.alt,
 table tr:nth-of-type(even) {
-  background: $grey-100;
+  // background: $grey-100;
+  background: rgba(0, 0, 0, 0.1);
 }
 table thead tr th,
 table tfoot tr th,
@@ -290,7 +293,10 @@ table.grid-rows tfoot > tr > td.tableblock {
   border-width: 1px 0 0 0;
 }
 table.frame-all {
-  border-width: 1px;
+  // border-width: 0px;
+  border-left: 1px solid #e0e0e0;
+  border-top: 1px solid #e0e0e0;
+  // border: 1px solid rgba(0, 0, 0, 0.6);
 }
 table.frame-sides {
   border-width: 0 1px;
@@ -322,10 +328,10 @@ th.valign-middle,
 td.valign-middle {
   vertical-align: middle;
 }
-table thead th,
-table tfoot th {
-  font-weight: bold;
-}
+// table thead th,
+// table tfoot th {
+//   font-weight: bold;
+// }
 tbody tr th {
   display: table-cell;
   line-height: 1.6;
