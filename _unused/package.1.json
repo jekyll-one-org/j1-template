@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "j1_template",
-  "version": "2021.2.1",
+  "version": "2021.2.2",
   "description": "Gem-based Template for Jekyll",
   "homepage": "https://jekyll.one",
   "author": {
