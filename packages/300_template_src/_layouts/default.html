@@ -262,6 +262,10 @@ layout:                                 compress
           var logger = log4javascript.getLogger('j1.layout.default');
 
           $('a[href*=\\#]').on('click', function (event) {
+            // ignore void links
+            if (window.location.href.includes('#void')||this.href.includes('#void')) {
+              return false
+            }
             // for external links, redirect to this page
             if (window.location.pathname !== this.pathname) {
               window.location.href = this.href;

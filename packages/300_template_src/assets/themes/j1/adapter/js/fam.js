@@ -55,7 +55,6 @@ regenerate:                             true
   {% assign production = true %}
 {% endif %}
 
-
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/fam.js
@@ -232,6 +231,7 @@ j1.adapter['fam'] = (function (j1, window) {
       $('a[href="#void"]').click(function(e) {
         e.preventDefault ? e.preventDefault() : e.returnValue = false;
         logger.info('\n' + 'bound click event to "#void", suppress default action');
+        return false;
       });
 
       // check if multiple buttons detected
