@@ -252,15 +252,97 @@ layout:                                 compress
     });
   </script>
 
-  {% comment %} Initialize Window History (back on <ESC>)
+  {% comment %} Smooth scroll for in-page anchors (e.g links on badges or footnotes)
+  ------------------------------------------------------------------------------ {% endcomment %}
+  <!-- [INFO   ] [j1.layout.default.html                ] [ initialize smooth scroll for in-page anchors ] -->
+  <script>
+    $(function() {
+      var dependencies_met_page_ready = setInterval (function (options) {
+        if (j1.getState() === 'finished') {
+          var logger = log4javascript.getLogger('j1.layout.default');
+
+          $('a[href*=\\#]').on('click', function (event) {
+            // for external links, redirect to this page
+            if (window.location.pathname !== this.pathname) {
+              window.location.href = this.href;
+            } else {
+              // continue on in-page anchor
+              var toccerScrollDuration  = 300;
+              var toccerScrollOffset    = 10;
+
+              // calculate offset value for correct (smooth) scroll position
+              //
+              var $pagehead       = $('.attic');
+              var $navbar         = $('nav.navbar');
+              var $adblock        = $('#adblock');
+              var navbarType      = $navbar.hasClass('navbar-fixed') ? 'fixed' : 'scrolled';
+              var fontSize        = $('body').css('font-size').replace('px','');
+              var start           = window.pageYOffset;
+              var l               = parseInt(fontSize);
+              var h               = $pagehead.length ? $pagehead.height() : 0;
+              var n               = $navbar.length ? $navbar.height() : 0;
+              var a               = $adblock.length ? $adblock.height() : 0;
+              var scrollOffset    = navbarType == 'fixed' ? -1*(n + a + l) : -1*(h + n + a + l);
+
+              // TODO:  to be checked why this static offset (toccerScrollOffset)
+              //        is needed
+              scrollOffset        = scrollOffset + toccerScrollOffset;
+
+              logger.debug('\n' + 'scroll to anchor: ' + this.hash);
+          		$("html, body").animate({
+          			scrollTop: $($(this).attr("href")).offset().top + scrollOffset + "px"
+          		}, {
+          			duration: toccerScrollDuration,
+          			easing: "swing"
+          		});
+              // diable bubble up the event
+          		return false;
+            } // End in-page link
+        	}); // END click event (on anchors)
+          clearInterval(dependencies_met_page_ready);
+        } //END state finished
+      }); // END dependency check
+    }); // END page ready
+  </script>
+
+  <!-- [INFO   ] [j1.layout.default.html                ] [ j1.page.{{page.title}}: save the current page to userstate cookie ] -->
+  {% comment %} Update cookie for lastpage
+  ------------------------------------------------------------------------------ {% endcomment %}
+  <script>
+    $(function() {
+      var dependencies_met_page_ready = setInterval (function (options) {
+        if (j1.getState() === 'finished') {
+          var logger = log4javascript.getLogger('j1.layout.default');
+
+          function setLastPage() {
+            var cookie_names                = j1.getCookieNames();
+            const user_state_cookie_name    = cookie_names.user_session;
+            var user_state                  = j1.readCookie(user_state_cookie_name);
+            var user_state_last_page        = window.location.pathname;
+            user_state.last_page            = user_state_last_page;
+
+            j1.writeCookie({
+              name: user_state_cookie_name,
+              data: user_state,
+              samesite: 'Strict'
+            });
+            logger.debug('\n' + 'saved current page to cookie :' + user_state_last_page);
+          }
+          setLastPage();
+          clearInterval(dependencies_met_page_ready);
+        }
+      });
+    });
+  </script>
+
+  {% comment %} Initialize Window History for back on <ESC>
   ------------------------------------------------------------------------------ {% endcomment %}
   <!-- [INFO   ] [j1.layout.default.html                ] [ initialize window.history.back ] -->
   <script>
-  // Redirect on KEY <ESC>
-  window.onkeyup = function (e)
-  {
-   if (e.keyCode == 27) window.history.back();
-  }
+    // Redirect on KEY <ESC>
+    window.onkeyup = function (e) {
+     if (e.keyCode == 27) window.history.back();
+    }
   </script>
   <!-- [INFO   ] [j1.layout.default.html                ] [ end page processing ] -->
 </html>

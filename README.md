@@ -63,7 +63,7 @@ issues for private or professional use.
 * Themeable source code highlighting (Rouge)
 * Desktop and Mobile Web and Navigation ready
 * Fully configurable
-* 100/100/100 Google Lighthouse scores
+* Highest Google Lighthouse scores
 
 ## Modules and Extensions
 
