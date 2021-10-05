@@ -45,8 +45,6 @@ window.Cookies                          = require('js-cookie');
 window.log4javascript                   = require('log4javascript');
 window.liteURL                          = require('lite-url');
 window.platform                         = require('platform');
-// window.yaml                          = require('js-yaml');                   # NOT longer used/needed
-// window.uuid                          = require('uuid/v4');                   # NOT longer used/needed
 
 // Core Libraries - build|required from SOURCE
 // -----------------------------------------------------------------------------
@@ -55,13 +53,14 @@ window.platform                         = require('platform');
 // exposed for run-time to the global namespace (window).
 // -----------------------------------------------------------------------------
 window.j1.adapter                       = require('./js/adapter/adapter.js');
+window.j1.anime                         = require('./js/anime/anime.js');       // added for fam
 window.j1.core                          = require('./js/core/core.js');
 window.j1.core.navigator                = require('./js/navigator/navigator.js');
-// window.j1.core.cookiebar             = require('./js/cookiebar/cookiebar.js');
-// window.j1.core.cookieconsent         = require('./js/cookieconsent/cookieconsent.js');
 window.j1.core.asciidoctor              = require('./js/asciidoctor/asciidoctor.js');
 window.j1.core.scrollSmooth             = require('./js/scroll-smooth/scroll-smooth.js');
-window.j1.anime                         = require('./js/anime/anime.js');       // added for fam
+
+window.deeplTranslator                  = require('./js/deepl-translator');
+
 // window.j1.fam                        = require('./js/fam/fam.js');           // cannot used until NOT rewritten to jQuery
 
 // Following source objects|modules are *implicetly* forced to be

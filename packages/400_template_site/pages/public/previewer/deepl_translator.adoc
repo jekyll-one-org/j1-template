@@ -1,0 +1,235 @@
+---
+title:                                  Translator
+tagline:                                deepl v2
+date:                                   2020-11-03 00:00:00 +100
+description: >
+                                        Welcome to the preview page focussing on the image module. This page
+                                        shows some valuable features of the J1 Template to manage your image-based
+                                        content using lightboxes, carousels (slider), and galleries.
+
+categories:                             [ Previewer ]
+tags:                                   [ Deepl ]
+
+comments:                               false
+fam_menu_id:                            page_ctrl_simple
+
+permalink:                              /pages/public/previewer/deepl-translator/
+regenerate:                             false
+
+resources:                              [ j1deepl ]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
+          alt:                          Photo by Ricardo Gomez Angel on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Ricardo Gomez Angel
+            href:                       https://unsplash.com/@ripato/portfolio
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="none" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// https://github.com/EdwardBalaj/Simple-DeepL-API-Integration
+
+// Include sub-documents
+// -----------------------------------------------------------------------------
+
+== Translation with Deepl
+
+Translate with the _Deepl_. J1 integrates the _Deepl_ for free translations
+(Free API) as well as for the professional version of the Pro API.
+
+The API in version 2 offers one of the best machine translation technologies
+for 26 popular spoken languages worldwide.
+
+++++
+<!-- div class="paragraph">
+  <p>
+    How do I call a function after a find for all the returned elements?
+  </p>
+</div -->
+
+<!-- div class="form-group bmd-form-group">
+  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  <label for="exampleFormControlTextarea1" class="bmd-label-floating">Example textarea</label>
+</div -->
+
+<div class="mt-3">
+
+	<form id="layout">
+		<!-- Source languages -->
+    <div class="form-group bmd-form-group">
+      <select id="source-language" class="form-control">
+        <option selected value="auto">Language Auto Detection</option>
+        <option value="CS">Czech</option>
+        <option value="DA">Danish</option>
+        <option value="DE">German</option>
+        <option value="NL">Dutch</option>
+        <option value="EN">English</option>
+        <option value="FR">French</option>
+        <option value="EL">Greek</option>
+        <option value="IT">Italian</option>
+        <option value="ES">Spanish</option>
+        <option value="SV">Swedish</option>
+      </select>
+      <label for="source-language" class="bmd-label-floating">Source Languages</label>
+    </div>
+
+    <div class="form-group bmd-form-group mb-4">
+      <textarea id="original-text" class="form-control"  type="text" rows="3"></textarea>
+      <label for="original-text" class="bmd-label-floating ml-0 mt-0">Your text</label>
+    </div>
+
+		<!-- Destination languages -->
+		<div id="destination">
+      <div class="form-group bmd-form-group">
+        <select id="destination-language" class="form-control" name="destination-language">
+  				<option value="BG">Bulgarian</option>
+  				<option value="ZH">Chinese</option>
+  				<option value="CS">Czech</option>
+  				<option value="DA">Danish</option>
+  				<option value="NL">Dutch</option>
+          <option selected value="EN">English</option>
+  				<option value="EN-US">English (American)</option>
+  				<option value="EN-GB">English (British)</option>
+  				<option value="ET">Estonian</option>
+  				<option value="FI">Finnish</option>
+  				<option value="FR">French</option>
+  				<option value="DE">German</option>
+  				<option value="EL">Greek</option>
+  				<option value="HU">Hungarian</option>
+  				<option value="IT">Italian</option>
+  				<option value="JA">Japanese</option>
+  				<option value="LV">Latvian</option>
+  				<option value="LT">Lithuanian</option>
+  				<option value="PL">Polish</option>
+          <option value="PT">Portuguese</option>
+  				<option value="PT-PT">Portuguese (Portugal)</option>
+  				<option value="PT-BR">Portuguese (Brazilian)</option>
+  				<option value="RO">Romanian</option>
+  				<option value="RU">Russian</option>
+  				<option value="SK">Slovak</option>
+  				<option value="SL">Slovenian</option>
+  				<option value="ES">Spanish</option>
+  				<option value="SV">Swedish</option>
+        </select>
+        <label for="destination-language" class="bmd-label-floating">Destination Languages</label>
+      </div>
+
+      <div class="form-group bmd-form-group">
+        <textarea id="translated-text" class="form-control"  type="text" rows="3"></textarea>
+        <!-- label for="translated-text" class="bmd-label-floating">Your text for translation</label -->
+      </div>
+
+      <!-- Translation control buttons -->
+  		<input id="translate" class="btn btn-info btn-raised mt-5" style="min-width: 10rem" type="button" value="Translate">
+      <button id="clear-translate" type="button" name="clear"
+        class="btn btn-raised btn-flex btn-primary mt-5 ml-2"
+        aria-label="Clear Button">
+        Clear Translation
+      </button>
+
+		</div>
+
+	</form>
+</div>
+++++
+
+++++
+<style>
+
+textarea {
+	word-wrap: break-word;
+	min-width: 100%;
+	max-width: 100%;
+	min-height: 10em;
+}
+
+select {
+	display: block;
+	width: 10em;
+	margin: 1em 0;
+}
+
+</style>
+++++
+
+++++
+<script>
+  $(document).ready(function() {
+
+    // clear text-area elements
+    $('#clear-translate').click(function() {
+      $("#original-text").val('');
+      $("#translated-text").val('');
+    });
+
+    // run translation
+    $('#translate').click(function() {
+      var fromLanguage  = $('#source-language').val();
+      var toLanguage    = $('#destination-language').val();
+
+      // var paragraphs    = $('p');
+      // for (para of paragraphs) {
+      //   $(para).addClass('brums-content');
+      // }
+
+      // var paragraphs    =  $('#main-content').find('p');
+
+      // $('.paragraph').find('p').each(function() {
+      //   $('p').addClass('translate');
+      //   $('.translate').j1deepl({
+      //     auth_key: 'fe1c56dc-1342-9899-26db-c5d701791e2d:fx',
+      //     source_lang: fromLanguage,
+      //     target_lang: toLanguage,
+      //     targetElement: '.translate'
+      //   });
+      //   $('.translate').j1deepl('destroy');
+      // });
+
+      // Create new translations ($objects)
+      $('#original-text').j1deepl({
+        api:      'pro',
+        auth_key: '1c360075-1a30-28c7-e4eb-2c0c0164ce4b',
+        source_lang: fromLanguage,
+        target_lang: toLanguage,
+        targetElement: '#translated-text'
+      });
+
+      // $('.translate').j1deepl({
+      //   auth_key: 'fe1c56dc-1342-9899-26db-c5d701791e2d:fx',
+      //   source_lang: fromLanguage,
+      //   target_lang: toLanguage,
+      //   targetElement: '.translate'
+      // });
+
+      // destroy existing translation for next tranlations ($object)
+      $('#original-text').j1deepl('destroy');
+      //$('.translate').j1deepl('destroy');
+
+     });
+  });
+</script>
+++++

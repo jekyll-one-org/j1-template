@@ -170,6 +170,9 @@
 #
 - item:                                 Tools
   sublevel:
+    - title:                            Deepl Translator
+      href:                             /pages/public/previewer/deepl-translator/
+      icon:                             translate    
     - title:                            Gallery Previewer
       href:                             /pages/public/previewer/justified_gallery/
       icon:                             view-dashboard

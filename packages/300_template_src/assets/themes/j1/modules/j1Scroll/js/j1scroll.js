@@ -11,6 +11,9 @@
  # J1 Template is licensed under the MIT License.
  # For details, see https://jekyll.one
  # -----------------------------------------------------------------------------
+ # NOTE: Based on https://github.com/jquery-boilerplate/jquery-boilerplate
+ # See:  https://www.dotnetcurry.com/jquery/1069/authoring-jquery-plugins
+ # -----------------------------------------------------------------------------
 */
 
 // the semi-colon before function invocation is a SAFETY method against
