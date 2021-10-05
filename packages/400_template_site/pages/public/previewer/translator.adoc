@@ -1,19 +1,20 @@
 ---
-title:                                  Translator
-tagline:                                deepl v2
-date:                                   2020-11-03 00:00:00 +100
+title:                                  Translation
+tagline:                                j1 translator
+date:                                   2021-10-06 00:00:00 +100
 description: >
-                                        Welcome to the preview page focussing on the image module. This page
-                                        shows some valuable features of the J1 Template to manage your image-based
-                                        content using lightboxes, carousels (slider), and galleries.
+                                        Translate with the _Deepl_. J1 integrates the _Deepl_ for free translations
+                                        (Free API) as well as for the professional version of the Pro API. The API
+                                        in version 2 offers one of the best machine translation technologies
+                                        for 26 popular spoken languages worldwide.
 
 categories:                             [ Previewer ]
-tags:                                   [ Deepl ]
+tags:                                   [ Translator, Deepl ]
 
 comments:                               false
 fam_menu_id:                            page_ctrl_simple
 
-permalink:                              /pages/public/previewer/deepl-translator/
+permalink:                              /pages/public/previewer/translator/
 regenerate:                             false
 
 resources:                              [ j1deepl ]
@@ -59,46 +60,42 @@ resource_options:
 == Translation with Deepl
 
 Translate with the _Deepl_. J1 integrates the _Deepl_ for free translations
-(Free API) as well as for the professional version of the Pro API.
-
-The API in version 2 offers one of the best machine translation technologies
-for 26 popular spoken languages worldwide.
+(Free API) as well as for the professional version of the Pro system. The API
+in version 2 offers one of the best machine translation technologies for 26
+popular spoken languages worldwide.
 
 ++++
-<!-- div class="paragraph">
-  <p>
-    How do I call a function after a find for all the returned elements?
-  </p>
-</div -->
-
-<!-- div class="form-group bmd-form-group">
-  <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-  <label for="exampleFormControlTextarea1" class="bmd-label-floating">Example textarea</label>
-</div -->
-
 <div class="mt-3">
 
 	<form id="layout">
 		<!-- Source languages -->
     <div class="form-group bmd-form-group">
       <select id="source-language" class="form-control">
-        <option selected value="auto">Language Auto Detection</option>
+        <option selected value="auto">Auto Detection</option>
         <option value="CS">Czech</option>
         <option value="DA">Danish</option>
         <option value="DE">German</option>
-        <option value="NL">Dutch</option>
-        <option value="EN">English</option>
-        <option value="FR">French</option>
-        <option value="EL">Greek</option>
-        <option value="IT">Italian</option>
         <option value="ES">Spanish</option>
+        <option value="EN">English</option>
+        <option value="EL">Greek</option>
+        <option value="FI">Finnish</option>
+        <option value="FR">French</option>
+        <option value="HU">Hungarian</option>
+        <option value="IT">Italian</option>
+        <option value="NL">Dutch</option>
+        <option value="PT">Portuguese</option>
+        <option value="RO">Romanian</option>
+        <option value="RU">Russian</option>
+        <option value="SK">Slovak</option>
+        <option value="SL">Slovenian</option>
+        <option value="SV">Swedish</option>
         <option value="SV">Swedish</option>
       </select>
       <label for="source-language" class="bmd-label-floating">Source Languages</label>
     </div>
 
-    <div class="form-group bmd-form-group mb-4">
-      <textarea id="original-text" class="form-control"  type="text" rows="3"></textarea>
+    <div id="source-group"class="form-group bmd-form-group mb-4">
+      <textarea id="original-text" class="form-control" type="text" rows="5"></textarea>
       <label for="original-text" class="bmd-label-floating ml-0 mt-0">Your text</label>
     </div>
 
@@ -107,23 +104,23 @@ for 26 popular spoken languages worldwide.
       <div class="form-group bmd-form-group">
         <select id="destination-language" class="form-control" name="destination-language">
   				<option value="BG">Bulgarian</option>
-  				<option value="ZH">Chinese</option>
   				<option value="CS">Czech</option>
   				<option value="DA">Danish</option>
-  				<option value="NL">Dutch</option>
+          <option value="DE">German</option>
+          <option value="EL">Greek</option>
+          <option value="ES">Spanish</option>
           <option selected value="EN">English</option>
   				<option value="EN-US">English (American)</option>
   				<option value="EN-GB">English (British)</option>
   				<option value="ET">Estonian</option>
   				<option value="FI">Finnish</option>
   				<option value="FR">French</option>
-  				<option value="DE">German</option>
-  				<option value="EL">Greek</option>
   				<option value="HU">Hungarian</option>
   				<option value="IT">Italian</option>
   				<option value="JA">Japanese</option>
   				<option value="LV">Latvian</option>
   				<option value="LT">Lithuanian</option>
+          <option value="NL">Dutch</option>
   				<option value="PL">Polish</option>
           <option value="PT">Portuguese</option>
   				<option value="PT-PT">Portuguese (Portugal)</option>
@@ -132,15 +129,15 @@ for 26 popular spoken languages worldwide.
   				<option value="RU">Russian</option>
   				<option value="SK">Slovak</option>
   				<option value="SL">Slovenian</option>
-  				<option value="ES">Spanish</option>
   				<option value="SV">Swedish</option>
+          <option value="ZH">Chinese</option>
         </select>
         <label for="destination-language" class="bmd-label-floating">Destination Languages</label>
       </div>
 
-      <div class="form-group bmd-form-group">
-        <textarea id="translated-text" class="form-control"  type="text" rows="3"></textarea>
-        <!-- label for="translated-text" class="bmd-label-floating">Your text for translation</label -->
+      <div id="translated-group" class="form-group bmd-form-group">
+        <textarea id="translated-text" class="form-control"  type="text" rows="5"></textarea>
+        <label for="translated-text" class="bmd-label-floating ml-0 mt-0">Your translation</label>
       </div>
 
       <!-- Translation control buttons -->
@@ -155,35 +152,30 @@ for 26 popular spoken languages worldwide.
 
 	</form>
 </div>
-++++
 
-++++
 <style>
 
-textarea {
-	word-wrap: break-word;
-	min-width: 100%;
-	max-width: 100%;
-	min-height: 10em;
+.form-control {
+  line-height: 1.5 !important;
 }
 
-select {
-	display: block;
-	width: 10em;
-	margin: 1em 0;
+textarea {
+	min-height: 8em;
 }
 
 </style>
-++++
 
-++++
 <script>
   $(document).ready(function() {
-
-    // clear text-area elements
+    // clear all text-area elements
     $('#clear-translate').click(function() {
       $("#original-text").val('');
       $("#translated-text").val('');
+
+      // manually reset filled state
+      $('#source-group').removeClass('is-filled');
+      $('#translated-group').removeClass('is-filled');
+
     });
 
     // run translation
@@ -191,25 +183,7 @@ select {
       var fromLanguage  = $('#source-language').val();
       var toLanguage    = $('#destination-language').val();
 
-      // var paragraphs    = $('p');
-      // for (para of paragraphs) {
-      //   $(para).addClass('brums-content');
-      // }
-
-      // var paragraphs    =  $('#main-content').find('p');
-
-      // $('.paragraph').find('p').each(function() {
-      //   $('p').addClass('translate');
-      //   $('.translate').j1deepl({
-      //     auth_key: 'fe1c56dc-1342-9899-26db-c5d701791e2d:fx',
-      //     source_lang: fromLanguage,
-      //     target_lang: toLanguage,
-      //     targetElement: '.translate'
-      //   });
-      //   $('.translate').j1deepl('destroy');
-      // });
-
-      // Create new translations ($objects)
+      // Create new translations (jquery objects)
       $('#original-text').j1deepl({
         api:      'pro',
         auth_key: '1c360075-1a30-28c7-e4eb-2c0c0164ce4b',
@@ -217,18 +191,11 @@ select {
         target_lang: toLanguage,
         targetElement: '#translated-text'
       });
-
-      // $('.translate').j1deepl({
-      //   auth_key: 'fe1c56dc-1342-9899-26db-c5d701791e2d:fx',
-      //   source_lang: fromLanguage,
-      //   target_lang: toLanguage,
-      //   targetElement: '.translate'
-      // });
-
-      // destroy existing translation for next tranlations ($object)
+      // destroy existing jquery objects for next translation
       $('#original-text').j1deepl('destroy');
-      //$('.translate').j1deepl('destroy');
 
+      // manually set filled state
+      $('#translated-group').addClass('is-filled');
      });
   });
 </script>
