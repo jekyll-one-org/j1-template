@@ -3,10 +3,11 @@ title:                                  Translation
 tagline:                                j1 translator
 date:                                   2021-10-06 00:00:00 +100
 description: >
-                                        Translate with the _Deepl_. J1 integrates the _Deepl_ for free translations
-                                        (Free API) as well as for the professional version of the Pro API. The API
-                                        in version 2 offers one of the best machine translation technologies
-                                        for 26 popular spoken languages worldwide.
+                                        Machine translation (MT) transfers information from one language to another
+                                        by a computer without human intervention. NMT is the most advanced method
+                                        of computer-generated translations. Thanks to autonomous learning based on
+                                        artificial intelligence.Deepl offers one of the best NMTengines worldwide.
+                                        Try translations with Jekyll One and Deepl on your own!
 
 categories:                             [ Previewer ]
 tags:                                   [ Translator, Deepl ]
@@ -46,6 +47,10 @@ resource_options:
 // -----------------------------------------------------------------------------
 {% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
 
+//  Set global Liquid vars
+// -----------------------------------------------------------------------------
+{% assign environment = site.environment %}
+
 // Load page attributes
 // -----------------------------------------------------------------------------
 {% include {{load_attributes}} scope="none" %}
@@ -54,21 +59,59 @@ resource_options:
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // https://github.com/EdwardBalaj/Simple-DeepL-API-Integration
 
+// Set local liquid vars
+// -----------------------------------------------------------------------------
+{% if environment == "development" or environment == "test" %}
+  {% assign translation_limit = 50000 %}
+{% else %}
+  {% assign translation_limit = 500 %}
+{% endif %}
+
+
 // Include sub-documents
 // -----------------------------------------------------------------------------
+Machine translation (MT) transfers information from one language to another
+by a computer without human intervention. NMT is the most advanced method
+of computer-generated translations. Thanks to autonomous learning based on
+artificial intelligence.
+
+== Neural Algorithms (NMT)
+
+Neural Machine Translation (NMT) works on a completely different principle
+than previous statistics-based or rule-based machine translation methods.
+The NMT uses a large neural network based on the human brain model with
+the help of artificial intelligence.
+
+It is the most advanced method of computer-generated translations. Thanks
+to autonomous learning based on artificial intelligence, Big Data, and
+Deep Learning, this method has made enormous progress in recent years.
+Nowadays, neural machine translation programs can be used as a basis for
+professional translations.
+
+Neural algorithms can generate accurate translations as well as also
+learn a language. This technology improves the quality of the translated
+data continuously improved. For the NMT to work well, it must be trained
+to be used. Training means that a large amount of data feeds the
+algorithms to improve the reliability of the final results.
 
 == Translation with Deepl
 
-Translate with the _Deepl_. J1 integrates the _Deepl_ for free translations
-(Free API) as well as for the professional version of the Pro system. The API
-in version 2 offers one of the best machine translation technologies for 26
-popular spoken languages worldwide.
+_Deepl_ offers one of the best NMT engines worldwide. The translater can be
+used online or by an application (app) installed on a computer locally.
+The third option to translate is the cloud-based service offered
+by the *Deepl API*.
+
+J1 integrates the cloud-based translator service for the *free* service and
+professional translations using the *Pro system*. The current API version V2
+supports the translation of more than 25 languages vice versa.
+
+Try translations with _Jekyll One_ and _Deepl_ on your own!
 
 ++++
-<div class="mt-3">
-
+<div class="mt-5">
 	<form id="layout">
-		<!-- Source languages -->
+
+		<!-- source language -->
     <div class="form-group bmd-form-group">
       <select id="source-language" class="form-control">
         <option selected value="auto">Auto Detection</option>
@@ -91,112 +134,126 @@ popular spoken languages worldwide.
         <option value="SV">Swedish</option>
         <option value="SV">Swedish</option>
       </select>
-      <label for="source-language" class="bmd-label-floating">Source Languages</label>
+      <label for="source-language" class="bmd-label-floating">Source Language</label>
     </div>
 
+    <!-- select if translated text should lean towards formal|informal language -->
+    <div class="form-group bmd-form-group">
+      <select id="language-scope" class="form-control">
+        <option selected value="default">Regular language</option>
+        <option value="more">Formal language</option>
+        <option value="less">Informal language</option>
+      </select>
+      <label for="language-scope" class="bmd-label-floating">Language scope</label>
+    </div>
+
+    <!-- translation input -->
     <div id="source-group"class="form-group bmd-form-group mb-4">
-      <textarea id="original-text" class="form-control" type="text" rows="5"></textarea>
-      <label for="original-text" class="bmd-label-floating ml-0 mt-0">Your text</label>
+      <textarea id="original-text" class="form-control" type="text" rows="3"></textarea>
+      <label for="original-text" class="bmd-label-floating ml-0 mt-0">Your text (max: 500 characters)</label>
     </div>
 
-		<!-- Destination languages -->
-		<div id="destination">
-      <div class="form-group bmd-form-group">
-        <select id="destination-language" class="form-control" name="destination-language">
-  				<option value="BG">Bulgarian</option>
-  				<option value="CS">Czech</option>
-  				<option value="DA">Danish</option>
-          <option value="DE">German</option>
-          <option value="EL">Greek</option>
-          <option value="ES">Spanish</option>
-          <option selected value="EN">English</option>
-  				<option value="EN-US">English (American)</option>
-  				<option value="EN-GB">English (British)</option>
-  				<option value="ET">Estonian</option>
-  				<option value="FI">Finnish</option>
-  				<option value="FR">French</option>
-  				<option value="HU">Hungarian</option>
-  				<option value="IT">Italian</option>
-  				<option value="JA">Japanese</option>
-  				<option value="LV">Latvian</option>
-  				<option value="LT">Lithuanian</option>
-          <option value="NL">Dutch</option>
-  				<option value="PL">Polish</option>
-          <option value="PT">Portuguese</option>
-  				<option value="PT-PT">Portuguese (Portugal)</option>
-  				<option value="PT-BR">Portuguese (Brazilian)</option>
-  				<option value="RO">Romanian</option>
-  				<option value="RU">Russian</option>
-  				<option value="SK">Slovak</option>
-  				<option value="SL">Slovenian</option>
-  				<option value="SV">Swedish</option>
-          <option value="ZH">Chinese</option>
-        </select>
-        <label for="destination-language" class="bmd-label-floating">Destination Languages</label>
-      </div>
+		<!-- destination language -->
+    <div class="form-group bmd-form-group">
+      <select id="destination-language" class="form-control" name="destination-language">
+				<option value="BG">Bulgarian</option>
+				<option value="CS">Czech</option>
+				<option value="DA">Danish</option>
+        <option value="DE">German</option>
+        <option value="EL">Greek</option>
+        <option value="ES">Spanish</option>
+        <option selected value="EN">English</option>
+				<option value="EN-US">English (American)</option>
+				<option value="EN-GB">English (British)</option>
+				<option value="ET">Estonian</option>
+				<option value="FI">Finnish</option>
+				<option value="FR">French</option>
+				<option value="HU">Hungarian</option>
+				<option value="IT">Italian</option>
+				<option value="JA">Japanese</option>
+				<option value="LV">Latvian</option>
+				<option value="LT">Lithuanian</option>
+        <option value="NL">Dutch</option>
+				<option value="PL">Polish</option>
+        <option value="PT">Portuguese</option>
+				<option value="PT-PT">Portuguese (Portugal)</option>
+				<option value="PT-BR">Portuguese (Brazilian)</option>
+				<option value="RO">Romanian</option>
+				<option value="RU">Russian</option>
+				<option value="SK">Slovak</option>
+				<option value="SL">Slovenian</option>
+				<option value="SV">Swedish</option>
+        <option value="ZH">Chinese</option>
+      </select>
+      <label for="destination-language" class="bmd-label-floating">Destination Language</label>
+    </div>
 
-      <div id="translated-group" class="form-group bmd-form-group">
-        <textarea id="translated-text" class="form-control"  type="text" rows="5"></textarea>
-        <label for="translated-text" class="bmd-label-floating ml-0 mt-0">Your translation</label>
-      </div>
+    <!-- translation output -->
+    <div id="translated-group" class="form-group bmd-form-group">
+      <textarea id="translated-text" class="form-control"  type="text" rows="3"></textarea>
+      <label for="translated-text" class="bmd-label-floating ml-0 mt-0">Your translation</label>
+    </div>
 
-      <!-- Translation control buttons -->
-  		<input id="translate" class="btn btn-info btn-raised mt-5" style="min-width: 10rem" type="button" value="Translate">
-      <button id="clear-translate" type="button" name="clear"
-        class="btn btn-raised btn-flex btn-primary mt-5 ml-2"
-        aria-label="Clear Button">
-        Clear Translation
-      </button>
-
-		</div>
+    <!-- control buttons -->
+		<input id="translate" class="btn btn-info btn-raised mt-3 mb-5" style="min-width: 10rem" type="button" value="Translate">
+    <button id="clear-translate" type="button" name="clear"
+      class="btn btn-raised btn-flex btn-primary mt-3 mb-5 ml-2"
+      aria-label="Clear Button">
+      Clear Translation
+    </button>
 
 	</form>
 </div>
+++++
 
+++++
 <style>
-
 .form-control {
   line-height: 1.5 !important;
 }
-
-textarea {
-	min-height: 8em;
-}
-
 </style>
+++++
 
+++++
 <script>
   $(document).ready(function() {
-    // clear all text-area elements
+    // reset translation event handler (button)
     $('#clear-translate').click(function() {
+      // clear all text-area elements
       $("#original-text").val('');
       $("#translated-text").val('');
-
-      // manually reset filled state
+      // manually reset fill states
       $('#source-group').removeClass('is-filled');
       $('#translated-group').removeClass('is-filled');
+    }); // END reset translation
 
-    });
-
-    // run translation
+    // translation event handler (button)
     $('#translate').click(function() {
       var fromLanguage  = $('#source-language').val();
       var toLanguage    = $('#destination-language').val();
+      var languageScope = $('#language-scope').val();
 
-      // Create new translations (jquery objects)
+      // create new translation
       $('#original-text').j1deepl({
-        api:      'pro',
-        auth_key: '1c360075-1a30-28c7-e4eb-2c0c0164ce4b',
-        source_lang: fromLanguage,
-        target_lang: toLanguage,
-        targetElement: '#translated-text'
-      });
-      // destroy existing jquery objects for next translation
+        api:            'pro',
+        auth_key:       '1c360075-1a30-28c7-e4eb-2c0c0164ce4b',
+        max_char:       {{translation_limit}},
+        formality:      languageScope,
+        source_lang:    fromLanguage,
+        target_lang:    toLanguage,
+        targetElement:  '#translated-text',
+      }); // END new translation
+
+      // reset translation for next run
+      // -----------------------------------------------------------------------
+      // destroy existing jquery object|s
       $('#original-text').j1deepl('destroy');
 
-      // manually set filled state
+      // update form elements
+      // -----------------------------------------------------------------------
+      // set fill state
       $('#translated-group').addClass('is-filled');
-     });
-  });
+    }); // END run translation
+  }); // END document ready
 </script>
 ++++
