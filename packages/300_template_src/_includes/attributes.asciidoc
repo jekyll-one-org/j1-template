@@ -428,7 +428,7 @@ end::tables[]
 // -----------------------------------------------------------------------------
 tag::products[]
 :j1--license:                                     MIT License
-:j1--version:                                     2021.2.2
+:j1--version:                                     2021.2.3
 :j1--site-name:                                   Jekyll One
 end::products[]
 
