@@ -75,7 +75,7 @@ by a computer without human intervention. NMT is the most advanced method
 of computer-generated translations. Thanks to autonomous learning based on
 artificial intelligence.
 
-== Neural Algorithms (NMT)
+== Neural Machine Translation
 
 Neural Machine Translation (NMT) works on a completely different principle
 than previous statistics-based or rule-based machine translation methods.
@@ -216,9 +216,9 @@ Try translations with _Jekyll One_ and _Deepl_ on your own!
 
 ++++
 <script>
-  $(document).ready(function() {
+  $(function() {
     // reset translation event handler (button)
-    $('#clear-translate').click(function() {
+    $('#clear-translate').click(function () {
       // clear all text-area elements
       $("#original-text").val('');
       $("#translated-text").val('');
@@ -228,20 +228,20 @@ Try translations with _Jekyll One_ and _Deepl_ on your own!
     }); // END reset translation
 
     // translation event handler (button)
-    $('#translate').click(function() {
-      var fromLanguage  = $('#source-language').val();
-      var toLanguage    = $('#destination-language').val();
+    $('#translate').click(function () {
+      var fromLanguage = $('#source-language').val();
+      var toLanguage = $('#destination-language').val();
       var languageScope = $('#language-scope').val();
 
       // create new translation
       $('#original-text').j1deepl({
-        api:            'pro',
-        auth_key:       '1c360075-1a30-28c7-e4eb-2c0c0164ce4b',
-        max_char:       {{translation_limit}},
-        formality:      languageScope,
-        source_lang:    fromLanguage,
-        target_lang:    toLanguage,
-        targetElement:  '#translated-text',
+        api: 'pro',
+        auth_key: '1c360075-1a30-28c7-e4eb-2c0c0164ce4b',
+        max_char: 500,
+        formality: languageScope,
+        source_lang: fromLanguage,
+        target_lang: toLanguage,
+        targetElement: '#translated-text',
       }); // END new translation
 
       // reset translation for next run
@@ -254,6 +254,6 @@ Try translations with _Jekyll One_ and _Deepl_ on your own!
       // set fill state
       $('#translated-group').addClass('is-filled');
     }); // END run translation
-  }); // END document ready
+  });
 </script>
 ++++
