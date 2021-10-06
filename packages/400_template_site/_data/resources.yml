@@ -1327,7 +1327,7 @@ resources:
         init_function:                  [ j1.adapter.j1Scroll.init ]
 
   # ----------------------------------------------------------------------------
-  # j1Scroll
+  # j1Deepl
   # NOTE: https://github.com/jquery-boilerplate/jquery-boilerplate
   #
   - name:                               j1Deepl
