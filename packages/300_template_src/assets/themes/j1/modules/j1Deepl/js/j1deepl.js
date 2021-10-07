@@ -28,21 +28,21 @@
     var pluginName = 'j1deepl',
     defaults = {
       api:                  'free',                                             // free (default) | pro
-      auth_key:             false,                                              // MANDATORY paramter
-      source_lang:          'auto',                                             // auto (default) | supported language
-      target_lang:          'DE',
-      max_char:             false,
-      split_sentences:      '1',                                                //
-      preserve_formatting:  '0',
-      formality:            'default',
-      tag_handling:         false,                                              // false (value=0) or 'xml'
-      outline_detection:    true,                                               // false (value=0) or true (NO value passed)
-      non_splitting_tags:   false,                                              // false or comma-separated list of XML tags
-      splitting_tags:       false,                                              // false or comma-separated list of XML tags
-      ignore_tags:          false,                                              // false or comma-separated list of XML tags
-      onInit:               function (){},                                      // callback after plugin has initialized
-      onBeforeTranslation:  function (){},                                      // callback before translation started
-      onAfterTranslation:   function (){}                                       // callback after translation finished
+      auth_key:             false,                                              // API authorization key.
+      source_lang:          'auto',                                             // autodetection (default: auto)|supported language. Specifies the language for the input text.
+      target_lang:          'DE',                                               // language to be tranlasted in.
+      max_chars:            false,                                              // false (unlimited) or number. Number of chars from the source text passed for translation.
+      split_sentences:      '1',                                                // enabled (1, default)|disabled (0)|nonewlines. Sets the translation engine to first split the input text into sentences.
+      preserve_formatting:  '0',                                                // disabled (0, default)|enabled (1). Sets the translation engine to respect the original formatting.
+      formality:            'default',                                          // default|more|less. Sets the translated text should lean towards formal or informal language.
+      tag_handling:         false,                                              // false (value=0)|xml. Sets which kind of tags should be handled. If set, API is able to process structured XML content.
+      outline_detection:    true,                                               // false (value=0) or true (NO value passed). Controls the automatic mechanism on XML tags for splitting. If disabled, all splitting_tags are to be specified.
+      non_splitting_tags:   false,                                              // false or comma-separated list of XML tags. Disable automated splitting on the tags specified.
+      splitting_tags:       false,                                              // false or comma-separated list of XML tags which always cause splitting.
+      ignore_tags:          false,                                              // false or comma-separated list of XML tags that indicate text NOT to be translated.
+      onInit:               function (){},                                      // callback after plugin has initialized.
+      onBeforeTranslation:  function (){},                                      // callback before translation started.
+      onAfterTranslation:   function (){}                                       // callback after translation finished.
     };
 
     // -------------------------------------------------------------------------
@@ -52,8 +52,8 @@
     function Plugin (element, options) {
       this.element            = element;
       this.settings           = $.extend( {}, defaults, options);
-      this.settings.elementID = '#' + this.element["id"]
-      this.xhr                = new XMLHttpRequest()
+      this.settings.elementID = '#' + this.element.id;
+      this.xhr                = new XMLHttpRequest();
 
       // call the plugin initializer
       this.init(this.settings);
@@ -110,8 +110,8 @@
       // then display the result, designed as a module.
       // -----------------------------------------------------------------------
       translate: function (settings) {
-        const logger                              = log4javascript.getLogger('j1deepl.translate');
-        const READYSTATE_DONE             = 4;
+        const logger                  = log4javascript.getLogger('j1deepl.translate');
+        const READYSTATE_DONE         = 4;
         const STATUS_OK               = 200;
         const SUPPORTED_LANG          = ['BG', 'CS', 'DA', 'DE', 'EL', 'EN-GB', 'EN-US', 'EN', 'ES', 'ET', 'FI', 'FR', 'HU', 'IT', 'JA', 'LT', 'LV', 'NL', 'PL', 'PT-PT', 'PT-BR', 'PT', 'RO', 'RU', 'SK', 'SL', 'SV', 'ZH'];
         const ALLOWED_FORMALITY_LANG  = ['DE', 'FR', 'IT', 'ES', 'NL', 'PL', 'PT', 'PT-BR', 'RU'];
@@ -125,38 +125,38 @@
         var ELEMENT_TYPE;
         var SOURCE_TEXT_FOUND;
 
-        var API_RESPONSE      = {};
-        API_RESPONSE['400']   = 'Bad request. Please check error message and your parameters.';
-        API_RESPONSE['401']   = 'Authorization failed. Please supply a valid DeepL-Auth-Key.';
-        API_RESPONSE['403']   = 'Forbidden. The access to the requested resource is denied, because of insufficient access rights.';
-        API_RESPONSE['404']   = 'The requested resource could not be found.';
-        API_RESPONSE['413']   = 'The request size exceeds the limit.';
-        API_RESPONSE['415']   = 'The requested entries format specified in the Accept header is not supported.';
-        API_RESPONSE['429']   = 'Too many requests. Please wait and resend your request.';
-        API_RESPONSE['456']   = 'Quota exceeded. The maximum amount of glossaries has been reached.';
-        API_RESPONSE['500']   = 'Internal server error';
-        API_RESPONSE['503']   = 'Resource currently unavailable. Try again later.';
-        API_RESPONSE['529']   = 'Too many requests. Please wait and resend your request.';
+        var API_RESPONSE              = {};
+        API_RESPONSE['400']           = 'Bad request. Please check error message and your parameters.';
+        API_RESPONSE['401']           = 'Authorization failed. Please supply a valid DeepL-Auth-Key.';
+        API_RESPONSE['403']           = 'Forbidden. The access to the requested resource is denied, because of insufficient access rights.';
+        API_RESPONSE['404']           = 'The requested resource could not be found.';
+        API_RESPONSE['413']           = 'The request size exceeds the limit.';
+        API_RESPONSE['415']           = 'The requested entries format specified in the Accept header is not supported.';
+        API_RESPONSE['429']           = 'Too many requests. Please wait and resend your request.';
+        API_RESPONSE['456']           = 'Quota exceeded. The maximum amount of glossaries has been reached.';
+        API_RESPONSE['500']           = 'Internal server error';
+        API_RESPONSE['503']           = 'Resource currently unavailable. Try again later.';
+        API_RESPONSE['529']           = 'Too many requests. Please wait and resend your request.';
 
         var reason_text;
-        var request           = '';
-        var element           = '';
-        var source_text       = '';
-        var source_text_lines = '';
+        var request                   = '';
+        var element                   = '';
+        var source_text               = '';
+        var source_text_lines         = '';
         var source_lang;
         var target_lang;
 
         // check if passed HTML element or ID exists
         if (TARGET_ELEMENT_EXISTS) {
-          var BASE_TARGET_ELEMENT       = (TARGET_ELEMENT.includes('.')||TARGET_ELEMENT.includes('#')) ? TARGET_ELEMENT.substring(1) : TARGET_ELEMENT;
-          var ELEMENT_TYPE            = $(TARGET_ELEMENT).get(0).nodeName;
+          BASE_TARGET_ELEMENT = (TARGET_ELEMENT.includes('.')||TARGET_ELEMENT.includes('#')) ? TARGET_ELEMENT.substring(1) : TARGET_ELEMENT;
+          ELEMENT_TYPE        = $(TARGET_ELEMENT).get(0).nodeName;
 
           // Read the text to be translated from the given HTML element
           if (ELEMENT_TYPE === 'TEXTAREA') {
               source_text  = this.element.value;
           } else if (ELEMENT_TYPE === 'P') {
-              element         = this.element;
-              source_text = $(TARGET_ELEMENT).text();
+              element      = this.element;
+              source_text  = $(TARGET_ELEMENT).text();
           }
           SOURCE_TEXT_FOUND = source_text.length;
         } else {
@@ -166,12 +166,11 @@
 
         // limit the source text if required
         if (settings.max_char && source_text.length > settings.max_char ) {
-          var source_text_full = source_text;
-          source_text = source_text_full.substring(0, settings.max_char -3);
-          source_text += source_text + ' ...'
+          var source_text_limited = source_text.substring(0, settings.max_char -3);
+          source_text = source_text_limited + ' ...';
           logger.info('\n' + 'limit for source text ' + '(max: ' + settings.max_char + ')' + ' reached: ' + source_text.length);
         }
-        source_text_lines     = this.prepareText(source_text);
+        source_text_lines = this.prepareText(source_text);
 
         // prepare the XHR request for the API (free/pro) requested
         this.prepareXHR(settings);
@@ -258,7 +257,7 @@
 
         // Check for VALID language supported by option 'formality'
         if (this.settings.formality != 'default' ) {
-          if (!ALLOWED_FORMALITY_LANG.indexOf(this.settings.target_lang) > -1) {
+          if (!(ALLOWED_FORMALITY_LANG.indexOf(this.settings.target_lang) > -1)) {
             logger.warn('\n' + 'wrong language found for formality setting: ' + this.settings.target_lang);
           }
           this.settings.formality = (ALLOWED_FORMALITY_LANG.indexOf(this.settings.target_lang) > -1) ? this.settings.formality : 'default';

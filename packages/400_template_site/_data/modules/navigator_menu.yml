@@ -337,6 +337,10 @@
           href:                         http://www.freeformatter.com/
           target:                       _blank
           icon:                         cached
+        - title:                        BeautifyTools
+          href:                         https://beautifytools.com/
+          target:                       _blank
+          icon:                         cached
         - title:                        AppDevTools
           href:                         https://www.appdevtools.com/
           target:                       _blank
@@ -361,10 +365,6 @@
           href:                         http://character-code.com/
           target:                       _blank
           icon:                         alpha-a-box-outline
-        - title:                        Wordcloud Generator
-          href:                         https://www.jasondavies.com/wordcloud/
-          target:                       _blank
-          icon:                         cloud
         - title:                        RegEx 101
           href:                         https://regex101.com/
           target:                       _blank

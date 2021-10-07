@@ -67,7 +67,6 @@ resource_options:
   {% assign translation_limit = 500 %}
 {% endif %}
 
-
 // Include sub-documents
 // -----------------------------------------------------------------------------
 Machine translation (MT) transfers information from one language to another
@@ -82,27 +81,27 @@ than previous statistics-based or rule-based machine translation methods.
 The NMT uses a large neural network based on the human brain model with
 the help of artificial intelligence.
 
-It is the most advanced method of computer-generated translations. Thanks
-to autonomous learning based on artificial intelligence, Big Data, and
-Deep Learning, this method has made enormous progress in recent years.
-Nowadays, neural machine translation programs can be used as a basis for
-professional translations.
+The NMT is the most advanced method of computer-generated translations.
+Thanks to autonomous learning based on artificial intelligence, Big Data,
+and Deep Learning, this method has made enormous progress in the last recent
+years. Nowadays, neural machine translation programs can be used as a basis
+for professional translations.
 
-Neural algorithms can generate accurate translations as well as also
-learn a language. This technology improves the quality of the translated
-data continuously improved. For the NMT to work well, it must be trained
-to be used. Training means that a large amount of data feeds the
-algorithms to improve the reliability of the final results.
+Neural algorithms can generate accurate translations as well as *learn* a
+language. This technology improves the quality of the translated data
+continuously. For the NMT to work well, it must be trained to be used.
+Training means that a large amount of data feeds the algorithms to
+improve the reliability of the final results.
 
 == Translation with Deepl
 
 _Deepl_ offers one of the best NMT engines worldwide. The translater can be
 used online or by an application (app) installed on a computer locally.
 The third option to translate is the cloud-based service offered
-by the *Deepl API*.
+by the *Deepl API* to be integrated into custom apps or websites, for example.
 
-J1 integrates the cloud-based translator service for the *free* service and
-professional translations using the *Pro system*. The current API version V2
+J1 integrates the cloud-based translator service for the *Free* service and
+professional translations using the *Pro* system. The current API *version V2*
 supports the translation of more than 25 languages vice versa.
 
 Try translations with _Jekyll One_ and _Deepl_ on your own!
@@ -149,8 +148,8 @@ Try translations with _Jekyll One_ and _Deepl_ on your own!
 
     <!-- translation input -->
     <div id="source-group"class="form-group bmd-form-group mb-4">
-      <textarea id="original-text" class="form-control" type="text" rows="3"></textarea>
-      <label for="original-text" class="bmd-label-floating ml-0 mt-0">Your text (max: 500 characters)</label>
+      <textarea id="original-text" class="form-control" type="text" rows="10"></textarea>
+      <label for="original-text" class="bmd-label-floating ml-0 mt-0">Your text, up to 1000 characters</label>
     </div>
 
 		<!-- destination language -->
@@ -159,10 +158,10 @@ Try translations with _Jekyll One_ and _Deepl_ on your own!
 				<option value="BG">Bulgarian</option>
 				<option value="CS">Czech</option>
 				<option value="DA">Danish</option>
-        <option value="DE">German</option>
+        <option selected value="DE">German</option>
         <option value="EL">Greek</option>
         <option value="ES">Spanish</option>
-        <option selected value="EN">English</option>
+        <option value="EN">English</option>
 				<option value="EN-US">English (American)</option>
 				<option value="EN-GB">English (British)</option>
 				<option value="ET">Estonian</option>
@@ -190,7 +189,7 @@ Try translations with _Jekyll One_ and _Deepl_ on your own!
 
     <!-- translation output -->
     <div id="translated-group" class="form-group bmd-form-group">
-      <textarea id="translated-text" class="form-control"  type="text" rows="3"></textarea>
+      <textarea id="translated-text" class="form-control" type="text" rows="12" disabled></textarea>
       <label for="translated-text" class="bmd-label-floating ml-0 mt-0">Your translation</label>
     </div>
 
@@ -216,6 +215,7 @@ Try translations with _Jekyll One_ and _Deepl_ on your own!
 
 ++++
 <script>
+
   $(function() {
     // reset translation event handler (button)
     $('#clear-translate').click(function () {
@@ -225,6 +225,8 @@ Try translations with _Jekyll One_ and _Deepl_ on your own!
       // manually reset fill states
       $('#source-group').removeClass('is-filled');
       $('#translated-group').removeClass('is-filled');
+      // disable the textarea (output)
+      $('#translated-text').prop('disabled', true);
     });
 
     // translation event handler (button)
@@ -233,11 +235,14 @@ Try translations with _Jekyll One_ and _Deepl_ on your own!
       var toLanguage = $('#destination-language').val();
       var languageScope = $('#language-scope').val();
 
+      // enable the textarea (output)
+      $('#translated-text').prop('disabled', false);
+
       // create new translation
       $('#original-text').j1deepl({
         api: 'pro',
         auth_key: '1c360075-1a30-28c7-e4eb-2c0c0164ce4b',
-        max_char: 500,
+        max_chars: 1000,
         formality: languageScope,
         source_lang: fromLanguage,
         target_lang: toLanguage,
@@ -256,4 +261,5 @@ Try translations with _Jekyll One_ and _Deepl_ on your own!
     });
   });
 </script>
+
 ++++
