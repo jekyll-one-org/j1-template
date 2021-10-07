@@ -225,7 +225,7 @@ Try translations with _Jekyll One_ and _Deepl_ on your own!
       // manually reset fill states
       $('#source-group').removeClass('is-filled');
       $('#translated-group').removeClass('is-filled');
-    }); // END reset translation
+    });
 
     // translation event handler (button)
     $('#translate').click(function () {
@@ -242,7 +242,7 @@ Try translations with _Jekyll One_ and _Deepl_ on your own!
         source_lang: fromLanguage,
         target_lang: toLanguage,
         targetElement: '#translated-text',
-      }); // END new translation
+      });
 
       // reset translation for next run
       // -----------------------------------------------------------------------
@@ -253,7 +253,7 @@ Try translations with _Jekyll One_ and _Deepl_ on your own!
       // -----------------------------------------------------------------------
       // set fill state
       $('#translated-group').addClass('is-filled');
-    }); // END run translation
+    });
   });
 </script>
 ++++

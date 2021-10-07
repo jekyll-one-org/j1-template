@@ -370,7 +370,7 @@ resources:
                                           modules/jquery/js/jquery,
                                           modules/jquery/js/jqueryUI,
                                           modules/popper/js/popper,
-                                          core/js/template
+                                          core/js/template                                     
                                         ]
         init_function:                  [ j1.init ]
 
