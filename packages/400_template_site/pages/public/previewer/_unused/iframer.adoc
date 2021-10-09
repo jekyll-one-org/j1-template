@@ -17,7 +17,7 @@ toc:                                    false
 permalink:                              /pages/public/iframer/
 regenerate:                             false
 
-resources:                              [ framer, fam ]
+resources:                              [ clipboard, rouge, framer ]
 resource_options:
   - attic:
       padding_top:                      400

@@ -1,0 +1,292 @@
+---
+title:                                  Translation Tester
+tagline:                                deepl translations
+date:                                   2021-10-06 00:00:00 +100
+description: >
+                                        Machine translation (MT) transfers information from one language to another
+                                        by a computer without human intervention. NMT is the most advanced method
+                                        of computer-generated translations. Thanks to autonomous learning based on
+                                        artificial intelligence.Deepl offers one of the best NMTengines worldwide.
+                                        Try translations with Jekyll One and Deepl on your own!
+
+categories:                             [ Previewer ]
+tags:                                   [ Translator, Deepl ]
+
+comments:                               false
+fam_menu_id:                            page_ctrl_simple
+
+permalink:                              /pages/public/previewer/translator/
+regenerate:                             false
+
+resources:                              [ clipboard, rouge, imagedropdown, j1deepl ]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
+          alt:                          Photo by Ricardo Gomez Angel on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Ricardo Gomez Angel
+            href:                       https://unsplash.com/@ripato/portfolio
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+//  Set global Liquid vars
+// -----------------------------------------------------------------------------
+{% assign environment = site.environment %}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="none" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// https://github.com/EdwardBalaj/Simple-DeepL-API-Integration
+// https://github.com/marghoobsuleman/ms-Dropdown
+// https://www.marghoobsuleman.com/image-dropdown/help
+// https://www.marghoobsuleman.com/image-dropdown/advanced-help
+
+// Set local liquid vars
+// -----------------------------------------------------------------------------
+{% if environment == "development" or environment == "test" %}
+  {% assign translation_limit = 50000 %}
+{% else %}
+  {% assign translation_limit = 500 %}
+{% endif %}
+
+// Include sub-documents
+// -----------------------------------------------------------------------------
+Machine translation (MT) transfers information from one language to another
+by a computer without human intervention. NMT is the most advanced method
+of computer-generated translations. Thanks to autonomous learning based on
+artificial intelligence.
+
+== Neural Machine Translation
+
+Neural Machine Translation (NMT) works on a completely different principle
+than previous statistics-based or rule-based machine translation methods.
+The NMT uses a large neural network based on the human brain model with
+the help of artificial intelligence.
+
+The NMT is the most advanced method of computer-generated translations.
+Thanks to autonomous learning based on artificial intelligence, Big Data,
+and Deep Learning, this method has made enormous progress in the last recent
+years. Nowadays, neural machine translation programs can be used as a basis
+for professional translations.
+
+Neural algorithms can generate accurate translations as well as *learn* a
+language. This technology improves the quality of the translated data
+continuously. For the NMT to work well, it must be trained to be used.
+Training means that a large amount of data feeds the algorithms to
+improve the reliability of the final results.
+
+== Translation with Deepl
+
+_Deepl_ offers one of the best NMT engines worldwide. The translater can be
+used online or by an application (app) installed on a computer locally.
+The third option to translate is the cloud-based service offered
+by the *Deepl API* to be integrated into custom apps or websites, for example.
+
+J1 integrates the cloud-based translator service for the *Free* service and
+professional translations using the *Pro* system. The current API *version V2*
+supports the translation of more than 25 languages vice versa.
+
+Try the translator with _Jekyll One_ and _Deepl_ on your own!
+
+== Translator
+
+++++
+<div class="mt-3">
+	<form id="deepl-translate">
+
+		<!-- source language -->
+    <div class="form-group bmd-form-group mb-2">
+
+      <select id="source-language" name="source-language" class="form-control" is="ms-dropdown">
+        <option selected value="auto" data-image-css="fas fa-magic mt-1 mr-3 mb-1">Auto Detection</option>
+        <option value="CZ" data-image-css="flag-icon flag-icon-cz rectangle size-md"> Czech</option>
+        <option value="DA" data-image-css="flag-icon flag-icon-dk rectangle size-md"> Danish</option>
+        <option value="DE" data-image-css="flag-icon flag-icon-de rectangle size-md"> German</option>
+        <option value="ES" data-image-css="flag-icon flag-icon-es rectangle size-md"> Spanish</option>
+        <option value="EN" data-image-css="flag-icon flag-icon-gb rectangle size-md"> English</option>
+        <option value="EL" data-image-css="flag-icon flag-icon-gr rectangle size-md"> Greek</option>
+        <option value="FI" data-image-css="flag-icon flag-icon-fi rectangle size-md"> Finnish</option>
+        <option value="FR" data-image-css="flag-icon flag-icon-fr rectangle size-md"> French</option>
+        <option value="HU" data-image-css="flag-icon flag-icon-hu rectangle size-md"> Hungarian</option>
+        <option value="IT" data-image-css="flag-icon flag-icon-it rectangle size-md"> Italian</option>
+        <option value="NL" data-image-css="flag-icon flag-icon-nl rectangle size-md"> Dutch</option>
+        <option value="PT" data-image-css="flag-icon flag-icon-pt rectangle size-md"> Portuguese</option>
+        <option value="RO" data-image-css="flag-icon flag-icon-ro rectangle size-md"> Romanian</option>
+        <option value="RU" data-image-css="flag-icon flag-icon-ru rectangle size-md"> Russian</option>
+        <option value="SK" data-image-css="flag-icon flag-icon-sk rectangle size-md"> Slovak</option>
+        <option value="SL "data-image-css="flag-icon flag-icon-sl rectangle size-md"> Slovenian</option>
+        <option value="SV" data-image-css="flag-icon flag-icon-sv rectangle size-md"> Swedish</option>
+      </select>
+      <label for="source-language" class="bmd-label-floating">Language source and scope selection</label>
+
+      <!-- select if translated text should lean towards formal|informal language -->
+      <select id="language-scope" class="form-control" is="ms-dropdown">
+        <option selected value="default" data-image-css="far fa-meh-blank mt-1 mr-3 mb-1">Regular language</option>
+        <option value="more" data-image-css="far fa-meh mt-1 mr-3">Formal language</option>
+        <option value="less" data-image-css="far fa-smile mt-1 mr-3">Informal language</option>
+      </select>
+
+    </div>
+
+    <!-- translation input -->
+    <div id="source-group" class="form-group bmd-form-group mb-4">
+      <textarea id="original-text" class="form-control" type="text" rows="5"></textarea>
+      <label for="original-text" class="bmd-label-floating ml-0 mt-0">Your text, up to 1000 characters</label>
+    </div>
+
+		<!-- destination language -->
+    <div class="form-group bmd-form-group mb-2">
+      <select id="destination-language" class="form-control scrollable-menu" name="destination-language" is="ms-dropdown">
+				<option value="BG" data-image-css="flag-icon flag-icon-bg rectangle size-md"> Bulgarian</option>
+				<option value="CS" data-image-css="flag-icon flag-icon-cz rectangle size-md"> Czech</option>
+				<option value="DA" data-image-css="flag-icon flag-icon-dk rectangle size-md"> Danish</option>
+        <option selected value="DE" data-image-css="flag-icon flag-icon-de rectangle size-md"> German</option>
+        <option value="EL" data-image-css="flag-icon flag-icon-gr rectangle size-md"> Greek</option>
+        <option value="ES" data-image-css="flag-icon flag-icon-es rectangle size-md"> Spanish</option>
+        <option value="EN" data-image-css="flag-icon flag-icon-gb rectangle size-md"> English</option>
+				<option value="EN-US" data-image-css="flag-icon flag-icon-us rectangle size-md"> English (American)</option>
+				<option value="EN-GB" data-image-css="flag-icon flag-icon-gb rectangle size-md"> English (British)</option>
+				<option value="ET" data-image-css="flag-icon flag-icon-ee rectangle size-md"> Estonian</option>
+				<option value="FI" data-image-css="flag-icon flag-icon-fi rectangle size-md"> Finnish</option>
+				<option value="FR" data-image-css="flag-icon flag-icon-fr rectangle size-md"> French</option>
+				<option value="HU" data-image-css="flag-icon flag-icon-hu rectangle size-md"> Hungarian</option>
+				<option value="IT" data-image-css="flag-icon flag-icon-it rectangle size-md"> Italian</option>
+				<option value="JA" data-image-css="flag-icon flag-icon-jp rectangle size-md"> Japanese</option>
+				<option value="LV" data-image-css="flag-icon flag-icon-lv rectangle size-md"> Latvian</option>
+				<option value="LT" data-image-css="flag-icon flag-icon-lt rectangle size-md"> Lithuanian</option>
+        <option value="NL" data-image-css="flag-icon flag-icon-nl rectangle size-md"> Dutch</option>
+				<option value="PL" data-image-css="flag-icon flag-icon-pl rectangle size-md"> Polish</option>
+        <option value="PT" data-image-css="flag-icon flag-icon-pt rectangle size-md"> Portuguese</option>
+				<option value="PT-PT" data-image-css="flag-icon flag-icon-pt rectangle size-md"> Portuguese (Portugal)</option>
+				<option value="PT-BR" data-image-css="flag-icon flag-icon-br rectangle size-md"> Portuguese (Brazilian)</option>
+				<option value="RO" data-image-css="flag-icon flag-icon-ro rectangle size-md"> Romanian</option>
+				<option value="RU" data-image-css="flag-icon flag-icon-ru rectangle size-md"> Russian</option>
+				<option value="SK" data-image-css="flag-icon flag-icon-sk rectangle size-md"> Slovak</option>
+				<option value="SL" data-image-css="flag-icon flag-icon-sl rectangle size-md"> Slovenian</option>
+				<option value="SV" data-image-css="flag-icon flag-icon-sk rectangle size-md"> Swedish</option>
+        <option value="ZH" data-image-css="flag-icon flag-icon-cn rectangle size-md"> Chinese</option>
+      </select>
+      <label for="destination-language" class="bmd-label-floating">Language destination selection</label>
+    </div>
+
+    <!-- translation output -->
+    <div id="translated-group" class="form-group bmd-form-group">
+      <textarea id="translated-text" class="form-control" type="text" rows="5" disabled></textarea>
+      <label for="translated-text" class="bmd-label-floating ml-0 mt-0">Your translation</label>
+    </div>
+
+    <!-- control buttons -->
+    <div class="mt-3 mb-1">
+  		<input id="translate" name="translate" class="btn btn-info btn-raised mt-1 mr-1" type="button" value="Translate" aria-label="Translate" style="min-width: 12rem">
+      <input id="clear-translate" name="clear-translate" class="btn btn-primary btn-raised mt-1 mr-1" type="button" value="Clear Translation" aria-label="Clear Translation" style="min-width: 12rem">
+      <input id="reset-translate" name="reset-translate" class="btn btn-danger btn-raised mt-1" type="button" value="Reset Settings" aria-label="Reset Button" style="min-width: 12rem">
+    </div>
+
+	</form>
+</div>
+++++
+
+++++
+<style>
+.form-control {
+  line-height: 1.5 !important;
+}
+</style>
+++++
+
+++++
+<script>
+
+  $(function() {
+
+    // reset translation event handler (button)
+    $('#reset-translate').click(function () {
+
+      // get access to msDropdown elements
+      var ddSourceLanguage      = document.getElementById("source-language").msDropdown;
+      var ddLanguageScope       = document.getElementById("language-scope").msDropdown;
+      var ddDestinationLanguage = document.getElementById("destination-language").msDropdown;
+
+      // reset (msDropdown) translation options
+      ddSourceLanguage.selectedIndex      = 0;
+      ddLanguageScope.selectedIndex       = 0;
+      ddDestinationLanguage.selectedIndex = 3;                                  // index 3 = DE
+
+      // clear all text-area elements
+      $('#original-text').val('');
+      $('#translated-text').val('');
+
+      // manually reset fill states
+      $('#source-group').removeClass('is-filled');
+      $('#translated-group').removeClass('is-filled');
+      // disable the textarea (output)
+      $('#translated-text').prop('disabled', true);
+    });
+
+    $('#clear-translate').click(function () {
+      // clear all text-area elements
+      $("#original-text").val('');
+      $("#translated-text").val('');
+      // manually reset fill states
+      $('#source-group').removeClass('is-filled');
+      $('#translated-group').removeClass('is-filled');
+      // disable the textarea (output)
+      $('#translated-text').prop('disabled', true);
+    });
+
+    // translation event handler (button)
+    $('#translate').click(function () {
+      var fromLanguage = $('#source-language').val();
+      var toLanguage = $('#destination-language').val();
+      var languageScope = $('#language-scope').val();
+
+      // enable the textarea (output)
+      $('#translated-text').prop('disabled', false);
+
+      // create new translation
+      $('#original-text').j1deepl({
+        api: 'pro',
+        auth_key: '1c360075-1a30-28c7-e4eb-2c0c0164ce4b',
+        max_chars: 1000,
+        formality: languageScope,
+        source_lang: fromLanguage,
+        target_lang: toLanguage,
+        targetElement: '#translated-text',
+      });
+
+      // reset translation for next run
+      // -----------------------------------------------------------------------
+      // destroy existing jquery object|s
+      $('#original-text').j1deepl('destroy');
+
+      // update form elements
+      // -----------------------------------------------------------------------
+      // set fill state
+      $('#translated-group').addClass('is-filled');
+    });
+
+  });
+</script>
+
+++++

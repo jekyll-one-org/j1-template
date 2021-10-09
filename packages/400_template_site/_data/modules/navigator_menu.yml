@@ -170,7 +170,10 @@
 #
 - item:                                 Tools
   sublevel:
-    - title:                            J1 Translator
+    - title:                            Country Flag Previewer
+      href:                             /pages/public/previewer/country_flags/
+      icon:                             flag
+    - title:                            Translation Tester
       href:                             /pages/public/previewer/translator/
       icon:                             translate
     - title:                            Gallery Previewer

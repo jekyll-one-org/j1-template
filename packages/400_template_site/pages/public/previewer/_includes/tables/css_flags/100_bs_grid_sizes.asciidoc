@@ -1,0 +1,57 @@
+
+.Flag sizes, responsive
+[cols="2a,3a,4a,^", options="header", width="100%", role="rtable mt-3"]
+|===
+|Size |Style |Markup |Render
+
+|`xs`
+|rectangle
+|
+.Germany
+[source, adoc, role="noclip"]
+----
+flag:de[rectangle, xs]
+----
+^|flag:de[rectangle, xs]
+
+|`sm`
+|rectangle
+|
+.Germany
+[source, adoc, role="noclip"]
+----
+flag:de[rectangle, sm]
+----
+^|flag:de[rectangle, sm]
+
+|`md`
+|rectangle
+|
+.Belgium
+[source, adoc, role="noclip"]
+----
+flag:be[rectangle, md]
+----
+^|flag:be[rectangle, md]
+
+|`lg`
+|rectangle
+|
+.Denmark
+[source, adoc, role="noclip"]
+----
+flag:dk[rectangle, lg]
+----
+^|flag:dk[rectangle, lg]
+
+|`xl`
+|rectangle
+|
+.Spain
+[source, adoc, role="noclip"]
+----
+flag:es[rectangle, xl]
+----
+^|flag:es[rectangle, xl]
+
+|===

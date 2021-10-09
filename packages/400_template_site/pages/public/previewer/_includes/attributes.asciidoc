@@ -5,6 +5,10 @@
 // URLs - Internal references and/or sources on the Internet
 // -----------------------------------------------------------------------------
 tag::urls[]
+
+:url-flag-icons--home:                            https://flagicons.lipis.dev/
+:url-flag-icons--gh-home:                         https://github.com/lipis/flag-icon-css
+
 end::urls[]
 
 

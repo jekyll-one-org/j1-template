@@ -370,7 +370,7 @@ resources:
                                           modules/jquery/js/jquery,
                                           modules/jquery/js/jqueryUI,
                                           modules/popper/js/popper,
-                                          core/js/template                                     
+                                          core/js/template
                                         ]
         init_function:                  [ j1.init ]
 
@@ -916,6 +916,27 @@ resources:
         init_function:                  []
 
   # ----------------------------------------------------------------------------
+  # CSS Flags Previewer
+  #
+  - name:                               CSS Flags Previewer
+    resource:
+      id:                               css_flags_previewer
+      enabled:                          true
+      comment:                          module css_flags_previewer
+      layout:                           [ all ]
+      region:                           head
+      required:                         always
+      preload:                          false                                   # property currently unused
+      script_load:                      deferred
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            []
+        files:                          [ core/country-flags/css/theme/uno.css ]
+        js:                             []
+        init_function:                  []
+
+  # ----------------------------------------------------------------------------
   # Iconify (Icons) Framework
   #
   - name:                               Iconify Framework
@@ -1346,6 +1367,27 @@ resources:
         css:                            []
         files:                          []
         js:                             [ modules/j1Deepl/js/j1deepl ]
+        init_function:                  []
+
+  # ----------------------------------------------------------------------------
+  # imageDropdown (former MSDropdown)
+  #
+  - name:                               imageDropdown
+    resource:
+      id:                               imagedropdown
+      enabled:                          true
+      comment:                          module imageDropdown
+      region:                           head
+      layout:                           [ home, page, post, collection, blog_archive ]
+      required:                         ondemand
+      preload:                          false                                   # property currently unused
+      script_load:                      async
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            [ modules/imageDropdown/css/dd ]
+        files:                          []
+        js:                             [ modules/imageDropdown/js/dd ]
         init_function:                  []
 
 # ------------------------------------------------------------------------------

@@ -98,7 +98,7 @@ place Galleries elsewhere with your content. You can use them for video blogs
 by putting them into your blog article's content.
 
 WARNING: LightGallery can be used for free for private use, but a commercial
-license is needed for business use. See link:{light-gallery-license}[Light Gallery license]
+license is needed for business use. See link:{url-light--gallery-license}[Light Gallery license]
 how to use LightGallery for commercial websites and projects.
 
 == Local video content
@@ -140,4 +140,4 @@ But the most visual component is the text for all pages, for all sites on the
 Internet. To see how text could be presented great for modern responsive
 websites, check the section Typography next.
 
-What? Please find out how it works. Go for: link:{roundtrip-typography}[Typography], then.
+What? Please find out how it works. Go for: link:{url-roundtrip--typography}[Typography], then.

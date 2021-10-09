@@ -16,7 +16,7 @@ scrollbar:                              false
 permalink:                              /pages/public/previewer/mdi_font/
 regenerate:                             false
 
-resources:                              [ clipboard, lightbox, rouge, mdi_previewer ]
+resources:                              [ clipboard, rouge, mdi_previewer ]
 resource_options:
   - attic:
       padding_top:                      400

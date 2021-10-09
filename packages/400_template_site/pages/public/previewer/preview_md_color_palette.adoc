@@ -19,7 +19,7 @@ flowtext:                               false
 permalink:                              /pages/public/previewer/color_palette/
 regenerate:                             false
 
-resources:                              []
+resources:                              [ clipboard, rouge ]
 resource_options:
   - attic:
       padding_top:                      400

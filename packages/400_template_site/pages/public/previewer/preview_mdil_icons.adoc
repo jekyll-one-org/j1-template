@@ -18,7 +18,7 @@ toc:                                    false
 permalink:                              /pages/public/previewer/mdil_font/
 regenerate:                             false
 
-resources:                              [ clipboard, lightbox, rouge, mdil_previewer ]
+resources:                              [ clipboard, rouge, mdil_previewer ]
 resource_options:
   - attic:
       padding_top:                      400

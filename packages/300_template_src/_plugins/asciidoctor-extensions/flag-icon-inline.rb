@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_plugins/asciidoctor-extensions/mdi-icon-inline.rb
-# Asciidoctor extension for J1 Template
+# ~/_plugins/asciidoctor-extensions/flag-icon-inline.rb
+# Asciidoctor flag icon extension for J1 Template
 #
 # Product/Info:
 # https://jekyll.one
@@ -10,8 +10,8 @@
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
 # ------------------------------------------------------------------------------
-# <i class="flag-icon flag-icon-gr"></i>
-# <i class="flag-icon flag-icon-gr flag-icon-squared"></i>
+# <i class="flag-icon flag-icon-gr rectangle size-xs"></i>
+# <i class="flag-icon flag-icon-gr squared size-xs"></i>
 # ------------------------------------------------------------------------------
 
 require 'asciidoctor/extensions' unless RUBY_ENGINE == 'opal'
