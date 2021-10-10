@@ -37,9 +37,9 @@
 /* eslint JSUnfilteredForInLoop: "off"                                        */
 // -----------------------------------------------------------------------------
 
-function BootstrapCookieConsent(props) {
-  var logger                = log4javascript.getLogger('j1.core.bsCookieConsent');
-  var modalId               = 'bccs-modal';
+function googleTranslator(props) {
+  var logger                = log4javascript.getLogger('j1.core.googleTranslator');
+  var modalId               = 'translator-modal';
   var self                  = this;
   var detailedSettingsShown = false;
   var url                   = new liteURL(window.location.href);
@@ -53,7 +53,7 @@ function BootstrapCookieConsent(props) {
 
   this.props = {
     autoShowDialog:         true,                                               // disable autoShowModal on the privacy policy and legal notice pages, to make these pages readable
-    language:               navigator.language,                                 // the language, in which the modal is shown
+    language:               'en',                                               // the language, in which the modal is shown
     languages:              ["en", "de"],                                       // supported languages (in ./content/), defaults to first in array
     contentURL:             "./content",                                        // this URL must contain the dialogs content in the needed languages
     cookieName:             "cookie-consent-settings",                          // the name of the cookie in which the configuration is stored as JSON
@@ -156,17 +156,17 @@ function BootstrapCookieConsent(props) {
             keyboard: false
           });
 
-          self.$buttonDoNotAgree = $("#bccs-buttonDoNotAgree");
-          self.$buttonAgree = $("#bccs-buttonAgree");
-          self.$buttonSave = $("#bccs-buttonSave");
-          self.$buttonAgreeAll = $("#bccs-buttonAgreeAll");
+          self.$buttonDoNotAgree = $("#translator-buttonDoNotAgree");
+          self.$buttonAgree = $("#translator-buttonAgree");
+          self.$buttonSave = $("#translator-buttonSave");
+          self.$buttonAgreeAll = $("#translator-buttonAgreeAll");
 
           logger.info('\n' + 'load/initialze options from cookie');
 
           updateButtons();
-          updateOptionsFromCookie();
+          // updateOptionsFromCookie();
 
-          $("#bccs-options").on("hide.bs.collapse", function () {
+          $("#google-options").on("hide.bs.collapse", function () {
             detailedSettingsShown = false;
             updateButtons();
           }).on("show.bs.collapse", function () {
@@ -183,14 +183,14 @@ function BootstrapCookieConsent(props) {
             agreeAll();
           });
           self.$buttonSave.click(function () {
-            $("#bccs-options").collapse('hide');
-            saveSettings();
-            updateOptionsFromCookie();
+            $("#google-options").collapse('hide');
+            //saveSettings();
+            // updateOptionsFromCookie();
           });
           self.$buttonAgreeAll.click(function () {
-            $("#bccs-options").collapse('hide');
+            $("#google-options").collapse('hide');
             agreeAll();
-            updateOptionsFromCookie();
+            // updateOptionsFromCookie();
           });
         })
         .fail(function () {
@@ -198,7 +198,7 @@ function BootstrapCookieConsent(props) {
           logger.warn('\n' + 'probably no `contentURL` set');
         });
       } else {
-        self.$modal.modal('show');
+        self.$modal.modal("show");
       }
     }.bind(this));
   }
@@ -207,7 +207,7 @@ function BootstrapCookieConsent(props) {
     var settings = self.getSettings();
     if (settings) {
       for (var setting in settings) {
-        var $checkbox = self.$modal.find("#bccs-options .bccs-option[data-name='" + setting + "'] input[type='checkbox']");
+        var $checkbox = self.$modal.find("#google-options .translator-option[data-name='" + setting + "'] input[type='checkbox']");
         $checkbox.prop("checked", settings[setting]);
       }
     }
@@ -228,7 +228,7 @@ function BootstrapCookieConsent(props) {
   }
 
   function gatherOptions(setAllExceptNecessary) {
-    var $options = self.$modal.find("#bccs-options .bccs-option");
+    var $options = self.$modal.find("#google-options .translator-option");
     var options = {};
     for (var i = 0; i < $options.length; i++) {
       var option = $options[i];
@@ -246,12 +246,12 @@ function BootstrapCookieConsent(props) {
   }
 
   function agreeAll() {
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(true)), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
+    // Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(true)), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
     self.$modal.modal('hide');
   }
 
   function doNotAgree() {
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
+    // Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
 
     // jadams, 2021-07-15: all cookies NOT longer supported by j1.expireCookie
     // TODO: Create loop over all cookies found in page
@@ -260,19 +260,12 @@ function BootstrapCookieConsent(props) {
     // j1.expireCookie('all');
 
     self.$modal.modal('hide');
-    j1.goHome();
+    // j1.goHome();
   }
 
   function saveSettings() {
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions()), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
+    // Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions()), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
     self.$modal.modal('hide');
-  }
-
-  // call consent dialog if no cookie found (except pages whitelisted)
-  //
-  whitelisted  = (this.props.whitelisted.indexOf(window.location.pathname) > -1);
-  if (Cookie.get(this.props.cookieName) === undefined && this.props.autoShowDialog && !whitelisted) {
-    showDialog();
   }
 
   // API functions
@@ -281,13 +274,10 @@ function BootstrapCookieConsent(props) {
   logger.info('\n' + 'initializing core module finished');
   logger.info('\n' + 'state: finished');
 
-  // show the consent dialog (modal)
+  // show the translator dialog (modal)
   // ---------------------------------------------------------------------------
   this.showDialog = function () {
-    whitelisted  = (this.props.whitelisted.indexOf(window.location.pathname) > -1);
-    if (!whitelisted) {
-      showDialog();
-    }
+    showDialog();
   };
 
   // collect settings from consent cookie

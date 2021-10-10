@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-#  ~/_data/modules/cookieconsent.yml
-#  User configuration settings for J1 Cookie Consent module
+#  ~/_data/modules/google_translate.yml
+#  User configuration settings for J1 Google Translate module
 #
 #  Product/Info:
 #  https://jekyll.one
@@ -16,18 +16,22 @@
 #
 description:
 
-  title:                                CookieConsent
+  title:                                Google Translate
   scope:                                User settings
-  location:                             _data/modules/cookieconsent.yml
+  location:                             _data/modules/google_translate.yml
 
 # ------------------------------------------------------------------------------
 # User configuration settings
 #
 settings:
 
-  enabled:                            true
-  show_cookie_icon:                   true
-  reloadPageOnChange:                 true
+  enabled:                              true
+  languages:                            [en, de]
+  translate_all_pages:                  true
+  autodetect_dest_language:             true
+  hide_suggestion_box:                  true
+  hide_powered_by:                      true
+  hide_top_frame:                       true
 
 # ------------------------------------------------------------------------------
 # END config

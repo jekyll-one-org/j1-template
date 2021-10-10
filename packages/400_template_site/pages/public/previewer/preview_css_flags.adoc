@@ -1838,7 +1838,7 @@ Find all flags available in alphabetical order.
 ++++
 <div class="doc-example mb-3">
   <div class="bs-component mb-3">
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
+    <span class="badge badge-primary"><a href="#NA"> NA · Namibia </a></span>
     <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
     <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
     <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>

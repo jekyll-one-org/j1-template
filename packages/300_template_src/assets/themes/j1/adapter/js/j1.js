@@ -1387,6 +1387,12 @@ var j1 = (function () {
       var isSlider  = false;
       var selector;
 
+      if (typeof anchor === 'undefined') {
+        return false;
+      } else if (anchor.includes("googtrans")) {
+        return false;
+      }
+
       var logger        = log4javascript.getLogger('j1.scrollTo');
 
       var toccerScrollDuration = {{toccer_options.scrollSmoothDuration}};
@@ -1612,6 +1618,23 @@ var j1 = (function () {
       });
 
       return state;
+    },
+    // -------------------------------------------------------------------------
+    // removeRessource (Vanilla JS)
+    // -------------------------------------------------------------------------
+    removeRessource: function (filename, filetype) {
+      // determine element type to create nodelist from
+      var targetelement=(filetype=="js")? "script" : (filetype=="css")? "link" : "none"
+      // determine corresponding attribute to test for
+      var targetattr=(filetype=="js")? "src" : (filetype=="css")? "href" : "none"
+      var allsuspects=document.getElementsByTagName(targetelement)
+
+      // search backwards within nodelist for matching elements to remove
+      // remove element by calling parentNode.removeChild()
+      for (var i=allsuspects.length; i>=0; i--) {
+        if (allsuspects[i] && allsuspects[i].getAttribute(targetattr)!=null && allsuspects[i].getAttribute(targetattr).indexOf(filename)!=-1)
+            allsuspects[i].parentNode.removeChild(allsuspects[i])
+      }
     },
     // -------------------------------------------------------------------------
     //  readCookie (Vanilla JS)

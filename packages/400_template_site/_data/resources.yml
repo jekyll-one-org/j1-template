@@ -1390,5 +1390,26 @@ resources:
         js:                             [ modules/imageDropdown/js/dd ]
         init_function:                  []
 
+  # ----------------------------------------------------------------------------
+  #  Google Translator for J1 Template
+  #
+  - name:                               Google Translator
+    resource:
+      id:                               googleTranslator
+      enabled:                          true
+      comment:                          module googleTranslator
+      region:                           head
+      layout:                           [ all ]
+      required:                         always
+      preload:                          false                                   # property currently unused
+      script_load:                      sync
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            [ modules/googleTranslator/css/translator ]
+        files:                          [ adapter/js/googleTranslator.js ]
+        js:                             [ modules/googleTranslator/js/translator ]
+        init_function:                  [ j1.adapter.googleTranslator.init ]
+
 # ------------------------------------------------------------------------------
 # END config

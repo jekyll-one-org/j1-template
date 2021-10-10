@@ -173,9 +173,12 @@
     - title:                            Country Flag Previewer
       href:                             /pages/public/previewer/country_flags/
       icon:                             flag
-    - title:                            Translation Tester
-      href:                             /pages/public/previewer/translator/
+    - title:                            Deepl Translation Tester
+      href:                             /pages/public/previewer/deepl-translator/
       icon:                             translate
+    - title:                            Google Translation Tester
+      href:                             /pages/public/previewer/google-translator/
+      icon:                             google-translate      
     - title:                            Gallery Previewer
       href:                             /pages/public/previewer/justified_gallery/
       icon:                             view-dashboard
