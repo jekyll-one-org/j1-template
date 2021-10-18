@@ -352,7 +352,7 @@ body{ top: 0 !important;}
 
     // enable|disable google-translate
     if (!user_consent.personalization || !gtranslate) {
-      user_state.gtranslate = 'disabled';
+      user_state.google_translate = 'disabled';
       cookie_written = j1.writeCookie({
         name:     cookie_names.user_state,
         data:     user_state,
@@ -361,7 +361,7 @@ body{ top: 0 !important;}
       });
       j1.removeCookie({name: 'googtrans'});
     } else {
-      user_state.gtranslate = 'enabled';
+      user_state.google_translate = 'enabled';
       cookie_written = j1.writeCookie({
         name:     cookie_names.user_state,
         data:     user_state,
@@ -384,7 +384,7 @@ body{ top: 0 !important;}
     });
 
     // relod the page to apply new language settings
-    window.location = window.location.pathname;
+    // window.location = window.location.pathname;
     location.reload();
   });
 

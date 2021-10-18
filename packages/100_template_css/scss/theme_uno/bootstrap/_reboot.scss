@@ -37,8 +37,10 @@
     font-size: 1em !important;
 }
 
+// jadams, 2021-10-11: Disable overwrite. unclear for what
+// reason i changed the bold face style
 b, strong {
-    font-weight: 400 !important;
+    font-weight: 500 !important;
 }
 
 a {

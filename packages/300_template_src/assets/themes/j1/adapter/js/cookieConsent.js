@@ -101,7 +101,8 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
   var secure;
   var logText;
   var cookie_written;
-  var language;
+  var contentLanguage;
+  var navigatorLanguage;
 
   // NOTE: RegEx for tracking_id: ^(G|UA|YT|MO)-[a-zA-Z0-9-]+$
   // See: https://stackoverflow.com/questions/20411767/how-to-validate-google-analytics-tracking-id-using-a-javascript-function/20412153
@@ -123,14 +124,15 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       // globals
       // -----------------------------------------------------------------------
-      _this         = j1.adapter.cookieConsent;
-      logger        = log4javascript.getLogger('j1.adapter.cookieConsent');
-      url           = new liteURL(window.location.href);
-      baseUrl       = url.origin;
-      hostname      = url.hostname;
-      domain        = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
-      secure        = (url.protocol.includes('https')) ? true : false;
-      language      = "{{site.language}}";
+      _this             = j1.adapter.cookieConsent;
+      logger            = log4javascript.getLogger('j1.adapter.cookieConsent');
+      url               = new liteURL(window.location.href);
+      baseUrl           = url.origin;
+      hostname          = url.hostname;
+      domain            = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+      secure            = (url.protocol.includes('https')) ? true : false;
+      contentLanguage   = '{{site.language}}';
+      navigatorLanguage = navigator.language || navigator.userLanguage;
 
       // set domain used by cookies
       if(domain !== 'localhost') {
@@ -161,6 +163,12 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
         moduleOptions = j1.mergeData(moduleOptions, settings);
       }
 
+      if (moduleOptions.dialogLanguage === 'auto') {
+        moduleOptions.dialogLanguage = navigatorLanguage;
+      } else if (moduleOptions.dialogLanguage === 'content') {
+        moduleOptions.dialogLanguage = contentLanguage;
+      }
+
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
@@ -171,14 +179,14 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
           logger.info('\n' + 'module is being initialized');
 
           j1.cookieConsent = new BootstrapCookieConsent({
-            contentURL:             moduleOptions.contentURL,
-            cookieName:             moduleOptions.cookieName,
-            language:               language,
-            whitelisted:            moduleOptions.whitelisted,
-            reloadPageOnChange:     moduleOptions.reloadPageOnChange,
-            xhr_data_element:       moduleOptions.xhr_data_element + '-' + language,
-            sameSite:               moduleOptions.sameSite,
-            secure:                 secure,
+            contentURL:             moduleOptions.contentURL,                   // dialog content (modals) for all supported languages
+            cookieName:             moduleOptions.cookieName,                   // name of the consent cookie
+            cookieSameSite:         moduleOptions.cookieSameSite,               // restrict consent cookie
+            dialogLanguage:         moduleOptions.dialogLanguage,               // language for the dialog (modal)
+            whitelisted:            moduleOptions.whitelisted,                  // pages NOt dialog is shown
+            reloadPageOnChange:     moduleOptions.reloadPageOnChange,           // reload if setzings has changed
+            dialogContainerID:      moduleOptions.dialogContainerID,            // container, the dialog modal is (dynamically) loaded
+            xhrDataElement:         moduleOptions.xhrDataElement,               // container for all language-specific dialogs (modals)
             postSelectionCallback:  function () {j1.adapter.cookieConsent.cbCookie()}
           });
 

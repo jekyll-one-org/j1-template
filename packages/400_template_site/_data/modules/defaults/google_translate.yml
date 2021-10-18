@@ -27,15 +27,21 @@ defaults:
   enabled:                              false
 
   languages:                            [all]                                   # supported languages
-  autodetect_dest_language:             false                                   # detect translation lang from browser
+  translationLanguage:                  auto                                    # detect translation lang from browser
   translate_all_pages:                  false                                   # enable tranlation on all pages
   hide_suggestion_box:                  false                                   # disable suggestions on translated text
   hide_powered_by:                      false                                   # disable label "Powered by Google"
   hide_top_frame:                       false                                   # disable the translator frame
+  reloadPageOnChange:                   true                                    # reload current page if user settings has been changed
+  postSelectionCallback:                j1.adapter.googleTranslator.cbCookie
 
-  modalContentURL:                      /assets/data/google_translate
-  xhr_data_element:                     modal-google-translate                  # container for the language-specific modal (taken from /assets/data/google_translate.html)
-  modalId:                              translator-modal
+  contentURL:                           /assets/data/google_translate           # dialogs (modals) for all supported languages
+  dialogLanguage:                       auto                                    # auto|content|one of dialogLanguages
+  dialogLanguages:                      [en, de]                                # supported dialog (modal) languages, defaults to FIRST language defined
+  cookieName:                           j1.user.translate                       # name of the user translation cookie (primary data)
+  cookieConsentName:                    j1.user.consent                         # name of the Cookie Consent Cookie (secondary data)
+  xhrDataElement:                       google-data                             # container for the language-specific modal (taken fromcontentURL)
+  dialogContainerID:                    translator-dialog                       # container, the dialog modal is (dynamically) loaded
 
   modal_settings:
 
@@ -45,94 +51,56 @@ defaults:
 
     body_text:
       en: >
-                                        This website is using cookies and similar technologies that
-                                        are required for operation. You are free to decide to give,
-                                        refuse or withdraw your consent at any time by clicking
-                                        the <code>My Settings</code> button. Subsequent changes are
-                                        possible at any time by clicking on the <code>cookie icon</code>
-                                        in the menu bar.
+                                        This website uses the free service <em>Google Translate</em> to
+                                        translate the content into 100+ languages in a matter of seconds.
+                                        The <b>language</b> for translation is taken <b>automatically</b> from the
+                                        language settings of your <b>browser</b>.
+                                        If you do <b>not</b> want translation anymore, <b>disable</b> the service
+                                        in section <code>My Settings</code>.
                                         <br><br>
-                                        Extended cookies are only used with your consent. Additional
-                                        cookies are used to analyze the usage of this website.
-                                        Analysis of the use of this website help gives you a better
-                                        user experience of the website to offer. More information
-                                        about what data is collected and how they may be passed on
-                                        to partners can be found in the <code>Privacy Policy</code>.
+                                        Your current language setting for translation is:
                                         <br><br>
-                                        Visiting this website, you consent to the use of by clicking the
-                                        <code>I agree</code> button.
+                                        <span id="translator-current-language"> <i class="flag-icon flag-icon-de rectangle size-md "></i> German <span>
+                                        <br><br>
+                                        To run the translation for your language, click the <code>Agree</code> button.
       de: >
-                                        Diese Website nutzt Cookies und ähnliche Technologien, die
-                                        zum Betrieb erforderlich sind. Es steht Ihnen frei, Ihre
-                                        Zustimmung jederzeit zu geben, zu verweigern oder zurückzuziehen,
-                                        indem Sie auf die Schaltfläche <code>Meine Einstellungen</code>
-                                        klicken. Nachträgliche Änderungen sind jederzeit möglich, indem Sie
-                                        auf das <code>Cookie-Icon</code> in der Menüleiste klicken.
+                                        Diese Website nutzt den kostenlosen Dienst <em>Google Translate</em>,
+                                        um die Inhalte in Sekundenschnelle in über 100+ Sprachen zu übersetzen.
+                                        Die <b>Sprache</b> für die Übersetzung wird <b>automatisch</b> aus den
+                                        Spracheinstellungen Ihres <b>Browsers</b> übernommen. Wenn Sie <b>keine</b>
+                                        Übersetzung mehr wünschen, <b>deaktivieren</b> Sie den Dienst im Abschnitt
+                                        <code>Meine Einstellungen</code>.
                                         <br><br>
-                                        Erweiterte Cookies werden nur mit Ihrer Zustimmung verwendet.
-                                        Zusätzliche Cookies werden eingesetzt, um Analysen der Nutzung
-                                        dieser Website durchzuführen. Analysen der Nutzung dieser Website
-                                        helfen dabei, Ihnen ein besseres Nutzungserlebnis der Website
-                                        zu bieten. Weitere Informationen welche Daten gesammelt und
-                                        wie sie ggf. an Partner weitergegeben werden finden Sie in der
-                                        <code>Datenschutzerklärung</code>.
+                                        Ihre aktuelle Spracheinstellung für die Übersetzung ist:
                                         <br><br>
-                                        Für den Besuch dieser Webseite stimmen Sie der Verwendung zu,
-                                        indem Sie auf die Schaltfläche <code>Einverstanden</code> klicken.
+                                        <span id="translator-current-language"> <i class="flag-icon flag-icon-de rectangle size-md "></i> German <span>
+                                        <br><br>
+                                        Um die Übersetzung für Ihre Sprache zu starten, klicken Sie auf die
+                                        Schaltfläche <code>Einverstanden</code>.
 
     privacy_notice:
+
       en: >
-                                        The operators of this website take the protection of your personal data
-                                        seriously. We treat your data confidential and comply with the
-                                        General Data Protection Regulation (GDPR) of the European Union to
-                                        protect your privacy.
-                                        A small set of data is stored in persistent cookies, e.g. what data
-                                        you agree to be stored in cookies. Persistent cookies have a lifespan
-                                        of 365 days (a year). We and our partners make use of persistent cookies.
-                                        Those additional cookies are only used with your consent.
+                                        The free service from <em>Google Translate</em> uses cookies to provide
+                                        its services, personalize advertising and run traffic analysis:
                                         <br><br>
-                                        <code>Necessary</code> data is stored to run base services of this site.
-                                        This website is based on static content, and no database is used behind it.
-                                        All information (data) needed to control this site is stored in
-                                        so-called session cookies. Session cookies are automatically removed by your
-                                        browser if you close all windows.
+                                        <code>Analysis</code> For translations, your consent on
+                                        <b>Analysis</b> with your <code>Privacy Settings</code> is required.
                                         <br><br>
-                                        <code>Analysis</code> of the use of this website helps us to optimize your
-                                        user experience of the website. For analysis, Google Analytics (GA) is used.
-                                        This website does <b>not</b> transfer any personal data to GA. Implicit
-                                        personal information, like IP addresses, is anonymized to protect your privacy.
-                                        <br><br>
-                                        <code>Personalization</code> is used e.g. to provide personal themes, collect
-                                        visitors feedback or running advertising campaigns to provide you a website
-                                        free of charge. Partners like Bootswatch, Disqus or Google enables us to provide
-                                        you excellent personalized services and enables us to finance the costs for
-                                        running this site.
+                                        <code>Personalization</code> For translations, your consent on
+                                        <b>Personalization</b> with your <code>Privacy Settings</code> is required.
       de: >
-                                        Die Betreiber dieser Website nehmen den Schutz Ihrer persönlichen Daten ernst.
-                                        Wir behandeln Ihre Daten vertraulich und halten uns zum Schutz Ihrer Privatsphäre
-                                        an die Datenschutz-Grundverordnung (DSGVO) der Europäischen Union. In persistenten
-                                        Cookies wird ein kleiner Datensatz gespeichert, z.B. mit welchen Daten Sie
-                                        einverstanden sind, in Cookies gespeichert zu werden. Dauerhafte Cookies haben
-                                        eine Lebensdauer von 365 Tagen (ein Jahr). Wir und unsere Partner verwenden
-                                        dauerhafte Cookies. Diese zusätzlichen Cookies werden nur mit Ihrer Zustimmung
-                                        verwendet.
+                                        Der kostenlose Dienst von <em>Google Translate</em> verwendet Cookies
+                                        um seine Dienste bereitzustellen, Werbung zu personalisieren und
+                                        Verkehrsanalysen durchzuführen:
                                         <br><br>
-                                        <code>Notwendige</code> Daten werden gespeichert, um Basisdienste dieser Site zu
-                                        betreiben. Diese Website basiert auf statischen Inhalten und es wird keine
-                                        Datenbank dahinter verwendet. Alle Informationen (Daten), die zur Steuerung dieser
-                                        Seite benötigt werden, werden in sogenannten Session-Cookies gespeichert. Sitzungscookies
-                                        werden von Ihrem Browser automatisch entfernt, wenn Sie alle Fenster schließen.
+                                        <code>Analysen</code> Für die Nutzung von Übersetzungen ist Ihre
+                                        Zustimmung zu <b>Analysen</b> in den Einstellungen <code>Ihre Privatsphäre</code>
+                                        erforderlich.
                                         <br><br>
-                                        <code>Analysen</code> der Nutzung dieser Website hilft uns, Ihr Nutzungserlebnis der
-                                        Website zu optimieren. Zur Analyse wird Google Analytics (GA) verwendet. Diese Website
-                                        übermittelt keine personenbezogenen Daten an GA. Implizite personenbezogene Daten wie
-                                        IP-Adressen werden zum Schutz Ihrer Privatsphäre anonymisiert.
-                                        <br><br>
-                                        <code>Personalisierung</code> wird eingesetzt um Ihnen z.B. personalierte Ansichten der
-                                        Webseite (Themen) anzubieten, Benutzerfeedback zu sammeln oder Werbekampagnen durchzuführen,
-                                        um Ihnen diese Website kostenlos zur Verfügung zu stellen. Partner wie Bootswatch, Disqus
-                                        oder Google ermöglichen es uns, Ihnen exzellente personalisierte Dienste anzubieten sowie
-                                        die Kosten für den Betrieb dieser Website zu finanzieren.
+                                        <code>Personalisierung</code> Für die Nutzung von Übersetzungen ist Ihre
+                                        Zustimmung zur <b>Personalisierung</b> in den Einstellungen <code>Ihre Privatsphäre</code>
+                                        erforderlich.
 
 # ------------------------------------------------------------------------------
 # END config

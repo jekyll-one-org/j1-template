@@ -69,12 +69,14 @@ exclude_from_search:                    true
 <div id="consent-data-en">
   <div id="modal-consent-en" class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
     <div class="modal-content">
+
       <div class="modal-header">
-        <p class="lead">{{consent_options.consent_modal_title.en}}</p>
+        <p class="lead">{{consent_options.modal_settings.title.en}}</p>
       </div>
+
       <div class="modal-body">
         <div class="bccs-body-text" style="font-size: 90%">
-          <p class="mb-4">{{consent_options.body_text.en}}</p>
+          <p class="mb-4">{{consent_options.modal_settings.body_text.en}}</p>
         </div>
         <p>
           <a href="#bccs-privacy" data-toggle="collapse" class="">Privacy Notice</a>
@@ -83,7 +85,7 @@ exclude_from_search:                    true
 
         <div id="bccs-privacy" class="collapse">
           <div class="bccs-body-text" style="font-size: 90%">
-            <p class="mb-4">{{consent_options.privacy_notice.en}}</p>
+            <p class="mb-4">{{consent_options.modal_settings.privacy_notice.en}}</p>
           </div>
         </div>
 
@@ -94,9 +96,9 @@ exclude_from_search:                    true
           <div class="bccs-option" data-name="necessary">
             <div class="switch">
               <label>
-                <input id="bccs-checkboxNecessary" type="checkbox" name="bccs-checkboxNecessary" disabled="" checked="">
+                <input id="bccs-checkboxNecessary" type="checkbox" name="bccs-checkboxNecessary" disabled="true" checked="true">
                 <span class="bmd-switch-track"></span>
-                Necessary
+                Necessary (Session Cookies)
               </label>
               <ul>
                 <li>Required to run the website</li>
@@ -106,35 +108,37 @@ exclude_from_search:                    true
           <div class="bccs-option" data-name="analyses">
             <div class="switch">
               <label>
-                <input id="bccs-checkboxAnalyses" type="checkbox" name="bccs-checkboxAnalyses" checked="">
+                <input id="bccs-checkboxAnalyses" type="checkbox" name="bccs-checkboxAnalyses" checked="true">
                 <span class="bmd-switch-track"></span>
-                Analyses
+                Analyses (Persistent Cookies)
               </label>
               <ul>
-                <li>Monitoring website usage</li>
-                <li>Optimizing the user experience</li>
+                <li>Usage monitoring for this site</li>
+                <li>Optimizing of the performance for this site</li>
+                <li>Optimizing of content for all visitors</li>
               </ul>
             </div>
           </div>
           <div class="bccs-option" data-name="personalization">
             <div class="switch">
               <label>
-                <input id="bccs-checkboxPersonalization" type="checkbox"  name="bccs-checkboxPersonalization" checked="">
+                <input id="bccs-checkboxPersonalization" type="checkbox"  name="bccs-checkboxPersonalization" checked="true">
                 <span class="bmd-switch-track"></span>
-                Personalization
+                Personalization (Persistent Cookies)
               </label>
               <ul>
-                <li>Storage of your preferences from previous visits</li>
-                <li>Collecting user feedback to improve our website</li>
-                <li>Recording of your interests in order to provide customised content and offers</li>
+                <li>Collect user feedback for improvements</li>
+                <li>Storage of personal preferences from previous visits</li>
+                <li>Translation or comments to exchange visitor's experiences</li>
               </ul>
             </div>
           </div>
         </div>
       </div>
+
       <div class="modal-footer">
         <button id="bccs-buttonDoNotAgree" type="button" class="btn btn-link text-decoration-none" style="">
-        I do not agree
+        I do not Agree
         </button>
         <button id="bccs-buttonAgree" type="button" class="btn btn-primary btn-raised" style="">
         Agree
@@ -146,6 +150,7 @@ exclude_from_search:                    true
         Agree on all
         </button>
       </div>
+
     </div>
   </div>
 </div>
@@ -158,12 +163,14 @@ exclude_from_search:                    true
 <div id="consent-data-de">
   <div id="modal-consent-de" class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
     <div class="modal-content">
+
       <div class="modal-header">
-        <p class="lead">{{consent_options.consent_modal_title.de}}</p>
+        <p class="lead">{{consent_options.modal_settings.title.de}}</p>
       </div>
+
       <div class="modal-body">
         <div class="bccs-body-text" style="font-size: 90%">
-          <p class="mb-4">{{consent_options.body_text.de}}</p>
+          <p class="mb-4">{{consent_options.modal_settings.body_text.de}}</p>
         </div>
         <p>
           <a href="#bccs-privacy" data-toggle="collapse" class="">Datenschutzerklärung</a>
@@ -172,7 +179,7 @@ exclude_from_search:                    true
 
         <div id="bccs-privacy" class="collapse">
           <div class="bccs-body-text" style="font-size: 90%">
-            <p class="mb-4">{{consent_options.privacy_notice.de}}</p>
+            <p class="mb-4">{{consent_options.modal_settings.privacy_notice.de}}</p>
           </div>
         </div>
 
@@ -183,9 +190,9 @@ exclude_from_search:                    true
           <div class="bccs-option" data-name="necessary">
             <div class="switch">
               <label>
-                <input id="bccs-checkboxNecessary" type="checkbox" name="bccs-checkboxNecessary" disabled="" checked="">
+                <input id="bccs-checkboxNecessary" type="checkbox" name="bccs-checkboxNecessary" disabled="true" checked="true">
                 <span class="bmd-switch-track"></span>
-                Notwendig
+                Notwendig (Sitzungscookies)
               </label>
               <ul>
                 <li>Zum Betrieb der Website erforderlich</li>
@@ -195,32 +202,34 @@ exclude_from_search:                    true
           <div class="bccs-option" data-name="analyses">
             <div class="switch">
               <label>
-                <input id="bccs-checkboxAnalyses" type="checkbox" name="bccs-checkboxAnalyses" checked="">
+                <input id="bccs-checkboxAnalyses" type="checkbox" name="bccs-checkboxAnalyses" checked="true">
                 <span class="bmd-switch-track"></span>
-                Analysen
+                Analysen (dauerhafte Cookies)
               </label>
               <ul>
-                <li>Beobachtung der Website-Nutzung</li>
-                <li>Optimierung der Benutzererfahrung</li>
+                <li>Nutzungsüberwachung für diese Website</li>
+                <li>Optimierung der Leistung für diese Website</li>
+                <li>Optimierung des Inhalts für alle Besucher</li>
               </ul>
             </div>
           </div>
           <div class="bccs-option" data-name="personalization">
             <div class="switch">
               <label>
-                <input id="bccs-checkboxPersonalization" type="checkbox"  name="bccs-checkboxPersonalization" checked="">
+                <input id="bccs-checkboxPersonalization" type="checkbox"  name="bccs-checkboxPersonalization" checked="true">
                 <span class="bmd-switch-track"></span>
-                Personalisierung
+                Personalisierung (dauerhafte Cookies)
               </label>
               <ul>
-                <li>Speicherung Ihrer Präfererenzen aus frühreren Besuchen</li>
-                <li>Sammeln von Benutzer-Feedback zur Verbesserung unserer Website</li>
-                <li>Erfassung Ihrer Interessen, um maßgeschneiderte Inhalte und Angebote anzubieten</li>
+                <li>Sammeln von Benutzer-Feedback für Verbesserungen</li>
+                <li>Speicherung Ihrer Präferenzen aus frühreren Besuchen</li>
+                <li>Übersetzungen oder Kommentare zum Austausch von Erfahrungen der Besucher</li>
               </ul>
             </div>
           </div>
         </div>
       </div>
+
       <div class="modal-footer">
         <button id="bccs-buttonDoNotAgree" type="button" class="btn btn-link text-decoration-none" style="">
         Ich bin nicht einverstanden
@@ -235,6 +244,7 @@ exclude_from_search:                    true
         Allen zustimmen
         </button>
       </div>
+
     </div>
   </div>
 </div>

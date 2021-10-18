@@ -238,6 +238,9 @@ var j1 = (function () {
     'theme_author':         '',
     'theme_version':        '{{template_version}}',
     'session_active':       false,
+    'google_translate':     'disabled',
+    'translate_all_pages':  true,
+    'translate_locale':     navigator.language || navigator.userLanguage,
     'last_session_ts':      ''
   };
   var user_consent = {};

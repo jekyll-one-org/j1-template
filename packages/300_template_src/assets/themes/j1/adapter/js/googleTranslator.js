@@ -37,7 +37,6 @@ regenerate:                             true
 {% assign translator_defaults = modules.defaults.google_translate.defaults %}
 {% assign translator_settings = modules.google_translate.settings %}
 {% assign tracking_enabled    = template_config.analytics.enabled %}
-{% assign tracking_id         = template_config.analytics.google.tracking_id %}
 
 
 {% comment %} Set config options
@@ -76,6 +75,10 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 /* eslint quotes: "off"                                                       */
 // -----------------------------------------------------------------------------
+// https://github.com/EdwardBalaj/Simple-DeepL-API-Integration
+// https://github.com/marghoobsuleman/ms-Dropdown
+// https://www.marghoobsuleman.com/image-dropdown/help
+// https://www.marghoobsuleman.com/image-dropdown/advanced-help
 'use strict';
 
 {% comment %} Main
@@ -83,9 +86,7 @@ regenerate:                             true
 j1.adapter['googleTranslator'] = (function (j1, window) {
 
   var environment       = '{{environment}}';
-  var tracking_enabled  = ('{{tracking_enabled}}' === 'true') ? true: false;
-  var tracking_id       = '{{tracking_id}}';
-  var tracking_id_valid = (tracking_id.includes('tracking-id')) ? false : true;
+  var tracking_enabled  = ('{{tracking_enabled}}' === 'true') ? true: false;    // Analytics/GA enabled?
   var moduleOptions     = {};
   var _this;
   var $modal;
@@ -99,10 +100,10 @@ j1.adapter['googleTranslator'] = (function (j1, window) {
   var secure;
   var logText;
   var cookie_written;
-  var language;
-
-  // NOTE: RegEx for tracking_id: ^(G|UA|YT|MO)-[a-zA-Z0-9-]+$
-  // See: https://stackoverflow.com/questions/20411767/how-to-validate-google-analytics-tracking-id-using-a-javascript-function/20412153
+  var modal_language;
+  var navigator_language;
+  var translation_language;
+  var ddSourceLanguage;
 
   // ---------------------------------------------------------------------------
   // Helper functions
@@ -121,14 +122,16 @@ j1.adapter['googleTranslator'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       // globals
       // -----------------------------------------------------------------------
-      _this         = j1.adapter.googleTranslator;
-      logger        = log4javascript.getLogger('j1.adapter.googleTranslator');
-      url           = new liteURL(window.location.href);
-      baseUrl       = url.origin;
-      hostname      = url.hostname;
-      domain        = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
-      secure        = (url.protocol.includes('https')) ? true : false;
-      language      = "{{site.language}}";
+      _this                 = j1.adapter.googleTranslator;
+      logger                = log4javascript.getLogger('j1.adapter.googleTranslator');
+      url                   = new liteURL(window.location.href);
+      baseUrl               = url.origin;
+      hostname              = url.hostname;
+      domain                = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+      secure                = (url.protocol.includes('https')) ? true : false;
+      modal_language        = "{{site.language}}";
+      navigator_language    = navigator.language || navigator.userLanguage;     // userLanguage for MS IE compatibility
+      translation_language  = navigator_language.split('-')[0];
 
       // set domain used by cookies
       if(domain !== 'localhost') {
@@ -159,11 +162,6 @@ j1.adapter['googleTranslator'] = (function (j1, window) {
         moduleOptions = j1.mergeData(moduleOptions, settings);
       }
 
-      // jadams, set static for now
-      //
-      moduleOptions.contentURL        = '/assets/data/google_translate';
-      moduleOptions.xhr_data_element  = 'google-data';
-
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
@@ -174,15 +172,14 @@ j1.adapter['googleTranslator'] = (function (j1, window) {
           logger.info('\n' + 'module is being initialized');
 
           j1.googleTranslator = new googleTranslator({
-            contentURL:             moduleOptions.contentURL,
-            cookieName:             moduleOptions.cookieName,
-            language:               language,
-            whitelisted:            moduleOptions.whitelisted,
-            reloadPageOnChange:     moduleOptions.reloadPageOnChange,
-            xhr_data_element:       moduleOptions.xhr_data_element + '-' + language,
-            sameSite:               moduleOptions.sameSite,
-            secure:                 secure,
-            postSelectionCallback:  function () {j1.adapter.google_translate.cbCookie()}
+            contentURL:             moduleOptions.contentURL,                   // dialog content (modals) for all supported languages
+            cookieName:             moduleOptions.cookieName,                   // the name of the User State Cookie (primary data)
+            cookieConsentName:      moduleOptions.cookieConsentName,            // the name of the Cookie Consent Cookie (secondary data)
+            dialogContainerID:      moduleOptions.dialogContainerID,            // dest container, the dialog modal is loaded (dynamically)
+            dialogLanguage:         moduleOptions.dialogLanguage,               // language for the dialog (modal)
+            translationLanguage:    moduleOptions.translationLanguage,          // language for translation
+            xhrDataElement:         moduleOptions.xhrDataElement,               // container for all language-specific dialogs (modals)
+            postSelectionCallback:  function () {j1.adapter.googleTranslator.cbCookie()}
           });
 
           _this.setState('finished');
@@ -242,92 +239,14 @@ j1.adapter['googleTranslator'] = (function (j1, window) {
     // made his selection (callback)
     // -------------------------------------------------------------------------
     cbCookie: function () {
-      var gaCookies           = j1.findCookie('_ga');
-      var j1Cookies           = j1.findCookie('j1');
       var cookie_names        = j1.getCookieNames();
       var user_state          = j1.readCookie(cookie_names.user_state);
       var user_consent        = j1.readCookie(cookie_names.user_consent);
-      var json                = JSON.stringify(user_consent);
-      var user_agent          = platform.ua;
 
       logger.info('\n' + 'entered post selection callback from google_translate');
-      logger.info('\n' + 'current values from google_translate: ' + json);
+      logger.debug('\n' + 'current values from cookie consent: ' + JSON.stringify(user_consent));
+      logger.debug('\n' + 'current values from user state: ' + JSON.stringify(user_state));
 
-      // enable cookie button if not visible
-      if ($('#quickLinksCookieButton').css('display') === 'none')  {
-        $('#quickLinksCookieButton').css('display', 'block');
-      }
-
-      // jadams, 2021-07-11: moved to j1 adapter (displayPage)
-      // NOTE: Warning needs to be moved to another module
-      // because page is reloaded after selection
-      //
-      // if (tracking_enabled && !tracking_id_valid) {
-      //   logger.error('\n' + 'tracking enabled, but invalid tracking id found: ' + tracking_id);
-      // } else {
-      //   logger.warn('\n' + 'tracking enabled, tracking id found: ' + tracking_id);
-      // }
-
-      logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
-      j1Cookies.forEach(item => console.log('j1.core.switcher: ' + item));
-      logger.debug('\n' + 'ga cookies found:' + gaCookies.length);
-      gaCookies.forEach(item => console.log('j1.core.switcher: ' + item));
-
-      if (user_agent.includes('iPad'))  {
-        logger.warn('\n' + 'product detected : ' + platform.product);
-        logger.warn('\n' + 'skip deleting (unwanted) cookies for this platform');
-      }
-
-      // Manage Google Analytics OptIn/Out
-      // See: https://github.com/luciomartinez/gtag-opt-in/wiki
-      if (tracking_enabled && tracking_id_valid) {
-        GTagOptIn.register(tracking_id);
-        if (user_consent.analyses)  {
-          logger.info('\n' + 'enable: GA');
-          GTagOptIn.optIn();
-        } else {
-          logger.warn('\n' + 'disable: GA');
-          GTagOptIn.optOut();
-
-          if (!user_agent.includes('iPad')) {
-            gaCookies.forEach(function (item) {
-              logger.warn('\n' + 'delete GA cookie: ' + item);
-              j1.removeCookie({ name: item, domain: cookie_domain });
-            });
-          }
-        }
-
-        // Managing providers for personalization OptIn/Out (Comments|Ads)
-        //
-        if (!user_consent.analyses || !user_consent.personalization) {
-          // expire consent|state cookies to session
-          j1.expireCookie({ name: cookie_names.user_state });
-          j1.expireCookie({ name: cookie_names.user_consent });
-        }
-        if (moduleOptions.reloadPageOnChange) {
-          // reload current page (skip cache)
-          location.reload(true);
-        }
-      } else {
-        // jadams, 2021-08-10: remove cookies on invalid GA config or left
-        // cookies from previous session if they exists
-        gaCookies.forEach(function (item) {
-          logger.warn('\n' + 'delete GA cookie: ' + item);
-          j1.removeCookie({ name: item, domain: cookie_domain });
-        });
-
-        // Managing providers for personalization OptIn/Out (Comments|Ads)
-        //
-        if (!user_consent.analyses || !user_consent.personalization) {
-          // expire consent|state cookies to session
-          j1.expireCookie({ name: cookie_names.user_state });
-          j1.expireCookie({ name: cookie_names.user_consent });
-        }
-        if (moduleOptions.reloadPageOnChange) {
-          // reload current page (skip cache)
-          location.reload(true);
-        }
-      } // END if tracking_enabled
     } // END cbCookie
 
   }; // END return

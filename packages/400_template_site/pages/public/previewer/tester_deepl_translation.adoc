@@ -299,7 +299,6 @@ ____
         <option value="more" data-image-css="far fa-meh mt-1 mr-3">Formal language</option>
         <option value="less" data-image-css="far fa-smile mt-1 mr-3">Informal language</option>
       </select>
-
     </div>
 
     <!-- translation input -->

@@ -39,11 +39,10 @@
 
 function BootstrapCookieConsent(props) {
   var logger                = log4javascript.getLogger('j1.core.bsCookieConsent');
-  var modalId               = 'bccs-modal';
   var self                  = this;
   var detailedSettingsShown = false;
   var url                   = new liteURL(window.location.href);
-  var secure                = (url.protocol.includes('https')) ? true : false;
+  var cookieSecure          = (url.protocol.includes('https')) ? true : false;
   var logText;
   var current_page;
   var whitelisted;
@@ -51,35 +50,43 @@ function BootstrapCookieConsent(props) {
   logger.info('\n' + 'initializing core module: started');
   logger.info('\n' + 'state: started');
 
+  // default settings
   this.props = {
-    autoShowDialog:         true,                                               // disable autoShowModal on the privacy policy and legal notice pages, to make these pages readable
-    language:               navigator.language,                                 // the language, in which the modal is shown
-    languages:              ["en", "de"],                                       // supported languages (in ./content/), defaults to first in array
-    contentURL:             "./content",                                        // this URL must contain the dialogs content in the needed languages
-    cookieName:             "cookie-consent-settings",                          // the name of the cookie in which the configuration is stored as JSON
-    cookieStorageDays:      365,                                                // the duration the cookie configuration is stored on the client
+    autoShowDialog:         true,                                               // show dialog if NO consent cookie found
+    dialogLanguage:         'content',                                          // language used for the consent dialog (modal)
+    dialogLanguages:        ['en','de'],                                        // supported languages for the consent dialog (modal), defaults to first in array
+    contentURL:             '/assets/data/cookieconsent',                       // URL contain the consent dialogs (modals) for ALL supported languages
+    cookieName:             'j1.user.translate',                                // name of the cookie, in which the configuration is stored
+    cookieStorageDays:      365,                                                // duration the configuration cookie is stored on the client
     postSelectionCallback:  undefined,                                          // callback function, called after the user has made his selection
-    whitelisted:            [],                                                 // pages NO consent modal page is issued
-    xhr_data_element:       "",                                                 // container for the language-specific consent modal taken from /assets/data/cookieconsent.html
-    sameSite:               "Strict",                                           // restrict consent cookie to first-party, do NOT send cookie to other domains
-    secure:                 false                                               //
+    whitelisted:            [],                                                 // pages NO consent modal dialog is issued
+    xhrDataElement:         'consent-data',                                     // src container for all language-specific consent dialogs (taken from contentURL)
+    dialogContainerID:      'consent-modal',                                    // dest container, the dialog modal is loaded (dynamically)
+    cookieSameSite:         'Strict',                                           // restrict the consent cookie to first-party (do NOT send cookie to other domains)
   };
 
+  // merge property settings
   for (var property in props) {
     this.props[property] = props[property];
   }
 
-  this.language = this.props.language;
-  if (this.language.indexOf("-") !== -1) {
-    this.language = this.language.split("-")[0];
+  if (this.props.dialogLanguage.indexOf("-") !== -1) {
+    this.props.dialogLanguage = this.props.dialogLanguage.split("-")[0];
   }
 
-  if (!this.props.languages.includes(this.language)) {
-    this.language = this.props.languages[0];                                    // fallback on default language
+  // fallback on default language (modal) if dialogLanguage not suppported
+  if (!this.props.dialogLanguages.includes(this.props.dialogLanguage)) {
+    this.props.dialogLanguage = this.props.dialogLanguages[0];
   }
+
+  // set modal by dialogLanguage that is loadad
+  this.props.xhrDataElement = this.props.xhrDataElement + '-' + this.props.dialogLanguage;
+
+  // set modal by dialogLanguage that is loadad
+  this.props.cookieSecure = cookieSecure;
 
   var Cookie = {
-    set: function (name, value, days, samesite, secure) {
+    set: function (name, value, days, cookieSameSite, cookieSecure) {
       var value_encoded = window.btoa(value);
       var expires = "";
       if (days) {
@@ -87,10 +94,10 @@ function BootstrapCookieConsent(props) {
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         expires = "; expires=" + date.toUTCString();
       }
-      if (secure) {
-        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + samesite + '; ' + 'secure=' + secure + ';';
+      if (cookieSecure) {
+        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; cookieSameSite=' + cookieSameSite + '; ' + 'cookieSecure=' + cookieSecure + ';';
       } else {
-        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + samesite + ';';
+        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; cookieSameSite=' + cookieSameSite + ';';
       }
     },
     get: function (name) {
@@ -124,15 +131,15 @@ function BootstrapCookieConsent(props) {
   function showDialog(options) {
     Events.documentReady(function () {
 
-      self.modal = document.getElementById(modalId);
+      self.modal = document.getElementById(self.props.dialogContainerID);
       if (!self.modal) {
         logger.info('\n' +  'load consent modal');
         self.modal = document.createElement("div");
-        self.modal.id = modalId;
+        self.modal.id = self.props.dialogContainerID;
         self.modal.setAttribute("class", "modal fade");
         self.modal.setAttribute("tabindex", "-1");
         self.modal.setAttribute("role", "dialog");
-        self.modal.setAttribute("aria-labelledby", modalId);
+        self.modal.setAttribute("aria-labelledby", self.props.dialogContainerID);
         document.body.append(self.modal);
         self.$modal = $(self.modal);
 
@@ -149,7 +156,7 @@ function BootstrapCookieConsent(props) {
         .done(function (data) {
           logger.info('\n' + 'loading consent modal: successfully');
           self.modal.innerHTML = data;
-          self.modal.innerHTML = $('#' + self.props.xhr_data_element).eq(0).html();
+          self.modal.innerHTML = $('#' + self.props.xhrDataElement).eq(0).html();
 
           $(self.modal).modal({
             backdrop: "static",
@@ -246,12 +253,12 @@ function BootstrapCookieConsent(props) {
   }
 
   function agreeAll() {
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(true)), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
+    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(true)), self.props.cookieStorageDays, self.props.cookieSameSite, self.props.cookieSecure);
     self.$modal.modal('hide');
   }
 
   function doNotAgree() {
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
+    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), self.props.cookieStorageDays, self.props.cookieSameSite, self.props.cookieSecure);
 
     // jadams, 2021-07-15: all cookies NOT longer supported by j1.expireCookie
     // TODO: Create loop over all cookies found in page
@@ -264,7 +271,7 @@ function BootstrapCookieConsent(props) {
   }
 
   function saveSettings() {
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions()), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
+    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions()), self.props.cookieStorageDays, self.props.cookieSameSite, self.props.cookieSecure);
     self.$modal.modal('hide');
   }
 

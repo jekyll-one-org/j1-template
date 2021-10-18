@@ -1379,7 +1379,7 @@ resources:
       comment:                          module imageDropdown
       region:                           head
       layout:                           [ home, page, post, collection, blog_archive ]
-      required:                         ondemand
+      required:                         always
       preload:                          false                                   # property currently unused
       script_load:                      async
       dependencies:                     false
