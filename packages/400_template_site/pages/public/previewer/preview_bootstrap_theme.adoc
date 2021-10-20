@@ -59,7 +59,6 @@ resource_options:
 
 // Include sub-documents
 // -----------------------------------------------------------------------------
-
 ++++
   <!-- Prepend H1 tag here -->
   <div id="theme" class="row ml-0 mb-3">

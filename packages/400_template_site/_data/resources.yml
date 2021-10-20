@@ -1393,11 +1393,11 @@ resources:
   # ----------------------------------------------------------------------------
   #  Google Translator for J1 Template
   #
-  - name:                               Google Translator
+  - name:                               Translator
     resource:
-      id:                               googleTranslator
+      id:                               translator
       enabled:                          true
-      comment:                          module googleTranslator
+      comment:                          module translator
       region:                           head
       layout:                           [ all ]
       required:                         always
@@ -1406,10 +1406,10 @@ resources:
       dependencies:                     false
       pass_init_data:                   false
       data:
-        css:                            [ modules/googleTranslator/css/translator ]
-        files:                          [ adapter/js/googleTranslator.js ]
-        js:                             [ modules/googleTranslator/js/translator ]
-        init_function:                  [ j1.adapter.googleTranslator.init ]
+        css:                            [ modules/translator/css/translator ]
+        files:                          [ adapter/js/translator.js ]
+        js:                             [ modules/translator/js/translator ]
+        init_function:                  [ j1.adapter.translator.init ]
 
 # ------------------------------------------------------------------------------
 # END config

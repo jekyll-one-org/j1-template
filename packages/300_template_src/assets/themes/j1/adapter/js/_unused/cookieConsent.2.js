@@ -246,7 +246,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       // See: https://github.com/luciomartinez/gtag-opt-in/wiki
       if (tracking_enabled && tracking_id_valid) {
         GTagOptIn.register(tracking_id);
-        if (user_consent.analyses)  {
+        if (user_consent.analysis)  {
           logger.info('Enable: GA');
           GTagOptIn.optIn();
         } else {
@@ -266,7 +266,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
          }
         }
 
-        if (!user_consent.analyses || !user_consent.personalization)  {
+        if (!user_consent.analysis || !user_consent.personalization)  {
           // expire consent|state cookies to session
           j1.writeCookie({
             name:     'j1.user.state',

@@ -50,7 +50,6 @@ resource_options:
 
 // Include sub-documents
 // -----------------------------------------------------------------------------
-
 == Material Design Icons
 
 _Material Design Icons_ (MDI) is a very helpful design resource for Web Design

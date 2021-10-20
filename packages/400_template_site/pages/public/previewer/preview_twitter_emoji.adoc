@@ -50,6 +50,9 @@ resource_options:
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents
+// -----------------------------------------------------------------------------
 == Twitter Emoji's
 
 J1 Template comes with the Twitter Emoji library (Twemoji) V1 included and

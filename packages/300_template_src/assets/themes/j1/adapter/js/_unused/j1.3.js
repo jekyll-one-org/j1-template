@@ -265,7 +265,7 @@ var j1 = (function () {
         user_state.session_active     = false;
         user_state.last_session_ts    = timestamp_now;
 
-        if (!user_consent.analyses || !user_consent.personalization)  {
+        if (!user_consent.analysis || !user_consent.personalization)  {
           // expire consent|state cookies to session
           j1.writeCookie({
             name:     cookie_names.user_consent,
@@ -314,7 +314,7 @@ var j1 = (function () {
 
       user_state.session_active = true;
 
-      if (!user_consent.analyses || !user_consent.personalization)  {
+      if (!user_consent.analysis || !user_consent.personalization)  {
         // expire consent|state cookies to session
         j1.writeCookie({
           name:     cookie_names.user_state,

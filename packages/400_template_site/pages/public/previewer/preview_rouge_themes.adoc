@@ -64,7 +64,6 @@ resource_options:
 
 // Include sub-documents
 // -----------------------------------------------------------------------------
-
 == Theme selector
 
 For the default theme `Uno` of J1 Template, the following _Rouge_ themes

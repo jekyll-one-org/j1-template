@@ -57,11 +57,6 @@ resource_options:
 
 // Include sub-documents
 // -----------------------------------------------------------------------------
-
-
-// Page content
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 == J1 Color Palette
 
 The color palette used by J1 Template is based on the definitions of Google's

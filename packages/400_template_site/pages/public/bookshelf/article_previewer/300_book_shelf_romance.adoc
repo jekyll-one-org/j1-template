@@ -56,7 +56,6 @@ resource_options:
 
 // Include sub-documents
 // -----------------------------------------------------------------------------
-
 == Romance
 
 The romance genre is a popular category of books that consistently churns out

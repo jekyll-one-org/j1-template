@@ -223,12 +223,12 @@ j1.adapter['themer'] = (function (j1, window) {
            // j1 adapter (displayPage)
            //
            // jadams, 2021-07-25: hide|show themes menu on cookie consent
-           // (analyses|personalization) settings. BootSwatch is a 3rd party
+           // (analysis|personalization) settings. BootSwatch is a 3rd party
            // is using e.g GA. Because NO control is possible on 3rd parties,
            // for GDPR compliance, themes feature may disabled on
            // privacy settings
            //
-           // if (!user_consent.analyses || !user_consent.personalization)  {
+           // if (!user_consent.analysis || !user_consent.personalization)  {
            //   logger.warn('\n' + 'disable themes feature because of privacy settings');
            //   $("#themes_menu").hide();
            // } else {

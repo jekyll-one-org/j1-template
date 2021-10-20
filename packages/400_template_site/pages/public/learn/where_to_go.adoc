@@ -47,13 +47,11 @@ resource_options:
 // -----------------------------------------------------------------------------
 {% include {{load_attributes}} scope="global" %}
 
-
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // Include sub-documents
 // -----------------------------------------------------------------------------
-
 Welcome to the pages of J1 Template. If you are here the first time, a good
 decision you get on that page first. For sure, there is no better place to go.
 The crucial first step in finding your way to Jekyll is done. Congratulations.

@@ -185,7 +185,7 @@ j1.adapter['themer'] = (function (j1, window) {
       // store if theme_switcher is enabled
       user_state.theme_switcher = themerOptions.enabled;
 
-      if (!user_consent.analyses || !user_consent.personalization)  {
+      if (!user_consent.analysis || !user_consent.personalization)  {
         // expire state cookie to session
         j1.writeCookie({
           name:     cookie_names.user_state,

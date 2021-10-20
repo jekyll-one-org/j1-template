@@ -13,7 +13,7 @@ function BootstrapCookieConsent(props) {
 
     // var user_consent_default = {
     //   "necessary":            true,
-    //   "analyses":             true,
+    //   "analysis":             true,
     //   "personalization":      true
     // };
 

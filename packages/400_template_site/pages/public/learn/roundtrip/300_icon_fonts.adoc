@@ -55,6 +55,8 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+// Include sub-documents
+// -----------------------------------------------------------------------------
 == Icon Fonts
 
 J1 Template supports popular icons font sets out-of-the-box:

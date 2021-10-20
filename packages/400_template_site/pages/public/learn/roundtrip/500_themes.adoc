@@ -53,10 +53,8 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-
 // Include sub-documents
 // -----------------------------------------------------------------------------
-
 Themes for the template system J1 are based on the free and open-source CSS
 front-end framework {url-bs--home}[Bootstrap, {browser-window--new}] of
 version V4.

@@ -54,14 +54,10 @@ regenerate:                             true
  # JS Adapter for J1 google_translate
  #
  #  Product/Info:
- #  https://shaack.com
  #  http://jekyll.one
  #
- #  Copyright (C) 2020 Stefan Haack
  #  Copyright (C) 2021 Juergen Adams
  #
- #  bootstrap-cookie-banner is licensed under MIT License.
- #  See: https://github.com/shaack/bootstrap-cookie-banner/blob/master/LICENSE
  #  J1 Template is licensed under MIT License.
  #  See: https://github.com/jekyll-one/J1 Template/blob/master/LICENSE
  # -----------------------------------------------------------------------------
@@ -106,8 +102,34 @@ j1.adapter['googleTranslator'] = (function (j1, window) {
   var ddSourceLanguage;
 
   // ---------------------------------------------------------------------------
-  // Helper functions
+  // helper functions
   // ---------------------------------------------------------------------------
+  function setCookie(options /*cName, cValue, expDays*/) {
+    var defaults = {
+        name: '',
+        path: '/',
+        expires: 0,
+        domain: 'localhost'
+    };
+    var settings = $.extend(defaults, options);
+
+    var date = new Date();
+    date.setTime(date.getTime() + (settings.expires * 24 * 60 * 60 * 1000));
+    const expires = "expires=" + date.toUTCString();
+    // document.cookie = cName + "=" + cValue + "; " + expires + "; path=/";
+    // document.cookie = settings.name + "=" + settings.data  + "; " + expires + "; path=/";
+    document.cookie = settings.name + "=" + settings.data  + "; path=/";
+  }
+
+  function googleTranslateElementInit() {
+    var bla;
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT
+    },
+    'google_translate_element'
+    );
+  }
 
   // ---------------------------------------------------------------------------
   // Main object
@@ -188,6 +210,43 @@ j1.adapter['googleTranslator'] = (function (j1, window) {
           clearInterval(dependencies_met_page_ready);
         }
       });
+
+      // ---------------------------------------------------------------------------
+      // event handler
+      // ---------------------------------------------------------------------------
+      // window.onload = function (event) {
+      //   var cookie_names   = j1.getCookieNames();
+      //   var user_translate = j1.readCookie(cookie_names.user_translate);
+      //   var head           = document.getElementsByTagName('head')[0];
+      //   var script         = document.createElement('script');
+      //
+      //   // set script details for google-translate
+      //   script.id  = 'google-translate';
+      //   script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      //
+      //   // enable|disable google-translate
+      //   if (user_translate["google-translate"]) {
+      //     srcLang   = "{{site.language}}";
+      //     destLang  = translation_language;
+      //     transCode = '/' + srcLang + '/' + destLang;
+      //
+      //     // set new language settings
+      //     setCookie({
+      //       name: 'googtrans',
+      //       data: transCode
+      //     });
+      //
+      //     head   = document.getElementsByTagName('head')[0];
+      //     script = document.createElement('script');
+      //
+      //     // set script details for google-translate
+      //     script.id  = 'google-translate';
+      //     script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit()';
+      //     head.appendChild(script);
+      //   } else {
+      //     j1.removeCookie({name: 'googtrans'});
+      //   }
+      // }; // END onload
     }, // END init
 
     // -------------------------------------------------------------------------
@@ -234,18 +293,69 @@ j1.adapter['googleTranslator'] = (function (j1, window) {
     }, // END getState
 
     // -------------------------------------------------------------------------
+    // googleTranslateElementInit()
+    //
+    // -------------------------------------------------------------------------
+    googleTranslateElementInit: function () {
+      new google.translate.TranslateElement({
+        pageLanguage: 'en',
+        layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT
+      },
+      'google_translate_element'
+      );
+    },
+
+    // -------------------------------------------------------------------------
     // cbCookie()
     // Called by google_translate module after the user has
     // made his selection (callback)
     // -------------------------------------------------------------------------
     cbCookie: function () {
-      var cookie_names        = j1.getCookieNames();
-      var user_state          = j1.readCookie(cookie_names.user_state);
-      var user_consent        = j1.readCookie(cookie_names.user_consent);
+      var cookie_names   = j1.getCookieNames();
+      var user_state     = j1.readCookie(cookie_names.user_state);
+      var user_consent   = j1.readCookie(cookie_names.user_consent);
+      var user_translate = j1.readCookie(cookie_names.user_translate);
+      var head;
+      var script;
+      var srcLang;
+      var destLang;
+      var transCode;
+      var cookie_written;
 
       logger.info('\n' + 'entered post selection callback from google_translate');
       logger.debug('\n' + 'current values from cookie consent: ' + JSON.stringify(user_consent));
       logger.debug('\n' + 'current values from user state: ' + JSON.stringify(user_state));
+
+      // if (user_translate["google-translate"]) {
+      //
+      //   srcLang   = "{{site.language}}";
+      //   destLang  = translation_language;
+      //   transCode = '/' + srcLang + '/' + destLang;
+      //
+      //   // set new language settings
+      //   setCookie({
+      //     name: 'googtrans',
+      //     data: transCode
+      //   });
+      //
+      //   head   = document.getElementsByTagName('head')[0];
+      //   script = document.createElement('script');
+      //
+      //   // set script details for google-translate
+      //   script.id  = 'google-translate';
+      //   script.src = '//translate.google.com/translate_a/element.js?cb=j1.adapter.googleTranslator.googleTranslateElementInit()';
+      //   head.appendChild(script);
+      //
+      //
+      //
+      // } else {
+      //   j1.removeCookie({name: 'googtrans'});
+      // }
+
+      if (moduleOptions.reloadPageOnChange) {
+        // reload current page (skip cache)
+        location.reload(true);
+      }
 
     } // END cbCookie
 

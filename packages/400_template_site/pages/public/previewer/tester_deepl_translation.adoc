@@ -364,6 +364,11 @@ ____
 .form-control {
   line-height: 1.5 !important;
 }
+
+/* workaround: limit the height of the resulting list (UL) of the 'dd' select   */
+.ms-dd .ms-options {
+  max-height: 12rem;
+}
 </style>
 ++++
 
@@ -371,6 +376,29 @@ ____
 <script>
 
   $(function() {
+
+    var logger = log4javascript.getLogger('j1.tester.deepl');
+    var logText;
+
+    var dependencies_met_page_ready = setInterval (function (options) {
+      if ( j1.getState() === 'finished' ) {
+        // stop scrolling if ANY of the DD selects is open (attr display: block)
+        $('.ms-options').attrchange({
+          trackValues: true,                                                        // enables tracking old and new values
+          callback: function (e) {                                                  //callback handler on DOM changes
+            logText = '\n' + 'Attribute: ' + e.attributeName + ' changed to: ' + e.newValue;
+            logger.debug(logText);
+
+            if (e.attributeName === 'style' && e.newValue.includes('block')) {
+              $('body').addClass('stop-scrolling');
+            } else if (e.attributeName === 'style' && e.newValue.includes('none')) {
+              $('body').removeClass('stop-scrolling');
+            }
+          }
+        });
+        clearInterval(dependencies_met_page_ready);
+      }
+    });
 
     // reset translation event handler (button)
     $('#reset-translate').click(function () {

@@ -1,27 +1,22 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/modules/cookieConsent/js/cookieConsent.js
- # Provides JS Core for J1 Module BS Cookie Consent
+ # ~/assets/themes/j1/modules/translator/js/translator.js
+ # Provides JS Core for J1 Module Translator
  #
  #  Product/Info:
- #  https://shaack.com
  #  http://jekyll.one
  #
- #  Copyright (C) 2020 Stefan Haack
  #  Copyright (C) 2021 Juergen Adams
  #
- #  bootstrap-cookie-banner is licensed under MIT License.
- #  See: https://github.com/shaack/bootstrap-cookie-banner/blob/master/LICENSE
  #  J1 Template is licensed under MIT License.
  #  See: https://github.com/jekyll-one/J1 Template/blob/master/LICENSE
  # -----------------------------------------------------------------------------
  # TODO:
- #
  # -----------------------------------------------------------------------------
  # NOTE:
- #  BS Cookie Consent is a MODIFIED version of bootstrap-cookie-banner
- #  for the use with J1 Template. This modified version cannot be used
- #  outside of J1 Template!
+ # https://github.com/marghoobsuleman/ms-Dropdown
+ # https://www.marghoobsuleman.com/image-dropdown/help
+ # https://www.marghoobsuleman.com/image-dropdown/advanced-help
  # -----------------------------------------------------------------------------
 */
 //'use strict';
@@ -37,8 +32,8 @@
 /* eslint JSUnfilteredForInLoop: "off"                                        */
 // -----------------------------------------------------------------------------
 
-function googleTranslator(props) {
-  var logger                = log4javascript.getLogger('j1.core.googleTranslator');
+function Translator(props) {
+  var logger                = log4javascript.getLogger('j1.core.translator');
   var dialogContainerID   = 'translator-modal';
   var self                  = this;
   var detailedSettingsShown = false;
@@ -47,27 +42,33 @@ function googleTranslator(props) {
   var logText;
   var current_page;
   var whitelisted;
-//var ddSourceLanguage;
+  var ddTranslationSourceLanguage;
 
   logger.info('\n' + 'initializing core module: started');
   logger.info('\n' + 'state: started');
 
   this.props = {
-    contentURL:             '/assets/data/google_translate',                    // this URL must contain the dialog content (modals) in the needed languages
+    contentURL:             '/assets/data/translator',                    	// this URL must contain the dialog content (modals) in the needed languages
     cookieName:             'j1.user.state',                                    // the name of the User State Cookie (primary data)
     cookieConsentName:      'j1.user.consent',                                  // the name of the Cookie Consent Cookie (secondary data)
     cookieStorageDays:      365,                                                // the duration the cookie is stored on the client
     cookieSameSite:         'Strict',                                           // restrict consent cookie to first-party, do NOT send cookie to other domains
     cookieSecure:           false,
+    translatorEnabled:      false,
+    translatorName:         'google',
     translationLanguage:    'auto',
+    translateAllPages:      true,                                               // enable tranlation on all pages
+    hideSuggestionBox:      true,                                               // disable suggestions on translated text
+    hidePoweredBy:          true,                                               // disable label "Powered by Google"
+    hideTopFrame:           true,                                               // disable the (google) translator frame
     dialogLanguage:         'content',                                          // language used for the consent dialog (modal)
     dialogLanguages:        ['en','de'],                                        // supported languages for the consent dialog (modal), defaults to first in array//
-    dialogContainerID:      'translator-modal',
+    dialogContainerID:      'translator-modal',                                 // container, the dialog modal is (dynamically) loaded
     xhrDataElement:         '',                                                 // container for the language-specific consent modal taken from /assets/data/cookieconsent.html
     postSelectionCallback:  undefined,                                          // callback function, called after the user has made his selection
   };
 
-  this.googleTranslateLanguages = {
+  this.googleTranslatorLanguages = {
       'af':     { 'name': 'Afrikaans' },
       'sq':     { 'name': 'Albanian' },
       'ar':     { 'name': 'Arabic' },
@@ -132,6 +133,37 @@ function googleTranslator(props) {
       'vi':     { 'name': 'Vietnamese' },
       'cy':     { 'name': 'Welsh' },
       'yi':     { 'name': 'Yiddish' }
+  };
+
+  this.deeplTranslatorLanguages = {
+      'bg':     { 'name': 'Bulgarian' },
+      'cs':     { 'name': 'Czech' },
+      'da':     { 'name': 'Danish' },
+      'de':     { 'name': 'German' },
+      'el':     { 'name': 'Greek' },
+      'es':     { 'name': 'Spanish' },
+      'en':     { 'name': 'English' },
+      'en-us':  { 'name': 'English (American)' },
+      'en-uk':  { 'name': 'English (British)' },
+      'et':     { 'name': 'Estonian' },
+      'ft':     { 'name': 'Finnish' },
+      'fr':     { 'name': 'French' },
+      'hu':     { 'name': 'Hungarian' },
+      'it':     { 'name': 'Italian' },
+      'ja':     { 'name': 'Japanese' },
+      'lv':     { 'name': 'Latvian' },
+      'lt':     { 'name': 'Lithuanian' },
+      'nl':     { 'name': 'Dutch' },
+      'af':     { 'name': 'Polish' },
+      'pt':     { 'name': 'Portuguese' },
+      'pt-pt':  { 'name': 'Portuguese (Portugal)' },
+      'pt-br':  { 'name': 'Portuguese (Brazilian)' },
+      'ro':     { 'name': 'Romanian' },
+      'ru':     { 'name': 'Russian' },
+      'sk':     { 'name': 'Slovak' },
+      'sl':     { 'name': 'Slovenian' },
+      'sv':     { 'name': 'Swedish' },
+      'zh':     { 'name': 'Chinese' },
   };
 
   for (var property in props) {
@@ -222,7 +254,37 @@ function googleTranslator(props) {
           });
         }
 
-        // load modal content
+        // jadams, 2021-10-18: register additional events for the dialog
+        self.$modal.on('shown.bs.modal', function () {
+          msDropdownSourceLanguage = document.getElementById("translate-source-language").msDropdown;
+
+          // workaround: limit the height of the resulting list (UL)
+          // of the 'dd' select
+          $('.ms-options').css('max-height', '10.5937rem');
+
+          // jadams, 2021-10-18: added stop scrolling on the body,
+          // if modal is OPEN
+          $('body').addClass('stop-scrolling');
+
+          // jadams, 2021-10-18: disable source language selection
+          if (self.props.translationLanguage === 'auto') {
+            msDropdownSourceLanguage.disabled = true;
+          }
+
+          // jadams, 2021-10-18: doesn't work for sizes > 1 !!!
+          // get access to msDropdown elements (API)
+          // set the size to limit the list
+          // msDropdownSourceLanguage.size = 1;
+
+        });
+
+        self.$modal.on('hidden.bs.modal', function () {
+          // jadams, 2021-10-18: remove stop scrolling on the body,
+          // if modal is CLOSED
+          $('body').removeClass('stop-scrolling');
+        });
+
+        // load dialog (modal content)
         //
         var templateUrl = self.props.contentURL + '/' + 'index.html';
         $.get(templateUrl)
@@ -237,14 +299,13 @@ function googleTranslator(props) {
           });
 
           self.$buttonDoNotAgree = $('#translator-buttonDoNotAgree');
-          self.$buttonAgree = $('#translator-buttonAgree');
-          self.$buttonSave = $('#translator-buttonSave');
-          self.$buttonAgreeAll = $('#translator-buttonAgreeAll');
+          self.$buttonAgree      = $('#translator-buttonAgree');
+          self.$buttonSave       = $('#translator-buttonSave');
+          self.$buttonAgreeAll   = $('#translator-buttonAgreeAll');
 
           logger.info('\n' + 'load/initialze options from cookie');
-
           updateButtons();
-          // updateOptionsFromCookie();
+          updateOptionsFromCookie();
 
           $('#google-options').on('hide.bs.collapse', function () {
             detailedSettingsShown = false;
@@ -254,7 +315,7 @@ function googleTranslator(props) {
             updateButtons();
           });
 
-          logger.info('\n' + 'initialze event handler');
+          logger.info('\n' + 'initialze button event handler');
 
           self.$buttonDoNotAgree.click(function () {
             doNotAgree();
@@ -264,18 +325,17 @@ function googleTranslator(props) {
           });
           self.$buttonSave.click(function () {
             $('#google-options').collapse('hide');
-            //saveSettings();
-            // updateOptionsFromCookie();
+            saveSettings();
+            updateOptionsFromCookie();
           });
           self.$buttonAgreeAll.click(function () {
             $('#google-options').collapse('hide');
             agreeAll();
-            // updateOptionsFromCookie();
           });
         })
         .fail(function () {
-          logger.error('\n' + 'loading consent modal: failed');
-          logger.warn('\n' + 'probably no `contentURL` set');
+          logger.error('\n' + 'loading translator dialog (modal): failed');
+          logger.warn('\n' + 'probably no|wrong `contentURL` set');
         });
       } else {
         self.$modal.modal('show');
@@ -283,6 +343,9 @@ function googleTranslator(props) {
     }.bind(this));
   }
 
+  // ---------------------------------------------------------------------------
+  // update all checkboxes in dialog (modal) from current cookie settings
+  // ---------------------------------------------------------------------------
   function updateOptionsFromCookie() {
     var settings = self.getSettings();
     if (settings) {
@@ -293,6 +356,9 @@ function googleTranslator(props) {
     }
   }
 
+  // ---------------------------------------------------------------------------
+  // toggle dialog (modal) buttons
+  // ---------------------------------------------------------------------------
   function updateButtons() {
     if (detailedSettingsShown) {
       self.$buttonDoNotAgree.hide();
@@ -301,14 +367,15 @@ function googleTranslator(props) {
       self.$buttonAgreeAll.show();
 
       // jadams, 2012-10-15: imageDropdown NOT usabe within (MS) modals
-      //
+      // -----------------------------------------------------------------------
+
       // if (document.getElementById("source-language")) {
       //   ddSourceLanguage = document.getElementById("source-language").msDropdown;
       //   ddSourceLanguage.destroy();
       //   ddSourceLanguage.make('#source-language');
       //   ddSourceLanguage.selectedIndex = 5;
       //   ddSourceLanguage.updateUiAndValue();
-      // }
+
     } else {
       self.$buttonDoNotAgree.show();
       self.$buttonAgree.show();
@@ -317,6 +384,9 @@ function googleTranslator(props) {
     }
   }
 
+  // ---------------------------------------------------------------------------
+  // collect current settings from checkboxes in dialog (modal)
+  // ---------------------------------------------------------------------------
   function gatherOptions(setAllExceptNecessary) {
     var $options = self.$modal.find('#google-options .translator-option');
     var options = {};
@@ -335,38 +405,68 @@ function googleTranslator(props) {
     return options;
   }
 
-  function agreeAll() {
-    // update all cookies required to enable translation
-    //
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(true)), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
-    self.$modal.modal('hide');
-  }
-
-  function doNotAgree() {
-    // update all cookies required to stop translation
-    //
-    // Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
-
-    self.$modal.modal('hide');
-  }
-
-  function saveSettings() {
-    // Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions()), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
-    self.$modal.modal('hide');
-  }
-
-  // API functions
   // ---------------------------------------------------------------------------
+  // process current settings from checkboxes for `agreeAll`
+  // ---------------------------------------------------------------------------
+  function agreeAll() {
+    var settings;
+    var consentSettings = {};
 
-  logger.info('\n' + 'initializing core module finished');
-  logger.info('\n' + 'state: finished');
+    // update all cookies required for (google-)translation
+    //
+    settings = gatherOptions();
+    consentSettings                     = JSON.parse(Cookie.get(self.props.cookieConsentName));
+    consentSettings["analysis"]         = settings["analysis-enabled"];
+    consentSettings["personalization"]  = settings["personalization-enabled"];
 
+    Cookie.set(self.props.cookieConsentName, JSON.stringify(consentSettings), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
+    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(true)), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
+
+    self.$modal.modal('hide');
+  }
+
+  // ---------------------------------------------------------------------------
+  // process current settings from checkboxes for `doNotAgree`
+  // ---------------------------------------------------------------------------
+  function doNotAgree() {
+    // update all cookies required for (google-)translation
+    //
+    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
+    self.$modal.modal('hide');
+  }
+
+  // ---------------------------------------------------------------------------
+  // write current settings from checkboxes to cookie
+  // ---------------------------------------------------------------------------
+  function saveSettings() {
+    var settings;
+    var consentSettings = {};
+
+    // update all cookies required for (google-)translation
+    //
+    settings = gatherOptions();
+    consentSettings                     = JSON.parse(Cookie.get(self.props.cookieConsentName));
+    consentSettings["analysis"]         = settings["analysis-enabled"];
+    consentSettings["personalization"]  = settings["personalization-enabled"];
+
+    Cookie.set(self.props.cookieConsentName, JSON.stringify(consentSettings), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
+
+    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions()), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
+    self.$modal.modal('hide');
+  }
+
+  // ===========================================================================
+  // API functions
+  // ===========================================================================
+
+  // ---------------------------------------------------------------------------
   // show the translator dialog (modal)
   // ---------------------------------------------------------------------------
   this.showDialog = function () {
     showDialog();
-  };
+  }; // END showDialog
 
+  // ---------------------------------------------------------------------------
   // collect settings from cookie
   // ---------------------------------------------------------------------------
   this.getSettings = function (optionName) {
@@ -386,5 +486,8 @@ function googleTranslator(props) {
       return undefined;
     }
   }; // END getSettings
+
+  logger.info('\n' + 'initializing core module finished');
+  logger.info('\n' + 'state: finished');
 
 } // END BootstrapCookieConsent

@@ -53,7 +53,6 @@ resource_options:
 
 // Include sub-documents
 // -----------------------------------------------------------------------------
-
 _Material Design Light_ (MDIL) is a helpful design resource for Web Sites that
 follow _Google's_ specification of Material Design. *MDIL* is a subset of the
 Material Design Icons (MDI) set managed by *Austin Andrews* and contributors.

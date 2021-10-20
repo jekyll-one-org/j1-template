@@ -51,6 +51,8 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+// Include sub-documents
+// -----------------------------------------------------------------------------
 Advanced Bootstrap Modals are based on the free package of
 link:{url-mdb--home}[Material Design for Bootstrap, {browser-window--new}] on version
 *4.3.2*. This version can be found following this link:

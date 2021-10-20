@@ -56,11 +56,6 @@ resource_options:
 
 // Include sub-documents
 // -----------------------------------------------------------------------------
-
-++++
-<div id="google_translate_element"></div>
-++++
-
 [role="dropcap"]
 Welcome to the first preview page focussing on the image module. This page
 shows some valuable features of the J1 Template to manage your image-based
@@ -239,13 +234,3 @@ and displaying digital image content. But much, much more can the J1 do for
 your web.
 
 Incredible? See the next example page link:{url-roundtrip--present-videos}[Present videos].
-
-++++
-<script type="text/javascript">
-function googleTranslateElementInit() {
-  new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
-}
-</script>
-
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-++++

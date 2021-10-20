@@ -69,6 +69,8 @@ window.deeplTranslator                  = require('./js/deepl-translator');
 //const Bootstrap                         = require('./js/bootstrap/bootstrap.js');
 //const J1JekyllSearch                    = require('./js/jekyll_search/jekyll_search.js');
 const J1Tocbot                            = require('./js/tocbot/tocbot.js');
+const J1AttrChangeListener                = require('./js/listen-attribute-changes/attrchange.js');
+
 //const J1ThemeSwitcher                   = require('./js/bs_theme_switcher/switcher.js');
 // const J1MmenuLight                     = require('./js/mmenu-light/mmenu.js');
 

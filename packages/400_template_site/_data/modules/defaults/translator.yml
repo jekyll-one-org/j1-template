@@ -15,9 +15,9 @@
 # About this configuration (used for J1 CC only)
 #
 about_config:
-  title:                                Google Translate
+  title:                                J1 Translator
   scope:                                Default settings
-  location:                             _data/modules/defaults/google_translate.yml
+  location:                             _data/modules/defaults/translator.yml
 
 # ------------------------------------------------------------------------------
 # Default settings
@@ -26,16 +26,18 @@ defaults:
 
   enabled:                              false
 
-  languages:                            [all]                                   # supported languages
+  translatorEnabled:                    false
+  translatorName:                       google
+  languages:                            [ all ]                                 # supported languages
   translationLanguage:                  auto                                    # detect translation lang from browser
-  translate_all_pages:                  false                                   # enable tranlation on all pages
-  hide_suggestion_box:                  false                                   # disable suggestions on translated text
-  hide_powered_by:                      false                                   # disable label "Powered by Google"
-  hide_top_frame:                       false                                   # disable the translator frame
+  translateAllPages:                    true                                    # enable tranlation on all pages
+  hideSuggestionBox:                    false                                   # disable suggestions on translated text
+  hidePoweredBy:                        false                                   # disable label "Powered by Google"
+  hideTopFrame:                         false                                   # disable the (google) translator frame
   reloadPageOnChange:                   true                                    # reload current page if user settings has been changed
-  postSelectionCallback:                j1.adapter.googleTranslator.cbCookie
+  postSelectionCallback:                j1.adapter.translator.cb                # currently NOT used
 
-  contentURL:                           /assets/data/google_translate           # dialogs (modals) for all supported languages
+  contentURL:                           /assets/data/translator                 # dialogs (modals) for all supported translators|languages
   dialogLanguage:                       auto                                    # auto|content|one of dialogLanguages
   dialogLanguages:                      [en, de]                                # supported dialog (modal) languages, defaults to FIRST language defined
   cookieName:                           j1.user.translate                       # name of the user translation cookie (primary data)
@@ -59,10 +61,30 @@ defaults:
                                         in section <code>My Settings</code>.
                                         <br><br>
                                         Your current language setting for translation is:
-                                        <br><br>
-                                        <span id="translator-current-language"> <i class="flag-icon flag-icon-de rectangle size-md "></i> German <span>
-                                        <br><br>
+                                        <!-- source language -->
+                                        <div class="mb-3">
+                                          <select id="translate-source-language" name="translate-source-language" class="" is="ms-dropdown">
+                                            <option value="CZ" data-image-css="flag-icon flag-icon-cz rectangle size-md"> Czech</option>
+                                            <option value="DA" data-image-css="flag-icon flag-icon-dk rectangle size-md"> Danish</option>
+                                            <option selected value="DE" data-image-css="flag-icon flag-icon-de rectangle size-md"> German</option>
+                                            <option value="ES" data-image-css="flag-icon flag-icon-es rectangle size-md"> Spanish</option>
+                                            <option value="EN" data-image-css="flag-icon flag-icon-gb rectangle size-md"> English</option>
+                                            <option value="EL" data-image-css="flag-icon flag-icon-gr rectangle size-md"> Greek</option>
+                                            <option value="FI" data-image-css="flag-icon flag-icon-fi rectangle size-md"> Finnish</option>
+                                            <option value="FR" data-image-css="flag-icon flag-icon-fr rectangle size-md"> French</option>
+                                            <option value="HU" data-image-css="flag-icon flag-icon-hu rectangle size-md"> Hungarian</option>
+                                            <option value="IT" data-image-css="flag-icon flag-icon-it rectangle size-md"> Italian</option>
+                                            <option value="NL" data-image-css="flag-icon flag-icon-nl rectangle size-md"> Dutch</option>
+                                            <option value="PT" data-image-css="flag-icon flag-icon-pt rectangle size-md"> Portuguese</option>
+                                            <option value="RO" data-image-css="flag-icon flag-icon-ro rectangle size-md"> Romanian</option>
+                                            <option value="RU" data-image-css="flag-icon flag-icon-ru rectangle size-md"> Russian</option>
+                                            <option value="SK" data-image-css="flag-icon flag-icon-sk rectangle size-md"> Slovak</option>
+                                            <option value="SL "data-image-css="flag-icon flag-icon-sl rectangle size-md"> Slovenian</option>
+                                            <option value="SV" data-image-css="flag-icon flag-icon-sv rectangle size-md"> Swedish</option>
+                                          </select>
+                                        </div>
                                         To run the translation for your language, click the <code>Agree</code> button.
+                                        <br><br>
       de: >
                                         Diese Website nutzt den kostenlosen Dienst <em>Google Translate</em>,
                                         um die Inhalte in Sekundenschnelle in über 100+ Sprachen zu übersetzen.

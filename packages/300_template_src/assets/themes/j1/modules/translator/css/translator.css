@@ -16,6 +16,7 @@
 #goog-gt-tt, .goog-te-balloon-frame {
   display: none !important;
 }
+
 .goog-text-highlight {
   background: none !important;
   box-shadow: none !important;
@@ -23,8 +24,9 @@
 
 /* hide the powered by */
 .goog-logo-link {display: none !important;}
-.goog-te-gadget {height: 28px !important;  overflow: hidden;}
+/* .goog-te-gadget {height: 28px !important;  overflow: hidden;} */
+.goog-te-gadget {display: none !important;}
 
 /* remove the top frame */
-body{ top: 0 !important;}
+body{top: 0 !important;}
 .goog-te-banner-frame{display: none !important;}

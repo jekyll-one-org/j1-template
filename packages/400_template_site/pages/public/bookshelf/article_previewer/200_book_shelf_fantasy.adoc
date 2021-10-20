@@ -56,7 +56,6 @@ resource_options:
 
 // Include sub-documents
 // -----------------------------------------------------------------------------
-
 == Fantasy
 
 The fantasy genre has become popular the past few years. Once a genre

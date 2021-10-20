@@ -16,9 +16,9 @@
 #
 description:
 
-  title:                                Google Translate
+  title:                                J1 Translator
   scope:                                User settings
-  location:                             _data/modules/google_translate.yml
+  location:                             _data/modules/translator.yml
 
 # ------------------------------------------------------------------------------
 # User configuration settings

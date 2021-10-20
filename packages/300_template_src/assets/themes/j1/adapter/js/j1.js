@@ -209,10 +209,11 @@ var j1 = (function () {
 
   // initial cookie settings
   var cookie_names = {
-    'app_session':  '{{template_config.cookies.app_session}}',
-    'user_session': '{{template_config.cookies.user_session}}',
-    'user_state':   '{{template_config.cookies.user_state}}',
-    'user_consent': '{{template_config.cookies.user_consent}}'
+    'app_session':    '{{template_config.cookies.app_session}}',
+    'user_session':   '{{template_config.cookies.user_session}}',
+    'user_state':     '{{template_config.cookies.user_state}}',
+    'user_consent':   '{{template_config.cookies.user_consent}}',
+    'user_translate': '{{template_config.cookies.user_translate}}'
   };
   var user_session = {
     'mode':                 'web',
@@ -323,7 +324,7 @@ var j1 = (function () {
           user_state.session_active     = false;
           user_state.last_session_ts    = timestamp_now;
 
-          if (!user_consent.analyses || !user_consent.personalization)  {
+          if (!user_consent.analysis || !user_consent.personalization)  {
             // rewrite consent|state cookies to session
             logger.debug('\n' + 'write to cookie : ' + cookie_names.user_consent);
             cookie_written = j1.writeCookie({
@@ -413,7 +414,7 @@ var j1 = (function () {
         user_state.session_active = true;
       }
 
-      if (!user_consent.analyses || !user_consent.personalization)  {
+      if (!user_consent.analysis || !user_consent.personalization)  {
         // rewrite consent|state cookies to session
         logger.debug('\n' + 'write to cookie : ' + cookie_names.user_state);
         cookie_written = j1.writeCookie({
@@ -1083,8 +1084,8 @@ var j1 = (function () {
             }
             // NOTE: Placed tracking warning/info here because page may reloaded
             // after cookie consent selection
-            if (user_consent.analyses) {
-              logger.info('\n' + 'tracking allowed, privacy settings for analysis: ' + user_consent.analyses);
+            if (user_consent.analysis) {
+              logger.info('\n' + 'tracking allowed, privacy settings for analysis: ' + user_consent.analysis);
               if (tracking_enabled && !tracking_id_valid) {
                 logger.error('\n' + 'tracking enabled, but invalid tracking id found: ' + tracking_id);
               } else if (tracking_enabled && tracking_id_valid) {
@@ -1093,7 +1094,7 @@ var j1 = (function () {
                 logger.info('\n' + 'tracking disabled, tracking id found: ' + tracking_id);
               }
             } else {
-              logger.warn('\n' + 'tracking not allowed, privacy settings for analysis: ' + user_consent.analyses);
+              logger.warn('\n' + 'tracking not allowed, privacy settings for analysis: ' + user_consent.analysis);
             }
 
             // show|hide cookie icon (should MOVED to Cookiebar ???)
@@ -1136,11 +1137,11 @@ var j1 = (function () {
             }
 
             // jadams, 2021-07-25: hide|show themes menu on cookie consent
-            // (analyses|personalization) settings. BootSwatch is a 3rd party
+            // (analysis|personalization) settings. BootSwatch is a 3rd party
             // is using e.g GA. Because NO control is possible on 3rd parties,
             // for GDPR compliance, themes feature may disabled on
             // privacy settings
-            if (!user_consent.analyses || !user_consent.personalization)  {
+            if (!user_consent.analysis || !user_consent.personalization)  {
               logger.warn('\n' + 'disable themes feature because of privacy settings');
               $("#themes_menu").hide();
             } else {
@@ -1242,8 +1243,8 @@ var j1 = (function () {
            }
           // NOTE: Placed tracking warning/info here because page may reloaded
           // after cookie consent selection
-          if (user_consent.analyses) {
-            logger.info('\n' + 'tracking allowed, privacy settings for analysis: ' + user_consent.analyses);
+          if (user_consent.analysis) {
+            logger.info('\n' + 'tracking allowed, privacy settings for analysis: ' + user_consent.analysis);
             if (tracking_enabled && !tracking_id_valid) {
               logger.error('\n' + 'tracking enabled, but invalid tracking id found: ' + tracking_id);
             } else if (tracking_enabled && tracking_id_valid) {
@@ -1252,7 +1253,7 @@ var j1 = (function () {
               logger.info('\n' + 'tracking disabled, tracking id found: ' + tracking_id);
             }
           } else {
-            logger.warn('\n' + 'tracking not allowed, privacy settings for analysis: ' + user_consent.analyses);
+            logger.warn('\n' + 'tracking not allowed, privacy settings for analysis: ' + user_consent.analysis);
           }
 
           logger.info('\n' + 'mode detected: web');
@@ -1296,11 +1297,11 @@ var j1 = (function () {
           }
 
           // jadams, 2021-07-25: hide|show themes menu on cookie consent
-          // (analyses|personalization) settings. BootSwatch is a 3rd party
+          // (analysis|personalization) settings. BootSwatch is a 3rd party
           // is using e.g GA. Because NO control is possible on 3rd parties,
           // for GDPR compliance, themes feature may disabled on
           // privacy settings
-          if (!user_consent.analyses || !user_consent.personalization)  {
+          if (!user_consent.analysis || !user_consent.personalization)  {
             logger.warn('\n' + 'disable themes feature because of privacy settings');
             $("#themes_menu").hide();
           } else {

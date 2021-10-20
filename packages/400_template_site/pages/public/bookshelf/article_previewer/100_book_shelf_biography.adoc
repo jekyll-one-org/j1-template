@@ -52,7 +52,6 @@ resource_options:
 
 // Include sub-documents
 // -----------------------------------------------------------------------------
-
 == Biography
 
 Find popular titles of Autobiographies written by today's people in the

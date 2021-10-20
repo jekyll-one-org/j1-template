@@ -58,7 +58,6 @@ regenerate:                             false
 
 // Include sub-documents
 // -----------------------------------------------------------------------------
-
 [[readmore]]
 == Traditional - Posts and pages
 
