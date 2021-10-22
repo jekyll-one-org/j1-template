@@ -83,8 +83,8 @@ defaults:
                                             <option value="SV" data-image-css="flag-icon flag-icon-sv rectangle size-md"> Swedish</option>
                                           </select>
                                         </div>
-                                        To run the translation for your language, click the <code>Agree</code> button.
-                                        <br><br>
+                                        <br>
+
       de: >
                                         Diese Website nutzt den kostenlosen Dienst <em>Google Translate</em>,
                                         um die Inhalte in Sekundenschnelle in über 100+ Sprachen zu übersetzen.
@@ -96,9 +96,7 @@ defaults:
                                         Ihre aktuelle Spracheinstellung für die Übersetzung ist:
                                         <br><br>
                                         <span id="translator-current-language"> <i class="flag-icon flag-icon-de rectangle size-md "></i> German <span>
-                                        <br><br>
-                                        Um die Übersetzung für Ihre Sprache zu starten, klicken Sie auf die
-                                        Schaltfläche <code>Einverstanden</code>.
+                                        <br>
 
     privacy_notice:
 

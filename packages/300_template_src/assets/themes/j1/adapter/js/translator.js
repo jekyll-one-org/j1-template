@@ -87,7 +87,7 @@ j1.adapter['translator'] = (function (j1, window) {
   var _this;
   var $modal;
   var cookie_names;
-  var user_cookie;
+  var user_consent;
   var logger;
   var url;
   var baseUrl;
@@ -105,11 +105,12 @@ j1.adapter['translator'] = (function (j1, window) {
   var script;
 
   var user_translate = {
-    'translatorEnabled':        false,
     'translatorName':           'google',
-    'analysis':                 false,
-    'personalization':          false,
+    'translatorEnabled':        false,
+    'analysis':                 true,
+    'personalization':          true,
     'translateAllPages':        true,
+    'useLanguageFromBrowser':   true,
   };
 
   // ---------------------------------------------------------------------------
@@ -157,7 +158,7 @@ j1.adapter['translator'] = (function (j1, window) {
       translation_language  = navigator_language.split('-')[0];
       cookie_names          = j1.getCookieNames();
       head                  = document.getElementsByTagName('head')[0];
-      script                 = document.createElement('script');
+      script                = document.createElement('script');
       script.id             = 'google-translate';
       script.src            = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
 
@@ -215,7 +216,18 @@ j1.adapter['translator'] = (function (j1, window) {
             $('google_translate_element').hide();
           }
 
-          if (user_translate["translatorEnabled"] && moduleOptions.translatorName === 'google') {
+          // update user_translate cookie
+          user_consent = j1.readCookie(cookie_names.user_consent);
+          user_translate.analysis = user_consent.analysis;
+          user_translate.personalization = user_consent.personalization;
+          cookie_written = j1.writeCookie({
+            name:     cookie_names.user_translate,
+            data:     user_translate,
+            samesite: 'Strict',
+            secure:   secure
+          });
+
+          if (user_translate.translatorEnabled && moduleOptions.translatorName === 'google') {
             head.appendChild(script);
             $('google_translate_element').hide();
           }
@@ -234,7 +246,7 @@ j1.adapter['translator'] = (function (j1, window) {
           });
 
 
-          if (!user_translate["translatorEnabled"] && moduleOptions.translatorName === 'google') {
+          if (!user_translate.translatorEnabled && moduleOptions.translatorName === 'google') {
             j1.removeCookie({name: 'googtrans'});
             // j1.removeCookie({name: 'CONSENT'});
             // j1.removeCookie({name: 'NID'});
@@ -313,32 +325,100 @@ j1.adapter['translator'] = (function (j1, window) {
       logger.debug('\n' + 'current values from cookie consent: ' + JSON.stringify(user_consent));
       logger.debug('\n' + 'current values from user state: ' + JSON.stringify(user_state));
 
-      head       = document.getElementsByTagName('head')[0];
-      script     = document.createElement('script');
-      script.id  = 'google-translate';
-      script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
 
+      // update cookie consent settings
+      user_consent.analysis = user_translate.analysis;
+      user_consent.personalization = user_translate.personalization;
+      cookie_written = j1.writeCookie({
+        name:     cookie_names.user_consent,
+        data:     user_consent,
+        samesite: 'Strict',
+        secure:   secure,
+        expires:  0
+      });
 
+      if (user_consent.analysis && user_consent.personalization)  {
+        // // rewrite consent|state cookies to session
+        // logger.debug('\n' + 'write to cookie : ' + cookie_names.user_consent);
+        // cookie_written = j1.writeCookie({
+        //   name:     cookie_names.user_consent,
+        //   data:     user_consent,
+        //   samesite: 'Strict',
+        //   secure:   secure,
+        //   expires:  0
+        // });
+        head       = document.getElementsByTagName('head')[0];
+        script     = document.createElement('script');
+        script.id  = 'google-translate';
+        script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
 
-      if (user_translate["translatorEnabled"] && moduleOptions.translatorName === 'google') {
+        if (user_translate.translatorEnabled && moduleOptions.translatorName === 'google') {
+          head.appendChild(script);
 
-        head.appendChild(script);
+          if ($('google_translate_element')) {
+            $('google_translate_element').hide();
+          }
 
-        if ($('google_translate_element')) {
-          $('google_translate_element').hide();
+          srcLang   = "{{site.language}}";
+          destLang  = translation_language;
+          transCode = '/' + srcLang + '/' + destLang;
+
+          // set language
+          setCookie({
+            name: 'googtrans',
+            data: transCode
+          });
+        } else {
+
+          user_translate.translatorEnabled = false;
+          cookie_written = j1.writeCookie({
+            name:     cookie_names.user_translate,
+            data:     user_translate,
+            samesite: 'Strict',
+            secure:   secure
+          });
+
+          var el = document.getElementById(script.id);
+
+          if (el) { el.remove(); }
+
+          el = document.getElementById('google_translate_element');
+          if (el) { el.remove(); }
+
+          j1.removeCookie({name: 'googtrans'});
+          // j1.removeCookie({name: '1P_JAR'});
+          // j1.removeCookie({name: 'CONSENT'});
+          // j1.removeCookie({name: 'NID'});
         }
+      }
 
-        srcLang   = "{{site.language}}";
-        destLang  = translation_language;
-        transCode = '/' + srcLang + '/' + destLang;
+      if (!user_translate.analysis || !user_translate.personalization) {
+        head       = document.getElementsByTagName('head')[0];
+        script     = document.createElement('script');
+        script.id  = 'google-translate';
+        // script.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
 
-        // set language
-        setCookie({
-          name: 'googtrans',
-          data: transCode
-        });
-      } else {
         var el = document.getElementById(script.id);
+
+        // update cookie consent settings
+        user_consent.analysis = user_translate.analysis;
+        user_consent.personalization = user_translate.personalization;
+        cookie_written = j1.writeCookie({
+          name:     cookie_names.user_consent,
+          data:     user_consent,
+          samesite: 'Strict',
+          secure:   secure,
+          expires:  0
+        });
+
+        user_translate.translatorEnabled = false;
+        cookie_written = j1.writeCookie({
+          name:     cookie_names.user_translate,
+          data:     user_consent,
+          samesite: 'Strict',
+          secure:   secure,
+          expires:  0
+        });
 
         if (el) { el.remove(); }
 
@@ -346,9 +426,6 @@ j1.adapter['translator'] = (function (j1, window) {
         if (el) { el.remove(); }
 
         j1.removeCookie({name: 'googtrans'});
-        // j1.removeCookie({name: '1P_JAR'});
-        // j1.removeCookie({name: 'CONSENT'});
-        // j1.removeCookie({name: 'NID'});
       }
 
       if (moduleOptions.reloadPageOnChange) {

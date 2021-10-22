@@ -268,7 +268,8 @@ function Translator(props) {
 
           // jadams, 2021-10-18: disable source language selection
           if (self.props.translationLanguage === 'auto') {
-            msDropdownSourceLanguage.disabled = true;
+            // msDropdownSourceLanguage.disabled = true;
+            msDropdownSourceLanguage.disabled = false;
           }
 
           // jadams, 2021-10-18: doesn't work for sizes > 1 !!!

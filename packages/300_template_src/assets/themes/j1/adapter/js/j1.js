@@ -1037,6 +1037,7 @@ var j1 = (function () {
             // Manage providers for personalization OptIn/Out (Comments|Ads)
             if (!user_consent.personalization) {
               logger.warn('\n' + 'disable comment provider: ' + comment_provider);
+              logger.warn('\n' + 'personalization not allowed, privacy settings for personalization: ' + user_consent.personalization);
               $('#leave-a-comment').remove();
               if (comment_provider === 'disqus') {
                 $('#dsq-count-scr').remove();
@@ -1141,8 +1142,9 @@ var j1 = (function () {
             // is using e.g GA. Because NO control is possible on 3rd parties,
             // for GDPR compliance, themes feature may disabled on
             // privacy settings
-            if (!user_consent.analysis || !user_consent.personalization)  {
+            if (!user_consent.personalization)  {
               logger.warn('\n' + 'disable themes feature because of privacy settings');
+              logger.warn('\n' + 'personalization not allowed, privacy settings for personalization: ' + user_consent.personalization);
               $("#themes_menu").hide();
             } else {
               $("#themes_menu").show();
@@ -1185,6 +1187,7 @@ var j1 = (function () {
           // Manage providers for personalization OptIn/Out (Comments|Ads)
           if (!user_consent.personalization) {
             logger.warn('\n' + 'disable comment provider: ' + comment_provider);
+            logger.warn('\n' + 'personalization not allowed, privacy settings for personalization: ' + user_consent.personalization);
             $('#leave-a-comment').remove();
             if (comment_provider === 'disqus') {
               $('#dsq-count-scr').remove();
@@ -1301,8 +1304,9 @@ var j1 = (function () {
           // is using e.g GA. Because NO control is possible on 3rd parties,
           // for GDPR compliance, themes feature may disabled on
           // privacy settings
-          if (!user_consent.analysis || !user_consent.personalization)  {
+          if (!user_consent.personalization)  {
             logger.warn('\n' + 'disable themes feature because of privacy settings');
+            logger.warn('\n' + 'personalization not allowed, privacy settings for personalization: ' + user_consent.personalization);
             $("#themes_menu").hide();
           } else {
             $("#themes_menu").show();

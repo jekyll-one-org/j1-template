@@ -248,8 +248,10 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       var cookie_names        = j1.getCookieNames();
       var user_state          = j1.readCookie(cookie_names.user_state);
       var user_consent        = j1.readCookie(cookie_names.user_consent);
+      var user_translate      = j1.readCookie(cookie_names.user_translate);
       var json                = JSON.stringify(user_consent);
       var user_agent          = platform.ua;
+      var cookie_written;
 
       logger.info('\n' + 'entered post selection callback from CookieConsent');
       logger.info('\n' + 'current values from CookieConsent: ' + json);
@@ -258,16 +260,6 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       if ($('#quickLinksCookieButton').css('display') === 'none')  {
         $('#quickLinksCookieButton').css('display', 'block');
       }
-
-      // jadams, 2021-07-11: moved to j1 adapter (displayPage)
-      // NOTE: Warning needs to be moved to another module
-      // because page is reloaded after selection
-      //
-      // if (tracking_enabled && !tracking_id_valid) {
-      //   logger.error('\n' + 'tracking enabled, but invalid tracking id found: ' + tracking_id);
-      // } else {
-      //   logger.warn('\n' + 'tracking enabled, tracking id found: ' + tracking_id);
-      // }
 
       logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
       j1Cookies.forEach(item => console.log('j1.core.switcher: ' + item));
@@ -304,6 +296,15 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
           // expire consent|state cookies to session
           j1.expireCookie({ name: cookie_names.user_state });
           j1.expireCookie({ name: cookie_names.user_consent });
+
+          user_translate.translatorEnabled = false;
+          cookie_written = j1.writeCookie({
+            name:     cookie_names.user_translate,
+            data:     user_translate,
+            samesite: 'Strict',
+            secure:   secure
+          });
+
         }
         if (moduleOptions.reloadPageOnChange) {
           // reload current page (skip cache)

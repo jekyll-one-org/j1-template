@@ -1,7 +1,7 @@
 {% comment %}
  # -----------------------------------------------------------------------------
  #  ~/_includes/themes/j1/modules/connectors/translators/google-translator.html
- #  Support of multiple languages by Google Translator for J1 Template
+ #  Connector for the Google Translator
  #
  #  Product/Info:
  #  http://jekyll.one
@@ -24,12 +24,8 @@
 
 
 {% comment %} Main
---------------------------------------------------------------------------------
-<!-- Google Translator, NOT shown by default -->
-<!-- div id="google_translate_element" class="ml-5 mr-5 mb-4" style="display: none;"></div -->
-<!-- script id="google-translate" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script -->
 -------------------------------------------------------------------------------- {% endcomment %}
-<!-- [INFO   ] [j1.modules.connectors.translation     ] [ place callback for Google Translator ] -->
+<!-- [INFO   ] [j1.modules.connectors.translation     ] [ place callback for the Google Translator API ] -->
 <script>
   function googleTranslateElementInit() {
     new google.translate.TranslateElement({
