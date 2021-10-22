@@ -462,13 +462,13 @@ advertising:
 # Set 'provider' to the provider you want to use.
 # ------------------------------------------------------------------------------
 translation:
-  enabled:                              false
-  
+  enabled:                              true
+
   provider:                             google
 
   google:
     layout:                             default
-    meta_data:                          [google-translate-customization]
+    meta_data:                          [google-translate]
     page_language:                      en
     translation_languages:              [all]
 

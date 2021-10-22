@@ -469,7 +469,7 @@ translation:
 
   google:
     layout:                             default
-    meta_data:                          [google-translate-customization]
+    meta_data:                          [google-translate]
     page_language:                      en
     translation_languages:              [all]
 
