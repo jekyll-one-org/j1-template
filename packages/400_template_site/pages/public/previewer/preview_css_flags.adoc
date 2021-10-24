@@ -24,14 +24,14 @@ resource_options:
   - attic:
       padding_top:                      400
       padding_bottom:                   50
-      opacity:                          0.5
+      opacity:                          0.3
       slides:
-        - url:                          /assets/images/modules/attics/markus-krisetya-1920x1280.jpg
-          alt:                          Photo by Markus Krisetya on Unsplash
+        - url:                          /assets/images/modules/attics/vladislav-klapin-2-1920x1280.jpg
+          alt:                          Photo by Vladislav Klapin on Unsplash
           badge:
             type:                       unsplash
-            author:                     Markus Krisetya
-            href:                       https://unsplash.com/@krisetya
+            author:                     Vladislav Klapin
+            href:                       https://unsplash.com/@lemonvlad
 ---
 
 // Page Initializer
@@ -161,7 +161,7 @@ flag:de[squared, md, ml-3 mr-3 mb-2] Germany, square
 
 .Rendered flags
 flag:de[rectangle, md, ml-3 mr-3 mb-2] Germany, rectangle +
-flag:de[squared, md, ml-3 mr-3 mb-2] Germany, square
+flag:de[squared, md, ml-3 mr-4 mb-2] Germany, square
 
 == Flags Overview
 
@@ -242,7 +242,7 @@ Find all flags available in alphabetical order.
         Afghanistan
       </div>
       <div class="capital">Kabul</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/af.svg" alt="Afghanistan Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/af.svg" alt="Afghanistan Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -252,7 +252,7 @@ Find all flags available in alphabetical order.
         Aland Islands
       </div>
       <div class="capital">Mariehamn</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ax.svg" alt="Aland Islands Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ax.svg" alt="Aland Islands Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -262,7 +262,7 @@ Find all flags available in alphabetical order.
         Albania
       </div>
       <div class="capital">Tirana</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/al.svg" alt="Albania Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/al.svg" alt="Albania Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -272,7 +272,7 @@ Find all flags available in alphabetical order.
         Algeria
       </div>
       <div class="capital">Algiers</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/dz.svg" alt="Algeria Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/dz.svg" alt="Algeria Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -282,7 +282,7 @@ Find all flags available in alphabetical order.
         American Samoa
       </div>
       <div class="capital">Pago Pago</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/as.svg" alt="American Samoa Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/as.svg" alt="American Samoa Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -292,7 +292,7 @@ Find all flags available in alphabetical order.
         Andorra
       </div>
       <div class="capital">Andorra la Vella</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ad.svg" alt="Andorra Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ad.svg" alt="Andorra Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -302,7 +302,7 @@ Find all flags available in alphabetical order.
         Angola
       </div>
       <div class="capital">Luanda</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ao.svg" alt="Angola Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ao.svg" alt="Angola Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -312,7 +312,7 @@ Find all flags available in alphabetical order.
         Anguilla
       </div>
       <div class="capital">The Valley</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ai.svg" alt="Anguilla Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ai.svg" alt="Anguilla Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -322,7 +322,7 @@ Find all flags available in alphabetical order.
         Antigua and Barbuda
       </div>
       <div class="capital">St. John's</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ag.svg" alt="Antigua and Barbuda Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ag.svg" alt="Antigua and Barbuda Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -332,7 +332,7 @@ Find all flags available in alphabetical order.
         Argentina
       </div>
       <div class="capital">Buenos Aires</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ar.svg" alt="Argentina Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ar.svg" alt="Argentina Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -342,7 +342,7 @@ Find all flags available in alphabetical order.
         Armenia
       </div>
       <div class="capital">Yerevan</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/am.svg" alt="Armenia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/am.svg" alt="Armenia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -352,7 +352,7 @@ Find all flags available in alphabetical order.
         Aruba
       </div>
       <div class="capital">Oranjestad</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/aw.svg" alt="Aruba Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/aw.svg" alt="Aruba Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -362,7 +362,7 @@ Find all flags available in alphabetical order.
         Australia
       </div>
       <div class="capital">Canberra</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/au.svg" alt="Australia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/au.svg" alt="Australia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -372,7 +372,7 @@ Find all flags available in alphabetical order.
         Austria
       </div>
       <div class="capital">Vienna</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/at.svg" alt="Austria Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/at.svg" alt="Austria Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -382,7 +382,7 @@ Find all flags available in alphabetical order.
         Azerbaijan
       </div>
       <div class="capital">Baku</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/az.svg" alt="Azerbaijan Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/az.svg" alt="Azerbaijan Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -392,7 +392,7 @@ Find all flags available in alphabetical order.
         Bahamas
       </div>
       <div class="capital">Nassau</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/bs.svg" alt="Bahamas Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/bs.svg" alt="Bahamas Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -402,7 +402,7 @@ Find all flags available in alphabetical order.
         Bahrain
       </div>
       <div class="capital">Manama</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/bh.svg" alt="Bahrain Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/bh.svg" alt="Bahrain Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -412,7 +412,7 @@ Find all flags available in alphabetical order.
         Bangladesh
       </div>
       <div class="capital">Dhaka</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/bd.svg" alt="Bangladesh Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/bd.svg" alt="Bangladesh Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -422,7 +422,7 @@ Find all flags available in alphabetical order.
         Barbados
       </div>
       <div class="capital">Bridgetown</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/bb.svg" alt="Barbados Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/bb.svg" alt="Barbados Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -432,7 +432,7 @@ Find all flags available in alphabetical order.
         Belarus
       </div>
       <div class="capital">Minsk</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/by.svg" alt="Belarus Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/by.svg" alt="Belarus Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -442,7 +442,7 @@ Find all flags available in alphabetical order.
         Belgium
       </div>
       <div class="capital">Brussels</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/be.svg" alt="Belgium Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/be.svg" alt="Belgium Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -452,7 +452,7 @@ Find all flags available in alphabetical order.
         Belize
       </div>
       <div class="capital">Belmopan</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/bz.svg" alt="Belize Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/bz.svg" alt="Belize Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -462,7 +462,7 @@ Find all flags available in alphabetical order.
         Benin
       </div>
       <div class="capital">Porto-Novo</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/bj.svg" alt="Benin Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/bj.svg" alt="Benin Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -472,7 +472,7 @@ Find all flags available in alphabetical order.
         Bermuda
       </div>
       <div class="capital">Hamilton</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/bm.svg" alt="Bermuda Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/bm.svg" alt="Bermuda Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -482,7 +482,7 @@ Find all flags available in alphabetical order.
         Bhutan
       </div>
       <div class="capital">Thimphu</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/bt.svg" alt="Bhutan Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/bt.svg" alt="Bhutan Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -492,7 +492,7 @@ Find all flags available in alphabetical order.
         Bolivia (Plurinational State of)
       </div>
       <div class="capital">Sucre</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/bo.svg" alt="Bolivia (Plurinational State of) Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/bo.svg" alt="Bolivia (Plurinational State of) Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -502,7 +502,7 @@ Find all flags available in alphabetical order.
         Bonaire, Sint Eustatius and Saba
       </div>
       <div class="capital">Kralendijk</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/bq.svg" alt="Bonaire, Sint Eustatius and Saba Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/bq.svg" alt="Bonaire, Sint Eustatius and Saba Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -512,7 +512,7 @@ Find all flags available in alphabetical order.
         Bosnia and Herzegovina
       </div>
       <div class="capital">Sarajevo</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ba.svg" alt="Bosnia and Herzegovina Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ba.svg" alt="Bosnia and Herzegovina Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -522,7 +522,7 @@ Find all flags available in alphabetical order.
         Botswana
       </div>
       <div class="capital">Gaborone</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/bw.svg" alt="Botswana Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/bw.svg" alt="Botswana Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -532,7 +532,7 @@ Find all flags available in alphabetical order.
         Brazil
       </div>
       <div class="capital">Brasília</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/br.svg" alt="Brazil Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/br.svg" alt="Brazil Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -542,7 +542,7 @@ Find all flags available in alphabetical order.
         British Indian Ocean Territory
       </div>
       <div class="capital">Diego Garcia</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/io.svg" alt="British Indian Ocean Territory Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/io.svg" alt="British Indian Ocean Territory Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -552,7 +552,7 @@ Find all flags available in alphabetical order.
         Brunei Darussalam
       </div>
       <div class="capital">Bandar Seri Begawan</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/bn.svg" alt="Brunei Darussalam Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/bn.svg" alt="Brunei Darussalam Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -562,7 +562,7 @@ Find all flags available in alphabetical order.
         Bulgaria
       </div>
       <div class="capital">Sofia</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/bg.svg" alt="Bulgaria Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/bg.svg" alt="Bulgaria Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -572,7 +572,7 @@ Find all flags available in alphabetical order.
         Burkina Faso
       </div>
       <div class="capital">Ouagadougou</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/bf.svg" alt="Burkina Faso Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/bf.svg" alt="Burkina Faso Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -582,7 +582,7 @@ Find all flags available in alphabetical order.
         Burundi
       </div>
       <div class="capital">Bujumbura</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/bi.svg" alt="Burundi Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/bi.svg" alt="Burundi Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -592,7 +592,7 @@ Find all flags available in alphabetical order.
         Cabo Verde
       </div>
       <div class="capital">Praia</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/cv.svg" alt="Cabo Verde Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/cv.svg" alt="Cabo Verde Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -602,7 +602,7 @@ Find all flags available in alphabetical order.
         Cambodia
       </div>
       <div class="capital">Phnom Penh</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/kh.svg" alt="Cambodia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/kh.svg" alt="Cambodia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -612,7 +612,7 @@ Find all flags available in alphabetical order.
         Cameroon
       </div>
       <div class="capital">Yaoundé</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/cm.svg" alt="Cameroon Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/cm.svg" alt="Cameroon Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -622,7 +622,7 @@ Find all flags available in alphabetical order.
         Canada
       </div>
       <div class="capital">Ottawa</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ca.svg" alt="Canada Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ca.svg" alt="Canada Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -632,7 +632,7 @@ Find all flags available in alphabetical order.
         Cayman Islands
       </div>
       <div class="capital">George Town</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ky.svg" alt="Cayman Islands Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ky.svg" alt="Cayman Islands Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -642,7 +642,7 @@ Find all flags available in alphabetical order.
         Central African Republic
       </div>
       <div class="capital">Bangui</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/cf.svg" alt="Central African Republic Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/cf.svg" alt="Central African Republic Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -652,7 +652,7 @@ Find all flags available in alphabetical order.
         Chad
       </div>
       <div class="capital">N'Djamena</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/td.svg" alt="Chad Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/td.svg" alt="Chad Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -662,7 +662,7 @@ Find all flags available in alphabetical order.
         Chile
       </div>
       <div class="capital">Santiago</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/cl.svg" alt="Chile Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/cl.svg" alt="Chile Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -672,7 +672,7 @@ Find all flags available in alphabetical order.
         China
       </div>
       <div class="capital">Beijing</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/cn.svg" alt="China Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/cn.svg" alt="China Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -682,7 +682,7 @@ Find all flags available in alphabetical order.
         Christmas Island
       </div>
       <div class="capital">Flying Fish Cove</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/cx.svg" alt="Christmas Island Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/cx.svg" alt="Christmas Island Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -692,7 +692,7 @@ Find all flags available in alphabetical order.
         Cocos (Keeling) Islands
       </div>
       <div class="capital">West Island</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/cc.svg" alt="Cocos (Keeling) Islands Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/cc.svg" alt="Cocos (Keeling) Islands Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -702,7 +702,7 @@ Find all flags available in alphabetical order.
         Colombia
       </div>
       <div class="capital">Bogotá</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/co.svg" alt="Colombia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/co.svg" alt="Colombia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -712,7 +712,7 @@ Find all flags available in alphabetical order.
         Comoros
       </div>
       <div class="capital">Moroni</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/km.svg" alt="Comoros Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/km.svg" alt="Comoros Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -722,7 +722,7 @@ Find all flags available in alphabetical order.
         Cook Islands
       </div>
       <div class="capital">Avarua</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ck.svg" alt="Cook Islands Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ck.svg" alt="Cook Islands Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -732,7 +732,7 @@ Find all flags available in alphabetical order.
         Costa Rica
       </div>
       <div class="capital">San José</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/cr.svg" alt="Costa Rica Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/cr.svg" alt="Costa Rica Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -742,7 +742,7 @@ Find all flags available in alphabetical order.
         Croatia
       </div>
       <div class="capital">Zagreb</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/hr.svg" alt="Croatia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/hr.svg" alt="Croatia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -752,7 +752,7 @@ Find all flags available in alphabetical order.
         Cuba
       </div>
       <div class="capital">Havana</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/cu.svg" alt="Cuba Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/cu.svg" alt="Cuba Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -762,7 +762,7 @@ Find all flags available in alphabetical order.
         Curaçao
       </div>
       <div class="capital">Willemstad</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/cw.svg" alt="Curaçao Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/cw.svg" alt="Curaçao Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -772,7 +772,7 @@ Find all flags available in alphabetical order.
         Cyprus
       </div>
       <div class="capital">Nicosia</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/cy.svg" alt="Cyprus Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/cy.svg" alt="Cyprus Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -782,7 +782,7 @@ Find all flags available in alphabetical order.
         Czech Republic
       </div>
       <div class="capital">Prague</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/cz.svg" alt="Czech Republic Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/cz.svg" alt="Czech Republic Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -792,7 +792,7 @@ Find all flags available in alphabetical order.
         Côte d'Ivoire
       </div>
       <div class="capital">Yamoussoukro</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ci.svg" alt="Côte d'Ivoire Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ci.svg" alt="Côte d'Ivoire Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -802,7 +802,7 @@ Find all flags available in alphabetical order.
         Democratic Republic of the Congo
       </div>
       <div class="capital">Kinshasa</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/cd.svg" alt="Democratic Republic of the Congo Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/cd.svg" alt="Democratic Republic of the Congo Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -812,7 +812,7 @@ Find all flags available in alphabetical order.
         Denmark
       </div>
       <div class="capital">Copenhagen</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/dk.svg" alt="Denmark Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/dk.svg" alt="Denmark Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -822,7 +822,7 @@ Find all flags available in alphabetical order.
         Djibouti
       </div>
       <div class="capital">Djibouti</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/dj.svg" alt="Djibouti Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/dj.svg" alt="Djibouti Flag">
     </div>
   </div>
 </div>
@@ -879,7 +879,7 @@ Find all flags available in alphabetical order.
         Dominica
       </div>
       <div class="capital">Roseau</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/dm.svg" alt="Dominica Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/dm.svg" alt="Dominica Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -889,7 +889,7 @@ Find all flags available in alphabetical order.
         Dominican Republic
       </div>
       <div class="capital">Santo Domingo</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/do.svg" alt="Dominican Republic Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/do.svg" alt="Dominican Republic Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -899,7 +899,7 @@ Find all flags available in alphabetical order.
         Ecuador
       </div>
       <div class="capital">Quito</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ec.svg" alt="Ecuador Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ec.svg" alt="Ecuador Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -909,7 +909,7 @@ Find all flags available in alphabetical order.
         Egypt
       </div>
       <div class="capital">Cairo</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/eg.svg" alt="Egypt Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/eg.svg" alt="Egypt Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -919,7 +919,7 @@ Find all flags available in alphabetical order.
         El Salvador
       </div>
       <div class="capital">San Salvador</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/sv.svg" alt="El Salvador Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/sv.svg" alt="El Salvador Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -929,7 +929,7 @@ Find all flags available in alphabetical order.
         England
       </div>
       <div class="capital">London</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/gb-eng.svg" alt="England Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/gb-eng.svg" alt="England Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -939,7 +939,7 @@ Find all flags available in alphabetical order.
         Equatorial Guinea
       </div>
       <div class="capital">Malabo</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/gq.svg" alt="Equatorial Guinea Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/gq.svg" alt="Equatorial Guinea Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -949,7 +949,7 @@ Find all flags available in alphabetical order.
         Eritrea
       </div>
       <div class="capital">Asmara</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/er.svg" alt="Eritrea Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/er.svg" alt="Eritrea Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -959,7 +959,7 @@ Find all flags available in alphabetical order.
         Estonia
       </div>
       <div class="capital">Tallinn</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ee.svg" alt="Estonia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ee.svg" alt="Estonia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -969,7 +969,7 @@ Find all flags available in alphabetical order.
         Ethiopia
       </div>
       <div class="capital">Addis Ababa</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/et.svg" alt="Ethiopia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/et.svg" alt="Ethiopia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -979,7 +979,7 @@ Find all flags available in alphabetical order.
         Falkland Islands
       </div>
       <div class="capital">Stanley</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/fk.svg" alt="Falkland Islands Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/fk.svg" alt="Falkland Islands Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -989,7 +989,7 @@ Find all flags available in alphabetical order.
         Faroe Islands
       </div>
       <div class="capital">Tórshavn</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/fo.svg" alt="Faroe Islands Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/fo.svg" alt="Faroe Islands Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -999,7 +999,7 @@ Find all flags available in alphabetical order.
         Federated States of Micronesia
       </div>
       <div class="capital">Palikir</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/fm.svg" alt="Federated States of Micronesia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/fm.svg" alt="Federated States of Micronesia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1009,7 +1009,7 @@ Find all flags available in alphabetical order.
         Fiji
       </div>
       <div class="capital">Suva</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/fj.svg" alt="Fiji Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/fj.svg" alt="Fiji Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1019,7 +1019,7 @@ Find all flags available in alphabetical order.
         Finland
       </div>
       <div class="capital">Helsinki</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/fi.svg" alt="Finland Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/fi.svg" alt="Finland Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1029,7 +1029,7 @@ Find all flags available in alphabetical order.
         France
       </div>
       <div class="capital">Paris</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/fr.svg" alt="France Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/fr.svg" alt="France Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1039,7 +1039,7 @@ Find all flags available in alphabetical order.
         French Guiana
       </div>
       <div class="capital">Cayenne</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/gf.svg" alt="French Guiana Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/gf.svg" alt="French Guiana Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1049,7 +1049,7 @@ Find all flags available in alphabetical order.
         French Polynesia
       </div>
       <div class="capital">Papeete</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/pf.svg" alt="French Polynesia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/pf.svg" alt="French Polynesia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1059,7 +1059,7 @@ Find all flags available in alphabetical order.
         French Southern Territories
       </div>
       <div class="capital">Saint-Pierre, Réunion</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/tf.svg" alt="French Southern Territories Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/tf.svg" alt="French Southern Territories Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1069,7 +1069,7 @@ Find all flags available in alphabetical order.
         Gabon
       </div>
       <div class="capital">Libreville</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ga.svg" alt="Gabon Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ga.svg" alt="Gabon Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1079,7 +1079,7 @@ Find all flags available in alphabetical order.
         Gambia
       </div>
       <div class="capital">Banjul</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/gm.svg" alt="Gambia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/gm.svg" alt="Gambia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1089,7 +1089,7 @@ Find all flags available in alphabetical order.
         Georgia
       </div>
       <div class="capital">Tbilisi</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ge.svg" alt="Georgia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ge.svg" alt="Georgia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1099,7 +1099,7 @@ Find all flags available in alphabetical order.
         Germany
       </div>
       <div class="capital">Berlin</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/de.svg" alt="Germany Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/de.svg" alt="Germany Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1109,7 +1109,7 @@ Find all flags available in alphabetical order.
         Ghana
       </div>
       <div class="capital">Accra</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/gh.svg" alt="Ghana Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/gh.svg" alt="Ghana Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1119,7 +1119,7 @@ Find all flags available in alphabetical order.
         Gibraltar
       </div>
       <div class="capital">Gibraltar</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/gi.svg" alt="Gibraltar Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/gi.svg" alt="Gibraltar Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1129,7 +1129,7 @@ Find all flags available in alphabetical order.
         Greece
       </div>
       <div class="capital">Athens</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/gr.svg" alt="Greece Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/gr.svg" alt="Greece Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1139,7 +1139,7 @@ Find all flags available in alphabetical order.
         Greenland
       </div>
       <div class="capital">Nuuk</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/gl.svg" alt="Greenland Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/gl.svg" alt="Greenland Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1149,7 +1149,7 @@ Find all flags available in alphabetical order.
         Grenada
       </div>
       <div class="capital">St. George's</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/gd.svg" alt="Grenada Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/gd.svg" alt="Grenada Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1159,7 +1159,7 @@ Find all flags available in alphabetical order.
         Guadeloupe
       </div>
       <div class="capital">Basse-Terre</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/gp.svg" alt="Guadeloupe Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/gp.svg" alt="Guadeloupe Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1169,7 +1169,7 @@ Find all flags available in alphabetical order.
         Guam
       </div>
       <div class="capital">Hagåtña</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/gu.svg" alt="Guam Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/gu.svg" alt="Guam Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1179,7 +1179,7 @@ Find all flags available in alphabetical order.
         Guatemala
       </div>
       <div class="capital">Guatemala City</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/gt.svg" alt="Guatemala Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/gt.svg" alt="Guatemala Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1189,7 +1189,7 @@ Find all flags available in alphabetical order.
         Guernsey
       </div>
       <div class="capital">Saint Peter Port</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/gg.svg" alt="Guernsey Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/gg.svg" alt="Guernsey Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1199,7 +1199,7 @@ Find all flags available in alphabetical order.
         Guinea
       </div>
       <div class="capital">Conakry</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/gn.svg" alt="Guinea Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/gn.svg" alt="Guinea Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1209,7 +1209,7 @@ Find all flags available in alphabetical order.
         Guinea-Bissau
       </div>
       <div class="capital">Bissau</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/gw.svg" alt="Guinea-Bissau Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/gw.svg" alt="Guinea-Bissau Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1219,7 +1219,7 @@ Find all flags available in alphabetical order.
         Guyana
       </div>
       <div class="capital">Georgetown</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/gy.svg" alt="Guyana Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/gy.svg" alt="Guyana Flag">
     </div>
   </div>
 
@@ -1297,7 +1297,7 @@ Find all flags available in alphabetical order.
         Haiti
       </div>
       <div class="capital">Port-au-Prince</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ht.svg" alt="Haiti Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ht.svg" alt="Haiti Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1307,7 +1307,7 @@ Find all flags available in alphabetical order.
         Holy See
       </div>
       <div class="capital">Vatican City</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/va.svg" alt="Holy See Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/va.svg" alt="Holy See Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1317,7 +1317,7 @@ Find all flags available in alphabetical order.
         Honduras
       </div>
       <div class="capital">Tegucigalpa</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/hn.svg" alt="Honduras Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/hn.svg" alt="Honduras Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1327,7 +1327,7 @@ Find all flags available in alphabetical order.
         Hong Kong
       </div>
       <div class="capital">Hong Kong</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/hk.svg" alt="Hong Kong Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/hk.svg" alt="Hong Kong Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1337,7 +1337,7 @@ Find all flags available in alphabetical order.
         Hungary
       </div>
       <div class="capital">Budapest</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/hu.svg" alt="Hungary Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/hu.svg" alt="Hungary Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1347,7 +1347,7 @@ Find all flags available in alphabetical order.
         Iceland
       </div>
       <div class="capital">Reykjavik</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/is.svg" alt="Iceland Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/is.svg" alt="Iceland Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1357,7 +1357,7 @@ Find all flags available in alphabetical order.
         India
       </div>
       <div class="capital">New Delhi</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/in.svg" alt="India Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/in.svg" alt="India Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1367,7 +1367,7 @@ Find all flags available in alphabetical order.
         Indonesia
       </div>
       <div class="capital">Jakarta</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/id.svg" alt="Indonesia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/id.svg" alt="Indonesia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1377,7 +1377,7 @@ Find all flags available in alphabetical order.
         Iran (Islamic Republic of)
       </div>
       <div class="capital">Tehran</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ir.svg" alt="Iran (Islamic Republic of) Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ir.svg" alt="Iran (Islamic Republic of) Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1387,7 +1387,7 @@ Find all flags available in alphabetical order.
         Iraq
       </div>
       <div class="capital">Baghdad</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/iq.svg" alt="Iraq Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/iq.svg" alt="Iraq Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1397,7 +1397,7 @@ Find all flags available in alphabetical order.
         Ireland
       </div>
       <div class="capital">Dublin</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ie.svg" alt="Ireland Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ie.svg" alt="Ireland Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1407,7 +1407,7 @@ Find all flags available in alphabetical order.
         Isle of Man
       </div>
       <div class="capital">Douglas</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/im.svg" alt="Isle of Man Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/im.svg" alt="Isle of Man Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1417,7 +1417,7 @@ Find all flags available in alphabetical order.
         Israel
       </div>
       <div class="capital">Jerusalem</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/il.svg" alt="Israel Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/il.svg" alt="Israel Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1427,7 +1427,7 @@ Find all flags available in alphabetical order.
         Italy
       </div>
       <div class="capital">Rome</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/it.svg" alt="Italy Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/it.svg" alt="Italy Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1437,7 +1437,7 @@ Find all flags available in alphabetical order.
         Jamaica
       </div>
       <div class="capital">Kingston</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/jm.svg" alt="Jamaica Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/jm.svg" alt="Jamaica Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1447,7 +1447,7 @@ Find all flags available in alphabetical order.
         Japan
       </div>
       <div class="capital">Tokyo</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/jp.svg" alt="Japan Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/jp.svg" alt="Japan Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1457,7 +1457,7 @@ Find all flags available in alphabetical order.
         Jersey
       </div>
       <div class="capital">Saint Helier</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/je.svg" alt="Jersey Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/je.svg" alt="Jersey Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1467,7 +1467,7 @@ Find all flags available in alphabetical order.
         Jordan
       </div>
       <div class="capital">Amman</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/jo.svg" alt="Jordan Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/jo.svg" alt="Jordan Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1477,7 +1477,7 @@ Find all flags available in alphabetical order.
         Kazakhstan
       </div>
       <div class="capital">Astana</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/kz.svg" alt="Kazakhstan Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/kz.svg" alt="Kazakhstan Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1487,7 +1487,7 @@ Find all flags available in alphabetical order.
         Kenya
       </div>
       <div class="capital">Nairobi</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ke.svg" alt="Kenya Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ke.svg" alt="Kenya Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1497,7 +1497,7 @@ Find all flags available in alphabetical order.
         Kiribati
       </div>
       <div class="capital">South Tarawa</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ki.svg" alt="Kiribati Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ki.svg" alt="Kiribati Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1507,7 +1507,7 @@ Find all flags available in alphabetical order.
         Kosovo
       </div>
       <div class="capital">Pristina</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/xk.svg" alt="Kosovo Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/xk.svg" alt="Kosovo Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1517,7 +1517,7 @@ Find all flags available in alphabetical order.
         Kuwait
       </div>
       <div class="capital">Kuwait City</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/kw.svg" alt="Kuwait Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/kw.svg" alt="Kuwait Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1527,7 +1527,7 @@ Find all flags available in alphabetical order.
         Kyrgyzstan
       </div>
       <div class="capital">Bishkek</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/kg.svg" alt="Kyrgyzstan Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/kg.svg" alt="Kyrgyzstan Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1537,7 +1537,7 @@ Find all flags available in alphabetical order.
         Laos
       </div>
       <div class="capital">Vientiane</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/la.svg" alt="Laos Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/la.svg" alt="Laos Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1547,7 +1547,7 @@ Find all flags available in alphabetical order.
         Latvia
       </div>
       <div class="capital">Riga</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/lv.svg" alt="Latvia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/lv.svg" alt="Latvia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1557,7 +1557,7 @@ Find all flags available in alphabetical order.
         Lebanon
       </div>
       <div class="capital">Beirut</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/lb.svg" alt="Lebanon Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/lb.svg" alt="Lebanon Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1567,7 +1567,7 @@ Find all flags available in alphabetical order.
         Lesotho
       </div>
       <div class="capital">Maseru</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ls.svg" alt="Lesotho Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ls.svg" alt="Lesotho Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1577,7 +1577,7 @@ Find all flags available in alphabetical order.
         Liberia
       </div>
       <div class="capital">Monrovia</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/lr.svg" alt="Liberia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/lr.svg" alt="Liberia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1587,7 +1587,7 @@ Find all flags available in alphabetical order.
         Libya
       </div>
       <div class="capital">Tripoli</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ly.svg" alt="Libya Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ly.svg" alt="Libya Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1597,7 +1597,7 @@ Find all flags available in alphabetical order.
         Liechtenstein
       </div>
       <div class="capital">Vaduz</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/li.svg" alt="Liechtenstein Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/li.svg" alt="Liechtenstein Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1607,7 +1607,7 @@ Find all flags available in alphabetical order.
         Lithuania
       </div>
       <div class="capital">Vilnius</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/lt.svg" alt="Lithuania Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/lt.svg" alt="Lithuania Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1617,7 +1617,7 @@ Find all flags available in alphabetical order.
         Luxembourg
       </div>
       <div class="capital">Luxembourg City</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/lu.svg" alt="Luxembourg Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/lu.svg" alt="Luxembourg Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1627,7 +1627,7 @@ Find all flags available in alphabetical order.
         Macau
       </div>
       <div class="capital">Macau</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/mo.svg" alt="Macau Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/mo.svg" alt="Macau Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1637,7 +1637,7 @@ Find all flags available in alphabetical order.
         Madagascar
       </div>
       <div class="capital">Antananarivo</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/mg.svg" alt="Madagascar Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/mg.svg" alt="Madagascar Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1647,7 +1647,7 @@ Find all flags available in alphabetical order.
         Malawi
       </div>
       <div class="capital">Lilongwe</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/mw.svg" alt="Malawi Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/mw.svg" alt="Malawi Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1657,7 +1657,7 @@ Find all flags available in alphabetical order.
         Malaysia
       </div>
       <div class="capital">Kuala Lumpur</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/my.svg" alt="Malaysia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/my.svg" alt="Malaysia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1667,7 +1667,7 @@ Find all flags available in alphabetical order.
         Maldives
       </div>
       <div class="capital">Malé</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/mv.svg" alt="Maldives Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/mv.svg" alt="Maldives Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1677,7 +1677,7 @@ Find all flags available in alphabetical order.
         Mali
       </div>
       <div class="capital">Bamako</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ml.svg" alt="Mali Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ml.svg" alt="Mali Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1687,7 +1687,7 @@ Find all flags available in alphabetical order.
         Malta
       </div>
       <div class="capital">Valletta</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/mt.svg" alt="Malta Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/mt.svg" alt="Malta Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1697,7 +1697,7 @@ Find all flags available in alphabetical order.
         Marshall Islands
       </div>
       <div class="capital">Majuro</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/mh.svg" alt="Marshall Islands Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/mh.svg" alt="Marshall Islands Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1707,7 +1707,7 @@ Find all flags available in alphabetical order.
         Martinique
       </div>
       <div class="capital">Fort-de-France</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/mq.svg" alt="Martinique Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/mq.svg" alt="Martinique Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1717,7 +1717,7 @@ Find all flags available in alphabetical order.
         Mauritania
       </div>
       <div class="capital">Nouakchott</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/mr.svg" alt="Mauritania Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/mr.svg" alt="Mauritania Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1727,7 +1727,7 @@ Find all flags available in alphabetical order.
         Mauritius
       </div>
       <div class="capital">Port Louis</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/mu.svg" alt="Mauritius Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/mu.svg" alt="Mauritius Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1737,7 +1737,7 @@ Find all flags available in alphabetical order.
         Mayotte
       </div>
       <div class="capital">Mamoudzou</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/yt.svg" alt="Mayotte Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/yt.svg" alt="Mayotte Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1747,7 +1747,7 @@ Find all flags available in alphabetical order.
         Mexico
       </div>
       <div class="capital">Mexico City</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/mx.svg" alt="Mexico Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/mx.svg" alt="Mexico Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1757,7 +1757,7 @@ Find all flags available in alphabetical order.
         Moldova
       </div>
       <div class="capital">Chișinău</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/md.svg" alt="Moldova Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/md.svg" alt="Moldova Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1767,7 +1767,7 @@ Find all flags available in alphabetical order.
         Monaco
       </div>
       <div class="capital">Monaco</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/mc.svg" alt="Monaco Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/mc.svg" alt="Monaco Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1777,7 +1777,7 @@ Find all flags available in alphabetical order.
         Mongolia
       </div>
       <div class="capital">Ulaanbaatar</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/mn.svg" alt="Mongolia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/mn.svg" alt="Mongolia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1787,7 +1787,7 @@ Find all flags available in alphabetical order.
         Montenegro
       </div>
       <div class="capital">Podgorica</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/me.svg" alt="Montenegro Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/me.svg" alt="Montenegro Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1797,7 +1797,7 @@ Find all flags available in alphabetical order.
         Montserrat
       </div>
       <div class="capital">Little Bay, Brades, Plymouth</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ms.svg" alt="Montserrat Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ms.svg" alt="Montserrat Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1807,7 +1807,7 @@ Find all flags available in alphabetical order.
         Morocco
       </div>
       <div class="capital">Rabat</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ma.svg" alt="Morocco Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ma.svg" alt="Morocco Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1817,7 +1817,7 @@ Find all flags available in alphabetical order.
         Mozambique
       </div>
       <div class="capital">Maputo</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/mz.svg" alt="Mozambique Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/mz.svg" alt="Mozambique Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1827,7 +1827,7 @@ Find all flags available in alphabetical order.
         Myanmar
       </div>
       <div class="capital">Naypyidaw</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/mm.svg" alt="Myanmar Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/mm.svg" alt="Myanmar Flag">
     </div>
   </div>
 </div>
@@ -1839,110 +1839,75 @@ Find all flags available in alphabetical order.
 <div class="doc-example mb-3">
   <div class="bs-component mb-3">
     <span class="badge badge-primary"><a href="#NA"> NA · Namibia </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
+    <span class="badge badge-primary"><a href="#NR"> NR · Nauru </a></span>
+    <span class="badge badge-primary"><a href="#NP"> NP · Nepal </a></span>
+    <span class="badge badge-primary"><a href="#NL"> NL · Netherlands </a></span>
+    <span class="badge badge-primary"><a href="#NC"> NC · New Caledonia </a></span>
+    <span class="badge badge-primary"><a href="#NZ"> NZ · New Zealand </a></span>
+    <span class="badge badge-primary"><a href="#NI"> NI · Nicaragua </a></span>
+    <span class="badge badge-primary"><a href="#NE"> NE · Niger </a></span>
+    <span class="badge badge-primary"><a href="#NG"> NG · Nigeria </a></span>
+    <span class="badge badge-primary"><a href="#NU"> NU · Niue </a></span>
+    <span class="badge badge-primary"><a href="#NF"> NF · Norfolk Island </a></span>
+    <span class="badge badge-primary"><a href="#KP"> KP · North Korea </a></span>
+    <span class="badge badge-primary"><a href="#MK"> MK · North Macedonia </a></span>
+    <span class="badge badge-primary"><a href="#GB-NIR"> GB-NIR · Northern Ireland </a></span>
+    <span class="badge badge-primary"><a href="#MP"> MP · Northern Mariana Islands </a></span>
+    <span class="badge badge-primary"><a href="#NO"> NO · Norway </a></span>
+    <span class="badge badge-primary"><a href="#OM"> OM · Oman </a></span>
+    <span class="badge badge-primary"><a href="#PK"> PK · Pakistan </a></span>
+    <span class="badge badge-primary"><a href="#PW"> PW · Palau </a></span>
+    <span class="badge badge-primary"><a href="#PA"> PA · Panama </a></span>
+    <span class="badge badge-primary"><a href="#PG"> PG · Papua New Guinea </a></span>
+    <span class="badge badge-primary"><a href="#PY"> PY · Paraguay </a></span>
+    <span class="badge badge-primary"><a href="#PE"> PE · Peru </a></span>
+    <span class="badge badge-primary"><a href="#PH"> PH · Philippines </a></span>
+    <span class="badge badge-primary"><a href="#PN"> PN · Pitcairn </a></span>
+    <span class="badge badge-primary"><a href="#PL"> PL · Poland </a></span>
+    <span class="badge badge-primary"><a href="#PT"> PT · Portugal </a></span>
+    <span class="badge badge-primary"><a href="#PR"> PR · Puerto Rico </a></span>
+    <span class="badge badge-primary"><a href="#QA"> QA · Qatar </a></span>
+    <span class="badge badge-primary"><a href="#CG"> CG · Republic of the Congo </a></span>
+    <span class="badge badge-primary"><a href="#RO"> RO · Romania </a></span>
+    <span class="badge badge-primary"><a href="#RU"> RU · Russia </a></span>
+    <span class="badge badge-primary"><a href="#RW"> RW · Rwanda </a></span>
+    <span class="badge badge-primary"><a href="#RE"> RE · Réunion </a></span>
+    <span class="badge badge-primary"><a href="#BL"> BL · Saint Barthélemy </a></span>
+    <span class="badge badge-primary"><a href="#SH"> SH · Saint Helena, Ascension and Tristan da Cunha </a></span>
+    <span class="badge badge-primary"><a href="#KN"> KN · Saint Kitts and Nevis </a></span>
+    <span class="badge badge-primary"><a href="#LC"> LC · Saint Lucia </a></span>
+    <span class="badge badge-primary"><a href="#MF"> MF · Saint Martin </a></span>
+    <span class="badge badge-primary"><a href="#PM"> PM · Saint Pierre and Miquelon </a></span>
+    <span class="badge badge-primary"><a href="#VC"> VC · Saint Vincent and the Grenadines </a></span>
+    <span class="badge badge-primary"><a href="#WS"> WS · Samoa </a></span>
+    <span class="badge badge-primary"><a href="#SM"> SM · San Marino </a></span>
+    <span class="badge badge-primary"><a href="#ST"> ST · Sao Tome and Principe </a></span>
+    <span class="badge badge-primary"><a href="#SA"> SA · Saudi Arabia </a></span>
+    <span class="badge badge-primary"><a href="#GB-SCT"> GB-SCT · Scotland </a></span>
+    <span class="badge badge-primary"><a href="#SN"> SN · Senegal </a></span>
+    <span class="badge badge-primary"><a href="#RS"> RS · Serbia </a></span>
+    <span class="badge badge-primary"><a href="#SC"> SC · Seychelles </a></span>
+    <span class="badge badge-primary"><a href="#SL"> SL · Sierra Leone </a></span>
+    <span class="badge badge-primary"><a href="#SG"> SG · Singapore </a></span>
+    <span class="badge badge-primary"><a href="#SX"> SX · Sint Maarten </a></span>
+    <span class="badge badge-primary"><a href="#SK"> SK · Slovakia </a></span>
+    <span class="badge badge-primary"><a href="#SI"> SI · Slovenia </a></span>
+    <span class="badge badge-primary"><a href="#SB"> SB · Solomon Islands </a></span>
+    <span class="badge badge-primary"><a href="#SO"> SO · Somalia </a></span>
+    <span class="badge badge-primary"><a href="#ZA"> ZA · South Africa </a></span>
+    <span class="badge badge-primary"><a href="#GS"> GS · South Georgia and the South Sandwich Islands </a></span>
+    <span class="badge badge-primary"><a href="#KR"> KR · South Korea </a></span>
+    <span class="badge badge-primary"><a href="#SS"> SS · South Sudan </a></span>
+    <span class="badge badge-primary"><a href="#ES"> ES · Spain </a></span>
+    <span class="badge badge-primary"><a href="#LK"> LK · Sri Lanka </a></span>
+    <span class="badge badge-primary"><a href="#PS"> PS · State of Palestine </a></span>
+    <span class="badge badge-primary"><a href="#SD"> SD · Sudan </a></span>
+    <span class="badge badge-primary"><a href="#SR"> SR · Suriname </a></span>
+    <span class="badge badge-primary"><a href="#SJ"> SJ · Svalbard and Jan Mayen </a></span>
+    <span class="badge badge-primary"><a href="#SZ"> SZ · Swaziland </a></span>
+    <span class="badge badge-primary"><a href="#SE"> SE · Sweden </a></span>
+    <span class="badge badge-primary"><a href="#CH"> CH · Switzerland </a></span>
+    <span class="badge badge-primary"><a href="#SY"> SY · Syrian Arab Republic </a></span>
   </div>
 </div>
 
@@ -1954,7 +1919,7 @@ Find all flags available in alphabetical order.
         Namibia
       </div>
       <div class="capital">Windhoek</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/na.svg" alt="Namibia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/na.svg" alt="Namibia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1964,7 +1929,7 @@ Find all flags available in alphabetical order.
         Nauru
       </div>
       <div class="capital">Yaren District</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/nr.svg" alt="Nauru Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/nr.svg" alt="Nauru Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1974,7 +1939,7 @@ Find all flags available in alphabetical order.
         Nepal
       </div>
       <div class="capital">Kathmandu</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/np.svg" alt="Nepal Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/np.svg" alt="Nepal Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1984,7 +1949,7 @@ Find all flags available in alphabetical order.
         Netherlands
       </div>
       <div class="capital">Amsterdam</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/nl.svg" alt="Netherlands Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/nl.svg" alt="Netherlands Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -1994,7 +1959,7 @@ Find all flags available in alphabetical order.
         New Caledonia
       </div>
       <div class="capital">Nouméa</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/nc.svg" alt="New Caledonia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/nc.svg" alt="New Caledonia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2004,7 +1969,7 @@ Find all flags available in alphabetical order.
         New Zealand
       </div>
       <div class="capital">Wellington</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/nz.svg" alt="New Zealand Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/nz.svg" alt="New Zealand Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2014,7 +1979,7 @@ Find all flags available in alphabetical order.
         Nicaragua
       </div>
       <div class="capital">Managua</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ni.svg" alt="Nicaragua Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ni.svg" alt="Nicaragua Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2024,7 +1989,7 @@ Find all flags available in alphabetical order.
         Niger
       </div>
       <div class="capital">Niamey</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ne.svg" alt="Niger Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ne.svg" alt="Niger Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2034,7 +1999,7 @@ Find all flags available in alphabetical order.
         Nigeria
       </div>
       <div class="capital">Abuja</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ng.svg" alt="Nigeria Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ng.svg" alt="Nigeria Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2044,7 +2009,7 @@ Find all flags available in alphabetical order.
         Niue
       </div>
       <div class="capital">Alofi</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/nu.svg" alt="Niue Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/nu.svg" alt="Niue Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2054,7 +2019,7 @@ Find all flags available in alphabetical order.
         Norfolk Island
       </div>
       <div class="capital">Kingston</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/nf.svg" alt="Norfolk Island Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/nf.svg" alt="Norfolk Island Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2064,7 +2029,7 @@ Find all flags available in alphabetical order.
         North Korea
       </div>
       <div class="capital">Pyongyang</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/kp.svg" alt="North Korea Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/kp.svg" alt="North Korea Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2074,7 +2039,7 @@ Find all flags available in alphabetical order.
         North Macedonia
       </div>
       <div class="capital">Skopje</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/mk.svg" alt="North Macedonia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/mk.svg" alt="North Macedonia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2084,7 +2049,7 @@ Find all flags available in alphabetical order.
         Northern Ireland
       </div>
       <div class="capital">Belfast</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/gb-nir.svg" alt="Northern Ireland Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/gb-nir.svg" alt="Northern Ireland Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2094,7 +2059,7 @@ Find all flags available in alphabetical order.
         Northern Mariana Islands
       </div>
       <div class="capital">Saipan</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/mp.svg" alt="Northern Mariana Islands Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/mp.svg" alt="Northern Mariana Islands Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2104,7 +2069,7 @@ Find all flags available in alphabetical order.
         Norway
       </div>
       <div class="capital">Oslo</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/no.svg" alt="Norway Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/no.svg" alt="Norway Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2114,7 +2079,7 @@ Find all flags available in alphabetical order.
         Oman
       </div>
       <div class="capital">Muscat</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/om.svg" alt="Oman Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/om.svg" alt="Oman Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2124,7 +2089,7 @@ Find all flags available in alphabetical order.
         Pakistan
       </div>
       <div class="capital">Islamabad</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/pk.svg" alt="Pakistan Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/pk.svg" alt="Pakistan Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2134,7 +2099,7 @@ Find all flags available in alphabetical order.
         Palau
       </div>
       <div class="capital">Ngerulmud</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/pw.svg" alt="Palau Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/pw.svg" alt="Palau Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2144,7 +2109,7 @@ Find all flags available in alphabetical order.
         Panama
       </div>
       <div class="capital">Panama City</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/pa.svg" alt="Panama Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/pa.svg" alt="Panama Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2154,7 +2119,7 @@ Find all flags available in alphabetical order.
         Papua New Guinea
       </div>
       <div class="capital">Port Moresby</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/pg.svg" alt="Papua New Guinea Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/pg.svg" alt="Papua New Guinea Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2164,7 +2129,7 @@ Find all flags available in alphabetical order.
         Paraguay
       </div>
       <div class="capital">Asunción</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/py.svg" alt="Paraguay Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/py.svg" alt="Paraguay Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2174,7 +2139,7 @@ Find all flags available in alphabetical order.
         Peru
       </div>
       <div class="capital">Lima</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/pe.svg" alt="Peru Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/pe.svg" alt="Peru Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2184,7 +2149,7 @@ Find all flags available in alphabetical order.
         Philippines
       </div>
       <div class="capital">Manila</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ph.svg" alt="Philippines Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ph.svg" alt="Philippines Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2194,7 +2159,7 @@ Find all flags available in alphabetical order.
         Pitcairn
       </div>
       <div class="capital">Adamstown</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/pn.svg" alt="Pitcairn Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/pn.svg" alt="Pitcairn Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2204,7 +2169,7 @@ Find all flags available in alphabetical order.
         Poland
       </div>
       <div class="capital">Warsaw</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/pl.svg" alt="Poland Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/pl.svg" alt="Poland Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2214,7 +2179,7 @@ Find all flags available in alphabetical order.
         Portugal
       </div>
       <div class="capital">Lisbon</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/pt.svg" alt="Portugal Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/pt.svg" alt="Portugal Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2224,7 +2189,7 @@ Find all flags available in alphabetical order.
         Puerto Rico
       </div>
       <div class="capital">San Juan</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/pr.svg" alt="Puerto Rico Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/pr.svg" alt="Puerto Rico Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2234,7 +2199,7 @@ Find all flags available in alphabetical order.
         Qatar
       </div>
       <div class="capital">Doha</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/qa.svg" alt="Qatar Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/qa.svg" alt="Qatar Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2244,7 +2209,7 @@ Find all flags available in alphabetical order.
         Republic of the Congo
       </div>
       <div class="capital">Brazzaville</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/cg.svg" alt="Republic of the Congo Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/cg.svg" alt="Republic of the Congo Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2254,7 +2219,7 @@ Find all flags available in alphabetical order.
         Romania
       </div>
       <div class="capital">Bucharest</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ro.svg" alt="Romania Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ro.svg" alt="Romania Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2264,7 +2229,7 @@ Find all flags available in alphabetical order.
         Russia
       </div>
       <div class="capital">Moscow</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ru.svg" alt="Russia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ru.svg" alt="Russia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2274,7 +2239,7 @@ Find all flags available in alphabetical order.
         Rwanda
       </div>
       <div class="capital">Kigali</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/rw.svg" alt="Rwanda Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/rw.svg" alt="Rwanda Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2284,7 +2249,7 @@ Find all flags available in alphabetical order.
         Réunion
       </div>
       <div class="capital">Saint-Denis</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/re.svg" alt="Réunion Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/re.svg" alt="Réunion Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2294,7 +2259,7 @@ Find all flags available in alphabetical order.
         Saint Barthélemy
       </div>
       <div class="capital">Gustavia</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/bl.svg" alt="Saint Barthélemy Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/bl.svg" alt="Saint Barthélemy Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2304,7 +2269,7 @@ Find all flags available in alphabetical order.
         Saint Helena, Ascension and Tristan da Cunha
       </div>
       <div class="capital">Jamestown</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/sh.svg" alt="Saint Helena, Ascension and Tristan da Cunha Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/sh.svg" alt="Saint Helena, Ascension and Tristan da Cunha Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2314,7 +2279,7 @@ Find all flags available in alphabetical order.
         Saint Kitts and Nevis
       </div>
       <div class="capital">Basseterre</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/kn.svg" alt="Saint Kitts and Nevis Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/kn.svg" alt="Saint Kitts and Nevis Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2324,7 +2289,7 @@ Find all flags available in alphabetical order.
         Saint Lucia
       </div>
       <div class="capital">Castries</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/lc.svg" alt="Saint Lucia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/lc.svg" alt="Saint Lucia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2334,7 +2299,7 @@ Find all flags available in alphabetical order.
         Saint Martin
       </div>
       <div class="capital">Marigot</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/mf.svg" alt="Saint Martin Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/mf.svg" alt="Saint Martin Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2344,7 +2309,7 @@ Find all flags available in alphabetical order.
         Saint Pierre and Miquelon
       </div>
       <div class="capital">Saint-Pierre</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/pm.svg" alt="Saint Pierre and Miquelon Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/pm.svg" alt="Saint Pierre and Miquelon Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2354,7 +2319,7 @@ Find all flags available in alphabetical order.
         Saint Vincent and the Grenadines
       </div>
       <div class="capital">Kingstown</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/vc.svg" alt="Saint Vincent and the Grenadines Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/vc.svg" alt="Saint Vincent and the Grenadines Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2364,7 +2329,7 @@ Find all flags available in alphabetical order.
         Samoa
       </div>
       <div class="capital">Apia</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ws.svg" alt="Samoa Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ws.svg" alt="Samoa Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2374,7 +2339,7 @@ Find all flags available in alphabetical order.
         San Marino
       </div>
       <div class="capital">San Marino</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/sm.svg" alt="San Marino Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/sm.svg" alt="San Marino Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2384,7 +2349,7 @@ Find all flags available in alphabetical order.
         Sao Tome and Principe
       </div>
       <div class="capital">São Tomé</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/st.svg" alt="Sao Tome and Principe Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/st.svg" alt="Sao Tome and Principe Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2394,7 +2359,7 @@ Find all flags available in alphabetical order.
         Saudi Arabia
       </div>
       <div class="capital">Riyadh</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/sa.svg" alt="Saudi Arabia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/sa.svg" alt="Saudi Arabia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2404,7 +2369,7 @@ Find all flags available in alphabetical order.
         Scotland
       </div>
       <div class="capital">Edinburgh</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/gb-sct.svg" alt="Scotland Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/gb-sct.svg" alt="Scotland Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2414,7 +2379,7 @@ Find all flags available in alphabetical order.
         Senegal
       </div>
       <div class="capital">Dakar</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/sn.svg" alt="Senegal Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/sn.svg" alt="Senegal Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2424,7 +2389,7 @@ Find all flags available in alphabetical order.
         Serbia
       </div>
       <div class="capital">Belgrade</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/rs.svg" alt="Serbia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/rs.svg" alt="Serbia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2434,7 +2399,7 @@ Find all flags available in alphabetical order.
         Seychelles
       </div>
       <div class="capital">Victoria</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/sc.svg" alt="Seychelles Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/sc.svg" alt="Seychelles Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2444,7 +2409,7 @@ Find all flags available in alphabetical order.
         Sierra Leone
       </div>
       <div class="capital">Freetown</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/sl.svg" alt="Sierra Leone Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/sl.svg" alt="Sierra Leone Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2454,7 +2419,7 @@ Find all flags available in alphabetical order.
         Singapore
       </div>
       <div class="capital">Singapore</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/sg.svg" alt="Singapore Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/sg.svg" alt="Singapore Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2464,7 +2429,7 @@ Find all flags available in alphabetical order.
         Sint Maarten
       </div>
       <div class="capital">Philipsburg</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/sx.svg" alt="Sint Maarten Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/sx.svg" alt="Sint Maarten Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2474,7 +2439,7 @@ Find all flags available in alphabetical order.
         Slovakia
       </div>
       <div class="capital">Bratislava</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/sk.svg" alt="Slovakia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/sk.svg" alt="Slovakia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2484,7 +2449,7 @@ Find all flags available in alphabetical order.
         Slovenia
       </div>
       <div class="capital">Ljubljana</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/si.svg" alt="Slovenia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/si.svg" alt="Slovenia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2494,7 +2459,7 @@ Find all flags available in alphabetical order.
         Solomon Islands
       </div>
       <div class="capital">Honiara</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/sb.svg" alt="Solomon Islands Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/sb.svg" alt="Solomon Islands Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2504,7 +2469,7 @@ Find all flags available in alphabetical order.
         Somalia
       </div>
       <div class="capital">Mogadishu</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/so.svg" alt="Somalia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/so.svg" alt="Somalia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2514,7 +2479,7 @@ Find all flags available in alphabetical order.
         South Africa
       </div>
       <div class="capital">Pretoria</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/za.svg" alt="South Africa Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/za.svg" alt="South Africa Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2524,7 +2489,7 @@ Find all flags available in alphabetical order.
         South Georgia and the South Sandwich Islands
       </div>
       <div class="capital">King Edward Point</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/gs.svg" alt="South Georgia and the South Sandwich Islands Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/gs.svg" alt="South Georgia and the South Sandwich Islands Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2534,7 +2499,7 @@ Find all flags available in alphabetical order.
         South Korea
       </div>
       <div class="capital">Seoul</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/kr.svg" alt="South Korea Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/kr.svg" alt="South Korea Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2544,7 +2509,7 @@ Find all flags available in alphabetical order.
         South Sudan
       </div>
       <div class="capital">Juba</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ss.svg" alt="South Sudan Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ss.svg" alt="South Sudan Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2554,7 +2519,7 @@ Find all flags available in alphabetical order.
         Spain
       </div>
       <div class="capital">Madrid</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/es.svg" alt="Spain Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/es.svg" alt="Spain Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2564,7 +2529,7 @@ Find all flags available in alphabetical order.
         Sri Lanka
       </div>
       <div class="capital">Sri Jayawardenepura Kotte, Colombo</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/lk.svg" alt="Sri Lanka Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/lk.svg" alt="Sri Lanka Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2574,7 +2539,7 @@ Find all flags available in alphabetical order.
         State of Palestine
       </div>
       <div class="capital">Ramallah</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ps.svg" alt="State of Palestine Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ps.svg" alt="State of Palestine Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2584,7 +2549,7 @@ Find all flags available in alphabetical order.
         Sudan
       </div>
       <div class="capital">Khartoum</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/sd.svg" alt="Sudan Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/sd.svg" alt="Sudan Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2594,7 +2559,7 @@ Find all flags available in alphabetical order.
         Suriname
       </div>
       <div class="capital">Paramaribo</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/sr.svg" alt="Suriname Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/sr.svg" alt="Suriname Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2604,7 +2569,7 @@ Find all flags available in alphabetical order.
         Svalbard and Jan Mayen
       </div>
       <div class="capital">Longyearbyen</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/sj.svg" alt="Svalbard and Jan Mayen Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/sj.svg" alt="Svalbard and Jan Mayen Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2614,7 +2579,7 @@ Find all flags available in alphabetical order.
         Swaziland
       </div>
       <div class="capital">Lobamba, Mbabane</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/sz.svg" alt="Swaziland Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/sz.svg" alt="Swaziland Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2624,7 +2589,7 @@ Find all flags available in alphabetical order.
         Sweden
       </div>
       <div class="capital">Stockholm</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/se.svg" alt="Sweden Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/se.svg" alt="Sweden Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2634,7 +2599,7 @@ Find all flags available in alphabetical order.
         Switzerland
       </div>
       <div class="capital">Bern</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ch.svg" alt="Switzerland Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ch.svg" alt="Switzerland Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2644,7 +2609,7 @@ Find all flags available in alphabetical order.
         Syrian Arab Republic
       </div>
       <div class="capital">Damascus</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/sy.svg" alt="Syrian Arab Republic Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/sy.svg" alt="Syrian Arab Republic Flag">
     </div>
   </div>
 </div>
@@ -2656,27 +2621,39 @@ Find all flags available in alphabetical order.
 
 <div class="doc-example mb-3">
   <div class="bs-component mb-3">
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
+    <span class="badge badge-primary"><a href="#TW"> TW · Taiwan </a></span>
+    <span class="badge badge-primary"><a href="#TJ"> TJ · Tajikistan </a></span>
+    <span class="badge badge-primary"><a href="#TZ"> TZ · Tanzania </a></span>
+    <span class="badge badge-primary"><a href="#TH"> TH · Thailand </a></span>
+    <span class="badge badge-primary"><a href="#TL"> TL · Timor-Leste </a></span>
+    <span class="badge badge-primary"><a href="#TG"> TG · Togo </a></span>
+    <span class="badge badge-primary"><a href="#TK"> TK · Tokelau </a></span>
+    <span class="badge badge-primary"><a href="#TO"> TO · Tonga </a></span>
+    <span class="badge badge-primary"><a href="#TT"> TT · Trinidad and Tobago </a></span>
+    <span class="badge badge-primary"><a href="#TN"> TN · Tunisia </a></span>
+    <span class="badge badge-primary"><a href="#TR"> TR · Turkey </a></span>
+    <span class="badge badge-primary"><a href="#TM"> TM · Turkmenistan </a></span>
+    <span class="badge badge-primary"><a href="#TC"> TC · Turks and Caicos Islands </a></span>
+    <span class="badge badge-primary"><a href="#TV"> TV · Tuvalu </a></span>
+    <span class="badge badge-primary"><a href="#UG"> UG · Uganda </a></span>
+    <span class="badge badge-primary"><a href="#UA"> UA · Ukraine </a></span>
+    <span class="badge badge-primary"><a href="#AE"> AE · United Arab Emirates </a></span>
+    <span class="badge badge-primary"><a href="#GB"> GB · United Kingdom </a></span>
+    <span class="badge badge-primary"><a href="#UM"> UM · United States Minor Outlying Islands </a></span>
+    <span class="badge badge-primary"><a href="#US"> US · United States of America </a></span>
+    <span class="badge badge-primary"><a href="#UY"> UY · Uruguay </a></span>
+    <span class="badge badge-primary"><a href="#UZ"> UZ · Uzbekistan </a></span>
+    <span class="badge badge-primary"><a href="#VU"> VU · Vanuatu </a></span>
+    <span class="badge badge-primary"><a href="#VE"> VE · Venezuela (Bolivarian Republic of) </a></span>
+    <span class="badge badge-primary"><a href="#VN"> VN · Vietnam </a></span>
+    <span class="badge badge-primary"><a href="#VG"> VG · Virgin Islands (British) </a></span>
+    <span class="badge badge-primary"><a href="#VI"> VI · Virgin Islands (U.S.) </a></span>
+    <span class="badge badge-primary"><a href="#GB-WLS"> GB-WLS · Wales </a></span>
+    <span class="badge badge-primary"><a href="#WF"> WF · Wallis and Futuna </a></span>
+    <span class="badge badge-primary"><a href="#EH"> EH · Western Sahara </a></span>
+    <span class="badge badge-primary"><a href="#YE"> YE · Yemen </a></span>
+    <span class="badge badge-primary"><a href="#ZM"> ZM · Zambia </a></span>
+    <span class="badge badge-primary"><a href="#ZW"> ZW · Zimbabwe </a></span>
   </div>
 </div>
 
@@ -2688,7 +2665,7 @@ Find all flags available in alphabetical order.
         Taiwan
       </div>
       <div class="capital">Taipei</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/tw.svg" alt="Taiwan Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/tw.svg" alt="Taiwan Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2698,7 +2675,7 @@ Find all flags available in alphabetical order.
         Tajikistan
       </div>
       <div class="capital">Dushanbe</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/tj.svg" alt="Tajikistan Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/tj.svg" alt="Tajikistan Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2708,7 +2685,7 @@ Find all flags available in alphabetical order.
         Tanzania
       </div>
       <div class="capital">Dodoma</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/tz.svg" alt="Tanzania Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/tz.svg" alt="Tanzania Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2718,7 +2695,7 @@ Find all flags available in alphabetical order.
         Thailand
       </div>
       <div class="capital">Bangkok</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/th.svg" alt="Thailand Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/th.svg" alt="Thailand Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2728,7 +2705,7 @@ Find all flags available in alphabetical order.
         Timor-Leste
       </div>
       <div class="capital">Dili</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/tl.svg" alt="Timor-Leste Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/tl.svg" alt="Timor-Leste Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2738,7 +2715,7 @@ Find all flags available in alphabetical order.
         Togo
       </div>
       <div class="capital">Lomé</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/tg.svg" alt="Togo Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/tg.svg" alt="Togo Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2748,7 +2725,7 @@ Find all flags available in alphabetical order.
         Tokelau
       </div>
       <div class="capital">Nukunonu, Atafu,Tokelau</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/tk.svg" alt="Tokelau Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/tk.svg" alt="Tokelau Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2758,7 +2735,7 @@ Find all flags available in alphabetical order.
         Tonga
       </div>
       <div class="capital">Nukuʻalofa</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/to.svg" alt="Tonga Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/to.svg" alt="Tonga Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2768,7 +2745,7 @@ Find all flags available in alphabetical order.
         Trinidad and Tobago
       </div>
       <div class="capital">Port of Spain</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/tt.svg" alt="Trinidad and Tobago Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/tt.svg" alt="Trinidad and Tobago Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2778,7 +2755,7 @@ Find all flags available in alphabetical order.
         Tunisia
       </div>
       <div class="capital">Tunis</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/tn.svg" alt="Tunisia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/tn.svg" alt="Tunisia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2788,7 +2765,7 @@ Find all flags available in alphabetical order.
         Turkey
       </div>
       <div class="capital">Ankara</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/tr.svg" alt="Turkey Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/tr.svg" alt="Turkey Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2798,7 +2775,7 @@ Find all flags available in alphabetical order.
         Turkmenistan
       </div>
       <div class="capital">Ashgabat</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/tm.svg" alt="Turkmenistan Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/tm.svg" alt="Turkmenistan Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2808,7 +2785,7 @@ Find all flags available in alphabetical order.
         Turks and Caicos Islands
       </div>
       <div class="capital">Cockburn Town</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/tc.svg" alt="Turks and Caicos Islands Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/tc.svg" alt="Turks and Caicos Islands Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2818,7 +2795,7 @@ Find all flags available in alphabetical order.
         Tuvalu
       </div>
       <div class="capital">Funafuti</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/tv.svg" alt="Tuvalu Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/tv.svg" alt="Tuvalu Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2828,7 +2805,7 @@ Find all flags available in alphabetical order.
         Uganda
       </div>
       <div class="capital">Kampala</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ug.svg" alt="Uganda Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ug.svg" alt="Uganda Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2838,7 +2815,7 @@ Find all flags available in alphabetical order.
         Ukraine
       </div>
       <div class="capital">Kiev</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ua.svg" alt="Ukraine Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ua.svg" alt="Ukraine Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2848,7 +2825,7 @@ Find all flags available in alphabetical order.
         United Arab Emirates
       </div>
       <div class="capital">Abu Dhabi</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ae.svg" alt="United Arab Emirates Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ae.svg" alt="United Arab Emirates Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2858,7 +2835,7 @@ Find all flags available in alphabetical order.
         United Kingdom
       </div>
       <div class="capital">London</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/gb.svg" alt="United Kingdom Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/gb.svg" alt="United Kingdom Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2868,7 +2845,7 @@ Find all flags available in alphabetical order.
         United States Minor Outlying Islands
       </div>
       <div class="capital">Washington, D.C.</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/um.svg" alt="United States Minor Outlying Islands Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/um.svg" alt="United States Minor Outlying Islands Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2878,7 +2855,7 @@ Find all flags available in alphabetical order.
         United States of America
       </div>
       <div class="capital">Washington, D.C.</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/us.svg" alt="United States of America Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/us.svg" alt="United States of America Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2888,7 +2865,7 @@ Find all flags available in alphabetical order.
         Uruguay
       </div>
       <div class="capital">Montevideo</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/uy.svg" alt="Uruguay Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/uy.svg" alt="Uruguay Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2898,7 +2875,7 @@ Find all flags available in alphabetical order.
         Uzbekistan
       </div>
       <div class="capital">Tashkent</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/uz.svg" alt="Uzbekistan Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/uz.svg" alt="Uzbekistan Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2908,7 +2885,7 @@ Find all flags available in alphabetical order.
         Vanuatu
       </div>
       <div class="capital">Port Vila</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/vu.svg" alt="Vanuatu Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/vu.svg" alt="Vanuatu Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2918,7 +2895,7 @@ Find all flags available in alphabetical order.
         Venezuela (Bolivarian Republic of)
       </div>
       <div class="capital">Caracas</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ve.svg" alt="Venezuela (Bolivarian Republic of) Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ve.svg" alt="Venezuela (Bolivarian Republic of) Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2928,7 +2905,7 @@ Find all flags available in alphabetical order.
         Vietnam
       </div>
       <div class="capital">Hanoi</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/vn.svg" alt="Vietnam Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/vn.svg" alt="Vietnam Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2938,7 +2915,7 @@ Find all flags available in alphabetical order.
         Virgin Islands (British)
       </div>
       <div class="capital">Road Town</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/vg.svg" alt="Virgin Islands (British) Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/vg.svg" alt="Virgin Islands (British) Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2948,7 +2925,7 @@ Find all flags available in alphabetical order.
         Virgin Islands (U.S.)
       </div>
       <div class="capital">Charlotte Amalie</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/vi.svg" alt="Virgin Islands (U.S.) Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/vi.svg" alt="Virgin Islands (U.S.) Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2958,7 +2935,7 @@ Find all flags available in alphabetical order.
         Wales
       </div>
       <div class="capital">Cardiff</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/gb-wls.svg" alt="Wales Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/gb-wls.svg" alt="Wales Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2968,7 +2945,7 @@ Find all flags available in alphabetical order.
         Wallis and Futuna
       </div>
       <div class="capital">Mata-Utu</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/wf.svg" alt="Wallis and Futuna Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/wf.svg" alt="Wallis and Futuna Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2978,7 +2955,7 @@ Find all flags available in alphabetical order.
         Western Sahara
       </div>
       <div class="capital">Laayoune</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/eh.svg" alt="Western Sahara Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/eh.svg" alt="Western Sahara Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2988,7 +2965,7 @@ Find all flags available in alphabetical order.
         Yemen
       </div>
       <div class="capital">Sana'a</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/ye.svg" alt="Yemen Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/ye.svg" alt="Yemen Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -2998,7 +2975,7 @@ Find all flags available in alphabetical order.
         Zambia
       </div>
       <div class="capital">Lusaka</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/zm.svg" alt="Zambia Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/zm.svg" alt="Zambia Flag">
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
@@ -3008,7 +2985,7 @@ Find all flags available in alphabetical order.
         Zimbabwe
       </div>
       <div class="capital">Harare</div>
-      <img class="flag" src="https://lipis.github.io/flag-icon-css/flags/4x3/zw.svg" alt="Zimbabwe Flag">
+      <img class="flag" src="/assets/themes/j1/core/country-flags/4x3/zw.svg" alt="Zimbabwe Flag">
     </div>
   </div>
 </div>

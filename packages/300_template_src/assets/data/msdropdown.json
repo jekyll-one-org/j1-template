@@ -1,0 +1,155 @@
+---
+regenerate:                             true
+exclude_from_search:                    true
+---
+
+{% capture cache %}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/msdropdown.json
+ # The Liquid template is used by J1 Translator module to create msDropdown
+ # (select) elements DYNAMICALLY
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # For details, see https://jekyll.one
+ # -----------------------------------------------------------------------------
+ # NOTE:
+ # Be carefull change the Liquid code. If the code is changed, check the
+ # integrity of the JSON data created. Invalid JSON data will cause the
+ # the J1 Translator module to fail.
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #   {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment         = site.environment %}
+
+{
+  "googleLanguages":
+  [
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "af",    "text": "Afrikaans"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "sq",    "text": "Albanian"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "ar",    "text": "Arabic"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "hy",    "text": "Armenian"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "az",    "text": "Azerbaijani"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "eu",    "text": "Basque"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "be",    "text": "Belarusian"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "bn",    "text": "Bengali"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "bg",    "text": "Bulgarian"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "ca",    "text": "Catalan"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "zh-CN", "text": "Chinese (Simplified)"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "zh-TW", "text": "Chinese (Traditional)"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "hr",    "text": "Croatian"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "cs",    "text": "Czech"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "da",    "text": "Danish"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "nl",    "text": "Dutch"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "eo",    "text": "Esperanto"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "et",    "text": "Estonian"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "tl",    "text": "Filipino"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "fi",    "text": "Finnish"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "fr",    "text": "French"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "gl",    "text": "Galician"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "ka",    "text": "Georgian"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "de",    "text": "German"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "el",    "text": "Greek"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "gu",    "text": "Gujarati"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "ht",    "text": "Haitian Creole"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "iw",    "text": "Hebrew"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "hi",    "text": "Hindi"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "hu",    "text": "Hungarian"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "is",    "text": "Icelandic"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "id",    "text": "Indonesian"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "ga",    "text": "Irish"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "it",    "text": "Italian"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "ja",    "text": "Japanese"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "kn",    "text": "Kannada"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "ko",    "text": "Korean"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "la",    "text": "Latin"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "lv",    "text": "Latvian"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "lt",    "text": "Lithuanian"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "mk",    "text": "Macedonian"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "ms",    "text": "Malay"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "mt",    "text": "Maltese"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "no",    "text": "Norwegian"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "fa",    "text": "Persian"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "pl",    "text": "Polish"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "pt",    "text": "Portuguese"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "ro",    "text": "Romanian"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "ru",    "text": "Russian"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "sr",    "text": "Serbian"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "sk",    "text": "Slovak"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "sl",    "text": "Slovenian"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "es",    "text": "Spanish"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "sw",    "text": "Swahili"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "sv",    "text": "Swedish"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "ta",    "text": "Tamil"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "te",    "text": "Telugu"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "th",    "text": "Thai"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "tr",    "text": "Turkish"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "uk",    "text": "Ukrainian"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "ur",    "text": "Urdu"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "vi",    "text": "Vietnamese"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "cy",    "text": "Welsh"},
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "yi",    "text": "Yiddish"}
+  ],
+
+  "deeplLanguages":
+  [
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "bg",    "text": "Bulgarian" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "cs",    "text": "Czech" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "da",    "text": "Danish" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "de",    "text": "German" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "el",    "text": "Greek" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "es",    "text": "Spanish" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "en",    "text": "English" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "en-us", "text": "English (American)" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "en-uk", "text": "English (British)" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "et",    "text": "Estonian" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "ft",    "text": "Finnish" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "fr",    "text": "French" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "hu",    "text": "Hungarian" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "it",    "text": "Italian" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "ja",    "text": "Japanese" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "lv",    "text": "Latvian" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "lt",    "text": "Lithuanian" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "nl",    "text": "Dutch" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "af",    "text": "Polish" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "pt",    "text": "Portuguese" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "pt-pt", "text": "Portuguese (Portugal)" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "pt-br", "text": "Portuguese (Brazilian)" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "ro",    "text": "Romanian" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "ru",    "text": "Russian" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "sk",    "text": "Slovak" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "sl",    "text": "Slovenian" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "sv",    "text": "Swedish" },
+  	{"imageCss": "flag-icon flag-icon-cz rectangle size-md", "value": "zh",    "text": "Chinese" }
+  ],
+
+  "jsonTest":
+  [
+    {"description":"Choose your payment gateway", "value":"", "text":"Payment Gateway"},
+    {"image":"/assets/themes/j1/modules/imageDropdown/icons/Amex-56.png", "description":"My life. My card...", "value":"amex", "text":"Amex"},
+    {"image":"/assets/themes/j1/modules/imageDropdown/icons/Discover-56.png", "description":"It pays to Discover...", "value":"Discover", "text":"Discover"},
+    {"image":"/assets/themes/j1/modules/imageDropdown/icons/Mastercard-56.png", "title":"For everything else...", "description":"For everything else...", "value":"Mastercard", "text":"Mastercard"},
+    {"image":"/assets/themes/j1/modules/imageDropdown/icons/Cash-56.png", "description":"Sorry not available...", "value":"cash", "text":"Cash on delivery", "disabled":true},
+    {"image":"/assets/themes/j1/modules/imageDropdown/icons/Visa-56.png", "description":"All you need...", "value":"Visa", "text":"Visa"},
+    {"image":"/assets/themes/j1/modules/imageDropdown/icons/Paypal-56.png", "description":"Pay and get paid...", "value":"Paypal", "text":"Paypal"}
+  ]
+}
+
+{% endcapture %}
+{% if production %}
+  {{ cache | minifyJSON }}
+{% else %}
+  {{ cache | strip_empty_lines }}
+{% endif %}
+{% assign cache = nil %}

@@ -96,7 +96,7 @@ exclude_from_search:                    true
           <div class="translator-option" data-name="analysis">
             <div class="switch">
               <label>
-                <input id="translator-checkboxAnalysis" type="checkbox"  name="translator-checkboxAnalysis" checked="true">
+                <input id="checkboxAnalysis" type="checkbox" name="checkboxAnalysis" checked="true">
                 <span class="bmd-switch-track"></span>
                 Analysis enabled (Your Privacy)
               </label>
@@ -106,7 +106,7 @@ exclude_from_search:                    true
           <div class="translator-option" data-name="personalization">
             <div class="switch">
               <label>
-                <input id="translator-checkboxPersonalization" type="checkbox"  name="translator-checkboxPersonalization" checked="true">
+                <input id="checkboxPersonalization" type="checkbox" name="checkboxPersonalization" checked="true">
                 <span class="bmd-switch-track"></span>
                 Personalization enabled (Your Privacy)
               </label>
@@ -116,7 +116,7 @@ exclude_from_search:                    true
           <div class="translator-option" data-name="useLanguageFromBrowser">
             <div class="switch">
               <label>
-                <input id="translator-checkboxuseLanguageFromBrowser" type="checkbox" name="translator-checkboxuseLanguageFromBrowser" checked="true" disabled>
+                <input id="checkboxuseLanguageFromBrowser" type="checkbox" name="checkboxuseLanguageFromBrowser" checked="true" disabled>
                 <span class="bmd-switch-track"></span>
                 Language settings taken from browser
               </label>
@@ -126,17 +126,17 @@ exclude_from_search:                    true
           <div class="translator-option" data-name="translateAllPages">
             <div class="switch">
               <label>
-                <input id="translator-checkboxTranslateAllPages" type="checkbox"  name="translator-checkboxTranslateAllPages" checked="true" disabled>
+                <input id="checkboxTranslateAllPages" type="checkbox" name="checkboxTranslateAllPages" checked="true" disabled>
                 <span class="bmd-switch-track"></span>
                 Translation of all pages
               </label>
             </div>
           </div>
 
-          <div class="translator-option" data-name="translatorEnabled">
+          <div class="translator-option" data-name="translationEnabled">
             <div class="switch">
               <label>
-                <input id="translator-checkboxTranslator" type="checkbox"  name="translator-checkboxTranslator" checked="true">
+                <input id="checkboxTranslationEnabled" type="checkbox" name="checkboxTranslationEnabled" checked="true">
                 <span class="bmd-switch-track"></span>
                 Translation enabled
               </label>
@@ -149,7 +149,7 @@ exclude_from_search:                    true
 
       <div class="modal-footer">
         <button id="translator-buttonDoNotAgree" type="button" class="btn btn-link text-decoration-none" style="">
-        No, skip translation
+        No, disable translation
         </button>
         <button id="translator-buttonAgree" type="button" class="btn btn-primary btn-raised" style="">
         Yes, please translate
@@ -199,7 +199,7 @@ exclude_from_search:                    true
           <div class="translator-option" data-name="analysis">
             <div class="switch">
               <label>
-                <input id="translator-checkboxAnalysis" type="checkbox"  name="translator-checkboxAnalysis" checked="true">
+                <input id="checkboxAnalysis" type="checkbox" name="checkboxAnalysis" checked="true">
                 <span class="bmd-switch-track"></span>
                 Analysen erlaubt (Ihre Privatsphäre)
               </label>
@@ -209,7 +209,7 @@ exclude_from_search:                    true
           <div class="translator-option" data-name="personalization">
             <div class="switch">
               <label>
-                <input id="translator-checkboxPersonalization" type="checkbox"  name="translator-checkboxPersonalization" checked="true">
+                <input id="checkboxPersonalization" type="checkbox" name="checkboxPersonalization" checked="true">
                 <span class="bmd-switch-track"></span>
                 Personalisierung erlaubt (Ihre Privatsphäre)
               </label>
@@ -219,7 +219,7 @@ exclude_from_search:                    true
           <div class="translator-option" data-name="useLanguageFromBrowser">
             <div class="switch">
               <label>
-                <input id="translator-checkboxUseLanguageFromBrowser" type="checkbox" name="translator-checkboxUseLanguageFromBrowser" checked="true">
+                <input id="checkboxUseLanguageFromBrowser" type="checkbox" name="checkboxUseLanguageFromBrowser" checked="true">
                 <span class="bmd-switch-track"></span>
                 Spracheinstellungen vom Browser
               </label>
@@ -229,7 +229,7 @@ exclude_from_search:                    true
           <div class="translator-option" data-name="translateAllPages">
             <div class="switch">
               <label>
-                <input id="translator-checkboxTranslateAllPages" type="checkbox"  name="translator-checkboxTranslateAllPages" checked="true" disabled>
+                <input id="checkboxTranslateAllPages" type="checkbox" name="checkboxTranslateAllPages" checked="true" disabled>
                 <span class="bmd-switch-track"></span>
                 Übersetzung aller Seiten
               </label>
@@ -239,17 +239,17 @@ exclude_from_search:                    true
           <!-- div class="translator-option" data-name="translatorName">
             <div class="switch">
               <label>
-                <input id="translator-checkboxTranslatorName" type="checkbox"  name="translator-checkboxTranslatorNameEnabled" disabled="true" checked="true">
+                <input id="checkboxTranslatorName" type="checkbox"  name="checkboxTranslatorNameEnabled" disabled="true" checked="true">
                 <span class="bmd-switch-track"></span>
                 Übersetzung eingeschaltet
               </label>
             </div>
           </div -->
 
-          <div class="translator-option" data-name="translatorEnabled">
+          <div class="translator-option" data-name="translationEnabled">
             <div class="switch">
               <label>
-                <input id="translator-checkboxTranslator" type="checkbox"  name="translator-checkboxTranslator" checked="true">
+                <input id="checkboxTranslator" type="checkbox" name="checkboxTranslator" checked="true">
                 <span class="bmd-switch-track"></span>
                 Übersetzung eingeschaltet
               </label>
@@ -262,10 +262,10 @@ exclude_from_search:                    true
 
       <div class="modal-footer">
         <button id="translator-buttonDoNotAgree" type="button" class="btn btn-link text-decoration-none" style="">
-        Ich bin nicht einverstanden
+        Nein, bitte Übersetzungen abschalten
         </button>
         <button id="translator-buttonAgree" type="button" class="btn btn-primary btn-raised" style="">
-        Einverstanden
+        Ja, bitte übersetzen
         </button>
         <button id="translator-buttonSave" type="button" class="btn btn-primary" style="display: none;">
         Auswahl speichern

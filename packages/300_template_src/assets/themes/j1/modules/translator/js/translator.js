@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/modules/translator/js/translator.js
- # Provides JS Core for J1 Module Translator
+ # Provides JS Core functions|API for J1 Module Translator
  #
  #  Product/Info:
  #  http://jekyll.one
@@ -11,15 +11,8 @@
  #  J1 Template is licensed under MIT License.
  #  See: https://github.com/jekyll-one/J1 Template/blob/master/LICENSE
  # -----------------------------------------------------------------------------
- # TODO:
- # -----------------------------------------------------------------------------
- # NOTE:
- # https://github.com/marghoobsuleman/ms-Dropdown
- # https://www.marghoobsuleman.com/image-dropdown/help
- # https://www.marghoobsuleman.com/image-dropdown/advanced-help
- # -----------------------------------------------------------------------------
 */
-//'use strict';
+'use strict';
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -43,18 +36,21 @@ function Translator(props) {
   var current_page;
   var whitelisted;
   var ddTranslationSourceLanguage;
+  var navigator_language;
+  var translation_language;
 
-  logger.info('\n' + 'initializing core module: started');
-  logger.info('\n' + 'state: started');
+  // ---------------------------------------------------------------------------
+  // var and propertiy settings
+  // ---------------------------------------------------------------------------
 
   this.props = {
-    contentURL:             '/assets/data/translator',                    	// this URL must contain the dialog content (modals) in the needed languages
+    contentURL:             '/assets/data/translator',                          // this URL must contain the dialog content (modals) in the needed languages
     cookieName:             'j1.user.state',                                    // the name of the User State Cookie (primary data)
     cookieConsentName:      'j1.user.consent',                                  // the name of the Cookie Consent Cookie (secondary data)
     cookieStorageDays:      365,                                                // the duration the cookie is stored on the client
     cookieSameSite:         'Strict',                                           // restrict consent cookie to first-party, do NOT send cookie to other domains
     cookieSecure:           false,
-    translatorEnabled:      false,
+    translationEnabled:     false,
     translatorName:         'google',
     translationLanguage:    'auto',
     translateAllPages:      true,                                               // enable tranlation on all pages
@@ -68,6 +64,7 @@ function Translator(props) {
     postSelectionCallback:  undefined,                                          // callback function, called after the user has made his selection
   };
 
+  // supported languages by Google Translate
   this.googleTranslatorLanguages = {
       'af':     { 'name': 'Afrikaans' },
       'sq':     { 'name': 'Albanian' },
@@ -135,6 +132,7 @@ function Translator(props) {
       'yi':     { 'name': 'Yiddish' }
   };
 
+  // supported languages by Deepl Translate
   this.deeplTranslatorLanguages = {
       'bg':     { 'name': 'Bulgarian' },
       'cs':     { 'name': 'Czech' },
@@ -190,6 +188,16 @@ function Translator(props) {
   // set modal by dialogLanguage that is loadad
   this.props.cookieSecure = cookieSecure;
 
+  logger.info('\n' + 'initializing core module: started');
+  logger.info('\n' + 'state: started');
+
+  // ---------------------------------------------------------------------------
+  // internal functions
+  // ---------------------------------------------------------------------------
+
+  // ---------------------------------------------------------------------------
+  // manage cookies
+  // ---------------------------------------------------------------------------
   var Cookie = {
     set: function (name, value, days, samesite, secure) {
       var value_encoded = window.btoa(value);
@@ -223,6 +231,9 @@ function Translator(props) {
     }
   };
 
+  // ---------------------------------------------------------------------------
+  // manage events
+  // ---------------------------------------------------------------------------
   var Events = {
     documentReady: function (onDocumentReady) {
       if (document.readyState !== 'loading') {
@@ -232,6 +243,46 @@ function Translator(props) {
       }
     }
   };
+
+  // ---------------------------------------------------------------------------
+  // createMsDropdownFromJSON
+  // Create a msDropdown select DYNAMICALLY from JSON data located in a file
+  // specified by "url". The JSON file contaians mutiple msDropdown elements
+  // selected by "elm". The base (empty) <div> container the msDropdown will
+  // be created is specified by theID given by "selector".
+  // ---------------------------------------------------------------------------
+  function createMsDropdownFromJSON (options /* url, elm, selector */) {
+    var _this       = this;
+    var selectorID  = '#' + options.selector;
+
+    $.ajax({
+      url: options.url,
+      dataType: 'json',
+      success: function (data) {
+        MsDropdown.make(selectorID, {
+          byJson: {
+            data: data[options.elm],
+            name: options.selector,
+//          size: 0,
+//          selectedIndex: 0,
+//          width: 450,
+//          multiple: false
+          },
+          enableAutoFilter:false
+        });
+
+        // msDropdown = document.getElementById(options.selector).msDropdown;
+        // msDropdown.selectedIndex  = 1;
+        // $(selectorID).show();
+        // msDropdown.on('close', function() {
+        //   console.log(msDropdown.value)
+        // });
+      },
+      error: function (jqXHR, textStatus, errorThrown) {
+        logger.error('\n' + 'failed to retrieve JSON data from: ' + url);
+      }
+    });
+  }
 
   function showDialog() {
     Events.documentReady(function () {
@@ -254,13 +305,53 @@ function Translator(props) {
           });
         }
 
-        // jadams, 2021-10-18: register additional events for the dialog
+        // ---------------------------------------------------------------------
+        // register additional events for the dialog (modal)
+        // ---------------------------------------------------------------------
+
+        // ---------------------------------------------------------------------
+        // on 'shown'
         self.$modal.on('shown.bs.modal', function () {
-          msDropdownSourceLanguage = document.getElementById("translate-source-language").msDropdown;
+          if (self.props.translationLanguage === 'auto') {
+            navigator_language    = navigator.language || navigator.userLanguage;
+            translation_language  = navigator_language.split('-')[0];
+          }
+
+          // $.when (
+          //   createMsDropdownFromJSON({
+          //     url:      '/assets/data/ms_select.json',
+          //     elm:      'googleLanguages',
+          //     selector: 'dropdowsJSON',
+          //   })
+          // )
+          // .then(function(data) {
+          //   $('#dropdowsJSON').show();
+          //   var msDropdown = document.getElementById('dropdowsJSON').msDropdown;
+          //   msDropdown.selectedIndex  = 1;
+          //
+          //   msDropdown.on('close', function() {
+          //     console.log(msDropdown.value)
+          //   });
+          // });
+
+          var msDropdownSourceLanguage = document.getElementById("translate-source-language").msDropdown;
+
+          // msDropdownSourceLanguage.on('close', function() {
+          //   var selectedLanguage  = msDropdownSourceLanguage.value.toLowerCase();
+          //
+          //   if (translation_language !== selectedLanguage) {
+          //     settings = JSON.parse(Cookie.get(self.props.cookieName));
+          //     settings.translationLanguage  = selectedLanguage;
+          //     Cookie.set(self.props.cookieName, JSON.stringify(settings), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
+          //
+          //     logger.info('\n' + 'selected language: ' + selectedLanguage);
+          //     return false;
+          //   }
+          // });
 
           // workaround: limit the height of the resulting list (UL)
           // of the 'dd' select
-          $('.ms-options').css('max-height', '10.5937rem');
+          // $('.ms-options').css('max-height', '10.5937rem');
 
           // jadams, 2021-10-18: added stop scrolling on the body,
           // if modal is OPEN
@@ -268,8 +359,8 @@ function Translator(props) {
 
           // jadams, 2021-10-18: disable source language selection
           if (self.props.translationLanguage === 'auto') {
-            // msDropdownSourceLanguage.disabled = true;
-            msDropdownSourceLanguage.disabled = false;
+            msDropdownSourceLanguage.disabled = true;
+            // msDropdownSourceLanguage.disabled = false;
           }
 
           // jadams, 2021-10-18: doesn't work for sizes > 1 !!!
@@ -279,9 +370,20 @@ function Translator(props) {
 
         });
 
+        // ---------------------------------------------------------------------
+        // on 'hidden'
         self.$modal.on('hidden.bs.modal', function () {
-          // jadams, 2021-10-18: remove stop scrolling on the body,
-          // if modal is CLOSED
+          var selectedLanguage = msDropdownSourceLanguage.value.toLowerCase();
+          var settings;
+
+          if (translation_language !== selectedLanguage) {
+            settings = JSON.parse(Cookie.get(self.props.cookieName));
+            settings.translationLanguage  = selectedLanguage;
+            Cookie.set(self.props.cookieName, JSON.stringify(settings), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
+
+            logger.info('\n' + 'selected language: ' + selectedLanguage);
+            return false;
+          }
           $('body').removeClass('stop-scrolling');
         });
 
@@ -366,17 +468,6 @@ function Translator(props) {
       self.$buttonAgree.hide();
       self.$buttonSave.show();
       self.$buttonAgreeAll.show();
-
-      // jadams, 2012-10-15: imageDropdown NOT usabe within (MS) modals
-      // -----------------------------------------------------------------------
-
-      // if (document.getElementById("source-language")) {
-      //   ddSourceLanguage = document.getElementById("source-language").msDropdown;
-      //   ddSourceLanguage.destroy();
-      //   ddSourceLanguage.make('#source-language');
-      //   ddSourceLanguage.selectedIndex = 5;
-      //   ddSourceLanguage.updateUiAndValue();
-
     } else {
       self.$buttonDoNotAgree.show();
       self.$buttonAgree.show();
@@ -413,15 +504,25 @@ function Translator(props) {
     var settings;
     var consentSettings = {};
 
-    // update all cookies required for (google-)translation
-    //
-    settings = gatherOptions();
-    consentSettings                     = JSON.parse(Cookie.get(self.props.cookieConsentName));
-    consentSettings["analysis"]         = settings["analysis-enabled"];
-    consentSettings["personalization"]  = settings["personalization-enabled"];
+    settings                        = gatherOptions();
+    consentSettings                 = JSON.parse(Cookie.get(self.props.cookieConsentName));
+    consentSettings.analysis        = settings.analysis;
+    consentSettings.personalization = settings.personalization;
 
-    Cookie.set(self.props.cookieConsentName, JSON.stringify(consentSettings), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(true)), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
+    Cookie.set(
+      self.props.cookieConsentName,
+      JSON.stringify(consentSettings),
+      self.props.cookieStorageDays,
+      self.props.sameSite,
+      self.props.secure
+    );
+    Cookie.set(
+      self.props.cookieName,
+      JSON.stringify(gatherOptions(true)),
+      self.props.cookieStorageDays,
+      self.props.sameSite,
+      self.props.secure
+    );
 
     self.$modal.modal('hide');
   }
@@ -430,9 +531,16 @@ function Translator(props) {
   // process current settings from checkboxes for `doNotAgree`
   // ---------------------------------------------------------------------------
   function doNotAgree() {
-    // update all cookies required for (google-)translation
-    //
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
+    var settings = gatherOptions();
+
+    settings.translationEnabled = false;
+    Cookie.set(
+      self.props.cookieName,
+      JSON.stringify(settings),
+      self.props.cookieStorageDays,
+      self.props.sameSite,
+      self.props.secure
+    );
     self.$modal.modal('hide');
   }
 
@@ -445,14 +553,25 @@ function Translator(props) {
 
     // update all cookies required for (google-)translation
     //
-    settings = gatherOptions();
-    consentSettings                     = JSON.parse(Cookie.get(self.props.cookieConsentName));
-    consentSettings["analysis"]         = settings["analysis-enabled"];
-    consentSettings["personalization"]  = settings["personalization-enabled"];
+    settings                        = gatherOptions();
+    consentSettings                 = JSON.parse(Cookie.get(self.props.cookieConsentName));
+    consentSettings.analysis        = settings.analysis;
+    consentSettings.personalization = settings.personalization;
 
-    Cookie.set(self.props.cookieConsentName, JSON.stringify(consentSettings), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
-
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions()), self.props.cookieStorageDays, self.props.sameSite, self.props.secure);
+    Cookie.set(
+      self.props.cookieConsentName,
+      JSON.stringify(consentSettings),
+      self.props.cookieStorageDays,
+      self.props.sameSite,
+      self.props.secure
+    );
+    Cookie.set(
+      self.props.cookieName,
+      JSON.stringify(gatherOptions()),
+      self.props.cookieStorageDays,
+      self.props.sameSite,
+      self.props.secure
+    );
     self.$modal.modal('hide');
   }
 
@@ -491,4 +610,4 @@ function Translator(props) {
   logger.info('\n' + 'initializing core module finished');
   logger.info('\n' + 'state: finished');
 
-} // END BootstrapCookieConsent
+} // END Translator

@@ -296,8 +296,9 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
           // expire consent|state cookies to session
           j1.expireCookie({ name: cookie_names.user_state });
           j1.expireCookie({ name: cookie_names.user_consent });
+          j1.expireCookie({ name: cookie_names.user_translate });
 
-          user_translate.translatorEnabled = false;
+          user_translate.translationEnabled = false;
           cookie_written = j1.writeCookie({
             name:     cookie_names.user_translate,
             data:     user_translate,
@@ -324,6 +325,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
           // expire consent|state cookies to session
           j1.expireCookie({ name: cookie_names.user_state });
           j1.expireCookie({ name: cookie_names.user_consent });
+          j1.expireCookie({ name: cookie_names.user_translate });
         }
         if (moduleOptions.reloadPageOnChange) {
           // reload current page (skip cache)

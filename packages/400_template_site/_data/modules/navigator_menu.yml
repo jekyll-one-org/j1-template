@@ -170,39 +170,57 @@
 #
 - item:                                 Tools
   sublevel:
-    - title:                            Country Flag Previewer
-      href:                             /pages/public/previewer/country_flags/
-      icon:                             flag
-    - title:                            Deepl Translation Tester
-      href:                             /pages/public/previewer/deepl-translator/
-      icon:                             translate
-    - title:                            Google Translation Tester
-      href:                             /pages/public/previewer/google-translator/
-      icon:                             google-translate      
-    - title:                            Gallery Previewer
-      href:                             /pages/public/previewer/justified_gallery/
-      icon:                             view-dashboard
-    - title:                            MDI Previewer (regular)
-      href:                             /pages/public/previewer/mdi_font/
-      icon:                             alarm-light
-    - title:                            MDI Previewer (light)
-      href:                             /pages/public/previewer/mdil_font/
-      icon:                             alarm-light-outline
-    - title:                            Twitter Emoji Previewer
-      href:                             /pages/public/previewer/twitter_emoji/
-      icon:                             emoticon-cool-outline
-    - title:                            Rouge Theme Previewer
-      href:                             /pages/public/previewer/rouge/
-      icon:                             code-parentheses
-    - title:                            MD Color Palette
-      href:                             /pages/public/previewer/color_palette/
-      icon:                             format-color-fill
 
-# Currently NOT used
-#
-#   - title:                            Automagic iFrame
-#     href:                             /pages/public/iframer/
-#     icon:                             image-filter-none
+    # --------------------------------------------------------------------------
+    # Manuals
+    #
+    - title:                            Manuals
+      icon:                             book-cog
+      dropdown:
+        - title:                        Country Flags
+          href:                         /pages/public/previewer/country_flags/
+          icon:                         flag
+        - title:                        MD Color Palette
+          href:                         /pages/public/previewer/color_palette/
+          icon:                         format-color-fill
+        - title:                        MsDropdown
+          href:                         /pages/public/manuals/msDropdown/
+          icon:                         form-dropdown
+
+    # --------------------------------------------------------------------------
+    # Tester
+    #
+    - title:                            Tester
+      icon:                             test-tube
+      dropdown:
+        - title:                        Translator
+          href:                         /pages/public/previewer/deepl-translator/
+          icon:                         translate
+        - title:                        Justified Gallery
+          href:                         /pages/public/previewer/justified_gallery/
+          icon:                         view-dashboard
+#       - title:                        Automagic iFrames
+#         href:                         /pages/public/iframer/
+#         icon:                         image-filter-none
+
+    # --------------------------------------------------------------------------
+    # Previewer
+    #
+    - title:                            Previewer
+      icon:                             eye
+      dropdown:
+      - title:                          MDI Icons (regular)
+        href:                           /pages/public/previewer/mdi_font/
+        icon:                           alarm-light
+      - title:                          MDI Icons (light)
+        href:                           /pages/public/previewer/mdil_font/
+        icon:                           alarm-light-outline
+      - title:                          Twitter Emojis
+        href:                           /pages/public/previewer/twitter_emoji/
+        icon:                           emoticon-cool-outline
+      - title:                          Rouge Themes
+        href:                           /pages/public/previewer/rouge/
+        icon:                           code-parentheses
 
 # ------------------------------------------------------------------------------
 # Menu BLOG
@@ -249,7 +267,7 @@
 - item:                                 Online
   megamenu:
     - title:                            Sites
-      icon:                             #web
+      icon:                             web
       column:
         - title:                        Jekyll Home
           href:                         https://jekyllrb.com/
@@ -293,7 +311,7 @@
           icon:                         arrow-down-bold-hexagon-outline
 
     - title:                            Knowledge
-      icon:                             #lightbulb-on
+      icon:                             lightbulb-on
       column:
         - title:                        Learn Jekyll at CloudCannon
           href:                         http://jekyll.tips/
@@ -337,7 +355,7 @@
           icon:                         hospital
 
     - title:                            Tools
-      icon:                             #wrench
+      icon:                             wrench
       column:
         - title:                        FreeFormatter
           href:                         http://www.freeformatter.com/

@@ -72,6 +72,7 @@
         this.translate(options);
         logger.info('\n' + 'initializing plugin: finished');
       },
+
       // -----------------------------------------------------------------------
       // prepareXHR
       // Prepare a XHR request according to DeepL API specification
@@ -92,6 +93,7 @@
         this.xhr.setRequestHeader("Accept", "*/*");
         this.xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
       },
+
       // -----------------------------------------------------------------------
       // prepareText
       // Prepare text function used to parse, or arrange text, designed as
@@ -103,6 +105,7 @@
       prepareText: function (source_text) {
           return source_text.split("\n");
       },
+
       // -----------------------------------------------------------------------
       // translate
       // Translate text function which uses all the other modules, in order to

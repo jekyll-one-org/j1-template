@@ -62,6 +62,7 @@
     "jquery": "3.5.1",
     "openssl": "^1.1.0",
     "popper.js": "^1.12.6",
-    "terser": "^5.5.1"
+    "terser": "^5.5.1",
+    "unminified-webpack-plugin": "^3.0.0"
   }
 }

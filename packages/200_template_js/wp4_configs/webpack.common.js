@@ -33,6 +33,8 @@ const path =                              require('path');
 const webpack =                           require('webpack');
 const webpackDevTool =                    'source-map';
 
+const UnminifiedWebpackPlugin =           require('unminified-webpack-plugin');
+
 const nodeEnv =                           process.env.NODE_ENV || 'development';
 const jekyllEnv =                         process.env.JEKYLL_ENV || 'development';
 
@@ -166,6 +168,7 @@ module.exports = {
   // --------------------------------------------------------
   plugins: [
     // providePlugins
+    new UnminifiedWebpackPlugin()
   ]
 
 };

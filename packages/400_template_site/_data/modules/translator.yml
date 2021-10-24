@@ -26,12 +26,6 @@ description:
 settings:
 
   enabled:                              true
-  languages:                            [en, de]
-  translate_all_pages:                  true
-  autodetect_dest_language:             true
-  hide_suggestion_box:                  true
-  hide_powered_by:                      true
-  hide_top_frame:                       true
 
 # ------------------------------------------------------------------------------
 # END config

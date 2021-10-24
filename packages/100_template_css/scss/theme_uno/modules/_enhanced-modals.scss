@@ -10,14 +10,16 @@
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
  # -----------------------------------------------------------------------------
- # NOTE: Styles for enhanced BS Modals
- # -----------------------------------------------------------------------------
 */
 
-// NOTE: NO fa icons should be used with enhanced modals to NOT conflict with asciidoc ICON colors
-// NOTE: Styles should be moved to bootstrap folder as modals NOT belong to a J1 Module (js)
-// SPEC:
-// TODO:
+// NOTE:  NO fa icons should be used with enhanced modals to NOT conflict
+//        with asciidoc ICON colors
+// NOTE:  Styles should be moved to bootstrap folder as modals NOT belong
+//        to a J1 Module (js)
+
+// TODO:  Full height modals: NOT responsive
+// TODO:  Full height modals: Media breakpoints needed to adjust modal
+//        header height to navbar
 
 // jadams, 2019-08-20: Added colors as vars
 // Colors
@@ -45,16 +47,18 @@ body {
 	}
 }
 
-// Enhanced Bootstrap Modals
+// Base styles
 // -----------------------------------------------------------------------------
 .modal {
 		.modal-content {
 			border-radius: $border-radius !important;
 			box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.5) !important;
 		}
+    // jadams, 2021-10-23: Adjust height to navbar
     .modal-header {
 	    	border-top-left-radius: 0;
 	    	border-top-right-radius: 0;
+        height: 80px;
         .modal-title {
             font-weight: 300;
         }

@@ -26,14 +26,15 @@ defaults:
 
   enabled:                              false
 
-  translatorEnabled:                    false
+  translationEnabled:                   false
   translatorName:                       google
   languages:                            [ all ]                                 # supported languages
   translationLanguage:                  auto                                    # detect translation lang from browser
   translateAllPages:                    true                                    # enable tranlation on all pages
-  hideSuggestionBox:                    false                                   # disable suggestions on translated text
-  hidePoweredBy:                        false                                   # disable label "Powered by Google"
-  hideTopFrame:                         false                                   # disable the (google) translator frame
+  hideTranslatorIcon:                   false                                   # hide translator icon if translation not allowed (cookie consent)
+  hideSuggestionBox:                    true                                    # disable suggestions on translated text
+  hidePoweredBy:                        true                                    # disable label "Powered by Google"
+  hideTopFrame:                         true                                    # disable the (google) translator frame
   reloadPageOnChange:                   true                                    # reload current page if user settings has been changed
   postSelectionCallback:                j1.adapter.translator.cb                # currently NOT used
 
@@ -55,34 +56,46 @@ defaults:
       en: >
                                         This website uses the free service <em>Google Translate</em> to
                                         translate the content into 100+ languages in a matter of seconds.
-                                        The <b>language</b> for translation is taken <b>automatically</b> from the
-                                        language settings of your <b>browser</b>.
+                                        The <b>language</b> for translation is taken <b>automatically</b>
+                                        from the language settings of your <b>browser</b>.
                                         If you do <b>not</b> want translation anymore, <b>disable</b> the service
-                                        in section <code>My Settings</code>.
+                                        in section <b>My Settings</b>.
                                         <br><br>
                                         Your current language setting for translation is:
                                         <!-- source language -->
-                                        <div class="mb-3">
-                                          <select id="translate-source-language" name="translate-source-language" class="" is="ms-dropdown">
-                                            <option value="CZ" data-image-css="flag-icon flag-icon-cz rectangle size-md"> Czech</option>
+                                        <div id="google-translator-source-language" class="mb-3">
+                                          <select id="translate-source-language" name="translate-source-language" is="ms-dropdown">
+                                            <option value="BG" data-image-css="flag-icon flag-icon-bg rectangle size-md"> Bulgarian</option>
+                                            <option value="CS" data-image-css="flag-icon flag-icon-cz rectangle size-md"> Czech</option>
                                             <option value="DA" data-image-css="flag-icon flag-icon-dk rectangle size-md"> Danish</option>
                                             <option selected value="DE" data-image-css="flag-icon flag-icon-de rectangle size-md"> German</option>
+                                            <option value="EL" data-image-css="flag-icon flag-icon-gr rectangle size-md"> Greek</option>
                                             <option value="ES" data-image-css="flag-icon flag-icon-es rectangle size-md"> Spanish</option>
                                             <option value="EN" data-image-css="flag-icon flag-icon-gb rectangle size-md"> English</option>
-                                            <option value="EL" data-image-css="flag-icon flag-icon-gr rectangle size-md"> Greek</option>
+                                            <option value="EN-US" data-image-css="flag-icon flag-icon-us rectangle size-md"> English (American)</option>
+                                            <option value="EN-GB" data-image-css="flag-icon flag-icon-gb rectangle size-md"> English (British)</option>
+                                            <option value="ET" data-image-css="flag-icon flag-icon-ee rectangle size-md"> Estonian</option>
                                             <option value="FI" data-image-css="flag-icon flag-icon-fi rectangle size-md"> Finnish</option>
                                             <option value="FR" data-image-css="flag-icon flag-icon-fr rectangle size-md"> French</option>
                                             <option value="HU" data-image-css="flag-icon flag-icon-hu rectangle size-md"> Hungarian</option>
                                             <option value="IT" data-image-css="flag-icon flag-icon-it rectangle size-md"> Italian</option>
+                                            <option value="JA" data-image-css="flag-icon flag-icon-jp rectangle size-md"> Japanese</option>
+                                            <option value="LV" data-image-css="flag-icon flag-icon-lv rectangle size-md"> Latvian</option>
+                                            <option value="LT" data-image-css="flag-icon flag-icon-lt rectangle size-md"> Lithuanian</option>
                                             <option value="NL" data-image-css="flag-icon flag-icon-nl rectangle size-md"> Dutch</option>
+                                            <option value="PL" data-image-css="flag-icon flag-icon-pl rectangle size-md"> Polish</option>
                                             <option value="PT" data-image-css="flag-icon flag-icon-pt rectangle size-md"> Portuguese</option>
+                                            <option value="PT-PT" data-image-css="flag-icon flag-icon-pt rectangle size-md"> Portuguese (Portugal)</option>
+                                            <option value="PT-BR" data-image-css="flag-icon flag-icon-br rectangle size-md"> Portuguese (Brazilian)</option>
                                             <option value="RO" data-image-css="flag-icon flag-icon-ro rectangle size-md"> Romanian</option>
                                             <option value="RU" data-image-css="flag-icon flag-icon-ru rectangle size-md"> Russian</option>
                                             <option value="SK" data-image-css="flag-icon flag-icon-sk rectangle size-md"> Slovak</option>
-                                            <option value="SL "data-image-css="flag-icon flag-icon-sl rectangle size-md"> Slovenian</option>
-                                            <option value="SV" data-image-css="flag-icon flag-icon-sv rectangle size-md"> Swedish</option>
-                                          </select>
+                                            <option value="SL" data-image-css="flag-icon flag-icon-sl rectangle size-md"> Slovenian</option>
+                                            <option value="SV" data-image-css="flag-icon flag-icon-sk rectangle size-md"> Swedish</option>
+                                            <option value="ZH" data-image-css="flag-icon flag-icon-cn rectangle size-md"> Chinese</option>                                          </select>
                                         </div>
+                                        <!-- test element to create msDropdowns dynamically from JSON -->
+                                        <div id="dropdowsJSON" class="mb-3" style="display:none"></div>
                                         <br>
 
       de: >
@@ -91,7 +104,7 @@ defaults:
                                         Die <b>Sprache</b> für die Übersetzung wird <b>automatisch</b> aus den
                                         Spracheinstellungen Ihres <b>Browsers</b> übernommen. Wenn Sie <b>keine</b>
                                         Übersetzung mehr wünschen, <b>deaktivieren</b> Sie den Dienst im Abschnitt
-                                        <code>Meine Einstellungen</code>.
+                                        <b>Meine Einstellungen</b>.
                                         <br><br>
                                         Ihre aktuelle Spracheinstellung für die Übersetzung ist:
                                         <br><br>
@@ -102,13 +115,16 @@ defaults:
 
       en: >
                                         The free service from <em>Google Translate</em> uses cookies to provide
-                                        its services, personalize advertising and run traffic analysis:
+                                        its services, personalize advertising and run traffic analysis To use the
+                                        service, your consent on using cookies is required. Find more information
+                                        about at the Google
+                                        <a href="https://policies.google.com/" target="_blank" rel="noopener">Privacy Policy</a>
                                         <br><br>
                                         <code>Analysis</code> For translations, your consent on
-                                        <b>Analysis</b> with your <code>Privacy Settings</code> is required.
+                                        <b>Analysis</b> with your <b>Privacy Settings</b> is required.
                                         <br><br>
                                         <code>Personalization</code> For translations, your consent on
-                                        <b>Personalization</b> with your <code>Privacy Settings</code> is required.
+                                        <b>Personalization</b> with your <b>Privacy Settings</b> is required.
       de: >
                                         Der kostenlose Dienst von <em>Google Translate</em> verwendet Cookies
                                         um seine Dienste bereitzustellen, Werbung zu personalisieren und

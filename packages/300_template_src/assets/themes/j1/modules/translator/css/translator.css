@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/modules/mdiPreviewer/css/previewer.css
- # Provides styles for the MDI Icon Previewer
+ # ~/assets/themes/j1/modules/translator/css/translator.css
+ # Provides styles for the J1 Translator
  #
  # Product/Info:
  # https://jekyll.one
@@ -12,6 +12,7 @@
  # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
  # -----------------------------------------------------------------------------
 */
+
 /* hide the suggestion box */
 #goog-gt-tt, .goog-te-balloon-frame {
   display: none !important;

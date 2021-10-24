@@ -1,6 +1,6 @@
 ---
-title:                                  Translation Tester
-tagline:                                deepl translations
+title:                                  Translator
+tagline:                                machine translations
 date:                                   2021-10-06 00:00:00 +100
 description: >
                                         Machine translation (MT) transfers information from one language to another
@@ -25,12 +25,12 @@ resource_options:
       padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
-          alt:                          Photo by Ricardo Gomez Angel on Unsplash
+        - url:                          /assets/images/modules/attics/markus-krisetya-1920x1280.jpg
+          alt:                          Photo by Markus Krisetya on Unsplash
           badge:
             type:                       unsplash
-            author:                     Ricardo Gomez Angel
-            href:                       https://unsplash.com/@ripato/portfolio
+            author:                     Markus Krisetya
+            href:                       https://unsplash.com/@krisetya
 ---
 
 // Page Initializer
@@ -240,10 +240,13 @@ The doctor replies: Sorry, I can't follow you.
 
 ==== Song lyrics
 
-Many translations for song lyrics are wrong and do not give meaning to what
-the artists express. The reason: using machine translators of bad quality.
+Many translations for song lyrics are wrong and often do not give meaning
+to what the artists express. The reason: using machine translators of bad
+quality.
+
 Check _Deepl_ using different language scopes!
 
+[role="mt-5 mb-5"]
 [quote, Love of a Lifetime - FireHouse]
 ____
 I guess the time was right for us to say +
@@ -262,7 +265,7 @@ I finally found the love of a lifetime +
 forever in my heart
 ____
 
-== Deepl Translator
+== Translator
 
 ++++
 <div class="mt-3">
@@ -271,7 +274,8 @@ ____
 		<!-- source language -->
     <div class="form-group bmd-form-group mb-2">
 
-      <select id="source-language" name="source-language" class="form-control" is="ms-dropdown" style="min-width: 20rem;">
+      <!-- select id="source-language" name="source-language" class="form-control" is="ms-dropdown" style="min-width: 20rem;" -->
+      <select id="source-language" name="source-language" class="form-control" data-visible-rows="3" is="ms-dropdown" style="min-width: 20rem;">
         <option selected value="auto" data-image-css="fas fa-magic mt-1 mr-3 mb-1">Auto detection</option>
         <option value="CZ" data-image-css="flag-icon flag-icon-cz rectangle size-md"> Czech</option>
         <option value="DA" data-image-css="flag-icon flag-icon-dk rectangle size-md"> Danish</option>
@@ -294,7 +298,7 @@ ____
       <label for="source-language" class="bmd-label-floating">Source language and type selection</label>
 
       <!-- select if translated text should lean towards formal|informal language -->
-      <select id="language-scope" class="form-control" is="ms-dropdown" style="min-width: 20rem;">
+      <select id="language-scope" class="form-control" data-visible-rows="3" is="ms-dropdown" style="min-width: 20rem;">
         <option selected value="default" data-image-css="far fa-meh-blank mt-1 mr-3 mb-1">Regular language</option>
         <option value="more" data-image-css="far fa-meh mt-1 mr-3">Formal language</option>
         <option value="less" data-image-css="far fa-smile mt-1 mr-3">Informal language</option>
@@ -309,7 +313,7 @@ ____
 
 		<!-- destination language -->
     <div class="form-group bmd-form-group mb-2">
-      <select id="destination-language" class="form-control scrollable-menu" name="destination-language" is="ms-dropdown" style="min-width: 20rem;">
+      <select id="destination-language" name="destination-language" class="form-control" data-visible-rows="3" is="ms-dropdown" style="min-width: 20rem;">
 				<option value="BG" data-image-css="flag-icon flag-icon-bg rectangle size-md"> Bulgarian</option>
 				<option value="CS" data-image-css="flag-icon flag-icon-cz rectangle size-md"> Czech</option>
 				<option value="DA" data-image-css="flag-icon flag-icon-dk rectangle size-md"> Danish</option>
@@ -364,11 +368,6 @@ ____
 .form-control {
   line-height: 1.5 !important;
 }
-
-/* workaround: limit the height of the resulting list (UL) of the 'dd' select   */
-.ms-dd .ms-options {
-  max-height: 12rem;
-}
 </style>
 ++++
 
@@ -382,6 +381,22 @@ ____
 
     var dependencies_met_page_ready = setInterval (function (options) {
       if ( j1.getState() === 'finished' ) {
+
+        // get access to msDropdown elements
+        var ddSourceLanguage      = document.getElementById("source-language").msDropdown;
+        var ddLanguageScope       = document.getElementById("language-scope").msDropdown;
+        var ddDestinationLanguage = document.getElementById("destination-language").msDropdown;
+
+        // transforms select into a list (of size)
+        // ddSourceLanguage.size = 10;
+
+        // doesn't work
+        // ddSourceLanguage.visibleRows = 10;
+
+        // limit the lenght of oprtions to length
+        // ddSourceLanguage.length = 4;
+
+
         // stop scrolling if ANY of the DD selects is open (attr display: block)
         $('.ms-options').attrchange({
           trackValues: true,                                                        // enables tracking old and new values
@@ -402,11 +417,6 @@ ____
 
     // reset translation event handler (button)
     $('#reset-translate').click(function () {
-
-      // get access to msDropdown elements
-      var ddSourceLanguage      = document.getElementById("source-language").msDropdown;
-      var ddLanguageScope       = document.getElementById("language-scope").msDropdown;
-      var ddDestinationLanguage = document.getElementById("destination-language").msDropdown;
 
       // reset (msDropdown) translation options
       ddSourceLanguage.selectedIndex      = 0;

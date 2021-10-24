@@ -215,7 +215,7 @@ tag::urls[]
 
 :url-light-gallery--home:                         https://sachinchoolur.github.io/lightGallery
 :url-light-gallery--gh-repo:                      http://sachinchoolur.github.io/lightGallery
-:url-light-gallery--license:                      http://sachinchoolur.github.io/lightGallery/docs/license.html
+:url-light-gallery--license:                      https://www.lightgalleryjs.com/license/
 
 :url-liquid--home:                                https://shopify.github.io/liquid/
 :url-liquid--gh-repo:                             https://github.com/Shopify/liquid

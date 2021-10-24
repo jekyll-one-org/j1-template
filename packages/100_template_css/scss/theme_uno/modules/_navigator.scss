@@ -254,9 +254,8 @@ li.dropdown.nav-item.nav-sub-item:before {
     // background-repeat: no-repeat;
   }
 
-
   // NavBar
-  // -----------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
   nav {
   	&.navigator {
   		.container {
@@ -899,7 +898,7 @@ li.dropdown.nav-item.nav-sub-item:before {
   }
 
   // Sidebar
-  // -----------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
   // Move the page if sidebar is opened
   body {
   	transition: all 0.3s ease-in-out;
@@ -929,7 +928,6 @@ li.dropdown.nav-item.nav-sub-item:before {
   		}
   	}
   }
-
 
   .side {
   	background-color: $white;

@@ -1,0 +1,513 @@
+---
+title:                                  Translation Tester
+tagline:                                deepl translations
+date:                                   2021-10-06 00:00:00 +100
+description: >
+                                        Machine translation (MT) transfers information from one language to another
+                                        by a computer without human intervention. NMT is the most advanced method
+                                        of computer-generated translations. Thanks to autonomous learning based on
+                                        artificial intelligence.Deepl offers one of the best NMTengines worldwide.
+                                        Try translations with Jekyll One and Deepl on your own!
+
+categories:                             [ Previewer ]
+tags:                                   [ Translator, Deepl ]
+
+comments:                               false
+fam_menu_id:                            page_ctrl_simple
+
+permalink:                              /pages/public/previewer/deepl-translator/
+regenerate:                             false
+
+resources:                              [ clipboard, rouge, imagedropdown, j1deepl ]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
+          alt:                          Photo by Ricardo Gomez Angel on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Ricardo Gomez Angel
+            href:                       https://unsplash.com/@ripato/portfolio
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+//  Set global Liquid vars
+// -----------------------------------------------------------------------------
+{% assign environment = site.environment %}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="none" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// https://github.com/EdwardBalaj/Simple-DeepL-API-Integration
+// https://github.com/marghoobsuleman/ms-Dropdown
+// https://www.marghoobsuleman.com/image-dropdown/help
+// https://www.marghoobsuleman.com/image-dropdown/advanced-help
+
+// Set local liquid vars
+// -----------------------------------------------------------------------------
+{% if environment == "development" or environment == "test" %}
+  {% assign translation_limit = 50000 %}
+{% else %}
+  {% assign translation_limit = 500 %}
+{% endif %}
+
+// Include sub-documents
+// -----------------------------------------------------------------------------
+Machine translation (MT) transfers information from one language to another
+by a computer without human intervention. NMT is the most advanced method
+of computer-generated translations. Thanks to autonomous learning based on
+artificial intelligence.
+
+== Neural Machine Translation
+
+Neural Machine Translation (NMT) works on a completely different principle
+than previous statistics-based or rule-based machine translation methods.
+The NMT uses a large neural network based on the human brain model with
+the help of artificial intelligence.
+
+The NMT is the most advanced method of computer-generated translations.
+Thanks to autonomous learning based on artificial intelligence, Big Data,
+and Deep Learning, this method has made enormous progress in the last recent
+years. Nowadays, neural machine translation programs can be used as a basis
+for professional translations.
+
+Neural algorithms can generate accurate translations as well as *learn* a
+language. This technology improves the quality of the translated data
+continuously. For the NMT to work well, it must be trained to be used.
+Training means that a large amount of data feeds the algorithms to
+improve the reliability of the final results.
+
+== Translation issues
+
+Human language translation is a tricky business. Languages offer many ways
+of expressing something. Languages use different letter systems, grammar,
+and spelling. A lot of pitfalls are on the way from one language to another.
+
+Read about the the most frequent sources of issues with the sections below.
+
+=== Everyday language (slang)
+
+Everyday language is exposed to rapid social development. Nobody knows which
+words that are currently on everyone's lips are yesterday's news again. In
+addition, terms change their meaning.
+
+=== Grammar
+
+NMT marks the beginning of a new era for artificial intelligence. Neural
+networks for translation no longer operate according to the rules of grammar.
+These procedures establish their own rules and even create their own (meta-)
+language.
+
+NMT algorithms first translate the sentences of a text into their own machine-
+language. Then the algorithm *thinks* about how this machine text is translated
+into an understandable sentence for the human language. Quite similar what
+a human brain would do.
+
+=== Spelling
+
+The next issue comes up by written words in large and lower case. In English,
+for example, it is often not clear whether there are words the lower case
+ones are nouns or verbs.
+
+Usually, people recognize it based on their language experience in no time.
+Computer algorithms do not. They require a lot of calculations to find this
+out.
+
+=== Ambiguity
+
+The problem with any translation is ambiguity. Human beings notice ambiguities
+mostly not because they usually recognize the meaning through the relationship.
+The problems related to ambiguity cannot be solved either by more data. The
+opposite is the case. Larger amounts of data can even worsen the problem because
+more ambiguities arise (Paradox of Knowledge).
+
+One study tested Google Translate from 2010 to 2013 with the same text.
+2010 was the translation bad. In 2011, the translation got better, and in
+2012 it got even better. However, in 2013 the quality of the translation
+fell and got worse again.
+
+=== Poems or verse
+
+Artificial intelligence continues to struggle with the enormous complexity
+of human language, and nowhere is language as complex and meaningful as in
+literature. In music, novels, poems, and plays, the beauty of words often
+lies in nuance and subtlety.
+
+A very successful way out of the *hell of complexity* for the translation
+of lyrical texts is proven by the algorithms of the NMT (Neural Machine
+Translation). These systems can learn over time, including the complexity
+of literary translations.
+
+=== Recommondations
+
+For a correct translation, it is recommended to use simple language that
+does not use country-specific expressions (slang). A simple structure of
+the sentences will help enormously to consider the foreign language's
+grammar and spelling.
+
+Write short sentences and especially avoid complicated subordinate clauses.
+Avoid rare words or words that are only used in certain languages. A simple
+language will not always be easy, especially when good language is important
+for you.
+
+Test your text with freely available translators on the internet to check
+the outcomes. Those first translations will be the base for optimizations
+on your text for internationalization.
+
+Writing texts for machine translation is a thing of its own. If you run a
+website international, the effort will be very worthwhile.
+
+
+== Translation with Deepl
+
+_Deepl_ offers one of the best NMT engines worldwide. The translater can be
+used online or by an application (app) installed on a computer locally.
+The third option to translate is the cloud-based service offered
+by the *Deepl API* to be integrated into custom apps or websites, for example.
+
+J1 integrates the cloud-based translator service for the *Free* service and
+professional translations using the *Pro* system. The current API *version V2*
+supports the translation of more than 25 languages vice versa.
+
+Try the translator with _Jekyll One_ and _Deepl_ on your own!
+
+=== Text examples
+
+Check the quality of Deepl's NMT engine. Translate some of the passages from
+the sections. See typical machine translation limitations with the following
+examples.
+
+==== Slang
+
+Slang is a typically spoken language, not written. Many slang words are not
+known to the algorithms because they are seldom used for written text. Unknown
+words or proper names are not translated and returned for translation as they
+are.
+
+.Means: a man
+----
+Bloke would be the American English equivalent of dude.
+----
+
+Everyday language use quite often common words in a different meaning. A good
+reason to avoid such expressions.
+
+.Means: Not my thing
+----
+Not my religion
+----
+
+==== Grammar
+
+Typical mistakes students make are bloopers. Translations may become wrongly
+understood sometimes the same way.
+
+.Language blooper
+----
+The thing that first caught my eye was a large silver cup that Charles
+had won for skating on the mantelpiece
+----
+
+==== Ambiguities
+
+Human languages are full of ambiguities. A good example of using them
+explicitly is a Joke.
+
+.Jokes
+----
+A man tells his doctor: Doc, help me. I’m addicted to Twitter!
+The doctor replies: Sorry, I can't follow you.
+----
+
+==== Song lyrics
+
+Many translations for song lyrics are wrong and often do not give meaning
+to what the artists express. The reason: using machine translators of bad
+quality.
+
+Check _Deepl_ using different language scopes!
+
+[quote, Love of a Lifetime - FireHouse]
+____
+I guess the time was right for us to say +
+we'd take our time and live our lives together day by day +
+We'll make a wish and send it on a prayer +
+We know our dreams can all come true with love that we can share
+
+With you I never wonder +
+will you be there for me? +
+With you I never wonder +
+you're the right one for me
+
+I finally found the love of a lifetime +
+A love to last my whole life through +
+I finally found the love of a lifetime +
+forever in my heart
+____
+
+== Deepl Translator
+
+++++
+<div class="mt-3">
+	<form id="deepl-translate">
+
+		<!-- source language -->
+    <div class="form-group bmd-form-group mb-2">
+
+      <select id="source-language" name="source-language" class="form-control" is="ms-dropdown" style="min-width: 20rem;">
+        <option selected value="auto" data-image-css="fas fa-magic mt-1 mr-3 mb-1">Auto detection</option>
+        <option value="CZ" data-image-css="flag-icon flag-icon-cz rectangle size-md"> Czech</option>
+        <option value="DA" data-image-css="flag-icon flag-icon-dk rectangle size-md"> Danish</option>
+        <option value="DE" data-image-css="flag-icon flag-icon-de rectangle size-md"> German</option>
+        <option value="ES" data-image-css="flag-icon flag-icon-es rectangle size-md"> Spanish</option>
+        <option value="EN" data-image-css="flag-icon flag-icon-gb rectangle size-md"> English</option>
+        <option value="EL" data-image-css="flag-icon flag-icon-gr rectangle size-md"> Greek</option>
+        <option value="FI" data-image-css="flag-icon flag-icon-fi rectangle size-md"> Finnish</option>
+        <option value="FR" data-image-css="flag-icon flag-icon-fr rectangle size-md"> French</option>
+        <option value="HU" data-image-css="flag-icon flag-icon-hu rectangle size-md"> Hungarian</option>
+        <option value="IT" data-image-css="flag-icon flag-icon-it rectangle size-md"> Italian</option>
+        <option value="NL" data-image-css="flag-icon flag-icon-nl rectangle size-md"> Dutch</option>
+        <option value="PT" data-image-css="flag-icon flag-icon-pt rectangle size-md"> Portuguese</option>
+        <option value="RO" data-image-css="flag-icon flag-icon-ro rectangle size-md"> Romanian</option>
+        <option value="RU" data-image-css="flag-icon flag-icon-ru rectangle size-md"> Russian</option>
+        <option value="SK" data-image-css="flag-icon flag-icon-sk rectangle size-md"> Slovak</option>
+        <option value="SL "data-image-css="flag-icon flag-icon-sl rectangle size-md"> Slovenian</option>
+        <option value="SV" data-image-css="flag-icon flag-icon-sv rectangle size-md"> Swedish</option>
+      </select>
+      <label for="source-language" class="bmd-label-floating">Source language and type selection</label>
+
+      <!-- select if translated text should lean towards formal|informal language -->
+      <select id="language-scope" class="form-control" is="ms-dropdown" style="min-width: 20rem;">
+        <option selected value="default" data-image-css="far fa-meh-blank mt-1 mr-3 mb-1">Regular language</option>
+        <option value="more" data-image-css="far fa-meh mt-1 mr-3">Formal language</option>
+        <option value="less" data-image-css="far fa-smile mt-1 mr-3">Informal language</option>
+      </select>
+    </div>
+
+    <!-- translation input -->
+    <div id="source-group" class="form-group bmd-form-group mb-4">
+      <textarea id="original-text" class="form-control" type="text" rows="5"></textarea>
+      <label for="original-text" class="bmd-label-floating ml-0 mt-0">Your text (source language), up to 1000 characters</label>
+    </div>
+
+		<!-- destination language -->
+    <div class="form-group bmd-form-group mb-2">
+      <select id="destination-language" class="form-control scrollable-menu" name="destination-language" is="ms-dropdown" style="min-width: 20rem;">
+      <option selected value="auto" data-image-css="fas fa-magic mt-1 mr-3 mb-1">Auto detection</option>
+      <option value="CZ" data-image-css="flag-icon flag-icon-cz rectangle size-md"> Czech</option>
+      <option value="DA" data-image-css="flag-icon flag-icon-dk rectangle size-md"> Danish</option>
+      <option value="DE" data-image-css="flag-icon flag-icon-de rectangle size-md"> German</option>
+      <option value="ES" data-image-css="flag-icon flag-icon-es rectangle size-md"> Spanish</option>
+      <option value="EN" data-image-css="flag-icon flag-icon-gb rectangle size-md"> English</option>
+      <option value="EL" data-image-css="flag-icon flag-icon-gr rectangle size-md"> Greek</option>
+      <option value="FI" data-image-css="flag-icon flag-icon-fi rectangle size-md"> Finnish</option>
+      <option value="FR" data-image-css="flag-icon flag-icon-fr rectangle size-md"> French</option>
+      <option value="HU" data-image-css="flag-icon flag-icon-hu rectangle size-md"> Hungarian</option>
+      <option value="IT" data-image-css="flag-icon flag-icon-it rectangle size-md"> Italian</option>
+      <option value="NL" data-image-css="flag-icon flag-icon-nl rectangle size-md"> Dutch</option>
+      <option value="PT" data-image-css="flag-icon flag-icon-pt rectangle size-md"> Portuguese</option>
+      <option value="RO" data-image-css="flag-icon flag-icon-ro rectangle size-md"> Romanian</option>
+      <option value="RU" data-image-css="flag-icon flag-icon-ru rectangle size-md"> Russian</option>
+      <option value="SK" data-image-css="flag-icon flag-icon-sk rectangle size-md"> Slovak</option>
+      <option value="SL "data-image-css="flag-icon flag-icon-sl rectangle size-md"> Slovenian</option>
+      <option value="SV" data-image-css="flag-icon flag-icon-sv rectangle size-md"> Swedish</option>
+      </select>
+      <label for="destination-language" class="bmd-label-floating">Translation language selection</label>
+    </div>
+
+    <!-- test element to create msDropdowns dynamically from JSON -->
+    <div id="dropdowsJSON" class="mb-3" style="display:none"></div>
+
+    <!-- translation output -->
+    <div id="translated-group" class="form-group bmd-form-group">
+      <textarea id="translated-text" class="form-control" type="text" rows="5" disabled></textarea>
+      <label for="translated-text" class="bmd-label-floating ml-0 mt-0">Your translation</label>
+    </div>
+
+    <!-- control buttons -->
+    <div class="mt-3 mb-1">
+  		<input id="translate" name="translate" class="btn btn-info btn-raised mt-1 mr-1" type="button" value="Translate" aria-label="Translate Button" style="min-width: 12rem">
+      <input id="clear-translate" name="clear-translate" class="btn btn-primary btn-raised mt-1 mr-1" type="button" value="Clear" aria-label="Clear Button" style="min-width: 12rem">
+      <input id="reset-translate" name="reset-translate" class="btn btn-danger btn-raised mt-1" type="button" value="Reset" aria-label="Reset Button" style="min-width: 12rem">
+    </div>
+
+	</form>
+</div>
+++++
+
+++++
+<style>
+.form-control {
+  line-height: 1.5 !important;
+}
+
+/* workaround: limit the height of the resulting list (UL) of the 'dd' select   */
+.ms-dd .ms-options {
+  max-height: 12rem;
+}
+</style>
+++++
+
+++++
+<script>
+  $(function() {
+
+    // -------------------------------------------------------------------------
+    //  readJSON
+    // -------------------------------------------------------------------------
+    // function readJSON (url) {
+    //   var _this = this;
+    //
+    //   $.ajax({
+    //     url: url,
+    //     // jadams 2016-10-10: removed the setting for sychronous XMLHttpRequest
+    //     // async: false,
+    //     dataType: 'json',
+    //     success: function (data) {
+    //       _this.languageList = data.bumms;                                        // data.googleLanguages;
+    //       makeDd(_this.languageList);
+    //     },
+    //     error: function (jqXHR, textStatus, errorThrown) {
+    //       logger.error('\n' + 'failed to retrieve JSON data from: ' +url);
+    //     }
+    //   });
+    // }
+
+    // -------------------------------------------------------------------------
+    //  makeDd
+    // -------------------------------------------------------------------------
+    // function makeDd (data) {
+    //   var bla;
+    //   var el;
+    //   // var data = JSON.parse(json);
+    //
+    //   el = document.getElementById("dropdowsJSON")
+    //   document.getElementById("dropdowsJSON").innerHTML = "";
+    //
+    //   MsDropdown.make("#dropdowsJSON", {
+    //     byJson: {
+    //       data: data,
+    //       selectedIndex: 0,
+    //       name: "dropdowsJSON",
+    //       size: 0,
+    //       multiple: false,
+    //       width: 450
+    //     },
+    //     enableAutoFilter:false
+    //   });
+    // }
+
+    var logger = log4javascript.getLogger('j1.tester.deepl');
+    var logText;
+
+    var dependencies_met_page_ready = setInterval (function (options) {
+      if ( j1.getState() === 'finished' ) {
+
+        // readJSON('/assets/data/ms_select.json');
+
+        // stop scrolling if ANY of the DD select is open (attr display: block)
+        $('.ms-options').attrchange({
+          trackValues: true,                                                    // enables tracking old and new values
+          callback: function (e) {                                              // callback handler on DOM changes
+            logText = '\n' + 'Attribute: ' + e.attributeName + ' changed to: ' + e.newValue;
+            logger.debug(logText);
+
+            if (e.attributeName === 'style' && e.newValue.includes('block')) {
+              $('body').addClass('stop-scrolling');
+            } else if (e.attributeName === 'style' && e.newValue.includes('none')) {
+              $('body').removeClass('stop-scrolling');
+            }
+          }
+        });
+        clearInterval(dependencies_met_page_ready);
+      }
+    });
+
+    // reset translation event handler (button)
+    $('#reset-translate').click(function () {
+
+      // get access to msDropdown elements
+      var ddSourceLanguage      = document.getElementById("source-language").msDropdown;
+      var ddLanguageScope       = document.getElementById("language-scope").msDropdown;
+      var ddDestinationLanguage = document.getElementById("destination-language").msDropdown;
+
+      // reset (msDropdown) translation options
+      ddSourceLanguage.selectedIndex      = 0;
+      ddLanguageScope.selectedIndex       = 0;
+      ddDestinationLanguage.selectedIndex = 3;                                  // index 3 = DE
+
+      // clear all text-area elements
+      $('#original-text').val('');
+      $('#translated-text').val('');
+
+      // manually reset fill states
+      $('#source-group').removeClass('is-filled');
+      $('#translated-group').removeClass('is-filled');
+      // disable the textarea (output)
+      $('#translated-text').prop('disabled', true);
+    });
+
+    $('#clear-translate').click(function () {
+      // clear all text-area elements
+      $("#original-text").val('');
+      $("#translated-text").val('');
+      // manually reset fill states
+      $('#source-group').removeClass('is-filled');
+      $('#translated-group').removeClass('is-filled');
+      // disable the textarea (output)
+      $('#translated-text').prop('disabled', true);
+    });
+
+    // translation event handler (button)
+    $('#translate').click(function () {
+      var fromLanguage = $('#source-language').val();
+      var toLanguage = $('#destination-language').val();
+      var languageScope = $('#language-scope').val();
+
+      // enable the textarea (output)
+      $('#translated-text').prop('disabled', false);
+
+      // create new translation
+      $('#original-text').j1deepl({
+        api: 'pro',
+        auth_key: '1c360075-1a30-28c7-e4eb-2c0c0164ce4b',
+        max_chars: 1000,
+        formality: languageScope,
+        source_lang: fromLanguage,
+        target_lang: toLanguage,
+        targetElement: '#translated-text',
+      });
+
+      // reset translation for next run
+      // -----------------------------------------------------------------------
+      // destroy existing jquery object|s
+      $('#original-text').j1deepl('destroy');
+
+      // update form elements
+      // -----------------------------------------------------------------------
+      // set fill state
+      $('#translated-group').addClass('is-filled');
+    });
+
+  });
+</script>
+++++
