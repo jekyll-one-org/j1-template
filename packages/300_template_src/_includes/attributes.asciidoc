@@ -266,6 +266,11 @@ tag::urls[]
 :url-popper--home:                                https://popper.js.org/
 :url-popper--gh-repo:                             https://github.com/popperjs/popper-core
 
+:url-previewer--county-flags:                     https://jekyll.one/pages/public/previewer/country_flags/
+:url-previewer--emoji:                            https://jekyll.one/pages/public/previewer/twitter_emoji/
+:url-previewer--mdi-icons:                        https://jekyll.one/pages/public/previewer/mdi_font/
+:url-previewer--rouge-themes:                     https://jekyll.one/pages/public/previewer/rouge/
+
 :url-puma--home:                                  https://puma.io/
 :url-puma--gh-repo:                               https://github.com/puma/puma
 
