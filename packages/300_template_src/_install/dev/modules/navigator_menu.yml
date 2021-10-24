@@ -148,7 +148,7 @@
 - item:                                 Online
   megamenu:
     - title:                            Sites
-      icon:                             #web
+      icon:                             web
       column:
         - title:                        Jekyll Home
           href:                         https://jekyllrb.com/
@@ -192,7 +192,7 @@
           icon:                         arrow-down-bold-hexagon-outline
 
     - title:                            Knowledge
-      icon:                             #lightbulb-on
+      icon:                             lightbulb-on
       column:
         - title:                        Learn Jekyll at CloudCannon
           href:                         http://jekyll.tips/
@@ -236,10 +236,18 @@
           icon:                         hospital
 
     - title:                            Tools
-      icon:                             #wrench
+      icon:                             wrench
       column:
         - title:                        FreeFormatter
           href:                         http://www.freeformatter.com/
+          target:                       _blank
+          icon:                         cached
+        - title:                        BeautifyTools
+          href:                         https://beautifytools.com/
+          target:                       _blank
+          icon:                         cached
+        - title:                        AppDevTools
+          href:                         https://www.appdevtools.com/
           target:                       _blank
           icon:                         cached
         - title:                        Convert CSS to Sass
@@ -258,18 +266,10 @@
           href:                         http://yaml-online-parser.appspot.com/
           target:                       _blank
           icon:                         code-braces
-        - title:                        XML-YAML Converter
-          href:                         http://codebeautify.org/xml-to-yaml
-          target:                       _blank
-          icon:                         xml
         - title:                        Character Codes
           href:                         http://character-code.com/
           target:                       _blank
           icon:                         alpha-a-box-outline
-        - title:                        Wordcloud Generator
-          href:                         https://www.jasondavies.com/wordcloud/
-          target:                       _blank
-          icon:                         cloud
         - title:                        RegEx 101
           href:                         https://regex101.com/
           target:                       _blank
