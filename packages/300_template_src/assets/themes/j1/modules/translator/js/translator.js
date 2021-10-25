@@ -373,6 +373,7 @@ function Translator(props) {
         // ---------------------------------------------------------------------
         // on 'hidden'
         self.$modal.on('hidden.bs.modal', function () {
+          var msDropdownSourceLanguage = document.getElementById("translate-source-language").msDropdown;
           var selectedLanguage = msDropdownSourceLanguage.value.toLowerCase();
           var settings;
 

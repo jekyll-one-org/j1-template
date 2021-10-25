@@ -83,11 +83,11 @@
       // -----------------------------------------------------------------------
       prepareXHR: function (settings) {
         if (settings.api === 'free') {
-            this.xhr.open("POST", "https://api-free.deepl.com/v2/translate", true);
+          this.xhr.open("POST", "https://api-free.deepl.com/v2/translate", true);
         } else if (settings.api === 'pro') {
-            this.xhr.open("POST", "https://api.deepl.com/v2/translate", true);
+          this.xhr.open("POST", "https://api.deepl.com/v2/translate", true);
         } else {
-            this.xhr.open("POST", "https://api-free.deepl.com/v2/translate", true);
+          this.xhr.open("POST", "https://api-free.deepl.com/v2/translate", true);
         }
         // Set required header parameters
         this.xhr.setRequestHeader("Accept", "*/*");
@@ -103,7 +103,7 @@
       // multiple sentences.
       // -----------------------------------------------------------------------
       prepareText: function (source_text) {
-          return source_text.split("\n");
+        return source_text.split("\n");
       },
 
       // -----------------------------------------------------------------------
@@ -217,7 +217,7 @@
         source_lang = this.settings.source_lang;
         target_lang = this.settings.target_lang;
 
-        if (this.settings.source_lang != 'auto') {
+        if (this.settings.source_lang !== 'auto') {
           this.settings.source_lang = (SUPPORTED_LANG.indexOf(this.settings.source_lang) > -1) ? this.settings.source_lang : false;
         }
         this.settings.target_lang = (SUPPORTED_LANG.indexOf(this.settings.target_lang) > -1) ? this.settings.target_lang : false;
@@ -259,7 +259,7 @@
         }
 
         // Check for VALID language supported by option 'formality'
-        if (this.settings.formality != 'default' ) {
+        if (this.settings.formality !== 'default' ) {
           if (!(ALLOWED_FORMALITY_LANG.indexOf(this.settings.target_lang) > -1)) {
             logger.warn('\n' + 'wrong language found for formality setting: ' + this.settings.target_lang);
           }
@@ -312,9 +312,9 @@
         // construct the API request body
         // ---------------------------------------------------------------------
         request =  "auth_key=" + this.settings.auth_key;
-        request += (this.settings.source_lang != 'auto' ) ? "&source_lang=" + this.settings.source_lang : '';
+        request += (this.settings.source_lang !== 'auto' ) ? "&source_lang=" + this.settings.source_lang : '';
         request += "&target_lang=" + this.settings.target_lang;
-        request += (this.settings.formality != 'default' ) ? "&formality=" + this.settings.formality : '';
+        request += (this.settings.formality !== 'default' ) ? "&formality=" + this.settings.formality : '';
         request += (this.settings.split_sentences) ? "&split_sentences=" + this.settings.formality : '';
         request += (this.settings.tag_handling) ? "&tag_handling=" + this.settings.tag_handling : "&tag_handling=0";
         request += (this.settings.tag_handling && this.settings.non_splitting_tags) ? "&non_splitting_tags=" + this.settings.non_splitting_tags : '';

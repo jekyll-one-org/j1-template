@@ -361,6 +361,29 @@ j1.adapter['translator'] = (function (j1, window) {
 
       if (user_consent.analysis && user_consent.personalization)  {
 
+        // detect changes on the last element on your page, cause then
+        // you know all elements above is translated.
+        // $('#j1_footer').bind('DOMSubtreeModified', function() {
+        //       var val = $(this);
+        //       var strlang = "" + val[0].innerText + "";
+        //       console.log(strlang); // print your selected language in console
+        // });
+
+        // $('#google_translate_element').bind('DOMSubtreeModified', function() {
+        //     var val = $(this);
+        //     var strlang = "" + val[0].innerText + "";
+        //     console.log(strlang); // print your selected language in console
+        // });
+
+        // remove class dropcap
+//      $('.dropcap').children('span').removeClass('j1-dropcap');
+
+        // remove span dropcap !!!
+//      $('.dropcap').children('span').remove();
+
+        // $('.dropcap').children('span').removeClass('j1-dropcap');
+        // $('.paragraph.dropcap').parent().find('p').removeClass('j1-dropcap');
+
         head       = document.getElementsByTagName('head')[0];
         script     = document.createElement('script');
         script.id  = 'google-translate';

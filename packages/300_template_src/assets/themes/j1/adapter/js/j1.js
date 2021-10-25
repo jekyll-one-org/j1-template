@@ -953,6 +953,7 @@ var j1 = (function () {
       var user_session        = j1.readCookie(cookie_names.user_session);
       var user_state          = j1.readCookie(cookie_names.user_state);
       var user_consent        = j1.readCookie(cookie_names.user_consent);
+      var user_translate      = j1.readCookie(cookie_names.user_translate);
       var current_url         = new liteURL(window.location.href);
       var providerPermissions = {};
       var provider;
@@ -1071,8 +1072,15 @@ var j1 = (function () {
             // display page
            $('#no_flicker').css('display', 'block');
 
-           // initialize backdrops
-           j1.core.createDropCap();
+           // no dropcaps if translation enabled
+           if (user_translate.translationEnabled) {
+             logger.info('\n' + 'translation enabled: ' + user_translate.translationEnabled);
+             logger.warn('\n' + 'skipped processing of dropcaps');
+           } else {
+             // initialize dropcaps
+             logger.info('\n' + 'post processing: createDropCap');
+             j1.core.createDropCap();
+           }
 
              // add recommended title to hyvor iframe for SEO optimization (if loadad)
             if (comment_provider === 'hyvor') {
@@ -1232,8 +1240,15 @@ var j1 = (function () {
                 $(this).parents(".card-header").toggleClass("highlight");
             });
 
-          // initialize backdrops
-          j1.core.createDropCap();
+            // no dropcaps if translation enabled
+            if (user_translate.translationEnabled) {
+              logger.info('\n' + 'translation enabled: ' + user_translate.translationEnabled);
+              logger.warn('\n' + 'skipped processing of dropcaps');
+            } else {
+              // initialize dropcaps
+              logger.info('\n' + 'post processing: createDropCap');
+              j1.core.createDropCap();
+            }
 
             // add recommended title to hyvor iframe for SEO optimization (if loadad)
            if (comment_provider === 'hyvor') {
