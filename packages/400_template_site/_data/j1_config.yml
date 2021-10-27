@@ -443,11 +443,11 @@ analytics:
 # Set 'provider' to the provider you want to use.
 # ------------------------------------------------------------------------------
 advertising:
-  enabled:                              false
+  enabled:                              true
   provider:                             google
 
   google:
-    publisher_id:                       '<your-publisher-id>'
+    publisher_id:                       9845710891660333                        # '<your-publisher-id>'
 
   custom:
     custom_data:
