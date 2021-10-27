@@ -391,9 +391,8 @@ body:
 # ------------------------------------------------------------------------------
 comments:
   enabled:                              false
-
   provider:                             hyvor                                   # disqus | hyvor | commento | just-comments
-  xhr_data_path:                        /assets/data
+
   comments_headline:
     en:                                 Leave a comment
     de:                                 Kommentieren
@@ -428,7 +427,6 @@ comments:
 # ------------------------------------------------------------------------------
 analytics:
   enabled:                              false
-
   provider:                             google
 
   google:
@@ -446,7 +444,6 @@ analytics:
 # ------------------------------------------------------------------------------
 advertising:
   enabled:                              false
-
   provider:                             google
 
   google:
@@ -464,7 +461,6 @@ advertising:
 # ------------------------------------------------------------------------------
 translation:
   enabled:                              true
-
   provider:                             google
 
   google:
