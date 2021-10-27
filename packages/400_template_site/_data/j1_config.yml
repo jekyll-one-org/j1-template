@@ -447,7 +447,7 @@ advertising:
   provider:                             google
 
   google:
-    publisher_id:                       9845710891660333                        # '<your-publisher-id>'
+    publisher_id:                       ca-pub-9845710891660333                 # '<your-publisher-id>'
 
   custom:
     custom_data:
