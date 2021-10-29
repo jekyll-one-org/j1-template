@@ -249,17 +249,18 @@ j1.adapter['translator'] = (function (j1, window) {
           });
 
           j1.translator = new Translator({
-            contentURL:             moduleOptions.contentURL,                   // dialog content (modals) for all supported languages
-            cookieName:             moduleOptions.cookieName,                   // the name of the User State Cookie (primary data)
-            cookieConsentName:      moduleOptions.cookieConsentName,            // the name of the Cookie Consent Cookie (secondary data)
-            dialogContainerID:      moduleOptions.dialogContainerID,            // dest container, the dialog modal is loaded (dynamically)
-            dialogLanguage:         moduleOptions.dialogLanguage,               // language for the dialog (modal)
-            translationLanguage:    translation_language,                       // language for translation
-            translationEnabled:     moduleOptions.translationEnabled,           // run translation enabled|disabled
-            translatorName:         moduleOptions.translatorName,               // translator for translation
-            translationLanguage:    moduleOptions.translationLanguage,          // language for translation
-            xhrDataElement:         moduleOptions.xhrDataElement,               // container for all language-specific dialogs (modals)
-            postSelectionCallback:  function () {j1.adapter.translator.cb()}
+            contentURL:               moduleOptions.contentURL,                 // dialog content (modals) for all supported languages
+            cookieName:               moduleOptions.cookieName,                 // the name of the User State Cookie (primary data)
+            cookieConsentName:        moduleOptions.cookieConsentName,          // the name of the Cookie Consent Cookie (secondary data)
+            disableLanguageSelector:  moduleOptions.disableLanguageSelector,    // disable language dropdown for translation in dialog (modal)
+            dialogContainerID:        moduleOptions.dialogContainerID,          // dest container, the dialog modal is loaded (dynamically)
+            dialogLanguage:           moduleOptions.dialogLanguage,             // language for the dialog (modal)
+            translationLanguage:      moduleOptions.translationLanguage,        // default language for translation
+            translationLanguages:     moduleOptions.translationLanguages,       // supported languages for translation
+            translationEnabled:       moduleOptions.translationEnabled,         // run translation enabled|disabled
+            translatorName:           moduleOptions.translatorName,             // translator for translation
+            xhrDataElement:           moduleOptions.xhrDataElement,             // container for all language-specific dialogs (modals)
+            postSelectionCallback:    function () {j1.adapter.translator.cb()}
           });
 
           if (user_consent.analysis && user_consent.personalization && user_translate.translationEnabled) {

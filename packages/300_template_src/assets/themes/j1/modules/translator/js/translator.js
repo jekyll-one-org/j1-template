@@ -26,154 +26,50 @@
 // -----------------------------------------------------------------------------
 
 function Translator(props) {
-  var logger                = log4javascript.getLogger('j1.core.translator');
-  var dialogContainerID   = 'translator-modal';
+
+  // ---------------------------------------------------------------------------
+  // global vars
+  // ---------------------------------------------------------------------------
   var self                  = this;
+  var logger                = log4javascript.getLogger('j1.core.translator');
+  var pageURL               = new liteURL(window.location.href);
+  var cookieSecure          = (pageURL.protocol.includes('https')) ? true : false;
   var detailedSettingsShown = false;
-  var url                   = new liteURL(window.location.href);
-  var cookieSecure          = (url.protocol.includes('https')) ? true : false;
-  var logText;
-  var current_page;
-  var whitelisted;
-  var ddTranslationSourceLanguage;
   var navigator_language;
   var translation_language;
 
   // ---------------------------------------------------------------------------
-  // var and propertiy settings
+  // default property settings
   // ---------------------------------------------------------------------------
-
   this.props = {
-    contentURL:             '/assets/data/translator',                          // this URL must contain the dialog content (modals) in the needed languages
-    cookieName:             'j1.user.state',                                    // the name of the User State Cookie (primary data)
-    cookieConsentName:      'j1.user.consent',                                  // the name of the Cookie Consent Cookie (secondary data)
-    cookieStorageDays:      365,                                                // the duration the cookie is stored on the client
-    cookieSameSite:         'Strict',                                           // restrict consent cookie to first-party, do NOT send cookie to other domains
-    cookieSecure:           false,
-    translationEnabled:     false,
-    translatorName:         'google',
-    translationLanguages:   'all',                                              // supported languages for translation
-    translationLanguage:    'auto',
-    translateAllPages:      true,                                               // enable tranlation on all pages
-    hideSuggestionBox:      true,                                               // disable suggestions on translated text
-    hidePoweredBy:          true,                                               // disable label "Powered by Google"
-    hideTopFrame:           true,                                               // disable the (google) translator frame
-    dialogLanguage:         'content',                                          // language used for the consent dialog (modal)
-    dialogLanguages:        ['en','de'],                                        // supported languages for the consent dialog (modal), defaults to first in array//
-    dialogContainerID:      'translator-modal',                                 // container, the dialog modal is (dynamically) loaded
-    xhrDataElement:         '',                                                 // container for the language-specific consent modal taken from /assets/data/cookieconsent.html
-    postSelectionCallback:  undefined,                                          // callback function, called after the user has made his selection
+    contentURL:                 '/assets/data/translator',                      // this URL must contain the dialog content (modals) in the needed languages
+    cookieName:                 'j1.user.state',                                // the name of the User State Cookie (primary data)
+    cookieConsentName:          'j1.user.consent',                              // the name of the Cookie Consent Cookie (secondary data)
+    cookieStorageDays:          365,                                            // the duration the cookie is stored on the client
+    cookieSameSite:             'Strict',                                       // restrict consent cookie to first-party, do NOT send cookie to other domains
+    cookieSecure:               cookieSecure,                                   // secure flag on cookies
+    translationEnabled:         false,                                          // enable|disable translation on first page view
+    disableLanguageSelector:    false,                                          // disable language dropdown for translation in dialog (modal)
+    translatorName:             'google',                                       // name of the default translator
+    translationLanguages:       'all',                                          // supported languages for translation
+    translationLanguage:        'auto',                                         // language used for translation
+    translateAllPages:          true,                                           // enable tranlation on all pages
+    hideSuggestionBox:          true,                                           // disable suggestions on translated text
+    hidePoweredBy:              true,                                           // disable label "Powered by Google"
+    hideTopFrame:               true,                                           // disable the (google) translator frame
+    dialogLanguage:             'content',                                      // language used for the consent dialog (modal)
+    dialogLanguages:            ['en','de'],                                    // supported languages for the consent dialog (modal), defaults to first in array//
+    dialogContainerID:          'translator-modal',                             // container, the dialog modal is (dynamically) loaded
+    xhrDataElement:             '',                                             // container for the language-specific consent modal taken from /assets/data/cookieconsent.html
+    postSelectionCallback:      undefined,                                      // callback function, called after the user has made his selection
   };
 
-  // supported languages by Google Translate
-  var googleTranslatorLanguages = {
-      'af':     { 'name': 'Afrikaans' },
-      'sq':     { 'name': 'Albanian' },
-      'ar':     { 'name': 'Arabic' },
-      'hy':     { 'name': 'Armenian' },
-      'az':     { 'name': 'Azerbaijani' },
-      'eu':     { 'name': 'Basque' },
-      'be':     { 'name': 'Belarusian' },
-      'bn':     { 'name': 'Bengali' },
-      'bg':     { 'name': 'Bulgarian' },
-      'ca':     { 'name': 'Catalan' },
-      'zh-CN':  { 'name': 'Chinese (Simplified)' },
-      'zh-TW':  { 'name': 'Chinese (Traditional)' },
-      'hr':     { 'name': 'Croatian' },
-      'cs':     { 'name': 'Czech' },
-      'da':     { 'name': 'Danish' },
-      'nl':     { 'name': 'Dutch' },
-      'eo':     { 'name': 'Esperanto' },
-      'et':     { 'name': 'Estonian' },
-      'tl':     { 'name': 'Filipino' },
-      'fi':     { 'name': 'Finnish' },
-      'fr':     { 'name': 'French' },
-      'gl':     { 'name': 'Galician' },
-      'ka':     { 'name': 'Georgian' },
-      'de':     { 'name': 'German' },
-      'el':     { 'name': 'Greek' },
-      'gu':     { 'name': 'Gujarati' },
-      'ht':     { 'name': 'Haitian Creole' },
-      'iw':     { 'name': 'Hebrew' },
-      'hi':     { 'name': 'Hindi' },
-      'hu':     { 'name': 'Hungarian' },
-      'is':     { 'name': 'Icelandic' },
-      'id':     { 'name': 'Indonesian' },
-      'ga':     { 'name': 'Irish' },
-      'it':     { 'name': 'Italian' },
-      'ja':     { 'name': 'Japanese' },
-      'kn':     { 'name': 'Kannada' },
-      'ko':     { 'name': 'Korean' },
-      'la':     { 'name': 'Latin' },
-      'lv':     { 'name': 'Latvian' },
-      'lt':     { 'name': 'Lithuanian' },
-      'mk':     { 'name': 'Macedonian' },
-      'ms':     { 'name': 'Malay' },
-      'mt':     { 'name': 'Maltese' },
-      'no':     { 'name': 'Norwegian' },
-      'fa':     { 'name': 'Persian' },
-      'pl':     { 'name': 'Polish' },
-      'pt':     { 'name': 'Portuguese' },
-      'ro':     { 'name': 'Romanian' },
-      'ru':     { 'name': 'Russian' },
-      'sr':     { 'name': 'Serbian' },
-      'sk':     { 'name': 'Slovak' },
-      'sl':     { 'name': 'Slovenian' },
-      'es':     { 'name': 'Spanish' },
-      'sw':     { 'name': 'Swahili' },
-      'sv':     { 'name': 'Swedish' },
-      'ta':     { 'name': 'Tamil' },
-      'te':     { 'name': 'Telugu' },
-      'th':     { 'name': 'Thai' },
-      'tr':     { 'name': 'Turkish' },
-      'uk':     { 'name': 'Ukrainian' },
-      'ur':     { 'name': 'Urdu' },
-      'vi':     { 'name': 'Vietnamese' },
-      'cy':     { 'name': 'Welsh' },
-      'yi':     { 'name': 'Yiddish' }
-  };
-
-  // supported languages by Deepl Translate
-  this.deeplTranslatorLanguages = {
-      'bg':     { 'name': 'Bulgarian' },
-      'cs':     { 'name': 'Czech' },
-      'da':     { 'name': 'Danish' },
-      'de':     { 'name': 'German' },
-      'el':     { 'name': 'Greek' },
-      'es':     { 'name': 'Spanish' },
-      'en':     { 'name': 'English' },
-      'en-us':  { 'name': 'English (American)' },
-      'en-uk':  { 'name': 'English (British)' },
-      'et':     { 'name': 'Estonian' },
-      'ft':     { 'name': 'Finnish' },
-      'fr':     { 'name': 'French' },
-      'hu':     { 'name': 'Hungarian' },
-      'it':     { 'name': 'Italian' },
-      'ja':     { 'name': 'Japanese' },
-      'lv':     { 'name': 'Latvian' },
-      'lt':     { 'name': 'Lithuanian' },
-      'nl':     { 'name': 'Dutch' },
-      'af':     { 'name': 'Polish' },
-      'pt':     { 'name': 'Portuguese' },
-      'pt-pt':  { 'name': 'Portuguese (Portugal)' },
-      'pt-br':  { 'name': 'Portuguese (Brazilian)' },
-      'ro':     { 'name': 'Romanian' },
-      'ru':     { 'name': 'Russian' },
-      'sk':     { 'name': 'Slovak' },
-      'sl':     { 'name': 'Slovenian' },
-      'sv':     { 'name': 'Swedish' },
-      'zh':     { 'name': 'Chinese' },
-  };
-
+  // merge properties from default|module
   for (var property in props) {
     this.props[property] = props[property];
   }
 
-  // merge property settings
-  for (var property in props) {
-    this.props[property] = props[property];
-  }
-
+  // extract the language portion (e.g. "en" for English)
   if (this.props.dialogLanguage.indexOf("-") !== -1) {
     this.props.dialogLanguage = this.props.dialogLanguage.split("-")[0];
   }
@@ -183,11 +79,8 @@ function Translator(props) {
     this.props.dialogLanguage = this.props.dialogLanguages[0];
   }
 
-  // set modal by dialogLanguage that is loadad
+  // set the xhrDataElement of the modal loadad based on dialogLanguage
   this.props.xhrDataElement = this.props.xhrDataElement + '-' + this.props.dialogLanguage;
-
-  // set modal by dialogLanguage that is loadad
-  this.props.cookieSecure = cookieSecure;
 
   logger.info('\n' + 'initializing core module: started');
   logger.info('\n' + 'state: started');
@@ -197,6 +90,7 @@ function Translator(props) {
   // ---------------------------------------------------------------------------
 
   // ---------------------------------------------------------------------------
+  // Cookie()
   // manage cookies
   // ---------------------------------------------------------------------------
   var Cookie = {
@@ -233,7 +127,7 @@ function Translator(props) {
   };
 
   // ---------------------------------------------------------------------------
-  // manage events
+  // global event handler
   // ---------------------------------------------------------------------------
   var Events = {
     documentReady: function (onDocumentReady) {
@@ -246,8 +140,8 @@ function Translator(props) {
   };
 
   // ---------------------------------------------------------------------------
-  // extend
-  // Vanilla JS replacement for jquery $.extent
+  // extend()
+  // deep merge of two objects
   // ---------------------------------------------------------------------------
   function extend () {
     var extended = {};
@@ -284,7 +178,7 @@ function Translator(props) {
   }
 
   // ---------------------------------------------------------------------------
-  // createMsDropdownFromJSON
+  // createMsDropdownFromJSON()
   // Create a msDropdown select DYNAMICALLY from JSON data located in a file
   // specified by "url". The JSON file contaians mutiple msDropdown elements
   // selected by "elm". The base (empty) <div> container the msDropdown will
@@ -294,7 +188,7 @@ function Translator(props) {
     var selectorID;
 
     // -----------------------------------------------------------------------
-    // Merge defaults|options
+    // Merge values from defaults|options
     // -----------------------------------------------------------------------
     var settings = extend ({
       size:   0,
@@ -311,9 +205,28 @@ function Translator(props) {
       url: settings.url,
       dataType: 'json',
       success: function (data) {
+        var dropdownLanguages = [];
+
+        // collect translation languages
+        if (self.props.translationLanguages.includes('all')) {
+          dropdownLanguages = data[settings.elm];
+        } else {
+          for (var i = 0; i < data[settings.elm].length; i++) {
+            if(self.props.translationLanguages.includes(data[settings.elm][i].value)) {
+              dropdownLanguages.push(data[settings.elm][i]);
+            }
+          }
+        }
+
+        // correct rows of the dropdown if required
+        if (settings.visibleRows > dropdownLanguages.length) {
+          settings.visibleRows = dropdownLanguages.length;
+        }
+
+        // create the dropdown
         MsDropdown.make(selectorID, {
           byJson: {
-            data: data[settings.elm],
+            data: dropdownLanguages,
             name: settings.name,
             size: settings.size,
             width: settings.width,
@@ -329,6 +242,10 @@ function Translator(props) {
     });
   }
 
+  // ---------------------------------------------------------------------------
+  // showDialog
+  // Show|Create the translation dialog (modal)
+  // ---------------------------------------------------------------------------
   function showDialog() {
     Events.documentReady(function () {
 
@@ -340,7 +257,7 @@ function Translator(props) {
         self.modal.setAttribute('class', 'modal fade');
         self.modal.setAttribute('tabindex', '-1');
         self.modal.setAttribute('role', 'dialog');
-        self.modal.setAttribute('aria-labelledby', dialogContainerID);
+        self.modal.setAttribute('aria-labelledby', self.props.dialogContainerID);
         document.body.append(self.modal);
         self.$modal = $(self.modal);
 
@@ -357,24 +274,27 @@ function Translator(props) {
 
           logger.info('\n' + 'show.bs.modal: entered');
 
+          // create the dopdown from JSON data
           $.when (
             createMsDropdownFromJSON({
               url:                '/assets/data/msdropdown.json',
               elm:                'googleLanguages',
               selector:           'dropdownJSON',
-              visibleRows:        4,
               width:              300,
+              visibleRows:        4,
             })
           )
           .then(function(data) {
             logger.info('\n' + 'create msDropdown from JSON: finished');
-            msDropdownJSON = document.getElementById('dropdownJSON').msDropdown;
+
+            msDropdownJSON   = document.getElementById('dropdownJSON').msDropdown;
 
             if (self.props.translationLanguage === 'auto') {
               navigator_language    = navigator.language || navigator.userLanguage;
               translation_language  = navigator_language.split('-')[0];
             }
 
+            // set selected dropdown option
             index = $('#dropdownJSON option[value=' +  translation_language + ']').index();
             msDropdownJSON.selectedIndex = index;
 
@@ -386,9 +306,15 @@ function Translator(props) {
         // ---------------------------------------------------------------------
         self.$modal.on('shown.bs.modal', function () {
           var msDropdownJSON = document.getElementById('dropdownJSON').msDropdown;
+          var length = msDropdownJSON.length;
+          var index;
+          var children;
+          var options;
+          var lang;
+          var uiData;
 
-          // jadams, 2021-10-18: disable source language selection
-          if (self.props.translationLanguage === 'auto' && self.props.translationLanguages !== 'all') {
+          // disable translation language selection
+          if (self.props.disableLanguageSelector) {
             msDropdownJSON.disabled = true;
           }
 
@@ -411,7 +337,6 @@ function Translator(props) {
         // ---------------------------------------------------------------------
         // load the dialog (modal content)
         // ---------------------------------------------------------------------
-
         var templateUrl = self.props.contentURL + '/' + 'index.html';
         $.get(templateUrl)
         .done(function (data) {
@@ -436,7 +361,6 @@ function Translator(props) {
           // -------------------------------------------------------------------
           // register button events for the dialog (modal)
           // -------------------------------------------------------------------
-
           $('#google-options').on('hide.bs.collapse', function () {
             detailedSettingsShown = false;
             updateButtons();
@@ -474,6 +398,7 @@ function Translator(props) {
   }
 
   // ---------------------------------------------------------------------------
+  // updateOptionsFromCookie()
   // update all checkboxes in dialog (modal) from current cookie settings
   // ---------------------------------------------------------------------------
   function updateOptionsFromCookie() {
@@ -487,6 +412,7 @@ function Translator(props) {
   }
 
   // ---------------------------------------------------------------------------
+  // updateButtons()
   // toggle dialog (modal) buttons
   // ---------------------------------------------------------------------------
   function updateButtons() {
@@ -504,7 +430,8 @@ function Translator(props) {
   }
 
   // ---------------------------------------------------------------------------
-  // collect current settings from checkboxes in dialog (modal)
+  // gatherOptions()
+  // collect current settings from all checkboxes in dialog (modal)
   // ---------------------------------------------------------------------------
   function gatherOptions(setAllExceptNecessary) {
     var $options = self.$modal.find('#google-options .translator-option');
@@ -525,7 +452,8 @@ function Translator(props) {
   }
 
   // ---------------------------------------------------------------------------
-  // process current settings from checkboxes for `agreeAll`
+  // agreeAll()
+  // process current settings from checkboxes for button `agreeAll`
   // ---------------------------------------------------------------------------
   function agreeAll() {
     var settings;
@@ -555,7 +483,8 @@ function Translator(props) {
   }
 
   // ---------------------------------------------------------------------------
-  // process current settings from checkboxes for `doNotAgree`
+  // doNotAgree()
+  // process current settings from checkboxes for button `doNotAgree`
   // ---------------------------------------------------------------------------
   function doNotAgree() {
     var settings = gatherOptions();
@@ -572,6 +501,7 @@ function Translator(props) {
   }
 
   // ---------------------------------------------------------------------------
+  // saveSettings()
   // write current settings from checkboxes to cookie
   // ---------------------------------------------------------------------------
   function saveSettings() {
@@ -607,6 +537,7 @@ function Translator(props) {
   // ===========================================================================
 
   // ---------------------------------------------------------------------------
+  // showDialog()
   // show the translator dialog (modal)
   // ---------------------------------------------------------------------------
   this.showDialog = function () {
@@ -614,6 +545,7 @@ function Translator(props) {
   }; // END showDialog
 
   // ---------------------------------------------------------------------------
+  // getSettings()
   // collect settings from cookie
   // ---------------------------------------------------------------------------
   this.getSettings = function (optionName) {
