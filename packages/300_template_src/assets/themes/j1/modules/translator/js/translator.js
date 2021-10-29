@@ -274,7 +274,7 @@ function Translator(props) {
 
           logger.info('\n' + 'show.bs.modal: entered');
 
-          // create the dopdown from JSON data
+          // create msDropdown from JSON data
           $.when (
             createMsDropdownFromJSON({
               url:                '/assets/data/msdropdown.json',
@@ -285,18 +285,7 @@ function Translator(props) {
             })
           )
           .then(function(data) {
-            logger.info('\n' + 'create msDropdown from JSON: finished');
-
-            // msDropdownJSON   = document.getElementById('dropdownJSON').msDropdown;
-            //
-            // if (self.props.translationLanguage === 'auto') {
-            //   navigator_language    = navigator.language || navigator.userLanguage;
-            //   translation_language  = navigator_language.split('-')[0];
-            // }
-            //
-            // // set selected dropdown option
-            // index = $('#dropdownJSON option[value=' +  translation_language + ']').index();
-            // msDropdownJSON.selectedIndex = index;
+            logger.info('\n' + 'creating msDropdown from JSON data: finished');
           });
         }); // END modal on 'show'
 
@@ -305,34 +294,33 @@ function Translator(props) {
         // ---------------------------------------------------------------------
         self.$modal.on('shown.bs.modal', function () {
           var msDropdownJSON = document.getElementById('dropdownJSON').msDropdown;
-          var length = msDropdownJSON.length;
-          var index;
-          var children;
-          var options;
-          var lang;
-          var uiData;
 
-          msDropdownJSON   = document.getElementById('dropdownJSON').msDropdown;
+          if (!msDropdownJSON.length) {
+            // critical error
+            logger.error('\n' + 'no msDropdown found in translation dialog');
+            self.$modal.hide();
+          } else {
+            // set translation language for auto detection
+            if (self.props.translationLanguage === 'auto') {
+              navigator_language    = navigator.language || navigator.userLanguage;
+              translation_language  = navigator_language.split('-')[0];
+            }
 
-          if (self.props.translationLanguage === 'auto') {
-            navigator_language    = navigator.language || navigator.userLanguage;
-            translation_language  = navigator_language.split('-')[0];
+            // set translation language for the dropdown
+            msDropdownJSON.selectedIndex = $('#dropdownJSON option[value=' +  translation_language + ']').index();;
+
+            // disable translation language selection
+            if (self.props.disableLanguageSelector) {
+              msDropdownJSON.disabled = true;
+            }
+
+            $('#dropdownJSON').show();
+
+            // jadams, 2021-10-18: added stop scrolling on the body,
+            // if modal is OPEN
+            $('body').addClass('stop-scrolling');
+
           }
-
-          // set selected dropdown option
-          index = $('#dropdownJSON option[value=' +  translation_language + ']').index();
-          msDropdownJSON.selectedIndex = index;
-
-          // disable translation language selection
-          if (self.props.disableLanguageSelector) {
-            msDropdownJSON.disabled = true;
-          }
-
-          $('#dropdownJSON').show();
-
-          // jadams, 2021-10-18: added stop scrolling on the body,
-          // if modal is OPEN
-          $('body').addClass('stop-scrolling');
 
         }); // END modal on 'shown'
 
