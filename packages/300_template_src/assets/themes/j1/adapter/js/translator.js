@@ -337,16 +337,24 @@ j1.adapter['translator'] = (function (j1, window) {
       var user_state     = j1.readCookie(cookie_names.user_state);
       var user_consent   = j1.readCookie(cookie_names.user_consent);
       var user_translate = j1.readCookie(cookie_names.user_translate);
+      var msDropdownLang = document.getElementById('dropdownJSON').msDropdown;
+      var msDropdown     = document.getElementById('dropdownJSON').msDropdown;
       var head;
       var script;
       var srcLang;
       var destLang;
       var transCode;
       var cookie_written;
+      var selectedTranslationLanguage;
+
 
       logger.info('\n' + 'entered post selection callback from google_translate');
       logger.debug('\n' + 'current values from cookie consent: ' + JSON.stringify(user_consent));
       logger.debug('\n' + 'current values from user state: ' + JSON.stringify(user_state));
+
+      selectedTranslationLanguage = msDropdownLang.value.toLowerCase();
+      logger.info('\n' + 'selected translation language: ' + selectedTranslationLanguage);
+
 
       // update cookie consent settings
       user_consent.analysis = user_translate.analysis;
@@ -398,7 +406,8 @@ j1.adapter['translator'] = (function (j1, window) {
 
           srcLang   = "{{site.language}}";
           destLang  = translation_language;
-          transCode = '/' + srcLang + '/' + destLang;
+//        transCode = '/' + srcLang + '/' + destLang;
+          transCode = '/' + srcLang + '/' + selectedTranslationLanguage;
 
           // set language
           setCookie({

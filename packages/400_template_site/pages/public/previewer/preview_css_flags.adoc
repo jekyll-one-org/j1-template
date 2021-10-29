@@ -706,7 +706,7 @@ Find all flags available in alphabetical order.
     </div>
   </div>
   <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
-    <div id="XX" class="country" data-type="country" data-capital-city="Moroni" data-language="not_set" data-country-name="Comoros" data-continent="Africa">
+    <div id="KM" class="country" data-type="country" data-capital-city="Moroni" data-language="not_set" data-country-name="Comoros" data-continent="Africa">
       <div class="name" title="Comoros">
         <span class="country-code">KM</span>
         Comoros

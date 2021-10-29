@@ -31,7 +31,7 @@ exclude_from_search:                    true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment = site.environment %}
+{% assign environment         = site.environment %}
 
 {
   "googleLanguages":
@@ -71,6 +71,7 @@ exclude_from_search:                    true
   	{"imageCss": "flag-icon flag-icon-bg     rectangle size-md", "value": "bg",    "text": "Bulgarian"},
   	{"imageCss": "flag-icon flag-icon-es     rectangle size-md", "value": "ca",    "text": "Catalan"},
   	{"imageCss": "flag-icon flag-icon-cn     rectangle size-md", "value": "zh-CN", "text": "Chinese (Simplified)"},
+  	{"imageCss": "flag-icon flag-icon-cn     rectangle size-md", "value": "zh-TW", "text": "Chinese (Traditional)"},
   	{"imageCss": "flag-icon flag-icon-hr     rectangle size-md", "value": "hr",    "text": "Croatian"},
   	{"imageCss": "flag-icon flag-icon-cz     rectangle size-md", "value": "cs",    "text": "Czech"},
   	{"imageCss": "flag-icon flag-icon-dk     rectangle size-md", "value": "da",    "text": "Danish"},
@@ -158,12 +159,12 @@ exclude_from_search:                    true
   "jsonTest":
   [
     {"description":"Choose your payment gateway", "value":"", "text":"Payment Gateway"},
-    {"image":"/assets/themes/j1/modules/imageDropdown/icons/Amex-56.png",       "description":"My life. My card...",    "value":"amex",       "text":"Amex"},
-    {"image":"/assets/themes/j1/modules/imageDropdown/icons/Discover-56.png",   "description":"It pays to Discover...", "value":"Discover",   "text":"Discover"},
-    {"image":"/assets/themes/j1/modules/imageDropdown/icons/Mastercard-56.png", "description":"For everything else...", "value":"Mastercard", "text":"Mastercard"},
-    {"image":"/assets/themes/j1/modules/imageDropdown/icons/Cash-56.png",       "description":"Sorry not available...", "value":"cash",       "text":"Cash on delivery", "disabled":true},
-    {"image":"/assets/themes/j1/modules/imageDropdown/icons/Visa-56.png",       "description":"All you need...",        "value":"Visa",       "text":"Visa"},
-    {"image":"/assets/themes/j1/modules/imageDropdown/icons/Paypal-56.png",     "description":"Pay and get paid...",    "value":"Paypal",     "text":"Paypal"}
+    {"image":"/assets/themes/j1/modules/imageDropdown/icons/Amex-56.png", "description":"My life. My card...", "value":"amex", "text":"Amex"},
+    {"image":"/assets/themes/j1/modules/imageDropdown/icons/Discover-56.png", "description":"It pays to Discover...", "value":"Discover", "text":"Discover"},
+    {"image":"/assets/themes/j1/modules/imageDropdown/icons/Mastercard-56.png", "title":"For everything else...", "description":"For everything else...", "value":"Mastercard", "text":"Mastercard"},
+    {"image":"/assets/themes/j1/modules/imageDropdown/icons/Cash-56.png", "description":"Sorry not available...", "value":"cash", "text":"Cash on delivery", "disabled":true},
+    {"image":"/assets/themes/j1/modules/imageDropdown/icons/Visa-56.png", "description":"All you need...", "value":"Visa", "text":"Visa"},
+    {"image":"/assets/themes/j1/modules/imageDropdown/icons/Paypal-56.png", "description":"Pay and get paid...", "value":"Paypal", "text":"Paypal"}
   ]
 }
 

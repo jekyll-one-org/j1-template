@@ -52,7 +52,6 @@ function Translator(props) {
     cookieSecure:           false,
     translationEnabled:     false,
     translatorName:         'google',
-    translationLanguages:   'all',                                              // supported languages for translation
     translationLanguage:    'auto',
     translateAllPages:      true,                                               // enable tranlation on all pages
     hideSuggestionBox:      true,                                               // disable suggestions on translated text
@@ -66,7 +65,7 @@ function Translator(props) {
   };
 
   // supported languages by Google Translate
-  var googleTranslatorLanguages = {
+  this.googleTranslatorLanguages = {
       'af':     { 'name': 'Afrikaans' },
       'sq':     { 'name': 'Albanian' },
       'ar':     { 'name': 'Arabic' },
@@ -246,44 +245,6 @@ function Translator(props) {
   };
 
   // ---------------------------------------------------------------------------
-  // extend
-  // Vanilla JS replacement for jquery $.extent
-  // ---------------------------------------------------------------------------
-  function extend () {
-    var extended = {};
-    var deep = false;
-    var i = 0;
-    var length = arguments.length;
-
-    // Check if a deep merge
-    if ( Object.prototype.toString.call( arguments[0] ) === '[object Boolean]' ) {
-        deep = arguments[0];
-        i++;
-    }
-
-    // Merge the object into the extended object
-    var merge = function (obj) {
-        for ( var prop in obj ) {
-            if ( Object.prototype.hasOwnProperty.call( obj, prop ) ) {
-                // If deep merge and property is an object, merge properties
-                if ( deep && Object.prototype.toString.call(obj[prop]) === '[object Object]' ) {
-                    extended[prop] = extend( true, extended[prop], obj[prop] );
-                } else {
-                    extended[prop] = obj[prop];
-                }
-            }
-        }
-    };
-
-    // Loop through each object and conduct a merge
-    for ( ; i < length; i++ ) {
-        var obj = arguments[i];
-        merge(obj);
-     }
-           return extended;
-  }
-
-  // ---------------------------------------------------------------------------
   // createMsDropdownFromJSON
   // Create a msDropdown select DYNAMICALLY from JSON data located in a file
   // specified by "url". The JSON file contaians mutiple msDropdown elements
@@ -291,40 +252,36 @@ function Translator(props) {
   // be created is specified by theID given by "selector".
   // ---------------------------------------------------------------------------
   function createMsDropdownFromJSON (options /* url, elm, selector */) {
-    var selectorID;
-
-    // -----------------------------------------------------------------------
-    // Merge defaults|options
-    // -----------------------------------------------------------------------
-    var settings = extend ({
-      size:   0,
-      width:  250,
-      multiple: false,
-      selectedIndex: 1,
-      enableAutoFilter: false,
-      visibleRows: null,
-    }, options);
-
-    selectorID = '#' + settings.selector;
+    var _this       = this;
+    var selectorID  = '#' + options.selector;
 
     $.ajax({
-      url: settings.url,
+      url: options.url,
       dataType: 'json',
       success: function (data) {
         MsDropdown.make(selectorID, {
           byJson: {
-            data: data[settings.elm],
-            name: settings.name,
-            size: settings.size,
-            width: settings.width,
-            multiple: settings.multiple,
+            data: data[options.elm],
+            name: options.selector,
+//          size: 0,
+            selectedIndex: options.selectedIndex,
+//          width: 450,
+//          multiple: false
           },
-          enableAutoFilter: settings.enableAutoFilter,
-          visibleRows: settings.visibleRows,
+          enableAutoFilter: options.enableAutoFilter,
+          visibleRows: options.visibleRows,
+//        on('create', function() {console.log('puupsi'});
         });
+
+        // msDropdown = document.getElementById(options.selector).msDropdown;
+        // msDropdown.selectedIndex  = 1;
+        // $(selectorID).show();
+        // msDropdown.on('close', function() {
+        //   console.log(msDropdown.value)
+        // });
       },
       error: function (jqXHR, textStatus, errorThrown) {
-        logger.error('\n' + 'failed to retrieve JSON data from: ' + settings.url);
+        logger.error('\n' + 'failed to retrieve JSON data from: ' + url);
       }
     });
   }
@@ -348,63 +305,57 @@ function Translator(props) {
         // register events for the dialog (modal)
         // ---------------------------------------------------------------------
 
-        // ---------------------------------------------------------------------
-        // on 'show'
-        // ---------------------------------------------------------------------
         self.$modal.on('show.bs.modal', function () {
-          var msDropdownJSON;
-          var index;
+          console.log('show.bs.modal entered');
+        }); // END modal on 'show'
 
-          logger.info('\n' + 'show.bs.modal: entered');
-
-          $.when (
-            createMsDropdownFromJSON({
-              url:                '/assets/data/msdropdown.json',
-              elm:                'googleLanguages',
-              selector:           'dropdownJSON',
-              visibleRows:        4,
-              width:              300,
-            })
-          )
-          .then(function(data) {
-            logger.info('\n' + 'create msDropdown from JSON: finished');
-            msDropdownJSON = document.getElementById('dropdownJSON').msDropdown;
-
-            if (self.props.translationLanguage === 'auto') {
-              navigator_language    = navigator.language || navigator.userLanguage;
-              translation_language  = navigator_language.split('-')[0];
-            }
-
-            index = $('#dropdownJSON option[value=' +  translation_language + ']').index();
-            msDropdownJSON.selectedIndex = index;
-
-          });
+        self.$modal.on('hide.bs.modal', function () {
+          console.log('hide.bs.modal entered');
         }); // END modal on 'show'
 
         // ---------------------------------------------------------------------
         // on 'shown'
         // ---------------------------------------------------------------------
         self.$modal.on('shown.bs.modal', function () {
-          var msDropdownJSON = document.getElementById('dropdownJSON').msDropdown;
-
-          // jadams, 2021-10-18: disable source language selection
-          if (self.props.translationLanguage === 'auto' && self.props.translationLanguages !== 'all') {
-            msDropdownJSON.disabled = true;
+          if (self.props.translationLanguage === 'auto') {
+            navigator_language    = navigator.language || navigator.userLanguage;
+            translation_language  = navigator_language.split('-')[0];
           }
 
-          $('#dropdownJSON').show();
+          $.when (
+            createMsDropdownFromJSON({
+              url:                '/assets/data/msdropdown.json',
+              elm:                'googleLanguages',
+              selector:           'dropdownJSON',
+              enableAutoFilter:   false,
+              visibleRows:        4,
+              selectedIndex:      46,
+            })
+          )
+          .then(function(data) {
+            $('#dropdownJSON').show();
+            var msDropdownSourceLanguage  = document.getElementById("translate-source-language").msDropdown;
+            var msDropdownJSON            = document.getElementById('dropdownJSON').msDropdown;
 
-          // jadams, 2021-10-18: added stop scrolling on the body,
-          // if modal is OPEN
-          $('body').addClass('stop-scrolling');
+            var options     = msDropdownSourceLanguage.options;
+            var children     = msDropdownSourceLanguage.children;
+            // var namedItem   = msDropdownSourceLanguage.namedItem(translation_language, withData);
 
+            // jadams, 2021-10-18: disable source language selection
+            if (self.props.translationLanguage === 'auto') {
+              msDropdownSourceLanguage.disabled = true;
+              // msDropdownSourceLanguage.disabled = false;
+            }
+            // jadams, 2021-10-18: added stop scrolling on the body,
+            // if modal is OPEN
+            $('body').addClass('stop-scrolling');
+          });
         }); // END modal on 'shown'
 
         // ---------------------------------------------------------------------
         // on 'hidden'
         // ---------------------------------------------------------------------
         self.$modal.on('hidden.bs.modal', function () {
-          $('body').removeClass('stop-scrolling');
           self.props.postSelectionCallback();
         }); // END modal on 'hidden'
 

@@ -387,20 +387,10 @@ ____
         var ddLanguageScope       = document.getElementById("language-scope").msDropdown;
         var ddDestinationLanguage = document.getElementById("destination-language").msDropdown;
 
-        // transforms select into a list (of size)
-        // ddSourceLanguage.size = 10;
-
-        // doesn't work
-        // ddSourceLanguage.visibleRows = 10;
-
-        // limit the lenght of oprtions to length
-        // ddSourceLanguage.length = 4;
-
-
-        // stop scrolling if ANY of the DD selects is open (attr display: block)
+        // stop scrolling if ANY of the DD selects is open (display: block)
         $('.ms-options').attrchange({
-          trackValues: true,                                                        // enables tracking old and new values
-          callback: function (e) {                                                  //callback handler on DOM changes
+          trackValues: true,                                                    // enables tracking old and new values
+          callback: function (e) {                                              //callback handler on DOM changes
             logText = '\n' + 'Attribute: ' + e.attributeName + ' changed to: ' + e.newValue;
             logger.debug(logText);
 
