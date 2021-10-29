@@ -287,17 +287,16 @@ function Translator(props) {
           .then(function(data) {
             logger.info('\n' + 'create msDropdown from JSON: finished');
 
-            msDropdownJSON   = document.getElementById('dropdownJSON').msDropdown;
-
-            if (self.props.translationLanguage === 'auto') {
-              navigator_language    = navigator.language || navigator.userLanguage;
-              translation_language  = navigator_language.split('-')[0];
-            }
-
-            // set selected dropdown option
-            index = $('#dropdownJSON option[value=' +  translation_language + ']').index();
-            msDropdownJSON.selectedIndex = index;
-
+            // msDropdownJSON   = document.getElementById('dropdownJSON').msDropdown;
+            //
+            // if (self.props.translationLanguage === 'auto') {
+            //   navigator_language    = navigator.language || navigator.userLanguage;
+            //   translation_language  = navigator_language.split('-')[0];
+            // }
+            //
+            // // set selected dropdown option
+            // index = $('#dropdownJSON option[value=' +  translation_language + ']').index();
+            // msDropdownJSON.selectedIndex = index;
           });
         }); // END modal on 'show'
 
@@ -312,6 +311,17 @@ function Translator(props) {
           var options;
           var lang;
           var uiData;
+
+          msDropdownJSON   = document.getElementById('dropdownJSON').msDropdown;
+
+          if (self.props.translationLanguage === 'auto') {
+            navigator_language    = navigator.language || navigator.userLanguage;
+            translation_language  = navigator_language.split('-')[0];
+          }
+
+          // set selected dropdown option
+          index = $('#dropdownJSON option[value=' +  translation_language + ']').index();
+          msDropdownJSON.selectedIndex = index;
 
           // disable translation language selection
           if (self.props.disableLanguageSelector) {
