@@ -109,20 +109,23 @@ j1.adapter['translator'] = (function (j1, window) {
   // ---------------------------------------------------------------------------
   // helper functions
   // ---------------------------------------------------------------------------
+
+  // ---------------------------------------------------------------------------
+  // setCookie()
+  // writes a flat cookie (not using an encoded JSON string)
+  // ---------------------------------------------------------------------------
   function setCookie(options /*cName, cValue, expDays*/) {
-    var defaults = {
+    var defaults = {};
+    var settings;
+
+    defaults = {
         name: '',
         path: '/',
         expires: 0,
         domain: 'localhost'
     };
-    var settings = $.extend(defaults, options);
+    settings = $.extend(defaults, options);
 
-    var date = new Date();
-    date.setTime(date.getTime() + (settings.expires * 24 * 60 * 60 * 1000));
-    const expires = "expires=" + date.toUTCString();
-    // document.cookie = cName + "=" + cValue + "; " + expires + "; path=/";
-    // document.cookie = settings.name + "=" + settings.data  + "; " + expires + "; path=/";
     document.cookie = settings.name + "=" + settings.data  + "; path=/";
   };
 
