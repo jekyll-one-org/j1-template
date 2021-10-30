@@ -61,7 +61,7 @@ function Translator(props) {
     dialogLanguages:            ['en','de'],                                    // supported languages for the consent dialog (modal), defaults to first in array//
     dialogContainerID:          'translator-modal',                             // container, the dialog modal is (dynamically) loaded
     xhrDataElement:             '',                                             // container for the language-specific consent modal taken from /assets/data/cookieconsent.html
-    postSelectionCallback:      undefined,                                      // callback function, called after the user has made his selection
+    postSelectionCallback:      '',                                             // callback function, called after the user has made his selection
   };
 
   // merge properties from default|module
@@ -178,6 +178,21 @@ function Translator(props) {
   }
 
   // ---------------------------------------------------------------------------
+  // executeFunctionByName()
+  // execute a function by NAME (functionName) in a browser context
+  // (e.g. window) the function is published
+  // ---------------------------------------------------------------------------
+  function executeFunctionByName (functionName, context /*, args */) {
+    var args = Array.prototype.slice.call(arguments, 2);
+    var namespaces = functionName.split('.');
+    var func = namespaces.pop();
+    for(var i = 0; i < namespaces.length; i++) {
+      context = context[namespaces[i]];
+    }
+    return context[func].apply(context, args);
+  }
+
+  // ---------------------------------------------------------------------------
   // createMsDropdownFromJSON()
   // Create a msDropdown select DYNAMICALLY from JSON data located in a file
   // specified by "url". The JSON file contaians mutiple msDropdown elements
@@ -277,11 +292,11 @@ function Translator(props) {
           // create msDropdown from JSON data
           $.when (
             createMsDropdownFromJSON({
-              url:                '/assets/data/msdropdown.json',
-              elm:                'googleLanguages',
+              url:                '/assets/data/iso-639-language-codes-flags.json',
+              elm:                'iso-639-languages',
               selector:           'dropdownJSON',
-              width:              300,
-              visibleRows:        4,
+              width:              400,
+              visibleRows:        8,
             })
           )
           .then(function(data) {
@@ -329,7 +344,8 @@ function Translator(props) {
         // ---------------------------------------------------------------------
         self.$modal.on('hidden.bs.modal', function () {
           $('body').removeClass('stop-scrolling');
-          self.props.postSelectionCallback();
+          // run the postSelectionCallback for (final) translation
+          executeFunctionByName (self.props.postSelectionCallback, window);
         }); // END modal on 'hidden'
 
         // ---------------------------------------------------------------------

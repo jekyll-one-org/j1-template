@@ -64,21 +64,21 @@ exclude_from_search:                    true
 {% comment %} i18n: translations
 -------------------------------------------------------------------------------- {% endcomment %}
 
-{% comment %} Modal translator dialog (default: en-EN)
+{% comment %} Modal Google Translator dialog (default: en-EN)
 -------------------------------------------------------------------------------- {% endcomment %}
 <div id="google-data-en">
   <div id="modal-google-translate-en" class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
     <div class="modal-content">
 
       <div class="modal-header">
-        <p class="lead">{{translate_options.modal_settings.title.en}}</p>
+        <p class="lead">{{translate_options.google.modal_settings.title.en}}</p>
       </div>
 
       <div class="modal-body">
         <div class="modal-body-text" style="font-size: 90%">
-          <p class="mb-3">{{translate_options.modal_settings.body_text.en}}</p>
+          <p class="mb-3">{{translate_options.google.modal_settings.body_text.en}}</p>
         </div>
-        <p style="font-size: 90%">{{translate_options.modal_settings.language_selector_title.en}}</p>
+        <p style="font-size: 90%">{{translate_options.google.modal_settings.language_selector_title.en}}</p>
         <div id="dropdownJSON" class="mb-4" style="display:none"></div>
         <p>
           <a href="#google-privacy" data-toggle="collapse" class="">Privacy Notice</a>
@@ -87,7 +87,7 @@ exclude_from_search:                    true
 
         <div id="google-privacy" class="collapse">
           <div class="modal-body-text" style="font-size: 90%">
-            <p class="mb-4">{{translate_options.modal_settings.privacy_notice.en}}</p>
+            <p class="mb-4">{{translate_options.google.modal_settings.privacy_notice.en}}</p>
           </div>
         </div>
 
@@ -168,22 +168,22 @@ exclude_from_search:                    true
   </div>
 </div>
 
-{% comment %} END Modal translator dialog (en-EN)
+{% comment %} END Modal Google Translator dialog (en-EN)
 -------------------------------------------------------------------------------- {% endcomment %}
 
-{% comment %} Modal translator dialog (de-DE)
+{% comment %} Modal Google Translator dialog (de-DE)
 -------------------------------------------------------------------------------- {% endcomment %}
 <div id="google-data-de">
   <div id="modal-google-translate-de" class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <p class="lead">{{translate_options.modal_settings.title.de}}</p>
+        <p class="lead">{{translate_options.google.modal_settings.title.de}}</p>
       </div>
       <div class="modal-body">
         <div class="modal-body-text" style="font-size: 90%">
-          <p class="mb-4">{{translate_options.modal_settings.body_text.de}}</p>
+          <p class="mb-4">{{translate_options.google.modal_settings.body_text.de}}</p>
         </div>
-        <p style="font-size: 90%">{{translate_options.modal_settings.language_selector_title.de}}</p>
+        <p style="font-size: 90%">{{translate_options.google.modal_settings.language_selector_title.de}}</p>
         <div id="dropdownJSON" class="mb-4" style="display:none"></div>
         <p>
           <a href="#google-privacy" data-toggle="collapse" class="">Datenschutzerklärung</a>
@@ -192,7 +192,7 @@ exclude_from_search:                    true
 
         <div id="google-privacy" class="collapse">
           <div class="modal-body-text" style="font-size: 90%">
-            <p class="mb-4">{{translate_options.modal_settings.privacy_notice.de}}</p>
+            <p class="mb-4">{{translate_options.google.modal_settings.privacy_notice.de}}</p>
           </div>
         </div>
 
@@ -282,7 +282,7 @@ exclude_from_search:                    true
     </div>
   </div>
 </div>
-{% comment %} END Modal translator dialog (de-DE)
+{% comment %} END Modal Google Translator dialog (de-DE)
 -------------------------------------------------------------------------------- {% endcomment %}
 
 {% endcapture %}

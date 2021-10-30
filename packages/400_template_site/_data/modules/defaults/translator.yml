@@ -20,24 +20,18 @@ about_config:
   location:                             _data/modules/defaults/translator.yml
 
 # ------------------------------------------------------------------------------
-# Default settings
+# Default translator settings (general)
 #
 defaults:
 
   enabled:                              false
 
   translationEnabled:                   false
-  translatorName:                       google
+  hideTranslatorIcon:                   false                                   # hide translator icon if translation not allowed (cookie consent)
   disableLanguageSelector:              false                                   # disable language dropdown for translation in dialog (modal)
-  translationLanguages:                 [all]                                   # supported languages for translation
   translationLanguage:                  auto                                    # detect translation language from browser
   translateAllPages:                    true                                    # enable translation for all pages
-  hideTranslatorIcon:                   false                                   # hide translator icon if translation not allowed (cookie consent)
-  hideSuggestionBox:                    true                                    # disable suggestions on translated text
-  hidePoweredBy:                        true                                    # disable label "Powered by Google"
-  hideTopFrame:                         true                                    # disable the (google) translator frame
   reloadPageOnChange:                   true                                    # reload current page if user settings has been changed
-  postSelectionCallback:                j1.adapter.translator.cb                # currently NOT used
 
   contentURL:                           /assets/data/translator                 # dialogs (modals) for all supported translators|languages
   dialogLanguage:                       auto                                    # auto|content|one of dialogLanguages
@@ -47,14 +41,38 @@ defaults:
   xhrDataElement:                       google-data                             # container for the language-specific modal (taken fromcontentURL)
   dialogContainerID:                    translator-dialog                       # container, the dialog modal is (dynamically) loaded
 
-  modal_settings:
+# ------------------------------------------------------------------------------
+# Default Google Translator settings
+#
+  google:
 
-    title:
-      en:                               Google Translate
-      de:                               Google Übersetzer
+    postSelectionCallback:              "j1.adapter.translator.cbGoogle"        # callback to run the translation
+    hideSuggestionBox:                  true                                    # disable suggestions on translated text
+    hidePoweredBy:                      true                                    # disable label "Powered by Google"
+    hideTopFrame:                       true                                    # disable the (google) translator frame
 
-    body_text:
-      en: >
+    translationLanguages:               [
+                                          af, sq, am, ar, hy, az, eu, be, bn,
+                                          bs, bg, km, ca, ny, zh-CN, zh-TW,
+                                          co, hr, cs, da, nl, en, et, tl, fi,
+                                          fr, fy, gl, ka, de, el, gu, ht, ha,
+                                          haw, iw, hi, hu, is, ig, id, ga, it,
+                                          ja, jw, kn, kk, rw, ko, ku, ky, lo,
+                                          lv, lt, mk, mg, ms, ml, mt, mi, mr,
+                                          mo, mn, ne, no, nn, or, ps, fa, pl,
+                                          pt, pa, ro, rm, ru, gd, sr, st, sn,
+                                          sd, si, sk, sl, so, es, su, sw, sv,
+                                          tg, ta, tt, te, th, tr, tk, ug, uk,
+                                          ur, uz, vi, cy, xh, yi, yo, zu
+                                        ]
+    modal_settings:
+
+      title:
+        en:                             Google Translator
+        de:                             Google Übersetzer
+
+      body_text:
+        en: >
                                         This website uses the free service <em>Google Translate</em> to
                                         translate the content into 100+ languages in a matter of seconds.
                                         The <b>language</b> for translation is taken <b>automatically</b>
@@ -62,24 +80,22 @@ defaults:
                                         If you do <b>not</b> want translation anymore, <b>disable</b> the service
                                         in section <b>My Settings</b>.
 
-      de: >
+        de: >
                                         Diese Website nutzt den kostenlosen Dienst <em>Google Translate</em>,
-                                        um die Inhalte in Sekundenschnelle in über 100+ Sprachen zu übersetzen.
+                                        um die Inhalte in sekundenschnelle in über 100+ Sprachen zu übersetzen.
                                         Die <b>Sprache</b> für die Übersetzung wird <b>automatisch</b> aus den
                                         Spracheinstellungen Ihres <b>Browsers</b> übernommen. Wenn Sie <b>keine</b>
                                         Übersetzung mehr wünschen, <b>deaktivieren</b> Sie den Dienst im Abschnitt
                                         <b>Meine Einstellungen</b>.
 
-    language_selector_title:
-      en: >
-                                        Your current language setting for translation is:
+      language_selector_title:
 
-      de: >
-                                        Ihre aktuelle Spracheinstellung für die Übersetzung ist:
+        en:                             "Your current language setting for translation is:"
+        de:                             "Ihre aktuelle Spracheinstellung für die Übersetzung ist:"
 
-    privacy_notice:
+      privacy_notice:
 
-      en: >
+        en: >
                                         The free service from <em>Google Translate</em> uses cookies to provide
                                         its services, personalize advertising and run traffic analysis To use the
                                         service, your consent on using cookies is required. Find more information
@@ -91,7 +107,7 @@ defaults:
                                         <br><br>
                                         <code>Personalization</code> For translations, your consent on
                                         <b>Personalization</b> with your <b>Privacy Settings</b> is required.
-      de: >
+        de: >
                                         Der kostenlose Dienst von <em>Google Translate</em> verwendet Cookies
                                         um seine Dienste bereitzustellen, Werbung zu personalisieren und
                                         Verkehrsanalysen durchzuführen:
@@ -103,6 +119,37 @@ defaults:
                                         <code>Personalisierung</code> Für die Nutzung von Übersetzungen ist Ihre
                                         Zustimmung zur <b>Personalisierung</b> in den Einstellungen <code>Ihre Privatsphäre</code>
                                         erforderlich.
+
+  # ------------------------------------------------------------------------------
+  # Default Deepl Translator settings (currently NOT supported)
+  #
+  # deepl:
+  #
+  #   postSelectionCallback:            j1.adapter.translator.cbDeepl()         # currently NOT used
+  #   translationLanguages:             [
+  #                                       bg, cs, da, de, el, es, en, en-us,
+  #                                       en-uk, et, ft, fr, hu, it, ja, lv,
+  #                                       lt, nl, af, pt, pt-pt, pt-br, ro,
+  #                                       ru, sk, sl, sv, zh-CN, zh-TW
+  #                                     ]
+  #
+  #   modal_settings:
+  #
+  #     title:
+  #       en:                           Deepl Translator
+  #       de:                           Deepl Übersetzer
+  #
+  #     body_text:
+  #       en:
+  #       de:
+  #
+  #     language_selector_title:
+  #       en:
+  #       de:
+  #
+  #     privacy_notice:
+  #       en:
+  #       de:
 
 # ------------------------------------------------------------------------------
 # END config

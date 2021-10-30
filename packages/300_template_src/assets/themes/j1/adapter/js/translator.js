@@ -259,11 +259,11 @@ j1.adapter['translator'] = (function (j1, window) {
             dialogContainerID:        moduleOptions.dialogContainerID,          // dest container, the dialog modal is loaded (dynamically)
             dialogLanguage:           moduleOptions.dialogLanguage,             // language for the dialog (modal)
             translationLanguage:      moduleOptions.translationLanguage,        // default language for translation
-            translationLanguages:     moduleOptions.translationLanguages,       // supported languages for translation
+            translationLanguages:     moduleOptions.google.translationLanguages,// supported languages for translation
             translationEnabled:       moduleOptions.translationEnabled,         // run translation enabled|disabled
-            translatorName:           moduleOptions.translatorName,             // translator for translation
+            translatorName:           moduleOptions.translatorName,             // translator used for translation
             xhrDataElement:           moduleOptions.xhrDataElement,             // container for all language-specific dialogs (modals)
-            postSelectionCallback:    function () {j1.adapter.translator.cb()}
+            postSelectionCallback:    moduleOptions.google.postSelectionCallback
           });
 
           if (user_consent.analysis && user_consent.personalization && user_translate.translationEnabled) {
@@ -329,11 +329,11 @@ j1.adapter['translator'] = (function (j1, window) {
     }, // END getState
 
     // -------------------------------------------------------------------------
-    // cb()
-    // Called by the translator CORE module (callback) after the user
-    // has made the lanuage selection for translation
+    // cbGoogle()
+    // Called by the translator CORE module after the user
+    // has made the lanuage selection for translation (callback)
     // -------------------------------------------------------------------------
-    cb: function () {
+    cbGoogle: function () {
       var cookie_names   = j1.getCookieNames();
       var user_state     = j1.readCookie(cookie_names.user_state);
       var user_consent   = j1.readCookie(cookie_names.user_consent);
@@ -353,7 +353,7 @@ j1.adapter['translator'] = (function (j1, window) {
       logger.debug('\n' + 'current values from cookie consent: ' + JSON.stringify(user_consent));
       logger.debug('\n' + 'current values from user state: ' + JSON.stringify(user_state));
 
-      selectedTranslationLanguage = msDropdownLang.value.toLowerCase();
+      selectedTranslationLanguage = msDropdownLang.value;
       logger.info('\n' + 'selected translation language: ' + selectedTranslationLanguage);
 
       // update cookie consent settings
@@ -457,7 +457,18 @@ j1.adapter['translator'] = (function (j1, window) {
         $('#quickLinksTranslateButton').css('display', 'none');
       }
 
-    } // END cbCookie
+    }, // END cbGoogle
+
+    // -------------------------------------------------------------------------
+    // cbDeepl()
+    // Called by the translator CORE module after the user
+    // has made the lanuage selection for translation (callback)
+    // -------------------------------------------------------------------------
+    cbDeepl: function () {
+
+      // code for post procession on Deepl translations
+
+    } // END cbDeepl
 
   }; // END return
 })(j1, window);

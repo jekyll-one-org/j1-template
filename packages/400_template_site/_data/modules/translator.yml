@@ -26,6 +26,7 @@ description:
 settings:
 
   enabled:                              true
+  translatorName:                       google
 
 # ------------------------------------------------------------------------------
 # END config
