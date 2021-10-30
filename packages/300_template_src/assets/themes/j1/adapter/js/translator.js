@@ -87,6 +87,7 @@ j1.adapter['translator'] = (function (j1, window) {
   var user_translate    = {};
   var _this;
   var $modal;
+  var domain;
   var cookie_names;
   var user_consent;
   var logger;
@@ -167,6 +168,13 @@ j1.adapter['translator'] = (function (j1, window) {
         'useLanguageFromBrowser':   true,
         'translationLanguage':      translation_language,
       };
+
+      // set domain used by cookies
+      if(domain !== 'localhost') {
+        cookie_domain = '.' + hostname;
+      } else {
+        cookie_domain = hostname;
+      }
 
       if (j1.existsCookie(cookie_names.user_translate)) {
         user_translate = j1.readCookie(cookie_names.user_translate);
@@ -273,7 +281,7 @@ j1.adapter['translator'] = (function (j1, window) {
             }
           } else {
             if (moduleOptions.translatorName === 'google') {
-              j1.removeCookie({name: 'googtrans'});
+              j1.removeCookie({name: 'googtrans', domain: cookie_domain});
            }
           }
 
@@ -411,7 +419,7 @@ j1.adapter['translator'] = (function (j1, window) {
 
           // stop translation for all pages
           if (htmlScriptElement) { htmlScriptElement.remove(); }
-          j1.removeCookie({name: 'googtrans'});
+          j1.removeCookie({name: 'googtrans', domain: cookie_domain});
         }
       }
 
@@ -444,7 +452,7 @@ j1.adapter['translator'] = (function (j1, window) {
 
         // stop translation for all pages
         if (htmlScriptElement) { htmlScriptElement.remove(); }
-        j1.removeCookie({name: 'googtrans'});
+        j1.removeCookie({name: 'googtrans', domain: cookie_domain});
       }
 
       if (moduleOptions.reloadPageOnChange) {
