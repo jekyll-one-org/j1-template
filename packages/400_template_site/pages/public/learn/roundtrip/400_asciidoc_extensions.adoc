@@ -57,12 +57,12 @@ resource_options:
 // -----------------------------------------------------------------------------
 J1 Template implements some incubating Ruby-based extensions for Asciidoctor.
 Most extensions are based on the examples given with the
-link:{asciidoctor-extensions-lab}[Asciidoctor Extensions Lab, {browser-window--new}].
+link:{url-asciidoctor--extensions-lab}[Asciidoctor Extensions Lab, {browser-window--new}].
 If you simply want to use the extensions from this repository, go ahead to
-link:{asciidoctor-extensions-use-extension}[Using an extension, {browser-window--new}].
+link:{url-asciidoctor--extensions-use}[Using an extension, {browser-window--new}].
 
 To create Asciidoc extensions on your own, it is highly recommended to read the
-link:{asciidoctor-user-manual-extensions}[extensions section, {browser-window--new}] in
+link:{url-asciidoctor--extensions-manual}[extensions section, {browser-window--new}] in
 the Asciidoctor user manual.
 
 == Asciidoc Extensions
