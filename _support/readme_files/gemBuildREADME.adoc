@@ -23,7 +23,7 @@ run j1 exe (help):                    bundle exec j1 --help
 When modifying remember to issue a new tag command in git before committing,
 then push the new tag
 
-# git tag -a v2021.2.5 -m "v2021.2.5"
+# git tag -a v2021.2.6 -m "v2021.2.6"
 
   git push origin --tags
 
