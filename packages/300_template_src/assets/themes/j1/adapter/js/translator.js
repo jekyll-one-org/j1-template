@@ -372,8 +372,12 @@ j1.adapter['translator'] = (function (j1, window) {
     // selection for a translation|language
     // -------------------------------------------------------------------------
     cbGoogle: function () {
-      var logger     = log4javascript.getLogger('j1.adapter.translator.cbGoogle');
-      var msDropdown = document.getElementById('dropdownJSON').msDropdown;
+      var logger         = log4javascript.getLogger('j1.adapter.translator.cbGoogle');
+      var cookie_names   = j1.getCookieNames();
+      var user_state     = j1.readCookie(cookie_names.user_state);
+      var user_consent   = j1.readCookie(cookie_names.user_consent);
+      var user_translate = j1.readCookie(cookie_names.user_translate);
+      var msDropdown     = document.getElementById('dropdownJSON').msDropdown;
       var selectedTranslationLanguage;
       var srcLang;
       var destLang;
@@ -381,6 +385,18 @@ j1.adapter['translator'] = (function (j1, window) {
 
       selectedTranslationLanguage = msDropdown.value;
       logger.info('\n' + 'selected translation language: ' + selectedTranslationLanguage);
+
+      // update cookie consent settings
+      user_consent.analysis         = user_translate.analysis;
+      user_consent.personalization  = user_translate.personalization;
+
+      cookie_written = j1.writeCookie({
+        name:     cookie_names.user_consent,
+        data:     user_consent,
+        samesite: 'Strict',
+        secure:   secure,
+        expires:  0
+      });
 
       // set transCode settings
       srcLang   = "{{site.language}}";

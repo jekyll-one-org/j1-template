@@ -467,16 +467,17 @@ function Translator(props) {
 
   // ---------------------------------------------------------------------------
   // agreeAll()
-  // process current settings from checkboxes for button `agreeAll`
+  // process current settings from checkboxes for button 'agreeAll'
+  // On 'agreeAll', enable ALL settings required for translation
   // ---------------------------------------------------------------------------
   function agreeAll() {
-    var settings;
-    var consentSettings = {};
+    var translationSettings = gatherOptions(true);
+    var consentSettings     = {};
 
-    settings                        = gatherOptions();
+    // enable and write all settings required for translation (consent cookie)
     consentSettings                 = JSON.parse(Cookie.get(self.props.cookieConsentName));
-    consentSettings.analysis        = settings.analysis;
-    consentSettings.personalization = settings.personalization;
+    consentSettings.analysis        = translationSettings.analysis;
+    consentSettings.personalization = translationSettings.personalization;
 
     Cookie.set(
       self.props.cookieConsentName,
@@ -485,9 +486,11 @@ function Translator(props) {
       self.props.sameSite,
       self.props.secure
     );
+
+    // enable and write all settings required for translation (translation cookie)
     Cookie.set(
       self.props.cookieName,
-      JSON.stringify(gatherOptions(true)),
+      JSON.stringify(translationSettings),
       self.props.cookieStorageDays,
       self.props.sameSite,
       self.props.secure
