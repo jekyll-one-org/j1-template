@@ -28,10 +28,11 @@
 <!-- [INFO   ] [j1.modules.connectors.translation     ] [ place callback for the Google Translator API ] -->
 <script>
   function googleTranslateElementInit() {
-    new google.translate.TranslateElement({
+    var gtAPI = new google.translate.TranslateElement({
       pageLanguage: 'en',
       layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT
     },
     'google_translate_element');
+    j1.adapter.translator.postTranslateElementInit(gtAPI);
   }
 </script>

@@ -190,14 +190,13 @@ j1.adapter['translator'] = (function (j1, window) {
         'translationLanguage':      translation_language,
       };
 
-      // set sub domain settings for cookies
+      // set domain used by cookies
       if(domain !== 'localhost') {
         cookie_sub_domains = '.' + hostname;
       } else {
         cookie_sub_domains = hostname;
       }
 
-      // load|initialize user translate cookie
       if (j1.existsCookie(cookie_names.user_translate)) {
         user_translate = j1.readCookie(cookie_names.user_translate);
       } else {
@@ -208,6 +207,13 @@ j1.adapter['translator'] = (function (j1, window) {
           samesite: 'Strict',
           expires:  365
         });
+      }
+
+      // set domain used by cookies
+      if(domain !== 'localhost') {
+        cookie_sub_domains = '.' + hostname;
+      } else {
+        cookie_sub_domains = hostname;
       }
 
       // initialize state flag
@@ -244,7 +250,6 @@ j1.adapter['translator'] = (function (j1, window) {
           logger.info('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
 
-          // hide the google translate element if exists
           if ($('google_translate_element')) {
             $('google_translate_element').hide();
           }
@@ -290,7 +295,6 @@ j1.adapter['translator'] = (function (j1, window) {
             postSelectionCallback:    moduleOptions.google.postSelectionCallback
           });
 
-          // enable|disable translation (after callback)
           if (user_consent.analysis && user_consent.personalization && user_translate.translationEnabled) {
             if (moduleOptions.translatorName === 'google') {
               head.appendChild(script);
@@ -359,52 +363,158 @@ j1.adapter['translator'] = (function (j1, window) {
     // postTranslateElementInit()
     // ???
     // -------------------------------------------------------------------------
-    postTranslateElementInit: function (response) {
-      // code for post processing
-      logger.info('\n' + 'postTranslateElementInit entered');
-      logger.info('\n' + response.T.Dh);
+    postTranslateElementInit: function () {
+      // var transCode = '/en/de';
+      //
+      // // set the transCode cookie (googtrans)
+      // setCookie({
+      //   name: 'googtrans',
+      //   data: transCode
+      // });
+      // j1.removeCookie({name: 'googtrans', domain: domain});
       return;
     }, // END postTranslateElementInit
 
     // -------------------------------------------------------------------------
     // cbGoogle()
-    // Called by the translator CORE module after the user made the
-    // selection for a translation|language
+    // Called by the translator CORE module after the user
+    // has made the lanuage selection for translation (callback)
     // -------------------------------------------------------------------------
     cbGoogle: function () {
-      var logger     = log4javascript.getLogger('j1.adapter.translator.cbGoogle');
-      var msDropdown = document.getElementById('dropdownJSON').msDropdown;
-      var selectedTranslationLanguage;
+      var cookie_names   = j1.getCookieNames();
+      var user_state     = j1.readCookie(cookie_names.user_state);
+      var user_consent   = j1.readCookie(cookie_names.user_consent);
+      var user_translate = j1.readCookie(cookie_names.user_translate);
+      var msDropdownLang = document.getElementById('dropdownJSON').msDropdown;
+      var msDropdown     = document.getElementById('dropdownJSON').msDropdown;
+      var head;
+      var script;
       var srcLang;
       var destLang;
       var transCode;
+      var cookie_written;
+      var htmlScriptElement;
+      var selectedTranslationLanguage;
 
-      selectedTranslationLanguage = msDropdown.value;
+      logger.info('\n' + 'entered post selection callback from google_translate');
+      logger.debug('\n' + 'current values from cookie consent: ' + JSON.stringify(user_consent));
+      logger.debug('\n' + 'current values from user state: ' + JSON.stringify(user_state));
+
+      selectedTranslationLanguage = msDropdownLang.value;
       logger.info('\n' + 'selected translation language: ' + selectedTranslationLanguage);
 
-      // set transCode settings
-      srcLang   = "{{site.language}}";
-      destLang  = translation_language;
-      transCode = '/' + srcLang + '/' + selectedTranslationLanguage;
+      // update cookie consent settings
+      user_consent.analysis         = user_translate.analysis;
+      user_consent.personalization  = user_translate.personalization;
 
-      // write the googtrans cookie
-      setCookie({
-        name: 'googtrans',
-        data: transCode
+      cookie_written = j1.writeCookie({
+        name:     cookie_names.user_consent,
+        data:     user_consent,
+        samesite: 'Strict',
+        secure:   secure,
+        expires:  0
       });
 
-      // reload current page (skip cache)
-      location.reload(true);
+      // translation allowed
+      if (user_consent.analysis && user_consent.personalization)  {
+        head              = document.getElementsByTagName('head')[0];
+        script            = document.createElement('script');
+        script.id         = 'google-translate';
+        script.src        = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+        htmlScriptElement = document.getElementById(script.id);
+
+        if (user_translate.translationEnabled && moduleOptions.translatorName === 'google') {
+          // head.appendChild(script);
+
+          if ($('google_translate_element')) {
+            $('google_translate_element').hide();
+          }
+
+          // set transCode settings
+          srcLang   = "{{site.language}}";
+          destLang  = translation_language;
+          transCode = '/' + srcLang + '/' + selectedTranslationLanguage;
+
+          // set the transCode cookie (googtrans)
+          setCookie({
+            name: 'googtrans',
+            data: transCode
+          });
+
+          // enable google transalate button if not visible
+          if ($('#quickLinksTranslateButton').css('display') === 'none')  {
+            $('#quickLinksTranslateButton').css('display', 'block');
+          }
+        } else { // translation NOT allowed
+
+          // update cookie user translate settings
+          user_translate.translationEnabled = false;
+          cookie_written = j1.writeCookie({
+            name:     cookie_names.user_translate,
+            data:     user_translate,
+            samesite: 'Strict',
+            secure:   secure
+          });
+
+          // stop translation for all pages
+          if (htmlScriptElement) { htmlScriptElement.remove(); }
+          j1.removeCookie({name: 'googtrans', domain: domain});
+        }
+      }
+
+      // translation NOT allowed
+      if (!user_translate.analysis || !user_translate.personalization) {
+        head       = document.getElementsByTagName('head')[0];
+        script     = document.createElement('script');
+        script.id  = 'google-translate';
+
+        // update cookie consent settings
+        user_consent.analysis        = user_translate.analysis;
+        user_consent.personalization = user_translate.personalization;
+        cookie_written = j1.writeCookie({
+          name:     cookie_names.user_consent,
+          data:     user_consent,
+          samesite: 'Strict',
+          secure:   secure,
+          expires:  0
+        });
+
+        // update cookie user translate settings
+        user_translate.translationEnabled = false;
+        cookie_written = j1.writeCookie({
+          name:     cookie_names.user_translate,
+          data:     user_consent,
+          samesite: 'Strict',
+          secure:   secure,
+          expires:  0
+        });
+
+        // stop translation for all pages
+        if (htmlScriptElement) { htmlScriptElement.remove(); }
+        j1.removeCookie({name: 'googtrans', domain: domain});
+      }
+
+      if (moduleOptions.reloadPageOnChange) {
+        // reload current page (skip cache)
+        location.reload(true);
+      }
+
+      // disable google translate button if visible
+      if ($('#quickLinksTranslateButton').css('display') === 'block')  {
+        $('#quickLinksTranslateButton').css('display', 'none');
+      }
+
     }, // END cbGoogle
 
     // -------------------------------------------------------------------------
     // cbDeepl()
-    // Called by the translator CORE module after the user made the
-    // selection for a translation language
+    // Called by the translator CORE module after the user
+    // has made the lanuage selection for translation (callback)
     // -------------------------------------------------------------------------
     cbDeepl: function () {
-      var logger     = log4javascript.getLogger('j1.adapter.translator.cbDeepl');
-      // code for post processing
+
+      // code for post procession on Deepl translations
+
     } // END cbDeepl
 
   }; // END return
