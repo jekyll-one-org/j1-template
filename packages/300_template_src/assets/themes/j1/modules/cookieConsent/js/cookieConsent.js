@@ -37,7 +37,7 @@
 /* eslint JSUnfilteredForInLoop: "off"                                        */
 // -----------------------------------------------------------------------------
 
-function BootstrapCookieConsent(props) {
+function CookieConsent(props) {
   var logger                = log4javascript.getLogger('j1.core.bsCookieConsent');
   var self                  = this;
   var detailedSettingsShown = false;
@@ -58,11 +58,12 @@ function BootstrapCookieConsent(props) {
     contentURL:             '/assets/data/cookieconsent',                       // URL contain the consent dialogs (modals) for ALL supported languages
     cookieName:             'j1.user.translate',                                // name of the cookie, in which the configuration is stored
     cookieStorageDays:      365,                                                // duration the configuration cookie is stored on the client
-    postSelectionCallback:  undefined,                                          // callback function, called after the user has made his selection
+    postSelectionCallback:  '',                                                 // callback function, called after the user has made his selection
     whitelisted:            [],                                                 // pages NO consent modal dialog is issued
     xhrDataElement:         'consent-data',                                     // src container for all language-specific consent dialogs (taken from contentURL)
     dialogContainerID:      'consent-modal',                                    // dest container, the dialog modal is loaded (dynamically)
     cookieSameSite:         'Strict',                                           // restrict the consent cookie to first-party (do NOT send cookie to other domains)
+    cookieSecure:           true
   };
 
   // merge property settings
@@ -128,6 +129,59 @@ function BootstrapCookieConsent(props) {
     }
   };
 
+  // ---------------------------------------------------------------------------
+  // extend()
+  // deep merge of two objects
+  // ---------------------------------------------------------------------------
+  function extend () {
+    var extended = {};
+    var deep = false;
+    var i = 0;
+    var length = arguments.length;
+
+    // Check if a deep merge
+    if ( Object.prototype.toString.call( arguments[0] ) === '[object Boolean]' ) {
+        deep = arguments[0];
+        i++;
+    }
+
+    // Merge the object into the extended object
+    var merge = function (obj) {
+        for ( var prop in obj ) {
+            if ( Object.prototype.hasOwnProperty.call( obj, prop ) ) {
+                // If deep merge and property is an object, merge properties
+                if ( deep && Object.prototype.toString.call(obj[prop]) === '[object Object]' ) {
+                    extended[prop] = extend( true, extended[prop], obj[prop] );
+                } else {
+                    extended[prop] = obj[prop];
+                }
+            }
+        }
+    };
+
+    // Loop through each object and conduct a merge
+    for ( ; i < length; i++ ) {
+        var obj = arguments[i];
+        merge(obj);
+     }
+           return extended;
+  }
+
+  // ---------------------------------------------------------------------------
+  // executeFunctionByName()
+  // execute a function by NAME (functionName) in a browser context
+  // (e.g. window) the function is published
+  // ---------------------------------------------------------------------------
+  function executeFunctionByName (functionName, context /*, args */) {
+    var args = Array.prototype.slice.call(arguments, 2);
+    var namespaces = functionName.split('.');
+    var func = namespaces.pop();
+    for(var i = 0; i < namespaces.length; i++) {
+      context = context[namespaces[i]];
+    }
+    return context[func].apply(context, args);
+  }
+
   function showDialog(options) {
     Events.documentReady(function () {
 
@@ -143,11 +197,17 @@ function BootstrapCookieConsent(props) {
         document.body.append(self.modal);
         self.$modal = $(self.modal);
 
-        if (self.props.postSelectionCallback) {
-          self.$modal.on("hidden.bs.modal", function () {
-            self.props.postSelectionCallback();
-          });
-        }
+        // ---------------------------------------------------------------------
+        // register events for the dialog (modal)
+        // ---------------------------------------------------------------------
+
+        // ---------------------------------------------------------------------
+        // on 'hidden'
+        // ---------------------------------------------------------------------
+        self.$modal.on('hidden.bs.modal', function () {
+          // process settings after the user has made his selections
+          executeFunctionByName (self.props.postSelectionCallback, window);
+        }); // END modal on 'hidden'
 
         // load modal content
         //
@@ -253,12 +313,12 @@ function BootstrapCookieConsent(props) {
   }
 
   function agreeAll() {
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(true)), self.props.cookieStorageDays, self.props.cookieSameSite, self.props.cookieSecure);
+    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(true)), self.props.cookieStorageDays, self.props.cookieSameSite, cookieSecure);
     self.$modal.modal('hide');
   }
 
   function doNotAgree() {
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), self.props.cookieStorageDays, self.props.cookieSameSite, self.props.cookieSecure);
+    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), self.props.cookieStorageDays, self.props.cookieSameSite, cookieSecure);
 
     // jadams, 2021-07-15: all cookies NOT longer supported by j1.expireCookie
     // TODO: Create loop over all cookies found in page
@@ -271,7 +331,7 @@ function BootstrapCookieConsent(props) {
   }
 
   function saveSettings() {
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions()), self.props.cookieStorageDays, self.props.cookieSameSite, self.props.cookieSecure);
+    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions()), self.props.cookieStorageDays, self.props.cookieSameSite, cookieSecure);
     self.$modal.modal('hide');
   }
 

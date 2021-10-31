@@ -46,7 +46,7 @@ defaults:
 #
   google:
 
-    postSelectionCallback:              "j1.adapter.translator.cbGoogle"        # callback to run the translation
+    postSelectionCallback:              j1.adapter.translator.cbGoogle          # callback to run the translation
     hideSuggestionBox:                  true                                    # disable suggestions on translated text
     hidePoweredBy:                      true                                    # disable label "Powered by Google"
     hideTopFrame:                       true                                    # disable the (google) translator frame

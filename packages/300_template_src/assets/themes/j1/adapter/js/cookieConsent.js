@@ -174,7 +174,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
           logger.info('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
 
-          j1.cookieConsent = new BootstrapCookieConsent({
+          j1.cookieConsent = new CookieConsent ({
             contentURL:             moduleOptions.contentURL,                   // dialog content (modals) for all supported languages
             cookieName:             moduleOptions.cookieName,                   // name of the consent cookie
             cookieSameSite:         moduleOptions.cookieSameSite,               // restrict consent cookie
@@ -183,7 +183,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
             reloadPageOnChange:     moduleOptions.reloadPageOnChange,           // reload if setzings has changed
             dialogContainerID:      moduleOptions.dialogContainerID,            // container, the dialog modal is (dynamically) loaded
             xhrDataElement:         moduleOptions.xhrDataElement,               // container for all language-specific dialogs (modals)
-            postSelectionCallback:  function () {j1.adapter.cookieConsent.cbCookie()}
+            postSelectionCallback:  moduleOptions.postSelectionCallback,        // callback function, called after the user has made his selection        
           });
 
           _this.setState('finished');
@@ -303,7 +303,8 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
             name:     cookie_names.user_translate,
             data:     user_translate,
             samesite: 'Strict',
-            secure:   secure
+            secure:   secure,
+            expires:  365
           });
 
         }
