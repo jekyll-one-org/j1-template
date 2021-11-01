@@ -341,7 +341,7 @@ base_path:                              ""
 #   encoding:                           UTF-8
 #
 protocol:                               http
-host:                                   win10pc.ja.home
+host:                                   localhost
 port:                                   4000
 timezone:                               Europe/Berlin
 encoding:                               UTF-8

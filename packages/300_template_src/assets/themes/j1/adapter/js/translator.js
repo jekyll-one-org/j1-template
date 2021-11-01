@@ -28,6 +28,7 @@ regenerate:                             true
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment         = site.environment %}
+{% assign contentLanguage     = site.language %}
 {% assign blocks              = site.data.blocks %}
 {% assign modules             = site.data.modules %}
 {% assign template_config     = site.data.j1_config %}
@@ -38,10 +39,9 @@ regenerate:                             true
 {% assign translator_settings = modules.translator.settings %}
 {% assign tracking_enabled    = template_config.analytics.enabled %}
 
-
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign translator_options     = translator_defaults | merge: translator_settings %}
+{% assign translator_options  = translator_defaults | merge: translator_settings %}
 
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
@@ -396,8 +396,22 @@ j1.adapter['translator'] = (function (j1, window) {
         expires:  365
       });
 
+      // set content language
+      if (moduleOptions.contentLanguage === 'auto') {
+        srcLang = '{{contentLanguage}}';
+      } else {
+        srcLang = moduleOptions.contentLanguage;
+      }
+
+      // translation language MUST be DIFFERENT from content language
+      if (srcLang == selectedTranslationLanguage ) {
+        Cookies.remove('googtrans', { domain: cookie_domain });
+        Cookies.remove('googtrans', { domain: hostname });
+        Cookies.remove('googtrans');
+        location.reload(true);
+      }
+
       // set transCode settings
-      srcLang   = "{{site.language}}";
       destLang  = translation_language;
       transCode = '/' + srcLang + '/' + selectedTranslationLanguage;
 

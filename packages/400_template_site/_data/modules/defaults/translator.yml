@@ -34,6 +34,7 @@ defaults:
   reloadPageOnChange:                   true                                    # reload current page if user settings has been changed
 
   contentURL:                           /assets/data/translator                 # dialogs (modals) for all supported translators|languages
+  contentLanguage:                      auto                                    # auto | one of 'translationLanguages'
   dialogLanguage:                       auto                                    # auto|content|one of dialogLanguages
   dialogLanguages:                      [en,de]                                 # supported dialog (modal) languages, defaults to FIRST language defined
   cookieName:                           j1.user.translate                       # name of the user translation cookie (primary data)

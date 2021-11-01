@@ -317,8 +317,10 @@ function Translator(props) {
           } else {
             // set translation language for auto detection
             if (self.props.translationLanguage === 'auto') {
-              navigator_language    = navigator.language || navigator.userLanguage;
-              translation_language  = navigator_language.split('-')[0];
+              navigator_language   = navigator.language || navigator.userLanguage;
+              translation_language = navigator_language.split('-')[0];
+            } else {
+              translation_language = self.props.translationLanguage;
             }
 
             // set translation language for the dropdown
