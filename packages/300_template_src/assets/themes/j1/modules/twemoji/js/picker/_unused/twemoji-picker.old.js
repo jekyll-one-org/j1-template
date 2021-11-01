@@ -66,7 +66,7 @@
     },
     _initPicker: function () {
       var h = this;
-      h.$id = "#" + h.$el["0"].id;
+      h.$id = "#void" + h.$el["0"].id;
       h.$pickerHeigth = h.options.height.replace("px", "");
       h.$pickerHeigth = Number(h.$pickerHeigth);
       h.$wrapper = h.$el.wrap('<div class="twemoji-wrap"></div>').parent();

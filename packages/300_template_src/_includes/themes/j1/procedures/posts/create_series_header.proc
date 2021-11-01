@@ -82,7 +82,7 @@
                {% assign excerpt = post.excerpt %}
                {% assign excerpt_title = post.tagline|capitalize %}
              {% endif %}
-             {% capture list_tmp %}{{list}}{% if page.url == post.url %}<li class="current" style="width: calc(100% - 5px)"><a data-proofer-ignore href="#" style="width: calc(100% - 5px)">{{post.date|date: "%Y-%m-%d"}} · Part {{count}} · {{post.title}}</a>{% else %}<li style="width: calc(100% - 5px)"><a data-proofer-ignore href="{{site.baseurl}}{{post.url}}" style="width: calc(100% - 5px)">{{post.date|date: "%Y-%m-%d"}} · Part {{count}} · {{post.title}}</a>{% endif %}</li>{% endcapture %}
+             {% capture list_tmp %}{{list}}{% if page.url == post.url %}<li class="current" style="width: calc(100% - 5px)"><a data-proofer-ignore href="#void" style="width: calc(100% - 5px)">{{post.date|date: "%Y-%m-%d"}} · Part {{count}} · {{post.title}}</a>{% else %}<li style="width: calc(100% - 5px)"><a data-proofer-ignore href="{{site.baseurl}}{{post.url}}" style="width: calc(100% - 5px)">{{post.date|date: "%Y-%m-%d"}} · Part {{count}} · {{post.title}}</a>{% endif %}</li>{% endcapture %}
              {% assign list = list_tmp %}
            {% endif %}
          {% endfor %}

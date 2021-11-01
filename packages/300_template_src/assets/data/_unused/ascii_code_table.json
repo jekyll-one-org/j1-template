@@ -25,7 +25,7 @@
   },
   {
     "code": "35",   
-    "character": "#",
+    "character": "#void",
     "dec": "#35",
     "hex": "x23",
     "html": "num;",

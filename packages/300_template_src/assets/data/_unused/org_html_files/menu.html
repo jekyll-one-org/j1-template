@@ -184,9 +184,9 @@ regenerate:                             true
       <!-- [INFO   ] [j1.modules.navigator.menu.html  ] [submenu level 1 detected] -->
       <li class="dropdown nav-item">
         {% if menu.icon == null %}
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">{{ menu.item }}</a>
+          <a href="#void" class="nav-link dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">{{ menu.item }}</a>
         {% else %}
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"> <i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{menu.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i>{{ menu.item }}</a>
+          <a href="#void" class="nav-link dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"> <i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{menu.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i>{{ menu.item }}</a>
         {% endif %}
 
         <ul class="dropdown-menu {{nav_menu_position}} raised-z{{raised_level}}">
@@ -211,9 +211,9 @@ regenerate:                             true
             <!-- [INFO   ] [j1.modules.navigator.menu.html  ] [submenu level 2 (dropdown) detected ] -->
             <li class="dropdown nav-item nav-sub-item">
               {% if level_1.icon == null %}
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ level_1.title }}</a>
+                <a href="#void" class="dropdown-toggle" data-toggle="dropdown">{{ level_1.title }}</a>
               {% else %}
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{level_1.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{ level_1.title }}</a>
+                <a href="#void" class="dropdown-toggle" data-toggle="dropdown"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{level_1.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{ level_1.title }}</a>
               {% endif %}
 
               <ul class="dropdown-menu {{nav_menu_position}} raised-z{{raised_level}}">
@@ -238,9 +238,9 @@ regenerate:                             true
                     <!-- [INFO   ] [j1.modules.navigator.menu.html  ] [submenu level 3 detected (last level supported)] -->
                     <li class="dropdown nav-item nav-sub-item">
                       {% if level_2.icon == null %}
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ level_2.title }}</a>
+                        <a href="#void" class="dropdown-toggle" data-toggle="dropdown">{{ level_2.title }}</a>
                       {% else %}
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{level_2.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{ level_2.title }}</a>
+                        <a href="#void" class="dropdown-toggle" data-toggle="dropdown"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{level_2.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{ level_2.title }}</a>
                       {% endif %}
                       <ul class="dropdown-menu {{nav_menu_position}} raised-z{{raised_level}}">
                       {% for level_3 in level_2.dropdown %}
@@ -283,7 +283,7 @@ regenerate:                             true
       <!-- [INFO   ] [j1.modules.navigator.menu.html  ] [Calculated size of mm_columns: {{ columns_width_md }}] -->
 
       <li class="dropdown nav-item megamenu-fw">
-        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">{{menu.item}} </a>
+        <a href="#void" class="nav-link dropdown-toggle" data-toggle="dropdown">{{menu.item}} </a>
         <ul class="dropdown-menu megamenu-content raised-z{{raised_level}}" style="max-height: {{nav_menu_options.max_height}}px; overflow-x: hidden; overflow-y: auto;" role="menu">
           <li>
             <div class="row">
@@ -352,7 +352,7 @@ regenerate:                             true
         {% when 'auth_client' %}
           <!-- [INFO   ] [j1.modules.navigator.menu.html  ] [found menu-type: auth_client] -->
           <li id="menuBarSignInOut" class="dropdown nav-item">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">{{menu.item}} </a>
+            <a href="#void" class="nav-link dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">{{menu.item}} </a>
 
             {% if nav_menu_animation %}
             <!-- jadams, 2017-11-24: (1) ul class="dropdown-menu {{nav_menu_position}} raised-z{{raised_level}}" style="opacity: 1; display: none;" -->
@@ -369,7 +369,7 @@ regenerate:                             true
                 <!-- [INFO   ] [j1.modules.navigator.menu.html  ] [START: check signin] -->
                 {% if item.mode == 'signin' %}
                   <li class="dropdown-item">
-                    <a href="#" data-toggle="modal" data-target="#modalOmniSignIn"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{item.icon}} {{nav_menu_icon_size}}" style="color:{{nav_menu_icon_color}}"></i>{{item.title}}</a>
+                    <a href="#void" data-toggle="modal" data-target="#modalOmniSignIn"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{item.icon}} {{nav_menu_icon_size}}" style="color:{{nav_menu_icon_color}}"></i>{{item.title}}</a>
                   </li>
                   {% assign item_found = 'true' %}
                 {% endif %}
@@ -378,7 +378,7 @@ regenerate:                             true
                 <!-- [INFO   ] [j1.modules.navigator.menu.html  ] [START: check signout] -->
                 {% if item.mode == 'signout' %}
                   <li class="dropdown-item">
-                    <a href="#" data-toggle="modal" data-target="#modalOmniSignOut"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{item.icon}} {{nav_menu_icon_size}}" style="color:{{nav_menu_icon_color}}"></i>{{item.title}}</a>
+                    <a href="#void" data-toggle="modal" data-target="#modalOmniSignOut"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{item.icon}} {{nav_menu_icon_size}}" style="color:{{nav_menu_icon_color}}"></i>{{item.title}}</a>
                   </li>
                   {% assign item_found = 'true' %}
                 {% endif %}
@@ -388,9 +388,9 @@ regenerate:                             true
                 <!-- [FATAL  ] [j1.modules.navigator.menu.html  ] [no valid menu item config found] -->
                   <li class="dropdown-item">
                     {% if item.title %}
-                      <a href="#" >Invalid: {{item.title}}</a>
+                      <a href="#void" >Invalid: {{item.title}}</a>
                     {% else %}
-                      <a href="#" >Item invalid</a>
+                      <a href="#void" >Item invalid</a>
                     {% endif %}
                   </li>
                 {% endif %}
@@ -408,7 +408,7 @@ regenerate:                             true
           {% if themer_options.enabled %}
             <!-- [INFO   ] [j1.modules.navigator.menu.html  ] [found menu-type: theme_select] -->
             <li class="dropdown nav-item">
-              <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">{{menu.item}} </a>
+              <a href="#void" class="nav-link dropdown-toggle" data-toggle="dropdown" data-hover="dropdown">{{menu.item}} </a>
               {% if nav_menu_animation %}
               <ul class="dropdown-menu raised-z{{raised_level}}">
               <!-- ul class="dropdown-menu data-in="{{nav_menu_animation}}" data-out="{{nav_menu_animation}}" -->
@@ -420,7 +420,7 @@ regenerate:                             true
                   <!-- check for locally loaded J1 Themes -->
                   {% if item.local_themes and item.local_themes == 'enabled' %}
                     <li class="dropdown nav-item nav-sub-item">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i class="dropdown {{nav_menu_icon_family}} {{nav_menu_icon_family}}-{{item.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{item.title}}</a>
+                      <a href="#void" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i class="dropdown {{nav_menu_icon_family}} {{nav_menu_icon_family}}-{{item.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{item.title}}</a>
                       <ul id="local_themes" class="dropdown-menu raised-z{{raised_level}}"></ul>
                     </li>
                     {% assign item_found = 'true' %}
@@ -428,7 +428,7 @@ regenerate:                             true
                   <!-- check for remotely loaded (BootSwatch) Themes -->
                   {% if item.bootswatch_themes and item.bootswatch_themes == 'enabled' %}
                     <li class="dropdown nav-item nav-sub-item">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i class="dropdown {{nav_menu_icon_family}} {{nav_menu_icon_family}}-{{item.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{item.title}}</a>
+                      <a href="#void" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"><i class="dropdown {{nav_menu_icon_family}} {{nav_menu_icon_family}}-{{item.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{item.title}}</a>
                       <ul id="remote_themes" class="dropdown-menu scrollable-menu raised-z{{raised_level}}"></ul>
                     </li>
                     {% assign item_found = 'true' %}
@@ -443,9 +443,9 @@ regenerate:                             true
                     {% if item_found == 'false' %}
                     <li>
                       {% if item.title %}
-                        <a href="#" >Invalid: {{item.title}}</a>
+                        <a href="#void" >Invalid: {{item.title}}</a>
                       {% else %}
-                        <a href="#" >Item invalid</a>
+                        <a href="#void" >Item invalid</a>
                       {% endif %}
                     </li>
                   {% endif %} <!-- end fallback -->

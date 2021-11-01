@@ -137,9 +137,9 @@
   {% if brand_position == "left" %}
     <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ place brand image to the: left ] -->
     {% if site.brand.image %}
-      <a href="#" id="navbar-brand" class="navbar-brand"> <img src="{{ site.data.j1_config.image_path }}/{{ site.brand.image }}" height="{{ site.brand.image_height }}" alt="{{ site.brand.text }}"></a>
+      <a href="#void" id="navbar-brand" class="navbar-brand"> <img src="{{ site.data.j1_config.image_path }}/{{ site.brand.image }}" height="{{ site.brand.image_height }}" alt="{{ site.brand.text }}"></a>
     {% else %}
-      <a href="#" id="navbar-brand" class="navbar-brand"> <b><font color="{{site.brand.text_color}}">{{ site.brand.text }}</font></b></a>
+      <a href="#void" id="navbar-brand" class="navbar-brand"> <b><font color="{{site.brand.text_color}}">{{ site.brand.text }}</font></b></a>
     {% endif %}
     <button id="navbar-toggler" type="button" class="navigator navbar-toggler animated fadeIn" data-toggle="collapse" data-target="#{{nav_menu_id}}" aria-controls="{{nav_menu_id}}" aria-expanded="false" aria-label="Toggle navigation">
       <i class="mdi mdi-menu mdi-48px"></i>
@@ -147,9 +147,9 @@
   {% elsif brand_position == "right" %}
     <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ place brand to the: right ] -->
     {% if site.brand.image %}
-      <a href="#" id="navbar-brand" class="navbar-brand"> <img src="{{ site.data.j1_config.image_path }}/{{ site.brand.image }}" height="{{ site.brand.image_height }}" alt="{{ site.brand.text }}"></a>
+      <a href="#void" id="navbar-brand" class="navbar-brand"> <img src="{{ site.data.j1_config.image_path }}/{{ site.brand.image }}" height="{{ site.brand.image_height }}" alt="{{ site.brand.text }}"></a>
     {% else %}
-      <a href="#" id="navbar-brand" class="navbar-brand"> <b><font color="{{site.brand.text_color}}">{{ site.brand.text }}</font></b></a>
+      <a href="#void" id="navbar-brand" class="navbar-brand"> <b><font color="{{site.brand.text_color}}">{{ site.brand.text }}</font></b></a>
     {% endif %}
     <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ place mobile menu button to the: left ] -->
     <button id="mmenu-button" type="button" class="navigator navbar-toggler animated fadeIn" data-toggle="collapse" data-target="#{{nav_menu_id}}" aria-controls="{{nav_menu_id}}" aria-expanded="false" aria-label="Toggle navigation">
@@ -158,9 +158,9 @@
   {% else %}
     <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ place brand to default position: left ] -->
     {% if site.brand.image %}
-      <a href="#" id="navbar-brand" class="navbar-brand"> <img src="{{ site.data.j1_config.image_path }}/{{ site.brand.image }}" height="{{ site.brand.image_height }}" alt="{{ site.brand.text }}"></a>
+      <a href="#void" id="navbar-brand" class="navbar-brand"> <img src="{{ site.data.j1_config.image_path }}/{{ site.brand.image }}" height="{{ site.brand.image_height }}" alt="{{ site.brand.text }}"></a>
     {% else %}
-      <a href="#" id="navbar-brand" class="navbar-brand"> <b><font color="{{site.brand.text_color}}">{{ site.brand.text }}</font></b></a>
+      <a href="#void" id="navbar-brand" class="navbar-brand"> <b><font color="{{site.brand.text_color}}">{{ site.brand.text }}</font></b></a>
     {% endif %}
     <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ place menu toggler to the: right ] -->
     <button id="navbar-toggler" type="button" class="navigator navbar-toggler animated fadeIn" data-toggle="collapse" data-target="#{{nav_menu_id}}" aria-controls="{{nav_menu_id}}" aria-expanded="false" aria-label="Toggle navigation">

@@ -126,7 +126,7 @@
                   <a class="page-link" href="{{ paginator.previous_page_path }}#article_navigator">Neuere Beiträge</a>
               </li>
             {% else %}
-                <li class="page-item disabled"><a href="#" class="page-link">Erste Seite</a></li>
+                <li class="page-item disabled"><a href="#void" class="page-link">Erste Seite</a></li>
             {% endif %}
 
             {% if paginator.next_page %}
@@ -134,7 +134,7 @@
                 <a class="page-link" href="{{ paginator.next_page_path }}#article_navigator">Ältere Beiträge</a>
             </li>
             {% else %}
-                <li class="page-item disabled"><a href="#" class="page-link">Letzte Seite</a></li>
+                <li class="page-item disabled"><a href="#void" class="page-link">Letzte Seite</a></li>
             {% endif %}
           </ul>
         </nav>

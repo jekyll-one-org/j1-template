@@ -157,9 +157,9 @@ site_category_word_list:    {{site_category_word_list | debug}}
         {% comment %}
         ------------------------------------------------------------------------
         {% if year != nyear %}
-        <a href="#" id="{{post.date|localize: "%Y"}}">
+        <a href="#void" id="{{post.date|localize: "%Y"}}">
         {% else %}
-        <a href="#" id="{{post.date|localize: "%Y-%m" }}">
+        <a href="#void" id="{{post.date|localize: "%Y-%m" }}">
         {% endif %}
         ------------------------------------------------------------------------ {% endcomment %}
         <i class="mdi mdi-calendar-blank"></i>

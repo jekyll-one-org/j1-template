@@ -1742,7 +1742,7 @@ color.fn = jQuery.extend( color.prototype, {
 			rgba.push( ~~( alpha * 255 ) );
 		}
 
-		return "#" + jQuery.map( rgba, function( v ) {
+		return "#void" + jQuery.map( rgba, function( v ) {
 
 			// Default to 0 when nulls exist
 			v = ( v || 0 ).toString( 16 );
@@ -8117,7 +8117,7 @@ $.extend( Datepicker.prototype, {
 			inst = $.datepicker._getInst( $target[ 0 ] );
 
 		if ( ( ( $target[ 0 ].id !== $.datepicker._mainDivId &&
-				$target.parents( "#" + $.datepicker._mainDivId ).length === 0 &&
+				$target.parents( "#void" + $.datepicker._mainDivId ).length === 0 &&
 				!$target.hasClass( $.datepicker.markerClassName ) &&
 				!$target.closest( "." + $.datepicker._triggerClass ).length &&
 				$.datepicker._datepickerShowing && !( $.datepicker._inDialog && $.blockUI ) ) ) ||
@@ -8768,7 +8768,7 @@ $.extend( Datepicker.prototype, {
 	 */
 	_attachHandlers: function( inst ) {
 		var stepMonths = this._get( inst, "stepMonths" ),
-			id = "#" + inst.id.replace( /\\\\/g, "\\" );
+			id = "#void" + inst.id.replace( /\\\\/g, "\\" );
 		inst.dpDiv.find( "[data-handler]" ).map( function() {
 			var handler = {
 				prev: function() {
@@ -9235,7 +9235,7 @@ $.fn.datepicker = function( options ) {
 	}
 
 	/* Append datepicker main container to body if not exist. */
-	if ( $( "#" + $.datepicker._mainDivId ).length === 0 ) {
+	if ( $( "#void" + $.datepicker._mainDivId ).length === 0 ) {
 		$( "body" ).append( $.datepicker.dpDiv );
 	}
 
@@ -17730,7 +17730,7 @@ $.widget( "ui.tabs", {
 				// If the tab doesn't already have aria-controls,
 				// generate an id by using a throw-away element
 				panelId = tab.attr( "aria-controls" ) || $( {} ).uniqueId()[ 0 ].id;
-				selector = "#" + panelId;
+				selector = "#void" + panelId;
 				panel = that.element.find( selector );
 				if ( !panel.length ) {
 					panel = that._createPanel( panelId );
@@ -18176,7 +18176,7 @@ $.widget( "ui.tabs", {
 
 	_getPanelForTab: function( tab ) {
 		var id = $( tab ).attr( "aria-controls" );
-		return this.element.find( this._sanitizeSelector( "#" + id ) );
+		return this.element.find( this._sanitizeSelector( "#void" + id ) );
 	}
 } );
 
@@ -18661,7 +18661,7 @@ $.widget( "ui.tooltip", {
 
 			// Remove immediately; destroying an open tooltip doesn't use the
 			// hide animation
-			$( "#" + id ).remove();
+			$( "#void" + id ).remove();
 
 			// Restore the title
 			if ( element.data( "ui-tooltip-title" ) ) {

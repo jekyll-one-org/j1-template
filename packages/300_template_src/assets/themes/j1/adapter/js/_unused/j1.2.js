@@ -1077,7 +1077,7 @@ var j1 = (function () {
           $(window).scrollTop($(window).scrollTop()-1);
         } // END if anchor_id
       } else if (anchor_id === '#') {
-        logger.info('bound click event to "#", suppress default action');
+        logger.info('bound click event to "#void", suppress default action');
         $(window).scrollTop($(window).scrollTop()+1);
         $(window).scrollTop($(window).scrollTop()-1);
         return false;

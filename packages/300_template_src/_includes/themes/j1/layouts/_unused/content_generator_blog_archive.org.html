@@ -141,7 +141,7 @@
                           <a class="page-link" href="{{ paginator.previous_page_path }}#article_navigator">Newer Posts</a>
                       </li>
                     {% else %}
-                        <li class="page-item disabled"><a href="#" class="page-link">First Page</a></li>
+                        <li class="page-item disabled"><a href="#void" class="page-link">First Page</a></li>
                     {% endif %}
 
                     {% if paginator.next_page %}
@@ -149,7 +149,7 @@
                         <a class="page-link" href="{{ paginator.next_page_path }}#article_navigator">Older Posts</a>
                     </li>
                     {% else %}
-                        <li class="page-item disabled"><a href="#" class="page-link">Last Page</a></li>
+                        <li class="page-item disabled"><a href="#void" class="page-link">Last Page</a></li>
                     {% endif %}
                   </ul>
                 </nav>
@@ -164,22 +164,22 @@
                     {% if paginator.previous_page %}
                       {% if paginator.previous_page > 1 %}
                         {% capture page_link %}{{paginator.previous_page_path}}#previewer{% endcapture %}
-                        <li class="page-item"><a href="#" class="page-link" href="{{page_link}}" title="Previous page">Previous</a></li>
+                        <li class="page-item"><a href="#void" class="page-link" href="{{page_link}}" title="Previous page">Previous</a></li>
                       {% else %}
                         {% comment %} Back to FIRST page {% endcomment %}
                         {% assign navigator = page.url | remove_first:'page2/index.html' %}
                         {% capture page_link %}{{navigator}}#previewer{% endcapture %}
-                        <li class="page-item"><a href="#" class="page-link" href="{{page_link}}" title="First page">Previous</a></li>
+                        <li class="page-item"><a href="#void" class="page-link" href="{{page_link}}" title="First page">Previous</a></li>
                       {% endif %}
                     {% else %}
-                        <li class="page-item disabled"><a href="#" class="page-link">First</a></li>
+                        <li class="page-item disabled"><a href="#void" class="page-link">First</a></li>
                     {% endif %}
 
                     {% if paginator.next_page %}
                         {% capture page_link %}{{paginator.next_page_path}}#previewer{% endcapture %}
                         <li class="page-item"><a class="page-link" href="{{page_link}}" title="Next page">Next</a></li>
                     {% else %}
-                        <li class="page-item disabled"><a href="#" class="page-link">Last</a>
+                        <li class="page-item disabled"><a href="#void" class="page-link">Last</a>
                     {% endif %}
                   </ul>
                 </nav>

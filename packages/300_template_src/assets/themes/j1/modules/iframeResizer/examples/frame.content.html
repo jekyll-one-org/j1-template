@@ -22,22 +22,22 @@
 
   <body>
     <b>iFrame</b>
-    <a href="#" onclick="$('p:eq(0)').toggle();return false;">Toggle content</a>
+    <a href="#void" onclick="$('p:eq(0)').toggle();return false;">Toggle content</a>
     &nbsp;
     <a
-      href="#"
+      href="#void"
       onclick="if ('parentIFrame' in window) window.parentIFrame.size(450);return false;"
       >Size(450)</a
     >
     &nbsp;
     <a
-      href="#"
+      href="#void"
       onclick="if ('parentIFrame' in window) window.parentIFrame.autoResize(true);return false;"
       >autoResize(true)</a
     >
 
     <a
-      href="#"
+      href="#void"
       onclick="if ('parentIFrame' in window) window.parentIFrame.autoResize(false);return false;"
       >autoResize(false)</a
     >
@@ -51,13 +51,13 @@
     <a href="frame.absolute.html">Absolute Position</a>
     &nbsp;
     <a
-      href="#"
+      href="#void"
       onclick="if ('parentIFrame' in window) window.parentIFrame.sendMessage('Hello from the iFrame');return false;"
       >Send Message</a
     >
     &nbsp;
     <a
-      href="#"
+      href="#void"
       onclick="if ('parentIFrame' in window) window.parentIFrame.close();return false;"
       >Close</a
     >

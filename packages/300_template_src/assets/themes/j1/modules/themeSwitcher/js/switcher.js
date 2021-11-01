@@ -309,7 +309,7 @@
           }
           var li = $('<li />')
               .attr('class',cssClass)
-              .append('<a href="#"><i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: ' +iconColor+ '"></i>' +value.name+ '</a>')
+              .append('<a href="#void"><i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: ' +iconColor+ '"></i>' +value.name+ '</a>')
               .on('click', function () {
                 if (settings.loadFromBootswatch) {
                   base.switchTheme(value.name, value.css);

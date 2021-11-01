@@ -429,8 +429,8 @@ carousel:
                                       cat-3.jpg, cat-4.jpg
                                     ]
       links:                        [
-                                      "#", "#",
-                                      "#", "#"
+                                      "#void", "#void",
+                                      "#void", "#void"
                                     ]
       lb_caption:                   [
                                       You see cat no 1,
@@ -465,8 +465,8 @@ carousel:
                                       000_6876412479_6268c6e2aa_b.jpg, 000_6880502467_d4b3c4b2a8_b.jpg
                                     ]
       links:                        [
-                                      "#", "#", "#", "#",
-                                      "#", "#", "#", "#"
+                                      "#void", "#void", "#void", "#void",
+                                      "#void", "#void", "#void", "#void"
                                     ]
       options:
         autoPlay:                   3000

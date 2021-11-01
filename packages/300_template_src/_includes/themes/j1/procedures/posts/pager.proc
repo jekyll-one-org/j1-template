@@ -116,7 +116,7 @@
     {% if page.next %}
       <li class="page-item"><a class="page-link" href="{{base_path}}{{page.next.url}}" title="{{page.next.title}}">{{pager_next_button_text}}</a></li>
     {% else %}
-      <li class="page-item disabled"><a class="page-link" href="#">{{pager_last_button_text}}</a></li>
+      <li class="page-item disabled"><a class="page-link" href="#void">{{pager_last_button_text}}</a></li>
     {% endif %}
 
   </ul>

@@ -136,7 +136,7 @@
                     <a class="page-link" href="{{ paginator.previous_page_path }}#article_navigator">{{paginator_button_newer_posts_text}}</a>
                 </li>
               {% else %}
-                  <li class="page-item disabled"><a href="#" class="page-link">{{paginator_button_first_post_text}}</a></li>
+                  <li class="page-item disabled"><a href="#void" class="page-link">{{paginator_button_first_post_text}}</a></li>
               {% endif %}
 
               {% if paginator.next_page %}
@@ -144,7 +144,7 @@
                   <a class="page-link" href="{{ paginator.next_page_path }}#article_navigator">{{paginator_button_older_posts_text}}</a>
               </li>
               {% else %}
-                  <li class="page-item disabled"><a href="#" class="page-link">{{paginator_button_last_post_text}}</a></li>
+                  <li class="page-item disabled"><a href="#void" class="page-link">{{paginator_button_last_post_text}}</a></li>
               {% endif %}
             </ul>
           </nav>

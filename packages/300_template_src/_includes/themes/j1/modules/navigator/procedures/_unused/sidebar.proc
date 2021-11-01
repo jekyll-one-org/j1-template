@@ -65,7 +65,7 @@
 
 <!-- [INFO   ] [j1.modules.navigator.sidebar.proc     ] [Start processing: sidebar] -->
 <div id="mod_sidebar" class="side">
-  <a href="#" class="close-side"><i class="{{icon_family}} {{icon_family}}-{{close_icon}} mdi-48px" {{icon_color}}></i></a>
+  <a href="#void" class="close-side"><i class="{{icon_family}} {{icon_family}}-{{close_icon}} mdi-48px" {{icon_color}}></i></a>
 
   {% for boxes in sidebar_config.boxes %}
     {% for box in boxes %}

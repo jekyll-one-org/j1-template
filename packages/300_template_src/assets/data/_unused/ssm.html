@@ -124,12 +124,12 @@ regenerate:                             true
       <li class="ssm-share-btn ssm-btn">
         {% if menu.icon == null %}
           <!-- [INFO   ] [j1.modules.ssm_menu.html  ] [no menu icon found] -->
-          <a href="#"><span class="ssm-btn-text">{{menu.item}}</span>>
+          <a href="#void"><span class="ssm-btn-text">{{menu.item}}</span>>
             <i class="{{ssm_menu_icon_family}} {{ssm_menu_icon_family}}-{{menu.icon}} {{menu.icon_classes}} {{ssm_menu_icon_color}} {{ssm_menu_icon_size}} mt-2 ml-2 mr-2"></i>
             <span class="ssm-btn-text">{{menu.item}}</span>
           </a>
         {% else %}
-          <a href="#"> <i class="{{ssm_menu_icon_family}} {{ssm_menu_icon_family}}-{{menu.icon}} {{menu.icon_classes}} {{ssm_menu_icon_color}} {{ssm_menu_icon_size}} mt-2 ml-2 mr-2"></i><span class="ssm-btn-text">{{menu.item}}</span></a>
+          <a href="#void"> <i class="{{ssm_menu_icon_family}} {{ssm_menu_icon_family}}-{{menu.icon}} {{menu.icon_classes}} {{ssm_menu_icon_color}} {{ssm_menu_icon_size}} mt-2 ml-2 mr-2"></i><span class="ssm-btn-text">{{menu.item}}</span></a>
         {% endif %}
         <div class="ssm-sub-menu">
           <ul>

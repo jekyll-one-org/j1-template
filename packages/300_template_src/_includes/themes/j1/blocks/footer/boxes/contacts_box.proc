@@ -48,7 +48,7 @@
     <li>
       <i class="radius-3x fa fa-globe"></i>
       <p><a href="mailto:{{ mail }}">{{ mail }}</a></p>
-      <p><a href="#">{{ www }}</a></p>
+      <p><a href="#void">{{ www }}</a></p>
     </li>
     {% endif %}
   </ul>

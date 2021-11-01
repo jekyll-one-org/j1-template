@@ -196,10 +196,10 @@
           <div class="calendar-footer mt-2">
             <ul class="calendar-list-unstyled list-inline blog-info">
               <li><i class="fa fa-clock-o"></i> {{ post.date | date: "%B %e, %Y" }} </li>
-              <!-- <li><i class="fa fa-comments-o"></i> <a href="#"> 7 Comments</a></li> -->
-              <li><a href="#"><i class="fa fa-comments-o"></i> 7 Comments</a></li>
+              <!-- <li><i class="fa fa-comments-o"></i> <a href="#void"> 7 Comments</a></li> -->
+              <li><a href="#void"><i class="fa fa-comments-o"></i> 7 Comments</a></li>
             </ul>
-              <a class="likes" href="#"><i class="fa fa-heart"></i> 239</a>
+              <a class="likes" href="#void"><i class="fa fa-heart"></i> 239</a>
           </div>
 
         </div>

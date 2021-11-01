@@ -122,9 +122,9 @@ regenerate:                             true
       <!-- [INFO   ] [j1.modules.mmenu.html  ] [submenu level 1 detected] -->
       <li>
         {% if menu.icon == null %}
-          <a href="#">{{menu.item}}</a>
+          <a href="#void">{{menu.item}}</a>
         {% else %}
-          <a href="#"> <i class="{{icon_style}} {{icon_family}}-{{menu.icon}} {{icon_size}} {{icon_color}} mr-2"></i>{{menu.item}}</a>
+          <a href="#void"> <i class="{{icon_style}} {{icon_family}}-{{menu.icon}} {{icon_size}} {{icon_color}} mr-2"></i>{{menu.item}}</a>
         {% endif %}
 
         <ul>
@@ -149,9 +149,9 @@ regenerate:                             true
             <!-- [INFO   ] [j1.modules.mmenu.html  ] [submenu level 2 (dropdown) detected] -->
             <li>
               {% if level_1.icon == null %}
-                <a href="#">{{level_1.title}}</a>
+                <a href="#void">{{level_1.title}}</a>
               {% else %}
-                <a href="#"><i class="{{icon_style}} {{icon_family}}-{{level_1.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_1.title}}</a>
+                <a href="#void"><i class="{{icon_style}} {{icon_family}}-{{level_1.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_1.title}}</a>
               {% endif %}
 
               <ul>
@@ -175,9 +175,9 @@ regenerate:                             true
                     <!-- [INFO   ] [j1.modules.mmenu.html  ] [submenu level 3 detected (last level supported)] -->
                     <li>
                       {% if level_2.icon == null %}
-                        <a href="#" >{{level_2.title}}</a>
+                        <a href="#void" >{{level_2.title}}</a>
                       {% else %}
-                        <a href="#" ><i class="{{icon_style}} {{icon_family}}-{{level_2.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_2.title}}</a>
+                        <a href="#void" ><i class="{{icon_style}} {{icon_family}}-{{level_2.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_2.title}}</a>
                       {% endif %}
 
                       <ul>
@@ -221,7 +221,7 @@ regenerate:                             true
       <!-- [INFO   ] [j1.modules.mmenu.html  ] [Calculated size of mm_columns: {{columns_width_md}}] -->
 
       <li>
-        <a href="#" >{{menu.item}} </a>
+        <a href="#void" >{{menu.item}} </a>
         <ul>
           <li>
             <div class="row">
@@ -290,7 +290,7 @@ regenerate:                             true
         {% when 'aaaaaaauth_client' %}
           <!-- [INFO   ] [j1.modules.mmenu.html  ] [found menu-type: auth_client] -->
           <li id="menuBarSignInOut" class="dropdown nav-item">
-            <a href="#">{{menu.item}} </a>
+            <a href="#void">{{menu.item}} </a>
 
             <ul>
               {% assign item_found = 'false' %}
@@ -299,7 +299,7 @@ regenerate:                             true
                 <!-- [INFO   ] [j1.modules.mmenu.html  ] [START: check signin] -->
                 {% if item.mode == 'signin' %}
                   <li>
-                    <a href="#" data-toggle="modal" data-target="#modalOmniSignIn"><i class="{{icon_style}} {{icon_family}}-{{item.icon}} {{icon_size}}"></i>{{item.title}}</a>
+                    <a href="#void" data-toggle="modal" data-target="#modalOmniSignIn"><i class="{{icon_style}} {{icon_family}}-{{item.icon}} {{icon_size}}"></i>{{item.title}}</a>
                   </li>
                   {% assign item_found = 'true' %}
                 {% endif %}
@@ -308,7 +308,7 @@ regenerate:                             true
                 <!-- [INFO   ] [j1.modules.mmenu.html  ] [START: check signout] -->
                 {% if item.mode == 'signout' %}
                   <li>
-                    <a href="#" data-toggle="modal" data-target="#modalOmniSignOut"><i class="{{icon_style}} {{icon_family}}-{{item.icon}} {{icon_size}}"></i>{{item.title}}</a>
+                    <a href="#void" data-toggle="modal" data-target="#modalOmniSignOut"><i class="{{icon_style}} {{icon_family}}-{{item.icon}} {{icon_size}}"></i>{{item.title}}</a>
                   </li>
                   {% assign item_found = 'true' %}
                 {% endif %}
@@ -318,9 +318,9 @@ regenerate:                             true
                 <!-- [FATAL  ] [j1.modules.mmenu.html  ] [no valid menu item config found] -->
                   <li>
                     {% if item.title %}
-                      <a href="#" >Invalid: {{item.title}}</a>
+                      <a href="#void" >Invalid: {{item.title}}</a>
                     {% else %}
-                      <a href="#" >Item invalid</a>
+                      <a href="#void" >Item invalid</a>
                     {% endif %}
                   </li>
                 {% endif %}
@@ -338,7 +338,7 @@ regenerate:                             true
           {% if themer_options.enabled %}
             <!-- [INFO   ] [j1.modules.mmenu.html  ] [found menu-type: theme_select] -->
             <li>
-              <a href="#">{{menu.item}} </a>
+              <a href="#void">{{menu.item}} </a>
               {% if nav_menu_animation %}
               <ul>
               <!-- ul class="dropdown-menu data-in="{{nav_menu_animation}}" data-out="{{nav_menu_animation}}" -->
@@ -350,7 +350,7 @@ regenerate:                             true
                   <!-- check for locally loaded J1 Themes -->
                   {% if item.local_themes and item.local_themes == 'enabled' %}
                     <li>
-                      <a href="#"><i class="{{icon_family}} {{icon_family}}-{{item.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{item.title}}</a>
+                      <a href="#void"><i class="{{icon_family}} {{icon_family}}-{{item.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{item.title}}</a>
                       <ul id="local_themes_mmenu"></ul>
                     </li>
                     {% assign item_found = 'true' %}
@@ -358,7 +358,7 @@ regenerate:                             true
                   <!-- check for remotely loaded (BootSwatch) Themes -->
                   {% if item.bootswatch_themes and item.bootswatch_themes == 'enabled' %}
                     <li>
-                      <a href="#"><i class="{{icon_family}} {{icon_family}}-{{item.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{item.title}}</a>
+                      <a href="#void"><i class="{{icon_family}} {{icon_family}}-{{item.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{item.title}}</a>
                       <ul id="remote_themes_mmenu"></ul>
                     </li>
                     {% assign item_found = 'true' %}
@@ -373,9 +373,9 @@ regenerate:                             true
                     {% if item_found == 'false' %}
                     <li>
                       {% if item.title %}
-                        <a href="#" >Invalid: {{item.title}}</a>
+                        <a href="#void" >Invalid: {{item.title}}</a>
                       {% else %}
-                        <a href="#" >Item invalid</a>
+                        <a href="#void" >Item invalid</a>
                       {% endif %}
                     </li>
                   {% endif %} <!-- end fallback -->

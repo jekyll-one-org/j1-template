@@ -79,7 +79,7 @@
         // initialize infinite scroll
         if ( options.type === 'infiniteScroll') {
           logger.info('\n' + 'processing mode: infiniteScroll');
-          logger.info('\n' + 'loading items from path: ' + options.path + "#");
+          logger.info('\n' + 'loading items from path: ' + options.path + "#void");
           logger.info('\n' + 'monitoring element set to: ' + this.scroller);
           this.registerScrollEvent(options);
         }

@@ -203,9 +203,9 @@ j1.adapter['bs_gallery'] = (function (j1, window) {
                                 'data-src="' +img+ '" ' +
                                 'data-sub-html="' +caption+ '">' +
                               {% if thumb_bordered %}
-                              '<a href="#" class="lg-thumbnail-{{container_id}}">' +
+                              '<a href="#void" class="lg-thumbnail-{{container_id}}">' +
                               {% else %}
-                              '<a href="#" class="lg-thumbnail lg-thumbnail-{{container_id}}">' +
+                              '<a href="#void" class="lg-thumbnail lg-thumbnail-{{container_id}}">' +
                               {% endif %}
                                 '<img class="img-fluid j1-lg-magnifier" src="' +img+ '">' +
                               '</a>' +
@@ -262,9 +262,9 @@ j1.adapter['bs_gallery'] = (function (j1, window) {
                 content += '    data-src="' +video+ '">' + '\n';
                {% endif %}
                {% if thumb_bordered %}
-                content += '    <a href="#" class="lg-thumbnail-{{container_id}}">' + '\n';
+                content += '    <a href="#void" class="lg-thumbnail-{{container_id}}">' + '\n';
                {% else %}
-                content += '    <a href="#" class="lg-thumbnail lg-thumbnail-{{container_id}}">' + '\n';
+                content += '    <a href="#void" class="lg-thumbnail lg-thumbnail-{{container_id}}">' + '\n';
                {% endif %}
                 content += '      <img class="img-gallery" src="' +poster+ '">' + '\n';
                 content += '      <img class="img-overlay" src="' +play_button+ '">' + '\n';
