@@ -73,6 +73,7 @@ issues for private or professional use.
 * Full-text search engine included (Lunr)
 * Blog Post navigation included
 * GDPR compatible cookie consent module included
+* Translator module (Google, Deepl) included
 * Clipboard module included
 * Floating Action Buttons included
 * Navigation modules included
