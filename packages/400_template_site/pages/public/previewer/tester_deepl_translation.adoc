@@ -12,6 +12,8 @@ description: >
 categories:                             [ Previewer ]
 tags:                                   [ Translator, Deepl ]
 
+compress:                               false
+
 comments:                               false
 fam_menu_id:                            page_ctrl_simple
 

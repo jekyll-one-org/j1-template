@@ -589,6 +589,7 @@ defaults:
     values:
       layout:                           page
       author:                           J1 Team
+      compress:                         true
 
       robots:
         index:                          true
@@ -633,6 +634,7 @@ defaults:
     values:
       layout:                           post
       author:                           J1 Team
+      compress:                         true
 
       robots:
         index:                          true
@@ -677,6 +679,7 @@ defaults:
     values:
       layout:                           post
       author:                           J1 Team
+      compress:                         true
 
       robots:
         index:                          true
@@ -719,6 +722,7 @@ defaults:
     values:
       layout:                           page
       sitemap:                          false
+      compress:                         true
 
       robots:
         index:                          false
