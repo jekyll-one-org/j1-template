@@ -308,45 +308,36 @@ function Translator(props) {
         // on 'shown'
         // ---------------------------------------------------------------------
         self.$modal.on('shown.bs.modal', function () {
-          var msDropdownJSON;
-          var dependencies_met_msDropdownJSON_loaded;
+          var msDropdownJSON = document.getElementById('dropdownJSON').msDropdown;
 
-          // found msDropdownJSON loaded slow on some PC 
-          dependencies_met_msDropdownJSON_loaded = setInterval (function () {
-            if (typeof document.getElementById('dropdownJSON').msDropdown !== 'undefined') {
-              msDropdownJSON = document.getElementById('dropdownJSON').msDropdown;
-              if (!msDropdownJSON.length) {
-              	// critical error
-              	logger.error('\n' + 'no msDropdown found in translation dialog');
-              	self.$modal.hide();
-              } else {
-              	// set translation language for auto detection
-              	if (self.props.translationLanguage === 'auto') {
-              	  navigator_language   = navigator.language || navigator.userLanguage;
-              	  translation_language = navigator_language.split('-')[0];
-              	} else {
-              	  translation_language = self.props.translationLanguage;
-              	}
-
-              	// set translation language for the dropdown
-              	msDropdownJSON.selectedIndex = $('#dropdownJSON option[value=' +  translation_language + ']').index();;
-
-              	// disable translation language selection
-              	if (self.props.disableLanguageSelector) {
-              	  msDropdownJSON.disabled = true;
-              	}
-
-              	$('#dropdownJSON').show();
-
-              	// jadams, 2021-10-18: added stop scrolling on the body,
-              	// if modal is OPEN
-              	$('body').addClass('stop-scrolling');
-
-                logger.info('\n' + 'msDropdown successfully loaded in translation dialog');
-                clearInterval(dependencies_met_msDropdownJSON_loaded);
-              }
+          if (!msDropdownJSON.length) {
+            // critical error
+            logger.error('\n' + 'no msDropdown found in translation dialog');
+            self.$modal.hide();
+          } else {
+            // set translation language for auto detection
+            if (self.props.translationLanguage === 'auto') {
+              navigator_language   = navigator.language || navigator.userLanguage;
+              translation_language = navigator_language.split('-')[0];
+            } else {
+              translation_language = self.props.translationLanguage;
             }
-          }, 25);
+
+            // set translation language for the dropdown
+            msDropdownJSON.selectedIndex = $('#dropdownJSON option[value=' +  translation_language + ']').index();;
+
+            // disable translation language selection
+            if (self.props.disableLanguageSelector) {
+              msDropdownJSON.disabled = true;
+            }
+
+            $('#dropdownJSON').show();
+
+            // jadams, 2021-10-18: added stop scrolling on the body,
+            // if modal is OPEN
+            $('body').addClass('stop-scrolling');
+
+          }
 
         }); // END modal on 'shown'
 
