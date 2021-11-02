@@ -311,7 +311,7 @@ function Translator(props) {
           var msDropdownJSON;
           var dependencies_met_msDropdownJSON_loaded;
 
-          // found msDropdownJSON loaded slow on some PC 
+          // found msDropdownJSON loaded slow on some PC
           dependencies_met_msDropdownJSON_loaded = setInterval (function () {
             if (typeof document.getElementById('dropdownJSON').msDropdown !== 'undefined') {
               msDropdownJSON = document.getElementById('dropdownJSON').msDropdown;
