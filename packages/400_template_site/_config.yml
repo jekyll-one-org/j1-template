@@ -47,7 +47,7 @@
 #   values:                             development|production
 #   default:                            production
 #
-environment:                            production
+environment:                            development
 
 # version
 # ------------------------------------------------------------------------------

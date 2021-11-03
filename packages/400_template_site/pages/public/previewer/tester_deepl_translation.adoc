@@ -6,11 +6,11 @@ description: >
                                         Machine translation (MT) transfers information from one language to another
                                         by a computer without human intervention. NMT is the most advanced method
                                         of computer-generated translations. Thanks to autonomous learning based on
-                                        artificial intelligence.Deepl offers one of the best NMTengines worldwide.
-                                        Try translations with Jekyll One and Deepl on your own!
+                                        artificial intelligence. DeepL offers one of the best NMTengines worldwide.
+                                        Try translations with Jekyll One and DeepL on your own!
 
 categories:                             [ Previewer ]
-tags:                                   [ Translator, Deepl ]
+tags:                                   [ Translator, DeepL ]
 
 compress:                               false
 
@@ -179,22 +179,22 @@ Writing texts for machine translation is a thing of its own. If you run a
 website international, the effort will be very worthwhile.
 
 
-== Translation with Deepl
+== Translation with DeepL
 
-_Deepl_ offers one of the best NMT engines worldwide. The translater can be
+_DeepL_ offers one of the best NMT engines worldwide. The translater can be
 used online or by an application (app) installed on a computer locally.
 The third option to translate is the cloud-based service offered
-by the *Deepl API* to be integrated into custom apps or websites, for example.
+by the *DeepL API* to be integrated into custom apps or websites, for example.
 
 J1 integrates the cloud-based translator service for the *Free* service and
 professional translations using the *Pro* system. The current API *version V2*
 supports the translation of more than 25 languages vice versa.
 
-Try the translator with _Jekyll One_ and _Deepl_ on your own!
+Try the translator with _Jekyll One_ and _DeepL_ on your own!
 
 === Text examples
 
-Check the quality of Deepl's NMT engine. Translate some of the passages from
+Check the quality of DeepL's NMT engine. Translate some of the passages from
 the sections. See typical machine translation limitations with the following
 examples.
 
@@ -213,7 +213,7 @@ Bloke would be the American English equivalent of dude.
 Everyday language use quite often common words in a different meaning. A good
 reason to avoid such expressions.
 
-.Means: Not my thing
+.Means: Not my interest, I'm not interested in that.
 ----
 Not my religion
 ----
@@ -246,7 +246,7 @@ Many translations for song lyrics are wrong and often do not give meaning
 to what the artists express. The reason: using machine translators of bad
 quality.
 
-Check _Deepl_ using different language scopes!
+Check _DeepL_ using different language scopes!
 
 [role="mt-5 mb-5"]
 [quote, Love of a Lifetime - FireHouse]
@@ -380,14 +380,17 @@ ____
 
     var logger = log4javascript.getLogger('j1.tester.deepl');
     var logText;
+    var ddSourceLanguage;
+    var ddLanguageScope;
+    var ddDestinationLanguage;
 
     var dependencies_met_page_ready = setInterval (function (options) {
       if ( j1.getState() === 'finished' ) {
 
         // get access to msDropdown elements
-        var ddSourceLanguage      = document.getElementById("source-language").msDropdown;
-        var ddLanguageScope       = document.getElementById("language-scope").msDropdown;
-        var ddDestinationLanguage = document.getElementById("destination-language").msDropdown;
+        ddSourceLanguage      = document.getElementById("source-language").msDropdown;
+        ddLanguageScope       = document.getElementById("language-scope").msDropdown;
+        ddDestinationLanguage = document.getElementById("destination-language").msDropdown;
 
         // stop scrolling if ANY of the DD selects is open (display: block)
         $('.ms-options').attrchange({
@@ -409,7 +412,6 @@ ____
 
     // reset translation event handler (button)
     $('#reset-translate').click(function () {
-
       // reset (msDropdown) translation options
       ddSourceLanguage.selectedIndex      = 0;
       ddLanguageScope.selectedIndex       = 0;
