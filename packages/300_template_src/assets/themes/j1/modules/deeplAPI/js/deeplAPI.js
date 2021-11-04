@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/modules/j1Deepl/js/j1deepl.js
- # J1 core module for j1Deepl
+ # ~/assets/themes/j1/modules/deeplAPI/js/deeplAPI.js
+ # J1 core module for deeplAPI
  #
  # Product/Info:
  # https://jekyll.one
@@ -25,10 +25,10 @@
     'use strict';
 
     // Create the defaults
-    var pluginName = 'j1deepl',
+    var pluginName = 'deeplAPI',
     defaults = {
       api:                  'free',                                             // free (default) | pro
-      auth_key:             false,                                              // API authorization key.
+      auth_key:             '',                                                 // API authorization key
       source_lang:          'auto',                                             // autodetection (default: auto)|supported language. Specifies the language for the input text.
       target_lang:          'DE',                                               // language to be tranlasted in.
       max_chars:            false,                                              // false (unlimited) or number. Number of chars from the source text passed for translation.
@@ -62,15 +62,39 @@
     // Avoid plugin prototype conflicts
     $.extend(Plugin.prototype, {
       // -----------------------------------------------------------------------
-      // init
-      // initialize the plugin
+      // init()
+      // initialize|run the translation
       // -----------------------------------------------------------------------
       init: function(options) {
-        var logger = log4javascript.getLogger('j1deepl.init');
+        var _this    = this;
+        var logger   = log4javascript.getLogger('deeplAPI.init');
+        var data_url = '/assets/data/private.json';
+        var settings = options;
+        var auth_key;
 
         logger.info('\n' + 'initializing plugin: started');
-        this.translate(options);
-        logger.info('\n' + 'initializing plugin: finished');
+
+        // loading private data (auth key)
+        $.ajax({
+          url: data_url,
+          dataType: 'json',
+          success: function (data) {
+            auth_key = data.translators.deepl.auth_key;
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            logger.error('\n' + 'failed to retrieve Yaml data from: ' + data_url);
+          }
+        });
+
+        // run the translation (if private data loaded)
+        var dependencies_met_page_ready = setInterval (function () {
+          if (typeof auth_key !== 'undefined' ) {
+            settings.auth_key = auth_key;
+            _this.translate(settings);
+            logger.info('\n' + 'translation: in progress');
+            clearInterval(dependencies_met_page_ready);
+          }
+        });
       },
 
       // -----------------------------------------------------------------------
@@ -113,7 +137,7 @@
       // then display the result, designed as a module.
       // -----------------------------------------------------------------------
       translate: function (settings) {
-        const logger                  = log4javascript.getLogger('j1deepl.translate');
+        const logger                  = log4javascript.getLogger('deeplAPI.translate');
         const READYSTATE_DONE         = 4;
         const STATUS_OK               = 200;
         const SUPPORTED_LANG          = ['BG', 'CS', 'DA', 'DE', 'EL', 'EN-GB', 'EN-US', 'EN', 'ES', 'ET', 'FI', 'FR', 'HU', 'IT', 'JA', 'LT', 'LV', 'NL', 'PL', 'PT-PT', 'PT-BR', 'PT', 'RO', 'RU', 'SK', 'SL', 'SV', 'ZH'];
@@ -196,7 +220,8 @@
                 translated_text += result.translations[i].text;
                 translated_text += "\n";
               }
-
+              logger.info('\n' + 'translation: finished');
+              
               // update the HTM element (content) by the tranlation
               if (ELEMENT_TYPE === 'TEXTAREA') {
                 $(TARGET_ELEMENT).val(translated_text);

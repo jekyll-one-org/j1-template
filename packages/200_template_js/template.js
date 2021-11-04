@@ -42,6 +42,7 @@
 // exposed for run-time to the global namespace (window).
 // -----------------------------------------------------------------------------
 window.Cookies                          = require('js-cookie');
+window.yaml                             = require('js-yaml');
 window.log4javascript                   = require('log4javascript');
 window.liteURL                          = require('lite-url');
 window.platform                         = require('platform');
@@ -68,6 +69,7 @@ window.deeplTranslator                  = require('./js/deepl-translator');
 // -----------------------------------------------------------------------------
 //const Bootstrap                         = require('./js/bootstrap/bootstrap.js');
 //const J1JekyllSearch                    = require('./js/jekyll_search/jekyll_search.js');
+//const J1Yaml                            = require('js-yaml');
 const J1Tocbot                            = require('./js/tocbot/tocbot.js');
 const J1AttrChangeListener                = require('./js/listen-attribute-changes/attrchange.js');
 

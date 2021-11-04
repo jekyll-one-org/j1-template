@@ -1,0 +1,33 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/defaults/deeplAPI.yml
+# Default configuration for DeepL translations
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2021 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# About this configuration (used for J1 CC only)
+#
+about_config:
+
+  title:
+  scope:                                User settings
+  location:                             _data/modules/scroller.yml
+
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+defaults:
+
+  enabled:                              false
+  api:                                  pro
+  auth_key:                             1c360075-1a30-28c7-e4eb-2c0c0164ce4b
+
+# ------------------------------------------------------------------------------
+# END config

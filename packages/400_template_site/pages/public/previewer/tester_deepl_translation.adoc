@@ -20,7 +20,7 @@ fam_menu_id:                            page_ctrl_simple
 permalink:                              /pages/public/previewer/deepl-translator/
 regenerate:                             false
 
-resources:                              [ clipboard, rouge, imagedropdown, j1deepl ]
+resources:                              [ clipboard, rouge, deeplAPI ]
 resource_options:
   - attic:
       padding_top:                      400
@@ -449,9 +449,8 @@ ____
       $('#translated-text').prop('disabled', false);
 
       // create new translation
-      $('#original-text').j1deepl({
+      $('#original-text').deeplAPI({
         api: 'pro',
-        auth_key: '1c360075-1a30-28c7-e4eb-2c0c0164ce4b',
         max_chars: 1000,
         formality: languageScope,
         source_lang: fromLanguage,
@@ -462,7 +461,7 @@ ____
       // reset translation for next run
       // -----------------------------------------------------------------------
       // destroy existing jquery object|s
-      $('#original-text').j1deepl('destroy');
+      $('#original-text').deeplAPI('destroy');
 
       // update form elements
       // -----------------------------------------------------------------------

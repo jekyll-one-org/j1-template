@@ -1268,13 +1268,13 @@ resources:
         init_function:                  [ j1.adapter.scroller.init ]
 
   # ----------------------------------------------------------------------------
-  # deeplAPI, JS Wrapper for the Deepl API
+  # deeplAPI, JS Wrapper for the DeepL API
   #
-  - name:                               j1Deepl
+  - name:                               deeplAPI
     resource:
-      id:                               j1deepl
+      id:                               deeplAPI
       enabled:                          true
-      comment:                          j1Deepl
+      comment:                          deeplAPI
       region:                           head
       layout:                           [ home, page, post, collection, blog_archive ]
       required:                         ondemand
@@ -1285,11 +1285,11 @@ resources:
       data:
         css:                            []
         files:                          []
-        js:                             [ modules/j1deepl/js/j1deepl ]
+        js:                             [ modules/deeplAPI/js/deeplAPI ]
         init_function:                  []
 
   # ----------------------------------------------------------------------------
-  # msDropdown, JS API to create themeable HTML <select> elements
+  # msDropdown, JS API to create themeable HTML <select> elements (dropdowns)
   #
   - name:                               msDropdown
     resource:
