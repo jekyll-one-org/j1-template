@@ -1247,27 +1247,6 @@ resources:
         init_function:                  [ j1.adapter.rtextResizer.init ]
 
   # ----------------------------------------------------------------------------
-  # showOnScroll, JS API to animate container elements
-  #
-  - name:                               showOnScroll
-    resource:
-      id:                               showonscroll
-      enabled:                          true
-      comment:                          J1 showOnScroll
-      region:                           head
-      layout:                           [ home, page, post, collection, blog_archive ]
-      required:                         ondemand                                # always | ondemand
-      preload:                          false                                   # property currently unused
-      script_load:                      defer
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            []
-        files:                          []
-        js:                             [ modules/showOnScroll/js/showOnScroll ]
-        init_function:                  []
-
-  # ----------------------------------------------------------------------------
   # scroller, JS API to implement infinite scroll
   #
   - name:                               scroller
@@ -1289,7 +1268,7 @@ resources:
         init_function:                  [ j1.adapter.scroller.init ]
 
   # ----------------------------------------------------------------------------
-  # j1Deepl, JS Wrapper for the Deepl API
+  # deeplAPI, JS Wrapper for the Deepl API
   #
   - name:                               j1Deepl
     resource:
