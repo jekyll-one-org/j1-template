@@ -54,7 +54,7 @@ regenerate:                             true
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/j1scroll.js
- # J1 Adapter for j1scroll
+ # J1 Adapter for j1scroll module
  #
  # Product/Info:
  # https://jekyll.one
@@ -79,19 +79,19 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 j1.adapter['j1scroll'] = (function (j1, window) {
 
-{% comment %} Set global variables
--------------------------------------------------------------------------------- {% endcomment %}
-var environment   = '{{environment}}';
-var language      = '{{site.language}}';
-var user_agent    = platform.ua;
-var moduleOptions = {};
-var _this;
-var lastPageInfo;
-var logger;
-var logText;
+  {% comment %} Set global variables
+  ------------------------------------------------------------------------------ {% endcomment %}
+  var environment   = '{{environment}}';
+  var language      = '{{site.language}}';
+  var user_agent    = platform.ua;
+  var moduleOptions = {};
+  var _this;
+  var lastPageInfo;
+  var logger;
+  var logText;
 
   // ---------------------------------------------------------------------------
-  // Main object
+  // main object
   // ---------------------------------------------------------------------------
   return {
 
@@ -110,12 +110,28 @@ var logText;
       logger.info('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
-
+      // -----------------------------------------------------------------------
       // default module settings
+      // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.j1scroll',
+        module_name: 'j1.adapter.',
         generated:   '{{site.time}}'
       }, options);
+
+      {% comment %} Load module config from yml data (disabled)
+      --------------------------------------------------------------------------
+      // Load  module DEFAULTS|CONFIG
+      //
+      /* eslint-disable */
+      moduleOptions = $.extend({}, {{scroll_options | replace: '=>', ':' | replace: 'nil', '""'}});
+      /* eslint-enable */
+
+      if (typeof settings !== 'undefined') {
+        moduleOptions = j1.mergeData(moduleOptions, settings);
+      }
+
+      // _this.initialize(moduleOptions);
+      -------------------------------------------------------------------------- {% endcomment %}
 
       _this.generate_scrollers();
 
@@ -124,14 +140,14 @@ var logText;
       logger.info('\n' + 'module initialized successfully');
     }, // END init
 
-    // -------------------------------------------------------------------------
+    // -----------------------------------------------------------------------
     // generate_scrollers()
-    // generate scrollers configured|enabled
-    // -------------------------------------------------------------------------
+    // generate scrollers configured and enabled
+    // -----------------------------------------------------------------------
     generate_scrollers: function () {
-      logger = log4javascript.getLogger('j1.adapter.j1scroll');
+      logger = log4javascript.getLogger('j1.adapter.');
 
-      var log_text = '\n' + 'j1scroll is being initialized';
+      var log_text = '\n' + ' is being initialized';
       logger.info(log_text);
 
       // START generate scrollers
@@ -151,7 +167,7 @@ var logText;
           {% assign lastPageInfo_de = item.scroller.lastPageInfo_de %}
 
           // scroller_id: {{ scroller_id }}
-          var log_text = '\n' + 'j1scroll is being initialized on: ' + '{{scroller_id}}';
+          var log_text = '\n' + ' is being initialized on: ' + '{{scroller_id}}';
           logger.info(log_text);
 
           var container = '#' + '{{container}}';
@@ -171,15 +187,15 @@ var logText;
             lastPageInfo += '</p></div>';
           }
 
-          // Create an j1scroll instance if container exists
+          // Create an  instance if container exists
           if ($(container).length) {
             $(container).j1scroll({
-              path:           pagePath,
-              elementScroll:  {{elementScroll}},
-              scrollOffset:   {{scrollOffset}},
-              lastPage:       {{lastPage}},
-              infoLastPage:   {{infoLastPage}},
-              lastPageInfo:   lastPageInfo,
+              path:                 pagePath,
+              elementScroll:        {{elementScroll}},
+              scrollOffset:         {{scrollOffset}},
+              lastPage:             {{lastPage}},
+              infoLastPage:         {{infoLastPage}},
+              lastPageInfo:         lastPageInfo,
             });
           }
 
@@ -188,12 +204,12 @@ var logText;
           clearInterval(dependencies_met_page_ready);
         }
       });
-      // END generate scrollers
+      // END generate_scrollers
     },
 
     // -------------------------------------------------------------------------
     // messageHandler()
-    // manage messages send from other J1 modules
+    // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
     messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);

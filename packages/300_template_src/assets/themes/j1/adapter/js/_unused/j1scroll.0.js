@@ -6,8 +6,8 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/j1scroll.js
- # Liquid template to adapt j1scroll plugin
+ # ~/assets/themes/j1/adapter/js/.js
+ # Liquid template to adapt 
  #
  # Product/Info:
  # https://jekyll.one
@@ -27,6 +27,7 @@ regenerate:                             true
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment       = site.environment %}
+{% assign template_version  = site.version %}
 {% assign asset_path        = "/assets/themes/j1" %}
 
 {% comment %} Process YML config data
@@ -38,23 +39,19 @@ regenerate:                             true
 {% assign blocks            = site.data.blocks %}
 {% assign modules           = site.data.modules %}
 
-{% comment %} Set config data (settings only)
+{% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign scroll_settings   = modules.j1scroll.settings %}
 
-{% comment %} Set config options (settings only)
+{% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign scroll_options    = scroll_settings %}
 
-{% assign production = false %}
-{% if environment == 'prod' or environment == 'production' %}
-  {% assign production = true %}
-{% endif %}
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/j1scroll.js
- # J1 Adapter for j1scroll
+ # ~/assets/themes/j1/adapter/js/.js
+ # J1 Adapter for 
  #
  # Product/Info:
  # https://jekyll.one
@@ -77,18 +74,29 @@ regenerate:                             true
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
-j1.adapter['j1scroll'] = (function (j1, window) {
+j1.adapter[''] = (function (j1, window) {
 
-{% comment %} Set global variables
--------------------------------------------------------------------------------- {% endcomment %}
-var environment   = '{{environment}}';
-var language      = '{{site.language}}';
-var user_agent    = platform.ua;
-var moduleOptions = {};
-var _this;
-var lastPageInfo;
-var logger;
-var logText;
+  {% comment %} Set global variables
+  ------------------------------------------------------------------------------ {% endcomment %}
+  var environment   = '{{environment}}';
+  var user_agent    = platform.ua;
+  var moduleOptions = {};
+  var _this;
+  var logger;
+  var logText;
+
+  // ---------------------------------------------------------------------------
+  // Helper functions
+  // ---------------------------------------------------------------------------
+  function sleep(milliseconds) {
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+      if ((new Date().getTime() - start) > milliseconds){
+        break;
+      }
+    }
+    return;
+  }
 
   // ---------------------------------------------------------------------------
   // Main object
@@ -96,104 +104,84 @@ var logText;
   return {
 
     // -------------------------------------------------------------------------
-    // init()
-    // adapter initializer
+    // Initializer
     // -------------------------------------------------------------------------
     init: function (options) {
-      {% comment %} Set global variables
-      -------------------------------------------------------------------------- {% endcomment %}
-      _this = j1.adapter.j1scroll;
-      logger = log4javascript.getLogger('j1.adapter.j1scroll');
+
+      // -----------------------------------------------------------------------
+      // globals
+      // -----------------------------------------------------------------------
+      _this   = j1.adapter.;
+      logger  = log4javascript.getLogger('j1.adapter.');
 
       // initialize state flag
       _this.setState('started');
       logger.info('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
-
-      // default module settings
+      // -----------------------------------------------------------------------
+      // Default module settings
+      // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.j1scroll',
+        module_name: 'j1.adapter.',
         generated:   '{{site.time}}'
       }, options);
 
-      _this.generate_scrollers();
-
-      _this.setState('finished');
-      logger.info('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module initialized successfully');
-    }, // END init
-
-    // -------------------------------------------------------------------------
-    // generate_scrollers()
-    // generate scrollers configured|enabled
-    // -------------------------------------------------------------------------
-    generate_scrollers: function () {
-      logger = log4javascript.getLogger('j1.adapter.j1scroll');
-
-      var log_text = '\n' + 'j1scroll is being initialized';
+      // -----------------------------------------------------------------------
+      //  initializer
+      // -----------------------------------------------------------------------
+      var log_text = '\n' + ' is being initialized';
       logger.info(log_text);
 
-      // START generate scrollers
       var dependencies_met_page_ready = setInterval (function (options) {
         if (j1.getState() === 'finished') {
-
-          {% for item in scroll_options.scrollers %} {% if item.scroller.enabled %}
-
-          {% assign scroller_id     = item.scroller.id %}
-          {% assign container       = item.scroller.container %}
-          {% assign path            = item.scroller.path  %}
-          {% assign elementScroll   = item.scroller.elementScroll %}
-          {% assign scrollOffset    = item.scroller.scrollOffset %}
-          {% assign lastPage        = item.scroller.lastPage %}
-          {% assign infoLastPage    = item.scroller.infoLastPage %}
-          {% assign lastPageInfo_en = item.scroller.lastPageInfo_en %}
-          {% assign lastPageInfo_de = item.scroller.lastPageInfo_de %}
-
-          // scroller_id: {{ scroller_id }}
-          var log_text = '\n' + 'j1scroll is being initialized on: ' + '{{scroller_id}}';
+          var log_text = '\n' + ' is being initialized';
           logger.info(log_text);
 
-          var container = '#' + '{{container}}';
-          var pagePath  = '{{path}}';
+          var postWrapperId = '#home_news_panel-scroll-group';
+          var paginatePath  = '/assets/data/news_panel_posts/page';
 
-          if (language === 'en') {
-            lastPageInfo =  '<div class="page-scroll-last"><p class="infinite-scroll-last">';
-            lastPageInfo += '{{lastPageInfo_en|strip_newlines}}';
-            lastPageInfo += '</p></div>';
-          } else if (language === 'de') {
-            lastPageInfo =  '<div class="page-scroll-last"><p class="infinite-scroll-last">';
-            lastPageInfo += '{{lastPageInfo_de|strip_newlines}}';
-            lastPageInfo += '</p></div>';
-          } else {
-            lastPageInfo =  '<div class="page-scroll-last"><p class="infinite-scroll-last">';
-            lastPageInfo += '{{lastPageInfo_en|strip_newlines}}';
-            lastPageInfo += '</p></div>';
-          }
+          // status:              '.page-scroll-last',
+          // firstPage:            2,
+          // onInit:               function(){},				                        // Callback after plugin has loaded
+          // onBeforeLoad:         function(link){},	                          // Callback before new content is loaded
+          // onAfterLoad:          function(html){}	                            // Callback after new content has been loaded
 
-          // Create an j1scroll instance if container exists
-          if ($(container).length) {
-            $(container).j1scroll({
-              path:           pagePath,
-              elementScroll:  {{elementScroll}},
-              scrollOffset:   {{scrollOffset}},
-              lastPage:       {{lastPage}},
-              infoLastPage:   {{infoLastPage}},
-              lastPageInfo:   lastPageInfo,
-            });
-          }
+          $(postWrapperId).({
+            path:                 paginatePath,
+            elementScroll:        true,
+            scrollThreshold:      300,
+            lastPage:             4,
+            infoLastPage:         true,
+          });
 
-          // END scroller_id: {{ scroller_id }}
-          {% endif %} {% endfor %}
+          $('.list-group').on( 'load.', function( event, body, path, response ) {
+            var logger = log4javascript.getLogger('j1.adapter.infiniteScroll');
+            var log_text = `\n loaded data from path: ${path}`;
+            logger.info(log_text);
+
+            var log_text = "\n initialize backdrops on load";
+            logger.info(log_text);
+
+            // initialize backdrops
+            j1.core.createDropCap();
+
+          });
+
+          $('.list-group').on( 'request.', function( event, path, fetchPromise ) {
+            var logger = log4javascript.getLogger('j1.adapter.infiniteScroll');
+            var log_text = `\n request for the next page to be loaded from path: ${path}`;
+            logger.info(log_text);
+          });
+
           clearInterval(dependencies_met_page_ready);
         }
       });
-      // END generate scrollers
-    },
+    }, // END init
 
     // -------------------------------------------------------------------------
-    // messageHandler()
-    // manage messages send from other J1 modules
+    // messageHandler: MessageHandler for J1 CookieConsent module
+    // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
     messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);

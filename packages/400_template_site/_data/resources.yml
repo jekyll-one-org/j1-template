@@ -1283,10 +1283,10 @@ resources:
       dependencies:                     false
       pass_init_data:                   false
       data:
-        css:                            [ modules/j1Scroll/css/theme/uno ]
+        css:                            [ modules/j1scroll/css/theme/uno ]
         files:                          [ adapter/js/j1scroll.js ]
-        js:                             [ modules/j1Scroll/js/j1scroll ]
-        init_function:                  [ j1.adapter.j1Scroll.init ]
+        js:                             [ modules/j1scroll/js/j1scroll ]
+        init_function:                  [ j1.adapter.j1scroll.init ]
 
   # ----------------------------------------------------------------------------
   # j1Deepl, JS Wrapper for the Deepl API
@@ -1306,7 +1306,7 @@ resources:
       data:
         css:                            []
         files:                          []
-        js:                             [ modules/j1Deepl/js/j1deepl ]
+        js:                             [ modules/j1deepl/js/j1deepl ]
         init_function:                  []
 
   # ----------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/modules/j1Scroll/js/j1scroll.js
+ # ~/assets/themes/j1/modules/j1scroll/js/j1scroll.js
  # J1 core module for j1scroll
  #
  # Product/Info:
@@ -24,7 +24,7 @@
   'use strict';
 
   // Create the defaults
-  var pluginName = 'j1Scroll',
+  var pluginName = 'j1scroll',
   defaults = {
     type:                 'infiniteScroll',
     scrollOffset:         100,
@@ -56,7 +56,7 @@
     // -----------------------------------------------------------------------
     init: function(options) {
       var _this  = this;
-      var logger = log4javascript.getLogger('j1Scroll');
+      var logger = log4javascript.getLogger('');
 
       logger.info('\n' + 'initializing plugin: started');
       logger.info('\n' + 'state: started');
@@ -138,7 +138,7 @@
     // -------------------------------------------------------------------------
     registerScrollEvent: function (options) {
       var _this = this;
-      var logger = log4javascript.getLogger('j1Scroll');
+      var logger = log4javascript.getLogger('');
 
       logger.info('\n' + 'scroll event: register');
       var eventHandler_onscroll = function (event) {
@@ -170,7 +170,7 @@
     // -------------------------------------------------------------------------
     getNewPost: function (options) {
       var _this = this;
-      var logger = log4javascript.getLogger('j1Scroll');
+      var logger = log4javascript.getLogger('');
 
       logger.info('\n' + 'trigger loading ');
 
@@ -230,7 +230,7 @@
     // -------------------------------------------------------------------------
     getChildItemsByAjaxHTML: function (options, HTMLText) {
       var newHTML = document.createElement('html');
-      var logger = log4javascript.getLogger('j1Scroll');
+      var logger = log4javascript.getLogger('');
 
       logger.info('\n' + 'load new items');
       newHTML.innerHTML = HTMLText;
@@ -244,7 +244,7 @@
     // -------------------------------------------------------------------------
     appendNewItems: function (items) {
       var _this           = this;
-      var logger          = log4javascript.getLogger('j1Scroll');
+      var logger          = log4javascript.getLogger('');
       var cookie_names    = j1.getCookieNames();
       var user_translate  = j1.readCookie(cookie_names.user_translate);
 
@@ -273,7 +273,7 @@
     // -------------------------------------------------------------------------
     infoLastPage: function (options) {
       var _this         = this;
-        var logger      = log4javascript.getLogger('j1Scroll');
+        var logger      = log4javascript.getLogger('');
 
         logger.info('\n' + 'show: infoLastPage');
         $('.page-scroll-last').show();
