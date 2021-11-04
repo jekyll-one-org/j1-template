@@ -6,8 +6,8 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/j1scroll.js
- # Liquid template to adapt j1scroll plugin
+ # ~/assets/themes/j1/adapter/js/scroller.js
+ # Liquid template to adapt scroller plugin
  #
  # Product/Info:
  # https://jekyll.one
@@ -40,7 +40,7 @@ regenerate:                             true
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign scroll_settings   = modules.j1scroll.settings %}
+{% assign scroll_settings   = modules.scroller.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -53,8 +53,8 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/j1scroll.js
- # J1 Adapter for j1scroll module
+ # ~/assets/themes/j1/adapter/js/scroller.js
+ # J1 Adapter for scroller module
  #
  # Product/Info:
  # https://jekyll.one
@@ -77,7 +77,7 @@ regenerate:                             true
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
-j1.adapter['j1scroll'] = (function (j1, window) {
+j1.adapter['scroller'] = (function (j1, window) {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
@@ -102,8 +102,8 @@ j1.adapter['j1scroll'] = (function (j1, window) {
     init: function (options) {
       {% comment %} Set global variables
       -------------------------------------------------------------------------- {% endcomment %}
-      _this = j1.adapter.j1scroll;
-      logger = log4javascript.getLogger('j1.adapter.j1scroll');
+      _this = j1.adapter.scroller;
+      logger = log4javascript.getLogger('j1.adapter.scroller');
 
       // initialize state flag
       _this.setState('started');
@@ -189,7 +189,7 @@ j1.adapter['j1scroll'] = (function (j1, window) {
 
           // Create an  instance if container exists
           if ($(container).length) {
-            $(container).j1scroll({
+            $(container).scroller({
               path:                 pagePath,
               elementScroll:        {{elementScroll}},
               scrollOffset:         {{scrollOffset}},

@@ -40,7 +40,7 @@ function isInViewport(elm, offset) {
 // -----------------------------------------------------------------------------
 $(document).ready( function() {
 
-  var showDelay =   700;
+  var showDelay =  700;
   var yOffset 	=  500;
 	var logger  	= log4javascript.getLogger('j1ShowOnScroll');
 

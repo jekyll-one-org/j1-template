@@ -41,7 +41,7 @@ regenerate:                             true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign scroll_settings   = modules.j1scroll.settings %}
+{% assign scroll_settings   = modules.scroller.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}

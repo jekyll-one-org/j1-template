@@ -6,8 +6,8 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/j1scroll.js
- # Liquid template to adapt j1scroll plugin
+ # ~/assets/themes/j1/adapter/js/scroller.js
+ # Liquid template to adapt scroller plugin
  #
  # Product/Info:
  # https://jekyll.one
@@ -40,11 +40,11 @@ regenerate:                             true
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign scroll_settings   = modules.j1scroll.settings %}
+{% assign scroller_settings = modules.scroller.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign scroll_options    = scroll_settings %}
+{% assign scroller_options  = scroller_settings %}
 
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
@@ -53,8 +53,8 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/j1scroll.js
- # J1 Adapter for j1scroll
+ # ~/assets/themes/j1/adapter/js/scroller.js
+ # J1 Adapter for scroller
  #
  # Product/Info:
  # https://jekyll.one
@@ -77,7 +77,7 @@ regenerate:                             true
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
-j1.adapter['j1scroll'] = (function (j1, window) {
+j1.adapter['scroller'] = (function (j1, window) {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -86,9 +86,9 @@ var language      = '{{site.language}}';
 var user_agent    = platform.ua;
 var moduleOptions = {};
 var _this;
-var lastPageInfo;
 var logger;
 var logText;
+var lastPageInfo;
 
   // ---------------------------------------------------------------------------
   // Main object
@@ -102,8 +102,8 @@ var logText;
     init: function (options) {
       {% comment %} Set global variables
       -------------------------------------------------------------------------- {% endcomment %}
-      _this = j1.adapter.j1scroll;
-      logger = log4javascript.getLogger('j1.adapter.j1scroll');
+      _this = j1.adapter.scroller;
+      logger = log4javascript.getLogger('j1.adapter.scroller');
 
       // initialize state flag
       _this.setState('started');
@@ -113,7 +113,7 @@ var logText;
 
       // default module settings
       var settings = $.extend({
-        module_name: 'j1.adapter.j1scroll',
+        module_name: 'j1.adapter.scroller',
         generated:   '{{site.time}}'
       }, options);
 
@@ -129,20 +129,27 @@ var logText;
     // generate scrollers configured|enabled
     // -------------------------------------------------------------------------
     generate_scrollers: function () {
-      logger = log4javascript.getLogger('j1.adapter.j1scroll');
 
-      var log_text = '\n' + 'j1scroll is being initialized';
-      logger.info(log_text);
+      logger = log4javascript.getLogger('j1.adapter.scroller');
+
+      logText = '\n' + 'scrollers are being initialized';
+      logger.info(logText);
 
       // START generate scrollers
       var dependencies_met_page_ready = setInterval (function (options) {
         if (j1.getState() === 'finished') {
 
-          {% for item in scroll_options.scrollers %} {% if item.scroller.enabled %}
+          {% comment %} generate scrollers of type 'infiniteScroll'
+          ---------------------------------------------------------------------- {% endcomment %}
+
+          {% for item in scroller_options.scrollers %} {% if item.scroller.enabled %}
+
+          {% if item.scroller.type == 'infiniteScroll' %}
 
           {% assign scroller_id     = item.scroller.id %}
+          {% assign scroller_type   = item.scroller.type %}
           {% assign container       = item.scroller.container %}
-          {% assign path            = item.scroller.path  %}
+          {% assign pagePath        = item.scroller.pagePath  %}
           {% assign elementScroll   = item.scroller.elementScroll %}
           {% assign scrollOffset    = item.scroller.scrollOffset %}
           {% assign lastPage        = item.scroller.lastPage %}
@@ -151,11 +158,11 @@ var logText;
           {% assign lastPageInfo_de = item.scroller.lastPageInfo_de %}
 
           // scroller_id: {{ scroller_id }}
-          var log_text = '\n' + 'j1scroll is being initialized on: ' + '{{scroller_id}}';
-          logger.info(log_text);
+          logText = '\n' + 'scroller of type {{item.scroller.type}} is being initialized on: ' + '{{scroller_id}}';
+          logger.info(logText);
 
           var container = '#' + '{{container}}';
-          var pagePath  = '{{path}}';
+          var pagePath  = '{{pagePath}}';
 
           if (language === 'en') {
             lastPageInfo =  '<div class="page-scroll-last"><p class="infinite-scroll-last">';
@@ -171,10 +178,12 @@ var logText;
             lastPageInfo += '</p></div>';
           }
 
-          // Create an j1scroll instance if container exists
+          // Create an scroller instance of infiniteScroll if container exists
           if ($(container).length) {
-            $(container).j1scroll({
-              path:           pagePath,
+            $(container).scroller({
+              id:             '{{scroller_id}}',
+              type:           '{{scroller_type}}',
+              pagePath:       '{{pagePath}}',
               elementScroll:  {{elementScroll}},
               scrollOffset:   {{scrollOffset}},
               lastPage:       {{lastPage}},
@@ -183,8 +192,38 @@ var logText;
             });
           }
 
+          {% endif %}
+
+          {% if item.scroller.type == 'showOnScroll' %}
+
+          {% assign scroller_id     = item.scroller.id %}
+          {% assign scroller_type   = item.scroller.type %}
+          {% assign container       = item.scroller.container %}
+          {% assign showDelay       = item.scroller.showDelay %}
+          {% assign scrollOffset    = item.scroller.scrollOffset  %}
+
+          var container = '#' + '{{container}}';
+
+          // scroller_id: {{ scroller_id }}
+          logText = '\n' + 'scroller of type {{item.scroller.type}} is being initialized on: ' + '{{scroller_id}}';
+          logger.info(logText);
+
+          // Create an scroller instance of showOnScroll if container exists
+          if ($(container).length) {
+            $(container).scroller({
+              id:             '{{scroller_id}}',
+              type:           '{{scroller_type}}',
+              container:      '{{container}}',
+              showDelay:      {{showDelay}},
+              scrollOffset:   {{scrollOffset}},
+            });
+          }
+
+          {% endif %}
+
           // END scroller_id: {{ scroller_id }}
           {% endif %} {% endfor %}
+
           clearInterval(dependencies_met_page_ready);
         }
       });

@@ -1268,13 +1268,13 @@ resources:
         init_function:                  []
 
   # ----------------------------------------------------------------------------
-  # j1Scroll, JS API to implement smooth scrolling pages
+  # scroller, JS API to implement infinite scroll
   #
-  - name:                               j1Scroll
+  - name:                               scroller
     resource:
-      id:                               j1scroll
+      id:                               scroller
       enabled:                          true
-      comment:                          j1Scroll
+      comment:                          scroller
       region:                           head
       layout:                           [ home, page, post, collection, blog_archive ]
       required:                         ondemand                                # always | ondemand
@@ -1283,10 +1283,10 @@ resources:
       dependencies:                     false
       pass_init_data:                   false
       data:
-        css:                            [ modules/j1scroll/css/theme/uno ]
-        files:                          [ adapter/js/j1scroll.js ]
-        js:                             [ modules/j1scroll/js/j1scroll ]
-        init_function:                  [ j1.adapter.j1scroll.init ]
+        css:                            [ modules/scroller/css/theme/uno ]
+        files:                          [ adapter/js/scroller.js ]
+        js:                             [ modules/scroller/js/scroller ]
+        init_function:                  [ j1.adapter.scroller.init ]
 
   # ----------------------------------------------------------------------------
   # j1Deepl, JS Wrapper for the Deepl API

@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/modules/j1scroll/js/j1scroll.js
- # J1 core module for j1scroll
+ # ~/assets/themes/j1/modules/scroller/js/scroller.js
+ # J1 core module for scroller
  #
  # Product/Info:
  # https://jekyll.one
@@ -24,7 +24,7 @@
   'use strict';
 
   // Create the defaults
-  var pluginName = 'j1scroll',
+  var pluginName = 'scroller',
   defaults = {
     type:                 'infiniteScroll',
     scrollOffset:         100,
@@ -81,10 +81,18 @@
       // until page_ready state
       var dependencies_met_page_ready = setInterval (function () {
         if (j1.getState() === 'finished') {
+
           // initialize infinite scroll
           if ( options.type === 'infiniteScroll') {
-            logger.info('\n' + 'processing mode: infiniteScroll');
-            logger.info('\n' + 'loading items from path: ' + options.path + "#void");
+            logger.info('\n' + 'processing mode: ' + options.type);
+            logger.info('\n' + 'loading items from path: ' + options.pagePath + "#void");
+            logger.info('\n' + 'monitoring element set to: ' + this.scroller);
+            _this.registerScrollEvent(options);
+          }
+          // initialize show on scroll
+          if ( options.type === 'showOnScroll') {
+            logger.info('\n' + 'processing mode: ' + options.type);
+            logger.info('\n' + 'loading items from path: ' + options.pagePath + "#void");
             logger.info('\n' + 'monitoring element set to: ' + this.scroller);
             _this.registerScrollEvent(options);
           }
@@ -93,6 +101,29 @@
           clearInterval(dependencies_met_page_ready);
         }
       });
+    },
+
+    // -------------------------------------------------------------------------
+    // isInViewport()
+    // detects if an element is visible in an viewport specified
+    // -------------------------------------------------------------------------
+    isInViewport: function (elm, offset) {
+      // if the element doesn't exist, abort
+    	if( elm.length == 0 ) {
+    		return;
+    	}
+    	var $window = jQuery(window);
+    	var viewport_top = $window.scrollTop();
+    	var viewport_height = $window.height();
+    	var viewport_bottom = viewport_top + viewport_height;
+    	var $elm = jQuery(elm);
+    	var top = $elm.offset().top + offset;
+    	var height = $elm.height();
+    	var bottom = top + height;
+
+    	return (top >= viewport_top && top < viewport_bottom) ||
+    	(bottom > viewport_top && bottom <= viewport_bottom) ||
+    	(height > viewport_height && top <= viewport_top && bottom >= viewport_bottom);
     },
 
     // -------------------------------------------------------------------------
@@ -140,26 +171,48 @@
       var _this = this;
       var logger = log4javascript.getLogger('');
 
-      logger.info('\n' + 'scroll event: register');
-      var eventHandler_onscroll = function (event) {
-        var options = _this.settings;
+      // scroller type infiniteScroll
+      if (options.type === 'infiniteScroll') {
+        logger.info('\n' + 'register scroll event of type: ' + options.type);
 
-        if (_this.isBottomReached(options)) {
-          if (options.firstPage > options.lastPage ) {
-            logger.info('\n' + 'last page detected on: ' + options.lastPage);
-            window.removeEventListener('scroll', eventHandler_onscroll);
-            logger.info('\n' + 'scroll event: removed');
+        // register event function DYNAMICALLY
+        _this[options.id] = function (event) {
+          var options = _this.settings;
 
-            if (options.infoLastPage ) {
-                _this.infoLastPage(options);
+          if (_this.isBottomReached(options)) {
+            if (options.firstPage > options.lastPage ) {
+              logger.info('\n' + 'last page detected on: ' + options.lastPage);
+              window.removeEventListener('scroll', _this[options.id]);
+              logger.info('\n' + 'scroll event: removed');
+
+              if (options.infoLastPage ) {
+                  _this.infoLastPage(options);
+              }
+              return false;
             }
-            return false;
+            _this.getNewPost(options);
           }
-          _this.getNewPost(options);
+        };
+        window.addEventListener('scroll', _this[options.id]);
+        logger.info('\n' + 'scroll event: registered');
+      }
+
+      // scroller type showOnScroll
+      if (options.type === 'showOnScroll') {
+        logger.info('\n' + 'register scroll event of type: ' + options.type);
+
+        // register event function DYNAMICALLY
+        _this[options.id] = function (event) {
+          if (_this.isInViewport ($('#' + options.id ), options.scrollOffset)) {
+      			logger.info('\n' + 'specified container is in view: ' + options.id);
+            $('.' + options.id).show(options.showDelay);
+      			logger.info('\n' + 'remove eventHandler');
+            window.removeEventListener('scroll', _this[options.id]);
+          }
         }
-      };
-      window.addEventListener('scroll', eventHandler_onscroll);
-      logger.info('\n' + 'scroll event: registered');
+      	window.addEventListener('scroll', _this[options.id]);
+      }
+
     },
 
     // -------------------------------------------------------------------------
@@ -219,8 +272,8 @@
           }
         }
       };
-      logger.info('\n' + 'loading new items from path: ' + options.path + options.firstPage);
-      xmlhttp.open("GET", location.origin + options.path + options.firstPage + '/index.html', true);
+      logger.info('\n' + 'loading new items from path: ' + options.pagePath + options.firstPage);
+      xmlhttp.open("GET", location.origin + options.pagePath + options.firstPage + '/index.html', true);
       xmlhttp.send();
     },
 
