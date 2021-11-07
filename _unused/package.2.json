@@ -17,6 +17,11 @@
     "bumplevel": "patch",
     "mode": "development"
   },
+  "engines": {
+    "node": ">=12.0",
+    "npm": ">=6.0",
+    "yarn": ">=1.22"
+  },
   "npm": {
     "loglevel": "silent",
     "prepend_nodepath": "true"
@@ -76,10 +81,10 @@
     "reset:clean-files": "npm --silent run clean",
     "reset:clean": "echo Remove js modules from all packages .. && lerna clean --yes",
     "reset:done": "echo done.",
+    "setup:files": "echo Create starter config files .. && lerna run --parallel jekyll_files",
     "setup:node-modules": "echo Bootstrap project modules .. && echo J1 Project modules: >> install.log && npm install --silent >> install.log && echo done.",
     "setup:lerna": "echo Initialize development packages .. && lerna init && lerna bootstrap && echo done.",
-    "setup:detect-os": "echo Detect operating system .. && if-env OS=Windows_NT && cross-var echo \"OS detected as: $OS\" || OS=$(echo $(getos)) && echo \"OS detected as: $OS\"",
-    "setup:files": "echo Create config files .. && lerna run --parallel jekyll_files",
+    "setup:detect-os": "echo Detect operating system .. && cross-var cross-env if-env OS=Windows_NT && cross-var echo \"OS detected as: $OS\" || OS=$(echo $(getos)) && echo \"OS detected as: $OS\"",
     "setup:links": "echo Create links for shared resources .. && lerna run --parallel setup-links",
     "setup:build": "lerna run --parallel build",
     "setup-start": "echo Set up development system for first use ..",

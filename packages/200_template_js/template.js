@@ -60,8 +60,7 @@ window.j1.core.navigator                = require('./js/navigator/navigator.js')
 window.j1.core.asciidoctor              = require('./js/asciidoctor/asciidoctor.js');
 window.j1.core.scrollSmooth             = require('./js/scroll-smooth/scroll-smooth.js');
 
-window.deeplTranslator                  = require('./js/deepl-translator');
-
+// window.deeplTranslator               = require('./js/deepl-translator');     // J1 Module deeplAPI used instead
 // window.j1.fam                        = require('./js/fam/fam.js');           // cannot used until NOT rewritten to jQuery
 
 // Following source objects|modules are *implicetly* forced to be

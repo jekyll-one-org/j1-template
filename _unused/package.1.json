@@ -17,6 +17,11 @@
     "bumplevel": "patch",
     "mode": "development"
   },
+  "engines": {
+    "node": ">=12.0",
+    "npm": ">=6.0",
+    "yarn": ">=1.22"
+  },
   "npm": {
     "loglevel": "silent",
     "prepend_nodepath": "true"
@@ -76,6 +81,7 @@
     "reset:clean-files": "npm --silent run clean",
     "reset:clean": "echo Remove js modules from all packages .. && lerna clean --yes",
     "reset:done": "echo done.",
+    "setup:files": "echo Create starter config files .. && lerna run --parallel jekyll_files",
     "setup:node-modules": "echo Bootstrap project modules .. && echo J1 Project modules: >> install.log && npm install --silent >> install.log && echo done.",
     "setup:lerna": "echo Initialize development packages .. && lerna init && lerna bootstrap && echo done.",
     "setup:detect-os": "echo Detect operating system .. && cross-var cross-env if-env OS=Windows_NT && cross-var echo \"OS detected as: $OS\" || OS=$(echo $(getos)) && echo \"OS detected as: $OS\"",
@@ -95,7 +101,6 @@
     "child-script": "cross-env if-env BUNDLE_VENDORIZE=true && echo bundle vendorized || echo bundle global"
   },
   "dependencies": {
-    "animate.css": "^4.1.0",
     "command-line-usage": "^6.1.1",
     "cors": "^2.8.5",
     "getos": "^3.1.0",
@@ -103,50 +108,28 @@
     "if-env": "^1.0.4",
     "j1-cli": "^2019.0.3",
     "js-yaml": "^3.12.2",
-    "popper.js": "^1.14.6",
     "request": "^2.88.0",
-    "smee-client": "^1.1.0",
-    "stickyfilljs": "^2.1.0",
+    "smee-client": "^1.0.1",
     "tablesaw": "^3.1.2",
-    "uuid": "^3.3.3"
+    "uuid": "^7.0.3",
+    "webpack": "^4.42.0",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.10.3",
+    "webpack-merge": "^4.2.1"
   },
   "optionalDependencies": {
     "fsevents": "^1.2.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.46",
-    "@babel/preset-env": "^7.0.0-beta.46",
-    "babel-loader": "^8.0.0-beta.2",
-    "clean-webpack-plugin": "^0.1.19",
     "cross-env": "^7.0.3",
     "cross-var": "^1.1.0",
-    "css-loader": "^2.1",
     "eslint": "^7.19.0",
-    "exports-loader": "^0.7.0",
-    "expose-loader": "^0.7.5",
-    "extract-text-webpack-plugin": "^4.0.0-beta.0",
-    "file-loader": "^1.1.11",
-    "html-webpack-plugin": "^3.2.0",
-    "imports-loader": "^0.8.0",
-    "lerna": "^3.22.1",
+    "lerna": "^4.0.0",
     "lnk-cli": "^1.0.1",
-    "lodash-es": "^4.17.10",
-    "mini-css-extract-plugin": "^0.4.0",
     "npm-delay": "^1.0.4",
     "npm-run-all": "^4.1.5",
-    "opn-cli": "^5.0.0",
-    "postcss-loader": "^2.1.5",
-    "resolve-url-loader": "^3.1.2",
-    "sass-loader": "^7.0.1",
+    "opn-cli": "^1.0.0",
     "shx": "^0.3.3",
-    "style-loader": "^0.21.0",
-    "terser": "^5.5.1",
-    "terser-webpack-plugin": "^1.2.1",
-    "uglify-js": "^3.0.25",
-    "video.js": "^7.7.5",
-    "webpack": "^4.42.0",
-    "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.10.3",
-    "webpack-merge": "^4.2.1"
+    "video.js": "^7.7.5"
   }
 }
