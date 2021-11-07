@@ -121,6 +121,7 @@
     "setup:create-etc-folder": "echo Create etc folder .. && shx mkdir ./etc && echo done.",
     "setup:node-modules-base": "echo Bootstrap project modules .. && echo J1 Project modules: >> install.log && npm --silent install >> install.log",
     "setup:node-modules-utilsrv": "echo Bootstrap utility server modules .. && echo J1 Utility Server modules: >> install.log && cd utilsrv && npm --silent install >> ../install.log && cd .. && echo done.",
+    "setup:private-config": "shx cp -f _data/_defaults/private.default.yml _data/private.yml",
     "setup:detect-os": "echo Detect OS .. && cross-env if-env OS=Windows_NT && cross-var echo \"OS detected: $OS\" || OS=$(echo $(getos)) && echo \"OS detected: $OS\" && echo done.",
     "setup:site": "run-s -s build",
 
