@@ -89,6 +89,8 @@ packages/400_template_site/_plugins
 
 packages/400_template_site/_install
 
+packages/400_template_site/_config.yml
+
 packages/400_template_site/apps
 
 packages/400_template_site/assets
