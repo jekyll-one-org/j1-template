@@ -1,0 +1,102 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/vendor/fonts/twemoji/scss/_sizes.scss
+ # Styles|Sizes for Twitter Emoji Icon
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+// NOTE: 2019-03-20, Set vertical-align from text-bottom to baseline
+// TODO:
+// SPEC:
+
+
+// SIZE
+// -----------------------------------------------------------------------------
+
+.twa {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  vertical-align: baseline;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 1em 1em
+}
+
+.twa-xs {
+  height: .875em;
+  width: .875em;
+  vertical-align: baseline;
+  background-size: .875em .875em;
+}
+
+.twa-sm {
+  height: 1em;
+  width: 1em;
+  vertical-align: baseline;
+  background-size: 1em 1em;
+}
+
+.twa-md {
+  height: 1.25em;
+  width: 1.25em;
+  vertical-align: baseline;
+  background-size: 1.25em 1.25em;
+}
+
+.twa-lg {
+  height: 1.5em;
+  width: 1.5em;
+  vertical-align: baseline;
+  background-size: 1.5em 1.5em;
+}
+
+.twa-xl {
+  height: 1.75em;
+  width: 1.75em;
+  vertical-align: baseline;
+  background-size: 1.75em 1.75em;
+}
+
+.twa-1x {
+  height: 1em;
+  width: 1em;
+  vertical-align: baseline;
+  background-size: 1em 1em;
+}
+
+.twa-2x {
+  height: 2em;
+  width: 2em;
+  vertical-align: baseline;
+  background-size: 2em 2em;
+}
+
+.twa-3x {
+  height: 3em;
+  width: 3em;
+  vertical-align: baseline;
+  background-size: 3em 3em;
+}
+
+.twa-4x {
+  height: 4em;
+  width: 4em;
+  vertical-align: baseline;
+  background-size: 4em 4em;
+}
+
+.twa-5x {
+  height: 5em;
+  width: 5em;
+  vertical-align: baseline;
+  background-size: 5em 5em;
+}

@@ -1,0 +1,64 @@
+/*
+// -----------------------------------------------------------------------------
+// ~/theme_uno/extentions/_forms.scss
+// Provides additional styles for input fields (forms) used by J1 Template
+//
+// Product/Info:
+// https://jekyll.one
+//
+// Copyright (C) 2021 Juergen Adams
+//
+// J1 Template is licensed under the MIT License.
+// See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+// -----------------------------------------------------------------------------
+*/
+
+// Chromium Overwite for input fields (autocomplete)
+// -----------------------------------------------------------------------------
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active  {
+  border-top-left-radius: 5px !important;
+  border-bottom-left-radius: 5px !important;
+  border-top-right-radius: 5px !important;
+  border-bottom-right-radius: 5px !important;
+}
+
+// Clear button for input fields (forms)
+// -----------------------------------------------------------------------------
+.form-group.position-relative input {
+  padding-right: 32px;
+}
+
+.form-clear {
+  align-items: center;
+  background: #cecece;
+  border-radius: 50%;
+  bottom: 8px;
+  color: rgba(0, 0, 0, .54);
+  cursor: pointer;
+  display: flex;
+  height: 24px;
+  justify-content: center;
+  position: absolute;
+  right: 10px;
+  width: 24px;
+  z-index: 10;
+}
+
+.form-clear-searcher {
+  bottom: 15px;
+  right: 50px;
+  background: transparent;
+  z-index: 99999;
+}
+
+.form-text+.form-clear {
+  bottom: calc(1rem + 18px);
+}
+
+.form-clear .material-icons {
+  font-size: 16px;
+  font-weight: 500;
+}

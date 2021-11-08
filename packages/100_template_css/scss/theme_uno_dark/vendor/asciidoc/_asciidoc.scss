@@ -1,0 +1,66 @@
+/*
+ # ----------------------------------------------------------------------------
+ # ~/theme_uno_dark/vendor/asciidoc/_asciidoc.scss
+ # Overload styles for Asciidoc Markups
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+// NOTE:
+// TODO:
+// SPEC:
+
+.listingblock pre {
+    border-color: $darken-600 !important;
+    border: 1px solid $grey-600 !important;
+//  background-color: $grey-300 !important;
+}
+
+.listingblock pre code {
+  background-color: transparent;
+  border: 1px !important;
+  border-color: $darken-600 !important;
+}
+
+.admonitionblock > table {
+  background: $lighten-200;
+}
+
+.admonitionblock > table td.content {
+    border-right: 1px !important;
+    border-bottom: 1px !important;
+}
+
+.admonitionblock > table td.icon {
+    border-right: 0px !important;
+    border-bottom: 1px !important;
+}
+
+.exampleblock {
+    border-radius: 0 !important;
+    background: $lighten-200 !important;
+}
+
+// table.frame-all {
+//   border-width: 0px;
+//   border-left: 1px solid #e0e0e0;
+//   border-top: 1px solid #e0e0e0;
+// }
+
+table tr th, table tr td {
+  color: $lighten;
+  border-right: 1px solid $grey;
+  border-bottom: 1px solid $grey;
+}
+
+.listingblock > .title,
+.imageblock > .title {
+  color: unset;
+}

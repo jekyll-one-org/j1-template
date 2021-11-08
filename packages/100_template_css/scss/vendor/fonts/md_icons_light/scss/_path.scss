@@ -1,0 +1,30 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/vendor/fonts/md_icons_light/scss/_path.scss
+ # Path settings for MDIL Icons v0.2.63
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+// FONT PATH
+// -----------------------------------------------------------------------------
+@font-face {
+  font-family: '#{$mdil-font-name}';
+  src: url('#{$mdil-font-path}/#{$mdil-filename}-webfont.woff2?v=#{$mdil-version}') format('woff2');
+  src: url('#{$mdil-font-path}/#{$mdil-filename}-webfont.woff?v=#{$mdil-version}') format('woff');
+  src: url('#{$mdil-font-path}/eot/#{$mdil-filename}-webfont.eot?v=#{$mdil-version}');
+  src: url('#{$mdil-font-path}/eot/#{$mdil-filename}-webfont.eot?#iefix&v=#{$mdil-version}') format('embedded-opentype');
+  src: url('#{$mdil-font-path}/svg/#{$mdil-filename}-webfont.svg?v=#{$mdil-version}#{$mdil-filename}#{$mdil-font-weight}') format('svg');
+  src: url('#{$mdil-font-path}/ttf/#{$mdil-filename}-webfont.ttf?v=#{$mdil-version}') format('truetype');
+
+  font-family: '#{$mdil-font-name}';
+  font-weight: normal;
+  font-style: normal;
+}

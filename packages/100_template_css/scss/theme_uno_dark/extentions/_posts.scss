@@ -1,0 +1,22 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/100_template_css/scss/theme_uno_dark/extentions/_posts.scss
+ #
+ # Product/Info:
+ # https:#jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+// Headlines
+// -----------------------------------------------------------------------------
+
+.post-headline h1,
+.post-headline h2 {
+    color: $grey-400;
+    border-bottom: 1px dotted  $grey-800 !important;
+}

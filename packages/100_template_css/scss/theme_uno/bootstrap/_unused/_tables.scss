@@ -1,0 +1,66 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/bootstrap/_tables.scss
+ #
+ # Product/Info:
+ # https://github.com/FezVrasta/bootstrap-material-design
+ #
+ # Copyright (C) 2020 Federico Zivolo and Contributors
+ #
+ # Bootstrap Material Design is licensed under the MIT License.
+ # See: https://github.com/FezVrasta/bootstrap-material-design/blob/master/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+// BS4 has not yet converted the following to variables
+// Keep an eye on it and move to variables when possible!
+
+.thead-inverse {
+  th {
+    //color: $bmd-inverse; // #fff;
+    //background-color: $gray-dark;
+  }
+}
+.thead-default {
+  th {
+    //color: $gray;
+    //background-color: $bmd-inverse-lighter; //$gray-lighter;
+  }
+}
+
+.table-inverse {
+  color: $bmd-inverse-light; //$gray-lighter;
+  //background-color: $gray-dark;
+
+  //th,
+  //td,
+  //thead th {
+  //  border-color: $gray;
+  //}
+}
+
+.table {
+  thead th {
+    font-size: $bmd-table-header-font-size;
+    font-weight: 500;
+    color: $gray;
+    border-top-width: 0;
+    border-bottom-width: $table-border-width;
+  }
+}
+
+thead.thead-inverse,
+// needs specificity
+.table-inverse thead {
+  th {
+    color: $bmd-inverse-lighter;
+  }
+}
+
+.table-inverse {
+  th,
+  td,
+  thead th {
+    border-color: $bmd-table-border-color-inverse;
+  }
+}

@@ -1,0 +1,24 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/bootstrap/_custom_forms.scss
+ #
+ # Product/Info:
+ # https://github.com/FezVrasta/bootstrap-material-design
+ #
+ # Copyright (C) 2020 Federico Zivolo and Contributors
+ #
+ # Bootstrap Material Design is licensed under the MIT License.
+ # See: https://github.com/FezVrasta/bootstrap-material-design/blob/master/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+.custom-file-control {
+  @extend .form-control;
+  @include bmd-form-color($bmd-label-color, $bmd-label-color-focus, $input-border-color);
+
+  &::before {
+    @extend .btn;
+    position: absolute;
+    height: calc(100% - 1px);
+  }
+}

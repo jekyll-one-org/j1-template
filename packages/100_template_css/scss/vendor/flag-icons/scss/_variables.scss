@@ -1,0 +1,21 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/vendor/fonts/md_icons/scss/_variables.scss
+ # Var settings for MD Icons v5.9.55
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+$flag-icon-css-path:                    '/assets/themes/j1/core/country-flags' !default;
+$flag-icon-rect-path:                   '/4x3' !default;
+$flag-icon-square-path:                 '/1x1' !default;
+
+$flag-icon-size-base:                    24px !default;
+$flag-icon-css-prefix:                   flag-icon !default;

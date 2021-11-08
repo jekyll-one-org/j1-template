@@ -1,0 +1,68 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/bootstrap/_links.scss
+ # Provides custom styles and overloads
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+// NOTE:
+// TODO:
+// SPEC:
+
+// see: https://css-tricks.com/hash-tag-links-padding/
+// jadams, 2020-11-15:  #anchor links padding
+
+// h2.anchor-link:before {
+//   display: block;
+//   content: " ";
+//   margin-top: -6rem;
+//   height: +6rem;
+//   visibility: hidden;
+// }
+//
+// h3.anchor-link:before {
+//   display: block;
+//   content: " ";
+//   margin-top: -6rem;
+//   height: +6rem;
+//   visibility: hidden;
+// }
+//
+// h4.anchor-link:before {
+//   display: block;
+//   content: " ";
+//   margin-top: -4.5rem;
+//   height: +4.5rem;
+//   visibility: hidden;
+// }
+
+
+// jadams, 2020-11-15: set text color for (all) anchors (Google optimisation)
+a {
+  color: $grey-800;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+}
+
+a:hover {
+  color: $grey-400 !important;
+  font-weight: 600 !important;
+}
+
+li > a {
+  font-weight: 500 !important;
+  text-decoration: none !important;
+}
+
+li > a:hover {
+  color: $grey-400  !important;
+  font-weight: 600 !important;
+}

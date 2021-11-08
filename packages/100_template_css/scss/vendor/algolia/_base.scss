@@ -1,0 +1,38 @@
+/*
+ # -----------------------------------------------------------------------------
+ #  ~/vendor/algolia/base.scss
+ #  Provides styles for the RefinementList widget (instantsearch.js)
+ #
+ #  Product/Info:
+ #  https://jekyll.one
+ #  https://github.com/algolia/instantsearch.js
+ #  https://community.algolia.com/instantsearch.js/v2/getting-started.html#add-a-refinementlist
+ #
+ #  Copyright (C) 2021 Juergen Adams
+ #  Copyright (C) 2015-present Algolia, Inc.
+ #
+ #  J1 Template is licensed under the MIT License
+ #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ #  instantsearch.js is licensed under the MIT License
+ #  See: https://github.com/algolia/instantsearch.js/blob/develop/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+[class^="ais-"] {
+  box-sizing: border-box;
+
+  & > *,
+  & > *::after,
+  & > *::before {
+    box-sizing: border-box;
+  }
+}
+
+.ais-header {
+  border-bottom: 2px solid #EEE;
+  font-size: .8em;
+  margin: 0 0 6px;
+  padding: 0 0 6px;
+  text-transform: uppercase;
+}
+

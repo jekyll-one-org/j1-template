@@ -1,0 +1,37 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/theme_uno/bootstrap/_body.scss
+ # Provides additional body styles
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+// Helper classes
+// -----------------------------------------------------------------------------
+
+// jadams, 2020-10-06: Hide all scrollbars (x/y) from the body
+/* Chrome, IE 10+ */
+.hide-scrollbar {
+//  overflow: hidden;  // jadams, 2020-10-08: NOT usable as this disables fromm ALL scrolling
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+// jadams, 2019-04-25: Hide (y) scrollbar from html
+// See: https://stackoverflow.com/questions/20997183/how-to-hide-scrollbar-in-firefox
+/* Firefox */
+.hide-scrollbar-moz {
+  scrollbar-width: none;
+}
+
+/* WebKit */
+.hide-scrollbar::-webkit-scrollbar {
+  width: 0px;
+}

@@ -1,0 +1,30 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/100_template_css/scss/theme_uno_dark/bootstrap/_cards.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+.card {
+  border: 0;
+  border-radius: 0;
+  .card-header {
+    // border-bottom: 1px solid $grey-600;
+    border-bottom: 0;
+  }
+  .card-footer {
+    background-color: transparent !important;
+    // border-top: 0;
+    border-top: 1px dotted rgba(0, 0, 0, 0.7);
+  }
+  hr {
+    border-top: 1px solid  $grey-600 !important;
+  }
+}

@@ -1,0 +1,38 @@
+/*
+// -----------------------------------------------------------------------------
+// ~/theme_uno/extentions/_panel_service.scss
+// Provides all general styles for J1 Template Service Panel
+//
+// Product/Info:
+// https://jekyll.one
+//
+// Copyright (C) 2021 Juergen Adams
+//
+// J1 Template is licensed under the MIT License.
+// See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+// -----------------------------------------------------------------------------
+*/
+
+// Content
+// -----------------------------------------------------------------------------
+.panel-service p {
+  text-align: justify;
+}
+
+.panel-service .card-description {
+  text-align: -webkit-center;
+}
+
+// Media Queries
+// -----------------------------------------------------------------------------
+@media screen and (max-width: 768px) {
+	.panel-service {
+		margin: 5rem;
+	}
+}
+
+@media screen and (max-width: 640px) {
+	.panel-service {
+		margin: 5rem;
+	}
+}

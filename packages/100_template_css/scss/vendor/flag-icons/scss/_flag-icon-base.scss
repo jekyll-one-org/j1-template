@@ -1,0 +1,30 @@
+.flag-icon-background {
+  background-size: contain;
+  background-position: 50%;
+  background-repeat: no-repeat;
+}
+
+.flag-icon {
+  @extend .flag-icon-background;
+  position: relative;
+  display: inline-block;
+  line-height: 1em;
+  &:before {
+    content: '\00a0';
+  }
+  &.rectangle {
+    width: (4 / 3) * 1em;
+  }
+  &.squared {
+    width: 1em;
+  }
+}
+
+@mixin flag-icon($country) {
+  .flag-icon-#{$country} {
+    background-image: url(#{$flag-icon-css-path}#{$flag-icon-rect-path}/#{$country}.svg);
+    &.squared {
+      background-image: url(#{$flag-icon-css-path}#{$flag-icon-square-path}/#{$country}.svg);
+    }
+  }
+}

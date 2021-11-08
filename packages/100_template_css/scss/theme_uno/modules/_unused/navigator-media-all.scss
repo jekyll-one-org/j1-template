@@ -1,0 +1,803 @@
+@media all {
+  .nav {
+  	&.navigator {
+  		flex-wrap: nowrap;
+  	}
+  	&.navbar-nav.navigator {
+      margin-top: 0px;
+  		padding-top: 0;
+  	}
+  }
+  ul.menu-col {
+  	padding: 0;
+  	margin: 0;
+  	font-size: 13px;  // jadams: set font-size to 13px list-style: none;
+  	li a {
+  		color: $grey-800;
+  		&:hover {
+  			text-decoration: none;
+  		}
+  		&:focus {
+  			text-decoration: none;
+  		}
+  	}
+  }
+  li.close-full-menu {
+  	padding-top: 30px !important;
+  	padding-bottom: 30px !important;
+  	> a {
+  		padding-top: 0 !important;
+  		padding-bottom: 0 !important;
+  	}
+  }
+  .heading:after {
+  	left: 0;
+  	bottom: 0;
+  	height: 2px;
+  	width: 50px;
+  	content: " ";
+  	background: $nav-primary;
+  	position: absolute;
+  }
+  .heading-footer h2 {
+  	color: $grey-200;
+  	font-size: 18px;
+  	text-transform: uppercase;
+  }
+
+  .navbar-default .navbar-nav > li > a {
+  	&:focus {
+  		background-color: transparent !important;
+  	}
+  	&:hover {
+  		background-color: transparent !important;
+  	}
+  }
+
+  // jadams: open class added by navigator.js
+  .nav.navbar.navigator.open ul.dropdown-menu.megamenu-content .content {
+  	display: block !important;
+  	height: auto !important;
+  }
+
+  // jadams, 2019-01-18: applying hover styles to the parent
+  nav.navbar.navigator .navbar-nav .nav-item.open {
+    border-bottom: 0px;
+    // background-image: linear-gradient(#141414,//1c1c1c 40%,//212121);
+    // background-repeat: no-repeat;
+  }
+
+
+  // NavBar
+  // -----------------------------------------------------------------------------
+  nav {
+  	&.navigator {
+  		.container {
+  			position: relative;
+  		}
+  		.megamenu-content {
+  			padding: 15px;
+  			width: 100% !important;
+  			.title {
+  				margin-top: 0;
+  			}
+  		}
+  		&.navbar-full {
+  			padding-bottom: 10px;
+  			padding-top: 10px;
+  			.navbar-header {
+  				display: block;
+  				width: 100%;
+  			}
+  			.navbar-toggle {
+  				display: inline-block;
+  				margin-right: 0;
+  				position: relative;
+  				top: 0;
+  				font-size: 30px;
+  				transition: all 1s ease-in-out;
+  			}
+  			.navbar-collapse {
+  				position: fixed;
+  				width: 100%;
+  				height: 100% !important;
+  				top: 0;
+  				left: 0;
+  				padding: 0;
+  				display: none !important;
+  				z-index: 99;
+  				&.in {
+  					display: block !important;
+  				}
+  				.nav-full {
+  					overflow: auto;
+  				}
+  				.wrap-full-menu {
+  					display: table-cell;
+  					vertical-align: middle;
+  					background-color: $white;
+  					overflow: auto;
+  				}
+  				.nav-full::-webkit-scrollbar {
+  					width: 0;
+  				}
+  				.nav-full::-moz-scrollbar {
+  					width: 0;
+  				}
+  				.nav-full::-ms-scrollbar {
+  					width: 0;
+  				}
+  				.nav-full::-o-scrollbar {
+  					width: 0;
+  				}
+  				ul.nav {
+  					display: block;
+  					width: 100%;
+  					overflow: auto;
+  					a {
+  						background-color: transparent;
+  						&:hover {
+  							background-color: transparent;
+  						}
+  						&:focus {
+  							background-color: transparent;
+  						}
+  					}
+  					> li {
+  						float: none;
+  						display: block;
+  						text-align: center;
+  						> a {
+  							display: table;
+  							margin: auto;
+  							text-transform: uppercase;
+  							font-weight: bold;
+  							letter-spacing: 2px;
+  							font-size: 24px;
+  							padding: 10px 15px;
+  						}
+  					}
+  				}
+  			}
+  		}
+  		&.navbar-brand-top {
+  			.navbar-header {
+  				display: block;
+  				width: 100%;
+  				text-align: center;
+  				.navbar-brand {
+  					display: inline-block;
+  					float: none;
+  					margin: 0;
+  				}
+  			}
+  			.navbar-collapse {
+  				text-align: center;
+  			}
+  			ul.nav {
+  				display: inline-block;
+  				float: none;
+  				margin: 0 0 -5px 0;
+  				> li.dropdown {
+  					> ul.dropdown-menu {
+  						margin-top: 2px;
+  					}
+  					&.megamenu-fw > ul.dropdown-menu {
+  						margin-top: 0;
+  					}
+  				}
+  			}
+  		}
+  		&.brand-center {
+  			.navbar-header {
+  				display: block;
+  				width: 100%;
+  				position: absolute;
+  				text-align: center;
+  				top: 0;
+  				left: 0;
+  			}
+  			.navbar-brand {
+  				display: inline-block;
+  				float: none;
+  			}
+  			.navbar-collapse {
+  				text-align: center;
+  				display: inline-block;
+  				padding-left: 0;
+  				padding-right: 0;
+  				.col-half {
+  					width: 50%;
+  					float: left;
+  					display: block;
+  					&.left {
+  						text-align: right;
+  						padding-right: 100px;
+  					}
+  					&.right {
+  						text-align: left;
+  						padding-left: 100px;
+  					}
+  				}
+  			}
+  			ul.nav {
+  				float: none !important;
+  				margin-bottom: -5px !important;
+  				display: inline-block !important;
+  				&.navbar-right {
+  					margin: 0;
+  				}
+  				> li.dropdown {
+  					> ul.dropdown-menu {
+  						margin-top: 2px;
+  					}
+  					&.megamenu-fw > ul.dropdown-menu {
+  						margin-top: 0;
+  					}
+  				}
+  			}
+  			&.center-side .navbar-collapse .col-half {
+  				&.left {
+  					text-align: left;
+  					padding-right: 100px;
+  				}
+  				&.right {
+  					text-align: right;
+  					padding-left: 100px;
+  				}
+  			}
+  		}
+  		&.navbar-sidebar {
+  			position: fixed;
+  			width: 260px;
+  			overflow: hidden;
+  			left: 0;
+  			padding: 0 0 0 0 !important;
+  			background: $white;
+  			box-shadow: 1px 0 1px 0 $grey-200;
+  			.scroller {
+  				width: 280px;
+  				overflow-y: auto;
+  				overflow-x: hidden;
+  			}
+  			.container-fluid {
+  				padding: 0 !important;
+  			}
+  			.container {
+  				padding: 0 !important;
+  			}
+  			.navbar-header {
+  				float: none;
+  				display: block;
+  				width: 260px;
+  				padding: 10px 15px;
+  				margin: 10px 0 0 0 !important;
+  			}
+  			.navbar-collapse {
+  				padding: 0 !important;
+  				width: 260px;
+  			}
+  			ul {
+  				&.nav {
+  					float: none;
+  					display: block;
+  					width: 100%;
+  					padding: 0 15px !important;
+  					margin: 0 0 30px 0;
+  					li {
+  						float: none !important;
+  						&.dropdown {
+  							ul.dropdown-menu {
+  								left: 100%;
+  								top: 0;
+  								position: relative !important;
+  								left: 0 !important;
+  								width: 100% !important;
+  								height: auto !important;
+  								background-color: transparent;
+  								border: none !important;
+  								padding: 0;
+  								box-shadow: 0 0 0;
+  								padding-left: 0;
+  								float: none;
+  								margin-bottom: 0;
+  								li {
+  									a {
+  										padding: 5px 15px;
+  										color: $grey-800;
+  										border: none;
+  									}
+                    // dropdown indicator
+                    // jadams, 2019-08-22: removed icons
+  									// &.dropdown > a:before {
+  									// 	font-family: $font_0;
+  									// 	content: "\f793"; // mdi-arrow-collapse-right
+  									// }
+  								}
+  								ul.dropdown-menu {
+  									padding-left: 15px;
+  									margin-top: 0;
+  								}
+  							}
+  							&.on ul.dropdown-menu li.dropdown.open > a:before {
+  								content: "\f795"; // mdi-arrow-expand-down
+  							}
+  						}
+  					}
+  					> li {
+  						> a {
+  							padding: 10px 15px;
+  							font-weight: bold;
+  						}
+  						&.dropdown {
+  							> a:after {
+  								float: right;
+  							}
+  							> ul.dropdown-menu {
+  								margin-bottom: 15px;
+  							}
+  						}
+  					}
+  					.megamenu-content .col-menu {
+  						border: none !important;
+  					}
+  				}
+  				&.dropdown-menu.megamenu-content > li {
+  					padding: 0 !important;
+  				}
+  			}
+  			.dropdown .megamenu-content .col-menu {
+  				display: block;
+  				float: none !important;
+  				padding: 0;
+  				margin: 0;
+  				width: 100%;
+  				border: none;
+  				.title {
+  					padding: 7px 0;
+  					text-transform: none;
+  					font-weight: 400;
+  					letter-spacing: 0;
+  					margin-bottom: 0;
+  					cursor: pointer;
+  					color: $grey-800;
+  				}
+  				.content {
+  					padding: 0 0 0 15px;
+  				}
+  				ul.menu-col li a {
+  					padding: 3px 0 !important;
+  				}
+  			}
+  		}
+  		.dropdown.megamenu-fw {
+  			position: static;
+  			.dropdown-menu {
+  				left: 0;
+  				right: 0;
+  			}
+  		}
+  		.megamenu-fw .dropdown-menu {
+  			left: auto;
+  		}
+  	}
+  	&.navbar {
+  		&.navigator {
+  			margin-bottom: 0;
+  			border-radius: 0;
+  			background-color: $white;
+  			border: none;
+  			z-index: 9;
+  			padding: 0;
+  			width: 100%;
+  			box-shadow: unset;
+        min-height: $nav-min-height;
+  			ul {
+  				&.nav {
+  					li {
+  						&.megamenu-fw > a {
+  							&:hover {
+  								background-color: transparent;
+  							}
+  							&:focus {
+  								background-color: transparent;
+  							}
+  						}
+  						&.active > a {
+  							background-color: transparent;
+  							&:hover {
+  								background-color: transparent;
+  							}
+  							&:focus {
+  								background-color: transparent;
+  							}
+  						}
+  					}
+  					&.navigator {
+  						.nav-item .nav-link {
+  							text-transform: none;
+                width: max-content;         // standard property
+  							width: intrinsic;           // Safari/WebKit non-standard vendor property
+                width: -moz-max-content;    // Firefox/Gecko
+                width: -webkit-max-content; // Chrome
+                width: -o-max-content;      // Opera
+                width: -ms-max-content;     // MS Internet Explorer (IE11)
+  							font-weight: 400;
+  							font-size: 1.1rem;
+  						}
+  						.dropdown.nav-item .nav-link {
+  							text-transform: none;
+  							width: max-content;         // standard property
+  							width: intrinsic;           // Safari/WebKit non-standard vendor property
+                width: -moz-max-content;    // Firefox/Gecko
+                width: -webkit-max-content; // Chrome
+                width: -o-max-content;      // Opera
+                width: -ms-max-content;     // MS Internet Explorer (IE11)
+  							font-weight: 400;
+  							font-size: 1.1rem;
+  						}
+  					}
+  					> li > a {
+  						background-color: transparent;
+  						/* padding: 30px 15px; */
+              padding: 25px 10px;
+  						font-weight: 300;
+  					}
+  					.dropdown-menu .dropdown-menu {
+  						top: 0;
+  						left: 100%;
+  						margin-top: -2px;
+  					}
+  					ul.dropdown-menu > li > a {
+  						white-space: normal;
+  					}
+  					&.navbar-right .dropdown-menu .dropdown-menu {
+  						left: -200px;
+  					}
+  				}
+  				&.navbar-right li.dropdown ul.dropdown-menu li {
+  					a {
+  						text-align: right;
+  					}
+            // jadams, 2018-01-06: old dropdown indicator disabled
+  					// &.dropdown > a.dropdown-toggle:before {
+  					// 	font-family: $font_0;
+  					// 	float: left;
+  					// 	content: "\f793";
+  					// 	margin-right: 1rem;
+  					// }
+  				}
+  				&.dropdown-menu.megamenu-content {
+  					padding: 0 15px !important;
+  					> li {
+  						padding: 25px 0 20px;
+  					}
+  					&.tabbed {
+  						padding: 0;
+  						> li {
+  							padding: 0;
+  						}
+  					}
+            // jadams, 2019-01-16, removed padding and margin, border-left only
+  					.col-menu {
+  						// padding: 0 30px;
+  						// margin: 0 -0.5px;
+  						border-left: solid 1px $grey-200;
+  						//border-right: solid 1px $grey-200;
+  						//margin: 0;
+  						&:first-child {
+  							border-left: none;
+  						}
+  /*
+  						&:last-child {
+  							border-right: none;
+  						}
+  */
+  					}
+  					.content ul.menu-col li a {
+  						text-align: left;
+  						padding: 5px 0;
+  						display: block;
+  						width: 100%;
+  						margin-bottom: 0;
+  						border-bottom: none;
+  						color: $grey-800;
+  					}
+  				}
+  			}
+  			.navbar-toggle {
+  				background-color: transparent !important;  // jadams: background was overwritten to transparent, was: $white !important;
+  				border: none;
+  				padding: 0;
+  				font-size: 18px;
+  				position: relative;
+  				top: 5px;
+  			}
+  			&.navbar-fixed {
+  				position: fixed;
+  				&.navbar-transparent {
+  					.logo-scrolled {
+  						display: none;
+  					}
+  					.logo-display {
+  						display: block;
+  					}
+  				}
+  				&.no-background {
+  					.logo-scrolled {
+  						display: none;
+  					}
+  					.logo-display {
+  						display: block;
+  					}
+  				}
+  				.logo-display {
+  					display: none;
+  				}
+  				.logo-scrolled {
+  					display: block;
+  				}
+  			}
+  			&.no-background {
+  				transition: all 1s ease-in-out;
+  				background-color: transparent;
+  				border-bottom: 0;  // jadams: set no border;
+  			}
+  			&.navbar-transparent {
+          // jadams, 2020-07-02: removed left classes to not CONFLICT with brand icon for @media mobile
+  				// .attr-nav {
+  				// 	padding-left: 15px;
+  				// 	margin-left: 30px;
+  				// }
+  				&.light {
+  					background-color: $lighten-300;
+            // jadams, 2020-07-25: removed border-bottom. Border cause flicker
+            // in page load ???. Now, the top of a menu is INSIDE the menubar!
+            // Make sense as a feature!
+            // BUT: dropdown is NOT posioned below 1st level entry
+            // TODO: Check 1st level dropdown pos with menu script
+  					// border-bottom: solid 3px $grey-50;
+  				}
+  				&.dark {
+  					background-color: $darken-300;
+            // jadams, 2020-07-25: removed border-bottom. Border cause flicker
+            // in page load ???. Now, the top of a menu is INSIDE the menubar!
+            // Make sense as a feature!
+            // BUT: dropdown is NOT posioned below 1st level entry
+            // TODO: Check 1st level dropdown pos with menu script
+  					// border-bottom: solid 3px $grey-900;
+  					// border-left: solid 1px $grey-900;
+  				}
+  			}
+  			&.menu-center {
+  				.container {
+  					position: relative;
+  				}
+  				.navbar-header {
+  					position: absolute;
+  				}
+  				.attr-nav {
+  					position: absolute;
+  					right: 15px;
+  				}
+  				ul.nav.navbar-center {
+  					float: none;
+  					margin: 0 auto;
+  					display: table;
+  					table-layout: fixed;
+  				}
+  			}
+  			&.navbar-shadow {
+  				box-shadow: 0 2px 2px 0 $darken-100, 0 3px 1px -2px $darken-200, 0 1px 5px 0 $darken-100;
+  			}
+  			> .active > a {
+  				bottom: -2px;
+  				position: relative;
+  				border-bottom: solid 2px $grey-800;  // jadams: border-bottom: solid 2px $lime;
+  			}
+        // jadams, 2019-01-17: Added left/right borders
+  			li.dropdown ul.dropdown-menu {
+  				padding-top: 2px;
+  				margin-top: 0;
+  				min-width: $dropdown-menu-min-width;
+  				background: $white;
+  				border-top: solid 8px;
+          border-right: solid 1px;
+          border-left: solid 1px;
+  				> li {
+  					a:hover {
+  						background-color: transparent;  // jadams, 2017-12-06: removed background color from dropdown elements;
+  					}
+  					&:last-child > a {
+  						border-bottom: none;
+  					}
+  				}
+  				ul.dropdown-menu {
+  					top: -3px;  // jadams, 2017-05-16, to check: top: -3px;
+  				}
+  			}
+  			&.on ul.dropdown-menu.megamenu-content .content {
+  				display: block !important;
+  				height: auto !important;
+  			}
+  		}
+  		&.navbar-inverse.navigator.navbar-transparent.dark {
+  			background-color: $darken-300;
+  			border-bottom: solid 3px $grey-900;
+  			border-left: solid 1px $grey-900;
+  		}
+  	}
+  }
+
+  // QuickLinks
+  // -----------------------------------------------------------------------------
+  .attr-nav {
+  	margin-left: 0; // jadams, 2020-07-02: set left to 0 to NOT conflict with brand icon for @media mobile
+  	margin-right: -20px;  // jadams: changed because of div header, org: margin-right: -15px;
+  	float: right;
+  	position: relative;
+  	display: inline-block;
+  	margin-right: 3.5rem; // jadams, 2020-07-02: set higher right space because of missing nav toggle button
+  	> ul {
+      //display: inline-block;
+  		// padding: 0;
+  		// margin: 0 0 -7px 0;
+  		list-style: none;
+      overflow: hidden;
+  		> li {
+  			float: left;
+  			display: block;
+  			> a {
+  				display: block;
+  				padding: 10px 5px;
+  				position: relative;
+  				span.badge {
+  					position: absolute;
+  					top: 50%;
+  					margin-top: -15px;
+  					right: 5px;
+  					font-size: 10px;
+  					padding: 0;
+  					width: 15px;
+  					height: 15px;
+  					padding-top: 2px;
+  				}
+  			}
+  			&.dropdown ul.dropdown-menu {
+  				border-radius: 0;
+  				box-shadow: 0 0 0;
+  				border: solid 1px $grey-300;
+  				margin-top: 0;
+  				margin-left: 55px;
+  				width: $dropdown-menu-min-width;
+  				left: -$dropdown-menu-min-width;
+  			}
+  		}
+  	}
+  }
+
+  // Top Search
+  // -----------------------------------------------------------------------------
+  .top-search {
+  	padding: 10px 0 10px 0;
+  	display: none;
+  	position: sticky;
+  	top: 0;
+  	.input-group-addon {
+  		border: none;
+  		color: rgba(0, 0, 0, 0.75); //  jadams, 2020-07-08: set input text color
+  		padding-left: 0;
+  		padding-right: 0;
+  		background-color: transparent;
+  		&.close-search {
+  			cursor: pointer;
+  //    padding-bottom: .25rem; //  jadams, 2020-07-08: adjust|center buttons
+  		}
+  	}
+  	input.form-control {
+  		border: none;
+  		box-shadow: 0 0 0;
+  		color: $white;
+  		height: 40px;
+  		padding: 0 15px;
+  		background-color: transparent;
+  		height: 61px;
+  	}
+  }
+
+  // Sidebar
+  // -----------------------------------------------------------------------------
+  // Move the page if sidebar is opened
+  body {
+  	transition: all 0.3s ease-in-out;
+  	&.on-side {
+  		margin-left: -$sidebar-width;
+  		.wrap-sticky nav.navbar.navigator.sticked {
+  			left: -$sidebar-width;
+  		}
+  	}
+  	&.wrap-nav-sidebar .wrapper {
+  		padding-left: 260px;
+  		overflow-x: hidden;
+  	}
+  }
+
+  .wrap-sticky {
+  	position: relative;
+  	transition: all 0.3s ease-in-out;
+  	nav.navbar.navigator {
+  		position: absolute;
+  		width: 100%;
+  		left: 0;
+  		top: 0;
+  		&.sticked {
+  			position: fixed;
+  			transition: all 0.2s ease-in-out;
+  		}
+  	}
+  }
+
+
+  .side {
+  	background-color: $white;
+  	position: fixed;
+  	overflow-y: auto;
+  	top: 0;
+  	right: -$sidebar-width;
+  	width: $sidebar-width;
+  	padding: 25px 30px;
+  	height: 100%;
+  	display: block;
+  	transition: all 0.3s ease-in-out;
+  	z-index: 9;
+  	&.on {
+  		right: 0;
+  	}
+  	.close-side {
+  		//float: right;
+  		color: $white;
+  		position: relative;
+  		z-index: 2;
+  		// font-size: 16px;
+  	}
+  	.widget {
+  		position: relative;
+  		z-index: 1;
+  		margin-bottom: 25px;
+  		.title {
+  			color: $white;
+  			margin-bottom: 15px;
+  			border-left: 3px solid $blue-900;
+  			padding-left: 5px;
+  		}
+  		.heading {
+  			text-align: left;
+  			color: $grey-200;
+  			font-size: 18px;
+  			text-transform: uppercase;
+  			position: relative;
+  			margin-bottom: 10px;
+  			padding-bottom: 10px;
+  		}
+  		ul.link {
+  			font-family: $font_1, $font_2, $font_3, $font_4, $font_5;
+  			font-size: 14px;
+  			padding: 0;
+  			margin: 0;
+  			list-style: none;
+  			li a {
+  				color: $grey;
+  				// letter-spacing: 1px;
+  				&:focus {
+  					color: $grey-50;
+  					text-decoration: none;
+  				}
+  				&:hover {
+  					color: $grey-50;
+  					text-decoration: none;
+  				}
+  			}
+  		}
+  	}
+  }
+} // END all

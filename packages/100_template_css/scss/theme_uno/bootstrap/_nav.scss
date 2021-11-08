@@ -1,0 +1,126 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/bootstrap/_nav.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+// Selected styles taken from previous custom.scss
+// -----------------------------------------------------------------------------
+
+// Override for nav-pills|extended Modals
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: $grey-100;
+  background-color: $blue;
+}
+
+.nav-pills > li > a:hover {
+  background-color: $darken;
+}
+
+// NAV
+// https://www.google.com/design/spec/components/tabs.html#tabs-specs
+// -----------------------------------------------------------------------------
+.navbar-text {
+  font-weight: 500;
+  color: $grey-800;
+}
+
+.nav-link {
+  //line-height: $bmd-nav-link-line-height; // set baseline line-height and font sizes
+  text-transform: uppercase;
+}
+
+// navbars
+.navbar-nav {
+  .nav-link {
+    padding: $bmd-navbar-link-padding;
+    font-size: $bmd-navbar-link-font-size;
+    font-weight: $bmd-navbar-link-font-weight;
+  }
+}
+
+// pills and tabs
+.nav-tabs,
+.nav-pills {
+  border: 0;
+
+  .nav-link {
+    padding: $bmd-nav-tabs-pills-link-padding;
+    font-size: $bmd-nav-tabs-pills-font-size;
+    font-weight: $bmd-nav-tabs-pills-font-weight;
+    background-color: $grey-300;
+    border: 0;
+  }
+
+  .nav-link.active,
+  .nav-item.show .nav-link {
+    background-color: transparent;
+    color: inherit;
+  }
+}
+
+// jadams, 2020-10-04: caret on top of the menu
+.nav-tabs .dropdown-menu, .nav-pills .dropdown-menu {
+    margin-top: 2px !important;
+    border-top-left-radius: 0 !important;
+    border-top-right-radius: 0 !important;
+    border-right-width: 2px;
+    border-bottom-width: 2px;
+}
+
+// jadams, 2020-10-04: caret on top of the menu
+.nav-tabs .dropdown-menu:before, .nav-pills .dropdown-menu:before {
+    position: absolute;
+    top: -7px;
+    left: 9px;
+    display: inline-block;
+    border-right: 7px solid transparent;
+    border-bottom: 7px solid #ccc;
+    border-left: 7px solid transparent;
+    border-bottom-color: rgba(0,0,0,0.2);
+    content: '';
+}
+
+.nav-tabs .dropdown-menu:after, .nav-pills .dropdown-menu:after {
+    position: absolute;
+    top: -6px;
+    left: 10px;
+    display: inline-block;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #fff;
+    border-left: 6px solid transparent;
+    content: '';
+}
+
+// tabs only
+.nav-tabs {
+  .nav-link {
+    border-bottom: $bmd-nav-tabs-border-size solid transparent;
+  }
+
+  // colors
+  @include bmd-tabs-color($bmd-nav-tabs-color, $bmd-nav-tabs-active-color, $bmd-nav-tabs-active-border-color, $bmd-nav-tabs-disabled-link-color, $bmd-nav-tabs-disabled-link-color-hover);
+
+  &.bg-primary {
+    @include bmd-tabs-color($bmd-nav-tabs-primary-color, $bmd-nav-tabs-primary-active-color, $bmd-nav-tabs-primary-active-border-color, $bmd-nav-tabs-primary-disabled-link-color, $bmd-nav-tabs-primary-disabled-link-color-hover);
+  }
+
+  &.bg-dark {
+    @include bmd-tabs-color($bmd-nav-tabs-inverse-color, $bmd-nav-tabs-inverse-active-color, $bmd-nav-tabs-inverse-active-border-color, $bmd-nav-tabs-inverse-disabled-link-color, $bmd-nav-tabs-inverse-disabled-link-color-hover);
+  }
+}
+
+// used to correctly size ripple container
+.nav {
+  .nav-item {
+    position: relative;
+  }
+}

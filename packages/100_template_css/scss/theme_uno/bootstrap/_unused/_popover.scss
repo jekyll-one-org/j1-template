@@ -1,0 +1,32 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/bootstrap/_popover.scss
+ #
+ # Product/Info:
+ # https://github.com/FezVrasta/bootstrap-material-design
+ #
+ # Copyright (C) 2020 Federico Zivolo and Contributors
+ #
+ # Bootstrap Material Design is licensed under the MIT License.
+ # See: https://github.com/FezVrasta/bootstrap-material-design/blob/master/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+.popover, .tooltip-inner {
+ line-height: 1em;
+ color: $bmd-popover-color;
+ background: $bmd-popover-background;
+ border: 0;
+ border-radius: $border-radius;
+ @include box-shadow($bmd-shadow-2dp);
+}
+
+.tooltip, .tooltip.in {
+ opacity: 1;
+}
+
+.popover, .tooltip {
+ .arrow, .tooltip-arrow {
+   display: none;
+ }
+}
