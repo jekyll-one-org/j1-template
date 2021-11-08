@@ -95,7 +95,7 @@
     "jekyll_post_build:make_sure_css_files_copied": "shx cp -rf ../100_template_css/dist/* ../400_template_site/assets/themes/j1/core/css",
     "jekyll_post_build:make_sure_js_files_copied": "shx cp -rf ../200_template_js/dist/* ../400_template_site/assets/themes/j1/core/js",
     "develop": "run-p -s develop:*",
-    "develop:wds": "cd ../200_template_js && cross-var cross-env WP_JEKYLL_PORT=$npm_package_jekyll_opt_wp_jekyll_port webpack-dev-server --config $npm_package_wds_develop --env mode=MODE --env JEKYLL_PORT=WP_JEKYLL_PORT",
+    "develop:wds": "cd ../200_template_js && cross-var cross-env WP_JEKYLL_PORT=$npm_package_jekyll_opt_wp_jekyll_port webpack-dev-server --config $npm_package_wds_develop --env.MODE --env.WP_JEKYLL_PORT",
     "develop:jekyll": "cross-var cross-env JEKYLL_ENV=$npm_package_config_mode BUNDLE_GEMFILE=$npm_package_ruby_gemfile bundle exec jekyll s -c $npm_package_jekyll_configfile $npm_package_jekyll_opt_watch $npm_package_jekyll_opt_incremental",
     "delay-1s": "node ./node_modules/npm-delay 1000",
     "delay-2s": "node ./node_modules/npm-delay 2000",

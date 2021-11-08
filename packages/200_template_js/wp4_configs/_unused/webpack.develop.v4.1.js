@@ -1,14 +1,15 @@
 // -----------------------------------------------------------------------------
-// ~/packages/200_template_js/wp4_configs/webpack.develop.js
-// Webpack development config (dev-server v4) for J1 Template
+//  ~/packages/200_template_js/wp4_configs/webpack.develop.js
+//  Webpack development config for J1 Template (Starter Web)
 //
-// Product/Info:
-// https://jekyll.one
+//  Product/Info:
+//  https://jekyll.one
 //
-// Copyright (C) 2021 Juergen Adams
+//  Copyright (C) 2021 Juergen Adams
 //
-// J1 Template is licensed under the MIT License.
-// See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+//  J1 Template is licensed under the MIT License.
+//  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+//
 // -----------------------------------------------------------------------------
 // NOTE:
 //   Webpack commandline|s

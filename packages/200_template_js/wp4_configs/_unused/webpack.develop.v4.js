@@ -1,14 +1,15 @@
 // -----------------------------------------------------------------------------
-// ~/packages/200_template_js/wp4_configs/webpack.develop.js
-// Webpack development config (dev-server v4) for J1 Template
+//  ~/packages/200_template_js/wp4_configs/webpack.develop.js
+//  Webpack development config for J1 Template (Starter Web)
 //
-// Product/Info:
-// https://jekyll.one
+//  Product/Info:
+//  https://jekyll.one
 //
-// Copyright (C) 2021 Juergen Adams
+//  Copyright (C) 2021 Juergen Adams
 //
-// J1 Template is licensed under the MIT License.
-// See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+//  J1 Template is licensed under the MIT License.
+//  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+//
 // -----------------------------------------------------------------------------
 // NOTE:
 //   Webpack commandline|s
@@ -18,7 +19,6 @@
 // -----------------------------------------------------------------------------
 // webpack-dev-server migration v3 --> v4:
 //    https://github.com/webpack/webpack-dev-server/blob/master/migration-v4.md
-//    https://github.com/webpack/webpack-dev-middleware
 //
 // -----------------------------------------------------------------------------
 
@@ -50,8 +50,7 @@ const devServerPageOpen =               dockerEnv ? false : true;
 const devServerPort =                   process.env.JEKYLL_PORT || 44000;
 const distFolder =                      path.resolve(__dirname, './dist');
 const nodeModulesFolder =               path.resolve(__dirname, './node_modules');
-// const jekyllSite =                   path.join(__dirname, ROOT, '../400_template_site/_site');
-const jekyllSite =                      path.resolve(__dirname, ROOT, '../400_template_site/_site');
+const jekyllSite =                      path.join(__dirname, ROOT, '../400_template_site/_site');
 const jekyllSiteAssets =                path.join(__dirname, ROOT, '../400_template_site/_site/assets');
 
 
@@ -112,7 +111,7 @@ module.exports = merge(common, {
   //    to all entry points.
   // ---------------------------------------------------------------------------
   devServer: {
-    host:                               devServerHost,                          // "local-ip"
+    host:                               "local-ip",
     port:                               devServerPort,
     allowedHosts:                       "all",                                  // NOTE: host security setting. Only use it when you know what you're doing.
     headers: {                                                                  // NOTE: Response header settings for the STATIC web (CORS)
@@ -121,8 +120,9 @@ module.exports = merge(common, {
 //  noInfo:                             false,                                  // NOTE: default: false, can be true|false
 //  clientLogLevel:                     "error",                                // NOTE: default: info, can be error|warning|info|none
     client: {
-      logging: "info",                                                          // NOTE: default: info, can be error|warning|info|none
-      // Can be used only for `errors`|`warnings`
+      logging: "info",
+      // Can be used only for `errors`/`warnings`
+      //
       // overlay: {
       //   errors: true,
       //   warnings: true,
@@ -131,24 +131,9 @@ module.exports = merge(common, {
       progress: true,
     },
 //  stats:                              "minimal",                              // NOTE: default: normal, can be normal|errors-only|minimal|verbose|none
-    devMiddleware: {
-      index:                            true,                                   // the server will respond to requests to the root URL
-      stats:                            "minimal",                              // NOTE: default: normal, can be normal|errors-only|minimal|verbose|none
-    },
     static: {
-      directory:                            jekyllSite,                         // NOTE: serve Jekyll Site
-      staticOptions: {
-        watchContentBase:                   true,                               // NOTE: livereload for Jekyll build mode
-        watchOptions:                       {
-                                              ignored: [
-                                                distFolder,                     // NOTE: do not watch for changes on dist folder, node modules
-                                                nodeModulesFolder,              // NOTE: do not watch for changes on node modules folder
-                                                jekyllSiteAssets                // NOTE: do not watch for changes on _site/assets folder
-                                              ],
-                                              aggregateTimeout: 300,
-                                              poll:            1000
-                                            },
-      },
+      directory: path.resolve(__dirname, ROOT, '../400_template_site/_site'),
+      staticOptions: {},
       // Don't be confused with `devMiddleware.publicPath`, it is `publicPath` for static directory
       // Can be:
       // publicPath: ['/static-public-path-one/', '/static-public-path-two/'],
