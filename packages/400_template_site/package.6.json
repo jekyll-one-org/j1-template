@@ -53,7 +53,7 @@
     "app": "run-p -s app:*",
     "app:rackup": "cross-env SINATRA_ACTIVESUPPORT_WARNING=false WEBSERVER=$npm_package_jekyll_opt_webserver INTERFACE=$npm_package_jekyll_opt_interface PORT=$npm_package_jekyll_opt_app_port j1 rackup",
     "_app:jekyll": "cross-var cross-env JEKYLL_ENV=$npm_package_config_mode BUNDLE_GEMFILE=$npm_package_ruby_gemfile bundle exec jekyll s -c $npm_package_jekyll_configfile $npm_package_jekyll_opt_incremental",
-    "app:open": "npm run delay-3s && cross-var open-cli $npm_package_jekyll_opt_app_url",
+    "app:open": "npm run delay-3s && cross-var opn $npm_package_jekyll_opt_app_url",
     "algolia": "cross-env ALGOLIA_API_KEY=$npm_package_algolia_admin_key bundle exec jekyll algolia",
     "algolia-check": "cross-env ALGOLIA_API_KEY=$npm_package_algolia_admin_key bundle exec jekyll algolia --dry-run --verbose",
     "clean": "run-p -s clean:*",
