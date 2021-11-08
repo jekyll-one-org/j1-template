@@ -60,7 +60,7 @@ const jekyllSiteAssets =                path.join(__dirname, ROOT, '../400_templ
 
 // Load|Configure NamedModulesPlugin
 // -----------------------------------------------------------------------------
-const namedModules =                    new webpack.NamedModulesPlugin();
+// const namedModules =                    new webpack.NamedModulesPlugin();
 
 // Load HMR Plugin (Hot-reload for development mode)
 // -----------------------------------------------------------------------------
@@ -92,7 +92,7 @@ module.exports = merge(common, {
   // ---------------------------------------------------------------------------
   plugins: [
 //  hotModuleReplacement,
-    namedModules
+//  namedModules
   ],
 
   // WP DEVELOPMENT SERVER configuration
