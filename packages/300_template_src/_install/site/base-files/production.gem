@@ -166,7 +166,7 @@ end
 # running # tasks defined by a Rakefile prior running the app|web.
 #
 # gem 'passenger', '>= 5.3'
-gem 'puma', '>= 4.3.1'
+gem 'puma', '>= 5.5.2'
 
 # ------------------------------------------------------------------------------
 # If J1 is transformed into a (Rack and Sinatra based) Web
