@@ -446,7 +446,7 @@ var j1 = (function () {
       $('a[href*=\\#]').on('click', function (event) {
         // ignore void links
         if (window.location.href.includes('#void')||this.href.includes('#void')) {
-          return false;
+          // return false;
         }
         // for external links, redirect to this page
         if (window.location.pathname !== this.pathname) {

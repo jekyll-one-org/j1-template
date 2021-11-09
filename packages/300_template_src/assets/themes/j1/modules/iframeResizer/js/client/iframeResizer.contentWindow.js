@@ -602,7 +602,7 @@
       }
 
       Array.prototype.forEach.call(
-        document.querySelectorAll('a[href^="#void"]'),
+        document.querySelectorAll('a[href^="#"]'),
         setupLink
       )
     }

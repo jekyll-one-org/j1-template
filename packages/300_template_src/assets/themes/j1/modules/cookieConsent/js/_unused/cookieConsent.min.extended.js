@@ -123,7 +123,7 @@ function BootstrapCookieConsent(c) {
                 var t = l.props.contentURL + "/index.html";
                 $.get(t).done(function(u) {
                     l.modal.innerHTML = u;
-                    l.modal.innerHTML = $("#void" + l.props.xhr_data_element).eq(0).html();
+                    l.modal.innerHTML = $("#" + l.props.xhr_data_element).eq(0).html();
                     $(l.modal).modal({
                         backdrop: "static",
                         keyboard: false

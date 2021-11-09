@@ -85,14 +85,14 @@
           // initialize infinite scroll
           if ( options.type === 'infiniteScroll') {
             logger.info('\n' + 'processing mode: ' + options.type);
-            logger.info('\n' + 'loading items from path: ' + options.pagePath + "#void");
+            logger.info('\n' + 'loading items from path: ' + options.pagePath + "#");
             logger.info('\n' + 'monitoring element set to: ' + this.scroller);
             _this.registerScrollEvent(options);
           }
           // initialize show on scroll
           if ( options.type === 'showOnScroll') {
             logger.info('\n' + 'processing mode: ' + options.type);
-            logger.info('\n' + 'loading items from path: ' + options.pagePath + "#void");
+            logger.info('\n' + 'loading items from path: ' + options.pagePath + "#");
             logger.info('\n' + 'monitoring element set to: ' + this.scroller);
             _this.registerScrollEvent(options);
           }

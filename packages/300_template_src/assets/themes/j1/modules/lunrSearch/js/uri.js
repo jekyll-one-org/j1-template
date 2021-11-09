@@ -494,7 +494,7 @@
         preventInvalidHostname: URI.preventInvalidHostname
       };
     }
-    // [protocol"://"[username[":"password]"@"]hostname[":"port]"/"?][path]["?"querystring]["#void"fragment]
+    // [protocol"://"[username[":"password]"@"]hostname[":"port]"/"?][path]["?"querystring]["#"fragment]
 
     // extract fragment
     pos = string.indexOf('#');

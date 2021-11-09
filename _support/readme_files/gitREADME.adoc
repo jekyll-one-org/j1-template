@@ -114,7 +114,7 @@ Then:
   git commit -am "Prepare new version 2021.3.2"
   git commit -am "Latest files of version 2021.3.2"
 
-# Add file permissions on Windows
+== Add file permissions on Windows
 
 See: https://medium.com/@akash1233/change-file-permissions-when-working-with-git-repos-on-windows-ea22e34d5cee
 
@@ -125,7 +125,7 @@ for windows os.
 
   git update-index --chmod=+x 'name-of-shell-script'
 
-# List all of committed files
+== List all of committed files
 
 List all files in the repo, including those that are only staged but not
 yet committed:
@@ -136,9 +136,9 @@ Lists all of the already committed files being tracked by the repo:
 
   git ls-tree --full-tree -r --name-only HEAD
 
-# Turn off warnings
+== Turn off warnings
 
-## Disable warning: CRLF will be replaced by LF
+=== Disable warning: CRLF will be replaced by LF
 
 You can turn off the warning with
 

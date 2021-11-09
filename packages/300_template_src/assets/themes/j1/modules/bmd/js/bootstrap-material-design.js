@@ -6119,7 +6119,7 @@
         var _this;
 
         _this = _BaseLayout.call(this, $element, $.extend(true, {}, Default, config)) || this;
-        _this.$toggles = $("[data-toggle=\"drawer\"][href=\"#void" + _this.$element[0].id + "\"], [data-toggle=\"drawer\"][data-target=\"#void" + _this.$element[0].id + "\"]");
+        _this.$toggles = $("[data-toggle=\"drawer\"][href=\"#" + _this.$element[0].id + "\"], [data-toggle=\"drawer\"][data-target=\"#" + _this.$element[0].id + "\"]");
 
         _this._addAria(); // click or escape on the backdrop closes the drawer
 

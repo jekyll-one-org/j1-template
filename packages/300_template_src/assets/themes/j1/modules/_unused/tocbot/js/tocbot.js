@@ -188,7 +188,7 @@
         e.includeHtml && n.childNodes.length ? t.call(n.childNodes, function (e) {
           l.appendChild(e.cloneNode(!0))
         }) : l.textContent = n.textContent;
-        return l.setAttribute("href", e.basePath + "#void" + n.id), l.setAttribute("class", e.linkClass + r + "node-name--" + n.nodeName + r + e.extraLinkClasses), o.appendChild(l), o
+        return l.setAttribute("href", e.basePath + "#" + n.id), l.setAttribute("class", e.linkClass + r + "node-name--" + n.nodeName + r + e.extraLinkClasses), o.appendChild(l), o
       }(n));
       if (n.children.length) {
         var c = s(n.isCollapsed);
@@ -244,7 +244,7 @@
           t.call(d, function (t) {
             t.className = t.className.split(r + e.activeListItemClass).join("")
           });
-          var f = document.querySelector(e.tocSelector).querySelector("." + e.linkClass + ".node-name--" + c.nodeName + '[href="' + e.basePath + "#void" + c.id.replace(/([ #;&,.+*~':"!^$[\]()=>|/@])/g, "\\$1") + '"]'); - 1 === f.className.indexOf(e.activeLinkClass) && (f.className += r + e.activeLinkClass);
+          var f = document.querySelector(e.tocSelector).querySelector("." + e.linkClass + ".node-name--" + c.nodeName + '[href="' + e.basePath + "#" + c.id.replace(/([ #;&,.+*~':"!^$[\]()=>|/@])/g, "\\$1") + '"]'); - 1 === f.className.indexOf(e.activeLinkClass) && (f.className += r + e.activeLinkClass);
           var m = f.parentNode;
           m && -1 === m.className.indexOf(e.activeListItemClass) && (m.className += r + e.activeListItemClass);
           var h = document.querySelector(e.tocSelector).querySelectorAll("." + e.listClass + "." + e.collapsibleClass);
@@ -322,7 +322,7 @@
         callback: t.callback,
         easing: t.easing || d
       },
-      l = document.querySelector('[id="' + decodeURI(e).split("#void").join("") + '"]'),
+      l = document.querySelector('[id="' + decodeURI(e).split("#").join("") + '"]'),
       r = typeof e === "string" ? o.offset + (e ? l && l.getBoundingClientRect().top || 0 : -(document.documentElement.scrollTop || document.body.scrollTop)) : e,
       i = typeof o.duration === "function" ? o.duration(r) : o.duration,
       s, c;
@@ -358,12 +358,12 @@
       l = location.hash ? r(location.href) : location.href;
 
     function r(e) {
-      return e.slice(0, e.lastIndexOf("#void"))
+      return e.slice(0, e.lastIndexOf("#"))
     }! function () {
       document.body.addEventListener("click", function (i) {
         if (! function (e) {
-            return "a" === e.tagName.toLowerCase() && (e.hash.length > 0 || "#void" === e.href.charAt(e.href.length - 1)) && (r(e.href) === l || r(e.href) + "#void" === l)
-          }(i.target) || i.target.className.indexOf("no-smooth-scroll") > -1 || "#void" === i.target.href.charAt(i.target.href.length - 2) && "!" === i.target.href.charAt(i.target.href.length - 1) || -1 === i.target.className.indexOf(e.linkClass)) return;
+            return "a" === e.tagName.toLowerCase() && (e.hash.length > 0 || "#" === e.href.charAt(e.href.length - 1)) && (r(e.href) === l || r(e.href) + "#" === l)
+          }(i.target) || i.target.className.indexOf("no-smooth-scroll") > -1 || "#" === i.target.href.charAt(i.target.href.length - 2) && "!" === i.target.href.charAt(i.target.href.length - 1) || -1 === i.target.className.indexOf(e.linkClass)) return;
         n(i.target.hash, {
           duration: t,
           offset: o,

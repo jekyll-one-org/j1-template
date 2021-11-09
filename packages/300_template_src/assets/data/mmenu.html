@@ -83,15 +83,15 @@ exclude_from_search:                    true
 {% assign icon_size   = navigator_options.icon_size %}
 {% assign icon_color  = navigator_options.icon_color %}
 
-<!-- [INFO   ] [j1.assets.data.mmenu.html             ] [ set meta data (robots) to exclude HTML data files from index ] -->
+<!-- [INFO   ] [/assets/data/mmenu.html               ] [ set meta data (robots) to exclude HTML data files from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />
 </head>
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
-  <!-- [INFO   ] [[j1.assets.data.mmenu.html        ] [collect all nav links for the mobile navigation ] -->
-  <!-- [INFO   ] [[j1.assets.data.mmenu.html        ] [id menu_mmenu set statically and MUST as configured  ] -->
+  <!-- [INFO   ] [/assets/data/mmenu.html               ] [collect all nav links for the mobile navigation ] -->
+  <!-- [INFO   ] [/assets/data/mmenu.html               ] [id menu_mmenu set statically and MUST as configured  ] -->
   <ul id="menu_mmenu" class="partial" style="display:none">
 
   {% for menu in navigator_menu_config %}
@@ -120,13 +120,13 @@ exclude_from_search:                    true
     {% comment %} Collect items having a SUB menue
     ---------------------------------------------------------------------------- {% endcomment %}
     {% when 'sublevel_menu' %}
-      <!-- [INFO   ] [j1.modules.mmenu.html  ] [found menu-type: sub-menue] -->
-      <!-- [INFO   ] [j1.modules.mmenu.html  ] [submenu level 1 detected] -->
+      <!-- [INFO   ] [/assets/data/mmenu.html               ] [found menu-type: sub-menue] -->
+      <!-- [INFO   ] [/assets/data/mmenu.html               ] [submenu level 1 detected] -->
       <li>
         {% if menu.icon == null %}
-          <a href="#void">{{menu.item}}</a>
+          <a href="#">{{menu.item}}</a>
         {% else %}
-          <a href="#void"> <i class="{{icon_style}} {{icon_family}}-{{menu.icon}} {{icon_size}} {{icon_color}} mr-2"></i>{{menu.item}}</a>
+          <a href="#"> <i class="{{icon_style}} {{icon_family}}-{{menu.icon}} {{icon_size}} {{icon_color}} mr-2"></i>{{menu.item}}</a>
         {% endif %}
 
         <ul>
@@ -148,12 +148,12 @@ exclude_from_search:                    true
           {% endif %}
 
           {% if level_1.dropdown %}
-            <!-- [INFO   ] [j1.modules.mmenu.html  ] [submenu level 2 (dropdown) detected] -->
+            <!-- [INFO   ] [/assets/data/mmenu.html               ] [submenu level 2 (dropdown) detected] -->
             <li>
               {% if level_1.icon == null %}
-                <a href="#void">{{level_1.title}}</a>
+                <a href="#">{{level_1.title}}</a>
               {% else %}
-                <a href="#void"><i class="{{icon_style}} {{icon_family}}-{{level_1.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_1.title}}</a>
+                <a href="#"><i class="{{icon_style}} {{icon_family}}-{{level_1.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_1.title}}</a>
               {% endif %}
 
               <ul>
@@ -174,12 +174,12 @@ exclude_from_search:                    true
                     {% endif %}
                   {% endif %}
                   {% if level_2.dropdown %}
-                    <!-- [INFO   ] [j1.modules.mmenu.html  ] [submenu level 3 detected (last level supported)] -->
+                    <!-- [INFO   ] [/assets/data/mmenu.html               ] [submenu level 3 detected (last level supported)] -->
                     <li>
                       {% if level_2.icon == null %}
-                        <a href="#void" >{{level_2.title}}</a>
+                        <a href="#" >{{level_2.title}}</a>
                       {% else %}
-                        <a href="#void" ><i class="{{icon_style}} {{icon_family}}-{{level_2.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_2.title}}</a>
+                        <a href="#" ><i class="{{icon_style}} {{icon_family}}-{{level_2.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_2.title}}</a>
                       {% endif %}
 
                       <ul>
@@ -198,32 +198,32 @@ exclude_from_search:                    true
                           {% endif %}
                         {% endif %}
                         {% if level_3.divider %} <li class="divider"></li> {% endif %}
-                      {% endfor %} <!-- [INFO   ] [j1.modules.mmenu.html  ] [end processing: level 3] -->
+                      {% endfor %} <!-- [INFO   ] [/assets/data/mmenu.html               ] [end processing: level 3] -->
                       </ul>
                     </li>
                   {% endif %}
-              {% endfor %} <!-- [INFO   ] [j1.modules.mmenu.html  ] [end processing: level 2] -->
+              {% endfor %} <!-- [INFO   ] [/assets/data/mmenu.html               ] [end processing: level 2] -->
               </ul>
             </li>
           {% endif %}
-        {% endfor %} <!-- [INFO   ] [j1.modules.mmenu.html  ] [end processing: level 1] -->
+        {% endfor %} <!-- [INFO   ] [/assets/data/mmenu.html               ] [end processing: level 1] -->
         </ul>
       </li>
-      <!-- [INFO   ] [j1.modules.mmenu.html  ] [reset menu_type for next loop] -->
+      <!-- [INFO   ] [/assets/data/mmenu.html               ] [reset menu_type for next loop] -->
     {% assign menu_type = '' %}
 
 
     {% comment %} Collect items having a MEGA menu (disabled for now)
     ---------------------------------------------------------------------------- {% endcomment %}
     {% when 'mmmmmmmega_menu' %}
-      <!-- [INFO   ] [j1.modules.mmenu.html  ] [found menu-type: megamenu-menue] -->
+      <!-- [INFO   ] [/assets/data/mmenu.html               ] [found menu-type: megamenu-menue] -->
       <!-- calculate size of mm_columns -->
       {% assign columns = menu.megamenu | size %}
       {% assign columns_width_md = 12 | divided_by:columns %}
-      <!-- [INFO   ] [j1.modules.mmenu.html  ] [Calculated size of mm_columns: {{columns_width_md}}] -->
+      <!-- [INFO   ] [/assets/data/mmenu.html               ] [Calculated size of mm_columns: {{columns_width_md}}] -->
 
       <li>
-        <a href="#void" >{{menu.item}} </a>
+        <a href="#" >{{menu.item}} </a>
         <ul>
           <li>
             <div class="row">
@@ -250,30 +250,30 @@ exclude_from_search:                    true
                 </ul>
               </div>
             </div>
-            <!-- [INFO   ] [j1.modules.mmenu.html  ] [megamenu-menue: end megabox] -->
+            <!-- [INFO   ] [/assets/data/mmenu.html               ] [megamenu-menue: end megabox] -->
             {% endfor %}
             </div>
           </li>
         </ul>
       </li>
-      <!-- [INFO   ] [j1.modules.mmenu.html  ] [megamenu-menue: end mega-menu] -->
-      <!-- [INFO   ] [j1.modules.mmenu.html  ] [reset menu_type for next loop] -->
+      <!-- [INFO   ] [/assets/data/mmenu.html               ] [megamenu-menue: end mega-menu] -->
+      <!-- [INFO   ] [/assets/data/mmenu.html               ] [reset menu_type for next loop] -->
       {% assign menu_type = '' %}
 
 
       {% comment %} Collect TOP-LEVEL items (NO sub-menu)
       -------------------------------------------------------------------------- {% endcomment %}
       {% when 'top_level_item' %}
-        <!-- [INFO   ] [j1.modules.mmenu.html  ] [found menu-type: menu-top-level-only] -->
+        <!-- [INFO   ] [/assets/data/mmenu.html               ] [found menu-type: menu-top-level-only] -->
         {% if menu.icon == null %}
-          <!-- [INFO   ] [j1.modules.mmenu.html  ] [no icon for menu-item found -->
+          <!-- [INFO   ] [/assets/data/mmenu.html               ] [no icon for menu-item found -->
           {% if menu.target == null %}
             <li> <a href="{{menu.href}}{{ext}}">{{menu.item}}</a> </li>
           {% else %}
             <li> <a href="{{menu.href}}{{ext}}" target="{{menu.target}}">{{menu.item}}</a> </li>
           {% endif %}
         {% elsif menu.icon %}
-          <!-- [INFO   ] [j1.modules.mmenu.html  ] [no icon for menu-item found -->
+          <!-- [INFO   ] [/assets/data/mmenu.html               ] [no icon for menu-item found -->
           {% if menu.target == null %}
             <li> <a href="{{menu.href}}{{ext}}"><i class="{{icon_style}} {{icon_family}}-{{menu.icon}} {{icon_size}}"></i> {{menu.item}}</a> </li>
           {% else %}
@@ -282,65 +282,65 @@ exclude_from_search:                    true
         {% else %}
           <!-- [FATAL ] [nav_menu.menu-top-level-only       ] [processing menu item failed] -->
         {% endif %}
-        <!-- [INFO   ] [j1.modules.mmenu.html  ] [menu-top-level-only: end menu] -->
-        <!-- [INFO   ] [j1.modules.mmenu.html  ] [reset menu_type for next loop] -->
+        <!-- [INFO   ] [/assets/data/mmenu.html               ] [menu-top-level-only: end menu] -->
+        <!-- [INFO   ] [/assets/data/mmenu.html               ] [reset menu_type for next loop] -->
         {% assign menu_type = '' %}
 
 
         {% comment %} Collect items having a LOGIN menu  (disabled for now)
         ------------------------------------------------------------------------ {% endcomment %}
-        {% when 'aaaaaaauth_client' %}
-          <!-- [INFO   ] [j1.modules.mmenu.html  ] [found menu-type: auth_client] -->
+        {% when 'auth_client' %}
+          <!-- [INFO   ] [/assets/data/mmenu.html               ] [found menu-type: auth_client] -->
           <li id="menuBarSignInOut" class="dropdown nav-item">
-            <a href="#void">{{menu.item}} </a>
+            <a href="#">{{menu.item}} </a>
 
             <ul>
               {% assign item_found = 'false' %}
               {% for item in menu.auth_client %}
 
-                <!-- [INFO   ] [j1.modules.mmenu.html  ] [START: check signin] -->
+                <!-- [INFO   ] [/assets/data/mmenu.html               ] [START: check signin] -->
                 {% if item.mode == 'signin' %}
                   <li>
-                    <a href="#void" data-toggle="modal" data-target="#modalOmniSignIn"><i class="{{icon_style}} {{icon_family}}-{{item.icon}} {{icon_size}}"></i>{{item.title}}</a>
+                    <a href="#" data-toggle="modal" data-target="#modalOmniSignIn"><i class="{{icon_style}} {{icon_family}}-{{item.icon}} {{icon_size}}"></i>{{item.title}}</a>
                   </li>
                   {% assign item_found = 'true' %}
                 {% endif %}
-                <!-- [INFO   ] [j1.modules.mmenu.html  ] [END: check signin] -->
+                <!-- [INFO   ] [/assets/data/mmenu.html               ] [END: check signin] -->
 
-                <!-- [INFO   ] [j1.modules.mmenu.html  ] [START: check signout] -->
+                <!-- [INFO   ] [/assets/data/mmenu.html               ] [START: check signout] -->
                 {% if item.mode == 'signout' %}
                   <li>
-                    <a href="#void" data-toggle="modal" data-target="#modalOmniSignOut"><i class="{{icon_style}} {{icon_family}}-{{item.icon}} {{icon_size}}"></i>{{item.title}}</a>
+                    <a href="#" data-toggle="modal" data-target="#modalOmniSignOut"><i class="{{icon_style}} {{icon_family}}-{{item.icon}} {{icon_size}}"></i>{{item.title}}</a>
                   </li>
                   {% assign item_found = 'true' %}
                 {% endif %}
-                <!-- [INFO   ] [j1.modules.mmenu.html  ] [END: check signout] -->
+                <!-- [INFO   ] [/assets/data/mmenu.html               ] [END: check signout] -->
 
                 {% if item_found == 'false' %}
-                <!-- [FATAL  ] [j1.modules.mmenu.html  ] [no valid menu item config found] -->
+                <!-- [FATAL  ] [/assets/data/mmenu.html               ] [no valid menu item config found] -->
                   <li>
                     {% if item.title %}
-                      <a href="#void" >Invalid: {{item.title}}</a>
+                      <a href="#" >Invalid: {{item.title}}</a>
                     {% else %}
-                      <a href="#void" >Item invalid</a>
+                      <a href="#" >Item invalid</a>
                     {% endif %}
                   </li>
                 {% endif %}
 
               {% endfor %}
-              <!-- [INFO   ] [j1.modules.mmenu.html  ] [login_menu: end menu] -->
+              <!-- [INFO   ] [/assets/data/mmenu.html               ] [login_menu: end menu] -->
             </ul>
           </li>
-          <!-- [INFO   ] [j1.modules.mmenu.html  ] [reset menu_type for next loop] -->
+          <!-- [INFO   ] [/assets/data/mmenu.html               ] [reset menu_type for next loop] -->
           {% assign menu_type = '' %}
 
           {% comment %} Collect items having a THEMES menu  (disabled for now)
           ---------------------------------------------------------------------- {% endcomment %}
           {% when 'theme_select' %}
           {% if themer_options.enabled %}
-            <!-- [INFO   ] [j1.modules.mmenu.html  ] [found menu-type: theme_select] -->
+            <!-- [INFO   ] [/assets/data/mmenu.html               ] [found menu-type: theme_select] -->
             <li>
-              <a href="#void">{{menu.item}} </a>
+              <a href="#">{{menu.item}} </a>
               {% if nav_menu_animation %}
               <ul>
               <!-- ul class="dropdown-menu data-in="{{nav_menu_animation}}" data-out="{{nav_menu_animation}}" -->
@@ -352,7 +352,7 @@ exclude_from_search:                    true
                   <!-- check for locally loaded J1 Themes -->
                   {% if item.local_themes and item.local_themes == 'enabled' %}
                     <li>
-                      <a href="#void"><i class="{{icon_family}} {{icon_family}}-{{item.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{item.title}}</a>
+                      <a href="#"><i class="{{icon_family}} {{icon_family}}-{{item.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{item.title}}</a>
                       <ul id="local_themes_mmenu"></ul>
                     </li>
                     {% assign item_found = 'true' %}
@@ -360,7 +360,7 @@ exclude_from_search:                    true
                   <!-- check for remotely loaded (BootSwatch) Themes -->
                   {% if item.bootswatch_themes and item.bootswatch_themes == 'enabled' %}
                     <li>
-                      <a href="#void"><i class="{{icon_family}} {{icon_family}}-{{item.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{item.title}}</a>
+                      <a href="#"><i class="{{icon_family}} {{icon_family}}-{{item.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{item.title}}</a>
                       <ul id="remote_themes_mmenu"></ul>
                     </li>
                     {% assign item_found = 'true' %}
@@ -375,16 +375,16 @@ exclude_from_search:                    true
                     {% if item_found == 'false' %}
                     <li>
                       {% if item.title %}
-                        <a href="#void" >Invalid: {{item.title}}</a>
+                        <a href="#" >Invalid: {{item.title}}</a>
                       {% else %}
-                        <a href="#void" >Item invalid</a>
+                        <a href="#" >Item invalid</a>
                       {% endif %}
                     </li>
                   {% endif %} <!-- end fallback -->
                 {% endfor %}
               </ul>
             </li>
-            <!-- [INFO   ] [j1.modules.mmenu.html  ] [reset menu_type for next loop] -->
+            <!-- [INFO   ] [/assets/data/mmenu.html               ] [reset menu_type for next loop] -->
           {% endif %}
           {% assign menu_type = '' %}
 
@@ -392,17 +392,17 @@ exclude_from_search:                    true
           {% comment %} Collect items failed
           ---------------------------------------------------------------------- {% endcomment %}
           {% else %}
-            <!-- [FATAL  ] [j1.modules.mmenu.html  ] [detecting menu items|type failed] -->
+            <!-- [FATAL  ] [/assets/data/mmenu.html               ] [detecting menu items|type failed] -->
         {% assign menu_type = '' %}
 
     {% endcase %}
 
   {% endfor %}
-  <!-- [INFO   ] [j1.modules.mmenu.html  ] [nav_menu_settings: end menu] -->
+  <!-- [INFO   ] [/assets/data/mmenu.html               ] [nav_menu_settings: end menu] -->
   </ul>
-  <!-- [INFO   ] [j1.modules.mmenu.html  ] [nav_menu_settings: end navbar] -->
+  <!-- [INFO   ] [/assets/data/mmenu.html               ] [nav_menu_settings: end navbar] -->
 <!-- div -->
-<!-- [INFO   ] [j1.modules.mmenu.html  ] [nav_menu_settings: end processing] -->
+<!-- [INFO   ] [/assets/data/mmenu.html               ] [nav_menu_settings: end processing] -->
 
 {% endcapture %}
 {% if production %}

@@ -43,7 +43,7 @@
 * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
 */
 
-(function ($, window, document, undefined) {
+;(function ($, window, document, undefined) {
 
   var old = $.fn.bootstrapThemeSwitcher;
 
@@ -133,9 +133,9 @@
       } else {
         logger.error('\n' + 'cookie not found: ' + cookie_names.user_state);
         logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
-        j1Cookies.forEach(item => console.log('j1.core.switcher: ' + item));
+        j1Cookies.forEach(function (item) {console.log('j1.core.switcher: ' + item);});
         logger.debug('\n' + 'ga cookies found:' + gaCookies.length);
-        gaCookies.forEach(item => console.log('j1.core.switcher: ' + item));
+        gaCookies.forEach(function (item) {console.log('j1.core.switcher: ' + item);});
       }
 
       themeName = user_state.theme_name;
@@ -203,9 +203,9 @@
       } else {
         logger.error('\n' + 'cookie not found: ' + cookie_names.user_state);
         logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
-        j1Cookies.forEach(item => console.log('j1.core.switcher: ' + item));
+        j1Cookies.forEach(function (item) {console.log('j1.core.switcher: ' + item);});
         logger.debug('\n' + 'ga cookies found:' + gaCookies.length);
-        gaCookies.forEach(item => console.log('j1.core.switcher: ' + item));
+        gaCookies.forEach(function (item) {console.log('j1.core.switcher: ' + item);});
       }
 
       var themeName = user_state.theme_name;
@@ -276,9 +276,9 @@
         } else {
           logger.error('\n' + 'user state NOT cookie found');
           logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
-          j1Cookies.forEach(item => console.log('j1.core.switcher: ' + item));
+          j1Cookies.forEach(function (item) {console.log('j1.core.switcher: ' + item);});
           logger.debug('\n' + 'ga cookies found:' + gaCookies.length);
-          gaCookies.forEach(item => console.log('j1.core.switcher: ' + item));
+          gaCookies.forEach(function (item) {console.log('j1.core.switcher: ' + item);});
         }
 
         themeName = user_state.theme_name;
@@ -309,7 +309,7 @@
           }
           var li = $('<li />')
               .attr('class',cssClass)
-              .append('<a href="#void"><i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: ' +iconColor+ '"></i>' +value.name+ '</a>')
+              .append('<a href="#"><i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: ' +iconColor+ '"></i>' +value.name+ '</a>')
               .on('click', function () {
                 if (settings.loadFromBootswatch) {
                   base.switchTheme(value.name, value.css);
