@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "site",
-  "version": "2021.3.1",
+  "version": "2021.3.2",
   "description": "Web/Content sources for J1 Starter",
   "main": "_config.yml",
   "config": {

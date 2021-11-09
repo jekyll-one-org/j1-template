@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "site",
-  "version": "2021.3.1",
+  "version": "2021.3.2",
   "description": "Web/Content sources for J1 Starter",
   "main": "_config.yml",
   "config": {
@@ -99,12 +99,10 @@
     "develop": "run-p -s develop:*",
     "develop:wds": "cd ../200_template_js && cross-var cross-env WP_JEKYLL_PORT=$npm_package_jekyll_opt_wp_jekyll_port webpack serve --config $npm_package_wds_develop",
     "develop:jekyll": "cross-var cross-env JEKYLL_ENV=$npm_package_config_mode BUNDLE_GEMFILE=$npm_package_ruby_gemfile bundle exec jekyll s -c $npm_package_jekyll_configfile $npm_package_jekyll_opt_watch $npm_package_jekyll_opt_incremental",
-
     "delay-1s": "node ./node_modules/npm-delay 1000",
     "delay-2s": "node ./node_modules/npm-delay 2000",
     "delay-3s": "node ./node_modules/npm-delay 3000",
     "delay-5s": "node ./node_modules/npm-delay 5000",
-
     "setup-links": "cross-var if-env OS=Windows_NT && run-s -s link-default || cross-env OS=$(echo $(getos)) run-s -s switch-links",
     "switch-links": "if-env OS=darwin && run-s -s link-osx || run-s -s link-default",
     "link-default": "run-p -s link-default:*",
