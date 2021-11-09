@@ -25,6 +25,7 @@
     "Theme"
   ],
   "scripts": {
+    "audit": "npm audit",
     "clean": "run-p -s clean:*",
     "clean:log": "shx rm -f *.log && shx rm -rf log/",
     "clean:lock": "shx rm -f *.lock && shx rm -f package-lock.json",

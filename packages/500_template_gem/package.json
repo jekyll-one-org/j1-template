@@ -27,6 +27,7 @@
     "userize": "true"
   },
   "scripts": {
+    "audit": "npm audit",
     "clean": "run-p -s clean:* && run-p -s clean-bundle:*",
     "create": "run-s template-gem",
     "setup": "run-s bundle_install:*",

@@ -11,6 +11,7 @@
   },
   "repository": "https://github.com/jekyll-one-org/J1 Template/packages/300_template_src/",
   "scripts": {
+    "audit": "npm audit",
     "clean": "run-s clean:*",
     "clean:lock": "shx rm -f *.lock && shx rm -f package-lock.json"
   },

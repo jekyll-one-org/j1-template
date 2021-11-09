@@ -56,7 +56,7 @@ const providePlugins = new webpack.ProvidePlugin({
 // MODULE object definitions
 // -----------------------------------------------------------------------------
 module.exports = {
-
+// module.exports = (env) => {
   // MODULE base definitions
   // ---------------------------------------------------------------------------
   context:                              jsSourcePath,

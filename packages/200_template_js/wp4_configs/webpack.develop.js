@@ -47,7 +47,7 @@ const hostCheckDisabled =               !!"String(process.env.DISABLE_WP_HOST_CH
 // -----------------------------------------------------------------------------
 const devServerHost =                   dockerEnv ? '0.0.0.0' : 'localhost';
 const devServerPageOpen =               dockerEnv ? false : true;
-const devServerPort =                   process.env.JEKYLL_PORT || 44000;
+const devServerPort =                   process.env.WP_JEKYLL_PORT || 50000;
 const distFolder =                      path.resolve(__dirname, './dist');
 const nodeModulesFolder =               path.resolve(__dirname, './node_modules');
 const jekyllSite =                      path.resolve(__dirname, ROOT, '../400_template_site/_site');
@@ -56,7 +56,6 @@ const jekyllSiteAssets =                path.resolve(__dirname, ROOT, '../400_te
 
 // WP PLUGIN definitions
 // -----------------------------------------------------------------------------
-
 
 // WP MODULE definitions
 // https://webpack.js.org/guides/production/
@@ -128,7 +127,7 @@ module.exports = merge(common, {
                                             jekyllSiteAssets                    // do not watch for changes on _site/assets folder
                                           ],
                                           aggregateTimeout: 300,
-                                          poll:            1000
+                                          poll:             1000
                                         },
       },
       serveIndex:                       true,

@@ -51,6 +51,7 @@
   },
   "scripts": {
     "app": "run-p -s app:*",
+    "audit": "npm audit",
     "app:rackup": "cross-env SINATRA_ACTIVESUPPORT_WARNING=false WEBSERVER=$npm_package_jekyll_opt_webserver INTERFACE=$npm_package_jekyll_opt_interface PORT=$npm_package_jekyll_opt_app_port j1 rackup",
     "_app:jekyll": "cross-var cross-env JEKYLL_ENV=$npm_package_config_mode BUNDLE_GEMFILE=$npm_package_ruby_gemfile bundle exec jekyll s -c $npm_package_jekyll_configfile $npm_package_jekyll_opt_incremental",
     "app:open": "npm run delay-3s && cross-var open-cli $npm_package_jekyll_opt_app_url",
@@ -96,12 +97,14 @@
     "jekyll_post_build:make_sure_css_files_copied": "shx cp -rf ../100_template_css/dist/* ../400_template_site/assets/themes/j1/core/css",
     "jekyll_post_build:make_sure_js_files_copied": "shx cp -rf ../200_template_js/dist/* ../400_template_site/assets/themes/j1/core/js",
     "develop": "run-p -s develop:*",
-    "develop:wds": "cd ../200_template_js && cross-var cross-env WP_JEKYLL_PORT=$npm_package_jekyll_opt_wp_jekyll_port webpack-dev-server --config $npm_package_wds_develop --env mode=MODE --env jekyll_port=WP_JEKYLL_PORT",
+    "develop:wds": "cd ../200_template_js && cross-var cross-env WP_JEKYLL_PORT=$npm_package_jekyll_opt_wp_jekyll_port webpack serve --config $npm_package_wds_develop",
     "develop:jekyll": "cross-var cross-env JEKYLL_ENV=$npm_package_config_mode BUNDLE_GEMFILE=$npm_package_ruby_gemfile bundle exec jekyll s -c $npm_package_jekyll_configfile $npm_package_jekyll_opt_watch $npm_package_jekyll_opt_incremental",
+
     "delay-1s": "node ./node_modules/npm-delay 1000",
     "delay-2s": "node ./node_modules/npm-delay 2000",
     "delay-3s": "node ./node_modules/npm-delay 3000",
     "delay-5s": "node ./node_modules/npm-delay 5000",
+
     "setup-links": "cross-var if-env OS=Windows_NT && run-s -s link-default || cross-env OS=$(echo $(getos)) run-s -s switch-links",
     "switch-links": "if-env OS=darwin && run-s -s link-osx || run-s -s link-default",
     "link-default": "run-p -s link-default:*",

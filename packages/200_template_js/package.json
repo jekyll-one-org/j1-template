@@ -19,6 +19,7 @@
     "build": "wp4_configs/webpack.common.js"
   },
   "scripts": {
+    "audit": "npm audit",
     "build": "npm run build-js",
     "clean": "run-p -s clean:*",
     "deploy": "run-s -s deploy:*",

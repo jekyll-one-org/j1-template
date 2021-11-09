@@ -1,0 +1,27 @@
+See: https://github.com/lerna/lerna/issues/2901
+
+In multiple packages we have a "start" command that launches
+webpack-dev-server or ng serve. In the root package.json we have a command
+that runs all these start commands
+
+"scripts": {
+   "start": "lerna run start --stream"
+}
+
+In Lerna v3, when that was running, I could kill it with CTRL+C, and then
+launch it again.
+
+In Lerna v4, when I kill the command with CTRL+C, and subsequently launch it
+I always now receive EADDRINUSE for the port that the webservers are running
+on. As a workaround I use npm package kill-port to kill Lerna's orphaned
+child process running on that port, before I can run it again.
+
+As a workaround we have downgraded to Lerna 3.22.1 - this is working as
+expected.
+
+Lerna run has a --no-bail flag which would appear to control the behavior
+that this is doing, but we do not want the --no-bail behavior but it now
+seems to be the default and cannot be disabled.
+
+This seems a broken approach to managing child processes and is a breaking
+change for those upgrading to v4.

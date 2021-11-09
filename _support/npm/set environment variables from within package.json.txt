@@ -1,0 +1,21 @@
+See:
+  https://stackoverflow.com/questions/25112510/how-to-set-environment-variables-from-within-package-json
+
+
+  Just use NPM package cross-env. Super easy. Works on Windows, Linux, and
+  all environments. Notice that you don't use && to move to the next task.
+  You just set the env and then start the next task. Credit to @mikekidder
+  or the suggestion in one of the comments here.
+
+  From documentation:
+
+  {
+    "scripts": {
+      "build": "cross-env NODE_ENV=production OTHERFLAG=myValue webpack --config build/webpack.config.js"
+    }
+  }
+
+  Notice that if you want to set multiple global vars, you just state them
+  in succession, followed by your command to be executed.
+
+  
