@@ -1,7 +1,8 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/modules/fam/js/fam.js
- # Provides JS Core for J1 Module FAM (Floating Button Menu)
+ # MODIFIED FAM JS from project Materialize
+ # Provides JS Core funtions for the J1 FAM Module (Floating Button Menu)
  #
  # Product/Info:
  # https://jekyll.one

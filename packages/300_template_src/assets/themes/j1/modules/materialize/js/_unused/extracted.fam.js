@@ -1,3 +1,5 @@
+// extracted from buttons.js
+//
 (function($, anim) {
   'use strict';
 

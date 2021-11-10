@@ -1,4 +1,25 @@
-/*! cash-dom 1.3.5, https://github.com/kenwheeler/cash @license MIT */
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/fam/js/cash.js
+ # MODIFIED old Cash version 1.3.5 from Materialize used by J1 Module FAM
+ #
+ # Product/Info:
+ # https://jekyll.one
+ # https://github.com/fabiospampinato/cash
+ #
+ # Copyright (C) 2021 Juergen Adams
+ #
+ # Cash is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/fabiospampinato/cash/blob/master/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # NOTE: cash-dom 1.3.5, https://github.com/kenwheeler/cash
+ # -----------------------------------------------------------------------------
+ # TODO:
+ # jadams, 2020-10-11: module needs to be rewitten to PURE jQuery
+ # -----------------------------------------------------------------------------
+*/
 (function (factory) {
   window.cash = factory();
 })(function () {
@@ -592,7 +613,7 @@
      */
     trigger: function (eventName, data) {
       if (document.createEvent) {
-        let evt = document.createEvent('HTMLEvents');
+        var evt = document.createEvent('HTMLEvents');
         evt.initEvent(eventName, true, false);
         evt = this.extend(evt, data);
         return this.each(function (v) {

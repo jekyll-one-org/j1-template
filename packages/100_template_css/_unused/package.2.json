@@ -51,7 +51,7 @@
     "theme_css:vendor": "node-sass --importer=node_modules/node-sass-tilde-importer vendor.scss dist/vendor.css",
     "uglify_css:theme_bootstrap": "postcss dist/themes/bootstrap/bootstrap.css -o dist/themes/bootstrap/bootstrap.min.css",
     "uglify_css:theme_uno_light": "postcss dist/themes/uno-light/bootstrap.css -o dist/themes/uno-light/bootstrap.min.css",
-    "uglify_css:theme_uno_dark": "postcss dist/themes/uno-dark/bootstrap.css -o dist/themes/uno-dark/bootstrap.min.css",    
+    "uglify_css:theme_uno_dark": "postcss dist/themes/uno-dark/bootstrap.css -o dist/themes/uno-dark/bootstrap.min.css",
     "uglify_css:icons_fontawesome": "postcss dist/icon-fonts/fontawesome.css -o dist/icon-fonts/fontawesome.min.css",
     "uglify_css:icons_iconify": "postcss dist/icon-fonts/iconify.css -o dist/icon-fonts/iconify.min.css",
     "uglify_css:icons_materialdesign": "postcss dist/icon-fonts/materialdesign.css -o dist/icon-fonts/materialdesign.min.css",
