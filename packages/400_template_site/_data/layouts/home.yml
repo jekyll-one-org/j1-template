@@ -224,9 +224,9 @@ lanes:
       type:                             async
       properties:                       mt-4 mr-5 mb-4 ml-5
 
-  # # ----------------------------------------------------------------------------
-  # # SERVICE panel
-  # #
+  # ----------------------------------------------------------------------------
+  # SERVICE panel
+  #
   # - lane:
   #     enabled:                          true
   #     id:                               home_service_panel
@@ -245,11 +245,11 @@ lanes:
       properties:                       elevated-z2
 
   # ----------------------------------------------------------------------------
-  # FAM
+  # FAB
   #
   - lane:
       enabled:                          true
-      id:                               fam-container
+      id:                               fab-container
       region:                           body-main
       type:                             async
       properties:                       elevated-z0

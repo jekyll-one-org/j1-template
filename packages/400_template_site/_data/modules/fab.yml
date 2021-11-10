@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/fam.yml
-# User Configuration of the FAM Module (Floating Action Menu)
+# ~/_data/modules/fab.yml
+# User Configuration of the FAB Module (Floating Action Button)
 #
 # Product/Info:
 # https://jekyll.one
@@ -19,9 +19,9 @@
 # About this configuration (used for J1 CC only)
 #
 about_config:
-  title:                                Floating Action Menu
+  title:                                Floating Action Button
   scope:                                User settings
-  location:                             _data/modules/fam.yml
+  location:                             _data/modules/fab.yml
 
 # ------------------------------------------------------------------------------
 # User settings

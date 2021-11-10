@@ -17,7 +17,7 @@ regenerate:                             false
 
 personalization:                        true
 
-fam_menu_id:                            page_ctrl_simple
+fab_menu_id:                            page_ctrl_simple
 
 resources:                              [
                                           lightGallery, justifiedGallery, video_js,

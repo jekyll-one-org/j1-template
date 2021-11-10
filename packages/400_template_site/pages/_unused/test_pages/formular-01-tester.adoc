@@ -11,7 +11,7 @@ categories:                             [ Testpages ]
 tags:                                   [ Example ]
 
 comments:                               false
-fam_menu_id:                            default
+fab_menu_id:                            default
 
 permalink:                              /pages/public/jotform-1/
 regenerate:                             false

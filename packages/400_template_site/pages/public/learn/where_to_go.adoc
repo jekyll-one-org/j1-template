@@ -10,7 +10,7 @@ description: >
 categories:                             [ Info ]
 tags:                                   [ Roundtrip, Introduction ]
 
-fam_menu_id:                            default
+fab_menu_id:                            default
 
 permalink:                              /pages/public/learn/where_to_go/
 regenerate:                             false

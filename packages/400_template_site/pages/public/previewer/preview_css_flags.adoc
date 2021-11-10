@@ -14,7 +14,7 @@ tags:                                   [ Country, Flags ]
 comments:                               false
 scrollbar:                              false
 
-fam_menu_id:                            page_ctrl_simple
+fab_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/previewer/country_flags/
 regenerate:                             false

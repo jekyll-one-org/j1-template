@@ -1141,7 +1141,7 @@ resources:
         init_function:                  []
 
   # ----------------------------------------------------------------------------
-  # Floating Button Menu, JS API to create FAM buttons for J1 Template
+  # Floating Action Button. JS API to create FAB menu buttons
   #
   - name:                               FAM
     resource:
@@ -1159,14 +1159,14 @@ resources:
       dependencies:                     false
       pass_init_data:                   true
       data:
-        css:                            [ modules/fam/css/theme/uno/fam ]       # styles for (J1) theme Uno]
+        css:                            [ modules/fab/css/theme/uno/fab ]       # styles for (J1) theme Uno]
         files:                          [
-                                          modules/fam/js/cash.js,               # adapted|old (1.3.5) version from Materialize
-                                          modules/fam/js/fam.js,                # modified version for J1 (former: button.js)
-                                          adapter/js/fam.js                     # adapter adopted from ssm module
+                                          modules/fab/js/cash.js,               # adapted|old (1.3.5) version from Materialize
+                                          modules/fab/js/fab.js,                # modified version for J1 (former: button.js)
+                                          adapter/js/fab.js                     # adapter adopted from ssm module
                                         ]
         js:                             []
-        init_function:                  [ j1.adapter.fam.init ]
+        init_function:                  [ j1.adapter.fab.init ]
 
   # ----------------------------------------------------------------------------
   # lunr search engine, JS API used for the QuickSearch feature of J1 Template

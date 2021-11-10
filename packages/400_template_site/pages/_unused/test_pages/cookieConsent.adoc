@@ -10,7 +10,7 @@ categories:                             [ Testpages ]
 tags:                                   [ Example ]
 
 scrollbar:                              false
-fam_menu_id:                            default
+fab_menu_id:                            default
 
 advertising:                            false
 comments:                               false

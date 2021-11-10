@@ -10,7 +10,7 @@ description: >
 categories:                             [ Roundtrip ]
 tags:                                   [ Introduction, Module, Image ]
 
-fam_menu_id:                            page_ctrl_simple
+fab_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/learn/roundtrip/present_images/
 regenerate:                             false

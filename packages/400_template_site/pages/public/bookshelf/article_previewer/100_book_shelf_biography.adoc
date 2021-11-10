@@ -11,7 +11,7 @@ tags:                                   [ Books ]
 permalink:                              /pages/public/collections/bookshelf/biography/
 regenerate:                             false
 
-fam_menu_id:                            open_toc
+fab_menu_id:                            open_toc
 
 resources:                              []
 resource_options:

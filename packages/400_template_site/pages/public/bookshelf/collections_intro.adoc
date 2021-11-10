@@ -14,7 +14,7 @@ categories:                             [ Collections ]
 tags:                                   [ Jekyll, Configuration ]
 
 
-fam_menu_id:                            open_toc
+fab_menu_id:                            open_toc
 
 permalink:                              /pages/public/collections/intro/
 regenerate:                             false

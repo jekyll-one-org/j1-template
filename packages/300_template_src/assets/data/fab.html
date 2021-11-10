@@ -43,13 +43,13 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment     = site.environment %}
 
-{% assign fam_settings    = modules.fam.settings %}
-{% assign fam_defaults    = modules.defaults.fam.defaults %}
+{% assign fab_settings    = modules.fab.settings %}
+{% assign fab_defaults    = modules.defaults.fab.defaults %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign fam_options     = fam_defaults | merge: fam_settings %}
-{% assign fam_menus       = fam_options.menus %}
+{% assign fab_options     = fab_defaults | merge: fab_settings %}
+{% assign fab_menus       = fab_options.menus %}
 
 {% comment %} Set permalink setting
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -60,31 +60,31 @@ exclude_from_search:                    true
 
 {% comment %} Set base icons and sizes
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign fam_menu_icon_family         = fam_options.icon_family %}
-{% assign fam_menu_icon_style          = fam_options.icon_style %}
-{% assign fam_menu_icon_color          = fam_options.icon_color %}
-{% assign fam_menu_icon_size           = fam_options.icon_size %}
+{% assign fab_menu_icon_family         = fab_options.icon_family %}
+{% assign fab_menu_icon_style          = fab_options.icon_style %}
+{% assign fab_menu_icon_color          = fab_options.icon_color %}
+{% assign fab_menu_icon_size           = fab_options.icon_size %}
 
-{% assign icon_family = fam_menu_icon_family | strip | downcase %}
+{% assign icon_family = fab_menu_icon_family | strip | downcase %}
 
 {% if icon_family == 'fontawesome' or icon_family == 'fontawesome5' %}
-  {% assign fam_menu_icon_family  = 'fa' %}
-  {% assign fam_menu_icon_style   = fam_menu_icon_style %}
+  {% assign fab_menu_icon_family  = 'fa' %}
+  {% assign fab_menu_icon_style   = fab_menu_icon_style %}
 {% elsif icon_family == 'mdi' %}
-  {% assign fam_menu_icon_family  = 'mdi' %}
-  {% assign fam_menu_icon_style   = fam_menu_icon_style %}
+  {% assign fab_menu_icon_family  = 'mdi' %}
+  {% assign fab_menu_icon_style   = fab_menu_icon_style %}
 {% else %}
-  {% assign fam_menu_icon_family  = 'mdi' %}
-  {% assign fam_menu_icon_style   = fam_menu_icon_style %}
+  {% assign fab_menu_icon_family  = 'mdi' %}
+  {% assign fab_menu_icon_style   = fab_menu_icon_style %}
 {% endif %}
 
 {% comment %} unused
 --------------------------------------------------------------------------------
-{% include {{select_color}} color=fam_menu_icon_color fallback="#9E9E9E" %}
-{% assign fam_menu_icon_color = color %}
+{% include {{select_color}} color=fab_menu_icon_color fallback="#9E9E9E" %}
+{% assign fab_menu_icon_color = color %}
 
-{% include {{select_icon_size}} family=fam_menu_icon_family size=fam_menu_icon_size %}
-{% assign fam_menu_icon_size = size %}
+{% include {{select_icon_size}} family=fab_menu_icon_family size=fab_menu_icon_size %}
+{% assign fab_menu_icon_size = size %}
 -------------------------------------------------------------------------------- {% endcomment %}
 
 {% assign production = false %}
@@ -100,16 +100,16 @@ exclude_from_search:                    true
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
 <!-- [DEBUG  ] [j1.modules.fam.html       ] [collect all menu items] -->
-{% for menu in fam_menus %}
+{% for menu in fab_menus %}
   {% if menu.enabled %}
   <!-- [DEBUG  ] [j1.modules.fam.html       ] [collect menu {{menu.id}}] -->
   <div id="{{menu.id}}">
-    <div class="fam-btn" style="display: none">
+    <div class="fab-btn" style="display: none">
       <!-- [DEBUG  ] [j1.modules.fam.html       ] [jadams, 2020-11-15: set href|link text (Google optimisation)] -->
-      <a href="#void" id="{{menu.id}}_button" class="btn-fab-floating btn-large btn-{{menu.color}} raised-z{{fam_options.raised_level}}"><i id="fam-icon" class="mdi mdi-{{menu.icon}}"></i>FAM button</a>
+      <a href="#void" id="{{menu.id}}_button" class="btn-fab-floating btn-large btn-{{menu.color}} raised-z{{fab_options.raised_level}}"><i id="fab-icon" class="mdi mdi-{{menu.icon}}"></i>FAM button</a>
       <ul id="{{menu.id}}_items">
         {% for item in menu.items %} {% if item.enabled %}
-        <li><a href="#void" id="{{item.id}}" class="btn-fab-floating btn-{{item.color}} raised-z{{fam_options.raised_level}}" style="display: none"><i id="fam-icon" class="mdi mdi-{{item.icon}} mdi-{{item.icon_properties}}"></i>{{item.id}}</a></li>
+        <li><a href="#void" id="{{item.id}}" class="btn-fab-floating btn-{{item.color}} raised-z{{fab_options.raised_level}}" style="display: none"><i id="fab-icon" class="mdi mdi-{{item.icon}} mdi-{{item.icon_properties}}"></i>{{item.id}}</a></li>
         {% endif %} {% endfor %}
       </ul>
     </div>

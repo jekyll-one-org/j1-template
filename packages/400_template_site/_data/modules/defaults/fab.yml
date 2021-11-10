@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/fam.yml
-# Default Configuration of the FAM Module (Floating Action Menu)
+# ~/_data/modules/fab.yml
+# Default Configuration of the FAB Module (Floating Action Button)
 #
 # Product/Info:
 # https://jekyll.one
@@ -19,9 +19,9 @@
 # About this configuration (used for J1 CC only)
 #
 about_config:
-  title:                                Floating Action Menu
+  title:                                Floating Action Button
   scope:                                Default settings
-  location:                             _data/modules/defaults/fam.yml
+  location:                             _data/modules/defaults/fab.yml
 
 # ------------------------------------------------------------------------------
 # Default settings
@@ -30,8 +30,8 @@ defaults:
   enabled:                              false
   mode:                                 icon
 
-  xhr_container_id:                     fam-container
-  xhr_data_path:                        /assets/data/fam/index.html
+  xhr_container_id:                     fab-container
+  xhr_data_path:                        /assets/data/fab/index.html
 
   icon_family:                          MDI
   icon_color:                           mdi-md-grey

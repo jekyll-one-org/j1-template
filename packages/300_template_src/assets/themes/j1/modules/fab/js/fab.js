@@ -450,7 +450,7 @@
   // jadams, 2020-10-10: moved to j1 name space
   //
   // M.FloatingActionButton = FloatingActionButton;
-  j1.fam = FloatingActionButton;
+  j1.fab = FloatingActionButton;
 
   // jadams, 2020-10-10: check how to transform to jQuery
   //

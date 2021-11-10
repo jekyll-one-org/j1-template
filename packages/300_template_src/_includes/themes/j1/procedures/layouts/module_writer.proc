@@ -174,7 +174,7 @@ NO need to load this again
                 {% if resource_settings.pass_init_data %}
 
                   // [INFO   ] [j1.layout.module_writer.proc          ] [ pass init data for: {{resource_settings.id}} ]
-                  {% capture settings %}{"layout": "{{page.layout}}", "fam_menu_id": "{{page.fam_menu_id}}", "scrollbar": "{{page.scrollbar}}", "toc": "{{page.toc}}", "comments": "{{page.comments}}"}{% endcapture %}
+                  {% capture settings %}{"layout": "{{page.layout}}", "fab_menu_id": "{{page.fab_menu_id}}", "scrollbar": "{{page.scrollbar}}", "toc": "{{page.toc}}", "comments": "{{page.comments}}"}{% endcapture %}
                   var settings = $.extend({}, {{settings}});
 
                   {% comment %} create resource_settings.dependencies (if any)

@@ -6,8 +6,8 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/fam.js
- # Liquid template to adapt FAM Core functions
+ # ~/assets/themes/j1/adapter/js/fab.js
+ # Liquid template to adapt FAB Core functions
  #
  # Product/Info:
  # https://jekyll.one
@@ -22,7 +22,7 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
  # NOTE:
  #  jadams, 2020-07-17:
- #    J1 FAM can't be minfied for now. Uglifier fails on an ES6 (most probably)
+ #    J1 FAB can't be minfied for now. Uglifier fails on an ES6 (most probably)
  #    structure that couldn't fixed by 'harmony' setting. Minifier fails by:
  #    Unexpected token: punc ())
  #    Current, minifying has been disabled
@@ -42,13 +42,13 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign toccer_defaults = modules.defaults.toccer.defaults %}
 {% assign toccer_settings = modules.toccer.settings %}
-{% assign fam_settings    = modules.fam.settings %}
-{% assign fam_defaults    = modules.defaults.fam.defaults %}
+{% assign fab_settings    = modules.fab.settings %}
+{% assign fab_defaults    = modules.defaults.fab.defaults %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign toccer_options  = toccer_defaults | merge: toccer_settings %}
-{% assign fam_options     = fam_defaults | merge: fam_settings %}
+{% assign fab_options     = fab_defaults | merge: fab_settings %}
 
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
@@ -57,8 +57,8 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/fam.js
- # JS Adapter for J1 FAM (Floating Button Menu)
+ # ~/assets/themes/j1/adapter/js/fab.js
+ # JS Adapter for J1 FAB (Floating Action Button)
  #
  # Product/Info:
  # http://jekyll.one
@@ -79,7 +79,7 @@ regenerate:                             true
 // -----------------------------------------------------------------------------
 'use strict';
 
-j1.adapter['fam'] = (function (j1, window) {
+j1.adapter['fab'] = (function (j1, window) {
   // ---------------------------------------------------------------------------
   // globals
   // ---------------------------------------------------------------------------
@@ -88,7 +88,7 @@ j1.adapter['fam'] = (function (j1, window) {
   var dclFinished   = false;
   var moduleOptions = {};
   var cookie_names  = j1.getCookieNames();
-  var famOptions;
+  var fabOptions;
   var frontmatterOptions;
   var user_state;
   var user_session;
@@ -118,8 +118,8 @@ j1.adapter['fam'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       // globals
       // -----------------------------------------------------------------------
-      _this         = j1.adapter.fam;
-      logger        = log4javascript.getLogger('j1.adapter.fam');
+      _this         = j1.adapter.fab;
+      logger        = log4javascript.getLogger('j1.adapter.fab');
       sect123Nodes  = $('[class$="sect1"],[class$="sect2"],[class$="sect3"]');
       sect12Nodes   = $('[class$="sect1"],[class$="sect2"]');
       sect1Nodes    = $('[class$="sect1"]');
@@ -136,7 +136,7 @@ j1.adapter['fam'] = (function (j1, window) {
       // defaults
       // -----------------------------------------------------------------------
       var settings  = $.extend({
-        module_name: 'j1.adapter.fam',
+        module_name: 'j1.adapter.fab',
         generated:   '{{site.time}}'
       }, options);
 
@@ -144,24 +144,24 @@ j1.adapter['fam'] = (function (j1, window) {
       // options loader
       // -----------------------------------------------------------------------
       /* eslint-disable */
-      famOptions = $.extend({}, {{fam_options | replace: 'nil', 'null' | replace: '=>', ':' }});
+      fabOptions = $.extend({}, {{fab_options | replace: 'nil', 'null' | replace: '=>', ':' }});
 
       // Load (individual) frontmatter options (currently NOT used)
       if (options != null) { frontmatterOptions = $.extend({}, options); }
 
       if (typeof frontmatterOptions !== 'undefined') {
-        moduleOptions = j1.mergeData(famOptions, frontmatterOptions);
+        moduleOptions = j1.mergeData(fabOptions, frontmatterOptions);
       }
       /* eslint-enable */
 
-      // save config settings into the fam object for global access
+      // save config settings into the FAB object for global access
       //
       _this['moduleOptions'] = moduleOptions;
 
       var dependencies_met_navigator = setInterval(function() {
         if (j1.adapter.navigator.getState() == 'finished') {
           logger.info('\n' + 'met dependencies for: navigator');
-          _this.famLoader(moduleOptions);
+          _this.fabLoader(moduleOptions);
           clearInterval(dependencies_met_navigator);
         }
       }, 25);
@@ -169,49 +169,50 @@ j1.adapter['fam'] = (function (j1, window) {
     }, // END init
 
     // -------------------------------------------------------------------------
-    // FAM Loader
+    // FAB Loader
     // -------------------------------------------------------------------------
-    famLoader: function (famOptions) {
+    fabLoader: function (fabOptions) {
 
       _this.setState('loading');
       logger.info('\n' + 'set module state to: ' + _this.getState());
-      logger.info('\n' + 'load HTML data for fam');
+      logger.info('\n' + 'load HTML data for FAB: ' + fabOptions.fab_menu_id);
 
       j1.loadHTML({
-        xhr_container_id: famOptions.xhr_container_id,
-        xhr_data_path:    famOptions.xhr_data_path,
-        xhr_data_element: famOptions.fam_menu_id },
-        'j1.adapter.fam',
+        xhr_container_id: fabOptions.xhr_container_id,
+        xhr_data_path:    fabOptions.xhr_data_path,
+        xhr_data_element: fabOptions.fab_menu_id
+        },
+        'j1.adapter.fab',
         'data_loaded'
       );
 
       // ---------------------------------------------------------------------
-      // Initialize FAM button
+      // Initialize FAB button
       // ---------------------------------------------------------------------
-      var dependencies_met_fam_initialized = setInterval (function () {
-        if (j1.xhrDOMState['#' + famOptions.xhr_container_id] == 'success' && j1.getState() == 'finished') {
+      var dependencies_met_fab_initialized = setInterval (function () {
+        if (j1.xhrDOMState['#' + fabOptions.xhr_container_id] == 'success' && j1.getState() == 'finished') {
           _this.setState('loaded');
           logger.info('\n' + 'set module state to: ' + _this.getState());
-          logger.info('\n' + 'HTML data for fam: ' + _this.getState());
+          logger.info('\n' + 'HTML data for FAB: ' + _this.getState());
 
-//        _this.scrollSpy(famOptions);
-          _this.buttonInitializer(famOptions);
+//        _this.scrollSpy(fabOptions);
+          _this.buttonInitializer(fabOptions);
 
           _this.setState('finished');
           logger.info('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module initialized successfully');
 
-          $('.fam-btn').show();
+          $('.fab-btn').show();
 
-          clearInterval(dependencies_met_fam_initialized);
+          clearInterval(dependencies_met_fab_initialized);
         }
-      }, 25); // END dependencies_met_fam_initialized
+      }, 25); // END dependencies_met_fab_initialized
     }, // END dataLoader
 
     // -------------------------------------------------------------------------
     // Button Initializer
     // -------------------------------------------------------------------------
-    buttonInitializer: function (famOptions) {
+    buttonInitializer: function (fabOptions) {
       var eventHandler;
       var actionMenuId;
       var actionMenuOptions;
@@ -219,11 +220,11 @@ j1.adapter['fam'] = (function (j1, window) {
       var instances;
       var $actionButton;
       var toggleIcons;
-      var famActions;
-      var $famContainer         = $('#' + famOptions.xhr_container_id);
-      var iconFamily            = famOptions.icon_family.toLowerCase();
-      var floatingActionOptions = famOptions.menu_options;
-      var famButtons            = document.querySelectorAll('.fam-btn');
+      var fabActions;
+      var $fabContainer         = $('#' + fabOptions.xhr_container_id);
+      var iconFamily            = fabOptions.icon_family.toLowerCase();
+      var floatingActionOptions = fabOptions.menu_options;
+      var fabButtons            = document.querySelectorAll('.fab-btn');
 
       // bind click event to all links with "#void" to suppress default action
       // See: https://stackoverflow.com/questions/134845/which-href-value-should-i-use-for-javascript-links-or-javascriptvoid0
@@ -235,45 +236,45 @@ j1.adapter['fam'] = (function (j1, window) {
       });
 
       // check if multiple buttons detected
-      if ( famButtons.length == 1 ) {
+      if ( fabButtons.length == 1 ) {
         _this.setState('processing');
         logger.info('\n' + 'set module state to: ' + _this.getState());
-        logger.info('\n' + 'initialize fam menu');
+        logger.info('\n' + 'initialize FAB menu');
 
-        actionButtonId  = famButtons[0].firstElementChild.id;
+        actionButtonId  = fabButtons[0].firstElementChild.id;
         actionMenuId    = actionButtonId.replace('_button', '');
-        instances       = j1.fam.init(famButtons, floatingActionOptions);
+        instances       = j1.fab.init(fabButtons, floatingActionOptions);
         $actionButton   = $('#' + actionButtonId);
 
-        famOptions.menus.forEach(function (menu, index) {
+        fabOptions.menus.forEach(function (menu, index) {
           if (menu.id === actionMenuId) {
-            actionMenuOptions = famOptions.menus[index];
+            actionMenuOptions = fabOptions.menus[index];
           };
         });
 
         // count number of menu actions for the button. If only one action
-        // found the FAM button gets created as a FAB (no menu) that has the
+        // found the FAB button gets created as a FAB (no menu) that has the
         // the action bound directly to the button
         //
-        famActions = actionMenuOptions.items.length;
+        fabActions = actionMenuOptions.items.length;
         toggleIcons = iconFamily + '-' + actionMenuOptions.icon + ' ' + iconFamily + '-' + actionMenuOptions.icon_hover;
 
         // toggle the icon for the FAB if configured
         if (floatingActionOptions.hoverEnabled) {
           $actionButton.hover(
             function() {
-              $('#fam-icon').toggleClass(toggleIcons);
+              $('#fab-icon').toggleClass(toggleIcons);
             }, function() {
-              $('#fam-icon').toggleClass(toggleIcons);
+              $('#fab-icon').toggleClass(toggleIcons);
             }
           );
         } else {
           $actionButton.on('click', function (e) {
-            $('#fam-icon').toggleClass(toggleIcons);
+            $('#fab-icon').toggleClass(toggleIcons);
           });
         }
 
-        if (famActions > 1) {
+        if (fabActions > 1) {
 
           actionMenuOptions.items.forEach(function (item, index) {
             // Bind an eventhandler instance if item id exists
@@ -290,9 +291,9 @@ j1.adapter['fam'] = (function (j1, window) {
                       if ( j1.adapter.toccer.getState() == 'finished' ) {
                         logger.info('\n' + 'met dependencies for: toccer');
 
-                        // famOptions.mode === 'icon'
-                        //   ? logger.info('\n' + 'fam mode detected: icon')
-                        //   : logger.info('\n' + 'fam mode detected: menu');
+                        // fabOptions.mode === 'icon'
+                        //   ? logger.info('\n' + 'FAB mode detected: icon')
+                        //   : logger.info('\n' + 'FAB mode detected: menu');
 
                         $('#open_mmenu_toc').show();
                         clearInterval(dependencies_met_toccer_finished);
@@ -322,7 +323,7 @@ j1.adapter['fam'] = (function (j1, window) {
           });
         } else {
           // single action, create FAB
-          logger.info('\n' + 'single action found for FAM, create: FAB');
+          logger.info('\n' + 'single action found for FAB, no menu loaded/created');
 
           // disable hover event (CSS)
           // $actionButton.css({'pointer-events': 'none'})
@@ -367,10 +368,10 @@ j1.adapter['fam'] = (function (j1, window) {
           });
         } // END else
       } else {
-//      alert ('Multiple FAM buttons found: ' + famButtons.length);
-        logger.error('\n' + 'multiple FAM buttons found: ' + famButtons.length);
-        logger.info('\n' + 'FAM container set to hidden: ' + $famContainer);
-        $famContainer.hide();
+//      alert ('Multiple FAB buttons found: ' + fabButtons.length);
+        logger.error('\n' + 'multiple FAB buttons found: ' + fabButtons.length);
+        logger.info('\n' + 'FAB container set to hidden: ' + $fabContainer);
+        $fabContainer.hide();
       } // END if famButton
     }, // END buttonInitializer
 
@@ -598,58 +599,60 @@ j1.adapter['fam'] = (function (j1, window) {
 
     // -------------------------------------------------------------------------
     // Manage (top) position and sizes (@media breakpoints) of the
-    // FAM container depending on the size of the page header (attic)
+    // FAB container depending on the size of the page header (attic)
     // -------------------------------------------------------------------------
-    scrollSpy: function (options) {
-      logger = log4javascript.getLogger('j1.adapter.fam.scrollSpy');
-
-      $(window).scroll(function(event){
-        var $navbar         = $('nav.navbar');
-        var $pagehead       = $('.attic');
-        var $main_content   = $('.js-toc-content');
-        var $adblock        = $('#adblock');
-        var $footer         = $('#j1_footer');
-        var $famContainer   = $('#fam-container');
-        var $page           = $(document);
-        var offset          = 0;
-        var pageOffset      = $(document).width() >= 992 ? -120 : -116;
-        var scrollPos       = $(document).scrollTop();
-        var pageHeight      = $page.height();
-        var pageHeightOuter = $page.outerHeight();
-
-        var m               = $main_content.offset().top;
-        var s               = $famContainer.length ? $famContainer.height() : 0;
-        var f               = $footer.length   ? $footer.outerHeight() : 0;
-        var n               = $navbar.length   ? $navbar.height() : 0;
-//      var h               = $pagehead.length ? $pagehead.outerHeight() : 0;
-        var a               = $adblock.length  ? $adblock.outerHeight() : 0;
-        var o               = n + offset;
-
-        // space above the (fixed) fam container
-        var showSsmPos      = m + pageOffset;
-
-        // space below the (fixed) fam container
-        var hideSsmPos      = pageHeight - s - f + pageOffset;
-
-        // set the top position of fam container for navbar modes
-        // e.g. "sticky" (navbar-fixed)
-        if($navbar.hasClass('navbar-fixed')){
-          $('#fam-container').css('top', o);
-        } else {
-          $('#fam-container').css('top', m);
-        }
-
-        // show|hide fam container on scroll position in page
-        //
-        scrollPos >= showSsmPos && scrollPos <= hideSsmPos
-          ? $famContainer.css('display','block')
-          : $famContainer.css('display','none');
-
-        // logger.debug('\n' + 'content pos detected as: ' + m + 'px');
-        // logger.debug('\n' + 'scroll pos detected as: ' + scrollPos + 'px');
-      }); // END setTop on scroll
-
-    }, // END scrollSpy
+    // NOTE: scrollSpy currently NOT used
+    // -------------------------------------------------------------------------
+//     scrollSpy: function (options) {
+//       logger = log4javascript.getLogger('j1.adapter.fab.scrollSpy');
+//
+//       $(window).scroll(function(event){
+//         var $navbar         = $('nav.navbar');
+//         var $pagehead       = $('.attic');
+//         var $main_content   = $('.js-toc-content');
+//         var $adblock        = $('#adblock');
+//         var $footer         = $('#j1_footer');
+//         var $fabContainer   = $('#' + fabOptions.xhr_container_id);
+//         var $page           = $(document);
+//         var offset          = 0;
+//         var pageOffset      = $(document).width() >= 992 ? -120 : -116;
+//         var scrollPos       = $(document).scrollTop();
+//         var pageHeight      = $page.height();
+//         var pageHeightOuter = $page.outerHeight();
+//
+//         var m               = $main_content.offset().top;
+//         var s               = $fabContainer.length ? $fabContainer.height() : 0;
+//         var f               = $footer.length   ? $footer.outerHeight() : 0;
+//         var n               = $navbar.length   ? $navbar.height() : 0;
+// //      var h               = $pagehead.length ? $pagehead.outerHeight() : 0;
+//         var a               = $adblock.length  ? $adblock.outerHeight() : 0;
+//         var o               = n + offset;
+//
+//         // space above the (fixed) FAB container
+//         var showSsmPos      = m + pageOffset;
+//
+//         // space below the (fixed) FAB container
+//         var hideSsmPos      = pageHeight - s - f + pageOffset;
+//
+//         // set the top position of FAB container for navbar modes
+//         // e.g. "sticky" (navbar-fixed)
+//         if($navbar.hasClass('navbar-fixed')){
+//           $fabContainer.css('top', o);
+//         } else {
+//           $fabContainer.css('top', m);
+//         }
+//
+//         // show|hide FAB container on scroll position in page
+//         //
+//         scrollPos >= showSsmPos && scrollPos <= hideSsmPos
+//           ? $fabContainer.css('display','block')
+//           : $fabContainer.css('display','none');
+//
+//         // logger.debug('\n' + 'content pos detected as: ' + m + 'px');
+//         // logger.debug('\n' + 'scroll pos detected as: ' + scrollPos + 'px');
+//       }); // END setTop on scroll
+//
+//     }, // END scrollSpy
 
     // -------------------------------------------------------------------------
     // setState()

@@ -608,7 +608,7 @@ defaults:
       vimeo:                            true
 
       toc:                              true
-      fam_menu_id:                      page_ctrl_simple
+      fab_menu_id::                      page_ctrl_simple
       scrollbar:                        false
 
       icons:
@@ -655,7 +655,7 @@ defaults:
       series:                           false
 
       toc:                              true
-      fam_menu_id:                      page_ctrl_simple
+      fab_menu_id::                      page_ctrl_simple
       scrollbar:                        false
 
       icons:
@@ -689,7 +689,7 @@ defaults:
         follow:                         true
 
       toc:                              true
-      fam_menu_id:                      page_ctrl_simple
+      fab_menu_id::                      page_ctrl_simple
       scrollbar:                        false
 
       personalization:                  false

@@ -11,7 +11,7 @@ description: >
 categories:                             [ Preview ]
 tags:                                   [ MDIL, Icons, Fonts ]
 
-fam_menu_id:                            default
+fab_menu_id:                            default
 scrollbar:                              false
 toc:                                    false
 
