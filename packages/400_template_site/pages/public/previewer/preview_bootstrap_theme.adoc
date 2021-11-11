@@ -225,10 +225,10 @@ colors. Then, customize with `.bg-*` utilities.
 
 == Buttons
 
-Use Bootstrap’s custom button styles for actions in forms, dialogs, and
+Use Bootstrap’s custom button styles for actions in forms, dialogs. And
 more with support for multiple sizes, states, and more. Bootstrap includes
-several predefined button styles, each serving its own semantic purpose,
-with a few extras thrown in for more control.
+several predefined button styles, each serving its semantic purpose, with a
+few extras thrown in for more control.
 
 // pass:[<i class="mdi mdi-bootstrap mdi-md-deep-purple mdi-24px"></i>]
 // mdi:bootstrap[24px, mdi-pulsed mdi-md-deep-purple]
@@ -237,8 +237,9 @@ link:{url-bs-docs--components-buttons}[Bootstrap Docs {char-middot} Buttons, {br
 
 === Active buttons
 
-Buttons will appear pressed (with a darker background, darker border, and
-inset shadow) when active.
+Active buttons will appear with a darker background and border. If pressed,
+a *ripple* effect is shown for feedback.
+
 ++++
 <div class="doc-example mb-3">
   <button type="button" class="btn btn-primary btn-raised">Primary</button>
@@ -265,8 +266,9 @@ inset shadow) when active.
 
 === Disabled buttons
 
-Buttons look inactive by adding the disabled boolean attribute to any
-<button> element.
+Buttons look *inactive* by adding the *disabled* boolean attribute to any
+`<button>` element.
+
 ++++
 <div class="doc-example mb-3">
   <button type="button" class="btn btn-primary btn-raised disabled">Primary</button>
@@ -292,8 +294,8 @@ Buttons look inactive by adding the disabled boolean attribute to any
 
 === Outline buttons
 
-In need of a button, but not the hefty background colors they bring? Replace
-the default modifier classes with the `.btn-outline-*` ones to remove all
+In need of a button, but not a hefty background color they bring? Replace
+the default modifier with the class `.btn-outline-*` to remove all
 background images and colors on any button.
 
 ++++
@@ -319,8 +321,9 @@ background images and colors on any button.
 
 === Flat buttons
 
-Flat buttons are text-only buttons. They may be used in dialogs, toolbars,
-or inline. They do not lift, but fill with color on press.
+*Flat* buttons are text-only buttons. They may be used in dialogs, toolbars,
+or inline. They do not lift, but *hightlighted* on mouse *hover* and *focussed*
+on press.
 
 ++++
 <div class="doc-example">
@@ -345,30 +348,45 @@ or inline. They do not lift, but fill with color on press.
 <button type="button" class="btn btn-link">Link</button>
 ----
 
-
 === Button sizes
 
-Beside the default size, small and large buttons are available.
+Beside the *default* size, small and large buttons are available.
 
 ++++
 <div class="doc-example mb-3">
-  <button type="button" class="btn btn-primary btn-raised btn-lg">Large button</button>
-  <button type="button" class="btn btn-primary btn-raised">Default button</button>
-  <button type="button" class="btn btn-primary btn-raised btn-sm">Small button</button>
+  <button type="button" class="btn btn-primary btn-raised btn-lg">Large</button>
+  <button type="button" class="btn btn-primary btn-raised">Default</button>
+  <button type="button" class="btn btn-primary btn-raised btn-sm">Small</button>
 </div>
 ++++
 
 [source, html, role="noclip"]
 ----
-<button type="button" class="btn btn-primary btn-raised btn-lg">Large button</button>
-<button type="button" class="btn btn-primary btn-raised">Default button</button>
-<button type="button" class="btn btn-primary btn-raised btn-sm">Small button</button>
+<button type="button" class="btn btn-primary btn-raised btn-lg">Large</button>
+<button type="button" class="btn btn-primary btn-raised">Default</button>
+<button type="button" class="btn btn-primary btn-raised btn-sm">Small</button>
 ----
+
+=== Pulsed button
+
+Draw attention to a button, e.g for a *recommended* action.
+
+++++
+<div class="doc-example mb-3">
+  <button type="button" class="btn btn-primary btn-raised pulsed-z2">Recommend</button>
+</div>
+++++
+
+[source, html, role="noclip"]
+----
+  <button type="button" class="btn btn-primary btn-raised pulsed-z2">Primary</button>
+----
+
 
 === Block level button
 
-Create block level buttons—those that span the full width of a parent—by
-adding .btn-block.
+Create *block level* buttons that span the full width of a parent by adding
+the class `.btn-block`.
 
 ++++
 <div class="doc-example mb-3">
@@ -389,41 +407,41 @@ adding .btn-block.
 </button>
 ----
 
-=== Toggle button
-
-++++
-<div class="doc-example mb-3">
-  <button type="button" class="btn btn-primary btn-raised" data-toggle="button" aria-pressed="false" autocomplete="off">
-    Single toggle
-  </button>
-</div>
-++++
-
-[source, html, role="noclip"]
-----
-<button type="button" class="btn btn-primary btn-raised"
-  data-toggle="button" aria-pressed="false" autocomplete="off">
-    Single toggle
-</button>
-----
-
 === Checkboxes and Radio buttons
 
-Bootstrap’s .button styles can be applied to other elements, such as
-`<label>`, to provide checkbox or radio style button toggling. The checked
-state for these buttons is only updated via click event on the button.
+J1 Template support two *selection* elements: checkboxes and radio buttons.
+These selection elements *replace* the default Bootstrap **toggle**-buttons
+for a better *style*.
+
+==== Checkboxes
+
+Checkboxes are used if you want users to select *any* number of options
+from a list of *preset* (available) options.
 
 ++++
 <div class="doc-example mb-3">
-  <div class="btn-group btn-group-toggle" data-toggle="buttons">
-    <label class="btn btn-primary btn-raised btn-flex active">
-      <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="">
+      Unchecked Checkbox
     </label>
-    <label class="btn btn-primary btn-raised btn-flex">
-      <input type="radio" name="options" id="option2" autocomplete="off"> Radio
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="" checked="">
+      Checked Checkbox
     </label>
-    <label class="btn btn-primary btn-raised btn-flex">
-      <input type="radio" name="options" id="option3" autocomplete="off"> Radio
+  </div>
+  <div class="checkbox disabled">
+    <label>
+      <input type="checkbox" value="" disabled="">
+      Disabled Checkbox
+    </label>
+  </div>
+  <div class="checkbox disabled">
+    <label>
+      <input type="checkbox" value="" disabled="" checked="">
+      Checked but disabled Checkbox
     </label>
   </div>
 </div>
@@ -431,26 +449,165 @@ state for these buttons is only updated via click event on the button.
 
 [source, html, role="noclip"]
 ----
-<div class="btn-group btn-group-toggle" data-toggle="buttons">
-  <label class="btn btn-primary btn-raised btn-flex active">
-    <input type="radio" name="options" id="option1" autocomplete="off" checked> Active
-  </label>
-  <label class="btn btn-primary btn-raised btn-flex">
-    <input type="radio" name="options" id="option2" autocomplete="off"> Radio
-  </label>
-  <label class="btn btn-primary btn-raised btn-flex">
-    <input type="radio" name="options" id="option3" autocomplete="off"> Radio
-  </label>
-</div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="">
+      Unchecked Checkbox
+    </label>
+  </div>
+  <div class="checkbox">
+    <label>
+      <input type="checkbox" value="" checked="">
+      Checked Checkbox
+    </label>
+  </div>
+  <div class="checkbox disabled">
+    <label>
+      <input type="checkbox" value="" disabled="">
+      Disabled Checkbox
+    </label>
+  </div>
+  <div class="checkbox disabled">
+    <label>
+      <input type="checkbox" value="" disabled="" checked="">
+      Checked but disabled checkbox
+    </label>
+  </div>
 ----
 
-=== Floating action buttons
+==== Radio buttons
 
-A floating action button represents the primary action in an application,
-it is used for a promoted action.
+Radio buttons are used if you want to *limit* users to just *one*
+selection from a list of *preset* (available) options.
+
+++++
+<div class="doc-example mb-3">
+  <div class="radio">
+    <label>
+      <input type="radio" name="radio" value="">
+      Unchecked Radio button
+    </label>
+  </div>
+  <div class="radio">
+    <label>
+      <input type="radio" name="radio" value="" checked="">
+      Checked Radio button
+    </label>
+  </div>
+  <div class="radio">
+    <label>
+      <input type="radio" name="radio" value="" disabled="">
+      Disabled Radio button
+    </label>
+  </div>
+  <div class="radio">
+    <label>
+      <input type="radio" value="" disabled="" checked="">
+      Checked but disabled Radio button
+    </label>
+  </div>
+</div>
+++++
+
+[source, html, role="noclip"]
+----
+  <div class="radio">
+    <label>
+      <input type="radio" name="radio" value="">
+      Unchecked Radio button
+    </label>
+  </div>
+  <div class="radio">
+    <label>
+      <input type="radio" name="radio" value="" checked="">
+      Checked Radio button
+    </label>
+  </div>
+  <div class="radio">
+    <label>
+      <input type="radio" name="radio" value="" disabled="">
+      Disabled Radio button
+    </label>
+  </div>
+  <div class="radio">
+    <label>
+      <input type="radio" value="" disabled="" checked="">
+      Checked but disabled Radio button
+    </label>
+  </div>
+----
+
+=== Switches
+
+You can use an *alternative* to standard J1 checkboxes: the Material Design
+styled element *switch*. Switches behave the same as checkboxes to want users
+to select *any number* of options from a list of *preset* (available) options.
+
+++++
+<div class="doc-example mb-3">
+  <div class="switch">
+    <label>
+      <input type="checkbox" value="">
+      Unchecked Switch
+    </label>
+  </div>
+  <div class="switch">
+    <label>
+      <input type="checkbox" value="" checked="">
+      Checked Switch
+    </label>
+  </div>
+  <div class="switch">
+    <label>
+      <input type="checkbox" value="" disabled="">
+      Disabled Switch
+    </label>
+  </div>
+  <div class="switch">
+    <label>
+      <input type="checkbox" value="" disabled="" checked="">
+      Checked but disabled Switch
+    </label>
+  </div>
+</div>
+++++
+
+[source, html, role="noclip"]
+----
+  <div class="switch">
+    <label>
+      <input type="checkbox" value="">
+      Unchecked Switch
+    </label>
+  </div>
+  <div class="switch">
+    <label>
+      <input type="checkbox" value="" checked="">
+      Checked Switch
+    </label>
+  </div>
+  <div class="switch">
+    <label>
+      <input type="checkbox" value="" disabled="">
+      Disabled Switch
+    </label>
+  </div>
+  <div class="switch">
+    <label>
+      <input type="checkbox" value="" disabled="" checked="">
+      Checked but disabled Switch
+    </label>
+  </div>
+----
+
+=== Floating Action Button (FAB)
+
+FABs are adopted navigation elements from mobile devices (Android) but used
+today quite often for web pages as well. Floating action buttons for the web
+typically provide *additonal* actions for a page, e.g. in-page navigation.
 
 mdi:bootstrap[24px, mdi-md-deep-purple]
-https://material.io/components/buttons-floating-action-button#types-of-transitions[Google Material Design {char-middot} Floating action buttons, {browser-window--new}]
+https://material.io/components/buttons-floating-action-button/android#using-fabs[Google Material Design {char-middot} Floating action buttons, {browser-window--new}]
 
 ++++
 <div class="doc-example">
@@ -462,12 +619,54 @@ https://material.io/components/buttons-floating-action-button#types-of-transitio
 
 [source, html, role="noclip"]
 ----
-  <button type="button" class="btn bmd-btn-fab" aria-label="fab-button">
+  <button type="button" class="btn bmd-btn-fab btn-primary" aria-label="fab-button">
+    <i class="mdi mdi-plus"></i>
+  </button>
+----
+
+==== Pulsed FAB
+
+Draw *attention* to floating action buttons (FAB) with this subtle but
+captivating effect.
+
+++++
+<div class="doc-example">
+  <button type="button" class="btn bmd-btn-fab btn-primary pulsed-z3" aria-label="fab-button">
+    <i class="mdi mdi-plus"></i>
+  </button>
+</div>
+++++
+
+[source, html, role="noclip"]
+----
+  <button type="button" class="btn bmd-btn-fab btn-primary pulsed-z3" aria-label="fab-button">
+    <i class="mdi mdi-plus"></i>
+  </button>
+----
+
+==== Mini FAB
+
+A smaller sized, *mini* floating action button (FAB) is also available.
+
+++++
+<div class="doc-example">
+  <button type="button" class="btn bmd-btn-fab bmd-btn-fab-sm btn-primary" aria-label="fab-button-small">
+    <i class="mdi mdi-plus"></i>
+  </button>
+</div>
+++++
+
+[source, html, role="noclip"]
+----
+  <button type="button" class="btn btn-danger bmd-btn-fab bmd-btn-fab-sm" aria-label="fab-button-small">
     <i class="mdi mdi-plus"></i>
   </button>
 ----
 
 ==== Colors
+
+For floating action buttons (FAB), all Bootstrap button *color classes* can
+be applied.
 
 ++++
 <div class="doc-example">
@@ -506,30 +705,22 @@ https://material.io/components/buttons-floating-action-button#types-of-transitio
   <button type="button" class="btn bmd-btn-fab btn-secondary" aria-label="fab-button-secondary">
     <i class="mdi mdi-plus"></i>
   </button>
-  ...
+  <button type="button" class="btn bmd-btn-fab btn-danger" aria-label="fab-button-danger">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn bmd-btn-fab btn-info" aria-label="fab-button-info">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn bmd-btn-fab btn-success" aria-label="fab-button-success">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn bmd-btn-fab btn-warning" aria-label="fab-button-warning">
+    <i class="mdi mdi-plus"></i>
+  </button>
   <button type="button" class="btn bmd-btn-fab btn-dark" aria-label="fab-button-dark">
     <i class="mdi mdi-plus"></i>
   </button>
   <button type="button" class="btn bmd-btn-fab btn-light" aria-label="fab-button-light">
-    <i class="mdi mdi-plus"></i>
-  </button>
-----
-
-==== Sizes
-
-A smaller sized, i.e. mini floating action button, is also available.
-
-++++
-<div class="doc-example">
-  <button type="button" class="btn btn-danger bmd-btn-fab bmd-btn-fab-sm" aria-label="fab-button-small">
-    <i class="mdi mdi-plus"></i>
-  </button>
-</div>
-++++
-
-[source, html, role="noclip"]
-----
-  <button type="button" class="btn btn-danger bmd-btn-fab bmd-btn-fab-sm" aria-label="fab-button-small">
     <i class="mdi mdi-plus"></i>
   </button>
 ----

@@ -425,7 +425,7 @@ var j1 = (function () {
           expires:  0
         });
         if (!cookie_written) {
-            logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
+          logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
         }
       } else {
         logger.debug('\n' + 'write to cookie : ' + cookie_names.user_state);
@@ -437,54 +437,56 @@ var j1 = (function () {
           expires:  365
         });
         if (!cookie_written) {
-            logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
+          logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
         }
       }
 
-      // initialize event handler for smooth scroll on in-page anchors
+      // jadams, 2021-11-10: anchor links of type #void are used/managed
+      // by the FAB module. No geneneraL use for NOW.
       // -----------------------------------------------------------------------
-      $('a[href*=\\#]').on('click', function (event) {
-        // ignore void links
-        if (window.location.href.includes('#void')||this.href.includes('#void')) {
-          // return false;
-        }
-        // for external links, redirect to this page
-        if (window.location.pathname !== this.pathname) {
-          window.location.href = this.href;
-        } else {
-          // continue on in-page anchor
-          var toccerScrollDuration  = 300;
-          var toccerScrollOffset    = 10;
-
-          // calculate offset value for correct (smooth) scroll position
-          //
-          var $pagehead       = $('.attic');
-          var $navbar         = $('nav.navbar');
-          var $adblock        = $('#adblock');
-          var navbarType      = $navbar.hasClass('navbar-fixed') ? 'fixed' : 'scrolled';
-          var fontSize        = $('body').css('font-size').replace('px','');
-          var start           = window.pageYOffset;
-          var l               = parseInt(fontSize);
-          var h               = $pagehead.length ? $pagehead.height() : 0;
-          var n               = $navbar.length ? $navbar.height() : 0;
-          var a               = $adblock.length ? $adblock.height() : 0;
-          var scrollOffset    = navbarType == 'fixed' ? -1*(n + a + l) : -1*(h + n + a + l);
-
-          // TODO:  to be checked why this static offset (toccerScrollOffset)
-          //        is needed
-          scrollOffset        = scrollOffset + toccerScrollOffset;
-
-          logger.debug('\n' + 'scroll to anchor: ' + this.hash);
-          $("html, body").animate({
-            scrollTop: $($(this).attr("href")).offset().top + scrollOffset + "px"
-          }, {
-            duration: toccerScrollDuration,
-            easing: "swing"
-          });
-          // disable bubble up the event
-          return false;
-        } // End in-page link
-      }); // END click event on anchors
+      // initialize event handler for smooth scroll on in-page anchors
+      // $('a[href*=\\#]').on('click', function (event) {
+      //   // ignore void links
+      //   if (window.location.href.includes('#void')||this.href.includes('#void')) {
+      //     return false;
+      //   }
+      //   // for external links, redirect to this page
+      //   if (window.location.pathname !== this.pathname) {
+      //     window.location.href = this.href;
+      //   } else {
+      //     // continue on in-page anchor
+      //     var toccerScrollDuration  = 300;
+      //     var toccerScrollOffset    = 10;
+      //
+      //     // calculate offset value for correct (smooth) scroll position
+      //     //
+      //     var $pagehead       = $('.attic');
+      //     var $navbar         = $('nav.navbar');
+      //     var $adblock        = $('#adblock');
+      //     var navbarType      = $navbar.hasClass('navbar-fixed') ? 'fixed' : 'scrolled';
+      //     var fontSize        = $('body').css('font-size').replace('px','');
+      //     var start           = window.pageYOffset;
+      //     var l               = parseInt(fontSize);
+      //     var h               = $pagehead.length ? $pagehead.height() : 0;
+      //     var n               = $navbar.length ? $navbar.height() : 0;
+      //     var a               = $adblock.length ? $adblock.height() : 0;
+      //     var scrollOffset    = navbarType == 'fixed' ? -1*(n + a + l) : -1*(h + n + a + l);
+      //
+      //     // TODO:  to be checked why this static offset (toccerScrollOffset)
+      //     //        is needed
+      //     scrollOffset        = scrollOffset + toccerScrollOffset;
+      //
+      //     logger.debug('\n' + 'scroll to anchor: ' + this.hash);
+      //     $("html, body").animate({
+      //       scrollTop: $($(this).attr("href")).offset().top + scrollOffset + "px"
+      //     }, {
+      //       duration: toccerScrollDuration,
+      //       easing: "swing"
+      //     });
+      //     // disable bubble up the event
+      //     return false;
+      //   } // End in-page link
+      // }); // END click event on anchors
 
       // initialize event handler for window/history/back on <ESC>
       // -----------------------------------------------------------------------

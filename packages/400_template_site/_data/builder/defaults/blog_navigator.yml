@@ -220,8 +220,8 @@ defaults:
         headline:                       Preview
         description: >
                                         All articles are reverse ordered by date. The current articles are displayed
-                                        first. From the FAM button <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
-                                        <i class="mdi mdi-plus"></i>FAM button</a> you can reach a table of contents
+                                        first. From the FAB button <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
+                                        <i class="mdi mdi-plus"></i>FAB button</a> you can reach a table of contents
                                         <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> of all available articles
                                         in the same order. To preview older posts, use the button <b>Older Posts</b> from
@@ -233,7 +233,7 @@ defaults:
                                         Alle Artikel sind in umgekehrter Reihenfolge ihres Erscheinens
                                         gruppiert. Aktuellere Beiträge werden zuerst angezeigt. Über den FAM-Button
                                         <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
-                                        <i class="mdi mdi-plus"></i>FAM button</a> erreichen Sie ein
+                                        <i class="mdi mdi-plus"></i>FAB button</a> erreichen Sie ein
                                         Inhaltsverzeichnis <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> über alle verfübaren Artikel
                                         in gleicher Reihenfolge. Zur Anzeige älterer Artikel, verwenden Sie die Schältfläche
@@ -249,9 +249,9 @@ defaults:
         description: >
                                         Check out <b>all</b> articles in the blog posts <b>archive</b>.
                                         Below, find articles available this site sorted from the youngest
-                                        to the oldest. From the FAM button <a href="#void"
+                                        to the oldest. From the FAB button <a href="#void"
                                         class="btn-fab-floating btn-small btn-md-blue">
-                                        <i class="mdi mdi-plus"></i>FAM button</a> you can reach a
+                                        <i class="mdi mdi-plus"></i>FAB button</a> you can reach a
                                         table of contents <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> of all available
                                         articles in the same order.
@@ -267,7 +267,7 @@ defaults:
                                         Blog-Beiträge. Die Artikel sind in umgekehrter Reihenfolge ihres Erscheinens
                                         gruppiert. Aktuellere Beiträge werden zuerst angezeigt. Über den FAM-Button
                                         <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
-                                        <i class="mdi mdi-plus"></i>FAM button</a> erreichen Sie ein
+                                        <i class="mdi mdi-plus"></i>FAB button</a> erreichen Sie ein
                                         Inhaltsverzeichnis <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> über alle verfübaren Artikel
                                         in gleicher Reihenfolge.
@@ -287,8 +287,8 @@ defaults:
         description: >
                                         On this page you will find all articles from the <b>archive</b>
                                         of the blog posts. The articles are grouped by <b>category</b>.
-                                        From the FAM button <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
-                                        <i class="mdi mdi-plus"></i>FAM button</a> you can reach a
+                                        From the FAB button <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
+                                        <i class="mdi mdi-plus"></i>FAB button</a> you can reach a
                                         table of contents <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> of all available articles
                                         in the same order.
@@ -303,7 +303,7 @@ defaults:
                                         Auf dieser Seite finden Sie alle Artikel aus dem <b>Archiv</b> der
                                         Blog-Beiträge. Die Artikel sind nach <b>Kategorie</b> gruppiert.
                                         Über den FAM-Button <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
-                                        <i class="mdi mdi-plus"></i>FAM button</a> erreichen Sie ein
+                                        <i class="mdi mdi-plus"></i>FAB button</a> erreichen Sie ein
                                         Inhaltsverzeichnis <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> über alle verfübaren Artikel
                                         in gleicher Reihenfolge.
@@ -322,8 +322,8 @@ defaults:
         description: >
                                         On this page you will find all articles from the <b>archive</b>
                                         of the blog posts. The articles are grouped by <b>Date</b>.
-                                        From the FAM button <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
-                                        <i class="mdi mdi-plus"></i>FAM button</a> you can reach a
+                                        From the FAB button <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
+                                        <i class="mdi mdi-plus"></i>FAB button</a> you can reach a
                                         table of contents <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> of all available articles
                                         in the same order.
@@ -338,7 +338,7 @@ defaults:
                                         Auf dieser Seite finden Sie alle Artikel aus dem <b>Archiv</b> der
                                         Blog-Beiträge. Die Artikel sind nach <b>Datum</b> gruppiert.
                                         Über den FAM-Button <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
-                                        <i class="mdi mdi-plus"></i>FAM button</a> erreichen Sie ein
+                                        <i class="mdi mdi-plus"></i>FAB button</a> erreichen Sie ein
                                         Inhaltsverzeichnis <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> über alle verfübaren Artikel
                                         in gleicher Reihenfolge.
@@ -357,8 +357,8 @@ defaults:
         description: >
                                         On this page you will find all articles from the <b>archive</b>
                                         of the blog posts. The articles are grouped by <b>Tag</b>.
-                                        From the FAM button <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
-                                        <i class="mdi mdi-plus"></i>FAM button</a> you can reach a
+                                        From the FAB button <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
+                                        <i class="mdi mdi-plus"></i>FAB button</a> you can reach a
                                         table of contents <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> of all available articles
                                         in the same order.
@@ -374,7 +374,7 @@ defaults:
                                         Auf dieser Seite finden Sie alle Artikel aus dem <b>Archiv</b> der
                                         Blog-Beiträge. Die Artikel sind nach <b>Tag</b> gruppiert.
                                         Über den FAM-Button <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
-                                        <i class="mdi mdi-plus"></i>FAM button</a> erreichen Sie ein
+                                        <i class="mdi mdi-plus"></i>FAB button</a> erreichen Sie ein
                                         Inhaltsverzeichnis <a href="#void" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> über alle verfübaren Artikel
                                         in gleicher Reihenfolge.
