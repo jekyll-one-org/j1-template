@@ -179,7 +179,7 @@ exclude_from_search:                    true
           <div class="row {{panel_settings.properties}}">
 
             <!-- Heading -->
-            <div class="row">
+            <div>
               <div class="{{panel_settings.animate}} mb-2">
                 <h2 class="g-font-weight-500 mb-0">{{panel_settings.title}}</h2>
                 <p class="tagline mb-0"><b>{{panel_settings.tagline}}</b></p>
@@ -191,7 +191,7 @@ exclude_from_search:                    true
             <!-- End Heading -->
 
             <!-- Cards -->
-            <div class="row card-deck {{panel_settings.id}}" style="display: none;">
+            <div class="card-deck {{panel_settings.id}}" style="display: none;">
             {% assign card_items = cards|size %}
             {% for card in cards %}
 
@@ -216,12 +216,6 @@ exclude_from_search:                    true
 
               {% include {{select_icon_size}} family=icon_family size=icon_size %}
               {% assign icon_size = size %}
-
-              {% if card_animate %}
-                {% assign card_animate = card_animate %}
-              {% else %}
-                {% assign card_animate = '' %}
-              {% endif %}
 
               {% comment %} extract link for card icon
               ------------------------------------------------------------------ {% endcomment %}
@@ -467,7 +461,7 @@ exclude_from_search:                    true
 
             {% if panel_options.title %}
             <!-- Heading -->
-            <div class="row">
+            <div class="noclass">
               <div class="{{panel_settings.animate}} mb-2">
                 <h2 class="g-font-weight-500 mb-0">{{panel_options.title}}</h2>
                 <p class="tagline mb-0"><b>{{panel_options.tagline}}</b></p>
@@ -520,7 +514,7 @@ exclude_from_search:                    true
 
               <!-- [INFO   ] [j1.assets.data.panel.html             ] [ blocktype detected as: {{card_block}} ] -->
               {% if card_block == 'card-list' %}
-              <div class="row">
+              <div class="noclass">
                 <ul id="{{panel_settings.id}}-scroll-group" class="list-group list-group-horizontal align-items-stretch flex-wrap">
                   <!-- [INFO   ] [j1.assets.data.panel.html             ] [ write post items ] -->
                 {% for post in site.posts %}

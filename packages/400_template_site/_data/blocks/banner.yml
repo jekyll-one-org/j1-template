@@ -121,7 +121,7 @@ settings:
         enabled:                        true
         comment:                        Top teaser shown on home page
         type:                           teaser
-        properties:                     mt-3 mr-3 mb-5 ml-3
+        properties:                     mt-3 mb-5
         icon_family:                    MDI
 
         style:                          light
@@ -134,10 +134,9 @@ settings:
               enabled:                  true
               width:                    12
               type:                     text
-              animate:                  false
               title:                    Jekyll One Template
               tagline:                  <b>powerful modern static websites</b>
-              description_properties:   mt-3 mr-3 mb-3
+              description_properties:   mt-3 mb-3
               description: >
                                         <p class="dropcap">
                                           Jekyll One is a full-featured template for Jekyll to create
@@ -189,7 +188,7 @@ settings:
                     icon:               briefcase-check-outline
                     icon_color:
                     icon_size:          3x
-                    href:               https://jekyll.one/pages/public/learn/quickstart/
+                    href:               "https://jekyll.one/pages/public/learn/quickstart/"
                     target:             blank
 
     # --------------------------------------------------------------------------
@@ -198,7 +197,7 @@ settings:
     - name:                             Home Welcome Banner
       banner:
         id:                             home_welcome_banner
-        enabled:                        true
+        enabled:                        false
         comment:                        Teaser shown on home page below the parallax
         type:                           teaser
         icon_family:                    MDI
@@ -268,7 +267,7 @@ settings:
     - name:                               Home Image Banner
       banner:
         id:                               home_image_banner
-        enabled:                          true
+        enabled:                          false
         type:                             image
         comment:                          Main image banner shown on home page
 

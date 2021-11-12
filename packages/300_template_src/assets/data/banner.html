@@ -136,6 +136,7 @@ exclude_from_search:                    true
         {% when 'teaser' %}
         {% assign banner_options = banner_config_defaults.teaser | merge: banner_settings %}
         {% if debug %}<!-- banner_options:  {{banner_options}} -->{% endif %}
+
         <section id="{{banner_settings.id}}" class="container">
           <div class="row {{banner_settings.properties}}">
           {% assign card_items = cards | size %}
@@ -152,7 +153,6 @@ exclude_from_search:                    true
                 {% if key == 'icon_size' %}               {% assign icon_size         = value %}                   {% endif %}
                 {% if key == 'icon_color' %}              {% assign icon_color        = value %}                   {% endif %}
                 {% if key == 'image_path' %}              {% assign card_image_path   = value %}                   {% endif %}
-                {% if key == 'animate' %}                 {% assign card_animate      = value %}                   {% endif %}
                 {% if key == 'description_properties' %}  {% assign card_properties   = value %}                   {% endif %}
                 {% if key == 'title' %}                   {% assign card_title        = value | strip_newlines%}   {% endif %}
                 {% if key == 'description' %}             {% assign card_description  = value | strip_newlines%}   {% endif %}
@@ -181,12 +181,6 @@ exclude_from_search:                    true
               {% assign card_width_md = 12 | divided_by: card_items %}
             {% endif %}
 
-            {% if card_animate %}
-              {% assign card_animate = card_animate %}
-            {% else %}
-              {% assign card_animate = '' %}
-            {% endif %}
-
             {% comment %} TODO: Add payment_url to config
             -------------------------------------------------------------------- {% endcomment %}
             {% assign patreon_enabled     = true %}
@@ -198,10 +192,10 @@ exclude_from_search:                    true
             {% capture payment_url %}{{patreon_home}}/{{pledge_url}}/{{vanity}}{% endcapture %}
 
             {% if card_type == 'text' and card_enabled %}
-            {% if card_animate %} {% capture animate %}animated {{card_animate}}{% endcapture %} {% endif %}
+
             <!-- Heading -->
-            <div class="row">
-              <div class="{{animate}} mb-2">
+            <div class="noclass">
+              <div>
                 <h2 class="g-font-weight-500 mb-0">{{card_title}}</h2>
                 <p class="tagline mb-0">{{card_tagline}}</p>
                 <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-2"></div>
@@ -210,11 +204,11 @@ exclude_from_search:                    true
             <!-- End Heading -->
 
             <!-- Body -->
-            <div class="row {{animate}}">
+            <div class="noclass">
               <div class="{{card_properties}}">{{card_description}}</div>
               {% if card_buttons %}
               <!-- Footer|Button row -->
-              <div class="mt-1 text-center">
+              <div>
                 {% for button_hash in card_buttons %}
                   {% include {{create_bs_button}} button_data=button_hash button_type="link" %}
                   {{bs_button_html}}
