@@ -3,15 +3,11 @@ title:                                  Theme previewer
 tagline:                                common components
 date:                                   2020-11-08 00:00:00 +100
 description: >
-                                        Bootstrap is a HTML, CSS & JS Library that focuses on
-                                        simplifying the development of modern web pages. The
-                                        primary purpose to apply the framework to J1 is to
-                                        provide a general standard colors, sizes, fonts and
-                                        the overall layout of a J1-based site. Bootstrap provides
-                                        basic style definitions for all common used HTML elements.
-                                        The Themes Previewer provides an overview for common components
-                                        of a selected theme. Find base Bootstrap features and styles for
-                                        the current theme selected.
+                                        Bootstrap is a HTML, CSS and JS Library that focuses on simplifying the
+                                        development of modern web pages. The primary purpose of applying a theme
+                                        is to change the available standard colors, sizes, and fonts.
+                                        The Themes Previewer provides an overview of common components of a selected
+                                        theme. Find base Bootstrap features and styles for the current theme selected.
 
 categories:                             [ Previewer ]
 tags:                                   [ Bootstrap, Themes ]
@@ -41,6 +37,57 @@ resource_options:
 // =============================================================================
 // Enable the Liquid Preprocessor
 :page-liquid:
+
+// Attribute settings for section control
+//
+:navbars:                               true
+:buttons:                               true
+:buttons_active:                        true
+:buttons_disabled:                      true
+:buttons_outline:                       true
+:buttons_flat:                          true
+:buttons_sizes:                         true
+:buttons_pulsed:                        true
+:buttons_blocklevel:                    true
+:selections:                            true
+:selections_checkboxes:                 true
+:selections_radio_buttons:              true
+:selections_switches:                   true
+:fab:                                   true
+:fab_raised:                            true
+:fab_pulsed:                            true
+:fab_mini:                              true
+:fab_colors:                            true
+:typography:                            true
+:typography_headings:                   true
+:typography_blockquotes:                true
+:tables:                                true
+:forms:                                 true
+:navs:                                  true
+:navs_tabs:                             true
+:navs_pills:                            true
+:navs_breadcrumbs:                      true
+:navs_pagination:                       true
+:indicators:                            true
+:indicators_alerts:                     true
+:indicators_badges:                     true
+:scrollbars:                            true
+:progress:                              true
+:progress_basic:                        true
+:progress_contextual_alternatives:      true
+:progress_multiple_bars:                true
+:progress_striped:                      true
+:progress_animated:                     true
+:containers:                            true
+:containers_jumbotron:                  true
+:containers_list:                       false
+:containers_list_groups:                false
+:cards:                                 true
+:cards_simple:                          true
+:cards_image:                           true
+:dialogs:                               true
+:dialogs_modals:                        true
+:dialogs_popovers_tooltips:             true
 
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
@@ -85,7 +132,7 @@ resource_options:
           } else {
             themeName  = 'J1 Default';
           }
-          var themeNameHeadline = '<h2 id="theme_name">Theme ' +themeName+ '</h2>';
+          var themeNameHeadline = '<h1 id="theme_name">Theme ' +themeName+ '</h1>';
           $('#theme').prepend(themeNameHeadline);
           clearInterval(dependencies_met_themer);
           }
@@ -98,18 +145,24 @@ resource_options:
   </div>
 ++++
 
-Themes step in the framework to further adjust the appearance of a website
-based on the core CSS rules and definitions of Bootstrap. Themes does not
-change the functionality of the framwork, but modifies rule-based e.g. the
-color scheme, fonts, sizes or the appearance of more complex elements like
-forms or tables. Additionally, a theme may add additonal components but in
-the *sense* of Bootstrap's framework rules and philosophy.
+Bootstrap is a HTML, CSS and JS Library that focuses on simplifying the
+development of modern web pages. The primary purpose of applying a theme
+is to change the available standard colors, sizes, fonts and predefined
+HTML elememts like buttons, forms, inputs, or navgation elements.
 
+Themes for Bootstrap are used to customize the appearance of a website based
+on the basic rules and definitions of Bootstrap's (CSS) styles. The use or
+change of a theme does not alter the functionality of the underlying Bootstrap
+framework but modifies, for example, the color scheme, fonts, or font sizes.
+Furthermore, the appearance of selected predefined HTML elememts like buttons,
+forms or navigation elements may be adapted by a theme.
+
+ifeval::[{navbars} == true]
 == Navbars
 
-See examples for Bootstrap’s powerful, responsive navigation header, the
-navbar. Includes support for branding, navigation, and more, including
-support for the collapse plugin.
+A navbar is an elementary page element, usually integrated at the top of
+your page for navigation. Bootstrap offers many navigation functions that
+are minimized on smartphones and thus always remain easy to use.
 
 mdi:bootstrap[24px, mdi-md-deep-purple]
 link:{url-bs-docs--components-navbar}[Bootstrap Docs {char-middot} Navbar, {browser-window--new}]
@@ -122,7 +175,7 @@ colors. Then, customize with `.bg-*` utilities.
 ++++
 <div class="doc-example mb-3">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-1">
-    <a href="#void" class="navbar-brand">Navbar<div class="ripple-container"></div></a>
+    <a href="#" class="navbar-brand">Navbar<div class="ripple-container"></div></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -130,16 +183,16 @@ colors. Then, customize with `.bg-*` utilities.
     <div class="collapse navbar-collapse" id="navbarColor01">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a href="#void" class="nav-link">Home <span class="sr-only">(current)</span></a>
+          <a href="#" class="nav-link">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a href="#void" class="nav-link">Features</a>
+          <a href="#" class="nav-link">Features</a>
         </li>
         <li class="nav-item">
-          <a href="#void" class="nav-link">Pricing</a>
+          <a href="#" class="nav-link">Pricing</a>
         </li>
         <li class="nav-item">
-          <a href="#void" class="nav-link">About</a>
+          <a href="#" class="nav-link">About</a>
         </li>
       </ul>
       <form class="form-inline">
@@ -150,7 +203,7 @@ colors. Then, customize with `.bg-*` utilities.
   </nav>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-1">
-    <a href="#void" class="navbar-brand">Navbar</a>
+    <a href="#" class="navbar-brand">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -158,16 +211,16 @@ colors. Then, customize with `.bg-*` utilities.
     <div class="collapse navbar-collapse" id="navbarColor02">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a href="#void" class="nav-link">Home <span class="sr-only">(current)</span></a>
+          <a href="#" class="nav-link">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a href="#void" class="nav-link">Features</a>
+          <a href="#" class="nav-link">Features</a>
         </li>
         <li class="nav-item">
-          <a href="#void" class="nav-link">Pricing</a>
+          <a href="#" class="nav-link">Pricing</a>
         </li>
         <li class="nav-item">
-          <a href="#void" class="nav-link">About</a>
+          <a href="#" class="nav-link">About</a>
         </li>
       </ul>
       <form class="form-inline">
@@ -178,7 +231,7 @@ colors. Then, customize with `.bg-*` utilities.
   </nav>
 
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-    <a href="#void" class="navbar-brand">Navbar</a>
+    <a href="#" class="navbar-brand">Navbar</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -186,16 +239,16 @@ colors. Then, customize with `.bg-*` utilities.
     <div class="collapse navbar-collapse" id="navbarColor03">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
-          <a href="#void" class="nav-link">Home <span class="sr-only">(current)</span></a>
+          <a href="#" class="nav-link">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
-          <a href="#void" class="nav-link">Features</a>
+          <a href="#" class="nav-link">Features</a>
         </li>
         <li class="nav-item">
-          <a href="#void" class="nav-link">Pricing</a>
+          <a href="#" class="nav-link">Pricing</a>
         </li>
         <li class="nav-item">
-          <a  href="#void" class="nav-link">About</a>
+          <a  href="#" class="nav-link">About</a>
         </li>
       </ul>
       <form class="form-inline">
@@ -221,20 +274,33 @@ colors. Then, customize with `.bg-*` utilities.
   <!-- Navbar content -->
 </nav>
 ----
+endif::[]
 
-
+ifeval::[{buttons} == true]
 == Buttons
 
-Use Bootstrap’s custom button styles for actions in forms, dialogs. And
-more with support for multiple sizes, states, and more. Bootstrap includes
-several predefined button styles, each serving its semantic purpose, with a
-few extras thrown in for more control.
+Buttons are important visual anchors that encourage visitors to click on
+them to call up to click on certain pages and offers on a website.
+Well-designed buttons are usable instead of simple text links. With the use
+of buttons, a higher visiting rate (click-through rate) of important pages
+of a site is achievable.
 
-// pass:[<i class="mdi mdi-bootstrap mdi-md-deep-purple mdi-24px"></i>]
-// mdi:bootstrap[24px, mdi-pulsed mdi-md-deep-purple]
+The Bootstrap framework offers different buttons out of the box, which is
+sufficient for most use cases. Buttons are suitable for the following HTML
+elements:
+
+* Links (anchors)
+* Form buttons (input)
+* General buttons (button)
+
+Defining a standard button in Bootstrap is very simple: assign the CSS class
+`.btn` to an HTML element. The following sections describe the different
+types of available buttons and how they are to be defined.
+
 mdi:bootstrap[24px, mdi-md-deep-purple]
 link:{url-bs-docs--components-buttons}[Bootstrap Docs {char-middot} Buttons, {browser-window--new}]
 
+ifeval::[{buttons_active} == true]
 === Active buttons
 
 Active buttons will appear with a darker background and border. If pressed,
@@ -262,8 +328,9 @@ a *ripple* effect is shown for feedback.
 <button type="button" class="btn btn-danger btn-raised">Danger</button>
 <button type="button" class="btn btn-link btn-raised">Link</button>
 ----
+endif::[]
 
-
+ifeval::[{buttons_disabled} == true]
 === Disabled buttons
 
 Buttons look *inactive* by adding the *disabled* boolean attribute to any
@@ -291,7 +358,9 @@ Buttons look *inactive* by adding the *disabled* boolean attribute to any
 <button type="button" class="btn btn-danger btn-raised disabled">Danger</button>
 <button type="button" class="btn btn-link btn-raised disabled">Link</button>
 ----
+endif::[]
 
+ifeval::[{buttons_outline} == true]
 === Outline buttons
 
 In need of a button, but not a hefty background color they bring? Replace
@@ -318,7 +387,9 @@ background images and colors on any button.
 <button type="button" class="btn btn-outline-warning btn-raised">Warning</button>
 <button type="button" class="btn btn-outline-danger btn-raised">Danger</button>
 ----
+endif::[]
 
+ifeval::[{buttons_flat} == true]
 === Flat buttons
 
 *Flat* buttons are text-only buttons. They may be used in dialogs, toolbars,
@@ -347,7 +418,9 @@ on press.
 <button type="button" class="btn btn-danger">Danger</button>
 <button type="button" class="btn btn-link">Link</button>
 ----
+endif::[]
 
+ifeval::[{buttons_sizes} == true]
 === Button sizes
 
 Beside the *default* size, small and large buttons are available.
@@ -366,7 +439,9 @@ Beside the *default* size, small and large buttons are available.
 <button type="button" class="btn btn-primary btn-raised">Default</button>
 <button type="button" class="btn btn-primary btn-raised btn-sm">Small</button>
 ----
+endif::[]
 
+ifeval::[{buttons_pulsed} == true]
 === Pulsed button
 
 Draw attention to a button, e.g for a *recommended* action.
@@ -381,8 +456,9 @@ Draw attention to a button, e.g for a *recommended* action.
 ----
   <button type="button" class="btn btn-primary btn-raised pulsed-z2">Primary</button>
 ----
+endif::[]
 
-
+ifeval::[{buttons_blocklevel} == true]
 === Block level button
 
 Create *block level* buttons that span the full width of a parent by adding
@@ -406,14 +482,18 @@ the class `.btn-block`.
   Block level button
 </button>
 ----
+endif::[]
+endif::[]
 
-=== Checkboxes and Radio buttons
+ifeval::[{selections} == true]
+== Selections
 
 J1 Template support two *selection* elements: checkboxes and radio buttons.
 These selection elements *replace* the default Bootstrap **toggle**-buttons
 for a better *style*.
 
-==== Checkboxes
+ifeval::[{selections_checkboxes} == true]
+=== Checkboxes
 
 Checkboxes are used if you want users to select *any* number of options
 from a list of *preset* (available) options.
@@ -422,25 +502,25 @@ from a list of *preset* (available) options.
 <div class="doc-example mb-3">
   <div class="checkbox">
     <label>
-      <input type="checkbox" value="">
+      <input type="checkbox">
       Unchecked Checkbox
     </label>
   </div>
   <div class="checkbox">
     <label>
-      <input type="checkbox" value="" checked="">
+      <input type="checkbox" checked>
       Checked Checkbox
     </label>
   </div>
   <div class="checkbox disabled">
     <label>
-      <input type="checkbox" value="" disabled="">
+      <input type="checkbox" disabled>
       Disabled Checkbox
     </label>
   </div>
   <div class="checkbox disabled">
     <label>
-      <input type="checkbox" value="" disabled="" checked="">
+      <input type="checkbox" disabled checked>
       Checked but disabled Checkbox
     </label>
   </div>
@@ -451,31 +531,33 @@ from a list of *preset* (available) options.
 ----
   <div class="checkbox">
     <label>
-      <input type="checkbox" value="">
+      <input type="checkbox">
       Unchecked Checkbox
     </label>
   </div>
   <div class="checkbox">
     <label>
-      <input type="checkbox" value="" checked="">
+      <input type="checkbox" checked>
       Checked Checkbox
     </label>
   </div>
   <div class="checkbox disabled">
     <label>
-      <input type="checkbox" value="" disabled="">
+      <input type="checkbox" disabled>
       Disabled Checkbox
     </label>
   </div>
   <div class="checkbox disabled">
     <label>
-      <input type="checkbox" value="" disabled="" checked="">
+      <input type="checkbox" disabled checked>
       Checked but disabled checkbox
     </label>
   </div>
 ----
+endif::[]
 
-==== Radio buttons
+ifeval::[{selections_radio_buttons} == true]
+=== Radio buttons
 
 Radio buttons are used if you want to *limit* users to just *one*
 selection from a list of *preset* (available) options.
@@ -484,25 +566,25 @@ selection from a list of *preset* (available) options.
 <div class="doc-example mb-3">
   <div class="radio">
     <label>
-      <input type="radio" name="radio" value="">
+      <input type="radio" name="radio">
       Unchecked Radio button
     </label>
   </div>
   <div class="radio">
     <label>
-      <input type="radio" name="radio" value="" checked="">
+      <input type="radio" name="radio" checked>
       Checked Radio button
     </label>
   </div>
   <div class="radio">
     <label>
-      <input type="radio" name="radio" value="" disabled="">
+      <input type="radio" name="radio" disabled>
       Disabled Radio button
     </label>
   </div>
   <div class="radio">
     <label>
-      <input type="radio" value="" disabled="" checked="">
+      <input type="radio" disabled checked>
       Checked but disabled Radio button
     </label>
   </div>
@@ -513,30 +595,32 @@ selection from a list of *preset* (available) options.
 ----
   <div class="radio">
     <label>
-      <input type="radio" name="radio" value="">
+      <input type="radio" name="radio">
       Unchecked Radio button
     </label>
   </div>
   <div class="radio">
     <label>
-      <input type="radio" name="radio" value="" checked="">
+      <input type="radio" name="radio" checked>
       Checked Radio button
     </label>
   </div>
   <div class="radio">
     <label>
-      <input type="radio" name="radio" value="" disabled="">
+      <input type="radio" name="radio" disabled>
       Disabled Radio button
     </label>
   </div>
   <div class="radio">
     <label>
-      <input type="radio" value="" disabled="" checked="">
+      <input type="radio" disabled checked>
       Checked but disabled Radio button
     </label>
   </div>
 ----
+endif::[]
 
+ifeval::[{selections_switches} == true]
 === Switches
 
 You can use an *alternative* to standard J1 checkboxes: the Material Design
@@ -547,25 +631,25 @@ to select *any number* of options from a list of *preset* (available) options.
 <div class="doc-example mb-3">
   <div class="switch">
     <label>
-      <input type="checkbox" value="">
+      <input type="checkbox">
       Unchecked Switch
     </label>
   </div>
   <div class="switch">
     <label>
-      <input type="checkbox" value="" checked="">
+      <input type="checkbox" checked>
       Checked Switch
     </label>
   </div>
   <div class="switch">
     <label>
-      <input type="checkbox" value="" disabled="">
+      <input type="checkbox" disabled>
       Disabled Switch
     </label>
   </div>
   <div class="switch">
     <label>
-      <input type="checkbox" value="" disabled="" checked="">
+      <input type="checkbox" disabled checked>
       Checked but disabled Switch
     </label>
   </div>
@@ -576,35 +660,38 @@ to select *any number* of options from a list of *preset* (available) options.
 ----
   <div class="switch">
     <label>
-      <input type="checkbox" value="">
+      <input type="checkbox">
       Unchecked Switch
     </label>
   </div>
   <div class="switch">
     <label>
-      <input type="checkbox" value="" checked="">
+      <input type="checkbox" checked>
       Checked Switch
     </label>
   </div>
   <div class="switch">
     <label>
-      <input type="checkbox" value="" disabled="">
+      <input type="checkbox" disabled>
       Disabled Switch
     </label>
   </div>
   <div class="switch">
     <label>
-      <input type="checkbox" value="" disabled="" checked="">
+      <input type="checkbox" disabled checked>
       Checked but disabled Switch
     </label>
   </div>
 ----
+endif::[]
 
+ifeval::[{fab} == true]
 === Floating Action Button (FAB)
 
-FABs are adopted navigation elements from mobile devices (Android) but used
-today quite often for web pages as well. Floating action buttons for the web
-typically provide *additonal* actions for a page, e.g. in-page navigation.
+Floating Action Buttons are adopted navigation elements from mobile devices
+(Android) but are used today quite often for web pages as well. Floating action
+buttons (FABs) for the web typically provide *additional* actions for a page,
+for example, in-page navigation.
 
 mdi:bootstrap[24px, mdi-md-deep-purple]
 https://material.io/components/buttons-floating-action-button/android#using-fabs[Google Material Design {char-middot} Floating action buttons, {browser-window--new}]
@@ -624,6 +711,30 @@ https://material.io/components/buttons-floating-action-button/android#using-fabs
   </button>
 ----
 
+ifeval::[{fab_raised} == true]
+==== Raised FAB
+
+To put a 3D effect on floating action buttons, buttons can be *raised* by
+adding the additional CSS class 'raised-zX'. J1 supports ten levels of
+raising HTML elements ranging from 1 to 10.
+
+++++
+<div class="doc-example">
+  <button type="button" class="btn bmd-btn-fab btn-primary raised-z5" aria-label="fab-button">
+    <i class="mdi mdi-plus"></i>
+  </button>
+</div>
+++++
+
+[source, html, role="noclip"]
+----
+  <button type="button" class="btn bmd-btn-fab btn-primary raised-z5" aria-label="fab-button">
+    <i class="mdi mdi-plus"></i>
+  </button>
+----
+endif::[]
+
+ifeval::[{fab_pulsed} == true]
 ==== Pulsed FAB
 
 Draw *attention* to floating action buttons (FAB) with this subtle but
@@ -643,7 +754,9 @@ captivating effect.
     <i class="mdi mdi-plus"></i>
   </button>
 ----
+endif::[]
 
+ifeval::[{fab_mini} == true]
 ==== Mini FAB
 
 A smaller sized, *mini* floating action button (FAB) is also available.
@@ -662,7 +775,9 @@ A smaller sized, *mini* floating action button (FAB) is also available.
     <i class="mdi mdi-plus"></i>
   </button>
 ----
+endif::[]
 
+ifeval::[{fab_colors} == true]
 ==== Colors
 
 For floating action buttons (FAB), all Bootstrap button *color classes* can
@@ -724,20 +839,32 @@ be applied.
     <i class="mdi mdi-plus"></i>
   </button>
 ----
+endif::[]
+endif::[]
 
+ifeval::[{typography} == true]
 == Typography
 
-Bootstrap sets basic global display, typography, and link styles. When more
-control is needed, check out the textual utility classes.
+Typography is a feature of Bootstrap for styling and formatting the text
+content. It is used to create customized headings, inline subheadings, lists,
+paragraphs, aligning, adding more design-oriented font styles, and much more.
 
-For a more inclusive and accessible type scale, it is assuemed that
-the browser default root font-size (typically 16px) so visitors can
-customize their browser defaults as needed.
+The base for all typography features is the default *font family*. J1 is using
+*Roboto* for the default font at a font size of *16px*. This setting is
+different from the standard Bootstrap configuration using the font family of
+*Helvetica* for the default.
 
 mdi:bootstrap[24px, mdi-md-deep-purple]
 link:{url-bs-docs--content-typography}[Bootstrap Docs {char-middot} Typography, {browser-window--new}]
 
+ifeval::[{typography_headings} == true]
 === Headings
+
+HTML headings provide valuable information by highlighting important topics
+and the structure of the document. The HTML5 standard offers six levels of
+heading tags, ranging from <h1> through <h6>. The lower the heading level, the
+higher its importance. Therefore <h1> tag defines the most important heading,
+whereas the <h6> tag defines the least important heading in a document.
 
 ++++
 <div class="doc-example mb-3">
@@ -757,7 +884,7 @@ link:{url-bs-docs--content-typography}[Bootstrap Docs {char-middot} Typography, 
     </div>
     <div class="col-md-4">
       <h3 class="notoc">Example body text</h2>
-      <p>Nullam quis risus eget <a href="#void">urna mollis ornare</a> vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.</p>
+      <p>Nullam quis risus eget <a href="#">urna mollis ornare</a> vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.</p>
       <p><small>This line of text is meant to be treated as fine print.</small></p>
       <p>The following is <strong>rendered as bold text</strong>.</p>
       <p>The following is <em>rendered as italicized text</em>.</p>
@@ -775,42 +902,41 @@ link:{url-bs-docs--content-typography}[Bootstrap Docs {char-middot} Typography, 
   </div>
 </div>
 ++++
+endif::[]
 
+ifeval::[{typography_blockquotes} == true]
 === Blockquotes
+
+The HTML element `<blockquote>` specifies a section with content quoted
+from another source. Blockquotes are generally displayed with indented
+left and right margins, along with a little extra space added above and
+below.
+
+For Bootstrap, are more complex styling of cites is available with the
+`<blockquote>` elements respectively the additional CSS class `.blockquote`.
 
 ++++
 <div class="doc-example mb-3">
-  <div class="row">
-    <div class="col-md-6 p-0">
-      <blockquote class="blockquote">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-        <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-      </blockquote>
-    </div>
-    <div class="col-md-6 p-0">
-      <blockquote class="blockquote blockquote-reverse">
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-        <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-      </blockquote>
-    </div>
-  </div>
+  <blockquote class="blockquote">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+    <footer class="blockquote-footer">Someone famous in
+      <cite title="Source Title">history</cite>
+    </footer>
+  </blockquote>
 </div>
 ++++
+endif::[]
+endif::[]
 
+ifeval::[{tables} == true]
 == Tables
 
-Due to the widespread use of tables across third-party widgets like calendars
-and date pickers, we’ve designed our tables to be opt-in. Just add the base
-class `.table` to any `<table>`, then extend with custom styles or our various
-included modifier classes.
-
-Using the most basic table markup, here’s how .table-based tables look in
-Bootstrap. All table styles are inherited in Bootstrap 4, meaning any nested
-tables will be styled in the same manner as the parent.
+Creating a design for tables is challenging. The approach used by J1 Template
+is based on pure CSS on top of the classic Bootstrap styles for simplicity
+and portability to be viewed best on all devices and browsers.
 
 mdi:bootstrap[24px, mdi-md-deep-purple]
 link:{url-bs-docs--content-tables}[Bootstrap Docs {char-middot} Tables, {browser-window--new}]
-
 
 ++++
 <div class="doc-example mb-3">
@@ -870,19 +996,23 @@ link:{url-bs-docs--content-tables}[Bootstrap Docs {char-middot} Tables, {browser
   </table>
 </div>
 ++++
+endif::[]
 
+ifeval::[{forms} == true]
 == Forms
 
-Bootstrap’s form controls expand on our Rebooted form styles with classes.
-Use these classes to opt into their customized displays for a more consistent
-rendering across browsers and devices.
+For collecting structured data, forms are essential. So-called Web forms,
+in short forms, are one of the main points of interaction between a user
+and a website or application. Forms allow users to enter data, which is sent,
+e.g., to a web server for processing.
+
+Here are some examples to demonstrate Bootstrap’s form styles. Keep reading
+for documentation on required classes, form layout, and more.
 
 Be sure to use an appropriate type attribute on all inputs (e.g., email
-for email address or number for numerical information) to take advantage
-of newer input controls like email verification, number selection, and more.
-
-Here’s a quick example to demonstrate Bootstrap’s form styles. Keep reading
-for documentation on required classes, form layout, and more.
+for the email address or the number for numerical information) to take
+advantage of newer input controls like email verification, number selection,
+and more.
 
 mdi:bootstrap[24px, mdi-md-deep-purple]
 link:{url-bs-docs--components-forms}[Bootstrap Docs {char-middot} Forms, {browser-window--new}]
@@ -901,16 +1031,33 @@ link:{url-bs-docs--components-forms}[Bootstrap Docs {char-middot} Forms, {browse
       <label for="exampleInputPassword1" class="bmd-label-floating">Password</label>
       <span class="form-clear d-none"><i class="mdi mdi-2x mdi-format-clear"></i></span>
     </div>
-    <div class="form-group form-check">
-      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    <div class="form-group">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox">
+          Option 1
+        </label>
+      </div>
+
+      <div class="radio">
+        <label>
+          <input type="radio" name="radio">
+          Option 2
+        </label>
+      </div>
+      <div class="radio">
+        <label>
+          <input type="radio" name="radio" checked>
+          Option 3
+        </label>
+      </div>
     </div>
-    <button type="submit" class="btn btn-primary btn-raised">Submit</button>
+    <button type="submit" class="btn btn-primary btn-raised mt-3">Submit</button>
   </form>
 </div>
 ++++
 
-Textual form controls—like <input>s, <select>s, and <textarea>s—are styled with
+Textual form controls—like <input>, <select>, and <textarea> are styled with
 the .form-control class. Included are styles for general appearance, focus
 state, sizing, and more.
 
@@ -959,21 +1106,24 @@ For file inputs, swap the .form-control for .form-control-file.
   </form>
 </div>
 ++++
+endif::[]
 
+ifeval::[{navs} == true]
 == Navs
 
-Navigation available in Bootstrap share general markup and styles, from the
+Navigation available in Bootstrap shares general markup and styles, from the
 base .nav class to the active and disabled states. Swap modifier classes to
 switch between each style.
 
-The base .nav component is built with flexbox and provide a strong foundation
-for building all types of navigation components. It includes some style
-overrides (for working with lists), some link padding for larger hit areas,
+The base .nav component is built with a flexbox and provides a strong foundation
+for building all navigation components. It includes some style
+overrides (for working with lists), link padding for larger hit areas,
 and basic disabled styling.
 
 mdi:bootstrap[24px, mdi-md-deep-purple]
 link:{url-bs-docs--components-navs}[Bootstrap Docs {char-middot} Navs, {browser-window--new}]
 
+ifeval::[{navs_tabs} == true]
 === Tabs
 
 Tabs takes the basic nav from above and adds the .nav-tabs class to generate
@@ -990,21 +1140,21 @@ JavaScript plugin.
       <a class="nav-link" data-toggle="tab" href="#profile">Profile</a>
     </li>
     <li class="nav-item dropdown">
-      <a href="#void" class="nav-link dropdown-toggle" data-toggle="dropdown"
+      <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
         role="button"
         aria-haspopup="true" aria-expanded="false">
         Dropdown
       </a>
       <div class="dropdown-menu">
-        <a href="#void" class="dropdown-item">Action</a>
-        <a href="#void" class="dropdown-item">Another action</a>
-        <a href="#void" class="dropdown-item">Something else here</a>
+        <a href="#" class="dropdown-item">Action</a>
+        <a href="#" class="dropdown-item">Another action</a>
+        <a href="#" class="dropdown-item">Something else here</a>
         <div class="dropdown-divider"></div>
-        <a href="#void" class="dropdown-item">Separated link</a>
+        <a href="#" class="dropdown-item">Separated link</a>
       </div>
     </li>
     <li class="nav-item">
-      <a href="#void" class="nav-link disabled">Disabled</a>
+      <a href="#" class="nav-link disabled">Disabled</a>
     </li>
   </ul>
   <div id="myTabContent" class="tab-content">
@@ -1023,8 +1173,9 @@ JavaScript plugin.
   </div>
 </div>
 ++++
+endif::[]
 
-
+ifeval::[{navs_pills} == true]
 === Pills
 
 Take that same HTML as Tabs, but use .nav-pills class instead.
@@ -1037,23 +1188,23 @@ Take that same HTML as Tabs, but use .nav-pills class instead.
       <h4 class="notoc">Standard Pills</h4>
       <ul class="nav nav-pills">
         <li class="nav-item mr-1 mb-2">
-          <a href="#void" class="nav-link active">Active</a>
+          <a href="#" class="nav-link active">Active</a>
         </li>
         <li class="nav-item dropdown mr-1">
-          <a href="#void" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
           <div class="dropdown-menu">
-            <a href="#void" class="dropdown-item">Action</a>
-            <a href="#void" class="dropdown-item">Another action</a>
-            <a href="#void" class="dropdown-item">Something else here</a>
+            <a href="#" class="dropdown-item">Action</a>
+            <a href="#" class="dropdown-item">Another action</a>
+            <a href="#" class="dropdown-item">Something else here</a>
             <div class="dropdown-divider"></div>
-            <a href="#void" class="dropdown-item">Separated link</a>
+            <a href="#" class="dropdown-item">Separated link</a>
           </div>
         </li>
         <li class="nav-item mr-1 mb-2">
-          <a href="#void" class="nav-link">Link</a>
+          <a href="#" class="nav-link">Link</a>
         </li>
         <li class="nav-item mr-1 mb-2">
-          <a href="#void" class="nav-link disabled">Disabled</a>
+          <a href="#" class="nav-link disabled">Disabled</a>
         </li>
       </ul>
     </div>
@@ -1061,30 +1212,32 @@ Take that same HTML as Tabs, but use .nav-pills class instead.
       <h5 class="notoc">Stacked Pills (vertical)</h5>
       <ul class="nav nav-pills flex-column mb-4">
         <li class="nav-item mb-2">
-          <a href="#void" class="nav-link active">Active</a>
+          <a href="#" class="nav-link active">Active</a>
         </li>
         <li class="nav-item dropdown mb-1">
-          <a href="#void" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
           <div class="dropdown-menu">
-            <a href="#void" class="dropdown-item">Action</a>
-            <a href="#void" class="dropdown-item">Another action</a>
-            <a href="#void" class="dropdown-item">Something else here</a>
+            <a href="#" class="dropdown-item">Action</a>
+            <a href="#" class="dropdown-item">Another action</a>
+            <a href="#" class="dropdown-item">Something else here</a>
             <div class="dropdown-divider"></div>
-            <a href="#void" class="dropdown-item">Separated link</a>
+            <a href="#" class="dropdown-item">Separated link</a>
           </div>
         </li>
         <li class="nav-item mb-2">
-          <a href="#void" class="nav-link">Link</a>
+          <a href="#" class="nav-link">Link</a>
         </li>
         <li class="nav-item mb-2">
-          <a href="#void" class="nav-link disabled">Disabled</a>
+          <a href="#" class="nav-link disabled">Disabled</a>
         </li>
       </ul>
     </div>
   </div>
 </div>
 ++++
+endif::[]
 
+ifeval::[{navs_breadcrumbs} == true]
 === Breadcrumbs
 
 Breadcrumbs indicate the current page’s location within a navigational
@@ -1098,17 +1251,19 @@ Separators are automatically added in CSS through ::before and content.
     <li class="breadcrumb-item active">Home</li>
   </ol>
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#void">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
     <li class="breadcrumb-item active">Library</li>
   </ol>
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#void">Home</a></li>
-    <li class="breadcrumb-item"><a href="#void">Library</a></li>
+    <li class="breadcrumb-item"><a href="#">Home</a></li>
+    <li class="breadcrumb-item"><a href="#">Library</a></li>
     <li class="breadcrumb-item active">Data</li>
   </ol>
 </div>
 ++++
+endif::[]
 
+ifeval::[{navs_pagination} == true]
 === Pagination
 
 We use a large block of connected links for our pagination, making links
@@ -1122,81 +1277,84 @@ it as a navigation section to screen readers and other assistive technologies.
   <div>
     <ul class="pagination">
       <li class="page-item disabled">
-        <a href="#void" class="page-link">&laquo;</a>
+        <a href="#" class="page-link">&laquo;</a>
       </li>
       <li class="page-item active">
-        <a href="#void" class="page-link">1</a>
+        <a href="#" class="page-link">1</a>
       </li>
       <li class="page-item">
-        <a href="#void" class="page-link">2</a>
+        <a href="#" class="page-link">2</a>
       </li>
       <li class="page-item">
-        <a href="#void" class="page-link">3</a>
+        <a href="#" class="page-link">3</a>
       </li>
       <li class="page-item">
-        <a href="#void" class="page-link">4</a>
+        <a href="#" class="page-link">4</a>
       </li>
       <li class="page-item">
-        <a href="#void" class="page-link">5</a>
+        <a href="#" class="page-link">5</a>
       </li>
       <li class="page-item">
-        <a href="#void" class="page-link">&raquo;</a>
+        <a href="#" class="page-link">&raquo;</a>
       </li>
     </ul>
   </div>
   <div>
     <ul class="pagination pagination-lg">
       <li class="page-item disabled">
-        <a href="#void" class="page-link">&laquo;</a>
+        <a href="#" class="page-link">&laquo;</a>
       </li>
       <li class="page-item active">
-        <a href="#void" class="page-link">1</a>
+        <a href="#" class="page-link">1</a>
       </li>
       <li class="page-item">
-        <a href="#void" class="page-link">2</a>
+        <a href="#" class="page-link">2</a>
       </li>
       <li class="page-item">
-        <a href="#void" class="page-link">3</a>
+        <a href="#" class="page-link">3</a>
       </li>
       <li class="page-item">
-        <a href="#void" class="page-link">4</a>
+        <a href="#" class="page-link">4</a>
       </li>
       <li class="page-item">
-        <a href="#void" class="page-link">5</a>
+        <a href="#" class="page-link">5</a>
       </li>
       <li class="page-item">
-        <a href="#void" class="page-link">&raquo;</a>
+        <a href="#" class="page-link">&raquo;</a>
       </li>
     </ul>
   </div>
   <div>
     <ul class="pagination pagination-sm">
       <li class="page-item disabled">
-        <a href="#void" class="page-link">&laquo;</a>
+        <a href="#" class="page-link">&laquo;</a>
       </li>
       <li class="page-item active">
-        <a href="#void" class="page-link">1</a>
+        <a href="#" class="page-link">1</a>
       </li>
       <li class="page-item">
-        <a href="#void" class="page-link">2</a>
+        <a href="#" class="page-link">2</a>
       </li>
       <li class="page-item">
-        <a href="#void" class="page-link">3</a>
+        <a href="#" class="page-link">3</a>
       </li>
       <li class="page-item">
-        <a href="#void" class="page-link">4</a>
+        <a href="#" class="page-link">4</a>
       </li>
       <li class="page-item">
-        <a href="#void" class="page-link">5</a>
+        <a href="#" class="page-link">5</a>
       </li>
       <li class="page-item">
-        <a href="#void" class="page-link">&raquo;</a>
+        <a href="#" class="page-link">&raquo;</a>
       </li>
     </ul>
   </div>
 </div>
 ++++
+endif::[]
+endif::[]
 
+ifeval::[{indicators} == true]
 == Indicators
 
 With Bootstrap, indicators are elememts to raise the users awareness. Alerts
@@ -1204,6 +1362,7 @@ are dynamic elememts that can be used to *indicate* success or something went
 wrong.  Contrasting *Badges, static BS elememts, to raise attention e.g for
 something *new*.
 
+ifeval::[{indicators_alerts} == true]
 === Alerts
 
 Alerts provide contextual feedback messages for typical user actions with the
@@ -1224,7 +1383,7 @@ link:{url-bs-docs--components-alerts}[Bootstrap Docs {char-middot} Alerts, {brow
       <div class="alert alert-dismissible alert-warning">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
         <h4 class="alert-heading notoc">Warning!</h4>
-        <p class="mb-0">Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, <a href="#void" class="alert-link">vel scelerisque nisl consectetur et</a>.</p>
+        <p class="mb-0">Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, <a href="#" class="alert-link">vel scelerisque nisl consectetur et</a>.</p>
       </div>
     </div>
   </div>
@@ -1232,25 +1391,27 @@ link:{url-bs-docs--components-alerts}[Bootstrap Docs {char-middot} Alerts, {brow
     <div class="col-md-4">
       <div class="alert alert-dismissible alert-danger">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Oh snap!</strong> <a href="#void" class="alert-link">Change a few things up</a> and try submitting again.
+        <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
       </div>
     </div>
     <div class="col-md-4">
       <div class="alert alert-dismissible alert-success">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Well done!</strong> You successfully read <a href="#void" class="alert-link">this important alert message</a>.
+        <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert message</a>.
       </div>
     </div>
     <div class="col-md-4">
       <div class="alert alert-dismissible alert-info">
         <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Heads up!</strong> This <a href="#void" class="alert-link">alert needs your attention</a>, but it's not super important.
+        <strong>Heads up!</strong> This <a href="#" class="alert-link">alert needs your attention</a>, but it's not super important.
       </div>
     </div>
   </div>
 </div>
 ++++
+endif::[]
 
+ifeval::[{indicators_badges} == true]
 === Badges
 
 Badges are small count and labeling components. They scale to match the size
@@ -1290,9 +1451,11 @@ link:{url-bs-docs--components-badges}[Bootstrap Docs {char-middot} Badge, {brows
   </div>
 </div>
 ++++
+endif::[]
+endif::[]
 
-ifdef::scrollbars[]
-=== Scrollbars
+ifeval::[{scrollbars} == true]
+== Scrollbars
 
 Chromium-based browsers like Chrome, Edge, Safari or Opera support the *webkit*
 `::-webkit-scrollbar` pseudo element, which allows to modify the look of the
@@ -1323,72 +1486,49 @@ For J1 Template, following flavours are implemented.
 
 [subs="attributes"]
 ++++
-<div>
-  <div class="row">
-    <div class="scrollbar" id="style-default">
-      <div class="force-overflow"></div>
+<div class="doc-example mb-3">
+    <div class="row">
+      <div class="scrollbar" id="style-default">
+        <div class="force-overflow"></div>
+      </div>
+      <div class="scrollbar scroller-1">
+        <div class="force-overflow"></div>
+      </div>
+      <div class="scrollbar scroller-2">
+        <div class="force-overflow"></div>
+      </div>
+      <div class="scrollbar scroller-3">
+        <div class="force-overflow"></div>
+      </div>
+      <div class="scrollbar scroller-4">
+        <div class="force-overflow"></div>
+      </div><div class="scrollbar scroller-5">
+        <div class="force-overflow"></div>
+      </div><div class="scrollbar scroller-6">
+        <div class="force-overflow"></div>
+      </div>
     </div>
 
-    <div class="scrollbar scroller-1">
-      <div class="force-overflow"></div>
+    <div class="row">
+      <div class="scrollbar scroller-7">
+        <div class="force-overflow"></div>
+      </div>
+      <div class="scrollbar scroller-8">
+        <div class="force-overflow"></div>
+      </div>
+      <div class="scrollbar scroller-9">
+        <div class="force-overflow"></div>
+      </div><div class="scrollbar scroller-10">
+        <div class="force-overflow"></div>
+      </div><div class="scrollbar scroller-11">
+        <div class="force-overflow"></div>
+      </div><div class="scrollbar scroller-12">
+        <div class="force-overflow"></div>
+      </div><div class="scrollbar scroller-14">
+        <div class="force-overflow"></div>
+      </div>
     </div>
 
-    <div class="scrollbar scroller-2">
-      <div class="force-overflow"></div>
-    </div>
-
-    <div class="scrollbar scroller-3">
-      <div class="force-overflow"></div>
-    </div>
-
-    <div class="scrollbar scroller-4">
-      <div class="force-overflow"></div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="scrollbar scroller-5">
-      <div class="force-overflow"></div>
-    </div>
-
-    <div class="scrollbar scroller-6">
-      <div class="force-overflow"></div>
-    </div>
-
-    <div class="scrollbar scroller-7">
-      <div class="force-overflow"></div>
-    </div>
-
-    <div class="scrollbar scroller-8">
-      <div class="force-overflow"></div>
-    </div>
-
-    <div class="scrollbar scroller-9">
-      <div class="force-overflow"></div>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="scrollbar scroller-10">
-      <div class="force-overflow"></div>
-    </div>
-
-    <div class="scrollbar scroller-11">
-      <div class="force-overflow"></div>
-    </div>
-
-    <div class="scrollbar scroller-13">
-      <div class="force-overflow"></div>
-    </div>
-
-    <div class="scrollbar scroller-14">
-      <div class="force-overflow"></div>
-    </div>
-
-    <div class="scrollbar scroller-15">
-      <div class="force-overflow"></div>
-    </div>
-  </div>
 </div>
 
 <!-- script>
@@ -1400,6 +1540,7 @@ if (!$.browser.webkit) {
 ++++
 endif::[]
 
+ifeval::[{progress} == true]
 == Progress
 
 Bootstrap custom progress bars featuring support for stacked bars, animated
@@ -1411,6 +1552,7 @@ and place text labels over them.
 mdi:bootstrap[24px, mdi-md-deep-purple]
 link:{url-bs-docs--components-progress}[Bootstrap Docs {char-middot} Progress, {browser-window--new}]
 
+ifeval::[{progress_basic} == true]
 === Basic
 
 ++++
@@ -1433,7 +1575,9 @@ link:{url-bs-docs--components-progress}[Bootstrap Docs {char-middot} Progress, {
     </div>
   </div>
 ----
+endif::[]
 
+ifeval::[{progress_contextual_alternatives} == true]
 === Contextual alternatives
 
 ++++
@@ -1465,7 +1609,9 @@ link:{url-bs-docs--components-progress}[Bootstrap Docs {char-middot} Progress, {
     </div>
   </div>
 ----
+endif::[]
 
+ifeval::[{progress_multiple_bars} == true]
 === Multiple bars
 
 ++++
@@ -1477,7 +1623,9 @@ link:{url-bs-docs--components-progress}[Bootstrap Docs {char-middot} Progress, {
   </div>
 </div>
 ++++
+endif::[]
 
+ifeval::[{progress_striped} == true]
 === Striped
 
 ++++
@@ -1499,7 +1647,9 @@ link:{url-bs-docs--components-progress}[Bootstrap Docs {char-middot} Progress, {
   </div>
 </div>
 ++++
+endif::[]
 
+ifeval::[{progress_animated} == true]
 === Animated
 
 ++++
@@ -1509,7 +1659,10 @@ link:{url-bs-docs--components-progress}[Bootstrap Docs {char-middot} Progress, {
   </div>
 </div>
 ++++
+endif::[]
+endif::[]
 
+ifeval::[{containers} == true]
 == Containers
 
 In sense of Bootstrap, *containers* are more complex, eye-catching elements to
@@ -1517,11 +1670,10 @@ showcase facts or topics of a site. Typical elements are:
 
 * Jumbotron
 * Lists
-* Cards
 
 Find below examples how BS can support the users awarenes.
 
-
+ifeval::[{containers_jumbotron} == true]
 === Jumbotron
 
 Lightweight, flexible component for showcasing hero unit style content.
@@ -1537,13 +1689,21 @@ link:{url-bs-docs--components-jumbotron}[Bootstrap Docs {char-middot} Jumbotron,
     <hr class="my-4">
     <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
     <p class="lead">
-      <a href="#void" class="btn btn-primary btn-raised btn-lg" role="button">Learn more</a>
+      <a href="#" class="btn btn-primary btn-raised btn-lg" role="button">Learn more</a>
     </p>
   </div>
 </div>
 ++++
+endif::[]
 
-=== List groups
+ifeval::[{containers_list} == true]
+=== Lists
+
+Lists are a flexible and powerful component for displaying a series of content
+within an single HTML element.
+
+ifeval::[{containers_list_groups} == true]
+==== List groups
 
 List groups are a flexible and powerful component for displaying a series of
 content. Modify and extend them to support just about any content within.
@@ -1573,19 +1733,19 @@ link:{url-bs-docs--components-list_group}[Bootstrap Docs {char-middot} List grou
 
     <div class="col-md-4">
       <div class="list-group">
-        <a href="#void" class="list-group-item list-group-item-action active">
+        <a href="#" class="list-group-item list-group-item-action active">
           Describe item #1
         </a>
-        <a href="#void" class="list-group-item list-group-item-action">Describe item #2
+        <a href="#" class="list-group-item list-group-item-action">Describe item #2
         </a>
-        <a href="#void" class="list-group-item list-group-item-action disabled">Describe item #3
+        <a href="#" class="list-group-item list-group-item-action disabled">Describe item #3
         </a>
       </div>
     </div>
 
     <div class="col-md-4">
       <div class="list-group">
-        <a href="#void" class="list-group-item list-group-item-action flex-column align-items-start active">
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
           <div class="d-flex w-100 justify-content-between">
             <h4 class="mb-1 notoc">List group item heading</h4>
             <small>3 days ago</small>
@@ -1593,7 +1753,7 @@ link:{url-bs-docs--components-list_group}[Bootstrap Docs {char-middot} List grou
           <p class="mb-1">Some quick example text to build on a list and make up the bulk of the list group's content.</p>
           <small>Summarize whats all about.</small>
         </a>
-        <a href="#void" class="list-group-item list-group-item-action flex-column align-items-start">
+        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
           <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1 notoc">List group item heading</h5>
             <small class="text-muted">3 days ago</small>
@@ -1607,9 +1767,12 @@ link:{url-bs-docs--components-list_group}[Bootstrap Docs {char-middot} List grou
   </div>
 </div>
 ++++
+endif::[]
+endif::[]
+endif::[]
 
-
-=== Cards
+ifeval::[{cards} == true]
+== Cards
 
 Bootstrap’s cards provide a flexible and extensible content container with
 multiple variants and options. A card is a flexible and extensible content
@@ -1628,7 +1791,8 @@ They have no margin by default, so use spacing utilities as needed.
 mdi:bootstrap[24px, mdi-md-deep-purple]
 link:{url-bs-docs--components-cards}[Bootstrap Docs {char-middot} Card, {browser-window--new}]
 
-==== Simple cards
+ifeval::[{cards_simple} == true]
+=== Simple cards
 ++++
 <div class="doc-example mb-3">
 
@@ -1639,8 +1803,8 @@ link:{url-bs-docs--components-cards}[Bootstrap Docs {char-middot} Card, {browser
           <h4 class="card-title notoc">Card title</h4>
           <h5 class="card-subtitle mb-2 text-muted notoc">Card subtitle</h5>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#void" class="card-link">Card link</a>
-          <a href="#void" class="card-link">Another link</a>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
         </div>
       </div>
     </div>
@@ -1650,8 +1814,8 @@ link:{url-bs-docs--components-cards}[Bootstrap Docs {char-middot} Card, {browser
           <h4 class="card-title notoc">Card title</h4>
           <h6 class="card-subtitle mb-2 text-muted notoc">Card subtitle</h6>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#void" class="card-link">Card link</a>
-          <a href="#void" class="card-link">Another link</a>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
         </div>
       </div>
     </div>
@@ -1661,8 +1825,8 @@ link:{url-bs-docs--components-cards}[Bootstrap Docs {char-middot} Card, {browser
           <h4 class="card-title notoc">Card title</h4>
           <h6 class="card-subtitle mb-2 text-muted notoc">Card subtitle</h6>
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#void" class="card-link">Card link</a>
-          <a href="#void" class="card-link">Another link</a>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
         </div>
       </div>
     </div>
@@ -1716,7 +1880,7 @@ link:{url-bs-docs--components-cards}[Bootstrap Docs {char-middot} Card, {browser
         </div>
         <div class="card-footer r-text-200">
           <a class="card-link bs-info font-weight-bold g-font-size-12 text-uppercase"
-             href="#void">Action · Footer Link
+             href="#">Action · Footer Link
           </a>
         </div>
       </div>
@@ -1732,7 +1896,7 @@ link:{url-bs-docs--components-cards}[Bootstrap Docs {char-middot} Card, {browser
         </div>
         <div class="card-footer r-text-200">
           <a class="card-link bs-warning font-weight-bold g-font-size-12 text-uppercase"
-             href="#void">Action · Footer Link
+             href="#">Action · Footer Link
           </a>
         </div>
       </div>
@@ -1747,7 +1911,7 @@ link:{url-bs-docs--components-cards}[Bootstrap Docs {char-middot} Card, {browser
           <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
         </div>
         <div class="card-footer r-text-200">
-          <a href="#void" class="card-link bs-danger font-weight-bold g-font-size-12 text-uppercase">
+          <a href="#" class="card-link bs-danger font-weight-bold g-font-size-12 text-uppercase">
           Action · Footer Link
           </a>
         </div>
@@ -1756,8 +1920,10 @@ link:{url-bs-docs--components-cards}[Bootstrap Docs {char-middot} Card, {browser
   </div>
 </div>
 ++++
+endif::[]
 
-==== Image cards
+ifeval::[{cards_image} == true]
+=== Image cards
 ++++
 <div class="doc-example mb-3">
 
@@ -1807,8 +1973,8 @@ link:{url-bs-docs--components-cards}[Bootstrap Docs {char-middot} Card, {browser
         </div>
 
         <div class="card-body">
-          <a href="#void" class="card-link">Card link</a>
-          <a href="#void" class="card-link">Another link</a>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
         </div>
         <div class="card-footer text-muted">
           2 days ago
@@ -1818,12 +1984,16 @@ link:{url-bs-docs--components-cards}[Bootstrap Docs {char-middot} Card, {browser
   </div>
 </div>
 ++++
+endif::[]
+endif::[]
 
+ifeval::[{dialogs} == true]
 == Dialogs
 
 Dialogs are important, interactive UI (user interface) components in Bootstrap
 to *inform* visitor of an website.
 
+ifeval::[{dialogs_modals} == true]
 === Modals
 
 Use Bootstrap’s JavaScript modal plugin to add dialogs to your site for
@@ -1837,7 +2007,7 @@ link:{url-bs-docs--components-modal}[Bootstrap Docs {char-middot} Modal, {browse
 
 .Modal types
 [cols="2a,8a,2a", options="header", width="100%", role="rtable"]
-|===============================================================================
+|===
 |Type |Description |Launch Example
 
 |*Base*
@@ -2147,10 +2317,10 @@ closed, any tooltips and popovers within are also automatically dismissed.
       </div>
       <div class="modal-body">
         <h4 class="notoc">Popover in a modal</h4>
-        <p>This <a href="#void" role="button" class="btn btn-primary btn-raised popover-test" data-toggle="popover" title="Popover title" data-content="Popover body content is set in this attribute.">button</a> triggers a popover on hover or click.</p>
+        <p>This <a href="#" role="button" class="btn btn-primary btn-raised popover-test" data-toggle="popover" title="Popover title" data-content="Popover body content is set in this attribute.">button</a> triggers a popover on hover or click.</p>
         <hr>
         <h4 class="notoc">Tooltips in a modal</h4>
-        <p><a href="#void" class="tooltip-test" data-toggle="tooltip" title="Tooltip">This link</a> and <a href="#void" class="tooltip-test" data-toggle="tooltip" title="Tooltip">that link</a> have tooltips on hover.</p>
+        <p><a href="#" class="tooltip-test" data-toggle="tooltip" title="Tooltip">This link</a> and <a href="#" class="tooltip-test" data-toggle="tooltip" title="Tooltip">that link</a> have tooltips on hover.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary btn-flex btn-raised mr-2">Do nothing</button>
@@ -2160,7 +2330,7 @@ closed, any tooltips and popovers within are also automatically dismissed.
   </div>
 </div>
 ++++
-|===============================================================================
+|===
 
 .Base Modal example
 [source, html, role="noclip"]
@@ -2211,7 +2381,9 @@ closed, any tooltips and popovers within are also automatically dismissed.
   </div>
 </div>
 ----
+endif::[]
 
+ifeval::[{dialogs_popovers_tooltips} == true]
 === Popovers and Tooltips
 
 Popovers and Tooltips rely on the 3rd party library __Popper.js__ for positioning.
@@ -2269,3 +2441,5 @@ NOTE: Popovers and Tooltips require the BS tooltip plugin as a dependency.
     </div>
   </div>
 ----
+endif::[]
+endif::[]

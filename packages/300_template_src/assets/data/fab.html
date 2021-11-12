@@ -106,12 +106,38 @@ exclude_from_search:                    true
   <div id="{{menu.id}}">
     <div class="fab-btn" style="display: none">
       <!-- [DEBUG  ] [j1.modules.fam.html       ] [jadams, 2020-11-15: set href|link text (Google optimisation)] -->
-      <a href="#void" id="{{menu.id}}_button" class="btn-fab-floating btn-large btn-{{menu.color}} raised-z{{fab_options.raised_level}}"><i id="fab-icon" class="mdi mdi-{{menu.icon}}"></i>FAM button</a>
-      <ul id="{{menu.id}}_items">
+
+      {% if fab_options.raised %}
+        {% capture options %}raised-z{{fab_options.raised}} {%endcapture%}
+      {% endif %}
+
+      {% if fab_options.pulsed %}
+        {% capture options %}options pulsed-z{{fab_options.pulsed}}{%endcapture%}
+      {% endif %}
+
+      <!-- a href="#void" id="{{menu.id}}_button" class="btn-fab-floating btn-large btn-{{menu.color}} raised-z{{fab_options.raised_level}}">
+        <i id="fab-icon" class="mdi mdi-{{menu.icon}}"></i>FAM button
+      </a -->
+
+      <button type="button" id="{{menu.id}}_button" class="btn bmd-btn-fab btn-{{menu.color}} {{options}}" aria-label="fab-button">
+        <i id="fab-icon" class="mdi mdi-{{menu.icon}}"></i>
+      </button>
+
+      <ul id="fab_menu_items">
         {% for item in menu.items %} {% if item.enabled %}
-        <li><a href="#void" id="{{item.id}}" class="btn-fab-floating btn-{{item.color}} raised-z{{fab_options.raised_level}}" style="display: none"><i id="fab-icon" class="mdi mdi-{{item.icon}} mdi-{{item.icon_properties}}"></i>{{item.id}}</a></li>
+        <li>
+          <a href="#void" id="{{item.id}}" class="btn-fab-floating btn-{{item.color}} raised-z{{fab_options.raised_level}}" style="display: none">
+            <i id="fab-icon" class="mdi mdi-{{item.icon}} mdi-{{item.icon_properties}}"></i>
+          </a>
+
+          <!-- button id="{{item.id}}" type="button" class="btn bmd-btn-fab bmd-btn-fab-sm btn-{{item.color}} raised-z{{fab_options.raised_level}}" aria-label="fab-button">
+            <i id="fab-icon" class="mdi mdi-{{item.icon}} mdi-{{item.icon_properties}}"></i>
+          </button -->
+
+        </li>
         {% endif %} {% endfor %}
       </ul>
+
     </div>
   </div>
   <!-- [DEBUG  ] [j1.modules.fam.html       ] [end menu {{menu.id}}] -->

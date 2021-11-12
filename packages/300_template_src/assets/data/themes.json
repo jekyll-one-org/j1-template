@@ -48,18 +48,20 @@ exclude_from_search:                    true
 {
   "themes":
   [
-    {"name": "Uno light", "css": "{{asset_path}}/core/css/themes/uno-light/bootstrap.css"},
-    {"name": "Uno dark",  "css": "{{asset_path}}/core/css/themes/uno-dark/bootstrap.css"},
-    {"name": "Bootstrap", "css": "{{asset_path}}/core/css/themes/bootstrap/bootstrap.css"}
+    {"name": "Uno light",     "css": "{{asset_path}}/core/css/themes/uno-light/bootstrap.css"},
+    {"name": "Uno dark",      "css": "{{asset_path}}/core/css/themes/uno-dark/bootstrap.css"},
+    {"name": "Bootstrap",     "css": "{{asset_path}}/core/css/themes/bootstrap/bootstrap.css"},
+    {"name": "Bootstrap V5",  "css": "{{asset_path}}/core/css/themes/bootstrap/bootstrap5.css"}
   ]
 }
 {% else %}
 {
   "themes":
   [
-    {"name": "Uno light", "css": "{{asset_path}}/core/css/themes/uno-light/bootstrap.min.css"},
-    {"name": "Uno dark",  "css": "{{asset_path}}/core/css/themes/uno-dark/bootstrap.min.css"},
-    {"name": "Bootstrap", "css": "{{asset_path}}/core/css/themes/bootstrap/bootstrap.min.css"}
+    {"name": "Uno light",     "css": "{{asset_path}}/core/css/themes/uno-light/bootstrap.min.css"},
+    {"name": "Uno dark",      "css": "{{asset_path}}/core/css/themes/uno-dark/bootstrap.min.css"},
+    {"name": "Bootstrap",     "css": "{{asset_path}}/core/css/themes/bootstrap/bootstrap.min.css"},
+    {"name": "Bootstrap V5",  "css": "{{asset_path}}/core/css/themes/bootstrap/bootstrap5.min.css"}
   ]
 }
 {% endif %}
