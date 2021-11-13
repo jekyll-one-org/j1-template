@@ -58,12 +58,22 @@ function initSmoothScrolling (options) {
       // Don't prevent default or hash doesn't change.
       // e.preventDefault()
 
+      // fixing-skip-to-content-links
+      // jump(e.target.hash, {
+      //   duration: duration,
+      //   offset: offset,
+      //   callback: function () {
+      //     setFocus(e.target.hash)
+      //   }
+      // })
+
+      // jadams, 2021-11-13
+      // fixing-skip-to-content-links, done by callback to focus(), seems
+      // NOT longer required for current browsers
       jump(e.target.hash, {
         duration: duration,
         offset: offset,
-        callback: function () {
-          setFocus(e.target.hash)
-        }
+        callback: false
       })
     }
   }
@@ -91,7 +101,6 @@ function initSmoothScrolling (options) {
       if (!/^(?:a|select|input|button|textarea)$/i.test(element.tagName)) {
         element.tabIndex = -1
       }
-
       element.focus()
     }
   }
@@ -124,14 +133,24 @@ function jump (target, options) {
   requestAnimationFrame(function (time) { timeStart = time; loop(time) })
   function loop (time) {
     timeElapsed = time - timeStart
-
     window.scrollTo(0, opt.easing(timeElapsed, start, distance, duration))
-
     if (timeElapsed < duration) { requestAnimationFrame(loop) } else { end() }
   }
 
   function end () {
-    window.scrollTo(0, start + distance)
+    // window.scrollTo(0, start + distance)
+
+    // jadams, 2020-07-04: on (some?) mobile devices, the navbar
+    // background is NOT switched (always?) correctly on a
+    // page RELOAD.
+    //
+    // Solution: scroll the page one pixel back and forth (trigger)
+    // to get the right position for the Toccer and adjust the
+    // Navigator to display the (tranparent) navbar correctly based
+    // on their onscroll events registered.
+    //
+    // $(window).scrollTop($(window).scrollTop()+1);
+    // $(window).scrollTop($(window).scrollTop()-1);
 
     if (typeof opt.callback === 'function') { opt.callback() }
   }

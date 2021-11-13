@@ -174,87 +174,40 @@ colors. Then, customize with `.bg-*` utilities.
 
 ++++
 <div class="doc-example mb-3">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-1">
-    <a href="#" class="navbar-brand">Navbar<div class="ripple-container"></div></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarColor01">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a href="#" class="nav-link">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">Features</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">About</a>
-        </li>
-      </ul>
-      <form class="form-inline">
-        <span class="bmd-form-group"><input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></span>
-        <button class="btn btn-outline-info my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </nav>
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-1">
-    <a href="#" class="navbar-brand">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarColor02">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a href="#" class="nav-link">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">Features</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">About</a>
-        </li>
-      </ul>
-      <form class="form-inline">
-        <span class="bmd-form-group"><input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></span>
-        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-      </form>
-    </div>
-  </nav>
-
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
-    <a href="#" class="navbar-brand">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarColor03">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a href="#" class="nav-link">Home <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">Features</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a  href="#" class="nav-link">About</a>
-        </li>
-      </ul>
-      <form class="form-inline">
-        <span class="bmd-form-group"><input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"></span>
-        <button class="btn btn-outline-primary my-2 my-sm-0" type="submit">Search</button>
-      </form>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled">Disabled</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
     </div>
   </nav>
 </div>
@@ -262,17 +215,42 @@ colors. Then, customize with `.bg-*` utilities.
 
 [source, html, role="noclip"]
 ----
-<nav class="navbar navbar-dark bg-dark">
-  <!-- Navbar content -->
-</nav>
-
-<nav class="navbar navbar-dark bg-primary">
-  <!-- Navbar content -->
-</nav>
-
-<nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-  <!-- Navbar content -->
-</nav>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled">Disabled</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
 ----
 endif::[]
 
@@ -1381,7 +1359,7 @@ link:{url-bs-docs--components-alerts}[Bootstrap Docs {char-middot} Alerts, {brow
   <div class="row mb-3">
     <div class="col-md-12">
       <div class="alert alert-dismissible alert-warning">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <button type="button" class="btn-close" data-dismiss="alert"</button>
         <h4 class="alert-heading notoc">Warning!</h4>
         <p class="mb-0">Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, <a href="#" class="alert-link">vel scelerisque nisl consectetur et</a>.</p>
       </div>
@@ -1390,19 +1368,19 @@ link:{url-bs-docs--components-alerts}[Bootstrap Docs {char-middot} Alerts, {brow
   <div class="row mb-5">
     <div class="col-md-4">
       <div class="alert alert-dismissible alert-danger">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <button type="button" class="btn-close" data-dismiss="alert"</button>
         <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
       </div>
     </div>
     <div class="col-md-4">
       <div class="alert alert-dismissible alert-success">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <button type="button" class="btn-close" data-dismiss="alert"</button>
         <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert message</a>.
       </div>
     </div>
     <div class="col-md-4">
       <div class="alert alert-dismissible alert-info">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <button type="button" class="btn-close" data-dismiss="alert"</button>
         <strong>Heads up!</strong> This <a href="#" class="alert-link">alert needs your attention</a>, but it's not super important.
       </div>
     </div>
@@ -2035,8 +2013,8 @@ from the top of the page.
     <div class="modal-content">
       <div class="modal-header">
         <h5 id="exampleSimpleModalLabel" class="modal-title notoc">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"</span>
         </button>
       </div>
       <div class="modal-body">
@@ -2078,8 +2056,8 @@ it (the backdrop).
     <div class="modal-content">
       <div class="modal-header">
         <h5 id="exampleStatcModalLabel" class="modal-title notoc">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"</span>
         </button>
       </div>
       <div class="modal-body">
@@ -2121,8 +2099,8 @@ the height.
     <div class="modal-content">
       <div class="modal-header">
         <h5 id="exampleModalLongTitle" class="modal-title notoc">The Extremes of Good and Evil</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"</span>
         </button>
       </div>
       <div class="modal-body">
@@ -2196,8 +2174,8 @@ modal body. Try the demo and scroll the content.
     <div class="modal-content">
       <div class="modal-header">
         <h5 id="exampleModalLongScrollableTitle" class="modal-title notoc">The Extremes of Good and Evil</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"</span>
         </button>
       </div>
       <div class="modal-body">
@@ -2268,8 +2246,8 @@ modal body. Try the demo and scroll the content.
     <div class="modal-content">
       <div class="modal-header">
         <h5 id="exampleModalVerticalCenterTitle" class="modal-title notoc">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"</span>
         </button>
       </div>
       <div class="modal-body">
@@ -2311,8 +2289,8 @@ closed, any tooltips and popovers within are also automatically dismissed.
     <div class="modal-content">
       <div class="modal-header">
         <h4 id="exampleModalTooltipTitle" class="modal-title notoc">Modal title</h4>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"</span>
         </button>
       </div>
       <div class="modal-body">
@@ -2358,10 +2336,10 @@ closed, any tooltips and popovers within are also automatically dismissed.
         <h5 id="exampleSimpleModalLabel" class="modal-title notoc">Modal title</h5>
         <button
           type="button"
-          class="close"
+          class="btn-close"
           data-dismiss="modal"
           aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true"</span>
         </button>
       </div>
       <div class="modal-body">

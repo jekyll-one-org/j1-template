@@ -36,7 +36,7 @@ settings:
         type:                           showOnScroll
         id:                             home_intro_panel
         container:                      home_intro_panel
-        showDelay:                      700
+        showDelay:                      1000
         scrollOffset:                   500
 
     # --------------------------------------------------------------------------

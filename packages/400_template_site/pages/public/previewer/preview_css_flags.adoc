@@ -172,65 +172,65 @@ Find all flags available in alphabetical order.
 ++++
 <div class="doc-example mt-3 mb-3">
   <div class="bs-component mb-3">
-    <span class="badge badge-primary"><a href="#AF"> AF · Afghanistan </a></span>
-    <span class="badge badge-primary"><a href="#AX"> AX · Aland Islands </a></span>
-    <span class="badge badge-primary"><a href="#AL"> AL · Albania </a></span>
-    <span class="badge badge-primary"><a href="#DZ"> DZ · Algeria </a></span>
-    <span class="badge badge-primary"><a href="#AS"> AS · American Samoa </a></span>
-    <span class="badge badge-primary"><a href="#AD"> AD · Andorra </a></span>
-    <span class="badge badge-primary"><a href="#AO"> AO · Angola </a></span>
-    <span class="badge badge-primary"><a href="#AI"> AI · Anguilla </a></span>
-    <span class="badge badge-primary"><a href="#AG"> AG · Antigua and Barbuda </a></span>
-    <span class="badge badge-primary"><a href="#AR"> AR · Argentina </a></span>
-    <span class="badge badge-primary"><a href="#AM"> AM · Armenia </a></span>
-    <span class="badge badge-primary"><a href="#AW"> AW · Aruba </a></span>
-    <span class="badge badge-primary"><a href="#AU"> AU · Australia </a></span>
-    <span class="badge badge-primary"><a href="#AT"> AT · Austria </a></span>
-    <span class="badge badge-primary"><a href="#AZ"> AZ · Azerbaijan </a></span>
-    <span class="badge badge-primary"><a href="#BS"> BS · Bahamas </a></span>
-    <span class="badge badge-primary"><a href="#BH"> BH · Bahrain </a></span>
-    <span class="badge badge-primary"><a href="#BD"> BD · Bangladesh </a></span>
-    <span class="badge badge-primary"><a href="#BB"> BB · Barbados </a></span>
-    <span class="badge badge-primary"><a href="#BY"> BY · Belarus </a></span>
-    <span class="badge badge-primary"><a href="#BE"> BE · Belgium </a></span>
-    <span class="badge badge-primary"><a href="#BZ"> BZ · Belize </a></span>
-    <span class="badge badge-primary"><a href="#BJ"> BJ · Benin </a></span>
-    <span class="badge badge-primary"><a href="#BM"> BM · Bermuda </a></span>
-    <span class="badge badge-primary"><a href="#BT"> BT · Bhutan </a></span>
-    <span class="badge badge-primary"><a href="#BO"> BO · Bolivia </a></span>
-    <span class="badge badge-primary"><a href="#BQ"> BQ · Bonaire, Sint Eustatius and Saba </a></span>
-    <span class="badge badge-primary"><a href="#BA"> BA · Bosnia and Herzegovina </a></span>
-    <span class="badge badge-primary"><a href="#BW"> BW · Botswana </a></span>
-    <span class="badge badge-primary"><a href="#BR"> BR · Brazil </a></span>
-    <span class="badge badge-primary"><a href="#IO"> IO · British Indian Ocean Territory </a></span>
-    <span class="badge badge-primary"><a href="#BN"> BN · Brunei Darussalam </a></span>
-    <span class="badge badge-primary"><a href="#BG"> BG · Bulgaria </a></span>
-    <span class="badge badge-primary"><a href="#BF"> BF · Burkina Faso </a></span>
-    <span class="badge badge-primary"><a href="#BI"> BI · Burundi </a></span>
-    <span class="badge badge-primary"><a href="#CV"> CV · Cabo Verde </a></span>
-    <span class="badge badge-primary"><a href="#KH"> KH · Cambodia </a></span>
-    <span class="badge badge-primary"><a href="#CM"> CM · Cameroon </a></span>
-    <span class="badge badge-primary"><a href="#CA"> CA · Canada </a></span>
-    <span class="badge badge-primary"><a href="#KY"> KY · Cayman Islands </a></span>
-    <span class="badge badge-primary"><a href="#CF"> CF · Central African Republic </a></span>
-    <span class="badge badge-primary"><a href="#TD"> TD · Chad </a></span>
-    <span class="badge badge-primary"><a href="#CL"> CL · Chile </a></span>
-    <span class="badge badge-primary"><a href="#CN"> CN · China </a></span>
-    <span class="badge badge-primary"><a href="#CX"> CX · Christmas Island </a></span>
-    <span class="badge badge-primary"><a href="#CC"> CC · Cocos (Keeling) Islands </a></span>
-    <span class="badge badge-primary"><a href="#CO"> CO · Colombia </a></span>
-    <span class="badge badge-primary"><a href="#KM"> KM · Comoros </a></span>
-    <span class="badge badge-primary"><a href="#CK"> CK · Cook Islands </a></span>
-    <span class="badge badge-primary"><a href="#CR"> CR · Costa Rica </a></span>
-    <span class="badge badge-primary"><a href="#HR"> HR · Croatia </a></span>
-    <span class="badge badge-primary"><a href="#CU"> CU · Cuba </a></span>
-    <span class="badge badge-primary"><a href="#CW"> CW · Curaçao </a></span>
-    <span class="badge badge-primary"><a href="#CY"> CY · Cyprus </a></span>
-    <span class="badge badge-primary"><a href="#CZ"> CZ · Czech Republic </a></span>
-    <span class="badge badge-primary"><a href="#CI"> CI · Côte d'Ivoire </a></span>
-    <span class="badge badge-primary"><a href="#CD"> CD · Democratic Republic of the Congo </a></span>
-    <span class="badge badge-primary"><a href="#DK"> DK · Denmark </a></span>
-    <span class="badge badge-primary"><a href="#DJ"> DJ · Djibouti </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#AF"> AF · Afghanistan </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#AX"> AX · Aland Islands </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#AL"> AL · Albania </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#DZ"> DZ · Algeria </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#AS"> AS · American Samoa </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#AD"> AD · Andorra </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#AO"> AO · Angola </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#AI"> AI · Anguilla </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#AG"> AG · Antigua and Barbuda </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#AR"> AR · Argentina </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#AM"> AM · Armenia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#AW"> AW · Aruba </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#AU"> AU · Australia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#AT"> AT · Austria </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#AZ"> AZ · Azerbaijan </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#BS"> BS · Bahamas </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#BH"> BH · Bahrain </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#BD"> BD · Bangladesh </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#BB"> BB · Barbados </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#BY"> BY · Belarus </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#BE"> BE · Belgium </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#BZ"> BZ · Belize </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#BJ"> BJ · Benin </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#BM"> BM · Bermuda </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#BT"> BT · Bhutan </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#BO"> BO · Bolivia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#BQ"> BQ · Bonaire, Sint Eustatius and Saba </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#BA"> BA · Bosnia and Herzegovina </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#BW"> BW · Botswana </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#BR"> BR · Brazil </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#IO"> IO · British Indian Ocean Territory </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#BN"> BN · Brunei Darussalam </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#BG"> BG · Bulgaria </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#BF"> BF · Burkina Faso </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#BI"> BI · Burundi </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#CV"> CV · Cabo Verde </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#KH"> KH · Cambodia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#CM"> CM · Cameroon </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#CA"> CA · Canada </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#KY"> KY · Cayman Islands </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#CF"> CF · Central African Republic </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#TD"> TD · Chad </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#CL"> CL · Chile </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#CN"> CN · China </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#CX"> CX · Christmas Island </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#CC"> CC · Cocos (Keeling) Islands </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#CO"> CO · Colombia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#KM"> KM · Comoros </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#CK"> CK · Cook Islands </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#CR"> CR · Costa Rica </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#HR"> HR · Croatia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#CU"> CU · Cuba </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#CW"> CW · Curaçao </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#CY"> CY · Cyprus </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#CZ"> CZ · Czech Republic </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#CI"> CI · Côte d'Ivoire </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#CD"> CD · Democratic Republic of the Congo </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#DK"> DK · Denmark </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#DJ"> DJ · Djibouti </a></span>
   </div>
 </div>
 
@@ -833,41 +833,41 @@ Find all flags available in alphabetical order.
 ++++
 <div class="doc-example mt-3 mb-3">
   <div class="bs-component mb-3">
-    <span class="badge badge-primary"><a href="#DM"> DM · Dominica </a></span>
-    <span class="badge badge-primary"><a href="#DO"> DO · Dominican Republic </a></span>
-    <span class="badge badge-primary"><a href="#EC"> EC · Ecuador </a></span>
-    <span class="badge badge-primary"><a href="#EG"> EG · Egypt </a></span>
-    <span class="badge badge-primary"><a href="#SV"> SV · El Salvador </a></span>
-    <span class="badge badge-primary"><a href="#GB-ENG"> GB-ENG · England </a></span>
-    <span class="badge badge-primary"><a href="#GQ"> GQ · Equatorial Guinea </a></span>
-    <span class="badge badge-primary"><a href="#ER"> ER · Eritrea </a></span>
-    <span class="badge badge-primary"><a href="#EE"> EE · Estonia </a></span>
-    <span class="badge badge-primary"><a href="#ET"> ET · Ethiopia </a></span>
-    <span class="badge badge-primary"><a href="#FK"> FK · Falkland Islands </a></span>
-    <span class="badge badge-primary"><a href="#FO"> FO · Faroe Islands </a></span>
-    <span class="badge badge-primary"><a href="#FM"> FM · Federated States of Micronesia </a></span>
-    <span class="badge badge-primary"><a href="#FJ"> FJ · Fiji </a></span>
-    <span class="badge badge-primary"><a href="#FI"> FI · Finland </a></span>
-    <span class="badge badge-primary"><a href="#FR"> FR · France </a></span>
-    <span class="badge badge-primary"><a href="#GF"> GF · French Guiana </a></span>
-    <span class="badge badge-primary"><a href="#PF"> PF · French Polynesia </a></span>
-    <span class="badge badge-primary"><a href="#TF"> TF · French Southern Territories </a></span>
-    <span class="badge badge-primary"><a href="#GA"> GA · Gabon </a></span>
-    <span class="badge badge-primary"><a href="#GM"> GM · Gambia </a></span>
-    <span class="badge badge-primary"><a href="#GE"> GE · Georgia </a></span>
-    <span class="badge badge-primary"><a href="#DE"> DE · Germany </a></span>
-    <span class="badge badge-primary"><a href="#GH"> GH · Ghana </a></span>
-    <span class="badge badge-primary"><a href="#GI"> GI · Gibraltar </a></span>
-    <span class="badge badge-primary"><a href="#GR"> GR · Greece </a></span>
-    <span class="badge badge-primary"><a href="#GL"> GL · Greenland </a></span>
-    <span class="badge badge-primary"><a href="#GD"> GD · Grenada </a></span>
-    <span class="badge badge-primary"><a href="#GP"> GP · Guadeloupe </a></span>
-    <span class="badge badge-primary"><a href="#GU"> GU · Guam </a></span>
-    <span class="badge badge-primary"><a href="#GT"> GT · Guatemala </a></span>
-    <span class="badge badge-primary"><a href="#GG"> GG · Guernsey </a></span>
-    <span class="badge badge-primary"><a href="#GN"> GN · Guinea </a></span>
-    <span class="badge badge-primary"><a href="#GW"> GW · Guinea-Bissau </a></span>
-    <span class="badge badge-primary"><a href="#GY"> GY · Guyana </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#DM"> DM · Dominica </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#DO"> DO · Dominican Republic </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#EC"> EC · Ecuador </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#EG"> EG · Egypt </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#SV"> SV · El Salvador </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GB-ENG"> GB-ENG · England </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GQ"> GQ · Equatorial Guinea </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#ER"> ER · Eritrea </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#EE"> EE · Estonia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#ET"> ET · Ethiopia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#FK"> FK · Falkland Islands </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#FO"> FO · Faroe Islands </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#FM"> FM · Federated States of Micronesia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#FJ"> FJ · Fiji </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#FI"> FI · Finland </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#FR"> FR · France </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GF"> GF · French Guiana </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#PF"> PF · French Polynesia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#TF"> TF · French Southern Territories </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GA"> GA · Gabon </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GM"> GM · Gambia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GE"> GE · Georgia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#DE"> DE · Germany </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GH"> GH · Ghana </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GI"> GI · Gibraltar </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GR"> GR · Greece </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GL"> GL · Greenland </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GD"> GD · Grenada </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GP"> GP · Guadeloupe </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GU"> GU · Guam </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GT"> GT · Guatemala </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GG"> GG · Guernsey </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GN"> GN · Guinea </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GW"> GW · Guinea-Bissau </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GY"> GY · Guyana </a></span>
   </div>
 </div>
 
@@ -1232,60 +1232,60 @@ Find all flags available in alphabetical order.
 
 <div class="doc-example mb-3">
   <div class="bs-component mb-3">
-    <span class="badge badge-primary"><a href="#HT"> HT · Haiti </a></span>
-    <span class="badge badge-primary"><a href="#VA"> VA · Holy See </a></span>
-    <span class="badge badge-primary"><a href="#HN"> HN · Honduras </a></span>
-    <span class="badge badge-primary"><a href="#HK"> HK · Hong Kong </a></span>
-    <span class="badge badge-primary"><a href="#HU"> HU · Hungary </a></span>
-    <span class="badge badge-primary"><a href="#IS"> IS · Iceland </a></span>
-    <span class="badge badge-primary"><a href="#IN"> IN · India </a></span>
-    <span class="badge badge-primary"><a href="#ID"> ID · Indonesia </a></span>
-    <span class="badge badge-primary"><a href="#IR"> IR · Iran (Islamic Republic of) </a></span>
-    <span class="badge badge-primary"><a href="#IQ"> IQ · Iraq </a></span>
-    <span class="badge badge-primary"><a href="#IE"> IE · Ireland </a></span>
-    <span class="badge badge-primary"><a href="#IM"> IM · Isle of Man </a></span>
-    <span class="badge badge-primary"><a href="#IL"> IL · Israel </a></span>
-    <span class="badge badge-primary"><a href="#IT"> IT · Italy </a></span>
-    <span class="badge badge-primary"><a href="#JM"> JM · Jamaica </a></span>
-    <span class="badge badge-primary"><a href="#JP"> JP · Japan </a></span>
-    <span class="badge badge-primary"><a href="#JE"> JE · Jersey </a></span>
-    <span class="badge badge-primary"><a href="#JO"> JO · Jordan </a></span>
-    <span class="badge badge-primary"><a href="#KZ"> KZ · Kazakhstan </a></span>
-    <span class="badge badge-primary"><a href="#KE"> KE · Kenya </a></span>
-    <span class="badge badge-primary"><a href="#KI"> KI · Kiribati </a></span>
-    <span class="badge badge-primary"><a href="#XK"> XK · Kosovo </a></span>
-    <span class="badge badge-primary"><a href="#KW"> KW · Kuwait </a></span>
-    <span class="badge badge-primary"><a href="#KG"> KG · Kyrgyzstan </a></span>
-    <span class="badge badge-primary"><a href="#LA"> LA · Laos </a></span>
-    <span class="badge badge-primary"><a href="#LV"> LV · Latvia </a></span>
-    <span class="badge badge-primary"><a href="#LB"> LB · Lebanon </a></span>
-    <span class="badge badge-primary"><a href="#LS"> LS · Lesotho </a></span>
-    <span class="badge badge-primary"><a href="#LR"> LR · Liberia </a></span>
-    <span class="badge badge-primary"><a href="#LY"> LY · Libya </a></span>
-    <span class="badge badge-primary"><a href="#LI"> LI · Liechtenstein </a></span>
-    <span class="badge badge-primary"><a href="#LT"> LT · Lithuania </a></span>
-    <span class="badge badge-primary"><a href="#LU"> LU · Luxembourg </a></span>
-    <span class="badge badge-primary"><a href="#MO"> MO · Macau </a></span>
-    <span class="badge badge-primary"><a href="#MG"> MG · Madagascar </a></span>
-    <span class="badge badge-primary"><a href="#MW"> MW · Malawi </a></span>
-    <span class="badge badge-primary"><a href="#MY"> MY · Malaysia </a></span>
-    <span class="badge badge-primary"><a href="#MV"> MV · Maldives </a></span>
-    <span class="badge badge-primary"><a href="#ML"> ML · Mali </a></span>
-    <span class="badge badge-primary"><a href="#MT"> MT · Malta </a></span>
-    <span class="badge badge-primary"><a href="#MH"> MH · Marshall Islands </a></span>
-    <span class="badge badge-primary"><a href="#MQ"> MQ · Martinique </a></span>
-    <span class="badge badge-primary"><a href="#MR"> MR · Mauritania </a></span>
-    <span class="badge badge-primary"><a href="#MU"> MU · Mauritius </a></span>
-    <span class="badge badge-primary"><a href="#YT"> YT · Mayotte </a></span>
-    <span class="badge badge-primary"><a href="#MX"> MX · Mexico </a></span>
-    <span class="badge badge-primary"><a href="#MD"> MD · Moldova </a></span>
-    <span class="badge badge-primary"><a href="#MC"> MC · Monaco </a></span>
-    <span class="badge badge-primary"><a href="#MN"> MN · Mongolia </a></span>
-    <span class="badge badge-primary"><a href="#ME"> ME · Montenegro </a></span>
-    <span class="badge badge-primary"><a href="#MS"> MS · Montserrat </a></span>
-    <span class="badge badge-primary"><a href="#MA"> MA · Morocco </a></span>
-    <span class="badge badge-primary"><a href="#MZ"> MZ · Mozambique </a></span>
-    <span class="badge badge-primary"><a href="#MM"> MM · Myanmar </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#HT"> HT · Haiti </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#VA"> VA · Holy See </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#HN"> HN · Honduras </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#HK"> HK · Hong Kong </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#HU"> HU · Hungary </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#IS"> IS · Iceland </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#IN"> IN · India </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#ID"> ID · Indonesia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#IR"> IR · Iran (Islamic Republic of) </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#IQ"> IQ · Iraq </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#IE"> IE · Ireland </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#IM"> IM · Isle of Man </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#IL"> IL · Israel </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#IT"> IT · Italy </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#JM"> JM · Jamaica </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#JP"> JP · Japan </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#JE"> JE · Jersey </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#JO"> JO · Jordan </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#KZ"> KZ · Kazakhstan </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#KE"> KE · Kenya </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#KI"> KI · Kiribati </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#XK"> XK · Kosovo </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#KW"> KW · Kuwait </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#KG"> KG · Kyrgyzstan </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#LA"> LA · Laos </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#LV"> LV · Latvia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#LB"> LB · Lebanon </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#LS"> LS · Lesotho </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#LR"> LR · Liberia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#LY"> LY · Libya </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#LI"> LI · Liechtenstein </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#LT"> LT · Lithuania </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#LU"> LU · Luxembourg </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#MO"> MO · Macau </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#MG"> MG · Madagascar </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#MW"> MW · Malawi </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#MY"> MY · Malaysia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#MV"> MV · Maldives </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#ML"> ML · Mali </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#MT"> MT · Malta </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#MH"> MH · Marshall Islands </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#MQ"> MQ · Martinique </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#MR"> MR · Mauritania </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#MU"> MU · Mauritius </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#YT"> YT · Mayotte </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#MX"> MX · Mexico </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#MD"> MD · Moldova </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#MC"> MC · Monaco </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#MN"> MN · Mongolia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#ME"> ME · Montenegro </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#MS"> MS · Montserrat </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#MA"> MA · Morocco </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#MZ"> MZ · Mozambique </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#MM"> MM · Myanmar </a></span>
   </div>
 </div>
 
@@ -1838,76 +1838,76 @@ Find all flags available in alphabetical order.
 ++++
 <div class="doc-example mb-3">
   <div class="bs-component mb-3">
-    <span class="badge badge-primary"><a href="#NA"> NA · Namibia </a></span>
-    <span class="badge badge-primary"><a href="#NR"> NR · Nauru </a></span>
-    <span class="badge badge-primary"><a href="#NP"> NP · Nepal </a></span>
-    <span class="badge badge-primary"><a href="#NL"> NL · Netherlands </a></span>
-    <span class="badge badge-primary"><a href="#NC"> NC · New Caledonia </a></span>
-    <span class="badge badge-primary"><a href="#NZ"> NZ · New Zealand </a></span>
-    <span class="badge badge-primary"><a href="#NI"> NI · Nicaragua </a></span>
-    <span class="badge badge-primary"><a href="#NE"> NE · Niger </a></span>
-    <span class="badge badge-primary"><a href="#NG"> NG · Nigeria </a></span>
-    <span class="badge badge-primary"><a href="#NU"> NU · Niue </a></span>
-    <span class="badge badge-primary"><a href="#NF"> NF · Norfolk Island </a></span>
-    <span class="badge badge-primary"><a href="#KP"> KP · North Korea </a></span>
-    <span class="badge badge-primary"><a href="#MK"> MK · North Macedonia </a></span>
-    <span class="badge badge-primary"><a href="#GB-NIR"> GB-NIR · Northern Ireland </a></span>
-    <span class="badge badge-primary"><a href="#MP"> MP · Northern Mariana Islands </a></span>
-    <span class="badge badge-primary"><a href="#NO"> NO · Norway </a></span>
-    <span class="badge badge-primary"><a href="#OM"> OM · Oman </a></span>
-    <span class="badge badge-primary"><a href="#PK"> PK · Pakistan </a></span>
-    <span class="badge badge-primary"><a href="#PW"> PW · Palau </a></span>
-    <span class="badge badge-primary"><a href="#PA"> PA · Panama </a></span>
-    <span class="badge badge-primary"><a href="#PG"> PG · Papua New Guinea </a></span>
-    <span class="badge badge-primary"><a href="#PY"> PY · Paraguay </a></span>
-    <span class="badge badge-primary"><a href="#PE"> PE · Peru </a></span>
-    <span class="badge badge-primary"><a href="#PH"> PH · Philippines </a></span>
-    <span class="badge badge-primary"><a href="#PN"> PN · Pitcairn </a></span>
-    <span class="badge badge-primary"><a href="#PL"> PL · Poland </a></span>
-    <span class="badge badge-primary"><a href="#PT"> PT · Portugal </a></span>
-    <span class="badge badge-primary"><a href="#PR"> PR · Puerto Rico </a></span>
-    <span class="badge badge-primary"><a href="#QA"> QA · Qatar </a></span>
-    <span class="badge badge-primary"><a href="#CG"> CG · Republic of the Congo </a></span>
-    <span class="badge badge-primary"><a href="#RO"> RO · Romania </a></span>
-    <span class="badge badge-primary"><a href="#RU"> RU · Russia </a></span>
-    <span class="badge badge-primary"><a href="#RW"> RW · Rwanda </a></span>
-    <span class="badge badge-primary"><a href="#RE"> RE · Réunion </a></span>
-    <span class="badge badge-primary"><a href="#BL"> BL · Saint Barthélemy </a></span>
-    <span class="badge badge-primary"><a href="#SH"> SH · Saint Helena, Ascension and Tristan da Cunha </a></span>
-    <span class="badge badge-primary"><a href="#KN"> KN · Saint Kitts and Nevis </a></span>
-    <span class="badge badge-primary"><a href="#LC"> LC · Saint Lucia </a></span>
-    <span class="badge badge-primary"><a href="#MF"> MF · Saint Martin </a></span>
-    <span class="badge badge-primary"><a href="#PM"> PM · Saint Pierre and Miquelon </a></span>
-    <span class="badge badge-primary"><a href="#VC"> VC · Saint Vincent and the Grenadines </a></span>
-    <span class="badge badge-primary"><a href="#WS"> WS · Samoa </a></span>
-    <span class="badge badge-primary"><a href="#SM"> SM · San Marino </a></span>
-    <span class="badge badge-primary"><a href="#ST"> ST · Sao Tome and Principe </a></span>
-    <span class="badge badge-primary"><a href="#SA"> SA · Saudi Arabia </a></span>
-    <span class="badge badge-primary"><a href="#GB-SCT"> GB-SCT · Scotland </a></span>
-    <span class="badge badge-primary"><a href="#SN"> SN · Senegal </a></span>
-    <span class="badge badge-primary"><a href="#RS"> RS · Serbia </a></span>
-    <span class="badge badge-primary"><a href="#SC"> SC · Seychelles </a></span>
-    <span class="badge badge-primary"><a href="#SL"> SL · Sierra Leone </a></span>
-    <span class="badge badge-primary"><a href="#SG"> SG · Singapore </a></span>
-    <span class="badge badge-primary"><a href="#SX"> SX · Sint Maarten </a></span>
-    <span class="badge badge-primary"><a href="#SK"> SK · Slovakia </a></span>
-    <span class="badge badge-primary"><a href="#SI"> SI · Slovenia </a></span>
-    <span class="badge badge-primary"><a href="#SB"> SB · Solomon Islands </a></span>
-    <span class="badge badge-primary"><a href="#SO"> SO · Somalia </a></span>
-    <span class="badge badge-primary"><a href="#ZA"> ZA · South Africa </a></span>
-    <span class="badge badge-primary"><a href="#GS"> GS · South Georgia and the South Sandwich Islands </a></span>
-    <span class="badge badge-primary"><a href="#KR"> KR · South Korea </a></span>
-    <span class="badge badge-primary"><a href="#SS"> SS · South Sudan </a></span>
-    <span class="badge badge-primary"><a href="#ES"> ES · Spain </a></span>
-    <span class="badge badge-primary"><a href="#LK"> LK · Sri Lanka </a></span>
-    <span class="badge badge-primary"><a href="#PS"> PS · State of Palestine </a></span>
-    <span class="badge badge-primary"><a href="#SD"> SD · Sudan </a></span>
-    <span class="badge badge-primary"><a href="#SR"> SR · Suriname </a></span>
-    <span class="badge badge-primary"><a href="#SJ"> SJ · Svalbard and Jan Mayen </a></span>
-    <span class="badge badge-primary"><a href="#SZ"> SZ · Swaziland </a></span>
-    <span class="badge badge-primary"><a href="#SE"> SE · Sweden </a></span>
-    <span class="badge badge-primary"><a href="#CH"> CH · Switzerland </a></span>
-    <span class="badge badge-primary"><a href="#SY"> SY · Syrian Arab Republic </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#NA"> NA · Namibia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#NR"> NR · Nauru </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#NP"> NP · Nepal </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#NL"> NL · Netherlands </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#NC"> NC · New Caledonia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#NZ"> NZ · New Zealand </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#NI"> NI · Nicaragua </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#NE"> NE · Niger </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#NG"> NG · Nigeria </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#NU"> NU · Niue </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#NF"> NF · Norfolk Island </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#KP"> KP · North Korea </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#MK"> MK · North Macedonia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GB-NIR"> GB-NIR · Northern Ireland </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#MP"> MP · Northern Mariana Islands </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#NO"> NO · Norway </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#OM"> OM · Oman </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#PK"> PK · Pakistan </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#PW"> PW · Palau </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#PA"> PA · Panama </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#PG"> PG · Papua New Guinea </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#PY"> PY · Paraguay </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#PE"> PE · Peru </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#PH"> PH · Philippines </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#PN"> PN · Pitcairn </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#PL"> PL · Poland </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#PT"> PT · Portugal </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#PR"> PR · Puerto Rico </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#QA"> QA · Qatar </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#CG"> CG · Republic of the Congo </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#RO"> RO · Romania </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#RU"> RU · Russia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#RW"> RW · Rwanda </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#RE"> RE · Réunion </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#BL"> BL · Saint Barthélemy </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#SH"> SH · Saint Helena, Ascension and Tristan da Cunha </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#KN"> KN · Saint Kitts and Nevis </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#LC"> LC · Saint Lucia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#MF"> MF · Saint Martin </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#PM"> PM · Saint Pierre and Miquelon </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#VC"> VC · Saint Vincent and the Grenadines </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#WS"> WS · Samoa </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#SM"> SM · San Marino </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#ST"> ST · Sao Tome and Principe </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#SA"> SA · Saudi Arabia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GB-SCT"> GB-SCT · Scotland </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#SN"> SN · Senegal </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#RS"> RS · Serbia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#SC"> SC · Seychelles </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#SL"> SL · Sierra Leone </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#SG"> SG · Singapore </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#SX"> SX · Sint Maarten </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#SK"> SK · Slovakia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#SI"> SI · Slovenia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#SB"> SB · Solomon Islands </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#SO"> SO · Somalia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#ZA"> ZA · South Africa </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GS"> GS · South Georgia and the South Sandwich Islands </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#KR"> KR · South Korea </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#SS"> SS · South Sudan </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#ES"> ES · Spain </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#LK"> LK · Sri Lanka </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#PS"> PS · State of Palestine </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#SD"> SD · Sudan </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#SR"> SR · Suriname </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#SJ"> SJ · Svalbard and Jan Mayen </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#SZ"> SZ · Swaziland </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#SE"> SE · Sweden </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#CH"> CH · Switzerland </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#SY"> SY · Syrian Arab Republic </a></span>
   </div>
 </div>
 
@@ -2621,39 +2621,39 @@ Find all flags available in alphabetical order.
 
 <div class="doc-example mb-3">
   <div class="bs-component mb-3">
-    <span class="badge badge-primary"><a href="#TW"> TW · Taiwan </a></span>
-    <span class="badge badge-primary"><a href="#TJ"> TJ · Tajikistan </a></span>
-    <span class="badge badge-primary"><a href="#TZ"> TZ · Tanzania </a></span>
-    <span class="badge badge-primary"><a href="#TH"> TH · Thailand </a></span>
-    <span class="badge badge-primary"><a href="#TL"> TL · Timor-Leste </a></span>
-    <span class="badge badge-primary"><a href="#TG"> TG · Togo </a></span>
-    <span class="badge badge-primary"><a href="#TK"> TK · Tokelau </a></span>
-    <span class="badge badge-primary"><a href="#TO"> TO · Tonga </a></span>
-    <span class="badge badge-primary"><a href="#TT"> TT · Trinidad and Tobago </a></span>
-    <span class="badge badge-primary"><a href="#TN"> TN · Tunisia </a></span>
-    <span class="badge badge-primary"><a href="#TR"> TR · Turkey </a></span>
-    <span class="badge badge-primary"><a href="#TM"> TM · Turkmenistan </a></span>
-    <span class="badge badge-primary"><a href="#TC"> TC · Turks and Caicos Islands </a></span>
-    <span class="badge badge-primary"><a href="#TV"> TV · Tuvalu </a></span>
-    <span class="badge badge-primary"><a href="#UG"> UG · Uganda </a></span>
-    <span class="badge badge-primary"><a href="#UA"> UA · Ukraine </a></span>
-    <span class="badge badge-primary"><a href="#AE"> AE · United Arab Emirates </a></span>
-    <span class="badge badge-primary"><a href="#GB"> GB · United Kingdom </a></span>
-    <span class="badge badge-primary"><a href="#UM"> UM · United States Minor Outlying Islands </a></span>
-    <span class="badge badge-primary"><a href="#US"> US · United States of America </a></span>
-    <span class="badge badge-primary"><a href="#UY"> UY · Uruguay </a></span>
-    <span class="badge badge-primary"><a href="#UZ"> UZ · Uzbekistan </a></span>
-    <span class="badge badge-primary"><a href="#VU"> VU · Vanuatu </a></span>
-    <span class="badge badge-primary"><a href="#VE"> VE · Venezuela (Bolivarian Republic of) </a></span>
-    <span class="badge badge-primary"><a href="#VN"> VN · Vietnam </a></span>
-    <span class="badge badge-primary"><a href="#VG"> VG · Virgin Islands (British) </a></span>
-    <span class="badge badge-primary"><a href="#VI"> VI · Virgin Islands (U.S.) </a></span>
-    <span class="badge badge-primary"><a href="#GB-WLS"> GB-WLS · Wales </a></span>
-    <span class="badge badge-primary"><a href="#WF"> WF · Wallis and Futuna </a></span>
-    <span class="badge badge-primary"><a href="#EH"> EH · Western Sahara </a></span>
-    <span class="badge badge-primary"><a href="#YE"> YE · Yemen </a></span>
-    <span class="badge badge-primary"><a href="#ZM"> ZM · Zambia </a></span>
-    <span class="badge badge-primary"><a href="#ZW"> ZW · Zimbabwe </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#TW"> TW · Taiwan </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#TJ"> TJ · Tajikistan </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#TZ"> TZ · Tanzania </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#TH"> TH · Thailand </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#TL"> TL · Timor-Leste </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#TG"> TG · Togo </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#TK"> TK · Tokelau </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#TO"> TO · Tonga </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#TT"> TT · Trinidad and Tobago </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#TN"> TN · Tunisia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#TR"> TR · Turkey </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#TM"> TM · Turkmenistan </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#TC"> TC · Turks and Caicos Islands </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#TV"> TV · Tuvalu </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#UG"> UG · Uganda </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#UA"> UA · Ukraine </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#AE"> AE · United Arab Emirates </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GB"> GB · United Kingdom </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#UM"> UM · United States Minor Outlying Islands </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#US"> US · United States of America </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#UY"> UY · Uruguay </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#UZ"> UZ · Uzbekistan </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#VU"> VU · Vanuatu </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#VE"> VE · Venezuela (Bolivarian Republic of) </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#VN"> VN · Vietnam </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#VG"> VG · Virgin Islands (British) </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#VI"> VI · Virgin Islands (U.S.) </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#GB-WLS"> GB-WLS · Wales </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#WF"> WF · Wallis and Futuna </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#EH"> EH · Western Sahara </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#YE"> YE · Yemen </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#ZM"> ZM · Zambia </a></span>
+    <span class="badge rounded-pill bg-primary"><a href="#ZW"> ZW · Zimbabwe </a></span>
   </div>
 </div>
 

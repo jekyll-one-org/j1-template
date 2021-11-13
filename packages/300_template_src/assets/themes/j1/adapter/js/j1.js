@@ -674,6 +674,7 @@ var j1 = (function () {
       // finalize and display page
       j1.displayPage();
     },
+
     // -------------------------------------------------------------------------
     // initBanner()
     // AJAX fetcher to load and place all banner used for a page
@@ -780,6 +781,7 @@ var j1 = (function () {
       }
       return true;
     },
+
     // -------------------------------------------------------------------------
     // initPanel()
     // AJAX fetcher to load and place all panel used for a page
@@ -882,6 +884,7 @@ var j1 = (function () {
       }
       return true;
     },
+
     // -------------------------------------------------------------------------
     // initFooter()
     // AJAX fetcher to load and place the footer used for a page
@@ -935,6 +938,7 @@ var j1 = (function () {
       }
       return true;
     },
+
     // -------------------------------------------------------------------------
     // displayPage
     // show the page after timeout of {{flickerTimeout}} ms
@@ -1357,6 +1361,7 @@ var j1 = (function () {
         }, flickerTimeout);
       }
     },
+
     // -------------------------------------------------------------------------
     // Helper functions
     // -------------------------------------------------------------------------
@@ -1377,6 +1382,7 @@ var j1 = (function () {
       }
       return o;
     },
+
     // -------------------------------------------------------------------------
     // getPrevPage()
     // Returns the last vistited page
@@ -1384,6 +1390,7 @@ var j1 = (function () {
     getPrevPage: function () {
       return previous_page;
     },
+
     // -------------------------------------------------------------------------
     // getLanguage()
     // Returns the preferred language taken form window.navigator
@@ -1393,6 +1400,7 @@ var j1 = (function () {
     getLanguage: function () {
       var language = navigator.languages ? navigator.languages[0] : (navigator.language || navigator.userLanguage);
     },
+
     // -------------------------------------------------------------------------
     // getTemplateVersion()
     // Returns the template version taken from site config (_config.yml)
@@ -1407,6 +1415,7 @@ var j1 = (function () {
     // TOCCER module
     // -------------------------------------------------------------------------
     scrollTo: function () {
+      var logger    = log4javascript.getLogger('j1.scrollTo');
       var anchor    = window.location.href.split('#')[1];
       var anchor_id = typeof anchor !== 'undefined' ? '#' + anchor : false;
       var isSlider  = false;
@@ -1417,8 +1426,6 @@ var j1 = (function () {
       } else if (anchor.includes("googtrans")) {
         return false;
       }
-
-      var logger        = log4javascript.getLogger('j1.scrollTo');
 
       var toccerScrollDuration = {{toccer_options.scrollSmoothDuration}};
       var toccerScrollOffset   = {{toccer_options.scrollSmoothOffset}};
@@ -1455,7 +1462,7 @@ var j1 = (function () {
           j1.core.scrollSmooth.scroll( anchor_id, {
             duration: toccerScrollDuration,
             offset: scrollOffset,
-            callback: null
+            callback: false
           });
         } else {
           // scroll the page one pixel back and forth (trigger)
@@ -1472,6 +1479,7 @@ var j1 = (function () {
         return false;
       }
     },
+
     // -------------------------------------------------------------------------
     //  authEnabled()
     //  Returns the state of the authentication module
@@ -1482,6 +1490,7 @@ var j1 = (function () {
 
       return authEnabled;
     },
+
     // -------------------------------------------------------------------------
     //  appDetected()
     //  Returns true if a web session cookie exists
@@ -1500,6 +1509,7 @@ var j1 = (function () {
       }
       return detected;
     },
+
     // -------------------------------------------------------------------------
     // loadHTML()
     // Load HTML data asychronously using XHR|jQuery on an element (e.g. <div>)
@@ -1606,6 +1616,7 @@ var j1 = (function () {
       }
       return state;
     },
+
     // -------------------------------------------------------------------------
     // loadJS()
     // Load JS data asychronously using jQuery (XHR)
@@ -1644,6 +1655,7 @@ var j1 = (function () {
 
       return state;
     },
+
     // -------------------------------------------------------------------------
     // removeRessource (Vanilla JS)
     // -------------------------------------------------------------------------
@@ -1661,6 +1673,7 @@ var j1 = (function () {
             allsuspects[i].parentNode.removeChild(allsuspects[i])
       }
     },
+
     // -------------------------------------------------------------------------
     //  readCookie (Vanilla JS)
     // -------------------------------------------------------------------------
@@ -1682,6 +1695,7 @@ var j1 = (function () {
         return false;
       }
     },
+
     // -------------------------------------------------------------------------
     // writeCookie (Cookie lib)
     // Write 'data' to a cookie 'name'. If not exists, the cookie gets
@@ -1775,6 +1789,7 @@ var j1 = (function () {
       }
 
     },
+
     // -------------------------------------------------------------------------
     // findCookie (Vanilla JS)
     // Search for cookies (names) in the page header that matches a given
@@ -1790,6 +1805,7 @@ var j1 = (function () {
 
       return rCookie;
     },
+
     // -------------------------------------------------------------------------
     // removeCookie (Vanilla JS)
     // -------------------------------------------------------------------------
@@ -1809,6 +1825,7 @@ var j1 = (function () {
         return false;
       }
     },
+
     // -------------------------------------------------------------------------
     // expireCookie (Vanilla JS)
     // Expires given cookies by name except cookies set to httpOnly. For all
@@ -1870,6 +1887,7 @@ var j1 = (function () {
 
       return true;
     },
+
     // -------------------------------------------------------------------------
     // existsCookie (Vanilla JS)
     // returns true if a given cookie exists
@@ -1904,6 +1922,7 @@ var j1 = (function () {
 
       return cookieExists;
     },
+
     // -------------------------------------------------------------------------
     // Resolve MACROs
     //
@@ -1981,6 +2000,7 @@ var j1 = (function () {
         }
       }, 25);
     },
+
     // -------------------------------------------------------------------------
     // Update MACROs
     // Update the values, NOT the placeholders
@@ -2038,6 +2058,7 @@ var j1 = (function () {
         }
       }, 25);
     },
+
     // -------------------------------------------------------------------------
     // getMessage
     // Get a log message from the log message catalog object
@@ -2047,6 +2068,7 @@ var j1 = (function () {
 
       return message;
     },
+
     // -------------------------------------------------------------------------
     // logger
     // Log a message
@@ -2058,6 +2080,7 @@ var j1 = (function () {
 
       return true;
     },
+
     // -------------------------------------------------------------------------
     // Send message
     // -------------------------------------------------------------------------
@@ -2078,6 +2101,7 @@ var j1 = (function () {
       }
 
     },
+
     // -------------------------------------------------------------------------
     // messageHandler: MessageHandler for J1 CookieConsent module
     // Manage messages send from other J1 modules
@@ -2103,6 +2127,7 @@ var j1 = (function () {
 
       return true;
     },
+
     // -------------------------------------------------------------------------
     // getStyleValue:
     // Returns the value of a style from a css class definition
@@ -2123,6 +2148,7 @@ var j1 = (function () {
 
       return val;
     },
+
     // -------------------------------------------------------------------------
     // getStyleSheetLoaded:
     // NOTE:
@@ -2139,6 +2165,7 @@ var j1 = (function () {
         }
       }
     },
+
     // -------------------------------------------------------------------------
     //  Returns the names of cookies used for J1 Template
     // -------------------------------------------------------------------------
@@ -2209,6 +2236,7 @@ var j1 = (function () {
 
       return true;
     },
+
     // -------------------------------------------------------------------------
     // setState()
     // Set the current (processing) state of the module
@@ -2216,6 +2244,7 @@ var j1 = (function () {
     setState: function (stat) {
       state = stat;
     },
+
     // -------------------------------------------------------------------------
     // getState()
     // Returns the current (processing) state of the module
@@ -2223,6 +2252,7 @@ var j1 = (function () {
     getState: function () {
       return state;
     },
+
     // -------------------------------------------------------------------------
     // setXhrDataState()
     // Set the final (loading) state of an element (partial) loaded via Xhr
@@ -2230,6 +2260,7 @@ var j1 = (function () {
     setXhrDataState: function (obj, stat) {
       j1.xhrDataState[obj] = stat;
     },
+
     // -------------------------------------------------------------------------
     // getXhrDataState()
     // Returns the final (loading) state of an element (partial) loaded via Xhr
@@ -2237,6 +2268,7 @@ var j1 = (function () {
     getXhrDataState: function (obj) {
       return j1.xhrDataState[obj];
     },
+
     // -------------------------------------------------------------------------
     // setXhrDomState()
     // Set the state of an element loaded via Xhr that is
@@ -2245,6 +2277,7 @@ var j1 = (function () {
     setXhrDomState: function (obj, stat) {
       j1.xhrDOMState[obj] = stat;
     },
+
     // -------------------------------------------------------------------------
     // getXhrDataState()
     // Returns the state of an element loaded via Xhr that is
@@ -2253,6 +2286,7 @@ var j1 = (function () {
     getXhrDOMState: function (obj) {
       return j1.xhrDOMState[obj];
     },
+
     // -------------------------------------------------------------------------
     // setMode()
     // Set the current mode of the site (web|app)
@@ -2260,6 +2294,7 @@ var j1 = (function () {
     setMode: function (mod) {
       mode = mod;
     },
+
     // -------------------------------------------------------------------------
     // getMode()
     // Returns the current mode of the site (web|app)
@@ -2267,6 +2302,7 @@ var j1 = (function () {
     getMode: function () {
       return mode;
     },
+
     // -------------------------------------------------------------------------
     // checkUserAgent()
     // Returns the name (UA) of the web browser
@@ -2278,6 +2314,7 @@ var j1 = (function () {
         return false;
       }
     },
+
     // -------------------------------------------------------------------------
     // generateId()
     // Generate a unique (thread) id used by the logger
@@ -2291,6 +2328,7 @@ var j1 = (function () {
      }
      return result;
     },
+
     // -------------------------------------------------------------------------
     // getTrue()
     // Returns always true (for testing purposes)
@@ -2298,6 +2336,7 @@ var j1 = (function () {
     getTrue: function () {
       return true;
     },
+
     // -------------------------------------------------------------------------
     // getFalse()
     // Returns always false (for testing purposes)
@@ -2305,6 +2344,7 @@ var j1 = (function () {
     getFalse: function () {
       return false;
     },
+
     // -------------------------------------------------------------------------
     // goHome()
     // Redirect current page to the browser homepage

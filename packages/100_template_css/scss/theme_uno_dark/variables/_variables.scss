@@ -55,7 +55,6 @@
 // for consistent naming.
 // Example|s: $nav-link-disabled-color and $modal-content-box-shadow-xs.
 
-
 // Colors
 // -----------------------------------------------------------------------------
 $primary:                                         $blue-800 !default;
@@ -203,3 +202,7 @@ $breadcrumb-active-color:                         $gray-500 !default;
 // Code
 // -----------------------------------------------------------------------------
 $pre-color:                                       inherit !default;
+
+// Added for bs@5
+// -----------------------------------------------------------------------------
+$close-color:                                     $secondary;

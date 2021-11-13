@@ -85,7 +85,7 @@
   }
 }
 
-@mixin bmd-form-color($label-color, $label-color-focus, $border-color) {
+@mixin bmd-form-color($label-color, $bmd-label-color-fokus, $border-color) {
   [class^='bmd-label'],
   [class*=' bmd-label'] {
     color: $label-color;
@@ -96,8 +96,8 @@
     // underline animation color on focus
     $underline-background-image: linear-gradient(
         to top,
-        $label-color-focus 2px,
-        fade-out($label-color-focus, 1) 2px
+        $bmd-label-color-fokus 2px,
+        $gray-50 2px
       ),
       linear-gradient(
         to top,
@@ -183,11 +183,14 @@
     // "Mixin form-validation-state is missing argument $icon."
     // Added dummy argument ""
     // org: @include form-validation-state("valid", $label-color);
-    @include form-validation-state("valid", $label-color, "");
+
+    // Disabled for bs@5
+    // -------------------------------------------------------------------------
+    // @include form-validation-state("valid", $label-color, "");
 
     [class^='bmd-label'],
     [class*=' bmd-label'] {
-      color: $label-color-focus;
+      color: $bmd-label-color-fokus;
     }
 
     .bmd-label-placeholder {

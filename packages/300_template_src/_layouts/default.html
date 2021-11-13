@@ -126,12 +126,18 @@ layout:                                 compress
 
   <body>
 
-  {% comment %} wrapper to prevent "DOM flicker"
+  {% comment %} wrapper to suppress "DOM flicker"|"Overflows"
+  NOTE:
+    2021-11-13:
+    Since moved to bs@5, a overflow is on the HOME page
+    !!! NOT seen on content pages !!!
   ------------------------------------------------------------------------------ {% endcomment %}
     <!-- [INFO   ] [j1.layout.default.html                ] [ start page processing for region: 'body' ] -->
     <!-- [INFO   ] [j1.layout.default.html                ] [ place wrapper to prevent "DOM flicker" ] -->
     <!-- [INFO   ] [j1.layout.default.html                ] [ make page hidden (suppress flicker) ] -->
-    <div id="no_flicker" style="display: none">
+    <!-- [INFO   ] [j1.layout.default.html                ] [ suppress page overflows (overflow: hidden) ] -->
+    <!-- div id="no_flicker" style="display: none" -->
+    <div id="no_flicker" style="overflow: hidden; display: none">
 
       {% comment %} collect the BODY-NAVIGATION region
       -------------------------------------------------------------------------- {% endcomment %}

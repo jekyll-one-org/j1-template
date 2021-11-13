@@ -88,8 +88,8 @@ $bmd-label-color-inner-focus:           $gray !default;                         
 
 // Theme colors based on Bootstrap Material Design default color set
 // usage: theme-color(primary)
-$theme-colors: () !default;
-$theme-colors: map-merge((
+$theme-color: () !default;
+$theme-color: map-merge((
   primary:                              $blue,
   secondary:                            $blue-grey,
   success:                              $green,
@@ -98,7 +98,7 @@ $theme-colors: map-merge((
   danger:                               $red,
   light:                                $grey-100,
   dark:                                 $grey-800
-), $theme-colors);
+), $theme-color);
 
 // Customized BS variables
 // -----------------------------------------------------------------------------
@@ -206,10 +206,15 @@ $bmd-switch-handle-checked-bg:          theme-color(primary) !default;
 $bmd-switch-handle-unchecked-bg:        #f1f1f1 !default;
 $bmd-switch-handle-disabled-bg:         #bdbdbd !default;
 $bmd-switch-unchecked-bg:               $gray-light !default;
-$bmd-switch-checked-bg:                 desaturate(
-                                          lighten($bmd-switch-handle-checked-bg, 28%),
-                                          32%
-                                        ); // kind of magic recipe
+
+// Disabled for bs@5
+// -----------------------------------------------------------------------------
+// $bmd-switch-checked-bg:                 desaturate(
+//                                           lighten($bmd-switch-handle-checked-bg, 28%),
+//                                           32%
+//                                         ); // kind of magic recipe
+
+$bmd-switch-checked-bg:               $gray-light !default;
 $bmd-switch-disabled-bg:                $gray-lighter !default;
 
 // Popovers and Popups
