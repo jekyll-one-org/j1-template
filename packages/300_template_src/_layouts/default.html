@@ -273,6 +273,22 @@ layout:                                 compress
           clearInterval(dependencies_met_page_ready);
         }
       });
+
+      // In-page HASH anchor links on click based on Chris Coyier's solution
+      // See: https://css-tricks.com/snippets/jquery/smooth-scrolling/
+      $('a[href^="#"]:not([href="#"])').click(function(e) {
+        if (location.hostname == this.hostname) {
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+          if (target.length) {
+            $('html, body').animate({
+              scrollTop: target.offset().top - 100 + 'px'
+            }, 200);
+            return false;
+          }
+        }
+      });
+
     });
   </script>
   <!-- [INFO   ] [j1.layout.default.html                ] [ end page processing ] -->

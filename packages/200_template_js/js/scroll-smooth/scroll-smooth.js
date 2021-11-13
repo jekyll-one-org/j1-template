@@ -98,8 +98,7 @@ module.exports = function scrollSmooth (options) {
       // -----------------------------------------------------------------------
       function postScrollActions () {
         var logger = log4javascript.getLogger('j1.core.scrollSmooth.post');
-        logText = 'scrollSmooth finished';
-        logger.debug(logText);
+        logger.debug('scrollSmooth finished');
         // post positioning if configured|needed
         if (typeof opt.callback === 'function') { opt.callback(); }
       }
