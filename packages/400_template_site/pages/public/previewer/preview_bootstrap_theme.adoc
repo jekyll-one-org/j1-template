@@ -13,6 +13,7 @@ categories:                             [ Previewer ]
 tags:                                   [ Bootstrap, Themes ]
 
 scrollbar:                              false
+scrollInPageHashes:                     false
 flowtext:                               false
 
 permalink:                              /pages/public/previewer/theme/
@@ -108,7 +109,7 @@ resource_options:
 // -----------------------------------------------------------------------------
 ++++
   <!-- Prepend H1 tag here -->
-  <div id="theme" class="row ml-0 mb-3">
+  <div id="theme" class="row g-0 mb-3">
 
     <!-- Load the previously selected theme from the (user state) cookie -->
     <script>

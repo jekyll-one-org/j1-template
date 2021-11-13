@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/defaults/rtable.yml
-# Default Configuration of the rTable Module
+# ~/_data/modules/defaults/scroller.yml
+# User configuration for J1 Scroller API
 #
 # Product/Info:
 # https://jekyll.one
@@ -19,7 +19,7 @@
 # About this configuration (used for J1 CC only)
 #
 about_config:
-  title:                                rTable Module
+  title:                                Scroller API
   scope:                                Default settings
   location:                             _data/modules/defaults/rtable.yml
 
@@ -28,8 +28,6 @@ about_config:
 #
 defaults:
   enabled:                              false
-
-  breakpoint:                           992
 
 # ------------------------------------------------------------------------------
 # END config

@@ -16,7 +16,7 @@
 #
 about_config:
 
-  title:
+  title:                                Scroller API
   scope:                                User settings
   location:                             _data/modules/scroller.yml
 

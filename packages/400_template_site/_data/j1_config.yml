@@ -54,6 +54,12 @@ typography:
   rtext:                                true
   rtext_size:                           300
 
+# ------------------------------------------------------------------------------
+# SmoothScroll settings
+#
+smoothScroll:
+  enabled:                              true
+  scrollInPageHashes:                   true
 
 # ==============================================================================
 # URL configuration

@@ -49,44 +49,55 @@ layout:                                 compress
 
 {% comment %} initialize global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment       = site.environment %}
-{% assign template_version  = site.version %}
-{% assign compress          = site.compress_html.enabled %}
-{% assign prettify          = data.j1_config.prettify %}
+{% assign environment          = site.environment %}
+{% assign template_version     = site.version %}
+{% assign compress             = site.compress_html.enabled %}
+{% assign prettify             = data.j1_config.prettify %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config   = site.data.j1_config %}
-{% assign blocks            = site.data.blocks %}
-{% assign modules           = site.data.modules %}
+{% assign template_config      = site.data.j1_config %}
+{% assign blocks               = site.data.blocks %}
+{% assign modules              = site.data.modules %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
+{% assign scroller_defaults    = modules.defaults.scroller %}
 
 {% comment %} Webhooks disabled
 --------------------------------------------------------------------------------
-{% assign webhook_defaults    = modules.defaults.webhooks.defaults %}
-{% assign webhook_settings    = modules.webhooks.settings %}
+{% assign webhook_defaults     = modules.defaults.webhooks.defaults %}
+{% assign webhook_settings     = modules.webhooks.settings %}
 -------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign tooltips_options    = template_config.bootstrap.tooltips %}
-{% assign popovers_options    = template_config.bootstrap.popovers %}
+{% assign tooltips_options     = template_config.bootstrap.tooltips %}
+{% assign popovers_options     = template_config.bootstrap.popovers %}
+{% assign smoothscroll_options = template_config.smoothScroll %}
 
 {% comment %} Webhooks disabled
 --------------------------------------------------------------------------------
-{% assign webhook_options     = webhook_defaults | merge: webhook_settings %}
+{% assign webhook_options      = webhook_defaults | merge: webhook_settings %}
 -------------------------------------------------------------------------------- {% endcomment %}
 
-{% assign lanes_collate     = data.layouts.default.lanes %}
-{% assign logon_client      = data.modules.j1_sign_in_up %}
-{% assign body_scrollbar    = data.j1_config.body.scrollbar %}
+{% assign lanes_collate        = data.layouts.default.lanes %}
+{% assign logon_client         = data.modules.j1_sign_in_up %}
+{% assign body_scrollbar       = data.j1_config.body.scrollbar %}
 
+{% if smoothscroll_options.enabled and smoothscroll_options.scrollInPageHashes %}
+  {% assign scroll_inpage_hashes = true %}
+{% endif %}
+
+{% comment %} Overload properties from page options
+-------------------------------------------------------------------------------- {% endcomment %}
 {% if page.scrollbar %}
   {% assign body_scrollbar = page.scrollbar %}
 {% endif %}
 
+{% if page.scrollInPageHashes != nil %}
+  {% assign scroll_inpage_hashes = page.scrollInPageHashes %}
+{% endif %}
 
 {% comment %} main
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -274,6 +285,7 @@ layout:                                 compress
         }
       });
 
+      {% if scroll_inpage_hashes %}
       // In-page HASH anchor links on click based on Chris Coyier's solution
       // See: https://css-tricks.com/snippets/jquery/smooth-scrolling/
       $('a[href^="#"]:not([href="#"])').click(function(e) {
@@ -288,6 +300,7 @@ layout:                                 compress
           }
         }
       });
+      {% endif %}
 
     });
   </script>
