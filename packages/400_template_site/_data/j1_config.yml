@@ -247,11 +247,11 @@ bootstrap:
 
 
   tooltips:
-    enabled:                            false
+    enabled:                            true
     trigger:                            hover
 
   popovers:
-    enabled:                            false
+    enabled:                            true
     trigger:                            hover
 
 # ------------------------------------------------------------------------------

@@ -249,13 +249,16 @@ layout:                                 compress
     ---------------------------------------------------------------------------- {% endcomment %}
     // initialize BS tooltips and popovers
     {% if tooltips_options.enabled %}
-      $('[data-toggle="tooltip"').tooltip({
-        trigger: '{{tooltips_options.trigger}}'
+      var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+      var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
       });
     {% endif %}
+
     {% if popovers_options.enabled %}
-      $('[data-toggle="popover"').popover({
-        trigger: '{{popovers_options.trigger}}'
+      var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
+      var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+        return new bootstrap.Popover(popoverTriggerEl)
       });
     {% endif %}
 
