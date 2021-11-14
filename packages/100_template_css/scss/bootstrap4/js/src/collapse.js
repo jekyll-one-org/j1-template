@@ -34,7 +34,7 @@ const EVENT_HIDDEN = `hidden${EVENT_KEY}`
 const EVENT_CLICK_DATA_API = `click${EVENT_KEY}${DATA_API_KEY}`
 
 const SELECTOR_ACTIVES = '.show, .collapsing'
-const SELECTOR_DATA_TOGGLE = '[data-toggle="collapse"]'
+const SELECTOR_DATA_TOGGLE = '[data-bs-toggle="collapse"]'
 
 const Default = {
   toggle: true,
@@ -56,8 +56,8 @@ class Collapse {
     this._element = element
     this._config = this._getConfig(config)
     this._triggerArray = [].slice.call(document.querySelectorAll(
-      `[data-toggle="collapse"][href="#${element.id}"],` +
-      `[data-toggle="collapse"][data-target="#${element.id}"]`
+      `[data-bs-toggle="collapse"][href="#${element.id}"],` +
+      `[data-bs-toggle="collapse"][data-target="#${element.id}"]`
     ))
 
     const toggleList = [].slice.call(document.querySelectorAll(SELECTOR_DATA_TOGGLE))
@@ -285,7 +285,7 @@ class Collapse {
       parent = document.querySelector(this._config.parent)
     }
 
-    const selector = `[data-toggle="collapse"][data-parent="${this._config.parent}"]`
+    const selector = `[data-bs-toggle="collapse"][data-parent="${this._config.parent}"]`
     const children = [].slice.call(parent.querySelectorAll(selector))
 
     $(children).each((i, element) => {

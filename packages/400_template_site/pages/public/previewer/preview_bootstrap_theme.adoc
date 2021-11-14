@@ -80,8 +80,8 @@ resource_options:
 :progress_striped:                      true
 :progress_animated:                     true
 :containers:                            true
-:containers_jumbotron:                  true
-:containers_list:                       false
+:containers_jumbotron:                  false
+:containers_list:                       true
 :containers_list_groups:                false
 :cards:                                 true
 :cards_simple:                          true
@@ -1356,33 +1356,34 @@ mdi:bootstrap[24px, mdi-md-deep-purple]
 link:{url-bs-docs--components-alerts}[Bootstrap Docs {char-middot} Alerts, {browser-window--new}]
 
 ++++
-<div class="doc-example mb-3">
-  <div class="row mb-3">
+<div class="doc-example">
+  <div class="row">
     <div class="col-md-12">
-      <div class="alert alert-dismissible alert-warning">
-        <button type="button" class="btn-close" data-dismiss="alert"</button>
+      <div class="alert alert-warning alert-dismissible" role="alert">
         <h4 class="alert-heading notoc">Warning!</h4>
-        <p class="mb-0">Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna, <a href="#" class="alert-link">vel scelerisque nisl consectetur et</a>.</p>
+        <p class="mb-0">Best check yo self, you're not looking too good. Nulla vitae elit libero, a pharetra augue. Praesent commodo cursus magna,
+        <a href="#" class="alert-link">vel scelerisque nisl consectetur et</a>.</p>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     </div>
   </div>
-  <div class="row mb-5">
+  <div class="row">
     <div class="col-md-4">
-      <div class="alert alert-dismissible alert-danger">
-        <button type="button" class="btn-close" data-dismiss="alert"</button>
+      <div class="alert alert-danger alert-dismissible" role="alert">
         <strong>Oh snap!</strong> <a href="#" class="alert-link">Change a few things up</a> and try submitting again.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"</button>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="alert alert-dismissible alert-success">
-        <button type="button" class="btn-close" data-dismiss="alert"</button>
+      <div class="alert alert-success alert-dismissible" role="alert">
         <strong>Well done!</strong> You successfully read <a href="#" class="alert-link">this important alert message</a>.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"</button>
       </div>
     </div>
     <div class="col-md-4">
-      <div class="alert alert-dismissible alert-info">
-        <button type="button" class="btn-close" data-dismiss="alert"</button>
+      <div class="alert alert-info alert-dismissible" role="alert">
         <strong>Heads up!</strong> This <a href="#" class="alert-link">alert needs your attention</a>, but it's not super important.
+        <button type="button" class="btn-close" data-bs-dismiss="alert"</button>
       </div>
     </div>
   </div>
@@ -1407,26 +1408,26 @@ mdi:bootstrap[24px, mdi-md-deep-purple]
 link:{url-bs-docs--components-badges}[Bootstrap Docs {char-middot} Badge, {browser-window--new}]
 
 ++++
-<div class="doc-example mb-3">
+<div class="doc-example">
   <div class="bs-component mb-3">
-    <span class="badge badge-primary">Primary</span>
-    <span class="badge badge-secondary">Secondary</span>
-    <span class="badge badge-success">Success</span>
-    <span class="badge badge-danger">Danger</span>
-    <span class="badge badge-warning">Warning</span>
-    <span class="badge badge-info">Info</span>
-    <span class="badge badge-light">Light</span>
-    <span class="badge badge-dark">Dark</span>
+    <span class="badge bg-primary">Primary</span>
+    <span class="badge bg-secondary">Secondary</span>
+    <span class="badge bg-success">Success</span>
+    <span class="badge bg-danger">Danger</span>
+    <span class="badge bg-warning">Warning</span>
+    <span class="badge bg-info">Info</span>
+    <span class="badge bg-light">Light</span>
+    <span class="badge bg-dark">Dark</span>
   </div>
-  <div class="bs-component mb-4">
-    <span class="badge badge-pill badge-primary">Primary</span>
-    <span class="badge badge-pill badge-secondary">Secondary</span>
-    <span class="badge badge-pill badge-success">Success</span>
-    <span class="badge badge-pill badge-danger">Danger</span>
-    <span class="badge badge-pill badge-warning">Warning</span>
-    <span class="badge badge-pill badge-info">Info</span>
-    <span class="badge badge-pill badge-light">Light</span>
-    <span class="badge badge-pill badge-dark">Dark</span>
+  <div class="bs-component">
+    <span class="badge rounded-pill bg-primary">Primary</span>
+    <span class="badge rounded-pill bg-secondary">Secondary</span>
+    <span class="badge rounded-pill bg-success">Success</span>
+    <span class="badge rounded-pill bg-danger">Danger</span>
+    <span class="badge rounded-pill bg-warning">Warning</span>
+    <span class="badge rounded-pill bg-info">Info</span>
+    <span class="badge rounded-pill bg-light">Light</span>
+    <span class="badge rounded-pill bg-dark">Dark</span>
   </div>
 </div>
 ++++
@@ -1681,6 +1682,18 @@ ifeval::[{containers_list} == true]
 Lists are a flexible and powerful component for displaying a series of content
 within an single HTML element.
 
+++++
+<div class="doc-example mb-3">
+  <ul class="list-group">
+    <li class="list-group-item">An item</li>
+    <li class="list-group-item">A second item</li>
+    <li class="list-group-item">A third item</li>
+    <li class="list-group-item">A fourth item</li>
+    <li class="list-group-item">And a fifth one</li>
+  </ul>
+</div>
+++++
+
 ifeval::[{containers_list_groups} == true]
 ==== List groups
 
@@ -1697,15 +1710,15 @@ link:{url-bs-docs--components-list_group}[Bootstrap Docs {char-middot} List grou
       <ul class="list-group">
         <li class="list-group-item d-flex justify-content-between align-items-center">
           Describe item #1
-          <span class="badge badge-primary badge-pill">14</span>
+          <span class="badge bg-primary rounded-pill">14</span>
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center">
           Describe item #2
-          <span class="badge badge-primary badge-pill">2</span>
+          <span class="badge bg-primary rounded-pill">2</span>
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center">
           Describe item #3
-          <span class="badge badge-primary badge-pill">1</span>
+          <span class="badge bg-primary rounded-pill">1</span>
         </li>
       </ul>
     </div>

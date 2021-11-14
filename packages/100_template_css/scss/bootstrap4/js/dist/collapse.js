@@ -70,7 +70,7 @@
   var EVENT_HIDDEN = "hidden" + EVENT_KEY;
   var EVENT_CLICK_DATA_API = "click" + EVENT_KEY + DATA_API_KEY;
   var SELECTOR_ACTIVES = '.show, .collapsing';
-  var SELECTOR_DATA_TOGGLE = '[data-toggle="collapse"]';
+  var SELECTOR_DATA_TOGGLE = '[data-bs-toggle="collapse"]';
   var Default = {
     toggle: true,
     parent: ''

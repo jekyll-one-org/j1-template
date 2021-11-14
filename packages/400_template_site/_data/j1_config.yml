@@ -247,11 +247,11 @@ bootstrap:
 
 
   tooltips:
-    enabled:                            true
+    enabled:                            false
     trigger:                            hover
 
   popovers:
-    enabled:                            true
+    enabled:                            false
     trigger:                            hover
 
 # ------------------------------------------------------------------------------
@@ -309,7 +309,7 @@ preload:
   js:
     preload:                              true
     js:                                   [
-                                            /assets/themes/j1/modules/bmd/js/bootstrap-material-design,
+                                            /assets/themes/j1/modules/bmd/js/bmd,
                                             /assets/themes/j1/modules/backstretch/js/backstretch,
                                             /assets/themes/j1/core/js/template
                                           ]

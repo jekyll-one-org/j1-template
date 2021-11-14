@@ -131,7 +131,7 @@ colors. Then, customize with `.bg-*` utilities.
 <div class="doc-example mb-3">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-1">
     <a href="#" class="navbar-brand">Navbar<div class="ripple-container"></div></a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -159,7 +159,7 @@ colors. Then, customize with `.bg-*` utilities.
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-1">
     <a href="#" class="navbar-brand">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -187,7 +187,7 @@ colors. Then, customize with `.bg-*` utilities.
 
   <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;">
     <a href="#" class="navbar-brand">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 

@@ -92,7 +92,7 @@ lorem:sentences[5]
           <div id="accordion" class="myaccordion w-100">
             <div class="card">
               <div class="card-header p-0" id="headingOne">
-                <button class="d-flex pl-4 align-items-center justify-content-between btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                <button class="d-flex pl-4 align-items-center justify-content-between btn btn-link" data-bs-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                   <div class="heading d-flex align-items-center">
                     <h3 class="mb-0">How to manage account?</h3>
                   </div>
@@ -109,7 +109,7 @@ lorem:sentences[5]
             </div>
             <div class="card">
               <div class="card-header p-0" id="headingTwo">
-                <button class="d-flex pl-4 align-items-center justify-content-between btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                <button class="d-flex pl-4 align-items-center justify-content-between btn btn-link collapsed" data-bs-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
                   <div class="heading d-flex align-items-center">
                     <h3 class="mb-0">How to become Pro</h3>
                   </div>
@@ -126,7 +126,7 @@ lorem:sentences[5]
             </div>
             <div class="card">
               <div class="card-header p-0" id="headingThree">
-                <button class="d-flex pl-4 align-items-center justify-content-between btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                <button class="d-flex pl-4 align-items-center justify-content-between btn btn-link collapsed" data-bs-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
                   <div class="heading d-flex align-items-center">
                     <h3 class="mb-0">How to create an account?</h3>
                   </div>

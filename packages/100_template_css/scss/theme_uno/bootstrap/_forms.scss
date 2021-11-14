@@ -99,7 +99,7 @@ form {
 // State coloring: default, success, info, warning, danger
 //
 @include bmd-selection-color();
-@include bmd-form-color($bmd-form-color-default, $bmd-form-color-default, $bmd-form-color-default);
+@include bmd-form-color($bmd-label-color, $bmd-label-color-focus, $input-border-color);
 
 .has-success {
 //@include bmd-form-color(theme-color(success), theme-color(success), theme-color(success));

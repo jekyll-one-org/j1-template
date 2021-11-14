@@ -366,7 +366,8 @@ resources:
                                           modules/gtag-opt-in/js/gtag-opt-in,
                                           modules/jquery/js/jquery,
                                           modules/jquery/js/jqueryUI,
-                                          modules/popper/js/popper,
+#                                         modules/popper/js/popper,
+                                          modules/popperV2/js/popper,
                                           core/js/template
                                         ]
         init_function:                  [ j1.init ]
@@ -585,13 +586,35 @@ resources:
         init_function:                  []
 
   # ----------------------------------------------------------------------------
-  # BMD, responsive UI framework for Bootstrap
+  # Bootstrap V5
+  #
+  - name:                               Bootstrap V5
+    resource:
+      id:                               bs5
+      enabled:                          true
+      comment:                          Bootstrap V5 JS
+      region:                           head
+      layout:                           [ all ]
+      required:                         always
+      preload:                          false
+      script_load:                      sync
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            []
+        files:                          []
+        js:                             [ modules/bootstrap-v5/js/bootstrap ]
+        init_function:                  []
+
+  # ----------------------------------------------------------------------------
+  # BMD, responsive UI framework for Bootstrap V4
+  # https://github.com/mdbootstrap/bootstrap-material-design/tree/4.1.3
   #
   - name:                               Bootstrap Material Design
     resource:
       id:                               bmd
       enabled:                          true
-      comment:                          Material Design for Bootstrap
+      comment:                          Bootstrap Material Design
       region:                           head
       layout:                           [ all ]
       required:                         always
@@ -602,11 +625,12 @@ resources:
       data:
         css:                            []
         files:                          [ adapter/js/bmd.js ]
-        js:                             [ modules/bmd/js/bootstrap-material-design ]
+        js:                             [ modules/bmd/js/bmd ]
         init_function:                  [ j1.adapter.bmd.init ]
 
   # ----------------------------------------------------------------------------
   # Materialize, responsive UI framework (Vanilla JS)
+  # https://materializecss.com/
   #
   - name:                               Materialize
     resource:

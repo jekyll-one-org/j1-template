@@ -98,7 +98,7 @@ j1.adapter['bmd'] = (function (j1, window) {
 
       var dependencies_met_j1_finished = setInterval(function() {
         if (j1.getState() == 'finished') {
-          $('body').bootstrapMaterialDesign();
+          $('body').bmd();
 
           _this.setState('finished');
           logger.info('\n' + 'state: ' + _this.getState());
