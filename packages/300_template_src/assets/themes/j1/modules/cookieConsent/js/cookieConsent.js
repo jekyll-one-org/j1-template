@@ -24,7 +24,6 @@
  #  outside of J1 Template!
  # -----------------------------------------------------------------------------
 */
-//'use strict';
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -36,7 +35,7 @@
 /* eslint indent: "off"                                                       */
 /* eslint JSUnfilteredForInLoop: "off"                                        */
 // -----------------------------------------------------------------------------
-
+'use strict';
 function CookieConsent(props) {
   var logger                = log4javascript.getLogger('j1.core.bsCookieConsent');
   var self                  = this;
@@ -182,94 +181,109 @@ function CookieConsent(props) {
     return context[func].apply(context, args);
   }
 
+  // ---------------------------------------------------------------------------
+  // loadDialog()
+  //
+  // ---------------------------------------------------------------------------
+  function loadDialog(options) {
+      logger.info('\n' +  'load consent modal');
+      self.modal = document.createElement("div");
+      self.modal.id = self.props.dialogContainerID;
+      self.modal.setAttribute("class", "modal fade");
+      self.modal.setAttribute("tabindex", "-1");
+      self.modal.setAttribute("role", "dialog");
+      self.modal.setAttribute("aria-labelledby", self.props.dialogContainerID);
+      document.body.append(self.modal);
+      self.$modal = $(self.modal);
+
+      // ---------------------------------------------------------------------
+      // register events for the dialog (modal)
+      // ---------------------------------------------------------------------
+
+      // ---------------------------------------------------------------------
+      // on 'hidden'
+      // ---------------------------------------------------------------------
+      self.$modal.on('hidden.bs.modal', function () {
+        // process settings after the user has made his selections
+        executeFunctionByName (self.props.postSelectionCallback, window);
+      }); // END modal on 'hidden'
+
+      // load modal content
+      //
+      var templateUrl = self.props.contentURL + '/' + 'index.html';
+      $.get(templateUrl)
+      .done(function (data) {
+        logger.info('\n' + 'loading consent modal: successfully');
+        self.modal.innerHTML = data;
+        self.modal.innerHTML = $('#' + self.props.xhrDataElement).eq(0).html();
+
+        $(self.modal).modal({
+          backdrop: "static",
+          keyboard: false
+        });
+
+        self.$buttonDoNotAgree = $("#bccs-buttonDoNotAgree");
+        self.$buttonAgree = $("#bccs-buttonAgree");
+        self.$buttonSave = $("#bccs-buttonSave");
+        self.$buttonAgreeAll = $("#bccs-buttonAgreeAll");
+
+        logger.info('\n' + 'load/initialze options from cookie');
+
+        updateButtons();
+        updateOptionsFromCookie();
+
+        $("#bccs-options").on("hide.bs.collapse", function () {
+          detailedSettingsShown = false;
+          updateButtons();
+        }).on("show.bs.collapse", function () {
+          detailedSettingsShown = true;
+          updateButtons();
+        });
+
+        logger.info('\n' + 'initialze event handler');
+
+        self.$buttonDoNotAgree.click(function () {
+          doNotAgree();
+        });
+        self.$buttonAgree.click(function () {
+          agreeAll();
+        });
+        self.$buttonSave.click(function () {
+          $("#bccs-options").collapse('hide');
+          saveSettings();
+          updateOptionsFromCookie();
+        });
+        self.$buttonAgreeAll.click(function () {
+          $("#bccs-options").collapse('hide');
+          agreeAll();
+          updateOptionsFromCookie();
+        });
+      })
+      .fail(function () {
+        logger.error('\n' + 'loading consent modal: failed');
+        logger.warn('\n' + 'probably no `contentURL` set');
+      });
+  }
+
+  // ---------------------------------------------------------------------------
+  // showDialog()
+  //
+  // ---------------------------------------------------------------------------
   function showDialog(options) {
     Events.documentReady(function () {
-
       self.modal = document.getElementById(self.props.dialogContainerID);
       if (!self.modal) {
-        logger.info('\n' +  'load consent modal');
-        self.modal = document.createElement("div");
-        self.modal.id = self.props.dialogContainerID;
-        self.modal.setAttribute("class", "modal fade");
-        self.modal.setAttribute("tabindex", "-1");
-        self.modal.setAttribute("role", "dialog");
-        self.modal.setAttribute("aria-labelledby", self.props.dialogContainerID);
-        document.body.append(self.modal);
-        self.$modal = $(self.modal);
-
-        // ---------------------------------------------------------------------
-        // register events for the dialog (modal)
-        // ---------------------------------------------------------------------
-
-        // ---------------------------------------------------------------------
-        // on 'hidden'
-        // ---------------------------------------------------------------------
-        self.$modal.on('hidden.bs.modal', function () {
-          // process settings after the user has made his selections
-          executeFunctionByName (self.props.postSelectionCallback, window);
-        }); // END modal on 'hidden'
-
-        // load modal content
-        //
-        var templateUrl = self.props.contentURL + '/' + 'index.html';
-        $.get(templateUrl)
-        .done(function (data) {
-          logger.info('\n' + 'loading consent modal: successfully');
-          self.modal.innerHTML = data;
-          self.modal.innerHTML = $('#' + self.props.xhrDataElement).eq(0).html();
-
-          $(self.modal).modal({
-            backdrop: "static",
-            keyboard: false
-          });
-
-          self.$buttonDoNotAgree = $("#bccs-buttonDoNotAgree");
-          self.$buttonAgree = $("#bccs-buttonAgree");
-          self.$buttonSave = $("#bccs-buttonSave");
-          self.$buttonAgreeAll = $("#bccs-buttonAgreeAll");
-
-          logger.info('\n' + 'load/initialze options from cookie');
-
-          updateButtons();
-          updateOptionsFromCookie();
-
-          $("#bccs-options").on("hide.bs.collapse", function () {
-            detailedSettingsShown = false;
-            updateButtons();
-          }).on("show.bs.collapse", function () {
-            detailedSettingsShown = true;
-            updateButtons();
-          });
-
-          logger.info('\n' + 'initialze event handler');
-
-          self.$buttonDoNotAgree.click(function () {
-            doNotAgree();
-          });
-          self.$buttonAgree.click(function () {
-            agreeAll();
-          });
-          self.$buttonSave.click(function () {
-            $("#bccs-options").collapse('hide');
-            saveSettings();
-            updateOptionsFromCookie();
-          });
-          self.$buttonAgreeAll.click(function () {
-            $("#bccs-options").collapse('hide');
-            agreeAll();
-            updateOptionsFromCookie();
-          });
-        })
-        .fail(function () {
-          logger.error('\n' + 'loading consent modal: failed');
-          logger.warn('\n' + 'probably no `contentURL` set');
-        });
+        loadDialog(options);
       } else {
         self.$modal.modal('show');
       }
     }.bind(this));
   }
 
+  // ---------------------------------------------------------------------------
+  // updateOptionsFromCookie()
+  //
+  // ---------------------------------------------------------------------------
   function updateOptionsFromCookie() {
     var settings = self.getSettings();
     if (settings) {
@@ -279,7 +293,10 @@ function CookieConsent(props) {
       }
     }
   }
-
+  // ---------------------------------------------------------------------------
+  // updateButtons()
+  //
+  // ---------------------------------------------------------------------------
   function updateButtons() {
     if (detailedSettingsShown) {
       self.$buttonDoNotAgree.hide();
@@ -294,6 +311,10 @@ function CookieConsent(props) {
     }
   }
 
+  // ---------------------------------------------------------------------------
+  // gatherOptions()
+  //
+  // ---------------------------------------------------------------------------
   function gatherOptions(setAllExceptNecessary) {
     var $options = self.$modal.find("#bccs-options .bccs-option");
     var options = {};
@@ -312,24 +333,29 @@ function CookieConsent(props) {
     return options;
   }
 
+  // ---------------------------------------------------------------------------
+  // agreeAll()
+  //
+  // ---------------------------------------------------------------------------
   function agreeAll() {
     Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(true)), self.props.cookieStorageDays, self.props.cookieSameSite, cookieSecure);
     self.$modal.modal('hide');
   }
 
+  // ---------------------------------------------------------------------------
+  // doNotAgree()
+  //
+  // ---------------------------------------------------------------------------
   function doNotAgree() {
     Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), self.props.cookieStorageDays, self.props.cookieSameSite, cookieSecure);
-
-    // jadams, 2021-07-15: all cookies NOT longer supported by j1.expireCookie
-    // TODO: Create loop over all cookies found in page
-    //
-    // logger.warn('expire all cookies');
-    // j1.expireCookie('all');
-
     self.$modal.modal('hide');
     j1.goHome();
   }
 
+  // ---------------------------------------------------------------------------
+  // saveSettings()
+  //
+  // ---------------------------------------------------------------------------
   function saveSettings() {
     Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions()), self.props.cookieStorageDays, self.props.cookieSameSite, cookieSecure);
     self.$modal.modal('hide');
@@ -342,21 +368,34 @@ function CookieConsent(props) {
     showDialog();
   }
 
-  // API functions
   // ---------------------------------------------------------------------------
+  // API functions
+  // ===========================================================================
 
   logger.info('\n' + 'initializing core module finished');
   logger.info('\n' + 'state: finished');
 
-  // show the consent dialog (modal)
+  // ---------------------------------------------------------------------------
+  // loadDialog()
+  // load the consent dialog
+  // ---------------------------------------------------------------------------
+  this.loadDialog = function () {
+    loadDialog();
+  }; // END loadDialog
+
+  // ---------------------------------------------------------------------------
+  // showDialog()
+  // show the consent dialog
   // ---------------------------------------------------------------------------
   this.showDialog = function () {
     whitelisted  = (this.props.whitelisted.indexOf(window.location.pathname) > -1);
     if (!whitelisted) {
       showDialog();
     }
-  };
+  }; // END showDialog
 
+  // ---------------------------------------------------------------------------
+  // getSettings()
   // collect settings from consent cookie
   // ---------------------------------------------------------------------------
   this.getSettings = function (optionName) {
@@ -377,4 +416,4 @@ function CookieConsent(props) {
     }
   }; // END getSettings
 
-} // END BootstrapCookieConsent
+} // END CookieConsent

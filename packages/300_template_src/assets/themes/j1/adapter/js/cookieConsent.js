@@ -190,9 +190,9 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
           logger.info('\n' + 'state: ' + _this.getState());
           logger.debug('\n' + 'module initialized successfully');
 
-          // jadams, 2021-11-14: since bs@5 dialog needs to be PRELOADED
+          // jadams, 2021-11-14: WORKAROUND: since bs@5 dialog needs to be PRELOADED
           //
-          j1.cookieConsent.showDialog();
+          j1.cookieConsent.loadDialog();
 
           clearInterval(dependencies_met_page_ready);
         }
