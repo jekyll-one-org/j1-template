@@ -183,12 +183,17 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
             reloadPageOnChange:     moduleOptions.reloadPageOnChange,           // reload if setzings has changed
             dialogContainerID:      moduleOptions.dialogContainerID,            // container, the dialog modal is (dynamically) loaded
             xhrDataElement:         moduleOptions.xhrDataElement,               // container for all language-specific dialogs (modals)
-            postSelectionCallback:  moduleOptions.postSelectionCallback,        // callback function, called after the user has made his selection        
+            postSelectionCallback:  moduleOptions.postSelectionCallback,        // callback function, called after the user has made his selection
           });
 
           _this.setState('finished');
           logger.info('\n' + 'state: ' + _this.getState());
           logger.debug('\n' + 'module initialized successfully');
+
+          // jadams, 2021-11-14: since bs@5 dialog needs to be PRELOADED
+          //
+          j1.cookieConsent.showDialog();
+
           clearInterval(dependencies_met_page_ready);
         }
       });
