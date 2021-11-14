@@ -1,0 +1,33 @@
+/*
+// -----------------------------------------------------------------------------
+// ~/theme_uno/extentions/_banner.scss
+// Provides general styles for the J1 Banner
+//
+// Product/Info:
+// https://jekyll.one
+//
+// Copyright (C) 2021 Juergen Adams
+//
+// J1 Template is licensed under the MIT License.
+// See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+// -----------------------------------------------------------------------------
+*/
+
+// Content
+// -----------------------------------------------------------------------------
+
+.banner-divider {
+    // margin-right: 4.5rem;
+    // margin-left: 1.5rem;
+    border-bottom: 1px dotted $grey-400;
+}
+
+.banner-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: start;
+    justify-content: flex-start;
+    margin-left: -1rem;
+    padding: 0.75rem;
+    border-top: 1px solid #e0e0e0;
+}

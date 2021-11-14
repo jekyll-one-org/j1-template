@@ -1,0 +1,62 @@
+// -----------------------------------------------------------------------------
+// ~/theme_uno/extentions/_list-group-items.scss
+// Provides J1 styles for responsible list groups
+//
+// Product/Info:
+// https://jekyll.one
+//
+// Copyright (C) 2021 Juergen Adams
+//
+// J1 Template is licensed under the MIT License.
+// See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+// -----------------------------------------------------------------------------
+
+.list-group-item {
+  width: 96%;
+  margin-right: 1% !important;
+  // jadams, 2021-09-28: removed irritating etry space below an item
+  border: 0 !important;
+  background-color: transparent !important;
+}
+
+/*  Media breakpoints
+-------------------------------------------------------------------------------- */
+@media only screen and (min-width: 576px) {
+  .list-group-item.items-auto {
+    width: 48.3%; }
+  .list-group-item.items-1 {
+    width: 96%; }
+  .list-group-item.items-2 {
+    width: 48.3%; }
+  .list-group-item.items-3 {
+    width: 48.3%; }
+  .list-group-item.items-4 {
+    width: 48.3%; }
+}
+
+@media only screen and (min-width: 768px) {
+  .list-group-item.items-auto {
+    width: 31.333%; }
+  .list-group-item.items-1 {
+    width: 96%; }
+  .list-group-item.items-2 {
+    width: 48.3%; }
+  .list-group-item.items-3 {
+    width: 48.3%; }
+  .list-group-item.items-4 {
+    width: 48.3%; }
+}
+
+@media only screen and (min-width: 992px) {
+  .list-group-item.items-auto {
+    width: 23.8%; }
+  .list-group-item.items-1 {
+    width: 96%; }
+  .list-group-item.items-2 {
+    width: 48.3%;
+    }
+  .list-group-item.items-3 {
+    width: 31.333%; }
+  .list-group-item.items-4 {
+    width: 23.8%; }
+}

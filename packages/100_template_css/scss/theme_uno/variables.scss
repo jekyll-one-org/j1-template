@@ -88,17 +88,18 @@ $bmd-label-color-inner-focus:           $gray !default;                         
 
 // Theme colors based on Bootstrap Material Design default color set
 // usage: theme-color(primary)
-$theme-color: () !default;
-$theme-color: map-merge((
-  primary:                              $blue,
-  secondary:                            $blue-grey,
-  success:                              $green,
-  info:                                 $cyan,
-  warning:                              $yellow,
-  danger:                               $red,
-  light:                                $grey-100,
-  dark:                                 $grey-800
-), $theme-color);
+// $theme-colors: () !default;
+// $theme-colors: map-merge((
+//   primary:                              $blue,
+//   secondary:                            $blue-grey,
+//   success:                              $green,
+//   info:                                 $cyan,
+//   warning:                              $yellow,
+//   danger:                               $red,
+//   light:                                $grey-100,
+//   dark:                                 $grey-800
+// ), $theme-colors);
+
 
 // Customized BS variables
 // -----------------------------------------------------------------------------
@@ -138,10 +139,14 @@ $enable-shadows:                        true;                                   
 // -----------------------------------------------------------------------------
 @import "variables/custom";
 
+// BS variables NOT in files
+// -----------------------------------------------------------------------------
+$label-color-focus:                     $blue-800 !default;
+$label-color:                           $grey !default;
 
 // (B)MD variables NOT in files
 // -----------------------------------------------------------------------------
-$bmd-label-color-focus:                 theme-color(primary) !default;
+$bmd-label-color-focus:                 $blue-800 !default;
 $bmd-invalid-underline:                 $red-a700 !default;
 $bmd-readonly-underline:                $input-border-color !default;
 
@@ -150,7 +155,7 @@ $bmd-readonly-underline:                $input-border-color !default;
 
 //
 //-- unverified below here
-$bmd-brand-inverse:                     $indigo !default;
+$bmd-brand-inverse:                     $blue-600 !default;
 // Typography elements FIXME: review to see if we actually need these
 $icon-color:                            rgba($black, 0.5) !default;
 
@@ -163,23 +168,34 @@ $icon-color:                            rgba($black, 0.5) !default;
 $bmd-bmd-label-static-size-ratio:       75 / 100 !default;
 $bmd-help-size-ratio:                   75 / 100 !default;
 
-// $bmd-form-control-bg-repeat-y: repeat-y !default; // it could work with no-repeat, but on Safari it's bugged and repeat-y is needed, but repeat-y is bugged on the warning icon.
+// $bmd-form-control-bg-repeat-y: repeat-y !default;
+// it could work with no-repeat, but on Safari it's bugged and repeat-y
+// is needed, but repeat-y is bugged on the warning icon.
 $bmd-form-control-bg-repeat-y:          no-repeat !default;
 $bmd-form-control-bg-position:          center bottom, center calc(100% - 1px) !default;
 $bmd-form-control-bg-size:              0 100%, 100% 100% !default;
 $bmd-form-control-bg-size-active:       100% 100%, 100% 100% !default;
 
+// jadams, 2021-11-14:  map theme-color NOT expanded in several scss files:
+// theme_uno/bootstrap/_forms.scss
+$bmd-form-color-default:                $blue-700 !default;                     // ???
+$bmd-form-color-success:                $green !default;                        // theme-color(success)
+$bmd-form-color-info:                   $cyan !default;                         // theme-color(info)
+$bmd-form-color-warning:                $yellow !default;                       // theme-color(warning)
+$bmd-form-color-danger:                 $red !default;                          // theme-color(danger)
+
 // expandable
 $input-text-button-size:                32px !default;
 
 // sizing
-$bmd-form-line-height:                  1 !default; // set as 1x font-size so that padding is easier calculated to match the spec.
+// set as 1x font-size so that padding is easier calculated to match the spec.
+$bmd-form-line-height:                  1 !default;
 $bmd-label-top-margin-base:             1rem !default;
 
-$bmd-form-line-height-lg:               1 !default; // set as 1x font-size so that padding is easier calculated to match the spec.
+$bmd-form-line-height-lg:               1 !default;
 $bmd-label-top-margin-lg:               1rem !default; // 16px
 
-$bmd-form-line-height-sm:               1 !default; // set as 1x font-size so that padding is easier calculated to match the spec.
+$bmd-form-line-height-sm:               1 !default;
 $bmd-label-top-margin-sm:               .75rem !default; // 12px
 
 $text-disabled:                         #a8a8a8 !default;
@@ -189,37 +205,15 @@ $background-disabled:                   #eaeaea !default;
 $bmd-checkbox-size:                     1.25rem !default;
 $bmd-checkbox-animation-ripple:         500ms !default;
 $bmd-checkbox-animation-check:          0.3s !default;
-$bmd-checkbox-checked-color:            theme-color(primary) !default;
+$bmd-checkbox-checked-color:            $blue-800 !default;
 $bmd-checkbox-label-padding:            .3125rem !default; // 5px
 
 $bmd-checkbox-border-size:              .125rem !default;
 $bmd-checkbox-border-color:             $bmd-label-color-inner-focus !default;
 $bmd-checkbox-border-color-disabled:    $gray-light !default; //#bdbdbd !default;
 
-// Switches
-$bmd-switch-label-padding:              .3125rem !default; // 5px
-$bmd-switch-width:                      2.125rem !default; // 34px
-$bmd-switch-height:                     .875rem !default; // 14px
-$bmd-switch-handle-size:                1.25rem !default; // 20px (was 18px)
-
-$bmd-switch-handle-checked-bg:          theme-color(primary) !default;
-$bmd-switch-handle-unchecked-bg:        #f1f1f1 !default;
-$bmd-switch-handle-disabled-bg:         #bdbdbd !default;
-$bmd-switch-unchecked-bg:               $gray-light !default;
-
-// Disabled for bs@5
-// -----------------------------------------------------------------------------
-// $bmd-switch-checked-bg:                 desaturate(
-//                                           lighten($bmd-switch-handle-checked-bg, 28%),
-//                                           32%
-//                                         ); // kind of magic recipe
-
-$bmd-switch-checked-bg:               $gray-light !default;
-$bmd-switch-disabled-bg:                $gray-lighter !default;
-
 // Popovers and Popups
 $bmd-popover-background:                rgba(101, 101, 101, 0.9) !default;
-$bmd-popover-color:                     #ececec !default;
 
 // Radio:
 $bmd-radio-border:                      .125rem !default; // 2px
@@ -228,12 +222,28 @@ $bmd-radio-ripple-offset:               1em !default;
 $bmd-radio-label-padding:               .3125rem !default; // 5px
 
 $bmd-radio-color-off:                   $bmd-label-color-inner-focus !default; // FIXME seems inconsistent, check spec
-$bmd-radio-color-on:                    theme-color(primary) !default;
+$bmd-radio-color-on:                    $blue-800 !default;
 $bmd-radio-color-disabled:              $gray-light; // light theme spec: Disabled: #000000, Opacity  26%
 $bmd-radio-color-disabled-inverse:      rgba(
                                           $white,
                                           0.30
                                         ); // dark theme spec: Disabled: #FFFFFF, Opacity  30%
+
+// Switches
+$bmd-switch-label-padding:              .3125rem !default; // 5px
+$bmd-switch-width:                      2.125rem !default; // 34px
+$bmd-switch-height:                     .875rem !default; // 14px
+$bmd-switch-handle-size:                1.25rem !default; // 20px (was 18px)
+
+$bmd-switch-handle-checked-bg:          $blue-800 !default;
+$bmd-switch-handle-unchecked-bg:        $gray !default;
+$bmd-switch-handle-disabled-bg:         $gray-400 !default;
+$bmd-switch-unchecked-bg:               $gray-light !default;
+$bmd-switch-checked-bg:                 desaturate(
+                                          lighten($bmd-switch-handle-checked-bg, 28%),
+                                          32%
+                                        ); // kind of magic recipe
+$bmd-switch-disabled-bg:                $gray-lighter !default;
 
 // Animations
 $bmd-animation-curve-fast-out-slow-in:    cubic-bezier(0.4, 0, 0.2, 1) !default;

@@ -99,22 +99,26 @@ form {
 // State coloring: default, success, info, warning, danger
 //
 @include bmd-selection-color();
-@include bmd-form-color($bmd-label-color, $bmd-label-color-focus, $input-border-color);
+@include bmd-form-color($bmd-form-color-default, $bmd-form-color-default, $bmd-form-color-default);
 
 .has-success {
-  @include bmd-form-color(theme-color(success), theme-color(success), theme-color(success));
+//@include bmd-form-color(theme-color(success), theme-color(success), theme-color(success));
+  @include bmd-form-color($bmd-form-color-success, $bmd-form-color-success, $bmd-form-color-success);
 }
 
 .has-info {
-  @include bmd-form-color(theme-color(info), theme-color(info), theme-color(info));
+//@include bmd-form-color(theme-color(info), theme-color(info), theme-color(info));
+  @include bmd-form-color($bmd-form-color-info, $bmd-form-color-info, $bmd-form-color-info);
 }
 
 .has-warning {
-  @include bmd-form-color(theme-color(warning), theme-color(warning), theme-color(warning));
+//@include bmd-form-color(theme-color(warning), theme-color(warning), theme-color(warning));
+  @include bmd-form-color($bmd-form-color-warning, $bmd-form-color-warning, $bmd-form-color-warning);
 }
 
 .has-danger {
-  @include bmd-form-color(theme-color(danger), theme-color(danger), theme-color(danger));
+//@include bmd-form-color(theme-color(danger), theme-color(danger), theme-color(danger));
+  @include bmd-form-color($bmd-form-color-danger, $bmd-form-color-danger, $bmd-form-color-danger);
 }
 
 // Reference http://www.google.com/design/spec/components/text-fields.html

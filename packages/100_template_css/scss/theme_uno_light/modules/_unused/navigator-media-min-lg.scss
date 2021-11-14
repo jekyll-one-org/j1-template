@@ -1,0 +1,108 @@
+@media screen and (min-width: $grid-breakpoint-lg) {
+	.dropdown-submenu {
+		position: relative;
+		> a::after {
+			border-bottom: 0.3em solid transparent;
+			border-left-color: inherit;
+			border-left-style: solid;
+			border-left-width: 0.3em;
+			border-top: 0.3em solid transparent;
+			content: " ";
+			display: block;
+			float: right;
+			height: 0;
+			margin-right: -0.6em;
+			margin-top: -0.95em;
+			width: 0;
+		}
+		&.pull-left {
+			float: none;
+			> .dropdown-menu {
+				left: -75%;
+			}
+		}
+		> .dropdown-menu {
+			top: 0;
+			left: 100%;
+			margin-top: -6px;
+			margin-left: 0;
+      // jadams, 2019-01-17: Removed border radius
+			// border-radius: 0.25rem;
+		}
+		&:hover > .dropdown-menu {
+			display: block;
+		}
+	}
+	body.wrap-nav-sidebar .wrapper .container {
+		width: 100%;
+		padding-left: 30px;
+		padding-right: 30px;
+	}
+	nav.navbar.navigator {
+		.dropdown-menu {
+			transform-origin: unset;
+			will-change: unset;
+			transition: unset;
+      //jadams, 2019-02-01: TODO check what high for an dropdown item fits best
+			.dropdown-item {
+				padding: .5em 1em .5em 1em;
+        // padding: 1em 1em 1em 1em;
+			}
+      .dropdown-megamenu-item {
+        padding-left: .25em;
+        list-style: none;
+        font-size: .75em;
+			}
+      .dropdown-megamenu-item:hover {
+        background: #ECEFF1;
+			}
+		}
+    // jadams, 2019-01-19: removed padding, overload BS margin
+    // jadams, 2020-06-20: adjust size to make navbar equal in height (80px)
+    // for desktop AND mobile navigation
+		.navbar-brand {
+			padding: 0.5rem 1rem;
+      margin-right: 0;
+		}
+    //jadams, 2019-02-01: TODO check what high for an dropdown item fits best
+		.dropdown .nav-item {
+			padding: 0.5em 1em .5em 1em;
+      //padding: 1em 1em 1em 1em;
+		}
+		ul.nav {
+			&.navigator .dropdown {
+				&.nav-item .dropdown-toggle:after {
+					display: none;
+				}
+				&.megamenu-fw .dropdown-toggle:after {
+					display: none;
+				}
+			}
+			.dropdown-menu .dropdown-menu {
+				margin-top: -2px;
+        max-height: 350px;
+        overflow-y: auto;
+			}
+		}
+		li.dropdown ul.dropdown-menu {
+			&.megamenu-content {
+				left: 0;
+			}
+			> li > a {
+        display: inline-flex;
+        align-items: center;
+				border-bottom: 0;
+				text-decoration: none;
+			}
+		}
+	}
+	.nav-item + .nav-item {
+		margin-left: 0 !important;
+	}
+	.dropdown-menu .divider {
+		background-color: $grey-300;
+		height: 1px;
+		margin: 9px 0;
+		overflow: hidden;
+	}
+}  // END MIN width: $grid-breakpoint-lg (992px)

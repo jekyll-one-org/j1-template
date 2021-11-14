@@ -12,13 +12,6 @@
  # -----------------------------------------------------------------------------
 */
 
-// jadams, 2021-11-12: set NO gutters (like BS@5) for containers|rows
-//
-.g-0 {
-  padding-right: 0;
-  padding-left: 0;
-}
-
 // This is a set of flex-based layout containers necessary for components
 // such as the drawer. It allows for flex based positioning such as sticky
 // header and footer inside an bmd-layout, with a bmd-layout-content that

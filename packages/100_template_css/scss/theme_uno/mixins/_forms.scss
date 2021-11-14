@@ -21,6 +21,11 @@
 
 // SPEC:
 
+// BS variables NOT in files
+// -----------------------------------------------------------------------------
+// $label-color-focus:                  theme-color(primary) !default;
+$label-color-focus:                     $blue !default;
+
 @mixin bmd-disabled() {
   fieldset[disabled][disabled] &,
   &.disabled,
@@ -85,7 +90,7 @@
   }
 }
 
-@mixin bmd-form-color($label-color, $bmd-label-color-fokus, $border-color) {
+@mixin bmd-form-color($label-color, $label-color-focus, $border-color) {
   [class^='bmd-label'],
   [class*=' bmd-label'] {
     color: $label-color;
@@ -96,8 +101,8 @@
     // underline animation color on focus
     $underline-background-image: linear-gradient(
         to top,
-        $bmd-label-color-fokus 2px,
-        $gray-50 2px
+        $label-color-focus 2px,
+        fade-out($blue, 1) 2px
       ),
       linear-gradient(
         to top,
@@ -183,14 +188,11 @@
     // "Mixin form-validation-state is missing argument $icon."
     // Added dummy argument ""
     // org: @include form-validation-state("valid", $label-color);
-
-    // Disabled for bs@5
-    // -------------------------------------------------------------------------
-    // @include form-validation-state("valid", $label-color, "");
+    @include form-validation-state("valid", $label-color, "");
 
     [class^='bmd-label'],
     [class*=' bmd-label'] {
-      color: $bmd-label-color-fokus;
+      color: $label-color-focus;
     }
 
     .bmd-label-placeholder {

@@ -1,0 +1,101 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/bootstrap/_bs4styles.scss
+ # Old BS4 style for migration reasons
+ #
+ # See for bs5:
+ #  https://getbootstrap.com/docs/5.1/utilities/position/
+ # -----------------------------------------------------------------------------
+*/
+
+// card deck
+//
+.card-deck .card {
+    margin-bottom: 15px
+}
+
+@media (min-width: 576px) {
+    .card-deck {
+        display:flex;
+        flex-flow: row wrap;
+        margin-left: -15px;
+        margin-right: -15px
+    }
+
+    .card-deck .card {
+        flex: 1 0 0%;
+        margin-bottom: 0;
+        margin-left: 15px;
+        margin-right: 15px
+    }
+}
+
+// positioning
+//
+.float-left {
+    float: left!important
+}
+
+.float-right {
+    float: right!important
+}
+
+.float-none {
+    float: none!important
+}
+
+@media (min-width: 576px) {
+    .float-sm-left {
+        float:left!important
+    }
+
+    .float-sm-right {
+        float: right!important
+    }
+
+    .float-sm-none {
+        float: none!important
+    }
+}
+
+@media (min-width: 768px) {
+    .float-md-left {
+        float:left!important
+    }
+
+    .float-md-right {
+        float: right!important
+    }
+
+    .float-md-none {
+        float: none!important
+    }
+}
+
+@media (min-width: 992px) {
+    .float-lg-left {
+        float:left!important
+    }
+
+    .float-lg-right {
+        float: right!important
+    }
+
+    .float-lg-none {
+        float: none!important
+    }
+}
+
+@media (min-width: 1200px) {
+    .float-xl-left {
+        float:left!important
+    }
+
+    .float-xl-right {
+        float: right!important
+    }
+
+    .float-xl-none {
+        float: none!important
+    }
+}
