@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "site",
-  "version": "2021.3.2",
+  "version": "2021.3.3",
   "description": "Web/Content sources for J1 Starter",
   "main": "_config.yml",
   "config": {
@@ -141,8 +141,8 @@
     "shx": "^0.2.2"
   },
   "devDependencies": {
-    "eslint": "^7.19.0",
     "@webpack-cli/serve": "^1.6.0",
+    "eslint": "^7.19.0",
     "webpack": "^5.62.1",
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.4.0",

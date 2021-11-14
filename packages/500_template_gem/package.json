@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "gem",
-  "version": "2021.3.2",
+  "version": "2021.3.3",
   "description": "RubyGem sources for J1 Starter",
   "main": "j1-template.gemspec",
   "config": {
