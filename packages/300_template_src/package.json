@@ -2,7 +2,7 @@
   "private": true,
   "name": "src",
   "version": "2021.3.3",
-  "description": "Base Jekyll sources",
+  "description": "Base template sources",
   "homepage": "https://jekyll.one",
   "author": "Juergen Adams <jadams@jekyll-one.com> (https://jekyll.one)",
   "license": "MIT",
@@ -16,7 +16,6 @@
     "clean:lock": "shx rm -f *.lock && shx rm -f package-lock.json"
   },
   "dependencies": {
-    "jscroll": "^2.4.1",
     "npm-run-all": "^4.1.5",
     "shx": "^0.3.3"
   }

@@ -1,0 +1,24 @@
+Problem:
+--------------------------------------------------------------------------------
+
+Operating System: Windows 10
+Browser: Version 87.0.4280.88 (Official Build) (64-bit)
+
+Compiling the Bootstrap v5.0.0beta1 with enabled shadows, but setting some
+of variables to none produces warnings followed by setting invalid CSS
+properties (Example: box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.075), none;).
+
+Compiler warnings:
+
+WARNING: The keyword 'none' must be used as a single argument.
+    node_modules\bootstrap\scss\mixins\_box-shadow.scss 10:9   box-shadow()
+    node_modules\bootstrap\scss\forms\_form-control.scss 40:7  @import
+    node_modules\bootstrap\scss\_forms.scss 3:9                @import
+    resources\sass\app.scss 23:9                               root stylesheet
+
+
+Discussion:
+--------------------------------------------------------------------------------
+
+See:
+  https://github.com/twbs/bootstrap/issues/32412

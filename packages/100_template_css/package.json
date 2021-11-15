@@ -40,7 +40,6 @@
     "build_css": "run-p -s theme_css:*",
     "uglify_css": "run-p -s uglify_css:*",
     "theme_css:theme_bootstrap": "node-sass --importer=node_modules/node-sass-tilde-importer theme-bootstrap.scss dist/themes/bootstrap/bootstrap.css",
-    "theme_css:theme_bootstrap5": "node-sass --importer=node_modules/node-sass-tilde-importer theme-bootstrap5.scss dist/themes/bootstrap/bootstrap5.css",
     "theme_css:theme_uno_light": "node-sass --importer=node_modules/node-sass-tilde-importer theme-uno.scss dist/themes/uno-light/bootstrap.css",
     "theme_css:theme_uno_dark": "node-sass --importer=node_modules/node-sass-tilde-importer theme-uno-dark.scss dist/themes/uno-dark/bootstrap.css",
     "theme_css:icons_fontawesome": "node-sass --importer=node_modules/node-sass-tilde-importer icons-fontawesome.scss dist/icon-fonts/fontawesome.css",
@@ -51,7 +50,6 @@
     "theme_css:animate": "node-sass --importer=node_modules/node-sass-tilde-importer animate.scss dist/animate.css",
     "theme_css:vendor": "node-sass --importer=node_modules/node-sass-tilde-importer vendor.scss dist/vendor.css",
     "uglify_css:theme_bootstrap": "postcss dist/themes/bootstrap/bootstrap.css -o dist/themes/bootstrap/bootstrap.min.css",
-    "uglify_css:theme_bootstrap5": "postcss dist/themes/bootstrap/bootstrap5.css -o dist/themes/bootstrap/bootstrap5.min.css",
     "uglify_css:theme_uno_light": "postcss dist/themes/uno-light/bootstrap.css -o dist/themes/uno-light/bootstrap.min.css",
     "uglify_css:theme_uno_dark": "postcss dist/themes/uno-dark/bootstrap.css -o dist/themes/uno-dark/bootstrap.min.css",
     "uglify_css:icons_fontawesome": "postcss dist/icon-fonts/fontawesome.css -o dist/icon-fonts/fontawesome.min.css",
@@ -76,9 +74,6 @@
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.8.1",
-    "bootstrap": "^5.1.3",
-    "bootstrap-material-design": "^4.1.1",
-    "jquery": "^3.5.1",
-    "popper.js": "^1.14.7"
+    "bootstrap": "^5.1.3"
   }
 }

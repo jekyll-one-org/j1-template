@@ -45,12 +45,11 @@ const jsTemplatIndexIn =                path.join(jsSourcePath, jsTemplatIndex);
 // symbols ( to window|root) if requested. Needed e.g. for Bootstrap
 // for e.g. jQuery, Popper etc.
 // -----------------------------------------------------------------------------
-const providePlugins = new webpack.ProvidePlugin({
-  $:                                    'jquery',
-  jQuery:                               'jquery',
-  'window.jQuery':                      'jquery',
-  Popper:                               ['popper.js', 'default']
-});
+// const providePlugins = new webpack.ProvidePlugin({
+//   $:                                    'jquery',
+//   jQuery:                               'jquery',
+//   'window.jQuery':                      'jquery'
+// });
 
 
 // MODULE object definitions
