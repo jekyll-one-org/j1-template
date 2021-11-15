@@ -63,7 +63,7 @@ tag::urls[]
 
 :previewer-theme:                                 /pages/public/previewer/theme/
 
-:kickstarter-web-in-a-day:                        /pages/public/learn/kickstarter/web_in_a_day/meet_and_greet/
+:kickstarter-web-in-a-day:                        https://jekyll.one/pages/public/learn/kickstarter/web_in_a_day/meet_and_greet/
 end::urls[]
 
 

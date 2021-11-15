@@ -254,7 +254,7 @@ settings:
                     icon:               rocket
                     icon_color:         md-black
                     icon_size:          24px
-                    href:               /pages/public/learn/kickstarter/web_in_a_day/meet_and_greet/
+                    href:               https://jekyll.one/pages/public/learn/kickstarter/web_in_a_day/meet_and_greet/
                     target:
 
   # ----------------------------------------------------------------------------
