@@ -21,7 +21,9 @@
 // Navigation Tabs
 // -----------------------------------------------------------------------------
 .nav-tabs {
-  background: #009688;
+  background: $blue;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 .nav-tabs > li > a {
   color: $grey-100;

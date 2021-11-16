@@ -15,6 +15,7 @@ tags:                                   [ Bootstrap, Themes ]
 scrollbar:                              false
 scrollInPageHashes:                     false
 flowtext:                               false
+fab_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/previewer/theme/
 regenerate:                             false
@@ -190,7 +191,7 @@ colors. Then, customize with `.bg-*` utilities.
             <a class="nav-link" href="#">Link</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Dropdown
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -205,8 +206,8 @@ colors. Then, customize with `.bg-*` utilities.
           </li>
         </ul>
         <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+          <input class="form-control bg-body mt-1 me-5" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success ml-2" type="submit">Search</button>
         </form>
       </div>
     </div>
@@ -219,7 +220,12 @@ colors. Then, customize with `.bg-*` utilities.
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -231,7 +237,9 @@ colors. Then, customize with `.bg-*` utilities.
             <a class="nav-link" href="#">Link</a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a id="navbarDropdown" class="nav-link dropdown-toggle"
+              href="#"
+              role="button" data-bs-toggle="dropdown" aria-expanded="false">
               Dropdown
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -440,26 +448,26 @@ endif::[]
 ifeval::[{buttons_blocklevel} == true]
 === Block level button
 
-Create *block level* buttons that span the full width of a parent by adding
-the class `.btn-block`.
+Create responsive stacks of full-width *block buttons* like those in BS@4
+with a mix of *display* and *gap* utilities. By using *utilities* instead of
+button specific classes, you have much greater control over spacing, alignment,
+and responsive behaviors.
 
 ++++
 <div class="doc-example mb-3">
-  <button type="button" class="btn btn-primary btn-lg btn-block btn-raised">Block level button</button>
-  <button type="button" class="btn btn-secondary btn-lg btn-block btn-raised">Block level button</button>
+  <div class="d-grid gap-2">
+    <button type="button" class="btn btn-primary btn-lg btn-raised">Block level button</button>
+    <button type="button" class="btn btn-secondary btn-raised">Block level button</button>
+  </div>
 </div>
 ++++
 
 [source, html, role="noclip"]
 ----
-<button type="button"
-        class="btn btn-primary btn-lg btn-block btn-raised">
-  Block level button
-</button>
-<button type="button"
-        class="btn btn-secondary btn-lg btn-block btn-raised">
-  Block level button
-</button>
+<div class="d-grid gap-2">
+  <button type="button" class="btn btn-primary btn-lg btn-raised">Block level button</button>
+  <button type="button" class="btn btn-secondary btn-raised">Block level button</button>
+</div>
 ----
 endif::[]
 endif::[]
@@ -1113,13 +1121,13 @@ JavaScript plugin.
 <div class="doc-example mb-3">
   <ul class="nav nav-tabs">
     <li class="nav-item">
-      <a class="nav-link active" data-toggle="tab" href="#home">Home</a>
+      <a class="nav-link active" data-bs-toggle="tab" href="#home">Home</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-toggle="tab" href="#profile">Profile</a>
+      <a class="nav-link" data-bs-toggle="tab" href="#profile">Profile</a>
     </li>
     <li class="nav-item dropdown">
-      <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"
+      <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
         role="button"
         aria-haspopup="true" aria-expanded="false">
         Dropdown
@@ -1170,7 +1178,7 @@ Take that same HTML as Tabs, but use .nav-pills class instead.
           <a href="#" class="nav-link active">Active</a>
         </li>
         <li class="nav-item dropdown mr-1">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
           <div class="dropdown-menu">
             <a href="#" class="dropdown-item">Action</a>
             <a href="#" class="dropdown-item">Another action</a>
@@ -1194,7 +1202,7 @@ Take that same HTML as Tabs, but use .nav-pills class instead.
           <a href="#" class="nav-link active">Active</a>
         </li>
         <li class="nav-item dropdown mb-1">
-          <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
           <div class="dropdown-menu">
             <a href="#" class="dropdown-item">Action</a>
             <a href="#" class="dropdown-item">Another action</a>
@@ -2011,8 +2019,8 @@ from the top of the page.
   <!-- Button trigger modal -->
   <button type="button"
     class="btn btn-primary btn-raised"
-    data-toggle="modal"
-    data-target="#exampleSimpleModal">
+    data-bs-toggle="modal"
+    data-bs-target="#exampleSimpleModal">
     Launch Example
   </button>
 </div>
@@ -2027,7 +2035,7 @@ from the top of the page.
     <div class="modal-content">
       <div class="modal-header">
         <h5 id="exampleSimpleModalLabel" class="modal-title notoc">Modal title</h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true"</span>
         </button>
       </div>
@@ -2036,7 +2044,7 @@ from the top of the page.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary btn-flex btn-raised mr-2">Do nothing</button>
-        <button type="button" class="btn btn-secondary btn-flex btn-raised" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary btn-flex btn-raised" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -2052,8 +2060,8 @@ it (the backdrop).
   <!-- Button trigger modal -->
   <button type="button"
     class="btn btn-primary btn-raised"
-    data-toggle="modal"
-    data-target="#exampleStaticModal">
+    data-bs-toggle="modal"
+    data-bs-target="#exampleStaticModal">
     Launch Example
   </button>
 </div>
@@ -2070,7 +2078,7 @@ it (the backdrop).
     <div class="modal-content">
       <div class="modal-header">
         <h5 id="exampleStatcModalLabel" class="modal-title notoc">Modal title</h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true"</span>
         </button>
       </div>
@@ -2079,7 +2087,7 @@ it (the backdrop).
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary btn-flex btn-raised mr-2">Do nothing</button>
-        <button type="button" class="btn btn-secondary btn-flex btn-raised" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary btn-flex btn-raised" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -2096,8 +2104,8 @@ the height.
   <!-- Button trigger modal -->
   <button type="button"
     class="btn btn-primary btn-raised"
-    data-toggle="modal"
-    data-target="#exampleModalLong">
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModalLong">
     Launch Example
   </button>
 </div>
@@ -2113,7 +2121,7 @@ the height.
     <div class="modal-content">
       <div class="modal-header">
         <h5 id="exampleModalLongTitle" class="modal-title notoc">The Extremes of Good and Evil</h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true"</span>
         </button>
       </div>
@@ -2155,7 +2163,7 @@ the height.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary btn-flex btn-raised mr-2">Do nothing</button>
-        <button type="button" class="btn btn-secondary btn-flex btn-raised" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary btn-flex btn-raised" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -2171,8 +2179,8 @@ modal body. Try the demo and scroll the content.
   <!-- Button trigger modal -->
   <button type="button"
     class="btn btn-primary btn-raised"
-    data-toggle="modal"
-    data-target="#exampleModalLongScrollable">
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModalLongScrollable">
     Launch Example
   </button>
 </div>
@@ -2188,7 +2196,7 @@ modal body. Try the demo and scroll the content.
     <div class="modal-content">
       <div class="modal-header">
         <h5 id="exampleModalLongScrollableTitle" class="modal-title notoc">The Extremes of Good and Evil</h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true"</span>
         </button>
       </div>
@@ -2230,7 +2238,7 @@ modal body. Try the demo and scroll the content.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary btn-flex btn-raised mr-2">Do nothing</button>
-        <button type="button" class="btn btn-secondary btn-flex btn-raised" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary btn-flex btn-raised" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -2245,7 +2253,7 @@ modal body. Try the demo and scroll the content.
   <!-- Button trigger modal -->
   <button type="button"
     class="btn btn-primary btn-raised"
-    data-toggle="modal" data-target="#exampleModalVerticalCenter">
+    data-bs-toggle="modal" data-bs-target="#exampleModalVerticalCenter">
     Launch Example
   </button>
 </div>
@@ -2260,7 +2268,7 @@ modal body. Try the demo and scroll the content.
     <div class="modal-content">
       <div class="modal-header">
         <h5 id="exampleModalVerticalCenterTitle" class="modal-title notoc">Modal title</h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true"</span>
         </button>
       </div>
@@ -2271,7 +2279,7 @@ modal body. Try the demo and scroll the content.
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary btn-flex btn-raised mr-2">Do nothing</button>
-        <button type="button" class="btn btn-secondary btn-flex btn-raised" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary btn-flex btn-raised" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -2287,8 +2295,8 @@ closed, any tooltips and popovers within are also automatically dismissed.
   <!-- Button trigger modal -->
   <button type="button"
     class="btn btn-primary btn-raised"
-    data-toggle="modal"
-    data-target="#exampleModalTooltip">
+    data-bs-toggle="modal"
+    data-bs-target="#exampleModalTooltip">
     Launch Example
   </button>
 </div>
@@ -2303,20 +2311,20 @@ closed, any tooltips and popovers within are also automatically dismissed.
     <div class="modal-content">
       <div class="modal-header">
         <h4 id="exampleModalTooltipTitle" class="modal-title notoc">Modal title</h4>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
           <span aria-hidden="true"</span>
         </button>
       </div>
       <div class="modal-body">
         <h4 class="notoc">Popover in a modal</h4>
-        <p>This <a href="#" role="button" class="btn btn-primary btn-raised popover-test" data-toggle="popover" title="Popover title" data-content="Popover body content is set in this attribute.">button</a> triggers a popover on hover or click.</p>
+        <p>This <a href="#" role="button" class="btn btn-primary btn-raised popover-test" data-bs-toggle="popover" title="Popover title" data-content="Popover body content is set in this attribute.">button</a> triggers a popover on hover or click.</p>
         <hr>
         <h4 class="notoc">Tooltips in a modal</h4>
         <p><a href="#" class="tooltip-test" data-bs-toggle="tooltip" title="Tooltip">This link</a> and <a href="#" class="tooltip-test" data-bs-toggle="tooltip" title="Tooltip">that link</a> have tooltips on hover.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary btn-flex btn-raised mr-2">Do nothing</button>
-        <button type="button" class="btn btn-secondary btn-flex btn-raised" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary btn-flex btn-raised" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
@@ -2331,8 +2339,8 @@ closed, any tooltips and popovers within are also automatically dismissed.
 <div class="ml-0">
   <button type="button"
     class="btn btn-primary btn-raised"
-    data-toggle="modal"
-    data-target="#exampleSimpleModal">
+    data-bs-toggle="modal"
+    data-bs-target="#exampleSimpleModal">
     Launch Example
   </button>
 </div>
@@ -2351,7 +2359,7 @@ closed, any tooltips and popovers within are also automatically dismissed.
         <button
           type="button"
           class="btn-close"
-          data-dismiss="modal"
+          data-bs-dismiss="modal"
           aria-label="Close">
           <span aria-hidden="true"</span>
         </button>
@@ -2366,7 +2374,7 @@ closed, any tooltips and popovers within are also automatically dismissed.
         <button
           type="button"
           class="btn btn-secondary btn-flex btn-raised"
-          data-dismiss="modal"> Close
+          data-bs-dismiss="modal"> Close
         </button>
       </div>
     </div>
@@ -2489,3 +2497,29 @@ link:{url-bs-docs--components-popovers}[Bootstrap Docs {char-middot} Popovers, {
 
 endif::[]
 endif::[]
+
+
+++++
+<script>
+  $(function () {
+    $.expr[':'].regex = function(elem, index, match) {
+       var matchParams = match[3].split(','),
+          validLabels = /^(data|css):/,
+          attr = {
+             method: matchParams[0].match(validLabels) ?
+                matchParams[0].split(':')[0] : 'attr',
+             property: matchParams.shift().replace(validLabels, '')
+          },
+          regexFlags = 'ig',
+          regex = new RegExp(matchParams.join('').replace(/^\s+|\s+$/g, ''), regexFlags);
+       return regex.test($(elem)[attr.method](attr.property));
+    }
+
+    $(':regex(href,$navbars)').click(function(e) {
+      e.preventDefault ? e.preventDefault() : e.returnValue = false;
+      logger.info('bound click event to "?#*", suppress default action');
+    });
+
+  });
+</script>
+++++

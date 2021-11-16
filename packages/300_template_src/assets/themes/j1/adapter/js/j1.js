@@ -2213,9 +2213,11 @@ var j1 = (function () {
 
       // bs tool tips
       // -----------------------------------------------------------------------
-      $('head').append('<style>.tooltip-inner { background-color: ' +bg_primary+ ' !important; }</style>');
-//    $('head').append('<style>.tooltip-arrow { background-color: ' +bg_primary+ ' !important; }</style>');
-      $('head').append('<style>.bs-tooltip-auto[x-placement^=bottom] .arrow::before, .bs-tooltip-bottom .arrow::before { border-bottom-color: ' +bg_primary+ ' !important; }</style>');
+      // $('head').append('<style>.tooltip-inner { background-color: ' +bg_primary+ ' !important; }</style>');
+      // $('head').append('<style>.bs-tooltip-top .tooltip-arrow::before { border-top-color: ' +bg_primary+ ' !important; }</style>');
+      // $('head').append('<style>.bs-tooltip-end .tooltip-arrow::before { border-right-color: ' +bg_primary+ ' !important; }</style>');
+      // $('head').append('<style>.bs-tooltip-bottom .tooltip-arrow::before { border-bottom-color: ' +bg_primary+ ' !important; }</style>');
+      // $('head').append('<style>.bs-tooltip-start .tooltip-arrow::before { border-left-color: ' +bg_primary+ ' !important; }</style>');
 
       // asciidoc results viewer
       // -----------------------------------------------------------------------

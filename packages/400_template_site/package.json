@@ -124,6 +124,7 @@
     "link-osx:plugins": "shx ln -s ../300_template_src/_plugins ./_plugins",
     "link-osx:sass": "shx ln -s ../100_template_css/scss ./_sass",
     "link-osx:templates": "shx ln -s ../300_template_src/_install ./_install",
+    "remove-links": "shx rm -rf _includes _layouts _plugins _install apps assets",
     "get_version": "run-p -s get_version:*",
     "get_version:jekyll": "cross-var cross-env JEKYLL_ENV=$npm_package_config_mode BUNDLE_GEMFILE=$npm_package_ruby_gemfile bundle exec jekyll --version"
   },

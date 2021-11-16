@@ -17,17 +17,43 @@
   background: $grey-300;
 }
 
-.popover.bottom .arrow:after {
-  border-bottom-color: $grey-300;
+.popover-header {
+  background-color: $grey-200;
+}
+
+.bs-popover-top .popover-arrow:after {
+  border-top-color: $grey-300 !important;
+}
+.bs-popover-end .popover-arrow:after {
+  border-right-color: $grey-300 !important;
+}
+.bs-popover-bottom .popover-arrow:after {
+  border-bottom-color: $grey-200 !important;
+}
+.bs-popover-start .popover-arrow:after {
+  border-left-color: $grey-300 !important;
 }
 
 // colored popovers
 // -----------------------------------------------------------------------------
 
-.popover-md-red + .popover {
-  background: $red;
+.popover + .popover-md-red {
+  background: $red-300;
 }
 
-.popover-md-red + .popover.bottom .arrow:after {
-  border-bottom-color: $red;
+.popover-header + .popover-md-red {
+  background-color: $red-200;
+}
+
+.bs-popover-top + .popover-md-red .popover-arrow:after {
+  border-top-color: $red-300 !important;
+}
+.bs-popover-end + .popover-md-red .popover-arrow:after {
+  border-right-color: $red-300 !important;
+}
+.bs-popover-bottom + .popover-md-red .popover-arrow:after {
+  border-bottom-color: $red-200 !important;
+}
+.bs-popover-start + .popover-md-red .popover-arrow:after {
+  border-left-color: $red-300 !important;
 }

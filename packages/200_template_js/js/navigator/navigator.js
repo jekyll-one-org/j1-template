@@ -61,6 +61,23 @@ module.exports = function navigator ( options ) {
   // ---------------------------------------------------------------------------
   return {
 
+    // https://gist.github.com/fny/1887398
+    //
+    // $(function () {
+    //   $.expr[':'].regex = function(elem, index, match) {
+    //      var matchParams = match[3].split(','),
+    //         validLabels = /^(data|css):/,
+    //         attr = {
+    //            method: matchParams[0].match(validLabels) ?
+    //               matchParams[0].split(':')[0] : 'attr',
+    //            property: matchParams.shift().replace(validLabels, '')
+    //         },
+    //         regexFlags = 'ig',
+    //         regex = new RegExp(matchParams.join('').replace(/^\s+|\s+$/g, ''), regexFlags);
+    //      return regex.test($(elem)[attr.method](attr.property));
+    //   }
+    // });
+
     // -------------------------------------------------------------------------
     // module initializer
     // -------------------------------------------------------------------------
@@ -129,8 +146,18 @@ module.exports = function navigator ( options ) {
       //
       $('a[href="#"]').click(function(e) {
         e.preventDefault ? e.preventDefault() : e.returnValue = false;
-        logger.info('bound click event to "#", suppress default action');
+        logger.info('\n' + 'bound click event to "#", suppress default action');
       });
+
+      $('a[href$="#"]').click(function(e) {
+        e.preventDefault ? e.preventDefault() : e.returnValue = false;
+        logger.info('bound click event to "?#*", suppress default action');
+      });
+
+      // $('a:contains("?#")').click(function(e) {
+      //   e.preventDefault ? e.preventDefault() : e.returnValue = false;
+      //   logger.info('bound click event to "?#*", suppress default action');
+      // });
 
       // -----------------------------------------------------------------------
       // Navbar Sticky
