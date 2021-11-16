@@ -302,9 +302,15 @@ j1.adapter['translator'] = (function (j1, window) {
             }
           }
 
+          $('#quickLinksTranslateButton').click(function(e) {
+            logger.info('\n' + 'call default action');
+            j1.translator.showDialog();
+          });
+
           _this.setState('finished');
           logger.info('\n' + 'state: ' + _this.getState());
           logger.debug('\n' + 'module initialized successfully');
+
           clearInterval(dependencies_met_page_ready);
         }
       });

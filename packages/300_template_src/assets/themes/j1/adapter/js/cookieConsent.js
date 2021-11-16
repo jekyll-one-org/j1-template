@@ -189,6 +189,12 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
           _this.setState('finished');
           logger.info('\n' + 'state: ' + _this.getState());
           logger.debug('\n' + 'module initialized successfully');
+
+          $('#quickLinksCookieButton').click(function(e) {
+            logger.info('\n' + 'call default action');
+            j1.cookieConsent.showDialog();
+          });
+
           clearInterval(dependencies_met_page_ready);
         }
       });
