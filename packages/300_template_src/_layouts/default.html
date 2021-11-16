@@ -76,6 +76,10 @@ layout:                                 compress
 {% assign popovers_options     = template_config.bootstrap.popovers %}
 {% assign smoothscroll_options = template_config.smoothScroll %}
 
+
+{% comment %} tooltips_options: {{ tooltips_options | debug }}{% endcomment %}
+
+
 {% comment %} Webhooks disabled
 --------------------------------------------------------------------------------
 {% assign webhook_options      = webhook_defaults | merge: webhook_settings %}
@@ -247,8 +251,9 @@ layout:                                 compress
     $(function() {
     {% comment %} BS tooltips and popovers
     ---------------------------------------------------------------------------- {% endcomment %}
-    // initialize BS tooltips and popovers
+
     {% if tooltips_options.enabled %}
+      // initialize BS tooltips
       var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
       var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl)
@@ -256,6 +261,7 @@ layout:                                 compress
     {% endif %}
 
     {% if popovers_options.enabled %}
+      // initialize BS popovers
       var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
       var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
         return new bootstrap.Popover(popoverTriggerEl)

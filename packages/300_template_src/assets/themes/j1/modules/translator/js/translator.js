@@ -12,6 +12,7 @@
  #  See: https://github.com/jekyll-one/J1 Template/blob/master/LICENSE
  # -----------------------------------------------------------------------------
 */
+
 // -----------------------------------------------------------------------------
 // ESLint shimming
 // -----------------------------------------------------------------------------
@@ -25,7 +26,6 @@
 
 'use strict';
 function Translator(props) {
-
   // ---------------------------------------------------------------------------
   // global vars
   // ---------------------------------------------------------------------------
@@ -257,164 +257,7 @@ function Translator(props) {
   }
 
   // ---------------------------------------------------------------------------
-  // loadDialog()
-  // load the translation dialog (modal)
-  // ---------------------------------------------------------------------------
-  function loadDialog() {
-    logger.info('\n' +  'load consent modal');
-    self.modal = document.createElement('div');
-    self.modal.id = self.props.dialogContainerID;
-    self.modal.setAttribute('class', 'modal fade');
-    self.modal.setAttribute('tabindex', '-1');
-    self.modal.setAttribute('role', 'dialog');
-    self.modal.setAttribute('aria-labelledby', self.props.dialogContainerID);
-    document.body.append(self.modal);
-    self.$modal = $(self.modal);
-
-    // ---------------------------------------------------------------------
-    // register events for the dialog (modal)
-    // ---------------------------------------------------------------------
-
-    // ---------------------------------------------------------------------
-    // on 'show'
-    // ---------------------------------------------------------------------
-    self.$modal.on('show.bs.modal', function () {
-      var msDropdownJSON;
-      var index;
-
-      logger.info('\n' + 'show.bs.modal: entered');
-
-      // create msDropdown from JSON data
-      $.when (
-        createMsDropdownFromJSON({
-          url:                '/assets/data/iso-639-language-codes-flags.json',
-          elm:                'iso-639-languages',
-          selector:           'dropdownJSON',
-          width:              400,
-          visibleRows:        8,
-        })
-      )
-      .then(function(data) {
-        logger.info('\n' + 'creating msDropdown from JSON data: finished');
-      });
-    }); // END modal on 'show'
-
-    // ---------------------------------------------------------------------
-    // on 'shown'
-    // ---------------------------------------------------------------------
-    self.$modal.on('shown.bs.modal', function () {
-      var msDropdownJSON;
-      var dependencies_met_msDropdownJSON_loaded;
-
-      // found msDropdownJSON loaded slow on some PC
-      dependencies_met_msDropdownJSON_loaded = setInterval (function () {
-        if (typeof document.getElementById('dropdownJSON').msDropdown !== 'undefined') {
-          msDropdownJSON = document.getElementById('dropdownJSON').msDropdown;
-          if (!msDropdownJSON.length) {
-            // critical error
-            logger.error('\n' + 'no msDropdown found in translation dialog');
-            self.$modal.hide();
-          } else {
-            // set translation language for auto detection
-            if (self.props.translationLanguage === 'auto') {
-              navigator_language   = navigator.language || navigator.userLanguage;
-              translation_language = navigator_language.split('-')[0];
-            } else {
-              translation_language = self.props.translationLanguage;
-            }
-
-            // set translation language for the dropdown
-            msDropdownJSON.selectedIndex = $('#dropdownJSON option[value=' +  translation_language + ']').index();;
-
-            // disable translation language selection
-            if (self.props.disableLanguageSelector) {
-              msDropdownJSON.disabled = true;
-            }
-
-            $('#dropdownJSON').show();
-
-            // jadams, 2021-10-18: added stop scrolling on the body,
-            // if modal is OPEN
-            $('body').addClass('stop-scrolling');
-
-            logger.info('\n' + 'msDropdown successfully loaded in translation dialog');
-            clearInterval(dependencies_met_msDropdownJSON_loaded);
-          }
-        }
-      }, 25);
-
-    }); // END modal on 'shown'
-
-    // ---------------------------------------------------------------------
-    // on 'hidden'
-    // ---------------------------------------------------------------------
-    self.$modal.on('hidden.bs.modal', function () {
-      $('body').removeClass('stop-scrolling');
-      // run the postSelectionCallback for (final) translation
-      executeFunctionByName (self.props.postSelectionCallback, window);
-    }); // END modal on 'hidden'
-
-    // ---------------------------------------------------------------------
-    // load the dialog (modal content)
-    // ---------------------------------------------------------------------
-    var templateUrl = self.props.contentURL + '/' + 'index.html';
-    $.get(templateUrl)
-    .done(function (data) {
-      logger.info('\n' + 'loading consent modal: successfully');
-      self.modal.innerHTML = data;
-      self.modal.innerHTML = $('#' + self.props.xhrDataElement).eq(0).html();
-
-      $(self.modal).modal({
-        backdrop: 'static',
-        keyboard: false
-      });
-
-      self.$buttonDoNotAgree = $('#translator-buttonDoNotAgree');
-      self.$buttonAgree      = $('#translator-buttonAgree');
-      self.$buttonSave       = $('#translator-buttonSave');
-      self.$buttonAgreeAll   = $('#translator-buttonAgreeAll');
-
-      logger.info('\n' + 'load/initialze options from cookie');
-      updateButtons();
-      updateOptionsFromCookie();
-
-      // -------------------------------------------------------------------
-      // register button events for the dialog (modal)
-      // -------------------------------------------------------------------
-      $('#google-options').on('hide.bs.collapse', function () {
-        detailedSettingsShown = false;
-        updateButtons();
-      }).on('show.bs.collapse', function () {
-        detailedSettingsShown = true;
-        updateButtons();
-      });
-
-      logger.info('\n' + 'initialze button event handler');
-
-      self.$buttonDoNotAgree.click(function () {
-        doNotAgree();
-      });
-      self.$buttonAgree.click(function () {
-        agreeAll();
-      });
-      self.$buttonSave.click(function () {
-        $('#google-options').collapse('hide');
-        saveSettings();
-        updateOptionsFromCookie();
-      });
-      self.$buttonAgreeAll.click(function () {
-        $('#google-options').collapse('hide');
-        agreeAll();
-      });
-    })
-    .fail(function () {
-      logger.error('\n' + 'loading translator dialog (modal): failed');
-      logger.warn('\n' + 'probably no|wrong `contentURL` set');
-    });
-  }
-
-  // ---------------------------------------------------------------------------
-  // showDialog()
+  // showDialog
   // Show|Create the translation dialog (modal)
   // ---------------------------------------------------------------------------
   function showDialog() {
@@ -422,7 +265,161 @@ function Translator(props) {
 
       self.modal = document.getElementById(self.props.dialogContainerID);
       if (!self.modal) {
-        loadDialog();
+        logger.info('\n' +  'load consent modal');
+
+        self.modal = document.createElement('div');
+        self.modal.id = self.props.dialogContainerID;
+        self.modal.style.display = 'none';
+
+        self.modal.setAttribute('class', 'modal fade');
+        self.modal.setAttribute('tabindex', '-1');
+        self.modal.setAttribute('role', 'dialog');
+        self.modal.setAttribute('aria-labelledby', self.props.dialogContainerID);
+        document.body.append(self.modal);
+        self.$modal = $(self.modal);
+
+        // ---------------------------------------------------------------------
+        // register events for the dialog (modal)
+        // ---------------------------------------------------------------------
+
+        // ---------------------------------------------------------------------
+        // on 'show'
+        // ---------------------------------------------------------------------
+        self.$modal.on('show.bs.modal', function () {
+          var msDropdownJSON;
+          var index;
+
+          logger.info('\n' + 'show.bs.modal: entered');
+
+          // create msDropdown from JSON data
+          $.when (
+            createMsDropdownFromJSON({
+              url:                '/assets/data/iso-639-language-codes-flags.json',
+              elm:                'iso-639-languages',
+              selector:           'dropdownJSON',
+              width:              400,
+              visibleRows:        8,
+            })
+          )
+          .then(function(data) {
+            logger.info('\n' + 'creating msDropdown from JSON data: finished');
+          });
+        }); // END modal on 'show'
+
+        // ---------------------------------------------------------------------
+        // on 'shown'
+        // ---------------------------------------------------------------------
+        self.$modal.on('shown.bs.modal', function () {
+          var msDropdownJSON;
+          var dependencies_met_msDropdownJSON_loaded;
+
+          // found msDropdownJSON loaded slow on some PC
+          dependencies_met_msDropdownJSON_loaded = setInterval (function () {
+            if (typeof document.getElementById('dropdownJSON').msDropdown !== 'undefined') {
+              msDropdownJSON = document.getElementById('dropdownJSON').msDropdown;
+              if (!msDropdownJSON.length) {
+              	// critical error
+              	logger.error('\n' + 'no msDropdown found in translation dialog');
+              	self.$modal.hide();
+              } else {
+              	// set translation language for auto detection
+              	if (self.props.translationLanguage === 'auto') {
+              	  navigator_language   = navigator.language || navigator.userLanguage;
+              	  translation_language = navigator_language.split('-')[0];
+              	} else {
+              	  translation_language = self.props.translationLanguage;
+              	}
+
+              	// set translation language for the dropdown
+              	msDropdownJSON.selectedIndex = $('#dropdownJSON option[value=' +  translation_language + ']').index();;
+
+              	// disable translation language selection
+              	if (self.props.disableLanguageSelector) {
+              	  msDropdownJSON.disabled = true;
+              	}
+
+              	$('#dropdownJSON').show();
+
+              	// jadams, 2021-10-18: added stop scrolling on the body,
+              	// if modal is OPEN
+              	$('body').addClass('stop-scrolling');
+
+                logger.info('\n' + 'msDropdown successfully loaded in translation dialog');
+                clearInterval(dependencies_met_msDropdownJSON_loaded);
+              }
+            }
+          }, 25);
+
+        }); // END modal on 'shown'
+
+        // ---------------------------------------------------------------------
+        // on 'hidden'
+        // ---------------------------------------------------------------------
+        self.$modal.on('hidden.bs.modal', function () {
+          $('body').removeClass('stop-scrolling');
+          // run the postSelectionCallback for (final) translation
+          executeFunctionByName (self.props.postSelectionCallback, window);
+        }); // END modal on 'hidden'
+
+        // ---------------------------------------------------------------------
+        // load the dialog (modal content)
+        // ---------------------------------------------------------------------
+        var templateUrl = self.props.contentURL + '/' + 'index.html';
+        $.get(templateUrl)
+        .done(function (data) {
+          logger.info('\n' + 'loading consent modal: successfully');
+          self.modal.innerHTML = data;
+          self.modal.innerHTML = $('#' + self.props.xhrDataElement).eq(0).html();
+          self.modal.style.display  = 'block';
+
+          $(self.modal).modal({
+            backdrop: 'static',
+            keyboard: false
+          });
+
+          self.$buttonDoNotAgree = $('#translator-buttonDoNotAgree');
+          self.$buttonAgree      = $('#translator-buttonAgree');
+          self.$buttonSave       = $('#translator-buttonSave');
+          self.$buttonAgreeAll   = $('#translator-buttonAgreeAll');
+
+          logger.info('\n' + 'load/initialze options from cookie');
+          updateButtons();
+          updateOptionsFromCookie();
+
+          // -------------------------------------------------------------------
+          // register button events for the dialog (modal)
+          // -------------------------------------------------------------------
+          $('#google-options').on('hide.bs.collapse', function () {
+            detailedSettingsShown = false;
+            updateButtons();
+          }).on('show.bs.collapse', function () {
+            detailedSettingsShown = true;
+            updateButtons();
+          });
+
+          logger.info('\n' + 'initialze button event handler');
+
+          self.$buttonDoNotAgree.click(function () {
+            doNotAgree();
+          });
+          self.$buttonAgree.click(function () {
+            agreeAll();
+          });
+          self.$buttonSave.click(function () {
+            $('#google-options').collapse('hide');
+            saveSettings();
+            updateOptionsFromCookie();
+          });
+          self.$buttonAgreeAll.click(function () {
+            $('#google-options').collapse('hide');
+            agreeAll();
+          });
+          self.$modal.modal('show');
+        })
+        .fail(function () {
+          logger.error('\n' + 'loading translator dialog (modal): failed');
+          logger.warn('\n' + 'probably no|wrong `contentURL` set');
+        });
       } else {
         self.$modal.modal('show');
       }
@@ -567,17 +564,9 @@ function Translator(props) {
     self.$modal.modal('hide');
   }
 
-  // ---------------------------------------------------------------------------
+  // ===========================================================================
   // API functions
   // ===========================================================================
-
-  // ---------------------------------------------------------------------------
-  // loadDialog()
-  // show the translator dialog (modal)
-  // ---------------------------------------------------------------------------
-  this.loadDialog = function () {
-    loadDialog();
-  }; // END loadDialog
 
   // ---------------------------------------------------------------------------
   // showDialog()

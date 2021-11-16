@@ -305,11 +305,6 @@ j1.adapter['translator'] = (function (j1, window) {
           _this.setState('finished');
           logger.info('\n' + 'state: ' + _this.getState());
           logger.debug('\n' + 'module initialized successfully');
-
-          // jadams, 2021-11-14: WORKAROUND: since bs@5 dialog needs to be PRELOADED
-          //
-          j1.translator.loadDialog();
-
           clearInterval(dependencies_met_page_ready);
         }
       });

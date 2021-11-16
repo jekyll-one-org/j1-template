@@ -985,8 +985,8 @@ var j1 = (function () {
 
       // if personalized content detected, page requires user consent
       if (personalization && !user_consent.personalization) {
-        // redirect to error paged (blocked content)
-        window.location.href = "/444.html";
+        // redirect to error page: blocked content
+        window.location.href = '/444.html';
       }
 
       logger.info('\n' + 'finalize page');
