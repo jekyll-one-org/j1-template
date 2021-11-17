@@ -86,7 +86,7 @@ resource_options:
 :containers_list_groups:                false
 :cards:                                 true
 :cards_simple:                          true
-:cards_image:                           true
+:cards_image:                           false
 :dialogs:                               true
 :dialogs_modals:                        true
 :dialogs_popovers_tooltips:             true
