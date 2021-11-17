@@ -39,8 +39,6 @@ All you’re doing at the end of the day is writing your content, and the J1
 Template does all the tricky things: putting out HTML, Javascript, and CSS.
 As a result, the site creation process gets out of your way.
 
-*Sounds fun, isn't it*?
-
 excerpt__end
 
 //  Load Liquid procedures

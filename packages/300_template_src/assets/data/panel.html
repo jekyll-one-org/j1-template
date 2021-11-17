@@ -346,7 +346,7 @@ exclude_from_search:                    true
             <div class="row {{panel_settings.id}}" style="display: none;">
             {% assign card_items = cards | size %}
 
-            <ul id="{{panel_settings.id}}-scroll-group" class="list-group list-group-horizontal align-items-stretch flex-wrap">
+            <ul id="{{panel_settings.id}}-scroll-group" class="scroll-group scroll-group-horizontal align-items-stretch flex-wrap">
 
             {% assign cards_written     = 0 %}
 
@@ -374,7 +374,7 @@ exclude_from_search:                    true
 
               {% if card_type == "service" and card_enabled %}
               {% assign cards_written = cards_written|plus:1 %}
-              <li id="{{panel_settings.id}}-scroll-item" class="list-group-item items-2 p-0">
+              <li id="{{panel_settings.id}}-scroll-item" class="scroll-group-item items-2 p-0">
                 <article class="card raised-z3 card-same-height mb-3">
                   <div class="card-profile mb-0">
 
@@ -457,11 +457,11 @@ exclude_from_search:                    true
         {% if debug %}<!-- panel_options:  {{panel_options}} -->{% endif %}
         <!-- Panel {{panel_settings.id}} -->
         <section id="{{panel_settings.id}}" class="container">
-          <div class="row {{panel_settings.properties}}">
+          <div class="container {{panel_settings.properties}}">
 
             {% if panel_options.title %}
             <!-- Heading -->
-            <div class="noclass">
+            <div>
               <div class="{{panel_settings.animate}} mb-2">
                 <h2 class="g-font-weight-500 mb-0">{{panel_options.title}}</h2>
                 <p class="tagline mb-0"><b>{{panel_options.tagline}}</b></p>
@@ -514,16 +514,16 @@ exclude_from_search:                    true
 
               <!-- [INFO   ] [j1.assets.data.panel.html             ] [ blocktype detected as: {{card_block}} ] -->
               {% if card_block == 'card-list' %}
-              <div class="noclass">
-                <ul id="{{panel_settings.id}}-scroll-group" class="list-group list-group-horizontal align-items-stretch flex-wrap">
+              <div>
+                <ul id="{{panel_settings.id}}-scroll-group" class="scroll-group scroll-group-horizontal align-items-stretch flex-wrap">
                   <!-- [INFO   ] [j1.assets.data.panel.html             ] [ write post items ] -->
                 {% for post in site.posts %}
                   {% if posts_written == posts_max %} {% assign last_post_written = true %} {% break %}{% endif %}
 
                   {% if last_post_written != true %}
                     {% assign posts_written = posts_written|plus:1 %}
-                			<li id="{{panel_settings.id}}-scroll-item" class="list-group-item items-{{cards_per_row}} p-0">
-                        <article class="card card-same-height raised-z3 mb-3">
+                			<li id="{{panel_settings.id}}-scroll-item" class="scroll-group-item items-{{cards_per_row}} p-0">
+                        <article class="card card-same-height raised-z3 mb-5">
                           {% if post.image %}
                             <img class="img-fluid img-object--cover g-height-200" src="{{post.image}}" alt="{{post.title}}">
                             {% assign post_width = '80x' %}

@@ -14,31 +14,31 @@
  # -----------------------------------------------------------------------------
 */
 
-// NOTE:
-// TODO:
-// SPEC:
-
 // Modules and Components
 // -----------------------------------------------------------------------------
 @import "extentions/accordion";
 @import "extentions/advertising";
 @import "extentions/attic";
-@import "extentions/backdrop";
-@import "extentions/bs-doc";
+@import "extentions/banner";
+
 // @import "extentions/banner_news";                                            // disabled|to be removed or moved
 // @import "extentions/banner_parallax";                                        // disabled|to be removed or moved
 // @import "extentions/banner_teaser";                                          // disabled|to be removed or moved
-@import "extentions/banner";
 // @import "extentions/blog_calendar";                                          // disabled|to be removed or moved
 // @import "extentions/blog";                                                   // disabled|to be removed or moved
+
+@import "extentions/bs-doc";
 @import "extentions/cards";
 @import "extentions/collection";
-@import "extentions/container";
+
+// @import "extentions/container";                                              // jadams, 2021-11-17: disabled
+
+@import "extentions/dropcap";
 @import "extentions/footer";
 @import "extentions/images";
-@import "extentions/lanes";
-// @import "extentions/list-group-items";                                       // jadams, 2020-08-29: disabled|to be removed or moved
+@import "extentions/lane";
 @import "extentions/pages";
+
 // @import "extentions/forms";                                                  // disabled|to be removed or moved
 // @import "extentions/grid";                                                   // disabled|to be removed or moved
 // @import "extentions/icons";                                                  // disabled
@@ -50,15 +50,19 @@
 // @import "extentions/panel";                                                  // disabled|to be removed or moved
 // @import "extentions/parallax";                                               // disabled|to be removed or moved
 // @import "extentions/posts_featured";                                         // jadams, 2020-08-29: disabled|to be removed or moved
+
 @import "extentions/posts";
 @import "extentions/pulser";
+@import "extentions/scroll-group";                                              // jadams, 2021-11-17: additional class for the scoller|infinite scroll
 @import "extentions/scrollbars";
+
 // @import "extentions/sticky";                                                 // jadams, 2020-08-29: disabled|to be removed or moved
 // @import "extentions/rtable";                                                 // jadams, 2020-08-29: disabled|to be removed or moved
 // @import "extentions/sidebar";                                                // disabled|to be removed or moved
 // @import "extentions/slider_parallax";                                        // disabled|to be removed or moved
 // @import "extentions/slider";                                                 // disabled|to be removed or moved
 // @import "extentions/_spinner";                                               // disabled
+
 @import "extentions/tags";
 @import "extentions/timeline";
 @import "extentions/typography";
@@ -67,9 +71,16 @@
 // MDE styles
 // -----------------------------------------------------------------------------
 @import "extentions/mde/_buttons";
+
 // @import "extentions/mde/_cards";                                             // disabled
+
 @import "extentions/mde/_color_palette";
+
+// @import "extentions/mde/_color_palette.active";                              // jadams, 2021-11-17: not implemented yet
+// @import "extentions/mde/_color_palette.focus";                               // jadams, 2021-11-17: not implemented yet
+
 @import "extentions/mde/_color_table";
 @import "extentions/mde/_elevation";
 @import "extentions/mde/_nav_tabs_pills";                                       // disabled|to be removed or moved
-// @import "extentions/mde/_transparancy";                                      // disabled
+
+// @import "extentions/mde/_transparency";                                      // disabled

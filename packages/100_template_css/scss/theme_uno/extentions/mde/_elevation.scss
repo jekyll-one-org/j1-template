@@ -1,6 +1,8 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/theme_uno/extentions/mde/_elevation.scss
+ # ~/scss/theme_uno/bootstrap/extensions/mde/_elevation.scss
+ # Provides (Helper) Styles for standard elevations (raised level)
+ # Inspired by Google MDC Web
  #
  # Product/Info:
  # https://jekyll.one
@@ -11,15 +13,9 @@
  # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
  # -----------------------------------------------------------------------------
  # NOTE: MDE elevation styles
+ # SPEC: https://material.io/guidelines/
  # -----------------------------------------------------------------------------
 */
-
-// Provides (Helper) Styles for standard elevations (raised level)
-// Inspired by Google MDC Web
-
-// NOTE:
-// TODO:
-// SPEC: https://material.io/guidelines/
 
 /*
  * Applies the correct css rules needed to have an element transition

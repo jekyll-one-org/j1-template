@@ -1,7 +1,7 @@
 /*
 // -----------------------------------------------------------------------------
-// ~/theme_uno/extentions/_backdrop.scss
-// Provides general styles for the J1 Backdrops
+// ~/scss/theme_uno/bootstrap/extensions/_dropcap.scss
+// Provides general styles for the J1 Dropcaps
 //
 // Product/Info:
 // https://jekyll.one
@@ -22,10 +22,17 @@
   color: #757575;
   float: left;
   padding-right: .125rem;
+  margin-right: .125rem !important;
 }
 
-/* Media breakpoints
--------------------------------------------------------------------------------- */
+p.dropcap {
+  margin-right: 0.125rem !important;
+  line-height: 1.5;
+}
+
+
+// Media queries
+// -----------------------------------------------------------------------------
 @media screen and (min-width: 992px) {
   .j1-dropcap {
     font-size: 3rem;

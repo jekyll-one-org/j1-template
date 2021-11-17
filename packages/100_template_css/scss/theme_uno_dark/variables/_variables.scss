@@ -1,15 +1,20 @@
 /*
-// -----------------------------------------------------------------------------
-// ~/100_template_css/scss/theme_uno_dark/variables/_variables.scss
-//
-// Product/Info:
-// https://jekyll.one
-//
-// Copyright (C) 2021 Juergen Adams
-//
-// J1 Template is licensed under the MIT License.
-// See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
-// -----------------------------------------------------------------------------
+  # ----------------------------------------------------------------------------
+  # ~/100_template_css/scss/theme_uno_dark/variables/_variables.scss
+  #
+  # Product/Info:
+  # https://jekyll.one
+  #
+  # Copyright (C) 2021 Juergen Adams
+  #
+  # J1 Template is licensed under the MIT License.
+  # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+  # ----------------------------------------------------------------------------
+  # NOTE:
+  # Variables should follow the `$component-state-property-size` formula
+  # for consistent naming.
+  # Example|s: $nav-link-disabled-color and $modal-content-box-shadow-xs.
+  # ----------------------------------------------------------------------------
 */
 
 // Contents
@@ -48,12 +53,6 @@
 // Carousel
 // Close
 // Code
-
-// NOTE:
-// -----------------------------------------------------------------------------
-// Variables should follow the `$component-state-property-size` formula
-// for consistent naming.
-// Example|s: $nav-link-disabled-color and $modal-content-box-shadow-xs.
 
 // Colors
 // -----------------------------------------------------------------------------

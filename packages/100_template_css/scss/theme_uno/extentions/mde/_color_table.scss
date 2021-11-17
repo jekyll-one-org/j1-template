@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/theme_uno/extentions/mde/_color_table.scss
+ # ~/scss/theme_uno/bootstrap/extensions/mde/_color_table.scss
  #
  # Product/Info:
  # https://jekyll.one
@@ -10,14 +10,13 @@
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
  # -----------------------------------------------------------------------------
- # NOTE: Color Palette for MD tables
+ # NOTE: Color Palette for MD tables, taken from Google MDC Web.
+ # -----------------------------------------------------------------------------
+ # TODO: Should be integrated into J1 page styles
+ # SPEC: https://material.io/guidelines/
+ # SPEC: https://material.io/guidelines/style/color.html#color-color-palette
  # -----------------------------------------------------------------------------
 */
-
-// NOTE: Taken from Google MDC Web. Defines all styles needed for MDE color tables
-// TODO: Should be integrated into J1 page styles
-// SPEC: https://material.io/guidelines/
-// SPEC: https://material.io/guidelines/style/color.html#color-color-palette
 
 table.s-tag-table {
   width: 100%}

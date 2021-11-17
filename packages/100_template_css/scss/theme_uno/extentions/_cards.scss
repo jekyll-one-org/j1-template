@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/theme_uno/extentions/_cards.scss
+ # ~/scss/theme_uno/bootstrap/extensions/_cards.scss
  #
  # Product/Info:
  # https://jekyll.one
@@ -26,18 +26,9 @@
 // Cards
 // -----------------------------------------------------------------------------
 
-// jadams, 2020-08-10: (new) color styles
-/*
-.card {
-  border: 1px solid $white !important;
-  border-radius: 0.125rem !important;
-}
-*/
-
-// jadams, 2021-09-00: make (J1) cards same height
 .card {
   &.card-same-height {
-    height: calc(100% - 1.75rem);
+    height: calc(100% - 1.75rem);                                               // jadams, 2021-09-00: make (J1) cards same height
   }
 }
 
@@ -54,22 +45,8 @@
     text-align: initial;
 }
 
-/*
 .card .card-footer {
-  background-color: $grey-100;
-}
-*/
-
-// .card .card-footer {
-// 	padding-top: 0;
-// 	padding-right: 1.25rem;
-// 	padding-bottom: 1.25rem;
-// 	padding-left: 1.25rem;
-// 	border-top: 0;
-// 	background-color: transparent;
-// }
-
-.card .card-footer {
+  line-height: 1.25;
 	padding: 1.25rem;
 	background-color: transparent;
   border-top: 1px dotted rgba(0, 0, 0, 0.25);
@@ -94,8 +71,6 @@
   height: 60%;
   position: relative;
   overflow: hidden;
-  // border-radius: 2px;
-  //box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
 .card-image-outer {
@@ -104,8 +79,8 @@
   margin-top: -30px;
 }
 
-/* MD table cards
---------------------------------------------------------------------- */
+// Card headers
+// -----------------------------------------------------------------------------
 
 /* jadams MD table cards */
 .card .card-table {
@@ -291,9 +266,8 @@ a.card-title:hover {
 }
 
 
-/*  Base Styles Header
-------------------------------------------------------------------- */
-
+// Base header styles (???)
+// -----------------------------------------------------------------------------
 .card .header {
   box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
   /* margin: 15px; */
@@ -434,9 +408,11 @@ a.card-title:hover {
     color: $grey-900;
 }
 
-/*  SignUp Cards
-------------------------------------------------------------------- */
+// Cards variants
+// =============================================================================
 
+// SignUp Card
+// -----------------------------------------------------------------------------
 .card-signup .header {
   box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
   margin-left: 20px;
@@ -473,9 +449,8 @@ a.card-title:hover {
 }
 
 
-/*  Contact Cards
-------------------------------------------------------------------- */
-
+// Contact Card
+// -----------------------------------------------------------------------------
 .card-contact .header {
   margin-top: -20px;
 }
@@ -483,8 +458,8 @@ a.card-title:hover {
   margin: 10px 0 10px;
 }
 
-/*  Nav Cards (Tabs)
-------------------------------------------------------------------- */
+// Nav Card
+// -----------------------------------------------------------------------------
 .card-nav-tabs {
   margin-top: 45px;
 }
@@ -496,9 +471,8 @@ a.card-title:hover {
   background: transparent;
 }
 
-/*  Plain Cards
-------------------------------------------------------------------- */
-
+// Plain Card
+// -----------------------------------------------------------------------------
 .card-plain {
   background: transparent;
   box-shadow: none;
@@ -524,8 +498,8 @@ a.card-title:hover {
   box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2);
 }
 
-/*  Form Cards
-------------------------------------------------------------------- */
+// Form Card
+// -----------------------------------------------------------------------------
 .card-form-horizontal .content {
   padding-left: 15px;
   padding-right: 15px;
@@ -544,11 +518,8 @@ a.card-title:hover {
   padding-left: 0;
 }
 
-/*  Profile Cards
-------------------------------------------------------------------- */
-
-// jadams, 2021-09-12
-//
+// Profile Card
+// -----------------------------------------------------------------------------
 .card-profile,
 .card-testimonial {
   // margin-top: 60px;
@@ -582,8 +553,8 @@ a.card-title:hover {
   margin-top: 0;
 }
 
-/*  Testimonial Cards
-------------------------------------------------------------------- */
+// Testimonial Card
+// -----------------------------------------------------------------------------
 .card-testimonial .card-avatar {
   max-width: 100px;
   max-height: 100px;
@@ -608,8 +579,8 @@ a.card-title:hover {
   font-size: 40px;
 }
 
-/*  Blog Cards
-------------------------------------------------------------------- */
+// Blog Card
+// -----------------------------------------------------------------------------
 .card-blog {
   margin-top: 30px;
 }
@@ -623,8 +594,8 @@ a.card-title:hover {
   margin-top: 20px;
 }
 
-/*  Pricing Cards
-------------------------------------------------------------------- */
+// Pricing Card
+// -----------------------------------------------------------------------------
 .card-pricing {
   text-align: center;
 }
@@ -739,8 +710,8 @@ a.card-title:hover {
   border-radius: 1px;
 }
 
-/*  Product Cards
-------------------------------------------------------------------- */
+// Product Card
+// -----------------------------------------------------------------------------
 .card-product {
   margin-top: 30px;
 }

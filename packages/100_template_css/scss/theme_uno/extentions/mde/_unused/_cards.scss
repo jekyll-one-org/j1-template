@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/theme_uno/extentions/mde/_cards.scss
+ # ~/scss/theme_uno/bootstrap/extensions/mde/_cards.scss
  #
  # Product/Info:
  # https://jekyll.one
@@ -10,17 +10,14 @@
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
  # -----------------------------------------------------------------------------
- # NOTE: MDE styles for cards
+ # NOTE: MDE styles for cards, inspired by BS3 Material-Kit
+ # -----------------------------------------------------------------------------
+ # TODO: Make height for Cards equal to width (http://stackoverflow.com/a/6615994)
  # -----------------------------------------------------------------------------
 */
 
-// NOTE: Cards|Styles, inspired by BS3 Material-Kit
-// TODO: Make height for Cards equal to width (http://stackoverflow.com/a/6615994)
-// SPEC:
-
 //  Base Styles
 // -----------------------------------------------------------------------------
-
 .card {
   display: inline-block;
   position: relative;

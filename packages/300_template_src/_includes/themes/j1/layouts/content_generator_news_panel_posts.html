@@ -280,11 +280,11 @@
 
               <div class="row">
                 <!-- post group-->
-                <ul id="{{panel_settings.id}}-scroll-group" class="list-group list-group-horizontal align-items-stretch flex-wrap">
+                <ul id="{{panel_settings.id}}-scroll-group" class="scroll-group scroll-group-horizontal align-items-stretch flex-wrap">
                   {% for post in paginator.posts %}
                   <!-- post items-->
-                  <li id="{{panel_settings.id}}-scroll-item" class="list-group-item items-{{cards_per_row}} p-0">
-                    <article class="animated {{card_animate}} card card-same-height raised-z3 mb-3">
+                  <li id="{{panel_settings.id}}-scroll-item" class="scroll-group-item items-{{cards_per_row}} p-0">
+                    <article class="card card-same-height raised-z3 mb-5">
                       {% if post.image %}
                         <img class="img-fluid img-object--cover g-height-200" src="{{post.image}}" alt="{{post.title}}">
                         {% assign post_width = '80x' %}

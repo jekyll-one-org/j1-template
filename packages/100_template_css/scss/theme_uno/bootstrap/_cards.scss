@@ -30,9 +30,16 @@
     background-color: transparent;
   }
 
-  .card-block {
+  .card-footer {
+    // assume footer is the set of actions?
+    padding: .5rem;
+  }
+
+  .card-body {
+    @extend %std-font;
     padding: 1.5rem 1rem 1rem;
-    //@extend %std-font;
+    font-weight: 300;
+    min-height: 16rem;
   }
 
   // Primary title/text
@@ -40,9 +47,9 @@
   //  - Subtitle: 14sp
 
   // non-h* card-titles will be 14sp
-  //&.card-title {
-  //  @extend %std-font;
-  //}
+  &.card-title {
+   @extend %std-font;
+  }
 
   // any h* will signal the larger size should render as 24sp
   @include headings() {
@@ -50,46 +57,5 @@
       font-size: 1.5rem;
       font-weight: 300;
     }
-  }
-
-  .bmd-card-actions,
-  // needed?  if you have actions in the middle of the card (see spec),
-  it may be necessary
-  .card-footer {
-    // assume footer is the set of actions?
-    padding: .5rem;
-  }
-
-  &.bmd-card-raised {
-    // Card raised elevation: 8dp
-    @include box-shadow($bmd-shadow-8dp);
-  }
-
-  @include media-breakpoint-up(lg) {
-    // On desktop, cards can have a resting elevation of 0dp and gain an elevation of 8dp on hover.
-    &.bmd-card-flat {
-      box-shadow: none;
-    }
-  }
-}
-
-@media screen and (min-width: 992px) {
-  .card-deck {
-      margin-right: -30px !important;
-      margin-left: -30px !important;
-  }
-}
-
-@media screen and (min-width: 576px) {
-  .card-deck {
-      margin-right: -30px !important;
-      margin-left: -30px !important;
-  }
-}
-
-@media screen and (max-width: 575px)  {
-  .card-deck {
-      margin-right: -15px;
-      margin-left: -15px;
   }
 }

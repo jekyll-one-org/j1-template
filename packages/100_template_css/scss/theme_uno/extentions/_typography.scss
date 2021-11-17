@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/theme_uno/extentions/_typography.scss
+ # ~/scss/theme_uno/bootstrap/extensions/_typography.scss
  #
  # Product/Info:
  # https://jekyll.one
@@ -11,15 +11,14 @@
  # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
  # -----------------------------------------------------------------------------
  # NOTE: Typography styles for resposive text (rtext)
+ #  Provides flowting text styles for dynamic|responsible text.
+ # Inspired by Materialize (http://materializecss.com/)
+ # TODO:1
+  # -----------------------------------------------------------------------------
+ # SPEC: r-text   - http://materializecss.com/typography.html
+ # SPEC: general  - https://www.google.com/design/spec/style/typography.html#typography-styles
  # -----------------------------------------------------------------------------
 */
-
-
-// NOTE: Provides flowting text styles for dynamic|responsible text.
-//       Inspired by Materialize (http://materializecss.com/)
-// TODO:
-// SPEC: r-text   - http://materializecss.com/typography.html
-// SPEC: general  - https://www.google.com/design/spec/style/typography.html#typography-styles
 
 // no r-text
 // -----------------------------------------------------------------------------'
