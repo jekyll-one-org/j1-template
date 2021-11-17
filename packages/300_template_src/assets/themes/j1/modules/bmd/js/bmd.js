@@ -1,3 +1,29 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/bmd/js/bmd.js
+ # Based on BootstrapMateialDesion (BMD) version 4.1.3 (BS@4)
+ # BS@5 implementation for J1 Template.
+ #
+ # Product/Info:
+ # https://jekyll.one
+ # https://github.com/mdbootstrap/bootstrap-material-design/tree/4.1.3
+ #
+ # Copyright (C) 2021 Juergen Adams
+ # Copyright (C) 2015 Federico Zivolo and contributors
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # BootstrapMaterialDesign is licensed under the MIT License.
+ # See: https://github.com/mdbootstrap/bootstrap-material-design/blob/4.1.3/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+// -----------------------------------------------------------------------------
+// ESLint shimming
+// -----------------------------------------------------------------------------
+/* eslint indent: "off"                                                       */
+// -----------------------------------------------------------------------------
+
 (function (factory) {
   typeof define === 'function' && define.amd ? define(factory) :
   factory();
