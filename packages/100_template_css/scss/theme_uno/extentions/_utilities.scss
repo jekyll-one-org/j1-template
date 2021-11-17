@@ -13,8 +13,17 @@
  # NOTE: Additional utility styles
  # -----------------------------------------------------------------------------
 */
-
 @import "../variables";
+
+// Toggle classes
+// -----------------------------------------------------------------------------
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
 
 // GLOBAL Styles (selected styles taken from previous globals.css)
 // -----------------------------------------------------------------------------

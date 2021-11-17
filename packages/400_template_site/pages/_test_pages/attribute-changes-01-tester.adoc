@@ -57,6 +57,20 @@ resource_options:
 // -----------------------------------------------------------------------------
 == Tester
 
+.Usage
+[source, js]
+----
+$([selector]).attrchange({
+  trackValues: true,
+  callback: function (event) {
+  	//event.attributeName - Attribute Name
+  	//event.oldValue - Prev Value
+  	//event.newValue - New Value
+    console.log("attr changed: " +event.newValue);
+  }
+});
+----
+
 ++++
 <section class="row ml-0">
 

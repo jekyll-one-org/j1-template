@@ -2498,28 +2498,27 @@ link:{url-bs-docs--components-popovers}[Bootstrap Docs {char-middot} Popovers, {
 endif::[]
 endif::[]
 
-
-++++
-<script>
-  $(function () {
-    $.expr[':'].regex = function(elem, index, match) {
-       var matchParams = match[3].split(','),
-          validLabels = /^(data|css):/,
-          attr = {
-             method: matchParams[0].match(validLabels) ?
-                matchParams[0].split(':')[0] : 'attr',
-             property: matchParams.shift().replace(validLabels, '')
-          },
-          regexFlags = 'ig',
-          regex = new RegExp(matchParams.join('').replace(/^\s+|\s+$/g, ''), regexFlags);
-       return regex.test($(elem)[attr.method](attr.property));
-    }
-
-    $(':regex(href,$navbars)').click(function(e) {
-      e.preventDefault ? e.preventDefault() : e.returnValue = false;
-      logger.info('bound click event to "?#*", suppress default action');
-    });
-
-  });
-</script>
-++++
+// ++++
+// <script>
+//   $(function () {
+//     $.expr[':'].regex = function(elem, index, match) {
+//        var matchParams = match[3].split(','),
+//           validLabels = /^(data|css):/,
+//           attr = {
+//              method: matchParams[0].match(validLabels) ?
+//                 matchParams[0].split(':')[0] : 'attr',
+//              property: matchParams.shift().replace(validLabels, '')
+//           },
+//           regexFlags = 'ig',
+//           regex = new RegExp(matchParams.join('').replace(/^\s+|\s+$/g, ''), regexFlags);
+//        return regex.test($(elem)[attr.method](attr.property));
+//     }
+//
+//     $(':regex(href,$navbars)').click(function(e) {
+//       e.preventDefault ? e.preventDefault() : e.returnValue = false;
+//       logger.info('bound click event to "?#*", suppress default action');
+//     });
+//
+//   });
+// </script>
+// ++++

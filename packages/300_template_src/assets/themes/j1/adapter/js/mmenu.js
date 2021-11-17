@@ -294,21 +294,7 @@ j1.adapter['mmenu'] = (function (j1, window) {
 
               $this.on('click', function(e){
                 const button_{{menu_id}} = this;
-
-                // TODO: Animated toggle button
-                //
-                // $('{{item.menu.content.toggler}}').toggleClass('fadeIn');
-                // $('{{item.menu.content.toggler}}').toggleClass('rotateIn')
-
-                // $('.mdi', this).toggleClass('mdi-menu');
-                // $('.mdi', this).toggleClass('mdi-close');
-
                 e.preventDefault();
-
-                // (toggler_{{menu_id}}.t = !toggler_{{menu_id}}.t)
-                //   ? drawer_{{menu_id}}.open()
-                //   : drawer_{{menu_id}}.close();
-
                 drawer_{{menu_id}}.open();
               });
             });
@@ -361,14 +347,30 @@ j1.adapter['mmenu'] = (function (j1, window) {
               });
 
               const drawer_{{menu_id}} = mmenu_{{menu_id}}.offcanvas ({
-                // drawer options
                 position: '{{item.menu.drawer.position}}'
               });
 
+              // set an id on the drawer wrapper div for later use
+              //
+              drawer_{{menu_id}}.wrapper.id = 'drawer_{{menu_id}}';
+
+              // monitor for state changes on the drawer
+              //
+              $('#drawer_{{menu_id}}').attrchange({
+                trackValues: true,
+                callback: function (event) {
+                  logger.debug('\n' + 'drawer changed state: ' + event.newValue);
+                  logger.debug('\n' + 'hide|show the main nav menu');
+                  // switch off|on the (main) nav menu
+                  $('#' + navMenuOptions.nav_main_menu).toggle();
+                  $('#' + navMenuOptions.nav_quicklinks).toggle();                  
+                }
+              });
+
               // button for the MMenu tocbar to open|close the toc drawer
+              //
               $('{{item.menu.content.button}}').each(function(e) {
                 var $this = $(this);
-
                 $this.on('click', function(e) {
                   var button_{{menu_id}} = this;
                   var hasClass;
@@ -382,15 +384,7 @@ j1.adapter['mmenu'] = (function (j1, window) {
                     hasClass = true;
                   }
                   if (hasClass) {
-                    // Toggle button animation
-                    //$('{{item.menu.content.toggler}}').toggleClass('{{item.menu.content.toggler_animation}}')
-
                     e.preventDefault();
-
-                    // (toggler_{{menu_id}}.t = !toggler_{{menu_id}}.t)
-                    //   ? drawer_{{menu_id}}.open()
-                    //   : drawer_{{menu_id}}.close();
-
                     drawer_{{menu_id}}.open();
                   } // END if hasclass
                 });

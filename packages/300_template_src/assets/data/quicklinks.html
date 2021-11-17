@@ -236,7 +236,7 @@ exclude_from_search:                    true
 <!-- [INFO   ] [j1.modules.navigator.quicklinks.html  ] [Set icon familiy as: {{ icon_family }}] -->
 <!-- [INFO   ] [j1.modules.navigator.quicklinks.html  ] [Set icon size as: {{ icon_size }}] -->
 
-<ul id="{{quicklinks_options.xhr_data_element}}" class="navbar-nav">
+<ul id="{{quicklinks_options.xhr_data_element}}" class="navbar-nav show">
 
   {% if back_url != "none" %}<li id="quickLinksHomeButton" class="nav-item"><a id="page_back_id" class="nav-icon" href="{{back_url}}" aria-label="Page back"><i class="{{icon_family}} {{icon_family}}-{{back_icon}} {{icon_size}}"></i></a></li>{% endif %}
   {% if home_url != "none" %}<li id="quickLinksHomeButton" class="nav-item"><a id="home_id" class="nav-icon" href="{{home_url}}" aria-label="Home"><i class="{{icon_family}} {{icon_family}}-{{home_icon}} {{icon_size}}"></i></a></li>{% endif %}
