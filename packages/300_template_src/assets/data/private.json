@@ -45,5 +45,9 @@ exclude_from_search:                    true
 {{ private_settings | json }}
 
 {% endcapture %}
-{{ cache | strip_empty_lines }}
+{% if production %}
+  {{ cache | minifyJSON }}
+{% else %}
+  {{ cache | strip_empty_lines }}
+{% endif %}
 {% assign cache = nil %}
