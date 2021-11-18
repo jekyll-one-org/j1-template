@@ -60,6 +60,7 @@
     {% for item in button_data %} {% for button in item[1] %}
       {% assign key   = button[0] %}
       {% assign value = button[1] %}
+      {% if key == 'id' %}         {% assign button_id         = value %} {% endif %}
       {% if key == 'title' %}      {% assign button_title      = value %} {% endif %}
       {% if key == 'tagline' %}    {% assign button_tagline    = value %} {% endif %}
       {% if key == 'class' %}      {% assign button_class      = value %} {% endif %}
@@ -78,7 +79,7 @@
     {% if button_tagline %}
       {% if button_href and button_target %}
         {% capture bs_button_html %}
-          <a href="{{button_href}}" target="{{button_target}}" rel="noopener" class="{{button_class}}" style="{{button_style}}">
+          <a id="#{{button_id}}" href="{{button_href}}" target="{{button_target}}" rel="noopener" class="{{button_class}}" style="{{button_style}}">
             <i class="{{icon_family}} {{icon_family}}-{{button_icon}} {{icon_family}}-{{button_icon_size}} {{icon_family}}-{{button_icon_color}} mr-3"></i>
             <span class="float-right text-left mt-2">
               {{button_title}}
@@ -88,7 +89,7 @@
         {% endcapture %}
       {% elsif button_href %}
         {% capture bs_button_html %}
-          <a href="{{button_href}}" class="{{button_class}}" style="{{button_style}}">
+          <a id="#{{button_id}}" href="{{button_href}}" class="{{button_class}}" style="{{button_style}}">
             <i class="{{icon_family}} {{icon_family}}-{{button_icon}} {{icon_family}}-{{button_icon_size}} {{icon_family}}-{{button_icon_color}} mr-3"></i>
             <span class="float-right text-left mt-2">
               {{button_title}}
@@ -102,7 +103,7 @@
     {% else %}
       {% if button_href and button_target %}
         {% capture bs_button_html %}
-          <a href="{{button_href}}" target="{{button_target}}" rel="noopener" class="{{button_class}}" style="{{button_style}}">
+          <a id="#{{button_id}}" href="{{button_href}}" target="{{button_target}}" rel="noopener" class="{{button_class}}" style="{{button_style}}">
             <i class="{{icon_family}} {{icon_family}}-{{button_icon}} {{icon_family}}-{{button_icon_size}} {{icon_family}}-{{button_icon_color}} mr-1"></i>
             <span class="float-right text-left">
               {{button_title}}
@@ -111,7 +112,7 @@
         {% endcapture %}
       {% elsif button_href %}
         {% capture bs_button_html %}
-          <a href="{{button_href}}" class="{{button_class}}" style="{{button_style}}">
+          <a id="#{{button_id}}" href="{{button_href}}" class="{{button_class}}" style="{{button_style}}">
             <i class="{{icon_family}} {{icon_family}}-{{button_icon}} {{icon_family}}-{{button_icon_size}} {{icon_family}}-{{button_icon_color}} mr-1"></i>
             <span class="float-right text-left">
               {{button_title}}
@@ -122,7 +123,6 @@
         {% capture bs_button_html %}INFO: No valid value for parameter href found{% endcapture %}
       {% endif %}
     {% endif %}
-
 
   {% when 'input' %}
   {% comment %} Create BS link button

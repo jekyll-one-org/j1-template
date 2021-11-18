@@ -645,7 +645,9 @@ resources:
       pass_init_data:                   false
       data:
         css:                            []
-        files:                          [ modules/materialize/js/fam.js ]
+        files:                          [
+                                          modules/materialize/js/fam.js
+                                        ]
         js:                             [ modules/materialize/js/cash ]
         init_function:                  []
 

@@ -990,8 +990,6 @@ var j1 = (function () {
       }
 
       logger.info('\n' + 'finalize page');
-      // j1.setCss();
-
       logText= '\n' + 'loading page partials: started';
       logger.info(logText);
 
@@ -1234,6 +1232,12 @@ var j1 = (function () {
 
           // display page
           $('#no_flicker').css('display', 'block');
+
+          // $('#features').tapTarget();
+          // $('#features').click(function(e) {
+          //   logger.info('\n' + 'call default action');
+          //   $('#features').tapTarget('open');
+          // });
 
           // Add minus icon for collapse element which is open by default
             $(".collapse.show").each(function(){
@@ -2172,72 +2176,73 @@ var j1 = (function () {
     getCookieNames: function () {
       return cookie_names;
     },
+
     // -------------------------------------------------------------------------
     // Set dynamic styles
     // -------------------------------------------------------------------------
-    setCss: function () {
-      var logger        = log4javascript.getLogger('j1.setCss');
-      var bg_primary    = j1.getStyleValue('bg-primary', 'background-color');
-      var bg_secondary  = j1.getStyleValue('bg-secondary', 'background-color');
-
-      logger.info('\n' + 'set color scheme for selected theme');
-
-      // globals
-      // -----------------------------------------------------------------------
-      $('head').append('<style>.g-bg-primary { background-color: ' +bg_primary+ ' !important; }</style>');
-
-      // mdi icons
-      // -----------------------------------------------------------------------
-      $('head').append('<style>.iconify-md-bg-primary { color: ' +bg_primary+ ' !important; }</style>');
-      $('head').append('<style>.fa-md-bg-primary { color: ' +bg_primary+ ' !important; }</style>');
-      $('head').append('<style>.fas-md-bg-primary { color: ' +bg_primary+ ' !important; }</style>');
-      $('head').append('<style>.mdi-md-bg-primary { color: ' +bg_primary+ ' !important; }</style>');
-
-      // asciidoc
-      // -----------------------------------------------------------------------
-      var admonitionblock_note_color      = bg_primary;
-      var admonitionblock_tip_color       = j1.getStyleValue('btn-success', 'background-color');
-      var admonitionblock_important_color = j1.getStyleValue('btn-info', 'background-color');
-      var admonitionblock_warning_color   = j1.getStyleValue('icon-warning', 'color');
-      var admonitionblock_caution_color   = j1.getStyleValue('btn-danger', 'background-color');
-
-      $('head').append('<style>.icon-note { color: ' +admonitionblock_note_color+ ' !important; }</style>');
-      $('head').append('<style>.icon-tip { color: ' +admonitionblock_tip_color+ ' !important; }</style>');
-      $('head').append('<style>.icon-important { color: ' +admonitionblock_important_color+ ' !important; }</style>');
-      $('head').append('<style>.icon-warning { color: ' +admonitionblock_warning_color+ ' !important; }</style>');
-      $('head').append('<style>.icon-caution { color: ' +admonitionblock_caution_color+ ' !important; }</style>');
-
-      // bs base styles (2020-09-20: diabled. Taken for BS CSS code)
-      // -----------------------------------------------------------------------
-      // $('head').append('<style>code { color: ' +bg_secondary+ ' !important; }</style>');
-
-      // bs tool tips
-      // -----------------------------------------------------------------------
-      // $('head').append('<style>.tooltip-inner { background-color: ' +bg_primary+ ' !important; }</style>');
-      // $('head').append('<style>.bs-tooltip-top .tooltip-arrow::before { border-top-color: ' +bg_primary+ ' !important; }</style>');
-      // $('head').append('<style>.bs-tooltip-end .tooltip-arrow::before { border-right-color: ' +bg_primary+ ' !important; }</style>');
-      // $('head').append('<style>.bs-tooltip-bottom .tooltip-arrow::before { border-bottom-color: ' +bg_primary+ ' !important; }</style>');
-      // $('head').append('<style>.bs-tooltip-start .tooltip-arrow::before { border-left-color: ' +bg_primary+ ' !important; }</style>');
-
-      // asciidoc results viewer
-      // -----------------------------------------------------------------------
-      $('head').append('<style>.btn-viewer:hover { background-color: ' +bg_primary+ ' !important; }</style>');
-
-      // extended modals
-      // -----------------------------------------------------------------------
-      // var tabs_pills_link_color_active    = j1.setColorData('md_blue');         // j1.getStyleValue('btn-info', 'background-color');
-      // var tabs_pills_link_color_hover     = j1.setColorData('md_gray_300');     // j1.getStyleValue('btn-secondary', 'background-color');
-
-      // var tabs_pills_link_color_active    = 'mdi-blue';
-      // var tabs_pills_link_color_hover     = 'mdi-gray-300';
-
-      // nav module
-      // -----------------------------------------------------------------------
-      // $('head').append('<style>.nav-link:hover { background-color: ' +tabs_pills_link_color_hover+ ' !important; }</style>');
-      // $('head').append('<style>.nav-link.active { background-color: ' +tabs_pills_link_color_active+ ' !important; }</style>');
-
-      return true;
-    },
+    // setCss: function () {
+    //   var logger        = log4javascript.getLogger('j1.setCss');
+    //   var bg_primary    = j1.getStyleValue('bg-primary', 'background-color');
+    //   var bg_secondary  = j1.getStyleValue('bg-secondary', 'background-color');
+    //
+    //   logger.info('\n' + 'set color scheme for selected theme');
+    //
+    //   // globals
+    //   // -----------------------------------------------------------------------
+    //   $('head').append('<style>.g-bg-primary { background-color: ' +bg_primary+ ' !important; }</style>');
+    //
+    //   // mdi icons
+    //   // -----------------------------------------------------------------------
+    //   $('head').append('<style>.iconify-md-bg-primary { color: ' +bg_primary+ ' !important; }</style>');
+    //   $('head').append('<style>.fa-md-bg-primary { color: ' +bg_primary+ ' !important; }</style>');
+    //   $('head').append('<style>.fas-md-bg-primary { color: ' +bg_primary+ ' !important; }</style>');
+    //   $('head').append('<style>.mdi-md-bg-primary { color: ' +bg_primary+ ' !important; }</style>');
+    //
+    //   // asciidoc
+    //   // -----------------------------------------------------------------------
+    //   var admonitionblock_note_color      = bg_primary;
+    //   var admonitionblock_tip_color       = j1.getStyleValue('btn-success', 'background-color');
+    //   var admonitionblock_important_color = j1.getStyleValue('btn-info', 'background-color');
+    //   var admonitionblock_warning_color   = j1.getStyleValue('icon-warning', 'color');
+    //   var admonitionblock_caution_color   = j1.getStyleValue('btn-danger', 'background-color');
+    //
+    //   $('head').append('<style>.icon-note { color: ' +admonitionblock_note_color+ ' !important; }</style>');
+    //   $('head').append('<style>.icon-tip { color: ' +admonitionblock_tip_color+ ' !important; }</style>');
+    //   $('head').append('<style>.icon-important { color: ' +admonitionblock_important_color+ ' !important; }</style>');
+    //   $('head').append('<style>.icon-warning { color: ' +admonitionblock_warning_color+ ' !important; }</style>');
+    //   $('head').append('<style>.icon-caution { color: ' +admonitionblock_caution_color+ ' !important; }</style>');
+    //
+    //   // bs base styles (2020-09-20: diabled. Taken for BS CSS code)
+    //   // -----------------------------------------------------------------------
+    //   // $('head').append('<style>code { color: ' +bg_secondary+ ' !important; }</style>');
+    //
+    //   // bs tool tips
+    //   // -----------------------------------------------------------------------
+    //   // $('head').append('<style>.tooltip-inner { background-color: ' +bg_primary+ ' !important; }</style>');
+    //   // $('head').append('<style>.bs-tooltip-top .tooltip-arrow::before { border-top-color: ' +bg_primary+ ' !important; }</style>');
+    //   // $('head').append('<style>.bs-tooltip-end .tooltip-arrow::before { border-right-color: ' +bg_primary+ ' !important; }</style>');
+    //   // $('head').append('<style>.bs-tooltip-bottom .tooltip-arrow::before { border-bottom-color: ' +bg_primary+ ' !important; }</style>');
+    //   // $('head').append('<style>.bs-tooltip-start .tooltip-arrow::before { border-left-color: ' +bg_primary+ ' !important; }</style>');
+    //
+    //   // asciidoc results viewer
+    //   // -----------------------------------------------------------------------
+    //   $('head').append('<style>.btn-viewer:hover { background-color: ' +bg_primary+ ' !important; }</style>');
+    //
+    //   // extended modals
+    //   // -----------------------------------------------------------------------
+    //   // var tabs_pills_link_color_active    = j1.setColorData('md_blue');         // j1.getStyleValue('btn-info', 'background-color');
+    //   // var tabs_pills_link_color_hover     = j1.setColorData('md_gray_300');     // j1.getStyleValue('btn-secondary', 'background-color');
+    //
+    //   // var tabs_pills_link_color_active    = 'mdi-blue';
+    //   // var tabs_pills_link_color_hover     = 'mdi-gray-300';
+    //
+    //   // nav module
+    //   // -----------------------------------------------------------------------
+    //   // $('head').append('<style>.nav-link:hover { background-color: ' +tabs_pills_link_color_hover+ ' !important; }</style>');
+    //   // $('head').append('<style>.nav-link.active { background-color: ' +tabs_pills_link_color_active+ ' !important; }</style>');
+    //
+    //   return true;
+    // },
 
     // -------------------------------------------------------------------------
     // setState()

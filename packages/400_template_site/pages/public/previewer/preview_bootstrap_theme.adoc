@@ -111,7 +111,7 @@ resource_options:
 // -----------------------------------------------------------------------------
 ++++
   <!-- Prepend H1 tag here -->
-  <div id="theme" class="row g-0 mb-3">
+  <div id="theme" class="row g-0 mb-1">
 
     <!-- Load the previously selected theme from the (user state) cookie -->
     <script>
@@ -156,7 +156,6 @@ resource_options:
 
       var dependencies_met_themer = setInterval(function() {
         interval_count += 1;
-        // if ( j1.adapter.themer.getState() == 'finished' ) {
         if (j1.getState() == 'finished') {
           user_state_detected = j1.existsCookie (cookie_names.user_state);
           if ( user_state_detected ) {
