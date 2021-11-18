@@ -1164,25 +1164,22 @@ resources:
         init_function:                  []
 
   # ----------------------------------------------------------------------------
-  # Floating Action Button. JS API to create FAB menu buttons
+  # Floating Action Button Menu. JS API to create FAB menus
   #
-  - name:                               FAM
+  - name:                               FABM
     resource:
-      id:                               fam
+      id:                               fabm
       enabled:                          true
-      comment:                          Floating Button Menu
+      comment:                          FAB Menus
       region:                           head
-      layout:                           [                                       # TODO: check if FAM makes sense for layout app
-                                          home, page, post, collection,
-                                          blog_archive
-                                        ]
+      layout:                           [ all ]
       required:                         always
-      preload:                          false                                   # property currently unused
+      preload:                          false
       script_load:                      sync
       dependencies:                     false
       pass_init_data:                   true
       data:
-        css:                            [ modules/fab/css/theme/uno/fab ]       # styles for (J1) theme Uno]
+        css:                            []                                      # styles moved to Template CSS
         files:                          [
                                           modules/fab/js/cash.js,               # adapted|old (1.3.5) version from Materialize
                                           modules/fab/js/fab.js,                # modified version for J1 (former: button.js)

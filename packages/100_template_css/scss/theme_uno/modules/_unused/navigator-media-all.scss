@@ -13,7 +13,7 @@
   	margin: 0;
   	font-size: 13px;  // jadams: set font-size to 13px list-style: none;
   	li a {
-  		color: $grey-800;
+  		color: $gray-800;
   		&:hover {
   			text-decoration: none;
   		}
@@ -40,7 +40,7 @@
   	position: absolute;
   }
   .heading-footer h2 {
-  	color: $grey-200;
+  	color: $gray-200;
   	font-size: 18px;
   	text-transform: uppercase;
   }
@@ -254,7 +254,7 @@
   			left: 0;
   			padding: 0 0 0 0 !important;
   			background: $white;
-  			box-shadow: 1px 0 1px 0 $grey-200;
+  			box-shadow: 1px 0 1px 0 $gray-200;
   			.scroller {
   				width: 280px;
   				overflow-y: auto;
@@ -304,7 +304,7 @@
   								li {
   									a {
   										padding: 5px 15px;
-  										color: $grey-800;
+  										color: $gray-800;
   										border: none;
   									}
                     // dropdown indicator
@@ -360,7 +360,7 @@
   					letter-spacing: 0;
   					margin-bottom: 0;
   					cursor: pointer;
-  					color: $grey-800;
+  					color: $gray-800;
   				}
   				.content {
   					padding: 0 0 0 15px;
@@ -482,8 +482,8 @@
   					.col-menu {
   						// padding: 0 30px;
   						// margin: 0 -0.5px;
-  						border-left: solid 1px $grey-200;
-  						//border-right: solid 1px $grey-200;
+  						border-left: solid 1px $gray-200;
+  						//border-right: solid 1px $gray-200;
   						//margin: 0;
   						&:first-child {
   							border-left: none;
@@ -501,7 +501,7 @@
   						width: 100%;
   						margin-bottom: 0;
   						border-bottom: none;
-  						color: $grey-800;
+  						color: $gray-800;
   					}
   				}
   			}
@@ -556,7 +556,7 @@
             // Make sense as a feature!
             // BUT: dropdown is NOT posioned below 1st level entry
             // TODO: Check 1st level dropdown pos with menu script
-  					// border-bottom: solid 3px $grey-50;
+  					// border-bottom: solid 3px $gray-50;
   				}
   				&.dark {
   					background-color: $darken-300;
@@ -565,8 +565,8 @@
             // Make sense as a feature!
             // BUT: dropdown is NOT posioned below 1st level entry
             // TODO: Check 1st level dropdown pos with menu script
-  					// border-bottom: solid 3px $grey-900;
-  					// border-left: solid 1px $grey-900;
+  					// border-bottom: solid 3px $gray-900;
+  					// border-left: solid 1px $gray-900;
   				}
   			}
   			&.menu-center {
@@ -593,7 +593,7 @@
   			> .active > a {
   				bottom: -2px;
   				position: relative;
-  				border-bottom: solid 2px $grey-800;  // jadams: border-bottom: solid 2px $lime;
+  				border-bottom: solid 2px $gray-800;  // jadams: border-bottom: solid 2px $lime;
   			}
         // jadams, 2019-01-17: Added left/right borders
   			li.dropdown ul.dropdown-menu {
@@ -623,8 +623,8 @@
   		}
   		&.navbar-inverse.navigator.navbar-transparent.dark {
   			background-color: $darken-300;
-  			border-bottom: solid 3px $grey-900;
-  			border-left: solid 1px $grey-900;
+  			border-bottom: solid 3px $gray-900;
+  			border-left: solid 1px $gray-900;
   		}
   	}
   }
@@ -666,7 +666,7 @@
   			&.dropdown ul.dropdown-menu {
   				border-radius: 0;
   				box-shadow: 0 0 0;
-  				border: solid 1px $grey-300;
+  				border: solid 1px $gray-300;
   				margin-top: 0;
   				margin-left: 55px;
   				width: $dropdown-menu-min-width;
@@ -772,7 +772,7 @@
   		}
   		.heading {
   			text-align: left;
-  			color: $grey-200;
+  			color: $gray-200;
   			font-size: 18px;
   			text-transform: uppercase;
   			position: relative;
@@ -786,14 +786,14 @@
   			margin: 0;
   			list-style: none;
   			li a {
-  				color: $grey;
+  				color: $gray;
   				// letter-spacing: 1px;
   				&:focus {
-  					color: $grey-50;
+  					color: $gray-50;
   					text-decoration: none;
   				}
   				&:hover {
-  					color: $grey-50;
+  					color: $gray-50;
   					text-decoration: none;
   				}
   			}

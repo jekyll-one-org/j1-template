@@ -250,7 +250,7 @@ robots:
 
 # ------------------------------------------------------------------------------
 # BRAND configuration
-# Set the brand image and favicon
+# Set the brand image and favicon (located in /asset/images)
 
 brand:
   image:                                modules/icons/j1/j1-512x512.png
@@ -258,7 +258,7 @@ brand:
   text:                                 Starter Web
   text_color:                           "#9E9E9E"
 
-# Set the favicon (located in the asset_path/images) and type
+# Set the favicon and type
 #
 favicon:
   image:                                modules/icons/j1/j1-32x32.ico

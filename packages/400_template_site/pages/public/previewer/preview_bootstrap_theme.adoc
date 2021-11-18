@@ -47,7 +47,8 @@ resource_options:
 :buttons_active:                        true
 :buttons_disabled:                      true
 :buttons_outline:                       true
-:buttons_flat:                          true
+:buttons_dropdown:                      true
+:buttons_flat:                          false
 :buttons_sizes:                         true
 :buttons_pulsed:                        true
 :buttons_blocklevel:                    true
@@ -115,13 +116,43 @@ resource_options:
     <!-- Load the previously selected theme from the (user state) cookie -->
     <script>
     $(document).ready(function() {
-      var interval_count = 0;
-      var max_count      = 10;
-      var cookie_names   = j1.getCookieNames();
-      var user_state     = {};
+      var theme_slogans   = {};
+      var interval_count  = 0;
+      var max_count       = 10;
+      var cookie_names    = j1.getCookieNames();
+      var user_state      = {};
+      var theme_slogan;
       var themeName;
       var themeNameHeadline;
       var user_state_detected;
+
+      theme_slogans.UnoLight      = 'An universial light theme';
+      theme_slogans.UnoDark       = 'An universial dark theme';
+      theme_slogans.Bootstrap     = 'Bootstrap V5 default theme';
+
+      theme_slogans.Cerulean      = 'A calm blue sky';
+      theme_slogans.Cosmo         = 'An ode to Metro';
+      theme_slogans.Cyborg        = 'Jet black and electric blue';
+      theme_slogans.Darkly        = 'Theme Flatly in night mode';
+      theme_slogans.Flatly        = 'Flat and modern';
+      theme_slogans.Journal       = 'Crisp like a new sheet of paper';
+      theme_slogans.Litera        = 'The medium is the message';
+      theme_slogans.Lumen         = 'Light and shadow';
+      theme_slogans.Materia       = 'Material is the metaphor';
+      theme_slogans.Minty         = 'A fresh feel';
+      theme_slogans.Morph         = 'A neumorphic layer';
+      theme_slogans.Pulse         = 'A trace of purple';
+      theme_slogans.Quartz        = 'A glassmorphic layer';
+      theme_slogans.Sandstone     = 'A touch of warmth';
+      theme_slogans.Simplex       = 'Mini and minimalist';
+      theme_slogans.Slate         = 'Shades of gunmetal gray';
+      theme_slogans.Solar         = 'A spin on Solarized';
+      theme_slogans.Spacelab      = 'Silvery and sleek';
+      theme_slogans.Superhero     = 'The brave and the blue';
+      theme_slogans.United        = 'Ubuntu orange and unique font';
+      theme_slogans.Vapor         = 'A cyberpunk aesthetic';
+      theme_slogans.Yeti          = 'A friendly foundation';
+      theme_slogans.Zephyr        = 'Breezy and beautiful';
 
       var dependencies_met_themer = setInterval(function() {
         interval_count += 1;
@@ -131,11 +162,13 @@ resource_options:
           if ( user_state_detected ) {
             user_state = j1.readCookie(cookie_names.user_state);
             themeName  = user_state.theme_name;
-          } else {
-            themeName  = 'J1 Default';
           }
-          var themeNameHeadline = '<h1 id="theme_name">Theme ' +themeName+ '</h1>';
+          theme_slogan = theme_slogans[themeName];
+
+          var themeNameHeadline = '<h1 id="theme_name" class="mb-0">Theme ' +themeName+ '</h1>';
           $('#theme').prepend(themeNameHeadline);
+          $('#theme').append('<p class="tagline mb-2"><b>'  + theme_slogan + '</b></p>');
+          $('#theme').append('<div class="d-inline-block g-width-50 g-height-2 bg-primary mb-2"></div>');
           clearInterval(dependencies_met_themer);
           }
         if (interval_count > max_count) {
@@ -176,38 +209,136 @@ colors. Then, customize with `.bg-*` utilities.
 
 ++++
 <div class="doc-example mb-3">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarColor01" aria-controls="navbarColor01"
+        aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+      <div class="collapse navbar-collapse" id="navbarColor01">
+        <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" href="#">Home
+              <span class="visually-hidden">(current)</span>
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
           </li>
           <li class="nav-item dropdown">
-            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+              href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Separated link</a>
+            </div>
           </li>
         </ul>
         <form class="d-flex">
-          <input class="form-control bg-body mt-1 me-5" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success ml-2" type="submit">Search</button>
+          <input class="form-control me-sm-2" type="text" placeholder="Search">
+          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarColor02" aria-controls="navbarColor02"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarColor02">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Home
+              <span class="visually-hidden">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+              href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Separated link</a>
+            </div>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-sm-2" type="text" placeholder="Search">
+          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarColor03" aria-controls="navbarColor03"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarColor03">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link active" href="#">Home
+              <span class="visually-hidden">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">About</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+              ref="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Separated link</a>
+            </div>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-sm-2" type="text" placeholder="Search">
+          <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
         </form>
       </div>
     </div>
@@ -215,50 +346,51 @@ colors. Then, customize with `.bg-*` utilities.
 </div>
 ++++
 
-[source, html, role="noclip"]
+[source, html]
 ----
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <button class="navbar-toggler" type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent"
-        aria-expanded="false"
-        aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a id="navbarDropdown" class="nav-link dropdown-toggle"
-              href="#"
-              role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-      </div>
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarColor01" aria-controls="navbarColor01"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarColor01">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Home
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+            href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">Something else here</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="#">Separated link</a>
+          </div>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control me-sm-2" type="text" placeholder="Search">
+        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
+      </form>
     </div>
+  </div>
   </nav>
 ----
 endif::[]
@@ -296,7 +428,7 @@ a *ripple* effect is shown for feedback.
 ++++
 <div class="doc-example mb-3">
   <button type="button" class="btn btn-primary btn-raised">Primary</button>
-  <button type="button" class="btn btn-primary btn-raised">Secondary</button>
+  <button type="button" class="btn btn-secondary btn-raised">Secondary</button>
   <button type="button" class="btn btn-success btn-raised">Success</button>
   <button type="button" class="btn btn-info btn-raised">Info</button>
   <button type="button" class="btn btn-warning btn-raised">Warning</button>
@@ -305,10 +437,10 @@ a *ripple* effect is shown for feedback.
 </div>
 ++++
 
-[source, html, role="noclip"]
+[source, html]
 ----
 <button type="button" class="btn btn-primary btn-raised">Primary</button>
-<button type="button" class="btn btn-primary btn-raised">Secondary</button>
+<button type="button" class="btn btn-secondary btn-raised">Secondary</button>
 <button type="button" class="btn btn-success btn-raised">Success</button>
 <button type="button" class="btn btn-info btn-raised">Info</button>
 <button type="button" class="btn btn-warning btn-raised">Warning</button>
@@ -326,7 +458,7 @@ Buttons look *inactive* by adding the *disabled* boolean attribute to any
 ++++
 <div class="doc-example mb-3">
   <button type="button" class="btn btn-primary btn-raised disabled">Primary</button>
-  <button type="button" class="btn btn-primary btn-raised disabled">Secondary</button>
+  <button type="button" class="btn btn-secondary btn-raised disabled">Secondary</button>
   <button type="button" class="btn btn-success btn-raised disabled">Success</button>
   <button type="button" class="btn btn-info btn-raised disabled">Info</button>
   <button type="button" class="btn btn-warning btn-raised disabled">Warning</button>
@@ -335,10 +467,10 @@ Buttons look *inactive* by adding the *disabled* boolean attribute to any
 </div>
 ++++
 
-[source, html, role="noclip"]
+[source, html]
 ----
 <button type="button" class="btn btn-primary btn-raised disabled">Primary</button>
-<button type="button" class="btn btn-primary btn-raised disabled">Secondary</button>
+<button type="button" class="btn btn-secondary btn-raised disabled">Secondary</button>
 <button type="button" class="btn btn-success btn-raised disabled">Success</button>
 <button type="button" class="btn btn-info btn-raised disabled">Info</button>
 <button type="button" class="btn btn-warning btn-raised disabled">Warning</button>
@@ -365,7 +497,7 @@ background images and colors on any button.
 </div>
 ++++
 
-[source, html, role="noclip"]
+[source, html]
 ----
 <button type="button" class="btn btn-outline-primary btn-raised">Primary</button>
 <button type="button" class="btn btn-outline-secondary btn-raised">Secondary</button>
@@ -375,6 +507,89 @@ background images and colors on any button.
 <button type="button" class="btn btn-outline-danger btn-raised">Danger</button>
 ----
 endif::[]
+
+ifeval::[{buttons_dropdown} == true]
+=== Dropdown buttons
+
+In need of a button having a little menu, buttons with a (nested)
+*dropdown* (menu) can be used.
+
+++++
+<div class="doc-example mb-3">
+  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    <button type="button" class="btn btn-primary">Primary</button>
+    <div class="btn-group" role="group">
+      <button id="btnGroupDrop1" type="button"
+        class="btn btn-primary dropdown-toggle"
+        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">
+        <a class="dropdown-item" href="#">Dropdown link</a>
+        <a class="dropdown-item" href="#">Dropdown link</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    <button type="button" class="btn btn-success">Success</button>
+    <div class="btn-group" role="group">
+      <button id="btnGroupDrop2" type="button"
+        class="btn btn-success dropdown-toggle"
+        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+      <div class="dropdown-menu" aria-labelledby="btnGroupDrop2" style="">
+        <a class="dropdown-item" href="#">Dropdown link</a>
+        <a class="dropdown-item" href="#">Dropdown link</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    <button type="button" class="btn btn-info">Info</button>
+    <div class="btn-group" role="group">
+      <button id="btnGroupDrop3" type="button"
+        class="btn btn-info dropdown-toggle"
+        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+      <div class="dropdown-menu" aria-labelledby="btnGroupDrop3" style="">
+        <a class="dropdown-item" href="#">Dropdown link</a>
+        <a class="dropdown-item" href="#">Dropdown link</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    <button type="button" class="btn btn-danger">Danger</button>
+    <div class="btn-group" role="group">
+      <button id="btnGroupDrop4" type="button"
+        class="btn btn-danger dropdown-toggle"
+        data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+      <div class="dropdown-menu" aria-labelledby="btnGroupDrop4" style="">
+        <a class="dropdown-item" href="#">Dropdown link</a>
+        <a class="dropdown-item" href="#">Dropdown link</a>
+      </div>
+    </div>
+  </div>
+</div>
+++++
+
+[source, html]
+----
+  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    <button type="button" class="btn btn-primary">Primary</button>
+    <div class="btn-group" role="group">
+      <button id="btnGroupDrop1" type="button"
+        class="btn btn-primary dropdown-toggle"
+        data-bs-toggle="dropdown"
+        aria-haspopup="true"
+        aria-expanded="false">
+      </button>
+      <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+        <a class="dropdown-item" href="#">Dropdown link</a>
+        <a class="dropdown-item" href="#">Dropdown link</a>
+      </div>
+    </div>
+</div>
+----
+endif::[]
+
 
 ifeval::[{buttons_flat} == true]
 === Flat buttons
@@ -395,7 +610,7 @@ on press.
 </div>
 ++++
 
-[source, html, role="noclip"]
+[source, html]
 ----
 <button type="button" class="btn btn-primary">Primary</button>
 <button type="button" class="btn btn-secondary">Secondary</button>
@@ -414,17 +629,17 @@ Beside the *default* size, small and large buttons are available.
 
 ++++
 <div class="doc-example mb-3">
-  <button type="button" class="btn btn-primary btn-raised btn-lg">Large</button>
-  <button type="button" class="btn btn-primary btn-raised">Default</button>
-  <button type="button" class="btn btn-primary btn-raised btn-sm">Small</button>
+  <button type="button" class="btn btn-primary btn-raised btn-lg">Large button</button>
+  <button type="button" class="btn btn-primary btn-raised">Default button</button>
+  <button type="button" class="btn btn-primary btn-raised btn-sm">Small button</button>
 </div>
 ++++
 
-[source, html, role="noclip"]
+[source, html]
 ----
-<button type="button" class="btn btn-primary btn-raised btn-lg">Large</button>
-<button type="button" class="btn btn-primary btn-raised">Default</button>
-<button type="button" class="btn btn-primary btn-raised btn-sm">Small</button>
+<button type="button" class="btn btn-primary btn-raised btn-lg">Large button</button>
+<button type="button" class="btn btn-primary btn-raised">Default button</button>
+<button type="button" class="btn btn-primary btn-raised btn-sm">Small button</button>
 ----
 endif::[]
 
@@ -439,7 +654,7 @@ Draw attention to a button, e.g for a *recommended* action.
 </div>
 ++++
 
-[source, html, role="noclip"]
+[source, html]
 ----
   <button type="button" class="btn btn-primary btn-raised pulsed-z2">Primary</button>
 ----
@@ -462,7 +677,7 @@ and responsive behaviors.
 </div>
 ++++
 
-[source, html, role="noclip"]
+[source, html]
 ----
 <div class="d-grid gap-2">
   <button type="button" class="btn btn-primary btn-lg btn-raised">Block level button</button>
@@ -514,7 +729,7 @@ from a list of *preset* (available) options.
 </div>
 ++++
 
-[source, html, role="noclip"]
+[source, html]
 ----
   <div class="checkbox">
     <label>
@@ -578,7 +793,7 @@ selection from a list of *preset* (available) options.
 </div>
 ++++
 
-[source, html, role="noclip"]
+[source, html]
 ----
   <div class="radio">
     <label>
@@ -643,7 +858,7 @@ to select *any number* of options from a list of *preset* (available) options.
 </div>
 ++++
 
-[source, html, role="noclip"]
+[source, html]
 ----
   <div class="switch">
     <label>
@@ -691,7 +906,7 @@ https://material.io/components/buttons-floating-action-button/android#using-fabs
 </div>
 ++++
 
-[source, html, role="noclip"]
+[source, html]
 ----
   <button type="button" class="btn bmd-btn-fab btn-primary" aria-label="fab-button">
     <i class="mdi mdi-plus"></i>
@@ -713,7 +928,7 @@ raising HTML elements ranging from 1 to 10.
 </div>
 ++++
 
-[source, html, role="noclip"]
+[source, html]
 ----
   <button type="button" class="btn bmd-btn-fab btn-primary raised-z5" aria-label="fab-button">
     <i class="mdi mdi-plus"></i>
@@ -735,7 +950,7 @@ captivating effect.
 </div>
 ++++
 
-[source, html, role="noclip"]
+[source, html]
 ----
   <button type="button" class="btn bmd-btn-fab btn-primary pulsed-z3" aria-label="fab-button">
     <i class="mdi mdi-plus"></i>
@@ -756,7 +971,7 @@ A smaller sized, *mini* floating action button (FAB) is also available.
 </div>
 ++++
 
-[source, html, role="noclip"]
+[source, html]
 ----
   <button type="button" class="btn btn-danger bmd-btn-fab bmd-btn-fab-sm" aria-label="fab-button-small">
     <i class="mdi mdi-plus"></i>
@@ -799,7 +1014,7 @@ be applied.
 </div>
 ++++
 
-[source, html, role="noclip"]
+[source, html]
 ----
   <button type="button" class="btn bmd-btn-fab btn-primary" aria-label="fab-button-primary">
     <i class="mdi mdi-plus"></i>
@@ -927,54 +1142,72 @@ link:{url-bs-docs--content-tables}[Bootstrap Docs {char-middot} Tables, {browser
 
 ++++
 <div class="doc-example mb-3">
-  <table class="table table-striped table-hover table-bordered">
+  <table class="table table-hover">
     <thead>
       <tr>
-        <th>#</th>
-        <th>Column heading</th>
-        <th>Column heading</th>
-        <th>Column heading</th>
+        <th scope="col">Type</th>
+        <th scope="col">Column heading</th>
+        <th scope="col">Column heading</th>
+        <th scope="col">Column heading</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>1</td>
+      <tr class="table-active">
+        <th scope="row">Active</th>
         <td>Column content</td>
         <td>Column content</td>
         <td>Column content</td>
       </tr>
       <tr>
-        <td>2</td>
+        <th scope="row">Default</th>
         <td>Column content</td>
         <td>Column content</td>
         <td>Column content</td>
       </tr>
-      <tr class="table-info">
-        <td>3</td>
+      <tr class="table-primary">
+        <th scope="row">Primary</th>
+        <td>Column content</td>
+        <td>Column content</td>
+        <td>Column content</td>
+      </tr>
+      <tr class="table-secondary">
+        <th scope="row">Secondary</th>
         <td>Column content</td>
         <td>Column content</td>
         <td>Column content</td>
       </tr>
       <tr class="table-success">
-        <td>4</td>
+        <th scope="row">Success</th>
         <td>Column content</td>
         <td>Column content</td>
         <td>Column content</td>
       </tr>
       <tr class="table-danger">
-        <td>5</td>
+        <th scope="row">Danger</th>
         <td>Column content</td>
         <td>Column content</td>
         <td>Column content</td>
       </tr>
       <tr class="table-warning">
-        <td>6</td>
+        <th scope="row">Warning</th>
         <td>Column content</td>
         <td>Column content</td>
         <td>Column content</td>
       </tr>
-      <tr class="table-active">
-        <td>7</td>
+      <tr class="table-info">
+        <th scope="row">Info</th>
+        <td>Column content</td>
+        <td>Column content</td>
+        <td>Column content</td>
+      </tr>
+      <tr class="table-light">
+        <th scope="row">Light</th>
+        <td>Column content</td>
+        <td>Column content</td>
+        <td>Column content</td>
+      </tr>
+      <tr class="table-dark">
+        <th scope="row">Dark</th>
         <td>Column content</td>
         <td>Column content</td>
         <td>Column content</td>
@@ -1044,9 +1277,9 @@ link:{url-bs-docs--components-forms}[Bootstrap Docs {char-middot} Forms, {browse
 </div>
 ++++
 
-Textual form controls—like <input>, <select>, and <textarea> are styled with
-the .form-control class. Included are styles for general appearance, focus
-state, sizing, and more.
+Textual form controls-like `<input>`, `<select>`, and `<textarea>` are styled
+with the `.form-control` class. Included are styles for general appearance,
+focus state, sizing, and more.
 
 ++++
 <div class="doc-example mb-3">
@@ -1081,18 +1314,213 @@ state, sizing, and more.
 </div>
 ++++
 
-For file inputs, swap the .form-control for .form-control-file.
+For file inputs, swap the `.form-control` for `.form-control-file`.
+
+// ++++
+// <div class="doc-example mb-3">
+//   <form>
+//     <div class="form-group">
+//       <input type="file" class="form-control-file" id="exampleFormControlFile1">
+//       <label for="exampleFormControlFile1" class="bmd-label-floating">Example file input</label>
+//     </div>
+//   </form>
+// </div>
+// ++++
+
+++++
+<div class="doc-example mb-3">
+  <div class="form-group">
+    <label for="formFile" class="form-label mt-4">Default file input example</label>
+    <input class="form-control" type="file" id="formFile">
+  </div>
+</div>
+++++
+
+=== Bootswatch Forms
 
 ++++
 <div class="doc-example mb-3">
   <form>
-    <div class="form-group">
-      <input type="file" class="form-control-file" id="exampleFormControlFile1">
-      <label for="exampleFormControlFile1" class="bmd-label-floating">Example file input</label>
-    </div>
+    <fieldset>
+      <div class="form-group row">
+        <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+        <div class="col-sm-10">
+          <input type="text" readonly="" class="form-control-plaintext" id="staticEmail" value="email@example.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputEmail11" class="form-label mt-4">Email address</label>
+        <input type="email" class="form-control" id="exampleInputEmail11" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword11" class="form-label mt-4">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword11" placeholder="Password">
+      </div>
+      <div class="form-group">
+        <label for="exampleSelect1" class="form-label mt-4">Example select</label>
+        <select class="form-select" id="exampleSelect1">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleSelect2" class="form-label mt-4">Example multiple select</label>
+        <select multiple="" class="form-select" id="exampleSelect2">
+          <option>1</option>
+          <option>2</option>
+          <option>3</option>
+          <option>4</option>
+          <option>5</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="exampleTextarea" class="form-label mt-4">Example textarea</label>
+        <textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="formFile" class="form-label mt-4">Default file input example</label>
+        <input class="form-control" type="file" id="formFile">
+      </div>
+      <fieldset class="form-group">
+        <legend class="mt-4">Radio buttons</legend>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios1" value="option1" checked="">
+            Option one is this and that—be sure to include why it's great
+          </label>
+        </div>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios2" value="option2">
+            Option two can be something else and selecting it will deselect option one
+          </label>
+        </div>
+        <div class="form-check disabled">
+          <label class="form-check-label">
+            <input type="radio" class="form-check-input" name="optionsRadios" id="optionsRadios3" value="option3" disabled="">
+            Option three is disabled
+          </label>
+        </div>
+      </fieldset>
+      <fieldset class="form-group">
+        <legend class="mt-4">Checkboxes</legend>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault">
+            Default checkbox
+          </label>
+        </div>
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked="">
+          <label class="form-check-label" for="flexCheckChecked">
+            Checked checkbox
+          </label>
+        </div>
+      </fieldset>
+      <fieldset>
+        <legend class="mt-4">Switches</legend>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+          <label class="form-check-label" for="flexSwitchCheckDefault">Default switch checkbox input</label>
+        </div>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked="">
+          <label class="form-check-label" for="flexSwitchCheckChecked">Checked switch checkbox input</label>
+        </div>
+      </fieldset>
+      <fieldset class="form-group">
+        <legend class="mt-4">Ranges</legend>
+          <label for="customRange1" class="form-label">Example range</label>
+          <input type="range" class="form-range" id="customRange1">
+          <label for="disabledRange" class="form-label">Disabled range</label>
+          <input type="range" class="form-range" id="disabledRange" disabled="">
+          <label for="customRange3" class="form-label">Example range</label>
+          <input type="range" class="form-range" min="0" max="5" step="0.5" id="customRange3">
+      </fieldset>
+      <!-- button type="submit" class="btn btn-primary">Submit</button -->
+    </fieldset>
   </form>
 </div>
 ++++
+
+=== Bootswatch Inputs
+
+++++
+<div class="doc-example mb-3">
+  <div class="form-group">
+    <fieldset disabled="">
+      <label class="form-label" for="disabledInput">Disabled input</label>
+      <input class="form-control" id="disabledInput" type="text" placeholder="Disabled input here..." disabled="">
+    </fieldset>
+  </div>
+
+  <div class="form-group">
+    <fieldset>
+      <label class="form-label mt-4" for="readOnlyInput">Readonly input</label>
+      <input class="form-control" id="readOnlyInput" type="text" placeholder="Readonly input here..." readonly="">
+    </fieldset>
+  </div>
+
+  <div class="form-group has-success">
+    <label class="form-label mt-4" for="inputValid">Valid input</label>
+    <input type="text" value="correct value" class="form-control is-valid" id="inputValid">
+    <div class="valid-feedback">Success! You've done it.</div>
+  </div>
+
+  <div class="form-group has-danger">
+    <label class="form-label mt-4" for="inputInvalid">Invalid input</label>
+    <input type="text" value="wrong value" class="form-control is-invalid" id="inputInvalid">
+    <div class="invalid-feedback">Sorry, that username's taken. Try another?</div>
+  </div>
+
+  <div class="form-group">
+    <label class="col-form-label col-form-label-lg mt-4" for="inputLarge">Large input</label>
+    <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg" id="inputLarge">
+  </div>
+
+  <div class="form-group">
+    <label class="col-form-label mt-4" for="inputDefault">Default input</label>
+    <input type="text" class="form-control" placeholder="Default input" id="inputDefault">
+  </div>
+
+  <div class="form-group">
+    <label class="col-form-label col-form-label-sm mt-4" for="inputSmall">Small input</label>
+    <input class="form-control form-control-sm" type="text" placeholder=".form-control-sm" id="inputSmall">
+  </div>
+
+  <div class="form-group">
+    <label class="form-label mt-4">Input addons</label>
+    <div class="form-group">
+      <div class="input-group mb-3">
+        <span class="input-group-text">$</span>
+        <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+        <span class="input-group-text">.00</span>
+      </div>
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="button-addon2">
+        <button class="btn btn-primary" type="button" id="button-addon2">Button</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="form-label mt-4">Floating labels</label>
+    <div class="form-floating mb-3">
+      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <label for="floatingInput">Email address</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <label for="floatingPassword">Password</label>
+    </div>
+  </div>
+</div>
+++++
+
 endif::[]
 
 ifeval::[{navs} == true]
@@ -1449,11 +1877,11 @@ Chromium-based browsers like Chrome, Edge, Safari or Opera support the *webkit*
 `::-webkit-scrollbar` pseudo element, which allows to modify the look of the
 browser's scrollbar.
 
-NOTE: Custom (webkit-based) scrollbars are not supported with the Firefox
+NOTE: Custom webkit-based scrollbars are *not* supported with the *Firefox*
 browser.
 
-.Default scrollbar J1 Template
-[source, css, role="noclip"]
+.Default scrollbar (J1 Template)
+[source, css]
 ----
 ::-webkit-scrollbar {
 	width: 12px;
@@ -1470,7 +1898,7 @@ browser.
 }
 ----
 
-For J1 Template, following flavours are implemented.
+For the following flavours are implemented.
 
 [subs="attributes"]
 ++++
@@ -1552,7 +1980,7 @@ ifeval::[{progress_basic} == true]
 ++++
 
 .Basic progressbar
-[source, html, role="noclip"]
+[source, html]
 ----
   <div class="progress">
     <div  class="progress-bar" role="progressbar"
@@ -1586,7 +2014,7 @@ ifeval::[{progress_contextual_alternatives} == true]
 ++++
 
 .Progressbar SUCCESS
-[source, html, role="noclip"]
+[source, html]
 ----
   <div class="progress">
     <div  class="progress-bar bg-success" role="progressbar"
@@ -2333,7 +2761,7 @@ closed, any tooltips and popovers within are also automatically dismissed.
 |===
 
 .Base Modal example
-[source, html, role="noclip"]
+[source, html]
 ----
 <!-- Trigger Button (modal) -->
 <div class="ml-0">
@@ -2411,7 +2839,7 @@ link:{url-bs-docs--components-tooltips}[Bootstrap Docs {char-middot} Tooltips, {
 ++++
 
 .Examples for Tooltips
-[source, html, role="noclip"]
+[source, html]
 ----
   <button type="button" class="btn btn-primary btn-raised"
     data-bs-toggle="tooltip"
@@ -2456,7 +2884,7 @@ link:{url-bs-docs--components-popovers}[Bootstrap Docs {char-middot} Popovers, {
 ++++
 
 .Examples for Popovers
-[source, html, role="noclip"]
+[source, html]
 ----
   <button type="button" class="btn btn-primary btn-raised"
     title="Popover Title"

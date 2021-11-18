@@ -75,7 +75,7 @@ body {
     }
     .modal-footer {
 	    padding: 2rem 2rem 2rem 2rem !important;
-	    border-top: 1px solid $grey-300 !important;
+	    border-top: 1px solid $gray-300 !important;
     }
     .modal-footer-show {
 	    padding: 1rem 2rem 1.75rem 2rem;
@@ -261,7 +261,7 @@ body {
 			background-color: $color_modal_primary;
 		}
 		.mdi {
-			color: $grey-100 !important;
+			color: $gray-100 !important;
 		}
 	}
 	&.modal-info {
@@ -272,7 +272,7 @@ body {
 			background-color: $color_modal_info;
 		}
 		.mdi {
-			color: $grey-100 !important;
+			color: $gray-100 !important;
 		}
 	}
 	&.modal-warning {
@@ -283,7 +283,7 @@ body {
 			background-color: $color_modal_warning;
 		}
 		.mdi {
-			color: $grey-100 !important;
+			color: $gray-100 !important;
 		}
 	}
 	&.modal-success {
@@ -294,7 +294,7 @@ body {
 			background-color: $color_modal_success;
 		}
 		.mdi {
-			color: $grey-100 !important;
+			color: $gray-100 !important;
 		}
 	}
 	&.modal-danger {
@@ -305,7 +305,7 @@ body {
 			background-color: $color_modal_danger;
 		}
 		.mdi {
-			color: $grey-100 !important;
+			color: $gray-100 !important;
 		}
 	}
 }

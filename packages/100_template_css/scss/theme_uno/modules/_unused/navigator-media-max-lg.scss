@@ -97,7 +97,7 @@
 						display: block;
 						width: 100%;
 						padding: 10px 5px;
-						//border-bottom: solid 1px $grey-300;
+						//border-bottom: solid 1px $gray-300;
 						padding-bottom: 15px;
 						border-bottom: 0;
 					}
@@ -109,7 +109,7 @@
 					width: 95%;
 					line-height: 1rem;
           // jadams, 2020-06-18: removed border line
-					// border-bottom: dotted 1px $grey-300;
+					// border-bottom: dotted 1px $gray-300;
           //
           // jadams, 2020-06-21: removed style from QL items
           // &:first-child {
@@ -191,11 +191,11 @@
 								> a {
                   // jadams, 2018-01-04: redesign mobile menu (flex)
 									width: 100%;
-									color: $grey-50 !important;
+									color: $gray-50 !important;
 									padding: .5rem 0 .5rem .5rem;
                   display: inline-flex;
               		align-items: center;
-									// border-bottom: dotted 1px $grey-300;
+									// border-bottom: dotted 1px $gray-300;
 									&:hover {
 										color: $blue !important;
 									}
@@ -238,7 +238,7 @@
 					}
 				}
 				&.navbar-nav.navbar-left > li:last-child > ul.dropdown-menu {
-					//border-bottom: solid 1px $grey-300;
+					//border-bottom: solid 1px $gray-300;
 				}
 			}
 			&.navbar-mobile {
@@ -376,8 +376,8 @@
 					letter-spacing: 0;
 					margin-bottom: 0;
 					cursor: pointer;
-					border-bottom: solid 1px $grey-300;
-					color: $grey-800;
+					border-bottom: solid 1px $gray-300;
+					color: $gray-800;
 				}
 				&:last-child {
 					.title {
@@ -393,14 +393,14 @@
 				ul > li > a {
 					display: block;
 					width: 100%;
-					border-bottom: solid 1px $grey-300;
+					border-bottom: solid 1px $gray-300;
 					padding: 8px 0;
 				}
 				&.on:last-child .title {
-					border-bottom: solid 1px $grey-300;
+					border-bottom: solid 1px $gray-300;
 				}
 				&.open:last-child .title {
-					border-bottom: solid 1px $grey-300;
+					border-bottom: solid 1px $gray-300;
 				}
 			}
 			&.navbar-sidebar .share {
@@ -424,7 +424,7 @@
 				background-repeat: unset;
 			}
 			.navbar-default .navbar-nav > li > a {
-				color: $grey-50 !important;
+				color: $gray-50 !important;
 				&:hover {
 					color: $blue !important;
 				}

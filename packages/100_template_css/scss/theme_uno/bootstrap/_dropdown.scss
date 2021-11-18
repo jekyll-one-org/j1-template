@@ -18,9 +18,9 @@
 // jadams, 2020-09-02: to be checked if overloading conflicts
 // with base BS styles (e.g. loaded as theme)
 .dropdown-item {
-  color: $grey !important;
+  color: $gray !important;
 }
 
 .dropdown-item:focus, .dropdown-item:hover {
-  background-color: $grey-300 !important;
+  background-color: $gray-300 !important;
 }

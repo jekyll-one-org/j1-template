@@ -51,7 +51,7 @@ form {
 .form-control {
   background: $bmd-form-control-bg-repeat-y $bmd-form-control-bg-position;
   background-size: $bmd-form-control-bg-size;
-  border: 0 !important;                                                         // Overwrite border for all BS themes!
+  border: 0;                                                                    // jadams, 2021-11-18: disabled !important - Overwrite border for all BS themes!
   transition: background 0s ease-out;
   padding-left: 0;
   padding-right: 0;

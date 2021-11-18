@@ -34,6 +34,7 @@
 // @import "extentions/container";                                              // jadams, 2021-11-17: disabled
 
 @import "extentions/dropcap";
+@import "extentions/fab";
 @import "extentions/footer";
 @import "extentions/images";
 @import "extentions/lane";
@@ -70,7 +71,7 @@
 
 // MDE styles
 // -----------------------------------------------------------------------------
-@import "extentions/mde/_buttons";
+@import "extentions/mde/_buttons";                                              // jadams, 2021-11-18: disabled ??
 
 // @import "extentions/mde/_cards";                                             // disabled
 
@@ -81,6 +82,6 @@
 
 @import "extentions/mde/_color_table";
 @import "extentions/mde/_elevation";
-@import "extentions/mde/_nav_tabs_pills";                                       // disabled|to be removed or moved
+// @import "extentions/mde/_nav_tabs_pills";                                    // jadams, 2021-11-18: disabled
 
-// @import "extentions/mde/_transparency";                                      // disabled
+// @import "extentions/mde/_transparency";                                      // jadams, 2021-11-18: disabled

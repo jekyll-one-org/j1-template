@@ -14,24 +14,24 @@
 */
 
 .popover {
-  background: $grey-300;
+  background: $gray-300;
 }
 
 .popover-header {
-  background-color: $grey-200;
+  background-color: $gray-200;
 }
 
 .bs-popover-top .popover-arrow:after {
-  border-top-color: $grey-300 !important;
+  border-top-color: $gray-300 !important;
 }
 .bs-popover-end .popover-arrow:after {
-  border-right-color: $grey-300 !important;
+  border-right-color: $gray-300 !important;
 }
 .bs-popover-bottom .popover-arrow:after {
-  border-bottom-color: $grey-200 !important;
+  border-bottom-color: $gray-200 !important;
 }
 .bs-popover-start .popover-arrow:after {
-  border-left-color: $grey-300 !important;
+  border-left-color: $gray-300 !important;
 }
 
 // colored popovers

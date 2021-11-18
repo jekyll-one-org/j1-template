@@ -21,39 +21,14 @@
   # ----------------------------------------------------------------------------
 */
 
-$theme: "uno_light" !default;
-
-// // BS@5 CSS source files
-// // -----------------------------------------------------------------------------
-// @import "~bootstrap/scss/bootstrap";
-//
-
-// BS variable overrides (BS|Theme variable overrides goes here)
-// -----------------------------------------------------------------------------
-@import "theme_uno/variables";
-
-// Functions|Mixins
-// -----------------------------------------------------------------------------
-@import "theme_uno/mixins";
-
-
 // BS@5 CSS source files
 // -----------------------------------------------------------------------------
 @import "~bootstrap/scss/bootstrap";
 
-
-// Global overrides
+// BS variable overrides (BS|Theme variable overrides goes here)
 // -----------------------------------------------------------------------------
-// @import "theme_uno/reboot";
+@import "theme_vapor/variables";
 
-// BS overrides (BS|CSS theme overrides goes here)
+// Functions|Mixins
 // -----------------------------------------------------------------------------
-@import "theme_uno/bootstrap";
-
-// Extentions
-// -----------------------------------------------------------------------------
-@import "theme_uno/extentions";
-
-// Modules
-// -----------------------------------------------------------------------------
-@import "theme_uno/modules";
+@import "theme_vapor/scss/bootswatch";

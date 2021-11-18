@@ -43,7 +43,7 @@ $timeline-title-background-color:                 theme-color(primary) !default;
   font-size: 14px;
 }
 h2.timeline-header-box {
-  color: $grey-900;
+  color: $gray-900;
   position: relative;
   margin-bottom: 30px;
 }
@@ -54,7 +54,7 @@ h2.timeline-header-box:after {
   height: 2px;
   content: " ";
   bottom: -10px;
-  background: $grey-900;
+  background: $gray-900;
   position: absolute;
 }
 
@@ -88,7 +88,7 @@ h2.timeline-header-box:after {
 .timeline-title {
 	display: block;
 	margin: 1.25rem 1.5rem .75rem .75rem;
-	border-bottom: 1px solid $grey-100;
+	border-bottom: 1px solid $gray-100;
 }
 
 .timeline-title  h2 {
@@ -159,7 +159,7 @@ a.timeline-list-unstyled:hover {
 	position: absolute;
 	content: " ";
 	width: 3px;
-	background-color: $grey-100;
+	background-color: $gray-100;
 	left: 50%;
 	margin-left: -1.5px;
 }
@@ -196,7 +196,7 @@ a.timeline-list-unstyled:hover {
 .timeline > li > .timeline-panel {
 	width: 94%;
 	float: left;
-	// border: 1px solid $grey-100;
+	// border: 1px solid $gray-100;
 	// border-radius: 1px;
 	position: relative;
 }
@@ -208,8 +208,8 @@ a.timeline-list-unstyled:hover {
 	right: -15px;
 	display: inline-block;
 	border-top: 15px solid transparent;
-	border-left: 15px solid $grey-100;
-	border-right: 0 solid $grey-100;
+	border-left: 15px solid $gray-100;
+	border-right: 0 solid $gray-100;
 	border-bottom: 15px solid transparent;
 	content: " ";
 }
@@ -281,7 +281,7 @@ a.timeline-list-unstyled:hover {
 .timeline .timeline-footer{
   padding: 7px 12px;
   overflow: hidden;
-  border-top: 1px solid $grey-100;
+  border-top: 1px solid $gray-100;
 }
 
 .timeline .timeline-footer .blog-info {
@@ -289,7 +289,7 @@ a.timeline-list-unstyled:hover {
 }
 
 .timeline .timeline-footer .blog-info i {
-	color: $grey;
+	color: $gray;
 }
 
 .timeline .timeline-footer .likes {
@@ -297,7 +297,7 @@ a.timeline-list-unstyled:hover {
 }
 .timeline .timeline-footer .likes i {
 	margin-right: 2px;
-	color: $grey;
+	color: $gray;
 }
 
 .timeline .timeline-footer .likes:hover {
@@ -335,7 +335,7 @@ a.timeline-list-unstyled:hover {
 		top: 31px;
 		right: -11px;
 		border-top: 11px solid transparent;
-		border-left: 11px solid $grey-100;
+		border-left: 11px solid $gray-100;
 		border-bottom: 11px solid transparent;
 	}
 
@@ -343,7 +343,7 @@ a.timeline-list-unstyled:hover {
 		top: 32px;
 		right: -10px;
 		border-top: 10px solid transparent;
-		border-left: 10px solid $grey-50;
+		border-left: 10px solid $gray-50;
 		border-bottom: 10px solid transparent;
 	}
 	.timeline > li.timeline-inverted > .timeline-panel:before {
@@ -393,7 +393,7 @@ a.timeline-list-unstyled:hover {
   	top: 27px;
 		right: -12px;
 		border-top: 12px solid transparent;
-		border-left: 12px solid $grey-100;
+		border-left: 12px solid $gray-100;
 		border-bottom: 12px solid transparent;
 	}
 

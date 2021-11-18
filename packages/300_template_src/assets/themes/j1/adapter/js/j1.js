@@ -990,7 +990,7 @@ var j1 = (function () {
       }
 
       logger.info('\n' + 'finalize page');
-      j1.setCss();
+      // j1.setCss();
 
       logText= '\n' + 'loading page partials: started';
       logger.info(logText);

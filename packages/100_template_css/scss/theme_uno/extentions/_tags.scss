@@ -46,7 +46,7 @@
 	a {
 		padding: 4px 6px;
 		margin: 2px;
-		color: $grey-50;
+		color: $gray-50;
 		background-color: $pink;
 		//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
 		border-radius: 4px;
@@ -94,7 +94,7 @@
 				transition: .2s;
 //  		box-shadow: 0 16px 26px -10px rgba(158, 158, 158, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(97, 97, 97, 0.2);
 				&:hover {
-					background-color: $grey-900;
+					background-color: $gray-900;
 					span {
 						color: $blue;
 					}
@@ -108,7 +108,7 @@
 				width: 20px;
 				height: 20px;
 				line-height: 1.5;
-				background-color: $grey-50;
+				background-color: $gray-50;
 				//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
 				border-radius: 100%;
 				color: $black;
@@ -131,7 +131,7 @@
 }
 .tag-numerator .badge {
 	padding: 5px 20px;
-	background-color: $grey-700;
+	background-color: $gray-700;
 }
 
 

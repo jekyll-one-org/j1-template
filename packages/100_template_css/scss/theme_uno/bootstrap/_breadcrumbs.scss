@@ -15,11 +15,11 @@
 .breadcrumb {
     font-size: .9rem;
     padding: 0 0 0 0.5rem !important;
-    background-color: $grey-200 !important;
-    border: 1px solid $grey-500;
+    background-color: $gray-200 !important;
+    border: 1px solid $gray-500;
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
-    color: $grey-900;
+    color: $gray-900;
     content: "\20 \B7 \20" !important;
 }

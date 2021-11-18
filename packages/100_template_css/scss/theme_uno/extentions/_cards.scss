@@ -137,7 +137,7 @@
 }
 
 .card .card-title {
-  color: $grey-900;
+  color: $gray-900;
 }
 
 a.card-title:hover {
@@ -262,7 +262,7 @@ a.card-title:hover {
 }
 
 .card .category:not([class*="text-"]) {
-  color: $grey;
+  color: $gray;
 }
 
 
@@ -306,7 +306,7 @@ a.card-title:hover {
 .card [class*="header-"],
 .card [class*="content-"] {
   /* jadams: color: $white; */
-  color: $grey-900
+  color: $gray-900
 }
 .card [class*="header-"] .card-title a,
 .card [class*="header-"] .card-title,
@@ -315,7 +315,7 @@ a.card-title:hover {
 .card [class*="content-"] .card-title,
 .card [class*="content-"] .icon i {
   /* jadams: color: $white; */
-  color: $grey-900
+  color: $gray-900
 }
 .card [class*="header-"] .icon i,
 .card [class*="content-"] .icon i {
@@ -336,7 +336,7 @@ a.card-title:hover {
 .card [class*="content-"] .author a:focus,
 .card [class*="content-"] .author a:active {
   /* jadams: color: $white; */
-  color: $grey-900
+  color: $gray-900
 }
 .card [class*="content-"] {
   border-radius: 1px;
@@ -383,12 +383,12 @@ a.card-title:hover {
   display: inline-block;
 }
 .card .footer .author {
-  color: $grey-200;
+  color: $gray-200;
 }
 .card .footer .stats {
   float: right;
   //line-height: 30px;
-  color: $grey-200;
+  color: $gray-200;
 }
 .card .footer .stats .material-icons {
   position: relative;
@@ -405,7 +405,7 @@ a.card-title:hover {
 }
 
 .card-footer-text {
-    color: $grey-900;
+    color: $gray-900;
 }
 
 // Cards variants
@@ -608,7 +608,7 @@ a.card-title:hover {
 }
 .card-pricing .icon {
   padding: 10px 0 0px;
-  color: $grey-200;
+  color: $gray-200;
 }
 .card-pricing .icon i {
   font-size: 80px;
@@ -633,7 +633,7 @@ a.card-title:hover {
   margin: 10px auto;
 }
 .card-pricing ul li {
-  color: $grey-200;
+  color: $gray-200;
   //text-align: center;
   display: inline-flex;
   align-items: flex-end;
@@ -644,7 +644,7 @@ a.card-title:hover {
   border: 0;
 }
 .card-pricing ul li b {
-  color: $grey-700;
+  color: $gray-700;
 }
 .card-pricing ul li i {
   top: 6px;

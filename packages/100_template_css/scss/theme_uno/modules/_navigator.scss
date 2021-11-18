@@ -59,11 +59,11 @@ $dropdown-menu-min-width:                         350px;
 // $blue-900:                                        #0D47A1;
 // $green:                                           #8BC34A;
 //
-// $grey:                                            #9E9E9E;
-// $grey-50:                                         #FAFAFA;
-// $grey-200:                                        #EEEEEE;
-// $grey-800:                                        #424242;
-// $grey-900:                                        #212121;
+// $gray:                                            #9E9E9E;
+// $gray-50:                                         #FAFAFA;
+// $gray-200:                                        #EEEEEE;
+// $gray-800:                                        #424242;
+// $gray-900:                                        #212121;
 //
 // $darken:                                          rgba(0, 0, 0, 0.5);
 // $darken-100:                                      rgba(0,0,0,0.1);
@@ -198,7 +198,7 @@ li.dropdown.nav-item.nav-sub-item:before {
   	margin: 0;
   	font-size: 13px;  // jadams: set font-size to 13px list-style: none;
   	li a {
-  		color: $grey-800;
+  		color: $gray-800;
   		&:hover {
   			text-decoration: none;
   		}
@@ -225,7 +225,7 @@ li.dropdown.nav-item.nav-sub-item:before {
   	position: absolute;
   }
   .heading-footer h2 {
-  	color: $grey-200;
+  	color: $gray-200;
   	font-size: 18px;
   	text-transform: uppercase;
   }
@@ -438,7 +438,7 @@ li.dropdown.nav-item.nav-sub-item:before {
   			left: 0;
   			padding: 0 0 0 0 !important;
   			background: $white;
-  			box-shadow: 1px 0 1px 0 $grey-200;
+  			box-shadow: 1px 0 1px 0 $gray-200;
   			.scroller {
   				width: 280px;
   				overflow-y: auto;
@@ -488,7 +488,7 @@ li.dropdown.nav-item.nav-sub-item:before {
   								li {
   									a {
   										padding: 5px 15px;
-  										color: $grey-800;
+  										color: $gray-800;
   										border: none;
   									}
                     // dropdown indicator
@@ -544,7 +544,7 @@ li.dropdown.nav-item.nav-sub-item:before {
   					letter-spacing: 0;
   					margin-bottom: 0;
   					cursor: pointer;
-  					color: $grey-800;
+  					color: $gray-800;
   				}
   				.content {
   					padding: 0 0 0 15px;
@@ -667,8 +667,8 @@ li.dropdown.nav-item.nav-sub-item:before {
   					.col-menu {
   						// padding: 0 30px;
   						// margin: 0 -0.5px;
-  						border-left: solid 1px $grey-200;
-  						//border-right: solid 1px $grey-200;
+  						border-left: solid 1px $gray-200;
+  						//border-right: solid 1px $gray-200;
   						//margin: 0;
   						&:first-child {
   							border-left: none;
@@ -686,7 +686,7 @@ li.dropdown.nav-item.nav-sub-item:before {
   						width: 100%;
   						margin-bottom: 0;
   						border-bottom: none;
-  						color: $grey-800;
+  						color: $gray-800;
   					}
   				}
   			}
@@ -741,7 +741,7 @@ li.dropdown.nav-item.nav-sub-item:before {
             // Make sense as a feature!
             // BUT: dropdown is NOT posioned below 1st level entry
             // TODO: Check 1st level dropdown pos with menu script
-  					// border-bottom: solid 3px $grey-50;
+  					// border-bottom: solid 3px $gray-50;
   				}
   				&.dark {
   					background-color: $darken-300;
@@ -750,8 +750,8 @@ li.dropdown.nav-item.nav-sub-item:before {
             // Make sense as a feature!
             // BUT: dropdown is NOT posioned below 1st level entry
             // TODO: Check 1st level dropdown pos with menu script
-  					// border-bottom: solid 3px $grey-900;
-  					// border-left: solid 1px $grey-900;
+  					// border-bottom: solid 3px $gray-900;
+  					// border-left: solid 1px $gray-900;
   				}
   			}
   			&.menu-center {
@@ -778,7 +778,7 @@ li.dropdown.nav-item.nav-sub-item:before {
   			> .active > a {
   				bottom: -2px;
   				position: relative;
-  				border-bottom: solid 2px $grey-800;  // jadams: border-bottom: solid 2px $lime;
+  				border-bottom: solid 2px $gray-800;  // jadams: border-bottom: solid 2px $lime;
   			}
         // jadams, 2019-01-17: Added left/right borders
         // jadams, 2020-10-13: REMOVED left/right borders
@@ -812,8 +812,8 @@ li.dropdown.nav-item.nav-sub-item:before {
   		}
   		&.navbar-inverse.navigator.navbar-transparent.dark {
   			background-color: $darken-300;
-  			border-bottom: solid 3px $grey-900;
-  			border-left: solid 1px $grey-900;
+  			border-bottom: solid 3px $gray-900;
+  			border-left: solid 1px $gray-900;
   		}
   	}
   }
@@ -856,7 +856,7 @@ li.dropdown.nav-item.nav-sub-item:before {
   			&.dropdown ul.dropdown-menu {
   				border-radius: 0;
   				box-shadow: 0 0 0;
-  				border: solid 1px $grey-300;
+  				border: solid 1px $gray-300;
   				margin-top: 0;
   				margin-left: 55px;
   				width: $dropdown-menu-min-width;
@@ -961,7 +961,7 @@ li.dropdown.nav-item.nav-sub-item:before {
   		}
   		.heading {
   			text-align: left;
-  			color: $grey-200;
+  			color: $gray-200;
   			font-size: 18px;
   			text-transform: uppercase;
   			position: relative;
@@ -975,14 +975,14 @@ li.dropdown.nav-item.nav-sub-item:before {
   			margin: 0;
   			list-style: none;
   			li a {
-  				color: $grey;
+  				color: $gray;
   				// letter-spacing: 1px;
   				&:focus {
-  					color: $grey-50;
+  					color: $gray-50;
   					text-decoration: none;
   				}
   				&:hover {
-  					color: $grey-50;
+  					color: $gray-50;
   					text-decoration: none;
   				}
   			}
@@ -1102,7 +1102,7 @@ li.dropdown.nav-item.nav-sub-item:before {
 		margin-left: 0 !important;
 	}
 	.dropdown-menu .divider {
-		background-color: $grey-300;
+		background-color: $gray-300;
 		height: 1px;
 		margin: 9px 0;
 		overflow: hidden;
@@ -1214,7 +1214,7 @@ li.dropdown.nav-item.nav-sub-item:before {
 						display: block;
 						width: 100%;
 						padding: 10px 5px;
-						//border-bottom: solid 1px $grey-300;
+						//border-bottom: solid 1px $gray-300;
 						padding-bottom: 15px;
 						border-bottom: 0;
 					}
@@ -1226,7 +1226,7 @@ li.dropdown.nav-item.nav-sub-item:before {
 					width: 95%;
 					line-height: 1rem;
           // jadams, 2020-06-18: removed border line
-					// border-bottom: dotted 1px $grey-300;
+					// border-bottom: dotted 1px $gray-300;
           //
           // jadams, 2020-06-21: removed style from QL items
           // &:first-child {
@@ -1308,11 +1308,11 @@ li.dropdown.nav-item.nav-sub-item:before {
 								> a {
                   // jadams, 2018-01-04: redesign mobile menu (flex)
 									width: 100%;
-									color: $grey-50 !important;
+									color: $gray-50 !important;
 									padding: .5rem 0 .5rem .5rem;
                   display: inline-flex;
               		align-items: center;
-									// border-bottom: dotted 1px $grey-300;
+									// border-bottom: dotted 1px $gray-300;
 									&:hover {
 										color: $blue !important;
 									}
@@ -1355,7 +1355,7 @@ li.dropdown.nav-item.nav-sub-item:before {
 					}
 				}
 				&.navbar-nav.navbar-left > li:last-child > ul.dropdown-menu {
-					//border-bottom: solid 1px $grey-300;
+					//border-bottom: solid 1px $gray-300;
 				}
 			}
 			&.navbar-mobile {
@@ -1495,8 +1495,8 @@ li.dropdown.nav-item.nav-sub-item:before {
 					letter-spacing: 0;
 					margin-bottom: 0;
 					cursor: pointer;
-					border-bottom: solid 1px $grey-300;
-					color: $grey-800;
+					border-bottom: solid 1px $gray-300;
+					color: $gray-800;
 				}
 				&:last-child {
 					.title {
@@ -1512,14 +1512,14 @@ li.dropdown.nav-item.nav-sub-item:before {
 				ul > li > a {
 					display: block;
 					width: 100%;
-					border-bottom: solid 1px $grey-300;
+					border-bottom: solid 1px $gray-300;
 					padding: 8px 0;
 				}
 				&.on:last-child .title {
-					border-bottom: solid 1px $grey-300;
+					border-bottom: solid 1px $gray-300;
 				}
 				&.open:last-child .title {
-					border-bottom: solid 1px $grey-300;
+					border-bottom: solid 1px $gray-300;
 				}
 			}
 			&.navbar-sidebar .share {
@@ -1543,7 +1543,7 @@ li.dropdown.nav-item.nav-sub-item:before {
 				background-repeat: unset;
 			}
 			.navbar-default .navbar-nav > li > a {
-				color: $grey-50 !important;
+				color: $gray-50 !important;
 				&:hover {
 					color: $blue !important;
 				}

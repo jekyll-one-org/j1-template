@@ -33,27 +33,25 @@ i {
     font-style: italic;
 }
 
-// jadams, 2021-11-18: disabled
-// .btn.bmd-btn-fab.btn-primary,
-// .btn.btn-raised.btn-primary,
-// .btn-group-raised
-// .btn.btn-primary {
-//     border-color: $blue;
 
-// jadams, 2021-11-18: disabled
+.btn.bmd-btn-fab.btn-primary,
+.btn.btn-raised.btn-primary,
+.btn-group-raised
+.btn.btn-primary {
+    border-color: $blue !important;
+}
+
 // jadams, 2020-11-15: set text color for (all) buttons (Google optimisation)
-// .btn.bmd-btn-fab.btn-primary,
-// .btn.btn-raised.btn-primary,
-// .btn-group-raised
-// .btn.btn-primary {
-//     color: $gray-900 !important;
-// }
+.btn.bmd-btn-fab.btn-primary,
+.btn.btn-raised.btn-primary,
+.btn-group-raised
+.btn.btn-primary {
+    color: $gray-900 !important;
+}
 
 // jadams, 2020-11-15: set hover for (all) buttons (Google optimisation)
-.btn-fab, .btn.btn-fab:hover, .btn.btn-fab:focus,
-.btn.btn-raised:hover, .btn.btn-raised:focus,
-.btn-group-raised .btn:hover, .btn-group-raised .btn:focus {
-    color: $lighten-800;                                                        // jadams, 2021-11-18: removed !important
+.btn.bmd-btn-fab:hover, .btn.bmd-btn-fab:focus, .btn.btn-raised:hover, .btn.btn-raised:focus, .btn-group-raised .btn:hover, .btn-group-raised .btn:focus {
+    color: $lighten-800 !important;
 }
 
 // removed button focus ring
@@ -64,16 +62,15 @@ button:focus {
   //outline: 5px auto -webkit-focus-ring-color;
 }
 
-// jadams, 2021-11-18: disabled
 // jadams, 2020-10-04: set hover for button links
 // jadams, 2021-04-24: added transition styles
-// a.btn:hover {
-//   color: $darken-800 !important;
-//   -webkit-transition: background-color .5s ease-out;
-//   -moz-transition: background-color .5s ease-out;
-//   -o-transition: background-color .5s ease-out;
-//   transition: background-color .5s ease-out;
-// }
+a.btn:hover {
+  color: $darken-800 !important;
+  -webkit-transition: background-color .5s ease-out;
+  -moz-transition: background-color .5s ease-out;
+  -o-transition: background-color .5s ease-out;
+  transition: background-color .5s ease-out;
+}
 
 // MD default buttons are flat by default
 // Specification: https://www.google.com/design/spec/components/buttons.html
@@ -87,6 +84,7 @@ button:focus {
   text-transform: uppercase;
   letter-spacing: 0;
   cursor: pointer;
+  background-color: transparent;
   border: 0;
   // jadams, 2021-09-03: added border-radius
   // border-radius: .25rem; $border-radius
@@ -100,16 +98,16 @@ button:focus {
   // Colors
 
   // flat removes bg, add color variations to text
-  // @include bmd-flat-button-color();                                          // jadams, 2021-11-18: disabled
+  @include bmd-flat-button-color();
 
   // fab and raised
   //  - colored, add their text and bg
   //  - hover color contrasted
   //  - shared shadow state on hover/active/focus
-  &.btn-fab,
+  &.bmd-btn-fab,
   &.btn-raised,
   .btn-group-raised & {
-    // @include bmd-raised-button-color();                                      // jadams, 2021-11-18: disabled
+    @include bmd-raised-button-color();
 
     // enlarged shadow on hover, focus
     @include hover-focus() {
@@ -156,10 +154,10 @@ button:focus {
 
   //
   // btn-outline
-  // @include bmd-outline-button-color();                                       // jadams, 2021-11-18: disabled
+  @include bmd-outline-button-color();
 
   // https://www.google.com/design/spec/components/buttons-floating-action-button.html
-  &.btn-fab,
+  &.bmd-btn-fab,
   &.bmd-btn-icon {
     overflow: hidden;
     font-size: $bmd-btn-fab-font-size;
@@ -173,20 +171,20 @@ button:focus {
       line-height: 0;
     }
 
-    // .material-icons {
-    //   position: absolute;
-    //   top: 50%;
-    //   left: 50%;
-    //   width: $bmd-btn-fab-font-size;
-    //   line-height: $bmd-btn-fab-font-size;
-    //   transform: translate(
-    //     -($bmd-btn-fab-font-size / 2),
-    //     -($bmd-btn-fab-font-size / 2)
-    //   );
-    // }
+    .material-icons {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: $bmd-btn-fab-font-size;
+      line-height: $bmd-btn-fab-font-size;
+      transform: translate(
+        -($bmd-btn-fab-font-size / 2),
+        -($bmd-btn-fab-font-size / 2)
+      );
+    }
   }
 
-  &.btn-fab {
+  &.bmd-btn-fab {
     // see above for color variations
     width: $bmd-btn-fab-size;
     min-width: $bmd-btn-fab-size;
@@ -199,7 +197,7 @@ button:focus {
       border-radius: 50%;
     }
 
-    &.btn-fab-sm,
+    &.bmd-btn-fab-sm,
     .btn-group-sm & {
       width: $bmd-btn-fab-size-sm;
       min-width: $bmd-btn-fab-size-sm;
@@ -229,29 +227,29 @@ button:focus {
       height: $bmd-btn-icon-size-sm;
       font-size: $bmd-btn-icon-font-size-sm;
 
-      // .material-icons {
-      //   width: $bmd-btn-icon-font-size-sm;
-      //   font-size: $bmd-btn-icon-font-size-sm;
-      //   line-height: 1;
-      //   vertical-align: middle;
-      //   transform: translate(
-      //     -($bmd-btn-icon-font-size-sm / 2),
-      //     -($bmd-btn-icon-font-size-sm / 2)
-      //   );
-      // }
+      .material-icons {
+        width: $bmd-btn-icon-font-size-sm;
+        font-size: $bmd-btn-icon-font-size-sm;
+        line-height: 1;
+        vertical-align: middle;
+        transform: translate(
+          -($bmd-btn-icon-font-size-sm / 2),
+          -($bmd-btn-icon-font-size-sm / 2)
+        );
+      }
     }
   }
 
   // Align icons inside buttons with text
-  // .material-icons {
-  //   position: relative;
-  //   display: inline-block;
-  //   top: .25em;
-  //   margin-top: -1em;
-  //   margin-bottom: -1em;
-  //   font-size: 1.5em;
-  //   vertical-align: middle;
-  // }
+  .material-icons {
+    position: relative;
+    display: inline-block;
+    top: .25em;
+    margin-top: -1em;
+    margin-bottom: -1em;
+    font-size: 1.5em;
+    vertical-align: middle;
+  }
 
   // Size variations
   &.btn-lg,
