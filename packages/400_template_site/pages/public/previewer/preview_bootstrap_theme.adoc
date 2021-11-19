@@ -899,7 +899,7 @@ https://material.io/components/buttons-floating-action-button/android#using-fabs
 
 ++++
 <div class="doc-example">
-  <button type="button" class="btn bmd-btn-fab btn-primary" aria-label="fab-button">
+  <button type="button" class="btn btn-fab btn-primary" aria-label="fab-button">
     <i class="mdi mdi-plus"></i>
   </button>
 </div>
@@ -907,7 +907,7 @@ https://material.io/components/buttons-floating-action-button/android#using-fabs
 
 [source, html]
 ----
-  <button type="button" class="btn bmd-btn-fab btn-primary" aria-label="fab-button">
+  <button type="button" class="btn btn-fab btn-primary" aria-label="fab-button">
     <i class="mdi mdi-plus"></i>
   </button>
 ----
@@ -921,7 +921,7 @@ raising HTML elements ranging from 1 to 10.
 
 ++++
 <div class="doc-example">
-  <button type="button" class="btn bmd-btn-fab btn-primary raised-z5" aria-label="fab-button">
+  <button type="button" class="btn btn-fab btn-primary raised-z5" aria-label="fab-button">
     <i class="mdi mdi-plus"></i>
   </button>
 </div>
@@ -929,7 +929,7 @@ raising HTML elements ranging from 1 to 10.
 
 [source, html]
 ----
-  <button type="button" class="btn bmd-btn-fab btn-primary raised-z5" aria-label="fab-button">
+  <button type="button" class="btn btn-fab btn-primary raised-z5" aria-label="fab-button">
     <i class="mdi mdi-plus"></i>
   </button>
 ----
@@ -943,7 +943,7 @@ captivating effect.
 
 ++++
 <div class="doc-example">
-  <button type="button" class="btn bmd-btn-fab btn-primary pulsed-z3" aria-label="fab-button">
+  <button type="button" class="btn btn-fab btn-primary pulsed-z3" aria-label="fab-button">
     <i class="mdi mdi-plus"></i>
   </button>
 </div>
@@ -951,7 +951,7 @@ captivating effect.
 
 [source, html]
 ----
-  <button type="button" class="btn bmd-btn-fab btn-primary pulsed-z3" aria-label="fab-button">
+  <button type="button" class="btn btn-fab btn-primary pulsed-z3" aria-label="fab-button">
     <i class="mdi mdi-plus"></i>
   </button>
 ----
@@ -964,7 +964,7 @@ A smaller sized, *mini* floating action button (FAB) is also available.
 
 ++++
 <div class="doc-example">
-  <button type="button" class="btn bmd-btn-fab bmd-btn-fab-sm btn-primary" aria-label="fab-button-small">
+  <button type="button" class="btn btn-fab btn-fab-sm btn-primary" aria-label="fab-button-small">
     <i class="mdi mdi-plus"></i>
   </button>
 </div>
@@ -972,7 +972,7 @@ A smaller sized, *mini* floating action button (FAB) is also available.
 
 [source, html]
 ----
-  <button type="button" class="btn btn-danger bmd-btn-fab bmd-btn-fab-sm" aria-label="fab-button-small">
+  <button type="button" class="btn btn-danger btn-fab btn-fab-sm" aria-label="fab-button-small">
     <i class="mdi mdi-plus"></i>
   </button>
 ----
@@ -986,28 +986,28 @@ be applied.
 
 ++++
 <div class="doc-example">
-  <button type="button" class="btn bmd-btn-fab btn-primary" aria-label="fab-button-primary">
+  <button type="button" class="btn btn-fab btn-primary" aria-label="fab-button-primary">
     <i class="mdi mdi-plus"></i>
   </button>
-  <button type="button" class="btn bmd-btn-fab btn-secondary" aria-label="fab-button-secondary">
+  <button type="button" class="btn btn-fab btn-secondary" aria-label="fab-button-secondary">
     <i class="mdi mdi-plus"></i>
   </button>
-  <button type="button" class="btn bmd-btn-fab btn-danger" aria-label="fab-button-danger">
+  <button type="button" class="btn btn-fab btn-danger" aria-label="fab-button-danger">
     <i class="mdi mdi-plus"></i>
   </button>
-  <button type="button" class="btn bmd-btn-fab btn-info" aria-label="fab-button-info">
+  <button type="button" class="btn btn-fab btn-info" aria-label="fab-button-info">
     <i class="mdi mdi-plus"></i>
   </button>
-  <button type="button" class="btn bmd-btn-fab btn-success" aria-label="fab-button-success">
+  <button type="button" class="btn btn-fab btn-success" aria-label="fab-button-success">
     <i class="mdi mdi-plus"></i>
   </button>
-  <button type="button" class="btn bmd-btn-fab btn-warning" aria-label="fab-button-warning">
+  <button type="button" class="btn btn-fab btn-warning" aria-label="fab-button-warning">
     <i class="mdi mdi-plus"></i>
   </button>
-  <button type="button" class="btn bmd-btn-fab btn-dark" aria-label="fab-button-dark">
+  <button type="button" class="btn btn-fab btn-dark" aria-label="fab-button-dark">
     <i class="mdi mdi-plus"></i>
   </button>
-  <button type="button" class="btn bmd-btn-fab btn-light" aria-label="fab-button-light">
+  <button type="button" class="btn btn-fab btn-light" aria-label="fab-button-light">
     <i class="mdi mdi-plus"></i>
   </button>
 </div>
@@ -1015,28 +1015,28 @@ be applied.
 
 [source, html]
 ----
-  <button type="button" class="btn bmd-btn-fab btn-primary" aria-label="fab-button-primary">
+  <button type="button" class="btn btn-fab btn-primary" aria-label="fab-button-primary">
     <i class="mdi mdi-plus"></i>
   </button>
-  <button type="button" class="btn bmd-btn-fab btn-secondary" aria-label="fab-button-secondary">
+  <button type="button" class="btn btn-fab btn-secondary" aria-label="fab-button-secondary">
     <i class="mdi mdi-plus"></i>
   </button>
-  <button type="button" class="btn bmd-btn-fab btn-danger" aria-label="fab-button-danger">
+  <button type="button" class="btn btn-fab btn-danger" aria-label="fab-button-danger">
     <i class="mdi mdi-plus"></i>
   </button>
-  <button type="button" class="btn bmd-btn-fab btn-info" aria-label="fab-button-info">
+  <button type="button" class="btn btn-fab btn-info" aria-label="fab-button-info">
     <i class="mdi mdi-plus"></i>
   </button>
-  <button type="button" class="btn bmd-btn-fab btn-success" aria-label="fab-button-success">
+  <button type="button" class="btn btn-fab btn-success" aria-label="fab-button-success">
     <i class="mdi mdi-plus"></i>
   </button>
-  <button type="button" class="btn bmd-btn-fab btn-warning" aria-label="fab-button-warning">
+  <button type="button" class="btn btn-fab btn-warning" aria-label="fab-button-warning">
     <i class="mdi mdi-plus"></i>
   </button>
-  <button type="button" class="btn bmd-btn-fab btn-dark" aria-label="fab-button-dark">
+  <button type="button" class="btn btn-fab btn-dark" aria-label="fab-button-dark">
     <i class="mdi mdi-plus"></i>
   </button>
-  <button type="button" class="btn bmd-btn-fab btn-light" aria-label="fab-button-light">
+  <button type="button" class="btn btn-fab btn-light" aria-label="fab-button-light">
     <i class="mdi mdi-plus"></i>
   </button>
 ----

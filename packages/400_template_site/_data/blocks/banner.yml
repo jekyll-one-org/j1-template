@@ -155,18 +155,18 @@ settings:
                                         </p>
               buttons:
 
-                - name:                 Features
-                  button:
-                    id:                 features
-                    title:              New
-                    tagline:            learn top features
-                    class:              btn btn-raised btn-xl btn-primary text-uppercase text-left mr-2 mb-2
-                    style:              "min-width: 250px"
-                    icon:               magnify
-                    icon_color:
-                    icon_size:          3x
-                    href:               '#'
-                    target:
+                # - name:                 Features
+                #   button:
+                #     id:                 features
+                #     title:              New
+                #     tagline:            learn top features
+                #     class:              btn btn-raised btn-xl btn-primary text-uppercase text-left mr-2 mb-2
+                #     style:              "min-width: 250px"
+                #     icon:               magnify
+                #     icon_color:
+                #     icon_size:          3x
+                #     href:               '#'
+                #     target:
 
                 - name:                 Roundtrip
                   button:
