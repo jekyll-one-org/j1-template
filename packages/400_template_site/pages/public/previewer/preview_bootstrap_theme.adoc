@@ -66,6 +66,7 @@ resource_options:
 :typography_blockquotes:                true
 :tables:                                true
 :forms:                                 true
+:forms_bootstrap:                       false
 :navs:                                  true
 :navs_tabs:                             true
 :navs_pills:                            true
@@ -81,10 +82,7 @@ resource_options:
 :progress_multiple_bars:                true
 :progress_striped:                      true
 :progress_animated:                     true
-:containers:                            true
-:containers_jumbotron:                  false
-:containers_list:                       true
-:containers_list_groups:                false
+:lists:                                 true
 :cards:                                 true
 :cards_simple:                          true
 :cards_image:                           false
@@ -1343,7 +1341,8 @@ For file inputs, swap the `.form-control` for `.form-control-file`.
 </div>
 ++++
 
-=== Bootswatch Forms
+ifeval::[{forms_bootstrap} == true]
+=== Bootstrap Forms
 
 ++++
 <div class="doc-example mb-3">
@@ -1454,7 +1453,7 @@ For file inputs, swap the `.form-control` for `.form-control-file`.
 </div>
 ++++
 
-=== Bootswatch Inputs
+=== Bootstrap Inputs
 
 ++++
 <div class="doc-example mb-3">
@@ -1527,7 +1526,7 @@ For file inputs, swap the `.form-control` for `.form-control-file`.
   </div>
 </div>
 ++++
-
+endif::[]
 endif::[]
 
 ifeval::[{navs} == true]
@@ -1554,7 +1553,7 @@ JavaScript plugin.
 
 ++++
 <div class="doc-example mb-3">
-  <ul class="nav nav-tabs">
+  <ul class="nav nav-tabs mb-3">
     <li class="nav-item">
       <a class="nav-link active" data-bs-toggle="tab" href="#home">Home</a>
     </li>
@@ -2085,42 +2084,8 @@ ifeval::[{progress_animated} == true]
 endif::[]
 endif::[]
 
-ifeval::[{containers} == true]
-== Containers
-
-In sense of Bootstrap, *containers* are more complex, eye-catching elements to
-showcase facts or topics of a site. Typical elements are:
-
-* Jumbotron
-* Lists
-
-Find below examples how BS can support the users awarenes.
-
-ifeval::[{containers_jumbotron} == true]
-=== Jumbotron
-
-Lightweight, flexible component for showcasing hero unit style content.
-
-mdi:bootstrap[24px, mdi-md-deep-purple]
-link:{url-bs-docs--components-jumbotron}[Bootstrap Docs {char-middot} Jumbotron, {browser-window--new}]
-
-++++
-<div class="doc-example mb-3">
-  <div class="jumbotron">
-    <h1 class="display-3">Hello, world!</h1>
-    <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
-    <hr class="my-4">
-    <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
-    <p class="lead">
-      <a href="#" class="btn btn-primary btn-raised btn-lg" role="button">Learn more</a>
-    </p>
-  </div>
-</div>
-++++
-endif::[]
-
-ifeval::[{containers_list} == true]
-=== Lists
+ifeval::[{lists} == true]
+== Lists
 
 Lists are a flexible and powerful component for displaying a series of content
 within an single HTML element.
@@ -2136,74 +2101,6 @@ within an single HTML element.
   </ul>
 </div>
 ++++
-
-ifeval::[{containers_list_groups} == true]
-==== List groups
-
-List groups are a flexible and powerful component for displaying a series of
-content. Modify and extend them to support just about any content within.
-
-mdi:bootstrap[24px, mdi-md-deep-purple]
-link:{url-bs-docs--components-list_group}[Bootstrap Docs {char-middot} List group, {browser-window--new}]
-
-++++
-<div class="doc-example mb-3">
-  <div class="row mb-5">
-    <div class="col-md-4">
-      <ul class="list-group">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Describe item #1
-          <span class="badge bg-primary rounded-pill">14</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Describe item #2
-          <span class="badge bg-primary rounded-pill">2</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Describe item #3
-          <span class="badge bg-primary rounded-pill">1</span>
-        </li>
-      </ul>
-    </div>
-
-    <div class="col-md-4">
-      <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action active">
-          Describe item #1
-        </a>
-        <a href="#" class="list-group-item list-group-item-action">Describe item #2
-        </a>
-        <a href="#" class="list-group-item list-group-item-action disabled">Describe item #3
-        </a>
-      </div>
-    </div>
-
-    <div class="col-md-4">
-      <div class="list-group">
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
-          <div class="d-flex w-100 justify-content-between">
-            <h4 class="mb-1 notoc">List group item heading</h4>
-            <small>3 days ago</small>
-          </div>
-          <p class="mb-1">Some quick example text to build on a list and make up the bulk of the list group's content.</p>
-          <small>Summarize whats all about.</small>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1 notoc">List group item heading</h5>
-            <small class="text-muted">3 days ago</small>
-          </div>
-          <p class="mb-1">Some quick example text to build on a list and make up the bulk of the list group's content.</p>
-          <small class="text-muted">Summarize whats all about.</small>
-        </a>
-      </div>
-    </div>
-
-  </div>
-</div>
-++++
-endif::[]
-endif::[]
 endif::[]
 
 ifeval::[{cards} == true]
