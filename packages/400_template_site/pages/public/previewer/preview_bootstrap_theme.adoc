@@ -75,7 +75,7 @@ resource_options:
 :indicators:                            true
 :indicators_alerts:                     true
 :indicators_badges:                     true
-:scrollbars:                            true
+:scrollbars:                            false
 :progress:                              true
 :progress_basic:                        true
 :progress_contextual_alternatives:      true
