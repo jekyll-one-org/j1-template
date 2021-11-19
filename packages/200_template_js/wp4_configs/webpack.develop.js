@@ -50,6 +50,8 @@ const devServerPageOpen =               dockerEnv ? false : true;
 const devServerPort =                   process.env.WP_JEKYLL_PORT || 50000;
 const distFolder =                      path.resolve(__dirname, './dist');
 const nodeModulesFolder =               path.resolve(__dirname, './node_modules');
+const cssSrc =                          path.resolve(__dirname, ROOT, '../100_template_css');
+const jekyllSrc =                       path.resolve(__dirname, ROOT, '../400_template_site');
 const jekyllSite =                      path.resolve(__dirname, ROOT, '../400_template_site/_site');
 const jekyllSiteAssets =                path.resolve(__dirname, ROOT, '../400_template_site/_site/assets');
 
@@ -122,8 +124,10 @@ module.exports = merge(common, {
         watchContentBase:               true,                                   // livereload for Jekyll build mode
         watchOptions:                   {
                                           ignored: [
-                                            distFolder,                         // do not watch for changes on dist folder, node modules
+                                            distFolder,                         // do not watch for changes on dist folder
                                             nodeModulesFolder,                  // do not watch for changes on node modules folder
+                                            jekyllSrc,
+                                            cssSrc,
                                             jekyllSiteAssets                    // do not watch for changes on _site/assets folder
                                           ],
                                           aggregateTimeout: 300,

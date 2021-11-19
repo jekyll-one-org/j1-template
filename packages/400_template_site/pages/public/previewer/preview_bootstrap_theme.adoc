@@ -456,25 +456,29 @@ Buttons look *inactive* by adding the *disabled* boolean attribute to any
 
 ++++
 <div class="doc-example mb-3">
-  <button type="button" class="btn btn-primary btn-raised disabled">Primary</button>
-  <button type="button" class="btn btn-secondary btn-raised disabled">Secondary</button>
-  <button type="button" class="btn btn-success btn-raised disabled">Success</button>
-  <button type="button" class="btn btn-info btn-raised disabled">Info</button>
-  <button type="button" class="btn btn-warning btn-raised disabled">Warning</button>
-  <button type="button" class="btn btn-danger btn-raised disabled">Danger</button>
-  <button type="button" class="btn btn-link btn-raised disabled">Link</button>
+  <button type="button" class="btn btn-primary disabled">Primary</button>
+  <button type="button" class="btn btn-secondary disabled">Secondary</button>
+  <button type="button" class="btn btn-success disabled">Success</button>
+  <button type="button" class="btn btn-info disabled">Info</button>
+  <button type="button" class="btn btn-warning disabled">Warning</button>
+  <button type="button" class="btn btn-danger disabled">Danger</button>
+  <button type="button" class="btn btn-light disabled">Light</button>
+  <button type="button" class="btn btn-dark disabled">Dark</button>
+  <button type="button" class="btn btn-link disabled">Link</button>
 </div>
 ++++
 
 [source, html]
 ----
-<button type="button" class="btn btn-primary btn-raised disabled">Primary</button>
-<button type="button" class="btn btn-secondary btn-raised disabled">Secondary</button>
-<button type="button" class="btn btn-success btn-raised disabled">Success</button>
-<button type="button" class="btn btn-info btn-raised disabled">Info</button>
-<button type="button" class="btn btn-warning btn-raised disabled">Warning</button>
-<button type="button" class="btn btn-danger btn-raised disabled">Danger</button>
-<button type="button" class="btn btn-link btn-raised disabled">Link</button>
+<button type="button" class="btn btn-primary disabled">Primary</button>
+<button type="button" class="btn btn-secondary disabled">Secondary</button>
+<button type="button" class="btn btn-success disabled">Success</button>
+<button type="button" class="btn btn-info disabled">Info</button>
+<button type="button" class="btn btn-warning disabled">Warning</button>
+<button type="button" class="btn btn-danger disabled">Danger</button>
+<button type="button" class="btn btn-light disabled">Light</button>
+<button type="button" class="btn btn-dark disabled">Dark</button>
+<button type="button" class="btn btn-link disabled">Link</button>
 ----
 endif::[]
 
@@ -487,23 +491,27 @@ background images and colors on any button.
 
 ++++
 <div class="doc-example mb-3">
-  <button type="button" class="btn btn-outline-primary btn-raised">Primary</button>
-  <button type="button" class="btn btn-outline-secondary btn-raised">Secondary</button>
-  <button type="button" class="btn btn-outline-success btn-raised">Success</button>
-  <button type="button" class="btn btn-outline-info btn-raised">Info</button>
-  <button type="button" class="btn btn-outline-warning btn-raised">Warning</button>
-  <button type="button" class="btn btn-outline-danger btn-raised">Danger</button>
+  <button type="button" class="btn btn-outline-primary">Primary</button>
+  <button type="button" class="btn btn-outline-secondary">Secondary</button>
+  <button type="button" class="btn btn-outline-success">Success</button>
+  <button type="button" class="btn btn-outline-info">Info</button>
+  <button type="button" class="btn btn-outline-warning">Warning</button>
+  <button type="button" class="btn btn-outline-danger">Danger</button>
+  <button type="button" class="btn btn-outline-light">Light</button>
+  <button type="button" class="btn btn-outline-dark">Dark</button>
 </div>
 ++++
 
 [source, html]
 ----
-<button type="button" class="btn btn-outline-primary btn-raised">Primary</button>
-<button type="button" class="btn btn-outline-secondary btn-raised">Secondary</button>
-<button type="button" class="btn btn-outline-success btn-raised">Success</button>
-<button type="button" class="btn btn-outline-info btn-raised">Info</button>
-<button type="button" class="btn btn-outline-warning btn-raised">Warning</button>
-<button type="button" class="btn btn-outline-danger btn-raised">Danger</button>
+<button type="button" class="btn btn-outline-primary">Primary</button>
+<button type="button" class="btn btn-outline-secondary">Secondary</button>
+<button type="button" class="btn btn-outline-success">Success</button>
+<button type="button" class="btn btn-outline-info">Info</button>
+<button type="button" class="btn btn-outline-warning">Warning</button>
+<button type="button" class="btn btn-outline-danger">Danger</button>
+<button type="button" class="btn btn-outline-light">Light</button>
+<button type="button" class="btn btn-outline-dark">Dark</button>
 ----
 endif::[]
 

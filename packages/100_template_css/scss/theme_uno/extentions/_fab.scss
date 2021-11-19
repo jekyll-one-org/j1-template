@@ -14,10 +14,108 @@
  # -----------------------------------------------------------------------------
 */
 
+$btn-fab-size:                      3.5rem !default; // 56px
+$btn-fab-size-sm:                   2.5rem !default; // 40px
+$btn-fab-font-size:                 1.5rem !default; // 24px
 
-.btn.btn-fab, .btn.bmd-btn-icon {
-    overflow: visible;
+// MD FAB button
+// -----------------------------------------------------------------------------
+.btn {
+  position: relative;
+  // jadams, 2020-04-18: removed margin for button shadow
+  // margin-bottom: $bmd-btn-margin-bottom; // just enough room so that focus shadows aren't covered up
+  // font-size: $bmd-btn-font-size;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  cursor: pointer;
+  border: 0;
+  // jadams, 2021-09-03: added border-radius
+  // border-radius: .25rem; $border-radius
+  // border-radius: $border-radius;
+  // transition: box-shadow 0.2s $bmd-animation-curve-fast-out-linear-in,
+  //   background-color 0.2s $bmd-animation-curve-default,
+  //   color 0.2s $bmd-animation-curve-default;
+  will-change: box-shadow, transform;
+
+  // fab and raised
+  //  - colored, add their text and bg
+  //  - hover color contrasted
+  //  - shared shadow state on hover/active/focus
+  &.btn-fab,
+  .btn-group-raised & {
+    // @include bmd-raised-button-color();                                      // jadams, 2021-11-18: disabled
+
+    // enlarged shadow on hover, focus
+    @include hover-focus() {
+      //border: 1px solid $blue;
+      z-index: 1; // add to the z-index so that the expanded shadow is above anything below it i.e. another button
+      @include box-shadow($bmd-shadow-4dp);
+    }
+
+    // :active - momentary press: big shadow, release and it is gone
+    // .active - persistent big shadow
+    &.active,
+    &:active {
+      z-index: 1; // add to the z-index so that the expanded shadow is above anything below it i.e. another button
+      @include box-shadow($bmd-shadow-focus);
+      //border: 1px solid $green;
+    }
+
+    // :focus - Avoid outline/boxShadow on buttons after mouseup
+    &.focus,
+    &:focus {
+      outline: 0; // disable outline
+    }
+  }
+
+  // https://www.google.com/design/spec/components/buttons-floating-action-button.html
+  &.btn-fab {
+    overflow: hidden;
+    font-size: $btn-fab-font-size;
+    line-height: 0;
+
+    .btn-group-lg &,
+    .btn-group-sm &,
+    & {
+      padding: 0; // need specificity
+      border-radius: 50%;
+      line-height: 0;
+    }
+  }
+
+  &.btn-fab {
+    // see above for color variations
+    width: $btn-fab-size;
+    min-width: $btn-fab-size;
+    height: $btn-fab-size;
+    //margin: auto;
+    //margin: 2px; // use z-index focus/hover/active instead. This is not called for in the spec, but it ensures room for the box-shadow, which is nice to have.
+    box-shadow: 0 1px 1.5px 0 $gray-lighter, 0 1px 1px 0 $gray-light;
+
+    .ripple-container {
+      border-radius: 50%;
+    }
+
+    &.btn-fab-sm,
+    .btn-group-sm & {
+      width: $btn-fab-size-sm;
+      min-width: $btn-fab-size-sm;
+      height: $btn-fab-size-sm;
+    }
+  }
 }
+
+.btn.btn-fab {
+    overflow: visible;                                                          // needed for pulsing
+}
+
+// jadams, 2020-11-15: set hover for (all) FAB buttons
+//
+.btn-fab, .btn.btn-fab:hover, .btn.btn-fab:focus {
+    color: $lighten-800;                                                        // jadams, 2021-11-18: removed !important
+}
+
 
 .fab-btn ul {
     left: 0;
@@ -31,19 +129,6 @@
     list-style-type: none;
 }
 
-// .btn-large,
-// .btn-small {
-//     border: none;
-//     border-radius: 2px;
-//     display: inline-block;
-//     height: 36px;
-//     line-height: 36px;
-//     padding: 0 16px;
-//     text-transform: uppercase;
-//     vertical-align: middle;
-//     -webkit-tap-highlight-color: transparent
-// }
-
 .btn-fab-floating.disabled,
 .btn-fab-floating[disabled] {
     pointer-events: none;
@@ -53,66 +138,6 @@
     color: #9F9F9F !important;
     cursor: default
 }
-
-// .disabled.btn-large:hover,
-// .disabled.btn-small:hover,
-// .btn-fab-floating.disabled:hover,
-// .btn-large.disabled:hover,
-// .btn-small.disabled:hover,
-// .btn-large:disabled:hover,
-// .btn-small:disabled:hover,
-// .btn-fab-floating:disabled:hover,
-// .btn-large:disabled:hover,
-// .btn-small:disabled:hover,
-// [disabled].btn-large:hover,
-// [disabled].btn-small:hover,
-// .btn-fab-floating[disabled]:hover,
-// .btn-large[disabled]:hover,
-// .btn-small[disabled]:hover {
-//     background-color: #DFDFDF !important;
-//     color: #9F9F9F !important
-// }
-
-// .btn-large,
-// .btn-small,
-// .btn-fab-floating {
-//     font-size: 14px;
-//     outline: 0
-// }
-//
-// .btn-large i,
-// .btn-small i,
-// .btn-fab-floating i {
-//     font-size: 1.3rem;
-//     line-height: inherit
-// }
-
-// .btn-large:focus,
-// .btn-small:focus,
-// .btn-fab-floating:focus {
-//     background-color: #1d7d74
-// }
-
-// .btn-large,
-// .btn-small {
-//     text-decoration: none;
-//     color: #fff;
-//     // background-color: #26a69a;
-//     text-align: center;
-//     letter-spacing: .5px;
-//     -webkit-transition: background-color .2s ease-out;
-//     transition: background-color .2s ease-out;
-//     cursor: pointer
-// }
-
-// .btn-large:hover,
-// .btn-small:hover {
-//   background-color: #424242 !important;
-// }
-//
-// .btn-fab-floating:hover {
-//   background-color: #424242 !important;
-// }
 
 .btn-fab-floating {
     display: inline-block;
