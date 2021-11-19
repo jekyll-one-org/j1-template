@@ -13,12 +13,7 @@
 */
 
 // jadams, 2021-11-19: set hover for (all) buttons
-.btn.btn-raised:hover, .btn.btn-raised:focus,
-.btn-group-raised .btn:hover, .btn-group-raised .btn:focus {
+.btn:hover, .btn:focus {
   color: $lighten-800;
-}
-
-// removed button focus ring
-button:focus {
   outline: none;
 }
