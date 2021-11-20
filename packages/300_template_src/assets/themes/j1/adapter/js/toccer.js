@@ -188,34 +188,13 @@ j1.adapter['toccer'] = (function () {
     // Set Toccer options
     // -------------------------------------------------------------------------
     initToccerCore: function (options) {
-      var scrollOffset;
+      var scrollOffset = j1.getScrollOffset();
 
       if (options  !== undefined) {
         var settings = $.extend({}, options);
       } else {
         var settings = false;
       }
-
-      // TODO: scrollOffset calculation needs revision: why needed ???
-      // calculate offset for correct (smooth) scroll position
-      //
-      var $pagehead   = $('.attic');
-      var $navbar     = $('nav.navbar');
-      var $adblock    = $('#adblock');
-
-      var navbarType  = $navbar.hasClass('navbar-fixed') ? 'fixed' : 'scrolled';
-      var fontSize    = $('body').css('font-size').replace('px','');
-
-      var f           = parseInt(fontSize);
-      var h           = $pagehead.length ? $pagehead.height() : 0;
-      var n           = $navbar.length ? $navbar.height() : 0;
-      var a           = $adblock.length ? $adblock.height() : 0;
-
-      scrollOffset    = navbarType == 'fixed' ? -1*(n + a + f) : -1*(h + n + a + f);
-
-      // static offset, to be checked why this is needed
-      //
-      scrollOffset    = scrollOffset + moduleOptions.scrollSmoothOffset
 
       _this.setState('running');
       logger.info('\n' + 'state: ' + _this.getState());
@@ -262,56 +241,40 @@ j1.adapter['toccer'] = (function () {
 
       // jadams, 2021-11-19: is this really neded?
       //
-      $(window).on('resize', function() {
-        var scrollOffset;
-        // re-calculate offset for correct (smooth) scroll position
-        //
-        var $pagehead   = $('.attic');
-        var $navbar     = $('nav.navbar');
-        var $adblock    = $('#adblock');
-        var navbarType  = $navbar.hasClass('navbar-fixed') ? 'fixed' : 'scrolled';
-        var fontSize    = $('body').css('font-size').replace('px','');
+      // $(window).on('resize', function() {
+      //   var scrollOffset = j1.getScrollOffset();
+      //
+      //   tocbot.refresh({
+      //     log:                    moduleOptions.log,
+      //     activeLinkColor:        moduleOptions.activeLinkColor,
+      //     tocSelector:            moduleOptions.tocSelector,
+      //     headingSelector:        moduleOptions.headingSelector,
+      //     ignoreSelector:         moduleOptions.ignoreSelector,
+      //     contentSelector:        moduleOptions.contentSelector,
+      //     collapseDepth:          moduleOptions.collapseDepth,
+      //     throttleTimeout:        moduleOptions.throttleTimeout,
+      //     hasInnerContainers:     false,
+      //     includeHtml:            false,
+      //     linkClass:              'toc-link',
+      //     extraLinkClasses:       '',
+      //     activeLinkClass:        'is-active-link',
+      //     listClass:              'toc-list',
+      //     extraListClasses:       '',
+      //     isCollapsedClass:       'is-collapsed',
+      //     collapsibleClass:       'is-collapsible',
+      //     listItemClass:          'toc-list-item',
+      //     positionFixedSelector:  '',
+      //     positionFixedClass:     'is-position-fixed',
+      //     fixedSidebarOffset:     'auto',
+      //     scrollContainer:        null,
+      //     scrollSmooth:           moduleOptions.scrollSmooth,
+      //     scrollSmoothDuration:   moduleOptions.scrollSmoothDuration,
+      //     scrollSmoothOffset:     scrollOffset,
+      //     headingsOffset:         1,
+      //     throttleTimeout:        moduleOptions.throttleTimeout
+      //   });
+      // });
 
-        var f           = parseInt(fontSize);
-        var h           = $pagehead.length ? $pagehead.height() : 0;
-        var n           = $navbar.length ? $navbar.height() : 0;
-        var a           = $adblock.length ? $adblock.height() : 0;
-
-        scrollOffset    = navbarType == 'fixed' ? -1*(n + a + f) : -1*(h + n + a + f);
-
-        // static offset, to be checked why this is needed
-        scrollOffset    = scrollOffset + moduleOptions.scrollSmoothOffset
-
-        tocbot.refresh({
-          log:                    moduleOptions.log,
-          activeLinkColor:        moduleOptions.activeLinkColor,
-          tocSelector:            moduleOptions.tocSelector,
-          headingSelector:        moduleOptions.headingSelector,
-          ignoreSelector:         moduleOptions.ignoreSelector,
-          contentSelector:        moduleOptions.contentSelector,
-          collapseDepth:          moduleOptions.collapseDepth,
-          throttleTimeout:        moduleOptions.throttleTimeout,
-          hasInnerContainers:     false,
-          includeHtml:            false,
-          linkClass:              'toc-link',
-          extraLinkClasses:       '',
-          activeLinkClass:        'is-active-link',
-          listClass:              'toc-list',
-          extraListClasses:       '',
-          isCollapsedClass:       'is-collapsed',
-          collapsibleClass:       'is-collapsible',
-          listItemClass:          'toc-list-item',
-          positionFixedSelector:  '',
-          positionFixedClass:     'is-position-fixed',
-          fixedSidebarOffset:     'auto',
-          scrollContainer:        null,
-          scrollSmooth:           moduleOptions.scrollSmooth,
-          scrollSmoothDuration:   moduleOptions.scrollSmoothDuration,
-          scrollSmoothOffset:     scrollOffset,
-          headingsOffset:         1,
-          throttleTimeout:        moduleOptions.throttleTimeout
-        });
-      });
     }, // END initToccerCore
 
     // -------------------------------------------------------------------------

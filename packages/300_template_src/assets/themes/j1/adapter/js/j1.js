@@ -1412,17 +1412,48 @@ var j1 = (function () {
     getTemplateVersion: function () {
       return '{{template_version}}';
     },
+
+    // -------------------------------------------------------------------------
+    // getScrollOffset()
+    // Calculate offset for correct (smooth) scroll position
+    // -------------------------------------------------------------------------
+    getScrollOffset: function () {
+      var scrollOffset;
+      var offsetCorrection;
+
+      var $pagehead     = $('.attic');
+      var $navbar       = $('nav.navbar');
+      var $adblock      = $('#adblock');
+      var navbarType    = $navbar.hasClass('navbar-fixed') ? 'fixed' : 'scrolled';
+      var fontSize      = $('body').css('font-size').replace('px','');
+
+      var f             = parseInt(fontSize);
+      var h             = $pagehead.length ? $pagehead.height() : 0;
+      var n             = $navbar.length ? $navbar.height() : 0;
+      var a             = $adblock.length ? $adblock.height() : 0;
+
+      // Unclear why or what element cause the need of a correction
+      // TODO: General revision of scrollOffset needed
+      //
+      offsetCorrection  = navbarType == 'fixed' ? 10 : -25;
+      scrollOffset      = navbarType == 'fixed'
+                            ? -1*(n + a + f) + offsetCorrection
+                            : -1*(n + a + f) + h + offsetCorrection;
+
+      return scrollOffset;
+    },
     // -------------------------------------------------------------------------
     // scrollTo()
     // Scrolls smooth to any anchor referenced by an page URL on
-    // e.g. a page reload. Values for delay|offset are taken from
+    // e.g. a page reload. Values e.g for delay are taken from
     // TOCCER module
     // -------------------------------------------------------------------------
     scrollTo: function () {
-      var logger    = log4javascript.getLogger('j1.scrollTo');
-      var anchor    = window.location.href.split('#')[1];
-      var anchor_id = typeof anchor !== 'undefined' ? '#' + anchor : false;
-      var isSlider  = false;
+      var logger          = log4javascript.getLogger('j1.scrollTo');
+      var anchor          = window.location.href.split('#')[1];
+      var anchor_id       = typeof anchor !== 'undefined' ? '#' + anchor : false;
+      var scrollDuration  = {{toccer_options.scrollSmoothDuration}};
+      var isSlider        = false;
       var selector;
       var scrollOffset;
 
@@ -1432,36 +1463,7 @@ var j1 = (function () {
         return false;
       }
 
-      var toccerScrollDuration = {{toccer_options.scrollSmoothDuration}};
-      var toccerScrollOffset   = {{toccer_options.scrollSmoothOffset}};
-
-      // calculate offset for correct (smooth) scroll position
-      //
-      var $title      = $('.document-title');
-      var $pagehead   = $('.attic');
-      var $navbar     = $('nav.navbar');
-      var $adblock    = $('#adblock');
-      var navbarType  = $navbar.hasClass('navbar-fixed') ? 'fixed' : 'scrolled';
-      var fontSize    = $('body').css('font-size').replace('px','');
-
-      var f           = parseInt(fontSize);
-//    var t           = $title.length ? $title.outerHeight(true) : 0;
-      var t           = $title.length ? $title.height() : 0;
-      var h           = $pagehead.length ? $pagehead.height() : 0;
-      var n           = $navbar.length ? $navbar.height() : 0;
-      var a           = $adblock.length ? $adblock.height() : 0;
-
-      scrollOffset    = navbarType == 'fixed' ? -1*(n + a + f) : -1*(h + n + a + f);
-
-      // Creasy workaround for the preview page
-      // TODO: scrollOffset calculation needs revision: why is this needed ???
-      if (t) {
-        // scrollOffset = scrollOffset + t + 51;
-        // scrollOffset = -1 * t;
-        scrollOffset = scrollOffset + toccerScrollOffset;
-      } else {
-        scrollOffset = scrollOffset + toccerScrollOffset;                       // static offset, to be checked why this is needed
-      }
+      scrollOffset    = j1.getScrollOffset();
 
       // Check if the anchor is an slider/gallery element
       if (typeof anchor !== 'undefined') {
@@ -1472,10 +1474,10 @@ var j1 = (function () {
         // scroll only, if an anchor is given with URL
         selector = $(anchor_id);
         if (selector.length) {
-          j1.core.scrollSmooth.scroll( anchor_id, {
-            duration: toccerScrollDuration,
-            offset: scrollOffset,
-            callback: false
+          j1.core.scrollSmooth.scroll(anchor_id, {
+            duration:   scrollDuration,
+            offset:     scrollOffset,
+            callback:   false
           });
         } else {
           // scroll the page one pixel back and forth (trigger)
@@ -1486,7 +1488,7 @@ var j1 = (function () {
           $(window).scrollTop($(window).scrollTop()-1);
         }
       } else if (anchor_id === '#') {
-        logger.info('\n' + 'bound click event to "#void", suppress default action');
+        logger.info('\n' + 'bound click event to "#", suppress default action');
         $(window).scrollTop($(window).scrollTop()+1);
         $(window).scrollTop($(window).scrollTop()-1);
         return false;

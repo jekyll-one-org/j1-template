@@ -2766,7 +2766,6 @@ endif::[]
 
 ++++
 <script>
-
   var cookie_names  = j1.getCookieNames();
   var user_state    = j1.readCookie(cookie_names.user_state);
   var theme_slogans = {};
@@ -2809,6 +2808,5 @@ endif::[]
   $('#theme').prepend(themeNameHeadline);
   $('#theme').append('<p class="tagline mb-2"><b>'  + theme_slogan + '</b></p>');
   $('#theme').append('<div class="d-inline-block g-width-50 g-height-2 bg-primary mb-2"></div>');
-
 </script>
 ++++

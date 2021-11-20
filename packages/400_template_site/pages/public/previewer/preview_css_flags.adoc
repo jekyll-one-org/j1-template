@@ -2993,48 +2993,23 @@ Find all flags available in alphabetical order.
 
 ++++
 <script>
-
   $(function () {
-    var toccerScrollDuration = 300;
+    var logger          = log4javascript.getLogger('j1.page.scroller');
+    var scrollOffset    = j1.getScrollOffset();
+    var scrollDuration  = 300;
     var anchor_id;
-    var tgt;
-    var logger;
 
-    var dependencies_met_page_ready = setInterval(function() {
-      if (j1.getState() === 'finished') {
-        logger = log4javascript.getLogger('j1.page.scroller');
+    $('.badge').on('click', function (e) {
+      e.preventDefault();
+      anchor_id = e.target.hash;
+//    var tgt   = document.querySelector('[id="' + decodeURI(anchor_id).split('#').join('') + '"]');
 
-        $('.badge').on('click', function (e) {
-          e.preventDefault();
-          anchor_id = e.target.hash;
-          tgt       = document.querySelector('[id="' + decodeURI(anchor_id).split('#').join('') + '"]');
+      logger.debug('\n' + 'badge clicked: ' + anchor_id);
 
-          logger.debug('\n' + 'badge clicked: ' + anchor_id);
-
-          // calculate offset for correct (smooth) scroll position
-          //
-          var $pagehead     = $('.attic');
-          var $navbar       = $('nav.navbar');
-          var $adblock      = $('#adblock');
-          var navbarType    = $navbar.hasClass('navbar-fixed') ? 'fixed' : 'scrolled';
-          var fontSize      = $('body').css('font-size').replace('px','');
-
-          var l             = parseInt(fontSize);
-          var h             = $pagehead.length ? $pagehead.height() : 0;
-          var n             = $navbar.length ? $navbar.height() : 0;
-          var a             = $adblock.length ? $adblock.height() : 0;
-
-          var scrollOffset  = navbarType === 'fixed' ? -1*(n + a + l) : -1*(h + n + a + l);
-
-          $('html, body').animate({
-            scrollTop: $(anchor_id).offset().top + scrollOffset
-          }, toccerScrollDuration);
-
-        });
-        clearInterval(dependencies_met_page_ready);
-      }
-    }, 25); // END 'dependencies_met_page_ready'
+      $('html, body').animate({
+        scrollTop: $(anchor_id).offset().top + scrollOffset
+      }, scrollDuration);
+    });
   }); //END page ready
-
 </script>
 ++++
