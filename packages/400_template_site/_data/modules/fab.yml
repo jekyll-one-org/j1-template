@@ -63,7 +63,7 @@ settings:
       id:                               open_toc
       icon:                             plus
       icon_hover:                       plus
-      color:                            info
+      color:                            primary
 
       # ------------------------------------------------------------------------
       # MENU items
@@ -87,7 +87,7 @@ settings:
     # --------------------------------------------------------------------------
     # FAM for in-page navigation (simplified)
     #
-    - name:                             in-page control
+    - name:                             in-page control simple
       enabled:                          true
       id:                               page_ctrl_simple
       icon:                             plus

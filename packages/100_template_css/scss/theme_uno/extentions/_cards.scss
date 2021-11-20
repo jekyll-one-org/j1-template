@@ -32,8 +32,12 @@
   }
 }
 
+.card .not-rounded {
+  border-radius: unset !important;                                              // jadams, 2021-09-00: helper to suppress round borders
+}
+
 .card .card-header {
-  background-color: $blue;
+  background-color: $primary;
   border-bottom: 0;
 }
 
@@ -43,13 +47,16 @@
 
 .card-body {
     text-align: initial;
+    color: $gray-dark !important;                                               // jadams, 2021-11-20: optimize colors for themes
+    background-color: $lighten-700;                                             // jadams, 2021-11-20: optimize colors for themes
+
 }
 
 .card .card-footer {
   line-height: 1.25;
 	padding: 1.25rem;
-	background-color: transparent;
-  border-top: 1px dotted rgba(0, 0, 0, 0.25);
+	background-color: $lighten-500;                                               // jadams, 2021-11-20: optimize colors for themes
+  border-top: 1px dotted $darken-300;                                           // jadams, 2021-11-20: optimize colors for themes
 }
 
 /* jadams: Overwrite Bootstraps heading margins for cards */
