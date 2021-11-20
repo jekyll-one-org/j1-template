@@ -51,7 +51,7 @@ resource_options:
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // https://github.com/Templarian/MaterialDesignLight
 
-// Include sub-documents
+// Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 _Material Design Light_ (MDIL) is a helpful design resource for Web Sites that
 follow _Google's_ specification of Material Design. *MDIL* is a subset of the

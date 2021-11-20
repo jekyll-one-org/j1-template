@@ -77,7 +77,7 @@ WARNING: This document *does not* constitute any *legal advice*. It is
 highly recommended to verify legal aspects and implications.
 endif::[]
 
-// Include sub-documents
+// Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 The operators of this website take the protection of your personal data
 seriously. We treat your data confidentially and protect your data privacy to

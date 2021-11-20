@@ -1437,7 +1437,7 @@ var j1 = (function () {
 
       // calculate offset for correct (smooth) scroll position
       //
-      var $title      = $('.page-title');
+      var $title      = $('.document-title');
       var $pagehead   = $('.attic');
       var $navbar     = $('nav.navbar');
       var $adblock    = $('#adblock');
@@ -1445,7 +1445,8 @@ var j1 = (function () {
       var fontSize    = $('body').css('font-size').replace('px','');
 
       var f           = parseInt(fontSize);
-      var t           = $title.length ? $title.outerHeight(true) : 0;
+//    var t           = $title.length ? $title.outerHeight(true) : 0;
+      var t           = $title.length ? $title.height() : 0;
       var h           = $pagehead.length ? $pagehead.height() : 0;
       var n           = $navbar.length ? $navbar.height() : 0;
       var a           = $adblock.length ? $adblock.height() : 0;
@@ -1455,7 +1456,9 @@ var j1 = (function () {
       // Creasy workaround for the preview page
       // TODO: scrollOffset calculation needs revision: why is this needed ???
       if (t) {
-        scrollOffset = scrollOffset + t + 51;
+        // scrollOffset = scrollOffset + t + 51;
+        // scrollOffset = -1 * t;
+        scrollOffset = scrollOffset + toccerScrollOffset;
       } else {
         scrollOffset = scrollOffset + toccerScrollOffset;                       // static offset, to be checked why this is needed
       }

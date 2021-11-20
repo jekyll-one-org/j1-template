@@ -53,7 +53,7 @@ resource_options:
 // http://meetselva.github.io/
 // https://codepen.io/meetselva/pen/EVaLmP
 
-// Include sub-documents
+// Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 == Tester
 

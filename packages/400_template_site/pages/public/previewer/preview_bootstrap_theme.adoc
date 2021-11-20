@@ -105,76 +105,11 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-// Include sub-documents
+// Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 ++++
-  <!-- Prepend H1 tag here -->
-  <div id="theme" class="page-title row g-0 mb-1">
-
-    <!-- Load the previously selected theme from the (user state) cookie -->
-    <script>
-    $(document).ready(function() {
-      var theme_slogans   = {};
-      var interval_count  = 0;
-      var max_count       = 10;
-      var cookie_names    = j1.getCookieNames();
-      var user_state      = {};
-      var theme_slogan;
-      var themeName;
-      var themeNameHeadline;
-      var user_state_detected;
-
-      theme_slogans.UnoLight      = 'An universial light theme';
-      theme_slogans.UnoDark       = 'An universial dark theme';
-      theme_slogans.Bootstrap     = 'Bootstrap V5 default theme';
-
-      theme_slogans.Cerulean      = 'A calm blue sky';
-      theme_slogans.Cosmo         = 'An ode to Metro';
-      theme_slogans.Cyborg        = 'Jet black and electric blue';
-      theme_slogans.Darkly        = 'Theme Flatly in night mode';
-      theme_slogans.Flatly        = 'Flat and modern';
-      theme_slogans.Journal       = 'Crisp like a new sheet of paper';
-      theme_slogans.Litera        = 'The medium is the message';
-      theme_slogans.Lumen         = 'Light and shadow';
-      theme_slogans.Materia       = 'Material is the metaphor';
-      theme_slogans.Minty         = 'A fresh feel';
-      theme_slogans.Morph         = 'A neumorphic layer';
-      theme_slogans.Pulse         = 'A trace of purple';
-      theme_slogans.Quartz        = 'A glassmorphic layer';
-      theme_slogans.Sandstone     = 'A touch of warmth';
-      theme_slogans.Simplex       = 'Mini and minimalist';
-      theme_slogans.Slate         = 'Shades of gunmetal gray';
-      theme_slogans.Solar         = 'A spin on Solarized';
-      theme_slogans.Spacelab      = 'Silvery and sleek';
-      theme_slogans.Superhero     = 'The brave and the blue';
-      theme_slogans.United        = 'Ubuntu orange and unique font';
-      theme_slogans.Vapor         = 'A cyberpunk aesthetic';
-      theme_slogans.Yeti          = 'A friendly foundation';
-      theme_slogans.Zephyr        = 'Breezy and beautiful';
-
-      var dependencies_met_themer = setInterval(function() {
-        interval_count += 1;
-        if (j1.getState() == 'finished') {
-          user_state_detected = j1.existsCookie (cookie_names.user_state);
-          if ( user_state_detected ) {
-            user_state = j1.readCookie(cookie_names.user_state);
-            themeName  = user_state.theme_name;
-          }
-          theme_slogan = theme_slogans[themeName];
-
-          var themeNameHeadline = '<h1 id="theme_name" class="mb-0">Theme ' +themeName+ '</h1>';
-          $('#theme').prepend(themeNameHeadline);
-          $('#theme').append('<p class="tagline mb-2"><b>'  + theme_slogan + '</b></p>');
-          $('#theme').append('<div class="d-inline-block g-width-50 g-height-2 bg-primary mb-2"></div>');
-          clearInterval(dependencies_met_themer);
-          }
-        if (interval_count > max_count) {
-          clearInterval(dependencies_met_themer);
-        }
-      }, 25);
-    });
-    </script>
-  </div>
+  <!-- Add H1 (document title) tag here -->
+  <div id="theme" class="document-title row g-0 mb-2"></div>
 ++++
 
 Bootstrap is a HTML, CSS and JS Library that focuses on simplifying the
@@ -2826,31 +2761,54 @@ link:{url-bs-docs--components-popovers}[Bootstrap Docs {char-middot} Popovers, {
     Left
   </button>
 ----
-
 endif::[]
 endif::[]
 
-// ++++
-// <script>
-//   $(function () {
-//     $.expr[':'].regex = function(elem, index, match) {
-//        var matchParams = match[3].split(','),
-//           validLabels = /^(data|css):/,
-//           attr = {
-//              method: matchParams[0].match(validLabels) ?
-//                 matchParams[0].split(':')[0] : 'attr',
-//              property: matchParams.shift().replace(validLabels, '')
-//           },
-//           regexFlags = 'ig',
-//           regex = new RegExp(matchParams.join('').replace(/^\s+|\s+$/g, ''), regexFlags);
-//        return regex.test($(elem)[attr.method](attr.property));
-//     }
-//
-//     $(':regex(href,$navbars)').click(function(e) {
-//       e.preventDefault ? e.preventDefault() : e.returnValue = false;
-//       logger.info('bound click event to "?#*", suppress default action');
-//     });
-//
-//   });
-// </script>
-// ++++
+++++
+<script>
+
+  var cookie_names  = j1.getCookieNames();
+  var user_state    = j1.readCookie(cookie_names.user_state);
+  var theme_slogans = {};
+  var theme_slogan;
+  var themeName;
+  var themeNameHeadline;
+
+  theme_slogans.UnoLight  = 'An universial light theme';
+  theme_slogans.UnoDark   = 'An universial dark theme';
+  theme_slogans.Bootstrap = 'Bootstrap V5 default theme';
+
+  theme_slogans.Cerulean  = 'A calm blue sky';
+  theme_slogans.Cosmo     = 'An ode to Metro';
+  theme_slogans.Cyborg    = 'Jet black and electric blue';
+  theme_slogans.Darkly    = 'Theme Flatly in night mode';
+  theme_slogans.Flatly    = 'Flat and modern';
+  theme_slogans.Journal   = 'Crisp like a new sheet of paper';
+  theme_slogans.Litera    = 'The medium is the message';
+  theme_slogans.Lumen     = 'Light and shadow';
+  theme_slogans.Materia   = 'Material is the metaphor';
+  theme_slogans.Minty     = 'A fresh feel';
+  theme_slogans.Morph     = 'A neumorphic layer';
+  theme_slogans.Pulse     = 'A trace of purple';
+  theme_slogans.Quartz    = 'A glassmorphic layer';
+  theme_slogans.Sandstone = 'A touch of warmth';
+  theme_slogans.Simplex   = 'Mini and minimalist';
+  theme_slogans.Slate     = 'Shades of gunmetal gray';
+  theme_slogans.Solar     = 'A spin on Solarized';
+  theme_slogans.Spacelab  = 'Silvery and sleek';
+  theme_slogans.Superhero = 'The brave and the blue';
+  theme_slogans.United    = 'Ubuntu orange and unique font';
+  theme_slogans.Vapor     = 'A cyberpunk aesthetic';
+  theme_slogans.Yeti      = 'A friendly foundation';
+  theme_slogans.Zephyr    = 'Breezy and beautiful';
+
+  themeName         = user_state.theme_name;
+  theme_slogan      = theme_slogans[themeName];
+  themeNameHeadline = '<h1 id="theme_name" class="mb-0">Theme ' +themeName+ '</h1>';
+
+  $('#theme').prepend(themeNameHeadline);
+  $('#theme').append('<p class="tagline mb-2"><b>'  + theme_slogan + '</b></p>');
+  $('#theme').append('<div class="d-inline-block g-width-50 g-height-2 bg-primary mb-2"></div>');
+
+</script>
+++++

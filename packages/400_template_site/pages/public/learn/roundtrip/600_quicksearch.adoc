@@ -53,7 +53,7 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-// Include sub-documents
+// Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 QuickSearch is based on the search engine Lunr, fully integrated with the J1
 Template. Lunr is designed to be lightweight yet full-featured to provide a

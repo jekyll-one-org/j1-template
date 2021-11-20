@@ -56,7 +56,7 @@ resource_options:
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // https://www.py4u.net/discuss/929705
 
-// Include sub-documents
+// Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 Machine translation (MT) transfers information from one language to another
 by a computer without human intervention. NMT is the most advanced method

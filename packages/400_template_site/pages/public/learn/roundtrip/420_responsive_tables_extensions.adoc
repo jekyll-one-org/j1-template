@@ -53,7 +53,7 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-// Include sub-documents
+// Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 Creating a design for responsive tables is challenging. The approach used by
 J1 Template is based on pure CSS on top of the classic Bootstrap styles for
