@@ -109,7 +109,7 @@ resource_options:
 // -----------------------------------------------------------------------------
 ++++
   <!-- Prepend H1 tag here -->
-  <div id="theme" class="row g-0 mb-1">
+  <div id="theme" class="page-title row g-0 mb-1">
 
     <!-- Load the previously selected theme from the (user state) cookie -->
     <script>

@@ -196,27 +196,26 @@ j1.adapter['toccer'] = (function () {
         var settings = false;
       }
 
+      // TODO: scrollOffset calculation needs revision: why needed ???
       // calculate offset for correct (smooth) scroll position
       //
-      var $pagehead       = $('.attic');
-      var $navbar         = $('nav.navbar');
-      var $adblock        = $('#adblock');
+      var $pagehead   = $('.attic');
+      var $navbar     = $('nav.navbar');
+      var $adblock    = $('#adblock');
 
-      var navbarType      = $navbar.hasClass('navbar-fixed') ? 'fixed' : 'scrolled';
-      var fontSize        = $('body').css('font-size').replace('px','');
-      var start           = window.pageYOffset;
+      var navbarType  = $navbar.hasClass('navbar-fixed') ? 'fixed' : 'scrolled';
+      var fontSize    = $('body').css('font-size').replace('px','');
 
-      var l               = parseInt(fontSize);
+      var f           = parseInt(fontSize);
+      var h           = $pagehead.length ? $pagehead.height() : 0;
+      var n           = $navbar.length ? $navbar.height() : 0;
+      var a           = $adblock.length ? $adblock.height() : 0;
 
-      var h               = $pagehead.length ? $pagehead.height() : 0;
-      var n               = $navbar.length ? $navbar.height() : 0;
-      var a               = $adblock.length ? $adblock.height() : 0;
-
-      scrollOffset        = navbarType == 'fixed' ? -1*(n + a + l) : -1*(h + n + a + l);
+      scrollOffset    = navbarType == 'fixed' ? -1*(n + a + f) : -1*(h + n + a + f);
 
       // static offset, to be checked why this is needed
       //
-      scrollOffset        = scrollOffset + moduleOptions.scrollSmoothOffset
+      scrollOffset    = scrollOffset + moduleOptions.scrollSmoothOffset
 
       _this.setState('running');
       logger.info('\n' + 'state: ' + _this.getState());
@@ -261,28 +260,27 @@ j1.adapter['toccer'] = (function () {
         } // END AJAX load finished
       }, 25); // END dependencies_met_ajax_load_finished
 
+      // jadams, 2021-11-19: is this really neded?
+      //
       $(window).on('resize', function() {
         var scrollOffset;
         // re-calculate offset for correct (smooth) scroll position
         //
-        var $pagehead       = $('.attic');
-        var $navbar         = $('nav.navbar');
-        var $adblock        = $('#adblock');
+        var $pagehead   = $('.attic');
+        var $navbar     = $('nav.navbar');
+        var $adblock    = $('#adblock');
+        var navbarType  = $navbar.hasClass('navbar-fixed') ? 'fixed' : 'scrolled';
+        var fontSize    = $('body').css('font-size').replace('px','');
 
-        var navbarType      = $navbar.hasClass('navbar-fixed') ? 'fixed' : 'scrolled';
-        var fontSize        = $('body').css('font-size').replace('px','');
-        var start           = window.pageYOffset;
+        var f           = parseInt(fontSize);
+        var h           = $pagehead.length ? $pagehead.height() : 0;
+        var n           = $navbar.length ? $navbar.height() : 0;
+        var a           = $adblock.length ? $adblock.height() : 0;
 
-        var l               = parseInt(fontSize);
-
-        var h               = $pagehead.length ? $pagehead.height() : 0;
-        var n               = $navbar.length ? $navbar.height() : 0;
-        var a               = $adblock.length ? $adblock.height() : 0;
-
-        scrollOffset        = navbarType == 'fixed' ? -1*(n + a + l) : -1*(h + n + a + l);
+        scrollOffset    = navbarType == 'fixed' ? -1*(n + a + f) : -1*(h + n + a + f);
 
         // static offset, to be checked why this is needed
-        scrollOffset        = scrollOffset + moduleOptions.scrollSmoothOffset
+        scrollOffset    = scrollOffset + moduleOptions.scrollSmoothOffset
 
         tocbot.refresh({
           log:                    moduleOptions.log,

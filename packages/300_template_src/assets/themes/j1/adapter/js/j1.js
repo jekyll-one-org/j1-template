@@ -1424,6 +1424,7 @@ var j1 = (function () {
       var anchor_id = typeof anchor !== 'undefined' ? '#' + anchor : false;
       var isSlider  = false;
       var selector;
+      var scrollOffset;
 
       if (typeof anchor === 'undefined') {
         return false;
@@ -1435,24 +1436,29 @@ var j1 = (function () {
       var toccerScrollOffset   = {{toccer_options.scrollSmoothOffset}};
 
       // calculate offset for correct (smooth) scroll position
-      var $pagehead       = $('.attic');
-      var $navbar         = $('nav.navbar');
-      var $adblock        = $('#adblock');
+      //
+      var $title      = $('.page-title');
+      var $pagehead   = $('.attic');
+      var $navbar     = $('nav.navbar');
+      var $adblock    = $('#adblock');
+      var navbarType  = $navbar.hasClass('navbar-fixed') ? 'fixed' : 'scrolled';
+      var fontSize    = $('body').css('font-size').replace('px','');
 
-      var navbarType      = $navbar.hasClass('navbar-fixed') ? 'fixed' : 'scrolled';
-      var fontSize        = $('body').css('font-size').replace('px','');
-      var start           = window.pageYOffset;
+      var f           = parseInt(fontSize);
+      var t           = $title.length ? $title.outerHeight(true) : 0;
+      var h           = $pagehead.length ? $pagehead.height() : 0;
+      var n           = $navbar.length ? $navbar.height() : 0;
+      var a           = $adblock.length ? $adblock.height() : 0;
 
-      var l               = parseInt(fontSize);
+      scrollOffset    = navbarType == 'fixed' ? -1*(n + a + f) : -1*(h + n + a + f);
 
-      var h               = $pagehead.length ? $pagehead.height() : 0;
-      var n               = $navbar.length ? $navbar.height() : 0;
-      var a               = $adblock.length ? $adblock.height() : 0;
-
-      var scrollOffset    = navbarType == 'fixed' ? -1*(n + a + l) : -1*(h + n + a + l);
-
-      // static offset, to be checked why this is needed
-      scrollOffset        = scrollOffset + toccerScrollOffset;
+      // Creasy workaround for the preview page
+      // TODO: scrollOffset calculation needs revision: why is this needed ???
+      if (t) {
+        scrollOffset = scrollOffset + t + 51;
+      } else {
+        scrollOffset = scrollOffset + toccerScrollOffset;                       // static offset, to be checked why this is needed
+      }
 
       // Check if the anchor is an slider/gallery element
       if (typeof anchor !== 'undefined') {
