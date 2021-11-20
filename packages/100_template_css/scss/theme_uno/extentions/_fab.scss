@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/scss/theme_uno/bootstrap/extensions/pulser.scss
+ # ~/scss/theme_uno/bootstrap/extensions/fab.scss
  #
  # Product/Info:
  # https://jekyll.one
@@ -22,20 +22,10 @@ $btn-fab-font-size:                 1.5rem !default; // 24px
 // -----------------------------------------------------------------------------
 .btn {
   position: relative;
-  // jadams, 2020-04-18: removed margin for button shadow
-  // margin-bottom: $bmd-btn-margin-bottom; // just enough room so that focus shadows aren't covered up
-  // font-size: $bmd-btn-font-size;
   text-decoration: none;
   text-transform: uppercase;
   letter-spacing: 0;
   cursor: pointer;
-  border: 0;
-  // jadams, 2021-09-03: added border-radius
-  // border-radius: .25rem; $border-radius
-  // border-radius: $border-radius;
-  // transition: box-shadow 0.2s $bmd-animation-curve-fast-out-linear-in,
-  //   background-color 0.2s $bmd-animation-curve-default,
-  //   color 0.2s $bmd-animation-curve-default;
   will-change: box-shadow, transform;
 
   // fab and raised
@@ -48,7 +38,6 @@ $btn-fab-font-size:                 1.5rem !default; // 24px
 
     // enlarged shadow on hover, focus
     @include hover-focus() {
-      //border: 1px solid $blue;
       z-index: 1; // add to the z-index so that the expanded shadow is above anything below it i.e. another button
       @include box-shadow($bmd-shadow-4dp);
     }
@@ -59,26 +48,25 @@ $btn-fab-font-size:                 1.5rem !default; // 24px
     &:active {
       z-index: 1; // add to the z-index so that the expanded shadow is above anything below it i.e. another button
       @include box-shadow($bmd-shadow-focus);
-      //border: 1px solid $green;
     }
 
     // :focus - Avoid outline/boxShadow on buttons after mouseup
     &.focus,
     &:focus {
-      outline: 0; // disable outline
+      outline: 0;                                                               // disable outline
     }
   }
 
   // https://www.google.com/design/spec/components/buttons-floating-action-button.html
   &.btn-fab {
-    overflow: hidden;
+    // overflow: hidden;
     font-size: $btn-fab-font-size;
     line-height: 0;
 
     .btn-group-lg &,
     .btn-group-sm &,
     & {
-      padding: 0; // need specificity
+      padding: 0;
       border-radius: 50%;
       line-height: 0;
     }
@@ -107,96 +95,93 @@ $btn-fab-font-size:                 1.5rem !default; // 24px
 }
 
 .btn.btn-fab {
-    overflow: visible;                                                          // needed for pulsing
+  overflow: visible;                                                            // needed for pulsing
 }
 
 // jadams, 2020-11-15: set hover for (all) FAB buttons
 //
 .btn-fab, .btn.btn-fab:hover, .btn.btn-fab:focus {
-    color: $lighten-800;                                                        // jadams, 2021-11-18: removed !important
+  color: $lighten-800;                                                          // jadams, 2021-11-18: removed !important
 }
 
-
 .fab-btn ul {
-    left: 0;
-    right: 0;
-    text-align: center;
-    position: absolute;
-    bottom: 64px;
-    margin: 0;
-    visibility: hidden;
-    padding-left: 0;
-    list-style-type: none;
+  left: 0;
+  right: 0;
+  text-align: center;
+  position: absolute;
+  bottom: 64px;
+  margin: 0;
+  visibility: hidden;
+  padding-left: 0;
+  list-style-type: none;
 }
 
 .btn-fab-floating.disabled,
 .btn-fab-floating[disabled] {
-    pointer-events: none;
-    // background-color: #DFDFDF !important;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    color: #9F9F9F !important;
-    cursor: default
+  pointer-events: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: $gray;
+  cursor: default
 }
 
 .btn-fab-floating {
-    display: inline-block;
-    color: #fff;
-    position: relative;
-    /* overflow: hidden; */
-    z-index: 1;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    padding: 0;
-    // background-color: #26a69a;
-    border-radius: 50%;
-    -webkit-transition: background-color .3s;
-    transition: background-color .3s;
-    cursor: pointer;
-    vertical-align: middle
+  display: inline-block;
+  color: #fff;
+  position: relative;
+  z-index: 1;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  padding: 0;
+  // background-color: #26a69a;
+  border-radius: 50%;
+  -webkit-transition: background-color .3s;
+  transition: background-color .3s;
+  cursor: pointer;
+  vertical-align: middle
 }
 
 .btn-fab-floating:before {
-    border-radius: 0
+  border-radius: 0
 }
 
 .btn-fab-floating.btn-large {
-    width: 56px;
-    height: 56px;
-    padding: 0
+  width: 56px;
+  height: 56px;
+  padding: 0
 }
 
 .btn-fab-floating.btn-large.halfway-fab {
-    bottom: -28px
+  bottom: -28px
 }
 
 .btn-fab-floating.btn-large i {
-    line-height: 56px
+  line-height: 56px
 }
 
 .btn-fab-floating.btn-small {
-    width: 32.4px;
-    height: 32.4px
+  width: 32.4px;
+  height: 32.4px
 }
 
 .btn-fab-floating.btn-small.halfway-fab {
-    bottom: -16.2px
+  bottom: -16.2px
 }
 
 .btn-fab-floating.btn-small i {
-    line-height: 32.4px
+  line-height: 32.4px
 }
 
 .btn-fab-floating.halfway-fab {
-    position: absolute;
-    right: 24px;
-    bottom: -20px
+  position: absolute;
+  right: 24px;
+  bottom: -20px
 }
 
 .btn-fab-floating.halfway-fab.left {
-    right: auto;
-    left: 24px
+  right: auto;
+  left: 24px
 }
 
 .btn-fab-floating i {
@@ -209,7 +194,7 @@ $btn-fab-font-size:                 1.5rem !default; // 24px
 }
 
 button.btn-fab-floating {
-    border: none
+  border: none
 }
 
 .fab-btn {
@@ -244,125 +229,125 @@ button.btn-fab-floating {
 
 .fab-btn.direction-left ul li,
 .fab-btn.direction-right ul li {
-    display: inline-block;
-    margin: 7.5px 15px 0 0
+  display: inline-block;
+  margin: 7.5px 15px 0 0
 }
 
 .fab-btn.direction-right {
-    padding: 0 15px 0 0
+  padding: 0 15px 0 0
 }
 
 .fab-btn.direction-right ul {
-    text-align: left;
-    direction: rtl;
-    left: 64px;
-    right: auto
+  text-align: left;
+  direction: rtl;
+  left: 64px;
+  right: auto
 }
 
 .fab-btn.direction-right ul li {
-    margin: 7.5px 0 0 15px
+  margin: 7.5px 0 0 15px
 }
 
 .fab-btn.direction-bottom {
-    padding: 0 0 15px 0
+  padding: 0 0 15px 0
 }
 
 .fab-btn.direction-bottom ul {
-    top: 64px;
-    bottom: auto;
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: reverse;
-    -webkit-flex-direction: column-reverse;
-    -ms-flex-direction: column-reverse;
-    flex-direction: column-reverse
+  top: 64px;
+  bottom: auto;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+  -webkit-flex-direction: column-reverse;
+  -ms-flex-direction: column-reverse;
+  flex-direction: column-reverse
 }
 
 .fab-btn.direction-bottom ul li {
-    margin: 15px 0 0 0
+  margin: 15px 0 0 0
 }
 
 .fab-btn.toolbar {
-    padding: 0;
-    height: 56px
+  padding: 0;
+  height: 56px
 }
 
 .fab-btn.toolbar.active>a i {
-    opacity: 0
+  opacity: 0
 }
 
 .fab-btn.toolbar ul {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    top: 0;
-    bottom: 0;
-    z-index: 1
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  top: 0;
+  bottom: 0;
+  z-index: 1
 }
 
 .fab-btn.toolbar ul li {
-    -webkit-box-flex: 1;
-    -webkit-flex: 1;
-    -ms-flex: 1;
-    flex: 1;
-    display: inline-block;
-    margin: 0;
-    height: 100%;
-    -webkit-transition: none;
-    transition: none
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  display: inline-block;
+  margin: 0;
+  height: 100%;
+  -webkit-transition: none;
+  transition: none
 }
 
 .fab-btn.toolbar ul li a {
-    display: block;
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    height: 100%;
-    background-color: transparent;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    color: #fff;
-    line-height: 56px;
-    z-index: 1
+  display: block;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  color: #fff;
+  line-height: 56px;
+  z-index: 1
 }
 
 .fab-btn.toolbar ul li a i {
-    line-height: inherit
+  line-height: inherit
 }
 
 .fab-btn ul {
-    left: 0;
-    right: 0;
-    text-align: center;
-    position: absolute;
-    bottom: 64px;
-    margin: 0;
-    visibility: hidden
+  left: 0;
+  right: 0;
+  text-align: center;
+  position: absolute;
+  bottom: 64px;
+  margin: 0;
+  visibility: hidden
 }
 
 .fab-btn ul li {
-    margin-bottom: 15px
+  margin-bottom: 15px
 }
 
 .fab-btn ul a.btn-fab-floating {
-    opacity: 0
+  opacity: 0
 }
 
 .fab-btn .fab-btn-backdrop {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-    width: 40px;
-    height: 40px;
-    background-color: #26a69a;
-    border-radius: 50%;
-    -webkit-transform: scale(0);
-    transform: scale(0)
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 40px;
+  height: 40px;
+  background-color: #26a69a;
+  border-radius: 50%;
+  -webkit-transform: scale(0);
+  transform: scale(0)
 }
 
 // .btn-large {

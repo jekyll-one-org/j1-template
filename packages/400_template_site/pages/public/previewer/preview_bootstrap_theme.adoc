@@ -60,7 +60,9 @@ resource_options:
 :fab_raised:                            true
 :fab_pulsed:                            true
 :fab_mini:                              true
+:fab_mini_raised:                       true
 :fab_colors:                            true
+:fab_disabled:                          true
 :typography:                            true
 :typography_headings:                   true
 :typography_blockquotes:                true
@@ -857,12 +859,18 @@ ifeval::[{fab_raised} == true]
 ==== Raised FAB
 
 To put a 3D effect on floating action buttons, buttons can be *raised* by
-adding the additional CSS class 'raised-zX'. J1 supports ten levels of
-raising HTML elements ranging from 1 to 10.
+adding the additional CSS class `raised-zX`. J1 supports 25 levels of
+raising HTML elements ranging from 0 to 24.
 
 ++++
 <div class="doc-example">
-  <button type="button" class="btn btn-fab btn-primary raised-z5" aria-label="fab-button">
+  <button type="button" class="btn btn-fab btn-primary raised-z5 mr-3" aria-label="fab-button">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-primary raised-z10 mr-3" aria-label="fab-button">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-primary raised-z24" aria-label="fab-button">
     <i class="mdi mdi-plus"></i>
   </button>
 </div>
@@ -871,6 +879,12 @@ raising HTML elements ranging from 1 to 10.
 [source, html]
 ----
   <button type="button" class="btn btn-fab btn-primary raised-z5" aria-label="fab-button">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-primary raised-z10" aria-label="fab-button">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-primary raised-z24" aria-label="fab-button">
     <i class="mdi mdi-plus"></i>
   </button>
 ----
@@ -918,6 +932,36 @@ A smaller sized, *mini* floating action button (FAB) is also available.
   </button>
 ----
 endif::[]
+
+ifeval::[{fab_mini_raised} == true]
+==== Mini FAB raised
+
+Mini FAB buttons can be *raised* as well by adding the additional CSS class
+`raised-zX`. J1 supports 25 levels of raising HTML elements ranging from 0
+to 24.
+
+++++
+<div class="doc-example">
+  <button type="button" class="btn btn-fab btn-fab-sm btn-primary raised-z5 mr-3" aria-label="fab-button">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-primary raised-z10 mr-3" aria-label="fab-button">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-primary raised-z24" aria-label="fab-button">
+    <i class="mdi mdi-plus"></i>
+  </button>
+</div>
+++++
+
+[source, html]
+----
+  <button type="button" class="btn btn-fab btn-fab-sm btn-primary raised-z5 mr-3" aria-label="fab-button">
+    <i class="mdi mdi-plus"></i>
+  </button>
+----
+endif::[]
+
 
 ifeval::[{fab_colors} == true]
 ==== Colors
@@ -978,6 +1022,142 @@ be applied.
     <i class="mdi mdi-plus"></i>
   </button>
   <button type="button" class="btn btn-fab btn-light" aria-label="fab-button-light">
+    <i class="mdi mdi-plus"></i>
+  </button>
+----
+
+++++
+<div class="doc-example">
+  <button type="button" class="btn btn-fab btn-fab-sm btn-primary" aria-label="fab-button-primary">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-secondary" aria-label="fab-button-secondary">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-danger" aria-label="fab-button-danger">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-info" aria-label="fab-button-info">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-success" aria-label="fab-button-success">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-warning" aria-label="fab-button-warning">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-dark" aria-label="fab-button-dark">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-light" aria-label="fab-button-light">
+    <i class="mdi mdi-plus"></i>
+  </button>
+</div>
+++++
+
+[source, html]
+----
+  <button type="button" class="btn btn-fab btn-fab-sm btn-primary" aria-label="fab-button-primary">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-secondary" aria-label="fab-button-secondary">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-danger" aria-label="fab-button-danger">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-info" aria-label="fab-button-info">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-success" aria-label="fab-button-success">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-warning" aria-label="fab-button-warning">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-dark" aria-label="fab-button-dark">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-light" aria-label="fab-button-light">
+    <i class="mdi mdi-plus"></i>
+  </button>
+----
+endif::[]
+
+ifeval::[{fab_disabled} == true]
+==== Disabled FAB
+
+FAB Buttons look inactive by adding the `disabled` boolean attribute to the
+`<button>` element.
+
+++++
+<div class="doc-example">
+  <button type="button" class="btn btn-fab btn-primary disabled" aria-label="fab-button-primary">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-secondary disabled" aria-label="fab-button-secondary">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-danger disabled" aria-label="fab-button-danger">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-info disabled" aria-label="fab-button-info">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-success disabled" aria-label="fab-button-success">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-warning disabled" aria-label="fab-button-warning">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-dark disabled" aria-label="fab-button-dark">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-light disabled" aria-label="fab-button-light">
+    <i class="mdi mdi-plus"></i>
+  </button>
+</div>
+++++
+
+[source, html]
+----
+  <button type="button" class="btn btn-fab btn-primary disabled" aria-label="fab-button">
+    <i class="mdi mdi-plus"></i>
+  </button>
+----
+
+++++
+<div class="doc-example">
+  <button type="button" class="btn btn-fab btn-fab-sm btn-primary disabled" aria-label="fab-button-primary">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-secondary disabled" aria-label="fab-button-secondary">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-danger disabled" aria-label="fab-button-danger">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-info disabled" aria-label="fab-button-info">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-success disabled" aria-label="fab-button-success">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-warning disabled" aria-label="fab-button-warning">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-dark disabled" aria-label="fab-button-dark">
+    <i class="mdi mdi-plus"></i>
+  </button>
+  <button type="button" class="btn btn-fab btn-fab-sm btn-light disabled" aria-label="fab-button-light">
+    <i class="mdi mdi-plus"></i>
+  </button>
+</div>
+++++
+
+[source, html]
+----
+  <button type="button" class="btn btn-fab btn-fab-sm btn-primary disabled" aria-label="fab-button">
     <i class="mdi mdi-plus"></i>
   </button>
 ----

@@ -18,7 +18,9 @@
 // -----------------------------------------------------------------------------
 @import "mixins/animations";
 @import "mixins/breakpoints";
-@import "mixins/buttons";
+
+// @import "mixins/buttons";                                                    // jadams, 2021-11-20: disabled
+
 @import "mixins/drawer";
 @import "mixins/flexbox";
 @import "mixins/forms";
