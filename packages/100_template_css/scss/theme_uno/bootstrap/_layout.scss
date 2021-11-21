@@ -38,6 +38,7 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
+  margin-left: 1px;                                                             // jadams, 2021-11-21: Additional pixel for dark themes
 }
 
 // Header layout (fixed top), belongs in a bmd-layout-container

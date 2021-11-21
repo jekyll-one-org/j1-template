@@ -14,6 +14,8 @@
 
 @import "mde_colors";
 
+$body-bg:                               $white !default;                        // jadams, 2021-11-21: set bg color as var
+
 // scss-docs-start theme-color-variables
 $primary:       $blue !default;
 $secondary:     $gray-600 !default;

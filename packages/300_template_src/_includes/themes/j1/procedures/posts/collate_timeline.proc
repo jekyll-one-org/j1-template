@@ -200,7 +200,7 @@
           {% else %}
             <!-- !place_icon && !place_image -->
             <!-- div class="timeline-body" -->
-            <div class="card-body r-text-300 mt-4">
+            <div class="card-body r-text-300">
               <!-- div class="tagline">
                 <p class="card-subtitle text-muted">{{post.tagline}}</p>
               </div -->

@@ -25,7 +25,7 @@
 // While the ordering works, we need to be sure this is more comprehensible.
 // -----------------------------------------------------------------------------
 
-@import "variables/colors";
+// @import "~bootstrap/scss/bootstrap";
 
 // MD variables
 // -----------------------------------------------------------------------------
@@ -37,7 +37,9 @@
 
 // Additional or customized variables
 // -----------------------------------------------------------------------------
-@import "variables/custom";
+// @import "variables/custom";
+
+@import "variables/drawer";                                                     // jadams, 2019-11-21: (bmd) drawer
 @import "variables/shadow";
 
 // Customized BS variables

@@ -1,5 +1,5 @@
 // -----------------------------------------------------------------------------
-// ~/scss/theme_uno/variables/_drawer.scss
+// ~/scss/theme_uno/variables/drawer.scss
 //
 // Product/Info:
 // https://jekyll.one
@@ -8,9 +8,13 @@
 //
 // J1 Template is licensed under the MIT License.
 // See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+// jadams, 2019-11-21: set the background to the theme color
 // -----------------------------------------------------------------------------
 
-$bmd-layout-drawer-bg-color:            $gray-50;                               // was: $white;
+@import "colors.scss";                                                          // jadams, 2021-11-21: uclear why colors needs to be imported here
+
+// Colors
+$bmd-layout-drawer-bg-color:            $body-bg !default;
 
 // Sizing
 $bmd-drawer-x-size:                     240px !default;

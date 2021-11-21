@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/scss/theme_uno/bootstrap/_drawer.scss
+ # ~/scss/theme_uno/bootstrap/drawer.scss
  #
  # Product/Info:
  # https://github.com/FezVrasta/bootstrap-material-design
@@ -15,15 +15,6 @@
  # -----------------------------------------------------------------------------
 */
 
-// Vars (to be moved)
-//------------------------------------------------------------------------------
-$bmd-layout-drawer-bg-color:            $gray-50;                               // was: $white;
-
-// Sizing
-$bmd-drawer-x-size:                     240px !default;
-$bmd-drawer-y-size:                     100px !default;
-
-
 .bmd-layout-drawer {
   position: absolute;
   z-index: 5; // over a header and content
@@ -37,7 +28,7 @@ $bmd-drawer-y-size:                     100px !default;
   overflow: visible;
   overflow-y: auto;
   font-size: .875rem;
-  background: $bmd-layout-drawer-bg-color;
+  background: $gray-400;
 
   // Transform offscreen.
   transition: transform;

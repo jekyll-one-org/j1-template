@@ -252,6 +252,7 @@ a.news-link {
 .series-exerpt {
   text-align: justify;
   padding: 0px 20px 10px 0px;
+  color: $gray-900;
 }
 
 .series-exerpt-title {
@@ -259,7 +260,7 @@ a.news-link {
   font-family: inherit;
   font-weight: 400;
   line-height: 1.1;
-  /* color: #444; */
+  // color: $gray-900;
 }
 
 .series-navigator .series-navigator-footer {
