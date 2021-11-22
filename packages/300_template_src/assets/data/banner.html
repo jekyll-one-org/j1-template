@@ -287,7 +287,7 @@ exclude_from_search:                    true
         {% comment %} Collect PARALLAX banner
         ------------------------------------------------------------------------ {% endcomment %}
         {% when 'parallax' %}
-        <div id="{{banner_settings.id}}">
+        <div id="{{banner_settings.id}}" class="parallax">
         {% assign banner_options = banner_config_defaults.parallax | merge: banner_settings %}
         {% if debug %}<!-- banner_options:  {{banner_options}} -->{% endif %}
 
@@ -301,10 +301,8 @@ exclude_from_search:                    true
               {% if key == 'cite_text_size' %}        {% assign card_cite_text_size        = value %}                   {% endif %}
               {% if key == 'cite_text_quotes' %}      {% assign card_cite_text_quotes      = value %}                   {% endif %}
               {% if key == 'cite_text' %}             {% assign card_text                  = value | strip_newlines %}  {% endif %}
-              {% if key == 'cite_size' %}             {% assign card_cite_size             = value %}                   {% endif %}
               {% if key == 'cite' %}                  {% assign card_cite                  = value | strip_newlines %}  {% endif %}
               {% if key == 'text_color' %}            {% assign card_text_color            = value %}                   {% endif %}
-              {% if key == 'cite_color' %}            {% assign card_cite_color            = value %}                   {% endif %}
               {% if key == 'gridify' %}               {% assign card_gridify               = value %}                   {% endif %}
               {% if key == 'gridifier' %}             {% assign card_gridifier             = value %}                   {% endif %}
               {% if key == 'darken' %}                {% assign card_darken                = value %}                   {% endif %}
@@ -319,8 +317,6 @@ exclude_from_search:                    true
               {% assign background_image  = parallax_options.background %}
               {% assign gridify           = parallax_options.gridify %}
               {% assign gridifier         = parallax_options.gridifier %}
-              {% assign text_color        = parallax_options.text_color %}
-              {% assign cite_color        = parallax_options.cite_color %}
               {% assign darken            = parallax_options.darken %}
 
               {% comment %} Set banner VALUES
@@ -329,17 +325,10 @@ exclude_from_search:                    true
               {% if card_gridifier %}             {% assign gridifier         = card_gridifier %}             {% endif %}
               {% if card_darken %}                {% assign darken            = card_darken %}                {% endif %}
               {% if card_text_color %}            {% assign text_color        = card_text_color %}            {% endif %}
-              {% if card_cite_color %}            {% assign cite_color        = card_cite_color %}            {% endif %}
               {% if card_background_size %}       {% assign size_y            = card_background_size %}       {% endif %}
               {% if card_background_image %}      {% assign background_image  = card_background_image %}      {% endif %}
 
               {% capture darken %}0.{{darken}}{% endcapture %}
-
-              {% include {{select_color}} color=text_color fallback="#FAFAFA" %}
-              {% assign text_color = color %}
-
-              {% include {{select_color}} color=cite_color fallback="#FAFAFA" %}
-              {% assign cite_color = color %}
 
               {% comment %} Add individual STYLE tags
               ------------------------------------------------------------------ {% endcomment %}
@@ -354,7 +343,6 @@ exclude_from_search:                    true
                   {% if card_text and card_cite_text_quotes %}
                   .{{banner_settings.id}}-parallax-quote-in p:after,.{{banner_settings.id}}-parallax-quote-in p:before{content:' " ';}
                   {% endif %}
-                  .{{banner_settings.id}}-parallax-quote-in small{color:{{cite_color}};font-size:{{card_cite_size}};font-weight:600;}
                   .{{banner_settings.id}}-parallax-quote:after{background: rgba(0,0,0,{{darken}})}
               </style>
 

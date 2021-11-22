@@ -438,7 +438,7 @@ better reading or orientation.
 </div>
 ++++
 
-=== Brown and Grey
+=== Brown and Gray
 ++++
 <div class="row col-list">
   <div class="color-palette col-lg-12">
@@ -459,40 +459,40 @@ better reading or orientation.
     </div>
     <div class="color-group col-lg-6">
       <ul>
-        <li class="color main-color" style="background-color: #9e9e9e;"> <span class="name dark-when-small">Grey</span> <span class="shade dark-when-small">500</span> <span class="hex dark-when-small"><a id="9e9e9e" class="mdColorValue md-white" title="Grey" href="#void">#9e9e9e</a></span> </li>
-        <li class="color dark" style="background-color: #fafafa;"><span class="shade expanded">50</span><span class="hex"><a id="fafafa" class="mdColorValue" title="Grey" href="#void">#fafafa</a></span> </li>
-        <li class="color dark" style="background-color: #f5f5f5;"><span class="shade">100</span><span class="hex"><a id="f5f5f5" class="mdColorValue" title="Grey" href="#void">#f5f5f5</a></span> </li>
-        <li class="color dark" style="background-color: #eeeeee;"><span class="shade expanded">200</span><span class="hex"><a id="eeeeee" class="mdColorValue" title="Grey" href="#void">#eeeeee</a></span> </li>
-        <li class="color dark" style="background-color: #e0e0e0;"><span class="shade">300</span><span class="hex"><a id="e0e0e0" class="mdColorValue" title="Grey" href="#void">#e0e0e0</a></span> </li>
-        <li class="color dark" style="background-color: #bdbdbd;"><span class="shade expanded">400</span><span class="hex"><a id="bdbdbd" class="mdColorValue" title="Grey" href="#void">#bdbdbd</a></span> </li>
-        <li class="color dark" style="background-color: #9e9e9e;"><span class="shade">500</span><span class="hex"><a id="9e9e9e" class="mdColorValue md-white" title="Grey" href="#void">#9e9e9e</a></span> </li>
-        <li class="color" style="background-color: #757575;"><span class="shade expanded">600</span><span class="hex"><a id="757575" class="mdColorValue md-white" title="Grey" href="#void">#757575</a></span> </li>
-        <li class="color" style="background-color: #616161;"><span class="shade">700</span><span class="hex"><a id="616161" class="mdColorValue md-white" title="Grey" href="#void">#616161</a></span> </li>
-        <li class="color" style="background-color: #424242;"><span class="shade expanded">800</span><span class="hex"><a id="424242" class="mdColorValue md-white" title="Grey" href="#void">#424242</a></span> </li>
-      <li class="color" style="background-color: #212121;"><span class="shade expanded">900</span><span class="hex"><a id="212121" class="mdColorValue md-white" title="Grey" href="#void">#212121</a></span> </li>
+        <li class="color main-color" style="background-color: #9e9e9e;"> <span class="name dark-when-small">Gray</span> <span class="shade dark-when-small">500</span> <span class="hex dark-when-small"><a id="9e9e9e" class="mdColorValue md-white" title="Gray" href="#void">#9e9e9e</a></span> </li>
+        <li class="color dark" style="background-color: #fafafa;"><span class="shade expanded">50</span><span class="hex"><a id="fafafa" class="mdColorValue" title="Gray" href="#void">#fafafa</a></span> </li>
+        <li class="color dark" style="background-color: #f5f5f5;"><span class="shade">100</span><span class="hex"><a id="f5f5f5" class="mdColorValue" title="Gray" href="#void">#f5f5f5</a></span> </li>
+        <li class="color dark" style="background-color: #eeeeee;"><span class="shade expanded">200</span><span class="hex"><a id="eeeeee" class="mdColorValue" title="Gray" href="#void">#eeeeee</a></span> </li>
+        <li class="color dark" style="background-color: #e0e0e0;"><span class="shade">300</span><span class="hex"><a id="e0e0e0" class="mdColorValue" title="Gray" href="#void">#e0e0e0</a></span> </li>
+        <li class="color dark" style="background-color: #bdbdbd;"><span class="shade expanded">400</span><span class="hex"><a id="bdbdbd" class="mdColorValue" title="Gray" href="#void">#bdbdbd</a></span> </li>
+        <li class="color dark" style="background-color: #9e9e9e;"><span class="shade">500</span><span class="hex"><a id="9e9e9e" class="mdColorValue md-white" title="Gray" href="#void">#9e9e9e</a></span> </li>
+        <li class="color" style="background-color: #757575;"><span class="shade expanded">600</span><span class="hex"><a id="757575" class="mdColorValue md-white" title="Gray" href="#void">#757575</a></span> </li>
+        <li class="color" style="background-color: #616161;"><span class="shade">700</span><span class="hex"><a id="616161" class="mdColorValue md-white" title="Gray" href="#void">#616161</a></span> </li>
+        <li class="color" style="background-color: #424242;"><span class="shade expanded">800</span><span class="hex"><a id="424242" class="mdColorValue md-white" title="Gray" href="#void">#424242</a></span> </li>
+      <li class="color" style="background-color: #212121;"><span class="shade expanded">900</span><span class="hex"><a id="212121" class="mdColorValue md-white" title="Gray" href="#void">#212121</a></span> </li>
       </ul>
     </div>
   </div>
 </div>
 ++++
 
-=== Blue Grey and BW
+=== Blue Gray and BW
 ++++
 <div class="row col-list">
   <div class="color-palette col-lg-12">
     <div class="color-group col-lg-6">
       <ul>
-        <li class="color main-color" style="background-color: #607d8b;"> <span class="name light-strong">Blue Grey</span> <span class="shade light-strong">500</span> <span class="hex light-strong"><a id="607d8b" class="mdColorValue md-white" title="Blue Grey" href="#void">#607d8b</a></span> </li>
-        <li class="color dark" style="background-color: #eceff1;"><span class="shade expanded">50</span><span class="hex"><a id="eceff1" class="mdColorValue" title="Blue Grey" href="#void">#eceff1</a></span> </li>
-        <li class="color dark" style="background-color: #cfd8dc;"><span class="shade">100</span><span class="hex"><a id="cfd8dc" class="mdColorValue" title="Blue Grey" href="#void">#cfd8dc</a></span> </li>
-        <li class="color dark" style="background-color: #b0bec5;"><span class="shade expanded">200</span><span class="hex"><a id="b0bec5" class="mdColorValue" title="Blue Grey" href="#void">#b0bec5</a></span> </li>
-        <li class="color dark" style="background-color: #90a4ae;"><span class="shade">300</span><span class="hex"><a id="90a4ae" class="mdColorValue" title="Blue Grey" href="#void">#90a4ae</a></span> </li>
-        <li class="color light-strong" style="background-color: #78909c;"><span class="shade expanded">400</span><span class="hex"><a id="78909c" class="mdColorValue md-white" title="Blue Grey" href="#void">#78909c</a></span> </li>
-        <li class="color" style="background-color: #607d8b;"><span class="shade">500</span><span class="hex"><a id="607d8b" class="mdColorValue md-white" title="Blue Grey" href="#void">#607d8b</a></span> </li>
-        <li class="color" style="background-color: #546e7a;"><span class="shade expanded">600</span><span class="hex"><a id="546e7a" class="mdColorValue md-white" title="Blue Grey" href="#void">#546e7a</a></span> </li>
-        <li class="color" style="background-color: #455a64;"><span class="shade">700</span><span class="hex"><a id="455a64" class="mdColorValue md-white" title="Blue Grey" href="#void">#455a64</a></span> </li>
-        <li class="color" style="background-color: #37474f;"><span class="shade expanded">800</span><span class="hex"><a id="37474f" class="mdColorValue md-white" title="Blue Grey" href="#void">#37474f</a></span> </li>
-        <li class="color" style="background-color: #263238;"><span class="shade expanded">900</span><span class="hex"><a id="263238" class="mdColorValue md-white" title="Blue Grey" href="#void">#263238</a></span> </li>
+        <li class="color main-color" style="background-color: #607d8b;"> <span class="name light-strong">Blue Gray</span> <span class="shade light-strong">500</span> <span class="hex light-strong"><a id="607d8b" class="mdColorValue md-white" title="Blue Gray" href="#void">#607d8b</a></span> </li>
+        <li class="color dark" style="background-color: #eceff1;"><span class="shade expanded">50</span><span class="hex"><a id="eceff1" class="mdColorValue" title="Blue Gray" href="#void">#eceff1</a></span> </li>
+        <li class="color dark" style="background-color: #cfd8dc;"><span class="shade">100</span><span class="hex"><a id="cfd8dc" class="mdColorValue" title="Blue Gray" href="#void">#cfd8dc</a></span> </li>
+        <li class="color dark" style="background-color: #b0bec5;"><span class="shade expanded">200</span><span class="hex"><a id="b0bec5" class="mdColorValue" title="Blue Gray" href="#void">#b0bec5</a></span> </li>
+        <li class="color dark" style="background-color: #90a4ae;"><span class="shade">300</span><span class="hex"><a id="90a4ae" class="mdColorValue" title="Blue Gray" href="#void">#90a4ae</a></span> </li>
+        <li class="color light-strong" style="background-color: #78909c;"><span class="shade expanded">400</span><span class="hex"><a id="78909c" class="mdColorValue md-white" title="Blue Gray" href="#void">#78909c</a></span> </li>
+        <li class="color" style="background-color: #607d8b;"><span class="shade">500</span><span class="hex"><a id="607d8b" class="mdColorValue md-white" title="Blue Gray" href="#void">#607d8b</a></span> </li>
+        <li class="color" style="background-color: #546e7a;"><span class="shade expanded">600</span><span class="hex"><a id="546e7a" class="mdColorValue md-white" title="Blue Gray" href="#void">#546e7a</a></span> </li>
+        <li class="color" style="background-color: #455a64;"><span class="shade">700</span><span class="hex"><a id="455a64" class="mdColorValue md-white" title="Blue Gray" href="#void">#455a64</a></span> </li>
+        <li class="color" style="background-color: #37474f;"><span class="shade expanded">800</span><span class="hex"><a id="37474f" class="mdColorValue md-white" title="Blue Gray" href="#void">#37474f</a></span> </li>
+        <li class="color" style="background-color: #263238;"><span class="shade expanded">900</span><span class="hex"><a id="263238" class="mdColorValue md-white" title="Blue Gray" href="#void">#263238</a></span> </li>
       </ul>
     </div>
     <div class="color-group col-lg-6">

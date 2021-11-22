@@ -72,8 +72,6 @@ settings:
 
     gridify:                            true
     gridifier:                          /assets/images/modules/patterns/gridtile.png
-    text_color:                         rgba_lighten
-    cite_color:                         rgba_lighten
     darken:                             3
     background:                         /assets/images/quotes/default.png
     background_pos_x:                   50%
@@ -88,25 +86,30 @@ settings:
     #
     - name:                             Divider Banner 1
       banner:
+        enabled:                        false
+
         id:                             divider-1
-        enabled:                        true
         type:                           divider
         comment:                        Divider Banner 1
+        lane_span:                      fluid
 
     - name:                             Divider Banner 2
       banner:
+        enabled:                        false
+
         id:                             divider-2
-        enabled:                        true
         type:                           divider
         comment:                        Divider Banner 2
+        lane_span:                      fluid
 
     - name:                             Divider Banner 3
       banner:
+        enabled:                        false
+
         id:                             divider-3
-        enabled:                        true
         type:                           divider
         comment:                        Divider Banner 3
-
+        lane_span:                      fluid
 
   # ----------------------------------------------------------------------------
   # TEASER Banner
@@ -117,14 +120,14 @@ settings:
     #
     - name:                             Home Teaser Banner
       banner:
-        id:                             home_teaser_banner
         enabled:                        true
+
+        id:                             home_teaser_banner
         comment:                        Top teaser shown on home page
         type:                           teaser
         properties:                     mt-3 mb-5
         icon_family:                    MDI
-        # style:                          light
-        # lane_span:                      fixed
+        lane_span:                      fluid
 
         cards:
 
@@ -211,14 +214,14 @@ settings:
     #
     - name:                             Home Welcome Banner
       banner:
-        id:                             home_welcome_banner
         enabled:                        false
+
+        id:                             home_welcome_banner
         comment:                        Teaser shown on home page below the parallax
         type:                           teaser
         properties:
         icon_family:                    MDI
-        # style:                          light
-        # lane_span:                      fixed
+        lane_span:                      fluid
 
         cards:
 
@@ -281,12 +284,13 @@ settings:
     #
     - name:                               Home Image Banner
       banner:
-        id:                               home_image_banner
         enabled:                          false
+
+        id:                               home_image_banner
         type:                             image
         properties:
         comment:                          Main image banner shown on home page
-        # lane_span:                        fluid
+        lane_span:                        fluid
 
         cards:
 
@@ -305,15 +309,15 @@ settings:
     # --------------------------------------------------------------------------
     # home_parallax_banner
     #
-    - name:                               Home Parallax Banner v1
+    - name:                               Home Parallax Banner
       banner:
-        id:                               home_parallax_banner
         enabled:                          true
+
+        id:                               home_parallax_banner
         type:                             parallax
         properties:
         comment:                          Main parallax banner shown on home page
-        # style:                            dark
-        # lane_span:                        fluid
+        lane_span:                        fluid
 
         cards:
 
@@ -321,16 +325,14 @@ settings:
             card:
               enabled:                    true
               type:                       quote
+#             cite:                       J1 Team
               cite_text_size:             300%
               cite_text_quotes:           false
               cite_text: >
-                                          <strong><span style="color: #2196f3">Making is</span>
+                                          <strong><span class="text-primary">Making is</span>
                                           like Wanting, <br> but even
-                                          <span style="color: #2196f3">Better</span></strong>
-              cite_size:                  200%
-#             cite:                       J1 Team
-              text_color:                 rgba_lighten_900
-              cite_color:                 rgba_lighten
+                                          <span class="text-primary">Better</span></strong>
+              text_color:                 "#E0E0E0"
               gridify:                    true
               size_y:                     450
               darken:                     6
@@ -345,10 +347,29 @@ settings:
     #
     - name:                               Foo Banner
       banner:
-        id:                               foo_banner
         enabled:                          false
+
+        id:                               foo_banner
         type:                             foo
         comment:                          Banner (type) to test config issues/exceptions
+        lane_span:                        fluid
+
+  # ----------------------------------------------------------------------------
+  # EXCEPTION banner
+  #
+  #   NOTE:
+  #   The EXCEPTION banner is used to place additional information to the
+  #   (default) exception CONTAINER if processing of a banner has failed
+  #
+  exception:
+    # --------------------------------------------------------------------------
+    # EXCEPTION banner settings
+    #
+    id:                                 exception_container
+    enabled:                            true
+    type:                               exception
+    comment:                            Default Exception Banner
+    lane_span:                        fluid
 
 # ------------------------------------------------------------------------------
 # END config
