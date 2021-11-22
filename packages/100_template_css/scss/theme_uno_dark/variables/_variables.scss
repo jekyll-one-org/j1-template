@@ -18,6 +18,7 @@
 */
 
 // Contents
+// jadams, 2019-11-21: Needs to be revised for BS@5
 // -----------------------------------------------------------------------------
 // Colors
 // Spacing
@@ -37,7 +38,6 @@
 // Navs
 // Navbar
 // Pagination
-// Jumbotron
 // Form states and alerts
 // Cards
 // Tooltips
@@ -54,30 +54,34 @@
 // Close
 // Code
 
+// Body (reverse colors)
+// -----------------------------------------------------------------------------
+$body-bg:                                         $gray-800;                    // --bs-body-bg (background|dark)
+$body-color:                                      $gray-300;                    // --bs-body-color (foreground|light)
+
 // Colors
 // -----------------------------------------------------------------------------
-$primary:                                         $blue-800 !default;
-$secondary:                                       $gray-800 !default;
-$success:                                         $green !default;
-$info:                                            $cyan !default;
-$warning:                                         $orange-700 !default;
-$danger:                                          $red !default;
-$light:                                           $gray-200 !default;
-$dark:                                            $gray-900 !default;
-
-// Body
-// -----------------------------------------------------------------------------
-$body-bg:                                         $gray-800 !default;
-$body-color:                                      $gray-100 !default;
+// $primary:                                         $blue-800 !default;
+// $secondary:                                       $gray-800 !default;
+// $success:                                         $green !default;
+// $info:                                            $cyan !default;
+// $warning:                                         $orange-700 !default;
+// $danger:                                          $red !default;
+// $light:                                           $gray-200 !default;
+// $dark:                                            $gray-900 !default;
 
 // Links
 // -----------------------------------------------------------------------------
-$link-color:                                      $white !default;
+// $link-color:                                      $white !default;
 
 // Fonts
 // -----------------------------------------------------------------------------
 $font-size-base:                                  0.9375rem !default;
 $font-weight-base:                                400 !default;
+
+// Text
+// -----------------------------------------------------------------------------
+$text-muted:                                      $gray-400;
 
 // Tables
 // -----------------------------------------------------------------------------

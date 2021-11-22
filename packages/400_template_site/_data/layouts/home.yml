@@ -162,17 +162,17 @@ lanes:
       id:                               home_teaser_banner
       region:                           body-main
       type:                             async
-      properties:                       elevated-z0
+      properties:                       g-2 elevated-z0
 
   # ----------------------------------------------------------------------------
   # SERVICE panel
   #
   - lane:
-      enabled:                          false
+      enabled:                          true
       id:                               home_service_panel
       region:                           body-main
       type:                             async
-      properties:                       elevated-z0 mb-3
+      properties:                       g-2 elevated-z0
 
   # ----------------------------------------------------------------------------
   # DIVIDER banner
@@ -192,7 +192,7 @@ lanes:
       id:                               home_intro_panel
       region:                           body-main
       type:                             async
-      properties:                       elevated-z2
+      properties:                       g-2 elevated-z2
 
   # ----------------------------------------------------------------------------
   # PARALLAX banner
@@ -242,7 +242,7 @@ lanes:
       id:                               home_news_panel
       region:                           body-main
       type:                             async
-      properties:                       elevated-z2
+      properties:                       g-2 elevated-z2
 
   # ----------------------------------------------------------------------------
   # FAB

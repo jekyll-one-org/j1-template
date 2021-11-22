@@ -29,6 +29,7 @@
 .card {
   &.card-same-height {
     height: calc(100% - 1.75rem);                                               // jadams, 2021-09-00: make (J1) cards same height
+    overflow: hidden;
   }
 }
 
@@ -57,6 +58,10 @@
 	padding: 1.25rem;
 	background-color: $lighten-500;                                               // jadams, 2021-11-20: optimize colors for themes
   border-top: 1px dotted $darken-300;                                           // jadams, 2021-11-20: optimize colors for themes
+}
+
+.card .card-footer .footer-body {
+    color: $gray-900;
 }
 
 /* jadams: Overwrite Bootstraps heading margins for cards */

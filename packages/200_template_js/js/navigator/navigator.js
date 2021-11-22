@@ -90,6 +90,10 @@ module.exports = function navigator ( options ) {
       var $getNav           = $('nav.navbar.navigator');
       var json_data;
 
+      // jadams: unused code (for now).: manages HTML5 server side events
+      // for incoming messages from Git Server send e.g. on a 'pull request'
+      // NOTE: used for ControlCenter (cc) functionality only !!!
+      // -----------------------------------------------------------------------
       // const seeMe           = 'https://smee.io/wlNIFNiJN0GClm2';
       // const middleware      = 'localhost:5000/state';
       // const web_server_dev  = 'http://localhost:41000/status';
@@ -124,14 +128,19 @@ module.exports = function navigator ( options ) {
       //   }; // END event onMessage
       // }
 
-      // bind click event to all links with "#" to suppress default action
-      // See: https://stackoverflow.com/questions/134845/which-href-value-should-i-use-for-javascript-links-or-javascriptvoid0
+      // bind click event to all plain '#' links to prevent default action
+      // 'scroll-to-top'
+      // See:
+      //  https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
+      //  https://stackoverflow.com/questions/134845/which-href-value-should-i-use-for-javascript-links-or-javascriptvoid0
       //
       $('a[href="#"]').click(function(e) {
+        logger.debug('\n' + 'click event on href "#" detected: prevent default action');
         e.preventDefault ? e.preventDefault() : e.returnValue = false;
-        logger.info('\n' + 'bound click event to "#", suppress default action');
       });
 
+      // jadams: test code for jQuery plugin 'regex'
+      // -----------------------------------------------------------------------
       // $('a:contains("?#")').click(function(e) {
       //   e.preventDefault ? e.preventDefault() : e.returnValue = false;
       //   logger.info('bound click event to "?#*", suppress default action');

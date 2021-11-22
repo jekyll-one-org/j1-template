@@ -16,15 +16,13 @@
   border: 0;
   border-radius: 0;
   .card-header {
-    // border-bottom: 1px solid $grey-600;
     border-bottom: 0;
   }
   .card-footer {
-    background-color: transparent !important;
-    // border-top: 0;
-    border-top: 1px dotted rgba(0, 0, 0, 0.7);
+    background-color: $lighten-400 !important;
+    border-top: 1px dotted $darken-700;                                         // rgba(0, 0, 0, 0.7)
   }
   hr {
-    border-top: 1px solid  $grey-600 !important;
+    border-top: 1px solid $grey-600 !important;
   }
 }

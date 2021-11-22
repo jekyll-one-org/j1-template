@@ -14,11 +14,11 @@
 
 .btn {
   color: $grey-400 !important;
-  border-color: $darken-600 !important;
+  // border-color: $darken-600 !important;
   text-shadow: 1px 1px 1px $darken-300;
   &:not([disabled]):not(.disabled).active,
   &.disabled {
-    border-color: $darken-600 !important;
+    // border-color: $darken-600 !important;
     box-shadow: none;
   }
   &:hover,
@@ -26,8 +26,8 @@
   &:not([disabled]):not(.disabled):active,
   &:not([disabled]):not(.disabled):active:hover,
   &:not([disabled]):not(.disabled).active:hover {
-    color: $grey-600 !important;
-    border-color: $darken-600 !important;
+    color: $gray-300 !important;
+    // border-color: $darken-600 !important;
   }
 }
 .btn-primary.btn-raised {
@@ -93,13 +93,18 @@
     color: $grey-100 !important;
   }
 }
-.btn-link,
-.btn-link:hover {
+.btn-link {
+  color: $gray-700 !important;
   border-color: transparent;
 }
+
 .btn-group,
 .btn-group-vertical {
   .btn.active {
     border-color: $darken-600 !important;
   }
+}
+
+.btn-check:focus + .btn, .btn:focus {
+  box-shadow: unset;
 }

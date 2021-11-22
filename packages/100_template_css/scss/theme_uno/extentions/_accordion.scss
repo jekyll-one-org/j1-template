@@ -1,6 +1,6 @@
 /*
 // ----------------------------------------------------------------------------
-// ~/scss/theme_uno/bootstrap/extensions/_accordion_panel.scss
+// ~/scss/theme_uno/bootstrap/extensions/_accordion.scss
 // Provides styles for the J1 Accordion Panel
 //
 // Product/Info:
@@ -29,18 +29,17 @@
 	background: none;
 	border: none;
 	padding: .4rem 1rem;
-	font-family: "Roboto", sans-serif;
+	// font-family: "Roboto", sans-serif;
 }
 .accordion .card-header h2 span {
 	float: left;
 	margin-top: 10px;
 }
 .accordion .card-header .btn {
-	color: #2f2f31;
-	font-size: 1.04rem;
+	// color: #2f2f31;
 	text-align: left;
 	position: relative;
-	font-weight: 500;
+	// font-weight: 500;
 	padding-left: 2rem;
 }
 .accordion .card-header i {
@@ -51,29 +50,32 @@
 	top: 9px;
 }
 .accordion .card-header .btn:hover {
-	color: #ff8300;
+	color: $info;
 }
 .accordion .card-body {
 	color: #324353;
 	padding: 0.5rem 3rem;
 }
-.page-title {
-	margin: 3rem 0 3rem 1rem;
-	font-family: "Roboto", sans-serif;
-	position: relative;
-}
-.page-title::after {
-	content: "";
-	width: 80px;
-	position: absolute;
-	height: 3px;
-	border-radius: 1px;
-	background: #73bb2b;
-	left: 0;
-	bottom: -15px;
-}
+
+// .page-title {
+// 	margin: 3rem 0 3rem 1rem;
+// 	// font-family: "Roboto", sans-serif;
+// 	position: relative;
+// }
+// .page-title::after {
+// 	content: "";
+// 	width: 80px;
+// 	position: absolute;
+// 	height: 3px;
+// 	border-radius: 1px;
+// 	background: #73bb2b;
+// 	left: 0;
+// 	bottom: -15px;
+// }
+
+
 .accordion .highlight .btn {
-	color: #2196f3;
+	color: $primary;
 }
 .accordion .highlight i {
 	transform: rotate(180deg);
@@ -82,7 +84,6 @@
 .collapsible-link[aria-expanded='true']::after {
   transform: rotate(90deg) translateX(-1px);
 }
-
 .collapsible-link[aria-expanded='true']::before {
   transform: rotate(180deg);
 }

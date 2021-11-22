@@ -123,9 +123,8 @@ settings:
         type:                           teaser
         properties:                     mt-3 mb-5
         icon_family:                    MDI
-
-        style:                          light
-        lane_span:                      fixed
+        # style:                          light
+        # lane_span:                      fixed
 
         cards:
 
@@ -155,18 +154,18 @@ settings:
                                         </p>
               buttons:
 
-                # - name:                 Features
-                #   button:
-                #     id:                 features
-                #     title:              New
-                #     tagline:            learn top features
-                #     class:              btn btn-raised btn-xl btn-primary text-uppercase text-left mr-2 mb-2
-                #     style:              "min-width: 250px"
-                #     icon:               magnify
-                #     icon_color:
-                #     icon_size:          3x
-                #     href:               '#'
-                #     target:
+#               - name:                 Features
+#                 button:
+#                   id:                 features
+#                   title:              New
+#                   tagline:            learn top features
+#                   class:              btn btn-raised btn-xl btn-primary text-uppercase text-left mr-2 mb-2
+#                   style:              "min-width: 250px"
+#                   icon:               magnify
+#                   icon_color:
+#                   icon_size:          3x
+#                   href:               '#'
+#                   target:
 
                 - name:                 Roundtrip
                   button:
@@ -216,10 +215,10 @@ settings:
         enabled:                        false
         comment:                        Teaser shown on home page below the parallax
         type:                           teaser
+        properties:
         icon_family:                    MDI
-
-        style:                          light
-        lane_span:                      fixed
+        # style:                          light
+        # lane_span:                      fixed
 
         cards:
 
@@ -285,9 +284,9 @@ settings:
         id:                               home_image_banner
         enabled:                          false
         type:                             image
+        properties:
         comment:                          Main image banner shown on home page
-
-        lane_span:                        fluid
+        # lane_span:                        fluid
 
         cards:
 
@@ -298,7 +297,6 @@ settings:
               size_y:                     450
               darken:                     1
               background_image:           /assets/images/modules/attics/ideas-start-here-1920x1280-bw.jpg
-
 
   # ----------------------------------------------------------------------------
   # PARALLAX Banner
@@ -312,11 +310,10 @@ settings:
         id:                               home_parallax_banner
         enabled:                          true
         type:                             parallax
-        properties:                       mt-6 mb-6
+        properties:
         comment:                          Main parallax banner shown on home page
-
-        style:                            dark
-        lane_span:                        fluid
+        # style:                            dark
+        # lane_span:                        fluid
 
         cards:
 
@@ -338,36 +335,6 @@ settings:
               size_y:                     450
               darken:                     6
               background_image:           /assets/images/modules/attics/ideas-start-here-1920x1280-bw.jpg
-
-    # --------------------------------------------------------------------------
-    # parallax_banner_einstein
-    #
-    - name:                               Home Parallax Banner v2
-      banner:
-        id:                               parallax_banner_einstein
-        enabled:                          false
-        type:                             parallax
-        comment:                          Main parallax banner shown on home page
-
-        style:                            dark
-        lane_span:                        fluid
-
-        cards:
-
-          - name:                         Quote settings
-            card:
-              enabled:                    true
-              type:                       quote
-              cite_text: >
-                                          Everything should be made as <b><span class="color-red">simple</span></b>
-                                          as possible,<br>
-                                          but not <b><span class="color-red">simpler</span></b>
-              cite:                       Albert Einstein
-              text_color:                 rgba_lighten_900
-              cite_color:                 rgba_lighten
-              gridify:                    true
-              darken:                     7
-              background_image:           /assets/images/quotes/albert_einstein.png
 
   # ----------------------------------------------------------------------------
   # FOO Banner

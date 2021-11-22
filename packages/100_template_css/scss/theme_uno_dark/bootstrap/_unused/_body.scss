@@ -14,18 +14,12 @@
 
 // Body
 // -----------------------------------------------------------------------------
-body {
-  font-family: Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-weight: $font-weight-base;
-  color: $grey-400;
-}
+// body {
+//   color:              $gray-300;
+//   background-color:   $gray-800;
+// }
 
-a {
-  &:focus {
-    outline: none; // remove the terrible @include tab-focus();
-  }
-}
-
-button:focus {
-  outline: none;
-}
+// body {
+//   color:              $gray-300;                                                // --bs-body-bg (dark)
+//   background-color:   $gray-800;                                                // --bs-body-color (light)
+// }

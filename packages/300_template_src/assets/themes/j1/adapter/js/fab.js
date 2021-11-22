@@ -226,14 +226,16 @@ j1.adapter['fab'] = (function (j1, window) {
       var floatingActionOptions = fabOptions.menu_options;
       var fabButtons            = document.querySelectorAll('.fab-btn');
 
+      // jadams, 2021-11-21: removed all #void links as not needed
+      //
       // bind click event to all links with "#void" to suppress default action
       // See: https://stackoverflow.com/questions/134845/which-href-value-should-i-use-for-javascript-links-or-javascriptvoid0
       //
-      $('a[href="#void"]').click(function(e) {
-        e.preventDefault ? e.preventDefault() : e.returnValue = false;
-        logger.info('\n' + 'bound click event to "#void", suppress default action');
-        return false;
-      });
+      // $('a[href="#void"]').click(function(e) {
+      //   // e.preventDefault ? e.preventDefault() : e.returnValue = false;
+      //   logger.debug('\n' + 'bound click event to "#void", suppress default action');
+      //   return false;
+      // });
 
       // check if multiple buttons detected
       if ( fabButtons.length == 1 ) {

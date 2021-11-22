@@ -1233,42 +1233,50 @@ var j1 = (function () {
           // display page
           $('#no_flicker').css('display', 'block');
 
+          // jadams, 2021-11-19: test code for 'tapTarget' of 'materializeCss'
+          // See:
+          //  https://stackoverflow.com/questions/49422111/opening-tap-target-in-materialize-css-for-2-seconds
+          // -------------------------------------------------------------------
           // $('#features').tapTarget();
           // $('#features').click(function(e) {
           //   logger.info('\n' + 'call default action');
           //   $('#features').tapTarget('open');
           // });
 
+          // jadams, 2021-11-19: additional code for accordions (collapsible)
+          // used e.g for the 'SERVICE Panel'
+          // -------------------------------------------------------------------
           // Add minus icon for collapse element which is open by default
-            $(".collapse.show").each(function(){
-                $(this).prev(".card-header").addClass("highlight");
-            });
+          $(".collapse.show").each(function(){
+              $(this).prev(".card-header").addClass("highlight");
+          });
 
-            // Highlight open collapsed element
-            $(".card-header .btn").click(function(){
-                $(".card-header").not($(this).parents()).removeClass("highlight");
-                $(this).parents(".card-header").toggleClass("highlight");
-            });
+          // Highlight open collapsed element
+          $(".card-header .btn").click(function(){
+              $(".card-header").not($(this).parents()).removeClass("highlight");
+              $(this).parents(".card-header").toggleClass("highlight");
+          });
 
-            // no dropcaps if translation enabled
-            if (user_translate.translationEnabled) {
-              logger.info('\n' + 'translation enabled: ' + user_translate.translationEnabled);
-              logger.warn('\n' + 'skipped processing of dropcaps');
-            } else {
-              // initialize dropcaps
-              logger.info('\n' + 'post processing: createDropCap');
-              j1.core.createDropCap();
-            }
+          // no dropcaps if translation enabled
+          if (user_translate.translationEnabled) {
+            logger.info('\n' + 'translation enabled: ' + user_translate.translationEnabled);
+            logger.warn('\n' + 'skipped processing of dropcaps');
+          } else {
+            // initialize dropcaps
+            logger.info('\n' + 'post processing: createDropCap');
+            j1.core.createDropCap();
+          }
 
-            // add recommended title to hyvor iframe for SEO optimization (if loadad)
-           if (comment_provider === 'hyvor') {
-             var dependencies_met_load_finished = setInterval (function () {
-               if ($('#hyvor-talk-view').children().length) {
-                 $('#hyvor-talk-iframe').prop('title', 'Hyvor talk iframe');
-                 clearInterval(dependencies_met_load_finished);
-               }
-             }, 25);
-           }
+          // add recommended title to hyvor iframe for SEO optimization (if loadad)
+         if (comment_provider === 'hyvor') {
+           var dependencies_met_load_finished = setInterval (function () {
+             if ($('#hyvor-talk-view').children().length) {
+               $('#hyvor-talk-iframe').prop('title', 'Hyvor talk iframe');
+               clearInterval(dependencies_met_load_finished);
+             }
+           }, 25);
+         }
+
           // NOTE: Placed tracking warning/info here because page may reloaded
           // after cookie consent selection
           if (user_consent.analysis) {

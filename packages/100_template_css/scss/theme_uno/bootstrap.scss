@@ -15,6 +15,7 @@
 */
 
 // Contents
+// jadams, 2019-11-21: Needs to be revised for BS@5
 // -----------------------------------------------------------------------------
 // Spacing
 // Body
@@ -34,7 +35,6 @@
 // Navs
 // Navbar
 // Pagination
-// Jumbotron
 // Form states and alerts
 // Cards
 // Tooltips
@@ -53,50 +53,21 @@
 
 @import "bootstrap/alerts";
 @import "bootstrap/body";
-
-// @import "bootstrap/breadcrumbs";                                             // jadams, 2021-11-17: disabled
-
 @import "bootstrap/bs4styles";
-
 @import "bootstrap/buttons";
-
 @import "bootstrap/cards";
 @import "bootstrap/checkboxes";
-
-// @import "bootstrap/custom-forms";                                            // jadams, 2020-08-18: disabled
-
 @import "bootstrap/code";                                                       // jadams, 2020-08-18: custom styles from FOLDER custom
-@import "bootstrap/container";                                                  // jadams, 2021-011-19: Added media queries (mobiles)
 @import "bootstrap/dropdown";
 @import "bootstrap/forms";
 @import "bootstrap/headings";                                                   // jadams, 2021-09-03: new heading style (Roboto Slap)
-
-// @import "bootstrap/images";
-// @import "bootstrap/functions";                                               // jadams, 2020-08-18: empty
-
 @import "bootstrap/input-group";
-@import "bootstrap/jumbotron";
 @import "bootstrap/layout";
 @import "bootstrap/links";                                                      // jadams, 2020-08-18: custom styles from FOLDER custom
-@import "bootstrap/lists";                                                      // jadams, 2020-11-21: added for Asciidoc
 @import "bootstrap/modal";
-
-// @import "bootstrap/nav";
-
-// @import "bootstrap/navbar";                                                  // jadams, 2020-08-18: disabled
-
 @import "bootstrap/pagination";
 @import "bootstrap/popover";
 @import "bootstrap/progress";
-@import "bootstrap/radios";
-@import "bootstrap/reboot";
-@import "bootstrap/ripples";
-@import "bootstrap/switches";
-@import "bootstrap/tables";                                                  // jadams, 2020-08-18: disabled
-
-// @import "bootstrap/themes";                                                  // jadams, 2020-08-18: disabled
-
+@import "bootstrap/tables";
 @import "bootstrap/tooltip";
 @import "bootstrap/utilities";
-
-// @import "bootstrap/type";                                                    // jadams, 2020-08-18: disabled

@@ -328,10 +328,10 @@ exclude_from_search:                    true
         <!-- Panel {{panel_settings.id}} -->
         <section id="{{panel_settings.id}}" class="container">
           <!-- Main Container -->
-          <div class="row {{panel_settings.properties}}">
+          <div class="noclass {{panel_settings.properties}}">
 
             <!-- Heading -->
-            <div class="row">
+            <div class="noclass">
               <div class="{{panel_settings.animate}} mb-2">
                 <h2 class="g-font-weight-500 mb-0">{{panel_settings.title}}</h2>
                 <p class="tagline mb-0"><b>{{panel_settings.tagline}}</b></p>
@@ -343,7 +343,7 @@ exclude_from_search:                    true
             <!-- END Heading -->
 
             <!-- Cards -->
-            <div class="row {{panel_settings.id}}" style="display: none;">
+            <div class="noclass {{panel_settings.id}}" style="display: none;">
             {% assign card_items = cards | size %}
 
             <ul id="{{panel_settings.id}}-scroll-group" class="scroll-group scroll-group-horizontal align-items-stretch flex-wrap">
@@ -399,14 +399,14 @@ exclude_from_search:                    true
                         	  <div class="card">
                           		<div class="card-header" id="headingOne">
                           		  <h2 class="clearfix mb-0">
-                            			<a class="btn btn-link collapsed" data-bs-toggle="collapse" data-target="#{{list.service.id}}" aria-expanded="false" aria-controls="{{list.service.id}}">
+                            			<a class="btn btn-link collapsed" data-bs-toggle="collapse" data-bs-target="#{{list.service.id}}" aria-expanded="false" aria-controls="{{list.service.id}}">
                                     <i class="fa fa-chevron-circle-down"></i>
                                     {{list.service.title}}
                                   </a>
                           		  </h2>
                           		</div>
-                          		<div id="{{list.service.id}}" class="collapse mb-4" aria-labelledby="{{list.service.id}}" data-parent="#{{card_id}}">
-                          		  <div class="card-body r-text-200">
+                          		<div id="{{list.service.id}}" class="collapse mb-4" aria-labelledby="{{list.service.id}}" data-bs-parent="#{{card_id}}">
+                          		  <div class="footer-body ml-5 r-text-200">
                                   {{list.service.description}}
                                   <hr>
                                   <a class="card-link text-muted text-lowercase" href="{{list.service.href}}">
