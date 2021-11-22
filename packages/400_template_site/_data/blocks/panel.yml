@@ -194,7 +194,7 @@ settings:
     #
     - name:                             Home Service Panel
       panel:
-        enabled:                        true
+        enabled:                        false
         id:                             home_service_panel
         comment:                        Home Service Panel
         type:                           service

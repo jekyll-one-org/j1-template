@@ -76,7 +76,7 @@
       <ul class="content">
         {% if source == 'categories' %}
           {% for tag in word_array %}
-            <li>
+            <li class="badge-tag">
               <a href="#{{tag|downcase}}">
                 {{ tag | capitalize }}
                 <span>{{ site.categories[tag] | size }}</span>
@@ -85,7 +85,7 @@
           {% endfor %}
         {% elsif source == 'tags' %}
           {% for tag in word_array %}
-            <li>
+            <li class="badge-tag">
               <a href="#{{ tag | replace: '+','_' | replace: ' ','_' | downcase }}">
                 {{ tag }}
                 <span>{{ site.tags[tag] | size }}</span>
