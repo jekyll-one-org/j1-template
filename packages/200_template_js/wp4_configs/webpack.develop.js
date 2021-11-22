@@ -52,6 +52,7 @@ const distFolder =                      path.resolve(__dirname, './dist');
 const nodeModulesFolder =               path.resolve(__dirname, './node_modules');
 const cssSrc =                          path.resolve(__dirname, ROOT, '../100_template_css');
 const jekyllSrc =                       path.resolve(__dirname, ROOT, '../400_template_site');
+const gemSrc =                          path.resolve(__dirname, ROOT, '../500_template_gem');
 const jekyllSite =                      path.resolve(__dirname, ROOT, '../400_template_site/_site');
 const jekyllSiteAssets =                path.resolve(__dirname, ROOT, '../400_template_site/_site/assets');
 
@@ -127,6 +128,7 @@ module.exports = merge(common, {
                                             distFolder,                         // do not watch for changes on dist folder
                                             nodeModulesFolder,                  // do not watch for changes on node modules folder
                                             jekyllSrc,
+                                            gemSrc,
                                             cssSrc,
                                             jekyllSiteAssets                    // do not watch for changes on _site/assets folder
                                           ],
