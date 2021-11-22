@@ -1318,8 +1318,8 @@ resources:
       dependencies:                     false
       pass_init_data:                   false
       data:
-        css:                            [ modules/msDropdown/css/msDropdown ]
-        files:                          []
+        css:                            []
+        files:                          [ modules/msDropdown/css/themes/uno/msDropdown.css ]
         js:                             [ modules/msDropdown/js/msDropdown ]
         init_function:                  []
 
