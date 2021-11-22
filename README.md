@@ -10,7 +10,7 @@ you go to the Jekyll Way.
 
 * Fully Responsive. J1 Template supports modern web browsers on all
   devices for best results on PCs, Tablets, and SmartPhones.
-* Full Bootstpap V4 support. Current Technology and Design. Excellent
+* Full Bootstpap V5 support. Current Technology and Design. Excellent
   performance running desktop and mobile websites. Use Jekyll One to
   present your content at its best.
 * Start in no time. No programming is needed to start using J1. The
@@ -39,7 +39,7 @@ issues for private or professional use.
 
 * Fully Responsive. J1 Template supports modern web browsers on all
   devices for best results on PCs, Tablets, and SmartPhones.
-* Full Bootstpap V4 support. Current Technology and Design. Excellent
+* Full Bootstpap V5 support. Current Technology and Design. Excellent
   performance running desktop and mobile websites. Use Jekyll One to
   present your content at its best.
 * Start in no time. No programming is needed to start using J1. The
@@ -52,7 +52,7 @@ issues for private or professional use.
 * Ruby 2.7 support
 * Asciidoc (Asciidoctor) and Markdown support
 * Asciidoctor plugins included
-* Bootstrap V4 (v4.6)
+* Bootstrap V5 (v5.1.3)
 * Responsive Design
 * Material Design
 * Responsive Text
