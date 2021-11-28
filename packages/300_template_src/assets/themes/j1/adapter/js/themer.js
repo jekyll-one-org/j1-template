@@ -118,14 +118,12 @@ j1.adapter['themer'] = (function (j1, window) {
   var logText;
   var cookie_written;
 
-  var cssExtension              = (environment === 'production')
-                                  ? '.min.css'
-                                  : '.css';
+  var cssExtension              = (environment === 'production') ? '.min.css' : '.css';
 
   var default_theme_name        = '{{default_theme.name}}';
   var default_theme_author      = '{{default_theme.author}}';
   var default_theme_author_url  = '{{default_theme.author_url}}';
-  var default_theme_css_name    = default_theme_name.toLowerCase().replace(' ', '-');
+  var default_theme_css_name    = default_theme_name.toLowerCase();
   var default_theme_css         = '{{asset_path}}/{{theme_base}}/' + default_theme_css_name + '/bootstrap' + cssExtension;
 
   var interval_count            = 0;
@@ -201,6 +199,17 @@ j1.adapter['themer'] = (function (j1, window) {
              user_state.theme_css        = default_theme_css;
              user_state.theme_author     = default_theme_author;
              user_state.theme_author_url = default_theme_author_url;
+
+             cookie_written = j1.writeCookie({
+               name:     cookie_names.user_state,
+               data:     user_state,
+               samesite: 'Strict',
+               secure:   secure,
+               expires:  365
+             });
+             if (!cookie_written) {
+                 logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_consent);
+             }
            }
 
            styleLoaded     = styleSheetLoaded(user_state.theme_css);

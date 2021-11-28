@@ -67,9 +67,8 @@ as something like images.
 
 == Responsive Text
 
-Sadly, one common flaw is seen in many templates and frameworks (sadly to say:
-the same to Bootstrap, including V4{fn-bootstrap-v5--responsive-text}) is a
-lack of support for genuinely responsive text. While elements on a page resize
+Sadly, one common flaw is seen in many templates and frameworks: a lack of
+support for genuinely responsive text. While elements on a page resize
 fluidly, the text still resizes on a fixed basis. To avoid this issue,
 especially for heavily text-focused pages, J1 Template supports styles that
 fluidly scale text size and line height to optimize readability for the user.

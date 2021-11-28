@@ -2981,9 +2981,9 @@ endif::[]
   theme_slogans.Yeti      = 'A friendly foundation';
   theme_slogans.Zephyr    = 'Breezy and beautiful';
 
-  themeName         = user_state.theme_name;
-  theme_slogan      = theme_slogans[themeName];
-  themeNameHeadline = '<h1 id="theme_name" class="mb-0">Theme ' +themeName+ '</h1>';
+  themeName               = user_state.theme_name;
+  theme_slogan            = theme_slogans[themeName];
+  themeNameHeadline       = '<h1 id="theme_name" class="mb-0">Theme ' +themeName+ '</h1>';
 
   $('#theme').prepend(themeNameHeadline);
   $('#theme').append('<p class="tagline mb-2"><b>'  + theme_slogan + '</b></p>');

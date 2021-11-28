@@ -234,9 +234,9 @@ var j1 = (function () {
   };
   var user_state = {
     'writer':               'j1.adapter',
-    'theme_name':           '',
+    'theme_name':           'UnoLight',
     'theme_css':            '',
-    'theme_author':         '',
+    'theme_author':         'J1 Team',
     'theme_version':        '{{template_version}}',
     'session_active':       false,
     'google_translate':     'disabled',

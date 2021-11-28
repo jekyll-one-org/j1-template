@@ -81,7 +81,7 @@ include::{documentdir}/410_table_bs_modal_examples.asciidoc[]
 
 == What next
 
-Bootstrap is a helpful framework that offers in the current V4
+Bootstrap is a helpful framework that offers in the current V5
 version a complete set of styles to create excellent responsive designs.
 In the sense of all can be improved, the responsive tables support of BS
 needs some enhancement to display tables on low-resolution devices or smaller
