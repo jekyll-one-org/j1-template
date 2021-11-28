@@ -4,7 +4,7 @@
 ++++
 <div class="ml-2">
   <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary btn-raised" data-toggle="modal" data-target="#sideModalTRSuccessDemo">
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#sideModalTRSuccessDemo">
     Launch Example
   </button>
 </div>

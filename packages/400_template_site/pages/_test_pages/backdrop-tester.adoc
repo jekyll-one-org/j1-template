@@ -80,21 +80,21 @@ resource_options:
     </div>
     <!-- Footer|Button row -->
     <div class="mt-1 text-center">
-      <a href="/pages/public/learn/roundtrip/present_images/" class="btn btn-raised btn-xl btn-primary text-uppercase text-left mr-2 mb-2" style="min-width: 250px">
+      <a href="/pages/public/learn/roundtrip/present_images/" class="btn btn-xl btn-primary text-uppercase text-left mr-2 mb-2" style="min-width: 250px">
         <i class="mdi mdi-briefcase-search-outline mdi-3x mdi- mr-3"></i>
         <span class="float-right text-left mt-2">
           Roundtrip
           <span class="d-block r-text-200 text-lowercase">learn top features</span>
         </span>
       </a>
-      <a href="https://rubygems.org/gems/j1-template" target="blank" rel="noopener" class="btn btn-raised btn-xl btn-primary text-uppercase text-left mr-2 mb-2" style="min-width: 250px">
+      <a href="https://rubygems.org/gems/j1-template" target="blank" rel="noopener" class="btn btn-xl btn-primary text-uppercase text-left mr-2 mb-2" style="min-width: 250px">
         <i class="mdi mdi-briefcase-download-outline mdi-3x mdi- mr-3"></i>
         <span class="float-right text-left mt-2">
           Download
           <span class="d-block r-text-200 text-lowercase">get on rubygems</span>
         </span>
       </a>
-      <a href="https://jekyll.one/pages/public/learn/quickstart/" target="blank" rel="noopener" class="btn btn-raised btn-xl btn-primary text-uppercase text-left mr-2 mb-2" style="min-width: 250px">
+      <a href="https://jekyll.one/pages/public/learn/quickstart/" target="blank" rel="noopener" class="btn btn-xl btn-primary text-uppercase text-left mr-2 mb-2" style="min-width: 250px">
         <i class="mdi mdi-briefcase-check-outline mdi-3x mdi- mr-3"></i>
         <span class="float-right text-left mt-2">
           Quickstart

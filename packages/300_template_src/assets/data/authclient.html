@@ -185,7 +185,7 @@ exclude_from_search:                    true
 
               {% if provider == 'disqus' and auth_disqus_enabled %}
               <li class="nav-item">
-                <a class="nav-link{{active_flag}}" href="#h-tabs-{{ auth_disqus_id }}" role="tab" data-toggle="tab" aria-expanded="false" aria-selected="false">
+                <a class="nav-link{{active_flag}}" href="#h-tabs-{{ auth_disqus_id }}" role="tab" data-bs-toggle="tab" aria-expanded="false" aria-selected="false">
                   <i class="mdi mdi-disqus mt-1 mb-2"></i> {{ auth_disqus_title }}
                 </a>
               </li>
@@ -193,7 +193,7 @@ exclude_from_search:                    true
 
               {% if provider == 'github' and auth_github_enabled %}
               <li class="nav-item">
-                <a class="nav-link{{active_flag}}" href="#h-tabs-{{ auth_github_id }}" role="tab" data-toggle="tab" aria-expanded="false" aria-selected="true">
+                <a class="nav-link{{active_flag}}" href="#h-tabs-{{ auth_github_id }}" role="tab" data-bs-toggle="tab" aria-expanded="false" aria-selected="true">
                   <i class="mdi mdi-github mt-1 mb-2"></i> {{ auth_github_title }}
                 </a>
               </li>
@@ -201,7 +201,7 @@ exclude_from_search:                    true
 
               {% if provider == 'facebook' and auth_facebook_enabled %}
               <li class="nav-item">
-                <a class="nav-link{{active_flag}}" href="#h-tabs-{{ auth_facebook_id }}" role="tab" data-toggle="tab" aria-expanded="false" aria-selected="false">
+                <a class="nav-link{{active_flag}}" href="#h-tabs-{{ auth_facebook_id }}" role="tab" data-bs-toggle="tab" aria-expanded="false" aria-selected="false">
                   <i class="mdi mdi-facebook mt-1 mb-2"></i> {{ auth_facebook_title }}
                 </a>
               </li>
@@ -209,7 +209,7 @@ exclude_from_search:                    true
 
               {% if provider == 'twitter' and auth_twitter_enabled %}
               <li class="nav-item">
-                <a class="nav-link{{active_flag}}" href="#h-tabs-{{ auth_twitter_id }}" role="tab" data-toggle="tab" aria-expanded="false" aria-selected="false">
+                <a class="nav-link{{active_flag}}" href="#h-tabs-{{ auth_twitter_id }}" role="tab" data-bs-toggle="tab" aria-expanded="false" aria-selected="false">
                   <i class="mdi mdi-twitter mt-1 mb-2"></i> {{ auth_twitter_title }}
                 </a>
               </li>
@@ -217,7 +217,7 @@ exclude_from_search:                    true
 
               {% if provider == 'patreon' and auth_patreon_enabled %}
               <li class="nav-item">
-                <a class="nav-link{{active_flag}}" href="#h-tabs-{{ auth_patreon_id }}" role="tab" data-toggle="tab" aria-expanded="true" aria-selected="false">
+                <a class="nav-link{{active_flag}}" href="#h-tabs-{{ auth_patreon_id }}" role="tab" data-bs-toggle="tab" aria-expanded="true" aria-selected="false">
                   <i class="mdi mdi-patreon mt-1 mb-2"></i>
                   {{ auth_patreon_title }}
                 </a>
@@ -259,11 +259,11 @@ exclude_from_search:                    true
 
         <!-- Footer -->
         <div class="modal-footer justify-content-center">
-          <a type="button" id="signInButton" class="btn btn btn-raised btn-flex btn-md btn-primary mr-3" data-dismiss="modal">
+          <a type="button" id="signInButton" class="btn btn btn-flex btn-md btn-primary mr-3" data-bs-dismiss="modal">
             <i class="mdi mdi-18px mdi-login mr-1"></i>
             Yes, please
           </a>
-          <a type="button" id="exitButton" class="btn btn btn-raised btn-flex btn-md btn-secondary" data-dismiss="modal">
+          <a type="button" id="exitButton" class="btn btn btn-flex btn-md btn-secondary" data-bs-dismiss="modal">
             <i class="mdi mdi-18px mdi-close mr-1"></i>
             No, thanks
           </a>
@@ -328,11 +328,11 @@ exclude_from_search:                    true
 
         <!-- Footer -->
         <div class="modal-footer">
-          <a type="button" id="signOutButton" class="btn btn btn-raised btn-flex btn-md btn-danger mr-3" data-dismiss="modal">
+          <a type="button" id="signOutButton" class="btn btn btn-flex btn-md btn-danger mr-3" data-bs-dismiss="modal">
             <i class="mdi mdi-18px mdi-logout mr-1"></i>
             Yes, please
           </a>
-          <a type="button" id="exitButton" class="btn btn btn-raised btn-flex btn-md btn-secondary" data-dismiss="modal">
+          <a type="button" id="exitButton" class="btn btn btn-flex btn-md btn-secondary" data-bs-dismiss="modal">
             <i class="mdi mdi-18px mdi-close mr-1"></i>
             No, thanks
           </a>
@@ -362,7 +362,7 @@ exclude_from_search:                    true
         </div>
         <!-- Footer -->
         <div class="modal-footer justify-content-center">
-          <a type="button" class="btn btn btn-raised btn-flex btn-md btn-primary" data-dismiss="modal">OK</a>
+          <a type="button" class="btn btn btn-flex btn-md btn-primary" data-bs-dismiss="modal">OK</a>
         </div>
       </div>
       <!-- END Content -->
@@ -381,7 +381,7 @@ exclude_from_search:                    true
         <div class="modal-body">
           <div class="row px-4">
             <p class="pt-1 pr-2">You're already signed in</p>
-            <a type="button" class="btn btn btn-raised btn-flex btn-md btn-primary" data-dismiss="modal"OK</a>
+            <a type="button" class="btn btn btn-flex btn-md btn-primary" data-bs-dismiss="modal"OK</a>
           </div>
         </div>
       </div>

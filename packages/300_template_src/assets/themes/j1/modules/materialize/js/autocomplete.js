@@ -150,7 +150,7 @@
       this.container.id = `autocomplete-options-${M.guid()}`;
       $(this.container).addClass('autocomplete-content dropdown-content');
       this.$inputField.append(this.container);
-      this.el.setAttribute('data-target', this.container.id);
+      this.el.setAttribute('data-bs-target', this.container.id);
 
       this.dropdown = M.Dropdown.init(this.el, {
         autoFocus: false,

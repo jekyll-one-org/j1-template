@@ -33,7 +33,7 @@
       this.isOpen = false;
 
       // setup
-      this.$origin = $('#' + this.$el.attr('data-target'));
+      this.$origin = $('#' + this.$el.attr('data-bs-target'));
       this._setup();
 
       this._calculatePositioning();

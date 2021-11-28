@@ -79,7 +79,7 @@ what will happen in terms of responsiveness.
 
 ++++
 <div>
-  <button type="button" name="toggle-r-text" class="btn btn-primary btn-raised btn-flex mt-3 mb-3">
+  <button type="button" name="toggle-r-text" class="btn btn-primary btn-flex mt-3 mb-3">
     <i class="toggle-button mdi mdi-toggle-switch-off mdi-lg mdi-md-bg-primary-50 mr-1"></i>
     Toggle rtext
   </button>
@@ -136,7 +136,7 @@ responsiveness in action.
 
 ++++
 <div>
-  <button type="button" name="scale-r-text" class="btn btn-primary btn-raised btn-flex mt-3 mb-3">
+  <button type="button" name="scale-r-text" class="btn btn-primary btn-flex mt-3 mb-3">
     <i class="scale-button mdi mdi-arrow-up mdi-lg mdi-md-bg-primary-50 mr-1"></i>
     Scale rtext
   </button>

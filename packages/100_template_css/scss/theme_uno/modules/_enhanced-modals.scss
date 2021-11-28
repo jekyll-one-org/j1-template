@@ -24,13 +24,13 @@
 // jadams, 2019-08-20: Added colors as vars
 // Colors
 // -----------------------------------------------------------------------------
-$color_modal_primary:                   										theme-color(primary) !default;
-$color_modal_success:                   										theme-color(success) !default;
-$color_modal_info:                      										theme-color(info) !default;
-$color_modal_warning:                   										theme-color(warning) !default;
-$color_modal_danger:                    										theme-color(danger) !default;
-$color_modal_light:                     										theme-color(light) !default;
-$color_modal_dark:                      										theme-color(dark) !default;
+$color_modal_primary:                   										$primary;
+$color_modal_success:                   										$success;
+$color_modal_info:                      										$info;
+$color_modal_warning:                   										$warning;
+$color_modal_danger:                    										$danger;
+$color_modal_light:                     										$light;
+$color_modal_dark:                      										$dark;
 
 // Distance
 // -----------------------------------------------------------------------------
@@ -71,6 +71,8 @@ body {
 			    padding-right: 1rem;
 			    padding-bottom: 1.75rem;
 			    padding-left: 1rem;
+          border: 0;
+          background-color: transparent;
 			  }
     }
     .modal-footer {
@@ -261,7 +263,7 @@ body {
 			background-color: $color_modal_primary;
 		}
 		.mdi {
-			color: $gray-100 !important;
+			color: $gray-100;
 		}
 	}
 	&.modal-info {
@@ -272,7 +274,7 @@ body {
 			background-color: $color_modal_info;
 		}
 		.mdi {
-			color: $gray-100 !important;
+			color: $gray-100;
 		}
 	}
 	&.modal-warning {
@@ -283,7 +285,7 @@ body {
 			background-color: $color_modal_warning;
 		}
 		.mdi {
-			color: $gray-100 !important;
+			color: $gray-100;
 		}
 	}
 	&.modal-success {
@@ -294,7 +296,7 @@ body {
 			background-color: $color_modal_success;
 		}
 		.mdi {
-			color: $gray-100 !important;
+			color: $gray-100;
 		}
 	}
 	&.modal-danger {
@@ -305,7 +307,11 @@ body {
 			background-color: $color_modal_danger;
 		}
 		.mdi {
-			color: $gray-100 !important;
+			color: $gray-100;
 		}
 	}
 }
+
+/*
+ # ------- END _enhanced-modals.scss -------------------------------------------
+*/

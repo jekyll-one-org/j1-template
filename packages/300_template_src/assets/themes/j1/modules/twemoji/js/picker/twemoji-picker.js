@@ -89,10 +89,10 @@
 
       buttonsHTML =  '<div class="twemoji-icon-picker">';
       buttonsHTML +=   '<span id="open-group" class="mr-2" style="width: 2rem; height: 2rem;">';
-      buttonsHTML +=     '<button type="button" name="open-group" class="btn btn-raised btn-flex btn-primary mr-2"><i class="toggle-button mdi mdi-lg mr-1 mdi-toggle-switch-off"></i> Picker </button>';
+      buttonsHTML +=     '<button type="button" name="open-group" class="btn btn-flex btn-primary mr-2"><i class="toggle-button mdi mdi-lg mr-1 mdi-toggle-switch-off"></i> Picker </button>';
       buttonsHTML +=   '</span>';
       buttonsHTML +=   '<span id="clear-textarea" style="width: 2rem; height: 2rem;">';
-      buttonsHTML +=     '<button type="button" name="clear-textarea" class="btn btn-raised btn-flex btn-primary"><i class="mdi mdi-close mdi-lg mr-1"></i>' + clearText + '</button>';
+      buttonsHTML +=     '<button type="button" name="clear-textarea" class="btn btn-flex btn-primary"><i class="mdi mdi-close mdi-lg mr-1"></i>' + clearText + '</button>';
       buttonsHTML +=   '</span>';
       buttonsHTML += '</div>';
 

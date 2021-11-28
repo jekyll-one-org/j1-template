@@ -61,7 +61,7 @@ resource_options:
     show the Dialog again with <code>cookieSettings.showDialog()</code>.
   </p>
   <p>
-    <a href="javascript:showSettingsDialog()" class="btn btn-primary btn-raised">Cookie Settings</a>
+    <a href="javascript:showSettingsDialog()" class="btn btn-primary">Cookie Settings</a>
   </p>
   <h2>Read the settings</h2>
   <p>Read all cookie settings with <code>cookieSettings.getSettings()</code></p>

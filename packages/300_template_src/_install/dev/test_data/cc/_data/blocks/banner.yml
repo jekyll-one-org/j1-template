@@ -157,7 +157,7 @@ settings:
                 - name:                   Start button
                   button:
                     text:                 Start
-                    class:                btn-primary btn-raised btn-flex
+                    class:                btn-primary btn-flex
                     icon:                 rocket
                     icon_color:           md_white
                     icon_size:            lg
@@ -166,7 +166,7 @@ settings:
                 - name:                   Download button
                   button:
                     text:                 Download
-                    class:                btn-primary btn-raised btn-flex
+                    class:                btn-primary btn-flex
                     icon:                 download
                     icon_color:           md_white
                     icon_size:            lg
@@ -175,7 +175,7 @@ settings:
                 - name:                   Patreon button
                   button:
                     text:                 Become a Patron
-                    class:                btn-danger btn-raised btn-flex
+                    class:                btn-danger btn-flex
                     icon:                 patreon
                     icon_color:           md_white
                     icon_size:            lg

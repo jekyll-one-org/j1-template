@@ -1462,12 +1462,12 @@
       _inheritsLoose(Drawer, _BaseLayout);
 
       // $element is expected to be the trigger
-      //  i.e. <button class="btn bmd-btn-icon" for="search" data-toggle="drawer" data-target="#my-side-nav-drawer" aria-expanded="false" aria-controls="my-side-nav-drawer">
+      //  i.e. <button class="btn bmd-btn-icon" for="search" data-bs-toggle="drawer" data-bs-target="#my-side-nav-drawer" aria-expanded="false" aria-controls="my-side-nav-drawer">
       function Drawer($element, config) {
         var _this;
 
         _this = _BaseLayout.call(this, $element, $.extend(true, {}, Default, config)) || this;
-        _this.$toggles = $("[data-toggle=\"drawer\"][href=\"#" + _this.$element[0].id + "\"], [data-toggle=\"drawer\"][data-target=\"#" + _this.$element[0].id + "\"]");
+        _this.$toggles = $("[data-bs-toggle=\"drawer\"][href=\"#" + _this.$element[0].id + "\"], [data-bs-toggle=\"drawer\"][data-bs-target=\"#" + _this.$element[0].id + "\"]");
 
         _this._addAria(); // click or escape on the backdrop closes the drawer
 
@@ -2114,7 +2114,7 @@
       //   selector: "label.checkbox-inline > input[type=checkbox]"
       // },
       // collapseInline: {
-      //   selector: '.bmd-collapse-inline [data-toggle="collapse"]'
+      //   selector: '.bmd-collapse-inline [data-bs-toggle="collapse"]'
       // },
       drawer: {
         selector: ".bmd-layout-drawer"

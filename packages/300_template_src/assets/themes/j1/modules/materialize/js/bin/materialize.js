@@ -1369,7 +1369,7 @@ M.getOverflowParent = function (element) {
  * @returns {string}
  */
 M.getIdFromTrigger = function (trigger) {
-  var id = trigger.getAttribute('data-target');
+  var id = trigger.getAttribute('data-bs-target');
   if (!id) {
     id = trigger.getAttribute('href');
     if (id) {
@@ -6556,7 +6556,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         this.container.id = "autocomplete-options-" + M.guid();
         $(this.container).addClass('autocomplete-content dropdown-content');
         this.$inputField.append(this.container);
-        this.el.setAttribute('data-target', this.container.id);
+        this.el.setAttribute('data-bs-target', this.container.id);
 
         this.dropdown = M.Dropdown.init(this.el, {
           autoFocus: false,
@@ -11282,7 +11282,7 @@ $jscomp.polyfill = function (e, r, p, m) {
       _this67.isOpen = false;
 
       // setup
-      _this67.$origin = $('#' + _this67.$el.attr('data-target'));
+      _this67.$origin = $('#' + _this67.$el.attr('data-bs-target'));
       _this67._setup();
 
       _this67._calculatePositioning();
@@ -11818,7 +11818,7 @@ $jscomp.polyfill = function (e, r, p, m) {
         $(this.input).addClass('select-dropdown dropdown-trigger');
         this.input.setAttribute('type', 'text');
         this.input.setAttribute('readonly', 'true');
-        this.input.setAttribute('data-target', this.dropdownOptions.id);
+        this.input.setAttribute('data-bs-target', this.dropdownOptions.id);
         if (this.el.disabled) {
           $(this.input).prop('disabled', 'true');
         }

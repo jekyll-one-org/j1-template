@@ -91,21 +91,21 @@ regenerate:                             true
       <div class="modal-footer justify-content-center">
         {% if cookie_options.buttons.policy_button %}
         <a id="policyButton" type="button"
-           class="btn btn-raised btn-flex btn-primary mb-2 mr-2" style="width: 20rem">
+           class="btn btn-flex btn-primary mb-2 mr-2" style="width: 20rem">
            <i class="mdi mdi-18px mdi-white mdi-read mr-2"></i>
            {{cookie_options.buttons.policy_button_text}}
         </a>
         {% endif %}
         <a id="acceptButton" type="button"
-           class="btn btn-raised btn-flex btn-primary mb-2 mr-2" style="width: 20rem"
-           data-dismiss="modal">
+           class="btn btn-flex btn-primary mb-2 mr-2" style="width: 20rem"
+           data-bs-dismiss="modal">
            <i class="mdi mdi-18px mdi-white mdi-check mr-2"></i>
            {{cookie_options.buttons.accept_button_text}}
         </a>
         {% if cookie_options.buttons.decline_button %}
         <a id="declineButton" type="button"
-           class="btn btn-raised btn-flex btn-primary mb-2 mr-2" style="width: 20rem"
-           data-dismiss="modal">
+           class="btn btn-flex btn-primary mb-2 mr-2" style="width: 20rem"
+           data-bs-dismiss="modal">
            <i class="mdi mdi-18px mdi-white mdi-close mr-2"></i>
            {{cookie_options.buttons.decline_button_text}}
         </a>
@@ -256,14 +256,14 @@ regenerate:                             true
         <!-- Footer -->
         <div class="modal-footer justify-content-center">
           <a id="revokeCookies" type="button"
-            class="btn btn-raised btn-flex btn-danger mb-2 mr-2" style="width: 25rem"
-            data-dismiss="modal">
+            class="btn btn-flex btn-danger mb-2 mr-2" style="width: 25rem"
+            data-bs-dismiss="modal">
             <i class="mdi mdi-18px mdi-white mdi-check mr-2"></i>
             {{cookie_options.buttons.revoke_button_text}}
           </a>
           <a id="remainCookies" type="button"
-            class="btn btn-raised btn-flex btn-primary mb-2 mr-2" style="width: 25rem"
-            data-dismiss="modal">
+            class="btn btn-flex btn-primary mb-2 mr-2" style="width: 25rem"
+            data-bs-dismiss="modal">
             <i class="mdi mdi-18px mdi-white mdi-close mr-2"></i>
             {{cookie_options.buttons.do_nothing_button_text}}
           </a>

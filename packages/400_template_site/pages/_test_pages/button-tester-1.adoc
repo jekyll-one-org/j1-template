@@ -61,14 +61,14 @@ resource_options:
 ++++
 <div>
 
-  <a href="#void" class="btn btn-raised btn-xl btn-primary text-uppercase mr-2 mb-2">
+  <a href="#void" class="btn btn-xl btn-primary text-uppercase mr-2 mb-2">
   	<i class="mdi mdi-language-ruby mdi-3x mr-2"></i>
   	<span class="float-right text-left mt-2">Let's Use this Button
   		<span class="d-block r-text-200">30 days free for all users</span>
   	</span>
   </a>
 
-  <a href="#void" class="btn btn-raised btn-xl btn-primary text-uppercase mr-2 mb-2">
+  <a href="#void" class="btn btn-xl btn-primary text-uppercase mr-2 mb-2">
   	<i class="mdi mdi-language-ruby mdi-3x mr-2"></i>
   	<span class="float-right text-left mt-2">Let's Use this Button
   		<span class="d-block r-text-200">30 days free for all users</span>

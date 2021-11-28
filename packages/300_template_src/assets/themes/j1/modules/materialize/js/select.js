@@ -212,7 +212,7 @@
       $(this.input).addClass('select-dropdown dropdown-trigger');
       this.input.setAttribute('type', 'text');
       this.input.setAttribute('readonly', 'true');
-      this.input.setAttribute('data-target', this.dropdownOptions.id);
+      this.input.setAttribute('data-bs-target', this.dropdownOptions.id);
       if (this.el.disabled) {
         $(this.input).prop('disabled', 'true');
       }

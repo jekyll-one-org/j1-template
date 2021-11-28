@@ -499,11 +499,11 @@ j1.adapter['navigator'] = (function (j1, window) {
         // See: https://stackoverflow.com/questions/13524107/how-to-set-data-attributes-in-html-elements
         if (user_session.authenticated === 'true') {
           // Set SignOut
-          $('#navLinkSignInOut').attr('data-target', '#modalOmniSignOut');
+          $('#navLinkSignInOut').attr('data-bs-target', '#modalOmniSignOut');
           $('#iconSignInOut').removeClass('mdi-login').addClass('mdi-logout');
         } else {
           // Set SignIn
-          $('#navLinkSignInOut').attr('data-target', '#modalOmniSignIn');
+          $('#navLinkSignInOut').attr('data-bs-target', '#modalOmniSignIn');
           $('#iconSignInOut').removeClass('mdi-logout').addClass('mdi-login');
         }
       }
@@ -806,7 +806,7 @@ j1.adapter['navigator'] = (function (j1, window) {
       // $('#navigator_nav_menu')
       //   .find('li.dropdown.nav-item')
 
-      $('[data-toggle]').closest('li')
+      $('[data-bs-toggle]').closest('li')
       .on('mouseenter', function (inEvent) {
         if (theElement) theElement.removeClass('open');
         window.clearTimeout(theTimer);

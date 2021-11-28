@@ -99,7 +99,7 @@
            </div>
            {% if readmore %}
            <div class="card-footer">
-             <a href="#readmore" class="btn btn-info btn-raised pull-right smoothscroll"> <i class="mdi mdi-eye mdi-lg" style="color:#FFFFFF" %}=""></i> Read More </a>
+             <a href="#readmore" class="btn btn-info pull-right smoothscroll"> <i class="mdi mdi-eye mdi-lg" style="color:#FFFFFF" %}=""></i> Read More </a>
            </div>
            {% endif %}
 

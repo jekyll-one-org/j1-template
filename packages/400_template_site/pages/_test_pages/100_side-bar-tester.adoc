@@ -124,7 +124,7 @@ gallery::jg_old_times[]
 
 ++++
 
-<button class="btn u-sidebar-navigation__toggler" id="sideNav-toggler" aria-haspopup="true" aria-expanded="false" aria-controls="sideNav" aria-label="Toggle Header" data-target="#sideNav" style="display: block;">
+<button class="btn u-sidebar-navigation__toggler" id="sideNav-toggler" aria-haspopup="true" aria-expanded="false" aria-controls="sideNav" aria-label="Toggle Header" data-bs-target="#sideNav" style="display: block;">
 <i id="fam-icon" class="mdi mdi-wrap mdi-"></i>
 </button>
 

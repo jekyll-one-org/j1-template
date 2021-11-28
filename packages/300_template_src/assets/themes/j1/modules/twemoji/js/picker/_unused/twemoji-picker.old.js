@@ -72,7 +72,7 @@
       h.$wrapper = h.$el.wrap('<div class="twemoji-wrap"></div>').parent();
       h.$wrapper.append('<div class="twemoji-textarea" contentEditable="true" placeholder="' + h.options.placeholder + '"></div>');
       h.$wrapper.append('<div class="twemoji-textarea-duplicate"></div>');
-      h.$wrapper.append('<div class="twemoji-icon-picker"><span id="open-group" class="mr-2" style="width: 2rem; height: 2rem;"><button type="button" name="open-group" class="btn btn-raised btn-flex btn-primary mr-2"><i class="toggle-button mdi mdi-lg mr-1 mdi-toggle-switch-off"></i> Picker <div class="ripple-container"></div></button></span><span id="clear-textarea" style="width: 2rem; height: 2rem;"><button type="button" name="clear-textarea" class="btn btn-raised btn-flex btn-primary"><i class="mdi mdi-close mdi-lg mr-1"></i> Clear </button></span></div>');
+      h.$wrapper.append('<div class="twemoji-icon-picker"><span id="open-group" class="mr-2" style="width: 2rem; height: 2rem;"><button type="button" name="open-group" class="btn btn-flex btn-primary mr-2"><i class="toggle-button mdi mdi-lg mr-1 mdi-toggle-switch-off"></i> Picker <div class="ripple-container"></div></button></span><span id="clear-textarea" style="width: 2rem; height: 2rem;"><button type="button" name="clear-textarea" class="btn btn-flex btn-primary"><i class="mdi mdi-close mdi-lg mr-1"></i> Clear </button></span></div>');
       h.$wrapper.append('<div class="twemoji-picker"></div>');
       h.$el.hide();
       h.$textarea = h.$wrapper.find(".twemoji-textarea");

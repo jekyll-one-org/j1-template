@@ -162,7 +162,7 @@ settings:
 #                   id:                 features
 #                   title:              New
 #                   tagline:            learn top features
-#                   class:              btn btn-raised btn-xl btn-primary text-uppercase text-left mr-2 mb-2
+#                   class:              btn btn-xl btn-primary text-uppercase text-left mr-2 mb-2
 #                   style:              "min-width: 250px"
 #                   icon:               magnify
 #                   icon_color:
@@ -175,7 +175,7 @@ settings:
                     id:                 roundtrip
                     title:              Roundtrip
                     tagline:            learn top features
-                    class:              btn btn-raised btn-xl btn-primary text-uppercase text-left mr-2 mb-2
+                    class:              btn btn-xl btn-primary text-uppercase text-left mr-2 mb-2
                     style:              "min-width: 250px"
                     icon:               briefcase-search-outline
                     icon_color:
@@ -188,7 +188,7 @@ settings:
                     id:                 download
                     title:              Download
                     tagline:            get on rubygems
-                    class:              btn btn-raised btn-xl btn-primary text-uppercase text-left mr-2 mb-2
+                    class:              btn btn-xl btn-primary text-uppercase text-left mr-2 mb-2
                     style:              "min-width: 250px"
                     icon:               briefcase-download-outline
                     icon_color:
@@ -201,7 +201,7 @@ settings:
                     id:                 quickstart
                     title:              Quickstart
                     tagline:            finished in 15 minutes
-                    class:              btn btn-raised btn-xl btn-primary text-uppercase text-left mr-2 mb-2
+                    class:              btn btn-xl btn-primary text-uppercase text-left mr-2 mb-2
                     style:              "min-width: 250px"
                     icon:               briefcase-check-outline
                     icon_color:
@@ -268,7 +268,7 @@ settings:
                 - name:                 Kickstarter button
                   button:
                     text:               Start creating your static web
-                    class:              btn btn-raised btn-flex btn-md btn-primary g-mr-5
+                    class:              btn btn-flex btn-md btn-primary g-mr-5
                     icon:               rocket
                     icon_color:         md-black
                     icon_size:          24px

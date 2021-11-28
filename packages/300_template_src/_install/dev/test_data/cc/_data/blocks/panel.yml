@@ -64,7 +64,7 @@ settings:
                 - name:                 Read More
                   button:
                     text:               Read More
-                    class:              btn-primary btn-raised btn-flex
+                    class:              btn-primary btn-flex
                     icon:               eye
                     icon_size:          lg
                     icon_color:         md-grey-50
@@ -90,7 +90,7 @@ settings:
                 - name:                 Read More
                   button:
                     text:               Read More
-                    class:              btn-primary btn-raised btn-flex
+                    class:              btn-primary btn-flex
                     icon:               eye
                     icon_size:          lg
                     icon_color:         md-grey-50
@@ -115,7 +115,7 @@ settings:
                 - name:                 Read More
                   button:
                     text:               Read More
-                    class:              btn-primary btn-raised btn-flex
+                    class:              btn-primary btn-flex
                     icon:               eye
                     icon_size:          lg
                     icon_color:         md-grey-50

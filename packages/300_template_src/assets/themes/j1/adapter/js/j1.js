@@ -540,12 +540,12 @@ var j1 = (function () {
                 if (user_session.authenticated === 'true') {
                   // set signout
                   logger.info('\n' + 'show signout icon');
-                  $('#navLinkSignInOut').attr('data-target','#modalOmniSignOut');
+                  $('#navLinkSignInOut').attr('data-bs-target','#modalOmniSignOut');
                   $('#iconSignInOut').removeClass('mdi-login').addClass('mdi-logout');
                 } else {
                   // set signin
                   logger.info('\n' + 'show signin icon');
-                  $('#navLinkSignInOut').attr('data-target','#modalOmniSignIn');
+                  $('#navLinkSignInOut').attr('data-bs-target','#modalOmniSignIn');
                   $('#iconSignInOut').removeClass('mdi-logout').addClass('mdi-login');
                 }
                 logger.info('\n' + 'authentication detected as: ' + user_session.authenticated);
@@ -1137,12 +1137,12 @@ var j1 = (function () {
               if (user_session.authenticated === 'true') {
                 // set signout
                 logger.info('\n' + 'show signout icon');
-                $('#navLinkSignInOut').attr('data-target','#modalOmniSignOut');
+                $('#navLinkSignInOut').attr('data-bs-target','#modalOmniSignOut');
                 $('#iconSignInOut').removeClass('mdi-login').addClass('mdi-logout');
               } else {
                 // set signin
                 logger.info('\n' + 'show signin icon');
-                $('#navLinkSignInOut').attr('data-target','#modalOmniSignIn');
+                $('#navLinkSignInOut').attr('data-bs-target','#modalOmniSignIn');
                 $('#iconSignInOut').removeClass('mdi-logout').addClass('mdi-login');
               }
               logger.info('\n' + 'authentication detected as: ' + user_session.authenticated);

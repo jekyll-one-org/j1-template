@@ -328,7 +328,7 @@ M.getOverflowParent = function(element) {
  * @returns {string}
  */
 M.getIdFromTrigger = function(trigger) {
-  let id = trigger.getAttribute('data-target');
+  let id = trigger.getAttribute('data-bs-target');
   if (!id) {
     id = trigger.getAttribute('href');
     if (id) {
