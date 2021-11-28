@@ -48,7 +48,7 @@ exclude_from_search:                    true
 {
   "themes":
   [
-    {"name": "UnoLight",    "css": "{{asset_path}}/core/css/themes/uno-light/bootstrap.css"},
+    {"name": "UnoLight",    "css": "{{asset_path}}/core/css/themes/unolight/bootstrap.css"},
     {"name": "UnoDark",     "css": "{{asset_path}}/core/css/themes/uno-dark/bootstrap.css"},
     {"name": "Vapor",       "css": "{{asset_path}}/core/css/themes/theme_vapor/bootstrap.css"},
     {"name": "Bootstrap",   "css": "{{asset_path}}/core/css/themes/bootstrap/bootstrap.css"}
@@ -58,7 +58,7 @@ exclude_from_search:                    true
 {
   "themes":
   [
-    {"name": "UnoLight",    "css": "{{asset_path}}/core/css/themes/uno-light/bootstrap.min.css"},
+    {"name": "UnoLight",    "css": "{{asset_path}}/core/css/themes/unolight/bootstrap.min.css"},
     {"name": "UnoDark",     "css": "{{asset_path}}/core/css/themes/uno-dark/bootstrap.min.css"},
     {"name": "Vapor",       "css": "{{asset_path}}/core/css/themes/theme_vapor/bootstrap.min.css"},
     {"name": "Bootstrap",   "css": "{{asset_path}}/core/css/themes/bootstrap/bootstrap.min.css"}
