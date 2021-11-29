@@ -169,6 +169,12 @@ end
 gem 'puma', '>= 5.5.2'
 
 # ------------------------------------------------------------------------------
+# OpenSSL provides SSL, TLS and general purpose cryptography. Used to
+# encrypt 'private' data
+#
+gem 'openssl'
+
+# ------------------------------------------------------------------------------
 # If J1 is transformed into a (Rack and Sinatra based) Web
 # application, the site can be secured using user authentication
 # for accessing private pages. J1 is using the Omniauth stack for
