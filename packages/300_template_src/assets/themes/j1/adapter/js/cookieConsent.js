@@ -267,15 +267,18 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
         $('#quickLinksCookieButton').css('display', 'block');
       }
 
-      logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
-      j1Cookies.forEach(item => console.log('j1.core.switcher: ' + item));
-      logger.debug('\n' + 'ga cookies found:' + gaCookies.length);
-      gaCookies.forEach(item => console.log('j1.core.switcher: ' + item));
-
-      if (user_agent.includes('iPad'))  {
-        logger.warn('\n' + 'product detected : ' + platform.product);
-        logger.warn('\n' + 'skip deleting (unwanted) cookies for this platform');
-      }
+      // jadams, 2021-11-29: disabled additional logs to verify the existance
+      // of J1 and GA cookies (testing only)
+      //
+      // logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
+      // j1Cookies.forEach(item => console.log('j1.core.switcher: ' + item));
+      // logger.debug('\n' + 'ga cookies found:' + gaCookies.length);
+      // gaCookies.forEach(item => console.log('j1.core.switcher: ' + item));
+      //
+      // if (user_agent.includes('iPad'))  {
+      //   logger.warn('\n' + 'product detected : ' + platform.product);
+      //   logger.warn('\n' + 'skip deleting (unwanted) cookies for this platform');
+      // }
 
       // Manage Google Analytics OptIn/Out
       // See: https://github.com/luciomartinez/gtag-opt-in/wiki

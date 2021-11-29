@@ -56,7 +56,7 @@
     // -----------------------------------------------------------------------
     init: function(options) {
       var _this  = this;
-      var logger = log4javascript.getLogger('');
+      var logger = log4javascript.getLogger('j1.scroller.core.init');
 
       logger.info('\n' + 'initializing plugin: started');
       logger.info('\n' + 'state: started');
@@ -169,7 +169,7 @@
     // -------------------------------------------------------------------------
     registerScrollEvent: function (options) {
       var _this = this;
-      var logger = log4javascript.getLogger('');
+      var logger = log4javascript.getLogger('j1.scroller.core.registerScrollEvent');
 
       // scroller type infiniteScroll
       if (options.type === 'infiniteScroll') {
@@ -223,7 +223,7 @@
     // -------------------------------------------------------------------------
     getNewPost: function (options) {
       var _this = this;
-      var logger = log4javascript.getLogger('');
+      var logger = log4javascript.getLogger('j1.scroller.core.getNewPost');
 
       logger.info('\n' + 'trigger loading ');
 
@@ -283,7 +283,7 @@
     // -------------------------------------------------------------------------
     getChildItemsByAjaxHTML: function (options, HTMLText) {
       var newHTML = document.createElement('html');
-      var logger = log4javascript.getLogger('');
+      var logger = log4javascript.getLogger('j1.scroller.core.getChildItemsByAjaxHTML');
 
       logger.info('\n' + 'load new items');
       newHTML.innerHTML = HTMLText;
@@ -297,7 +297,7 @@
     // -------------------------------------------------------------------------
     appendNewItems: function (items) {
       var _this           = this;
-      var logger          = log4javascript.getLogger('');
+      var logger          = log4javascript.getLogger('j1.scroller.core.appendNewItems');
       var cookie_names    = j1.getCookieNames();
       var user_translate  = j1.readCookie(cookie_names.user_translate);
 
@@ -326,7 +326,7 @@
     // -------------------------------------------------------------------------
     infoLastPage: function (options) {
       var _this         = this;
-        var logger      = log4javascript.getLogger('');
+        var logger      = log4javascript.getLogger('j1.scroller.core.infoLastPage');
 
         logger.info('\n' + 'show: infoLastPage');
         $('.page-scroll-last').show();

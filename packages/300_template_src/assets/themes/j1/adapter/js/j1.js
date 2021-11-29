@@ -776,7 +776,7 @@ var j1 = (function () {
         }
       }  else {
         logText = '\n' + 'no banner found in site';
-        logger.warn(logText);
+        logger.debug(logText);
         return false;
       }
       return true;
@@ -879,7 +879,7 @@ var j1 = (function () {
         }
       } else {
         logText = '\n' + 'no panel found in site';
-        logger.warn(logText);
+        logger.debug(logText);
         return false;
       }
       return true;
@@ -931,7 +931,7 @@ var j1 = (function () {
         selector.load(footer_data_path, cb_load_closure(id));
       } else {
         logText = '\n' + 'data not loaded';
-        logger.warn(logText);
+        logger.debug(logText);
         j1.setXhrDataState(id, 'not loaded');
         j1.setXhrDomState(id, 'pending');
         return false;
@@ -1041,8 +1041,8 @@ var j1 = (function () {
           setTimeout (function() {
             // Manage providers for personalization OptIn/Out (Comments|Ads)
             if (!user_consent.personalization) {
-              logger.warn('\n' + 'disable comment provider: ' + comment_provider);
-              logger.warn('\n' + 'personalization not allowed, privacy settings for personalization: ' + user_consent.personalization);
+              logger.debug('\n' + 'disable comment provider: ' + comment_provider);
+              logger.debug('\n' + 'personalization not allowed, privacy settings for personalization: ' + user_consent.personalization);
               $('#leave-a-comment').remove();
               if (comment_provider === 'disqus') {
                 $('#dsq-count-scr').remove();
@@ -1079,7 +1079,7 @@ var j1 = (function () {
            // no dropcaps if translation enabled
            if (user_translate.translationEnabled) {
              logger.info('\n' + 'translation enabled: ' + user_translate.translationEnabled);
-             logger.warn('\n' + 'skipped processing of dropcaps');
+             logger.debug('\n' + 'skipped processing of dropcaps');
            } else {
              // initialize dropcaps
              logger.info('\n' + 'post processing: createDropCap');
@@ -1107,7 +1107,7 @@ var j1 = (function () {
                 logger.info('\n' + 'tracking disabled, tracking id found: ' + tracking_id);
               }
             } else {
-              logger.warn('\n' + 'tracking not allowed, privacy settings for analysis: ' + user_consent.analysis);
+              logger.debug('\n' + 'tracking not allowed, privacy settings for analysis: ' + user_consent.analysis);
             }
 
             // show|hide cookie icon (should MOVED to Cookiebar ???)
@@ -1155,8 +1155,8 @@ var j1 = (function () {
             // for GDPR compliance, themes feature may disabled on
             // privacy settings
             if (!user_consent.personalization)  {
-              logger.warn('\n' + 'disable themes feature because of privacy settings');
-              logger.warn('\n' + 'personalization not allowed, privacy settings for personalization: ' + user_consent.personalization);
+              logger.debug('\n' + 'disable themes feature because of privacy settings');
+              logger.debug('\n' + 'personalization not allowed, privacy settings for personalization: ' + user_consent.personalization);
               $("#themes_menu").hide();
             } else {
               $("#themes_menu").show();
@@ -1198,8 +1198,8 @@ var j1 = (function () {
 
           // Manage providers for personalization OptIn/Out (Comments|Ads)
           if (!user_consent.personalization) {
-            logger.warn('\n' + 'disable comment provider: ' + comment_provider);
-            logger.warn('\n' + 'personalization not allowed, privacy settings for personalization: ' + user_consent.personalization);
+            logger.debug('\n' + 'disable comment provider: ' + comment_provider);
+            logger.debug('\n' + 'personalization not allowed, privacy settings for personalization: ' + user_consent.personalization);
             $('#leave-a-comment').remove();
             if (comment_provider === 'disqus') {
               $('#dsq-count-scr').remove();
@@ -1260,7 +1260,7 @@ var j1 = (function () {
           // no dropcaps if translation enabled
           if (user_translate.translationEnabled) {
             logger.info('\n' + 'translation enabled: ' + user_translate.translationEnabled);
-            logger.warn('\n' + 'skipped processing of dropcaps');
+            logger.debug('\n' + 'skipped processing of dropcaps');
           } else {
             // initialize dropcaps
             logger.info('\n' + 'post processing: createDropCap');
@@ -1289,7 +1289,7 @@ var j1 = (function () {
               logger.info('\n' + 'tracking disabled, tracking id found: ' + tracking_id);
             }
           } else {
-            logger.warn('\n' + 'tracking not allowed, privacy settings for analysis: ' + user_consent.analysis);
+            logger.debug('\n' + 'tracking not allowed, privacy settings for analysis: ' + user_consent.analysis);
           }
 
           logger.info('\n' + 'mode detected: web');
@@ -1338,8 +1338,8 @@ var j1 = (function () {
           // for GDPR compliance, themes feature may disabled on
           // privacy settings
           if (!user_consent.personalization)  {
-            logger.warn('\n' + 'disable themes feature because of privacy settings');
-            logger.warn('\n' + 'personalization not allowed, privacy settings for personalization: ' + user_consent.personalization);
+            logger.debug('\n' + 'disable themes feature because of privacy settings');
+            logger.debug('\n' + 'personalization not allowed, privacy settings for personalization: ' + user_consent.personalization);
             $("#themes_menu").hide();
           } else {
             $("#themes_menu").show();
@@ -1594,7 +1594,7 @@ var j1 = (function () {
       if (options.xhr_data_element !== '') {
         logger.info('\n' + 'XHR data element found: ' + options.xhr_data_element);
       } else  {
-        logger.warn('\n' + 'no XHR data element found, loading data aborted');
+        logger.debug('\n' + 'no XHR data element found, loading data aborted');
         return;
       }
 
@@ -1626,7 +1626,7 @@ var j1 = (function () {
         // failsafe - prevent XHR load errors
         if (id != '#undefined') {
           logText = '\n' + 'data not loaded on id:' + id;
-          logger.warn(logText);
+          logger.debug(logText);
           j1.setXhrDataState(id, 'not loaded');
           j1.setXhrDomState(id, 'not loaded');
           // Set processing state to 'finished' to complete module load
