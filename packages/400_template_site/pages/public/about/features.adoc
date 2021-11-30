@@ -17,7 +17,7 @@ comments:                               true
 permalink:                              /pages/public/about/features/
 regenerate:                             false
 
-resources:                              [ lightbox ]
+resources:                              [ lightbox, animate ]
 resource_options:
   - attic:
       padding_top:                      400
