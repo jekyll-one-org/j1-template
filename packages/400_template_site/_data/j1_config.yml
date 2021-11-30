@@ -370,7 +370,7 @@ body:
 #   site_id: your-disqus-short-name
 # ------------------------------------------------------------------------------
 comments:
-  enabled:                              false
+  enabled:                              true
   provider:                             hyvor                                   # disqus | hyvor | commento | just-comments
 
   comments_headline:
@@ -378,7 +378,7 @@ comments:
     de:                                 Kommentieren
 
   hyvor:
-    site_id:                            'hyvor-site-id'
+    site_id:                            4757                                    # 'hyvor-site-id'
 
   disqus:
     site_id:                            '<your-site-short-name>'
@@ -406,11 +406,11 @@ comments:
 # Set 'provider' to the provider you want to use.
 # ------------------------------------------------------------------------------
 analytics:
-  enabled:                              false
+  enabled:                              true
   provider:                             google
 
   google:
-    tracking_id:                        '<your-tracking-id>'
+    tracking_id:                        G-8ZGNE0WE42                            # '<your-tracking-id>'
 
   custom:
     custom_data:
