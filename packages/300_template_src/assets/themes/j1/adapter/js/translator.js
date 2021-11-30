@@ -98,7 +98,6 @@ j1.adapter['translator'] = (function (j1, window) {
   var secure;
   var logText;
   var cookie_written;
-  var modal_language;
   var navigator_language;
   var translation_language;
   var ddSourceLanguage;
@@ -171,7 +170,6 @@ j1.adapter['translator'] = (function (j1, window) {
       domain                = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
       cookie_domain         = (domain.includes('.')) ? '.' + domain : domain;
       secure                = (url.protocol.includes('https')) ? true : false;
-      modal_language        = "{{site.language}}";
       navigator_language    = navigator.language || navigator.userLanguage;     // userLanguage for MS IE compatibility
       translation_language  = navigator_language.split('-')[0];
       cookie_names          = j1.getCookieNames();
@@ -269,6 +267,10 @@ j1.adapter['translator'] = (function (j1, window) {
             secure:   secure,
             expires:  365
           });
+
+          if (moduleOptions.dialogLanguage === 'auto') {
+            moduleOptions.dialogLanguage = '{{contentLanguage}}';
+          }
 
           j1.translator = new Translator({
             contentURL:               moduleOptions.contentURL,                 // dialog content (modals) for all supported languages

@@ -27,9 +27,9 @@ settings:
 
   enabled:                              true
   translatorName:                       google
-  contentLanguage:                      en
-  dialogLanguage:                       en
-  translationLanguage:                  de
+  contentLanguage:                      en                                      # [auto|any supported language], auto: language set by site config
+  dialogLanguage:                       auto                                    # [auto|en|de], auto: language set by site config
+  translationLanguage:                  de                                      # any supported language
 
 # ------------------------------------------------------------------------------
 # END config

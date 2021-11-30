@@ -370,7 +370,7 @@ body:
 #   site_id: your-disqus-short-name
 # ------------------------------------------------------------------------------
 comments:
-  enabled:                              true
+  enabled:                              false
   provider:                             hyvor                                   # disqus | hyvor | commento | just-comments
 
   comments_headline:
@@ -406,7 +406,7 @@ comments:
 # Set 'provider' to the provider you want to use.
 # ------------------------------------------------------------------------------
 analytics:
-  enabled:                              true
+  enabled:                              false
   provider:                             google
 
   google:
