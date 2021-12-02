@@ -9,7 +9,7 @@ require 'mercenary'
 Mercenary.program(:j1) do |p|
 
   p.version J1::VERSION
-  p.description 'J1 Template MDE 4 is a gem-based Template made for Jekyll powered by Bootstrap v4'
+  p.description 'J1 Template is a Gem-based Template made for Jekyll'
   p.syntax 'j1 <subcommand> [options]'
 
   p.command(:generate) do |c|

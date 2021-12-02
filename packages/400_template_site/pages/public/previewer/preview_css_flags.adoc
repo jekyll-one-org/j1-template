@@ -2990,26 +2990,3 @@ Find all flags available in alphabetical order.
   </div>
 </div>
 ++++
-
-++++
-<script>
-  $(function () {
-    var logger          = log4javascript.getLogger('j1.page.scroller');
-    var scrollOffset    = j1.getScrollOffset();
-    var scrollDuration  = 300;
-    var anchor_id;
-
-    $('.badge').on('click', function (e) {
-      e.preventDefault();
-      anchor_id = e.target.hash;
-//    var tgt   = document.querySelector('[id="' + decodeURI(anchor_id).split('#').join('') + '"]');
-
-      logger.debug('\n' + 'badge clicked: ' + anchor_id);
-
-      $('html, body').animate({
-        scrollTop: $(anchor_id).offset().top + scrollOffset
-      }, scrollDuration);
-    });
-  }); //END page ready
-</script>
-++++
