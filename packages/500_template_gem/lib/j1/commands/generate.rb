@@ -6,21 +6,20 @@ module J1
   module Commands
     class Generate < Command
       class << self
-        def init_with_program(prog)
 
-          prog.command(:generate) do |c|
-            c.syntax 'generate PATH'
-            c.description 'Generates a starter site scaffold in PATH'
-            c.option 'force', '--force', 'Force a site to be created even the PATH already exists'
-            c.option 'skip-bundle', '--skip-bundle', "Skip 'bundle install'"
-            c.option "skip-_patches", "--skip-_patches", "Skip to install any PATCHES buildin with J1"
-            c.option "system", "--system", "Run 'bundle install' for the Ruby SYSTEM gem folder"
-            c.action do |args, options|
-              J1::Commands::Generate.process(args, options)
-            end
-          end
-
-        end
+        # def init_with_program(prog)
+        #   prog.command(:generate) do |c|
+        #     c.description 'Generates a starter site scaffold in PATH'
+        #     c.syntax 'generate PATH'
+        #     c.option 'force', '--force',                'Force a site to be created even the PATH already exists'
+        #     c.option 'skip-bundle', '--skip-bundle',    'Skip bundle install'
+        #     c.option 'skip-patches', '--skip-patches',  'Skip install any PATCHES buildin with J1'
+        #     c.option 'system', '--system',              'Run "bundle install" for the Ruby SYSTEM gem folder'
+        #     c.action do |args, options|
+        #       J1::Commands::Generate.process(args, options)
+        #     end
+        #   end
+        # end
 
         def is_windows?
           RbConfig::CONFIG["host_os"] =~ %r!mswin|mingw|cygwin!i
@@ -93,10 +92,10 @@ module J1
         def after_install(path, options = {})
           unless options['skip-bundle']
             bundle_install(path, options)
-            unless options['skip-_patches']
+            unless options['skip-patches']
               patch_install(options)
             else
-              J1.logger.info "Install _patches skipped ..."
+              J1.logger.info "Install build-in patches skipped ..."
             end
           end
           unless options['force']
