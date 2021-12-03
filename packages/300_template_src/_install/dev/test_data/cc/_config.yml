@@ -68,7 +68,7 @@ environment:                            development
 #   anything here because version information is bumped-in by
 #   the build process
 #
-version:                                2022.0.2
+version:                                2022.0.3
 
 
 # ==============================================================================
