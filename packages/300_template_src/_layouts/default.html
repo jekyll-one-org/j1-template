@@ -133,23 +133,39 @@ layout:                                 compress
 
   <body>
 
-    {% comment %} collect the BODY-NAVIGATION region
-    -------------------------------------------------------------------------- {% endcomment %}
-    <!-- [INFO   ] [j1.layout.default.html                ] [ call default_writer for region: 'body-navigation' ] -->
-    {% include  {{default_writer}} region='body-navigation' items=lanes_collate %}
-    <!-- [INFO   ] [j1.layout.default.html                ] [ end processing default_writer for region: 'body-navigation' ] -->
+  {% comment %} wrapper to suppress "DOM flicker"|"Overflows"
+  NOTE:
+    2021-11-13:
+    Since moved to bs@5, a overflow is on the HOME page
+    !!! NOT seen on content pages !!!
+  ------------------------------------------------------------------------------ {% endcomment %}
+    <!-- [INFO   ] [j1.layout.default.html                ] [ start page processing for region: 'body' ] -->
+    <!-- [INFO   ] [j1.layout.default.html                ] [ place wrapper to prevent "DOM flicker" ] -->
+    <!-- [INFO   ] [j1.layout.default.html                ] [ make page hidden (suppress flicker) ] -->
+    <!-- [INFO   ] [j1.layout.default.html                ] [ suppress page overflows (overflow: hidden) ] -->
+    <!-- div id="no_flicker" style="display: none" -->
+    <div id="no_flicker" style="overflow: hidden; display: none">
 
-    {% comment %} inherit CONTENT from other LAYOUTS
-    -------------------------------------------------------------------------- {% endcomment %}
-    <!-- [INFO   ] [j1.layout.default.html                ] [ place content inherited by layout: {{ page.layout}} ] -->
-    {{ content }}
-    <!-- [INFO   ] [j1.layout.default.html                ] [ end content inherited by layout: {{ page.layout}} ] -->
+      {% comment %} collect the BODY-NAVIGATION region
+      -------------------------------------------------------------------------- {% endcomment %}
+      <!-- [INFO   ] [j1.layout.default.html                ] [ call default_writer for region: 'body-navigation' ] -->
+      {% include  {{default_writer}} region='body-navigation' items=lanes_collate %}
+      <!-- [INFO   ] [j1.layout.default.html                ] [ end processing default_writer for region: 'body-navigation' ] -->
 
-    {% comment %} collect the BODY-FOOTER region
-    -------------------------------------------------------------------------- {% endcomment %}
-    <!-- [INFO   ] [j1.layout.default.html                ] [ call default_writer for region: 'body-footer' ] -->
-    {% include  {{default_writer}} region='body-footer' items=lanes_collate %}
-    <!-- [INFO   ] [j1.layout.default.html                ] [ end content_writer default_writer for region: 'body-footer' ] -->
+      {% comment %} inherit CONTENT from other LAYOUTS
+      -------------------------------------------------------------------------- {% endcomment %}
+      <!-- [INFO   ] [j1.layout.default.html                ] [ place content inherited by layout: {{ page.layout}} ] -->
+      {{ content }}
+      <!-- [INFO   ] [j1.layout.default.html                ] [ end content inherited by layout: {{ page.layout}} ] -->
+
+      {% comment %} collect the BODY-FOOTER region
+      -------------------------------------------------------------------------- {% endcomment %}
+      <!-- [INFO   ] [j1.layout.default.html                ] [ call default_writer for region: 'body-footer' ] -->
+      {% include  {{default_writer}} region='body-footer' items=lanes_collate %}
+      <!-- [INFO   ] [j1.layout.default.html                ] [ end content_writer default_writer for region: 'body-footer' ] -->
+
+    </div>
+    <!-- [INFO   ] [j1.layout.default.html                ] [ end suppress flicker ] -->
 
     <!-- [INFO   ] [j1.layout.default.html                ] [ place noscript info|error page ] -->
     {% assign language            = site.language %}
@@ -204,8 +220,8 @@ layout:                                 compress
 
     <!-- [INFO   ] [j1.layout.default.html                ] [ place hidden color selector/themes: bg-primary ] -->
     <div id="bg-primary" class="bg-primary" style="display: none"></div>
-    <!-- [INFO   ] [j1.layout.default.html                ] [ end default writer] -->
 
+    <!-- [INFO   ] [j1.layout.default.html                ] [ end default writer] -->
   </body>
 
   {% comment %} Place container for WebHook modals

@@ -71,13 +71,9 @@ module.exports = function navigator ( options ) {
       logger.info(logText);
 
       // -----------------------------------------------------------------------
-      // Create a Wrapper to suppress "DOM flicker"
-      // jadams, 2021-11-13: Since moved to bs@5, an overflow is on the
-      // HOME page, but NOT seen on any content page!
-      // Added overflow|hidden to the wrapper as a WORKAROUND!
-      // TODO: To be checked, why an overflow is seen on home page
+      // Create a Wrapper for the nav system
       // -----------------------------------------------------------------------
-      $('body').wrapInner('<div id="no_flicker" class="wrapper" style="overflow: hidden; display: none;"></div>');
+      $('body').wrapInner('<div id="wrapper-inner" class="wrapper"></div>');
 
       this.manageDropdownMenu(defaultOptions, menuOptions);
       this.navbarSticky();
