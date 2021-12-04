@@ -64,7 +64,7 @@
     "rebuild": "run-p rebuild:*",
     "rebuild:css": "lerna --scope css run build",
     "rebuild:js": "lerna --scope js run build",
-    "pretemplate-gem": "run-p -s clean:* && run-s template-gem-folders && run-s template-gem-files && run-s template-gem-templates && run-s rebuild",
+    "pretemplate-gem": "run-p -s clean:* && run-s rebuild && run-s template-gem-folders && run-s template-gem-files && run-s template-gem-templates",
     "template-gem": "run-s bundle_install:* && run-s starter-git-repo && run-s template-gem-create",
     "posttemplate-gem": "echo Cleanup files and folders .. && shx rm -rf **/_unused && shx rm -rf .git && echo .. done.",
     "starter-git-repo": "run-s starter-git-repo:*",
