@@ -729,14 +729,13 @@ defaults:
         follow:                         false
 
       personalization:                  false
-      exclude_from_search:              false
+      exclude_from_search:              true
 
       analytics:                        false
       comments:                         false
       advertising:                      false
       youtube:                          false
       vimeo:                            false
-
 
 # ==============================================================================
 # 6. LAYOUT configuration
