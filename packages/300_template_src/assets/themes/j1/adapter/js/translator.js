@@ -304,10 +304,12 @@ j1.adapter['translator'] = (function (j1, window) {
             }
           }
 
-          $('#quickLinksTranslateButton').click(function(e) {
-            logger.info('\n' + 'call default action');
-            j1.translator.showDialog();
-          });
+          // Click events moved to Navigator (core)
+          //
+          // $('#quickLinksTranslateButton').click(function(e) {
+          //   logger.info('\n' + 'call default action');
+          //   j1.translator.showDialog();
+          // });
 
           _this.setState('finished');
           logger.info('\n' + 'state: ' + _this.getState());

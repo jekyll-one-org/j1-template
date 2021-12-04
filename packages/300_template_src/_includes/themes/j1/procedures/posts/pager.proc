@@ -100,9 +100,9 @@
 
       <!-- [INFO   ] [procedures.global.pager.proc          ] [Calculate BackURL from User State Cookie for page: {{page.title}}] -->
       if (re.test(last_pager)) {
-        last_pager_url = '<li class="page-item"><a class="page-link" href="' + last_pager + '" title="Back to Top Page">{{pager_back_button_text}}</a></li>';
+        last_pager_url = '<li class="page-item"><a class="page-link" href="' + last_pager + '" title="Back to {{pager_back_button_text}}">{{pager_back_button_text}}</a></li>';
       } else {
-        last_pager_url = '<li class="page-item disabled"><a class="page-link" title="Back to Top Page">{{pager_back_button_text}}</a></li>';
+        last_pager_url = '<li class="page-item disabled"><a class="page-link" title="Back to {{pager_back_button_text}}">{{pager_back_button_text}}</a></li>';
       }
       document.write( last_pager_url );
       j1.writeCookie({

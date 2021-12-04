@@ -154,8 +154,8 @@ defaults:
         en:                             Next
         de:                             Nächster
       back:
-        en:                             Back
-        de:                             Zurück
+        en:                             Navigator
+        de:                             Navigator
       first:
         en:                             First
         de:                             Erster

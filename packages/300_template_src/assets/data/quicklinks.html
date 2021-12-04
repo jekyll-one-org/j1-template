@@ -78,30 +78,15 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign icon_family             = quicklinks_options.icon_family | downcase %}
 
-{% assign cookies_icon            = quicklinks_options.cookies_icon %}
-
-{% assign translate_icon          = quicklinks_options.translate_icon %}
-
-{% assign search_icon             = quicklinks_options.top_search_icon %}
-{% assign sidebar_icon            = quicklinks_options.sidebar_icon %}
-
-{% assign signin_icon             = auth_client_config.signin_icon %}
-{% assign signout_icon            = auth_client_config.signout_icon %}
-
-{% assign control_center_icon     = cc_app_config_options.quicklinks_icon %}
-{% assign control_center_url      = cc_app_config_options.quicklinks_url %}
-
-{% assign translator_icon         = quicklinks_options.translator_icon %}
-
+{% comment %} Link buttons
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign home_icon               = quicklinks_options.home_icon %}
 {% assign home_url                = quicklinks_options.home_url %}
-
-{% assign r_text_icon             = quicklinks_options.r_text_icon %}
-
-{% assign toc_icon                = quicklinks_options.toc_icon %}
+{% assign home_label              = quicklinks_options.home_label %}
 
 {% assign back_icon               = quicklinks_options.back_icon %}
 {% assign back_url                = quicklinks_options.back_url %}
+{% assign back_label                = quicklinks_options.back_label %}
 
 {% assign disqus_icon             = quicklinks_options.disqus_icon %}
 {% assign github_icon             = quicklinks_options.github_icon %}
@@ -115,15 +100,50 @@ exclude_from_search:                    true
 {% assign facebook_url            = quicklinks_options.facebook_url %}
 {% assign twitter_url             = quicklinks_options.twitter_url %}
 
+{% assign disqus_label            = quicklinks_options.disqus_label %}
+{% assign github_label            = quicklinks_options.github_label %}
+{% assign patreon_label           = quicklinks_options.patreon_label %}
+{% assign facebook_label          = quicklinks_options.facebook_label %}
+{% assign twitter_label           = quicklinks_options.twitter_label %}
+
+{% comment %} Action buttons
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign cookies_icon            = quicklinks_options.cookies_icon %}
+{% assign cookies_action          = quicklinks_options.cookies_action %}
+{% assign cookies_label           = quicklinks_options.cookies_label %}
+
+{% assign translate_icon          = quicklinks_options.translate_icon %}
+{% assign translate_action        = quicklinks_options.translate_action %}
+{% assign translate_label         = quicklinks_options.translate_label %}
+
+{% assign quicksearch_icon         = quicklinks_options.quicksearch_icon %}
+{% assign quicksearch_action       = quicklinks_options.quicksearch_action %}
+{% assign quicksearch_label        = quicklinks_options.quicksearch_label %}
+
+{% assign translator_icon         = quicklinks_options.translator_icon %}
+{% assign translator_action       = quicklinks_options.translator_action %}
+{% assign translator_label        = quicklinks_options.translator_label %}
+
+{% assign r_text_icon             = quicklinks_options.r_text_icon %}
+{% assign r_text_action           = quicklinks_options.r_text_action %}
+{% assign r_text_label            = quicklinks_options.r_text_label %}
+
+{% comment %} Legacy buttons
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign signin_icon             = auth_client_config.signin_icon %}
+{% assign signout_icon            = auth_client_config.signout_icon %}
 {% assign signin_modal_id         = auth_client_config.signin_modal_id %}
+
+{% assign control_center_icon     = cc_app_config_options.quicklinks_icon %}
+{% assign control_center_url      = cc_app_config_options.quicklinks_url %}
 
 
 {% comment %} Show|Hide Quicksearch icon
 -------------------------------------------------------------------------------- {% endcomment %}
 {% if quick_search_options.enabled %}
-  {% assign show_quick_search_icon = true  %}
+  {% assign show_quicksearch_icon = true  %}
 {% else %}
-  {% assign show_quick_search_icon = false %}
+  {% assign show_quicksearch_icon = false %}
 {% endif %}
 
 {% comment %} Show|Hide Translator icon
@@ -154,19 +174,9 @@ exclude_from_search:                    true
   {% assign show_control_center_icon = false %}
 {% endif %}
 
-{% comment %} Show|Hide Sidebar icon
--------------------------------------------------------------------------------- {% endcomment %}
-{% if quicklinks_options.sidebar %}
-  {% assign show_sidebar_icon = true %}
-{% else %}
-  {% assign show_sidebar_icon = false %}
-{% endif %}
-
-{% assign show_sidebar_icon = false %}
-
 {% comment %} Show|Hide RSizer icon
 -------------------------------------------------------------------------------- {% endcomment %}
-{% if quicklinks_options.r_text_sizer %}
+{% if quicklinks_options.r_text_icon %}
   {% assign show_r_text_icon = true %}
 {% else %}
   {% assign show_r_text_icon = false %}
@@ -238,24 +248,29 @@ exclude_from_search:                    true
 
 <ul id="{{quicklinks_options.xhr_data_element}}" class="navbar-nav show">
 
-  {% if back_url != "none" %}<li id="quickLinksHomeButton" class="nav-item"><a id="page_back_id" class="nav-icon" href="{{back_url}}" aria-label="Page back"><i class="{{icon_family}} {{icon_family}}-{{back_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if home_url != "none" %}<li id="quickLinksHomeButton" class="nav-item"><a id="home_id" class="nav-icon" href="{{home_url}}" aria-label="Home"><i class="{{icon_family}} {{icon_family}}-{{home_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if disqus_url != "none" %}<li id="quickLinksDisqusButton" class="nav-item"><a id="disqus_id" class="nav-icon" href="{{disqus_url}}" aria-label="Disqus" target="blank"><i class="{{icon_family}} {{icon_family}}-{{disqus_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if github_url != "none" %}<li id="quickLinksGithubButton" class="nav-item"><a id="github_id" class="nav-icon" href="{{github_url}}" aria-label="Github" target="blank"><i class="{{icon_family}} {{icon_family}}-{{github_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if patreon_url != "none" %}<li id="quickLinksPatreonButton" class="nav-item"><a id="patreon_id" class="nav-icon" href="{{patreon_url}}" aria-label="Patreon" target="blank"><i class="{{icon_family}} {{icon_family}}-{{patreon_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if facebook_url != "none" %}<li id="quickLinksFacebookButton" class="nav-item"><a id="facebook_id" class="nav-icon" href="{{facebook_url}}" aria-label="Facebook" target="blank"><i class="{{icon_family}} {{icon_family}}-{{facebook_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if twitter_url != "none" %}<li id="quickLinksTwitterButton" class="nav-item"><a id="twitter_id" class="nav-icon" href="{{twitter_url}}" aria-label="Twitter" target="blank"><i class="{{icon_family}} {{icon_family}}-{{twitter_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if show_auth_manager_icon %}<li id="quickLinksSignInOutButton" class="nav-item" style="display: none;"><a class="nav-icon" id="navLinkSignInOut" aria-label="SignOut" href="#" data-bs-toggle="modal" data-bs-target="#{{signin_modal_id}}"><i id="iconSignInOut" class="{{icon_family}} {{icon_family}}-{{signin_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if show_cookieconsent_icon %}<li id="quickLinksCookieButton" class="nav-item" style="display: block;"><a href="#" aria-label="Cookie Consent"><i class="{{icon_family}} {{icon_family}}-{{cookies_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if show_quick_search_icon %}<li id="quickLinksSearchButton" class="nav-item search"><a class="nav-icon" href="#" aria-label="Search"><i class="{{icon_family}} {{icon_family}}-{{search_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if show_control_center_icon %}<li id="quickLinksControlCenterButton" class="nav-item control-center" style="display: block;"><a class="nav-icon" href="{{control_center_url}}" aria-label="ControlCenter"><i class="{{icon_family}} {{icon_family}}-{{control_center_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if show_r_text_icon %}<li id="quickLinksRTextButton" class="nav-item control-center" style="display: block;"><a class="nav-icon" href="#" aria-label="TextResizer" data-bs-toggle="modal" data-bs-target="#fluidModalRTextResizer"><i class="{{icon_family}} {{icon_family}}-{{r_text_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if show_google_translate_icon %}<li id="quickLinksTranslateButton" class="nav-item" style="display: block;"><a href="#" aria-label="Google Translate"><i class="{{icon_family}} {{icon_family}}-{{translate_icon}} {{icon_size}}"></i></a></li>{% endif %}
+  {% comment %} Link buttons
+  ------------------------------------------------------------------------------ {% endcomment %}
+  {% if back_url != "none" %}<li id="quickLinksBackButton" class="nav-item"><a id="page_back_id" class="nav-icon" href="{{back_url}}" aria-label="{{back_label}}"><i class="{{icon_family}} {{icon_family}}-{{back_icon}} {{icon_size}}"></i></a></li>{% endif %}
+  {% if home_url != "none" %}<li id="quickLinksHomeButton" class="nav-item"><a id="home_id" class="nav-icon" href="{{home_url}}" aria-label="{{home_label}}"><i class="{{icon_family}} {{icon_family}}-{{home_icon}} {{icon_size}}"></i></a></li>{% endif %}
+  {% if disqus_url != "none" %}<li id="quickLinksDisqusButton" class="nav-item"><a id="disqus_id" class="nav-icon" href="{{disqus_url}}" aria-label="{{disqus_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{disqus_icon}} {{icon_size}}"></i></a></li>{% endif %}
+  {% if github_url != "none" %}<li id="quickLinksGithubButton" class="nav-item"><a id="github_id" class="nav-icon" href="{{github_url}}" aria-label="{{github_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{github_icon}} {{icon_size}}"></i></a></li>{% endif %}
+  {% if patreon_url != "none" %}<li id="quickLinksPatreonButton" class="nav-item"><a id="patreon_id" class="nav-icon" href="{{patreon_url}}" aria-label="{{patreon_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{patreon_icon}} {{icon_size}}"></i></a></li>{% endif %}
+  {% if facebook_url != "none" %}<li id="quickLinksFacebookButton" class="nav-item"><a id="facebook_id" class="nav-icon" href="{{facebook_url}}" aria-label="{{facebook_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{facebook_icon}} {{icon_size}}"></i></a></li>{% endif %}
+  {% if twitter_url != "none" %}<li id="quickLinksTwitterButton" class="nav-item"><a id="twitter_id" class="nav-icon" href="{{twitter_url}}" aria-label="{{twitter_label}}" target="blank"><i class="nav-icon {{icon_family}} {{icon_family}}-{{twitter_icon}} {{icon_size}}"></i></a></li>{% endif %}
+
+  {% comment %} Action buttons
+  ------------------------------------------------------------------------------ {% endcomment %}
+  {% if show_quicksearch_icon %}<li id="quickLinksSearchButton" class="nav-item {{quicksearch_action}}"><a class="nav-icon" href="#" aria-label="{{quicksearch_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{quicksearch_icon}} {{icon_size}}"></i></a></li>{% endif %}
+  {% if show_auth_manager_icon %}<li id="quickLinksSignInOutButton" class="nav-item sign-inout" style="display: none;"><a class="nav-icon" id="navLinkSignInOut" aria-label="SignOut" href="#" data-bs-toggle="modal" data-bs-target="#{{signin_modal_id}}"><i id="iconSignInOut" class="nav-icon {{icon_family}} {{icon_family}}-{{signin_icon}} {{icon_size}}"></i></a></li>{% endif %}
+  {% if show_cookieconsent_icon %}<li id="quickLinksCookieButton" class="nav-item {{cookies_action}}" style="display: block;"><a href="#" aria-label="{{cookies_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{cookies_icon}} {{icon_size}}"></i></a></li>{% endif %}
+  {% if show_r_text_icon %}<li id="quickLinksRTextButton" class="nav-item {{r_text_action}}" style="display: block;"><a class="nav-icon" href="#" aria-label="{{r_text_label}}" data-bs-toggle="modal" data-bs-target="#fluidModalRTextResizer"><i class="nav-icon {{icon_family}} {{icon_family}}-{{r_text_icon}} {{icon_size}}"></i></a></li>{% endif %}
+  {% if show_google_translate_icon %}<li id="quickLinksTranslateButton" class="nav-item {{translate_action}}" style="display: block;"><a href="#" aria-label="{{translate_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{translate_icon}} {{icon_size}}"></i></a></li>{% endif %}
 
   {% comment %} Unused
   --------------------------------------------------------------------------------
-  {% if show_translator_icon %}<li id="quickLinksLanguageButton" class="nav-item translator"><a class="nav-icon" href="#void" aria-label="Translator"><i class="{{icon_family}} {{icon_family}}-{{translator_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if show_google_translate_lang %}<li id="quickLinksTranslateLangButton" class="nav-item" style="display: block;"><a href="javascript:j1.translator.showDialog()" aria-label="Google Translate"><i class="flag-icon flag-icon-{{translate_lang}} rectangle size-md"></i></a></li>{% endif %}
+  {% if show_control_center_icon %}<li id="quickLinksControlCenterButton" class="nav-item control-center" style="display: block;"><a class="nav-icon" href="{{control_center_url}}" aria-label="ControlCenter"><i class="{{icon_family}} {{icon_family}}-{{control_center_icon}} {{icon_size}}"></i></a></li>{% endif %}
+  {% if show_translator_icon %}<li id="quickLinksLanguageButton" class="nav-item translator"><a class="nav-icon" href="#void" aria-label="Translator"><i class="nav-icon {{icon_family}} {{icon_family}}-{{translator_icon}} {{icon_size}}"></i></a></li>{% endif %}
+  {% if show_google_translate_lang %}<li id="quickLinksTranslateLangButton" class="nav-item" style="display: block;"><a href="javascript:j1.translator.showDialog()" aria-label="Google Translate"><i class="nav-icon flag-icon flag-icon-{{translate_lang}} rectangle size-md"></i></a></li>{% endif %}
   -------------------------------------------------------------------------------- {% endcomment %}
 
 </ul>

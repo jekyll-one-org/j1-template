@@ -378,7 +378,7 @@ comments:
     de:                                 Kommentieren
 
   hyvor:
-    site_id:                            4757                                    # 'hyvor-site-id'
+    site_id:                            'hyvor-site-id'
 
   disqus:
     site_id:                            '<your-site-short-name>'
@@ -410,7 +410,7 @@ analytics:
   provider:                             google
 
   google:
-    tracking_id:                        G-8ZGNE0WE42                            # '<your-tracking-id>'
+    tracking_id:                        '<your-tracking-id>'
 
   custom:
     custom_data:

@@ -66,9 +66,19 @@ module.exports = function navigator ( options ) {
     // -------------------------------------------------------------------------
     init: function( defaultOptions, menuOptions ) {
       logger  = log4javascript.getLogger('j1.core.navigator');
-      logText = 'core is being initialized';
 
+      logText = 'core is being initialized';
       logger.info(logText);
+
+      // -----------------------------------------------------------------------
+      // Create a Wrapper to suppress "DOM flicker"
+      // jadams, 2021-11-13: Since moved to bs@5, an overflow is on the
+      // HOME page, but NOT seen on any content page!
+      // Added overflow|hidden to the wrapper as a WORKAROUND!
+      // TODO: To be checked, why an overflow is seen on home page
+      // -----------------------------------------------------------------------
+      $('body').wrapInner('<div id="no_flicker" class="wrapper" style="overflow: hidden; display: none;"></div>');
+
       this.manageDropdownMenu(defaultOptions, menuOptions);
       this.navbarSticky();
       this.eventHandler(defaultOptions); // jadams, 2021-07-03: initialize events early
@@ -142,8 +152,15 @@ module.exports = function navigator ( options ) {
       //  https://stackoverflow.com/questions/134845/which-href-value-should-i-use-for-javascript-links-or-javascriptvoid0
       //
       $('a[href="#"]').click(function(e) {
-        logger.debug('\n' + 'click event on href "#" detected: prevent default action');
-        e.preventDefault ? e.preventDefault() : e.returnValue = false;
+        page_link    = document.querySelector('[id="' + decodeURI(anchor_id).split('#').join('') + '"]') ? true : false;
+        anchor_id    = e.target.hash ? e.target.hash : false;
+        classname    = e.target.className ? e.target.className : '';
+        nav_link     = classname.includes('nav-');
+
+        if (!nav_link || page_link) {
+          logger.debug('\n' + 'click event on href "#" detected: prevent default action');
+          e.preventDefault ? e.preventDefault() : e.returnValue = false;
+        }
       });
 
       // -----------------------------------------------------------------------
@@ -319,78 +336,80 @@ module.exports = function navigator ( options ) {
       }
 
       // -----------------------------------------------------------------------
-      // Toggle Search
+      // Manage events for all quicklinks
       // https://stackoverflow.com/questions/178325/how-do-i-check-if-an-element-is-hidden-in-jquery
       // https://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily
       // https://stackoverflow.com/questions/5963669/whats-the-difference-between-event-stoppropagation-and-event-preventdefault
       // -----------------------------------------------------------------------
-//    $('nav.navbar.navigator .attr-nav').each(function() {
       $('.attr-nav').each(function() {
-        logger.debug('register OPEN event|s for QuickSearch');
-        $('li.search > a', this).on('click', function(e) {
-          // e.preventDefault(); // don't do the default browser action
-          logger.debug('manage search action OPEN');
-          $('html,body').animate({scrollTop: 0}, 0);
-          $('.top-search').slideToggle('slow', 'swing', function() {
-            if ( $('.top-search').is(':visible') ) {
-              // disable scrolling (desktop)
-              $('body').addClass('stop-scrolling');
-              // disable scrolling (mobile)
-              $('body').bind('touchmove', function(e){e.preventDefault();});
-              // disable navbar
-              $('#' + defaultOptions.nav_bar.container_id).hide();
-            } else {
-              // enable scrolling (desktop)
-              $('body').removeClass('stop-scrolling');
-              // enable scrolling (mobile)
-              $('body').unbind('touchmove');
-              // enable navbar
-              $('#' + defaultOptions.nav_bar.container_id).show();
-            }
+        // ---------------------------------------------------------------------
+        // QuickSearch
+        //
+        if ($('li.quicksearch')) {
+          logger.debug('register OPEN event for QuickSearch');
+          $('li.quicksearch > a', this).on('click', function(e) {
+            e.preventDefault(); // don't do the default browser action
+            logger.debug('manage search action OPEN');
+            $('html,body').animate({scrollTop: 0}, 0);
+            $('.top-search').slideToggle('slow', 'swing', function() {
+              if ( $('.top-search').is(':visible') ) {
+                // disable scrolling (desktop)
+                $('body').addClass('stop-scrolling');
+                // disable scrolling (mobile)
+                $('body').bind('touchmove', function(e){e.preventDefault();});
+                // disable navbar
+                $('#' + defaultOptions.nav_bar.container_id).hide();
+              } else {
+                // enable scrolling (desktop)
+                $('body').removeClass('stop-scrolling');
+                // enable scrolling (mobile)
+                $('body').unbind('touchmove');
+                // enable navbar
+                $('#' + defaultOptions.nav_bar.container_id).show();
+              }
+            });
+            e.stopPropagation(); // don't bubble up the event
           });
-          // e.stopPropagation(); // don't bubble up the event
-        });
-      });
-      logger.debug('register CLOSE event|s for QuickSearch');
-      $('.input-group-addon.close-search').on('click', function(e) {
-        e.preventDefault(); // don't do the default browser action
-        logger.debug('manage search action CLOSE');
-        $('.top-search').slideUp('slow', 'swing');
-        $('html,body').animate({scrollTop: 0}, 0);
-        // enable scrolling (desktop)
-        $('body').removeClass('stop-scrolling');
-        // enable scrolling (mobile)
-        $('body').unbind('touchmove');
-        // enable navbar
-        $('#' + defaultOptions.nav_bar.container_id).show();
-        e.stopPropagation(); // don't bubble up the event
-      });
 
-      // -----------------------------------------------------------------------
-      // Toggle Translator SHOW|HIDE
-      // -----------------------------------------------------------------------
-      $('nav.navbar.navigator .attr-nav').each(function() {
-        logger.debug('register SHOW|HIDE event|s for J1 Translator');
-        $('li.translator > a', this).on('click', function(e) {
-          // e.preventDefault(); // don't do the default browser action
-          // window.location.reload(true);
-          logger.debug('toggle translator icon SHOW|HIDE');
-          // See: https://api.jquery.com/toggle/
-          // With no parameters, the .toggle() method simply toggles the visibility of elements
-          $('#google_translate_element').toggle();
-          if ($('#google_translate_element').css('display') !== 'none') {
-            $('html,body').animate({scrollTop: 0}, 'slow');
-          }
-          // e.stopPropagation(); // don't bubble up the event
-        });
-      });
+          logger.debug('register CLOSE event for QuickSearch');
+          $('.input-group-addon.close-search').on('click', function(e) {
+            e.preventDefault(); // don't do the default browser action
+            logger.debug('manage search action CLOSE');
+            $('.top-search').slideUp('slow', 'swing');
+            $('html,body').animate({scrollTop: 0}, 0);
+            // enable scrolling (desktop)
+            $('body').removeClass('stop-scrolling');
+            // enable scrolling (mobile)
+            $('body').unbind('touchmove');
+            // enable navbar
+            $('#' + defaultOptions.nav_bar.container_id).show();
+            e.stopPropagation(); // don't bubble up the event
+          });
+        } // END QuickSearch
 
-      // -----------------------------------------------------------------------
-      // Wrapper
-      // -----------------------------------------------------------------------
-      $('body').wrapInner( '<div class=\'wrapper\'></div>');
+        // ---------------------------------------------------------------------
+        // Translator
+        //
+        if ($('li.translate')) {
+          logger.debug('register SHOW event for J1 Translator');
+          $('li.translate > a', this).on('click', function(e) {
+            j1.translator.showDialog();
+          });
+        } // END Translator
 
-    }, // end event
+        // ---------------------------------------------------------------------
+        // CookieConsent
+        //
+        if ($('li.cookie-consent')) {
+          logger.debug('register SHOW event for J1 CookieConsent');
+          $('li.cookie-consent > a', this).on('click', function(e) {
+            j1.cookieConsent.showDialog();
+          });
+        } // END CookieConsent
+
+      }); // End manage events for all quicklinks
+
+    }, // END eventHandler
 
     // -------------------------------------------------------------------------
     // Manage the Menu Dropdowns for Desktop|Mobile
