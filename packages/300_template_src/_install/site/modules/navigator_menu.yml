@@ -81,7 +81,7 @@
 #
 - item:                                 Blog
   sublevel:
-    - title:                            Creators Blog
+    - title:                            Starter Blog
       href:                             /pages/public/blog/navigator/
       icon:                             near-me
     - title:                            Categories
