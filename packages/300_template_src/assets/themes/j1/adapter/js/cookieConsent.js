@@ -313,7 +313,6 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
           cookie_written = j1.writeCookie({
             name:     cookie_names.user_translate,
             data:     user_translate,
-            samesite: 'Strict',
             secure:   secure,
             expires:  365
           });

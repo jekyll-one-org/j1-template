@@ -168,7 +168,6 @@
         j1.writeCookie({
           name: cookie_names.user_state,
           data: user_state,
-          samesite: 'Strict',
           secure:   secure,
           expires:  365
         });

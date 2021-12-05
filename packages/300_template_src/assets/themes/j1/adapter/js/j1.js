@@ -54,6 +54,9 @@ regenerate:                             true
 {% assign footer_config_defaults    = blocks.defaults.footer.defaults %}
 {% assign toccer_defaults           = modules.defaults.toccer.defaults %}
 
+{% assign cookie_defaults           = modules.defaults.cookies.defaults %}
+{% assign cookie_settings           = modules.cokkies.settings %}
+
 {% assign themer_defaults           = modules.defaults.themer.defaults %}
 {% assign themer_settings           = modules.themer.settings %}
 
@@ -67,6 +70,7 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign toccer_options            = toccer_defaults | merge: toccer_settings %}
 {% assign themer_options            = themer_defaults| merge: themer_settings %}
+{% assign cookie_options            = cookie_defaults | merge: cookie_settings %}
 
 {% assign authentication_options    = authentication_defaults | merge: authentication_settings %}
 
@@ -330,7 +334,6 @@ var j1 = (function () {
             cookie_written = j1.writeCookie({
               name:     cookie_names.user_consent,
               data:     user_consent,
-              samesite: 'Strict',
               secure:   secure,
               expires:  0
             });
@@ -341,7 +344,6 @@ var j1 = (function () {
             cookie_written = j1.writeCookie({
               name:     cookie_names.user_state,
               data:     user_state,
-              samesite: 'Strict',
               secure:   secure,
               expires:  0
             });
@@ -353,7 +355,6 @@ var j1 = (function () {
             cookie_written = j1.writeCookie({
               name:     cookie_names.user_state,
               data:     user_state,
-              samesite: 'Strict',
               secure:   secure,
               expires:  365
             });
@@ -379,7 +380,6 @@ var j1 = (function () {
                         : cookie_written = j1.writeCookie({
                             name:     cookie_names.user_session,
                             data:     user_session,
-                            samesite: 'Strict',
                             secure:   secure,
                             expires:  0
                           });
@@ -392,7 +392,6 @@ var j1 = (function () {
                         : cookie_written = j1.writeCookie({
                             name:     cookie_names.user_state,
                             data:     user_state,
-                            samesite: 'Strict',
                             secure:   secure,
                             expires:  365
                           });
@@ -420,7 +419,6 @@ var j1 = (function () {
         cookie_written = j1.writeCookie({
           name:     cookie_names.user_state,
           data:     user_state,
-          samesite: 'Strict',
           secure:   secure,
           expires:  0
         });
@@ -432,7 +430,6 @@ var j1 = (function () {
         cookie_written = j1.writeCookie({
           name:     cookie_names.user_state,
           data:     user_state,
-          samesite: 'Strict',
           secure:   secure,
           expires:  365
         });
@@ -522,7 +519,6 @@ var j1 = (function () {
           cookie_written = j1.writeCookie({
             name:     cookie_names.user_session,
             data:     user_session,
-            samesite: 'Strict',
             secure:   secure,
             expires:  0
           });
@@ -571,7 +567,6 @@ var j1 = (function () {
             cookie_written = j1.writeCookie({
               name:     cookie_names.user_session,
               data:     user_session,
-              samesite: 'Strict',
               secure:   secure,
               expires:  0
             });
@@ -634,7 +629,6 @@ var j1 = (function () {
       cookie_written = j1.writeCookie({
         name:     cookie_names.user_session,
         data:     user_session,
-        samesite: 'Strict',
         secure:   secure,
         expires:  0
       });
@@ -658,7 +652,6 @@ var j1 = (function () {
       cookie_written = j1.writeCookie({
         name:     cookie_names.user_session,
         data:     user_session,
-        samesite: 'Strict',
         secure:   secure,
         expires:  0
       });
@@ -1007,7 +1000,6 @@ var j1 = (function () {
           cookie_written = j1.writeCookie({
             name:     cookie_names.user_session,
             data:     user_session,
-            samesite: 'Strict',
             secure:   secure,
             expires:  0
           });
@@ -1301,7 +1293,6 @@ var j1 = (function () {
           cookie_written = j1.writeCookie({
               name:     cookie_names.user_session,
               data:     user_session,
-              samesite: 'Strict',
               secure:   secure,
               expires:  0
           });
@@ -1763,14 +1754,14 @@ var j1 = (function () {
       var stringifiedAttributes = '';
 
       var defaults = {
-          data: {},
-          name: '',
-          path: '/',
-          expires: 0,
-          domain: 'localhost',
-          samesite: 'Strict',
-          http_only: false,
-          secure: false
+          data:         {},
+          name:         '',
+          path:         '{{cookie_options.path}}',
+          expires:      '{{cookie_options.expires}}',
+          domain:       '{{cookie_options.domain}}',
+          samesite:     '{{cookie_options.same_site}}',
+          http_only:    '{{cookie_options.http_only}}',
+          secure:       '{{cookie_options.secure}}'
       };
 
       var settings = $.extend(defaults, options);
@@ -1870,7 +1861,7 @@ var j1 = (function () {
     expireCookie: function (options /*name [,path, samesite, secure]*/) {
       var defaults = {
           path: '/',
-          samesite: 'Strict',
+          samesite: 'Lax',
           secure: false
       };
       var settings  = $.extend(defaults, options);

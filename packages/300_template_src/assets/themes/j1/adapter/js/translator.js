@@ -196,7 +196,6 @@ j1.adapter['translator'] = (function (j1, window) {
         cookie_written = j1.writeCookie({
           name:     cookie_names.user_translate,
           data:     user_translate,
-          samesite: 'Strict',
           secure:   secure,
           expires:  365
         });
@@ -263,7 +262,6 @@ j1.adapter['translator'] = (function (j1, window) {
           cookie_written = j1.writeCookie({
             name:     cookie_names.user_translate,
             data:     user_translate,
-            samesite: 'Strict',
             secure:   secure,
             expires:  365
           });
@@ -401,7 +399,6 @@ j1.adapter['translator'] = (function (j1, window) {
       cookie_written = j1.writeCookie({
         name:     cookie_names.user_consent,
         data:     user_consent,
-        samesite: 'Strict',
         secure:   secure,
         expires:  365
       });

@@ -203,7 +203,6 @@ j1.adapter['themer'] = (function (j1, window) {
              cookie_written = j1.writeCookie({
                name:     cookie_names.user_state,
                data:     user_state,
-               samesite: 'Strict',
                secure:   secure,
                expires:  365
              });

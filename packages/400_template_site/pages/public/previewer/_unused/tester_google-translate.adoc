@@ -381,7 +381,6 @@ body{ top: 0 !important;}
       cookie_written = j1.writeCookie({
         name:     cookie_names.user_state,
         data:     user_state,
-        samesite: 'Strict',
         expires:  0
       });
       j1.removeCookie({name: 'googtrans'});
@@ -390,7 +389,6 @@ body{ top: 0 !important;}
       cookie_written = j1.writeCookie({
         name:     cookie_names.user_state,
         data:     user_state,
-        samesite: 'Strict',
         expires:  365
       });
       head.appendChild(script);
