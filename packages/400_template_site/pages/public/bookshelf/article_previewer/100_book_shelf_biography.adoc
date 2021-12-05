@@ -13,7 +13,7 @@ regenerate:                             false
 
 fab_menu_id:                            open_toc
 
-resources:                              []
+resources:                              [ animate ]
 resource_options:
   - attic:
       padding_top:                      400

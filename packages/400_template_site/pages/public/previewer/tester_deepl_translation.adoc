@@ -20,7 +20,7 @@ fab_menu_id:                            page_ctrl_simple
 permalink:                              /pages/public/previewer/deepl-translator/
 regenerate:                             false
 
-resources:                              [ clipboard, rouge, deeplAPI, cryptoJS ]
+resources:                              [ animate, clipboard, rouge, deeplAPI, cryptoJS ]
 resource_options:
   - attic:
       padding_top:                      400

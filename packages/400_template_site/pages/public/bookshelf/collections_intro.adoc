@@ -19,6 +19,7 @@ fab_menu_id:                            open_toc
 permalink:                              /pages/public/collections/intro/
 regenerate:                             false
 
+resources:                              [ animate ]
 resource_options:
   - attic:
       padding_top:                      400

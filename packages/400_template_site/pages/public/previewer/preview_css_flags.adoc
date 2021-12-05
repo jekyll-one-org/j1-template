@@ -19,7 +19,7 @@ fab_menu_id:                            page_ctrl_simple
 permalink:                              /pages/public/previewer/country_flags/
 regenerate:                             false
 
-resources:                              [ clipboard, rouge, flags_previewer ]
+resources:                              [ animate, clipboard, rouge, flags_previewer ]
 resource_options:
   - attic:
       padding_top:                      400

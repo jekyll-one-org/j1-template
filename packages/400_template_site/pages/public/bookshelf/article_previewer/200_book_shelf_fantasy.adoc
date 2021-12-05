@@ -17,7 +17,7 @@ fab_menu_id:                            open_toc
 permalink:                              /pages/public/collections/bookshelf/fantasy/
 regenerate:                             false
 
-resources:                              []
+resources:                              [ animate ]
 resource_options:
   - attic:
       padding_top:                      400

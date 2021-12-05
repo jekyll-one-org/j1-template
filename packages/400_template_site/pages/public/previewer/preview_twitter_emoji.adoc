@@ -15,7 +15,7 @@ scrollbar:                              false
 permalink:                              /pages/public/previewer/twitter_emoji/
 regenerate:                             false
 
-resources:                              [ clipboard, rouge, twemoji, twemoji_picker ]
+resources:                              [ animate, clipboard, rouge, twemoji, twemoji_picker ]
 resource_options:
   - attic:
       padding_top:                      400

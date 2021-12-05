@@ -16,7 +16,7 @@ toc:                                    true
 permalink:                              /pages/public/previewer/rouge/
 regenerate:                             true
 
-resources:                             [ clipboard, rouge ]
+resources:                             [ animate, clipboard, rouge ]
 resource_options:
   - toccer:
       collapseDepth:                    4
