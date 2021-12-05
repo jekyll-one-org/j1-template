@@ -45,7 +45,7 @@ function Translator(props) {
     cookieName:                 'j1.user.state',                                // the name of the User State Cookie (primary data)
     cookieConsentName:          'j1.user.consent',                              // the name of the Cookie Consent Cookie (secondary data)
     cookieStorageDays:          365,                                            // the duration the cookie is stored on the client
-    cookieSameSite:             'Strict',                                       // restrict consent cookie to first-party, do NOT send cookie to other domains
+    cookieSameSite:             'Lax',                                       // restrict consent cookie to first-party, do NOT send cookie to other domains
     cookieSecure:               cookieSecure,                                   // secure flag on cookies
     translationEnabled:         false,                                          // enable|disable translation on first page view
     disableLanguageSelector:    false,                                          // disable language dropdown for translation in dialog (modal)

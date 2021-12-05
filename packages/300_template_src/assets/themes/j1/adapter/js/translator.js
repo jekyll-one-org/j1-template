@@ -124,7 +124,7 @@ j1.adapter['translator'] = (function (j1, window) {
         path: '/',
         expires: 0,
         domain: 'localhost',
-        samesite: 'Strict',
+        samesite: 'Lax',
         http_only: false,
         secure: false
     };

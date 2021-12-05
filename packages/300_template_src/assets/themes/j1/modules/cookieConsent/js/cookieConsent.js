@@ -62,7 +62,7 @@ function CookieConsent(props) {
     whitelisted:            [],                                                 // pages NO consent modal dialog is issued
     xhrDataElement:         'consent-data',                                     // src container for all language-specific consent dialogs (taken from contentURL)
     dialogContainerID:      'consent-modal',                                    // dest container, the dialog modal is loaded (dynamically)
-    cookieSameSite:         'Strict',                                           // restrict the consent cookie to first-party (do NOT send cookie to other domains)
+    cookieSameSite:         'Lax',                                           // restrict the consent cookie to first-party (do NOT send cookie to other domains)
     cookieSecure:           true
   };
 
