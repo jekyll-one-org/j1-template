@@ -11,8 +11,9 @@ categories:                             [ About ]
 tags:                                   [ Software, Platforms, Contributers ]
 
 scrollbar:                              false
-
 regenerate:                             false
+
+permalink:                              /pages/public/about/site/
 
 resources:                              [ animate ]
 resource_options:
