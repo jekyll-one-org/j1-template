@@ -35,6 +35,9 @@ regenerate:                             true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
+{% assign cookie_defaults     = modules.defaults.cookies.defaults %}
+{% assign cookie_settings     = modules.cookies.settings %}
+
 {% assign translator_defaults = modules.defaults.translator.defaults %}
 {% assign translator_settings = modules.translator.settings %}
 {% assign tracking_enabled    = template_config.analytics.enabled %}
@@ -42,6 +45,7 @@ regenerate:                             true
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign translator_options  = translator_defaults | merge: translator_settings %}
+{% assign cookie_options      = cookie_defaults | merge: cookie_settings %}
 
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
@@ -95,6 +99,7 @@ j1.adapter['translator'] = (function (j1, window) {
   var hostname;
   var domain;
   var cookie_domain;
+  var domain_enabled;
   var secure;
   var logText;
   var cookie_written;
@@ -111,10 +116,17 @@ j1.adapter['translator'] = (function (j1, window) {
 
   // ---------------------------------------------------------------------------
   // setCookie()
-  // writes a flat cookie (not using an encoded JSON string)
+  // writes a FLAT cookie (not using an encoded JSON string)
   // ---------------------------------------------------------------------------
   function setCookie(options /*cName, cValue, expDays*/) {
-    var defaults = {};
+    var date            = new Date();
+    var timestamp_now   = date.toISOString()
+    var url             = new liteURL(window.location.href);
+    var baseUrl         = url.origin;;
+    var hostname        = url.hostname;
+    var domain          = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+    var domain_enabled  = '{{cookie_options.domain}}';
+    var defaults        = {};
     var settings;
     var document_cookie;
     var stringifiedAttributes = '';
@@ -123,7 +135,7 @@ j1.adapter['translator'] = (function (j1, window) {
         name: '',
         path: '/',
         expires: 0,
-        domain: 'localhost',
+        domain: true,
         samesite: 'Lax',
         http_only: false,
         secure: false
@@ -136,6 +148,9 @@ j1.adapter['translator'] = (function (j1, window) {
       date.setTime(date.getTime() + (settings.expires * 24 * 60 * 60 * 1000));
       stringifiedAttributes += '; ' + 'expires=' + date.toUTCString();
     }
+
+    settings.domain = settings.domain ? '.' + domain : hostname;
+    stringifiedAttributes += '; ' + 'domain=' + settings.domain;
 
     stringifiedAttributes += '; ' + 'SameSite=' + settings.samesite;
 
@@ -168,9 +183,10 @@ j1.adapter['translator'] = (function (j1, window) {
       baseUrl               = url.origin;
       hostname              = url.hostname;
       domain                = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
-      cookie_domain         = (domain.includes('.')) ? '.' + domain : domain;
+      domain_enabled        = '{{cookie_options.domain}}';
       secure                = (url.protocol.includes('https')) ? true : false;
       navigator_language    = navigator.language || navigator.userLanguage;     // userLanguage for MS IE compatibility
+      cookie_domain         = domain_enabled ? '.' + domain : hostname;         // set domain used by cookies
       translation_language  = navigator_language.split('-')[0];
       cookie_names          = j1.getCookieNames();
       head                  = document.getElementsByTagName('head')[0];
@@ -228,6 +244,9 @@ j1.adapter['translator'] = (function (j1, window) {
       // initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (function (options) {
+        var expires   = '{{cookie_options.expires}}';
+        var same_site = '{{cookie_options.same_site}}';
+
         user_consent = j1.readCookie(cookie_names.user_consent);
 
         if ( j1.getState() === 'finished' ) {
@@ -272,7 +291,10 @@ j1.adapter['translator'] = (function (j1, window) {
 
           j1.translator = new Translator({
             contentURL:               moduleOptions.contentURL,                 // dialog content (modals) for all supported languages
-            cookieName:               moduleOptions.cookieName,                 // the name of the User State Cookie (primary data)
+            cookieName:               cookie_names.user_consent,                // name of the consent cookie
+            cookieStorageDays:        expires,                                  // lifetime of a cookie [0..365], 0: session cookie
+            cookieSameSite:           same_site,                                // restrict consent cookie
+            cookieDomain:             cookie_domain,                            // set domain (hostname|domain)
             cookieConsentName:        moduleOptions.cookieConsentName,          // the name of the Cookie Consent Cookie (secondary data)
             disableLanguageSelector:  moduleOptions.disableLanguageSelector,    // disable language dropdown for translation in dialog (modal)
             dialogContainerID:        moduleOptions.dialogContainerID,          // dest container, the dialog modal is loaded (dynamically)

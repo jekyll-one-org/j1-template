@@ -340,17 +340,17 @@ lerna info Executing command in 3 packages: "yarn run build"
 css: $ npm run clean
 js: $ npm run clean && npm run lint
 site: $ run-s -s jekyll_build:*
-css: > css@2022.0.7 clean path_to_\j1-template\packages\100_template_css
+css: > css@2022.0.8 clean path_to_\j1-template\packages\100_template_css
 css: > run-p -s clean:*
-js: > js@2022.0.7 clean path_to_\j1-template\packages\200_template_js
+js: > js@2022.0.8 clean path_to_\j1-template\packages\200_template_js
 js: > run-p -s clean:*
-site: > site@2022.0.7 bundle path_to_\j1-template\packages\400_template_site
+site: > site@2022.0.8 bundle path_to_\j1-template\packages\400_template_site
 site: > run-s -s bundler:*
 css: $ npm run build_css && npm run uglify_css
 site: Create bundle ..
-css: > css@2022.0.7 build_css path_to_\j1-template\packages\100_template_css
+css: > css@2022.0.8 build_css path_to_\j1-template\packages\100_template_css
 css: > run-p -s theme_css:*
-js: > js@2022.0.7 lint path_to_\j1-template\packages\200_template_js
+js: > js@2022.0.8 lint path_to_\j1-template\packages\200_template_js
 js: > run-p -s lint:*
 css: Rendering Complete, saving .css file...
 css: Wrote CSS to path_to_\j1-template\packages\100_template_css\dist\icon-fonts\fontawesome.css
@@ -367,13 +367,13 @@ css: Rendering Complete, saving .css file...
 css: Wrote CSS to path_to_\j1-template\packages\100_template_css\dist\icon-fonts\materialdesign.css
 css: Rendering Complete, saving .css file...
 css: Wrote CSS to path_to_\j1-template\packages\100_template_css\dist\themes\uno-light\bootstrap.css
-js: > js@2022.0.7 build-js path_to_\j1-template\packages\200_template_js
+js: > js@2022.0.8 build-js path_to_\j1-template\packages\200_template_js
 js: > cross-var webpack --mode production --config $npm_package_wp_build
 site: Bundle Rubies using user path ..
-css: > css@2022.0.7 uglify_css path_to_\j1-template\packages\100_template_css
+css: > css@2022.0.8 uglify_css path_to_\j1-template\packages\100_template_css
 css: > run-p -s uglify_css:*
 js: $ npm run uglify-js && npm run deploy
-js: > js@2022.0.7 uglify-js path_to_\j1-template\packages\200_template_js
+js: > js@2022.0.8 uglify-js path_to_\j1-template\packages\200_template_js
 js: > terser dist/template.js -o dist/template.min.js -m --source-map
 ..
 site: Fetching gem metadata from https://rubygems.org/..........

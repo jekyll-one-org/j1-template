@@ -34,6 +34,9 @@ regenerate:                             true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
+{% assign cookie_defaults     = modules.defaults.cookies.defaults %}
+{% assign cookie_settings     = modules.cookies.settings %}
+
 {% assign consent_defaults    = modules.defaults.cookieconsent.defaults %}
 {% assign consent_settings    = modules.cookieconsent.settings %}
 {% assign tracking_enabled    = template_config.analytics.enabled %}
@@ -44,6 +47,7 @@ regenerate:                             true
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign consent_options     = consent_defaults | merge: consent_settings %}
+{% assign cookie_options      = cookie_defaults | merge: cookie_settings %}
 
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
@@ -87,12 +91,14 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
   var moduleOptions     = {};
   var _this;
   var $modal;
+  var cookie_names;
   var user_cookie;
   var logger;
   var url;
   var baseUrl;
   var hostname;
   var domain;
+  var domain_enabled;
   var cookie_domain;
   var secure;
   var logText;
@@ -122,20 +128,16 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       _this             = j1.adapter.cookieConsent;
       logger            = log4javascript.getLogger('j1.adapter.cookieConsent');
+      cookie_names      = j1.getCookieNames();
       url               = new liteURL(window.location.href);
       baseUrl           = url.origin;
       hostname          = url.hostname;
       domain            = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+      domain_enabled    = '{{cookie_options.domain}}';
       secure            = (url.protocol.includes('https')) ? true : false;
       contentLanguage   = '{{site.language}}';
       navigatorLanguage = navigator.language || navigator.userLanguage;
-
-      // set domain used by cookies
-      if(domain !== 'localhost') {
-        cookie_domain = '.' + hostname;
-      } else {
-        cookie_domain = hostname;
-      }
+      cookie_domain     = domain_enabled ? '.' + domain : hostname;             // set domain used by cookies
 
       // initialize state flag
       _this.state = 'pending';
@@ -169,6 +171,9 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       // initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (function (options) {
+        var expires   = '{{cookie_options.expires}}';
+        var same_site = '{{cookie_options.same_site}}';
+
         if ( j1.getState() === 'finished' ) {
           _this.setState('started');
           logger.info('\n' + 'state: ' + _this.getState());
@@ -176,8 +181,10 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
 
           j1.cookieConsent = new CookieConsent ({
             contentURL:             moduleOptions.contentURL,                   // dialog content (modals) for all supported languages
-            cookieName:             moduleOptions.cookieName,                   // name of the consent cookie
-            cookieSameSite:         moduleOptions.cookieSameSite,               // restrict consent cookie
+            cookieName:             cookie_names.user_consent,                  // name of the consent cookie
+            cookieStorageDays:      expires,                                    // lifetime of a cookie [0..365], 0: session cookie
+            cookieSameSite:         same_site,                                  // restrict consent cookie
+            cookieDomain:           cookie_domain,                              // set domain (hostname|domain)
             dialogLanguage:         moduleOptions.dialogLanguage,               // language for the dialog (modal)
             whitelisted:            moduleOptions.whitelisted,                  // pages NOt dialog is shown
             reloadPageOnChange:     moduleOptions.reloadPageOnChange,           // reload if setzings has changed

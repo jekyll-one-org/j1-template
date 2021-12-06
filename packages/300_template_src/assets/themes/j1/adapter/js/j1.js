@@ -55,7 +55,7 @@ regenerate:                             true
 {% assign toccer_defaults           = modules.defaults.toccer.defaults %}
 
 {% assign cookie_defaults           = modules.defaults.cookies.defaults %}
-{% assign cookie_settings           = modules.cokkies.settings %}
+{% assign cookie_settings           = modules.cookies.settings %}
 
 {% assign themer_defaults           = modules.defaults.themer.defaults %}
 {% assign themer_settings           = modules.themer.settings %}
@@ -399,19 +399,28 @@ var j1 = (function () {
         logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
       }
 
+      // jadams, 2021-12-06: Access to cookies for this site failed.
+      // Possibly, a third-party domain or an attacker tries to access it.
+      if (!user_state) {
+        logger.error('\n' + 'Access to cookie failed or cookie not found: ' + cookie_names.user_state);
+        logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
+        // redirect to error page: blocked content
+        window.location.href = '/446.html';
+      }
+
       // jadams, 2021-07-11: Found situation that user_state NOT initialized
       // correctly (user_state == false).
       // TODO: Check if/why user state (cookie NOT created?) NOT initialized
       // for what reason.
-      if (!user_state) {
-        logger.error('\n' + 'cookie not found: ' + cookie_names.user_state);
-        logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
-        j1Cookies.forEach(item => console.log('j1.core.switcher: ' + item));
-        logger.debug('\n' + 'ga cookies found:' + gaCookies.length);
-        gaCookies.forEach(item => console.log('j1.core.switcher: ' + item));
-        user_state = j1.readCookie(cookie_names.user_state);
-        user_state.session_active = true;
-      }
+      // if (!user_state) {
+      //   logger.error('\n' + 'cookie not found: ' + cookie_names.user_state);
+      //   logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
+      //   j1Cookies.forEach(item => console.log('j1.core.switcher: ' + item));
+      //   logger.debug('\n' + 'ga cookies found:' + gaCookies.length);
+      //   gaCookies.forEach(item => console.log('j1.core.switcher: ' + item));
+      //   user_state = j1.readCookie(cookie_names.user_state);
+      //   user_state.session_active = true;
+      // }
 
       if (!user_consent.analysis || !user_consent.personalization)  {
         // rewrite consent|state cookies to session
@@ -1745,9 +1754,14 @@ var j1 = (function () {
     //    context/HTTPS).
     // -------------------------------------------------------------------------
     writeCookie: function (options /*name, data, [path, expires, domain, samesite, http_only, secure]*/) {
-      var date          = new Date();
-      var timestamp_now = date.toISOString();
-      var cookie_data   = {};
+      var date            = new Date();
+      var timestamp_now   = date.toISOString()
+      var url             = new liteURL(window.location.href);
+      var baseUrl         = url.origin;;
+      var hostname        = url.hostname;
+      var domain          = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+      var domain_enabled  = '{{cookie_options.domain}}';
+      var cookie_data     = {};
       var data_json;
       var data_encoded;
       var expires;
@@ -1758,13 +1772,18 @@ var j1 = (function () {
           name:         '',
           path:         '{{cookie_options.path}}',
           expires:      '{{cookie_options.expires}}',
-          domain:       '{{cookie_options.domain}}',
+          domain:       true,
           samesite:     '{{cookie_options.same_site}}',
           http_only:    '{{cookie_options.http_only}}',
           secure:       '{{cookie_options.secure}}'
       };
-
       var settings = $.extend(defaults, options);
+
+      // if (settings.domain) {
+      //   settings.domain =
+      // } else {
+      //
+      // }
 
       cookie_data.timestamp = timestamp_now;
 
@@ -1787,6 +1806,9 @@ var j1 = (function () {
       }
 
       stringifiedAttributes += '; ' + 'SameSite=' + settings.samesite;
+
+      settings.domain = settings.domain ? '.' + domain : hostname;
+      stringifiedAttributes += '; ' + 'domain=' + settings.domain;
 
       if (settings.secure) {
         stringifiedAttributes += '; ' + 'secure=' + settings.secure;
@@ -1859,12 +1881,20 @@ var j1 = (function () {
     // to JavaScript. For that reason, attributes needs to be set explicitly.
     // -------------------------------------------------------------------------
     expireCookie: function (options /*name [,path, samesite, secure]*/) {
+      var url             = new liteURL(window.location.href);
+      var baseUrl         = url.origin;;
+      var hostname        = url.hostname;
+      var domain          = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+      var domain_enabled  = '{{cookie_options.domain}}';
+
       var defaults = {
           path: '/',
           samesite: 'Lax',
           secure: false
       };
       var settings  = $.extend(defaults, options);
+
+      settings.domain = domain_enabled ? '.' + domain : hostname;
 
       var dc        = document.cookie;                                            // all cookies in page
       var end       = dc.length;                                                  // default to end of the string
@@ -1894,9 +1924,9 @@ var j1 = (function () {
       // expire cookie to session
       content = decodeURI(dc.substring(begin + prefix.length, end) ).replace(/"/g, '');
       if (settings.secure) {
-        document.cookie = settings.name + '=' + content +'; path=' + settings.path + '; ' + 'SameSite=' + settings.samesite + '; secure';
+        document.cookie = settings.name + '=' + content +'; path=' + settings.path + '; ' + 'SameSite=' + settings.samesite + '; ' + 'Domain=' + settings.domain + '; secure' + '; ';
       } else {
-        document.cookie = settings.name + '=' + content +'; path=' + settings.path + '; ' + 'SameSite=' + settings.samesite;
+        document.cookie = settings.name + '=' + content +'; path=' + settings.path + '; ' + 'SameSite=' + settings.samesite + '; ' + 'Domain=' + settings.domain + '; ';
       }
 
       return true;

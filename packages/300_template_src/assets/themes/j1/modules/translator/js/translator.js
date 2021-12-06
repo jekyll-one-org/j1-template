@@ -93,18 +93,18 @@ function Translator(props) {
   // manage cookies
   // ---------------------------------------------------------------------------
   var Cookie = {
-    set: function (name, value, days, samesite, secure) {
+    set: function (name, value, days, cookieSameSite, cookieDomain, cookieSecure) {
       var value_encoded = window.btoa(value);
-      var expires = '';
-      if (days) {
+      var expires = '; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+      if (days>0) {
         var date = new Date();
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        expires = '; expires=' + date.toUTCString();
+        expires = "; expires=" + date.toUTCString();
       }
-      if (secure) {
-        document.cookie = name + '=' + (value_encoded || '') + expires + '; Path=/; SameSite=' + samesite + '; ' + 'secure=' + secure + ';';
+      if (cookieSecure) {
+        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + '; ' + 'Domain=' + cookieDomain + '; ' + 'Secure=' + cookieSecure + ';';
       } else {
-        document.cookie = name + '=' + (value_encoded || '') + expires + '; Path=/; SameSite=' + samesite + ';';
+        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + ';' + 'Domain=' + cookieDomain + '; ';
       }
     },
     get: function (name) {

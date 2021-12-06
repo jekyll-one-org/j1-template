@@ -25,6 +25,7 @@ description:
 #
 settings:
   expires:                              365
+  same_site:                            Lax
 
 # ------------------------------------------------------------------------------
 # END config

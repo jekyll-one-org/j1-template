@@ -38,7 +38,7 @@
 
 'use strict';
 function CookieConsent(props) {
-  var logger                = log4javascript.getLogger('j1.core.bsCookieConsent');
+  var logger                = log4javascript.getLogger('j1.core.CookieConsent');
   var self                  = this;
   var detailedSettingsShown = false;
   var url                   = new liteURL(window.location.href);
@@ -56,14 +56,14 @@ function CookieConsent(props) {
     dialogLanguage:         'content',                                          // language used for the consent dialog (modal)
     dialogLanguages:        ['en','de'],                                        // supported languages for the consent dialog (modal), defaults to first in array
     contentURL:             '/assets/data/cookieconsent',                       // URL contain the consent dialogs (modals) for ALL supported languages
-    cookieName:             'j1.user.translate',                                // name of the cookie, in which the configuration is stored
-    cookieStorageDays:      365,                                                // duration the configuration cookie is stored on the client
+//  cookieName:             'j1.user.translate',                                // name of the cookie, in which the configuration is stored
+//  cookieSameSite:         'Lax',                                           // restrict the consent cookie to first-party (do NOT send cookie to other domains)
+//  cookieSecure:           true
+//  cookieStorageDays:      365,                                                // duration the configuration cookie is stored on the client
     postSelectionCallback:  '',                                                 // callback function, called after the user has made his selection
     whitelisted:            [],                                                 // pages NO consent modal dialog is issued
     xhrDataElement:         'consent-data',                                     // src container for all language-specific consent dialogs (taken from contentURL)
-    dialogContainerID:      'consent-modal',                                    // dest container, the dialog modal is loaded (dynamically)
-    cookieSameSite:         'Lax',                                           // restrict the consent cookie to first-party (do NOT send cookie to other domains)
-    cookieSecure:           true
+    dialogContainerID:      'consent-modal'                                    // dest container, the dialog modal is loaded (dynamically)
   };
 
   // merge property settings
@@ -87,7 +87,7 @@ function CookieConsent(props) {
   this.props.cookieSecure = cookieSecure;
 
   var Cookie = {
-    set: function (name, value, days, cookieSameSite, cookieSecure) {
+    set: function (name, value, days, cookieSameSite, cookieDomain, cookieSecure) {
       var value_encoded = window.btoa(value);
       var expires = '; expires=Thu, 01 Jan 1970 00:00:00 UTC';
       if (days>0) {
@@ -96,9 +96,9 @@ function CookieConsent(props) {
         expires = "; expires=" + date.toUTCString();
       }
       if (cookieSecure) {
-        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; cookieSameSite=' + cookieSameSite + '; ' + 'cookieSecure=' + cookieSecure + ';';
+        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + '; ' + 'Domain=' + cookieDomain + '; ' + 'Secure=' + cookieSecure + ';';
       } else {
-        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; cookieSameSite=' + cookieSameSite + ';';
+        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + ';' + 'Domain=' + cookieDomain + '; ';
       }
     },
     get: function (name) {
@@ -319,20 +319,20 @@ function CookieConsent(props) {
   }
 
   function agreeAll() {
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(true)), self.props.cookieStorageDays, self.props.cookieSameSite, cookieSecure);
+    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(true)), self.props.cookieStorageDays, self.props.cookieSameSite, self.props.cookieDomain, cookieSecure);
     self.$modal.modal('hide');
   }
 
   function doNotAgree() {
     // Remove consent cookie
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), 0, self.props.cookieSameSite, cookieSecure);
+    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions(false)), 0, self.props.cookieSameSite, self.props.cookieDomain, cookieSecure);
     self.$modal.modal('hide');
     // redirect to error page: blocked site
     window.location.href = '/445.html';
   }
 
   function saveSettings() {
-    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions()), self.props.cookieStorageDays, self.props.cookieSameSite, cookieSecure);
+    Cookie.set(self.props.cookieName, JSON.stringify(gatherOptions()), self.props.cookieStorageDays, self.props.cookieSameSite, self.props.cookieDomain, cookieSecure);
     self.$modal.modal('hide');
   }
 

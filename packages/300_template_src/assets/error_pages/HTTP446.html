@@ -4,22 +4,22 @@ description: >
                                         Customized HTML error page
 
 categories:                             [ Error page ]
-tags:                                   [ HTML, 445 ]
+tags:                                   [ HTML, 446 ]
 
 exclude_from_search:                    true
 
 regenerate:                             false
-permalink:                              /445.html
-http_error:                             445
-back_url:                               /
+permalink:                              /446.html
+http_error:                             446
+back_url:                               "https://jekyll.one/"
 sitemap:                                false
 ---
 {% capture j1_cache %}
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/http_error_pages/HTTP445.html
- # Liquid TEMPLATE to generate customized HTML error pages: 445 - Blocked Content
+ # ~/assets/http_error_pages/HTTP446.html
+ # Liquid TEMPLATE to generate customized HTML error pages: 446 - Blocked Content
  #
  # Product/Info:
  # https://jekyll.one
@@ -64,15 +64,15 @@ sitemap:                                false
 
 {% if language == 'en' %}
   {% assign title             = "Site Blocked" %}
-  {% assign back_url_text     = "Back Home" %}
-  {% assign reason            = "Access to the site has been disabled for technical reasons. <br/> Because your cookie settings are disabled for this website, the content cannot be presented." %}
+  {% assign back_url_text     = "Back to J1 Template (Home)" %}
+  {% assign reason            = "Access to the site has been blocked for technical reasons. <br> Access to cookies for this site failed. Possibly, a third-party domain tries to access it." %}
   {% assign contact_issue     = "Technical Contact" %}
 {% endif %}
 
 {% if language == 'de' %}
-  {% assign title             = "Gesperrter Inhalt" %}
-  {% assign back_url_text     = "Zurück zur Startseite" %}
-  {% assign reason            = "Diese Webseiten sind aus technischen Gründen nicht verfügbar. <br/> Da Ihre Cookie-Einstellungen für diese Website deaktiviert sind, können die Inhalte nicht angezeigt werden." %}
+  {% assign title             = "Website gesperrt" %}
+  {% assign back_url_text     = "Zurück zu J1 Template (Home)" %}
+  {% assign reason            = "Diese Webseiten sind aus technischen Gründen nicht verfügbar. <br> Der Zugriff auf Cookies ist für diese Website fehlgeschlagen. Möglicherweise versucht eine Drittanbieter-Domain darauf zuzugreifen." %}
   {% assign contact_issue     = "Technischer Kontakt" %}
 {% endif %}
 
