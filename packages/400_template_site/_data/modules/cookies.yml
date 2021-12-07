@@ -24,6 +24,7 @@ description:
 # User configuration settings
 #
 settings:
+  check_cookies:                        false
   expires:                              365
   domain:                               true
   same_site:                            Lax

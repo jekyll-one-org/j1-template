@@ -174,6 +174,7 @@ var j1 = (function () {
   // Default comment provider information
   var comment_provider          = '{{comment_provider}}';
   var site_id                   = '{{site_id}}';
+  var check_cookies             = {{cookie_options.check_cookies}};
 
   var current_user_data;
   var current_page;
@@ -368,14 +369,16 @@ var j1 = (function () {
                             expires:  365
                           });
 
-      // jadams, 2021-12-06: Access to cookies for this site failed.
+      // jadams, 2021-12-06: Check if access to cookies for this site failed.
       // Possibly, a third-party domain or an attacker tries to access it.
-      // if (!user_state) {
-      //   logger.error('\n' + 'Access to cookie failed or cookie not found: ' + cookie_names.user_state);
-      //   logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
-      //   // redirect to error page: blocked content
-      //   window.location.href = '/446.html';
-      // }
+      if (check_cookies) {
+        if (!user_state) {
+          logger.error('\n' + 'Access to cookie failed or cookie not found: ' + cookie_names.user_state);
+          logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
+          // redirect to error page: blocked content
+          window.location.href = '/446.html';
+        }
+      }
 
       if (!user_consent.analysis || !user_consent.personalization)  {
         // expire permanent cookies to session
