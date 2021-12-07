@@ -93,7 +93,7 @@ defaults:
   # ----------------------------------------------------------------------------
   #
   path:                                 /
-  domain:                               true
+  domain:                               false
   expires:                              0
   same_site:                            Strict
   http_only:                            false
