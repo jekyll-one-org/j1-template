@@ -256,7 +256,7 @@ j1.adapter['translator'] = (function (j1, window) {
             secure:   secure,
             expires:  365
           });
-        }        
+        }
 
         if ( j1.getState() === 'finished' ) {
           _this.setState('started');
@@ -425,10 +425,25 @@ j1.adapter['translator'] = (function (j1, window) {
       var user_consent   = j1.readCookie(cookie_names.user_consent);
       var user_translate = j1.readCookie(cookie_names.user_translate);
       var msDropdown     = document.getElementById('dropdownJSON').msDropdown;
+      var url            = new liteURL(window.location.href);
+      var baseUrl        = url.origin;;
+      var hostname       = url.hostname;
+      var domain         = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+      var domain_enabled = '{{cookie_options.domain}}';
+      var same_site      = '{{cookie_options.same_site}}';
+
       var selectedTranslationLanguage;
       var srcLang;
       var destLang;
       var transCode;
+
+
+      // set domain used by cookies
+      if (domain != hostname) {
+        cookie_domain = domain_enabled ? '.' + domain : hostname;
+      } else {
+        cookie_domain = hostname;
+      }
 
       selectedTranslationLanguage = msDropdown.value;
       logger.info('\n' + 'selected translation language: ' + selectedTranslationLanguage);
@@ -457,8 +472,17 @@ j1.adapter['translator'] = (function (j1, window) {
       Cookies.remove('googtrans', { domain: hostname });
       Cookies.remove('googtrans');
 
-      // write the googtrans cookie w/o DOMAIN!
-      Cookies.set('googtrans', transCode);
+      // -----------------------------------------------------------------------
+      // NOTE: googtrans cookie will be rewritten (by Google!?) for
+      // attributes 'SameSite' and potentially 'Domain'. This results
+      // for 'SameSite' in an empty field!
+      // -----------------------------------------------------------------------
+
+      // write the googtrans cookie (w/o DOMAIN?!)
+      Cookies.set('googtrans', transCode, {
+        Domain:    cookie_domain,
+        sameSite:  'Lax'
+      });
 
       // reload current page (skip cache)
       location.reload(true);
