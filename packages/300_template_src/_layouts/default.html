@@ -74,11 +74,6 @@ layout:                                 compress
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign tooltips_options     = template_config.bootstrap.tooltips %}
 {% assign popovers_options     = template_config.bootstrap.popovers %}
-{% assign smoothscroll_options = template_config.smoothScroll %}
-
-
-{% comment %} tooltips_options: {{ tooltips_options | debug }}{% endcomment %}
-
 
 {% comment %} Webhooks disabled
 --------------------------------------------------------------------------------
@@ -89,18 +84,10 @@ layout:                                 compress
 {% assign logon_client         = data.modules.j1_sign_in_up %}
 {% assign body_scrollbar       = data.j1_config.body.scrollbar %}
 
-{% if smoothscroll_options.enabled and smoothscroll_options.scrollInPageHashes %}
-  {% assign scroll_inpage_hashes = true %}
-{% endif %}
-
 {% comment %} Overload properties from page options
 -------------------------------------------------------------------------------- {% endcomment %}
 {% if page.scrollbar %}
   {% assign body_scrollbar = page.scrollbar %}
-{% endif %}
-
-{% if page.scrollInPageHashes != nil %}
-  {% assign scroll_inpage_hashes = page.scrollInPageHashes %}
 {% endif %}
 
 {% comment %} main
@@ -259,49 +246,6 @@ layout:                                 compress
         return new bootstrap.Popover(popoverTriggerEl)
       });
     {% endif %}
-
-    {% comment %} Update cookie for lastpage
-    ---------------------------------------------------------------------------- {% endcomment %}
-      // save the current page to userstate cookie
-      var dependencies_met_page_ready = setInterval (function (options) {
-        if (j1.getState() === 'finished') {
-          var logger = log4javascript.getLogger('j1.layout.default');
-
-          function setLastPage() {
-            var cookie_names                = j1.getCookieNames();
-            const user_state_cookie_name    = cookie_names.user_session;
-            var user_state                  = j1.readCookie(user_state_cookie_name);
-            var user_state_last_page        = window.location.pathname;
-            user_state.last_page            = user_state_last_page;
-
-            j1.writeCookie({
-              name: user_state_cookie_name,
-              data: user_state
-            });
-            logger.debug('\n' + 'saved current page to cookie :' + user_state_last_page);
-          }
-          setLastPage();
-          clearInterval(dependencies_met_page_ready);
-        }
-      });
-
-      {% if scroll_inpage_hashes %}
-      // In-page HASH anchor links on click based on Chris Coyier's solution
-      // See: https://css-tricks.com/snippets/jquery/smooth-scrolling/
-      $('a[href^="#"]:not([href="#"])').click(function(e) {
-        if (location.hostname == this.hostname) {
-          var target = $(this.hash);
-          target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-          if (target.length) {
-            $('html, body').animate({
-              scrollTop: target.offset().top - 100 + 'px'
-            }, 200);
-            return false;
-          }
-        }
-      });
-      {% endif %}
-
     });
   </script>
   <!-- [INFO   ] [j1.layout.default.html                ] [ end page processing ] -->

@@ -149,7 +149,11 @@ j1.adapter['translator'] = (function (j1, window) {
       stringifiedAttributes += '; ' + 'expires=' + date.toUTCString();
     }
 
-    settings.domain = settings.domain ? '.' + domain : hostname;
+    if (domain != hostname) {
+      settings.domain = domain_enabled ? '.' + domain : hostname;
+    } else {
+      settings.domain = hostname;
+    }
     stringifiedAttributes += '; ' + 'domain=' + settings.domain;
 
     stringifiedAttributes += '; ' + 'SameSite=' + settings.samesite;
@@ -186,7 +190,6 @@ j1.adapter['translator'] = (function (j1, window) {
       domain_enabled        = '{{cookie_options.domain}}';
       secure                = (url.protocol.includes('https')) ? true : false;
       navigator_language    = navigator.language || navigator.userLanguage;     // userLanguage for MS IE compatibility
-      cookie_domain         = domain_enabled ? '.' + domain : hostname;         // set domain used by cookies
       translation_language  = navigator_language.split('-')[0];
       cookie_names          = j1.getCookieNames();
       head                  = document.getElementsByTagName('head')[0];
@@ -204,22 +207,8 @@ j1.adapter['translator'] = (function (j1, window) {
         'translationLanguage':      translation_language,
       };
 
-      // load|initialize user translate cookie
-      if (j1.existsCookie(cookie_names.user_translate)) {
-        user_translate = j1.readCookie(cookie_names.user_translate);
-      } else {
-        logger.debug('\n' + 'write to cookie : ' + cookie_names.user_translate);
-        cookie_written = j1.writeCookie({
-          name:     cookie_names.user_translate,
-          data:     user_translate,
-          secure:   secure,
-          expires:  365
-        });
-      }
-
       // initialize state flag
       _this.state = 'pending';
-      // _this.settings.languageList = '/assets/data/ms_select.json';
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -246,8 +235,28 @@ j1.adapter['translator'] = (function (j1, window) {
       var dependencies_met_page_ready = setInterval (function (options) {
         var expires   = '{{cookie_options.expires}}';
         var same_site = '{{cookie_options.same_site}}';
+        user_consent    = j1.readCookie(cookie_names.user_consent);
 
-        user_consent = j1.readCookie(cookie_names.user_consent);
+        // set domain used by cookies
+        if (domain != hostname) {
+          cookie_domain = domain_enabled ? '.' + domain : hostname;
+        } else {
+          cookie_domain = hostname;
+        }
+
+        // load|initialize user translate cookie
+        if (j1.existsCookie(cookie_names.user_translate)) {
+          user_translate = j1.readCookie(cookie_names.user_translate);
+        } else {
+          logger.debug('\n' + 'write to cookie : ' + cookie_names.user_translate);
+          cookie_written = j1.writeCookie({
+            name:     cookie_names.user_translate,
+            data:     user_translate,
+            samesite: 'Strict',
+            secure:   secure,
+            expires:  365
+          });
+        }        
 
         if ( j1.getState() === 'finished' ) {
           _this.setState('started');
@@ -275,15 +284,28 @@ j1.adapter['translator'] = (function (j1, window) {
             }
           }
 
-          // update user_translate cookie
-          user_translate.analysis         = user_consent.analysis;
-          user_translate.personalization  = user_consent.personalization;
-          cookie_written = j1.writeCookie({
-            name:     cookie_names.user_translate,
-            data:     user_translate,
-            secure:   secure,
-            expires:  365
-          });
+          // load|set user translate cookie
+          user_translate = j1.readCookie(cookie_names.user_translate);
+          if (!user_consent.analysis || !user_consent.personalization) {
+            // disable translation service
+            user_translate.translationEnabled = false;
+            cookie_written = j1.writeCookie({
+              name:     cookie_names.user_translate,
+              data:     user_translate,
+              secure:   secure
+            });
+
+            // expire permanent cookie to session
+            j1.expireCookie({ name: cookie_names.user_translate });
+          } else {
+            logger.debug('\n' + 'write to cookie : ' + cookie_names.user_translate);
+            cookie_written = j1.writeCookie({
+              name:     cookie_names.user_translate,
+              data:     user_translate,
+              secure:   secure,
+              expires:  365
+            });
+          }
 
           if (moduleOptions.dialogLanguage === 'auto') {
             moduleOptions.dialogLanguage = '{{contentLanguage}}';
@@ -291,10 +313,11 @@ j1.adapter['translator'] = (function (j1, window) {
 
           j1.translator = new Translator({
             contentURL:               moduleOptions.contentURL,                 // dialog content (modals) for all supported languages
-            cookieName:               cookie_names.user_consent,                // name of the consent cookie
+            cookieName:               cookie_names.user_translate,              // name of the translator cookie
             cookieStorageDays:        expires,                                  // lifetime of a cookie [0..365], 0: session cookie
             cookieSameSite:           same_site,                                // restrict consent cookie
             cookieDomain:             cookie_domain,                            // set domain (hostname|domain)
+            cookieSecure:             secure,                                   // set
             cookieConsentName:        moduleOptions.cookieConsentName,          // the name of the Cookie Consent Cookie (secondary data)
             disableLanguageSelector:  moduleOptions.disableLanguageSelector,    // disable language dropdown for translation in dialog (modal)
             dialogContainerID:        moduleOptions.dialogContainerID,          // dest container, the dialog modal is loaded (dynamically)
@@ -308,7 +331,7 @@ j1.adapter['translator'] = (function (j1, window) {
           });
 
           // enable|disable translation (after callback)
-          if (user_consent.analysis && user_consent.personalization && user_translate.translationEnabled) {
+          if (user_translate.analysis && user_translate.personalization && user_translate.translationEnabled) {
             if (moduleOptions.translatorName === 'google') {
               head.appendChild(script);
               if ($('google_translate_element')) {
@@ -324,12 +347,9 @@ j1.adapter['translator'] = (function (j1, window) {
             }
           }
 
-          // Click events moved to Navigator (core)
-          //
-          // $('#quickLinksTranslateButton').click(function(e) {
-          //   logger.info('\n' + 'call default action');
-          //   j1.translator.showDialog();
-          // });
+          // -------------------------------------------------------------------
+          // NOTE: Click events moved to Navigator (core)
+          // -------------------------------------------------------------------
 
           _this.setState('finished');
           logger.info('\n' + 'state: ' + _this.getState());
@@ -396,13 +416,12 @@ j1.adapter['translator'] = (function (j1, window) {
 
     // -------------------------------------------------------------------------
     // cbGoogle()
-    // Called by the translator CORE module after the user made the
-    // selection for a translation|language
+    // Called by the translator CORE module after the user has made
+    // the selection for a translation|language
     // -------------------------------------------------------------------------
     cbGoogle: function () {
       var logger         = log4javascript.getLogger('j1.adapter.translator.cbGoogle');
       var cookie_names   = j1.getCookieNames();
-      var user_state     = j1.readCookie(cookie_names.user_state);
       var user_consent   = j1.readCookie(cookie_names.user_consent);
       var user_translate = j1.readCookie(cookie_names.user_translate);
       var msDropdown     = document.getElementById('dropdownJSON').msDropdown;
@@ -413,17 +432,6 @@ j1.adapter['translator'] = (function (j1, window) {
 
       selectedTranslationLanguage = msDropdown.value;
       logger.info('\n' + 'selected translation language: ' + selectedTranslationLanguage);
-
-      // update cookie consent settings
-      user_consent.analysis         = user_translate.analysis;
-      user_consent.personalization  = user_translate.personalization;
-
-      cookie_written = j1.writeCookie({
-        name:     cookie_names.user_consent,
-        data:     user_consent,
-        secure:   secure,
-        expires:  365
-      });
 
       // set content language
       if (moduleOptions.contentLanguage === 'auto') {

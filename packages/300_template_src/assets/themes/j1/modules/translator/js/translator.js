@@ -38,6 +38,46 @@ function Translator(props) {
   var translation_language;
 
   // ---------------------------------------------------------------------------
+  // Cookie()
+  // manage cookies
+  // ---------------------------------------------------------------------------
+  var Cookie = {
+    set: function (name, value, days, cookieSameSite, cookieDomain, cookieSecure) {
+      var value_encoded = window.btoa(value);
+      var expires = '; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+      if (days>0) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      if (cookieSecure) {
+        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + '; ' + 'Domain=' + cookieDomain + '; ' + 'Secure=' + cookieSecure + ';';
+      } else {
+        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + ';' + 'Domain=' + cookieDomain + '; ';
+      }
+    },
+    get: function (name) {
+    var nameEQ = name + '=';
+    var ca = document.cookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+      var c = ca[i];
+      while (c.charAt(0) === ' ') {
+        c = c.substring(1, c.length);
+      }
+      if (c.indexOf(nameEQ) === 0) {
+        var value_encoded = c.substring(nameEQ.length, c.length);
+        var value         = window.atob(value_encoded);
+        return value;
+      }
+    }
+    return undefined;
+    }
+  };
+
+  logger.info('\n' + 'initializing core module: started');
+  logger.info('\n' + 'state: started');
+
+  // ---------------------------------------------------------------------------
   // default property settings
   // ---------------------------------------------------------------------------
   this.props = {
@@ -84,46 +124,33 @@ function Translator(props) {
   logger.info('\n' + 'initializing core module: started');
   logger.info('\n' + 'state: started');
 
+  var translationDefaultSettings = {
+    "translatorName":         "google",
+    "translationEnabled":     false,
+    "translateAllPages":      true,
+    "useLanguageFromBrowser": true,
+    "translationLanguage":    "de",
+    "analysis":               true,
+    "personalization":        true
+  };
+
+  var translatorCookie = Cookie.get(self.props.cookieName);
+  if (!translatorCookie) {
+    logger.info('\n' + 'initializing translator cookie: ' + self.props.cookieName);
+    // enable and write all settings required for translation (translation cookie)
+    Cookie.set(
+      self.props.cookieName,
+      JSON.stringify(translationDefaultSettings),
+      self.props.cookieStorageDays,
+      self.props.cookieSameSite,
+      self.props.cookieDomain,
+      self.props.cookieSecure
+    );
+  }
+
   // ---------------------------------------------------------------------------
   // internal functions
   // ---------------------------------------------------------------------------
-
-  // ---------------------------------------------------------------------------
-  // Cookie()
-  // manage cookies
-  // ---------------------------------------------------------------------------
-  var Cookie = {
-    set: function (name, value, days, cookieSameSite, cookieDomain, cookieSecure) {
-      var value_encoded = window.btoa(value);
-      var expires = '; expires=Thu, 01 Jan 1970 00:00:00 UTC';
-      if (days>0) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-        expires = "; expires=" + date.toUTCString();
-      }
-      if (cookieSecure) {
-        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + '; ' + 'Domain=' + cookieDomain + '; ' + 'Secure=' + cookieSecure + ';';
-      } else {
-        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + ';' + 'Domain=' + cookieDomain + '; ';
-      }
-    },
-    get: function (name) {
-    var nameEQ = name + '=';
-    var ca = document.cookie.split(';');
-    for (var i = 0; i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) === ' ') {
-        c = c.substring(1, c.length);
-      }
-      if (c.indexOf(nameEQ) === 0) {
-        var value_encoded = c.substring(nameEQ.length, c.length);
-        var value         = window.atob(value_encoded);
-        return value;
-      }
-    }
-    return undefined;
-    }
-  };
 
   // ---------------------------------------------------------------------------
   // global event handler
@@ -486,11 +513,15 @@ function Translator(props) {
   // On 'agreeAll', enable ALL settings required for translation
   // ---------------------------------------------------------------------------
   function agreeAll() {
-    var translationSettings = gatherOptions(true);
-    var consentSettings     = {};
+    var consentSettings     = JSON.parse(Cookie.get(self.props.cookieConsentName));
+    var translationSettings = {};
 
-    // enable and write all settings required for translation (consent cookie)
-    consentSettings                 = JSON.parse(Cookie.get(self.props.cookieConsentName));
+    // enable all settings required for translation
+    translationSettings.analysis = true;
+    translationSettings.personalization = true;
+    translationSettings.translationEnabled = true;
+
+    // overload user consent settings (consent cookie)
     consentSettings.analysis        = translationSettings.analysis;
     consentSettings.personalization = translationSettings.personalization;
 
@@ -498,17 +529,19 @@ function Translator(props) {
       self.props.cookieConsentName,
       JSON.stringify(consentSettings),
       self.props.cookieStorageDays,
-      self.props.sameSite,
-      self.props.secure
+      self.props.cookieSameSite,
+      self.props.cookieDomain,
+      self.props.cookieSecure
     );
 
-    // enable and write all settings required for translation (translation cookie)
+    // write all settings required for translation (translation cookie)
     Cookie.set(
       self.props.cookieName,
       JSON.stringify(translationSettings),
       self.props.cookieStorageDays,
-      self.props.sameSite,
-      self.props.secure
+      self.props.cookieSameSite,
+      self.props.cookieDomain,
+      self.props.cookieSecure
     );
 
     self.$modal.modal('hide');
@@ -519,15 +552,17 @@ function Translator(props) {
   // process current settings from checkboxes for button `doNotAgree`
   // ---------------------------------------------------------------------------
   function doNotAgree() {
-    var settings = gatherOptions();
+    var translationSettings = gatherOptions();
 
-    settings.translationEnabled = false;
+    // disable all settings required for translation (translation cookie)
+    translationSettings.translationEnabled = false;
     Cookie.set(
       self.props.cookieName,
-      JSON.stringify(settings),
+      JSON.stringify(translationSettings),
       self.props.cookieStorageDays,
-      self.props.sameSite,
-      self.props.secure
+      self.props.cookieSameSite,
+      self.props.cookieDomain,
+      self.props.cookieSecure
     );
     self.$modal.modal('hide');
   }
@@ -537,29 +572,29 @@ function Translator(props) {
   // write current settings from checkboxes to cookie
   // ---------------------------------------------------------------------------
   function saveSettings() {
-    var settings;
-    var consentSettings = {};
+    var translationSettings = gatherOptions();
+    var consentSettings     = JSON.parse(Cookie.get(self.props.cookieConsentName));
 
     // update all cookies required for (google-)translation
     //
-    settings                        = gatherOptions();
-    consentSettings                 = JSON.parse(Cookie.get(self.props.cookieConsentName));
-    consentSettings.analysis        = settings.analysis;
-    consentSettings.personalization = settings.personalization;
+    consentSettings.analysis        = translationSettings.analysis;
+    consentSettings.personalization = translationSettings.personalization;
 
     Cookie.set(
       self.props.cookieConsentName,
       JSON.stringify(consentSettings),
       self.props.cookieStorageDays,
-      self.props.sameSite,
-      self.props.secure
+      self.props.cookieSameSite,
+      self.props.cookieDomain,
+      self.props.cookieSecure
     );
     Cookie.set(
       self.props.cookieName,
-      JSON.stringify(gatherOptions()),
+      JSON.stringify(translationSettings),
       self.props.cookieStorageDays,
-      self.props.sameSite,
-      self.props.secure
+      self.props.cookieSameSite,
+      self.props.cookieDomain,
+      self.props.cookieSecure
     );
     self.$modal.modal('hide');
   }

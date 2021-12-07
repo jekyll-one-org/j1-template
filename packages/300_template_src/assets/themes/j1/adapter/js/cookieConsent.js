@@ -137,7 +137,6 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       secure            = (url.protocol.includes('https')) ? true : false;
       contentLanguage   = '{{site.language}}';
       navigatorLanguage = navigator.language || navigator.userLanguage;
-      cookie_domain     = domain_enabled ? '.' + domain : hostname;             // set domain used by cookies
 
       // initialize state flag
       _this.state = 'pending';
@@ -174,6 +173,13 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
         var expires   = '{{cookie_options.expires}}';
         var same_site = '{{cookie_options.same_site}}';
 
+        // set domain used by cookies
+        if (domain != hostname) {
+          cookie_domain = domain_enabled ? '.' + domain : hostname;
+        } else {
+          cookie_domain = hostname;
+        }
+
         if ( j1.getState() === 'finished' ) {
           _this.setState('started');
           logger.info('\n' + 'state: ' + _this.getState());
@@ -197,12 +203,9 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
           logger.info('\n' + 'state: ' + _this.getState());
           logger.debug('\n' + 'module initialized successfully');
 
-          // Click events moved to Navigator (core)
-          //
-          // $('#quickLinksCookieButton').click(function(e) {
-          //   logger.info('\n' + 'call default action');
-          //   j1.cookieConsent.showDialog();
-          // });
+          // -------------------------------------------------------------------
+          // NOTE: Click events moved to Navigator (core)
+          // -------------------------------------------------------------------
 
           clearInterval(dependencies_met_page_ready);
         }
@@ -308,22 +311,27 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
           }
         }
 
-        // Managing providers for personalization OptIn/Out (Comments|Ads)
+        // Managing providers using personalization OptIn/Out
+        // (Comments|Ads|Translation)
         //
         if (!user_consent.analysis || !user_consent.personalization) {
-          // expire consent|state cookies to session
-          j1.expireCookie({ name: cookie_names.user_state });
-          j1.expireCookie({ name: cookie_names.user_consent });
-          j1.expireCookie({ name: cookie_names.user_translate });
 
+          // overload cookie consent settings
+          user_translate.analysis         = user_consent.analysis;
+          user_translate.personalization  = user_consent.personalization;
+          // disable translation service
           user_translate.translationEnabled = false;
+
           cookie_written = j1.writeCookie({
             name:     cookie_names.user_translate,
             data:     user_translate,
-            secure:   secure,
-            expires:  365
+            secure:   secure
           });
 
+          // expire permanent cookies to session
+          j1.expireCookie({ name: cookie_names.user_state });
+          j1.expireCookie({ name: cookie_names.user_consent });
+          j1.expireCookie({ name: cookie_names.user_translate });
         }
         if (moduleOptions.reloadPageOnChange) {
           // reload current page (skip cache)
@@ -337,14 +345,28 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
           j1.removeCookie({ name: item, domain: cookie_domain });
         });
 
-        // Managing providers for personalization OptIn/Out (Comments|Ads)
+        // Managing providers using personalization OptIn/Out
+        // (Comments|Ads|Translation)
         //
         if (!user_consent.analysis || !user_consent.personalization) {
-          // expire consent|state cookies to session
+          // overload cookie consent settings
+          user_translate.analysis         = user_consent.analysis;
+          user_translate.personalization  = user_consent.personalization;
+          // disable translation service
+          user_translate.translationEnabled = false;
+
+          cookie_written = j1.writeCookie({
+            name:     cookie_names.user_translate,
+            data:     user_translate,
+            secure:   secure
+          });
+
+          // expire permanent cookies to session
           j1.expireCookie({ name: cookie_names.user_state });
           j1.expireCookie({ name: cookie_names.user_consent });
           j1.expireCookie({ name: cookie_names.user_translate });
         }
+        
         if (moduleOptions.reloadPageOnChange) {
           // reload current page (skip cache)
           location.reload(true);

@@ -324,22 +324,24 @@ var j1 = (function () {
 
         // final update of the user state cookie before browser page|tab
         // get closed
-        if (user_state) {
+//      if (user_state) {
           user_state.session_active     = false;
           user_state.last_session_ts    = timestamp_now;
 
           if (!user_consent.analysis || !user_consent.personalization)  {
+
             // rewrite consent|state cookies to session
-            logger.debug('\n' + 'write to cookie : ' + cookie_names.user_consent);
-            cookie_written = j1.writeCookie({
-              name:     cookie_names.user_consent,
-              data:     user_consent,
-              secure:   secure,
-              expires:  0
-            });
-            if (!cookie_written) {
-              logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_consent);
-            }
+            // logger.debug('\n' + 'write to cookie : ' + cookie_names.user_consent);
+            // cookie_written = j1.writeCookie({
+            //   name:     cookie_names.user_consent,
+            //   data:     user_consent,
+            //   secure:   secure,
+            //   expires:  0
+            // });
+            // if (!cookie_written) {
+            //   logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_consent);
+            // }
+
             logger.debug('\n' + 'write to cookie : ' + cookie_names.user_state);
             cookie_written = j1.writeCookie({
               name:     cookie_names.user_state,
@@ -347,9 +349,11 @@ var j1 = (function () {
               secure:   secure,
               expires:  0
             });
-            if (!cookie_written) {
-                logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_consent);
-            }
+
+            // if (!cookie_written) {
+            //     logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_consent);
+            // }
+
           } else {
             logger.debug('\n' + 'write to cookie : ' + cookie_names.user_state);
             cookie_written = j1.writeCookie({
@@ -358,14 +362,17 @@ var j1 = (function () {
               secure:   secure,
               expires:  365
             });
-            if (!cookie_written) {
-                logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
-            }
+
+            // if (!cookie_written) {
+            //     logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
+            // }
+
           }
-        } else {
-          // jadams, 2021-07-11: on beforeunload, a user state cookie is expected
-          logger.error('\n' + 'missing cookie detected: ' + cookie_names.user_state);
-        }
+//      }
+        // else {
+        //   // jadams, 2021-07-11: on beforeunload, a user state cookie is expected
+        //   logger.error('\n' + 'missing cookie detected: ' + cookie_names.user_state);
+        // }
       }); // END beforeunload
 
       // -----------------------------------------------------------------------
@@ -383,9 +390,10 @@ var j1 = (function () {
                             secure:   secure,
                             expires:  0
                           });
-      if (!cookie_written) {
-        logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
-      }
+
+      // if (!cookie_written) {
+      //   logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
+      // }
 
       user_state    =  j1.existsCookie(cookie_names.user_state)
                         ? j1.readCookie(cookie_names.user_state)
@@ -395,9 +403,10 @@ var j1 = (function () {
                             secure:   secure,
                             expires:  365
                           });
-      if (!cookie_written) {
-        logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
-      }
+
+      // if (!cookie_written) {
+      //   logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
+      // }
 
       // jadams, 2021-12-06: Access to cookies for this site failed.
       // Possibly, a third-party domain or an attacker tries to access it.
@@ -424,28 +433,33 @@ var j1 = (function () {
 
       if (!user_consent.analysis || !user_consent.personalization)  {
         // rewrite consent|state cookies to session
-        logger.debug('\n' + 'write to cookie : ' + cookie_names.user_state);
-        cookie_written = j1.writeCookie({
-          name:     cookie_names.user_state,
-          data:     user_state,
-          secure:   secure,
-          expires:  0
-        });
-        if (!cookie_written) {
-          logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
-        }
-      } else {
-        logger.debug('\n' + 'write to cookie : ' + cookie_names.user_state);
-        cookie_written = j1.writeCookie({
-          name:     cookie_names.user_state,
-          data:     user_state,
-          secure:   secure,
-          expires:  365
-        });
-        if (!cookie_written) {
-          logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
-        }
+        // logger.debug('\n' + 'write to cookie : ' + cookie_names.user_state);
+        // cookie_written = j1.writeCookie({
+        //   name:     cookie_names.user_state,
+        //   data:     user_state,
+        //   secure:   secure,
+        //   expires:  0
+        // });
+        // if (!cookie_written) {
+        //   logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
+        // }
+        // expire permanent cookies to session
+        j1.expireCookie({ name: cookie_names.user_state });
+        j1.expireCookie({ name: cookie_names.user_consent });
+        j1.expireCookie({ name: cookie_names.user_translate });
       }
+      // else {
+      //   logger.debug('\n' + 'write to cookie : ' + cookie_names.user_state);
+      //   cookie_written = j1.writeCookie({
+      //     name:     cookie_names.user_state,
+      //     data:     user_state,
+      //     secure:   secure,
+      //     expires:  365
+      //   });
+      //   if (!cookie_written) {
+      //     logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_state);
+      //   }
+      // }
 
       // jadams, 2021-11-10: anchor links of type #void are used/managed
       // by the FAB module. No geneneraL use for NOW.
@@ -532,9 +546,9 @@ var j1 = (function () {
             expires:  0
           });
 
-          if (!cookie_written) {
-            logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
-          }
+          // if (!cookie_written) {
+          //   logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
+          // }
 
           j1.setState(curr_state);
           logger.info('\n' + 'state: ' + j1.getState());
@@ -579,9 +593,10 @@ var j1 = (function () {
               secure:   secure,
               expires:  0
             });
-            if (!cookie_written) {
-                logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
-            }
+
+            // if (!cookie_written) {
+            //     logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
+            // }
 
             j1.setState(curr_state);
             logger.info('\n' + 'state: ' + j1.getState());
@@ -642,9 +657,9 @@ var j1 = (function () {
         expires:  0
       });
 
-      if (!cookie_written) {
-        logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
-      }
+      // if (!cookie_written) {
+      //   logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
+      // }
 
       // NOTE: asynchronous calls should be rewitten to xhrData
       // initialize page resources for blocks
@@ -664,9 +679,10 @@ var j1 = (function () {
         secure:   secure,
         expires:  0
       });
-      if (!cookie_written) {
-        logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
-      }
+
+      // if (!cookie_written) {
+      //   logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
+      // }
 
       // -----------------------------------------------------------------------
       // additional BS helpers from j1.core
@@ -1012,9 +1028,10 @@ var j1 = (function () {
             secure:   secure,
             expires:  0
           });
-          if (!cookie_written) {
-            logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
-          }
+
+          // if (!cookie_written) {
+          //   logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
+          // }
 
           providerPermissions = user_session.provider_permissions;
           categoryAllowed     = providerPermissions.includes(user_session.page_permission);
@@ -1177,10 +1194,10 @@ var j1 = (function () {
             }
 
             // update sidebar for changed theme data
-            logger.info('\n' + 'update sidebar');
-            user_state        = j1.readCookie(cookie_names.user_state);
-            current_user_data = j1.mergeData(user_session, user_state);
-            j1.core.navigator.updateSidebar(current_user_data);
+            // logger.info('\n' + 'update sidebar');
+            // user_state        = j1.readCookie(cookie_names.user_state);
+            // current_user_data = j1.mergeData(user_session, user_state);
+            // j1.core.navigator.updateSidebar(current_user_data);
 
             // Set|Log status
             state = 'finished';
@@ -1305,9 +1322,10 @@ var j1 = (function () {
               secure:   secure,
               expires:  0
           });
-          if (!cookie_written) {
-            logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
-          }
+
+          // if (!cookie_written) {
+          //   logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_session);
+          // }
 
           // show|hide translator icon (currently NOT supported)
           // if (translation_enabled) {
@@ -1359,10 +1377,10 @@ var j1 = (function () {
           }
 
           // update sidebar for changed theme data
-          logger.info('\n' + 'update sidebar');
-          user_state        = j1.readCookie(cookie_names.user_state);
-          current_user_data = j1.mergeData(user_session, user_state);
-          j1.core.navigator.updateSidebar(current_user_data);
+          // logger.info('\n' + 'update sidebar');
+          // user_state        = j1.readCookie(cookie_names.user_state);
+          // current_user_data = j1.mergeData(user_session, user_state);
+          // j1.core.navigator.updateSidebar(current_user_data);
 
           // set|log status
           state = 'finished';
@@ -1772,18 +1790,12 @@ var j1 = (function () {
           name:         '',
           path:         '{{cookie_options.path}}',
           expires:      '{{cookie_options.expires}}',
-          domain:       true,
+          domain:       'localhost',
           samesite:     '{{cookie_options.same_site}}',
           http_only:    '{{cookie_options.http_only}}',
           secure:       '{{cookie_options.secure}}'
       };
       var settings = $.extend(defaults, options);
-
-      // if (settings.domain) {
-      //   settings.domain =
-      // } else {
-      //
-      // }
 
       cookie_data.timestamp = timestamp_now;
 
@@ -1807,7 +1819,14 @@ var j1 = (function () {
 
       stringifiedAttributes += '; ' + 'SameSite=' + settings.samesite;
 
-      settings.domain = settings.domain ? '.' + domain : hostname;
+      // settings.domain = settings.domain ? '.' + domain : hostname;
+
+      if (domain != hostname) {
+        settings.domain = domain_enabled ? '.' + domain : hostname;
+      } else {
+        settings.domain = hostname;
+      }
+
       stringifiedAttributes += '; ' + 'domain=' + settings.domain;
 
       if (settings.secure) {
@@ -1894,7 +1913,13 @@ var j1 = (function () {
       };
       var settings  = $.extend(defaults, options);
 
-      settings.domain = domain_enabled ? '.' + domain : hostname;
+//    settings.domain = domain_enabled ? '.' + domain : hostname;
+
+      if (domain != hostname) {
+        settings.domain = domain_enabled ? '.' + domain : hostname;
+      } else {
+        settings.domain = hostname;
+      }
 
       var dc        = document.cookie;                                            // all cookies in page
       var end       = dc.length;                                                  // default to end of the string
