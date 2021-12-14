@@ -109,6 +109,7 @@ j1.adapter['translator'] = (function (j1, window) {
   var head;
   var script;
   var languageList;
+  var domainAttribute;
 
   // ---------------------------------------------------------------------------
   // helper functions
@@ -118,55 +119,56 @@ j1.adapter['translator'] = (function (j1, window) {
   // setCookie()
   // writes a FLAT cookie (not using an encoded JSON string)
   // ---------------------------------------------------------------------------
-  function setCookie(options /*cName, cValue, expDays*/) {
-    var date            = new Date();
-    var timestamp_now   = date.toISOString()
-    var url             = new liteURL(window.location.href);
-    var baseUrl         = url.origin;;
-    var hostname        = url.hostname;
-    var domain          = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
-    var domain_enabled  = '{{cookie_options.domain}}';
-    var defaults        = {};
-    var settings;
-    var document_cookie;
-    var stringifiedAttributes = '';
-
-    defaults = {
-        name: '',
-        path: '/',
-        expires: 0,
-        domain: true,
-        samesite: 'Lax',
-        http_only: false,
-        secure: false
-    };
-    settings = $.extend(defaults, options);
-
-    stringifiedAttributes += '; ' + 'path=' + settings.path;
-
-    if (settings.expires > 0) {
-      date.setTime(date.getTime() + (settings.expires * 24 * 60 * 60 * 1000));
-      stringifiedAttributes += '; ' + 'expires=' + date.toUTCString();
-    }
-
-    if (domain != hostname) {
-      settings.domain = domain_enabled ? '.' + domain : hostname;
-    } else {
-      settings.domain = hostname;
-    }
-    stringifiedAttributes += '; ' + 'domain=' + settings.domain;
-
-    stringifiedAttributes += '; ' + 'SameSite=' + settings.samesite;
-
-    if (settings.secure) {
-      stringifiedAttributes += '; ' + 'secure=' + settings.secure;
-    }
-
-    // document_cookie = settings.name + '=' + settings.data  + '; path=' + settings.path + '; ' + 'domain=' + settings.domain + '; ' + 'SameSite=' + settings.samesite + ';';
-    document_cookie = settings.name + '=' + settings.data + stringifiedAttributes;
-
-    document.cookie = document_cookie;
-  };
+//   function setCookie(options /*cName, cValue, expDays*/) {
+//     var date            = new Date();
+//     var timestamp_now   = date.toISOString()
+//     var url             = new liteURL(window.location.href);
+//     var baseUrl         = url.origin;;
+//     var hostname        = url.hostname;
+//     var domain          = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+//     var domain_enabled  = '{{cookie_options.domain}}';
+//     var defaults        = {};
+//     var settings;
+//     var document_cookie;
+//     var stringifiedAttributes = '';
+//
+//     defaults = {
+//         name: '',
+//         path: '/',
+//         expires: 0,
+//         domain: true,
+//         samesite: 'Lax',
+//         http_only: false,
+//         secure: false
+//     };
+//     settings = $.extend(defaults, options);
+//
+//     stringifiedAttributes += '; ' + 'path=' + settings.path;
+//
+//     if (settings.expires > 0) {
+//       date.setTime(date.getTime() + (settings.expires * 24 * 60 * 60 * 1000));
+//       stringifiedAttributes += '; ' + 'expires=' + date.toUTCString();
+//     }
+//
+//     if (domain != hostname) {
+// //    settings.domain = domain_enabled ? '.' + domain : hostname;
+//       settings.domain = domain_enabled ? domain : hostname;
+//     } else {
+//       settings.domain = hostname;
+//     }
+//     stringifiedAttributes += '; ' + 'domain=' + settings.domain;
+//
+//     stringifiedAttributes += '; ' + 'SameSite=' + settings.samesite;
+//
+//     if (settings.secure) {
+//       stringifiedAttributes += '; ' + 'secure=' + settings.secure;
+//     }
+//
+//     // document_cookie = settings.name + '=' + settings.data  + '; path=' + settings.path + '; ' + 'domain=' + settings.domain + '; ' + 'SameSite=' + settings.samesite + ';';
+//     document_cookie = settings.name + '=' + settings.data + stringifiedAttributes;
+//
+//     document.cookie = document_cookie;
+//   };
 
   // ---------------------------------------------------------------------------
   // Main object
@@ -237,11 +239,19 @@ j1.adapter['translator'] = (function (j1, window) {
         var same_site = '{{cookie_options.same_site}}';
         user_consent    = j1.readCookie(cookie_names.user_consent);
 
+  //       // set domain used by cookies
+  //       if ((domain != hostname) && domain_enabled) {
+  // //      settings.domain = domain_enabled ? '.' + domain : hostname;
+  //         settings.domain =  domain;
+  //       } else {
+  //         settings.domain = ';';
+  //       }
+
         // set domain used by cookies
-        if (domain != hostname) {
-          cookie_domain = domain_enabled ? '.' + domain : hostname;
-        } else {
-          cookie_domain = hostname;
+        if (settings.domain == 'auto') {
+          domainAttribute = domain ;
+        } else  {
+          domainAttribute = hostname;
         }
 
         // load|initialize user translate cookie
@@ -316,7 +326,7 @@ j1.adapter['translator'] = (function (j1, window) {
             cookieName:               cookie_names.user_translate,              // name of the translator cookie
             cookieStorageDays:        expires,                                  // lifetime of a cookie [0..365], 0: session cookie
             cookieSameSite:           same_site,                                // restrict consent cookie
-            cookieDomain:             cookie_domain,                            // set domain (hostname|domain)
+            cookieDomain:             domainAttribute,                          // set domain (hostname|domain)
             cookieSecure:             secure,                                   // set
             cookieConsentName:        moduleOptions.cookieConsentName,          // the name of the Cookie Consent Cookie (secondary data)
             disableLanguageSelector:  moduleOptions.disableLanguageSelector,    // disable language dropdown for translation in dialog (modal)
@@ -429,20 +439,20 @@ j1.adapter['translator'] = (function (j1, window) {
       var baseUrl        = url.origin;;
       var hostname       = url.hostname;
       var domain         = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
-      var domain_enabled = '{{cookie_options.domain}}';
+      var options_domain = '{{cookie_options.domain}}';
       var same_site      = '{{cookie_options.same_site}}';
 
       var selectedTranslationLanguage;
       var srcLang;
       var destLang;
       var transCode;
-
+      var domainAttribute;
 
       // set domain used by cookies
-      if (domain != hostname) {
-        cookie_domain = domain_enabled ? '.' + domain : hostname;
-      } else {
-        cookie_domain = hostname;
+      if (options_domain == 'auto') {
+        domainAttribute = domain ;
+      } else  {
+        domainAttribute = hostname;
       }
 
       selectedTranslationLanguage = msDropdown.value;
@@ -457,7 +467,7 @@ j1.adapter['translator'] = (function (j1, window) {
 
       // translation language MUST be DIFFERENT from content language
       if (srcLang == selectedTranslationLanguage ) {
-        Cookies.remove('googtrans', { domain: cookie_domain });
+        Cookies.remove('googtrans', { domain: domainAttribute });
         Cookies.remove('googtrans', { domain: hostname });
         Cookies.remove('googtrans');
         location.reload(true);
@@ -468,7 +478,7 @@ j1.adapter['translator'] = (function (j1, window) {
       transCode = '/' + srcLang + '/' + selectedTranslationLanguage;
 
       // remove all googtrans cookies that POTENTIALLY exists
-      Cookies.remove('googtrans', { domain: cookie_domain });
+      Cookies.remove('googtrans', { domain: domainAttribute });
       Cookies.remove('googtrans', { domain: hostname });
       Cookies.remove('googtrans');
 
@@ -480,7 +490,7 @@ j1.adapter['translator'] = (function (j1, window) {
 
       // write the googtrans cookie (w/o DOMAIN?!)
       Cookies.set('googtrans', transCode, {
-        Domain:    cookie_domain,
+        Domain:    domainAttribute,
         sameSite:  'Lax'
       });
 

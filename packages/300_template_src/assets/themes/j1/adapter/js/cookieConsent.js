@@ -137,6 +137,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       secure            = (url.protocol.includes('https')) ? true : false;
       contentLanguage   = '{{site.language}}';
       navigatorLanguage = navigator.language || navigator.userLanguage;
+      var domainAttribute;
 
       // initialize state flag
       _this.state = 'pending';
@@ -174,10 +175,10 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
         var same_site = '{{cookie_options.same_site}}';
 
         // set domain used by cookies
-        if (domain != hostname) {
-          cookie_domain = domain_enabled ? '.' + domain : hostname;
-        } else {
-          cookie_domain = hostname;
+        if (settings.domain == 'auto') {
+          domainAttribute = domain ;
+        } else  {
+          domainAttribute = hostname;
         }
 
         if ( j1.getState() === 'finished' ) {
@@ -190,7 +191,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
             cookieName:             cookie_names.user_consent,                  // name of the consent cookie
             cookieStorageDays:      expires,                                    // lifetime of a cookie [0..365], 0: session cookie
             cookieSameSite:         same_site,                                  // restrict consent cookie
-            cookieDomain:           cookie_domain,                              // set domain (hostname|domain)
+            cookieDomain:           domainAttribute,                            // set domain (hostname|domain)
             dialogLanguage:         moduleOptions.dialogLanguage,               // language for the dialog (modal)
             whitelisted:            moduleOptions.whitelisted,                  // pages NOt dialog is shown
             reloadPageOnChange:     moduleOptions.reloadPageOnChange,           // reload if setzings has changed
@@ -366,7 +367,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
           j1.expireCookie({ name: cookie_names.user_consent });
           j1.expireCookie({ name: cookie_names.user_translate });
         }
-        
+
         if (moduleOptions.reloadPageOnChange) {
           // reload current page (skip cache)
           location.reload(true);
