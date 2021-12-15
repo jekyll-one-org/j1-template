@@ -1615,19 +1615,18 @@ var j1 = (function () {
     //    context/HTTPS).
     // -------------------------------------------------------------------------
     writeCookie: function (options /*name, data, [path, expires, domain, samesite, http_only, secure]*/) {
-      var date            = new Date();
-      var timestamp_now   = date.toISOString()
-      var url             = new liteURL(window.location.href);
-      var baseUrl         = url.origin;;
-      var hostname        = url.hostname;
-      var domain          = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
-      var domain_enabled  = '{{cookie_options.domain}}';
-      var cookie_data     = {};
+      var date                  = new Date();
+      var timestamp_now         = date.toISOString()
+      var url                   = new liteURL(window.location.href);
+      var baseUrl               = url.origin;;
+      var hostname              = url.hostname;
+      var domain                = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+      var stringifiedAttributes = '';
+      var cookie_data           = {};
       var data_json;
       var data_encoded;
       var expires;
       var domainAttribute;
-      var stringifiedAttributes = '';
 
       var defaults = {
           data:         {},
@@ -1654,26 +1653,27 @@ var j1 = (function () {
         data_encoded  = window.btoa(data_json);
       }
 
-      stringifiedAttributes += '; ' + 'path=' + settings.path;
+      stringifiedAttributes += '; ' + 'Path=' + settings.path;
 
       if (settings.expires > 0) {
         date.setTime(date.getTime() + (settings.expires * 24 * 60 * 60 * 1000));
-        stringifiedAttributes += '; ' + 'expires=' + date.toUTCString();
+        stringifiedAttributes += '; ' + 'Expires=' + date.toUTCString();
       }
 
       stringifiedAttributes += '; ' + 'SameSite=' + settings.samesite;
 
       // set domain used by cookies
       if (settings.domain == 'auto') {
-        domainAttribute = domain ;
-        stringifiedAttributes += '; ' + 'domain=' + domainAttribute;
+        domainAttribute = domain;
+        stringifiedAttributes += '; ' + 'Domain=' + domainAttribute;
       } else  {
-        domainAttribute = hostname;
-        stringifiedAttributes += '; ' + 'domain=' + domainAttribute;
+        // domainAttribute = hostname;
+        domainAttribute = '';
+        stringifiedAttributes += '; ' + 'Domain=' + domainAttribute;
       }
 
-      if (settings.secure) {
-        stringifiedAttributes += '; ' + 'secure=' + settings.secure;
+      if (settings.secure == 'true') {
+        stringifiedAttributes += '; ' + 'Secure=' + settings.secure;
       }
 
       // write the cookie
@@ -1724,12 +1724,13 @@ var j1 = (function () {
       if (settings.domain == 'auto') {
         domainAttribute = domain ;
       } else  {
-        domainAttribute = hostname;
+        // domainAttribute = hostname;
+        domainAttribute = '';
       }
 
       if (j1.findCookie(settings.name)) {
         // clear cookie CONTENT and set expiry date in the PAST
-        document.cookie = settings.name + '=; domain=' + settings.domain + '; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+        document.cookie = settings.name + '=; Domain=' + domainAttribute + '; Expires=Thu, 01 Jan 1970 00:00:00 UTC; Path=/;';
         return true;
       } else {
         return false;
@@ -1759,7 +1760,6 @@ var j1 = (function () {
       var baseUrl         = url.origin;;
       var hostname        = url.hostname;
       var domain          = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
-      var domain_enabled  = '{{cookie_options.domain}}';
       var domainAttribute;
 
       var defaults = {
@@ -1776,7 +1776,8 @@ var j1 = (function () {
       if (settings.domain == 'auto') {
         domainAttribute = domain ;
       } else  {
-        domainAttribute = hostname;
+        // domainAttribute = hostname;
+        domainAttribute = '';
       }
 
       var dc        = document.cookie;                                            // all cookies in page
@@ -1806,10 +1807,10 @@ var j1 = (function () {
 
       // expire cookie to session
       content = decodeURI(dc.substring(begin + prefix.length, end) ).replace(/"/g, '');
-      if (settings.secure) {
-        document.cookie = settings.name + '=' + content +'; path=' + settings.path + '; ' + 'SameSite=' + settings.samesite + '; ' + 'Domain=' + domainAttribute + '; secure' + '; ';
+      if (settings.secure == 'true') {
+        document.cookie = settings.name + '=' + content +'; Path=' + settings.path + '; ' + 'SameSite=' + settings.samesite + '; ' + 'Domain=' + domainAttribute + '; Secure' + '; ';
       } else {
-        document.cookie = settings.name + '=' + content +'; path=' + settings.path + '; ' + 'SameSite=' + settings.samesite + '; ' + 'Domain=' + domainAttribute + '; ';
+        document.cookie = settings.name + '=' + content +'; Path=' + settings.path + '; ' + 'SameSite=' + settings.samesite + '; ' + 'Domain=' + domainAttribute + '; ';
       }
 
       return true;

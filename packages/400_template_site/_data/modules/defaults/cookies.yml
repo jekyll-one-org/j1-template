@@ -96,14 +96,14 @@ defaults:
   #   Check if cookies created/available
   #
   #   values:                           [false|true]
-  #   default:                          false
+  #   default:                          true
   #
   # ----------------------------------------------------------------------------
   #
-  check_cookies:                        false
+  check_cookies:                        true
   path:                                 /
   domain:                               false
-  expires:                              0
+  expires:                              365
   same_site:                            Strict
   http_only:                            false
   secure:                               false

@@ -514,7 +514,7 @@ function Translator(props) {
   // ---------------------------------------------------------------------------
   function agreeAll() {
     var consentSettings     = JSON.parse(Cookie.get(self.props.cookieConsentName));
-    var translationSettings = {};
+    var translationSettings = JSON.parse(Cookie.get(self.props.cookieName));
 
     // enable all settings required for translation
     translationSettings.analysis = true;

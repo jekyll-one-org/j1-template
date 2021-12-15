@@ -45,7 +45,7 @@ const hostCheckDisabled =               !!"String(process.env.DISABLE_WP_HOST_CH
 
 // WP Development Server config variables
 // -----------------------------------------------------------------------------
-const devServerHost =                   dockerEnv ? '0.0.0.0' : 'localhost';
+const devServerHost =                   dockerEnv ? '0.0.0.0' : 'win10pc.ja.home';
 const devServerPageOpen =               dockerEnv ? false : true;
 const devServerPort =                   process.env.WP_JEKYLL_PORT || 50000;
 const distFolder =                      path.resolve(__dirname, './dist');

@@ -98,13 +98,14 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
   var baseUrl;
   var hostname;
   var domain;
-  var domain_enabled;
+  var cookie_option_domain;
   var cookie_domain;
   var secure;
   var logText;
   var cookie_written;
   var contentLanguage;
   var navigatorLanguage;
+  var domainAttribute;
 
   // NOTE: RegEx for tracking_id: ^(G|UA|YT|MO)-[a-zA-Z0-9-]+$
   // See: https://stackoverflow.com/questions/20411767/how-to-validate-google-analytics-tracking-id-using-a-javascript-function/20412153
@@ -126,18 +127,17 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       // -----------------------------------------------------------------------
       // globals
       // -----------------------------------------------------------------------
-      _this             = j1.adapter.cookieConsent;
-      logger            = log4javascript.getLogger('j1.adapter.cookieConsent');
-      cookie_names      = j1.getCookieNames();
-      url               = new liteURL(window.location.href);
-      baseUrl           = url.origin;
-      hostname          = url.hostname;
-      domain            = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
-      domain_enabled    = '{{cookie_options.domain}}';
-      secure            = (url.protocol.includes('https')) ? true : false;
-      contentLanguage   = '{{site.language}}';
-      navigatorLanguage = navigator.language || navigator.userLanguage;
-      var domainAttribute;
+      _this                 = j1.adapter.cookieConsent;
+      logger                = log4javascript.getLogger('j1.adapter.cookieConsent');
+      cookie_names          = j1.getCookieNames();
+      url                   = new liteURL(window.location.href);
+      baseUrl               = url.origin;
+      hostname              = url.hostname;
+      domain                = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+      cookie_option_domain  = '{{cookie_options.domain}}';
+      secure                = (url.protocol.includes('https')) ? true : false;
+      contentLanguage       = '{{site.language}}';
+      navigatorLanguage     = navigator.language || navigator.userLanguage;
 
       // initialize state flag
       _this.state = 'pending';
@@ -171,14 +171,15 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       // initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (function (options) {
-        var expires   = '{{cookie_options.expires}}';
-        var same_site = '{{cookie_options.same_site}}';
+        var expires     = '{{cookie_options.expires}}';
+        var same_site   = '{{cookie_options.same_site}}';
 
         // set domain used by cookies
-        if (settings.domain == 'auto') {
+        if (cookie_option_domain == 'auto') {
           domainAttribute = domain ;
         } else  {
-          domainAttribute = hostname;
+          // domainAttribute = hostname;
+          domainAttribute = '';
         }
 
         if ( j1.getState() === 'finished' ) {
@@ -191,6 +192,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
             cookieName:             cookie_names.user_consent,                  // name of the consent cookie
             cookieStorageDays:      expires,                                    // lifetime of a cookie [0..365], 0: session cookie
             cookieSameSite:         same_site,                                  // restrict consent cookie
+            cookieSecure:           secure,                                     // only sent to the server with an encrypted request over HTTPS
             cookieDomain:           domainAttribute,                            // set domain (hostname|domain)
             dialogLanguage:         moduleOptions.dialogLanguage,               // language for the dialog (modal)
             whitelisted:            moduleOptions.whitelisted,                  // pages NOt dialog is shown

@@ -98,8 +98,7 @@ j1.adapter['translator'] = (function (j1, window) {
   var baseUrl;
   var hostname;
   var domain;
-  var cookie_domain;
-  var domain_enabled;
+  var cookie_option_domain;
   var secure;
   var logText;
   var cookie_written;
@@ -189,7 +188,6 @@ j1.adapter['translator'] = (function (j1, window) {
       baseUrl               = url.origin;
       hostname              = url.hostname;
       domain                = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
-      domain_enabled        = '{{cookie_options.domain}}';
       secure                = (url.protocol.includes('https')) ? true : false;
       navigator_language    = navigator.language || navigator.userLanguage;     // userLanguage for MS IE compatibility
       translation_language  = navigator_language.split('-')[0];
@@ -235,23 +233,18 @@ j1.adapter['translator'] = (function (j1, window) {
       // initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (function (options) {
-        var expires   = '{{cookie_options.expires}}';
-        var same_site = '{{cookie_options.same_site}}';
-        user_consent    = j1.readCookie(cookie_names.user_consent);
+        var expires       = '{{cookie_options.expires}}';
+        var same_site     = '{{cookie_options.same_site}}';
+        var option_domain = '{{cookie_options.domain}}';
 
-  //       // set domain used by cookies
-  //       if ((domain != hostname) && domain_enabled) {
-  // //      settings.domain = domain_enabled ? '.' + domain : hostname;
-  //         settings.domain =  domain;
-  //       } else {
-  //         settings.domain = ';';
-  //       }
+        user_consent      = j1.readCookie(cookie_names.user_consent);
 
         // set domain used by cookies
-        if (settings.domain == 'auto') {
+        if (option_domain == 'auto') {
           domainAttribute = domain ;
         } else  {
-          domainAttribute = hostname;
+          // domainAttribute = hostname;
+          domainAttribute = '';
         }
 
         // load|initialize user translate cookie
@@ -262,9 +255,9 @@ j1.adapter['translator'] = (function (j1, window) {
           cookie_written = j1.writeCookie({
             name:     cookie_names.user_translate,
             data:     user_translate,
-            samesite: 'Strict',
+            samesite: same_site,
             secure:   secure,
-            expires:  365
+            expires:  expires
           });
         }
 
@@ -295,7 +288,7 @@ j1.adapter['translator'] = (function (j1, window) {
           }
 
           // load|set user translate cookie
-          user_translate = j1.readCookie(cookie_names.user_translate);
+          user_consent = j1.readCookie(cookie_names.user_consent);
           if (!user_consent.analysis || !user_consent.personalization) {
             // disable translation service
             user_translate.translationEnabled = false;
@@ -351,7 +344,7 @@ j1.adapter['translator'] = (function (j1, window) {
           } else {
             if (moduleOptions.translatorName === 'google') {
               // remove all googtrans cookies that POTENTIALLY exists
-              Cookies.remove('googtrans', { domain: cookie_domain });
+              Cookies.remove('googtrans', { domain: domainAttribute });
               Cookies.remove('googtrans', { domain: hostname });
               Cookies.remove('googtrans');
             }
@@ -430,30 +423,30 @@ j1.adapter['translator'] = (function (j1, window) {
     // the selection for a translation|language
     // -------------------------------------------------------------------------
     cbGoogle: function () {
-      var logger         = log4javascript.getLogger('j1.adapter.translator.cbGoogle');
-      var cookie_names   = j1.getCookieNames();
-      var user_consent   = j1.readCookie(cookie_names.user_consent);
-      var user_translate = j1.readCookie(cookie_names.user_translate);
-      var msDropdown     = document.getElementById('dropdownJSON').msDropdown;
-      var url            = new liteURL(window.location.href);
-      var baseUrl        = url.origin;;
-      var hostname       = url.hostname;
-      var domain         = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
-      var options_domain = '{{cookie_options.domain}}';
-      var same_site      = '{{cookie_options.same_site}}';
-
-      var selectedTranslationLanguage;
+      var logger                = log4javascript.getLogger('j1.adapter.translator.cbGoogle');
+      var msDropdown            = document.getElementById('dropdownJSON').msDropdown;
+//    var cookie_names          = j1.getCookieNames();
+//    var user_consent          = j1.readCookie(cookie_names.user_consent);
+//    var user_translate        = j1.readCookie(cookie_names.user_translate);
+//    var url                   = new liteURL(window.location.href);
+//    var baseUrl               = url.origin;;
+//    var hostname              = url.hostname;
+//    var domain                = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+//    var cookie_option_domain  = '{{cookie_options.domain}}';
+//    var same_site             = '{{cookie_options.same_site}}';
       var srcLang;
       var destLang;
       var transCode;
       var domainAttribute;
+      var selectedTranslationLanguage;
 
       // set domain used by cookies
-      if (options_domain == 'auto') {
-        domainAttribute = domain ;
-      } else  {
-        domainAttribute = hostname;
-      }
+      // if (cookie_option_domain == 'auto') {
+      //   domainAttribute = domain ;
+      // } else  {
+      //   // domainAttribute = hostname;
+      //   domainAttribute = '';
+      // }
 
       selectedTranslationLanguage = msDropdown.value;
       logger.info('\n' + 'selected translation language: ' + selectedTranslationLanguage);
@@ -484,15 +477,11 @@ j1.adapter['translator'] = (function (j1, window) {
 
       // -----------------------------------------------------------------------
       // NOTE: googtrans cookie will be rewritten (by Google!?) for
-      // attributes 'SameSite' and potentially 'Domain'. This results
-      // for 'SameSite' in an empty field!
+      // attributes 'SameSite' and 'Domain'. This results for 'SameSite'
+      // in an empty field and two cookies (host+domain) if domain option
+      // is enabled!!!
       // -----------------------------------------------------------------------
-
-      // write the googtrans cookie (w/o DOMAIN?!)
-      Cookies.set('googtrans', transCode, {
-        Domain:    domainAttribute,
-        sameSite:  'Lax'
-      });
+      Cookies.set('googtrans', transCode);
 
       // reload current page (skip cache)
       location.reload(true);

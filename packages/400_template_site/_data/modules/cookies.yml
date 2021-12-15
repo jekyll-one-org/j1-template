@@ -24,10 +24,9 @@ description:
 # User configuration settings
 #
 settings:
-  check_cookies:                        false
-  expires:                              365
-  domain:                               false
-  same_site:                            Lax
+  check_cookies:                        true
+  domain:                               auto
+# same_site:                            Lax
 
 # ------------------------------------------------------------------------------
 # END config
