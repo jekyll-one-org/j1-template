@@ -243,7 +243,6 @@ j1.adapter['translator'] = (function (j1, window) {
         if (option_domain == 'auto') {
           domainAttribute = domain ;
         } else  {
-          // domainAttribute = hostname;
           domainAttribute = '';
         }
 

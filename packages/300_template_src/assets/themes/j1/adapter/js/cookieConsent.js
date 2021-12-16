@@ -178,7 +178,6 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
         if (cookie_option_domain == 'auto') {
           domainAttribute = domain ;
         } else  {
-          // domainAttribute = hostname;
           domainAttribute = '';
         }
 

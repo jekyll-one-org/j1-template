@@ -1667,7 +1667,6 @@ var j1 = (function () {
         domainAttribute = domain;
         stringifiedAttributes += '; ' + 'Domain=' + domainAttribute;
       } else  {
-        // domainAttribute = hostname;
         domainAttribute = '';
         stringifiedAttributes += '; ' + 'Domain=' + domainAttribute;
       }

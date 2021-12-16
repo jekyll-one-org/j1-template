@@ -100,7 +100,7 @@ defaults:
   #
   # ----------------------------------------------------------------------------
   #
-  check_cookies:                        true
+  check_cookies:                        false
   path:                                 /
   domain:                               false
   expires:                              365
