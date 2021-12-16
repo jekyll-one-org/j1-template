@@ -7,56 +7,6 @@ description: >
                                         syntax highlighter. It can highlight over 100 different
                                         languages fully integrated with J1 Template.
 
-keywords: >
-                                        previewer, tool, preview, overview,
-                                        highlighter, highlight, rouge, language
-                                        palette, primary, accent, illustration, scheme,
-                                        base16, base16.dark, base16.light, base16.monokai,
-                                        base16.monokai.dark, base16.monokai.light, base16.solarized,
-                                        base16.solarized.dark, base16.solarized.light, colorful,
-                                        github, gruvbox, gruvbox.dark, gruvbox.light, igorpro,
-                                        molokai, monokai, monokai.sublime, pastie, thankful_eyes, tulip,
-                                        abap, actionscript, apache, apiblueprint, applescript,
-                                        awk, biml, brainfuck, bsl, ceylon, cfscript, clojure,
-                                        clang, cmake, coffeescript, common_lisp, conf, console, coq,
-                                        cpp, c++, crystal, csharp, css, dlang, dart, diff, digdag,
-                                        docker, dot, eiffel, elixir, elm, erb, erlang, escape,
-                                        factor, fsharp, gherkin, glsl, golang, gradle, graphql,
-                                        groovy, hack, haml, handlebars, haskell, hcl, html, http,
-                                        hylang, idlang, igorpro, ini, io, irb, java, javascript,
-                                        jinja, json, json-doc, jsonnet, jsp, jsx, julia, kotlin,
-                                        lasso, liquid, literate_coffeescript, literate_haskell,
-                                        llvm, lua, m68k, magik, make, markdown, mathematica,
-                                        matlab, moonscript, mosel, mxml, nasm, nginx, nim, nix,
-                                        objective_c, ocaml, pascal, perl, php, plaintext, plist,
-                                        powershell, praat, prolog, prometheus, properties, protobuf,
-                                        puppet, python, kdb+, qml, rlang, racket, ruby, rust,
-                                        sass, scala, scheme, sed, shell, sieve, slim, smalltalk,
-                                        smarty, sml, sqf, sql, supercollider, swift, tap, tcl
-                                        terraform, tex, toml, tsx, tulip, turtle, twig, typescript,
-                                        vala, visualbasic, verilog, vhdl, viml, vue, wollok, xml,
-                                        xojo, yaml,
-                                        opensource, free, load, download, start, starter, example,
-                                        high, easy, use, secure, encrypt, standard, popular,
-                                        generate, develop, create, learn, distribute, publish, deploy,
-                                        beginner, advanced, expert, student, learner, writer, reader, visitor
-                                        framework, toolkit, integration, extension, module, api,
-                                        dynamic, static, generator, client, server, internet, local, localhost
-                                        page, web, website, webdesign, material, design, responsive,
-                                        javascript, nodejs, ruby, windows, linux, osx, mac, os,
-                                        http, https, html, html5, css, scss, style,
-                                        browser, firefox, chrome, edge, opera, safari,
-                                        configuration, generator, navigation, menu, dropdown, fab, action, button
-                                        application, interface, provider, api, repository,
-                                        cookie, language, translation, gdpr, dsgvo, privacy,
-                                        asciidoc, aciidoctor, bootstrap, jekyll, liquid,
-                                        hyvor, disqus, git, github, netlify, heroku, apple, microsoft,
-                                        provider, service, internet, support,
-                                        google, analytics, advertising, search, console, silverlight, score,
-                                        j1, template, jekyllone, comment
-
-
-
 categories:                             [ Previewer ]
 tags:                                   [ Highlighter, Rouge ]
 
@@ -116,32 +66,26 @@ resource_options:
 // -----------------------------------------------------------------------------
 == Theme selector
 
-For the default theme `Uno` of J1 Template, the following themes for the
-highlighter Rouge are used:
+For the default theme `Uno` of J1 Template, the following _Rouge_ themes
+are used:
 
-* UnoLight: `igorpro`
-* UnoDark: `monokai.sublime`
+* light: `igorpro`
+* dark: `monokai.sublime`
 
-NOTE: The default theme for the highlighter Rouge can be configured for a
-template (theme) with the global template config file `~/_data/j1_config.yml`.
+NOTE: The default themes used for J1 Template can be configured with the
+global template config file `~/_data/j1_config.yml`.
 
-Make a selection from the button below to preview a theme of your choice.
+Make a selection of theme below to preview.
 
 ++++
-<div class="btn-group mt-2 mb-2" role="group" aria-label="Button to select a theme">
+<div class="btn-group">
   <!-- See: https://stackoverflow.com/questions/47242702/force-bootstrap-dropdown-menu-to-always-display-at-the-bottom-and-allow-it-go-of -->
   <!-- NOTE: control the behaviour of popper.js for positioning -->
   <!-- NOTE: set attribute data-flip="false" to open the SELECT list at the BOTTOM of the BUTTON -->
-  <button id="btnGroupThemesDropdown"
-    class="btn btn-primary btn-raised btn-flex btn-lg dropdown-toggle"
-    data-flip="false" type="button"
-    data-bs-toggle="dropdown"
-    data-bs-target="#navbarDropdown"
-    aria-haspopup="true"
-    aria-expanded="false">
-    Select a theme <span class="caret ml-2"></span>
+  <button class="btn btn-primary btn-flex btn-lg dropdown-toggle" data-flip="false" type="button" data-bs-toggle="dropdown" data-bs-target="#navbarDropdown" aria-haspopup="true" aria-expanded="false">
+  Select a theme<span class="caret"></span>
   </button>
-  <ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="btnGroupThemesDropdown">
+  <ul class="dropdown-menu scrollable-menu" role="menu">
     <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>base16</a></li>
     <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.dark')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>base16.dark</a></li>
     <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.light')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>base16.light</a></li>
@@ -164,13 +108,12 @@ Make a selection from the button below to preview a theme of your choice.
     <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('tulip')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>tulip</a></li>
   </ul>
 </div>
-<div id="selected-theme" class="mt-3 mb-4"></div>
+<div id="selected" class="mt-1 mb-3"></div>
 ++++
 
 === Language examples
 
-Find below a selected number languages (code blocks) and their highlightning
-for default or a theme selected.
+Find below a selected number languages (code blocks) and their highlightning.
 
 include::{documentdir}/rouge/100_language_examples.asciidoc[]
 

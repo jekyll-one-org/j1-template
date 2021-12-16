@@ -146,7 +146,7 @@ j1.adapter['rouge'] = (function (j1, window) {
       var dependencies_met_j1_finished = setInterval(function() {
         if (j1.getState() == 'finished') {
          $('.dropdown-menu a').click(function(){
-            $('#selected').html("Current Selection: <div class='bg-primary mt-1 p-2'>"+$(this).text()+"</div>");
+            $('#selected-theme').html('Current selection: <div class="md-gray-900 mt-1 p-2" style="background-color: #BDBDBD; font-weight: 700;">' +$(this).text() + '</div>');
          });
           _this.setState('finished');
           logger.info('\n' + 'state: ' + _this.getState());
