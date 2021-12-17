@@ -25,38 +25,7 @@
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
-
-<script data-ad-client="{{publisher_id}}"
-  async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
+<script
+  async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{publisher_id}}"
+  crossorigin="anonymous">
 </script>
-
-{% comment %} to be checked
---------------------------------------------------------------------------------
-<script data-ad-client="{{publisher_id}}"
-  $(document).ready(function() {
-    var dependencies_met_page_finished = setInterval (function () {
-      if (j1.getState() === 'finished') {
-        async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
-        clearInterval(dependencies_met_page_finished);
-      }
-  }, 25); // END dependencies_met_page_finished
-</script>
--------------------------------------------------------------------------------- {% endcomment %}
-
-{% comment %} to be checked
---------------------------------------------------------------------------------
-<script data-ad-client="{{publisher_id}}"
-    async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
-</script>
--------------------------------------------------------------------------------- {% endcomment %}
-
-{% comment %} Old Ads code
---------------------------------------------------------------------------------
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-  (adsbygoogle = window.adsbygoogle || []).push({
-    google_ad_client: "{{publisher_id}}",
-    enable_page_level_ads: true
-  });
-</script>
--------------------------------------------------------------------------------- {% endcomment %}

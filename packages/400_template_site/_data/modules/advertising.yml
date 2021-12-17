@@ -29,19 +29,147 @@ about_config:
 settings:
 
   # ----------------------------------------------------------------------------
-  # AD elements
+  # Settings
   #
-  ads:
+  #   enabled
+  #   --------------------------------------------------------------------------
+  #   Attribute 'path' indicates a URL PATH that must exist in the requested
+  #   URL in order to send the Cookie header
+  #
+  #   values:                           [true|false]
+  #   default:                          false
+  #
+  #   provider
+  #   --------------------------------------------------------------------------
+  #   Attribute 'path' indicates a URL PATH that must exist in the requested
+  #   URL in order to send the Cookie header
+  #
+  #   values:                           [google]
+  #   default:                          google
+  #
+  # ----------------------------------------------------------------------------
+  #
+  enabled:                              true
+  provider:                             google
+
+  google:
 
     # --------------------------------------------------------------------------
-    # Image attic (used for layouts posts|pages, image-based)
+    # Provider settings
     #
-    - name:                             Full width top
-      ad:
-        enabled:                        true
-        id:                             ad_full_width_top
-        layout:                         [ page, post ]
-        type:                           ad-bla
+    #   publisher_id
+    #   ------------------------------------------------------------------------
+    #   Attribute 'path' indicates a URL PATH that must exist in the requested
+    #   URL in order to send the Cookie header
+    #
+    #   values:                         string
+    #   default:                        none
+    #
+    #   autoHideOnUnfilled
+    #   ------------------------------------------------------------------------
+    #   Switch 'domain' controls if the value for the attribute 'domain' is
+    #   used (= auto|domain) or NOT used (false). If 'auto' is given, the domain
+    #   is calculated from the hostname. Otherwise domain is treates as domain
+    #   to be used.
+    #
+    #   values:                         [true|false]
+    #   default:                        true
+    #
+    # --------------------------------------------------------------------------
+    #
+    publisher_id:                       ca-pub-3885670015316130
+    autoHideOnUnfilled:                 true
+
+    # --------------------------------------------------------------------------
+    # Attributes (Ads)
+    #
+    #   enabled
+    #   ------------------------------------------------------------------------
+    #   Attribute 'path' indicates a URL PATH that must exist in the requested
+    #   URL in order to send the Cookie header
+    #
+    #   values:                         [true|false]
+    #   default:                        true
+    #
+    #   layout
+    #   ------------------------------------------------------------------------
+    #   Check if cookies created/available
+    #
+    #   values:                         [home, page, post]
+    #   default:                        none
+    #
+    #   placement
+    #   ------------------------------------------------------------------------
+    #   Switch 'domain' controls if the value for the attribute 'domain' is
+    #   used (= auto|domain) or NOT used (false). If 'auto' is given, the domain
+    #   is calculated from the hostname. Otherwise domain is treates as domain
+    #   to be used.
+    #
+    #   values:                         [auto|random|content-top]
+    #   default:                        true
+    #
+    #   fixed
+    #   ------------------------------------------------------------------------
+    #   lifetime of a cookie [0..365] days. The value of 0 results in a
+    #   SESSION cookie. For all otrher values >0, the cookie results in a
+    #   PERMANENT cookie.
+    #
+    #   values:                         [true|false]
+    #   default:                        false
+    #
+    #   adFormat
+    #   ------------------------------------------------------------------------
+    #   Lax: sent for all requests (including subdomains).
+    #   Strict: the cookie is only sent to the site where it originated
+    #   (excluding subdomains)
+    #
+    #   values:                         [auto|???]
+    #   default:                        auto
+    #
+    #   adTest
+    #   ------------------------------------------------------------------------
+    #   prevent access to cookie values via JavaScript
+    #
+    #   values:                         [false|true]
+    #   default:                        false
+    #
+    #   adSlot
+    #   ------------------------------------------------------------------------
+    #   Cookies are only sent to the server with an encrypted request over
+    #   the HTTPS protocol
+    #
+    #   values:                         string
+    #   default:                        none
+    #
+    # --------------------------------------------------------------------------
+    #
+    ads:
+
+      # ------------------------------------------------------------------------
+      # Google Ad resposive full-width
+      #
+      - name:                           horizontal-1
+        ad:
+          enabled:                      true
+          layout:                       [ page ]
+          placement:                    content-top
+          fixed:                        false
+          adSlot:                       5128488466
+          adTest:                       false
+          adFormat:                     auto
+
+      # ------------------------------------------------------------------------
+      # Google Ad resposive full-width
+      #
+      - name:                           horizontal-2
+        ad:
+          enabled:                      true
+          layout:                       [ post ]
+          placement:                    content-top
+          fixed:                        false
+          adSlot:                       7284712660
+          adTest:                       false
+          adFormat:                     auto
 
 # ------------------------------------------------------------------------------
 # END config

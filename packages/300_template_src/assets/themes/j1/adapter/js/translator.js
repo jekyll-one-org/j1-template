@@ -246,24 +246,24 @@ j1.adapter['translator'] = (function (j1, window) {
           domainAttribute = '';
         }
 
-        // load|initialize user translate cookie
-        if (j1.existsCookie(cookie_names.user_translate)) {
-          user_translate = j1.readCookie(cookie_names.user_translate);
-        } else {
-          logger.debug('\n' + 'write to cookie : ' + cookie_names.user_translate);
-          cookie_written = j1.writeCookie({
-            name:     cookie_names.user_translate,
-            data:     user_translate,
-            samesite: same_site,
-            secure:   secure,
-            expires:  expires
-          });
-        }
-
         if ( j1.getState() === 'finished' ) {
           _this.setState('started');
           logger.info('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
+
+          // load|initialize user translate cookie
+          if (j1.existsCookie(cookie_names.user_translate)) {
+            user_translate = j1.readCookie(cookie_names.user_translate);
+          } else {
+            logger.debug('\n' + 'write to cookie : ' + cookie_names.user_translate);
+            cookie_written = j1.writeCookie({
+              name:     cookie_names.user_translate,
+              data:     user_translate,
+              samesite: same_site,
+              secure:   secure,
+              expires:  expires
+            });
+          }
 
           // hide the google translate element if exists
           if ($('google_translate_element')) {

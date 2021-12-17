@@ -45,7 +45,6 @@ theme:
 #
 css:
   custom_scss:                          false
-  custom_css:                           false
 
 # ------------------------------------------------------------------------------
 # Typography settings
@@ -423,11 +422,11 @@ analytics:
 # Set 'provider' to the provider you want to use.
 # ------------------------------------------------------------------------------
 advertising:
-  enabled:                              false
+  enabled:                              true
   provider:                             google
 
   google:
-    publisher_id:                       '<your-publisher-id>'
+    publisher_id:                       ca-pub-3885670015316130
 
   custom:
     custom_data:

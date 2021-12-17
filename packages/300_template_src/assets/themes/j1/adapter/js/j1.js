@@ -1707,6 +1707,8 @@ var j1 = (function () {
     // removeCookie (Vanilla JS)
     // -------------------------------------------------------------------------
     removeCookie: function (options /*name, [path, domain]*/) {
+      var domainAttribute;
+      
       var defaults = {
         path:         '{{cookie_options.path}}',
         expires:      '{{cookie_options.expires}}',

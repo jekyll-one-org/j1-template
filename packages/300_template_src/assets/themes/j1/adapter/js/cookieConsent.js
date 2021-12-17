@@ -342,9 +342,14 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       } else {
         // jadams, 2021-08-10: remove cookies on invalid GA config or left
         // cookies from previous session if they exists
+        // ---------------------------------------------------------------------
         gaCookies.forEach(function (item) {
-          logger.warn('\n' + 'delete GA cookie: ' + item);
-          j1.removeCookie({ name: item, domain: cookie_domain });
+          // Skip cookies from Google Ads
+          var gad = item.includes('gad');
+          if (!gad) {
+            logger.warn('\n' + 'delete GA cookie: ' + item);
+            j1.removeCookie({ name: item, domain: cookie_domain });
+          }
         });
 
         // Managing providers using personalization OptIn/Out
