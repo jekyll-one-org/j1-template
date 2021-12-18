@@ -100,7 +100,7 @@
             logger.info('\n' + 'translation: in progress');
             clearInterval(dependencies_met_page_ready);
           }
-        });
+        }, 25);
       },
 
       encryptData: function (message = '', key = '') {

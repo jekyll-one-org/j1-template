@@ -1054,6 +1054,7 @@ var j1 = (function () {
 
             // Set|Log status
             state = 'finished';
+            j1.setState(state);
             logText = '\n' + 'state: ' + state;
             logger.info(logText);
             logText = '\n' + 'page finalized successfully';
@@ -1063,7 +1064,7 @@ var j1 = (function () {
       } else {
         // web mode
         setTimeout (function() {
-          j1.setState('finished');
+          // j1.setState('finished');
           logger.info('\n' + 'state: finished');
           logger.info('\n' + 'page initialization: finished');
 
@@ -1224,8 +1225,9 @@ var j1 = (function () {
           current_user_data = j1.mergeData(user_session, user_state);
           j1.core.navigator.updateSidebar(current_user_data);
 
-          // set|log status
+          // Set|Log status
           state = 'finished';
+          j1.setState(state);
           logText = '\n' + 'state: ' + state;
           logger.info(logText);
           logText = '\n' + 'page finalized successfully';
@@ -1708,7 +1710,7 @@ var j1 = (function () {
     // -------------------------------------------------------------------------
     removeCookie: function (options /*name, [path, domain]*/) {
       var domainAttribute;
-      
+
       var defaults = {
         path:         '{{cookie_options.path}}',
         expires:      '{{cookie_options.expires}}',

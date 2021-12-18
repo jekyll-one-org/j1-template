@@ -422,7 +422,7 @@ analytics:
 # Set 'provider' to the provider you want to use.
 # ------------------------------------------------------------------------------
 advertising:
-  enabled:                              true
+  enabled:                              false
   provider:                             google
 
   google:

@@ -226,7 +226,7 @@ var lastPageInfo;
 
           clearInterval(dependencies_met_page_ready);
         }
-      });
+      }, 25);
       // END generate scrollers
     },
 

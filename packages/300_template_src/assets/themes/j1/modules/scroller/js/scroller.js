@@ -100,7 +100,7 @@
           logger.info('\n' + 'state: finished');
           clearInterval(dependencies_met_page_ready);
         }
-      });
+      }, 25);
     },
 
     // -------------------------------------------------------------------------

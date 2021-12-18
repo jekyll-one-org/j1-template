@@ -164,12 +164,9 @@ j1.adapter['framer'] = (function (j1, window) {
             logger.info('\n' + 'initializing module finished');
 
             clearInterval(dependencies_met_page_finished);
-
             return true;
-
         }
       }, 25);
-
     }, // END init
 
     // -------------------------------------------------------------------------

@@ -99,7 +99,7 @@
           logger.info('\n' + 'translate: started');
           clearInterval(dependencies_met_page_ready);
         }
-      });
+      }, 25);
     },
 
     // decryptData: function (message = '', key = '', iv = '') {
