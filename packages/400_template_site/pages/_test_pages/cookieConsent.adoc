@@ -12,7 +12,6 @@ tags:                                   [ Example ]
 scrollbar:                              false
 fab_menu_id:                            default
 
-advertising:                            false
 comments:                               false
 
 permalink:                              /pages/public/cookieConsent/

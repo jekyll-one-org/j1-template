@@ -1386,8 +1386,11 @@ resources:
       pass_init_data:                   false
       data:
         css:                            []
-        files:                          [ adapter/js/advertising.js ]
-        js:                             [ modules/advertising/js/google/adInitializer ]
+        files:                          [
+                                          modules/advertising/js/google/adInitializer.js,
+                                          adapter/js/advertising.js
+                                        ]
+        js:                             []
         init_function:                  [ j1.adapter.advertising.init ]
 
 # ------------------------------------------------------------------------------

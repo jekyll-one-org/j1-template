@@ -18,6 +18,7 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
+ #  advertising_options:  {{ advertising_options | debug }}
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
@@ -40,11 +41,12 @@ regenerate:                             true
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
+{% assign advertising_defaults = modules.defaults.advertising.defaults %}
 {% assign advertising_settings = modules.advertising.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign advertising_options  = advertising_settings %}
+{% assign advertising_options  = advertising_defaults | merge: advertising_settings %}
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -86,10 +88,13 @@ j1.adapter['advertising'] = (function (j1, window) {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
-var environment         = '{{environment}}';
-var gadScript           = document.createElement('script');
-var adInitializerScript = document.createElement('script');
-var autoHideOnUnfilled  = {{advertising_options.google.autoHideOnUnfilled}};
+var environment             = '{{environment}}';
+var gadScript               = document.createElement('script');
+var adInitializerScript     = document.createElement('script');
+var autoHideOnUnfilled      = {{advertising_options.google.autoHideOnUnfilled}};
+var addBorderOnUnfilled     = {{advertising_options.google.addBorderOnUnfilled}};
+var checkTrackingProtection = {{advertising_options.google.checkTrackingProtection}};
+var showErrorPageOnBlocked  = {{advertising_options.google.showErrorPageOnBlocked}};
 var adInitializerScriptText;
 var tracking_protection;
 var _this;
@@ -131,7 +136,7 @@ var logText;
 
           // place all ads configured for the page
           // NOTE: currently NOT implemented/used
-          // -----------------------------------------------------------------------
+          // -------------------------------------------------------------------
           // _this.place_ads();
 
           // add gad api dynamically in the head section
@@ -144,30 +149,41 @@ var logText;
 
           // run protection check
           // -------------------------------------------------------------------
-          logger.info('\n' + 'run checks for tracking protection');
-          _this.check_tracking_protection();
+          if (checkTrackingProtection) {
+            logger.info('\n' + 'run checks for tracking protection');
+            _this.check_tracking_protection();
 
-          var dependencies_met_tracking_check_ready = setInterval (function (options) {
-            if (typeof tracking_protection !== 'undefined' ) {
-              if (!tracking_protection) {
-                logText = '\n' + 'tracking protection: disabled';
-                logger.info(logText);
-              } else {
-                logText = '\n' + 'tracking protection: enabled';
-                logger.warn(logText);
+            var dependencies_met_tracking_check_ready = setInterval (function (options) {
+              if (typeof tracking_protection !== 'undefined' ) {
+
+                var browser_tracking_feature = navigator.DoNotTrack;
+
+                if (!tracking_protection && !browser_tracking_feature) {
+                  logText = '\n' + 'tracking protection: disabled';
+                  logger.info(logText);
+                } else {
+                  logText = '\n' + 'tracking protection: enabled';
+                  logger.warn(logText);
+
+                  if (showErrorPageOnBlocked) {
+                    logger.error('\n' + 'redirect to error page (blocked content): HTML-447');
+                    // redirect to error page: blocked content
+                    window.location.href = '/447.html';
+                  }
+                }
               }
+            }, 25);
+          } else {
+            // setup monitor for state changes on all ads configured
+            // ---------------------------------------------------------------
+            logger.info('\n' + 'setup monitoring');
+            _this.monitor_ads();
 
-              // setup monitor for state changes on all ads configured
-              // ---------------------------------------------------------------
-              logger.info('\n' + 'setup monitoring');
-              _this.monitor_ads();
-
-              _this.setState('finished');
-              logger.info('\n' + 'state: ' + _this.getState());
-              logger.info('\n' + 'module initialized successfully');
-              clearInterval(dependencies_met_tracking_check_ready);
-            }
-          }, 25);
+            _this.setState('finished');
+            logger.info('\n' + 'state: ' + _this.getState());
+            logger.info('\n' + 'module initialized successfully');
+            clearInterval(dependencies_met_tracking_check_ready);
+          }
           clearInterval(dependencies_met_page_ready);
         }
       }, 25);
@@ -176,7 +192,17 @@ var logText;
       // [INFO   ] [j1.adapter.advertising                  ] [ place provider: Custom Provider ]
       {% endcase %}
       // [INFO   ] [j1.adapter.advertising                  ] [ end processing ]
-    {% endif %}
+      {% else %}
+      var dependencies_met_page_ready = setInterval(function() {
+        if (j1.getState() == 'finished') {
+          var ads_found = document.getElementsByClassName('adsbygoogle').length;
+          logger = log4javascript.getLogger('j1.adapter.advertising.google');
+          logger.warn('\n' + 'found ads in page: #' + ads_found);
+          logger.warn('\n' + 'no ads initialized, advertising disabled');
+          clearInterval(dependencies_met_page_ready);
+        }
+      }, 25);
+      {% endif %}
       return;
     }, // END init
 
@@ -191,10 +217,11 @@ var logText;
         callback: function (event) {
           if (event.newValue === 'unfilled') {
             var elm = event.target.dataset;
+            if (addBorderOnUnfilled) { $('.adsbygoogle').addClass('border--dotted'); }
             if (elm.adClient) {
               logger.warn('\n' + 'found ad state ' + event.newValue + ' for slot: ' + elm.adSlot);
               if (autoHideOnUnfilled) {
-                logger.info('\n' + ' hide ad for slot: ' + elm.adSlot);
+                logger.warn('\n' + ' hide ad for slot: ' + elm.adSlot);
                 $('#' + elm.adSlot ).hide();
               }
             }

@@ -25,6 +25,14 @@
   display: none;
 }
 
+.border--solid {
+    border: 1px solid #616161;
+}
+
+.border--dotted {
+    border: 1px dotted #616161;
+}
+
 // GLOBAL Styles (selected styles taken from previous globals.css)
 // -----------------------------------------------------------------------------
 .g-color-white-opacity-0_6, .g-color-white-opacity-0_6--hover:hover {
