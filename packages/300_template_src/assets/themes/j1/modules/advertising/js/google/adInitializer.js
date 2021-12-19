@@ -34,17 +34,22 @@ regenerate:                             true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config   = site.data.j1_config %}
-{% assign blocks            = site.data.blocks %}
-{% assign modules           = site.data.modules %}
+{% assign template_config       = site.data.j1_config %}
+{% assign blocks                = site.data.blocks %}
+{% assign modules               = site.data.modules %}
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign advertising_settings = modules.advertising.settings %}
+{% assign cookie_defaults       = modules.defaults.cookies.defaults %}
+{% assign cookie_settings       = modules.cookies.settings %}
+
+{% assign advertising_options   = modules.defaults.advertising.defaults %}
+{% assign advertising_settings  = modules.advertising.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign advertising_options  = advertising_settings %}
+{% assign cookie_options        = cookie_defaults | merge: cookie_settings %}
+{% assign advertising_options   = advertising_options | merge: advertising_settings %}
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -75,18 +80,25 @@ $(document).ready(function() {
   // [INFO   ] [j1.adapter.advertising                  ] [ detected advertising provider: {{advertising_provider}}} ]
   // [INFO   ] [j1.adapter.advertising                  ] [ advertising detected as: {{advertising}} ]
   {% if advertising %}
-  var logger    = log4javascript.getLogger('j1.core.advertising.google');
-  var ads_found = document.getElementsByClassName('adsbygoogle').length;
+  var logger        = log4javascript.getLogger('j1.core.advertising.google');
+  var ads_found     = document.getElementsByClassName('adsbygoogle').length;
+  var cookie_names  = j1.getCookieNames();
+  var user_consent  = j1.readCookie(cookie_names.user_consent);
 
   var dependencies_met_page_ready = setInterval (function (options) {
     if (j1.getState() === 'finished') {
-      if (ads_found) {
-        logger.info('\n' + 'initialize all ads in page: #' + ads_found);
-        [].forEach.call(document.querySelectorAll('.adsbygoogle'), function() {
-          (adsbygoogle = window.adsbygoogle || []).push({});
-        });
+      if (user_consent.personalization) {
+        if (ads_found) {
+          logger.info('\n' + 'initialize all ads in page: #' + ads_found);
+          [].forEach.call(document.querySelectorAll('.adsbygoogle'), function() {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+          });
+        } else {
+          logger.warn('\n' + 'no ads found in page');
+        }
       } else {
-        logger.warn('\n' + 'no ads found in page');
+        logger.warn('\n' + 'initializing ads skipped');
+        logger.warn('\n' + 'consent on cookies disabled for personalization');
       }
       clearInterval(dependencies_met_page_ready);
     }

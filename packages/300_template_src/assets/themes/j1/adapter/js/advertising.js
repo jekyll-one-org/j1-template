@@ -41,11 +41,14 @@ regenerate:                             true
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
+{% assign cookie_defaults      = modules.defaults.cookies.defaults %}
+{% assign cookie_settings      = modules.cookies.settings %}
 {% assign advertising_defaults = modules.defaults.advertising.defaults %}
 {% assign advertising_settings = modules.advertising.settings %}
 
 {% comment %} Set config options (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
+{% assign cookie_options       = cookie_defaults | merge: cookie_settings %}
 {% assign advertising_options  = advertising_defaults | merge: advertising_settings %}
 
 {% comment %} Variables
@@ -97,6 +100,15 @@ var checkTrackingProtection = {{advertising_options.google.checkTrackingProtecti
 var showErrorPageOnBlocked  = {{advertising_options.google.showErrorPageOnBlocked}};
 var adInitializerScriptText;
 var tracking_protection;
+var url;
+var baseUrl;
+var hostname;
+var cookie_names;
+var user_consent;
+var domain;
+var domainAttribute;
+var cookie_option_domain;
+var cookie_domain;
 var _this;
 var logger;
 var logText;
@@ -116,6 +128,21 @@ var logText;
       // [INFO   ] [j1.adapter.advertising                  ] [ detected advertising provider (j1_config): {{advertising_provider}}} ]
       // [INFO   ] [j1.adapter.advertising                  ] [ start processing load region head, layout: {{page.layout}} ]
 
+      cookie_names          = j1.getCookieNames();
+      user_consent          = j1.readCookie(cookie_names.user_consent);
+      url                   = new liteURL(window.location.href);
+      baseUrl               = url.origin;
+      hostname              = url.hostname;
+      domain                = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+      cookie_option_domain  = '{{cookie_options.domain}}';
+
+      // set domain used by cookies
+      if (cookie_option_domain == 'auto') {
+        domainAttribute = domain ;
+      } else  {
+        domainAttribute = hostname;
+      }
+
       {% case advertising_provider %}
       {% when "google" %}
       // [INFO   ] [j1.adapter.advertising                  ] [ place provider: Google Adsense ]
@@ -133,59 +160,97 @@ var logText;
 
       var dependencies_met_page_ready = setInterval(function() {
         if (j1.getState() == 'finished') {
+          if (user_consent.personalization) {
+            // place all ads configured for the page
+            // NOTE: currently NOT implemented/used
+            // -----------------------------------------------------------------
+            // _this.place_ads();
 
-          // place all ads configured for the page
-          // NOTE: currently NOT implemented/used
-          // -------------------------------------------------------------------
-          // _this.place_ads();
+            // add gad api dynamically in the head section
+            // -----------------------------------------------------------------
+            logger.info('\n' + 'add gad api dynamically in section: head');
+            gadScript.async = true;
+            gadScript.id    = 'gad-api';
+            gadScript.src   = '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+            gadScript.setAttribute('data-ad-client', 'ca-pub-3885670015316130');
+            document.head.appendChild(gadScript);
 
-          // add gad api dynamically in the head section
-          // -------------------------------------------------------------------
-          logger.info('\n' + 'add gad api dynamically in section: head');
-          gadScript.async = true;
-          gadScript.src   = '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
-          gadScript.setAttribute('data-ad-client', 'ca-pub-3885670015316130');
-          document.head.appendChild(gadScript);
-
-          // run protection check
-          // -------------------------------------------------------------------
-          if (checkTrackingProtection) {
-            logger.info('\n' + 'run checks for tracking protection');
-            _this.check_tracking_protection();
-
-            var dependencies_met_tracking_check_ready = setInterval (function (options) {
-              if (typeof tracking_protection !== 'undefined' ) {
-
-                var browser_tracking_feature = navigator.DoNotTrack;
-
-                if (!tracking_protection && !browser_tracking_feature) {
-                  logText = '\n' + 'tracking protection: disabled';
-                  logger.info(logText);
-                } else {
-                  logText = '\n' + 'tracking protection: enabled';
-                  logger.warn(logText);
-
-                  if (showErrorPageOnBlocked) {
-                    logger.error('\n' + 'redirect to error page (blocked content): HTML-447');
-                    // redirect to error page: blocked content
-                    window.location.href = '/447.html';
-                  }
-                }
-              }
-            }, 25);
-          } else {
             // setup monitor for state changes on all ads configured
             // ---------------------------------------------------------------
             logger.info('\n' + 'setup monitoring');
             _this.monitor_ads();
 
-            _this.setState('finished');
-            logger.info('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'module initialized successfully');
-            clearInterval(dependencies_met_tracking_check_ready);
-          }
-          clearInterval(dependencies_met_page_ready);
-        }
+            // run protection check
+            // -------------------------------------------------------------------
+            if (checkTrackingProtection) {
+              logger.info('\n' + 'run checks for tracking protection');
+              _this.check_tracking_protection();
+
+              var dependencies_met_tracking_check_ready = setInterval (function (options) {
+                if (typeof tracking_protection !== 'undefined' ) {
+
+                  var browser_tracking_feature = navigator.DoNotTrack;
+
+                  if (!tracking_protection && !browser_tracking_feature) {
+                    logText = '\n' + 'tracking protection: disabled';
+                    logger.info(logText);
+                  } else {
+                    logText = '\n' + 'tracking protection: enabled';
+                    logger.warn(logText);
+
+                    if (showErrorPageOnBlocked) {
+                      logger.error('\n' + 'redirect to error page (blocked content): HTML-447');
+                      // redirect to error page: blocked content
+                      window.location.href = '/447.html';
+                    }
+                  }
+                }
+                clearInterval(dependencies_met_tracking_check_ready);
+              }, 25);
+            } else {
+              // setup monitor for state changes on all ads configured
+              // ---------------------------------------------------------------
+              logger.info('\n' + 'setup monitoring');
+              _this.monitor_ads();
+
+              _this.setState('finished');
+              logger.info('\n' + 'state: ' + _this.getState());
+              logger.info('\n' + 'module initialized successfully');
+              clearInterval(dependencies_met_tracking_check_ready);
+            }
+            clearInterval(dependencies_met_page_ready);
+          } else {
+            var gaCookies  = j1.findCookie('_ga');
+            logger.warn('\n' + 'consent on cookies disabled for personalization');
+            logger.warn('\n' + 'initialization of module advertising skipped');
+
+            // jadams, 2021-12-19: remove cookies on invalid GAD config
+            // or left cookies from previous session
+            // -----------------------------------------------------------------
+            j1.removeCookie({ name: '__gads' });
+
+            // jadams, 2021-12-19: delete cookies in loop doesn't work
+            // gaCookies.forEach(function (item) {
+            //   logger.warn('\n' + 'delete GAD cookie: ' + item);
+            //   // j1.removeCookie({ name: item, domain: domainAttribute });
+            //   // j1.removeCookie({ name: item });
+            // });
+
+            if (checkTrackingProtection) {
+              if (!user_consent.personalization) {
+                logText = '\n' + 'consent on cookies disabled for personalization';
+                logger.warn(logText);
+
+                if (showErrorPageOnBlocked) {
+                  logger.error('\n' + 'redirect to error page (blocked content): HTML-447');
+                  // redirect to error page: blocked content
+                  window.location.href = '/448.html';
+                }
+              }
+            }
+            clearInterval(dependencies_met_page_ready);
+          } // END if user_consent.personalization
+        } // END if getState 'finished'
       }, 25);
 
       {% when "custom" %}

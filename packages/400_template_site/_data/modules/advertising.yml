@@ -97,8 +97,9 @@ settings:
     publisherID:                        ca-pub-xxxx..xxx
     autoHideOnUnfilled:                 false
     addBorderOnUnfilled:                true
-    checkTrackingProtection:            false
-    showErrorPageOnBlocked:             false
+    checkTrackingProtection:            true
+    showErrorPageOnBlocked:             true
+    addBorderOnUnfilled:                true
 
     ads:
 
