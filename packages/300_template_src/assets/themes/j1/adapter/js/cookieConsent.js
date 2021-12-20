@@ -259,8 +259,8 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
 
     // -------------------------------------------------------------------------
     // cbCookie()
-    // Called by CookieConsent module after the user has
-    // made his selection (callback)
+    // Called (callback) by CookieConsent module after the user has
+    // made his selection
     // -------------------------------------------------------------------------
     cbCookie: function () {
       var gaCookies           = j1.findCookie('_ga');
@@ -297,24 +297,30 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
       // Manage Google Analytics OptIn/Out
       // See: https://github.com/luciomartinez/gtag-opt-in/wiki
       if (tracking_enabled && tracking_id_valid) {
-        GTagOptIn.register(tracking_id);
-        if (user_consent.analysis)  {
-          logger.info('\n' + 'enable: GA');
-          GTagOptIn.optIn();
-        } else {
-          logger.warn('\n' + 'disable: GA');
-          GTagOptIn.optOut();
+        // jadams, 2021-12-20:  GA OptIn|Out handling moved to (new)
+        // analytics adapter (adapter/js/analytics.js)
+        // ---------------------------------------------------------------------
+        // GTagOptIn.register(tracking_id);
+        // if (user_consent.analysis)  {
+        //   logger.info('\n' + 'enable: GA');
+        //   GTagOptIn.optIn();
+        // } else {
+        //   logger.warn('\n' + 'disable: GA');
+        //   GTagOptIn.optOut();
+        //
+        //   if (!user_agent.includes('iPad')) {
+        //     gaCookies.forEach(function (item) {
+        //       logger.warn('\n' + 'delete GA cookie: ' + item);
+        //       j1.removeCookie({ name: item, domain: cookie_domain });
+        //     });
+        //   }
+        // }
 
-          if (!user_agent.includes('iPad')) {
-            gaCookies.forEach(function (item) {
-              logger.warn('\n' + 'delete GA cookie: ' + item);
-              j1.removeCookie({ name: item, domain: cookie_domain });
-            });
-          }
-        }
-
-        // Managing providers using personalization OptIn/Out
-        // (Comments|Ads|Translation)
+        // Managing cookie life-time. If cookie settings allows only
+        // "required" cookies, all "persistent" cookies (Comments|Ads|Translation)
+        // get expired to "session" for better GDPR compliance. The GDPR
+        // regulations|privacy does NOT require any consent on using cookies
+        // for session-only cookies.
         //
         if (!user_consent.analysis || !user_consent.personalization) {
 
@@ -331,6 +337,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
           });
 
           // expire permanent cookies to session
+          // -------------------------------------------------------------------
           j1.expireCookie({ name: cookie_names.user_state });
           j1.expireCookie({ name: cookie_names.user_consent });
           j1.expireCookie({ name: cookie_names.user_translate });
@@ -341,7 +348,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
         }
       } else {
         // jadams, 2021-08-10: remove cookies on invalid GA config or left
-        // cookies from previous session if they exists
+        // cookies from previous session/page view if they exists
         // ---------------------------------------------------------------------
         gaCookies.forEach(function (item) {
           // Skip cookies from Google Ads
@@ -352,8 +359,11 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
           }
         });
 
-        // Managing providers using personalization OptIn/Out
-        // (Comments|Ads|Translation)
+        // Managing cookie life-time. If cookie settings allows only
+        // "required" cookies, all "persistent" cookies (Comments|Ads|Translation)
+        // get expired to "session" for better GDPR compliance. The GDPR
+        // regulations|privacy does NOT require any consent on using cookies
+        // for session-only cookies.
         //
         if (!user_consent.analysis || !user_consent.personalization) {
           // overload cookie consent settings
@@ -369,6 +379,7 @@ j1.adapter['cookieConsent'] = (function (j1, window) {
           });
 
           // expire permanent cookies to session
+          // -------------------------------------------------------------------
           j1.expireCookie({ name: cookie_names.user_state });
           j1.expireCookie({ name: cookie_names.user_consent });
           j1.expireCookie({ name: cookie_names.user_translate });

@@ -377,7 +377,7 @@ comments:
     de:                                 Kommentieren
 
   hyvor:
-    site_id:                            'hyvor-site-id'
+    site_id:                            4612                                    # 'hyvor-site-id'
 
   disqus:
     site_id:                            '<your-site-short-name>'
@@ -404,15 +404,15 @@ comments:
 # from what is set pagewise!
 # Set 'provider' to the provider you want to use.
 # ------------------------------------------------------------------------------
-analytics:
-  enabled:                              false
-  provider:                             google
-
-  google:
-    tracking_id:                        '<your-tracking-id>'
-
-  custom:
-    custom_data:
+# analytics:
+#   enabled:                              true
+#   provider:                             google
+#
+#   google:
+#     tracking_id:                        G-299QGW5RJH                            # '<your-tracking-id>'
+#
+#   custom:
+#     custom_data:
 
 # ------------------------------------------------------------------------------
 # ADVERTISING settings
@@ -421,15 +421,15 @@ analytics:
 # from what is set pagewise!
 # Set 'provider' to the provider you want to use.
 # ------------------------------------------------------------------------------
-advertising:
-  enabled:                              false
-  provider:                             google
-
-  google:
-    publisher_id:                       ca-pub-3885670015316130
-
-  custom:
-    custom_data:
+# advertising:
+#   enabled:                              false
+#   provider:                             google
+#
+#   google:
+#     publisher_id:                       ca-pub-3885670015316130
+#
+#   custom:
+#     custom_data:
 
 # ------------------------------------------------------------------------------
 # TRANSLATOR settings
@@ -438,15 +438,15 @@ advertising:
 # from what is set pagewise!
 # Set 'provider' to the provider you want to use.
 # ------------------------------------------------------------------------------
-translation:
-  enabled:                              true
-  provider:                             google
-
-  google:
-    layout:                             default
-    meta_data:                          [google-translate]
-    page_language:                      en
-    translation_languages:              [all]
+# translation:
+#   enabled:                              true
+#   provider:                             google
+#
+#   google:
+#     layout:                             default
+#     meta_data:                          [google-translate]
+#     page_language:                      en
+#     translation_languages:              [all]
 
 # ------------------------------------------------------------------------------
 # SHARING settings (currently NOT supported)
