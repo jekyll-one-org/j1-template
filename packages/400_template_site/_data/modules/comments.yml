@@ -24,9 +24,8 @@ description:
 # User configuration settings
 #
 settings:
-
   # ----------------------------------------------------------------------------
-  # Settings
+  # Base settings
   #
   #   enabled
   #   --------------------------------------------------------------------------
@@ -44,29 +43,12 @@ settings:
   #   default:                          disqus
   #
   # ----------------------------------------------------------------------------
-  #
-  enabled:                              true
-
-  provider:                             hyvor
 
   # ----------------------------------------------------------------------------
-  # Provider settings
-  #
-  #   site_id
-  #   --------------------------------------------------------------------------
-  #   Your site id connected with your Provider Account the for the
-  #   domain registered.
-  #
-  #   values:                         string
-  #   default:                        none
-  #
-  #   --------------------------------------------------------------------------
-  #
-  hyvor:
-    site_id:                            4612
-
-  disqus:
-    site_id:                            jekyll-one
+  # Base settings (required)
+  # ----------------------------------------------------------------------------
+  enabled:                              false
+  provider:                             hyvor
 
 # ------------------------------------------------------------------------------
 # END config

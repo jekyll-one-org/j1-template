@@ -26,7 +26,7 @@ description:
 defaults:
 
   # ----------------------------------------------------------------------------
-  # Settings
+  # Base settings
   #
   #   enabled
   #   --------------------------------------------------------------------------
@@ -45,12 +45,21 @@ defaults:
   #   values:                           iso-639 language code
   #   default:                          en
   #
+  #   provider
+  #   --------------------------------------------------------------------------
+  #   Specifies the provider to be used for commenting
+  #
+  #   values:                           [disqus|hyvor|commento|just-comments]
+  #   default:                          disqus
+  #
   # ----------------------------------------------------------------------------
   #
   enabled:                              false
 
+  # ----------------------------------------------------------------------------
+  # Base settings
+  # ----------------------------------------------------------------------------
   provider:                             disqus
-
   comments_headline:
     "en":                               Leave a comment
     "bg":                               Оставите коментар
@@ -77,8 +86,11 @@ defaults:
     "ro":                               Lasa un comentariu
     "ru":                               Оставить комментарий
 
+  # ----------------------------------------------------------------------------
+  # Provider settings
+  # ----------------------------------------------------------------------------
   hyvor:
-    site_id:                            'hyvor-site-id'
+    site_id:                            4612                                    # 'hyvor-site-id'
 
   disqus:
     site_id:                            '<your-site-short-name>'
