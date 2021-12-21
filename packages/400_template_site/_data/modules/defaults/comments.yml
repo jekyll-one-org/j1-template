@@ -90,7 +90,7 @@ defaults:
   # Provider settings
   # ----------------------------------------------------------------------------
   hyvor:
-    site_id:                            4612                                    # 'hyvor-site-id'
+    site_id:                            'hyvor-site-id'
 
   disqus:
     site_id:                            '<your-site-short-name>'
