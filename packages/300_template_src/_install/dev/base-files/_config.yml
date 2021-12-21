@@ -598,9 +598,6 @@ defaults:
       personalization:                  false
       exclude_from_search:              false
 
-      analytics:                        true
-      comments:                         true
-      advertising:                      false
       youtube:                          true
       vimeo:                            true
 
@@ -643,9 +640,6 @@ defaults:
       personalization:                  false
       exclude_from_search:              false
 
-      analytics:                        true
-      comments:                         true
-      advertising:                      false
       youtube:                          true
       vimeo:                            true
 
@@ -692,9 +686,6 @@ defaults:
       personalization:                  false
       exclude_from_search:              false
 
-      analytics:                        true
-      comments:                         true
-      advertising:                      false
       youtube:                          true
       vimeo:                            true
 
@@ -731,9 +722,6 @@ defaults:
       personalization:                  false
       exclude_from_search:              true
 
-      analytics:                        false
-      comments:                         false
-      advertising:                      false
       youtube:                          false
       vimeo:                            false
 

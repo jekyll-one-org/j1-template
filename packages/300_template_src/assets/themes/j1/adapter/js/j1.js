@@ -82,24 +82,10 @@ regenerate:                             true
 {% assign themer_enabled            = modules.themer_options.enabled %}
 {% assign themer_reloadPageOnChange = modules.themer_options.reloadPageOnChange %}
 {% assign themer_hideOnReload       = modules.themer_options.hideOnReload %}
-{% assign comment_provider          = template_config.comments.provider %}
+
 
 {% comment %} Set variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% if comment_provider == 'disqus' %}
-  {% assign site_id = template_config.comments.disqus.site_id %}
-{% elsif comment_provider == 'hyvor' %}
-  {% assign site_id = template_config.comments.hyvor.site_id %}
-{% elsif comment_provider == 'commento' %}
-  {% assign site_id = template_config.comments.commento.site_id %}
-{% elsif comment_provider == 'just-comments' %}
-  {% assign site_id = template_config.comments.just-comments.site_id %}
-{% elsif comment_provider == 'facebook' %}
-  {% assign site_id = template_config.comments.facebook.site_id %}
-{% else %}
-  {% assign site_id = false %}
-{% endif %}
-
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
@@ -113,14 +99,6 @@ regenerate:                             true
   {% assign language = "de" %}
 {% else %}
   {% assign language = "en" %}
-{% endif %}
-
-{% if language == "en" %}
-  {% assign comments_headline = template_config.comments.comments_headline.en %}
-{% endif %}
-
-{% if language == "de" %}
-  {% assign comments_headline = template_config.comments.comments_headline.de %}
 {% endif %}
 
 /*
@@ -848,6 +826,7 @@ var j1 = (function () {
       var categoryAllowed;
 
       // provider APIs require user consent
+      // -----------------------------------------------------------------------
       var meta_analytics        = $('meta[name=analytics]').attr('content');
       var analytics             = (meta_analytics === 'true') ? true: false;
       var meta_comments         = $('meta[name=comments]').attr('content');
@@ -864,6 +843,7 @@ var j1 = (function () {
       var personalization       = (meta_personalization === 'true') ? true: false;
 
       // if personalized content detected, page requires user consent
+      // -----------------------------------------------------------------------
       if (personalization && !user_consent.personalization) {
         // redirect to error page: blocked content
         window.location.href = '/444.html';
@@ -873,7 +853,9 @@ var j1 = (function () {
       logText= '\n' + 'loading page partials: started';
       logger.info(logText);
 
-      if (j1.appDetected()) { // app mode
+      if (j1.appDetected()) {
+        // app mode
+        // ---------------------------------------------------------------------
         logger.info('\n' + 'mode detected: app');
 
         $.when ($.ajax(ep_status))
@@ -916,78 +898,22 @@ var j1 = (function () {
 
           // show the page delayed
           setTimeout (function() {
-            // Manage providers for personalization OptIn/Out (Comments|Ads)
-            if (!user_consent.personalization) {
-              logger.debug('\n' + 'disable comment provider: ' + comment_provider);
-              logger.debug('\n' + 'personalization not allowed, privacy settings for personalization: ' + user_consent.personalization);
-              $('#leave-a-comment').remove();
-              if (comment_provider === 'disqus') {
-                $('#dsq-count-scr').remove();
-                $('#disqus-thread').remove();
-              }
-              if (comment_provider === 'hyvor') {
-                $('#hyvor-embed').remove();
-                $('#hyvor-talk-view').remove();
-              }
-            } else {
-              if (comments) {
-                logger.info('\n' + 'enable comment provider: ' + comment_provider);
-                $('#main-content').append('<h2 id="leave-a-comment" class="mt-4">{{comments_headline}}</h2>');
-                if (comment_provider === 'disqus') {
-                  logger.info('\n' + 'load comment provider code: ' + comment_provider);
-                  $('#main-content').append('<div id="disqus_thread"></div>');
-                  $('body').append('<script async id="dsq-count-scr" src="//' + site_id + '.disqus.com/count.js"></script>');
-                  j1.loadJS({
-                    xhr_data_path:    '/assets/data/' + comment_provider + '.js',
-                    xhr_data_element: comment_provider
-                  });
-                }
-                if (comment_provider === 'hyvor') {
-                  $('body').append('<script> var HYVOR_TALK_WEBSITE = ' + site_id + '; var HYVOR_TALK_CONFIG = { url: false, id: false };');
-                  $('#main-content').append('<div id="hyvor-talk-view"></div>');
-                  $('body').append('<script async id="hyvor-embed" type="text/javascript" src="//talk.hyvor.com/web-api/embed.js"></script>');
-                }
-              }
-            }
-
             // display page
-           $('#no_flicker').css('display', 'block');
+            $('#no_flicker').css('display', 'block');
 
-           // no dropcaps if translation enabled
-           if (user_translate.translationEnabled) {
+            // manage Dropcaps if translation is enabled|disabled
+            // -----------------------------------------------------------------
+            if (user_translate.translationEnabled) {
              logger.info('\n' + 'translation enabled: ' + user_translate.translationEnabled);
              logger.debug('\n' + 'skipped processing of dropcaps');
-           } else {
+            } else {
              // initialize dropcaps
              logger.info('\n' + 'post processing: createDropCap');
              j1.core.createDropCap();
-           }
-
-             // add recommended title to hyvor iframe for SEO optimization (if loadad)
-            if (comment_provider === 'hyvor') {
-              var dependencies_met_load_finished = setInterval (function () {
-                if ($('#hyvor-talk-view').children().length) {
-                    $('#hyvor-talk-iframe').prop('title', 'Hyvor talk iframe');
-                    clearInterval(dependencies_met_load_finished);
-                }
-              }, 25);
-            }
-            // NOTE: Placed tracking warning/info here because page may reloaded
-            // after cookie consent selection
-            if (user_consent.analysis) {
-              logger.info('\n' + 'tracking allowed, privacy settings for analysis: ' + user_consent.analysis);
-              if (tracking_enabled && !tracking_id_valid) {
-                logger.error('\n' + 'tracking enabled, but invalid tracking id found: ' + tracking_id);
-              } else if (tracking_enabled && tracking_id_valid) {
-                logger.info('\n' + 'tracking enabled, tracking id found: ' + tracking_id);
-              } else {
-                logger.info('\n' + 'tracking disabled, tracking id found: ' + tracking_id);
-              }
-            } else {
-              logger.debug('\n' + 'tracking not allowed, privacy settings for analysis: ' + user_consent.analysis);
             }
 
-            // show|hide cookie icon (should MOVED to Cookiebar ???)
+            // TODO: should MOVED to Cookiebar ???
+            // show|hide cookie icon
             if (j1.existsCookie(cookie_names.user_consent)) {
               // Display cookie icon
               logText = '\n' + 'show cookie icon';
@@ -1000,6 +926,7 @@ var j1 = (function () {
               $('#quickLinksCookieButton').css('display', 'none');
             }
 
+            // TODO: should MOVED to ControlCenter Adapter ???
             // -----------------------------------------------------------------
             // show cc icon (currently NOT supported)
             // $('#quickLinksControlCenterButton').css('display', 'block');
@@ -1020,6 +947,7 @@ var j1 = (function () {
               $('#quickLinksSignInOutButton').css('display', 'block');
             }
 
+            // TODO: should MOVED to Themer ???
             // jadams, 2021-07-25: hide|show themes menu on cookie consent
             // (analysis|personalization) settings. BootSwatch is a 3rd party
             // is using e.g GA. Because NO control is possible on 3rd parties,
@@ -1033,10 +961,10 @@ var j1 = (function () {
               $("#themes_menu").show();
             }
 
-            // if the page requested contains an anchor element,
-            // do a smooth scroll to
+            // if a page requested contains an anchor element, do a smooth scroll
             j1.scrollTo();
 
+            // detect if a loaded page has been chenged
             if (user_session.previous_page !== user_session.current_page) {
               logText = '\n' + 'page change detected';
               logger.info(logText);
@@ -1052,7 +980,7 @@ var j1 = (function () {
             current_user_data = j1.mergeData(user_session, user_state);
             j1.core.navigator.updateSidebar(current_user_data);
 
-            // Set|Log status
+            // set|log status
             state = 'finished';
             j1.setState(state);
             logText = '\n' + 'state: ' + state;
@@ -1063,46 +991,13 @@ var j1 = (function () {
         });
       } else {
         // web mode
+        // ---------------------------------------------------------------------
         setTimeout (function() {
           // j1.setState('finished');
           logger.info('\n' + 'state: finished');
           logger.info('\n' + 'page initialization: finished');
 
-          // Manage providers for personalization OptIn/Out (Comments|Ads)
-          if (!user_consent.personalization) {
-            logger.debug('\n' + 'disable comment provider: ' + comment_provider);
-            logger.debug('\n' + 'personalization not allowed, privacy settings for personalization: ' + user_consent.personalization);
-            $('#leave-a-comment').remove();
-            if (comment_provider === 'disqus') {
-              $('#dsq-count-scr').remove();
-              $('#disqus-thread').remove();
-            }
-            if (comment_provider === 'hyvor') {
-              $('#hyvor-embed').remove();
-              $('#hyvor-talk-view').remove();
-            }
-          } else {
-            if (comments) {
-              logger.info('\n' + 'enable comment provider: ' + comment_provider);
-              $('#main-content').append('<h2 id="leave-a-comment" class="mt-4">{{comments_headline}}</h2>');
-              if (comment_provider === 'disqus') {
-                logger.info('\n' + 'load comment provider code: ' + comment_provider);
-                $('#main-content').append('<div id="disqus_thread"></div>');
-                $('body').append('<script async id="dsq-count-scr" src="//' + site_id + '.disqus.com/count.js"></script>');
-                j1.loadJS({
-                  xhr_data_path:    '/assets/data/' + comment_provider + '.js',
-                  xhr_data_element: comment_provider
-                });
-              }
-              if (comment_provider === 'hyvor') {
-                $('body').append('<script> var HYVOR_TALK_WEBSITE = ' + site_id + '; var HYVOR_TALK_CONFIG = { url: false, id: false };');
-                $('#main-content').append('<div id="hyvor-talk-view"></div>');
-                $('body').append('<script async id="hyvor-embed" type="text/javascript" src="//talk.hyvor.com/web-api/embed.js"></script>');
-              }
-            }
-          }
-
-          // display page
+          // display the page loaded
           $('#no_flicker').css('display', 'block');
 
           // jadams, 2021-11-19: test code for 'tapTarget' of 'materializeCss'
@@ -1129,7 +1024,8 @@ var j1 = (function () {
               $(this).parents(".card-header").toggleClass("highlight");
           });
 
-          // no dropcaps if translation enabled
+          // manage Dropcaps if translation is enabled|disabled
+          // -------------------------------------------------------------------
           if (user_translate.translationEnabled) {
             logger.info('\n' + 'translation enabled: ' + user_translate.translationEnabled);
             logger.debug('\n' + 'skipped processing of dropcaps');
@@ -1137,31 +1033,6 @@ var j1 = (function () {
             // initialize dropcaps
             logger.info('\n' + 'post processing: createDropCap');
             j1.core.createDropCap();
-          }
-
-          // add recommended title to hyvor iframe for SEO optimization (if loadad)
-         if (comment_provider === 'hyvor') {
-           var dependencies_met_load_finished = setInterval (function () {
-             if ($('#hyvor-talk-view').children().length) {
-               $('#hyvor-talk-iframe').prop('title', 'Hyvor talk iframe');
-               clearInterval(dependencies_met_load_finished);
-             }
-           }, 25);
-         }
-
-          // NOTE: Placed tracking warning/info here because page may reloaded
-          // after cookie consent selection
-          if (user_consent.analysis) {
-            logger.info('\n' + 'tracking allowed, privacy settings for analysis: ' + user_consent.analysis);
-            if (tracking_enabled && !tracking_id_valid) {
-              logger.error('\n' + 'tracking enabled, but invalid tracking id found: ' + tracking_id);
-            } else if (tracking_enabled && tracking_id_valid) {
-              logger.info('\n' + 'tracking enabled, tracking id found: ' + tracking_id);
-            } else {
-              logger.info('\n' + 'tracking disabled, tracking id found: ' + tracking_id);
-            }
-          } else {
-            logger.debug('\n' + 'tracking not allowed, privacy settings for analysis: ' + user_consent.analysis);
           }
 
           logger.info('\n' + 'mode detected: web');
@@ -1177,9 +1048,12 @@ var j1 = (function () {
               expires:  0
           });
 
+          // TODO: should MOVED to ControlCenter Adapter ???
+          // -----------------------------------------------------------------
           // show cc icon (currently NOT supported)
           // $('#quickLinksControlCenterButton').css('display', 'block');
 
+          // TODO: should MOVED to Cookiebar ???
           // show|hide cookie icon
           if (j1.existsCookie(cookie_names.user_consent)) {
             // Display cookie icon
@@ -1193,6 +1067,7 @@ var j1 = (function () {
             $('#quickLinksCookieButton').css('display', 'none');
           }
 
+          // TODO: should MOVED to Themer ???
           // jadams, 2021-07-25: hide|show themes menu on cookie consent
           // (analysis|personalization) settings. BootSwatch is a 3rd party
           // is using e.g GA. Because NO control is possible on 3rd parties,
@@ -1206,10 +1081,10 @@ var j1 = (function () {
             $("#themes_menu").show();
           }
 
-          // If the page requested contains an anchor element,
-          // do a smooth scroll
+          // if a page requested contains an anchor element, do a smooth scroll
           j1.scrollTo();
 
+          // detect if a loaded page has been chenged
           if (user_session.previous_page !== user_session.current_page) {
             logText = '\n' + 'page change detected';
             logger.info(logText);
@@ -1225,7 +1100,7 @@ var j1 = (function () {
           current_user_data = j1.mergeData(user_session, user_state);
           j1.core.navigator.updateSidebar(current_user_data);
 
-          // Set|Log status
+          // set|log status
           state = 'finished';
           j1.setState(state);
           logText = '\n' + 'state: ' + state;

@@ -5,7 +5,8 @@
  #
  #  Product/Info:
  #  https://jekyll.one
- #  https://github.com/adamnurdin01/navigator
+ #  https://github.com/adamnurdin01/bootsnav
+ #  http://corenav.anurdin.net/
  #
  #  Copyright (C) 2021 Juergen Adams
  #  Copyright (C) 2016 adamnurdin01

@@ -177,15 +177,15 @@ j1.adapter['translator'] = (function (j1, window) {
 
       // add GT callback script dynamically in the head section
       // -----------------------------------------------------------------------
-      gtCallbackScript.text  = '';
-      gtCallbackScript.text += 'function googleTranslateElementInit() {';
-      gtCallbackScript.text += '  var gtAPI = new google.translate.TranslateElement({';
-      gtCallbackScript.text += '    pageLanguage: "{{translator_options.contentLanguage}}",';
-      gtCallbackScript.text += '    layout:       google.translate.TranslateElement.FloatPosition.TOP_LEFT';
-      gtCallbackScript.text += '  },';
-      gtCallbackScript.text += '  "google_translate_element");';
-      gtCallbackScript.text += '  j1.adapter.translator.postTranslateElementInit(gtAPI);';
-      gtCallbackScript.text += '}';
+      gtCallbackScript.text  = '\n';
+      gtCallbackScript.text += 'function googleTranslateElementInit() {' + '\n';
+      gtCallbackScript.text += '  var gtAPI = new google.translate.TranslateElement({' + '\n';
+      gtCallbackScript.text += '    pageLanguage: "{{translator_options.contentLanguage}}",' + '\n';
+      gtCallbackScript.text += '    layout:       google.translate.TranslateElement.FloatPosition.TOP_LEFT' + '\n';
+      gtCallbackScript.text += '  },' + '\n';
+      gtCallbackScript.text += '  "google_translate_element");' + '\n';
+      gtCallbackScript.text += '  j1.adapter.translator.postTranslateElementInit(gtAPI);' + '\n';
+      gtCallbackScript.text += '}' + '\n';
       document.head.appendChild(gtCallbackScript);
 
       // -----------------------------------------------------------------------

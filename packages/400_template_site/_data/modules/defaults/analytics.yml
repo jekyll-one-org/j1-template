@@ -24,7 +24,7 @@ about_config:
   location:                             _data/modules/default/analytics.yml
 
 # ------------------------------------------------------------------------------
-# User settings
+# Default settings
 #
 defaults:
 

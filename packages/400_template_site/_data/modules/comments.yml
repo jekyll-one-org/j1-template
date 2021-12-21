@@ -1,0 +1,72 @@
+# ------------------------------------------------------------------------------
+#  ~/_data/modules/comments.yml
+#  User configuration settings for J1 Comments Module
+#
+#  Product/Info:
+#  https://jekyll.one
+#
+#  Copyright (C) 2021 Juergen Adams
+#
+#  J1 Template is licensed under the MIT License.
+#  See: https://github.com/jekyll-one/J1 Template/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description (used for J1 CC only)
+#
+description:
+
+  title:                                J1 Comments
+  scope:                                User settings
+  location:                             _data/modules/comments.yml
+
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+settings:
+
+  # ----------------------------------------------------------------------------
+  # Settings
+  #
+  #   enabled
+  #   --------------------------------------------------------------------------
+  #   Enables or disable comments services. If disabled, the service
+  #   won't be enabled on any page.
+  #
+  #   values:                           [true|false]
+  #   default:                          false
+  #
+  #   provider
+  #   --------------------------------------------------------------------------
+  #   Specifies the provider to be used for commenting
+  #
+  #   values:                           [disqus|hyvor|commento|just-comments]
+  #   default:                          disqus
+  #
+  # ----------------------------------------------------------------------------
+  #
+  enabled:                              true
+
+  provider:                             hyvor
+
+  # ----------------------------------------------------------------------------
+  # Provider settings
+  #
+  #   site_id
+  #   --------------------------------------------------------------------------
+  #   Your site id connected with your Provider Account the for the
+  #   domain registered.
+  #
+  #   values:                         string
+  #   default:                        none
+  #
+  #   --------------------------------------------------------------------------
+  #
+  hyvor:
+    site_id:                            4612
+
+  disqus:
+    site_id:                            jekyll-one
+
+# ------------------------------------------------------------------------------
+# END config
