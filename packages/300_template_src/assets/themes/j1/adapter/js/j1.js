@@ -985,6 +985,8 @@ var j1 = (function () {
             logText = '\n' + 'page finalized successfully';
             logger.info(logText);
 
+            // do a (smooth) scroll if all nav elements ready
+            // -----------------------------------------------------------------
             var dependencies_met_navigator_finished = setInterval(function() {
               if (j1.adapter.navigator.getState() == 'finished') {
                 // if a page requested contains an anchor element, do a smooth scroll
@@ -1110,6 +1112,8 @@ var j1 = (function () {
           logText = '\n' + 'page finalized successfully';
           logger.info(logText);
 
+          // do a (smooth) scroll if all nav elements ready
+          // -------------------------------------------------------------------
           var dependencies_met_navigator_finished = setInterval(function() {
             if (j1.adapter.navigator.getState() == 'finished') {
               // if a page requested contains an anchor element, do a smooth scroll
@@ -1118,7 +1122,6 @@ var j1 = (function () {
             }
           }, 25);
         }, flickerTimeout);
-
       }
     },
 
