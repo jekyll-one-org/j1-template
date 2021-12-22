@@ -86,15 +86,24 @@ function CookieConsent(props) {
     set: function (name, value, days, cookieSameSite, cookieDomain, cookieSecure) {
       var value_encoded = window.btoa(value);
       var expires = '; expires=Thu, 01 Jan 1970 00:00:00 UTC';
+
       if (days>0) {
         var date = new Date();
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         expires = "; expires=" + date.toUTCString();
       }
+
+      // TODO: cookie attriebutes should be 'stringified' as done
+      // in j1.adapter.writeCookie()
+      // NOTE: DISABLED attribute 'Domain' for now
+      //------------------------------------------------------------------------
+
       if (cookieSecure) {
-        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + '; ' + 'Domain=' + cookieDomain + '; ' + 'Secure=' + cookieSecure + ';';
+//      document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + '; ' + 'Domain=' + cookieDomain + '; ' + 'Secure=' + cookieSecure + ';';
+        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + '; ' + 'Secure=' + cookieSecure + ';';
       } else {
-        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + ';' + 'Domain=' + cookieDomain + '; ';
+//      document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + ';' + 'Domain=' + cookieDomain + '; ';
+        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + ';';
       }
     },
     get: function (name) {

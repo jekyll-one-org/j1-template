@@ -19,6 +19,7 @@ regenerate:                             true
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
+ # cookie_options: {{ cookie_options | debug }}
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
@@ -94,7 +95,7 @@ j1.adapter.cookieConsent = (function (j1, window) {
   var url;
   var baseUrl;
   var hostname;
-  var domain;
+  var auto_domain;
   var cookie_option_domain;
   var cookie_domain;
   var secure;
@@ -130,8 +131,8 @@ j1.adapter.cookieConsent = (function (j1, window) {
       url                   = new liteURL(window.location.href);
       baseUrl               = url.origin;
       hostname              = url.hostname;
-      domain                = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
-      cookie_option_domain  = '{{cookie_options.domain}}';
+      auto_domain           = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+      cookie_option_domain  = ('{{cookie_options.domain}}' === 'true');
       secure                = (url.protocol.includes('https')) ? true : false;
       contentLanguage       = '{{site.language}}';
       navigatorLanguage     = navigator.language || navigator.userLanguage;
@@ -171,11 +172,28 @@ j1.adapter.cookieConsent = (function (j1, window) {
         var expires     = '{{cookie_options.expires}}';
         var same_site   = '{{cookie_options.same_site}}';
 
+        // // set domain used by cookies
+        // if (cookie_option_domain == 'auto') {
+        //   domainAttribute = domain ;
+        // } else  {
+        //   domainAttribute = '';
+        // }
+
         // set domain used by cookies
-        if (cookie_option_domain == 'auto') {
-          domainAttribute = domain ;
-        } else  {
-          domainAttribute = '';
+        if (cookie_option_domain) {
+          if (cookie_option_domain == 'auto') {
+            domainAttribute = auto_domain;
+            stringifiedAttributes += '; ' + 'Domain=' + domainAttribute;
+          } else if (cookie_option_domain)  {
+            domainAttribute = domain;
+            stringifiedAttributes += '; ' + 'Domain=' + domainAttribute;
+          }
+        }
+
+        // Failsafe: if 'None' is given for samesite in non-secure environments
+        // -----------------------------------------------------------------------
+        if (same_site == 'None' && !secure) {
+          same_site = 'Lax';
         }
 
         if ( j1.getState() === 'finished' ) {
