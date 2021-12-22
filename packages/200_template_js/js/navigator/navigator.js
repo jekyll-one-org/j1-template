@@ -178,8 +178,8 @@ module.exports = function navigator ( options ) {
         scrollOffset = j1.getScrollOffset();
 
         if (img_link) {
-          // do nothing if a click on an image detected
-          return false;
+          // skip scrolling if a click on an image detected
+          return true;
         }
 
         if (anchor_id && !nav_link || page_link) {
