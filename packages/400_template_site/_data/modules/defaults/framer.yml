@@ -245,7 +245,6 @@ description:
 # DEFAULTS
 #
 defaults:
-
   enabled:                            true
 
   load:                               sync

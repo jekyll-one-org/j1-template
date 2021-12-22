@@ -24,8 +24,8 @@ description:
 # Default settings
 #
 defaults:
-
   enabled:                              false
+
   placement:                            navbar
   target:                               _blank
   rebuild:                              false

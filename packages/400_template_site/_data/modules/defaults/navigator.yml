@@ -29,6 +29,7 @@ description:
 # Default settings
 #
 defaults:
+  enabled:                              true
 
   # ------------------------------------------------------------------------------
   # Font icon settings

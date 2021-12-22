@@ -33,6 +33,8 @@
 # SETTINGS
 #
 settings:
+  enabled:                              true
+
   # ----------------------------------------------------------------------------
   # Global settings for text- and image-based header
   #

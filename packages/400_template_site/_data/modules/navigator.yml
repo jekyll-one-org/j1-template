@@ -27,6 +27,7 @@ description:
 # User configuration settings
 #
 settings:
+  enabled:                              true
 
   # ----------------------------------------------------------------------------
   # NavBar

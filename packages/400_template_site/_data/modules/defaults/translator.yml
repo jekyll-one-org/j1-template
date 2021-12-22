@@ -24,7 +24,6 @@ about_config:
 # Default translator settings (general)
 #
 defaults:
-
   enabled:                              false
 
   translationEnabled:                   false

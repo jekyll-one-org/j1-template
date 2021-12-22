@@ -33,6 +33,7 @@ description:
 # Default configuration settings
 #
 defaults:
+  enabled:                              true
 
   # ----------------------------------------------------------------------------
   # Global settings for text- and image-based header

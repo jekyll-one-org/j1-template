@@ -24,8 +24,8 @@ description:
 # User configuration settings
 #
 settings:
-
   enabled:                              true
+
   placement:                            navbar
   target:                               _blank
   rebuild:                              true

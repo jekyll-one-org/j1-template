@@ -29,6 +29,7 @@ description:
 #
 defaults:
   enabled:                              false
+
   mode:                                 icon
 
   xhr_container_id:                     fab-container

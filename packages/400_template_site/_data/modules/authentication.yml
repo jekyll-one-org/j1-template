@@ -25,6 +25,7 @@ description:
 # User settings
 #
 settings:
+  enabled:                              true
 
   # ----------------------------------------------------------------------------
   # Provider settings
