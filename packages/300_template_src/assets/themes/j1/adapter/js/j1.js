@@ -1528,7 +1528,7 @@ var j1 = (function () {
       };
       var settings = $.extend(defaults, options);
 
-      // Failsafe: if 'None' is given in non-secure environment
+      // Failsafe: if 'None' is given for samesite in non-secure environments
       // -----------------------------------------------------------------------
       if (settings.samesite == 'None' && !settings.secure) {
         settings.samesite = 'Lax';
