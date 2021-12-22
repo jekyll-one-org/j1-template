@@ -178,7 +178,7 @@ module.exports = function navigator ( options ) {
         scrollOffset = j1.getScrollOffset();
 
         if (img_link) {
-          // do nothing if a click on an image is detected
+          // do nothing if a click on an image detected
           return false;
         }
 
