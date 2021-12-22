@@ -1504,11 +1504,11 @@ var j1 = (function () {
     // -------------------------------------------------------------------------
     writeCookie: function (options /*name, data, [path, expires, domain, samesite, http_only, secure]*/) {
       var date                  = new Date();
-      var timestamp_now         = date.toISOString()
+      var timestamp_now         = date.toISOString();
       var url                   = new liteURL(window.location.href);
       var baseUrl               = url.origin;;
       var hostname              = url.hostname;
-      var domain                = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+      var auto_domain           = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
       var stringifiedAttributes = '';
       var cookie_data           = {};
       var data_json;
@@ -1521,12 +1521,18 @@ var j1 = (function () {
           name:         '',
           path:         '{{cookie_options.path}}',
           expires:      '{{cookie_options.expires}}',
-          domain:       '{{cookie_options.domain}}',
+          domain:       ('{{cookie_options.domain}}' === 'true'),               // convert string to boolean
           samesite:     '{{cookie_options.same_site}}',
           http_only:    '{{cookie_options.http_only}}',
           secure:       '{{cookie_options.secure}}'
       };
       var settings = $.extend(defaults, options);
+
+      // Failsafe: if 'None' is given in non-secure environment
+      // -----------------------------------------------------------------------
+      if (settings.samesite == 'None' && !settings.secure) {
+        settings.secure = 'Lax';
+      }
 
       cookie_data.timestamp = timestamp_now;
 
@@ -1551,12 +1557,14 @@ var j1 = (function () {
       stringifiedAttributes += '; ' + 'SameSite=' + settings.samesite;
 
       // set domain used by cookies
-      if (settings.domain == 'auto') {
-        domainAttribute = domain;
-        stringifiedAttributes += '; ' + 'Domain=' + domainAttribute;
-      } else  {
-        domainAttribute = '';
-        stringifiedAttributes += '; ' + 'Domain=' + domainAttribute;
+      if (settings.domain) {
+        if (settings.domain == 'auto') {
+          domainAttribute = auto_domain;
+          stringifiedAttributes += '; ' + 'Domain=' + domainAttribute;
+        } else if (settings.domain)  {
+          domainAttribute = settings.domain;
+          stringifiedAttributes += '; ' + 'Domain=' + domainAttribute;
+        }
       }
 
       if (settings.secure == true) {

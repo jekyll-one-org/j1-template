@@ -118,6 +118,8 @@ j1.adapter.comments = (function (j1, window) {
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
 var environment       = '{{environment}}';
+var date              = new Date();
+var timestamp_now     = date.toISOString();
 var comments_provider = '{{comments_provider}}';
 var dqApiScript       = document.createElement('script');
 var hvApiScript       = document.createElement('script');
@@ -276,12 +278,9 @@ var logText;
 
             // add|initialize Disqus Web API
             // -----------------------------------------------------------------
-            var d = new Date();
-            var currDate = d.toString().slice(0, 33);                           // extract the data part
-
             dqApiScript.id    = 'dq-web-api';
             dqApiScript.src   = '//' + siteID + '.disqus.com/embed.js";'
-            dqApiScript.setAttribute("data-timestamp", '"' + currDate + '"');
+            dqApiScript.setAttribute("data-timestamp", '"' + timestamp_now + '"');
             document.head.appendChild(dqApiScript);
 
             // add Disqus comment container
