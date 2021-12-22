@@ -77,10 +77,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-
-{% comment %} Main
---------------------------------------------------------------- {% endcomment %}
-j1.adapter['carousel'] = (function (j1, window) {
+j1.adapter.carousel = (function (j1, window) {
   var environment   = '{{environment}}';
   var moduleOptions = {};
   var _this;

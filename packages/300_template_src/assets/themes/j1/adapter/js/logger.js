@@ -80,8 +80,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-
-j1.adapter['logger'] = (function (j1, window) {
+j1.adapter.logger = (function (j1, window) {
 
   // ---------------------------------------------------------------------------
   // globals

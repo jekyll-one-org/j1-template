@@ -83,9 +83,7 @@ regenerate:                             true
 // https://www.marghoobsuleman.com/image-dropdown/advanced-help
 'use strict';
 
-{% comment %} Main
--------------------------------------------------------------------------------- {% endcomment %}
-j1.adapter['translator'] = (function (j1, window) {
+j1.adapter.translator = (function (j1, window) {
 
   var environment       = '{{environment}}';
   var tracking_enabled  = ('{{tracking_enabled}}' === 'true') ? true: false;    // Analytics/GA enabled?

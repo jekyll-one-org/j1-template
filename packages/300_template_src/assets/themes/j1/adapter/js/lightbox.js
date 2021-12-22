@@ -80,11 +80,7 @@ regenerate:                             false
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-
-{% comment %} Main
---------------------------------------------------------------- {% endcomment %}
-// j1.Lightbox = (function (j1, window) {
-j1.adapter['lightbox'] = (function (j1, window) {
+j1.adapter.lightbox = (function (j1, window) {
 
   {% comment %} Global variables
   ------------------------------------------------------------------------------ {% endcomment %}

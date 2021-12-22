@@ -62,8 +62,7 @@ regenerate:                             false
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-
-j1.adapter['clipboard'] = (function (j1, window) {
+j1.adapter.clipboard = (function (j1, window) {
 
   // ---------------------------------------------------------------------------
   // globals

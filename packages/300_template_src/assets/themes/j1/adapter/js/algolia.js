@@ -74,10 +74,7 @@ regenerate:                             false
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-
-{% comment %} Main
--------------------------------------------------------------------------------- {% endcomment %}
-j1.adapter['algolia'] = (function (j1, window) {
+j1.adapter.algolia = (function (j1, window) {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}

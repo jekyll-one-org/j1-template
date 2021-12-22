@@ -90,10 +90,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-
-{% comment %} Main
--------------------------------------------------------------------------------- {% endcomment %}
-j1.adapter['toccer'] = (function () {
+j1.adapter.toccer = (function () {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}

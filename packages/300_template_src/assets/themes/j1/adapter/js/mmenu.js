@@ -101,8 +101,7 @@ regenerate: true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-
-j1.adapter['mmenu'] = (function (j1, window) {
+j1.adapter.mmenu = (function (j1, window) {
 
   // ---------------------------------------------------------------------------
   // globals
@@ -363,7 +362,7 @@ j1.adapter['mmenu'] = (function (j1, window) {
                   logger.debug('\n' + 'hide|show the main nav menu');
                   // switch off|on the (main) nav menu
                   $('#' + navMenuOptions.nav_main_menu).toggle();
-                  $('#' + navMenuOptions.nav_quicklinks).toggle();                  
+                  $('#' + navMenuOptions.nav_quicklinks).toggle();
                 }
               });
 

@@ -148,8 +148,7 @@ ToDo: Remove configuration from j1_navigator.yml
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-
-j1.adapter['navigator'] = (function (j1, window) {
+j1.adapter.navigator = (function (j1, window) {
 
   // ---------------------------------------------------------------------------
   // globals

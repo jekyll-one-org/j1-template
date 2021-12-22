@@ -76,10 +76,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-
-{% comment %} Main
--------------------------------------------------------------------------------- {% endcomment %}
-j1.adapter['justifiedGallery'] = (function (j1, window) {
+j1.adapter.justifiedGallery = (function (j1, window) {
 
   {% comment %} Global variables
   ------------------------------------------------------------------------------ {% endcomment %}
