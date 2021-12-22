@@ -1555,7 +1555,7 @@ var j1 = (function () {
         domainAttribute = domain;
         stringifiedAttributes += '; ' + 'Domain=' + domainAttribute;
       } else  {
-        domainAttribute = 'localhost';
+        domainAttribute = '';
         stringifiedAttributes += '; ' + 'Domain=' + domainAttribute;
       }
 
