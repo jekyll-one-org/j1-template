@@ -1531,7 +1531,7 @@ var j1 = (function () {
       // Failsafe: if 'None' is given in non-secure environment
       // -----------------------------------------------------------------------
       if (settings.samesite == 'None' && !settings.secure) {
-        settings.secure = 'Lax';
+        settings.samesite = 'Lax';
       }
 
       cookie_data.timestamp = timestamp_now;
