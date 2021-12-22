@@ -33,8 +33,8 @@
 #   under ~/assets/themes/j1. To shorten the filenames to be configured,
 #   base_url points to the (base) asset path.
 #
-#   type:                           string
-#   default:                        /assets/themes/j1
+#   type:                               string
+#   default:                            /assets/themes/j1
 #
 # extensions
 # ------------------------------------------------------------------------------
@@ -45,10 +45,10 @@
 #
 #   defaults
 # ------------------------------------------------------------------------------
-#     css_dev:                      css
-#     css_prod:                     min.css
-#     js_dev:                       js
-#     js_prod:                      min.js
+#     css_dev:                          css
+#     css_prod:                         min.css
+#     js_dev:                           js
+#     js_prod:                          min.js
 #
 # location
 # ------------------------------------------------------------------------------
@@ -86,8 +86,8 @@
 #   NOTE:
 #   To load resources from REMOTE, access to the INTERNET is needed.
 #
-#   type:                           string (local|remote)
-#   default:                        local
+#   type:                               string (local|remote)
+#   default:                            local
 #
 # ------------------------------------------------------------------------------
 # RESOURCES
@@ -106,16 +106,16 @@
 # ------------------------------------------------------------------------------
 #   Enables|Disables the use of a resource
 #
-#   type:                           boolean
-#   values:                         true|false
-#   default:                        true
+#   type:                               boolean
+#   values:                             true|false
+#   default:                            true
 #
 # id
 # ------------------------------------------------------------------------------
 #   Specifies the ID of a ressoure.
 #
-#   type:                           string
-#   default:                        ""
+#   type:                               string
+#   default:                            ""
 #
 # comment
 # ------------------------------------------------------------------------------
@@ -124,8 +124,8 @@
 #   used for commenting the generated HTML markup for easier
 #   (post mortem) code analysis.
 #
-#   type:                           string
-#   default:                        ""
+#   type:                               string
+#   default:                            ""
 #
 # region
 # ------------------------------------------------------------------------------
@@ -143,17 +143,17 @@
 #   (REGION head) assuming modern browsers managing script
 #   loading strategies for SYNC and DEFER.
 #
-#   type:                           string
-#   values:                         head|body-footer
-#   default:                        head
+#   type:                               string
+#   values:                             head|body-footer
+#   default:                            head
 #
 # layout
 # ------------------------------------------------------------------------------
 #   Specifies the LAYOUT the resources is loaded
 #
-#   type:                           sequence (array)
-#   values:                         home|page|post|app|all
-#   default:                        []
+#   type:                               sequence (array)
+#   values:                             home|page|post|app|all
+#   default:                            []
 #
 # required
 # ------------------------------------------------------------------------------
@@ -165,7 +165,7 @@
 #
 #   ---
 #   ...
-#   resources:                    [ ID, .. ,ID ]
+#   resources:                        [ ID, .. ,ID ]
 #   ...
 #   ---
 #
@@ -175,18 +175,18 @@
 #   of data (CSS|JS files) loaded by a page, MODULES should loaded
 #   (and initialized) on ondemand.
 #
-#   type:                           string
-#   values:                         always|ondemand
-#   default:                        always
+#   type:                               string
+#   values:                             always|ondemand
+#   default:                            always
 #
 # script_load
 # ------------------------------------------------------------------------------
 #   Specifies HOW a js resource (script) is loaded by the
 #   BROWSER
 #
-#   type:                           string
-#   values:                         sync|async|defer
-#   default:                        sync
+#   type:                               string
+#   values:                             sync|async|defer
+#   default:                            sync
 #
 #   NOTE:
 #   Modern web browsers support the ASYNC and DEFER attributes
@@ -210,9 +210,9 @@
 #   Set to false, if the (native) initializer of a resource should
 #   NOT get any template specific parameters at startup.
 #
-#   type:                           boolean
-#   values:                         true|false
-#   default:                        true
+#   type:                               boolean
+#   values:                             true|false
+#   default:                            true
 #
 # data
 # ------------------------------------------------------------------------------
@@ -234,36 +234,36 @@
 #   versions (e.g. js files from commercial products) are
 #   available.
 #
-#   type:                           sequence (array)
-#   values:                         JSON object for local|remote resources
-#   default:                        []
+#   type:                               sequence (array)
+#   values:                             JSON object for local|remote resources
+#   default:                            []
 #
 #   css
 #   ----------------------------------------------------------------------------
 #   Specifies CSS resources (NO .css extention) the module
 #   depends on.
 #
-#   type:                           sequence (array)
-#   values:                         JSON object for local|remote CSS resources
-#   default:                        []
+#   type:                               sequence (array)
+#   values:                             JSON object for local|remote CSS resources
+#   default:                            []
 #
 #   js
 #   ----------------------------------------------------------------------------
 #   Specifies JAVASCRIPT resources (NO .js extention) the
 #   module depends on.
 #
-#   type:                           sequence (array)
-#   values:                         JSON object for local|remote JS resources
-#   default:                        []
+#   type:                               sequence (array)
+#   values:                             JSON object for local|remote JS resources
+#   default:                            []
 #
 #   init_function
 #   ----------------------------------------------------------------------------
 #   Specifies the name of the (J1|Module) initializer
 #   function to be started on document-ready (event).
 #
-#   type:                           string
-#   values:                         name
-#   default:                        ""
+#   type:                               string
+#   values:                             name
+#   default:                            ""
 #
 # ------------------------------------------------------------------------------
 # Resource SKELETON
@@ -272,45 +272,45 @@
 #  # ---------------------------------------------------------------------------
 #  # RESOURCE description
 #  - resource:
-#      enabled:                      true|false
-#      id:                           resource_id
-#      comment:                      cmments on YOUR_RESOURCE_NAME
-#      region:                       head|body-footer
-#      layout:                       [ layout_name(s)|all ]
-#      required:                     always|ondemand
-#      preload:                      false|true
-#      script_load:                  sync|defer|async
-#      pass_init_data:               true|false
+#      enabled:                         true|false
+#      id:                              resource_id
+#      comment:                         cmments on YOUR_RESOURCE_NAME
+#      region:                          head|body-footer
+#      layout:                          [ layout_name(s)|all ]
+#      required:                        always|ondemand
+#      preload:                         false|true
+#      script_load:                     sync|defer|async
+#      pass_init_data:                  true|false
 #      data:
 #
-#        css:                        [
-#                                       { local:  "path/to/1/css_file",
-#                                         remote: "URL 1st css_file"
-#                                       },
-#                                       { local:  "path/to/2/css_file",
-#                                         remote: "URL 2nd css_file"
-#                                       },
-#                                       ...
-#                                    ]
-#        files:                      [
-#                                       "path/to/1/file.ext",
-#                                       "path/to/2/file.ext",
-#                                       ...
-#                                    ]
-#        js:                         [
-#                                       { local:  "path/to/1/js_file",
-#                                         remote: "URL 1st js_file"
-#                                       },
-#                                       { local:  "path/to/2/js_file",
-#                                         remote: "URL 2nd js_file"
-#                                       },
-#                                       ...
-#                                    ]
-#        init_function:              [
-#                                     INITIALIZER_NAME.INIT_METHOD_NAME,
-#                                     INITIALIZER_NAME.INIT_METHOD_NAME,
-#                                     ...
-#                                    ]
+#        css:                           [
+#                                         { local:  "path/to/1/css_file",
+#                                           remote: "URL 1st css_file"
+#                                         },
+#                                         { local:  "path/to/2/css_file",
+#                                           remote: "URL 2nd css_file"
+#                                         },
+#                                         ...
+#                                       ]
+#        files:                         [
+#                                         "path/to/1/file.ext",
+#                                         "path/to/2/file.ext",
+#                                         ...
+#                                       ]
+#        js:                            [
+#                                         { local:  "path/to/1/js_file",
+#                                           remote: "URL 1st js_file"
+#                                         },
+#                                         { local:  "path/to/2/js_file",
+#                                           remote: "URL 2nd js_file"
+#                                         },
+#                                         ...
+#                                       ]
+#        init_function:                 [
+#                                         INITIALIZER_NAME.INIT_METHOD_NAME,
+#                                         INITIALIZER_NAME.INIT_METHOD_NAME,
+#                                         ...
+#                                       ]
 #
 # ------------------------------------------------------------------------------
 

@@ -46,7 +46,7 @@ settings:
   #
   # ----------------------------------------------------------------------------
   #
-  enabled:                              true
+  enabled:                              false
   provider:                             google
 
   google:

@@ -13,21 +13,24 @@
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
-# About this configuration (used for J1 CC only)
+# Description (used for J1 CC only)
 #
-about_config:
+description:
 
   title:                                Authentication
   scope:                                User settings
   location:                             _data/modules/authentication.yml
 
 # ------------------------------------------------------------------------------
-# User configuration settings
+# User settings
 #
 settings:
 
+  # ----------------------------------------------------------------------------
+  # Provider settings
+  #
   j1_auth:
-    enabled:                            true
+    enabled:                            false
     ssl:                                false
 
     content:
@@ -41,7 +44,6 @@ settings:
 
     providers:
       activated:                        [ disqus, github ]
-#     activated:                        [ github ]
 
       disqus:
         provider_url:                   https://disqus.com
@@ -79,82 +81,8 @@ settings:
               whitelist:                [ all ]
               blacklist:                []
 
-    # facebook:
-    #   provider_url:                   https://facebook.com
-    #   strategy:                       member
-    #   scope:                          []
-    #   users:                          [ all ]
-    #   permissions:                    [ protected ]
-    #   data_fields:                    []
-    #   conditions:
-    #     protected:
-    #       enabled:                    true
-    #       users:
-    #         whitelist:                [ all ]
-    #         blacklist:                []
-    #
-    # github:
-    #   provider_url:                   https://github.com
-    #   strategy:                       member
-    #   scope:                          []
-    #   users:                          [ all ]
-    #   permissions:                    [ protected ]
-    #   data_fields:                    []
-    #   conditions:
-    #     protected:
-    #       enabled:                    true
-    #       users:
-    #         whitelist:                [ all ]
-    #         blacklist:                []
-    #
-    # patreon:
-    #   provider_url:                   https://patreon.com
-    #   strategy:                       member
-    #   scope:                          [ users, pledges-to-me ]
-    #   users:                          [ all ]
-    #   permissions:                    [ protected, private ]
-    #   data_fields:                    [
-    #                                     email, name, first_name, nickname,
-    #                                     amount_cents, created_at, declined_since
-    #                                   ]
-    #   conditions:
-    #     protected:
-    #       enabled:                    true
-    #       users:
-    #         blacklist:                []
-    #     private:
-    #       enabled:                    true
-    #       users:
-    #         whitelist:                [ juergen_adams ]
-    #         blacklist:                []
-    #       payment:
-    #         activated:                [ "Premium Content", "Value Content" ]
-    #         tiers:
-    #           - tier:
-    #               name:               "Premium Content"
-    #               amount:             500,
-    #               state:              paid
-    #           - tier:
-    #               name:               "Value Content"
-    #               amount:             100,
-    #               state:              paid
-    #
-    # twitter:
-    #   provider_url:                   https://twitter.com
-    #   strategy:                       member
-    #   scope:                          []
-    #   users:                          [ all ]
-    #   permissions:                    [ protected ]
-    #   data_fields:                    []
-    #   conditions:
-    #     protected:
-    #       enabled:                    true
-    #       users:
-    #         blacklist:                []
-
-
   # ----------------------------------------------------------------------------
-  # Auth CLIENT
+  # Auth CLIENT settings
   #
   auth_client:
     enabled:                            true
