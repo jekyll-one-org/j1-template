@@ -400,11 +400,13 @@ j1.adapter['navigator'] = (function (j1, window) {
                     clearInterval(dependencies_met_page_finished);
                   }, 25);
                 }
-                _this.setState('initialized');
+//              _this.setState('initialized');
+                _this.setState('finished');
               }, 25); // END 'dependencies_met_page_finished'
             } else {
               logText = '\n' + 'theme switcher detected as: disabled';
               logger.info(logText);
+              _this.setState('finished');
             }
 
             // -----------------------------------------------------------------

@@ -154,7 +154,8 @@ module.exports = function navigator ( options ) {
         classname    = e.target.className ? e.target.className : '';
         nav_link     = classname.includes('nav-');
 
-        if (!nav_link || page_link) {
+//      if (!nav_link || page_link) {
+        if (nav_link || !page_link) {
           logger.debug('\n' + 'click event on href "#" detected: prevent default action');
           e.preventDefault ? e.preventDefault() : e.returnValue = false;
         }

@@ -961,9 +961,6 @@ var j1 = (function () {
               $("#themes_menu").show();
             }
 
-            // if a page requested contains an anchor element, do a smooth scroll
-            j1.scrollTo();
-
             // detect if a loaded page has been chenged
             if (user_session.previous_page !== user_session.current_page) {
               logText = '\n' + 'page change detected';
@@ -987,6 +984,14 @@ var j1 = (function () {
             logger.info(logText);
             logText = '\n' + 'page finalized successfully';
             logger.info(logText);
+
+            var dependencies_met_navigator_finished = setInterval(function() {
+              if (j1.adapter.navigator.getState() == 'finished') {
+                // if a page requested contains an anchor element, do a smooth scroll
+                j1.scrollTo();
+                clearInterval(dependencies_met_navigator_finished);
+              }
+            }, 25);
           }, flickerTimeout);
         });
       } else {
@@ -1081,9 +1086,6 @@ var j1 = (function () {
             $("#themes_menu").show();
           }
 
-          // if a page requested contains an anchor element, do a smooth scroll
-          j1.scrollTo();
-
           // detect if a loaded page has been chenged
           if (user_session.previous_page !== user_session.current_page) {
             logText = '\n' + 'page change detected';
@@ -1107,7 +1109,16 @@ var j1 = (function () {
           logger.info(logText);
           logText = '\n' + 'page finalized successfully';
           logger.info(logText);
+
+          var dependencies_met_navigator_finished = setInterval(function() {
+            if (j1.adapter.navigator.getState() == 'finished') {
+              // if a page requested contains an anchor element, do a smooth scroll
+              j1.scrollTo();
+              clearInterval(dependencies_met_navigator_finished);
+            }
+          }, 25);
         }, flickerTimeout);
+
       }
     },
 
@@ -1199,9 +1210,9 @@ var j1 = (function () {
       var anchor          = window.location.href.split('#')[1];
       var anchor_id       = typeof anchor !== 'undefined' ? '#' + anchor : false;
       var scrollDuration  = {{toccer_options.scrollSmoothDuration}};
+      var scrollOffset    = j1.getScrollOffset();
       var isSlider        = false;
       var selector;
-      var scrollOffset;
 
       if (typeof anchor === 'undefined') {
         return false;
@@ -1209,15 +1220,13 @@ var j1 = (function () {
         return false;
       }
 
-      scrollOffset    = j1.getScrollOffset();
-
       // Check if the anchor is an slider/gallery element
       if (typeof anchor !== 'undefined') {
-        isSlider  = anchor.includes('slide');
+        isSlider = anchor.includes('slide');
       }
 
       if (anchor_id && anchor_id !== '#' && !isSlider) {
-        // scroll only, if an anchor is given with URL
+        // scroll only, if an anchor is given with an URL
         selector = $(anchor_id);
         if (selector.length) {
           j1.core.scrollSmooth.scroll(anchor_id, {
@@ -1544,11 +1553,11 @@ var j1 = (function () {
         domainAttribute = domain;
         stringifiedAttributes += '; ' + 'Domain=' + domainAttribute;
       } else  {
-        domainAttribute = '';
+        domainAttribute = 'localhost';
         stringifiedAttributes += '; ' + 'Domain=' + domainAttribute;
       }
 
-      if (settings.secure == 'true') {
+      if (settings.secure == true) {
         stringifiedAttributes += '; ' + 'Secure=' + settings.secure;
       }
 
