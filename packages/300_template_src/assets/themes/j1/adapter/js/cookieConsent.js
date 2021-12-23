@@ -279,6 +279,7 @@ j1.adapter.cookieConsent = (function (j1, window) {
     // -------------------------------------------------------------------------
     cbCookie: function () {
       var gaCookies           = j1.findCookie('_ga');
+      var gasCookies          = j1.findCookie('__ga');
       var j1Cookies           = j1.findCookie('j1');
       var cookie_names        = j1.getCookieNames();
       var user_state          = j1.readCookie(cookie_names.user_state);
@@ -296,46 +297,15 @@ j1.adapter.cookieConsent = (function (j1, window) {
         $('#quickLinksCookieButton').css('display', 'block');
       }
 
-      // jadams, 2021-11-29: disabled additional logs to verify the existance
-      // of J1 and GA cookies (testing only)
-      //
-      // logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
-      // j1Cookies.forEach(item => console.log('j1.core.switcher: ' + item));
-      // logger.debug('\n' + 'ga cookies found:' + gaCookies.length);
-      // gaCookies.forEach(item => console.log('j1.core.switcher: ' + item));
-      //
-      // if (user_agent.includes('iPad'))  {
-      //   logger.warn('\n' + 'product detected : ' + platform.product);
-      //   logger.warn('\n' + 'skip deleting (unwanted) cookies for this platform');
-      // }
-
       // Manage Google Analytics OptIn/Out
       // See: https://github.com/luciomartinez/gtag-opt-in/wiki
       if (tracking_enabled && tracking_id_valid) {
-        // jadams, 2021-12-20:  GA OptIn|Out handling moved to (new)
-        // analytics adapter (adapter/js/analytics.js)
+        // Managing cookie life-time
         // ---------------------------------------------------------------------
-        // GTagOptIn.register(tracking_id);
-        // if (user_consent.analysis)  {
-        //   logger.info('\n' + 'enable: GA');
-        //   GTagOptIn.optIn();
-        // } else {
-        //   logger.warn('\n' + 'disable: GA');
-        //   GTagOptIn.optOut();
-        //
-        //   if (!user_agent.includes('iPad')) {
-        //     gaCookies.forEach(function (item) {
-        //       logger.warn('\n' + 'delete GA cookie: ' + item);
-        //       j1.removeCookie({ name: item, domain: cookie_domain });
-        //     });
-        //   }
-        // }
-
-        // Managing cookie life-time. If cookie settings allows only
-        // "required" cookies, all "persistent" cookies (Comments|Ads|Translation)
-        // get expired to "session" for better GDPR compliance. The GDPR
-        // regulations|privacy does NOT require any consent on using cookies
-        // for session-only cookies.
+        // If cookie settings allows only "required" cookies, all "persistent"
+        // cookies (Comments|Ads|Translation) get expired to "session" for
+        // better GDPR compliance. The GDPR regulations does NOT require
+        // any consent on session-only cookies.
         //
         if (!user_consent.analysis || !user_consent.personalization) {
 
@@ -362,16 +332,25 @@ j1.adapter.cookieConsent = (function (j1, window) {
           location.reload(true);
         }
       } else {
+        // Failsafe: Make (REALLY) sure the all GA|GAS cookies removed
+        // left from a previous session/page view for better GDPR compliance
+        // ---------------------------------------------------------------------
+
         // jadams, 2021-08-10: remove cookies on invalid GA config or left
         // cookies from previous session/page view if they exists
         // ---------------------------------------------------------------------
         gaCookies.forEach(function (item) {
-          // Skip cookies from Google Ads
-          var gad = item.includes('gad');
-          if (!gad) {
-            logger.warn('\n' + 'delete GA cookie: ' + item);
-            j1.removeCookie({ name: item, domain: cookie_domain });
-          }
+          logger.warn('\n' + 'delete GA cookie: ' + item);
+          j1.removeCookie({ name: item, domain: cookie_domain });
+        });
+
+        // jadams, 2021-12-23: remove cookies on invalid GAdsense config
+        // or left cookies from previous session/page view if they exists
+        // ---------------------------------------------------------------------
+        gasCookies.forEach(function (item) {
+          // Remove cookies from Google Ads
+          logger.warn('\n' + 'delete GAS cookie: ' + item);
+          j1.removeCookie({ name: item, domain: cookie_domain });
         });
 
         // Managing cookie life-time. If cookie settings allows only
@@ -379,7 +358,7 @@ j1.adapter.cookieConsent = (function (j1, window) {
         // get expired to "session" for better GDPR compliance. The GDPR
         // regulations|privacy does NOT require any consent on using cookies
         // for session-only cookies.
-        //
+        // ---------------------------------------------------------------------
         if (!user_consent.analysis || !user_consent.personalization) {
           // overload cookie consent settings
           user_translate.analysis         = user_consent.analysis;

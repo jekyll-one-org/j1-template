@@ -26,7 +26,5 @@ description:
 settings:
   enabled:                              true
 
-  check_cookies:                        false
-
 # ------------------------------------------------------------------------------
 # END config

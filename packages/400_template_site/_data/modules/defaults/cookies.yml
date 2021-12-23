@@ -33,6 +33,18 @@ defaults:
   # ----------------------------------------------------------------------------
   # Settings/Attributes
   #
+  #   check_cookies
+  #   --------------------------------------------------------------------------
+  #   Check if cookies are created and available to the browser. If the cookie
+  #   attributes does NOT allow to create and|or access on cookies,
+  #   setting-up a page will FAIL. It is recommended to enable checks on
+  #   cookies to issue an ERROR page (HTML 445) if access on cookies has
+  #   failed for some reason. This will prevent severe failures and|or endless
+  #   loops accessing a page on missing cookies or INVALID cookie settings.
+  #
+  #   values:                           [false|true]
+  #   default:                          true
+  #
   #   path
   #   --------------------------------------------------------------------------
   #   Attribute 'path' indicates a URL PATH that must exist in the requested
@@ -89,26 +101,33 @@ defaults:
   #
   #   http_only
   #   --------------------------------------------------------------------------
-  #   prevent access to cookie values via JavaScript
+  #   Prevent access on cookies via JavaScript (client-side). Note, for
+  #   client-side processing of cookies, like J1 Modules, NEVER change
+  #   the attribute to 'true'.
+  #
+  #   NOTE: The attribute 'http_only' is only used for web applications to
+  #   store sensitive private user data (like passwords, account data) to
+  #   cookies. Only 'server-sided' web applications will be able to read
+  #   cookies secured by 'http_only'.
   #
   #   values:                           [false|true]
   #   default:                          false
   #
   #   secure
   #   --------------------------------------------------------------------------
-  #   Cookies are only sent to the server with an encrypted request over
-  #   the HTTPS protocol
+  #   If set to 'true', cookies are only sent to the server with an encrypted
+  #   request over the HTTPS protocol. If set to 'auto', the attribute is
+  #   ENABLED (set to 'true') automatically, if a secure connection (HTTPS)
+  #   is detected.
   #
-  #   values:                           [false|true]
-  #   default:                          false
+  #   NOTE: For sites deployed on the Internet, it is highly recommended
+  #   to use encryption (HTTPS protocol) for all sites to prevent
+  #   (man-in-the-middle) attacks on cookies.
   #
-  #   check_cookies
-  #   --------------------------------------------------------------------------
-  #   Check if cookies created/available
+  #   values:                           [auto|false|true]
+  #   default:                          auto
   #
-  #   values:                           [false|true]
-  #   default:                          true
-  #
+
   # ----------------------------------------------------------------------------
   #
   check_cookies:                        true
@@ -116,8 +135,9 @@ defaults:
   domain:                               false
   expires:                              365
   same_site:                            Strict
-  http_only:                            false
-  secure:                               false
+  secure:                               auto
+  http_only:                            false                                   # NOT used for J1 javascript apps|modules
+  encrypted:                            false                                   # Currently NOT supported
 
 # ------------------------------------------------------------------------------
 # END config

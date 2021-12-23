@@ -217,22 +217,22 @@ var logText;
             }
             clearInterval(dependencies_met_page_ready);
           } else {
-            var gaCookies  = j1.findCookie('_ga');
+            // manage GAD cookies if no consent is given|rejected
+            // -----------------------------------------------------------------
+            var gasCookies = j1.findCookie('__ga');
             logger.warn('\n' + 'consent on cookies disabled for personalization');
             logger.warn('\n' + 'initialization of module advertising skipped');
 
-            // jadams, 2021-12-19: remove cookies on invalid GAD config
-            // or left cookies from previous session
+            // jadams, 2021-12-23: remove cookies on invalid GAdsense config
+            // or left cookies from previous session/page view if they exists
             // -----------------------------------------------------------------
-            j1.removeCookie({ name: '__gads' });
+            gasCookies.forEach(function (item) {
+              // Remove cookies from Google Ads
+              j1.removeCookie({ name: item, domain: cookie_domain });
+            });
 
-            // jadams, 2021-12-19: delete cookies in loop doesn't work
-            // gaCookies.forEach(function (item) {
-            //   logger.warn('\n' + 'delete GAD cookie: ' + item);
-            //   // j1.removeCookie({ name: item, domain: domainAttribute });
-            //   // j1.removeCookie({ name: item });
-            // });
-
+            // manage tracking protection
+            // -----------------------------------------------------------------
             if (checkTrackingProtection) {
               if (!user_consent.personalization) {
                 logText = '\n' + 'consent on cookies disabled for personalization';
@@ -270,7 +270,7 @@ var logText;
 
     // -------------------------------------------------------------------------
     // monitor_ads()
-    // monitor for state changes on the ad
+    // monitor for state changes on the ad placed in pages (if any)
     // -------------------------------------------------------------------------
     monitor_ads: function () {
 
