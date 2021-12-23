@@ -115,7 +115,7 @@ defaults:
   path:                                 /
   domain:                               false
   expires:                              365
-  same_site:                            Lax
+  same_site:                            Strict
   http_only:                            false
   secure:                               false
 

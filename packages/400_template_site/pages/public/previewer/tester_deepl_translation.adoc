@@ -9,18 +9,43 @@ description: >
                                         artificial intelligence. DeepL offers one of the best NMTengines worldwide.
                                         Try translations with Jekyll One and DeepL on your own!
 
+keywords: >
+                                        previewer, tool, preview, test, tester, overview,
+                                        artificial, intelligence, autonomous, learning, nmt,
+                                        deepl, deepl-api, network, professional, neural, network,
+                                        grammar, slang, blooper, ambiguities, jokes, spelling,
+                                        opensource, free, load, download, start, starter, example,
+                                        high, easy, use, secure, encrypt, standard, popular,
+                                        generate, develop, create, learn, distribute, publish, deploy,
+                                        beginner, advanced, expert, student, learner, writer, reader, visitor
+                                        framework, toolkit, integration, extension, module, api,
+                                        dynamic, static, generator, client, server, internet, local, localhost
+                                        page, web, website, webdesign, material, design, responsive,
+                                        javascript, nodejs, ruby, windows, linux, osx, mac, os,
+                                        http, https, html, html5, css, scss, style,
+                                        browser, firefox, chrome, edge, opera, safari,
+                                        configuration, generator, navigation, menu, dropdown, fab, action, button
+                                        application, interface, provider, api, repository,
+                                        cookie, language, translation, gdpr, dsgvo, privacy,
+                                        asciidoc, aciidoctor, bootstrap, jekyll, liquid,
+                                        hyvor, disqus, git, github, netlify, heroku, apple, microsoft,
+                                        provider, service, internet, support,
+                                        google, analytics, advertising, search, console, silverlight, score,
+                                        j1, template, jekyllone, comment
+
+
+
 categories:                             [ Previewer ]
 tags:                                   [ Translator, DeepL ]
 
 compress:                               false
-
-comments:                               false
+scrollbar:                              true
 fab_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/previewer/deepl-translator/
 regenerate:                             false
 
-resources:                              [ animate, clipboard, rouge, deeplAPI, cryptoJS ]
+resources:                              [ animate, comments, clipboard, rouge, deeplAPI ]
 resource_options:
   - attic:
       padding_top:                      400
@@ -356,9 +381,9 @@ ____
 
     <!-- control buttons -->
     <div class="mt-3 mb-1">
-  		<input id="translate" name="translate" class="btn btn-info mt-1 mr-1" type="button" value="Translate" aria-label="Translate Button" style="min-width: 12rem">
-      <input id="clear-translate" name="clear-translate" class="btn btn-primary mt-1 mr-1" type="button" value="Clear" aria-label="Clear Button" style="min-width: 12rem">
-      <input id="reset-translate" name="reset-translate" class="btn btn-danger mt-1" type="button" value="Reset" aria-label="Reset Button" style="min-width: 12rem">
+  		<input id="translate" name="translate" class="btn btn-info btn-raised mt-1 mr-1" type="button" value="Translate" aria-label="Translate Button" style="min-width: 12rem">
+      <input id="clear-translate" name="clear-translate" class="btn btn-primary btn-raised mt-1 mr-1" type="button" value="Clear" aria-label="Clear Button" style="min-width: 12rem">
+      <input id="reset-translate" name="reset-translate" class="btn btn-danger btn-raised mt-1" type="button" value="Reset" aria-label="Reset Button" style="min-width: 12rem">
     </div>
 
 	</form>

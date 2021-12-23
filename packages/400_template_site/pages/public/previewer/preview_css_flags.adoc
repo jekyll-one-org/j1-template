@@ -8,18 +8,39 @@ description: >
                                         make language selections or country indicators more visual to support your
                                         visitors by making a more meaningful presentation.
 
+keywords: >
+                                        country, flag, selection, indicator, visual, rectangle, squared,
+                                        markup, style, render, modifier, overview, buildin,
+                                        panayiotis, lipiridis,
+                                        opensource, free, load, download, start, starter, example,
+                                        high, easy, use, secure, encrypt, standard, popular,
+                                        generate, develop, create, learn, distribute, publish, deploy,
+                                        beginner, advanced, expert, student, learner, writer, reader, visitor
+                                        framework, toolkit, integration, extension, module, api,
+                                        dynamic, static, generator, client, server, internet, local, localhost
+                                        page, web, website, webdesign, material, design, responsive,
+                                        javascript, nodejs, ruby, windows, linux, osx, mac, os,
+                                        http, https, html, html5, css, scss, style,
+                                        browser, firefox, chrome, edge, opera, safari,
+                                        configuration, generator, navigation, menu, dropdown, fab, action, button
+                                        application, interface, provider, api, repository,
+                                        cookie, language, translation, gdpr, dsgvo, privacy,
+                                        asciidoc, aciidoctor, bootstrap, jekyll, liquid,
+                                        hyvor, disqus, git, github, netlify, heroku, apple, microsoft,
+                                        provider, service, internet, support,
+                                        google, analytics, advertising, search, console, silverlight, score,
+                                        j1, template, jekyllone, comment
+
 categories:                             [ Previewer ]
 tags:                                   [ Country, Flags ]
 
-comments:                               false
-scrollbar:                              false
-
+scrollbar:                              true
 fab_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/previewer/country_flags/
 regenerate:                             false
 
-resources:                              [ animate, clipboard, rouge, flags_previewer ]
+resources:                              [ animate, comments, clipboard, rouge, flags_previewer ]
 resource_options:
   - attic:
       padding_top:                      400
@@ -2989,4 +3010,27 @@ Find all flags available in alphabetical order.
     </div>
   </div>
 </div>
+++++
+
+++++
+<script>
+  $(function () {
+    var logger          = log4javascript.getLogger('j1.page.scroller');
+    var scrollOffset    = j1.getScrollOffset();
+    var scrollDuration  = 300;
+    var anchor_id;
+
+    $('.badge').on('click', function (e) {
+      e.preventDefault();
+      anchor_id = e.target.hash;
+//    var tgt   = document.querySelector('[id="' + decodeURI(anchor_id).split('#').join('') + '"]');
+
+      logger.debug('\n' + 'badge clicked: ' + anchor_id);
+
+      $('html, body').animate({
+        scrollTop: $(anchor_id).offset().top + scrollOffset
+      }, scrollDuration);
+    });
+  }); //END page ready
+</script>
 ++++

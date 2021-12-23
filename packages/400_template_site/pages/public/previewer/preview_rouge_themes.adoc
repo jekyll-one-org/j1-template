@@ -60,13 +60,13 @@ keywords: >
 categories:                             [ Previewer ]
 tags:                                   [ Highlighter, Rouge ]
 
-scrollbar:                              false
-toc:                                    true
+scrollbar:                              true
+fab_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/previewer/rouge/
 regenerate:                             true
 
-resources:                             [ animate, clipboard, rouge ]
+resources:                             [ animate, comments, clipboard, rouge ]
 resource_options:
   - toccer:
       collapseDepth:                    4
@@ -116,19 +116,19 @@ resource_options:
 // -----------------------------------------------------------------------------
 == Theme selector
 
-For the default theme `Uno` of J1 Template, the following themes for the
-highlighter Rouge are used:
+For the default theme `Uno` of J1 Template, the following _Rouge_ themes
+are used:
 
-* UnoLight: `igorpro`
-* UnoDark: `monokai.sublime`
+* light: `igorpro`
+* dark: `monokai.sublime`
 
-NOTE: The default theme for the highlighter Rouge can be configured for a
-template (theme) with the global template config file `~/_data/j1_config.yml`.
+NOTE: The default themes used for J1 Template can be configured with the
+global template config file `~/_data/j1_config.yml`.
 
-Make a selection from the button below to preview a theme of your choice.
+Make a  below to preview.
 
 ++++
-<div class="btn-group mt-2 mb-2" role="group" aria-label="Button to select a theme">
+<div class="btn-group" role="group" aria-label="Button to select a theme">
   <!-- See: https://stackoverflow.com/questions/47242702/force-bootstrap-dropdown-menu-to-always-display-at-the-bottom-and-allow-it-go-of -->
   <!-- NOTE: control the behaviour of popper.js for positioning -->
   <!-- NOTE: set attribute data-flip="false" to open the SELECT list at the BOTTOM of the BUTTON -->
@@ -164,13 +164,12 @@ Make a selection from the button below to preview a theme of your choice.
     <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('tulip')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>tulip</a></li>
   </ul>
 </div>
-<div id="selected-theme" class="mt-3 mb-4"></div>
+<div id="selected" class="mt-3 mb-5"></div>
 ++++
 
 === Language examples
 
-Find below a selected number languages (code blocks) and their highlightning
-for default or a theme selected.
+Find below a selected number languages (code blocks) and their highlightning.
 
 include::{documentdir}/rouge/100_language_examples.asciidoc[]
 

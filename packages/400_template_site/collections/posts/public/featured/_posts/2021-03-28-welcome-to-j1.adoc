@@ -9,7 +9,7 @@ image:                                  /assets/images/modules/attics/katie-moum
 
 regenerate:                             false
 
-resources:                              []
+resources:                              [ animate ]
 resource_options:
   - attic:
       opacity:                          0.5

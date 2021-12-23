@@ -8,17 +8,39 @@ description: >
                                         designers and developers targeting various platforms to download
                                         icons in the format, color and size they need for any project.
 
+keywords: >
+                                        previewer, tool, preview, overview, markup, size, relative,
+                                        icon, font, mdi, fontawesome, iconify, unified, brand, symbol,
+                                        glyph, webfont, woff, woff2, tts, rotate, flip, pulse, spin, color,
+                                        opensource, free, load, download, start, starter, example,
+                                        high, easy, use, secure, encrypt, standard, popular,
+                                        generate, develop, create, learn, distribute, publish, deploy,
+                                        beginner, advanced, expert, student, learner, writer, reader, visitor
+                                        framework, toolkit, integration, extension, module, api,
+                                        dynamic, static, generator, client, server, internet, local, localhost
+                                        page, web, website, webdesign, material, design, responsive,
+                                        javascript, nodejs, ruby, windows, linux, osx, mac, os,
+                                        http, https, html, html5, css, scss, style,
+                                        browser, firefox, chrome, edge, opera, safari,
+                                        configuration, generator, navigation, menu, dropdown, fab, action, button
+                                        application, interface, provider, api, repository,
+                                        cookie, language, translation, gdpr, dsgvo, privacy,
+                                        asciidoc, aciidoctor, bootstrap, jekyll, liquid,
+                                        hyvor, disqus, git, github, netlify, heroku, apple, microsoft,
+                                        provider, service, internet, support,
+                                        google, analytics, advertising, search, console, silverlight, score,
+                                        j1, template, jekyllone, comment
+
 categories:                             [ Preview ]
 tags:                                   [ MDIL, Icons, Fonts ]
 
-fab_menu_id:                            default
-scrollbar:                              false
-toc:                                    false
+scrollbar:                              true
+fab_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/previewer/mdil_font/
 regenerate:                             false
 
-resources:                              [ animate, clipboard, rouge, mdil_previewer ]
+resources:                              [ animate, comments, clipboard, rouge, mdil_previewer ]
 resource_options:
   - attic:
       padding_top:                      400

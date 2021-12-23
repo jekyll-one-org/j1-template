@@ -100,7 +100,6 @@ settings:
     addBorderOnUnfilled:                true
     checkTrackingProtection:            true
     showErrorPageOnBlocked:             true
-    addBorderOnUnfilled:                true
 
     ads:
 
