@@ -1610,33 +1610,52 @@ var j1 = (function () {
     // removeCookie (Vanilla JS)
     // -------------------------------------------------------------------------
     removeCookie: function (options /*name, [path, domain]*/) {
-      var expireDate  = 'Thu, 01 Jan 1970 00:00:00 UTC';                        // clear cookies by settting the expiry date in the PAST
-      var domainAttribute;
+      var url                   = new liteURL(window.location.href);
+      var baseUrl               = url.origin;;
+      var hostname              = url.hostname;
+      var auto_domain           = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
+      var auto_secure           = (url.protocol.includes('https')) ? true : false;
+      var stringifiedAttributes = '';
 
       var defaults = {
         path:         '{{cookie_options.path}}',
-        expires:      '{{cookie_options.expires}}',
+        expires:      'Thu, 01 Jan 1970 00:00:00 UTC',                          // clear cookies by settting the expiry date in the PAST
         domain:       ('{{cookie_options.domain}}' === 'true'),                 // convert to boolean
         samesite:     '{{cookie_options.same_site}}',
         http_only:    ('{{cookie_options.http_only}}' === 'true'),              // convert to boolean
         secure:       ('{{cookie_options.secure}}' === 'true'),                 // convert to boolean
       };
-      var cookieExists;
+      var settings  = $.extend(defaults, options);
 
-      var settings = $.extend(defaults, options);
+      // collect the cookie attributes
+      // -----------------------------------------------------------------------
+      stringifiedAttributes += '; ' + 'Path=' + settings.path;
+      stringifiedAttributes += '; ' + 'SameSite=' + settings.samesite;
+      stringifiedAttributes += '; ' + 'Expires=' + settings.expires;
 
       // set domain used by cookies
-      if (settings.domain == 'auto') {
-        domainAttribute = domain ;
-      } else  {
-        // domainAttribute = hostname;
-        domainAttribute = '';
+      if (settings.domain) {
+        if (settings.domain == 'auto') {
+          stringifiedAttributes += '; ' + 'Domain=' + auto_domain;
+        } else if (settings.domain)  {
+          stringifiedAttributes += '; ' + 'Domain=' + settings.domain;
+        }
       }
 
-      // clear|remove the cookie
+      // set secure attribute
+      if (settings.secure) {
+        if (settings.secure == 'auto') {
+          stringifiedAttributes += '; ' + 'Secure=' + auto_secure;
+        } else if (settings.secure == true) {
+          stringifiedAttributes += '; ' + 'Secure=' + settings.secure;
+        }
+      }
+
+      // clear|remove the cookie (NO content witten)
       // -----------------------------------------------------------------------
       if (j1.findCookie(settings.name)) {
-        document.cookie = settings.name + '=; Domain=' + domainAttribute + '; Expires=' + expireDate + '; ' + 'Path=/;';
+        document.cookie = settings.name + '=;' + stringifiedAttributes;
+        // document.cookie = settings.name + '=; Domain=' + domainAttribute + '; Expires=' + expireDate + '; ' + 'Path=/;';
         return true;
       } else {
         return false;

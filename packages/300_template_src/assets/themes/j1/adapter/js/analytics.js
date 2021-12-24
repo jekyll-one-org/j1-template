@@ -133,7 +133,7 @@ var logText;
       gaCookies = j1.findCookie('_ga');
       gaCookies.forEach(function (item) {
         logger.warn('\n' + 'delete GA cookie: ' + item);
-        j1.removeCookie({ name: item });
+        j1.removeCookie({ name: item, domain: false, secure: false });
       });
 
       var dependencies_met_page_ready = setInterval(function() {

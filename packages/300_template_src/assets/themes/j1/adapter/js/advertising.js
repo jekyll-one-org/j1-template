@@ -228,7 +228,7 @@ var logText;
             // -----------------------------------------------------------------
             gasCookies.forEach(function (item) {
               // Remove cookies from Google Ads
-              j1.removeCookie({ name: item, domain: cookie_domain });
+              j1.removeCookie({ name: item, domain: false, secure: false });
             });
 
             // manage tracking protection

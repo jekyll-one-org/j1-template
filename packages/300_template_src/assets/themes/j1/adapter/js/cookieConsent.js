@@ -341,7 +341,7 @@ j1.adapter.cookieConsent = (function (j1, window) {
         // ---------------------------------------------------------------------
         gaCookies.forEach(function (item) {
           logger.warn('\n' + 'delete GA cookie: ' + item);
-          j1.removeCookie({ name: item, domain: cookie_domain });
+          j1.removeCookie({ name: item, domain: false, secure: false });
         });
 
         // jadams, 2021-12-23: remove cookies on invalid GAdsense config
@@ -350,7 +350,7 @@ j1.adapter.cookieConsent = (function (j1, window) {
         gasCookies.forEach(function (item) {
           // Remove cookies from Google Ads
           logger.warn('\n' + 'delete GAS cookie: ' + item);
-          j1.removeCookie({ name: item, domain: cookie_domain });
+          j1.removeCookie({ name: item, domain: false, secure: false });
         });
 
         // Managing cookie life-time. If cookie settings allows only
