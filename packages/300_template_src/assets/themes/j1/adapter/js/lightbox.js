@@ -102,16 +102,23 @@ j1.adapter.lightbox = (function (j1, window) {
     // -------------------------------------------------------------------------
     // Initializer
     // -------------------------------------------------------------------------
-    init: function () {
-      // initialize state flag
-      j1.adapter.lightbox.state = 'pending';
+    init: function (options) {
 
       // -----------------------------------------------------------------------
-      // globals
+      // Default module settings
+      // -----------------------------------------------------------------------
+      var settings = $.extend({
+        module_name: 'j1.adapter.lightbox',
+        generated:   '{{site.time}}'
+      }, options);
+
+      // -----------------------------------------------------------------------
+      // Global variable settings
       // -----------------------------------------------------------------------
       _this   = j1.adapter.lightbox;
       logger  = log4javascript.getLogger('j1.adapter.lightbox');
 
+      j1.adapter.lightbox.state = 'pending';
       _this.setState('started');
       logger.info('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');

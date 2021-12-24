@@ -99,21 +99,21 @@ j1.adapter.algolia = (function (j1, window) {
     init: function (options) {
 
       // -----------------------------------------------------------------------
-      // globals
-      // -----------------------------------------------------------------------
-      _this   = j1.adapter.algolia;
-      logger  = log4javascript.getLogger('j1.adapter.algolia');
-
-      // initialize state flag
-      _this.state = 'pending';
-
-      // -----------------------------------------------------------------------
       // Default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
         module_name: 'j1.adapter.algolia',
         generated:   '{{site.time}}'
       }, options);
+
+      // -----------------------------------------------------------------------
+      // Global variable settings
+      // -----------------------------------------------------------------------
+      _this   = j1.adapter.algolia;
+      logger  = log4javascript.getLogger('j1.adapter.algolia');
+
+      // initialize state flag
+      _this.state = 'pending';
 
       _this.setState('started');
       logger.info('\n' + 'state: ' + _this.getState());

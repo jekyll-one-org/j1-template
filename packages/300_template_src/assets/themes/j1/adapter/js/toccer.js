@@ -117,7 +117,15 @@ j1.adapter.toccer = (function () {
     init: function (options) {
 
       // -----------------------------------------------------------------------
-      // globals
+      // Default module settings
+      // -----------------------------------------------------------------------
+      var settings  = $.extend({
+        module_name: 'j1.adapter.toccer',
+        generated:   '{{site.time}}'
+      }, options);
+
+      // -----------------------------------------------------------------------
+      // Global variable settings
       // -----------------------------------------------------------------------
       _this   = j1.adapter.toccer;
       logger  = log4javascript.getLogger('j1.adapter.toccer');
@@ -129,14 +137,6 @@ j1.adapter.toccer = (function () {
 
       // create settings object from frontmatterOptions
       var frontmatterOptions = options != null ? $.extend({}, options) : {};
-
-      // -----------------------------------------------------------------------
-      // defaults
-      // -----------------------------------------------------------------------
-      var settings  = $.extend({
-        module_name: 'j1.adapter.toccer',
-        generated:   '{{site.time}}'
-      }, options);
 
       // -----------------------------------------------------------------------
       // options loader

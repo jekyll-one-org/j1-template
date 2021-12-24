@@ -119,7 +119,15 @@ j1.adapter.translator = (function (j1, window) {
     init: function (options) {
 
       // -----------------------------------------------------------------------
-      // globals
+      // Default module settings
+      // -----------------------------------------------------------------------
+      var settings = $.extend({
+        module_name: 'j1.adapter.translator',
+        generated:   '{{site.time}}'
+      }, options);
+
+      // -----------------------------------------------------------------------
+      // Global variable settings
       // -----------------------------------------------------------------------
       _this                 = j1.adapter.translator;
       logger                = log4javascript.getLogger('j1.adapter.translator');
@@ -150,14 +158,6 @@ j1.adapter.translator = (function (j1, window) {
 
       // initialize state flag
       _this.state = 'pending';
-
-      // -----------------------------------------------------------------------
-      // Default module settings
-      // -----------------------------------------------------------------------
-      var settings = $.extend({
-        module_name: 'j1.adapter.translator',
-        generated:   '{{site.time}}'
-      }, options);
 
       {% comment %} Load module config from yml data
       -------------------------------------------------------------------------- {% endcomment %}

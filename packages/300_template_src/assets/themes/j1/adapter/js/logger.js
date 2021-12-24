@@ -175,7 +175,14 @@ j1.adapter.logger = (function (j1, window) {
       // initialize state flag
       j1.adapter.logger.state = 'started';
 
-      // load module DEFAULTS|CONFIG to js object
+      // -----------------------------------------------------------------------
+      // Default module settings
+      // -----------------------------------------------------------------------
+      var settings = $.extend({
+        module_name: 'j1.adapter.logger',
+        generated:   '{{site.time}}'
+      }, options);
+
       /* eslint-disable */
       loggerOptions       = $.extend({}, {{logger_options | replace: '=>', ':' | replace: 'nil', '""'}});
       utilServerOptions   = $.extend({}, {{util_server_options | replace: '=>', ':' | replace: 'nil', '""'}});
@@ -183,8 +190,8 @@ j1.adapter.logger = (function (j1, window) {
       ajaxAppenderOptions = loggerOptions.appenders[1].appender;
 
       // -----------------------------------------------------------------------
-      // setup logger instances
-      //
+      // Global variable settings
+      // -----------------------------------------------------------------------
       _this       = j1.adapter.logger;
       logger      = log4javascript.getLogger('j1.adapter.logger');
 

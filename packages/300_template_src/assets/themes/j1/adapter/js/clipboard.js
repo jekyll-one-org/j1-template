@@ -89,19 +89,19 @@ j1.adapter.clipboard = (function (j1, window) {
     init: function (options) {
 
       // -----------------------------------------------------------------------
-      // globals
-      // -----------------------------------------------------------------------
-      _this     = j1.adapter.clipboard;
-      language  = '{{site.language}}';
-      logger    = log4javascript.getLogger('j1.adapter.clipboard');
-
-      // -----------------------------------------------------------------------
-      // defaults
+      // Default module settings
       // -----------------------------------------------------------------------
       var settings  = $.extend({
         module_name: 'j1.adapter.clipboard',
         generated:   '{{site.time}}'
       }, options);
+
+      // -----------------------------------------------------------------------
+      // Global variable settings
+      // -----------------------------------------------------------------------
+      _this     = j1.adapter.clipboard;
+      language  = '{{site.language}}';
+      logger    = log4javascript.getLogger('j1.adapter.clipboard');
 
       // initialize state flag
       _this.state = 'started';

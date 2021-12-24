@@ -104,64 +104,65 @@ j1.adapter.framer = (function (j1, window) {
 
       var dependencies_met_page_finished = setInterval (function () {
         if (j1.getState() === 'finished') {
-            // -----------------------------------------------------------------------
-            // globals
-            // -----------------------------------------------------------------------
-            _this   = j1.adapter.framer;
-            logger  = log4javascript.getLogger('j1.adapter.framer');
 
-            // initialize state flag
-            _this.setState('started');
-            logger.info('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'module is being initialized');
+          // -----------------------------------------------------------------------
+          // Default module settings
+          // -----------------------------------------------------------------------
+          var settings = $.extend({
+            module_name: 'j1.adapter.example',
+            generated:   '{{site.time}}'
+          }, options);
 
-            // -----------------------------------------------------------------------
-            // Default module settings
-            // -----------------------------------------------------------------------
-            var settings = $.extend({
-              module_name: 'j1.adapter.example',
-              generated:   '{{site.time}}'
-            }, options);
+          // -----------------------------------------------------------------------
+          // Global variable settings
+          // -----------------------------------------------------------------------
+          _this   = j1.adapter.framer;
+          logger  = log4javascript.getLogger('j1.adapter.framer');
 
-            {% comment %} Load module config from yml data
-            -------------------------------------------------------------------------- {% endcomment %}
-            // Load  module DEFAULTS|CONFIG
-            /* eslint-disable */
-            moduleOptions = $.extend({}, {{framer_options | replace: '=>', ':' | replace: 'nil', '""'}});
-            /* eslint-enable */
+          // initialize state flag
+          _this.setState('started');
+          logger.info('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module is being initialized');
 
-            if (typeof settings !== 'undefined') {
-              moduleOptions = j1.mergeData(moduleOptions, settings);
-            }
+          {% comment %} Load module config from yml data
+          -------------------------------------------------------------------------- {% endcomment %}
+          // Load  module DEFAULTS|CONFIG
+          /* eslint-disable */
+          moduleOptions = $.extend({}, {{framer_options | replace: '=>', ':' | replace: 'nil', '""'}});
+          /* eslint-enable */
 
-            iFrameResize({
-              log:                      moduleOptions.log,
-              autoResize:               moduleOptions.autoResize,
-              bodyBackground:           moduleOptions.bodyBackground,
-              bodyMargin:               moduleOptions.bodyMargin,
-              checkOrigin:              moduleOptions.checkOrigin,
-              inPageLinks:              moduleOptions.inPageLinks,
-              interval:                 moduleOptions.interval,
-              heightCalculationMethod:  moduleOptions.heightCalculationMethod,
-              maxHeight:                moduleOptions.maxHeight,
-              minWidth:                 moduleOptions.minWidth,
-              maxWidth:                 moduleOptions.maxWidth,
-              minHeight:                moduleOptions.minHeight,
-              resizeFrom:               moduleOptions.resizeFrom,
-              scrolling:                moduleOptions.scrolling,
-              sizeHeight:               moduleOptions.sizeHeight,
-              sizeWidth:                moduleOptions.sizeWidth,
-              tolerance:                moduleOptions.tolerance,
-              widthCalculationMethod:   moduleOptions.widthCalculationMethod,
-              targetOrigin:             moduleOptions.checkOrigin
-            });
+          if (typeof settings !== 'undefined') {
+            moduleOptions = j1.mergeData(moduleOptions, settings);
+          }
 
-            _this.setState('finished');
-            logger.info('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'initializing module finished');
+          iFrameResize({
+            log:                      moduleOptions.log,
+            autoResize:               moduleOptions.autoResize,
+            bodyBackground:           moduleOptions.bodyBackground,
+            bodyMargin:               moduleOptions.bodyMargin,
+            checkOrigin:              moduleOptions.checkOrigin,
+            inPageLinks:              moduleOptions.inPageLinks,
+            interval:                 moduleOptions.interval,
+            heightCalculationMethod:  moduleOptions.heightCalculationMethod,
+            maxHeight:                moduleOptions.maxHeight,
+            minWidth:                 moduleOptions.minWidth,
+            maxWidth:                 moduleOptions.maxWidth,
+            minHeight:                moduleOptions.minHeight,
+            resizeFrom:               moduleOptions.resizeFrom,
+            scrolling:                moduleOptions.scrolling,
+            sizeHeight:               moduleOptions.sizeHeight,
+            sizeWidth:                moduleOptions.sizeWidth,
+            tolerance:                moduleOptions.tolerance,
+            widthCalculationMethod:   moduleOptions.widthCalculationMethod,
+            targetOrigin:             moduleOptions.checkOrigin
+          });
 
-            clearInterval(dependencies_met_page_finished);
-            return true;
+          _this.setState('finished');
+          logger.info('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'initializing module finished');
+
+          clearInterval(dependencies_met_page_finished);
+          return true;
         }
       }, 25);
     }, // END init

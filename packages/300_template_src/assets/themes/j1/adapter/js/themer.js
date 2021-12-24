@@ -159,9 +159,18 @@ j1.adapter.themer = (function (j1, window) {
     // -------------------------------------------------------------------------
     // initializer
     // -------------------------------------------------------------------------
-    init: function () {
+    init: function (options) {
+
       // -----------------------------------------------------------------------
-      // globals
+      // Default module settings
+      // -----------------------------------------------------------------------
+      var settings = $.extend({
+        module_name: 'j1.adapter.themer',
+        generated:   '{{site.time}}'
+      }, options);
+
+      // -----------------------------------------------------------------------
+      // Global variable settings
       // -----------------------------------------------------------------------
       _this       = j1.adapter.themer;
       url         = new liteURL(window.location.href);

@@ -69,7 +69,15 @@ j1.adapter.bmd = (function (j1, window) {
     init: function (options) {
 
       // -----------------------------------------------------------------------
-      // globals
+      // Default module settings
+      // -----------------------------------------------------------------------
+      var settings = $.extend({
+        module_name: 'j1.adapter.bmd',
+        generated:   '{{site.time}}'
+      }, options);
+
+      // -----------------------------------------------------------------------
+      // Global variable settings
       // -----------------------------------------------------------------------
       _this   = j1.adapter.bmd;
       logger  = log4javascript.getLogger('j1.adapter.bmd');
@@ -78,15 +86,6 @@ j1.adapter.bmd = (function (j1, window) {
       _this.setState('started');
       logger.info('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
-
-      // -----------------------------------------------------------------------
-      // Default module settings
-      // -----------------------------------------------------------------------
-      var settings = $.extend({
-        module_name: 'j1.adapter.bmd',
-        generated:   '{{site.time}}'
-      }, options);
-
       // -----------------------------------------------------------------------
       // BMD initializer
       // -----------------------------------------------------------------------

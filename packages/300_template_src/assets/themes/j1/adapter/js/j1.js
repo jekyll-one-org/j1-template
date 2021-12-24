@@ -60,8 +60,8 @@ regenerate:                             true
 {% assign themer_defaults           = modules.defaults.themer.defaults %}
 {% assign themer_settings           = modules.themer.settings %}
 
-{% assign tracking_enabled          = template_config.analytics.enabled %}
-{% assign tracking_id               = template_config.analytics.google.tracking_id %}
+{% assign tracking_enabled          = modules.analytics.enabled %}
+{% assign tracking_id               = modules.analytics.google.trackingID %}
 
 {% assign authentication_defaults   = modules.defaults.authentication.defaults %}
 {% assign authentication_settings   = modules.authentication.settings %}
@@ -144,9 +144,9 @@ var j1 = (function () {
   var mode                        = 'not_detected';
 
   // Default tracking provider information
-  var tracking_enabled            = ('{{tracking_enabled}}' === 'true') ? true: false;
-  var tracking_id                 = '{{tracking_id}}';
-  var tracking_id_valid           = (tracking_id.includes('tracking-id')) ? false : true;
+  // var tracking_enabled            = ('{{tracking_enabled}}' === 'true') ? true: false;
+  // var tracking_id                 = '{{tracking_id}}';
+  // var tracking_id_valid           = (tracking_id.includes('tracking-id')) ? false : true;
 
   // Default comment provider information
   var comment_provider            = '{{comment_provider}}';
@@ -253,7 +253,15 @@ var j1 = (function () {
     init: function (options) {
 
       // -----------------------------------------------------------------------
-      // global var (function)
+      // Default module settings
+      // -----------------------------------------------------------------------
+      var settings = $.extend({
+        module_name: 'j1',
+        generated:   '{{site.time}}'
+      }, options);
+
+      // -----------------------------------------------------------------------
+      // Global variable settings
       // -----------------------------------------------------------------------
       var logger            = log4javascript.getLogger('j1.init');
       var url               = new liteURL(window.location.href);
@@ -268,15 +276,6 @@ var j1 = (function () {
       var j1Cookies         = j1.findCookie('j1');
       var themerOptions     = $.extend({}, {{themer_options | replace: '=>', ':' | replace: 'nil', '""' }});
 
-      // -----------------------------------------------------------------------
-      // options loader
-      // -----------------------------------------------------------------------
-      var settings = $.extend({
-        foo: 'foo_option',
-        bar: 'bar_option'
-        },
-        options
-      );
       // -----------------------------------------------------------------------
       // status settings
       // save status into the adapter object for (later) global access

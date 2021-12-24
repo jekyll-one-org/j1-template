@@ -89,6 +89,8 @@ j1.adapter.advertising = (function (j1, window) {
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
 var environment             = '{{environment}}';
+var date                    = new Date();
+var timestamp_now           = date.toISOString();
 var gadScript               = document.createElement('script');
 var adInitializerScript     = document.createElement('script');
 var autoHideOnUnfilled      = {{advertising_options.google.autoHideOnUnfilled}};
@@ -106,6 +108,9 @@ var domain;
 var domainAttribute;
 var cookie_option_domain;
 var cookie_domain;
+var advertisingProvider;
+var providerID;
+var validProviderID;
 var _this;
 var logger;
 var logText;
@@ -125,6 +130,17 @@ var logText;
       // [INFO   ] [j1.adapter.advertising                  ] [ detected advertising provider (j1_config): {{advertising_provider}}} ]
       // [INFO   ] [j1.adapter.advertising                  ] [ start processing load region head, layout: {{page.layout}} ]
 
+      // -----------------------------------------------------------------------
+      // Default module settings
+      // -----------------------------------------------------------------------
+      var settings = $.extend({
+        module_name: 'j1.adapter.advertising',
+        generated:   '{{site.time}}'
+      }, options);
+
+      // -----------------------------------------------------------------------
+      // Global variable settings
+      // -----------------------------------------------------------------------
       cookie_names          = j1.getCookieNames();
       user_consent          = j1.readCookie(cookie_names.user_consent);
       url                   = new liteURL(window.location.href);
@@ -143,20 +159,28 @@ var logText;
       {% case advertising_provider %}
       {% when "google" %}
       // [INFO   ] [j1.adapter.advertising                  ] [ place provider: Google Adsense ]
+
       _this = j1.adapter.advertising;
       logger = log4javascript.getLogger('j1.adapter.advertising.google');
+
       // initialize state flag
       _this.setState('started');
       logger.info('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
-      // default module settings
-      var settings = $.extend({
-        module_name: 'j1.adapter.advertising',
-        generated:   '2021-12-18 18:55:38 +0000'
-      }, options);
 
       var dependencies_met_page_ready = setInterval(function() {
         if (j1.getState() == 'finished') {
+
+          providerID          = '{{advertising_options.google.publisherID}}';
+          advertisingProvider = 'Google Adsense';
+          validProviderID = (providerID.includes('your')) ? false : true;
+          if (!validProviderID) {
+            logger.warn('\n' + 'invalid publisherID detected for Google Adsense: ' + providerID);
+            logger.info('\n' + 'skip initialization for provider: ' + advertisingProvider);
+            clearInterval(dependencies_met_page_ready);
+            return false;
+          }
+
           if (user_consent.personalization) {
             // place all ads configured for the page
             // NOTE: currently NOT implemented/used

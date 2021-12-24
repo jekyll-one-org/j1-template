@@ -202,7 +202,15 @@ j1.adapter.navigator = (function (j1, window) {
     init: function (options) {
 
       // -----------------------------------------------------------------------
-      // globals
+      // Default module settings
+      // -----------------------------------------------------------------------
+      var settings  = $.extend({
+        module_name: 'j1.adapter.navigator',
+        generated:   '{{site.time}}'
+      }, options);
+
+      // -----------------------------------------------------------------------
+      // Global variable settings
       // -----------------------------------------------------------------------
       _this         = j1.adapter.navigator;
       logger        = log4javascript.getLogger('j1.adapter.navigator');
@@ -211,14 +219,6 @@ j1.adapter.navigator = (function (j1, window) {
       _this.setState('started');
       logger.info('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
-
-      // -----------------------------------------------------------------------
-      // defaults
-      // -----------------------------------------------------------------------
-      var settings  = $.extend({
-        module_name: 'j1.adapter.navigator',
-        generated:   '{{site.time}}'
-      }, options);
 
       // -----------------------------------------------------------------------
       // options loader

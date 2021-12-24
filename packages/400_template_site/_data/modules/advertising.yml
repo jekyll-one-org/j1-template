@@ -95,7 +95,7 @@ settings:
     #
     # --------------------------------------------------------------------------
     #
-    publisherID:                        ca-pub-xxxx..xxx
+    publisherID:                        '<your-publisher-id>'
     autoHideOnUnfilled:                 false
     addBorderOnUnfilled:                true
     checkTrackingProtection:            true

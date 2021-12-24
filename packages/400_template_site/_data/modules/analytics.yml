@@ -46,7 +46,7 @@ settings:
   #
   # ----------------------------------------------------------------------------
   #
-  enabled:                              false
+  enabled:                              true
 
   provider:                             google
   google:
@@ -91,7 +91,7 @@ settings:
     #
     # --------------------------------------------------------------------------
     #
-    trackingID:                         '<your-tracking-id>'
+    trackingID:                         G-299QGW5RJH                            # '<your-tracking-id>'
     optInOut:                           true
     anonymizeIP:                        true
 

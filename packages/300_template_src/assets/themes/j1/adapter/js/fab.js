@@ -81,7 +81,7 @@ regenerate:                             true
 j1.adapter.fab = (function (j1, window) {
 
   // ---------------------------------------------------------------------------
-  // globals
+  // Global variable settings
   // ---------------------------------------------------------------------------
   var isMobile      = j1.core.isMobile();
   var environment   = '{{environment}}';
@@ -116,7 +116,15 @@ j1.adapter.fab = (function (j1, window) {
     init: function (options) {
 
       // -----------------------------------------------------------------------
-      // globals
+      // Default module settings
+      // -----------------------------------------------------------------------
+      var settings  = $.extend({
+        module_name: 'j1.adapter.fab',
+        generated:   '{{site.time}}'
+      }, options);
+
+      // -----------------------------------------------------------------------
+      // Global variable settings
       // -----------------------------------------------------------------------
       _this         = j1.adapter.fab;
       logger        = log4javascript.getLogger('j1.adapter.fab');
@@ -131,14 +139,6 @@ j1.adapter.fab = (function (j1, window) {
 
       // create settings object from frontmatterOptions
       var frontmatterOptions = options != null ? $.extend({}, options) : {};
-
-      // -----------------------------------------------------------------------
-      // defaults
-      // -----------------------------------------------------------------------
-      var settings  = $.extend({
-        module_name: 'j1.adapter.fab',
-        generated:   '{{site.time}}'
-      }, options);
 
       // -----------------------------------------------------------------------
       // options loader

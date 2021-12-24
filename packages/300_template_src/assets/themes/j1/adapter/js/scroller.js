@@ -97,8 +97,18 @@ var lastPageInfo;
     // adapter initializer
     // -------------------------------------------------------------------------
     init: function (options) {
-      {% comment %} Set global variables
-      -------------------------------------------------------------------------- {% endcomment %}
+
+      // -----------------------------------------------------------------------
+      // Default module settings
+      // -----------------------------------------------------------------------
+      var settings = $.extend({
+        module_name: 'j1.adapter.scroller',
+        generated:   '{{site.time}}'
+      }, options);
+
+      // -----------------------------------------------------------------------
+      // Global variable settings
+      // -----------------------------------------------------------------------
       _this = j1.adapter.scroller;
       logger = log4javascript.getLogger('j1.adapter.scroller');
 
@@ -108,11 +118,6 @@ var lastPageInfo;
       logger.info('\n' + 'module is being initialized');
 
 
-      // default module settings
-      var settings = $.extend({
-        module_name: 'j1.adapter.scroller',
-        generated:   '{{site.time}}'
-      }, options);
 
       _this.generate_scrollers();
 

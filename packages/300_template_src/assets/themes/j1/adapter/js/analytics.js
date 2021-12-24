@@ -85,12 +85,15 @@ j1.adapter.analytics = (function (j1, window) {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
-var environment   = '{{environment}}';
-var gaScript      = document.createElement('script');
-var trackingID    = '{{analytics_options.google.trackingID}}';
-var optInOut      = {{analytics_options.google.optInOut}};
-var anonymizeIP   = {{analytics_options.google.anonymizeIP}};
-var cookie_names  = j1.getCookieNames();
+var environment     = '{{environment}}';
+var gaScript        = document.createElement('script');
+var providerID      = '{{analytics_options.google.trackingID}}';
+var validProviderID = (providerID.includes('your')) ? false : true;
+var optInOut        = {{analytics_options.google.optInOut}};
+var anonymizeIP     = {{analytics_options.google.anonymizeIP}};
+var cookie_names    = j1.getCookieNames();
+var date            = new Date();
+var timestamp_now   = date.toISOString();
 var gaCookies;
 var user_consent;
 var gaExists;
@@ -116,23 +119,31 @@ var logText;
       {% case analytics_provider %}
       {% when "google" %}
       // [INFO   ] [j1.adapter.analytics                    ] [ place provider: Google Adsense ]
+
+      // -----------------------------------------------------------------------
+      // Default module settings
+      // -----------------------------------------------------------------------
+      var settings = $.extend({
+        module_name: 'j1.adapter.analytics',
+        generated:   '{{site.time}}'
+      }, options);
+
+      // -----------------------------------------------------------------------
+      // Global variable settings
+      // -----------------------------------------------------------------------
       _this = j1.adapter.analytics;
       logger = log4javascript.getLogger('j1.adapter.analytics.google');
+
       // initialize state flag
       _this.setState('started');
       logger.info('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
-      // default module settings
-      var settings = $.extend({
-        module_name: 'j1.adapter.analytics',
-        generated:   '2021-12-18 18:55:38 +0000'
-      }, options);
 
       // remove all ga cookies left from a previous session/page view
       // -----------------------------------------------------------------------
       gaCookies = j1.findCookie('_ga');
       gaCookies.forEach(function (item) {
-        logger.warn('\n' + 'delete GA cookie: ' + item);
+        logger.warn('\n' + 'delete cookie created by Google Analytics: ' + item);
         j1.removeCookie({ name: item, domain: false, secure: false });
       });
 
@@ -143,23 +154,27 @@ var logText;
           if (!gaExists) {
             // add ga api dynamically in the head section
             // -----------------------------------------------------------------
-            logger.info('\n' + 'add ga api dynamically in section: head');
+            logger.info('\n' + 'Google Analytics API added in section: head');
             gaScript.async = true;
             gaScript.id    = 'google-tag-manager';
-            gaScript.src   = '//www.googletagmanager.com/gtag/js?id={{analytics_options.google.trackingID}}';
+            gaScript.src   = '//www.googletagmanager.com/gtag/js?id=' + providerID;
             document.head.appendChild(gaScript);
           }
 
           user_consent  = j1.readCookie(cookie_names.user_consent);
           if (user_consent.analysis) {
-            logger.info('\n' + 'user consent on analytics: ' + user_consent.analysis);
-            logger.info('\n' + 'enable: GA');
-            GTagOptIn.register(trackingID);
-            GTagOptIn.optIn();
+            if (validProviderID) {
+              logger.info('\n' + 'user consent on analytics: ' + user_consent.analysis);
+              logger.info('\n' + 'enable Google Analytics on ID: ' + providerID);
+              GTagOptIn.register(providerID);
+              GTagOptIn.optIn();
+            } else {
+              logger.warn('\n' + 'invalid trackig id detected for Google Analytics: ' + providerID);
+            }
           } else {
             logger.info('\n' + 'user consent on analytics: ' + user_consent.analysis);
-            logger.warn('\n' + 'disable: GA');
-            GTagOptIn.register(trackingID);
+            logger.warn('\n' + 'disable Google Analytics on ID: ' + providerID);
+            GTagOptIn.register(providerID);
             GTagOptIn.optOut();
           }
           clearInterval(dependencies_met_page_ready);
@@ -174,7 +189,7 @@ var logText;
       var dependencies_met_page_ready = setInterval(function() {
         if (j1.getState() == 'finished') {
           logger = log4javascript.getLogger('j1.adapter.analytics.google');
-          logger.info('\n' + 'ga: disabled');
+          logger.info('\n' + 'Google Analytics: disabled');
           clearInterval(dependencies_met_page_ready);
         }
       }, 25);

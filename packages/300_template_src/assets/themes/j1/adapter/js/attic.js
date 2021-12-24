@@ -102,7 +102,15 @@ j1.adapter.attic = (function (j1, window) {
     init: function (options) {
 
       // -----------------------------------------------------------------------
-      // globals
+      // Default module settings
+      // -----------------------------------------------------------------------
+      var settings = $.extend({
+        module_name: 'j1.adapter.attic',
+        generated:   '{{site.time}}'
+      }, options);
+
+      // -----------------------------------------------------------------------
+      // Global variable settings
       // -----------------------------------------------------------------------
       _this   = j1.adapter.attic;
       logger  = log4javascript.getLogger('j1.adapter.attic');
