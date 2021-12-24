@@ -134,24 +134,25 @@ var j1 = (function () {
   // ---------------------------------------------------------------------------
   // globals
   // ---------------------------------------------------------------------------
-  var rePager                   =  new RegExp('navigator|dateview|tagview|archive');
-  var environment               = '{{environment}}';
-  var moduleOptions             = {};
-  var j1_runtime_data           = {};
+  var rePager                     =  new RegExp('navigator|dateview|tagview|archive');
+  var environment                 = '{{environment}}';
+  var moduleOptions               = {};
+  var j1_runtime_data             = {};
 
   // Status information
-  var state                     = 'not_started';
-  var mode                      = 'not_detected';
+  var state                       = 'not_started';
+  var mode                        = 'not_detected';
 
   // Default tracking provider information
-  var tracking_enabled          = ('{{tracking_enabled}}' === 'true') ? true: false;
-  var tracking_id               = '{{tracking_id}}';
-  var tracking_id_valid         = (tracking_id.includes('tracking-id')) ? false : true;
+  var tracking_enabled            = ('{{tracking_enabled}}' === 'true') ? true: false;
+  var tracking_id                 = '{{tracking_id}}';
+  var tracking_id_valid           = (tracking_id.includes('tracking-id')) ? false : true;
 
   // Default comment provider information
-  var comment_provider          = '{{comment_provider}}';
-  var site_id                   = '{{site_id}}';
-  var check_cookies             = {{cookie_options.check_cookies}};
+  var comment_provider            = '{{comment_provider}}';
+  var site_id                     = '{{site_id}}';
+  var checkCookies                = {{cookie_options.checkCookies}};
+  var expireCookiesOnRequiredOnly = ('{{cookie_options.expireCookiesOnRequiredOnly}}' === 'true') ? true: false;
 
   var current_user_data;
   var current_page;
@@ -348,7 +349,7 @@ var j1 = (function () {
 
       // jadams, 2021-12-06: Check if access to cookies for this site failed.
       // Possibly, a third-party domain or an attacker tries to access it.
-      if (check_cookies) {
+      if (checkCookies) {
         if (!user_state) {
           logger.error('\n' + 'Access to cookie failed or cookie not found: ' + cookie_names.user_state);
           logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
@@ -358,10 +359,12 @@ var j1 = (function () {
       }
 
       if (!user_consent.analysis || !user_consent.personalization)  {
-        // expire permanent cookies to session
-        j1.expireCookie({ name: cookie_names.user_state });
-        j1.expireCookie({ name: cookie_names.user_consent });
-        j1.expireCookie({ name: cookie_names.user_translate });
+        if (expireCookiesOnRequiredOnly) {
+          // expire permanent cookies to session
+          j1.expireCookie({ name: cookie_names.user_state });
+          j1.expireCookie({ name: cookie_names.user_consent });
+          j1.expireCookie({ name: cookie_names.user_translate });
+        }
       }
 
       // initialize event handler for window/history/back on <ESC>

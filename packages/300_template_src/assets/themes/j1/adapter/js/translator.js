@@ -37,17 +37,16 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign cookie_defaults     = modules.defaults.cookies.defaults %}
 {% assign cookie_settings     = modules.cookies.settings %}
-
-{% assign tracking_enabled    = modules.analytics.settings.enabled %}
-
 {% assign translator_defaults = modules.defaults.translator.defaults %}
 {% assign translator_settings = modules.translator.settings %}
 
-
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign translator_options  = translator_defaults | merge: translator_settings %}
 {% assign cookie_options      = cookie_defaults | merge: cookie_settings %}
+{% assign translator_options  = translator_defaults | merge: translator_settings %}
+
+{% comment %} Set variables
+-------------------------------------------------------------------------------- {% endcomment %}
 
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
@@ -84,9 +83,7 @@ regenerate:                             true
 'use strict';
 
 j1.adapter.translator = (function (j1, window) {
-
   var environment       = '{{environment}}';
-  var tracking_enabled  = ('{{tracking_enabled}}' === 'true') ? true: false;    // Analytics/GA enabled?
   var moduleOptions     = {};
   var user_translate    = {};
   var _this;

@@ -37,18 +37,21 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign cookie_defaults     = modules.defaults.cookies.defaults %}
 {% assign cookie_settings     = modules.cookies.settings %}
-
 {% assign consent_defaults    = modules.defaults.cookieconsent.defaults %}
 {% assign consent_settings    = modules.cookieconsent.settings %}
-{% assign tracking_enabled    = template_config.analytics.enabled %}
-{% assign tracking_id         = template_config.analytics.google.tracking_id %}
-
-{% assign comment_provider    = site.data.j1_config.comments.provider %}
+{% assign analytics_defaults  = modules.defaults.analytics.defaults %}
+{% assign analytics_settings  = modules.analytics.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign consent_options     = consent_defaults | merge: consent_settings %}
 {% assign cookie_options      = cookie_defaults | merge: cookie_settings %}
+{% assign analytics_options   = analytics_defaults | merge: analytics_settings %}
+
+{% comment %} Set variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign tracking_enabled    = analytics_options.enabled %}
+{% assign tracking_id         = analytics_options.google.trackingID %}
 
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
@@ -80,13 +83,12 @@ regenerate:                             true
 // -----------------------------------------------------------------------------
 'use strict';
 j1.adapter.cookieConsent = (function (j1, window) {
-
-  var environment       = '{{environment}}';
-  var tracking_enabled  = ('{{tracking_enabled}}' === 'true') ? true: false;
-  var tracking_id       = '{{tracking_id}}';
-  var tracking_id_valid = (tracking_id.includes('tracking-id')) ? false : true;
-  var comment_provider  = '{{comment_provider}}';
-  var moduleOptions     = {};
+  var environment                 = '{{environment}}';
+  var tracking_enabled            = ('{{tracking_enabled}}' === 'true') ? true: false;
+  var tracking_id                 = '{{tracking_id}}';
+  var tracking_id_valid           = (tracking_id.includes('tracking-id')) ? false : true;
+  var expireCookiesOnRequiredOnly = ('{{cookie_options.expireCookiesOnRequiredOnly}}' === 'true') ? true: false;
+  var moduleOptions               = {};
   var _this;
   var $modal;
   var cookie_names;
@@ -372,11 +374,12 @@ j1.adapter.cookieConsent = (function (j1, window) {
             secure:   secure
           });
 
-          // expire permanent cookies to session
-          // -------------------------------------------------------------------
-          j1.expireCookie({ name: cookie_names.user_state });
-          j1.expireCookie({ name: cookie_names.user_consent });
-          j1.expireCookie({ name: cookie_names.user_translate });
+          if (expireCookiesOnRequiredOnly) {
+            // expire permanent cookies to session
+            j1.expireCookie({ name: cookie_names.user_state });
+            j1.expireCookie({ name: cookie_names.user_consent });
+            j1.expireCookie({ name: cookie_names.user_translate });
+          }
         }
 
         if (moduleOptions.reloadPageOnChange) {
