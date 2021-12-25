@@ -113,19 +113,19 @@ defaults:
   #   domain
   #   --------------------------------------------------------------------------
   #   Switch 'domain' controls if the value for the attribute 'domain' is
-  #   used (= auto|domain) or NOT used (false). If 'auto' is given, the domain
-  #   is calculated from the hostname. Otherwise domain is treates as domain
-  #   to be used.
-  #   If the switch 'domain' is to 'false', the attribute 'domain' is
-  #   automatically set to the (fully qualified) hostname and all subdomains
-  #   are EXCLUDED from accessing the cookies.
+  #   used (= auto|domain_string) or NOT used (false). If 'auto' is given,
+  #   the domain is calculated from the hostname found in URL of the current
+  #   page. Otherwise 'domain_string' is treates as domain to be used.
+  #   If the switch 'domain' is set to 'false', the attribute 'domain' is
+  #   not set, but automatically set by the browser to the (fully qualified)
+  #   hostname and all subdomains are excluded from accessing the cookies.
   #
   #   NOTE: Be carefull setting switch 'domain' to auto. For sites deployed
   #         to hosts of public domain providers like Netlify (netlify.app),
   #         this will open the access on cookies to ALL hosts (subdomains)!
   #         See 'same_site'.
   #
-  #   values:                           [false|auto|domain]
+  #   values:                           [false|auto|domain_string]
   #   default:                          false
   #
   #   expires
@@ -144,15 +144,16 @@ defaults:
   #   Strict:   The cookie is only sent to the site where it originated,
   #             excluding subdomains, but not in cross-site requests.
   #   None:     Send cookies in cross-site requests if the attribute
-  #             'secure' is enabled (HTTPS requests only).
+  #             'secure' is enabled. Note, the value 'None' can be only
+  #             used for HTTPS requests.
   #
   #   values:                           [Strict|Lax|None]
-  #   default:                          Lax
+  #   default:                          Strict
   #
   #   http_only
   #   --------------------------------------------------------------------------
   #   Prevent access on cookies via JavaScript (client-side). Note, for
-  #   client-side processing of cookies, like J1 Modules, NEVER change
+  #   client-side processing of cookies, like J1 Modules, never change
   #   the attribute to 'true'.
   #
   #   NOTE: The attribute 'http_only' is only used for web applications to
@@ -184,7 +185,7 @@ defaults:
   expires:                              365
   same_site:                            Strict
   secure:                               auto
-  http_only:                            false                                   # NOT used for J1 javascript apps|modules
+  http_only:                            false
 
 # ------------------------------------------------------------------------------
 # END config

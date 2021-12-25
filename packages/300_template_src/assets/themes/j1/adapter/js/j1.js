@@ -1516,18 +1516,14 @@ var j1 = (function () {
       var cookie_data           = {};
       var data_json;
       var data_encoded;
-      var expires;
-      var domainAttribute;
 
       var defaults = {
-        data:         {},
-        name:         '',
         path:         '{{cookie_options.path}}',
         expires:      '{{cookie_options.expires}}',
-        domain:       ('{{cookie_options.domain}}' === 'true'),                 // convert to boolean
+        domain:       ('{{cookie_options.domain}}' === 'false') ? false : '{{cookie_options.domain}}',
         samesite:     '{{cookie_options.same_site}}',
-        http_only:    ('{{cookie_options.http_only}}' === 'true'),              // convert to boolean
-        secure:       ('{{cookie_options.secure}}' === 'true'),                 // convert to boolean
+        http_only:    ('{{cookie_options.http_only}}' === 'true'),
+        secure:       ('{{cookie_options.secure}}' === 'false') ? false : '{{cookie_options.secure}}'
       };
       var settings = $.extend(defaults, options);
 
@@ -1565,7 +1561,7 @@ var j1 = (function () {
       if (settings.domain) {
         if (settings.domain == 'auto') {
           stringifiedAttributes += '; ' + 'Domain=' + auto_domain;
-        } else if (settings.domain)  {
+        } else {
           stringifiedAttributes += '; ' + 'Domain=' + settings.domain;
         }
       }
@@ -1574,14 +1570,13 @@ var j1 = (function () {
       if (settings.secure) {
         if (settings.secure == 'auto') {
           stringifiedAttributes += '; ' + 'Secure=' + auto_secure;
-        } else if (settings.secure == true) {
+        } else {
           stringifiedAttributes += '; ' + 'Secure=' + settings.secure;
         }
       }
 
       // write the cookie
       // -----------------------------------------------------------------------
-//    document.cookie = settings.name + '=' + content + '; path=' + settings.path + '; domain=' + settings.domain + '; ' + 'SameSite=' + settings.samesite + '; secure';
       document.cookie = settings.name + '=' + data_encoded + stringifiedAttributes;
 
       if (j1.existsCookie(settings.name)) {
@@ -1589,13 +1584,12 @@ var j1 = (function () {
       } else {
         return false;
       }
-
     },
 
     // -------------------------------------------------------------------------
     // findCookie (Vanilla JS)
-    // Search for cookies (names) in the page header that matches a given
-    // name. A cookie name can be given as full name, like 'j1.user.state',
+    // Search for cookies (by name) in the page header that matches a given
+    // (name) string. A cookie name can be given as full name, like 'j1.user.state',
     // or as a partial like 'j1'
     // Returns all names found as an array.
     // -------------------------------------------------------------------------
@@ -1622,10 +1616,10 @@ var j1 = (function () {
       var defaults = {
         path:         '{{cookie_options.path}}',
         expires:      'Thu, 01 Jan 1970 00:00:00 UTC',                          // clear cookies by settting the expiry date in the PAST
-        domain:       ('{{cookie_options.domain}}' === 'true'),                 // convert to boolean
+        domain:       ('{{cookie_options.domain}}' === 'false') ? false : '{{cookie_options.domain}}',
         samesite:     '{{cookie_options.same_site}}',
-        http_only:    ('{{cookie_options.http_only}}' === 'true'),              // convert to boolean
-        secure:       ('{{cookie_options.secure}}' === 'true'),                 // convert to boolean
+        http_only:    ('{{cookie_options.http_only}}' === 'true'),
+        secure:       ('{{cookie_options.secure}}' === 'false') ? false : '{{cookie_options.secure}}'
       };
       var settings  = $.extend(defaults, options);
 
@@ -1639,7 +1633,7 @@ var j1 = (function () {
       if (settings.domain) {
         if (settings.domain == 'auto') {
           stringifiedAttributes += '; ' + 'Domain=' + auto_domain;
-        } else if (settings.domain)  {
+        } else if (typeof settings.domain == 'string') {
           stringifiedAttributes += '; ' + 'Domain=' + settings.domain;
         }
       }
@@ -1648,16 +1642,15 @@ var j1 = (function () {
       if (settings.secure) {
         if (settings.secure == 'auto') {
           stringifiedAttributes += '; ' + 'Secure=' + auto_secure;
-        } else if (settings.secure == true) {
+        } else {
           stringifiedAttributes += '; ' + 'Secure=' + settings.secure;
         }
       }
 
-      // clear|remove the cookie (NO content witten)
+      // clear|remove the cookie if exists
       // -----------------------------------------------------------------------
       if (j1.findCookie(settings.name)) {
         document.cookie = settings.name + '=;' + stringifiedAttributes;
-        // document.cookie = settings.name + '=; Domain=' + domainAttribute + '; Expires=' + expireDate + '; ' + 'Path=/;';
         return true;
       } else {
         return false;
@@ -1696,10 +1689,10 @@ var j1 = (function () {
       var defaults = {
         path:         '{{cookie_options.path}}',
         expires:      '{{cookie_options.expires}}',
-        domain:       ('{{cookie_options.domain}}' === 'true'),                 // convert to boolean
+        domain:       ('{{cookie_options.domain}}' === 'false') ? false : '{{cookie_options.domain}}',
         samesite:     '{{cookie_options.same_site}}',
-        http_only:    ('{{cookie_options.http_only}}' === 'true'),              // convert to boolean
-        secure:       ('{{cookie_options.secure}}' === 'true'),                 // convert to boolean
+        http_only:    ('{{cookie_options.http_only}}' === 'true'),
+        secure:       ('{{cookie_options.secure}}' === 'false') ? false : '{{cookie_options.secure}}'
       };
       var settings  = $.extend(defaults, options);
 
@@ -1712,8 +1705,10 @@ var j1 = (function () {
       if (settings.domain) {
         if (settings.domain == 'auto') {
           stringifiedAttributes += '; ' + 'Domain=' + auto_domain;
-        } else if (settings.domain)  {
-          stringifiedAttributes += '; ' + 'Domain=' + settings.domain;
+        } else if (typeof settings.domain == 'string') {
+          if (settings.domain !== 'false') {
+            stringifiedAttributes += '; ' + 'Domain=' + settings.domain;
+          }
         }
       }
 
@@ -1721,14 +1716,14 @@ var j1 = (function () {
       if (settings.secure) {
         if (settings.secure == 'auto') {
           stringifiedAttributes += '; ' + 'Secure=' + auto_secure;
-        } else if (settings.secure == true) {
+        } else {
           stringifiedAttributes += '; ' + 'Secure=' + settings.secure;
         }
       }
 
-      var dc        = document.cookie;                                            // all cookies in page
-      var end       = dc.length;                                                  // default to end of the string
-      var prefix    = settings.name + '=';                                                 // search string for the cookie name given
+      var dc        = document.cookie;                                          // all cookies in page
+      var end       = dc.length;                                                // default to end of the string
+      var prefix    = settings.name + '=';                                      // search string for the cookie name given
       var begin     = dc.indexOf('; ' + prefix);
       var content   = '';
 
@@ -1762,7 +1757,7 @@ var j1 = (function () {
 
     // -------------------------------------------------------------------------
     // existsCookie (Vanilla JS)
-    // returns true if a given cookie exists
+    // returns true if a cookie of given name exists
     // -------------------------------------------------------------------------
     existsCookie: function (name) {
       var dc            = document.cookie;
