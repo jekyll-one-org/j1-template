@@ -33,7 +33,7 @@ defaults:
   # ----------------------------------------------------------------------------
   # Switches
   #
-  #   check_cookies
+  #   checkCookies
   #   --------------------------------------------------------------------------
   #   Check if cookies are created and available to the browser. If the cookie
   #   attributes does NOT allow to create and|or access on cookies,
