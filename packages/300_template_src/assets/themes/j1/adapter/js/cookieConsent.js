@@ -280,15 +280,17 @@ j1.adapter.cookieConsent = (function (j1, window) {
     // made his selection
     // -------------------------------------------------------------------------
     cbCookie: function () {
-      var gaCookies           = j1.findCookie('_ga');
-      var gasCookies          = j1.findCookie('__ga');
-      var j1Cookies           = j1.findCookie('j1');
-      var cookie_names        = j1.getCookieNames();
-      var user_state          = j1.readCookie(cookie_names.user_state);
-      var user_consent        = j1.readCookie(cookie_names.user_consent);
-      var user_translate      = j1.readCookie(cookie_names.user_translate);
-      var json                = JSON.stringify(user_consent);
-      var user_agent          = platform.ua;
+      var url             = new liteURL(window.location.href);
+      var hostname        = url.hostname;
+      var gaCookies       = j1.findCookie('_ga');
+      var gasCookies      = j1.findCookie('__ga');
+      var j1Cookies       = j1.findCookie('j1');
+      var cookie_names    = j1.getCookieNames();
+      var user_state      = j1.readCookie(cookie_names.user_state);
+      var user_consent    = j1.readCookie(cookie_names.user_consent);
+      var user_translate  = j1.readCookie(cookie_names.user_translate);
+      var json            = JSON.stringify(user_consent);
+      var user_agent      = platform.ua;
       var cookie_written;
 
       logger.info('\n' + 'entered post selection callback from CookieConsent');
@@ -343,7 +345,11 @@ j1.adapter.cookieConsent = (function (j1, window) {
         // ---------------------------------------------------------------------
         gaCookies.forEach(function (item) {
           logger.warn('\n' + 'delete GA cookie: ' + item);
-          j1.removeCookie({ name: item, domain: false, secure: false });
+          if (hostname == 'localhost') {
+            j1.removeCookie({ name: item, domain: false, secure: false });
+          } else {
+            j1.removeCookie({ name: item, domain: '.' + hostname, secure: false });
+          }
         });
 
         // jadams, 2021-12-23: remove cookies on invalid GAdsense config
@@ -352,7 +358,11 @@ j1.adapter.cookieConsent = (function (j1, window) {
         gasCookies.forEach(function (item) {
           // Remove cookies from Google Ads
           logger.warn('\n' + 'delete GAS cookie: ' + item);
-          j1.removeCookie({ name: item, domain: false, secure: false });
+          if (hostname == 'localhost') {
+            j1.removeCookie({ name: item, domain: false, secure: false });
+          } else {
+            j1.removeCookie({ name: item, domain: '.' + hostname, secure: false });
+          }
         });
 
         // Managing cookie life-time. If cookie settings allows only

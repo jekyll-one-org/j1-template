@@ -85,6 +85,8 @@ j1.adapter.analytics = (function (j1, window) {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
+var url             = new liteURL(window.location.href);
+var hostname        = url.hostname;
 var environment     = '{{environment}}';
 var gaScript        = document.createElement('script');
 var providerID      = '{{analytics_options.google.trackingID}}';
@@ -144,7 +146,11 @@ var logText;
       gaCookies = j1.findCookie('_ga');
       gaCookies.forEach(function (item) {
         logger.warn('\n' + 'delete cookie created by Google Analytics: ' + item);
-        j1.removeCookie({ name: item, domain: false, secure: false });
+        if (hostname == 'localhost') {
+          j1.removeCookie({ name: item, domain: false, secure: false });
+        } else {
+          j1.removeCookie({ name: item, domain: '.' + hostname, secure: false });
+        }
       });
 
       var dependencies_met_page_ready = setInterval(function() {
