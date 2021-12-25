@@ -192,8 +192,9 @@ j1.adapter.cookieConsent = (function (j1, window) {
           }
         }
 
-        // Failsafe: if 'None' is given for samesite in non-secure environments
-        // -----------------------------------------------------------------------
+        // Failsafe: if 'None' is given for samesite in non-secure
+        // environments open access to cookies to subdomains
+        // ---------------------------------------------------------------------
         if (same_site == 'None' && !secure) {
           same_site = 'Lax';
         }
