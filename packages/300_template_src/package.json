@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "src",
-  "version": "2022.0.13",
+  "version": "2022.0.14",
   "description": "Base template sources",
   "homepage": "https://jekyll.one",
   "author": "Juergen Adams <jadams@jekyll-one.com> (https://jekyll.one)",
