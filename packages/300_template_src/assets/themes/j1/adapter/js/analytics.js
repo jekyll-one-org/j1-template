@@ -141,8 +141,9 @@ var logText;
       logger.info('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
-      // remove all ga cookies left from a previous session/page view
-      // -----------------------------------------------------------------------
+      // remove cookies on invalid GA config or left from a previous
+      // session/page view if they exists
+      // ---------------------------------------------------------------------
       gaCookies = j1.findCookie('_ga');
       gaCookies.forEach(function (item) {
         logger.warn('\n' + 'delete cookie created by Google Analytics: ' + item);

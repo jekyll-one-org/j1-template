@@ -340,8 +340,8 @@ j1.adapter.cookieConsent = (function (j1, window) {
         // left from a previous session/page view for better GDPR compliance
         // ---------------------------------------------------------------------
 
-        // jadams, 2021-08-10: remove cookies on invalid GA config or left
-        // cookies from previous session/page view if they exists
+        // remove cookies on invalid GA config or left from a previous
+        // session/page view if they exists
         // ---------------------------------------------------------------------
         gaCookies.forEach(function (item) {
           logger.warn('\n' + 'delete GA cookie: ' + item);
@@ -352,8 +352,8 @@ j1.adapter.cookieConsent = (function (j1, window) {
           }
         });
 
-        // jadams, 2021-12-23: remove cookies on invalid GAdsense config
-        // or left cookies from previous session/page view if they exists
+        // remove cookies on invalid GAS config or left from a previous
+        // session/page view if they exists
         // ---------------------------------------------------------------------
         gasCookies.forEach(function (item) {
           // Remove cookies from Google Ads

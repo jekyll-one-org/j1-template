@@ -248,9 +248,9 @@ var logText;
             logger.warn('\n' + 'consent on cookies disabled for personalization');
             logger.warn('\n' + 'initialization of module advertising skipped');
 
-            // jadams, 2021-12-23: remove cookies on invalid GAdsense config
-            // or left cookies from previous session/page view if they exists
-            // -----------------------------------------------------------------
+            // remove cookies on invalid GAS config or left from a previous
+            // session/page view if they exists
+            // ---------------------------------------------------------------------
             gasCookies.forEach(function (item) {
               // Remove cookies from Google Ads
               if (hostname == 'localhost') {
