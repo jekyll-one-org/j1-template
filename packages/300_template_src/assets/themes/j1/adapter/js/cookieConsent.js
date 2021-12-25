@@ -336,8 +336,8 @@ j1.adapter.cookieConsent = (function (j1, window) {
           location.reload(true);
         }
       } else {
-        // Failsafe: Make (REALLY) sure the all GA|GAS cookies removed
-        // left from a previous session/page view for better GDPR compliance
+        // Failsafe: Make (really) sure the all GA|GAS cookies removed
+        // left from a previous session/page view for better privacy compliance
         // ---------------------------------------------------------------------
 
         // remove cookies on invalid GA config or left from a previous
