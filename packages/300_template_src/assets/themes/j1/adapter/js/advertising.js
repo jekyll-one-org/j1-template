@@ -176,7 +176,7 @@ var logText;
           advertisingProvider = 'Google Adsense';
           validProviderID = (providerID.includes('your')) ? false : true;
           if (!validProviderID) {
-            logger.warn('\n' + 'invalid publisherID detected for Google Adsense: ' + providerID);
+            logger.warn('\n' + 'invalid publisherID detected for Google Adsense (GAS): ' + providerID);
             logger.info('\n' + 'skip initialization for provider: ' + advertisingProvider);
             clearInterval(dependencies_met_page_ready);
             return false;
@@ -190,22 +190,22 @@ var logText;
 
             // add gad api dynamically in the head section
             // -----------------------------------------------------------------
-            logger.info('\n' + 'add gad api dynamically in section: head');
+            logger.info('\n' + 'add gas api in section: head');
             gadScript.async = true;
-            gadScript.id    = 'gad-api';
+            gadScript.id    = 'gas-api';
             gadScript.src   = '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
             gadScript.setAttribute('data-ad-client', 'ca-pub-3885670015316130');
             document.head.appendChild(gadScript);
 
             // setup monitor for state changes on all ads configured
             // ---------------------------------------------------------------
-            logger.info('\n' + 'setup monitoring');
+            logger.debug('\n' + 'setup monitoring');
             _this.monitor_ads();
 
             // run protection check
             // -------------------------------------------------------------------
             if (checkTrackingProtection) {
-              logger.info('\n' + 'run checks for tracking protection');
+              logger.debug('\n' + 'run checks for tracking protection');
               _this.check_tracking_protection();
 
               var dependencies_met_tracking_check_ready = setInterval (function (options) {
@@ -300,20 +300,27 @@ var logText;
     // -------------------------------------------------------------------------
     // monitor_ads()
     // monitor for state changes on the ad placed in pages (if any)
+    //
+    // NOTE: Check visibility state of the adSlot to prevent multiple
+    // processing of the same slot
     // -------------------------------------------------------------------------
     monitor_ads: function () {
+      var logger = log4javascript.getLogger('j1.adapter.advertising.monitor.ads');
 
       $('.adsbygoogle').attrchange({
         trackValues: true,
         callback: function (event) {
           if (event.newValue === 'unfilled') {
-            var elm = event.target.dataset;
-            if (addBorderOnUnfilled) { $('.adsbygoogle').addClass('border--dotted'); }
-            if (elm.adClient) {
-              logger.warn('\n' + 'found ad state ' + event.newValue + ' for slot: ' + elm.adSlot);
-              if (autoHideOnUnfilled) {
-                logger.warn('\n' + ' hide ad for slot: ' + elm.adSlot);
-                $('#' + elm.adSlot ).hide();
+            var elm             = event.target.dataset;
+            var adSlotIsVisible = $('#' + elm.adSlot ).is(":visible");
+            if (adSlotIsVisible) {
+              if (addBorderOnUnfilled) { $('.adsbygoogle').addClass('border--dotted'); }
+              if (elm.adClient) {
+                logger.warn('\n' + 'found ad state ' + event.newValue + ' for slot: ' + elm.adSlot);
+                if (autoHideOnUnfilled) {
+                  logger.warn('\n' + ' hide ad for slot: ' + elm.adSlot);
+                  $('#' + elm.adSlot ).hide();
+                }
               }
             }
           }
@@ -334,7 +341,7 @@ var logText;
     //  https://stackoverflow.com/questions/33959324/how-to-detect-if-a-user-is-using-tracking-protection-in-firefox-42
     // -------------------------------------------------------------------------
     check_tracking_protection: function () {
-      var logger = log4javascript.getLogger('j1.adapter.advertising.tracking.monitor');
+      var logger = log4javascript.getLogger('j1.adapter.advertising.monitor.tracking');
 
       logText = '\n' + 'check for trackingprotection';
       logger.info(logText);
