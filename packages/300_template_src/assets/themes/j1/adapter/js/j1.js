@@ -273,7 +273,6 @@ var j1 = (function () {
       var timestamp_now     = date.toISOString();
       var curr_state        = 'started';
       var gaCookies         = j1.findCookie('_ga');
-      var j1Cookies         = j1.findCookie('j1');
       var themerOptions     = $.extend({}, {{themer_options | replace: '=>', ':' | replace: 'nil', '""' }});
 
       // -----------------------------------------------------------------------
@@ -345,17 +344,6 @@ var j1 = (function () {
                             secure:   secure,
                             expires:  365
                           });
-
-      // jadams, 2021-12-06: Check if access to cookies for this site failed.
-      // Possibly, a third-party domain or an attacker tries to access it.
-      if (checkCookies) {
-        if (!user_state) {
-          logger.error('\n' + 'Access to cookie failed or cookie not found: ' + cookie_names.user_state);
-          logger.debug('\n' + 'j1 cookies found:' + j1Cookies.length);
-          // redirect to error page: blocked content
-          window.location.href = '/446.html';
-        }
-      }
 
       if (!user_consent.analysis || !user_consent.personalization)  {
         if (expireCookiesOnRequiredOnly) {
@@ -902,6 +890,20 @@ var j1 = (function () {
             // display page
             $('#no_flicker').css('display', 'block');
 
+            // jadams, 2021-12-06: Check if access to cookies for this site failed.
+            // Possibly, a third-party domain or an attacker tries to access it.
+            if (checkCookies) {
+              var j1Cookies = j1.findCookie('j1');
+              if (!j1.existsCookie(cookie_names.user_state)) {
+                logger.error('\n' + 'Access to cookie failed or cookie not found: ' + cookie_names.user_state);
+                logger.info('\n' + 'j1 cookies found:' + j1Cookies.length);
+                // redirect to error page: blocked content
+                window.location.href = '/446.html';
+              } else {
+                logger.info('\n' + 'j1 cookies found:' + j1Cookies.length);
+              }
+            }
+
             // manage Dropcaps if translation is enabled|disabled
             // -----------------------------------------------------------------
             if (user_translate.translationEnabled) {
@@ -1007,6 +1009,20 @@ var j1 = (function () {
 
           // display the page loaded
           $('#no_flicker').css('display', 'block');
+
+          // jadams, 2021-12-06: Check if access to cookies for this site failed.
+          // Possibly, a third-party domain or an attacker tries to access it.
+          if (checkCookies) {
+            var j1Cookies = j1.findCookie('j1');
+            if (!j1.existsCookie(cookie_names.user_state)) {
+              logger.error('\n' + 'Access to cookie failed or cookie not found: ' + cookie_names.user_state);
+              logger.info('\n' + 'j1 cookies found:' + j1Cookies.length);
+              // redirect to error page: blocked content
+              window.location.href = '/446.html';
+            } else {
+              logger.info('\n' + 'j1 cookies found:' + j1Cookies.length);
+            }
+          }
 
           // jadams, 2021-11-19: test code for 'tapTarget' of 'materializeCss'
           // See:
