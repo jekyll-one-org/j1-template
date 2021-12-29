@@ -111,11 +111,6 @@ var _this;
 var logger;
 var logText;
 
-// var domain;
-// var domainAttribute;
-// var cookie_option_domain;
-// var cookie_domain;
-
   // ---------------------------------------------------------------------------
   // Main object
   // ---------------------------------------------------------------------------
@@ -146,16 +141,6 @@ var logText;
       user_consent          = j1.readCookie(cookie_names.user_consent);
       url                   = new liteURL(window.location.href);
       hostname              = url.hostname;
-
-//    domain                = hostname.substring(hostname.lastIndexOf('.', hostname.lastIndexOf('.') - 1) + 1);
-//    cookie_option_domain  = '{{cookie_options.domain}}';
-
-      // // set domain used by cookies
-      // if (cookie_option_domain == 'auto') {
-      //   domainAttribute = domain ;
-      // } else  {
-      //   domainAttribute = hostname;
-      // }
 
       {% case advertising_provider %}
       {% when "google" %}
