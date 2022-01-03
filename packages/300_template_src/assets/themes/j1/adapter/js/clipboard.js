@@ -159,7 +159,7 @@ j1.adapter.clipboard = (function (j1, window) {
         if ( isNoClip.length == 0) {
           var btnHtml = '';
 
-          btnHtml = '<div class="j1-clipboard"><span class="btn-clipboard j1-tooltip" data-bs-toggle="tooltip" data-placement="left" title="' + btnTitle +'">' + btnText + '</span></div>';
+          btnHtml = '<div class="j1-clipboard"><span class="btn-clipboard" data-bs-toggle="tooltip" data-bs-placement="left" title="' + btnTitle +'">' + btnText + '</span></div>';
 
           $(this).before(btnHtml);
           $('.btn-clipboard').tooltip();

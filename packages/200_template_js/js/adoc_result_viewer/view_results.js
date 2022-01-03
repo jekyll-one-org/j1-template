@@ -47,14 +47,16 @@ function insert_result_links() {
     var title_div = result_block.prev().find('.title');
 
     if (language == 'en') {
-      view_result_link = $('<div class="view-result j1-viewer"><span class="btn-viewer j1-tooltip" data-toggle="tooltip" data-placement="left" title="toggle results" data-original-title="toggle results">View</span></div>');
+      view_result_link = $('<div class="j1-viewer"><span class="btn-viewer" data-bs-toggle="tooltip" data-bs-placement="left" title="toggle results" data-bs-original-title="toggle results">View</span></div>');
     } else if (language == 'de') {
-      view_result_link = $('<div class="view-result j1-viewer"><span class="btn-viewer j1-tooltip" data-toggle="tooltip" data-placement="left" title="Anzeige umschalten" data-original-title="toggle results">Anzeige</span></div>');
+      view_result_link = $('<div class="j1-viewer"><span class="btn-viewer" data-bs-toggle="tooltip" data-bs-placement="left" title="Anzeige umschalten" data-bs-original-title="toggle results">Anzeige</span></div>');
     } else {
-      view_result_link = $('<div class="view-result j1-viewer"><span class="btn-viewer j1-tooltip" data-toggle="tooltip" data-placement="left" title="toggle results" data-original-title="toggle results">View</span></div>');
+      view_result_link = $('<div class="j1-viewer"><span class="btn-viewer" data-bs-toggle="tooltip" data-bs-placement="left" title="toggle results" data-bs-original-title="toggle results">View</span></div>');
     }
 
     title_div.append(view_result_link);
+    $('.btn-viewer').tooltip();
+
     view_result_link.on('click', function(event) {
       event.preventDefault();
       toggle_result_block(result_block);
@@ -62,4 +64,9 @@ function insert_result_links() {
   });
 }
 
-$(insert_result_links);
+var dependencies_met_page_ready = setInterval(function() {
+  if (j1.getState() == 'finished') {
+    $(insert_result_links);
+    clearInterval(dependencies_met_page_ready);
+  } // END if getState 'finished'
+}, 25);
