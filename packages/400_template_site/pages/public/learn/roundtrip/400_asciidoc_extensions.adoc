@@ -72,7 +72,7 @@ valuable extensions to the Markup language Asciidoc to the Markup language
 Asciidoc is made especially for documents of the Jekyll content type pages
 (but can be used for posts or collections as well).
 
-== Asciidoc Code
+== Asciidoc Result Extension
 
 J1 Template adds a simple Javascript based on the `View Result Extension` to
 any `listingblock`. The extension adds an interactive toggle button `VIEW`
@@ -92,7 +92,7 @@ Asciidoc code and how the resulting (HTML) code would look alike.
 
 [.result]
 ====
- displayed till clicked, but closed on second click
+ displayed till clicked, but closed on second click (toggle)
 ====
 
 == Asciidoc Admonitions
