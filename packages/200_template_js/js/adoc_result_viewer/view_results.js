@@ -64,9 +64,4 @@ function insert_result_links() {
   });
 }
 
-var dependencies_met_page_ready = setInterval(function() {
-  if (j1.getState() == 'finished') {
-    $(insert_result_links);
-    clearInterval(dependencies_met_page_ready);
-  } // END if getState 'finished'
-}, 25);
+$(insert_result_links);
