@@ -11,17 +11,37 @@ Mercenary.program(:j1) do |p|
   p.description 'J1 Template is a gem-based Template made for Jekyll'
   p.syntax 'j1 <subcommand> [options]'
 
-  p.command(:generate) do |c|
-    c.description 'Generates a starter site scaffold in PATH'
-    c.syntax 'generate PATH'
-    c.option 'force', '--force',                '    Force a site to be created even the PATH already exists'
-    c.option 'skip-bundle', '--skip-bundle',    '    Skip bundle install'
-    c.option 'skip-patches', '--skip-patches',  '   Skip install any PATCHES buildin with J1'
-    c.option 'system', '--system',              '    Run "bundle install" for the Ruby SYSTEM gem folder'
-    c.action do |args, options|
-      J1::Commands::Generate.process(args, options)
+  # available options for all subcommands
+  #
+  p.option 'force', '--force'
+  p.option 'skip-bundle', '--skip-bundle'
+  p.option 'skip-patches', '--skip-patches'
+  p.option 'system', '--system'
+
+  J1::External.require_if_present(J1::External.blessed_gems) do |g, ver_constraint|
+    cmd = g.split("-").last
+    p.command(cmd.to_sym) do |c|
+      c.syntax cmd
+      c.action do
+        J1.logger.abort_with "You must install the '#{g}' gem" \
+          " version #{ver_constraint} to use the 'jekyll #{cmd}' command."
+      end
     end
   end
 
-  p.default_command(:generate)
+  J1::Command.subclasses.each { |c| c.init_with_program(p) }
+
+  p.action do |args, _|
+    if args.empty?
+      J1.logger.error "A subcommand is required."
+      puts p
+      abort
+    else
+      subcommand = args.first
+      unless p.has_command? subcommand
+        J1.logger.abort_with "fatal: 'j1 #{args.first}' failed." \
+          " No subcommand '#{args.first}' available."
+      end
+    end
+  end
 end

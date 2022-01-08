@@ -50,7 +50,7 @@ The full error message from Ruby is: '#{e.message}'
 
 If you run into trouble, you can find helpful resources at https://jekyllrb.com/help/!
             MSG
-            raise Jekyll::Errors::MissingDependencyException, name
+            raise J1::Errors::MissingDependencyException, name
           end
         end
       end

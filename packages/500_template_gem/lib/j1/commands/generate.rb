@@ -1,32 +1,29 @@
+# frozen_string_literal: true
+
 require 'erb'
-require 'rbconfig'
-require 'fileutils'
 
 module J1
   module Commands
     class Generate < Command
       class << self
 
-        # def init_with_program(prog)
-        #   prog.command(:generate) do |c|
-        #     c.description 'Generates a starter site scaffold in PATH'
-        #     c.syntax 'generate PATH'
-        #     c.option 'force', '--force',                'Force a site to be created even the PATH already exists'
-        #     c.option 'skip-bundle', '--skip-bundle',    'Skip bundle install'
-        #     c.option 'skip-patches', '--skip-patches',  'Skip install any PATCHES buildin with J1'
-        #     c.option 'system', '--system',              'Run "bundle install" for the Ruby SYSTEM gem folder'
-        #     c.action do |args, options|
-        #       J1::Commands::Generate.process(args, options)
-        #     end
-        #   end
-        # end
-
-        def is_windows?
-          RbConfig::CONFIG["host_os"] =~ %r!mswin|mingw|cygwin!i
+        def init_with_program(prog)
+          prog.command(:generate) do |c|
+            c.description 'Generates a starter site scaffold in PATH'
+            c.syntax 'generate PATH'
+            c.option 'force', '--force',                'Force a site to be created even the PATH already exists'
+            c.option 'skip-bundle', '--skip-bundle',    'Skip bundle install'
+            c.option 'skip-patches', '--skip-patches',  'Skip install any PATCHES buildin with J1'
+            c.option 'system', '--system',              'Run "bundle install" for the Ruby SYSTEM gem folder'
+            c.action do |args, options|
+              J1::Commands::Generate.process(args, options)
+            end
+          end
         end
 
         def process(args, options = {})
           raise ArgumentError, 'You must specify a path.' if args.empty?
+
           new_blog_path = File.expand_path(args.join(' '), Dir.pwd)
           FileUtils.mkdir_p new_blog_path
           if preserve_source_location?(new_blog_path, options)
@@ -61,6 +58,10 @@ module J1
 
         private
 
+        def is_windows?
+          RbConfig::CONFIG["host_os"] =~ %r!mswin|mingw|cygwin!i
+        end
+        
         def create_site(new_blog_path)
           create_sample_files new_blog_path
 
@@ -92,16 +93,16 @@ module J1
         def after_install(path, options = {})
           unless options['skip-bundle']
             bundle_install(path, options)
-            unless options['skip-patches']
-              patch_install(options)
-            else
+            if options['skip-patches']
               J1.logger.info "Install build-in patches skipped ..."
+            else
+              patch_install(options)
             end
           end
-          unless options['force']
-            J1.logger.info "Generated Jekyll site installed in folder #{path}"
-          else
+          if options['force']
             J1.logger.info "Generated Jekyll site force installed in folder #{path}"
+          else
+            J1.logger.info "Generated Jekyll site installed in folder #{path}"
           end
           J1.logger.info 'Installation (bundle) of RubyGems skipped' if options['skip-bundle']
         end
