@@ -8,7 +8,7 @@ module J1
         def init_with_program(prog)
           prog.command(:help) do |c|
             c.syntax "help [subcommand]"
-            c.description "Show the help message, optionally for a given subcommand."
+            c.description "Show the help message, optionally for a given subcommand"
 
             c.action do |args, _|
               cmd = (args.first || "").to_sym

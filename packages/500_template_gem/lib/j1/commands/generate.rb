@@ -9,11 +9,11 @@ module J1
 
         def init_with_program(prog)
           prog.command(:generate) do |c|
-            c.description 'Generates a starter site scaffold in PATH'
+            c.description 'Generates a J1 project scaffold in PATH'
             c.syntax 'generate PATH'
             c.option 'force', '--force',                'Force a site to be created even the PATH already exists'
             c.option 'skip-bundle', '--skip-bundle',    'Skip bundle install'
-            c.option 'skip-patches', '--skip-patches',  'Skip install any PATCHES buildin with J1'
+            c.option 'skip-patches', '--skip-patches',  'Skip install any PATCHES build-in with J1'
             c.option 'system', '--system',              'Run "bundle install" for the Ruby SYSTEM gem folder'
             c.action do |args, options|
               J1::Commands::Generate.process(args, options)
@@ -22,12 +22,12 @@ module J1
         end
 
         def process(args, options = {})
-          raise ArgumentError, 'You must specify a path.' if args.empty?
+          raise ArgumentError, 'GENERATE: You must specify a path.' if args.empty?
 
           new_blog_path = File.expand_path(args.join(' '), Dir.pwd)
           FileUtils.mkdir_p new_blog_path
           if preserve_source_location?(new_blog_path, options)
-            J1.logger.abort_with 'Conflict:', "#{new_blog_path} exists and is not empty."
+            J1.logger.abort_with 'GENERATE: Conflict:', "#{new_blog_path} exists and is not empty."
           end
 
           if options['blank']
@@ -61,7 +61,7 @@ module J1
         def is_windows?
           RbConfig::CONFIG["host_os"] =~ %r!mswin|mingw|cygwin!i
         end
-        
+
         def create_site(new_blog_path)
           create_sample_files new_blog_path
 
@@ -94,32 +94,32 @@ module J1
           unless options['skip-bundle']
             bundle_install(path, options)
             if options['skip-patches']
-              J1.logger.info "Install build-in patches skipped ..."
+              J1.logger.info "GENERATE: Install build-in patches skipped ..."
             else
               patch_install(options)
             end
           end
           if options['force']
-            J1.logger.info "Generated Jekyll site force installed in folder #{path}"
+            J1.logger.info "GENERATE: Generated Jekyll site force installed in folder #{path}"
           else
-            J1.logger.info "Generated Jekyll site installed in folder #{path}"
+            J1.logger.info "GENERATE: Generated Jekyll site installed in folder #{path}"
           end
-          J1.logger.info 'Installation (bundle) of RubyGems skipped' if options['skip-bundle']
+          J1.logger.info 'GENERATE: Installation (bundle) of RubyGems skipped' if options['skip-bundle']
         end
 
         def bundle_install(path, options)
           J1::External.require_with_graceful_fail 'bundler'
-          J1.logger.info "Running bundle install in #{path} ..."
+          J1.logger.info "GENERATE: Running bundle install in #{path} ..."
           Dir.chdir(path) do
             if options['system']
-              J1.logger.info "Install bundle in Ruby gem SYSTEM folder ..."
+              J1.logger.info "GENERATE: Install bundle in Ruby gem SYSTEM folder ..."
             else
-              J1.logger.info "Install bundle in USER gem folder ~/.gem ..."
+              J1.logger.info "GENERATE: Install bundle in USER gem folder ~/.gem ..."
               process, output = J1::Utils::Exec.run('bundle', 'config', 'set', '--local', 'path', '~/.gem')
             end
             process, output = J1::Utils::Exec.run('bundle', 'install')
             output.to_s.each_line do |line|
-              J1.logger.info('Bundler:', line.strip) unless line.to_s.empty?
+              J1.logger.info('BUNDLE:', line.strip) unless line.to_s.empty?
             end
             raise SystemExit unless process.success?
           end
@@ -143,12 +143,12 @@ module J1
             system_path = result[1]
 
             if options['system']
-              J1.logger.info "Install patches in SYSTEM folder ..."
-              J1.logger.info "Install patches on path #{system_path} ..."
+              J1.logger.info "GENERATE: Install patches in SYSTEM folder ..."
+              J1.logger.info "GENERATE: Install patches on path #{system_path} ..."
               dest = system_path + '/gems/' + patch_gem_eventmachine + '/lib'
             else
-              J1.logger.info "Install patches in USER gem folder ~/.gem ..."
-              J1.logger.info "Install patches on path #{user_path} ..."
+              J1.logger.info "GENERATE: Install patches in USER gem folder ~/.gem ..."
+              J1.logger.info "GENERATE: Install patches on path #{user_path} ..."
               dest = user_path + '/gems/' + patch_gem_eventmachine + '/lib'
             end
             src = patch_eventmachine_source_path
@@ -164,7 +164,7 @@ module J1
               if Dir.exist?(dest)
                 FileUtils.cp(src, dest)
               else
-                J1.logger.info "Skipped install patches for execjs-2.7.0 ..."
+                J1.logger.info "GENERATE: Skipped install patches for execjs-2.7.0 ..."
               end
             end
 

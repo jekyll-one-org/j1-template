@@ -1,10 +1,41 @@
+require "singleton"
+
 module J1
   module Utils
     extend self
     autoload :Ansi, "j1/utils/ansi"
     autoload :Exec, "j1/utils/exec"
+    autoload :ExecUntilTrap, "j1/utils/exec_until_trap"
     autoload :Platforms, "j1/utils/platforms"
     autoload :WinTZ, "j1/utils/win_tz"
+
+    class GracefulQuit
+      include Singleton
+
+      attr_accessor :breaker
+
+      def initialize
+        self.breaker = false
+      end
+
+      def self.enable
+        trap('INT') {
+          yield if block_given?
+          self.instance.breaker = true
+        }
+      end
+
+      def self.check(message = "Quitting")
+        if self.instance.breaker
+          yield if block_given?
+          puts message
+          exit
+        end
+      end
+
+    end
+
+
 
     # Constants for use in #slugify
     SLUGIFY_MODES = %w(raw default pretty ascii).freeze

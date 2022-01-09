@@ -8,7 +8,7 @@ module J1
 
         def init_with_program(prog)
           prog.command(:patch) do |c|
-            c.description 'Install all patches available for J1'
+            c.description 'Install patches available for J1 projects'
             c.syntax 'patch'
             c.option 'force', '--force',                'Force to install patches even already exists'
             c.option 'system', '--system',              'Install patches on the Ruby SYSTEM gem folder'
@@ -48,12 +48,12 @@ module J1
             system_path = result[1]
 
             if options['system']
-              J1.logger.info "Install patches in SYSTEM folder ..."
-              J1.logger.info "Install patches on path #{system_path} ..."
+              J1.logger.info "PATCH: Install patches in SYSTEM folder ..."
+              J1.logger.info "PATCH: Install patches on path #{system_path} ..."
               dest = system_path + '/gems/' + patch_gem_eventmachine + '/lib'
             else
-              J1.logger.info "Install patches in USER gem folder ~/.gem ..."
-              J1.logger.info "Install patches on path #{user_path} ..."
+              J1.logger.info "PATCH: Install patches in USER gem folder ~/.gem ..."
+              J1.logger.info "PATCH: Install patches on path #{user_path} ..."
               dest = user_path + '/gems/' + patch_gem_eventmachine + '/lib'
             end
             src = patch_eventmachine_source_path
@@ -69,7 +69,7 @@ module J1
               if Dir.exist?(dest)
                 FileUtils.cp(src, dest)
               else
-                J1.logger.info "Skipped install patches for execjs-2.7.0 ..."
+                J1.logger.info "PATCH: Skipped install patches for execjs-2.7.0 ..."
               end
             end
 
