@@ -56,16 +56,13 @@ module J1
           J1.logger.info "Running bundle install in #{path} ..."
           Dir.chdir(path) do
             if options['system']
-              J1.logger.info "Install bundle in Ruby gem SYSTEM folder ..."
+              J1.logger.info "SETUP: Install bundle in Ruby gem SYSTEM folder ..."
             else
-              J1.logger.info "Install bundle in USER gem folder ~/.gem ..."
+              J1.logger.info "SETUP: Install bundle in USER gem folder ~/.gem ..."
               process = J1::Utils::Exec2.run('BUNDLE','bundle', 'config', 'set', '--local', 'path', '~/.gem')
               raise SystemExit unless process.success?
             end
             process = J1::Utils::Exec2.run('BUNDLE','bundle', 'install')
-            # output.to_s.each_line do |line|
-            #   J1.logger.info('Bundler:', line.strip) unless line.to_s.empty?
-            # end
             raise SystemExit unless process.success?
           end
         end
@@ -88,12 +85,12 @@ module J1
             system_path = result[1]
 
             if options['system']
-              J1.logger.info "Install patches in SYSTEM folder ..."
-              J1.logger.info "Install patches on path #{system_path} ..."
+              J1.logger.info "SETUP: Install patches in SYSTEM folder ..."
+              J1.logger.info "SETUP: Install patches on path #{system_path} ..."
               dest = system_path + '/gems/' + patch_gem_eventmachine + '/lib'
             else
-              J1.logger.info "Install patches in USER gem folder ~/.gem ..."
-              J1.logger.info "Install patches on path #{user_path} ..."
+              J1.logger.info "SETUP: Install patches in USER gem folder ~/.gem ..."
+              J1.logger.info "SETUP: Install patches on path #{user_path} ..."
               dest = user_path + '/gems/' + patch_gem_eventmachine + '/lib'
             end
             src = patch_eventmachine_source_path
@@ -109,7 +106,7 @@ module J1
               if Dir.exist?(dest)
                 FileUtils.cp(src, dest)
               else
-                J1.logger.info "Skipped install patches for execjs-2.7.0 ..."
+                J1.logger.info "SETUP: Skipped install patches for execjs-2.7.0 ..."
               end
             end
 
