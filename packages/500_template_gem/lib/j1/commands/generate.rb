@@ -58,10 +58,6 @@ module J1
 
         private
 
-        def is_windows?
-          RbConfig::CONFIG["host_os"] =~ %r!mswin|mingw|cygwin!i
-        end
-
         def create_site(new_blog_path)
           create_sample_files new_blog_path
 
@@ -115,9 +111,9 @@ module J1
               J1.logger.info "GENERATE: Install bundle in Ruby gem SYSTEM folder ..."
             else
               J1.logger.info "GENERATE: Install bundle in USER gem folder ~/.gem ..."
-              process, output = J1::Utils::Exec.run('bundle', 'config', 'set', '--local', 'path', '~/.gem')
+              process, output = J1::Utils::Exec2.run('BUNDLE','bundle', 'config', 'set', '--local', 'path', '~/.gem')
             end
-            process, output = J1::Utils::Exec.run('bundle', 'install')
+            process, output = J1::Utils::Exec2.run( 'BUNDLE', 'bundle', 'install')
             output.to_s.each_line do |line|
               J1.logger.info('BUNDLE:', line.strip) unless line.to_s.empty?
             end
@@ -126,7 +122,7 @@ module J1
         end
 
         def patch_install(options)
-          if is_windows?
+          if J1::Utils::is_windows?
             major, minor = RUBY_VERSION.split('.')
             lib_version = major + '.' + minor
             curr_path = File.expand_path(File.dirname(File.dirname(__FILE__)))
@@ -135,7 +131,7 @@ module J1
             patch_eventmachine_source_path = curr_path + '/patches/rubygems' + '/' + patch_gem_eventmachine + '/lib/' + lib_version
             patch_execjs_source_path = curr_path + '/patches/rubygems' + '/' + patch_gem_execjs + '/lib/execjs/external_runtime.rb'
 
-            process, output = J1::Utils::Exec.run('gem', 'env', 'gempath')
+            process, output = J1::Utils::Exec1.run('gem', 'env', 'gempath')
             raise SystemExit unless process.success?
 
             result = output.split(';')

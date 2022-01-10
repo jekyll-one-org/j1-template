@@ -19,19 +19,14 @@ module J1
         end
 
         def process(args, options = {})
-          patch_install(options)
           @args = args
+          patch_install(options)
         end
 
         private
 
-        def is_windows?
-          #noinspection RubyResolve
-          RbConfig::CONFIG["host_os"] =~ %r!mswin|mingw|cygwin!i
-        end
-
         def patch_install(options)
-          if is_windows?
+          if J1::Utils::is_windows?
             major, minor = RUBY_VERSION.split('.')
             lib_version = major + '.' + minor
             curr_path = File.expand_path(File.dirname(File.dirname(__FILE__)))
@@ -40,7 +35,7 @@ module J1
             patch_eventmachine_source_path = curr_path + '/patches/rubygems' + '/' + patch_gem_eventmachine + '/lib/' + lib_version
             patch_execjs_source_path = curr_path + '/patches/rubygems' + '/' + patch_gem_execjs + '/lib/execjs/external_runtime.rb'
 
-            process, output = J1::Utils::Exec.run('gem', 'env', 'gempath')
+            process, output = J1::Utils::Exec1.run('gem', 'env', 'gempath')
             raise SystemExit unless process.success?
 
             result = output.split(';')

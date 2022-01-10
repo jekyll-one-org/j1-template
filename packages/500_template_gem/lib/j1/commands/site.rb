@@ -17,8 +17,12 @@ module J1
         end
 
         def process(args, options = {})
-          J1.logger.info "SITE: Starting up your site ..."
-          J1::Utils::ExecUntilTrap.run('SITE','npm', 'run', 'j1-site')
+          if J1::Utils::is_project?
+            J1.logger.info "SITE: Starting up your site ..."
+            process = J1::Utils::Exec2.run('SITE','npm', 'run', 'j1-site')
+          else
+            raise SystemExit
+          end
         end
 
       end

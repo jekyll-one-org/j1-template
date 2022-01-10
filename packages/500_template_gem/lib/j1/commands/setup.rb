@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+# require "futils"
 
 module J1
   module Commands
@@ -22,7 +23,8 @@ module J1
         def process(args, options = {})
           @args = args
           path = File.expand_path(Dir.getwd)
-          if is_project?
+
+          if J1::Utils::is_project?
             bundle_install(path, options)
             if options['skip-patches']
               J1.logger.info "SETUP: Install build-in patches skipped ..."
@@ -31,31 +33,23 @@ module J1
             end
             J1.logger.info "SETUP: Initialize the project ..."
             J1.logger.info "SETUP: Be patient, this will take a while ..."
-            process, output = J1::Utils::Exec.run('npm', 'run', 'setup')
-            output.to_s.each_line do |line|
-              J1.logger.info('SETUP:', line.strip) unless line.to_s.empty?
-            end
+            # process, output = J1::Utils::Exec.run('npm', 'run', 'setup')
+            # output.to_s.each_line do |line|
+            #   J1.logger.info('SETUP:', line.strip) unless line.to_s.empty?
+            # end
+            process = J1::Utils::Exec2.run('SETUP','npm', 'run', 'setup')
             if process.success?
               J1.logger.info "SETUP: Initializing the project finished successfully."
               J1.logger.info "SETUP: To open your site, run: j1 site"
             else
               raise SystemExit
-            end
+              end
+          else
+            raise SystemExit
           end
         end
 
         private
-
-        def is_project?
-          path = File.expand_path(File.dirname(File.dirname(__FILE__)))
-          J1.logger.info "Check consistency of the project ..."
-          return true
-        end
-
-        def is_windows?
-          #noinspection RubyResolve
-          RbConfig::CONFIG["host_os"] =~ %r!mswin|mingw|cygwin!i
-        end
 
         def bundle_install(path, options)
           J1::External.require_with_graceful_fail 'bundler'
@@ -65,18 +59,19 @@ module J1
               J1.logger.info "Install bundle in Ruby gem SYSTEM folder ..."
             else
               J1.logger.info "Install bundle in USER gem folder ~/.gem ..."
-              process, output = J1::Utils::Exec.run('bundle', 'config', 'set', '--local', 'path', '~/.gem')
+              process = J1::Utils::Exec2.run('BUNDLE','bundle', 'config', 'set', '--local', 'path', '~/.gem')
+              raise SystemExit unless process.success?
             end
-            process, output = J1::Utils::Exec.run('bundle', 'install')
-            output.to_s.each_line do |line|
-              J1.logger.info('Bundler:', line.strip) unless line.to_s.empty?
-            end
+            process = J1::Utils::Exec2.run('BUNDLE','bundle', 'install')
+            # output.to_s.each_line do |line|
+            #   J1.logger.info('Bundler:', line.strip) unless line.to_s.empty?
+            # end
             raise SystemExit unless process.success?
           end
         end
 
         def patch_install(options)
-          if is_windows?
+          if J1::Utils::is_windows?
             major, minor = RUBY_VERSION.split('.')
             lib_version = major + '.' + minor
             curr_path = File.expand_path(File.dirname(File.dirname(__FILE__)))
@@ -85,7 +80,7 @@ module J1
             patch_eventmachine_source_path = curr_path + '/patches/rubygems' + '/' + patch_gem_eventmachine + '/lib/' + lib_version
             patch_execjs_source_path = curr_path + '/patches/rubygems' + '/' + patch_gem_execjs + '/lib/execjs/external_runtime.rb'
 
-            process, output = J1::Utils::Exec.run('gem', 'env', 'gempath')
+            process, output = J1::Utils::Exec1.run('gem', 'env', 'gempath')
             raise SystemExit unless process.success?
 
             result = output.split(';')

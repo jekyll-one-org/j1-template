@@ -2,7 +2,7 @@ require "open3"
 
 module J1
   module Utils
-    module Exec
+    module Exec1
       extend self
 
       # Runs a program in a sub-shell.

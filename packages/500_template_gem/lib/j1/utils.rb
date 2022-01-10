@@ -4,8 +4,8 @@ module J1
   module Utils
     extend self
     autoload :Ansi, "j1/utils/ansi"
-    autoload :Exec, "j1/utils/exec"
-    autoload :ExecUntilTrap, "j1/utils/exec_until_trap"
+    autoload :Exec1, "j1/utils/exec1"
+    autoload :Exec2, "j1/utils/exec2"
     autoload :Platforms, "j1/utils/platforms"
     autoload :WinTZ, "j1/utils/win_tz"
 
@@ -32,10 +32,7 @@ module J1
           exit
         end
       end
-
     end
-
-
 
     # Constants for use in #slugify
     SLUGIFY_MODES = %w(raw default pretty ascii).freeze
@@ -43,6 +40,21 @@ module J1
     SLUGIFY_DEFAULT_REGEXP = Regexp.new("[^[:alnum:]]+").freeze
     SLUGIFY_PRETTY_REGEXP = Regexp.new("[^[:alnum:]._~!$&'()+,;=@]+").freeze
     SLUGIFY_ASCII_REGEXP = Regexp.new("[^[A-Za-z0-9]]+").freeze
+
+    def is_project?
+      path = File.expand_path(Dir.pwd)
+      puts "Check consistency of the J1 project ..."
+      if File.exist?(path + '/package.json') && File.exist?(path + '/_config.yml')
+        return true
+      else
+        puts "\e[31m" + "FATAL: Path #{path} seems not a J1 project folder" + "\e[0m"
+      end
+    end
+
+    def is_windows?
+      #noinspection RubyResolve
+      RbConfig::CONFIG["host_os"] =~ %r!mswin|mingw|cygwin!i
+    end
 
     # Takes an indented string and removes the preceding spaces on each line
 
