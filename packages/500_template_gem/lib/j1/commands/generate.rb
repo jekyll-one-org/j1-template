@@ -111,12 +111,10 @@ module J1
               J1.logger.info "GENERATE: Install bundle in Ruby gem SYSTEM folder ..."
             else
               J1.logger.info "GENERATE: Install bundle in USER gem folder ~/.gem ..."
-              process, output = J1::Utils::Exec2.run('BUNDLE','bundle', 'config', 'set', '--local', 'path', '~/.gem')
+              process = J1::Utils::Exec2.run('GENERATE','bundle', 'config', 'set', '--local', 'path', '~/.gem')
+              raise SystemExit unless process.success?
             end
-            process, output = J1::Utils::Exec2.run( 'BUNDLE', 'bundle', 'install')
-            output.to_s.each_line do |line|
-              J1.logger.info('BUNDLE:', line.strip) unless line.to_s.empty?
-            end
+            process = J1::Utils::Exec2.run( 'GENERATE', 'bundle', 'install')
             raise SystemExit unless process.success?
           end
         end
