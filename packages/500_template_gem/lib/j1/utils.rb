@@ -51,6 +51,17 @@ module J1
       end
     end
 
+    def is_project_setup?
+      path = File.expand_path(Dir.pwd)
+      puts "Check setup state of the J1 project ..."
+      if File.exist?(path + '/package-lock.json') && File.exist?(path + '/Gemfile.lock')
+        return true
+      else
+        puts "\e[31m" + "FATAL: Project in path #{path} seems not initialized" + "\e[0m"
+        puts "INFO: Consider to run 'j1 setup' in order to prepare the project for first use"
+      end
+    end
+
     def is_windows?
       #noinspection RubyResolve
       RbConfig::CONFIG["host_os"] =~ %r!mswin|mingw|cygwin!i
