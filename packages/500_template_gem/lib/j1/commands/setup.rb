@@ -53,16 +53,16 @@ module J1
 
         def bundle_install(path, options)
           J1::External.require_with_graceful_fail 'bundler'
-          J1.logger.info "Running bundle install in #{path} ..."
+          J1.logger.info "SETUP: Running bundle install in #{path} ..."
           Dir.chdir(path) do
             if options['system']
               J1.logger.info "SETUP: Install bundle in Ruby gem SYSTEM folder ..."
             else
               J1.logger.info "SETUP: Install bundle in USER gem folder ~/.gem ..."
-              process = J1::Utils::Exec2.run('BUNDLE','bundle', 'config', 'set', '--local', 'path', '~/.gem')
+              process = J1::Utils::Exec2.run('SETUP','bundle', 'config', 'set', '--local', 'path', '~/.gem')
               raise SystemExit unless process.success?
             end
-            process = J1::Utils::Exec2.run('BUNDLE','bundle', 'install')
+            process = J1::Utils::Exec2.run('SETUP','bundle', 'install')
             raise SystemExit unless process.success?
           end
         end
