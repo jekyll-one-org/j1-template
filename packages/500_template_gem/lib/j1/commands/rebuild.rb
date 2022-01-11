@@ -18,11 +18,15 @@ module J1
 
         def process(args, options = {})
           if J1::Utils::is_project?
-            J1.logger.info "REBUILD: Rebuild the projects website ..."
-            J1.logger.info "REBUILD: Be patient, this will take a while ..."
-            process = J1::Utils::Exec2.run('REBUILD','npm', 'run', 'rebuild')
-            if process.success?
-              J1.logger.info "REBUILD: The projects website has been rebuild successfully."
+            if J1::Utils::is_project_setup?
+              J1.logger.info "REBUILD: Rebuild the projects website ..."
+              J1.logger.info "REBUILD: Be patient, this will take a while ..."
+              process = J1::Utils::Exec2.run('REBUILD','npm', 'run', 'rebuild')
+              if process.success?
+                J1.logger.info "REBUILD: The projects website has been rebuild successfully."
+              else
+                raise SystemExit
+              end
             else
               raise SystemExit
             end
