@@ -20,10 +20,6 @@ module J1
           if J1::Utils::is_project?
             J1.logger.info "RESET: Reset the project to factory state ..."
             J1.logger.info "RESET: Be patient, this will take a while ..."
-            # process, output = J1::Utils::Exec1.run('npm', 'run', 'reset')
-            # output.to_s.each_line do |line|
-            #   J1.logger.info('RESET:', line.strip) unless line.to_s.empty?
-            # end
             process = J1::Utils::Exec2.run('RESET','npm', 'run', 'reset')
             if process.success?
               J1.logger.info "RESET: The project reset finished successfully."
