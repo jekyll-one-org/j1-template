@@ -24,6 +24,7 @@ module J1
               process = J1::Utils::Exec2.run('RESET','npm', 'run', 'reset')
               if process.success?
                 J1.logger.info "RESET: The project reset finished successfully."
+                J1.logger.info "RESET: To setup the project, run: j1 setup"
               else
                 raise SystemExit
               end

@@ -24,6 +24,7 @@ module J1
               process = J1::Utils::Exec2.run('REBUILD','npm', 'run', 'rebuild')
               if process.success?
                 J1.logger.info "REBUILD: The projects website has been rebuild successfully."
+                J1.logger.info "REBUILD: To open the site, run: j1 site"
               else
                 raise SystemExit
               end

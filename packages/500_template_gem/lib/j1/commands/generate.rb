@@ -37,6 +37,7 @@ module J1
           end
 
           after_install(new_blog_path, options)
+          J1.logger.info "GENERATE: To setup the site, change to the project folder #{new_blog_path} and run: j1 setup"
         end
 
         def create_blank_site(path)
