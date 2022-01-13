@@ -5,23 +5,46 @@ module J1
     module Exec2
       extend self
 
-      # Runs a program in a sub-shell.
+      # Runs a program in a sub-shell and return a Process::Status on exit
       #
+      # title - prepend a title on all messages
       # *args - a list of strings containing the program name and arguments
       #
-      # Returns a Process::Status and a String of output in an array in
-      # that order.
       def run(title, *args)
-        # title = 'TITLE'
         Open3.popen3(*args) do |stdin, stdout, stderr, status|
+
+          # manage software interrupt on Ctrl-C
           trap('INT') {
             puts "#{title}: Received Ctrl-C to stop"
+            [stdin, stdout, stderr].each(&:close)
             raise SystemExit
           }
-          stdout.each_line do |line|
-            puts "#{title}: #{line}"
+
+          # manage messages on stdout
+          stdout_thr = Thread.new do
+            # exit the tread silently
+            Thread.current.report_on_exception = false
+            stdout.each_line do |line|
+              puts "#{title}: #{line}"
+            end
           end
+
+          # manage messages on stdout
+          stderr_thr = Thread.new do
+            # exit the tread silently
+            Thread.current.report_on_exception = false
+            stderr.each_line do |line|
+              puts "\e[31m" + "#{title}: #{line}" + "\e[0m"
+            end
+          end
+
+          # combine channels stdout, stderr for output
+          [stdout_thr, stderr_thr].each(&:join)
+
+          # close channels explicitly to exit gracefully
           [stdin, stdout, stderr].each(&:close)
+
+          # exit and return Process::Status
           status.value
         end
       end
