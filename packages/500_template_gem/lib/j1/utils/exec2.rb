@@ -15,7 +15,8 @@ module J1
 
           # manage software interrupt on Ctrl-C
           trap('INT') {
-            puts "#{title}: Received Ctrl-C to stop"
+            timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+            puts "#{timestamp} - #{title}: Received Ctrl-C to stop"
             [stdin, stdout, stderr].each(&:close)
             raise SystemExit
           }
@@ -35,7 +36,8 @@ module J1
             # exit the tread silently
             Thread.current.report_on_exception = false
             stderr.each_line do |line|
-              puts "\e[31m" + "#{title}: #{line}" + "\e[0m"
+              timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+              puts "#{timestamp} - " + "\e[31m" + "#{title}: #{line}" + "\e[0m"
             end
           end
 

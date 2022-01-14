@@ -23,7 +23,6 @@ module J1
         def process(args, options = {})
           @args = args
           path = File.expand_path(Dir.getwd)
-          timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
 
           if J1::Utils::is_project?
             bundle_install(path, options)
@@ -32,6 +31,8 @@ module J1
             else
               patch_install(options)
             end
+
+            timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
             J1.logger.info "#{timestamp} - SETUP: Initialize the project ..."
             J1.logger.info "#{timestamp} - SETUP: Be patient, this will take a while ..."
             # process, output = J1::Utils::Exec.run('npm', 'run', 'setup')
@@ -65,7 +66,7 @@ module J1
               process = J1::Utils::Exec2.run('SETUP','bundle', 'config', 'set', '--local', 'path', '~/.gem')
               raise SystemExit unless process.success?
             end
-            process = J1::Utils::Exec2.run('#{timestamp} - SETUP','bundle', 'install')
+            process = J1::Utils::Exec2.run('SETUP','bundle', 'install')
             raise SystemExit unless process.success?
           end
         end

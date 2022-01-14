@@ -99,6 +99,7 @@ module J1
               patch_install(options)
             end
           end
+          timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
           if options['force']
             J1.logger.info "#{timestamp} - GENERATE: Generated Jekyll site force installed in folder #{path}"
           else
@@ -136,6 +137,9 @@ module J1
             patch_execjs_source_path = curr_path + '/patches/rubygems' + '/' + patch_gem_execjs + '/lib/execjs/external_runtime.rb'
 
             process, output = J1::Utils::Exec1.run('gem', 'env', 'gempath')
+            output.to_s.each_line do |line|
+              J1.logger.info("#{timestamp} - GENERATE: ", line.strip) unless line.to_s.empty?
+            end
             raise SystemExit unless process.success?
 
             result = output.split(';')
