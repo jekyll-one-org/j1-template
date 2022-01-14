@@ -22,12 +22,13 @@ module J1
         end
 
         def process(args, options = {})
-          raise ArgumentError, 'GENERATE: You must specify a path.' if args.empty?
+          timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+          raise ArgumentError, "#{timestamp} - GENERATE: You must specify a path." if args.empty?
 
           new_blog_path = File.expand_path(args.join(' '), Dir.pwd)
           FileUtils.mkdir_p new_blog_path
           if preserve_source_location?(new_blog_path, options)
-            J1.logger.abort_with 'GENERATE: Conflict:', "#{new_blog_path} exists and is not empty."
+            J1.logger.abort_with "#{timestamp} - GENERATE: Conflict:", "#{new_blog_path} exists and is not empty."
           end
 
           if options['blank']
@@ -37,7 +38,8 @@ module J1
           end
 
           after_install(new_blog_path, options)
-          J1.logger.info "GENERATE: To setup the site, change to the project folder #{new_blog_path} and run: j1 setup"
+          timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+          J1.logger.info "#{timestamp} - GENERATE: To setup the site, change to the project folder #{new_blog_path} and run: j1 setup"
         end
 
         def create_blank_site(path)
@@ -88,30 +90,32 @@ module J1
         # then automatically execute bundle install from within the generate blog dir
         # unless the user opts to generate a blank blog or skip 'bundle install'.
         def after_install(path, options = {})
+          timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
           unless options['skip-bundle']
             bundle_install(path, options)
             if options['skip-patches']
-              J1.logger.info "GENERATE: Install build-in patches skipped ..."
+              J1.logger.info "#{timestamp} - GENERATE: Install build-in patches skipped ..."
             else
               patch_install(options)
             end
           end
           if options['force']
-            J1.logger.info "GENERATE: Generated Jekyll site force installed in folder #{path}"
+            J1.logger.info "#{timestamp} - GENERATE: Generated Jekyll site force installed in folder #{path}"
           else
-            J1.logger.info "GENERATE: Generated Jekyll site installed in folder #{path}"
+            J1.logger.info "#{timestamp} - GENERATE: Generated Jekyll site installed in folder #{path}"
           end
-          J1.logger.info 'GENERATE: Installation (bundle) of RubyGems skipped' if options['skip-bundle']
+          J1.logger.info "#{timestamp} - GENERATE: Installation (bundle) of RubyGems skipped" if options['skip-bundle']
         end
 
         def bundle_install(path, options)
+          timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
           J1::External.require_with_graceful_fail 'bundler'
-          J1.logger.info "GENERATE: Running bundle install in #{path} ..."
+          J1.logger.info "#{timestamp} - GENERATE: Running bundle install in #{path} ..."
           Dir.chdir(path) do
             if options['system']
-              J1.logger.info "GENERATE: Install bundle in Ruby gem SYSTEM folder ..."
+              J1.logger.info "#{timestamp} - GENERATE: Install bundle in Ruby gem SYSTEM folder ..."
             else
-              J1.logger.info "GENERATE: Install bundle in USER gem folder ~/.gem ..."
+              J1.logger.info "#{timestamp} - GENERATE: Install bundle in USER gem folder ~/.gem ..."
               process = J1::Utils::Exec2.run('GENERATE','bundle', 'config', 'set', '--local', 'path', '~/.gem')
               raise SystemExit unless process.success?
             end
@@ -121,6 +125,7 @@ module J1
         end
 
         def patch_install(options)
+          timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
           if J1::Utils::is_windows?
             major, minor = RUBY_VERSION.split('.')
             lib_version = major + '.' + minor
@@ -136,14 +141,15 @@ module J1
             result = output.split(';')
             user_path = result[0]
             system_path = result[1]
+            timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
 
             if options['system']
-              J1.logger.info "GENERATE: Install patches in SYSTEM folder ..."
-              J1.logger.info "GENERATE: Install patches on path #{system_path} ..."
+              J1.logger.info "#{timestamp} - GENERATE: Install patches in SYSTEM folder ..."
+              J1.logger.info "#{timestamp} - GENERATE: Install patches on path #{system_path} ..."
               dest = system_path + '/gems/' + patch_gem_eventmachine + '/lib'
             else
-              J1.logger.info "GENERATE: Install patches in USER gem folder ~/.gem ..."
-              J1.logger.info "GENERATE: Install patches on path #{user_path} ..."
+              J1.logger.info "#{timestamp} - GENERATE: Install patches in USER gem folder ~/.gem ..."
+              J1.logger.info "#{timestamp} - GENERATE: Install patches on path #{user_path} ..."
               dest = user_path + '/gems/' + patch_gem_eventmachine + '/lib'
             end
             src = patch_eventmachine_source_path
@@ -159,7 +165,7 @@ module J1
               if Dir.exist?(dest)
                 FileUtils.cp(src, dest)
               else
-                J1.logger.info "GENERATE: Skipped install patches for execjs-2.7.0 ..."
+                J1.logger.info "#{timestamp} - GENERATE: Skipped install patches for execjs-2.7.0 ..."
               end
             end
 

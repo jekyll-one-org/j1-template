@@ -25,7 +25,8 @@ module J1
             # exit the tread silently
             Thread.current.report_on_exception = false
             stdout.each_line do |line|
-              puts "#{title}: #{line}"
+              timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+              puts "#{timestamp} - #{title}: #{line}"
             end
           end
 

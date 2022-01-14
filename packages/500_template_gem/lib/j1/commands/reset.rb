@@ -17,14 +17,16 @@ module J1
         end
 
         def process(args, options = {})
+          timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
           if J1::Utils::is_project?
             if J1::Utils::is_project_setup?
-              J1.logger.info "RESET: Reset the project to factory state ..."
-              J1.logger.info "RESET: Be patient, this will take a while ..."
+              J1.logger.info "#{timestamp} - RESET: Reset the project to factory state ..."
+              J1.logger.info "#{timestamp} - RESET: Be patient, this will take a while ..."
               process = J1::Utils::Exec2.run('RESET','npm', 'run', 'reset')
               if process.success?
-                J1.logger.info "RESET: The project reset finished successfully."
-                J1.logger.info "RESET: To setup the project, run: j1 setup"
+                timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
+                J1.logger.info "#{timestamp} - RESET: The project reset finished successfully."
+                J1.logger.info "#{timestamp} - RESET: To setup the project, run: j1 setup"
               else
                 raise SystemExit
               end
