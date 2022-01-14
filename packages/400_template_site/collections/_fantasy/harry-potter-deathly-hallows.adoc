@@ -1,7 +1,7 @@
 ---
 title:                                  Harry Potter and the Deathly Hallows
 tagline:                                Lord Voldemort and the Death Eaters are not far ..
-date:                                   2016-11-17 00:00:00 +100
+date:                                   2016-11-17 00:00:00
 
 book:
   cover:                                https://d4rri9bdfuube.cloudfront.net/assets/images/book/large/9781/4088/9781408855713.jpg

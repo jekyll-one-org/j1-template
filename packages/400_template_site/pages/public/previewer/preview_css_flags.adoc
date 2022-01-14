@@ -1,7 +1,7 @@
 ---
 title:                                  Country Flags
 tagline:                                flags worldwide
-date:                                   2020-11-08 00:00:00 +100
+date:                                   2020-11-08 00:00:00
 description: >
                                         Country flags are often used in the context of language-specific selections
                                         or for content related to a specific country. The use of country flags can

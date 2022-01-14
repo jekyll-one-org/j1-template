@@ -284,7 +284,7 @@ module Jekyll
           elsif defined?(site.data['date'])
             date = site.data['date']
           else
-            date = '2021-01-01 00:00:00'
+            date = '2022-01-01 00:00:00'
           end
 
           tagline     = site.data['tagline']

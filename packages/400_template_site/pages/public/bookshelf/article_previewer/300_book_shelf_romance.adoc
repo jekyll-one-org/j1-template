@@ -1,7 +1,7 @@
 ---
 title:                                  Romance
 tagline:                                Romance Literature in the Book Shelf
-date:                                   2020-11-03 00:00:00 +100
+date:                                   2020-11-03 00:00:00
 description: >
                                         Romance Literature in the Book Shelf
 

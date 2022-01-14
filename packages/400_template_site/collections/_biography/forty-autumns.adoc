@@ -1,7 +1,7 @@
 ---
 title:                                  Forty Autumns
 tagline:                                A Family's Story on Both Sides of the Berlin Wall
-date:                                   2016-10-27 00:00:00 +100
+date:                                   2016-10-27 00:00:00
 
 book:
   cover:                                https://d20eq91zdmkqd.cloudfront.net/assets/images/book/large/9781/4087/9781408707265.jpg

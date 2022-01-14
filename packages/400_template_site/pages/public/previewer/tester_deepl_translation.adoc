@@ -1,7 +1,7 @@
 ---
 title:                                  Translator
 tagline:                                machine translations
-date:                                   2021-10-06 00:00:00 +100
+date:                                   2021-10-06 00:00:00
 description: >
                                         Machine translation (MT) transfers information from one language to another
                                         by a computer without human intervention. NMT is the most advanced method

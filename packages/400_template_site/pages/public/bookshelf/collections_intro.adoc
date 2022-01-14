@@ -1,7 +1,7 @@
 ---
 title:                                  Jekyll Collections
 tagline:                                a brief introduction
-date:                                   2020-03-01 00:00:00 +100
+date:                                   2020-03-01 00:00:00
 description: >
                                         Collections are Jekyll's most powerful and simultaneously least understood
                                         feature. Collections add another possibility, or use-case, outside of Jekyll's

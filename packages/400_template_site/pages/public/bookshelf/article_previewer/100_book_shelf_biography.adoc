@@ -1,7 +1,7 @@
 ---
 title:                                  Biography
 tagline:                                Today's People in the Book Shelf
-date:                                   2020-11-03 00:00:00 +100
+date:                                   2020-11-03 00:00:00
 description: >
                                         Today's People in the Book Shelf
 

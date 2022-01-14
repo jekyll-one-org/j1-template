@@ -1,7 +1,7 @@
 ---
 title:                                  A Breath of Snow and Ashes
 tagline:                                Extraordinary story of 18th-century Scotsman Jamie Fraser
-date:                                   2016-11-24 00:00:00 +100
+date:                                   2016-11-24 00:00:00
 
 book:
   cover:                                https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9780/4402/9780440225805.jpg

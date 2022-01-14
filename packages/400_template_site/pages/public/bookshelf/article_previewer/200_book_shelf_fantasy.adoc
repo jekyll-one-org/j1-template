@@ -1,7 +1,7 @@
 ---
 title:                                  Fantasy
 tagline:                                Fantasy Literature in the Book Shelf
-date:                                   2020-11-04 00:00:00 +100
+date:                                   2020-11-04 00:00:00
 description: >
                                         Fantasy Literature in the Book Shelf
 

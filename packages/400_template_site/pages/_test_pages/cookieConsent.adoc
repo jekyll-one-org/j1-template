@@ -1,7 +1,7 @@
 ---
 title:                                  J1
 tagline:                                Cookie Consent
-date:                                   2021-06-24 00:00:00 +100
+date:                                   2021-06-24 00:00:00
 description: >
                                         Bootstrap Cookie Consent Module
                                         for J1 Template
