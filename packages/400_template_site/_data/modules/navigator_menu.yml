@@ -183,6 +183,9 @@
         - title:                        MD Color Palette
           href:                         /pages/public/previewer/color_palette/
           icon:                         format-color-fill
+        - title:                        J1 Dropdowns
+          href:                         /pages/public/manuals/j1Dropdowns/
+          icon:                         form-dropdown
         - title:                        MsDropdown
           href:                         /pages/public/manuals/msDropdown/
           icon:                         form-dropdown

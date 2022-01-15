@@ -45,6 +45,7 @@ theme:
 #
 css:
   custom_scss:                          false
+  custom_css:                           false
 
 # ------------------------------------------------------------------------------
 # Typography settings

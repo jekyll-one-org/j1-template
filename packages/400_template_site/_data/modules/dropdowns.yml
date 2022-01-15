@@ -1,0 +1,59 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/dropdowns.yml
+# User Configuration of the Dropdowns Module
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2021 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+#
+# ------------------------------------------------------------------------------
+# NOTE:
+#
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description (used for J1 CC only)
+#
+description:
+
+  title:                                Dropdowns Module
+  scope:                                User settings
+  location:                             _data/modules/dropdowns.yml
+
+# ------------------------------------------------------------------------------
+# User settings
+#
+settings:
+  enabled:                              true
+
+  dropdowns:
+    # --------------------------------------------------------------------------
+    # DROPDOWN configurations
+    # --------------------------------------------------------------------------
+
+    # --------------------------------------------------------------------------
+    # demo_dropdown
+    #
+    - dropdown:
+        enabled:                        true
+
+        id:                             demo_dropdown
+        items: >
+                                        <li><a href="#!">one</a></li>
+                                        <li><a href="#!">two</a></li>
+                                        <li class="divider" tabindex="-1"></li>
+                                        <li><a href="#!">three</a></li>
+                                        <li><a href="#!"><i class="mdi mdi-view-module mdi-2x"></i>four</a></li>
+                                        <li><a href="#!"><i class="mdi mdi-cloud mdi-2x"></i>five</a></li>
+
+        options:
+          alignment:                    left
+          hover:                        true
+          maxLenght:                    500
+
+# ------------------------------------------------------------------------------
+# END config

@@ -6,8 +6,8 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/rtable.js
- # Liquid template to adapt rtable
+ # ~/assets/themes/j1/adapter/js/dropdowns.js
+ # Liquid template to adapt dropdowns
  #
  # Product/Info:
  # https://jekyll.one
@@ -40,12 +40,12 @@ regenerate:                             true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign rtable_defaults = modules.defaults.rtable.defaults %}
-{% assign rtable_settings = modules.rtable.settings %}
+{% assign dropdowns_defaults = modules.defaults.dropdowns.defaults %}
+{% assign dropdowns_settings = modules.dropdowns.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign rtable_options  = rtable_defaults | merge: rtable_settings %}
+{% assign dropdowns_options  = dropdowns_defaults | merge: dropdowns_settings %}
 
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
@@ -54,8 +54,8 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/rtable.js
- # J1 Adapter for rtable
+ # ~/assets/themes/j1/adapter/js/dropdowns.js
+ # J1 Adapter for J1 Module Dropdowns
  #
  # Product/Info:
  # https://jekyll.one
@@ -75,7 +75,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.rtable = (function (j1, window) {
+j1.adapter.dropdowns = (function (j1, window) {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
@@ -104,15 +104,15 @@ j1.adapter.rtable = (function (j1, window) {
       // Default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.rtable',
+        module_name: 'j1.adapter.dropdowns',
         generated:   '{{site.time}}'
       }, options);
 
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
-      _this   = j1.adapter.rtable;
-      logger  = log4javascript.getLogger('j1.adapter.rtable');
+      _this   = j1.adapter.dropdowns;
+      logger  = log4javascript.getLogger('j1.adapter.dropdowns');
 
       // initialize state flag
       _this.setState('started');
@@ -121,7 +121,7 @@ j1.adapter.rtable = (function (j1, window) {
 
       // create settings object from frontmatterOptions
       frontmatterOptions = options != null ? $.extend({}, options) : {};
-      moduleOptions = $.extend({}, {{rtable_options | replace: 'nil', 'null' | replace: '=>', ':' }});
+      moduleOptions = $.extend({}, {{dropdowns_options | replace: 'nil', 'null' | replace: '=>', ':' }});
 
       if (typeof frontmatterOptions !== 'undefined') {
         moduleOptions = j1.mergeData(moduleOptions, frontmatterOptions);
@@ -131,38 +131,23 @@ j1.adapter.rtable = (function (j1, window) {
         if (j1.getState() == 'finished') {
 
           // -------------------------------------------------------------------
-          // rtable initializer
+          // dropdowns initializer
           // -------------------------------------------------------------------
-          var log_text = '\n' + 'rtable is being initialized';
+          var log_text = '\n' + 'dropdowns is being initialized';
           logger.info(log_text);
 
-          // Add data attributes for tablesaw to all tables of a page
-          // as Asciidoctor has NO option to pass 'data attributes'
-          // See: https://stackoverflow.com/questions/50600405/how-to-add-custom-data-attributes-with-asciidoctor
+          // Add ...
           //
-          $('table').each(function(){
-            var curTable = $(this);
-            var log_text;
-            // jadams, 2020-09-16: class 'rtable' indicate use of 'tablesaw'
-            if ($(curTable).hasClass('rtable')) {
-              // jadams, 2020-09-16: add needed CSS class/attribute for tablesaw
-              $(curTable).addClass('tablesaw');
-              $(curTable).attr('data-tablesaw-mode','stack');
-
-              Tablesaw.init(curTable, moduleOptions);
-
-              // set initial state for all table/colgroup elements
-              //
-              if ($(window).width() < moduleOptions.breakpoint) {
-                log_text = '\n' + 'hide colgroups: ' + curTable.attr('id')
-                curTable.find('colgroup').hide();
-                logger.debug(log_text);
-              } else {
-                log_text = '\n' + 'show colgroup: ' + curTable.attr('id')
-                curTable.find('colgroup').show();
-                logger.debug(log_text);
-              }
-            } // END if hasClass 'rtable'
+          var elms      = document.querySelectorAll('.dropdowns');
+          var instances = j1.dropdowns.init(elms, {
+            alignment: "left",
+            autoTrigger: true,
+            constrainWidth: true,
+            coverTrigger: true,
+            closeOnClick: true,
+            hover: false,
+            inDuration: 150,
+            outDuration: 250
           });
 
           _this.setState('finished');
