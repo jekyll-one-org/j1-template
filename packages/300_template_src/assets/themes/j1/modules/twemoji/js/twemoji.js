@@ -7,7 +7,7 @@
  # https://jekyll.one
  # https://github.com/twitter/twemoji
  #
- # Copyright (C) 2021 Juergen Adams
+ # Copyright (C) 2022 Juergen Adams
  # Copyright (C) 2018 Twitter, Inc and other contributors
  #
  # J1 Template is licensed under the MIT License.

@@ -8,7 +8,7 @@
  #  http://jekyll.one
  #
  #  Copyright (C) 2020 Stefan Haack
- #  Copyright (C) 2021 Juergen Adams
+ #  Copyright (C) 2022 Juergen Adams
  #
  #  bootstrap-cookie-banner is licensed under MIT License.
  #  See: https://github.com/shaack/bootstrap-cookie-banner/blob/master/LICENSE

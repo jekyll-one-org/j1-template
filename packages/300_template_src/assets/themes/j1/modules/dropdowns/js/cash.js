@@ -7,7 +7,7 @@
  # https://jekyll.one
  # https://github.com/fabiospampinato/cash
  #
- # Copyright (C) 2021 Juergen Adams
+ # Copyright (C) 2022 Juergen Adams
  #
  # Cash is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE

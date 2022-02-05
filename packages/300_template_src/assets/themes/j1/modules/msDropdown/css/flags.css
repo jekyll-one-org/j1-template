@@ -7,7 +7,7 @@
  # http://jekyll.one
  # https://www.marghoobsuleman.com/
  #
- # Copyright (C) 2021 Juergen Adams
+ # Copyright (C) 2022 Juergen Adams
  #
  # msDropdown is licensed under MIT License.
  # See: https://github.com/marghoobsuleman/ms-Dropdown/blob/master/MIT-LICENSE.txt

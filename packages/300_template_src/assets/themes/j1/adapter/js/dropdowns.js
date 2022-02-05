@@ -11,13 +11,14 @@ regenerate:                             true
  #
  # Product/Info:
  # https://jekyll.one
- # Copyright (C) 2021 Juergen Adams
+ # Copyright (C) 2022 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # For details, see https://jekyll.one
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
+ #  {{ dropdowns_options | debug }}
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
@@ -60,7 +61,7 @@ regenerate:                             true
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2021 Juergen Adams
+ # Copyright (C) 2022 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # For details, see https://jekyll.one
@@ -81,6 +82,7 @@ j1.adapter.dropdowns = (function (j1, window) {
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment   = '{{environment}}';
   var moduleOptions = {};
+  var instances     = [];
   var frontmatterOptions;
   var _this;
   var logger;
@@ -114,6 +116,7 @@ j1.adapter.dropdowns = (function (j1, window) {
       _this   = j1.adapter.dropdowns;
       logger  = log4javascript.getLogger('j1.adapter.dropdowns');
 
+
       // initialize state flag
       _this.setState('started');
       logger.info('\n' + 'state: ' + _this.getState());
@@ -129,6 +132,7 @@ j1.adapter.dropdowns = (function (j1, window) {
 
       var dependencies_met_j1_finished = setInterval(function() {
         if (j1.getState() == 'finished') {
+          var elms = document.querySelectorAll('.dropdowns');
 
           // -------------------------------------------------------------------
           // dropdowns initializer
@@ -136,19 +140,62 @@ j1.adapter.dropdowns = (function (j1, window) {
           var log_text = '\n' + 'dropdowns is being initialized';
           logger.info(log_text);
 
-          // Add ...
-          //
-          var elms      = document.querySelectorAll('.dropdowns');
-          var instances = j1.dropdowns.init(elms, {
-            alignment: "left",
-            autoTrigger: true,
-            constrainWidth: true,
-            coverTrigger: true,
-            closeOnClick: true,
-            hover: false,
-            inDuration: 150,
-            outDuration: 250
-          });
+          {% for item in dropdowns_options.dropdowns %} {% if item.dropdown.enabled %}
+            {% assign dropdown_id = item.dropdown.id %}
+
+            {% comment %} load default options
+            ---------------------------------------------------------------------- {% endcomment %}
+            {% assign alignment       = dropdowns_options.options.alignment %}
+            {% assign autoTrigger     = dropdowns_options.options.autoTrigger %}
+            {% assign constrainWidth  = dropdowns_options.options.constrainWidth %}
+            {% assign coverTrigger    = dropdowns_options.options.coverTrigger %}
+            {% assign closeOnClick    = dropdowns_options.options.closeOnClick %}
+            {% assign hover           = dropdowns_options.options.hover %}
+            {% assign inDuration      = dropdowns_options.options.inDuration %}
+            {% assign outDuration     = dropdowns_options.options.outDuration %}
+            {% assign cbOnOpen        = dropdowns_options.options.cbOnOpen %}
+            {% assign cbOnClose       = dropdowns_options.options.cbOnClose %}
+            {% assign cbOnItemClick   = dropdowns_options.options.cbOnItemClick %}
+
+            {% comment %} set dropdown options
+            -------------------------------------------------------------------- {% endcomment %}
+            {% if item.dropdown.options.alignment %}      {% assign alignment       = item.dropdown.options.alignment %}        {% endif %}
+            {% if item.dropdown.options.autoTrigger %}    {% assign autoTrigger     = item.dropdown.options.autoTrigger %}      {% endif %}
+            {% if item.dropdown.options.constrainWidth %} {% assign constrainWidth  = item.dropdown.options.constrainWidth %}   {% endif %}
+            {% if item.dropdown.options.coverTrigger %}   {% assign coverTrigger    = item.dropdown.options.coverTrigger %}     {% endif %}
+            {% if item.dropdown.options.closeOnClick %}   {% assign closeOnClick    = item.dropdown.options.closeOnClick %}     {% endif %}
+            {% if item.dropdown.options.hover %}          {% assign hover           = item.dropdown.options.hover %}            {% endif %}
+            {% if item.dropdown.options.inDuration %}     {% assign inDuration      = item.dropdown.options.inDuration %}       {% endif %}
+            {% if item.dropdown.options.outDuration %}    {% assign outDuration     = item.dropdown.options.outDuration %}      {% endif %}
+            {% if item.dropdown.options.cbOnOpen %}       {% assign cbOnOpen        = item.dropdown.options.cbOnOpen %}         {% endif %}
+            {% if item.dropdown.options.cbOnClose %}      {% assign cbOnClose       = item.dropdown.options.cbOnClose %}        {% endif %}
+            {% if item.dropdown.options.cbOnItemClick %}  {% assign cbOnItemClick   = item.dropdown.options.cbOnItemClick %}    {% endif %}
+
+            elms.forEach(function (elm) {
+              var id = elm.dataset.target;
+
+              if (id === '{{dropdown_id}}') {
+                // processing: {{dropdown_id}}
+                //
+                var instance = j1.dropdowns.init(elm, {
+                  alignment:        "{{alignment}}",
+                  autoTrigger:      {{autoTrigger}},
+                  constrainWidth:   {{constrainWidth}},
+                  coverTrigger:     {{coverTrigger}},
+                  closeOnClick:     {{closeOnClick}},
+                  hover:            {{hover}},
+                  inDuration:       "{{inDuration}}",
+                  outDuration:      "{{outDuration}}",
+                  onOpen:           "{{cbOnOpen}}",
+                  onClose:          "{{cbOnClose}}",
+                  onItemClick:      "{{cbOnItemClick}}"
+                });
+                instances.push(instance);
+              }
+
+            });
+            {% assign item.dropdown.options = nil %}
+          {% endif %} {% endfor %}
 
           _this.setState('finished');
           logger.info('\n' + 'state: ' + _this.getState());
@@ -160,7 +207,65 @@ j1.adapter.dropdowns = (function (j1, window) {
     }, // END init
 
     // -------------------------------------------------------------------------
-    // messageHandler: MessageHandler for J1 CookieConsent module
+    // cbOnClick)
+    // Called by the dropdowns CORE module when and dropdown element
+    // is clicked
+    // -------------------------------------------------------------------------
+    cbOnclick: function (event) {
+      var logger  = log4javascript.getLogger('j1.adapter.dropdowns.cbOnClick');
+      var itemEl = $(event.target).closest('li')[0];
+
+
+      // logText = '\n' + 'entered cbOnClick on id: ' + id;
+      // logger.info(logText);
+
+      return true;
+    },
+
+    // -------------------------------------------------------------------------
+    // cbOnOpen()
+    // Called by the dropdowns CORE module when dropdown get opened
+    // -------------------------------------------------------------------------
+    cbOnOpen: function (elm) {
+      var logger  = log4javascript.getLogger('j1.adapter.dropdowns.cbOnOpen');
+      var id      = elm.id;
+
+      logText = '\n' + 'entered cbOnOpen on id: ' + id;
+      logger.info(logText);
+      return true;
+    },
+
+    // -------------------------------------------------------------------------
+    // cbOnClose()
+    // Called by the dropdowns CORE module when dropdown get closed
+    // -------------------------------------------------------------------------
+    cbOnClose: function (elm) {
+      var logger    = log4javascript.getLogger('j1.adapter.dropdowns.cbOnClose');
+      var id        = elm.id;
+      var listItems = '#' + elm.id + " li";
+      var menuItems = document.querySelectorAll(listItems);
+      var activeItem;
+      var activeValue;
+
+      // Loop through each <li> element and mark selected menuItem by class active
+      for (var i=0; i < menuItems.length; i++) {
+        if (menuItems[i].classList.contains('active')) {
+            activeItem  = i;
+            activeValue = menuItems[i].dataset.target;
+        }
+      }
+
+      logText = '\n' + 'entered cbOnClose on id: ' + id;
+      logger.info(logText);
+      logText = '\n' + 'item selected: ' + activeItem;
+      logger.info(logText);
+      logText = '\n' + 'value selected: ' + activeValue;
+      logger.info(logText);
+      return true;
+    },
+
+    // -------------------------------------------------------------------------
+    // messageHandler
     // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
     messageHandler: function (sender, message) {

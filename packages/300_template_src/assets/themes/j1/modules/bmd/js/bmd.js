@@ -8,7 +8,7 @@
  # https://jekyll.one
  # https://github.com/mdbootstrap/bootstrap-material-design/tree/4.1.3
  #
- # Copyright (C) 2021 Juergen Adams
+ # Copyright (C) 2022 Juergen Adams
  # Copyright (C) 2015 Federico Zivolo and contributors
  #
  # J1 Template is licensed under the MIT License.

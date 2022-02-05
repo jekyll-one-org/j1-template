@@ -5,8 +5,8 @@
 # Product/Info:
 # https://jekyll.one
 #
-# Copyright (C) 2021 Juergen Adams
-# Copyright (c) 2010 Travis Dunn
+# Copyright (C) 2022 Juergen Adams
+# Copyright (C) 2022 Travis Dunn
 #
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE

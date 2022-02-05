@@ -8,7 +8,7 @@
  # https://jekyll.one
  # https://github.com/Dogfalo/materialize
  #
- # Copyright (C) 2021 Juergen Adams
+ # Copyright (C) 2022 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
@@ -228,6 +228,20 @@
        return id;
      }
 
+     // ---------------------------------------------------------------------------
+     // executeFunctionByName()
+     // execute a function by NAME (functionName) in a browser context
+     // (e.g. window) the function is published
+     // ---------------------------------------------------------------------------
+     executeFunctionByName (functionName, context /*, args */) {
+       var args = Array.prototype.slice.call(arguments, 2);
+       var namespaces = functionName.split('.');
+       var func = namespaces.pop();
+       for(var i = 0; i < namespaces.length; i++) {
+         context = context[namespaces[i]];
+       }
+       return context[func].apply(context, args);
+     }
 
      checkPossibleAlignments (el, container, bounding, offset) {
        var canAlign = {
@@ -280,9 +294,6 @@
 
        return canAlign;
      }
-
-
-
 
      /**
       * Teardown component
@@ -426,10 +437,18 @@
       * @param {Event} e
       */
      _handleDropdownClick(e) {
-       // onItemClick callback
-       if (typeof this.options.onItemClick === 'function') {
-         let itemEl = $(e.target).closest('li')[0];
-         this.options.onItemClick.call(this, itemEl);
+
+       // onItemClick callback (by reference)
+       // if (typeof this.options.onItemClick === 'function') {
+       //   let itemEl = $(e.target).closest('li')[0];
+       //   this.options.onItemClick.call(this, itemEl);
+       // }
+
+       // onItemClick callback (by name)
+       if (this.options.onItemClick !== 'false') {
+         var _this  = this;
+         // var itemEl = $(e.target).closest('li')[0];
+         this.executeFunctionByName(this.options.onItemClick, window, _this);
        }
      }
 
@@ -665,7 +684,7 @@
              this.dropdownEl.focus();
            }
 
-           // onOpenEnd callback
+           // onOpenEnd callback (by reference)
            if (typeof this.options.onOpenEnd === 'function') {
              this.options.onOpenEnd.call(this, this.el);
            }
@@ -691,7 +710,7 @@
          complete: (anim) => {
            this._resetDropdownStyles();
 
-           // onCloseEnd callback
+           // onCloseEnd callback (by reference)
            if (typeof this.options.onCloseEnd === 'function') {
              this.options.onCloseEnd.call(this, this.el);
            }
@@ -728,9 +747,34 @@
        }
        this.isOpen = true;
 
-       // onOpenStart callback
-       if (typeof this.options.onOpenStart === 'function') {
-         this.options.onOpenStart.call(this, this.el);
+       // onOpen callback (by reference)
+       // if (typeof this.options.onOpen === 'function') {
+       //   this.options.onOpen.call(this, this.el);
+       // }
+
+       var _this      = this;
+       var listItems  = '#' + _this.id + " li";
+       var menuItems  = document.querySelectorAll(listItems);
+
+       // Loop through each <li> element
+       for (var i=0; i < menuItems.length; i++) {
+         // adding a event listener, mark selected menuItem by class active
+          menuItems[i].addEventListener('click', function(event) {
+            event.preventDefault();
+            for(var i=0; i < menuItems.length; i++) {
+              if (menuItems[i].classList.contains('active')) {
+                  menuItems[i].classList.remove('active');
+              }
+            }
+            // add `active` to current clicked element
+            this.classList.add('active');
+          }, false);
+       }
+
+       // onOpen callback (ny name)
+       var _this = this;
+       if (this.options.onOpen) {
+         this.executeFunctionByName(this.options.onOpen, window, _this);
        }
 
        // Reset styles
@@ -752,9 +796,15 @@
        this.isOpen = false;
        this.focusedIndex = -1;
 
-       // onCloseStart callback
-       if (typeof this.options.onCloseStart === 'function') {
-         this.options.onCloseStart.call(this, this.el);
+       // onClose callback (by reference)
+       // if (typeof this.options.onClose === 'function') {
+       //   this.options.onCloseStart.call(this, this.el);
+       // }
+
+       // onClose callback (by name)
+       var _this = this;
+       if (this.options.onClose) {
+         this.executeFunctionByName(this.options.onClose, window, _this);
        }
 
        this._animateOut();

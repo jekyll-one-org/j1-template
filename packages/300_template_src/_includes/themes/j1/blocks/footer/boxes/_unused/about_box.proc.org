@@ -6,7 +6,7 @@
  #  Product/Info:
  #  http://jekyll.one
  #
- #  Copyright (C) 2021 Juergen Adams
+ #  Copyright (C) 2022 Juergen Adams
  #
  #  Licensed under the Creative Commons Attribution 3.0 Unported License.
  #  See: http://creativecommons.org/licenses/by/3.0/.

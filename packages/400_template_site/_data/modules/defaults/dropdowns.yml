@@ -6,7 +6,7 @@
 # https://jekyll.one
 # https://materializecss.com/dropdown.html
 #
-# Copyright (C) 2021 Juergen Adams
+# Copyright (C) 2022 Juergen Adams
 #
 # Materialize is licensed under the MIT License.
 # See: https://github.com/Dogfalo/materialize/blob/v1-dev/LICENSE
@@ -115,7 +115,7 @@ defaults:
   #   values:                           Number
   #   default:                          250
   #
-  # cbOnOpenStart
+  # cbOnOpen
   # ----------------------------------------------------------------------------
   #  Function called when dropdown starts entering.
   #
@@ -129,7 +129,7 @@ defaults:
   #   values:                           Function|false
   #   default:                          false
   #
-  # cbOnCloseStart
+  # cbOnClose
   # ----------------------------------------------------------------------------
   #  Function called when dropdown starts exiting.
   #
@@ -152,14 +152,13 @@ defaults:
     container:                          false
     coverTrigger:                       true
     closeOnClick:                       true
-    hover:                              true
+    hover:                              false
     inDuration:                         150
     outDuration:                        250
     maxLenght:                          350
-    cbOnOpenStart:                      false
-    cbOnOpenEnd:                        false
-    cbOnCloseStart:                     false
-    cbOnCloseEnd:                       false
+    cbOnOpen:                           j1.adapter.dropdowns.cbOnOpen
+    cbOnClose:                          j1.adapter.dropdowns.cbOnClose
+    cbOnItemClick:                      false                                   # j1.adapter.dropdowns.cbOnItemClick
 
 # ------------------------------------------------------------------------------
 # END config
