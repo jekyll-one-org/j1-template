@@ -1,3 +1,22 @@
+/*
+ # -----------------------------------------------------------------------------
+ #  ~/assets/themes/j1/modules/rouge/css/base16.light/theme.css
+ #  Rouge theme base16 (light)
+ #
+ #  Product/Info:
+ #  https://jekyll.one
+ #  https://github.com/rouge-ruby/rouge
+ #
+ #  Copyright (C) 2022 Juergen Adams
+ #  Copyright (c) 2012 Jeanine Adkisson
+ #
+ #  J1 Template is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ #  Rouge is licensed under the MIT License.
+ #  See: https://github.com/rouge-ruby/rouge/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
 .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
 .highlight, .highlight .w {

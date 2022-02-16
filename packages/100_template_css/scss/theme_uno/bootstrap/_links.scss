@@ -43,7 +43,7 @@
 
 // jadams, 2020-11-15: set text color for (all) anchors (Google optimisation)
 a {
-  color: $gray-800;
+  color: $gray-800 !important;
   font-weight: 500 !important;
   text-decoration: none !important;
 }

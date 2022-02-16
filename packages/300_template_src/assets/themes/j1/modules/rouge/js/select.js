@@ -1,3 +1,22 @@
+/*
+ # -----------------------------------------------------------------------------
+ #  ~/assets/themes/j1/modules/rouge/js/select.js
+ #  Rouge theme selector
+ #
+ #  Product/Info:
+ #  https://jekyll.one
+ #  https://github.com/rouge-ruby/rouge
+ #
+ #  Copyright (C) 2022 Juergen Adams
+ #  Copyright (c) 2012 Jeanine Adkisson
+ #
+ #  J1 Template is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ #  Rouge is licensed under the MIT License.
+ #  See: https://github.com/rouge-ruby/rouge/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
 $(document).ready(function(){
 
  $('.dropdown-menu a').click(function(){

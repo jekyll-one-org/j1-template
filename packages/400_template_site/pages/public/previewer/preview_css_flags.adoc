@@ -34,8 +34,8 @@ keywords: >
 categories:                             [ Previewer ]
 tags:                                   [ Country, Flags ]
 
-scrollbar:                              true
 fab_menu_id:                            page_ctrl_simple
+scrollbar:                              false
 
 permalink:                              /pages/public/previewer/country_flags/
 regenerate:                             false
@@ -122,7 +122,7 @@ pass:[<i class="flag-icon flag-icon-<name> <style> <size> <modifier>"></i>] <1>
 flag:country[style, size, modifier] <2>
 ----
 <1> Markup using a pass block
-<2> Markup using the Asciidoc (inline) extension *flag:*
+<2> Markup using the Asciidoc (inline) extension *flag*
 
 == Styles
 

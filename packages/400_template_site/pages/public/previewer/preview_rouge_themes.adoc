@@ -60,7 +60,7 @@ keywords: >
 categories:                             [ Previewer ]
 tags:                                   [ Highlighter, Rouge ]
 
-scrollbar:                              true
+scrollbar:                              false
 fab_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/previewer/rouge/
@@ -119,13 +119,13 @@ resource_options:
 For the default theme `Uno` of J1 Template, the following _Rouge_ themes
 are used:
 
-* light: `igorpro`
-* dark: `monokai.sublime`
+* light:  `uno.light` (based on `github`)
+* dark:   `uno.dark`  (based on `gruvbox`)
 
 NOTE: The default themes used for J1 Template can be configured with the
 global template config file `~/_data/j1_config.yml`.
 
-Make a  below to preview.
+Make a selection from the select button below to preview a theme.
 
 ++++
 <div class="btn-group" role="group" aria-label="Button to select a theme">
@@ -142,6 +142,8 @@ Make a  below to preview.
     Select a theme <span class="caret ml-2"></span>
   </button>
   <ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="btnGroupThemesDropdown">
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('uno.light')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>uno.light</a></li>
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('uno.dark')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>uno.dark</a></li>
     <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>base16</a></li>
     <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.dark')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>base16.dark</a></li>
     <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.light')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>base16.light</a></li>
@@ -169,7 +171,8 @@ Make a  below to preview.
 
 === Language examples
 
-Find below a selected number languages (code blocks) and their highlightning.
+Find a selected number languages (code blocks) and their highlightning using
+a selected theme.
 
 include::{documentdir}/rouge/100_language_examples.asciidoc[]
 
@@ -182,7 +185,7 @@ include::{tabledir}/rouge/200_rouge_attributes.asciidoc[]
 
 == Supported languages
 
-Here the list of the (current of Feb, 2021) supported languages and lexers
+Here the list of the (current of Feb, 2022) supported languages and lexers
 (language highlighters).
 
 include::{tabledir}/rouge/300_supported_languages.asciidoc[]

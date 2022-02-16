@@ -1,0 +1,90 @@
+---
+title:                                  AsciiDoc
+tagline:                                Language Documentation
+date:                                   2020-11-08 00:00:00
+description: >
+                                        AsciiDoc is a lightweight and semantic markup language primarily
+                                        designed for writing technical documentation. The language can be
+                                        used to produce a variety of presentation-rich output formats, all
+                                        from content encoded in a concise, human-readable, plain text format.
+
+categories:                             [ AsciiDoc ]
+tags:                                   [ Language, Documentation ]
+
+
+toc:                                    false
+
+permalink:                              /pages/public/iframer_asciidoc/
+regenerate:                             false
+
+resources:                              [ framer ]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/modules/attics/jessica-ruscello-1920x1280.jpg
+          alt:                          Photo by Jessica Ruscello Unsplash
+#         caption:
+#           text:                       Photo by Jessica Ruscello on Unsplash
+#           href:                       https://unsplash.com/@jasonrosewell
+          badge:
+            type:                       unsplash
+            author:                     Jessica Ruscello
+            href:                       https://unsplash.com/@jruscello
+---
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+++++
+<p id="callback" class="ml-2 mb-0"></p>
+++++
+
+++++
+<iframe
+  src="/pages/public/asciidoctor_manuals/html/index.html"
+  width="100%"
+  style="border-width:0;"
+  scrolling="no"
+  title="Test Content">
+</iframe>
+
+<script>
+  $(document).ready(function() {
+    var dependencies_met_page_finished = setInterval (function () {
+      if (j1.adapter.framer.getState() === 'finished') {
+        iFrameResize({
+          log:       true,
+          minHeight: 250,
+//        heightCalculationMethod: 'max',
+          onResized: function(messageData) {
+            $('p#callback').html(
+              '<b>Frame ID:</b> '    + messageData.iframe.id +
+              ' <b>Height:</b> '     + messageData.height +
+              ' <b>Width:</b> '      + messageData.width +
+              ' <b>Event type:</b> ' + messageData.type
+            );
+          },
+          onMessage: function(messageData) {
+            $('p#callback').html(
+              '<b>Frame ID:</b> '    + messageData.iframe.id +
+              ' <b>Message:</b> '    + messageData.message
+            );
+            alert(messageData.message);
+            document.getElementsByTagName('iframe')[0].iFrameResizer.sendMessage('Hello back from parent page');
+          },
+          onClosed: function(id) {
+            $('p#callback').html(
+              '<b>IFrame (</b>'    + id +
+              '<b>) removed from page.</b>'
+            );
+          }
+        });
+        clearInterval(dependencies_met_page_finished);
+      }
+    }, 25);
+  });
+</script>
+++++

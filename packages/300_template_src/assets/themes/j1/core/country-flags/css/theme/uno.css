@@ -35,13 +35,15 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    line-height: normal
+    line-height: normal;
+    color: #424242;
 }
 
 .country .capital {
     font-size: .9em;
     border-bottom: 1px solid #ddd;
-    margin-bottom: 4px
+    margin-bottom: 4px;
+    color: #424242;
 }
 
 .country .country-code {

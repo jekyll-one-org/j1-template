@@ -12,7 +12,22 @@
  # -----------------------------------------------------------------------------
 */
 
+//  jadams, 2022-01-15: set border color to background color
+table {
+  background: $grey-400;
+  border: solid 1px $grey-800;
+}
+
+//  jadams, 2022-01-15: set border color to background color
+table.tableblock > .title {
+    border-right: 1px solid $grey-800;
+    border-left: 1px solid $grey-800;
+    border-bottom: 1px solid $grey-800;
+}
+
+//  jadams, 2022-01-15: set border color to background color
 table.frame-all {
+    border-top: 1px solid $grey-800 !important;
     border-left: 1px solid $grey-800 !important;
 }
 
@@ -23,10 +38,6 @@ table tr th, table tr td {
 
 table thead, table tfoot {
   background: $blue-700;
-}
-
-table {
-  background: $grey-400;
 }
 
 table tr.even, table tr.alt, table tr:nth-of-type(even) {

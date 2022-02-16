@@ -13,6 +13,18 @@
  # -----------------------------------------------------------------------------
 */
 
+code {
+  word-break: break-word;
+  padding: 0.125em 0.275em 0.125em 0.275em !important;
+  border-radius: 2px;
+  background-color: rgba(0, 0, 0, 0.3) !important;
+}
+
+// jadams, 2022-01-16: set background color for (table-styled) conum lists
+.colist > table > tbody > tr {
+  background: transparent !important;
+}
+
 .listingblock pre {
     border-color: $darken-600 !important;
     border: 1px solid $grey-600 !important;
@@ -26,7 +38,8 @@
 }
 
 .admonitionblock > table {
-  background: $lighten-200;
+//  background: $lighten-200;
+  background: $gray-800 !important;
 }
 
 .admonitionblock > table td.content {
@@ -49,6 +62,11 @@
 //   border-left: 1px solid #e0e0e0;
 //   border-top: 1px solid #e0e0e0;
 // }
+
+//  jadams, 2022-01-15: set border color like the listingblock
+.admonitionblock > table {
+    border: solid 1px $grey-600;
+}
 
 table tr th, table tr td {
   color: $lighten;

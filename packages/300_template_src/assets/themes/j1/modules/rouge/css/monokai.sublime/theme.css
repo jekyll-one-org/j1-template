@@ -1,3 +1,27 @@
+/*
+ # -----------------------------------------------------------------------------
+ #  ~/assets/themes/j1/modules/rouge/css/monokai.sublime/theme.css
+ #  Rouge theme monokai (sublime)
+ #
+ #  Product/Info:
+ #  https://jekyll.one
+ #  https://github.com/rouge-ruby/rouge
+ #
+ #  Copyright (C) 2022 Juergen Adams
+ #  Copyright (c) 2012 Jeanine Adkisson
+ #
+ #  J1 Template is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ #  Rouge is licensed under the MIT License.
+ #  See: https://github.com/rouge-ruby/rouge/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+/* jadams 2022-02-15: Set compatible background for J1/Bootswatch dark themes */
+.highlight {
+  background-color: transparent;
+}
+
 .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; }
 .highlight .gh {

@@ -48,14 +48,14 @@
 }
 
 a.toc-link {
-  color: #BDBDBD;	                                                              /* md-grey-400 */
+  color: $grey-400 !important;
   height: 100%;
   font-size: 1rem;                                                              /* jadams, 2017-12-13: added font-size for toc-link */
 }
 
 /* jadams, 2020-07-03: added hover to global style */
 a.toc-link:hover {
-  color: #757575 !important;                                                    /* md-grey-600 */
+  color: $gray-600 !important;
   text-decoration: none;
   font-weight: 700;
 }
@@ -77,11 +77,11 @@ a.toc-link:hover {
 
 .is-active-link {
   font-weight: 700 !important;
-  color: #2196f3 !important;
+  color: $blue !important;
 }
 
 .toc-link::before {
-  background-color: #E0E0E0;	                                                  /* md-grey-300 */
+  background-color: $gray-300;
   content: ' ';
   display: inline-block;
   height: inherit;
@@ -92,5 +92,5 @@ a.toc-link:hover {
 }
 
 .is-active-link::before {
-  background-color: #757575;	                                                  /* md-grey-600, was: #54BC4B */
+  background-color: $gray-600;
 }

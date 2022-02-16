@@ -29,15 +29,15 @@ $breakpoint--xs:                        575px;
 
 // Admonitionblock colors
 // -----------------------------------------------------------------------------
-$admonitionblock__note--color:            $blue;                                // theme-color(primary) !default;
-$admonitionblock__tip--color:             $green;                               // theme-color(success) !default;
-$admonitionblock__important--color:       $orange;                              // theme-color(warning) !default;
-$admonitionblock__warning--color:         $yellow-600;
-$admonitionblock__caution--color:         $red;                                 // theme-color(danger) !default;
+$admonitionblock__note--color:          $blue;                                  // theme-color(primary) !default;
+$admonitionblock__tip--color:           $green;                                 // theme-color(success) !default;
+$admonitionblock__important--color:     $orange;                                // theme-color(warning) !default;
+$admonitionblock__warning--color:       $yellow-600;
+$admonitionblock__caution--color:       $red;                                   // theme-color(danger) !default;
 
 // Text colors
 // -----------------------------------------------------------------------------
-$code--color:                             theme-color(secondary) !default;
+$code--color:                           theme-color(secondary) !default;
 
 // Variables for all blocks
 // -----------------------------------------------------------------------------
@@ -58,6 +58,7 @@ $pre__code--background-color:           transparent;
 
 // Variables for tables
 // -----------------------------------------------------------------------------
+$table--bg-color:                       transparent !important;
 $table--bg-accent:                      rgba(#000, .03);
 $table--border-color:                   rgba(#000, .06);
 $table--bg-hover:                       rgba(#000, .02);                        // like grey-100 (on white background)
@@ -89,19 +90,9 @@ code {
     background-color: $darken-100 !important;
 }
 
-/*
-  // Account for some code outputs that place code tags in pre tags
-  code {
-    padding: .125em;
-    font-size: inherit;
-//  border-radius: $border--radius;
-    color: inherit;
-    background-color: $pre__code--background-color !important;
-  }
-*/
-
 // Headings
 // -----------------------------------------------------------------------------
+
 // jadams, 2019-03-31: Make heading sizes relativ for rtext use
 h2, .h2 {
   font-size: 200% !important;
@@ -141,8 +132,9 @@ div .paragraph p span.scaled img {
 
 // Additional role to EXCERPT (id="preamble")
 // -----------------------------------------------------------------------------
+
 #preamble div.sectionbody div.paragraph.turnoff {
-   display: none;
+  display: none;
 }
 
 div.paragraph #preamble div.sectionbody div.paragraph.turnoff {
@@ -152,16 +144,14 @@ div.paragraph #preamble div.sectionbody div.paragraph.turnoff {
 // Emphasis
 // -----------------------------------------------------------------------------
 b, optgroup, strong {
-    font-weight: 600;
-//  color: $grey-800;
+  font-weight: 600;
 }
 
 /* jadams, 2017-12-07: removed i: i, cite, em, var, address, dfn { */
 /* Interfere with global list styles */
 cite, em, var, address, dfn {
-    font-style: italic;
-    font-weight: 400;
-//  color: $grey-800;
+  font-style: italic;
+  font-weight: 400;
 }
 
 // Tables
@@ -171,44 +161,45 @@ table {
   border-spacing: 0;
 }
 
-table {
 //  jadams, 2017-12-13: added font-size for the table body
-    font-size: $table__body--font-size;
-    background: white;
-    margin-bottom: 1.25em;
-    border: solid 1px $grey;
-//  jadams, 2020-10-11: Added to expand all admonitions full page width
-    width: -webkit-fill-available;
+table {
+  font-size: $table__body--font-size;
+  // background: white;
+  background: $table--bg-color;
+  margin-bottom: 1.25em;
 }
+
 table thead,
 table tfoot {
   background: rgba(0, 0, 0, 0.1);
   font-weight: bold;
   font-size: large;
 }
+
 table thead tr th,
 table thead tr td,
 table tfoot tr th,
 table tfoot tr td {
   padding: 0.5em 0.625em 0.625em;
   font-size: inherit;
-  // color: $darken-800 !important;
   text-align: left;
 }
+
 table tr th,
 table tr td {
   padding: .5rem 1rem 0.5rem 1rem;
   font-size: inherit;
-  // color: $darken-800 !important;
   border-right:  1px solid $grey-400;
   border-bottom: 1px solid $grey-400;
 }
+
 table tr.even,
 table tr.alt,
 table tr:nth-of-type(even) {
   // background: $grey-100;
   background: rgba(0, 0, 0, 0.1);
 }
+
 table thead tr th,
 table tfoot tr th,
 table tbody tr td,
@@ -224,62 +215,39 @@ table.full-width {
 
 // jadams 2019-01-24: Moved to flat style (no box-shadow)
 table.tableblock {
-    max-width: 100%;
-    border-collapse: separate;
-//  box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12) !important;
+  max-width: 100%;
+  border-collapse: separate;
 }
+
 table.tableblock td > .paragraph:last-child p > p:last-child,
 table.tableblock th > p:last-child,
 table.tableblock td > p:last-child {
   margin-bottom: 0;
 }
+
 table.spread {
   width: 100%;
 }
-/*
-table.tableblock,
-th.tableblock,
-td.tableblock {
-  border: 0 solid $grey;
-}
-*/
 
 table.grid-all th.tableblock,
 table.grid-all td.tableblock {
   border-width: 0 1px 1px 0;
 }
+
 table.grid-all tfoot > tr > th.tableblock,
 table.grid-all tfoot > tr > td.tableblock {
   border-width: 1px 1px 0 0;
 }
+
 table.grid-cols th.tableblock,
 table.grid-cols td.tableblock {
   border-width: 0 1px 0 0;
 }
 
-/*
-table.grid-all * > tr > .tableblock:last-child,
-table.grid-cols * > tr > .tableblock:last-child {
-  border-right-width: 0;
-  border-bottom-width: 0;
-}
-*/
-
 table.grid-rows th.tableblock,
 table.grid-rows td.tableblock {
   border-width: 0 0 1px 0;
 }
-
-/*
-table.grid-all tbody > tr:last-child > th.tableblock,
-table.grid-all tbody > tr:last-child > td.tableblock,
-table.grid-all thead:last-child > tr > th.tableblock,
-table.grid-rows tbody > tr:last-child > th.tableblock,
-table.grid-rows tbody > tr:last-child > td.tableblock,
-table.grid-rows thead:last-child > tr > th.tableblock {
-  border-bottom-width: 0;
-}
-*/
 
 table.grid-all tbody > td:last-child > th.tableblock {
   border-bottom-width: 1px;
@@ -289,97 +257,106 @@ table.grid-rows tfoot > tr > th.tableblock,
 table.grid-rows tfoot > tr > td.tableblock {
   border-width: 1px 0 0 0;
 }
+
+//  jadams, 2022-01-15: set ...
 table.frame-all {
-  // border-width: 0px;
-  border-left: 1px solid #e0e0e0;
-  border-top: 1px solid #e0e0e0;
-  // border: 1px solid rgba(0, 0, 0, 0.6);
+  border-left: 1px solid $gray;
+  border-top: 1px solid $gray;
 }
+
 table.frame-sides {
   border-width: 0 1px;
 }
+
 table.frame-topbot {
   border-width: 1px 0;
 }
+
 th.halign-left,
 td.halign-left {
   text-align: left;
 }
+
 th.halign-right,
 td.halign-right {
   text-align: right;
 }
+
 th.halign-center,
 td.halign-center {
   text-align: center;
 }
+
 th.valign-top,
 td.valign-top {
   vertical-align: top;
 }
+
 th.valign-bottom,
 td.valign-bottom {
   vertical-align: bottom;
 }
+
 th.valign-middle,
 td.valign-middle {
   vertical-align: middle;
 }
-// table thead th,
-// table tfoot th {
-//   font-weight: bold;
-// }
+
 tbody tr th {
   display: table-cell;
   line-height: 1.6;
   background: $grey-100;
 }
+
 tbody tr th,
 tbody tr th p,
 tfoot tr th,
 tfoot tr th p {
-  // color: $darken-800;
   font-weight: bold;
 }
+
 p.tableblock > code:only-child {
   background: none;
   padding: 0;
 }
-p.tableblock {
-    font-size: 1em;
+
 //  jadams, 2020-07-10: add top margin for larger (image) items
-    margin-top: 1.5em;
+p.tableblock {
+  font-size: 1em;
+  margin-top: 1.5em;
 }
 
 // Quote blocks
 // -----------------------------------------------------------------------------
+
 // jadams 2020-10-10: changed margins, font-sizes
 .quoteblock {
-/*  margin-top: 1.5em; */
-    margin-right: 1em;
-    margin-bottom: 1.25em;
-    margin-left: 1.5em;
-    display: table;
+  margin-right: 1em;
+  margin-bottom: 1.25em;
+  margin-left: 1.5em;
+  display: table;
 }
+
 .quoteblock > .title {
   margin-left: -1.5em;
   margin-bottom: 0.75em;
 }
+
 .quoteblock blockquote,
 .quoteblock blockquote p {
-    // color: $darken-800;
-/*  font-size: 1.125rem; */                                                     // was: 1.8rem
-    line-height: 1.30;
-    word-spacing: 0.1em;
-    letter-spacing: 0;
-    font-style: italic;
-    text-align: justify;
+  line-height: 1.30;
+  word-spacing: 0.1em;
+  letter-spacing: 0;
+  font-style: italic;
+  text-align: justify;
 }
+
 .quoteblock blockquote {
   margin: 0;
   padding: 0;
   border: 0;
 }
+
 .quoteblock blockquote:before {
   content: "\201c";
   float: left;
@@ -390,20 +367,24 @@ p.tableblock {
   color: $blue-900;
   text-shadow: 0 1px 2px $darken-100;
 }
+
 .quoteblock blockquote > .paragraph:last-child p {
   margin-bottom: 0;
 }
+
 .quoteblock .attribution {
   margin-top: 0.5em;
   margin-right: 0.5ex;
   text-align: right;
 }
+
 .quoteblock .quoteblock {
   margin-left: 0;
   margin-right: 0;
   padding: 0.5em 0;
   border-left: 3px solid $darken-600;
 }
+
 .quoteblock .quoteblock blockquote {
   padding: 0 0 0 0.75em;
 }
@@ -442,7 +423,6 @@ span.icon>.fa {
 .hdlist > .title {
   text-rendering: optimizeLegibility;
   text-align: left;
-  // color: $grey-800;
   line-height: 1.25;
   font-size: 1.125rem;
   font-weight: 500;
@@ -453,27 +433,24 @@ span.icon>.fa {
 .admonitionblock td.content > .title {
   text-rendering: optimizeLegibility;
   text-align: left;
-  // color: $grey-800;
   line-height: 1.25;
   font-size: 1.125rem;
   font-weight: 500;
   margin-bottom: .5em;
 }
 
+//  jadams, 2022-01-15: set ...
 table.tableblock > .title {
-    text-rendering: optimizeLegibility;
-    text-align: left;
-    // color: $grey-800;
-    line-height: 1.25;
-    font-size: 1.125rem;
-    font-weight: 500;
-    margin: 0px !important;
-    border-top: 1px solid $grey;
+  text-rendering: optimizeLegibility;
+  text-align: left;
+  line-height: 1.25;
+  font-size: 1.125rem;
+  font-weight: 500;
+  margin: 0px !important;
 }
 
 .listingblock > .title,
 .imageblock > .title {
-  // color: $grey-800;
   line-height: 1.25;
   font-size: 1.125rem;
   font-weight: 500;
@@ -489,33 +466,16 @@ table.tableblock > .title {
     padding: $pre--padding;
     margin: $pre--margin;
     border: $pre--border;
-//  border-radius: $pre--border-radius;
-//  background-color: $pre--background-color;
 }
 
-// jadams, 2020-09-16: disabled, seenms has to effect
-/*
-// jadams, 2019-03-31: Make adoc blocks responsive (like BS table-responsive)
-div.exampleblock, div.literalblock, div.listingblock, div.quoteblock {
-  width: 100%;
-  overflow-x: auto;
-}
-
-div.admonitionblock.note, div.admonitionblock.tip, div.admonitionblock.important,
-div.admonitionblock.warning, div.admonitionblock.caution {
-  width: 100%;
-  overflow-x: auto;
-}
-
-// jadams 2019-01-24: Moved to flat style (no border-radius|box-shadow)
+// jadams 2022-02-15: Changed background to transparent for dark themes
+// jadams, 2022-01-15: set border color like the listingblock
+// jadams, 2020-10-11: Added to expand all admonitions full page width
 .admonitionblock > table {
-  border-collapse: separate;
-  border-bottom: 2px solid $grey;
-  border-right: 2px solid $grey;
-  background: $gray-100;
-  width: 100%;
+  background: transparent !important;
+  border: solid 1px $grey-400;
+  width: -webkit-fill-available;
 }
-*/
 
 // jadams, 2018-03-01: Set width of td cell fix to 130px
 .admonitionblock > table td.icon {
@@ -524,26 +484,28 @@ div.admonitionblock.warning, div.admonitionblock.caution {
   border-right: 0px !important;
   border-bottom: 0px;
 }
+
 .admonitionblock > table td.icon img {
   max-width: none;
 }
+
 .admonitionblock > table td.icon .title {
   font-weight: bold;
   font-family: "Open Sans", "DejaVu Sans", sans-serif;
   text-transform: uppercase;
 }
+
 .admonitionblock > table td.content {
     padding-left: 1.125em;
     padding-right: 1.125em;
     border-right: 1px;
     border-left: 1px dotted $grey;
     font-size: inherit;
-    // color: $darken-800;
     text-align: justify;
     border-bottom: 0px;
     min-width: 20em;
-/*  font-size: $table__body--font-size; */
 }
+
 .admonitionblock > table td.content>:last-child>:last-child {
   margin-bottom: 0;
 }
@@ -573,29 +535,28 @@ div.admonitionblock.warning, div.admonitionblock.caution {
 // jadams 2019-01-24: Moved to flat style (no box-shadow)
 // -----------------------------------------------------------------------------
 .admonitionblock td.icon [class^="fa icon-"] {
-    font-size: 5rem;
-    cursor: default;
-//  text-shadow: 1px 1px 2px rgba(0, 0, 0, .5);
+  font-size: 5rem;
+  cursor: default;
 }
+
 .admonitionblock td.icon .icon-note:before {
-    content: "\f05a";
-//  color: $admonitionblock__note--color;
+  content: "\f05a";
 }
+
 .admonitionblock td.icon .icon-tip:before {
-    content: "\f0eb";
-//  color: $admonitionblock__tip--color;
+  content: "\f0eb";
 }
+
 .admonitionblock td.icon .icon-important:before {
-    content: "\f06a";
-//  color: $admonitionblock__important--color;
+  content: "\f06a";
 }
+
 .admonitionblock td.icon .icon-warning:before {
-    content: "\f071";
-//  color: $admonitionblock__warning--color;
+  content: "\f071";
 }
+
 .admonitionblock td.icon .icon-caution:before {
-    content: "\f06d";
-//  color: $admonitionblock__caution--color;
+  content: "\f06d";
 }
 
 // jadams 2016-09-11: Custom admonition blocks
@@ -615,24 +576,27 @@ div.admonitionblock.warning, div.admonitionblock.caution {
 
 // jadams 2019-01-24: Moved to flat style (no box-shadow)
 .exampleblock {
-  	margin-bottom: 1.25rem;
-    border-radius: $border--radius;
-    // color: $darken-800;
-    background: $grey-50;
-//  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+	margin-bottom: 1.25rem;
+  border-radius: $border--radius;
+  background: $grey-50;
 }
+
 .exampleblock > .content > :first-child {
   margin-top: 0
 }
+
 .exampleblock > .content > :last-child {
   margin-bottom: 0
 }
+
 .exampleblock > .content > :last-child {
   margin-bottom: 1.25em
 }
+
 .exampleblock.result {
   display: none
 }
+
 a.view-result {
   float: right;
   font-weight: normal;
@@ -648,24 +612,29 @@ span.footnoteref {
   vertical-align: super;
   font-size: 0.875em
 }
+
 span.footnote a,
 span.footnoteref a {
   text-decoration: none
 }
+
 span.footnote a:active,
 span.footnoteref a:active {
   text-decoration: underline
 }
+
 #footnotes {
   padding: 0.75em 0;
   margin-top: -0.625em
 }
+
 #footnotes hr {
   width: 20%;
   min-width: 6.25em;
   margin: -.25em 0 0.75em 0;
   border-width: 1px 0 0 0
 }
+
 #footnotes .footnote {
   line-height: 1.3;
   font-size: 0.875em;
@@ -674,10 +643,12 @@ span.footnoteref a:active {
   margin-bottom: 0.2em;
   padding: 0 0.375em
 }
+
 #footnotes .footnote a:first-of-type {
   font-weight: bold;
   text-decoration: none
 }
+
 #footnotes .footnote:last-of-type {
   margin-bottom: 0
 }
@@ -690,6 +661,7 @@ span.footnoteref a:active {
   width: 100%;
   margin-bottom: 0
 }
+
 .gist .file-data>table td.line-data {
   width: 99%
 }
@@ -699,27 +671,35 @@ span.footnoteref a:active {
 .mono {
   font-family: "Droid Sans Mono", "DejaVu Sans Mono", "Monospace", monospace
 }
+
 .unbreakable {
   page-break-inside: avoid;
 }
+
 .big {
   font-size: larger;
 }
+
 .small {
   font-size: smaller;
 }
+
 .bold {
   font-weight: bold;
 }
+
 .italic {
   font-style: italic;
 }
+
 .underline {
   text-decoration: underline;
 }
+
 .overline {
   text-decoration: overline;
 }
+
 .line-through {
   text-decoration: line-through;
 }
@@ -729,102 +709,135 @@ span.footnoteref a:active {
 .aqua {
   color: #00bfbf
 }
+
 .aqua-background {
   background-color: #00fafa
 }
+
 .black {
   color: #000
 }
+
 .black-background {
   background-color: #000
 }
+
 .blue {
   color: #0000bf
 }
+
 .blue-background {
   background-color: #0000fa
 }
+
 .fuchsia {
   color: #bf00bf
 }
+
 .fuchsia-background {
   background-color: #fa00fa
 }
+
 .gray {
   color: #606060
 }
+
 .gray-background {
   background-color: #7d7d7d
 }
+
 .grey {
   color: #606060
 }
+
 .grey-background {
   background-color: #7d7d7d
 }
+
 .green {
   color: #006000
 }
+
 .green-background {
   background-color: #007d00
 }
+
 .lime {
   color: #00bf00
 }
+
 .lime-background {
   background-color: #00fa00
 }
+
 .maroon {
   color: #600000
 }
+
 .maroon-background {
   background-color: #7d0000
 }
+
 .navy {
   color: #000060
 }
+
 .navy-background {
   background-color: #00007d
 }
+
 .olive {
   color: #606000
 }
+
 .olive-background {
   background-color: #7d7d00
 }
+
 .purple {
   color: #600060
 }
+
 .purple-background {
   background-color: #7d007d
 }
+
 .red {
   color: #bf0000
 }
+
 .red-background {
   background-color: #fa0000
 }
+
 .silver {
   color: #909090
 }
+
 .silver-background {
   background-color: #bcbcbc
 }
+
 .teal {
   color: #006060
 }
+
 .teal-background {
   background-color: #007d7d
 }
+
 .white {
   color: #bfbfbf
 }
+
 .white-background {
   background-color: $grey-50
 }
+
 .yellow {
   color: #bfbf00
 }
+
 .yellow-background {
   background-color: #fafa00
 }
@@ -839,40 +852,48 @@ textarea {
   font-size: 100%;
   margin: 0
 }
+
 button,
 input {
   line-height: normal
 }
+
 button,
 select {
   text-transform: none
 }
+
 button,
 html input[type="button"],
 input[type="reset"],
 input[type="submit"] {
   cursor: pointer;
 }
+
 button[disabled],
 html input[disabled] {
   cursor: default
 }
+
 input[type="checkbox"],
 input[type="radio"] {
   box-sizing: border-box;
   padding: 0;
   margin-right: .25rem;
 }
+
 input[type="search"] {
   -webkit-appearance: textfield;
   -moz-box-sizing: content-box;
   -webkit-box-sizing: content-box;
   box-sizing: content-box
 }
+
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-decoration {
   -webkit-appearance: none
 }
+
 button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
@@ -900,15 +921,16 @@ input::-moz-focus-inner {
   background: none
 }
 
-
 td.hdlist1 {
   padding-right: 0.75em;
   font-weight: bold
 }
+
 td.hdlist1,
 td.hdlist2 {
   vertical-align: top
 }
+
 .literalblock+.colist,
 .listingblock+.colist {
   margin-top: -0.5em
@@ -1039,9 +1061,11 @@ ul.disc {
 
 // FontAwesome V4 (Added for V3 compability)
 // -----------------------------------------------------------------------------
+
 .fa.fa-square-o {
   font-weight: 400 !important;
 }
+
 .fa-square-o:before {
   content: "\f0c8";
 }
@@ -1076,15 +1100,12 @@ ul.disc {
 
 // Breakpoint SM
 @media only screen and (max-width: $breakpoint--sm) {
-
   .admonitionblock > table td.content {
       border-left: 0;
   }
-
 }
 
 @media only screen and (max-width: $breakpoint--md) and (max-width: $breakpoint--lg) {
-
   .admonitionblock > table td.content {
       border-left: 0;
   }

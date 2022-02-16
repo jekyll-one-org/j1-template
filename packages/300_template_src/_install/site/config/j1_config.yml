@@ -249,13 +249,12 @@ bootstrap:
     trigger:                            hover
 
 # ------------------------------------------------------------------------------
-# HIGHLIGHTER settings
+# HIGHLIGHTER settings (Rouge)
 #
 rouge:
-  theme_light:                          igorpro
 
-  # may github, pastie
-  theme_dark:                           monokai.sublime
+  theme_light:                          uno.light
+  theme_dark:                           uno.dark
 
 # ------------------------------------------------------------------------------
 # SEO settings (optimization)

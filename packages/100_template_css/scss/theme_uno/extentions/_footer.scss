@@ -72,7 +72,7 @@
 }
 
 .footer .link-news li a {
-    color: $lighten;
+    color: $lighten !important;
     margin-bottom: 0;
     font-size: 1em;
     font-weight: 700;
@@ -183,6 +183,11 @@
   font-size: 0.8em;
   font-family: sans-serif;
   margin-top: 3px;
+}
+
+// jadams, 2022-01-16: set text color
+.copyright .terms-menu li a {
+  color: rgba(255, 255, 255, 0.5) !important;
 }
 
 /*Social Icons*/

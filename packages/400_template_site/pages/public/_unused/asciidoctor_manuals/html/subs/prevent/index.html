@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+<!-- Mirrored from docs.asciidoctor.org/asciidoc/latest/subs/prevent/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Feb 2022 14:01:26 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Escape and Prevent Substitutions | Asciidoctor Docs</title>
+    <link rel="stylesheet" href="../../../css/site.css">
+    <meta name="generator" content="Antora 3.0.0">
+    <link rel="canonical" href="index.html">
+    <meta property="og:url" content="index.html">
+    <meta property="og:description" content="A documentation page for AsciiDoc.">
+    <meta property="og:site_name" content="Asciidoctor Docs">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="og:title" content="AsciiDoc - Escape and Prevent Substitutions">
+    <meta property="og:image" content="../../../img/asciidoctor-og.png">
+    <meta name="twitter:site" content="@asciidoctor">
+    <link rel="prev" href="../apply-subs-to-text/index.html">
+    <link rel="next" href="../../pass/index.html">
+    <meta name="page-spec" content="asciidoc:subs:prevent.adoc">
+    <link rel="icon" href="https://docs.asciidoctor.org/_/img/favicon.ico" type="image/x-icon">
+  </head>
+  <body class="article">
+<header class="header">
+  <nav class="navbar">
+    <div class="navbar-brand">
+      <a class="navbar-item logo" title="Asciidoctor" href="https://asciidoctor.org/"><img src="https://d33wubrfki0l68.cloudfront.net/348e7376631816d3fe030c0a645d5b80187cbdb1/c9192/_/img/asciidoctor-logo.svg" alt="Asciidoctor" width="48"></a>
+      <a class="navbar-item title" href="https://docs.asciidoctor.org/">Asciidoctor Docs</a>
+      <button class="navbar-burger" data-target="topbar-nav">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+    <div id="topbar-nav" class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item search hide-for-print">
+          <div id="search" class="field has-filter">
+            <input class="query" type="text" placeholder="Search the docs">
+            <label class="filter checkbox">
+              <input type="checkbox" data-facet-filter="component:asciidoc"> In this project
+            </label>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <div class="navbar-link">AsciiDoc</div>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="../../index.html">Language</a>
+            <a class="navbar-item" href="../../syntax-quick-reference/index.html">Syntax Quick Reference</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <div class="navbar-link">Processing</div>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://docs.asciidoctor.org/asciidoctor/latest/">Asciidoctor <small>Ruby</small></a>
+            <a class="navbar-item" href="https://docs.asciidoctor.org/asciidoctor.js/latest/">Asciidoctor.js <small>JavaScript</small></a>
+            <a class="navbar-item" href="https://docs.asciidoctor.org/asciidoctorj/latest/">AsciidoctorJ <small>Java</small></a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <div class="navbar-link">Extensions</div>
+          <div class="navbar-dropdown">
+            <div class="navbar-item">Add-on Converters</div>
+            <a class="navbar-item" href="https://docs.asciidoctor.org/reveal.js-converter/latest/">reveal.js <small>Ruby, JavaScript</small></a>
+            <a class="navbar-item" href="https://docs.asciidoctor.org/epub3-converter/latest/">EPUB3 <small>Ruby</small></a>
+            <hr class="navbar-divider">
+            <div class="navbar-item">Extended Syntax</div>
+            <a class="navbar-item" href="https://docs.asciidoctor.org/diagram-extension/latest/">Asciidoctor Diagram <small>Ruby</small></a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <div class="navbar-link">Tooling</div>
+          <div class="navbar-dropdown is-right">
+            <div class="navbar-item">Build Automation</div>
+            <a class="navbar-item" href="https://docs.asciidoctor.org/maven-tools/latest/">Maven Tools <small>Java</small></a>
+            <a class="navbar-item" href="https://docs.asciidoctor.org/asciidoclet/latest/">Asciidoclet <small>Java</small></a>
+            <hr class="navbar-divider">
+            <div class="navbar-item">Text Editors / Viewers</div>
+            <a class="navbar-item" href="https://intellij-asciidoc-plugin.ahus1.de/docs" target="_blank" rel="noopener">IntelliJ Plugin</a>
+          </div>
+        </div>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-item" href="https://docs.asciidoctor.org/about/support/" data-title="Support">
+            <span class="icon"><img src="https://docs.asciidoctor.org/_/img/octicons-24.svg#view-comment-discussion"></span>
+          </a>
+          <div class="navbar-dropdown is-right">
+            <a class="navbar-item has-icon" href="https://asciidoctor.zulipchat.com/" target="_blank" rel="noopener">
+              <span class="icon"><img src="https://docs.asciidoctor.org/_/img/octicons-16.svg#view-comment-discussion"></span>
+              <span>Chat</span>
+            </a>
+            <a class="navbar-item has-icon" href="https://discuss.asciidoctor.org/" target="_blank" rel="noopener">
+              <span class="icon"><img src="https://docs.asciidoctor.org/_/img/octicons-16.svg#view-mail"></span>
+              <span>List</span>
+            </a>
+            <a class="navbar-item has-icon" href="https://github.com/asciidoctor" target="_blank" rel="noopener">
+              <span class="icon"><img src="https://docs.asciidoctor.org/_/img/octicons-16.svg#view-mark-github"></span>
+              <span>Source</span>
+            </a>
+            <a class="navbar-item has-icon" href="https://twitter.com/asciidoctor" target="_blank" rel="noopener">
+              <span class="icon"><img src="https://docs.asciidoctor.org/_/img/octicons-16.svg#view-hash"></span>
+              <span>Tweets</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+<div class="body">
+<div class="nav-container">
+  <aside class="nav">
+    <div class="panels">
+<div class="nav-panel-menu is-active is-loading" data-panel="menu">
+  <nav class="nav-menu">
+    <button class="nav-menu-toggle" title="Toggle expand/collapse all"></button>
+    <h3 class="title"><a href="../../index.html">AsciiDoc</a></h3>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Introduction</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../document-structure/index.html">Document Structure</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../key-concepts/index.html">Key Concepts</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../document-processing/index.html">Document Processing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../normalization/index.html">Normalization</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../blocks/index.html">Blocks</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../blocks/delimited/index.html">Delimited Blocks</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../blocks/build-basic-block/index.html">Build a Basic Block</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../blocks/add-title/index.html">Add a Title to a Block</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../blocks/assign-id/index.html">Assign an ID</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../blocks/masquerading/index.html">Block Masquerading</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../blocks/troubleshoot-blocks/index.html">Troubleshooting Blocks</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../attributes/document-attributes/index.html">Document Attributes</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../attributes/attribute-entries/index.html">Attribute Entries</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../attributes/names-and-values/index.html">Attribute Entry Names and Values</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../attributes/wrap-values/index.html">Wrap Attribute Entry Values</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../attributes/attribute-entry-substitutions/index.html">Attribute Entry Substitutions</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../attributes/inline-attribute-entries/index.html">Inline Attribute Entries</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../attributes/built-in-attributes/index.html">Declare Built-In Attributes</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../attributes/boolean-attributes/index.html">Set Boolean Attributes</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../attributes/custom-attributes/index.html">Declare Custom Attributes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../attributes/unset-attributes/index.html">Unset Attributes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../attributes/reference-attributes/index.html">Reference Attributes</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../attributes/unresolved-references/index.html">Handle Unresolved References</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../attributes/assignment-precedence/index.html">Attribute Assignment Precedence</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../attributes/counters/index.html">Counters</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../attributes/element-attributes/index.html">Element Attributes</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../attributes/positional-and-named-attributes/index.html">Positional and Named Attributes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../attributes/id/index.html">ID Attribute</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../attributes/role/index.html">Role Attribute</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../attributes/options/index.html">Options Attribute</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../document/header/index.html">Document Header</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../document/title/index.html">Document Title</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../document/subtitle/index.html">Subtitle</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../document/author-information/index.html">Author Information</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../document/author-line/index.html">Using the Author Line</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../document/multiple-authors/index.html">Add Multiple Authors to a Document</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../document/author-attribute-entries/index.html">Assign Author and Email with Attribute Entries</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../document/reference-author-attributes/index.html">Reference the Author Information</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../document/compound-author-name/index.html">Compound Author Names</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../document/revision-information/index.html">Revision Information</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../document/revision-line/index.html">Using the Revision Line</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../document/revision-attribute-entries/index.html">Assign Revision Attributes with Attribute Entries</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../document/version-label/index.html">Version Label Attribute</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../document/reference-revision-attributes/index.html">Reference the Revision Attributes</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../document/metadata/index.html">Document Metadata</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../document/header-ref/index.html">Document Header Reference</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../document/doctype/index.html">Document Type</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Sections</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../sections/titles-and-levels/index.html">Section Titles and Levels</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../sections/title-links/index.html">Activate Section Title Links</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../sections/auto-ids/index.html">Autogenerate Section IDs</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../sections/id-prefix-and-separator/index.html">Change the ID Prefix and Separator</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../sections/custom-ids/index.html">Assign Custom IDs and Reference Text</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../sections/numbers/index.html">Section Numbers</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../sections/styles/index.html">Section Styles for Articles and Books</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../sections/special-section-titles/index.html">Hide Special Section Titles</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../sections/special-section-numbers/index.html">Number Special Sections</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../sections/colophon/index.html">Colophon</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../sections/dedication/index.html">Dedication</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../sections/abstract/index.html">Abstract (Section)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../sections/abstract-block/index.html">Abstract (Block)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../sections/preface/index.html">Preface</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../sections/parts/index.html">Book Parts</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../../sections/part-numbers-and-signifier/index.html">Part Numbers and Signifier</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../sections/chapters/index.html">Chapters</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../sections/appendix/index.html">Appendix</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../sections/glossary/index.html">Glossary</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../sections/bibliography/index.html">Bibliography</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../sections/user-index/index.html">Index</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../sections/section-ref/index.html">Section Attributes and Styles Reference</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../blocks/paragraphs/index.html">Paragraphs</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../blocks/hard-line-breaks/index.html">Hard Line Breaks</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../blocks/preamble-and-lead/index.html">Preamble and Lead Style</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../blocks/paragraph-alignment/index.html">Paragraph Alignment</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../blocks/discrete-headings/index.html">Discrete Headings</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../blocks/breaks/index.html">Breaks</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../text/index.html">Text Formatting and Punctuation</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../text/bold/index.html">Bold</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../text/italic/index.html">Italic</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../text/monospace/index.html">Monospace</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../text/literal-monospace/index.html">Literal Monospace</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../text/text-span-built-in-roles/index.html">Text Span and Built-in Roles</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../text/highlight/index.html">Highlight</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../text/quotation-marks-and-apostrophes/index.html">Quotation Marks and Apostrophes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../text/subscript-and-superscript/index.html">Subscript and Superscript</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../text/custom-inline-styles/index.html">Using Custom Inline Styles</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../text/troubleshoot-unconstrained-formatting/index.html">Troubleshoot Unconstrained Formatting Pairs</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Lists</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../lists/unordered/index.html">Unordered Lists</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../lists/ordered/index.html">Ordered Lists</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../lists/checklist/index.html">Checklists</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../lists/separating/index.html">Separating Lists</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../lists/continuation/index.html">Complex List Items</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../lists/description/index.html">Description Lists</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../lists/horizontal/index.html">Horizontal Description List</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../lists/qanda/index.html">Question and Answer Lists</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../lists/description-with-marker/index.html">Description Lists With Marker</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../macros/links/index.html">Links</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../macros/autolinks/index.html">Autolinks</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../macros/url-macro/index.html">URL Macro</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../macros/mailto-macro/index.html">Mailto Macro</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../macros/link-macro/index.html">Link Macro</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../macros/link-macro-attribute-parsing/index.html">Link Macro Attribute Parsing</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../macros/complex-urls/index.html">Troubleshooting Complex URLs</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../macros/link-macro-ref/index.html">Link Macro Attributes Reference</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../macros/xref/index.html">Cross References</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../macros/inter-document-xref/index.html">Document to Document Cross References</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../macros/xref-text-and-style/index.html">Cross Reference Text and Styles</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../macros/xref-validate/index.html">Validate Cross References</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../macros/footnote/index.html">Footnotes</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../macros/images/index.html">Images</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../macros/images-directory/index.html">Set the Images Directory</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../macros/image-url/index.html">Insert Images from a URL</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../macros/image-position/index.html">Position and Frame Images</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../macros/image-size/index.html">Adjust Image Sizes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../macros/image-format/index.html">Specify Image Format</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../macros/image-svg/index.html">SVG Images</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../macros/image-ref/index.html">Images Reference</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../macros/audio-and-video/index.html">Audio and Video</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../macros/icons/index.html">Icons</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../macros/icons-image/index.html">Image Icons Mode</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../macros/icons-font/index.html">Font Icons Mode</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../macros/icon-macro/index.html">Icon Macro</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../macros/keyboard-macro/index.html">Keyboard Macro</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../macros/ui-macros/index.html">Button and Menu UI Macros</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../blocks/admonitions/index.html">Admonitions</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../blocks/sidebars/index.html">Sidebars</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../blocks/example-blocks/index.html">Example Blocks</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../blocks/blockquotes/index.html">Blockquotes</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../blocks/verses/index.html">Verses</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Verbatim and Source Blocks</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../verbatim/source-blocks/index.html">Source Code Blocks</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../verbatim/source-highlighter/index.html">Source Highlighting</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../verbatim/highlight-lines/index.html">Highlight Select Lines</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../verbatim/highlight-php/index.html">Highlight PHP Source Code</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../verbatim/listing-blocks/index.html">Listing Blocks</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../verbatim/literal-blocks/index.html">Literal Blocks</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../verbatim/callouts/index.html">Callouts</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Tables</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../tables/build-a-basic-table/index.html">Build a Basic Table</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../tables/add-title/index.html">Add a Title</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tables/customize-title-label/index.html">Customize the Title Label</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tables/turn-off-title-label/index.html">Turn Off the Title Label</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../tables/add-columns/index.html">Add Columns to a Table</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tables/adjust-column-widths/index.html">Adjust Column Widths</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tables/align-by-column/index.html">Align Content by Column</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tables/format-column-content/index.html">Format Content by Column</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../tables/add-cells-and-rows/index.html">Add Cells and Rows to a Table</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tables/add-header-row/index.html">Create a Header Row</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tables/add-footer-row/index.html">Create a Footer Row</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tables/align-by-cell/index.html">Align Content by Cell</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tables/format-cell-content/index.html">Format Content by Cell</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tables/span-cells/index.html">Span Columns and Rows</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../../tables/duplicate-cells/index.html">Duplicate Cells</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../tables/width/index.html">Table Width</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../tables/borders/index.html">Table Borders</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../tables/striping/index.html">Table Striping</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../tables/orientation/index.html">Table Orientation</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../tables/assign-a-role/index.html">Assign a Role to a Table</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../tables/nested/index.html">Nesting Tables</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../tables/data-format/index.html">CSV, TSV and DSV Data</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../tables/table-ref/index.html">Table Reference</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../stem/index.html">Equations and Formulas (STEM)</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../blocks/open-blocks/index.html">Open Blocks</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../blocks/collapsible/index.html">Collapsible Blocks</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <a class="nav-link" href="../../comments/index.html">Comments</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../toc/index.html">Automatic Table of Contents</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../toc/title/index.html">Customize the TOC Title</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../toc/levels/index.html">Adjust the TOC Depth</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../toc/position/index.html">Position the TOC</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../toc/toc-ref/index.html">TOC Attributes Reference</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../directives/include/index.html">Includes</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../directives/include-with-leveloffset/index.html">Offset Section Levels</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../directives/include-with-indent/index.html">Indent Included Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../directives/include-multiple-times-in-same-document/index.html">Use an Include File Multiple Times</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../directives/include-list-item-content/index.html">Include List Item Content</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../directives/include-tagged-regions/index.html">Include Content by Tagged Regions</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../directives/include-lines/index.html">Include Content by Line Ranges</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../directives/include-uri/index.html">Include Content by URI</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../directives/conditionals/index.html">Conditionals</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../directives/ifdef-ifndef/index.html">ifdef and ifndef Directives</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../directives/ifeval/index.html">ifeval Directive</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../index.html">Substitutions</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../special-characters/index.html">Special Characters</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../quotes/index.html">Quotes</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../attributes/index.html">Attribute References</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../replacements/index.html">Character Replacements</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../macros/index.html">Macros</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../post-replacements/index.html">Post Replacements</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../apply-subs-to-blocks/index.html">Customize the Substitutions Applied to Blocks</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../apply-subs-to-text/index.html">Customize the Substitutions Applied to Text</a>
+  </li>
+  <li class="nav-item is-current-url" data-depth="2">
+    <a class="nav-link" href="index.html">Escape and Prevent Substitutions</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../../pass/index.html">Passthroughs</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../pass/pass-block/index.html">Passthrough Blocks</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../pass/pass-macro/index.html">Inline Passthroughs</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="0">
+<ul class="nav-list">
+  <li class="nav-item" data-depth="1">
+    <button class="nav-item-toggle"></button>
+    <span class="nav-text">Reference</span>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../syntax-quick-reference/index.html">Syntax Quick Reference</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../faq/index.html">Frequently Asked Questions (FAQ)</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../asciidoc-vs-markdown/index.html">Compare AsciiDoc to Markdown</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../attributes/document-attributes-ref/index.html">Document Attributes Reference</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../attributes/character-replacement-ref/index.html">Character Replacement Attributes Reference</a>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../../glossary/index.html">Glossary of Terms</a>
+  </li>
+</ul>
+  </li>
+</ul>
+  </li>
+</ul>
+  </nav>
+  <script>
+;(function () {
+  var panel = document.querySelector('.nav-panel-menu')
+  var page
+  var hash = window.location.hash
+  if (hash) {
+    if (~hash.indexOf('%')) hash = decodeURIComponent(hash)
+    if (~hash.indexOf('"')) hash = hash.replace(/(?=")/g, '\\')
+    var link = panel.querySelector('.nav-link[href="' + hash + '"]')
+    if (link) page = link.parentNode
+    else if ((page = panel.querySelector('.is-current-url'))) page.classList.add('is-provisional')
+  } else {
+    page = panel.querySelector('.is-current-url')
+  }
+  if (page) {
+    var ancestor = page
+    while ((ancestor = ancestor.parentNode) && ancestor !== panel) {
+      if (ancestor.className === 'nav-item') ancestor.classList.add('is-current-path', 'is-active')
+    }
+    page.classList.add('is-current-page', 'is-active')
+    if (panel.scrollHeight > panel.clientHeight) {
+      var panelRect = panel.getBoundingClientRect()
+      var linkRect = page.querySelector('.nav-link').getBoundingClientRect()
+      panel.scrollTop += Math.round(linkRect.top - panelRect.top - (panelRect.height - linkRect.height) * 0.5)
+    }
+  } else {
+    panel.scrollTop = 0
+  }
+  panel.classList.remove('is-loading')
+})()
+  </script>
+</div>
+<div class="nav-panel-explore" data-panel="explore">
+  <div class="context">
+    <span class="title">AsciiDoc</span>
+    <span class="version"></span>
+  </div>
+  <ul class="components">
+    <li class="component is-current">
+      <a class="title" href="../../index.html">AsciiDoc</a>
+    </li>
+    <li class="component">
+      <a class="title" href="https://docs.asciidoctor.org/asciidoctor/latest/">Asciidoctor</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="https://docs.asciidoctor.org/asciidoctor/latest/">2.0</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="https://docs.asciidoctor.org/asciidoctor.js/latest/">Asciidoctor.js</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="https://docs.asciidoctor.org/asciidoctor.js/latest/">2.2</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="https://docs.asciidoctor.org/asciidoctorj/latest/">AsciidoctorJ</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="https://docs.asciidoctor.org/asciidoctorj/latest/">2.5</a>
+        </li>
+        <li class="version">
+          <a href="https://docs.asciidoctor.org/asciidoctorj/2.4/">2.4</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="https://docs.asciidoctor.org/maven-tools/latest/">Maven Tools</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="https://docs.asciidoctor.org/maven-tools/latest/">2.2</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="https://docs.asciidoctor.org/asciidoclet/latest/">Asciidoclet</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="https://docs.asciidoctor.org/asciidoclet/latest/">1.5.6</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="https://docs.asciidoctor.org/reveal.js-converter/latest/">Asciidoctor reveal.js</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="https://docs.asciidoctor.org/reveal.js-converter/latest/">4.1</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="https://docs.asciidoctor.org/epub3-converter/latest/">Asciidoctor EPUB3</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="https://docs.asciidoctor.org/epub3-converter/latest/">1.5</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="https://docs.asciidoctor.org/diagram-extension/latest/">Asciidoctor Diagram</a>
+      <ul class="versions">
+        <li class="version is-latest">
+          <a href="https://docs.asciidoctor.org/diagram-extension/latest/">2.2</a>
+        </li>
+      </ul>
+    </li>
+    <li class="component">
+      <a class="title" href="https://docs.asciidoctor.org/about/">Community</a>
+    </li>
+  </ul>
+</div>
+    </div>
+  </aside>
+</div>
+<main class="article">
+<div class="toolbar" role="navigation">
+<button class="nav-toggle"></button>
+  <a href="https://docs.asciidoctor.org/" class="home-link" title="Home"></a>
+<nav class="breadcrumbs" aria-label="breadcrumbs">
+  <ul>
+    <li><a href="../../index.html">AsciiDoc</a></li>
+    <li><a href="../index.html">Substitutions</a></li>
+    <li><a href="index.html">Escape and Prevent Substitutions</a></li>
+  </ul>
+</nav>
+  <div class="edit-this-page"><a href="https://github.com/asciidoctor/asciidoc-docs/edit/main/docs/modules/subs/pages/prevent.adoc">Edit this Page</a></div>
+  </div>
+  <div class="content">
+<aside class="toc sidebar" data-title="Contents" data-levels="2">
+  <div class="toc-menu"></div>
+</aside>
+<article class="doc">
+<h1 class="page">Escape and Prevent Substitutions</h1>
+<div id="preamble">
+<div class="sectionbody">
+<div class="paragraph">
+<p>The AsciiDoc syntax offers several approaches for preventing substitutions from being applied.</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="escape-with-backslashes"><a class="anchor" href="#escape-with-backslashes"></a>Escape with backslashes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To prevent a punctuation character from being interpreted as an attribute reference or formatting syntax (e.g., _, ^) in normal content, prepend the character with a backslash (<code>\</code>).</p>
+</div>
+<div id="ex-backslash" class="listingblock">
+<div class="title">Example 1. Prevent unintended substitutions with a backslash in normal content</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">In /items/\{id}, the id attribute isn't replaced.
+The curly braces around it are preserved.
+
+\*Stars* isn't displayed as bold text.
+The asterisks around it are preserved.
+
+\&amp;sect; appears as an entity reference.
+It's not converted into the section symbol (&amp;sect;).
+
+\=&gt; The backslash prevents the equals sign followed by a greater
+than sign from combining to form a double arrow character (=&gt;).
+
+\[[Word]] is not interpreted as an anchor.
+The double brackets around it are preserved.
+
+[\[[Word]]] is not interpreted as a bibliography anchor.
+The triple brackets around it are preserved.
+
+The URL \https://example.org isn't converted into an active link.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The backslash can also prevent character replacements, macros, and attribute replacements.
+The results of <a href="#ex-backslash">Example 1</a> are below.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>In /items/{id}, the id attribute isn&#8217;t replaced.
+The curly braces around it are preserved.</p>
+</div>
+<div class="paragraph">
+<p>*Stars* isn&#8217;t displayed as bold text.
+The asterisks around it are preserved.</p>
+</div>
+<div class="paragraph">
+<p>&amp;sect; appears as an entity reference.
+It&#8217;s not converted into the section symbol (&sect;).</p>
+</div>
+<div class="paragraph">
+<p>=&gt; The backslash prevents the equals sign followed by a greater
+than sign from combining to form a double arrow character (&#8658;).</p>
+</div>
+<div class="paragraph">
+<p>[[Word]] is not interpreted as an anchor.
+The double brackets around it are preserved.</p>
+</div>
+<div class="paragraph">
+<p>[[[Word]]] is not interpreted as a bibliography anchor.
+The triple brackets around it are preserved.</p>
+</div>
+<div class="paragraph">
+<p>The URL https://example.org isn&#8217;t converted into an active link.</p>
+</div>
+</div>
+</div>
+<div class="paragraph">
+<p>Notice that the backslash is removed so it doesn&#8217;t display in your output.</p>
+</div>
+<div class="paragraph">
+<p>To prevent two adjacent characters (e.g., __, ##), from being interpreted as AsciiDoc syntax you need to precede it with two backslashes (<code>\\</code>).</p>
+</div>
+<div id="ex-double-slash" class="listingblock">
+<div class="title">Example 2. Prevent unintended substitutions with two backslashes in normal content</div>
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-asciidoc hljs" data-lang="asciidoc">The text \\__func__ will appear with two underscores
+in front of it and after it.
+It won't be italicized.</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The results of <a href="#ex-double-slash">Example 2</a> are below.</p>
+</div>
+<div class="exampleblock">
+<div class="content">
+<div class="paragraph">
+<p>The text __func__ will appear with two underscores
+in front of it and after it.
+It won&#8217;t be italicized.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="passthroughs"><a class="anchor" href="#passthroughs"></a>Passthroughs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A passthrough is the primary mechanism by which to escape content in AsciiDoc.
+They&#8217;re far more comprehensive and consistent than using a backslash.
+As the name implies, a passthrough passes content directly through to the output document without applying any substitutions.</p>
+</div>
+<div class="paragraph">
+<p>You can control and prevent substitutions in inline text with the <a href="../../pass/pass-macro/index.html" class="xref page">inline passthrough macros</a> and for entire blocks of content with the <a href="../../pass/pass-block/index.html" class="xref page">block passthrough</a>.</p>
+</div>
+</div>
+</div>
+<nav class="pagination">
+  <span class="prev"><a href="../apply-subs-to-text/index.html">Customize the Substitutions Applied to Text</a></span>
+  <span class="next"><a href="../../pass/index.html">Passthroughs</a></span>
+</nav>
+</article>
+  </div>
+</main>
+</div>
+<!-- footer class="footer">
+  <div class="footer-main">
+    <figure class="footer-brand">
+      <a class="logo" href="https://asciidoctor.org/"><img src="https://d33wubrfki0l68.cloudfront.net/348e7376631816d3fe030c0a645d5b80187cbdb1/c9192/_/img/asciidoctor-logo.svg" alt="Asciidoctor" width="48"></a>
+      <figcaption class="footer-brand-name"><a href="https://asciidoctor.org/">Asciidoctor</a></figcaption>
+    </figure>
+    <ul class="footer-brand-links">
+      <li><a href="https://asciidoctor.org/" target="_blank" rel="noopener">Home</a></li>
+      <li><a href="https://docs.asciidoctor.org/">Docs</a></li>
+      <li><a href="https://asciidoctor.zulipchat.com/" target="_blank" rel="noopener">Chat</a></li>
+      <li><a href="https://discuss.asciidoctor.org/" target="_blank" rel="noopener">List</a></li>
+      <li><a href="https://github.com/asciidoctor" target="_blank" rel="noopener">Source</a></li>
+    </ul>
+    <p class="footer-brand-follow">
+      <a href="https://twitter.com/asciidoctor" title="Follow us on Twitter" target="_blank" rel="noopener"><img src="https://d33wubrfki0l68.cloudfront.net/94a4f75ba4c555ef69ef211a9d1c0b2aa31fe5e1/708c9/_/img/twitter-logo.svg" alt="Twitter logo" class="logo" width="28"><span class="handle">@asciidoctor</span></a>
+    </p>
+  </div>
+  <div class="footer-legal">
+    <p>Copyright © 2022 Dan Allen, Sarah White, and individual Asciidoctor contributors. Except where noted, the content is licensed under a Creative Commons Attribution 4.0 International (CC BY 4.0) license.</p>
+    <p>The <a href="https://github.com/asciidoctor/asciidoctor-docs-ui" target="_blank" rel="noopener">UI for this site</a> is derived from the Antora default UI and is licensed under the MPL-2.0 license. Several icons are imported from <a href="https://primer.style/octicons/" target="_blank" rel="noopener">Octicons</a> and are licensed under the MIT license.</p>
+    <p>AsciiDoc® and AsciiDoc Language™ are trademarks of the Eclipse Foundation, Inc.</p>
+  </div>
+  <div class="footer-thanks">
+    <p>Thanks to our <a href="https://asciidoctor.org/supporters/" target="_blank" rel="noopener">backers</a> and <a href="https://asciidoctor.org/contributors/" target="_blank" rel="noopener">contributors</a> for helping to make this project possible. Additional thanks to:</p>
+    <p class="badges">
+      <a href="https://opendevise.com/" title="Development support by OpenDevise" target="_blank" rel="noopener"><img src="../../../../../secure.gravatar.com/avatar/823717a797dbd78ceff7b26aa397f3835bfa.png?size=80" alt="OpenDevise Logo" width="30"></a>
+      <a href="https://algolia.com/docsearch" title="Search by Algolia DocSearch" target="_blank" rel="noopener"><img src="https://d33wubrfki0l68.cloudfront.net/cece91961a3dda25e49ac1dd48f29d360f00aa98/d84d6/_/img/algolia-logo.svg" alt="Algolia logo" width="30"></a>
+      <a href="https://netlify.com/" title="Deploys by Netlify" target="_blank" rel="noopener"><img src="https://www.netlify.com/img/global/badges/netlify-dark.svg" alt="Deploys by Netlify" width="67"></a>
+    </p>
+    <p>Authored in AsciiDoc.<br>Produced by <a href="https://antora.org/" target="_blank" rel="noopener">Antora</a> and <a href="https://asciidoctor.org/" target="_blank" rel="noopener">Asciidoctor</a>.</p>
+  </div>
+</footer -->
+<!-- script id="site-script" src="../../js/site.js" data-ui-root-path="../../../../_"></script -->
+<!-- script async src="../../js/vendor/highlight.js"></script -->
+<!-- script async id="search-script" src="../../js/vendor/docsearch.js" data-app-id="V1SEVEBOXX" data-api-key="02ab3d2d0cab4dec119447e14abdd3bc" data-index-name="asciidoctor-docs" data-stylesheet="../../../css/vendor/docsearch.css"></script -->
+  </body>
+
+<!-- Mirrored from docs.asciidoctor.org/asciidoc/latest/subs/prevent/ by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 12 Feb 2022 14:01:26 GMT -->
+</html>
