@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- #  ~/js/adapter/adapter.js  BBBBB
+ #  ~/js/adapter/adapter.js
  #  Provides an empty object for later loaded adapter objects
  #
  #  Product/Info:

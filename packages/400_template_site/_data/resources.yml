@@ -1358,9 +1358,7 @@ resources:
                                           modules/videojs/css/themes/sea
                                         ]
         files:                          []
-        js:                             [
-                                          modules/videojs/js/video
-                                        ]
+        js:                             [ modules/videojs/js/video ]
         init_function:                  []
 
   # ----------------------------------------------------------------------------
@@ -1408,28 +1406,27 @@ resources:
         init_function:                  []
 
   # ----------------------------------------------------------------------------
-  # Slider, responsive input sliders based on the JS implementation
-  # of noUiSlider API (currently NOT used)
+  # Range Slider, based on the JS implementation of the noUiSlider API
   # See: https://github.com/leongersen/noUiSlider
   #
-  - name:                               Slider
+  - name:                               rangeSlider
     resource:
-      enabled:                          false
+      enabled:                          true
 
-      id:                               nouislider
-      comment:                          module nouislider
+      id:                               rangeslider
+      comment:                          module rangeSlider
       region:                           head
-      layout:                           [ page, post, collection ]
+      layout:                           [ page, post, collection, raw ]
       required:                         ondemand
       preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
       data:
-        css:                            [ modules/noUISlider/css/noUISlider ]
-        files:                          []
-        js:                             [ modules/noUISlider/js/noUISlider ]
-        init_function:                  []
+        css:                            [ modules/rangeSlider/css/theme/uno/nouislider ]
+        files:                          [ adapter/js/rangeSlider.js ]
+        js:                             [ modules/rangeSlider/js/nouislider ]
+        init_function:                  [ j1.adapter.rangeSlider.init ]
 
   # ----------------------------------------------------------------------------
   # Data tables for J1 Template (currently NOT used)

@@ -1,0 +1,308 @@
+---
+title:                                  Range Sliders
+tagline:                                preview data sliders
+date:                                   2022-02-20 00:00:00
+description: >
+                                        Welcome to the preview page focussing on the Range Slider module.
+
+categories:                             [ Previewer ]
+tags:                                   [ Modules, Data Slider ]
+
+comments:                               false
+fab_menu_id:                            page_ctrl_simple
+
+permalink:                              /pages/public/previewer/range-slider/
+regenerate:                             false
+
+resources:                              [ clipboard, rangeslider, rouge ]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
+          alt:                          Photo by Ricardo Gomez Angel on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Ricardo Gomez Angel
+            href:                       https://unsplash.com/@ripato/portfolio
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// See: https://materializecss.com/range.html
+// See: https://refreshless.com/nouislider/
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+Add a range slider for values with a wide range. This one is set to be a
+number between 0 and 100. We have two different types of sliders. *nouiSlider*
+is a 3rd party plugin which we've modified. To use the noUiSlider, you will
+have to manually link the nouislider.css and nouislider.js files located in
+the extras folder.
+
+[[html-slider]]
+== Range Slider
+
+See noUiSlider's official https://refreshless.com/nouislider/[documentation, {browser-window--new}]
+to see a variety of slider options.
+
+++++
+<div class="container mt-5 mb-5">
+  <div class="row">
+    <div class="col mt-2">
+      <div id="example_slider" class="range-slider mt-1"></div>
+    </div>
+    <div class="col">
+      <span id="current_value_1" class="mb-2"></span>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col mt-4">
+      <div id="example_slider_2" class="range-slider mt-1"></div>
+    </div>
+    <div class="col mt-3">
+    <span id="current_value_2" class="mb-2"></span>
+    </div>
+  </div>
+
+</div>
+++++
+
+.HTML Markup
+[source, html]
+----
+  <div id="slider"></div>
+----
+
+.JS initialization
+[source, js]
+----
+  var slider = document.getElementById('slider');
+  noUiSlider.create(slider, {
+   start: [ 20 ],
+   connect: true,
+   step: 1,
+   orientation: 'horizontal',
+   range: {
+     'min': 0,
+     'max': 100
+   },
+   format: wNumb({
+     decimals: 0
+   })
+  });
+----
+
+
+== Getting slider values
+
+noUiSlider has an API with two simple methods: .get() and .set(). To get the current slider value:
+
+.Example
+[source, js]
+----
+var slider    = document.getElementById('slider');
+var sliderVal = slider.noUiSlider.get();
+----
+
+For one-handle sliders, calling `.get()` will return the value as a `string`.
+For multi-handle sliders, an `array['string', 'string', ...]` will be returned.
+Use .`get(true)` to get the slider values without formatting applied (as a
+number or array[number, number, ...]).
+
+
+== Setting slider values
+
+If a slider is configured to use one handle, its current value can be changed
+using the `.set()` method. For sliders with multiple handles, pass an array.
+
+One-handled sliders will also accept arrays. Within an array, any position
+can be set to null to leave a handle unchanged.
+
+noUiSlider will always limit values to the slider range. To set a single slider
+handle, the `setHandle` method can be used. This method accepts a zero-indexed
+handle number, a value and optionally a 'fire set event' boolean. Passing
+`null` as the value to setHandle will leave the handle unchanged.
+
+Both the set and setHandle methods have an exactInput argument, which can
+be used to ignore the stepping configured for the slider.
+To return to the initial slider values, the `.reset()` method can be used.
+This will only reset the slider values.
+
+.Examples
+[source, js]
+----
+var slider = document.getElementById('slider');
+
+noUiSlider.create(slider, /* { options } */);
+
+// Set one handled slider
+slider.noUiSlider.set(10);
+slider.noUiSlider.set([150]);
+
+// Set the upper handle on a slider with two handles,
+// don't change the lower one
+slider.noUiSlider.set([null, 14]);
+
+// On a slider with three handles,
+// set the third to 12 (the handleNumber is 0-indexed),
+// fire the set event (default true),
+// Don't ignore stepping on the slider (default false)
+slider.noUiSlider.setHandle(2, 12, true, true);
+
+// Set both slider handles on a slider with two handles
+slider.noUiSlider.set([13.2, 15.7]);
+
+// Set both slider handles on a slider with two handles,
+// fire the set event (default true)
+// Ignore stepping on the slider (default false)
+slider.noUiSlider.set([13.2, 15.7], true, true);
+
+// Return to the 'start' values
+// Does NOT reset any other slider properties
+slider.noUiSlider.reset();
+----
+
+== Events
+
+noUiSlider offers several ways to listen to interaction: `update`, `change`,
+`set`, `slide` and `drag`. These events can all be used at the same time.
+There are also the `start` and `end` events, that fire when a drag is
+started or ended.
+
+Events always fire in the following order:
+
+`start` > `slide` > `drag` > `update` > `change` > `set` > `end`
+
+noUiSlider uses a custom binding model with support for namespaces. There are
+two methods, `.on(eventName, callback)` and `.off(eventName)`. Events can be
+namespaced by appending a period ('.') and an identifier to the event name.
+
+Nested namespaces ('slide.something.else') are not supported, and are threated
+as a single namespace (so '.a.b' isn't related to '.a').
+
+Values is an array containing the current slider values, with formatting
+applied. handle is the index of the handle that caused the event, starting
+at zero. `values[handle]` gives the value for the handle that triggered the
+event.
+
+// unencoded contains the slider values without any formatting.
+
+For all events, this is set to the current slider's API, containing (among
+others) the `.get()` and `.set()` methods. The Slider API is also available
+as the sixth argument to all events.
+
+.Examples
+[source, js]
+----
+function doSomething(values, handle, unencoded, tap, positions, noUiSlider) {
+  // values: Current slider values (array);
+  // handle: Handle that caused the event (number);
+  // unencoded: Slider values without formatting (array);
+  // tap: Event was caused by the user tapping the slider (boolean);
+  // positions: Left offset of the handles (array);
+  // noUiSlider: slider public Api (noUiSlider);
+}
+
+// Binding signature
+slider.noUiSlider.on(eventName, doSomething);
+
+// Binding namespaced events
+slider.noUiSlider.on('set.one', function () { });
+slider.noUiSlider.on('change.one', function () { });
+
+// Remove all events in the 'one' namespace.
+slider.noUiSlider.off('.one');
+
+// Remove all events
+slider.noUiSlider.off();
+
+// Remove all 'change' events in any namespace.
+slider.noUiSlider.off('change');
+----
+
+/////
+== HTML5 Range Input
+
+// See: https://www.w3schools.com/tags/att_input_type_range.asp
+
+The `<input type="range">` defines a control for entering a number whose exact
+value is not important (like a slider control).
+
+Default range is 0 to 100. However, you can set restrictions on what numbers
+are accepted with the attributes below.
+
+* max - specifies the maximum value allowed
+* min - specifies the minimum value allowed
+* step - specifies the legal number intervals
+* value - Specifies the default value
+
+TIP: Always add the <label> tag for best accessibility practices!
+
+.HTML Markup
+[source, html]
+----
+  <form action="#">
+      <input type="range" id="input-slider" min="0" max="100" />
+  </form>
+----
+
+++++
+<div class="row mt-5 mb-5">
+
+  <div class="col-md-6 ml-1">
+    <form action="#">
+      <input type="range" id="input-slider" min="0" max="100" />
+    </form>
+  </div>
+
+</div>
+++++
+/////
+
+++++
+<script>
+  $(document).ready(function() {
+    var dependencies_met_j1_finished = setInterval(function() {
+      if (j1.getState() == 'finished') {
+        if (j1.adapter.rangeSlider.getState() == 'finished') {
+          var rangeSlider = document.getElementById('example_slider');
+          rangeSlider.noUiSlider.on('update', function (values, handle) {
+            $('span#current_value_1').html (
+              '<b>Current value:</b> ' + values[handle]
+            );
+          });
+          var rangeSlider_2 = document.getElementById('example_slider_2');
+          rangeSlider_2.noUiSlider.on('update', function (values, handle) {
+            $('span#current_value_2').html (
+              '<b>Current value:</b> ' + values[handle]
+            );
+          });
+          clearInterval(dependencies_met_j1_finished);
+        } // END if j1.adapter.rangeSlider.getState()
+      } // END if j1.getState()
+    }, 25);
+  });
+</script>
+++++

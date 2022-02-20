@@ -1,0 +1,114 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/rangeSlider.yml
+# User Configuration of the Range Slider Module
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2022 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+#
+# ------------------------------------------------------------------------------
+# NOTE:
+#
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description (used for J1 CC only)
+#
+description:
+
+  title:                                Range Slider Module
+  scope:                                User settings
+  location:                             _data/modules/rangeSlider.yml
+
+# ------------------------------------------------------------------------------
+# User settings
+#
+settings:
+  enabled:                              true
+
+  sliders:
+    # --------------------------------------------------------------------------
+    # RANGE SLIDER configurations
+    # --------------------------------------------------------------------------
+
+    # --------------------------------------------------------------------------
+    # example slider 1
+    #
+    - slider:
+        enabled:                        true
+        id:                             example_slider
+        label:                          Example Slider 1
+        description:
+
+        options:
+          start:                        20
+          range:
+            min:                        0
+            max:                        100
+
+    # --------------------------------------------------------------------------
+    # example slider 2
+    #
+    - slider:
+        enabled:                        true
+        id:                             example_slider_2
+        label:                          Example Slider 2
+        description:
+
+        options:
+          start:                        80
+          range:
+            min:                        0
+            max:                        200
+
+    # --------------------------------------------------------------------------
+    # jgSlider rowHeigth (galleryCustomizer)
+    #
+    - slider:
+        enabled:                        true
+        id:                             jgSlider_row_heigth
+        label:                          Row Height [px]
+        description:                    "Image line height (min: 100px)"
+
+        options:
+          start:                        150
+          range:
+            min:                        100
+            max:                        300
+
+    # --------------------------------------------------------------------------
+    # jgSlider thumbSpacing (galleryCustomizer)
+    #
+    - slider:
+        enabled:                        true
+        id:                             jgSlider_thumb_spacing
+        label:                          Thumb Spacing [px]
+        description:                    Space between the preview images
+
+        options:
+          start:                        1
+          range:
+            min:                        0
+            max:                        10
+
+    # --------------------------------------------------------------------------
+    # jgSlider galleryPadding (galleryCustomizer)
+    #
+    - slider:
+        enabled:                        true
+        id:                             jgSlider_gallery_padding
+        label:                          Gallery Padding [px]
+        description:                    Border size around the gallery items
+
+        options:
+          start:                        0
+          range:
+            min:                        0
+            max:                        10
+
+# ------------------------------------------------------------------------------
+# END config

@@ -135,11 +135,13 @@ $label-color-focus:                     $blue !default;
       transparent 100%
     );
 
+    // jadams, 2022-02-19: disabled
+    //
     // bg image is always there, we just need to reveal it
-    &,
-    .is-focused & {
-      background-image: $underline-background-image;
-    }
+    // &,
+    // .is-focused & {
+    //   background-image: $underline-background-image;
+    // }
 
     &:invalid {
       background-image: $underline-background-image-invalid;
@@ -325,6 +327,7 @@ $label-color-focus:                     $blue !default;
   .bmd-label-static {
     @include bmd-label-static($label-static-top, $static-font-size);
   }
+
   // #559 Fix for webkit/chrome autofill - rule must be separate because it breaks firefox otherwise #731
   //input:-webkit-autofill ~ .bmd-label-floating {  FIXME: confirm that the autofill js generation of change event makes this unnecessary
   //  @include bmd-label-static($label-top, $static-font-size, $static-line-height);

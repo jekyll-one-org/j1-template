@@ -367,23 +367,12 @@ end::footnotes[]
 // TAGS, global asciidoc attributes (variables)
 // -----------------------------------------------------------------------------
 tag::tags[]
+
+// controls (strings)
+//
 :browser-window--new:                             window="_blank"
 :clipboard--noclip:                               noclip
 :figure-caption--text:                            Figure
-
-// fa icons
-//
-:level--beginner:                                 icon:battery-quarter[role="md-blue"]
-:level--intermediate:                             icon:battery-half[role="md-blue"]
-:level--advanced:                                 icon:battery-three-quarters[role="md-blue"]
-:level--expert:                                   icon:battery-full[role="md-blue"]
-
-// mdi icons
-//
-// :level--beginner:                              mdi:battery-20[24px, mdi-md-blue]
-// :level--intermediate:                          mdi:battery-50[24px, mdi-md-blue]
-// :level--advanced:                              mdi:battery-70[24px, mdi-md-blue]
-// :level--expert:                                mdi:battery[24px, mdi-md-blue]
 
 // fa icons
 //
@@ -395,12 +384,23 @@ tag::tags[]
 :icon-battery--three-quarter:                     icon:battery-three-quarters[role="md-blue"]
 :icon-battery--full:                              icon:battery-full[role="md-blue"]
 
+// level indicators
+//
+:level--beginner:                                 {icon-battery--quarter}
+:level--intermediate:                             {icon-battery--half}
+:level--advanced:                                 {icon-battery--three-quarters}
+:level--expert:                                   {icon-battery--full}
+
+// common badges
+//
 :badge-j1--license:                               image:https://img.shields.io/github/license/jekyll-one-org/j1-template[GitHub, link="https://github.com/jekyll-one-org/j1-template/blob/master/LICENSE.md", window="_blank"]
 :badge-j1--version-latest:                        image:https://badge.fury.io/rb/j1-template.svg[Gem Version, link="https://badge.fury.io/rb/j1-template", window="_blank"]
 :badge-j1--downloads:                             image:https://img.shields.io/gem/dt/j1-template[Gem]
 :badge-j1-gh--last-commit:                        image:https://img.shields.io/github/last-commit/jekyll-one-org/j1-template[GitHub last commit]
 :badge-j1-gh--stars:                              image:https://img.shields.io/github/stars/jekyll-one-org/j1-template?style=social[GitHub Repo stars]
 
+// special characters
+//
 :char-emdash:                                     &#8212;
 :char-middot:                                     &middot;
 :char-dot:                                        &#46;
@@ -408,6 +408,7 @@ tag::tags[]
 :char-bullet:                                     &bull;
 :char-bullet--big:                                &#9679;
 :char-bullet--bigger:                             &#11044;
+
 end::tags[]
 
 

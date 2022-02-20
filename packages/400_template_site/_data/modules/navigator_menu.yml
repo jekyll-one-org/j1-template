@@ -224,6 +224,9 @@
       - title:                          Rouge Themes
         href:                           /pages/public/previewer/rouge/
         icon:                           code-parentheses
+      - title:                          Range Slider
+        href:                           /pages/public/previewer/range-slider/
+        icon:                           arrow-decision-outline
 
 # ------------------------------------------------------------------------------
 # Menu BLOG

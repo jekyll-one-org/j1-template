@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/scss/theme_uno/bootstrap/drawer.scss
+ # ~/scss/theme_uno/extentions/drawer.scss
  #
  # Product/Info:
  # https://github.com/FezVrasta/bootstrap-material-design
@@ -28,7 +28,7 @@
   overflow: visible;
   overflow-y: auto;
   font-size: .875rem;
-  background: $gray-400;
+  background: $white;
 
   // Transform offscreen.
   transition: transform;

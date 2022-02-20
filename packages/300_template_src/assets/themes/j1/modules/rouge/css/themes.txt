@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- #  ~/assets/themes/j1/modules/rouge/css/themes.txt
+ #  ~/modules/rouge/css/themes.txt
  #  All available Rouge themes
  #
  #  Product/Info:
