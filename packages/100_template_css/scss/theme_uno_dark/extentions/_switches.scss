@@ -1,0 +1,19 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno_dark/extensions/_switches.scss
+ #
+ # Product/Info:
+ # https://github.com/FezVrasta/bootstrap-material-design
+ #
+ # Copyright (C) 2020 Federico Zivolo and Contributors
+ #
+ # Bootstrap Material Design is licensed under the MIT License.
+ # See: https://github.com/FezVrasta/bootstrap-material-design/blob/master/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+.radio label, .is-focused .radio label, .radio-inline, .is-focused .radio-inline,
+.checkbox label, .is-focused .checkbox label, .checkbox-inline,
+.is-focused .checkbox-inline, .switch label, .is-focused .switch label {
+    color: #e0e0e0;
+}

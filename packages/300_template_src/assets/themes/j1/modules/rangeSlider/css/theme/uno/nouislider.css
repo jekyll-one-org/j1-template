@@ -17,9 +17,14 @@
 --------------------------------------------------------------------------------
 */
 
+.range-slider {
+  margin-top: 2rem;
+}
+
 .range-slider-label {
   font-size: 0.75rem;
-	line-height: 1;
+  padding-top: 0.75rem;
+  margin-left: 0;
 }
 
 /* Functional styling;
@@ -50,6 +55,7 @@
   height: 100%;
   position: relative;
   z-index: 1; /* Fix 401 */
+  background-color: rgba(0, 0, 0, 0.2);
 }
 .noUi-connect {
   position: absolute;

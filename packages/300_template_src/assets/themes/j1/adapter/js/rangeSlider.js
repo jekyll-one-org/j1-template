@@ -92,6 +92,10 @@ j1.adapter.rangeSlider = (function (j1, window) {
   // Helper functions
   // ---------------------------------------------------------------------------
 
+  function insertAfter(newNode, referenceNode) {
+      referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+  }
+
   // ---------------------------------------------------------------------------
   // Main object
   // ---------------------------------------------------------------------------
@@ -156,6 +160,7 @@ j1.adapter.rangeSlider = (function (j1, window) {
 
             {% comment %} overload defaults by slider options
             -------------------------------------------------------------------- {% endcomment %}
+            {% if item.slider.options.label %}            {% assign label           = item.slider.options.label %}            {% endif %}
             {% if item.slider.options.start %}            {% assign start           = item.slider.options.start %}            {% endif %}
             {% if item.slider.options.connect %}          {% assign connect         = item.slider.options.connect %}          {% endif %}
             {% if item.slider.options.step %}             {% assign step            = item.slider.options.step %}             {% endif %}
@@ -187,6 +192,13 @@ j1.adapter.rangeSlider = (function (j1, window) {
                      decimals:  {{format_decimals}}
                    })
                 });
+
+                var el = document.createElement("label");
+                el.classList.add('range-slider-label');
+                el.innerHTML = '{{label}}';
+                var div = document.getElementById(id);
+                insertAfter(el, div);
+
                 slider_{{slider_id}}.noUiSlider.on('update', function (values, handle) {
                   var logger = log4javascript.getLogger('j1.adapter.rangeSlider.cbOnUpdate');
                   logger.debug('current value: ' + values[handle]);

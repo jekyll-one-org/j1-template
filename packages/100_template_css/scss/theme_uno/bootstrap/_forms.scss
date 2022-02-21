@@ -436,3 +436,20 @@ select {
     }
   }
 }
+
+// jadams, 2022-02-21, overload BMD label settings
+// TODO: Modify base settings instead using an overload in same? file
+// -----------------------------------------------------------------------------
+
+.bmd-form-group .checkbox label,
+.bmd-form-group .radio label,
+.bmd-form-group label {
+    font-size: .825rem;
+    line-height: 1.75 !important;
+    color: unset;
+}
+
+[class^='bmd-label'],
+[class*=' bmd-label'] {
+    color: $gray-700;
+}

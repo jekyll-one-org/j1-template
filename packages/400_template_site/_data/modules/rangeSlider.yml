@@ -41,10 +41,9 @@ settings:
     - slider:
         enabled:                        true
         id:                             example_slider
-        label:                          Example Slider 1
-        description:
 
         options:
+          label:                        Example Slider 1
           start:                        20
           range:
             min:                        0
@@ -56,10 +55,9 @@ settings:
     - slider:
         enabled:                        true
         id:                             example_slider_2
-        label:                          Example Slider 2
-        description:
 
         options:
+          label:                        Example Slider 2
           start:                        80
           range:
             min:                        0
@@ -71,10 +69,9 @@ settings:
     - slider:
         enabled:                        true
         id:                             jgSlider_row_heigth
-        label:                          Row Height [px]
-        description:                    "Image line height (min: 100px)"
 
         options:
+          label:                        Image Row Height [px]
           start:                        150
           range:
             min:                        100
@@ -86,10 +83,9 @@ settings:
     - slider:
         enabled:                        true
         id:                             jgSlider_thumb_spacing
-        label:                          Thumb Spacing [px]
-        description:                    Space between the preview images
 
         options:
+          label:                        Thumb Image Spacing [px]
           start:                        1
           range:
             min:                        0
@@ -101,14 +97,13 @@ settings:
     - slider:
         enabled:                        true
         id:                             jgSlider_gallery_padding
-        label:                          Gallery Padding [px]
-        description:                    Border size around the gallery items
 
         options:
+          label:                        Gallery Padding [px]
           start:                        0
           range:
             min:                        0
-            max:                        10
+            max:                        50
 
 # ------------------------------------------------------------------------------
 # END config

@@ -28,7 +28,6 @@
   overflow: visible;
   overflow-y: auto;
   font-size: .875rem;
-  background: $white;
 
   // Transform offscreen.
   transition: transform;
@@ -65,6 +64,12 @@
       font-weight: 500;
     }
   }
+}
+
+// jadams, 2022-02-21: set bg color for dark theme compatibility
+//
+.bmd-layout-drawer {
+  background: $lighten-200;
 }
 
 // Sizing and positioning
