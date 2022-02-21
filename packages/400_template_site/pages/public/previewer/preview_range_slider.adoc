@@ -90,36 +90,140 @@ See noUiSlider's official https://refreshless.com/nouislider/[documentation, {br
 to see a variety of slider options.
 
 ++++
-<div class="container mt-5 mb-5">
+<div class="container mt-3 mb-4">
   <div class="row">
-    <div class="col mt-2">
-      <div id="example_slider" class="range-slider mt-1"></div>
-    </div>
     <div class="col">
+      <div id="example_slider" class="range-slider"></div>
+    </div>
+    <div class="col mt-3">
       <span id="current_value_1" class="mb-2"></span>
     </div>
   </div>
 
   <div class="row">
-    <div class="col mt-4">
-      <div id="example_slider_2" class="range-slider mt-1"></div>
+    <div class="col mt-2">
+      <div id="example_slider_2" class="range-slider"></div>
     </div>
-    <div class="col mt-3">
+    <div class="col mt-4">
     <span id="current_value_2" class="mb-2"></span>
     </div>
   </div>
 
+  <button type="button" name="reset-defaults"
+    class="btn btn-flex btn-primary mt-3"
+    aria-label="Reset Button"
+    style="min-width: 12rem">
+    <i class="mdi mdi-close mdi-24px mdi-md_white mr-1"></i>
+    Reset Sliders
+  </button>
 </div>
 ++++
 
+== J1 Template
+
+.Asciidoc Markup
+[source, no_template, role="noclip"]
+----
+  ++++
+  <div id="slider" class="range-slider"></div>
+  ++++
+----
+
+.J1 Page Configuration (Frontmatter)
+[source, no_template, role="noclip"]
+----
+  ---
+  title:                                  <your title>
+  tagline:                                <your tagline>
+  ...
+  resources:                              [ rangeslider ]
+  resource_options:
+    <your options>
+  ---
+----
+
+.J1 Resources Configuration
+[source, no_template, role="noclip"]
+----
+  # ----------------------------------------------------------------------------
+  # Range Slider, based on the JS implementation of the noUiSlider API
+  # See: https://github.com/leongersen/noUiSlider
+  #
+  - name:                               rangeSlider
+    resource:
+      enabled:                          true
+
+      id:                               rangeslider
+      comment:                          module rangeSlider
+      region:                           head
+      layout:                           [ page, post, collection, raw ]
+      required:                         ondemand
+      preload:                          false
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            [ modules/rangeSlider/css/theme/uno/nouislider ]
+        files:                          [ adapter/js/rangeSlider.js ]
+        js:                             [ modules/rangeSlider/js/nouislider ]
+        init_function:                  [ j1.adapter.rangeSlider.init ]
+----
+
+.J1 Module Configuration
+[source, no_template, role="noclip"]
+----
+  # ------------------------------------------------------------------------------
+  # ~/_data/modules/rangeSlider.yml
+  # User Configuration of the Range Slider Module
+  #
+  # Product/Info:
+  # https://jekyll.one
+  #
+  # Copyright (C) 2022 Juergen Adams
+  #
+  # J1 Template is licensed under the MIT License.
+  # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+  #
+  # ------------------------------------------------------------------------------
+
+  ...
+
+    sliders:
+
+      - slider:
+          enabled:                        true
+          id:                             example_slider
+
+          options:
+            label:                        "Slider 1, range: [0,100], start at: 20"
+            start:                        20
+            range:
+              min:                        0
+              max:                        100
+
+      - slider:
+          enabled:                        true
+          id:                             example_slider_2
+
+          options:
+            label:                        "Slider 2, range: [0,200], start at: 80"
+            start:                        80
+            range:
+              min:                        0
+              max:                        200
+----
+
+/////
+== noUiSlider API
+
 .HTML Markup
-[source, html]
+[source, html, role="noclip"]
 ----
   <div id="slider"></div>
 ----
 
 .JS initialization
-[source, js]
+[source, js, role="noclip"]
 ----
   var slider = document.getElementById('slider');
   noUiSlider.create(slider, {
@@ -143,10 +247,10 @@ to see a variety of slider options.
 noUiSlider has an API with two simple methods: .get() and .set(). To get the current slider value:
 
 .Example
-[source, js]
+[source, js, role="noclip"]
 ----
-var slider    = document.getElementById('slider');
-var sliderVal = slider.noUiSlider.get();
+  var slider    = document.getElementById('slider');
+  var sliderVal = slider.noUiSlider.get();
 ----
 
 For one-handle sliders, calling `.get()` will return the value as a `string`.
@@ -174,7 +278,7 @@ To return to the initial slider values, the `.reset()` method can be used.
 This will only reset the slider values.
 
 .Examples
-[source, js]
+[source, js, role="noclip"]
 ----
 var slider = document.getElementById('slider');
 
@@ -237,7 +341,7 @@ others) the `.get()` and `.set()` methods. The Slider API is also available
 as the sixth argument to all events.
 
 .Examples
-[source, js]
+[source, js, role="noclip"]
 ----
 function doSomething(values, handle, unencoded, tap, positions, noUiSlider) {
   // values: Current slider values (array);
@@ -264,6 +368,7 @@ slider.noUiSlider.off();
 // Remove all 'change' events in any namespace.
 slider.noUiSlider.off('change');
 ----
+/////
 
 /////
 == HTML5 Range Input
@@ -284,7 +389,7 @@ are accepted with the attributes below.
 TIP: Always add the <label> tag for best accessibility practices!
 
 .HTML Markup
-[source, html]
+[source, html, role="noclip"]
 ----
   <form action="#">
       <input type="range" id="input-slider" min="0" max="100" />
@@ -310,14 +415,18 @@ TIP: Always add the <label> tag for best accessibility practices!
     var dependencies_met_j1_finished = setInterval(function() {
       if (j1.getState() == 'finished' && j1.adapter.rangeSlider.getState() == 'finished') {
         var rangeSlider = document.getElementById('example_slider');
+        var rangeSlider_2 = document.getElementById('example_slider_2');
         rangeSlider.noUiSlider.on('update', function (values, handle) {
           $('span#current_value_1').html('<b>Current value:</b> ' + values[handle]);
         });
-        var rangeSlider_2 = document.getElementById('example_slider_2');
         rangeSlider_2.noUiSlider.on('update', function (values, handle) {
           $('span#current_value_2').html ('<b>Current value:</b> ' + values[handle]);
         });
         clearInterval(dependencies_met_j1_finished);
+        $('button[name="reset-defaults"]').on('click', function (e) {
+          rangeSlider.noUiSlider.set(20);
+          rangeSlider_2.noUiSlider.set(80);
+        });
       } // END if getState()
     }, 25);
   });
