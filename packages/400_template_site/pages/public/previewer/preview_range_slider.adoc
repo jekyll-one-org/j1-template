@@ -3,7 +3,29 @@ title:                                  Range Sliders
 tagline:                                preview data sliders
 date:                                   2022-02-20 00:00:00
 description: >
-                                        Welcome to the preview page focussing on the Range Slider module.
+                                        Welcome to the preview page focussing on the Range Slider
+                                        module.
+keywords: >
+                                        previewer, tool, preview, overview, images, jquery, plugin,
+                                        RangeSlider,
+                                        opensource, free, load, download, start, starter, example,
+                                        high, easy, use, secure, encrypt, standard, popular,
+                                        generate, develop, create, learn, distribute, publish, deploy,
+                                        beginner, advanced, expert, student, learner, writer, reader, visitor
+                                        framework, toolkit, integration, extension, module, api,
+                                        dynamic, static, generator, client, server, internet, local, localhost
+                                        page, web, website, webdesign, material, design, responsive,
+                                        javascript, nodejs, ruby, windows, linux, osx, mac, os,
+                                        http, https, html, html5, css, scss, style,
+                                        browser, firefox, chrome, edge, opera, safari,
+                                        configuration, generator, navigation, menu, dropdown, fab, action, button
+                                        application, interface, provider, api, repository,
+                                        cookie, language, translation, gdpr, dsgvo, privacy,
+                                        asciidoc, aciidoctor, bootstrap, jekyll, liquid,
+                                        hyvor, disqus, git, github, netlify, heroku, apple, microsoft,
+                                        provider, service, internet, support,
+                                        google, analytics, advertising, search, console, silverlight, score,
+                                        j1, template, jekyllone, comment
 
 categories:                             [ Previewer ]
 tags:                                   [ Modules, Data Slider ]
@@ -13,6 +35,7 @@ fab_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/previewer/range-slider/
 regenerate:                             false
+compress:                               false
 
 resources:                              [ clipboard, rangeslider, rouge ]
 resource_options:
@@ -285,23 +308,17 @@ TIP: Always add the <label> tag for best accessibility practices!
 <script>
   $(document).ready(function() {
     var dependencies_met_j1_finished = setInterval(function() {
-      if (j1.getState() == 'finished') {
-        if (j1.adapter.rangeSlider.getState() == 'finished') {
-          var rangeSlider = document.getElementById('example_slider');
-          rangeSlider.noUiSlider.on('update', function (values, handle) {
-            $('span#current_value_1').html (
-              '<b>Current value:</b> ' + values[handle]
-            );
-          });
-          var rangeSlider_2 = document.getElementById('example_slider_2');
-          rangeSlider_2.noUiSlider.on('update', function (values, handle) {
-            $('span#current_value_2').html (
-              '<b>Current value:</b> ' + values[handle]
-            );
-          });
-          clearInterval(dependencies_met_j1_finished);
-        } // END if j1.adapter.rangeSlider.getState()
-      } // END if j1.getState()
+      if (j1.getState() == 'finished' && j1.adapter.rangeSlider.getState() == 'finished') {
+        var rangeSlider = document.getElementById('example_slider');
+        rangeSlider.noUiSlider.on('update', function (values, handle) {
+          $('span#current_value_1').html('<b>Current value:</b> ' + values[handle]);
+        });
+        var rangeSlider_2 = document.getElementById('example_slider_2');
+        rangeSlider_2.noUiSlider.on('update', function (values, handle) {
+          $('span#current_value_2').html ('<b>Current value:</b> ' + values[handle]);
+        });
+        clearInterval(dependencies_met_j1_finished);
+      } // END if getState()
     }, 25);
   });
 </script>
