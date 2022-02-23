@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- #  ~/assets/themes/j1/modules/mmenu_light/css/theme/uno.css
+ #  ~/assets/themes/j1/modules/mmenu_light/css/theme/uno/mmenu.css
  #  Provides theme styles (Uno) for Mobile Menu light (v3.0.5)
  #
  #  Product/Info:
@@ -111,7 +111,11 @@ NOTE: For unknown reason, style "mm-ocd--left" is NOT applied correctly
 /* jadams, 2020-06-20: set j1 template colors (dark theme) */
 .mm-spn.mm-spn--dark {
   color: #e3e3e3;
-  background: #191919
+  background: #000 !important;
+}
+
+.mm-spn ul {
+  background: #000 !important;
 }
 
 /* Sidebar (Drawer)
@@ -164,10 +168,15 @@ NOTE: For unknown reason, style "mm-ocd--left" is NOT applied correctly
 
 /* Navigation (Menu)
    ----------------------------------------------------------------------------- */
+
+.mm-spn a {
+  color: #9e9e9e !important;
+}
+
 .mm-spn a:hover {
-    color: #fafafa;
-    text-decoration: none;
-    font-weight: 500;
+    color: #fafafa !important;
+    /* text-decoration: none;
+    font-weight: 500; */
 }
 
 /* jadams, 2020-07-03: added hover to global style */

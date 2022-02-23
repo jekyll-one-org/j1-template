@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/modules/msDropdown/css/msDropdown.css
+ # ~/assets/themes/j1/modules/msDropdown/css/themes/uno/msDropdown.css
  # Provides CSS core styles for MSDropdown
  #
  # Product/Info:
@@ -19,6 +19,7 @@
  # https://www.marghoobsuleman.com/image-dropdown/help
  # https://www.marghoobsuleman.com/image-dropdown/advanced-help
  # -----------------------------------------------------------------------------
+*/
 
  /*!
  * /**
@@ -31,6 +32,7 @@
  *  * it under the terms of the either the MIT License or the Gnu General Public License (GPL) Version 2
  *  * /
  */
+ 
  .ms-pr {
   position: relative
 }

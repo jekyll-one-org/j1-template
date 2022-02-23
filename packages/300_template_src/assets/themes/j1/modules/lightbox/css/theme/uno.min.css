@@ -12,14 +12,4 @@
  # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
  # -----------------------------------------------------------------------------
 */
-
-/* Reduced image border|color changed */
-.lightbox .lb-image {
-    border-radius: 1px;
-    border: 1px solid lightgrey;
-}
-
-/* Removed invalid|unneeded attributes */
-.lb-outerContainer {
-    zoom: unset;
-}
+.lightbox .lb-image{border-radius:1px;border:1px solid lightgrey}.lb-outerContainer{zoom:unset}
