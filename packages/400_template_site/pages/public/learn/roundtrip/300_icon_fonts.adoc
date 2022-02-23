@@ -57,6 +57,7 @@ resource_options:
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
+
 == Icon Fonts
 
 J1 Template supports popular icons font sets out-of-the-box:
@@ -72,7 +73,6 @@ details for <<Material Design Icons>> and <<FontAwesome Icons>>.
 Iconify icons are not a locally stored icon-set like MDI or FA. All icons are
 loaded over the Internet using the so-called *Unified OpenSource Icon
 Framework*. See section <<Iconify Icons>> for more information.
-
 
 == Material Design Icons
 
@@ -95,7 +95,7 @@ repository and MD style specification.
 |1x
 |no modifier set
 |All icons can be found for preview at the
-link:{url-material-design-icons--cheatsheet}[MDI Cheatsheet, {browser-window--new}]
+link:{url-material-design-icons--cheatsheet}[MDI Icons, {browser-window--new}]
 page online. +
 
 No modifiers +
@@ -108,7 +108,7 @@ mdi:account[1x]
 |3x
 |no modifier set
 |All icons can be found for preview at the
-link:{url-material-design-icons--cheatsheet}[MDI Cheatsheet, {browser-window--new}]
+link:{url-material-design-icons--cheatsheet}[MDI Icons, {browser-window--new}]
 page online. +
 
 No modifiers +
@@ -121,7 +121,7 @@ mdi:account[3x]
 |5x
 |no modifier set
 |All icons can be found for preview at the
-link:{url-material-design-icons--cheatsheet}[MDI Cheatsheet, {browser-window--new}]
+link:{url-material-design-icons--cheatsheet}[MDI Icons, {browser-window--new}]
 page online. +
 
 No modifiers +
@@ -134,7 +134,7 @@ mdi:account[5x]
 |5x
 |`mdi-rotate-45`
 |All icons can be found for preview at the
-link:{url-material-design-icons--cheatsheet}[MDI Cheatsheet, {browser-window--new}]
+link:{url-material-design-icons--cheatsheet}[MDI Icons, {browser-window--new}]
 page online. +
 
 Rotate 45 degrees +
@@ -147,7 +147,7 @@ mdi:account[5x mdi-rotate-45]
 |5x
 |`mdi-rotate-315`
 |All icons can be found for preview at the
-link:{url-material-design-icons--cheatsheet}[MDI Cheatsheet, {browser-window--new}]
+link:{url-material-design-icons--cheatsheet}[MDI Icons, {browser-window--new}]
 page online. +
 
 Rotate 315 degrees +
@@ -161,7 +161,7 @@ mdi:account[5x mdi-rotate-315]
 |`mdi-light` +
 `mdi-flip-v`
 |All icons can be found for preview at the
-link:{url-material-design-icons--cheatsheet}[MDI Cheatsheet, {browser-window--new}]
+link:{url-material-design-icons--cheatsheet}[MDI Icons, {browser-window--new}]
 page online. +
 
 Colour set to (md) light-grey and flipped vertical +
@@ -174,7 +174,7 @@ mdi:alert[5x mdi-light mdi-flip-v]
 |5x
 |`md-indigo`
 |All icons can be found for preview at the
-link:{url-material-design-icons--cheatsheet}[MDI Cheatsheet, {browser-window--new}]
+link:{url-material-design-icons--cheatsheet}[MDI Icons, {browser-window--new}]
 page online. +
 
 Colour set to (md) indigo +
@@ -187,7 +187,7 @@ mdi:alert[5x md-indigo]
 |5x
 |`md-pink`
 |All icons can be found for preview at the
-link:{url-material-design-icons--cheatsheet}[MDI Cheatsheet, {browser-window--new}]
+link:{url-material-design-icons--cheatsheet}[MDI Icons, {browser-window--new}]
 page online. +
 
 Colour set to (md) pink +
@@ -200,7 +200,7 @@ mdi:alert[5x md-pink]
 |5x
 |`mdi-spin`
 |All icons can be found for preview at the
-link:{url-material-design-icons--cheatsheet}[MDI Cheatsheet, {browser-window--new}]
+link:{url-material-design-icons--cheatsheet}[MDI Icons, {browser-window--new}]
 page online. +
 
 Added animation of type rotate (spin) +
@@ -214,7 +214,7 @@ mdi:loading[5x mdi-spin]
 |`md-red-900` +
 `mdi-pulsed`
 |All icons can be found for preview at the
-link:{url-material-design-icons--cheatsheet}[MDI Cheatsheet, {browser-window--new}]
+link:{url-material-design-icons--cheatsheet}[MDI Icons, {browser-window--new}]
 page online. +
 
 Colour  set to (md) color dark-red and added animation of type pulsed +

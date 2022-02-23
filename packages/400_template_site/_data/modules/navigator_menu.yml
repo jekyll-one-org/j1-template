@@ -172,46 +172,18 @@
   sublevel:
 
     # --------------------------------------------------------------------------
-    # Manuals
-    #
-    - title:                            Manuals
-      icon:                             book-cog
-      dropdown:
-        - title:                        Country Flags
-          href:                         /pages/public/previewer/country_flags/
-          icon:                         flag
-        - title:                        MD Color Palette
-          href:                         /pages/public/previewer/color_palette/
-          icon:                         format-color-fill
-        - title:                        J1 Dropdowns
-          href:                         /pages/public/manuals/j1Dropdowns/
-          icon:                         form-dropdown
-        - title:                        MsDropdown
-          href:                         /pages/public/manuals/msDropdown/
-          icon:                         form-dropdown
-
-    # --------------------------------------------------------------------------
-    # Tester
-    #
-    - title:                            Tester
-      icon:                             test-tube
-      dropdown:
-        - title:                        Translator
-          href:                         /pages/public/previewer/deepl-translator/
-          icon:                         translate
-        - title:                        Justified Gallery
-          href:                         /pages/public/previewer/justified_gallery/
-          icon:                         view-dashboard
-#       - title:                        Automagic iFrames
-#         href:                         /pages/public/iframer/
-#         icon:                         image-filter-none
-
-    # --------------------------------------------------------------------------
     # Previewer
     #
     - title:                            Previewer
       icon:                             eye
       dropdown:
+
+      - title:                          Country Flags
+        href:                           /pages/public/previewer/country_flags/
+        icon:                           flag
+      - title:                          MD Color Palette
+        href:                           /pages/public/previewer/color_palette/
+        icon:                           format-color-fill
       - title:                          MDI Icons (regular)
         href:                           /pages/public/previewer/mdi_font/
         icon:                           alarm-light
@@ -227,6 +199,9 @@
       - title:                          Range Slider
         href:                           /pages/public/previewer/range-slider/
         icon:                           arrow-decision-outline
+      - title:                          Justified Gallery
+        href:                           /pages/public/previewer/justified_gallery/
+        icon:                           view-dashboard
 
 # ------------------------------------------------------------------------------
 # Menu BLOG
