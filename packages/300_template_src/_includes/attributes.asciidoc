@@ -288,7 +288,7 @@ tag::urls[]
 :url-popper--home:                                https://popper.js.org/
 :url-popper--gh-repo:                             https://github.com/popperjs/popper-core/
 
-:url-previewer--county-flags:                     /pages/public/previewer/country_flags/
+:url-previewer--county-flags:                     https://jekyll.one/pages/public/previewer/country_flags/
 :url-previewer--emoji:                            http://localhost:42000/pages/public/previewer/twitter_emoji/
 :url-previewer--mdi-icons:                        http://localhost:42000/pages/public/previewer/mdi_font/
 :url-previewer--rouge-themes:                     http://localhost:42000/pages/public/previewer/rouge/
