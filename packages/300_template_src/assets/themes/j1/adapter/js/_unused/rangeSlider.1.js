@@ -135,94 +135,90 @@ j1.adapter.rangeSlider = (function (j1, window) {
       }
 
       var dependencies_met_j1_finished = setInterval(function() {
-        if (j1.getState() == 'finished') {
-          var dependencies_met_elms_loaded = setInterval(function() {
-            elms = document.querySelectorAll('.range-slider');
-            if (elms.length) {
-              logger.info('\n' + 'number of rangeSlider elements found: ' + elms.length);
+        elms = document.querySelectorAll('.range-slider');
+        if (elms) {
+//          var elms = document.querySelectorAll('.range-slider');
 
-              // -------------------------------------------------------------------
-              // slider initializer
-              // -------------------------------------------------------------------
-              var log_text = '\n' + 'rangeSlider elements are being initialized';
-              logger.info(log_text);
+          // -------------------------------------------------------------------
+          // slider initializer
+          // -------------------------------------------------------------------
+          var log_text = '\n' + 'rangeSliders are being initialized';
+          logger.info(log_text);
 
-              {% for item in range_slider_options.sliders %} {% if item.slider.enabled %}
-                {% assign slider_id = item.slider.id %}
+          {% for item in range_slider_options.sliders %} {% if item.slider.enabled %}
+            {% assign slider_id = item.slider.id %}
 
-                {% comment %} load default options
-                ---------------------------------------------------------------------- {% endcomment %}
-                {% assign start             = range_slider_options.options.start %}
-                {% assign connect           = range_slider_options.options.connect %}
-                {% assign step              = range_slider_options.options.step %}
-                {% assign orientation       = range_slider_options.options.orientation %}
-                {% assign range_min         = range_slider_options.options.range.min %}
-                {% assign range_max         = range_slider_options.options.range.max %}
-                {% assign format_decimals   = range_slider_options.options.format.decimals %}
-                {% assign cbOnUpdate        = range_slider_options.options.cbOnUpdate %}
+            {% comment %} load default options
+            ---------------------------------------------------------------------- {% endcomment %}
+            {% assign start             = range_slider_options.options.start %}
+            {% assign connect           = range_slider_options.options.connect %}
+            {% assign step              = range_slider_options.options.step %}
+            {% assign orientation       = range_slider_options.options.orientation %}
+            {% assign range_min         = range_slider_options.options.range.min %}
+            {% assign range_max         = range_slider_options.options.range.max %}
+            {% assign format_decimals   = range_slider_options.options.format.decimals %}
+            {% assign cbOnUpdate        = range_slider_options.options.cbOnUpdate %}
 
-                {% comment %} overload defaults by slider options
-                -------------------------------------------------------------------- {% endcomment %}
-                {% if item.slider.options.label %}            {% assign label           = item.slider.options.label %}            {% endif %}
-                {% if item.slider.options.start %}            {% assign start           = item.slider.options.start %}            {% endif %}
-                {% if item.slider.options.connect %}          {% assign connect         = item.slider.options.connect %}          {% endif %}
-                {% if item.slider.options.step %}             {% assign step            = item.slider.options.step %}             {% endif %}
-                {% if item.slider.options.orientation %}      {% assign orientation     = item.slider.options.orientation %}      {% endif %}
-                {% if item.slider.options.range.min %}        {% assign range_min       = item.slider.options.range.min %}        {% endif %}
-                {% if item.slider.options.range.max %}        {% assign range_max       = item.slider.options.range.max %}        {% endif %}
-                {% if item.slider.options.format.decimals %}  {% assign format_decimals = item.slider.options.format.decimals %}  {% endif %}
-                {% if item.slider.options.cbOnUpdate %}       {% assign cbOnUpdate      = item.slider.options.cbOnUpdate %}       {% endif %}
+            {% comment %} overload defaults by slider options
+            -------------------------------------------------------------------- {% endcomment %}
+            {% if item.slider.options.label %}            {% assign label           = item.slider.options.label %}            {% endif %}
+            {% if item.slider.options.start %}            {% assign start           = item.slider.options.start %}            {% endif %}
+            {% if item.slider.options.connect %}          {% assign connect         = item.slider.options.connect %}          {% endif %}
+            {% if item.slider.options.step %}             {% assign step            = item.slider.options.step %}             {% endif %}
+            {% if item.slider.options.orientation %}      {% assign orientation     = item.slider.options.orientation %}      {% endif %}
+            {% if item.slider.options.range.min %}        {% assign range_min       = item.slider.options.range.min %}        {% endif %}
+            {% if item.slider.options.range.max %}        {% assign range_max       = item.slider.options.range.max %}        {% endif %}
+            {% if item.slider.options.format.decimals %}  {% assign format_decimals = item.slider.options.format.decimals %}  {% endif %}
+            {% if item.slider.options.cbOnUpdate %}       {% assign cbOnUpdate      = item.slider.options.cbOnUpdate %}       {% endif %}
 
-                elms.forEach(function (elm) {
-                  var id = elm.id;
+            elms.forEach(function (elm) {
+              var id = elm.id;
 
-                  if (id === '{{slider_id}}') {
-                    // processing: {{slider_id}}
-                    //
-                    logger.info('\n' + 'configure range slider: ' + id);
+              if (id === '{{slider_id}}') {
+                // processing: {{slider_id}}
+                //
+                logger.info('\n' + 'configure range slider: ' + id);
 
-                    var slider_{{slider_id}} = document.getElementById('{{slider_id}}');
-                    var instance = noUiSlider.create(slider_{{slider_id}}, {
-                       start:       [{{start}}],
-                       connect:     {{connect}},
-                       step:        {{step}},
-                       orientation: '{{orientation}}',
-                       range: {
-                         'min':     {{range_min}},
-                         'max':     {{range_max}}
-                       },
-                       format: wNumb({
-                         decimals:  {{format_decimals}}
-                       })
-                    });
+                var slider_{{slider_id}} = document.getElementById('{{slider_id}}');
+                var instance = noUiSlider.create(slider_{{slider_id}}, {
+                   start:       [{{start}}],
+                   connect:     {{connect}},
+                   step:        {{step}},
+                   orientation: '{{orientation}}',
+                   range: {
+                     'min':     {{range_min}},
+                     'max':     {{range_max}}
+                   },
+                   format: wNumb({
+                     decimals:  {{format_decimals}}
+                   })
+                });
 
-                    var el = document.createElement("label");
-                    el.classList.add('range-slider-label');
-                    el.innerHTML = '{{label}}';
-                    var div = document.getElementById(id);
-                    insertAfter(el, div);
+                var el = document.createElement("label");
+                el.classList.add('range-slider-label');
+                el.innerHTML = '{{label}}';
+                var div = document.getElementById(id);
+                insertAfter(el, div);
 
-                    slider_{{slider_id}}.noUiSlider.on('update', function (values, handle) {
-                      var logger = log4javascript.getLogger('j1.adapter.rangeSlider.cbOnUpdate');
-                      logger.debug('\n' + 'current value: ' + values[handle]);
-                    });
-                    instances.push(instance);
-                  }
-                }); // END forEach
-
-                {% assign item.slider.options = nil %}
-              {% endif %} {% endfor %}
-
-              if (instances.length) {
-                logger.info('\n' + 'number of slider instances configured: ' + instances.length);
-                _this.setState('finished');
-                logger.info('\n' + 'state: ' + _this.getState());
-              } else {
-                logger.error('\n' + 'no configured instances found');
+                slider_{{slider_id}}.noUiSlider.on('update', function (values, handle) {
+                  var logger = log4javascript.getLogger('j1.adapter.rangeSlider.cbOnUpdate');
+                  logger.debug('\n' + 'current value: ' + values[handle]);
+                });
+                instances.push(instance);
               }
-            } // ENF if elms
-            clearInterval(dependencies_met_elms_loaded);
-          }, 25);
+            }); // END forEach
+
+            {% assign item.slider.options = nil %}
+          {% endif %} {% endfor %}
+
+          if (instances.length) {
+            logger.info('\n' + 'number of instances configured: ' + instances.length);
+            _this.setState('finished');
+            logger.info('\n' + 'state: ' + _this.getState());
+          } else {
+            logger.error('\n' + 'no configured instances found');
+          }
+
           clearInterval(dependencies_met_j1_finished);
         } // END dependencies_met_j1_finished
       }, 25);
@@ -237,6 +233,7 @@ j1.adapter.rangeSlider = (function (j1, window) {
     cbOnclick: function (event) {
       var logger  = log4javascript.getLogger('j1.adapter.rangeSlider.cbOnClick');
       var itemEl = $(event.target).closest('li')[0];
+
 
       // logText = '\n' + 'entered cbOnClick on id: ' + id;
       // logger.info(logText);

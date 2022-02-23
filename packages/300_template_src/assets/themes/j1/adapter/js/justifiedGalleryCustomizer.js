@@ -152,7 +152,7 @@ j1.adapter.justifiedGalleryCustomizer = (function (j1, window) {
       // initializer
       // -----------------------------------------------------------------------
       var dependencies_met_data_loaded = setInterval(function() {
-        if (j1.xhrDOMState['#customizer'] == 'success' && j1.adapter.rangeSlider.getState() == 'finished') {
+        if (j1.getState() == 'finished' && j1.xhrDOMState['#customizer'] == 'success') {
           var galleryId             = '#jg_customizer';
           var $formId               = $('#jg-customizer-form');
           var $instance             = $('#jg_customizer');
@@ -162,118 +162,130 @@ j1.adapter.justifiedGalleryCustomizer = (function (j1, window) {
           var kbdDelay              = 750;
           var imageHeightMin        = 100;
 
-          logger.info('\n' + 'loading customizer finished on id: #' + customizerOptions.xhr_container_id);
+          logger.info('\n' + 'loading HTML portion of the customizer finished on id: #' + customizerOptions.xhr_container_id);
 
           // -------------------------------------------------------------------
           // load gallery data
+          //
           j1.adapter.justifiedGallery.initialize(galleryOptions);
 
-          logger.info('\n' + 'initialize customizer ui|forms');
-
+          // -------------------------------------------------------------------
+          // initialize customizer ui
+          //
           if ($formId.length) {
-            var timerid;
+            var dependencies_met_sliders_loaded = setInterval(function() {
+              if (j1.adapter.rangeSlider.getState() == 'finished') {
+                logger.info('\n' + 'initialize customizer ui');
 
-            rangeRowHeigth.noUiSlider.on('update', function (values, handle) {
-              $instance.justifiedGallery({rowHeight: values[handle]});
-            });
-            rangeThumbSpacing.noUiSlider.on('update', function (values, handle) {
-              $instance.justifiedGallery({margins: values[handle]});
-            });
-            rangeGalleryPadding.noUiSlider.on('update', function (values, handle) {
-              $instance.justifiedGallery({border: values[handle]});
-            });
+                rangeRowHeigth.noUiSlider.on('update', function (values, handle) {
+                  $instance.justifiedGallery({rowHeight: values[handle]});
+                });
+                rangeThumbSpacing.noUiSlider.on('update', function (values, handle) {
+                  $instance.justifiedGallery({margins: values[handle]});
+                });
+                rangeGalleryPadding.noUiSlider.on('update', function (values, handle) {
+                  $instance.justifiedGallery({border: values[handle]});
+                });
 
-            $('input:checkbox[name="captions"]').on('click', function (e) {
-              var value = $(this).is(':checked');
+                $('input:checkbox[name="captions"]').on('click', function (e) {
+                  var value = $(this).is(':checked');
 
-              $instance.justifiedGallery({captions: value});
-              if(environment === 'development') {
-                logText = '\n' + 'gallery on ID ' +galleryId+ ' changed captions to: ' +value;
-                logger.info(logText);
+                  $instance.justifiedGallery({captions: value});
+                  if(environment === 'development') {
+                    logText = '\n' + 'gallery on ID ' +galleryId+ ' changed captions to: ' +value;
+                    logger.info(logText);
+                  }
+                  e.stopPropagation();
+                });
+
+                $('input:checkbox[name="random"]').on('click', function (e) {
+                  var value = $(this).is(':checked');
+
+                  $instance.justifiedGallery({randomize: value});
+                  if(environment === 'development') {
+                    logText = '\n' + 'gallery on ID ' +galleryId+ ' changed randomize to: ' +value;
+                    logger.info(logText);
+                  }
+                  e.stopPropagation();
+                });
+
+                $('input:checkbox[name="justify_last_row"]').on('click', function (e) {
+                  var value = $(this).is(':checked');
+
+                  if (value == true) {
+                    value = 'justify';
+                    $instance.justifiedGallery({lastRow: value});
+                  } else {
+                    value = 'nojustify';
+                    $instance.justifiedGallery({lastRow: value});
+                  }
+                  if(environment === 'development') {
+                    logText = '\n' + 'gallery on ID ' +galleryId+ ' changed lastRow to: ' +value;
+                    logger.info(logText);
+                  }
+                  e.stopPropagation();
+                });
+
+                $('input:checkbox[name="hide_last_row"]').on('click', function (e) {
+                  var value = $(this).is(':checked');
+
+                  if (value == true) {
+                    value = 'hide';
+                    $instance.justifiedGallery({lastRow: value});
+                  } else {
+                    value = 'nojustify';
+                    $instance.justifiedGallery({lastRow: value});
+                  }
+                  if(environment === 'development') {
+                    logText = '\n' + 'gallery on ID ' +galleryId+ ' changed lastRow to: ' +value;
+                    logger.info(logText);
+                  }
+                  e.stopPropagation();
+                });
+
+                $('#jg-customizer-form button[name="reset-defaults"]').on('click', function (e) {
+
+                  rangeRowHeigth.noUiSlider.set(customizerOptions.gallery_settings.rowHeight);
+                  rangeThumbSpacing.noUiSlider.set(customizerOptions.gallery_settings.margins);
+                  rangeGalleryPadding.noUiSlider.set(customizerOptions.gallery_settings.border);
+
+                  $('input:checkbox[name="captions"]').val('on').filter('[value="on"]').prop('checked', customizerOptions.gallery_settings.captions);
+                  $('input:checkbox[name="random"]').val('off').filter('[value="off"]').prop('checked', customizerOptions.gallery_settings.randomize);
+                  $('input:checkbox[name="justify_last_row"]').val('on').filter('[value="on"]').prop('checked', customizerOptions.gallery_settings.justifyLastRow);
+                  $('input:checkbox[name="hide_last_row"]').val('off').filter('[value="off"]').prop('checked', customizerOptions.gallery_settings.hideLastRow);
+
+                  // -----------------------------------------------------------
+                  // set gallery options
+                  //
+                  $instance.justifiedGallery({
+                    rowHeight:          customizerOptions.gallery_settings.rowHeight,
+                    maxRowHeight:       customizerOptions.gallery_settings.maxRowHeight,
+                    lastRow:            customizerOptions.gallery_settings.lastRow,
+                    margins:            customizerOptions.gallery_settings.margins,
+                    border:             customizerOptions.gallery_settings.border,
+                    randomize:          customizerOptions.gallery_settings.randomize,
+                    sort:               customizerOptions.gallery_settings.sort,
+                    refreshTime:        customizerOptions.gallery_settings.refreshTime,
+                    refreshSensitivity: customizerOptions.gallery_settings.refreshSensitivity,
+                    justifyThreshold:   customizerOptions.gallery_settings.justifyThreshold,
+                    captions:           customizerOptions.gallery_settings.captions
+                  });
+
+                  if(environment === 'development') {
+                    logText = '\n' + 'gallery on ID ' +galleryId+ ' reset to default values';
+                    logger.info(logText);
+                  }
+                  e.stopPropagation();
+                });
+                clearInterval(dependencies_met_sliders_loaded);
               }
-              e.stopPropagation();
-            });
+            }, 25);
+          } // END if formId (customizer ui)
 
-            $('input:checkbox[name="random"]').on('click', function (e) {
-              var value = $(this).is(':checked');
-
-              $instance.justifiedGallery({randomize: value});
-              if(environment === 'development') {
-                logText = '\n' + 'gallery on ID ' +galleryId+ ' changed randomize to: ' +value;
-                logger.info(logText);
-              }
-              e.stopPropagation();
-            });
-
-            $('input:checkbox[name="justify_last_row"]').on('click', function (e) {
-              var value = $(this).is(':checked');
-
-              if (value == true) {
-                value = 'justify';
-                $instance.justifiedGallery({lastRow: value});
-              } else {
-                value = 'nojustify';
-                $instance.justifiedGallery({lastRow: value});
-              }
-              if(environment === 'development') {
-                logText = '\n' + 'gallery on ID ' +galleryId+ ' changed lastRow to: ' +value;
-                logger.info(logText);
-              }
-              e.stopPropagation();
-            });
-
-            $('input:checkbox[name="hide_last_row"]').on('click', function (e) {
-              var value = $(this).is(':checked');
-
-              if (value == true) {
-                value = 'hide';
-                $instance.justifiedGallery({lastRow: value});
-              } else {
-                value = 'nojustify';
-                $instance.justifiedGallery({lastRow: value});
-              }
-              if(environment === 'development') {
-                logText = '\n' + 'gallery on ID ' +galleryId+ ' changed lastRow to: ' +value;
-                logger.info(logText);
-              }
-              e.stopPropagation();
-            });
-
-            $('#jg-customizer-form button[name="reset-defaults"]').on('click', function (e) {
-
-              rangeRowHeigth.noUiSlider.set(customizerOptions.gallery_settings.rowHeight);
-              rangeThumbSpacing.noUiSlider.set(customizerOptions.gallery_settings.margins);
-              rangeGalleryPadding.noUiSlider.set(customizerOptions.gallery_settings.border);
-
-              $('input:checkbox[name="captions"]').val('on').filter('[value="on"]').prop('checked', customizerOptions.gallery_settings.captions);
-              $('input:checkbox[name="random"]').val('off').filter('[value="off"]').prop('checked', customizerOptions.gallery_settings.randomize);
-              $('input:checkbox[name="justify_last_row"]').val('on').filter('[value="on"]').prop('checked', customizerOptions.gallery_settings.justifyLastRow);
-              $('input:checkbox[name="hide_last_row"]').val('off').filter('[value="off"]').prop('checked', customizerOptions.gallery_settings.hideLastRow);
-
-              $instance.justifiedGallery({
-                rowHeight:          customizerOptions.gallery_settings.rowHeight,
-                maxRowHeight:       customizerOptions.gallery_settings.maxRowHeight,
-                lastRow:            customizerOptions.gallery_settings.lastRow,
-                margins:            customizerOptions.gallery_settings.margins,
-                border:             customizerOptions.gallery_settings.border,
-                randomize:          customizerOptions.gallery_settings.randomize,
-                sort:               customizerOptions.gallery_settings.sort,
-                refreshTime:        customizerOptions.gallery_settings.refreshTime,
-                refreshSensitivity: customizerOptions.gallery_settings.refreshSensitivity,
-                justifyThreshold:   customizerOptions.gallery_settings.justifyThreshold,
-                captions:           customizerOptions.gallery_settings.captions
-              });
-
-              if(environment === 'development') {
-                logText = '\n' + 'gallery on ID ' +galleryId+ ' reset to default values';
-                logger.info(logText);
-              }
-              e.stopPropagation();
-            });
-
-          } // END form events
-
+          // -----------------------------------------------------------
+          // set drawer events (button toggler)
           // See: https://jsfiddle.net/prathviraj080/vbbbw46a/1/
+          //
           $('button.drawer-toggler').click(function(){
             $('button.drawer-toggler span.mdi').toggleClass('mdi-menu mdi-close');
           });
