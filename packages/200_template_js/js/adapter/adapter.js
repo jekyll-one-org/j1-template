@@ -12,7 +12,6 @@
  #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
  # -----------------------------------------------------------------------------
 */
-'use strict';
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -22,11 +21,7 @@
 /* eslint no-undef: "off"                                                     */
 // -----------------------------------------------------------------------------
 
-/*!
- * J1 Adapter
- * Copyright (C) 2022 Juergen Adams
- * Licensed under MIT License.
- */
+'use strict';
 module.exports = (function ( j1, window ) {
   return {
 
