@@ -121,11 +121,6 @@ j1.adapter.rangeSlider = (function (j1, window) {
       _this   = j1.adapter.rangeSlider;
       logger  = log4javascript.getLogger('j1.adapter.rangeSlider');
 
-      // initialize state flag
-      _this.setState('started');
-      logger.info('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module is being initialized');
-
       // create settings object from frontmatterOptions
       frontmatterOptions = options != null ? $.extend({}, options) : {};
       moduleOptions = $.extend({}, {{range_slider_options | replace: 'nil', 'null' | replace: '=>', ':' }});
@@ -136,6 +131,12 @@ j1.adapter.rangeSlider = (function (j1, window) {
 
       var dependencies_met_j1_finished = setInterval(function() {
         if (j1.getState() == 'finished') {
+
+          // initialize state flag
+          _this.setState('started');
+          logger.info('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module is being initialized');
+
           var dependencies_met_elms_loaded = setInterval(function() {
             elms = document.querySelectorAll('.range-slider');
             if (elms.length) {
@@ -177,9 +178,9 @@ j1.adapter.rangeSlider = (function (j1, window) {
                   var id = elm.id;
 
                   if (id === '{{slider_id}}') {
-                    // processing: {{slider_id}}
+                    // processing rangeSlider: {{slider_id}}
                     //
-                    logger.info('\n' + 'configure range slider: ' + id);
+                    logger.info('\n' + 'configure rangeSlider: ' + id);
 
                     var slider_{{slider_id}} = document.getElementById('{{slider_id}}');
                     var instance = noUiSlider.create(slider_{{slider_id}}, {
@@ -214,11 +215,13 @@ j1.adapter.rangeSlider = (function (j1, window) {
               {% endif %} {% endfor %}
 
               if (instances.length) {
-                logger.info('\n' + 'number of slider instances configured: ' + instances.length);
+                logger.info('\n' + 'number of rangeSlider instances configured: ' + instances.length);
                 _this.setState('finished');
                 logger.info('\n' + 'state: ' + _this.getState());
+                logger.info('\n' + 'initializing module finished');
               } else {
-                logger.error('\n' + 'no configured instances found');
+                logger.error('\n' + 'no configured rangeSlider instances found');
+                logger.warning('\n' + 'initializing module failed');
               }
             } // ENF if elms
             clearInterval(dependencies_met_elms_loaded);
