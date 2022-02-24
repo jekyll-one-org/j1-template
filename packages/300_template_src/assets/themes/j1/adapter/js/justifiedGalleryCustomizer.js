@@ -125,11 +125,6 @@ j1.adapter.justifiedGalleryCustomizer = (function (j1, window) {
       _this   = j1.adapter.justifiedGalleryCustomizer;
       logger  = log4javascript.getLogger('j1.adapter.justifiedGalleryCustomizer');
 
-      // initialize state flag
-      _this.setState('started');
-      logger.info('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module is being initialized');
-
       {% comment %} Load gallery config from yml data
       -------------------------------------------------------------------------- {% endcomment %}
       /* eslint-disable */
@@ -161,6 +156,12 @@ j1.adapter.justifiedGalleryCustomizer = (function (j1, window) {
           var rangeGalleryPadding   = document.getElementById('jgSlider_gallery_padding');
           var kbdDelay              = 750;
           var imageHeightMin        = 100;
+
+          logger.info('\n' + 'module is being initialized');
+
+          // initialize state flag
+          _this.setState('started');
+          logger.info('\n' + 'state: ' + _this.getState());
 
           logger.info('\n' + 'loading HTML portion of the customizer finished on id: #' + customizerOptions.xhr_container_id);
 

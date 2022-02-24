@@ -132,10 +132,11 @@ j1.adapter.rangeSlider = (function (j1, window) {
       var dependencies_met_j1_finished = setInterval(function() {
         if (j1.getState() == 'finished') {
 
+          logger.info('\n' + 'module is being initialized');
+          
           // initialize state flag
           _this.setState('started');
           logger.info('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
 
           var dependencies_met_elms_loaded = setInterval(function() {
             elms = document.querySelectorAll('.range-slider');
