@@ -62,7 +62,7 @@ settings:
   #   values:                           string
   #   default:                          /assets/data/galleries.json
   #
-  enabled:                              true                                    # needed for j1.layout_shim_generator.html
+  enabled:                              true
   xhr_data_path:                        /assets/data/galleries.json
   instance_type:                        multiple
   rowHeight:                            170

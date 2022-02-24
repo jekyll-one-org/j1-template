@@ -64,18 +64,17 @@ NOTE: currently NOT used
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign language = 'en' %}
 
-<!-- [INFO   ] [j1.assets.data.banner.html             ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
+<!-- [INFO   ] [assets.data.gallery_customizer.html    ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />
 </head>
 
-<!-- div id="galleryCustomizer" -->
-<div id="{{customizer_options.xhr_data_element}}">
+<!-- [INFO   ] [assets.data.gallery_customizer.html    ] [ Placement of the Gallery container ] -->
+<div id="{{customizer_options.xhr_data_element}}" style="max-width: {{customizer_options.max_gallery_width}}px;">
 
   {% comment %} Main
   ------------------------------------------------------------------------------ {% endcomment %}
-  <!-- [INFO   ] [j1.gallery_customizer              ] [Placement of the Drawer] -->
-
+  <!-- [INFO   ] [assets.data.gallery_customizer.html    ] [Placement of the Drawer] -->
   <nav class="nav bmd-layout-container custom-size-300 bmd-drawer-f-l">
 
     <header class="bmd-layout-header">
