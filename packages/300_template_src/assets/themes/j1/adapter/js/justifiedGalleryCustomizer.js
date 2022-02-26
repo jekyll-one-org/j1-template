@@ -147,7 +147,7 @@ j1.adapter.justifiedGalleryCustomizer = (function (j1, window) {
       // initializer
       // -----------------------------------------------------------------------
       var dependencies_met_data_loaded = setInterval(function() {
-        if (j1.getState() == 'finished' && j1.xhrDOMState['#customizer'] == 'success') {
+        if (j1.getState() == 'finished' && j1.xhrDOMState['#customizer'] == 'success' && j1.adapter.justifiedGallery.getState() == 'finished') {
           var galleryId             = '#jg_customizer';
           var $formId               = $('#jg-customizer-form');
           var $instance             = $('#jg_customizer');

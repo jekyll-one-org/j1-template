@@ -114,28 +114,34 @@ j1.adapter.justifiedGallery = (function (j1, window) {
       _this = j1.adapter.justifiedGallery;
       logger = log4javascript.getLogger('j1.adapter.justifiedGallery');
 
-      // initialize state flag
-      _this.setState('started');
-      logger.info('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module is being initialized');
+      var dependencies_met_j1_finished= setInterval(function() {
+        if (j1.getState() == 'finished') {
+          // initialize state flag
+          _this.setState('started');
+          logger.info('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module is being initialized');
 
-      {% comment %} Load module config from yml data
-      -------------------------------------------------------------------------- {% endcomment %}
-      // Load  module DEFAULTS|CONFIG
-      //
-      /* eslint-disable */
-      moduleOptions = $.extend({}, {{jf_gallery_options | replace: '=>', ':' | replace: 'nil', '""'}});
-      /* eslint-enable */
+          {% comment %} Load module config from yml data
+          ---------------------------------------------------------------------- {% endcomment %}
+          // Load  module DEFAULTS|CONFIG
+          //
+          /* eslint-disable */
+          moduleOptions = $.extend({}, {{jf_gallery_options | replace: '=>', ':' | replace: 'nil', '""'}});
+          /* eslint-enable */
 
-      if (typeof settings !== 'undefined') {
-        moduleOptions = j1.mergeData(moduleOptions, settings);
-      }
+          if (typeof settings !== 'undefined') {
+            moduleOptions = j1.mergeData(moduleOptions, settings);
+          }
 
-      _this.initialize(moduleOptions);
+          _this.initialize(moduleOptions);
 
-      _this.setState('finished');
-      logger.info('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module initialized successfully');
+          _this.setState('finished');
+          logger.info('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module initialized successfully');
+
+          clearInterval(dependencies_met_j1_finished);
+        }
+      }, 25);
     },
 
     // -----------------------------------------------------------------------
@@ -157,7 +163,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
           {% assign gallery_title         = item.gallery.title %}
           {% assign gallery_type          = item.gallery.type %}
           {% assign lightbox              = item.gallery.lightbox_options.lightbox %}
-          {% assign css_classes           = item.gallery.css_classes %}
+          {% assign theme                 = item.gallery.theme %}
           {% assign show_delay        	  = 250 %}
 
           {% if lightbox == "lg" %}
@@ -180,6 +186,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
           {% endif %}
 
           {% if item.gallery.show_delay %}  {% assign show_delay    = item.gallery.show_delay %}  {% endif %}
+          {% if item.gallery.theme %}       {% assign theme         = item.gallery.theme %}  {% endif %}
           {% if lb_options.mode %}          {% assign lb_mode       = lb_options.mode %}          {% endif %}
           {% if lb_options.cssEasing %}     {% assign lb_cssEasing  = lb_options.cssEasing %}     {% endif %}
           {% if lb_options.thumbnails %}    {% assign lb_thumbnails = lb_options.thumbnails %}    {% endif %}
@@ -219,7 +226,6 @@ j1.adapter.justifiedGallery = (function (j1, window) {
 
               for (var i in data['{{item.gallery.id}}']) {
                 var img               = data['{{item.gallery.id}}'][i].img;
-//              var img               = data['{{item.gallery.id}}'][i].image_path + '/' + data['{{item.gallery.id}}'][i].poster;
                 var captions_gallery  = data['{{item.gallery.id}}'][i].captions_gallery;
                 var captions_lightbox = data['{{item.gallery.id}}'][i].captions_lightbox;
                 var lightbox          = '{{lightbox}}';
@@ -240,6 +246,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
           {% elsif gallery_type == "video-html5" or gallery_type == "video-online" %}
 
             // Collect html5 video gallery data from data file (xhr_data_path)
+            //
             $.getJSON('{{jf_gallery_options.xhr_data_path}}', function (data) {
               var play_button = '/assets/themes/j1/modules/lightGallery/css/themes/icons/play-button.png';
               var content = '';
@@ -254,6 +261,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
                 var captions_lightbox = data['{{item.gallery.id}}'][i].captions_lightbox;
                 var video_id          = data['{{item.gallery.id}}'][i].video_id;
                 var video             = data['{{item.gallery.id}}'][i].video;
+                var theme             = data['{{item.gallery.id}}'][i].theme;
                 var player_params     = data['{{item.gallery.id}}'][i].player_params;
                 var lightbox          = '{{lightbox}}';
 
@@ -279,6 +287,8 @@ j1.adapter.justifiedGallery = (function (j1, window) {
 
               } // END for
 
+              // hidden container for the video-js player
+              //
               var hidden_video_div = '';
               for (var i in data['{{item.gallery.id}}']) {
                 var video        = data['{{item.gallery.id}}'][i].video_path + '/' + data['{{item.gallery.id}}'][i].video;
@@ -287,7 +297,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
                 var video_id     = data['{{item.gallery.id}}'][i].video_id;
                 var video_type   = video.substr(video.lastIndexOf('.') + 1);
                 hidden_video_div += '<div style="display:none;" id="' +video_id+ '">' + '\n';
-                hidden_video_div += '  <video class="lg-video-object lg-html5 video-js vjs-default-skin"' + '\n';
+                hidden_video_div += '  <video class="lg-video-object lg-html5 video-js vjs-theme-{{theme}}"' + '\n';
                 hidden_video_div += '         poster="' +poster+ '" controls="" preload="none">' + '\n';
                 hidden_video_div += '    <source src="' +video+ '" type="video/' +video_type+ '">' + '\n';
                 hidden_video_div += '    Your browser does not support HTML5 video.' + '\n';

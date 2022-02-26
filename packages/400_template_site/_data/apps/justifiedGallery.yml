@@ -219,8 +219,9 @@ settings:
         id:                             jg_video_html5
         show_delay:                     300
         title:                          false                                   # HTML5 Video Gallery
-        css_classes:
-        video_path:                     "https://github.com/jekyll-one-org/jekyll-one-lfs/raw/master/videos"
+        theme:                          city
+#       video_path:                     "https://github.com/jekyll-one-org/jekyll-one-lfs/raw/master/videos"
+        video_path:                     /assets/videos/gallery/html5
         image_path:                     /assets/videos/gallery
         thumb_path:                     /assets/videos/gallery
         videos:                         [
@@ -263,10 +264,10 @@ settings:
         image_path:                     /assets/videos/gallery
         thumb_path:                     /assets/videos/gallery
         videos:                         [
-                                          "https://www.youtube.com/watch?v=X5Cfi7U4eL4",
-                                          "https://www.youtube.com/watch?v=Nck6BZga7TQ",
-                                          "https://www.youtube.com/watch?v=F2SXmzk8ve4",
-                                          "https://www.youtube.com/watch?v=ln3wAdRAim4"
+                                          "//youtube.com/watch?v=X5Cfi7U4eL4",
+                                          "//youtube.com/watch?v=Nck6BZga7TQ",
+                                          "//youtube.com/watch?v=F2SXmzk8ve4",
+                                          "//youtube.com/watch?v=ln3wAdRAim4"
                                         ]
         captions_gallery:               [
                                           "Carpool Karaoke - Lady Gaga",
@@ -305,13 +306,13 @@ settings:
         show_delay:                     300
         title:                          false                                   # YouTube Video Gallery
         css_classes:
-        image_path:                     /assets/videos/gallery/TheVoiceKids2021
-        thumb_path:                     /assets/videos/gallery/TheVoiceKids2021
+        image_path:                     /assets/videos/gallery/voice_kids_de_2021
+        thumb_path:                     /assets/videos/gallery/voice_kids_de_2021
         videos:                         [
-                                          "https://www.youtube.com/watch?v=aQqPgLMgO-I",
-                                          "https://www.youtube.com/watch?v=Bl6tkAgaP1g",
-                                          "https://www.youtube.com/watch?v=GuiOYCv9NTI",
-                                          "https://www.youtube.com/watch?v=1bvE2mgJ22I"
+                                          "//youtube.com/watch?v=aQqPgLMgO-I",
+                                          "//youtube.com/watch?v=Bl6tkAgaP1g",
+                                          "//youtube.com/watch?v=GuiOYCv9NTI",
+                                          "//youtube.com/watch?v=1bvE2mgJ22I"
                                         ]
         player_params:                  [
                                           "start: 0, end: 148",
@@ -348,7 +349,7 @@ settings:
           videojsOptions:               {}
 
     # --------------------------------------------------------------------------
-    # Online VIDEO (Vimeo)
+    # Online VIDEO 3 (Vimeo)
     #
     - gallery:
         enabled:                        true
@@ -364,8 +365,8 @@ settings:
         image_path:                     /assets/videos/gallery
         thumb_path:                     /assets/videos/gallery
         videos:                         [
-                                          "https://vimeo.com/175582480",
-                                          "https://vimeo.com/179528528"
+                                          "//vimeo.com/175582480",
+                                          "//vimeo.com/179528528"
                                         ]
         captions_gallery:               [
                                           "Vogue -  Adriana Lima",
@@ -386,34 +387,39 @@ settings:
         lightbox_options:
           lightbox:                     lg
 
+
     # --------------------------------------------------------------------------
-    # Tutorial Videos (HTML5 VIDEO)
+    # Online VIDEO (DailyMotion)
     #
     - gallery:
         enabled:                        true
-        type:                           video-html5                             # video-html5
-        id:                             jg_video_intro
+        type:                           video-online
+        id:                             jg_video_online_dailymotion
         show_delay:                     300
-        title:                          false                                   # Introduction Videos
+        title:                          false                                   # DailyMotion Video Gallery
+        thumb_items:                    2
+        thumb_spacing:                  5
+        thumb_bordered:                 true
+        thumb_animate:                  true
         css_classes:
-        video_path:                     /assets/videos/tutorials
-        image_path:                     /assets/videos/tutorials
-        thumb_path:                     /assets/videos/tutorials
+        image_path:                     /assets/videos/gallery/dailymotion
+        thumb_path:                     /assets/videos/gallery/dailymotion
         videos:                         [
-                                          web-erzeugen.1.mp4,
-                                          web-erzeugen.2.mp4
+                                          "//dai.ly/x7u5sps",
+                                          "//dai.ly/x7tgyyc"
                                         ]
+
         captions_gallery:               [
-                                          "Ein Starter Web erzeugen",
-                                          "Noch ein Starter Web erzeugen"
+                                          "Indoor activities against boredom",
+                                          "Habits for a better start to the day"
                                         ]
         captions_lightbox:              [
-                                          "<p>Ein Starter Web erzeugen</p>",
-                                          "<p>Noch ein Starter Web erzeugen</p>"
+                                          "<p>Indoor activities against boredom</p>",
+                                          "<p>Habits for a better start to the day</p>"
                                         ]
         poster:                         [
-                                          web-erzeugen-poster.jpg,
-                                          web-erzeugen-poster.jpg
+                                          aktivitaeten.jpg,
+                                          gewohnheiten.jpg
                                         ]
         gallery_options:
           rowHeight:                    200
@@ -421,50 +427,124 @@ settings:
 
         lightbox_options:
           lightbox:                     lg
-#         mode:                         lg-fade
-#         cssEasing:                    cubic-bezier(0.25, 0, 0.25, 1)
-          videojs:                      true
-          videojsOptions:               {}
 
     # --------------------------------------------------------------------------
-    # TikTok
+    # Online VIDEO (DailyMotion)
     #
     - gallery:
         enabled:                        true
         type:                           video-online
-        id:                             jg_tiktok
+        id:                             jg_video_online_vk
         show_delay:                     300
-        title:                          false
+        title:                          false                                   # VK Video Gallery
+        thumb_items:                    2
+        thumb_spacing:                  5
+        thumb_bordered:                 true
+        thumb_animate:                  true
         css_classes:
-        image_path:                     /assets/videos/tiktok
-        thumb_path:                     /assets/videos/tiktok
+        image_path:                     /assets/videos/gallery/vk
+        thumb_path:                     /assets/videos/gallery/vk
         videos:                         [
-                                          "https://www.tiktok.com/@octaviaegon/video/6983746143356292357/",
-                                          "https://www.tiktok.com/@waluschka.w59/video/6984680288114756870/",
-                                          "https://www.tiktok.com/@octaviaegon/video/6983746143356292357/",
+                                          "//vk.com/video_ext.php?oid=-114944820&id=456242413&hash=ef5be3f71500f8df",
+                                          "//vk.com/video_ext.php?oid=-114944820&id=456239717&hash=f6651448bfb14b90"
                                         ]
         captions_gallery:               [
-                                        "Egon - Einhorn",
-                                        "Valentina - Mahlzeit!",
-                                        "Egon - Einhorn",
+                                          "Otter plague",
+                                          "Looked at the shark's mouth"
                                         ]
         captions_lightbox:              [
-                                          "<p>Egon - Einhorn</p>",
-                                          "<p>Valentina - Mahlzeit!</p>",
-                                          "<p>Egon - Einhorn</p>"
+                                          "<p>Otter plague</p>",
+                                          "<p>Looked at the shark's mouth</p>"
                                         ]
-        poster:                         [                                       # thumbnails taken from https://www.tiktok.com/oembed?url=xxx (thumbnail_url)
-                                          einhorn.jpg,                          # https://p16-sign-va.tiktokcdn.com/tos-maliva-p-0068/dd93b5e1036b47f88ecd38fdc7305c4c~tplv-dmt-logom:tos-maliva-p-0000/a6315c6d8268486c931480b6fb1e3836.image?x-expires=1629579600&x-signature=lWUMEMNw%2Byf3tTX4YOdEGRrh1%2BQ%3D
-                                          waluschka.jpg,                        # https://p16-sign-va.tiktokcdn.com/obj/tos-maliva-p-0068/03a05accd4ec443aba51f4ec8a07d3a0?x-expires=1629583200&x-signature=t%2FvV5z4I9mdjtwAzH4FOF%2Fkm9fs%3D
-                                          einhorn.jpg
+        poster:                         [
+                                          otter.jpg,
+                                          hai.jpg
                                         ]
         gallery_options:
-          rowHeight:                    400
+          rowHeight:                    200
           margins:                      5
 
         lightbox_options:
           lightbox:                     lg
 
+    # --------------------------------------------------------------------------
+    # TikTok
+    #
+    # - gallery:
+    #     enabled:                        false
+    #     type:                           video-online
+    #     id:                             jg_tiktok
+    #     show_delay:                     300
+    #     title:                          false
+    #     css_classes:
+    #     image_path:                     /assets/videos/tiktok
+    #     thumb_path:                     /assets/videos/tiktok
+    #     videos:                         [
+    #                                       "https://www.tiktok.com/@octaviaegon/video/6983746143356292357/",
+    #                                       "https://www.tiktok.com/@waluschka.w59/video/6984680288114756870/",
+    #                                       "https://www.tiktok.com/@octaviaegon/video/6983746143356292357/",
+    #                                     ]
+    #     captions_gallery:               [
+    #                                     "Egon - Einhorn",
+    #                                     "Valentina - Mahlzeit!",
+    #                                     "Egon - Einhorn",
+    #                                     ]
+    #     captions_lightbox:              [
+    #                                       "<p>Egon - Einhorn</p>",
+    #                                       "<p>Valentina - Mahlzeit!</p>",
+    #                                       "<p>Egon - Einhorn</p>"
+    #                                     ]
+    #     poster:                         [                                       # thumbnails taken from https://www.tiktok.com/oembed?url=xxx (thumbnail_url)
+    #                                       einhorn.jpg,                          # https://p16-sign-va.tiktokcdn.com/tos-maliva-p-0068/dd93b5e1036b47f88ecd38fdc7305c4c~tplv-dmt-logom:tos-maliva-p-0000/a6315c6d8268486c931480b6fb1e3836.image?x-expires=1629579600&x-signature=lWUMEMNw%2Byf3tTX4YOdEGRrh1%2BQ%3D
+    #                                       waluschka.jpg,                        # https://p16-sign-va.tiktokcdn.com/obj/tos-maliva-p-0068/03a05accd4ec443aba51f4ec8a07d3a0?x-expires=1629583200&x-signature=t%2FvV5z4I9mdjtwAzH4FOF%2Fkm9fs%3D
+    #                                       einhorn.jpg
+    #                                     ]
+    #     gallery_options:
+    #       rowHeight:                    400
+    #       margins:                      5
+    #
+    #     lightbox_options:
+    #       lightbox:                     lg
+
+    # --------------------------------------------------------------------------
+    # Tutorial Videos (HTML5 VIDEO)
+    #
+#     - gallery:
+#         enabled:                        true
+#         type:                           video-html5                             # video-html5
+#         id:                             jg_video_intro
+#         show_delay:                     300
+#         title:                          false                                   # Introduction Videos
+#         css_classes:
+#         video_path:                     /assets/videos/tutorials
+#         image_path:                     /assets/videos/tutorials
+#         thumb_path:                     /assets/videos/tutorials
+#         videos:                         [
+#                                           web-erzeugen.1.mp4,
+#                                           web-erzeugen.2.mp4
+#                                         ]
+#         captions_gallery:               [
+#                                           "Ein Starter Web erzeugen",
+#                                           "Noch ein Starter Web erzeugen"
+#                                         ]
+#         captions_lightbox:              [
+#                                           "<p>Ein Starter Web erzeugen</p>",
+#                                           "<p>Noch ein Starter Web erzeugen</p>"
+#                                         ]
+#         poster:                         [
+#                                           web-erzeugen-poster.jpg,
+#                                           web-erzeugen-poster.jpg
+#                                         ]
+#         gallery_options:
+#           rowHeight:                    200
+#           margins:                      5
+#
+#         lightbox_options:
+#           lightbox:                     lg
+# #         mode:                         lg-fade
+# #         cssEasing:                    cubic-bezier(0.25, 0, 0.25, 1)
+#           videojs:                      true
+#           videojsOptions:               {}
 
 # ------------------------------------------------------------------------------
 # END config

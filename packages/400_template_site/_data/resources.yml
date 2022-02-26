@@ -1343,9 +1343,9 @@ resources:
       id:                               video_js
       comment:                          module videojs
       region:                           head
-      layout:                           [ home, page, post, collection, blog_archive ]
+      layout:                           [ all ]
       required:                         ondemand
-      preload:                          false                                   # property currently unused
+      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1371,9 +1371,9 @@ resources:
       id:                               vimeo_froogaloop
       comment:                          module vimeo_froogaloop
       region:                           head
-      layout:                           [ home, page, post, collection, blog_archive ]
+      layout:                           [ all ]
       required:                         ondemand
-      preload:                          false                                   # property currently unused
+      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1393,9 +1393,9 @@ resources:
       id:                               vimeo_player
       comment:                          module vimeo_player
       region:                           head
-      layout:                           [ home, page, post, collection, blog_archive ]
+      layout:                           [ all ]
       required:                         ondemand
-      preload:                          false                                   # property currently unused
+      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
@@ -1416,7 +1416,7 @@ resources:
       id:                               rangeslider
       comment:                          module rangeSlider
       region:                           head
-      layout:                           [ page, post, collection, raw ]
+      layout:                           [ all ]
       required:                         ondemand
       preload:                          false
       script_load:                      defer
