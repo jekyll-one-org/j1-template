@@ -1361,7 +1361,7 @@
                 try {
                     $(this).data('lightGallery').init();
                 } catch (err) {
-                    console.error('lightGallery has not initiated properly');
+                    console.error('lightGallery has not been initiated properly');
                 }
             }
         });

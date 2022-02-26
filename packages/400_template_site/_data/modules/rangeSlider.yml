@@ -43,7 +43,7 @@ settings:
         id:                             example_slider
 
         options:
-          label:                        Example Slider 1
+          label:                        "Slider 1, range: [0,100], start at: 20"
           start:                        20
           range:
             min:                        0
@@ -57,7 +57,7 @@ settings:
         id:                             example_slider_2
 
         options:
-          label:                        Example Slider 2
+          label:                        "Slider 2, range: [0,200], start at: 80"
           start:                        80
           range:
             min:                        0

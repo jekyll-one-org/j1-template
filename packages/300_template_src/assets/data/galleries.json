@@ -95,17 +95,20 @@ exclude_from_search:                    true
       {% for video in item.gallery.videos %}
         {% assign image_no = forloop.index %}
       {
+        "video":             "{{ video }}",
+        "image_path":        "{{ item.gallery.image_path }}",
+
         {% if item.gallery.type == "video-html5" %}
         "video_path":        "{{ item.gallery.video_path }}",
         "video_id":          "{{ video | slugify }}",
         {% endif %}
-        "image_path":        "{{ item.gallery.image_path }}",
+
         {% for poster in item.gallery.poster %}
         {% if forloop.index == image_no %}
         "poster":   	       "{{ poster }}",
         {% endif %}
         {% endfor %}
-        "video":             "{{ video }}",
+
         {% if item.gallery.captions_lightbox %}
         {% for caption in item.gallery.captions_lightbox %}
         {% if forloop.index == image_no %}
@@ -113,6 +116,15 @@ exclude_from_search:                    true
         {% endif %}
         {% endfor %}
         {% endif %}
+
+        {% if item.gallery.player_params %}
+        {% for params in item.gallery.player_params %}
+        {% if forloop.index == image_no %}
+        "player_params":     "{{ params }}",
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
         {% if item.gallery.captions_gallery %}
         {% for caption in item.gallery.captions_gallery %}
         {% if forloop.index == image_no %}

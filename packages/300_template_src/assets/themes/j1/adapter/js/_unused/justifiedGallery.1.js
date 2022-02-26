@@ -249,6 +249,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
               {% endif %}
 
               for (var i in data['{{item.gallery.id}}']) {
+//              var img               = data['{{item.gallery.id}}'][i].img;
                 var img               = data['{{item.gallery.id}}'][i].image_path + '/' + data['{{item.gallery.id}}'][i].poster;
                 var captions_gallery  = data['{{item.gallery.id}}'][i].captions_gallery;
                 var captions_lightbox = data['{{item.gallery.id}}'][i].captions_lightbox;
@@ -263,8 +264,8 @@ j1.adapter.justifiedGallery = (function (j1, window) {
                   content += ' data-html="#' +video_id+ '">' + '\n';
                   {% endif %}
                   {% if gallery_type == "video-online" %}
-                  content += ' data-src="' +video+ '"';
-                  content += ' data-options="' +player_params+ '"' + '>' + '\n';
+                  content += ' data-options="' +player_params+ '\n';
+                  content += ' data-src="' +video+ '">' + '\n';
                   {% endif %}
                   content +=  'href="' +img+ '">' + '\n';
                   content +=  '<img src="' +img+ '" img alt="' +captions_lightbox+ '">' + '\n';

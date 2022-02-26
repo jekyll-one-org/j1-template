@@ -187,14 +187,29 @@ gallery::jg_video_html5[role="mb-5"]
 
 == Online video content
 
-The Internet is full of inspiring content. Video content is popular,
-the number of channels on _YouTube_ is enormous. If you want to present
-video content from the Internet, e.g., your channel, the online video
-support of J1 Template may be the right choice. Find some enjoyable videos
-from James Cordon's channel: Carpool Karaoke.
+The Internet is full of inspiring content. If you want to present video
+content from the Internet, the online video support of J1 Template is the
+right choice.
 
-.YouTube Video Gallery - Carpool Karaoke
+=== YouTube
+
+The number of channels on YouTube is enormous. For TV-Stations it's a must
+to publish videos of their shows. Find below a current gallery from Germany's
+*The Voice Kids* (SAT.1) and a real classic channel from the frontman James Corden
+of *The Late Late Show* at CBS, Los Angeles.
+
+.The Voice Kids, Germany 2021
+gallery::jg_video_online_youtube_2[role="mb-5"]
+
+.James Cordon's Carpool Karaoke
 gallery::jg_video_online_youtube[role="mb-5"]
+
+=== Vimeo
+
+Vimeo is a video sharing platform that includes features such as live-streaming
+and customization. These services include video creation, editing, broadcasting
+tools and connecting with clients. The bottom line is that Vimeo allows you
+to create high quality, professional videos and reach audiences worldwide
 
 .Vimeo Video Gallery - Fashion
 gallery::jg_video_online_vimeo[role="mb-5"]

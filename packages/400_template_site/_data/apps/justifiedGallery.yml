@@ -296,6 +296,58 @@ settings:
           videojsOptions:               {}
 
     # --------------------------------------------------------------------------
+    # Online VIDEO 2 (YouTube)
+    #
+    - gallery:
+        enabled:                        true
+        type:                           video-online
+        id:                             jg_video_online_youtube_2
+        show_delay:                     300
+        title:                          false                                   # YouTube Video Gallery
+        css_classes:
+        image_path:                     /assets/videos/gallery/TheVoiceKids2021
+        thumb_path:                     /assets/videos/gallery/TheVoiceKids2021
+        videos:                         [
+                                          "https://www.youtube.com/watch?v=aQqPgLMgO-I",
+                                          "https://www.youtube.com/watch?v=Bl6tkAgaP1g",
+                                          "https://www.youtube.com/watch?v=GuiOYCv9NTI",
+                                          "https://www.youtube.com/watch?v=1bvE2mgJ22I"
+                                        ]
+        player_params:                  [
+                                          "start: 0, end: 148",
+                                          "start: 0, end: 122",
+                                          "start: 0, end: 104",
+                                          "start: 10, end: 173"
+                                        ]
+
+        captions_gallery:               [
+                                          "The Voice Kids Germany 2021 - Constance",
+                                          "The Voice Kids Germany 2021 - Elisa",
+                                          "The Voice Kids Germany 2021 - Ben",
+                                          "The Voice Kids Germany 2021 - The Battle"
+                                        ]
+        captions_lightbox:              [
+                                          "<p>14-year-old Constance has dreamed of being on The Voice Kids stage for a very long time. Your dream has finally come true! She performs a breathtaking version of Sia's song Alive.</p>",
+                                          "<p>14-year-old Elisa is fascinated by the classics of pop music. Her version of Hey Jude from The Beatles comes with a lot of feeling.</p>",
+                                          "<p>14-year-old Ben pours all of his emotions into his performance of Maroon 5's Sunday Morning. He wants to show what he's made of.</p>",
+                                          "<p>The battle of the three young people is a real emotional battle. Elisa's husky voice, Constanze's unbelievable power, and Ben's rhythm come into their own in Adele's James Bond theme song Skyfall.</p>"
+                                        ]
+        poster:                         [
+                                          constance.jpg, elisa.jpg,
+                                          ben.jpg, battle.jpg
+                                        ]
+        gallery_options:
+          rowHeight:                    200
+          margins:                      5
+
+        lightbox_options:
+          lightbox:                     lg
+#         mode:                         lg-fade
+#         cssEasing:                    cubic-bezier(0.25, 0, 0.25, 1)
+          videojs:                      true
+          videojsOptions:               {}
+
+    # --------------------------------------------------------------------------
     # Online VIDEO (Vimeo)
     #
     - gallery:

@@ -27,7 +27,6 @@
         var defaults = {
             videoMaxWidth: '855px',
             autoplayFirstVideo: true,
-
             youtubePlayerParams: false,
             tiktokPlayerParams: false,
             youpornPlayerParams: false,
@@ -86,6 +85,7 @@
             var autoplay = 1;
             var a = '';
             var isVideo = this.core.isVideo(src, index) || {};
+            var videoOptions;
 
             // Enable autoplay based on setting for first video if poster doesn't exist
             if (noPoster) {
@@ -98,20 +98,36 @@
 
             // jadams
             if (isVideo.youtube) {
+              // jadams
+              var videoOptions = false;
 
-                a = '?wmode=opaque&autoplay=' + autoplay + '&enablejsapi=1';
-                if (this.core.s.youtubePlayerParams) {
-                    a = a + '&' + $.param(this.core.s.youtubePlayerParams);
-                }
+              a = '?wmode=opaque&autoplay=' + autoplay + '&enablejsapi=1';
+              var options = this.core.$items[index].dataset.options;
+              if (options !== 'undefined' && options.length) {
+                options   = options.replace(/ /g, "");
+                var pairs = options.split(',');                               // create an array of 'key=value' pairs
+//              var obj   = pairs.reduce((obj, data) => {                     // transform array in an object of 'key=value' pairs
+                var obj   = pairs.reduce(function (obj, data) {                     // transform array in an object of 'key=value' pairs
+                    let [k, v] = data.split(':')                              // split each pair into key/value
+                    obj[k] = v                                                // add key-value pair to the object
+                    return obj
+                }, {});
+                videoOptions = obj;
+              }
 
-                video = '<iframe class="lg-video-object lg-youtube ' + addClass + '" width="560" height="315" src="//www.youtube.com/embed/' + isVideo.youtube[1] + a + '" frameborder="0" allowfullscreen></iframe>';
-            // jadams
+              if (this.core.s.youtubePlayerParams) {
+                  a = a + '&' + $.param(this.core.s.youtubePlayerParams);
+              } else if (videoOptions) {
+                  a = a + '&' + $.param(videoOptions);
+              }
+              video = '<iframe class="lg-video-object lg-youtube ' + addClass + '" width="560" height="315" src="//www.youtube.com/embed/' + isVideo.youtube[1] + a + '" frameborder="0" allowfullscreen></iframe>';
+
             } else if (isVideo.tiktok) {
-
+              // jadams
                 a = '?wmode=opaque&autoplay=' + autoplay + '&enablejsapi=1';
-                if (this.core.s.youtubePlayerParams) {
-                    a = a + '&' + $.param(this.core.s.youtubePlayerParams);
-                }
+//              if (this.core.s.youtubePlayerParams) {
+//                a = a + '&' + this.core.s.youtubePlayerParams);
+//              }
 //              video = '<iframe loading="lazy" class="lg-video-object lg-youtube lg-tiktok' + addClass + '" width="340" height="700"  src="https://www.tiktok.com/embed/' + isVideo.tiktok[2] + a + '" frameborder="0" scrolling=no allow="fullscreen"></iframe>';
 //              video = '<iframe class="lg-video-object lg-youtube ' + addClass + '" width="560" height="315"  src="https://www.tiktok.com/embed/' + isVideo.tiktok[2] + a + '" frameborder="0" scrolling=no allowfullscreen name="yp_embed_video" frameborder="0"></iframe>';
 //              video = '<iframe loading="lazy" class="lg-video-object lg-tiktok ' + addClass + '" width="340" height="700"  src="https://www.tiktok.com/embed/' + isVideo.tiktok[2] + '" frameborder="0" scrolling=no allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" name="yp_embed_video" frameborder="0"></iframe>';
