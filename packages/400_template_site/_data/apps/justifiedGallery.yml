@@ -429,7 +429,7 @@ settings:
           lightbox:                     lg
 
     # --------------------------------------------------------------------------
-    # Online VIDEO (DailyMotion)
+    # Online VIDEO (VK)
     #
     - gallery:
         enabled:                        true
@@ -450,11 +450,11 @@ settings:
                                         ]
         captions_gallery:               [
                                           "Otter plague",
-                                          "Looked at the shark's mouth"
+                                          "Looked at the shark's mouth (whale shark)"
                                         ]
         captions_lightbox:              [
                                           "<p>Otter plague</p>",
-                                          "<p>Looked at the shark's mouth</p>"
+                                          "<p>Looked at the shark's mouth (whale shark)</p>"
                                         ]
         poster:                         [
                                           otter.jpg,
