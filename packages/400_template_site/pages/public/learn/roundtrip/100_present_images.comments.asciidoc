@@ -209,21 +209,18 @@ carousel::demo_oneslide[role="mb-3"]
 
 JustifiedGallery is a great jQuery plugin to create responsive, infinite,
 and high-quality justified image galleries. J1 Template combines the Gallery
-with the lightboxes supported to enlarge the images of a gallery.
-
-See JustifiedGallery in action - and for sure, all that you see is even
-responsive. Change the size of your current browser window, by width or height,
-to see what will happen!
+with the lightboxes supported to enlarge the images of a gallery. See the
+gallery in action; and for sure, all that you see is even responsive. Change
+the size of your current browser window, by width or height to see what will
+happen!
 
 Pictures you've made are typically not even in size. Images may have the
 same size (resolution), but some are orientated landscapes, or others
 may be portraits. For that reason, a more powerful gallery is needed to create
-so-called justified views.
-
-JustifiedGallery uses a so-called masonry grid layout. It works by
-placing elements in an optimal position based on available horizontal and
-vertical space. Sort of like mason fitting stones in a wall. You'll have
-seen it in use all over the Internet!
+so-called justified views. JustifiedGallery uses a so-called masonry grid
+layout. It works by placing elements in an optimal position based on available
+horizontal and vertical space. Sort of like mason fitting stones in a wall.
+You'll have seen it in use all over the Internet!
 
 .Masonry grid layout of JustifiedGallery
 gallery::jg_customizer[]

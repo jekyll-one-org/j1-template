@@ -33,6 +33,21 @@
     border: 1px dotted #616161;
 }
 
+// Additional utility classes for "sizing"
+// -----------------------------------------------------------------------------
+.wm-200, .wmax-200 {
+  max-width: 200px !important;
+}
+.wm-400, .wmax-400 {
+  max-width: 400px !important;
+}
+.wm-600, .wmax-600 {
+  max-width: 600px !important;
+}
+.wm-800, .wmax-800 {
+  max-width: 800px !important;
+}
+
 // GLOBAL Styles (selected styles taken from previous globals.css)
 // -----------------------------------------------------------------------------
 .g-color-white-opacity-0_6, .g-color-white-opacity-0_6--hover:hover {
