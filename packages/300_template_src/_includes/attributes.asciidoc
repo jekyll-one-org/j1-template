@@ -28,6 +28,11 @@ tag::urls[]
 :url-asciidoctor--extensions-use:                 https://github.com/asciidoctor/asciidoctor-extensions-lab#using-an-extension
 :url-asciidoctor--extensions-manual:              http://asciidoctor.org/docs/user-manual/#extensions
 
+:url-alexa-scores--youtube:                       https://www.alexa.com/siteinfo/youtube.com
+:url-alexa-scores--vimeo:                         https://www.alexa.com/siteinfo/vimeo.com
+:url-alexa-scores--dailymotion:                   https://www.alexa.com/siteinfo/dailymotion.com
+:url-alexa-scores--vk:                            https://www.alexa.com/siteinfo/vk.com
+
 :url-babel-js--home:                              https://babeljs.io/
 :url-babel-js--gh-repo:                           https://github.com/babel/babel/
 
@@ -108,6 +113,8 @@ tag::urls[]
 :url-cors--gh-repo:                               https://github.com/expressjs/cors/
 :url-cross-env--gh-repo:                          https://github.com/kentcdodds/cross-env/
 :url-cross-var--gh-repo:                          https://github.com/elijahmanor/cross-var/
+
+:url-dailymotion--home:                           https://www.dailymotion.com/
 
 :url-datatables--home:                            https://datatables.net/
 :url-docker--home:                                https://getbootstrap.com/
@@ -359,6 +366,9 @@ tag::urls[]
 
 :url-vimeo--home:                                 https://vimeo.com/
 :url-vimeo--privacy-policy:                       https://vimeo.com/privacy
+
+:url-vivendi--home:                               https://www.vivendi.com/en/
+:url-vk--home:                                    https://vk.com/
 
 :url-webpack--home:                               https://webpack.js.org/
 :url-webpack--gh-repo:                            https://github.com/webpack/webpack/
