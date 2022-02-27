@@ -168,21 +168,23 @@ how to use LightGallery for commercial websites and projects.
 
 == Local Video content
 
-Digital image content, simple pictures or videos, are easy to make. Today, every mobile has a camera - not that bad! Presenting a bunch
-of (digital) pictures is done very easily by using Justified Gallery, for example.
-Videos created by a digicam or a mobile can be played by J1 Template using the
-HTML5 Video support of LightGallery.
+Digital image content, simple pictures or videos, are easy to make. Today,
+every mobile has a camera - not that bad! Presenting a bunch of (digital)
+pictures is done very easily by using Justified Gallery, for example.
+Videos created by a digicam or a mobile can be played by J1 Template using
+the HTML5 Video support. Present videos you have made at it's best.
 
 Two players are available with LightGallery:
 
 . an internal player used by default
 . {url-videojs--home}[video.js, {browser-window--new}], a excellent
-  Javascript video library
+  Javascript video library including a great player
 
-NOTE: The HTML5 specification does _not_ define which video and audio formats
-browsers _should_ support. J1 LightGallery can play all types of standard
+NOTE: The HTML5 specification does *not* define which video and audio formats
+browsers *should* support. J1 LightGallery can play all types of standard
 HTML5 Video formats on modern browsers today (MP4, WebM, and Ogg).
 
+.MP4 Videos - VideoJS Player
 gallery::jg_video_html5[role="mb-5"]
 
 == Online Video content
@@ -242,7 +244,7 @@ length of 60 minutes. If a user is a MotionMaker or MotionPartner, a program
 for particularly creative users or partners, they can upload videos of
 unlimited length.
 
-.DailyMotion Video Gallery - Lifestyle
+.DailyMotion Video Gallery - SELF Magazine (Channel)
 gallery::jg_video_online_dailymotion[role="mb-5"]
 
 === VK

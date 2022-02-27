@@ -403,21 +403,21 @@ settings:
         image_path:                     /assets/videos/gallery/dailymotion
         thumb_path:                     /assets/videos/gallery/dailymotion
         videos:                         [
-                                          "//dai.ly/x7u5sps",
-                                          "//dai.ly/x7tgyyc"
+                                          "//dai.ly/x887s09",
+                                          "//dai.ly/x87ycik"
                                         ]
 
         captions_gallery:               [
-                                          "Indoor activities against boredom",
-                                          "Habits for a better start to the day"
+                                          "Guided Meditation: Morning Energy",
+                                          "Beginner Mat Pilates: Core Workout"
                                         ]
         captions_lightbox:              [
-                                          "<p>Indoor activities against boredom</p>",
-                                          "<p>Habits for a better start to the day</p>"
+                                          "<p>Guided Meditation: Morning Energy</p>",
+                                          "<p>Beginner Mat Pilates: Core Workout</p>"
                                         ]
         poster:                         [
-                                          aktivitaeten.jpg,
-                                          gewohnheiten.jpg
+                                          meditation.jpg,
+                                          pilates.jpg
                                         ]
         gallery_options:
           rowHeight:                    200
