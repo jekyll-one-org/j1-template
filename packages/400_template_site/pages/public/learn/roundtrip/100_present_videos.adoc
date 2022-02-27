@@ -201,9 +201,9 @@ content every day. The
 link:{url-alexa-scores--youtube}[Alexa Internet, {browser-window--new}]
 scores are impressive. For good reasons: the number of channels on YouTube
 is enormous. For TV-Stations, it's a must to publish videos of their shows
-on YouTube. Find below a current gallery from *The Voice Kids* (SAT.1) Germany
-and a classic channel from the frontman James Corden of *The Late Late Show*
-at CBS, Los Angeles.
+on YouTube. Find below a current gallery from *The Voice Kids* (SAT.1)
+Germany and a real classic channel *Carpool Karaoke* from the frontman James
+Corden of *The Late Late Show* at CBS, Los Angeles.
 
 .The Voice Kids, Germany 2021
 gallery::jg_video_online_youtube_2[role="mb-5"]
