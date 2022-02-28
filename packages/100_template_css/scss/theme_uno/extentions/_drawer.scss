@@ -67,9 +67,8 @@
 }
 
 // jadams, 2022-02-21: set bg color for dark theme compatibility
-//
 .bmd-layout-drawer {
-  background: $lighten-200;
+  background: var(--bs-body-bg);
 }
 
 // Sizing and positioning

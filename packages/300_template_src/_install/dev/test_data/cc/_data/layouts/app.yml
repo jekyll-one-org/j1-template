@@ -103,7 +103,7 @@ lanes:
 #   Page HEADER (region body-header)
 #
 #   NOTE:
-#     All pages are using a specific banner to display a title and a
+#     All pages are using a specific header to display a title and a
 #     tagline. Title and tagline are to be configured with the FRONTMATTER
 #     of a page for individual data (text).
 #

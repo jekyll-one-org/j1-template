@@ -249,10 +249,11 @@ a.news-link {
   color: #fff !important;
 }
 
+// jadams, 2022-02-21: disabled color for dark theme compatibility
 .series-exerpt {
   text-align: justify;
   padding: 0px 20px 10px 0px;
-  color: $gray-900;
+//  color: $gray-900;
 }
 
 .series-exerpt-title {
