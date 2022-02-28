@@ -1002,22 +1002,20 @@ kbd {
   color: rgba(51, 51, 51, 0.8)
 }
 
+// jadams 2022-02-28: Use BS default colors for kbd styles
 kbd:not(.keyseq) {
+//  color: $darken-800;
+//  line-height: 1.4; jadams,2020-04-18
+//  background-color: $grey-300;
+//  border: $pre--border;
     display: inline-block;
-    // color: $darken-800;
     font-size: 0.75em;
-    // line-height: 1.4; jadams,2020-04-18
-    background-color: $grey-300;
-    border: $pre--border;
     -webkit-border-radius: 3px;
     border-radius: 3px;
     margin: -0.15em 0.15em 0 0.15em;
     padding: 0.2em 0.6em 0.2em 0.5em;
     vertical-align: middle;
     white-space: nowrap;
-// -webkit-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 0.1em #fff inset;
-// -moz-box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 0.1em #fff inset;
-// box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), 0 0 0 0.1em #fff inset;
 }
 
 .keyseq kbd:first-child {
