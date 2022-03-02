@@ -16,6 +16,100 @@
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
+# Menu no level
+# - item:                                 Sandbox
+#   href:                                 /pages/public/sandbox/simple/
+
+# ------------------------------------------------------------------------------
+# Menu 3-level
+#
+# - item:                                 3-Level
+#   sublevel:
+#
+#     - title:                            This site
+#       icon:                             home-variant-outline
+#       href:                             /pages/public/about/site
+#     - title:                            Privacy
+#       icon:                             heart
+#       href:                             /pages/public/legal/en/privacy/
+#     - title:                            Impress
+#       icon:                             gavel
+#       href:                             /pages/public/legal/en/impress/
+#     - title:                            Jekyll
+#       icon:                             flask
+#     - title:                            Privacy
+#       icon:                             heart
+#       href:                             /pages/public/legal/en/privacy/
+#
+#     - title:                            Jekyll
+#       icon:                             flask
+#       dropdown:
+#
+#         - title:                        User Guide
+#           icon:                         book-open-page-variant
+#           dropdown:
+#
+#             - title:                    Commandline
+#               href:                     /pages/protected/manuals/jekyll/user_guide/commandline/
+#               icon:                     console-line
+#             - title:                    Configuration
+#               href:                     /pages/protected/manuals/jekyll/user_guide/configuration/
+#               icon:                     code-braces
+#             - title:                    Managing Pages
+#               href:                     /pages/protected/manuals/jekyll/user_guide/managing_pages/
+#               icon:                     book-open-page-variant
+#             - title:                    Managing Posts
+#               href:                     /pages/protected/manuals/jekyll/user_guide/managing_posts/
+#               icon:                     blogger
+#             - title:                    Managing Collections
+#               href:                     /pages/protected/manuals/jekyll/user_guide/managing_collections/
+#               icon:                     collage
+#             - title:                    Jekyll Date formats
+#               href:                     /pages/protected/manuals/jekyll/user_guide/date_formats/
+#               icon:                     calendar-blank
+#             - title:                    Commandline
+#               href:                     /pages/protected/manuals/jekyll/user_guide/commandline/
+#               icon:                     console-line
+#             - title:                    Configuration
+#               href:                     /pages/protected/manuals/jekyll/user_guide/configuration/
+#               icon:                     code-braces
+#             - title:                    Managing Pages
+#               href:                     /pages/protected/manuals/jekyll/user_guide/managing_pages/
+#               icon:                     book-open-page-variant
+#             - title:                    Managing Posts
+#               href:                     /pages/protected/manuals/jekyll/user_guide/managing_posts/
+#               icon:                     blogger
+#             - title:                    Managing Collections
+#               href:                     /pages/protected/manuals/jekyll/user_guide/managing_collections/
+#               icon:                     collage
+#             - title:                    Jekyll Date formats
+#               href:                     /pages/protected/manuals/jekyll/user_guide/date_formats/
+#               icon:                     calendar-blank
+#
+#
+#         - title:                        Where to go
+#           href:                         /pages/public/learn/where_to_go/
+#           icon:                         paw
+#         - title:                        Where to go
+#           href:                         /pages/public/learn/where_to_go/
+#           icon:                         paw
+#         - title:                        Where to go
+#           href:                         /pages/public/learn/where_to_go/
+#           icon:                         paw
+#         - title:                        Where to go
+#           href:                         /pages/public/learn/where_to_go/
+#           icon:                         paw
+#         - title:                        Where to go
+#           href:                         /pages/public/learn/where_to_go/
+#           icon:                         paw
+#         - title:                        Where to go
+#           href:                         /pages/public/learn/where_to_go/
+#           icon:                         paw
+#         - title:                        Where to go
+#           href:                         /pages/public/learn/where_to_go/
+#           icon:                         paw
+
+# ------------------------------------------------------------------------------
 # Menu LEARN
 #
 - item:                                 Learn
@@ -81,27 +175,38 @@
 #
 - item:                                 Tools
   sublevel:
-    - title:                            Gallery Previewer
-      href:                             /pages/public/previewer/justified_gallery/
-      icon:                             view-dashboard
-    - title:                            MDI Icon Previewer
-      href:                             /pages/public/previewer/mdi_font/
-      icon:                             fan
-    - title:                            Twitter Emoji Previewer
-      href:                             /pages/public/previewer/twitter_emoji/
-      icon:                             emoticon-cool-outline
-    - title:                            Rouge Theme Previewer
-      href:                             /pages/public/previewer/rouge/
-      icon:                             code-parentheses
-    - title:                            MD Color Palette
-      href:                             /pages/public/previewer/color_palette/
-      icon:                             format-color-fill
 
-# Currently NOT used
-#
-#   - title:                            Automagic iFrame
-#     href:                             /pages/public/iframer/
-#     icon:                             image-filter-none
+    # --------------------------------------------------------------------------
+    # Previewer
+    #
+    - title:                            Previewer
+      icon:                             eye
+      dropdown:
+
+      - title:                          Country Flags
+        href:                           /pages/public/previewer/country_flags/
+        icon:                           flag
+      - title:                          MD Color Palette
+        href:                           /pages/public/previewer/color_palette/
+        icon:                           format-color-fill
+      - title:                          MDI Icons (regular)
+        href:                           /pages/public/previewer/mdi_font/
+        icon:                           alarm-light
+      - title:                          MDI Icons (light)
+        href:                           /pages/public/previewer/mdil_font/
+        icon:                           alarm-light-outline
+      - title:                          Twitter Emojis
+        href:                           /pages/public/previewer/twitter_emoji/
+        icon:                           emoticon-cool-outline
+      - title:                          Rouge Themes
+        href:                           /pages/public/previewer/rouge/
+        icon:                           code-parentheses
+      - title:                          Range Slider
+        href:                           /pages/public/previewer/range-slider/
+        icon:                           arrow-decision-outline
+      - title:                          Justified Gallery
+        href:                           /pages/public/previewer/justified_gallery/
+        icon:                           view-dashboard
 
 # ------------------------------------------------------------------------------
 # Menu BLOG
@@ -309,6 +414,10 @@
     - title:                            Impress
       icon:                             gavel
       href:                             /pages/public/legal/en/impress/
+    - title:                            Comments
+      icon:                             comment
+      href:                             /pages/public/legal/en/comment_policy/
+
 
 # ------------------------------------------------------------------------------
 # END config

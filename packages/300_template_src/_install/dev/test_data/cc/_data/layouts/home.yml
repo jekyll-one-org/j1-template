@@ -100,7 +100,7 @@
 lanes:
 
   # ----------------------------------------------------------------------------
-  # MASTER Header
+  # MASTER header (attic)
   #
   - lane:
       enabled:                          true

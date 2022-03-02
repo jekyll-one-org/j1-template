@@ -118,33 +118,37 @@ j1.adapter.lightbox = (function (j1, window) {
       _this   = j1.adapter.lightbox;
       logger  = log4javascript.getLogger('j1.adapter.lightbox');
 
-      j1.adapter.lightbox.state = 'pending';
-      _this.setState('started');
-      logger.info('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module is being initialized');
+      var dependencies_met_j1_finished = setInterval(function() {
+        if (j1.getState() == 'finished') {
 
-      /* eslint-disable */
-      lightbox.option({
-        alwaysShowNavOnTouchDevices:  {{ lightbox_options.alwaysShowNavOnTouchDevices | json }},
-        albumLabel:                   {{ lightbox_options.albumLabel | json }},
-        disableScrolling:             {{ lightbox_options.disableScrolling | json }},
-        fadeDuration:                 {{ lightbox_options.fadeDuration | json }},
-        fitImagesInViewport:          {{ lightbox_options.fitImagesInViewport | json }},
-        imageFadeDuration:            {{ lightbox_options.imageFadeDuration | json }},
-        maxWidth:                     {{ lightbox_options.maxWidth | json }},
-        maxHeight:                    {{ lightbox_options.maxHeight | json }},
-        positionFromTop:              {{ lightbox_options.positionFromTop | json }},
-        resizeDuration:               {{ lightbox_options.resizeDuration | json }},
-        showImageNumberLabel:         {{ lightbox_options.showImageNumberLabel | json }},
-        wrapAround:                   {{ lightbox_options.wrapAround | json }}
-      });
-      /* eslint-enable */
+          _this.setState('started');
+          logger.info('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module is being initialized');
 
-      _this.setState('finished');
-      logger.info('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'initializing module finished');
+          /* eslint-disable */
+          lightbox.option({
+            alwaysShowNavOnTouchDevices:  {{ lightbox_options.alwaysShowNavOnTouchDevices | json }},
+            albumLabel:                   {{ lightbox_options.albumLabel | json }},
+            disableScrolling:             {{ lightbox_options.disableScrolling | json }},
+            fadeDuration:                 {{ lightbox_options.fadeDuration | json }},
+            fitImagesInViewport:          {{ lightbox_options.fitImagesInViewport | json }},
+            imageFadeDuration:            {{ lightbox_options.imageFadeDuration | json }},
+            maxWidth:                     {{ lightbox_options.maxWidth | json }},
+            maxHeight:                    {{ lightbox_options.maxHeight | json }},
+            positionFromTop:              {{ lightbox_options.positionFromTop | json }},
+            resizeDuration:               {{ lightbox_options.resizeDuration | json }},
+            showImageNumberLabel:         {{ lightbox_options.showImageNumberLabel | json }},
+            wrapAround:                   {{ lightbox_options.wrapAround | json }}
+          });
+          /* eslint-enable */
 
-      return true;
+          _this.setState('finished');
+          logger.info('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'initializing module finished');
+
+          clearInterval(dependencies_met_j1_finished);
+        } // END dependencies_met_j1_finished
+      }, 25);
     }, // END init lightbox
 
     // -------------------------------------------------------------------------
