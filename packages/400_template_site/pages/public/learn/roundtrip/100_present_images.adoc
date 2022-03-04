@@ -16,9 +16,8 @@ permalink:                              /pages/public/learn/roundtrip/present_im
 regenerate:                             false
 
 resources:                              [
-                                          animate, clipboard,
-                                          carousel, justifiedGallery,
-                                          lightbox, lightGallery,
+                                          animate, clipboard, carousel,
+                                          justifiedGallery, lightbox, lightGallery,
                                           rouge
                                         ]
 resource_options:
