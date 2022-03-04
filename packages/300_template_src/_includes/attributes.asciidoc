@@ -496,6 +496,9 @@ tag::data[]
 
 :data-translator--icon:                           "pages/tools/translator-icon.jpg, QuickLinks - Translator Icon"
 
+:data-images-lightbox--standalone:                "modules/gallery/old_times/image_02.jpg, GrandPa's 80th Birthday"
+:data-images-lightbox--group:                     "modules/gallery/old_times/image_03.jpg, GrandPa's annual journey, modules/gallery/old_times/image_04.jpg, GrandPa's annual journey"
+
 end::data[]
 
 

@@ -126,7 +126,7 @@ j1.adapter.attic = (function (j1, window) {
       _this['frontmatterOptions'] = frontmatterOptions;
 
       _this.setState('started');
-      logger.info('\n' + 'state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
       _this.loadHeader(frontmatterOptions);
@@ -238,7 +238,7 @@ j1.adapter.attic = (function (j1, window) {
                 }
               }
               _this.setState('finished');
-              logger.info('\n' + 'state: ' + _this.getState());
+              logger.debug('\n' + 'state: ' + _this.getState());
               logger.info('\n' + 'module initialized successfully');
             });
 
@@ -499,7 +499,7 @@ j1.adapter.attic = (function (j1, window) {
             $('head').append(attic_opacity);
 
             _this.setState('initialized');
-            logger.info('\n' + 'state: ' + _this.getState());
+            logger.debug('\n' + 'state: ' + _this.getState());
 
             {% comment %} Run the image header if any
             -------------------------------------------------------------------- {% endcomment %}
@@ -510,7 +510,7 @@ j1.adapter.attic = (function (j1, window) {
                 logger.debug('\n' + 'Load image header');
                 {{attic_id}}(atticOptions);
                 _this.setState('completed');
-                logger.info('\n' + 'state: ' + _this.getState());
+                logger.debug('\n' + 'state: ' + _this.getState());
               });
             }
           } // END if header id found in page
@@ -520,7 +520,7 @@ j1.adapter.attic = (function (j1, window) {
       // NO header found in page
       if ($('#no_header').length) {
         _this.setState('completed');
-        logger.info('\n' + 'state: ' + _this.getState());
+        logger.debug('\n' + 'state: ' + _this.getState());
         logger.warn('\n' + 'no header configured or found in page');
       }
 

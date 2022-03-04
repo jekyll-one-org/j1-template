@@ -43,20 +43,16 @@ regenerate:                             true
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign template_config     = site.data.j1_config %}
-{% assign apps                = site.data.apps %}
 {% assign modules             = site.data.modules %}
+{% assign apps                = apps.data.modules %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-
-{% comment %}
---------------------------------------------------------------------------------
-{% assign carousel_defaults   = apps.defaults.carousel.defaults %}
-{% assign carousel_settings   = apps.carousel.settings %}
--------------------------------------------------------------------------------- {% endcomment %}
-
 {% assign carousel_defaults   = modules.defaults.carousel.defaults %}
 {% assign carousel_settings   = modules.carousel.settings %}
+
+{% assign carousel_defaults   = apps.defaults.carousel.defaults %}
+{% assign carousel_settings   = apps.carousel.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -121,23 +117,26 @@ j1.adapter.carousel = (function (j1, window) {
       _this   = j1.adapter.carousel;
       logger  = log4javascript.getLogger('j1.adapter.carousel');
 
+      // initialize state flag
+      _this.state = 'pending';
+
+      {% comment %} Load module config from yml data
+      -------------------------------------------------------------------------- {% endcomment %}
+      // Load  module DEFAULTS|CONFIG
+      /* eslint-disable */
+      moduleOptions = $.extend({}, {{carousel_options | replace: '=>', ':' | replace: 'nil', '""'}});
+      /* eslint-enable */
+
+      if (typeof settings !== 'undefined') {
+        moduleOptions = j1.mergeData(moduleOptions, settings);
+      }
+
+      _this.setState('started');
+      logger.debug('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'module is being initialized');
+
       var dependencies_met_page_finished = setInterval(function() {
         if (j1.getState() == 'finished') {
-
-          {% comment %} Load module config from yml data
-          -------------------------------------------------------------------------- {% endcomment %}
-          // Load  module DEFAULTS|CONFIG
-          /* eslint-disable */
-          moduleOptions = $.extend({}, {{carousel_options | replace: '=>', ':' | replace: 'nil', '""'}});
-          /* eslint-enable */
-
-          if (typeof settings !== 'undefined') {
-            moduleOptions = j1.mergeData(moduleOptions, settings);
-          }
-
-          _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
 
           {% for item in carousel_options.carousel %}
 
@@ -158,9 +157,13 @@ j1.adapter.carousel = (function (j1, window) {
               // Create an Carousel INSTANCE if slider on id: {{slider_id}} exists
               if ($('#{{slider_id}}').length) {
 
-                logText = '\n' + 'slider is being processed on id: #{{slider_id}}';
-                logger.info(logText);
-                _this.setState('processing');
+                {% if environment == 'development' %}
+                  logText = '\n' + 'slider is being initialized on id: #{{slider_id}}';
+                  logger.info(logText);
+                  _this.setState('running');
+                  logger.debug('\n' + 'state: ' + _this.getState());
+                  logger.info('\n' + 'module is being initialized');
+                {% endif %}
 
                 {% if item.show.slide_height != null %}
                   // Set slide_height: {{item.show.slide_height}}vh
@@ -334,27 +337,18 @@ j1.adapter.carousel = (function (j1, window) {
                     {% endif %}
                   }
                   $('#{{slider_id}}').html(content);
-                  _this.setState('processed');
-                  logText = '\n' + 'processing slider finished on id: {{slider_id}}';
+                  logText = '\n' + 'initializing slider finished on id: {{slider_id}}';
                   logger.info(logText);
                 } // END customDataSuccess_{{forloop.index}}
               } // END if carousel exists
             {% endif %}
           {% endfor %}
-
           clearInterval(dependencies_met_page_finished);
-
-          var dependencies_met_sliders_processed = setInterval(function() {
-            if (_this.getState() == 'processed') {
-              _this.setState('finished');
-              logger.debug('\n' + 'state: ' + _this.getState());
-              logger.info('\n' + 'initializing module finished');
-
-              clearInterval(dependencies_met_sliders_processed);
-            }
-          }, 25); // END 'dependencies_met_sliders_processed'
-        } // END if j1.getState 'finished'
-      }, 25); // END 'dependencies_met_page_finished'
+        }
+        _this.setState('finished');
+        logger.debug('\n' + 'state: ' + _this.getState());
+        logger.info('\n' + 'initializing module finished');
+      }, 25); // END 'dependencies_met_adapter_finished'
     }, // END init
 
     // -------------------------------------------------------------------------

@@ -138,7 +138,7 @@ var logText;
 
       // initialize state flag
       _this.setState('started');
-      logger.info('\n' + 'state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
       // remove cookies on invalid GA config or left from a previous

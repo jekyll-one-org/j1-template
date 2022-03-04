@@ -7,7 +7,7 @@ regenerate:                             true
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/rtextResizer.js
- # Liquid template to adapt rtextResizer functions
+ # Liquid template to adapt rtextResizer functions (currently NOT used)
  #
  # Product/Info:
  # https://jekyll.one
@@ -46,20 +46,13 @@ regenerate:                             true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign jf_gallery_defaults         = apps.defaults.justifiedGallery.defaults %}
-{% assign jf_gallery_settings         = apps.justifiedGallery.settings %}
-{% assign gallery_customizer_defaults = apps.defaults.justifiedGalleryCustomizer.defaults %}
-{% assign gallery_customizer_settings = apps.justifiedGalleryCustomizer.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign gallery_options             = jf_gallery_defaults | merge: jf_gallery_settings %}
-{% assign customizer_options          = gallery_customizer_defaults | merge: gallery_customizer_settings %}
 
 {% comment %} Liquid var initialization
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign customizer_title            = customizer_options.title %}
-{% assign gallery_rowHeight           = customizer_options.gallery_settings.rowHeight %}
+
 
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
@@ -94,8 +87,6 @@ j1.adapter.rtextResizer = (function (j1, window) {
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment       = '{{environment}}';
-  var galleryOptions    = {};
-  var customizerOptions = {};
   var _this;
   var logger;
   var logText;
@@ -126,15 +117,8 @@ j1.adapter.rtextResizer = (function (j1, window) {
 
       // initialize state flag
       _this.setState('started');
-      logger.info('\n' + 'state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
-
-      {% comment %} Load gallery config from yml data
-      -------------------------------------------------------------------------- {% endcomment %}
-      /* eslint-disable */
-      galleryOptions    = $.extend({}, {{gallery_options | replace: '=>', ':' | replace: 'nil', '""'}});
-      customizerOptions = $.extend({}, {{customizer_options | replace: '=>', ':' | replace: 'nil', '""'}});
-      /* eslint-enable */
 
       // -----------------------------------------------------------------------
       // data loader
@@ -225,12 +209,12 @@ j1.adapter.rtextResizer = (function (j1, window) {
             });
 
           } // END form events
+          clearInterval(dependencies_met_data_loaded);
 
           _this.setState('finished');
-          logger.info('\n' + 'state: ' + _this.getState());
+          logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'initializing module finished');
-          logger.info('\n' + 'met dependencies for: loadHTML');
-          clearInterval(dependencies_met_data_loaded);
+          logger.debug('\n' + 'met dependencies for: loadHTML');
         } // END dependencies_met_data_loaded
       }, 25);
     }, // END init

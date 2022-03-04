@@ -49,11 +49,11 @@ exclude_from_search:                    true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign apps                = site.data.apps %}
+{% assign modules             = site.data.modules %}
 
 {% comment %} Set config data (carousel settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign carousel_settings   = apps.carousel.settings %}
+{% assign carousel_settings   = modules.carousel.settings %}
 
 {
   {% for item in carousel_settings.carousel %}

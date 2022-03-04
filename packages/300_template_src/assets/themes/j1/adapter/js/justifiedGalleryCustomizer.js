@@ -46,8 +46,8 @@ regenerate:                             true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign jf_gallery_defaults         = apps.defaults.justifiedGallery.defaults %}
-{% assign jf_gallery_settings         = apps.justifiedGallery.settings %}
+{% assign jf_gallery_defaults         = modules.defaults.justifiedGallery.defaults %}
+{% assign jf_gallery_settings         = modules.justifiedGallery.settings %}
 {% assign gallery_customizer_defaults = apps.defaults.justifiedGalleryCustomizer.defaults %}
 {% assign gallery_customizer_settings = apps.justifiedGalleryCustomizer.settings %}
 
@@ -161,7 +161,7 @@ j1.adapter.justifiedGalleryCustomizer = (function (j1, window) {
 
           // initialize state flag
           _this.setState('started');
-          logger.info('\n' + 'state: ' + _this.getState());
+          logger.debug('\n' + 'state: ' + _this.getState());
 
           logger.info('\n' + 'loading HTML portion of the customizer finished on id: #' + customizerOptions.xhr_container_id);
 
@@ -295,9 +295,9 @@ j1.adapter.justifiedGalleryCustomizer = (function (j1, window) {
           });
 
           _this.setState('finished');
-          logger.info('\n' + 'state: ' + _this.getState());
+          logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'initializing module finished');
-          logger.info('\n' + 'met dependencies for: loadHTML');
+          logger.debug('\n' + 'met dependencies for: loadHTML');
           clearInterval(dependencies_met_data_loaded);
         } // END dependencies_met_data_loaded
       }, 25);

@@ -127,7 +127,7 @@ j1.adapter.justifiedGalleryCustomizer = (function (j1, window) {
 
       // initialize state flag
       _this.setState('started');
-      logger.info('\n' + 'state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
       {% comment %} Load gallery config from yml data
@@ -282,9 +282,9 @@ j1.adapter.justifiedGalleryCustomizer = (function (j1, window) {
           });
 
           _this.setState('finished');
-          logger.info('\n' + 'state: ' + _this.getState());
+          logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'initializing module finished');
-          logger.info('\n' + 'met dependencies for: loadHTML');
+          logger.debug('\n' + 'met dependencies for: loadHTML');
           clearInterval(dependencies_met_data_loaded);
         } // END dependencies_met_data_loaded
       }, 25);

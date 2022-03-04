@@ -114,7 +114,7 @@ var lastPageInfo;
 
       // initialize state flag
       _this.setState('started');
-      logger.info('\n' + 'state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
 
@@ -122,7 +122,7 @@ var lastPageInfo;
       _this.generate_scrollers();
 
       _this.setState('finished');
-      logger.info('\n' + 'state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module initialized successfully');
     }, // END init
 

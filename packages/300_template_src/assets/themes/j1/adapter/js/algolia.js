@@ -116,7 +116,7 @@ j1.adapter.algolia = (function (j1, window) {
       _this.state = 'pending';
 
       _this.setState('started');
-      logger.info('\n' + 'state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
       {% comment %} Load module config from yml data
@@ -139,7 +139,7 @@ j1.adapter.algolia = (function (j1, window) {
 
       var hitTemplate = function(hit) {
         // state = 'start search';
-        // logger.info('\n' + 'state: ' + state);
+        // logger.debug('\n' + 'state: ' + state);
         // var re = new RegExp('^\/posts');
         // var re = new RegExp('^\/pages');
         var re = new RegExp('^\/pages|^\/posts|^\/collections');
@@ -179,7 +179,7 @@ j1.adapter.algolia = (function (j1, window) {
           `;
         }
         // state = 'finished search';
-        // logger.info('\n' + 'state: ' + state);
+        // logger.debug('\n' + 'state: ' + state);
       };
 
       if (moduleOptions.enabled == true) {
@@ -269,13 +269,13 @@ j1.adapter.algolia = (function (j1, window) {
         $('#searcher').addClass('row');
 
         _this.setState('finished');
-        logger.info('\n' + 'state: ' + _this.getState());
+        logger.debug('\n' + 'state: ' + _this.getState());
         logger.info('\n' + 'module initialized successfully');
 
       } else {
         $('#algolia-site-search').append('<p class="ml-5 mt-5 mb-5 "> <strong>Algolia Search DISABLED</strong> </p>');
         _this.setState('finished');
-        logger.info('\n' + 'state: ' + _this.getState());
+        logger.debug('\n' + 'state: ' + _this.getState());
         logger.warn('\n' + 'module disabled');
       }
 

@@ -84,7 +84,7 @@ j1.adapter.bmd = (function (j1, window) {
 
       // initialize state flag
       _this.setState('started');
-      logger.info('\n' + 'state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
       // -----------------------------------------------------------------------
       // BMD initializer
@@ -97,7 +97,7 @@ j1.adapter.bmd = (function (j1, window) {
           $('body').bmd();
 
           _this.setState('finished');
-          logger.info('\n' + 'state: ' + _this.getState());
+          logger.debug('\n' + 'state: ' + _this.getState());
 
           clearInterval(dependencies_met_j1_finished);
         } // END dependencies_met_j1_finished

@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_data/apps/light_gallery.yml
-# User configuration settings for J1 LightGallery (lg)
+# ~/_data/modules/defaults/light_gallery.yml
+# Default configuration settings for J1 LightGallery (lg)
 #
 # Product/Info:
 # https://jekyll.one
@@ -9,6 +9,7 @@
 #
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+#
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
@@ -17,13 +18,13 @@
 description:
 
   title:                                Light Gallery
-  scope:                                User settings
-  location:                             _data/apps/light_gallery.yml
+  scope:                                Default settings
+  location:                             _data/apps/defaults/light_gallery.yml
 
 # ------------------------------------------------------------------------------
 # User configuration settings
 #
-settings:
+defaults:
 
   # ----------------------------------------------------------------------------
   # behavior and appearance
@@ -49,7 +50,7 @@ settings:
   # PAGER plugin
   #
   pager:
-    enabled:                        true
+    enabled:                        false
 
   # ----------------------------------------------------------------------------
   # SHARE plugin
@@ -97,7 +98,7 @@ settings:
     vimeoPlayerParams:              false
     dailymotionPlayerParams:        false
     vkPlayerParams:                 false
-    videojs:                        true                                        # Enable VideoJS player
+    videojs:                        false
     videojsOptions:                 {}
 
   # ----------------------------------------------------------------------------

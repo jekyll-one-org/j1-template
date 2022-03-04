@@ -217,7 +217,7 @@ j1.adapter.navigator = (function (j1, window) {
 
       // initialize state flag
       _this.setState('started');
-      logger.info('\n' + 'state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
       // -----------------------------------------------------------------------
@@ -428,9 +428,9 @@ j1.adapter.navigator = (function (j1, window) {
                   _this.initAuthClient(_this.navAuthManagerConfig);
 
                   _this.setState('finished');
-                  logger.info('\n' + 'state: ' + _this.getState());
+                  logger.debug('\n' + 'state: ' + _this.getState());
                   logger.info('\n' + 'module initialized successfully');
-                  logger.info('\n' + 'met dependencies for: j1');
+                  logger.debug('\n' + 'met dependencies for: j1');
                   clearInterval(dependencies_met_initialized);
                 }
               } else {
@@ -447,11 +447,11 @@ j1.adapter.navigator = (function (j1, window) {
                 logger.info('\n' + 'init auth client');
                 _this.initAuthClient(_this.navAuthManagerConfig);
                 _this.setState('finished');
-                logger.info('\n' + 'state: ' + _this.getState());
+                logger.debug('\n' + 'state: ' + _this.getState());
                 clearInterval(dependencies_met_initialized);
               }
             }, 25); // END 'dependencies_met_initialized'
-            logger.info('\n' + 'met dependencies for: themer');
+            logger.debug('\n' + 'met dependencies for: themer');
             clearInterval(dependencies_met_load_menu_finished);
           }
         }, 25); // END 'dependencies_met_load_menu_finished'

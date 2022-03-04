@@ -151,7 +151,7 @@ var logText;
 
       // initialize state flag
       _this.setState('started');
-      logger.info('\n' + 'state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
       var dependencies_met_page_ready = setInterval(function() {
@@ -221,7 +221,7 @@ var logText;
               _this.monitor_ads();
 
               _this.setState('finished');
-              logger.info('\n' + 'state: ' + _this.getState());
+              logger.debug('\n' + 'state: ' + _this.getState());
               logger.info('\n' + 'module initialized successfully');
               clearInterval(dependencies_met_tracking_check_ready);
             }

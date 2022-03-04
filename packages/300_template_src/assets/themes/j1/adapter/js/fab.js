@@ -160,7 +160,7 @@ j1.adapter.fab = (function (j1, window) {
 
       var dependencies_met_navigator = setInterval(function() {
         if (j1.adapter.navigator.getState() == 'finished') {
-          logger.info('\n' + 'met dependencies for: navigator');
+          logger.debug('\n' + 'met dependencies for: navigator');
           _this.fabLoader(moduleOptions);
           clearInterval(dependencies_met_navigator);
         }
@@ -199,7 +199,7 @@ j1.adapter.fab = (function (j1, window) {
           _this.buttonInitializer(fabOptions);
 
           _this.setState('finished');
-          logger.info('\n' + 'state: ' + _this.getState());
+          logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module initialized successfully');
 
           $('.fab-btn').show();
@@ -291,7 +291,7 @@ j1.adapter.fab = (function (j1, window) {
                     logger.info('\n' + 'found toc in page: enabled');
                     var dependencies_met_toccer_finished = setInterval (function () {
                       if ( j1.adapter.toccer.getState() == 'finished' ) {
-                        logger.info('\n' + 'met dependencies for: toccer');
+                        logger.debug('\n' + 'met dependencies for: toccer');
 
                         // fabOptions.mode === 'icon'
                         //   ? logger.info('\n' + 'FAB mode detected: icon')
@@ -352,7 +352,7 @@ j1.adapter.fab = (function (j1, window) {
                   logger.info('\n' + 'found toc in page: enabled');
                   var dependencies_met_toccer_finished = setInterval (function () {
                     if ( j1.adapter.toccer.getState() == 'finished' ) {
-                      logger.info('\n' + 'met dependencies for toccer: finished');
+                      logger.debug('\n' + 'met dependencies for toccer: finished');
                       // change the id of the $actionButton to the already
                       // registered id by mmenu adapter of ('open_mmenu_toc')
                       // to open the TOC sidebar

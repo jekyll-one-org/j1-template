@@ -182,7 +182,7 @@ j1.adapter.themer = (function (j1, window) {
 
       // initialize state flag
       _this.state = 'started';
-      logger.info('\n' + 'state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
 
       // jadams, 2021-07-25: problem seems NOT an timing issue on the iPad
       // platform. (General) Dependency should be REMOVED!!!
@@ -283,11 +283,11 @@ j1.adapter.themer = (function (j1, window) {
            logger.info('\n' + 'theme loaded: ' + user_state.theme_name);
            logger.info('\n' + 'theme css file: ' + user_state.theme_css);
            _this.setState('finished');
-           logger.info('\n' + 'state: ' + _this.getState());
+           logger.debug('\n' + 'state: ' + _this.getState());
            logger.info('\n' + 'module initialized successfully');
          } else {
            _this.setState('finished');
-           logger.info('\n' + 'state: ' + _this.getState());
+           logger.debug('\n' + 'state: ' + _this.getState());
            logger.info('\n' + 'themes detected as: disabled');
          }
           clearInterval(dependencies_met_user_state_available);

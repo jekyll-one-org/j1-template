@@ -105,13 +105,13 @@ Find below an example of using the lightbox Lightbox standalone. See how
 single (individual) images are linked for use with Lightbox.
 
 .Lightbox block for standalone images
-lightbox::example-standalone[ 400, {data-images-standalone} ]
+lightbox::example-standalone[ 800, {data-images-standalone}, role="mb-4" ]
 
 Lightbox supports image groups (image sets). Click on the images below to
 see how Lightbox manages a group of images.
 
 .Lightbox block for grouped images
-lightbox::example-group[ 400, {data-images-group}, group ]
+lightbox::example-group[ 395, {data-images-group}, group, role="mb-4 wm-800" ]
 
 === LightGallery Example
 
@@ -120,7 +120,7 @@ supports a gallery-style thumbnail preview plus image resizing, a download
 dialog, sharing provider support, and more helpful. Check what
 LightGallery can do this by the following example.
 
-gallery::jg_old_times[]
+gallery::jg_old_times[ role="mb-4 wm-800" ]
 
 == J1 Carousel App
 

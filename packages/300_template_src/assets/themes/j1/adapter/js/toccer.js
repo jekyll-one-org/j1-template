@@ -132,7 +132,7 @@ j1.adapter.toccer = (function () {
 
       // initialize state flag
       _this.setState('started');
-      logger.info('\n' + 'state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
       // create settings object from frontmatterOptions
@@ -172,9 +172,9 @@ j1.adapter.toccer = (function () {
             _this.initToccerCore(settings);
             _this.setState('finished');
 
-            logger.info('\n' + 'state: ' + _this.getState());
+            logger.debug('\n' + 'state: ' + _this.getState());
             logger.info('\n' + 'module initialized successfully');
-            logger.info('\n' + 'met dependencies for: j1');
+            logger.debug('\n' + 'met dependencies for: j1');
             clearInterval(dependencies_met_navigator);
           }
         }, 25);
@@ -194,7 +194,7 @@ j1.adapter.toccer = (function () {
       }
 
       _this.setState('running');
-      logger.info('\n' + 'state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
 
       // tocbot get fired if HTML portion is loaded (AJAX load finished)
       //
@@ -231,7 +231,7 @@ j1.adapter.toccer = (function () {
             throttleTimeout:        moduleOptions.throttleTimeout
           });
           /* eslint-enable */
-          logger.info('\n' + 'met dependencies for: loadHTML');
+          logger.debug('\n' + 'met dependencies for: loadHTML');
           clearInterval(dependencies_met_ajax_load_finished);
         } // END AJAX load finished
       }, 25); // END dependencies_met_ajax_load_finished

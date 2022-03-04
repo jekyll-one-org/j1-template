@@ -202,7 +202,7 @@ j1.adapter.logger = (function (j1, window) {
 
         if (user_session.mode !== 'na') {
           clearInterval(dependencies_met_mode_detected);
-          logger.info('\n' + 'met dependencies for: mode detected');
+          logger.debug('\n' + 'met dependencies for: mode detected');
           appDetected = user_session.mode === 'app' ? true : false;
 
           if (appDetected) {
@@ -287,7 +287,7 @@ j1.adapter.logger = (function (j1, window) {
           }
 
           _this.setState('finished');
-          logger.info('\n' + 'state: ' + _this.getState());
+          logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module initialized successfully');
 
           return true;

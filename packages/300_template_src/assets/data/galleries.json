@@ -45,14 +45,14 @@ exclude_from_search:                    true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign apps                = site.data.apps %}
+{% assign modules             = site.data.modules %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment         = site.environment %}
 
-{% assign jg_config_defaults  = apps.defaults.justifiedGallery.defaults %}
-{% assign jg_config_settings  = apps.justifiedGallery.settings %}
+{% assign jg_config_defaults  = modules.defaults.justifiedGallery.defaults %}
+{% assign jg_config_settings  = modules.justifiedGallery.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}

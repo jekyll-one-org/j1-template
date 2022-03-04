@@ -182,7 +182,7 @@ var logText;
           // initialize state flag, issue init message
           // -------------------------------------------------------------------
           _this.setState('started');
-          logger.info('\n' + 'state: ' + _this.getState());
+          logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized for provider: ' + comments_provider);
 
           // place|remove initialization code
@@ -259,7 +259,7 @@ var logText;
           // initialize state flag, issue init message
           // -------------------------------------------------------------------
           _this.setState('started');
-          logger.info('\n' + 'state: ' + _this.getState());
+          logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized for provider: ' + comments_provider);
 
           // place|remove initialization code

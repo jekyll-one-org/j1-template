@@ -36,12 +36,12 @@ regenerate:                             false
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign template_config   = site.data.j1_config %}
-{% assign apps              = site.data.apps %}
+{% assign modules           = site.data.modules %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign lightbox_defaults  = apps.defaults.lightbox.defaults %}
-{% assign lightbox_settings  = apps.lightbox.settings %}
+{% assign lightbox_defaults  = modules.defaults.lightbox.defaults %}
+{% assign lightbox_settings  = modules.lightbox.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -122,7 +122,7 @@ j1.adapter.lightbox = (function (j1, window) {
         if (j1.getState() == 'finished') {
 
           _this.setState('started');
-          logger.info('\n' + 'state: ' + _this.getState());
+          logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
 
           /* eslint-disable */
@@ -143,7 +143,7 @@ j1.adapter.lightbox = (function (j1, window) {
           /* eslint-enable */
 
           _this.setState('finished');
-          logger.info('\n' + 'state: ' + _this.getState());
+          logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'initializing module finished');
 
           clearInterval(dependencies_met_j1_finished);

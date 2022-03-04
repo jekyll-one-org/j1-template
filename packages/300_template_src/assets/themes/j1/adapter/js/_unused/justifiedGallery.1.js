@@ -116,7 +116,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
 
       // initialize state flag
       _this.setState('started');
-      logger.info('\n' + 'state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
       {% comment %} Load module config from yml data
@@ -134,7 +134,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
       _this.initialize(moduleOptions);
 
       _this.setState('finished');
-      logger.info('\n' + 'state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module initialized successfully');
     },
 
@@ -145,7 +145,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
       logger = log4javascript.getLogger('j1.adapter.justifiedGallery');
 
       _this.setState('running');
-      logger.info('\n' + 'state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
 
       {% for item in jf_gallery_options.galleries %}
         {% if item.gallery.enabled %}

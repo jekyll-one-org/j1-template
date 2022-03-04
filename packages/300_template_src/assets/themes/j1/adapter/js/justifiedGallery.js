@@ -34,11 +34,12 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign template_config       = site.data.j1_config %}
 {% assign apps                  = site.data.apps %}
+{% assign modules               = site.data.modules %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign jf_gallery_defaults   = apps.defaults.justifiedGallery.defaults %}
-{% assign jf_gallery_settings   = apps.justifiedGallery.settings %}
+{% assign jf_gallery_defaults   = modules.defaults.justifiedGallery.defaults %}
+{% assign jf_gallery_settings   = modules.justifiedGallery.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -118,7 +119,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
         if (j1.getState() == 'finished') {
           // initialize state flag
           _this.setState('started');
-          logger.info('\n' + 'state: ' + _this.getState());
+          logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
 
           {% comment %} Load module config from yml data
@@ -136,7 +137,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
           _this.initialize(moduleOptions);
 
           _this.setState('finished');
-          logger.info('\n' + 'state: ' + _this.getState());
+          logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module initialized successfully');
 
           clearInterval(dependencies_met_j1_finished);
@@ -151,7 +152,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
       logger = log4javascript.getLogger('j1.adapter.justifiedGallery');
 
       _this.setState('running');
-      logger.info('\n' + 'state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
 
       {% for item in jf_gallery_options.galleries %}
         {% if item.gallery.enabled %}

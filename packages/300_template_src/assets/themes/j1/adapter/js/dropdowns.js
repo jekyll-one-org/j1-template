@@ -119,7 +119,7 @@ j1.adapter.dropdowns = (function (j1, window) {
 
       // initialize state flag
       _this.setState('started');
-      logger.info('\n' + 'state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
       // create settings object from frontmatterOptions
@@ -198,7 +198,7 @@ j1.adapter.dropdowns = (function (j1, window) {
           {% endif %} {% endfor %}
 
           _this.setState('finished');
-          logger.info('\n' + 'state: ' + _this.getState());
+          logger.debug('\n' + 'state: ' + _this.getState());
 
           clearInterval(dependencies_met_j1_finished);
         } // END dependencies_met_j1_finished

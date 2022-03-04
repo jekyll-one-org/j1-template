@@ -150,7 +150,7 @@ j1.adapter.mmenu = (function (j1, window) {
 
       // initialize state flag
       _this.setState('started');
-      logger.info('\n' + 'state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
       // -----------------------------------------------------------------------
@@ -172,7 +172,7 @@ j1.adapter.mmenu = (function (j1, window) {
       if (options != null) { var frontmatterOptions = $.extend({}, options); }
 
       _this.setState('started');
-      logger.info('\n' + 'state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
       _this.mmenuLoader(navMenuOptions);
     }, // END init
@@ -229,7 +229,7 @@ j1.adapter.mmenu = (function (j1, window) {
       logger.info('\n' + 'initialize navs and drawers');
       _this.mmenuInitializer(mmOptions);
       _this.setState('finished');
-      logger.info('\n' + 'state: ' + _this.getState());
+      logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module initialized successfully');
 
     }, // END dataLoader
@@ -263,7 +263,7 @@ j1.adapter.mmenu = (function (j1, window) {
         logger.info('\n' + 'initialize mmenu on id: #{{menu_id}}');
         var dependencies_met_{{menu_id}}_loaded = setInterval (function () {
           if (j1.xhrDataState['#{{menu_id}}'] == 'success' ) {
-            logger.info('\n' + 'met dependencies for: {{menu_id}}');
+            logger.debug('\n' + 'met dependencies for: {{menu_id}}');
             const menu_selector = document.querySelector('#{{menu_id}}');
             const mmenu_{{menu_id}} = new MmenuLight (
               menu_selector,
@@ -313,7 +313,7 @@ j1.adapter.mmenu = (function (j1, window) {
 
             $('#{{item.menu.content.id}}').show();
             logger.info('\n' + 'initializing mmenu finished on id: #{{menu_id}}');
-            logger.info('\n' + 'met dependencies for: {{menu_id}} loaded');
+            logger.debug('\n' + 'met dependencies for: {{menu_id}} loaded');
             clearInterval(dependencies_met_{{menu_id}}_loaded);
             $('#{{item.menu.content.id}}').show();
             logger.info('\n' + 'initializing mmenu finished on id: #{{menu_id}}');
@@ -334,7 +334,7 @@ j1.adapter.mmenu = (function (j1, window) {
           var dependencies_met_{{menu_id}}_loaded = setInterval (function () {
             if (j1.xhrDataState['#{{menu_id}}'] == 'success' &&
                 $('{{item.menu.content.button}}').length) {
-              logger.info('\n' + 'met dependencies for: xhrData/{{menu_id}}');
+              logger.debug('\n' + 'met dependencies for: xhrData/{{menu_id}}');
 
               const menu_selector = document.querySelector('#{{menu_id}}');
               const mmenu_{{menu_id}} = new MmenuLight (
@@ -388,7 +388,7 @@ j1.adapter.mmenu = (function (j1, window) {
                   } // END if hasclass
                 });
               });
-              logger.info('\n' + 'met dependencies for: {{menu_id}} loaded');
+              logger.debug('\n' + 'met dependencies for: {{menu_id}} loaded');
               clearInterval(dependencies_met_{{menu_id}}_loaded);
               $('#{{item.menu.content.id}}').show();
           }; // END if menu_loaded

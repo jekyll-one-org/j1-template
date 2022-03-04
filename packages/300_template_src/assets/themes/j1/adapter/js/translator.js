@@ -202,7 +202,7 @@ j1.adapter.translator = (function (j1, window) {
 
         if ( j1.getState() === 'finished' ) {
           _this.setState('started');
-          logger.info('\n' + 'state: ' + _this.getState());
+          logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
 
           // load|initialize user translate cookie
@@ -308,7 +308,7 @@ j1.adapter.translator = (function (j1, window) {
           // -------------------------------------------------------------------
 
           _this.setState('finished');
-          logger.info('\n' + 'state: ' + _this.getState());
+          logger.debug('\n' + 'state: ' + _this.getState());
           logger.debug('\n' + 'module initialized successfully');
 
           clearInterval(dependencies_met_page_ready);
