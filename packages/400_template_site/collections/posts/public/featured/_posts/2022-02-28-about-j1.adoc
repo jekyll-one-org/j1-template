@@ -2,7 +2,7 @@
 title:                                  J1 Template
 tagline:                                first version for the public is out
 
-categories:                             [ Knowledge ]
+categories:                             [ Knowledge, Jekyll ]
 tags:                                   [ J1, Template ]
 
 image:                                  /assets/images/modules/attics/runner-1920x1200.jpg

@@ -131,6 +131,59 @@ module Jekyll
     end
 
     # --------------------------------------------------------------------------
+    #  Managing Arrays
+    #   input - arr:  returns any elements from input that are NOT in arr
+    #   arr - input:  returns any elements from arr that are not in a
+    #   arr | input:  returns the unique set from input AND arr
+    #   arr & input:  returns the intersection elements of input AND arr
+    #   pipe (|):     returns the unique set of elements for BOTH arrays
+    #
+    #  Example|s:
+    #
+    #   {% assign input = '1,2,3,4,5' | split: ',' %}
+    #   {% assign arr   = '1,2,3' | split: ',' %}
+    #
+    #   {% assign difference    = input | difference: arr %}
+    #   {% assign union         = input | union: arr %}
+    #   {% assign intersection  = input | intersection: arr %}
+    #
+    #  NOTE
+    #    See: https://stackoverflow.com/questions/5678108/how-can-i-get-the-intersection-union-and-subset-of-arrays-in-ruby
+    #
+    # --------------------------------------------------------------------------
+    def difference(input, arr)
+      if ( input.kind_of?(Array) )
+        input - arr
+      else
+        []
+      end
+    end
+
+    # def difference_both_unique(input, arr)
+    #   if ( input.kind_of?(Array) )
+    #     input - arr | arr - input
+    #   else
+    #     []
+    #   end
+    # end
+
+    def union(input, arr)
+      if ( input.kind_of?(Array) )
+        input | arr
+      else
+        []
+      end
+    end
+
+    def intersection(input, arr)
+      if ( input.kind_of?(Array) )
+        input & arr
+      else
+        []
+      end
+    end
+
+    # --------------------------------------------------------------------------
     #  strip_empty_lines:
     #
     #  Example:

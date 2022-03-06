@@ -40,14 +40,19 @@
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
 
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign template_config           = site.data.j1_config %}
+
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign builder_config  = site.data.builder.blog_navigator.collate_timeline %}
-{% assign truncate_words  = site.excerpt_truncate_words %}
-{% assign header_title    = false %}
-{% assign header_tagline  = false %}
-{% assign posts_collate   = include.items %}
-{% assign limit_excerpt   = include.limit_excerpt %}
+{% assign builder_config      = site.data.builder.blog_navigator.collate_timeline %}
+{% assign truncate_words      = site.excerpt_truncate_words %}
+{% assign header_title        = false %}
+{% assign header_tagline      = false %}
+{% assign posts_collate       = include.items %}
+{% assign limit_excerpt       = include.limit_excerpt %}
+{% assign category_blacklist  = template_config.posts.category_blacklist %}
 
 {% comment %} language detection
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -237,7 +242,21 @@
                 <span class="font-weight-bold"> · </span>
                 <i class="mdi mdi-comment md-grey-900 mr-1"></i> {{comment_count}}
                 {% endif %}
-              </div>
+
+                <!-- Cleanup categories by given blacklist -->
+                {% assign my_categories = post.categories | difference: category_blacklist %}
+
+                <!-- Build element strings -->
+                {% assign categories    = my_categories |join: " · "  %}
+                {% assign tags          = post.tags | join: " · "  %}
+
+                <p class="result-item-text small text-muted mb-3">
+                  <i class="mdi mdi-tag-text-outline mdi-18px mr-1"></i>
+                  <span class="sr-categories">{{categories}}</span>
+                  <br>
+                  <i class="mdi mdi-tag mdi-18px mr-1"></i>
+                  <span class="sr-tags">{{tags}}</span>
+              </p>
               <a class="card-link md-grey-900 text-lowercase"
                 href="{{post.url}}#readmore">
                 {{readmore_text}} · {{post.tagline}}

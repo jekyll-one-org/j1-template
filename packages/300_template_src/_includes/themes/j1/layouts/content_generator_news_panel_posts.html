@@ -307,6 +307,23 @@
                           {% if language == "de" %}
                             <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
                           {% endif %}
+
+                          {% assign category_blacklist = panel_settings.category_blacklist %}
+
+                          <!-- Cleanup categories by given blacklist -->
+                          {% assign my_categories = post.categories | difference: category_blacklist %}
+
+                          <!-- Build element strings -->
+                          {% assign categories    = my_categories |join: " · "  %}
+                          {% assign tags          = post.tags | join: " · "  %}
+
+                          <p class="result-item-text small text-muted mb-3">
+                            <i class="mdi mdi-tag-text-outline mdi-18px mr-1"></i>
+                            <span class="sr-categories">{{categories}}</span>
+                            <br>
+                            <i class="mdi mdi-tag mdi-18px mr-1"></i>
+                            <span class="sr-tags">{{tags}}</span>
+                        </p>
                         </div>
                         <a class="card-link md-grey-900 text-lowercase"
                            href="{{post.url}}">

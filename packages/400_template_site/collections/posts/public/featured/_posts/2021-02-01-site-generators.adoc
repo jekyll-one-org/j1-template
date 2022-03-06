@@ -2,8 +2,8 @@
 title:                                  Site Generators
 tagline:                                top open source tools
 
-categories:                             [ Knowledge ]
-tags:                                   [ Jekyll, Generators ]
+categories:                             [ Knowledge, Jekyll ]
+tags:                                   [ Static Site, Generators ]
 
 image:                                  /assets/images/modules/attics/machine-generator-1920x1280.jpg
 

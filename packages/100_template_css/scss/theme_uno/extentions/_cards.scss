@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/scss/theme_uno/bootstrap/extensions/_cards.scss
+ # ~/scss/theme_uno/extensions/_cards.scss
  #
  # Product/Info:
  # https://jekyll.one
@@ -47,10 +47,11 @@
 }
 
 .card-body {
-    text-align: initial;
-    color: $gray-dark !important;                                               // jadams, 2021-11-20: optimize colors for themes
-    background-color: $lighten-700;                                             // jadams, 2021-11-20: optimize colors for themes
-
+  margin-top: 1rem;                                                             // jadams, 2022-03-06: added additial space (above dropcaps)
+  text-align: initial;
+  color: $gray-dark !important;                                                 // jadams, 2021-11-20: optimize colors for themes
+  background-color: $lighten-700;                                               // jadams, 2021-11-20: optimize colors for themes
+  line-height: 1.5;
 }
 
 .card .card-footer {

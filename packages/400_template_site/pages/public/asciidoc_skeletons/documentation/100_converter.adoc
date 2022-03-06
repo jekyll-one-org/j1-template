@@ -1,7 +1,9 @@
 ---
 title:                                  Asciidoctor PDF Converter
 tagline:                                A native PDF converter for AsciiDoc
-description:                            Native PDF Converter for Asciidoctor
+date:                                   2022-01-01 00:00:00
+description: >
+                                        Native PDF Converter for Asciidoctor
 
 categories:                             [ Knowledge ]
 tags:                                   [ Asciidoctor, PDF, Converter ]

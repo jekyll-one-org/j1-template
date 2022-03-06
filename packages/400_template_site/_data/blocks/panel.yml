@@ -161,6 +161,7 @@ settings:
         id:                             home_news_panel
         comment:                        Home News Panel
         type:                           news
+        category_blacklist:             [ posts, public, private, protected, featured, series ]
         animate:                        false
         properties:                     mt-5 mb-5
 
@@ -176,6 +177,7 @@ settings:
                                         <p>
                                           Have fun!
                                         </p>
+
         cards:
 
           - name:                       Recent Posts
