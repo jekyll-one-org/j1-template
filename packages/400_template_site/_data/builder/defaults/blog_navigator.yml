@@ -279,7 +279,6 @@ defaults:
                                         zu durchsuchen, rufen Sie die Anzeige <b>Nach Datum</b> auf.
 
   category_view:
-    skip_categories:                    Posts, Public, Featured, Series
     page_text:
       enabled:                          true
 

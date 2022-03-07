@@ -17,11 +17,8 @@
  #  counted against a given SOURCE (how often they are found).
  #  Supported SOURCES are: tags|categories
  #
- #  If a (second) list of words given by 'skip_words', all words will be
- #  EXCLUDED from the word cloud.
- #
  #    Usage:
- #      1)  assign the 'source', 'word_list' and 'skip_words' variables
+ #      1)  assign the 'source' and 'word_list' variables
  #      2)  include the create_word_cloud.proc procedure
  #
  #  Example:
@@ -50,7 +47,6 @@
 {% if source == 'categories' %}
   {% assign categories = site.categories | sort %}
 {% endif %}
-
 
 {% comment %} Main
 --------------------------------------------------------------------------------

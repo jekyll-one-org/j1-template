@@ -1,28 +1,39 @@
 ---
+layout:                                 post
+
 title:                                  Your title
 tagline:                                your tagline
-date:                                   YYYY-MM-DD 00:00:00 +0100
 keywords: >
                                         place, your, keywords, here
 
-categories:                             [ Featured, Post ]
-tags:                                   [ J1, Jekyll ]
+categories:                             [ Template ]
+tags:                                   [ Simple Post ]
 
-image:                                  /assets/images/modules/attics/katie-moum-1920x1280.jpg
+image:                                  /assets/images/modules/attics/sigmund-1920x1280.jpg
+
+#personalization:                       false
+#exclude_from_search:                   false
+#series:                                false
+#toc:                                   true
+#fab_menu_id:                           page_ctrl_simple
+#scrollbar:                             false
 
 regenerate:                             false
-resources:                              [ animate ]
+
+resources:                              []
 resource_options:
   - attic:
+      padding_top:                      400
+      padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/images/modules/attics/katie-moum-1920x1280.jpg
-          alt:                          Photo by Katie Moum on Unsplash
+        - url:                          /assets/images/modules/attics/sigmund-1920x1280.jpg
+          alt:                          Photo by Sigmund on Unsplash
           alignY:                       0.3
           badge:
             type:                       unsplash
-            author:                     Katie Moum
-            href:                       https://unsplash.com/@katiemoum
+            author:                     Sigmund
+            href:                       https://unsplash.com/@sigmund
 ---
 
 // Page Initializer
@@ -33,13 +44,13 @@ resource_options:
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
+// :post-image:                         /assets/images/modules/attics/sigmund-1920x1280.jpg
 
 // Place an excerpt at the most top position
 // -----------------------------------------------------------------------------
 [role="dropcap"]
-All you’re doing at the end of the day is writing your content, and the J1
-Template does all the tricky things: putting out HTML, Javascript, and CSS.
-As a result, the site creation process gets out of your way.
+The Asciidoc skeleton *simple-post* a helper for setting up a base file
+and folder structure for post articles.
 
 excerpt__end
 
@@ -57,6 +68,9 @@ excerpt__end
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
+
+// [role="mt-3 mb-5"]
+// image::{post-image}[{{page.title}}]
 
 [[readmore]]
 == What is a static site?
