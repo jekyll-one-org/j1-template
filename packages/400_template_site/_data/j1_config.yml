@@ -192,7 +192,7 @@ pages:
 #
 # ------------------------------------------------------------------------------
 posts:
-  category_blacklist:                   [ posts, public, private, protected, featured, series, simple-post ]
+  category_blacklist:                   [ posts, public, private, protected, featured, series ]
 
 
 # ==============================================================================
