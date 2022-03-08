@@ -40,7 +40,7 @@ defaults:
   stopwords:                            /assets/themes/j1/modules/lunrSearch/stopwords/en.txt
   stopwords_locale:                     en
   strip_index_html:                     false
-  strip_categories:                     [ pages, posts, series, public, featured, wikipedia ]
+# strip_categories:                     [ pages, posts, series, public, featured, wikipedia, simple-post ]
   min_length:                           3
   date_format:                          mmm dd, yyyy
 
@@ -59,7 +59,6 @@ defaults:
   # message shown, if search returns no results (can be empty)
   #
   emptyMsg:                                                                     # '<p style="margin-left: 3.5rem">No matches.</p>'
-
 
 # ------------------------------------------------------------------------------
 # END config

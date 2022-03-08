@@ -1,0 +1,42 @@
+---
+regenerate:                             true
+exclude_from_search:                    true
+---
+
+{% capture cache %}
+
+{% comment %}
+# ------------------------------------------------------------------------------
+# ~/assets/data/j1_config.json
+# The j1_config data used by several J1 components to ...
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2022 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1_template/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Process YML config data
+================================================================================ {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign data             = site.data %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign j1_config = data.j1_config %}
+
+
+{% comment %} Write config data as JSON string
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{{ j1_config | json }}
+
+{% endcapture %}
+{{ cache | strip_empty_lines }}
+{% assign cache = nil %}

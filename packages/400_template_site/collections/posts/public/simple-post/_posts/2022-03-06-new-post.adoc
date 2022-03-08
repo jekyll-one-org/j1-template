@@ -1,0 +1,81 @@
+---
+layout:                                 post
+
+title:                                  Your first post article
+tagline:                                a first new post from scratch
+keywords: >
+                                        place, your, keywords, here
+
+categories:                             [ Tutorial ]
+tags:                                   [ Simple Post, Example ]
+
+image:                                  /assets/images/modules/attics/sigmund-1920x1280.jpg
+
+#series:                                 false #simple-post
+
+#personalization:                       false
+#exclude_from_search:                   false
+#series:                                false
+#toc:                                   true
+#fab_menu_id:                           page_ctrl_simple
+#scrollbar:                             false
+
+regenerate:                             false
+
+resources:                              []
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/modules/attics/sigmund-1920x1280.jpg
+          alt:                          Photo by Sigmund on Unsplash
+          alignY:                       0.3
+          badge:
+            type:                       unsplash
+            author:                     Sigmund
+            href:                       https://unsplash.com/@sigmund
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:post-image:                            /assets/images/modules/attics/sigmund-1920x1280.jpg
+
+// Place an excerpt at the most top position
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+The Asciidoc skeleton *simple-post* a helper for setting up a base file
+and folder structure for post articles.
+
+excerpt__end
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+[[readmore]]
+== Chapter 1
+
+lorem:sentences[5]
+
+== Chapter 2
+
+lorem:sentences[5]
