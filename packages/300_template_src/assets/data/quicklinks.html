@@ -41,8 +41,8 @@ exclude_from_search:                    true
 {% assign navigator_settings      = modules.navigator.settings %}
 {% assign consent_defaults        = modules.defaults.cookieconsent.defaults %}
 {% assign consent_settings        = modules.cookieconsent.settings %}
-{% assign quick_search_defaults   = modules.defaults.quicksearch.defaults %}
-{% assign quick_search_settings   = modules.quicksearch.settings %}
+{% assign lunr_search_defaults    = modules.defaults.lunr.defaults %}
+{% assign lunr_search_settings    = modules.lunr.settings %}
 
 {% comment %} Control Center disabled
 --------------------------------------------------------------------------------
@@ -60,7 +60,7 @@ exclude_from_search:                    true
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign authentication_options  = authentication_defaults | merge: authentication_settings %}
-{% assign quick_search_options    = quick_search_defaults | merge: quick_search_settings %}
+{% assign lunr_search_options     = lunr_search_defaults | merge: lunr_search_settings %}
 {% assign quicklinks_options      = nav_quicklinks_defaults | merge: nav_quicklinks_settings %}
 {% assign consent_options         = consent_defaults | merge: consent_settings %}
 
@@ -140,7 +140,7 @@ exclude_from_search:                    true
 
 {% comment %} Show|Hide Quicksearch icon
 -------------------------------------------------------------------------------- {% endcomment %}
-{% if quick_search_options.enabled %}
+{% if lunr_search_options.enabled %}
   {% assign show_quicksearch_icon = true  %}
 {% else %}
   {% assign show_quicksearch_icon = false %}

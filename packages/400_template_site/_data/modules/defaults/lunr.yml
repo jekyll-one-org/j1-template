@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-#  ~/_data/modules/defaults/quicksearch.yml
-#  Default configuration settings for J1 QuickSearch module
+#  ~/_data/modules/defaults/lunr.yml
+#  Default configuration settings for J1 Lunr (search) module
 #
 #  Product/Info:
 #  https://jekyll.one
@@ -16,9 +16,9 @@
 #
 description:
 
-  title:                                J1 QuickSearch
+  title:                                J1 Lunr
   scope:                                Default settings
-  location:                             _data/modules/defaults/quicksearch.yml
+  location:                             _data/modules/defaults/lunr.yml
 
 # ------------------------------------------------------------------------------
 # Default settings
@@ -30,21 +30,13 @@ defaults:
   target:                               _blank
   rebuild:                              false
   full_index:                           true
-
-  # currently NOT supported, use pagewise exclude_from_search: true|false
-  # excludes:                           [
-  #                                       /assets/*, /apps/*, /log/* ,
-  #                                       /node_modules/*, '/*\.htm*/'
-  #                                     ]
-
-  stopwords:                            /assets/themes/j1/modules/lunrSearch/stopwords/en.txt
+  stopwords:                            /assets/themes/j1/modules/lunr/stopwords/en.txt
   stopwords_locale:                     en
   strip_index_html:                     false
-# strip_categories:                     [ pages, posts, series, public, featured, wikipedia, simple-post ]
   min_length:                           3
   date_format:                          mmm dd, yyyy
 
-  module_dir:                           /assets/themes/j1/modules/lunrSearch/js
+  module_dir:                           /assets/themes/j1/modules/lunr/js
   index_dir:                            /assets/data
   index_name:                           lunr-index.json
   index_file:                           /assets/data/lunr-index.json

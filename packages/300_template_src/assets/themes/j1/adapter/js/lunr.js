@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/quicksearch.js
+ # ~/assets/themes/j1/adapter/js/lunr.js
  # Liquid template to adapt Lunr for J1 TemplATE
  #
  # Product/Info:
@@ -38,12 +38,12 @@ regenerate:                             true
 {% assign environment           = site.environment %}
 {% assign template_version      = site.version %}
 
-{% assign quicksearch_defaults  = modules.defaults.quicksearch.defaults %}
-{% assign quicksearch_settings  = modules.quicksearch.settings %}
+{% assign lunr_search_defaults  = modules.defaults.lunr.defaults %}
+{% assign lunr_search_settings  = modules.lunr.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign lunr_search_options   = quicksearch_defaults | merge: quicksearch_settings %}
+{% assign lunr_search_options   = lunr_search_defaults | merge: lunr_search_settings %}
 
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
@@ -52,8 +52,8 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/quicksearch.js
- # J1 Adapter for J1 QuickSearch (Lunr)
+ # ~/assets/themes/j1/adapter/js/lunr.js
+ # J1 Adapter for J1 Lunr
  #
  # Product/Info:
  # https://jekyll.one
@@ -73,7 +73,7 @@ regenerate:                             true
 /* eslint indent: "off"                                                       */
 // -----------------------------------------------------------------------------
 'use strict';
-j1.adapter.quicksearch = (function (j1, window) {
+j1.adapter.lunr = (function (j1, window) {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
@@ -101,15 +101,15 @@ j1.adapter.quicksearch = (function (j1, window) {
       // Default module settings
       // -----------------------------------------------------------------------
       var settings = $.extend({
-        module_name: 'j1.adapter.quicksearch',
+        module_name: 'j1.adapter.lunr',
         generated:   '{{site.time}}'
       }, options);
 
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
-      _this   = j1.adapter.quicksearch;
-      logger  = log4javascript.getLogger('j1.adapter.quicksearch');
+      _this   = j1.adapter.lunr;
+      logger  = log4javascript.getLogger('j1.adapter.lunr');
 
       // initialize state flag
       _this.setState('started');

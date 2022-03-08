@@ -787,31 +787,30 @@ resources:
   # of J1 Template based on the Lunr JS API
   # See: https://lunrjs.com/
   #
-  - name:                               QuickSearch
+  - name:                               Lunr
     resource:
       enabled:                          true
 
-      id:                               quicksearch
-      comment:                          J1 QuickSearch
+      id:                               lunr
+      comment:                          J1 Lunr
       region:                           head
       layout:                           [ all ]
-      required:                         always                                  # always | ondemand
-      preload:                          false                                   # property currently unused
+      required:                         always
+      preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
       data:
-        css:                            [ modules/lunrSearch/css/quicksearch ]
-        files:                          [ adapter/js/quicksearch.js ]
+        css:                            [ modules/lunr/css/j1 ]
+        files:                          [ adapter/js/lunr.js ]
         js:                             [
-                                          modules/lunrSearch/js/lunr,
-                                          modules/lunrSearch/js/mustache,
-                                          modules/lunrSearch/js/dateformat,
-                                          modules/lunrSearch/js/uri,
-#                                         modules/jquery/js/require,            # require.js currently unused, but conflicts with some modules
-                                          modules/lunrSearch/js/quicksearch
+                                          modules/lunr/js/lunr,
+                                          modules/lunr/js/mustache,
+                                          modules/lunr/js/dateformat,
+                                          modules/lunr/js/uri,
+                                          modules/lunr/js/j1
                                         ]
-        init_function:                  [ j1.adapter.quicksearch.init ]
+        init_function:                  [ j1.adapter.lunr.init ]
 
   # ----------------------------------------------------------------------------
   # rtextResizer (currently NOT used)
