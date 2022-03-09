@@ -704,11 +704,11 @@ defaults:
   #
 
   # ----------------------------------------------------------------------------
-  # Featured Articles
+  # BIOGRAPHY
   #
   - scope:
-      type:                             featured
-      path:                             collections/_featured
+      type:                             collection
+      path:                             collections/_biography
 
     values:
       layout:                           page
@@ -722,8 +722,44 @@ defaults:
       personalization:                  false
       exclude_from_search:              true
 
-      youtube:                          false
-      vimeo:                            false
+  # ----------------------------------------------------------------------------
+  # FANTASY
+  #
+  - scope:
+      type:                             collection
+      path:                             collections/_fantasie
+
+    values:
+      layout:                           page
+      sitemap:                          false
+      compress:                         true
+
+      robots:
+        index:                          false
+        follow:                         false
+
+      personalization:                  false
+      exclude_from_search:              true
+
+  # ----------------------------------------------------------------------------
+  # ROMANCE
+  #
+  - scope:
+      type:                             collection
+      path:                             collections/_romance
+
+    values:
+      layout:                           page
+      sitemap:                          false
+      compress:                         true
+
+      robots:
+        index:                          false
+        follow:                         false
+
+      personalization:                  false
+      exclude_from_search:              true
+
 
 # ==============================================================================
 # 6. LAYOUT configuration

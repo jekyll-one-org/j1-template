@@ -79,6 +79,7 @@ j1.adapter.rouge = (function (j1, window) {
   var _this;
   var logger;
   var logText;
+  var darkTheme;
 
   var templateOptions = $.extend({}, {{template_config | replace: 'nil', 'null' | replace: '=>', ':' }});
 
@@ -114,39 +115,42 @@ j1.adapter.rouge = (function (j1, window) {
       _this   = j1.adapter.rouge;
       logger  = log4javascript.getLogger('j1.adapter.rouge');
 
-      // initialize state flag
-      _this.setState('started');
-      logger.debug('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module is being initialized');
 
       // -----------------------------------------------------------------------
       // rouge initializer
       // -----------------------------------------------------------------------
-      var log_text = '\n' + 'module is being initialized';
-      logger.info(log_text);
-
-      // Detect|Set J1 UserState
-      user_state_detected = j1.existsCookie(cookie_user_state_name);
-      if (user_state_detected) {
-        user_state            = j1.readCookie(cookie_user_state_name);
-        themeCss              = user_state.theme_css;
-        var darkTheme         = themeCss.includes('dark') ||
-                                themeCss.includes('cyborg') ||
-                                themeCss.includes('darkly') ||
-                                themeCss.includes('slate') ||
-                                themeCss.includes('superhero');
-      } else {
-        log_text = '\n' + 'user_state cookie not found';
-        logger.warn(log_text);
-      }
 
       var dependencies_met_j1_finished = setInterval(function() {
         if (j1.getState() == 'finished') {
+
+          // initialize state flag
+          _this.setState('started');
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module is being initialized');
+
+          // Detect|Set J1 UserState
+          user_state_detected = j1.existsCookie(cookie_user_state_name);
+          if (user_state_detected) {
+            user_state  = j1.readCookie(cookie_user_state_name);
+            themeCss    = user_state.theme_css;
+            darkTheme   = themeCss.includes('dark') ||
+                          themeCss.includes('cyborg') ||
+                          themeCss.includes('darkly') ||
+                          themeCss.includes('slate') ||
+                          themeCss.includes('superhero');
+          } else {
+            log_text = '\n' + 'user_state cookie not found';
+            logger.warn(log_text);
+          }
+
          $('.dropdown-menu a').click(function(){
             $('#selected-theme').html('Current selection: <div class="md-gray-900 mt-1 p-2" style="background-color: #BDBDBD; font-weight: 700;">' +$(this).text() + '</div>');
          });
+
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'initializing module finished');
+
           clearInterval(dependencies_met_j1_finished);
         } // END dependencies_met_j1_finished
       }, 25);

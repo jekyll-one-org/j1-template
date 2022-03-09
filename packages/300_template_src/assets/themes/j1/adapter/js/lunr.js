@@ -111,11 +111,6 @@ j1.adapter.lunr = (function (j1, window) {
       _this   = j1.adapter.lunr;
       logger  = log4javascript.getLogger('j1.adapter.lunr');
 
-      // initialize state flag
-      _this.setState('started');
-      logger.debug('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module is being initialized');
-
       // -----------------------------------------------------------------------
       // options loader
       // -----------------------------------------------------------------------
@@ -125,11 +120,13 @@ j1.adapter.lunr = (function (j1, window) {
       // -----------------------------------------------------------------------
       // lunr_search initializer
       // -----------------------------------------------------------------------
-      var log_text = '\n' + 'module is being initialized';
-      logger.info(log_text);
-
       var dependencies_met_j1_finished = setInterval(function() {
         if (j1.getState() == 'finished') {
+
+          // initialize state flag
+          _this.setState('started');
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module is being initialized');
 
           $(searchOptions.search_input).lunrSearch({
             index_file: searchOptions.index_file,
@@ -141,6 +138,7 @@ j1.adapter.lunr = (function (j1, window) {
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'initializing module finished');
 
           clearInterval(dependencies_met_j1_finished);
         } // END dependencies_met_j1_finished
