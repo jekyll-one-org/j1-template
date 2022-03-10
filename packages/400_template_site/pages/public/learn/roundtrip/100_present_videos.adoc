@@ -135,6 +135,7 @@ resource_options:
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
+[role="dropcap"]
 Playing video on web pages seems not that special since you can already
 watch videos on web pages through plugins like _Flash Player_, _Quicktime_,
 or _Silverlight_. A new standard goes to HTML5 Video, a pure HTML way to

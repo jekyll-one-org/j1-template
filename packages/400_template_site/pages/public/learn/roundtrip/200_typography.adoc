@@ -58,8 +58,7 @@ resource_options:
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-== Typography
-
+[role="dropcap"]
 The character font serves as one of the most crucial branding elements for
 any business. Typography matters for any media presenting text. The text will
 take on an important role of acting as plain text but will also serve

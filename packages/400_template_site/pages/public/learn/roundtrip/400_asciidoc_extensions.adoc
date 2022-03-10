@@ -55,6 +55,7 @@ resource_options:
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
+[role="dropcap"]
 J1 Template implements some incubating Ruby-based extensions for Asciidoctor.
 Most extensions are based on the examples given with the
 link:{url-asciidoctor--extensions-lab}[Asciidoctor Extensions Lab, {browser-window--new}].
