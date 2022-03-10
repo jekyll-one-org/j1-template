@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "css",
-  "version": "2022.1.1",
+  "version": "2022.1.2",
   "description": "CSS bundle for J1 Template",
   "main": "theme_uno.scss",
   "config": {
