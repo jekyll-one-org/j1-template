@@ -60,12 +60,11 @@ resource_options:
 [role="dropcap"]
 Welcome to the first preview page focussing on the image module. This page
 shows some valuable features of the J1 Template to manage your image-based
-content using lightboxes, carousels (slider), and galleries.
-
-The image module offers complex functionality based on powerful OpenSource
-libraries like JustifiedGallery for high-end, masonry-styled preview maps.
-J1 Template uses the jQuery plugin Owl Carousel as a base for image sliders.
-A carousel app (slider) lets you present your images as shows.
+content using lightboxes, carousels (slider), and galleries. The image module
+offers complex functionality based on powerful OpenSource libraries like
+JustifiedGallery for high-end, masonry-styled preview maps. J1 Template uses
+the jQuery plugin Owl Carousel as a base for image sliders. A carousel
+app (slider) lets you present your images as shows.
 
 Lightboxes like LightGallery or Lightbox V2 support your web for enlarged
 image views of your picture or video content. Have a look, a quick tour

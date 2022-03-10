@@ -60,7 +60,6 @@ link:{url-mdb--home}[Material Design for Bootstrap, {browser-window--new}] on ve
 link:{url-mdb--bs-modals-legacy}[Enhanced Bootstrap Modals, {browser-window--new}]. A more
 current version is available from here:
 link:{url-mdb--bs-modals}[Modal examples & templates, {browser-window--new}].
-
 Bootstrap modals are used to add dialogues to your web pages for user
 notifications. To highlight important information to your visitors. Modals
 are positioned over everything else in the document so that messages
