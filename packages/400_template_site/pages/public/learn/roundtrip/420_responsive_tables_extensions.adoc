@@ -14,7 +14,7 @@ flowtext:                               false
 fab_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/learn/roundtrip/responsive_tables/
-regenerate:                             true
+regenerate:                             false
 
 resources:                              [ animate, rouge ]
 resource_options:
