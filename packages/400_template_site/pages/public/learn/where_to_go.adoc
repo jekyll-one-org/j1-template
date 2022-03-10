@@ -113,8 +113,6 @@ tutorials present what you need to know:
 * Development System
 * Project Management
 * Create Content
-* Using Modules
-* Cloud Services
 
 It sounds much, spending a whole day to get Jekyll and J1 to know. Yes, it is
 much. But it makes sense to get a full overview of what can be achieved by modern

@@ -421,8 +421,8 @@ To simulate a logical *AND* search of documents that contain the word `jekyll`
 
 You reached the end of the roundtrip. Hopefully you enjoyed exploring what J1
 can do for your new website. To make things real for your new site, go for
-*Web in a day*. This tutorial guides you through all the steps on how to
+*J1 in a Day*. This tutorial guides you through all the steps on how to
 build a website. Your site using Jekyll and the template system J1.
 
 It's a pleasant journey to learn what  modern static webs can offer today.
-Start your journey from here: link:{url-j1-kickstarter--web-in-a-day}[Web in a day, {browser-window--new}].
+Start your journey from here: link:{url-j1-kickstarter--web-in-a-day}[J1 in a Day, {browser-window--new}].
