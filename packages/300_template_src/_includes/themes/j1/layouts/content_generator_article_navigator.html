@@ -31,13 +31,12 @@
 {% assign template_config                     = site.data.j1_config %}
 {% assign blocks                              = site.data.blocks %}
 {% assign modules                             = site.data.modules %}
-{% assign builder                             = site.data.builder %}
 {% assign plugins                             = site.data.plugins %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign blog_navigator_defaults             = builder.defaults.blog_navigator.defaults %}
-{% assign blog_navigator_settings             = builder.blog_navigator.settings %}
+{% assign blog_navigator_defaults             = modules.defaults.blog_navigator.defaults %}
+{% assign blog_navigator_settings             = modules.blog_navigator.settings %}
 {% assign paginator_defaults                  = plugins.defaults.paginator.defaults %}
 {% assign paginator_settings                  = plugins.paginator.settings %}
 
@@ -48,8 +47,8 @@
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign article_navigator                   = builder.blog_navigator.settings.article_navigator %}
-{% assign article_previewer                   = builder.blog_navigator.settings.article_previewer %}
+{% assign article_navigator                   = blog_navigator_settings.article_navigator %}
+{% assign article_previewer                   = blog_navigator_settings.article_previewer %}
 {% assign article_navigator_description       = blog_navigator_options.article_navigator.description %}
 {% assign article_previewer_description       = blog_navigator_options.article_previewer.description %}
 

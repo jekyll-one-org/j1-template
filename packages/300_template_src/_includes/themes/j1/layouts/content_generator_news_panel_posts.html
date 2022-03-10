@@ -26,26 +26,26 @@
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config                     = site.data.j1_config %}
-{% assign blocks                              = site.data.blocks %}
-{% assign modules                             = site.data.modules %}
-{% assign builder                             = site.data.builder %}
-{% assign plugins                             = site.data.plugins %}
+{% assign template_config             = site.data.j1_config %}
+{% assign blocks                      = site.data.blocks %}
+{% assign modules                     = site.data.modules %}
+{% assign builder                     = site.data.builder %}
+{% assign plugins                     = site.data.plugins %}
 
-{% assign blocks                    = site.data.blocks %}
-{% assign panel_config_defaults     = blocks.defaults.panel %}
-{% assign panel_config_settings     = blocks.panel %}
-{% assign bs_config                 = template_config.bootstrap %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign blog_navigator_defaults             = builder.defaults.blog_navigator.defaults %}
-{% assign blog_navigator_settings             = builder.blog_navigator.settings %}
-{% assign paginator_defaults                  = plugins.defaults.paginator.defaults %}
-{% assign paginator_settings                  = plugins.paginator.settings %}
+{% assign panel_config_defaults       = blocks.defaults.panel %}
+{% assign panel_config_settings       = blocks.panel %}
+{% assign bs_config                   = template_config.bootstrap %}
 
-{% assign panel_config_defaults     = panel_config_defaults.defaults %}
-{% assign panel_config_settings     = panel_config_settings.settings %}
+{% assign blog_navigator_defaults     = modules.defaults.blog_navigator.defaults %}
+{% assign blog_navigator_settings     = modules.blog_navigator.settings %}
+{% assign paginator_defaults          = plugins.defaults.paginator.defaults %}
+{% assign paginator_settings          = plugins.paginator.settings %}
+
+{% assign panel_config_defaults       = panel_config_defaults.defaults %}
+{% assign panel_config_settings       = panel_config_settings.settings %}
 
 
 {% comment %} Set config options
@@ -55,17 +55,16 @@
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign article_navigator                   = builder.blog_navigator.settings.article_navigator %}
-{% assign article_previewer                   = builder.blog_navigator.settings.article_previewer %}
+{% assign article_navigator                   = blog_navigator_settings.article_navigator %}
+{% assign article_previewer                   = blog_navigator_settings.article_previewer %}
 {% assign article_navigator_description       = blog_navigator_options.article_navigator.description %}
 {% assign article_previewer_description       = blog_navigator_options.article_previewer.description %}
 
 {% assign previewer                           = blog_navigator_options.previewer %}
 {% assign paginate                            = paginator_options.pagination.enabled %}
 
+{% assign truncate_words                      = site.excerpt_truncate_words %}
 
-
-{% assign truncate_words            = site.excerpt_truncate_words %}
 
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}

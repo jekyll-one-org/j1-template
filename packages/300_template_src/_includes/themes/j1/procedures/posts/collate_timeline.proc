@@ -42,11 +42,14 @@
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config           = site.data.j1_config %}
+{% assign template_config     = site.data.j1_config %}
+{% assign blocks              = site.data.blocks %}
+{% assign modules             = site.data.modules %}
+{% assign plugins             = site.data.plugins %}
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign builder_config      = site.data.builder.blog_navigator.collate_timeline %}
+{% assign builder_config      = modules.blog_navigator.collate_timeline %}
 {% assign truncate_words      = site.excerpt_truncate_words %}
 {% assign header_title        = false %}
 {% assign header_tagline      = false %}

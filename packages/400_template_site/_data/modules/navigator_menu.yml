@@ -213,7 +213,7 @@
 #
 - item:                                 Blog
   sublevel:
-    - title:                            Starter Blog
+    - title:                            Blog Navigator
       href:                             /pages/public/blog/navigator/
       icon:                             near-me
     - title:                            Categories
