@@ -332,8 +332,7 @@ permalink:                              pretty
 # if you are running jekyll serve in a development environment,
 # site.url will be set to the value of host, port.
 #
-# url:                                  "http://localhost:40000"
-url:                                    "https://jekyll.one"
+url:                                  "http://localhost:40000"
 
 # The subpath of your site, e.g. /blog/. Used in conjunction with
 # site.url (see above) when you want a link to something with the
@@ -359,7 +358,7 @@ base_path:                              ""
 #
 protocol:                               http
 host:                                   localhost
-port:                                   42000
+port:                                   40000
 timezone:                               Europe/Berlin
 encoding:                               UTF-8
 
@@ -611,35 +610,6 @@ defaults:
   # ----------------------------------------------------------------------------
   # POSTS
   #
-
-  # ----------------------------------------------------------------------------
-  # PUBLIC - SIMPLE POST
-  #
-  # - scope:
-  #     path:                             posts/public/simple-post
-  #     type:                             posts
-  #
-  #   values:
-  #     layout:                           post
-  #     author:                           J1 Team
-  #     compress:                         true
-  #     image:                            /assets/images/modules/attics/joanna-kosinska-1920x1280.jpg
-  #
-  #     robots:
-  #       index:                          true
-  #       follow:                         true
-  #
-  #     personalization:                  false
-  #     exclude_from_search:              false
-  #     series:                           false
-  #
-  #     toc:                              true
-  #     fab_menu_id:                      page_ctrl_simple
-  #     scrollbar:                        false
-  #
-  #     resource_options:
-  #       - toccer:
-  #           collapseDepth:              3
 
   # ----------------------------------------------------------------------------
   # PUBLIC - FEATURED
