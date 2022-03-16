@@ -14,11 +14,11 @@ an interactive prompt.
 ## Create the RubyGem
 
 The creation process is controlled by the (gemspec) configuration file
-*j1_template.gemspec*. This configuration is used by the Ruby
+*j1-template.gemspec*. This configuration is used by the Ruby
 commandline utility `gem` called like so:
 
 ``` sh
-gem build j1_template.gemspec
+gem build j1-template.gemspec
 ```
 
 ## Installation
@@ -26,14 +26,31 @@ gem build j1_template.gemspec
 Add this line to your application's Gemfile:
 
 ``` ruby
-gem 'j1_template', '~> 2022.1.1'
+gem 'j1_template', '~> 2022.1.3'
 ```
 
 and install the locally created RubGem as:
 
 ``` sh
-gem install --local j1_template --no-document
+gem install --local j1-template --no-document
 ```
+
+### Userized Installation
+
+When you use the --user-install option, RubyGems will install the gems to a
+directory inside your home directory, something like ~/.gem/ruby/1.9.1. The
+commands provided by the gems you installed will end up in
+~/.gem/ruby/1.9.1/bin.
+
+gem install j1-template --user-install --no-document
+
+
+For the programs installed there to be available for
+you, you need to add ~/.gem/ruby/1.9.1/bin to your PATH environment variable.
+
+For example, if you use bash you can add that directory to your PATH by
+adding code like this to your ~/.bashrc file:
+
 
 ## Usage
 
