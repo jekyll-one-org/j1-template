@@ -68,11 +68,7 @@ environment:                            development
 #   anything here because version information is bumped-in by
 #   the build process
 #
-<<<<<<< HEAD
-version:                                2022.1.2
-=======
 version:                                2022.1.3
->>>>>>> 75103f8ccfb8d8292c46ad82c73f4bcb0aa51129
 
 
 # ==============================================================================
@@ -392,7 +388,7 @@ exclude:                                [
                                           ".sass-cache", ".vscode", ".idea",
                                           "*.ignore",
                                           "*.bat*", "*.sh", "*.tmp",
-                                          "*.txt", "*.log", "*.ppt*", 
+                                          "*.txt", "*.log", "*.ppt*",
                                           "*.zip", "*.7z", "*.a2p",
                                           "*.asciidoc", "History.markdown",
                                           "README.md", "changelog.md",
@@ -604,7 +600,7 @@ j1_auth:
   #       users:
   #         whitelist:                  [ all ]
   #         blacklist:                  []
-  # 
+  #
   # github:
   #   provider_url:                     https://github.com
   #   strategy:                         member
@@ -618,7 +614,7 @@ j1_auth:
   #       users:
   #         whitelist:                  [ all ]
   #         blacklist:                  []
-  # 
+  #
   # patreon:
   #   provider_url:                     https://patreon.com
   #   strategy:                         member
@@ -650,7 +646,7 @@ j1_auth:
   #               name:                 "Value Content"
   #               amount:               100,
   #               state:                paid
-  # 
+  #
   # twitter:
   #   provider_url:                     https://twitter.com
   #   strategy:                         member
@@ -754,7 +750,7 @@ collections:
 # Instead of repeating this configuration each time a page is being
 # created, Jekyll provides a way to set these configuration items
 # as defaults in this site configuration (_config.yml).
-# 
+#
 defaults:
 
   # ----------------------------------------------------------------------------
