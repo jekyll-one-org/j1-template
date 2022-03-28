@@ -7,7 +7,7 @@ regenerate:                             false
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/nbinteract.js
- # Liquid template to adapt nbinteract
+ # Liquid template to adapt nbinteract-core JS API
  #
  # Product/Info:
  # https://jekyll.one
@@ -20,6 +20,37 @@ regenerate:                             false
  #  {{ liquid_var | debug }}
  # -----------------------------------------------------------------------------
 {% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Set global settings
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment       = site.environment %}
+{% assign asset_path        = "/assets/themes/j1" %}
+
+{% comment %} Process YML config data
+================================================================================ {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign template_config   = site.data.j1_config %}
+{% assign blocks            = site.data.blocks %}
+{% assign modules           = site.data.modules %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign notebook_defaults = modules.defaults.notebooks.defaults %}
+{% assign notebook_settings = modules.notebooks.settings %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign notebook_options  = notebook_defaults | merge: notebook_settings %}
+
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
 
 /*
  # -----------------------------------------------------------------------------

@@ -1,17 +1,76 @@
-<!DOCTYPE html>
-<html>
+---
+title:                                  Jupyter Notebooks
+tagline:                                nbinteract
+date:                                   2022-01-01 00:00:00
+description: >
+                                        Things you should know about this site,
+                                        the people and the software and/or
+                                        services provided.
 
-<head>
-  <meta charset="utf-8" />
-  <title>ODEs_In_Python</title>
+tags:                                   [ Overview ]
+categories:                             [ Software, Platforms, Contributers ]
 
-  <!-- BS V3 latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-<head>
+scrollbar:                              false
 
-<body>
-<div tabindex="-1" id="notebook" class="border-box-sizing">
+permalink:                              /pages/public/nbinteract/
+regenerate:                             false
+
+resources:                              [ framer, nbinteract, rouge ]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/modules/attics/runner-1920x1200.jpg
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:badges-enabled:                        false
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ifeval::[{badges-enabled} == true]
+{badge-j1--license} {badge-j1--version-latest} {badge-j1-gh--last-commit} {badge-j1--downloads}
+endif::[]
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+image:https://mybinder.org/badge_logo.svg[Binder, link="https://mybinder.org/v2/gist/jekyll-one/7818823efbfa538c35cc811da9e72296", window="_blank"]
+
+
+== ODEs in Python
+
+// See: https://towardsdatascience.com/ordinal-differential-equation-ode-in-python-8dc1de21323b
+
+Ordinary Differential Equation (ODE) can be used to describe a dynamic system.
+To some extent, we are living in a dynamic system, the weather outside of the
+window changes from dawn to dusk, the metabolism occurs in our body is also a
+dynamic system because thousands of reactions and molecules got synthesized
+and degraded as time goes.
+
+++++
+<div id="notebook" class="border-box-sizing">
   <div class="container">
+
     <div class="cell text_cell">
       <button class="js-nbinteract-widget">
       Loading widgets...
@@ -32,8 +91,8 @@
         </div>
       </div>
     </div>
-    <div class="
-      cell border-box-sizing code_cell rendered">
+    
+    <div class="cell border-box-sizing code_cell rendered">
       <div class="input">
         <div class="inner_cell">
           <div class="input_area">
@@ -503,221 +562,7 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>
-
-<style>
-/* Style/CSS overwrites */
-  .container {
-    width: 100% !important;
-  }
-
-  .code_cell.rendered {
-    margin-bottom: 1.75rem;
-  }
-
-  .widget-interact {
-    margin-top: 1.75rem;
-  }
-</style>
-
-<style>
-/* Style/CSS for highlightning */
-  pre { line-height: 125%; margin: 0; }
-  td.linenos pre { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
-  span.linenos { color: #000000; background-color: #f0f0f0; padding: 0 5px 0 5px; }
-  td.linenos pre.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
-  span.linenos.special { color: #000000; background-color: #ffffc0; padding: 0 5px 0 5px; }
-  .highlight .hll { background-color: #ffffcc }
-  .highlight { background: #f8f8f8; }
-  .highlight .c { color: #408080; font-style: italic } /* Comment */
-  .highlight .err { border: 1px solid #FF0000 } /* Error */
-  .highlight .k { color: #008000; font-weight: bold } /* Keyword */
-  .highlight .o { color: #666666 } /* Operator */
-  .highlight .ch { color: #408080; font-style: italic } /* Comment.Hashbang */
-  .highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
-  .highlight .cp { color: #BC7A00 } /* Comment.Preproc */
-  .highlight .cpf { color: #408080; font-style: italic } /* Comment.PreprocFile */
-  .highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
-  .highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
-  .highlight .gd { color: #A00000 } /* Generic.Deleted */
-  .highlight .ge { font-style: italic } /* Generic.Emph */
-  .highlight .gr { color: #FF0000 } /* Generic.Error */
-  .highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
-  .highlight .gi { color: #00A000 } /* Generic.Inserted */
-  .highlight .go { color: #888888 } /* Generic.Output */
-  .highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
-  .highlight .gs { font-weight: bold } /* Generic.Strong */
-  .highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
-  .highlight .gt { color: #0044DD } /* Generic.Traceback */
-  .highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
-  .highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
-  .highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
-  .highlight .kp { color: #008000 } /* Keyword.Pseudo */
-  .highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
-  .highlight .kt { color: #B00040 } /* Keyword.Type */
-  .highlight .m { color: #666666 } /* Literal.Number */
-  .highlight .s { color: #BA2121 } /* Literal.String */
-  .highlight .na { color: #7D9029 } /* Name.Attribute */
-  .highlight .nb { color: #008000 } /* Name.Builtin */
-  .highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
-  .highlight .no { color: #880000 } /* Name.Constant */
-  .highlight .nd { color: #AA22FF } /* Name.Decorator */
-  .highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
-  .highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
-  .highlight .nf { color: #0000FF } /* Name.Function */
-  .highlight .nl { color: #A0A000 } /* Name.Label */
-  .highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
-  .highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
-  .highlight .nv { color: #19177C } /* Name.Variable */
-  .highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
-  .highlight .w { color: #bbbbbb } /* Text.Whitespace */
-  .highlight .mb { color: #666666 } /* Literal.Number.Bin */
-  .highlight .mf { color: #666666 } /* Literal.Number.Float */
-  .highlight .mh { color: #666666 } /* Literal.Number.Hex */
-  .highlight .mi { color: #666666 } /* Literal.Number.Integer */
-  .highlight .mo { color: #666666 } /* Literal.Number.Oct */
-  .highlight .sa { color: #BA2121 } /* Literal.String.Affix */
-  .highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
-  .highlight .sc { color: #BA2121 } /* Literal.String.Char */
-  .highlight .dl { color: #BA2121 } /* Literal.String.Delimiter */
-  .highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
-  .highlight .s2 { color: #BA2121 } /* Literal.String.Double */
-  .highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
-  .highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
-  .highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
-  .highlight .sx { color: #008000 } /* Literal.String.Other */
-  .highlight .sr { color: #BB6688 } /* Literal.String.Regex */
-  .highlight .s1 { color: #BA2121 } /* Literal.String.Single */
-  .highlight .ss { color: #19177C } /* Literal.String.Symbol */
-  .highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
-  .highlight .fm { color: #0000FF } /* Name.Function.Magic */
-  .highlight .vc { color: #19177C } /* Name.Variable.Class */
-  .highlight .vg { color: #19177C } /* Name.Variable.Global */
-  .highlight .vi { color: #19177C } /* Name.Variable.Instance */
-  .highlight .vm { color: #19177C } /* Name.Variable.Magic */
-  .highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
-
-</style>
-
-
-<style>
-/* Overrides of notebook CSS for static HTML export */
-  body {
-    overflow: visible;
-    padding: 8px;
-  }
-
-  div#notebook {
-    overflow: visible;
-    border-top: none;
-  }@media print {
-    div.cell {
-      display: block;
-      page-break-inside: avoid;
-    }
-    div.output_wrapper {
-      display: block;
-      page-break-inside: avoid;
-    }
-    div.output {
-      display: block;
-      page-break-inside: avoid;
-    }
-  }
-</style>
-
-
-<style>
-    .cell.nbinteract-left {
-        width: 50%;
-        float: left;
-    }
-
-    .cell.nbinteract-right {
-        width: 50%;
-        float: right;
-    }
-
-    .cell.nbinteract-hide_in > .input {
-        display: none;
-    }
-
-    .cell.nbinteract-hide_out > .output_wrapper {
-        display: none;
-    }
-
-    .cell:after {
-      content: "";
-      display: table;
-      clear: both;
-    }
-
-    div.output_subarea {
-        max-width: initial;
-    }
-
-    .jp-OutputPrompt {
-        display: none;
-    }
-</style>
-
-
-<!-- Loads nbinteract package -->
-<!-- script src="https://unpkg.com/nbinteract-core" async></script -->
-
-<!-- Load the LOCAL nbinteract package -->
-<script src="/assets/themes/j1/modules/nbInteract/js/core/index.bundle.js"></script>
-
-<script>
-  (function setupNbinteract() {
-    // If NbInteract hasn't loaded, wait one second and try again
-    if (window.NbInteract === undefined) {
-      setTimeout(setupNbinteract, 1000)
-      return
-    }
-
-    var interact = new window.NbInteract({
-      spec: 'jekyll-one/7818823efbfa538c35cc811da9e72296/master',
-      baseUrl: 'https://mybinder.org',
-      provider: 'gist',
-    })
-    interact.prepare()
-
-    window.interact = interact
-  })()
-</script>
-
-
-
-<!-- Load the iFramer Client -->
-<script src="/assets/themes/j1/modules/iframeResizer/js/client/iframeResizer.contentWindow.js"></script>
-
-
-<!-- Loading mathjax macro -->
-<!-- Load mathjax -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
-
-<!-- MathJax configuration -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({
-      tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-          displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-          processEscapes: true,
-          processEnvironments: true
-      },
-      // Center justify equations in code and markdown cells. Elsewhere
-      // we use CSS to left justify single line equations in code cells.
-      displayAlign: 'center',
-      "HTML-CSS": {
-          styles: {'.MathJax_Display': {"margin": 0}},
-          linebreaks: { automatic: true }
-      }
-  });
-</script>
-<!-- End of mathjax configuration -->
-
-
-</body>
-</html>
+++++

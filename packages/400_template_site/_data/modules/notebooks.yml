@@ -1,0 +1,44 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/notebooks.yml
+# User configuration for J1 Jupyter Notebooks
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2022 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description (used for J1 CC only)
+#
+description:
+
+  title:                                Jupyter Notebooks
+  scope:                                User settings
+  location:                             _data/modules/notebooks.yml
+
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+settings:
+  enabled:                              true
+
+  notebooks:
+    # --------------------------------------------------------------------------
+    # ODEs in Python
+    #
+    - notebook:
+        enabled:                        true
+
+        id:                             odes_in_python
+        container:                      odes_in_python
+
+        spec:                           jekyll-one/7818823efbfa538c35cc811da9e72296/master
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gist
+
+# ------------------------------------------------------------------------------
+# END config

@@ -1,0 +1,12 @@
+
+
+nbinteract
+  -r "D:\j1\github\j1-template-2022.1.x\packages\400_template_site\assets\data\jupyter\notebooks"
+  -t plain
+  -s fake/fake
+
+
+Transformation
+--------------------------------------------------------------------------------
+h1 -> h2
+delete all: &#182;
