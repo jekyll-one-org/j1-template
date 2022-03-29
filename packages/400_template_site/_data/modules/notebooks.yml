@@ -24,9 +24,9 @@ description:
 # User configuration settings
 #
 settings:
-  enabled:                              true
 
   notebooks:
+
     # --------------------------------------------------------------------------
     # ODEs in Python
     #
@@ -34,7 +34,25 @@ settings:
         enabled:                        true
 
         id:                             odes_in_python
-        container:                      odes_in_python
+        xhr_data_path:                  /assets/data/jupyter/notebooks
+        xhr_data:                       ODEs_In_Python.html
+
+        spec:                           jekyll-one/7818823efbfa538c35cc811da9e72296/master
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gist
+
+    # --------------------------------------------------------------------------
+    # Second NB
+    #
+    - notebook:
+        enabled:                        true
+
+        id:                             bratze
+        xhr_data_path:                  /assets/data/jupyter/notebooks
+        xhr_data:                       bratze.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
 
         spec:                           jekyll-one/7818823efbfa538c35cc811da9e72296/master
         baseUrl:                        'https://mybinder.org'

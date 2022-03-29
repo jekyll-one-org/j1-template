@@ -28,7 +28,11 @@ description:
 # Default settings
 #
 defaults:
-  enabled:                              false
+
+  xhr_data_path:                        /assets/data/jupyter/notebooks
+
+  heading:                              h3
+  button_styles:                        btn btn-primary btn-raised
 
   baseUrl:                              'https://mybinder.org'
   provider:                             gist
