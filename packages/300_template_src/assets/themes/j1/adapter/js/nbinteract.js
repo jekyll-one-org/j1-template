@@ -82,7 +82,30 @@ j1.adapter.nbinteract = (function (j1, window) {
   var environment     = '{{environment}}';
   var moduleOptions   = {};
   var moduleSettings  = {};
+  var spinnerOpts     = {
+    lines: 13, // The number of lines to draw
+    length: 38, // The length of each line
+    width: 17, // The line thickness
+    radius: 45, // The radius of the inner circle
+    scale: 2, // Scales overall size of the spinner
+    corners: 1, // Corner roundness (0..1)
+    speed: 0.5, // Rounds per second
+    rotate: 0, // The rotation offset
+    animation: 'spinner-line-fade-more', // The CSS animation name for the lines: spinner-line-fade-quick | spinner-line-shrink | spinner-line-fade-more
+    direction: 1, // 1: clockwise, -1: counterclockwise
+    color: '#424242', // CSS color or array of colors: orange (EF6C00) | blue (1565C0) | gray (424242)
+    fadeColor: 'transparent', // CSS color or array of colors
+    top: '65%', // Top position relative to parent
+    left: '50%', // Left position relative to parent
+    shadow: '0 0 1px transparent', // Box-shadow for the lines
+    zIndex: 2000000000, // The z-index (defaults to 2e9)
+    className: 'spinner', // The CSS class to assign to the spinner
+    position: 'fixed', // Element positioning:  absolute | fixed
+  };
+  var notebooks;
   var notebook;
+  var target;
+  var spinner;
   var _this;
   var interact;
   var logger;
@@ -111,7 +134,7 @@ j1.adapter.nbinteract = (function (j1, window) {
       }, options);
 
       moduleOptions = $.extend({}, {{notebook_options | replace: 'nil', 'null' | replace: '=>', ':' }});
-      var notebooks = moduleOptions.notebooks;
+      notebooks     = moduleOptions.notebooks;
 
       // -----------------------------------------------------------------------
       // Global variable settings
@@ -119,123 +142,133 @@ j1.adapter.nbinteract = (function (j1, window) {
       _this   = j1.adapter.nbinteract;
       logger  = log4javascript.getLogger('j1.adapter.nbinteract');
 
+      // run a spinner to indicate activity of 'nbInteract'
+      //
+      target  = document.getElementById('content');
+      spinner = new Spinner(spinnerOpts).spin(target);
+
       // -----------------------------------------------------------------------
-      // data loader
+      // load HTML data for the notebooks and run nbInteract to enable
+      // interactive inputs
       // -----------------------------------------------------------------------
       notebooks.forEach (function (elm) {
         notebook = elm.notebook;
         var notebook_id = notebook.id;
         var $selector = $('#' + notebook_id);
+
+        // load the HTML portion for the notebook
+        //
         if ( $selector.length ) {
           _this.loadNotebookHTML ({
-            xhr_container_id:   'odes_in_python',
-            xhr_data_path:      '/assets/data/jupyter/notebooks',
-            xhr_data:           'ODEs_In_Python.html'
+            xhr_container_id:   notebook.id,
+            xhr_data_path:      notebook.xhr_data_path,
+            xhr_data:           notebook.xhr_data,
+            setHeadings:        moduleOptions.heading,
+            buttonStyles:       moduleOptions.button_styles,
           });
+
+          // monitor the HTML load (Mutation Observer), NOT used anymore
+          //
+          // $selector.attrchange({
+          //   trackValues: true,
+          //   callback: function (event) {
+          //     if (event.newValue) {
+          //       logger.info('\n' + 'notebook ' + notebook_id + ' changed state: ' + event.newValue);
+          //     }
+          //   }
+          // });
+
+          // conntect to BinderHub
+          //
           _this.interactNotebook(notebook);
         }
-        // if ( $selector.length ) {
-        //   _this.interactNotebook(notebook);
-        // }
       });
-
     }, // END init
 
     // -------------------------------------------------------------------------
-    // generate_scrollers()
-    // generate scrollers configured|enabled
+    // interactNotebook()
+    // connect to the configured BinderHub instance (kernel)
     // -------------------------------------------------------------------------
     interactNotebook: function (options) {
       var notebook = options;
 
-      logText = '\n' + 'notebook is being connected ...';
-      logger.info(logText);
+      // initialize state flag
+      _this.setState('started');
+      logger.debug('\n' + 'state: ' + _this.getState());
 
-      var dependencies_met_j1_finished = setInterval(function() {
-        if (j1.getState() == 'finished') {
+      var log_text = '\n' + 'nbinteract is being initialized';
+      logger.info(log_text);
 
-          // initialize state flag
-          _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
+      {% comment %} connect notebooks
+      ---------------------------------------------------------------------- {% endcomment %}
+      {% for item in notebook_options.notebooks %} {% if item.notebook.enabled %}
 
-          var log_text = '\n' + 'nbinteract is being initialized';
-          logger.info(log_text);
+      {% assign notebook_id       = item.notebook.id %}
+      {% assign notebook_spec     = item.notebook.spec %}
+      {% assign notebook_baseUrl  = item.notebook.baseUrl %}
+      {% assign notebook_provider = item.notebook.provider %}
 
-          {% comment %} connect notebooks
-          ---------------------------------------------------------------------- {% endcomment %}
+      if ( $('#{{notebook_id}}').length ) {
+        var dependencies_met_nb_loaded = setInterval(function() {
+          if ( $('#{{notebook_id}}').attr('data-nb-notebook') == 'loaded' ) {
+            logText = '\n' + 'notebook is being connected ...';
+            logger.info(logText);
 
-          {% for item in notebook_options.notebooks %} {% if item.notebook.enabled %}
+            // nbInteract initializer
+            //
+            var coreLogger = log4javascript.getLogger('nbinteract.core');
+            interact = new NbInteract({
+              spec:     '{{notebook_spec}}',
+              baseUrl:  '{{notebook_baseUrl}}',
+              provider: '{{notebook_provider}}',
+              logger:   coreLogger,
+            });
 
-          {% assign notebook_id       = item.notebook.id %}
-          {% assign notebook_spec     = item.notebook.spec %}
-          {% assign notebook_baseUrl  = item.notebook.baseUrl %}
-          {% assign notebook_provider = item.notebook.provider %}
+            interact.prepare();
+            window.interact = interact;
 
-          var $selector = $('#{{notebook_id}}');
-          if ( $selector.length ) {
-          var dependencies_met_nb_loaded = setInterval(function() {
-            if ( j1.getXhrDOMState('#odes_in_python') == 'success' ) {
-                // nbInteract initializer
-                //
-                var coreLogger = log4javascript.getLogger('nbinteract.core');
-                interact = new NbInteract({
-                  spec:     '{{notebook_spec}}',
-                  baseUrl:  '{{notebook_baseUrl}}',
-                  provider: '{{notebook_provider}}',
-                  logger:   coreLogger,
-                });
+            // MathJax initializer
+            // NOTE:  MathJax currently loaded|initialized
+            //        via page (embedded HTML script)
+            //
+            // MathJax.Hub.Config({
+            //     tex2jax: {
+            //         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            //         displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            //         processEscapes: true,
+            //         processEnvironments: true
+            //     },
+            //     // Center justify equations in code and markdown cells. Elsewhere
+            //     // we use CSS to left justify single line equations in code cells.
+            //     displayAlign: 'center',
+            //     "HTML-CSS": {
+            //         styles: {'.MathJax_Display': {"margin": 0}},
+            //         linebreaks: { automatic: true }
+            //     }
+            // });
 
-                interact.prepare();
-                window.interact = interact;
+            _this.setState('finished');
+            logger.debug('\n' + 'state: ' + _this.getState());
+            logger.info('\n' + 'initializing module finished');
 
-                // MathJax initializer (MathJax currently NOT used)
-                //
-                // MathJax.Hub.Config({
-                //     tex2jax: {
-                //         inlineMath: [ ['$','$'], ["\\(","\\)"] ],
-                //         displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-                //         processEscapes: true,
-                //         processEnvironments: true
-                //     },
-                //     // Center justify equations in code and markdown cells. Elsewhere
-                //     // we use CSS to left justify single line equations in code cells.
-                //     displayAlign: 'center',
-                //     "HTML-CSS": {
-                //         styles: {'.MathJax_Display': {"margin": 0}},
-                //         linebreaks: { automatic: true }
-                //     }
-                // });
-
-                _this.setState('finished');
-                logger.debug('\n' + 'state: ' + _this.getState());
-                logger.info('\n' + 'initializing module finished');
-            } // END dependencies_met_nb_loaded
             clearInterval(dependencies_met_nb_loaded);
-          }, 25);
-          }
-          // END notebook_id: {{ notebook_id }}
-          {% endif %} {% endfor %}
-            clearInterval(dependencies_met_j1_finished);
-          } // END dependencies_met_j1_finished
-      }, 25);
+          } // END dependencies_met_nb_loaded
+        }, 25);
+      }
+      // END notebook_id: {{ notebook_id }}
+      {% endif %} {% endfor %}
     },
 
     // -------------------------------------------------------------------------
     // loadNotebookHTML()
-    // Load HTML data asychronously using XHR|jQuery on an element (e.g. <div>)
-    // specified by xhr_container_id, xhr_data_path (options)
+    // Load HTML data asychronously using XHR|jQuery on an element
+    // (e.g. <div>) specified by xhr_container_id, xhr_data_path
     // -------------------------------------------------------------------------
     loadNotebookHTML: function (options, mod, status) {
-      var logger            = log4javascript.getLogger('j1.adapter.loadHTML');
-      var selector          = $('#' + options.xhr_container_id);
+      var html_data_path    = options.xhr_data_path + '/' + options.xhr_data;
+      var id                = options.xhr_container_id;
+      var $selector         = $('#' + id);
       var state             = status;
-      var observer_options  = {
-        attributes:     false,
-        childList:      true,
-        characterData:  false,
-        subtree:        true
-      };
-      var observer;
       var logText;
 
       var cb_load_closure = function(mod, id) {
@@ -245,13 +278,18 @@ j1.adapter.nbinteract = (function (j1, window) {
             j1.setXhrDataState(id, statusTxt);
             j1.setXhrDomState(id, 'pending');
 
-            $(id).find('button').replaceWith( function() {
-              // $(this)[0].outerHTML = '???'
-              return '<button class="btn btn-primary btn-raised js-nbinteract-widget"> Loading widgets ...</button>'
-            });
+            // set data attribute to indicate HTML data loaded
+            //
+            $selector.attr('data-nb-notebook', 'loaded');
 
-            $(id).find('h1').replaceWith( function() {
-              return '<h4 id="' + $(this)[0].id + '">' + $(this).text().slice(0,-1) + '</h4>';
+            // run HTML cleanups
+            //
+            $selector.find('button').replaceWith( function() {
+              // $(this)[0].outerHTML = '???'
+              return '<button class="' + options.buttonStyles + ' js-nbinteract-widget hidden"> Loading widgets ...</button>'
+            });
+            $selector.find('h1').replaceWith( function() {
+              return '<' + options.setHeadings + ' id="' + $(this)[0].id + '">' + $(this).text().slice(0,-1) + '</' + options.heading + '>';
             });
 
             logText = '\n' + 'data loaded successfully on id: ' + id;
@@ -262,7 +300,7 @@ j1.adapter.nbinteract = (function (j1, window) {
             // jadams, 2020-07-21: to be checked why id could be UNDEFINED
             if (typeof(id) != "undefined") {
               state = 'failed';
-              logger.info('\n' + 'set state for ' +mod+ ' to: ' + state);
+              logger.info('\n' + 'set state for ' + mod + ' to: ' + state);
               // jadams, 2020-07-21: intermediate state should DISABLED
               // executeFunctionByName(mod + '.setState', window, state);
               j1.setXhrDataState(id, statusTxt);
@@ -275,41 +313,46 @@ j1.adapter.nbinteract = (function (j1, window) {
         };
       };
 
-      // see: https://stackoverflow.com/questions/20420577/detect-added-element-to-dom-with-mutation-observer
-      //
-      var html_data_path  = options.xhr_data_path + '/' + options.xhr_data;
-      var id              = '#' + options.xhr_container_id;
-      var $selector       = $(id);
-
       // failsafe - prevent XHR load errors
       //
-      if (options.xhr_data_element !== '') {
-        logger.info('\n' + 'XHR data element found: ' + options.xhr_data_element);
+      if (options.xhr_data !== '') {
+        logger.info('\n' + 'HTML data file found: ' + options.xhr_data);
       } else  {
-        logger.debug('\n' + 'no XHR data element found, loading data aborted');
+        logger.warning('\n' + 'no HTML data file found, loading data aborted');
         return;
       }
 
       if ( $selector.length ) {
         $selector.load( html_data_path, cb_load_closure( mod, id ) );
 
+        // observe DOM changes to detect if cell buttons removed
+        // by nbinterct
         var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
         var xhrObserver = new MutationObserver (mutationHandler);
         var obsConfig = {
-            childList: true,
-            characterData: false,
-            attributes: false,
-            subtree: false };
+          childList: true,
+          characterData: false,
+          attributes: false,
+          subtree: true
+        };
 
-        selector.each(function(){
-            xhrObserver.observe(this, obsConfig);
+        $selector.each(function(){
+          xhrObserver.observe(this, obsConfig);
         });
 
         function mutationHandler (mutationRecords) {
-          mutationRecords.forEach ( function (mutation) {
-            if (mutation.addedNodes.length) {
-              logger.info('\n' + 'XHR data loaded in the DOM: ' + id);
-              j1.setXhrDomState(id, 'success');
+          mutationRecords.forEach (function (mutation) {
+            if (mutation.removedNodes.length) {
+              var removedNodeClass = mutation.removedNodes[0].className;
+              if (typeof removedNodeClass !== 'undefined' && removedNodeClass !== '' && removedNodeClass.includes('btn-primary')) {
+                // removed cell buttons indicate that all 'nbinteract'
+                // API functions has successfully finished
+                xhrObserver.disconnect();
+                spinner.stop();
+                logger.info('\n' + 'cell button removed from the DOM');
+                logger.info('\n' + 'processing the notebook (nbinteract) finished');
+                logger.debug('\n' + 'found removedNodeClass: ' + removedNodeClass);
+              }
             }
           });
         }
@@ -324,8 +367,6 @@ j1.adapter.nbinteract = (function (j1, window) {
           // Set processing state to 'finished' to complete module load
           state = 'finished';
           logger.debug('\n' + 'state: ' + state);
-          // jadams, 2020-07-21: intermediate state should DISABLED
-          // executeFunctionByName(mod + '.setState', window, state);
           state = false;
         }
       }
@@ -333,7 +374,7 @@ j1.adapter.nbinteract = (function (j1, window) {
     },
 
     // -------------------------------------------------------------------------
-    // messageHandler: MessageHandler for J1 CookieConsent module
+    // messageHandler()
     // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
     messageHandler: function (sender, message) {

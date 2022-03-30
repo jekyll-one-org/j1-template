@@ -1,5 +1,5 @@
 ---
-title:                                  Jupyter Notebooks
+title:                                  Jupyter
 tagline:                                interactive notebooks
 date:                                   2022-03-28 00:00:00
 description: >
@@ -11,7 +11,6 @@ categories:                             [ Software, Python ]
 tags:                                   [ Binder, Jupyter, Notebooks ]
 
 scrollbar:                              true
-pynb_clean:                             false
 
 permalink:                              /pages/public/nbinteract/
 regenerate:                             false
@@ -55,9 +54,9 @@ endif::[]
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 ifeval::[{binder-badge-enabled} == true]
-image:https://mybinder.org/badge_logo.svg[Binder, link="https://mybinder.org/v2/gist/jekyll-one/7818823efbfa538c35cc811da9e72296", {browser-window--new}]
 image:/assets/images/badges/myBinder.png[[Binder, link="https://mybinder.org/", {browser-window--new}]
 image:/assets/images/badges/docsBinder.png[[Binder, link="https://mybinder.readthedocs.io/en/latest/", {browser-window--new}]
+image:https://mybinder.org/badge_logo.svg[Binder, link="https://mybinder.org/v2/gist/jekyll-one/7818823efbfa538c35cc811da9e72296", {browser-window--new}]
 endif::[]
 
 == Get started with Binder
@@ -138,3 +137,25 @@ dynamic system because thousands of reactions and molecules got synthesized
 and degraded as time goes.
 
 notebook::odes_in_python[]
+
+++++
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
+<!-- MathJax configuration -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+        processEnvironments: true
+    },
+    // Center justify equations in code and markdown cells. Elsewhere
+    // we use CSS to left justify single line equations in code cells.
+    displayAlign: 'center',
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}},
+        linebreaks: { automatic: true }
+    }
+});
+</script>
+++++

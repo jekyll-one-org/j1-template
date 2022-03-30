@@ -355,14 +355,16 @@ resources:
       pass_init_data:                   true
       data:
         css:                            [
-                                          core/css/themes/unolight/bootstrap,
+                                          modules/spinner/css/spin,
                                           core/css/icon-fonts/mdi,
                                           core/css/icon-fonts/mdil,
                                           core/css/icon-fonts/fontawesome,
+                                          core/css/themes/unolight/bootstrap,
                                           core/css/vendor
                                         ]
         files:                          [ adapter/js/j1.js ]
         js:                             [
+                                          modules/spinner/js/spin,
                                           modules/jquery/js/jquery,
                                           modules/popper/js/popper,             # required for BS
                                           core/js/template
@@ -1639,12 +1641,12 @@ resources:
   # ----------------------------------------------------------------------------
   # nbInteract, implement nbInteract Core JS API for J1
   #
-  - name:                               nbInteractCore
+  - name:                               nbInteract
     resource:
       enabled:                          true
 
       id:                               nbinteract
-      comment:                          nbInteractCore
+      comment:                          nbInteract
       region:                           head
       layout:                           [ all ]
       required:                         ondemand                                # always | ondemand
@@ -1653,15 +1655,13 @@ resources:
       dependencies:                     false
       pass_init_data:                   false
       data:
-        css:                            []
+        css:                            [ modules/nbInteract/css/nbinteract/nbinteract-core ]
         files:                          [
-                                          modules/nbInteract/css/nbinteract/nbinteract-core.css,
 #                                         modules/nbInteract/js/mathjax/latest.js,
 #                                         modules/nbInteract/js/mathjax/tex-chtml-full.js,
-                                          modules/nbInteract/js/nbinteract/nbinteract-core.js,
                                           adapter/js/nbinteract.js
                                         ]
-        js:                             []
+        js:                             [ modules/nbInteract/js/nbinteract/nbinteract-core ]
         init_function:                  [ j1.adapter.nbinteract.init ]
 
 # ------------------------------------------------------------------------------

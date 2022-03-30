@@ -20,6 +20,9 @@
     width: 100% !important;
   }
 
+  .hidden {
+    display: none;
+  }
   .code_cell.rendered {
     margin-bottom: 1.75rem;
   }
