@@ -1,0 +1,90 @@
+---
+title:                                  ODEs Selected
+tagline:                                interactive notebooks
+date:                                   2022-03-28 00:00:00
+description: >
+                                        Things you should know about this site,
+                                        the people and the software and/or
+                                        services provided.
+
+categories:                             [ Software, Python ]
+tags:                                   [ Binder, Jupyter, Notebooks ]
+
+scrollbar:                              true
+
+permalink:                              /pages/public/odes-selected/
+regenerate:                             false
+
+resources:                              [ nbinteract ]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/modules/attics/runner-1920x1200.jpg
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:badges-enabled:                        false
+:binder-badge-enabled:                  true
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ifeval::[{badges-enabled} == true]
+{badge-j1--license} {badge-j1--version-latest} {badge-j1-gh--last-commit} {badge-j1--downloads}
+endif::[]
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+ifeval::[{binder-badge-enabled} == true]
+image:/assets/images/badges/myBinder.png[[Binder, link="https://mybinder.org/", {browser-window--new}]
+image:/assets/images/badges/docsBinder.png[[Binder, link="https://mybinder.readthedocs.io/en/latest/", {browser-window--new}]
+image:https://mybinder.org/badge_logo.svg[Binder, link="https://mybinder.org/v2/gist/jekyll-one/b2b2fe2997d3a78217cae73089c94193", {browser-window--new}]
+endif::[]
+
+== ODEs selected
+
+// See: https://towardsdatascience.com/ordinal-differential-equation-ode-in-python-8dc1de21323b
+
+lorem:sentences[5]
+
+notebook::odes_selected[]
+
+++++
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
+<!-- MathJax configuration -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+        processEnvironments: true
+    },
+    // Center justify equations in code and markdown cells. Elsewhere
+    // we use CSS to left justify single line equations in code cells.
+    displayAlign: 'center',
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}},
+        linebreaks: { automatic: true }
+    }
+});
+</script>
+++++
