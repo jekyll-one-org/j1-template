@@ -286,7 +286,8 @@ j1.adapter.nbinteract = (function (j1, window) {
             //
             $selector.find('button').replaceWith( function() {
               // $(this)[0].outerHTML = '???'
-              return '<button class="' + options.buttonStyles + ' js-nbinteract-widget hidden"> Loading widgets ...</button>'
+              // return '<button class="' + options.buttonStyles + ' js-nbinteract-widget hidden"> Loading widgets ...</button>'
+              return '<button class="' + options.buttonStyles + ' js-nbinteract-widget"> Loading widgets ...</button>'
             });
             $selector.find('h1').replaceWith( function() {
               return '<' + options.setHeadings + ' id="' + $(this)[0].id + '">' + $(this).text().slice(0,-1) + '</' + options.heading + '>';

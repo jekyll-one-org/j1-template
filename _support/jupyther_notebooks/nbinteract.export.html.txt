@@ -12,3 +12,48 @@ Transformation
 --------------------------------------------------------------------------------
 h1 -> h2
 delete all: &#182;
+
+
+
+Repo Name of a Gist
+--------------------------------------------------------------------------------
+
+https://gist.github.com/jekyll-one/3b9c74d7cd5a43d6f5a55249e22df595.git
+
+Collect details of file that is part of a Gist
+--------------------------------------------------------------------------------
+
+https://gist.github.com/jekyll-one/3b9c74d7cd5a43d6f5a55249e22df595.js?file=GlobalLandTemperaturesByMajorCity.csv.zip
+
+Response (HTML)
+---------------
+
+document.write('<link rel="stylesheet" href="https://github.githubassets.com/assets/gist-embed-d3de7836d004.css">')
+...
+
+--> <a href=\"https://gist.github.com/jekyll-one/3b9c74d7cd5a43d6f5a55249e22df595/raw/51bcc4ed12692610dff1db4d2b4db769f41aefc4/GlobalLandTemperaturesByMajorCity.csv.zip\">View raw<\/a>
+
+Extract the file URL
+--------------------
+
+https://gist.github.com/jekyll-one/3b9c74d7cd5a43d6f5a55249e22df595/raw/51bcc4ed12692610dff1db4d2b4db769f41aefc4/GlobalLandTemperaturesByMajorCity.csv.zip
+
+
+Create new Binder
+----------------
+
+GistID:   jekyll-one/3b9c74d7cd5a43d6f5a55249e22df595
+BinderURL: https://mybinder.org/v2/gist/jekyll-one/3b9c74d7cd5a43d6f5a55249e22df595/HEAD
+BinderBadge: [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gist/jekyll-one/3b9c74d7cd5a43d6f5a55249e22df595/HEAD)
+
+
+Git Repo
+--------------------------------------------------------------------------------
+
+Name:   https://github.com/jekyll-one/nbinteract-notebooks.git
+Path:   https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/HEAD?labpath=interactive
+
+
+
+Bla
+--------------------------------------------------------------------------------

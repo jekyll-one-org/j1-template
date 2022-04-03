@@ -132,8 +132,23 @@
 #       - title:                        Binder
 #         href:                         /pages/public/binder/
 #         icon:                         notebook
+        - title:                        BinderHub API
+          href:                         /pages/public/binderhub-api/
+          icon:                         book-cog
+        - title:                        JupyterHub API
+          href:                         /pages/public/jupyterlab-api/
+          icon:                         book-cog
         - title:                        Interactive Notebooks
           href:                         /pages/public/nbinteract/
+          icon:                         notebook
+        - title:                        Climate change
+          href:                         /pages/public/climate/
+          icon:                         notebook
+        - title:                        Interactive
+          href:                         /pages/public/interactive/
+          icon:                         notebook
+        - title:                        ODEs selected
+          href:                         /pages/public/odes-selected/
           icon:                         notebook
 
     # --------------------------------------------------------------------------

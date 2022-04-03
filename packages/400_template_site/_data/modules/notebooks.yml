@@ -30,16 +30,33 @@ settings:
     # --------------------------------------------------------------------------
     # ODEs in Python
     #
+    # - notebook:
+    #     enabled:                        false
+    #
+    #     id:                             odes_in_python
+    #     xhr_data_path:                  /assets/data/jupyter/notebooks
+    #     xhr_data:                       ODEs_In_Python.html
+    #
+    #     spec:                           jekyll-one/7818823efbfa538c35cc811da9e72296/master
+    #     baseUrl:                        'https://mybinder.org'
+    #     provider:                       gist
+
+    # --------------------------------------------------------------------------
+    # First NB
+    #
     - notebook:
         enabled:                        true
 
         id:                             odes_in_python
         xhr_data_path:                  /assets/data/jupyter/notebooks
-        xhr_data:                       ODEs_In_Python.html
+        xhr_data:                       odes-in-python.html
 
-        spec:                           jekyll-one/7818823efbfa538c35cc811da9e72296/master
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one/nbinteract-notebooks/main
         baseUrl:                        'https://mybinder.org'
-        provider:                       gist
+        provider:                       gh
 
     # --------------------------------------------------------------------------
     # Second NB
@@ -47,16 +64,67 @@ settings:
     - notebook:
         enabled:                        true
 
-        id:                             bratze
+        id:                             climate_change
         xhr_data_path:                  /assets/data/jupyter/notebooks
-        xhr_data:                       bratze.html
+        xhr_data:                       climate-change-forecast.html
 
         heading:                        h3
         button_styles:                  btn btn-primary btn-raised
 
-        spec:                           jekyll-one/7818823efbfa538c35cc811da9e72296/master
+        spec:                           jekyll-one/nbinteract-notebooks/main
         baseUrl:                        'https://mybinder.org'
-        provider:                       gist
+        provider:                       gh
+
+    # --------------------------------------------------------------------------
+    # Third NB
+    #
+    - notebook:
+        enabled:                        true
+
+        id:                             interactive
+        xhr_data_path:                  /assets/data/jupyter/notebooks
+        xhr_data:                       interactive.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one/nbinteract-notebooks/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    # --------------------------------------------------------------------------
+    # Fourth NB
+    #
+    - notebook:
+        enabled:                        true
+
+        id:                             odes_selected
+        xhr_data_path:                  /assets/data/jupyter/notebooks
+        xhr_data:                       odes-selected.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one/nbinteract-notebooks/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    # --------------------------------------------------------------------------
+    # Fifths NB
+    #
+    - notebook:
+        enabled:                        true
+
+        id:                             tut_interact
+        xhr_data_path:                  /assets/data/jupyter/notebooks/tutorial
+        xhr_data:                       tutorial_interact.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one-org/nbinteract-tutorial/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
 
 # ------------------------------------------------------------------------------
 # END config
