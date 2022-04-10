@@ -76,8 +76,8 @@ that runs it, see https://mybinder.readthedocs.io/en/latest/about/about.html[Abo
 
 === Configuration Files
 
-The `repo2docker` looks for configuration files in the repository being built
-to determine how to build it. In general, repo2docker uses the same
+The `repo2docker` CLI looks for configuration files in the repository being
+built to determine how to build it. In general, repo2docker uses the same
 configuration files as other software installation tools, rather than
 creating new custom configuration files. A number of repo2docker configuration
 files can be combined to compose more complex setups.
@@ -85,14 +85,24 @@ files can be combined to compose more complex setups.
 The https://github.com/binder-examples[binder examples, {{browser-window--new}}]
 organization on GitHub contains a list of sample repositories for common
 configurations that repo2docker can build with various configuration files
-such as Python and R installation in a repository. A list of supported
+such as Python and R installation in a repository.
+
+Binder examples:
+
+* https://github.com/jupyterlab/jupyterlab-demo[JupyterLab Demonstration, {browser-window--new}]
+* https://github.com/binder-examples/jupyterlab[JupyterLab + Binder, {browser-window--new}]
+// * https://github.com/binder-examples/remote_storage[Remote Storage with Binder, {browser-window--new}]
+* https://github.com/binder-examples/python-conda_pip[Using conda with pip in the same build, {browser-window--new}]
+* https://github.com/binder-examples/pipfile[Python environment with Pipfile, {browser-window--new}]
+
+A list of supported
 configuration files (roughly in the order of build priority) can be found
 below.
 
 ==== environment.yml
 
 The `environment.yml` configuration is the standard configuration file used
-by conda that lets you install any kind of package, including Python, R,
+by *Conda* that lets you install any kind of package, including Python, R,
 and C/C++ packages. The `repo2docker` does *not* use your environment.yml
 to create and activate a new conda environment. Rather, it updates a base
 conda environment defined here with the packages listed in your
@@ -101,7 +111,6 @@ same default name, not the name specified in your `environment.yml`.
 
 [source, yaml]
 ----
-name: python 2.7
 dependencies:
   - ipywidgets
   - matplotlib
@@ -112,6 +121,33 @@ dependencies:
   - statsmodels
 ----
 
+If you use `environment.yml`, then Binder will use a *Miniconda* distribution
+to install your packages. However, you may still want to use *pip*. In this
+case, you should *not* use a `requirements.txt` file, but instead use a pip
+*section* in `environment.yml`. This repository is an example of how to
+construct your configuration to accomplish this.
+
+[source, yaml]
+----
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python
+  - numpy
+  - pip
+  - pip:
+    - nbgitpuller
+    - sphinx-gallery
+    - pandas
+    - matplotlib
+----
+
+==== requirements.txt
+
+This configuration specifies a list of *Python packages* that should be
+installed in your environment. Our requirements.txt example on GitHub shows
+a typical requirements file.
 
 For Binder, the requirements.txt file should list all Python libraries that
 your notebooks depend on, and they will be installed using:
@@ -137,11 +173,6 @@ WARNING: If you include a Python version in a `runtime.txt` file in
 *addition* to your `environment.yml`, your `runtime.txt` will be
 *ignored*.
 
-==== requirements.txt
-
-This configuration specifies a list of *Python packages* that should be
-installed in your environment. Our requirements.txt example on GitHub shows
-a typical requirements file.
 
 ==== runtime.txt
 

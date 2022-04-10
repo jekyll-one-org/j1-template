@@ -59,10 +59,55 @@ settings:
         provider:                       gh
 
     # --------------------------------------------------------------------------
-    # Second NB
+    # J1 nbinteract docs
     #
     - notebook:
         enabled:                        true
+
+        id:                             central_limit_theorem
+        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        xhr_data:                       examples_central_limit_theorem.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one-org/nbinteract-tutorial/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    - notebook:
+        enabled:                        true
+
+        id:                             empirical_distributions
+        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        xhr_data:                       examples_empirical_distributions.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one-org/nbinteract-tutorial/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    - notebook:
+        enabled:                        true
+
+        id:                             simple_webpage
+        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        xhr_data:                       tutorial_interact.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one-org/nbinteract-tutorial/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    # --------------------------------------------------------------------------
+    # Second NB
+    #
+    - notebook:
+        enabled:                        false
 
         id:                             climate_change
         xhr_data_path:                  /assets/data/jupyter/notebooks
@@ -79,7 +124,7 @@ settings:
     # Third NB
     #
     - notebook:
-        enabled:                        true
+        enabled:                        false
 
         id:                             interactive
         xhr_data_path:                  /assets/data/jupyter/notebooks
@@ -96,7 +141,7 @@ settings:
     # Fourth NB
     #
     - notebook:
-        enabled:                        true
+        enabled:                        false
 
         id:                             odes_selected
         xhr_data_path:                  /assets/data/jupyter/notebooks
@@ -113,7 +158,7 @@ settings:
     # Fifths NB
     #
     - notebook:
-        enabled:                        true
+        enabled:                        false
 
         id:                             tut_interact
         xhr_data_path:                  /assets/data/jupyter/notebooks/tutorial

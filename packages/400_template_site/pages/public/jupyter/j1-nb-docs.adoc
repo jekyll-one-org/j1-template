@@ -1,0 +1,250 @@
+---
+title:                                  nbinteract
+tagline:                                docs
+date:                                   2022-03-28 00:00:00
+description: >
+                                        Things you should know about this site,
+                                        the people and the software and/or
+                                        services provided.
+
+categories:                             [ Software, Python ]
+tags:                                   [ Binder, Jupyter, Notebooks ]
+
+scrollbar:                              false
+fab_menu_id:                            page_ctrl
+
+permalink:                              /pages/public/j1-nb-docs/
+regenerate:                             true
+
+resources:                              [ nbinteract, rouge ]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/modules/attics/john-schnobrich-2-1920x1280.jpg
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:badges-enabled:                        false
+:binder-badge-enabled:                  true
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ifeval::[{badges-enabled} == true]
+{badge-j1--license} {badge-j1--version-latest} {badge-j1-gh--last-commit} {badge-j1--downloads}
+endif::[]
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+ifeval::[{binder-badge-enabled} == true]
+image:/assets/images/badges/myBinder.png[[Binder, link="https://mybinder.org/", {browser-window--new}]
+image:/assets/images/badges/docsBinder.png[[Binder, link="https://mybinder.readthedocs.io/en/latest/", {browser-window--new}]
+image:https://mybinder.org/badge_logo.svg[Binder, link="https://mybinder.org/v2/gist/jekyll-one/b2b2fe2997d3a78217cae73089c94193", {browser-window--new}]
+endif::[]
+
+[NOTE]
+====
+This is a port for J1 Template of the origial document pages at
+https://www.nbinteract.com/[nbinteracts Dos, {browser-window--new}].
+Meanwhile, a lot of changes at Binder were done what cause the origial
+pages doesn't work anymore. You'll see at the origial documents that all
+(interactive) pages never change their state: `Initializing widgets...` and
+get stuck in an infinite initializing loop.
+====
+
+The package *nbinteract* aims to enable authors and educators to easily create
+and share interactive web pages. Interactive explanations of concepts are
+useful for communicating and explaining tricky concepts. Consider these
+explanations for linear regression and conditional probability, for example.
+
+However, making an interactive webpage often requires significant knowledge
+of web technologies and especially Javascript. While Jupyter widgets allow
+authors to generate interactive interfaces directly in a Jupyter notebook,
+sharing these demos typically requires readers to run the notebook. This
+causes issues when the reader's computer lacks (correct versions of) the
+packages needed to completely run the notebook.
+
+The package *nbinteract* provides a single binary that converts Jupyter
+notebooks into HTML pages. The resulting HTML pages can be shared with
+the public, keeping any interactivity created using Jupyter widgets. For
+example, the interactive parts of this website are entirely generated from
+notebooks using nbinteract.
+
+In addition, nbinteract provides a Python package. Once imported, nbinteract
+provides helper methods that allow users to create simple interactive
+visualizations with single function calls.
+
+++++
+<!-- Button trigger modal -->
+<!-- button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nbiModalTopInfo">
+  Launch demo modal
+</button -->
+++++
+
+== Getting Started
+
+In the following set of pages, we will show you how to use nbinteract and
+its related tools. At the end of this tutorial, you will have a publicly
+viewable interactive webpage to share with the world!
+
+=== Following Along
+
+In this tutorial, we assume familiarity with running terminal commands and
+using Jupyter notebooks.
+
+The simplest way to follow this tutorial is to use the Binder service to
+start a notebook server. On the next page, we'll guide you through the steps
+to configure Binder so that the necessary packages are available for use in notebooks.
+
+=== Installing Locally
+If you prefer to work on your local machine, you need to install the nbinteract
+package. To install the package, run the following commands in your terminal:
+
+[source, sh]
+----
+pip install nbinteract
+
+# The next two commands can be skipped for notebook version 5.3 and above
+jupyter nbextension enable --py --sys-prefix bqplot
+jupyter nbextension enable --py --sys-prefix widgetsnbextension
+----
+
+== Set Up
+
+To enable interactivity on webpages, nbinteract relies on the free Binder
+service. To configure Binder to run your webpages, we will create a GitHub
+repository which will also allow you to host your converted webpages publicly.
+
+=== Creating an Account and Repo
+
+To begin, visit https://github.com[Github] and create an account. If you
+already have an account, you should log in.
+
+Then, create a new repo. You may do this using the GitHub UI or visiting to
+https://github.com/new[create new repo at Github]. Name the repo
+nbinteract-tutorial. If you'd like a different name, feel free to name it
+something else; just keep in mind that we will use this repo name in later
+parts of the tutorial.
+
+Make sure your repo is public, and click the checkbox to initialize your
+repo with a README. Your page should look like:
+
+// image gh-repo-setup
+
+Now, click on the Settings link for the repo near the top of the page,
+scroll down to the GitHub Pages section, and select the main branch as the
+GitHub pages source. Click the Save button to save your changes.
+
+// image gh-pages-setup
+
+Now, any file you upload to this repo will have a public URL. For example,
+the README.md file in the repo has the following URL:
+
+  {username}.github.io/nbinteract-tutorial/README.md
+
+Where `{username}` is replaced with your GitHub username. For example,
+if my username is SamLau95, my URL is:
+
+  SamLau95.github.io/nbinteract-tutorial/README.md
+
+If you can visit that URL and the page contains text (and not a 404 error)
+you've set up your GitHub repo correctly.
+
+=== Cloning Your Repo
+
+Now, visit http://mybinder.org/[Binder] and paste in the URL to your repo.
+It should look like:
+
+  https://github.com/{username}/nbinteract-tutorial
+
+Where {username} is replaced with your GitHub username.
+
+Launch the Binder server to open Jupyter. If you are working locally, you
+should instead run the following commands in your terminal:
+
+[source, sh]
+----
+# Clone the repo
+git clone https://github.com/{username}/nbinteract-tutorial
+
+# Move into the repo directory
+cd nbinteract-tutorial
+
+# Start Jupyter
+jupyter notebook
+----
+
+
+== Initializing nbinteract
+
+Via the notebook interface, click on New -> Terminal. This should open a
+terminal prompt. Run the following commands:
+
+[source, sh]
+----
+# Installs nbinteract
+pip install nbinteract
+
+# Initializes nbinteract. When prompted, create a requirements.txt file. Since we aren't
+# adding additional packages in this tutorial, re-run the command to finish initialization.
+nbinteract init
+
+git add -A
+git commit -m "Setup nbinteract"
+git push origin main
+----
+
+This initializes the nbinteract package and pushes the configuration files
+to GitHub. If you are working locally, skip the pip install command above
+and run the remaining commands in your terminal.
+
+notebook::simple_webpage[]
+
+== Examples
+
+lorem:sentences[5]
+
+notebook::central_limit_theorem[]
+
+notebook::empirical_distributions[]
+
+
+++++
+<script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
+<!-- MathJax configuration -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+        processEscapes: true,
+        processEnvironments: true
+    },
+    // Center justify equations in code and markdown cells. Elsewhere
+    // we use CSS to left justify single line equations in code cells.
+    displayAlign: 'center',
+    "HTML-CSS": {
+        styles: {'.MathJax_Display': {"margin": 0}},
+        linebreaks: { automatic: true }
+    }
+});
+</script>
+++++

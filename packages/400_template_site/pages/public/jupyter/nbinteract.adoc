@@ -138,6 +138,15 @@ and degraded as time goes.
 
 notebook::odes_in_python[]
 
+
+=== ODEs Selected
+
+lorem:sentences[5]
+
+notebook::odes_selected[]
+
+
+
 ++++
 <script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
 <!-- MathJax configuration -->

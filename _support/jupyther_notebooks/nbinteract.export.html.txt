@@ -1,12 +1,16 @@
 nbinteract -r "D:\j1\github\j1-template-2022.1.x\packages\400_template_site\assets\data\jupyter\notebooks" -t plain -s fake/fake
 
-
+nbinteract -r "T:\J1\nbi-site\assets\data\jupyter\notebooks" -t plain -s fake/fake
 
 nbinteract
   -r "D:\j1\github\j1-template-2022.1.x\packages\400_template_site\assets\data\jupyter\notebooks"
   -t plain
   -s fake/fake
 
+
+https://raw.githubusercontent.com/data-8/materials-fa17/master/lec/united_summer2015.csv
+
+https://raw.githubusercontent.com/jekyll-one/nbinteract-notebooks/main/data/GlobalLandTemperaturesByMajorCity.csv.zip
 
 Transformation
 --------------------------------------------------------------------------------

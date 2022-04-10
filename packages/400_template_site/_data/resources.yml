@@ -1655,13 +1655,13 @@ resources:
       dependencies:                     false
       pass_init_data:                   false
       data:
-        css:                            [ modules/nbInteract/css/nbinteract/nbinteract-core ]
+        css:                            [ modules/nbInteract/css/j1-nbinteract-core ]
         files:                          [
 #                                         modules/nbInteract/js/mathjax/latest.js,
 #                                         modules/nbInteract/js/mathjax/tex-chtml-full.js,
                                           adapter/js/nbinteract.js
                                         ]
-        js:                             [ modules/nbInteract/js/nbinteract/nbinteract-core ]
+        js:                             [ modules/nbInteract/js/nbinteract/j1-nbinteract-core ]
         init_function:                  [ j1.adapter.nbinteract.init ]
 
 # ------------------------------------------------------------------------------
