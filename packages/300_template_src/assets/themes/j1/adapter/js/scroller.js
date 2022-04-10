@@ -117,8 +117,6 @@ var lastPageInfo;
       logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
-
-
       _this.generate_scrollers();
 
       _this.setState('finished');

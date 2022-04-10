@@ -146,13 +146,6 @@ settings:
       #
       items:
 
-        - item:                         Reload Page
-          enabled:                      true
-          id:                           fam_reload_page
-          color:                        md-red
-          event_handler:                reload_page
-          icon:                         reload
-
         - item:                         To Top
           enabled:                      true
           id:                           fam_scroll_to_top
@@ -177,13 +170,20 @@ settings:
           icon:                         step-forward
           icon_properties:              rotate-90
 
-        - item:                         To bottom
+        # - item:                         To bottom
+        #   enabled:                      true
+        #   id:                           fam_scroll_to_bottom
+        #   color:                        info
+        #   event_handler:                scroll_to_bottom
+        #   icon:                         step-forward-2
+        #   icon_properties:              rotate-90
+
+        - item:                         Reload Page
           enabled:                      true
-          id:                           fam_scroll_to_bottom
-          color:                        info
-          event_handler:                scroll_to_bottom
-          icon:                         step-forward-2
-          icon_properties:              rotate-90
+          id:                           fam_reload_page
+          color:                        md-red
+          event_handler:                reload_page
+          icon:                         reload
 
         - item:                         Table of Contents
           enabled:                      true

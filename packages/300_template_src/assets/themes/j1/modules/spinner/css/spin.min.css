@@ -1,0 +1,19 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/spinner/css/spin.js
+ # Provides the CSS styles for spin.js
+ #
+ # Product/Info:
+ # https://jekyll.one
+ # https://github.com/fgnass/spin.js
+ #
+ # Copyright (C) 2022 Juergen Adams
+ # Copyright (c) 2011-2018 Felix Gnass
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # Spin is licensed under the MIT License.
+ # See: https://github.com/fgnass/spin.js/blob/master/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+@keyframes spinner-line-fade-more{0%,100%{opacity:0}1%{opacity:1}}@keyframes spinner-line-fade-quick{0%,39%,100%{opacity:.25}40%{opacity:1}}@keyframes spinner-line-fade-default{0%,100%{opacity:.22}1%{opacity:1}}@keyframes spinner-line-shrink{0%,25%,100%{transform:scale(0.5);opacity:.25}26%{transform:scale(1);opacity:1}}

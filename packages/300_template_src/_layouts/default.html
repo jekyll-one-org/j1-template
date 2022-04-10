@@ -258,10 +258,11 @@ layout:                                 compress
 {% case environment %}
 
   {% comment %} DEVELOPMENT mode
+  {{ j1_cache | regex_replace: 'js-nbinteract-widget', 'btn btn-primary btn-raised js-nbinteract-widget' | regex_replace: '<h[1-2].*?>(.*?)<\/h[1-2]>', '<h2>\1</h2>' | regex_replace: '&#182;|¶' | strip_empty_lines | remove: '<p>excerpt__end</p>' | pretty_print }}
   ------------------------------------------------------------------------------ {% endcomment %}
   {% when 'development' or 'dev' or 'test' %}
     {% if prettify %}
-      {{ j1_cache  | strip_empty_lines | remove: '<p>excerpt__end</p>' | pretty_print }}
+      {{ j1_cache | strip_empty_lines | remove: '<p>excerpt__end</p>' | pretty_print }}
     {% else %}
       {{ j1_cache | strip_empty_lines | remove: '<p>excerpt__end</p>' }}
     {% endif %} {% comment %} END prettify {% endcomment %}

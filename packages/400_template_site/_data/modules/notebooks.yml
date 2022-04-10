@@ -1,0 +1,315 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/notebooks.yml
+# User configuration for J1 Jupyter Notebooks
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2022 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description (used for J1 CC only)
+#
+description:
+
+  title:                                Jupyter Notebooks
+  scope:                                User settings
+  location:                             _data/modules/notebooks.yml
+
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+settings:
+
+  notebooks:
+
+    # --------------------------------------------------------------------------
+    # ODEs in Python
+    #
+    # - notebook:
+    #     enabled:                        false
+    #
+    #     id:                             odes_in_python
+    #     xhr_data_path:                  /assets/data/jupyter/notebooks
+    #     xhr_data:                       ODEs_In_Python.html
+    #
+    #     spec:                           jekyll-one/7818823efbfa538c35cc811da9e72296/master
+    #     baseUrl:                        'https://mybinder.org'
+    #     provider:                       gist
+
+    # --------------------------------------------------------------------------
+    # First NB
+    #
+    - notebook:
+        enabled:                        true
+
+        id:                             odes_in_python
+        xhr_data_path:                  /assets/data/jupyter/notebooks
+        xhr_data:                       odes-in-python.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one/nbinteract-notebooks/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    # --------------------------------------------------------------------------
+    # J1 nbinteract docs
+    #
+    - notebook:
+        enabled:                        true
+
+        id:                             simple_webpage
+        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        xhr_data:                       tutorial_interact.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one-org/nbinteract-tutorial/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    - notebook:
+        enabled:                        true
+
+        id:                             tutorial_monty_hall
+        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        xhr_data:                       tutorial_monty_hall.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one-org/nbinteract-tutorial/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    - notebook:
+        enabled:                        true
+
+        id:                             recipes_graphing
+        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        xhr_data:                       recipes_graphing.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one-org/nbinteract-tutorial/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    - notebook:
+        enabled:                        true
+
+        id:                             recipes_layout
+        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        xhr_data:                       recipes_layout.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one-org/nbinteract-tutorial/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    - notebook:
+        enabled:                        true
+
+        id:                             recipes_interactive_questions
+        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        xhr_data:                       recipes_interactive_questions.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one-org/nbinteract-tutorial/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    - notebook:
+        enabled:                        true
+
+        id:                             recipes_interactive_questions
+        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        xhr_data:                       recipes_interactive_questions.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one-org/nbinteract-tutorial/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    - notebook:
+        enabled:                        true
+
+        id:                             empirical_distributions
+        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        xhr_data:                       examples_empirical_distributions.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one-org/nbinteract-tutorial/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    - notebook:
+        enabled:                        true
+
+        id:                             examples_sampling_from_a_population
+        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        xhr_data:                       examples_sampling_from_a_population.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one-org/nbinteract-tutorial/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    - notebook:
+        enabled:                        true
+
+        id:                             examples_variability_of_the_sample_mean
+        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        xhr_data:                       examples_variability_of_the_sample_mean.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one-org/nbinteract-tutorial/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    - notebook:
+        enabled:                        true
+
+        id:                             examples_correlation
+        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        xhr_data:                       examples_correlation.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one-org/nbinteract-tutorial/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    - notebook:
+        enabled:                        true
+
+        id:                             examples_linear_regression
+        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        xhr_data:                       examples_linear_regression.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one-org/nbinteract-tutorial/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    - notebook:
+        enabled:                        true
+
+        id:                             examples_probability_distribution_plots
+        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        xhr_data:                       examples_probability_distribution_plots.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one-org/nbinteract-tutorial/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    - notebook:
+        enabled:                        true
+
+        id:                             central_limit_theorem
+        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        xhr_data:                       examples_central_limit_theorem.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one-org/nbinteract-tutorial/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    # --------------------------------------------------------------------------
+    # Second NB
+    #
+    - notebook:
+        enabled:                        false
+
+        id:                             climate_change
+        xhr_data_path:                  /assets/data/jupyter/notebooks
+        xhr_data:                       climate-change-forecast.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one/nbinteract-notebooks/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    # --------------------------------------------------------------------------
+    # Third NB
+    #
+    - notebook:
+        enabled:                        false
+
+        id:                             interactive
+        xhr_data_path:                  /assets/data/jupyter/notebooks
+        xhr_data:                       interactive.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one/nbinteract-notebooks/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    # --------------------------------------------------------------------------
+    # Fourth NB
+    #
+    - notebook:
+        enabled:                        false
+
+        id:                             odes_selected
+        xhr_data_path:                  /assets/data/jupyter/notebooks
+        xhr_data:                       odes-selected.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one/nbinteract-notebooks/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+    # --------------------------------------------------------------------------
+    # Fifths NB
+    #
+    - notebook:
+        enabled:                        false
+
+        id:                             tut_interact
+        xhr_data_path:                  /assets/data/jupyter/notebooks/tutorial
+        xhr_data:                       tutorial_interact.html
+
+        heading:                        h3
+        button_styles:                  btn btn-primary btn-raised
+
+        spec:                           jekyll-one-org/nbinteract-tutorial/main
+        baseUrl:                        'https://mybinder.org'
+        provider:                       gh
+
+# ------------------------------------------------------------------------------
+# END config
