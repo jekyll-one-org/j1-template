@@ -341,9 +341,8 @@ j1.adapter.nbinteract = (function (j1, window) {
               logger:   coreLogger,
               j1API:    j1,
             });
-            // nbInteract (core) initializer
+            // initialize nbInteract (core) instance
             //
-            // interact.run();
             interact.prepare();
 
             _this.setState('finished');
