@@ -1,6 +1,12 @@
-nbinteract -r "D:\j1\github\j1-template-2022.1.x\packages\400_template_site\assets\data\jupyter\notebooks" -t plain -s fake/fake
+Convert notebooks to HTML
+--------------------------------------------------------------------------------
 
-nbinteract -r "T:\J1\nbi-site\assets\data\jupyter\notebooks" -t plain -s fake/fake
+nbinteract -r D:\j1\github\j1-template-2022.2.x\packages\300_template_src\assets\data\jupyter\notebooks -t plain -s fake/fake
+
+nbinteract -r T:\J1\nbi-site\assets\data\jupyter\notebooks -t plain -s fake/fake
+
+nbinteract -r D:\j1\github\j1-sites\j1-nbi-site-2022.2.0\assets\data\jupyter\notebooks -t plain -s fake/fake
+
 
 nbinteract
   -r "D:\j1\github\j1-template-2022.1.x\packages\400_template_site\assets\data\jupyter\notebooks"
@@ -12,11 +18,12 @@ https://raw.githubusercontent.com/data-8/materials-fa17/master/lec/united_summer
 
 https://raw.githubusercontent.com/jekyll-one/nbinteract-notebooks/main/data/GlobalLandTemperaturesByMajorCity.csv.zip
 
+
 Transformation
 --------------------------------------------------------------------------------
+
 h1 -> h2
 delete all: &#182;
-
 
 
 Repo Name of a Gist
@@ -56,8 +63,3 @@ Git Repo
 
 Name:   https://github.com/jekyll-one/nbinteract-notebooks.git
 Path:   https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/HEAD?labpath=interactive
-
-
-
-Bla
---------------------------------------------------------------------------------
