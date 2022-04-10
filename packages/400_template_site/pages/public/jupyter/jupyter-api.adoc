@@ -1,5 +1,5 @@
 ---
-title:                                  JupyterLab
+title:                                  Jupyter
 tagline:                                Services API
 date:                                   2022-03-28 00:00:00
 description: >
@@ -83,7 +83,7 @@ to serve a pre-configured data science environment to any user in the world.
 It is customizable and scalable, and is suitable for small and large teams,
 academic courses, and large-scale infrastructure.
 
-== JupyterLab Services
+== Jupyter Services (REST API)
 
 Javascript client for the Jupyter services REST APIs. All functions and
 classes using the REST API allow a serverSettings parameter to configure

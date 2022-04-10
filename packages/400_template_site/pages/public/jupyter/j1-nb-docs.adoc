@@ -112,9 +112,11 @@ using Jupyter notebooks.
 
 The simplest way to follow this tutorial is to use the Binder service to
 start a notebook server. On the next page, we'll guide you through the steps
-to configure Binder so that the necessary packages are available for use in notebooks.
+to configure Binder so that the necessary packages are available for use in
+notebooks.
 
 === Installing Locally
+
 If you prefer to work on your local machine, you need to install the nbinteract
 package. To install the package, run the following commands in your terminal:
 
@@ -218,14 +220,229 @@ and run the remaining commands in your terminal.
 
 notebook::simple_webpage[]
 
+== Publishing A Webpage
+
+To convert a notebook into an HTML file, start a terminal and run the
+following command.
+
+  nbinteract tutorial.ipynb
+
+This generates a tutorial.html file with the contents of the notebook created
+in the previous section. Now, push your files to GitHub by running:
+
+[source, sh]
+----
+git add -A
+git commit -m "Publish nb"
+git push origin main
+----
+
+After pushing, you now have a URL you can view and share:
+
+  {username}.github.io/nbinteract-tutorial/tutorial.html
+
+Where `{username}` is replaced with your GitHub username. For example, if
+my username is SamLau95, my URL is:
+
+  SamLau95.github.io/nbinteract-tutorial/tutorial.html
+
+=== Publishing to a different URL
+
+To change the URL of the page you publish, you can rename your notebook
+before you convert it. For example, if you rename `tutorial.ipynb` to
+`hello.ipynb` and convert the notebook, the resulting URL becomes:
+
+  {username}.github.io/nbinteract-tutorial/hello.html
+
+To change the path segment before the filename (in this case,
+nbinteract-tutorial) you can create a new GitHub repo with the subpath
+name you want. Then, you may create and convert notebooks in this repo.
+For example, if you create a new repo called blog-posts and convert a
+notebook called tutorial.ipynb, the resulting URL becomes:
+
+  {username}.github.io/blog-posts/tutorial.html
+
+=== Workflow
+
+You have learned a simple workflow to create interactive webpages:
+
+. Write a Jupyter notebook containing Python functions
+. Use interact to create UI elements to interact with the functions.
+. Run nbinteract {notebook} in a terminal to generate an interactive
+  webpage using your notebook code.
+. Publish your webpage to GitHub pages to make it publicly accessible.
+
+In the next section, you will create an interactive simulation of the
+Monty Hall Problem. Onward!
+
+notebook::tutorial_monty_hall[]
+
+
+== Recipes
+
+lorem:sentences[5]
+
+=== Exporting With nbinteract
+
+nbinteract comes with two options for exporting Jupyter notebooks into
+standalone HTML pages: using the nbinteract command line tool and running
+nbi.publish() in a notebook cell.
+
+=== The nbinteract CLI tool
+
+Installing the nbinteract package installs a command-line tool for converting
+notebooks into HTML pages. For example, to convert a notebook called
+`Hello.ipynb` using the Binder spec `calebs11/nbinteract-image/main`:
+
+[source, sh]
+----
+# `main` is optional since it is the default
+nbinteract Hello.ipynb -s calebs11/nbinteract-image
+----
+
+After running nbinteract init, you may omit the -s flag and simply write:
+
+[source, sh]
+----
+nbinteract Hello.ipynb
+----
+
+One advantage of the command line tool is that it can convert notebooks in
+folders as well as individual notebooks:
+
+[source, sh]
+----
+# Using the -r flag tells nbinteract to recursively search for .ipynb files
+# in nb_folder
+nbinteract -r nb_folder/
+----
+
+For the complete set of options, run nbinteract --help.
+
+[source, sh]
+----
+$ nbinteract --help
+----
+
+....
+`nbinteract NOTEBOOKS ...` converts notebooks into HTML pages. Note that
+running this command outside a GitHub project initialized with `nbinteract
+init` requires you to specify the --spec SPEC option.
+
+Arguments:
+  NOTEBOOKS  List of notebooks or folders to convert. If folders are passed in,
+             all the notebooks in each folder are converted. The resulting HTML
+             files are created adjacent to their originating notebooks and will
+             clobber existing files of the same name.
+
+             By default, notebooks in subfolders will not be converted; use the
+             --recursive flag to recursively convert notebooks in subfolders.
+
+Options:
+  -h --help                  Show this screen
+  -s SPEC --spec SPEC        BinderHub spec for Jupyter image. Must be in the
+                             format: `{username}/{repo}/{branch}`. For example:
+                             'SamLau95/nbinteract-image/master'. This flag is
+                             **required** unless a .nbinteract.json file exists
+                             in the project root with the "spec" key. If branch
+                             is not specified, default to `main`.
+  -t TYPE --template TYPE    Specifies the type of HTML page to generate. Valid
+                             types: full (standalone page), partial (embeddable
+                             page with library), or plain (embeddable page
+                             without JS).
+                             [default: full]
+  -B --no-top-button         If set, doesn't generate button at top of page.
+  -r --recursive             Recursively convert notebooks in subdirectories.
+  -o FOLDER --output=FOLDER  Outputs HTML files into FOLDER instead of
+                             outputting files adjacent to their originating
+                             notebooks. All files will be direct descendants of
+                             the folder even if --recursive is set.
+  -i FOLDER --images=FOLDER  Extracts images from HTML and writes into FOLDER
+                             instead of encoding images in base64 in the HTML.
+                             Requires -o option to be set as well.
+  -e --execute               Executes the notebook before converting to HTML,
+                             functioning like the equivalent flag for
+                             nbconvert. Configure NbiExecutePreprocessor to
+                             change conversion instead of the base
+                             ExecutePreprocessor.
+....
+
+=== nbi.publish()
+
+The `nbi.publish()` method can be run inside a Jupyter notebook cell. It has
+the following signature:
+
+[source, python]
+----
+import nbinteract as nbi
+
+nbi.publish(spec, nb_name, template='full', save_first=True)
+----
+
+....
+Converts nb_name to an HTML file. Preserves widget functionality.
+
+Outputs a link to download HTML file after conversion if called in a
+notebook environment.
+
+Equivalent to running `nbinteract ${spec} ${nb_name}` on the command line.
+
+Args:
+    spec (str): BinderHub spec for Jupyter image. Must be in the format:
+        `${username}/${repo}/${branch}`.
+
+    nb_name (str): Complete name of the notebook file to convert. Can be a
+        relative path (eg. './foo/test.ipynb').
+
+    template (str): Template to use for conversion. Valid templates:
+
+        - 'full': Outputs a complete standalone HTML page with default
+          styling. Automatically loads the nbinteract JS library.
+        - 'partial': Outputs an HTML partial that can be embedded in
+          another page. Automatically loads the nbinteract JS library.
+        - 'gitbook': Outputs an HTML partial used to embed in a Gitbook or
+          other environments where the nbinteract JS library is already
+          loaded.
+
+    save_first (bool): If True, saves the currently opened notebook before
+        converting nb_name. Used to ensure notebook is written to
+        filesystem before starting conversion. Does nothing if not in a
+        notebook environment.
+
+
+Returns:
+    None
+....
+
+For example, to convert a notebook called Hello.ipynb using the Binder spec
+`calebs11/nbinteract-image/main`:
+
+[source, sh]
+----
+nbi.publish('calebs11/nbinteract-image/main', 'Hello.ipynb')
+----
+
+notebook::recipes_graphing[]
+
+notebook::recipes_layout[]
+
+notebook::recipes_interactive_questions[]
+
 == Examples
 
 lorem:sentences[5]
 
-notebook::central_limit_theorem[]
-
 notebook::empirical_distributions[]
 
+notebook::examples_sampling_from_a_population[]
+
+notebook::examples_variability_of_the_sample_mean[]
+
+notebook::examples_correlation[]
+
+notebook::examples_linear_regression[]
+
+notebook::central_limit_theorem[]
 
 ++++
 <script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>
