@@ -185,12 +185,14 @@ table tfoot tr td {
   text-align: left;
 }
 
+// jadams, 2022-04-11, added ALL borders
 table tr th,
 table tr td {
   padding: .5rem 1rem 0.5rem 1rem;
   font-size: inherit;
-  border-right:  1px solid $grey-400;
-  border-bottom: 1px solid $grey-400;
+  // border-right:  1px solid $grey-400;
+  // border-bottom: 1px solid $grey-400;
+   border: 1px solid $grey-400;
 }
 
 table tr.even,

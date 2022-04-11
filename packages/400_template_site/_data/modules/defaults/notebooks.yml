@@ -29,13 +29,28 @@ description:
 #
 defaults:
 
-  xhr_data_path:                        /assets/data/jupyter/notebooks
+  # ----------------------------------------------------------------------------
+  # config settings
+  #
+  # - notebook:
+  #     enabled:                        false
+  #
+  #     id:                             odes_in_python
+  #     xhr_data:                       ODEs_In_Python.html
+  #     xhr_data_path:                  /assets/data/jupyter/notebooks
+  #     button_styles:                  btn btn-primary btn-raised
+  #
+  #     spec:                           jekyll-one/7818823efbfa538c35cc811da9e72296/master
+  #     baseUrl:                        'https://mybinder.org'
+  #     provider:                       gist
+  # ----------------------------------------------------------------------------
+  #
 
-  heading:                              h3
-  button_styles:                        btn btn-primary btn-raised
-
+  spec:                                 jekyll-one/nbinteract-notebooks/main
   baseUrl:                              'https://mybinder.org'
-  provider:                             gist
+  provider:                             gh
+
+  button_styles:                        btn btn-primary btn-raised
 
 # ------------------------------------------------------------------------------
 # END config
