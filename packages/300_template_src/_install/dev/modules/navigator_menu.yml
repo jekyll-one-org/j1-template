@@ -155,6 +155,49 @@
           icon:                         magnify
 
     # --------------------------------------------------------------------------
+    # Experimental
+    #
+    - title:                            Experimental
+      icon:                             test-tube                               # head-flash-outline
+      dropdown:
+
+        - title:                        J1 Text Books
+          icon:                         script-text-play-outline
+          dropdown:
+
+            - title:                    NBI Docs (J1 Version)
+              href:                     /pages/public/jupyter/textbooks/j1-nb-docs/
+              icon:                     script-text-play-outline
+            - title:                    NBI Test Notebooks
+              href:                     /pages/public/jupyter/textbooks/j1-nb-test/
+              icon:                     script-text-play-outline
+
+            # - title:                    ODE in Python (interactive)
+            #   href:                     /pages/public/jupyter/textbooks/odes-in-python/
+            #   icon:                     script-text-play-outline
+            # - title:                    Climate Change (static)
+            #   href:                     /pages/public/jupyter/textbooks/climate-change-forecast/
+            #   icon:                     script-text-play-outline
+
+        - title:                        Docs
+          icon:                         book-open-page-variant
+          dropdown:
+
+            - title:                    J1 NbInteract
+              href:                     /pages/public/jupyter/docs/j1-nb-docs/
+              icon:                     alpha-j-box
+
+            - title:                    NBI Widgets
+              href:                     /pages/public/jupyter/docs/nbi-widgets/
+              icon:                     book
+            - title:                    BinderHub API
+              href:                     /pages/public/jupyter/docs/binderhub-api/
+              icon:                     book
+            - title:                    JupyterHub API
+              href:                     /pages/public/jupyter/docs/jupyterlab-api/
+              icon:                     book
+
+    # --------------------------------------------------------------------------
     # Asciidoc Skeletons
     #
     - title:                            Asciidoc Skeletons
@@ -213,7 +256,7 @@
 #
 - item:                                 Blog
   sublevel:
-    - title:                            Starter Blog
+    - title:                            Blog Navigator
       href:                             /pages/public/blog/navigator/
       icon:                             near-me
     - title:                            Categories

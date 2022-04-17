@@ -155,6 +155,7 @@ module.exports = function navigator ( options ) {
         classname    = e.target.className ? e.target.className : '';
         nav_link     = classname.includes('nav-');
 
+//      if (!nav_link || page_link) {
         if (nav_link || !page_link) {
           logger.debug('\n' + 'click event on href "#" detected: prevent default action');
           e.preventDefault ? e.preventDefault() : e.returnValue = false;
@@ -431,12 +432,10 @@ module.exports = function navigator ( options ) {
       var $getOut             = $getNav.find('ul.nav').data('out');
 
       var menuSelector        = '#' +navMenuOptions.xhr_container_id+ '.collapse';
-      var quicklinksSelector  = '#navigator_nav_quicklinks';
       var delayMenuOpen       = navMenuOptions.delay_menu_open;
 
-      var breakPoint;
-
       var $menu;
+      var breakPoint;
       var $dropDown;
       var timeoutHandle;
 
@@ -462,6 +461,7 @@ module.exports = function navigator ( options ) {
       var xlarge_range        = {min: '90.063em', max: '120em'};                /* 1441px, 1920px */
       var xxlarge_range       = {min: '120.063em'};                             /* 1921px */
 
+
       // jadams, 2019-05-01: Set Media Breakpoint for Desktop|Mobile Navigation
       if ( navDefaultOptions.nav_bar.media_breakpoint === 'lg' ) {
         breakPoint = gridBreakpoint_lg;
@@ -483,12 +483,36 @@ module.exports = function navigator ( options ) {
       // MIN media breakpoint
       if ( $getWindow <= breakPoint ) {
 
-        // Collapse Navbar (Desktop Navigation)
+        // Collapse Navbar
         $(menuSelector).addClass('navbar-collapse');
-        $(menuSelector).removeClass('show');
+        $(menuSelector).removeClass('show'); //
+        $('#navigator_nav_quicklinks').addClass('show');
 
-        // Show QuicklinksBar
-        $(quicklinksSelector).addClass('show');
+        // Enable click Quicklink Navigation
+        $('nav.navbar.navigator .attr-nav').each(function() {
+          $('.dropdown-menu', this).removeClass('animated');
+          $('li.dropdown', this).off('mouseenter');
+          $('li.dropdown', this).off('mouseleave');
+          $('a.dropdown-toggle', this).off('click');
+          $('a.dropdown-toggle', this).on('click', function (e) {
+            // e.stopPropagation(); // don't bubble up the event
+            $(this).closest('li.dropdown').find('.dropdown-menu').first().stop().fadeToggle();
+            $('.navbar-toggle').each(function(){
+              $('.mdi', this).removeClass('mdi-close');
+              $('.mdi', this).addClass('mdi-menu');
+              $('.navbar-collapse').removeClass('in');
+              $('.navbar-collapse').removeClass('open');
+            });
+          });
+
+          $(this).on('mouseleave', function(){
+            $('.dropdown-menu', this).stop().fadeOut();
+            $('li.dropdown', this).removeClass('open');
+            // return false;
+          });
+        });
+
+        $('#desktop_menu').hide();
 
       // -----------------------------------------------------------------------
       // Desktop Navigation does NOT work on physical devices like iPad|Pro
@@ -526,6 +550,7 @@ module.exports = function navigator ( options ) {
           var $list       = $container.find('ul');
 
           // limit LAST menu ONLY
+          //
           if ( $list.length == 1 ) {
             $list.addClass('scrollable-menu');
           }
@@ -536,31 +561,38 @@ module.exports = function navigator ( options ) {
         $(menuSelector).removeClass('navbar-collapse');
         $(menuSelector).addClass('show');
 
+        // Navbar Sidebar
+        // jadams, 2021-03-05: Sidebar NOT used anymore
+
         // Open Desktop Menu|s on hover
+        //
         $('nav.navbar.navigator ul.nav').each(function() {
 
           $('a.dropdown-toggle', this).off('click');
-          // $('a.dropdown-toggle', this).on('click', function (e) {
-          //   // e.stopPropagation(); // don't bubble up the event
-          // });
+          $('a.dropdown-toggle', this).on('click', function (e) {
+            // e.stopPropagation(); // don't bubble up the event
+          });
 
           $('.megamenu-fw', this).each(function() {
             $('.title', this).off('click');
             $('a.dropdown-toggle', this).off('click');
             $('.content').removeClass('animated');
           });
-
           $('.dropdown-menu', this).addClass('animated');
 
           $('li.dropdown', this).on('mouseenter', function(e) {
             $menu     = $('.dropdown-menu', this).eq(0);
             $dropDown = $(this);
 
+            // e.stopImmediatePropagation();
+            // e.preventDefault();
+
             $menu.removeClass($getOut);
             $menu.removeClass('open');
             $dropDown.addClass('open');
 
-            // Create a timeout object to delay the dropdown menus to open
+
+            // Get|Set the timeout object to delay the dropdown open
             timeoutHandle = window.setTimeout(function () {
               if ($dropDown.hasClass('open')) {
                 $menu.stop().fadeIn().addClass($getIn);
@@ -568,26 +600,85 @@ module.exports = function navigator ( options ) {
                 $dropDown.addClass('open');
               }
             }, delayMenuOpen);
+
+            // return false;
             return true;
           });
 
           $('li.dropdown', this).on('mouseleave', function(e) {
             $menu     = $('.dropdown-menu', this).eq(0);
             $dropDown = $(this);
+            window.clearTimeout(timeoutHandle);                                 // Clear the timeout object for 'dropdown open'
 
-            // Clear the timeout object for dropdown menus 'open'
-            window.clearTimeout(timeoutHandle);
+            // e.stopImmediatePropagation();
+            // e.preventDefault();
 
-            $menu.removeClass($getIn);
-            $menu.addClass($getOut);
-            $menu.fadeOut('slow');
-            $dropDown.removeClass('open');
+            // $(this).removeClass('open').removeClass('open');
+            // $('.dropdown-menu', this).removeClass('open');
+            //  $('.dropdown-menu', this).delay(1000).queue(function(){
+            //     $(this).removeClass('open').dequeue();
+            // });
 
-           return true;
+             $menu.removeClass($getIn);
+             $menu.addClass($getOut);
+             $menu.stop().delay(1000).fadeOut();
+             // $menu.removeClass('open');
+             $dropDown.delay(1000).removeClass('open');
+
+            //  window.setTimeout(function () {
+            //    $dropDown.removeClass('open')
+            // }, delayMenuOpen);
+
+             // $dropDown.delay(1000).queue(function() {
+             //   $dropDown.removeClass('open').dequeue();
+             // });
+
+             // return false;
+             return true;
           });
+
+          // $(this).on('mouseleave', function() {
+          //   window.clearTimeout(timeoutHandle);
+          //   $('.dropdown-menu', this).removeClass($getIn);
+          //   $('li.dropdown', this).removeClass('open');
+          //   $('.dropdown-menu', this).removeClass('open');
+          //   // $('.dropdown-menu', this).eq(0).stop().fadeOut().addClass($getOut);
+          // });
         }); // END Desktop Menu
 
       } // end Desktop
+
+      // -----------------------------------------------------------------------
+      // Hover Open on Quicklink Navigation (not used anymore)
+      // -----------------------------------------------------------------------
+      // $('nav.navbar.navigator .attr-nav').each(function() {
+      //
+      //   $('a.dropdown-toggle', this).off('click');
+      //   $('a.dropdown-toggle', this).on('click', function (e) {
+      //     // e.stopPropagation(); // don't bubble up the event
+      //   });
+      //
+      //   $('.dropdown-menu', this).addClass('animated');
+      //   $('li.dropdown', this).on('mouseenter', function(){
+      //     $('.dropdown-menu', this).eq(0).removeClass($getOut);
+      //     $('.dropdown-menu', this).eq(0).stop().fadeIn().addClass($getIn);
+      //     $(this).addClass('open');
+      //     //return false;
+      //   });
+      //
+      //   $('li.dropdown', this).on('mouseleave', function(){
+      //     $('.dropdown-menu', this).eq(0).removeClass($getIn);
+      //     $('.dropdown-menu', this).eq(0).stop().fadeOut().addClass($getOut);
+      //     $(this).removeClass('open');
+      //   });
+      //
+      //   $(this).on('mouseleave', function(){
+      //     $('.dropdown-menu', this).removeClass($getIn);
+      //     $('.dropdown-menu', this).eq(0).stop().fadeOut().addClass($getOut);
+      //     $('li.dropdown', this).removeClass('open');
+      //     //return false;
+      //   });
+      // });
 
       // -----------------------------------------------------------------------
       //  Fullscreen Menu

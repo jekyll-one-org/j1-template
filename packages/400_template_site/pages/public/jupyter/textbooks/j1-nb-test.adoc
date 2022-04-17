@@ -24,6 +24,11 @@ resource_options:
       opacity:                          0.5
       slides:
         - url:                          /assets/images/modules/attics/john-schnobrich-2-1920x1280.jpg
+          alt:                          Photo by John Schnobrich on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     John Schnobrich
+            href:                       https://unsplash.com/@johnschno
 ---
 
 // Page Initializer

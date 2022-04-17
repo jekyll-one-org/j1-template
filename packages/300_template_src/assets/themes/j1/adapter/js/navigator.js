@@ -791,57 +791,6 @@ j1.adapter.navigator = (function (j1, window) {
     }, // END setCSS
 
     // -------------------------------------------------------------------------
-    //  delayShowMenu
-    //  delay all dropdown menu to open for "delay" time
-    //  See: http://jsfiddle.net/AndreasPizsa/NzvKC/
-    // -------------------------------------------------------------------------
-    delayShowMenu: function ( menuOpenDelay ) {
-      var logger      = log4javascript.getLogger('j1.adapter.navigator.delayShowMenu');
-      var theTimer = 0;
-      var theElement = null;
-      var theLastPosition = {x:0,y:0};
-
-      logText = '\n' + 'entered delayShowMenu';
-      logger.info(logText);
-
-      // $('#navigator_nav_menu')
-      //   .find('li.dropdown.nav-item')
-
-      $('[data-bs-toggle]').closest('li')
-      .on('mouseenter', function (inEvent) {
-        if (theElement) theElement.removeClass('open');
-        window.clearTimeout(theTimer);
-        theElement = $(this);
-
-        theTimer = window.setTimeout(function () {
-          theElement.addClass('open');
-        }, menuOpenDelay);
-      })
-      .on('mousemove', function (inEvent) {
-        if(Math.abs(theLastPosition.x - inEvent.ScreenX) > 4 ||
-           Math.abs(theLastPosition.y - inEvent.ScreenY) > 4) {
-          theLastPosition.x = inEvent.ScreenX;
-          theLastPosition.y = inEvent.ScreenY;
-          return;
-        }
-        if (theElement.hasClass('open')) return;
-        window.clearTimeout(theTimer);
-        theTimer = window.setTimeout(function () {
-          theElement.addClass('open');
-        }, menuOpenDelay);
-      })
-      .on('mouseleave', function (inEvent) {
-        window.clearTimeout(theTimer);
-        theElement = $(this);
-        theTimer = window.setTimeout(function () {
-          theElement.removeClass('open');
-        }, menuOpenDelay);
-      });
-
-      return true;
-    }, // END delayShowMenu
-
-    // -------------------------------------------------------------------------
     // messageHandler
     // Manage messages (paylods) send from other J1 modules
     // -------------------------------------------------------------------------
