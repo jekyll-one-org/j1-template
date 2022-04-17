@@ -83,32 +83,42 @@ j1.adapter.nbinteract = (function (j1, window) {
   var moduleOptions   = {};
   var moduleSettings  = {};
   var message         = {};
-  var spinnerOpts     = {
-    lines: 13,                                                                  // The number of lines to draw
-    length: 38,                                                                 // The length of each line
-    width: 17,                                                                  // The line thickness
-    radius: 45,                                                                 // The radius of the inner circle
-    scale: 2,                                                                   // Scales overall size of the spinner
-    corners: 1,                                                                 // Corner roundness (0..1)
-    speed: 0.5,                                                                 // Rounds per second
-    rotate: 0,                                                                  // The rotation offset
-    animation: 'spinner-line-fade-more',                                        // The CSS animation name for the lines: spinner-line-fade-quick | spinner-line-shrink | spinner-line-fade-more
-    direction: 1,                                                               // 1: clockwise, -1: counterclockwise
-    color: '#424242',                                                           // CSS color or array of colors: orange (EF6C00) | blue (1565C0) | gray (424242)
-    fadeColor: 'transparent',                                                   // CSS color or array of colors
-    top: '80%',                                                                 // Top position relative to parent
-    left: '50%',                                                                // Left position relative to parent
-    shadow: '0 0 1px transparent',                                              // Box-shadow for the lines
-    zIndex: 2000000000,                                                         // The z-index (defaults to 2e9)
-    className: 'spinner',                                                       // The CSS class to assign to the spinner
-    position: 'fixed',                                                          // Element positioning:  absolute | fixed
+  var spinnerOpts     = {                                                       // (default) options for a spinner
+    lines:      13,                                                             // number of lines to draw
+    length:     38,                                                             // length of each line
+    width:      17,                                                             // line thickness
+    radius:     45,                                                             // radius of the inner circle
+    scale:      2,                                                              // scales overall size of the spinner
+    corners:    1,                                                              // corner roundness (0..1)
+    speed:      0.5,                                                            // rounds per second
+    rotate:     0,                                                              // rotation offset
+    animation: 'spinner-line-fade-more',                                        // CSS animation name for the lines: spinner-line-fade-quick | spinner-line-shrink | spinner-line-fade-more
+    direction:  1,                                                              // 1: clockwise, -1: counterclockwise
+    color:      '#424242',                                                      // CSS color or array of colors: orange (EF6C00) | blue (1565C0) | gray (424242)
+    fadeColor:  'transparent',                                                  // CSS color or array of colors
+    top:        '80%',                                                          // top position relative to parent
+    left:       '50%',                                                          // left position relative to parent
+    shadow:     '0 0 1px transparent',                                          // box-shadow for the lines
+    zIndex:     2000000000,                                                     // z-index (defaults to 2e9)
+    className:  'spinner',                                                      // CSS class assined to the spinner
+    position:   'fixed',                                                        // element positioning:  absolute|fixed
   };
-  var nbinteract_prepared = false;                                              // indicate if a prepare() was already done
-  var nbiModalCloseDelay = 1500;                                                // delay modal auto close for 1500 milliseconds
-  var notebooks;
-  var notebook;
-  var target;
-  var spinner;
+  var nbiContentModalInfoID       = 'nbiModalInfoBody'                          // ID of the content (messages) for the INFO modal
+  var nbiContentModalSuccessID    = 'nbiModalSuccessBody'                       // ID of the content (messages) for the SUCCESS modal
+  var nbiContentModalErrorID      = 'nbiModalErrorBody'                         // ID of the content (messages) for the SUCCESS modal
+  var nbiModalInfoID              = '#' + 'nbiModalTopInfo';                    // ID of the SUCCESS modal
+  var nbiModalSuccessID           = '#' + 'nbiModalTRSuccess';                  // ID of the SUCCESS modal
+  var nbiModalErrorID             = '#' + 'nbiModalTLDanger';                   // ID of the ERROR modal
+  var nbinteract_prepared         = false;                                      // switch to indicate if ???
+  var nbiModalSuccessMessagesID   = 'nbiModalSuccessMessages'                   // UL contalner SUCCESS messahes
+  var nbiModalErrorMessagesID     = 'nbiModalErrorMessages'                     // UL contalner ERROR messahes
+  var nbiModalAutoClose;                                                        // switch to auto-close nbi message modals
+  var nbiModalAutoCloseDelay;                                                   // delay auto-close nbi message modals
+  var nbiInitTimeout;                                                           //
+  var notebooks;                                                                // ALL notebokks enabled
+  var notebook;                                                                 // current notebook (processed)
+  var target;                                                                   // target container for the (activity) spinner
+  var spinner;                                                                  // the (activity) spinner
   var nbiModal;
   var _this;
   var interact;
@@ -143,26 +153,46 @@ j1.adapter.nbinteract = (function (j1, window) {
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
-      _this   = j1.adapter.nbinteract;
-      logger  = log4javascript.getLogger('j1.adapter.nbinteract');
+      _this                   = j1.adapter.nbinteract;
+      logger                  = log4javascript.getLogger('j1.adapter.nbinteract');
+      nbiModalAutoClose       = moduleOptions.nbi_messages_auto_close;
+      nbiModalAutoCloseDelay  = moduleOptions.nbi_messages_auto_close_delay;
+      nbiInitTimeout          = moduleOptions.nbi_init_timeout;
 
       // -----------------------------------------------------------------------
       // load HTML data for all modals used by nbInteract
       // -----------------------------------------------------------------------
       _this.loadNbiModals();
 
-      // -------------------------------------------------------------------------
+      // -----------------------------------------------------------------------
       // loadNbiNoteBooks()
       // load the HTML portion for all notebooks configured (enabled)
-      // -------------------------------------------------------------------------
+      // -----------------------------------------------------------------------
       _this.loadNbiNoteBooks(moduleOptions);
 
       // -----------------------------------------------------------------------
-      // interactNotebook()
+      // register callbacks (actions) for all modals used
+      // -----------------------------------------------------------------------
+      if (moduleOptions.show_nbi_messages) {
+        _this.registerNbiModalsCB();
+      }
+
+      // -----------------------------------------------------------------------
+      // run a spinner to indicate activity of 'nbInteract' if enabled
+      // -----------------------------------------------------------------------
+      $(document).ready(function() {
+        if (moduleOptions.indicate_nbi_activity) {
+          target  = document.getElementById('content');
+          spinner = new Spinner(spinnerOpts).spin(target);
+        }
+      });
+
+      // -----------------------------------------------------------------------
+      // interactNbiNotebooks()
       // connect to the configured BinderHub instance to create a
       // Jupyter kernel if required
       // -----------------------------------------------------------------------
-      _this.interactNotebook(moduleOptions);
+      _this.interactNbiNotebooks(moduleOptions);
 
     }, // END init
 
@@ -181,7 +211,7 @@ j1.adapter.nbinteract = (function (j1, window) {
 
           // load the HTML portion for the notebook
           //
-          if ( $selector.length ) {
+          if ($selector.length) {
             _this.loadNotebookHTML ({
               xhr_container_id:   notebook.id,
               xhr_data:           notebook.xhr_data,
@@ -194,13 +224,13 @@ j1.adapter.nbinteract = (function (j1, window) {
     },
 
     // -------------------------------------------------------------------------
-    // interactNotebook()
+    // interactNbiNotebooks()
     // connect to the configured BinderHub instance to create a
     // Jupyter kernel if required. A BinderHub instance in created
     // on a per notebook basis but trigeered only done once,
     // controlled by nbinteract_prepared.
     // -------------------------------------------------------------------------
-    interactNotebook: function (options) {
+    interactNbiNotebooks: function (options) {
       var notebook = options;
 
       // initialize state flag
@@ -218,9 +248,9 @@ j1.adapter.nbinteract = (function (j1, window) {
       {% for item in notebook_options.notebooks %} {% if item.notebook.enabled %}
       {% assign notebook_id       = item.notebook.id %}
 
-      if ( $('#{{notebook_id}}').length ) {
+      if ($('#{{notebook_id}}').length) {
         var dependencies_met_nb_loaded = setInterval(function() {
-          if ( $('#{{notebook_id}}').attr('data-nb-notebook') == 'loaded' ) {
+          if ($('#{{notebook_id}}').attr('data-nb-notebook') == 'loaded') {
 
             if(!nbinteract_prepared) {
               logText = '\n' + 'jupyter kernel is being generated ...';
@@ -239,12 +269,39 @@ j1.adapter.nbinteract = (function (j1, window) {
 
               // genetae a jupyter kernel at BinderHub
               interact.prepare();
-              nbinteract_prepared = true
-            }
+              nbinteract_prepared = true;
 
-            _this.setState('finished');
-            logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'initializing module finished');
+              // window.setTimeout(function() {
+              //   var nbiButtonState = _this.getNbiButtonState();
+              //   if (nbiButtonState) {
+              //     logger.error('NBI initialialization failed: {{notebook_id}}');
+              //     // hide the info modal uncondionally (need ???)
+              //     //
+              //     $(nbiModalSuccessID).modal('hide');
+              //
+              //     // show the error modal
+              //     //
+              //     $(nbiModalSuccessID).on('hidden.bs.modal', function () {
+              //       if ($(nbiModalErrorID).is(':hidden')) {
+              //         var messageErrorUL = document.getElementById(nbiModalErrorMessagesID);
+              //         _this.appendModalMessage(messageErrorUL, 'NBI initialialization failed for notebook: {{notebook_id}}')
+              //         $(nbiModalErrorID).modal('show');
+              //
+              //         // auto-close the error modal
+              //         //
+              //         if (nbiModalAutoClose) {
+              //           window.setTimeout(function() {
+              //             $(nbiModalErrorID).modal('hide');
+              //           }, nbiModalAutoCloseDelay);
+              //         }
+              //       }
+              //     });
+              //   } else {
+              //     logger.info('NBI initialized successfully.');
+              //   }
+              // }, nbiInitTimeout);
+
+            }
 
             clearInterval(dependencies_met_nb_loaded);
           } // END dependencies_met_nb_loaded
@@ -260,17 +317,16 @@ j1.adapter.nbinteract = (function (j1, window) {
     // Load HTML data asychronously using XHR|jQuery on an element
     // (e.g. <div>) specified by xhr_container_id, xhr_data_path
     // -------------------------------------------------------------------------
-    loadNotebookHTML: function (options, mod, status) {
+    loadNotebookHTML: function (options) {
       var html_data_path    = options.xhr_data_path + '/' + options.xhr_data;
       var id                = options.xhr_container_id;
       var $selector         = $('#' + id);
-      var state             = status;
       var logText;
 
-      var cb_load_closure = function(mod, id) {
+      var cb_load_closure = function(id) {
         return function (responseTxt, statusTxt, xhr) {
           var logger = log4javascript.getLogger('j1.adapter.loadHTML');
-          if ( statusTxt === 'success' ) {
+          if (statusTxt === 'success') {
             j1.setXhrDataState(id, statusTxt);
             j1.setXhrDomState(id, 'pending');
 
@@ -281,18 +337,16 @@ j1.adapter.nbinteract = (function (j1, window) {
             // run HTML cleanups
             //
             $selector.find('button').replaceWith( function() {
-              // $(this)[0].outerHTML = '???'
-              // return '<button class="' + options.buttonStyles + ' js-nbinteract-widget hidden"> Loading widgets ...</button>'
-              return '<button class="' + options.buttonStyles + ' js-nbinteract-widget"> Loading widgets ...</button>'
+              return '<button class="' + options.buttonStyles + ' js-nbinteract-widget"> Loading widgets ...</button>';
             });
 
-            // disable translation (Google) for ALL input_area HTML elements
+            // disable (Google) translation for all input_area HTML elements
             // see: https://www.codingexercises.com/replace-all-instances-of-css-class-in-vanilla-js
             //
             var input_area = document.getElementsByClassName('input_area');
             [...input_area].forEach(x => x.className += " notranslate");
 
-            // cleanup headins and add an id (used by toccer)
+            // cleanup headlines in notebook HTML and add an id used by toccer
             //
             $selector.find('h1').replaceWith( function() {
               // return '<' + options.setHeadings + ' id="' + $(this)[0].id + '">' + $(this).text().slice(0,-1) + '</' + options.heading + '>';
@@ -317,12 +371,11 @@ j1.adapter.nbinteract = (function (j1, window) {
 
             logText = '\n' + 'data loaded successfully on id: ' + id;
             logger.info(logText);
-            state = true;
           }
-          if ( statusTxt === 'error' ) {
+          if (statusTxt === 'error') {
             // jadams, 2020-07-21: to be checked why id could be UNDEFINED
             if (typeof(id) != "undefined") {
-              state = 'failed';
+              var state = 'failed';
               logger.info('\n' + 'set state for ' + mod + ' to: ' + state);
               // jadams, 2020-07-21: intermediate state should DISABLED
               // executeFunctionByName(mod + '.setState', window, state);
@@ -345,58 +398,63 @@ j1.adapter.nbinteract = (function (j1, window) {
         return;
       }
 
-      if ( $selector.length ) {
-        $selector.load( html_data_path, cb_load_closure( mod, id ) );
-
-        // observe DOM changes to detect if cell buttons removed
-        // by nbinterct
-        var MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
-        var xhrObserver = new MutationObserver (mutationHandler);
-        var obsConfig = {
-          childList: true,
-          characterData: false,
-          attributes: false,
-          subtree: true
-        };
-
-        $selector.each(function(){
-          xhrObserver.observe(this, obsConfig);
-        });
-
-        function mutationHandler (mutationRecords) {
-          mutationRecords.forEach (function (mutation) {
-            if (mutation.removedNodes.length) {
-              var removedNodeClass = mutation.removedNodes[0].className;
-              if (typeof removedNodeClass !== 'undefined' && removedNodeClass !== '' && removedNodeClass.includes('btn-primary')) {
-                // removed cell buttons indicate that all 'nbinteract'
-                // API functions has successfully finished
-                xhrObserver.disconnect();
-                spinner.stop();
-                window.setTimeout(function(){
-                   $('#nbiModalTRSuccess').modal('hide');
-                }, nbiModalCloseDelay);
-                // $('#nbiModalTopInfo').modal('hide');
-                logger.debug('\n' + 'cell button removed from the DOM');
-                logger.debug('\n' + 'found removedNodeClass: ' + removedNodeClass);
-              }
-            }
-          });
-        }
-      } else {
-        // jadams, 2020-07-21: To be clarified why a id is "undefined"
-        // failsafe - prevent XHR load errors
-        if (id != '#undefined') {
-          logText = '\n' + 'data not loaded on id:' + id;
-          logger.debug(logText);
-          j1.setXhrDataState(id, 'not loaded');
-          j1.setXhrDomState(id, 'not loaded');
-          // Set processing state to 'finished' to complete module load
-          state = 'finished';
-          logger.debug('\n' + 'state: ' + state);
-          state = false;
-        }
+      if ($selector.length) {
+        $selector.load( html_data_path, cb_load_closure(id));
       }
-      return state;
+
+      return;
+    },
+
+    // -------------------------------------------------------------------------
+    // registerNbiModalsCB()
+    // regsiter callbacks for modals used
+    // -------------------------------------------------------------------------
+    registerNbiModalsCB: function () {
+
+      // auto-scroll to the END of the SUCCESS messages
+      // see: https://stackoverflow.com/questions/7303948/how-to-auto-scroll-to-end-of-div-when-data-is-added
+      //
+      window.setInterval(function() {
+        var contentModalSuccess = document.getElementById(nbiContentModalSuccessID);
+        contentModalSuccess.scrollTop = contentModalSuccess.scrollHeight;
+      }, 500);
+
+      // remove all INFO messages on modal CLOSED
+      //
+      $('#nbiModalTopInfo').on('hidden.bs.modal', function () {
+        var ul = document.getElementById(nbiModalInfoMessagesID);
+        var listLength = ul.children.length;
+
+        if (listLength) {
+          logger.debug('modal closed nbiModalTopInfo: remove all messages');
+          _this.removeModalMessages(nbiModalInfoMessagesID);
+        }
+      });
+      // remove all SUCCESS messages on modal CLOSED
+      //
+      $('#nbiModalTRSuccess').on('hidden.bs.modal', function () {
+        var ul = document.getElementById(nbiModalSuccessMessagesID);
+        var listLength = ul.children.length;
+
+        if (listLength) {
+          logger.debug('modal closed nbiModalTRSuccess: remove all messages');
+          _this.removeModalMessages(nbiModalSuccessMessagesID);
+        }
+      });
+      // remove all ERROR messages on modal CLOSED
+      //
+      $('#nbiModalTLDanger').on('hidden.bs.modal', function () {
+        var ul = document.getElementById(nbiModalErrorMessagesID);
+        var listLength = ul.children.length;
+
+        if (listLength) {
+          logger.debug('modal closed nbiModalTLDanger: remove all messages');
+          _this.removeModalMessages(nbiModalErrorMessagesID);
+        }
+        if (moduleOptions.indicate_nbi_activity) {
+          spinner.stop();
+        }
+      });
     },
 
     // -------------------------------------------------------------------------
@@ -414,15 +472,20 @@ j1.adapter.nbinteract = (function (j1, window) {
           data-keyboard="false"
           data-backdrop="static">
           <div class="modal-dialog modal-frame modal-top modal-notify modal-info" role="document">
+            <!-- Icon -->
+            <div class="text-center">
+              <i class="mdi mdi-10x mdi-progress-clock mdi-spin md-green mb-1"></i>
+            </div>
             <!-- Content -->
             <div class="modal-content">
               <!-- Body -->
-              <div class="modal-body">
-                <div class="row px-4">
-                  <p id="nbiModalTopInfoMessage" class="pt-1 pr-2">Placeholder ..</p>
+              <div id="nbiModalInfoBody" class="modal-body">
+                <div>
+                  <ul id="nbiModalInfoMessages"></ul>
                 </div>
-                <div class="row px-4">
-                  <a type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</a>
+                <!-- Footer -->
+                <div class="modal-footer justify-content-center">
+                  <a type="button" class="btn btn-primary" data-bs-dismiss="modal">OK, thanks</a>
                 </div>
               </div>
             </div>
@@ -436,28 +499,31 @@ j1.adapter.nbinteract = (function (j1, window) {
           tabindex="-1"
           role="dialog"
           aria-labelledby="myModalLabel" aria-hidden="true"
-          data-keyboard="false"
-          data-backdrop="static">
-          <div class="modal-dialog modal-side modal-top-right modal-notify modal-success" role="document">
+          data-bs-keyboard="false"
+          data-bs-backdrop="static">
+          <div class="modal-dialog modal-dialog-scrollable modal-side-2x modal-top-right modal-notify modal-success" role="document">
             <!-- Content -->
             <div class="modal-content">
-              <!--Header-->
+              <!-- Header -->
               <div class="modal-header">
-                <p class="lead">Progress Info</p>
+                <p class="lead">Info - NbInteract</p>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                   <i class="mdi mdi-close mdi-dark mdi-48px"></i>
                 </button>
               </div>
+              <!-- Icon -->
+              <div class="text-center">
+                <i class="mdi mdi-10x mdi-loading mdi-spin md-green mb-1"></i>
+              </div>
               <!-- Body -->
-              <div class="modal-body">
-                <div class="text-center">
-                  <i class="mdi mdi-8x mdi-progress-clock md-green mb-1"></i>
-                  <p id="nbiModalTRSuccessMessage">Placeholder ..</p>
+              <div id="nbiModalSuccessBody" class="modal-body">
+                <div>
+                  <p> Initializing your Binder. This may take a while ...</p>
+                  <ul id="nbiModalSuccessMessages"></ul>
                 </div>
               </div>
               <!-- Footer -->
               <div class="modal-footer justify-content-center">
-                <!-- a type="button" class="btn btn-primary" data-bs-dismiss="modal">OK</a -->
                 <a type="button" class="btn btn-primary" data-bs-dismiss="modal">OK, thanks</a>
               </div>
             </div>
@@ -471,29 +537,32 @@ j1.adapter.nbinteract = (function (j1, window) {
           tabindex="-1"
           role="dialog"
           aria-labelledby="myModalLabel" aria-hidden="true"
-          data-keyboard="false"
-          data-backdrop="static">
-          <div class="modal-dialog modal-side modal-top-right modal-notify modal-danger" role="document">
+          data-bs-keyboard="false"
+          data-bs-backdrop="static">
+          <div class="modal-dialog modal-side-2x modal-top-left modal-notify modal-danger" role="document">
             <!-- Content -->
-            <div class="modal-content">
+            <div id="nbiModalErrorBody" class="modal-content">
               <!--Header-->
               <div class="modal-header">
-                <p class="lead">Error</p>
+                <p class="lead">Error - NbInteract</p>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                   <i class="mdi mdi-close mdi-dark mdi-48px"></i>
                 </button>
               </div>
+              <!-- Icon -->
+              <div class="text-center">
+                <i class="mdi mdi-10x mdi-alert md-red mb-1"></i>
+              </div>
               <!-- Body -->
-              <div class="modal-body">
-                <div class="text-center">
-                  <i class="mdi mdi-10x mdi-alert md-red mb-1"></i>
-                  <p id="nbiModalTRFailedMessage">Placeholder ..</p>
+              <div id="nbiModalErrorBody" class="modal-body">
+                <p> Initializing NbInteract failed:</p>
+                <div>
+                  <ul id="nbiModalErrorMessages"></ul>
                 </div>
               </div>
               <!-- Footer -->
               <div class="modal-footer justify-content-center">
-                <a type="button" class="btn btn-primary mr-2">Yes, please</a>
-                <a type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">No, thanks</a>
+                <a type="button" class="btn btn-primary" data-bs-dismiss="modal">OK, thanks</a>
               </div>
             </div>
             <!-- END Content -->
@@ -525,7 +594,9 @@ j1.adapter.nbinteract = (function (j1, window) {
     // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
     messageHandler: function (sender, message) {
-      var json_message  = JSON.stringify(message, undefined, 2);
+      var json_message      = JSON.stringify(message, undefined, 2);
+      var messageSuccessUL  = document.getElementById(nbiModalSuccessMessagesID);
+      var messageErrorUL    = document.getElementById(nbiModalErrorMessagesID);
       var message;
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -534,61 +605,135 @@ j1.adapter.nbinteract = (function (j1, window) {
       // -----------------------------------------------------------------------
       //  Process commands|actions
       // -----------------------------------------------------------------------
-      if (message.type === 'command' && message.action === 'run') {
+
+      // -----------------------------------------------------------------------
+      //  command|nbi_init_finished
+      //
+      if (message.type === 'command' && message.action === 'nbi_init_finished') {
+
+        _this.setState('finished');
+        logger.debug('\n' + 'state: ' + _this.getState());
+        logger.info('\n' + 'initializing module finished');
+
+        if (moduleOptions.show_nbi_messages) {
+          if (nbiModalAutoClose) {
+            window.setTimeout(function() {
+               $(nbiModalSuccessID).modal('hide');
+            }, nbiModalAutoCloseDelay);
+          }
+        }
+
+        if (moduleOptions.indicate_nbi_activity) {
+          spinner.stop();
+        }
+
+      } // END message command/nbi_init_finished
+
+      // -----------------------------------------------------------------------
+      //  command|info
+      //
+      if (message.type === 'command' && message.action === 'info') {
+//      var reMessageTS         = new RegExp('/(?:[1-9]\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d{1,9})?(?:Z|[+-][01]\d:[0-5]\d)/');
+        var messageTS;
+
+        // remove timestamp|loglevel from message if exists
+        //
+        messageTS = message.text.split('] ')[1];
+        if (messageTS) {
+          message.text = messageTS;
+        }
+
+        _this.appendModalMessage(messageSuccessUL, message.text)
+
         logger.debug('\n' + message.text);
 
-        // run a spinner to indicate activity of 'nbInteract'
-        target  = document.getElementById('content');
-        spinner = new Spinner(spinnerOpts).spin(target);
-
-        // // set message text in modal
-        // message           = document.getElementById('nbiModalTopInfoMessage');
-        // // message.innerHTML = message.text;
-        // message.innerHTML = 'Initializing nbinteract - this may take a while to finish  ...';
+        // show the info modal
         //
-        // // show info modal
-        // $('#nbiModalTopInfo').modal('show');
+        if (moduleOptions.show_nbi_messages) {
+          if ($(nbiModalSuccessID).is(':hidden')) {
+            $(nbiModalSuccessID).modal('show');
+          }
+        }
 
-        // set message text in modal
-        message           = document.getElementById('nbiModalTRSuccessMessage');
-        // message.innerHTML = message.text;
-        message.innerHTML = 'Initializing nbinteract<br> This may take a while to finish  ...';
+      } // END message command/info
 
-        // show info modal
-        $('#nbiModalTRSuccess').modal('show');
-      }
+      // -----------------------------------------------------------------------
+      //  command|error
+      //
+      if (message.type === 'command' && message.action === 'error') {
+        var messageTS;
 
-      if (message.type === 'command' && message.action === 'finished') {
-        // hide info modal (make sure modal is shown)
-        $('#nbiModalTRSuccess').on('shown.bs.modal', function () {
-          window.setTimeout(function(){
-             $('#nbiModalTRSuccess').modal('hide');
-          }, nbiModalCloseDelay);
-        });
-        spinner.stop();
-      }
+        // remove timestamp|loglevel from message if exists
+        //
+        messageTS = message.text.split('] ')[1];
+        if (messageTS) {
+          message.text = messageTS;
+        }
 
-      if (message.type === 'command' && message.action === 'startKernelfailed') {
+        _this.appendModalMessage(messageErrorUL, message.text)
+
         logger.error('\n' + message.text);
 
-        spinner.stop();
-        $('#nbiModalTopInfo').on('shown.bs.modal', function () {
-          $('#nbiModalTopInfo').modal('hide');
-        });
+        // stop the (progress) spinner (currently NOT used)
+        //
+        // if (moduleOptions.indicate_nbi_activity) {
+        //   spinner.stop();
+        // }
 
-        // $('#nbiModalTRSuccess').on('shown.bs.modal', function () {
-        //   $('#nbiModalTRSuccess').modal('hide');
-        // });
+        if (moduleOptions.show_nbi_messages) {
+          // hide the info modal if shown
+          //
+          $(nbiModalSuccessID).on('shown.bs.modal', function () {
+            $(nbiModalSuccessID).modal('hide');
+          });
 
-        // set message text in modal
-        message = document.getElementById('nbiModalTLDangerMessage');
-        // message.innerHTML = message.text;
-        message.innerHTML = 'Initializing nbinteract: initialization of the kernel failed';
-        $('#nbiModalTLDanger').modal('show');
-      }
+          // hide the info modal uncondionally (need ???)
+          //
+          $(nbiModalSuccessID).modal('hide');
+
+          // show the error modal
+          //
+          $(nbiModalSuccessID).on('hidden.bs.modal', function () {
+            if ($(nbiModalErrorID).is(':hidden')) {
+              $(nbiModalErrorID).modal('show');
+
+              // auto-close the error modal
+              //
+              if (nbiModalAutoClose) {
+                window.setTimeout(function() {
+                  $(nbiModalErrorID).modal('hide');
+                }, nbiModalAutoCloseDelay);
+              }
+            }
+          });
+        }
+      } // END message command/error
 
       return true;
     }, // END messageHandler
+
+    // -------------------------------------------------------------------------
+    // getNbiButtonsState()
+    // Gets the current (processing) state of NBI widget buttons
+    // -------------------------------------------------------------------------
+    getNbiButtonState: function () {
+      var state;
+      var cellButtons = document.querySelectorAll('.js-nbinteract-widget')
+      if (cellButtons.length) {
+        state = true;
+      } else {
+        state = false;
+      }
+      // cellButtons.forEach (function (elm) {
+      //   state = elm.innerHTML;
+      //   if (state == 'Initializing widgets ...') {
+      //     state = 'init';
+      //    } else {
+      //      state = 'bla';
+      //    }
+      // });
+      return state;
+     }, // END getNbiButtonsState
 
     // -------------------------------------------------------------------------
     // setState()
@@ -604,7 +749,26 @@ j1.adapter.nbinteract = (function (j1, window) {
     // -------------------------------------------------------------------------
     getState: function () {
       return _this.state;
-    } // END getState
+    }, // END getState
+
+    appendModalMessage: function (elmID, msg) {
+      var li = document.createElement('li');
+
+        li.setAttribute('class','item');
+        elmID.appendChild(li);
+        li.innerHTML = li.innerHTML + msg;
+    },  // END appendModalMessage
+
+    removeModalMessages: function (elmID) {
+      var ul = document.getElementById(elmID);
+      var listLength = ul.children.length;
+
+      if (listLength) {
+        for (var i = 0; i < listLength; i++) {
+          ul.removeChild(ul.children[0]);
+        }
+      }
+    }  // END removeModalMessages
 
   }; // END return
 })(j1, window);

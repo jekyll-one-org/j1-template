@@ -25,34 +25,128 @@ description:
 #
 settings:
 
+  # NOTEBOOK settings
+  # ----------------------------------------------------------------------------
+
+  # enabled
+  # ------------------------------------------------------------------------------
+  #   Enables|Disables the use of a notebook. If disabled, no J1 adapter
+  #   setting are generated for this Jupyter Notebook.
+  #
+  #   values:                           boolean (true|false)
+  #   default:                          true
+  #
+  # ----------------------------------------------------------------------------
+  #
+  # id
+  # ----------------------------------------------------------------------------
+  #   The id of a notebook that is used by the Asciidoc extension
+  #   notebook::<id>[] to place the HTML portion for the HTML code
+  #   of an exported Jupyter Notebook.
+  #
+  #   values:                           string
+  #   default:                          no default
+  #
+  # ----------------------------------------------------------------------------
+  #
+  # xhr_data
+  # ----------------------------------------------------------------------------
+  #   The name of the exported HTML data file of a Jupyter Notebook.
+  #
+  #   values:                           string
+  #   default:                          no default
+  #
+  # ----------------------------------------------------------------------------
+  #
+  # xhr_data_path
+  # ----------------------------------------------------------------------------
+  #   The (data) path the Jupyter Notebook is exported.
+  #
+  #   values:                           path
+  #   default:                          no default
+  #
+  # ----------------------------------------------------------------------------
+
   notebooks:
 
     # --------------------------------------------------------------------------
-    # nb for testing
+    # J1 Notebooks for testing
     # --------------------------------------------------------------------------
+
+    # --------------------------------------------------------------------------
+    # test_notebook
+    #
+    - notebook:
+        enabled:                        true
+
+        id:                             j1_recipes_layout
+        xhr_data:                       j1_recipes_layout.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/html
 
     # --------------------------------------------------------------------------
     # odes_in_python
     #
     - notebook:
-        enabled:                        true
+        enabled:                        false
 
-        id:                             odes_in_python
-        xhr_data:                       odes-in-python.html
-        xhr_data_path:                  /assets/data/jupyter/notebooks
+        id:                             j1_odes_in_python
+        xhr_data:                       j1_odes-in-python.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/html
 
     # --------------------------------------------------------------------------
-    # climate_change
+    # ode_selected
+    #
+    - notebook:
+        enabled:                        true
+
+        id:                             j1_ode_selected
+        xhr_data:                       j1_ode_selected.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/html
+
+    # --------------------------------------------------------------------------
+    # climate-change-forecast
+    #
+    - notebook:
+        enabled:                        true
+
+        id:                             j1_climate_change_forecast
+        xhr_data:                       j1_climate_change_forecast.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/html
+
+    # --------------------------------------------------------------------------
+    # climate-test
     #
     - notebook:
         enabled:                        false
 
-        id:                             climate_change
-        xhr_data:                       climate-change-forecast.html
-        xhr_data_path:                  /assets/data/jupyter/notebooks
+        id:                             climate_test
+        xhr_data:                       climate-test.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/html
 
     # --------------------------------------------------------------------------
-    # J1 nbinteract docs
+    # creating-reading-and-writing
+    #
+    - notebook:
+        enabled:                        false
+
+        id:                             j1_pandas_intro
+        xhr_data:                       j1_pandas_creating_reading_and_writing.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/html
+
+
+    # --------------------------------------------------------------------------
+    # interactive
+    #
+    - notebook:
+        enabled:                        false
+
+        id:                             j1_interactive
+        xhr_data:                       j1_interactive.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/html
+
+
+    # --------------------------------------------------------------------------
+    # NbInteract Docs (J1 Template version)
     # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
@@ -61,9 +155,9 @@ settings:
     - notebook:
         enabled:                        true
 
-        id:                             simple_webpage
-        xhr_data:                       tutorial_interact.html
-        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        id:                             nbi_docs_tutorial_interact
+        xhr_data:                       nbi_docs_tutorial_interact.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/html
 
     # --------------------------------------------------------------------------
     # tutorial_monty_hall
@@ -71,9 +165,9 @@ settings:
     - notebook:
         enabled:                        true
 
-        id:                             tutorial_monty_hall
-        xhr_data:                       tutorial_monty_hall.html
-        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        id:                             nbi_docs_tutorial_monty_hall
+        xhr_data:                       nbi_docs_tutorial_monty_hall.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/html
 
     # --------------------------------------------------------------------------
     # recipes_graphing
@@ -81,9 +175,9 @@ settings:
     - notebook:
         enabled:                        true
 
-        id:                             recipes_graphing
-        xhr_data:                       recipes_graphing.html
-        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        id:                             nbi_docs_recipes_graphing
+        xhr_data:                       nbi_docs_recipes_graphing.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/html
 
 
     # --------------------------------------------------------------------------
@@ -92,9 +186,9 @@ settings:
     - notebook:
         enabled:                        true
 
-        id:                             recipes_layout
-        xhr_data:                       recipes_layout.html
-        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        id:                             nbi_docs_recipes_layout
+        xhr_data:                       nbi_docs_recipes_layout.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/html
 
     # --------------------------------------------------------------------------
     # recipes_interactive_questions
@@ -102,9 +196,9 @@ settings:
     - notebook:
         enabled:                        true
 
-        id:                             recipes_interactive_questions
-        xhr_data:                       recipes_interactive_questions.html
-        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        id:                             nbi_docs_recipes_interactive_questions
+        xhr_data:                       nbi_docs_recipes_interactive_questions.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/html
 
     # --------------------------------------------------------------------------
     # empirical_distributions
@@ -112,9 +206,9 @@ settings:
     - notebook:
         enabled:                        true
 
-        id:                             empirical_distributions
-        xhr_data:                       examples_empirical_distributions.html
-        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        id:                             nbi_docs_empirical_distributions
+        xhr_data:                       nbi_docs_examples_empirical_distributions.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/html
 
 
     # --------------------------------------------------------------------------
@@ -123,9 +217,9 @@ settings:
     - notebook:
         enabled:                        true
 
-        id:                             examples_sampling_from_a_population
-        xhr_data:                       examples_sampling_from_a_population.html
-        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        id:                             nbi_docs_examples_sampling_from_a_population
+        xhr_data:                       nbi_docs_examples_sampling_from_a_population.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/html
 
     # --------------------------------------------------------------------------
     # examples_variability_of_the_sample_mean
@@ -133,9 +227,9 @@ settings:
     - notebook:
         enabled:                        true
 
-        id:                             examples_variability_of_the_sample_mean
-        xhr_data:                       examples_variability_of_the_sample_mean.html
-        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        id:                             nbi_docs_examples_variability_of_the_sample_mean
+        xhr_data:                       nbi_docs_examples_variability_of_the_sample_mean.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/html
 
     # --------------------------------------------------------------------------
     # examples_correlation
@@ -143,9 +237,9 @@ settings:
     - notebook:
         enabled:                        true
 
-        id:                             examples_correlation
-        xhr_data:                       examples_correlation.html
-        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        id:                             nbi_docs_examples_correlation
+        xhr_data:                       nbi_docs_examples_correlation.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/html
 
     # --------------------------------------------------------------------------
     # examples_linear_regression
@@ -153,9 +247,9 @@ settings:
     - notebook:
         enabled:                        true
 
-        id:                             examples_linear_regression
-        xhr_data:                       examples_linear_regression.html
-        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        id:                             nbi_docs_examples_linear_regression
+        xhr_data:                       nbi_docs_examples_linear_regression.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/html
 
     # --------------------------------------------------------------------------
     # examples_probability_distribution_plots
@@ -163,9 +257,9 @@ settings:
     - notebook:
         enabled:                        true
 
-        id:                             examples_probability_distribution_plots
-        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
-        xhr_data:                       examples_probability_distribution_plots.html
+        id:                             nbi_docs_examples_probability_distribution_plots
+        xhr_data:                       nbi_docs_examples_probability_distribution_plots.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/html
 
     # --------------------------------------------------------------------------
     # central_limit_theorem
@@ -173,9 +267,9 @@ settings:
     - notebook:
         enabled:                        true
 
-        id:                             central_limit_theorem
-        xhr_data:                       examples_central_limit_theorem.html
-        xhr_data_path:                  /assets/data/jupyter/notebooks/nbi
+        id:                             nbi_docs_central_limit_theorem
+        xhr_data:                       nbi_docs_examples_central_limit_theorem.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/html
 
 # ------------------------------------------------------------------------------
 # END config

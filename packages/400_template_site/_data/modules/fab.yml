@@ -86,6 +86,44 @@ settings:
           icon:                         wrap
 
     # --------------------------------------------------------------------------
+    # FAM to open sidebar-based (Mmenu Drawer) table of contents (toccer)
+    #
+    - name:                             Open TOC Reload
+      enabled:                          true
+      id:                               open_toc_reload
+      icon:                             plus
+      icon_hover:                       plus
+      color:                            primary
+
+      # ------------------------------------------------------------------------
+      # MENU items
+      #
+      items:
+        - item:                         To Top
+          enabled:                      true
+          id:                           fam_scroll_to_top
+          color:                        primary
+          event_handler:                scroll_to_top
+          icon:                         chevron-double-up
+          icon_properties:
+
+        - item:                         Reload Page
+          enabled:                      true
+          id:                           fam_reload_page
+          color:                        md-red
+          event_handler:                reload_page
+          icon:                         reload
+
+        - item:                         Table of Contents
+          enabled:                      true
+          id:                           open_mmenu_toc
+          color:                        info
+          event_handler:                open_mmenu_toc
+          icon:                         wrap
+
+
+
+    # --------------------------------------------------------------------------
     # FAM for in-page navigation (simplified)
     #
     - name:                             in-page control simple

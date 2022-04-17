@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_plugins/asciidoctor-extensions/gallery-block.rb
-# Asciidoctor extension for J1 Galleries
+# ~/_plugins/asciidoctor-extensions/nodebook-block.rb
+# Asciidoctor extension for J1 Jupyter Notebooks
 #
 # Product/Info:
 # https://jekyll.one
@@ -9,36 +9,37 @@
 #
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+#
+# ------------------------------------------------------------------------------
+# A block macro that embeds a notebook block into the output document
+#
+# Usage:
+#
+#   notebook::notebook_id[role="additional classes"]
+#
+# Example|s:
+#
+#   notebook::j1_test_notebook[]
+#   notebook::j1_test_notebook[role="mt-2 mb-4"]
+#
 # ------------------------------------------------------------------------------
 require 'asciidoctor/extensions' unless RUBY_ENGINE == 'opal'
 include Asciidoctor
 
-# A block macro that embeds a Gallery block into the output document
-#
-# Usage
-#
-#   gallery::gallery_id[role="additional classes"]
-#
-# Example:
-#
-#   .The gallery title
-#   gallery::jg_live_demo[]
-#
 Asciidoctor::Extensions.register do
 
-  class ImageBlockMacro < Extensions::BlockMacroProcessor
+  class NbiBlockMacro < Extensions::BlockMacroProcessor
     use_dsl
 
     named :notebook
     name_positional_attributes 'role'
 
     def process parent, target, attrs
-      title_html  = (attrs.has_key? 'title') ? %(<div class="gallery-title">#{attrs['title']}</div>\n) : nil
-      html = %(#{title_html} <div id="#{target}" class="#{attrs['role']}" data-nb-notebook="initial"></div>)
+      html = %(<div id="#{target}" class="cell #{attrs['role']}" data-nb-notebook="initial"></div>)
       create_pass_block parent, html, attrs, subs: nil
     end
   end
 
-  block_macro ImageBlockMacro
+  block_macro NbiBlockMacro
 
 end

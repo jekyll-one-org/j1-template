@@ -1,0 +1,93 @@
+---
+title:                                  Jupyter Notebooks
+tagline:                                binder
+date:                                   2022-01-01 00:00:00
+description: >
+                                        Things you should know about this site,
+                                        the people and the software and/or
+                                        services provided.
+
+tags:                                   [ Overview ]
+categories:                             [ Software, Platforms, Contributers ]
+
+scrollbar:                              false
+
+permalink:                              /pages/public/binder/
+regenerate:                             false
+
+resources:                              []
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/modules/attics/runner-1920x1200.jpg
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:badges-enabled:                        false
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+ifeval::[{badges-enabled} == true]
+{badge-j1--license} {badge-j1--version-latest} {badge-j1-gh--last-commit} {badge-j1--downloads}
+endif::[]
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+image:https://mybinder.org/badge_logo.svg[Binder, link="https://mybinder.org/v2/gist/jekyll-one/7818823efbfa538c35cc811da9e72296", window="_blank"]
+
+
+== Binder
+
+// See: https://elc.github.io/posts/embed-interactive-notebooks/
+
+lorem:sentences[5]
+
+lorem:sentences[3]
+
+++++
+<!-- iframe
+  src="https://elc.github.io/blog/iframes/ode-python/foxes-rabbits-iframe.html"
+  width="100%"
+  style="border-width: 0;"
+  scrolling="no"
+  title="Test Content">
+</iframe -->
+
+
+<!-- iframe
+  src="https://elc.github.io/blog/iframes/ode-python/foxes-rabbits-iframe.html"
+  width="100%"
+  height="1200">
+</iframe -->
+
+<iframe
+  src="https://mybinder.org/v2/gist/jekyll-one/7818823efbfa538c35cc811da9e72296"
+  width="100%"
+  height="1200">
+</iframe>
+
+++++
+
+// https://notebooks.gesis.org/binder/jupyter/user/jekyll-one-7818-5cc811da9e72296-25q3d30w/lab/tree/ODEs_In_Python.ipynb#Foxes-and-Rabbits
+// https://mybinder.org/v2/gist/jekyll-one/7818823efbfa538c35cc811da9e72296

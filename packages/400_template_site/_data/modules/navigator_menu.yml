@@ -119,43 +119,6 @@
       href:                             /pages/public/learn/where_to_go/
       icon:                             paw
 
-
-    # --------------------------------------------------------------------------
-    # Python
-    #
-    - title:                            Python
-      icon:                             language-python
-      dropdown:
-#       - title:                        Gihub Gists
-#         href:                         /pages/public/gist/
-#         icon:                         github
-#       - title:                        Binder
-#         href:                         /pages/public/binder/
-#         icon:                         notebook
-
-        - title:                        BinderHub API
-          href:                         /pages/public/binderhub-api/
-          icon:                         book-cog
-        - title:                        JupyterHub API
-          href:                         /pages/public/jupyterlab-api/
-          icon:                         book-cog
-        - title:                        J1 NbInteract Docs
-          href:                         /pages/public/j1-nb-docs/
-          icon:                         notebook
-
-        # - title:                        Interactive Notebooks
-        #   href:                         /pages/public/nbinteract/
-        #   icon:                         notebook
-        # - title:                        Climate change
-        #   href:                         /pages/public/climate/
-        #   icon:                         notebook
-        # - title:                        Interactive
-        #   href:                         /pages/public/interactive/
-        #   icon:                         notebook
-        # - title:                        ODEs selected
-        #   href:                         /pages/public/odes-selected/
-        #   icon:                         notebook
-
     # --------------------------------------------------------------------------
     # Roundtrip
     #
@@ -190,6 +153,48 @@
         - title:                        QuickSearch
           href:                         /pages/public/learn/roundtrip/quicksearch/
           icon:                         magnify
+
+    # --------------------------------------------------------------------------
+    # Experimental
+    #
+    - title:                            Experimental
+      icon:                             test-tube                               # head-flash-outline
+      dropdown:
+
+        - title:                        J1 NBI Integration
+          href:                         /pages/public/j1-nb-docs/
+          icon:                         alpha-j-box
+
+        - title:                        J1 Text Books
+          icon:                         script-text-play-outline
+          dropdown:
+
+            - title:                    NBI Test Notebooks
+              href:                     /pages/public/jupyter/textbooks/j1-nb-test/
+              icon:                     script-text-play-outline
+            - title:                    NBI Docs (J1 Version)
+              href:                     /pages/public/jupyter/textbooks/j1-nb-docs/
+              icon:                     script-text-play-outline
+            - title:                    ODE in Python (interactive)
+              href:                     /pages/public/jupyter/textbooks/odes-in-python/
+              icon:                     script-text-play-outline
+            - title:                    Climate Change (static)
+              href:                     /pages/public/jupyter/textbooks/climate-change-forecast/
+              icon:                     script-text-play-outline
+
+        - title:                        Docs
+          icon:                         book-open-page-variant
+          dropdown:
+
+            - title:                    NBI Widgets
+              href:                     /pages/public/jupyter/docs/nbi-widgets/
+              icon:                     book
+            - title:                    BinderHub API
+              href:                     /pages/public/jupyter/docs/binderhub-api/
+              icon:                     book
+            - title:                    JupyterHub API
+              href:                     /pages/public/jupyter/docs/jupyterlab-api/
+              icon:                     book
 
     # --------------------------------------------------------------------------
     # Asciidoc Skeletons

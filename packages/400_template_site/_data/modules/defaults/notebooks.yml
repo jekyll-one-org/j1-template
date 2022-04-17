@@ -29,28 +29,113 @@ description:
 #
 defaults:
 
+  # GENERAL settings
   # ----------------------------------------------------------------------------
-  # config settings
-  #
-  # - notebook:
-  #     enabled:                        false
-  #
-  #     id:                             odes_in_python
-  #     xhr_data:                       ODEs_In_Python.html
-  #     xhr_data_path:                  /assets/data/jupyter/notebooks
-  #     button_styles:                  btn btn-primary btn-raised
-  #
-  #     spec:                           jekyll-one/7818823efbfa538c35cc811da9e72296/master
-  #     baseUrl:                        'https://mybinder.org'
-  #     provider:                       gist
-  # ----------------------------------------------------------------------------
-  #
 
+  # spec
+  # ----------------------------------------------------------------------------
+  #   Defines the (public) repo the configuration data available
+  #
+  #   values:                           string (<user>/<repo>/<commit-sha-or-tag-or-branch>)
+  #   default:                          your-public-data-repo
+  #
+  # ----------------------------------------------------------------------------
+  #
+  # baseUrl
+  # ----------------------------------------------------------------------------
+  #   Base URL of the Binder service
+  #
+  #   values:                           URL
+  #   default:                          https://mybinder.org
+  #
+  # ----------------------------------------------------------------------------
+  #
+  # provider
+  # ----------------------------------------------------------------------------
+  #   Provider the (public) repo
+  #
+  #   Provider:
+  #     gh -    GitHub
+  #     gist -  GitHub Gist
+  #     gl -    GitLab
+  #
+  #   values:                           gh|gist|gl
+  #   default:                          gh
+  #
+  # ----------------------------------------------------------------------------
+  #
+  # button_styles
+  # ----------------------------------------------------------------------------
+  #   Additional button styles. Additional styles are added to all
+  #   widget buttons in the HTML output of your Jupyter Notebooks.
+  #
+  #   values:                           CSS styles (Bootstrap)
+  #   default:                          btn btn-primary btn-raised hidden
+  #
+  #  NOTE: Style 'hidden'  hide all widget buttons by default (display: none)
+  #
+  # ----------------------------------------------------------------------------
+  #
+  # show_nbi_messages
+  # ----------------------------------------------------------------------------
+  #   Show info|progress|error messages while nbinteract is
+  #   being initialized on a page.
+  #
+  #   values:                           boolean (true|false)
+  #   default:                          true
+  #
+  # ----------------------------------------------------------------------------
+  #
+  # indicate_nbi_activity
+  # ----------------------------------------------------------------------------
+  #   Shows a spinner while nbinteract in being initialized on a page.
+  #
+  #   values:                           boolean (true|false)
+  #   default:                          false
+  #
+  # ----------------------------------------------------------------------------
+  #
+  # nbi_messages_auto_close
+  # ----------------------------------------------------------------------------
+  #   Close the nbi messages modals automatically.
+  #
+  #   values:                           boolean (true|false)
+  #   default:                          true
+  #
+  # ----------------------------------------------------------------------------
+  #
+  # nbi_init_timeout
+  # ----------------------------------------------------------------------------
+  #   Time (ms) notebooks on a page are to be finally initialized. If the
+  #   nitit tooks longer, an error is issued
+  #
+  #   values:                           integer
+  #   default:                          5000
+  #
+  # ----------------------------------------------------------------------------
+  #
+  # nbi_messages_auto_close_delay
+  # ----------------------------------------------------------------------------
+  #   Delay (ms) to auto-close nbi messages modals.
+  #
+  #   values:                           integer
+  #   default:                          5000
+  #
+  # ----------------------------------------------------------------------------
+
+  #
   spec:                                 jekyll-one/nbinteract-notebooks/main
   baseUrl:                              'https://mybinder.org'
   provider:                             gh
 
-  button_styles:                        btn btn-primary btn-raised
+  button_styles:                        btn btn-primary btn-raised              # hidden
+
+  show_nbi_messages:                    true
+  indicate_nbi_activity:                false
+  nbi_messages_auto_close:              true
+
+  nbi_init_timeout:                     5000
+  nbi_messages_auto_close_delay:        5000
 
 # ------------------------------------------------------------------------------
 # END config

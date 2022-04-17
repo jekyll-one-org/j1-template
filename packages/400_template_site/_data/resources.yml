@@ -1651,17 +1651,17 @@ resources:
       layout:                           [ all ]
       required:                         ondemand                                # always | ondemand
       preload:                          false                                   # property currently unused
-      script_load:                      defer
+      script_load:                      sync
       dependencies:                     false
       pass_init_data:                   false
       data:
-        css:                            [ modules/nbInteract/css/j1-nbinteract-core ]
+        css:                            [ modules/nbInteract/css/nbinteract-core ]
         files:                          [
 #                                         modules/nbInteract/js/mathjax/latest.js,
 #                                         modules/nbInteract/js/mathjax/tex-chtml-full.js,
                                           adapter/js/nbinteract.js
                                         ]
-        js:                             [ modules/nbInteract/js/nbinteract/j1-nbinteract-core ]
+        js:                             [ modules/nbInteract/js/nbinteract/nbinteract-core ]
         init_function:                  [ j1.adapter.nbinteract.init ]
 
 # ------------------------------------------------------------------------------
