@@ -14,7 +14,7 @@ scrollbar:                              false
 fab_menu_id:                            open_toc_reload
 
 permalink:                              /pages/public/jupyter/textbooks/j1-learn-pandas/
-regenerate:                             true
+regenerate:                             false
 
 resources:                              [ nbinteract ]
 resource_options:

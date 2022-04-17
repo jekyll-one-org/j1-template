@@ -267,39 +267,43 @@ j1.adapter.nbinteract = (function (j1, window) {
                 j1API:    j1,
               });
 
-              // genetae a jupyter kernel at BinderHub
+              // generate a jupyter kernel via BinderHub
               interact.prepare();
               nbinteract_prepared = true;
 
-              // window.setTimeout(function() {
-              //   var nbiButtonState = _this.getNbiButtonState();
-              //   if (nbiButtonState) {
-              //     logger.error('NBI initialialization failed: {{notebook_id}}');
-              //     // hide the info modal uncondionally (need ???)
-              //     //
-              //     $(nbiModalSuccessID).modal('hide');
+              // issue an error if the NBI (init) button never removed by
+              // nbInteract-core (util or manager)
+              // TODO:  The 'timeout' condition should be replaced
+              //        state-based triggered from nbInteract-core.
               //
-              //     // show the error modal
-              //     //
-              //     $(nbiModalSuccessID).on('hidden.bs.modal', function () {
-              //       if ($(nbiModalErrorID).is(':hidden')) {
-              //         var messageErrorUL = document.getElementById(nbiModalErrorMessagesID);
-              //         _this.appendModalMessage(messageErrorUL, 'NBI initialialization failed for notebook: {{notebook_id}}')
-              //         $(nbiModalErrorID).modal('show');
-              //
-              //         // auto-close the error modal
-              //         //
-              //         if (nbiModalAutoClose) {
-              //           window.setTimeout(function() {
-              //             $(nbiModalErrorID).modal('hide');
-              //           }, nbiModalAutoCloseDelay);
-              //         }
-              //       }
-              //     });
-              //   } else {
-              //     logger.info('NBI initialized successfully.');
-              //   }
-              // }, nbiInitTimeout);
+              window.setTimeout(function() {
+                var nbiButtonState = _this.getNbiButtonState();
+                if (nbiButtonState) {
+                  // button NOT removed
+                  logger.error('NBI initialialization failed: {{notebook_id}}');
+                  // hide the info modal
+                  $(nbiModalSuccessID).modal('hide');
+
+                  // show the error modal
+                  $(nbiModalSuccessID).on('hidden.bs.modal', function () {
+                    if ($(nbiModalErrorID).is(':hidden')) {
+                      var messageErrorUL = document.getElementById(nbiModalErrorMessagesID);
+                      _this.appendModalMessage(messageErrorUL, 'NBI initialialization failed for notebook: {{notebook_id}}')
+                      $(nbiModalErrorID).modal('show');
+
+                      // auto-close the error modal
+                      if (nbiModalAutoClose) {
+                        window.setTimeout(function() {
+                          $(nbiModalErrorID).modal('hide');
+                        }, nbiModalAutoCloseDelay);
+                      }
+                    }
+                  });
+                } else {
+                  // button removed
+                  logger.info('NBI initialized successfully.');
+                }
+              }, nbiInitTimeout);
 
             }
 

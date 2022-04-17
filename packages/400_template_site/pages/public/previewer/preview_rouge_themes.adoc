@@ -64,7 +64,7 @@ scrollbar:                              false
 fab_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/previewer/rouge/
-regenerate:                             true
+regenerate:                             false
 
 resources:                             [ animate, comments, clipboard, rouge ]
 resource_options:

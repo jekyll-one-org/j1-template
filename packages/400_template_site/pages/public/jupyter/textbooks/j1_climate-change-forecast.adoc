@@ -62,5 +62,4 @@ endif::[]
 
 == Climate change forecasting
 
-
 notebook::j1_climate_change_forecast[]

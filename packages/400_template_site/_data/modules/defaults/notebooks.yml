@@ -107,10 +107,10 @@ defaults:
   # nbi_init_timeout
   # ----------------------------------------------------------------------------
   #   Time (ms) notebooks on a page are to be finally initialized. If the
-  #   nitit tooks longer, an error is issued
+  #   init phase tooks longer, an error is issued.
   #
   #   values:                           integer
-  #   default:                          5000
+  #   default:                          60000
   #
   # ----------------------------------------------------------------------------
   #
@@ -119,7 +119,7 @@ defaults:
   #   Delay (ms) to auto-close nbi messages modals.
   #
   #   values:                           integer
-  #   default:                          5000
+  #   default:                          3500
   #
   # ----------------------------------------------------------------------------
 
@@ -128,14 +128,14 @@ defaults:
   baseUrl:                              'https://mybinder.org'
   provider:                             gh
 
-  button_styles:                        btn btn-primary btn-raised              # hidden
+  button_styles:                        btn btn-primary btn-raised hidden
 
   show_nbi_messages:                    true
   indicate_nbi_activity:                false
   nbi_messages_auto_close:              true
 
-  nbi_init_timeout:                     5000
-  nbi_messages_auto_close_delay:        5000
+  nbi_init_timeout:                     60000
+  nbi_messages_auto_close_delay:        3500
 
 # ------------------------------------------------------------------------------
 # END config
