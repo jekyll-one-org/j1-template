@@ -54,24 +54,22 @@ resource_options:
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-// image:/assets/images/badges/myBinder.png[Binder, link="https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/main", {browser-window--new}]
-// image:https://mybinder.org/badge_logo.svg[Binder, link="https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/HEAD", {browser-window--new}]
+// image:/assets/images/badges/myBinder.png[Binder, link="https://mybinder.org/", {browser-window--new}]
+// image:/assets/images/badges/docsBinder.png[Binder, link="https://mybinder.readthedocs.io/en/latest/", {browser-window--new}]
 
 ifeval::[{binder-badges-enabled} == true]
-image:/assets/images/badges/myBinder.png[Binder, link="https://mybinder.org/", {browser-window--new}]
-image:/assets/images/badges/docsBinder.png[Binder, link="https://mybinder.readthedocs.io/en/latest/", {browser-window--new}]
 image:https://mybinder.org/badge_logo.svg[Binder, link="https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/main", {browser-window--new}]
 endif::[]
-
 
 [NOTE]
 ====
 This is a port for J1 Template of the origial document pages at
-https://www.nbinteract.com/[nbinteracts Dos, {browser-window--new}].
-Meanwhile, a lot of changes at Binder were done what cause the origial
-pages doesn't work anymore. You'll see at the origial documents that all
-(interactive) pages never change their state: `Initializing widgets...` and
-get stuck in an infinite initializing loop.
+link:{url-nbinteract--docs}[nbinteract Docs, {browser-window--new}].
+Meanwhile, a lot of changes were done at
+link:{url-binder--home}[Binder, {browser-window--new} ] what cause the
+origial pages doesn't work anymore. On clicking the NBI button `Show Widgets`,
+you'll encounter that all interactive pages never change their state, and
+get stuck in an infinite initializing loop `Initializing widgets...`.
 ====
 
 The package *nbinteract* aims to enable authors and educators to easily create
@@ -131,14 +129,14 @@ repository which will also allow you to host your converted webpages publicly.
 
 ==== Creating an Account and Repo
 
-To begin, visit https://github.com[Github] and create an account. If you
-already have an account, you should log in.
+To begin, visit https://github.com[Github, {browser-window--new}] and create
+an account. If you already have an account, you should log in.
 
 Then, create a new repo. You may do this using the GitHub UI or visiting to
-https://github.com/new[create new repo at Github]. Name the repo
-nbinteract-tutorial. If you'd like a different name, feel free to name it
-something else; just keep in mind that we will use this repo name in later
-parts of the tutorial.
+https://github.com/new[create new repo at Github, {browser-window--new}].
+Name the repo *nbinteract-tutorial*. If you'd like a different name, feel
+free to name it something else; just keep in mind that we will use this repo
+name in later parts of the tutorial.
 
 Make sure your repo is public, and click the checkbox to initialize your
 repo with a README. Your page should look like:

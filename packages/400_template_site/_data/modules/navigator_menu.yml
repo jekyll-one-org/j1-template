@@ -161,23 +161,23 @@
       icon:                             test-tube                               # head-flash-outline
       dropdown:
 
-        - title:                        J1 Text Books
+        - title:                        Textbooks
           icon:                         script-text-play-outline
           dropdown:
 
-            - title:                    NBI Docs (J1 Version)
+            - title:                    NBI Docs (J1 Textbook)
               href:                     /pages/public/jupyter/textbooks/j1-nb-docs/
               icon:                     script-text-play-outline
-            - title:                    J1 Test Notebooks
+            - title:                    J1 Textbook Examples
               href:                     /pages/public/jupyter/textbooks/j1-nb-test/
               icon:                     script-text-play-outline
 
-            # - title:                    ODE in Python (interactive)
-            #   href:                     /pages/public/jupyter/textbooks/odes-in-python/
-            #   icon:                     script-text-play-outline
-            # - title:                    Climate Change (static)
-            #   href:                     /pages/public/jupyter/textbooks/climate-change-forecast/
-            #   icon:                     script-text-play-outline
+          # - title:                    ODE in Python (interactive)
+          #   href:                     /pages/public/jupyter/textbooks/odes-in-python/
+          #   icon:                     script-text-play-outline
+          # - title:                    Climate Change (static)
+          #   href:                     /pages/public/jupyter/textbooks/climate-change-forecast/
+          #   icon:                     script-text-play-outline
 
         - title:                        Docs
           icon:                         book-open-page-variant

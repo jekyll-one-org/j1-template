@@ -13,6 +13,8 @@ tag::urls[]
 
 :url-apache-log4j-v2--home:                       https://logging.apache.org/log4j/2.x/
 
+:url-binder--home:                                https://mybinder.org/
+
 :url-oreilly-atlas--home:                         https://atlas.oreilly.com/
 
 :url-asciidoctor--home:                           https://asciidoctor.org/
@@ -263,6 +265,8 @@ tag::urls[]
 :url-mobile-menu-light--gh-repo:                  https://github.com/FrDH/mmenu-light
 
 :url-msdropdown--home:                            https://www.marghoobsuleman.com/image-dropdown
+
+:url-nbinteract--docs:                            https://www.nbinteract.com/
 
 :url-netlify--home:                               https://www.netlify.com/
 :url-netlify--docs:                               https://docs.netlify.com/

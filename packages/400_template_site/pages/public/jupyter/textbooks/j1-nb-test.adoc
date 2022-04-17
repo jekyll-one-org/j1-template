@@ -54,19 +54,12 @@ resource_options:
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
+// image:/assets/images/badges/myBinder.png[Binder, link="https://mybinder.org/", {browser-window--new}]
+// image:/assets/images/badges/docsBinder.png[Binder, link="https://mybinder.readthedocs.io/en/latest/", {browser-window--new}]
+
 ifeval::[{binder-badges-enabled} == true]
-image:/assets/images/badges/myBinder.png[Binder, link="https://mybinder.org/", {browser-window--new}]
-image:/assets/images/badges/docsBinder.png[Binder, link="https://mybinder.readthedocs.io/en/latest/", {browser-window--new}]
-image:https://mybinder.org/badge_logo.svg[Binder, link="https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/HEAD", {browser-window--new}]
+image:https://mybinder.org/badge_logo.svg[Binder, link="https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/main", {browser-window--new}]
 endif::[]
-
-////
-== Tutorial Interact
-
-lorem:sentences[5]
-
-notebook::tutorial_interact[]
-////
 
 == Recipes Layout
 

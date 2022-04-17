@@ -34,7 +34,6 @@ resource_options:
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
-:badges-enabled:                        false
 :binder-badge-enabled:                  true
 
 //  Load Liquid procedures
@@ -48,16 +47,11 @@ resource_options:
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-ifeval::[{badges-enabled} == true]
-{badge-j1--license} {badge-j1--version-latest} {badge-j1-gh--last-commit} {badge-j1--downloads}
-endif::[]
+// image:/assets/images/badges/myBinder.png[Binder, link="https://mybinder.org/", {browser-window--new}]
+// image:/assets/images/badges/docsBinder.png[Binder, link="https://mybinder.readthedocs.io/en/latest/", {browser-window--new}]
 
-// Include sub-documents (if any)
-// -----------------------------------------------------------------------------
-ifeval::[{binder-badge-enabled} == true]
-image:/assets/images/badges/myBinder.png[Binder, link="https://mybinder.org/", {browser-window--new}]
-image:/assets/images/badges/docsBinder.png[Binder, link="https://mybinder.readthedocs.io/en/latest/", {browser-window--new}]
-image:https://mybinder.org/badge_logo.svg[Binder, link="https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/HEAD", {browser-window--new}]
+ifeval::[{binder-badges-enabled} == true]
+image:https://mybinder.org/badge_logo.svg[Binder, link="https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/main", {browser-window--new}]
 endif::[]
 
 == Climate change forecasting
