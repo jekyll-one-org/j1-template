@@ -49,7 +49,7 @@
 <!-- [INFO   ] [news_box.proc                      ] [ place news box ] -->
 <div class="col-md-{{footer_box_width_md}}">
   <!-- div class="heading-footer"><h2 class="notoc">{{title}}</h2></div -->
-  <h2 class="text-uppercase g-color-white-opacity-0_6 g-font-size-18 mb-0">{{title}}</h2>
+  <h2 class="text-uppercase g-color-white-opacity-0_6 g-font-size-18 mb-0" notranslate>{{title}}</h2>
   <p class="tagline mb-0">
     <large>{{tagline}}</large>
   </p>
@@ -61,7 +61,7 @@
         {% if category == posts_category and posts_written <= max_posts %}
         {% assign posts_written = posts_written | plus:'1' %}
         <li>
-          <a href="{{post.url}}">{{post.title}}</a>
+          <a href="{{post.url}}" class="notranslate">{{post.title}}</a>
           {% if language == "en" %}
             <small class="text-uppercase">{{post.date | localize: "%Y %B, %-d"}}</small>
           {% endif %}

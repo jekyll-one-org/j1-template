@@ -182,7 +182,7 @@ exclude_from_search:                    true
             <!-- Heading -->
             <div>
               <div class="{{panel_settings.animate}} mb-2">
-                <h2 class="g-font-weight-500 mb-0">{{panel_settings.title}}</h2>
+                <h2 class="g-font-weight-500 mb-0 notranslate">{{panel_settings.title}}</h2>
                 <p class="tagline mb-0"><b>{{panel_settings.tagline}}</b></p>
                 <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-2"></div>
               </div>
@@ -252,7 +252,7 @@ exclude_from_search:                    true
                           </span>
                         {% endif %}
                       </div>
-                      <h3 class="m-0">{{card_title}}</h3>
+                      <h3 class="m-0 notranslate">{{card_title}}</h3>
                     </div>
                   </div>
 
@@ -533,7 +533,7 @@ exclude_from_search:                    true
                             <img class="mt-2" src="" alt="">
                             {% assign post_width = '100x' %}
                           {% endif %}
-                          <h3 class="card-header bg-primary notoc">{{post.title}}</h3>
+                          <h3 class="card-header bg-primary notoc notranslate">{{post.title}}</h3>
                           <!-- Body|Excerpt -->
                           <div class="card-body r-text-300">
                             {% comment %} {{post.excerpt|truncatewords: 50|replace:'...',' ...'|remove:'<div class="paragraph">'|remove:'</div>'|remove:'<p>'|remove:'</p>'}} {% endcomment %}
@@ -557,7 +557,7 @@ exclude_from_search:                    true
                               {% assign categories    = my_categories |join: " · "  %}
                               {% assign tags          = post.tags | join: " · "  %}
 
-                              <p class="result-item-text small text-muted mb-3">
+                              <p class="result-item-text small text-muted mb-3 notranslate">
                                 <i class="mdi mdi-tag-text-outline mdi-18px mr-1"></i>
                                 <span class="sr-categories">{{categories}}</span>
                                 <br>

@@ -78,8 +78,7 @@ defaults:
   #
   # show_nbi_messages
   # ----------------------------------------------------------------------------
-  #   Show info|progress|error messages while nbinteract is
-  #   being initialized on a page.
+  #   Show info|progress|error messages while nbinteract is being initialized.
   #
   #   values:                           boolean (true|false)
   #   default:                          true
@@ -88,7 +87,7 @@ defaults:
   #
   # indicate_nbi_activity
   # ----------------------------------------------------------------------------
-  #   Shows a spinner while nbinteract in being initialized on a page.
+  #   Show a spinner while nbinteract in being initialized.
   #
   #   values:                           boolean (true|false)
   #   default:                          false
@@ -110,7 +109,7 @@ defaults:
   #   init phase tooks longer, an error is issued.
   #
   #   values:                           integer
-  #   default:                          60000
+  #   default:                          180000
   #
   # ----------------------------------------------------------------------------
   #
@@ -122,7 +121,15 @@ defaults:
   #   default:                          3500
   #
   # ----------------------------------------------------------------------------
-
+  #
+  # nbi_init_mathjax
+  # ----------------------------------------------------------------------------
+  #   Load and initialize the MathJax JS library
+  #
+  #   values:                           boolean (true|false)
+  #   default:                          false
+  #
+  # ----------------------------------------------------------------------------
   #
   spec:                                 jekyll-one/nbinteract-notebooks/main
   baseUrl:                              'https://mybinder.org'
@@ -130,12 +137,14 @@ defaults:
 
   button_styles:                        btn btn-primary btn-raised hidden
 
-  show_nbi_messages:                    true
-  indicate_nbi_activity:                false
+  show_nbi_messages:                    false
+  indicate_nbi_activity:                true
   nbi_messages_auto_close:              true
 
-  nbi_init_timeout:                     60000
+  nbi_init_timeout:                     180000
   nbi_messages_auto_close_delay:        3500
+
+  nbi_init_mathjax:                     false
 
 # ------------------------------------------------------------------------------
 # END config

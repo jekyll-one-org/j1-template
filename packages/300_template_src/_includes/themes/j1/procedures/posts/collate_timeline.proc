@@ -124,7 +124,7 @@
           ---------------------------------------------------------------------- {% endcomment %}
           <!-- div class="timeline-title" -->
           <div class="card-header bg-primary pt-4 pb-3">
-            <h2 id="{{1000000 | rand}}" class="md-white">{{post.title}}</h2>
+            <h2 id="{{1000000 | rand}}" class="md-white notranslate">{{post.title}}</h2>
           </div>
 
           <!-- Collect icon data from frontmatter -->
@@ -253,7 +253,7 @@
                 {% assign categories    = my_categories |join: " · "  %}
                 {% assign tags          = post.tags | join: " · "  %}
 
-                <p class="result-item-text small text-muted mb-3">
+                <p class="result-item-text small text-muted mb-3 notranslate">
                   <i class="mdi mdi-tag-text-outline mdi-18px mr-1"></i>
                   <span class="sr-categories">{{categories}}</span>
                   <br>

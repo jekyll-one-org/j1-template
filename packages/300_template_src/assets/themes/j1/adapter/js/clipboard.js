@@ -149,18 +149,23 @@ j1.adapter.clipboard = (function (j1, window) {
     // -------------------------------------------------------------------------
     // initClipboard
     // Create copy-to-clipboard for all pages
+    // NOTE: Added check on isNotebook to skip clipboard button on
+    //       Notebooks
     // -------------------------------------------------------------------------
     initClipButtons: function () {
+      var btnHtml = '<div class="j1-clipboard"><span class="btn-clipboard" data-bs-toggle="tooltip" data-bs-placement="left" title="' + btnTitle +'">' + btnText + '</span></div>';
+      var isNoClip;
+      var isNotebook;
+
       // insert copy to clipboard button before all elements having a
       // class of ".highlight" assigned to (e.g. Asciidoc source blocks)
+      //
       $('.highlight').each(function () {
-        // Check if no clipboard should be applied
-        var isNoClip = $(this).closest('.noclip');
-        if ( isNoClip.length == 0) {
-          var btnHtml = '';
+        // Check if NO clipboard should be applied
+        isNoClip    = $(this).closest('.noclip').length;
+        isNotebook  = $(this).closest('.hl-ipython3').length;
 
-          btnHtml = '<div class="j1-clipboard"><span class="btn-clipboard" data-bs-toggle="tooltip" data-bs-placement="left" title="' + btnTitle +'">' + btnText + '</span></div>';
-
+        if (!isNoClip && !isNotebook) {
           $(this).before(btnHtml);
           $('.btn-clipboard').tooltip();
         }

@@ -65,9 +65,41 @@ settings:
   #   values:                           path
   #   default:                          no default
   #
+  # show_nbi_messages
+  # ----------------------------------------------------------------------------
+  #   Show info|progress|error messages while nbinteract is being initialized.
+  #
+  #   values:                           boolean (true|false)
+  #   default:                          true
+  #
+  #
+  # indicate_nbi_activity
+  # ----------------------------------------------------------------------------
+  #   Show a spinner while nbinteract in being initialized.
+  #
+  #   values:                           boolean (true|false)
+  #   default:                          false
+  #
   # ----------------------------------------------------------------------------
 
   notebooks:
+    # --------------------------------------------------------------------------
+    # J1 Notebooks J1 NBI Docs
+    # --------------------------------------------------------------------------
+
+    # --------------------------------------------------------------------------
+    # Demo notebook 'selected ODEs'
+    #
+    - notebook:
+        enabled:                        true
+
+        id:                             j1_docs_example_dynamic
+        xhr_data:                       j1_docs_example_dynamic.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/html
+
+        show_nbi_messages:              false
+        indicate_nbi_activity:          false
+
 
     # --------------------------------------------------------------------------
     # J1 Notebooks for testing
@@ -132,7 +164,6 @@ settings:
         id:                             j1_pandas_intro
         xhr_data:                       j1_pandas_creating_reading_and_writing.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
-
 
     # --------------------------------------------------------------------------
     # interactive

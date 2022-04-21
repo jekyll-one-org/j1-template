@@ -8,7 +8,7 @@
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Page-Layout-and-Dashboarding">Page Layout and Dashboarding<a class="anchor-link" href="#Page-Layout-and-Dashboarding">&#182;</a></h3><p><code>nbinteract</code> gives basic page layout functionality using special comments in your code. Include one or more of these markers in a Python comment and <code>nbinteract</code> will add their corresponding CSS classes to the generated cells.</p>
+<h3 id="Page-Layout-and-Dashboarding">Page Layout and Dashboarding<a class="anchor-link" href="#Page-Layout-and-Dashboarding">&#182;</a></h3><p><code>nbinteract</code> gives basic page layout functionality using special comments in your code. Include one or more of these markers in a Python. Outputting the HTML code by <code>nbinteract</code> add their corresponding CSS classes to the generated cells.</p>
 <table>
 <thead><tr>
 <th>Marker</th>
@@ -65,17 +65,29 @@
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
-<span class="kn">from</span> <span class="nn">ipywidgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">interactive</span><span class="p">,</span> <span class="n">fixed</span><span class="p">,</span> <span class="n">interact_manual</span>
 <span class="kn">import</span> <span class="nn">nbinteract</span> <span class="k">as</span> <span class="nn">nbi</span>
+
+<span class="c1"># Jupyter Specifics</span>
+<span class="c1">#</span>
+<span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="nn">widgets</span>
+<span class="c1"># from ipywidgets import interact, interactive, fixed, interact_manual</span>
+<span class="kn">from</span> <span class="nn">ipywidgets.widgets</span> <span class="kn">import</span> <span class="n">interact</span><span class="p">,</span> <span class="n">IntSlider</span><span class="p">,</span> <span class="n">FloatSlider</span><span class="p">,</span> <span class="n">Layout</span>
+
 
 <span class="n">np</span><span class="o">.</span><span class="n">set_printoptions</span><span class="p">(</span><span class="n">threshold</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">suppress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_rows</span> <span class="o">=</span> <span class="mi">7</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">options</span><span class="o">.</span><span class="n">display</span><span class="o">.</span><span class="n">max_columns</span> <span class="o">=</span> <span class="mi">8</span>
 <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;precision&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
 <span class="c1"># This option stops scientific notation for pandas</span>
-<span class="c1"># pd.set_option(&#39;display.float_format&#39;, &#39;{:.2f}&#39;.format)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.float_format&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="si">{:.2f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">)</span>
+
+<span class="n">style</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;description_width&#39;</span><span class="p">:</span> <span class="s1">&#39;150px&#39;</span><span class="p">}</span>
+<span class="n">slider_layout</span> <span class="o">=</span> <span class="n">Layout</span><span class="p">(</span><span class="n">width</span><span class="o">=</span><span class="s1">&#39;90%&#39;</span><span class="p">)</span>
+
+<span class="c1"># Some Magics</span>
+<span class="c1">#</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
 </pre></div>
 
     </div>
@@ -181,6 +193,12 @@
 </div>
 
   </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Dashboard-1">Dashboard 1<a class="anchor-link" href="#Dashboard-1">&#182;</a></h4>
+</div>
+</div>
+</div>
 
   
 
@@ -194,20 +212,25 @@
 <span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Views for Trending Videos&#39;</span><span class="p">,</span>
     <span class="s1">&#39;xlabel&#39;</span><span class="p">:</span> <span class="s1">&#39;Date Trending&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;ylabel&#39;</span><span class="p">:</span> <span class="s1">&#39;Views&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ylabel&#39;</span><span class="p">:</span> <span class="s1">&#39;Views [1k]&#39;</span><span class="p">,</span>
     <span class="s1">&#39;animation_duration&#39;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
     <span class="s1">&#39;aspect_ratio&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
 <span class="p">}</span>
 
 <span class="k">def</span> <span class="nf">xs</span><span class="p">(</span><span class="n">channel</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">videos</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">videos</span><span class="p">[</span><span class="s1">&#39;channel_title&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">channel</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
+    <span class="k">return</span> <span class="n">videos</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">videos</span><span class="p">[</span><span class="s1">&#39;channel_title&#39;</span><span class="p">]</span>
+            <span class="o">==</span> <span class="n">channel</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
 
-<span class="k">def</span> <span class="nf">ys</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">videos</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">xs</span><span class="p">,</span> <span class="s1">&#39;views&#39;</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">ys</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>    
+    <span class="k">return</span> <span class="p">(</span><span class="n">videos</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">xs</span><span class="p">,</span> <span class="s1">&#39;views&#39;</span><span class="p">])</span><span class="o">/</span><span class="mi">1000</span>
+
+
+
 
 <span class="n">nbi</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span>
-            <span class="n">channel</span><span class="o">=</span><span class="n">videos</span><span class="p">[</span><span class="s1">&#39;channel_title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()[</span><span class="mi">9</span><span class="p">:</span><span class="mi">15</span><span class="p">],</span>
-            <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+  <span class="n">channel</span> <span class="o">=</span>
+    <span class="n">videos</span><span class="p">[</span><span class="s1">&#39;channel_title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()[</span><span class="mi">9</span><span class="p">:</span><span class="mi">15</span><span class="p">],</span>
+    <span class="n">options</span> <span class="o">=</span> <span class="n">options</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -247,17 +270,27 @@
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># nbi:right</span>
 <span class="n">options</span><span class="o">=</span><span class="p">{</span>
-    <span class="s1">&#39;ylabel&#39;</span><span class="p">:</span> <span class="s1">&#39;Proportion per Unit&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ylabel&#39;</span><span class="p">:</span> <span class="s1">&#39;Proportion per Unit [1k]&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;xlabel&#39;</span><span class="p">:</span> <span class="s1">&#39;Units&#39;</span><span class="p">,</span>
     <span class="s1">&#39;bins&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
     <span class="s1">&#39;aspect_ratio&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
 <span class="p">}</span>
 
-
 <span class="k">def</span> <span class="nf">values</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
     <span class="n">vals</span> <span class="o">=</span> <span class="n">videos</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">vals</span><span class="p">[</span><span class="n">vals</span> <span class="o">&lt;</span> <span class="n">vals</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.8</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="n">vals</span> <span class="o">&lt;</span> <span class="n">vals</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.8</span><span class="p">)])</span><span class="o">/</span><span class="mi">1000</span>
 
-<span class="n">nbi</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">ToggleButtons</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;views&#39;</span><span class="p">,</span> <span class="s1">&#39;likes&#39;</span><span class="p">,</span> <span class="s1">&#39;dislikes&#39;</span><span class="p">,</span> <span class="s1">&#39;comment_count&#39;</span><span class="p">]),</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+
+
+
+
+
+<span class="n">nbi</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span>
+ <span class="n">values</span><span class="p">,</span><span class="n">col</span> <span class="o">=</span>
+ <span class="n">widgets</span><span class="o">.</span><span class="n">ToggleButtons</span><span class="p">(</span>
+  <span class="n">options</span> <span class="o">=</span>
+    <span class="p">[</span><span class="s1">&#39;comment_count&#39;</span><span class="p">,</span> <span class="s1">&#39;likes&#39;</span><span class="p">,</span> <span class="s1">&#39;dislikes&#39;</span><span class="p">,</span> <span class="s1">&#39;views&#39;</span><span class="p">]),</span> 
+  <span class="n">options</span> <span class="o">=</span> <span class="n">options</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -288,7 +321,14 @@
   </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Dashboard-(without-showing-code)">Dashboard (without showing code)<a class="anchor-link" href="#Dashboard-(without-showing-code)">&#182;</a></h4>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Dashboard-2">Dashboard 2<a class="anchor-link" href="#Dashboard-2">&#182;</a></h4><p>This dashboard example is showing the same widgets, but without showing the code.</p>
+
 </div>
 </div>
 </div>
@@ -355,7 +395,7 @@
 <span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;title&#39;</span><span class="p">:</span> <span class="s1">&#39;Views for Trending Videos&#39;</span><span class="p">,</span>
     <span class="s1">&#39;xlabel&#39;</span><span class="p">:</span> <span class="s1">&#39;Date Trending&#39;</span><span class="p">,</span>
-    <span class="s1">&#39;ylabel&#39;</span><span class="p">:</span> <span class="s1">&#39;Views&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ylabel&#39;</span><span class="p">:</span> <span class="s1">&#39;Views [1k]&#39;</span><span class="p">,</span>
     <span class="s1">&#39;animation_duration&#39;</span><span class="p">:</span> <span class="mi">500</span><span class="p">,</span>
     <span class="s1">&#39;aspect_ratio&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
 <span class="p">}</span>
@@ -363,12 +403,12 @@
 <span class="k">def</span> <span class="nf">xs</span><span class="p">(</span><span class="n">channel</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">videos</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">videos</span><span class="p">[</span><span class="s1">&#39;channel_title&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">channel</span><span class="p">]</span><span class="o">.</span><span class="n">index</span>
 
-<span class="k">def</span> <span class="nf">ys</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">videos</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">xs</span><span class="p">,</span> <span class="s1">&#39;views&#39;</span><span class="p">]</span>
+<span class="k">def</span> <span class="nf">ys</span><span class="p">(</span><span class="n">xs</span><span class="p">):</span>    
+    <span class="k">return</span> <span class="p">(</span><span class="n">videos</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">xs</span><span class="p">,</span> <span class="s1">&#39;views&#39;</span><span class="p">])</span><span class="o">/</span><span class="mi">1000</span>
 
 <span class="n">nbi</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xs</span><span class="p">,</span> <span class="n">ys</span><span class="p">,</span>
-            <span class="n">channel</span><span class="o">=</span><span class="n">videos</span><span class="p">[</span><span class="s1">&#39;channel_title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()[</span><span class="mi">9</span><span class="p">:</span><span class="mi">15</span><span class="p">],</span>
-            <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+  <span class="n">channel</span><span class="o">=</span><span class="n">videos</span><span class="p">[</span><span class="s1">&#39;channel_title&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()[</span><span class="mi">9</span><span class="p">:</span><span class="mi">15</span><span class="p">],</span>
+  <span class="n">options</span> <span class="o">=</span> <span class="n">options</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -409,17 +449,22 @@
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># nbi:hide_in</span>
 <span class="c1"># nbi:right</span>
 <span class="n">options</span><span class="o">=</span><span class="p">{</span>
-    <span class="s1">&#39;ylabel&#39;</span><span class="p">:</span> <span class="s1">&#39;Proportion per Unit&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;ylabel&#39;</span><span class="p">:</span> <span class="s1">&#39;Proportion per Unit [1k]&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;xlabel&#39;</span><span class="p">:</span> <span class="s1">&#39;Units&#39;</span><span class="p">,</span>
     <span class="s1">&#39;bins&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span>
     <span class="s1">&#39;aspect_ratio&#39;</span><span class="p">:</span> <span class="mf">1.0</span><span class="p">,</span>
 <span class="p">}</span>
 
-
 <span class="k">def</span> <span class="nf">values</span><span class="p">(</span><span class="n">col</span><span class="p">):</span>
     <span class="n">vals</span> <span class="o">=</span> <span class="n">videos</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
-    <span class="k">return</span> <span class="n">vals</span><span class="p">[</span><span class="n">vals</span> <span class="o">&lt;</span> <span class="n">vals</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.8</span><span class="p">)]</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">vals</span><span class="p">[</span><span class="n">vals</span> <span class="o">&lt;</span> <span class="n">vals</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="mf">0.8</span><span class="p">)])</span><span class="o">/</span><span class="mi">1000</span>
 
-<span class="n">nbi</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="n">widgets</span><span class="o">.</span><span class="n">ToggleButtons</span><span class="p">(</span><span class="n">options</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;views&#39;</span><span class="p">,</span> <span class="s1">&#39;likes&#39;</span><span class="p">,</span> <span class="s1">&#39;dislikes&#39;</span><span class="p">,</span> <span class="s1">&#39;comment_count&#39;</span><span class="p">]),</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">)</span>
+<span class="n">nbi</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span>
+    <span class="n">values</span><span class="p">,</span><span class="n">col</span> <span class="o">=</span>
+    <span class="n">widgets</span><span class="o">.</span><span class="n">ToggleButtons</span><span class="p">(</span>
+      <span class="n">options</span> <span class="o">=</span>
+        <span class="p">[</span><span class="s1">&#39;comment_count&#39;</span><span class="p">,</span> <span class="s1">&#39;likes&#39;</span><span class="p">,</span> <span class="s1">&#39;dislikes&#39;</span><span class="p">,</span> <span class="s1">&#39;views&#39;</span><span class="p">]),</span> 
+      <span class="n">options</span> <span class="o">=</span> <span class="n">options</span><span class="p">)</span>
 </pre></div>
 
     </div>

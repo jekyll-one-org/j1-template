@@ -39,6 +39,12 @@
     "opt_app_url": "http://localhost:41010/",
     "opt_watch": "--watch"
   },
+  "nbi": {
+    "opt_output_type": "plain",
+    "opt_credentials": "fake/fake",
+    "opt_nbi_input_folder": "D:\\j1\\github\\j1-template-2022.2.x\\packages\\400_template_site\\pages\\public\\jupyter\\notebooks",
+    "opt_nbi_output_folder": "D:\\j1\\github\\j1-template-2022.2.x\\packages\\400_template_site\\pages\\public\\jupyter\\notebooks\\html"
+  },
   "algolia": {
     "admin_key": "your-algolia-admin-key"
   },
@@ -126,7 +132,8 @@
     "link-osx:templates": "shx ln -s ../300_template_src/_install ./_install",
     "remove-links": "shx rm -rf _includes _layouts _plugins _install apps assets",
     "get_version": "run-p -s get_version:*",
-    "get_version:jekyll": "cross-var cross-env JEKYLL_ENV=$npm_package_config_mode BUNDLE_GEMFILE=$npm_package_ruby_gemfile bundle exec jekyll --version"
+    "get_version:jekyll": "cross-var cross-env JEKYLL_ENV=$npm_package_config_mode BUNDLE_GEMFILE=$npm_package_ruby_gemfile bundle exec jekyll --version",
+    "build--all": "cross-var nbinteract -r $npm_package_nbi_opt_nbi_input_folder -o $npm_package_nbi_opt_nbi_output_folder -t $npm_package_nbi_opt_output_type -s $npm_package_nbi_opt_credentials"
   },
   "dependencies": {
     "cross-env": "^7.0.3",

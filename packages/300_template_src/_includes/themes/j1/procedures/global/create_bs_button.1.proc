@@ -1,0 +1,172 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_includes/themes/j1/procedures/components/create_bs_button.proc
+ #  Liquid PROCEDURE to create the HTML code for a BS button
+ #  of type LINK, BUTTON, INPUT and SUBMIT
+ #
+ #  https://jekyll.one
+ #
+ #  Copyright (C) 2022 Juergen Adams
+ #
+ #  J1 Template is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+ #   Components procedure. Calculate the HTML code for a given button TYPE
+ #   based on the button_data (hash) (e.g. taken from the panel configuration)
+ #
+ #    Usage:
+ #      1)  assign the 'button_data' and 'button_type' variables
+ #      2)  include the create_bs_button.proc procedure
+ #
+ #  Example:
+ #
+ #  {% capture create_bs_button %}themes/{{site.template.name}}/procedures/global/create_bs_button.proc{% endcapture %}
+ #  {% assign my_button_hash = button_hash %}
+ #  {% assign my_button_type = "link" %}
+ #
+ #  {% include {{create_bs_button}} button_data=my_button_hash size=my_button_type %}
+ #  {% assign my_button_html = {{button_html}} %}
+ #
+ #  or
+ #
+ #  {% include {{create_bs_button}} button_data=button_hash size="link" %}
+ #  {% assign my_button_html = {{button_html}} %}
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ #  button_data: {{button_data}}
+ #
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% assign button_data = include.button_data %}
+{% assign button_type = include.button_type | strip | downcase %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture select_color     %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %}
+
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% case button_type %}
+
+  {% when 'link' %}
+  {% comment %} Create BS link button
+  ------------------------------------------------------------------------------ {% endcomment %}
+
+    {% for item in button_data %} {% for button in item[1] %}
+      {% assign key   = button[0] %}
+      {% assign value = button[1] %}
+      {% if key == 'id' %}         {% assign button_id         = value %} {% endif %}
+      {% if key == 'title' %}      {% assign button_title      = value %} {% endif %}
+      {% if key == 'tagline' %}    {% assign button_tagline    = value %} {% endif %}
+      {% if key == 'class' %}      {% assign button_class      = value %} {% endif %}
+      {% if key == 'style' %}      {% assign button_style      = value %} {% endif %}
+      {% if key == 'icon' %}       {% assign button_icon       = value %} {% endif %}
+      {% if key == 'icon_color' %} {% assign button_icon_color = value %} {% endif %}
+      {% if key == 'icon_size' %}  {% assign button_icon_size  = value %} {% endif %}
+      {% if key == 'href' %}       {% assign button_href       = value %} {% endif %}
+      {% if key == 'target' %}     {% assign button_target     = value %} {% endif %}
+    {% endfor %} {% endfor %}
+
+    {% comment %} jadams, 2021-04-24:
+    TODO, mr-x on font-icon are to be scaled on icon-size (fixed on: mr-3)
+    -------------------------------------------------------------------------------- {% endcomment %}
+
+    {% if button_tagline %}
+      {% if button_href and button_target %}
+        {% capture bs_button_html %}
+          <a id="{{button_id}}" href="{{button_href}}" target="{{button_target}}" rel="noopener" class="{{button_class}}" style="{{button_style}}">
+            <i class="{{icon_family}} {{icon_family}}-{{button_icon}} {{icon_family}}-{{button_icon_size}} {{icon_family}}-{{button_icon_color}} mr-3"></i>
+            <span class="float-right text-left mt-2 notranslate">
+              {{button_title}}
+              <span class="d-block r-text-200 text-lowercase">{{button_tagline}}</span>
+            </span>
+          </a>
+        {% endcapture %}
+      {% elsif button_href %}
+        {% capture bs_button_html %}
+          <a id="{{button_id}}" href="{{button_href}}" class="{{button_class}}" style="{{button_style}}">
+            <i class="{{icon_family}} {{icon_family}}-{{button_icon}} {{icon_family}}-{{button_icon_size}} {{icon_family}}-{{button_icon_color}} mr-3"></i>
+            <span class="float-right text-left mt-2 notranslate">
+              {{button_title}}
+              <span class="d-block r-text-200 text-lowercase">{{button_tagline}}</span>
+            </span>
+          </a>
+        {% endcapture %}
+      {% else %}
+        {% capture bs_button_html %}INFO: No valid value for parameter href found{% endcapture %}
+      {% endif %}
+    {% else %}
+      {% if button_href and button_target %}
+        {% capture bs_button_html %}
+          <a id="{{button_id}}" href="{{button_href}}" target="{{button_target}}" rel="noopener" class="{{button_class}}" style="{{button_style}}">
+            <i class="{{icon_family}} {{icon_family}}-{{button_icon}} {{icon_family}}-{{button_icon_size}} {{icon_family}}-{{button_icon_color}} mr-1"></i>
+            <span class="float-right text-left notranslate">
+              {{button_title}}
+            </span>
+          </a>
+        {% endcapture %}
+      {% elsif button_href %}
+        {% capture bs_button_html %}
+          <a id="{{button_id}}" href="{{button_href}}" class="{{button_class}}" style="{{button_style}}">
+            <i class="{{icon_family}} {{icon_family}}-{{button_icon}} {{icon_family}}-{{button_icon_size}} {{icon_family}}-{{button_icon_color}} mr-1"></i>
+            <span class="float-right text-left notranslate">
+              {{button_title}}
+            </span>
+          </a>
+        {% endcapture %}
+      {% else %}
+        {% capture bs_button_html %}INFO: No valid value for parameter href found{% endcapture %}
+      {% endif %}
+    {% endif %}
+
+  {% when 'input' %}
+  {% comment %} Create BS link button
+  ------------------------------------------------------------------------------ {% endcomment %}
+
+  {% when 'submit' %}
+  {% comment %} Create BS link button
+  ------------------------------------------------------------------------------ {% endcomment %}
+
+
+  {% when 'card' %}
+  {% comment %} Create BS card button
+  ------------------------------------------------------------------------------ {% endcomment %}
+
+    {% for item in button_data %}
+
+      {% for button in item[1] %}
+        {% assign key   = button[0] %}
+        {% assign value = button[1] %}
+        {% if key == 'text' %}       {% assign button_text       = value %} {% endif %}
+        {% if key == 'class' %}      {% assign button_class      = value %} {% endif %}
+        {% if key == 'icon' %}       {% assign button_icon       = value %} {% endif %}
+        {% if key == 'icon_color' %} {% assign button_icon_color = value %} {% endif %}
+        {% if key == 'icon_size' %}  {% assign button_icon_size  = value %} {% endif %}
+        {% if key == 'href' %}       {% assign button_href       = value %} {% endif %}
+      {% endfor %}
+
+    {% endfor %}
+
+    {% if button_href %}
+      {% capture bs_button_html %}<a href="{{button_href}}" class="{{button_class}}"><i class="{{icon_family}} {{icon_family}}-{{button_icon}} {{icon_family}}-{{button_icon_size}} {{icon_family}}-{{button_icon_color}} mr-1 mb-2"></i> {{button_text}} </a>{% endcapture %}
+    {% else %}
+      {% capture bs_button_html %}<!-- INFO: No valid value for parameter href found. -->{% endcapture %}
+    {% endif %}
+
+
+{% endcase %}
+
+{% comment %} Reset Liquid vars
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% assign button_text       = nil %}
+{% assign button_class      = nil %}
+{% assign button_icon       = nil %}
+{% assign button_icon_color = nil %}
+{% assign button_icon_size  = nil %}
+{% assign button_href       = nil %}

@@ -26,9 +26,9 @@
 
 {% comment %} Main
 --------------------------------------------------------------- {% endcomment %}
-<!-- [INFO   ] [j1.assets.data.footer              ] [Found ContactsBox. Process ContactsBox] --> 
+<!-- [INFO   ] [j1.assets.data.footer              ] [Found ContactsBox. Process ContactsBox] -->
 <div class="col-md-{{footer_box_width_md}}"> <!-- ContactsBox -->
-  <div class="heading-footer"><h2 class="notoc">{{ title }}</h2></div>
+  <div class="heading-footer"><h2 class="notoc notranslate">{{ title }}</h2></div>
   <ul class="list-unstyled contacts">
     {% if address %}
     <li>

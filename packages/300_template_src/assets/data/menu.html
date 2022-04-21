@@ -90,6 +90,7 @@ exclude_from_search:                    true
 {% comment %} Set navBarOptions
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign nav_bar_position      = nav_bar_options.position %}
+{% assign nav_bar_translation   = nav_bar_options.translation %}
 
 {% comment %} Set navMenuOptions
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -109,6 +110,14 @@ exclude_from_search:                    true
   {% assign raised_level = nav_menu_options.raised_level %}
 {% else %}
   {% assign raised_level = 0 %}
+{% endif %}
+
+{% comment %} Set (Google) translation features
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if nav_bar_translation %}
+  {% assign translation = 'translate' %}
+% else %}
+  {% assign translation = 'notranslate' %}
 {% endif %}
 
 {% comment %} Set base icons and sizes
@@ -144,15 +153,16 @@ exclude_from_search:                    true
 </head>
 
 {% comment %} Main
+See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-mathjax-processing-from-certain-html-elements
 -------------------------------------------------------------------------------- {% endcomment %}
 
 <!-- [DEBUG  ] [/assets/data/menu.html          ] [collect all nav links for the navigation bar (navbar)] -->
 <!-- div id="{{nav_menu_id}}" class="{{dropdown_collapse}}" -->
 <!-- div class="{{dropdown_collapse}}" -->
   {% if nav_menu_animation %}
-  <ul id="{{nav_menu_options.xhr_data_element}}" class="nav navbar-nav navigator navbar-{{nav_bar_position}}" data-in="{{animate_in}}" data-out="{{animate_out}}">
+  <ul id="{{nav_menu_options.xhr_data_element}}" class="nav navbar-nav navigator navbar-{{nav_bar_position}} tex2jax_ignore {{nav_bar_translation}}" data-in="{{animate_in}}" data-out="{{animate_out}}">
   {% else %}
-  <ul id="{{nav_menu_options.xhr_data_element}}" class="nav navbar-nav navigator navbar-{{nav_bar_position}}" data-in="fadeIn" data-out="fadeOut">
+  <ul id="{{nav_menu_options.xhr_data_element}}" class="nav navbar-nav navigator navbar-{{nav_bar_position}} tex2jax_ignore {{nav_bar_translation}}" data-in="fadeIn" data-out="fadeOut">
   {% endif %}
 
   {% for menu in navigator_menu_config %}

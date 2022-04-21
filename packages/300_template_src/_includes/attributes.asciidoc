@@ -266,6 +266,7 @@ tag::urls[]
 
 :url-msdropdown--home:                            https://www.marghoobsuleman.com/image-dropdown
 
+:url-nbconvert--doc:                              https://nbconvert.readthedocs.io/en/latest/usage.html
 :url-nbinteract--docs:                            https://www.nbinteract.com/
 
 :url-netlify--home:                               https://www.netlify.com/

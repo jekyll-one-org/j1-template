@@ -31,7 +31,7 @@
 <!-- [INFO   ] [links_box.proc                     ] [ place links box ] -->
 <div class="col-md-{{footer_box_width_md}}">
   <!-- div class="heading-footer"><h2 class="notoc">{{title}}</h2></div -->
-  <h2 class="text-uppercase g-color-white-opacity-0_6 g-font-size-18 mb-0">{{title}}</h2>
+  <h2 class="text-uppercase g-color-white-opacity-0_6 g-font-size-18 mb-0 notranslate">{{title}}</h2>
   <p class="tagline mb-0">
     <large>{{tagline}}</large>
   </p>
@@ -41,7 +41,7 @@
     {% for property in links %}
       {% comment %} <!-- proc - property.link: {{ property.link }} --> {% endcomment %}
       <li>
-        <a href="{{property.link.href}}" target="_blank" rel="noopener noreferrer">{{property.link.title}}</a>
+        <a href="{{property.link.href}}" class="notranslate" target="_blank" rel="noopener noreferrer">{{property.link.title}}</a>
         <div class="text-uppercase"><small>{{property.link.tagline}}</small></div>
       </li>
     {% endfor %}

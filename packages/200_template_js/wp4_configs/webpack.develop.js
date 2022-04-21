@@ -50,12 +50,10 @@ const devServerPageOpen =               dockerEnv ? false : true;
 const devServerPort =                   process.env.WP_JEKYLL_PORT || 50000;
 const distFolder =                      path.resolve(__dirname, './dist');
 const nodeModulesFolder =               path.resolve(__dirname, './node_modules');
-const cssSrc =                          path.resolve(__dirname, ROOT, '../100_template_css');
-const jekyllSrc =                       path.resolve(__dirname, ROOT, '../400_template_site');
-const gemSrc =                          path.resolve(__dirname, ROOT, '../500_template_gem');
-const jekyllSite =                      path.resolve(__dirname, ROOT, '../400_template_site/_site');
-const jekyllSiteAssets =                path.resolve(__dirname, ROOT, '../400_template_site/_site/assets');
-
+const cssSrc =                          path.resolve(__dirname, ROOT, '../100_template_css/');
+const gemSrc =                          path.resolve(__dirname, ROOT, '../500_template_gem/');
+const jekyllSources =                   path.resolve(__dirname, ROOT, '../400_template_site/');
+const jekyllSite =                      path.resolve(__dirname, ROOT, '../400_template_site/_site/');
 
 // WP PLUGIN definitions
 // -----------------------------------------------------------------------------
@@ -120,17 +118,16 @@ module.exports = merge(common, {
       stats:                            'minimal',                              // default: normal, can be normal|errors-only|minimal|verbose|none
     },
     static: {
-      directory:                        jekyllSite,                             // serve Jekyll Site
+      directory:                        jekyllSite,                    // serve the Jekyll _site folder
       staticOptions: {
         watchContentBase:               true,                                   // livereload for Jekyll build mode
         watchOptions:                   {
                                           ignored: [
                                             distFolder,                         // do not watch for changes on dist folder
-                                            nodeModulesFolder,                  // do not watch for changes on node modules folder
-                                            jekyllSrc,
-                                            gemSrc,
-                                            cssSrc,
-                                            jekyllSiteAssets                    // do not watch for changes on _site/assets folder
+                                            nodeModulesFolder,                  // do not watch for changes at node modules folder
+                                            cssSrc,                             // do not watch for changes at the projects CSS folder
+                                            gemSrc,                             // do not watch for changes at the projects GEM folder
+                                            jekyllSources,                  // do not watch for changes at the Jekyll source folder
                                           ],
                                           aggregateTimeout: 300,
                                           poll:             1000

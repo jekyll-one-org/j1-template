@@ -33,7 +33,7 @@
 <!-- [INFO   ] [about_box.proc                     ] [ place about box ] -->
 <div class="col-md-{{footer_box_width_md}}">
   <!-- div class="heading-footer"><h2 class="notoc">{{title}}</h2></div -->
-  <h2 class="text-uppercase g-color-white-opacity-0_6 g-font-size-18 mb-0">{{title}}</h2>
+  <h2 class="text-uppercase g-color-white-opacity-0_6 g-font-size-18 mb-0 notranslate">{{title}}</h2>
   <p class="tagline mb-0">
     <large>{{tagline}}</large>
   </p>

@@ -173,7 +173,7 @@ module.exports = function navigator ( options ) {
         page_link    = document.querySelector('[id="' + decodeURI(anchor_id).split('#').join('') + '"]') ? true : false;
         anchor_id    = e.target.hash ? e.target.hash : false;
         classname    = e.target.className ? e.target.className : '';
-        nav_link     = classname.includes('nav-link');                          // skip BS nav links
+        nav_link     = typeof classname == 'string' ? classname.includes('nav-link') : false;                          // skip BS nav links
         scrollOffset = j1.getScrollOffset();
 
         if (img_link) {

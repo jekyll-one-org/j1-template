@@ -64,34 +64,6 @@ settings:
 
         cards:
 
-          - name:                       Full Responsive
-            card:
-              enabled:                  true
-              type:                     text
-              title:                    Full Responsive
-              tagline:                  J1 Template
-              icon:                     responsive
-              icon_family:              MDI
-              icon_size:                3x
-              icon_color:
-              text: >
-                                        <p class="dropcap mt-3">
-                                          The Web is everywhere. J1 Template supports modern web browsers
-                                          on all devices for best results on PCs, Tablets, and SmartPhones.
-                                        </p>
-
-              buttons:
-
-                - name:                 Read More
-                  button:
-                    type:               text
-                    text:               Follow Your Visitors
-                    class:
-                    icon:
-                    icon_size:
-                    icon_color:
-                    href:               /pages/public/panels/intro_panel#responsive-design
-
           - name:                       Technology
             card:
               enabled:                  true
@@ -119,12 +91,39 @@ settings:
                     icon_color:
                     href:               /pages/public/panels/intro_panel#current-technology
 
-
-          - name:                       Start in No Time
+          - name:                       Design
             card:
               enabled:                  true
               type:                     text
-              title:                    Start in No Time
+              title:                    Design
+              tagline:                  J1 Template
+              icon:                     responsive
+              icon_family:              MDI
+              icon_size:                3x
+              icon_color:
+              text: >
+                                        <p class="dropcap mt-3">
+                                          The Web is everywhere. J1 Template supports modern web browsers
+                                          on all devices for best results on PCs, Tablets, and SmartPhones.
+                                        </p>
+
+              buttons:
+
+                - name:                 Read More
+                  button:
+                    type:               text
+                    text:               Follow Your Visitors
+                    class:
+                    icon:
+                    icon_size:
+                    icon_color:
+                    href:               /pages/public/panels/intro_panel#responsive-design
+
+          - name:                       Development
+            card:
+              enabled:                  true
+              type:                     text
+              title:                    Develop
               tagline:                  J1 Template
               icon:                     clock
               icon_family:              MDI
@@ -133,7 +132,7 @@ settings:
               text: >
                                         <p class="dropcap mt-3">
                                           No programming is needed to start using J1. The Template
-                                          provides a large number of building blocks to create
+                                          provides a large number of building blocks to develop
                                           modern web pages in minutes.
                                         </p>
 

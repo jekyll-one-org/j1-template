@@ -191,7 +191,7 @@ settings:
 
               - name:                   Jekyll Home
                 link:
-                  title:                Jekyll Home
+                  title:                Jekyll
                   tagline:              First address for latest news
                   href:                 http://jekyllrb.com/
                   target:               _blank
@@ -199,7 +199,7 @@ settings:
 
               - name:                   CloudCannon
                 link:
-                  title:                Jekyll Tips at CloudCannon
+                  title:                Jekyll Tips
                   tagline:              Learn from experts
                   href:                 http://jekyll.tips/
                   target:               _blank

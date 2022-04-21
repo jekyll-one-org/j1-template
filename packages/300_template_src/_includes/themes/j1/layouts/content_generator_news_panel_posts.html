@@ -291,7 +291,7 @@
                         <img class="mt-2" src="" alt="">
                         {% assign post_width = '100x' %}
                       {% endif %}
-                      <h3 class="card-header bg-primary notoc">{{post.title}}</h3>
+                      <h3 class="card-header bg-primary notoc notranslate">{{post.title}}</h3>
                       <!-- Body|Excerpt -->
                       <div class="card-body r-text-300">
                         {{post.excerpt|truncatewords: truncate_words}}
@@ -316,7 +316,7 @@
                           {% assign categories    = my_categories |join: " · "  %}
                           {% assign tags          = post.tags | join: " · "  %}
 
-                          <p class="result-item-text small text-muted mb-3">
+                          <p class="result-item-text small text-muted mb-3 notranslate">
                             <i class="mdi mdi-tag-text-outline mdi-18px mr-1"></i>
                             <span class="sr-categories">{{categories}}</span>
                             <br>

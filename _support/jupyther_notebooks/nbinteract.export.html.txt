@@ -11,6 +11,7 @@ nbinteract D:\j1\github\j1-template-2022.2.x\packages\400_template_site\pages\pu
 
 nbinteract -r D:\j1\github\j1-template-2022.2.x\packages\400_template_site\pages\public\jupyter\notebooks -o D:\j1\github\j1-template-2022.2.x\packages\400_template_site\pages\public\jupyter\notebooks\html -t plain -s fake/fake
 
+nbinteract D:\j1\github\j1-template-2022.2.x\packages\400_template_site\pages\public\jupyter\notebooks\nbi-docs\nbi_docs_recipes_layout.ipynb -t plain -s fake/fake
 
 nbinteract
   -r "D:\j1\github\j1-template-2022.1.x\packages\400_template_site\assets\data\jupyter\notebooks"

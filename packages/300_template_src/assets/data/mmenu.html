@@ -89,10 +89,11 @@ exclude_from_search:                    true
 </head>
 
 {% comment %} Main
+See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-mathjax-processing-from-certain-html-elements
 -------------------------------------------------------------------------------- {% endcomment %}
   <!-- [INFO   ] [/assets/data/mmenu.html               ] [collect all nav links for the mobile navigation ] -->
   <!-- [INFO   ] [/assets/data/mmenu.html               ] [id menu_mmenu set statically and MUST as configured  ] -->
-  <ul id="menu_mmenu" class="partial" style="display:none">
+  <ul id="menu_mmenu" class="partial tex2jax_ignore" style="display:none">
 
   {% for menu in navigator_menu_config %}
 

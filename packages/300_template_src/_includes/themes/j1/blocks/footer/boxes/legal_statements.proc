@@ -48,31 +48,31 @@ legal_item: {{legal_item.legal | debug}}
 
   {% if language == "en" %}
     {% if legal_item.legal.enabled and legal_item.legal.type == 'copyright' %}
-      <li><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
+      <li class="notranslate"><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
     {% endif %}
 
     {% if legal_item.legal.enabled and legal_item.legal.type == 'impress' %}
-      <li><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
+      <li class="notranslate"><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
     {% endif %}
 
     {% if legal_item.legal.enabled and legal_item.legal.type == 'terms' %}
-      <li><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
+      <li class="notranslate"><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
     {% endif %}
 
     {% if legal_item.legal.enabled and legal_item.legal.type == 'privacy' %}
-      <li><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
+      <li class="notranslate"><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
     {% endif %}
 
     {% if legal_item.legal.enabled and legal_item.legal.type == 'licence' %}
-      <li><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
+      <li class="notranslate"><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
     {% endif %}
 
     {% if legal_item.legal.enabled and legal_item.legal.type == 'support' %}
-      <li><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
+      <li class="notranslate"><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
     {% endif %}
 
     {% if legal_item.legal.enabled and legal_item.legal.type == 'comments' %}
-      <li><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
+      <li class="notranslate"><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
     {% endif %}
   {% endif %}
 

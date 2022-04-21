@@ -467,6 +467,7 @@ j1.adapter.attic = (function (j1, window) {
 
             var text_emphasis = 'text-emphasis-' +atticOptions.text_emphasis;
             $('#head-title-text').addClass(text_emphasis);
+            // $('#head-title-text').addClass(notranslate);
             $('#head-tagline-text').addClass(text_emphasis);
 
             {% comment %} Add header CSS styles to <HEAD>

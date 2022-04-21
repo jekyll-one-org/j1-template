@@ -171,6 +171,7 @@ j1.adapter.translator = (function (j1, window) {
       }
 
       // add GT callback script dynamically in the head section
+      // jadams, 2022-04-21: postTranslateElementInit cause error, disabled
       // -----------------------------------------------------------------------
       gtCallbackScript.text  = '\n';
       gtCallbackScript.text += 'function googleTranslateElementInit() {' + '\n';
@@ -179,7 +180,7 @@ j1.adapter.translator = (function (j1, window) {
       gtCallbackScript.text += '    layout:       google.translate.TranslateElement.FloatPosition.TOP_LEFT' + '\n';
       gtCallbackScript.text += '  },' + '\n';
       gtCallbackScript.text += '  "google_translate_element");' + '\n';
-      gtCallbackScript.text += '  j1.adapter.translator.postTranslateElementInit(gtAPI);' + '\n';
+//    gtCallbackScript.text += '  j1.adapter.translator.postTranslateElementInit(gtAPI);' + '\n';
       gtCallbackScript.text += '}' + '\n';
       document.head.appendChild(gtCallbackScript);
 
