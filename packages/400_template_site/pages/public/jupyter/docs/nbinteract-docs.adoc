@@ -63,54 +63,57 @@ endif::[]
 
 [NOTE]
 ====
-This is a port for J1 Template of the origial document pages at
-link:{url-nbinteract--docs}[nbinteract Docs, {browser-window--new}].
-Meanwhile, a lot of changes were done at
-link:{url-binder--home}[Binder, {browser-window--new} ] what cause the
-origial pages doesn't work anymore. On clicking the NBI button `Show Widgets`,
-you'll encounter that all interactive pages never change their state, and
-get stuck in an infinite initializing loop `Initializing widgets...`.
+This document is a port for J1 Template of the original document pages
+at link:{url-nbinteract--docs}[nbinteract Docs, {browser-window--new}].
+Some sections are rewritten for the text to improve clarity and simplify the
+language for future translation.
+
+Meanwhile, a lot of changes were done for the services at
+link:{url-binder--home}[Binder, {browser-window--new} ], which causes the
+original pages doesn't work anymore. On clicking the NBI button `Show Widgets`,
+you'll encounter that all interactive pages never change their state and
+get stuck in `Initializing widgets...` for an infinite initializing loop.
 ====
 
-The package *nbinteract* aims to enable authors and educators to easily create
-and share interactive web pages. Interactive explanations of concepts are
+The package *nbinteract* aims to enable authors and educators to create and
+share interactive web pages easily. Interactive explanations of concepts are
 useful for communicating and explaining tricky concepts. Consider these
 explanations for linear regression and conditional probability, for example.
 
-However, making an interactive webpage often requires significant knowledge
-of web technologies and especially Javascript. While Jupyter widgets allow
-authors to generate interactive interfaces directly in a Jupyter notebook,
-sharing these demos typically requires readers to run the notebook. This
-causes issues when the reader's computer lacks (correct versions of) the
-packages needed to completely run the notebook.
+However, making an interactive web page often requires significant knowledge
+of web technologies, especially Javascript. While Jupyter widgets allow authors
+to generate interactive interfaces directly in a Jupyter notebook,
+sharing these demos typically requires the readers to run the notebook. Th
+ missing knowledge causes issues when the reader's computer lacks the correct
+versions of the packages required to run the notebook completely.
 
-The library provides a single binary that converts Jupyter notebooks into
-HTML pages. The resulting HTML pages can be shared with the public, keeping
-any interactivity created using Jupyter widgets. For example, the interactive
-parts of this website are entirely generated from notebooks using nbinteract.
+The library `nbinteract` provides a single binary that converts Jupyter
+notebooks into HTML pages. The resulting HTML pages can be shared with the
+public, keeping any interactivity created using Jupyter widgets. For example,
+the interactive parts of this website are entirely generated from notebooks
+using `nbinteract`.
 
-In addition, nbinteract provides a Python package. Once imported, nbinteract
+In addition, `nbinteract` provides a Python package. Once imported, the package
 provides helper methods that allow users to create simple interactive
 visualizations with single function calls.
 
 == Getting Started
 
-In the following set of pages, we will show you how to use nbinteract and
-its related tools. At the end of this tutorial, you will have a publicly
-viewable interactive webpage to share with the world!
+The following pages will show you how to use `nbinteract` and its related
+tools. At the end of this tutorial, you will have a publicly accessible
+interactive webpage to share with others!
 
-=== Following Along
+The pages assumes familiarity with running terminal commands and using Jupyter
+notebooks. The simplest way to follow this tutorial is to use the *Binder*
+service to start a notebook server. On the next page, we'll guide you through
+the steps to configure Binder so that the necessary packages are available for
+use in notebooks.
 
-In this tutorial, we assume familiarity with running terminal commands and
-using Jupyter notebooks. The simplest way to follow this tutorial is to use
-the *Binder service* to start a notebook server. On the next page, we'll guide
-you through the steps to configure Binder so that the necessary packages are
-available for use in notebooks.
+=== Local installation
 
-=== Installing Locally
-
-If you prefer to work on your local machine, you need to install the nbinteract
-package. To install the package, run the following commands in your terminal:
+If you prefer to work with Jupyter Notebook on your local machine, you need
+to install the `nbinteract` package on your PC. To install the package, run
+the following commands in your terminal:
 
 [source, sh]
 ----
@@ -121,51 +124,55 @@ jupyter nbextension enable --py --sys-prefix bqplot
 jupyter nbextension enable --py --sys-prefix widgetsnbextension
 ----
 
-=== Set Up
+WARNING: To work locally, a full setup of a Python *language* versions
+is required.
 
-To enable interactivity on webpages, nbinteract relies on the free Binder
-service. To configure Binder to run your webpages, we will create a GitHub
-repository which will also allow you to host your converted webpages publicly.
+=== Setup steps
 
-==== Creating an Account and Repo
+Enable interactive notebooks on webpages using `nbinteract` relies on the
+*free* Binder service. To configure Binder to run your webpages, we will
+create a GitHub repository that will allow you to host your converted webpages
+publicly.
+
+==== Creating a public repo at Github
 
 To begin, visit https://github.com[Github, {browser-window--new}] and create
 an account. If you already have an account, you should log in.
 
-Then, create a new repo. You may do this using the GitHub UI or visiting to
-https://github.com/new[create new repo at Github, {browser-window--new}].
-Name the repo *nbinteract-tutorial*. If you'd like a different name, feel
-free to name it something else; just keep in mind that we will use this repo
-name in later parts of the tutorial.
+Then, create a new repo. You may do this using the GitHub UI or by visiting
+https://github.com/new[create new repo at Github, {browser-window--new}]. Name
+the repo *nbinteract-tutorial*. If you'd like a different name, feel free to
+name it something else; keep in mind that we will use this repo name later in
+the tutorial.
 
-Make sure your repo is public, and click the checkbox to initialize your
-repo with a README. Your page should look like:
+Make sure your repo is *public*, and click the checkbox to initialize your
+repo with a README. Your page should look like this:
 
 // image gh-repo-setup
 
-Now, click on the Settings link for the repo near the top of the page,
-scroll down to the GitHub Pages section, and select the main branch as the
-GitHub pages source. Click the Save button to save your changes.
+Now, click on the Settings link for the repo near the top of the page, scroll
+down to the GitHub Pages section, and select the main branch as the GitHub
+pages source. Click the Save button to save your changes.
 
 // image gh-pages-setup
 
-Now, any file you upload to this repo will have a public URL. For example,
-the README.md file in the repo has the following URL:
+Any file you upload to this repo will have a public URL. For example, the
+README.md file in the repo has the following URL:
 
   {username}.github.io/nbinteract-tutorial/README.md
 
-Where `{username}` is replaced with your GitHub username. For example,
-if my username is SamLau95, my URL is:
+Where `{username}` is replaced with your GitHub username. For example, if
+my username is SamLau95, my URL is:
 
   SamLau95.github.io/nbinteract-tutorial/README.md
 
-If you can visit that URL and the page contains text (and not a 404 error)
+If you can visit that URL and the page contains text (and not a 404 error),
 you've set up your GitHub repo correctly.
 
-==== Cloning Your Repo
+==== Cloning your repo
 
-Now, visit http://mybinder.org/[Binder] and paste in the URL to your repo.
-It should look like:
+Now, visit http://mybinder.org/[Binder] and paste the URL to your repo. It
+should look like this:
 
   https://github.com/{username}/nbinteract-tutorial
 
@@ -189,8 +196,8 @@ jupyter notebook
 
 === Initializing nbinteract
 
-Via the notebook interface, click on New -> Terminal. This should open a
-terminal prompt. Run the following commands:
+Via the notebook interface, click on `New -> Terminal`. On clicking, this
+should open a terminal prompt. Run the following commands:
 
 [source, sh]
 ----
@@ -206,21 +213,23 @@ git commit -m "Setup nbinteract"
 git push origin main
 ----
 
-This initializes the nbinteract package and pushes the configuration files
-to GitHub. If you are working locally, skip the pip install command above
-and run the remaining commands in your terminal.
+The commands initialize the `nbinteract` package and push the configuration
+files to GitHub. If you are working locally, skip the pip install command
+above and run the remaining commands in your terminal.
 
 notebook::nbi_docs_tutorial_interact[]
 
-=== Publishing A Webpage
+=== Publishing a Webpage
 
-To convert a notebook into an HTML file, start a terminal and run the
-following command.
+To convert a notebook into an HTML file, start a terminal and run the following command.
 
+[source, sh]
+----
   nbinteract tutorial.ipynb
+----
 
-This generates a tutorial.html file with the contents of the notebook created
-in the previous section. Now, push your files to GitHub by running:
+The command generates a HTML file `tutorial.html` with the notebook's contents
+created in the previous section. Now, push your files to GitHub by running:
 
 [source, sh]
 ----
@@ -246,11 +255,11 @@ before you convert it. For example, if you rename `tutorial.ipynb` to
 
   {username}.github.io/nbinteract-tutorial/hello.html
 
-To change the path segment before the filename (in this case,
-nbinteract-tutorial) you can create a new GitHub repo with the subpath
-name you want. Then, you may create and convert notebooks in this repo.
-For example, if you create a new repo called blog-posts and convert a
-notebook called tutorial.ipynb, the resulting URL becomes:
+To change the path segment before the filename (nbinteract-tutorial), you
+can create a new GitHub repo with the subpath name you want. Then, you may
+create and convert notebooks in this repo. For example, if you create a new
+repo called blog-posts and convert a notebook called tutorial.ipynb, the
+resulting URL becomes:
 
   {username}.github.io/blog-posts/tutorial.html
 
@@ -258,33 +267,28 @@ notebook called tutorial.ipynb, the resulting URL becomes:
 
 You have learned a simple workflow to create interactive webpages:
 
-. Write a Jupyter notebook containing Python functions
-. Use interact to create UI elements to interact with the functions.
-. Run nbinteract {notebook} in a terminal to generate an interactive
+. write a Jupyter notebook containing Python functions
+. use interact to create UI elements to interact with the functions.
+. zun nbinteract {notebook} in a terminal to generate an interactive
   webpage using your notebook code.
-. Publish your webpage to GitHub pages to make it publicly accessible.
+. publish your webpage to GitHub pages to make it publicly accessible.
 
 In the next section, you will create an interactive simulation of the
 Monty Hall Problem. Onward!
 
 notebook::nbi_docs_tutorial_monty_hall[]
 
-
 == Recipes
 
-lorem:sentences[5]
+The Recipes section shows in simple steps how to use `nbinteract`. In addition
+to the classic widgets provided by Juypter Notebook, `nbinteract` offers
+additional interactive elements.
 
-=== Exporting With nbinteract
+=== Exporting with `nbinteract`
 
-nbinteract comes with two options for exporting Jupyter notebooks into
-standalone HTML pages: using the nbinteract command line tool and running
-nbi.publish() in a notebook cell.
-
-=== The nbinteract CLI tool
-
-Installing the nbinteract package installs a command-line tool for converting
-notebooks into HTML pages. For example, to convert a notebook called
-`Hello.ipynb` using the Binder spec `calebs11/nbinteract-image/main`:
+Installing the `nbinteract` package installs a command-line tool for
+converting notebooks into HTML pages. For example, to convert a notebook
+called `Hello.ipynb` using the Binder spec `calebs11/nbinteract-image/main`:
 
 [source, sh]
 ----
@@ -359,10 +363,10 @@ Options:
                              ExecutePreprocessor.
 ....
 
-=== nbi.publish()
+=== The method `nbi.publish()`
 
-The `nbi.publish()` method can be run inside a Jupyter notebook cell. It has
-the following signature:
+The `nbi.publish()` method can be run *inside* a Jupyter notebook cell.
+It has the following signature:
 
 [source, python]
 ----
@@ -422,7 +426,9 @@ notebook::nbi_docs_recipes_interactive_questions[]
 
 == Examples
 
-lorem:sentences[5]
+For more examples of interactive notebooks, see this section. The examples
+show a selection of specific learning content at colleges and universities
+on statistical issues.
 
 notebook::nbi_docs_empirical_distributions[]
 
