@@ -65,24 +65,10 @@ settings:
   #   values:                           path
   #   default:                          no default
   #
-  # show_nbi_messages
   # ----------------------------------------------------------------------------
-  #   Show info|progress|error messages while nbinteract is being initialized.
   #
-  #   values:                           boolean (true|false)
-  #   default:                          true
-  #
-  #
-  # indicate_nbi_activity
-  # ----------------------------------------------------------------------------
-  #   Show a spinner while nbinteract in being initialized.
-  #
-  #   values:                           boolean (true|false)
-  #   default:                          false
-  #
-  # ----------------------------------------------------------------------------
-
   notebooks:
+    
     # --------------------------------------------------------------------------
     # J1 Notebooks J1 NBI Docs
     # --------------------------------------------------------------------------

@@ -99,29 +99,176 @@ expected.
 
 == J1 NBI Integration
 
-Die ID des Moduls der J1 NBI Integration ist `nbinteract`
+Das Modul zur J1 NBI Integration steht als stabile Version zur Verfügung,
+ist jedoch noch im Status *Experimentell*. Wesentlicher Grund für den
+experimentellen Status ist das *Alter* der der zu Grunde liegenden Library
+`nbinteract-core`.
 
-=== Requirements
-
-To develop your Jupyter Notebooks, a *local* Installation of the *Python*
-programming language is required. For the development of notebooks, the
-*Jupyter* package and the installation of the Python Library *nbinteract*
-are expected.
+NOTE: Aktuelle Updates der Library sind länger als ein Jahr her und die
+aktuelle Version von Jupyter Notebook (JupyterLab) wird leider (noch)
+nicht unterstützt.
 
 
 === Module configuration
 
+Wie bein allen Modulen die mit J1 zur Verfügung stehen ist  *keine*
+Programmierung erforderlich. Ein Adapter für J1 übernimmt die Integration,
+dass mit Hilfe der Module Konfiguration ein einfaches Einbinden in Ihre
+Webseiten erlaubt.
+
+
+==== Default settings
+
+[cols="3a,4a,5a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Paramter |Value |Description
+
+|`spec`
+|`<user>/<repo>/<branch>`
+|Defines the *public* repo the configuration data is available to be read
+by the *Binder* service.
+
+|`baseUrl`
+|`https://mybinder.org`
+|Base URL of the *Binder* service.
+
+|`provider`
+|gh\|gist\|gl
+|Provider of the *public* repo. +
+`gh`, GitHub +
+`gist`, GitHub Gist +
+`gl`, GitLab
+
+|`button_styles`
+|CSS styles
+|For *Bootstrap*, styles like `btn btn-primary btn-raised ` can be used.
+
+|`show_nbi_messages`
+|`true`\|`false`
+|Show info\|progress\|error messages while nbinteract is being initialized.
+Messges are shown in (Bootstrap) modals. +
+Default: `false`
+
+|`indicate_nbi_activity`
+|`true`\|`false`
+|Show a spinner while nbinteract in being initialized.
+Default: `true`
+
+|`nbi_messages_auto_close`
+|`true`\|`false`
+|Close the nbi messages modals automatically. +
+Default: `true`
+
+|`nbi_init_timeout`
+|`integer`
+|Time (ms) notebooks on a page are to be finally initialized. If the
+init phase tooks longer, an error is issued. +
+Default: `180000` (3 min)
+
+|`nbi_messages_auto_close_delay`
+|`integer`
+|Delay (ms) to auto-close nbi messages modal. +
+Default: `3500` (3.5 sec)
+
+|`nbi_init_mathjax`
+|`true`\|`false`
+|Load and initialize the MathJax JS library. +
+Default: `false`
+
+|===
+
+WARNING: In the current implementation of NBI for J1, the JS library *MathJax*
+interferes with the formatting output of other pages of a J1 website. The
+formatting done by MatJax may result in strange outcomes for the other content.
+For that reason, the MathJax library is *disabled* for the time being.
+
+[source, yaml]
+----
+# ------------------------------------------------------------------------------
+# Default settings
+#
+defaults:
+
+  spec:                                 jekyll-one/nbinteract-notebooks/main
+  baseUrl:                              'https://mybinder.org'
+  provider:                             gh
+
+  button_styles:                        btn btn-primary btn-raised hidden
+
+  show_nbi_messages:                    false
+  indicate_nbi_activity:                true
+  nbi_messages_auto_close:              true
+
+  nbi_init_timeout:                     180000
+  nbi_messages_auto_close_delay:        3500
+
+  nbi_init_mathjax:                     false
+----
+
+==== Notebook settings
+
+[cols="3a,4a,5a", options="header", width="100%", role="rtable mt-3"]
+|===
+|Paramter |Value |Description
+
+|`enabled`
+|`true`\|`false`
+|Enables\|Disables the use of a notebook. If disabled, *no* J1 adapter
+setting are generated for this Jupyter Notebook. +
+Default: `true`
+
+|`id`
+|`string`
+|The id of a notebook that is used by the *Asciidoc Extension*
+`notebook::<id>[]` to place the HTML portion for the HTML code
+of an exported Jupyter Notebook. +
+Default: `no default`
+
+|`xhr_data`
+|`string`
+|The name of the exported HTML data file of a Jupyter Notebook. +
+Default: `no default`
+
+|`xhr_data_path`
+|`path`
+|The (data) path the Jupyter Notebook is exported. +
+Default: `no default`
+|===
+
+.Settings for the starter web
+[source, yaml]
+----
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+settings:
+
+  notebooks:
+
+    # --------------------------------------------------------------------------
+    # J1 Notebooks J1 NBI Docs
+    # --------------------------------------------------------------------------
+
+    # --------------------------------------------------------------------------
+    # Demo notebook 'selected ODEs'
+    #
+    - notebook:
+        enabled:                        true
+
+        id:                             j1_docs_example_dynamic
+        xhr_data:                       j1_docs_example_dynamic.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/html
+----
+
+=== Binder configuration
+
 lorem:sentences[5]
 
-=== Configuration of a Binder Repo
+=== Notebook configuration
 
 lorem:sentences[5]
 
-=== Configuration of notebooks
-
-lorem:sentences[5]
-
-=== Integrate notebooks
+=== Integrate notebooks with pages
 
 Das Modul zur J1 NBI Integration ...
 
