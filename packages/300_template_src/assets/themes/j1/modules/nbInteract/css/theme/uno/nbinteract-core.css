@@ -57,6 +57,24 @@ pre {
   overflow: hidden !important;
 }
 
+/* jadams, 2022-04-22: overload BS style for the p element */
+.widget-html-content > p {
+  margin-bottom: 0 !important;
+}
+
+/* jadams, 2022-04-22: overload FA style for size and placement */
+.widget-html-content > .fa.fa-check, .fa.fa-times {
+    font-size: 1.5rem !important;
+    margin-left: .5rem !important;
+}
+
+/* jadams, 2022-04-22: additinal space for NBI/Interactive Questions */
+/* NOTE: affects ALL widget-vbox elements e.g. sitting in a 'output_wrapper' */
+/*       but acceptable */
+.widget-vbox {
+  margin-bottom: 0.75rem !important;
+}
+
 /* jadams, 2022-04-22 */
 .widget-hslider {
   margin-top: 1rem !important;
