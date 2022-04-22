@@ -146,19 +146,20 @@ exclude_from_search:                    true
               {% for item in items[1] %}
                 {% assign key   = item[0] %}
                 {% assign value = item[1] %}
-                {% if key == 'enabled' %}                 {% assign card_enabled      = value %}                   {% endif %}
-                {% if key == 'width' %}                   {% assign card_width        = value %}                   {% endif %}
-                {% if key == 'type' %}                    {% assign card_type         = value %}                   {% endif %}
-                {% if key == 'icon' %}                    {% assign icon              = value %}                   {% endif %}
-                {% if key == 'icon_size' %}               {% assign icon_size         = value %}                   {% endif %}
-                {% if key == 'icon_color' %}              {% assign icon_color        = value %}                   {% endif %}
-                {% if key == 'image_path' %}              {% assign card_image_path   = value %}                   {% endif %}
-                {% if key == 'description_properties' %}  {% assign card_properties   = value %}                   {% endif %}
-                {% if key == 'title' %}                   {% assign card_title        = value | strip_newlines%}   {% endif %}
-                {% if key == 'description' %}             {% assign card_description  = value | strip_newlines%}   {% endif %}
-                {% if key == 'tagline' %}                 {% assign card_tagline      = value | strip_newlines%}   {% endif %}
-                {% if key == 'text' %}                    {% assign card_text         = value | strip_newlines %}  {% endif %}
-                {% if key == 'buttons' %}                 {% assign card_buttons      = value %}                   {% endif %}
+                {% if key == 'enabled' %}                 {% assign card_enabled            = value %}                 {% endif %}
+                {% if key == 'width' %}                   {% assign card_width              = value %}                 {% endif %}
+                {% if key == 'type' %}                    {% assign card_type               = value %}                 {% endif %}
+                {% if key == 'icon' %}                    {% assign icon                    = value %}                 {% endif %}
+                {% if key == 'icon_size' %}               {% assign icon_size               = value %}                 {% endif %}
+                {% if key == 'icon_color' %}              {% assign icon_color              = value %}                 {% endif %}
+                {% if key == 'image_path' %}              {% assign card_image_path         = value %}                 {% endif %}
+                {% if key == 'description_properties' %}  {% assign card_properties         = value %}                 {% endif %}
+                {% if key == 'title' %}                   {% assign card_title              = value | strip_newlines%} {% endif %}
+                {% if key == 'translate_title' %}         {% assign card_title_translation  = value %}                 {% endif %}
+                {% if key == 'description' %}             {% assign card_description        = value | strip_newlines%} {% endif %}
+                {% if key == 'tagline' %}                 {% assign card_tagline            = value | strip_newlines%} {% endif %}
+                {% if key == 'text' %}                    {% assign card_text               = value | strip_newlines%} {% endif %}
+                {% if key == 'buttons' %}                 {% assign card_buttons            = value %}                 {% endif %}
               {% endfor %}
               {% if card_enabled == false %} {% assign card_items = card_items | minus:1 %} {% endif %}
             {% endfor %}
@@ -196,7 +197,7 @@ exclude_from_search:                    true
             <!-- Heading -->
             <div class="noclass">
               <div>
-                <h2 class="g-font-weight-500 mb-0 notranslate">{{card_title}}</h2>
+                <h2 class="g-font-weight-500 mb-0 {{card_title_translation}}">{{card_title}}</h2>
                 <p class="tagline mb-0">{{card_tagline}}</p>
                 <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-2"></div>
               </div>

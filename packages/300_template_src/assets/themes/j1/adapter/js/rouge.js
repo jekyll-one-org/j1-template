@@ -14,7 +14,7 @@ regenerate:                             false
  # Copyright (C) 2022 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see https://jekyll.one
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
@@ -48,7 +48,7 @@ regenerate:                             false
  # Copyright (C) 2022 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see https://jekyll.one
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  # Note:
  #  https://github.com/jirutka/asciidoctor-rouge/issues/9
@@ -143,9 +143,20 @@ j1.adapter.rouge = (function (j1, window) {
             logger.warn(log_text);
           }
 
-         $('.dropdown-menu a').click(function(){
+          $('.dropdown-menu a').click(function(){
             $('#selected-theme').html('Current selection: <div class="md-gray-900 mt-1 p-2" style="background-color: #BDBDBD; font-weight: 700;">' +$(this).text() + '</div>');
-         });
+          });
+
+          // disable (Google) translation for all highlight HTML elements
+          // used for rouge
+          // see: https://www.codingexercises.com/replace-all-instances-of-css-class-in-vanilla-js
+          //
+          var highlight = document.getElementsByClassName('highlight');
+          [...highlight].forEach(function(x) {
+           if (!x.className.includes('notranslate')) {
+             x.className += " notranslate"
+           }
+          });
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());

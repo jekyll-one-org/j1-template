@@ -1,16 +1,15 @@
 {% comment %}
  # -----------------------------------------------------------------------------
- #  ~/_includes/templates/j1/blocks/footer/boxes/legal_statements.proc
- #  Liquid PROCEDURE to create a legal statements line for the footer
+ # ~/_includes/templates/j1/blocks/footer/boxes/legal_statements.proc
+ # Liquid PROCEDURE to create a LEGAL STATEMENTS line for the footer
  #
- #  Product/Info:
- #  http://jekyll.one
+ # Product/Info:
+ # http://jekyll.one
  #
- #  Copyright (C) 2022 Juergen Adams
+ # Copyright (C) 2022 Juergen Adams
  #
- #  Licensed under the Creative Commons Attribution 3.0 Unported License.
- #  See: http://creativecommons.org/licenses/by/3.0/.
- #
+ # J1 Template is licensed under the MIT License.
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  # Test data:
  #  liquid_var:  {{ liquid_var | debug }}
@@ -24,19 +23,10 @@
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign legals = include.legals %}
 
-{% comment %} language detection
--------------------------------------------------------------------------------- {% endcomment %}
-{% if site.language == "en" %}
-  {% assign language = "en" %}
-{% elsif site.language == "de"%}
-  {% assign language = "de" %}
-{% else %}
-  {% assign language = "en" %}
-{% endif %}
-
 {% comment %} Debugging
 --------------------------------------------------------------------------------
-legal_item: {{legal_item.legal | debug}}
+item:   {{item.legal | debug}}
+legals: {{legals | debug}}
 --------------------------------------------------------------------------------
 {% endcomment %}
 
@@ -44,67 +34,37 @@ legal_item: {{legal_item.legal | debug}}
 -------------------------------------------------------------------------------- {% endcomment %}
 <!-- [INFO   ] [legal_statements.proc              ] [ process legal statements configured ] -->
 <ul class="list-inline terms-menu">
-{% for legal_item in legals %}
 
-  {% if language == "en" %}
-    {% if legal_item.legal.enabled and legal_item.legal.type == 'copyright' %}
-      <li class="notranslate"><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
-    {% endif %}
+{% for item in legals %}
 
-    {% if legal_item.legal.enabled and legal_item.legal.type == 'impress' %}
-      <li class="notranslate"><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
-    {% endif %}
-
-    {% if legal_item.legal.enabled and legal_item.legal.type == 'terms' %}
-      <li class="notranslate"><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
-    {% endif %}
-
-    {% if legal_item.legal.enabled and legal_item.legal.type == 'privacy' %}
-      <li class="notranslate"><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
-    {% endif %}
-
-    {% if legal_item.legal.enabled and legal_item.legal.type == 'licence' %}
-      <li class="notranslate"><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
-    {% endif %}
-
-    {% if legal_item.legal.enabled and legal_item.legal.type == 'support' %}
-      <li class="notranslate"><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
-    {% endif %}
-
-    {% if legal_item.legal.enabled and legal_item.legal.type == 'comments' %}
-      <li class="notranslate"><a href="{{legal_item.legal.en.href}}">{{legal_item.legal.en.statement}}</a></li>
-    {% endif %}
+  {% if item.legal.enabled and item.legal.type == 'copyright' %}
+    <li class="{{item.legal.translate_statement}}"><a href="{{item.legal.href}}">{{item.legal.statement}}</a></li>
   {% endif %}
 
-  {% if language == "de" %}
-    {% if legal_item.legal.enabled and legal_item.legal.type == 'copyright' %}
-      <li><a href="{{legal_item.legal.de.href}}">{{legal_item.legal.de.statement}}</a></li>
-    {% endif %}
+  {% if item.legal.enabled and item.legal.type == 'impress' %}
+    <li class="{{item.legal.translate_statement}}"><a href="{{item.legal.href}}">{{item.legal.statement}}</a></li>
+  {% endif %}
 
-    {% if legal_item.legal.enabled and legal_item.legal.type == 'impress' %}
-      <li><a href="{{legal_item.legal.de.href}}">{{legal_item.legal.de.statement}}</a></li>
-    {% endif %}
+  {% if item.legal.enabled and item.legal.type == 'terms' %}
+    <li class="{{item.legal.translate_statement}}"><a href="{{item.legal.href}}">{{item.legal.statement}}</a></li>
+  {% endif %}
 
-    {% if legal_item.legal.enabled and legal_item.legal.type == 'terms' %}
-      <li><a href="{{legal_item.legal.de.href}}">{{legal_item.legal.de.statement}}</a></li>
-    {% endif %}
+  {% if item.legal.enabled and item.legal.type == 'privacy' %}
+    <li class="{{item.legal.translate_statement}}"><a href="{{item.legal.href}}">{{item.legal.statement}}</a></li>
+  {% endif %}
 
-    {% if legal_item.legal.enabled and legal_item.legal.type == 'privacy' %}
-      <li><a href="{{legal_item.legal.de.href}}">{{legal_item.legal.de.statement}}</a></li>
-    {% endif %}
+  {% if item.legal.enabled and item.legal.type == 'licence' %}
+    <li class="{{item.legal.translate_statement}}"><a href="{{item.legal.href}}">{{item.legal.statement}}</a></li>
+  {% endif %}
 
-    {% if legal_item.legal.enabled and legal_item.legal.type == 'licence' %}
-      <li><a href="{{legal_item.legal.de.href}}">{{legal_item.legal.de.statement}}</a></li>
-    {% endif %}
+  {% if item.legal.enabled and item.legal.type == 'support' %}
+    <li class="{{item.legal.translate_statement}}"><a href="{{item.legal.href}}">{{item.legal.statement}}</a></li>
+  {% endif %}
 
-    {% if legal_item.legal.enabled and legal_item.legal.type == 'support' %}
-      <li><a href="{{legal_item.legal.de.href}}">{{legal_item.legal.de.statement}}</a></li>
-    {% endif %}
-
-    {% if legal_item.legal.enabled and legal_item.legal.type == 'comments' %}
-      <li><a href="{{legal_item.legal.de.href}}">{{legal_item.legal.de.statement}}</a></li>
-    {% endif %}
+  {% if item.legal.enabled and item.legal.type == 'comments' %}
+    <li class="{{item.legal.translate_statement}}"><a href="{{item.legal.href}}">{{item.legal.statement}}</a></li>
   {% endif %}
 
 {% endfor %}
+
 </ul>

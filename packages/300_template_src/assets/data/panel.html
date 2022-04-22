@@ -200,17 +200,18 @@ exclude_from_search:                    true
                 {% for item in items[1] %}
                   {% assign key   = item[0] %}
                   {% assign value = item[1] %}
-                  {% if key == 'enabled' %}     {% assign card_enabled      = value %}                   {% endif %}
-                  {% if key == 'type' %}        {% assign card_type         = value %}                   {% endif %}
-                  {% if key == 'properties' %}  {% assign card_properties   = value %}                   {% endif %}
-                  {% if key == 'icon' %}        {% assign card_icon         = value %}                   {% endif %}
-                  {% if key == 'icon_size' %}   {% assign card_icon_size    = value %}                   {% endif %}
-                  {% if key == 'icon_family' %} {% assign card_icon_family  = value | downcase %}        {% endif %}
-                  {% if key == 'icon_color' %}  {% assign card_icon_color   = value %}                   {% endif %}
-                  {% if key == 'title' %}       {% assign card_title        = value | strip_newlines%}   {% endif %}
-                  {% if key == 'tagline' %}     {% assign card_tagline      = value | strip_newlines%}   {% endif %}
-                  {% if key == 'text' %}        {% assign card_text         = value | strip_newlines %}  {% endif %}
-                  {% if key == 'buttons' %}     {% assign card_buttons      = value %}                   {% endif %}
+                  {% if key == 'enabled' %}         {% assign card_enabled          = value %}                   {% endif %}
+                  {% if key == 'type' %}            {% assign card_type             = value %}                   {% endif %}
+                  {% if key == 'properties' %}      {% assign card_properties       = value %}                   {% endif %}
+                  {% if key == 'icon' %}            {% assign card_icon             = value %}                   {% endif %}
+                  {% if key == 'icon_size' %}       {% assign card_icon_size        = value %}                   {% endif %}
+                  {% if key == 'icon_family' %}     {% assign card_icon_family      = value | downcase %}        {% endif %}
+                  {% if key == 'icon_color' %}      {% assign card_icon_color       = value %}                   {% endif %}
+                  {% if key == 'title' %}           {% assign card_title            = value | strip_newlines%}   {% endif %}
+                  {% if key == 'title_translate' %} {% assign card_title_translate  = value %}                   {% endif %}
+                  {% if key == 'tagline' %}         {% assign card_tagline          = value | strip_newlines%}   {% endif %}
+                  {% if key == 'text' %}            {% assign card_text             = value | strip_newlines %}  {% endif %}
+                  {% if key == 'buttons' %}         {% assign card_buttons          = value %}                   {% endif %}
                 {% endfor %}
                 {% if card_enabled == false %} {% assign card_items = card_items|minus:1 %} {% endif %}
               {% endfor %}
@@ -252,7 +253,7 @@ exclude_from_search:                    true
                           </span>
                         {% endif %}
                       </div>
-                      <h3 class="m-0 notranslate">{{card_title}}</h3>
+                      <h3 class="m-0 {{card_title_translate}}">{{card_title}}</h3>
                     </div>
                   </div>
 
@@ -357,19 +358,20 @@ exclude_from_search:                    true
                 {% for item in items[1] %}
                   {% assign key   = item[0] %}
                   {% assign value = item[1] %}
-                  {% if key == 'enabled' %}     {% assign card_enabled    = value %}                  {% endif %}
-                  {% if key == 'id' %}          {% assign card_id         = value %}                  {% endif %}
-                  {% if key == 'width' %}       {% assign card_width      = value %}                  {% endif %}
-                  {% if key == 'type' %}        {% assign card_type       = value %}                  {% endif %}
-                  {% if key == 'href' %}        {% assign card_href       = value %}                  {% endif %}
-                  {% if key == 'icon' %}        {% assign card_icon       = value %}                  {% endif %}
-                  {% if key == 'icon_family' %} {% assign icon_family     = value %}                  {% endif %}
-                  {% if key == 'icon_size' %}   {% assign icon_size       = value %}                  {% endif %}
-                  {% if key == 'icon_color' %}  {% assign icon_color      = value %}                  {% endif %}
-                  {% if key == 'title' %}       {% assign card_title      = value | strip_newlines %} {% endif %}
-                  {% if key == 'tagline' %}     {% assign card_tagline    = value | strip_newlines %} {% endif %}
-                  {% if key == 'text' %}        {% assign card_text       = value | strip_newlines %} {% endif %}
-                  {% if key == 'services' %}    {% assign services        = value %}                  {% endif %}
+                  {% if key == 'enabled' %}         {% assign card_enabled          = value %}                  {% endif %}
+                  {% if key == 'id' %}              {% assign card_id               = value %}                  {% endif %}
+                  {% if key == 'width' %}           {% assign card_width            = value %}                  {% endif %}
+                  {% if key == 'type' %}            {% assign card_type             = value %}                  {% endif %}
+                  {% if key == 'href' %}            {% assign card_href             = value %}                  {% endif %}
+                  {% if key == 'icon' %}            {% assign card_icon             = value %}                  {% endif %}
+                  {% if key == 'icon_family' %}     {% assign icon_family           = value %}                  {% endif %}
+                  {% if key == 'icon_size' %}       {% assign icon_size             = value %}                  {% endif %}
+                  {% if key == 'icon_color' %}      {% assign icon_color            = value %}                  {% endif %}
+                  {% if key == 'title' %}           {% assign card_title            = value | strip_newlines %} {% endif %}
+                  {% if key == 'title_translate' %} {% assign card_title_translate  = value %}                  {% endif %}
+                  {% if key == 'tagline' %}         {% assign card_tagline          = value | strip_newlines %} {% endif %}
+                  {% if key == 'text' %}            {% assign card_text             = value | strip_newlines %} {% endif %}
+                  {% if key == 'services' %}        {% assign services              = value %}                  {% endif %}
                 {% endfor %}
               {% endfor %}
 
@@ -388,7 +390,7 @@ exclude_from_search:                    true
                     <div class="content mt-4">
 
                       <div class="card-header">
-                        <h6 class="notoc category text-gray">{{card_title}}</h6>
+                        <h6 class="notoc category text-gray {{card_title_translate}}">{{card_title}}</h6>
                         <h4 class="notoc card-title">{{card_tagline}}</h4>
                       </div>
                       <div class="card-body g-min-height-300 r-text-300">{{card_text}}</div>

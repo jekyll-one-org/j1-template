@@ -1,16 +1,15 @@
 {% comment %}
  # -----------------------------------------------------------------------------
- #  ~/_includes/themes/j1/blocks/footer/boxes/about_box.proc
- #  Liquid PROCEDURE to create a news box for the footer
+ # ~/_includes/themes/j1/blocks/footer/boxes/about_box.proc
+ # Liquid PROCEDURE to create a ABOUT box for the footer
  #
- #  Product/Info:
- #  http://jekyll.one
+ # Product/Info:
+ # http://jekyll.one
  #
- #  Copyright (C) 2022 Juergen Adams
+ # Copyright (C) 2022 Juergen Adams
  #
- #  Licensed under the Creative Commons Attribution 3.0 Unported License.
- #  See: http://creativecommons.org/licenses/by/3.0/.
- #
+ # J1 Template is licensed under the MIT License.
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  # Test data:
  #  liquid_var:  {{ liquid_var | debug }}
@@ -21,19 +20,21 @@
 -------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Variables
+include_hash: {{include | debug}}
+box_hash:     {{box | debug}}
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign title   = include.title %}
-{% assign tagline = include.tagline %}
-{% assign text    = include.text %}
-{% assign justify = include.justify %}
-
+{% assign title               = box.title %}
+{% assign title_translation   = box.title_translation %}
+{% assign tagline             = box.tagline %}
+{% assign text                = box.text %}
+{% assign justify             = box.justify %}
 
 {% comment %} Main
 ================================================================================ {% endcomment %}
 <!-- [INFO   ] [about_box.proc                     ] [ place about box ] -->
 <div class="col-md-{{footer_box_width_md}}">
   <!-- div class="heading-footer"><h2 class="notoc">{{title}}</h2></div -->
-  <h2 class="text-uppercase g-color-white-opacity-0_6 g-font-size-18 mb-0 notranslate">{{title}}</h2>
+  <h2 class="text-uppercase g-color-white-opacity-0_6 g-font-size-18 mb-0 {{title_translation}}">{{title}}</h2>
   <p class="tagline mb-0">
     <large>{{tagline}}</large>
   </p>

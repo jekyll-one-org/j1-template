@@ -1,16 +1,15 @@
 {% comment %}
  # -----------------------------------------------------------------------------
- #  ~/_includes/templates/j1/blocks/footer/boxes/news_box.proc
- #  Liquid PROCEDURE to create a news box for the footer
+ # ~/_includes/templates/j1/blocks/footer/boxes/news_box.proc
+ # Liquid PROCEDURE to create a NEWS box for the footer
  #
- #  Product/Info:
- #  http://jekyll.one
+ # Product/Info:
+ # http://jekyll.one
  #
- #  Copyright (C) 2022 Juergen Adams
+ # Copyright (C) 2022 Juergen Adams
  #
- #  Licensed under the Creative Commons Attribution 3.0 Unported License.
- #  See: http://creativecommons.org/licenses/by/3.0/.
- #
+ # J1 Template is licensed under the MIT License.
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  # Test data:
  #  liquid_var:  {{liquid_var | debug}}
@@ -22,11 +21,12 @@
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign title           = include.title %}
-{% assign tagline         = include.tagline %}
-{% assign posts_category  = include.category %}
-{% assign posts_max       = include.max_posts %}
-{% assign posts           = include.posts %}
+{% assign title               = box.title %}
+{% assign title_translation   = box.title_translation %}
+{% assign tagline             = box.tagline %}
+{% assign posts_category      = include.category %}
+{% assign posts_max           = include.max_posts %}
+{% assign posts               = include.posts %}
 
 {% comment %} language detection
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -43,16 +43,13 @@
 {% assign max_posts       = posts_max | minus:'1' %}
 {% assign posts_written   = 0 %}
 
-
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
 <!-- [INFO   ] [news_box.proc                      ] [ place news box ] -->
 <div class="col-md-{{footer_box_width_md}}">
-  <!-- div class="heading-footer"><h2 class="notoc">{{title}}</h2></div -->
-  <h2 class="text-uppercase g-color-white-opacity-0_6 g-font-size-18 mb-0" notranslate>{{title}}</h2>
-  <p class="tagline mb-0">
-    <large>{{tagline}}</large>
-  </p>
+
+  <h2 class="text-uppercase g-color-white-opacity-0_6 g-font-size-18 mb-0 {{title_translation}}">{{title}}</h2>
+  <p class="tagline mb-0"> <large>{{tagline}}</large> </p>
   <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-1"></div>
 
     <ul class="list-unstyled link-news">
@@ -61,7 +58,7 @@
         {% if category == posts_category and posts_written <= max_posts %}
         {% assign posts_written = posts_written | plus:'1' %}
         <li>
-          <a href="{{post.url}}" class="notranslate">{{post.title}}</a>
+          <a href="{{post.url}}" class="{{title_translation}}">{{post.title}}</a>
           {% if language == "en" %}
             <small class="text-uppercase">{{post.date | localize: "%Y %B, %-d"}}</small>
           {% endif %}
@@ -73,4 +70,5 @@
       {% endfor %}
     {% endfor %}
     </ul>
+
 </div>

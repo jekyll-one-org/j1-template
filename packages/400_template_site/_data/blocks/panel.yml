@@ -43,6 +43,7 @@ settings:
         properties:                     mt-5 mb-5
 
         title:                          All in One
+        title_translate:                notranslate                             # translate|notranslate
         tagline:                        top features
         description_properties:         mt-3 mr-3 mb-3
         description: >
@@ -69,6 +70,7 @@ settings:
               enabled:                  true
               type:                     text
               title:                    Technology
+              title_translate:          notranslate                             # translate|notranslate
               tagline:                  J1 Template
               icon:                     tools
               icon_family:              MDI
@@ -96,6 +98,7 @@ settings:
               enabled:                  true
               type:                     text
               title:                    Design
+              title_translate:          notranslate                             # translate|notranslate
               tagline:                  J1 Template
               icon:                     responsive
               icon_family:              MDI
@@ -124,6 +127,7 @@ settings:
               enabled:                  true
               type:                     text
               title:                    Create
+              title_translate:          notranslate                             # translate|notranslate
               tagline:                  J1 Template
               icon:                     clock
               icon_family:              MDI

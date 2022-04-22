@@ -17,7 +17,7 @@
  # -----------------------------------------------------------------------------
 */
 
-$(document).ready(function(){
+$(document).ready(function() {
 
  $('.dropdown-menu a').click(function(){
     $('#selected').html("Current Selection: <span class='bg-info text-white p-3 mb-2'>"+$(this).text()+"</span>");

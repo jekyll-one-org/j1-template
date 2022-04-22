@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/defaults/notebooks.yml
-# Default configuration for J1 Jupyter Notebooks
+# ~/_data/modules/defaults/nbinteract.yml
+# Default configuration for J1 NBI
 #
 # Product/Info:
 # https://jekyll.one
@@ -9,7 +9,6 @@
 #
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
-#
 # ------------------------------------------------------------------------------
 # NOTE:
 #
@@ -20,9 +19,9 @@
 #
 description:
 
-  title:                                Jupyter Notebooks
+  title:                                J1 NBI
   scope:                                Default settings
-  location:                             _data/modules/defaults/notebooks.yml
+  location:                             _data/modules/defaults/nbinteract.yml
 
 # ------------------------------------------------------------------------------
 # Default settings
@@ -144,7 +143,7 @@ defaults:
   nbi_init_timeout:                     180000
   nbi_messages_auto_close_delay:        3500
 
-  nbi_init_mathjax:                     false
+  nbi_init_mathjax:                     true
 
 # ------------------------------------------------------------------------------
 # END config

@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/notebooks.yml
-# User configuration for J1 Jupyter Notebooks
+# ~/_data/modules/nbinteract.yml
+# User configuration for J1 NBI
 #
 # Product/Info:
 # https://jekyll.one
@@ -16,9 +16,9 @@
 #
 description:
 
-  title:                                Jupyter Notebooks
+  title:                                J1 NBI
   scope:                                User settings
-  location:                             _data/modules/notebooks.yml
+  location:                             _data/modules/nbinteract.yml
 
 # ------------------------------------------------------------------------------
 # User configuration settings
@@ -68,7 +68,7 @@ settings:
   # ----------------------------------------------------------------------------
   #
   notebooks:
-    
+
     # --------------------------------------------------------------------------
     # J1 Notebooks J1 NBI Docs
     # --------------------------------------------------------------------------
@@ -100,6 +100,7 @@ settings:
         id:                             j1_recipes_layout
         xhr_data:                       j1_recipes_layout.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
+        use_mathjax:                    false
 
     # --------------------------------------------------------------------------
     # odes_in_python
@@ -110,6 +111,7 @@ settings:
         id:                             j1_odes_in_python
         xhr_data:                       j1_odes-in-python.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
+        use_mathjax:                    false
 
     # --------------------------------------------------------------------------
     # ode_selected
@@ -120,6 +122,7 @@ settings:
         id:                             j1_ode_selected
         xhr_data:                       j1_ode_selected.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
+        use_mathjax:                    false
 
     # --------------------------------------------------------------------------
     # climate-change-forecast
@@ -130,6 +133,7 @@ settings:
         id:                             j1_climate_change_forecast
         xhr_data:                       j1_climate_change_forecast.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
+        use_mathjax:                    false
 
     # --------------------------------------------------------------------------
     # climate-test
@@ -140,6 +144,7 @@ settings:
         id:                             climate_test
         xhr_data:                       climate-test.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
+        use_mathjax:                    false
 
     # --------------------------------------------------------------------------
     # creating-reading-and-writing
@@ -150,6 +155,7 @@ settings:
         id:                             j1_pandas_intro
         xhr_data:                       j1_pandas_creating_reading_and_writing.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
+        use_mathjax:                    false
 
     # --------------------------------------------------------------------------
     # interactive
@@ -160,6 +166,7 @@ settings:
         id:                             j1_interactive
         xhr_data:                       j1_interactive.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
+        use_mathjax:                    false
 
 
     # --------------------------------------------------------------------------
@@ -175,6 +182,7 @@ settings:
         id:                             nbi_docs_tutorial_interact
         xhr_data:                       nbi_docs_tutorial_interact.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
+        use_mathjax:                    false
 
     # --------------------------------------------------------------------------
     # tutorial_monty_hall
@@ -185,6 +193,7 @@ settings:
         id:                             nbi_docs_tutorial_monty_hall
         xhr_data:                       nbi_docs_tutorial_monty_hall.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
+        use_mathjax:                    false
 
     # --------------------------------------------------------------------------
     # recipes_graphing
@@ -195,6 +204,7 @@ settings:
         id:                             nbi_docs_recipes_graphing
         xhr_data:                       nbi_docs_recipes_graphing.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
+        use_mathjax:                    false
 
 
     # --------------------------------------------------------------------------
@@ -206,6 +216,7 @@ settings:
         id:                             nbi_docs_recipes_layout
         xhr_data:                       nbi_docs_recipes_layout.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
+        use_mathjax:                    false
 
     # --------------------------------------------------------------------------
     # recipes_interactive_questions
@@ -216,6 +227,7 @@ settings:
         id:                             nbi_docs_recipes_interactive_questions
         xhr_data:                       nbi_docs_recipes_interactive_questions.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
+        use_mathjax:                    false
 
     # --------------------------------------------------------------------------
     # empirical_distributions
@@ -226,7 +238,7 @@ settings:
         id:                             nbi_docs_empirical_distributions
         xhr_data:                       nbi_docs_examples_empirical_distributions.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
-
+        use_mathjax:                    false
 
     # --------------------------------------------------------------------------
     # examples_sampling_from_a_population
@@ -237,6 +249,7 @@ settings:
         id:                             nbi_docs_examples_sampling_from_a_population
         xhr_data:                       nbi_docs_examples_sampling_from_a_population.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
+        use_mathjax:                    false
 
     # --------------------------------------------------------------------------
     # examples_variability_of_the_sample_mean
@@ -247,6 +260,7 @@ settings:
         id:                             nbi_docs_examples_variability_of_the_sample_mean
         xhr_data:                       nbi_docs_examples_variability_of_the_sample_mean.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
+        use_mathjax:                    true
 
     # --------------------------------------------------------------------------
     # examples_correlation
@@ -257,6 +271,7 @@ settings:
         id:                             nbi_docs_examples_correlation
         xhr_data:                       nbi_docs_examples_correlation.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
+        use_mathjax:                    true
 
     # --------------------------------------------------------------------------
     # examples_linear_regression
@@ -267,6 +282,7 @@ settings:
         id:                             nbi_docs_examples_linear_regression
         xhr_data:                       nbi_docs_examples_linear_regression.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
+        use_mathjax:                    false
 
     # --------------------------------------------------------------------------
     # examples_probability_distribution_plots
@@ -277,6 +293,7 @@ settings:
         id:                             nbi_docs_examples_probability_distribution_plots
         xhr_data:                       nbi_docs_examples_probability_distribution_plots.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
+        use_mathjax:                    false
 
     # --------------------------------------------------------------------------
     # central_limit_theorem
@@ -287,6 +304,7 @@ settings:
         id:                             nbi_docs_central_limit_theorem
         xhr_data:                       nbi_docs_examples_central_limit_theorem.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
+        use_mathjax:                    false
 
 # ------------------------------------------------------------------------------
 # END config

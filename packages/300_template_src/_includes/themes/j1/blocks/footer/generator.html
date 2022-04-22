@@ -69,6 +69,8 @@
   {% endif %}
 {% endfor %}
 
+{% assign item = nil %}
+
 <!-- Set footer column width to: {{footer_box_width_md}} -->
 {% assign footer_box_width_md = 12 | divided_by:enabled_boxes %}
 
@@ -84,6 +86,9 @@
             <!-- Extract box elements from hash (of boxes) -->
             {% assign box_type            = item[1].type %}
             {% assign box_enabled         = item[1].enabled %}
+
+            {% comment %} Unused
+            --------------------------------------------------------------------
             {% assign title               = item[1].title %}
             {% assign address             = item[1].address.enabled %}
             {% assign address_1           = item[1].address.address_1 %}
@@ -98,34 +103,35 @@
             {% assign align               = item[1].align %}
             {% assign posts_category      = item[1].selected_category %}
             {% assign max_posts           = item[1].max_posts %}
-            {% assign links               = item[1].links %}
+            {% assign links               = item[1].links %} 
+            -------------------------------------------------------------------- {% endcomment %}
 
             {% if box_type == 'AboutBox' and box_enabled %}
-              <!-- Found AboutBox -->
+              <!-- Process AboutBox -->
               {% include {{about_box}} %}
             {% endif %}
 
             {% if box_type == 'NewsBox' and box_enabled %}
-             <!-- Found NewsBox -->
+             <!-- Process NewsBox -->
              {% assign posts_collate = site.posts %}
-             {% include {{news_box}} category=posts_category max_posts=max_posts items=posts_collate %}
+             {% include {{news_box}} category=posts_category max_posts=max_posts posts=posts_collate %}
             {% endif %}
 
             {% if box_type == 'LinksBox' and box_enabled %}
-              <!-- Found LinksBox -->
+              <!-- Process LinksBox -->
               {% include {{links_box}} links=links %}
             {% endif %}
 
             {% if box_type == 'ContactsBox' and box_enabled %}
-              <!-- Found ContactsBox -->
+              <!-- Process ContactsBox -->
               {% include {{contacts_box}} %}
             {% endif %}
 
           {% endfor %}
         {% endfor %}
       {% endfor %}
-      </div> <!-- /row -->
-    </div><!-- /container -->
+      </div> <!-- END row -->
+    </div><!-- END container -->
   </div>
 
   <div class="copyright">

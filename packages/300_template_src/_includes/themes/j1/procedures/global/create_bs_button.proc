@@ -62,6 +62,7 @@
       {% assign value = button[1] %}
       {% if key == 'id' %}         {% assign button_id         = value %} {% endif %}
       {% if key == 'title' %}      {% assign button_title      = value %} {% endif %}
+      {% if key == 'translate' %}  {% assign button_translate  = value %} {% endif %}
       {% if key == 'tagline' %}    {% assign button_tagline    = value %} {% endif %}
       {% if key == 'class' %}      {% assign button_class      = value %} {% endif %}
       {% if key == 'style' %}      {% assign button_style      = value %} {% endif %}
@@ -81,7 +82,7 @@
         {% capture bs_button_html %}
           <a id="{{button_id}}" href="{{button_href}}" target="{{button_target}}" rel="noopener" class="{{button_class}}" style="{{button_style}}">
             <i class="{{icon_family}} {{icon_family}}-{{button_icon}} {{icon_family}}-{{button_icon_size}} {{icon_family}}-{{button_icon_color}} mr-3"></i>
-            <span class="float-right text-left mt-2 notranslate">
+            <span class="float-right text-left mt-2 {{button_translate}}">
               {{button_title}}
               <span class="d-block r-text-200 text-lowercase">{{button_tagline}}</span>
             </span>
@@ -91,7 +92,7 @@
         {% capture bs_button_html %}
           <a id="{{button_id}}" href="{{button_href}}" class="{{button_class}}" style="{{button_style}}">
             <i class="{{icon_family}} {{icon_family}}-{{button_icon}} {{icon_family}}-{{button_icon_size}} {{icon_family}}-{{button_icon_color}} mr-3"></i>
-            <span class="float-right text-left mt-2 notranslate">
+            <span class="float-right text-left mt-2 {{button_translate}}">
               {{button_title}}
               <span class="d-block r-text-200 text-lowercase">{{button_tagline}}</span>
             </span>
@@ -105,7 +106,7 @@
         {% capture bs_button_html %}
           <a id="{{button_id}}" href="{{button_href}}" target="{{button_target}}" rel="noopener" class="{{button_class}}" style="{{button_style}}">
             <i class="{{icon_family}} {{icon_family}}-{{button_icon}} {{icon_family}}-{{button_icon_size}} {{icon_family}}-{{button_icon_color}} mr-1"></i>
-            <span class="float-right text-left notranslate">
+            <span class="float-right text-left {{button_translate}}">
               {{button_title}}
             </span>
           </a>
@@ -114,7 +115,7 @@
         {% capture bs_button_html %}
           <a id="{{button_id}}" href="{{button_href}}" class="{{button_class}}" style="{{button_style}}">
             <i class="{{icon_family}} {{icon_family}}-{{button_icon}} {{icon_family}}-{{button_icon_size}} {{icon_family}}-{{button_icon_color}} mr-1"></i>
-            <span class="float-right text-left">
+            <span class="float-right text-left {{button_translate}}">
               {{button_title}}
             </span>
           </a>

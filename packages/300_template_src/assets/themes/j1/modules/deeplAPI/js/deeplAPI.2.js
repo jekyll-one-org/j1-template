@@ -9,7 +9,7 @@
  # Copyright (C) 2022 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see https://jekyll.one
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  # NOTE: Based on https://github.com/jquery-boilerplate/jquery-boilerplate
  # See:  https://www.dotnetcurry.com/jquery/1069/authoring-jquery-plugins

@@ -14,7 +14,7 @@ regenerate:                             true
  # Copyright (C) 2022 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see https://jekyll.one
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
@@ -40,12 +40,12 @@ regenerate:                             true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign notebook_defaults = modules.defaults.notebooks.defaults %}
-{% assign notebook_settings = modules.notebooks.settings %}
+{% assign nbinteract_defaults = modules.defaults.nbinteract.defaults %}
+{% assign nbinteract_settings = modules.nbinteract.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign notebook_options  = notebook_defaults | merge: notebook_settings %}
+{% assign nbinteract_options  = nbinteract_defaults | merge: nbinteract_settings %}
 
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
@@ -63,7 +63,7 @@ regenerate:                             true
  # Copyright (C) 2022 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see https://jekyll.one
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  #  Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
@@ -117,8 +117,8 @@ j1.adapter.nbinteract = (function (j1, window) {
   var nbiIndicateNbiActivity;                                                   // switch to show a spinner while NBI is being initialized
   var nbiModalAutoClose;                                                        // switch to auto-close nbi message modals
   var nbiModalAutoCloseDelay;                                                   // delay auto-close nbi message modals
-  var nbiInitTimeout;
-  var nbiInitMathJax;                                                        //
+  var nbiInitTimeout;                                                           // delay indicate NBI failed
+  var nbiinitMathJax;                                                           // Load and run MathJax at runtime
   var notebooks;                                                                // ALL notebokks enabled
   var notebook;                                                                 // current notebook (processed)
   var target;                                                                   // target container for the (activity) spinner
@@ -152,7 +152,7 @@ j1.adapter.nbinteract = (function (j1, window) {
         generated:   '{{site.time}}'
       }, options);
 
-      moduleOptions = $.extend({}, {{notebook_options | replace: 'nil', 'null' | replace: '=>', ':' }});
+      moduleOptions = $.extend({}, {{nbinteract_options | replace: 'nil', 'null' | replace: '=>', ':' }});
 
       // -----------------------------------------------------------------------
       // Global variable settings
@@ -164,13 +164,13 @@ j1.adapter.nbinteract = (function (j1, window) {
       nbiInitTimeout          = moduleOptions.nbi_init_timeout;
       nbiShowMessages         = moduleOptions.show_nbi_messages;
       nbiIndicateNbiActivity  = moduleOptions.indicate_nbi_activity;
-      nbiInitMathJax          = moduleOptions.nbi_init_mathjax;
+      nbiinitMathJax          = moduleOptions.nbi_init_mathjax;
 
       // -----------------------------------------------------------------------
       // load|configure Mathjax for Jupyter Notebooks
       // -----------------------------------------------------------------------
-      if (nbiInitMathJax) {
-        _this.initMathjax();
+      if (nbiinitMathJax) {
+        _this.initMathJax();
       }
 
       // -----------------------------------------------------------------------
@@ -211,17 +211,16 @@ j1.adapter.nbinteract = (function (j1, window) {
     }, // END init
 
     // -------------------------------------------------------------------------
-    // initMathjax()
-    // load|configure Mathjax for Jupyter Notebooks
+    // initMathJax()
+    // load|configure MathJax at runtime
+    // See: https://docs.mathjax.org/en/v2.7-latest/options/preprocessors/tex2jax.html
     // -------------------------------------------------------------------------
-    initMathjax: function () {
-      var scriptMathjax;
-      var scriptMathjaxConfig
+    initMathJax: function () {
+      var scriptMathjax       = document.createElement('script');
+      var scriptMathjaxConfig = document.createElement('script');
 
-      scriptMathjax = document.createElement('script');
       scriptMathjax.setAttribute('src','//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML');
 
-      scriptMathjaxConfig = document.createElement('script');
       scriptMathjaxConfig.setAttribute('type','text/x-mathjax-config');
       scriptMathjaxConfig.innerHTML = `
         MathJax.Hub.Config({
@@ -229,18 +228,27 @@ j1.adapter.nbinteract = (function (j1, window) {
                 inlineMath: [ ['$','$'], ["\\(","\\)"] ],
                 displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
                 processEscapes: true,
-                processEnvironments: true
+                processEnvironments: true,
+                processClass: "mathjax",
+                ignoreClass: "nomathjax"
             },
+            // jadams, 2022-04-22, NOTE: 'MathJax_Display' overloaded by
+            // THEME CSS. Unclear how to configure 'HTML-CSS' correctly.
+            //
             // Center justify equations in code and markdown cells. Elsewhere
             // we use CSS to left justify single line equations in code cells.
             displayAlign: 'center',
             "HTML-CSS": {
-                styles: {'.MathJax_Display': {"margin": 0}},
+                styles: {'.MathJax_Display': {
+                  "margin": 0,
+                }},
                 linebreaks: { automatic: true }
             }
         });
       `;
 
+      // add Mathjax resources
+      //
       document.head.appendChild(scriptMathjax);
       document.head.appendChild(scriptMathjaxConfig);
 
@@ -287,6 +295,7 @@ j1.adapter.nbinteract = (function (j1, window) {
               xhr_container_id:   notebook.id,
               xhr_data:           notebook.xhr_data,
               xhr_data_path:      notebook.xhr_data_path,
+              use_mathjax:        notebook.use_mathjax,
               buttonStyles:       settings.button_styles,
             });
           }
@@ -316,7 +325,7 @@ j1.adapter.nbinteract = (function (j1, window) {
       {% assign notebook_baseUrl  = item.notebook.baseUrl %}
       {% assign notebook_provider = item.notebook.provider %}
       -------------------------------------------------------------------------- {% endcomment %}
-      {% for item in notebook_options.notebooks %} {% if item.notebook.enabled %}
+      {% for item in nbinteract_options.notebooks %} {% if item.notebook.enabled %}
       {% assign notebook_id       = item.notebook.id %}
 
       if ($('#{{notebook_id}}').length) {
@@ -395,6 +404,7 @@ j1.adapter.nbinteract = (function (j1, window) {
     loadNotebookHTML: function (options) {
       var html_data_path    = options.xhr_data_path + '/' + options.xhr_data;
       var id                = options.xhr_container_id;
+      var mathjaxEnabled    = options.use_mathjax;
       var $selector         = $('#' + id);
       var logText;
 
@@ -415,33 +425,80 @@ j1.adapter.nbinteract = (function (j1, window) {
               return '<button class="' + options.buttonStyles + ' js-nbinteract-widget"> Loading widgets ...</button>';
             });
 
-            // disable (Google) translation for all input_area HTML elements
+            // disable (Google) translation for all input_area|output_area HTML elements
             // see: https://www.codingexercises.com/replace-all-instances-of-css-class-in-vanilla-js
+            // see: https://wiki.selfhtml.org/wiki/JavaScript/Operatoren/Rest-_oder_Spread-Operator
             //
-            var input_area = document.getElementsByClassName('input_area');
-            [...input_area].forEach(x => x.className += " notranslate");
+            var output_wrapper = document.getElementsByClassName('output_wrapper');
+            // [...output_wrapper].forEach(function(x) {
+            //   if (!x.className.includes('notranslate')) {
+            //     x.className += " notranslate nomathjax"
+            //   }
+            // });
+            [...output_wrapper].forEach(function(x) {
+              if (!x.className.includes('notranslate')) {
+                x.className += " notranslate"
+              }
+            });
+
+            // disable ^MathJax for all output_area HTML elements
+            var output_area = document.getElementsByClassName('output_area');
+            [...output_wrapper].forEach(function(x) {
+              if (!x.className.includes('nomathjax')) {
+                x.className += " nomathjax"
+              }
+            });
+
+            var cell = document.getElementsByClassName('cell');
+            if (mathjaxEnabled) {
+              [...cell].forEach(function(x) {
+                if (!x.className.includes('mathjax')) {
+                  x.className += " mathjax"
+                }
+              });
+            }
+            // } else {
+            //   [...cell].forEach(function(x) {
+            //     if (!x.className.includes('nomathjax')) {
+            //       x.className += " nomathjax"
+            //     }
+            //   });
+            // }
+
+            // NOTE: DISABLED. Doesn't work that way. The class 'nbinteract-hide_in'
+            // is used in combination with hidden code cells as well!
+            //
+            // Remove all childs in a element having the class 'nbinteract-hide_in'
+            // document.querySelectorAll('.nbinteract-hide_in').forEach(el => el.remove());
+
+            // Adding class on input_area NOT needed. This element contains
+            // and 'highlight' element that is processed for 'notranslate'
+            // in adapter rouge.js already
+            //
+            // var input_area = document.getElementsByClassName('input_area');
+            // [...input_area].forEach(x => x.className += " notranslate");
 
             // cleanup headlines in notebook HTML and add an id used by toccer
             //
             $selector.find('h1').replaceWith( function() {
-              // return '<' + options.setHeadings + ' id="' + $(this)[0].id + '">' + $(this).text().slice(0,-1) + '</' + options.heading + '>';
-              return '<h1 id="' + $(this)[0].id + '" class="tex2jax_ignore">' + $(this).text().slice(0,-1) + '</h1>';
+              // return '<h1 id="' + $(this)[0].id.replace(/\$/g, '') + '">' + $(this).text().slice(0,-1) + '</h1>';
+              return '<h1 id="' + $(this)[0].id + '">' + $(this).text().slice(0,-1) + '</h1>';
             });
 
             $selector.find('h2').replaceWith( function() {
-              return '<h2 id="' + $(this)[0].id + '" class="tex2jax_ignore">' + $(this).text().slice(0,-1) + '</h2>';
+              return '<h2 id="' + $(this)[0].id + '">' + $(this).text().slice(0,-1) + '</h2>';
             });
 
             $selector.find('h3').replaceWith( function() {
-              return '<h3 id="' + $(this)[0].id + '" class="tex2jax_ignore">' + $(this).text().slice(0,-1) + '</h3>';
+              return '<h3 id="' + $(this)[0].id + '">' + $(this).text().slice(0,-1) + '</h3>';
             });
 
             $selector.find('h4').replaceWith( function() {
-              return '<h4 id="' + $(this)[0].id + '" class="tex2jax_ignore">' + $(this).text().slice(0,-1) + '</h4>';
+              return '<h4 id="' + $(this)[0].id + '">' + $(this).text().slice(0,-1) + '</h4>';
             });
 
             $selector.find('h5').replaceWith( function() {
-              return '<h5 id="' + $(this)[0].id + '" class="tex2jax_ignore">' + $(this).text().slice(0,-1) + '</h5>';
+              return '<h5 id="' + $(this)[0].id + '">' + $(this).text().slice(0,-1) + '</h5>';
             });
 
             logText = '\n' + 'data loaded successfully on id: ' + id;
