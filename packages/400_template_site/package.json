@@ -43,7 +43,7 @@
     "opt_output_type": "plain",
     "opt_credentials": "fake/fake",
     "opt_nbi_input_folder": "D:\\j1\\github\\j1-template-2022.2.x\\packages\\400_template_site\\pages\\public\\jupyter\\notebooks",
-    "opt_nbi_output_folder": "D:\\j1\\github\\j1-template-2022.2.x\\packages\\400_template_site\\pages\\public\\jupyter\\notebooks\\html"
+    "opt_nbi_output_folder": "D:\\j1\\github\\j1-template-2022.2.x\\packages\\400_template_site\\pages\\public\\jupyter\\notebooks\\textbooks"
   },
   "algolia": {
     "admin_key": "your-algolia-admin-key"
