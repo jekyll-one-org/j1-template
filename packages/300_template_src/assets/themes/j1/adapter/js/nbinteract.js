@@ -118,9 +118,9 @@ j1.adapter.nbinteract = (function (j1, window) {
   var nbiModalAutoClose;                                                        // switch to auto-close nbi message modals
   var nbiModalAutoCloseDelay;                                                   // delay auto-close nbi message modals
   var nbiInitTimeout;                                                           // delay indicate NBI failed
-  var nbiinitMathJax;                                                           // Load and run MathJax at runtime
-  var notebooks;                                                                // ALL notebokks enabled
-  var notebook;                                                                 // current notebook (processed)
+  var nbiInitMathJax;                                                           // Load and run MathJax at runtime
+  var textbooks;                                                                // ALL notebokks enabled
+  var textbook;                                                                 // current textbook (processed)
   var target;                                                                   // target container for the (activity) spinner
   var spinner;                                                                  // the (activity) spinner
   var nbiModal;
@@ -164,12 +164,12 @@ j1.adapter.nbinteract = (function (j1, window) {
       nbiInitTimeout          = moduleOptions.nbi_init_timeout;
       nbiShowMessages         = moduleOptions.show_nbi_messages;
       nbiIndicateNbiActivity  = moduleOptions.indicate_nbi_activity;
-      nbiinitMathJax          = moduleOptions.nbi_init_mathjax;
+      nbiInitMathJax          = moduleOptions.nbi_init_mathjax;
 
       // -----------------------------------------------------------------------
-      // load|configure Mathjax for Jupyter Notebooks
+      // load|configure Mathjax
       // -----------------------------------------------------------------------
-      if (nbiinitMathJax) {
+      if (nbiInitMathJax) {
         _this.initMathJax();
       }
 
@@ -179,9 +179,9 @@ j1.adapter.nbinteract = (function (j1, window) {
       _this.loadNbiModals();
 
       // -----------------------------------------------------------------------
-      // load the HTML portion for all notebooks configured|enabled
+      // load the HTML portion for all textbooks configured|enabled
       // -----------------------------------------------------------------------
-      _this.loadNbiNoteBooks(moduleOptions);
+      _this.loadNbiTextbooks(moduleOptions);
 
       // -------------------------------------------------------------------
       // run a spinner to indicate activity of 'nbInteract' if enabled
@@ -202,11 +202,11 @@ j1.adapter.nbinteract = (function (j1, window) {
       }
 
       // -----------------------------------------------------------------------
-      // interactNbiNotebooks()
+      // interactNbiTextbooks()
       // connect to the configured BinderHub instance to create a
       // Jupyter kernel if required
       // -----------------------------------------------------------------------
-      _this.interactNbiNotebooks(moduleOptions);
+      _this.interactNbiTextbooks(moduleOptions);
 
     }, // END init
 
@@ -256,46 +256,27 @@ j1.adapter.nbinteract = (function (j1, window) {
     }, // END intMathjax
 
     // -------------------------------------------------------------------------
-    // loadNbiNoteBooks()
-    // load the HTML portion for all notebooks configured (enabled)
+    // loadNbiTextbooks()
+    // load the HTML portion for all textbooks configured (enabled)
     // -------------------------------------------------------------------------
-    loadNbiNoteBooks: function (settings) {
-      var notebooks = settings.notebooks;
+    loadNbiTextbooks: function (settings) {
+      var textbooks = settings.textbooks;
 
-      notebooks.forEach (function (elm) {
-        if (elm.notebook.enabled) {
-          notebook = elm.notebook;
+      textbooks.forEach (function (elm) {
+        if (elm.textbook.enabled) {
+          textbook = elm.textbook;
 
-          // Overload notebook settings
-          //
-          // if (typeof notebook.show_nbi_messages == 'undefined') {
-          //   notebook.show_nbi_messages = true;
-          // }
-          // nbiShowMessages         = notebook.show_nbi_messages == false  ? nbiShowMessages = false : nbiShowMessages;
-          // nbiIndicateNbiActivity  = notebook.indicate_nbi_activity == false ? nbiIndicateNbiActivity = false : nbiIndicateNbiActivity;
+          var textbook_id = textbook.id;
+          var $selector = $('#' + textbook_id);
 
-          // -------------------------------------------------------------------
-          // run a spinner to indicate activity of 'nbInteract' if enabled
-          // -------------------------------------------------------------------
-          // $(document).ready(function() {
-          //   if (nbiIndicateNbiActivity && !spinnerStarted) {
-          //     spinnerStarted = true;
-          //     target  = document.getElementById('content');
-          //     spinner = new Spinner(spinnerOpts).spin(target);
-          //   }
-          // });
-
-          var notebook_id = notebook.id;
-          var $selector = $('#' + notebook_id);
-
-          // load the HTML portion for the notebook
+          // load the HTML portion for the textbook
           //
           if ($selector.length) {
-            _this.loadNotebookHTML ({
-              xhr_container_id:   notebook.id,
-              xhr_data:           notebook.xhr_data,
-              xhr_data_path:      notebook.xhr_data_path,
-              use_mathjax:        notebook.use_mathjax,
+            _this.loadTextbookHTML ({
+              xhr_container_id:   textbook.id,
+              xhr_data:           textbook.xhr_data,
+              xhr_data_path:      textbook.xhr_data_path,
+              use_mathjax:        textbook.use_mathjax,
               buttonStyles:       settings.button_styles,
             });
           }
@@ -304,14 +285,14 @@ j1.adapter.nbinteract = (function (j1, window) {
     },
 
     // -------------------------------------------------------------------------
-    // interactNbiNotebooks()
+    // interactNbiTextbooks()
     // connect to the configured BinderHub instance to create a
     // Jupyter kernel if required. A BinderHub instance in created
-    // on a per notebook basis but trigeered only done once,
+    // on a per textbook basis but trigeered only done once,
     // controlled by nbinteract_prepared.
     // -------------------------------------------------------------------------
-    interactNbiNotebooks: function (options) {
-      var notebook = options;
+    interactNbiTextbooks: function (options) {
+      var textbook = options;
 
       // initialize state flag
       _this.setState('started');
@@ -322,21 +303,21 @@ j1.adapter.nbinteract = (function (j1, window) {
 
       // var nbiButtonsFound = document.querySelectorAll('.js-nbinteract-widget')
 
-      {% comment %} initialize nbinteract per notebook
-      {% assign notebook_spec     = item.notebook.spec %}
-      {% assign notebook_baseUrl  = item.notebook.baseUrl %}
-      {% assign notebook_provider = item.notebook.provider %}
+      {% comment %} initialize nbinteract per textbook
+      {% assign textbook_spec     = item.textbook.spec %}
+      {% assign textbook_baseUrl  = item.textbook.baseUrl %}
+      {% assign textbook_provider = item.textbook.provider %}
       -------------------------------------------------------------------------- {% endcomment %}
-      {% for item in nbinteract_options.notebooks %} {% if item.notebook.enabled %}
-      {% assign notebook_id       = item.notebook.id %}
+      {% for item in nbinteract_options.textbooks %} {% if item.textbook.enabled %}
+      {% assign textbook_id       = item.textbook.id %}
 
-      if ($('#{{notebook_id}}').length) {
+      if ($('#{{textbook_id}}').length) {
         var dependencies_met_nb_loaded = setInterval(function() {
-          if ($('#{{notebook_id}}').attr('data-nb-notebook') == 'loaded') {
+          if ($('#{{textbook_id}}').attr('data-nb-textbook') == 'loaded') {
 
             var nbiButtonsFound = document.querySelectorAll('.js-nbinteract-widget').length
             if (nbiButtonsFound == 1) {
-              var log_text = '\n' + 'static notebook found, skip NBI initialization for: {{notebook_id}}';
+              var log_text = '\n' + 'static textbook found, skip NBI initialization for: {{textbook_id}}';
               logger.warn(log_text);
             }
 
@@ -368,7 +349,7 @@ j1.adapter.nbinteract = (function (j1, window) {
                 var nbiButtonState = _this.getNbiButtonState();
                 if (nbiButtonState) {
                   // button NOT removed
-                  logger.warn('NBI initialialization failed on notebook: {{notebook_id}}');
+                  logger.warn('NBI initialialization failed on textbook: {{textbook_id}}');
                   // hide the info modal
                   $(nbiModalSuccessID).modal('hide');
 
@@ -376,7 +357,7 @@ j1.adapter.nbinteract = (function (j1, window) {
                   $(nbiModalSuccessID).on('hidden.bs.modal', function () {
                     if ($(nbiModalErrorID).is(':hidden')) {
                       var messageErrorUL = document.getElementById(nbiModalErrorMessagesID);
-                      _this.appendModalMessage(messageErrorUL, 'NBI initialialization failed for notebook: {{notebook_id}}')
+                      _this.appendModalMessage(messageErrorUL, 'NBI initialialization failed for textbook: {{textbook_id}}')
                       $(nbiModalErrorID).modal('show');
 
                       // auto-close the error modal
@@ -400,16 +381,16 @@ j1.adapter.nbinteract = (function (j1, window) {
         }, 25);
         return;
       }
-      // END notebook_id: {{ notebook_id }}
+      // END textbook_id: {{ textbook_id }}
       {% endif %} {% endfor %}
     },
 
     // -------------------------------------------------------------------------
-    // loadNotebookHTML()
+    // loadTextbookHTML()
     // Load HTML data asychronously using XHR|jQuery on an element
     // (e.g. <div>) specified by xhr_container_id, xhr_data_path
     // -------------------------------------------------------------------------
-    loadNotebookHTML: function (options) {
+    loadTextbookHTML: function (options) {
       var html_data_path    = options.xhr_data_path + '/' + options.xhr_data;
       var id                = options.xhr_container_id;
       var mathjaxEnabled    = options.use_mathjax;
@@ -426,7 +407,7 @@ j1.adapter.nbinteract = (function (j1, window) {
 
             // set data attribute to indicate HTML data loaded
             //
-            $selector.attr('data-nb-notebook', 'loaded');
+            $selector.attr('data-nb-textbook', 'loaded');
 
             // run HTML cleanups
             //
@@ -434,15 +415,14 @@ j1.adapter.nbinteract = (function (j1, window) {
               return '<button class="' + options.buttonStyles + ' js-nbinteract-widget"> Loading widgets ...</button>';
             });
 
-
-            // enable MathJax for the (current) j1_notebook container
-            // processed if enabled for the (containing) notebook
+            // enable MathJax for the (current) J1 Textbook container
+            // processed if enabled for the (containing) textbook
             //
-            var currentNotebook = document.getElementById(id);
+            var currentTextbook = document.getElementById(id);
             if (mathjaxFlag) {
-              currentNotebook.classList.add('mathjax');
+              currentTextbook.classList.add('mathjax');
             } else {
-              currentNotebook.classList.add('nomathjax');
+              currentTextbook.classList.add('nomathjax');
             }
 
             // ------------------------------------------------------------------
@@ -489,7 +469,7 @@ j1.adapter.nbinteract = (function (j1, window) {
             // var input_area = document.getElementsByClassName('input_area');
             // [...input_area].forEach(x => x.className += " notranslate");
 
-            // cleanup headlines in notebook HTML and add an id used by toccer
+            // cleanup headlines in textbook HTML and add an id used by toccer
             //
             $selector.find('h1').replaceWith( function() {
               // return '<h1 id="' + $(this)[0].id.replace(/\$/g, '') + '">' + $(this).text().slice(0,-1) + '</h1>';
@@ -873,15 +853,6 @@ j1.adapter.nbinteract = (function (j1, window) {
       } else {
         state = false;
       }
-
-      // cellButtons.forEach (function (elm) {
-      //   state = elm.innerHTML;
-      //   if (state == 'Initializing widgets ...') {
-      //     state = 'init';
-      //    } else {
-      //      state = 'bla';
-      //    }
-      // });
 
       return state;
      }, // END getNbiButtonsState

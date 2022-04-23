@@ -31,11 +31,11 @@ Asciidoctor::Extensions.register do
   class NbiBlockMacro < Extensions::BlockMacroProcessor
     use_dsl
 
-    named :notebook
+    named :textbook
     name_positional_attributes 'role'
 
     def process parent, target, attrs
-      html = %(<div id="#{target}" class="j1_notebook #{attrs['role']}" data-nb-notebook="initial"></div>)
+      html = %(<div id="#{target}" class="nb-textbook #{attrs['role']}" data-nb-textbook="initial"></div>)
       create_pass_block parent, html, attrs, subs: nil
     end
   end

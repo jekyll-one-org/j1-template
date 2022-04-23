@@ -136,14 +136,14 @@ window changes from dawn to dusk, the metabolism occurs in our body is also a
 dynamic system because thousands of reactions and molecules got synthesized
 and degraded as time goes.
 
-notebook::odes_in_python[]
+textbook::odes_in_python[]
 
 
 === ODEs Selected
 
 lorem:sentences[5]
 
-notebook::odes_selected[]
+textbook::odes_selected[]
 
 
 

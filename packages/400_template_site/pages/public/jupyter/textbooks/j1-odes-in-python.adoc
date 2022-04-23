@@ -61,6 +61,6 @@ endif::[]
 
 lorem:sentences[5]
 
-// notebook::odes_in_python[]
+// textbook::odes_in_python[]
 
-notebook::j1_ode_selected[]
+textbook::j1_ode_selected[]

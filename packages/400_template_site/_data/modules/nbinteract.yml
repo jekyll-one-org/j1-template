@@ -25,7 +25,7 @@ description:
 #
 settings:
 
-  # NOTEBOOK settings
+  # TEXTBOOK settings
   # ----------------------------------------------------------------------------
 
   # enabled
@@ -67,34 +67,42 @@ settings:
   #
   # ----------------------------------------------------------------------------
   #
-  notebooks:
+  # use_mathjax
+  # ----------------------------------------------------------------------------
+  #   This is a per notebook setting to enable mathjax processing. In general
+  #   'nbi_init_mathjax' from default settings are be set to 'true' (enabled).
+  #
+  #   values:                           boolean (true|false)
+  #   default:                          false
+  #
+  # ----------------------------------------------------------------------------
+  #
+  textbooks:
 
     # --------------------------------------------------------------------------
-    # J1 Notebooks J1 NBI Docs
+    # J1 NBI Docs
     # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
     # Demo notebook 'selected ODEs'
     #
-    - notebook:
+    - textbook:
         enabled:                        true
 
         id:                             j1_docs_example_dynamic
         xhr_data:                       j1_docs_example_dynamic.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
-
-        show_nbi_messages:              false
-        indicate_nbi_activity:          false
+        use_mathjax:                    false
 
 
     # --------------------------------------------------------------------------
-    # J1 Notebooks for testing
+    # Textbooks for testing
     # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
     # test_notebook
     #
-    - notebook:
+    - textbook:
         enabled:                        true
 
         id:                             j1_recipes_layout
@@ -105,7 +113,7 @@ settings:
     # --------------------------------------------------------------------------
     # ode_selected
     #
-    - notebook:
+    - textbook:
         enabled:                        true
 
         id:                             j1_ode_selected
@@ -116,7 +124,7 @@ settings:
     # --------------------------------------------------------------------------
     # climate-change-forecast (static notebook)
     #
-    - notebook:
+    - textbook:
         enabled:                        true
 
         id:                             j1_climate_change_forecast
@@ -127,7 +135,7 @@ settings:
     # --------------------------------------------------------------------------
     # odes_in_python
     #
-    - notebook:
+    - textbook:
         enabled:                        false
 
         id:                             j1_odes_in_python
@@ -138,7 +146,7 @@ settings:
     # --------------------------------------------------------------------------
     # creating-reading-and-writing
     #
-    - notebook:
+    - textbook:
         enabled:                        false
 
         id:                             j1_pandas_intro
@@ -149,7 +157,7 @@ settings:
     # --------------------------------------------------------------------------
     # interactive
     #
-    - notebook:
+    - textbook:
         enabled:                        false
 
         id:                             j1_interactive
@@ -165,7 +173,7 @@ settings:
     # --------------------------------------------------------------------------
     # simple_webpage
     #
-    - notebook:
+    - textbook:
         enabled:                        true
 
         id:                             nbi_docs_tutorial_interact
@@ -176,7 +184,7 @@ settings:
     # --------------------------------------------------------------------------
     # tutorial_monty_hall
     #
-    - notebook:
+    - textbook:
         enabled:                        true
 
         id:                             nbi_docs_tutorial_monty_hall
@@ -187,7 +195,7 @@ settings:
     # --------------------------------------------------------------------------
     # recipes_graphing
     #
-    - notebook:
+    - textbook:
         enabled:                        true
 
         id:                             nbi_docs_recipes_graphing
@@ -199,7 +207,7 @@ settings:
     # --------------------------------------------------------------------------
     # recipes_layout
     #
-    - notebook:
+    - textbook:
         enabled:                        true
 
         id:                             nbi_docs_recipes_layout
@@ -210,7 +218,7 @@ settings:
     # --------------------------------------------------------------------------
     # recipes_interactive_questions
     #
-    - notebook:
+    - textbook:
         enabled:                        true
 
         id:                             nbi_docs_recipes_interactive_questions
@@ -221,7 +229,7 @@ settings:
     # --------------------------------------------------------------------------
     # empirical_distributions
     #
-    - notebook:
+    - textbook:
         enabled:                        true
 
         id:                             nbi_docs_empirical_distributions
@@ -232,7 +240,7 @@ settings:
     # --------------------------------------------------------------------------
     # examples_sampling_from_a_population
     #
-    - notebook:
+    - textbook:
         enabled:                        true
 
         id:                             nbi_docs_examples_sampling_from_a_population
@@ -243,7 +251,7 @@ settings:
     # --------------------------------------------------------------------------
     # examples_variability_of_the_sample_mean
     #
-    - notebook:
+    - textbook:
         enabled:                        true
 
         id:                             nbi_docs_examples_variability_of_the_sample_mean
@@ -254,7 +262,7 @@ settings:
     # --------------------------------------------------------------------------
     # examples_correlation
     #
-    - notebook:
+    - textbook:
         enabled:                        true
 
         id:                             nbi_docs_examples_correlation
@@ -265,7 +273,7 @@ settings:
     # --------------------------------------------------------------------------
     # examples_linear_regression
     #
-    - notebook:
+    - textbook:
         enabled:                        true
 
         id:                             nbi_docs_examples_linear_regression
@@ -276,7 +284,7 @@ settings:
     # --------------------------------------------------------------------------
     # examples_probability_distribution_plots
     #
-    - notebook:
+    - textbook:
         enabled:                        true
 
         id:                             nbi_docs_examples_probability_distribution_plots
@@ -287,7 +295,7 @@ settings:
     # --------------------------------------------------------------------------
     # central_limit_theorem
     #
-    - notebook:
+    - textbook:
         enabled:                        true
 
         id:                             nbi_docs_central_limit_theorem

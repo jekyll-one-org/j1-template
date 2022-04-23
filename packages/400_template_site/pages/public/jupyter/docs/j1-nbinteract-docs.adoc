@@ -1,5 +1,5 @@
 ---
-title:                                  J1 NbInteract
+title:                                  J1 NBI
 tagline:                                nbi integration
 date:                                   2022-04-17 00:00:00
 description: >
@@ -8,7 +8,7 @@ description: >
                                         services provided.
 
 categories:                             [ J1, Integration ]
-tags:                                   [ NbInteract ]
+tags:                                   [ NBI, nbinteract ]
 
 scrollbar:                              false
 fab_menu_id:                            page_ctrl_simple
@@ -86,7 +86,7 @@ The integration of NBI consists of the following components:
   record `nbinteract` (~/_data/`resources.yml`)
 * an J1 adapter `nbinteract.js` for integration
 * a module configuration `notebooks.yml`
-* an Asciidoc Extension `notebook::` to integrate notebooks (in webpages)
+* an Asciidoc Extension `textbook::` to integrate notebooks (in webpages)
 
 The built-in *Starter Web* of the template comes with a suitable J1 NBI
 configuration and documents for testing. You can find examples of interactive
@@ -117,9 +117,9 @@ Programmierung erforderlich. Ein Adapter für J1 übernimmt die Integration,
 dass mit Hilfe der Module Konfiguration ein einfaches Einbinden in Ihre
 Webseiten erlaubt.
 
-
 ==== Default settings
 
+.Default settings
 [cols="3a,4a,5a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Paramter |Value |Description
@@ -174,15 +174,17 @@ Default: `3500` (3.5 sec)
 |`nbi_init_mathjax`
 |`true`\|`false`
 |Load and initialize the MathJax JS library. +
-Default: `false`
+Default: `true`
 
 |===
 
 WARNING: In the current implementation of NBI for J1, the JS library *MathJax*
-interferes with the formatting output of other pages of a J1 website. The
-formatting done by MatJax may result in strange outcomes for the other content.
-For that reason, the MathJax library is *disabled* for the time being.
+*may* interfere with the HTML output of other pages of a J1 website. The
+formatting done by MatJax may result in *strange outcomes* for other content.
+For that reason, the MathJax library should be used *carefully* for the
+time being.
 
+.Example settings (~/_data/default/nbinteract.yml)
 [source, yaml]
 ----
 # ------------------------------------------------------------------------------
@@ -196,18 +198,19 @@ defaults:
 
   button_styles:                        btn btn-primary btn-raised hidden
 
-  show_nbi_messages:                    false
-  indicate_nbi_activity:                true
+  show_nbi_messages:                    true
+  indicate_nbi_activity:                false
   nbi_messages_auto_close:              true
 
   nbi_init_timeout:                     180000
   nbi_messages_auto_close_delay:        3500
 
-  nbi_init_mathjax:                     false
+  nbi_init_mathjax:                     true
 ----
 
-==== Notebook settings
+==== Textbook settings
 
+.Textbook settings
 [cols="3a,4a,5a", options="header", width="100%", role="rtable mt-3"]
 |===
 |Paramter |Value |Description
@@ -221,7 +224,7 @@ Default: `true`
 |`id`
 |`string`
 |The id of a notebook that is used by the *Asciidoc Extension*
-`notebook::<id>[]` to place the HTML portion for the HTML code
+`textbook::<id>[]` to place the HTML portion for the HTML code
 of an exported Jupyter Notebook. +
 Default: `no default`
 
@@ -234,9 +237,16 @@ Default: `no default`
 |`path`
 |The (data) path the Jupyter Notebook is exported. +
 Default: `no default`
+
+|`use_mathjax`
+|`true`\|`false`
+|This is a per notebook setting to enable mathjax processing. In general
+`nbi_init_mathjax` from *default* settings are be set to `true` (enabled). +
+Default: `false`
+
 |===
 
-.Settings for the starter web
+.Example settings (~/_data/nbinteract.yml)
 [source, yaml]
 ----
 # ------------------------------------------------------------------------------
@@ -247,7 +257,7 @@ settings:
   notebooks:
 
     # --------------------------------------------------------------------------
-    # J1 Notebooks J1 NBI Docs
+    # J1 NBI Textbooks J1 NBI Docs
     # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
@@ -259,33 +269,129 @@ settings:
         id:                             j1_docs_example_dynamic
         xhr_data:                       j1_docs_example_dynamic.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
+        use_mathjax:                    false
+
 ----
 
 === Binder configuration
 
-lorem:sentences[5]
+Der Einsatz von J1 NBI erfordert eine gültige *Binder* configuration. Die
+Binder configuration ist über ein öffentliches Repo bereitzustellen.
+Ein Beispiel eines solchen Repos finden auf *Github* unter
+https://github.com/jekyll-one/nbinteract-notebooks[Binder Repo, {browser-window--new}].
+Die Einstellungen zur Konfiguration sind im Abschnitt <<Default settings>>
+beschrieben.
 
-=== Notebook configuration
+=== Textbook configuration
 
-lorem:sentences[5]
+Neben den Defaulteinstellungen für J1 NBI (`~/_data/default/nbinteract.yml`)
+sind *individuelle* Einstellungen für jedes Textbook (nbinteract HTML Notebook)
+erforderlich, dass in die Seiten eines J1 Webs eingebunden werden soll.
+Beispiele dazu finden sie in der Konfigurationsdatei `~/_data/nbinteract.yml`,
+eine Beschreibung der verwendeten Parameter im Abschnitt <<Notebook settings>>.
 
-=== Integrate notebooks with pages
+=== Textbook integration
 
-Das Modul zur J1 NBI Integration ...
+Zur Integration von Textbooks (nbinteract HTML Notebook) in Webseiten ist das
+J1 NBI Module a Resource einzubinden. Die `ID` des Moduls der J1 NBI Integration
+ist: `nbinteract`.
 
-Die ID des Moduls der J1 NBI Integration ist `nbinteract`. Für alle Webseiten
-die dynamische Jupyter Notebooks einbinden, ist als Resource das Modul
-einzubinden
-
-.Frontmatter settings
+.Example Frontmatter of a page using Textbooks
 [source, yaml, role="noclip"]
-
 ----
-resources:                              [ nbinteract ]
+title:                                  J1 NbInteract
+tagline:                                nbi integration
+date:                                   2022-04-17 00:00:00
+description: >
+                                        Things you should know about this site,
+                                        the people and the software and/or
+                                        services provided.
+
+categories:                             [ J1, Integration ]
+tags:                                   [ NBI, nbinteract ]
+
+scrollbar:                              false
+fab_menu_id:                            page_ctrl_simple
+personalization:                        true <1>
+
+permalink:                              /pages/public/jupyter/docs/j1-nbinteract-docs/
+regenerate:                             true
+
+resources:                              [ nbinteract, rouge ] <2>
+----
+<1> Die Dienste von Binder erfordern personalisierte Einstellungen in den
+    verwendeten *Cookies*. Um Schwierigkeiten mit den Regeln der Privatssphäre
+    zu vermeiden, sollte explizit darauf hingewiesen sowie in geeigneter Form
+    reagiert werden, falls die aktuellen Cookieeinstellungen des Besuchers
+    dies nicht erlauben.
+<2> Falls Highlightning der Sourecode Anteile in einem Textbook gewünscht
+    ist, muss zusätzlich das Modul `rouge` eingebunden werden.
+
+Sind die Konfigurationsschritte für den Einsatz von J1 NBI erledigt, ist das
+Einbinden von Textbooks sehr einfach. Über die die Asciidoc-Erweiterung
+`textbook::` kann ein Textbooks (nbinteract HTML Notebook) an jeder beliebigen
+Stelle eingebunden
+werden
+
+.General syntax
+[source, conf, role="noclip"]
+----
+textbook::<notebook-id>[]
 ----
 
-lorem:sentences[5]
+Einbinden des Notebooks mit der ID `j1_docs_example_dynamic` in eine Webseite.
 
+.Example
+[source, conf, role="noclip"]
+----
+textbook::j1_docs_example_dynamic[]
+----
+
+
+== Textbook Examples
+
+For the J1 template, textbooks are typically integrated as *dynamic* HTML
+pages. In addition to the dynamic pages, notebooks can also be integrated as
+*static* HTML code. You can find examples for both variants in the following
+sections.
+
+=== Static Textbook
+
+The `nbconvert` tool converts Jupyter notebooks to various other formats via
+Jinja templates. The tool allows you to convert an .ipynb notebook file into
+various *static* formats. For more details, refer to
+link:{url-nbconvert--doc}[nbconvert - usage, {browser-window--new}].
+
+.Generate a static Textbook
+[source, bash]
+----
+jupyter nbconvert --execute --to html <full_path_to>/<notebook.ipynb>
+----
+
+Below you find an static HTML output (Textbook) generated via `nbconvert`.
+
+include::{documentdir}/j1_ode_selected_static.asciidoc[]
+
+=== Dynamic Textbook
+
+*Dynamic* Textbooks are generated using `nbinteract`:
+
+.Generate a dynamic Textbook (J1 Version)
+[source, bash]
+----
+nbinteract <full_path_to>/<notebook.ipynb> -t plain -s fake/fake
+----
+
+textbook::j1_docs_example_dynamic[]
+
+=== Conclusion
+
+Compare both textbook versions, dynamic versus static, in terms of
+*interactivity*. Again, check the _Evaluation_ section at section
+<<Dynamic Textbook>>.
+
+
+/////
 == Backgrounds
 
 lorem:sentences[5]
@@ -330,11 +436,11 @@ NBI Integration verwendet wird, führt Python-Code aus erzeugt die Ergebnisse.
 Der Name der Library `nbinteract` deutet zwei generelle Funktionen für
 Jupyter Notebooks  an:
 
-notebook::
+`nb`, textbook::
 Verarbeitung von Notebooks
 // (als HTML Darstellung)
 
-interaction::
+`interact`::
 Ausführen von Notebooks in Zusammenarbeit mit einem (remoten) Verarbeitungs
 System und Darstellung der Ergebnisse
 
@@ -398,45 +504,4 @@ JupyterHub läuft in der Cloud oder auf Ihrer eigenen Hardware und ermöglicht
 es, jedem Benutzer weltweit eine vorkonfigurierte Data-Science-Umgebung
 bereitzustellen. Es ist anpassbar und skalierbar und eignet sich für kleine
 und große Teams, akademische Kurse und große Infrastrukturen.
-
-== Textbook Examples
-
-For the J1 template, textbooks are typically integrated as *dynamic* HTML
-pages. In addition to the dynamic pages, notebooks can also be integrated as
-*static* HTML code. You can find examples for both variants in the following
-sections.
-
-=== Static Textbook
-
-The `nbconvert` tool converts Jupyter notebooks to various other formats via
-Jinja templates. The tool allows you to convert an .ipynb notebook file into
-various *static* formats. For more details, refer to
-link:{url-nbconvert--doc}[nbconvert - usage, {browser-window--new}].
-
-.Generate a static notebook
-[source, bash]
-----
-jupyter nbconvert --execute --to html <full_path_to>/<notebook.ipynb>
-----
-
-Below you find an static HTML output (Textbook) generated via `nbconvert`.
-
-include::{documentdir}/j1_ode_selected_static.asciidoc[]
-
-=== Dynamic Textbook
-
-*Dynamic* Textbooks are generated using `nbinteract`:
-
-.Generate a dynamic notebook (J1 Version)
-[source, bash]
-----
-nbinteract <full_path_to>/<notebook.ipynb> -t plain -s fake/fake
-----
-
-notebook::j1_docs_example_dynamic[]
-
-=== Conclusion
-
-Compare both textbook versions, dynamic versus static, in terms of
-*interactivity*. Again, check the _Evaluation_ section at the
-<<Dynamic Textbook>>.
+/////

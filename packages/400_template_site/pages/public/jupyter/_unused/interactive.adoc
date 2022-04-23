@@ -65,13 +65,13 @@ endif::[]
 
 lorem:sentences[5]
 
-notebook::interactive[]
+textbook::interactive[]
 
 === Selected
 
 lorem:sentences[5]
 
-notebook::odes_selected[]
+textbook::odes_selected[]
 
 ++++
 <script src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML"></script>

@@ -913,10 +913,12 @@ input::-moz-focus-inner {
 }
 
 // jadams, 2020-09-20: remove borders
+// jadams, 2022-04-23: remove ALL borders
 .colist > table tr th,
 .colist > table tr td {
-    border-right: 0;
-    border-bottom: 0;
+  // border-right: 0;
+  // border-bottom: 0;
+  border: 0;
 }
 
 .hdlist>table>tbody>tr,

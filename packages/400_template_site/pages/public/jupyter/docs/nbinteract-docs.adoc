@@ -1,5 +1,5 @@
 ---
-title:                                  nbinteract
+title:                                  NBI
 tagline:                                docs
 date:                                   2022-03-28 00:00:00
 description: >
@@ -217,7 +217,7 @@ The commands initialize the `nbinteract` package and push the configuration
 files to GitHub. If you are working locally, skip the pip install command
 above and run the remaining commands in your terminal.
 
-notebook::nbi_docs_tutorial_interact[]
+textbook::nbi_docs_tutorial_interact[]
 
 === Publishing a Webpage
 
@@ -276,7 +276,7 @@ You have learned a simple workflow to create interactive webpages:
 In the next section, you will create an interactive simulation of the
 Monty Hall Problem. Onward!
 
-notebook::nbi_docs_tutorial_monty_hall[]
+textbook::nbi_docs_tutorial_monty_hall[]
 
 == Recipes
 
@@ -418,11 +418,11 @@ For example, to convert a notebook called Hello.ipynb using the Binder spec
 nbi.publish('calebs11/nbinteract-image/main', 'Hello.ipynb')
 ----
 
-notebook::nbi_docs_recipes_graphing[]
+textbook::nbi_docs_recipes_graphing[]
 
-notebook::nbi_docs_recipes_layout[]
+textbook::nbi_docs_recipes_layout[]
 
-notebook::nbi_docs_recipes_interactive_questions[]
+textbook::nbi_docs_recipes_interactive_questions[]
 
 == Examples
 
@@ -430,14 +430,14 @@ For more examples of interactive notebooks, see this section. The examples
 show a selection of specific learning content at colleges and universities
 on statistical issues.
 
-notebook::nbi_docs_empirical_distributions[]
+textbook::nbi_docs_empirical_distributions[]
 
-notebook::nbi_docs_examples_sampling_from_a_population[]
+textbook::nbi_docs_examples_sampling_from_a_population[]
 
-notebook::nbi_docs_examples_variability_of_the_sample_mean[]
+textbook::nbi_docs_examples_variability_of_the_sample_mean[]
 
-notebook::nbi_docs_examples_correlation[]
+textbook::nbi_docs_examples_correlation[]
 
-notebook::nbi_docs_examples_linear_regression[]
+textbook::nbi_docs_examples_linear_regression[]
 
-notebook::nbi_docs_central_limit_theorem[]
+textbook::nbi_docs_central_limit_theorem[]

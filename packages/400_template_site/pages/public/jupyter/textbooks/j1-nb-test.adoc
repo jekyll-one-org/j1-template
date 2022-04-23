@@ -1,6 +1,6 @@
 ---
-title:                                  J1 NbInteract
-tagline:                                test notebooks
+title:                                  J1 NBI
+tagline:                                textbooks for testing
 date:                                   2022-03-28 00:00:00
 description: >
                                         Things you should know about this site,
@@ -62,11 +62,11 @@ ifeval::[{binder-badges-enabled} == true]
 image:https://mybinder.org/badge_logo.svg[Binder, link="https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/main", {browser-window--new}]
 endif::[]
 
-== Test notestbooks
+== Textbooks for testing
 
 lorem:sentences[5]
 
 
 === ODEs in Python
 
-notebook::j1_ode_selected[]
+textbook::j1_ode_selected[]
