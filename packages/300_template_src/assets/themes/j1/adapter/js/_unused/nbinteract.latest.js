@@ -14,7 +14,7 @@ regenerate:                             true
  # Copyright (C) 2022 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see https://jekyll.one
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ liquid_var | debug }}
@@ -40,12 +40,12 @@ regenerate:                             true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign notebook_defaults = modules.defaults.nbinteract.defaults %}
-{% assign notebook_settings = modules.nbinteract.settings %}
+{% assign nbinteract_defaults = modules.defaults.nbinteract.defaults %}
+{% assign nbinteract_settings = modules.nbinteract.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign notebook_options  = notebook_defaults | merge: notebook_settings %}
+{% assign nbinteract_options  = nbinteract_defaults | merge: nbinteract_settings %}
 
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
@@ -63,7 +63,7 @@ regenerate:                             true
  # Copyright (C) 2022 Juergen Adams
  #
  # J1 Template is licensed under the MIT License.
- # For details, see https://jekyll.one
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  #  Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
@@ -96,24 +96,29 @@ j1.adapter.nbinteract = (function (j1, window) {
     direction:  1,                                                              // 1: clockwise, -1: counterclockwise
     color:      '#424242',                                                      // CSS color or array of colors: orange (EF6C00) | blue (1565C0) | gray (424242)
     fadeColor:  'transparent',                                                  // CSS color or array of colors
-    top:        '80%',                                                          // top position relative to parent
+    top:        '70%',                                                          // top position relative to parent
     left:       '50%',                                                          // left position relative to parent
     shadow:     '0 0 1px transparent',                                          // box-shadow for the lines
     zIndex:     2000000000,                                                     // z-index (defaults to 2e9)
     className:  'spinner',                                                      // CSS class assined to the spinner
     position:   'fixed',                                                        // element positioning:  absolute|fixed
   };
-  var nbiContentModalInfoID       = 'nbiModalInfoBody'                          // ID of the content (messages) for the INFO modal
-  var nbiContentModalSuccessID    = 'nbiModalSuccessBody'                       // ID of the content (messages) for the SUCCESS modal
-  var nbiContentModalErrorID      = 'nbiModalErrorBody'                         // ID of the content (messages) for the SUCCESS modal
+  var spinnerStarted = false;                                                   // switch to indicate a started spinner
+  var nbiContentModalInfoID       = 'nbiModalInfoBody';                         // ID of the content (messages) for the INFO modal
+  var nbiContentModalSuccessID    = 'nbiModalSuccessBody';                      // ID of the content (messages) for the SUCCESS modal
+  var nbiContentModalErrorID      = 'nbiModalErrorBody';                        // ID of the content (messages) for the SUCCESS modal
   var nbiModalInfoID              = '#' + 'nbiModalTopInfo';                    // ID of the SUCCESS modal
   var nbiModalSuccessID           = '#' + 'nbiModalTRSuccess';                  // ID of the SUCCESS modal
   var nbiModalErrorID             = '#' + 'nbiModalTLDanger';                   // ID of the ERROR modal
   var nbinteract_prepared         = false;                                      // switch to indicate if ???
-  var nbiModalSuccessMessagesID   = 'nbiModalSuccessMessages'                   // UL contalner SUCCESS messahes
-  var nbiModalErrorMessagesID     = 'nbiModalErrorMessages'                     // UL contalner ERROR messahes
+  var nbiModalSuccessMessagesID   = 'nbiModalSuccessMessages';                  // UL contalner SUCCESS messages
+  var nbiModalErrorMessagesID     = 'nbiModalErrorMessages';                    // UL contalner ERROR messahes
+  var nbiShowMessages;                                                          // switch to show NBI messages
+  var nbiIndicateNbiActivity;                                                   // switch to show a spinner while NBI is being initialized
   var nbiModalAutoClose;                                                        // switch to auto-close nbi message modals
   var nbiModalAutoCloseDelay;                                                   // delay auto-close nbi message modals
+  var nbiInitTimeout;                                                           // delay indicate NBI failed
+  var nbiinitMathJax;                                                           // Load and run MathJax at runtime
   var notebooks;                                                                // ALL notebokks enabled
   var notebook;                                                                 // current notebook (processed)
   var target;                                                                   // target container for the (activity) spinner
@@ -147,7 +152,7 @@ j1.adapter.nbinteract = (function (j1, window) {
         generated:   '{{site.time}}'
       }, options);
 
-      moduleOptions = $.extend({}, {{notebook_options | replace: 'nil', 'null' | replace: '=>', ':' }});
+      moduleOptions = $.extend({}, {{nbinteract_options | replace: 'nil', 'null' | replace: '=>', ':' }});
 
       // -----------------------------------------------------------------------
       // Global variable settings
@@ -156,6 +161,17 @@ j1.adapter.nbinteract = (function (j1, window) {
       logger                  = log4javascript.getLogger('j1.adapter.nbinteract');
       nbiModalAutoClose       = moduleOptions.nbi_messages_auto_close;
       nbiModalAutoCloseDelay  = moduleOptions.nbi_messages_auto_close_delay;
+      nbiInitTimeout          = moduleOptions.nbi_init_timeout;
+      nbiShowMessages         = moduleOptions.show_nbi_messages;
+      nbiIndicateNbiActivity  = moduleOptions.indicate_nbi_activity;
+      nbiinitMathJax          = moduleOptions.nbi_init_mathjax;
+
+      // -----------------------------------------------------------------------
+      // load|configure Mathjax for Jupyter Notebooks
+      // -----------------------------------------------------------------------
+      if (nbiinitMathJax) {
+        _this.initMathJax();
+      }
 
       // -----------------------------------------------------------------------
       // load HTML data for all modals used by nbInteract
@@ -163,36 +179,81 @@ j1.adapter.nbinteract = (function (j1, window) {
       _this.loadNbiModals();
 
       // -----------------------------------------------------------------------
-      // loadNbiNoteBooks()
-      // load the HTML portion for all notebooks configured (enabled)
+      // load the HTML portion for all notebooks configured|enabled
       // -----------------------------------------------------------------------
       _this.loadNbiNoteBooks(moduleOptions);
 
-      // -----------------------------------------------------------------------
-      // register callbacks (actions) for all modals used
-      // -----------------------------------------------------------------------
-      if (moduleOptions.show_nbi_messages) {
-        _this.registerNbiModalsCB();
-      }
-
-      // -----------------------------------------------------------------------
+      // -------------------------------------------------------------------
       // run a spinner to indicate activity of 'nbInteract' if enabled
-      // -----------------------------------------------------------------------
+      // -------------------------------------------------------------------
       $(document).ready(function() {
-        if (moduleOptions.indicate_nbi_activity) {
+        if (nbiIndicateNbiActivity && !spinnerStarted) {
+          spinnerStarted = true;
           target  = document.getElementById('content');
           spinner = new Spinner(spinnerOpts).spin(target);
         }
       });
 
       // -----------------------------------------------------------------------
-      // interactNotebook()
+      // register callbacks (actions) for all modals used
+      // -----------------------------------------------------------------------
+      if (nbiShowMessages) {
+        _this.registerNbiModalsCB();
+      }
+
+      // -----------------------------------------------------------------------
+      // interactNbiNotebooks()
       // connect to the configured BinderHub instance to create a
       // Jupyter kernel if required
       // -----------------------------------------------------------------------
-      _this.interactNotebook(moduleOptions);
+      _this.interactNbiNotebooks(moduleOptions);
 
     }, // END init
+
+    // -------------------------------------------------------------------------
+    // initMathJax()
+    // load|configure MathJax at runtime
+    // See: https://docs.mathjax.org/en/v2.7-latest/options/preprocessors/tex2jax.html
+    // -------------------------------------------------------------------------
+    initMathJax: function () {
+      var scriptMathjax       = document.createElement('script');
+      var scriptMathjaxConfig = document.createElement('script');
+
+      scriptMathjax.setAttribute('src','//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML');
+
+      scriptMathjaxConfig.setAttribute('type','text/x-mathjax-config');
+      scriptMathjaxConfig.innerHTML = `
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                processEscapes: true,
+                processEnvironments: true,
+                processClass: "mathjax",
+                ignoreClass: "nomathjax"
+            },
+            // jadams, 2022-04-22, NOTE: 'MathJax_Display' overloaded by
+            // THEME CSS. Unclear how to configure 'HTML-CSS' correctly.
+            //
+            // Center justify equations in code and markdown cells. Elsewhere
+            // we use CSS to left justify single line equations in code cells.
+            displayAlign: 'center',
+            "HTML-CSS": {
+                styles: {'.MathJax_Display': {
+                  "margin": 0,
+                }},
+                linebreaks: { automatic: true }
+            }
+        });
+      `;
+
+      // add Mathjax resources
+      //
+      document.head.appendChild(scriptMathjax);
+      document.head.appendChild(scriptMathjaxConfig);
+
+      return;
+    }, // END intMathjax
 
     // -------------------------------------------------------------------------
     // loadNbiNoteBooks()
@@ -204,6 +265,26 @@ j1.adapter.nbinteract = (function (j1, window) {
       notebooks.forEach (function (elm) {
         if (elm.notebook.enabled) {
           notebook = elm.notebook;
+
+          // Overload notebook settings
+          //
+          // if (typeof notebook.show_nbi_messages == 'undefined') {
+          //   notebook.show_nbi_messages = true;
+          // }
+          // nbiShowMessages         = notebook.show_nbi_messages == false  ? nbiShowMessages = false : nbiShowMessages;
+          // nbiIndicateNbiActivity  = notebook.indicate_nbi_activity == false ? nbiIndicateNbiActivity = false : nbiIndicateNbiActivity;
+
+          // -------------------------------------------------------------------
+          // run a spinner to indicate activity of 'nbInteract' if enabled
+          // -------------------------------------------------------------------
+          // $(document).ready(function() {
+          //   if (nbiIndicateNbiActivity && !spinnerStarted) {
+          //     spinnerStarted = true;
+          //     target  = document.getElementById('content');
+          //     spinner = new Spinner(spinnerOpts).spin(target);
+          //   }
+          // });
+
           var notebook_id = notebook.id;
           var $selector = $('#' + notebook_id);
 
@@ -223,13 +304,13 @@ j1.adapter.nbinteract = (function (j1, window) {
     },
 
     // -------------------------------------------------------------------------
-    // interactNotebook()
+    // interactNbiNotebooks()
     // connect to the configured BinderHub instance to create a
     // Jupyter kernel if required. A BinderHub instance in created
     // on a per notebook basis but trigeered only done once,
     // controlled by nbinteract_prepared.
     // -------------------------------------------------------------------------
-    interactNotebook: function (options) {
+    interactNbiNotebooks: function (options) {
       var notebook = options;
 
       // initialize state flag
@@ -244,7 +325,7 @@ j1.adapter.nbinteract = (function (j1, window) {
       {% assign notebook_baseUrl  = item.notebook.baseUrl %}
       {% assign notebook_provider = item.notebook.provider %}
       -------------------------------------------------------------------------- {% endcomment %}
-      {% for item in notebook_options.notebooks %} {% if item.notebook.enabled %}
+      {% for item in nbinteract_options.notebooks %} {% if item.notebook.enabled %}
       {% assign notebook_id       = item.notebook.id %}
 
       if ($('#{{notebook_id}}').length) {
@@ -266,9 +347,44 @@ j1.adapter.nbinteract = (function (j1, window) {
                 j1API:    j1,
               });
 
-              // genetae a jupyter kernel at BinderHub
+              // generate a jupyter kernel via BinderHub
               interact.prepare();
-              nbinteract_prepared = true
+              nbinteract_prepared = true;
+
+              // issue an error if the NBI (init) button never removed by
+              // nbInteract-core (util or manager)
+              // TODO:  The 'timeout' condition should be replaced
+              //        state-based triggered from nbInteract-core.
+              //
+              window.setTimeout(function() {
+                var nbiButtonState = _this.getNbiButtonState();
+                if (nbiButtonState) {
+                  // button NOT removed
+                  logger.warn('NBI initialialization failed on notebook: {{notebook_id}}');
+                  // hide the info modal
+                  $(nbiModalSuccessID).modal('hide');
+
+                  // show the error modal
+                  $(nbiModalSuccessID).on('hidden.bs.modal', function () {
+                    if ($(nbiModalErrorID).is(':hidden')) {
+                      var messageErrorUL = document.getElementById(nbiModalErrorMessagesID);
+                      _this.appendModalMessage(messageErrorUL, 'NBI initialialization failed for notebook: {{notebook_id}}')
+                      $(nbiModalErrorID).modal('show');
+
+                      // auto-close the error modal
+                      if (nbiModalAutoClose) {
+                        window.setTimeout(function() {
+                          $(nbiModalErrorID).modal('hide');
+                        }, nbiModalAutoCloseDelay);
+                      }
+                    }
+                  });
+                } else {
+                  // button removed
+                  logger.info('NBI initialized successfully.');
+                }
+              }, nbiInitTimeout);
+
             }
 
             clearInterval(dependencies_met_nb_loaded);
@@ -288,12 +404,14 @@ j1.adapter.nbinteract = (function (j1, window) {
     loadNotebookHTML: function (options) {
       var html_data_path    = options.xhr_data_path + '/' + options.xhr_data;
       var id                = options.xhr_container_id;
+      var mathjaxEnabled    = options.use_mathjax;
       var $selector         = $('#' + id);
       var logText;
 
       var cb_load_closure = function(id) {
         return function (responseTxt, statusTxt, xhr) {
           var logger = log4javascript.getLogger('j1.adapter.loadHTML');
+
           if (statusTxt === 'success') {
             j1.setXhrDataState(id, statusTxt);
             j1.setXhrDomState(id, 'pending');
@@ -308,9 +426,6 @@ j1.adapter.nbinteract = (function (j1, window) {
               return '<button class="' + options.buttonStyles + ' js-nbinteract-widget"> Loading widgets ...</button>';
             });
 
-            // disable (Google) translation for all input_area HTML elements
-            // see: https://www.codingexercises.com/replace-all-instances-of-css-class-in-vanilla-js
-            //
             // disable (Google) translation for all input_area|output_area HTML elements
             // see: https://www.codingexercises.com/replace-all-instances-of-css-class-in-vanilla-js
             // see: https://wiki.selfhtml.org/wiki/JavaScript/Operatoren/Rest-_oder_Spread-Operator
@@ -322,31 +437,31 @@ j1.adapter.nbinteract = (function (j1, window) {
               }
             });
 
-            // // disable MathJax for all output_area HTML elements
-            // //
-            // var output_area = document.getElementsByClassName('output_area');
-            // [...output_area].forEach(function(x) {
-            //   if (!x.className.includes('nomathjax')) {
-            //     x.className += " nomathjax"
-            //   }
-            // });
+            // disable MathJax for all output_area HTML elements
             //
-            // // enable MathJax for all cell HTML elements if enabled
-            // // for a (speific) notebook
-            // var cell = document.getElementsByClassName('cell');
-            // if (mathjaxEnabled) {
-            //   [...cell].forEach(function(x) {
-            //     if (!x.className.includes('mathjax')) {
-            //       x.className += " mathjax"
-            //     }
-            //   });
-            // } else {
-            //   [...cell].forEach(function(x) {
-            //     if (!x.className.includes('nomathjax')) {
-            //       x.className += " nomathjax"
-            //     }
-            //   });
-            // }
+            var output_area = document.getElementsByClassName('output_area');
+            [...output_area].forEach(function(x) {
+              if (!x.className.includes('nomathjax')) {
+                x.className += " nomathjax"
+              }
+            });
+
+            // enable MathJax for all cell HTML elements if enabled
+            // for a (speific) notebook
+            var cell = document.getElementsByClassName('cell');
+            if (mathjaxEnabled) {
+              [...cell].forEach(function(x) {
+                if (!x.className.includes('mathjax')) {
+                  x.className += " mathjax"
+                }
+              });
+            } else {
+              [...cell].forEach(function(x) {
+                if (!x.className.includes('nomathjax')) {
+                  x.className += " nomathjax"
+                }
+              });
+            }
 
             // NOTE: DISABLED. Doesn't work that way. The class 'nbinteract-hide_in'
             // is used in combination with hidden code cells as well!
@@ -361,11 +476,10 @@ j1.adapter.nbinteract = (function (j1, window) {
             // var input_area = document.getElementsByClassName('input_area');
             // [...input_area].forEach(x => x.className += " notranslate");
 
-
             // cleanup headlines in notebook HTML and add an id used by toccer
             //
             $selector.find('h1').replaceWith( function() {
-              // return '<' + options.setHeadings + ' id="' + $(this)[0].id + '">' + $(this).text().slice(0,-1) + '</' + options.heading + '>';
+              // return '<h1 id="' + $(this)[0].id.replace(/\$/g, '') + '">' + $(this).text().slice(0,-1) + '</h1>';
               return '<h1 id="' + $(this)[0].id + '">' + $(this).text().slice(0,-1) + '</h1>';
             });
 
@@ -388,10 +502,11 @@ j1.adapter.nbinteract = (function (j1, window) {
             logText = '\n' + 'data loaded successfully on id: ' + id;
             logger.info(logText);
           }
+
           if (statusTxt === 'error') {
             // jadams, 2020-07-21: to be checked why id could be UNDEFINED
             if (typeof(id) != "undefined") {
-              state = 'failed';
+              var state = 'failed';
               logger.info('\n' + 'set state for ' + mod + ' to: ' + state);
               // jadams, 2020-07-21: intermediate state should DISABLED
               // executeFunctionByName(mod + '.setState', window, state);
@@ -423,7 +538,7 @@ j1.adapter.nbinteract = (function (j1, window) {
 
     // -------------------------------------------------------------------------
     // registerNbiModalsCB()
-    // regsiter callbacks for modals used
+    // regsiter callbacks for all (NBI) modals used
     // -------------------------------------------------------------------------
     registerNbiModalsCB: function () {
 
@@ -467,7 +582,7 @@ j1.adapter.nbinteract = (function (j1, window) {
           logger.debug('modal closed nbiModalTLDanger: remove all messages');
           _this.removeModalMessages(nbiModalErrorMessagesID);
         }
-        if (moduleOptions.indicate_nbi_activity) {
+        if (nbiIndicateNbiActivity) {
           spinner.stop();
         }
       });
@@ -475,7 +590,7 @@ j1.adapter.nbinteract = (function (j1, window) {
 
     // -------------------------------------------------------------------------
     // loadNbiModals()
-    // Load HTML data for all modals used
+    // Load HTML data for all (NBI) modals used
     // -------------------------------------------------------------------------
     loadNbiModals: function () {
 
@@ -571,7 +686,7 @@ j1.adapter.nbinteract = (function (j1, window) {
               </div>
               <!-- Body -->
               <div id="nbiModalErrorBody" class="modal-body">
-                <p> Initializing your Binder failed:</p>
+                <p> Initializing NbInteract failed:</p>
                 <div>
                   <ul id="nbiModalErrorMessages"></ul>
                 </div>
@@ -631,7 +746,7 @@ j1.adapter.nbinteract = (function (j1, window) {
         logger.debug('\n' + 'state: ' + _this.getState());
         logger.info('\n' + 'initializing module finished');
 
-        if (moduleOptions.show_nbi_messages) {
+        if (nbiShowMessages) {
           if (nbiModalAutoClose) {
             window.setTimeout(function() {
                $(nbiModalSuccessID).modal('hide');
@@ -639,7 +754,7 @@ j1.adapter.nbinteract = (function (j1, window) {
           }
         }
 
-        if (moduleOptions.indicate_nbi_activity) {
+        if (nbiIndicateNbiActivity) {
           spinner.stop();
         }
 
@@ -665,7 +780,7 @@ j1.adapter.nbinteract = (function (j1, window) {
 
         // show the info modal
         //
-        if (moduleOptions.show_nbi_messages) {
+        if (nbiShowMessages) {
           if ($(nbiModalSuccessID).is(':hidden')) {
             $(nbiModalSuccessID).modal('show');
           }
@@ -696,7 +811,7 @@ j1.adapter.nbinteract = (function (j1, window) {
         //   spinner.stop();
         // }
 
-        if (moduleOptions.show_nbi_messages) {
+        if (nbiShowMessages) {
           // hide the info modal if shown
           //
           $(nbiModalSuccessID).on('shown.bs.modal', function () {
@@ -723,10 +838,40 @@ j1.adapter.nbinteract = (function (j1, window) {
             }
           });
         }
+
+        if (nbiIndicateNbiActivity) {
+          spinner.stop();
+        }
+
       } // END message command/error
 
       return true;
     }, // END messageHandler
+
+    // -------------------------------------------------------------------------
+    // getNbiButtonsState()
+    // Gets the current (processing) state of NBI widget buttons
+    // -------------------------------------------------------------------------
+    getNbiButtonState: function () {
+      var state;
+      var cellButtons = document.querySelectorAll('.js-nbinteract-widget')
+      if (cellButtons.length) {
+        state = true;
+      } else {
+        state = false;
+      }
+
+      // cellButtons.forEach (function (elm) {
+      //   state = elm.innerHTML;
+      //   if (state == 'Initializing widgets ...') {
+      //     state = 'init';
+      //    } else {
+      //      state = 'bla';
+      //    }
+      // });
+
+      return state;
+     }, // END getNbiButtonsState
 
     // -------------------------------------------------------------------------
     // setState()
@@ -744,6 +889,10 @@ j1.adapter.nbinteract = (function (j1, window) {
       return _this.state;
     }, // END getState
 
+    // -------------------------------------------------------------------------
+    // appendModalMessage()
+    // Appends a message to given (NBI) modal
+    // -------------------------------------------------------------------------
     appendModalMessage: function (elmID, msg) {
       var li = document.createElement('li');
 
@@ -752,6 +901,10 @@ j1.adapter.nbinteract = (function (j1, window) {
         li.innerHTML = li.innerHTML + msg;
     },  // END appendModalMessage
 
+    // -------------------------------------------------------------------------
+    // removeModalMessages()
+    // Remove (clear) all modal messages if a given (NBI) modal
+    // -------------------------------------------------------------------------
     removeModalMessages: function (elmID) {
       var ul = document.getElementById(elmID);
       var listLength = ul.children.length;

@@ -103,17 +103,6 @@ settings:
         use_mathjax:                    false
 
     # --------------------------------------------------------------------------
-    # odes_in_python
-    #
-    - notebook:
-        enabled:                        false
-
-        id:                             j1_odes_in_python
-        xhr_data:                       j1_odes-in-python.html
-        xhr_data_path:                  /pages/public/jupyter/notebooks/html
-        use_mathjax:                    false
-
-    # --------------------------------------------------------------------------
     # ode_selected
     #
     - notebook:
@@ -125,7 +114,7 @@ settings:
         use_mathjax:                    false
 
     # --------------------------------------------------------------------------
-    # climate-change-forecast
+    # climate-change-forecast (static notebook)
     #
     - notebook:
         enabled:                        true
@@ -133,16 +122,16 @@ settings:
         id:                             j1_climate_change_forecast
         xhr_data:                       j1_climate_change_forecast.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
-        use_mathjax:                    false
+        use_mathjax:                    true
 
     # --------------------------------------------------------------------------
-    # climate-test
+    # odes_in_python
     #
     - notebook:
         enabled:                        false
 
-        id:                             climate_test
-        xhr_data:                       climate-test.html
+        id:                             j1_odes_in_python
+        xhr_data:                       j1_odes-in-python.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/html
         use_mathjax:                    false
 

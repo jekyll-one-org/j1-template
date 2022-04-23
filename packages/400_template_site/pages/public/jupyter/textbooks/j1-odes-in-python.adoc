@@ -12,11 +12,13 @@ tags:                                   [ Binder, Jupyter, Notebooks ]
 
 scrollbar:                              false
 fab_menu_id:                            open_toc_reload
+personalization:                        true
+
 
 permalink:                              /pages/public/jupyter/textbooks/odes-in-python/
 regenerate:                             false
 
-resources:                              [ nbinteract ]
+resources:                              [ nbinteract, rouge ]
 resource_options:
   - attic:
       padding_top:                      400

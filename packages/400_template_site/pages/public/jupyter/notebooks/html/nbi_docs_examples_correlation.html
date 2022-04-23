@@ -43,12 +43,12 @@
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="The-correlation-coefficient">The correlation coefficient<a class="anchor-link" href="#The-correlation-coefficient">&#182;</a></h4><p>The <em>correlation coefficient</em> measures the strength of the linear relationship between two variables. Graphically, it measures how clustered the scatter diagram is around a straight line.</p>
-<p>The term <em>correlation coefficient</em> isn't easy to say, so it is usually shortened to <em>correlation</em> and denoted by $r$.</p>
+<p>The term <em>correlation coefficient</em> is a quite long word, so usually the term shortened to <em>correlation</em> and denoted by $r$.</p>
 <p>Here are some mathematical facts about $r$ that we will just observe by simulation.</p>
 <ul>
-<li>The correlation coefficient $r$ is a number between $-1$ and 1.</li>
+<li>The correlation coefficient $r$ is a number between -1 and 1.</li>
 <li>$r$ measures the extent to which the scatter plot clusters around a straight line.</li>
-<li>$r = 1$ if the scatter diagram is a perfect straight line sloping upwards, and $r = -1$ if the scatter diagram is a perfect straight line sloping downwards.</li>
+<li>$r$ = 1 if the scatter diagram is a perfect straight line sloping upwards, and $r$ = -1 if the scatter diagram is a perfect straight line sloping downwards.</li>
 </ul>
 
 </div>
@@ -58,7 +58,7 @@
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The function <code>r_scatter</code> takes a value of $r$ as its argument and simulates a scatter plot with a correlation very close to $r$. Because of randomness in the simulation, the correlation is not expected to be exactly equal to $r$.</p>
 <p>Call <code>r_scatter</code> a few times, with different values of $r$ as the argument, and see how the scatter plot changes.</p>
-<p>When $r=1$ the scatter plot is perfectly linear and slopes upward. When $r=-1$, the scatter plot is perfectly linear and slopes downward. When $r=0$, the scatter plot is a formless cloud around the horizontal axis, and the variables are said to be <em>uncorrelated</em>.</p>
+<p>When $r$ = 1 the scatter plot is perfectly linear and slopes upward. When $r$ = -1, the scatter plot is perfectly linear and slopes downward. When $r$ = 0, the scatter plot is a formless cloud around the horizontal axis, and the variables are said to be <em>uncorrelated</em>.</p>
 
 </div>
 </div>
@@ -110,30 +110,16 @@
 
 </div>
 
-<div class="output_area">
-
-    
-
-
-
-  <div class="output_subarea output_widget_view ">
-    <button class="js-nbinteract-widget">
-      Loading widgets...
-    </button>
-  </div>
-
-</div>
-
 </div>
 </div>
 
   </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Calculating-$r$">Calculating $r$<a class="anchor-link" href="#Calculating-$r$">&#182;</a></h4><p>The formula for $r$ is not apparent from our observations so far. It has a mathematical basis that is outside the scope of this class. However, as you will see, the calculation is straightforward and helps us understand several of the properties of $r$.</p>
-<p><strong>Formula for $r$</strong>:</p>
-<p><strong>$r$ is the average of the products of the two variables, when both variables are measured in standard units.</strong></p>
-<p>Here are the steps in the calculation. We will apply the steps to a simple table of values of $x$ and $y$.</p>
+<h4 id="Calculating-the-correlation">Calculating the correlation<a class="anchor-link" href="#Calculating-the-correlation">&#182;</a></h4><p>The formula for $r$ is not apparent from our observations so far. It has a mathematical basis that is outside the scope of this class. However, as you will see, the calculation is straightforward and helps us understand several of the properties of $r$.</p>
+<p><strong>Formula</strong> for $r$:</p>
+<p>$r$ is the <strong>average of the products of the two variables</strong>, when both variables are measured in standard units.</p>
+<p>Here are the steps in the calculation. We will apply the steps to a simple table of values of <strong>x</strong> and <strong>y</strong>.</p>
 
 </div>
 </div>
@@ -180,23 +166,18 @@
         <tr>
             <td>1   </td> <td>2   </td>
         </tr>
-    </tbody>
         <tr>
             <td>2   </td> <td>3   </td>
         </tr>
-    </tbody>
         <tr>
             <td>3   </td> <td>1   </td>
         </tr>
-    </tbody>
         <tr>
             <td>4   </td> <td>5   </td>
         </tr>
-    </tbody>
         <tr>
             <td>5   </td> <td>2   </td>
         </tr>
-    </tbody>
         <tr>
             <td>6   </td> <td>7   </td>
         </tr>
@@ -236,20 +217,6 @@
 <div class="output_wrapper">
 <div class="output">
 
-
-<div class="output_area">
-
-    
-
-
-
-  <div class="output_subarea output_widget_view ">
-    <button class="js-nbinteract-widget">
-      Loading widgets...
-    </button>
-  </div>
-
-</div>
 
 <div class="output_area">
 
@@ -334,23 +301,18 @@
         <tr>
             <td>1   </td> <td>2   </td> <td>-1.46385          </td> <td>-0.648886         </td>
         </tr>
-    </tbody>
         <tr>
             <td>2   </td> <td>3   </td> <td>-0.87831          </td> <td>-0.162221         </td>
         </tr>
-    </tbody>
         <tr>
             <td>3   </td> <td>1   </td> <td>-0.29277          </td> <td>-1.13555          </td>
         </tr>
-    </tbody>
         <tr>
             <td>4   </td> <td>5   </td> <td>0.29277           </td> <td>0.811107          </td>
         </tr>
-    </tbody>
         <tr>
             <td>5   </td> <td>2   </td> <td>0.87831           </td> <td>-0.648886         </td>
         </tr>
-    </tbody>
         <tr>
             <td>6   </td> <td>7   </td> <td>1.46385           </td> <td>1.78444           </td>
         </tr>
@@ -408,23 +370,18 @@
         <tr>
             <td>1   </td> <td>2   </td> <td>-1.46385          </td> <td>-0.648886         </td> <td>0.949871                 </td>
         </tr>
-    </tbody>
         <tr>
             <td>2   </td> <td>3   </td> <td>-0.87831          </td> <td>-0.162221         </td> <td>0.142481                 </td>
         </tr>
-    </tbody>
         <tr>
             <td>3   </td> <td>1   </td> <td>-0.29277          </td> <td>-1.13555          </td> <td>0.332455                 </td>
         </tr>
-    </tbody>
         <tr>
             <td>4   </td> <td>5   </td> <td>0.29277           </td> <td>0.811107          </td> <td>0.237468                 </td>
         </tr>
-    </tbody>
         <tr>
             <td>5   </td> <td>2   </td> <td>0.87831           </td> <td>-0.648886         </td> <td>-0.569923                </td>
         </tr>
-    </tbody>
         <tr>
             <td>6   </td> <td>7   </td> <td>1.46385           </td> <td>1.78444           </td> <td>2.61215                  </td>
         </tr>
@@ -497,7 +454,7 @@
 <ul>
 <li>$r$ is a pure number. It has no units. This is because $r$ is based on standard units.</li>
 <li>$r$ is unaffected by changing the units on either axis. This too is because $r$ is based on standard units.</li>
-<li>$r$ is unaffected by switching the axes. Algebraically, this is because the product of standard units does not depend on which variable is called $x$ and which $y$. Geometrically, switching axes reflects the scatter plot about the line $y=x$, but does not change the amount of clustering nor the sign of the association.</li>
+<li>$r$ is unaffected by switching the axes. Algebraically, this is because the product of standard units does not depend on which variable is called <strong>x</strong> and which <strong>y</strong>. Geometrically, switching axes reflects the scatter plot about the line <strong>y = x</strong>, but does not change the amount of clustering nor the sign of the association.</li>
 </ul>
 
 </div>
@@ -537,27 +494,13 @@
 
 </div>
 
-<div class="output_area">
-
-    
-
-
-
-  <div class="output_subarea output_widget_view ">
-    <button class="js-nbinteract-widget">
-      Loading widgets...
-    </button>
-  </div>
-
-</div>
-
 </div>
 </div>
 
   </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="The-correlation-function">The <code>correlation</code> function<a class="anchor-link" href="#The-correlation-function">&#182;</a></h4><p>We are going to be calculating correlations repeatedly, so it will help to define a function that computes it by performing all the steps described above. Let's define a function <code>correlation</code> that takes a table and the labels of two columns in the table. The function returns $r$, the mean of the products of those column values in standard units.</p>
+<h4 id="The-correlation-function">The correlation function<a class="anchor-link" href="#The-correlation-function">&#182;</a></h4><p>We are going to be calculating correlations repeatedly, so it will help to define a function that computes it by performing all the steps described above. Let's define a function <code>correlation</code> that takes a table and the labels of two columns in the table. The function returns $r$, the mean of the products of those column values in standard units.</p>
 
 </div>
 </div>
@@ -623,7 +566,7 @@
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;function __main__.correlation&gt;</pre>
+<pre>&lt;function __main__.correlation(t, x, y)&gt;</pre>
 </div>
 
 </div>
@@ -666,7 +609,7 @@
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.61741639718977093</pre>
+<pre>0.6174163971897709</pre>
 </div>
 
 </div>
@@ -709,7 +652,7 @@
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>0.61741639718977093</pre>
+<pre>0.6174163971897709</pre>
 </div>
 
 </div>
@@ -773,7 +716,7 @@
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>&lt;function __main__.correlation&gt;</pre>
+<pre>&lt;function __main__.correlation(t, x, y)&gt;</pre>
 </div>
 
 </div>

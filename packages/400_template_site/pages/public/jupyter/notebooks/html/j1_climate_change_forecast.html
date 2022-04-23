@@ -8,7 +8,7 @@
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Time-Series-Modeling">Time Series Modeling<a class="anchor-link" href="#Time-Series-Modeling">&#182;</a></h1><p>There are several things that are time dependent, I mean, today's values can have an effective relationship to values that have occurred in the past.</p>
+<h3 id="Time-Series-Modeling">Time Series Modeling<a class="anchor-link" href="#Time-Series-Modeling">&#182;</a></h3><p>There are several things that are time dependent, I mean, today's values can have an effective relationship to values that have occurred in the past.</p>
 <p>Some examples related to the subject are demand of products during a certain period, harvest of commodities, stock prices and of course what we will try to predict, the climate change in Rio De Janeiro.</p>
 <p>Currently there are several types of time series forecast models, in this notebook I will try to use <a href="https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average">Seasonal ARIMA Models</a></p>
 <p>First we need to import the essential libraries:</p>
@@ -142,11 +142,9 @@
   </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Below I'll try to make a brief explanation about ARIMA models:</p>
-<h1><font color=green>SARIMA Model (p, d, q)(P, D, Q, S)</font>:</h1>
-<p>SARIMA stands for Seasonal Auto Regressive Integrated Moving Average, The name scares, but this is not as scary as it seems.</p>
-<h2><font color=green>Non seasonal ARIMA</font>:</h2>
-<p>We can split the Arima term into three terms, AR, I, MA:</p>
+<h3 id="The-ARIMA-models">The ARIMA models<a class="anchor-link" href="#The-ARIMA-models">&#182;</a></h3><p>Below I'll try to make a brief explanation about ARIMA models.</p>
+<h5 id="SARIMA-Model-(p,-d,-q)(P,-D,-Q,-S)">SARIMA Model (p, d, q)(P, D, Q, S)<a class="anchor-link" href="#SARIMA-Model-(p,-d,-q)(P,-D,-Q,-S)">&#182;</a></h5><p>SARIMA stands for Seasonal Auto Regressive Integrated Moving Average, The name scares, but this is not as scary as it seems.</p>
+<h4 id="Non-seasonal-ARIMA">Non seasonal ARIMA<a class="anchor-link" href="#Non-seasonal-ARIMA">&#182;</a></h4><p>We can split the Arima term into three terms, AR, I, MA:</p>
 <ul>
 <li><p><strong>AR(p)</strong> stands for <em>autoregressive model</em>, the <code>p</code> parameter is an integer that confirms how many lagged series are going to be used to forecast periods ahead, example:</p>
 <ul>
@@ -171,8 +169,7 @@
 </ul>
 </li>
 </ul>
-<h2><font color=green>Seasonal ARIMA</font>:</h2>
-<p>The <strong>p, d, q</strong> parameters are capitalized to differ from the non seasonal parameters.</p>
+<h4 id="Seasonal-ARIMA">Seasonal ARIMA<a class="anchor-link" href="#Seasonal-ARIMA">&#182;</a></h4><p>The <strong>p, d, q</strong> parameters are capitalized to differ from the non seasonal parameters.</p>
 <ul>
 <li><p><strong>SAR(P)</strong> is the seasonal autoregression of the series.</p>
 <ul>
@@ -195,11 +192,9 @@
 </li>
 </ul>
 <ul>
-<li><p><strong>S</strong> It's the seasonal period where you are going to calculate the the P, D, Q terms. If there is a 52 week seasonal correlation this is the number to be used on the 'S' parameter</p>
-<p>## <font color=green>Trend</font>:</p>
-</li>
+<li><strong>S</strong> It's the seasonal period where you are going to calculate the the P, D, Q terms. If there is a 52 week seasonal correlation this is the number to be used on the 'S' parameter</li>
 </ul>
-<p>We will use <a href="https://www.statsmodels.org/dev/generated/statsmodels.tsa.statespace.sarimax.SARIMAX.html">SARIMAX</a> to create a forecast, the following terms are a definition to the trend:</p>
+<h4 id="Trend">Trend<a class="anchor-link" href="#Trend">&#182;</a></h4><p>We will use <a href="https://www.statsmodels.org/dev/generated/statsmodels.tsa.statespace.sarimax.SARIMAX.html">SARIMAX</a> to create a forecast, the following terms are a definition to the trend:</p>
 <ul>
 <li>'n' when there is no trend to be used (default).</li>
 <li>‘c’ indicates a constant (i.e. a degree zero component of the trend polynomial)</li>
@@ -555,7 +550,7 @@ Freq: M, Name: Temp, dtype: float64</pre>
 </ul>
 </li>
 </ul>
-<p>For more interesting sources you can read the materials on this amazing website made by Mr. Robert Nau: <a href="http://people.duke.edu/~rnau/411home.htm"> Duke University</a>, also you can check <a href="https://machinelearningmastery.com/">Jason Brownlee's</a> website, which have a lot of time series content.</p>
+<p>For more interesting sources you can read the materials on this amazing website made by Mr. Robert Nau: <a href="http://people.duke.edu/~rnau/411home.htm"> Duke University</a>, also you can check <a href="machinelearningmastery.com">Jason Brownlee's</a> website, which have a lot of time series content.</p>
 
 </div>
 </div>

@@ -23,6 +23,11 @@
   margin-left: 1rem !important;
 }
 
+span.MathJax {
+    margin-left: 0.25rem;
+    margin-right: 0.25rem;
+}
+
 /*
   global CSS styles
   ------------------------------------------------------------------------------
@@ -84,7 +89,7 @@ pre {
 
 /* jadams, 2022-04-22 */
 .widget-inline-hbox .widget-label {
-  width: 6rem !important;
+  /* width: 6rem !important; */
 }
 
 /* jadams, 2022-04-22 */

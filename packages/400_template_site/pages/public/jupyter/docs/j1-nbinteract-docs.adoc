@@ -11,7 +11,8 @@ categories:                             [ J1, Integration ]
 tags:                                   [ NbInteract ]
 
 scrollbar:                              false
-fab_menu_id:                            page_ctrl_simple                        # open_toc_reload
+fab_menu_id:                            page_ctrl_simple
+personalization:                        true
 
 permalink:                              /pages/public/jupyter/docs/j1-nbinteract-docs/
 regenerate:                             true

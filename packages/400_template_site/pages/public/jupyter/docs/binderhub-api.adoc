@@ -11,6 +11,7 @@ categories:                             [ Software, Python ]
 tags:                                   [ Binder, API ]
 
 scrollbar:                              true
+personalization:                        true
 
 permalink:                              /pages/public/jupyter/docs/binderhub-api/
 regenerate:                             false
