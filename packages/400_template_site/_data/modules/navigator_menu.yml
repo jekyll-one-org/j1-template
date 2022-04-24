@@ -165,14 +165,14 @@
           icon:                         book-open-page-variant
           dropdown:
 
-            - title:                    J1 Textbook Examples
+            - title:                    Widget Examples
               href:                     /pages/public/jupyter/textbooks/j1-nb-test/
               icon:                     script-text-play-outline
 
-            - title:                    ODE in Python (interactive)
+            - title:                    Interactive Evaluation
               href:                     /pages/public/jupyter/textbooks/odes-in-python/
               icon:                     script-text-play-outline
-            - title:                    Climate Change (static)
+            - title:                    Climate Change
               href:                     /pages/public/jupyter/textbooks/climate-change-forecast/
               icon:                     script-text-play-outline
 

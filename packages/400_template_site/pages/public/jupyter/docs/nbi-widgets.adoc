@@ -3,9 +3,9 @@ title:                                  J1 NBI
 tagline:                                nbinteract widgets
 date:                                   2022-03-28 00:00:00
 description: >
-                                        Things you should know about this site,
-                                        the people and the software and/or
-                                        services provided.
+                                        The package nbinteract aims to enable authors and educators to create and
+                                        share interactive web pages easily. Interactive explanations of concepts are
+                                        useful for communicating and explaining tricky concepts.
 
 categories:                             [ Software, Python ]
 tags:                                   [ Binder, API ]

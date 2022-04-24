@@ -3,9 +3,12 @@ title:                                  Jupyter
 tagline:                                JupyterHub
 date:                                   2022-03-28 00:00:00
 description: >
-                                        Things you should know about this site,
-                                        the people and the software and/or
-                                        services provided.
+                                        JupyterHub brings the power of notebooks to groups of users. It
+                                        gives users access to computational environments and resources without
+                                        burdening the users with installation and maintenance tasks. Users, including
+                                        students, researchers, and data scientists, can get their work done in
+                                        their own workspaces on shared resources which can be managed efficiently
+                                        by system administrators.
 
 categories:                             [ Software, Python ]
 tags:                                   [ JupyterLab, API ]

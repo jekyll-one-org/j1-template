@@ -3,9 +3,10 @@ title:                                  Binder
 tagline:                                BinderHub
 date:                                   2022-03-28 00:00:00
 description: >
-                                        Things you should know about this site,
-                                        the people and the software and/or
-                                        services provided.
+                                        Binder allows you to create custom computing environments that can be
+                                        shared and used by many remote users. A Binder service is powered by
+                                        BinderHub, an open-source tool that runs on Kubernetes, a portable,
+                                        extensible, open-source platform for managing containerized services.
 
 categories:                             [ Software, Python ]
 tags:                                   [ Binder, API ]

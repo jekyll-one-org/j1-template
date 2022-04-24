@@ -3,9 +3,9 @@ title:                                  Climate Change
 tagline:                                static notebook
 date:                                   2022-03-28 00:00:00
 description: >
-                                        Things you should know about this site,
-                                        the people and the software and/or
-                                        services provided.
+                                        The package nbinteract aims to enable authors and educators to create and
+                                        share interactive web pages easily. Interactive explanations of concepts are
+                                        useful for communicating and explaining tricky concepts.
 
 categories:                             [ Software, Python ]
 tags:                                   [ Binder, Jupyter, Notebooks ]
@@ -56,5 +56,8 @@ image:https://mybinder.org/badge_logo.svg[Binder, link="https://mybinder.org/v2/
 endif::[]
 
 == Climate change forecasting
+
+The textbook is an example of a *static* Jupyter notebook. Jupyter
+Notebooks don't need to contain *interactive* widgets.
 
 textbook::j1_climate_change_forecast[]

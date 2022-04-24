@@ -1,11 +1,11 @@
 ---
 title:                                  ODEs in Python
-tagline:                                interactive notebook
+tagline:                                interactive evaluation
 date:                                   2022-03-28 00:00:00
 description: >
-                                        Things you should know about this site,
-                                        the people and the software and/or
-                                        services provided.
+                                        The package nbinteract aims to enable authors and educators to create and
+                                        share interactive web pages easily. Interactive explanations of concepts are
+                                        useful for communicating and explaining tricky concepts.
 
 categories:                             [ Software, Python ]
 tags:                                   [ Binder, Jupyter, Notebooks ]
@@ -51,16 +51,24 @@ resource_options:
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // image:/assets/images/badges/myBinder.png[Binder, link="https://mybinder.org/", {browser-window--new}]
 // image:/assets/images/badges/docsBinder.png[Binder, link="https://mybinder.readthedocs.io/en/latest/", {browser-window--new}]
+// See: https://towardsdatascience.com/ordinal-differential-equation-ode-in-python-8dc1de21323b
 
 ifeval::[{binder-badges-enabled} == true]
 image:https://mybinder.org/badge_logo.svg[Binder, link="https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/main", {browser-window--new}]
 endif::[]
 
 == ODEs in Python
-// See: https://towardsdatascience.com/ordinal-differential-equation-ode-in-python-8dc1de21323b
 
-lorem:sentences[5]
+An ordinary differential equation (often abbreviated to ODE) is one
+Differential equation where only derivatives of the desired function
+occur after exactly one variable.
 
-// textbook::odes_in_python[]
+Many physical, chemical and biological processes in nature are described
+mathematically with such equations. Examples are the radioactive decay,
+motion processes of bodies, many types of Oscillation processes or the growth
+behavior of animal populations.
 
-textbook::j1_ode_selected[]
+In scientific models, ordinary differential equations are used, therefore
+often used to analyze, simulate, or to be able to make predictions.
+
+textbook::j1_odes_in_python[]

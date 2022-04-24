@@ -8,8 +8,7 @@
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Time-Series-Modeling">Time Series Modeling<a class="anchor-link" href="#Time-Series-Modeling">&#182;</a></h3><p>There are several things that are time dependent, I mean, today's values can have an effective relationship to values that have occurred in the past.</p>
-<p>Some examples related to the subject are demand of products during a certain period, harvest of commodities, stock prices and of course what we will try to predict, the climate change in Rio De Janeiro.</p>
+<h3 id="Time-Series-Modeling">Time Series Modeling<a class="anchor-link" href="#Time-Series-Modeling">&#182;</a></h3><p>There are several things that are time dependent, I mean, today's values can have an effective relationship to values that have occurred in the past. Some examples related to the subject are demand of products during a certain period, harvest of commodities, stock prices and of course what we will try to predict, the climate change in Rio De Janeiro.</p>
 <p>Currently there are several types of time series forecast models, in this notebook I will try to use <a href="https://en.wikipedia.org/wiki/Autoregressive_integrated_moving_average">Seasonal ARIMA Models</a></p>
 <p>First we need to import the essential libraries:</p>
 
@@ -196,11 +195,11 @@
 </ul>
 <h4 id="Trend">Trend<a class="anchor-link" href="#Trend">&#182;</a></h4><p>We will use <a href="https://www.statsmodels.org/dev/generated/statsmodels.tsa.statespace.sarimax.SARIMAX.html">SARIMAX</a> to create a forecast, the following terms are a definition to the trend:</p>
 <ul>
-<li>'n' when there is no trend to be used (default).</li>
-<li>‘c’ indicates a constant (i.e. a degree zero component of the trend polynomial)</li>
+<li>'n' when there is no trend to be used for default.</li>
+<li>‘c’ indicates a constant, i.e. a degree zero component of the trend polynomial</li>
 <li>‘t’ indicates a linear trend with time</li>
 <li>‘ct’ is both trend and constant. </li>
-<li>Can also be specified as an iterable defining the polynomial as in numpy.poly1d, where [1,1,0,1] would denote a+bt+ct3</li>
+<li>Can also be specified as an iterable defining the polynomial as in numpy.poly1d</li>
 </ul>
 
 </div>
@@ -535,8 +534,8 @@ Freq: M, Name: Temp, dtype: float64</pre>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As we can see, the series has a small uptrend and it appears that there is some seasonality with higher temperatures at the begining and end of the year and lower temperatures around the middle of the year.</p>
-<p>To create a time series forecast, the series must be stationary (constant mean, variance and autocorrelation).</p>
-<p>One way to check if the series is stationary is using the <strong>adfuller function</strong>, if the P-Value is lower than 5% (usual number used for this kind of study) the series is stationary and you can start creating your model.</p>
+<p>To create a time series forecast, the series must be stationary. Constant mean, variance and autocorrelation.</p>
+<p>One way to check if the series is stationary is using the <strong>adfuller function</strong>, if the P-Value is lower than 5%, the series is stationary and you can start creating your model.</p>
 <p>If the series isn't stationary you can do some data transformation like using natural logarithm, deflation, differencing, etc.</p>
 <p>Below is the function that I used to check the stationarity, it plots:</p>
 <ul>
@@ -1053,7 +1052,7 @@ It&#39;s a decrease of -64.86% in the RMSE
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Analyzing the plots above we can see that the predictions fit very well on the current values.</p>
-<p>The <strong>Error vs Predicted values</strong> has a linear distribution (the errors are between -1.5 and +1.5 while the temperature increases).</p>
+<p>The <strong>Error vs Predicted values</strong> has a linear distribution, the errors are between <strong>-1.5</strong> and <strong>+1.5</strong> while the temperature increases.</p>
 <p>The QQ Plot shows a normal pattern with some little outliers and,</p>
 <p>The autocorrelation plot shows a positive spike over the confidence interval just above the second lag, but I believe that there is no need for more changes.</p>
 <p>Finally it's time to extrapolate the prediction in the <strong>test set</strong> for the last 12 months</p>
