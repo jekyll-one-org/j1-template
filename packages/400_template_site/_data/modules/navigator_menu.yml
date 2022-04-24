@@ -158,7 +158,7 @@
     # Experimental
     #
     - title:                            Experimental
-      icon:                             test-tube                               # head-flash-outline
+      icon:                             test-tube
       dropdown:
 
         - title:                        Textbooks
@@ -184,9 +184,9 @@
               href:                     /pages/public/jupyter/docs/j1-nbinteract-docs/
               icon:                     alpha-j-box
 
-            - title:                    NBI Docs (J1 Textbook)
+            - title:                    NBI Docs
               href:                     /pages/public/jupyter/textbooks/nbinteract-docs/
-              icon:                     script-text-play-outline
+              icon:                     alpha-j-box
             - title:                    NBI Widgets
               href:                     /pages/public/jupyter/docs/nbi-widgets/
               icon:                     book

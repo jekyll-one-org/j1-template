@@ -15,6 +15,7 @@ module J1
     # log_level - (optional, symbol) the log level
     #
     # Returns nothing
+    # --------------------------------------------------------------------------
     def initialize(writer, level = :info)
       @messages = []
       @writer = writer
@@ -26,6 +27,7 @@ module J1
     # level - (symbol) the log level
     #
     # Returns nothing
+    # --------------------------------------------------------------------------
     def log_level=(level)
       writer.level = LOG_LEVELS.fetch(level)
     end
@@ -46,6 +48,7 @@ module J1
     # message - the message detail
     #
     # Returns nothing
+    # --------------------------------------------------------------------------
     def debug(topic, message = nil)
       writer.debug(message(topic, message))
     end
@@ -56,6 +59,7 @@ module J1
     # message - the message detail
     #
     # Returns nothing
+    # --------------------------------------------------------------------------
     def info(topic, message = nil)
       writer.info(message(topic, message))
     end
@@ -66,6 +70,7 @@ module J1
     # message - the message detail
     #
     # Returns nothing
+    # --------------------------------------------------------------------------
     def warn(topic, message = nil)
       writer.warn(message(topic, message))
     end
@@ -86,6 +91,7 @@ module J1
     # message - the message detail (can be omitted)
     #
     # Returns nothing
+    # --------------------------------------------------------------------------
     def abort_with(topic, message = nil)
       error(topic, message)
       abort
@@ -97,6 +103,7 @@ module J1
     # message - the message detail
     #
     # Returns the formatted message
+    # --------------------------------------------------------------------------
     def message(topic, message)
       msg = formatted_topic(topic) + message.to_s.gsub(%r!\s+!, " ")
       messages << msg
@@ -108,6 +115,7 @@ module J1
     # topic - the topic of the message, e.g. "Configuration file", "Deprecation", etc.
     #
     # Returns the formatted topic statement
+    # --------------------------------------------------------------------------
     def formatted_topic(topic)
       "#{topic} ".rjust(20)
     end

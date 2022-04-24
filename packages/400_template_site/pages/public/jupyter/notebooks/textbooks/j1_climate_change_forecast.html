@@ -407,7 +407,7 @@
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We can confirm that there is a constant increasing trend and that the average temperature increased from 23.5º to 24.5º, that's 4.25% in over100 years.</p>
-<p>Before we go on, i'm going to split the data in training, validation and test set. After training the model, I will use the last 5 years to do the data validation and test, being 48 months to do a month by month validation (walk forward) and 12 months to make an extrapolation for the future and compare to the test set:</p>
+<p>Before we go on, i'm going to split the data in training, validation and test set. After training the model, I will use the last 5 years to do the data validation and test, being 48 months to do a month by month validation and 12 months to make an extrapolation for the future and compare to the test set:</p>
 
 </div>
 </div>
@@ -549,7 +549,7 @@ Freq: M, Name: Temp, dtype: float64</pre>
 </ul>
 </li>
 </ul>
-<p>For more interesting sources you can read the materials on this amazing website made by Mr. Robert Nau: <a href="http://people.duke.edu/~rnau/411home.htm"> Duke University</a>, also you can check <a href="machinelearningmastery.com">Jason Brownlee's</a> website, which have a lot of time series content.</p>
+<p>For more interesting sources you can read the materials on this amazing website made by Mr. Robert Nau: <a href="http://people.duke.edu/~rnau/411home.htm"> Duke University</a>, also you can check <a href="https://machinelearningmastery.com/">Jason Brownlee's</a> website, which have a lot of time series content.</p>
 
 </div>
 </div>
@@ -737,7 +737,7 @@ The serie seems to be stationary
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>As the plots above showed, the first <strong>ACF</strong> lags have a gradual decay, while the <strong>PACF</strong> drops under the confidence interval after the third lag, this is an <strong>AR</strong> signature with a parameter of 3, so this is an <strong>AR(3)</strong> model.</p>
 <p>As we used a first seasonal difference, the <strong>ACF</strong> and <strong>PACF</strong> showed a significative drop in the 12th lag, it means an <strong>SMA</strong> signature with a parameter of 1 lag, resuming this is an <strong>SAR(1) with a first difference</strong>.</p>
-<p>Initially i'm going to work with the following (p,d,q) orders: (3, 0, 0), and with the following seasonal (P, D, Q, S) orders (0,1,1,12) and as the series has a clear uptrend i'm going to use it in the model ('c').</p>
+<p>Initially i'm going to work with the following (p,d,q) orders: (3, 0, 0), and with the following seasonal (P, D, Q, S) orders (0,1,1,12) and as the series has a clear uptrend i'm going to use it in the model.</p>
 <p>To start forecasting the validation set, I'm going to create a function to use one-step-forecast in the whole validation set and measure the error:</p>
 
 </div>
@@ -1242,8 +1242,7 @@ That is an improvement of 61.51%
   </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I Hope you liked this analysis, if you have any doubt or comment fell free to talk with me, also you can find me on my <a href="https://www.linkedin.com/in/leandro-rabelo-08722824">LinkedIn</a> or in my <a href="https://twitter.com/leandrovrabelo">Twitter</a></p>
-<p>Thanks!!!</p>
+<p>I Hope you liked this analysis, if you have any doubt or comment fell free to talk with me, also you can find me on my <a href="https://www.linkedin.com/in/leandro-rabelo-08722824">LinkedIn</a> or in my <a href="https://twitter.com/leandrovrabelo">Twitter</a> account.</p>
 
 </div>
 </div>

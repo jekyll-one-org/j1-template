@@ -33,6 +33,7 @@ module J1
     end
 
     # Log a +WARN+ message
+    # --------------------------------------------------------------------------
     def warn(progname = nil, &block)
       #add(WARN, nil, progname.yellow, &block)
       add(WARN, nil, progname, &block)

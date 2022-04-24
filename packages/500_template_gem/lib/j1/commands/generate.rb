@@ -89,6 +89,7 @@ module J1
         # After a generate blog has been created, print a success notification and
         # then automatically execute bundle install from within the generate blog dir
         # unless the user opts to generate a blank blog or skip 'bundle install'.
+        # --------------------------------------------------------------------------
         def after_install(path, options = {})
           timestamp = Time.now.strftime("%Y-%m-%d %H:%M:%S")
           unless options['skip-bundle']

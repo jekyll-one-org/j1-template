@@ -53,6 +53,7 @@ module J1
     #            list of option names and their defaults.
     #
     # Returns the final configuration Hash.
+    #
     def configuration(override = {})
       config = Configuration.new
       override = Configuration[override].stringify_keys
@@ -72,6 +73,7 @@ module J1
     #
     # Returns nothing
     # rubocop:disable Style/AccessorMethodName
+    #
     def set_timezone(timezone)
       ENV['TZ'] = timezone
     end
@@ -79,7 +81,8 @@ module J1
 
     # Public: Fetch the logger instance for this J1 process.
     #
-    # Returns the LogAdapter instance.
+    # Returns the LogAdapter instance
+    #
     def logger
       @logger ||= LogAdapter.new(LogHelper.new, (ENV['J1_LOG_LEVEL'] || :info).to_sym)
     end
@@ -90,14 +93,16 @@ module J1
     #
     # writer - the new Logger-compatible log transport
     #
-    # Returns the new logger.
+    # Returns the new logger
+    #
     def logger=(writer)
       @logger = LogAdapter.new(writer, (ENV['J1_LOG_LEVEL'] || :info).to_sym)
     end
 
     # Public: An array of sites
     #
-    # Returns the J1 sites created.
+    # Returns the J1 sites created
+    #
     def sites
       @sites ||= []
     end
@@ -108,7 +113,8 @@ module J1
     # base_directory - the directory with which to prefix the questionable path
     # questionable_path - the path we're unsure about, and want prefixed
     #
-    # Returns the sanitized path.
+    # Returns the sanitized path
+    #
     def sanitized_path(base_directory, questionable_path)
       return base_directory if base_directory.eql?(questionable_path)
 

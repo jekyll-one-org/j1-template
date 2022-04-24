@@ -4,7 +4,7 @@ module J1
       #
       # Gems that, if installed, should be loaded.
       # Usually contain subcommands.
-      #
+      # ------------------------------------------------------------------------
       def blessed_gems
         %w(
           jekyll-docs
@@ -35,7 +35,7 @@ module J1
       # normal LoadError.
       #
       # names - a string gem name or array of gem names
-      #
+      # ------------------------------------------------------------------------
       def require_with_graceful_fail(names)
         Array(names).each do |name|
           begin

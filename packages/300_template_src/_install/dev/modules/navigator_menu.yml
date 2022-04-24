@@ -158,35 +158,35 @@
     # Experimental
     #
     - title:                            Experimental
-      icon:                             test-tube                               # head-flash-outline
+      icon:                             test-tube
       dropdown:
 
-        - title:                        J1 Text Books
-          icon:                         script-text-play-outline
+        - title:                        Textbooks
+          icon:                         book-open-page-variant
           dropdown:
 
-            - title:                    NBI Docs (J1 Version)
-              href:                     /pages/public/jupyter/textbooks/j1-nb-docs/
-              icon:                     script-text-play-outline
-            - title:                    NBI Test Notebooks
+            - title:                    Widget Examples
               href:                     /pages/public/jupyter/textbooks/j1-nb-test/
               icon:                     script-text-play-outline
 
-            # - title:                    ODE in Python (interactive)
-            #   href:                     /pages/public/jupyter/textbooks/odes-in-python/
-            #   icon:                     script-text-play-outline
-            # - title:                    Climate Change (static)
-            #   href:                     /pages/public/jupyter/textbooks/climate-change-forecast/
-            #   icon:                     script-text-play-outline
+            - title:                    Interactive Evaluation
+              href:                     /pages/public/jupyter/textbooks/odes-in-python/
+              icon:                     script-text-play-outline
+            - title:                    Climate Change
+              href:                     /pages/public/jupyter/textbooks/climate-change-forecast/
+              icon:                     script-text-play-outline
 
         - title:                        Docs
           icon:                         book-open-page-variant
           dropdown:
 
-            - title:                    J1 NbInteract
-              href:                     /pages/public/jupyter/docs/j1-nb-docs/
+            - title:                    J1 NBI Docs
+              href:                     /pages/public/jupyter/docs/j1-nbinteract-docs/
               icon:                     alpha-j-box
 
+            - title:                    NBI Docs
+              href:                     /pages/public/jupyter/textbooks/nbinteract-docs/
+              icon:                     alpha-j-box
             - title:                    NBI Widgets
               href:                     /pages/public/jupyter/docs/nbi-widgets/
               icon:                     book

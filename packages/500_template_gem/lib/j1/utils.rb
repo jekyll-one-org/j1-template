@@ -235,7 +235,8 @@ module J1
     #   slugify("The _config.yml file", "ascii")
     #   # => "the-config.yml-file"
     #
-    # Returns the slugified string.
+    # Returns the slugified string
+    # --------------------------------------------------------------------------
     def slugify(string, mode: nil, cased: false)
       mode ||= "default"
       return nil if string.nil?
@@ -245,6 +246,7 @@ module J1
       end
 
       # Replace each character sequence with a hyphen
+      # --------------------------------------------------------------------------
       re =
         case mode
         when "raw"
@@ -299,6 +301,7 @@ module J1
     #   # => "/:basename"
     #
     # Returns the updated permalink template
+    # --------------------------------------------------------------------------
     def add_permalink_suffix(template, permalink_style)
       case permalink_style
       when :pretty
@@ -335,6 +338,7 @@ module J1
     # flags    - the flags which will be applied to the pattern
     #
     # Returns matched pathes
+    # --------------------------------------------------------------------------
     def safe_glob(dir, patterns, flags = 0)
       return [] unless Dir.exist?(dir)
       pattern = File.join(Array(patterns))
@@ -346,6 +350,7 @@ module J1
 
     # Returns merged option hash for File.read of self.site (if exists)
     # and a given param
+    # --------------------------------------------------------------------------
     def merged_file_read_opts(site, opts)
       merged = (site ? site.file_read_opts : {}).merge(opts)
       if merged["encoding"] && !merged["encoding"].start_with?("bom|")

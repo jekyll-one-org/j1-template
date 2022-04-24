@@ -71,14 +71,14 @@
           icon:                         book-open-page-variant
           dropdown:
 
-            - title:                    J1 Textbook Examples
+            - title:                    Widget Examples
               href:                     /pages/public/jupyter/textbooks/j1-nb-test/
               icon:                     script-text-play-outline
 
-            - title:                    ODE in Python (interactive)
+            - title:                    Interactive Evaluation
               href:                     /pages/public/jupyter/textbooks/odes-in-python/
               icon:                     script-text-play-outline
-            - title:                    Climate Change (static)
+            - title:                    Climate Change
               href:                     /pages/public/jupyter/textbooks/climate-change-forecast/
               icon:                     script-text-play-outline
 
@@ -90,9 +90,9 @@
               href:                     /pages/public/jupyter/docs/j1-nbinteract-docs/
               icon:                     alpha-j-box
 
-            - title:                    NBI Docs (J1 Textbook)
+            - title:                    NBI Docs
               href:                     /pages/public/jupyter/textbooks/nbinteract-docs/
-              icon:                     script-text-play-outline
+              icon:                     alpha-j-box
             - title:                    NBI Widgets
               href:                     /pages/public/jupyter/docs/nbi-widgets/
               icon:                     book
