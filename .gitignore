@@ -64,6 +64,8 @@ packages/100_template_css/report*.json
 # ------------------------------------------------------------------------------
 packages/200_template_js/dist/
 
+packages/200_template_js/log/
+
 packages/200_template_js/node_modules/
 
 packages/200_template_js/yarn.lock

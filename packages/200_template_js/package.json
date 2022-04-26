@@ -25,7 +25,6 @@
     "deploy": "run-s -s deploy:*",
     "lint": "run-p -s lint:*",
     "rebuild": "npm run build-js",
-    "clean:log": "shx rm -f *.log && shx rm -rf log/",
     "clean:lock": "shx rm -f *.lock && shx rm -f package-lock.json",
     "clean:dist": "shx rm -rf dist/",
     "clean:tmp": "shx rm -f *.tmp && shx rm -rf tmp/",
