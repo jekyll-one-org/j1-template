@@ -84,6 +84,17 @@ settings:
     # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
+    # algebra_with_sympy
+    #
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_algebra_with_sympy
+        xhr_data:                       j1_algebra_with_sympy.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    # --------------------------------------------------------------------------
     # climate-change-forecast (static notebook)
     #
     - textbook:

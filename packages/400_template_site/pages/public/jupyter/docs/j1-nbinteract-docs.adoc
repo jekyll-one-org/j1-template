@@ -6,6 +6,27 @@ description: >
                                         The package nbinteract aims to enable authors and educators to create and
                                         share interactive web pages easily. Interactive explanations of concepts are
                                         useful for communicating and explaining tricky concepts.
+keywords: >
+                                        opensource, free, load, download, start, starter, example,
+                                        high, easy, use, secure, encrypt, standard, popular,
+                                        generate, create, learn, distribute, publish, deploy,
+                                        beginner, advanced, expert, student, learner, writer, reader, visitor
+                                        framework, toolkit, integration, extension, module, api,
+                                        dynamic, static, generator, client, server, internet, local, localhost
+                                        page, web, website, webdesign, material, design, responsive,
+                                        javascript, nodejs, ruby, windows, linux, osx, mac, os,
+                                        http, https, html, html5, css, scss, style,
+                                        browser, firefox, chrome, edge, opera, safari,
+                                        configuration, generator, navigation, menu, dropdown, fab, action, button
+                                        application, interface, provider, api, repository,
+                                        cookie, language, translation, gdpr, dsgvo, privacy,
+                                        asciidoc, aciidoctor, bootstrap, jekyll, liquid,
+                                        hyvor, disqus, git, github, netlify, heroku, apple, microsoft,
+                                        provider, service, internet, support,
+                                        google, analytics, advertising, search, console, silverlight, score,
+                                        j1, template, jekyllone, comment,
+                                        python, jupyter, notebook, textbook, api, app, nbinteract,
+                                        nbi, integration, binder, binderhub, jupyterhub
 
 categories:                             [ J1, Integration ]
 tags:                                   [ NBI, nbinteract ]
@@ -335,19 +356,16 @@ regenerate:                             true
 
 resources:                              [ nbinteract, rouge ] <2>
 ----
-<1> Die Dienste von Binder erfordern personalisierte Einstellungen in den
-    verwendeten *Cookies*. Um Schwierigkeiten mit den Regeln der Privatssphäre
-    zu vermeiden, sollte explizit darauf hingewiesen sowie in geeigneter Form
-    reagiert werden, falls die aktuellen Cookieeinstellungen des Besuchers
-    dies nicht erlauben.
-<2> Falls Highlightning der Sourecode Anteile in einem Textbook gewünscht
-    ist, muss zusätzlich das Modul `rouge` eingebunden werden.
+<1> Binder's services require personalized settings in the *cookies* used.
+    Difficulties with the rules of privacy should be explicitly pointed out
+    and responded to in a suitable form if the cookie settings of the
+    visitor do not allow this.
+<2> If highlighting the source code parts is desired in a textbook, the
+    `rouge` module must included as well.
 
-Sind die Konfigurationsschritte für den Einsatz von J1 NBI erledigt, ist das
-Einbinden von Textbooks sehr einfach. Über die die Asciidoc-Erweiterung
-`textbook::` kann ein Textbooks (nbinteract HTML Notebook) an jeder beliebigen
-Stelle eingebunden
-werden
+Once the configuration steps for using J1 NBI have been completed, integrating
+textbooks is very easy. The Asciidoc extension `textbook::` can include a
+textbook (nbinteract HTML Notebook) anywhere.
 
 .General syntax
 [source, conf, role="noclip"]

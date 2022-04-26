@@ -319,6 +319,7 @@ j1.adapter.nbinteract = (function (j1, window) {
             if (nbiButtonsFound == 1) {
               var log_text = '\n' + 'static textbook found, skip NBI initialization for: {{textbook_id}}';
               logger.warn(log_text);
+              spinner.stop();
             }
 
             if(!nbinteract_prepared && nbiButtonsFound > 1) {
