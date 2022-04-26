@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "site",
-  "version": "2022.2.1",
+  "version": "2022.2.2",
   "description": "Web/Content sources for J1 Starter",
   "main": "_config.yml",
   "config": {
@@ -45,7 +45,6 @@
     "opt_nbi_input_folder": "D:\\j1\\github\\j1-template-2022.2.x\\packages\\400_template_site\\pages\\public\\jupyter\\notebooks",
     "opt_nbi_output_folder": "D:\\j1\\github\\j1-template-2022.2.x\\packages\\400_template_site\\pages\\public\\jupyter\\notebooks\\textbooks"
   },
-
   "algolia": {
     "admin_key": "your-algolia-admin-key"
   },
