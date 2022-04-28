@@ -56,8 +56,10 @@ resource_options:
 
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
-// :page--attr:                         <attr-value>
-:binder-badge-enabled:                  true
+// :page--attr:                                   <attr-value>
+:binder-badges-enabled:                           true
+:binder-app-launch--tree:                         https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/main?urlpath=/tree
+:binder-app-launch--j1_odes_in_python:            https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/main?urlpath=/tree/notebooks/j1/j1_odes_in_python.ipynb
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -75,8 +77,9 @@ resource_options:
 // See: https://towardsdatascience.com/ordinal-differential-equation-ode-in-python-8dc1de21323b
 
 ifeval::[{binder-badges-enabled} == true]
-image:https://mybinder.org/badge_logo.svg[Binder, link="https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/main", {browser-window--new}]
+image:https://mybinder.org/badge_logo.svg[Binder, link="{binder-app-launch--j1_odes_in_python}", {browser-window--new}]
 endif::[]
+
 
 == ODEs in Python
 

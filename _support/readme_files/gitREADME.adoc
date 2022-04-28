@@ -21,6 +21,31 @@ nur die entfernten Branches anzeigt.
   $ git branch -a
   $ git branch -r
 
+== Rename a branch
+
+If you want to rename a branch while pointed to any branch, do:
+
+  git branch -m <oldname> <newname>
+
+If you want to rename the current branch, you can do:
+
+  git branch -m <newname>
+
+If you want to push the local branch and reset the upstream branch:
+
+  git push origin -u <newname>
+
+== Push current branch to main
+
+Remote:
+
+    git push --set-upstream origin main
+
+
+
+
+
+
 == Delete branches
 
 See:

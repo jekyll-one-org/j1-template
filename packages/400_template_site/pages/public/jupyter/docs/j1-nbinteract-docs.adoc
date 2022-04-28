@@ -60,8 +60,12 @@ resource_options:
 
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
-// :page--attr:                         <attr-value>
-:binder-badge-enabled:                  false
+// :page--attr:                                   <attr-value>
+:binder-badges-enabled:                           false
+:binder--home:                                    https://mybinder.org/
+:binder--docs:                                    https://mybinder.readthedocs.io/en/latest/
+:binder-app-launch--tree:                         https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/main?urlpath=/tree
+
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -74,9 +78,10 @@ resource_options:
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-ifeval::[{binder-badge-enabled} == true]
-image:/assets/images/badges/myBinder.png[[Binder, link="https://mybinder.org/", {browser-window--new}]
-image:/assets/images/badges/docsBinder.png[[Binder, link="https://mybinder.readthedocs.io/en/latest/", {browser-window--new}]
+ifeval::[{binder-badges-enabled} == true]
+image:https://mybinder.org/badge_logo.svg[Binder, link="{binder-app-launch--tree}", {browser-window--new}]
+image:/assets/images/badges/myBinder.png[[Binder, link="{binder--home}", {browser-window--new}]
+image:/assets/images/badges/docsBinder.png[[Binder, link="{binder--docs}", {browser-window--new}]
 endif::[]
 
 // Include sub-documents (if any)

@@ -89,8 +89,8 @@ settings:
     - textbook:
         enabled:                        true
 
-        id:                             j1_algebra_with_sympy
-        xhr_data:                       j1_algebra_with_sympy.html
+        id:                             j1_ipympl_test_plots
+        xhr_data:                       j1_ipympl_test_plots.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    false
 
