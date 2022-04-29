@@ -165,6 +165,13 @@
           icon:                         book-open-page-variant
           dropdown:
 
+            - title:                    Altair Widget Examples
+              href:                     /pages/public/jupyter/textbooks/j1-altair-base/
+              icon:                     script-text-play-outline
+            - title:                    Altair Widget Interactive
+              href:                     /pages/public/jupyter/textbooks/j1-altair-interactive/
+              icon:                     script-text-play-outline
+
             - title:                    Widget Examples
               href:                     /pages/public/jupyter/textbooks/j1-nb-test/
               icon:                     script-text-play-outline
@@ -176,7 +183,7 @@
               icon:                     script-text-play-outline
             - title:                    Algebra with sympy
               href:                     /pages/public/jupyter/textbooks/j1-algebra-with-sympy/
-              icon:                     script-text-play-outline              
+              icon:                     script-text-play-outline
 
         - title:                        Docs
           icon:                         book-open-page-variant

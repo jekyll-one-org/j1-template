@@ -316,8 +316,8 @@ j1.adapter.nbinteract = (function (j1, window) {
           if ($('#{{textbook_id}}').attr('data-nb-textbook') == 'loaded') {
 
             var nbiButtonsFound = document.querySelectorAll('.js-nbinteract-widget').length
-            if (nbiButtonsFound == 1) {
-              var log_text = '\n' + 'static textbook found, skip NBI initialization for: {{textbook_id}}';
+            if (nbiIndicateNbiActivity && nbiButtonsFound == 1) {
+              var log_text = '\n' + 'non-nbi textbook found, skip NBI initialization for: {{textbook_id}}';
               logger.warn(log_text);
               spinner.stop();
             }
@@ -440,14 +440,87 @@ j1.adapter.nbinteract = (function (j1, window) {
               }
             });
 
-            // disable MathJax for all HTML 'output_wrapper' elements
+            // cleanups for Altair for all HTML 'output_wrapper' elements
             //
-            [...output_wrapper].forEach(function(x) {
-              if (!x.className.includes('nomathjax')) {
-                x.className += ' nomathjax';
+            $(document).ready(function() {
+              var myLabelSpanClasses;
+              var reUnderscores = new RegExp(/_/, 'g');
+              var reMultipleSpaces = new RegExp(/\s+/, 'g');
+              var reMultipleSpacesStart = new RegExp(/^\s+/, 'g');
+              var reMultipleSpacesEnd = new RegExp(/\s+$/, 'g');
+              var reSkipWords = new RegExp(/vgsid|bla/, 'g');
+              var reDuplicateWords = new RegExp(/(\b\S.+\b)(?=.*\1)/, 'g');
+              var content;
+              var testContainer;
+              var newContent;
+              var newContentWritten = false;
+              var isWidget;
+              var isWidgetRendered;
+              var outputDiv;
+              var childNodes =  0;
+              var allID = document.querySelectorAll('*[id^="altair-viz"]');
+
+//            for (var item of output_wrapper) {
+              for (var item of allID) {
+                var dependencies_met_widget_rendered = setInterval(function() {
+
+//                outputDiv = document.getElementById(item.id);
+//                outputDiv = document.getElementById("altair-viz-ad13adb250ba4a5091dd1e7ae3ac0e4c");
+//                var allID = document.querySelectorAll('*[id^="altair-viz"]');
+//                isWidgetRendered = item.getElementsByClassName('vega-embed').length;
+//                isWidget = item.getElementsByClassName('vega-bind');
+//                isWidgetRendered = item.getElementsByClassName('vega-bind');
+//                isWidgetRendered = outputDiv.clientHeight;
+//                if (isWidgetRendered) {
+
+                  if (document.getElementById(item.id)) {
+                    // var testContainer = document.querySelector(item.id);
+                    // var childNodes = outputDiv.querySelector('.vega-bind-name');
+
+//                  testContainer  = document.getElementById("altair-viz-ad13adb250ba4a5091dd1e7ae3ac0e4c");
+                    testContainer  = document.getElementById(item.id);
+
+
+                    childNodes = testContainer.getElementsByClassName('vega-bind-name');
+                    if ( childNodes === 'null') {
+                      childNodes = 0;
+                    }
+
+//                  myLabelSpanClasses = outputDiv.getElementsByClassName('.vega-bind-name');
+//                  myLabelSpanClasses = outputDiv.getElementsByClassName('vega-bind');
+                    // if (myLabelSpanClasses.length) {
+                    if (childNodes.length && !newContentWritten) {
+//                    console.log('j1.adapter.nbinteract, found: ' + item.id);
+                      for (var i = 0; i < childNodes.length; i++) {
+                        content = childNodes[i].innerHTML;
+                        newContent = content.replace(reUnderscores, ' ');
+                        newContent  = newContent.replace(reDuplicateWords, '');
+                        newContent  = newContent.replace(reSkipWords, '');
+                        newContent  = newContent.replace(reMultipleSpaces, ' ');
+                        newContent  = newContent.replace(reMultipleSpacesStart, '');
+                        newContent  = newContent.replace(reMultipleSpacesEnd, '');
+
+                        childNodes[i].innerHTML = newContent;
+                        newContentWritten = true;
+
+                        // break;
+                      }
+                      clearInterval(dependencies_met_widget_rendered);
+                    }
+//                  clearInterval(dependencies_met_widget_rendered);
+                  }
+                 clearInterval(dependencies_met_widget_rendered);
+                }, 25);
               }
             });
 
+            // disable MathJax for all HTML 'output_wrapper' elements
+            //
+            [...output_wrapper].forEach(function(x) {
+              if (x.className.includes('nomathjax')) {
+                x.className += ' nomathjax';
+              }
+            });
             // make all 'image' elements responsive (BS@4)
             //
             var images = document.getElementsByTagName('img');;
@@ -501,7 +574,10 @@ j1.adapter.nbinteract = (function (j1, window) {
             // jadams, 2020-07-21: to be checked why id could be UNDEFINED
             if (typeof(id) != "undefined") {
               var state = 'failed';
-              logger.info('\n' + 'set state for ' + mod + ' to: ' + state);
+              if (nbiIndicateNbiActivity) {
+                spinner.stop();
+              }
+              // logger.info('\n' + 'set state for ' + mod + ' to: ' + state);
               // jadams, 2020-07-21: intermediate state should DISABLED
               // executeFunctionByName(mod + '.setState', window, state);
               j1.setXhrDataState(id, statusTxt);

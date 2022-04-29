@@ -14,9 +14,38 @@
 */
 
 /*
+  Altair CSS overwrites
+  ------------------------------------------------------------------------------
+*/
+
+/* jadams: overwrite width/height (style) of the canvas for responsiveness */
+/* https://stackoverflow.com/questions/55169344/how-to-make-altair-plots-responsive */
+canvas.marks {
+    max-width: 100% !important;
+    height: auto !important;
+}
+
+div.vega-bind, div.vega-bind > span {
+  margin-left: .5rem !important;
+  font-size: 1rem;
+}
+
+input, select {
+  margin-right: .75rem;
+  margin-left: .75rem;
+}
+
+/* select {
+  margin-right: .75rem;
+  margin-left: .75rem;
+} */
+
+
+/*
   MathJax CSS overwrites
   ------------------------------------------------------------------------------
 */
+
 .MathJax_Display {
   margin-top: 1rem !important;
   text-align: left !important;
@@ -113,6 +142,8 @@ div#notebook {
   div.output_wrapper {
     display: block;
     page-break-inside: avoid;
+    max-width: 100%;
+    height: auto;
   }
   div.output {
     display: block;

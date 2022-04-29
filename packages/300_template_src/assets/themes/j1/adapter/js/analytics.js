@@ -90,12 +90,15 @@ var hostname        = url.hostname;
 var environment     = '{{environment}}';
 var gaScript        = document.createElement('script');
 var providerID      = '{{analytics_options.google.trackingID}}';
+var skipAllHosts    = '{{analytics_options.google.skipAllHosts}}';
 var validProviderID = (providerID.includes('your')) ? false : true;
 var optInOut        = {{analytics_options.google.optInOut}};
 var anonymizeIP     = {{analytics_options.google.anonymizeIP}};
 var cookie_names    = j1.getCookieNames();
 var date            = new Date();
 var timestamp_now   = date.toISOString();
+var skipHost        = false;
+var skipHosts;
 var gaCookies;
 var user_consent;
 var gaExists;
@@ -157,10 +160,19 @@ var logText;
       var dependencies_met_page_ready = setInterval(function() {
         if (j1.getState() == 'finished') {
 
-          gaExists = document.getElementById('google-tag-manager');
-          if (!gaExists) {
+          gaExists  = document.getElementById('google-tag-manager');
+          skipHosts = skipAllHosts.replace(/,/g, ' ');
+          skipHost = skipHosts.includes(hostname);
+
+          user_consent  = j1.readCookie(cookie_names.user_consent);
+          if (user_consent.analysis && skipHost && validProviderID) {
+            logger.warn('\n' + 'Google Analytics skipped for: ' + hostname);
+          }
+
+          if (!gaExists && !skipHost) {
             // add ga api dynamically in the head section
             // -----------------------------------------------------------------
+            logger.info('\n' + 'Google Analytics added for: ' + hostname);
             logger.info('\n' + 'Google Analytics API added in section: head');
             gaScript.async = true;
             gaScript.id    = 'google-tag-manager';

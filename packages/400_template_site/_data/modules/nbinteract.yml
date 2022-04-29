@@ -84,13 +84,24 @@ settings:
     # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
-    # algebra_with_sympy
+    # altair-base
     #
     - textbook:
         enabled:                        true
 
-        id:                             j1_ipympl_test_plots
-        xhr_data:                       j1_ipympl_test_plots.html
+        id:                             j1_altair_base
+        xhr_data:                       j1_altair_visualization.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    # --------------------------------------------------------------------------
+    # altair-interactive
+    #
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_altair_interactive
+        xhr_data:                       j1_altair_interactive.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    false
 
