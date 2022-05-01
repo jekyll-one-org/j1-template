@@ -93,6 +93,7 @@ settings:
         xhr_data:                       j1_altair_visualization.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    false
+        altair_cleanups:                true
 
     # --------------------------------------------------------------------------
     # altair-interactive
@@ -104,6 +105,19 @@ settings:
         xhr_data:                       j1_altair_interactive.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    false
+        altair_cleanups:                true
+
+    # --------------------------------------------------------------------------
+    # altair-interactive-test
+    #
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_altair_interactive_test
+        xhr_data:                       j1_altair_interactive_test.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                true
 
     # --------------------------------------------------------------------------
     # climate-change-forecast (static notebook)

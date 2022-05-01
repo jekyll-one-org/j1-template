@@ -93,14 +93,5 @@ Interactive widgets are provided natively by Jupyter Notebooks using the
 library `ipywidgets`. Some more widgets are provided by `nbinteract`. Find
 common examples in the example textbooks below.
 
+// textbook::j1_altair_interactive_test[]
 textbook::j1_altair_interactive[]
-
-// ++++
-// <script>
-//   $(document).ready(function() {
-//     var el = document.getElementsByClassName('vega-bind-name')[0].children[0].children[1];
-//     var text = el.innerHTML;
-//     el.innerHTML = text.replace('_',' ');
-//   });
-// </script>
-// ++++

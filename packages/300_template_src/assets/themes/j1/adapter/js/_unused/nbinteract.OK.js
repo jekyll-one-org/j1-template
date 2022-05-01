@@ -277,7 +277,6 @@ j1.adapter.nbinteract = (function (j1, window) {
               xhr_data:           textbook.xhr_data,
               xhr_data_path:      textbook.xhr_data_path,
               use_mathjax:        textbook.use_mathjax,
-              altair_cleanups:    textbook.altair_cleanups,
               buttonStyles:       settings.button_styles,
             });
           }
@@ -396,7 +395,6 @@ j1.adapter.nbinteract = (function (j1, window) {
       var html_data_path    = options.xhr_data_path + '/' + options.xhr_data;
       var id                = options.xhr_container_id;
       var mathjaxEnabled    = options.use_mathjax;
-      var cleanupAltair     = options.altair_cleanups;
       var $selector         = $('#' + id);
       var logText;
 
@@ -444,49 +442,49 @@ j1.adapter.nbinteract = (function (j1, window) {
 
             // cleanups for Altair for all HTML 'output_wrapper' elements
             //
-            if (cleanupAltair) {
+            var myLabelSpanClasses;
+            var reUnderscores = new RegExp(/_/, 'g');
+            var reMultipleSpaces = new RegExp(/\s+/, 'g');
+            var reMultipleSpacesStart = new RegExp(/^\s+/, 'g');
+            var reMultipleSpacesEnd = new RegExp(/\s+$/, 'g');
+            var reSkipWords = new RegExp(/vgsid|bla/, 'g');
+            var reDuplicateWords = new RegExp(/(\b\S.+\b)(?=.*\1)/, 'g');
+            var content;
+            var testContainer;
+            var newContent;
+            var newContentWritten = false;
+            var isWidget;
+            var isWidgetRendered;
+            var isPageRendered = false;
+            var outputDiv;
+            var myItem;
+            var childNodes;
+            var clientHeight;
+            var lastWidget = false;
+            var l;
+            var allID = document.querySelectorAll('*[id^="altair-viz"]');
 
+            for (l = 0; l < allID.length; l++) {
+              testContainer   = document.getElementById(allID[l].id);
+              var dependencies_met_page_rendered = setInterval(function() {
+                lastWidget = (l == allID.length) ? true : false;
+                if (testContainer.clientHeight && lastWidget && !isPageRendered) {
+                  isPageRendered = true;
+                  logger.info('\n' + 'last widget rendered ' + testContainer.id + ' : ' + testContainer.clientHeight);
+                  clearInterval(dependencies_met_page_rendered);
+                }
+              }, 25);  // END interval
+            } // END for all ID
 
-              var reUnderscores = new RegExp(/_/, 'g');
-              var reMultipleSpaces = new RegExp(/\s+/, 'g');
-              var reMultipleSpacesStart = new RegExp(/^\s+/, 'g');
-              var reMultipleSpacesEnd = new RegExp(/\s+$/, 'g');
-              var reSkipWords = new RegExp(/vgsid|bla/, 'g');
-              var reDuplicateWords = new RegExp(/(\b\S.+\b)(?=.*\1)/, 'g');
-              var content;
-              var newContent;
-              var newContentWritten = false;
-              var isWidget;
-              var isPageRendered = false;
-              var outputDiv;
-              var childNodes;
-              var clientHeight;
-              var lastWidget = false;
-              var allID = document.querySelectorAll('*[id^="altair-viz"]');
+            var dependencies_met_widgets_updated = setInterval(function() {
+              if (isPageRendered) {
+                for (var item of allID) {
+                	testContainer = document.getElementById(item.id);
+                  logger.info('\n' + 'processing widget on id: ' + item.id);
 
-              // check/wait for ALL widgets in the page are rendered (by JS)
-              // if rendering finished, flag 'isPageRendered' is set to 'true'
-              //
-              for (var l = 0; l < allID.length; l++) {
-                outputDiv = document.getElementById(allID[l].id);
-                var dependencies_met_page_rendered = setInterval(function() {
-                  lastWidget = (l == allID.length) ? true : false;
-                  if (outputDiv.clientHeight && lastWidget && !isPageRendered) {
-                    isPageRendered = true;
-                    logger.debug('\n' + 'last widget rendered ' + outputDiv.id + ' : ' + outputDiv.clientHeight);
-                    clearInterval(dependencies_met_page_rendered);
-                  }
-                }, 25);  // END interval
-              } // END for all ID
-
-              var dependencies_met_widgets_updated = setInterval(function() {
-                if (isPageRendered) {
-                  for (var item of allID) {
-                  	outputDiv = document.getElementById(item.id);
-                    logger.debug('\n' + 'processing widget on id: ' + item.id);
-
-                  	childNodes = outputDiv.getElementsByClassName('vega-bind-name');
-                  	if (childNodes.length) {
+                	childNodes = testContainer.getElementsByClassName('vega-bind-name');
+                	if (childNodes.length) {
+//              	  if (childNodes.length && !newContentWritten) {
                   		for (var i = 0; i < childNodes.length; i++) {
                   		  content = childNodes[i].innerHTML;
                   		  newContent = content.replace(reUnderscores, ' ');
@@ -498,14 +496,14 @@ j1.adapter.nbinteract = (function (j1, window) {
                   		  childNodes[i].innerHTML = newContent;
                   		  newContentWritten = true;
                   		} // END for
-                  	} // END if childNodes.length
-                  } // END for
-                  logger.debug('\n' + 'all widgets updated');
+//              	  } // END if !newContentWritten
+                	} // END if childNodes.length
+                } // END for
 
-                  clearInterval(dependencies_met_widgets_updated);
-                }
-              }, 25);  // END interval
-            } // END if cleanupAltair
+                logger.info('\n' + 'all widgets updated');
+                clearInterval(dependencies_met_widgets_updated);
+              }
+            }, 25);  // END interval
 
             // disable MathJax for all HTML 'output_wrapper' elements
             //

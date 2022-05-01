@@ -1,0 +1,4 @@
+Verbindung mit dem lokalen Server, der mit der Verbindungs-URL "http://localhost:8888/" ausgeführt wird, nicht möglich
+Sorgen Sie dafür, dass die Erweiterung "jupyter_http_over_ws Jupyter" auf Ihrem Computer aktiviert und auf dem neuesten Stand ist.
+
+pip install --upgrade jupyter_http_over_ws>=0.0.7 && jupyter serverextension enable --py jupyter_http_over_ws

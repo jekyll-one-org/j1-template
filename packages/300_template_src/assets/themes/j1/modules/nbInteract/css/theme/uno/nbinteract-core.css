@@ -25,15 +25,65 @@ canvas.marks {
     height: auto !important;
 }
 
-div.vega-bind, div.vega-bind > span {
+/* div.vega-bind, div.vega-bind > span {
   margin-left: .5rem !important;
   font-size: 1rem;
+} */
+
+input[type="range"] {
+    /* margin-top: 0.5rem; */
+}
+
+.vega-bind {
+    margin-top: 0.25rem;
+}
+
+.vega-bind-name {
+    width: 8rem !important;
+    display: inline-block;
+}
+.checkbox label, .radio label, label {
+    margin-left: 0;
+}
+
+form.vega-bindings {
+  font-size: 1rem;
+  margin: .75rem 0 .75rem 1.75rem;
 }
 
 input, select {
-  margin-right: .75rem;
-  margin-left: .75rem;
+  margin-right: 0.75rem;
+  margin-left: 0.75rem;
 }
+
+select {
+  border-width: 1px;
+  border-style: solid;
+  border-color: #9E9E9E;
+  color: #757575;
+  line-height: 125%;
+  padding: 0px 0 0 6px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url("data:image/svg+xml,<svg height='10px' width='10px' viewBox='0 0 16 16' fill='%23000000' xmlns='http://www.w3.org/2000/svg'><path d='M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z'/></svg>") no-repeat;
+  background-position: calc(100% - 0.75rem) center !important;
+  -moz-appearance: none !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  padding-right: 2rem !important;
+  border: 1px solid #BDBDBD;
+  border-radius: 2px;
+}
+
+/* select:focus {
+  min-width: 150px;
+  width: auto;
+} */
+
+/* .vega-bind-name {
+    width: 16rem !important;
+    display: inline-block;
+} */
 
 /* select {
   margin-right: .75rem;
@@ -61,6 +111,11 @@ span.MathJax {
   global CSS styles
   ------------------------------------------------------------------------------
 */
+
+.bmd-form-group {
+  padding-top: unset;
+}
+
 .container {
   width: 100% !important;
 }

@@ -83,11 +83,11 @@ $table__header--font-size:              95%;
 // jadams, 2020-08-16: added background color|padding
 code {
   // font-weight: bold;
-    word-break: break-word;
-    padding: 0.125em 0.275em 0.125em 0.275em !important;
-    border-radius: $border--radius;
-    // background-color: rgba(0, 0, 0, 0.1) !important;
-    background-color: $darken-100 !important;
+  word-break: break-word;
+  padding: 0.125em 0.275em 0.125em 0.275em !important;
+  border-radius: $border--radius;
+  // background-color: rgba(0, 0, 0, 0.1) !important;
+  background-color: $darken-100 !important;
 }
 
 // Headings
@@ -329,13 +329,11 @@ p.tableblock {
 }
 
 // Quote blocks
+// jadams 2022-05-01: quoteblock, changed style
 // -----------------------------------------------------------------------------
 
-// jadams 2020-10-10: changed margins, font-sizes
 .quoteblock {
-  margin-right: 1em;
-  margin-bottom: 1.25em;
-  margin-left: 1.5em;
+  margin: 1.5em 6em 1.25em 4em;
   display: table;
 }
 
@@ -347,7 +345,6 @@ p.tableblock {
 .quoteblock blockquote,
 .quoteblock blockquote p {
   line-height: 1.30;
-  word-spacing: 0.1em;
   letter-spacing: 0;
   font-style: italic;
   text-align: justify;
@@ -360,14 +357,17 @@ p.tableblock {
 }
 
 .quoteblock blockquote:before {
-  content: "\201c";
-  float: left;
-  font-size: 2.10em;
-  font-weight: bold;
-  line-height: 0.6em;
-  margin-left: -0.6em;
-  color: $blue-900;
-  text-shadow: 0 1px 2px $darken-100;
+	float: left;
+	color: #0d47a1;
+	margin-left: 0.1em;
+	content: '\0022';
+	position: absolute;
+	font-size: 10em;
+	font-weight: 900;
+	opacity: 0.2;
+	left: 4%;
+	z-index: -1;
+	margin-top: -0.3em;
 }
 
 .quoteblock blockquote > .paragraph:last-child p {
@@ -375,9 +375,12 @@ p.tableblock {
 }
 
 .quoteblock .attribution {
-  margin-top: 0.5em;
-  margin-right: 0.5ex;
+  margin-top: 0.75em;
   text-align: right;
+  font-size: .875em;
+  font-weight: 400;
+  --bs-text-opacity: 1;
+  color: #757575 !important;
 }
 
 .quoteblock .quoteblock {
@@ -462,13 +465,13 @@ table.tableblock > .title {
 
 // jadams 2019-01-24: Moved to flat style (no box-shadow)
 .listingblock pre {
-    display: block;
-    line-height: $pre--line-height !important;
-    word-break: break-all;
-    word-wrap: break-word;
-    padding: $pre--padding;
-    margin: $pre--margin;
-    border: $pre--border;
+  display: block;
+  line-height: $pre--line-height !important;
+  word-break: break-all;
+  word-wrap: break-word;
+  padding: $pre--padding;
+  margin: $pre--margin;
+  border: $pre--border;
 }
 
 // jadams 2022-02-15: Changed background to transparent for dark themes
@@ -499,14 +502,14 @@ table.tableblock > .title {
 }
 
 .admonitionblock > table td.content {
-    padding-left: 1.125em;
-    padding-right: 1.125em;
-    border-right: 1px;
-    border-left: 1px dotted $grey;
-    font-size: inherit;
-    text-align: justify;
-    border-bottom: 0px;
-    min-width: 20em;
+  padding-left: 1.125em;
+  padding-right: 1.125em;
+  border-right: 1px;
+  border-left: 1px dotted $grey;
+  font-size: inherit;
+  text-align: justify;
+  border-bottom: 0px;
+  min-width: 20em;
 }
 
 .admonitionblock > table td.content>:last-child>:last-child {
@@ -1008,19 +1011,19 @@ kbd {
 
 // jadams 2022-02-28: Use BS default colors for kbd styles
 kbd:not(.keyseq) {
-//  color: $darken-800;
-//  line-height: 1.4; jadams,2020-04-18
-//  background-color: $grey-300;
-//  border: $pre--border;
-    display: inline-block;
-    font-size: 0.75em;
-    -webkit-border-radius: 3px;
-    border-radius: 3px;
-    margin: -0.15em 0.15em 0 0.15em;
-    padding: 0.2em 0.6em 0.2em 0.5em;
-    vertical-align: middle;
-    white-space: nowrap;
-}
+  //  color: $darken-800;
+  //  line-height: 1.4; jadams,2020-04-18
+  //  background-color: $grey-300;
+  //  border: $pre--border;
+  display: inline-block;
+  font-size: 0.75em;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  margin: -0.15em 0.15em 0 0.15em;
+  padding: 0.2em 0.6em 0.2em 0.5em;
+  vertical-align: middle;
+  white-space: nowrap;
+  }
 
 .keyseq kbd:first-child {
   margin-left: 0
@@ -1136,8 +1139,6 @@ ul.disc {
 		border-top: 1px dotted $grey-400;
 		position: relative;
 		white-space: normal;
-/*  padding-left: 50%; */
-/*  text-align:left; */
 	}
 
 	.admonitionblock td:before {
