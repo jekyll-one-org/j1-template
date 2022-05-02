@@ -65,9 +65,8 @@ resource_options:
 :jupyter-discourse--startup-time:       https://discourse.jupyter.org/t/how-to-reduce-mybinder-org-repository-startup-time/4956
 
 :binder--home:                          https://mybinder.org/
-:binder-docs--about:                    https://mybinder.readthedocs.io/en/latest/about/about.html
 :binder-sre--analytics:                 https://mybinder-sre.readthedocs.io/en/latest/analytics/events-archive.html
-:binder--binderlyzer:                   {binder--home}/v2/gh/betatim/binderlyzer/master
+:binder--binderlyzer:                   {binder--home}v2/gh/betatim/binderlyzer/master
 
 :binderhub-docs--reference:             https://binderhub.readthedocs.io/en/latest/reference/ref-index.html
 
@@ -104,9 +103,6 @@ an open-source tool that runs on Kubernetes, a portable, extensible,
 open-source platform for managing containerized services. One such deployment
 lives at link:{binder--home}[Binder Home, {browser-window--new}], and is free
 to use.
-
-For more information about the mybinder.org deployment and the team
-that runs it, see link:{binder-docs--about}[Binder - About, {browser-window--new}].
 
 == Configuration Files
 
