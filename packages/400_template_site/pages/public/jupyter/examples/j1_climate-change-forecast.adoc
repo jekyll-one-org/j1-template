@@ -1,6 +1,6 @@
 ---
-title:                                  Climate Change
-tagline:                                static notebook
+title:                                  Non-Interactive Notebook
+tagline:                                climate change forecast
 date:                                   2022-03-28 00:00:00
 description: >
                                         The package nbinteract aims to enable authors and educators to create and
@@ -59,6 +59,7 @@ resource_options:
 // :page--attr:                                   <attr-value>
 :binder-badges-enabled:                           true
 :binder-app-launch--tree:                         https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/main?urlpath=/tree
+:binder-app-launch--notebook:                     https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/main?filepath=notebooks/j1/j1_climate_change_forecast.ipynb
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -75,12 +76,27 @@ resource_options:
 // image:/assets/images/badges/docsBinder.png[Binder, link="https://mybinder.readthedocs.io/en/latest/", {browser-window--new}]
 
 ifeval::[{binder-badges-enabled} == true]
+image:/assets/images/badges/notebookBinder.png[Binder, link="{binder-app-launch--notebook}", {browser-window--new}]
 image:https://mybinder.org/badge_logo.svg[Binder, link="{binder-app-launch--tree}", {browser-window--new}]
 endif::[]
 
+This textbook is an example of a *non-interactive* Jupyter notebook (JN).
+Jupyter Notebooks don't necessarily need to contain *interactive* widgets.
+The CLI `nbinteract` can export all types of (Python-based) notebooks to
+an (HTML) textbooks.
+
+NOTE: If the J1 NBI module detects non-interactive textbooks, the module
+adapter does *not* start the Binder service for an external computational
+environment.
+
 == Climate change forecasting
 
-The textbook is an example of a *static* Jupyter notebook. Jupyter
-Notebooks don't need to contain *interactive* widgets.
+Predicting climate change is a very difficult business. The calculations are
+certainly not easy to understand, and a solid knowledge of mathematics and
+statistics is required.
+
+Still, complex but well-annotated ones can provide insight for all readers.
+Graphic representations of the results clearly show the results of mathematical
+calculations and allow (interested) laypeople to gain a basic understanding.
 
 textbook::j1_climate_change_forecast[]

@@ -28,7 +28,6 @@ keywords: >
                                         python, jupyter, notebook, textbook, api, app, nbinteract,
                                         nbi, integration, binder, binderhub, jupyterhub
 
-
 categories:                             [ Software, Python ]
 tags:                                   [ Binder, Jupyter, Notebooks ]
 

@@ -84,6 +84,7 @@ issues for private or professional use.
 
 ## Addons and Integrations
 
+* Jupyter Notebook support (nbinteract)
 * Featured example content included
 * Royalty free images included
 * Comment provider support for Hyvor and Disqus
@@ -108,13 +109,16 @@ platforms.
 To run the Development System for J1 Template, the following languages and
 tools expected to be in place with your OS:
 
-*   Ruby language, version >= 2.6 < 3.x
-*   RubyGems >= 3.2.4
-*   Bundler >= 2.2.4
-*   Javascript language (NodeJS), version >= 12.x < 13.x
-*   NPM, version >= 6.14
-*   YARN, version >= 1.22
-*   Git, version >= 2.29
+* Ruby language, version >= 2.6 < 3.x
+* Python language, version > 2.7 <1>
+* RubyGems >= 3.2.4
+* Bundler >= 2.2.4
+* Javascript language (NodeJS), version >= 12.x < 13.x
+* NPM, version >= 6.14
+* YARN, version >= 1.22
+* Git, version >= 2.29
+
+<1> required only for **full** Jupyter Notebook support
 
 Note, Ruby **3.x** versions are **not** supported for Jekyll and J1 either.
 More current or older versions of **NodeJS** may work, but not tested.

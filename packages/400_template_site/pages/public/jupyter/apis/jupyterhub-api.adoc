@@ -88,13 +88,12 @@ image:/assets/images/badges/myBinder.png[[Binder, link="https://mybinder.org/", 
 image:/assets/images/badges/docsBinder.png[[Binder, link="https://mybinder.readthedocs.io/en/latest/", {browser-window--new}]
 endif::[]
 
-*JupyterLab* is the latest web-based interactive development environment
-for notebooks, code, and data. Its flexible interface allows users to
-configure and arrange workflows in data science, scientific computing,
-computational journalism, and machine learning. A modular design invites
-extensions to expand and enrich functionality.
+// *JupyterLab* is the latest web-based interactive development environment
+// for notebooks, code, and data. Its flexible interface allows users to
+// configure and arrange workflows in data science, scientific computing,
+// computational journalism, and machine learning. A modular design invites
+// extensions to expand and enrich functionality.
 
-== JupyterHub
 // See: https://jupyter.org/hub
 
 *JupyterHub* brings the power of notebooks to *groups* of users. It
@@ -109,7 +108,7 @@ to serve a pre-configured data science environment to any user in the world.
 It is customizable and scalable, and is suitable for small and large teams,
 academic courses, and large-scale infrastructure.
 
-== Jupyter Services (REST API)
+== JupyterHub Services
 
 Javascript client for the Jupyter services REST APIs. All functions and
 classes using the REST API allow a serverSettings parameter to configure
@@ -118,13 +117,11 @@ modern browsers or via npm install fetch for node users. The whatwg-fetch
 npm package can be used to polyfill browsers that do not support the
 fetch API.
 
-=== Overview
-
 This package introduces a number of concepts, such as session context, etc.
 Here we give a brief overview of some of the top-level concepts in this
 package.
 
-==== Clients
+=== Clients
 
 A *client* is a single entity connected to a kernel. Since kernel messages
 include the client id, it is easy for a client to filter kernel messages for
@@ -132,17 +129,17 @@ just messages between it and the kernel. In JupyterLab, different activities,
 such as a console and a notebook, are usually considered separate clients
 when connected to the same kernel.
 
-==== Kernel specs
+=== Kernel specs
 
 A kernel spec is the data about an available kernel on the system. We can
 retrieve a current list of kernel specs from the server.
 
-==== Kernels
+=== Kernels
 
 A kernel represents a running process on the server that implements the
 Jupyter kernel messaging protocol.
 
-==== Kernel model
+=== Kernel model
 
 A *kernel model* mirrors the server kernel models, and represents a single
 running kernel on the server. A kernel can be created, restarted, shut down,
@@ -150,7 +147,7 @@ etc., through calls to the server. A kernel model's lifecycle mirrors the
 server kernel model's lifecycle, and it will be disposed when the server
 kernel is shut down.
 
-==== Kernel connection
+=== Kernel connection
 
 A kernel connection represents a single client connecting to a kernel over
 a *websocket*. Typically only one kernel connection handles comms for any
@@ -164,7 +161,7 @@ of a manager, you are responsible for cleaning them up.
 A kernel connection has a number of signals, such as kernel status,
 kernel connection status, etc.
 
-==== Kernel manager
+=== Kernel manager
 
 A kernel manager is an object that maintains a list of kernel models by
 regular polling. The kernel manager can instantiate a kernel connection
@@ -175,7 +172,7 @@ The manager provides some minimal bookkeeping around kernels and their
 connections. Generally, it is easiest to interact with kernels on a server
 through a manager.
 
-==== Sessions
+=== Sessions
 
 A session is a mapping on the server from an identifying string (the
 session's path) to a kernel. A session has a few other pieces of information
@@ -187,7 +184,7 @@ of the notebook's file path. When a browser is refreshed, the notebook viewer
 can connect to the same kernel by asking the server for the session
 corresponding with the notebook file path.
 
-==== Session model
+=== Session model
 
 A session model mirrors a server session. The session models can be refreshed
 from the server, created, changed (including creating a new session kernel),
@@ -195,7 +192,7 @@ and shut down (which implies that the kernel will be shut down). A session
 model's lifecycle mirrors the server session's lifecycle, and it will be
 disposed when the server session is shut down.
 
-==== Session connection
+=== Session connection
 
 A session connection represents a single client connected to a session's
 kernel. A session's kernel connection can change and may be null to signify
@@ -211,7 +208,7 @@ The session connection can be disposed when the client no longer is connected
 to that session's kernel, and disposal will not cause the session model to be
 deleted.
 
-==== Session manager
+=== Session manager
 
 A session manager is an object that maintains a list of session models by
 regular polling. The session manager can instantiate a session connection
@@ -222,7 +219,7 @@ The manager provides some minimal bookkeeping around sessions and their
 connections. Generally, it is easiest to interact with sessions on a server
 through a manager.
 
-==== Session Context
+=== Session Context
 
 A session context is an object which has the same lifecycle as the client.
 The session context owns a session connection, which may be null if the
@@ -237,7 +234,6 @@ Here is a diagram that provides an overview of the different components:
 
 .JupyterLab Architecture
 lightbox::jupyterlab--architecture[ 800, {data-jupyterlab--architecture}, role="mt-3 mb-4" ]
-
 
 
 == Rest API

@@ -68,3 +68,11 @@ Git Repo
 
 Name:   https://github.com/jekyll-one/nbinteract-notebooks.git
 Path:   https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/HEAD?labpath=interactive
+
+
+Loading Notebooks by the Binder
+--------------------------------------------------------------------------------
+
+The general form of the URL looks now like the following:
+
+https://mybinder.org/v2/<PROVIDER>/<REPO_NAME>/<BRANCH/TAG/COMMIT>?filepath=<FILE_PATH>

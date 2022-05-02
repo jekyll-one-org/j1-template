@@ -84,42 +84,6 @@ settings:
     # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
-    # altair-base
-    #
-    - textbook:
-        enabled:                        false
-
-        id:                             j1_altair_base
-        xhr_data:                       j1_altair_visualization.html
-        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
-        use_mathjax:                    false
-        altair_cleanups:                true
-
-    # --------------------------------------------------------------------------
-    # altair-interactive
-    #
-    - textbook:
-        enabled:                        false
-
-        id:                             j1_altair_interactive
-        xhr_data:                       j1_altair_interactive.html
-        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
-        use_mathjax:                    false
-        altair_cleanups:                true
-
-    # --------------------------------------------------------------------------
-    # altair-interactive-test
-    #
-    - textbook:
-        enabled:                        false
-
-        id:                             j1_altair_interactive_test
-        xhr_data:                       j1_altair_interactive_test.html
-        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
-        use_mathjax:                    false
-        altair_cleanups:                true
-
-    # --------------------------------------------------------------------------
     # climate-change-forecast (static notebook)
     #
     - textbook:
@@ -142,17 +106,6 @@ settings:
         use_mathjax:                    false
 
     # --------------------------------------------------------------------------
-    # odes_in_python
-    #
-    - textbook:
-        enabled:                        false
-
-        id:                             j1_odes_in_python
-        xhr_data:                       j1_odes_in_python.html
-        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
-        use_mathjax:                    false
-
-    # --------------------------------------------------------------------------
     # ode_selected
     #
     - textbook:
@@ -162,18 +115,6 @@ settings:
         xhr_data:                       j1_ode_selected.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    false
-
-    # --------------------------------------------------------------------------
-    # creating-reading-and-writing
-    #
-    - textbook:
-        enabled:                        false
-
-        id:                             j1_pandas_intro
-        xhr_data:                       j1_pandas_creating_reading_and_writing.html
-        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
-        use_mathjax:                    false
-
 
     # --------------------------------------------------------------------------
     # J1 NBI Docs

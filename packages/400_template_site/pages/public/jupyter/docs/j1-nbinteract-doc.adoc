@@ -61,11 +61,10 @@ resource_options:
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
 // :page--attr:                                   <attr-value>
-:binder-badges-enabled:                           false
+:binder-badges-enabled:                           true
 :binder--home:                                    https://mybinder.org/
 :binder--docs:                                    https://mybinder.readthedocs.io/en/latest/
 :binder-app-launch--tree:                         https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/main?urlpath=/tree
-
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -75,13 +74,11 @@ resource_options:
 // -----------------------------------------------------------------------------
 {% include {{load_attributes}} scope="all" %}
 
-
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ifeval::[{binder-badges-enabled} == true]
-image:https://mybinder.org/badge_logo.svg[Binder, link="{binder-app-launch--tree}", {browser-window--new}]
-image:/assets/images/badges/myBinder.png[[Binder, link="{binder--home}", {browser-window--new}]
-image:/assets/images/badges/docsBinder.png[[Binder, link="{binder--docs}", {browser-window--new}]
+image:/assets/images/badges/configBinder.png[Binder, link="{binder--home}", {browser-window--new}]
+image:/assets/images/badges/docsBinder.png[Binder, link="{binder--docs}", {browser-window--new}]
 endif::[]
 
 // Include sub-documents (if any)
@@ -96,6 +93,10 @@ endif::[]
 // 2HTML:       https://stackoverflow.com/questions/35896866/how-to-export-current-notebook-in-html-on-jupyter
 
 // info:        https://en.wikipedia.org/wiki/Galileo_Galilei
+
+
+
+== J1 NBI Integration
 
 The Template system J1 integrates the Javascript (core) library
 `nbinteract-core.js` from NBI (nbinteract). The integration is a J1 module
@@ -124,8 +125,6 @@ WARNING: To develop your *Jupyter Notebooks*, a *local* installation of the
 Notebooks, the *Jupyter* package and the installation of the library
 *nbinteract* are expected.
 
-== J1 NBI Integration
-
 The module for J1 NBI integration is available as a stable version. However,
 it is still in an experimental state. The main reason for that experimental
 status is the *age* of the underlying library `nbinteract-core`.
@@ -134,7 +133,7 @@ NOTE: Recent library updates are more than a year ago, and the current
 version of the Jupyter Notebook *JupyterLab* application, unfortunately,
 *not* supported (yet).
 
-=== Notebooks vs Textbooks
+=== Notebooks vs. Textbooks
 
 Jupyter Notebooks with the extension `.ipynb` are (data) files in JSON
 format and can only be run using the *App* of Jupyter Notebook. On the

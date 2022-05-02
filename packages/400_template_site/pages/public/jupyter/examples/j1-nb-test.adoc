@@ -63,6 +63,8 @@ resource_options:
 // :page--attr:                                   <attr-value>
 :binder-badges-enabled:                           true
 :binder-app-launch--tree:                         https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/main?urlpath=/tree
+:binder-app-launch--notebook:                     https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/main?filepath=notebooks/j1/j1_interactive.ipynb
+
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -81,6 +83,7 @@ resource_options:
 // image:/assets/images/badges/docsBinder.png[Binder, link="https://mybinder.readthedocs.io/en/latest/", {browser-window--new}]
 
 ifeval::[{binder-badges-enabled} == true]
+image:/assets/images/badges/notebookBinder.png[Binder, link="{binder-app-launch--notebook}", {browser-window--new}]
 image:https://mybinder.org/badge_logo.svg[Binder, link="{binder-app-launch--tree}", {browser-window--new}]
 endif::[]
 
@@ -93,9 +96,5 @@ the most used.
 Interactive widgets are provided natively by Jupyter Notebooks using the
 library `ipywidgets`. Some more widgets are provided by `nbinteract`. Find
 common examples in the example textbooks below.
-
-textbook::j1_interactive[]
-
-lorem:sentences[5]
 
 textbook::j1_interactive[]
