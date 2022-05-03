@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/scss/theme_uno/bootstrap/extensions/_tags.scss
+ # ~/scss/theme_uno/extensions/_tags.scss
  #
  # Product/Info:
  # https://jekyll.one
@@ -82,7 +82,7 @@
 				white-space: nowrap;
 				text-overflow: ellipsis;
 				overflow: hidden;
-				color: $black;
+				color: $black !important;
 				font-size: 1rem;
 				font-weight: 400;
 				text-decoration: none;

@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/scss/theme_uno/extensions/_container.scss
+ # ~/scss/theme_uno/extensions/_badge.scss
  #
  # Product/Info:
  # https://jekyll.one
@@ -10,14 +10,13 @@
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
  # -----------------------------------------------------------------------------
- # NOTE: General container styles
+ # NOTE: General styles for tag boxes|clouds
  # -----------------------------------------------------------------------------
 */
 
-// CONTAINER layout helper classes
+// Badge anchor links
 // -----------------------------------------------------------------------------
 
-.no-padding {
-  padding-right: 0 !important;
-  padding-left:  0 !important;
+span.badge > a {
+  color: #000 !important;
 }
