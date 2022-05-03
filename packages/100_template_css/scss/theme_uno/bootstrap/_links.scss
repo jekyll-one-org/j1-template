@@ -43,14 +43,14 @@
 
 // jadams, 2020-11-15: set text color for (all) anchors (Google optimisation)
 a {
-  color: $gray-800 !important;
+//color: $gray-800 !important;
   font-weight: 500 !important;
   text-decoration: none !important;
 }
 
 a:hover {
   color: $gray-400 !important;
-  font-weight: 600 !important;
+  font-weight: 500 !important;
 }
 
 li > a {
@@ -60,5 +60,5 @@ li > a {
 
 li > a:hover {
   color: $gray-400  !important;
-  font-weight: 600 !important;
+  font-weight: 500 !important;
 }

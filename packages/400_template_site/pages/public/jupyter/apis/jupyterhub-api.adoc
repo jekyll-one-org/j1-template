@@ -34,8 +34,7 @@ keywords: >
 categories:                             [ Software, Python ]
 tags:                                   [ JupyterLab, API ]
 
-scrollbar:                              true
-
+scrollbar:                              false
 permalink:                              /pages/public/jupyter/docs/jupyterlab-api/
 regenerate:                             false
 
@@ -96,23 +95,22 @@ endif::[]
 
 // See: https://jupyter.org/hub
 
-*JupyterHub* brings the power of notebooks to *groups* of users. It
-gives users access to *computational environments* and resources without
-burdening the users with installation and maintenance tasks. Users, including
-students, researchers, and data scientists, can get their work done in
-their own workspaces on shared resources which can be managed efficiently
-by system administrators.
+JupyterHub brings the power of notebooks to groups of users. It gives users
+access to computational environments and resources without burdening the users
+with installation and maintenance tasks. Users, including students, researchers,
+and data scientists, can get their work done in their own workspaces on shared
+resources which can be managed efficiently by system administrators.
 
 JupyterHub runs in the cloud or on your own hardware, and makes it possible
 to serve a pre-configured data science environment to any user in the world.
 It is customizable and scalable, and is suitable for small and large teams,
 academic courses, and large-scale infrastructure.
 
-== JupyterHub Services
+== Services API
 
 Javascript client for the Jupyter services REST APIs. All functions and
 classes using the REST API allow a serverSettings parameter to configure
-requests. Requests are made using the *fetch API*, which is available in
+requests. Requests are made using the fetch API, which is available in
 modern browsers or via npm install fetch for node users. The whatwg-fetch
 npm package can be used to polyfill browsers that do not support the
 fetch API.
@@ -123,7 +121,7 @@ package.
 
 === Clients
 
-A *client* is a single entity connected to a kernel. Since kernel messages
+A client is a single entity connected to a kernel. Since kernel messages
 include the client id, it is easy for a client to filter kernel messages for
 just messages between it and the kernel. In JupyterLab, different activities,
 such as a console and a notebook, are usually considered separate clients
@@ -141,7 +139,7 @@ Jupyter kernel messaging protocol.
 
 === Kernel model
 
-A *kernel model* mirrors the server kernel models, and represents a single
+A kernel model mirrors the server kernel models, and represents a single
 running kernel on the server. A kernel can be created, restarted, shut down,
 etc., through calls to the server. A kernel model's lifecycle mirrors the
 server kernel model's lifecycle, and it will be disposed when the server
@@ -150,7 +148,7 @@ kernel is shut down.
 === Kernel connection
 
 A kernel connection represents a single client connecting to a kernel over
-a *websocket*. Typically only one kernel connection handles comms for any
+a websocket (wss). Typically only one kernel connection handles comms for any
 given kernel. The kernel connection is disposed when the client no longer
 has a need for the connection. Disposing a kernel connection does not cause
 the kernel to shut down. However, if a kernel is shut down, (eventually)
@@ -242,5 +240,5 @@ lightbox::jupyterlab--architecture[ 800, {data-jupyterlab--architecture}, role="
 // https://jupyter-server.readthedocs.io/en/latest/developers/rest-api.html
 // https://petstore.swagger.io/?url=https://raw.githubusercontent.com/jupyter/jupyter_server/master/jupyter_server/services/api/api.yaml#/
 
-Find an selectable bla at swagger.io with
+Find at swagger.io a selectable list of all API calls available:
 link:{url-jupyter-server-api--swagger}[Jupyter Server API, {browser-window--new}].

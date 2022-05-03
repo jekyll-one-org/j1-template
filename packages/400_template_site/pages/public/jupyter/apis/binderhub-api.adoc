@@ -32,7 +32,7 @@ keywords: >
 categories:                             [ Software, Python ]
 tags:                                   [ Binder, API ]
 
-scrollbar:                              true
+scrollbar:                              false
 personalization:                        true
 
 permalink:                              /pages/public/jupyter/docs/binderhub-api/
@@ -319,7 +319,7 @@ For some background and tips about how you can speed up your repository
 launch times, see this
 link:{jupyter-discourse--startup-time}[community forum post, {{browser-window--new}}].
 
-=== Track repository data on `mybinder.org`
+=== Track repository data on Binder
 
 The mybinder.org team runs a service that provides repository-level data
 about all of the binders that run each day. This is called the mybinder.org
@@ -563,5 +563,5 @@ a git repository.
 
 === Configuration and Source Code Reference
 
-Find details for all *code references* on
+Find details for all code references on:
 link:{binderhub-docs--reference}[BinderHub Docs - Reference, {browser-window--new}]

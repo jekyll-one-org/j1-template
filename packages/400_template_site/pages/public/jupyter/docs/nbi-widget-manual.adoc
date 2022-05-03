@@ -31,8 +31,7 @@ keywords: >
 categories:                             [ Software, Python ]
 tags:                                   [ Binder, API ]
 
-scrollbar:                              true
-
+scrollbar:                              false
 permalink:                              /pages/public/jupyter/docs/nbi-widgets/
 regenerate:                             false
 
@@ -80,6 +79,17 @@ endif::[]
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
+
+The library *nbinteract* comes with a set of functions that produce
+Javascript-based plots designed for interaction. The package combines the
+_ipywidgets_ library and the _bqplot_ plotting library to implement
+function-driven interfaces to interactive plotting.
+
+The nbinteract plotting methods use _ipywidgets_ to generate and display
+widgets, inferring the widget type as needed. When a user interacts with a
+widget, a Python callback updates the visualization *without* a complete
+rerender. This noticeably lowers visualization update time compared to using
+ipywidgets alone to render static images.
 
 == Histogram
 

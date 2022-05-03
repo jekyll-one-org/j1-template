@@ -35,7 +35,7 @@ scrollbar:                              false
 fab_menu_id:                            open_toc_reload
 personalization:                        true
 
-permalink:                              /pages/public/jupyter/textbooks/j1-nb-test/
+permalink:                              /pages/public/jupyter/textbooks/interactive-widgets/
 regenerate:                             false
 
 resources:                              [ nbinteract, rouge ]
@@ -87,14 +87,15 @@ image:/assets/images/badges/notebookBinder.png[Binder, link="{binder-app-launch-
 image:https://mybinder.org/badge_logo.svg[Binder, link="{binder-app-launch--tree}", {browser-window--new}]
 endif::[]
 
+Widgets are eventful python objects that have a representation in the browser,
+often as a control like a slider, textbox, etc. Widgets are used to build
+interactive GUIs for your notebooks, and to synchronize stateful and stateless
+information between the (IPython-)Kernel and JavaScript.
+
 Find with that page a commonly used set of widgets for interactive textbooks.
 Some more options are available for interactivity, but this selection shows
-the most used.
+the most used. Interactive widgets are provided natively by Jupyter Notebooks
+using the library `ipywidgets`. Some more widgets are provided by `nbinteract`.
+Find common examples in the textbooks below.
 
-== Interactive Widgets
-
-Interactive widgets are provided natively by Jupyter Notebooks using the
-library `ipywidgets`. Some more widgets are provided by `nbinteract`. Find
-common examples in the example textbooks below.
-
-textbook::j1_interactive[]
+textbook::j1_interactive_widgets[]

@@ -136,8 +136,8 @@ settings:
     - textbook:
         enabled:                        true
 
-        id:                             j1_interactive
-        xhr_data:                       j1_interactive.html
+        id:                             j1_interactive_widgets
+        xhr_data:                       j1_interactive_widgets.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    false
 

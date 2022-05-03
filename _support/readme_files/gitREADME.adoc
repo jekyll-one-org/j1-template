@@ -42,10 +42,6 @@ Remote:
     git push --set-upstream origin main
 
 
-
-
-
-
 == Delete branches
 
 See:

@@ -95,18 +95,6 @@ endif::[]
 // info:        https://en.wikipedia.org/wiki/Galileo_Galilei
 
 
-
-== J1 NBI Integration
-
-The Template system J1 integrates the Javascript (core) library
-`nbinteract-core.js` from NBI (nbinteract). The integration is a J1 module
-that requires *no programming* to integrate interactive textbooks in
-your webpages.
-
-WARNING: The (core) library integrated with J1 can *only* used with the
-Template System J1. The library `nbinteract-core` is modified for the use
-with J1, allowing seamless integration between NBI and the pages of a J1 Web.
-
 The integration of NBI consists of the following components:
 
 * the (modified) JS and CSS files of the library *nbinteract-core* specified
@@ -133,7 +121,7 @@ NOTE: Recent library updates are more than a year ago, and the current
 version of the Jupyter Notebook *JupyterLab* application, unfortunately,
 *not* supported (yet).
 
-=== Notebooks vs. Textbooks
+== Notebooks vs. Textbooks
 
 Jupyter Notebooks with the extension `.ipynb` are (data) files in JSON
 format and can only be run using the *App* of Jupyter Notebook. On the
@@ -145,6 +133,17 @@ For integrating textbooks in webpages, the notebooks with the extension
 (Python) program nbinteract. Textbooks that have already been exported
 can be found for the *Starter Web* in the folder
 `~/pages/public/jupyter/notebooks/textbooks`.
+
+== J1 NBI Configuration
+
+The Template system J1 integrates the Javascript (core) library
+`nbinteract-core.js` from NBI (nbinteract). The integration is a J1 module
+that requires *no programming* to integrate interactive textbooks in
+your webpages.
+
+WARNING: The (core) library integrated with J1 can *only* used with the
+Template System J1. The library `nbinteract-core` is modified for the use
+with J1, allowing seamless integration between NBI and the pages of a J1 Web.
 
 === Modul configuration
 

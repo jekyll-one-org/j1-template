@@ -169,7 +169,7 @@
           dropdown:
 
             - title:                    Interactive Widgets
-              href:                     /pages/public/jupyter/textbooks/j1-nb-test/
+              href:                     /pages/public/jupyter/textbooks/interactive-widgets/
               icon:                     script-text-play-outline
             - title:                    Interactive Evaluation
               href:                     /pages/public/jupyter/textbooks/odes-in-python/
