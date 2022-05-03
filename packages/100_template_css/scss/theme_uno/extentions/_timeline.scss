@@ -20,9 +20,8 @@
 $timeline-tmicon-background-color:                theme-color(primary) !default;
 $timeline-title-background-color:                 theme-color(primary) !default;
 
-/* Header Box
--------------------------------------------------------------------------------- */
-
+// Header Box
+// -----------------------------------------------------------------------------
 .timeline-header-box  {
   background: $white;
 }
@@ -75,9 +74,8 @@ h2.timeline-header-box:after {
 }
 
 
-/* Timeline
--------------------------------------------------------------------------------- */
-
+// Timeline
+// -----------------------------------------------------------------------------
 .timeline {
 	padding: 20px 0;
 	list-style: none;
@@ -201,20 +199,6 @@ a.timeline-list-unstyled:hover {
 	position: relative;
 }
 
-/*
-.timeline > li > .timeline-panel:before {
-	position: absolute;
-	top: 26px;
-	right: -15px;
-	display: inline-block;
-	border-top: 15px solid transparent;
-	border-left: 15px solid $gray-100;
-	border-right: 0 solid $gray-100;
-	border-bottom: 15px solid transparent;
-	content: " ";
-}
-*/
-
 .timeline > li > .timeline-panel:after {
 	position: absolute;
 	top: 27px;
@@ -327,9 +311,8 @@ a.timeline-list-unstyled:hover {
   	left: -12px;
 }
 
-/* Media Queries
- ------------------------------------------------------------------------------- */
-
+// Media Queries
+// -----------------------------------------------------------------------------
 @media screen and (max-width: 992px) {
 	.timeline > li > .timeline-panel:before {
 		top: 31px;
@@ -427,7 +410,6 @@ a.timeline-list-unstyled:hover {
 	}
 
 	.timeline > li.timeline-inverted > .timeline-badge {
-    /* was: left: 28px; */
     left: -11px;
 	}
 }

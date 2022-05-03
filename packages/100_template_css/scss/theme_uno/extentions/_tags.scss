@@ -17,10 +17,6 @@
 // Tag Box mixins
 // -----------------------------------------------------------------------------
 
-//@extend-elements
-//original selectors
-//.tag__box:before, .tag__box:after
-
 %extend_1 {
 	display: table;
 	content: "";
@@ -29,7 +25,6 @@
 
 // Tagbox styles
 // -----------------------------------------------------------------------------
-
 .tag__box {
 	list-style: none;
 	margin: 0;
@@ -64,8 +59,8 @@
 	}
 }
 
-/*  Tag Cloud classes
--------------------------------------------------------------------------------- */
+// Tag Cloud classes
+// -----------------------------------------------------------------------------
 .tag__cloud {
 	margin-bottom: 10px;
 	margin-top: 20px;
@@ -92,9 +87,7 @@
 				font-weight: 400;
 				text-decoration: none;
 				transition: .2s;
-//  		box-shadow: 0 16px 26px -10px rgba(158, 158, 158, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(97, 97, 97, 0.2);
 				&:hover {
-//  			background-color: $lighten-300;                                       // make hover manageable for light and dark themens
 					span {
 						color: $primary;
 					}
@@ -109,7 +102,6 @@
 				height: 20px;
 				line-height: 1.5;
 				background-color: $gray-50;
-				//Instead of the line below you could use @include border-radius($radius, $vertical-radius)
 				border-radius: 100%;
 				color: $black;
 				font-size: 11px;
@@ -129,6 +121,7 @@
 		}
 	}
 }
+
 .tag-numerator .badge {
 	padding: 5px 20px;
 	background-color: $gray-700;

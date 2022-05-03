@@ -12,12 +12,10 @@
  # -----------------------------------------------------------------------------
 */
 
-// // jadams, 2021-11-19: set hover for (all) buttons
-// .btn:hover, .btn:focus {
-//   color: $darken-300;
-//   outline: none;
-// }
-
 .btn-link {
   color: $gray-800;
+}
+
+.btn {
+  color: #424242 !important;
 }

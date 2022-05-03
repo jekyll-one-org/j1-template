@@ -73,9 +73,9 @@
     {% if internet_enabled %}
     <li>
       <i class="fa fa-globe fa-2x"></i>
-      <p><a href="{{home_link}}">{{home_text}}</a></p>
-      <p><a href="mailto:{{mail_1}}">{{mail_1}}</a></p>
-      <p><a href="mailto:{{mail_2}}">{{mail_2}}</a></p>
+      <p><a class="link-news" href="{{home_link}}">{{home_text}}</a></p>
+      <p><a class="link-news" href="mailto:{{mail_1}}">{{mail_1}}</a></p>
+      <p><a class="link-news"href="mailto:{{mail_2}}">{{mail_2}}</a></p>
     </li>
     {% endif %}
   </ul>

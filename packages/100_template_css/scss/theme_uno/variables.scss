@@ -14,12 +14,12 @@
  # -----------------------------------------------------------------------------
 */
 
-// // FIXME: re-examine organization of variables, files, ordering etc.
-// // While the ordering works, we need to be sure this is more comprehensible.
-// // -----------------------------------------------------------------------------
+// FIXME: re-examine organization of variables, files, ordering etc.
+// While the ordering works, we need to be sure this is more comprehensible.
+// -----------------------------------------------------------------------------
+
 // @import "variables/colors";
 // @import "variables/shadow";
-
 
 // FIXME: re-examine organization of variables, files, ordering etc.
 // While the ordering works, we need to be sure this is more comprehensible.
@@ -37,6 +37,7 @@
 
 // Additional or customized variables
 // -----------------------------------------------------------------------------
+
 // @import "variables/custom";
 
 @import "variables/drawer";                                                     // jadams, 2019-11-21: (bmd) drawer
@@ -77,13 +78,13 @@ $enable-shadows:                        true;                                   
 @import "~bootstrap/scss/functions";                                            // from bootstrap node_module
 @import "~bootstrap/scss/variables";                                            // from bootstrap node_module
 
-// // MD variables
-// // -----------------------------------------------------------------------------
+// MD variables
+// -----------------------------------------------------------------------------
 // @import "variables/drawer";
 // @import "variables/layout";
 // @import "variables/menu";
 // @import "variables/snackbar";
 //
-// // Additional or customized variables
-// // -----------------------------------------------------------------------------
+// Additional or customized variables
+// -----------------------------------------------------------------------------
 // @import "variables/custom";

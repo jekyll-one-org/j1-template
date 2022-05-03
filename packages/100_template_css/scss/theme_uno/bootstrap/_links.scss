@@ -13,52 +13,25 @@
  # -----------------------------------------------------------------------------
 */
 
-// see: https://css-tricks.com/hash-tag-links-padding/
-// jadams, 2020-11-15:  #anchor links padding
-
-// h2.anchor-link:before {
-//   display: block;
-//   content: " ";
-//   margin-top: -6rem;
-//   height: +6rem;
-//   visibility: hidden;
-// }
-//
-// h3.anchor-link:before {
-//   display: block;
-//   content: " ";
-//   margin-top: -6rem;
-//   height: +6rem;
-//   visibility: hidden;
-// }
-//
-// h4.anchor-link:before {
-//   display: block;
-//   content: " ";
-//   margin-top: -4.5rem;
-//   height: +4.5rem;
-//   visibility: hidden;
-// }
-
-
 // jadams, 2020-11-15: set text color for (all) anchors (Google optimisation)
 a {
-//color: $gray-800 !important;
+  color: $blue-gray !important;
   font-weight: 500 !important;
   text-decoration: none !important;
 }
 
 a:hover {
-  color: $gray-400 !important;
+  color: $blue-gray-800 !important;
   font-weight: 500 !important;
 }
 
 li > a {
+  color: $blue-gray !important;
   font-weight: 500 !important;
   text-decoration: none !important;
 }
 
 li > a:hover {
-  color: $gray-400  !important;
+  color: $blue-gray-800  !important;
   font-weight: 500 !important;
 }

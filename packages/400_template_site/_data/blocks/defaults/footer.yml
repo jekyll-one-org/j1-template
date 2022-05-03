@@ -173,7 +173,7 @@ defaults:
         enabled:                        true
         title:                          Useful Links
         title_translation:              notranslate                             # translate|notranslate
-        tagline:                        latest info
+        tagline:                        top sites
 
         links:
 

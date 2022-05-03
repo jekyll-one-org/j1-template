@@ -17,9 +17,8 @@
 // Provides all styles for FLEX examples (Kickstarter/Flex-in-a-Day)
 // -----------------------------------------------------------------------------
 
-
-/* Helper classes
------------------ */
+// Helper classes
+// -----------------------------------------------------------------------------
 
 .fix-height-150 {
   height: 150px;
@@ -33,8 +32,8 @@
   height: 600px;
 }
 
-/* Container (Parent) classes
------------------------------ */
+// Container (Parent) classes
+// -----------------------------------------------------------------------------
 
 .flex-container-v2 {
   padding: 0;
@@ -53,7 +52,6 @@
   justify-content: space-around;
 }
 
-
 .flex-container {
   display: flex;
   align-items: center;
@@ -71,9 +69,8 @@
   font-size: 3em;
 }
 
-/* Flex Item (Child) classes
-------------------------------------------------------------------- */
-
+// Flex Item (Child) classes
+// -----------------------------------------------------------------------------
 .flex-item-v2 {
   background-color: #E8EAF6;
   width: 100px;
@@ -84,9 +81,8 @@
   font-size: 3em;
 }
 
-
-/* Flex PARENT property flex-direction
-------------------------------------------------------------------- */
+// Flex PARENT property flex-direction
+// -----------------------------------------------------------------------------
 .flex-direction-column {
   flex-direction: column;
 }
@@ -100,8 +96,8 @@
   flex-direction: row-reverse;
 }
 
-/* Flex PARENT property flex-wrap
-------------------------------------------------------------------- */
+// Flex PARENT property flex-wrap
+// -----------------------------------------------------------------------------
 .flex-wrap-nowrap {
   flex-wrap: nowrap;
 }
@@ -112,8 +108,8 @@
   flex-wrap: wrap-reverse;
 }
 
-/* Flex PARENT property flex-wrap
-------------------------------------------------------------------- */
+// Flex PARENT property flex-wrap
+// -----------------------------------------------------------------------------
 .flex-flow-row-wrap {
   flex-flow: row wrap;
 }
@@ -121,8 +117,8 @@
   flex-flow: row nowrap;
 }
 
-/* Flex PARENT property justify-content
-------------------------------------------------------------------- */
+// Flex PARENT property justify-content
+// -----------------------------------------------------------------------------
 .flex-justify-content-center {
   justify-content: center;
 }
@@ -139,8 +135,8 @@
   justify-content: space-between;
 }
 
-/* Flex PARENT property align-items
-------------------------------------------------------------------- */
+// Flex PARENT property align-items
+// -----------------------------------------------------------------------------
 .flex-align-items-baseline {
   align-items: baseline;
 }
@@ -157,8 +153,8 @@
   align-items: stretch;
 }
 
-/* Flex PARENT property align-content
-------------------------------------------------------------------- */
+// Flex PARENT property align-content
+// -----------------------------------------------------------------------------
 .flex-align-content-center {
   align-content: center;
 }
@@ -178,9 +174,8 @@
   align-content: stretch;
 }
 
-/* Navigation example
-------------------------------------------------------------------- */
-
+// Navigation example
+// -----------------------------------------------------------------------------
 .navigation {
   list-style: none;
   margin: 0;
@@ -234,9 +229,8 @@
   }
 }
 
-/* 3-Columns Layout example
-------------------------------------------------------------------- */
-
+// 3-Columns Layout example
+// -----------------------------------------------------------------------------
 .wrapper-mobile {
   display: flex;
   flex-flow: row wrap;

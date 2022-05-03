@@ -27,169 +27,6 @@
   border-bottom: 1px solid #E5E5E5;
 }
 
-// .post-timestamp {
-//   display: block;
-//   margin: 10px 0 25px 0;
-// }
-
-// .post-paginator {
-//   margin: 0 0 -1px 0;
-//   padding-bottom: 5px;
-//   padding-left: 10px;
-//   display: inline-block;
-//   border-bottom: 1px dotted #3465a4;
-// }
-
-// h4.post-headline > a {
-//   color: #0d47a1;
-// }
-//
-// h4.post-headline > a:hover {
-//   color: #212121;
-// }
-
-
-//  jadams, 2017-08-27: unclear why color settings don't work
-//  on anchor elements
-// -----------------------------------------------------------------------------
-
-//  jadams, 2020-08-15: removed padding
-// -----------------------------------------------------------------------------
-// h1 .post-headline {
-//   color: rgba(0, 0, 0, 0.9);
-//   font-size: 3.5rem !important;
-//   font-weight: 400;
-//   margin: 0 0 -1px 0;
-//   padding-bottom: 5px;
-//   /* padding-left: 10px; */
-//   display: inline-block;
-//   border-bottom: 1px dotted #3465a4;
-// }
-//
-// h2 .post-headline {
-//   color: rgba(0, 0, 0, 0.9);
-//   font-size: 3rem !important;
-//   font-weight: 400;
-//   margin: 0 0 -1px 0;
-//   padding-bottom: 5px;
-//   /* padding-left: 10px; */
-//   display: inline-block;
-//   border-bottom: 1px dotted #3465a4;
-// }
-
-//  jadams, 2021-05-01: disabled styles NOT needed
-// -----------------------------------------------------------------------------
-
-//  Post links in ul list to display search results
-// -----------------------------------------------------------------------------
-
-/*
-.post-search-results h2 {
-  font-size: 3rem !important;
-  font-weight: 400;
-}
-
-.post-search-results h3 {
-  font-size: 2rem !important;
-  font-weight: 400;
-}
-
-.post-search-results h4 {
-  font-size: 2rem !important;
-  font-weight: 400;
-}
-
-.post-search-results h4 {
-  font-size: 1.25rem !important;
-  font-weight: 200;
-  margin-top: 0;
-}
-
-.post-search-results h4 {
-    font-size: 1.75rem !important;
-    font-weight: 500;
-    margin-top: 0;
-    color: $gray-300 !important;
-}
-
-.post-search-results .link-news {
-	margin-bottom: 0;
-}
-
-.post-search-results .link-news li {
-	// padding: 12px 0px;
-	// border-top: solid 1px #353535;
-}
-
-.post-search-results .link-news li:first-child {
-	padding-top: 0;
-	border-top: none;
-}
-
-.post-search-results .link-news li a, .link-news li a {
-  color: rgba(0, 0, 0, 0.5);
-  // font-size: 1.25rem;
-  font-weight: 400;
-  margin-bottom: 3px;
-  display: inline-block;
-}
-
-.post-search-results .link-news a:hover {
-	color: rgba(0, 0, 0, 0.9) !important;
-  text-decoration: none;
-}
-
-.post-search-results .link-news li small {
-  font-size: 1.25rem;
-	color: #555;
-	display: block;
-}
-
-.post-archive-search-results .link-news li a, .link-news li a {
-    color: rgba(0, 0, 0, 0.5);
-    // font-size: 1rem;
-    font-weight: 400;
-    margin-bottom: 3px;
-    display: inline-block;
-}
-
-.post-date-search-results .link-news li a, .link-news li a {
-    color: rgba(0, 0, 0, 0.5);
-    // font-size: 1rem;
-    font-weight: 400;
-    margin-bottom: 3px;
-    display: inline-block;
-}
-
-.post-date-search-results h3 {
-    font-size: 4rem !important;
-    font-weight: 400;
-}
-
-.link-news a {
-  text-decoration: none;
-}
-
-.link-news a:hover {
-  color: rgba(0, 0, 0, 0.9) !important;
-  text-decoration: none;
-}
-
-a.news-link {
-    color: currentColor;
-    height: 100%;
-    font-size: 14px;
-    text-decoration: none !important;
-}
-*/
-
-
-//  Blog Series Classes
-//    Inspired by Justin James.
-//    See: http://digitaldrummerj.me/,
-//         https://github.com/digitaldrummerj/digitaldrummerj.github.io
-// -----------------------------------------------------------------------------
-
 //  Series navigator
 // -----------------------------------------------------------------------------
 .series-navigator {
@@ -253,7 +90,6 @@ a.news-link {
 .series-exerpt {
   text-align: justify;
   padding: 0px 20px 10px 0px;
-//  color: $gray-900;
 }
 
 .series-exerpt-title {
@@ -261,7 +97,6 @@ a.news-link {
   font-family: inherit;
   font-weight: 400;
   line-height: 1.1;
-  // color: $gray-900;
 }
 
 .series-navigator .series-navigator-footer {

@@ -17,29 +17,6 @@
 // CONTAINER layout helper classes
 // -----------------------------------------------------------------------------
 
-// space for e.g. SSM (sticky side menu)
-/*
-#content {
-   padding-right: initial;
-}S
-*/
-
-// jadams, 2020-08-15: new left padding (all pages, except home)
-// -----------------------------------------------------------------------------
-/*
-@media screen and (min-width: 992px) {
-  #content {
-     padding-right: 2.5rem;
-  }
-}
-
-@media screen and (max-width: 992px) {
-  #content {
-     padding-right: 2.5rem;
-  }
-}
-*/
-
 .no-padding {
   padding-right: 0 !important;
   padding-left:  0 !important;

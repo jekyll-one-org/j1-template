@@ -54,34 +54,32 @@
 // scroller for scrollable (BS) menus (based on scroller style 1)
 // -----------------------------------------------------------------------------
 ul.scrollable-menu {
-    height: auto;
-    max-height: 20.5rem;
-    overflow-x: hidden;
-//	firefox
-		scrollbar-color: #424242 #f5f5f5;
-		scrollbar-width: thin;
+  height: auto;
+  max-height: 20.5rem;
+  overflow-x: hidden;
+	scrollbar-color: #424242 #f5f5f5; //	firefox
+	scrollbar-width: thin;            //	firefox
 }
 
 ul.scrollable-menu::-webkit-scrollbar {
-    width: 12px;
-    background-color: $gray-100;
+  width: 12px;
+  background-color: $gray-100;
 }
 ul.scrollable-menu::-webkit-scrollbar-track {
-	  -webkit-box-shadow: inset 0 0 6px $darken-300;
-	  border-radius: 0px;
-	  background-color: $gray-100;
+  -webkit-box-shadow: inset 0 0 6px $darken-300;
+  border-radius: 0px;
+  background-color: $gray-100;
 }
 ul.scrollable-menu::-webkit-scrollbar-thumb {
-//	border-radius: 10px;
-		-webkit-box-shadow: inset 0 0 6px $lighten-300;
-		background-color: $gray-800;
+	-webkit-box-shadow: inset 0 0 6px $lighten-300;
+	background-color: $gray-800;
 }
 
 // custom scroller styles
 // -----------------------------------------------------------------------------
 
-// scrooler style 1
-//
+// Scroller style 1
+// -----------------------------------------------------------------------------
 .scroller-1::-webkit-scrollbar {
 	width: 12px;
 	background-color: $gray-100;
@@ -97,8 +95,8 @@ ul.scrollable-menu::-webkit-scrollbar-thumb {
 	background-color: $gray-800;
 }
 
-// scrooler style 2
-//
+// Scroller style 2
+// -----------------------------------------------------------------------------
 .scroller-2::-webkit-scrollbar {
 	width: 12px;
 	background-color: $gray-300;
@@ -114,8 +112,8 @@ ul.scrollable-menu::-webkit-scrollbar-thumb {
 	background-color: $gray-800;
 }
 
-// scrooler style 3
-//
+// Scroller style 3
+// -----------------------------------------------------------------------------
 .scroller-3::-webkit-scrollbar {
 	width: 6px;
 	background-color: $gray-100;
@@ -128,8 +126,8 @@ ul.scrollable-menu::-webkit-scrollbar-thumb {
 	background-color: $black;
 }
 
-// scrooler style 4
-//
+// Scroller style 4
+// -----------------------------------------------------------------------------
 .scroller-4::-webkit-scrollbar {
 	width: 10px;
 	background-color: $gray-100;
@@ -143,8 +141,8 @@ ul.scrollable-menu::-webkit-scrollbar-thumb {
 	border: 2px solid $gray-800;
 }
 
-// scrooler style 5
-//
+// Scroller style 5
+// -----------------------------------------------------------------------------
 .scroller-5::-webkit-scrollbar {
 	width: 10px;
 	background-color: $gray-100;
@@ -160,8 +158,8 @@ ul.scrollable-menu::-webkit-scrollbar-thumb {
 		color-stop(.5, transparent), to(transparent));
 }
 
-// scrooler style 6
-//
+// Scroller style 6
+// -----------------------------------------------------------------------------
 .scroller-6::-webkit-scrollbar {
 	width: 10px;
 	background-color: $gray-100;
@@ -182,8 +180,8 @@ ul.scrollable-menu::-webkit-scrollbar-thumb {
 		transparent)
 }
 
-// scrooler style 7
-//
+// Scroller style 7
+// -----------------------------------------------------------------------------
 .scroller-7::-webkit-scrollbar {
 	width: 10px;
 	background-color: $gray-100;
@@ -203,8 +201,8 @@ ul.scrollable-menu::-webkit-scrollbar-thumb {
 		color-stop(0.86, $indigo-900));
 }
 
-// scrooler style 8
-//
+// Scroller style 8
+// -----------------------------------------------------------------------------
 .scroller-8::-webkit-scrollbar {
 	width: 10px;
 	background-color: $gray-100;
@@ -217,8 +215,8 @@ ul.scrollable-menu::-webkit-scrollbar-thumb {
 	background-color: $black;
 }
 
-// scrooler style 9
-//
+// Scroller style 9
+// -----------------------------------------------------------------------------
 .scroller-9::-webkit-scrollbar {
 	width: 10px;
 	background-color: $gray-100;
@@ -239,8 +237,8 @@ ul.scrollable-menu::-webkit-scrollbar-thumb {
 		transparent)
 }
 
-// scrooler style 10
-//
+// Scroller style 10
+// -----------------------------------------------------------------------------
 .scroller-10::-webkit-scrollbar {
 	width: 10px;
 	background-color: $gray-100;
@@ -263,8 +261,8 @@ ul.scrollable-menu::-webkit-scrollbar-thumb {
 		transparent)
 }
 
-// scrooler style 11
-//
+// Scroller style 11
+// -----------------------------------------------------------------------------
 .scroller-11::-webkit-scrollbar {
 	width: 10px;
 	background-color: $gray-100;
@@ -287,8 +285,8 @@ ul.scrollable-menu::-webkit-scrollbar-thumb {
 	  transparent)
 }
 
-// scrooler style 12
-//
+// Scroller style 12
+// -----------------------------------------------------------------------------
 .scroller-12::-webkit-scrollbar {
 	width: 12px;
 	background-color: $gray-100;
@@ -308,8 +306,8 @@ ul.scrollable-menu::-webkit-scrollbar-thumb {
 		transparent)
 }
 
-// scrooler style 13
-//
+// Scroller style 13
+// -----------------------------------------------------------------------------
 .scroller-13::-webkit-scrollbar {
 	width: 12px;
 	background-color: $gray-100;
@@ -329,8 +327,8 @@ ul.scrollable-menu::-webkit-scrollbar-thumb {
 		transparent)
 }
 
-// scrooler style 14
-//
+// Scroller style 14
+// -----------------------------------------------------------------------------
 .scroller-14::-webkit-scrollbar {
 	width: 10px;
 	background-color: $gray-100;
@@ -349,8 +347,8 @@ ul.scrollable-menu::-webkit-scrollbar-thumb {
 		transparent)
 }
 
-// scrooler style 15
-//
+// Scroller style 15
+// -----------------------------------------------------------------------------
 .scroller-15::-webkit-scrollbar {
 	width: 10px;
 	background-color: $gray-100;
@@ -371,8 +369,8 @@ ul.scrollable-menu::-webkit-scrollbar-thumb {
 		color-stop(.6,#54DE5D))
 }
 
-// scrooler style 16
-//
+// Scroller style 16
+// -----------------------------------------------------------------------------
 .scroller-16::-webkit-scrollbar {
 	width: 10px;
 	background-color: $gray-100;

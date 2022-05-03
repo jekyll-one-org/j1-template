@@ -14,7 +14,6 @@
  # -----------------------------------------------------------------------------
 */
 
-/* jadams: background md_grey_900 */
 .footer {
 	padding-top: 2em;
 	background: $gray-900;
@@ -27,11 +26,10 @@
 }
 
 .footer p {
-    color: $lighten;
-    font-size: 1em;
-    font-family: sans-serif;
+  color: $lighten;
+  font-size: 1em;
+  font-family: sans-serif;
 }
-
 
 .heading-footer {
 	text-align: left;
@@ -41,24 +39,25 @@
 }
 
 .heading-footer:after {
-    left: 0;
-    bottom: 0;
-    height: 2px;
-    width: 50px;
-    content: " ";
-    background: #204a87;
-    position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 2px;
+  width: 50px;
+  content: " ";
+  background: #204a87;
+  position: absolute;
 }
 
 .heading-footer h2 {
-    color: $lighten;
-    font-size: 1.3em !important;
-    text-transform: uppercase;
+  color: $lighten;
+  font-size: 1.3em !important;
+  text-transform: uppercase;
 }
 
 /*Link News*/
 .footer .link-news {
 	margin-bottom: 0;
+  color: $gray-500 !important;
 }
 
 .footer .link-news li {
@@ -72,20 +71,11 @@
 }
 
 .footer .link-news li a {
-    color: $lighten !important;
-    margin-bottom: 0;
-    font-size: 1em;
-    font-weight: 700;
+  color: $lighten !important;
+  margin-bottom: 0;
+  font-size: 1em;
+  font-weight: 700;
 }
-
-/*
-.footer .link-news li a {
-	color: $lighten-300;
-	font-size: 1em;
-	margin-bottom: 0;
-	display: inline-block;
-}
-*/
 
 .footer .link-news a:hover {
 	color: #FAFAFA !important;

@@ -35,6 +35,7 @@ categories:                             [ Software, Python ]
 tags:                                   [ JupyterLab, API ]
 
 scrollbar:                              false
+
 permalink:                              /pages/public/jupyter/docs/jupyterlab-api/
 regenerate:                             false
 

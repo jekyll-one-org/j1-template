@@ -12,10 +12,9 @@
  # -----------------------------------------------------------------------------
 */
 
-// -----------------------------------------
 // input-group and input-group-addon styles
 //  note: form-groups are not required
-//
+// -----------------------------------------------------------------------------
 @mixin input-group-button-variation($vertical-padding) {
   .input-group-btn {
     .btn {
