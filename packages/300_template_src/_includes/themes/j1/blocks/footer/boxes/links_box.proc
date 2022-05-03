@@ -26,6 +26,7 @@
 {% assign tagline             = box.tagline %}
 {% assign links               = box.links %}
 
+
 {% comment %} Main
 ================================================================================ {% endcomment %}
 <!-- [INFO   ] [links_box.proc                     ] [ place links box ] -->

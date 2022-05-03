@@ -12,42 +12,70 @@
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  # Test data:
- #  liquid_var:  {{ liquid_var | debug }}
+ #  liquid_var:  {{liquid_var | debug}}
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
 {% comment %} Liquid procedures
---------------------------------------------------------------- {% endcomment %}
+-------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Variables
---------------------------------------------------------------- {% endcomment %}
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign title               = box.title %}
+{% assign title_translation   = box.title_translation %}
+{% assign tagline             = box.tagline %}
+
+{% assign address_enabled     = box.address.enabled %}
+{% assign phone_enabled       = box.phone.enabled %}
+{% assign internet_enabled    = box.internet.enabled %}
+
+{% assign address_1           = box.address.address_1 %}
+{% assign address_2           = box.address.address_2 %}
+{% assign address_3           = box.address.address_3 %}
+
+
+{% assign office_hours        = box.phone.office_hours %}
+{% assign phone_1             = box.phone.phone_1 %}
+{% assign phone_2             = box.phone.phone_2 %}
+
+{% assign home_text           = box.internet.home_text %}
+{% assign home_link           = box.internet.home_link %}
+{% assign mail_1              = box.internet.mail_1 %}
+{% assign mail_2              = box.internet.mail_2 %}
 
 
 {% comment %} Main
---------------------------------------------------------------- {% endcomment %}
+-------------------------------------------------------------------------------- {% endcomment %}
 <!-- [INFO   ] [j1.assets.data.footer              ] [Found ContactsBox. Process ContactsBox] -->
 <div class="col-md-{{footer_box_width_md}}"> <!-- ContactsBox -->
-  <div class="heading-footer"><h2 class="notoc notranslate">{{ title }}</h2></div>
-  <ul class="list-unstyled contacts">
-    {% if address %}
+
+  <h2 class="text-uppercase g-color-white-opacity-0_6 g-font-size-18 mb-0 {{title_translation}}">{{title}}</h2>
+  <p class="tagline mb-0"> <large>{{tagline}}</large> </p>
+  <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-1"></div>
+
+  <ul class="list-unstyled contacts r-text-100">
+    {% if address_enabled %}
     <li>
-      <i class="radius-3x fa fa-map-marker"></i>
-      <p>{{ address_1 }}</p>
-      <p>{{ address_2 }}</p>
+      <i class="fa fa-map-marker fa-2x"></i>
+      <p>{{address_1}}</p>
+      <p>{{address_2}}</p>
+      <p>{{address_3}}</p>
     </li>
     {% endif %}
-    {% if phone %}
+    {% if phone_enabled %}
     <li>
-      <i class="radius-3x fa fa-phone"></i>
-      <p>{{ phone_1 }}</p>
-      <p>{{ phone_2 }}</p>
+      <i class="fa fa-phone fa-2x"></i>
+      <p> hours:  {{office_hours}}</p>
+      <p> office: {{phone_1}}</p>
+      <p> fax:    {{phone_2}}</p>
     </li>
     {% endif %}
-    {% if internet %}
+    {% if internet_enabled %}
     <li>
-      <i class="radius-3x fa fa-globe"></i>
-      <p><a href="mailto:{{ mail }}">{{ mail }}</a></p>
-      <p><a href="#void">{{ www }}</a></p>
+      <i class="fa fa-globe fa-2x"></i>
+      <p><a href="{{home_link}}">{{home_text}}</a></p>
+      <p><a href="mailto:{{mail_1}}">{{mail_1}}</a></p>
+      <p><a href="mailto:{{mail_2}}">{{mail_2}}</a></p>
     </li>
     {% endif %}
   </ul>

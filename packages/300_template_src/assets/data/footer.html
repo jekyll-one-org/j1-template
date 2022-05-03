@@ -21,7 +21,7 @@ exclude_from_search:                    true
  # Test data:
  #    {{ variable | debug }}
  # -----------------------------------------------------------------------------
-{% endcomment %}
+{% endcomment %} 
 
 <!-- [INFO   ] [j1.assets.data.footer              ] [Footer generated: {{site.time}}] -->
 
@@ -162,7 +162,7 @@ exclude_from_search:                    true
                 --------------------------------------------------------------- {% endcomment %}
                 {% when 'contact' %}
                   {% if box.enabled %}
-                    {% include {{contacts_box}} %}
+                    {% include {{contacts_box}} title=box.title tagline=box.tagline %}
                   {% endif %}
 
                   {% comment %} Reset element variable
