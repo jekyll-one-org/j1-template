@@ -1,0 +1,454 @@
+nbinteract: Generate Interactive Web Pages From Jupyter Notebooks
+Samuel Lau Joshua Hug
+
+Electrical Engineering and Computer Sciences University of California at
+Berkeley
+
+http://www2.eecs.berkeley.edu/Pubs/TechRpts/2018/EECS-2018-57.html[Technical
+Report No. UCB/EECS-2018-57
+http://www2.eecs.berkeley.edu/Pubs/TechRpts/2018/EECS-2018-57.html]
+
+May 11, 2018
+
+
+Figure 3: The free [.s15]##Binder ##service runs Jupyter servers for
+public use.
+
+[#bookmark2]#Features#
+
+In this section, we describe the installation steps and application
+programming interface (API) for [.s13]#nbinteract#.
+
+
+== Installation
+
+Installing [.s13]##nbinteract ##requires Python version 3.4 or higher.
+To install
+
+nbinteract[.p]##, run the following command in a terminal shell:##
+
+pip install nbinteract
+
+If the Jupyter [.s13]##notebook ##package version is lower than 5.3, run
+these two additional commands to enable [.s13]##nbinteract ##in the
+notebook environment:
+
+jupyter nbextension enable --py --sys-prefix widgetsnbextension jupyter
+nbextension enable --py --sys-prefix bqplot
+
+After installation, the [.s13]##nbinteract ##package is available to
+import in a Python program and a [.s13]##nbinteract ##command-line tool
+is available to use in a terminal shell.
+
+
+== Preparing Notebooks for nbinteract
+
+The simplest method to prepare notebooks for conversion using
+[.s13]##nbinteract ##is to place the notebooks in a GitHub repository
+with a [.s13]##requirements.txt ##file in the root directory. The
+[.s13]##requirements.txt ##file should list all packages required to run
+the notebooks. These steps will prepare the GitHub repository for use on
+the Binder service, a prerequisite for [.s13]#nbinteract#. For
+
+additional configuration options, consult the Binder
+documentation[.s16]##1##. http://bit.ly/binder-docs[1]
+http://bit.ly/binder-docs
+
+== Command-line API
+
+nbinteract [.p]#provides a command line tool to convert Jupyter notebook
+files to HTML files. It requires that a GitHub repository with the
+notebooks is set up for use with the Binder service. To convert a
+notebook to HTML, run the following command in a terminal shell:#
+
+nbinteract \{owner}/\{repo}/\{branch} \{notebook[.s18]##_##name}
+
+[.p]#Where #\{owner}[.p]#, #\{repo}[.p]#, #\{branch}[.p]#, and
+#\{notebook[.s18]##_##name} [.p]##are replaced with the repository’s
+owner, repository name, branch containing the files, and the name of the
+notebook to convert. For example, to convert a notebook called
+##hello.ipynb [.p]##residing on the default ##master [.p]##branch of
+##https://github.com/SamLau95/nbinteract[.p]#, run:#
+
+nbinteract SamLau95/nbinteract/master hello.ipynb
+
+This command creates a [.s13]##hello.html ##file using the original
+[.s13]#hello.ipynb#
+
+notebook. The resulting HTML file may be uploaded to the World Wide
+
+Web using any hosting service, including the free GitHub Pages
+service[.s16]##2##. https://pages.github.com/[2]
+https://pages.github.com/
+
+== Python API for Notebook Conversion
+
+As a convenience, [.s13]##nbinteract ##also provides a Python interface
+to convert notebooks to HTML files. To use Python to convert the
+[.s13]##hello.ipynb ##notebook mentioned above, run:
+
+== import nbinteract as nbi
+
+nbi.publish(’SamLau95/nbinteract-image/master’, ’hello.ipynb’)
+
+ +
+
+[cols="",]
+|===
+|image:data:image/jpg;base64,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[image,width=175,height=320]
+|===
+
+This Python code performs the same conversion as the shell command
+above.
+
+== Python API for Interactive Plotting
+
+The [.s13]##nbinteract ##Python package provides a set of plotting
+methods for generating visualizations controlled by interactive widgets.
+While most plotting methods in other visualization libraries (e.g.
+[.s13]#matplotlib#) take data as input, the plotting methods in
+[.s13]##nbinteract ##link:#bookmark3[take in functions that generate
+data as input. For example, the following code generates an interactive
+histogram shown in figure] 4 where the user can change the mean and
+spread of a normal distribution:
+
+
+== import numpy as np import nbinteract as nbi
+
+== def [.s24]##normal##[.s13]##(mean, sd):##
+
+’’’Returns 1000 points drawn at random fron N(mean, sd)’’’
+
+[.h1]##return ##np.random.normal(mean, sd, 1000)
+
+
+
+# Pass in the ‘normal‘ function and let user change mean and sd. #
+Whenever the user interacts with the sliders, the
+
+# ‘normal‘ function is called and the returned data are plotted.
+
+nbi.hist(normal, mean=(0, 10), sd=(0, 2.0), options=options)
+
+
+The plotting methods in [.s13]##nbinteract ##take in functions as input
+and use the function signature to generate widgets placed above the
+resulting visualization. The complete plotting API is documented on
+[.s13]##nbinteract##http://nbinteract.com/[’s website:]
+[.s24]#http://nbinteract.com/#.
+
+[#bookmark3]#Figure 4: The# [.s15]##nbinteract ##plotting functions
+create visualizations with interactive widgets. Here, two different
+histogram states are shown.
+
+== Future Python API for Complex Plots
+
+As of this writing, [.s13]##nbinteract##link:#bookmark4[’s visualization
+methods only generate plots with a single mark (e.g. a line or a
+histogram). A forthcoming API will enable a declarative one-to-many
+mapping for widgets to functions and functions to plot marks. Although
+the these methods are still under testing, the API itself is largely
+stable. We include an example below to demonstrate plotting two lines
+that share data from a pair of interactive widgets. The resulting chart
+is shown in figure] 5.
+
+== import numpy as np import nbinteract as nbi
+
+{empty}[.h1]##def ##x[.s28]##_##intercept1(x[.s18]##_##coord):
+[.h1]#return #[x[.s18]##_##coord, x[.s18]##_##coord]
+
+{empty}[.h1]##def ##x[.s28]##_##intercept2(x[.s18]##_##coord):
+[.h1]#return #[x[.s18]##_##coord + 5, x[.s18]##_##coord + 5]
+
+{empty}[.h1]##def ##y[.s28]##_##points(y[.s18]##_##coord): [.h1]#return
+#[0, y[.s18]##_##coord]
+
+nbi.Figure(
+
+options = \{’xlim’: (0, 20), ’ylim’: (0, 20)},
+
+widgets=\{’widget[.s29]##_##x’: (5, 0, 10), ’widget[.s29]##_##y’: (5, 0,
+10)}, functions=\{x[.s18]##_##intercept1: [’widget[.s29]##_##x’],
+
+x[.s18]##_##intercept2: [’widget[.s29]##_##x’], y[.s18]##_##points:
+[’widget[.s29]##_##y’]},
+
+marks=\{’line1’: nbi.Line(x[.s18]##_##intercept1, y[.s18]##_##points),
+’line2’: nbi.Line(x[.s18]##_##intercept2, y[.s18]##_##points)}
+
+
+[#bookmark4]#Figure 5: The two line marks in the resulting visualization
+share data input from the same pair of two widgets.#
+
+)
+
+Interactivity for Generated HTML Pages
+
+Using the base [.s13]##nbconvert ##library to convert notebooks to HTML
+results in a static HTML page that includes code, text, and images. If
+the notebook uses [.s13]##ipywidgets ##library to generate widgets, the
+HTML page also renders static widgets. Although these widgets respond to
+user interaction, since the page does not have access to a Jupyter
+kernel the widgets will not
+
+generate new output[.s16]##3##. [.s17]##3 ##[.s30]##For example,
+##[.s31]##the ##[.s32]##ipywidgets ##[.s33]#docu-#
+
+When a notebook is converted to HTML using [.s13]#nbinteract#, the
+library replaces all static widgets with “Run Widget” buttons and embeds
+an additional JavaScript library in the page. When a “Run Widget” is
+pressed, the JavaScript library starts a Jupyter kernel using the
+publicly available Binder service. Once a kernel is available, the
+JavaScript library runs the code on the page and renders live widgets
+for each cell that originally generated widgets. The library also
+handles future communication between the widgets on HTML page and the
+kernel so that interacting with the widgets also updates the output in
+the HTML. Connecting to a live Jupyter
+
+mentation has widgets embedded in the page that are detached from their
+original Python output.
+
+kernel using the Binder service allows the static HTML page generated
+from a notebook to contain dynamic elements.
+
+The JavaScript library for [.s13]##nbinteract ##called
+[.s13]##nbinteract-core ##is pub-
+
+licly available on the JavaScript package registry[.s16]##4 ##but is
+neither designed https://www.npmjs.com/[4] https://www.npmjs.com/
+
+for general use nor documented on the [.s13]##nbinteract ##website.
+[.s13]##nbinteract-core ##combines three existing APIs in order to
+enable widget rendering for static HTML pages: the Binder Web API, the
+JupyterLab Services JavaScript API, and the [.s13]##ipywidgets
+##JavaScript API.
+
+The Binder Web API allows other programs to start Jupyter servers on the
+Binder service. Although it is undocumented, the code repos-
+
+itory contains an example of API usage[.s16]##5 ##which we use to
+implement http://bit.ly/binder-api[5] http://bit.ly/binder-api
+
+nbinteract-core[.p]##.##
+
+The JupyterLab Services API contains methods to start and manage
+
+Jupyter kernels on a Jupyter server[.s16]##6##. After starting a Jupyter
+server using https://www.npmjs.com/package/%40jupyterlab/services[6]
+https://www.npmjs.com/package/%40jupyterlab/services[https://www.npmjs.com/package/]
+
+the Binder API, [.s13]##nbinteract-core ##uses the JupyterLab Services
+API to start a Jupyter kernel in order to run Python code on the HTML
+page.
+
+When running code that generates widgets, the [.s13]##nbinteract-core
+##library uses the [.s13]##ipywidgets ##JavaScript API for rendering the
+widgets onto
+
+https://www.npmjs.com/package/%40jupyterlab/services[@jupyterlab/services]
+
+the page[.s16]##7 ##and sets up the necessary connection between widgets
+and ker- https://github.com/jupyter-widgets/ipywidgets[7]
+https://github.com/jupyter-widgets/ipywidgets[https://github.com/]
+
+nel so that future interactions with the widgets will generate new
+output.
+
+https://github.com/jupyter-widgets/ipywidgets[jupyter-widgets/ipywidgets]
+
+ +
+
+Interactive Plotting Implementation
+
+nbinteract [.p]##combines the ##ipywidgets [.p]##widget library and the
+##bqplot[.s34]##8 ##[.s35]##plot-
+##https://github.com/bloomberg/bqplot[8]
+https://github.com/bloomberg/bqplot[https://github.com/bloomberg/]
+
+ting library to implement function-driven interfaces to interactive
+plotting. The [.s13]##nbinteract ##plotting methods use
+[.s13]##ipywidgets ##to generate and display widgets, inferring the
+widget type as needed. When a user interacts with a widget, a Python
+callback updates the visualization without a complete rerender. This
+noticeably lowers visualization update time compared to using
+[.s13]##ipywidgets ##alone to render static images.
+
+https://github.com/bloomberg/bqplot[bqplot]
+
+ +
+
+[#bookmark6]#Discussion#
+
+Use Cases
+
+Because [.s13]##nbinteract ##is designed for use with the Python
+programming language in Jupyter notebooks, it provides the most utility
+for users with prior familiarity with Python and Jupyter. These users
+include course staff for computer science or data science courses,
+students in these courses, and online blog authors that use Jupyter
+notebooks for written content. [.s13]##nbinteract ##can also be used to
+create dashboards from Jupyter notebooks by hiding the code used to
+generate widgets. Since Jupyter notebooks
+
+converted to HTML are an increasingly popular format for online
+content[.s16]##9##, [.s17]##9 ##[.s30]##The first detection of
+gravitational##
+
+nbinteract [.p]#is designed to easily fit into existing notebook
+publishing workflows.#
+
+waves and Peter Norvig’s pytudes are recent high-profile examples of
+notebooks used as online content formats.
+
+UC Berkeley’s upper division data science course Data 100 uses
+[.s13]#nbinteract#
+
+to build its online textbook[.s16]##10##. The textbook is written using
+Jupyter note- https://www.textbook.ds100.org/[10]
+https://www.textbook.ds100.org/
+
+
+books and receives over a hundred views per day. [.s13]##nbinteract
+##link:#bookmark7[allows the authors to include interactive widgets
+anywhere in the textbook. For example, the book uses widgets to display
+complete views of large data tables that would normally require
+truncation by allowing viewers to scrub through the rows and columns of
+the data table as shown in figure] 6. The book also allows viewers to
+interactively change parameters and data of statistical models and
+displays updated visualizations in response.
+
+ +
+
+Comparison with JavaScript
+
+Compared to JavaScript, [.s13]##nbinteract ##gives authors lower
+flexibility and fidelity in exchange for easier interaction creation.
+
+Since web browsers run JavaScript natively, JavaScript users have almost
+complete control over every element of the interaction, including the
+visual appearance of interactive elements and animations.
+[.s13]#nbinteract#, however, limits interactions to the widgets
+supported by the [.s13]##ipywidgets ##and [.s13]##bqplot ##libraries.
+
+Compared to [.s13]#nbinteract#, JavaScript-based interactions will
+typically have a lower startup time and a lower latency between user
+interaction and visual change. In order to display an interactive
+element for the first time, [.s13]##nbinteract ##requests a Jupyter
+server from the Binder service. This initial request adds 5-10 seconds
+to the initial startup time. On user interaction, [.s13]##nbinteract
+##runs Python code on a remote Jupyter kernel, incurring overhead from
+network latency in addition to the time it takes the kernel to run the
+Python code. Typically, interactions can be structured in a way to
+minimize code execution time when widgets are manipulated, making
+network latency the most significant overhead for user interaction. On
+fast connections, this latency is typically around 100 milliseconds.
+JavaScript-based interactions, however, typically do not make requests
+to a remote server and thus do not incur network latency overhead. We
+are actively implementing methods of reducing both startup and
+interaction latency— [.s13]##nbinteract ##caches previously-initialized
+Binder servers on the client and avoid unnecessary network requests when
+performing visualization updates.
+
+Interactions that both [.s13]##nbinteract ##and JavaScript support are
+typically easier to create in [.s13]##nbinteract ##than in JavaScript.
+Authors fluent in
+
+Python can often write interactions with an order-of-magnitude fewer
+lines of code in [.s13]##nbinteract ##than authors fluent in JavaScript.
+The simplicity
+
+of [.s13]##nbinteract ##makes it attractive for authors already
+knowledgable in Python but not JavaScript and HTML.
+
+ +
+
+[#bookmark7]#Figure 6: Use of# [.s15]##nbinteract ##to embed large
+tables in the Data 100 Textbook.
+
+Future Work
+
+Although [.s13]##nbinteract ##is not designed to fully replicate the
+flexibility and fidelity of JavaScript, we hope to make several
+improvements to the library to increase utility for authors that use
+Jupyter notebooks.
+
+As previously discussed, we plan to release a more flexible API for
+creating interactive visualizations using [.s13]#nbinteract#. Currently,
+visualizations are restricted to single plots that contain one type of
+mark (e.g. line, point, or bar). Our future API will provide a
+declarative syntax for connecting multiple widgets, functions, and plot
+elements to create more complex interactive visualizations.
+
+Currently, [.s13]##nbinteract ##only permits widgets from the
+[.s13]##ipywidgets ##and
+
+bqplot [.p]#libraries. Since there are now many libraries built on top
+of the#
+
+[.s13]##ipywidgets ##library[.s16]#11#, we plan to allow authors to
+specify additional wid- [.s17]##11 ##[.s30]##Any of the widget libraries
+listed##
+
+get libraries when converting notebooks. This improvement will allow
+[.s13]##nbinteract ##to support the entire ecosystem of interaction
+frameworks that use [.s13]#ipywidgets#.
+
+ +
+
+[#bookmark8]#Conclusion#
+
+nbinteract [.p]#combines recently developed projects in the Jupyter
+ecosystem to allow authors to create interactive explanations and
+visualizations directly in the Jupyter notebook environment. The library
+aims to use the broad adoption of Python and Jupyter to allow many more
+individuals to create and share interactive content online.#
+
+http://jupyter.org/widgets[at] http://jupyter.org/widgets[.s12]##, for
+example.##
+
+ +
+
+References
+
+. [#bookmark9]##Arose/Nglview: IPython Widget to Interactively View
+Molecular Structures and Trajectories##[.p]##.
+https://github.com/arose/nglview.##
+. [#bookmark10]##Binder (Beta)##[.p]##. https://mybinder.org/.##
+. [#bookmark11]#Michael Bostock, Vadim Ogievetsky, and Jeffrey Heer.
+“D$3ˆ$ Data-Driven Documents”. In:# [.s37]##IEEE transactions on
+visualization and computer graphics ##17.12 (2011), pp. 2301–2309.
+. [#bookmark12]##Bqplot: Plotting Library for IPython/Jupyter
+Notebooks##[.p]##. Apr. 2018.##
+. [#bookmark13]#bret.# [.s37]#Tangle: A JavaScript Library for Reactive
+Documents#. Apr. 2018.
+. {empty}[#bookmark14]##Explorable Explanations##http://explorabl.es/[.
+http://explorabl.es/.]
+. [#bookmark15]#Jessica B. Hamrick and Jupyter Development Team.#
+[.s39]##2016 ##[.s37]##Jupyter Education
+Survey##http://dx.doi.org/10.5281/zenodo.51701[. May 2016. doi:]
+[.s24]#10.5281/zenodo.51701#.
+. [#bookmark16]##Jupyter-Widgets/Ipywidgets: Interactive Widgets for the
+Jupyter Notebook##[.p]##.
+https://github.com/jupyter-widgets/ipywidgets.##
+. [#bookmark17]##Jupyter/Nbconvert: Jupyter Notebook Conversion##[.p]##.
+https://github.com/jupyter/nbconvert.##
+. {empty}[#bookmark18]#Daniel Kunin.# [.s37]##Seeing
+Theory##http://seeingtheory.io/[. en. http://seeingtheory.io.]
+. [#bookmark19]#Arvind Satyanarayan et al. “Reactive Vega: A Streaming
+Dataflow Architecture for Declarative Interactive Visualization”. In:#
+[.s37]##IEEE transactions on visualization and computer graphics ##22.1
+(2016), pp. 659–668.
+. [#bookmark20]##[.p]#Philip B. Stark. “SticiGui: Statistics Tools for
+Internet and Classroom Instruction with a Graphic User Interface”. In:
+###http://stat-www/[Available at Web site:] http://stat-www. berkeley.
+edu/users/stark/SticiGui/index. htm ([.s39]##8 ##August [.s39]#2004#)
+[.p]#(2004).#
+. [#bookmark21]#The Most Popular Language For Machine Learning and Data
+Science Is#
++
+http://www.kdnuggets.com/2017/01/most-popular-language-[. . .]
+http://www.kdnuggets.com/2017/01/most-popular-language-[https://www.kdnuggets.com/2017/01/most-popular-language]-machine-learning-data-science.html.
+. [#bookmark22]#Kluyver Thomas et al. “Jupyter Notebooks—a Publishing
+Format for Reproducible Computational Workflows”. In:# [.s37]##Stand
+Alone ##http://dx.doi.org/10.3233/978-1-61499-649-1-87[(2016), pp.
+87–90. issn: 0000-0000. doi:] [.s24]#10.3233/978-1-61499-649-1-87#.

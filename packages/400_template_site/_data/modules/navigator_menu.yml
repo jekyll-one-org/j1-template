@@ -209,10 +209,10 @@
           icon:                         book-open-page-variant
           dropdown:
             - title:                    BinderHub API
-              href:                     /pages/public/jupyter/docs/binderhub-api/
+              href:                     /pages/public/jupyter/docs/binderhub/
               icon:                     book
             - title:                    JupyterHub API
-              href:                     /pages/public/jupyter/docs/jupyterlab-api/
+              href:                     /pages/public/jupyter/docs/jupyterhub/
               icon:                     book
 
     # --------------------------------------------------------------------------
@@ -237,37 +237,30 @@
 - item:                                 Tools
   sublevel:
 
-    # --------------------------------------------------------------------------
-    # Previewer
-    #
-    - title:                            Previewer
-      icon:                             eye
-      dropdown:
-
-      - title:                          Country Flags
-        href:                           /pages/public/previewer/country_flags/
-        icon:                           flag
-      - title:                          MD Color Palette
-        href:                           /pages/public/previewer/color_palette/
-        icon:                           format-color-fill
-      - title:                          MDI Icons (regular)
-        href:                           /pages/public/previewer/mdi_font/
-        icon:                           alarm-light
-      - title:                          MDI Icons (light)
-        href:                           /pages/public/previewer/mdil_font/
-        icon:                           alarm-light-outline
-      - title:                          Twitter Emojis
-        href:                           /pages/public/previewer/twitter_emoji/
-        icon:                           emoticon-cool-outline
-      - title:                          Rouge Themes
-        href:                           /pages/public/previewer/rouge/
-        icon:                           code-parentheses
-      - title:                          Range Slider
-        href:                           /pages/public/previewer/range-slider/
-        icon:                           arrow-decision-outline
-      - title:                          Justified Gallery
-        href:                           /pages/public/previewer/justified_gallery/
-        icon:                           view-dashboard
+    - title:                            Country Flags
+      href:                             /pages/public/previewer/country_flags/
+      icon:                             flag
+    - title:                            MD Color Palette
+      href:                             /pages/public/previewer/color_palette/
+      icon:                             format-color-fill
+    - title:                            MDI Icons (regular)
+      href:                             /pages/public/previewer/mdi_font/
+      icon:                             alarm-light
+    - title:                            MDI Icons (light)
+      href:                             /pages/public/previewer/mdil_font/
+      icon:                             alarm-light-outline
+    - title:                            Twitter Emojis
+      href:                             /pages/public/previewer/twitter_emoji/
+      icon:                             emoticon-cool-outline
+    - title:                            Rouge Themes
+      href:                             /pages/public/previewer/rouge/
+      icon:                             code-parentheses
+    - title:                            Range Slider
+      href:                             /pages/public/previewer/range-slider/
+      icon:                             arrow-decision-outline
+    - title:                            Justified Gallery
+      href:                             /pages/public/previewer/justified_gallery/
+      icon:                             view-dashboard
 
 # ------------------------------------------------------------------------------
 # Menu BLOG
