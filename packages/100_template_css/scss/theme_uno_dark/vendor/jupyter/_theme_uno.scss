@@ -1,0 +1,43 @@
+/*
+ # ----------------------------------------------------------------------------
+ # ~/theme_uno_dark/vendor/jupyter/_theme_uno.scss
+ # Overload styles for nbinteract (jupyter/bgplot) widgets
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+// bqplot widgets overwrites
+// -----------------------------------------------------------------------------
+.bqplot > svg .plotarea_background {
+   fill: #9E9E9E !important;
+}
+
+// ipywigets overwrites
+// -----------------------------------------------------------------------------
+
+.jupyter-widgets {
+  color: #F5F5F5;
+}
+
+.widget-inline-hbox .widget-label {
+  color: #F5F5F5;
+}
+
+.widget-readout {
+  color: #F5F5F5;
+}
+
+.widget-slider .ui-slider .ui-slider-handle {
+  background-color: #212121;
+}
+
+.jupyter-button {
+  background-color: #9E9E9E;
+}

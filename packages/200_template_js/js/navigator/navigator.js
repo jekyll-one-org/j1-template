@@ -176,6 +176,8 @@ module.exports = function navigator ( options ) {
         nav_link     = typeof classname == 'string' ? classname.includes('nav-link') : false;                          // skip BS nav links
         scrollOffset = j1.getScrollOffset();
 
+        if (anchor_id.includes('void')) anchor_id = false;
+
         if (img_link) {
           // skip scrolling if a click on an image detected
           return true;

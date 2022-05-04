@@ -108,6 +108,18 @@ span.MathJax {
 }
 
 /*
+  Bgplot CSS overwrites
+  ------------------------------------------------------------------------------
+*/
+
+.bqplot {
+  box-sizing: border-box !important;
+  display: flex !important;
+  min-width: 640px !important;
+  min-height: 480px !important;
+}
+
+/*
   global CSS styles
   ------------------------------------------------------------------------------
 */
@@ -121,7 +133,7 @@ span.MathJax {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6 {

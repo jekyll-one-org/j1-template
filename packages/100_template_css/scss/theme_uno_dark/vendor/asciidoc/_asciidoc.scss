@@ -1,7 +1,7 @@
 /*
  # ----------------------------------------------------------------------------
- # ~/theme_uno_dark/vendor/asciidoc/_asciidoc.scss
- # Overload styles for Asciidoc Markups
+ # ~/theme_uno_dark/vendor/bgplot/_theme_uno.scss
+ # Overload styles for nbinteract/bgplot widgets
  #
  # Product/Info:
  # https://jekyll.one
@@ -13,68 +13,6 @@
  # -----------------------------------------------------------------------------
 */
 
-code {
-  word-break: break-word;
-  padding: 0.125em 0.275em 0.125em 0.275em !important;
-  border-radius: 2px;
-  background-color: rgba(0, 0, 0, 0.3) !important;
-}
-
-// jadams, 2022-01-16: set background color for (table-styled) conum lists
-.colist > table > tbody > tr {
-  background: transparent !important;
-}
-
-.listingblock pre {
-    border-color: $darken-600 !important;
-    border: 1px solid $grey-600 !important;
-//  background-color: $grey-300 !important;
-}
-
-.listingblock pre code {
-  background-color: transparent;
-  border: 1px !important;
-  border-color: $darken-600 !important;
-}
-
-.admonitionblock > table {
-//  background: $lighten-200;
-  background: $gray-800 !important;
-}
-
-.admonitionblock > table td.content {
-    border-right: 1px !important;
-    border-bottom: 1px !important;
-}
-
-.admonitionblock > table td.icon {
-    border-right: 0px !important;
-    border-bottom: 1px !important;
-}
-
-.exampleblock {
-    border-radius: 0 !important;
-    background: $lighten-200 !important;
-}
-
-// table.frame-all {
-//   border-width: 0px;
-//   border-left: 1px solid #e0e0e0;
-//   border-top: 1px solid #e0e0e0;
-// }
-
-//  jadams, 2022-01-15: set border color like the listingblock
-.admonitionblock > table {
-    border: solid 1px $grey-600;
-}
-
-table tr th, table tr td {
-  color: $lighten;
-  border-right: 1px solid $grey;
-  border-bottom: 1px solid $grey;
-}
-
-.listingblock > .title,
-.imageblock > .title {
-  color: unset;
+.bqplot > svg .plotarea_background {
+   fill: #757575 !important;
 }
