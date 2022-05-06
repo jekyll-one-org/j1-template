@@ -64,7 +64,7 @@ resource_options:
 :binder-badges-enabled:                           true
 :binder--home:                                    https://mybinder.org/
 :binder--docs:                                    https://mybinder.readthedocs.io/en/latest/
-:binder-app-launch--tree:                         https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/main?urlpath=/tree
+:binder-app-launch--tree:                         https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?urlpath=/tree
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -351,7 +351,7 @@ time being.
 #
 defaults:
 
-  spec:                                 jekyll-one/nbinteract-notebooks/main
+  spec:                                 jekyll-one/j1-binder-repo/main
   baseUrl:                              'https://mybinder.org'
   provider:                             gh
 

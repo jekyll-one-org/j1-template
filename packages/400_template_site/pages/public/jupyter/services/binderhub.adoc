@@ -58,7 +58,7 @@ resource_options:
 // :page--attr:                         <attr-value>
 :badges-enabled:                        false
 :binder-badge-enabled:                  false
-:binder-app-launch--tree:               https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/main?urlpath=/tree
+:binder-app-launch--tree:               https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?urlpath=/tree
 :jupyterlab-docs--getting-started:      https://jupyterlab.readthedocs.io/en/latest/getting_started/starting.html
 :jupyter-discourse--startup-time:       https://discourse.jupyter.org/t/how-to-reduce-mybinder-org-repository-startup-time/4956
 
@@ -229,7 +229,7 @@ session opening the path `notebooks`:
 
 [source, txt]
 ----
-  https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/main?filepath=notebooks
+  https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks
 ----
 
 The filepath notebooks above is how JupyterLab directs you to a specific file
@@ -252,7 +252,7 @@ like so:
 .Example
 [source, txt]
 ----
-  https://mybinder.org/v2/gh/jekyll-one/nbinteract-notebooks/main?urlpath=/tree
+  https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?urlpath=/tree
 ----
 
 
