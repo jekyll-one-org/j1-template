@@ -171,7 +171,10 @@
             - title:                    Interactive Widgets
               href:                     /pages/public/jupyter/textbooks/interactive-widgets/
               icon:                     script-text-play-outline
-            - title:                    Interactive Evaluation
+            - title:                    Time Tables Visualization
+              href:                     /pages/public/jupyter/textbooks/j1-circular-times-table/
+              icon:                     script-text-play-outline
+            - title:                    ODEs in Python
               href:                     /pages/public/jupyter/textbooks/odes-in-python/
               icon:                     script-text-play-outline
             - title:                    Non-Interactive Notebook

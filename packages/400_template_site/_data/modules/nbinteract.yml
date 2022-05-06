@@ -145,12 +145,12 @@ settings:
     # odes_in_python
     #
     - textbook:
-        enabled:                        false
+        enabled:                        true
 
         id:                             j1_odes_in_python
         xhr_data:                       j1_odes_in_python.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
-        use_mathjax:                    false
+        use_mathjax:                    true
 
     # --------------------------------------------------------------------------
     # ode_selected
@@ -174,6 +174,38 @@ settings:
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    false
 
+    # --------------------------------------------------------------------------
+    # ode_selected
+    #
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_testing_plotly
+        xhr_data:                       j1_testing_plotly.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    # --------------------------------------------------------------------------
+    # j1_circular_times_table
+    #
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_circular_times_table
+        xhr_data:                       j1_circular_times_table.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    # --------------------------------------------------------------------------
+    # circular_times_table
+    #
+    - textbook:
+        enabled:                        true
+
+        id:                             circular_times_table
+        xhr_data:                       circular_times_table.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
 
     # --------------------------------------------------------------------------
     # J1 NBI Docs

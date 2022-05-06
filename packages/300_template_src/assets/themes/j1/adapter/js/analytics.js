@@ -85,19 +85,19 @@ j1.adapter.analytics = (function (j1, window) {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
-var url             = new liteURL(window.location.href);
-var hostname        = url.hostname;
-var environment     = '{{environment}}';
-var gaScript        = document.createElement('script');
-var providerID      = '{{analytics_options.google.trackingID}}';
-var skipAllHosts    = '{{analytics_options.google.skipAllHosts}}';
-var validProviderID = (providerID.includes('your')) ? false : true;
-var optInOut        = {{analytics_options.google.optInOut}};
-var anonymizeIP     = {{analytics_options.google.anonymizeIP}};
-var cookie_names    = j1.getCookieNames();
-var date            = new Date();
-var timestamp_now   = date.toISOString();
-var skipHost        = false;
+var url               = new liteURL(window.location.href);
+var hostname          = url.hostname;
+var environment       = '{{environment}}';
+var gaScript          = document.createElement('script');
+var providerID        = '{{analytics_options.google.trackingID}}';
+var skipAllHosts      = '{{analytics_options.google.skipAllHosts}}';
+var validProviderID   = (providerID.includes('your')) ? false : true;
+var optInOut          = {{analytics_options.google.optInOut}};
+var anonymizeIP       = {{analytics_options.google.anonymizeIP}};
+var cookie_names      = j1.getCookieNames();
+var date              = new Date();
+var timestamp_now     = date.toISOString();
+var skipHost          = false;
 var skipHosts;
 var gaCookies;
 var user_consent;

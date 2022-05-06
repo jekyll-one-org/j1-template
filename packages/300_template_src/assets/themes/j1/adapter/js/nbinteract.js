@@ -225,7 +225,7 @@ j1.adapter.nbinteract = (function (j1, window) {
       scriptMathjaxConfig.innerHTML = `
         MathJax.Hub.Config({
             tex2jax: {
-                inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                inlineMath: [ ['$','$'], ["\\(","\\)  "] ],
                 displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
                 processEscapes: true,
                 processEnvironments: true,

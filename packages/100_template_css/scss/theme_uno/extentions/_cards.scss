@@ -419,6 +419,13 @@ a.card-title:hover {
     color: $gray-900;
 }
 
+// Card links (footer)
+// -----------------------------------------------------------------------------
+// jadams, 2022-05-06: remove dotted link decoration
+a.card-link {
+    border-bottom: unset;
+}
+
 // Cards variants
 // -----------------------------------------------------------------------------
 

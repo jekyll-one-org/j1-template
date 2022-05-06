@@ -17,7 +17,8 @@
 a {
   color: $gray-700 !important;
   font-weight: 500 !important;
-  // text-decoration: none !important;
+  text-decoration: none;
+  border-bottom: 1px dotted;
 }
 
 a:hover {

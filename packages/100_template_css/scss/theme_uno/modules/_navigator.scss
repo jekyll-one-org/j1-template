@@ -608,6 +608,7 @@ li.dropdown.nav-item.nav-sub-item:before {
                 width: -ms-max-content;     // MS Internet Explorer (IE11)
   							font-weight: 400;
   							font-size: 1.1rem;
+                border-bottom: unset;       // jadams, 2022-05-06: remove dotted link decoration
   						}
   						.dropdown.nav-item .nav-link {
   							text-transform: none;
@@ -1063,6 +1064,8 @@ li.dropdown.nav-item.nav-sub-item:before {
 			padding: 0.5rem 1rem;
       margin-right: 0;
       border-right: 0px !important;
+      border-bottom: unset;                                                     // jadams, 2022-05-06: remove dotted link decoration
+
 		}
     //jadams, 2019-02-01: TODO check what high for an dropdown item fits best
 		.dropdown .nav-item {
@@ -1671,6 +1674,7 @@ li.dropdown.nav-item.nav-sub-item:before {
           color: $lighten;
 					padding: 16px 10px 15px;
 					padding-left: 0;
+          border-bottom: unset;                                                 // jadams, 2022-05-06: remove dotted link decoration
 				}
 				&.dropdown ul.dropdown-menu {
 					left: -275px;

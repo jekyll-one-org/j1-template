@@ -51,6 +51,7 @@ a.toc-link {
   color: $grey-400 !important;
   height: 100%;
   font-size: 1rem;                                                              /* jadams, 2017-12-13: added font-size for toc-link */
+  border-bottom: unset;
 }
 
 /* jadams, 2020-07-03: added hover to global style */

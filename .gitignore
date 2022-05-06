@@ -44,6 +44,8 @@ tmp/
 
 **/\.ipynb_checkpoints/
 
+**/notebooks/j1/*.mp4
+
 
 # Never publish your sensitive personal and/or OAuth
 # data to any repo - not to public, not to any private.
