@@ -519,7 +519,7 @@ j1.adapter.nbinteract = (function (j1, window) {
             var images = document.getElementsByTagName('img');;
             [...images].forEach(function(x) {
               if (!x.className.includes('img-fluid')) {
-                x.className += 'img-fluid';
+                x.className += ' img-fluid';
               }
             });
 

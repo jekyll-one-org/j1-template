@@ -178,8 +178,8 @@ module.exports = function navigator ( options ) {
 
         if (anchor_id && anchor_id.includes('void')) anchor_id = false;
 
+        // skip scrolling if a click on an image detected
         if (img_link) {
-          // skip scrolling if a click on an image detected
           return true;
         }
 
