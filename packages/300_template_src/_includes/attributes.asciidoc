@@ -120,6 +120,7 @@ tag::urls[]
 :url-cross-var--gh-repo:                          https://github.com/elijahmanor/cross-var/
 
 :url-dailymotion--home:                           https://www.dailymotion.com/
+:url-dailymotion--privacy-policy:                 https://legal.dailymotion.com/en/privacy-policy/
 
 :url-datatables--home:                            https://datatables.net/
 :url-docker--home:                                https://getbootstrap.com/
@@ -385,7 +386,9 @@ tag::urls[]
 :url-vimeo--privacy-policy:                       https://vimeo.com/privacy
 
 :url-vivendi--home:                               https://www.vivendi.com/en/
+
 :url-vk--home:                                    https://vk.com/
+:url-vk--privacy-policy:                          https://vk.com/data_protection
 
 :url-webpack--home:                               https://webpack.js.org/
 :url-webpack--gh-repo:                            https://github.com/webpack/webpack/
