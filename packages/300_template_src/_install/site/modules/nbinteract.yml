@@ -111,8 +111,8 @@ settings:
     - textbook:
         enabled:                        true
 
-        id:                             j1_odes_in_python
-        xhr_data:                       j1_odes_in_python.html
+        id:                             j1_docs_example_dynamic
+        xhr_data:                       j1_docs_example_dynamic.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    true
 
@@ -126,6 +126,18 @@ settings:
         xhr_data:                       j1_circular_times_table.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    false
+
+    # --------------------------------------------------------------------------
+    # odes_in_python
+    #
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_odes_in_python
+        xhr_data:                       j1_odes_in_python.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    true
+
 
     # --------------------------------------------------------------------------
     # J1 NBI Docs

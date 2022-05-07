@@ -158,8 +158,8 @@ settings:
     - textbook:
         enabled:                        true
 
-        id:                             j1_ode_selected
-        xhr_data:                       j1_ode_selected.html
+        id:                             j1_docs_example_dynamic
+        xhr_data:                       j1_docs_example_dynamic.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    false
 
