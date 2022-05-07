@@ -112,10 +112,10 @@
           icon:                         book-open-page-variant
           dropdown:
             - title:                    BinderHub API
-              href:                     /pages/public/jupyter/docs/binderhub-api/
+              href:                     /pages/public/jupyter/docs/binderhub/
               icon:                     book
             - title:                    JupyterHub API
-              href:                     /pages/public/jupyter/docs/jupyterlab-api/
+              href:                     /pages/public/jupyter/docs/jupyterhub/
               icon:                     book
 
     # --------------------------------------------------------------------------
