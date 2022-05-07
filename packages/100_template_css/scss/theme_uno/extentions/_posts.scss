@@ -59,12 +59,12 @@
   display: inline-block;
   line-height: 2.5rem;
   padding: 0 1rem 0 1rem;
-  background-color: #2196F3;
+  background-color: $blue;
   border-radius: 3px;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  color: #fff;
+  color: $gray-900 !important;
   font-size: .75rem !important;
   font-weight: 400;
   text-decoration: none;
@@ -78,12 +78,12 @@
 
 .series-navigation ul li.current a:hover {
   background-color: rgba(0, 0, 0, 0.9) !important;
-  color: #fff !important;
+  color: $black !important;
 }
 
 .series-navigation ul li a:hover {
   background-color: rgba(0, 0, 0, 0.9);
-  color: #fff !important;
+  color: $black !important;
 }
 
 // jadams, 2022-02-21: disabled color for dark theme compatibility

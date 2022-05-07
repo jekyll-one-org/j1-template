@@ -14,6 +14,11 @@
  # -----------------------------------------------------------------------------
 */
 
+// jadams, 2022-05-06: remove dotted link decoration
+.mdColorValue {
+  border-bottom: unset;
+}
+
 .md-white {
   color: $white !important;
 }
