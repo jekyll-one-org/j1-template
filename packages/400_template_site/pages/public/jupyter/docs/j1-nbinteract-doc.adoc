@@ -38,7 +38,7 @@ personalization:                        true
 permalink:                              /pages/public/jupyter/docs/j1-nbinteract-docs/
 regenerate:                             true
 
-resources:                              [ animate, clipboard, nbinteract, rouge ]
+resources:                              [ animate, clipboard, lightbox, nbinteract, rouge ]
 resource_options:
   - attic:
       padding_top:                      400
@@ -190,8 +190,8 @@ not preserve the interactive elements of the notebook. The resulting web
 page only contains text and images.
 
 .NBI textbook (excerpt)
-// lightbox::nbi-textbook--excerpt[ 800, {data-nbi-textbook--excerpt}, role="mt-3 mb-4" ]
-image::pages/nbinteract/nbi-textbook-example.jpg["NBI textbook (excerpt)", 800]
+lightbox::nbi-textbook--excerpt[ 800, {data-nbi-textbook--excerpt}, role="mt-3 mb-4" ]
+// image::pages/nbinteract/nbi-textbook-example.jpg["NBI textbook (excerpt)", 800]
 
 The Python package `nbinteract` allows authors to convert Jupyter notebooks
 into *interactive*, standalone HTML pages: the textbooks. The interactive
