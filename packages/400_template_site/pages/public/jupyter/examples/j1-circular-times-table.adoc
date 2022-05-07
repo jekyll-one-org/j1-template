@@ -87,13 +87,35 @@ link:{time-tables-visualization}[Time Tables Visualization - Finding Patterns, {
 and re-written for the use of module J1 NBI. Some text is used from the
 original post but re-written for clarity and simplicity.
 
-First, let's introduce the video from _Mathologer_. In this video, a very nice
-pattern emerges in something called *Times Tables*. The idea, in general, is
-surprisingly simple, but the results are impressive. Please go for the video
-from _Mathologer_ first to catch the idea in behind.
+First, let's introduce the video from _Mathologer_. This video creates very
+nice patterns from _Times Tables_. Everybody knows them from primary school.
+It's something like this:
 
-In this document, several scenarios using *Times Tables* as a base to
-calculate plotted images are presented:
+.Table of *Two* (excerpt)
+[cols="6a,6a", options="header", width="100%", role="rtable mt-3"]
+|===
+|Factor |Value
+
+|`1 x 2`
+|2
+
+|`2 x 2`
+|4
+
+|`3 x 2`
+|6
+
+|`4 x 2`
+|8
+
+|===
+
+The idea, in general, is surprisingly simple, but the results are surprising.
+Please go for the video from _Mathologer_ first to catch the idea behind it.
+
+In this document, several scenarios using _Times Tables_ as a base to
+calculate plotted images are presented similar to the approach of
+what _Mathologer_ is doing:
 
 * a static but parametric version: you can change with sliders the values
   and experiment by yourself.
@@ -104,9 +126,9 @@ calculate plotted images are presented:
 * an animated version to construct the image Factor by Factor: the lines
   and the number of points is fixed, but the factor increases per iteration.
 
-WARNING: Each scenario presented on this page uses **time-consuming**
+WARNING: Each scenario presented on this page uses *time-consuming*
 operations that take a while to finish. The images and the interactive
-elements are built through a backend in the cloud, so please be patient
+elements are built through a backend in the cloud. Please be patient
 to see the results.
 
 Start your journey on the power of Mathematics!
