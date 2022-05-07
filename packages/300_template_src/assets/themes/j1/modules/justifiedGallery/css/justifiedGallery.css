@@ -10,6 +10,12 @@
   position: relative;
   overflow: hidden;
 }
+
+/* jadams, 2022-05-06: remove dotted link decoration */
+.justified-gallery > a {
+  border-bottom: unset;
+}
+
 .justified-gallery > a,
 .justified-gallery > div,
 .justified-gallery > figure {

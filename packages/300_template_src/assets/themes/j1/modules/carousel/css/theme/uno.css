@@ -40,6 +40,11 @@ padding-left: 1px;
 /* Carousel items (text|image)
  ------------------------------------------------------------------------------- */
 
+/* jadams, 2022-05-06: remove dotted link decoration */
+.owl-carousel .owl-item > a {
+  border-bottom: unset;
+}
+
 .owl-carousel .item p {
   margin: 3px;
 }
