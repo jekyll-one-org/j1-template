@@ -192,6 +192,7 @@ j1.adapter.nbinteract = (function (j1, window) {
           target  = document.getElementById('content');
           spinner = new Spinner(spinnerOpts).spin(target);
         }
+
       });
 
       // -----------------------------------------------------------------------
@@ -219,32 +220,128 @@ j1.adapter.nbinteract = (function (j1, window) {
       var scriptMathjax       = document.createElement('script');
       var scriptMathjaxConfig = document.createElement('script');
 
+      // Loading MathJax from a CDN
+      //
       scriptMathjax.setAttribute('src','//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-AMS_HTML');
 
+      // create/load MathJax configuration settings
+      //
       scriptMathjaxConfig.setAttribute('type','text/x-mathjax-config');
       scriptMathjaxConfig.innerHTML = `
         MathJax.Hub.Config({
             tex2jax: {
-                inlineMath: [ ['$','$'], ["\\(","\\)  "] ],
-                displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
-                processEscapes: true,
-                processEnvironments: true,
-                processClass: "mathjax",
-                ignoreClass: "nomathjax"
+              // inlineMath, displayMath
+              // ---------------------------------------------------------------
+              // TeX 'delimiters'. By default, the tex2jax preprocessor
+              // definesthe LaTeX math delimiters, which are \(...\) for
+              // 'in-line' math, and \[...\] for 'displayed' equations.
+              // It also defines the TeX delimiters $$...$$ for displayed
+              // equations, but it does not define $...$ as in-line math
+              // delimiters. That is because dollar signs appear too often
+              // in non-mathematical settings, which could cause some text
+              // to be treated as mathematics unexpectedly. For example,
+              // with single-dollar delimiters, 'the cost is $2.50' for the
+              // first one, and '$2.00' for each additional one would cause
+              // the phrase '2.50 for the first one' to be treated as
+              // mathematics since it falls between dollar signs. For this
+              // reason, if you want to use single-dollars for in-line math
+              // mode, you must enable that explicitly.
+              //
+              inlineMath: [ ['$','$'], ["\\(","\\)  "] ],
+              displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+
+              // processEscapes
+              // ---------------------------------------------------------------
+              // When 'processEscapes' set to true, you may use \$ to
+              // representa literal dollar sign, rather than using it as
+              // a math delimiter. When false, \$ will not be altered,
+              // and the dollar sign may be considered part of a math
+              // delimiter. Typically this is set to 'true' if you enable
+              // the $ ... $ in-line delimiters, so you can type \$ and
+              // tex2jax will convert it to a regular dollar sign in the
+              // rendered document.
+              //
+              processEscapes: true,
+
+              // processEnvironments
+              // ---------------------------------------------------------------
+              // When 'processEnvironments' true, tex2jax looks not only
+              // for the in-line and display math delimiters, but also for
+              // LaTeX environments (\begin{something}...\end{something})
+              // and marks them forprocessing by MathJax. When false, LaTeX
+              // environments will not be processed outside of math mode.
+              //
+              processEnvironments: false,
+
+              // skipTags
+              // ---------------------------------------------------------------
+              // The array 'skipTags' lists the names of the tags whose
+              // contents should NOT be processed by tex2jax.
+              //
+              skipTags: ["script","noscript","style","textarea","pre","code"],
+
+              // processClass, ignoreClass
+              // ---------------------------------------------------------------
+              // These are the (CSS) classes name used to mark elements whose
+              // contents should or should NOT be processed by tex2jax.
+              //
+              processClass: "mathjax",
+              ignoreClass: "nomathjax"
             },
-            // jadams, 2022-04-22, NOTE: 'MathJax_Display' overloaded by
-            // THEME CSS. Unclear how to configure 'HTML-CSS' correctly.
+
+            // displayAlign
+            // -----------------------------------------------------------------
+            // Align (displayMath) equations left-sided in code and all
+            // markdown cells.
             //
-            // Center justify equations in code and markdown cells. Elsewhere
-            // we use CSS to left justify single line equations in code cells.
-            displayAlign: 'center',
-            "HTML-CSS": {
-                styles: {'.MathJax_Display': {
-                  "margin": 0,
-                }},
-                linebreaks: { automatic: true }
-            }
+            displayAlign: 'left',
+
+            // preview
+            // -----------------------------------------------------------------
+            // Controls whether tex2jax inserts 'MathJax_Preview' spans to
+            // make a preview available, and what preview to use, when it
+            // locates in-line or display mathematics in the page. The default
+            // is 'TeX', which means use the TeX code as the preview (which
+            // will be visible until it is processed by MathJax). Set to
+            // 'none' to prevent previews from being inserted.
+            //
+            preview: "TeX",
+
+            // CommonHTML, HTML-CSS, and SVG output processors
+            // -----------------------------------------------------------------
+            // The CommonHTML, HTML-CSS, and SVG output processors implement
+            // most of the MathML3 automatic line-breaking specification.
+            // Since line-breaking takes extra processing and so can slow
+            // down the mathematical output, it is off by default
+            //
+            CommonHTML: { linebreaks: { automatic: false } },
+            "HTML-CSS": { linebreaks: { automatic: false } },
+                   SVG: { linebreaks: { automatic: false } }
         });
+
+        // Use Jax renderer 'CommonHTML' for default
+        //
+        MathJax.Hub.Register.StartupHook("End Jax",function () {
+          var BROWSER = MathJax.Hub.Browser;
+          var jax = "CommonHTML";
+          if (BROWSER.hasMathPlayer) jax = "NativeMML";
+          return MathJax.Hub.setRenderer(jax);
+        });
+
+        // Register a message MessageHook
+        // ---------------------------------------------------------------------
+        // MathJax.Hub.Register.MessageHook("New Math", function (message) {
+        //   var script = MathJax.Hub.getJaxFor(message[1]).SourceElement();
+        //   var j1_message = {};
+        //   j1_message.type    = 'command';
+        //   j1_message.action  = 'mathjax';
+        //   j1_message.text    = message[1];
+        //   this.j1.sendMessage('MathJax.Hub.MessageHook', 'j1.adapter.nbinteract', j1_message);
+        //   // console.error('nbinteract, Hub - New Math: ' + message[1]);
+        // });
+
+        // ---------------------------------------------------------------------
+        // END config
       `;
 
       // add Mathjax resources
@@ -277,6 +374,7 @@ j1.adapter.nbinteract = (function (j1, window) {
               xhr_data:           textbook.xhr_data,
               xhr_data_path:      textbook.xhr_data_path,
               use_mathjax:        textbook.use_mathjax,
+              translate_mathjax:  textbook.translate_mathjax,
               altair_cleanups:    textbook.altair_cleanups,
               buttonStyles:       settings.button_styles,
             });
@@ -393,11 +491,16 @@ j1.adapter.nbinteract = (function (j1, window) {
     // (e.g. <div>) specified by xhr_container_id, xhr_data_path
     // -------------------------------------------------------------------------
     loadTextbookHTML: function (options) {
-      var html_data_path    = options.xhr_data_path + '/' + options.xhr_data;
-      var id                = options.xhr_container_id;
-      var mathjaxEnabled    = options.use_mathjax;
-      var cleanupAltair     = options.altair_cleanups;
-      var $selector         = $('#' + id);
+      var html_data_path      = options.xhr_data_path + '/' + options.xhr_data;
+      var id                  = options.xhr_container_id;
+      var mathjaxEnabled      = options.use_mathjax ? options.use_mathjax : false;
+      var mathjaxTranslate    = options.translate_mathjax ? options.translate_mathjax : false;
+      var cleanupAltair       = options.altair_cleanups ? options.altair_cleanups : false;
+      var isPageRendered      = false;
+      var $selector           = $('#' + id);
+      var allID;
+      var allMathJaxSpan;
+      var allMathJaxElement;
       var logText;
 
       var cb_load_closure = function(id, mathjaxFlag) {
@@ -446,7 +549,6 @@ j1.adapter.nbinteract = (function (j1, window) {
             //
             if (cleanupAltair) {
 
-
               var reUnderscores = new RegExp(/_/, 'g');
               var reMultipleSpaces = new RegExp(/\s+/, 'g');
               var reMultipleSpacesStart = new RegExp(/^\s+/, 'g');
@@ -457,16 +559,15 @@ j1.adapter.nbinteract = (function (j1, window) {
               var newContent;
               var newContentWritten = false;
               var isWidget;
-              var isPageRendered = false;
               var outputDiv;
               var childNodes;
               var clientHeight;
               var lastWidget = false;
-              var allID = document.querySelectorAll('*[id^="altair-viz"]');
 
-              // check/wait for ALL widgets in the page are rendered (by JS)
+              // check/wait for ALL Altair widgets in the page are rendered (by JS)
               // if rendering finished, flag 'isPageRendered' is set to 'true'
               //
+              allID = document.querySelectorAll('*[id^="altair-viz"]');
               for (var l = 0; l < allID.length; l++) {
                 outputDiv = document.getElementById(allID[l].id);
                 var dependencies_met_page_rendered = setInterval(function() {
@@ -505,7 +606,7 @@ j1.adapter.nbinteract = (function (j1, window) {
                   clearInterval(dependencies_met_widgets_updated);
                 }
               }, 25);  // END interval
-            } // END if cleanupAltair
+            } // END if cleanup Altair
 
             // disable MathJax for all HTML 'output_wrapper' elements
             //
@@ -514,6 +615,7 @@ j1.adapter.nbinteract = (function (j1, window) {
                 x.className += ' nomathjax';
               }
             });
+
             // make all 'image' elements responsive (BS@4)
             //
             var images = document.getElementsByTagName('img');;
@@ -523,20 +625,46 @@ j1.adapter.nbinteract = (function (j1, window) {
               }
             });
 
-            // NOTE: DISABLED. Doesn't work that way. The class 'nbinteract-hide_in'
-            // is used in combination with hidden code cells as well!
+            // disable for now
             //
-            // Remove all childs in a element having the class 'nbinteract-hide_in'
-            // document.querySelectorAll('.nbinteract-hide_in').forEach(el => el.remove());
+            mathjaxTranslate = true
 
-            // Adding class on input_area NOT needed. This element contains
-            // and 'highlight' element that is processed for 'notranslate'
-            // in adapter rouge.js already
-            //
-            // var input_area = document.getElementsByClassName('input_area');
-            // [...input_area].forEach(x => x.className += " notranslate");
+            // disable translation on MathJax containers
+            // -----------------------------------------------------------------
+            if (mathjaxEnabled && !mathjaxTranslate) {
 
-            // cleanup headlines in textbook HTML and add an id used by toccer
+              var dependencies_met_mathjax_available = setInterval(function() {
+                // document.getElementsByClassName('MJXc-display');
+                // document.querySelectorAll('*[id^="MathJax-Element"]');
+                // allMathJaxSpan = document.querySelectorAll('*[id^="MathJax-Element"]');
+                // allMathJaxSpan = document.querySelectorAll('*[id^="MathJax-Element-"]');
+                // allMathJaxSpan = document.getElementsByClassName('mjx-chtml');
+                allMathJaxSpan = document.querySelectorAll('*[id$="-Frame"]');
+
+                if (allMathJaxSpan.length) {
+                  // var lastElm = document.getElementById(allMathJaxSpan[allMathJaxSpan.length-1].id);
+                  var dependencies_met_mathjax_rendered = setInterval(function() {
+                    // var isProcessing = lastElm.classList.contains('MathJax_Processing');
+                    var mj_state = j1.adapter.nbinteract.getState()
+                    if (mj_state == 'mathjax_finished') {
+                      allMathJaxSpan = document.querySelectorAll('*[id$="-Frame"]');
+                      for (var l = 0; l < allMathJaxSpan.length; l++) {
+                        // outputDiv = document.getElementById(allMathJaxSpan[l].id);
+                        outputDiv = allMathJaxSpan[l];
+                        logger.error('\n' + 'element: ' + outputDiv.id  );
+                        // outputDiv.classList.remove('MJXc-processing');
+                        outputDiv.classList.add('notranslate');
+                      }
+                      clearInterval(dependencies_met_mathjax_rendered);
+                    }
+                  }, 25);  // END interval dependencies_met_mathjax_rendered
+                  clearInterval(dependencies_met_mathjax_available);
+                };
+              }, 25);  // END interval dependencies_met_mathjax_available
+
+            } // END // disable translation on MathJax
+
+            // rewrite headlines in textbook HTML, add an id used by toccer
             //
             $selector.find('h1').replaceWith( function() {
               // return '<h1 id="' + $(this)[0].id.replace(/\$/g, '') + '">' + $(this).text().slice(0,-1) + '</h1>';
@@ -791,6 +919,7 @@ j1.adapter.nbinteract = (function (j1, window) {
       var json_message      = JSON.stringify(message, undefined, 2);
       var messageSuccessUL  = document.getElementById(nbiModalSuccessMessagesID);
       var messageErrorUL    = document.getElementById(nbiModalErrorMessagesID);
+      var isUpdated = false;
       var message;
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
@@ -820,6 +949,30 @@ j1.adapter.nbinteract = (function (j1, window) {
         if (nbiIndicateNbiActivity) {
           spinner.stop();
         }
+
+      } // END message command/nbi_init_finished
+
+      if (message.type === 'command' && message.action === 'mathjax') {
+        logger.error('\n' + 'New Math, ID: ' + message.text);
+
+        MathJax.Hub.Startup.signal.Interest(function (message) {
+          logger.error("Startup: " + message)
+          // if (message.contains('End')) {
+          //   logger.error("Startup: " + message)
+          // }
+        });
+
+        var dependencies_met_mathjax_rendered = setInterval(function() {
+          var elm = document.getElementById('MathJax-Element-6' + '-Frame');
+          var isProcessing = (elm.classList.contains('MJXc-processing') || elm.classList.contains('MJXc-processed')) ? true : false;
+          if (!isProcessing && !isUpdated) {
+            isUpdated = true;
+            elm.classList.add('notranslate');
+            logger.error('\n' + 'New Math, ID: ' + message.text);
+            //clearInterval(dependencies_met_mathjax_rendered);
+          }
+          clearInterval(dependencies_met_mathjax_rendered);
+        }, 25);  // END interval dependencies_met_mathjax_rendered
 
       } // END message command/nbi_init_finished
 

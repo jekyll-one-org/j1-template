@@ -91,21 +91,31 @@ select {
 } */
 
 
+
 /*
-  MathJax CSS overwrites
+  MathJax CSS overwrites (CSS-HTML)
   ------------------------------------------------------------------------------
 */
 
-.MathJax_Display {
-  margin-top: 1rem !important;
-  text-align: left !important;
-  margin-left: 1rem !important;
+/* .MathJax span {
+  font-size: 100% !important;
+} */
+
+/*
+  MathJax CSS overwrites (CommonHTML)
+  ------------------------------------------------------------------------------
+*/
+
+.MJXc-display {
+  margin: 1em 0 0 1rem !important;
 }
 
-span.MathJax {
-    margin-left: 0.25rem;
-    margin-right: 0.25rem;
+.mjx-chtml {
+  margin-right: 0.25rem !important;
+  margin-left: 0.25rem !important;
+  font-size: 100% !important;
 }
+
 
 /*
   Bgplot CSS overwrites

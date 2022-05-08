@@ -129,6 +129,7 @@ settings:
         xhr_data:                       j1_climate_change_forecast.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    true
+        translate_mathjax:              false
 
     # --------------------------------------------------------------------------
     # interactive widget types
@@ -151,6 +152,7 @@ settings:
         xhr_data:                       j1_odes_in_python.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    true
+        translate_mathjax:              true
 
     # --------------------------------------------------------------------------
     # ode_selected
@@ -314,6 +316,7 @@ settings:
         xhr_data:                       nbi_docs_examples_variability_of_the_sample_mean.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    true
+        translate_mathjax:              false
 
     # --------------------------------------------------------------------------
     # examples_correlation
@@ -325,6 +328,7 @@ settings:
         xhr_data:                       nbi_docs_examples_correlation.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    true
+        translate_mathjax:              true
 
     # --------------------------------------------------------------------------
     # examples_linear_regression
