@@ -316,3 +316,69 @@ interact_params (dict): Keyword arguments in the same format as
     parameter names, prefix the corresponding kwargs with `x__` and
     `y__`.
 ----
+
+== Multiple Choice
+
+Generates a multiple choice question that allows the user to select an
+answer choice and shows whether choice was correct.
+
+[source, python, role="noclip"]
+----
+nbinteract.multiple_choice(question, choices, answers)
+----
+
+.Example
+[source, python, role="noclip"]
+----
+import nbinteract as nbi
+
+nbi.multiple_choice(question="Select all prime numbers.",
+                    choices=['12', '3', '31'],
+                    answers=[1, 2])
+----
+
+=== Options
+
+[source, python, role="noclip"]
+----
+question (str): Question text displayed above choices.
+
+choices (list str): Answer choices that user can select.
+
+answers (int | iterable int): Either an integer or iterable of
+    integers. Each integer in answers corresponds to the index of the
+    correct choice in `choices`.
+----
+
+== Short Answer
+
+Generates a short answer question that allows user to input an answer in
+a textbox and a submit button to check the answer.
+
+[source, python, role="noclip"]
+----
+nbinteract.short_answer(question, answers, explanation=None)
+----
+
+.Example
+[source, python, role="noclip"]
+----
+import nbinteract as nbi
+
+nbi.short_answer('What is 1+1?', answers='2', explanation='1+1 is 2')
+----
+
+=== Options
+
+[source, python, role="noclip"]
+----
+question (str):  The question being asked.
+
+answers (str | list str | func): If a string, only that string will be
+    marked correct. If a list of string, any string in the list will be
+    marked correct. If a function, any input that causes the function
+    to return True will be marked correct.
+
+explanation (str):  The explanation to the question is displayed when
+    the user inputs the correct answer.
+----
