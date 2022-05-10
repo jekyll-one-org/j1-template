@@ -212,7 +212,7 @@ j1.adapter.cookieConsent = (function (j1, window) {
             cookieSecure:           secure,                                     // only sent to the server with an encrypted request over HTTPS
             cookieDomain:           domainAttribute,                            // set domain (hostname|domain)
             dialogLanguage:         moduleOptions.dialogLanguage,               // language for the dialog (modal)
-            whitelisted:            moduleOptions.whitelisted,                  // pages NOt dialog is shown
+            whitelisted:            moduleOptions.whitelisted,                  // pages NO cookie dialog is shown
             reloadPageOnChange:     moduleOptions.reloadPageOnChange,           // reload if setzings has changed
             dialogContainerID:      moduleOptions.dialogContainerID,            // container, the dialog modal is (dynamically) loaded
             xhrDataElement:         moduleOptions.xhrDataElement,               // container for all language-specific dialogs (modals)

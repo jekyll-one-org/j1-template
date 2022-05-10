@@ -83,6 +83,9 @@ j1.adapter.nbinteract = (function (j1, window) {
   var moduleOptions   = {};
   var moduleSettings  = {};
   var message         = {};
+  var flags            = {
+    checkURL:   false
+  };
   var spinnerOpts     = {                                                       // (default) options for a spinner
     lines:      13,                                                             // number of lines to draw
     length:     38,                                                             // length of each line
@@ -107,7 +110,8 @@ j1.adapter.nbinteract = (function (j1, window) {
   var nbiContentModalInfoID       = 'nbiModalInfoBody';                         // ID of the content (messages) for the INFO modal
   var nbiContentModalSuccessID    = 'nbiModalSuccessBody';                      // ID of the content (messages) for the SUCCESS modal
   var nbiContentModalErrorID      = 'nbiModalErrorBody';                        // ID of the content (messages) for the SUCCESS modal
-  var nbiModalInfoID              = '#' + 'nbiModalTopInfo';                    // ID of the SUCCESS modal
+  var nbiModalTopInfo             = '#' + 'nbiModalTopInfo';                    // ID of the TopInfo modal
+  var nbiModalTRInfo              = '#' + 'nbiModalTRInfo';                     // ID of the TRInfo modal
   var nbiModalSuccessID           = '#' + 'nbiModalTRSuccess';                  // ID of the SUCCESS modal
   var nbiModalErrorID             = '#' + 'nbiModalTLDanger';                   // ID of the ERROR modal
   var nbinteract_prepared         = false;                                      // switch to indicate if ???
@@ -187,6 +191,7 @@ j1.adapter.nbinteract = (function (j1, window) {
       // run a spinner to indicate activity of 'nbInteract' if enabled
       // -------------------------------------------------------------------
       $(document).ready(function() {
+
         if (nbiIndicateNbiActivity && !spinnerStarted) {
           spinnerStarted = true;
           target  = document.getElementById('content');
@@ -391,98 +396,124 @@ j1.adapter.nbinteract = (function (j1, window) {
     // controlled by nbinteract_prepared.
     // -------------------------------------------------------------------------
     interactNbiTextbooks: function (options) {
+      var state;
       var textbook = options;
 
       // initialize state flag
       _this.setState('started');
       logger.debug('\n' + 'state: ' + _this.getState());
 
+      // check if the Binder Service is available
+      //
+      _this.checkURL(options.baseUrl, flags);
+
       var log_text = '\n' + 'nbinteract is being initialized';
       logger.info(log_text);
 
-      // var nbiButtonsFound = document.querySelectorAll('.js-nbinteract-widget')
+      var dependencies_met_binder_responsive = setInterval(function() {
+        state = _this.getState();
+        if (state == 'finished_checks') {
+          clearInterval(dependencies_met_binder_responsive);
+          if (flags.checkURL) {
+            {% comment %} initialize nbinteract per textbook
+            {% assign textbook_spec     = item.textbook.spec %}
+            {% assign textbook_baseUrl  = item.textbook.baseUrl %}
+            {% assign textbook_provider = item.textbook.provider %}
+            -------------------------------------------------------------------------- {% endcomment %}
+            {% for item in nbinteract_options.textbooks %} {% if item.textbook.enabled %}
+            {% assign textbook_id       = item.textbook.id %}
 
-      {% comment %} initialize nbinteract per textbook
-      {% assign textbook_spec     = item.textbook.spec %}
-      {% assign textbook_baseUrl  = item.textbook.baseUrl %}
-      {% assign textbook_provider = item.textbook.provider %}
-      -------------------------------------------------------------------------- {% endcomment %}
-      {% for item in nbinteract_options.textbooks %} {% if item.textbook.enabled %}
-      {% assign textbook_id       = item.textbook.id %}
+            if ($('#{{textbook_id}}').length) {
+              var dependencies_met_nb_loaded = setInterval(function() {
+                if ($('#{{textbook_id}}').attr('data-nb-textbook') == 'loaded') {
 
-      if ($('#{{textbook_id}}').length) {
-        var dependencies_met_nb_loaded = setInterval(function() {
-          if ($('#{{textbook_id}}').attr('data-nb-textbook') == 'loaded') {
+                  var nbiButtonsFound = document.querySelectorAll('.js-nbinteract-widget').length
+                  if (nbiIndicateNbiActivity && nbiButtonsFound == 1) {
+                    var log_text = '\n' + 'non-nbi textbook found, skip NBI initialization for: {{textbook_id}}';
+                    logger.warn(log_text);
+                    spinner.stop();
+                  }
 
-            var nbiButtonsFound = document.querySelectorAll('.js-nbinteract-widget').length
-            if (nbiIndicateNbiActivity && nbiButtonsFound == 1) {
-              var log_text = '\n' + 'non-nbi textbook found, skip NBI initialization for: {{textbook_id}}';
-              logger.warn(log_text);
-              spinner.stop();
-            }
+                  if(!nbinteract_prepared && nbiButtonsFound > 1) {
+                    logText = '\n' + 'jupyter kernel is being generated ...';
+                    logger.info(logText);
 
-            if(!nbinteract_prepared && nbiButtonsFound > 1) {
-              logText = '\n' + 'jupyter kernel is being generated ...';
-              logger.info(logText);
+                    // create nbInteract (core) instance
+                    //
+                    coreLogger = log4javascript.getLogger('nbinteract.core');
+                    interact = new NbInteract({
+                      spec:     options.spec,
+                      baseUrl:  options.baseUrl,
+                      provider: options.provider,
+                      logger:   coreLogger,
+                      j1API:    j1,
+                    });
 
-              // create nbInteract (core) instance
-              //
-              coreLogger = log4javascript.getLogger('nbinteract.core');
-              interact = new NbInteract({
-                spec:     options.spec,
-                baseUrl:  options.baseUrl,
-                provider: options.provider,
-                logger:   coreLogger,
-                j1API:    j1,
-              });
+                    // generate a jupyter kernel via BinderHub
+                    interact.prepare();
+                    nbinteract_prepared = true;
 
-              // generate a jupyter kernel via BinderHub
-              interact.prepare();
-              nbinteract_prepared = true;
+                    // issue an error if the NBI (init) button never removed by
+                    // nbInteract-core (util or manager)
+                    // TODO:  The 'timeout' condition should be replaced
+                    //        state-based triggered from nbInteract-core.
+                    //
+                    window.setTimeout(function() {
+                      var nbiButtonState = _this.getNbiButtonState();
+                      if (nbiButtonState) {
+                        // button NOT removed
+                        logger.warn('NBI initialialization failed on textbook: {{textbook_id}}');
+                        // hide the info modal
+                        $(nbiModalSuccessID).modal('hide');
 
-              // issue an error if the NBI (init) button never removed by
-              // nbInteract-core (util or manager)
-              // TODO:  The 'timeout' condition should be replaced
-              //        state-based triggered from nbInteract-core.
-              //
-              window.setTimeout(function() {
-                var nbiButtonState = _this.getNbiButtonState();
-                if (nbiButtonState) {
-                  // button NOT removed
-                  logger.warn('NBI initialialization failed on textbook: {{textbook_id}}');
-                  // hide the info modal
-                  $(nbiModalSuccessID).modal('hide');
+                        // show the error modal
+                        $(nbiModalSuccessID).on('hidden.bs.modal', function () {
+                          if ($(nbiModalErrorID).is(':hidden')) {
+                            var messageErrorUL = document.getElementById(nbiModalErrorMessagesID);
+                            _this.appendModalMessage(messageErrorUL, 'NBI initialialization failed for textbook: {{textbook_id}}')
+                            $(nbiModalErrorID).modal('show');
 
-                  // show the error modal
-                  $(nbiModalSuccessID).on('hidden.bs.modal', function () {
-                    if ($(nbiModalErrorID).is(':hidden')) {
-                      var messageErrorUL = document.getElementById(nbiModalErrorMessagesID);
-                      _this.appendModalMessage(messageErrorUL, 'NBI initialialization failed for textbook: {{textbook_id}}')
-                      $(nbiModalErrorID).modal('show');
-
-                      // auto-close the error modal
-                      if (nbiModalAutoClose) {
-                        window.setTimeout(function() {
-                          $(nbiModalErrorID).modal('hide');
-                        }, nbiModalAutoCloseDelay);
+                            // auto-close the error modal
+                            if (nbiModalAutoClose) {
+                              window.setTimeout(function() {
+                                $(nbiModalErrorID).modal('hide');
+                              }, nbiModalAutoCloseDelay);
+                            }
+                          }
+                        });
+                      } else {
+                        // button removed
+                        logger.info('NBI initialized successfully.');
                       }
-                    }
-                  });
-                } else {
-                  // button removed
-                  logger.info('NBI initialized successfully.');
-                }
-              }, nbiInitTimeout);
+                    }, nbiInitTimeout);
 
+                  }
+
+                  clearInterval(dependencies_met_nb_loaded);
+                } // END dependencies_met_nb_loaded
+              }, 25);
+              return;
             }
+            // END textbook_id: {{ textbook_id }}
+            {% endif %} {% endfor %}
+          } else {
+            spinner.stop();
+            var modaBodyText = `
+              The <i>Binder Service</i> is currently not available or is overloaded.
+              All interactive components on the page are <b>not</b> available.
+              You can reload the page or re-open later again.
+            `;
+            logger.error('\n', 'Binder access: failed');
+            if ($(nbiModalTRInfo).is(':hidden')) {
+              document.getElementById('nbiModalTRInfoBody').innerHTML = modaBodyText;
+              $(nbiModalTRInfo).modal('show');
+            }
+            clearInterval(dependencies_met_binder_responsive);
+          }
 
-            clearInterval(dependencies_met_nb_loaded);
-          } // END dependencies_met_nb_loaded
-        }, 25);
-        return;
-      }
-      // END textbook_id: {{ textbook_id }}
-      {% endif %} {% endfor %}
+        }
+      }, 25);  // END dependencies_met_binder_responsive
+
     },
 
     // -------------------------------------------------------------------------
@@ -815,6 +846,45 @@ j1.adapter.nbinteract = (function (j1, window) {
           </div>
         </div>
       `
+
+      const nbiModalTRInfo = `
+        <div id="nbiModalTRInfo"
+          class="modal fade right"
+          tabindex="-1"
+          role="dialog"
+          aria-labelledby="myModalLabel" aria-hidden="true"
+          data-bs-keyboard="false"
+          data-bs-backdrop="static">
+          <div class="modal-dialog modal-dialog-scrollable modal-side-2x modal-top-right modal-notify modal-success" role="document">
+            <!-- Content -->
+            <div class="modal-content">
+              <!-- Header -->
+              <div class="modal-header">
+                <p class="lead">Information</p>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                  <i class="mdi mdi-close mdi-dark mdi-48px"></i>
+                </button>
+              </div>
+              <!-- Icon -->
+              <div class="text-center">
+                <i class="mdi mdi-10x mdi-information-variant mdi-spin md-green mb-1"></i>
+              </div>
+              <!-- Body -->
+              <div id="nbiModalTRInfoBody" class="modal-body">
+                <div>
+                  <p> Placeholder </p>
+                </div>
+              </div>
+              <!-- Footer -->
+              <div class="modal-footer justify-content-center">
+                <a type="button" class="btn btn-primary" data-bs-dismiss="modal">OK, thanks</a>
+              </div>
+            </div>
+            <!-- END Content -->
+          </div>
+        </div>
+      `
+
       const nbiModalTRSuccess = `
         <div id="nbiModalTRSuccess"
           class="modal fade right"
@@ -828,7 +898,7 @@ j1.adapter.nbinteract = (function (j1, window) {
             <div class="modal-content">
               <!-- Header -->
               <div class="modal-header">
-                <p class="lead">Info - NbInteract</p>
+                <p class="lead">NBI - Information</p>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                   <i class="mdi mdi-close mdi-dark mdi-48px"></i>
                 </button>
@@ -853,6 +923,7 @@ j1.adapter.nbinteract = (function (j1, window) {
           </div>
         </div>
       `
+
       const nbiModalTLDanger = `
         <div id="nbiModalTLDanger"
           class="modal fade left"
@@ -866,7 +937,7 @@ j1.adapter.nbinteract = (function (j1, window) {
             <div id="nbiModalErrorBody" class="modal-content">
               <!--Header-->
               <div class="modal-header">
-                <p class="lead">Error - NbInteract</p>
+                <p class="lead">NBI - Error</p>
                 <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                   <i class="mdi mdi-close mdi-dark mdi-48px"></i>
                 </button>
@@ -895,6 +966,12 @@ j1.adapter.nbinteract = (function (j1, window) {
       nbiModal.id             = 'nbi-modal-info';
       nbiModal.className      = 'nbi-modal';
       nbiModal.innerHTML      = nbiModalTopInfo;
+      document.body.appendChild(nbiModal);
+
+      nbiModal                = document.createElement('div');
+      nbiModal.id             = 'nbi-modal-info';
+      nbiModal.className      = 'nbi-modal';
+      nbiModal.innerHTML      = nbiModalTRInfo;
       document.body.appendChild(nbiModal);
 
       nbiModal                = document.createElement('div');
@@ -1096,6 +1173,22 @@ j1.adapter.nbinteract = (function (j1, window) {
       return _this.state;
     }, // END getState
 
+    // -------------------------------------------------------------------------
+    // getState()
+    // Returns the current (processing) state of the module
+    // -------------------------------------------------------------------------
+    checkURL: function (uri, flags) {
+      _this.setState('process_checks');
+      $.get(uri).done(function () {
+        _this.setState('finished_checks');
+        flags.checkURL = true;
+        return true;
+      }).fail(function () {
+        _this.setState('finished_checks');
+        flags.checkURL = false;
+      });
+
+    }, // END checkURL
     // -------------------------------------------------------------------------
     // appendModalMessage()
     // Appends a message to given (NBI) modal

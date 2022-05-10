@@ -365,6 +365,7 @@ function CookieConsent(props) {
   // call consent dialog if no cookie found or cookie NOT accepted (except whitelisted pages)
   //
   whitelisted = (this.props.whitelisted.indexOf(window.location.pathname) > -1);
+
   var consentCookie = Cookie.get(this.props.cookieName);
   if ((consentCookie === undefined || consentCookie === "false") && this.props.autoShowDialog && !whitelisted) {
     showDialog();
