@@ -116,7 +116,8 @@ j1.adapter.nbinteract = (function (j1, window) {
   var nbiModalErrorID             = '#' + 'nbiModalTLDanger';                   // ID of the ERROR modal
   var nbinteract_prepared         = false;                                      // switch to indicate if ???
   var nbiModalSuccessMessagesID   = 'nbiModalSuccessMessages';                  // UL contalner SUCCESS messages
-  var nbiModalErrorMessagesID     = 'nbiModalErrorMessages';                    // UL contalner ERROR messahes
+  var nbiModalErrorMessagesID     = 'nbiModalErrorMessages';                    // UL contalner ERROR messages
+  var nbiCellsRendered = false;                                                  // flag indicates if all widgets in page are rendered
   var nbiShowMessages;                                                          // switch to show NBI messages
   var nbiIndicateNbiActivity;                                                   // switch to show a spinner while NBI is being initialized
   var nbiModalAutoClose;                                                        // switch to auto-close nbi message modals
@@ -133,6 +134,9 @@ j1.adapter.nbinteract = (function (j1, window) {
   var logger;
   var coreLogger;
   var logText;
+  var widgetCells;
+  var widgetCellsRendered;
+  var nbiNotebookReady;
 
   // ---------------------------------------------------------------------------
   // Helper functions
@@ -169,6 +173,7 @@ j1.adapter.nbinteract = (function (j1, window) {
       nbiShowMessages         = moduleOptions.show_nbi_messages;
       nbiIndicateNbiActivity  = moduleOptions.indicate_nbi_activity;
       nbiInitMathJax          = moduleOptions.nbi_init_mathjax;
+      nbiNotebookReady        = moduleOptions.notebook_ready;
 
       // -----------------------------------------------------------------------
       // load|configure Mathjax
@@ -191,7 +196,6 @@ j1.adapter.nbinteract = (function (j1, window) {
       // run a spinner to indicate activity of 'nbInteract' if enabled
       // -------------------------------------------------------------------
       $(document).ready(function() {
-
         if (nbiIndicateNbiActivity && !spinnerStarted) {
           spinnerStarted = true;
           target  = document.getElementById('content');
@@ -213,6 +217,19 @@ j1.adapter.nbinteract = (function (j1, window) {
       // Jupyter kernel if required
       // -----------------------------------------------------------------------
       _this.interactNbiTextbooks(moduleOptions);
+
+      // toggle hide|show the FAB button, if to wait on 'last_widget' rendered
+      //
+      if (nbiNotebookReady == 'last_widget') {
+        var dependencies_met_page_rendered = setInterval(function() {
+          if (nbiCellsRendered) {
+            $('.fab-btn').show();
+            clearInterval(dependencies_met_page_rendered);
+          } else {
+            $('.fab-btn').hide();
+          }
+        }, 25);  // END interval dependencies_met_page_rendered
+      }
 
     }, // END init
 
@@ -1023,9 +1040,18 @@ j1.adapter.nbinteract = (function (j1, window) {
           }
         }
 
-        if (nbiIndicateNbiActivity) {
-          spinner.stop();
-        }
+        widgetCells = document.querySelectorAll('.output_widget_view').length;
+        var dependencies_met_page_rendered = setInterval(function() {
+          widgetCellsRendered = document.querySelectorAll('.widget-vbox').length;
+          if (widgetCellsRendered >= widgetCells) {
+            logger.warn('\n' + 'page rendered widgets: ' + widgetCells + '|' + widgetCellsRendered);
+            nbiCellsRendered = true;
+            if (nbiIndicateNbiActivity) {
+              spinner.stop();
+            }
+            clearInterval(dependencies_met_page_rendered);
+          }
+        }, 25);  // END interval dependencies_met_page_rendered
 
       } // END message command/nbi_init_finished
 
@@ -1088,6 +1114,20 @@ j1.adapter.nbinteract = (function (j1, window) {
       //
       if (message.type === 'command' && message.action === 'error') {
         var messageTS;
+
+        if (messageTS.contains('Too many users') || messageTS.contains('Insufficent nodes')) {
+          var modaBodyText = `
+            The <i>Binder Service</i> is currently not available or is overloaded.
+            All interactive components on the page are <b>not</b> available.
+            You can reload the page or re-open later again.
+          `;
+          logger.error('\n', 'Binder access: failed');
+          if ($(nbiModalTRInfo).is(':hidden')) {
+            document.getElementById('nbiModalTRInfoBody').innerHTML = modaBodyText;
+            $(nbiModalTRInfo).modal('show');
+          }
+          return;
+        }
 
         // remove timestamp|loglevel from message if exists
         //

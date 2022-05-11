@@ -130,6 +130,20 @@ defaults:
   #
   # ----------------------------------------------------------------------------
   #
+  # notebook_ready
+  # ----------------------------------------------------------------------------
+  #   Flag that indicates if a notebook is ready (fully rendered).
+  #   For default, the signal 'notebook_ready' is set if the 'first'
+  #   widget in a notebook is rendered. For larger notebooks having
+  #   many headlines, the TOC provided by the FAB in a page may
+  #   incomplete. To indicate all resources of a page fully available,
+  #   the option 'last_widget' may a better choice.
+  #
+  #   values:                           first_widget | last_widget
+  #   default:                          first_widget
+  #
+  # ----------------------------------------------------------------------------
+  #
   # spec:                               jekyll-one/nbinteract-notebooks/main
   spec:                                 jekyll-one/j1-binder-repo/main
   baseUrl:                              'https://mybinder.org'
@@ -145,6 +159,7 @@ defaults:
   nbi_messages_auto_close_delay:        3500
 
   nbi_init_mathjax:                     true
+  notebook_ready:                       first_widget
 
 # ------------------------------------------------------------------------------
 # END config
