@@ -302,7 +302,7 @@ j1.adapter.mmenu = (function (j1, window) {
               var $this = $(this);
               var clicked;
 
-              $this.on('click', function(e){
+              $this.on('click', function(e) {
                 const button_{{menu_id}} = this;
                 e.preventDefault();
                 // toggle mmenu open|clse
@@ -316,7 +316,6 @@ j1.adapter.mmenu = (function (j1, window) {
                   drawer_{{menu_id}}.open();
                   clicked = true;
                 }
-
               });
             });
 

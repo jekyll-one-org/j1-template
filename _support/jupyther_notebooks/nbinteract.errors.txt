@@ -4,3 +4,15 @@ Häufig in Endlosscheife
 [14:39:43.901] [t1mwviky4zx] [INFO ] [nbinteract.core ] [nbinteract-core.js:93]
 binderhub.registerCallback: messages sent by Binder: 2022-04-30T12:39:43Z [Normal] Pulling image "gcr.io/binderhub-288415/r2d-staging-g5b5b759-jekyll-2done-2dj1-2dnbi-2dtestrepo-389889:5006a3ac29b5c305b41726810518184d5e5ceaf2"
 [http://localhost:41000/assets/themes/j1/modules/nbInteract/js/nbinteract/nbinteract-core.js:93]
+
+
+Overloaded BinderHub
+--------------------------------------------------------------------------------
+
+[10:57:41.117] [afh896zrsg3] [INFO ] [nbinteract.core                                             ] [jquery.js:40]
+binderhub.registerCallback: messages sent by Binder: Too many users on this BinderHub! Try again soon.
+[https://jekyll-one-org.github.io/assets/themes/j1/modules/jquery/js/jquery.js:40] log4javascript.js:1880:32
+
+[17:38:52.035] [mhf40qc12pe] [ERROR] [j1.adapter.nbinteract                                       ] [nbinteract.js:1656]
+Insufficent nodes avaialble at BinderHub
+[http://localhost:41000/assets/themes/j1/adapter/js/nbinteract.js:1656]
