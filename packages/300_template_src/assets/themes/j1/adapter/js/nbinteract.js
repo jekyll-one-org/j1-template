@@ -192,9 +192,9 @@ j1.adapter.nbinteract = (function (j1, window) {
       // -----------------------------------------------------------------------
       _this.loadNbiTextbooks(moduleOptions);
 
-      // -------------------------------------------------------------------
+      // -----------------------------------------------------------------------
       // run a spinner to indicate activity of 'nbInteract' if enabled
-      // -------------------------------------------------------------------
+      // -----------------------------------------------------------------------
       $(document).ready(function() {
         if (nbiIndicateNbiActivity && !spinnerStarted) {
           spinnerStarted = true;
@@ -1053,11 +1053,18 @@ j1.adapter.nbinteract = (function (j1, window) {
           }
         }, 25);  // END interval dependencies_met_page_rendered
 
+        // ---------------------------------------------------------------------
+        // show the quicklinks icon
+        // ---------------------------------------------------------------------
+        $('#quickLinksNotebookseButton').show();
+
       } // END message command/nbi_init_finished
 
       if (message.type === 'command' && message.action === 'mathjax') {
         logger.error('\n' + 'New Math, ID: ' + message.text);
 
+        // Register a MathJax callback if page is FULLY rendered
+        // TODO: Dosn't for now tha way !!!
         MathJax.Hub.Startup.signal.Interest(function (message) {
           logger.error("Startup: " + message)
           // if (message.contains('End')) {

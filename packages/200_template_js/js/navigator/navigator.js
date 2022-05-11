@@ -394,7 +394,7 @@ module.exports = function navigator ( options ) {
         } // END QuickSearch
 
         // ---------------------------------------------------------------------
-        // Translator
+        // Translator dialog
         //
         if ($('li.translate')) {
           logger.debug('register SHOW event for J1 Translator');
@@ -404,7 +404,18 @@ module.exports = function navigator ( options ) {
         } // END Translator
 
         // ---------------------------------------------------------------------
-        // CookieConsent
+        // NBI Notebooks dialog
+        //
+        if ($('li.nbi-notebooks')) {
+          logger.debug('register SHOW event for J1 NBI');
+          $('li.nbi-notebooks > a', this).on('click', function(e) {
+//          j1.nbi.showDialog();
+            j1.translator.showDialog();
+          });
+        } // END Translator
+
+        // ---------------------------------------------------------------------
+        // CookieConsent dialog
         //
         if ($('li.cookie-consent')) {
           logger.debug('register SHOW event for J1 CookieConsent');

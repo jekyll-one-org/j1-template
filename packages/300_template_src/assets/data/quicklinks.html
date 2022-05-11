@@ -43,6 +43,8 @@ exclude_from_search:                    true
 {% assign consent_settings        = modules.cookieconsent.settings %}
 {% assign lunr_search_defaults    = modules.defaults.lunr.defaults %}
 {% assign lunr_search_settings    = modules.lunr.settings %}
+{% assign nbi_defaults            = modules.defaults.nbinteract.defaults %}
+
 
 {% comment %} Control Center disabled
 --------------------------------------------------------------------------------
@@ -124,6 +126,10 @@ exclude_from_search:                    true
 {% assign translator_action       = quicklinks_options.translator_action %}
 {% assign translator_label        = quicklinks_options.translator_label %}
 
+{% assign notebooks_icon          = quicklinks_options.notebooks_icon %}
+{% assign notebooks_action        = quicklinks_options.notebooks_action %}
+{% assign notebooks_label         = quicklinks_options.notebooks_label %}
+
 {% assign r_text_icon             = quicklinks_options.r_text_icon %}
 {% assign r_text_action           = quicklinks_options.r_text_action %}
 {% assign r_text_label            = quicklinks_options.r_text_label %}
@@ -152,6 +158,14 @@ exclude_from_search:                    true
   {% assign show_translator_icon = true  %}
 {% else %}
   {% assign show_translator_icon = false %}
+{% endif %}
+
+{% comment %} Show|Hide Notebooks icon
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if nbi_defaults.enabled %}
+  {% assign show_notebooks_icon = true  %}
+{% else %}
+  {% assign show_notebooks_icon = false %}
 {% endif %}
 
 {% comment %} Show|Hide AuthManager icon
@@ -265,6 +279,7 @@ exclude_from_search:                    true
   {% if show_cookieconsent_icon %}<li id="quickLinksCookieButton" class="nav-item {{cookies_action}}" style="display: block;"><a href="#" aria-label="{{cookies_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{cookies_icon}} {{icon_size}}"></i></a></li>{% endif %}
   {% if show_r_text_icon %}<li id="quickLinksRTextButton" class="nav-item {{r_text_action}}" style="display: block;"><a class="nav-icon" href="#" aria-label="{{r_text_label}}" data-bs-toggle="modal" data-bs-target="#fluidModalRTextResizer"><i class="nav-icon {{icon_family}} {{icon_family}}-{{r_text_icon}} {{icon_size}}"></i></a></li>{% endif %}
   {% if show_google_translate_icon %}<li id="quickLinksTranslateButton" class="nav-item {{translate_action}}" style="display: block;"><a href="#" aria-label="{{translate_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{translate_icon}} {{icon_size}}"></i></a></li>{% endif %}
+  {% if show_notebooks_icon %}<li id="quickLinksNotebookseButton" class="nav-item {{notebooks_action}}" style="display: none;"><a href="#" aria-label="{{translate_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{notebooks_icon}} {{icon_size}}"></i></a></li>{% endif %}
 
   {% comment %} Unused
   --------------------------------------------------------------------------------

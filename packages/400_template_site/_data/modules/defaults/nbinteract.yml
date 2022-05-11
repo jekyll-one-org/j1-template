@@ -144,6 +144,8 @@ defaults:
   #
   # ----------------------------------------------------------------------------
   #
+  enabled:                              true
+
   # spec:                               jekyll-one/nbinteract-notebooks/main
   spec:                                 jekyll-one/j1-binder-repo/main
   baseUrl:                              'https://mybinder.org'
