@@ -275,7 +275,8 @@ j1.adapter.mmenu = (function (j1, window) {
 
             const drawer_{{menu_id}} = mmenu_{{menu_id}}.offcanvas ({
               // drawer options
-              position: mmOptions.mmenu_drawer.position
+              position: mmOptions.mmenu_drawer.position,
+              toggle_mode: false
             });
 
             const navigator_{{menu_id}} = mmenu_{{menu_id}}.navigation ({
@@ -286,19 +287,41 @@ j1.adapter.mmenu = (function (j1, window) {
               theme:            mmOptions.mmenu_navigator.theme
             });
 
+            // make sure the QL menu is shown, if mmenu is closed
+            // by mmenu backdrop
+            //
+            $(".mm-ocd").click(function() {
+              $('#quicklinks').show();
+              return false
+            });
+
             // Toggle Bars (Hamburger) for the NavBar to open|close
             // the mmenu drawer
+            //
             $('{{item.menu.content.button}}').each(function(e) {
               var $this = $(this);
+              var clicked;
 
               $this.on('click', function(e){
                 const button_{{menu_id}} = this;
                 e.preventDefault();
-                drawer_{{menu_id}}.open();
+                // toggle mmenu open|clse
+                clicked = $('body.mm-ocd-opened').length ? true : false;
+                if (clicked) {
+                  drawer_{{menu_id}}.close();
+                  $('#quicklinks').show();
+                  clicked = false;
+                } else {
+                  $('#quicklinks').hide();
+                  drawer_{{menu_id}}.open();
+                  clicked = true;
+                }
+
               });
             });
 
             // jadams, 2020-09-30: loading the menues (themes) if enabled
+            //
             if (themerEnabled) {
               // load REMOTE themes from Bootswatch API (localFeed EMPTY!)
               $('#remote_themes_mmenu').bootstrapThemeSwitcher({

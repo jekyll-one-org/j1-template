@@ -716,8 +716,8 @@ j1.adapter.navigator = (function (j1, window) {
 
       // navQuicklinks styles
       // -----------------------------------------------------------------------
-      $('head').append('<style>.attr-nav> ul > li > a { color: ' +navQuicklinksOptions.icon_color+ ' !important; }</style>');
-      $('head').append('<style>.attr-nav> ul > li > a:hover { color: ' +navQuicklinksOptions.icon_color_hover+ ' !important; }</style>');
+      $('head').append('<style>.quicklink-nav> ul > li > a { color: ' +navQuicklinksOptions.icon_color+ ' !important; }</style>');
+      $('head').append('<style>.quicklink-nav> ul > li > a:hover { color: ' +navQuicklinksOptions.icon_color_hover+ ' !important; }</style>');
 
       // navMenu styles
       // -----------------------------------------------------------------------

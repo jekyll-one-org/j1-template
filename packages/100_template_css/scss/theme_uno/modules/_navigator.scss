@@ -731,7 +731,7 @@ li.dropdown.nav-item.nav-sub-item:before {
   			}
   			&.navbar-transparent {
           // jadams, 2020-07-02: removed left classes to not CONFLICT with brand icon for @media mobile
-  				.attr-nav {
+  				.quicklink-nav {
   					padding-left: 15px;
   					margin-left: 30px;
   				}
@@ -762,7 +762,7 @@ li.dropdown.nav-item.nav-sub-item:before {
   				// .navbar-header {
   				// 	position: absolute;
   				// }
-  				.attr-nav {
+  				.quicklink-nav {
   					position: absolute;
   					right: 15px;
   				}
@@ -821,7 +821,7 @@ li.dropdown.nav-item.nav-sub-item:before {
 
   // QuickLinks
   // -----------------------------------------------------------------------------
-  .attr-nav {
+  .quicklink-nav {
   	margin-left: 0; // jadams, 2020-07-02: set left to 0 to NOT conflict with brand icon for @media mobile
   	margin-right: -20px;  // jadams: changed because of div header, org: margin-right: -15px;
   	float: right;
@@ -1559,7 +1559,7 @@ li.dropdown.nav-item.nav-sub-item:before {
 		}
 	}
 // jadams, 2020-09-29: ab hier für mobile navigation wichtig
-	.attr-nav {
+	.quicklink-nav {
 		position: absolute;
 //  right: 2.5rem;
 		right: 1.5rem;
@@ -1679,7 +1679,7 @@ li.dropdown.nav-item.nav-sub-item:before {
 		// 	}
 		// }
 	//}
-	.attr-nav {
+	.quicklink-nav {
     // jadams, 2020-06-02: adjust CLOSER to navbar toggler
 		// right: 2.5rem;
     // top: 30px;

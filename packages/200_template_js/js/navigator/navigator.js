@@ -347,7 +347,7 @@ module.exports = function navigator ( options ) {
       // https://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily
       // https://stackoverflow.com/questions/5963669/whats-the-difference-between-event-stoppropagation-and-event-preventdefault
       // -----------------------------------------------------------------------
-      $('.attr-nav').each(function() {
+      $('.quicklink-nav').each(function() {
         // ---------------------------------------------------------------------
         // QuickSearch
         //
