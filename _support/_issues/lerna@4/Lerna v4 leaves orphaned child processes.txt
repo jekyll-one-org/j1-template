@@ -26,3 +26,10 @@ seems to be the default and cannot be disabled.
 
 This seems a broken approach to managing child processes and is a breaking
 change for those upgrading to v4.
+
+Potential Fix:
+--------------------------------------------------------------------------------
+
+npm/workspaces
+--------------
+See: https://docs.npmjs.com/cli/v8/using-npm/workspaces
