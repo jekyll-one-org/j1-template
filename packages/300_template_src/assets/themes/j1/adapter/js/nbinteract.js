@@ -1059,6 +1059,11 @@ j1.adapter.nbinteract = (function (j1, window) {
           }
         }
 
+        if (nbiNotebookReady == 'first_widget') {
+          if (nbiIndicateNbiActivity) spinner.stop();
+          $('.fab-btn').show();
+        }
+
         widgetCells = document.querySelectorAll('.output_widget_view').length;
         var dependencies_met_page_rendered = setInterval(function() {
           widgetCellsRendered = document.querySelectorAll('.widget-vbox').length;

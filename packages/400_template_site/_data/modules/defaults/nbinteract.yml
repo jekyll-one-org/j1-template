@@ -219,6 +219,10 @@ defaults:
                                         Required Cookie Settings:
                                         <ul>
                                           <li>
+                                            <code>Analysis</code> For translations, your consent on
+                                            <b>Analysis</b> with your <b>Privacy Settings</b> is required.
+                                          </li>                                        
+                                          <li>
                                           <code>Personalization</code> For processing textbooks, your consent on
                                           <b>Personalization</b> with your <b>Privacy Settings</b> (Cookie Settings) is required.
                                           </li>
