@@ -106,6 +106,11 @@ j1.adapter.nbinteract = (function (j1, window) {
     className:  'spinner',                                                      // CSS class assined to the spinner
     position:   'fixed',                                                        // element positioning:  absolute|fixed
   };
+
+  var nbActions = {
+    "resetLocalStorage":        true
+  };
+
   var spinnerStarted = false;                                                   // switch to indicate a started spinner
   var nbiContentModalInfoID       = 'nbiModalInfoBody';                         // ID of the content (messages) for the INFO modal
   var nbiContentModalSuccessID    = 'nbiModalSuccessBody';                      // ID of the content (messages) for the SUCCESS modal
@@ -137,6 +142,7 @@ j1.adapter.nbinteract = (function (j1, window) {
   var widgetCells;
   var widgetCellsRendered;
   var nbiNotebookReady;
+  var Events;
 
   // ---------------------------------------------------------------------------
   // Helper functions
@@ -151,6 +157,19 @@ j1.adapter.nbinteract = (function (j1, window) {
     // Initializer
     // -------------------------------------------------------------------------
     init: function (options) {
+
+      // -----------------------------------------------------------------------
+      // global event handler
+      // -----------------------------------------------------------------------
+      Events = {
+        documentReady: function (onDocumentReady) {
+          if (document.readyState !== 'loading') {
+            onDocumentReady();
+          } else {
+            document.addEventListener('DOMContentLoaded', onDocumentReady);
+          }
+        }
+      };
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -181,14 +200,18 @@ j1.adapter.nbinteract = (function (j1, window) {
       if (nbiInitMathJax) {
         _this.initMathJax();
       }
+      // -----------------------------------------------------------------------
+      // load|configure NBI dialog (modal)
+      // -----------------------------------------------------------------------
+      _this.loadDialog(moduleOptions);
 
       // -----------------------------------------------------------------------
-      // load HTML data for all modals used by nbInteract
+      // load all modals (HTML portion) used by NBI
       // -----------------------------------------------------------------------
       _this.loadNbiModals();
 
       // -----------------------------------------------------------------------
-      // load the HTML portion for all textbooks configured|enabled
+      // load all textbooks (HTML portion) configured|enabled
       // -----------------------------------------------------------------------
       _this.loadNbiTextbooks(moduleOptions);
 
@@ -581,7 +604,7 @@ j1.adapter.nbinteract = (function (j1, window) {
 
             // ------------------------------------------------------------------
             // see: https://www.codingexercises.com/replace-all-instances-of-css-class-in-vanilla-js
-            // see: https://wiki.selfhtml.org/wiki/JavaScript/Operatoren/Rest-_oder_Spread-Operator
+            // see: https://wiki.thishtml.org/wiki/JavaScript/Operatoren/Rest-_oder_Spread-Operator
             // ------------------------------------------------------------------
 
             // disable (Google) translation for all HTML 'output_wrapper' elements
@@ -1024,13 +1047,9 @@ j1.adapter.nbinteract = (function (j1, window) {
       // -----------------------------------------------------------------------
 
       // -----------------------------------------------------------------------
-      //  command|nbi_init_finished
-      //
-      if (message.type === 'command' && message.action === 'nbi_init_finished') {
-
-        _this.setState('finished');
-        logger.debug('\n' + 'state: ' + _this.getState());
-        logger.info('\n' + 'initializing module finished');
+      //  command|nbi_init_started
+      // -----------------------------------------------------------------------
+      if (message.type === 'command' && message.action === 'nbi_init_started') {
 
         if (nbiShowMessages) {
           if (nbiModalAutoClose) {
@@ -1044,11 +1063,13 @@ j1.adapter.nbinteract = (function (j1, window) {
         var dependencies_met_page_rendered = setInterval(function() {
           widgetCellsRendered = document.querySelectorAll('.widget-vbox').length;
           if (widgetCellsRendered >= widgetCells) {
-            logger.warn('\n' + 'page rendered widgets: ' + widgetCells + '|' + widgetCellsRendered);
+            logger.info('\n' + 'widgets rendered in page (interactive|total) : ' + widgetCells + '|' + widgetCellsRendered);
             nbiCellsRendered = true;
-            if (nbiIndicateNbiActivity) {
-              spinner.stop();
-            }
+            if (nbiIndicateNbiActivity) spinner.stop();
+            _this.setState('finished');
+            logger.debug('\n' + 'state: ' + _this.getState());
+            logger.info('\n' + 'initializing module finished');
+
             clearInterval(dependencies_met_page_rendered);
           }
         }, 25);  // END interval dependencies_met_page_rendered
@@ -1058,19 +1079,22 @@ j1.adapter.nbinteract = (function (j1, window) {
         // ---------------------------------------------------------------------
         $('#quickLinksNotebookseButton').show();
 
-      } // END message command/nbi_init_finished
+      } // END message command/nbi_init_started
 
+      // -----------------------------------------------------------------------
+      //  command|mathjax
+      // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'mathjax') {
         logger.error('\n' + 'New Math, ID: ' + message.text);
 
         // Register a MathJax callback if page is FULLY rendered
         // TODO: Dosn't for now tha way !!!
-        MathJax.Hub.Startup.signal.Interest(function (message) {
-          logger.error("Startup: " + message)
-          // if (message.contains('End')) {
-          //   logger.error("Startup: " + message)
-          // }
-        });
+        // MathJax.Hub.Startup.signal.Interest(function (message) {
+        //   logger.error("Startup: " + message)
+        //   if (message.contains('End')) {
+        //     logger.error("Startup: " + message)
+        //   }
+        // });
 
         var dependencies_met_mathjax_rendered = setInterval(function() {
           var elm = document.getElementById('MathJax-Element-6' + '-Frame');
@@ -1084,16 +1108,22 @@ j1.adapter.nbinteract = (function (j1, window) {
           clearInterval(dependencies_met_mathjax_rendered);
         }, 25);  // END interval dependencies_met_mathjax_rendered
 
-      } // END message command/nbi_init_finished
+      } // END message command/mathjax
 
       // -----------------------------------------------------------------------
       // command|info
       // TODO:  count messages contain 'Pulling image'.
       //        Potentially a enless loop
-      //
+      // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'info') {
 //      var reMessageTS         = new RegExp('/(?:[1-9]\d{3}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1\d|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[1-9]\d(?:0[48]|[2468][048]|[13579][26])|(?:[2468][048]|[13579][26])00)-02-29)T(?:[01]\d|2[0-3]):[0-5]\d:[0-5]\d(?:\.\d{1,9})?(?:Z|[+-][01]\d:[0-5]\d)/');
         var messageTS;
+
+        // widget render info messages for logging
+        //
+        if (message.text.includes('Displaying widget') || message.text.includes('First widget')) {
+          logger.debug('\n' + message.text);
+        }
 
         // remove timestamp|loglevel from message if exists
         //
@@ -1103,7 +1133,6 @@ j1.adapter.nbinteract = (function (j1, window) {
         }
 
         _this.appendModalMessage(messageSuccessUL, message.text)
-
         logger.debug('\n' + message.text);
 
         // show the info modal
@@ -1118,7 +1147,7 @@ j1.adapter.nbinteract = (function (j1, window) {
 
       // -----------------------------------------------------------------------
       //  command|error
-      //
+      // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'error') {
         var messageTS;
 
@@ -1144,14 +1173,13 @@ j1.adapter.nbinteract = (function (j1, window) {
         }
 
         _this.appendModalMessage(messageErrorUL, message.text)
-
         logger.error('\n' + message.text);
 
-        // stop the (progress) spinner (currently NOT used)
+        // stop the (progress) spinner
         //
-        // if (moduleOptions.indicate_nbi_activity) {
-        //   spinner.stop();
-        // }
+        if (moduleOptions.indicate_nbi_activity) {
+          spinner.stop();
+        }
 
         if (nbiShowMessages) {
           // hide the info modal if shown
@@ -1238,6 +1266,125 @@ j1.adapter.nbinteract = (function (j1, window) {
       });
 
     }, // END checkURL
+
+    // -------------------------------------------------------------------------
+    // loadDialog()
+    // Loads the NBI dialog (modal)
+    // -------------------------------------------------------------------------
+    loadDialog: function (options) {
+      Events.documentReady(function () {
+
+        _this.modal = document.getElementById(options.dialogContainerID);
+        if (!_this.modal) {
+          logger.info('\n' +  'load consent modal');
+
+          _this.modal = document.createElement('div');
+          _this.modal.id = options.dialogContainerID;
+          _this.modal.style.display = 'none';
+
+          _this.modal.setAttribute('class', 'modal fade');
+          _this.modal.setAttribute('tabindex', '-1');
+          _this.modal.setAttribute('role', 'dialog');
+          _this.modal.setAttribute('aria-labelledby', options.dialogContainerID);
+          document.body.append(_this.modal);
+          _this.$modal = $(_this.modal);
+
+          // -------------------------------------------------------------------
+          // load|initialize the dialog (modal content)
+          // -------------------------------------------------------------------
+          var templateUrl = options.contentURL + '/' + 'index.html';
+          $.get(templateUrl)
+          .done(function (data) {
+            // load ALL modals HTML
+            _this.modal.innerHTML = data;
+            // select only the requested modal
+            _this.modal.innerHTML = $('#' + options.xhrDataElement).eq(0).html();
+
+            // set dialog type to 'modal'
+            //
+            $(_this.modal).modal({
+              backdrop: 'static',
+              keyboard: false
+            });
+
+            // register all button links
+            //
+            _this.$buttonDoNotAgree = $('#nbi-buttonDoNotAgree');
+            _this.$buttonAgree      = $('#nbi-buttonAgree');
+            _this.$buttonSave       = $('#nbi-buttonSave');
+            _this.$buttonAgreeAll   = $('#nbi-buttonAgreeAll');
+
+            // register all actions
+            //
+            _this.registerActions();
+
+            // register button event handler
+            //
+            _this.$buttonDoNotAgree.click(function () {
+              _this.doNotAgree();
+            });
+
+            _this.$buttonAgree.click(function () {
+              _this.agreeAll();
+            });
+          })
+          .fail(function () {
+            logger.error('\n' + 'loading nbi dialog (modal): failed');
+            logger.warn('\n' + 'probably no|wrong `contentURL` set');
+          });
+        }
+      }.bind(_this));
+    },  // END loadDialog
+
+    // -------------------------------------------------------------------------
+    // showDialog()
+    // Show the NBI dialog (modal)
+    // -------------------------------------------------------------------------
+    showDialog: function () {
+      this.$modal.modal('show');
+    },  // END showDialog
+
+    // -------------------------------------------------------------------------
+    // registerActions()
+    // register actions to run
+    // -------------------------------------------------------------------------
+    registerActions: function () {
+
+      $('input:checkbox[name="checkboxClearLocalStorage"]').on('click', function (e) {
+        nbActions.resetLocalStorage = $(this).is(':checked');
+        logText = '\n' + 'action ClearLocalStorage changed to: ' + value;
+        logger.info(logText);
+
+        e.stopPropagation();
+      });
+
+    },  // END registerActions
+
+    // -------------------------------------------------------------------------
+    // doNotAgree()
+    // action to run ...
+    // -------------------------------------------------------------------------
+    doNotAgree: function (elmID, msg) {
+      _this.$modal.modal('hide');
+    },  // END doNotAgree
+
+    // -------------------------------------------------------------------------
+    // agreeAll()
+    // caction to run ...
+    // -------------------------------------------------------------------------
+    agreeAll: function (elmID, msg) {
+
+      if (nbActions.resetLocalStorage) {
+        logText = '\n' + 'run action: "Clear Binder Settings"';
+        logger.info(logText);
+        localStorage.removeItem('serverParams');
+        localStorage.removeItem('kernelId');
+      }
+
+      _this.$modal.modal('hide');
+      location.reload(true);
+    },  // END agreeAll
+
     // -------------------------------------------------------------------------
     // appendModalMessage()
     // Appends a message to given (NBI) modal

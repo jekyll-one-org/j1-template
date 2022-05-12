@@ -409,8 +409,7 @@ module.exports = function navigator ( options ) {
         if ($('li.nbi-notebooks')) {
           logger.debug('register SHOW event for J1 NBI');
           $('li.nbi-notebooks > a', this).on('click', function(e) {
-//          j1.nbi.showDialog();
-            j1.translator.showDialog();
+            j1.adapter.nbinteract.showDialog();
           });
         } // END Translator
 

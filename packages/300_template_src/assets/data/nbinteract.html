@@ -7,9 +7,9 @@ exclude_from_search:                    true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/data/translator.html
- # Liquid PROCEDURE to generate the HTML (data) portion of all modals used
- # by the J1 Translator module
+ # ~/assets/data/nbinteract.html
+ # Liquid PROCEDURE to generate the HTML (data) portion of all dialog modals
+ # used by the J1 NBI module
  #
  # Product/Info:
  # https://jekyll.one
@@ -41,12 +41,12 @@ exclude_from_search:                    true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign translate_defaults = modules.defaults.translator.defaults %}
-{% assign translate_settings = modules.translator.settings %}
+{% assign nbinteract_defaults = modules.defaults.nbinteract.defaults %}
+{% assign nbinteract_settings = modules.nbinteract.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign translate_options  = translate_defaults | merge: translate_settings %}
+{% assign nbinteract_options  = nbinteract_defaults | merge: nbinteract_settings %}
 
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
@@ -56,111 +56,58 @@ exclude_from_search:                    true
 
 {% comment %} Main
 ================================================================================ {% endcomment %}
-<!-- [INFO   ] [j1.assets.data.translator.html               ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
+<!-- [INFO   ] [j1.assets.data.nbinteract.html               ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />
 </head>
 
-{% comment %} i18n: translations
--------------------------------------------------------------------------------- {% endcomment %}
-
 {% comment %} Modal NBI dialog
 -------------------------------------------------------------------------------- {% endcomment %}
-<div id="nbi-data">
-  <div id="modal-nbi" class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
+<div id="nbi-modal-data">
+  <div id="nbi-dialog" class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
     <div class="modal-content">
 
       <div class="modal-header">
-        <p class="lead">{{translate_options.google.modal_settings.title.en}}</p>
+        <p class="lead">{{nbinteract_options.dialogTitle}}</p>
       </div>
 
       <div class="modal-body">
         <div class="modal-body-text" style="font-size: 90%">
-          <p class="mb-3">{{translate_options.google.modal_settings.body_text.en}}</p>
+          <p class="mb-3">{{nbinteract_options.dialogBodyText}}</p>
         </div>
-        <p style="font-size: 90%">{{translate_options.google.modal_settings.language_selector_title.en}}</p>
-        <div id="dropdownJSON" class="mb-4" style="display:none"></div>
+
         <p>
-          <a href="#google-privacy" data-bs-toggle="collapse" class="">Privacy Notice</a>
-          <a href="#google-options" data-bs-toggle="collapse" class="float-right">My Settings</a>
+          <a href="#nbi-privacy" data-bs-toggle="collapse" class="">Privacy Notice</a>
+          <a href="#nbi-actions" data-bs-toggle="collapse" class="float-right">My Actions</a>
         </p>
 
-        <div id="google-privacy" class="collapse">
+        <div id="nbi-privacy" class="collapse">
           <div class="modal-body-text" style="font-size: 90%">
-            <p class="mb-4">{{translate_options.google.modal_settings.privacy_notice.en}}</p>
+            <p class="mb-2">{{nbinteract_options.dialogPrivacyNotice}}</p>
           </div>
         </div>
 
-        <div id="google-options" class="collapse">
-          <p class="tagline mt-4 mb-1"><b>Settings</b></p>
+        <div id="nbi-actions" class="collapse">
+          <p class="tagline mt-4 mb-1"><b>Actions</b></p>
           <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-3"></div>
 
-          <div class="translator-option" data-name="analysis">
-            <div class="switch">
+          <div class="translator-option" data-name="ClearLocalStorage">
+            <div class="switch mb-1">
               <label>
-                <input id="checkboxAnalysis" type="checkbox" name="checkboxAnalysis" checked>
-                <span class="bmd-switch-track"></span>
-                Analysis enabled (Your Privacy)
+                <input id="checkboxClearLocalStorage" type="checkbox" name="checkboxClearLocalStorage" checked>
+                Clear Binder Settings
               </label>
             </div>
           </div>
-
-          <div class="translator-option" data-name="personalization">
-            <div class="switch">
-              <label>
-                <input id="checkboxPersonalization" type="checkbox" name="checkboxPersonalization" checked>
-                <span class="bmd-switch-track"></span>
-                Personalization enabled (Your Privacy)
-              </label>
-            </div>
-          </div>
-
-          <div class="translator-option" data-name="useLanguageFromBrowser">
-            <div class="switch">
-              <label>
-                <input id="checkboxuseLanguageFromBrowser" type="checkbox" name="checkboxuseLanguageFromBrowser" checked disabled>
-                <span class="bmd-switch-track"></span>
-                Language settings taken from browser
-              </label>
-            </div>
-          </div>
-
-          <div class="translator-option" data-name="translateAllPages">
-            <div class="switch">
-              <label>
-                <input id="checkboxTranslateAllPages" type="checkbox" name="checkboxTranslateAllPages" checked disabled>
-                <span class="bmd-switch-track"></span>
-                Translation of all pages
-              </label>
-            </div>
-          </div>
-
-          <div class="translator-option" data-name="translationEnabled">
-            <div class="switch">
-              <label>
-                <input id="checkboxTranslationEnabled" type="checkbox" name="checkboxTranslationEnabled" checked>
-                <span class="bmd-switch-track"></span>
-                Translation enabled
-              </label>
-            </div>
-          </div>
-
         </div>
-
       </div>
 
       <div class="modal-footer">
-        <button id="translator-buttonDoNotAgree" type="button" class="btn btn-outline-secondary mb-1 mr-2" style="min-width: 20rem">
-        No, disable translation
+        <button id="nbi-buttonDoNotAgree" type="button" class="btn btn-outline-secondary mb-1 mr-2" style="min-width: 20rem">
+        No, do nothing
         </button>
-        <button id="translator-buttonAgree" type="button" class="btn btn-primary mb-1 mr-2" style="min-width: 20rem">
-        Yes, please translate
-        </button>
-        <button id="translator-buttonSave" type="button" class="btn btn-outline-secondary mb-1 mr-2" style="display:none; min-width: 20rem">
-        Save selection
-        </button>
-        <button id="translator-buttonAgreeAll" type="button" class="btn btn-primary mb-1 mr-2" style="display:none; min-width: 20rem">
-        I Agree on all
+        <button id="nbi-buttonAgree" type="button" class="btn btn-primary mb-1 mr-2" style="min-width: 20rem">
+        Yes, please run all actions
         </button>
       </div>
 
@@ -168,7 +115,7 @@ exclude_from_search:                    true
   </div>
 </div>
 
-{% comment %} END Modal Google Translator dialog (en-EN)
+{% comment %} END Modal NBI dialog
 -------------------------------------------------------------------------------- {% endcomment %}
 
 {% endcapture %}
