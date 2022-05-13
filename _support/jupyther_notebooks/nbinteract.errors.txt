@@ -2,7 +2,8 @@ Häufig in Endlosscheife
 --------------------------------------------------------------------------------
 
 [14:39:43.901] [t1mwviky4zx] [INFO ] [nbinteract.core ] [nbinteract-core.js:93]
-binderhub.registerCallback: messages sent by Binder: 2022-04-30T12:39:43Z [Normal] Pulling image "gcr.io/binderhub-288415/r2d-staging-g5b5b759-jekyll-2done-2dj1-2dnbi-2dtestrepo-389889:5006a3ac29b5c305b41726810518184d5e5ceaf2"
+binderhub.registerCallback: messages sent by Binder:
+2022-04-30T12:39:43Z [Normal] Pulling image "gcr.io/binderhub-288415/r2d-staging-g5b5b759-jekyll-2done-2dj1-2dnbi-2dtestrepo-389889:5006a3ac29b5c305b41726810518184d5e5ceaf2"
 [http://localhost:41000/assets/themes/j1/modules/nbInteract/js/nbinteract/nbinteract-core.js:93]
 
 
@@ -16,3 +17,11 @@ binderhub.registerCallback: messages sent by Binder: Too many users on this Bind
 [17:38:52.035] [mhf40qc12pe] [ERROR] [j1.adapter.nbinteract                                       ] [nbinteract.js:1656]
 Insufficent nodes avaialble at BinderHub
 [http://localhost:41000/assets/themes/j1/adapter/js/nbinteract.js:1656]
+
+
+Connection to BinderHub failed
+--------------------------------------------------------------------------------
+
+log4javascript.min.js:163 [12:45:46.615] [b6cvkdgf6hb] [ERROR] [nbinteract.core                   ] [nbinteract-core.min.js:93]
+binderhub.startServer: stopping nbinteract, failed to connect to Binder: [object Event]
+[http://localhost:19000/assets/themes/j1/modules/nbInteract/js/nbinteract/nbinteract-core.min.js:93]

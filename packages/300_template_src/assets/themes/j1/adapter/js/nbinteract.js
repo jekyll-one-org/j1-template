@@ -1156,7 +1156,10 @@ j1.adapter.nbinteract = (function (j1, window) {
       if (message.type === 'command' && message.action === 'error') {
         var messageTS;
 
-        if (messageTS.contains('Too many users') || messageTS.contains('Insufficent nodes')) {
+        if (messageTS.contains('Too many users') ||
+            messageTS.contains('Insufficent nodes') ||
+            messageTS.contains('failed to connect')
+        ) {
           var modaBodyText = `
             The <i>Binder Service</i> is currently not available or is overloaded.
             All interactive components on the page are <b>not</b> available.
@@ -1167,6 +1170,7 @@ j1.adapter.nbinteract = (function (j1, window) {
             document.getElementById('nbiModalTRInfoBody').innerHTML = modaBodyText;
             $(nbiModalTRInfo).modal('show');
           }
+
           return;
         }
 
