@@ -1158,6 +1158,7 @@ j1.adapter.nbinteract = (function (j1, window) {
 
         if (messageTS.contains('Too many users') ||
             messageTS.contains('Insufficent nodes') ||
+            messageTS.contains('ImagePullBackOff') ||
             messageTS.contains('failed to connect')
         ) {
           var modaBodyText = `

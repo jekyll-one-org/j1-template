@@ -19,9 +19,14 @@ Insufficent nodes avaialble at BinderHub
 [http://localhost:41000/assets/themes/j1/adapter/js/nbinteract.js:1656]
 
 
-Connection to BinderHub failed
+Connection|Processing to|on BinderHub failed
 --------------------------------------------------------------------------------
 
 log4javascript.min.js:163 [12:45:46.615] [b6cvkdgf6hb] [ERROR] [nbinteract.core                   ] [nbinteract-core.min.js:93]
 binderhub.startServer: stopping nbinteract, failed to connect to Binder: [object Event]
 [http://localhost:19000/assets/themes/j1/modules/nbInteract/js/nbinteract/nbinteract-core.min.js:93]
+
+
+[13:16:57.434] [02azy1or2pj] [INFO ] [nbinteract.core                                             ] [nbinteract-core.min.js:93]
+binderhub.registerCallback: messages sent by Binder: 2022-05-13T11:16:57Z [Warning] Error: ImagePullBackOff
+[http://localhost:17000/assets/themes/j1/modules/nbInteract/js/nbinteract/nbinteract-core.min.js:93]
