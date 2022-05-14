@@ -503,6 +503,7 @@ j1.adapter.nbinteract = (function (j1, window) {
                       if (nbiButtonState) {
                         // button NOT removed
                         logger.warn('NBI initialialization failed on textbook: {{textbook_id}}');
+                        spinner.stop();
                         // hide the info modal
                         $(nbiModalSuccessID).modal('hide');
 
