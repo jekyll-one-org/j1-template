@@ -182,7 +182,7 @@ cookies:
 #
 flicker_timeout:                        150
 prettify:                               true
-autoScrollRatioThreshold:               140
+autoScrollRatioThreshold:               130
 
 # ==============================================================================
 # PAGE global configuration settings (currently NOT used)
