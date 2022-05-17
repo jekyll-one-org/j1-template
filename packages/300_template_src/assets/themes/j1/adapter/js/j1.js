@@ -2255,6 +2255,8 @@ var j1 = (function () {
       //
       const observer = new ResizeObserver(entries => {
         const scrollOffset = j1.getScrollOffset();
+        // Set autoScrollRatioThreshold if NOT specified
+        autoScrollRatioThreshold = autoScrollRatioThreshold ? autoScrollRatioThreshold : 130;
         for (const entry of entries) {
 
           // each entry is an instance of ResizeObserverEntry
