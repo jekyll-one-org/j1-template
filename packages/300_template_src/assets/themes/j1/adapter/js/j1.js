@@ -158,15 +158,12 @@ var j1 = (function () {
   var headerLoadTimeout           = 1000;
 
   // Load of dynamic pages
-
   var autoScrollRatioThreshold    = '{{template_config.autoScrollRatioThreshold}}';
   var pageGrowthRatio             = 0;
   var pageBaseHeigth              = 0;
   var pageStatic                  = false;
+  var staticPage                  = false;
   var pageHeight;
-
-  // var currPageHeight
-  // var pageLoaded = false;
 
   var current_user_data;
   var current_page;
@@ -963,7 +960,7 @@ var j1 = (function () {
             // do a (smooth) scroll for static pages (if all nav elements ready)
             // -----------------------------------------------------------------
             var dependencies_met_navigator_finished = setInterval(function() {
-              if (j1.adapter.navigator.getState() == 'finished') {
+              if (j1.adapter.navigator.getState() == 'finished' && staticPage) {
                 // if a page requested contains an anchor element, do a smooth scroll
                 logger.debug('\n' + 'Scroll static page, growth ratio at 100 (percent)');
                 // NOTE: on some pages, the offset is NOT correct
@@ -1106,7 +1103,7 @@ var j1 = (function () {
           // do a (smooth) scroll for static pages (if all nav elements ready)
           // -------------------------------------------------------------------
           var dependencies_met_navigator_finished = setInterval(function() {
-            if (j1.adapter.navigator.getState() == 'finished') {
+            if (j1.adapter.navigator.getState() == 'finished' && staticPage) {
               logger.debug('\n' + 'Scroll static page, growth ratio at 100 (percent)');
               // if a page requested contains an anchor element, do a smooth scroll
               // NOTE: on some pages, the offset is NOT correct
@@ -2274,6 +2271,14 @@ var j1 = (function () {
           }
 
           // logger.debug('\n' + 'Page growth ratio (percent): ', pageGrowthRatio);
+
+          // set flag 'staticPage'
+          if (pageGrowthRatio == 100) {
+            staticPage = true;
+          } else {
+            // on page height growth
+            staticPage = false;
+          }
 
           if (pageGrowthRatio > autoScrollRatioThreshold) {
             // dynamic page that increase in size
