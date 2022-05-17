@@ -134,37 +134,41 @@ var j1 = (function () {
   // ---------------------------------------------------------------------------
   // globals
   // ---------------------------------------------------------------------------
+  // base page resources
   var rePager                     =  new RegExp('navigator|dateview|tagview|archive');
   var environment                 = '{{environment}}';
   var moduleOptions               = {};
   var j1_runtime_data             = {};
+  var _this;
+  var settings;
+  var json_data;
+  var ep;
+  var baseUrl;
+  var referrer;
 
-  // Status information
+  // defaults for status information
   var state                       = 'not_started';
   var mode                        = 'not_detected';
 
-  // Default tracking provider information
-  // var tracking_enabled            = ('{{tracking_enabled}}' === 'true') ? true: false;
-  // var tracking_id                 = '{{tracking_id}}';
-  // var tracking_id_valid           = (tracking_id.includes('tracking-id')) ? false : true;
+  // defaults for tracking providers
+  var tracking_enabled            = ('{{tracking_enabled}}' === 'true') ? true: false;
+  var tracking_id                 = '{{tracking_id}}';
+  var tracking_id_valid           = (tracking_id.includes('tracking-id')) ? false : true;
 
-  // Default comment provider information
+  // defaults for comment providers
   var comment_provider            = '{{comment_provider}}';
   var site_id                     = '{{site_id}}';
   var checkCookies                = {{cookie_options.checkCookies}};
   var expireCookiesOnRequiredOnly = ('{{cookie_options.expireCookiesOnRequiredOnly}}' === 'true') ? true: false;
 
-  // Delay for scrollTo 'headers'
-  var headerLoadTimeout           = 1000;
-
-  // Load of dynamic pages
+  // defaults for dynamic pages
   var autoScrollRatioThreshold    = '{{template_config.autoScrollRatioThreshold}}';
-  var pageGrowthRatio             = 0;
-  var pageBaseHeigth              = 0;
-  var pageStatic                  = false;
-  var staticPage                  = false;
-  var pageHeight;
+  var pageGrowthRatio             = 0;                                          // ratio a dynamic page has grown in height
+  var pageBaseHeigth              = 0;  	                                      // base height of  a dynamic page
+  var staticPage                  = false;                                      // defalt: false, but decided in ResizeObserver
+  var pageHeight;                                                               // height of a page dynamic detected in ResizeObserver
 
+  // defaults for the cookie management
   var current_user_data;
   var current_page;
   var previous_page;
@@ -174,29 +178,22 @@ var j1 = (function () {
   var user_session_detected;
   var cookie_written;
 
-  // Theme information
+  // defaults for themes
   var themeName;
   var themeCss;
   var cssExtension              = (environment === 'production')
                                   ? '.min.css'
                                   : '.css'
 
-   // Pathes of J1 data files
+  // defaults for data files
   var colors_data_path          = '{{template_config.colors_data_path}}';
   var font_size_data_path       = '{{template_config.font_size_data_path}}';
   var runtime_data_path         = '{{template_config.runtime_data_path}}';
   var message_catalog_data_path = '{{template_config.message_catalog_data_path}}';
 
-  // Logger
+  // Logger resources
   var logger;
   var logText;
-
-  var _this;
-  var settings;
-  var json_data;
-  var ep;
-  var baseUrl;
-  var referrer;
 
   // initial cookie settings
   var cookie_names = {
@@ -2265,7 +2262,6 @@ var j1 = (function () {
           }
 
           // calculation of the ratio a dyn page that has lengthened
-          // if (pageBaseHeigth && !pageStatic) {
           if (pageBaseHeigth) {
             pageGrowthRatio = Math.round(pageHeight / pageBaseHeigth *100);
           }
