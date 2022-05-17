@@ -2261,28 +2261,32 @@ var j1 = (function () {
             pageBaseHeigth = pageHeight;
           }
 
-          // calculation of the ratio a dyn page that has lengthened
+          // calculation of the ratio a page that has lengthened
           if (pageBaseHeigth) {
             pageGrowthRatio = Math.round(pageHeight / pageBaseHeigth *100);
           }
 
-          // logger.debug('\n' + 'Page growth ratio (percent): ', pageGrowthRatio);
+          // log only if page grown above 'autoScrollRatioThreshold'
+          if (pageGrowthRatio > autoScrollRatioThreshold) {
+            logger.debug('\n' + 'Page growth ratio reached the threshold: ', pageGrowthRatio);
+          }
 
-          // set flag 'staticPage'
-          if (pageGrowthRatio == 100) {
+          // identify a 'staticPage'
+          if (pageGrowthRatio < autoScrollRatioThreshold) {
             staticPage = true;
           } else {
-            // on page height growth
+            // identify a page as 'dynamic' if autoScrollRatioThreshold reached
             staticPage = false;
           }
 
+          // dynamic page that has been increased in size above the threshold
           if (pageGrowthRatio > autoScrollRatioThreshold) {
-            // dynamic page that increase in size
             j1.scrollTo(scrollOffset);
             logger.debug('\n' + 'Scroll dynamic page on growth ratio: ', pageGrowthRatio);
           }
         }
-      })
+      });
+      // monitor the page 'body'
       observer.observe(document.querySelector('body'));
 
       // -----------------------------------------------------------------------
