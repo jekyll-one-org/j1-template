@@ -157,16 +157,9 @@ var j1 = (function () {
   // Delay for scrollTo 'headers'
   var headerLoadTimeout           = 1000;
 
-  // Load of dynamic pages
-
-  var autoScrollRatioThreshold    = '{{template_config.autoScrollRatioThreshold}}';
-  var pageGrowthRatio             = 0;
-  var pageBaseHeigth              = 0;
-  var pageStatic                  = false;
+  // Used to detect final load of dynamic pages
   var pageHeight;
-
-  // var currPageHeight
-  // var pageLoaded = false;
+  var pageLoaded = false;
 
   var current_user_data;
   var current_page;
@@ -256,6 +249,20 @@ var j1 = (function () {
     return context[func].apply(context, args);
   }
 
+  function onElementHeightChange(elm, callback) {
+    var lastHeight = elm.clientHeight, newHeight;
+
+    (function run() {
+      newHeight = elm.clientHeight;
+      if (lastHeight != newHeight) callback(newHeight)
+
+      return lastHeight = newHeight;
+
+      if (elm.onElementHeightChangeTimer) clearTimeout(elm.onElementHeightChangeTimer)
+      elm.onElementHeightChangeTimer = setTimeout(run, 200)
+    })()
+  }
+
   // ---------------------------------------------------------------------------
   // main object
   // ---------------------------------------------------------------------------
@@ -330,7 +337,7 @@ var j1 = (function () {
         }
       }
 
-      j1.registerEvents(logger);
+      j1.registerEvents();
 
       // detect middleware (mode 'app') and update user session cookie
       // -----------------------------------------------------------------------
@@ -960,15 +967,12 @@ var j1 = (function () {
             logText = '\n' + 'page finalized successfully';
             logger.info(logText);
 
-            // do a (smooth) scroll for static pages (if all nav elements ready)
+            // do a (smooth) scroll if all nav elements ready
             // -----------------------------------------------------------------
             var dependencies_met_navigator_finished = setInterval(function() {
               if (j1.adapter.navigator.getState() == 'finished') {
                 // if a page requested contains an anchor element, do a smooth scroll
-                logger.debug('\n' + 'Scroll static page, growth ratio at 100 (percent)');
-                // NOTE: on some pages, the offset is NOT correct
-                var scrollOffset = j1.getScrollOffset();
-                j1.scrollTo(scrollOffset);
+                j1.scrollTo();
                 clearInterval(dependencies_met_navigator_finished);
               }
             }, 25);
@@ -978,6 +982,7 @@ var j1 = (function () {
         // web mode
         // ---------------------------------------------------------------------
         setTimeout (function() {
+          // j1.setState('finished');
           logger.info('\n' + 'state: finished');
           logger.info('\n' + 'page initialization: finished');
 
@@ -1103,19 +1108,15 @@ var j1 = (function () {
           logText = '\n' + 'page finalized successfully';
           logger.info(logText);
 
-          // do a (smooth) scroll for static pages (if all nav elements ready)
+          // do a (smooth) scroll if all nav elements ready
           // -------------------------------------------------------------------
           var dependencies_met_navigator_finished = setInterval(function() {
             if (j1.adapter.navigator.getState() == 'finished') {
-              logger.debug('\n' + 'Scroll static page, growth ratio at 100 (percent)');
               // if a page requested contains an anchor element, do a smooth scroll
-              // NOTE: on some pages, the offset is NOT correct
-              var scrollOffset = j1.getScrollOffset();
-              j1.scrollTo(scrollOffset);
+              j1.scrollTo();
               clearInterval(dependencies_met_navigator_finished);
             }
           }, 25);
-
         }, flickerTimeout);
       }
     },
@@ -1169,11 +1170,11 @@ var j1 = (function () {
 
     // -------------------------------------------------------------------------
     // getScrollOffset()
-    // Calculate offset for a correct (smooth) scroll position
+    // Calculate offset for correct (smooth) scroll position
     // -------------------------------------------------------------------------
     getScrollOffset: function () {
       var scrollOffset;
-      var offsetCorrection = 0;
+      var offsetCorrection;
 
       var $pagehead     = $('.attic');
       var $navbar       = $('nav.navbar');
@@ -1188,10 +1189,8 @@ var j1 = (function () {
 
       // Unclear why or what element cause the need of a correction
       // TODO: General revision of scrollOffset needed
-      // NOTE: Disabled for now
       //
-      // offsetCorrection  = navbarType == 'fixed' ? 10 : -25;
-
+      offsetCorrection  = navbarType == 'fixed' ? 10 : -25;
       scrollOffset      = navbarType == 'fixed'
                             ? -1*(n + a + f) + offsetCorrection
                             : -1*(n + a + f) + h + offsetCorrection;
@@ -1204,14 +1203,13 @@ var j1 = (function () {
     // Scrolls smooth to any anchor referenced by an page URL on
     // e.g. a page reload. Values e.g for delay are taken from
     // TOCCER module
-    // NOTE: crollTo() is triggered by 'onDocumentHeigthChange'
     // -------------------------------------------------------------------------
-    scrollTo: function (offset) {
+    scrollTo: function () {
       var logger          = log4javascript.getLogger('j1.scrollTo');
       var anchor          = window.location.href.split('#')[1];
       var anchor_id       = typeof anchor !== 'undefined' ? '#' + anchor : false;
       var scrollDuration  = {{toccer_options.scrollSmoothDuration}};
-      var scrollOffset    = offset ; // j1.getScrollOffset();
+      var scrollOffset    = j1.getScrollOffset();
       var isSlider        = false;
       var selector        = $(anchor_id);
 
@@ -1227,30 +1225,66 @@ var j1 = (function () {
         isSlider = anchor.includes('slide');
       }
 
-      if (anchor_id && anchor_id !== '#' && !isSlider) {
-        // scroll only, if an anchor is given with an URL
-        selector = $(anchor_id);
-        if (selector.length) {
-          logger.info('\n' + 'scrollTo header: ' + anchor_id);
-          j1.core.scrollSmooth.scroll(anchor_id, {
-            duration:   scrollDuration,
-            offset:     scrollOffset,
-            callback:   false
-          });
-        } else {
-          // scroll the page one pixel back and forth (trigger)
-          // to get the right position for the Toccer and adjust the
-          // Navigator to display the (tranparent) navbar correctly
-          //
-          $(window).scrollTop($(window).scrollTop()+1);
-          $(window).scrollTop($(window).scrollTop()-1);
-        }
-      } else if (anchor_id === '#') {
-        logger.info('\n' + 'bound click event to "#", suppress default action');
-        $(window).scrollTop($(window).scrollTop()+1);
-        $(window).scrollTop($(window).scrollTop()-1);
-        return false;
-      }
+      var dependencies_met_dynamic_page_loaded = setInterval(function() {
+        // setTimeout (function() {
+          // check if page length does NOT change anymore (finally loaded)
+          if (j1.dynamicPageLoaded(logger)) {
+            if (anchor_id && anchor_id !== '#' && !isSlider) {
+              // scroll only, if an anchor is given with an URL
+              selector = $(anchor_id);
+              if (selector.length) {
+                logger.info('\n' + 'scrollTo header: ' + anchor_id);
+                j1.core.scrollSmooth.scroll(anchor_id, {
+                  duration:   scrollDuration,
+                  offset:     scrollOffset,
+                  callback:   false
+                });
+              } else {
+                // scroll the page one pixel back and forth (trigger)
+                // to get the right position for the Toccer and adjust the
+                // Navigator to display the (tranparent) navbar correctly
+                //
+                $(window).scrollTop($(window).scrollTop()+1);
+                $(window).scrollTop($(window).scrollTop()-1);
+              }
+            } else if (anchor_id === '#') {
+              logger.info('\n' + 'bound click event to "#", suppress default action');
+              $(window).scrollTop($(window).scrollTop()+1);
+              $(window).scrollTop($(window).scrollTop()-1);
+              return false;
+            }
+            clearInterval(dependencies_met_dynamic_page_loaded);
+          }
+        }, 25);  // END interval dependencies_met_dynamic_page_loaded
+//    }, headerLoadTimeout);
+
+      // setTimeout (function() {
+      //   if (anchor_id && anchor_id !== '#' && !isSlider) {
+      //     // scroll only, if an anchor is given with an URL
+      //     selector = $(anchor_id);
+      //     if (selector.length) {
+      //       logger.info('\n' + 'scrollTo header: ' + anchor_id);
+      //       j1.core.scrollSmooth.scroll(anchor_id, {
+      //         duration:   scrollDuration,
+      //         offset:     scrollOffset,
+      //         callback:   false
+      //       });
+      //     } else {
+      //       // scroll the page one pixel back and forth (trigger)
+      //       // to get the right position for the Toccer and adjust the
+      //       // Navigator to display the (tranparent) navbar correctly
+      //       //
+      //       $(window).scrollTop($(window).scrollTop()+1);
+      //       $(window).scrollTop($(window).scrollTop()-1);
+      //     }
+      //   } else if (anchor_id === '#') {
+      //     logger.info('\n' + 'bound click event to "#", suppress default action');
+      //     $(window).scrollTop($(window).scrollTop()+1);
+      //     $(window).scrollTop($(window).scrollTop()-1);
+      //     return false;
+      //   }
+      // }, headerLoadTimeout);
+
     },
 
     // -------------------------------------------------------------------------
@@ -2248,52 +2282,31 @@ var j1 = (function () {
     // registerEvents()
     // Redirect current page to last visited page (referrer)
     // -------------------------------------------------------------------------
-    registerEvents: function (logger) {
+    registerEvents: function () {
 
-      // Add ResizeObserver to monitor the page height of dynamic pages
-      // see: https://stackoverflow.com/questions/14866775/detect-document-height-change
+      // Add lstener to get the current page height
       //
-      const observer = new ResizeObserver(entries => {
-        const scrollOffset = j1.getScrollOffset();
-        for (const entry of entries) {
+      onElementHeightChange(document.body, function(h) {
+        currPageHeight = h;
+        console.log('Body height changed:', currPageHeight);
 
-          // each entry is an instance of ResizeObserverEntry
-          pageHeight = Math.round(entry.contentRect.height);
-
-          // set base height on a page height <> 0
-          if (!pageBaseHeigth && pageHeight) {
-            pageBaseHeigth = pageHeight;
-          }
-
-          // calculation of the ratio a dyn page that has lengthened
-          // if (pageBaseHeigth && !pageStatic) {
-          if (pageBaseHeigth) {
-            pageGrowthRatio = Math.round(pageHeight / pageBaseHeigth *100);
-          }
-
-          // logger.debug('\n' + 'Page growth ratio (percent): ', pageGrowthRatio);
-
-          if (pageGrowthRatio > autoScrollRatioThreshold) {
-            // dynamic page that increase in size
-            j1.scrollTo(scrollOffset);
-            logger.debug('\n' + 'Scroll dynamic page on growth ratio: ', pageGrowthRatio);
-          }
+        if (currPageHeight == pageHeight) {
+          console.log('Body height changed:', currPageHeight);
         }
-      })
-      observer.observe(document.querySelector('body'));
+
+        pageHeight = currPageHeight;
+      });
 
       // -----------------------------------------------------------------------
       // final updates before browser page|tab
       // see: https://stackoverflow.com/questions/3888902/detect-browser-or-tab-closing
       // -----------------------------------------------------------------------
       window.addEventListener('beforeunload', function (event) {
-        var cookie_names  = j1.getCookieNames();
-        var date          = new Date();
-        var timestamp_now = date.toISOString();
-        var user_state    = j1.readCookie(cookie_names.user_state);
-        var user_consent  = j1.readCookie(cookie_names.user_consent);
-        var url           = new liteURL(window.location.href);
-        var secure        = (url.protocol.includes('https')) ? true : false;
+        var cookie_names              = j1.getCookieNames();
+        var date                      = new Date();
+        var timestamp_now             = date.toISOString();
+        var user_state                = j1.readCookie(cookie_names.user_state);
+        var user_consent              = j1.readCookie(cookie_names.user_consent);
         var ep_status;
         var url;
         var baseUrl;
@@ -2303,6 +2316,7 @@ var j1 = (function () {
         user_state.last_session_ts    = timestamp_now;
 
         if (!user_consent.analysis || !user_consent.personalization) {
+          logger.debug('\n' + 'write to cookie : ' + cookie_names.user_state);
 
           cookie_written = j1.writeCookie({
             name:     cookie_names.user_state,
@@ -2311,6 +2325,7 @@ var j1 = (function () {
             expires:  0
           });
         } else {
+          logger.debug('\n' + 'write to cookie : ' + cookie_names.user_state);
           cookie_written = j1.writeCookie({
             name:     cookie_names.user_state,
             data:     user_state,
@@ -2325,6 +2340,40 @@ var j1 = (function () {
       window.onkeyup = function (event) {
         if (event.keyCode == 27) window.history.back();
       };
+
+      // Add lstener to get the current page height
+      //
+      // window.addEventListener('resize', function(event){
+      //   currPageHeight = window.innerHeight;
+      // });
+
+      // Add 'resize' observer to get the current page height
+      //
+      // const observer = new ResizeObserver(entries => {
+      //   for (const entry of entries) {
+      //     // each entry is an instance of ResizeObserverEntry
+      //     pageHeight = Math.round(entry.contentRect.height);
+      //   }
+      // })
+      // observer.observe(document.querySelector('body'));
+
+    },
+    // -------------------------------------------------------------------------
+    // dynamicPageLoaded()
+    // Returns 'true' if a dynamic page fully loaded.
+    // -------------------------------------------------------------------------
+    dynamicPageLoaded: function (logger) {
+      var dependencies_met_page_loaded = setInterval(function() {
+        var currPageHeight = $(document).height();
+        // check if page length does NOT change anymore (finally loaded)
+          if (currPageHeight == pageHeight) {
+            logger.info('\n' + 'page fully loaded, length : ' + pageHeight);
+            clearInterval(dependencies_met_page_loaded);
+            pageLoaded = true;
+            return pageLoaded;
+          }
+      }, 25);  // END interval dependencies_met_page_loaded
+      return pageLoaded;
     }
   };
 }) (j1, window);
