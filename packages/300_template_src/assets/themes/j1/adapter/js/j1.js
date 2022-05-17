@@ -957,6 +957,7 @@ var j1 = (function () {
             // do a (smooth) scroll for static pages (if all nav elements ready)
             // -----------------------------------------------------------------
             var dependencies_met_navigator_finished = setInterval(function() {
+              // NOTE: dynamic pages scrolled at a growth ratio of 100 percent as well
               if (j1.adapter.navigator.getState() == 'finished' && staticPage) {
                 // if a page requested contains an anchor element, do a smooth scroll
                 logger.debug('\n' + 'Scroll static page, growth ratio at 100 (percent)');
