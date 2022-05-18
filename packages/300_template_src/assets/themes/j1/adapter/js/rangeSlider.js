@@ -93,8 +93,16 @@ j1.adapter.rangeSlider = (function (j1, window) {
   // Helper functions
   // ---------------------------------------------------------------------------
 
-  function insertAfter(newNode, referenceNode) {
-      referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+  function prepend(newNode, referenceNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode);
+  }
+
+  function append(newNode, referenceNode) {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+  }
+
+  function insert(newNode, referenceNode) {
+    referenceNode.appendChild(newNode);
   }
 
   // ---------------------------------------------------------------------------
@@ -133,7 +141,7 @@ j1.adapter.rangeSlider = (function (j1, window) {
         if (j1.getState() == 'finished') {
 
           logger.info('\n' + 'module is being initialized');
-          
+
           // initialize state flag
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -163,8 +171,10 @@ j1.adapter.rangeSlider = (function (j1, window) {
                 {% assign format_decimals   = range_slider_options.options.format.decimals %}
                 {% assign cbOnUpdate        = range_slider_options.options.cbOnUpdate %}
 
+
                 {% comment %} overload defaults by slider options
-                -------------------------------------------------------------------- {% endcomment %}
+                ---------------------------------------------------------------- {% endcomment %}
+                {% if item.slider.options.title %}            {% assign title           = item.slider.options.title %}            {% endif %}
                 {% if item.slider.options.label %}            {% assign label           = item.slider.options.label %}            {% endif %}
                 {% if item.slider.options.start %}            {% assign start           = item.slider.options.start %}            {% endif %}
                 {% if item.slider.options.connect %}          {% assign connect         = item.slider.options.connect %}          {% endif %}
@@ -176,7 +186,8 @@ j1.adapter.rangeSlider = (function (j1, window) {
                 {% if item.slider.options.cbOnUpdate %}       {% assign cbOnUpdate      = item.slider.options.cbOnUpdate %}       {% endif %}
 
                 elms.forEach(function (elm) {
-                  var id = elm.id;
+                  var id      = elm.id;
+                  var parent  = document.getElementById(id);
 
                   if (id === '{{slider_id}}') {
                     // processing rangeSlider: {{slider_id}}
@@ -198,11 +209,17 @@ j1.adapter.rangeSlider = (function (j1, window) {
                        })
                     });
 
-                    var el = document.createElement("label");
-                    el.classList.add('range-slider-label');
-                    el.innerHTML = '{{label}}';
-                    var div = document.getElementById(id);
-                    insertAfter(el, div);
+                    if ('{{title}}'.length) {
+                      var title = document.createElement('div');
+                      title.classList.add('range-slider-title');
+                      title.innerHTML = '{{title}}';
+                      prepend(title, parent);
+                    }
+
+                    var label = document.createElement('label');
+                    label.classList.add('range-slider-label');
+                    label.innerHTML = '{{label}}';
+                    insert(label, parent);
 
                     slider_{{slider_id}}.noUiSlider.on('update', function (values, handle) {
                       var logger = log4javascript.getLogger('j1.adapter.rangeSlider.cbOnUpdate');

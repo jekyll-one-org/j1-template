@@ -1,5 +1,5 @@
 ---
-title:                                  Range Slider Preview
+title:                                  Manuals
 tagline:                                range sliders
 date:                                   2022-02-20 00:00:00
 description: >
@@ -33,7 +33,7 @@ tags:                                   [ Modules, Data Slider ]
 comments:                               false
 fab_menu_id:                            page_ctrl_simple
 
-permalink:                              /pages/public/previewer/range-slider/
+permalink:                              /pages/public/manuals/modules/range-slider/
 regenerate:                             false
 compress:                               false
 

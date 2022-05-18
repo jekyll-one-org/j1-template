@@ -1,6 +1,6 @@
 ---
-title:                                  MDI Light Previewer
-tagline:                                search and select mdil icons
+title:                                  MDI Light Icon Previewer
+tagline:                                select mdil icons
 date:                                   2020-11-08 00:00:00
 description: >
                                         Previewer for the light Material Design Icons (MDIL) for J1 Template.

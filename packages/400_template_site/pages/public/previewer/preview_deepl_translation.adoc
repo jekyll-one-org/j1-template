@@ -1,5 +1,5 @@
 ---
-title:                                  Translator
+title:                                  Translation Previewer
 tagline:                                machine translations
 date:                                   2021-10-06 00:00:00
 description: >

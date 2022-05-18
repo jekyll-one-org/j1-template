@@ -1,6 +1,6 @@
 ---
-title:                                  Framer
-tagline:                                automagic iframes
+title:                                  iFrame Preeviewer
+tagline:                                magic iframes
 date:                                   2020-11-08 00:00:00
 description: >
                                         Test page for J1 module framer. Framer enables the automatic
@@ -14,7 +14,7 @@ tags:                                   [ HTML, iframe ]
 
 toc:                                    false
 
-permalink:                              /pages/public/iframer/
+permalink:                              /pages/public/previewer/iframer/
 regenerate:                             false
 
 resources:                              [ framer, fam ]
