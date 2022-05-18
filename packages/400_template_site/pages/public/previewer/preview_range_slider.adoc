@@ -245,9 +245,6 @@ The slider's notation using Asciidoc may be completely sufficient for
 simple user interfaces. Remember that evaluating the slider's values requires
 always a *Javascript* interface to react to the values changed by the slider.
 
-TIP: See in section <<Slider Control (Javascript)>> how a JS interface to
-control a slider is implemented.
-
 [[module-configuration-asciidoc]]
 ==== Module configuration
 
@@ -275,20 +272,23 @@ control a slider is implemented.
 
 [source, no_template]
 ----
-range_slider::example_slider_asciidoc[role="mb-5"]
+range_slider::example_slider_asciidoc[role="mt-5 mb-5"]
 ----
 
+[[rendered-slider-asiidoc]]
 ==== Rendered Slider
 
-range_slider::example_slider_asciidoc[role="mb-6"]
+See the rendered slider below (ID: `example_slider_asciidoc`) based on the
+Asciidoc Markup using the extension `range_slider::`:
+
+range_slider::example_slider_asciidoc[role="mt-5 mb-6"]
 
 === HTML Markup
 
 The slider's notation using Asciidoc is sufficient for simple user interfaces.
 For more complex user interfaces it is recommended to use HTML markups. The
 following example implements a slider and a control button to reset the
-slider to the *defaults* value. You can monitor the changes using the
-development console.
+slider to the *defaults* value.
 
 [[module-configuration-html]]
 ==== Module configuration
@@ -324,12 +324,10 @@ development console.
   class="btn btn-flex btn-primary mt-3"
   aria-label="Reset Button"
   style="min-width: 12rem">
-  <i class="mdi mdi-close mdi-24px mdi-md_white mr-1"></i>
+  <i class="mdi mdi-close mdi-24px mr-1"></i>
   Reset Slider
 </button>
 ----
-
-==== Slider Control
 
 [source, js]
 ----
@@ -348,12 +346,21 @@ development console.
           controlledSlider.noUiSlider.set(default_value);
         });
       } // END if rangeSlider.getState()
-    }, 25); // End intervall dependencies_met_controlled_slider_finished
+    }, 25); // End interval dependencies_met_controlled_slider_finished
   }); // END document ready
 </script>
 ----
 
-==== Rendered Slider + Control
+[[rendered-slider-html]]
+==== Rendered Slider
+
+Find  the rendered slider below (ID: `example_slider_html`) based on the
+HTML Markups from above. Additional, a Javascript is used to control (reset)
+the slider. Click the button *RESET SLIDER* to reset the slider to the default
+value.
+
+TIP: You can monitor the changes on the slider using the *development* console
+of your browser.
 
 ++++
 <div id="example_slider_html" class="range-slider mb-5"></div>
@@ -362,7 +369,7 @@ development console.
   class="btn btn-flex btn-primary mt-3"
   aria-label="Reset Button"
   style="min-width: 12rem">
-  <i class="mdi mdi-close mdi-24px mdi-md_white mr-1"></i>
+  <i class="mdi mdi-close mdi-24px mr-1"></i>
   Reset Slider
 </button>
 ++++
@@ -383,12 +390,10 @@ development console.
           controlledSlider.noUiSlider.set(default_value);
         });
       } // END if rangeSlider.getState()
-    }, 25); // End intervall dependencies_met_controlled_slider_finished
+    }, 25); // End interval dependencies_met_controlled_slider_finished
   }); // END document ready
 </script>
 ++++
-
-
 
 /////
 == noUiSlider API
