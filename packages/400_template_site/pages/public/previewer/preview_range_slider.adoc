@@ -7,7 +7,7 @@ description: >
                                         module.
 keywords: >
                                         previewer, tool, preview, overview, images, jquery, plugin,
-                                        RangeSlider,
+                                        Slider, RangeSlider, noUiSlider,
                                         opensource, free, load, download, start, starter, example,
                                         high, easy, use, secure, encrypt, standard, popular,
                                         generate, develop, create, learn, distribute, publish, deploy,
@@ -28,7 +28,7 @@ keywords: >
                                         j1, template, jekyllone, comment
 
 categories:                             [ Previewer ]
-tags:                                   [ Modules, Data Slider ]
+tags:                                   [ Modules, Slider, RangeSlider ]
 
 comments:                               false
 fab_menu_id:                            page_ctrl_simple

@@ -1,0 +1,18 @@
+turing
+--------------------------------------------------------------------------------
+
+2022-05-17T11:21:07Z [Normal] Started container tc-init
+2022-05-17T11:21:08Z [Normal] Pulling image "turingmybinder/binder-prod-r2d-g5b5b759-jekyll-2done-2dj1-2dbinder-2drepo-cef1d2:4468612968193e78f95725f433b61fdf9ee53083"
+2022-05-17T11:22:15Z [Normal] Successfully pulled image "turingmybinder/binder-prod-r2d-g5b5b759-jekyll-2done-2dj1-2dbinder-2drepo-cef1d2:4468612968193e78f95725f433b61fdf9ee53083" in 1m6.526305864s
+2022-05-17T11:22:15Z [Normal] Created container notebook
+2022-05-17T11:22:15Z [Normal] Started container notebook
+Spawn failed: Server at http://10.244.1.81:8888/user/jekyll-one-j1-binder-repo-fry69j6i/ didn't respond in 30 seconds
+Launch attempt 1 failed, retrying...
+Server requested
+2022-05-17T11:23:20.658480Z [Normal] Successfully assigned turing/jupyter-jekyll-2done-2dj1-2dbinder-2drepo-2dhlvped64 to aks-user-14930255-vmss00001p
+2022-05-17T11:23:21Z [Normal] Container image "jupyterhub/mybinder.org-tc-init:2020.12.4-n655.hfe65496" already present on machine
+2022-05-17T11:23:27Z [Normal] Created container tc-init
+2022-05-17T11:23:28Z [Normal] Started container tc-init
+2022-05-17T11:23:30Z [Normal] Pulling image "turingmybinder/binder-prod-r2d-g5b5b759-jekyll-2done-2dj1-2dbinder-2drepo-cef1d2:4468612968193e78f95725f433b61fdf9ee53083"
+
+-- nothing happens anymore
