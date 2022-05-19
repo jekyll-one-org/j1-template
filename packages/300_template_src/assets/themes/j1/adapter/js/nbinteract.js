@@ -1157,17 +1157,17 @@ j1.adapter.nbinteract = (function (j1, window) {
       if (message.type === 'command' && message.action === 'error') {
         var messageTS;
 
-        if (messageTS.contains('Too many users') ||
-            messageTS.contains('Insufficent nodes') ||
-            messageTS.contains('ImagePullBackOff') ||
-            messageTS.contains('failed to connect')
+        if (message.text.includes('Too many users') ||
+            message.text.includes('Insufficent nodes') ||
+            message.text.includes('ImagePullBackOff') ||
+            message.text.includes('failed to connect')
         ) {
           var modaBodyText = `
-            The <i>Binder Service</i> is currently not available or is overloaded.
+            The <i>Binder Service</i> seems currently not available or is overloaded.
             All interactive components on the page are <b>not</b> available.
-            You can reload the page or re-open later again.
+            You can reload the page now to re-connect or re-open it at a later time.
           `;
-          logger.error('\n', 'Binder access: failed');
+          logger.error('\n', 'Binder access failed: ' + message.text);
           if ($(nbiModalTRInfo).is(':hidden')) {
             document.getElementById('nbiModalTRInfoBody').innerHTML = modaBodyText;
             $(nbiModalTRInfo).modal('show');
@@ -1262,16 +1262,16 @@ j1.adapter.nbinteract = (function (j1, window) {
     }, // END getState
 
     // -------------------------------------------------------------------------
-    // getState()
+    // checkURL()
     // Returns the current (processing) state of the module
     // -------------------------------------------------------------------------
     checkURL: function (uri, flags) {
       _this.setState('process_checks');
-      $.get(uri).done(function () {
+      $.get(uri).done(function (e) {
         _this.setState('finished_checks');
         flags.checkURL = true;
         return true;
-      }).fail(function () {
+      }).fail(function (e) {
         _this.setState('finished_checks');
         flags.checkURL = false;
       });

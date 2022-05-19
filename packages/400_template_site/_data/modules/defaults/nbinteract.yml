@@ -74,6 +74,10 @@ defaults:
   #   values:                           URL
   #   default:                          https://mybinder.org
   #
+  # NOTE: DIRECT access to (GESIS) 'https://notebooks.gesis.org/binder/'
+  # is restricted to private access (isTrusted == true). Registration at
+  # GESIS is required.
+  #
   # ----------------------------------------------------------------------------
   #
   # provider
@@ -221,7 +225,7 @@ defaults:
                                           <li>
                                             <code>Analysis</code> For translations, your consent on
                                             <b>Analysis</b> with your <b>Privacy Settings</b> is required.
-                                          </li>                                        
+                                          </li>
                                           <li>
                                           <code>Personalization</code> For processing textbooks, your consent on
                                           <b>Personalization</b> with your <b>Privacy Settings</b> (Cookie Settings) is required.
