@@ -1160,6 +1160,7 @@ j1.adapter.nbinteract = (function (j1, window) {
         if (message.text.includes('Too many users') ||
             message.text.includes('Insufficent nodes') ||
             message.text.includes('ImagePullBackOff') ||
+            message.text.includes('kernel failed') ||
             message.text.includes('failed to connect')
         ) {
           var modaBodyText = `
@@ -1168,6 +1169,7 @@ j1.adapter.nbinteract = (function (j1, window) {
             You can reload the page now to re-connect or re-open it at a later time.
           `;
           logger.error('\n', 'Binder access failed: ' + message.text);
+
           if ($(nbiModalTRInfo).is(':hidden')) {
             document.getElementById('nbiModalTRInfoBody').innerHTML = modaBodyText;
             $(nbiModalTRInfo).modal('show');

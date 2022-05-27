@@ -80,17 +80,17 @@ settings:
   textbooks:
 
     # --------------------------------------------------------------------------
-    # Textbooks for testing
+    # Static Textbooks (NOT rendered at Binder)
     # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
     # altair-base
     #
     - textbook:
-        enabled:                        false
+        enabled:                        true
 
-        id:                             j1_altair_base
-        xhr_data:                       j1_altair_visualization.html
+        id:                             j1_altair_static
+        xhr_data:                       j1_altair_static.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    false
         altair_cleanups:                true
@@ -99,7 +99,7 @@ settings:
     # altair-interactive
     #
     - textbook:
-        enabled:                        false
+        enabled:                        true
 
         id:                             j1_altair_interactive
         xhr_data:                       j1_altair_interactive.html
@@ -108,19 +108,19 @@ settings:
         altair_cleanups:                true
 
     # --------------------------------------------------------------------------
-    # altair-interactive-test
+    # bokeh-interactive
     #
     - textbook:
-        enabled:                        false
+        enabled:                        true
 
-        id:                             j1_altair_interactive_test
-        xhr_data:                       j1_altair_interactive_test.html
+        id:                             bokeh_tut_00_introduction_and_setup
+        xhr_data:                       bokeh_tut_00_introduction_and_setup.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    false
-        altair_cleanups:                true
+        altair_cleanups:                false
 
     # --------------------------------------------------------------------------
-    # climate-change-forecast (static notebook)
+    # climate-change-forecast
     #
     - textbook:
         enabled:                        true
@@ -130,6 +130,10 @@ settings:
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    true
         translate_mathjax:              false
+
+    # --------------------------------------------------------------------------
+    # Interactive Textbooks
+    # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
     # interactive widget types
@@ -208,6 +212,66 @@ settings:
         xhr_data:                       circular_times_table.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    false
+
+    # --------------------------------------------------------------------------
+    # J1 Bokeh Tutorial
+    # --------------------------------------------------------------------------
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_bokeh_01_basic_plotting
+        xhr_data:                       j1_bokeh_01_basic_plotting.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_bokeh_02_styling_and_theming
+        xhr_data:                       j1_bokeh_02_styling_and_theming.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_bokeh_03_data_sources_and_transformations
+        xhr_data:                       j1_bokeh_03_data_sources_and_transformations.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_bokeh_04_adding_annotations
+        xhr_data:                       j1_bokeh_04_adding_annotations.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_bokeh_05_presentation_layouts
+        xhr_data:                       j1_bokeh_05_presentation_layouts.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_bokeh_06_linking_and_interactions
+        xhr_data:                       j1_bokeh_06_linking_and_interactions.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                false
+
+
 
     # --------------------------------------------------------------------------
     # J1 NBI Docs

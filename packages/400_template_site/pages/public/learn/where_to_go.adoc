@@ -61,6 +61,7 @@ resource_options:
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
+:url-j1-experimental--where-to-go:      /pages/public/jupyter/experimental/where-to-go/
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -91,6 +92,16 @@ features of J1.
 
 If you like, continue by walking through the roundtrip examples by starting
 the link:{url-j1-roundtrip--present-images}[tour here].
+
+Experimental::
+In section *Experimental*, you'll find a tour of extended but experimental
+features of J1. Currently, in *Experimental*, Python's Jupyter Notebooks
+for *Data Science* and *Data Analysis* are discussed. Data Science is
+fundamental for all projects related to all *Digitization* concepts of the
+21st century. If you're interested, what tools are available with Python to
+discuss (your) *Data Analysis* projects go for this section.
+
+If you like, start a tour from link:{url-j1-experimental--where-to-go}[here].
 
 Rocketstart::
 J1-Template is fully JAM-Stack ready. If you're interested in creating and
