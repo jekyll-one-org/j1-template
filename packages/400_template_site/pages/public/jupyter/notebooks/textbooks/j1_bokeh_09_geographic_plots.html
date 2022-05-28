@@ -8,21 +8,22 @@
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<table style="float:left; border:none">
-   <tr style="border:none">
-       <td style="border:none">
-           <a href="https://bokeh.org/">     
-           <img 
-               src="assets/bokeh-transparent.png" 
-               style="width:50px"
-           >
-           </a>    
-       </td>
-       <td style="border:none">
-           <h1>Bokeh Tutorial</h1>
-       </td>
-   </tr>
-</table><div style="float:right;"><h2>09. Geographic Plots</h2></div>
+<h2 id="9.-Geographic-Plots">9. Geographic Plots<a class="anchor-link" href="#9.-Geographic-Plots">&#182;</a></h2><p>It is often useful to be able to relate datasets with their real-world context.  You can plot geographic data just like any other type of data, as in the <a href="https://docs.bokeh.org/en/latest/docs/gallery/texas.html">Texas Unemployment example</a>, but Bokeh also provides several specialized mechanisms for plotting data in geographic coordinates:</p>
+<ul>
+<li><p><a href="https://docs.bokeh.org/en/latest/docs/user_guide/geo.html#google-maps-support">GMapPlot</a>: Bokeh Plots on top of Google Maps</p>
+</li>
+<li><p><a href="https://docs.bokeh.org/en/latest/docs/user_guide/geo.html#tile-providers">TileSource</a>, especially WMTSTileSource: allows data to be overlaid on data from any map tile server, including 
+<a href="http://maps.google.com">Google Maps</a>, 
+<a href="http://maps.stamen.com">Stamen</a>, 
+<a href="https://www.mapquest.com/">MapQuest</a>, 
+<a href="https://www.openstreetmap.org">OpenStreetMap</a>, 
+<a href="http://www.esri.com">ESRI</a>, 
+and custom servers.</p>
+</li>
+<li><p><a href="https://docs.bokeh.org/en/latest/docs/user_guide/geo.html#geojson-datasource">GeoJSONDataSource</a>: Allows reading data in <a href="http://geojson.org/">GeoJSON</a> format for use with Bokeh plots and glyphs, similar to <code>ColumnDataSource</code>.</p>
+</li>
+</ul>
+
 </div>
 </div>
 </div>
@@ -36,6 +37,25 @@
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">bokeh.io</span> <span class="kn">import</span> <span class="n">output_notebook</span><span class="p">,</span> <span class="n">show</span>
+<span class="kn">from</span> <span class="nn">bokeh.plotting</span> <span class="kn">import</span> <span class="n">figure</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+  </div>
+
+  
+
+  <div class="nbinteract-hide_out
+      cell border-box-sizing code_cell rendered">
+    <div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># nbi:hide_out</span>
+<span class="c1"># Make all outputs INLINE for default (why a hell this is needed !!!)</span>
 <span class="n">output_notebook</span><span class="p">()</span>
 </pre></div>
 
@@ -55,7 +75,7 @@
 <div class="output_html rendered_html output_subarea ">
 <div class="bk-root">
         <a href="https://bokeh.org" target="_blank" class="bk-logo bk-logo-small bk-logo-notebook"></a>
-        <span id="1001">Loading BokehJS ...</span>
+        <span id="1002">Loading BokehJS ...</span>
     </div>
 
 </div>
@@ -69,10 +89,10 @@
 
 
 
-<div id="a5f6f9b7-a629-4b6f-8c76-2556ace5ce0f"></div>
+<div id="23b5bfc9-8def-4a02-a4cd-de4993a4f430"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#a5f6f9b7-a629-4b6f-8c76-2556ace5ce0f');
+var element = $('#23b5bfc9-8def-4a02-a4cd-de4993a4f430');
 (function(root) {
   function now() {
     return new Date();
@@ -230,7 +250,7 @@ const JS_MIME_TYPE = 'application/javascript';
      "</div>"}};
 
   function display_loaded() {
-    const el = document.getElementById("1001");
+    const el = document.getElementById("1002");
     if (el != null) {
       el.textContent = "BokehJS is loading...";
     }
@@ -336,7 +356,7 @@ if (force === true) {
       console.log("Bokeh: BokehJS failed to load within specified timeout.");
       root._bokeh_failed_load = true;
     } else if (force !== true) {
-      const cell = $(document.getElementById("1001")).parents('.cell').data().cell;
+      const cell = $(document.getElementById("1002")).parents('.cell').data().cell;
       cell.output_area.append_execute_result(NB_LOAD_WARNING)
     }
   }
@@ -362,28 +382,7 @@ if (force === true) {
   </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>It is often useful to be able to relate datasets with their real-world context.  You can plot geographic data just like any other type of data, as in the <a href="https://docs.bokeh.org/en/latest/docs/gallery/texas.html">Texas Unemployment example</a>, but Bokeh also provides several specialized mechanisms for plotting data in geographic coordinates:</p>
-<ul>
-<li><p><a href="https://docs.bokeh.org/en/latest/docs/user_guide/geo.html#google-maps-support">GMapPlot</a>: Bokeh Plots on top of Google Maps</p>
-</li>
-<li><p><a href="https://docs.bokeh.org/en/latest/docs/user_guide/geo.html#tile-providers">TileSource</a>, especially WMTSTileSource: allows data to be overlaid on data from any map tile server, including 
-<a href="http://maps.google.com">Google Maps</a>, 
-<a href="http://maps.stamen.com">Stamen</a>, 
-<a href="https://www.mapquest.com/">MapQuest</a>, 
-<a href="https://www.openstreetmap.org">OpenStreetMap</a>, 
-<a href="http://www.esri.com">ESRI</a>, 
-and custom servers.</p>
-</li>
-<li><p><a href="https://docs.bokeh.org/en/latest/docs/user_guide/geo.html#geojson-datasource">GeoJSONDataSource</a>: Allows reading data in <a href="http://geojson.org/">GeoJSON</a> format for use with Bokeh plots and glyphs, similar to <code>ColumnDataSource</code>.</p>
-</li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="WMTS-Tile-Source">WMTS Tile Source<a class="anchor-link" href="#WMTS-Tile-Source">&#182;</a></h2><p>WTMS is the most common web standard for tiled map data, i.e. maps supplied as standard-sized image patches from which the overall map can be constructed at a given zoom level.  WTMS uses Web Mercator format, measuring distances from Greenwich, England as meters north and meters west, which is easy to compute but does distort the global shape.</p>
+<h3 id="WMTS-Tile-Source">WMTS Tile Source<a class="anchor-link" href="#WMTS-Tile-Source">&#182;</a></h3><p>WTMS is the most common web standard for tiled map data, i.e. maps supplied as standard-sized image patches from which the overall map can be constructed at a given zoom level.  WTMS uses Web Mercator format, measuring distances from Greenwich, England as meters north and meters west, which is easy to compute but does distort the global shape.</p>
 <p>First let's create an empty Bokeh plot covering the USA, with bounds specified in meters:</p>
 
 </div>
@@ -402,10 +401,18 @@ and custom servers.</p>
 <span class="kn">from</span> <span class="nn">bokeh.models</span> <span class="kn">import</span> <span class="n">WMTSTileSource</span>
 
 <span class="c1"># web mercator coordinates</span>
-<span class="n">USA</span> <span class="o">=</span> <span class="n">x_range</span><span class="p">,</span><span class="n">y_range</span> <span class="o">=</span> <span class="p">((</span><span class="o">-</span><span class="mi">13884029</span><span class="p">,</span><span class="o">-</span><span class="mi">7453304</span><span class="p">),</span> <span class="p">(</span><span class="mi">2698291</span><span class="p">,</span><span class="mi">6455972</span><span class="p">))</span>
+<span class="n">USA</span> <span class="o">=</span> <span class="n">x_range</span><span class="p">,</span><span class="n">y_range</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">(</span><span class="o">-</span><span class="mi">13884029</span><span class="p">,</span><span class="o">-</span><span class="mi">7453304</span><span class="p">),</span>
+    <span class="p">(</span><span class="mi">2698291</span><span class="p">,</span><span class="mi">6455972</span><span class="p">)</span>
+<span class="p">)</span>
 
-<span class="n">p</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">tools</span><span class="o">=</span><span class="s1">&#39;pan, wheel_zoom&#39;</span><span class="p">,</span> <span class="n">x_range</span><span class="o">=</span><span class="n">x_range</span><span class="p">,</span> <span class="n">y_range</span><span class="o">=</span><span class="n">y_range</span><span class="p">,</span> 
-           <span class="n">x_axis_type</span><span class="o">=</span><span class="s2">&quot;mercator&quot;</span><span class="p">,</span> <span class="n">y_axis_type</span><span class="o">=</span><span class="s2">&quot;mercator&quot;</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span>
+    <span class="n">plot_width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+    <span class="n">tools</span><span class="o">=</span><span class="s1">&#39;pan, wheel_zoom, reset&#39;</span><span class="p">,</span>
+    <span class="n">x_range</span><span class="o">=</span><span class="n">x_range</span><span class="p">,</span>
+    <span class="n">y_range</span><span class="o">=</span><span class="n">y_range</span><span class="p">,</span> 
+    <span class="n">x_axis_type</span><span class="o">=</span><span class="s2">&quot;mercator&quot;</span><span class="p">,</span>
+    <span class="n">y_axis_type</span><span class="o">=</span><span class="s2">&quot;mercator&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -449,13 +456,13 @@ and custom servers.</p>
 
 
 <div class="output_html rendered_html output_subarea output_execute_result">
-<div style="display: table;"><div style="display: table-row;"><div style="display: table-cell;"><b title="bokeh.models.renderers.TileRenderer">TileRenderer</b>(</div><div style="display: table-cell;">id&nbsp;=&nbsp;'1034', <span id="1037" style="cursor: pointer;">&hellip;)</span></div></div><div class="1036" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">alpha&nbsp;=&nbsp;1.0,</div></div><div class="1036" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">coordinates&nbsp;=&nbsp;None,</div></div><div class="1036" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">group&nbsp;=&nbsp;None,</div></div><div class="1036" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">js_event_callbacks&nbsp;=&nbsp;{},</div></div><div class="1036" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">js_property_callbacks&nbsp;=&nbsp;{},</div></div><div class="1036" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">level&nbsp;=&nbsp;'image',</div></div><div class="1036" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">name&nbsp;=&nbsp;None,</div></div><div class="1036" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">render_parents&nbsp;=&nbsp;True,</div></div><div class="1036" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">smoothing&nbsp;=&nbsp;True,</div></div><div class="1036" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">subscribed_events&nbsp;=&nbsp;[],</div></div><div class="1036" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">syncable&nbsp;=&nbsp;True,</div></div><div class="1036" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">tags&nbsp;=&nbsp;[],</div></div><div class="1036" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">tile_source&nbsp;=&nbsp;WMTSTileSource(id='1033', ...),</div></div><div class="1036" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">visible&nbsp;=&nbsp;True,</div></div><div class="1036" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">x_range_name&nbsp;=&nbsp;'default',</div></div><div class="1036" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">y_range_name&nbsp;=&nbsp;'default')</div></div></div>
+<div style="display: table;"><div style="display: table-row;"><div style="display: table-cell;"><b title="bokeh.models.renderers.TileRenderer">TileRenderer</b>(</div><div style="display: table-cell;">id&nbsp;=&nbsp;'1036', <span id="1039" style="cursor: pointer;">&hellip;)</span></div></div><div class="1038" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">alpha&nbsp;=&nbsp;1.0,</div></div><div class="1038" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">coordinates&nbsp;=&nbsp;None,</div></div><div class="1038" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">group&nbsp;=&nbsp;None,</div></div><div class="1038" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">js_event_callbacks&nbsp;=&nbsp;{},</div></div><div class="1038" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">js_property_callbacks&nbsp;=&nbsp;{},</div></div><div class="1038" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">level&nbsp;=&nbsp;'image',</div></div><div class="1038" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">name&nbsp;=&nbsp;None,</div></div><div class="1038" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">render_parents&nbsp;=&nbsp;True,</div></div><div class="1038" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">smoothing&nbsp;=&nbsp;True,</div></div><div class="1038" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">subscribed_events&nbsp;=&nbsp;[],</div></div><div class="1038" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">syncable&nbsp;=&nbsp;True,</div></div><div class="1038" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">tags&nbsp;=&nbsp;[],</div></div><div class="1038" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">tile_source&nbsp;=&nbsp;WMTSTileSource(id='1035', ...),</div></div><div class="1038" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">visible&nbsp;=&nbsp;True,</div></div><div class="1038" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">x_range_name&nbsp;=&nbsp;'default',</div></div><div class="1038" style="display: none;"><div style="display: table-cell;"></div><div style="display: table-cell;">y_range_name&nbsp;=&nbsp;'default')</div></div></div>
 <script>
 (function() {
   let expanded = false;
-  const ellipsis = document.getElementById("1037");
+  const ellipsis = document.getElementById("1039");
   ellipsis.addEventListener("click", function() {
-    const rows = document.getElementsByClassName("1036");
+    const rows = document.getElementsByClassName("1038");
     for (let i = 0; i < rows.length; i++) {
       const el = rows[i];
       el.style.display = expanded ? "none" : "table-row";
@@ -490,7 +497,8 @@ and custom servers.</p>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">show</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># show the results</span>
+<span class="n">show</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -508,7 +516,7 @@ and custom servers.</p>
 
 <div class="output_html rendered_html output_subarea ">
 
-  <div class="bk-root" id="4dad2590-db4e-4508-8e29-ff21b024edbb" data-root-id="1003"></div>
+  <div class="bk-root" id="ba68e445-dff5-45db-9101-09673511ce62" data-root-id="1003"></div>
 
 </div>
 
@@ -521,14 +529,14 @@ and custom servers.</p>
 
 
 
-<div id="0fda5abc-8691-4454-a515-bf4f473eb9df"></div>
+<div id="5eaef386-7232-4f3a-ac52-62596d3918a9"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#0fda5abc-8691-4454-a515-bf4f473eb9df');
+var element = $('#5eaef386-7232-4f3a-ac52-62596d3918a9');
 (function(root) {
   function embed_document(root) {
-  const docs_json = {"81c41d33-cc75-4f7b-b23e-7cd9dcc57e6b":{"defs":[],"roots":{"references":[{"attributes":{"below":[{"id":"1012"}],"center":[{"id":"1019"},{"id":"1027"}],"left":[{"id":"1020"}],"renderers":[{"id":"1034"}],"title":{"id":"1038"},"toolbar":{"id":"1030"},"x_range":{"id":"1004"},"x_scale":{"id":"1008"},"y_range":{"id":"1006"},"y_scale":{"id":"1010"}},"id":"1003","subtype":"Figure","type":"Plot"},{"attributes":{"axis":{"id":"1020"},"coordinates":null,"dimension":1,"group":null,"ticker":null},"id":"1027","type":"Grid"},{"attributes":{"end":-7453304,"start":-13884029},"id":"1004","type":"Range1d"},{"attributes":{"coordinates":null,"group":null},"id":"1038","type":"Title"},{"attributes":{"dimension":"lat"},"id":"1023","type":"MercatorTickFormatter"},{"attributes":{},"id":"1028","type":"PanTool"},{"attributes":{},"id":"1029","type":"WheelZoomTool"},{"attributes":{"dimension":"lon"},"id":"1013","type":"MercatorTicker"},{"attributes":{"end":6455972,"start":2698291},"id":"1006","type":"Range1d"},{"attributes":{},"id":"1008","type":"LinearScale"},{"attributes":{},"id":"1010","type":"LinearScale"},{"attributes":{"tools":[{"id":"1028"},{"id":"1029"}]},"id":"1030","type":"Toolbar"},{"attributes":{"coordinates":null,"formatter":{"id":"1015"},"group":null,"major_label_policy":{"id":"1045"},"ticker":{"id":"1013"}},"id":"1012","type":"MercatorAxis"},{"attributes":{"axis":{"id":"1012"},"coordinates":null,"group":null,"ticker":null},"id":"1019","type":"Grid"},{"attributes":{"dimension":"lat"},"id":"1021","type":"MercatorTicker"},{"attributes":{"coordinates":null,"group":null,"tile_source":{"id":"1033"}},"id":"1034","type":"TileRenderer"},{"attributes":{},"id":"1042","type":"AllLabels"},{"attributes":{"dimension":"lon"},"id":"1015","type":"MercatorTickFormatter"},{"attributes":{},"id":"1045","type":"AllLabels"},{"attributes":{"attribution":"Tiles by Carto, under CC BY 3.0. Data by OSM, under ODbL","url":"http://a.basemaps.cartocdn.com/rastertiles/voyager/{Z}/{X}/{Y}.png"},"id":"1033","type":"WMTSTileSource"},{"attributes":{"coordinates":null,"formatter":{"id":"1023"},"group":null,"major_label_policy":{"id":"1042"},"ticker":{"id":"1021"}},"id":"1020","type":"MercatorAxis"}],"root_ids":["1003"]},"title":"Bokeh Application","version":"2.4.3"}};
-  const render_items = [{"docid":"81c41d33-cc75-4f7b-b23e-7cd9dcc57e6b","root_ids":["1003"],"roots":{"1003":"4dad2590-db4e-4508-8e29-ff21b024edbb"}}];
+  const docs_json = {"0e7d3e5e-fb9d-4476-afd5-3155263333bd":{"defs":[],"roots":{"references":[{"attributes":{"below":[{"id":"1012"}],"center":[{"id":"1019"},{"id":"1027"}],"left":[{"id":"1020"}],"renderers":[{"id":"1036"}],"title":{"id":"1040"},"toolbar":{"id":"1031"},"width":800,"x_range":{"id":"1004"},"x_scale":{"id":"1008"},"y_range":{"id":"1006"},"y_scale":{"id":"1010"}},"id":"1003","subtype":"Figure","type":"Plot"},{"attributes":{"tools":[{"id":"1028"},{"id":"1029"},{"id":"1030"}]},"id":"1031","type":"Toolbar"},{"attributes":{"attribution":"Tiles by Carto, under CC BY 3.0. Data by OSM, under ODbL","url":"http://a.basemaps.cartocdn.com/rastertiles/voyager/{Z}/{X}/{Y}.png"},"id":"1035","type":"WMTSTileSource"},{"attributes":{},"id":"1028","type":"PanTool"},{"attributes":{"end":6455972,"start":2698291},"id":"1006","type":"Range1d"},{"attributes":{},"id":"1029","type":"WheelZoomTool"},{"attributes":{"dimension":"lon"},"id":"1013","type":"MercatorTicker"},{"attributes":{"end":-7453304,"start":-13884029},"id":"1004","type":"Range1d"},{"attributes":{},"id":"1030","type":"ResetTool"},{"attributes":{},"id":"1008","type":"LinearScale"},{"attributes":{},"id":"1010","type":"LinearScale"},{"attributes":{"coordinates":null,"formatter":{"id":"1015"},"group":null,"major_label_policy":{"id":"1047"},"ticker":{"id":"1013"}},"id":"1012","type":"MercatorAxis"},{"attributes":{"axis":{"id":"1012"},"coordinates":null,"group":null,"ticker":null},"id":"1019","type":"Grid"},{"attributes":{"dimension":"lat"},"id":"1021","type":"MercatorTicker"},{"attributes":{"coordinates":null,"group":null},"id":"1040","type":"Title"},{"attributes":{"dimension":"lon"},"id":"1015","type":"MercatorTickFormatter"},{"attributes":{"coordinates":null,"formatter":{"id":"1023"},"group":null,"major_label_policy":{"id":"1044"},"ticker":{"id":"1021"}},"id":"1020","type":"MercatorAxis"},{"attributes":{},"id":"1047","type":"AllLabels"},{"attributes":{"coordinates":null,"group":null,"tile_source":{"id":"1035"}},"id":"1036","type":"TileRenderer"},{"attributes":{"axis":{"id":"1020"},"coordinates":null,"dimension":1,"group":null,"ticker":null},"id":"1027","type":"Grid"},{"attributes":{"dimension":"lat"},"id":"1023","type":"MercatorTickFormatter"},{"attributes":{},"id":"1044","type":"AllLabels"}],"root_ids":["1003"]},"title":"Bokeh Application","version":"2.4.3"}};
+  const render_items = [{"docid":"0e7d3e5e-fb9d-4476-afd5-3155263333bd","root_ids":["1003"],"roots":{"1003":"ba68e445-dff5-45db-9101-09673511ce62"}}];
   root.Bokeh.embed.embed_items_notebook(docs_json, render_items);
   }
   if (root.Bokeh !== undefined) {
@@ -664,12 +672,30 @@ var element = $('#0fda5abc-8691-4454-a515-bf4f473eb9df');
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span><span class="n">tools</span><span class="o">=</span><span class="s1">&#39;pan, wheel_zoom&#39;</span><span class="p">,</span> <span class="n">x_range</span><span class="o">=</span><span class="n">x_range</span><span class="p">,</span> <span class="n">y_range</span><span class="o">=</span><span class="n">y_range</span><span class="p">,</span> 
-           <span class="n">x_axis_type</span><span class="o">=</span><span class="s2">&quot;mercator&quot;</span><span class="p">,</span> <span class="n">y_axis_type</span><span class="o">=</span><span class="s2">&quot;mercator&quot;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">p</span> <span class="o">=</span> <span class="n">figure</span><span class="p">(</span>
+    <span class="n">plot_width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+    <span class="n">tools</span><span class="o">=</span><span class="s1">&#39;pan, wheel_zoom, reset&#39;</span><span class="p">,</span>
+    <span class="n">x_range</span><span class="o">=</span><span class="n">x_range</span><span class="p">,</span>
+    <span class="n">y_range</span><span class="o">=</span><span class="n">y_range</span><span class="p">,</span> 
+    <span class="n">x_axis_type</span><span class="o">=</span><span class="s2">&quot;mercator&quot;</span><span class="p">,</span>
+    <span class="n">y_axis_type</span><span class="o">=</span><span class="s2">&quot;mercator&quot;</span>
+<span class="p">)</span>
 
-<span class="n">p</span><span class="o">.</span><span class="n">add_tile</span><span class="p">(</span><span class="n">WMTSTileSource</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span> <span class="n">attribution</span><span class="o">=</span><span class="n">attribution</span><span class="p">))</span>
+<span class="n">p</span><span class="o">.</span><span class="n">add_tile</span><span class="p">(</span>
+    <span class="n">WMTSTileSource</span><span class="p">(</span>
+        <span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">,</span>
+        <span class="n">attribution</span><span class="o">=</span><span class="n">attribution</span>
+    <span class="p">)</span>
+<span class="p">)</span>
 
-<span class="n">p</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span> <span class="n">fill_color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">p</span><span class="o">.</span><span class="n">circle</span><span class="p">(</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">],</span>
+    <span class="n">y</span><span class="o">=</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;y&#39;</span><span class="p">],</span>
+    <span class="n">fill_color</span><span class="o">=</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span>
+    <span class="n">size</span><span class="o">=</span><span class="mi">10</span>
+<span class="p">)</span>
+
+<span class="c1"># show the results</span>
 <span class="n">show</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 </pre></div>
 
@@ -688,7 +714,7 @@ var element = $('#0fda5abc-8691-4454-a515-bf4f473eb9df');
 
 <div class="output_html rendered_html output_subarea ">
 
-  <div class="bk-root" id="264cef05-2626-46c0-89d0-75cfd07124da" data-root-id="1086"></div>
+  <div class="bk-root" id="0d2e5850-00ed-4efe-8d28-27779b6704bb" data-root-id="1088"></div>
 
 </div>
 
@@ -701,14 +727,14 @@ var element = $('#0fda5abc-8691-4454-a515-bf4f473eb9df');
 
 
 
-<div id="d2d7bca2-a5f3-4dda-8ba4-cf5b9e0d628d"></div>
+<div id="90ac63fa-889c-4b62-b29e-66c1938899df"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#d2d7bca2-a5f3-4dda-8ba4-cf5b9e0d628d');
+var element = $('#90ac63fa-889c-4b62-b29e-66c1938899df');
 (function(root) {
   function embed_document(root) {
-  const docs_json = {"fdbc9813-b65b-4364-b020-919fd1e13fcd":{"defs":[],"roots":{"references":[{"attributes":{"below":[{"id":"1095"}],"center":[{"id":"1102"},{"id":"1110"}],"left":[{"id":"1103"}],"renderers":[{"id":"1117"},{"id":"1123"}],"title":{"id":"1133"},"toolbar":{"id":"1113"},"x_range":{"id":"1087"},"x_scale":{"id":"1091"},"y_range":{"id":"1089"},"y_scale":{"id":"1093"}},"id":"1086","subtype":"Figure","type":"Plot"},{"attributes":{"fill_alpha":{"value":0.2},"fill_color":{"value":"orange"},"hatch_alpha":{"value":0.2},"line_alpha":{"value":0.2},"line_color":{"value":"#1f77b4"},"size":{"value":10},"x":{"field":"x"},"y":{"field":"y"}},"id":"1122","type":"Circle"},{"attributes":{"dimension":"lon"},"id":"1096","type":"MercatorTicker"},{"attributes":{"axis":{"id":"1095"},"coordinates":null,"group":null,"ticker":null},"id":"1102","type":"Grid"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"orange"},"hatch_alpha":{"value":0.1},"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"size":{"value":10},"x":{"field":"x"},"y":{"field":"y"}},"id":"1121","type":"Circle"},{"attributes":{"coordinates":null,"formatter":{"id":"1098"},"group":null,"major_label_policy":{"id":"1140"},"ticker":{"id":"1096"}},"id":"1095","type":"MercatorAxis"},{"attributes":{},"id":"1093","type":"LinearScale"},{"attributes":{"coordinates":null,"data_source":{"id":"1119"},"glyph":{"id":"1120"},"group":null,"hover_glyph":null,"muted_glyph":{"id":"1122"},"nonselection_glyph":{"id":"1121"},"view":{"id":"1124"}},"id":"1123","type":"GlyphRenderer"},{"attributes":{"end":6455972,"start":2698291},"id":"1089","type":"Range1d"},{"attributes":{"dimension":"lon"},"id":"1098","type":"MercatorTickFormatter"},{"attributes":{"dimension":"lat"},"id":"1104","type":"MercatorTicker"},{"attributes":{},"id":"1140","type":"AllLabels"},{"attributes":{"coordinates":null,"formatter":{"id":"1106"},"group":null,"major_label_policy":{"id":"1137"},"ticker":{"id":"1104"}},"id":"1103","type":"MercatorAxis"},{"attributes":{"tools":[{"id":"1111"},{"id":"1112"}]},"id":"1113","type":"Toolbar"},{"attributes":{"axis":{"id":"1103"},"coordinates":null,"dimension":1,"group":null,"ticker":null},"id":"1110","type":"Grid"},{"attributes":{"coordinates":null,"group":null},"id":"1133","type":"Title"},{"attributes":{},"id":"1137","type":"AllLabels"},{"attributes":{"source":{"id":"1119"}},"id":"1124","type":"CDSView"},{"attributes":{"dimension":"lat"},"id":"1106","type":"MercatorTickFormatter"},{"attributes":{"end":-7453304,"start":-13884029},"id":"1087","type":"Range1d"},{"attributes":{},"id":"1141","type":"UnionRenderers"},{"attributes":{"fill_color":{"value":"orange"},"line_color":{"value":"#1f77b4"},"size":{"value":10},"x":{"field":"x"},"y":{"field":"y"}},"id":"1120","type":"Circle"},{"attributes":{},"id":"1111","type":"PanTool"},{"attributes":{},"id":"1142","type":"Selection"},{"attributes":{},"id":"1112","type":"WheelZoomTool"},{"attributes":{"coordinates":null,"group":null,"tile_source":{"id":"1116"}},"id":"1117","type":"TileRenderer"},{"attributes":{"attribution":"Tiles by Carto, under CC BY 3.0. Data by OSM, under ODbL","url":"http://a.basemaps.cartocdn.com/rastertiles/voyager/{Z}/{X}/{Y}.png"},"id":"1116","type":"WMTSTileSource"},{"attributes":{},"id":"1091","type":"LinearScale"},{"attributes":{"data":{"x":{"__ndarray__":"TJjbA9nAZMGf/KLGNm1fwQ==","dtype":"float64","order":"little","shape":[2]},"y":{"__ndarray__":"bqXdLQv+SkFnqxDllfVSQQ==","dtype":"float64","order":"little","shape":[2]}},"selected":{"id":"1142"},"selection_policy":{"id":"1141"}},"id":"1119","type":"ColumnDataSource"}],"root_ids":["1086"]},"title":"Bokeh Application","version":"2.4.3"}};
-  const render_items = [{"docid":"fdbc9813-b65b-4364-b020-919fd1e13fcd","root_ids":["1086"],"roots":{"1086":"264cef05-2626-46c0-89d0-75cfd07124da"}}];
+  const docs_json = {"a0d467d0-b838-42e9-9853-4770b4886c59":{"defs":[],"roots":{"references":[{"attributes":{"below":[{"id":"1097"}],"center":[{"id":"1104"},{"id":"1112"}],"left":[{"id":"1105"}],"renderers":[{"id":"1121"},{"id":"1127"}],"title":{"id":"1137"},"toolbar":{"id":"1116"},"width":800,"x_range":{"id":"1089"},"x_scale":{"id":"1093"},"y_range":{"id":"1091"},"y_scale":{"id":"1095"}},"id":"1088","subtype":"Figure","type":"Plot"},{"attributes":{"dimension":"lat"},"id":"1106","type":"MercatorTicker"},{"attributes":{},"id":"1146","type":"Selection"},{"attributes":{},"id":"1141","type":"AllLabels"},{"attributes":{"dimension":"lon"},"id":"1098","type":"MercatorTicker"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"orange"},"hatch_alpha":{"value":0.1},"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"size":{"value":10},"x":{"field":"x"},"y":{"field":"y"}},"id":"1125","type":"Circle"},{"attributes":{},"id":"1113","type":"PanTool"},{"attributes":{},"id":"1114","type":"WheelZoomTool"},{"attributes":{"coordinates":null,"formatter":{"id":"1100"},"group":null,"major_label_policy":{"id":"1144"},"ticker":{"id":"1098"}},"id":"1097","type":"MercatorAxis"},{"attributes":{},"id":"1144","type":"AllLabels"},{"attributes":{"source":{"id":"1123"}},"id":"1128","type":"CDSView"},{"attributes":{"data":{"x":{"__ndarray__":"TJjbA9nAZMGf/KLGNm1fwQ==","dtype":"float64","order":"little","shape":[2]},"y":{"__ndarray__":"bqXdLQv+SkFnqxDllfVSQQ==","dtype":"float64","order":"little","shape":[2]}},"selected":{"id":"1146"},"selection_policy":{"id":"1145"}},"id":"1123","type":"ColumnDataSource"},{"attributes":{"end":-7453304,"start":-13884029},"id":"1089","type":"Range1d"},{"attributes":{"tools":[{"id":"1113"},{"id":"1114"},{"id":"1115"}]},"id":"1116","type":"Toolbar"},{"attributes":{},"id":"1093","type":"LinearScale"},{"attributes":{"dimension":"lat"},"id":"1108","type":"MercatorTickFormatter"},{"attributes":{"coordinates":null,"data_source":{"id":"1123"},"glyph":{"id":"1124"},"group":null,"hover_glyph":null,"muted_glyph":{"id":"1126"},"nonselection_glyph":{"id":"1125"},"view":{"id":"1128"}},"id":"1127","type":"GlyphRenderer"},{"attributes":{"coordinates":null,"group":null},"id":"1137","type":"Title"},{"attributes":{"axis":{"id":"1097"},"coordinates":null,"group":null,"ticker":null},"id":"1104","type":"Grid"},{"attributes":{"fill_color":{"value":"orange"},"line_color":{"value":"#1f77b4"},"size":{"value":10},"x":{"field":"x"},"y":{"field":"y"}},"id":"1124","type":"Circle"},{"attributes":{},"id":"1115","type":"ResetTool"},{"attributes":{"coordinates":null,"formatter":{"id":"1108"},"group":null,"major_label_policy":{"id":"1141"},"ticker":{"id":"1106"}},"id":"1105","type":"MercatorAxis"},{"attributes":{"axis":{"id":"1105"},"coordinates":null,"dimension":1,"group":null,"ticker":null},"id":"1112","type":"Grid"},{"attributes":{},"id":"1145","type":"UnionRenderers"},{"attributes":{"attribution":"Tiles by Carto, under CC BY 3.0. Data by OSM, under ODbL","url":"http://a.basemaps.cartocdn.com/rastertiles/voyager/{Z}/{X}/{Y}.png"},"id":"1120","type":"WMTSTileSource"},{"attributes":{"end":6455972,"start":2698291},"id":"1091","type":"Range1d"},{"attributes":{"fill_alpha":{"value":0.2},"fill_color":{"value":"orange"},"hatch_alpha":{"value":0.2},"line_alpha":{"value":0.2},"line_color":{"value":"#1f77b4"},"size":{"value":10},"x":{"field":"x"},"y":{"field":"y"}},"id":"1126","type":"Circle"},{"attributes":{"dimension":"lon"},"id":"1100","type":"MercatorTickFormatter"},{"attributes":{},"id":"1095","type":"LinearScale"},{"attributes":{"coordinates":null,"group":null,"tile_source":{"id":"1120"}},"id":"1121","type":"TileRenderer"}],"root_ids":["1088"]},"title":"Bokeh Application","version":"2.4.3"}};
+  const render_items = [{"docid":"a0d467d0-b838-42e9-9853-4770b4886c59","root_ids":["1088"],"roots":{"1088":"0d2e5850-00ed-4efe-8d28-27779b6704bb"}}];
   root.Bokeh.embed.embed_items_notebook(docs_json, render_items);
   }
   if (root.Bokeh !== undefined) {
@@ -738,36 +764,4 @@ var element = $('#d2d7bca2-a5f3-4dda-8ba4-cf5b9e0d628d');
 </div>
 
   </div>
-
-  
-
-  <div class="
-      cell border-box-sizing code_cell rendered">
-    <div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># EXERCISE: find some data in lat, lon (e.g. at http://data.gov), </span>
-<span class="c1"># import it into a dataframe or data source, and add it on the map above.</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-  </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Next-Section">Next Section<a class="anchor-link" href="#Next-Section">&#182;</a></h1>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Click on this link to go to the next notebook: <a href="10%20-%20Exporting%20and%20Embedding.ipynb">10 - Exporting and Embedding</a>.</p>
-<p>To go back to the overview, click <a href="00%20-%20Introduction%20and%20Setup.ipynb">here</a>.</p>
-
-</div>
-</div>
-</div>
 

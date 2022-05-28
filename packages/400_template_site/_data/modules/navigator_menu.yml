@@ -168,7 +168,7 @@
         # ----------------------------------------------------------------------
         # Interactive Notebooks
         #
-        - title:                        Interactive Notebooks
+        - title:                        Distributed Notebooks
           icon:                         notebook-outline
           dropdown:
 
@@ -185,7 +185,7 @@
         # ----------------------------------------------------------------------
         # Static Notebooks
         #
-        - title:                        Static Notebooks
+        - title:                        Localized Notebooks
           icon:                         notebook-outline
           dropdown:
 

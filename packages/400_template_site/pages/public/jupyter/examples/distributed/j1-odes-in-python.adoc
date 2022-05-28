@@ -1,12 +1,11 @@
 ---
-title:                                  Non-Interactive Notebook
-tagline:                                climate change forecast
+title:                                  ODEs with Python
+tagline:                                interactive evaluation
 date:                                   2022-03-28 00:00:00
 description: >
                                         The package nbinteract aims to enable authors and educators to create and
                                         share interactive web pages easily. Interactive explanations of concepts are
                                         useful for communicating and explaining tricky concepts.
-
 keywords: >
                                         opensource, free, load, download, start, starter, example,
                                         high, easy, use, secure, encrypt, standard, popular,
@@ -30,13 +29,13 @@ keywords: >
                                         nbi, integration, binder, binderhub, jupyterhub
 
 categories:                             [ Software, Python ]
-tags:                                   [ Binder, Jupyter, Notebooks ]
+tags:                                   [ Binder, Jupyter, Notebooks, Distributed ]
 
 scrollbar:                              false
 fab_menu_id:                            open_toc_reload
 personalization:                        true
 
-permalink:                              /pages/public/jupyter/examples/static/climate-change-forecast/
+permalink:                              /pages/public/jupyter/textbooks/odes-in-python/
 regenerate:                             false
 
 resources:                              [ nbinteract, rouge ]
@@ -64,7 +63,8 @@ resource_options:
 // :page--attr:                         <attr-value>
 :binder-badges-enabled:                 true
 :binder-app-launch--tree:               https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?urlpath=/tree
-:binder-app-launch--notebook:           https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/j1/j1_climate_change_forecast.ipynb
+:binder-app-launch--notebook:           https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/j1/j1_odes_in_python.ipynb
+:odes-in-python:                        https://elc.github.io/posts/ordinary-differential-equations-with-python/
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -79,29 +79,34 @@ resource_options:
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // image:/assets/images/badges/myBinder.png[Binder, link="https://mybinder.org/", {browser-window--new}]
 // image:/assets/images/badges/docsBinder.png[Binder, link="https://mybinder.readthedocs.io/en/latest/", {browser-window--new}]
+// See: https://towardsdatascience.com/ordinal-differential-equation-ode-in-python-8dc1de21323b
 
 ifeval::[{binder-badges-enabled} == true]
 image:/assets/images/badges/notebookBinder.png[Binder, link="{binder-app-launch--notebook}", {browser-window--new}]
 image:https://mybinder.org/badge_logo.svg[Binder, link="{binder-app-launch--tree}", {browser-window--new}]
 endif::[]
 
-CAUTION: If the J1 NBI module detects *non-interactive* textbooks, the
-NBI module adapter does *not* start a Binder service for an external
-computational environment.
 
-This textbook is an example of a *non-interactive* Jupyter notebook (JN).
-Jupyter Notebooks don't necessarily need to contain *interactive* widgets.
-The CLI `nbinteract` can export all types of (Python-based) notebooks to
-an (HTML) textbooks.
+// See: https://elc.github.io/posts/ordinary-differential-equations-with-python/
 
-== Climate change forecasting
+CAUTION: Each interactive element presented on this page uses *time-consuming*
+operations that take a while to finish. The elements are built through a
+backend in the cloud. Please be patient to see the results.
 
-Predicting climate change is a very difficult business. The calculations are
-certainly not easy to understand, and a solid knowledge of mathematics and
-statistics is required.
+An ordinary differential equation (often abbreviated to ODE) is one
+Differential equation where only derivatives of the desired function
+occur after exactly one variable. Many physical, chemical and biological
+processes in nature are described mathematically with such equations.
+Examples are the radioactive decay, motion processes of bodies, many types
+of Oscillation processes or the growth behavior of animal populations.
 
-Still, complex but well-annotated ones can provide insight for all readers.
-Graphic representations of the results clearly show the results of mathematical
-calculations and allow (interested) laypeople to gain a basic understanding.
+In scientific models, ordinary differential equations are often used to
+analyze, simulate, or be able to make predictions. Find an example below
+describing the dynamics of the population of rabbits and foxes. Check how
+the animals depend on each other. Manipulate some parameters to see the
+influences on the rabbits and foxes population.
 
-textbook::j1_climate_change_forecast[]
+NOTE: All examples are taken from
+link:{odes-in-python}[Ordinary Differential Equations (ODE) with Python, {browser-window--new}]
+
+textbook::j1_odes_in_python[]

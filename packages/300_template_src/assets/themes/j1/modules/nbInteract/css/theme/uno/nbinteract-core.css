@@ -210,6 +210,13 @@ div#notebook {
 
 /* Cell styles for static HTML export
 -------------------------------------------------------------------------------- */
+
+/* adopted from BS "table-responsive */
+.cell-responsive {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
 .cell.nbinteract-left {
     width: 49%;
     float: left;

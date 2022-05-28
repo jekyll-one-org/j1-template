@@ -1729,6 +1729,32 @@ resources:
         init_function:                  []
 
   # ----------------------------------------------------------------------------
+  # BokehJS - JS Interface for Bokeh Interactive Visualization library
+  # It provides elegant, concise construction of versatile graphics, and
+  # affords high-performance interactivity over large or streaming datasets.
+  #
+  # See: https://github.com/bokeh/bokeh
+  #
+  - name:                               BokehJS
+    resource:
+      enabled:                          false
+
+      id:                               bokeh
+      comment:                          BokehJS
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand
+      preload:                          false
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            []
+        files:                          [ modules/bokeh/js/v2.4.3/bokeh.min.js ]
+        js:                             []
+        init_function:                  []
+
+  # ----------------------------------------------------------------------------
   # Vega – A Visualization Grammar
   # Vega is a visualization grammar, a declarative language for creating,
   # saving, and sharing interactive visualization designs. With Vega you can

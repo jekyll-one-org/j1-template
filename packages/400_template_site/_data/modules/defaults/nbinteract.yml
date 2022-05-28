@@ -232,7 +232,7 @@ defaults:
                                           </li>
                                         </ul>
 
-  spec:                                 jekyll-one/j1-binder-repo/main
+  spec:                                 jekyll-one/j1-binder-repo/cb77220       # jekyll-one/j1-binder-repo/main, jekyll-one/j1-binder-repo/v2022.2.2
   baseUrl:                              'https://mybinder.org'
   provider:                             gh
 

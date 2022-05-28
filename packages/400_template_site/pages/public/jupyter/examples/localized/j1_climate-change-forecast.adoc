@@ -1,11 +1,12 @@
 ---
-title:                                  Times Tables
-tagline:                                visualize patterns
+title:                                  Non-Interactive Notebook
+tagline:                                climate change forecast
 date:                                   2022-03-28 00:00:00
 description: >
                                         The package nbinteract aims to enable authors and educators to create and
                                         share interactive web pages easily. Interactive explanations of concepts are
                                         useful for communicating and explaining tricky concepts.
+
 keywords: >
                                         opensource, free, load, download, start, starter, example,
                                         high, easy, use, secure, encrypt, standard, popular,
@@ -29,13 +30,13 @@ keywords: >
                                         nbi, integration, binder, binderhub, jupyterhub
 
 categories:                             [ Software, Python ]
-tags:                                   [ Binder, Jupyter, Notebooks ]
+tags:                                   [ Jupyter, Notebooks, Localized ]
 
 scrollbar:                              false
 fab_menu_id:                            open_toc_reload
 personalization:                        true
 
-permalink:                              /pages/public/jupyter/textbooks/j1-circular-times-table/
+permalink:                              /pages/public/jupyter/examples/static/climate-change-forecast/
 regenerate:                             false
 
 resources:                              [ nbinteract, rouge ]
@@ -63,8 +64,7 @@ resource_options:
 // :page--attr:                         <attr-value>
 :binder-badges-enabled:                 true
 :binder-app-launch--tree:               https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?urlpath=/tree
-:binder-app-launch--notebook:           https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/j1/j1_circular_times_table.ipynb
-:times-tables-visualization:            https://elc.github.io/posts/times-tables/
+:binder-app-launch--notebook:           https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/j1/j1_climate_change_forecast.ipynb
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -79,62 +79,29 @@ resource_options:
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // image:/assets/images/badges/myBinder.png[Binder, link="https://mybinder.org/", {browser-window--new}]
 // image:/assets/images/badges/docsBinder.png[Binder, link="https://mybinder.readthedocs.io/en/latest/", {browser-window--new}]
-// See: https://towardsdatascience.com/ordinal-differential-equation-ode-in-python-8dc1de21323b
 
 ifeval::[{binder-badges-enabled} == true]
 image:/assets/images/badges/notebookBinder.png[Binder, link="{binder-app-launch--notebook}", {browser-window--new}]
 image:https://mybinder.org/badge_logo.svg[Binder, link="{binder-app-launch--tree}", {browser-window--new}]
 endif::[]
 
-CAUTION: Each interactive element presented on this page uses *time-consuming*
-operations that take a while to finish. The elements are built through a
-backend in the cloud. Please be patient to see the results.
+CAUTION: If the J1 NBI module detects *non-interactive* textbooks, the
+NBI module adapter does *not* start a Binder service for an external
+computational environment.
 
-First, let's introduce the video from _Mathologer_. This video creates very
-nice patterns from _Times Tables_. Everybody knows them from primary school.
-It's something like this:
+This textbook is an example of a *non-interactive* Jupyter notebook (JN).
+Jupyter Notebooks don't necessarily need to contain *interactive* widgets.
+The CLI `nbinteract` can export all types of (Python-based) notebooks to
+an (HTML) textbooks.
 
-.Table of *Two* (excerpt)
-[cols="6a,6a", options="header", width="100%", role="rtable mt-3"]
-|===
-|Factor |Value
+== Climate change forecasting
 
-|`1 x 2`
-|2
+Predicting climate change is a very difficult business. The calculations are
+certainly not easy to understand, and a solid knowledge of mathematics and
+statistics is required.
 
-|`2 x 2`
-|4
+Still, complex but well-annotated ones can provide insight for all readers.
+Graphic representations of the results clearly show the results of mathematical
+calculations and allow (interested) laypeople to gain a basic understanding.
 
-|`3 x 2`
-|6
-
-|`4 x 2`
-|8
-
-|===
-
-The idea, in general, is surprisingly simple, but the results are surprising.
-Please go for the video from _Mathologer_ first to catch the idea behind it.
-
-In this document, several scenarios using _Times Tables_ as a base to
-calculate plotted images are presented similar to the approach of
-what _Mathologer_ is doing:
-
-* a static but parametric version: you can change with sliders the values
-  and experiment by yourself.
-* an animated version to construct the image Line by Line: the factor
-  and the number of points is fixed, but each line is plotted per iteration
-* an animated version to construct the image Point by Point: the factor
-  and the lines are fixed, but each iteration increases the number of points
-* an animated version to construct the image Factor by Factor: the lines
-  and the number of points is fixed, but the factor increases per iteration.
-
-Start your journey on the power of Mathematics!
-
-NOTE: All examples are taken from
-link:{times-tables-visualization}[Times Tables Visualization - Finding Patterns, {browser-window--new}],
-and re-written for the use of module J1 NBI. Some text is used from the
-original post but re-written for clarity and simplicity.
-
-// textbook::circular_times_table[]
-textbook::j1_circular_times_table[]
+textbook::j1_climate_change_forecast[]

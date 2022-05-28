@@ -29,7 +29,7 @@ keywords: >
                                         nbi, integration, binder, binderhub, jupyterhub
 
 categories:                             [ J1, Integration ]
-tags:                                   [ NBI, nbinteract ]
+tags:                                   [ NBI, Notebooks, Distributed ]
 
 scrollbar:                              false
 fab_menu_id:                            page_ctrl_simple

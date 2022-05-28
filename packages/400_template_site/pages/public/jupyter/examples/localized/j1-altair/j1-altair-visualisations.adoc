@@ -30,14 +30,15 @@ keywords: >
                                         google, analytics, advertising, search, console, silverlight, score,
                                         j1, template, jekyllone, comment,
                                         python, jupyter, notebook, textbook, api, app, nbinteract,
-                                        nbi, integration, binder, binderhub, jupyterhub
+                                        nbi, integration, binder, binderhub, jupyterhub,
+                                        altair
 
 categories:                             [ Software, Python ]
-tags:                                   [ Altair, Jupyter, Notebooks ]
+tags:                                   [ Altair, Jupyter, Notebooks, Localized ]
 
-scrollbar:                              false
+scrollbar:                              true
 fab_menu_id:                            open_toc_reload
-personalization:                        true
+personalization:                        false
 
 permalink:                              /pages/public/jupyter/examples/static/j1-altair-visualizations/
 regenerate:                             false
@@ -88,14 +89,10 @@ resource_options:
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-// image:/assets/images/badges/myBinder.png[Binder, link="https://mybinder.org/", {browser-window--new}]
-// image:/assets/images/badges/docsBinder.png[Binder, link="https://mybinder.readthedocs.io/en/latest/", {browser-window--new}]
-
 ifeval::[{binder-badges-enabled} == true]
 image:/assets/images/badges/notebookBinder.png[Binder, link="{binder-app-launch--notebook}", {browser-window--new}]
 image:https://mybinder.org/badge_logo.svg[Binder, link="{binder-app-launch--tree}", {browser-window--new}]
 endif::[]
-
 
 With Altair, you can spend more time understanding your data and its meaning.
 Altair’s API is simple, friendly and consistent and built on top of the
@@ -103,13 +100,14 @@ powerful Vega-Lite visualization grammar. This elegant simplicity produces
 beautiful and effective visualizations with a minimal amount of code. Find
 more on Altair link:{altair-docs}[Docs, {browser-window--new}].
 
+
 == Visualisations
 
 lorem:sentences[5]
 
 lorem:sentences[3]
 
-textbook::j1_altair_static[]
+textbook::j1_altair_non_interactive[]
 
 == Interactive Visualisations
 

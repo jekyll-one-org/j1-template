@@ -617,6 +617,15 @@ j1.adapter.nbinteract = (function (j1, window) {
               }
             });
 
+            // make all output_wrapper cells "responsive" (especially for tables)
+            //
+            var output_wrapper = document.getElementsByClassName('output_wrapper');
+            [...output_wrapper].forEach(function(x) {
+              if (!x.className.includes('cell-responsive')) {
+                x.className += ' cell-responsive';
+              }
+            });
+
             // cleanups for Altair for all HTML 'output_wrapper' elements
             //
             if (cleanupAltair) {

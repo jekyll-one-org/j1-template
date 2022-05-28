@@ -29,7 +29,7 @@ keywords: >
                                         nbi, integration, binder, binderhub, jupyterhub
 
 categories:                             [ Software, Python ]
-tags:                                   [ Binder, Jupyter, Notebooks ]
+tags:                                   [ Binder, Jupyter, Notebooks, Distributed ]
 
 scrollbar:                              false
 fab_menu_id:                            open_toc_reload
