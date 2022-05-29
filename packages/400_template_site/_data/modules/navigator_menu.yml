@@ -155,10 +155,10 @@
           icon:                         magnify
 
     # --------------------------------------------------------------------------
-    # Experimental
+    # Jupyter Notebooks
     #
-    - title:                            Experimental
-      icon:                             test-tube
+    - title:                            Jupyter Notebooks
+      icon:                             notebook-outline
       dropdown:
 
         - title:                        Where to go
