@@ -40,10 +40,10 @@ scrollbar:                              true
 fab_menu_id:                            open_toc_reload
 personalization:                        false
 
-permalink:                              /pages/public/jupyter/examples/static/j1-altair-visualizations/
+permalink:                              /pages/public/jupyter/examples/localized/j1-altair-visualizations/
 regenerate:                             false
 
-resources:                              [ clipboard, nbinteract, rouge ]
+resources:                              [ nbinteract, rouge ]
 resource_options:
   - attic:
       padding_top:                      400
@@ -65,13 +65,15 @@ resource_options:
 
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
-// :page--attr:                                   <attr-value>
-:binder-badges-enabled:                 true
+// :page--attr:                         <attr-value>
+:binder-badges-enabled:                 false
 :binder-app-launch--tree:               https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?urlpath=/tree
-:binder-app-launch--notebook:           https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/j1/j1_altair_interactive.ipynb
 
-:altair-docs:                           https://altair-viz.github.io/
-:altair-docs--interactions:             https://altair-viz.github.io/user_guide/interactions.html
+:binder-app-launch--non-interactive:    https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/j1-altair-tutorial/j1_altair_non_interactive.ipynb
+:binder-app-launch--interactive:        https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/j1-altair-tutorial/j1_altair_interactive.ipynb
+
+:url-altair-docs:                       https://altair-viz.github.io/
+:url-altair-docs--interactions:         https://altair-viz.github.io/user_guide/interactions.html
 
 
 //  Load Liquid procedures
@@ -90,7 +92,6 @@ resource_options:
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 ifeval::[{binder-badges-enabled} == true]
-image:/assets/images/badges/notebookBinder.png[Binder, link="{binder-app-launch--notebook}", {browser-window--new}]
 image:https://mybinder.org/badge_logo.svg[Binder, link="{binder-app-launch--tree}", {browser-window--new}]
 endif::[]
 
@@ -98,18 +99,25 @@ With Altair, you can spend more time understanding your data and its meaning.
 Altair’s API is simple, friendly and consistent and built on top of the
 powerful Vega-Lite visualization grammar. This elegant simplicity produces
 beautiful and effective visualizations with a minimal amount of code. Find
-more on Altair link:{altair-docs}[Docs, {browser-window--new}].
+more on Docs at Altair:
 
+mdi:link-variant[24px, md-blue mr-2 ml-3]
+link:{url-altair-docs}[Altair Dokumentation, {browser-window--new}] +
+mdi:link-variant[24px, md-blue mr-2 ml-3]
+link:{url-altair-docs--interactions}[Altair Interactive Visualization, {browser-window--new}]
 
-== Visualisations
+Find all Notebooks at *Binder* from below:
 
-lorem:sentences[5]
+mdi:link-variant[24px, md-blue mr-2 ml-3]
+image:/assets/images/badges/notebookBinder.png[Binder, link="{binder-app-launch--non-interactive}", {browser-window--new}] -- 1. Basic Visualisations +
+mdi:link-variant[24px, md-blue mr-2 ml-3]
+image:/assets/images/badges/notebookBinder.png[Binder, link="{binder-app-launch--interactive}", {browser-window--new}] -- 2. Interactive Visualisations
 
-lorem:sentences[3]
+== 1. Basic Visualisations
 
 textbook::j1_altair_non_interactive[]
 
-== Interactive Visualisations
+== 2. Interactive Visualisations
 
 One of the unique features of Altair, inherited from _Vega-Lite_, is a
 declarative grammar of not just visualization, but *interaction*. There are
@@ -130,6 +138,6 @@ three core concepts of this grammar:
 Interactive charts can use one or more of these elements to create rich
 interactivity between the viewer and the data. Find more about
 *interactive visualizations* on Altair Docs at
-link:{altair-docs--interactions}[Making Charts Interactive, {browser-window--new}].
+link:{url-altair-docs--interactions}[Making Charts Interactive, {browser-window--new}].
 
 textbook::j1_altair_interactive[]

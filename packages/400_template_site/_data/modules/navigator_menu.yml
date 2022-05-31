@@ -190,13 +190,13 @@
           dropdown:
 
             - title:                    Climate Change Forecast
-              href:                     /pages/public/jupyter/examples/static/climate-change-forecast/
+              href:                     /pages/public/jupyter/examples/localized/climate-change-forecast/
               icon:                     notebook-outline
             - title:                    Visualizations using Altair
-              href:                     /pages/public/jupyter/examples/static/j1-altair-visualizations/
+              href:                     /pages/public/jupyter/examples/localized/j1-altair-visualizations/
               icon:                     notebook-outline
             - title:                    Visualizations using Bokeh
-              href:                     /pages/public/jupyter/examples/static/j1-bokeh-visualizations/
+              href:                     /pages/public/jupyter/examples/localized/j1-bokeh-visualizations/
               icon:                     notebook-outline
 
         # ----------------------------------------------------------------------

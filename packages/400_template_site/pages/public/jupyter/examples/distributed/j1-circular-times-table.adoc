@@ -31,7 +31,7 @@ keywords: >
 categories:                             [ Software, Python ]
 tags:                                   [ Binder, Jupyter, Notebooks, Distributed ]
 
-scrollbar:                              false
+scrollbar:                              true
 fab_menu_id:                            open_toc_reload
 personalization:                        true
 

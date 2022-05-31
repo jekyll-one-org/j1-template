@@ -255,6 +255,9 @@
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">movies_url</span><span class="p">)</span><span class="o">.</span><span class="n">mark_circle</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
     <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;Rotten_Tomatoes_Rating:Q&#39;</span><span class="p">),</span>
     <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;IMDB_Rating:Q&#39;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">400</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -273,13 +276,13 @@
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-d6577062d2dd475e8950ffd699b706b1"></div>
+<div id="altair-viz-3fb77a8addc44bdbba64608b1b36043f"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-d6577062d2dd475e8950ffd699b706b1") {
-      outputDiv = document.getElementById("altair-viz-d6577062d2dd475e8950ffd699b706b1");
+    if (outputDiv.id !== "altair-viz-3fb77a8addc44bdbba64608b1b36043f") {
+      outputDiv = document.getElementById("altair-viz-3fb77a8addc44bdbba64608b1b36043f");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -325,7 +328,7 @@
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": "circle", "encoding": {"x": {"field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"field": "IMDB_Rating", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json"}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": "circle", "encoding": {"x": {"field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"field": "IMDB_Rating", "type": "quantitative"}}, "height": 400, "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json"}, {"mode": "vega-lite"});
 </script>
 </div>
 
@@ -354,6 +357,9 @@
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">movies_url</span><span class="p">)</span><span class="o">.</span><span class="n">mark_circle</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
     <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;Rotten_Tomatoes_Rating:Q&#39;</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
     <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;IMDB_Rating:Q&#39;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">400</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -372,13 +378,13 @@
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-957aeef57f8d4922b8c1d81bda02481d"></div>
+<div id="altair-viz-d343c0fee35d45f097c050e5ec7a6ced"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-957aeef57f8d4922b8c1d81bda02481d") {
-      outputDiv = document.getElementById("altair-viz-957aeef57f8d4922b8c1d81bda02481d");
+    if (outputDiv.id !== "altair-viz-d343c0fee35d45f097c050e5ec7a6ced") {
+      outputDiv = document.getElementById("altair-viz-d343c0fee35d45f097c050e5ec7a6ced");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -424,7 +430,7 @@
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": "circle", "encoding": {"x": {"bin": true, "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"field": "IMDB_Rating", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json"}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": "circle", "encoding": {"x": {"bin": true, "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"field": "IMDB_Rating", "type": "quantitative"}}, "height": 400, "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json"}, {"mode": "vega-lite"});
 </script>
 </div>
 
@@ -453,6 +459,9 @@
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">movies_url</span><span class="p">)</span><span class="o">.</span><span class="n">mark_circle</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
     <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;Rotten_Tomatoes_Rating:Q&#39;</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">BinParams</span><span class="p">(</span><span class="n">maxbins</span><span class="o">=</span><span class="mi">20</span><span class="p">)),</span>
     <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;IMDB_Rating:Q&#39;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">400</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -471,13 +480,13 @@
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-0bd28a0711744810a2f9431aeeb0d3a2"></div>
+<div id="altair-viz-b1e8c23da933405c8dbfa3441caaab02"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-0bd28a0711744810a2f9431aeeb0d3a2") {
-      outputDiv = document.getElementById("altair-viz-0bd28a0711744810a2f9431aeeb0d3a2");
+    if (outputDiv.id !== "altair-viz-b1e8c23da933405c8dbfa3441caaab02") {
+      outputDiv = document.getElementById("altair-viz-b1e8c23da933405c8dbfa3441caaab02");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -523,7 +532,7 @@
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": "circle", "encoding": {"x": {"bin": {"maxbins": 20}, "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"field": "IMDB_Rating", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json"}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": "circle", "encoding": {"x": {"bin": {"maxbins": 20}, "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"field": "IMDB_Rating", "type": "quantitative"}}, "height": 400, "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json"}, {"mode": "vega-lite"});
 </script>
 </div>
 
@@ -553,6 +562,9 @@
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">movies_url</span><span class="p">)</span><span class="o">.</span><span class="n">mark_circle</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
     <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;Rotten_Tomatoes_Rating:Q&#39;</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">BinParams</span><span class="p">(</span><span class="n">maxbins</span><span class="o">=</span><span class="mi">20</span><span class="p">)),</span>
     <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;count()&#39;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">400</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -571,13 +583,13 @@
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-4899fbf86f3b495e8e4596cc46c99b7c"></div>
+<div id="altair-viz-e2a841b391c546048445e68b0c28f564"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-4899fbf86f3b495e8e4596cc46c99b7c") {
-      outputDiv = document.getElementById("altair-viz-4899fbf86f3b495e8e4596cc46c99b7c");
+    if (outputDiv.id !== "altair-viz-e2a841b391c546048445e68b0c28f564") {
+      outputDiv = document.getElementById("altair-viz-e2a841b391c546048445e68b0c28f564");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -623,7 +635,7 @@
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": "circle", "encoding": {"x": {"bin": {"maxbins": 20}, "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"aggregate": "count", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json"}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": "circle", "encoding": {"x": {"bin": {"maxbins": 20}, "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"aggregate": "count", "type": "quantitative"}}, "height": 400, "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json"}, {"mode": "vega-lite"});
 </script>
 </div>
 
@@ -652,6 +664,9 @@
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">movies_url</span><span class="p">)</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
     <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;Rotten_Tomatoes_Rating:Q&#39;</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">BinParams</span><span class="p">(</span><span class="n">maxbins</span><span class="o">=</span><span class="mi">20</span><span class="p">)),</span>
     <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;count()&#39;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">400</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -670,13 +685,13 @@
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-1533f60254d842fcab8f1ab4a0fbc091"></div>
+<div id="altair-viz-890c699c81a343d785fabe95ccd77ce0"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-1533f60254d842fcab8f1ab4a0fbc091") {
-      outputDiv = document.getElementById("altair-viz-1533f60254d842fcab8f1ab4a0fbc091");
+    if (outputDiv.id !== "altair-viz-890c699c81a343d785fabe95ccd77ce0") {
+      outputDiv = document.getElementById("altair-viz-890c699c81a343d785fabe95ccd77ce0");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -722,7 +737,7 @@
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": "bar", "encoding": {"x": {"bin": {"maxbins": 20}, "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"aggregate": "count", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json"}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": "bar", "encoding": {"x": {"bin": {"maxbins": 20}, "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"aggregate": "count", "type": "quantitative"}}, "height": 400, "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json"}, {"mode": "vega-lite"});
 </script>
 </div>
 
@@ -752,6 +767,9 @@
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">movies_url</span><span class="p">)</span><span class="o">.</span><span class="n">mark_bar</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
     <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;IMDB_Rating:Q&#39;</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">BinParams</span><span class="p">(</span><span class="n">maxbins</span><span class="o">=</span><span class="mi">20</span><span class="p">)),</span>
     <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;count()&#39;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">400</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -770,13 +788,13 @@
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-fb6a4b5b21754d0c9502529848bbfe1a"></div>
+<div id="altair-viz-cee3059547d64f86bb7caf3d38da555c"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-fb6a4b5b21754d0c9502529848bbfe1a") {
-      outputDiv = document.getElementById("altair-viz-fb6a4b5b21754d0c9502529848bbfe1a");
+    if (outputDiv.id !== "altair-viz-cee3059547d64f86bb7caf3d38da555c") {
+      outputDiv = document.getElementById("altair-viz-cee3059547d64f86bb7caf3d38da555c");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -822,7 +840,7 @@
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": "bar", "encoding": {"x": {"bin": {"maxbins": 20}, "field": "IMDB_Rating", "type": "quantitative"}, "y": {"aggregate": "count", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json"}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": "bar", "encoding": {"x": {"bin": {"maxbins": 20}, "field": "IMDB_Rating", "type": "quantitative"}, "y": {"aggregate": "count", "type": "quantitative"}}, "height": 400, "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json"}, {"mode": "vega-lite"});
 </script>
 </div>
 
@@ -852,6 +870,9 @@
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">alt</span><span class="o">.</span><span class="n">Chart</span><span class="p">(</span><span class="n">movies_url</span><span class="p">)</span><span class="o">.</span><span class="n">mark_circle</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span>
     <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;Rotten_Tomatoes_Rating:Q&#39;</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">BinParams</span><span class="p">(</span><span class="n">maxbins</span><span class="o">=</span><span class="mi">20</span><span class="p">)),</span>
     <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;IMDB_Rating:Q&#39;</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">BinParams</span><span class="p">(</span><span class="n">maxbins</span><span class="o">=</span><span class="mi">20</span><span class="p">)),</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">400</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -870,13 +891,13 @@
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-532816eace634888b5a1ee959e73563c"></div>
+<div id="altair-viz-d192f47b42ac448db255588b3bf801eb"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-532816eace634888b5a1ee959e73563c") {
-      outputDiv = document.getElementById("altair-viz-532816eace634888b5a1ee959e73563c");
+    if (outputDiv.id !== "altair-viz-d192f47b42ac448db255588b3bf801eb") {
+      outputDiv = document.getElementById("altair-viz-d192f47b42ac448db255588b3bf801eb");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -922,7 +943,7 @@
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": "circle", "encoding": {"x": {"bin": {"maxbins": 20}, "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"bin": {"maxbins": 20}, "field": "IMDB_Rating", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json"}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": "circle", "encoding": {"x": {"bin": {"maxbins": 20}, "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"bin": {"maxbins": 20}, "field": "IMDB_Rating", "type": "quantitative"}}, "height": 400, "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json"}, {"mode": "vega-lite"});
 </script>
 </div>
 
@@ -953,6 +974,9 @@
     <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;Rotten_Tomatoes_Rating:Q&#39;</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">BinParams</span><span class="p">(</span><span class="n">maxbins</span><span class="o">=</span><span class="mi">20</span><span class="p">)),</span>
     <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;IMDB_Rating:Q&#39;</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">BinParams</span><span class="p">(</span><span class="n">maxbins</span><span class="o">=</span><span class="mi">20</span><span class="p">)),</span>
     <span class="n">alt</span><span class="o">.</span><span class="n">Size</span><span class="p">(</span><span class="s1">&#39;count()&#39;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">400</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -971,13 +995,13 @@
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-7dfe320f774f43039edab2bc8978094b"></div>
+<div id="altair-viz-49f403013cbf44118f18d9bcf1f8fe5b"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-7dfe320f774f43039edab2bc8978094b") {
-      outputDiv = document.getElementById("altair-viz-7dfe320f774f43039edab2bc8978094b");
+    if (outputDiv.id !== "altair-viz-49f403013cbf44118f18d9bcf1f8fe5b") {
+      outputDiv = document.getElementById("altair-viz-49f403013cbf44118f18d9bcf1f8fe5b");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -1023,7 +1047,7 @@
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": "circle", "encoding": {"size": {"aggregate": "count", "type": "quantitative"}, "x": {"bin": {"maxbins": 20}, "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"bin": {"maxbins": 20}, "field": "IMDB_Rating", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json"}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": "circle", "encoding": {"size": {"aggregate": "count", "type": "quantitative"}, "x": {"bin": {"maxbins": 20}, "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"bin": {"maxbins": 20}, "field": "IMDB_Rating", "type": "quantitative"}}, "height": 400, "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json"}, {"mode": "vega-lite"});
 </script>
 </div>
 
@@ -1053,6 +1077,9 @@
     <span class="n">alt</span><span class="o">.</span><span class="n">X</span><span class="p">(</span><span class="s1">&#39;Rotten_Tomatoes_Rating:Q&#39;</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">BinParams</span><span class="p">(</span><span class="n">maxbins</span><span class="o">=</span><span class="mi">20</span><span class="p">)),</span>
     <span class="n">alt</span><span class="o">.</span><span class="n">Y</span><span class="p">(</span><span class="s1">&#39;IMDB_Rating:Q&#39;</span><span class="p">,</span> <span class="nb">bin</span><span class="o">=</span><span class="n">alt</span><span class="o">.</span><span class="n">BinParams</span><span class="p">(</span><span class="n">maxbins</span><span class="o">=</span><span class="mi">20</span><span class="p">)),</span>
     <span class="n">alt</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span><span class="s1">&#39;count()&#39;</span><span class="p">)</span>
+<span class="p">)</span><span class="o">.</span><span class="n">properties</span><span class="p">(</span>
+    <span class="n">width</span><span class="o">=</span><span class="mi">800</span><span class="p">,</span>
+    <span class="n">height</span><span class="o">=</span><span class="mi">400</span>
 <span class="p">)</span>
 </pre></div>
 
@@ -1071,13 +1098,13 @@
 
 <div class="output_html rendered_html output_subarea output_execute_result">
 
-<div id="altair-viz-9eaee1fd517445639098327a457b8726"></div>
+<div id="altair-viz-ea5c6bddfd524df484e60577255c49cc"></div>
 <script type="text/javascript">
   var VEGA_DEBUG = (typeof VEGA_DEBUG == "undefined") ? {} : VEGA_DEBUG;
   (function(spec, embedOpt){
     let outputDiv = document.currentScript.previousElementSibling;
-    if (outputDiv.id !== "altair-viz-9eaee1fd517445639098327a457b8726") {
-      outputDiv = document.getElementById("altair-viz-9eaee1fd517445639098327a457b8726");
+    if (outputDiv.id !== "altair-viz-ea5c6bddfd524df484e60577255c49cc") {
+      outputDiv = document.getElementById("altair-viz-ea5c6bddfd524df484e60577255c49cc");
     }
     const paths = {
       "vega": "https://cdn.jsdelivr.net/npm//vega@5?noext",
@@ -1123,7 +1150,7 @@
         .catch(showError)
         .then(() => displayChart(vegaEmbed));
     }
-  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": "bar", "encoding": {"color": {"aggregate": "count", "type": "quantitative"}, "x": {"bin": {"maxbins": 20}, "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"bin": {"maxbins": 20}, "field": "IMDB_Rating", "type": "quantitative"}}, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json"}, {"mode": "vega-lite"});
+  })({"config": {"view": {"continuousWidth": 400, "continuousHeight": 300}}, "data": {"url": "https://cdn.jsdelivr.net/npm/vega-datasets@1/data/movies.json"}, "mark": "bar", "encoding": {"color": {"aggregate": "count", "type": "quantitative"}, "x": {"bin": {"maxbins": 20}, "field": "Rotten_Tomatoes_Rating", "type": "quantitative"}, "y": {"bin": {"maxbins": 20}, "field": "IMDB_Rating", "type": "quantitative"}}, "height": 400, "width": 800, "$schema": "https://vega.github.io/schema/vega-lite/v4.17.0.json"}, {"mode": "vega-lite"});
 </script>
 </div>
 

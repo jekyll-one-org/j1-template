@@ -38,7 +38,7 @@ scrollbar:                              true
 fab_menu_id:                            open_toc_reload
 personalization:                        false
 
-permalink:                              /pages/public/jupyter/examples/static/j1-bokeh-visualizations/
+permalink:                              /pages/public/jupyter/examples/localized/j1-bokeh-visualizations/
 
 resources:                              [ nbinteract, rouge ]
 resource_options:
