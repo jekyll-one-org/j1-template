@@ -84,6 +84,7 @@ issues for private or professional use.
 
 ## Addons and Integrations
 
+* Jupyter Notebook support (nbinteract)
 * Featured example content included
 * Royalty free images included
 * Comment provider support for Hyvor and Disqus
