@@ -84,7 +84,7 @@ settings:
     # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
-    # climate-change-forecast
+    # climate_change_forecast
     #
     - textbook:
         enabled:                        true
@@ -96,11 +96,143 @@ settings:
         translate_mathjax:              false
 
     # --------------------------------------------------------------------------
+    # J1 Altair Tutorial
+    # --------------------------------------------------------------------------
+
+    # --------------------------------------------------------------------------
+    # altair_non_interactive
+    #
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_altair_non_interactive
+        xhr_data:                       j1_altair_non_interactive.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                true
+
+    # --------------------------------------------------------------------------
+    # altair_interactive
+    #
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_altair_interactive
+        xhr_data:                       j1_altair_interactive.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                true
+
+    # --------------------------------------------------------------------------
+    # J1 Bokeh Tutorial
+    # --------------------------------------------------------------------------
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_bokeh_01_basic_plotting
+        xhr_data:                       j1_bokeh_01_basic_plotting.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_bokeh_02_styling_and_theming
+        xhr_data:                       j1_bokeh_02_styling_and_theming.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_bokeh_03_data_sources_and_transformations
+        xhr_data:                       j1_bokeh_03_data_sources_and_transformations.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_bokeh_04_adding_annotations
+        xhr_data:                       j1_bokeh_04_adding_annotations.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_bokeh_05_presentation_layouts
+        xhr_data:                       j1_bokeh_05_presentation_layouts.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_bokeh_06_linking_and_interactions
+        xhr_data:                       j1_bokeh_06_linking_and_interactions.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_bokeh_07_bar_and_categorical_data_plots
+        xhr_data:                       j1_bokeh_07_bar_and_categorical_data_plots.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_bokeh_08_graph_and_network_plots
+        xhr_data:                       j1_bokeh_08_graph_and_network_plots.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_bokeh_09_geographic_plots
+        xhr_data:                       j1_bokeh_09_geographic_plots.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                false
+
+    - textbook:
+        enabled:                        false
+
+        id:                             j1_bokeh_10_exporting_and_embedding
+        xhr_data:                       j1_bokeh_10_exporting_and_embedding.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                false
+
+    - textbook:
+        enabled:                        false
+
+        id:                             j1_bokeh_11_running_bokeh_applications
+        xhr_data:                       j1_bokeh_11_running_bokeh_applications.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                false
+
+
+    # --------------------------------------------------------------------------
     # Distributed Textbooks
     # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
-    # interactive widget types
+    # interactive_widgets
     #
     - textbook:
         enabled:                        true
@@ -123,24 +255,35 @@ settings:
         translate_mathjax:              true
 
     # --------------------------------------------------------------------------
-    # ode_selected
-    #
-    - textbook:
-        enabled:                        true
-
-        id:                             j1_docs_example_dynamic
-        xhr_data:                       j1_docs_example_dynamic.html
-        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
-        use_mathjax:                    false
-
-    # --------------------------------------------------------------------------
-    # j1_circular_times_table
+    # circular_times_table
     #
     - textbook:
         enabled:                        true
 
         id:                             j1_circular_times_table
         xhr_data:                       j1_circular_times_table.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    # --------------------------------------------------------------------------
+    # pandas_intro
+    #
+    - textbook:
+        enabled:                        false
+
+        id:                             j1_pandas_intro
+        xhr_data:                       j1_pandas_creating_reading_and_writing.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    # --------------------------------------------------------------------------
+    # testing_plotly
+    #
+    - textbook:
+        enabled:                        false
+
+        id:                             j1_testing_plotly
+        xhr_data:                       j1_testing_plotly.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    false
 
