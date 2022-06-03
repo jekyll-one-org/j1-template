@@ -94,6 +94,7 @@ If you're interested what J1 Template can do, continue by walking through the
 roundtrip examples by starting an inspiring tour
 link:{url-j1-roundtrip--present-images}[from here].
 
+////
 Jupyter Notebooks::
 In section *Jupyter Notebooks*, you'll find a tour through the J1 Implementation
 of the integration of Python's Jupyter Notebooks in J1 Websites for *Data Science*
@@ -104,6 +105,7 @@ projects go for this section.
 
 To learn more about the toolset for presenting *Data Analysis* projects supported
 by J1 Template start the tour link:{url-j1-jupyter-notebooks--where-to-go}[from here].
+////
 
 Rocketstart::
 J1-Template is fully JAM-Stack ready. If you're interested in creating and
