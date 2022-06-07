@@ -46,7 +46,9 @@ tmp/
 
 **/notebooks/j1/*.mp4
 
-**/notebooks/bokeh-tutorial/*.html
+**/notebooks/j1-bokeh-tutorial/*.html
+**/notebooks/j1-bokeh-tutorial/*.png
+**/notebooks/j1-bokeh-tutorial/*.svg
 
 
 # Never publish your sensitive personal and/or OAuth

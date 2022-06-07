@@ -96,17 +96,24 @@ to build *interactive* GUIs for your notebooks, and to synchronize stateful and
 stateless information between the (IPython-)Kernel and JavaScript.
 
 Many libraries are available for Jupyter (IPython) to choose from. One of the
-most commonly used libraries for widgets is *IPyWidgets*. the widgets of
-*Matplotlib* or *GGplot*.
+most commonly used libraries for widgets is *IPyWidgets* and the visualizations
+of *Matplotlib*, *BQplot* or *GGplot*.
 
+// Native NBI widgets currently NOT used
+// -----------------------------------------------------------------------------
+////
 In addition to the popular widgets, the NBI module offers additional GUI
 elements via the integrated interact-core library, which are useable in a
 very simple way.
+////
 
 Find with that page a commonly used set of widgets for interactive textbooks.
 Some more options are available for interactivity, but this selection shows
 the most used. Interactive widgets are provided natively by Jupyter Notebooks
-using the library `ipywidgets`. Some more widgets are provided by `nbinteract`.
-Find common examples in the textbooks below.
+using the library `ipywidgets`. Find common examples in the textbooks below.
 
 textbook::j1_interactive_widgets[]
+
+// Native NBI widgets (nbinteract) currently NOT used
+// -----------------------------------------------------------------------------
+// textbook::j1_nbi_widgets[]

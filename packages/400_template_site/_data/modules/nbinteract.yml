@@ -237,8 +237,24 @@ settings:
     - textbook:
         enabled:                        true
 
+        id:                             j1_docs_example_dynamic
+        xhr_data:                       j1_docs_example_dynamic.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    - textbook:
+        enabled:                        true
+
         id:                             j1_interactive_widgets
         xhr_data:                       j1_interactive_widgets.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_nbi_widgets
+        xhr_data:                       j1_nbi_widgets.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    false
 
