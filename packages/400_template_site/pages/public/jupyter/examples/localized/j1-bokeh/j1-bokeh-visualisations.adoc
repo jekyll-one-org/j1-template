@@ -119,7 +119,7 @@ dashboards, and data applications.
 mdi:link-variant[24px, md-blue mr-2 ml-3]
 link:{url-bokeh--docs}[Bokeh Dokumentation, {browser-window--new}] +
 mdi:link-variant[24px, md-blue mr-2 ml-3]
-link:{binder-app-launch--j1-bokeh-tutorial}[Bokeh Tutorial (at Binder), {browser-window--new}]
+link:{binder-app-launch--bokeh-tutorial}[Bokeh Tutorial (at Binder), {browser-window--new}]
 
 CAUTION: To use all featues of _Bokeh_, reasonable knowlegde of Javascript
 programming is reqired.
