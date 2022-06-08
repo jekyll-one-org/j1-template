@@ -67,6 +67,7 @@ resource_options:
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
 :binder-badges-enabled:                 false
+:binder-app-launch--lab:                https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main
 :binder-app-launch--tree:               https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?urlpath=/tree
 
 :binder-app-launch--non-interactive:    https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/j1-altair-tutorial/j1_altair_non_interactive.ipynb
@@ -92,7 +93,7 @@ resource_options:
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 ifeval::[{binder-badges-enabled} == true]
-image:https://mybinder.org/badge_logo.svg[Binder, link="{binder-app-launch--tree}", {browser-window--new}]
+image:https://mybinder.org/badge_logo.svg[Binder, link="{binder-app-launch--lab}", {browser-window--new}]
 endif::[]
 
 With Altair, you can spend more time understanding your data and its meaning.

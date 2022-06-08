@@ -63,6 +63,7 @@ resource_options:
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
 :binder-badges-enabled:                 true
+:binder-app-launch--lab:                https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main
 :binder-app-launch--tree:               https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?urlpath=/tree
 :binder-app-launch--notebook:           https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/j1/j1_climate_change_forecast.ipynb
 
@@ -82,7 +83,7 @@ resource_options:
 
 ifeval::[{binder-badges-enabled} == true]
 image:/assets/images/badges/notebookBinder.png[Binder, link="{binder-app-launch--notebook}", {browser-window--new}]
-image:https://mybinder.org/badge_logo.svg[Binder, link="{binder-app-launch--tree}", {browser-window--new}]
+image:https://mybinder.org/badge_logo.svg[Binder, link="{binder-app-launch--lab}", {browser-window--new}]
 endif::[]
 
 CAUTION: If the J1 NBI module detects *non-interactive* textbooks, the

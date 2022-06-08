@@ -73,6 +73,7 @@ resource_options:
 // :starter-web-enabled:
 :binder-badges-enabled:                 false
 
+:binder-app-launch--lab:                https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main
 :binder-app-launch--tree:               https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?urlpath=/tree
 
 :url-j1-notebook--times-tables:         /pages/public/jupyter/textbooks/j1-circular-times-table/
@@ -101,7 +102,7 @@ resource_options:
 // See: https://towardsdatascience.com/ordinal-differential-equation-ode-in-python-8dc1de21323b
 
 ifeval::[{binder-badges-enabled} == true]
-image:https://mybinder.org/badge_logo.svg[Binder, link="{binder-app-launch--tree}", {browser-window--new}]
+image:https://mybinder.org/badge_logo.svg[Binder, link="{binder-app-launch--lab}", {browser-window--new}]
 endif::[]
 
 Jupyter Notebook (JN) is an open source web application based on the programming

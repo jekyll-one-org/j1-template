@@ -60,6 +60,18 @@ Local
 
   $ git branch -d <branch_name>
 
+
+== Reset repo to a commit
+
+local:
+
+  git reset --hard 217a618
+
+remote:
+
+git push --force origin main
+
+
 == Push an existing repository from the command line
 
 git remote add github https://github.com/jekyll-one-org/heroku_starter_app.git

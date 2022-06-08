@@ -68,18 +68,19 @@ resource_options:
 :url-bokeh--docs:                       https://docs.bokeh.org/en/latest/index.html
 
 :binder-badges-enabled:                 false
+:binder-app-launch--lab:                https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main
 :binder-app-launch--tree:               https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?urlpath=/tree
 :binder-app-launch--bokeh-tutorial:     https://mybinder.org/v2/gh/bokeh/bokeh-notebooks/master?filepath=tutorial%2F00%20-%20Introduction%20and%20Setup.ipynb
 
-:binder-app-launch--notebook-01:        https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/bokeh-tutorial/j1_bokeh_01_basic_plotting.ipynb
-:binder-app-launch--notebook-02:        https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/bokeh-tutorial/j1_bokeh_02_styling_and_theming.ipynb
-:binder-app-launch--notebook-03:        https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/bokeh-tutorial/j1_bokeh_03_data_sources_and_transformations.ipynb
-:binder-app-launch--notebook-04:        https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/bokeh-tutorial/j1_bokeh_04_adding_annotations.ipynb
-:binder-app-launch--notebook-05:        https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/bokeh-tutorial/j1_bokeh_05_presentation_layouts.ipynb
-:binder-app-launch--notebook-06:        https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/bokeh-tutorial/j1_bokeh_06_linking_and_interactions.ipynb
-:binder-app-launch--notebook-07:        https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/bokeh-tutorial/j1_bokeh_07_bar_and_categorical_data_plots.ipynb
-:binder-app-launch--notebook-08:        https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/bokeh-tutorial/j1_bokeh_08_graph_and_network_plots.ipynb
-:binder-app-launch--notebook-09:        https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/bokeh-tutorial/j1_bokeh_09_geographic_plots.ipynb
+:binder-app-launch--notebook-01:        https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/j1-bokeh-tutorial/j1_bokeh_01_basic_plotting.ipynb
+:binder-app-launch--notebook-02:        https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/j1-bokeh-tutorial/j1_bokeh_02_styling_and_theming.ipynb
+:binder-app-launch--notebook-03:        https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/j1-bokeh-tutorial/j1_bokeh_03_data_sources_and_transformations.ipynb
+:binder-app-launch--notebook-04:        https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/j1-bokeh-tutorial/j1_bokeh_04_adding_annotations.ipynb
+:binder-app-launch--notebook-05:        https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/j1-bokeh-tutorial/j1_bokeh_05_presentation_layouts.ipynb
+:binder-app-launch--notebook-06:        https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/j1-bokeh-tutorial/j1_bokeh_06_linking_and_interactions.ipynb
+:binder-app-launch--notebook-07:        https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/j1-bokeh-tutorial/j1_bokeh_07_bar_and_categorical_data_plots.ipynb
+:binder-app-launch--notebook-08:        https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/j1-bokeh-tutorial/j1_bokeh_08_graph_and_network_plots.ipynb
+:binder-app-launch--notebook-09:        https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/j1-bokeh-tutorial/j1_bokeh_09_geographic_plots.ipynb
 
 
 //  Load Liquid procedures
@@ -118,7 +119,7 @@ dashboards, and data applications.
 mdi:link-variant[24px, md-blue mr-2 ml-3]
 link:{url-bokeh--docs}[Bokeh Dokumentation, {browser-window--new}] +
 mdi:link-variant[24px, md-blue mr-2 ml-3]
-link:{binder-app-launch--bokeh-tutorial}[Bokeh Tutorial (at Binder), {browser-window--new}]
+link:{binder-app-launch--j1-bokeh-tutorial}[Bokeh Tutorial (at Binder), {browser-window--new}]
 
 CAUTION: To use all featues of _Bokeh_, reasonable knowlegde of Javascript
 programming is reqired.

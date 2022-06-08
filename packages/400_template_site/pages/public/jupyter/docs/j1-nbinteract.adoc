@@ -65,6 +65,7 @@ resource_options:
 :binder--home:                          https://mybinder.org/
 :binder--docs:                          https://mybinder.readthedocs.io/en/latest/
 :github-repo--binderhub:                https://github.com/jupyterhub/binderhub
+:binder-app-launch--lab:                https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main
 :binder-app-launch--tree:               https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?urlpath=/tree
 
 //  Load Liquid procedures
