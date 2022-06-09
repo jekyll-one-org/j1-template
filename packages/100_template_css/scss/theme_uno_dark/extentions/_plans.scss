@@ -1,7 +1,7 @@
 /*
 // -----------------------------------------------------------------------------
-// ~/100_template_css/scss/theme_uno_dark/extentions.scss
-// CSS styles for additional elements that extents the theme
+// ~/theme_uno_dark/extentions/_plans.scss
+// Provides general styles for the J1 Plan Banner
 //
 // Product/Info:
 // https://jekyll.one
@@ -13,17 +13,14 @@
 // -----------------------------------------------------------------------------
 */
 
-// Extentions (list)
+// Content
 // -----------------------------------------------------------------------------
 
-// Posts
-// Timeline
+.plan-card {
+  background: #393a3b;
+  color: #e4e6eb;
+}
 
-@import "extentions/bs-doc";
-@import "extentions/drawer";
-@import "extentions/lanes";
-@import "extentions/plans";
-@import "extentions/posts";
-@import "extentions/switches";
-@import "extentions/tags";
-@import "extentions/timeline";
+.plan-card.recommended {
+  box-shadow: 0 0.0625rem 0.125rem rgba(255,255,255,.2), 0 0.3125rem 0.9375rem rgba(255,255,255,.1), 0 0.625rem 5rem 0 rgba(255,255,255,.1);
+}

@@ -15,11 +15,13 @@
 .card {
   border: 0;
   border-radius: 0;
+  background-color: #FAFAFA;
   .card-header {
     border-bottom: 0;
   }
   .card-footer {
-    background-color: $lighten-400 !important;
+//  background-color: $lighten-400 !important;
+    background-color: #F5F5F5 !important;
     border-top: 1px dotted $darken-700;                                         // rgba(0, 0, 0, 0.7)
   }
   hr {

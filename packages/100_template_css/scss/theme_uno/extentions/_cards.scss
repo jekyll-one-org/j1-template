@@ -421,9 +421,10 @@ a.card-title:hover {
 
 // Card links (footer)
 // -----------------------------------------------------------------------------
-// jadams, 2022-05-06: remove dotted link decoration
+// jadams, 2022-05-06: removed (dotted) link decoration
 a.card-link {
-    border-bottom: unset;
+  text-decoration: none;
+  border-bottom: unset;
 }
 
 // Cards variants
