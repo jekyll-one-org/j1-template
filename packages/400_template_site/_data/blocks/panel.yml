@@ -207,11 +207,11 @@ settings:
                 - benefit:              Base modules included
 
               disbenefits:
-                - disbenefit:           No customized Template GEMs
+                - disbenefit:           No early access to latest versions
                 - disbenefit:           No access to Hotfixes and Prereleases
                 - disbenefit:           No extended modules available
                 - disbenefit:           No support offered
-
+                - disbenefit:           No customized Template GEMs
               buttons:
                 - name:                 Select
                   id:                   starter-plan
@@ -242,6 +242,7 @@ settings:
                 - disbenefit:           No access to Hotfixes and Prereleases
                 - disbenefit:           No access to extended manual pages
                 - disbenefit:           No support offered
+                - disbenefit:           No customized Template GEMs
 
               buttons:
                 - name:                 Select
@@ -266,10 +267,11 @@ settings:
                 currency:               $
 
               benefits:
-                - benefit:              Extended modules available
+                - benefit:              Extended modules included
+                - benefit:              Early access to latest versions
                 - benefit:              Access to extended manual pages
                 - benefit:              Base support offered
-                - benefit:              Access to Hotfixes and Prerelease
+                - benefit:              Access to Hotfixes and Prereleases
 
               disbenefits:
                 - disbenefit:           No customized Template GEMs
@@ -298,10 +300,12 @@ settings:
                 currency:               $
 
               benefits:
-                - benefit:              All modules available
-                - benefit:              Access to all manual pages
+                - benefit:              All modules included
+                - benefit:              Full access to latest versions
+                - benefit:              Full access to Hotfixes and Prereleases
+                - benefit:              Full access to all manual pages
                 - benefit:              Full support offered
-                - benefit:              Access to Hotfixes and Prerelease
+                - benefit:              Full access to Hotfixes and Prereleases
                 - benefit:              Customized Template GEMs
 
               disbenefits:

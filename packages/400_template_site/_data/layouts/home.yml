@@ -204,7 +204,7 @@ lanes:
   # INTRO panel
   #
   - lane:
-      enabled:                          true
+      enabled:                          false
       id:                               home_intro_panel
       region:                           body-main
       type:                             async
@@ -224,7 +224,7 @@ lanes:
   # PLAN panel
   #
   - lane:
-      enabled:                          true
+      enabled:                          false
       id:                               home_plan_panel
       region:                           body-main
       type:                             async
@@ -248,7 +248,7 @@ lanes:
       id:                               home_news_panel
       region:                           body-main
       type:                             async
-      properties:                       g-2 elevated-z2
+      properties:                       g-2 elevated-z0
 
   # ----------------------------------------------------------------------------
   # FAB

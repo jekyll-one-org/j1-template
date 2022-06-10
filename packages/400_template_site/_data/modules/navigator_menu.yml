@@ -467,6 +467,9 @@
     - title:                            This site
       icon:                             home-variant-outline
       href:                             /pages/public/about/site
+    - title:                            Features
+      icon:                             wrench
+      href:                             /pages/public/about/features/
     - title:                            Privacy
       icon:                             heart
       href:                             /pages/public/legal/en/privacy/

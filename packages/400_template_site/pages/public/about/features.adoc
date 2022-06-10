@@ -24,12 +24,7 @@ resource_options:
       padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/images/modules/attics/ryan-quintal-1920x1280.jpg
-          alt:                          Photo by Ryan Quintal on Unsplash
-          badge:
-            type:                       unsplash
-            author:                     Ryan Quintal
-            href:                       https://unsplash.com/@ryanquintal
+        - url:                          /assets/images/modules/attics/runner-1920x1200.jpg
 ---
 
 // Page Initializer
@@ -53,9 +48,10 @@ resource_options:
 
 
 // Page content
+// {badge-j1--license} {badge-j1--version-latest} {badge-j1-gh--last-commit} {badge-j1--downloads}
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ifeval::[{badges-enabled} == true]
-{badge-j1--license} {badge-j1--version-latest} {badge-j1-gh--last-commit} {badge-j1--downloads}
+{badge-j1--version-latest} {badge-j1--downloads}
 endif::[]
 
 // Include sub-documents (if any)
