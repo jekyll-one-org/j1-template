@@ -26,7 +26,7 @@ gem build j1-template.gemspec
 Add this line to your application's Gemfile:
 
 ``` ruby
-gem 'j1_template', '~> 2022.4.3'
+gem 'j1_template', '~> 2022.4.4'
 ```
 
 and install the locally created RubGem as:
