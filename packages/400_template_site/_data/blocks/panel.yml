@@ -203,10 +203,13 @@ settings:
                 currency:               $
 
               benefits:
-                - benefit:              Open source
+                - benefit:              Use lifetime at no costs
+                - benefit:              Base modules included
 
               disbenefits:
-                - disbenefit:           This Plan displays a Beautiful Jekyll ad
+                - disbenefit:           No customized Template GEMs
+                - disbenefit:           No access to Hotfixes and Prereleases
+                - disbenefit:           No extended modules available
                 - disbenefit:           No support offered
 
               buttons:
@@ -231,10 +234,13 @@ settings:
                 currency:               $
 
               benefits:
-                - benefit:              Warm fuzzy feeling knowing you're supporting open source
+                - benefit:              Early access to latest versions
+                - benefit:              Extended modules included
 
               disbenefits:
-                - disbenefit:           This Plan displays a Beautiful Jekyll ad
+                - disbenefit:           No customized Template GEMs
+                - disbenefit:           No access to Hotfixes and Prereleases
+                - disbenefit:           No access to extended manual pages
                 - disbenefit:           No support offered
 
               buttons:
@@ -260,13 +266,14 @@ settings:
                 currency:               $
 
               benefits:
-                - benefit:              Warm fuzzy feeling knowing you're supporting open source
-                - benefit:              Remove Beautiful Jekyll ads
-                - benefit:              Showcased as a Featured User
-                - benefit:              <b>Thank you</b> shout out on social media
+                - benefit:              Extended modules available
+                - benefit:              Access to extended manual pages
+                - benefit:              Base support offered
+                - benefit:              Access to Hotfixes and Prerelease
 
               disbenefits:
-                - disbenefit:           No support offered
+                - disbenefit:           No customized Template GEMs
+
 
               buttons:
                 - name:                 Select
@@ -291,13 +298,11 @@ settings:
                 currency:               $
 
               benefits:
-                - benefit:              Warm fuzzy feeling knowing you're supporting open source
-                - benefit:              Remove Beautiful Jekyll ads
-                - benefit:              Showcased as a Featured User
-                - benefit:              <b>Thank you</b> shout out on social media
-                - benefit:              Access to Dark Mode skin
-                - benefit:              Listed as an Official Sponsor
-                - benefit:              Access to virtual office hours
+                - benefit:              All modules available
+                - benefit:              Access to all manual pages
+                - benefit:              Full support offered
+                - benefit:              Access to Hotfixes and Prerelease
+                - benefit:              Customized Template GEMs
 
               disbenefits:
 

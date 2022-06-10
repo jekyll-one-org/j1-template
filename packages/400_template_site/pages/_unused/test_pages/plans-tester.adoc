@@ -1,6 +1,6 @@
 ---
 title:                                  Tester
-tagline:                                button
+tagline:                                plans
 date:                                   2020-11-03 00:00:00
 description: >
                                         Welcome to the preview page focussing on the image module. This page
@@ -8,30 +8,23 @@ description: >
                                         content using lightboxes, carousels (slider), and galleries.
 
 categories:                             [ Testpages ]
-tags:                                   [ Example ]
+tags:                                   [ Example, Plans ]
 
 comments:                               false
 fab_menu_id:                            page_ctrl_simple
 
-permalink:                              /pages/public/learn/card_tester/
+permalink:                              /pages/public/learn/plan_tester/
 regenerate:                             false
 
-resources:                              [
-                                          clipboard, rouge, carousel, lightbox,
-                                          justifiedGallery, lightGallery
-                                        ]
+resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
   - attic:
       padding_top:                      400
       padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
-          alt:                          Photo by Ricardo Gomez Angel on Unsplash
-          badge:
-            type:                       unsplash
-            author:                     Ricardo Gomez Angel
-            href:                       https://unsplash.com/@ripato/portfolio
+        - url:                          /assets/images/modules/attics/shutterstock_sponsor-1920x1280.jpg
+          alt:                          shutterstock_sponsor-1920x1280.jpg
 ---
 
 // Page Initializer
@@ -50,7 +43,7 @@ resource_options:
 
 // Load page attributes
 // -----------------------------------------------------------------------------
-{% include {{load_attributes}} scope="all" %}
+{% include {{load_attributes}} scope="global" %}
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -58,71 +51,104 @@ resource_options:
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 
+== Plans
+
+_Github Sponsores_ support to invest in the open source projects you like to
+use or for businesses: you depend on. Contributors are working behind the
+scenes to make open source better for everyone -- give them the help and
+recognition they deserve.
+
+Fund our project that make up your web site easy to manage for excellent
+performance, reliability, and stability.
+
 ++++
-<div>
+<div class="container-fluid" role="main">
+  <div class="row g-0">
+    <div class="col">
+      <div id="plans-container" class="container mt-5">
+        <div class="row g-0">
 
-  <article class="card raised-z3 mb-5">
-    <h3 id="35983" class="card-header bg-primary">Welcome</h3>
-    <!-- h5 class="notoc card-subtitle text-muted mb-2">jekyll for everyone</h5 -->
-
-    <div class="row mx-0">
-
-      <div class="col-md-6 img-bg--fill px-0"
-        style="border-right: 1px dotted rgba(0, 0, 0, 0.25); background-image: url(/assets/images/modules/attics/katie-moum-1920x1280.jpg);">
-      </div>
-
-      <!-- div class="col-md-6 px-0">
-        <img class="img__object--cover" src="/assets/images/modules/attics/katie-moum-1920x1280.jpg" alt="Welcome">
-      </div -->
-
-      <div class="col-md-6 p-0">
-        <div class="card-body r-text-300">All you’re doing at the end of the day is writing your content, and the J1 Template does all the tricky things: putting out HTML, Javascript, and CSS. As a result, the site creation process gets out of your way.   Sounds fun, isn’t it?  ...</div>
-        <div class="card-footer r-text-200">
-          
-          <div class="card-footer-text">
-            <i class="mdi mdi-calendar-blank mdi-md-grey mr-1"></i> 2021 March, 28
+          <div class="col-sm-6 col-lg-3 mt-2 mb-2">
+            <div class="plan-card raised-z2">
+              <div class="plan-name">Starter</div>
+              <div class="plan-price">
+                <div class="price-currency">$</div>
+                <div class="price-amount">0</div>
+                <div class="price-period">/month</div>
+              </div>
+              <hr>
+              <div class="plan-benefits">
+                <div class="plan-benefit">Open source</div>
+                <div class="plan-disbenefit">This Plan displays a Beautiful Jekyll ad</div>
+                <div class="plan-disbenefit">No support offered</div>
+              </div>
+              <a class="btn btn-primary plan-select" href="/pages/public/plans/plan_details/" target="_blank" rel="noopener noreferrer">Select</a>
+            </div>
           </div>
-          <a class="card-link text-muted text-lowercase" href="/posts/public/featured/2021/03/28/welcome-to-j1/#readmore">
-          Read · jekyll for everyone
-          </a>
+
+          <div class="col-sm-6 col-lg-3 mt-2 mb-2">
+            <div class="plan-card raised-z2">
+              <div class="plan-name">Base</div>
+              <div class="plan-price">
+                <div class="price-currency">$</div>
+                <div class="price-amount">2</div>
+                <div class="price-period">/month</div>
+              </div>
+              <hr>
+              <div class="plan-benefits">
+                <div class="plan-benefit">Warm fuzzy feeling knowing you're supporting open source</div>
+                <div class="plan-disbenefit">This Plan displays a Beautiful Jekyll ad</div>
+                <div class="plan-disbenefit">No support offered</div>
+              </div>
+              <a class="btn btn-primary plan-select" href="https://github.com/sponsors/daattali/sponsorships?tier_id=40732" target="_blank" rel="noopener noreferrer">Select</a>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-3 mt-2 mb-2">
+            <div class="plan-card raised-z5 recommended">
+              <div class="plan-name">Developer</div>
+              <div class="plan-price">
+                <div class="price-currency">$</div>
+                <div class="price-amount">5</div>
+                <div class="price-period">/month</div>
+              </div>
+              <hr>
+              <div class="plan-benefits">
+                <div class="plan-benefit">Warm fuzzy feeling knowing you're supporting open source</div>
+                <div class="plan-benefit"><strong>Remove Beautiful Jekyll ads</strong></div>
+                <div class="plan-benefit">Showcased as a <a href="https://beautifuljekyll.com/examples">Featured User</a></div>
+                <div class="plan-benefit">"Thank you" shout out on social media</div>
+                <div class="plan-disbenefit">No support offered</div>
+              </div>
+              <a class="btn btn-primary plan-select" href="https://github.com/sponsors/daattali/sponsorships?tier_id=7362" target="_blank" rel="noopener noreferrer">Select</a>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-3 mt-2 mb-2">
+            <div class="plan-card raised-z2">
+              <div class="plan-name">Professional</div>
+              <div class="plan-price">
+                <div class="price-currency">$</div>
+                <div class="price-amount">10</div>
+                <div class="price-period">/month</div>
+              </div>
+              <hr>
+              <div class="plan-benefits">
+                <div class="plan-benefit">Warm fuzzy feeling knowing you're supporting open source</div>
+                <div class="plan-benefit"><strong>Remove Beautiful Jekyll ads</strong></div>
+                <div class="plan-benefit">Showcased as a <a href="https://beautifuljekyll.com/examples">Featured User</a></div>
+                <div class="plan-benefit">"Thank you" shout out on social media</div>
+                <div class="plan-benefit">Access to Dark Mode skin</div>
+                <div class="plan-benefit">Listed as an <a href="https://github.com/daattali/beautiful-jekyll#sponsors">Official Sponsor</a></div>
+                <div class="plan-benefit">Access to virtual office hours</div>
+              </div>
+              <a class="btn btn-primary plan-select" href="https://github.com/sponsors/daattali/sponsorships?tier_id=39856" target="_blank" rel="noopener noreferrer">Select</a>
+            </div>
+          </div>
+
         </div>
       </div>
-
-  </div>
-
-  </article>
-
-
-  <article class="card raised-z5 mb-5">
-    <h3 id="35983" class="card-header bg-primary">Welcome</h3>
-    <!-- h5 class="notoc card-subtitle text-muted mb-2">jekyll for everyone</h5 -->
-    <div class="card-body r-text-300">All you’re doing at the end of the day is writing your content, and the J1 Template does all the tricky things: putting out HTML, Javascript, and CSS. As a result, the site creation process gets out of your way.   Sounds fun, isn’t it?  ...</div>
-    <div class="card-footer r-text-200">
-      <div class="card-footer-text">
-        <i class="mdi mdi-calendar-blank mr-1"></i> 2021 March, 28
-      </div>
-      <a class="card-link md-grey-800 font-weight-bold g-font-size-12 text-uppercase" href="/posts/public/featured/2021/03/28/welcome-to-j1/#readmore">
-      Read · jekyll for everyone
-      </a>
     </div>
-  </article>
-
+  </div>
 </div>
-
-<style>
-
-
-.g-bg-img-hero {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-}
-
-.g-px-0 {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-}
-
-</style>
-
 ++++
