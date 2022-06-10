@@ -221,6 +221,16 @@ lanes:
       properties:                       elevated-z0
 
   # ----------------------------------------------------------------------------
+  # PLAN panel
+  #
+  - lane:
+      enabled:                          true
+      id:                               home_plan_panel
+      region:                           body-main
+      type:                             async
+      properties:                       g-2 elevated-z0
+
+  # ----------------------------------------------------------------------------
   # IMAGE banner
   #
   - lane:

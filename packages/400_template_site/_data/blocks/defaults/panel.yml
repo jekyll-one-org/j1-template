@@ -31,6 +31,27 @@ defaults:
   data_path:                            /assets/data/panel/index.html
 
   # ----------------------------------------------------------------------------
+  # PLAN panel
+  #
+  plan:
+    # --------------------------------------------------------------------------
+    # PLAN panel properties
+    #
+    enabled:                        false
+    id:                             home_plan_panel
+    comment:                        Home Plan Panel
+    type:                           plan
+    animate:                        false
+    properties:                     mt-5 mb-5
+    plan_price:
+      currency:                     $
+    provider:                       Github
+    account:                        daattali
+    title:                          J1 Plans
+    title_translate:                notranslate                             # translate|notranslate
+    tagline:                        your way
+
+  # ----------------------------------------------------------------------------
   # INTRO panel
   #
   intro:

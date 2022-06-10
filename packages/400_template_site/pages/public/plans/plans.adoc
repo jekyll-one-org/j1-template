@@ -11,7 +11,7 @@ description: >
 
 
 categories:                             [ Info ]
-tags:                                   [ Info, Jekyll, Template ]
+tags:                                   [ Plan, Template ]
 
 robots:
   index:                                false
@@ -25,7 +25,7 @@ fab_menu_id:                            page_ctrl_simple
 permalink:                              /pages/public/plans/plan_details/
 regenerate:                             false
 
-resources:                              [ animate, clipboard, carousel, lightbox, rouge ]
+resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
   - attic:
       padding_top:                      400
@@ -44,7 +44,6 @@ resource_options:
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
-:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -59,14 +58,40 @@ resource_options:
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-[[starter-free]]
-== Starter
+== Plans
 
-[role="mb-3"]
-image::/assets/images/pages/panels/responsive-text-1920x800.jpg[{{page.title}}]
+lorem:sentences[5]
 
-A good user experience browsing a Web site is one of the most important
-features a website offers as a must, besides excellent content. Presenting
-content at its best on all devices for all window sizes makes a great Web
-brilliant. J1 Template supports your Web for full responsiveness, for the
-best user experience on all modern devices.
+lorem:sentences[3]
+
+=== Starter
+
+lorem:sentences[5]
+
+
+=== Base
+
+lorem:sentences[5]
+
+=== Developer
+
+lorem:sentences[5]
+
+=== Expert
+
+lorem:sentences[5]
+
+
+== Modules
+
+lorem:sentences[5]
+
+lorem:sentences[3]
+
+=== Base
+
+lorem:sentences[5]
+
+=== Extended
+
+lorem:sentences[5]

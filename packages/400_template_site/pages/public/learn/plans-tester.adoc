@@ -11,12 +11,12 @@ categories:                             [ Testpages ]
 tags:                                   [ Example, Plans ]
 
 comments:                               false
-fab_menu_id:                            default
+fab_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/learn/plan_tester/
 regenerate:                             false
 
-resources:                              [ clipboard, rouge ]
+resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
   - attic:
       padding_top:                      400
@@ -63,18 +63,18 @@ performance, reliability, and stability.
 
 ++++
 <div class="container-fluid" role="main">
-  <div class="row">
-    <div class=" col ">
-      <div id="plans-container" class="container">
-        <div class="row no-gutters">
+  <div class="row g-0">
+    <div class="col">
+      <div id="plans-container" class="container mt-5">
+        <div class="row g-0">
 
           <div class="col-sm-6 col-lg-3 mt-2 mb-2">
-            <div class="plan-card">
+            <div class="plan-card raised-z2">
               <div class="plan-name">Starter</div>
               <div class="plan-price">
-                <div class="dollarsign">$</div>
-                <div class="pricenum">0</div>
-                <div class="permonth">/month</div>
+                <div class="price-currency">$</div>
+                <div class="price-amount">0</div>
+                <div class="price-period">/month</div>
               </div>
               <hr>
               <div class="plan-benefits">
@@ -82,17 +82,17 @@ performance, reliability, and stability.
                 <div class="plan-disbenefit">This Plan displays a Beautiful Jekyll ad</div>
                 <div class="plan-disbenefit">No support offered</div>
               </div>
-              <a class="btn btn-primary plan-select" href="/pages/public/plans/plan_details/#starter-free" target="_blank" rel="noopener noreferrer">Select</a>
+              <a class="btn btn-primary plan-select" href="/pages/public/plans/plan_details/" target="_blank" rel="noopener noreferrer">Select</a>
             </div>
           </div>
 
           <div class="col-sm-6 col-lg-3 mt-2 mb-2">
-            <div class="plan-card">
+            <div class="plan-card raised-z2">
               <div class="plan-name">Base</div>
               <div class="plan-price">
-                <div class="dollarsign">$</div>
-                <div class="pricenum">2</div>
-                <div class="permonth">/month</div>
+                <div class="price-currency">$</div>
+                <div class="price-amount">2</div>
+                <div class="price-period">/month</div>
               </div>
               <hr>
               <div class="plan-benefits">
@@ -100,17 +100,17 @@ performance, reliability, and stability.
                 <div class="plan-disbenefit">This Plan displays a Beautiful Jekyll ad</div>
                 <div class="plan-disbenefit">No support offered</div>
               </div>
-              <a class="btn btn-primary plan-select" href="https://github.com/sponsors/daattali/sponsorships?tier_id=40732">Select</a>
+              <a class="btn btn-primary plan-select" href="https://github.com/sponsors/daattali/sponsorships?tier_id=40732" target="_blank" rel="noopener noreferrer">Select</a>
             </div>
           </div>
 
           <div class="col-sm-6 col-lg-3 mt-2 mb-2">
-            <div class="plan-card recommended">
+            <div class="plan-card raised-z5 recommended">
               <div class="plan-name">Developer</div>
               <div class="plan-price">
-                <div class="dollarsign">$</div>
-                <div class="pricenum">5</div>
-                <div class="permonth">/month</div>
+                <div class="price-currency">$</div>
+                <div class="price-amount">5</div>
+                <div class="price-period">/month</div>
               </div>
               <hr>
               <div class="plan-benefits">
@@ -120,17 +120,17 @@ performance, reliability, and stability.
                 <div class="plan-benefit">"Thank you" shout out on social media</div>
                 <div class="plan-disbenefit">No support offered</div>
               </div>
-              <a class="btn btn-primary plan-select" href="https://github.com/sponsors/daattali/sponsorships?tier_id=7362">Select</a>
+              <a class="btn btn-primary plan-select" href="https://github.com/sponsors/daattali/sponsorships?tier_id=7362" target="_blank" rel="noopener noreferrer">Select</a>
             </div>
           </div>
 
           <div class="col-sm-6 col-lg-3 mt-2 mb-2">
-            <div class="plan-card">
-              <div class="plan-name">Expert</div>
+            <div class="plan-card raised-z2">
+              <div class="plan-name">Professional</div>
               <div class="plan-price">
-                <div class="dollarsign">$</div>
-                <div class="pricenum">10</div>
-                <div class="permonth">/month</div>
+                <div class="price-currency">$</div>
+                <div class="price-amount">10</div>
+                <div class="price-period">/month</div>
               </div>
               <hr>
               <div class="plan-benefits">
@@ -142,7 +142,7 @@ performance, reliability, and stability.
                 <div class="plan-benefit">Listed as an <a href="https://github.com/daattali/beautiful-jekyll#sponsors">Official Sponsor</a></div>
                 <div class="plan-benefit">Access to virtual office hours</div>
               </div>
-              <a class="btn btn-primary plan-select" href="https://github.com/sponsors/daattali/sponsorships?tier_id=39856">Select</a>
+              <a class="btn btn-primary plan-select" href="https://github.com/sponsors/daattali/sponsorships?tier_id=39856" target="_blank" rel="noopener noreferrer">Select</a>
             </div>
           </div>
 

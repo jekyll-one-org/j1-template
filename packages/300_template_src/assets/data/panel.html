@@ -320,6 +320,141 @@ exclude_from_search:                    true
         {% assign panel_settings = nil %}
 
 
+        {% comment %} Collect PLAN panel
+        ------------------------------------------------------------------------ {% endcomment %}
+        {% when 'plan' %}
+        {% assign panel_options = panel_config_defaults.plan | merge: panel_settings %}
+        {% if debug %}<!-- panel_options:  {{panel_options}} -->{% endif %}
+
+        {% assign plan_details_page = panel_options.plan_details_page %}
+
+        {% if panel_options.provider contains 'Github' %}
+          {% assign provider_url = 'https://github.com/sponsors' %}
+        {% else %}
+          {% assign provider_url = 'https://kaputtnik.com' %}
+        {% endif %}
+
+        <!-- Panel {{panel_settings.id}} -->
+        <section id="{{panel_settings.id}}" class="container">
+          <!-- Main Container -->
+          <div class="row {{panel_settings.properties}}">
+            <!-- Heading -->
+            <div>
+              <div class="{{panel_settings.animate}} mb-2">
+                <h2 class="g-font-weight-500 mb-0 {{card_title_translate}}">{{panel_settings.title}}</h2>
+                <p class="tagline mb-0"><b>{{panel_settings.tagline}}</b></p>
+                <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-2"></div>
+              </div>
+              <!-- Description -->
+              <div class="{{description_properties}}">{{panel_settings.description}}</div>
+            </div>
+            <!-- End Heading -->
+
+            <!-- Cards -->
+            <div class="container-fluid" role="main">
+              <div class="row g-0">
+                <div class="col">
+                  <div id="plans-container" class="container mt-5">
+                    <div class="row g-0">
+
+                    {% assign card_items = cards|size %}
+                    {% for card in cards %}
+
+                      {% for items in card %}
+                        {% for item in items[1] %}
+                          {% assign key   = item[0] %}
+                          {% assign value = item[1] %}
+                          {% if key == 'enabled' %}         {% assign card_enabled          = value %}                  {% endif %}
+                          {% if key == 'recommended' %}     {% assign plan_recommended      = value %}                  {% endif %}
+                          {% if key == 'name' %}            {% assign card_title            = value | strip_newlines%}  {% endif %}
+                          {% if key == 'name_translate' %}  {% assign card_title_translate  = value %}                  {% endif %}
+                          {% if key == 'price' %}           {% assign price                 = value %}                  {% endif %}
+                          {% if key == 'benefits' %}        {% assign benefits         = value %}                  {% endif %}
+                          {% if key == 'disbenefits' %}     {% assign disbenefits      = value %}                  {% endif %}
+                          {% if key == 'buttons' %}         {% assign card_buttons          = value %}                  {% endif %}
+                        {% endfor %}
+                        {% if card_enabled == false %} {% assign card_items = card_items|minus:1 %} {% endif %}
+                      {% endfor %}
+
+                      {% include {{select_icon_size}} family=icon_family size=icon_size %}
+                      {% assign icon_size = size %}
+
+                      {% comment %} extract sponsor link from button data (HoH)
+                      ------------------------------------------------------------------ {% endcomment %}
+                      {% for items in card_buttons %} {% for item in items %}
+                        {% if item[0] == 'href' %}
+                          {% for elm in item[1] %}
+                            {% assign key   = elm[0] %}
+                            {% assign value = elm[1] %}
+
+                             {% if key == 'tier_id' %}
+                               {% if elm[1] contains 'plan_details_page' %}
+                                 {% assign sponsor_link = plan_details_page %}
+                               {% else %}
+                                 {% capture sponsor_link %}{{provider_url}}/{{panel_options.account}}/sponsorships?tier_id={{elm[1]}}{% endcapture %}
+                               {% endif %}
+                             {% endif %}
+                          {% endfor %}
+                        {% endif %}
+                      {% endfor %} {% endfor %}
+
+                      {% if card_enabled %}
+                      <div class="col-sm-6 col-lg-3 mt-2 mb-2">
+
+                        {% if plan_recommended %}
+                        <div class="plan-card recommended raised-z2">
+                        {% else %}
+                        <div class="plan-card raised-z2">
+                        {% endif %}
+
+                          <div class="plan-name {{card_title_translate}}">{{card_title}}</div>
+                          <div class="plan-price">
+                            <div class="price-currency">{{price.currency}}</div>
+                            <div class="price-amount">{{price.amount}}</div>
+                            <div class="price-period">/{{price.period}}</div>
+                          </div>
+                          <hr>
+
+                          <div class="plan-benefits">
+                            {% comment %} extract benefits (AoH)
+                            ---------------------------------------------------- {% endcomment %}
+                            {% for benefit in benefits %}
+                              {% for elm in benefit %}
+                                {% assign value = elm[1] %}
+                                <div class="plan-benefit">{{value}}</div>
+                              {% endfor %}
+                            {% endfor %}
+                            {% comment %} disbenefit benefits (AoH)
+                            ---------------------------------------------------- {% endcomment %}
+                            {% for disbenefit in disbenefits %}
+                              {% for elm in disbenefit %}
+                                {% assign value = elm[1] %}
+                                <div class="plan-disbenefit">{{value}}</div>
+                              {% endfor %}
+                            {% endfor %}
+                          </div>
+                          <a class="btn btn-primary plan-select" href="{{sponsor_link}}" target="_blank" rel="noopener noreferrer">Select</a>
+                        </div>
+                      </div>
+                      {% endif %}
+                      <!-- End Card -->
+                    {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div> <!-- End Cards -->
+            {% comment %} END cards
+            -------------------------------------------------------------------- {% endcomment %}
+
+          </div> <!-- END main container -->
+        </section> <!-- END Panel {{panel_settings.id}} -->
+
+        {% comment %} Reset element variables (already processed)
+        ------------------------------------------------------------------------ {% endcomment %}
+        {% assign panel_settings = nil %}
+
+
         {% comment %} Collect SERVICE panel
         ------------------------------------------------------------------------ {% endcomment %}
         {% when 'service' %}

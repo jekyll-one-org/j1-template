@@ -612,7 +612,7 @@ var j1 = (function () {
 
       {% comment %} NOTE
       strategy for MutationObserver callbacks to monitor DOM changes
-      needs to be checked if multiple containers are chenaged in a row
+      needs to be checked if multiple containers are changed in a row
       -------------------------------------------------------------------------- {% endcomment %}
       var cb_load_closure = function(panel_id) {
         return function ( responseTxt, statusTxt, xhr ) {
@@ -643,6 +643,7 @@ var j1 = (function () {
         {% assign value = items[1] %}
 
         {% if key == 'intro'     %}  {% assign panel_config  = value %} {% endif %}
+        {% if key == 'plan'      %}  {% assign panel_config  = value %} {% endif %}
         {% if key == 'service'   %}  {% assign panel_config  = value %} {% endif %}
         {% if key == 'step'      %}  {% assign panel_config  = value %} {% endif %}
         {% if key == 'news'      %}  {% assign panel_config  = value %} {% endif %}
@@ -2272,8 +2273,10 @@ var j1 = (function () {
             logger.debug('\n' + 'Page growth ratio reached the threshold: ', pageGrowthRatio);
           }
 
-          // identify a 'staticPage'
-          if (pageGrowthRatio < autoScrollRatioThreshold) {
+          // identify a 'static page'
+          // unclear why a static page can "shrink" (found page height at 99%)
+          //
+          if (pageGrowthRatio > 0 && pageGrowthRatio <= autoScrollRatioThreshold) {
             staticPage = true;
           } else {
             // identify a page as 'dynamic' if autoScrollRatioThreshold reached

@@ -152,6 +152,167 @@ settings:
                     href:               /pages/public/panels/intro_panel#launch-ready
 
   # ----------------------------------------------------------------------------
+  # PLAN Panel
+  #
+  plan:
+    # --------------------------------------------------------------------------
+    # PLAN panel properties (Github Sponsors)
+    #
+    - name:                             Home Plan Panel
+      panel:
+        enabled:                        true
+        id:                             home_plan_panel
+        comment:                        Home Plan Panel
+        type:                           plan
+        animate:                        false
+        properties:                     mt-5 mb-5
+        plan_details_page:              /pages/public/plans/plan_details/
+
+        provider:                       Github
+        account:                        daattali
+
+        title:                          J1 Plans
+        title_translate:                notranslate                             # translate|notranslate
+        tagline:                        your way
+        description_properties:         mt-3 mr-3 mb-3
+        description: >
+                                        <p class="dropcap">
+                                          Github Sponsores support to invest in the open source
+                                          projects you like to use or for businesses: you depend on.
+                                          Contributors are working behind the scenes to make open
+                                          source better for everyone — give them the help and
+                                          recognition they deserve.
+                                        </p>
+                                        <p>
+                                          Fund our project that make up your web site easy to manage
+                                          for excellent performance, reliability, and stability.
+                                        </p>
+
+        cards:
+
+          - name:                       Starter
+            card:
+              enabled:                  true
+              recommended:              false
+              name:                     Starter
+              name_translate:           notranslate                             # translate|notranslate
+
+              price:
+                amount:                 0
+                period:                 month
+                currency:               $
+
+              benefits:
+                - benefit:              Open source
+
+              disbenefits:
+                - disbenefit:           This Plan displays a Beautiful Jekyll ad
+                - disbenefit:           No support offered
+
+              buttons:
+                - name:                 Select
+                  id:                   starter-plan
+                  translate:            notranslate                             # translate|notranslate
+                  title:                Select
+                  href:
+                    tier_id:            plan_details_page
+                    target:             blank
+
+          - name:                       Base
+            card:
+              enabled:                  true
+              recommended:              false
+              name:                     Base
+              name_translate:           notranslate                             # translate|notranslate
+
+              price:
+                amount:                 2
+                period:                 month
+                currency:               $
+
+              benefits:
+                - benefit:              Warm fuzzy feeling knowing you're supporting open source
+
+              disbenefits:
+                - disbenefit:           This Plan displays a Beautiful Jekyll ad
+                - disbenefit:           No support offered
+
+              buttons:
+                - name:                 Select
+                  id:                   base-plan
+                  translate:            notranslate                             # translate|notranslate
+                  title:                Select
+                  class:                btn btn-primary plan-select
+                  href:
+                    tier_id:            40732
+                    target:             blank
+
+          - name:                       Developer
+            card:
+              enabled:                  true
+              recommended:              true
+              name:                     Developer
+              name_translate:           notranslate                             # translate|notranslate
+
+              price:
+                amount:                 5
+                period:                 month
+                currency:               $
+
+              benefits:
+                - benefit:              Warm fuzzy feeling knowing you're supporting open source
+                - benefit:              Remove Beautiful Jekyll ads
+                - benefit:              Showcased as a Featured User
+                - benefit:              <b>Thank you</b> shout out on social media
+
+              disbenefits:
+                - disbenefit:           No support offered
+
+              buttons:
+                - name:                 Select
+                  id:                   developer-plan
+                  translate:            notranslate                             # translate|notranslate
+                  title:                Select
+                  class:                btn btn-primary plan-select
+                  href:
+                    tier_id:            7362
+                    target:             blank
+
+          - name:                       Professional
+            card:
+              enabled:                  true
+              recommended:              false
+              name:                     Professional
+              name_translate:           notranslate                             # translate|notranslate
+
+              price:
+                amount:                 10
+                period:                 month
+                currency:               $
+
+              benefits:
+                - benefit:              Warm fuzzy feeling knowing you're supporting open source
+                - benefit:              Remove Beautiful Jekyll ads
+                - benefit:              Showcased as a Featured User
+                - benefit:              <b>Thank you</b> shout out on social media
+                - benefit:              Access to Dark Mode skin
+                - benefit:              Listed as an Official Sponsor
+                - benefit:              Access to virtual office hours
+
+              disbenefits:
+
+              buttons:
+                - name:                 Select
+                  id:                   professional-plan
+                  translate:            notranslate                             # translate|notranslate
+                  title:                Select
+                  class:                btn btn-primary plan-select
+                  href:
+                    tier_id:            39856
+                    target:             blank
+
+
+  # ----------------------------------------------------------------------------
   # NEWS Panel
   #
   news:
