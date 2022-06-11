@@ -88,6 +88,7 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 <!-- [INFO   ] [ j1.modules.navigator.mmenu_sidebar.html ] [Start processing: sidebar] -->
 <div id="{{sidebar_options.id}}" class="mm-side tex2jax_ignore" style="display:none">
+  <h2 class="mb-4">{{sidebar_options.title}}</h2>
 {% for boxes in sidebar_options.boxes %}
   {% for box in boxes %}
 
@@ -110,7 +111,7 @@ exclude_from_search:                    true
           <!-- [INFO   ] [ j1.modules.navigator.mmenu_sidebar.html ] [USER info enabled] -->
           <!-- [INFO   ] [ j1.modules.navigator.mmenu_sidebar.html ] [Write widget placeholder: USER info] -->
           <div id="user-info" class="widget">
-            <h3 class="heading">{{title}}</h3>
+            <h2 class="heading">{{title}}</h2>
             <ul id="display_user_details" class="link">
               {% for link in links %}
 
@@ -138,7 +139,7 @@ exclude_from_search:                    true
                   {% capture link_text %}{{link.title}}: {{link.value}}{% endcapture %}
                 {% endif %}
 
-                <li><a {{macro_id}} href="{{link.href|strip}}" {{target}} rel="noopener noreferrer">{{icon}} {{link_text}}</a></li>
+                <li><a class="link-no-decoration" {{macro_id}} href="{{link.href|strip}}" {{target}} rel="noopener noreferrer">{{icon}} {{link_text}}</a></li>
 
               {% endfor %}
             </ul>
@@ -189,7 +190,7 @@ exclude_from_search:                    true
                 {% capture link_text %}{{link.title}}: {{link.value}}{% endcapture %}
               {% endif %}
 
-              <li><a {{macro_id}} href="{{link.href|strip}}" {{target}} rel="noopener noreferrer">{{icon}} {{link_text}}</a></li>
+              <li><a class="link-no-decoration" {{macro_id}} href="{{link.href|strip}}" {{target}} rel="noopener noreferrer">{{icon}} {{link_text}}</a></li>
 
             {% endfor %}
             </ul>
@@ -234,7 +235,7 @@ exclude_from_search:                    true
                   {% capture link_text %}"{{link.title}}: {{link.title}}"{% endcapture %}
                 {% endif %}
 
-                <li><a href="{{link.href|strip}}" {{target}} rel="noopener noreferrer">{{icon}}{{link_text}}</a></li>
+                <li><a class="link-no-decoration" href="{{link.href|strip}}" {{target}} rel="noopener noreferrer">{{icon}}{{link_text}}</a></li>
 
               {% endfor %}
             </ul>

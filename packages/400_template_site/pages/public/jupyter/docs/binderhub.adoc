@@ -133,15 +133,15 @@ A list of supported
 configuration files (roughly in the order of build priority) can be found
 below.
 
-=== environment.yml
+=== The environment file
 
 The `environment.yml` configuration is the standard configuration file used
 by *Conda* that lets you install any kind of package, including Python, R,
-and C/C++ packages. The `repo2docker` does *not* use your environment.yml
+and C/C++ packages. The `repo2docker` does *not* use your `environment.yml`
 to create and activate a new conda environment. Rather, it updates a base
 conda environment defined here with the packages listed in your
-`environment.yml`. This means that the environment will always have the
-same default name, not the name specified in your `environment.yml`.
+environment file. This means that the environment will always have the
+same default name, not the name specified in your environment file.
 
 [source, yaml]
 ----
@@ -155,7 +155,7 @@ dependencies:
   - statsmodels
 ----
 
-If you use `environment.yml`, then Binder will use a *Miniconda* distribution
+If you use a environment file, then Binder will use a *Miniconda* distribution
 to install your packages. However, you may still want to use *pip*. In this
 case, you should *not* use a `requirements.txt` file, but instead use a pip
 *section* in `environment.yml`. This repository is an example of how to
@@ -177,14 +177,15 @@ dependencies:
     - matplotlib
 ----
 
-=== requirements.txt
+=== The requirements file
 
-This configuration specifies a list of *Python packages* that should be
-installed in your environment. Our requirements.txt example on GitHub shows
-a typical requirements file.
+The configuration `requirements.txt` specifies a list of *Python packages*
+that should be installed in your environment. The `requirements.txt` example
+J1 is using on link:{url-j1--gh-binder-repo}[GitHub, {browser-window--new}]
+shows a typical setup used with J1 Template for the example notebooks to run.
 
-For Binder, the requirements.txt file should list all Python libraries that
-your notebooks depend on, and they will be installed using:
+For Binder, a requirements file should list *all* Python libraries that your
+notebooks depend on, and they will be installed under the hood using:
 
 [source, sh, role="noclip"]
 ----
@@ -210,16 +211,61 @@ WARNING: If you include a Python version in a `runtime.txt` file in
 *addition* to your `environment.yml`, your `runtime.txt` will be
 *ignored*.
 
-=== runtime.txt
+=== The apt file
 
-Sometimes you want to specify the *version* of the runtime (e.g. the version
-of Python), but the environment specification format will not let you
-specify this information (e.g. requirements.txt). For these cases, we have a
-special file, runtime.txt.
+Contrasting the requirements or the environment file to install Python-specific
+modules, the file `apt.txt`  is used to install *OS packages* like `ffmeg`
+to make them usable in Jupyter Notebooks. The video library is a good
+example of why OS packages are needed.
+
+The video library `ffmeg` comes in two flavors:
+
+* the OS packages to install the application binaries of ffmeg
+* the Python/Jupyter package for ffmeg to integrate the video library in
+  Jupyter Notebooks
+
+The Python/Jupyter package for ffmeg is just a *wrapper* around the OS package
+of `ffmeg` to make the library *usable* for Jupyter. A prerequisite to using
+the wrapper is an installation `ffmeg` for the OS, for the resulting Docker
+image.
+
+The base OS used for the Docker images created by Binder is the Ubuntu, a free
+Linux distribution. As the name `apt.txt` of the file implies, the configuration
+goes with the `apt`, the command to install new software packages for Ubuntu.
+
+.Example
+[source, text]
+----
+ffmpeg
+----
+
+The apt file is a simple text file that specifies OS packages. The format is
+simple: use one package to be installed *per line*.
+
+NOTE: The apt command is a powerful command-line tool that works with
+Ubuntu's Advanced Packaging Tool (APT) performs such functions as
+installation of new software packages, upgrade of existing software packages,
+and even upgrading the entire Ubuntu system.
+
+If underlying libraries or application packages are needed, the apt file
+is the right place to install those OS-specific dependencies.
+
+=== The runtime file
+
+Sometimes you want to specify the *version* of the runtime, the version
+of Python, but the environment specification format will not let you
+specify this information. For these cases, the special file `runtime.txt`
+can be used.
+
+.Example
+[source, text]
+----
+python-3.8
+----
 
 NOTE: runtime.txt is only supported when used with environment specifications
-that do not already support specifying the runtime. If using environment.yml
-for conda, runtime.txt will be ignored.
+that do not already support specifying the runtime. If you are using a
+`environment.yml` file for conda, the runtime file will be *ignored*.
 
 
 == Configure the user interface
@@ -227,7 +273,7 @@ for conda, runtime.txt will be ignored.
 You can build several user interfaces into the resulting Docker image. This
 is controlled with various <<Configuration Files>>.
 
-=== JupyterLab Interface
+=== Jupyter Lab Interface
 
 JupyterLab is the *default* interface for repo2docker. The following
 Binder URL will open the *jekyll-one* repository and begin a JupyterLab

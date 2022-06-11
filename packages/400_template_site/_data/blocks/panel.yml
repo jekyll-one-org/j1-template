@@ -207,6 +207,7 @@ settings:
                 - benefit:              Base modules included
 
               disbenefits:
+                - disbenefit:           No access to JS and CSS sources
                 - disbenefit:           No early access to latest versions
                 - disbenefit:           No access to Hotfixes and Prereleases
                 - disbenefit:           No extended modules available
@@ -238,7 +239,7 @@ settings:
                 - benefit:              Extended modules included
 
               disbenefits:
-                - disbenefit:           No customized Template GEMs
+                - disbenefit:           No access to JS and CSS sources
                 - disbenefit:           No access to Hotfixes and Prereleases
                 - disbenefit:           No access to extended manual pages
                 - disbenefit:           No support offered
@@ -269,9 +270,11 @@ settings:
               benefits:
                 - benefit:              Extended modules included
                 - benefit:              Early access to latest versions
-                - benefit:              Access to extended manual pages
-                - benefit:              Base support offered
                 - benefit:              Access to Hotfixes and Prereleases
+                - benefit:              Base access to extended manual pages
+                - benefit:              Base access to JS and CSS sources
+                - benefit:              Base support offered
+
 
               disbenefits:
                 - disbenefit:           No customized Template GEMs
@@ -301,6 +304,7 @@ settings:
 
               benefits:
                 - benefit:              All modules included
+                - benefit:              Full access to all JS and CSS sources
                 - benefit:              Full access to latest versions
                 - benefit:              Full access to Hotfixes and Prereleases
                 - benefit:              Full access to all manual pages

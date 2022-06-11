@@ -100,7 +100,7 @@ settings:
       # DRAWER Sidebar
       #
       - menu:
-          enabled:                      false
+          enabled:                      true
 
           xhr_container_id:             navigator_sidebar_mmenu
           xhr_data_element:             sidebar_mmenu
@@ -115,13 +115,12 @@ settings:
             title:                      Site Info
             theme:                      dark
             button:                     "#navbar-brand"
-            button_activated:           always
 
             boxes:
 
               - box:
-                  enabled:              true
                   type:                 theme_info
+                  enabled:              true
                   title:                Theme
 
                   links:
@@ -142,8 +141,8 @@ settings:
                       target:           none
 
               - box:
-                  enabled:              false
                   type:                 site_info
+                  enabled:              false
                   title:                Site
 
                   links:
@@ -176,8 +175,8 @@ settings:
 #                     target:           none
 
               - box:
-                  enabled:              false
                   type:                 user_info
+                  enabled:              false
                   title:                User
 
                   links:
