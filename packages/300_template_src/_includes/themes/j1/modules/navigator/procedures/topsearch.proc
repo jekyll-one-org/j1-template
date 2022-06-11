@@ -89,7 +89,7 @@
   ------------------------------------------------------------------------------ {% endcomment %}
   {% if quick_search %}
     <!-- [INFO   ] [j1.modules.navigator.topsearch.proc   ] [ start processing: top search ] -->
-    <div id="{{topsearch_id}}" class="top-search ml-4 mr-4" style="display: none;">
+    <div id="{{topsearch_id}}" class="top-search ml-4 mr-4" style="background-color: #eceff1 !important; display: none;">
     	<div class="input-group">
     	  <span class="input-group-addon"><i class="mdi mdi-magnify mdi-2x mb-2" style="color:#9E9E9E"></i></span>
     	  <input id="search-query" type="text" name="q" placeholder="{{placeholder}}" autocomplete="off" class="form-control">
