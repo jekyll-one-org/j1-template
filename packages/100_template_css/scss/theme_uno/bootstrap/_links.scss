@@ -21,13 +21,13 @@ a {
   border-bottom: 1px dotted;
 }
 
-// jadams, 2022-06-09: undecorated link
+// jadams, 2022-06-09: undecorated anchor link
 a.link-no-decoration {
     border-bottom: unset;
     text-decoration: none;
 }
 a.link-no-decoration:hover {
-    color: #FAFAFA !important;
+    color: #BDBDBD !important;
     font-weight: 500 !important;
 }
 
