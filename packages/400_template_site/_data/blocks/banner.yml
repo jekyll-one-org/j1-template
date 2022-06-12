@@ -127,6 +127,7 @@ settings:
         comment:                        Top teaser shown on home page
         type:                           teaser
         properties:                     mt-3 mb-5
+        badges:                         false
         icon_family:                    MDI
         lane_span:                      fluid
 

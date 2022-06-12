@@ -461,10 +461,10 @@ tag::tags[]
 
 // common badges
 //
-:badge-j1--license:                               image:https://img.shields.io/github/license/jekyll-one-org/j1-template[GitHub, link="https://github.com/jekyll-one-org/j1-template/blob/master/LICENSE.md", window="_blank"]
+:badge-j1--license:                               image:https://img.shields.io/github/license/jekyll-one-org/j1-template-base[GitHub, link="https://github.com/jekyll-one-org/j1-template-base/blob/main/LICENSE.md", window="_blank"]
 :badge-j1--version-latest:                        image:https://badge.fury.io/rb/j1-template.svg[Gem Version, link="https://badge.fury.io/rb/j1-template", window="_blank"]
 :badge-j1--downloads:                             image:https://img.shields.io/gem/dt/j1-template[Gem]
-:badge-j1-gh--last-commit:                        image:https://img.shields.io/github/last-commit/jekyll-one-org/j1-template[GitHub last commit]
+:badge-j1-gh--last-commit:                        image:https://img.shields.io/github/last-commit/jekyll-one-org/j1-template-base[GitHub last commit]
 :badge-j1-gh--stars:                              image:https://img.shields.io/github/stars/jekyll-one-org/j1-template?style=social[GitHub Repo stars]
 
 // special characters

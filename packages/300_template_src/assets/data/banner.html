@@ -92,6 +92,7 @@ exclude_from_search:                    true
           {% assign banner_settings = banner %}
           {% assign id              = banner_settings.id %}
           {% assign enabled         = banner_settings.enabled %}
+          {% assign badges          = banner_settings.badges %}
           {% assign type            = banner_settings.type %}
           {% assign icon_family     = banner_settings.icon_family | downcase %}
           {% assign style           = banner_settings.style %}
@@ -194,18 +195,20 @@ exclude_from_search:                    true
 
             {% if card_type == 'text' and card_enabled %}
 
-            <div class="paragraph">
+            {% if badges %}
+            <div>
               <p>
                 <span>
                   <a class="image" href="https://badge.fury.io/rb/j1-template" target="_blank" rel="noopener noreferrer">
-                    <img src="https://badge.fury.io/rb/j1-template.svg" alt="Gem Version">
+                    <img src="https://badge.fury.io/rb/j1-template.svg" alt="Current Gem Version">
                   </a>
                   </span>
                 <span>
-                  <img src="https://img.shields.io/gem/dt/j1-template" alt="Gem Downloads">
+                  <img src="https://img.shields.io/gem/dt/j1-template" alt="Current Gem Downloads">
                 </span>
               </p>
             </div>
+            {% endif %}
 
             <!-- Heading -->
             <div class="noclass">

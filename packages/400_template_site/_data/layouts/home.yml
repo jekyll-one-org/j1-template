@@ -224,7 +224,7 @@ lanes:
   # PLAN panel
   #
   - lane:
-      enabled:                          false
+      enabled:                          true
       id:                               home_plan_panel
       region:                           body-main
       type:                             async
