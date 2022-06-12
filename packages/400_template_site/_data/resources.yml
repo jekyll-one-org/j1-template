@@ -1342,6 +1342,35 @@ resources:
         js:                             []
         init_function:                  [ j1.adapter.carousel.init ]
 
+
+  # ----------------------------------------------------------------------------
+  # MasterSlider Free, light verson v2.50.0 - Aug 2016
+  #
+  - name:                               MasterSlider
+    resource:
+      enabled:                          true
+
+      id:                               masterslider
+      comment:                          module MasterSlider
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand
+      preload:                          false
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   true
+      data:
+        css:                            [
+                                          modules/masterSlider/css/masterslider.main,
+                                          modules/masterSlider/css/ms-skin-sample
+                                        ]
+        files:                          [
+                                          modules/masterSlider/js/jquery.easing.min.js,
+                                          adapter/js/masterslider.js
+                                        ]
+        js:                             [ modules/masterSlider/js/masterslider.lite ]
+        init_function:                  [ j1.adapter.masterslider.init ]
+
   # ----------------------------------------------------------------------------
   # Justified Gallery, JS implementation for full-featured image galleries
   # based on the Justified Gallery API

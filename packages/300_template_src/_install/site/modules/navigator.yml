@@ -115,12 +115,13 @@ settings:
             title:                      Site Info
             theme:                      dark
             button:                     "#navbar-brand"
+            button_activated:           always
 
             boxes:
 
               - box:
-                  type:                 theme_info
                   enabled:              true
+                  type:                 theme_info
                   title:                Theme
 
                   links:
@@ -141,8 +142,8 @@ settings:
                       target:           none
 
               - box:
-                  type:                 site_info
                   enabled:              false
+                  type:                 site_info
                   title:                Site
 
                   links:
@@ -175,8 +176,8 @@ settings:
 #                     target:           none
 
               - box:
-                  type:                 user_info
                   enabled:              false
+                  type:                 user_info
                   title:                User
 
                   links:

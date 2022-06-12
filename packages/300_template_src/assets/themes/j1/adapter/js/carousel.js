@@ -299,22 +299,24 @@ j1.adapter.carousel = (function (j1, window) {
 
                     // if lightbox is enabled (preference over href)
                     if (lb) {
+
                       if (lb_caption) {
+
                         content += '\t\t' + '<div class="item {{slider_id}}-item {{slide_border}}">'+ '\n';
                         content += '\t\t\t' + '<a href="' +img+ '" ' + 'data-lightbox="{{slider_id}}" data-title="' +lb_caption+ '">' + '\n';
                         content += '\t\t\t\t' + '<img class="lazyOwl" src="' +img+ '" alt="' +lb_caption+ '">' + '\n';
                         content += '\t\t\t' + ' </a>' + '\n';
                         if (href) {
-                        content += '\t\t\t' + '<span class="carousel-caption"><a href="' +href+ '">' +lb_caption+ ' </a> </span>' + '\n';
+                        content += '\t\t\t' + '<span id="{{slider_id}}_caption" class="text-start carousel-caption"><a class="md-grey-300 link-no-decoration" href="' +href+ '">' +lb_caption+ ' </a> </span>' + '\n';
                         } else {
-                        content += '\t\t\t' + '<span class="carousel-caption">' +lb_caption+ '</span>' + '\n';
+                        content += '\t\t\t' + '<span id="{{slider_id}}_caption" class="text-start carousel-caption">' +lb_caption+ '</span>' + '\n';
                         }
                         content += '\t\t' + '</div>' + '\n';
                       } else {
                         // jadams, 2021-03-06: added link text (alt) for search engine optimization (SEO|Google)
                         // content += '<a class="item" href="' +img+ '" ' + 'data-lightbox="{{slider_id}}"> <img class="lazyOwl" data-src="' +img+ '" alt="' +alt+ '">' + ' </a>';
                         //
-                        content += '<a class="item" href="' + img + '" ';
+                        content += '<a class="item link-no-decoration" href="' + img + '" ';
                         content += 'data-lightbox="{{slider_id}}"> <img class="lazyOwl" data-src="' + img;
                         content += '" alt="' +alt+ '">' +alt+ ' </a>';
                       }
@@ -334,6 +336,23 @@ j1.adapter.carousel = (function (j1, window) {
                     {% endif %}
                   }
                   $('#{{slider_id}}').html(content);
+
+                  // jadams: managing captions should be adopted from
+                  // JustifiedGallery as this simple solution does NOT work
+                  // NOTE: Potentially the core of OwlCarousel has to be
+                  // changed to manage captions natively
+                  // -----------------------------------------------------------
+                  // var captionID = '#{{slider_id}}_caption';
+                  // $(captionID).hover(
+                  //   function(e) {
+                  //     $( this ).find( ".carousel-caption" ).show();
+                  //     e.stopPropagation();
+                  //   }, function(e) {
+                  //     $( this ).find( ".carousel-caption" ).hide();
+                  //     e.stopPropagation();
+                  //   }
+                  // );
+
                   _this.setState('processed');
                   logText = '\n' + 'processing slider finished on id: {{slider_id}}';
                   logger.info(logText);

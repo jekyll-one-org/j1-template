@@ -75,7 +75,7 @@ padding-left: 1px;
  }
 */
 
-/* Navigation (buttons)
+/* Navigation buttons
  ------------------------------------------------------------------------------- */
 
 .owl-btn {
@@ -161,7 +161,7 @@ padding-left: 1px;
 	background: url(../../images/ajax-loader.gif) no-repeat center center
 }
 
-/* Caption
+/* Captions
  ------------------------------------------------------------------------------- */
 
  .owl-carousel .container {
@@ -187,28 +187,21 @@ padding-left: 1px;
    line-height: 180%;
  }
 
+ /* Caption text
+ ------------------------------------------------------------------------------- */
 
- /* Carousel caption text
-  ------------------------------------------------------------------------------- */
-
- /* jadams, 2018-02-10: add caption styles */
  .owl-item .carousel-caption {
    opacity: 0;
    position: absolute;
    bottom: 3px;
    left: 3px;
    right: 3px;
-   color: white;
    font-size: 1rem;
    font-weight: 300;
    font-family: sans-serif;
    z-index: 10;
-   padding-top: 20px;
-   padding-bottom: 20px;
-   color: #fff;
-   text-align: center;
+   padding-left: 10px;
  }
-
  .owl-item .carousel-caption:hover   {
    opacity: 1;
    -webkit-transition: opacity 500ms;
@@ -218,14 +211,9 @@ padding-left: 1px;
    background: rgba(0,0,0,0.5);
  }
 
- span.carousel-caption a {
-   color: #fff;
-   text-decoration: none;
- }
 
-
-
-/* see. https://github.com/OwlCarousel2/OwlCarousel2/issues/2199 */
+/* See: https://github.com/OwlCarousel2/OwlCarousel2/issues/2199
+--------------------------------------------------------------------------------*/
 
 /*
 .owl-carousel .owl-wrapper {

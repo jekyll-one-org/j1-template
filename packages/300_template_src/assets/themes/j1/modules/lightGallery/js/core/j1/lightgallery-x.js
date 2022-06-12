@@ -1,9 +1,9 @@
 /*! lightgallery - v1.6.12 - 2019-02-19
-* Extended version to support YouPorn
+* J1 Extended version to support more providers
 * http://sachinchoolur.github.io/lightGallery/
 * Copyright (C) 2022 Sachin N; Licensed GPLv3 */
 
-(function (root, factory) {
+!(function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD. Register as an anonymous module unless amdModuleId is set
     define(['jquery'], function (a0) {
@@ -377,7 +377,7 @@
         }, this.s.backdropDuration);
 
         if (this.s.download) {
-            this.$outer.find('.lg-toolbar').append('<a id="lg-download" target="_blank" download class="lg-download lg-icon"></a>');
+            this.$outer.find('.lg-toolbar').append('<a id="lg-download" target="_blank" download class="link-no-decoration lg-download lg-icon"></a>');
         }
 
         // Store the current scroll top value to scroll back after closing the gallery..
