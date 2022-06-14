@@ -701,6 +701,7 @@ li.dropdown.nav-item.nav-sub-item:before {
   			}
   			&.navbar-fixed {
   				position: fixed;
+          z-index: 999999999;
   				&.navbar-transparent {
   					.logo-scrolled {
   						display: none;

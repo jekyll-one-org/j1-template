@@ -1342,16 +1342,40 @@ resources:
         js:                             []
         init_function:                  [ j1.adapter.carousel.init ]
 
-
   # ----------------------------------------------------------------------------
-  # MasterSlider Free, light verson v2.50.0 - Aug 2016
+  # MasterSlider Lite, free version 2.85.13 - Feb 2022
   #
-  - name:                               MasterSlider
+  - name:                               masterSliderLite
     resource:
       enabled:                          true
 
       id:                               masterslider
-      comment:                          module MasterSlider
+      comment:                          module masterSliderLite
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand
+      preload:                          false
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   true
+      data:
+        css:                            [ modules/masterSliderLite/css/masterslider ]
+        files:                          [ adapter/js/masterslider.js ]
+        js:                             [
+                                          modules/masterSliderLite/js/plugins/jquery.easing,
+                                          modules/masterSliderLite/js/masterslider
+                                        ]
+        init_function:                  [ j1.adapter.masterslider.init ]
+
+  # ----------------------------------------------------------------------------
+  # MasterSlider Pro
+  #
+  - name:                               MasterSlider Professional
+    resource:
+      enabled:                          true
+
+      id:                               mastersliderpro
+      comment:                          module MasterSlider Professional
       region:                           head
       layout:                           [ all ]
       required:                         ondemand
@@ -1361,14 +1385,11 @@ resources:
       pass_init_data:                   true
       data:
         css:                            [
-                                          modules/masterSlider/css/masterslider.main,
-                                          modules/masterSlider/css/ms-skin-sample
+                                          modules/masterSliderPro/css/style/masterslider,
+                                          modules/masterSliderPro/css/skins/default/style
                                         ]
-        files:                          [
-                                          modules/masterSlider/js/jquery.easing.min.js,
-                                          adapter/js/masterslider.js
-                                        ]
-        js:                             [ modules/masterSlider/js/masterslider.lite ]
+        files:                          [ adapter/js/masterslider.js ]
+        js:                             [ modules/masterSliderPro/js/masterslider ]
         init_function:                  [ j1.adapter.masterslider.init ]
 
   # ----------------------------------------------------------------------------

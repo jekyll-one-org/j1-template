@@ -26,45 +26,59 @@ description:
 defaults:
   enabled:                              false
 
-  width:                                1200
-  height:                               600
-  minHeight:                            0
-  space:                                0
-  start:                                1
-  grabCursor:                           true
-  swipe:                                true
-  mouse:                                true
-  keyboard:                             false
-  layout:                               boxed
-  wheel:                                false
-  autoplay:                             false
-  instantStartLayers:                   false
-  mobileBGVideo:                        false
-  loop:                                 false
-  shuffle:                              false
-  preload:                              0
-  heightLimit:                          true
-  autoHeight:                           false
-  smoothHeight:                         true
-  endPause:                             false
-  overPause:                            true
-  fillMode:                             fill
-  centerControls:                       true
-  startOnAppear:                        false
-  layersMode:                           center
-  autofillTarget:                       null
-  hideLayers:                           false
-  fullscreenMargin:                     0
-  speed:                                20
-  dir:                                  h
+# ------------------------------------------------------------------------------
+# Default settings
+#
+defaults:
+  enabled:                              false
+
+  forceInit:                            true                                    # Force calling init even an error occurs in jQuery's dom ready method.
+  autoplay:                             false                                   # Enables the autoplay slideshow.
+  loop:                                 false                                   # Enables the continuous sliding mode.
+  mouse:                                true                                    # Whether the user can use mouse drag navigation.
+  swipe:                                true                                    # Whether the drag/swipe navigation is enabled.
+  grabCursor:                           true                                    # Whether the slider uses grab mouse cursor.
+  space:                                0                                       # The spacing value between slides in pixels.
+  fillMode:                             fill                                    # Specifies the slide background scaling method. Its acceptable values are "fill", "fit", "stretch", "center" and "tile".
+  start:                                1                                       # The slider starting slide number.
+  view:                                 basic                                     # The slide changing transition.
+  width:                                300                                     # The base width of slides. It helps the slider to resize in correct ratio.
+  height:                               150                                     # The base height of slides, It helps the slider to resize in correct ratio.
+  inView:                               15                                      # Specifies number of slides which will be added at a same time in DOM.
+  critMargin:                           1
+  mobileBGVideo:                        false                                   # Whether show background videos in mobile devices.
+  heightLimit:                          true                                    # It force the slide to use max height value as its base specified height value.
+  smoothHeight:                         true                                    # Whether the slider uses smooth animation while its height changes.
+  autoHeight:                           false                                   # Whether the slider adapts its height to each slide height or not. It overrides heightLimit option.
+  minHeight:                            -1                                      # @since 2.13.0, Specifies min height value for the slider, it prevents slider to shows too narrow in small screens.
+  fullwidth:                            false                                   # It enables the slider to adapt width to its parent element. It's very useful for creating full-width sliders. In default it takes max width as its base width value.
+  fullheight:                           false                                   # It enables the slider to adapt height to its parent element.
+  autofill:                             false                                   # It enables the slider to adapt width and height to its parent element, It's very useful for creating fullscreen or fullwindow slider.
+  layersMode:                           center                                  # It accepts two values "center" and "full". The "center" value indicates that the slider aligns layers to the center. This option is only effective in full width mode.
+  hideLayers:                           false                                   # Whether the slider hides all layers before changing slide.
+  endPause:                             false                                   # Whether the slider pauses slideshow when it stays at the last slide.
+  centerControls:                       true                                    # Whether the slider aligns UI controls to center. This option is only effective in full width mode.
+  overPause:                            true                                    # Whether the slider pauses slideshow on hover.
+  shuffle:                              false                                   # Enables the shuffle slide order.
+  speed:                                17                                      # Specifies slide changing speed. It accepts float values between 0 and 100.
+  dir:                                  h                                       # Specifies slide changing direction. It accepts two values "h" (horizontal) and "v" (vertical).
+  preload:                              0                                       # Specifies number of slides which will be loaded by slider. 0 value means the slider loads slides in sequence.
+  wheel:                                false                                   # Whether slider uses mouse wheel for navigation.
+  layout:                               boxed                                   # It accepts 'fullwidth', 'fullscreen', 'fillwidth', 'autofill', 'partialview', 'boxed'. It overrides 'fullwidth' and 'autofill' (added in v1.5.6)
+  autofillTarget:                       null                                    # @since 2.13.0, Specifies the parent element of slider width jQuery selector, it used for sizing slider with autofill layout. Default value is the first parent element of slider.
+  fullscreenMargin:                     0                                       # Specifies margin amount to the bottom of slider, it's only effective on fullscreen slider.
+  instantStartLayers:                   false                                   # @since 1.5.0, Whether instantly shows slide layers.
+  parallaxMode:                         mouse                                   # @since 1.6.0, Specifies mode of parallax effect accepts: "mouse", "mouse:x-only", "mouse:y-only" and "swipe"
+  rtl:                                  false                                   # @since 1.8.0, Whether Right-to-left direction slider.
+  deepLink:                             null                                    # @since 2.1.0, null value disables slider deep-linking any string values identifies the slider in page's url like /#msslider-1
+  deepLinkType:                         'path'                                  # @since 2.1.0, type of hash value in page's url possible values, path and query (  #gallery/1 || #gallery=4 )
+  disablePlugins:                       []                                      # @since 2.9.6, list of disabled Master Slider plugin names for this instance.
   responsive:                           true
   tabletWidth:                          768
   tabletHeight:                         null
   phoneWidth:                           480
   phoneHeight:                          null
-  sizingReference:                      window
-  parallaxMode:                         swipe
-  view:                                 basic
+  sizingReference:                      window                                  # document window
 
 # ------------------------------------------------------------------------------
 # END config
