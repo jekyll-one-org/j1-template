@@ -204,7 +204,7 @@ lanes:
   # INTRO panel
   #
   - lane:
-      enabled:                          false
+      enabled:                          true
       id:                               home_intro_panel
       region:                           body-main
       type:                             async
@@ -224,7 +224,7 @@ lanes:
   # PLAN panel
   #
   - lane:
-      enabled:                          true
+      enabled:                          false
       id:                               home_plan_panel
       region:                           body-main
       type:                             async
