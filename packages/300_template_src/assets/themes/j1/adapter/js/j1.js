@@ -1205,7 +1205,7 @@ var j1 = (function () {
     scrollTo: function (offset) {
       var logger          = log4javascript.getLogger('j1.scrollTo');
       var anchor          = window.location.href.split('#')[1];
-      var anchor_id       = typeof anchor !== 'undefined' ? '#' + anchor : false;
+      var anchor_id       = (typeof anchor !== 'undefined') && (anchor != '') ? '#' + anchor : false;
       var scrollDuration  = {{toccer_options.scrollSmoothDuration}};
       var scrollOffset    = offset ; // j1.getScrollOffset();
       var isSlider        = false;

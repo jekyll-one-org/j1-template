@@ -60,8 +60,8 @@ module.exports = function scrollSmooth ( options ) {
       // indicator|check currently NOT used
       // if (isCssSmoothScrollSupported()) { }
 
-      logText = 'run module scrollSmooth';
-      logger.info(logText);
+      logText = '\n' + 'run module scrollSmooth';
+      logger.debug(logText);
 
       var duration  = options.duration;
       var offset    = options.offset;
@@ -75,9 +75,6 @@ module.exports = function scrollSmooth ( options ) {
         offset: offset,
         callback: false
       });
-
-      logText = 'scrollSmooth finished';
-      logger.info(logText);
     },
 
     // -------------------------------------------------------------------------

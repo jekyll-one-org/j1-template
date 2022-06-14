@@ -119,17 +119,9 @@
       href:                             /pages/public/learn/where_to_go/
       icon:                             paw
 
-    - title:                            Tester - MasterSlider Lite
-      href:                             /pages/public/learn/masterslider-lite/
-      icon:                             star-check
-
-    - title:                            Tester - MasterSlider Pro
-      href:                             /pages/public/learn/masterslider-pro/
-      icon:                             star-check
-
-    #   - title:                          Tester - Plans
-    #     href:                           /pages/public/learn/plan_tester/
-    #     icon:                           star-check
+    # - title:                            Tester - Plans
+    #   href:                             /pages/public/learn/plan_tester/
+    #   icon:                             star-check
 
     # --------------------------------------------------------------------------
     # Roundtrip
