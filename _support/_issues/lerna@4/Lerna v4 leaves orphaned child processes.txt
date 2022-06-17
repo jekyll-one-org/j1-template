@@ -33,3 +33,24 @@ Potential Fix:
 npm/workspaces
 --------------
 See: https://docs.npmjs.com/cli/v8/using-npm/workspaces
+
+Fixed in version lerna@5.1:
+--------------------------------------------------------------------------------
+
+From: https://github.com/lerna/lerna/issues/2901
+
+Hi @JamesHenry, since Lerna is now being maintained by Nrwrl, and the Major
+version bumped again to 5, I would like to bump this issue again. Windows
+users are still stuck with major 3 because of orphan children.
+Is the source of this bug known?
+Is there anything I can do to help with locating the root cause and fix it?
+
+JamesHenry pushed a commit to feryardiant/lerna that referenced this issue 14 days ago
+@feryardiant
+@JamesHenry
+fix: Fix orphan child process on windows lerna#2899, lerna#2901 …
+24de171
+JamesHenry pushed a commit to feryardiant/lerna that referenced this issue 14 days ago
+@feryardiant
+@JamesHenry
+fix: Fix orphan child process on windows lerna#2899, lerna#2901

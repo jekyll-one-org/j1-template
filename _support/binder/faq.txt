@@ -1,0 +1,15 @@
+== Can I choose a specific (at least not Turing) hub for my Binder links?
+
+So it’s simply a matter of substituting
+
+  https://<hub>.mybinder.org/v2/gh/<owner>/<repo>
+
+=== Federation memers
+
+The following table lists BinderHub deployments in the mybinder.org
+federation:
+
+* gke.mybinder.org, reliable (quota: 400)
+* ovh.mybinder.org, reliable(quota: 80)
+* gesis.mybinder.org, reliable (quota: 120)
+* turing.mybinder.org, very weak! (quota: 200)

@@ -47,7 +47,7 @@ Remote:
 See:
   {https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-locally-and-remotely}[Stackoverflow]
 
-Remote
+Remote:
 
   $ git push -d <remote_name> <branch_name>
 
@@ -56,20 +56,20 @@ have to use the command like so.
 
   $ git push -d origin <branch_name>
 
-Local
+Local:
 
   $ git branch -d <branch_name>
 
 
 == Reset repo to a commit
 
-local:
+Local:
 
   git reset --hard 217a618
 
-remote:
+Remote:
 
-git push --force origin main
+  git push --force origin main
 
 
 == Push an existing repository from the command line

@@ -112,7 +112,7 @@ tools expected to be in place with your OS:
 * Python language, version > 2.7 <1>
 * RubyGems >= 3.2.4
 * Bundler >= 2.2.4
-* Javascript language (NodeJS), version >= 12.x < 13.x
+* Javascript language (NodeJS), version >= 14.x < 15.x
 * NPM, version >= 6.14
 * YARN, version >= 1.22
 * Git, version >= 2.29

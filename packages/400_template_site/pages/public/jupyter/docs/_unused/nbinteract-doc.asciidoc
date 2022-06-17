@@ -59,6 +59,7 @@ resource_options:
 :page-liquid:
 
 // Set (local) page attributes here
+// https://mybinder.org/v2/gh/jekyll-one/j1-binder-nbinteract/main?urlpath=/tree
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
 :badges-enabled:                        true

@@ -1677,27 +1677,29 @@ resources:
         init_function:                  [ j1.adapter.dropdowns.init ]
 
   # ----------------------------------------------------------------------------
-  # nbInteract, implement nbInteract Core JS API for J1
+  # J1 NBI, implement nbinteract core JS for J1 Template
   #
-  - name:                               nbInteract
+  - name:                               j1-nbinteract
     resource:
       enabled:                          true
 
       id:                               nbinteract
-      comment:                          nbInteract
+      comment:                          module j1-nbinteract
       region:                           head
       layout:                           [ all ]
-      required:                         ondemand                                # always | ondemand
-      preload:                          false                                   # property currently unused
+      required:                         ondemand
+      preload:                          false
       script_load:                      sync
       dependencies:                     false
       pass_init_data:                   false
       data:
-        css:                            [ modules/nbInteract/css/theme/uno/nbinteract-core ]
-        files:                          [ adapter/js/nbinteract.js ]
-        js:                             [ modules/nbInteract/js/nbinteract/nbinteract-core ]
+        css:                            [ modules/nbinteract-core/css/theme/uno/nbinteract ]
+        files:                          [
+                                          modules/nbinteract-core/js/nbinteract/j1-nbinteract-core.js,
+                                          adapter/js/nbinteract.js
+                                        ]
+        js:                             []
         init_function:                  [ j1.adapter.nbinteract.init ]
-
 
   # ----------------------------------------------------------------------------
   # Plotly Open Source Graphing Library

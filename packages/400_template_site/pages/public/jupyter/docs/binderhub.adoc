@@ -177,6 +177,22 @@ dependencies:
     - matplotlib
 ----
 
+[NOTE]
+====
+Conda `channels` are the locations where packages are stored. They serve
+as the base for hosting and managing packages. Conda packages are downloaded
+from remote channels, which are URLs to directories containing conda packages.
+
+The conda command searches a set of channels. By default, packages are
+automatically downloaded and updated from the
+https://repo.anaconda.com/pkgs/[default channel] which may require a paid
+license, as described in the repository terms of service a commercial license.
+
+The `conda-forge` channel is *free* for all to use. You can modify what
+remote channels are automatically searched. You might want to do this to
+maintain a private or internal channel.
+====
+
 === The requirements file
 
 The configuration `requirements.txt` specifies a list of *Python packages*

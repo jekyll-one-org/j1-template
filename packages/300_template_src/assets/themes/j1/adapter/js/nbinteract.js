@@ -55,7 +55,7 @@ regenerate:                             true
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/nbinteract.js
- # J1 Adapter for nbinteract
+ # J1 Adapter for j1-nbinteract
  #
  # Product/Info:
  # https://jekyll.one
