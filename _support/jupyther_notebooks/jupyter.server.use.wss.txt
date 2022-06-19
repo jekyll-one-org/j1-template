@@ -1,4 +1,22 @@
-Verbindung mit dem lokalen Server, der mit der Verbindungs-URL "http://localhost:8888/" ausgeführt wird, nicht möglich
-Sorgen Sie dafür, dass die Erweiterung "jupyter_http_over_ws Jupyter" auf Ihrem Computer aktiviert und auf dem neuesten Stand ist.
+== Jupyter Server Extension to use WSS connections
 
-pip install --upgrade jupyter_http_over_ws>=0.0.7 && jupyter serverextension enable --py jupyter_http_over_ws
+Verbindung mit dem lokalen Server, der mit der Verbindungs-URL
+`http://localhost:8888/` ausgeführt wird, nicht möglich.
+
+Sorgen Sie dafür, dass die Jupyter Erweiterung `jupyter_http_over_ws` auf
+Ihrem Computer aktiviert und auf dem neuesten Stand ist:
+
+  pip install --upgrade jupyter_http_over_ws>=0.0.7 && jupyter serverextension enable --py jupyter_http_over_ws
+  --
+  Enabling: jupyter_http_over_ws
+  - Writing config: C:\Users\jadams\.jupyter
+      - Validating...
+        jupyter_http_over_ws 0.0.7 ok
+
+== Connect to a local Jupyter Server
+
+See (from j1-nbinteract source):
+
+  - util.js:17
+  - NbInteract.js:340
+  

@@ -1,0 +1,99 @@
+Hi there,
+
+I'm Juergen, a web developer. Currently I'm working on an integration of Jupyter
+Notebooks in webpages to make Notebooks live/interactive available using the
+Binder service.
+
+The integration is a bit tricky, hopefully I can find some tips and tricks on
+the forum. Thanks in advance for all the helpful info already available!
+
+I'll post some info on my project as my 50 Cent to the forum. As next steps,
+I'll describe how to integrate Juypter Notebooks in an static website based
+on Jekyll and some example websites to see what's all about.
+
+
+
+
+Topics
+
+-
+
+How to Embed Interactive Jupyter Notebooks in Static Websites for Free
+
+Integrate interactive Jupyter Notebooks in static websites (Jekyll) using Binder for free
+
+
+Hi Guys,
+
+I'm Juergen, a web developer. Currently, I'm working on integrating Jupyter Notebooks (Python) in webpages to make Notebooks live/interactive available using the public Binder service for free.
+
+I've integrated the (Python/JS) package/library nbinteract with my Jekyll-based
+static website at https://jekyll.one. You'll find in the menubar a dropdown Live Examples. Go for one of these sites. On these sites, use the menu  Learn/Experimental/Textbooks and open one of the pages in that dropdown. The pages integrate some nice Jupyter Notebooks using interactive widgets.
+
+You can create a personal website in notime if you're already on Github or Netlify. Go for the Rocketstart on https://jekyll.one to create your web!
+
+
+Welcome,
+Juergen
+
+
+
+Integrate interactive Jupyter Notebooks in static websites (Jekyll) using Binder for free
+
+Hi Guys,
+
+to embed Jupyter Notebooks in static Jekyll-sites could be done easier using a
+template for Jekyll that has an JN integration build-in.
+
+I've integrated the (Python/JS) package/library nbinteract with my Jekyll-based
+static website at https://jekyll.one. You'll find in the menubar a dropdown Live Examples. Go for one of these sites. On these sites, use the menu  Learn/Experimental/Textbooks and open one of the pages in that dropdown. The pages integrate some nice Jupyter Notebooks using interactive widgets.
+
+You can create a personal website in notime if you're already on Github or Netlify. Go for the Rocketstart on https://jekyll.one to create your web!
+
+Happy Jekylling,
+Juergen
+
+
+Disqus
+--------------------------------------------------------------------------------
+
+Hi Guys,
+
+to embed Jupyter Notebooks in static <b>Jekyll</b>-sites could be done easy using a template for Jekyll that has an JN integration <b>build-in</b>.
+
+I've integrated the (Python/JS) package/library <b><i>nbinteract </i></b>with my Jekyll-based static website at <a href="https://jekyll.one">JekyllOne</a>. You'll find in the menubar a dropdown Live Examples. Go for one of these sites. On these sites, use the menu  Learn/Experimental/Textbooks and open one of the pages in that dropdown. The pages integrate some nice Jupyter Notebooks using interactive widgets.
+
+You can create a personal website in notime if you're already on Github or Netlify. Go for the <b>Rocketstart </b>on href="https://jekyll.one">JekyllOne</a> to create your web!
+
+Happy Jekylling,
+Juergen
+
+
+Hallo,
+
+Ich bin Jürgen, ein Webentwickler. Derzeit arbeite ich daran, Jupyter Notebooks
+in Webseiten zu integrieren, um sie über den Binder-Dienst live/interaktiv
+verfügbar zu machen.
+
+Ich habe das (Python/JS) Paket/Bibliothek „nbinteract“ in meine Jekyll-basierte
+statische Website integriert unter:
+
+https://jekyll.one
+
+In der Menüleiste finden Sie ein Dropdown "Live Examples". Besuchen Sie eine
+dieser Seiten, und öffne Sie im Menü „Learn/Experimental/Textbooks“
+Seiten integrieren einige nette Jupyter-Notizbücher
+mit interaktiven Widgets.
+
+Es wäre sehr hilfreich, wenn einige von euch mal reinschauen würden. Ich bin sehr dankbar, Ihre Meinung zu hören!
+
+Übrigens: Sie können in wenigen Minuten eine persönliche Website erstellen, wenn Sie bereits auf Github oder Netlify sind. Gehen Sie zum "Rocketstart" auf "jekyll.one", um Ihr Web zu erstellen!
+
+Vielen Dank,
+Jürgen
+
+
+Upgrade
+--------------------------------------------------------------------------------
+
+Hi Guys,

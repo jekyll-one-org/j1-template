@@ -1278,15 +1278,20 @@ j1.adapter.nbinteract = (function (j1, window) {
     // -------------------------------------------------------------------------
     checkURL: function (uri, flags) {
       _this.setState('process_checks');
-      $.get(uri).done(function (e) {
+      if (uri.includes('localhost')) {
         _this.setState('finished_checks');
         flags.checkURL = true;
         return true;
-      }).fail(function (e) {
-        _this.setState('finished_checks');
-        flags.checkURL = false;
-      });
-
+      } else {
+        $.get(uri).done(function (e) {
+          _this.setState('finished_checks');
+          flags.checkURL = true;
+          return true;
+        }).fail(function (e) {
+          _this.setState('finished_checks');
+          flags.checkURL = false;
+        });
+      }
     }, // END checkURL
 
     // -------------------------------------------------------------------------

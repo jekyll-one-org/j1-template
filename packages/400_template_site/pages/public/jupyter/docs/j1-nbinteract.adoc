@@ -273,7 +273,7 @@ for the *Starter Web* in the folder `~/pages/public/jupyter/notebooks/textbooks`
 == J1 NBI Configuration
 
 The Template system J1 integrates the Javascript (core) library
-`nbinteract-core.js` from NBI (nbinteract). The integration is a J1 module
+`j1-nbinteract-core.js` from NBI (nbinteract). The integration is a J1 module
 that requires *no programming* to integrate interactive textbooks in
 your webpages.
 

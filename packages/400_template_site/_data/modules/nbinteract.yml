@@ -251,10 +251,42 @@ settings:
         use_mathjax:                    false
 
     - textbook:
-        enabled:                        true
+        enabled:                        false
 
         id:                             j1_nbi_widgets
         xhr_data:                       j1_nbi_widgets.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_nbi_widgets_bar_charts
+        xhr_data:                       j1_nbi_widgets_bar_charts.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_nbi_widgets_scatter_charts
+        xhr_data:                       j1_nbi_widgets_scatter_charts.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_nbi_widgets_line_charts
+        xhr_data:                       j1_nbi_widgets_line_charts.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_nbi_widgets_questions
+        xhr_data:                       j1_nbi_widgets_questions.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    false
 

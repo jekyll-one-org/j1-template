@@ -232,8 +232,11 @@ defaults:
                                           </li>
                                         </ul>
 
-  spec:                                 jekyll-one/j1-binder-repo/main
+# spec:                                 jekyll-one/j1-binder-repo/main          # based on environment.txt
+  spec:                                 jekyll-one/j1-binder-nbinteract/main    # based on environment.yml
+
   baseUrl:                              'https://mybinder.org'
+# baseUrl:                              'http://localhost:8888'                 # local Jupyter Server, correct ???
   provider:                             gh
 
   button_styles:                        btn btn-primary btn-raised hidden

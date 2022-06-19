@@ -32,6 +32,12 @@ binderhub.registerCallback: messages sent by Binder: 2022-05-13T11:16:57Z [Warni
 [http://localhost:17000/assets/themes/j1/modules/nbInteract/js/nbinteract/nbinteract-core.min.js:93]
 
 
-??? BinderHub
+GH reject BinderHub accessing repos
 --------------------------------------------------------------------------------
-Rate limit exceeded. Try again in 3600 seconds.
+See: https://discourse.jupyter.org/t/rate-limit-exceeded-try-again-in-3600-seconds/14516/5
+
+Error: Rate limit exceeded. Try again in 3600 seconds.
+
+GH has a limit how often a (public) can be read by an website (organisation).
+For Binder, _binder.org_  were rate limited to access the GitHub API, the
+*specific repo* doesn’t factor into it.
