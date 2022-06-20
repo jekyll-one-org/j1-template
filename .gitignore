@@ -89,6 +89,8 @@ packages/300_template_src/assets/themes/j1/core/css/
 
 packages/300_template_src/assets/themes/j1/core/js/template*
 
+packages/300_template_src/assets/themes/j1/modules/nbinteract-core/js/nbinteract/j1-nbinteract-core*
+
 
 # Unneeded files for package 400_template_site
 # Ignore symbolic links as simple files!!!
