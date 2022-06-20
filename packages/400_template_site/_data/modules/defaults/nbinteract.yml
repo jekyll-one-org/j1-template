@@ -232,10 +232,10 @@ defaults:
                                           </li>
                                         </ul>
 
-# spec:                                 jekyll-one/j1-binder-repo/main          # based on environment.txt
-  spec:                                 jekyll-one/j1-binder-nbinteract/main    # based on environment.yml
+  spec:                                 jekyll-one/j1-binder-repo/main          # based on environment.txt, created at GKE
+# spec:                                 jekyll-one/j1-binder-nbinteract/main    # based on environment.yml
 
-  baseUrl:                              'https://mybinder.org'
+  baseUrl:                              'https://gke.mybinder.org'              # set to GKE
 # baseUrl:                              'http://localhost:8888'                 # local Jupyter Server, correct ???
   provider:                             gh
 

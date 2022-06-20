@@ -61,6 +61,13 @@ Local:
   $ git branch -d <branch_name>
 
 
+== Create branch from commit
+
+Create a branch from a previous commit using Git:
+
+  git branch branch_name <sha1-of-commit>
+
+
 == Reset repo to a commit
 
 Local:

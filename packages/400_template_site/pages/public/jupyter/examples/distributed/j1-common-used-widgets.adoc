@@ -138,13 +138,7 @@ widget, a Python callback updates the visualization **without** a complete
 rerender. This noticeably lowers visualization update time compared to using
 ipywidgets alone to render static images.
 
-// textbook::j1_nbi_widgets_bar_charts[]
-// textbook::j1_nbi_widgets_scatter_charts[]
-// textbook::j1_nbi_widgets_line_charts[]
+textbook::j1_nbi_widgets_bar_charts[]
+textbook::j1_nbi_widgets_scatter_charts[]
+textbook::j1_nbi_widgets_line_charts[]
 textbook::j1_nbi_widgets_questions[]
-
-
-
-// Native NBI widgets (nbinteract) currently NOT used
-// -----------------------------------------------------------------------------
-// textbook::j1_nbi_widgets[]
