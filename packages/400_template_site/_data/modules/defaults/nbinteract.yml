@@ -233,10 +233,15 @@ defaults:
                                         </ul>
 
   spec:                                 jekyll-one/j1-binder-repo/main          # based on environment.txt, created at GKE
-# spec:                                 jekyll-one/j1-binder-nbinteract/main    # based on environment.yml
+# spec:                                 jekyll-one/j1-binder-nbinteract/main    # based on environment.yml, created at GKE
 
-  baseUrl:                              'https://gke.mybinder.org'              # set to GKE
+  baseUrl:                              'https://mybinder.org'                  # default Binder
+# baseUrl:                              'https://gke.mybinder.org'              # GKE: Google Cloud
+# baseUrl:                              'https://ovh.mybinder.org'              # OVH: OVHcloud
+# baseUrl:                              'https://gesis.mybinder.org'            # GESIS: GESIS Notebooks
+# baseUrl:                              'https://turing.mybinder.org'           # TURING: Alan Turing Institute
 # baseUrl:                              'http://localhost:8888'                 # local Jupyter Server, correct ???
+
   provider:                             gh
 
   button_styles:                        btn btn-primary btn-raised hidden

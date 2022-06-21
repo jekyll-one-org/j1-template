@@ -49,6 +49,7 @@
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">x_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="n">y_coords</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 
+
 <span class="n">options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s1">&#39;xlim&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">),</span>
     <span class="s1">&#39;ylim&#39;</span><span class="p">:</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">11</span><span class="p">),</span>
@@ -60,7 +61,13 @@
     <span class="s1">&#39;plot_width&#39;</span><span class="p">:</span> <span class="s1">&#39;800px&#39;</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">scatter_drag</span> <span class="o">=</span> <span class="n">nbi</span><span class="o">.</span><span class="n">scatter_drag</span><span class="p">(</span><span class="n">x_coords</span><span class="p">,</span> <span class="n">y_coords</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span> <span class="n">layouts</span><span class="o">=</span><span class="n">layouts</span><span class="p">)</span>
+<span class="n">scatter_drag</span> <span class="o">=</span> <span class="n">nbi</span><span class="o">.</span><span class="n">scatter_drag</span><span class="p">(</span>
+    <span class="n">x_coords</span><span class="p">,</span>
+    <span class="n">y_coords</span><span class="p">,</span>
+    <span class="n">options</span><span class="o">=</span><span class="n">options</span><span class="p">,</span>
+    <span class="n">layouts</span><span class="o">=</span><span class="n">layouts</span>
+<span class="p">)</span>
+
 <span class="n">scatter_drag</span>
 </pre></div>
 
@@ -116,7 +123,13 @@
     <span class="s1">&#39;plot_width&#39;</span><span class="p">:</span> <span class="s1">&#39;800px&#39;</span><span class="p">,</span>
 <span class="p">}</span>
 
-<span class="n">scatter_chart</span> <span class="o">=</span> <span class="n">nbi</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x_values</span><span class="p">,</span> <span class="n">y_values</span><span class="p">,</span> <span class="n">n</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">200</span><span class="p">),</span> <span class="n">layouts</span><span class="o">=</span><span class="n">layouts</span><span class="p">)</span>
+<span class="n">scatter_chart</span> <span class="o">=</span> <span class="n">nbi</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span>
+    <span class="n">x_values</span><span class="p">,</span>
+    <span class="n">y_values</span><span class="p">,</span>
+    <span class="n">n</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">200</span><span class="p">),</span>
+    <span class="n">layouts</span><span class="o">=</span><span class="n">layouts</span>
+<span class="p">)</span>
+
 <span class="n">scatter_chart</span>
 </pre></div>
 
