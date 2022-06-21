@@ -90,6 +90,7 @@
     "lint:adapter_js": "eslint --color _site/assets/themes/j1/adapter/js/*.js",
     "rebuild": "run-s -s rebuild:*",
     "rebuild:clean": "bundle exec jekyll clean",
+    "_rebuild:j1-nbinteract-core": "shx cp -f ./node_modules/j1-nbinteract-core/lib/* ../300_template_src/assets/themes/j1/modules/nbinteract-core/js/nbinteract",
     "rebuild:jekyll": "cross-var cross-env JEKYLL_ENV=$npm_package_config_mode BUNDLE_GEMFILE=$npm_package_ruby_gemfile bundle exec jekyll b --profile -c $npm_package_jekyll_configfile $npm_package_jekyll_opt_incremental",
     "rebuild:lint": "npm run lint",
     "jekyll_files": "run-s -s jekyll_files:*",
