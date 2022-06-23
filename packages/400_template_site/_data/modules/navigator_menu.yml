@@ -177,13 +177,13 @@
           dropdown:
 
             - title:                    Time Tables Visualization
-              href:                     /pages/public/jupyter/textbooks/j1-circular-times-table/
+              href:                     /pages/public/jupyter/examples/distributed/j1-circular-times-table/
               icon:                     notebook-outline
             - title:                    ODEs in Python
-              href:                     /pages/public/jupyter/textbooks/odes-in-python/
+              href:                     /pages/public/jupyter/examples/distributed/odes-in-python/
               icon:                     notebook-outline
             - title:                    Common Used Widgets
-              href:                     /pages/public/jupyter/textbooks/interactive-widgets/
+              href:                     /pages/public/jupyter/examples/distributed/common-used-widgets/
               icon:                     notebook-outline
 
         # ----------------------------------------------------------------------
@@ -210,8 +210,11 @@
           icon:                         head-lightbulb
           dropdown:
 
-            - title:                    J1 NBI Integration
+            - title:                    NBI Integration
               href:                     /pages/public/jupyter/docs/j1-nbinteract-docs/
+              icon:                     alpha-j-box
+            - title:                    NBI Wigets
+              href:                     /pages/public/jupyter/docs/nbi-widgets/
               icon:                     alpha-j-box
             - title:                    BinderHub API
               href:                     /pages/public/jupyter/docs/binderhub/

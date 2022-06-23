@@ -218,6 +218,7 @@ tag::urls[]
 
 :url-j1--binderhub:                               /pages/public/jupyter/docs/binderhub
 :url-j1--jupyterhub:                              /pages/public/jupyter/docs/jupyterhub
+:url-j1-repo--nbinteract:                         https://github.com/jekyll-one/j1-nbinteract
 
 :url-jekyll--home:                                https://jekyllrb.com/
 :url-jekyll--docs:                                https://jekyllrb.com/docs/
@@ -489,15 +490,7 @@ tag::data[]
 :data-binderhub--architecture:                    "pages/nbinteract/binderhub-architecture.jpg, Binderhub Architecture"
 :data-jupyterlab--architecture:                   "pages/nbinteract/jupyterlab-architecture.jpg, JupyterLab Architecture"
 
-:data-nbi-textbook--excerpt:                      "pages/nbinteract/nbi-textbook-example.jpg, NBI textbook (excerpt)"
-
-:data-nbi-widget--bar:                            "pages/nbinteract/manual/nbi_bar.jpg, Rendered Barchart"
-:data-nbi-widget--hist:                           "pages/nbinteract/manual/nbi_hist.jpg, Rendered Histogram"
-:data-nbi-widget--line:                           "pages/nbinteract/manual/nbi_line.jpg, Rendered Line Chart"
-:data-nbi-widget--multiple-choice:                "pages/nbinteract/manual/nbi_multiple_choice.jpg, Rendered Multiple Choice"
-:data-nbi-widget--scatter:                        "pages/nbinteract/manual/nbi_scatter.jpg, Rendered Scatter"
-:data-nbi-widget--scatter-drag:                   "pages/nbinteract/manual/nbi_scatter_drag.jpg, Rendered interactive Scatter"
-:data-nbi-widget--short-answer:                   "pages/nbinteract/manual/nbi_short_answer.jpg, Rendered Short Answer"
+:data-nbi-textbook--excerpt:                      "pages/nbinteract/manual/nbi-textbook-example.jpg, NBI textbook (excerpt)"
 
 :data-lingohub--speakers-by-language:             "pages/features/native-speakers-by-language.jpg, Native speakers by language"
 :data-images--google-lighthouse:                  "pages/features/google-lighthouse-1080x300.jpg, Google Lighthouse Scores"
