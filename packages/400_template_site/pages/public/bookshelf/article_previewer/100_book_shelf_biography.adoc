@@ -16,9 +16,6 @@ fab_menu_id:                            open_toc
 resources:                              [ animate ]
 resource_options:
   - attic:
-      padding_top:                      400
-      padding_bottom:                   50
-      opacity:                          0.5
       slides:
         - url:                          /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
           alt:                          Photo by Giammarco on Unsplash

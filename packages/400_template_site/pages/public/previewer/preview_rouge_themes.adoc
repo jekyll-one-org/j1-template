@@ -71,15 +71,9 @@ resource_options:
   - toccer:
       collapseDepth:                    4
   - attic:
-      padding_top:                      400
-      padding_bottom:                   50
-      opacity:                          0.5
       slides:
         - url:                          /assets/images/modules/attics/jessica-ruscello-1920x1280.jpg
           alt:                          Photo by Jessica Ruscello Unsplash
-#         caption:
-#           text:                       Photo by Jessica Ruscello on Unsplash
-#           href:                       https://unsplash.com/@jasonrosewell
           badge:
             type:                       unsplash
             author:                     Jessica Ruscello

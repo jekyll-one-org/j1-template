@@ -42,8 +42,6 @@ regenerate:                             false
 resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
   - attic:
-      padding_top:                      400
-      padding_bottom:                   50
       opacity:                          0.3
       slides:
         - url:                          /assets/images/modules/attics/shubham-dhage-2-1920x1280.jpg

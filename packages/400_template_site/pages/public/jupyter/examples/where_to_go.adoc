@@ -42,8 +42,6 @@ regenerate:                             false
 resources:                              [ clipboard, rouge ]
 resource_options:
   - attic:
-      padding_top:                      400
-      padding_bottom:                   50
       opacity:                          0.3
       slides:
         - url:                          /assets/images/modules/attics/tldr-1920x800.jpg

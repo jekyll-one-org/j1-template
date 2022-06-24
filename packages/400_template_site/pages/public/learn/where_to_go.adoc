@@ -41,9 +41,6 @@ regenerate:                             false
 resources:                              [ animate, comments ]
 resource_options:
   - attic:
-      padding_top:                      400
-      padding_bottom:                   50
-      opacity:                          0.5
       slides:
         - url:                          /assets/images/modules/attics/tldr-1920x800.jpg
           alt:                          Photo by Alexander Redl on Unsplash

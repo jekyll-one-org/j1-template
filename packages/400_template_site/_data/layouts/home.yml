@@ -110,11 +110,11 @@ lanes:
 
   # ----------------------------------------------------------------------------
   # MASTER header (attic)
+  #   All pages are using a specific header to display a title and a
+  #   tagline. Title and tagline are to be configured with the
+  #   FRONTMATTER of a page for individual data (text).
   #
   # NOTE:
-  #   All pages are using a specific header to display a title and a
-  #   tagline. Title and tagline are to be configured with the FRONTMATTER
-  #   of a page for individual data (text).
   # ----------------------------------------------------------------------------
   #
   - lane:

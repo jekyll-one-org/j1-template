@@ -72,6 +72,7 @@
     "clean:jekyll-links": "shx rm -rf _includes _layouts _plugins _install apps assets",
     "clean:jekyll-folders": "shx rm -f _sass",
     "clean:jekyll-folders-forced": "shx rm -rf _logs/* .jekyll-cache",
+    "clean:jekyll-pages-jupyter": "shx rm -f pages/public/jupyter/notebooks/textbooks/*html",
     "bundle": "run-s -s bundler:*",
     "bundler:info": "echo Create bundle ..",
     "bundler:clean": "shx rm -f Gemfile.lock",
@@ -102,6 +103,7 @@
     "jekyll_build:j1-nbinteract-core": "shx cp -f ./node_modules/j1-nbinteract-core/lib/* ../300_template_src/assets/themes/j1/modules/nbinteract-core/js/nbinteract",
     "jekyll_build:bundle": "cross-env BUNDLE_USERIZE=$npm_package_jekyll_userize npm run bundle",
     "jekyll_build:build": "cross-var cross-env JEKYLL_ENV=$npm_package_config_mode BUNDLE_GEMFILE=$npm_package_ruby_gemfile bundle exec jekyll b --profile -c $npm_package_jekyll_configfile $npm_package_jekyll_opt_incremental",
+    "_jekyll_post_build:textbooks": "npm run build--all",
     "jekyll_post_build:make_sure_css_files_copied": "shx cp -rf ../100_template_css/dist/* ../400_template_site/assets/themes/j1/core/css",
     "jekyll_post_build:make_sure_js_files_copied": "shx cp -rf ../200_template_js/dist/* ../400_template_site/assets/themes/j1/core/js",
     "develop": "run-p -s develop:*",
@@ -135,7 +137,7 @@
     "remove-links": "shx rm -rf _includes _layouts _plugins _install apps assets",
     "get_version": "run-p -s get_version:*",
     "get_version:jekyll": "cross-var cross-env JEKYLL_ENV=$npm_package_config_mode BUNDLE_GEMFILE=$npm_package_ruby_gemfile bundle exec jekyll --version",
-    "build--all": "cross-var nbinteract -r $npm_package_nbi_opt_nbi_input_folder -o $npm_package_nbi_opt_nbi_output_folder -t $npm_package_nbi_opt_output_type -s $npm_package_nbi_opt_credentials"
+    "build--all": "npm run clean:jekyll-pages-jupyter && cross-var nbinteract -r $npm_package_nbi_opt_nbi_input_folder -o $npm_package_nbi_opt_nbi_output_folder -t $npm_package_nbi_opt_output_type -s $npm_package_nbi_opt_credentials"
   },
   "dependencies": {
     "cross-env": "^7.0.3",

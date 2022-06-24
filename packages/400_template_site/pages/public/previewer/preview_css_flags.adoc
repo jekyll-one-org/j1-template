@@ -1,6 +1,7 @@
 ---
 title:                                  Country Flags Previewer
 tagline:                                flags worldwide
+layout:                                 page
 date:                                   2020-11-08 00:00:00
 description: >
                                         Country flags are often used in the context of language-specific selections
@@ -43,9 +44,6 @@ regenerate:                             false
 resources:                              [ animate, comments, clipboard, rouge, flags_previewer ]
 resource_options:
   - attic:
-      padding_top:                      400
-      padding_bottom:                   50
-      opacity:                          0.3
       slides:
         - url:                          /assets/images/modules/attics/vladislav-klapin-2-1920x1280.jpg
           alt:                          Photo by Vladislav Klapin on Unsplash

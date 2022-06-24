@@ -121,6 +121,8 @@ j1.adapter.attic = (function (j1, window) {
       // create settings object from frontmatter options
       var frontmatterOptions  = options != null ? $.extend({}, options) : {};
       // create settings object from attic options
+      var atticDefaults        = $.extend({}, {{attic_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      var atticSettings        = $.extend({}, {{attic_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       var atticOptions         = $.extend({}, {{attic_options | replace: 'nil', 'null' | replace: '=>', ':' }});
 
       // Save frontmatterOptions in the j1 namespace
@@ -138,6 +140,7 @@ j1.adapter.attic = (function (j1, window) {
     // Initialize all header supported
     // -------------------------------------------------------------------------
     loadHeader: function () {
+
       var frontmatterOptions = _this.frontmatterOptions;
 
       {% comment %} Load data from header config (yaml data file)
@@ -271,15 +274,13 @@ j1.adapter.attic = (function (j1, window) {
 
           // Initialize the header found in page
           if ($('#{{attic_id}}').length) {
-            // Load  Attic OPTIONS
-            var atticOptions = $.extend({}, {{attic_options | replace:'=>',':' }});
 
-            {% comment %} Load data from header config file
-            -------------------------------------------------------------------- {% endcomment %}
+          {% comment %} Load data from header config file
+          ---------------------------------------------------------------------- {% endcomment %}
 
-             {% comment %} NOTE:
-             Unclear why title_size|tagline_size evaluated to 1 if NOT set
-             ------------------------------------------------------------------- {% endcomment %}
+           {% comment %} NOTE:
+           Unclear why title_size|tagline_size evaluated to 1 if NOT set
+           --------------------------------------------------------------------- {% endcomment %}
 
             {% for item in attic_options.attics %}
               {% if item.attic.id == attic_id %}
@@ -288,7 +289,6 @@ j1.adapter.attic = (function (j1, window) {
                 {% assign r_text                = item.attic.r_text %}
                 {% assign text_emphasis         = item.attic.text_emphasis %}
                 {% assign padding_top           = item.attic.padding_top %}
-                {% assign padding_bottom        = item.attic.padding_bottom %}
                 {% assign padding_bottom        = item.attic.padding_bottom %}
                 {% assign margin_bottom         = item.attic.margin_bottom %}
 
@@ -299,33 +299,32 @@ j1.adapter.attic = (function (j1, window) {
                 {% assign title_animate         = item.attic.title.animate %}
                 {% assign title_align           = item.attic.title.align %}
 
-                {% assign background_color_1    = item.attic.background_color_1 %}
-                {% assign background_color_2    = item.attic.background_color_2 %}
+                {% assign background_color_1    = item.attic.background_color.color_1 %}
+                {% assign background_color_2    = item.attic.background_color.color_2 %}
 
-                {% assign type                  = item.attic.type %}
-                {% assign slides                = item.attic.slides %}
-                {% assign opacity               = item.attic.opacity %}
-                {% assign spinner               = item.attic.spinner %}
-                {% assign alignX                = item.attic.alignX %}
-                {% assign alignY                = item.attic.alignY %}
-                {% assign scale                 = item.attic.scale %}
-                {% assign animateFirst          = item.attic.animateFirst %}
-                {% assign paused                = item.attic.paused %}
-                {% assign start                 = item.attic.start %}
-                {% assign preload               = item.attic.preload %}
-                {% assign preloadSize           = item.attic.preloadSize %}
-                {% assign bypassCss             = item.attic.bypassCss %}
-                {% assign transition            = item.attic.transition %}
-                {% assign duration              = item.attic.duration %}
-                {% assign transitionDuration    = item.attic.transitionDuration %}
-                {% assign animateFirst          = item.attic.animateFirst %}
-                {% assign sound                 = item.attic.sound %}
+                {% assign type                  = item.attic.image_header.type %}
+                {% assign slides                = item.attic.image_header.slides %}
+                {% assign opacity               = item.attic.image_header.opacity %}
+                {% assign spinner               = item.attic.image_header.spinner %}
+                {% assign alignX                = item.attic.image_header.alignX %}
+                {% assign alignY                = item.attic.image_header.alignY %}
+                {% assign scale                 = item.attic.image_header.scale %}
+                {% assign animateFirst          = item.attic.image_header.animateFirst %}
+                {% assign paused                = item.attic.image_header.paused %}
+                {% assign start                 = item.attic.image_header.start %}
+                {% assign preload               = item.attic.image_header.preload %}
+                {% assign preloadSize           = item.attic.image_header.preloadSize %}
+                {% assign bypassCss             = item.attic.image_header.bypassCss %}
+                {% assign transition            = item.attic.image_header.transition %}
+                {% assign duration              = item.attic.image_header.duration %}
+                {% assign transitionDuration    = item.attic.image_header.transitionDuration %}
+                {% assign animateFirst          = item.attic.image_header.animateFirst %}
+                {% assign sound                 = item.attic.image_header.sound %}
 
                 // Create and json object for HEADER options taken from
                 // header config (YAML data file)
                 /* eslint-disable */
-                var atticOptionsHeader = {
-                  {% if opacity %}              "opacity":                {{ opacity | json }}, {% endif %}
+                var atticOptions = {
                   {% if raised_level %}         "raised_level":           {{ raised_level | json }}, {% endif %}
                   {% if r_text %}               "r_text":                 {{ r_text | json }}, {% endif %}
                   {% if text_emphasis %}        "text_emphasis":          {{ text_emphasis | json }}, {% endif %}
@@ -343,8 +342,8 @@ j1.adapter.attic = (function (j1, window) {
                   {% if background_color_1 %}   "background_color_1":     {{ background_color_1 | json }}, {% endif %}
                   {% if background_color_2 %}   "background_color_2":     {{ background_color_2 | json }}, {% endif %}
                 }
-                /* eslint-enable */
 
+                /* eslint-enable */
                 {% comment %} trans-script header|backstretch options
                 ---------------------------------------------------------------- {% endcomment %}
                 {% if type == 'video' %}
@@ -356,7 +355,7 @@ j1.adapter.attic = (function (j1, window) {
                 // Create an json object for BACKSTRETCH options taken from
                 // header config (yaml data file)
                 /* eslint-disable */
-                var atticOptionsBackstretch = {
+                var atticOptions = {
                   {% if spinner %}              "spinner":                {{ spinner | json }}, {% endif %}
                   {% if opacity %}              "opacity":                {{ opacity | json }}, {% endif %}
                   {% if slides %}               "slides":                 {{ slides | json }}, {% endif %}
@@ -376,13 +375,14 @@ j1.adapter.attic = (function (j1, window) {
                   {% if transitionDuration %}   "transitionDuration":     {{ transitionDuration | json }}, {% endif %}
                   {% if duration %}             "duration":               {{ duration | json }}, {% endif %}
                 }
+
+                // Load  Attic DEFAULTS
+                var attic_options = $.extend({}, {{attic_options | replace:'=>',':' }});
+
+                // Merge|Overload  Attic DEFAULTS by individual settings
+                // var atticOptions = j1.mergeData(attic_options, atticOptions);
+                var atticOptions = j1.mergeData(atticOptions, attic_options);
                 /* eslint-enable */
-
-                // Merge|Overload Attic OPTIONS
-                atticOptions = j1.mergeData(atticOptions, atticOptionsHeader);
-                atticOptions = j1.mergeData(atticOptions, atticOptionsBackstretch);
-
-                // Overload Attic OPTIONS by settings from frontmatterOptions
                 if (frontmatterOptions.background_color_1) atticOptions.background_color_1 = frontmatterOptions.background_color_1;
                 if (frontmatterOptions.background_color_2) atticOptions.background_color_2 = frontmatterOptions.background_color_2;
               {% else %}
@@ -454,11 +454,11 @@ j1.adapter.attic = (function (j1, window) {
 
             // Initialze header background gradient
             attic_style += '<style> .attic { ';
-            attic_style += 'background-image: -webkit-gradient(linear, left top, left bottom, from(' +atticOptions.background_color_1 + '), to(' +atticOptions.background_color_2+ ')) !important;';
-            attic_style += 'background-image: -webkit-linear-gradient(top, ' +atticOptions.background_color_1 + ' 0%, ' +atticOptions.background_color_2 + ' 100%) !important;';
-            attic_style += 'background-image: -o-linear-gradient(top, ' +atticOptions.background_color_1 + ' 0%, ' +atticOptions.background_color_2 + ' 100%) !important;';
-            attic_style += 'background-image: linear-gradient(to bottom, ' +atticOptions.background_color_1 + ' 0%, ' +atticOptions.background_color_2 + ' 100%) !important;';
-            attic_style += 'filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="' +atticOptions.background_color_1 + '", endColorstr="' +atticOptions.background_color_2 + '", GradientType=0) !important;';
+            attic_style += 'background-image: -webkit-gradient(linear, left top, left bottom, from(' +atticOptions.background_color_1+ '), to(' +atticOptions.background_color_2+ ')) !important;';
+            attic_style += 'background-image: -webkit-linear-gradient(top, ' +atticOptions.background_color_1+ ' 0%, ' +atticOptions.background_color_2+ ' 100%) !important;';
+            attic_style += 'background-image: -o-linear-gradient(top, ' +atticOptions.background_color_1+ ' 0%, ' +atticOptions.background_color_2+ ' 100%) !important;';
+            attic_style += 'background-image: linear-gradient(to bottom, ' +atticOptions.background_color_1+ ' 0%, ' +atticOptions.background_color_2+ ' 100%) !important;';
+            attic_style += 'filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="' +atticOptions.background_color_1+ '", endColorstr="' +atticOptions.background_color_2+ '", GradientType=0) !important;';
             attic_style += '} </style>';
             $('head').append(attic_style);
 

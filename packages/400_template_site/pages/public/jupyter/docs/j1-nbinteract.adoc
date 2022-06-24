@@ -42,9 +42,6 @@ regenerate:                             true
 resources:                              [ animate, clipboard, lightbox, nbinteract, rouge ]
 resource_options:
   - attic:
-      padding_top:                      400
-      padding_bottom:                   50
-      opacity:                          0.5
       slides:
         - url:                          /assets/images/modules/attics/kirklai-1920x1280.jpg
           alt:                          Photo by 𝓴𝓘𝓡𝓚 𝕝𝔸𝕀 on Unsplash

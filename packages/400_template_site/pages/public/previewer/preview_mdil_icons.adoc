@@ -43,9 +43,6 @@ regenerate:                             false
 resources:                              [ animate, comments, clipboard, rouge, mdil_previewer ]
 resource_options:
   - attic:
-      padding_top:                      400
-      padding_bottom:                   50
-      opacity:                          0.5
       slides:
         - url:                          /assets/images/pages/roundtrip/icon-fonts-1920x1280-bw.jpg
           alt:                          icon-fonts-1920x1280-bw

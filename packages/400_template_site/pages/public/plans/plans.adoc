@@ -28,9 +28,6 @@ regenerate:                             false
 resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
   - attic:
-      padding_top:                      400
-      padding_bottom:                   50
-      opacity:                          0.5
       slides:
         - url:                          /assets/images/modules/attics/shutterstock_sponsor-1920x1280.jpg
           alt:                          shutterstock_sponsor-1920x1280.jpg

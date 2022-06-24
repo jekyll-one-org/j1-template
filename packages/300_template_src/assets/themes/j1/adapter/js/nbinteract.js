@@ -437,7 +437,13 @@ j1.adapter.nbinteract = (function (j1, window) {
     // -------------------------------------------------------------------------
     interactNbiTextbooks: function (options) {
       var state;
-      var textbook = options;
+      //  collect (preferred) Binder references
+      //
+      var preferredBaseUrl  = options.baseUrls.preferred;
+      var myBaseUrl         = options.baseUrls[preferredBaseUrl];
+      var preferredProvider = options.providers.preferred;
+      var myProviderId      = options.providers[preferredProvider].provider_id;
+      var myProviderSpec    = options.providers[preferredProvider].provider_spec;
 
       // initialize state flag
       _this.setState('started');
@@ -445,7 +451,7 @@ j1.adapter.nbinteract = (function (j1, window) {
 
       // check if the Binder Service is available
       //
-      _this.checkURL(options.baseUrl, flags);
+      _this.checkURL(myBaseUrl, flags);
 
       var log_text = '\n' + 'nbinteract is being initialized';
       logger.info(log_text);
@@ -469,7 +475,7 @@ j1.adapter.nbinteract = (function (j1, window) {
 
                   var nbiButtonsFound = document.querySelectorAll('.js-nbinteract-widget').length
                   if (nbiIndicateNbiActivity && nbiButtonsFound == 1) {
-                    var log_text = '\n' + 'non-nbi textbook found, skip NBI initialization for: {{textbook_id}}';
+                    var log_text = '\n' + 'localized textbook found, skip NBI initialization for: {{textbook_id}}';
                     logger.warn(log_text);
                     spinner.stop();
                   }
@@ -482,9 +488,9 @@ j1.adapter.nbinteract = (function (j1, window) {
                     //
                     coreLogger = log4javascript.getLogger('nbinteract.core');
                     interact = new NbInteract({
-                      spec:     options.spec,
-                      baseUrl:  options.baseUrl,
-                      provider: options.provider,
+                      baseUrl:  myBaseUrl,
+                      provider: myProviderId,
+                      spec:     myProviderSpec,
                       logger:   coreLogger,
                       j1API:    j1,
                     });
