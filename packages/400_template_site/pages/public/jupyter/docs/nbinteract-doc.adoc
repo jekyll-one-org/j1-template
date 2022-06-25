@@ -39,7 +39,7 @@ personalization:                        true
 permalink:                              /pages/public/jupyter/textbooks/nbinteract-docs/
 regenerate:                             false
 
-resources:                              [ nbinteract, rouge ]
+resources:                              [ animate, nbinteract, rouge ]
 resource_options:
   - attic:
       slides:

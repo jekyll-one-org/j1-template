@@ -35,13 +35,13 @@ keywords: >
 categories:                             [ Software, Python ]
 tags:                                   [ Bokeh, Jupyter, Notebooks, Localized ]
 
-scrollbar:                              true
+scrollbar:                              false
 fab_menu_id:                            open_toc_reload
 personalization:                        false
 
 permalink:                              /pages/public/jupyter/examples/localized/j1-bokeh-visualizations/
 
-resources:                              [ nbinteract, rouge ]
+resources:                              [ animate, nbinteract, rouge ]
 resource_options:
   - toccer:
       collapseDepth:                    2

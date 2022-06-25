@@ -40,7 +40,7 @@ personalization:                        true
 permalink:                              /pages/public/jupyter/textbooks/j1-testing-plotly/
 regenerate:                             true
 
-resources:                              [ nbinteract, require, rouge ]
+resources:                              [ animate, nbinteract, require, rouge ]
 resource_options:
   - attic:
       slides:

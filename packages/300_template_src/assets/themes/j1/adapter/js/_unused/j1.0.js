@@ -163,9 +163,9 @@ var j1 = (function () {
   var expireCookiesOnRequiredOnly = ('{{cookie_options.expireCookiesOnRequiredOnly}}' === 'true') ? true: false;
 
   // defaults for dynamic pages
-  var timeoutScrollDynamicPages   = '{{template_config.timeoutScrollDynamicPages}}';
+  var autoScrollRatioThreshold    = '{{template_config.autoScrollRatioThreshold}}';
   var pageGrowthRatio             = 0;                                          // ratio a dynamic page has grown in height
-  var pageBaseHeigth              = 0;                                            // base height of  a dynamic page
+  var pageBaseHeigth              = 0;  	                                      // base height of  a dynamic page
   var staticPage                  = false;                                      // defalt: false, but decided in ResizeObserver
   var pageHeight;                                                               // height of a page dynamic detected in ResizeObserver
 
@@ -291,11 +291,8 @@ var j1 = (function () {
       j1['xhrDataState'] = {};
       j1['xhrDOMState']  = {};
       j1['pageMonitor']  = {
-        pageType:             'unknown',
-        currentPageHeight:    0,
-        previouspageHeight:   0,
-        currentGrowthRatio:   0,
-        previousGrowthRatio:  0
+        previousGrowthRatio: 0,
+        currentGrowthRatio: 0
       };
 
       // -----------------------------------------------------------------------
@@ -493,11 +490,17 @@ var j1 = (function () {
       // -----------------------------------------------------------------------
       j1.core.bsFormClearButton();
 
-      // finalize and display current page
+      // finalize and display page
       j1.displayPage();
 
-      // scroll to an anchor in current page if given in URL
-      j1.scrollToAnchor();
+      setTimeout (function() {
+        const scrollOffset = j1.getScrollOffset();
+        $('#content').css('display', 'block');
+        j1.scrollTo(scrollOffset);
+        logger.info('\n' + 'Scroller: Scroll dynamic page on timeout')
+      }, 5000);
+
+
     },
 
     // -------------------------------------------------------------------------
@@ -1126,6 +1129,7 @@ var j1 = (function () {
               clearInterval(dependencies_met_navigator_finished);
             }
           }, 25);
+
         }, flickerTimeout);
       }
     },
@@ -2255,39 +2259,6 @@ var j1 = (function () {
     },
 
     // -------------------------------------------------------------------------
-    // scrollToAnchor()
-    // Scroll to an anchor in current page if given in URL
-    // TODO: Find a better solution for 'dynamic' pages to detect
-    // the content if fully loaded instead using a timeout
-    // -------------------------------------------------------------------------
-    scrollToAnchor: function () {
-      var logger = log4javascript.getLogger('j1.adapter.scrollToAnchor');
-
-      var dependencies_met_page_displayed = setInterval (function () {
-        if (j1.getState() == 'finished' && j1['pageMonitor'].currentGrowthRatio >= 100) {
-          if (j1['pageMonitor'].pageType == 'static') {
-            logger.info('\n' + 'Scroller: Scroll static page')
-            const scrollOffset = j1.getScrollOffset();
-            j1.scrollTo(scrollOffset);
-            clearInterval(dependencies_met_page_displayed);
-          } else if (j1['pageMonitor'].pageType == 'dynamic') {
-            setTimeout (function() {
-              const scrollOffset = j1.getScrollOffset();
-              j1.scrollTo(scrollOffset);
-              logger.info('\n' + 'Scroller: Scroll dynamic page on timeout')
-            }, timeoutScrollDynamicPages);
-            clearInterval(dependencies_met_page_displayed);
-          }
-          else {
-            // failsave fallback
-            const scrollOffset = j1.getScrollOffset();
-            j1.scrollTo(scrollOffset);
-          }
-        }
-      }, 25);
-    },
-
-    // -------------------------------------------------------------------------
     // registerEvents()
     //
     // -------------------------------------------------------------------------
@@ -2297,100 +2268,93 @@ var j1 = (function () {
       // see: https://stackoverflow.com/questions/14866775/detect-document-height-change
       //
       const observer = new ResizeObserver(entries => {
-        const body              = document.body,
-              html              = document.documentElement,
-              scrollOffset      = j1.getScrollOffset();
-
-        var previousGrowthRatio = pageGrowthRatio;
-        var previouspageHeight  = pageHeight;
-
-        var documentHeight = Math.max (
-          body.scrollHeight,
-          body.offsetHeight,
-          html.clientHeight,
-          html.scrollHeight,
-          html.offsetHeight
-        );
-
+        const scrollOffset = j1.getScrollOffset();
         var growthRatio;
+        var previousGrowthRatio = pageGrowthRatio;
+        var previouspageHeight = pageHeight;
 
-        // scroll dynamic page to top on EVERY change
-        //
-        window.scrollTo(0, 0);
+//      $('#no_flicker').css('display', 'none');
+        $('#content').css('display', 'none');
+
+        var body = document.body,
+            html = document.documentElement;
+
+        var documentHeight = Math.max( body.scrollHeight, body.offsetHeight,
+                               html.clientHeight, html.scrollHeight, html.offsetHeight );
 
         j1['pageMonitor'].previousGrowthRatio = pageGrowthRatio;
+        // j1['pageMonitor'].previouspageHeight = pageHeight;
 
-        // collect all DOM properties with 'entry'
-        // each entry is an instance of ResizeObserverEntry
+        // Set autoScrollRatioThreshold if NOT specified
+        autoScrollRatioThreshold = autoScrollRatioThreshold ? autoScrollRatioThreshold : 100;
         for (const entry of entries) {
 
-          // get the page height (rounded to int)
-          //
+          // each entry is an instance of ResizeObserverEntry
           pageHeight = Math.round(entry.contentRect.height);
 
-          // set the 'base height' on page height detected <> 0
-          //
+          // set base height on a page height <> 0
           if (!pageBaseHeigth && pageHeight) {
             pageBaseHeigth = pageHeight;
+            // j1['pageMonitor'].currentpageHeight = pageHeight;
           }
 
-          // calculation of the ratio a page has grown
-          //
+          // calculation of the ratio a page that has lengthened
           if (pageBaseHeigth) {
-            // pageGrowthRatio = Math.round(pageHeight / pageBaseHeigth *100);
-            pageGrowthRatio = pageHeight / pageBaseHeigth *100;
-            pageGrowthRatio = pageGrowthRatio.toFixed(2);
+            pageGrowthRatio = Math.round(pageHeight / pageBaseHeigth *100);
             if (pageGrowthRatio < 100) pageGrowthRatio = 100;
-
-            // save pageGrowthRatio into the j1 adapter object for later access
-            //
+            // save pageGrowthRatio into the adapter object for (later) global access
+            // -----------------------------------------------------------------------
+            // j1['pageGrowthRatio'] = pageGrowthRatio;
             j1['pageMonitor'].currentGrowthRatio = pageGrowthRatio;
           }
-        }
 
-        growthRatio = ((pageGrowthRatio / previousGrowthRatio) - 1) * 100;
-
-        // collect details for the 'pageMonitor'
-        //
-        if (growthRatio > 0) {
-          // set a page as 'dynamic' if page has grown
-          //
-          staticPage  = false;
-          growthRatio = growthRatio.toFixed(2);
-
-          // if growthRatio calculated from 'toFixed' to Infinity,
-          // set value hard to '0.00'
-          if (growthRatio == Infinity) {
-            growthRatio = 0.000001;
-            growthRatio = growthRatio.toFixed(2);
+          // log only if page grown above 'autoScrollRatioThreshold'
+          if (pageGrowthRatio > autoScrollRatioThreshold) {
+            logger.debug('\n' + 'Page growth ratio reached the threshold: ', pageGrowthRatio);
           }
 
-          // unclear why the current pageHeight < previouspageHeight
-          // TODO: re-check the calculation based on the observer results
+          // identify a 'static page'
+          // unclear why a static page can "shrink" (found page height at 99%)
           //
-          if (pageHeight > previouspageHeight) {
-            logger.debug('\n' + 'Observer: previousPageHeight|currentPageHeight (px): ', previouspageHeight + '|' + pageHeight);
-            logger.debug('\n' + 'Observer: growthRatio relative|absolute (%): ', growthRatio + '|' + pageGrowthRatio);
-
+          if (pageGrowthRatio > 0 && pageGrowthRatio <= autoScrollRatioThreshold) {
+            staticPage = true;
+            j1['pageMonitor'].pageType = 'static';
+          } else {
+            // identify a page as 'dynamic' if autoScrollRatioThreshold reached
+            staticPage = false;
             j1['pageMonitor'].pageType = 'dynamic';
-            j1['pageMonitor'].previouspageHeight = previouspageHeight;
-            j1['pageMonitor'].currentPageHeight = pageHeight;
           }
-        } else {
-          // set a page as 'static' if no growth detected
-          //
-          staticPage = true;
-          j1['pageMonitor'].pageType = 'static';
-          // reset pageMonitor properties from any (previous) dynamic page
-          j1['pageMonitor'].previousGrowthRatio   = 0;
-          j1['pageMonitor'].currentGrowthRatio    = 0;
-          j1['pageMonitor'].currentPageHeight     = documentHeight;
-          j1['pageMonitor'].previouspageHeight    = 0;
-        }
-      });
 
-      // monitor the page 'content'
-      observer.observe(document.querySelector('#content'));
+          // dynamic page that has been increased in size above the threshold
+          if (pageGrowthRatio > autoScrollRatioThreshold) {
+            // $('#no_flicker').css('display', 'none');
+            window.scrollTo(0, 0);
+            // $('#no_flicker').css('display', 'block');
+            // j1.scrollTo(scrollOffset);
+            logger.info('\n' + 'Scroller: Scroll dynamic page on growth ratio: ', pageGrowthRatio);
+          }
+        }
+
+        // growthRatio = pageGrowthRatio / previousGrowthRatio;
+        // growthRatio = Math.round(pageGrowthRatio / previousGrowthRatio);
+        growthRatio = ((pageGrowthRatio / previousGrowthRatio) - 1) * 100;
+        if (growthRatio > 0) {
+          j1['pageMonitor'].previouspageHeight = previouspageHeight;
+          j1['pageMonitor'].currentPageHeight = pageHeight;
+          // var documentHeight  = document.height
+          growthRatio     = growthRatio.toFixed(2);
+
+          logger.debug('\n' + 'Page dim previousPageHeight|currentPageHeight: ', previouspageHeight + '|' + pageHeight);
+          logger.debug('\n' + 'Page dim documentHeight: ', documentHeight);
+          // logger.debug('\n' + 'Page dim currentPageHeight: ',  pageHeight);
+          // logger.debug('\n' + 'Page dim growthRatio: ', growthRatio);
+        }
+
+//      $('#no_flicker').css('display', 'block');
+        $('#content').css('display', 'block');
+      });
+      // monitor the page 'body'
+      observer.observe(document.querySelector('body'));
 
       // -----------------------------------------------------------------------
       // final updates before browser page|tab

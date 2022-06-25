@@ -196,7 +196,7 @@ defaults:
   # ----------------------------------------------------------------------------
   #
   providers:
-    preferred:                          github
+    preferred:                          github                                  # github
     github:
       provider_id:                      gh
       provider_spec:                    jekyll-one/j1-binder-repo/main          # config: requirements.txt

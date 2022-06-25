@@ -32,16 +32,17 @@ keywords: >
 categories:                             [ Software, Python ]
 tags:                                   [ Binder, Jupyter, Notebooks, Distributed ]
 
-scrollbar:                              true
+scrollbar:                              false
 fab_menu_id:                            open_toc_reload
 personalization:                        true
 
 permalink:                              /pages/public/jupyter/examples/distributed/odes-in-python/
 regenerate:                             false
 
-resources:                              [ nbinteract, rouge ]
+resources:                              [ animate, nbinteract, rouge ]
 resource_options:
   - attic:
+#     opacity:                          0.3
       slides:
         - url:                          /assets/images/modules/attics/yellow-cactus-1920x1280.jpg
           alt:                          Photo by Yellow Cactus on Unsplash

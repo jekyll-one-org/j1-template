@@ -33,14 +33,14 @@ keywords: >
 categories:                             [ Software, Python ]
 tags:                                   [ Jupyter, Notebooks, Localized ]
 
-scrollbar:                              true
+scrollbar:                              false
 fab_menu_id:                            open_toc_reload
 personalization:                        true
 
 permalink:                              /pages/public/jupyter/examples/localized/climate-change-forecast/
 regenerate:                             false
 
-resources:                              [ nbinteract, rouge ]
+resources:                              [ animate, nbinteract, rouge ]
 resource_options:
   - attic:
       slides:

@@ -39,7 +39,7 @@ personalization:                        true
 permalink:                              /pages/public/jupyter/experimental/where-to-go/
 regenerate:                             false
 
-resources:                              [ clipboard, rouge ]
+resources:                              [ animate, clipboard, rouge ]
 resource_options:
   - attic:
       opacity:                          0.3

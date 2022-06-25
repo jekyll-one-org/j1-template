@@ -37,14 +37,14 @@ keywords: >
 categories:                             [ Software, Python ]
 tags:                                   [ Altair, Jupyter, Notebooks, Localized ]
 
-scrollbar:                              true
+scrollbar:                              false
 fab_menu_id:                            open_toc_reload
 personalization:                        false
 
 permalink:                              /pages/public/jupyter/examples/localized/j1-altair-visualizations/
 regenerate:                             false
 
-resources:                              [ nbinteract, rouge ]
+resources:                              [ animate, nbinteract, rouge ]
 resource_options:
   - attic:
       slides:

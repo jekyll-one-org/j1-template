@@ -486,7 +486,7 @@ j1.adapter.nbinteract = (function (j1, window) {
 
                     // create nbInteract (core) instance
                     //
-                    coreLogger = log4javascript.getLogger('nbinteract.core');
+                    coreLogger = log4javascript.getLogger('j1.nbinteract-core');
                     interact = new NbInteract({
                       baseUrl:  myBaseUrl,
                       provider: myProviderId,
@@ -502,7 +502,7 @@ j1.adapter.nbinteract = (function (j1, window) {
                     // issue an error if the NBI (init) button never removed by
                     // nbInteract-core (util or manager)
                     // TODO:  The 'timeout' condition should be replaced
-                    //        state-based triggered from nbInteract-core.
+                    //        state-based triggered from nbinteract-core.
                     //
                     window.setTimeout(function() {
                       var nbiButtonState = _this.getNbiButtonState();
@@ -703,7 +703,7 @@ j1.adapter.nbinteract = (function (j1, window) {
               }
             });
 
-            // make all 'image' elements responsive (BS@4)
+            // make all 'image' elements responsive (BS@5)
             //
             var images = document.getElementsByTagName('img');;
             [...images].forEach(function(x) {
@@ -751,7 +751,7 @@ j1.adapter.nbinteract = (function (j1, window) {
 
             } // END // disable translation on MathJax
 
-            // rewrite headlines in textbook HTML, add an id used by toccer
+            // rewrite headlines in textbook HTML, add an id to be used by toccer
             //
             $selector.find('h1').replaceWith( function() {
               // return '<h1 id="' + $(this)[0].id.replace(/\$/g, '') + '">' + $(this).text().slice(0,-1) + '</h1>';

@@ -163,9 +163,9 @@ var j1 = (function () {
   var expireCookiesOnRequiredOnly = ('{{cookie_options.expireCookiesOnRequiredOnly}}' === 'true') ? true: false;
 
   // defaults for dynamic pages
-  var timeoutScrollDynamicPages   = '{{template_config.timeoutScrollDynamicPages}}';
+  var autoScrollRatioThreshold    = '{{template_config.autoScrollRatioThreshold}}';
   var pageGrowthRatio             = 0;                                          // ratio a dynamic page has grown in height
-  var pageBaseHeigth              = 0;                                            // base height of  a dynamic page
+  var pageBaseHeigth              = 0;  	                                      // base height of  a dynamic page
   var staticPage                  = false;                                      // defalt: false, but decided in ResizeObserver
   var pageHeight;                                                               // height of a page dynamic detected in ResizeObserver
 
@@ -291,11 +291,10 @@ var j1 = (function () {
       j1['xhrDataState'] = {};
       j1['xhrDOMState']  = {};
       j1['pageMonitor']  = {
-        pageType:             'unknown',
-        currentPageHeight:    0,
-        previouspageHeight:   0,
-        currentGrowthRatio:   0,
-        previousGrowthRatio:  0
+        topScroll: false,
+        pageType: 'unknown',
+        previousGrowthRatio: 0,
+        currentGrowthRatio: 0
       };
 
       // -----------------------------------------------------------------------
@@ -493,11 +492,31 @@ var j1 = (function () {
       // -----------------------------------------------------------------------
       j1.core.bsFormClearButton();
 
-      // finalize and display current page
+      // finalize and display page
       j1.displayPage();
 
-      // scroll to an anchor in current page if given in URL
-      j1.scrollToAnchor();
+      var dependencies_met_page_displayed = setInterval (function () {
+        if (j1['pageMonitor'].currentGrowthRatio >= 100) {
+          if (j1['pageMonitor'].pageType == 'static') {
+            logger.info('\n' + 'Scroller: Scroll static page')
+            const scrollOffset = j1.getScrollOffset();
+            j1.scrollTo(scrollOffset);
+            clearInterval(dependencies_met_page_displayed);
+          } else if (j1['pageMonitor'].pageType == 'dynamic') {
+            setTimeout (function() {
+              const scrollOffset = j1.getScrollOffset();
+              j1.scrollTo(scrollOffset);
+              logger.info('\n' + 'Scroller: Scroll dynamic page on timeout')
+            }, 5000);
+            clearInterval(dependencies_met_page_displayed);
+          }
+          else {
+            // failsave fallback
+            const scrollOffset = j1.getScrollOffset();
+            j1.scrollTo(scrollOffset);
+          }
+        }
+      }, 25);
     },
 
     // -------------------------------------------------------------------------
@@ -1126,6 +1145,7 @@ var j1 = (function () {
               clearInterval(dependencies_met_navigator_finished);
             }
           }, 25);
+
         }, flickerTimeout);
       }
     },
@@ -2255,39 +2275,6 @@ var j1 = (function () {
     },
 
     // -------------------------------------------------------------------------
-    // scrollToAnchor()
-    // Scroll to an anchor in current page if given in URL
-    // TODO: Find a better solution for 'dynamic' pages to detect
-    // the content if fully loaded instead using a timeout
-    // -------------------------------------------------------------------------
-    scrollToAnchor: function () {
-      var logger = log4javascript.getLogger('j1.adapter.scrollToAnchor');
-
-      var dependencies_met_page_displayed = setInterval (function () {
-        if (j1.getState() == 'finished' && j1['pageMonitor'].currentGrowthRatio >= 100) {
-          if (j1['pageMonitor'].pageType == 'static') {
-            logger.info('\n' + 'Scroller: Scroll static page')
-            const scrollOffset = j1.getScrollOffset();
-            j1.scrollTo(scrollOffset);
-            clearInterval(dependencies_met_page_displayed);
-          } else if (j1['pageMonitor'].pageType == 'dynamic') {
-            setTimeout (function() {
-              const scrollOffset = j1.getScrollOffset();
-              j1.scrollTo(scrollOffset);
-              logger.info('\n' + 'Scroller: Scroll dynamic page on timeout')
-            }, timeoutScrollDynamicPages);
-            clearInterval(dependencies_met_page_displayed);
-          }
-          else {
-            // failsave fallback
-            const scrollOffset = j1.getScrollOffset();
-            j1.scrollTo(scrollOffset);
-          }
-        }
-      }, 25);
-    },
-
-    // -------------------------------------------------------------------------
     // registerEvents()
     //
     // -------------------------------------------------------------------------
@@ -2297,25 +2284,20 @@ var j1 = (function () {
       // see: https://stackoverflow.com/questions/14866775/detect-document-height-change
       //
       const observer = new ResizeObserver(entries => {
-        const body              = document.body,
-              html              = document.documentElement,
-              scrollOffset      = j1.getScrollOffset();
-
-        var previousGrowthRatio = pageGrowthRatio;
-        var previouspageHeight  = pageHeight;
-
-        var documentHeight = Math.max (
-          body.scrollHeight,
-          body.offsetHeight,
-          html.clientHeight,
-          html.scrollHeight,
-          html.offsetHeight
-        );
-
+        const scrollOffset = j1.getScrollOffset();
         var growthRatio;
+        var previousGrowthRatio = pageGrowthRatio;
+        var previouspageHeight = pageHeight;
+
+        const body = document.body,
+            html = document.documentElement;
+
+        var documentHeight = Math.max( body.scrollHeight, body.offsetHeight,
+                               html.clientHeight, html.scrollHeight, html.offsetHeight );
+
+        if (typeof previouspageHeight == 'undefined') previouspageHeight = documentHeight;
 
         // scroll dynamic page to top on EVERY change
-        //
         window.scrollTo(0, 0);
 
         j1['pageMonitor'].previousGrowthRatio = pageGrowthRatio;
@@ -2325,25 +2307,18 @@ var j1 = (function () {
         for (const entry of entries) {
 
           // get the page height (rounded to int)
-          //
           pageHeight = Math.round(entry.contentRect.height);
 
           // set the 'base height' on page height detected <> 0
-          //
           if (!pageBaseHeigth && pageHeight) {
             pageBaseHeigth = pageHeight;
           }
 
           // calculation of the ratio a page has grown
-          //
           if (pageBaseHeigth) {
-            // pageGrowthRatio = Math.round(pageHeight / pageBaseHeigth *100);
-            pageGrowthRatio = pageHeight / pageBaseHeigth *100;
-            pageGrowthRatio = pageGrowthRatio.toFixed(2);
+            pageGrowthRatio = Math.round(pageHeight / pageBaseHeigth *100);
             if (pageGrowthRatio < 100) pageGrowthRatio = 100;
-
             // save pageGrowthRatio into the j1 adapter object for later access
-            //
             j1['pageMonitor'].currentGrowthRatio = pageGrowthRatio;
           }
         }
@@ -2352,41 +2327,24 @@ var j1 = (function () {
 
         // collect details for the 'pageMonitor'
         //
+        var isFinite = growthRatio.isFinite;
         if (growthRatio > 0) {
           // set a page as 'dynamic' if page has grown
-          //
           staticPage  = false;
           growthRatio = growthRatio.toFixed(2);
 
-          // if growthRatio calculated from 'toFixed' to Infinity,
-          // set value hard to '0.00'
-          if (growthRatio == Infinity) {
-            growthRatio = 0.000001;
-            growthRatio = growthRatio.toFixed(2);
-          }
+          logger.debug('\n' + 'Observer: previousPageHeight|currentPageHeight (px): ', previouspageHeight + '|' + pageHeight);
+          logger.debug('\n' + 'Observer: growthRatio relative|absolute (%): ', growthRatio + '|' + pageGrowthRatio);
 
-          // unclear why the current pageHeight < previouspageHeight
-          // TODO: re-check the calculation based on the observer results
-          //
-          if (pageHeight > previouspageHeight) {
-            logger.debug('\n' + 'Observer: previousPageHeight|currentPageHeight (px): ', previouspageHeight + '|' + pageHeight);
-            logger.debug('\n' + 'Observer: growthRatio relative|absolute (%): ', growthRatio + '|' + pageGrowthRatio);
-
-            j1['pageMonitor'].pageType = 'dynamic';
-            j1['pageMonitor'].previouspageHeight = previouspageHeight;
-            j1['pageMonitor'].currentPageHeight = pageHeight;
-          }
+          j1['pageMonitor'].pageType = 'dynamic';
+          j1['pageMonitor'].previouspageHeight = previouspageHeight;
+          j1['pageMonitor'].currentPageHeight = pageHeight;
         } else {
           // set a page as 'static' if no growth detected
-          //
           staticPage = true;
           j1['pageMonitor'].pageType = 'static';
-          // reset pageMonitor properties from any (previous) dynamic page
-          j1['pageMonitor'].previousGrowthRatio   = 0;
-          j1['pageMonitor'].currentGrowthRatio    = 0;
-          j1['pageMonitor'].currentPageHeight     = documentHeight;
-          j1['pageMonitor'].previouspageHeight    = 0;
         }
+
       });
 
       // monitor the page 'content'
