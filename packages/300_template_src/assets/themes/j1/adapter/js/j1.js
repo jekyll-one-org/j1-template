@@ -2267,6 +2267,7 @@ var j1 = (function () {
         if (j1.getState() == 'finished' && j1['pageMonitor'].currentGrowthRatio >= 100) {
           if (j1['pageMonitor'].pageType == 'static') {
             logger.info('\n' + 'Scroller: Scroll static page')
+            // j1['pageMonitor'].currentGrowthRatio = 100;                         //
             const scrollOffset = j1.getScrollOffset();
             j1.scrollTo(scrollOffset);
             clearInterval(dependencies_met_page_displayed);
@@ -2383,7 +2384,7 @@ var j1 = (function () {
           j1['pageMonitor'].pageType = 'static';
           // reset pageMonitor properties from any (previous) dynamic page
           j1['pageMonitor'].previousGrowthRatio   = 0;
-          j1['pageMonitor'].currentGrowthRatio    = 0;
+          j1['pageMonitor'].currentGrowthRatio    = 100;                        // static pages are always at 100%
           j1['pageMonitor'].currentPageHeight     = documentHeight;
           j1['pageMonitor'].previouspageHeight    = 0;
         }

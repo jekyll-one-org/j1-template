@@ -10,23 +10,24 @@ keywords: >
                                         opensource, free, load, download, start, starter, example,
                                         high, easy, use, secure, encrypt, standard, popular,
                                         generate, create, learn, distribute, publish, deploy,
-                                        beginner, advanced, expert, student, learner, writer, reader, visitor
+                                        beginner, advanced, expert, student, learner, educator,
+                                        writer, reader, visitor,
                                         framework, toolkit, integration, extension, module, api,
-                                        dynamic, static, generator, client, server, internet, local, localhost
+                                        dynamic, static, generator, client, server, internet, local, localhost,
                                         page, web, website, webdesign, material, design, responsive,
                                         javascript, nodejs, ruby, windows, linux, osx, mac, os,
                                         http, https, html, html5, css, scss, style,
                                         browser, firefox, chrome, edge, opera, safari,
-                                        configuration, generator, navigation, menu, dropdown, fab, action, button
+                                        configuration, generator, navigation, menu, dropdown, fab, action, button,
                                         application, interface, provider, api, repository,
                                         cookie, language, translation, gdpr, dsgvo, privacy,
                                         asciidoc, aciidoctor, bootstrap, jekyll, liquid,
                                         hyvor, disqus, git, github, netlify, heroku, apple, microsoft,
                                         provider, service, internet, support,
                                         google, analytics, advertising, search, console, silverlight, score,
-                                        j1, template, jekyllone, comment,
-                                        python, jupyter, notebook, textbook, api, app, nbinteract,
-                                        nbi, integration, binder, binderhub, jupyterhub
+                                        j1, nbi, j1-nbinteract, nbinteract, template, integration,
+                                        python, jupyter, notebook, textbook, api, app,
+                                        binder, binderhub, jupyterhub
 
 categories:                             [ Software, Python ]
 tags:                                   [ Binder, Jupyter, Notebooks, Distributed ]
@@ -35,15 +36,12 @@ scrollbar:                              false
 fab_menu_id:                            open_toc_reload
 personalization:                        true
 
-permalink:                              /pages/public/jupyter/textbooks/j1-circular-times-table/
+permalink:                              /pages/public/jupyter/examples/distributed/j1-circular-times-table/
 regenerate:                             false
 
-resources:                              [ nbinteract, rouge ]
+resources:                              [ animate, nbinteract, rouge ]
 resource_options:
   - attic:
-      padding_top:                      400
-      padding_bottom:                   50
-      opacity:                          0.5
       slides:
         - url:                          /assets/images/modules/attics/yellow-cactus-1920x1280.jpg
           alt:                          Photo by Yellow Cactus on Unsplash
@@ -62,6 +60,7 @@ resource_options:
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
 :binder-badges-enabled:                 true
+:binder-app-launch--lab:                https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main
 :binder-app-launch--tree:               https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?urlpath=/tree
 :binder-app-launch--notebook:           https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/j1/j1_circular_times_table.ipynb
 :times-tables-visualization:            https://elc.github.io/posts/times-tables/
@@ -83,7 +82,7 @@ resource_options:
 
 ifeval::[{binder-badges-enabled} == true]
 image:/assets/images/badges/notebookBinder.png[Binder, link="{binder-app-launch--notebook}", {browser-window--new}]
-image:https://mybinder.org/badge_logo.svg[Binder, link="{binder-app-launch--tree}", {browser-window--new}]
+image:https://mybinder.org/badge_logo.svg[Binder, link="{binder-app-launch--lab}", {browser-window--new}]
 endif::[]
 
 CAUTION: Each interactive element presented on this page uses *time-consuming*

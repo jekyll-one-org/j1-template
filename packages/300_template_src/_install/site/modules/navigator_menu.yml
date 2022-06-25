@@ -60,67 +60,67 @@
           href:                         /pages/public/learn/roundtrip/quicksearch/
           icon:                         magnify
 
-    # # --------------------------------------------------------------------------
-    # # Jupyter Notebooks
-    # #
-    # - title:                            Jupyter Notebooks
-    #   icon:                             notebook-outline
-    #   dropdown:
+    # --------------------------------------------------------------------------
+    # Jupyter Notebooks
     #
-    #     - title:                        Where to go
-    #       href:                         /pages/public/jupyter/experimental/where-to-go/
-    #       icon:                         paw
-    #
-    #     # ----------------------------------------------------------------------
-    #     # Interactive Notebooks
-    #     #
-    #     - title:                        Distributed Notebooks
-    #       icon:                         notebook-outline
-    #       dropdown:
-    #
-    #         - title:                    Time Tables Visualization
-    #           href:                     /pages/public/jupyter/textbooks/j1-circular-times-table/
-    #           icon:                     notebook-outline
-    #         - title:                    ODEs in Python
-    #           href:                     /pages/public/jupyter/textbooks/odes-in-python/
-    #           icon:                     notebook-outline
-    #         - title:                    Common Used Widgets
-    #           href:                     /pages/public/jupyter/textbooks/interactive-widgets/
-    #           icon:                     notebook-outline
-    #
-    #     # ----------------------------------------------------------------------
-    #     # Static Notebooks
-    #     #
-    #     - title:                        Localized Notebooks
-    #       icon:                         notebook-outline
-    #       dropdown:
-    #
-    #         - title:                    Climate Change Forecast
-    #           href:                     /pages/public/jupyter/examples/localized/climate-change-forecast/
-    #           icon:                     notebook-outline
-    #         - title:                    Visualizations using Altair
-    #           href:                     https://jekyll.one/pages/public/jupyter/examples/localized/j1-altair-visualizations/
-    #           icon:                     notebook-outline
-    #         - title:                    Visualizations using Bokeh
-    #           href:                     https://jekyll.one/pages/public/jupyter/examples/localized/j1-bokeh-visualizations/
-    #           icon:                     notebook-outline
-    #
-    #     # ----------------------------------------------------------------------
-    #     # Documentation
-    #     #
-    #     - title:                        NBI Documentation
-    #       icon:                         head-lightbulb
-    #       dropdown:
-    #
-    #         - title:                    J1 NBI Integration
-    #           href:                     https://jekyll.one/pages/public/jupyter/docs/j1-nbinteract-docs/
-    #           icon:                     alpha-j-box
-    #         - title:                    BinderHub API
-    #           href:                     https://jekyll.one/pages/public/jupyter/docs/binderhub/
-    #           icon:                     book
-    #         - title:                    JupyterHub API
-    #           href:                     https://jekyll.one/pages/public/jupyter/docs/jupyterhub/
-    #           icon:                     book
+    - title:                            Jupyter Notebooks
+      icon:                             notebook-outline
+      dropdown:
+
+        - title:                        Where to go
+          href:                         /pages/public/jupyter/experimental/where-to-go/
+          icon:                         paw
+
+        # ----------------------------------------------------------------------
+        # Interactive Notebooks
+        #
+        - title:                        Distributed Notebooks
+          icon:                         notebook-outline
+          dropdown:
+
+            - title:                    Time Tables Visualization
+              href:                     /pages/public/jupyter/examples/distributed/j1-circular-times-table/
+              icon:                     notebook-outline
+            - title:                    ODEs in Python
+              href:                     /pages/public/jupyter/examples/distributed/odes-in-python/
+              icon:                     notebook-outline
+            - title:                    Common Used Widgets
+              href:                     /pages/public/jupyter/examples/distributed/common-used-widgets/
+              icon:                     notebook-outline
+
+        # ----------------------------------------------------------------------
+        # Static Notebooks
+        #
+        - title:                        Localized Notebooks
+          icon:                         notebook-outline
+          dropdown:
+
+            - title:                    Climate Change Forecast
+              href:                     /pages/public/jupyter/examples/localized/climate-change-forecast/
+              icon:                     notebook-outline
+            - title:                    Visualizations using Altair
+              href:                     /pages/public/jupyter/examples/localized/j1-altair-visualizations/
+              icon:                     notebook-outline
+            - title:                    Visualizations using Bokeh
+              href:                     /pages/public/jupyter/examples/localized/j1-bokeh-visualizations/
+              icon:                     notebook-outline
+
+        # ----------------------------------------------------------------------
+        # Documentation
+        #
+        - title:                        NBI Documentation
+          icon:                         head-lightbulb
+          dropdown:
+
+            - title:                    J1 NBI Integration
+              href:                     https://jekyll.one/pages/public/jupyter/docs/j1-nbinteract-docs/
+              icon:                     alpha-j-box
+            - title:                    BinderHub API
+              href:                     https://jekyll.one/pages/public/jupyter/docs/binderhub/
+              icon:                     book
+            - title:                    JupyterHub API
+              href:                     https://jekyll.one/pages/public/jupyter/docs/jupyterhub/
+              icon:                     book
 
     # --------------------------------------------------------------------------
     # Asciidoc Skeletons
