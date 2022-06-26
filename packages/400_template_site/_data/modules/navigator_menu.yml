@@ -166,7 +166,7 @@
       dropdown:
 
         - title:                        Where to go
-          href:                         /pages/public/jupyter/experimental/where-to-go/
+          href:                         /pages/public/jupyter/where-to-go/
           icon:                         paw
 
         # ----------------------------------------------------------------------

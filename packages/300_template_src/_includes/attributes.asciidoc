@@ -14,6 +14,8 @@ tag::urls[]
 :url-apache-log4j-v2--home:                       https://logging.apache.org/log4j/2.x/
 
 :url-binder--home:                                https://mybinder.org/
+:url-binder-app-launch--lab:                      https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main
+:url-binder-app-launch--tree:                     https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?urlpath=/tree
 
 :url-oreilly-atlas--home:                         https://atlas.oreilly.com/
 
@@ -216,9 +218,14 @@ tag::urls[]
 :url-j1-learn--responsive-tables:                 https://jekyll.one/pages/public/learn/roundtrip/responsive_tables/
 :url-j1-learn--themes:                            https://jekyll.one/pages/public/learn/roundtrip/themes/
 
-:url-j1--binderhub:                               /pages/public/jupyter/docs/binderhub
-:url-j1--jupyterhub:                              /pages/public/jupyter/docs/jupyterhub
-:url-j1-repo--nbinteract:                         https://github.com/jekyll-one/j1-nbinteract
+:url-j1-binder-repo--requirements-txt:            https://github.com/jekyll-one/j1-binder-repo
+:url-j1-binder-repo--environment-yml:             https://github.com/jekyll-one/j1-binder-nbinteract
+
+:url-j1-repo--j1-nbinteract:                      https://github.com/jekyll-one/j1-nbinteract
+:url-j1-altair-visualizations--remote:            https://jekyll.one/pages/public/jupyter/examples/localized/j1-bokeh-visualizations/
+:url-j1-bokeh-visualizations--remote:             https://jekyll.one/pages/public/jupyter/examples/localized/j1-bokeh-visualizations/
+:url-j1-nbi-module-docs--remote:                  https://jekyll.one/pages/public/jupyter/docs/j1-nbinteract-docs/
+:url-j1-nbi-apis-binder--remote:                  https://jekyll.one/pages/public/jupyter/docs/binderhub/
 
 :url-jekyll--home:                                https://jekyllrb.com/
 :url-jekyll--docs:                                https://jekyllrb.com/docs/

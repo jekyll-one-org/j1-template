@@ -78,7 +78,7 @@ endif::[]
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 
-The package link:{url-j1-repo--nbinteract}[j1-nbinteract, {browser-window--new}]
+The package at Github link:{url-j1-repo--j1-nbinteract}[j1-nbinteract, {browser-window--new}]
 aims to enable authors and educators to create and share interactive web pages
 easily. Interactive explanations of concepts are useful for communicating and
 explaining complex concepts better. The package *j1-nbinteract* comes with a

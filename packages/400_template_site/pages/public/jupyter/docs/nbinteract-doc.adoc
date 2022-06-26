@@ -147,15 +147,14 @@ the following commands in your terminal:
 
 [source, sh]
 ----
-pip install nbinteract
+pip install j1-nbinteract
 
 # The next two commands can be skipped for notebook version 5.3 and above
 jupyter nbextension enable --py --sys-prefix bqplot
 jupyter nbextension enable --py --sys-prefix widgetsnbextension
 ----
 
-WARNING: To work locally, a full setup of a Python *language* versions
-is required.
+WARNING: To work locally, a full setup of a *Python* version 3.x is required.
 
 === Setup steps
 
@@ -201,8 +200,8 @@ you've set up your GitHub repo correctly.
 
 ==== Cloning your repo
 
-Now, visit http://mybinder.org/[Binder] and paste the URL to your repo. It
-should look like this:
+Now, visit link:{url-binder--home}[Binder] and paste the URL to your repo.
+It should look like this:
 
   https://github.com/{username}/nbinteract-tutorial
 

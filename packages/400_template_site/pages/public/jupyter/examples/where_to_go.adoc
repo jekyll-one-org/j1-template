@@ -36,7 +36,7 @@ scrollbar:                              false
 fab_menu_id:                            page_ctrl_simple
 personalization:                        true
 
-permalink:                              /pages/public/jupyter/experimental/where-to-go/
+permalink:                              /pages/public/jupyter/where-to-go/
 regenerate:                             false
 
 resources:                              [ animate, clipboard, rouge ]
@@ -75,15 +75,12 @@ resource_options:
 :binder-app-launch--lab:                https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main
 :binder-app-launch--tree:               https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?urlpath=/tree
 
-:url-j1-notebook--times-tables:         /pages/public/jupyter/textbooks/j1-circular-times-table/
+:url-j1-notebook--times-tables:         /pages/public/jupyter/examples/distributed/j1-circular-times-table/
 :url-j1-notebook--climate-change:       /pages/public/jupyter/examples/localized/climate-change-forecast/
+:url-j1-altair-local--visualizations:   /pages/public/jupyter/examples/localized/j1-altair-visualizations/
 :url-j1-bokeh-local--visualizations:    /pages/public/jupyter/examples/localized/j1-bokeh-visualizations/
-:url-j1-bokeh-remote--visualizations:   https://jekyll.one/pages/public/jupyter/examples/localized/j1-bokeh-visualizations/
-:url-j1-nbi-module--docs-local:         /pages/public/jupyter/docs/j1-nbinteract-docs/
-:url-j1-nbi-module--docs-remote:        https://jekyll.one/pages/public/jupyter/docs/j1-nbinteract-docs/
-:url-j1-nbi-apis--binder-local:         /pages/public/jupyter/docs/binderhub/
-:url-j1-nbi-apis--binder--remote:       https://jekyll.one/pages/public/jupyter/docs/binderhub/
-
+:url-j1-nbi-module-docs--local:         /pages/public/jupyter/docs/j1-nbinteract-docs/
+:url-j1-nbi-apis-binder--local:         /pages/public/jupyter/docs/binderhub/
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -221,7 +218,7 @@ visualization but can achieve *similar* results if a powerful Javascript-based
 visualization the library is used. An excellent example of such a powerful
 Javascript-based visualization library is demonstrated with the tour through
 the (interactive) graphic elements of
-link:{url-j1-bokeh-remote--visualizations}[Bokeh, {browser-window--new}].
+link:{url-j1-bokeh-visualizations--remote}[Bokeh, {browser-window--new}].
 endif::[]
 
 ifndef::starter-web-enabled[]
@@ -241,7 +238,7 @@ NBI Documentation::
 Find more about how the NBI module works and what resources are used in
 this section. More about the module configuration and how it is used for static
 web pages can be found in this section:
-link:{url-j1-nbi-module--docs-remote}[NBI Docs, {browser-window--new}].
+link:{url-j1-nbi-module-docs--remote}[NBI Docs, {browser-window--new}].
 endif::[]
 
 ifndef::starter-web-enabled[]
@@ -249,7 +246,7 @@ NBI Documentation::
 Find more about how the NBI module works and what resources are used in
 this section. More about the module configuration and how it is used for static
 web pages can be found in this section:
-link:{url-j1-nbi-module--docs-local}[NBI Docs, {browser-window--new}].
+link:{url-j1-nbi-module-docs--local}[NBI Docs, {browser-window--new}].
 endif::[]
 
 ifdef::starter-web-enabled[]
@@ -267,7 +264,7 @@ More about the backgrounds of the NBI module and what are APIs are used
 under the hood can be found in this section. As the _Binder_ service is
 intensively used for distributed notebooks, more about these background service
 is provided at the
-link:{url-j1-nbi-apis--binder-local}[Binder API, {browser-window--new}].
+link:{url-j1-nbi-apis-binder--local}[Binder API, {browser-window--new}].
 endif::[]
 
 Having fun exploring the world of *Data Science* and *Analysis*.
