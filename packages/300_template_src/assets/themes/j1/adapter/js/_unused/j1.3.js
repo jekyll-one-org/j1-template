@@ -165,14 +165,13 @@ var j1 = (function () {
   // defaults for dynamic pages
   var timeoutScrollDynamicPages   = '{{template_config.timeoutScrollDynamicPages}}';
   var pageGrowthRatio             = 0;                                          // ratio a dynamic page has grown in height
-  var pageBaseHeigth              = 0;                                          // base height of a dynamic page (not grown)
+  var pageBaseHeigth              = 0;                                            // base height of  a dynamic page
   var staticPage                  = false;                                      // defalt: false, but decided in ResizeObserver
-  var pageHeight;
-  var pageBaseHeight;                                                              // height of a page dynamic detected in ResizeObserver
+  var pageHeight;                                                               // height of a page dynamic detected in ResizeObserver
 
-  var growthRatio                 = 100;
-  var previousGrowthRatio         = 100;
-  var previousPageHeight;
+  var previousGrowthRatio;
+  var growthRatio;
+  var previouspageHeight;
   var documentHeight;
 
   // defaults for the cookie management
@@ -297,12 +296,9 @@ var j1 = (function () {
       j1['xhrDataState'] = {};
       j1['xhrDOMState']  = {};
       j1['pageMonitor']  = {
-        eventNo:              0,
         pageType:             'unknown',
-        pageBaseHeight:       0,
-//      totalGrowthRatio:     0,
         currentPageHeight:    0,
-        previousPageHeight:   0,
+        previouspageHeight:   0,
         currentGrowthRatio:   0,
         previousGrowthRatio:  0
       };
@@ -506,9 +502,7 @@ var j1 = (function () {
       j1.displayPage();
 
       // scroll to an anchor in current page if given in URL
-      setTimeout (function() {
-        j1.scrollToAnchor();
-      }, timeoutScrollDynamicPages);
+      j1.scrollToAnchor();
     },
 
     // -------------------------------------------------------------------------
@@ -2278,6 +2272,7 @@ var j1 = (function () {
         if (j1.getState() == 'finished' && j1['pageMonitor'].currentGrowthRatio >= 100) {
           if (j1['pageMonitor'].pageType == 'static') {
             logger.info('\n' + 'Scroller: Scroll static page')
+            // j1['pageMonitor'].currentGrowthRatio = 100;                         //
             const scrollOffset = j1.getScrollOffset();
             j1.scrollTo(scrollOffset);
             clearInterval(dependencies_met_page_displayed);
@@ -2288,12 +2283,11 @@ var j1 = (function () {
               logger.info('\n' + 'Scroller: Scroll dynamic page on timeout')
             }, timeoutScrollDynamicPages);
             clearInterval(dependencies_met_page_displayed);
-          } else {
+          }
+          else {
             // failsave fallback
-            logger.warn('\n' + 'Scroller: Scroll page of unknown type')
             const scrollOffset = j1.getScrollOffset();
             j1.scrollTo(scrollOffset);
-            clearInterval(dependencies_met_page_displayed);
           }
         }
       }, 25);
@@ -2313,9 +2307,7 @@ var j1 = (function () {
               html              = document.documentElement,
               scrollOffset      = j1.getScrollOffset();
 
-        // get the page height from the DOM
-        //
-        var documentHeight = Math.max (
+        documentHeight = Math.max (
           body.scrollHeight,
           body.offsetHeight,
           html.clientHeight,
@@ -2323,75 +2315,100 @@ var j1 = (function () {
           html.offsetHeight
         );
 
-        // scroll the page to top on EVERY change of height
+        var growthRatio;
+
+        pageHeight = pageHeight ? pageHeight: documentHeight;
+        previousGrowthRatio = pageGrowthRatio ? pageGrowthRatio : 0;
+        growthRatio = growthRatio ? pageGrowthRatio : 0;
+        previouspageHeight  = pageHeight;
+
+        // scroll dynamic page to top on EVERY change
         //
         window.scrollTo(0, 0);
 
-        j1['pageMonitor'].eventNo += 1;
+        j1['pageMonitor'].previousGrowthRatio = pageGrowthRatio;
 
-        if (!j1['pageMonitor'].pageBaseHeight) {
-          // set INITAIL page properties
-          //
-          pageBaseHeight      = documentHeight;
-          previousGrowthRatio = 100;
-          growthRatio         = 0.00;
-
-          j1['pageMonitor'].pageBaseHeight      = documentHeight;
-          j1['pageMonitor'].currentPageHeight   = documentHeight;
-          j1['pageMonitor'].previousGrowthRatio = previousGrowthRatio;
-          j1['pageMonitor'].growthRatio         = growthRatio;
-        } else {
-          // set PREVIOUS page properties taken from GLOBAL vars
-          //
-          j1['pageMonitor'].previousPageHeight  = pageHeight;
-          j1['pageMonitor'].previousGrowthRatio = previousGrowthRatio;
-        }
-
-        // collect 'pageHeight' from 'entries'
-        // NOTE: each entry is an instance of ResizeObserverEntry
+        // collect all DOM properties with 'entry'
+        // each entry is an instance of ResizeObserverEntry
         for (const entry of entries) {
-          pageBaseHeight = j1['pageMonitor'].pageBaseHeight;
 
-          // get the page height (rounded to int) from observer
+          // get the page height (rounded to int)
           //
           pageHeight = Math.round(entry.contentRect.height);
-          j1['pageMonitor'].currentPageHeight = pageHeight;
 
-          // total growth ratio
-          pageGrowthRatio = pageHeight / pageBaseHeight * 100;
-          pageGrowthRatio = pageGrowthRatio.toFixed(2);
+          // set the 'base height' on page height detected <> 0
+          //
+          if (!pageBaseHeigth && pageHeight) {
+            pageBaseHeigth = pageHeight;
+          }
 
-          j1['pageMonitor'].currentGrowthRatio = pageGrowthRatio;
+          // calculation of the ratio a page has grown
+          //
+          if (pageBaseHeigth) {
+            // pageGrowthRatio = Math.round(pageHeight / pageBaseHeigth *100);
+            pageGrowthRatio = pageHeight / pageBaseHeigth *100;
+            pageGrowthRatio = pageGrowthRatio.toFixed(2);
+            if (pageGrowthRatio < 100) pageGrowthRatio = 100;
 
-          growthRatio = ((pageGrowthRatio / previousGrowthRatio) - 1) * 100;
-          growthRatio = growthRatio.toFixed(2);
-          j1['pageMonitor'].growthRatio = growthRatio;
+            // save pageGrowthRatio into the j1 adapter object for later access
+            //
+            j1['pageMonitor'].currentGrowthRatio = pageGrowthRatio;
+          }
         }
 
-        // detect the page 'type'
+        if (typeof previouspageHeight == 'undefined') {
+          // for static pages 'previouspageHeight' NOT set (undefined)
+          previouspageHeight = pageHeight;
+        }
+
+        if (previousGrowthRatio > 1) growthRatio = ((pageGrowthRatio / previousGrowthRatio) - 1) * 100;
+
+        if (typeof growthRatio == 'undefined') {
+          // for static pages 'growthRatio' NOT set (undefined)
+          growthRatio = 0;
+        }
+
+        // collect details for the 'pageMonitor'
         //
         if (growthRatio > 0) {
           // set a page as 'dynamic' if page has grown
           //
-          j1['pageMonitor'].pageType = 'dynamic';
+          staticPage  = false;
+          growthRatio = growthRatio.toFixed(2);
 
-          logger.debug('\n' + 'Observer: previousPageHeight|currentPageHeight (px): ', j1['pageMonitor'].previousPageHeight + '|' + pageHeight);
-          logger.debug('\n' + 'Observer: growthRatio relative|absolute (%): ', growthRatio + '|' + pageGrowthRatio);
+          // if growthRatio calculated from 'toFixed' to Infinity,
+          // set value hard to '0.00'
+          if (growthRatio == Infinity) {
+            growthRatio = 0.000001;
+            growthRatio = growthRatio.toFixed(2);
+          }
 
+          // unclear why the current pageHeight < previouspageHeight
+          // TODO: re-check the calculation based on the observer results
+          //
+          if (pageHeight > previouspageHeight) {
+            logger.debug('\n' + 'Observer: previousPageHeight|currentPageHeight (px): ', previouspageHeight + '|' + pageHeight);
+            logger.debug('\n' + 'Observer: growthRatio relative|absolute (%): ', growthRatio + '|' + pageGrowthRatio);
+
+            j1['pageMonitor'].pageType = 'dynamic';
+            j1['pageMonitor'].previouspageHeight = previouspageHeight;
+            j1['pageMonitor'].currentPageHeight = pageHeight;
+          }
         } else {
           // set a page as 'static' if no growth detected
           //
+          staticPage = true;
           j1['pageMonitor'].pageType = 'static';
+          // reset pageMonitor properties from any (previous) dynamic page
+          j1['pageMonitor'].previousGrowthRatio   = 0;
+          j1['pageMonitor'].currentGrowthRatio    = 100;                        // static pages are always at 100%
+          j1['pageMonitor'].currentPageHeight     = documentHeight;
+          j1['pageMonitor'].previouspageHeight    = documentHeight;
         }
       });
 
-      // monitor the page growth if visible
-      var dependencies_met_page_displayed = setInterval (function () {
-        if (j1.getState() == 'finished') {
-          observer.observe(document.querySelector('body'));                     //    observer.observe(document.querySelector('#content'));
-          clearInterval(dependencies_met_page_displayed);
-        }
-      }, 25);
+      // monitor the page 'content'
+      observer.observe(document.querySelector('#content'));
 
       // -----------------------------------------------------------------------
       // final updates before browser page|tab

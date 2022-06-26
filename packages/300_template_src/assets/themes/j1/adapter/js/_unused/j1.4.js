@@ -2373,15 +2373,28 @@ var j1 = (function () {
         if (growthRatio > 0) {
           // set a page as 'dynamic' if page has grown
           //
-          j1['pageMonitor'].pageType = 'dynamic';
+          // staticPage  = false;
+          // growthRatio = growthRatio.toFixed(2);
 
-          logger.debug('\n' + 'Observer: previousPageHeight|currentPageHeight (px): ', j1['pageMonitor'].previousPageHeight + '|' + pageHeight);
-          logger.debug('\n' + 'Observer: growthRatio relative|absolute (%): ', growthRatio + '|' + pageGrowthRatio);
+          // unclear why the current pageHeight < previousPageHeight
+          // TODO: re-check the calculation based on the observer results
+          //
+//        if (pageHeight > j1['pageMonitor'].previousPageHeight) {
+            j1['pageMonitor'].pageType = 'dynamic';
 
+            logger.debug('\n' + 'Observer: previousPageHeight|currentPageHeight (px): ', j1['pageMonitor'].previousPageHeight + '|' + pageHeight);
+            logger.debug('\n' + 'Observer: growthRatio relative|absolute (%): ', growthRatio + '|' + pageGrowthRatio);
+//        }
         } else {
           // set a page as 'static' if no growth detected
           //
+          // staticPage = true;
           j1['pageMonitor'].pageType = 'static';
+          // reset pageMonitor properties from any (previous) dynamic page
+          // j1['pageMonitor'].previousGrowthRatio   = 0;
+          // j1['pageMonitor'].currentGrowthRatio    = 100;                        // static pages are always at 100%
+          // j1['pageMonitor'].currentPageHeight     = documentHeight;
+          // j1['pageMonitor'].previousPageHeight    = documentHeight;
         }
       });
 
