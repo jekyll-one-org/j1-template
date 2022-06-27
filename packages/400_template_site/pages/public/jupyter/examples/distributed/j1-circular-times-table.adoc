@@ -36,8 +36,6 @@ scrollbar:                              false
 fab_menu_id:                            open_toc_reload
 personalization:                        true
 
-scrollDynamicPagesTopOnChange:          false                                   # do NOT scroll the page to top on content changes
-
 permalink:                              /pages/public/jupyter/examples/distributed/j1-circular-times-table/
 regenerate:                             false
 
