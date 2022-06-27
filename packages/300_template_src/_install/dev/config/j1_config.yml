@@ -409,9 +409,9 @@ body:
 #   values:                             boolean (true|false)
 #   default:                            false
 #
-#   NOTE: If scrolling to the top position is NOT wanted for specific pages,
+#   NOTE: If scrolling to the top position is wanted for specific pages,
 #         the property 'scrollDynamicPagesTopOnChange' can be set in the
-#         FRONTMATTER of a page to false.
+#         FRONTMATTER of a page to true.
 #
 # ------------------------------------------------------------------------------
 #
