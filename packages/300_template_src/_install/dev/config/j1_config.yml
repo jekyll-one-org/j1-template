@@ -380,4 +380,43 @@ body:
   line-height:                          1.5
 
 # ------------------------------------------------------------------------------
+# PAGE settings
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# SmoothScroll settings
+#
+#   timeoutScrollDynamicPages
+#   ----------------------------------------------------------------------------
+#   Delays the scrolling of DYNAMIC pages if an anchor is given in URL.
+#   The content of dynamic pages growth by loading HTML data at runtime.
+#   To scroll precisely to a headline (anchor) given in URL, the page needs
+#   to be fully rendered (loaded) BEFORE the headline is scrolled to by the
+#   browser.
+#
+#   values:                             (unsigned) int
+#   default:                            2000
+#
+#   scrollDynamicPagesTopOnChange
+#   ----------------------------------------------------------------------------
+#   Enables|Disables scrolling a dynamic page to the top positon of the
+#   browser window if content of DYNAMIC pages has changed.
+#   The content of dynamic pages growth by loading HTML data at runtime.
+#   While loadig the content, the page is scrolled to the top position of
+#   the browser window when the content growth. This may help to reduce
+#   'flicker' when content growth.
+#
+#   values:                             boolean (true|false)
+#   default:                            true
+#
+#   NOTE: If scrolling to the top position is NOT wanted for specific pages,
+#         the property 'scrollDynamicPagesTopOnChange' can be set in the
+#         FRONTMATTER of a page to false.
+#
+# ------------------------------------------------------------------------------
+#
+timeoutScrollDynamicPages:              2000
+scrollDynamicPagesTopOnChange:          true
+
+# ------------------------------------------------------------------------------
 # END config

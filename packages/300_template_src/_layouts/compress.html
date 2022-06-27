@@ -1,9 +1,10 @@
 ---
+# last layout in the heritance
 ---
 
 {% comment %}
  # -----------------------------------------------------------------------------
- #   ~/_layouts/compress.html
+ #  ~/_layouts/compress.html
  #  Liquid layout template for all pages|layouts to COMPRESS the HTML output
  #  for production mode
  #
@@ -20,8 +21,9 @@
  #
  # -----------------------------------------------------------------------------
  #  NOTE:
- #    Compress is the post-processing layout inherited by layout DEFAULT
- #    for all page layouts to compress the HTML for all pages generated.
+ #    Compress is the post-processing layout inherited by the (base) layout
+ #    DEFAULT for all content layouts to compress the HTML for all pages
+ #    generated. NO other layout are inherited by Compress.
  # -----------------------------------------------------------------------------
  #  NOTE:
  #    Compress is only used for PRODUCTION mode.

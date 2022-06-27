@@ -1,12 +1,12 @@
 ---
-layout:                                 default
-debug:                                  false
+layout:                                 default                                 # base layout the page inherits GLOBAL content
+debug:                                  false                                   # enable|disable additional debug information written to (static) content source
 ---
 
 {% comment %}
  # -----------------------------------------------------------------------------
  #  ~/_layouts/collection.html
- #  Liquid layout template for all pages of content-type COLLECTION
+ #  Liquid layout template for all pages of the content-type COLLECTION
  #
  #  Product/Info:
  #  https://jekyll.one
@@ -19,18 +19,15 @@ debug:                                  false
  # -----------------------------------------------------------------------------
  #  NOTE:
  #    This is the layout for all content pages of type COLLECTION.
- #    Layout COLLECTION is based on layout DEFAULT to inherit all
+ #    Layout COLLECTION is based on layout (base) DEFAULT to inherit all
  #    default (HTML) data used for ALL pages.
  # -----------------------------------------------------------------------------
  #  NOTE:
- #    For J1 template, "Liquid Procedures" are being used intensively. To load
+ #    Do NOT add any CONTENT here.
+ #    For J1 template, Liquid procedures are being used intensively. To load
  #    HTML data for a region (lane), the (Liquid) procedure "content_writer"
- #    places the components based on the YAML data file: collection.yml.
- # -----------------------------------------------------------------------------
- #  NOTE:
- #    Do NOT add any CONTENT here. If needed, go for a "next level" layout
- #    that extents the layout BASE by additional data for your specific
- #    needs based on YAML configuration data files.
+ #    places the components specified in the connected YAML data file
+ #    'collection.yml' located in folder: ~/_data/layouts.
  # -----------------------------------------------------------------------------
  # Test data:
  #  liquid_var:  {{ liquid_var | debug }}

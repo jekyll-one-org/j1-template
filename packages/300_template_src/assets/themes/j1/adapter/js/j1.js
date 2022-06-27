@@ -129,7 +129,7 @@ regenerate:                             true
 /* eslint semi: "off"                                                         */
 // -----------------------------------------------------------------------------
 'use strict';
-var j1 = (function () {
+var j1 = (function (options) {
 
   // ---------------------------------------------------------------------------
   // globals
@@ -148,30 +148,31 @@ var j1 = (function () {
   var documentHeight;
 
   // defaults for status information
-  var state                       = 'not_started';
-  var mode                        = 'not_detected';
+  var state                         = 'not_started';
+  var mode                          = 'not_detected';
 
   // defaults for tracking providers
-  var tracking_enabled            = ('{{tracking_enabled}}' === 'true') ? true: false;
-  var tracking_id                 = '{{tracking_id}}';
-  var tracking_id_valid           = (tracking_id.includes('tracking-id')) ? false : true;
+  var tracking_enabled              = ('{{tracking_enabled}}' === 'true') ? true: false;
+  var tracking_id                   = '{{tracking_id}}';
+  var tracking_id_valid             = (tracking_id.includes('tracking-id')) ? false : true;
 
   // defaults for comment providers
-  var comment_provider            = '{{comment_provider}}';
-  var site_id                     = '{{site_id}}';
-  var checkCookies                = {{cookie_options.checkCookies}};
-  var expireCookiesOnRequiredOnly = ('{{cookie_options.expireCookiesOnRequiredOnly}}' === 'true') ? true: false;
+  var comment_provider              = '{{comment_provider}}';
+  var site_id                       = '{{site_id}}';
+  var checkCookies                  = {{cookie_options.checkCookies}};
+  var expireCookiesOnRequiredOnly   = ('{{cookie_options.expireCookiesOnRequiredOnly}}' === 'true') ? true: false;
 
   // defaults for dynamic pages
-  var timeoutScrollDynamicPages   = '{{template_config.timeoutScrollDynamicPages}}';
-  var pageGrowthRatio             = 0;                                          // ratio a dynamic page has grown in height
-  var pageBaseHeigth              = 0;                                          // base height of a dynamic page (not grown)
-  var staticPage                  = false;                                      // defalt: false, but decided in ResizeObserver
+  var timeoutScrollDynamicPages     = '{{template_config.timeoutScrollDynamicPages}}';
+  var scrollDynamicPagesTopOnChange = '{{template_config.scrollDynamicPagesTopOnChange}}';
+  var pageGrowthRatio               = 0;                                          // ratio a dynamic page has grown in height
+  var pageBaseHeigth                = 0;                                          // base height of a dynamic page (not grown)
+  var staticPage                    = false;                                      // defalt: false, but decided in ResizeObserver
   var pageHeight;
   var pageBaseHeight;                                                              // height of a page dynamic detected in ResizeObserver
 
-  var growthRatio                 = 100;
-  var previousGrowthRatio         = 100;
+  var growthRatio                   = 100;
+  var previousGrowthRatio           = 100;
   var previousPageHeight;
   var documentHeight;
 
@@ -257,6 +258,27 @@ var j1 = (function () {
     return context[func].apply(context, args);
   }
 
+  function stringToBoolean(string) {
+    switch(string.toLowerCase().trim()) {
+      case "true":
+      case "yes":
+      case "1":
+        return true;
+      case "false":
+      case "no":
+      case "0":
+      case null:
+        return false;
+      default:
+        return Boolean(string);
+    }
+  }
+
+  function isOdd(num) {
+    var test = (num % 2).toString();
+    return stringToBoolean(test);
+  }
+
   // ---------------------------------------------------------------------------
   // main object
   // ---------------------------------------------------------------------------
@@ -274,6 +296,13 @@ var j1 = (function () {
         module_name: 'j1',
         generated:   '{{site.time}}'
       }, options);
+
+      // create settings object from frontmatter options
+      var frontmatterOptions  = options != null ? $.extend({}, options) : {};
+
+      // settings for dynamic pages
+      scrollDynamicPagesTopOnChange = frontmatterOptions.scrollDynamicPagesTopOnChange ? frontmatterOptions.scrollDynamicPagesTopOnChange : '{{template_config.scrollDynamicPagesTopOnChange}}';
+      scrollDynamicPagesTopOnChange = stringToBoolean(scrollDynamicPagesTopOnChange);
 
       // -----------------------------------------------------------------------
       // Global variable settings
@@ -879,8 +908,6 @@ var j1 = (function () {
             // display page
             $('#no_flicker').css('display', 'block');
 
-            window.scrollTo(0, 0);
-
             // jadams, 2021-12-06: Check if access to cookies for this site failed.
             // Possibly, a third-party domain or an attacker tries to access it.
             if (checkCookies) {
@@ -978,20 +1005,6 @@ var j1 = (function () {
             logger.info(logText);
             logText = '\n' + 'page finalized successfully';
             logger.info(logText);
-
-            // do a (smooth) scroll for static pages (if all nav elements ready)
-            // -----------------------------------------------------------------
-            var dependencies_met_navigator_finished = setInterval(function() {
-              // NOTE: dynamic pages scrolled at a growth ratio of 100 percent as well
-              if (j1.adapter.navigator.getState() == 'finished' && staticPage) {
-                // if a page requested contains an anchor element, do a smooth scroll
-                logger.debug('\n' + 'Scroll static page, growth ratio at 100 (percent)');
-                // NOTE: on some pages, the offset is NOT correct
-                var scrollOffset = j1.getScrollOffset();
-                // j1.scrollTo(scrollOffset);
-                clearInterval(dependencies_met_navigator_finished);
-              }
-            }, 25);
           }, flickerTimeout);
         });
       } else {
@@ -1003,8 +1016,6 @@ var j1 = (function () {
 
           // display the page loaded
           $('#no_flicker').css('display', 'block');
-
-          window.scrollTo(0, 0);
 
           // jadams, 2021-12-06: Check if access to cookies for this site failed.
           // Possibly, a third-party domain or an attacker tries to access it.
@@ -1124,19 +1135,6 @@ var j1 = (function () {
           logger.info(logText);
           logText = '\n' + 'page finalized successfully';
           logger.info(logText);
-
-          // do a (smooth) scroll for static pages (if all nav elements ready)
-          // -------------------------------------------------------------------
-          var dependencies_met_navigator_finished = setInterval(function() {
-            if (j1.adapter.navigator.getState() == 'finished' && staticPage) {
-              logger.debug('\n' + 'Scroll static page, growth ratio at 100 (percent)');
-              // if a page requested contains an anchor element, do a smooth scroll
-              // NOTE: on some pages, the offset is NOT correct
-              var scrollOffset = j1.getScrollOffset();
-              // j1.scrollTo(scrollOffset);
-              clearInterval(dependencies_met_navigator_finished);
-            }
-          }, 25);
         }, flickerTimeout);
       }
     },
@@ -2323,10 +2321,6 @@ var j1 = (function () {
           html.offsetHeight
         );
 
-        // scroll the page to top on EVERY change of height
-        //
-        window.scrollTo(0, 0);
-
         j1['pageMonitor'].eventNo += 1;
 
         if (!j1['pageMonitor'].pageBaseHeight) {
@@ -2371,7 +2365,15 @@ var j1 = (function () {
         // detect the page 'type'
         //
         if (growthRatio > 0) {
-          // set a page as 'dynamic' if page has grown
+          // scroll the page to top if content has grown
+          //
+          if (scrollDynamicPagesTopOnChange) {
+            // limit scrolling to reduce the flicker (for chromium browsers)
+            if (j1['pageMonitor'].eventNo > 3) {
+              window.scrollTo(0, 0);
+            }
+          }
+          // set the page type to 'dynamic' if content has grown
           //
           j1['pageMonitor'].pageType = 'dynamic';
 
@@ -2379,7 +2381,7 @@ var j1 = (function () {
           logger.debug('\n' + 'Observer: growthRatio relative|absolute (%): ', growthRatio + '|' + pageGrowthRatio);
 
         } else {
-          // set a page as 'static' if no growth detected
+          // set the page type to 'static' if no growth detected
           //
           j1['pageMonitor'].pageType = 'static';
         }

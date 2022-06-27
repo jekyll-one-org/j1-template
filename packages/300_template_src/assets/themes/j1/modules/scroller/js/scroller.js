@@ -85,14 +85,14 @@
           // initialize infinite scroll
           if ( options.type === 'infiniteScroll') {
             logger.info('\n' + 'processing mode: ' + options.type);
-            logger.info('\n' + 'loading items from path: ' + options.pagePath + "#");
+            logger.info('\n' + 'loading items from path: ' + options.pagePath);
             logger.info('\n' + 'monitoring element set to: ' + this.scroller);
             _this.registerScrollEvent(options);
           }
           // initialize show on scroll
           if ( options.type === 'showOnScroll') {
             logger.info('\n' + 'processing mode: ' + options.type);
-            logger.info('\n' + 'loading items from path: ' + options.pagePath + "#");
+            logger.info('\n' + 'loading items from path: ' + options.pagePath);
             logger.info('\n' + 'monitoring element set to: ' + this.scroller);
             _this.registerScrollEvent(options);
           }
@@ -225,7 +225,7 @@
       var _this = this;
       var logger = log4javascript.getLogger('j1.scroller.core.getNewPost');
 
-      logger.info('\n' + 'trigger loading ');
+      logger.debug('\n' + 'trigger loading ');
 
       // initialze loader flag
       if (this.itemsLoaded === false) return false;
@@ -285,7 +285,7 @@
       var newHTML = document.createElement('html');
       var logger = log4javascript.getLogger('j1.scroller.core.getChildItemsByAjaxHTML');
 
-      logger.info('\n' + 'load new items');
+      logger.debug('\n' + 'load new items');
       newHTML.innerHTML = HTMLText;
       var childItems = newHTML.querySelectorAll(options.elementID + ' > *');
       return childItems;
@@ -301,7 +301,7 @@
       var cookie_names    = j1.getCookieNames();
       var user_translate  = j1.readCookie(cookie_names.user_translate);
 
-      logger.info('\n' + 'append new items');
+      logger.debug('\n' + 'append new items');
       items.forEach(function (item) {
         _this.element.appendChild(item);
       });

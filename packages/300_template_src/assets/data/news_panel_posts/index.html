@@ -3,7 +3,7 @@ layout:                                 news_panel_posts
 # title:                                scroller pages
 tagline:                                scroller page
 description: >
-                                        Create index pages (infinte scroll) for all posts.
+                                        Create paginator pages for all posts.
                                         Used for infinite scroll for the news panel (home page)
 
 categories:                             []
@@ -27,13 +27,14 @@ exclude_from_search:                    true
 analytics:                              false
 comments:                               false
 
-regenerate:                             true                                    # needed to update paginator pages
+regenerate:                             true                                    # needed to update the pagination pages (infinite scroll)
 
 resources:                              []
 resource_options:                       []
 ---
 
 <pre>
+
   This page is created by the layout: {{ page.layout }}.
 
   If this text is displayed (instead of the home page expected),
@@ -43,4 +44,5 @@ resource_options:                       []
   Check the  contents   of folder _layouts. Verify  if the base
   layout  "{{ page.layout }}" exists  and the  referring  chain
   (inheritance) is correct.
+
 </pre>

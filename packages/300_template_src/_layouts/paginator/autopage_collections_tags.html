@@ -1,6 +1,6 @@
 ---
-layout:                                 page
-debug:                                  false
+layout:                                 page                                    # base layout the page inherits GLOBAL content
+debug:                                  false                                   # enable|disable additional debug information written to (static) content source
 regenerate:                             false
 
 autopages:
@@ -10,12 +10,15 @@ pagination:
   enabled:                              true
   collection:                           all
   debug:                                false
+
+resources:                              []
+resource_options:                       []
 ---
 
 {% comment %}
  # -----------------------------------------------------------------------------
- #   ~/_layouts/paginator_v2/autopage_collections_tags.html
- #  Liquid layout for Paginator V2 - Autopage COLLECTION|TAGS
+ #  ~/_layouts/j1_paginator/autopage_collections_tags.html
+ #  Liquid layout for J1 Paginator (Paginator V2) - Autopage COLLECTION|TAGS
  #
  #  Product/Info:
  #  https://jekyll.one

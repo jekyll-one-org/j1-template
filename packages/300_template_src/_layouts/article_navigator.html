@@ -1,11 +1,13 @@
 ---
-layout:                                 default
+layout:                                 default                                 # base layout the page inherits GLOBAL content
+debug:                                  false                                   # enable|disable additional debug information written to (static) content source
 ---
 
 {% comment %}
  # -----------------------------------------------------------------------------
- #  ~/_layouts/previewer_posts.html
- #  Liquid layout template for all pages of content-type ????
+ #  ~/_layouts/article_navigator.html
+ #  Liquid layout template for all pages of content-type article_navigator
+ #  (used by ~/assets/data/article_navigator/index.html)
  #
  #  Product/Info:
  #  https://jekyll.one
@@ -20,9 +22,11 @@ layout:                                 default
  #    This is the layout for the generator page of type BLOG ARCHIVE NAVIGATOR.
  # -----------------------------------------------------------------------------
  #  NOTE:
- #    For J1 template, "Liquid Procedures" are being used intensively. To load
+ #    Do NOT add any CONTENT here.
+ #    For J1 template, Liquid procedures are being used intensively. To load
  #    HTML data for a region (lane), the (Liquid) procedure "content_writer"
- #    places the components based on the YAML data file: collection.yml.
+ #    places the components specified in the connected YAML data file
+ #    'article_navigator.yml' located in folder: ~/_data/layouts.
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ lanes_collate | debug }}

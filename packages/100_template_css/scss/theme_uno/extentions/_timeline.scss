@@ -17,8 +17,8 @@
 // jadams, 2019-08-20: Added colors as vars
 // BMD variables NOT in files
 // -----------------------------------------------------------------------------
-$timeline-tmicon-background-color:                theme-color(primary) !default;
-$timeline-title-background-color:                 theme-color(primary) !default;
+$timeline-tmicon-background-color:                $blue !default;
+$timeline-title-background-color:                 $blue !default;
 
 // Header Box
 // -----------------------------------------------------------------------------
@@ -157,7 +157,7 @@ a.timeline-list-unstyled:hover {
 	position: absolute;
 	content: " ";
 	width: 3px;
-	background-color: $gray-100;
+	background-color: $gray-400;
 	left: 50%;
 	margin-left: -1.5px;
 }
@@ -230,7 +230,7 @@ a.timeline-list-unstyled:hover {
   position: absolute;
   background: $timeline-tmicon-background-color;
   margin: 0 0 0 -5px;
-  box-shadow: 0 0 0 4px $gray-100;
+  box-shadow: 0 0 0 4px $gray-400;
   -webkit-font-smoothing: antialiased;
 }
 

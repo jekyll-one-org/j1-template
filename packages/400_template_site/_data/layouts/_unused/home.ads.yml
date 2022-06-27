@@ -200,7 +200,7 @@ lanes:
   # Page Advertisment
   #
   - lane:
-      enabled:                          false
+      enabled:                          true
       region:                           body-main
       id:                               google_ad_content_home
       type:                             sync
