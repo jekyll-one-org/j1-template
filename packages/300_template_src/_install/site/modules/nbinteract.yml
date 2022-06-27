@@ -226,6 +226,28 @@ settings:
         use_mathjax:                    false
         altair_cleanups:                false
 
+    # --------------------------------------------------------------------------
+    # J1 BQplot Tutorial
+    # --------------------------------------------------------------------------
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1-bqplot-basic-plotting
+        xhr_data:                       j1-bqplot-basic-plotting.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1-bqplot-advanced-plotting
+        xhr_data:                       j1-bqplot-advanced-plotting.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+        altair_cleanups:                false
+
 
     # --------------------------------------------------------------------------
     # Distributed Textbooks
@@ -237,8 +259,79 @@ settings:
     - textbook:
         enabled:                        true
 
+        id:                             j1_docs_example_dynamic
+        xhr_data:                       j1_docs_example_dynamic.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    - textbook:
+        enabled:                        true
+
         id:                             j1_interactive_widgets
         xhr_data:                       j1_interactive_widgets.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    - textbook:
+        enabled:                        false
+
+        id:                             j1_nbi_widgets
+        xhr_data:                       j1_nbi_widgets.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_nbi_widgets_hist_chart
+        xhr_data:                       j1_nbi_widgets_hist_chart.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_nbi_widgets_bar_chart
+        xhr_data:                       j1_nbi_widgets_bar_chart.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_nbi_widgets_scatter_drag_chart
+        xhr_data:                       j1_nbi_widgets_scatter_drag_chart.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_nbi_widgets_scatter_chart
+        xhr_data:                       j1_nbi_widgets_scatter_chart.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_nbi_widgets_line_chart
+        xhr_data:                       j1_nbi_widgets_line_chart.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_nbi_widgets_question_multiple_choice
+        xhr_data:                       j1_nbi_widgets_question_multiple_choice.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    - textbook:
+        enabled:                        true
+
+        id:                             j1_nbi_widgets_question_short_answer
+        xhr_data:                       j1_nbi_widgets_question_short_answer.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    false
 
@@ -286,6 +379,143 @@ settings:
         xhr_data:                       j1_testing_plotly.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    false
+
+    # --------------------------------------------------------------------------
+    # NbInteract Docs
+    # --------------------------------------------------------------------------
+
+    # --------------------------------------------------------------------------
+    # simple_webpage
+    #
+    - textbook:
+        enabled:                        true
+
+        id:                             nbi_docs_tutorial_interact
+        xhr_data:                       nbi_docs_tutorial_interact.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    # --------------------------------------------------------------------------
+    # tutorial_monty_hall
+    #
+    - textbook:
+        enabled:                        true
+
+        id:                             nbi_docs_tutorial_monty_hall
+        xhr_data:                       nbi_docs_tutorial_monty_hall.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    # --------------------------------------------------------------------------
+    # recipes_graphing
+    #
+    - textbook:
+        enabled:                        true
+
+        id:                             nbi_docs_recipes_graphing
+        xhr_data:                       nbi_docs_recipes_graphing.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    # --------------------------------------------------------------------------
+    # recipes_layout
+    #
+    - textbook:
+        enabled:                        true
+
+        id:                             nbi_docs_recipes_layout
+        xhr_data:                       nbi_docs_recipes_layout.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    # --------------------------------------------------------------------------
+    # recipes_interactive_questions
+    #
+    - textbook:
+        enabled:                        true
+
+        id:                             nbi_docs_recipes_interactive_questions
+        xhr_data:                       nbi_docs_recipes_interactive_questions.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    # --------------------------------------------------------------------------
+    # empirical_distributions
+    #
+    - textbook:
+        enabled:                        true
+
+        id:                             nbi_docs_empirical_distributions
+        xhr_data:                       nbi_docs_examples_empirical_distributions.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    # --------------------------------------------------------------------------
+    # examples_sampling_from_a_population
+    #
+    - textbook:
+        enabled:                        true
+
+        id:                             nbi_docs_examples_sampling_from_a_population
+        xhr_data:                       nbi_docs_examples_sampling_from_a_population.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    # --------------------------------------------------------------------------
+    # examples_variability_of_the_sample_mean
+    #
+    - textbook:
+        enabled:                        true
+
+        id:                             nbi_docs_examples_variability_of_the_sample_mean
+        xhr_data:                       nbi_docs_examples_variability_of_the_sample_mean.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    true
+
+    # --------------------------------------------------------------------------
+    # examples_correlation
+    #
+    - textbook:
+        enabled:                        true
+
+        id:                             nbi_docs_examples_correlation
+        xhr_data:                       nbi_docs_examples_correlation.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    true
+
+    # --------------------------------------------------------------------------
+    # examples_linear_regression
+    #
+    - textbook:
+        enabled:                        true
+
+        id:                             nbi_docs_examples_linear_regression
+        xhr_data:                       nbi_docs_examples_linear_regression.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    # --------------------------------------------------------------------------
+    # examples_probability_distribution_plots
+    #
+    - textbook:
+        enabled:                        true
+
+        id:                             nbi_docs_examples_probability_distribution_plots
+        xhr_data:                       nbi_docs_examples_probability_distribution_plots.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
+    # --------------------------------------------------------------------------
+    # central_limit_theorem
+    #
+    - textbook:
+        enabled:                        true
+
+        id:                             nbi_docs_central_limit_theorem
+        xhr_data:                       nbi_docs_examples_central_limit_theorem.html
+        xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
+        use_mathjax:                    false
+
 
 # ------------------------------------------------------------------------------
 # END config
