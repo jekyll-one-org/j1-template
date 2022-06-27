@@ -407,7 +407,7 @@ body:
 #   'flicker' when content growth.
 #
 #   values:                             boolean (true|false)
-#   default:                            true
+#   default:                            false
 #
 #   NOTE: If scrolling to the top position is NOT wanted for specific pages,
 #         the property 'scrollDynamicPagesTopOnChange' can be set in the
@@ -416,7 +416,7 @@ body:
 # ------------------------------------------------------------------------------
 #
 timeoutScrollDynamicPages:              2000
-scrollDynamicPagesTopOnChange:          true
+scrollDynamicPagesTopOnChange:          false
 
 # ------------------------------------------------------------------------------
 # END config
