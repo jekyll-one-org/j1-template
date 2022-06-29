@@ -215,6 +215,46 @@ lanes:
       properties:                       g-2 elevated-z0
 
   # ----------------------------------------------------------------------------
+  # DIVIDER banner
+  #
+  #   Place a (dotted) line as a simple divider. Find the configuration
+  #   with:
+  #
+  #     banners:  ~/_data/blocks/banner.yml
+  #
+  # NOTE:
+  #   The property 'id' of a banner element MUST be the same as specified
+  #   the configuration for banners (banner.yml).
+  # ----------------------------------------------------------------------------
+  #
+  - lane:
+      enabled:                          false
+      id:                               divider-1
+      region:                           body-main
+      type:                             async
+      properties:                       mt-4 mr-0 mb-4 ml-0
+
+  # ----------------------------------------------------------------------------
+  # IMAGE banner
+  #
+  #   Places an image (full width) on a page. Can be used as a more
+  #   eye-minded divider element. Find the configuration with:
+  #
+  #     banners:  ~/_data/blocks/banner.yml
+  #
+  # NOTE:
+  #   The property 'id' of a banner element MUST be the same as specified
+  #   the configuration for banners (banner.yml).
+  #
+  # ----------------------------------------------------------------------------
+  #
+  - lane:
+      enabled:                          false
+      id:                               home_image_banner
+      region:                           body-main
+      type:                             async
+
+  # ----------------------------------------------------------------------------
   # CUSTOM content
   #
   #   Load custom rendered static HTML data files or custom HTML templates
@@ -256,46 +296,6 @@ lanes:
       region:                           body-main
       type:                             async
       properties:                       g-2 elevated-z0
-
-  # ----------------------------------------------------------------------------
-  # DIVIDER banner
-  #
-  #   Place a (dotted) line as a simple divider. Find the configuration
-  #   with:
-  #
-  #     banners:  ~/_data/blocks/banner.yml
-  #
-  # NOTE:
-  #   The property 'id' of a banner element MUST be the same as specified
-  #   the configuration for banners (banner.yml).
-  # ----------------------------------------------------------------------------
-  #
-  - lane:
-      enabled:                          false
-      id:                               divider-1
-      region:                           body-main
-      type:                             async
-      properties:                       mt-4 mr-0 mb-4 ml-0
-
-  # ----------------------------------------------------------------------------
-  # IMAGE banner
-  #
-  #   Places an image (full width) on a page. Can be used as a more
-  #   eye-minded divider element. Find the configuration with:
-  #
-  #     banners:  ~/_data/blocks/banner.yml
-  #
-  # NOTE:
-  #   The property 'id' of a banner element MUST be the same as specified
-  #   the configuration for banners (banner.yml).
-  #
-  # ----------------------------------------------------------------------------
-  #
-  - lane:
-      enabled:                          false
-      id:                               home_image_banner
-      region:                           body-main
-      type:                             async
 
   # ----------------------------------------------------------------------------
   # INTRO panel
