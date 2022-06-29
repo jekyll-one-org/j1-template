@@ -17,7 +17,6 @@ you go to the Jekyll Way.
   Template provides a large number of building blocks to create modern
   web pages in minutes.
 
-
 **Create powerful modern Static Webs: Secure, Flexible and Fast.**
 
 Have fun!
@@ -89,6 +88,7 @@ issues for private or professional use.
 * Comment provider support for Hyvor and Disqus
 * Google Analytics support
 * Deploy on Github Pages (source only), Netlify and Heroku ready
+* Support for Jupyter Notebooks
 
 # Supported platforms
 
