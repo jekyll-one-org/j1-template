@@ -61,20 +61,21 @@
 
      {% if item.attic.layout contains page.layout %}
         {% assign attic                 = item.attic.id %}
+        {% assign attic_enabled         = item.attic.enabled %}
 
-        {% assign action_enabled 	      = item.attic.action.enabled %}
+        {% assign action_enabled        = item.attic.action.enabled %}
         {% if action_enabled %}
-          {% assign action_url 	        = item.attic.action.url %}
-          {% assign action_button 	    = item.attic.action.button %}
-          {% assign action_icon	        = item.attic.action.icon %}
+          {% assign action_url          = item.attic.action.url %}
+          {% assign action_button       = item.attic.action.button %}
+          {% assign action_icon         = item.attic.action.icon %}
           {% assign action_icon_family  = item.attic.action.icon_family %}
-          {% assign action_text 	      = item.attic.action.text %}
+          {% assign action_text         = item.attic.action.text %}
         {% endif %}
 
-        {% assign logo_enabled 	        = item.attic.logo.enabled %}
+        {% assign logo_enabled          = item.attic.logo.enabled %}
         {% if logo_enabled %}
-          {% assign logo_url 	          = item.attic.logo.url %}
-          {% assign logo_alt     	      = item.attic.logo.alt %}
+          {% assign logo_url            = item.attic.logo.url %}
+          {% assign logo_alt            = item.attic.logo.alt %}
           {% assign logo_height         = item.attic.logo.height %}
           {% assign logo_animate        = item.attic.logo.animate %}
         {% endif %}
@@ -83,8 +84,10 @@
        {% continue %}
      {% endif %}
 
-    {% endif %}
-  {% endfor %}
+  {% else %}
+    {% assign attic_enabled = item.attic.enabled %}
+  {% endif %}
+{% endfor %}
 
 {% comment %} Initialize logo image
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -118,9 +121,11 @@
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
-{% if attic %}
-  <!-- [INFO   ] [j1.modules.attics.generator.html             ] [ place attic detected: {{attic}} ] -->
-
+  <!-- [INFO   ] [j1.attic.generator.html               ] [ attic enabled: {{attic_enabled}} ] -->
+{% if attic and attic_enabled %}
+  <!-- [INFO   ] [j1.attic.generator.html               ] [ attic enabled for layout: {{page.layout}} ] -->
+  <!-- [INFO   ] [j1.attic.generator.html               ] [ place attic detected: {{attic}} ] -->
+  
  {% comment %} Place attic detected
  ------------------------------------------------------------------------------- {% endcomment %}
   <div id="{{attic}}" class="attic notranslate">
@@ -143,11 +148,9 @@
 
 {% else %}
 
- {% comment %} No attic
- ------------------------------------------------------------------------------- {% endcomment %}
-  <!-- [INFO   ] [j1.attic.generator.html             ] [ no attic detected ] -->
-  <div id="no_attic" class="attic" style="margin-bottom: 120px;">
-    <div class="container"></div>
-  </div>
+  {% comment %} Fake attic used if NO attic is enabled for a layout
+  ------------------------------------------------------------------------------ {% endcomment %}
+   <!-- [INFO   ] [j1.attic.generator.html               ] [ attic disabled for layout: {{page.layout}} ] -->
+   <div id="no_attic" class="no-attic"></div>
 
 {% endif %}

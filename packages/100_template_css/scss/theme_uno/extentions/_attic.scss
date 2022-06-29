@@ -10,26 +10,33 @@
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
  # -----------------------------------------------------------------------------
- # NOTE: Styles for the attics module (page headers)
+ # NOTE: Styles for the attics module (master header)
  # -----------------------------------------------------------------------------
 */
+
+// Content
+// -----------------------------------------------------------------------------
+.no-attic {                                                                     // fake attic used if NO attic is enabled for a layout
+    padding-top: 80px;
+    margin-bottom: 50px;
+    background-color: $gray-900;
+}
 
 .attic {
   position: relative;
   width: 100%;
-  overflow: hidden; /* jadams, 2017-12-11: needed for image headers */
+  overflow: hidden;                                                             // jadams, 2017-12-11: needed for image headers
 }
 
 .attic .j1-booticon {
   margin: 0 auto 30px;
 }
 
-/* jadams, 2020-12-25: added line-height */
 .attic .head-title h2 {
   margin-top: -1.2rem;
   margin-bottom: 0 !important;
   font-weight: 600;
-  line-height: 1.2;
+  line-height: 1.2;                                                             // jadams, 2020-12-25: added line-height
 }
 
 .attic .head-tagline h3 {
@@ -81,12 +88,17 @@
     text-decoration: none;
 }
 
-/* Media breakpoints
--------------------------------------------------------------------------------- */
+// Media breakpoints
+// -----------------------------------------------------------------------------
 @media screen and (min-width: 992px) {
   .attic .lead {
     width: 90%;
     font-size: 30px;
+  }
+}
+@media screen and (max-width: 992px) {
+  .no-attic {
+      padding-top: 48px;
   }
 }
 
@@ -99,6 +111,11 @@
     font-size: 24px;
   }
 }
+@media screen and (max-width: 768px) {
+  .no-attic {
+      padding-top: 48px;
+  }
+}
 
 @media screen and (min-width: 480px) {
   .attic .btn {
@@ -106,10 +123,14 @@
     margin-top: 10px;
   }
 }
+@media screen and (max-width: 480px) {
+  .no-attic {
+      padding-top: 48px;
+  }
+}
 
-/* Helper styles
--------------------------------------------------------------------------------- */
-
+// Helper styles
+// -----------------------------------------------------------------------------
 .text-emphasis-none {
   text-shadow: none !important;
 }
@@ -126,8 +147,7 @@
   text-shadow: 0 4px 0 rgba(0,0,0,.2) !important;
 }
 
-
-// Unsplash
+// Unsplash badge
 // -----------------------------------------------------------------------------
 .attic__badge {
   background-color: rgba(0, 0, 0, 0.3);

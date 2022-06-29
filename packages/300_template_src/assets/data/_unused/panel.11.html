@@ -652,19 +652,29 @@ exclude_from_search:                    true
             <!-- End Heading -->
             {% endif %}
 
+            {% assign header_available  = false %}
+            {% assign card_items        = panel_options.cards|size %}
+
             {% for card in panel_options.cards %}
               {% for items in card %}
                 {% for item in items[1] %}
                   {% assign key   = item[0] %}
                   {% assign value = item[1] %}
-                  {% if key == 'infinite_scroll' %} {% assign card_infinite_scroll  = value %} {% endif %}
-                  {% if key == 'animate' %}         {% assign card_animate          = value %} {% endif %}
-                  {% if key == 'block' %}           {% assign card_block            = value %} {% endif %}
-                  {% if key == 'num_per_row' %}     {% assign cards_per_row         = value %} {% endif %}
-                  {% if key == 'max_posts' %}       {% assign posts_max             = value %} {% endif %}
-                  {% if key == 'truncatewords' %}   {% assign truncatewords         = value %} {% endif %}
+                  {% if key == 'enabled' %}       {% assign card_enabled  = value %} {% endif %}
+                  {% if key == 'type' %}          {% assign card_type     = value %} {% endif %}
+                  {% if key == 'block' %}         {% assign card_block    = value %} {% endif %}
+                  {% if key == 'num_per_row' %}   {% assign cards_per_row = value %} {% endif %}
+                  {% if key == 'style' %}         {% assign card_style    = value %} {% endif %}
+                  {% if key == 'raised' %}        {% assign card_raised   = value %} {% endif %}
+                  {% if key == 'category' %}      {% assign post_category = value %} {% endif %}
+                  {% if key == 'max_rows' %}      {% assign rows_max      = value %} {% endif %}
+                  {% if key == 'max_posts' %}     {% assign posts_max     = value %} {% endif %}
+                  {% if key == 'truncatewords' %} {% assign truncatewords = value %} {% endif %}
+                  {% if key == 'buttons' %}       {% assign card_buttons  = value %} {% endif %}
                 {% endfor %}
+                {% if card_enabled == false %} {% assign card_items = card_items|minus:1 %} {% assign card_enabled = nil %} {% endif %}
               {% endfor %}
+              {% assign col_size = 12|divided_by:card_items %}
 
               {% assign posts_written     = 0 %}
               {% assign last_post_written = false %}

@@ -50,13 +50,14 @@ exclude_from_search:                    true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign bs_card_deck            = bs_config.cards.card-deck %}
-{% assign banner_config_defaults  = banner_config_defaults.defaults %}
-{% assign banner_config_settings  = banner_config_settings.settings %}
+{% assign bs_card_deck              = bs_config.cards.card-deck %}
+{% assign banner_config_defaults    = banner_config_defaults.defaults %}
+{% assign banner_config_settings    = banner_config_settings.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign parallax_options  = banner_config_defaults.parallax_settings | merge: banner_config_settings.parallax_settings %}
+{% assign parallax_options          = banner_config_defaults.parallax_settings | merge: banner_config_settings.parallax_settings %}
+{% assign image_options             = banner_config_defaults.image_settings | merge: banner_config_settings.image_settings %}
 
 {% comment %} Set HELPER variables
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -128,9 +129,11 @@ exclude_from_search:                    true
         <div id="{{banner_settings.id}}">
           <div class="row banner-divider"></div>
         </div> <!-- End banner {{ id }} -->
+
         {% comment %} Reset element variables (already processed)
         ------------------------------------------------------------------------ {% endcomment %}
         {% assign banner_settings = nil %}
+
 
         {% comment %} Collect TEASER banner
         ------------------------------------------------------------------------ {% endcomment %}
@@ -250,47 +253,55 @@ exclude_from_search:                    true
         {% comment %} END TEASER banner
         ------------------------------------------------------------------------ {% endcomment %}
 
+
         {% comment %} Collect IMAGE banner
         ------------------------------------------------------------------------ {% endcomment %}
         {% when 'image' %}
-        <div id="{{banner_settings.id}}">
+
+        {% comment %} Set image banner DEFAULTS
+        gridifier:  {{ gridifier | debug }}
+        ------------------------------------------------------------------ {% endcomment %}
+        {% assign gridifier = image_options.gridifier %}
+
+        <div id="{{banner_settings.id}}" class="{{banner_settings.properties}}">
         {% assign banner_options = banner_config_defaults.image | merge: banner_settings %}
         {% if debug %}<!-- banner_options:  {{banner_options}} -->{% endif %}
 
-          {% for card in cards %}
-            {% for items in card %}
-              {% for item in items[1] %}
-                {% assign key   = item[0] %}
-                {% assign value = item[1] %}
-                {% if key == 'enabled' %}               {% assign enabled           = value %}                   {% endif %}
-                {% if key == 'gridify' %}               {% assign gridify           = value %}                   {% endif %}
-                {% if key == 'gridifier' %}             {% assign gridifier         = value %}                   {% endif %}
-                {% if key == 'darken' %}                {% assign darken            = value %}                   {% endif %}
-                {% if key == 'size_y' %}                {% assign size_y            = value %}                   {% endif %}
-                {% if key == 'background_image' %}      {% assign background_image  = value %}                   {% endif %}
-              {% endfor %}
-            {% endfor %}
+          {% capture opacity %}calc( {{banner_settings.image.opacity}}/100 ){% endcapture %}
 
-            {% if enabled %}
+          {% if banner_settings.image.justify %}
+            {% assign background-position = 'center' %}
+          {% else %}
+            {% assign background-position = 'inherit' %}
+          {% endif %}
 
-              {% capture darken %}0.{{darken}}{% endcapture %}
+          <style>
+            .{{banner_settings.id}}-image {
+              background:url("{{banner_settings.image.picture}}");
+              height: {{banner_settings.image.height}}px;
+              background-position: {{background-position}};
+              background-repeat: no-repeat; background-size: cover;
+              {% if banner_settings.image.opacity > 0 %}
+                opacity: {{opacity}};
+              {% endif %}
+              {% if banner_settings.image.brightness > 0 %}
+                filter: brightness({{banner_settings.image.brightness}}%);
+              {% endif %}
+            }
+            .{{banner_settings.id}}-image:before {
+              width:100%;
+              height:100%;
+              content:" ";
+              {% if banner_settings.image.gridify %}
+                background: url("{{gridifier}}") repeat;
+              {% endif %}
+            }
+            </style>
 
-              {% comment %} Set STYLE tags
-              ------------------------------------------------------------------ {% endcomment %}
-              $('head').append(
-                "<style>
-                  .{{banner_settings.id}}-image{background:url("{{background_image}}"); min-height: {{size_y}}px; background-position: center;  background-repeat: no-repeat; background-size: cover; }
-                </style>"
-              );
+          <div class="panel-fluid">
+            <div class="row no-gutters {{banner_settings.id}}-image"></div>
+          </div>
 
-              <div class="panel-fluid">
-                <div class="row no-gutters {{banner_settings.id}}-image"></div>
-              </div>
-
-            {% endif %}
-          {% endfor %}
-          {% comment %} END cards
-          ---------------------------------------------------------------------- {% endcomment %}
         </div> <!-- End banner {{ id }} -->
 
         {% comment %} Reset element variables (already processed)
@@ -360,7 +371,7 @@ exclude_from_search:                    true
                   {% if card_text and card_cite_text_quotes %}
                   .{{banner_settings.id}}-parallax-quote-in p:after,.{{banner_settings.id}}-parallax-quote-in p:before{content:' " ';}
                   {% endif %}
-                  .{{banner_settings.id}}-parallax-quote:after{background: rgba(0,0,0,{{darken}})}
+
               </style>
 
               <div class="panel-fluid {{banner_settings.properties}}">

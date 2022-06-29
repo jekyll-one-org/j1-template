@@ -108,7 +108,7 @@ lanes:
   #   The header region contains the 'master' header displayed on all pages.
   #
   #   NOTE:
-  #     Do NOT add any CONTENT here.
+  #     Do NOT add any HTML CONTENT here (directly).
   #     For the J1 Template GEM (J1 run-time version), ONLY the building
   #     blocks already prepared can be used to generate the contents of
   #     a home page. To change the content for a 'attic', find the
@@ -147,7 +147,7 @@ lanes:
   #     or unrendered content, a valid FRONTMATTER is needed to pass the data.
   #
   #   NOTE:
-  #     Do NOT add any CONTENT here.
+  #     Do NOT add any HTML CONTENT here (directly).
   #     For the J1 Template GEM (J1 run-time version), ONLY the building
   #     blocks already prepared can be used to generate the contents of
   #     a home page. To change the content for a 'lane', find the configuration

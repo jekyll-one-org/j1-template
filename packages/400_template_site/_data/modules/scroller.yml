@@ -42,7 +42,7 @@ settings:
     # Service Panel
     #
     - scroller:
-        enabled:                        false
+        enabled:                        true
         type:                           showOnScroll
         id:                             home_service_panel
         container:                      home_service_panel
