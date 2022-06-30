@@ -150,7 +150,7 @@ packages/400_template_site/_data/private*.yml
 
 packages/400_template_site/collections/posts/featured/_posts/*welcome-to-J1 Template.adoc
 
-packages/400_template_site/pages/public/jupyter/notebooks/textbooks/*html
+packages/400_template_site/pages/public/jupyter/notebooks/textbooks/
 
 
 # Unneeded files for package 500_template_gem
