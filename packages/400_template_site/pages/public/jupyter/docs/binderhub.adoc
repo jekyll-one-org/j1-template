@@ -196,7 +196,7 @@ maintain a private or internal channel.
 
 The configuration `requirements.txt` specifies a list of *Python packages*
 that should be installed in your environment. The `requirements.txt` example
-J1 is using on link:{url-j1--gh-binder-repo}[GitHub, {browser-window--new}]
+J1 is using on link:{url-j1-gh-binder-repo--requirements-txt}[GitHub, {browser-window--new}]
 shows a typical setup used with J1 Template for the example notebooks to run.
 
 For Binder, a requirements file should list *all* Python libraries that your

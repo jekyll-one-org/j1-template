@@ -188,8 +188,8 @@ _JupyterHub_ services
 You can find an overview of these services and their communication interfaces
 at:
 
-* link:{url-j1--binderhub}[BinderHub, {browser-window--new}]
-* link:{url-j1--jupyterhub}[JupyterHub, {browser-window--new}]
+* link:{url-j1-docs-binderhub--remote}[BinderHub, {browser-window--new}]
+* link:{url-j1-docs-jupyterhub--remote}[JupyterHub, {browser-window--new}]
 
 TIP: The `nbinteract` package also includes additional methods for interactive
 plots (widgets) designed for very fast interaction prototyping in the notebook
