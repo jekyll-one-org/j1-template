@@ -281,7 +281,7 @@ bar_chart = nbi.bar(
 bar_chart
 ----
 
-=== Rendered Bar Chart
+=== Rendered Bar chart
 
 lightbox::nbi-widget--bar[1280, {image-nbi-widget--bar}, role="mt-3 mb-4"]
 

@@ -345,7 +345,7 @@ For the complete set of options, run nbinteract --help.
 
 [source, sh]
 ----
-$ nbinteract --help
+nbinteract --help
 ----
 
 ....

@@ -208,7 +208,7 @@ The integration of NBI consists of the following components:
 The built-in Starter Web of the template comes with a suitable J1 NBI
 configuration and documents for testing. You can find examples of pages that
 contain interactive textbooks under the menu `Lern` underneath the submenu
-`Experimental|Textbooks`.
+`Juyper Notebooks`.
 
 WARNING: To develop your *Jupyter Notebooks*, a *local* installation of the
 *Python* programming language is required. For the development of Jupyter
@@ -217,10 +217,10 @@ Notebooks, the *Jupyter* package and the installation of the library
 
 The module for J1 NBI integration is available as a stable version. However,
 it is still in an experimental state. The main reason for that experimental
-status is the *age* of the underlying library `nbinteract-core`.
+status is the *age* of the base library `nbinteract-core` of version v0.2.6.
 
 NOTE: Recent library updates are more than a year ago, and the current
-version of the Jupyter Notebook *JupyterLab* application, unfortunately,
+version of the Jupyter Notebook V7 application (JupyterLab), unfortunately,
 *not* supported (yet).
 
 === Notebooks vs. Textbooks
@@ -232,18 +232,18 @@ Jupyter Notebooks to be viewed in a web browser.
 
 For integrating textbooks in webpages, the notebooks with the extension
 `.ipynb` are to be *exported* to HTML (text) files using the (Python)
-program nbinteract. Textbooks that have already been exported can be found
+program `nbinteract`. Textbooks that have already been exported can be found
 for the *Starter Web* in the folder `~/pages/public/jupyter/notebooks/textbooks`.
 
 == J1 NBI Configuration
 
 The Template system J1 integrates the Javascript (core) library
-`j1-nbinteract-core.js` from NBI (nbinteract). The integration is a J1 module
-that requires *no programming* to integrate interactive textbooks in
+`j1-nbinteract-core.js` from NBI (j1-nbinteract). The integration is a J1
+module that requires *no programming* to integrate interactive textbooks in
 your webpages.
 
 WARNING: The (core) library integrated with J1 can *only* used with the
-Template System J1. The library `nbinteract-core` is modified for the use
+Template System J1. The library `j1-nbinteract-core` is modified for the use
 with J1, allowing seamless integration between NBI and the pages of a J1 Web.
 
 === Modul configuration
@@ -263,7 +263,12 @@ file is `~/_data/default/nbinteract.yml`.
 |===
 |Paramter |Value |Description
 
-|`spec`
+|`preferred`
+|`<baseUrl> \| <provider>`
+|Defines the provider and the *public* repo to be used by the
+*Binder* service.
+
+|`provider_spec`
 |`<user>/<repo>/<branch>`
 |Defines the *public* repo the configuration data is available to be read
 by the *Binder* service.
@@ -272,12 +277,13 @@ by the *Binder* service.
 |`https://mybinder.org`
 |Base URL of the *Binder* service.
 
-|`provider`
-|gh\|gist\|gl
+|`provider_id`
+|gh\|gist\|gl\|zenodo
 |Provider of the *public* repo. +
 `gh`, GitHub +
 `gist`, GitHub Gist +
-`gl`, GitLab
+`gl`, GitLab +
+`zenodo`, Zenodo Org
 
 |`button_styles`
 |CSS styles
@@ -331,20 +337,46 @@ time being.
 #
 defaults:
 
-  spec:                                 jekyll-one/j1-binder-repo/main
-  baseUrl:                              'https://mybinder.org'
-  provider:                             gh
+  # ----------------------------------------------------------------------------
+  # Binder access
+  # ----------------------------------------------------------------------------
 
-  button_styles:                        btn btn-primary btn-raised hidden
+  # Binder baseUrls (all members of the Binder Org Federation)
+  # ----------------------------------------------------------------------------
+  #
+  baseUrls:
+    preferred:                          mybinder
+    mybinder:                           'https://mybinder.org'                  # Binder Org
+    gke:                                'https://gke.mybinder.org'              # Google Cloud
+    ovh:                                'https://ovh.mybinder.org'              # OVH Cloud
+    gesis:                              'https://gesis.mybinder.org'            # GESIS Notebooks
+    turing:                             'https://turing.mybinder.org'           # Alan Turing Institute
 
-  show_nbi_messages:                    true
-  indicate_nbi_activity:                false
+  # Provider specs
+  # ----------------------------------------------------------------------------
+  #
+  providers:
+    preferred:                          github                                  # github
+    github:
+      provider_id:                      gh
+      provider_spec:                    jekyll-one/j1-binder-repo/main          # config: requirements.txt
+    zenodo:
+      provider_id:                      zenodo
+      provider_spec:                    10.5281/zenodo.6721479                  # 2nd version, config: requirements.txt
+
+  # ----------------------------------------------------------------------------
+  # Module settings
+  # ----------------------------------------------------------------------------
+
+  show_nbi_messages:                    false
+  indicate_nbi_activity:                true
   nbi_messages_auto_close:              true
 
   nbi_init_timeout:                     180000
   nbi_messages_auto_close_delay:        3500
 
   nbi_init_mathjax:                     true
+  notebook_ready:                       first_widget
 ----
 
 ==== Textbook settings
@@ -399,11 +431,7 @@ settings:
   textbooks:
 
     # --------------------------------------------------------------------------
-    # J1 NBI Textbooks J1 NBI Docs
-    # --------------------------------------------------------------------------
-
-    # --------------------------------------------------------------------------
-    # Demo notebook 'selected ODEs'
+    # interactive_widgets
     #
     - textbook:
         enabled:                        true
@@ -412,7 +440,6 @@ settings:
         xhr_data:                       j1_docs_example_dynamic.html
         xhr_data_path:                  /pages/public/jupyter/notebooks/textbooks
         use_mathjax:                    false
-
 ----
 
 === Binder configuration
