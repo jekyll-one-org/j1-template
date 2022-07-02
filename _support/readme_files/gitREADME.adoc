@@ -127,7 +127,7 @@ git push -d origin v2022.4.5
 # When modifying remember to issue a new tag command in git before committing,
 # then push the new tag
 #
-# git tag -a v2022.4.5 -m "v2022.4.5"
+  git tag -a v2022.4.5 -m "v2022.4.5"
   git push origin --tags
 
 == Update Git Index (cache) completely
