@@ -414,7 +414,7 @@ module.exports = function navigator ( options ) {
           $('li.nbi-notebooks > a', this).on('click', function(e) {
             j1.adapter.nbinteract.showDialog();
           });
-        } // END Translator
+        } // END NBI Notebooks
 
         // ---------------------------------------------------------------------
         // CookieConsent dialog

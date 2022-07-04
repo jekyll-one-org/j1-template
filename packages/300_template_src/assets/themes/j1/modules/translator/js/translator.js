@@ -316,7 +316,10 @@ function Translator(props) {
           var msDropdownJSON;
           var index;
 
-          logger.info('\n' + 'show.bs.modal: entered');
+          logger.debug('\n' + 'show.bs.modal: entered');
+
+          // hide the menubar for the modal header
+          $('#navigator_nav_navbar').hide();
 
           // create msDropdown from JSON data
           $.when (
@@ -384,6 +387,8 @@ function Translator(props) {
         // ---------------------------------------------------------------------
         self.$modal.on('hidden.bs.modal', function () {
           $('body').removeClass('stop-scrolling');
+          // if the modal is closed, show the menubar
+          $('#navigator_nav_navbar').show();
           // run the postSelectionCallback for (final) translation
           executeFunctionByName (self.props.postSelectionCallback, window);
         }); // END modal on 'hidden'
