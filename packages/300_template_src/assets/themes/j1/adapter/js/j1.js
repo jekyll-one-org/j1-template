@@ -1165,11 +1165,24 @@ var j1 = (function (options) {
             if (typeof template_previous_version == 'undefined') template_previous_version = 'na';
             logger.warn('\n' + 'template version detected as changed');
             logger.warn('\n' + 'template version previous|current: ' +  template_previous_version + '|' + template_version);
+            // Update the user_state cookie
+            // TODO:  replace theme_version by template_version as they
+            //        are alwas the same
+            //        disable: user_state.theme_version = template_version;
+            //
+            user_state.template_version = template_version;
+            cookie_written = j1.writeCookie({
+            	name:     cookie_names.user_state,
+            	data:     user_state,
+            	secure:   secure,
+            	expires:  365
+            });
             logger.warn('\n' + 'template version updated to: ' +  template_version);
           } else {
             logger.info('\n' + 'template version detected: ' +  user_state.template_version);
           }
 
+          // set current user data
           current_user_data = j1.mergeData(user_session, user_state);
           j1.core.navigator.updateSidebar(current_user_data);
 
@@ -1920,7 +1933,7 @@ var j1 = (function (options) {
               $('#macro-theme-version').each(function() {
                 var $this = $(this);
                 var $html = $this.html();
-                $this.html($html.replace('??theme-version', user_data.theme_version));
+                $this.html($html.replace('??theme-version', user_data.template_version));
               });
 
             });
