@@ -94,25 +94,46 @@ code {
 // -----------------------------------------------------------------------------
 
 // jadams, 2019-03-31: Make heading sizes relativ for rtext use
+//
 h2, .h2 {
-  font-size: 200% !important;
+  font-size: 200%;
   font-weight: 500;
 }
 
 h3, .h3 {
-  font-size: 175% !important;
+  font-size: 175%;
   font-weight: 500;
 }
 
 h4, .h4 {
-  font-size: 150% !important;
+  font-size: 150%;
   font-weight: 400;
 }
 
 h5, .h5 {
-  font-size: 150% !important;
+  font-size: 150%;
   font-weight: 400;
 }
+
+// h2, .h2 {
+//   font-size: 200% !important;
+//   font-weight: 500;
+// }
+//
+// h3, .h3 {
+//   font-size: 175% !important;
+//   font-weight: 500;
+// }
+//
+// h4, .h4 {
+//   font-size: 150% !important;
+//   font-weight: 400;
+// }
+//
+// h5, .h5 {
+//   font-size: 150% !important;
+//   font-weight: 400;
+// }
 
 // Images
 // -----------------------------------------------------------------------------

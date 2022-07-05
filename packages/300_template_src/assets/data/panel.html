@@ -89,7 +89,7 @@ exclude_from_search:                    true
   {% assign infinite_scroll_last = "Weitere Artikel finden Sie im" %}
 {% endif %}
 
-<!-- [INFO   ] [j1.assets.data.panel.html             ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
+<!-- [INFO   ] [/assets/data/panel.html               ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />
 </head>
@@ -672,17 +672,17 @@ exclude_from_search:                    true
               {% comment %} default for card_block: card-deck
               ------------------------------------------------------------------ {% endcomment %}
               {% if card_block == "card-deck" or card_block == "card-list" %}
-                <!-- [INFO   ] [j1.assets.data.panel.html             ] [ blocktype detected as: {{card_block}} ] -->
+                <!-- [INFO   ] [/assets/data/panel.html               ] [ blocktype detected as: {{card_block}} ] -->
 			        {% else %}
-				        <!-- [INFO   ] [j1.assets.data.panel.html             ] [ set blocktype to: card-deck ] -->
+				        <!-- [INFO   ] [/assets/data/panel.html               ] [ set blocktype to: card-deck ] -->
                 {% assign card_block = "card-deck" %}
               {% endif %}
 
-              <!-- [INFO   ] [j1.assets.data.panel.html             ] [ blocktype detected as: {{card_block}} ] -->
+              <!-- [INFO   ] [/assets/data/panel.html               ] [ blocktype detected as: {{card_block}} ] -->
               {% if card_block == 'card-list' %}
               <div>
                 <ul id="{{panel_settings.id}}-scroll-group" class="scroll-group scroll-group-horizontal align-items-stretch flex-wrap">
-                  <!-- [INFO   ] [j1.assets.data.panel.html             ] [ write post items ] -->
+                  <!-- [INFO   ] [/assets/data/panel.html               ] [ write post items ] -->
                 {% for post in site.posts %}
                   {% if posts_written == posts_max %} {% assign last_post_written = true %} {% break %}{% endif %}
 

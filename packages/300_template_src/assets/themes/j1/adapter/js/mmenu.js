@@ -380,9 +380,9 @@ j1.adapter.mmenu = (function (j1, window) {
               $('#drawer_{{menu_id}}').attrchange({
                 trackValues: true,
                 callback: function (event) {
-                  logger.debug('\n' + 'drawer changed state: ' + event.newValue);
-                  logger.debug('\n' + 'hide|show the main nav menu');
+                  logger.debug('\n' + 'hide|show the nav menu');
                   // switch off|on the (main) nav menu
+                  $('#' + 'navbar-brand').toggle();
                   $('#' + navMenuOptions.nav_main_menu).toggle();
                   $('#' + navMenuOptions.nav_quicklinks).toggle();
                 }
