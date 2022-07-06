@@ -1342,6 +1342,58 @@ resources:
         js:                             []
         init_function:                  [ j1.adapter.carousel.init ]
 
+
+  # ----------------------------------------------------------------------------
+  # MasterSlider Lite, free version 2.85.13 - Feb 2022
+  #
+  - name:                               masterSliderLite
+    resource:
+      enabled:                          true
+
+      id:                               masterslider
+      comment:                          module masterSliderLite
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand
+      preload:                          false
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   true
+      data:
+        css:                            [ modules/masterSliderLite/css/masterslider ]
+        files:                          [ adapter/js/masterslider.js ]
+        js:                             [
+                                          modules/masterSliderLite/js/plugins/jquery.easing,
+                                          modules/masterSliderLite/js/masterslider
+                                        ]
+        init_function:                  [ j1.adapter.masterslider.init ]
+
+  # ----------------------------------------------------------------------------
+  # MasterSlider Pro
+  #
+  - name:                               MasterSlider Professional
+    resource:
+      enabled:                          true
+
+      id:                               mastersliderpro
+      comment:                          module MasterSlider Professional
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand
+      preload:                          false
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   true
+      data:
+        css:                            [
+                                          modules/masterSliderPro/css/style/masterslider,
+                                          modules/masterSliderPro/css/skins/default/style
+                                        ]
+        files:                          [ adapter/js/masterslider.js ]
+        js:                             [ modules/masterSliderPro/js/masterslider ]
+        init_function:                  [ j1.adapter.masterslider.init ]
+
+
   # ----------------------------------------------------------------------------
   # Justified Gallery, JS implementation for full-featured image galleries
   # based on the Justified Gallery API
