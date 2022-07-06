@@ -1,6 +1,6 @@
-/*!
+/*! 
  * Master Slider – Responsive Touch Swipe Slider [lite version]
- * Copyright © 2022 All Rights Reserved.
+ * Copyright © 2022 All Rights Reserved. 
  *
  * @author Averta [www.averta.net]
  * @version 2.85.13
@@ -340,50 +340,50 @@ window.averta = {};
 
 /* ================== bin-debug/js/lite/tools/EventDispatcher.js =================== */
 ;(function(){
-
+	
 	"use strict";
-
+	
 	averta.EventDispatcher = function(){
 		this.listeners = {};
 	};
-
+	
 	averta.EventDispatcher.extend = function(_proto){
 		var instance = new averta.EventDispatcher();
 		for(var key in instance)
 			if(key != 'constructor') _proto[key] =  averta.EventDispatcher.prototype[key];
 	};
-
+	
 	averta.EventDispatcher.prototype = {
-
+		
 		constructor : averta.EventDispatcher,
-
+		
 		addEventListener : function(event , listener , ref){
 			if(!this.listeners[event]) this.listeners[event] = [];
 			this.listeners[event].push({listener:listener , ref:ref});
-
+			
 		},
-
+		
 		removeEventListener : function(event , listener , ref){
 			if(this.listeners[event]){
 
 				for(var i = 0; i < this.listeners[event].length ; ++i){
-
-					if(listener === this.listeners[event][i].listener && ref === this.listeners[event][i].ref){
+					
+					if(listener === this.listeners[event][i].listener && ref === this.listeners[event][i].ref){	
 						this.listeners[event].splice(i--,1);
 					}
 				}
-
+				
 				if (this.listeners[event].length === 0){
 					this.listeners[event] = null;
 				}
 			}
 		},
-
+		
 		dispatchEvent : function (event) {
 			event.target = this;
 			if(this.listeners[event.type]){
 				for(var i = 0 , l = this.listeners[event.type].length; i < l ; ++i){
-					this.listeners[event.type][i].listener.call(this.listeners[event.type][i].ref , event);
+					this.listeners[event.type][i].listener.call(this.listeners[event.type][i].ref , event);	
 				}
 			}
 		}
@@ -625,22 +625,22 @@ window.averta = {};
 
 ;(function(){
 	"use strict";
-
+	
 	averta.Ticker = function(){};
-
+	
 	var st = averta.Ticker,
 		list = [],
 		len = 0,
 		__stopped = true;
-
+	
 	st.add = function (listener , ref){
 		list.push([listener , ref]);
-
+		
 		if(list.length === 1) st.start();
 		len = list.length;
 		return len;
 	};
-
+	
 	st.remove = function (listener , ref) {
 		for(var i = 0 , l = list.length ; i<l ; ++i){
 			if(list[i] && list[i][0] === listener && list[i][1] === ref){
@@ -654,17 +654,17 @@ window.averta = {};
 			st.stop();
 		}
 	};
-
+	
 	st.start = function (){
 		if(!__stopped) return;
 		__stopped = false;
 		__tick();
 	};
-
+	
 	st.stop = function (){
 		__stopped = true;
 	};
-
+	
 	var __tick = function () {
 		if(st.__stopped) return;
 		var item;
@@ -675,7 +675,7 @@ window.averta = {};
 
 		requestAnimationFrame(__tick);
 	};
-
+	
 })();
 
 /**
@@ -684,45 +684,45 @@ window.averta = {};
  */
 ;(function(){
 	"use strict";
-
+	
 	if(!Date.now){
 		Date.now = function(){
 			return new Date().getTime();
 		};
 	}
-
+	
 	averta.Timer = function(delay , autoStart) {
 		this.delay = delay;
 		this.currentCount = 0;
 		this.paused = false;
 		this.onTimer = null;
 		this.refrence = null;
-
+		
 		if(autoStart) this.start();
-
+		
 	};
-
+	
 	averta.Timer.prototype = {
-
+		
 		constructor : averta.Timer,
-
+		
 		start : function(){
 			this.paused = false;
 			this.lastTime = Date.now();
 			averta.Ticker.add(this.update , this);
 		},
-
+		
 		stop : function(){
 			this.paused = true;
 			averta.Ticker.remove(this.update , this);
 		},
-
+		
 		reset : function(){
 			this.currentCount = 0;
 			this.paused = true;
 			this.lastTime = Date.now();
 		},
-
+		
 		update : function(){
 			if(this.paused || Date.now() - this.lastTime < this.delay) return;
 			this.currentCount ++;
@@ -731,11 +731,11 @@ window.averta = {};
 				this.onTimer.call(this.refrence , this.getTime());
 
 		} ,
-
+		
 		getTime : function(){
 			return this.delay * this.currentCount;
 		}
-
+		
 	};
 })();
 
@@ -1098,59 +1098,59 @@ window.averta = {};
 /**
  *  Touch List Control
  * 	version 1.1.2
- *
- * 	Copyright (C) 2014, Averta Ltd. All rights reserved.
+ * 	
+ * 	Copyright (C) 2014, Averta Ltd. All rights reserved. 	 	
  */
 
-;(function(){
-
+;(function(){	
+	
 	"use strict";
-
+		
 	var _options = {
 		bouncing 			: true,
 		snapping			: false,
 		snapsize			: null,
 		friction			: 0.05,
 		outFriction			: 0.05,
-		outAcceleration		: 0.09,
+		outAcceleration		: 0.09,	
 		minValidDist		: 0.3,
 		snappingMinSpeed	: 2,
 		paging				: false,
 		endless				: false,
 		maxSpeed			: 160
 	};
-
+	
 
 	var Controller = function(min , max , options){
-
+		
 		if(max === null || min === null) {
 			throw new Error('Max and Min values are required.');
 		}
-
+		
 		this.options = options || {};
-
+		
 		for(var key in _options){
 			if(!(key in this.options))
 				this.options[key] = _options[key];
 		}
-
+		
 		this._max_value 	= max;
 		this._min_value 	= min;
-
+				
 		this.value 			= min;
 		this.end_loc 		= min;
-
+		
 		this.current_snap	= this.getSnapNum(min);
-
+		
 		this.__extrStep 	= 0;
 		this.__extraMove 	= 0;
-
+		
 		this.__animID	 	= -1;
-
+	
 	};
-
+	
 	var p = Controller.prototype;
-
+	
 	/*
 	---------------------------------------------------
 		PUBLIC METHODS
@@ -1163,13 +1163,13 @@ window.averta = {};
 		this._internalStop();
 		value = this._checkLimits(value);
 		speed = Math.abs(speed || 0);
-
+		
 		if(this.options.snapping){
 			snap_num = snap_num || this.getSnapNum(value);
 			if( dispatch !== false )this._callsnapChange(snap_num);
 			this.current_snap = snap_num;
 		}
-
+		
 		if(animate){
 			this.animating = true;
 
@@ -1182,11 +1182,11 @@ window.averta = {};
 				timeconst = animFrict + (speed - 20)  * animFrict * 1.3 / self.options.maxSpeed;
 
 			var tick = function(){
-
+				
 				if(active_id !== self.__animID) return;
-
+				
 				var dis =  value - self.value;
-
+				
 				if( Math.abs(dis) > self.options.minValidDist && self.animating ){
 					window.requestAnimationFrame(tick);
 				} else {
@@ -1197,13 +1197,13 @@ window.averta = {};
 					}
 
 					self.animating = false;
-
+					
 					if( active_id !== self.__animID ){
 						self.__animID = -1;
 					}
-
+					
 					self._callonComplete('anim');
-
+					
 					return;
 				}
 
@@ -1212,28 +1212,28 @@ window.averta = {};
 
 				self._callrenderer();
 			};
-
+		
 			tick();
-
+			
 			return;
 		}
-
+				
 		this.value = value;
 		this._callrenderer();
 	};
-
+	
 	p.drag = function(move){
-
+		
 		if(this.start_drag){
 			this.drag_start_loc  = this.value;
 			this.start_drag = false;
 		}
-
+		
 		this.animating 		= false;
 		this._deceleration 	= false;
-
+		
 		this.value -= move;
-
+				
 		if ( !this.options.endless && (this.value > this._max_value || this.value < 0)) {
 			if (this.options.bouncing) {
 				this.__isout = true;
@@ -1246,79 +1246,79 @@ window.averta = {};
 		}else if(!this.options.endless && this.options.bouncing){
 				this.__isout = false;
 		}
-
+		
 		this._callrenderer();
-
+		
 	};
-
+	
 	p.push = function(speed){
 		this.stopped = false;
 		if(this.options.snapping && Math.abs(speed) <= this.options.snappingMinSpeed){
 			this.cancel();
 			return;
 		}
-
+		
 		this.__speed = speed;
 		this.__startSpeed = speed;
 
 		this.end_loc = this._calculateEnd();
-
+		
 		if(this.options.snapping){
-
+			
 			var snap_loc = this.getSnapNum(this.value),
 				end_snap = this.getSnapNum(this.end_loc);
 
 			if(this.options.paging){
 				snap_loc = this.getSnapNum(this.drag_start_loc);
-
+				
 				this.__isout = false;
 				if(speed > 0){
 					this.gotoSnap(snap_loc + 1 , true , speed);
 				}else{
 					this.gotoSnap(snap_loc - 1 , true , speed);
 				}
-				return;
+				return;	
 			}else if(snap_loc === end_snap){
 				this.cancel();
 				return;
 			}
-
+			
 			this._callsnapChange(end_snap);
 			this.current_snap = end_snap;
-
+			
 		}
-
+		
 		this.animating = false;
 
 		this.__needsSnap = this.options.endless || (this.end_loc > this._min_value && this.end_loc < this._max_value) ;
-
+	
 		if(this.options.snapping && this.__needsSnap)
 			this.__extraMove = this._calculateExtraMove(this.end_loc);
-
-
+		
+		
 		this._startDecelaration();
 	};
-
+	
 	p.bounce = function(speed){
 		if(this.animating) return;
 		this.stopped = false;
 		this.animating = false;
-
+		
 		this.__speed = speed;
 		this.__startSpeed = speed;
-
+		
 		this.end_loc = this._calculateEnd();
-
+		
 		//if(this.options.paging){}
-
+		
 		this._startDecelaration();
 	};
-
+	
 	p.stop = function(){
 		this.stopped = true;
 		this._internalStop();
 	};
-
+		
 	p.cancel = function(){
 		this.start_drag = true; // reset flag for next drag
 		if(this.__isout){
@@ -1327,30 +1327,30 @@ window.averta = {};
 		}else if(this.options.snapping){
 			this.gotoSnap(this.getSnapNum(this.value) , true);
 		}
-
+		
 	};
-
+		
 	p.renderCallback = function(listener , ref){
 		this.__renderHook = {fun:listener , ref:ref};
 	};
-
+	
 	p.snappingCallback = function(listener , ref){
 		this.__snapHook = {fun:listener , ref:ref};
 	};
-
+	
 	p.snapCompleteCallback = function(listener , ref){
 		this.__compHook = {fun:listener , ref:ref};
 	};
-
+	
 	p.getSnapNum = function(value){
 		return Math.floor(( value + this.options.snapsize / 2 ) / this.options.snapsize);
 	};
-
+		
 	p.nextSnap = function(){
 		this._internalStop();
-
+		
 		var curr_snap = this.getSnapNum(this.value);
-
+		
 		if(!this.options.endless && (curr_snap + 1) * this.options.snapsize > this._max_value){
 			this.__speed = 8;
 			this.__needsSnap = false;
@@ -1358,14 +1358,14 @@ window.averta = {};
 		}else{
 			this.gotoSnap(curr_snap + 1 , true);
 		}
-
+	
 	};
-
+	
 	p.prevSnap = function(){
 		this._internalStop();
-
+		
 		var curr_snap = this.getSnapNum(this.value);
-
+				
 		if(!this.options.endless && (curr_snap - 1) * this.options.snapsize < this._min_value){
 			this.__speed = -8;
 			this.__needsSnap = false;
@@ -1373,38 +1373,38 @@ window.averta = {};
 		}else{
 			this.gotoSnap(curr_snap - 1 , true);
 		}
-
+	
 	};
-
+	
 	p.gotoSnap = function(snap_num , animate , speed){
 		this.changeTo(snap_num * this.options.snapsize , animate , speed , snap_num);
 	};
-
+	
 	p.destroy = function(){
 		this._internalStop();
 		this.__renderHook = null;
 		this.__snapHook = null;
 		this.__compHook = null;
 	};
-
+	
 	/*
 	---------------------------------------------------
 		PRIVATE METHODS
 	----------------------------------------------------
 	*/
-
+	
 	p._internalStop = function(){
 		this.start_drag = true; // reset flag for next drag
 		this.animating = false;
 		this._deceleration = false;
 		this.__extrStep = 0;
 	};
-
+	
 	p._calculateExtraMove = function(value){
 		var m = value % this.options.snapsize;
 		return m < this.options.snapsize / 2  ? -m : this.options.snapsize - m;
 	};
-
+	
 	p._calculateEnd = function(step){
 		var temp_speed = this.__speed;
 		var temp_value = this.value;
@@ -1417,18 +1417,18 @@ window.averta = {};
 		if(step) return i;
 		return temp_value;
 	};
-
+	
 	p._checkLimits = function(value){
 		if(this.options.endless) 	return value;
 		if(value < this._min_value) return this._min_value;
 		if(value > this._max_value) return this._max_value;
 		return value;
 	};
-
+	
 	p._callrenderer = function(){
 		if(this.__renderHook) this.__renderHook.fun.call(this.__renderHook.ref , this , this.value);
 	};
-
+	
 	p._callsnapChange = function(targetSnap){
 		if(!this.__snapHook || targetSnap === this.current_snap) return;
 		this.__snapHook.fun.call(this.__snapHook.ref , this , targetSnap , targetSnap - this.current_snap);
@@ -1438,11 +1438,11 @@ window.averta = {};
 		if(this.__compHook && !this.stopped){
 			this.__compHook.fun.call(this.__compHook.ref , this , this.current_snap , type);
 		}
-
+			
 	};
 
 	p._computeDeceleration = function(){
-
+		
 		if(this.options.snapping && this.__needsSnap){
 			var xtr_move = (this.__startSpeed - this.__speed) / this.__startSpeed * this.__extraMove;
 			this.value += this.__speed + xtr_move - this.__extrStep;
@@ -1450,9 +1450,9 @@ window.averta = {};
 		}else{
 			this.value += this.__speed;
 		}
-
+		
 		this.__speed *= this.options.friction; //* 10;
-
+		
 		if(!this.options.endless && !this.options.bouncing){
 			if(this.value <= this._min_value){
 				this.value = this._min_value;
@@ -1462,21 +1462,21 @@ window.averta = {};
 				this.__speed = 0;
 			}
 		}
-
+		
 		this._callrenderer();
-
+		
 		if(!this.options.endless && this.options.bouncing){
-
+			
 			var out_value = 0;
-
+			
 			if(this.value < this._min_value){
 				out_value = this._min_value - this.value;
 			}else if(this.value > this._max_value){
 				out_value = this._max_value - this.value;
 			}
-
+			
 			this.__isout =  Math.abs(out_value) >= this.options.minValidDist;
-
+			
 			if(this.__isout){
 				if(this.__speed * out_value <= 0){
 					this.__speed += out_value * this.options.outFriction;
@@ -1490,37 +1490,37 @@ window.averta = {};
 	p._startDecelaration = function(){
 		if(this._deceleration) return;
 		this._deceleration = true;
-
+		
 		var self = this;
-
+		
 		var tick = function (){
-
+			
 			if(!self._deceleration) return;
-
+			
 			self._computeDeceleration();
-
+			
 			if(Math.abs(self.__speed) > self.options.minValidDist || self.__isout){
 				window.requestAnimationFrame(tick);
 			}else{
 				self._deceleration = false;
 				self.__isout = false;
-
+				
 				if(self.__needsSnap && self.options.snapping && !self.options.paging){
 					self.value = self._checkLimits(self.end_loc + self.__extraMove);
 				}else{
 					self.value = Math.round(self.value);
 				}
-
+				
 				self._callrenderer();
 				self._callonComplete('decel');
 			}
 		};
-
+		
 		tick();
 	};
-
+	
 	window.Controller = Controller;
-
+	
 })();
 
 /* ================== bin-debug/js/lite/controls/SliderEvent.js =================== */
@@ -2534,7 +2534,7 @@ MSSliderEvent.DESTROY				= 'ms_destroy';
 		if ( action in this ){
 			this[action].apply(this, actionParams);
 		} else if ( console ){
-			console.warn('Master Slider Error: Action "'+action+'" not found.');
+			console.log('Master Slider Error: Action "'+action+'" not found.');
 		}
 	};
 
@@ -3048,7 +3048,7 @@ MSSliderEvent.DESTROY				= 'ms_destroy';
 		this.setupMarkup = this.$element.html();
 
 		if( this.$element.length === 0 ){
-			//if(console) console.warn('Master Slider Error: #'+id+' not found.');
+			//if(console) console.log('Master Slider Error: #'+id+' not found.');
 			return;
 		}
 
@@ -4652,31 +4652,31 @@ MSViewEvents.CHANGE_END	     	= 'slideChangeEnd';
 
 /* ================== bin-debug/js/lite/uicontrols/Bullets.js =================== */
 ;(function($){
-
+	
 	"use strict";
-
+	
 	var MSBulltes = function(options){
 		BaseControl.call(this);
-
+		
 		this.options.dir 	= 'h';
 		this.options.inset  = true;
 		this.options.margin = 10;
 		this.options.space = 10;
-
+		
 
 		$.extend(this.options , options);
-
+		
 		this.bullets = [];
-
+		
 	};
-
+	
 	MSBulltes.extend(BaseControl);
-
+	
 	var p = MSBulltes.prototype;
 	var _super = BaseControl.prototype;
-
+	
 	/* -------------------------------- */
-
+	
 	p.setup = function(){
 		_super.setup.call(this);
 
@@ -4684,7 +4684,7 @@ MSViewEvents.CHANGE_END	     	= 'slideChangeEnd';
 						.addClass(this.options.prefix + 'bullets')
 						.addClass('ms-dir-' + this.options.dir)
 						.appendTo(this.cont);
-
+		
 		this.$bullet_cont = $('<div></div>')
 						.addClass('ms-bullets-count')
 						.appendTo(this.$element);
@@ -4700,11 +4700,11 @@ MSViewEvents.CHANGE_END	     	= 'slideChangeEnd';
 
 		this.checkHideUnder(); // super method
 	};
-
+	
 	p.create = function(){
 		_super.create.call(this);
 		var that = this;
-
+									
 		this.slider.api.addEventListener(MSSliderEvent.CHANGE_START , this.update , this);
 		this.cindex =  this.slider.api.index();
 		for(var i = 0; i < this.slider.api.count(); ++i){
@@ -4719,64 +4719,64 @@ MSViewEvents.CHANGE_END	     	= 'slideChangeEnd';
 				bullet.css('margin', this.options.space);
 			}
 		}
-
+		
 		if(this.options.dir === 'h') {
 			this.$element.width(bullet.outerWidth(true) * this.slider.api.count());
 		} else {
 			this.$element.css('margin-top', -this.$element.outerHeight(true)/2);
 		}
-
+		
 		this.select(this.bullets[this.cindex]);
 	};
-
+	
 	p.update = function(){
 		var nindex = this.slider.api.index();
 		if(this.cindex === nindex) return;
-
+		
 		if(this.cindex != null)this.unselect(this.bullets[this.cindex]);
 		this.cindex = nindex;
 		this.select(this.bullets[this.cindex]);
 	};
-
+	
 	p.changeSlide = function(index){
 		if(this.cindex === index) return;
 		this.slider.api.gotoSlide(index);
 	};
-
+	
 	p.unselect = function(ele){
 		ele.removeClass('ms-bullet-selected');
 	};
-
+	
 	p.select = function(ele){
 		ele.addClass('ms-bullet-selected');
 	};
-
+	
 	p.destroy = function(){
 		_super.destroy();
 		this.slider.api.removeEventListener(MSSliderEvent.CHANGE_START , this.update , this);
 		this.$element.remove();
 	};
-
+	
 	window.MSBulltes = MSBulltes;
-
+	
 	MSSlideController.registerControl('bullets' , MSBulltes);
-
+	
 })(jQuery);
 
 /* ================== bin-debug/js/lite/uicontrols/Scrollbar.js =================== */
 ;(function($){
-
+	
 	"use strict";
-
+	
 	var MSScrollbar = function(options){
 		BaseControl.call(this);
-
+		
 		this.options.dir 		= 'h';
 		this.options.autohide	= true;
 		this.options.width 		= 4;
 		this.options.color 		= '#3D3D3D';
 		this.options.margin		= 10;
-
+		
 		$.extend(this.options , options);
 		this.__dimen    		= this.options.dir === 'h' ? 'width' : 'height';
 		this.__jdimen    		= this.options.dir === 'h' ? 'outerWidth' : 'outerHeight';
@@ -4784,22 +4784,22 @@ MSViewEvents.CHANGE_END	     	= 'slideChangeEnd';
 		this.__translate_end	= window._css3d ? ' translateZ(0px)' : '';
 		this.__translate_start	= this.options.dir === 'h' ? ' translateX(' : 'translateY(';
 	};
-
+	
 	MSScrollbar.extend(BaseControl);
-
+	
 	var p = MSScrollbar.prototype;
 	var _super = BaseControl.prototype;
-
+	
 	/* -------------------------------- */
-
+	
 	p.setup = function(){
 
 		this.$element = $('<div></div>')
 						.addClass(this.options.prefix + 'sbar')
 						.addClass('ms-dir-' + this.options.dir);
-
+						
 		_super.setup.call(this);
-
+	
 		if( this.slider.$controlsCont === this.cont ){
 			this.$element.appendTo(this.slider.$element);
 		}else{
@@ -4809,18 +4809,18 @@ MSViewEvents.CHANGE_END	     	= 'slideChangeEnd';
 		this.$bar = $('<div></div>')
 					.addClass(this.options.prefix + 'bar')
 					.appendTo(this.$element);
-
+					
 		if(this.slider.options.loop){
-			console.warn('WARNING, MSScrollbar cannot work with looped slider.');
+			console.log('WARNING, MSScrollbar cannot work with looped slider.');
 			this.disable = true;
 			this.$element.remove();
 		}
-
+		
 		/**
 		 * align control
 		 * @since 1.5.7
 		 */
-		// change width
+		// change width 
 		if( this.options.dir === 'v' ){
 			this.$bar.width(this.options.width);
 		} else {
@@ -4831,7 +4831,7 @@ MSViewEvents.CHANGE_END	     	= 'slideChangeEnd';
 		this.$bar.css('background-color', this.options.color);
 
 		if( !this.options.insetTo && this.options.align ){
-
+			
 			// reset old versions styles
 			if( this.options.dir === 'v' ){
 				this.$element.css({
@@ -4880,53 +4880,53 @@ MSViewEvents.CHANGE_END	     	= 'slideChangeEnd';
 		var pos = this.slider.reserveSpace(align, this.options.margin * 2 + this.options.width);
 		this.$element.css(align, -pos - this.options.margin - this.options.width);
 	};
-
+	
 	p.create = function(){
-
+		
 		if(this.disable) return;
-
+		
 		//_super.create.call(this);
 		var that = this;
-
+		
 		this.scroller = this.slider.api.scroller;
-
-		this.slider.api.view.addEventListener(MSViewEvents.SCROLL , this._update , this);
+		
+		this.slider.api.view.addEventListener(MSViewEvents.SCROLL , this._update , this);		
 		this.slider.api.addEventListener(MSSliderEvent.RESIZE , this._resize , this);
-
+		
 		this._resize();
-
+		
 		if(this.options.autohide){
 			this.$bar.css('opacity' , '0');
 		}
 	};
-
+	
 	p._resize = function(){
 		this.vdimen = this.$element[this.__dimen]();
-		this.bar_dimen = this.slider.api.view[ '__' + this.__dimen] * this.vdimen / this.scroller._max_value;
+		this.bar_dimen = this.slider.api.view[ '__' + this.__dimen] * this.vdimen / this.scroller._max_value; 
 		this.$bar[this.__dimen](this.bar_dimen );
 	};
-
+	
 	p._update = function(){
 		var value = this.scroller.value * (this.vdimen - this.bar_dimen) / this.scroller._max_value;
 		if(this.lvalue === value) return;
 		this.lvalue = value;
-
+		
 		if(this.options.autohide){
 			clearTimeout(this.hto);
 			this.$bar.css('opacity' , '1');
-
+			
 			var that = this;
 			this.hto = setTimeout(function(){
 				//if(!that.slider.api.view.swipeControl.touchStarted)
 				that.$bar.css('opacity' , '0');
 			} , 150);
 		}
-
+		
 		if(value < 0){
 			this.$bar[0].style[this.__dimen] = this.bar_dimen + value + 'px';
 			return;
 		}
-
+		
 		if(value > this.vdimen - this.bar_dimen)
 			this.$bar[0].style[this.__dimen] = this.vdimen - value + 'px';
 
@@ -4934,29 +4934,29 @@ MSViewEvents.CHANGE_END	     	= 'slideChangeEnd';
 			this.$bar[0].style[window._jcsspfx + 'Transform'] = this.__translate_start +value+'px)'+ this.__translate_end;
 			return;
 		}
-
+		
 		this.$bar[0].style[this.__pos] = value + 'px';
-
+		
 	};
-
+	
 	p.destroy = function(){
 		_super.destroy();
-		this.slider.api.view.removeEventListener(MSViewEvents.SCROLL , this._update , this);
+		this.slider.api.view.removeEventListener(MSViewEvents.SCROLL , this._update , this);		
 		this.slider.api.removeEventListener(MSSliderEvent.RESIZE , this._resize , this);
 		this.slider.api.removeEventListener(MSSliderEvent.RESERVED_SPACE_CHANGE, this.align, this);
 
 		this.$element.remove();
 	};
-
+	
 	window.MSScrollbar = MSScrollbar;
 	MSSlideController.registerControl('scrollbar' , MSScrollbar);
 })(jQuery);
 
 /* ================== bin-debug/js/lite/uicontrols/Timebar.js =================== */
 ;(function($){
-
+	
 	"use strict";
-
+	
 	var MSTimerbar = function(options){
 		BaseControl.call(this);
 
@@ -4968,23 +4968,23 @@ MSViewEvents.CHANGE_END	     	= 'slideChangeEnd';
 
 		$.extend(this.options , options);
 	};
-
+	
 	MSTimerbar.extend(BaseControl);
-
+	
 	var p = MSTimerbar.prototype;
 	var _super = BaseControl.prototype;
-
+	
 	/* -------------------------------- */
-
+	
 	p.setup = function(){
 		var that = this;
 		_super.setup.call(this);
-
+		
 		this.$element = $('<div></div>')
 					.addClass(this.options.prefix + 'timerbar');
-
+		
 		_super.setup.call(this);
-
+	
 		if( this.slider.$controlsCont === this.cont ){
 			this.$element.appendTo(this.slider.$element);
 		}else{
@@ -4995,7 +4995,7 @@ MSViewEvents.CHANGE_END	     	= 'slideChangeEnd';
 					.addClass('ms-time-bar')
 					.appendTo(this.$element);
 
-		// change width
+		// change width 
 		if( this.options.dir === 'v' ){
 			this.$bar.width(this.options.width);
 			this.$element.width(this.options.width);
@@ -5006,9 +5006,9 @@ MSViewEvents.CHANGE_END	     	= 'slideChangeEnd';
 
 		// change color
 		this.$bar.css('background-color', this.options.color);
-
+		
 		if( !this.options.insetTo && this.options.align ){
-
+			
 			this.$element.css({
 				top:'auto',
 				bottom:'auto'
@@ -5034,7 +5034,7 @@ MSViewEvents.CHANGE_END	     	= 'slideChangeEnd';
 		}
 
 		this.checkHideUnder(); // super method
-
+		
 	};
 
 	/**
@@ -5050,24 +5050,24 @@ MSViewEvents.CHANGE_END	     	= 'slideChangeEnd';
 		var pos = this.slider.reserveSpace(align, this.options.margin * 2 + this.options.width);
 		this.$element.css(align, -pos - this.options.margin - this.options.width);
 	};
-
+	
 	p.create = function(){
 		_super.create.call(this);
 		this.slider.api.addEventListener(MSSliderEvent.WAITING , this._update , this);
 		this._update();
 	};
-
+	
 	p._update = function(){
 		this.$bar[0].style.width = this.slider.api._delayProgress  + '%';
 	};
-
+	
 	p.destroy = function(){
 		_super.destroy();
 		this.slider.api.removeEventListener(MSSliderEvent.RESERVED_SPACE_CHANGE, this.align, this);
 		this.slider.api.removeEventListener(MSSliderEvent.WAITING , this._update , this);
 		this.$element.remove();
 	};
-
+	
 	window.MSTimerbar = MSTimerbar;
 	MSSlideController.registerControl('timebar' , MSTimerbar);
 })(jQuery);
@@ -5174,12 +5174,12 @@ MSViewEvents.CHANGE_END	     	= 'slideChangeEnd';
 
 /* ================== bin-debug/js/lite/uicontrols/SlideInfo.js =================== */
 ;(function($){
-
+	
 	"use strict";
-
+	
 	window.MSSlideInfo = function(options){
 		BaseControl.call(this , options);
-
+		
 		this.options.autohide	= false;
 		this.options.align  = null;
 		this.options.inset = false;
@@ -5193,24 +5193,24 @@ MSViewEvents.CHANGE_END	     	= 'slideChangeEnd';
 	};
 	MSSlideInfo.fadeDuratation = 400;
 	MSSlideInfo.extend(BaseControl);
-
+	
 	var p = MSSlideInfo.prototype;
 	var _super = BaseControl.prototype;
-
-	/* -------------------------------- */
+	
+	/* -------------------------------- */	
 	p.setup = function(){
 		this.$element = $('<div></div>')
 						.addClass(this.options.prefix + 'slide-info')
 						.addClass('ms-dir-' + this.options.dir);
 
-		_super.setup.call(this);
+		_super.setup.call(this);	
 
 		if( this.slider.$controlsCont === this.cont ){
 			this.$element.appendTo(this.slider.$element); // insert in outer container out of overflow hidden
 		}else{
 			this.$element.appendTo(this.cont);
 		}
-
+		
 		// align control
 		if( !this.options.insetTo && this.options.align ){
 			var align = this.options.align;
@@ -5253,49 +5253,49 @@ MSViewEvents.CHANGE_END	     	= 'slideChangeEnd';
 		var pos = this.slider.reserveSpace(align, this.options.size + this.options.margin * 2);
 		this.$element.css(align, -pos - this.options.size - this.options.margin);
 	};
-
+	
 	p.slideAction = function(slide){
 		var info_ele = $(slide.$element.find('.ms-info'));
 		var that = this;
 		info_ele.detach();
-
+		
 		this.data_list[slide.index] = info_ele;
 	};
-
+	
 	p.create = function(){
 		_super.create.call(this);
 		this.slider.api.addEventListener(MSSliderEvent.CHANGE_START , this.update , this);
 		this.cindex =  this.slider.api.index();
 		this.switchEle(this.data_list[this.cindex]);
 	};
-
+	
 	p.update = function(){
 		var nindex = this.slider.api.index();
 		this.switchEle(this.data_list[nindex]);
 		this.cindex = nindex;
 	};
-
+	
 	p.switchEle = function(ele){
 		if(this.current_ele){
 			var that = this;
-
+			
 			if(this.current_ele[0].tween)this.current_ele[0].tween.stop(true);
 			this.current_ele[0].tween = CTween.animate(this.current_ele , MSSlideInfo.fadeDuratation  , {opacity:0} , {complete:function(){
 				this.detach();
-				this[0].tween = null;
+				this[0].tween = null; 
 				ele.css('position', 'relative');
 			} , target:this.current_ele });
 
-			//this.current_ele.css('position', 'absolute');
+			//this.current_ele.css('position', 'absolute');			
 			ele.css('position', 'absolute');
 		}
 
 		this.__show(ele);
 	};
-
+	
 	p.__show = function(ele){
 		ele.appendTo(this.$element).css('opacity','0');///.css('position', 'relative');
-
+		
 		// calculate max height
 		if ( this.current_ele ){
 			ele.height( Math.max( ele.height(), this.current_ele.height() ) );
@@ -5304,7 +5304,7 @@ MSViewEvents.CHANGE_END	     	= 'slideChangeEnd';
 		clearTimeout(this.tou);
 		this.tou = setTimeout(function(){
 			CTween.fadeIn(ele , MSSlideInfo.fadeDuratation );
-			ele.css('height', '');
+			ele.css('height', '');	
 		}, MSSlideInfo.fadeDuratation);
 
 
@@ -5322,7 +5322,7 @@ MSViewEvents.CHANGE_END	     	= 'slideChangeEnd';
 		this.slider.api.removeEventListener(MSSliderEvent.RESERVED_SPACE_CHANGE, this.align, this);
 		this.slider.api.removeEventListener(MSSliderEvent.CHANGE_START , this.update , this);
 	};
-
+	
 	MSSlideController.registerControl('slideinfo' , MSSlideInfo);
 })(jQuery);
 

@@ -16,10 +16,16 @@
 
 .ms-moz .ms-slide-bgcont>img { -webkit-transform: translateX(0px); -ms-transform: translateX(0px); transform: translateX(0px); }
 
-.master-slider a,
+.master-slider a {
+	-webkit-transition: none;
+	transition: none;
+  color: #fff !important;
+}
+
 .master-slider a:hover {
 	-webkit-transition: none;
 	transition: none;
+  color: #212121 !important;
 }
 
 .wpb_row .master-slider-parent *,

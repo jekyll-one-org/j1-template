@@ -16,7 +16,7 @@ fab_menu_id:                            page_ctrl_simple
 permalink:                              /pages/public/learn/masterslider-pro/
 regenerate:                             false
 
-resources:                              [ mastersliderpro ]
+resources:                              [ animate, mastersliderpro ]
 resource_options:
   - attic:
       padding_top:                      400
@@ -55,7 +55,7 @@ resource_options:
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 
-== Slider 1
+== Slider 1 - Simple Boxed
 
 lorem:sentences[5]
 
@@ -67,21 +67,21 @@ lorem:sentences[5]
     <div class="ms-slide" data-delay="3" data-fill-mode="fill">
       <img
         src="/assets/themes/j1/modules/masterSliderLite/css/blank.gif"
-        alt="business-1" title="business-1"
+        alt="business-1" title="cat-1"
         data-src="/assets/images/modules/masterslider/cats/cat-1.jpg"
       >
     </div>
     <div class="ms-slide" data-delay="3" data-fill-mode="fill">
       <img
         src="/assets/themes/j1/modules/masterSliderLite/css/blank.gif"
-        alt="business-2" title="business-2"
+        alt="business-2" title="cat-2"
         data-src="/assets/images/modules/masterslider/cats/cat-2.jpg"
       >
     </div>
     <div class="ms-slide" data-delay="3" data-fill-mode="fill">
       <img
         src="/assets/themes/j1/modules/masterSliderLite/css/blank.gif"
-        alt="business-3" title="business-3"
+        alt="business-3" title="cat-3"
         data-src="/assets/images/modules/masterslider/cats/cat-3.jpg"
       >
     </div>
@@ -92,7 +92,7 @@ lorem:sentences[5]
 ++++
 
 
-== Slider 2
+== Slider 2 - Full Width
 
 lorem:sentences[5]
 
@@ -103,21 +103,21 @@ lorem:sentences[5]
     <div class="ms-slide" data-delay="3" data-fill-mode="fill">
       <img
         src="/assets/themes/j1/modules/masterSliderLite/css/blank.gif"
-        alt="business-1" title="business-1"
+        alt="business-1" title="cities-1"
         data-src="/assets/images/modules/masterslider/mega_cities/andreas-brucker.jpg"
       >
     </div>
     <div class="ms-slide" data-delay="3" data-fill-mode="fill">
       <img
         src="/assets/themes/j1/modules/masterSliderLite/css/blank.gif"
-        alt="business-2" title="business-2"
+        alt="business-2" title="cities-2"
         data-src="/assets/images/modules/masterslider/mega_cities/denys-nevozhai-1.jpg"
       >
     </div>
     <div class="ms-slide" data-delay="3" data-fill-mode="fill">
       <img
         src="/assets/themes/j1/modules/masterSliderLite/css/blank.gif"
-        alt="business-3" title="business-3"
+        alt="business-3" title="cities-3"
         data-src="/assets/images/modules/masterslider/mega_cities/denys-nevozhai-2.jpg"
       >
     </div>
@@ -128,44 +128,71 @@ lorem:sentences[5]
 ++++
 
 
-== Slider 3
+== Slider 3 - MS-Info (Overlay|Animated)
 
 lorem:sentences[5]
 
 ++++
-<!-- MasterSlider -->
-<div id="P_MS62a701ccd35f6" class="master-slider-parent ms-parent-id-64 mb-5" style="max-width:1200px;"  >
+<!-- MasterSlider 3 -->
+<div id="P_MS0003" class="master-slider-parent ms-parent-id-64 mb-5" style="max-width:1200px;"  >
   <!-- MasterSlider Main -->
-  <div id="MS62a701ccd35f6" class="master-slider ms-skin-default" >
-    <div class="ms-slide" data-delay="3" data-fill-mode="fill"   >
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-architecture-1.jpg" />
+  <div id="MS0003" class="master-slider ms-skin-default" >
+    <div class="ms-slide" data-delay="3" data-fill-mode="fill">
+      <img
+        src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif"
+        alt="ms-free-food-restaurant"
+        title="ms-free-food-restaurant"
+        data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-restaurant.jpg"
+      />
+      <!-- MasterSlider Info -->
       <div class="ms-info">
-        <h2 class="notoc" style="text-align: center;">Sample Title 1</h2>
-        <p style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore.</p>
+        <div class="j1-ms-info-overlay">
+          <h2 class="notoc j1-ms-info-headline r-text-500 animated rotateInUpLeft">Sample Title 1</h2>
+          <p class="j1-ms-info-body r-text-300 animated fadeInRight">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+        </div>
       </div>
+      <!-- END MasterSlider Info -->
     </div>
     <div class="ms-slide" data-delay="3" data-fill-mode="fill"   >
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-architecture-2.jpg" />
+      <img
+        src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif"
+        alt="ms-free-food-hamburger"
+        title="ms-free-food-hamburger"
+        data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-hamburger.jpg"
+      />
+      <!-- MasterSlider Info -->
       <div class="ms-info">
-        <h2 class="notoc" style="text-align: center;">Sample Title 2</h2>
-        <p style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <div class="j1-ms-info-overlay">
+          <h2 class="notoc j1-ms-info-headline r-text-500 animated rotateInUpLeft">Sample Title 2</h2>
+          <p class="j1-ms-info-body r-text-300 animated fadeInRight">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+        </div>
       </div>
+      <!-- END MasterSlider Info -->
     </div>
     <div class="ms-slide" data-delay="3" data-fill-mode="fill"   >
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-architecture-3.jpg" />
+      <img
+        src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif"
+        alt="ms-free-food-family-2"
+        title="ms-free-food-family-2"
+        data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2.jpg"
+      />
+      <!-- MasterSlider Info -->
       <div class="ms-info">
-        <h2 class="notoc" style="text-align: center;">Sample Title 3</h2>
-        <p style="text-align: center;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+        <div class="j1-ms-info-overlay">
+          <h2 class="notoc j1-ms-info-headline r-text-500 animated rotateInUpLeft">Sample Title 3</h2>
+          <p class="j1-ms-info-body r-text-300 animated fadeInRight">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
+        </div>
       </div>
+      <!-- END MasterSlider Info -->
     </div>
   </div>
   <!-- END MasterSlider Main -->
 </div>
-<!-- END MasterSlider -->
+<!-- END MasterSlider 3 -->
 ++++
 
 
-== Slider 4
+== Slider 4 - ThumbView (position right|vertical)
 
 lorem:sentences[5]
 
@@ -173,7 +200,7 @@ lorem:sentences[5]
 <!-- MasterSlider -->
 <div id="P_MS62a702e85fdd9" class="master-slider-parent ms-parent-id-63  mb-5"  >
   <!-- MasterSlider Main -->
-  <div id="MS62a702e85fdd9" class="master-slider ms-skin-light-6 round-skin" >
+  <div id="MS62a702e85fdd9" class="master-slider ms-skin-light-1 round-skin" >
     <div class="ms-slide" data-delay="3" data-fill-mode="fill"   >
       <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="ms-free-animals-1" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-1.jpg" />
       <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-1-100x80.jpg" alt="" />
@@ -209,7 +236,7 @@ lorem:sentences[5]
 ++++
 
 
-== Slider 5
+== Slider 5 - ThumbView  (position bottom|horizontal)
 
 lorem:sentences[5]
 
@@ -219,15 +246,34 @@ lorem:sentences[5]
   <!-- MasterSlider Main -->
   <div id="MS62a706bd0f5b3" class="master-slider ms-skin-default" >
     <div class="ms-slide" data-delay="3" data-fill-mode="fill"   >
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="ms-free-food-family" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-140x80.jpg" alt="" />
+      <img
+        src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif"
+        alt=""
+        title="ms-free-food-family"
+        data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family.jpg"
+      />
+      <img
+        class="ms-thumb"
+        src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-140x80.jpg"
+        alt=""
+      />
     </div>
     <div class="ms-slide" data-delay="3" data-fill-mode="fill"   >
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="ms-free-food-woman-hand" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-woman-hand.jpg" />
+      <img
+        src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif"
+        alt=""
+        title="ms-free-food-woman-hand"
+        data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-woman-hand.jpg"
+      />
       <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-woman-hand-140x80.jpg" alt="" />
     </div>
     <div class="ms-slide" data-delay="3" data-fill-mode="fill"   >
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="ms-free-food-family-2" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2.jpg" />
+      <img
+        src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif"
+        alt=""
+        title="ms-free-food-family-2"
+        data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2.jpg"
+      />
       <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2-140x80.jpg" alt="" />
     </div>
     <div class="ms-slide" data-delay="3" data-fill-mode="fill"   >
@@ -265,7 +311,7 @@ lorem:sentences[5]
 ++++
 
 
-== Slider 6
+== Slider 6 - Blog articles (PartialView)
 
 lorem:sentences[5]
 
@@ -278,9 +324,11 @@ lorem:sentences[5]
       <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="Special slider for bloggers" title="Special slider for bloggers" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-slide2-1024x622.jpg" />
       <div class="ms-info">
         <div style="text-align: center;">
-          <h4 class="notoc" style="text-align: center; font-size: 20px; font-weight: 600; margin-bottom: 0;"><a class="link-no-decoration" style="color: #4dc8e4; text-decoration: none;" href="https://www.masterslider.com/special-slider-photographers-bloggers/">Special slider for bloggers</a></h4>
-          <p style="margin-bottom: 25px;">Are you managing wordpress website? No matter that you are expert or amateur photographer, We offer  ...</p>
-          <a style="padding: 5px 15px; background: #4dc8e4; text-decoration: none; color: #fff; border-radius:3px;" href="https://www.masterslider.com/special-slider-photographers-bloggers/">Read More</a>
+          <h2 class="notoc r-text-400 animated fadeInLeft" style="text-align: center; font-size: 20px; font-weight: 600; color: #fff;">Special slider for bloggers</h4>
+          <!-- p style="margin-bottom: 25px;">Are you managing wordpress website? No matter that you are expert or amateur photographer, We offer  ...</p -->
+          <p class="animated fadeInRight mt-4">
+            <a class="link-no-decoration" style="padding: 5px 15px; background: #2196f3; text-decoration: none; color: #fff; border-radius:3px; font-size: 16px;" href="#void">Read More</a>
+          </p>
         </div>
       </div>
     </div>
@@ -288,9 +336,11 @@ lorem:sentences[5]
       <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="Everything is customizable!" title="Everything is customizable!" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-1-1024x622.jpg" />
       <div class="ms-info">
         <div style="text-align: center;">
-          <h4 class="notoc" style="text-align: center; font-size: 20px; font-weight: 600; margin-bottom: 0;"><a class="link-no-decoration" style="color: #4dc8e4; text-decoration: none;" href="https://www.masterslider.com/everything-will-customize-just-minutes/">Everything is customizable!</a></h4>
-          <p style="margin-bottom: 25px;">create a wordpress slider for your website just in minutes by Master Slider templates! Everything wi ...</p>
-          <a style="padding: 5px 15px; background: #4dc8e4; text-decoration: none; color: #fff; border-radius:3px;" href="https://www.masterslider.com/everything-will-customize-just-minutes/">Read More</a>
+          <h2 class="notoc r-text-400 animated fadeInLeft" style="text-align: center; font-size: 20px; font-weight: 600; color: #fff;">Everything is customizable!</h4>
+          <!-- p style="margin-bottom: 25px;">create a wordpress slider for your website just in minutes by Master Slider templates! Everything wi ...</p -->
+          <p class="animated fadeInRight mt-4">
+            <a class="link-no-decoration" style="padding: 5px 15px; background: #2196f3; text-decoration: none; color: #fff; border-radius:3px; font-size: 16px;" href="#void">Read More</a>
+          </p>
         </div>
       </div>
     </div>
@@ -298,9 +348,11 @@ lorem:sentences[5]
       <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="Share your moments with your visitors" title="Share your moments with your visitors" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-slide3-1024x622.jpg" />
       <div class="ms-info">
         <div style="text-align: center;">
-          <h4 class="notoc" style="text-align: center; font-size: 20px; font-weight: 600; margin-bottom: 0;"><a class="link-no-decoration" style="color: #4dc8e4; text-decoration: none;" href="https://www.masterslider.com/share-moments-website-visitors/">Share your moments with your visitors</a></h4>
-          <p style="margin-bottom: 25px;">Our pre-made templates make it easy for you to create slideshows by your Tastes. this template is su ...</p>
-          <a style="padding: 5px 15px; background: #4dc8e4; text-decoration: none; color: #fff; border-radius:3px;" href="https://www.masterslider.com/share-moments-website-visitors/">Read More</a>
+          <h2 class="notoc r-text-400 animated fadeInLeft" style="text-align: center; font-size: 20px; font-weight: 600; color: #fff;">Share your moments with your visitors</h4>
+          <!-- p style="margin-bottom: 25px;">Our pre-made templates make it easy for you to create slideshows by your Tastes. this template is su ...</p -->
+          <p class="animated fadeInRight mt-4">
+            <a class="link-no-decoration" style="padding: 5px 15px; background: #2196f3; text-decoration: none; color: #fff; border-radius:3px; font-size: 16px;" href="#void">Read More</a>
+          </p>
         </div>
       </div>
     </div>
@@ -308,9 +360,11 @@ lorem:sentences[5]
       <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="We love interior design websites" title="We love interior design websites" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-3.jpg" />
       <div class="ms-info">
         <div style="text-align: center;">
-          <h4 class="notoc" style="text-align: center; font-size: 20px; font-weight: 600; margin-bottom: 0;"><a class="link-no-decoration" style="color: #4dc8e4; text-decoration: none;" href="https://www.masterslider.com/love-interior-design-websites/">We love interior design websites</a></h4>
-          <p style="margin-bottom: 25px;">Are you searching for slider plugin that support video and text? Master slider is Best slider to sho ...</p>
-          <a style="padding: 5px 15px; background: #4dc8e4; text-decoration: none; color: #fff; border-radius:3px;" href="https://www.masterslider.com/love-interior-design-websites/">Read More</a>
+          <h2 class="notoc r-text-400 animated fadeInLeft" style="text-align: center; font-size: 20px; font-weight: 600; color: #fff;">We love interior design websites</h4>
+          <!-- p style="margin-bottom: 25px;">Are you searching for slider plugin that support video and text? Master slider is Best slider to sho ...</p -->
+          <p class="animated fadeInRight mt-4">
+            <a class="link-no-decoration" style="padding: 5px 15px; background: #2196f3; text-decoration: none; color: #fff; border-radius:3px; font-size: 16px;" href="#void">Read More</a>
+          </p>
         </div>
       </div>
     </div>
@@ -318,9 +372,11 @@ lorem:sentences[5]
       <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="New Buildings, New Designs!" title="New Buildings, New Designs!" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-2.jpg" />
       <div class="ms-info">
         <div style="text-align: center;">
-          <h4 class="notoc" style="text-align: center; font-size: 20px; font-weight: 600; margin-bottom: 0;"><a class="link-no-decoration" style="color: #4dc8e4; text-decoration: none;" href="https://www.masterslider.com/new-buildings-new-designs/">New Buildings, New Designs!</a></h4>
-          <p style="margin-bottom: 25px;">Here is revolution on wordpress slider! Build your favorite slider with our ready to use templates j ...</p>
-          <a style="padding: 5px 15px; background: #4dc8e4; text-decoration: none; color: #fff; border-radius:3px;" href="https://www.masterslider.com/new-buildings-new-designs/">Read More</a>
+          <h2 class="notoc r-text-400 animated fadeInLeft" style="text-align: center; font-size: 20px; font-weight: 600; color: #fff;">New Buildings, New Designs!</h4>
+          <!-- p style="margin-bottom: 25px;">Here is revolution on wordpress slider! Build your favorite slider with our ready to use templates j ...</p -->
+          <p class="animated fadeInRight mt-4">
+             <a class="link-no-decoration" style="padding: 5px 15px; background: #2196f3; text-decoration: none; color: #fff; border-radius:3px; font-size: 16px;" href="#void">Read More</a>
+          </p>
         </div>
       </div>
     </div>
@@ -328,9 +384,11 @@ lorem:sentences[5]
       <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="Greatest Modern Architect Designs" title="Greatest Modern Architect Designs" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-1.jpg" />
       <div class="ms-info">
         <div style="text-align: center;">
-          <h4 class="notoc" style="text-align: center; font-size: 20px; font-weight: 600; margin-bottom: 0;"><a class="link-no-decoration" style="color: #4dc8e4; text-decoration: none;" href="https://www.masterslider.com/greatest-modern-architect-designs/">Greatest Modern Architect Designs</a></h4>
-          <p style="margin-bottom: 25px;">Create a slider with Master Slider plugin! With this architecture template, you just need to add you ...</p>
-          <a style="padding: 5px 15px; background: #4dc8e4; text-decoration: none; color: #fff; border-radius:3px;" href="https://www.masterslider.com/greatest-modern-architect-designs/">Read More</a>
+          <h2 class="notoc r-text-400 animated fadeInLeft" style="text-align: center; font-size: 20px; font-weight: 600; color: #fff;">Greatest Modern Architect Designs</h4>
+          <!-- p style="margin-bottom: 25px;">Create a slider with Master Slider plugin! With this architecture template, you just need to add you ...</p -->
+          <p class="animated fadeInRight mt-4">
+             <a class="link-no-decoration" style="padding: 5px 15px; background: #2196f3; text-decoration: none; color: #fff; border-radius:3px; font-size: 16px;" href="#void">Read More</a>
+          </p>
         </div>
       </div>
     </div>
@@ -341,7 +399,7 @@ lorem:sentences[5]
 ++++
 
 
-== Slider 7 (partialview)
+== Slider 7 - PartialView 3D
 
 lorem:sentences[5]
 
@@ -404,6 +462,7 @@ lorem:sentences[5]
 <!-- END MasterSlider -->
 ++++
 
+////
 == Slider 8
 
 lorem:sentences[5]
@@ -439,9 +498,9 @@ lorem:sentences[5]
 </div>
 <!-- END MasterSlider -->
 ++++
+////
 
-
-== Slider 9
+== Slider 8 - ThumbView (position right|vertical)
 
 lorem:sentences[5]
 
@@ -487,6 +546,55 @@ lorem:sentences[5]
 
 ++++
 <style>
+
+/*
+.ms-slide-info {
+  background-color: rgba(0,0,0,.75);
+  font-family: "Lato";
+  font-size: 16px;
+  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 40px;
+  padding-left: 30px;
+  font-weight: 400;
+  line-height: normal;
+  color: #f3f3f3;
+}
+*/
+
+.j1-ms-info {
+  background-color: rgba(0,0,0,.75);
+  font-family: "Lato";
+  font-size: 16px;
+  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  font-weight: 400;
+  line-height: normal;
+  color: #f3f3f3;
+}
+
+.j1-ms-info-overlay {
+  font-family: "Lato";
+  font-size: 16px;
+  padding-top: 10px;
+  padding-right: 30px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  font-weight: 400;
+  line-height: normal;
+  color: #f3f3f3;
+}
+h2.j1-ms-info-headline {
+  text-align: center;
+  font-family: "Lato";
+}
+
+.j1-ms-info-body r-text-300 {
+  text-align: center;
+  font-family: "Lato";
+}
 
 .ms-info-context {
   background-color: rgba(0,0,0,.75);
