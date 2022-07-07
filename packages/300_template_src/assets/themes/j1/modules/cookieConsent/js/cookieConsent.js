@@ -214,7 +214,7 @@ function CookieConsent(props) {
         // ---------------------------------------------------------------------
         self.$modal.on('show.bs.modal', function () {
           // hide the menubar for the modal header
-          $('#navigator_nav_navbar').hide();
+          // $('#navigator_nav_navbar').hide();
         }); // END modal on 'show'
 
         // ---------------------------------------------------------------------
@@ -222,7 +222,7 @@ function CookieConsent(props) {
         // ---------------------------------------------------------------------
         self.$modal.on('hidden.bs.modal', function () {
           // if the modal is closed, show the menubar
-          $('#navigator_nav_navbar').show();
+          // $('#navigator_nav_navbar').show();
           // process settings after the user has made his selections
           executeFunctionByName (self.props.postSelectionCallback, window);
         }); // END modal on 'hidden'

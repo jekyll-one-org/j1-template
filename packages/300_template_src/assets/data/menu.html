@@ -73,7 +73,7 @@ exclude_from_search:                    true
   {% assign ext = '.html' %}
 {% endif %}
 
-<!-- [DEBUG  ] [/assets/data/menu.html          ] [detect bs type] -->
+<!-- [DEBUG  ] [~/assets/data/menu.html         ][detect bs type] -->
 {% assign bs_type  = 'bmd4' %}
 {% if navigator_settings.bs_type == 'bs4' %}
   {% assign bs_type = 'bs4' %}
@@ -85,7 +85,7 @@ exclude_from_search:                    true
   {% assign dropdown_collapse = 'fake-class collapse'  %}
 {% endif %}
 
-<!-- [DEBUG  ] [/assets/data/menu.html          ] [bs type detected: {{bs_type}}] -->
+<!-- [DEBUG  ] [~/assets/data/menu.html         ][bs type detected: {{bs_type}}] -->
 
 {% comment %} Set navBarOptions
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -105,7 +105,7 @@ exclude_from_search:                    true
 {% capture nav_menu_position %}dropdown-menu-{{nav_bar_position}}{% endcapture %}
 {% unless nav_menu_animation %} {% assign nav_menu_animation  = false %} {% endunless %}
 
-<!-- [DEBUG  ] [/assets/data/menu.html          ] [initialize default menu properties] -->
+<!-- [DEBUG  ] [~/assets/data/menu.html         ][initialize default menu properties] -->
 {% if nav_menu_options.raised_level %}
   {% assign raised_level = nav_menu_options.raised_level %}
 {% else %}
@@ -120,13 +120,13 @@ exclude_from_search:                    true
   {% assign translate = 'notranslate' %}
 {% endif %}
 
-<!-- [DEBUG  ] [/assets/data/menu.html          ] [nav_bar_translation:  {{ nav_bar_translation }}] -->
-<!-- [DEBUG  ] [/assets/data/menu.html          ] [translate:  {{ translate }}] -->
+<!-- [DEBUG  ] [~/assets/data/menu.html         ][nav_bar_translation:  {{ nav_bar_translation }}] -->
+<!-- [DEBUG  ] [~/assets/data/menu.html         ][translate:  {{ translate }}] -->
 -------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Set base icons and sizes
 -------------------------------------------------------------------------------- {% endcomment %}
-<!-- [DEBUG  ] [/assets/data/menu.html          ] [initialize default menu icon properties] -->
+<!-- [DEBUG  ] [~/assets/data/menu.html         ][initialize default menu icon properties] -->
 {% assign nav_menu_icon_family         = nav_menu_options.icon_family %}
 {% assign nav_menu_icon_style          = nav_menu_options.icon_style %}
 {% assign nav_menu_icon_color          = nav_menu_options.icon_color %}
@@ -151,7 +151,7 @@ exclude_from_search:                    true
 {% include {{select_icon_size}} family=nav_menu_icon_family size=nav_menu_icon_size %}
 {% assign nav_menu_icon_size = size %}
 
-<!-- [INFO   ] [/assets/data/menu.html          ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
+<!-- [INFO   ] [~/assets/data/menu.html         ][ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />
 </head>
@@ -160,7 +160,7 @@ exclude_from_search:                    true
 See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-mathjax-processing-from-certain-html-elements
 -------------------------------------------------------------------------------- {% endcomment %}
 
-<!-- [DEBUG  ] [/assets/data/menu.html          ] [collect all nav links for the navigation bar (navbar)] -->
+<!-- [DEBUG  ] [~/assets/data/menu.html         ][collect all nav links for the navigation bar (navbar)] -->
 <!-- div id="{{nav_menu_id}}" class="{{dropdown_collapse}}" -->
 <!-- div class="{{dropdown_collapse}}" -->
   {% if nav_menu_animation %}
@@ -195,8 +195,8 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
     {% comment %} Collect items having a SUB menue
     ---------------------------------------------------------------------------- {% endcomment %}
     {% when 'sublevel_menu' %}
-      <!-- [INFO   ] [/assets/data/menu.html          ] [found menu-type: sub-menue] -->
-      <!-- [INFO   ] [/assets/data/menu.html          ] [submenu level 1 detected] -->
+      <!-- [INFO   ] [~/assets/data/menu.html         ][found menu-type: sub-menue] -->
+      <!-- [INFO   ] [~/assets/data/menu.html         ][submenu level 1 detected] -->
       <li class="dropdown nav-item">
         {% if menu.icon == null %}
           <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-hover="dropdown">{{ menu.item }}</a>
@@ -223,7 +223,7 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
           {% endif %}
           {% if level_1.divider %} <li class="divider"></li> {% endif %}
           {% if level_1.dropdown %}
-            <!-- [INFO   ] [/assets/data/menu.html          ] [submenu level 2 (dropdown) detected ] -->
+            <!-- [INFO   ] [~/assets/data/menu.html         ][submenu level 2 (dropdown) detected ] -->
             <li class="dropdown nav-item nav-sub-item">
               {% if level_1.icon == null %}
                 <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">{{ level_1.title }}</a>
@@ -250,7 +250,7 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                   {% endif %}
                   {% if level_2.divider %} <li class="divider"></li> {% endif %}
                   {% if level_2.dropdown %}
-                    <!-- [INFO   ] [/assets/data/menu.html          ] [submenu level 3 detected (last level supported)] -->
+                    <!-- [INFO   ] [~/assets/data/menu.html         ][submenu level 3 detected (last level supported)] -->
                     <li class="dropdown nav-item nav-sub-item">
                       {% if level_2.icon == null %}
                         <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">{{ level_2.title }}</a>
@@ -273,29 +273,29 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                           {% endif %}
                         {% endif %}
                         {% if level_3.divider %} <li class="divider"></li> {% endif %}
-                      {% endfor %} <!-- [INFO   ] [/assets/data/menu.html          ] [end processing: level 3] -->
+                      {% endfor %} <!-- [INFO   ] [~/assets/data/menu.html         ][end processing: level 3] -->
                       </ul>
                     </li>
                   {% endif %}
-              {% endfor %} <!-- [INFO   ] [/assets/data/menu.html          ] [end processing: level 2] -->
+              {% endfor %} <!-- [INFO   ] [~/assets/data/menu.html         ][end processing: level 2] -->
               </ul>
             </li>
           {% endif %}
-        {% endfor %} <!-- [INFO   ] [/assets/data/menu.html          ] [end processing: level 1] -->
+        {% endfor %} <!-- [INFO   ] [~/assets/data/menu.html         ][end processing: level 1] -->
         </ul>
       </li>
-      <!-- [INFO   ] [/assets/data/menu.html          ] [reset menu_type for next loop] -->
+      <!-- [INFO   ] [~/assets/data/menu.html         ][reset menu_type for next loop] -->
     {% assign menu_type = '' %}
 
 
     {% comment %} Collect items having a MEGA menu
     ---------------------------------------------------------------------------- {% endcomment %}
     {% when 'mega_menu' %}
-      <!-- [INFO   ] [/assets/data/menu.html          ] [found menu-type: megamenu-menue] -->
+      <!-- [INFO   ] [~/assets/data/menu.html         ][found menu-type: megamenu-menue] -->
       <!-- calculate size of mm_columns -->
       {% assign columns = menu.megamenu | size %}
       {% assign columns_width_md = 12 | divided_by:columns %}
-      <!-- [INFO   ] [/assets/data/menu.html          ] [Calculated size of mm_columns: {{ columns_width_md }}] -->
+      <!-- [INFO   ] [~/assets/data/menu.html         ][Calculated size of mm_columns: {{ columns_width_md }}] -->
 
       <li class="dropdown nav-item megamenu-fw">
         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{menu.item}} </a>
@@ -325,30 +325,30 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                 </ul>
               </div>
             </div>
-            <!-- [INFO   ] [/assets/data/menu.html          ] [megamenu-menue: end megabox] -->
+            <!-- [INFO   ] [~/assets/data/menu.html         ][megamenu-menue: end megabox] -->
             {% endfor %}
             </div>
           </li>
         </ul>
       </li>
-      <!-- [INFO   ] [/assets/data/menu.html          ] [megamenu-menue: end mega-menu] -->
-      <!-- [INFO   ] [/assets/data/menu.html          ] [reset menu_type for next loop] -->
+      <!-- [INFO   ] [~/assets/data/menu.html         ][megamenu-menue: end mega-menu] -->
+      <!-- [INFO   ] [~/assets/data/menu.html         ][reset menu_type for next loop] -->
       {% assign menu_type = '' %}
 
 
       {% comment %} Collect TOP-LEVEL items (NO sub-menu)
       -------------------------------------------------------------------------- {% endcomment %}
       {% when 'top_level_item' %}
-        <!-- [INFO   ] [/assets/data/menu.html          ] [found menu-type: menu-top-level-only] -->
+        <!-- [INFO   ] [~/assets/data/menu.html         ][found menu-type: menu-top-level-only] -->
         {% if menu.icon == null %}
-          <!-- [INFO   ] [/assets/data/menu.html          ] [no icon for menu-item found -->
+          <!-- [INFO   ] [~/assets/data/menu.html         ][no icon for menu-item found -->
           {% if menu.target == null %}
             <li class="nav-item"> <a class="nav-link" href="{{ menu.href }}{{ext}}">{{ menu.item }}</a> </li>
           {% else %}
             <li class="nav-item"> <a class="nav-link" href="{{ menu.href }}{{ext}}" target="{{ menu.target }}" rel="noopener">{{ menu.item }}</a> </li>
           {% endif %}
         {% elsif menu.icon %}
-          <!-- [INFO   ] [/assets/data/menu.html          ] [no icon for menu-item found -->
+          <!-- [INFO   ] [~/assets/data/menu.html         ][no icon for menu-item found -->
           {% if menu.target == null %}
             <li> <a class="nav-link" href="{{ menu.href }}{{ext}}"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{menu.icon}} {{nav_menu_icon_size}}" style="color:{{nav_menu_icon_color}}"></i> {{ menu.item }}</a> </li>
           {% else %}
@@ -357,15 +357,15 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
         {% else %}
           <!-- [FATAL ] [nav_menu.menu-top-level-only       ] [processing menu item failed] -->
         {% endif %}
-        <!-- [INFO   ] [/assets/data/menu.html          ] [menu-top-level-only: end menu] -->
-        <!-- [INFO   ] [/assets/data/menu.html          ] [reset menu_type for next loop] -->
+        <!-- [INFO   ] [~/assets/data/menu.html         ][menu-top-level-only: end menu] -->
+        <!-- [INFO   ] [~/assets/data/menu.html         ][reset menu_type for next loop] -->
         {% assign menu_type = '' %}
 
 
         {% comment %} Collect items having a LOGIN menu
         ------------------------------------------------------------------------ {% endcomment %}
         {% when 'auth_client' %}
-          <!-- [INFO   ] [/assets/data/menu.html          ] [found menu-type: auth_client] -->
+          <!-- [INFO   ] [~/assets/data/menu.html         ][found menu-type: auth_client] -->
           <li id="menuBarSignInOut" class="dropdown nav-item">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-hover="dropdown">{{menu.item}} </a>
 
@@ -381,26 +381,26 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
               {% assign item_found = 'false' %}
               {% for item in menu.auth_client %}
 
-                <!-- [INFO   ] [/assets/data/menu.html          ] [START: check signin] -->
+                <!-- [INFO   ] [~/assets/data/menu.html         ][START: check signin] -->
                 {% if item.mode == 'signin' %}
                   <li class="dropdown-item">
                     <a href="#" data-bs-toggle="modal" data-bs-target="#modalOmniSignIn"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{item.icon}} {{nav_menu_icon_size}}" style="color:{{nav_menu_icon_color}}"></i>{{item.title}}</a>
                   </li>
                   {% assign item_found = 'true' %}
                 {% endif %}
-                <!-- [INFO   ] [/assets/data/menu.html          ] [END: check signin] -->
+                <!-- [INFO   ] [~/assets/data/menu.html         ][END: check signin] -->
 
-                <!-- [INFO   ] [/assets/data/menu.html          ] [START: check signout] -->
+                <!-- [INFO   ] [~/assets/data/menu.html         ][START: check signout] -->
                 {% if item.mode == 'signout' %}
                   <li class="dropdown-item">
                     <a href="#" data-bs-toggle="modal" data-bs-target="#modalOmniSignOut"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{item.icon}} {{nav_menu_icon_size}}" style="color:{{nav_menu_icon_color}}"></i>{{item.title}}</a>
                   </li>
                   {% assign item_found = 'true' %}
                 {% endif %}
-                <!-- [INFO   ] [/assets/data/menu.html          ] [END: check signout] -->
+                <!-- [INFO   ] [~/assets/data/menu.html         ][END: check signout] -->
 
                 {% if item_found == 'false' %}
-                <!-- [FATAL  ] [/assets/data/menu.html          ] [no valid menu item config found] -->
+                <!-- [FATAL  ] [~/assets/data/menu.html         ][no valid menu item config found] -->
                   <li class="dropdown-item">
                     {% if item.title %}
                       <a href="#" >Invalid: {{item.title}}</a>
@@ -411,17 +411,17 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                 {% endif %}
 
               {% endfor %}
-              <!-- [INFO   ] [/assets/data/menu.html          ] [login_menu: end menu] -->
+              <!-- [INFO   ] [~/assets/data/menu.html         ][login_menu: end menu] -->
             </ul>
           </li>
-          <!-- [INFO   ] [/assets/data/menu.html          ] [reset menu_type for next loop] -->
+          <!-- [INFO   ] [~/assets/data/menu.html         ][reset menu_type for next loop] -->
           {% assign menu_type = '' %}
 
           {% comment %} Collect items having a THEMES menu
           ---------------------------------------------------------------------- {% endcomment %}
           {% when 'theme_select' %}
           {% if themer_options.enabled %}
-            <!-- [INFO   ] [/assets/data/menu.html          ] [found menu-type: theme_select] -->
+            <!-- [INFO   ] [~/assets/data/menu.html         ][found menu-type: theme_select] -->
             <li id="themes_menu" class="dropdown nav-item">
               <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-hover="dropdown">{{menu.item}} </a>
               {% if nav_menu_animation %}
@@ -467,7 +467,7 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                 {% endfor %}
               </ul>
             </li>
-            <!-- [INFO   ] [/assets/data/menu.html          ] [reset menu_type for next loop] -->
+            <!-- [INFO   ] [~/assets/data/menu.html         ][reset menu_type for next loop] -->
           {% endif %}
           {% assign menu_type = '' %}
 
@@ -475,16 +475,16 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
           {% comment %} Collect items failed
           ---------------------------------------------------------------------- {% endcomment %}
           {% else %}
-            <!-- [FATAL  ] [/assets/data/menu.html          ] [detecting menu items|type failed] -->
+            <!-- [FATAL  ] [~/assets/data/menu.html         ][detecting menu items|type failed] -->
         {% assign menu_type = '' %}
 
     {% endcase %}
 
   {% endfor %}
-  <!-- [INFO   ] [/assets/data/menu.html          ] [nav_menu_settings: end menu] -->
+  <!-- [INFO   ] [~/assets/data/menu.html         ][nav_menu_settings: end menu] -->
   </ul>
-  <!-- [INFO   ] [/assets/data/menu.html          ] [nav_menu_settings: end navbar] -->
-  <!-- [INFO   ] [/assets/data/menu.html          ] [nav_menu_settings: end processing] -->
+  <!-- [INFO   ] [~/assets/data/menu.html         ][nav_menu_settings: end navbar] -->
+  <!-- [INFO   ] [~/assets/data/menu.html         ][nav_menu_settings: end processing] -->
 {% endcapture %}
 
 {% if production %}

@@ -7,8 +7,8 @@ exclude_from_search:                    true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/data/fam.html
- # Liquid procedure to generate HTML portion for FAM buttons to be loaded
+ # ~/assets/data/slider.html
+ # Liquid procedure to generate HTML portion for all Master Sliders to be loaded
  #
  # Product/Info:
  # https://jekyll.one
@@ -18,7 +18,7 @@ exclude_from_search:                    true
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
  # -----------------------------------------------------------------------------
- # NOTE: Data loaded dynamically by J1 FAM Manager module (AJAX)
+ # NOTE: Data loaded dynamically by J1 Master Slider module (AJAX)
  # -----------------------------------------------------------------------------
  # Test data:
  #    {{variable | debug}}
@@ -36,22 +36,25 @@ exclude_from_search:                    true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config = site.data.j1_config %}
-{% assign modules         = site.data.modules %}
+{% assign template_config     = site.data.j1_config %}
+{% assign modules             = site.data.modules %}
 
 {% comment %} Set config data
-fab_settings: {{fab_settings | debug}}
-fab_defaults: {{fab_defaults | debug}}
+slider_defaults: {{slider_defaults | debug}}
+slider_settings: {{slider_settings | debug}}
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment     = site.environment %}
+{% assign environment         = site.environment %}
 
-{% assign fab_settings    = modules.fab.settings %}
-{% assign fab_defaults    = modules.defaults.fab.defaults %}
+{% assign slider_defaults     = modules.defaults.masterslider.defaults %}
+{% assign slider_settings     = modules.masterslider.settings %}
 
 {% comment %} Set config options
+slider_options: {{slider_options | debug}}
+sliders: {{sliders | debug}}
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign fab_options     = fab_defaults | merge: fab_settings %}
-{% assign fab_menus       = fab_options.menus %}
+{% assign slider_options      = slider_defaults | merge: slider_settings %}
+{% assign sliders             = slider_options.sliders %}
+
 
 {% comment %} Set permalink setting
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -62,31 +65,31 @@ fab_defaults: {{fab_defaults | debug}}
 
 {% comment %} Set base icons and sizes
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign fab_menu_icon_family         = fab_options.icon_family %}
-{% assign fab_menu_icon_style          = fab_options.icon_style %}
-{% assign fab_menu_icon_color          = fab_options.icon_color %}
-{% assign fab_menu_icon_size           = fab_options.icon_size %}
+{% assign slider_menu_icon_family         = slider_options.icon_family %}
+{% assign slider_menu_icon_style          = slider_options.icon_style %}
+{% assign slider_menu_icon_color          = slider_options.icon_color %}
+{% assign slider_menu_icon_size           = slider_options.icon_size %}
 
-{% assign icon_family = fab_menu_icon_family | strip | downcase %}
+{% assign icon_family = slider_menu_icon_family | strip | downcase %}
 
 {% if icon_family == 'fontawesome' or icon_family == 'fontawesome5' %}
-  {% assign fab_menu_icon_family  = 'fa' %}
-  {% assign fab_menu_icon_style   = fab_menu_icon_style %}
+  {% assign slider_menu_icon_family  = 'fa' %}
+  {% assign slider_menu_icon_style   = slider_menu_icon_style %}
 {% elsif icon_family == 'mdi' %}
-  {% assign fab_menu_icon_family  = 'mdi' %}
-  {% assign fab_menu_icon_style   = fab_menu_icon_style %}
+  {% assign slider_menu_icon_family  = 'mdi' %}
+  {% assign slider_menu_icon_style   = slider_menu_icon_style %}
 {% else %}
-  {% assign fab_menu_icon_family  = 'mdi' %}
-  {% assign fab_menu_icon_style   = fab_menu_icon_style %}
+  {% assign slider_menu_icon_family  = 'mdi' %}
+  {% assign slider_menu_icon_style   = slider_menu_icon_style %}
 {% endif %}
 
 {% comment %} unused
 --------------------------------------------------------------------------------
-{% include {{select_color}} color=fab_menu_icon_color fallback="#9E9E9E" %}
-{% assign fab_menu_icon_color = color %}
+{% include {{select_color}} color=slider_menu_icon_color fallback="#9E9E9E" %}
+{% assign slider_menu_icon_color = color %}
 
-{% include {{select_icon_size}} family=fab_menu_icon_family size=fab_menu_icon_size %}
-{% assign fab_menu_icon_size = size %}
+{% include {{select_icon_size}} family=slider_menu_icon_family size=slider_menu_icon_size %}
+{% assign slider_menu_icon_size = size %}
 -------------------------------------------------------------------------------- {% endcomment %}
 
 {% assign production = false %}
@@ -94,51 +97,116 @@ fab_defaults: {{fab_defaults | debug}}
   {% assign production = true %}
 {% endif %}
 
-<!-- [INFO   ] [~/assets/data/fab.html                     ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
+<!-- [INFO   ] [~/assets/data/slider.html                     ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />
 </head>
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
-<!-- [DEBUG  ] [~/assets/data/fab.html                     ] [collect all menu items] -->
-{% for menu in fab_menus %}
-  {% if menu.enabled %}
-  <!-- [DEBUG  ] [~/assets/data/fab.html                     ] [collect menu {{menu.id}}] -->
-  <div id="{{menu.id}}">
-    <div class="fab-btn" style="display: none">
-      <!-- [DEBUG  ] [~/assets/data/fab.html                     ] [jadams, 2020-11-15: set href|link text (Google optimisation)] -->
+<!-- [INFO   ] [~/assets/data/slider.html                     ] [collect all slider items] -->
+{% for slider in sliders %}
+  {% if slider.enabled %}
 
-      {% if fab_options.raised %}
-        {% capture options %}raised-z{{fab_options.raised}} {%endcapture%}
+  {% if slider.skin %}
+    {% capture skin %}ms-skin-{{slider.skin}}{% endcapture %}
+  {% else %}
+    {% capture skin %}ms-skin-default{% endcapture %}
+  {% endif %}
+
+  <!-- [INFO   ] [~/assets/data/slider.html                     ] [collect slider {{slider.id}}] -->
+  <!-- MasterSlider Main -->
+  <div id="{{slider.id}}" class="master-slider {{skin}}">
+
+    {% for slide in slider.slides %}
+    <div class="ms-slide">
+      <img
+        src="{{slide.background}}"
+        alt="{{slide.alt}}" title="{{slide.title}}"
+        data-src="{{slide.foreground}}"
+      >
+
+      {% assign slideinfo = slide.slideinfo %}
+      {% if slideinfo %}
+        {% assign slideinfo = true %}
+      {% else %}
+        {% assign slideinfo = false %}
       {% endif %}
 
-      {% if fab_options.pulsed %}
-        {% capture options %}options pulsed-z{{fab_options.pulsed}}{%endcapture%}
+      {% if slideinfo %}
+      <!-- MasterSlider Info -->
+      <div class="ms-info">
+
+      {% if slide.slideinfo.rtext %}
+        {% capture rtext %}r-text-{{slide.slideinfo.rtext}} {% endcapture %}
+      {% else %}
+        {% capture rtext %} {% endcapture %}
       {% endif %}
 
-      <button type="button" id="{{menu.id}}_button" class="btn btn-fab btn-{{menu.color}} {{options}}" aria-label="fab-button">
-        <i id="fab-icon" class="mdi mdi-{{menu.icon}} md-white"></i>
-      </button>
+      {% if slide.slideinfo.title %}
+        {% assign title = slide.slideinfo.title %}
+      {% else %}
+        {% assign title = false %}
+      {% endif %}
 
-      <ul id="fab_menu_items">
-        {% for item in menu.items %} {% if item.enabled %}
-        <li>
-          <!-- a href="#void" id="{{item.id}}" class="btn-fab-floating btn-{{item.color}} raised-z{{fab_options.raised_level}}" style="display: none" -->
-          <a href="#" id="{{item.id}}" class="btn-fab-floating btn-{{item.color}} raised-z{{fab_options.raised_level}}" style="display: none">
-            <i id="fab-icon" class="mdi mdi-{{item.icon}} mdi-{{item.icon_properties}}"></i>
-          </a>
-        </li>
-        {% endif %} {% endfor %}
-      </ul>
+      {% if slide.slideinfo.title_animated %}
+        {% capture title_animated %}animated {{slide.slideinfo.title_animated}} {% endcapture %}
+      {% else %}
+        {% capture title_animated %} {% endcapture %}
+      {% endif %}
+
+      {% if slide.slideinfo.tagline %}
+        {% assign tagline = slide.slideinfo.tagline %}
+      {% else %}
+        {% assign tagline = false %}
+      {% endif %}
+
+      {% if slide.slideinfo.tagline_animated %}
+        {% capture tagline_animated %}animated {{slide.slideinfo.title_animated}} {% endcapture %}
+      {% else %}
+        {% capture tagline_animated %} {% endcapture %}
+      {% endif %}
+
+      {% if slide.slideinfo.description %}
+        {% assign description = slide.slideinfo.description %}
+      {% else %}
+        {% assign description = false %}
+      {% endif %}
+
+      {% if slide.slideinfo.description_animated %}
+        {% capture description_animated %}animated {{slide.slideinfo.description_animated}} {% endcapture %}
+      {% else %}
+        {% capture description_animated %} {% endcapture %}
+      {% endif %}
+
+        {% if slide.slideinfo.boxed %}
+        <div class="j1-ms-info-overlay">
+        {% else %}
+        <div class="j1-ms-info">
+        {% endif %}
+
+          {% if title %}
+          <h2 class="notoc j1-ms-info-headline {{rtext}} {{title_animated}}">{{title}}</h2>
+          {% endif %}
+          {% if tagline %}
+          <h3 class="notoc j1-ms-info-tagline {{rtext}} {{tagline_animated}}">{{tagline}}</h3>
+          {% endif %}
+          {% if description %}
+          <p class="j1-ms-info-body {{rtext}} {{description_animated}}">{{description}}</p>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
 
     </div>
+    {% endfor %}
+
   </div>
-  <!-- [DEBUG  ] [~/assets/data/fab.html                     ] [end menu {{menu.id}}] -->
+  <!-- [INFO   ] [~/assets/data/slider.html                     ] [end slider {{slider.id}}] -->
   {% endif %}
 
 {% endfor %}
-<!-- [DEBUG  ] [~/assets/data/fab.html                     ] [end collecting all menu items] -->
+<!-- [INFO   ] [~/assets/data/slider.html                     ] [end collecting all slider items] -->
 
 {% endcapture %}
 

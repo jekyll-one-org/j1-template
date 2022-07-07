@@ -61,7 +61,7 @@ exclude_from_search:                    true
 
 {% for item in nav_mmenu_options.menus %}
 {% if item.menu.xhr_container_id == "navigator_sidebar_mmenu" %}
-<!-- [INFO   ] [ /assets/data/mmenu_sidebar.html ] [ collect data for mmenu sitebar ] -->
+<!-- [INFO   ] [~/assets/data/mmenu_sidebar.html         ] [ collect data for mmenu sitebar ] -->
 {% assign sidebar_options = item.menu.content %}
 {% endif %}
 {% endfor %}
@@ -86,7 +86,7 @@ exclude_from_search:                    true
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
-<!-- [INFO   ] [ /assets/data/mmenu_sidebar.html ] [Start processing: sidebar] -->
+<!-- [INFO   ] [~/assets/data/mmenu_sidebar.html         ] [Start processing: sidebar] -->
 <div id="{{sidebar_options.id}}" class="mm-side tex2jax_ignore" style="display:none">
   <!-- h2 class="menu-title">{{sidebar_options.title}}</h2 -->
 {% for boxes in sidebar_options.boxes %}
@@ -108,7 +108,7 @@ exclude_from_search:                    true
         {% comment %} Collect USER info
         ------------------------------------------------------------------------ {% endcomment %}
         {% when 'user_info' %}
-          <!-- [INFO   ] [ /assets/data/mmenu_sidebar.html ] [USER info enabled] -->
+          <!-- [INFO   ] [~/assets/data/mmenu_sidebar.html         ] [USER info enabled] -->
           <div id="user-info" class="widget">
             <ul id="display_user_details" class="link">
               {% for link in links %}
@@ -142,7 +142,7 @@ exclude_from_search:                    true
               {% endfor %}
             </ul>
           </div>
-          <!-- [INFO   ] [ /assets/data/mmenu_sidebar.html ] [End processing: USER info] -->
+          <!-- [INFO   ] [~/assets/data/mmenu_sidebar.html         ] [End processing: USER info] -->
 
         {% comment %} END Collect USER info
         ------------------------------------------------------------------------ {% endcomment %}
@@ -158,7 +158,7 @@ exclude_from_search:                    true
         {% comment %} Collect THEME info
         ------------------------------------------------------------------------ {% endcomment %}
         {% when 'theme_info' %}
-          <!-- [INFO   ] [ /assets/data/mmenu_sidebar.html ] [THEME info detected] -->
+          <!-- [INFO   ] [~/assets/data/mmenu_sidebar.html         ] [THEME info detected] -->
           <div id="theme-info" class="widget">
             <h3 class="heading">{{title}}</h3>
             <ul class="link">
@@ -193,7 +193,7 @@ exclude_from_search:                    true
             {% endfor %}
             </ul>
           </div>
-          <!-- [INFO   ] [ /assets/data/mmenu_sidebar.html ] [End processing: THEME info] -->
+          <!-- [INFO   ] [~/assets/data/mmenu_sidebar.html         ] [End processing: THEME info] -->
 
         {% comment %} END Collect THEME info
         ------------------------------------------------------------------------ {% endcomment %}
@@ -209,7 +209,7 @@ exclude_from_search:                    true
         {% comment %} Collect SITE info
         ------------------------------------------------------------------------ {% endcomment %}
         {% when 'site_info' %}
-          <!-- [INFO   ] [ /assets/data/mmenu_sidebar.html ] [SITE info detected] -->
+          <!-- [INFO   ] [~/assets/data/mmenu_sidebar.html         ] [SITE info detected] -->
           <div id="site-info" class="widget">
             <h3 class="heading">{{title}}</h3>
             <ul class="link">
@@ -237,7 +237,7 @@ exclude_from_search:                    true
               {% endfor %}
             </ul>
           </div>
-          <!-- [INFO   ] [ /assets/data/mmenu_sidebar.html ] [End processing: SITE info] -->
+          <!-- [INFO   ] [~/assets/data/mmenu_sidebar.html         ] [End processing: SITE info] -->
         {% comment %} END Collect SITE info
         ------------------------------------------------------------------------ {% endcomment %}
 
@@ -254,8 +254,8 @@ exclude_from_search:                    true
 
   {% endfor %}
 {% endfor %}
-<!-- [INFO   ] [ /assets/data/mmenu_sidebar.html ] [End processing sidebar boxes] -->
-<!-- [INFO   ] [ /assets/data/mmenu_sidebar.html ] [End processing: sidebar] -->
+<!-- [INFO   ] [~/assets/data/mmenu_sidebar.html         ] [End processing sidebar boxes] -->
+<!-- [INFO   ] [~/assets/data/mmenu_sidebar.html         ] [End processing: sidebar] -->
 </div>
 {% endcapture %}
 

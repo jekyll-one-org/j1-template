@@ -1374,18 +1374,18 @@ j1.adapter.nbinteract = (function (j1, window) {
         // ---------------------------------------------------------------------
         // on 'show'
         // ---------------------------------------------------------------------
-        _this.$modal.on('show.bs.modal', function () {
-          // hide the menubar for the modal header
-          $('#navigator_nav_navbar').hide();
-        }); // END modal on 'show'
+        // _this.$modal.on('show.bs.modal', function () {
+        //   // hide the menubar for the modal header
+        //   $('#navigator_nav_navbar').hide();
+        // }); // END modal on 'show'
 
         // ---------------------------------------------------------------------
         // on 'hidden'
         // ---------------------------------------------------------------------
-        _this.$modal.on('hidden.bs.modal', function () {
-          // if the modal is closed, show the menubar
-          $('#navigator_nav_navbar').show();
-        }); // END modal on 'hidden'
+        // _this.$modal.on('hidden.bs.modal', function () {
+        //   // if the modal is closed, show the menubar
+        //   $('#navigator_nav_navbar').show();
+        // }); // END modal on 'hidden'
 
       }.bind(_this));
     },  // END loadDialog

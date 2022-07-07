@@ -691,17 +691,23 @@ li.dropdown.nav-item.nav-sub-item:before {
   					}
   				}
   			}
+        // jadams: background was overwritten to transparent, was: $white !important;
   			.navbar-toggle {
-  				background-color: transparent !important;  // jadams: background was overwritten to transparent, was: $white !important;
+  				background-color: transparent !important;
   				border: none;
   				padding: 0;
   				font-size: 18px;
   				position: relative;
   				top: 5px;
   			}
+        // was: z-index: 999999999;
+        // jadams: z-index too high and cause navbar displayed ALWAS on top.
+        // Conflict with oher tools (like LightGallery) using overlay
+        // techniques for full-screen
+        //
   			&.navbar-fixed {
   				position: fixed;
-          z-index: 999999999;
+          z-index: 1000;
   				&.navbar-transparent {
   					.logo-scrolled {
   						display: none;

@@ -1,0 +1,237 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/masterslider.yml
+# User configuration for J1 MasterSlider
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2022 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description
+#
+description:
+  title:                                J1 MasterSlider
+  scope:                                User settings
+  location:                             _data/modules/masterslider.yml
+
+# ------------------------------------------------------------------------------
+# User settings
+#
+settings:
+
+  # ----------------------------------------------------------------------------
+  # Sliders
+  # ----------------------------------------------------------------------------
+  #
+  sliders:
+
+    # --------------------------------------------------------------------------
+    # Slider 1, Simple Boxed
+    #
+    - slider:
+      enabled:                          true
+
+      id:                               ms_00001
+      skin:                             light-3
+
+      # ------------------------------------------------------------------------
+      # Slider controls
+      #
+      controls:
+        # NO controls used for this slider
+
+      # ------------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+
+        width:                          1200
+        height:                         600
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        # slide 1
+        #
+        - slide:
+          alt:                          "cat-1"
+          title:                        "cat-1"
+          foreground:                   "/assets/images/modules/masterslider/cats/cat-1.jpg"
+          background:                   /assets/themes/j1/modules/masterslider/css/blank.gif
+          slideinfo:                    false
+
+        # slide 2
+        #
+        - image:
+          alt:                          "cat-2"
+          title:                        "cat-2"
+          foreground:                   "/assets/images/modules/masterslider/cats/cat-2.jpg"
+          background:                   /assets/themes/j1/modules/masterslider/css/blank.gif
+          slideinfo:                    false
+
+        # slide 3
+        #
+        - image:
+          alt:                          "cat-3"
+          title:                        "cat-3"
+          foreground:                   "/assets/images/modules/masterslider/cats/cat-3.jpg"
+          background:                   /assets/themes/j1/modules/masterslider/css/blank.gif
+          slideinfo:                    false
+
+    # --------------------------------------------------------------------------
+    # Slider 2 - Full Width
+    #
+    - slider:
+      enabled:                          true
+
+      id:                               ms_00002
+      skin:                             default
+
+      # ------------------------------------------------------------------------
+      # Slider controls
+      #
+      controls:
+        # NO controls used for this slider
+
+      # ------------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+        # NO options used for this slider
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        # slide 1
+        #
+        - slide:
+          alt:                          cities-1
+          title:                        cities-1
+          foreground:                   /assets/images/modules/masterslider/mega_cities/andreas-brucker.jpg
+          background:                   /assets/themes/j1/modules/masterslider/css/blank.gif
+          slideinfo:                    false
+
+        # slide 2
+        #
+        - image:
+          alt:                          cities-2
+          title:                        cities-2
+          foreground:                   /assets/images/modules/masterslider/mega_cities/denys-nevozhai-1.jpg
+          background:                   /assets/themes/j1/modules/masterslider/css/blank.gif
+          slideinfo:                    false
+
+        # slide 3
+        #
+        - image:
+          alt:                          cities-3
+          title:                        cities-3
+          foreground:                   /assets/images/modules/masterslider/mega_cities/denys-nevozhai-2.jpg
+          background:                   /assets/themes/j1/modules/masterslider/css/blank.gif
+          slideinfo:                    false
+
+    # --------------------------------------------------------------------------
+    # Slider 3 - SlideInfo (Boxed|Animated)
+    #
+    - slider:
+      enabled:                          true
+
+      id:                               ms_00003
+      skin:                             default                                 # light-2
+
+      # ------------------------------------------------------------------------
+      # Slider controls
+      #
+      controls:
+
+        slideinfo:
+          enabled:                      true
+          autohide:                     false
+          overVideo:                    true
+          dir:                          h
+          align:                        bottom
+          inset:                        false
+          margin:                       -113
+
+      # ------------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+        width:                          1200
+        height:                         500
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        # slide 1
+        #
+        - slide:
+          alt:                          ms-free-food-restaurant
+          title:                        ms-free-food-restaurant
+          foreground:                   "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-restaurant.jpg"
+          background:                   /assets/themes/j1/modules/masterslider/css/blank.gif
+          slideinfo:
+            rtext:                      300                                     # false or [100 .. 500]
+            boxed:                      true
+            title:                      Sample Title 1
+            title_animated:             rotateInUpLeft
+            tagline:                    false
+            tagline_animated:           false
+            description: >
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                        Ut enim ad minim veniam.
+            description_animated:       fadeInRight
+
+        # slide 2
+        #
+        - slide:
+          alt:                          ms-free-food-hamburger
+          title:                        ms-free-food-hamburger
+          foreground:                   "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-hamburger.jpg"
+          background:                   /assets/themes/j1/modules/masterslider/css/blank.gif
+          slideinfo:
+            rtext:                      300                                     # false or [100 .. 500]
+            boxed:                      true
+            title:                      Sample Title 2
+            title_animated:             rotateInUpLeft
+            tagline:                    false
+            tagline_animated:           false
+            description: >
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                        Ut enim ad minim veniam.
+            description_animated:       fadeInRight
+
+        # slide 3
+        #
+        - slide:
+          alt:                          ms-free-food-family-2
+          title:                        ms-free-food-family-2
+          foreground:                   "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2.jpg"
+          background:                   /assets/themes/j1/modules/masterslider/css/blank.gif
+          slideinfo:
+            rtext:                      300                                     # false or [100 .. 500]
+            boxed:                      true
+            title:                      Sample Title 3
+            title_animated:             rotateInUpLeft
+            tagline:                    false
+            tagline_animated:           false
+            description: >
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                        Ut enim ad minim veniam.
+            description_animated:       fadeInRight
+
+# ------------------------------------------------------------------------------
+# END config

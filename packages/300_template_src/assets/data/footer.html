@@ -23,7 +23,7 @@ exclude_from_search:                    true
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
-<!-- [INFO   ] [j1.assets.data.footer              ] [Footer generated: {{site.time}}] -->
+<!-- [INFO   ] [~/assets/data/footer.html                ] [Footer generated: {{site.time}}] -->
 
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -64,7 +64,7 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% capture footer_config_file_name %}~/_data/modules/footer.yml{% endcapture %}
 
-<!-- [INFO   ] [/assets/data/footer.html               ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
+<!-- [INFO   ] [~/assets/data/footer.html                ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />
 </head>
@@ -108,7 +108,7 @@ exclude_from_search:                    true
           {% if property.enabled %} {% assign enabled_boxes = enabled_boxes | plus:1 %} {% endif %}
         {% endfor %}
         {% assign footer_box_width_md = 12 | divided_by:enabled_boxes %}
-        <!-- [INFO   ] [j1.assets.data.footer              ] [Set footer box column width to: {{ footer_box_width_md }}] -->
+        <!-- [INFO   ] [~/assets/data/footer.html                ] [Set footer box column width to: {{ footer_box_width_md }}] -->
 
         <!-- div id="{{footer_config_defaults.container-id}}" class="{{footer_options.theme}}" -->
         <div id="{{footer_config_defaults.container-id}}">
@@ -215,7 +215,7 @@ exclude_from_search:                    true
           <div class="copyright">
             <div class="container">
               <div class="row">
-                <!-- [INFO   ] [j1.assets.data.footer              ] [Enable horizontal list using id #inline] -->
+                <!-- [INFO   ] [~/assets/data/footer.html                ] [Enable horizontal list using id #inline] -->
                 <div class="col-md-10" id="inline">
                 {% include {{legal_statements}} legals=footer_options.legals %}
                 </div>

@@ -83,7 +83,7 @@ exclude_from_search:                    true
 {% assign icon_size   = navigator_options.icon_size %}
 {% assign icon_color  = navigator_options.icon_color %}
 
-<!-- [INFO   ] [/assets/data/mmenu.html               ] [ set meta data (robots) to exclude HTML data files from index ] -->
+<!-- [INFO   ] [~/assets/data/mmenu.html              ] [ set meta data (robots) to exclude HTML data files from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />
 </head>
@@ -91,8 +91,8 @@ exclude_from_search:                    true
 {% comment %} Main
 See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-mathjax-processing-from-certain-html-elements
 -------------------------------------------------------------------------------- {% endcomment %}
-  <!-- [INFO   ] [/assets/data/mmenu.html               ] [collect all nav links for the mobile navigation ] -->
-  <!-- [INFO   ] [/assets/data/mmenu.html               ] [id menu_mmenu set statically and MUST as configured  ] -->
+  <!-- [INFO   ] [~/assets/data/mmenu.html              ] [collect all nav links for the mobile navigation ] -->
+  <!-- [INFO   ] [~/assets/data/mmenu.html              ] [id menu_mmenu set statically and MUST as configured  ] -->
   <ul id="menu_mmenu" class="partial tex2jax_ignore" style="display:none">
 
   {% for menu in navigator_menu_config %}
@@ -121,8 +121,8 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
     {% comment %} Collect items having a SUB menue
     ---------------------------------------------------------------------------- {% endcomment %}
     {% when 'sublevel_menu' %}
-      <!-- [INFO   ] [/assets/data/mmenu.html               ] [found menu-type: sub-menue] -->
-      <!-- [INFO   ] [/assets/data/mmenu.html               ] [submenu level 1 detected] -->
+      <!-- [INFO   ] [~/assets/data/mmenu.html              ] [found menu-type: sub-menue] -->
+      <!-- [INFO   ] [~/assets/data/mmenu.html              ] [submenu level 1 detected] -->
       <li>
         {% if menu.icon == null %}
           <a href="#">{{menu.item}}</a>
@@ -149,7 +149,7 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
           {% endif %}
 
           {% if level_1.dropdown %}
-            <!-- [INFO   ] [/assets/data/mmenu.html               ] [submenu level 2 (dropdown) detected] -->
+            <!-- [INFO   ] [~/assets/data/mmenu.html              ] [submenu level 2 (dropdown) detected] -->
             <li>
               {% if level_1.icon == null %}
                 <a href="#">{{level_1.title}}</a>
@@ -175,7 +175,7 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                     {% endif %}
                   {% endif %}
                   {% if level_2.dropdown %}
-                    <!-- [INFO   ] [/assets/data/mmenu.html               ] [submenu level 3 detected (last level supported)] -->
+                    <!-- [INFO   ] [~/assets/data/mmenu.html              ] [submenu level 3 detected (last level supported)] -->
                     <li>
                       {% if level_2.icon == null %}
                         <a href="#" >{{level_2.title}}</a>
@@ -199,29 +199,29 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                           {% endif %}
                         {% endif %}
                         {% if level_3.divider %} <li class="divider"></li> {% endif %}
-                      {% endfor %} <!-- [INFO   ] [/assets/data/mmenu.html               ] [end processing: level 3] -->
+                      {% endfor %} <!-- [INFO   ] [~/assets/data/mmenu.html              ] [end processing: level 3] -->
                       </ul>
                     </li>
                   {% endif %}
-              {% endfor %} <!-- [INFO   ] [/assets/data/mmenu.html               ] [end processing: level 2] -->
+              {% endfor %} <!-- [INFO   ] [~/assets/data/mmenu.html              ] [end processing: level 2] -->
               </ul>
             </li>
           {% endif %}
-        {% endfor %} <!-- [INFO   ] [/assets/data/mmenu.html               ] [end processing: level 1] -->
+        {% endfor %} <!-- [INFO   ] [~/assets/data/mmenu.html              ] [end processing: level 1] -->
         </ul>
       </li>
-      <!-- [INFO   ] [/assets/data/mmenu.html               ] [reset menu_type for next loop] -->
+      <!-- [INFO   ] [~/assets/data/mmenu.html              ] [reset menu_type for next loop] -->
     {% assign menu_type = '' %}
 
 
     {% comment %} Collect items having a MEGA menu (disabled for now)
     ---------------------------------------------------------------------------- {% endcomment %}
     {% when 'mmmmmmmega_menu' %}
-      <!-- [INFO   ] [/assets/data/mmenu.html               ] [found menu-type: megamenu-menue] -->
+      <!-- [INFO   ] [~/assets/data/mmenu.html              ] [found menu-type: megamenu-menue] -->
       <!-- calculate size of mm_columns -->
       {% assign columns = menu.megamenu | size %}
       {% assign columns_width_md = 12 | divided_by:columns %}
-      <!-- [INFO   ] [/assets/data/mmenu.html               ] [Calculated size of mm_columns: {{columns_width_md}}] -->
+      <!-- [INFO   ] [~/assets/data/mmenu.html              ] [Calculated size of mm_columns: {{columns_width_md}}] -->
 
       <li>
         <a href="#" >{{menu.item}} </a>
@@ -251,30 +251,30 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                 </ul>
               </div>
             </div>
-            <!-- [INFO   ] [/assets/data/mmenu.html               ] [megamenu-menue: end megabox] -->
+            <!-- [INFO   ] [~/assets/data/mmenu.html              ] [megamenu-menue: end megabox] -->
             {% endfor %}
             </div>
           </li>
         </ul>
       </li>
-      <!-- [INFO   ] [/assets/data/mmenu.html               ] [megamenu-menue: end mega-menu] -->
-      <!-- [INFO   ] [/assets/data/mmenu.html               ] [reset menu_type for next loop] -->
+      <!-- [INFO   ] [~/assets/data/mmenu.html              ] [megamenu-menue: end mega-menu] -->
+      <!-- [INFO   ] [~/assets/data/mmenu.html              ] [reset menu_type for next loop] -->
       {% assign menu_type = '' %}
 
 
       {% comment %} Collect TOP-LEVEL items (NO sub-menu)
       -------------------------------------------------------------------------- {% endcomment %}
       {% when 'top_level_item' %}
-        <!-- [INFO   ] [/assets/data/mmenu.html               ] [found menu-type: menu-top-level-only] -->
+        <!-- [INFO   ] [~/assets/data/mmenu.html              ] [found menu-type: menu-top-level-only] -->
         {% if menu.icon == null %}
-          <!-- [INFO   ] [/assets/data/mmenu.html               ] [no icon for menu-item found -->
+          <!-- [INFO   ] [~/assets/data/mmenu.html              ] [no icon for menu-item found -->
           {% if menu.target == null %}
             <li> <a href="{{menu.href}}{{ext}}">{{menu.item}}</a> </li>
           {% else %}
             <li> <a href="{{menu.href}}{{ext}}" target="{{menu.target}}">{{menu.item}}</a> </li>
           {% endif %}
         {% elsif menu.icon %}
-          <!-- [INFO   ] [/assets/data/mmenu.html               ] [no icon for menu-item found -->
+          <!-- [INFO   ] [~/assets/data/mmenu.html              ] [no icon for menu-item found -->
           {% if menu.target == null %}
             <li> <a href="{{menu.href}}{{ext}}"><i class="{{icon_style}} {{icon_family}}-{{menu.icon}} {{icon_size}}"></i> {{menu.item}}</a> </li>
           {% else %}
@@ -283,15 +283,15 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
         {% else %}
           <!-- [FATAL ] [nav_menu.menu-top-level-only       ] [processing menu item failed] -->
         {% endif %}
-        <!-- [INFO   ] [/assets/data/mmenu.html               ] [menu-top-level-only: end menu] -->
-        <!-- [INFO   ] [/assets/data/mmenu.html               ] [reset menu_type for next loop] -->
+        <!-- [INFO   ] [~/assets/data/mmenu.html              ] [menu-top-level-only: end menu] -->
+        <!-- [INFO   ] [~/assets/data/mmenu.html              ] [reset menu_type for next loop] -->
         {% assign menu_type = '' %}
 
 
         {% comment %} Collect items having a LOGIN menu  (disabled for now)
         ------------------------------------------------------------------------ {% endcomment %}
         {% when 'auth_client' %}
-          <!-- [INFO   ] [/assets/data/mmenu.html               ] [found menu-type: auth_client] -->
+          <!-- [INFO   ] [~/assets/data/mmenu.html              ] [found menu-type: auth_client] -->
           <li id="menuBarSignInOut" class="dropdown nav-item">
             <a href="#">{{menu.item}} </a>
 
@@ -299,26 +299,26 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
               {% assign item_found = 'false' %}
               {% for item in menu.auth_client %}
 
-                <!-- [INFO   ] [/assets/data/mmenu.html               ] [START: check signin] -->
+                <!-- [INFO   ] [~/assets/data/mmenu.html              ] [START: check signin] -->
                 {% if item.mode == 'signin' %}
                   <li>
                     <a href="#" data-bs-toggle="modal" data-bs-target="#modalOmniSignIn"><i class="{{icon_style}} {{icon_family}}-{{item.icon}} {{icon_size}}"></i>{{item.title}}</a>
                   </li>
                   {% assign item_found = 'true' %}
                 {% endif %}
-                <!-- [INFO   ] [/assets/data/mmenu.html               ] [END: check signin] -->
+                <!-- [INFO   ] [~/assets/data/mmenu.html              ] [END: check signin] -->
 
-                <!-- [INFO   ] [/assets/data/mmenu.html               ] [START: check signout] -->
+                <!-- [INFO   ] [~/assets/data/mmenu.html              ] [START: check signout] -->
                 {% if item.mode == 'signout' %}
                   <li>
                     <a href="#" data-bs-toggle="modal" data-bs-target="#modalOmniSignOut"><i class="{{icon_style}} {{icon_family}}-{{item.icon}} {{icon_size}}"></i>{{item.title}}</a>
                   </li>
                   {% assign item_found = 'true' %}
                 {% endif %}
-                <!-- [INFO   ] [/assets/data/mmenu.html               ] [END: check signout] -->
+                <!-- [INFO   ] [~/assets/data/mmenu.html              ] [END: check signout] -->
 
                 {% if item_found == 'false' %}
-                <!-- [FATAL  ] [/assets/data/mmenu.html               ] [no valid menu item config found] -->
+                <!-- [FATAL  ] [~/assets/data/mmenu.html              ] [no valid menu item config found] -->
                   <li>
                     {% if item.title %}
                       <a href="#" >Invalid: {{item.title}}</a>
@@ -329,17 +329,17 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                 {% endif %}
 
               {% endfor %}
-              <!-- [INFO   ] [/assets/data/mmenu.html               ] [login_menu: end menu] -->
+              <!-- [INFO   ] [~/assets/data/mmenu.html              ] [login_menu: end menu] -->
             </ul>
           </li>
-          <!-- [INFO   ] [/assets/data/mmenu.html               ] [reset menu_type for next loop] -->
+          <!-- [INFO   ] [~/assets/data/mmenu.html              ] [reset menu_type for next loop] -->
           {% assign menu_type = '' %}
 
           {% comment %} Collect items having a THEMES menu  (disabled for now)
           ---------------------------------------------------------------------- {% endcomment %}
           {% when 'theme_select' %}
           {% if themer_options.enabled %}
-            <!-- [INFO   ] [/assets/data/mmenu.html               ] [found menu-type: theme_select] -->
+            <!-- [INFO   ] [~/assets/data/mmenu.html              ] [found menu-type: theme_select] -->
             <li>
               <a href="#">{{menu.item}} </a>
               {% if nav_menu_animation %}
@@ -385,7 +385,7 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                 {% endfor %}
               </ul>
             </li>
-            <!-- [INFO   ] [/assets/data/mmenu.html               ] [reset menu_type for next loop] -->
+            <!-- [INFO   ] [~/assets/data/mmenu.html              ] [reset menu_type for next loop] -->
           {% endif %}
           {% assign menu_type = '' %}
 
@@ -393,17 +393,17 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
           {% comment %} Collect items failed
           ---------------------------------------------------------------------- {% endcomment %}
           {% else %}
-            <!-- [FATAL  ] [/assets/data/mmenu.html               ] [detecting menu items|type failed] -->
+            <!-- [FATAL  ] [~/assets/data/mmenu.html              ] [detecting menu items|type failed] -->
         {% assign menu_type = '' %}
 
     {% endcase %}
 
   {% endfor %}
-  <!-- [INFO   ] [/assets/data/mmenu.html               ] [nav_menu_settings: end menu] -->
+  <!-- [INFO   ] [~/assets/data/mmenu.html              ] [nav_menu_settings: end menu] -->
   </ul>
-  <!-- [INFO   ] [/assets/data/mmenu.html               ] [nav_menu_settings: end navbar] -->
+  <!-- [INFO   ] [~/assets/data/mmenu.html              ] [nav_menu_settings: end navbar] -->
 <!-- div -->
-<!-- [INFO   ] [/assets/data/mmenu.html               ] [nav_menu_settings: end processing] -->
+<!-- [INFO   ] [~/assets/data/mmenu.html              ] [nav_menu_settings: end processing] -->
 
 {% endcapture %}
 {% if production %}

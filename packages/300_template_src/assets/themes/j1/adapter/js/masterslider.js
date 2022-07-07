@@ -63,7 +63,7 @@ j1.adapter.masterslider = (function (j1, window) {
   // ---------------------------------------------------------------------------
   return {
 
-    // ----ms_1------------------------------------------------------------------
+    // -------------------------------------------------------------------------
     // Initializer
     // -------------------------------------------------------------------------
     init: function (options) {
@@ -100,14 +100,13 @@ j1.adapter.masterslider = (function (j1, window) {
           //--------------------------------------------------------------------
           var masterslider_1 = new MasterSlider();
 
-          // slider controls
           // masterslider_1.control('arrows', {
           //   autohide:             false,
           //   overVideo:            true
           // });
 
           // slider setup
-          masterslider_1.setup('ms_1', {
+          masterslider_1.setup('ms_00001', {
             width:                1200,
             height:               600,
             minHeight:            0,
@@ -156,13 +155,13 @@ j1.adapter.masterslider = (function (j1, window) {
           var masterslider_2 = new MasterSlider();
 
           // slider controls
-          masterslider_2.control('arrows', {
-            autohide:             false,
-            overVideo:            true
-          });
+          // masterslider_2.control('arrows', {
+          //   autohide:             false,
+          //   overVideo:            true
+          // });
 
           // slider setup
-          masterslider_2.setup('ms_2', {
+          masterslider_2.setup('ms_00002', {
             width:                1200,
             height:               600,
             minHeight:            0,
@@ -226,7 +225,7 @@ j1.adapter.masterslider = (function (j1, window) {
               align:                'bottom',
               inset:                false,
 //            insertTo:             'section',
-              margin:               -140
+              margin:               -113
             }
           );
 
@@ -242,7 +241,7 @@ j1.adapter.masterslider = (function (j1, window) {
           // );
 
     			// slider setup
-    			masterslider_0003.setup("MS0003", {
+    			masterslider_0003.setup("ms_00003", {
     				width:                  1200,
     				height:                 500,
     				minHeight:              0,
@@ -389,9 +388,38 @@ j1.adapter.masterslider = (function (j1, window) {
           var masterslider_f5b3 = new MasterSlider();
 
     			// slider controls
-    			masterslider_f5b3.control('arrows'     ,{ autohide:false, overVideo:true  });
-    			masterslider_f5b3.control('bullets'    ,{ autohide:false, overVideo:true, dir:'h', align:'bottom', space:5 , margin:10  });
-    			masterslider_f5b3.control('thumblist'  ,{ autohide:false, overVideo:true, dir:'h', speed:17, inset:false, arrows:false, hover:false, customClass:'', align:'bottom',type:'thumbs', margin:5, width:140, height:80, space:5, fillMode:'fill'  });
+    			masterslider_f5b3.control('arrows', {
+            autohide:false,
+            overVideo:true
+          });
+    			masterslider_f5b3.control(
+            'bullets', {
+              autohide:false,
+              overVideo:true,
+              dir:'h',
+              align:'bottom',
+              space:5,
+              margin:10
+          });
+    			masterslider_f5b3.control(
+            'thumblist', {
+              autohide:false,
+              overVideo:true,
+              dir:'h',
+              speed:17,
+              inset:false,
+              arrows:false,
+              hover:false,
+              customClass:'',
+              align:'bottom',
+              type:'thumbs',
+              margin:5,
+              width:140,
+              height:80,
+              space:5,
+              fillMode:'fill'
+          });
+
     			// slider setup
     			masterslider_f5b3.setup("MS62a706bd0f5b3", {
     				width :            1200,
@@ -507,9 +535,29 @@ j1.adapter.masterslider = (function (j1, window) {
           var masterslider_4e59 = new MasterSlider();
 
     			// slider controls
-    			masterslider_4e59.control('arrows'     ,{ autohide:true, overVideo:true  });
-    			masterslider_4e59.control('circletimer',{ autohide:false, overVideo:true, color:'#FFFFFF', radius:4, stroke:9   });
-    			masterslider_4e59.control('slideinfo'  ,{ autohide:false, overVideo:true, dir:'h', align:'bottom',inset:false , margin:20   });
+    			masterslider_4e59.control(
+            'arrows', {
+              autohide:true,
+              overVideo:true
+          });
+    			masterslider_4e59.control(
+            'circletimer', {
+              autohide:false,
+              overVideo:true,
+              color:'#FFFFFF',
+              radius:4,
+              stroke:9
+          });
+    			masterslider_4e59.control(
+            'slideinfo', {
+              autohide:false,
+              overVideo:true,
+              dir:'h',
+              align:'bottom',
+              inset:false,
+              margin:20
+          });
+
     			// slider setup
     			masterslider_4e59.setup("MS62a73daae4e59", {
     				width :            700,
@@ -524,7 +572,7 @@ j1.adapter.masterslider = (function (j1, window) {
     				layout:            "partialview",
     				wheel :            false,
     				autoplay :        false,
-                    instantStartLayers:false,
+            instantStartLayers:false,
     				mobileBGVideo:false,
     				loop  :            true,
     				shuffle  :        false,
@@ -647,10 +695,48 @@ j1.adapter.masterslider = (function (j1, window) {
           var masterslider_9f74 = new MasterSlider();
 
     			// slider controls
-    			masterslider_9f74.control('arrows'     ,{ autohide:true, overVideo:true  });
-    			masterslider_9f74.control('thumblist'  ,{ autohide:false, overVideo:true, dir:'v', speed:17, inset:false, arrows:false, hover:false, customClass:'', align:'right',type:'thumbs', margin:2, width:130, height:85, space:2, fillMode:'fill'  });
-    			masterslider_9f74.control('scrollbar'  ,{ autohide:false, overVideo:true, dir:'v', inset:true, align:'right', color:'#3D3D3D' , margin:2  , width:4 });
-    			masterslider_9f74.control('circletimer',{ autohide:false, overVideo:true, color:'#FFFFFF', radius:4, stroke:9   });
+    			masterslider_9f74.control('arrows', {
+            autohide:true,
+            overVideo:true
+          });
+    			masterslider_9f74.control(
+            'thumblist', {
+              autohide:false,
+              overVideo:true,
+              dir:'v',
+              speed:17,
+              inset:false,
+              arrows:false,
+              hover:false,
+              customClass:'',
+              align:'right',
+              type:'thumbs',
+              margin:2,
+              width:130,
+              height:85,
+              space:2,
+              fillMode:'fill'
+          });
+    			masterslider_9f74.control(
+            'scrollbar', {
+              autohide:false,
+              overVideo:true,
+              dir:'v',
+              inset:true,
+              align:'right',
+              color:'#3D3D3D',
+              margin:2,
+              width:4
+          });
+    			masterslider_9f74.control(
+            'circletimer', {
+              autohide:false,
+              overVideo:true,
+              color:'#FFFFFF',
+              radius:4,
+              stroke:9
+          });
+
     			// slider setup
     			masterslider_9f74.setup("MS62a72e9c69f74", {
     				width :            752,
