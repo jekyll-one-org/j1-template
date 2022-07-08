@@ -7,7 +7,7 @@ exclude_from_search:                    true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/data/slider.html
+ # ~/assets/data/masterslider.html
  # Liquid procedure to generate HTML portion for all Master Sliders to be loaded
  #
  # Product/Info:
@@ -40,21 +40,13 @@ exclude_from_search:                    true
 {% assign modules             = site.data.modules %}
 
 {% comment %} Set config data
-slider_defaults: {{slider_defaults | debug}}
-slider_settings: {{slider_settings | debug}}
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment         = site.environment %}
-
-{% assign slider_defaults     = modules.defaults.masterslider.defaults %}
 {% assign slider_settings     = modules.masterslider.settings %}
 
 {% comment %} Set config options
-slider_options: {{slider_options | debug}}
-sliders: {{sliders | debug}}
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign slider_options      = slider_defaults | merge: slider_settings %}
-{% assign sliders             = slider_options.sliders %}
-
+{% assign sliders             = slider_settings.sliders %}
 
 {% comment %} Set permalink setting
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -63,33 +55,13 @@ sliders: {{sliders | debug}}
   {% assign ext = '.html' %}
 {% endif %}
 
-{% comment %} Set base icons and sizes
--------------------------------------------------------------------------------- {% endcomment %}
-{% assign slider_menu_icon_family         = slider_options.icon_family %}
-{% assign slider_menu_icon_style          = slider_options.icon_style %}
-{% assign slider_menu_icon_color          = slider_options.icon_color %}
-{% assign slider_menu_icon_size           = slider_options.icon_size %}
-
-{% assign icon_family = slider_menu_icon_family | strip | downcase %}
-
-{% if icon_family == 'fontawesome' or icon_family == 'fontawesome5' %}
-  {% assign slider_menu_icon_family  = 'fa' %}
-  {% assign slider_menu_icon_style   = slider_menu_icon_style %}
-{% elsif icon_family == 'mdi' %}
-  {% assign slider_menu_icon_family  = 'mdi' %}
-  {% assign slider_menu_icon_style   = slider_menu_icon_style %}
-{% else %}
-  {% assign slider_menu_icon_family  = 'mdi' %}
-  {% assign slider_menu_icon_style   = slider_menu_icon_style %}
-{% endif %}
-
 {% comment %} unused
 --------------------------------------------------------------------------------
-{% include {{select_color}} color=slider_menu_icon_color fallback="#9E9E9E" %}
-{% assign slider_menu_icon_color = color %}
+{% include {{select_color}} color=slider_icon_color fallback="#9E9E9E" %}
+{% assign slider_icon_color = color %}
 
-{% include {{select_icon_size}} family=slider_menu_icon_family size=slider_menu_icon_size %}
-{% assign slider_menu_icon_size = size %}
+{% include {{select_icon_size}} family=slider_icon_family size=slider_icon_size %}
+{% assign slider_icon_size = size %}
 -------------------------------------------------------------------------------- {% endcomment %}
 
 {% assign production = false %}
@@ -114,17 +86,52 @@ sliders: {{sliders | debug}}
     {% capture skin %}ms-skin-default{% endcapture %}
   {% endif %}
 
+  {% if slider.options.partialview %}
+    {% capture partialview %}ms-layout-partialview{% endcapture %}
+  {% else %}
+    {% capture partialview %} {% endcapture %}
+  {% endif %}
+
+
+  {% comment %} Set base icons and sizes
+  -------------------------------------------------------------------------------- {% endcomment %}
+  {% assign slider_icon_family         = slider.icon_family %}
+  {% assign slider_icon_class          = slider.icon_class %}
+  {% assign slider_icon_color          = slider.icon_color %}
+  {% assign slider_icon_size           = slider.icon_size %}
+
+  {% assign icon_family = slider_icon_family | strip | downcase %}
+
+  {% if icon_family == 'fontawesome' or icon_family == 'fontawesome5' %}
+    {% assign slider_icon_family  = 'fa' %}
+    {% assign slider_icon_class   = slider_icon_class %}
+  {% elsif icon_family == 'mdi' %}
+    {% assign slider_icon_class  = 'mdi' %}
+  {% else %}
+    {% assign slider_icon_family  = 'mdi' %}
+    {% assign slider_icon_class   = 'mdi' %}
+  {% endif %}
+
+  {% comment %} Collect slides
+  -------------------------------------------------------------------------------- {% endcomment %}
+
   <!-- [INFO   ] [~/assets/data/slider.html                     ] [collect slider {{slider.id}}] -->
   <!-- MasterSlider Main -->
-  <div id="{{slider.id}}" class="master-slider {{skin}}">
+  <div id="{{slider.id}}" class="master-slider {{skin}} {{partialview}}">
 
     {% for slide in slider.slides %}
     <div class="ms-slide">
       <img
-        src="{{slide.background}}"
+        src="{{slide.background_image}}"
         alt="{{slide.alt}}" title="{{slide.title}}"
-        data-src="{{slide.foreground}}"
+        data-src="{{slide.foreground_image}}"
       >
+      {% if slide.thumb_image %}
+      <img
+        class="ms-thumb" src="{{slide.thumb_image}}"
+        alt="thumb_image_{{slider.id}}"
+      >
+      {% endif %}
 
       {% assign slideinfo = slide.slideinfo %}
       {% if slideinfo %}
@@ -133,67 +140,96 @@ sliders: {{sliders | debug}}
         {% assign slideinfo = false %}
       {% endif %}
 
+      {% comment %} Collect slide-info
+      -------------------------------------------------------------------------- {% endcomment %}
       {% if slideinfo %}
       <!-- MasterSlider Info -->
       <div class="ms-info">
 
-      {% if slide.slideinfo.rtext %}
-        {% capture rtext %}r-text-{{slide.slideinfo.rtext}} {% endcapture %}
-      {% else %}
-        {% capture rtext %} {% endcapture %}
-      {% endif %}
+        {% if slide.slideinfo.rtext %}
+          {% capture rtext %}r-text-{{slide.slideinfo.rtext}} {% endcapture %}
+        {% else %}
+          {% capture rtext %} {% endcapture %}
+        {% endif %}
 
-      {% if slide.slideinfo.title %}
-        {% assign title = slide.slideinfo.title %}
-      {% else %}
-        {% assign title = false %}
-      {% endif %}
+        {% if slide.slideinfo.title %}
+          {% assign title = slide.slideinfo.title %}
+        {% else %}
+          {% assign title = false %}
+        {% endif %}
 
-      {% if slide.slideinfo.title_animated %}
-        {% capture title_animated %}animated {{slide.slideinfo.title_animated}} {% endcapture %}
-      {% else %}
-        {% capture title_animated %} {% endcapture %}
-      {% endif %}
+        {% if slide.slideinfo.title_animated %}
+          {% capture title_animated %}animated {{slide.slideinfo.title_animated}} {% endcapture %}
+        {% else %}
+          {% capture title_animated %} {% endcapture %}
+        {% endif %}
 
-      {% if slide.slideinfo.tagline %}
-        {% assign tagline = slide.slideinfo.tagline %}
-      {% else %}
-        {% assign tagline = false %}
-      {% endif %}
+        {% if slide.slideinfo.title_upcase %}
+          {% assign title = slide.slideinfo.title|upcase %}
+        {% endif %}
 
-      {% if slide.slideinfo.tagline_animated %}
-        {% capture tagline_animated %}animated {{slide.slideinfo.title_animated}} {% endcapture %}
-      {% else %}
-        {% capture tagline_animated %} {% endcapture %}
-      {% endif %}
+        {% if slide.slideinfo.tagline %}
+          {% assign tagline = slide.slideinfo.tagline %}
+        {% else %}
+          {% assign tagline = false %}
+        {% endif %}
 
-      {% if slide.slideinfo.description %}
-        {% assign description = slide.slideinfo.description %}
-      {% else %}
-        {% assign description = false %}
-      {% endif %}
+        {% if slide.slideinfo.tagline_animated %}
+          {% capture tagline_animated %}animated {{slide.slideinfo.title_animated}} {% endcapture %}
+        {% else %}
+          {% capture tagline_animated %} {% endcapture %}
+        {% endif %}
 
-      {% if slide.slideinfo.description_animated %}
-        {% capture description_animated %}animated {{slide.slideinfo.description_animated}} {% endcapture %}
-      {% else %}
-        {% capture description_animated %} {% endcapture %}
-      {% endif %}
+        {% if slide.slideinfo.tagline_upcase %}
+          {% assign tagline = slide.slideinfo.tagline|upcase %}
+        {% endif %}
+
+        {% if slide.slideinfo.description %}
+          {% assign description = slide.slideinfo.description %}
+        {% else %}
+          {% assign description = false %}
+        {% endif %}
+
+        {% if slide.slideinfo.description_animated %}
+          {% capture description_animated %}animated {{slide.slideinfo.description_animated}} {% endcapture %}
+        {% else %}
+          {% capture description_animated %} {% endcapture %}
+        {% endif %}
+
+        {% if slide.slideinfo.button.enabled %}
+          {% assign button = true %}
+        {% else %}
+          {% assign button = false %}
+        {% endif %}
+
+        {% if slide.slideinfo.button.animated %}
+          {% capture button_animated %}animated {{slide.slideinfo.button.animated}} {% endcapture %}
+        {% else %}
+          {% capture button_animated %} {% endcapture %}
+        {% endif %}
 
         {% if slide.slideinfo.boxed %}
-        <div class="j1-ms-info-overlay">
+        <div class="j1-ms-info-boxed">
         {% else %}
         <div class="j1-ms-info">
         {% endif %}
 
           {% if title %}
-          <h2 class="notoc j1-ms-info-headline {{rtext}} {{title_animated}}">{{title}}</h2>
+          <h2 class="notoc j1-ms-info-title {{rtext}} {{title_animated}}" style="color: {{slide.slideinfo.title_color}};">{{title}}</h2>
           {% endif %}
           {% if tagline %}
-          <h3 class="notoc j1-ms-info-tagline {{rtext}} {{tagline_animated}}">{{tagline}}</h3>
+          <h3 class="notoc j1-ms-info-tagline {{rtext}} {{tagline_animated}}" style="color: {{slide.slideinfo.tagline_color}};">{{tagline}}</h3>
           {% endif %}
           {% if description %}
-          <p class="j1-ms-info-body {{rtext}} {{description_animated}}">{{description}}</p>
+          <p class="j1-ms-info-description {{rtext}} {{description_animated}}" style="color: {{slide.slideinfo.description_color}};">{{description}}</p>
           {% endif %}
+
+          {% if button %}
+          <p class="{{button_animated}} {{slide.slideinfo.button.margin}}" style="text-align: center;">
+            <a class="{{slide.slideinfo.button.class}}" href="{{slide.slideinfo.button.link}}" role="button">{{slide.slideinfo.button.text}}</a>
+          </p>
+          {% endif %}
+
         </div>
       </div>
       {% endif %}

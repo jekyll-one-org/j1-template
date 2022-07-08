@@ -19,29 +19,29 @@ include Asciidoctor
 #
 # Usage:
 #
-#   sliders::slider_id[role="additional classes"]
+#   masterslider::slider_id[role="additional classes"]
 #
 # Example:
 #
 #   .The slider title
-#   slider::ms_0001[role="mt-3 mb-5"]
+#   masterslider::ms_00001[role="mt-3 mb-5"]
 #
 Asciidoctor::Extensions.register do
 
-  class SliderBlockMacro < Extensions::BlockMacroProcessor
+  class MasterSliderBlockMacro < Extensions::BlockMacroProcessor
     use_dsl
 
-    named :slider
+    named :masterslider
     name_positional_attributes 'role'
 
     def process parent, target, attrs
 
       title_html  = (attrs.has_key? 'title') ? %(<div class="slider-title">#{attrs['title']}</div>\n) : nil
-      html = %(#{title_html} <div id="p_#{target}" class="master-slider-parent #{attrs['role']}"></div>)
+      html = %(#{title_html} <div id="#{target}_container" class="master-slider-parent #{attrs['role']}"></div>)
       create_pass_block parent, html, attrs, subs: nil
     end
   end
 
-  block_macro SliderBlockMacro
+  block_macro MasterSliderBlockMacro
 
 end

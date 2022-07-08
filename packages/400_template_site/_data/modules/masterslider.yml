@@ -38,6 +38,10 @@ settings:
 
       id:                               ms_00001
       skin:                             light-3
+      icon_family:                      MDI
+      icon_class:                       false                                   # false | fas | fab (Fontawsesome only)
+      icon_color:                       '#1E88E5'                               # md-blue-600
+      icon_size:                        2x
 
       # ------------------------------------------------------------------------
       # Slider controls
@@ -52,6 +56,7 @@ settings:
 
         width:                          1200
         height:                         600
+        partialview:                    false
 
       # ------------------------------------------------------------------------
       # Slides
@@ -61,28 +66,31 @@ settings:
         # slide 1
         #
         - slide:
-          alt:                          "cat-1"
-          title:                        "cat-1"
-          foreground:                   "/assets/images/modules/masterslider/cats/cat-1.jpg"
-          background:                   /assets/themes/j1/modules/masterslider/css/blank.gif
+          alt:                          cat-1
+          title:                        cat-1
+          foreground_image:             /assets/images/modules/masterslider/cats/cat-1.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
           slideinfo:                    false
 
         # slide 2
         #
-        - image:
-          alt:                          "cat-2"
-          title:                        "cat-2"
-          foreground:                   "/assets/images/modules/masterslider/cats/cat-2.jpg"
-          background:                   /assets/themes/j1/modules/masterslider/css/blank.gif
+        - slide:
+          alt:                          cat-2
+          title:                        cat-2
+          foreground_image:             /assets/images/modules/masterslider/cats/cat-2.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
           slideinfo:                    false
 
         # slide 3
         #
-        - image:
-          alt:                          "cat-3"
-          title:                        "cat-3"
-          foreground:                   "/assets/images/modules/masterslider/cats/cat-3.jpg"
-          background:                   /assets/themes/j1/modules/masterslider/css/blank.gif
+        - slide:
+          alt:                          cat-3
+          title:                        cat-3
+          foreground_image:             /assets/images/modules/masterslider/cats/cat-3.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
           slideinfo:                    false
 
     # --------------------------------------------------------------------------
@@ -93,6 +101,12 @@ settings:
 
       id:                               ms_00002
       skin:                             default
+      icon_family:                      MDI
+      icon_class:                       false                                   # false | fas | fab (Fontawsesome only)
+      icon_color:                       '#1E88E5'                               # md-blue-600
+      icon_size:                        2x
+
+
 
       # ------------------------------------------------------------------------
       # Slider controls
@@ -116,27 +130,31 @@ settings:
         - slide:
           alt:                          cities-1
           title:                        cities-1
-          foreground:                   /assets/images/modules/masterslider/mega_cities/andreas-brucker.jpg
-          background:                   /assets/themes/j1/modules/masterslider/css/blank.gif
+          foreground_image:             /assets/images/modules/masterslider/mega_cities/andreas-brucker.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
           slideinfo:                    false
 
         # slide 2
         #
-        - image:
+        - slide:
           alt:                          cities-2
           title:                        cities-2
-          foreground:                   /assets/images/modules/masterslider/mega_cities/denys-nevozhai-1.jpg
-          background:                   /assets/themes/j1/modules/masterslider/css/blank.gif
+          foreground_image:             /assets/images/modules/masterslider/mega_cities/denys-nevozhai-1.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
           slideinfo:                    false
 
         # slide 3
         #
-        - image:
+        - slide:
           alt:                          cities-3
           title:                        cities-3
-          foreground:                   /assets/images/modules/masterslider/mega_cities/denys-nevozhai-2.jpg
-          background:                   /assets/themes/j1/modules/masterslider/css/blank.gif
+          foreground_image:             /assets/images/modules/masterslider/mega_cities/denys-nevozhai-2.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
           slideinfo:                    false
+
 
     # --------------------------------------------------------------------------
     # Slider 3 - SlideInfo (Boxed|Animated)
@@ -146,6 +164,10 @@ settings:
 
       id:                               ms_00003
       skin:                             default                                 # light-2
+      icon_family:                      MDI
+      icon_class:                       false                                   # false | fas | fab (Fontawsesome only)
+      icon_color:                       '#1E88E5'                               # md-blue-600
+      icon_size:                        2x
 
       # ------------------------------------------------------------------------
       # Slider controls
@@ -159,7 +181,7 @@ settings:
           dir:                          h
           align:                        bottom
           inset:                        false
-          margin:                       -113
+          margin:                       -120
 
       # ------------------------------------------------------------------------
       # Slider options
@@ -167,6 +189,7 @@ settings:
       options:
         width:                          1200
         height:                         500
+        partialview:                    false
 
       # ------------------------------------------------------------------------
       # Slides
@@ -178,19 +201,26 @@ settings:
         - slide:
           alt:                          ms-free-food-restaurant
           title:                        ms-free-food-restaurant
-          foreground:                   "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-restaurant.jpg"
-          background:                   /assets/themes/j1/modules/masterslider/css/blank.gif
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-restaurant.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
           slideinfo:
             rtext:                      300                                     # false or [100 .. 500]
             boxed:                      true
             title:                      Sample Title 1
+            title_color:                '#BDBDBD'                               # md-gray-400
             title_animated:             rotateInUpLeft
+            title_upcase:               false
             tagline:                    false
+            tagline_color:              false                                   # '#757575' md-gray-600
             tagline_animated:           false
+            tagline_upcase:             false
             description: >
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                                         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                                         Ut enim ad minim veniam.
+
+            description_color:          '#9E9E9E'                               # md-gray-500
             description_animated:       fadeInRight
 
         # slide 2
@@ -198,19 +228,26 @@ settings:
         - slide:
           alt:                          ms-free-food-hamburger
           title:                        ms-free-food-hamburger
-          foreground:                   "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-hamburger.jpg"
-          background:                   /assets/themes/j1/modules/masterslider/css/blank.gif
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-hamburger.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
           slideinfo:
             rtext:                      300                                     # false or [100 .. 500]
             boxed:                      true
             title:                      Sample Title 2
+            title_color:                '#BDBDBD'                               # md-gray-400
             title_animated:             rotateInUpLeft
+            title_upcase:               false
             tagline:                    false
+            tagline_color:              false                                   # '#757575' md-gray-600
             tagline_animated:           false
+            tagline_upcase:             false
             description: >
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                                         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                                         Ut enim ad minim veniam.
+
+            description_color:          '#9E9E9E'                               # md-gray-500
             description_animated:       fadeInRight
 
         # slide 3
@@ -218,20 +255,721 @@ settings:
         - slide:
           alt:                          ms-free-food-family-2
           title:                        ms-free-food-family-2
-          foreground:                   "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2.jpg"
-          background:                   /assets/themes/j1/modules/masterslider/css/blank.gif
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
           slideinfo:
             rtext:                      300                                     # false or [100 .. 500]
             boxed:                      true
             title:                      Sample Title 3
+            title_color:                '#BDBDBD'                               # md-gray-400
             title_animated:             rotateInUpLeft
+            title_upcase:               false
             tagline:                    false
+            tagline_color:              false                                   # '#757575' md-gray-600
             tagline_animated:           false
+            tagline_upcase:             false
             description: >
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                                         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                                         Ut enim ad minim veniam.
+
+            description_color:          '#9E9E9E'                               # md-gray-500
             description_animated:       fadeInRight
+
+
+    # --------------------------------------------------------------------------
+    # Slider 4 - ThumbView (position right|vertical)
+    #
+    - slider:
+      enabled:                          true
+
+      id:                               ms_00004
+      skin:                             light-2
+      icon_family:                      MDI
+      icon_class:                       false                                   # false | fas | fab (Fontawsesome only)
+      icon_color:                       '#1E88E5'                               # md-blue-600
+      icon_size:                        2x
+
+      # ------------------------------------------------------------------------
+      # Slider controls
+      #
+      controls:
+
+        arrows:
+          enabled:                      true
+          autohide:                     false
+
+        bullets:
+          enabled:                      true
+          autohide:                     false
+          overVideo:                    true
+          dir:                          h
+          hideUnder:                    null
+          align:                        bottom
+          margin:                       10
+
+        thumblist:
+          enabled:                      true
+          width:                        100
+          height:                       100
+          autohide:                     true
+          overVideo:                    true
+          dir:                          h
+          speed:                        17
+          hideUnder:                    null
+          inset:                        false
+          arrows:                       false
+          hover:                        false
+          customClass:                  ''
+          align:                        bottom
+          type:                         thumbs
+          margin:                       10
+          space:                        10
+          fillMode:                     fill
+
+        scrollbar:
+          enabled:                      true
+          autohide:                     false
+          overVideo:                    true
+          dir:                          h
+          inset:                        true
+          align:                        top
+          color:                        '#404040'
+          hideUnder:                    null
+          margin:                       10
+          width:                        4
+
+      # ------------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+
+        width:                          1200
+        height:                         600
+        partialview:                    false
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        # slide 1
+        #
+        - slide:
+          alt:                          ms-free-animals-1
+          title:                        ms-free-animals-1
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-1.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-1-100x80.jpg"
+          slideinfo:                    false
+
+        # slide 2
+        #
+        - slide:
+          alt:                          ms-free-animals-2
+          title:                        ms-free-animals-2
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-2.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-2-100x80.jpg"
+          slideinfo:                    false
+
+        # slide 3
+        #
+        - slide:
+          alt:                          ms-free-animals-3
+          title:                        ms-free-animals-3
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-3.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-3-100x80.jpg"
+          slideinfo:                    false
+
+        # slide 4
+        #
+        - slide:
+          alt:                          ms-free-animals-4
+          title:                        ms-free-animals-4
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-4.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-4-100x80.jpg"
+          slideinfo:                    false
+
+        # slide 5
+        #
+        - slide:
+          alt:                          ms-free-animals-5
+          title:                        ms-free-animals-5
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-5.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-5-100x80.jpg"
+          slideinfo:                    false
+
+        # slide 6
+        #
+        - slide:
+          alt:                          ms-free-animals-6
+          title:                        ms-free-animals-6
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-6.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-6-100x80.jpg"
+          slideinfo:                    false
+
+        # slide 7
+        #
+        - slide:
+          alt:                          ms-free-animals-7
+          title:                        ms-free-animals-7
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-7.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-7-100x80.jpg"
+          slideinfo:                    false
+
+
+    # --------------------------------------------------------------------------
+    # Slider 5 - ThumbView (position bottom|horizontal)
+    #
+    - slider:
+      enabled:                          true
+
+      id:                               ms_00005
+      skin:                             default
+      icon_family:                      MDI
+      icon_class:                       false                                   # false | fas | fab (Fontawsesome only)
+      icon_color:                       '#1E88E5'                               # md-blue-600
+      icon_size:                        2x
+
+      # ------------------------------------------------------------------------
+      # Slider controls
+      #
+      controls:
+
+        arrows:
+          enabled:                      true
+          autohide:                     false
+          overVideo:                    true
+          hideUnder:                    null
+
+        bullets:
+          enabled:                      true
+          autohide:                     false
+          overVideo:                    true
+          dir:                          h
+          hideUnder:                    null
+          align:                        bottom
+          margin:                       10
+
+        thumblist:
+          enabled:                      true
+          width:                        100
+          height:                       100
+          autohide:                     true
+          overVideo:                    true
+          dir:                          h
+          speed:                        17
+          hideUnder:                    null
+          inset:                        false
+          arrows:                       false
+          hover:                        false
+          customClass:                  ''
+          align:                        bottom
+          type:                         thumbs
+          margin:                       10
+          space:                        10
+          fillMode:                     fill
+
+      # ------------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+
+        width:                          900
+        height:                         900
+        partialview:                    false
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        # slide 1
+        #
+        - slide:
+          alt:                          ms-free-food-restaurant
+          title:                        ms-free-food-restaurant
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-restaurant.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-restaurant-140x80.jpg"
+          slideinfo:                    false
+
+        # slide 2
+        #
+        - slide:
+          alt:                          ms-free-food-family
+          title:                        ms-free-food-family
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-140x80.jpg"
+          slideinfo:                    false
+
+        # slide 3
+        #
+        - slide:
+          alt:                          ms-free-food-woman-hand
+          title:                        ms-free-food-woman-hand
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-woman-hand.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-woman-hand-140x80.jpg"
+          slideinfo:                    false
+
+        # slide 4
+        #
+        - slide:
+          alt:                          ms-free-food-family-2
+          title:                        ms-free-food-family-2
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2-140x80.jpg"
+          slideinfo:                    false
+
+        # slide 5
+        #
+        - slide:
+          alt:                          ms-free-food-family-3
+          title:                        ms-free-food-family-3
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-3.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-3-140x80.jpg"
+          slideinfo:                    false
+
+        # slide 6
+        #
+        - slide:
+          alt:                          ms-free-food-hamburger
+          title:                        ms-free-food-hamburger
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-hamburger.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-hamburger-140x80.jpg"
+          slideinfo:                    false
+
+        # slide 7
+        #
+        - slide:
+          alt:                          ms-free-food-pizza
+          title:                        ms-free-food-pizza
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-pizza.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-pizza-140x80.jpg"
+          slideinfo:                    false
+
+        # slide 8
+        #
+        - slide:
+          alt:                          ms-free-food-single-man
+          title:                        ms-free-food-single-man
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-man.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-man-140x80.jpg"
+          slideinfo:                    false
+
+        # slide 9
+        #
+        - slide:
+          alt:                          ms-free-food-single-woman
+          title:                        ms-free-food-single-woman
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-woman.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-woman-140x80.jpg"
+          slideinfo:                    false
+
+        # slide 10
+        #
+        - slide:
+          alt:                          ms-free-food-table
+          title:                        ms-free-food-table
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-table.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-table-140x80.jpg"
+          slideinfo:                    false
+
+
+    # --------------------------------------------------------------------------
+    # Slider 6 - Blog articles (PartialView)
+    #
+    - slider:
+      enabled:                          true
+
+      id:                               ms_00006
+      skin:                             default                                 # light-2
+      icon_family:                      MDI
+      icon_class:                       false                                   # false | fas | fab (Fontawsesome only)
+      icon_color:                       '#1E88E5'                               # md-blue-600
+      icon_size:                        2x
+
+      # ------------------------------------------------------------------------
+      # Slider controls
+      #
+      controls:
+
+        slideinfo:
+          enabled:                      true
+          autohide:                     false
+          overVideo:                    true
+          dir:                          h
+          align:                        bottom
+          inset:                        false
+          margin:                       -110
+
+      # ------------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+        width:                          450
+        height:                         220
+        partialview:                    true
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        # slide 1
+        #
+        - slide:
+          alt:                          Special slider for bloggers
+          title:                        Special slider for bloggers
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-slide2-1024x622.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+
+          slideinfo:
+            rtext:                      300                                     # false or [100 .. 500]
+            boxed:                      false
+            title:                      Special slider for bloggers
+            title_color:                '#F5F5F5'                               # md-gray-100
+            title_animated:             fadeInLeft
+            title_upcase:               false
+            tagline:                    false
+            tagline_color:              false
+            tagline_animated:           false
+            tagline_upcase:             false
+            description:                false
+            description_animated:       false
+
+            button:
+              enabled:                  true
+              align:                    center
+              margin:                   mt-4
+              animated:                 fadeInRight
+              class:                    btn btn-primary btn-sm
+              link:                     '#void'
+              text:                     Read More
+
+        # slide 2
+        #
+        - slide:
+          alt:                          We love architecture websites
+          title:                        We love architecture websites
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-3.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+
+          slideinfo:
+            rtext:                      400                                     # false or [100 .. 500]
+            boxed:                      false
+            title:                      We love architecture websites
+            title_color:                '#212121'                               # md-gray-900
+            title_animated:             fadeInLeft
+            title_upcase:               false
+            tagline:                    false
+            tagline_color:              false                                   # '#7a7a7a'
+            tagline_animated:           false
+            tagline_upcase:             false
+            description:                false
+            description_animated:       false
+
+            button:
+              enabled:                  true
+              align:                    center
+              margin:                   mt-4
+              animated:                 fadeInRight
+              class:                    btn btn-primary btn-sm
+              link:                     '#void'
+              text:                     Read More
+
+        # slide 3
+        #
+        - slide:
+          alt:                          New Buildings, New Designs!
+          title:                        New Buildings, New Designs!
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-2.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+
+          slideinfo:
+            rtext:                      400                                     # false or [100 .. 500]
+            boxed:                      false
+            title:                      New Buildings, New Designs!
+            title_color:                '#212121'                               # md-gray-900
+            title_animated:             fadeInLeft
+            title_upcase:               false
+            tagline:                    false
+            tagline_color:              false                                   # '#7a7a7a'
+            tagline_animated:           false
+            tagline_upcase:             false
+            description:                false
+            description_animated:       false
+
+            button:
+              enabled:                  true
+              align:                    center
+              margin:                   mt-4
+              animated:                 fadeInRight
+              class:                    btn btn-primary btn-sm
+              link:                     '#void'
+              text:                     Read More
+
+        # slide 4
+        #
+        - slide:
+          alt:                          Greatest Modern Architect Designs
+          title:                        Greatest Modern Architect Designs
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-1.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+
+          slideinfo:
+            rtext:                      400                                     # false or [100 .. 500]
+            boxed:                      false
+            title:                      Greatest Modern Architect Designs
+            title_color:                '#212121'                               # md-gray-900
+            title_animated:             fadeInLeft
+            title_upcase:               false
+            tagline:                    false
+            tagline_color:              false                                   # '#7a7a7a'
+            tagline_animated:           false
+            tagline_upcase:             false
+            description:                false
+            description_animated:       false
+
+            button:
+              enabled:                  true
+              align:                    center
+              margin:                   mt-4
+              animated:                 fadeInRight
+              class:                    btn btn-primary btn-sm
+              link:                     '#void'
+              text:                     Read More
+
+
+    # --------------------------------------------------------------------------
+    # Slider 7 - PartialView/MS-Info (info position below)
+    #
+    - slider:
+      enabled:                          true
+
+      id:                               ms_00007
+      skin:                             default                                 # light-2
+      icon_family:                      MDI
+      icon_class:                       false                                   # false | fas | fab (Fontawsesome only)
+      icon_color:                       '#1E88E5'                               # md-blue-600
+      icon_size:                        2x
+
+      # ------------------------------------------------------------------------
+      # Slider controls
+      #
+      controls:
+
+        arrows:
+          enabled:                      true
+          autohide:                     false
+          overVideo:                    true
+
+        slideinfo:
+          enabled:                      true
+          autohide:                     false
+          overVideo:                    true
+          dir:                          h
+          align:                        bottom
+          inset:                        false
+          margin:                       -113
+
+        circletimer:
+          enabled:                      true
+          autohide:                     false
+          overVideo:                    true
+          color:                        '#FFFFFF'
+          radius:                       4
+          stroke:                       9
+
+      # ------------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+        width:                          700
+        height:                         350
+        partialview:                    true
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        # slide 1
+        #
+        - slide:
+          alt:                          childhood-memories
+          title:                        childhood-memories
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/6-2.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+          slideinfo:
+            rtext:                      300                                     # false or [100 .. 500]
+            boxed:                      false
+            title:                      Childhood Memories
+            title_color:                '#222222'
+            title_animated:             false
+            title_upcase:               true
+            tagline:                    John Wiliam
+            tagline_color:              '#7a7a7a'
+            tagline_animated:           false
+            tagline_upcase:             true
+            description: >
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                                        sed diam nonummy nibh euismod tincidunt.
+
+            description_color:          '#9E9E9E'                               # md-gray-500
+            description_animated:       false
+
+        # slide 2
+        #
+        - slide:
+          alt:                          consectetuer-adipiscing
+          title:                        consectetuer-adipiscing
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/5-2.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+          slideinfo:
+            rtext:                      300                                     # false or [100 .. 500]
+            boxed:                      false
+            title:                      Consectetuer adipiscing elit
+            title_color:                '#222222'
+            title_animated:             false
+            title_upcase:               true
+            tagline:                    John Wiliam
+            tagline_color:              '#7a7a7a'
+            tagline_animated:           false
+            tagline_upcase:             true
+            description: >
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                                        sed diam nonummy nibh euismod tincidunt.
+
+            description_color:          '#9E9E9E'                               # md-gray-500
+            description_animated:       false
+
+        # slide 3
+        #
+        - slide:
+          alt:                          nonummy-nibh
+          title:                        nonummy-nibh
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/6-3.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+          slideinfo:
+            rtext:                      300                                     # false or [100 .. 500]
+            boxed:                      false
+            title:                      SUSPENDISSE UT PULVINAR MAURIS
+            title_color:                '#222222'
+            title_animated:             false
+            title_upcase:               true
+            tagline:                    John Wiliam
+            tagline_color:              '#7a7a7a'
+            tagline_animated:           false
+            tagline_upcase:             true
+            description: >
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                        Ut enim ad minim veniam.
+
+            description_color:          '#9E9E9E'                               # md-gray-500
+            description_animated:       false
+
+        # slide 4
+        #
+        - slide:
+          alt:                          nibh-euismod
+          title:                        nibh-euismod
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/8.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+          slideinfo:
+            rtext:                      300                                     # false or [100 .. 500]
+            boxed:                      false
+            title:                      SED DAPIBUS SIT AMET FELIS
+            title_color:                '#222222'
+            title_animated:             false
+            title_upcase:               true
+            tagline:                    Gregory Wilson
+            tagline_color:              '#7a7a7a'
+            tagline_animated:           false
+            tagline_upcase:             true
+            description: >
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                                        sed diam nonummy nibh euismod tincidunt.
+
+            description_color:          '#9E9E9E'                               # md-gray-500
+            description_animated:       false
+
+        # slide 5
+        #
+        - slide:
+          alt:                          cheetags
+          title:                        cheetags
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/8-1.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+          slideinfo:
+            rtext:                      300                                     # false or [100 .. 500]
+            boxed:                      false
+            title:                      Cheetags on the edge
+            title_color:                '#222222'
+            title_animated:             false
+            title_upcase:               true
+            tagline:                    Gregory Wilson
+            tagline_color:              '#7a7a7a'
+            tagline_animated:           false
+            tagline_upcase:             true
+            description: >
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                                        sed diam nonummy nibh euismod tincidunt.
+
+            description_color:          '#9E9E9E'                               # md-gray-500
+            description_animated:       false
+
+        # slide 6
+        #
+        - slide:
+          alt:                          wp-content-uploads
+          title:
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/1-2.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+          slideinfo:
+            rtext:                      300                                     # false or [100 .. 500]
+            boxed:                      false
+            title:                      CONSECTETUR ADIPISCING ELIT
+            title_color:                '#222222'
+            title_animated:             false
+            title_upcase:               true
+            tagline:                    Gregory Wilson
+            tagline_color:              '#7a7a7a'
+            tagline_animated:           false
+            tagline_upcase:             true
+            description: >
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                                        sed diam nonummy nibh euismod tincidunt.
+
+            description_color:          '#9E9E9E'                               # md-gray-500
+            description_animated:       false
 
 # ------------------------------------------------------------------------------
 # END config

@@ -21,6 +21,23 @@ regenerate:                             false
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
+{% comment %} Liquid var initialization
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign template_config     = site.data.j1_config %}
+{% assign modules             = site.data.modules %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign slider_defaults     = modules.defaults.masterslider.defaults %}
+{% assign slider_settings     = modules.masterslider.settings %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign sliders             = slider_settings.sliders %}
+
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/masterslider.js
@@ -50,6 +67,8 @@ j1.adapter.masterslider = (function (j1, window) {
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment   = '{{environment}}';
   var moduleOptions = {};
+  var sliders       = {};
+  var slider        = {};
   var _this;
   var logger;
   var logText;
@@ -76,11 +95,50 @@ j1.adapter.masterslider = (function (j1, window) {
         generated:   '{{site.time}}'
       }, options);
 
+      moduleOptions = $.extend({}, {{slider_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      sliders       = $.extend({}, {{sliders | replace: 'nil', 'null' | replace: '=>', ':' }});
+
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
-      _this   = j1.adapter.bmd;
+      _this   = j1.adapter.masterslider;
       logger  = log4javascript.getLogger('j1.adapter.masterslider');
+
+      _this.loadSliderHTML(sliders);
+      _this.initializeSliders();
+
+    }, // END init
+
+    // -------------------------------------------------------------------------
+    // loadSliderHTML()
+    // ?????
+    // -------------------------------------------------------------------------
+    loadSliderHTML: function (sliders) {
+      var numSliders = Object.keys(sliders).length;
+
+      // var log_text = '\n' + 'Sliders are being loaded';
+      // logger.info(log_text);
+
+      console.log('number of sliders found: ' + numSliders);
+
+      Object.keys(sliders).forEach(function(key) {
+        if (sliders[key].enabled) {
+          console.log('load slider id: ' + sliders[key].id);
+        } else {
+          numSliders--;
+        }
+      });
+
+      console.log('number of sliders loaded: ' + numSliders);
+
+    }, // END loadSliderHTML
+
+    // -------------------------------------------------------------------------
+    // initializeSliders()
+    // ????
+    // -------------------------------------------------------------------------
+    initializeSliders: function () {
+      var log_text;
 
       var dependencies_met_j1_finished = setInterval(function() {
         if (j1.getState() == 'finished') {
@@ -90,11 +148,10 @@ j1.adapter.masterslider = (function (j1, window) {
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
 
-          var log_text = '\n' + 'Sliders are being initialized';
+          log_text = '\n' + 'sliders are being initialized';
           logger.info(log_text);
 
           window.masterslider_instances = window.masterslider_instances || [];
-
 
           // Slider 1
           //--------------------------------------------------------------------
@@ -225,7 +282,7 @@ j1.adapter.masterslider = (function (j1, window) {
               align:                'bottom',
               inset:                false,
 //            insertTo:             'section',
-              margin:               -113
+              margin:               -120
             }
           );
 
@@ -291,15 +348,15 @@ j1.adapter.masterslider = (function (j1, window) {
 
           // Slider 4
           //--------------------------------------------------------------------
-          var masterslider_fdd9 = new MasterSlider();
+          var masterslider_00004 = new MasterSlider();
 
     			// slider controls
-    			masterslider_fdd9.control(
+    			masterslider_00004.control(
             'arrows', {
               autohide:false,
               overVideo:true
           });
-    			masterslider_fdd9.control(
+    			masterslider_00004.control(
             'bullets', {
               autohide:false,
               overVideo:true,
@@ -308,7 +365,7 @@ j1.adapter.masterslider = (function (j1, window) {
               space:5,
               margin:10
           });
-    			masterslider_fdd9.control(
+    			masterslider_00004.control(
             'thumblist', {
               autohide:false,
               overVideo:true,
@@ -326,7 +383,7 @@ j1.adapter.masterslider = (function (j1, window) {
               space:1,
               fillMode:'fill'
           });
-    			masterslider_fdd9.control(
+    			masterslider_00004.control(
             'scrollbar',  {
               autohide:true,
               overVideo:true,
@@ -339,9 +396,9 @@ j1.adapter.masterslider = (function (j1, window) {
           });
 
     			// slider setup
-    			masterslider_fdd9.setup("MS62a702e85fdd9", {
-    				width :            900,
-    				height:            900,
+    			masterslider_00004.setup("ms_00004", {
+            width:            890,
+    				height:           480,
     				minHeight:        0,
     				space :            0,
     				start :            1,
@@ -380,19 +437,19 @@ j1.adapter.masterslider = (function (j1, window) {
     				parallaxMode:     'swipe',
     				view  :            "basic"
     			});
-    			window.masterslider_instances.push( masterslider_fdd9 );
+    			window.masterslider_instances.push( masterslider_00004 );
 
 
           // Slider 5
           //--------------------------------------------------------------------
-          var masterslider_f5b3 = new MasterSlider();
+          var masterslider_00005 = new MasterSlider();
 
     			// slider controls
-    			masterslider_f5b3.control('arrows', {
+    			masterslider_00005.control('arrows', {
             autohide:false,
             overVideo:true
           });
-    			masterslider_f5b3.control(
+    			masterslider_00005.control(
             'bullets', {
               autohide:false,
               overVideo:true,
@@ -401,7 +458,7 @@ j1.adapter.masterslider = (function (j1, window) {
               space:5,
               margin:10
           });
-    			masterslider_f5b3.control(
+    			masterslider_00005.control(
             'thumblist', {
               autohide:false,
               overVideo:true,
@@ -421,7 +478,7 @@ j1.adapter.masterslider = (function (j1, window) {
           });
 
     			// slider setup
-    			masterslider_f5b3.setup("MS62a706bd0f5b3", {
+    			masterslider_00005.setup("ms_00005", {
     				width :            1200,
     				height:            530,
     				minHeight:        0,
@@ -462,20 +519,20 @@ j1.adapter.masterslider = (function (j1, window) {
     				parallaxMode:     'swipe',
     				view  :            "basic"
     			});
-    			window.masterslider_instances.push( masterslider_f5b3 );
+    			window.masterslider_instances.push( masterslider_00005 );
 
 
           // Slider 6
           //--------------------------------------------------------------------
-          var masterslider_13eb = new MasterSlider();
+          var masterslider_00006 = new MasterSlider();
 
     			// slider controls
-    			// masterslider_13eb.control(
+    			// masterslider_00006.control(
           //   'arrows', {
           //     autohide:true,
           //     overVideo:true
           // });
-    			masterslider_13eb.control(
+    			masterslider_00006.control(
             'slideinfo', {
               autohide:       false,
               overVideo:      true,
@@ -486,7 +543,7 @@ j1.adapter.masterslider = (function (j1, window) {
           });
 
     			// slider setup
-    			masterslider_13eb.setup("MS62a70f2f113eb", {
+    			masterslider_00006.setup("ms_00006", {
     				width :            450,
     				height:            220,
     				minHeight:        0,
@@ -527,20 +584,20 @@ j1.adapter.masterslider = (function (j1, window) {
     				parallaxMode:     'swipe',
     				view  :            "fadeBasic"
     			});
-    			window.masterslider_instances.push( masterslider_13eb );
+    			window.masterslider_instances.push( masterslider_00006 );
 
 
           // Slider 7
           //--------------------------------------------------------------------
-          var masterslider_4e59 = new MasterSlider();
+          var masterslider_00007 = new MasterSlider();
 
     			// slider controls
-    			masterslider_4e59.control(
+    			masterslider_00007.control(
             'arrows', {
               autohide:true,
               overVideo:true
           });
-    			masterslider_4e59.control(
+    			masterslider_00007.control(
             'circletimer', {
               autohide:false,
               overVideo:true,
@@ -548,7 +605,7 @@ j1.adapter.masterslider = (function (j1, window) {
               radius:4,
               stroke:9
           });
-    			masterslider_4e59.control(
+    			masterslider_00007.control(
             'slideinfo', {
               autohide:false,
               overVideo:true,
@@ -559,7 +616,7 @@ j1.adapter.masterslider = (function (j1, window) {
           });
 
     			// slider setup
-    			masterslider_4e59.setup("MS62a73daae4e59", {
+    			masterslider_00007.setup("ms_00007", {
     				width :            700,
     				height:            350,
     				minHeight:        0,
@@ -600,7 +657,7 @@ j1.adapter.masterslider = (function (j1, window) {
     				parallaxMode:     'swipe',
     				view  :            "fadeFlow"
     			});
-    			window.masterslider_instances.push( masterslider_4e59 );
+    			window.masterslider_instances.push( masterslider_00007 );
 
 
           // Slider 8
@@ -781,30 +838,14 @@ j1.adapter.masterslider = (function (j1, window) {
     			});
     			window.masterslider_instances.push( masterslider_9f74 );
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'initializing module finished');
+          logger.info('\n' + 'initializing sliders finished');
           clearInterval(dependencies_met_j1_finished);
         } // END dependencies_met_j1_finished
       }, 25);
 
-    }, // END init
+    }, // END initializeSliders
 
     // -------------------------------------------------------------------------
     // messageHandler: MessageHandler for J1 CookieConsent module

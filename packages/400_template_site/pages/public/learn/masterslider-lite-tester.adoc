@@ -66,40 +66,6 @@ slider::ms_00000[ role="mb-4 wm-800" ]
 
 lorem:sentences[5]
 
-////
-++++
-<!-- MasterSlider -->
-<div id="p_ms_00001" class="master-slider-parent mt-3 mb-5">
-  <!-- MasterSlider Main -->
-  <div id="ms_00001" class="master-slider ms-skin-light-3">
-    <div class="ms-slide">
-      <img
-        src="/assets/themes/j1/modules/masterslider/css/blank.gif"
-        alt="cat-1" title="cat-1"
-        data-src="/assets/images/modules/masterslider/cats/cat-1.jpg"
-      >
-    </div>
-    <div class="ms-slide">
-      <img
-        src="/assets/themes/j1/modules/masterslider/css/blank.gif"
-        alt="cat-2" title="cat-2"
-        data-src="/assets/images/modules/masterslider/cats/cat-2.jpg"
-      >
-    </div>
-    <div class="ms-slide">
-      <img
-        src="/assets/themes/j1/modules/masterslider/css/blank.gif"
-        alt="cat-3" title="cat-3"
-        data-src="/assets/images/modules/masterslider/cats/cat-3.jpg"
-      >
-    </div>
-  </div>
-  <!-- END MasterSlider Main -->
-</div>
-<!-- END MasterSlider ms_00001 -->
-++++
-////
-
 ++++
 <div id="ms_00001" class="master-slider ms-skin-light-3">
   <div class="ms-slide">
@@ -114,42 +80,10 @@ lorem:sentences[5]
 </div>
 ++++
 
+
 == Slider 2 - Full Width
 
 lorem:sentences[5]
-
-////
-++++
-<div id="p_ms_00002" class="master-slider-parent mt-3 mb-5">
-  <!-- MasterSlider Main -->
-  <div id="ms_00002" class="master-slider ms-skin-default">
-    <div class="ms-slide">
-      <img
-        src="/assets/themes/j1/modules/masterslider/css/blank.gif"
-        alt="cities-1" title="cities-1"
-        data-src="/assets/images/modules/masterslider/mega_cities/andreas-brucker.jpg"
-      >
-    </div>
-    <div class="ms-slide">
-      <img
-        src="/assets/themes/j1/modules/masterslider/css/blank.gif"
-        alt="cities-2" title="cities-2"
-        data-src="/assets/images/modules/masterslider/mega_cities/denys-nevozhai-1.jpg"
-      >
-    </div>
-    <div class="ms-slide">
-      <img
-        src="/assets/themes/j1/modules/masterslider/css/blank.gif"
-        alt="cities-3" title="cities-3"
-        data-src="/assets/images/modules/masterslider/mega_cities/denys-nevozhai-2.jpg"
-      >
-    </div>
-  </div>
-  <!-- END MasterSlider Main -->
-</div>
-<!-- END MasterSlider ms_00002 -->
-++++
-////
 
 ++++
 <div id="p_ms_00002" class="master-slider-parent mt-3 mb-5">
@@ -172,78 +106,18 @@ lorem:sentences[5]
 
 lorem:sentences[5]
 
-////
 ++++
 <!-- MasterSlider 3 -->
 <div id="p_ms0003" class="master-slider-parent mt-3 mb-5">
-  <!-- MasterSlider Main -->
-  <div id="MS0003" class="master-slider ms-skin-default" >
-    <div class="ms-slide">
-      <img
-        src="/assets/themes/j1/modules/masterslider/css/blank.gif"
-        alt="ms-free-food-restaurant"
-        title="ms-free-food-restaurant"
-        data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-restaurant.jpg"
-      />
-      <!-- MasterSlider Info -->
-      <div class="ms-info">
-        <div class="j1-ms-info-overlay">
-          <h2 class="notoc j1-ms-info-headline r-text-500 animated rotateInUpLeft">Sample Title 1</h2>
-          <p class="j1-ms-info-body r-text-300 animated fadeInRight">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-        </div>
-      </div>
-      <!-- END MasterSlider Info -->
-    </div>
-    <div class="ms-slide">
-      <img
-        src="/assets/themes/j1/modules/masterslider/css/blank.gif"
-        alt="ms-free-food-hamburger"
-        title="ms-free-food-hamburger"
-        data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-hamburger.jpg"
-      />
-      <!-- MasterSlider Info -->
-      <div class="ms-info">
-        <div class="j1-ms-info-overlay">
-          <h2 class="notoc j1-ms-info-headline r-text-500 animated rotateInUpLeft">Sample Title 2</h2>
-          <p class="j1-ms-info-body r-text-300 animated fadeInRight">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-        </div>
-      </div>
-      <!-- END MasterSlider Info -->
-    </div>
-    <div class="ms-slide">
-      <img
-        src="/assets/themes/j1/modules/masterslider/css/blank.gif"
-        alt="ms-free-food-family-2"
-        title="ms-free-food-family-2"
-        data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2.jpg"
-      />
-      <!-- MasterSlider Info -->
-      <div class="ms-info">
-        <div class="j1-ms-info-overlay">
-          <h2 class="notoc j1-ms-info-headline r-text-500 animated rotateInUpLeft">Sample Title 3</h2>
-          <p class="j1-ms-info-body r-text-300 animated fadeInRight">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-        </div>
-      </div>
-      <!-- END MasterSlider Info -->
-    </div>
-  </div>
-  <!-- END MasterSlider Main -->
-</div>
-<!-- END MasterSlider 3 -->
-++++
-////
 
-++++
-<!-- MasterSlider 3 -->
-<div id="p_ms0003" class="master-slider-parent mt-3 mb-5">
-  <div id="ms_00003" class="master-slider ms-skin-default">
+  <div id="ms_00003" class="master-slider ms-skin-default  ">
     <div class="ms-slide">
       <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-restaurant" title="ms-free-food-restaurant" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-restaurant.jpg">
       <!-- MasterSlider Info -->
       <div class="ms-info">
-        <div class="j1-ms-info-overlay">
-          <h2 class="notoc j1-ms-info-headline r-text-300  animated rotateInUpLeft ">Sample Title 1</h2>
-          <p class="j1-ms-info-body r-text-300  animated fadeInRight ">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+        <div class="j1-ms-info-boxed">
+          <h2 class="notoc j1-ms-info-title r-text-300  animated rotateInUpLeft " style="color: #BDBDBD;">Sample Title 1</h2>
+          <p class="j1-ms-info-description r-text-300  animated fadeInRight " style="color: #9E9E9E;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
           </p>
         </div>
       </div>
@@ -252,9 +126,9 @@ lorem:sentences[5]
       <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-hamburger" title="ms-free-food-hamburger" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-hamburger.jpg">
       <!-- MasterSlider Info -->
       <div class="ms-info">
-        <div class="j1-ms-info-overlay">
-          <h2 class="notoc j1-ms-info-headline r-text-300  animated rotateInUpLeft ">Sample Title 2</h2>
-          <p class="j1-ms-info-body r-text-300  animated fadeInRight ">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+        <div class="j1-ms-info-boxed">
+          <h2 class="notoc j1-ms-info-title r-text-300  animated rotateInUpLeft " style="color: #BDBDBD;">Sample Title 2</h2>
+          <p class="j1-ms-info-description r-text-300  animated fadeInRight " style="color: #9E9E9E;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
           </p>
         </div>
       </div>
@@ -263,14 +137,15 @@ lorem:sentences[5]
       <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-family-2" title="ms-free-food-family-2" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2.jpg">
       <!-- MasterSlider Info -->
       <div class="ms-info">
-        <div class="j1-ms-info-overlay">
-          <h2 class="notoc j1-ms-info-headline r-text-300  animated rotateInUpLeft ">Sample Title 3</h2>
-          <p class="j1-ms-info-body r-text-300  animated fadeInRight ">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+        <div class="j1-ms-info-boxed">
+          <h2 class="notoc j1-ms-info-title r-text-300  animated rotateInUpLeft " style="color: #BDBDBD;">Sample Title 3</h2>
+          <p class="j1-ms-info-description r-text-300  animated fadeInRight " style="color: #9E9E9E;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
           </p>
         </div>
       </div>
     </div>
   </div>
+
 </div>
 ++++
 
@@ -281,39 +156,39 @@ lorem:sentences[5]
 
 ++++
 <!-- MasterSlider -->
-<div id="p_ms62a702e85fdd9" class="master-slider-parent ms-parent-id-63  mt-3 mb-5"  >
-  <!-- MasterSlider Main -->
-  <div id="MS62a702e85fdd9" class="master-slider ms-skin-light-2" >
+<div id="p_ms_00004" class="master-slider-parent mt-3 mb-5">
+
+  <div id="ms_00004" class="master-slider ms-skin-light-2">
     <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="ms-free-animals-1" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-1.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-1-100x80.jpg" alt="" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-animals-1" title="ms-free-animals-1" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-1.jpg">
+      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-1-100x80.jpg" alt="thumb_image_ms_00004">
     </div>
     <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="ms-free-animals-2" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-2.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-2-100x80.jpg" alt="" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-animals-2" title="ms-free-animals-2" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-2.jpg">
+      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-2-100x80.jpg" alt="thumb_image_ms_00004">
     </div>
     <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="ms-free-animals-3" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-3.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-3-100x80.jpg" alt="" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-animals-3" title="ms-free-animals-3" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-3.jpg">
+      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-3-100x80.jpg" alt="thumb_image_ms_00004">
     </div>
     <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="ms-free-animals-4" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-4.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-4-100x80.jpg" alt="" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-animals-4" title="ms-free-animals-4" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-4.jpg">
+      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-4-100x80.jpg" alt="thumb_image_ms_00004">
     </div>
     <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="ms-free-animals-5" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-5.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-5-100x80.jpg" alt="" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-animals-5" title="ms-free-animals-5" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-5.jpg">
+      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-5-100x80.jpg" alt="thumb_image_ms_00004">
     </div>
     <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="ms-free-animals-6" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-6.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-6-100x80.jpg" alt="" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-animals-6" title="ms-free-animals-6" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-6.jpg">
+      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-6-100x80.jpg" alt="thumb_image_ms_00004">
     </div>
     <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="ms-free-animals-7" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-7.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-7-100x80.jpg" alt="" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-animals-7" title="ms-free-animals-7" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-7.jpg">
+      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-7-100x80.jpg" alt="thumb_image_ms_00004">
     </div>
   </div>
-  <!-- END MasterSlider Main -->
+
 </div>
 <!-- END MasterSlider -->
 ++++
@@ -325,51 +200,51 @@ lorem:sentences[5]
 
 ++++
 <!-- MasterSlider -->
-<div id="p_ms62a70846a678e" class="master-slider-parent ms-parent-id-190 mt-3 mb-5" style="max-width:1100px;"  >
-  <!-- MasterSlider Main -->
-  <div id="MS62a706bd0f5b3" class="master-slider ms-skin-default" >
+<div id="p_ms_00005" class="master-slider-parent mt-3 mb-5">
+
+  <div id="ms_00005" class="master-slider ms-skin-default">
     <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="ms-free-food-family" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-140x80.jpg" alt="" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-restaurant" title="ms-free-food-restaurant" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-restaurant.jpg">
+      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-restaurant-140x80.jpg" alt="thumb_image_ms_00005">
     </div>
     <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="ms-free-food-woman-hand" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-woman-hand.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-woman-hand-140x80.jpg" alt="" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-family" title="ms-free-food-family" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family.jpg">
+      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-140x80.jpg" alt="thumb_image_ms_00005">
     </div>
     <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="ms-free-food-family-2" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2-140x80.jpg" alt="" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-woman-hand" title="ms-free-food-woman-hand" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-woman-hand.jpg">
+      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-woman-hand-140x80.jpg" alt="thumb_image_ms_00005">
     </div>
     <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="ms-free-food-family-3" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-3.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-3-140x80.jpg" alt="" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-family-2" title="ms-free-food-family-2" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2.jpg">
+      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2-140x80.jpg" alt="thumb_image_ms_00005">
     </div>
     <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="ms-free-food-hamburger" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-hamburger.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-hamburger-140x80.jpg" alt="" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-family-3" title="ms-free-food-family-3" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-3.jpg">
+      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-3-140x80.jpg" alt="thumb_image_ms_00005">
     </div>
     <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="ms-free-food-pizza" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-pizza.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-pizza-140x80.jpg" alt="" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-hamburger" title="ms-free-food-hamburger" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-hamburger.jpg">
+      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-hamburger-140x80.jpg" alt="thumb_image_ms_00005">
     </div>
     <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="ms-free-food-restaurant" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-restaurant.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-restaurant-140x80.jpg" alt="" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-pizza" title="ms-free-food-pizza" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-pizza.jpg">
+      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-pizza-140x80.jpg" alt="thumb_image_ms_00005">
     </div>
     <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="ms-free-food-single-man" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-man.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-man-140x80.jpg" alt="" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-single-man" title="ms-free-food-single-man" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-man.jpg">
+      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-man-140x80.jpg" alt="thumb_image_ms_00005">
     </div>
     <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="ms-free-food-single-woman" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-woman.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-woman-140x80.jpg" alt="" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-single-woman" title="ms-free-food-single-woman" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-woman.jpg">
+      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-woman-140x80.jpg" alt="thumb_image_ms_00005">
     </div>
     <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="ms-free-food-table" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-table.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-table-140x80.jpg" alt="" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="ms-free-food-table" title="ms-free-food-table" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-table.jpg">
+      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-table-140x80.jpg" alt="thumb_image_ms_00005">
     </div>
   </div>
-  <!-- END MasterSlider Main -->
+
 </div>
 <!-- END MasterSlider -->
 ++++
@@ -381,256 +256,200 @@ lorem:sentences[5]
 
 ++++
 <!-- MasterSlider -->
-<div id="p_ms62a70f2f113eb" class="master-slider-parent ms-staff-carousel ms-parent-id-70 mt-3 mb-5" style="max-width:100%;"  >
-  <!-- MasterSlider Main -->
-  <div id="MS62a70f2f113eb" class="master-slider ms-skin-default ms-wk ms-layout-partialview" >
-    <div class="ms-slide  ms-slide-post-4252" data-delay="10" data-fill-mode="fill"   >
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="Special slider for bloggers" title="Special slider for bloggers" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-slide2-1024x622.jpg" />
-      <div class="ms-info">
-        <div style="text-align: center;">
-          <h2 class="notoc r-text-400 animated fadeInLeft" style="text-align: center; font-size: 20px; font-weight: 600; color: #fff;">Special slider for bloggers</h4>
-          <!-- p style="margin-bottom: 25px;">Are you managing wordpress website? No matter that you are expert or amateur photographer, We offer  ...</p -->
-          <p class="animated fadeInRight mt-4">
-            <a class="link-no-decoration" style="padding: 5px 15px; background: #2196f3; text-decoration: none; color: #fff; border-radius:3px; font-size: 16px;" href="#void">Read More</a>
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="ms-slide  ms-slide-post-4251" data-delay="10" data-fill-mode="fill"   >
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="Everything is customizable!" title="Everything is customizable!" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-1-1024x622.jpg" />
-      <div class="ms-info">
-        <div style="text-align: center;">
-          <h2 class="notoc r-text-400 animated fadeInLeft" style="text-align: center; font-size: 20px; font-weight: 600; color: #fff;">Everything is customizable!</h4>
-          <!-- p style="margin-bottom: 25px;">create a wordpress slider for your website just in minutes by Master Slider templates! Everything wi ...</p -->
-          <p class="animated fadeInRight mt-4">
-            <a class="link-no-decoration" style="padding: 5px 15px; background: #2196f3; text-decoration: none; color: #fff; border-radius:3px; font-size: 16px;" href="#void">Read More</a>
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="ms-slide  ms-slide-post-4246" data-delay="10" data-fill-mode="fill"   >
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="Share your moments with your visitors" title="Share your moments with your visitors" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-slide3-1024x622.jpg" />
-      <div class="ms-info">
-        <div style="text-align: center;">
-          <h2 class="notoc r-text-400 animated fadeInLeft" style="text-align: center; font-size: 20px; font-weight: 600; color: #fff;">Share your moments with your visitors</h4>
-          <!-- p style="margin-bottom: 25px;">Our pre-made templates make it easy for you to create slideshows by your Tastes. this template is su ...</p -->
-          <p class="animated fadeInRight mt-4">
-            <a class="link-no-decoration" style="padding: 5px 15px; background: #2196f3; text-decoration: none; color: #fff; border-radius:3px; font-size: 16px;" href="#void">Read More</a>
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="ms-slide  ms-slide-post-4239" data-delay="10" data-fill-mode="fill"   >
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="We love interior design websites" title="We love interior design websites" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-3.jpg" />
-      <div class="ms-info">
-        <div style="text-align: center;">
-          <h2 class="notoc r-text-400 animated fadeInLeft" style="text-align: center; font-size: 20px; font-weight: 600; color: #fff;">We love interior design websites</h4>
-          <!-- p style="margin-bottom: 25px;">Are you searching for slider plugin that support video and text? Master slider is Best slider to sho ...</p -->
-          <p class="animated fadeInRight mt-4">
-            <a class="link-no-decoration" style="padding: 5px 15px; background: #2196f3; text-decoration: none; color: #fff; border-radius:3px; font-size: 16px;" href="#void">Read More</a>
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="ms-slide  ms-slide-post-4238" data-delay="10" data-fill-mode="fill"   >
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="New Buildings, New Designs!" title="New Buildings, New Designs!" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-2.jpg" />
-      <div class="ms-info">
-        <div style="text-align: center;">
-          <h2 class="notoc r-text-400 animated fadeInLeft" style="text-align: center; font-size: 20px; font-weight: 600; color: #fff;">New Buildings, New Designs!</h4>
-          <!-- p style="margin-bottom: 25px;">Here is revolution on wordpress slider! Build your favorite slider with our ready to use templates j ...</p -->
-          <p class="animated fadeInRight mt-4">
-             <a class="link-no-decoration" style="padding: 5px 15px; background: #2196f3; text-decoration: none; color: #fff; border-radius:3px; font-size: 16px;" href="#void">Read More</a>
-          </p>
-        </div>
-      </div>
-    </div>
-    <div class="ms-slide  ms-slide-post-4233" data-delay="10" data-fill-mode="fill"   >
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="Greatest Modern Architect Designs" title="Greatest Modern Architect Designs" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-1.jpg" />
-      <div class="ms-info">
-        <div style="text-align: center;">
-          <h2 class="notoc r-text-400 animated fadeInLeft" style="text-align: center; font-size: 20px; font-weight: 600; color: #fff;">Greatest Modern Architect Designs</h4>
-          <!-- p style="margin-bottom: 25px;">Create a slider with Master Slider plugin! With this architecture template, you just need to add you ...</p -->
-          <p class="animated fadeInRight mt-4">
-             <a class="link-no-decoration" style="padding: 5px 15px; background: #2196f3; text-decoration: none; color: #fff; border-radius:3px; font-size: 16px;" href="#void">Read More</a>
-          </p>
-        </div>
+<div id="p_ms_00006" class="master-slider-parent mt-3 mb-5">
+
+<div id="ms_00006" class="master-slider ms-skin-default ms-layout-partialview">
+  <div class="ms-slide">
+    <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="Special slider for bloggers" title="Special slider for bloggers" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-slide2-1024x622.jpg">
+    <!-- MasterSlider Info -->
+    <div class="ms-info">
+      <div class="j1-ms-info">
+        <h2 class="notoc j1-ms-info-title r-text-300  animated fadeInLeft " style="color: #F5F5F5;">Special slider for bloggers</h2>
+        <p class="animated fadeInRight  mt-4" style="text-align: center;">
+          <a class="btn btn-primary btn-sm" href="#void" role="button">Read More</a>
+        </p>
       </div>
     </div>
   </div>
-  <!-- END MasterSlider Main -->
+  <div class="ms-slide">
+    <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="We love architecture websites" title="We love architecture websites" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-3.jpg">
+    <!-- MasterSlider Info -->
+    <div class="ms-info">
+      <div class="j1-ms-info">
+        <h2 class="notoc j1-ms-info-title r-text-400  animated fadeInLeft " style="color: #212121;">We love architecture websites</h2>
+        <p class="animated fadeInRight  mt-4" style="text-align: center;">
+          <a class="btn btn-primary btn-sm" href="#void" role="button">Read More</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="ms-slide">
+    <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="New Buildings, New Designs!" title="New Buildings, New Designs!" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-2.jpg">
+    <!-- MasterSlider Info -->
+    <div class="ms-info">
+      <div class="j1-ms-info">
+        <h2 class="notoc j1-ms-info-title r-text-400  animated fadeInLeft " style="color: #212121;">New Buildings, New Designs!</h2>
+        <p class="animated fadeInRight  mt-4" style="text-align: center;">
+          <a class="btn btn-primary btn-sm" href="#void" role="button">Read More</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="ms-slide">
+    <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="Greatest Modern Architect Designs" title="Greatest Modern Architect Designs" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-1.jpg">
+    <!-- MasterSlider Info -->
+    <div class="ms-info">
+      <div class="j1-ms-info">
+        <h2 class="notoc j1-ms-info-title r-text-400  animated fadeInLeft " style="color: #212121;">Greatest Modern Architect Designs</h2>
+        <p class="animated fadeInRight  mt-4" style="text-align: center;">
+          <a class="btn btn-primary btn-sm" href="#void" role="button">Read More</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 </div>
 <!-- END MasterSlider -->
 ++++
 
 
-////
-== Slider 8
+== Slider 7 - PartialView/MS-Info (info position below)
 
 lorem:sentences[5]
 
 ++++
 <!-- MasterSlider -->
-<div id="p_ms62a725da068e7" class="master-slider-parent ms-parent-id-65 mt-3 mb-5" style="max-width:1200px;"  >
-  <!-- MasterSlider Main -->
-  <div id="MS62a725da068e7" class="master-slider ms-skin-light-2" >
+<div id="p_ms_00007" class="master-slider-parent mt-3 mb-5">
+
+  <div id="ms_00007" class="master-slider ms-skin-default ms-layout-partialview">
     <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/business-bg-slide1.jpg" />
-      <div class="ms-info ms-info-context">
-        <h2 class="notoc" style="text-align: left;">Sample Title 1</h2>
-        <p style="text-align: left;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="childhood-memories" title="childhood-memories" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/6-2.jpg">
+      <!-- MasterSlider Info -->
+      <div class="ms-info">
+        <div class="j1-ms-info">
+          <h2 class="notoc j1-ms-info-title r-text-300   " style="color: #222222;">CHILDHOOD MEMORIES</h2>
+          <h3 class="notoc j1-ms-info-tagline r-text-300   " style="color: #7a7a7a;">JOHN WILIAM</h3>
+          <p class="j1-ms-info-description r-text-300   " style="color: #9E9E9E;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.
+          </p>
+        </div>
       </div>
     </div>
     <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/business-bg-slide2.jpg" />
-      <div class="ms-info ms-info-context">
-        <h2 class="notoc" style="text-align: left;">Sample Title 2</h2>
-        <p style="text-align: left;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="consectetuer-adipiscing" title="consectetuer-adipiscing" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/5-2.jpg">
+      <!-- MasterSlider Info -->
+      <div class="ms-info">
+        <div class="j1-ms-info">
+          <h2 class="notoc j1-ms-info-title r-text-300   " style="color: #222222;">CONSECTETUER ADIPISCING ELIT</h2>
+          <h3 class="notoc j1-ms-info-tagline r-text-300   " style="color: #7a7a7a;">JOHN WILIAM</h3>
+          <p class="j1-ms-info-description r-text-300   " style="color: #9E9E9E;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.
+          </p>
+        </div>
       </div>
     </div>
     <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/business-bg-slide3.jpg" />
-      <div class="ms-info ms-info-context">
-        <h2 class="notoc" style="text-align: left;">Sample Title 3</h2>
-        <p style="text-align: left;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="nonummy-nibh" title="nonummy-nibh" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/6-3.jpg">
+      <!-- MasterSlider Info -->
+      <div class="ms-info">
+        <div class="j1-ms-info">
+          <h2 class="notoc j1-ms-info-title r-text-300   " style="color: #222222;">SUSPENDISSE UT PULVINAR MAURIS</h2>
+          <h3 class="notoc j1-ms-info-tagline r-text-300   " style="color: #7a7a7a;">JOHN WILIAM</h3>
+          <p class="j1-ms-info-description r-text-300   " style="color: #9E9E9E;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="ms-slide">
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="nibh-euismod" title="nibh-euismod" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/8.jpg">
+      <!-- MasterSlider Info -->
+      <div class="ms-info">
+        <div class="j1-ms-info">
+          <h2 class="notoc j1-ms-info-title r-text-300   " style="color: #222222;">SED DAPIBUS SIT AMET FELIS</h2>
+          <h3 class="notoc j1-ms-info-tagline r-text-300   " style="color: #7a7a7a;">GREGORY WILSON</h3>
+          <p class="j1-ms-info-description r-text-300   " style="color: #9E9E9E;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="ms-slide">
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="cheetags" title="cheetags" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/8-1.jpg">
+      <!-- MasterSlider Info -->
+      <div class="ms-info">
+        <div class="j1-ms-info">
+          <h2 class="notoc j1-ms-info-title r-text-300   " style="color: #222222;">CHEETAGS ON THE EDGE</h2>
+          <h3 class="notoc j1-ms-info-tagline r-text-300   " style="color: #7a7a7a;">GREGORY WILSON</h3>
+          <p class="j1-ms-info-description r-text-300   " style="color: #9E9E9E;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="ms-slide">
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="wp-content-uploads" title="" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/1-2.jpg">
+      <!-- MasterSlider Info -->
+      <div class="ms-info">
+        <div class="j1-ms-info">
+          <h2 class="notoc j1-ms-info-title r-text-300   " style="color: #222222;">CONSECTETUR ADIPISCING ELIT</h2>
+          <h3 class="notoc j1-ms-info-tagline r-text-300   " style="color: #7a7a7a;">GREGORY WILSON</h3>
+          <p class="j1-ms-info-description r-text-300   " style="color: #9E9E9E;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.
+          </p>
+        </div>
       </div>
     </div>
   </div>
-  <!-- END MasterSlider Main -->
+
 </div>
 <!-- END MasterSlider -->
 ++++
-////
-
-
-== Slider 8 - ThumbView  (position right|vertical)
-
-lorem:sentences[5]
-
-++++
-<!-- MasterSlider -->
-<div id="p_ms62a72e9c69f74" class="master-slider-parent ms-vertical-template ms-parent-id-189 mt-3 mb-5" style="max-width:754px;"  >
-  <!-- MasterSlider Main -->
-  <div id="MS62a72e9c69f74" class="master-slider ms-skin-default" >
-    <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/vds-5.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/vds-5-130x85.jpg" alt="" />
-    </div>
-    <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/vds-1.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/vds-1-130x85.jpg" alt="" />
-    </div>
-    <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/vds-2.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/vds-2-130x85.jpg" alt="" />
-    </div>
-    <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/vds-3.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/vds-3-130x85.jpg" alt="" />
-    </div>
-    <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/vds-4.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/vds-4-130x85.jpg" alt="" />
-    </div>
-    <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/vds-6.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/vds-6-130x85.jpg" alt="" />
-    </div>
-    <div class="ms-slide">
-      <img src="https://www.masterslider.com/wp-content/plugins/masterslider/public/assets/css/blank.gif" alt="" title="" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/vds-7.jpg" />
-      <img class="ms-thumb" src="https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/vds-7-130x85.jpg" alt="" />
-    </div>
-  </div>
-  <!-- END MasterSlider Main -->
-</div>
-<!-- END MasterSlider -->
-++++
-
-
 
 ++++
 <style>
 
 .j1-ms-info {
-  background-color: rgba(0,0,0,.75);
   font-family: "Lato";
-  font-size: 16px;
-  padding-top: 10px;
-  padding-right: 30px;
-  padding-bottom: 10px;
-  padding-left: 30px;
-  font-weight: 400;
-  line-height: normal;
-  color: #f3f3f3;
-}
-
-.j1-ms-info-overlay {
-  background-color: rgba(0,0,0,.75);
-  font-family: "Lato";
-  font-size: 16px;
   padding-top: 10px;
   padding-right: 90px;
   padding-bottom: 10px;
   padding-left: 90px;
-  font-weight: 400;
   line-height: normal;
   color: #f3f3f3;
 }
+
+.j1-ms-info-boxed {
+  font-family: "Lato";
+  padding-top: 10px;
+  padding-right: 90px;
+  padding-bottom: 10px;
+  padding-left: 90px;
+  line-height: normal;
+  color: #f3f3f3;
+  background-color: rgba(0,0,0,.75);
+}
+
 h2.j1-ms-info-headline {
   text-align: center;
-  font-family: "Lato";
-}
-
-.j1-ms-info-body r-text-300 {
-  text-align: center;
-  font-family: "Lato";
-}
-
-.ms-info-context {
-  background-color: rgba(0,0,0,.75);
-  font-family: "Lato";
-  font-size: 16px;
-  padding-top: 10px;
-  padding-right: 30px;
-  padding-bottom: 40px;
-  padding-left: 30px;
-  font-weight: 400;
-  line-height: normal;
   color: #f3f3f3;
 }
 
-.ms-tab-context {
-  font-family: "Lato";
-  font-size: 16px;
+.j1-ms-info-title {
+  text-align: center;
+  font-size: 26px !important;
+  font-weight: 600;
+  color: #f3f3f3;
 }
 
-.msp-cn-3470-6 {
-    background-color: rgba(0,0,0,.75);
-    padding-top: 40px;
-    padding-right: 30px;
-    padding-bottom: 40px;
-    padding-left: 30px;
-    font-family: "Lato";
-    font-weight: 400;
-    font-size: 26px;
-    line-height: normal;
-    color: #f3f3f3;
-    width: 100%;
-    min-height: 10%;
-    box-sizing: border-box;
+.j1-ms-info-tagline {
+  text-align: center;
+  font-size: 24px !important;
+  font-weight: 300;
+  color: #9E9E9E;
 }
 
-.msp-cn-1542-7 {
-  padding-top: 8px;
-  padding-right: 20px;
-  padding-bottom: 8px;
-  padding-left: 20px;
-  font-weight: 400;
-  line-height: normal;
-}
-
-.msp-preset-btn-149 {
-  background-color: #f4524d;
-  color: #fff;
+.j1-ms-info-description {
+  text-align: center;
+  font-size: 18px !important;
+  font-weight: 300;
+  color: #f3f3f3;
 }
 
 </style>
