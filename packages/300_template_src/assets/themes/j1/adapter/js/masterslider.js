@@ -113,13 +113,12 @@ j1.adapter.masterslider = (function (j1, window) {
 
       _this.loadSliderHTML(sliderOptions, sliders);
       _this.initiSliders(sliderOptions, sliders, true /* save_config */);
-//    _this.postActionSliders(sliderOptions, sliders);
 
     }, // END init
 
     // -------------------------------------------------------------------------
     // postActionSliders()
-    // load all master sliders (HTML portion) dynanically configured
+    // NOTE: currently NOT used
     // -------------------------------------------------------------------------
     postActionSliders: function (options, slider) {
       var settings  = $.extend(options, slider);
@@ -154,15 +153,15 @@ j1.adapter.masterslider = (function (j1, window) {
     // eg. using the asciidoc extension masterslider::
     // -------------------------------------------------------------------------
     loadSliderHTML: function (options, slider) {
-      var numSliders          = Object.keys(slider).length;
-      var xhr_data_path       = options.xhr_data_path + '/index.html';
+      var numSliders      = Object.keys(slider).length;
+      var active_sliders  = numSliders;
+      var xhr_data_path   = options.xhr_data_path + '/index.html';
       var xhr_container_id;
 
       console.debug('load HTML portion of all sliders configured found in page');
       console.debug('number of sliders found: ' + numSliders);
 
       _this.setState('load_data');
-
       Object.keys(slider).forEach(function(key) {
         if (slider[key].enabled) {
           console.debug('load HTML data on slider id: ' + slider[key].id);
@@ -175,10 +174,10 @@ j1.adapter.masterslider = (function (j1, window) {
           });
         } else {
           console.debug('slider found disabled on id: ' + slider[key].id);
-          numSliders--;
+          active_sliders--;
         }
       });
-      console.debug('number of sliders loaded found in page: ' + numSliders);
+      console.debug('sliders loaded in page active|deactive: ' + active_sliders + '|' + numSliders);
       _this.setState('data_loaded');
     }, // END loadSliderHTML
 
@@ -188,30 +187,57 @@ j1.adapter.masterslider = (function (j1, window) {
     // -------------------------------------------------------------------------
     initiSliders: function (options, slider, save_config) {
 
+      // create an 'MasterSlider' instance for all sliders configured
+      //
       function createSliderInstances(sliders) {
-
-        // run slider setup
         var i=0;
         Object.keys(sliders).forEach(function(key) {
           i++;
           logger.debug('\n' + 'create slider instances on id: ' + sliders[key].id);
           _this["masterslider_" + i] = new MasterSlider();
         });
-
       } // END createSliderInstances
 
-      function setupControls(options, slider) {
+      // run the method 'setup' on all sliders 'enabled'
+      //
+      function setupSliders(options, slider, save_config) {
+        var i=0;
+        Object.keys(slider).forEach(function(key) {
+          i++;
+          if (slider[key].enabled) {
+            logger.debug('\n' + 'slider is being initialized on id: ' + slider[key].id);
 
+            setup = $.extend(settings.options, slider[key].options );
+            _this["masterslider_" + i].setup(slider[key].id, setup);
+
+            if (save_config) {
+              // save slider config for later access
+              j1.masterslider.instances.push(_this["masterslider_" + i]);
+            }
+            if (setup.layout == 'partialview') {
+              $('#' + slider[key].id).addClass('ms-layout-partialview');
+            }
+
+          } else {
+            logger.debug('\n' + 'slider found disabled on id: ' + slider[key].id);
+            numSliders--;
+          }
+        });
+      } // END setupSliders
+
+      // run the method 'control' on all sliders 'enabled'
+      //
+      function setupControls(options, slider) {
         // Slider 1
-        //--------------------------------------------------------------------
+        //----------------------------------------------------------------------
         // NO slider controls
 
         // Slider 2
-        //--------------------------------------------------------------------
+        //----------------------------------------------------------------------
         // NO slider controls
 
         // Slider 3
-        //--------------------------------------------------------------------
+        //----------------------------------------------------------------------
         // slider controls
         _this.masterslider_3.control(
           'slideinfo', {
@@ -225,7 +251,7 @@ j1.adapter.masterslider = (function (j1, window) {
         );
 
         // Slider 4
-        //--------------------------------------------------------------------
+        //----------------------------------------------------------------------
         // slider controls
         _this.masterslider_4.control(
           'arrows', {
@@ -272,11 +298,12 @@ j1.adapter.masterslider = (function (j1, window) {
         });
 
         // Slider 5
-        //--------------------------------------------------------------------
+        //----------------------------------------------------------------------
         // slider controls
-        _this.masterslider_5.control('arrows', {
-          autohide:false,
-          overVideo:true
+        _this.masterslider_5.control(
+          'arrows', {
+            autohide:false,
+            overVideo:true
         });
         _this.masterslider_5.control(
           'bullets', {
@@ -307,67 +334,20 @@ j1.adapter.masterslider = (function (j1, window) {
         });
 
         // Slider 6
-        //--------------------------------------------------------------------
+        //----------------------------------------------------------------------
         // slider controls
         _this.masterslider_6.control(
           'slideinfo', {
-            autohide:       false,
-            overVideo:      true,
-            dir:            'h',
-            align:          'bottom',
-            inset:          false,
-            margin:         -110
-        });
-
-        // slider setup
-        // _this.masterslider_6.setup("ms_00006", {
-        // 	layout: "partialview"
-        // });
-
-        _this.masterslider_6.setup("ms_00006", {
-          width :            450,
-          height:            220,
-          minHeight:        0,
-          space :            0,
-          start :            1,
-          grabCursor:       true,
-          swipe :            true,
-          mouse :            true,
-          keyboard :        false,
-          layout:            "partialview",
-          wheel :            false,
-          autoplay :        false,
-          instantStartLayers:false,
-          mobileBGVideo:false,
-          loop  :            true,
-          shuffle  :        false,
-          preload  :        0,
-          heightLimit:      true,
-          autoHeight:       false,
-          smoothHeight:     true,
-          endPause :        false,
-          overPause:        true,
-          fillMode :        "fill",
-          centerControls  : true,
-          startOnAppear   : false,
-          layersMode:       "center",
-          autofillTarget  : "",
-          hideLayers:       false,
-          fullscreenMargin: 0,
-          speed :            20,
-          dir   :            "h",
-          responsive:       true,
-          tabletWidth:      768,
-          tabletHeight:     null,
-          phoneWidth:       480,
-          phoneHeight:     null,
-          sizingReference : window,
-          parallaxMode:     'swipe',
-          view  :            "fadeBasic"
+            autohide:           false,
+            overVideo:          true,
+            dir:                'h',
+            align:              'bottom',
+            inset:              false,
+            margin:             -110
         });
 
         // Slider 7
-        //--------------------------------------------------------------------
+        //----------------------------------------------------------------------
         // slider controls
         _this.masterslider_7.control(
           'arrows', {
@@ -393,35 +373,6 @@ j1.adapter.masterslider = (function (j1, window) {
         });
 
       } // END setupControls
-
-      function setupSliders(options, slider, save_config) {
-
-        // run slider setup
-        var i=0;
-        Object.keys(slider).forEach(function(key) {
-          i++;
-          if (slider[key].enabled) {
-            logger.info('\n' + 'slider is being initialized on id: ' + slider[key].id);
-
-            setup = $.extend(settings.options, slider[key].options );
-            _this["masterslider_" + i].setup(slider[key].id, setup);
-
-            if (save_config) {
-              // save slider config for later access
-              j1.masterslider.instances.push(_this["masterslider_" + i]);
-            }
-
-            if (setup.layout == 'partialview') {
-              $('#' + slider[key].id).addClass('ms-layout-partialview');
-            }
-
-          } else {
-            logger.debug('\n' + 'slider found disabled on id: ' + slider[key].id);
-            numSliders--;
-          }
-        });
-
-      } // END setupSliders
 
       var settings  = $.extend(options, slider);
       var setup     = {};
