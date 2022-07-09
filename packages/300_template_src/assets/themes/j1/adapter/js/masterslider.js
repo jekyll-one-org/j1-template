@@ -104,54 +104,70 @@ j1.adapter.masterslider = (function (j1, window) {
       _this   = j1.adapter.masterslider;
       logger  = log4javascript.getLogger('j1.adapter.masterslider');
 
-      _this.loadSliderHTML(sliders);
+      // initialize state flag
+      _this.setState('started');
+      logger.debug('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'module is being initialized');
+
+      _this.loadSliderHTML(moduleOptions, sliders);
       _this.initializeSliders();
 
     }, // END init
 
     // -------------------------------------------------------------------------
     // loadSliderHTML()
-    // ?????
+    // load all master sliders (HTML portion) dynanically configured
+    // and enabled (AJAX) from data file
+    // NOTE: Make sure the placeholder is available in the content page
+    // eg. using the asciidoc extension masterslider::
     // -------------------------------------------------------------------------
-    loadSliderHTML: function (sliders) {
-      var numSliders = Object.keys(sliders).length;
+    loadSliderHTML: function (options, slider) {
+      var numSliders          = Object.keys(slider).length;
+      var xhr_data_path       = options.xhr_data_path + '/index.html';
+      var xhr_container_id;
 
-      // var log_text = '\n' + 'Sliders are being loaded';
-      // logger.info(log_text);
+      console.debug('load HTML portion of all sliders configured found in page');
+      console.debug('number of sliders found: ' + numSliders);
 
-      console.log('number of sliders found: ' + numSliders);
+      _this.setState('load_data');
 
-      Object.keys(sliders).forEach(function(key) {
-        if (sliders[key].enabled) {
-          console.log('load slider id: ' + sliders[key].id);
+      Object.keys(slider).forEach(function(key) {
+        if (slider[key].enabled) {
+          console.debug('load HTML data on slider id: ' + slider[key].id);
+
+          xhr_container_id = 'p_' + slider[key].id;
+          j1.loadHTML({
+            xhr_container_id: xhr_container_id,
+            xhr_data_path:    xhr_data_path,
+            xhr_data_element: sliders[key].id
+          });
         } else {
+          console.debug('slider found disabled on id: ' + slider[key].id);
           numSliders--;
         }
       });
-
-      console.log('number of sliders loaded: ' + numSliders);
-
+      console.debug('number of sliders loaded found in page: ' + numSliders);
+      _this.setState('data_loaded');
     }, // END loadSliderHTML
 
     // -------------------------------------------------------------------------
     // initializeSliders()
-    // ????
+    // initialze all master sliders found in page
     // -------------------------------------------------------------------------
     initializeSliders: function () {
       var log_text;
 
       var dependencies_met_j1_finished = setInterval(function() {
-        if (j1.getState() == 'finished') {
+        if (_this.getState() == 'data_loaded' && j1.getState() == 'finished') {
+          window.masterslider_instances = window.masterslider_instances || [];
 
           // initialize state flag
-          _this.setState('started');
+          _this.setState('initialize_sliders');
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
 
           log_text = '\n' + 'sliders are being initialized';
           logger.info(log_text);
-
-          window.masterslider_instances = window.masterslider_instances || [];
 
           // Slider 1
           //--------------------------------------------------------------------

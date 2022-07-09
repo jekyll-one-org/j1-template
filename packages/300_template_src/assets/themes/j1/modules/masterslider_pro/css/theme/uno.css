@@ -1,0 +1,61 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/masterslider/css/theme/uno.css
+ # Provides MasterSlider styles for J1 Theme Uno
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+.j1-ms-info {
+  font-family: "Lato";
+  padding-top: 10px;
+  padding-right: 90px;
+  padding-bottom: 10px;
+  padding-left: 90px;
+  line-height: normal;
+  color: #f3f3f3;
+}
+
+.j1-ms-info-boxed {
+  font-family: "Lato";
+  padding-top: 10px;
+  padding-right: 90px;
+  padding-bottom: 10px;
+  padding-left: 90px;
+  line-height: normal;
+  color: #f3f3f3;
+  background-color: rgba(0,0,0,.75);
+}
+
+h2.j1-ms-info-headline {
+  text-align: center;
+  color: #f3f3f3;
+}
+
+.j1-ms-info-title {
+  text-align: center;
+  font-size: 26px !important;
+  font-weight: 600;
+  color: #f3f3f3;
+}
+
+.j1-ms-info-tagline {
+  text-align: center;
+  font-size: 24px !important;
+  font-weight: 300;
+  color: #9E9E9E;
+}
+
+.j1-ms-info-description {
+  text-align: center;
+  font-size: 18px !important;
+  font-weight: 300;
+  color: #f3f3f3;
+}

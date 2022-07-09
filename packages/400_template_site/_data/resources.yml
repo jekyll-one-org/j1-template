@@ -1361,7 +1361,10 @@ resources:
       dependencies:                     false
       pass_init_data:                   true
       data:
-        css:                            [ modules/masterslider/css/masterslider ]
+        css:                            [
+                                          modules/masterslider/css/masterslider,
+                                          modules/masterslider/css/theme/uno
+                                        ]
         files:                          [ adapter/js/masterslider.js ]
         js:                             [
                                           modules/masterslider/js/plugins/jquery.easing,
@@ -1386,7 +1389,10 @@ resources:
       dependencies:                     false
       pass_init_data:                   true
       data:
-        css:                            [ modules/masterslider_pro/css/masterslider ]
+        css:                            [
+                                          modules/masterslider_pro/css/masterslider,
+                                          modules/masterslider_pro/css/theme/uno
+                                        ]
         files:                          [
                                           modules/masterslider_pro/css/style/masterslider.css,
                                           modules/masterslider_pro/css/skins/black-1/style.css,
