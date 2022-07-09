@@ -112,8 +112,7 @@ j1.adapter.masterslider = (function (j1, window) {
       logger.info('\n' + 'module is being initialized');
 
       _this.loadSliderHTML(sliderOptions, sliders);
-      _this.initiSliders(sliderOptions, sliders, true /* save_config */);
-//    _this.postActionSliders(sliderOptions, sliders);
+      _this.initializeSliders(sliderOptions, sliders, true /* save_config */);
 
     }, // END init
 
@@ -128,17 +127,17 @@ j1.adapter.masterslider = (function (j1, window) {
       var i=0;
       Object.keys(slider).forEach(function(key) {
         i++;
+
         if (slider[key].enabled) {
           logger.info('\n' + 'run slider post actions');
           setup = $.extend(settings.options, slider[key].options);
 
           if (setup.layout == 'partialview') {
-            $('#' + slider[key].id).removeClass('ms-layout-partialview ms-wk');
             window.setTimeout(function() {
-              logger.warn('\n' + 'modify slider layout partialview on id: ' + slider[key].id);
-              //_this["masterslider_" + i].setup(slider[key].id, setup);
-              $('#' + slider[key].id).addClass('ms-layout-partialview');
-            }, 5000);
+              logger.info('\n' + 'modify layout partialview on id: ' + slider[key].id);
+              // $('#' + slider[key].id).addClass('ms-layout-partialview');
+              _this["masterslider_" + i].setup(slider[key].id, setup);
+            }, 15000);
           } else {
             logger.debug('\n' + 'slider found disabled on id: ' + slider[key].id);
           }
@@ -183,32 +182,115 @@ j1.adapter.masterslider = (function (j1, window) {
     }, // END loadSliderHTML
 
     // -------------------------------------------------------------------------
-    // initiSliders()
+    // initializeSliders()
     // initialze all master sliders found in page
     // -------------------------------------------------------------------------
-    initiSliders: function (options, slider, save_config) {
-
-      function createSliderInstances(sliders) {
-
-        // run slider setup
-        var i=0;
-        Object.keys(sliders).forEach(function(key) {
-          i++;
-          logger.debug('\n' + 'create slider instances on id: ' + sliders[key].id);
-          _this["masterslider_" + i] = new MasterSlider();
-        });
-
-      } // END createSliderInstances
+    initializeSliders: function (options, slider, save_config) {
 
       function setupControls(options, slider) {
 
         // Slider 1
         //--------------------------------------------------------------------
-        // NO slider controls
+        // slider setup
+        // _this.masterslider_1.setup('ms_00001', {
+        //   width:                1200,
+        //   height:               600,
+        //   minHeight:            0,
+        //   space:                0,
+        //   start:                1,
+        //   grabCursor:           true,
+        //   swipe:                true,
+        //   mouse:                true,
+        //   keyboard:             false,
+        //   layout:               'boxed',
+        //   wheel:                false,
+        //   autoplay:             false,
+        //   instantStartLayers:   false,
+        //   mobileBGVideo:        false,
+        //   loop:                 false,
+        //   shuffle:              false,
+        //   preload:              0,
+        //   heightLimit:          true,
+        //   autoHeight:           false,
+        //   smoothHeight:         true,
+        //   endPause:             false,
+        //   overPause:            true,
+        //   fillMode:             'fill',
+        //   centerControls:       true,
+        //   startOnAppear:        false,
+        //   layersMode:           'center',
+        //   autofillTarget:       '',
+        //   hideLayers:           false,
+        //   fullscreenMargin:     0,
+        //   speed:                20,
+        //   dir:                  'h',
+        //   responsive:           true,
+        //   tabletWidth:          768,
+        //   tabletHeight:         null,
+        //   phoneWidth:           480,
+        //   phoneHeight:          null,
+        //   sizingReference:      window,
+        //   parallaxMode:         'swipe',
+        //   view:                 'basic'
+        // });
+        //
+        // if (save_config) {
+        //   // save slider config for later access
+        //   j1.masterslider.instances.push(_this.masterslider_1);
+        // }
+
+
 
         // Slider 2
         //--------------------------------------------------------------------
-        // NO slider controls
+        // slider setup
+        // _this.masterslider_2.setup('ms_00002', {
+        //   width:                1200,
+        //   height:               600,
+        //   minHeight:            0,
+        //   space:                0,
+        //   start:                1,
+        //   grabCursor:           true,
+        //   swipe:                true,
+        //   mouse:                true,
+        //   keyboard:             false,
+        //   layout:               'fullwidth',
+        //   wheel:                false,
+        //   autoplay:             false,
+        //   instantStartLayers:   false,
+        //   mobileBGVideo:        false,
+        //   loop:                 false,
+        //   shuffle:              false,
+        //   preload:              0,
+        //   heightLimit:          true,
+        //   autoHeight:           false,
+        //   smoothHeight:         true,
+        //   endPause:             false,
+        //   overPause:            true,
+        //   fillMode:             'fill',
+        //   centerControls:       true,
+        //   startOnAppear:        false,
+        //   layersMode:           'center',
+        //   autofillTarget:       '',
+        //   hideLayers:           false,
+        //   fullscreenMargin:     0,
+        //   speed:                20,
+        //   dir:                  'h',
+        //   responsive:           true,
+        //   tabletWidth:          768,
+        //   tabletHeight:         null,
+        //   phoneWidth:           480,
+        //   phoneHeight:          null,
+        //   sizingReference:      window,
+        //   parallaxMode:         'swipe',
+        //   view:                 'basic'
+        // });
+        //
+        // if (save_config) {
+        //   // save slider config for later access
+        //   j1.masterslider.instances.push(_this.masterslider_2);
+        // }
+
 
         // Slider 3
         //--------------------------------------------------------------------
@@ -223,6 +305,59 @@ j1.adapter.masterslider = (function (j1, window) {
             margin:               -120
           }
         );
+
+        // slider setup
+        // _this.masterslider_3.setup("ms_00003", {
+        // 	width:                  1200,
+        // 	height:                 500,
+        // 	minHeight:              0,
+        // 	space:                  0,
+        // 	start:                  1,
+        // 	grabCursor:             true,
+        // 	swipe:                  true,
+        // 	mouse:                  true,
+        // 	keyboard:               false,
+        // 	layout:                 "boxed",
+        // 	wheel:                  false,
+        // 	autoplay:               false,
+        //   instantStartLayers:     false,
+        // 	mobileBGVideo:          false,
+        // 	loop:                   true,
+        // 	shuffle:                false,
+        // 	preload:                0,
+        // 	heightLimit:            true,
+        // 	autoHeight:             false,
+        // 	smoothHeight:           true,
+        // 	endPause:               false,
+        // 	overPause:              true,
+        // 	fillMode:               "fill",
+        // 	centerControls:         true,
+        // 	startOnAppear:          false,
+        // 	layersMode:             "center",
+        // 	autofillTarget:         "",
+        // 	hideLayers:             false,
+        // 	fullscreenMargin:       0,
+        // 	speed:                  20,
+        // 	dir  :                  "h",
+        // 	responsive:             true,
+        // 	tabletWidth:            768,
+        // 	tabletHeight:           null,
+        // 	phoneWidth:             480,
+        // 	phoneHeight:            null,
+        // 	sizingReference :       window,
+        // 	parallaxMode:           'swipe',
+        // 	view :                  "basic",
+        //   filters: {
+        //       grayscale:          1,
+        //       opacity:            0.5,
+        //       brightness:         2
+        //   }
+        // });
+        //
+        // if (save_config) {
+        //   // save slider config for later access
+        //   j1.masterslider.instances.push(_this.masterslider_3);
+        // }
 
         // Slider 4
         //--------------------------------------------------------------------
@@ -271,6 +406,54 @@ j1.adapter.masterslider = (function (j1, window) {
             width:4
         });
 
+        // slider setup
+        // _this.masterslider_4.setup("ms_00004", {
+        //   width:            890,
+        // 	height:           480,
+        // 	minHeight:        0,
+        // 	space :            0,
+        // 	start :            1,
+        // 	grabCursor:       true,
+        // 	swipe :            true,
+        // 	mouse :            true,
+        // 	keyboard :        false,
+        // 	layout:            "boxed",
+        // 	wheel :            false,
+        // 	autoplay :        false,
+        //   instantStartLayers:false,
+        // 	mobileBGVideo:false,
+        // 	loop  :            false,
+        // 	shuffle  :        false,
+        // 	preload  :        0,
+        // 	heightLimit:      true,
+        // 	autoHeight:       false,
+        // 	smoothHeight:     true,
+        // 	endPause :        false,
+        // 	overPause:        true,
+        // 	fillMode :        "fill",
+        // 	centerControls  : false,
+        // 	startOnAppear   : false,
+        // 	layersMode:       "center",
+        // 	autofillTarget  : "",
+        // 	hideLayers:       false,
+        // 	fullscreenMargin: 0,
+        // 	speed :            20,
+        // 	dir   :            "h",
+        // 	responsive:       true,
+        // 	tabletWidth:      768,
+        // 	tabletHeight:     null,
+        // 	phoneWidth:       480,
+        // 	phoneHeight:     null,
+        // 	sizingReference : window,
+        // 	parallaxMode:     'swipe',
+        // 	view  :            "basic"
+        // });
+        //
+        // if (save_config) {
+        //   // save slider config for later access
+        //   j1.masterslider.instances.push(_this.masterslider_4);
+        // }
+
         // Slider 5
         //--------------------------------------------------------------------
         // slider controls
@@ -305,6 +488,54 @@ j1.adapter.masterslider = (function (j1, window) {
             space:5,
             fillMode:'fill'
         });
+
+        // // slider setup
+        // _this.masterslider_5.setup("ms_00005", {
+        // 	width :            1200,
+        // 	height:            530,
+        // 	minHeight:        0,
+        // 	space :            0,
+        // 	start :            1,
+        // 	grabCursor:       true,
+        // 	swipe :            true,
+        // 	mouse :            true,
+        // 	keyboard :        false,
+        // 	layout:            "boxed",
+        // 	wheel :            false,
+        // 	autoplay :        false,
+        //   instantStartLayers:false,
+        // 	mobileBGVideo:false,
+        // 	loop  :            false,
+        // 	shuffle  :        false,
+        // 	preload  :        0,
+        // 	heightLimit:      true,
+        // 	autoHeight:       false,
+        // 	smoothHeight:     true,
+        // 	endPause :        false,
+        // 	overPause:        true,
+        // 	fillMode :        "fill",
+        // 	centerControls  : true,
+        // 	startOnAppear   : false,
+        // 	layersMode:       "center",
+        // 	autofillTarget  : "",
+        // 	hideLayers:       false,
+        // 	fullscreenMargin: 0,
+        // 	speed :            20,
+        // 	dir   :            "h",
+        // 	responsive:       true,
+        // 	tabletWidth:      768,
+        // 	tabletHeight:     null,
+        // 	phoneWidth:       480,
+        // 	phoneHeight:     null,
+        // 	sizingReference : window,
+        // 	parallaxMode:     'swipe',
+        // 	view  :            "basic"
+        // });
+        //
+        // if (save_config) {
+        //   // save slider config for later access
+        //   j1.masterslider.instances.push(_this.masterslider_5);
+        // }
 
         // Slider 6
         //--------------------------------------------------------------------
@@ -366,6 +597,12 @@ j1.adapter.masterslider = (function (j1, window) {
           view  :            "fadeBasic"
         });
 
+        // if (save_config) {
+        //   // save slider config for later access
+        //   j1.masterslider.instances.push(_this.masterslider_6);
+        // }
+
+
         // Slider 7
         //--------------------------------------------------------------------
         // slider controls
@@ -392,6 +629,54 @@ j1.adapter.masterslider = (function (j1, window) {
             margin:20
         });
 
+        // slider setup
+        // _this.masterslider_7.setup("ms_00007", {
+        // 	width :            700,
+        // 	height:            350,
+        // 	minHeight:        0,
+        // 	space :            10,
+        // 	start :            1,
+        // 	grabCursor:       true,
+        // 	swipe :            true,
+        // 	mouse :            true,
+        // 	keyboard :        false,
+        // 	layout:            "partialview",
+        // 	wheel :            false,
+        // 	autoplay :        false,
+        //   instantStartLayers:false,
+        // 	mobileBGVideo:false,
+        // 	loop  :            true,
+        // 	shuffle  :        false,
+        // 	preload  :        0,
+        // 	heightLimit:      true,
+        // 	autoHeight:       false,
+        // 	smoothHeight:     true,
+        // 	endPause :        false,
+        // 	overPause:        true,
+        // 	fillMode :        "fill",
+        // 	centerControls  : true,
+        // 	startOnAppear   : false,
+        // 	layersMode:       "center",
+        // 	autofillTarget  : "",
+        // 	hideLayers:       false,
+        // 	fullscreenMargin: 0,
+        // 	speed :            20,
+        // 	dir   :            "h",
+        // 	responsive:       true,
+        // 	tabletWidth:      768,
+        // 	tabletHeight:     null,
+        // 	phoneWidth:       480,
+        // 	phoneHeight:     null,
+        // 	sizingReference : window,
+        // 	parallaxMode:     'swipe',
+        // 	view  :            "fadeFlow"
+        // });
+        //
+        // if (save_config) {
+        //   // save slider config for later access
+        //   j1.masterslider.instances.push(_this.masterslider_7);
+        // }
+
       } // END setupControls
 
       function setupSliders(options, slider, save_config) {
@@ -402,6 +687,8 @@ j1.adapter.masterslider = (function (j1, window) {
           i++;
           if (slider[key].enabled) {
             logger.info('\n' + 'slider is being initialized on id: ' + slider[key].id);
+
+            _this["masterslider_" + i] = new MasterSlider();
 
             setup = $.extend(settings.options, slider[key].options );
             _this["masterslider_" + i].setup(slider[key].id, setup);
@@ -439,9 +726,11 @@ j1.adapter.masterslider = (function (j1, window) {
           log_text = '\n' + 'sliders are being initialized';
           logger.info(log_text);
 
-          createSliderInstances(slider);
           setupControls(options, slider);
           setupSliders(options, slider, save_config);
+
+          // _this.postActionSliders(sliderOptions, sliders);
+
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -450,7 +739,7 @@ j1.adapter.masterslider = (function (j1, window) {
         } // END dependencies_met_j1_finished
       }, 25);
 
-    }, // END initiSliders
+    }, // END initializeSliders
 
     // -------------------------------------------------------------------------
     // messageHandler: MessageHandler for J1 CookieConsent module

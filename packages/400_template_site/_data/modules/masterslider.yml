@@ -482,8 +482,8 @@ settings:
       #
       options:
 
-        width:                          900
-        height:                         900
+        width:                          1200
+        height:                         530
         partialview:                    false
 
       # ------------------------------------------------------------------------
@@ -625,7 +625,7 @@ settings:
       options:
         width:                          450
         height:                         220
-        partialview:                    true
+        layout:                         partialview
 
       # ------------------------------------------------------------------------
       # Slides
@@ -807,7 +807,7 @@ settings:
       options:
         width:                          700
         height:                         350
-        partialview:                    true
+        layout:                         partialview
 
       # ------------------------------------------------------------------------
       # Slides

@@ -80,18 +80,20 @@ exclude_from_search:                    true
 {% for slider in sliders %}
   {% if slider.enabled %}
 
+  {% comment %} Set base classes for a slider ('master-slider')
+  -------------------------------------------------------------------------------- {% endcomment %}
+
   {% if slider.skin %}
     {% capture skin %}ms-skin-{{slider.skin}}{% endcapture %}
   {% else %}
     {% capture skin %}ms-skin-default{% endcapture %}
   {% endif %}
 
-  {% if slider.options.partialview %}
+  {% if slider.options.layout == 'partialview' %}
     {% capture partialview %}ms-layout-partialview{% endcapture %}
   {% else %}
     {% capture partialview %} {% endcapture %}
   {% endif %}
-
 
   {% comment %} Set base icons and sizes
   -------------------------------------------------------------------------------- {% endcomment %}
