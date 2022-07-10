@@ -38,10 +38,10 @@ settings:
 
       id:                               ms_00001
       skin:                             light-3
-      icon_family:                      MDI
-      icon_class:                       false                                   # false | fas | fab (Fontawsesome only)
-      icon_color:                       '#1E88E5'                               # md-blue-600
-      icon_size:                        2x
+#     icon_family:                      MDI
+#     icon_class:                       false                                   # false | fas | fab (Fontawsesome only)
+#     icon_color:                       '#1E88E5'                               # md-blue-600
+#     icon_size:                        2x
 
       # ------------------------------------------------------------------------
       # Slider controls
@@ -56,7 +56,6 @@ settings:
 
         width:                          1200
         height:                         600
-        partialview:                    false
 
       # ------------------------------------------------------------------------
       # Slides
@@ -101,12 +100,6 @@ settings:
 
       id:                               ms_00002
       skin:                             default
-      icon_family:                      MDI
-      icon_class:                       false                                   # false | fas | fab (Fontawsesome only)
-      icon_color:                       '#1E88E5'                               # md-blue-600
-      icon_size:                        2x
-
-
 
       # ------------------------------------------------------------------------
       # Slider controls
@@ -118,7 +111,9 @@ settings:
       # Slider options
       #
       options:
-        # NO options used for this slider
+
+        width:                          1200
+        height:                         600
 
       # ------------------------------------------------------------------------
       # Slides
@@ -163,11 +158,7 @@ settings:
       enabled:                          true
 
       id:                               ms_00003
-      skin:                             default                                 # light-2
-      icon_family:                      MDI
-      icon_class:                       false                                   # false | fas | fab (Fontawsesome only)
-      icon_color:                       '#1E88E5'                               # md-blue-600
-      icon_size:                        2x
+      skin:                             default
 
       # ------------------------------------------------------------------------
       # Slider controls
@@ -176,20 +167,15 @@ settings:
 
         slideinfo:
           enabled:                      true
-          autohide:                     false
-          overVideo:                    true
-          dir:                          h
-          align:                        bottom
-          inset:                        false
           margin:                       -120
 
       # ------------------------------------------------------------------------
       # Slider options
       #
       options:
+
         width:                          1200
         height:                         500
-        partialview:                    false
 
       # ------------------------------------------------------------------------
       # Slides
@@ -286,59 +272,28 @@ settings:
 
       id:                               ms_00004
       skin:                             light-2
-      icon_family:                      MDI
-      icon_class:                       false                                   # false | fas | fab (Fontawsesome only)
-      icon_color:                       '#1E88E5'                               # md-blue-600
-      icon_size:                        2x
 
       # ------------------------------------------------------------------------
       # Slider controls
       #
       controls:
 
-        arrows:
+        arrows:                                                                 # default settings
           enabled:                      true
-          autohide:                     false
 
-        bullets:
+        bullets:                                                                # default settings
           enabled:                      true
-          autohide:                     false
-          overVideo:                    true
-          dir:                          h
-          hideUnder:                    null
-          align:                        bottom
-          margin:                       10
 
         thumblist:
           enabled:                      true
-          width:                        100
-          height:                       100
-          autohide:                     true
-          overVideo:                    true
-          dir:                          h
-          speed:                        17
-          hideUnder:                    null
-          inset:                        false
-          arrows:                       false
-          hover:                        false
-          customClass:                  ''
-          align:                        bottom
-          type:                         thumbs
-          margin:                       10
-          space:                        10
-          fillMode:                     fill
+          autohide:                     false
+          dir:                          v
 
         scrollbar:
           enabled:                      true
-          autohide:                     false
-          overVideo:                    true
-          dir:                          h
           inset:                        true
           align:                        top
           color:                        '#404040'
-          hideUnder:                    null
-          margin:                       10
-          width:                        4
 
       # ------------------------------------------------------------------------
       # Slider options
@@ -347,7 +302,6 @@ settings:
 
         width:                          1200
         height:                         600
-        partialview:                    false
 
       # ------------------------------------------------------------------------
       # Slides
@@ -433,49 +387,26 @@ settings:
 
       id:                               ms_00005
       skin:                             default
-      icon_family:                      MDI
-      icon_class:                       false                                   # false | fas | fab (Fontawsesome only)
-      icon_color:                       '#1E88E5'                               # md-blue-600
-      icon_size:                        2x
 
       # ------------------------------------------------------------------------
       # Slider controls
       #
       controls:
 
-        arrows:
+        arrows:                                                                 # default settings
           enabled:                      true
-          autohide:                     false
-          overVideo:                    true
-          hideUnder:                    null
 
-        bullets:
+        bullets:                                                                # default settings
           enabled:                      true
-          autohide:                     false
-          overVideo:                    true
-          dir:                          h
-          hideUnder:                    null
-          align:                        bottom
-          margin:                       10
 
         thumblist:
           enabled:                      true
-          width:                        100
-          height:                       100
-          autohide:                     true
-          overVideo:                    true
-          dir:                          h
-          speed:                        17
-          hideUnder:                    null
-          inset:                        false
-          arrows:                       false
-          hover:                        false
-          customClass:                  ''
+          autohide:                     false
           align:                        bottom
-          type:                         thumbs
-          margin:                       10
-          space:                        10
-          fillMode:                     fill
+          width:                        140
+          height:                       80
+          margin:                       5
+          space:                        5
 
       # ------------------------------------------------------------------------
       # Slider options
@@ -484,7 +415,6 @@ settings:
 
         width:                          1200
         height:                         530
-        partialview:                    false
 
       # ------------------------------------------------------------------------
       # Slides
@@ -599,11 +529,7 @@ settings:
       enabled:                          true
 
       id:                               ms_00006
-      skin:                             default                                 # light-2
-      icon_family:                      MDI
-      icon_class:                       false                                   # false | fas | fab (Fontawsesome only)
-      icon_color:                       '#1E88E5'                               # md-blue-600
-      icon_size:                        2x
+      skin:                             default
 
       # ------------------------------------------------------------------------
       # Slider controls
@@ -612,17 +538,13 @@ settings:
 
         slideinfo:
           enabled:                      true
-          autohide:                     false
-          overVideo:                    true
-          dir:                          h
-          align:                        bottom
-          inset:                        false
-          margin:                       -110
+          margin:                       -120
 
       # ------------------------------------------------------------------------
       # Slider options
       #
       options:
+
         width:                          450
         height:                         220
         layout:                         partialview
@@ -768,38 +690,21 @@ settings:
       enabled:                          true
 
       id:                               ms_00007
-      skin:                             default                                 # light-2
-      icon_family:                      MDI
-      icon_class:                       false                                   # false | fas | fab (Fontawsesome only)
-      icon_color:                       '#1E88E5'                               # md-blue-600
-      icon_size:                        2x
+      skin:                             default
 
       # ------------------------------------------------------------------------
       # Slider controls
       #
       controls:
 
-        arrows:
+        arrows:                                                                 # default settings
           enabled:                      true
-          autohide:                     false
-          overVideo:                    true
 
-        slideinfo:
+        slideinfo:                                                              # default settings
           enabled:                      true
-          autohide:                     false
-          overVideo:                    true
-          dir:                          h
-          align:                        bottom
-          inset:                        false
-          margin:                       -113
 
-        circletimer:
+        circletimer:                                                            # default settings
           enabled:                      true
-          autohide:                     false
-          overVideo:                    true
-          color:                        '#FFFFFF'
-          radius:                       4
-          stroke:                       9
 
       # ------------------------------------------------------------------------
       # Slider options

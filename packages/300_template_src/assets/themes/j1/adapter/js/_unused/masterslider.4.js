@@ -121,7 +121,7 @@ j1.adapter.masterslider = (function (j1, window) {
     // NOTE: currently NOT used
     // -------------------------------------------------------------------------
     postActionSliders: function (options, slider) {
-      var settings  = $.extend({}, options, slider);
+      var settings  = $.extend(options, slider);
       var setup     = {};
 
       var i=0;
@@ -129,7 +129,7 @@ j1.adapter.masterslider = (function (j1, window) {
         i++;
         if (slider[key].enabled) {
           logger.info('\n' + 'run slider post actions');
-          setup = $.extend({}, settings.options, slider[key].options);
+          setup = $.extend(settings.options, slider[key].options);
 
           if (setup.layout == 'partialview') {
             $('#' + slider[key].id).removeClass('ms-layout-partialview ms-wk');
@@ -201,18 +201,13 @@ j1.adapter.masterslider = (function (j1, window) {
       // run the method 'setup' on all sliders 'enabled'
       //
       function setupSliders(options, slider, save_config) {
-        const controlOptions    = options.controls;
-        var control             = {};
-        var index;
-
         var i=0;
         Object.keys(slider).forEach(function(key) {
-          i++;                                                                  // instance index
-          index = parseInt(key);                                                // object index
-          if (slider[index].enabled) {
-            logger.info('\n' + 'slider is being initialized on id: ' + slider[key].id);
+          i++;
+          if (slider[key].enabled) {
+            logger.debug('\n' + 'slider is being initialized on id: ' + slider[key].id);
 
-            setup = $.extend({}, settings.options, slider[index].options);
+            setup = $.extend(settings.options, slider[key].options );
             _this["masterslider_" + i].setup(slider[key].id, setup);
 
             if (save_config) {
@@ -230,31 +225,46 @@ j1.adapter.masterslider = (function (j1, window) {
       function setupControls(options, slider) {
         const controlOptions    = options.controls;
         var control             = {};
+        // var numSliders          = Object.keys(slider).length;
         var index;
-        var i=0;
+        // numSliders--;
 
+        var i=0;
         Object.keys(slider).forEach(function(key) {
-          i++;                                                                  // instance index
-          index = parseInt(key);                                                // object index
+          i++;
+          index = parseInt(key);
 
           if (slider[index].enabled) {
+
             if (slider[index].controls) {
+              // logger.info('\n' + 'slider controls are being initialized on id: ' + slider[index].id);
+
               Object.keys(slider[index].controls).forEach(function(key) {
+
+
                 logger.info('\n' + 'slider control found id|key: ' + slider[index].id + '|' + key);
-                // merge settings, defaults into control
+//              control = $.extend(sliderOptions.controls[key], slider[(i-1)].controls[key]);
+//              control = $.extend(controlOptions[key], slider[index].controls[key]);
+//              control = slider[index].controls[key];
+//              $.extend(control, controlOptions[key]);
+//              control = j1.mergeData(slider[index].controls[key], controlOptions[key]);
                 control = $.extend({}, controlOptions[key], slider[index].controls[key]);
+
+
                 // remove J1 config setting
                 delete control['enabled'];
                 _this["masterslider_" + i].control(key, control);
+                // if (key > numSliders) break;
               });
             }
           } else {
             logger.info('\n' + 'slider found disabled on id: ' + slider[key].id);
           }
         });
+
       } // END setupControls
 
-      var settings  = $.extend({}, options, slider);
+      var settings  = $.extend(options, slider);
       var setup     = {};
       var log_text;
 
