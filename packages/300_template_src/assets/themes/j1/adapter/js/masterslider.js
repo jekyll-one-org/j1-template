@@ -117,35 +117,6 @@ j1.adapter.masterslider = (function (j1, window) {
     }, // END init
 
     // -------------------------------------------------------------------------
-    // postActionSliders()
-    // NOTE: currently NOT used
-    // -------------------------------------------------------------------------
-    postActionSliders: function (options, slider) {
-      var settings  = $.extend({}, options, slider);
-      var setup     = {};
-
-      var i=0;
-      Object.keys(slider).forEach(function(key) {
-        i++;
-        if (slider[key].enabled) {
-          logger.info('\n' + 'run slider post actions');
-          setup = $.extend({}, settings.options, slider[key].options);
-
-          if (setup.layout == 'partialview') {
-            $('#' + slider[key].id).removeClass('ms-layout-partialview ms-wk');
-            window.setTimeout(function() {
-              logger.warn('\n' + 'modify slider layout partialview on id: ' + slider[key].id);
-              //_this["masterslider_" + i].setup(slider[key].id, setup);
-              $('#' + slider[key].id).addClass('ms-layout-partialview');
-            }, 5000);
-          } else {
-            logger.debug('\n' + 'slider found disabled on id: ' + slider[key].id);
-          }
-        }
-      });
-    }, // END postActionSliders
-
-    // -------------------------------------------------------------------------
     // loadSliderHTML()
     // load all master sliders (HTML portion) dynanically configured
     // and enabled (AJAX) from data file
@@ -183,7 +154,8 @@ j1.adapter.masterslider = (function (j1, window) {
 
     // -------------------------------------------------------------------------
     // initSliders()
-    // initialze all master sliders found in page
+    // initialze all master sliders found in page. Dynamically apply properties
+    // for methods 'setup' and 'control'.
     // -------------------------------------------------------------------------
     initSliders: function (options, slider, save_config) {
 
