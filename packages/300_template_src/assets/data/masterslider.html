@@ -42,11 +42,17 @@ exclude_from_search:                    true
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment         = site.environment %}
+{% assign slider_defaults     = modules.defaults.masterslider.defaults %}
 {% assign slider_settings     = modules.masterslider.settings %}
 
 {% comment %} Set config options
+slider_settings.module_version: {{slider_settings.module_version | debug}}
+slider_options.module_version:  {{slider_options.module_version | debug}}
+module_version:                 {{module_version | debug}}
 -------------------------------------------------------------------------------- {% endcomment %}
+{% assign slider_options      = slider_defaults | merge: slider_settings %}
 {% assign sliders             = slider_settings.sliders %}
+{% assign module_version      = slider_options.module_version %}
 
 {% comment %} Set permalink setting
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -81,7 +87,7 @@ exclude_from_search:                    true
   {% if slider.enabled %}
 
   {% comment %} Set base classes for a slider ('master-slider')
-  -------------------------------------------------------------------------------- {% endcomment %}
+  ------------------------------------------------------------------------------ {% endcomment %}
 
   {% if slider.skin %}
     {% capture skin %}ms-skin-{{slider.skin}}{% endcapture %}
@@ -89,14 +95,25 @@ exclude_from_search:                    true
     {% capture skin %}ms-skin-default{% endcapture %}
   {% endif %}
 
-  {% if slider.options.layout == 'partialview' %}
-    {% capture partialview %}ms-layout-partialview{% endcapture %}
+  <!-- [INFO   ] [~/assets/data/slider.html                     ] [detect ms module version] -->
+  {% if module_version == 'lite' %}
+  <!-- [INFO   ] [~/assets/data/slider.html                     ] [ms module version detected: {{module_version}}] -->
+    {% if slider.options.layout == 'partialview' %}
+      {% capture partialview %}ms-layout-partialview{% endcapture %}
+    {% else %}
+      {% capture partialview %} {% endcapture %}
+    {% endif %}
+  {% elsif module_version == 'pro' %}
+    <!-- [INFO   ] [~/assets/data/slider.html                     ] [ms module version detected: {{module_version}}] -->
+    {% capture partialview %}{% endcapture %}
   {% else %}
-    {% capture partialview %} {% endcapture %}
+    <!-- [WARN   ] [~/assets/data/slider.html                     ] [ms module version NOT detected, use FALLBACK] -->
+    {% capture partialview %}{% endcapture %}
   {% endif %}
 
+
   {% comment %} Set base icons and sizes
-  -------------------------------------------------------------------------------- {% endcomment %}
+  ------------------------------------------------------------------------------ {% endcomment %}
   {% assign slider_icon_family         = slider.icon_family %}
   {% assign slider_icon_class          = slider.icon_class %}
   {% assign slider_icon_color          = slider.icon_color %}
@@ -115,7 +132,7 @@ exclude_from_search:                    true
   {% endif %}
 
   {% comment %} Collect slides
-  -------------------------------------------------------------------------------- {% endcomment %}
+  ------------------------------------------------------------------------------ {% endcomment %}
 
   <!-- [INFO   ] [~/assets/data/slider.html                     ] [collect slider {{slider.id}}] -->
   <!-- MasterSlider Main -->

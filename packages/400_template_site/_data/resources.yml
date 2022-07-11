@@ -809,7 +809,7 @@ resources:
       region:                           head
       required:                         always
       preload:                          false
-      script_load:                      deferred
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -988,7 +988,7 @@ resources:
       layout:                           [ all ]
       required:                         ondemand
       preload:                          false
-      script_load:                      async
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -1010,7 +1010,7 @@ resources:
       layout:                           [ all ]
       required:                         ondemand
       preload:                          false
-      script_load:                      async
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -1158,7 +1158,7 @@ resources:
       region:                           head
       required:                         ondemand
       preload:                          false
-      script_load:                      deferred
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -1182,7 +1182,7 @@ resources:
       region:                           head
       required:                         ondemand
       preload:                          false
-      script_load:                      deferred
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -1206,7 +1206,7 @@ resources:
       region:                           head
       required:                         ondemand
       preload:                          false
-      script_load:                      deferred
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -1230,7 +1230,7 @@ resources:
       region:                           head
       required:                         ondemand
       preload:                          false
-      script_load:                      deferred
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -1357,7 +1357,7 @@ resources:
       layout:                           [ all ]
       required:                         ondemand
       preload:                          false
-      script_load:                      defer
+      script_load:                      sync
       dependencies:                     false
       pass_init_data:                   true
       data:
@@ -1385,7 +1385,7 @@ resources:
       layout:                           [ all ]
       required:                         ondemand
       preload:                          false
-      script_load:                      defer
+      script_load:                      sync
       dependencies:                     false
       pass_init_data:                   true
       data:
@@ -1411,6 +1411,7 @@ resources:
                                         ]
         js:                             [ modules/masterslider_pro/js/masterslider ]
         init_function:                  [ j1.adapter.masterslider.init ]
+#       init_function:                  []
 
 
   # ----------------------------------------------------------------------------
@@ -1592,7 +1593,7 @@ resources:
       layout:                           [ all ]
       required:                         ondemand
       preload:                          false                                   # property currently unused
-      script_load:                      async
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
       data:

@@ -25,12 +25,16 @@ description:
 defaults:
 
   xhr_data_path:                        /assets/data/masterslider
+  module_version:                       lite                                    # lite | pro
+  save_slider_config:                   false
 
-  skin:                                 default
   icon_family:                          MDI
   icon_class:                           false                                   # false | fas | fab (Fontawsesome only)
   icon_color:                           '#1E88E5'                               # md-blue-600
   icon_size:                            2x
+
+  skin:                                 default
+
 
   # ----------------------------------------------------------------------------
   # DEFAULT  settings

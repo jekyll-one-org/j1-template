@@ -55,6 +55,7 @@ resource_options:
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 
+////
 == Slider 1 - Simple Boxed
 
 lorem:sentences[5]
@@ -98,6 +99,8 @@ lorem:sentences[5]
 //
 masterslider::ms_00005[role="mt-3 mb-5"]
 
+////
+
 
 == Slider 6 - Blog articles (PartialView)
 
@@ -115,22 +118,3 @@ lorem:sentences[5]
 // add placeholder for dynamic load (AJAX)
 //
 masterslider::ms_00007[role="mt-3 mb-5"]
-
-////
-++++
-<script>
-  $(document).ready(function() {
-    var dependencies_met_data_loaded = setInterval(function() {
-      if (j1.getState() == 'finished') {
-        // var settings = $.extend({}, {"layout": "page", "fab_menu_id": "page_ctrl_simple", "scrollbar": "false", "toc": "true", "comments": "false", "scrollDynamicPagesTopOnChange": ""});
-        // j1.adapter.masterslider.init(settings);
-        j1.adapter.masterslider.init();
-        clearInterval(dependencies_met_data_loaded);
-      } // END dependencies_met_j1_finished
-    }, 25);
-  });
-
-  masterslider_1.setup();
-</script>
-++++
-////

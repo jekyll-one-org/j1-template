@@ -269,25 +269,9 @@ var j1 = (function (options) {
     return context[func].apply(context, args);
   }
 
-  function stringToBoolean(string) {
-    switch(string.toLowerCase().trim()) {
-      case "true":
-      case "yes":
-      case "1":
-        return true;
-      case "false":
-      case "no":
-      case "0":
-      case null:
-        return false;
-      default:
-        return Boolean(string);
-    }
-  }
-
   function isOdd(num) {
     var test = (num % 2).toString();
-    return stringToBoolean(test);
+    return j1.stringToBoolean(test);
   }
 
   // ---------------------------------------------------------------------------
@@ -313,7 +297,7 @@ var j1 = (function (options) {
 
       // settings for dynamic pages
       scrollDynamicPagesTopOnChange = frontmatterOptions.scrollDynamicPagesTopOnChange ? frontmatterOptions.scrollDynamicPagesTopOnChange : '{{template_config.scrollDynamicPagesTopOnChange}}';
-      scrollDynamicPagesTopOnChange = stringToBoolean(scrollDynamicPagesTopOnChange);
+      scrollDynamicPagesTopOnChange = j1.stringToBoolean(scrollDynamicPagesTopOnChange);
 
       // -----------------------------------------------------------------------
       // Global variable settings
@@ -2354,6 +2338,28 @@ var j1 = (function (options) {
         }
       }, 25);
     },
+
+    // -------------------------------------------------------------------------
+    // stringToBoolean()
+    // convert a string to boolean
+    // -------------------------------------------------------------------------
+    stringToBoolean: function (string) {
+
+      switch(string.toLowerCase().trim()) {
+        case "true":
+        case "yes":
+        case "1":
+          return true;
+        case "false":
+        case "no":
+        case "0":
+        case null:
+          return false;
+        default:
+          return Boolean(string);
+      }
+
+    }, // END stringToBoolean
 
     // -------------------------------------------------------------------------
     // registerEvents()
