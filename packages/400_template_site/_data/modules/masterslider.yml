@@ -24,7 +24,7 @@ description:
 #
 settings:
 
-  module_version:                       pro                                     # lite | pro
+  module_version:                       lite                                    # lite | pro
   save_slider_config:                   true
 
   # ----------------------------------------------------------------------------

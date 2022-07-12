@@ -1,0 +1,350 @@
+---
+title:                                  Tester
+tagline:                                master slider pro
+date:                                   2020-11-03 00:00:00
+description: >
+                                        Welcome to the preview page focussing on the image module. This page
+                                        shows some valuable features of the J1 Template to manage your image-based
+                                        content using lightboxes, carousels (slider), and galleries.
+
+categories:                             [ Testpages ]
+tags:                                   [ Example ]
+
+comments:                               false
+fab_menu_id:                            page_ctrl_simple
+
+permalink:                              /pages/public/learn/masterslider-pro/
+regenerate:                             false
+
+resources:                              [ animate, mastersliderpro ]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
+          alt:                          Photo by Ricardo Gomez Angel on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Ricardo Gomez Angel
+            href:                       https://unsplash.com/@ripato/portfolio
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+
+== Slider 6 - Blog articles (PartialView)
+
+lorem:sentences[5]
+
+// add placeholder for dynamic load (AJAX)
+//
+//masterslider::ms_00006[role="mt-3 mb-5"]
+++++
+<!-- MasterSlider -->
+<div id="p_ms_00006" class="master-slider-parent mt-3 mb-5">
+
+  <div id="ms_00006" class="master-slider ms-skin-default">
+    <div class="ms-slide">
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="Special slider for bloggers" title="Special slider for bloggers" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-slide2-1024x622.jpg">
+      <!-- MasterSlider Info -->
+      <div class="ms-info">
+        <div class="j1-ms-info">
+          <h2 class="notoc j1-ms-info-title r-text-300  animated fadeInLeft " style="color: #F5F5F5;">Special slider for bloggers</h2>
+          <p class="animated fadeInRight  mt-4" style="text-align: center;">
+            <a class="btn btn-primary btn-sm" href="#void" role="button">Read More</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="ms-slide">
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="We love architecture websites" title="We love architecture websites" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-3.jpg">
+      <!-- MasterSlider Info -->
+      <div class="ms-info">
+        <div class="j1-ms-info">
+          <h2 class="notoc j1-ms-info-title r-text-400  animated fadeInLeft " style="color: #212121;">We love architecture websites</h2>
+          <p class="animated fadeInRight  mt-4" style="text-align: center;">
+            <a class="btn btn-primary btn-sm" href="#void" role="button">Read More</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="ms-slide">
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="New Buildings, New Designs!" title="New Buildings, New Designs!" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-2.jpg">
+      <!-- MasterSlider Info -->
+      <div class="ms-info">
+        <div class="j1-ms-info">
+          <h2 class="notoc j1-ms-info-title r-text-400  animated fadeInLeft " style="color: #212121;">New Buildings, New Designs!</h2>
+          <p class="animated fadeInRight  mt-4" style="text-align: center;">
+            <a class="btn btn-primary btn-sm" href="#void" role="button">Read More</a>
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="ms-slide">
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="Greatest Modern Architect Designs" title="Greatest Modern Architect Designs" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-1.jpg">
+      <!-- MasterSlider Info -->
+      <div class="ms-info">
+        <div class="j1-ms-info">
+          <h2 class="notoc j1-ms-info-title r-text-400  animated fadeInLeft " style="color: #212121;">Greatest Modern Architect Designs</h2>
+          <p class="animated fadeInRight  mt-4" style="text-align: center;">
+            <a class="btn btn-primary btn-sm" href="#void" role="button">Read More</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- END MasterSlider -->
+++++
+
+
+== Slider 7 - PartialView/MS-Info (info position below)
+
+lorem:sentences[5]
+
+// add placeholder for dynamic load (AJAX)
+//
+// masterslider::ms_00007[role="mt-3 mb-5"]
+
+++++
+<!-- MasterSlider -->
+<div id="p_ms_00007" class="master-slider-parent mt-3 mb-5">
+
+  <div id="ms_00007" class="master-slider ms-skin-default">
+    <div class="ms-slide">
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="childhood-memories" title="childhood-memories" data-src="/assets/images/modules/masterslider/slider_7/6-2.jpg">
+      <!-- MasterSlider Info -->
+      <div class="ms-info">
+        <div class="j1-ms-info">
+          <h2 class="notoc j1-ms-info-title r-text-300   " style="color: #222222;">CHILDHOOD MEMORIES</h2>
+          <h3 class="notoc j1-ms-info-tagline r-text-300   " style="color: #7a7a7a;">JOHN WILIAM</h3>
+          <p class="j1-ms-info-description r-text-300   " style="color: #9E9E9E;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="ms-slide">
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="consectetuer-adipiscing" title="consectetuer-adipiscing" data-src="/assets/images/modules/masterslider/slider_7/5-2.jpg">
+      <!-- MasterSlider Info -->
+      <div class="ms-info">
+        <div class="j1-ms-info">
+          <h2 class="notoc j1-ms-info-title r-text-300   " style="color: #222222;">CONSECTETUER ADIPISCING ELIT</h2>
+          <h3 class="notoc j1-ms-info-tagline r-text-300   " style="color: #7a7a7a;">JOHN WILIAM</h3>
+          <p class="j1-ms-info-description r-text-300   " style="color: #9E9E9E;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="ms-slide">
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="nonummy-nibh" title="nonummy-nibh" data-src="/assets/images/modules/masterslider/slider_7/6-3.jpg">
+      <!-- MasterSlider Info -->
+      <div class="ms-info">
+        <div class="j1-ms-info">
+          <h2 class="notoc j1-ms-info-title r-text-300   " style="color: #222222;">SUSPENDISSE UT PULVINAR MAURIS</h2>
+          <h3 class="notoc j1-ms-info-tagline r-text-300   " style="color: #7a7a7a;">JOHN WILIAM</h3>
+          <p class="j1-ms-info-description r-text-300   " style="color: #9E9E9E;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="ms-slide">
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="nibh-euismod" title="nibh-euismod" data-src="/assets/images/modules/masterslider/slider_7/8.jpg">
+      <!-- MasterSlider Info -->
+      <div class="ms-info">
+        <div class="j1-ms-info">
+          <h2 class="notoc j1-ms-info-title r-text-300   " style="color: #222222;">SED DAPIBUS SIT AMET FELIS</h2>
+          <h3 class="notoc j1-ms-info-tagline r-text-300   " style="color: #7a7a7a;">GREGORY WILSON</h3>
+          <p class="j1-ms-info-description r-text-300   " style="color: #9E9E9E;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="ms-slide">
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="cheetags" title="cheetags" data-src="/assets/images/modules/masterslider/slider_7/8-1.jpg">
+      <!-- MasterSlider Info -->
+      <div class="ms-info">
+        <div class="j1-ms-info">
+          <h2 class="notoc j1-ms-info-title r-text-300   " style="color: #222222;">CHEETAGS ON THE EDGE</h2>
+          <h3 class="notoc j1-ms-info-tagline r-text-300   " style="color: #7a7a7a;">GREGORY WILSON</h3>
+          <p class="j1-ms-info-description r-text-300   " style="color: #9E9E9E;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="ms-slide">
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="wp-content-uploads" title="" data-src="/assets/images/modules/masterslider/slider_7/1-2.jpg">
+      <!-- MasterSlider Info -->
+      <div class="ms-info">
+        <div class="j1-ms-info">
+          <h2 class="notoc j1-ms-info-title r-text-300   " style="color: #222222;">CONSECTETUR ADIPISCING ELIT</h2>
+          <h3 class="notoc j1-ms-info-tagline r-text-300   " style="color: #7a7a7a;">GREGORY WILSON</h3>
+          <p class="j1-ms-info-description r-text-300   " style="color: #9E9E9E;">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- END MasterSlider -->
+
+++++
+
+
+++++
+<script id="ms-slider-manager">
+// initialize slider controls and setup
+//------------------------------------------------------------------------------
+
+var masterslider_6 = new MasterSlider();
+
+masterslider_6.control(
+  'slideinfo', {
+    "autohide":             false,
+    "overVideo":            true,
+    "insertTo":             "",
+    "size":                 100,
+    "hideUnder":            null,
+    "align":                "bottom",
+    "inset":                false,
+    "margin":               -120
+});
+masterslider_6.setup(
+  'ms_00006', {
+    "width":                450,
+    "height":               220,
+    "minHeight":            0,
+    "space":                0,
+    "start":                1,
+    "grabCursor":           true,
+    "swipe":                true,
+    "mouse":                true,
+    "keyboard":             false,
+    "layout":               "partialview",
+    "wheel":                false,
+    "autoplay":             false,
+    "instantStartLayers":   false,
+    "mobileBGVideo":        false,
+    "loop":                 false,
+    "shuffle":              false,
+    "preload":              0,
+    "heightLimit":          true,
+    "autoHeight":           false,
+    "smoothHeight":         true,
+    "endPause":             false,
+    "overPause":            true,
+    "fillMode":             "fill",
+    "centerControls":       true,
+    "startOnAppear":        false,
+    "layersMode":           "center",
+    "autofillTarget":       "",
+    "hideLayers":           false,
+    "fullscreenMargin":     0,
+    "speed":                20,
+    "dir":                  "h",
+    "responsive":           true,
+    "tabletWidth":          768,
+    "tabletHeight":         null,
+    "phoneWidth":           480,
+    "phoneHeight":          null,
+    "sizingReference":      "window",
+    "parallaxMode":         "swipe",
+    "view":                 "basic"
+});
+
+var masterslider_7 = new MasterSlider();
+
+masterslider_7.control(
+  'arrows', {
+    "autohide":             false,
+    "overVideo":            true,
+    "hideUnder":            null
+});
+masterslider_7.control(
+  'slideinfo', {
+    "autohide":             false,
+    "overVideo":            true,
+    "insertTo":             "",
+    "size":                 100,
+    "hideUnder":            null,
+    "align":                "bottom",
+    "inset":                false,
+    "margin":               10
+});
+masterslider_7.control(
+  'circletimer', {
+    "autohide":             false,
+    "overVideo":            true,
+    "color":                "#A2A2A2",
+    "radius":               4,
+    "stroke":               10,
+    "hideUnder":            null
+});
+masterslider_7.setup(
+  'ms_00007', {
+    "width":                700,
+    "height":               350,
+    "minHeight":            0,
+    "space":                0,
+    "start":                1,
+    "grabCursor":           true,
+    "swipe":                true,
+    "mouse":                true,
+    "keyboard":             false,
+    "layout":               "partialview",
+    "wheel":                false,
+    "autoplay":             false,
+    "instantStartLayers":   false,
+    "mobileBGVideo":        false,
+    "loop":                 false,
+    "shuffle":              false,
+    "preload":              0,
+    "heightLimit":          true,
+    "autoHeight":           false,
+    "smoothHeight":         true,
+    "endPause":             false,
+    "overPause":            true,
+    "fillMode":             "fill",
+    "centerControls":       true,
+    "startOnAppear":        false,
+    "layersMode":           "center",
+    "autofillTarget":       "",
+    "hideLayers":           false,
+    "fullscreenMargin":     0,
+    "speed":                20,
+    "dir":                  "h",
+    "responsive":           true,
+    "tabletWidth":          768,
+    "tabletHeight":         null,
+    "phoneWidth":           480,
+    "phoneHeight":          null,
+    "sizingReference":      "window",
+    "parallaxMode":         "swipe",
+    "view":                 "basic"});
+</script>
+++++

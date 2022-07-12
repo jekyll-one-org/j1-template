@@ -1410,8 +1410,8 @@ resources:
                                           adapter/js/masterslider.js
                                         ]
         js:                             [ modules/masterslider_pro/js/masterslider ]
-        init_function:                  [ j1.adapter.masterslider.init ]
-#       init_function:                  []
+#       init_function:                  [ j1.adapter.masterslider.init ]
+        init_function:                  []
 
 
   # ----------------------------------------------------------------------------

@@ -90,6 +90,17 @@ j1.adapter.masterslider = (function (j1, window) {
     // Initializer
     // -------------------------------------------------------------------------
     init: function (options) {
+      var msSliderManager;
+
+      msSliderManager             = document.createElement('script');
+      msSliderManager.id          = 'ms-slider-manager';
+      msSliderManager.innerHTML   = `
+// initialize slider controls and setup
+//------------------------------------------------------------------------------
+// $(document).ready(function() {
+//  var dependencies_met_data_loaded = setInterval(function() {
+//    if (j1.getState() == 'finished') {
+`;
 
       // used for later access
       j1.masterslider           = {};
@@ -122,14 +133,14 @@ j1.adapter.masterslider = (function (j1, window) {
       _this.loadSliderHTML(sliderOptions, sliders);
       // create an 'MasterSlider' instance for all sliders configured
       console.debug('create an \'MasterSlider\' instance for all sliders configured');
-      _this.createSliderInstances(sliders);
+      _this.createSliderInstances(sliders, msSliderManager);
 
       // initialize all sliders configured
       var dependencies_met_data_loaded = setInterval(function() {
         if (_this.getState() == 'data_loaded' && j1.getState() == 'finished') {
           logger.info('\n' + 'ms module version detected: ' + moduleVersion);
           logger.info('\n' + 'module is being initialized');
-          _this.initSliders(sliderOptions, sliders, saveSliderConfig);
+          _this.initSliders(sliderOptions, sliders, msSliderManager, saveSliderConfig);
           clearInterval(dependencies_met_data_loaded);
         } // END dependencies_met_j1_finished
       }, 25);
@@ -138,6 +149,15 @@ j1.adapter.masterslider = (function (j1, window) {
       var dependencies_met_module_finished = setInterval(function() {
         if (_this.getState() == 'sliders_initialized' && j1.getState() == 'finished') {
             _this.setState('finished');
+
+            // msSliderManager.innerHTML +=  `
+            // clearInterval(dependencies_met_data_loaded);
+            // } // END dependencies_met_j1_finished
+            // }, 25);
+            // `
+            // msSliderManager.innerHTML +=  '   });'
+
+            document.body.appendChild(msSliderManager);
             logger.info('\n' + 'initializing module finished');
             clearInterval(dependencies_met_module_finished);
         } // END dependencies_met_j1_finished
@@ -186,15 +206,23 @@ j1.adapter.masterslider = (function (j1, window) {
     // createSliderInstances()
     // create an 'MasterSlider' instance for all sliders configured
     // -------------------------------------------------------------------------
-    createSliderInstances: function (sliders) {
-      var numSliders = Object.keys(sliders).length;
+    createSliderInstances: function (sliders, sliderManager) {
+      var msSliderManager = sliderManager;
+      var newline         = '\n';
+      var numSliders      = Object.keys(sliders).length;
 
+      msSliderManager.innerHTML += newline;
       var i=0;
       Object.keys(sliders).forEach(function(key) {
+        var msSliderManagerItem;
         i++;
         console.debug('create slider instance on id: ' + sliders[key].id);
-        _this["masterslider_" + i] = new MasterSlider();
+
+        msSliderManagerItem        =  '\n' + 'var masterslider_' + i + ' = new MasterSlider();';
+        msSliderManager.innerHTML +=  '        ' + msSliderManagerItem;
+//      _this["masterslider_" + i] = new MasterSlider();
       });
+
       console.debug('slider instances created: ' + numSliders);
     }, // END loadSliderHTML
 
@@ -203,17 +231,21 @@ j1.adapter.masterslider = (function (j1, window) {
     // initialze all master sliders found in page. Dynamically apply properties
     // for methods 'setup' and 'control'.
     // -------------------------------------------------------------------------
-    initSliders: function (options, slider, save_config) {
+    initSliders: function (options, slider, sliderManager, save_config) {
+      var msSliderManager = sliderManager;
+      var newline         = '\n';
 
       // run the method 'control' on all sliders 'enabled'
       //
-      function setupControls(options, slider) {
-        const controlOptions    = options.controls;
+      function setupControls(options, slider, sliderManager) {
+        const controlOptions = options.controls;
+        var msSliderManager  = sliderManager;
         var index;
         var i=0;
 
         logger.info('\n' + 'generate slider controls');
 
+        msSliderManager.innerHTML += newline;
         Object.keys(slider).forEach(function(key) {
           i++;                                                                  // instance index
           index = parseInt(key);                                                // object index
@@ -221,12 +253,17 @@ j1.adapter.masterslider = (function (j1, window) {
           if (slider[index].enabled) {
             if (slider[index].controls) {
               Object.keys(slider[index].controls).forEach(function(key) {
+                var msSliderManagerItem = '\n';
                 logger.info('\n' + 'slider control found id|key: ' + slider[index].id + '|' + key);
                 // merge settings, defaults into control
                 control = $.extend({}, controlOptions[key], slider[index].controls[key]);
                 // remove J1 config setting
                 delete control['enabled'];
-                _this["masterslider_" + i].control(key, control);
+
+                msSliderManagerItem        = '    ' + 'masterslider_' + i + '.control(' + '\'' + key + '\'' +  ', ' + JSON.stringify(control) + ');'
+                msSliderManager.innerHTML +=  msSliderManagerItem + '\n';
+
+                // _this["masterslider_" + i].control(key, control);
               });
             } else {
               logger.info('\n' + 'no slider controls found on id: ' + slider[key].id);
@@ -239,22 +276,28 @@ j1.adapter.masterslider = (function (j1, window) {
 
       // run the method 'setup' on all sliders 'enabled'
       //
-      function setupSliders(options, slider, save_config) {
-        const controlOptions    = options.controls;
-        var control             = {};
+      function setupSliders(options, slider, sliderManager, save_config) {
+        const controlOptions = options.controls;
+        var msSliderManager  = sliderManager;
+        var control          = {};
         var index;
 
         logger.info('\n' + 'generate slider setup');
 
+        msSliderManager.innerHTML += newline;
         var i=0;
         Object.keys(slider).forEach(function(key) {
+          var msSliderManagerItem = '\n';
           i++;                                                                  // instance index
           index = parseInt(key);                                                // object index
           if (slider[index].enabled) {
             logger.info('\n' + 'slider is being initialized on id: ' + slider[key].id);
 
-            setup = $.extend({}, settings.options, slider[index].options);
-            _this["masterslider_" + i].setup(slider[key].id, setup);
+            setup                      = $.extend({}, settings.options, slider[index].options);
+            msSliderManagerItem        = '    ' + 'masterslider_' + i + '.setup(' + '\'' + slider[key].id + '\'' + ', ' + JSON.stringify(setup) + ');'
+            msSliderManager.innerHTML +=  msSliderManagerItem + '\n';
+
+            // _this["masterslider_" + i].setup(slider[key].id, setup);
 
             if (save_config) {
               // save slider config for later access
@@ -274,14 +317,13 @@ j1.adapter.masterslider = (function (j1, window) {
       var setup     = {};
       var log_text;
 
-
       _this.setState('initialize_sliders');
       logger.debug('\n' + 'state: ' + _this.getState());
       log_text = '\n' + 'sliders are being initialized';
       logger.info(log_text);
 
-      setupControls(options, slider);
-      setupSliders(options, slider, save_config);
+      setupControls(options, slider, msSliderManager);
+      setupSliders(options, slider, msSliderManager, save_config);
 
     }, // END initSliders
 

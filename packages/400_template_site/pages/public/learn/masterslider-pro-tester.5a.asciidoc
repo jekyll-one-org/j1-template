@@ -38,7 +38,7 @@ resource_options:
 
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
-//:page--attr:                         <attr-value>
+// :page--attr:                         <attr-value>
 :images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
 
 //  Load Liquid procedures
@@ -61,14 +61,12 @@ lorem:sentences[5]
 
 ++++
 <!-- MasterSlider -->
-<div id="p_ms_00006" class="master-slider-parent mb-5">
+<div id="P_MS62a70f2f113eb" class="master-slider-parent mb-5">
 
   <!-- MasterSlider Main -->
-  <div id="ms_00006" class="master-slider ms-skin-default" >
+  <div id="MS62a70f2f113eb" class="master-slider ms-skin-default" >
     <div  class="ms-slide"   >
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif"
-      alt="Special slider for bloggers" title="Special slider for bloggers"
-      data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-slide2-1024x622.jpg" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="Special slider for bloggers" title="Special slider for bloggers" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-slide2-1024x622.jpg" />
       <div class="ms-info">
         <div style="text-align: center;">
           <h4 class="notoc" style="text-align: center; font-size: 20px; font-weight: 600; margin-bottom: 0;"><a class="link-no-decoration" style="color: #4dc8e4; text-decoration: none;" href="https://www.masterslider.com/special-slider-photographers-bloggers/">Special slider for bloggers</a></h4>
@@ -78,9 +76,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif"
-      alt="Everything is customizable!" title="Everything is customizable!"
-      data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-1-1024x622.jpg" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="Everything is customizable!" title="Everything is customizable!" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-1-1024x622.jpg" />
       <div class="ms-info">
         <div style="text-align: center;">
           <h4 class="notoc" style="text-align: center; font-size: 20px; font-weight: 600; margin-bottom: 0;"><a class="link-no-decoration" style="color: #4dc8e4; text-decoration: none;" href="https://www.masterslider.com/everything-will-customize-just-minutes/">Everything is customizable!</a></h4>
@@ -90,9 +86,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif"
-      alt="Share your moments with your visitors" title="Share your moments with your visitors"
-      data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-slide3-1024x622.jpg" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="Share your moments with your visitors" title="Share your moments with your visitors" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-slide3-1024x622.jpg" />
       <div class="ms-info">
         <div style="text-align: center;">
           <h4 class="notoc" style="text-align: center; font-size: 20px; font-weight: 600; margin-bottom: 0;"><a class="link-no-decoration" style="color: #4dc8e4; text-decoration: none;" href="https://www.masterslider.com/share-moments-website-visitors/">Share your moments with your visitors</a></h4>
@@ -102,9 +96,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif"
-      alt="We love interior design websites" title="We love interior design websites"
-      data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-3.jpg" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="We love interior design websites" title="We love interior design websites" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-3.jpg" />
       <div class="ms-info">
         <div style="text-align: center;">
           <h4 class="notoc" style="text-align: center; font-size: 20px; font-weight: 600; margin-bottom: 0;"><a class="link-no-decoration" style="color: #4dc8e4; text-decoration: none;" href="https://www.masterslider.com/love-interior-design-websites/">We love interior design websites</a></h4>
@@ -114,9 +106,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif"
-      alt="New Buildings, New Designs!" title="New Buildings, New Designs!"
-      data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-2.jpg" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="New Buildings, New Designs!" title="New Buildings, New Designs!" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-2.jpg" />
       <div class="ms-info">
         <div style="text-align: center;">
           <h4 class="notoc" style="text-align: center; font-size: 20px; font-weight: 600; margin-bottom: 0;"><a class="link-no-decoration" style="color: #4dc8e4; text-decoration: none;" href="https://www.masterslider.com/new-buildings-new-designs/">New Buildings, New Designs!</a></h4>
@@ -126,9 +116,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif"
-      alt="Greatest Modern Architect Designs" title="Greatest Modern Architect Designs"
-      data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-1.jpg" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="Greatest Modern Architect Designs" title="Greatest Modern Architect Designs" data-src="https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-1.jpg" />
       <div class="ms-info">
         <div style="text-align: center;">
           <h4 class="notoc" style="text-align: center; font-size: 20px; font-weight: 600; margin-bottom: 0;"><a class="link-no-decoration" style="color: #4dc8e4; text-decoration: none;" href="https://www.masterslider.com/greatest-modern-architect-designs/">Greatest Modern Architect Designs</a></h4>
@@ -149,17 +137,14 @@ lorem:sentences[5]
 
 lorem:sentences[5]
 
-// /assets/images/modules/masterslider/slider_7/
 ++++
 <!-- MasterSlider -->
-<div id="p_ms_00007" class="master-slider-parent mb-5">
+<div id="P_MS62a73daae4e59" class="master-slider-parent mb-5">
 
   <!-- MasterSlider Main -->
-  <div id="ms_00007" class="master-slider ms-skin-default" >
+  <div id="MS62a73daae4e59" class="master-slider ms-skin-default" >
     <div  class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif"
-      alt="" title=""
-      data-src="/assets/images/modules/masterslider/slider_7/6-2.jpg" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="" title="" data-src="/assets/images/modules/masterslider/slider_7/6-2.jpg" />
       <div class="ms-info">
         <h3 class="notoc" style="font-weight: 300; color: #222222; text-align: center;">CHILDHOOD MEMORIES</h3>
         <h4 class="notoc" style="font-weight: 300; color: #7a7a7a; text-align: center;">JOHN WILIAM</h4>
@@ -167,9 +152,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif"
-      alt="" title=""
-      data-src="/assets/images/modules/masterslider/slider_7/5-2.jpg" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="" title="" data-src="/assets/images/modules/masterslider/slider_7/5-2.jpg" />
       <div class="ms-info">
         <h3 class="notoc" style="font-weight: 300; color: #222222; text-align: center;">CONSECTETUR ADIPISCING ELIT</h3>
         <h4 class="notoc" style="font-weight: 300; color: #7a7a7a; text-align: center;">JOHN WILIAM</h4>
@@ -177,9 +160,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif"
-      alt="" title=""
-      data-src="/assets/images/modules/masterslider/slider_7/6-3.jpg" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="" title="" data-src="/assets/images/modules/masterslider/slider_7/6-3.jpg" />
       <div class="ms-info">
         <h3 class="notoc" style="font-weight: 300; color: #222222; text-align: center;">SUSPENDISSE UT PULVINAR MAURIS</h3>
         <h4 class="notoc" style="font-weight: 300; color: #7a7a7a; text-align: center;">JOHN WILIAM</h4>
@@ -187,9 +168,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif"
-      alt="" title=""
-      data-src="/assets/images/modules/masterslider/slider_7/8.jpg" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="" title="" data-src="/assets/images/modules/masterslider/slider_7/8.jpg" />
       <div class="ms-info">
         <h3 class="notoc" style="font-weight: 300; color: #222222; text-align: center;">SED DAPIBUS SIT AMET FELIS</h3>
         <h4 class="notoc" style="font-weight: 300; color: #7a7a7a; text-align: center;">JOHN WILIAM</h4>
@@ -197,9 +176,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif"
-      alt="" title=""
-      data-src="/assets/images/modules/masterslider/slider_7/8-1.jpg" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="" title="" data-src="/assets/images/modules/masterslider/slider_7/8-1.jpg" />
       <div class="ms-info">
         <h3 class="notoc" style="font-weight: 300; color: #222222; text-align: center;">CHEETAHS ON THE EDGE</h3>
         <h4 class="notoc" style="font-weight: 300; color: #7a7a7a; text-align: center;">GREGORY WILSON</h4>
@@ -207,9 +184,7 @@ lorem:sentences[5]
       </div>
     </div>
     <div  class="ms-slide">
-      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif"
-      alt="" title=""
-      data-src="/assets/images/modules/masterslider/slider_7/1-2.jpg" />
+      <img src="/assets/themes/j1/modules/masterslider/css/blank.gif" alt="" title="" data-src="/assets/images/modules/masterslider/slider_7/1-2.jpg" />
       <div class="ms-info">
         <h3 class="notoc" style="font-weight: 300; color: #222222; text-align: center;">CONSECTETUR ADIPISCING ELIT</h3>
         <h4 class="notoc" style="font-weight: 300; color: #7a7a7a; text-align: center;">JOHN WILIAM</h4>
@@ -230,140 +205,107 @@ lorem:sentences[5]
 
 // Slider 6
 //--------------------------------------------------------------------
-var masterslider_6 = new MasterSlider();
+var masterslider_13eb = new MasterSlider();
 
 // slider controls
-masterslider_6.control(
-  "arrows", {
-    "autohide":               true,
-    "overVideo":              true
-});
-masterslider_6.control(
-  "slideinfo", {
-    "autohide":               false,
-    "overVideo":              true,
-    "dir":                    'h',
-    "align":                  'bottom',
-    "inset":                  false,
-    "margin":                 10
-});
+masterslider_13eb.control('arrows'     ,{ autohide:true, overVideo:true  });
+masterslider_13eb.control('slideinfo'  ,{ autohide:false, overVideo:true, dir:'h', align:'bottom',inset:false , margin:10   });
 // slider setup
-masterslider_6.setup(
-  "ms_00006", {
-    "width":  	              350,
-    "height":                 220,
-    "minHeight":              0,
-    "space":                  0,
-    "start":                  1,
-    "grabCursor":             true,
-    "swipe":                  true,
-    "mouse":                  true,
-    "keyboard":               false,
-    "layout":                 "partialview",
-    "wheel":                  false,
-    "autoplay":               false,
-    "instantStartLayers":     false,
-    "mobileBGVideo":          false,
-    "loop":                   true,
-    "shuffle":                false,
-    "preload":                0,
-    "heightLimit":            true,
-    "autoHeight":             false,
-    "smoothHeight":           true,
-    "endPause":               false,
-    "overPause":              true,
-    "fillMode":               "fill",
-    "centerControls":         true,
-    "startOnAppear":          false,
-    "layersMode":             "center",
-    "autofillTarget":         "",
-    "hideLayers":             false,
-    "fullscreenMargin":       0,
-    "speed":                  20,
-    "dir":                    "h",
-    "responsive":             true,
-    "tabletWidth":            768,
-    "tabletHeight":           null,
-    "phoneWidth":             480,
-    "phoneHeight":            null,
-    "sizingReference":        window,
-    "parallaxMode":           'swipe',
-    "view":                   "fadeBasic"
+masterslider_13eb.setup("MS62a70f2f113eb", {
+  width           : 350,
+  height          : 220,
+  minHeight       : 0,
+  space           : 0,
+  start           : 1,
+  grabCursor      : true,
+  swipe           : true,
+  mouse           : true,
+  keyboard        : false,
+  layout          : "partialview",
+  wheel           : false,
+  autoplay        : false,
+  instantStartLayers:false,
+  mobileBGVideo:false,
+  loop            : true,
+  shuffle         : false,
+  preload         : 0,
+  heightLimit     : true,
+  autoHeight      : false,
+  smoothHeight    : true,
+  endPause        : false,
+  overPause       : true,
+  fillMode        : "fill",
+  centerControls  : true,
+  startOnAppear   : false,
+  layersMode      : "center",
+  autofillTarget  : "",
+  hideLayers      : false,
+  fullscreenMargin: 0,
+  speed           : 20,
+  dir             : "h",
+  responsive      : true,
+  tabletWidth     : 768,
+  tabletHeight    : null,
+  phoneWidth      : 480,
+  phoneHeight    : null,
+  sizingReference : window,
+  parallaxMode    : 'swipe',
+  view            : "fadeBasic"
 });
-// window.masterslider_instances.push( masterslider_6 );
+// window.masterslider_instances.push( masterslider_13eb );
 
 
 // Slider 7
 //--------------------------------------------------------------------
-var masterslider_7 = new MasterSlider();
+var masterslider_4e59 = new MasterSlider();
 
 // slider controls
-masterslider_7.control(
-  "arrows", {
-    autohide:               true,
-    overVideo:              true
+masterslider_4e59.control('arrows'     ,{ autohide:true, overVideo:true  });
+masterslider_4e59.control('circletimer',{ autohide:false, overVideo:true, color:'#FFFFFF', radius:4, stroke:9   });
+masterslider_4e59.control('slideinfo'  ,{ autohide:false, overVideo:true, dir:'h', align:'bottom',inset:false , margin:20   });
+// slider setup
+masterslider_4e59.setup("MS62a73daae4e59", {
+  width           : 700,
+  height          : 350,
+  minHeight       : 0,
+  space           : 10,
+  start           : 1,
+  grabCursor      : true,
+  swipe           : true,
+  mouse           : true,
+  keyboard        : false,
+  layout          : "partialview",
+  wheel           : false,
+  autoplay        : false,
+          instantStartLayers:false,
+  mobileBGVideo:false,
+  loop            : true,
+  shuffle         : false,
+  preload         : 0,
+  heightLimit     : true,
+  autoHeight      : false,
+  smoothHeight    : true,
+  endPause        : false,
+  overPause       : true,
+  fillMode        : "fill",
+  centerControls  : true,
+  startOnAppear   : false,
+  layersMode      : "center",
+  autofillTarget  : "",
+  hideLayers      : false,
+  fullscreenMargin: 0,
+  speed           : 20,
+  dir             : "h",
+  responsive      : true,
+  tabletWidth     : 768,
+  tabletHeight    : null,
+  phoneWidth      : 480,
+  phoneHeight    : null,
+  sizingReference : window,
+  parallaxMode    : 'swipe',
+  view            : "fadeFlow"
 });
-masterslider_7.control(
-  "circletimer", {
-    autohide:               false,
-    overVideo:              true,
-    color:                  '#FFFFFF',
-    radius:                 4,
-    stroke:                 9
-});
-masterslider_7.control(
-  "slideinfo", {
-    autohide:               false,
-    overVideo:              true,
-    dir:                    'h',
-    align:                  'bottom',
-    inset:                  false,
-    margin:                 20
-});
-// slider setupa
-masterslider_7.setup(
-  "ms_00007", {
-    width:                  700,
-    height:                 350,
-    minHeight:              0,
-    space:                  0,
-    start:                  1,
-    grabCursor:             true,
-    swipe:                  true,
-    mouse:                  true,
-    keyboard:               false,
-    layout:                 "partialview",
-    wheel:                  false,
-    autoplay:               false,
-    instantStartLayers:     false,
-    mobileBGVideo:          false,
-    loop:                   true,
-    shuffle:                false,
-    preload:                0,
-    heightLimit:            true,
-    autoHeight:             false,
-    smoothHeight:           true,
-    endPause:               false,
-    overPause:              true,
-    fillMode:               "fill",
-    centerControls:         true,
-    startOnAppear:          false,
-    layersMode:             "center",
-    autofillTarget:         "",
-    hideLayers:             false,
-    fullscreenMargin:       0,
-    speed:                  20,
-    dir:                    "h",
-    responsive:             true,
-    tabletWidth:            768,
-    tabletHeight:           null,
-    phoneWidth:             480,
-    phoneHeight:            null,
-    sizingReference:        window,
-    parallaxMode:           'swipe',
-    view:                   "fadeBasic"
-});
-// window.masterslider_instances.push( masterslider_7 );
+// window.masterslider_instances.push( masterslider_4e59 );
 
 </script>
 ++++
