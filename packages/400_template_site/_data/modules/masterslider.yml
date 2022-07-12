@@ -25,7 +25,8 @@ description:
 settings:
 
   module_version:                       lite                                    # lite | pro
-  save_slider_config:                   true
+  save_slider_config:                   false
+  slider_manager:                       false
 
   # ----------------------------------------------------------------------------
   # Sliders
@@ -41,10 +42,6 @@ settings:
 
       id:                               ms_00001
       skin:                             light-3
-#     icon_family:                      MDI
-#     icon_class:                       false                                   # false | fas | fab (Fontawsesome only)
-#     icon_color:                       '#1E88E5'                               # md-blue-600
-#     icon_size:                        2x
 
       # ------------------------------------------------------------------------
       # Slider controls
@@ -551,6 +548,7 @@ settings:
         width:                          450
         height:                         220
         layout:                         partialview
+        loop:                           true                                    # required for partialview!
 
       # ------------------------------------------------------------------------
       # Slides
@@ -716,6 +714,7 @@ settings:
         width:                          700
         height:                         350
         layout:                         partialview
+        loop:                           true                                    # required for partialview!
 
       # ------------------------------------------------------------------------
       # Slides

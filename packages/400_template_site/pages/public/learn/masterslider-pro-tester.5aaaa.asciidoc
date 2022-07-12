@@ -217,13 +217,10 @@ lorem:sentences[5]
       "inset":                    false,
       "margin":                   10
   });
-
-
 	// slider setup
-
 	masterslider_6.setup(
     "ms_00006", {
-  		"width":                    450,
+  		"width":                    350,
   		"height":                   220,
   		"minHeight":                0,
   		"space":                    0,
@@ -263,7 +260,6 @@ lorem:sentences[5]
   		"parallaxMode":             "swipe",
   		"view":                     "fadeBasic"
 	});
-
 	window.masterslider_instances.push(masterslider_6);
 
 
