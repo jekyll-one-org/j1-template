@@ -126,13 +126,9 @@
       icon:                             briefcase-edit-outline
       dropdown:
 
-        - title:                         MS Lite
-          href:                          /pages/public/learn/masterslider-lite/
-          icon:                          star-check
-
-        - title:                         MS Pro
-          href:                          /pages/public/learn/masterslider-pro/
-          icon:                          star-check
+#       - title:                         MS Pro
+#         href:                          /pages/public/learn/masterslider-pro/
+#         icon:                          star-check
 
 #       - title:                         Plans
 #         href:                          /pages/public/learn/plan_tester/
@@ -260,6 +256,9 @@
 - item:                                 Tools
   sublevel:
 
+    - title:                            Master Slider
+      href:                             /pages/public/previewer/masterslider/
+      icon:                             gesture-swipe                           # export
     - title:                            Country Flags
       href:                             /pages/public/previewer/country_flags/
       icon:                             flag

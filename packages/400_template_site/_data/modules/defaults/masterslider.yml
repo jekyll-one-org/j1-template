@@ -26,7 +26,7 @@ defaults:
 
   xhr_data_path:                        /assets/data/masterslider
   module_version:                       lite                                    # lite | pro
-  save_slider_config:                   false
+  save_slider_config:                   true
   slider_manager:                       false
 
   icon_family:                          MDI
@@ -35,7 +35,8 @@ defaults:
   icon_size:                            2x
 
   skin:                                 default
-
+  lightbox:                             false
+  
 
   # ----------------------------------------------------------------------------
   # DEFAULT  settings

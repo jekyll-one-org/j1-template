@@ -55,10 +55,9 @@ resource_options:
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 
-////
 == Slider 1 - Simple Boxed
 
-lorem:sentences[5]
+lorem:sentences[3]
 
 // add placeholder for dynamic load (AJAX)
 //
@@ -67,7 +66,7 @@ masterslider::ms_00001[role="mt-3 mb-5"]
 
 == Slider 2 - Full Width
 
-lorem:sentences[5]
+lorem:sentences[3]
 
 // add placeholder for dynamic load (AJAX)
 //
@@ -76,15 +75,16 @@ masterslider::ms_00002[role="mt-3 mb-5"]
 
 == Slider 3 - SlideInfo (Boxed|Animated)
 
-lorem:sentences[5]
+lorem:sentences[3]
 
 // add placeholder for dynamic load (AJAX)
 //
 masterslider::ms_00003[role="mt-3 mb-5"]
 
+
 == Slider 4 - ThumbView (position right|vertical)
 
-lorem:sentences[5]
+lorem:sentences[2]
 
 // add placeholder for dynamic load (AJAX)
 //
@@ -93,28 +93,54 @@ masterslider::ms_00004[role="mt-3 mb-5"]
 
 == Slider 5 - ThumbView  (position bottom|horizontal)
 
-lorem:sentences[5]
+lorem:sentences[2]
 
 // add placeholder for dynamic load (AJAX)
 //
 masterslider::ms_00005[role="mt-3 mb-5"]
 
-////
 
+== Slider 6 - ThumbNail  (position bottom|horizontal)
 
-== Slider 6 - Blog articles (PartialView)
-
-lorem:sentences[5]
+lorem:sentences[2]
 
 // add placeholder for dynamic load (AJAX)
 //
 masterslider::ms_00006[role="mt-3 mb-5"]
 
 
-== Slider 7 - PartialView/MS-Info (info position below)
+== Slider 7 - ThumbNail  (position right|vertical)
 
-lorem:sentences[5]
+lorem:sentences[2]
 
 // add placeholder for dynamic load (AJAX)
 //
 masterslider::ms_00007[role="mt-3 mb-5"]
+
+
+== Slider 8 - Blog articles (PartialView)
+
+lorem:sentences[3]
+
+// add placeholder for dynamic load (AJAX)
+//
+masterslider::ms_00008[role="mt-3 mb-5"]
+
+
+== Slider 9 - PartialView/MS-Info (info position below)
+
+lorem:sentences[3]
+
+// add placeholder for dynamic load (AJAX)
+//
+masterslider::ms_00009[role="mt-3 mb-5"]
+
+
+
+++++
+<style>
+
+
+
+</style>
+++++

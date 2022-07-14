@@ -121,11 +121,11 @@
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
-  <!-- [INFO   ] [j1.attic.generator.html               ] [ attic enabled: {{attic_enabled}} ] -->
+  <!-- [INFO   ] [~/_includes/themes/j1/modules/attics/generator.html ] [ attic enabled: {{attic_enabled}} ] -->
 {% if attic and attic_enabled %}
-  <!-- [INFO   ] [j1.attic.generator.html               ] [ attic enabled for layout: {{page.layout}} ] -->
-  <!-- [INFO   ] [j1.attic.generator.html               ] [ place attic detected: {{attic}} ] -->
-  
+  <!-- [INFO   ] [~/_includes/themes/j1/modules/attics/generator.html ] [ attic enabled for layout: {{page.layout}} ] -->
+  <!-- [INFO   ] [~/_includes/themes/j1/modules/attics/generator.html ] [ place attic detected: {{attic}} ] -->
+
  {% comment %} Place attic detected
  ------------------------------------------------------------------------------- {% endcomment %}
   <div id="{{attic}}" class="attic notranslate">
@@ -150,7 +150,7 @@
 
   {% comment %} Fake attic used if NO attic is enabled for a layout
   ------------------------------------------------------------------------------ {% endcomment %}
-   <!-- [INFO   ] [j1.attic.generator.html               ] [ attic disabled for layout: {{page.layout}} ] -->
+   <!-- [INFO   ] [~/_includes/themes/j1/modules/attics/generator.html ] [ attic disabled for layout: {{page.layout}} ] -->
    <div id="no_attic" class="no-attic"></div>
 
 {% endif %}

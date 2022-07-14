@@ -218,7 +218,7 @@ j1.adapter.attic = (function (j1, window) {
                 if (bType === 'unsplash') {
                   var badgeHTML = ''
                       + '<div class="attic__badge">'
-                      + ' <a class="attic__badge_unsplash"'
+                      + ' <a class="attic__badge_unsplash link-no-decoration"'
                       + '  href="' +bLink+ '?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"'
                       + '  target="_blank"'
                       + '  rel="noopener noreferrer"'
@@ -227,7 +227,7 @@ j1.adapter.attic = (function (j1, window) {
                       + '    <svg xmlns="http://www.w3.org/2000/svg"'
                       + '	   class="attic__badge_unsplash_icon-size"'
                       + '      viewBox="0 0 32 32">'
-                      + '      <title>search unsplash</title>'
+//                    + '      <title>search unsplash</title>'
                       + '      <path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path>'
                       + '    </svg>'
                       + '  </span>'

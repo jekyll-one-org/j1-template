@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/modules/masterslider/css/theme/uno.css
+ # ~/assets/themes/j1/modules/masterslider/css/theme/uno.min.css
  # Provides MasterSlider styles for J1 Theme Uno
  #
  # Product/Info:
@@ -12,6 +12,10 @@
  # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
  # -----------------------------------------------------------------------------
 */
+
+/* .ms-tabs .ms-thumb-frame-selected {
+    background: #edeff1;
+} */
 
 .j1-ms-info {
   font-family: "Lato";
@@ -55,7 +59,7 @@ h2.j1-ms-info-headline {
 
 .j1-ms-info-description {
   text-align: center;
-  font-size: 18px !important;
+  font-size: 18px;
   font-weight: 300;
-  color: #f3f3f3;
+  /* color: #f3f3f3; */
 }

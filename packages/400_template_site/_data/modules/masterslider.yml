@@ -25,7 +25,7 @@ description:
 settings:
 
   module_version:                       lite                                    # lite | pro
-  save_slider_config:                   false
+  save_slider_config:                   true
   slider_manager:                       false
 
   # ----------------------------------------------------------------------------
@@ -42,12 +42,18 @@ settings:
 
       id:                               ms_00001
       skin:                             light-3
+      lightbox:                         true
 
       # ------------------------------------------------------------------------
       # Slider controls
       #
       controls:
-        # NO controls used for this slider
+
+        arrows:                                                                 # default settings
+          enabled:                      true
+
+        bullets:                                                                # default settings
+          enabled:                      true
 
       # ------------------------------------------------------------------------
       # Slider options
@@ -67,7 +73,7 @@ settings:
         - slide:
           alt:                          cat-1
           title:                        cat-1
-          foreground_image:             /assets/images/modules/masterslider/cats/cat-1.jpg
+          foreground_image:             /assets/images/modules/masterslider/slider_1/cat-1.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
           slideinfo:                    false
@@ -77,7 +83,7 @@ settings:
         - slide:
           alt:                          cat-2
           title:                        cat-2
-          foreground_image:             /assets/images/modules/masterslider/cats/cat-2.jpg
+          foreground_image:             /assets/images/modules/masterslider/slider_1/cat-2.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
           slideinfo:                    false
@@ -87,7 +93,7 @@ settings:
         - slide:
           alt:                          cat-3
           title:                        cat-3
-          foreground_image:             /assets/images/modules/masterslider/cats/cat-3.jpg
+          foreground_image:             /assets/images/modules/masterslider/slider_1/cat-3.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
           slideinfo:                    false
@@ -99,7 +105,7 @@ settings:
       enabled:                          true
 
       id:                               ms_00002
-      skin:                             default
+      lightbox:                         true
 
       # ------------------------------------------------------------------------
       # Slider controls
@@ -114,6 +120,7 @@ settings:
 
         width:                          1200
         height:                         600
+        layout:                         fullwidth                               # fullscreen
 
       # ------------------------------------------------------------------------
       # Slides
@@ -125,7 +132,7 @@ settings:
         - slide:
           alt:                          cities-1
           title:                        cities-1
-          foreground_image:             /assets/images/modules/masterslider/mega_cities/andreas-brucker.jpg
+          foreground_image:             /assets/images/modules/masterslider/slider_2/andreas-brucker.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
           slideinfo:                    false
@@ -135,7 +142,7 @@ settings:
         - slide:
           alt:                          cities-2
           title:                        cities-2
-          foreground_image:             /assets/images/modules/masterslider/mega_cities/denys-nevozhai-1.jpg
+          foreground_image:             /assets/images/modules/masterslider/slider_2/denys-nevozhai-1.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
           slideinfo:                    false
@@ -145,7 +152,7 @@ settings:
         - slide:
           alt:                          cities-3
           title:                        cities-3
-          foreground_image:             /assets/images/modules/masterslider/mega_cities/denys-nevozhai-2.jpg
+          foreground_image:             /assets/images/modules/masterslider/slider_2/denys-nevozhai-2.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
           slideinfo:                    false
@@ -265,7 +272,7 @@ settings:
 
 
     # --------------------------------------------------------------------------
-    # Slider 4 - ThumbView (position right|vertical)
+    # Slider 4 - ThumbImage (position right|vertical)
     #
     - slider:
       enabled:                          true
@@ -277,9 +284,6 @@ settings:
       # Slider controls
       #
       controls:
-
-        arrows:                                                                 # default settings
-          enabled:                      true
 
         bullets:                                                                # default settings
           enabled:                      true
@@ -380,7 +384,7 @@ settings:
 
 
     # --------------------------------------------------------------------------
-    # Slider 5 - ThumbView (position bottom|horizontal)
+    # Slider 5 - ThumbImage (position bottom|horizontal)
     #
     - slider:
       enabled:                          true
@@ -392,9 +396,6 @@ settings:
       # Slider controls
       #
       controls:
-
-        arrows:                                                                 # default settings
-          enabled:                      true
 
         bullets:                                                                # default settings
           enabled:                      true
@@ -521,14 +522,244 @@ settings:
           thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-table-140x80.jpg"
           slideinfo:                    false
 
-
     # --------------------------------------------------------------------------
-    # Slider 6 - Blog articles (PartialView)
+    # Slider 6 - ThumbTabs (position bottom|horizontal)
     #
     - slider:
       enabled:                          true
 
       id:                               ms_00006
+      skin:                             light-3
+
+      # ------------------------------------------------------------------------
+      # Slider controls
+      #
+      controls:
+
+        thumblist:
+          enabled:                      true
+          width:                        300
+          height:                       160
+          autohide:                     false
+          dir:                          h
+          align:                        bottom
+          type:                         tabs
+          margin:                       -12
+          space:                        0
+          hideUnder:                    400
+
+      # ------------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+
+        width:                          1200
+        height:                         530
+        layout:                         fullwidth
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        # slide 1
+        #
+        - slide:
+          alt:                          Kitchen Design Ideas
+          title:                        Kitchen Design Ideas
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876387431_d86867a3d9_b.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_tab: >
+                                        <strong>Kitchen Design Ideas</strong> <br>
+                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
+                                        Slider with Horizontal Tabs
+
+          slideinfo:                    false
+
+        # slide 2
+        #
+        - slide:
+          alt:                          Modern Wall Design
+          title:                        Modern Wall Design
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876388511_d618d53455_b.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_tab: >
+                                        <strong>Modern Wall Design</strong> <br>
+                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
+                                        Slider with Horizontal Tabs
+
+          slideinfo:                    false
+
+        # slide 3
+        #
+        - slide:
+          alt:                          Banquette Seating Kitchen
+          title:                        Banquette Seating Kitchen
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876389463_db27a377e1_b.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_tab: >
+                                        <strong>Banquette Seating Kitchen</strong> <br>
+                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
+                                        Slider with Horizontal Tabs
+
+          slideinfo:                    false
+
+        # slide 4
+        #
+        - slide:
+          alt:                          Harmony in Interior Design
+          title:                        Harmony in Interior Design
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876390339_2e4dd9dbbb_b.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_tab: >
+                                        <strong>Harmony in Interior Design</strong> <br>
+                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
+                                        Slider with Horizontal Tabs
+
+          slideinfo:                    false
+
+        # slide 5
+        #
+        - slide:
+          alt:                          Make Your Workspace Better
+          title:                        Make Your Workspace Better
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876390339_2e4dd9dbbb_b.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_tab: >
+                                        <strong>Make Your Workspace Better</strong> <br>
+                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
+                                        Slider with Horizontal Tabs
+
+          slideinfo:                    false
+
+
+    # --------------------------------------------------------------------------
+    # Slider 7 - ThumbTabs (position right|vertical)
+    #
+    - slider:
+      enabled:                          true
+
+      id:                               ms_00007
+
+      # ------------------------------------------------------------------------
+      # Slider controls
+      #
+      controls:
+
+        thumblist:
+          enabled:                      true
+          width:                        240
+          height:                       190
+          autohide:                     false
+          dir:                          v
+          align:                        right
+          type:                         tabs
+          margin:                       -12
+          space:                        0
+          hideUnder:                    700
+
+      # ------------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+
+        width:                            1000
+        height:                           500
+        instantStartLayers:               true
+        loop:                             true
+        speed:                            15
+        view:                             fadeBasic
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        # slide 1
+        #
+        - slide:
+          alt:                          Kitchen Design Ideas
+          title:                        Kitchen Design Ideas
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876387431_d86867a3d9_b.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+
+          thumbinfo:
+            title:                      Kitchen Design Ideas
+            tagline:                    false
+            description: >
+                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
+                                        Slider with Vertical Tabs
+          thumb_tab: >
+                                        <strong>Kitchen Design Ideas</strong> <br>
+                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
+                                        Slider with Vertical Tabs
+
+          slideinfo:                    false
+
+        # slide 2
+        #
+        - slide:
+          alt:                          Modern Wall Design
+          title:                        Modern Wall Design
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876388511_d618d53455_b.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_tab: >
+                                        <strong>Modern Wall Design</strong> <br>
+                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
+                                        Slider with Vertical Tabs
+
+          slideinfo:                    false
+
+        # slide 3
+        #
+        - slide:
+          alt:                          Banquette Seating Kitchen
+          title:                        Banquette Seating Kitchen
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876389463_db27a377e1_b.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_tab: >
+                                        <strong>Banquette Seating Kitchen</strong> <br>
+                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
+                                        Slider with Vertical Tabs
+
+          slideinfo:                    false
+
+        # slide 4
+        #
+        - slide:
+          alt:                          Harmony in Interior Design
+          title:                        Harmony in Interior Design
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876390339_2e4dd9dbbb_b.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_tab: >
+                                        <strong>Harmony in Interior Design</strong> <br>
+                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
+                                        Slider with Vertical Tabs
+
+          slideinfo:                    false
+
+        # slide 5
+        #
+        - slide:
+          alt:                          Make Your Workspace Better
+          title:                        Make Your Workspace Better
+          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876390339_2e4dd9dbbb_b.jpg"
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_tab: >
+                                        <strong>Make Your Workspace Better</strong> <br>
+                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
+                                        Slider with Vertical Tabs
+
+          slideinfo:                    false
+
+
+    # --------------------------------------------------------------------------
+    # Slider 8 - Blog articles (PartialView)
+    #
+    - slider:
+      enabled:                          true
+
+      id:                               ms_00008
       skin:                             default
 
       # ------------------------------------------------------------------------
@@ -685,12 +916,12 @@ settings:
 
 
     # --------------------------------------------------------------------------
-    # Slider 7 - PartialView/MS-Info (info position below)
+    # Slider 9 - PartialView/MS-Info (info position below)
     #
     - slider:
       enabled:                          true
 
-      id:                               ms_00007
+      id:                               ms_00009
       skin:                             default
 
       # ------------------------------------------------------------------------

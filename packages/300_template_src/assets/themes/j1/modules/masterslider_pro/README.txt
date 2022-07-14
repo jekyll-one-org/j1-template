@@ -1,24 +1,28 @@
-=== Master Slider - Responsive Touch Slider ===
-Contributors: averta, averta_support
-Donate link: http://averta.net/
-License: GPLv3
-License URI: http://www.gnu.org/licenses/gpl.html
-Tags: slider, image slider, wordpress slider, video slider, best slider plugin, slideshow, swipe, touch slider, content slider, SEO, vertical slider, HTML5 slider, hardware accelerate, animation, mobile slider, iOS, android, youtube slider, horizontal slider, responsive slider, fullscreen slider, post slider, photo slider, online album, mobile slider, WordPress slider,wpml, ,ultisite, wistia, woocommerce, product slider, woocommerce slider, portfolio, gallery, lightweight slider
-Requires PHP: 5.4
-Requires at least: 5.0
-Tested up to: 5.9.0
-Stable tag: 3.8.1
+= Master Slider - Responsive Touch Slider
 
-Build SEO friendly sliders fast and easy with Master Slider. The most advanced responsive HTML5 WordPress slider plugin, with touch swipe navigation that works smoothly on desktop and devices.
+Contributors:                 averta, averta_support
+Donate link:                  http://averta.net/
+License:                      GPLv3
+License URI:                  http://www.gnu.org/licenses/gpl.html
+Tags:                         slider, image slider, wordpress slider, video slider, best slider plugin,
+                              slideshow, swipe, touch slider, content slider, SEO, vertical slider, HTML5 slider, hardware accelerate, animation, mobile slider, iOS, android, youtube slider, horizontal slider, responsive slider, fullscreen slider, post slider, photo slider, online album, mobile slider, WordPress slider,wpml, ,ultisite, wistia, woocommerce, product slider, woocommerce slider, portfolio, gallery, lightweight slider
+Requires                      PHP: 5.4
+Requires at least:            5.0
+Tested up to:                 5.9.0
+Stable tag:                   3.8.1
 
-== Description ==
+Build SEO friendly sliders fast and easy with Master Slider. The most
+advanced responsive HTML5 WordPress slider plugin, with touch swipe navigation
+that works smoothly on desktop and devices.
+
+== Description
 
 >[Demos](http://avt.li/mswftem "Live demos of Master Slider free version") | [Features](http://avt.li/mswfea "All features") | [Documentation](http://avt.li/mswfdoc "Master Slider documentation") | [All Video tutorials](http://avt.li/msfvids "Watch all video tutorials") | [Support](http://wordpress.org/support/plugin/master-slider "Free support")
 
 [youtube https://www.youtube.com/watch?v=nyjpGEHwOn8]
 
 
-= Overview =
+== Overview
 
 Master Slider is a free SEO friendly, responsive image and video slider that truly works on all major devices, and it has super smooth hardware accelerated transitions. It supports touch navigation with pure swipe gesture that you have never experienced before.
 With our 8 Starter Samples, creating slideshows has never been so fast and enjoyable!
@@ -30,7 +34,7 @@ Master Slider is built using WordPress best practices both on the front and the 
 
 
 
-= Features =
+== Features
 
 • The Most SEO Friendly Slider Plugin in Market!
 • Easy to Use Interface
@@ -72,7 +76,7 @@ Master Slider is built using WordPress best practices both on the front and the 
 * [Full List of Features](http://masterslider.com/wordpress/free/?mslf)
 
 
-= Compatible Browsers =
+== Compatible Browsers
 
 * IE8+
 * Firefox
@@ -83,7 +87,7 @@ Master Slider is built using WordPress best practices both on the front and the 
 * Android browser
 
 
-= Master Slider Pro Features =
+== Master Slider Pro Features
 
 * Full-width, Full-screen and Boxed Layout
 * Post Slider - with Advanced Filtering Tool (Any Post-type)
@@ -127,19 +131,19 @@ Master Slider is built using WordPress best practices both on the front and the 
 Upgrade to [Pro Version](http://masterslider.com/purchase/?mslf)
 
 
-= Demo for PRO Version =
+== Demo for PRO Version
 
 * [Master Slider Demo Sliders](http://avt.li/mswptem)
 * [Master Slider Features](http://avt.li/mswpfea)
 * [Master Slider Manual](http://avt.li/mswpdoc)
 
 
-= Documentations =
+== Documentations
 
 If you have any question about working with "Master Slider", you can take a look at [online documentations](http://masterslider.com/doc/wp/free/)
 
 
-= Translation =
+== Translation
 
 French. Special thanks to [Thomas](http://www.thomasgrimaud.fr)
 Brazilian Portuguese. Special thanks to [WebPress](http://www.themeforest.net/user/WebPress-CodeLayer)
@@ -148,9 +152,9 @@ Serbian. Special thanks to [Borisa Djuraskovic](http://www.webhostinghub.com)
 You can start translating Master Slider by our [online translation service](http://translate.averta.net/projects/masterslider/free-version).
 
 
-== Installation ==
+== Installation
 
-= Minimum Requirements =
+= Minimum Requirements
 
 * WordPress 4.6 or greater
 * PHP version 5.4 or greater
@@ -160,14 +164,14 @@ You can start translating Master Slider by our [online translation service](http
 **This section describes how to install the plugin and get it working**
 
 
-= Automatic installation (easiest way) =
+=== Automatic installation (easiest way)
 
 To do an automatic install of Master Slider, log in to your WordPress dashboard, navigate to the Plugins menu and click Add New.
 
 In the search field type "Master Slider" and click Search Plugins. Once you have found it you can install it by simply clicking "Install Now".
 
 
-= Manual installation =
+=== Manual installation
 
 **Uploading in WordPress Dashboard**
 
@@ -189,38 +193,38 @@ The WordPress codex contains [instructions on how to install a WordPress plugin]
 
 
 
-= Updating =
+== Updating
 
 You can use automatic update to update the plugin safely.
 
 
-== Frequently Asked Questions ==
+== Frequently Asked Questions
 
-= Where can I find Master Slider documentation and user guides =
+== Where can I find Master Slider documentation and user guides =
 
 If you have any question about working with "Master Slider", you can take a look at [online documentations](http://docs.averta.net/display/MSWPF/)
 
-= When I preview the slider in admin page everything looks fine, but when I add it to my website the slider looks different. How can I fix that? =
+== When I preview the slider in admin page everything looks fine, but when I add it to my website the slider looks different. How can I fix that? =
 It is a known issue with few poor coded themes that can be easily fixed. In fact, some styles in your theme conflicts with the styles in Master Slider. You can simply submit a ticket in support section, our support agents will advice you how to fix the conflicts.
 
-= Will Master Slider work with my theme? =
+== Will Master Slider work with my theme? =
 Master Slider works with any theme, including the default WordPress themes.
 
-= Can you recommend a free theme that is optimized for Master Slider =
+== Can you recommend a free theme that is optimized for Master Slider =
 Fortunately there are plenty of options out there, including the default WordPress themes too. But the one that we recommend most is [Phlox theme](http://avt.li/msphpp "Phlox theme - Free Minimal and Responsive WordPress Theme") which is a free, versatile and optimized theme for Master Slider.
 
-= I added text to slide (slide info), but it does not appear in slider =
+== I added text to slide (slide info), but it does not appear in slider =
 You need to add "slide info" control too. To do that, go for editing slider, under "slider controls" tab, select and add "slide info" control
 
-= After I've removed a slider, it still appears on my website =
+== After I've removed a slider, it still appears on my website =
 Maybe you have a cache plugin enabled on your website or Master Slider's built-in cache is enabled.
 
-= Where can I report bugs? =
+== Where can I report bugs? =
 Bugs can be reported in our [support forums](http://wordpress.org/tags/master-slider).
 
 
 
-== Screenshots ==
+== Screenshots
 
 1. Slider without thumbnail (light skin 1)
 2. Slider with thumbnail on bottom (light skin 1)
@@ -235,7 +239,7 @@ Bugs can be reported in our [support forums](http://wordpress.org/tags/master-sl
 11. Flexible slider controls
 
 
-== Changelog ==
+== Changelog
 
 = 3.8.1 =
 
@@ -502,7 +506,7 @@ Bugs can be reported in our [support forums](http://wordpress.org/tags/master-sl
 
 
 
-== Upgrade Notice ==
+== Upgrade Notice
 
 = Version 3.7.10/ (11.10.2021) =
 - [Fixed]: An issue which caused controls `autohide` option didn't work.

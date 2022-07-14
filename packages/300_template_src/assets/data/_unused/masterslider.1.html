@@ -53,6 +53,12 @@ module_version:                 {{module_version | debug}}
 {% assign slider_options      = slider_defaults | merge: slider_settings %}
 {% assign sliders             = slider_settings.sliders %}
 {% assign module_version      = slider_options.module_version %}
+{% assign lightbox_enabled    = slider_options.enable_lightbox %}
+{% assign partialview_enabled = 'false' %}
+
+{% if slider.options.layout == 'partialview' %}
+  {% assign partialview_enabled = 'true' %}
+{% endif %}
 
 
 {% comment %} Set permalink setting
@@ -90,8 +96,6 @@ module_version:                 {{module_version | debug}}
   {% comment %} Set base classes for a slider ('master-slider')
   ------------------------------------------------------------------------------ {% endcomment %}
 
-  {% assign lightbox  = slider.lightbox %}
-
   {% if slider.skin %}
     {% capture skin %}ms-skin-{{slider.skin}}{% endcapture %}
   {% else %}
@@ -101,7 +105,7 @@ module_version:                 {{module_version | debug}}
   <!-- [INFO   ] [~/assets/data/slider.html                     ] [detect ms module version] -->
   {% if module_version == 'lite' %}
   <!-- [INFO   ] [~/assets/data/slider.html                     ] [ms module version detected: {{module_version}}] -->
-    {% if slider.options.layout == 'partialview' %}
+    {% if partialview_enabled %}
       {% capture partialview %}ms-layout-partialview{% endcapture %}
     {% else %}
       {% capture partialview %} {% endcapture %}
@@ -146,7 +150,7 @@ module_version:                 {{module_version | debug}}
     {% for slide in slider.slides %}
     <div id="ms-slide-{{slider.id}}-{{forloop.index}}" class="ms-slide">
 
-      {% if slider.lightbox and slider.options.layout != 'partialview' %}
+      {% if lightbox_enabled and partialview_enabled == false %}
       <div class="ms-nav-lightbox icon-flex" style="display: block;">
         <a id="lightbox-{{slider.id}}" class="link-no-decoration icon-wrapper-2x"
           href="{{slide.foreground_image}}"

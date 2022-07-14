@@ -37,8 +37,6 @@ regenerate:                             true
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign slider_options      = slider_defaults | merge: slider_settings %}
-{% assign lightbox_enabled    = slider_options.enable_lightbox %}
-{% assign slider_manager      = slider_options.slider_manager %}
 {% assign save_slider_config  = slider_options.save_slider_config %}
 {% assign module_version      = slider_options.module_version %}
 {% assign sliders             = slider_settings.sliders %}
@@ -72,12 +70,9 @@ j1.adapter.masterslider = (function (j1, window) {
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment       = '{{environment}}';
   var moduleVersion     = '{{module_version}}';
-  var sliderManager     = j1.stringToBoolean('{{slider_manager}}');
-  var lightboxEnabled   = j1.stringToBoolean('{{lightbox_enabled}}');
   var saveSliderConfig  = j1.stringToBoolean('{{save_slider_config}}');
   var sliderOptions     = {};
   var sliders           = {};
-  var newline           = '\n';
   var _this;
   var logger;
   var logText;
@@ -97,11 +92,15 @@ j1.adapter.masterslider = (function (j1, window) {
     init: function (options) {
       var msSliderManager;
 
-      if (sliderManager) {
-        msSliderManager             = document.createElement('script');
-        msSliderManager.id          = 'ms-slider-manager';
-        msSliderManager.innerHTML   = '';
-      }
+      msSliderManager             = document.createElement('script');
+      msSliderManager.id          = 'ms-slider-manager';
+      msSliderManager.innerHTML   = `
+// initialize slider controls and setup
+//------------------------------------------------------------------------------
+// $(document).ready(function() {
+//  var dependencies_met_data_loaded = setInterval(function() {
+//    if (j1.getState() == 'finished') {
+`;
 
       // used for later access
       j1.masterslider           = {};
@@ -151,11 +150,14 @@ j1.adapter.masterslider = (function (j1, window) {
         if (_this.getState() == 'sliders_initialized' && j1.getState() == 'finished') {
             _this.setState('finished');
 
-            // Currently NOT used (experimental)
-            // _this.registerEvents(j1.masterslider.instances);
+            // msSliderManager.innerHTML +=  `
+            // clearInterval(dependencies_met_data_loaded);
+            // } // END dependencies_met_j1_finished
+            // }, 25);
+            // `
+            // msSliderManager.innerHTML +=  '   });'
 
-            if (sliderManager) document.body.appendChild(msSliderManager);
-
+            document.body.appendChild(msSliderManager);
             logger.info('\n' + 'initializing module finished');
             clearInterval(dependencies_met_module_finished);
         } // END dependencies_met_j1_finished
@@ -206,21 +208,19 @@ j1.adapter.masterslider = (function (j1, window) {
     // -------------------------------------------------------------------------
     createSliderInstances: function (sliders, sliderManager) {
       var msSliderManager = sliderManager;
+      var newline         = '\n';
       var numSliders      = Object.keys(sliders).length;
 
+      msSliderManager.innerHTML += newline;
       var i=0;
       Object.keys(sliders).forEach(function(key) {
         var msSliderManagerItem;
         i++;
         console.debug('create slider instance on id: ' + sliders[key].id);
 
-        if (sliderManager) {
-          msSliderManagerItem        =  'var masterslider_' + i + ' = new MasterSlider();' + '\n';
-          msSliderManager.innerHTML +=  msSliderManagerItem;
-        } else {
-          _this["masterslider_" + i] = new MasterSlider();
-        }
-
+        msSliderManagerItem        =  '\n' + 'var masterslider_' + i + ' = new MasterSlider();';
+        msSliderManager.innerHTML +=  '        ' + msSliderManagerItem;
+//      _this["masterslider_" + i] = new MasterSlider();
       });
 
       console.debug('slider instances created: ' + numSliders);
@@ -245,7 +245,7 @@ j1.adapter.masterslider = (function (j1, window) {
 
         logger.info('\n' + 'generate slider controls');
 
-        if (sliderManager) msSliderManager.innerHTML += newline;
+        msSliderManager.innerHTML += newline;
         Object.keys(slider).forEach(function(key) {
           i++;                                                                  // instance index
           index = parseInt(key);                                                // object index
@@ -260,13 +260,10 @@ j1.adapter.masterslider = (function (j1, window) {
                 // remove J1 config setting
                 delete control['enabled'];
 
-                if (sliderManager) {
-                  msSliderManagerItem        = '    ' + 'masterslider_' + i + '.control(' + '\'' + key + '\'' +  ', ' + JSON.stringify(control) + ');'
-                  msSliderManager.innerHTML +=  msSliderManagerItem + '\n';
-                } else {
-                  _this["masterslider_" + i].control(key, control);
-                }
+                msSliderManagerItem        = '    ' + 'masterslider_' + i + '.control(' + '\'' + key + '\'' +  ', ' + JSON.stringify(control) + ');'
+                msSliderManager.innerHTML +=  msSliderManagerItem + '\n';
 
+                // _this["masterslider_" + i].control(key, control);
               });
             } else {
               logger.info('\n' + 'no slider controls found on id: ' + slider[key].id);
@@ -287,7 +284,7 @@ j1.adapter.masterslider = (function (j1, window) {
 
         logger.info('\n' + 'generate slider setup');
 
-        if (sliderManager) msSliderManager.innerHTML += newline;
+        msSliderManager.innerHTML += newline;
         var i=0;
         Object.keys(slider).forEach(function(key) {
           var msSliderManagerItem = '\n';
@@ -296,14 +293,23 @@ j1.adapter.masterslider = (function (j1, window) {
           if (slider[index].enabled) {
             logger.info('\n' + 'slider is being initialized on id: ' + slider[key].id);
 
-            setup = $.extend({}, settings.options, slider[index].options);
+            setup                      = $.extend({}, settings.options, slider[index].options);
+            msSliderManagerItem        = '    ' + 'masterslider_' + i + '.setup(' + '\'' + slider[key].id + '\'' + ', ' + JSON.stringify(setup) + ');'
+            msSliderManager.innerHTML +=  msSliderManagerItem + '\n';
 
-            if (sliderManager) {
-              msSliderManagerItem        = '    ' + 'masterslider_' + i + '.setup(' + '\'' + slider[key].id + '\'' + ', ' + JSON.stringify(setup) + ');'
-              msSliderManager.innerHTML +=  msSliderManagerItem + '\n';
-            } else {
-              _this["masterslider_" + i].setup(slider[key].id, setup);
-            }
+            // _this["masterslider_" + i].setup(slider[key].id, setup);
+
+
+            var myslider = 'masterslider_' + i;
+            myslider.api.addEventListener(MSSliderEvent.CHANGE_START , function() {
+              // var currentSlide = masterslider_1.api.view.currentSlide;
+              var currentSlide = slider.api.view.currentSlide;
+
+              // dispatches when the slider's current slide change starts.
+              // logger.info('\n' + 'slider is being changed on id: ' + slider[key].id);
+              console.log('slider is being changed on id: ');
+            });
+
 
             if (save_config) {
               // save slider config for later access
@@ -312,9 +318,7 @@ j1.adapter.masterslider = (function (j1, window) {
           } else {
             logger.debug('\n' + 'slider found disabled on id: ' + slider[key].id);
           }
-
         });
-
         _this.setState('sliders_initialized');
         logger.debug('\n' + 'state: ' + _this.getState());
         logger.info('\n' + 'initializing sliders finished');
@@ -369,65 +373,6 @@ j1.adapter.masterslider = (function (j1, window) {
     setState: function (stat) {
       _this.state = stat;
     }, // END setState
-
-    // -------------------------------------------------------------------------
-    // registerEvents()
-    // Currently NOT used (experimental)
-    // -------------------------------------------------------------------------
-    registerEvents: function (slider) {
-      var index;
-
-      var i=0;
-      Object.keys(slider).forEach(function(key) {
-        i++;                                                                    // instance index
-        index = parseInt(key);                                                  // object index
-
-          logger.debug('\n' + 'slider events are being initialized on id: ' + index);
-
-          slider[index].api.addEventListener(MSSliderEvent.WAITING, function(e) {
-          var brutze = e;
-
-          // var currentSlide = masterslider_1.api.view.currentSlide;
-          // var currentSlide = currSlider.api.view.currentSlide;
-
-          var controller      = e.target.view.controller;
-          var controllerValue = e.target.view.controller.value;
-          var isLoading       = e.target.currentSlide.$loading.length;
-
-          // dispatches when the slider's current slide change starts.
-          if (!isLoading) {
-            logger.info('\n' + 'slider is loaded' );
-          } else {
-            logger.info('\n' + 'slider is being loaded: ' + e.target.currentSlide.bg_src);
-          }
-
-        });
-
-
-        // var currSlider = 'masterslider_1';
-        // currSlider.api.addEventListener(MSSliderEvent.CHANGE_START, function(currSlider) {
-        //   // var currentSlide = masterslider_1.api.view.currentSlide;
-        //   var currentSlide = currSlider.api.view.currentSlide;
-        //
-        //   // dispatches when the slider's current slide change starts.
-        //   logger.info('\n' + 'slider is being changed on id: ');
-        // });
-
-        // var selector = "#" + slider[key].id;
-        // if ($(selector).length) {
-        //   $(document).on("click", selector, function(e) {
-        //     // e.preventDefault();
-        //
-        //     var elm     = e.currentTarget.attributes[0];
-        //     var img_src = e.target.currentSrc;
-        //     var id      = e.handleObj.selector;
-        //
-        //     logger.info('\n' + 'click event on id: ' + e.currentTarget.id);
-        //   });
-        // }
-
-      });
-    }, // END registerEvents
 
     // -------------------------------------------------------------------------
     // getState()
