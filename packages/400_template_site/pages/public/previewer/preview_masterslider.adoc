@@ -235,8 +235,9 @@ settings:
       #
       options:
 
-        width:                          1200
-        height:                         600
+        height:                         500
+        fillMode:                       fill
+        layersMode:                     center
         layout:                         fullwidth
 
       # ------------------------------------------------------------------------

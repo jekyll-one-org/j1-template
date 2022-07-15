@@ -122,8 +122,9 @@ settings:
       #
       options:
 
-        width:                          1200
-        height:                         600
+        height:                         500
+        fillMode:                       fill                                    # default: fill | fit | stretch | center | tile
+        layersMode:                     center                                  # default: center | full
         layout:                         fullwidth                               # fullscreen
 
       # ------------------------------------------------------------------------
