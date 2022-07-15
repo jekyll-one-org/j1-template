@@ -8,7 +8,8 @@ exclude_from_search:                    true
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/assets/data/masterslider.html
- # Liquid procedure to generate HTML portion for all Master Sliders to be loaded
+ # Liquid procedure to generate the HTML portion for all Master Sliders
+ # configured
  #
  # Product/Info:
  # https://jekyll.one
@@ -46,23 +47,21 @@ exclude_from_search:                    true
 {% assign slider_settings     = modules.masterslider.settings %}
 
 {% comment %} Set config options
-slider_settings.module_version: {{slider_settings.module_version | debug}}
-slider_options.module_version:  {{slider_options.module_version | debug}}
-module_version:                 {{module_version | debug}}
+module_version:               {{module_version | debug}}
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign slider_options      = slider_defaults | merge: slider_settings %}
 {% assign sliders             = slider_settings.sliders %}
 {% assign module_version      = slider_options.module_version %}
 
 
-{% comment %} Set permalink setting
+{% comment %} Configure permalink settings
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign ext = '' %}
 {% if site.permalink == 'none' %}
   {% assign ext = '.html' %}
 {% endif %}
 
-{% comment %} unused
+{% comment %} Currently NOT used
 --------------------------------------------------------------------------------
 {% include {{select_color}} color=slider_icon_color fallback="#9E9E9E" %}
 {% assign slider_icon_color = color %}
@@ -76,14 +75,14 @@ module_version:                 {{module_version | debug}}
   {% assign production = true %}
 {% endif %}
 
-<!-- [INFO   ] [~/assets/data/slider.html                     ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
+<!-- [INFO   ] [~/assets/data/masterslider.html               ]  [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />
 </head>
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
-<!-- [INFO   ] [~/assets/data/slider.html                     ] [collect all slider items] -->
+<!-- [INFO   ] [~/assets/data/masterslider.html               ]  [collect all slider items] -->
 {% for slider in sliders %}
   {% if slider.enabled %}
 
@@ -98,19 +97,19 @@ module_version:                 {{module_version | debug}}
     {% capture skin %}ms-skin-default{% endcapture %}
   {% endif %}
 
-  <!-- [INFO   ] [~/assets/data/slider.html                     ] [detect ms module version] -->
+  <!-- [INFO   ] [~/assets/data/masterslider.html               ]  [detect ms module version] -->
   {% if module_version == 'lite' %}
-  <!-- [INFO   ] [~/assets/data/slider.html                     ] [ms module version detected: {{module_version}}] -->
+  <!-- [INFO   ] [~/assets/data/masterslider.html               ]  [ms module version detected: {{module_version}}] -->
     {% if slider.options.layout == 'partialview' %}
       {% capture partialview %}ms-layout-partialview{% endcapture %}
     {% else %}
       {% capture partialview %} {% endcapture %}
     {% endif %}
   {% elsif module_version == 'pro' %}
-    <!-- [INFO   ] [~/assets/data/slider.html                     ] [ms module version detected: {{module_version}}] -->
+    <!-- [INFO   ] [~/assets/data/masterslider.html               ]  [ms module version detected: {{module_version}}] -->
     {% capture partialview %}{% endcapture %}
   {% else %}
-    <!-- [WARN   ] [~/assets/data/slider.html                     ] [ms module version NOT detected, use FALLBACK] -->
+    <!-- [WARN   ] [~/assets/data/masterslider.html               ]  [ms module version NOT detected, use FALLBACK] -->
     {% capture partialview %}{% endcapture %}
   {% endif %}
 
@@ -137,7 +136,7 @@ module_version:                 {{module_version | debug}}
   {% comment %} Collect slides
   ------------------------------------------------------------------------------ {% endcomment %}
 
-  <!-- [INFO   ] [~/assets/data/slider.html                     ] [collect slider {{slider.id}}] -->
+  <!-- [INFO   ] [~/assets/data/masterslider.html               ]  [collect slider {{slider.id}}] -->
   <!-- MasterSlider Main -->
   <!-- div id="{{slider.id}}" class="master-slider {{skin}} {{partialview}}" -->
   <!-- div id="{{slider.id}}" class="master-slider {{skin}}" -->
@@ -146,6 +145,8 @@ module_version:                 {{module_version | debug}}
     {% for slide in slider.slides %}
     <div id="ms-slide-{{slider.id}}-{{forloop.index}}" class="ms-slide">
 
+      {% comment %} Place Lighbox data if enabled
+      -------------------------------------------------------------------------- {% endcomment %}
       {% if slider.lightbox and slider.options.layout != 'partialview' %}
       <div class="ms-nav-lightbox icon-flex" style="display: block;">
         <a id="lightbox-{{slider.id}}" class="link-no-decoration icon-wrapper-2x"
@@ -157,6 +158,8 @@ module_version:                 {{module_version | debug}}
       </div>
       {% endif %}
 
+      {% comment %} Place images
+      -------------------------------------------------------------------------- {% endcomment %}
       <img
         src="{{slide.background_image}}"
         alt="{{slide.alt}}" title="{{slide.title}}"
@@ -170,14 +173,32 @@ module_version:                 {{module_version | debug}}
       />
       {% endif %}
 
-      {% if slide.thumb_tab %}
+      {% comment %} Place Thumb Info
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% assign thumbinfo = slide.thumbinfo %}
+      {% if thumbinfo %}
+        {% assign thumbinfo = true %}
+      {% else %}
+        {% assign thumbinfo = false %}
+      {% endif %}
+
+      {% if thumbinfo %}
       <div class="ms-thumb">
-        <p>
-          {{slide.thumb_tab}}
-        </p>
+        {% if slide.thumbinfo.title %}
+        <h2 class="notoc j1-ms-thumb-title">{{slide.thumbinfo.title}}</h2>
+        {% endif %}
+        {% if slide.thumbinfo.tagline %}
+        <h3 class="notoc j1-ms-thumb-tagline">{{slide.thumbinfo.tagline}}</h3>
+        {% endif %}
+        {% if slide.thumbinfo.description %}
+        <p class="j1-ms-thumb-description">{{slide.thumbinfo.description}}</p>
+        {% endif %}
       </div>
       {% endif %}
 
+
+      {% comment %} Place Slide Info
+      -------------------------------------------------------------------------- {% endcomment %}
       {% assign slideinfo = slide.slideinfo %}
       {% if slideinfo %}
         {% assign slideinfo = true %}
@@ -185,8 +206,6 @@ module_version:                 {{module_version | debug}}
         {% assign slideinfo = false %}
       {% endif %}
 
-      {% comment %} Collect slide-info
-      -------------------------------------------------------------------------- {% endcomment %}
       {% if slideinfo %}
       <!-- MasterSlider Info -->
       <div class="ms-info">
@@ -283,11 +302,11 @@ module_version:                 {{module_version | debug}}
     {% endfor %}
 
   </div>
-  <!-- [INFO   ] [~/assets/data/slider.html                     ] [end slider {{slider.id}}] -->
+  <!-- [INFO   ] [~/assets/data/masterslider.html               ]  [end slider {{slider.id}}] -->
   {% endif %}
 
 {% endfor %}
-<!-- [INFO   ] [~/assets/data/slider.html                     ] [end collecting all slider items] -->
+<!-- [INFO   ] [~/assets/data/masterslider.html               ]  [end collecting all slider items] -->
 
 {% endcapture %}
 

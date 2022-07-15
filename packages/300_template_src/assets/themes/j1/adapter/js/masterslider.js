@@ -7,7 +7,7 @@ regenerate:                             true
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/masterslider.js
- # Liquid template to adapt Averta MasterSlider Lite 2.85.13 (Feb 2022)
+ # Liquid template to adapt Averta MasterSlider Lite
  #
  # Product/Info:
  # https://jekyll.one
@@ -199,7 +199,6 @@ j1.adapter.masterslider = (function (j1, window) {
       _this.setState('data_loaded');
     }, // END loadSliderHTML
 
-
     // -------------------------------------------------------------------------
     // createSliderInstances()
     // create an 'MasterSlider' instance for all sliders configured
@@ -318,6 +317,7 @@ j1.adapter.masterslider = (function (j1, window) {
         _this.setState('sliders_initialized');
         logger.debug('\n' + 'state: ' + _this.getState());
         logger.info('\n' + 'initializing sliders finished');
+
       } // END setupSliders
 
       var settings  = $.extend({}, options, slider);
@@ -403,7 +403,6 @@ j1.adapter.masterslider = (function (j1, window) {
 
         });
 
-
         // var currSlider = 'masterslider_1';
         // currSlider.api.addEventListener(MSSliderEvent.CHANGE_START, function(currSlider) {
         //   // var currentSlide = masterslider_1.api.view.currentSlide;
@@ -427,6 +426,7 @@ j1.adapter.masterslider = (function (j1, window) {
         // }
 
       });
+
     }, // END registerEvents
 
     // -------------------------------------------------------------------------
@@ -438,6 +438,7 @@ j1.adapter.masterslider = (function (j1, window) {
     } // END getState
 
   }; // END return
+
 })(j1, window);
 
 {% endcapture %}

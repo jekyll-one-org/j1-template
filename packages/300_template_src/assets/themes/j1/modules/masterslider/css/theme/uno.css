@@ -55,11 +55,6 @@
   background-color: rgba(0,0,0,.75);
 }
 
-h2.j1-ms-info-headline {
-  text-align: center;
-  color: #f3f3f3;
-}
-
 .j1-ms-info-title {
   text-align: center;
   font-size: 26px !important;
@@ -78,5 +73,19 @@ h2.j1-ms-info-headline {
   text-align: center;
   font-size: 18px;
   font-weight: 300;
-  /* color: #f3f3f3; */
+}
+
+.j1-ms-thumb-title {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.j1-ms-thumb-tagline {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.j1-ms-thumb-description {
+  font-size: 16px;
+  font-weight: 300;
 }

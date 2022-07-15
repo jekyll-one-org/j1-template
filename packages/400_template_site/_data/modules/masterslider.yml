@@ -569,10 +569,13 @@ settings:
           title:                        Kitchen Design Ideas
           foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876387431_d86867a3d9_b.jpg"
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_tab: >
-                                        <strong>Kitchen Design Ideas</strong> <br>
+
+          thumbinfo:
+            title:                      Kitchen Design Ideas
+            tagline:                    false
+            description: >
                                         Lorem ipsum dolor sit amet, consectetuer elit <br>
-                                        Slider with Horizontal Tabs
+                                        Slider with Vertical Tabs
 
           slideinfo:                    false
 
@@ -583,10 +586,13 @@ settings:
           title:                        Modern Wall Design
           foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876388511_d618d53455_b.jpg"
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_tab: >
-                                        <strong>Modern Wall Design</strong> <br>
+
+          thumbinfo:
+            title:                      Modern Wall Design
+            tagline:                    false
+            description: >
                                         Lorem ipsum dolor sit amet, consectetuer elit <br>
-                                        Slider with Horizontal Tabs
+                                        Slider with Vertical Tabs
 
           slideinfo:                    false
 
@@ -597,10 +603,13 @@ settings:
           title:                        Banquette Seating Kitchen
           foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876389463_db27a377e1_b.jpg"
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_tab: >
-                                        <strong>Banquette Seating Kitchen</strong> <br>
+
+          thumbinfo:
+            title:                      Banquette Seating Kitchen
+            tagline:                    false
+            description: >
                                         Lorem ipsum dolor sit amet, consectetuer elit <br>
-                                        Slider with Horizontal Tabs
+                                        Slider with Vertical Tabs
 
           slideinfo:                    false
 
@@ -611,10 +620,13 @@ settings:
           title:                        Harmony in Interior Design
           foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876390339_2e4dd9dbbb_b.jpg"
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_tab: >
-                                        <strong>Harmony in Interior Design</strong> <br>
+
+          thumbinfo:
+            title:                      Harmony in Interior Design
+            tagline:                    false
+            description: >
                                         Lorem ipsum dolor sit amet, consectetuer elit <br>
-                                        Slider with Horizontal Tabs
+                                        Slider with Vertical Tabs
 
           slideinfo:                    false
 
@@ -625,11 +637,13 @@ settings:
           title:                        Make Your Workspace Better
           foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876390339_2e4dd9dbbb_b.jpg"
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_tab: >
-                                        <strong>Make Your Workspace Better</strong> <br>
-                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
-                                        Slider with Horizontal Tabs
 
+          thumbinfo:
+            title:                      Make Your Workspace Better
+            tagline:                    false
+            description: >
+                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
+                                        Slider with Vertical Tabs
           slideinfo:                    false
 
 
@@ -640,6 +654,7 @@ settings:
       enabled:                          true
 
       id:                               ms_00007
+      lightbox:                         true
 
       # ------------------------------------------------------------------------
       # Slider controls
@@ -649,7 +664,7 @@ settings:
         thumblist:
           enabled:                      true
           width:                        240
-          height:                       190
+          height:                       160
           autohide:                     false
           dir:                          v
           align:                        right
@@ -689,10 +704,7 @@ settings:
             description: >
                                         Lorem ipsum dolor sit amet, consectetuer elit <br>
                                         Slider with Vertical Tabs
-          thumb_tab: >
-                                        <strong>Kitchen Design Ideas</strong> <br>
-                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
-                                        Slider with Vertical Tabs
+
 
           slideinfo:                    false
 
@@ -703,8 +715,11 @@ settings:
           title:                        Modern Wall Design
           foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876388511_d618d53455_b.jpg"
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_tab: >
-                                        <strong>Modern Wall Design</strong> <br>
+
+          thumbinfo:
+            title:                      Modern Wall Design
+            tagline:                    false
+            description: >
                                         Lorem ipsum dolor sit amet, consectetuer elit <br>
                                         Slider with Vertical Tabs
 
@@ -717,8 +732,11 @@ settings:
           title:                        Banquette Seating Kitchen
           foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876389463_db27a377e1_b.jpg"
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_tab: >
-                                        <strong>Banquette Seating Kitchen</strong> <br>
+
+          thumbinfo:
+            title:                      Banquette Seating Kitchen
+            tagline:                    false
+            description: >
                                         Lorem ipsum dolor sit amet, consectetuer elit <br>
                                         Slider with Vertical Tabs
 
@@ -731,8 +749,11 @@ settings:
           title:                        Harmony in Interior Design
           foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876390339_2e4dd9dbbb_b.jpg"
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_tab: >
-                                        <strong>Harmony in Interior Design</strong> <br>
+
+          thumbinfo:
+            title:                      Harmony in Interior Design
+            tagline:                    false
+            description: >
                                         Lorem ipsum dolor sit amet, consectetuer elit <br>
                                         Slider with Vertical Tabs
 
@@ -745,8 +766,11 @@ settings:
           title:                        Make Your Workspace Better
           foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876390339_2e4dd9dbbb_b.jpg"
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_tab: >
-                                        <strong>Make Your Workspace Better</strong> <br>
+
+          thumbinfo:
+            title:                      Make Your Workspace Better
+            tagline:                    false
+            description: >
                                         Lorem ipsum dolor sit amet, consectetuer elit <br>
                                         Slider with Vertical Tabs
 
