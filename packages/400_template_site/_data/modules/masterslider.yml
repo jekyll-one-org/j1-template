@@ -43,7 +43,7 @@ settings:
       id:                               ms_00001
       skin:                             light-3
       lightbox:
-        enabled:                        true
+        enabled:                        false
         type:                           lb                                      # lb | lg
 
       # ------------------------------------------------------------------------
@@ -73,8 +73,8 @@ settings:
         # slide 1
         #
         - slide:
-          alt:                          cat-1
-          title:                        cat-1
+          alt:                          Cat 1
+          title:                        Cat 1
           foreground_image:             /assets/images/modules/masterslider/slider_1/cat-1.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
@@ -83,8 +83,8 @@ settings:
         # slide 2
         #
         - slide:
-          alt:                          cat-2
-          title:                        cat-2
+          alt:                          Cat 2
+          title:                        Cat 2
           foreground_image:             /assets/images/modules/masterslider/slider_1/cat-2.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
@@ -93,8 +93,8 @@ settings:
         # slide 3
         #
         - slide:
-          alt:                          cat-3
-          title:                        cat-3
+          alt:                          Cat 3
+          title:                        Cat 3
           foreground_image:             /assets/images/modules/masterslider/slider_1/cat-3.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
@@ -134,8 +134,8 @@ settings:
         # slide 1
         #
         - slide:
-          alt:                          cities-1
-          title:                        cities-1
+          alt:                          Cities 1
+          title:                        Cities 1
           foreground_image:             /assets/images/modules/masterslider/slider_2/andreas-brucker.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
@@ -144,8 +144,8 @@ settings:
         # slide 2
         #
         - slide:
-          alt:                          cities-2
-          title:                        cities-2
+          alt:                          Cities 2
+          title:                        Cities 2
           foreground_image:             /assets/images/modules/masterslider/slider_2/denys-nevozhai-1.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
@@ -154,8 +154,8 @@ settings:
         # slide 3
         #
         - slide:
-          alt:                          cities-3
-          title:                        cities-3
+          alt:                          Cities 3
+          title:                        Cities 3
           foreground_image:             /assets/images/modules/masterslider/slider_2/denys-nevozhai-2.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
@@ -197,7 +197,7 @@ settings:
         #
         - slide:
           alt:                          ms-free-food-restaurant
-          title:                        ms-free-food-restaurant
+          title:                        MS free food restaurant
           foreground_image:             /assets/images/modules/masterslider/slider_3/ms-free-food-restaurant.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
@@ -224,7 +224,7 @@ settings:
         #
         - slide:
           alt:                          ms-free-food-hamburger
-          title:                        ms-free-food-hamburger
+          title:                        MS free food hamburger
           foreground_image:             /assets/images/modules/masterslider/slider_3/ms-free-food-hamburger.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
@@ -251,7 +251,7 @@ settings:
         #
         - slide:
           alt:                          ms-free-food-family-2
-          title:                        ms-free-food-family-2
+          title:                        MS free food family 2
           foreground_image:             /assets/images/modules/masterslider/slider_3/ms-free-food-family-2.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
@@ -320,7 +320,7 @@ settings:
         #
         - slide:
           alt:                          ms-free-animals-1
-          title:                        ms-free-animals-1
+          title:                        MS free animals 1
           foreground_image:             /assets/images/modules/masterslider/slider_4/ms-free-animals-1.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  /assets/images/modules/masterslider/slider_4/ms-free-animals-1-100x80.jpg
@@ -330,7 +330,7 @@ settings:
         #
         - slide:
           alt:                          ms-free-animals-2
-          title:                        ms-free-animals-2
+          title:                        MS free animals 2
           foreground_image:             /assets/images/modules/masterslider/slider_4/ms-free-animals-2.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  /assets/images/modules/masterslider/slider_4/ms-free-animals-2-100x80.jpg
@@ -340,7 +340,7 @@ settings:
         #
         - slide:
           alt:                          ms-free-animals-3
-          title:                        ms-free-animals-3
+          title:                        MS free animals 3
           foreground_image:             /assets/images/modules/masterslider/slider_4/ms-free-animals-3.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  /assets/images/modules/masterslider/slider_4/ms-free-animals-3-100x80.jpg
@@ -350,7 +350,7 @@ settings:
         #
         - slide:
           alt:                          ms-free-animals-4
-          title:                        ms-free-animals-4
+          title:                        MS free animals 4
           foreground_image:             /assets/images/modules/masterslider/slider_4/ms-free-animals-4.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  /assets/images/modules/masterslider/slider_4/ms-free-animals-4-100x80.jpg
@@ -360,7 +360,7 @@ settings:
         #
         - slide:
           alt:                          ms-free-animals-5
-          title:                        ms-free-animals-5
+          title:                        MS free animals 5
           foreground_image:             /assets/images/modules/masterslider/slider_4/ms-free-animals-5.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  /assets/images/modules/masterslider/slider_4/ms-free-animals-5-100x80.jpg
@@ -370,7 +370,7 @@ settings:
         #
         - slide:
           alt:                          ms-free-animals-6
-          title:                        ms-free-animals-6
+          title:                        MS free animals 6
           foreground_image:             /assets/images/modules/masterslider/slider_4/ms-free-animals-6.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  /assets/images/modules/masterslider/slider_4/ms-free-animals-6-100x80.jpg
@@ -380,7 +380,7 @@ settings:
         #
         - slide:
           alt:                          ms-free-animals-7
-          title:                        ms-free-animals-7
+          title:                        MS free animals 7
           foreground_image:             /assets/images/modules/masterslider/slider_4/ms-free-animals-7.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  /assets/images/modules/masterslider/slider_4/ms-free-animals-7-100x80.jpg
@@ -430,7 +430,7 @@ settings:
         #
         - slide:
           alt:                          ms-free-food-restaurant
-          title:                        ms-free-food-restaurant
+          title:                        MS free food restaurant
           foreground_image:             /assets/images/modules/masterslider/slider_5/ms-free-food-restaurant.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  /assets/images/modules/masterslider/slider_5/ms-free-food-restaurant-140x80.jpg
@@ -440,7 +440,7 @@ settings:
         #
         - slide:
           alt:                          ms-free-food-family
-          title:                        ms-free-food-family
+          title:                        MS free food family
           foreground_image:             /assets/images/modules/masterslider/slider_5/ms-free-food-family.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  /assets/images/modules/masterslider/slider_5/ms-free-food-family-140x80.jpg
@@ -450,7 +450,7 @@ settings:
         #
         - slide:
           alt:                          ms-free-food-woman-hand
-          title:                        ms-free-food-woman-hand
+          title:                        MS free food woman hand
           foreground_image:             /assets/images/modules/masterslider/slider_5/ms-free-food-woman-hand.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  /assets/images/modules/masterslider/slider_5/ms-free-food-woman-hand-140x80.jpg
@@ -460,7 +460,7 @@ settings:
         #
         - slide:
           alt:                          ms-free-food-family-2
-          title:                        ms-free-food-family-2
+          title:                        MS free food family 2
           foreground_image:             /assets/images/modules/masterslider/slider_5/ms-free-food-family-2.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  /assets/images/modules/masterslider/slider_5/ms-free-food-family-2-140x80.jpg
@@ -470,7 +470,7 @@ settings:
         #
         - slide:
           alt:                          ms-free-food-family-3
-          title:                        ms-free-food-family-3
+          title:                        MS free food family 3
           foreground_image:             /assets/images/modules/masterslider/slider_5/ms-free-food-family-3.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  /assets/images/modules/masterslider/slider_5/ms-free-food-family-3-140x80.jpg
@@ -480,7 +480,7 @@ settings:
         #
         - slide:
           alt:                          ms-free-food-hamburger
-          title:                        ms-free-food-hamburger
+          title:                        MS free food hamburger
           foreground_image:             /assets/images/modules/masterslider/slider_5/ms-free-food-hamburger.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  /assets/images/modules/masterslider/slider_5/ms-free-food-hamburger-140x80.jpg
@@ -490,7 +490,7 @@ settings:
         #
         - slide:
           alt:                          ms-free-food-pizza
-          title:                        ms-free-food-pizza
+          title:                        MS free food pizza
           foreground_image:             /assets/images/modules/masterslider/slider_5/ms-free-food-pizza.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  /assets/images/modules/masterslider/slider_5/ms-free-food-pizza-140x80.jpg
@@ -500,7 +500,7 @@ settings:
         #
         - slide:
           alt:                          ms-free-food-single-man
-          title:                        ms-free-food-single-man
+          title:                        MS free food single man
           foreground_image:             /assets/images/modules/masterslider/slider_5/ms-free-food-single-man.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  /assets/images/modules/masterslider/slider_5/ms-free-food-single-man-140x80.jpg
@@ -510,7 +510,7 @@ settings:
         #
         - slide:
           alt:                          ms-free-food-single-woman
-          title:                        ms-free-food-single-woman
+          title:                        MS free food single woman
           foreground_image:             /assets/images/modules/masterslider/slider_5/ms-free-food-single-woman.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  /assets/images/modules/masterslider/slider_5/ms-free-food-single-woman-140x80.jpg
@@ -520,7 +520,7 @@ settings:
         #
         - slide:
           alt:                          ms-free-food-table
-          title:                        ms-free-food-table
+          title:                        MS free food table
           foreground_image:             /assets/images/modules/masterslider/slider_5/ms-free-food-table.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  /assets/images/modules/masterslider/slider_5/ms-free-food-table-140x80.jpg
@@ -570,85 +570,81 @@ settings:
         # slide 1
         #
         - slide:
-          alt:                          Kitchen Design Ideas
+          alt:                          MS free - Kitchen Design Ideas
           title:                        Kitchen Design Ideas
           foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876385555_74a0d7d7ee_b.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
 
           thumbinfo:
             title:                      Kitchen Design Ideas
-            tagline:                    false
+            tagline:                    Slider with Horizontal Tabs
             description: >
-                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
-                                        Slider with Vertical Tabs
+                                        Lorem ipsum dolor sit amet, consectetuer elit
 
           slideinfo:                    false
 
         # slide 2
         #
         - slide:
-          alt:                          Modern Wall Design
+          alt:                          MS free - Modern Wall Design
           title:                        Modern Wall Design
           foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876387431_d86867a3d9_b.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
 
           thumbinfo:
             title:                      Modern Wall Design
-            tagline:                    false
+            tagline:                    Slider with Horizontal Tabs
             description: >
-                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
-                                        Slider with Vertical Tabs
+                                        Lorem ipsum dolor sit amet, consectetuer elit
 
           slideinfo:                    false
 
         # slide 3
         #
         - slide:
-          alt:                          Banquette Seating Kitchen
+          alt:                          MS free - Banquette Seating Kitchen
           title:                        Banquette Seating Kitchen
           foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876388511_d618d53455_b.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
 
           thumbinfo:
             title:                      Banquette Seating Kitchen
-            tagline:                    false
+            tagline:                    Slider with Horizontal Tabs
             description: >
-                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
-                                        Slider with Vertical Tabs
+                                        Lorem ipsum dolor sit amet, consectetuer elit
 
           slideinfo:                    false
 
         # slide 4
         #
         - slide:
-          alt:                          Harmony in Interior Design
+          alt:                          MS free - Harmony in Interior Design
           title:                        Harmony in Interior Design
           foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876389463_db27a377e1_b.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
 
           thumbinfo:
             title:                      Harmony in Interior Design
-            tagline:                    false
+            tagline:                    Slider with Horizontal Tabs
             description: >
-                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
-                                        Slider with Vertical Tabs
+                                        Lorem ipsum dolor sit amet, consectetuer elit
 
           slideinfo:                    false
 
         # slide 5
         #
         - slide:
-          alt:                          Make Your Workspace Better
+          alt:                          MS free - Make Your Workspace Better
           title:                        Make Your Workspace Better
           foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876390339_2e4dd9dbbb_b.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
 
           thumbinfo:
             title:                      Make Your Workspace Better
-            tagline:                    false
+            tagline:                    Slider with Horizontal Tabs
             description: >
-                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
-                                        Slider with Vertical Tabs
+                                        Lorem ipsum dolor sit amet, consectetuer elit
+
           slideinfo:                    false
 
 
@@ -700,17 +696,16 @@ settings:
         # slide 1
         #
         - slide:
-          alt:                          Kitchen Design Ideas
+          alt:                          MS free - Kitchen Design Ideas
           title:                        Kitchen Design Ideas
           foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876385555_74a0d7d7ee_b.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
 
           thumbinfo:
             title:                      Kitchen Design Ideas
-            tagline:                    false
+            tagline:                    Slider with Vertical Tabs
             description: >
-                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
-                                        Slider with Vertical Tabs
+                                        Lorem ipsum dolor sit amet, consectetuer elit
 
 
           slideinfo:                    false
@@ -718,68 +713,64 @@ settings:
         # slide 2
         #
         - slide:
-          alt:                          Modern Wall Design
+          alt:                          MS free - Modern Wall Design
           title:                        Modern Wall Design
           foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876387431_d86867a3d9_b.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
 
           thumbinfo:
             title:                      Modern Wall Design
-            tagline:                    false
+            tagline:                    Slider with Vertical Tabs
             description: >
-                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
-                                        Slider with Vertical Tabs
+                                        Lorem ipsum dolor sit amet, consectetuer elit
 
           slideinfo:                    false
 
         # slide 3
         #
         - slide:
-          alt:                          Banquette Seating Kitchen
+          alt:                          MS free - Banquette Seating Kitchen
           title:                        Banquette Seating Kitchen
           foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876388511_d618d53455_b.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
 
           thumbinfo:
             title:                      Banquette Seating Kitchen
-            tagline:                    false
+            tagline:                    Slider with Vertical Tabs
             description: >
-                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
-                                        Slider with Vertical Tabs
+                                        Lorem ipsum dolor sit amet, consectetuer elit
 
           slideinfo:                    false
 
         # slide 4
         #
         - slide:
-          alt:                          Harmony in Interior Design
+          alt:                          MS free - Harmony in Interior Design
           title:                        Harmony in Interior Design
           foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876389463_db27a377e1_b.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
 
           thumbinfo:
             title:                      Harmony in Interior Design
-            tagline:                    false
+            tagline:                    Slider with Vertical Tabs
             description: >
-                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
-                                        Slider with Vertical Tabs
+                                        Lorem ipsum dolor sit amet, consectetuer elit
 
           slideinfo:                    false
 
         # slide 5
         #
         - slide:
-          alt:                          Make Your Workspace Better
+          alt:                          MS free - Make Your Workspace Better
           title:                        Make Your Workspace Better
           foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876390339_2e4dd9dbbb_b.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
 
           thumbinfo:
             title:                      Make Your Workspace Better
-            tagline:                    false
+            tagline:                    Slider with Vertical Tabs
             description: >
-                                        Lorem ipsum dolor sit amet, consectetuer elit <br>
-                                        Slider with Vertical Tabs
+                                        Lorem ipsum dolor sit amet, consectetuer elit
 
           slideinfo:                    false
 
@@ -820,7 +811,7 @@ settings:
         # slide 1
         #
         - slide:
-          alt:                          Special slider for bloggers
+          alt:                          MS free - Special slider for bloggers
           title:                        Special slider for bloggers
           foreground_image:             /assets/images/modules/masterslider/slider_8/postslider6-bg-slide2-1024x622.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
@@ -852,7 +843,7 @@ settings:
         # slide 2
         #
         - slide:
-          alt:                          We love architecture websites
+          alt:                          MS free - We love architecture websites
           title:                        We love architecture websites
           foreground_image:             /assets/images/modules/masterslider/slider_8/postslider-5-img-3.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
@@ -884,7 +875,7 @@ settings:
         # slide 3
         #
         - slide:
-          alt:                          New Buildings, New Designs!
+          alt:                          MS free -  New Buildings, New Designs!
           title:                        New Buildings, New Designs!
           foreground_image:             /assets/images/modules/masterslider/slider_8/postslider-5-img-2.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
@@ -916,7 +907,7 @@ settings:
         # slide 4
         #
         - slide:
-          alt:                          Greatest Modern Architect Designs
+          alt:                          MS free - Greatest Modern Architect Designs
           title:                        Greatest Modern Architect Designs
           foreground_image:             /assets/images/modules/masterslider/slider_8/postslider-5-img-1.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
@@ -966,9 +957,6 @@ settings:
         slideinfo:                                                              # default settings
           enabled:                      true
 
-        circletimer:                                                            # default settings
-          enabled:                      true
-
       # ------------------------------------------------------------------------
       # Slider options
       #
@@ -986,7 +974,7 @@ settings:
         # slide 1
         #
         - slide:
-          alt:                          Childhood Memories
+          alt:                          MS free - Childhood Memories
           title:                        Childhood Memories
           foreground_image:             /assets/images/modules/masterslider/slider_9/6-2.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
@@ -1012,7 +1000,7 @@ settings:
         # slide 2
         #
         - slide:
-          alt:                          Consectetuer adipiscing elit
+          alt:                          MS free - Consectetuer adipiscing elit
           title:                        Consectetuer adipiscing elit
           foreground_image:             /assets/images/modules/masterslider/slider_9/5-2.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
@@ -1038,7 +1026,7 @@ settings:
         # slide 3
         #
         - slide:
-          alt:                          Suspendissue ut pulvinar mauris
+          alt:                          MS free - Suspendissue ut pulvinar mauris
           title:                        Suspendissue ut pulvinar mauris
           foreground_image:             /assets/images/modules/masterslider/slider_9/6-3.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
@@ -1065,7 +1053,7 @@ settings:
         # slide 4
         #
         - slide:
-          alt:                          Sed dabibus sit amet felis
+          alt:                          MS free - Sed dabibus sit amet felis
           title:                        Sed dabibus sit amet felis
           foreground_image:             /assets/images/modules/masterslider/slider_9/8.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
@@ -1091,7 +1079,7 @@ settings:
         # slide 5
         #
         - slide:
-          alt:                          Cheetags on the edge
+          alt:                          MS free - Cheetags on the edge
           title:                        Cheetags on the edge
           foreground_image:             /assets/images/modules/masterslider/slider_9/8-1.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
@@ -1117,7 +1105,7 @@ settings:
         # slide 6
         #
         - slide:
-          alt:                          Consectetuer adipiscing elit
+          alt:                          MS free - Consectetuer adipiscing elit
           title:                        Consectetuer adipiscing elit
           foreground_image:             /assets/images/modules/masterslider/slider_9/1-2.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif

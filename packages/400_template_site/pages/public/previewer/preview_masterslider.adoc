@@ -7,8 +7,29 @@ description: >
                                         shows some valuable features of the J1 Template to manage your image-based
                                         content using Master Slider.
 
-categories:                             [ Testpages ]
-tags:                                   [ Example ]
+keywords: >
+                                        opensource, free, load, download, start, starter, example,
+                                        high, easy, use, secure, encrypt, standard, popular,
+                                        generate, create, learn, distribute, publish, deploy,
+                                        beginner, advanced, expert, student, learner, educator,
+                                        writer, reader, visitor,
+                                        framework, toolkit, integration, extension, module, api,
+                                        dynamic, static, generator, client, server, internet, local, localhost,
+                                        page, web, website, webdesign, material, design, responsive,
+                                        javascript, nodejs, ruby, windows, linux, osx, mac, os,
+                                        http, https, html, html5, css, scss, style,
+                                        browser, firefox, chrome, edge, opera, safari,
+                                        configuration, generator, navigation, menu, dropdown, fab, action, button,
+                                        application, interface, provider, api, repository,
+                                        cookie, language, translation, gdpr, dsgvo, privacy,
+                                        asciidoc, aciidoctor, bootstrap, jekyll, liquid,
+                                        hyvor, disqus, git, github, netlify, heroku, apple, microsoft,
+                                        provider, service, internet, support,
+                                        google, analytics, advertising, search, console, silverlight, score,
+                                        j1, master, slider, template, integration
+
+categories:                             [ Previewer ]
+tags:                                   [ Master Slider ]
 
 comments:                               false
 fab_menu_id:                            page_ctrl_simple
@@ -16,7 +37,7 @@ fab_menu_id:                            page_ctrl_simple
 permalink:                              /pages/public/previewer/masterslider/
 regenerate:                             false
 
-resources:                              [ animate, lightbox, lightGallery, masterslider ]
+resources:                              [ animate, clipboard, lightbox, lightGallery, masterslider, rouge ]
 resource_options:
   - attic:
       padding_top:                      400
@@ -56,77 +77,795 @@ resource_options:
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 
-Welcome to the preview page focussing on the image module. This page
-shows some valuable features of the J1 Template to manage your image-based
-content using Master Slider.
+Welcome to the preview page focussing on the image module. This page shows
+some valuable features of the J1 Template to manage your image-based
+content using the *Master Slider* (MS) module `masterslider`.
 
-== Slider 1 - Simple Boxed
+NOTE: J1 Template uses the *free* version of Master Slider (MS Lite).
+The lite version does *not* support all features. Not all slider *layouts*
+and no *overlays* are supported by the lite version.
 
-lorem:sentences[3]
+MS sliders are based on so-called *templates*. A template defines the HTML
+portion, the base HTML structure of a slider in a webpage. The J1 module
+`masterslider` is fully configurable. Based on the J1 configuration of an
+MS slider, the template is automatically generated and loaded as required - no
+need for any programming or writing HTML code for your MS sliders.
 
+
+== Slider 1 - Simple
+
+The example *Slider 1* is using the:
+
+* skin `light-3`
+* layout `boxed`
+
+in combination with the controls:
+
+* `arrows` (default settings)
+* `bullets` (default settings)
+
+[[slider-settings-1]]
+=== Slider settings
+
+TIP: Find the *full* slider configuration in file `~/_data/masterslider.yml`.
+
+.Excerpt
+[source, yaml]
+----
+# ------------------------------------------------------------------------------
+# User settings
+#
+settings:
+
+  module_version:                       lite
+
+  # ----------------------------------------------------------------------------
+  # Sliders
+  # ----------------------------------------------------------------------------
+  #
+  sliders:
+
+    # --------------------------------------------------------------------------
+    # Slider 1, Simple Boxed
+    #
+    - slider:
+      enabled:                          true
+
+      id:                               ms_00001
+      skin:                             light-3
+      lightbox:
+        enabled:                        false
+
+      # ------------------------------------------------------------------------
+      # Slider controls
+      #
+      controls:
+
+        arrows:
+          enabled:                      true
+
+        bullets:
+          enabled:                      true
+
+      # ------------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+
+        width:                          1200
+        height:                         600
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        # slide 1
+        #
+        - slide:
+          alt:                          cat-1
+          title:                        cat-1
+          foreground_image:             /assets/images/modules/masterslider/slider_1/cat-1.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+          slideinfo:                    false
+
+        ...
+----
+
+[[slider-adoc-1]]
+=== Asciidoc Markup
+
+[source, yaml]
+----
+masterslider::ms_00001[role="mt-4 mb-5"]
+----
+
+[[rendered-slider-1]]
+=== Rendered slider
 // add placeholder for dynamic load (AJAX)
 //
-masterslider::ms_00001[role="mt-3 mb-5"]
+masterslider::ms_00001[role="mt-4 mb-5"]
 
 
 == Slider 2 - Full Width
 
 lorem:sentences[3]
 
+[[slider-settings-2]]
+=== Slider settings
+
+TIP: Find the *full* slider configuration in file `~/_data/masterslider.yml`.
+
+.Excerpt
+[source, yaml]
+----
+# ------------------------------------------------------------------------------
+# User settings
+#
+settings:
+
+  module_version:                       lite
+
+  # ----------------------------------------------------------------------------
+  # Sliders
+  # ----------------------------------------------------------------------------
+  #
+  sliders:
+
+    # --------------------------------------------------------------------------
+    # Slider 2 - Full Width
+    #
+    - slider:
+      enabled:                          true
+
+      id:                               ms_00002
+      lightbox:
+        enabled:                        true
+        type:                           lb
+
+      # ------------------------------------------------------------------------
+      # Slider controls
+      #
+      controls:
+        # NO controls used for this slider
+
+      # ------------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+
+        width:                          1200
+        height:                         600
+        layout:                         fullwidth
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        # slide 1
+        #
+        - slide:
+          alt:                          Cities 1
+          title:                        Cities 1
+          foreground_image:             /assets/images/modules/masterslider/slider_2/andreas-brucker.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+          slideinfo:                    false
+
+      ...
+----
+
+[[slider-adoc-2]]
+=== Asciidoc Markup
+
+[source, yaml]
+----
+masterslider::ms_00002[role="mt-4 mb-5"]
+----
+
+[[rendered-slider-2]]
+=== Rendered slider
 // add placeholder for dynamic load (AJAX)
 //
-masterslider::ms_00002[role="mt-3 mb-5"]
+masterslider::ms_00002[role="mt-4 mb-5"]
 
 
 == Slider 3 - SlideInfo (Boxed|Animated)
 
 lorem:sentences[3]
 
+[[slider-settings-3]]
+=== Slider settings
+
+TIP: Find the *full* slider configuration in file `~/_data/masterslider.yml`.
+
+.Excerpt
+[source, yaml]
+----
+# ------------------------------------------------------------------------------
+# User settings
+#
+settings:
+
+  module_version:                       lite
+
+  # ----------------------------------------------------------------------------
+  # Sliders
+  # ----------------------------------------------------------------------------
+  #
+  sliders:
+
+    # --------------------------------------------------------------------------
+    # Slider 3 - SlideInfo (Boxed|Animated)
+    #
+    - slider:
+      enabled:                          true
+
+      id:                               ms_00003
+      skin:                             default
+
+      # ------------------------------------------------------------------------
+      # Slider controls
+      #
+      controls:
+
+        slideinfo:
+          enabled:                      true
+          margin:                       -120
+
+      # ------------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+
+        width:                          1200
+        height:                         500
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        # slide 1
+        #
+        - slide:
+          alt:                          ms-free-food-restaurant
+          title:                        MS free food restaurant
+          foreground_image:             /assets/images/modules/masterslider/slider_3/ms-free-food-restaurant.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+          slideinfo:
+            rtext:                      300
+            boxed:                      true
+            title:                      Sample Title 1
+            title_color:                '#BDBDBD'
+            title_animated:             rotateInUpLeft
+            title_upcase:               false
+            tagline:                    false
+            tagline_color:              false
+            tagline_animated:           false
+            tagline_upcase:             false
+            description: >
+                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                                        Ut enim ad minim veniam.
+
+            description_color:          '#9E9E9E'
+            description_animated:       fadeInRight
+
+      ...
+----
+
+[[slider-adoc-3]]
+=== Asciidoc Markup
+
+[source, yaml]
+----
+masterslider::ms_00003[role="mt-4 mb-5"]
+----
+
+[[rendered-slider-3]]
+=== Rendered slider
 // add placeholder for dynamic load (AJAX)
 //
-masterslider::ms_00003[role="mt-3 mb-5"]
+masterslider::ms_00003[role="mt-4 mb-5"]
 
 
-== Slider 4 - ThumbView (position right|vertical)
+== Slider 4 - ThumbImage (position right|vertical)
 
 lorem:sentences[2]
 
+[[slider-settings-4]]
+=== Slider settings
+
+TIP: Find the *full* slider configuration in file `~/_data/masterslider.yml`.
+
+.Excerpt
+[source, yaml]
+----
+# ------------------------------------------------------------------------------
+# User settings
+#
+settings:
+
+  module_version:                       lite
+
+  # ----------------------------------------------------------------------------
+  # Sliders
+  # ----------------------------------------------------------------------------
+  #
+  sliders:
+
+    # --------------------------------------------------------------------------
+    # Slider 4 - ThumbImage (position right|vertical)
+    #
+    - slider:
+      enabled:                          true
+
+      id:                               ms_00004
+      skin:                             light-2
+
+      # ------------------------------------------------------------------------
+      # Slider controls
+      #
+      controls:
+
+        bullets:
+          enabled:                      true
+
+        thumblist:
+          enabled:                      true
+          autohide:                     false
+          dir:                          v
+
+        scrollbar:
+          enabled:                      true
+          inset:                        true
+          align:                        top
+          color:                        '#404040'
+
+      # ------------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+
+        width:                          1200
+        height:                         600
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        # slide 1
+        #
+        - slide:
+          alt:                          ms-free-animals-1
+          title:                        MS free animals 1
+          foreground_image:             /assets/images/modules/masterslider/slider_4/ms-free-animals-1.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  /assets/images/modules/masterslider/slider_4/ms-free-animals-1-100x80.jpg
+          slideinfo:                    false
+
+      ...
+----
+
+[[slider-adoc-4]]
+=== Asciidoc Markup
+
+[source, yaml]
+----
+masterslider::ms_00004[role="mt-4 mb-5"]
+----
+
+[[rendered-slider-4]]
+=== Rendered slider
 // add placeholder for dynamic load (AJAX)
 //
-masterslider::ms_00004[role="mt-3 mb-5"]
+masterslider::ms_00004[role="mt-4 mb-5"]
 
 
-== Slider 5 - ThumbView  (position bottom|horizontal)
+== Slider 5 - ThumbImage  (position bottom|horizontal)
 
 lorem:sentences[2]
 
+[[slider-settings-5]]
+=== Slider settings
+
+TIP: Find the *full* slider configuration in file `~/_data/masterslider.yml`.
+
+.Excerpt
+[source, yaml]
+----
+# ------------------------------------------------------------------------------
+# User settings
+#
+settings:
+
+  module_version:                       lite
+
+  # ----------------------------------------------------------------------------
+  # Sliders
+  # ----------------------------------------------------------------------------
+  #
+  sliders:
+
+    # --------------------------------------------------------------------------
+    # Slider 5 - ThumbImage (position bottom|horizontal)
+    #
+    - slider:
+      enabled:                          true
+
+      id:                               ms_00005
+      skin:                             default
+
+      # ------------------------------------------------------------------------
+      # Slider controls
+      #
+      controls:
+
+        bullets:
+          enabled:                      true
+
+        thumblist:
+          enabled:                      true
+          autohide:                     false
+          align:                        bottom
+          width:                        140
+          height:                       80
+          margin:                       5
+          space:                        5
+
+      # ------------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+
+        width:                          1200
+        height:                         530
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        # slide 1
+        #
+        - slide:
+          alt:                          ms-free-food-restaurant
+          title:                        MS free food restaurant
+          foreground_image:             /assets/images/modules/masterslider/slider_5/ms-free-food-restaurant.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  /assets/images/modules/masterslider/slider_5/ms-free-food-restaurant-140x80.jpg
+          slideinfo:                    false
+
+      ...
+----
+
+[[slider-adoc-5]]
+=== Asciidoc Markup
+
+[source, yaml]
+----
+masterslider::ms_00005[role="mt-4 mb-5"]
+----
+
+[[rendered-slider-5]]
+=== Rendered slider
 // add placeholder for dynamic load (AJAX)
 //
-masterslider::ms_00005[role="mt-3 mb-5"]
+masterslider::ms_00005[role="mt-4 mb-5"]
 
 
-== Slider 6 - ThumbNail  (position bottom|horizontal)
+== Slider 6 - ThumbInfo  (position bottom|horizontal)
 
 lorem:sentences[2]
 
+[[slider-settings-6]]
+=== Slider settings
+
+TIP: Find the *full* slider configuration in file `~/_data/masterslider.yml`.
+
+.Excerpt
+[source, yaml]
+----
+# ------------------------------------------------------------------------------
+# User settings
+#
+settings:
+
+  module_version:                       lite
+
+  # ----------------------------------------------------------------------------
+  # Sliders
+  # ----------------------------------------------------------------------------
+  #
+  sliders:
+
+    # --------------------------------------------------------------------------
+    # Slider 6 - ThumbTabs (position bottom|horizontal)
+    #
+    - slider:
+      enabled:                          true
+
+      id:                               ms_00006
+      skin:                             light-3
+
+      # ------------------------------------------------------------------------
+      # Slider controls
+      #
+      controls:
+
+        thumblist:
+          enabled:                      true
+          width:                        300
+          height:                       160
+          autohide:                     false
+          dir:                          h
+          align:                        bottom
+          type:                         tabs
+          margin:                       -12
+          space:                        0
+          hideUnder:                    400
+
+      # ------------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+
+        width:                          1200
+        height:                         530
+        layout:                         fullwidth
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        # slide 1
+        #
+        - slide:
+          alt:                          MS free - Kitchen Design Ideas
+          title:                        Kitchen Design Ideas
+          foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876385555_74a0d7d7ee_b.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+
+          thumbinfo:
+            title:                      Kitchen Design Ideas
+            tagline:                    Slider with Horizontal Tabs
+            description: >
+                                        Lorem ipsum dolor sit amet, consectetuer elit
+
+          slideinfo:                    false
+
+      ...
+----
+
+[[slider-adoc-6]]
+=== Asciidoc Markup
+
+[source, yaml]
+----
+masterslider::ms_00006[role="mt-4 mb-5"]
+----
+
+[[rendered-slider-6]]
+=== Rendered slider
 // add placeholder for dynamic load (AJAX)
 //
-masterslider::ms_00006[role="mt-3 mb-5"]
+masterslider::ms_00006[role="mt-4 mb-5"]
 
 
-== Slider 7 - ThumbNail  (position right|vertical)
+== Slider 7 - ThumbInfo  (position right|vertical)
 
 lorem:sentences[2]
 
+[[slider-settings-7]]
+=== Slider settings
+
+TIP: Find the *full* slider configuration in file `~/_data/masterslider.yml`.
+
+.Excerpt
+[source, yaml]
+----
+# ------------------------------------------------------------------------------
+# User settings
+#
+settings:
+
+  module_version:                       lite
+
+  # ----------------------------------------------------------------------------
+  # Sliders
+  # ----------------------------------------------------------------------------
+  #
+  sliders:
+
+    # --------------------------------------------------------------------------
+    # Slider 7 - ThumbTabs (position right|vertical)
+    #
+    - slider:
+      enabled:                          true
+
+      id:                               ms_00007
+      lightbox:
+        enabled:                        true
+        type:                           lb
+
+      # ------------------------------------------------------------------------
+      # Slider controls
+      #
+      controls:
+
+        thumblist:
+          enabled:                      true
+          width:                        240
+          height:                       160
+          autohide:                     false
+          dir:                          v
+          align:                        right
+          type:                         tabs
+          margin:                       -12
+          space:                        0
+          hideUnder:                    700
+
+      # ------------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+
+        width:                            1000
+        height:                           500
+        instantStartLayers:               true
+        loop:                             true
+        speed:                            15
+        view:                             fadeBasic
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        # slide 1
+        #
+        - slide:
+          alt:                          MS free - Kitchen Design Ideas
+          title:                        Kitchen Design Ideas
+          foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876385555_74a0d7d7ee_b.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+
+          thumbinfo:
+            title:                      Kitchen Design Ideas
+            tagline:                    Slider with Vertical Tabs
+            description: >
+                                        Lorem ipsum dolor sit amet, consectetuer elit
+
+
+          slideinfo:                    false
+
+      ...
+----
+
+[[slider-adoc-7]]
+=== Asciidoc Markup
+
+[source, yaml]
+----
+masterslider::ms_00007[role="mt-4 mb-5"]
+----
+
+[[rendered-slider-7]]
+=== Rendered slider
 // add placeholder for dynamic load (AJAX)
 //
-masterslider::ms_00007[role="mt-3 mb-5"]
+masterslider::ms_00007[role="mt-4 mb-5"]
 
 
 == Slider 8 - Blog articles (PartialView)
 
 lorem:sentences[3]
 
+[[slider-settings-8]]
+=== Slider settings
+
+TIP: Find the *full* slider configuration in file `~/_data/masterslider.yml`.
+
+.Excerpt
+[source, yaml]
+----
+# ------------------------------------------------------------------------------
+# User settings
+#
+settings:
+
+  module_version:                       lite
+
+  # ----------------------------------------------------------------------------
+  # Sliders
+  # ----------------------------------------------------------------------------
+  #
+  sliders:
+
+    # --------------------------------------------------------------------------
+    # Slider 8 - Blog articles (PartialView)
+    #
+    - slider:
+      enabled:                          true
+
+      id:                               ms_00008
+      skin:                             default
+
+      # ------------------------------------------------------------------------
+      # Slider controls
+      #
+      controls:
+
+        slideinfo:
+          enabled:                      true
+          margin:                       -120
+
+      # ------------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+
+        width:                          450
+        height:                         220
+        layout:                         partialview
+        loop:                           true
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        # slide 1
+        #
+        - slide:
+          alt:                          MS free - Special slider for bloggers
+          title:                        Special slider for bloggers
+          foreground_image:             /assets/images/modules/masterslider/slider_8/postslider6-bg-slide2-1024x622.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+
+          slideinfo:
+            rtext:                      300
+            boxed:                      false
+            title:                      Special slider for bloggers
+            title_color:                '#F5F5F5'
+            title_animated:             fadeInLeft
+            title_upcase:               false
+            tagline:                    false
+            tagline_color:              false
+            tagline_animated:           false
+            tagline_upcase:             false
+            description:                false
+            description_animated:       false
+
+            button:
+              enabled:                  true
+              align:                    center
+              margin:                   mt-4
+              animated:                 fadeInRight
+              class:                    btn btn-primary btn-sm
+              link:                     '#void'
+              text:                     Read More
+
+       ...
+----
+
+[[slider-adoc-8]]
+=== Asciidoc Markup
+
+[source, yaml]
+----
+masterslider::ms_00008[role="mt-4 mb-5"]
+----
+
+[[rendered-slider-8]]
+=== Rendered slider
 // add placeholder for dynamic load (AJAX)
 //
 masterslider::ms_00008[role="mt-3 mb-5"]
@@ -136,9 +875,133 @@ masterslider::ms_00008[role="mt-3 mb-5"]
 
 lorem:sentences[3]
 
+[[slider-settings-9]]
+=== Slider settings
+
+TIP: Find the *full* slider configuration in file `~/_data/masterslider.yml`.
+
+.Excerpt
+[source, yaml]
+----
+# ------------------------------------------------------------------------------
+# User settings
+#
+settings:
+
+  module_version:                       lite
+
+  # ----------------------------------------------------------------------------
+  # Sliders
+  # ----------------------------------------------------------------------------
+  #
+  sliders:
+
+    # --------------------------------------------------------------------------
+    # Slider 9 - PartialView/MS-Info (info position below)
+    #
+    - slider:
+      enabled:                          true
+
+      id:                               ms_00009
+      skin:                             default
+
+      # ------------------------------------------------------------------------
+      # Slider controls
+      #
+      controls:
+
+        arrows:
+          enabled:                      true
+
+        slideinfo:
+          enabled:                      true
+
+      # ------------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+        width:                          700
+        height:                         350
+        layout:                         partialview
+        loop:                           true
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        # slide 1
+        #
+        - slide:
+          alt:                          MS free - Childhood Memories
+          title:                        Childhood Memories
+          foreground_image:             /assets/images/modules/masterslider/slider_9/6-2.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+          slideinfo:
+            rtext:                      300
+            boxed:                      false
+            title:                      Childhood Memories
+            title_color:                '#222222'
+            title_animated:             false
+            title_upcase:               true
+            tagline:                    John Wiliam
+            tagline_color:              '#7a7a7a'
+            tagline_animated:           false
+            tagline_upcase:             false
+            description: >
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                                        sed diam nonummy nibh euismod tincidunt.
+
+            description_color:          '#9E9E9E'
+            description_animated:       false
+
+        # slide 2
+        #
+        - slide:
+          alt:                          MS free - Consectetuer adipiscing elit
+          title:                        Consectetuer adipiscing elit
+          foreground_image:             /assets/images/modules/masterslider/slider_9/5-2.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+          slideinfo:
+            rtext:                      300
+            boxed:                      false
+            title:                      Consectetuer adipiscing elit
+            title_color:                '#222222'
+            title_animated:             fadeInRight
+            title_upcase:               true
+            tagline:                    John Wiliam
+            tagline_color:              '#7a7a7a'
+            tagline_animated:           false
+            tagline_upcase:             true
+            description: >
+                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                                        sed diam nonummy nibh euismod tincidunt.
+
+            description_color:          '#9E9E9E'
+            description_animated:       false
+
+       ...
+----
+
+[[slider-adoc-9]]
+=== Asciidoc Markup
+
+[source, yaml]
+----
+masterslider::ms_00009[role="mt-4 mb-5"]
+----
+
+[[rendered-slider-9]]
+=== Rendered slider
 // add placeholder for dynamic load (AJAX)
 //
-masterslider::ms_00009[role="mt-3 mb-5"]
+masterslider::ms_00009[role="mt-4 mb-5"]
+
+
+
+
 
 
 
