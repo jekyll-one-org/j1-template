@@ -143,6 +143,24 @@ module_version:               {{module_version | debug}}
 
   <div id="{{slider.id}}" class="master-slider {{skin}} {{partialview}}">
 
+    {% comment %} Place 'LightGallery' data
+    ----------------------------------------------------------------------------
+    <div id="lightgallery-{{slider.id}}">
+      {% for slide in slider.slides %}
+        <a id="lightGallery-{{slider.id}}-{{forloop.index}}" class="link-no-decoration"
+          href="{{slide.foreground_image}}"
+          data-title="{{slide.title}}">
+          <img
+            id="lightgallery-image-{{slider.id}}-{{forloop.index}}"
+            src="{{slide.foreground_image}}"
+            alt="{{slide.alt}}" title="{{slide.title}}"
+            style="display: none;"
+          />
+        </a>
+      {% endfor %}
+    </div>
+    ---------------------------------------------------------------------------- {% endcomment %}
+
     {% comment %} Place data for 'LightGallery' (later access)
     ---------------------------------------------------------------------------- {% endcomment %}
     <!-- [INFO   ] [~/assets/data/masterslider.html               ]  [Place 'LightGallery' data for id: {{slider.id}}] -->

@@ -198,7 +198,7 @@ settings:
         - slide:
           alt:                          ms-free-food-restaurant
           title:                        ms-free-food-restaurant
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-restaurant.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_3/ms-free-food-restaurant.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
           slideinfo:
@@ -225,7 +225,7 @@ settings:
         - slide:
           alt:                          ms-free-food-hamburger
           title:                        ms-free-food-hamburger
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-hamburger.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_3/ms-free-food-hamburger.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
           slideinfo:
@@ -252,7 +252,7 @@ settings:
         - slide:
           alt:                          ms-free-food-family-2
           title:                        ms-free-food-family-2
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_3/ms-free-food-family-2.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
           slideinfo:
@@ -321,9 +321,9 @@ settings:
         - slide:
           alt:                          ms-free-animals-1
           title:                        ms-free-animals-1
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-1.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_4/ms-free-animals-1.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-1-100x80.jpg"
+          thumb_image:                  /assets/images/modules/masterslider/slider_4/ms-free-animals-1-100x80.jpg
           slideinfo:                    false
 
         # slide 2
@@ -331,9 +331,9 @@ settings:
         - slide:
           alt:                          ms-free-animals-2
           title:                        ms-free-animals-2
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-2.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_4/ms-free-animals-2.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-2-100x80.jpg"
+          thumb_image:                  /assets/images/modules/masterslider/slider_4/ms-free-animals-2-100x80.jpg
           slideinfo:                    false
 
         # slide 3
@@ -341,9 +341,9 @@ settings:
         - slide:
           alt:                          ms-free-animals-3
           title:                        ms-free-animals-3
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-3.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_4/ms-free-animals-3.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-3-100x80.jpg"
+          thumb_image:                  /assets/images/modules/masterslider/slider_4/ms-free-animals-3-100x80.jpg
           slideinfo:                    false
 
         # slide 4
@@ -351,9 +351,9 @@ settings:
         - slide:
           alt:                          ms-free-animals-4
           title:                        ms-free-animals-4
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-4.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_4/ms-free-animals-4.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-4-100x80.jpg"
+          thumb_image:                  /assets/images/modules/masterslider/slider_4/ms-free-animals-4-100x80.jpg
           slideinfo:                    false
 
         # slide 5
@@ -361,9 +361,9 @@ settings:
         - slide:
           alt:                          ms-free-animals-5
           title:                        ms-free-animals-5
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-5.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_4/ms-free-animals-5.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-5-100x80.jpg"
+          thumb_image:                  /assets/images/modules/masterslider/slider_4/ms-free-animals-5-100x80.jpg
           slideinfo:                    false
 
         # slide 6
@@ -371,9 +371,9 @@ settings:
         - slide:
           alt:                          ms-free-animals-6
           title:                        ms-free-animals-6
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-6.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_4/ms-free-animals-6.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-6-100x80.jpg"
+          thumb_image:                  /assets/images/modules/masterslider/slider_4/ms-free-animals-6-100x80.jpg
           slideinfo:                    false
 
         # slide 7
@@ -381,9 +381,9 @@ settings:
         - slide:
           alt:                          ms-free-animals-7
           title:                        ms-free-animals-7
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-7.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_4/ms-free-animals-7.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-animals-7-100x80.jpg"
+          thumb_image:                  /assets/images/modules/masterslider/slider_4/ms-free-animals-7-100x80.jpg
           slideinfo:                    false
 
 
@@ -431,9 +431,9 @@ settings:
         - slide:
           alt:                          ms-free-food-restaurant
           title:                        ms-free-food-restaurant
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-restaurant.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_5/ms-free-food-restaurant.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-restaurant-140x80.jpg"
+          thumb_image:                  /assets/images/modules/masterslider/slider_5/ms-free-food-restaurant-140x80.jpg
           slideinfo:                    false
 
         # slide 2
@@ -441,9 +441,9 @@ settings:
         - slide:
           alt:                          ms-free-food-family
           title:                        ms-free-food-family
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_5/ms-free-food-family.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-140x80.jpg"
+          thumb_image:                  /assets/images/modules/masterslider/slider_5/ms-free-food-family-140x80.jpg
           slideinfo:                    false
 
         # slide 3
@@ -451,9 +451,9 @@ settings:
         - slide:
           alt:                          ms-free-food-woman-hand
           title:                        ms-free-food-woman-hand
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-woman-hand.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_5/ms-free-food-woman-hand.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-woman-hand-140x80.jpg"
+          thumb_image:                  /assets/images/modules/masterslider/slider_5/ms-free-food-woman-hand-140x80.jpg
           slideinfo:                    false
 
         # slide 4
@@ -461,9 +461,9 @@ settings:
         - slide:
           alt:                          ms-free-food-family-2
           title:                        ms-free-food-family-2
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_5/ms-free-food-family-2.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-2-140x80.jpg"
+          thumb_image:                  /assets/images/modules/masterslider/slider_5/ms-free-food-family-2-140x80.jpg
           slideinfo:                    false
 
         # slide 5
@@ -471,9 +471,9 @@ settings:
         - slide:
           alt:                          ms-free-food-family-3
           title:                        ms-free-food-family-3
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-3.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_5/ms-free-food-family-3.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-family-3-140x80.jpg"
+          thumb_image:                  /assets/images/modules/masterslider/slider_5/ms-free-food-family-3-140x80.jpg
           slideinfo:                    false
 
         # slide 6
@@ -481,9 +481,9 @@ settings:
         - slide:
           alt:                          ms-free-food-hamburger
           title:                        ms-free-food-hamburger
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-hamburger.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_5/ms-free-food-hamburger.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-hamburger-140x80.jpg"
+          thumb_image:                  /assets/images/modules/masterslider/slider_5/ms-free-food-hamburger-140x80.jpg
           slideinfo:                    false
 
         # slide 7
@@ -491,9 +491,9 @@ settings:
         - slide:
           alt:                          ms-free-food-pizza
           title:                        ms-free-food-pizza
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-pizza.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_5/ms-free-food-pizza.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-pizza-140x80.jpg"
+          thumb_image:                  /assets/images/modules/masterslider/slider_5/ms-free-food-pizza-140x80.jpg
           slideinfo:                    false
 
         # slide 8
@@ -501,9 +501,9 @@ settings:
         - slide:
           alt:                          ms-free-food-single-man
           title:                        ms-free-food-single-man
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-man.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_5/ms-free-food-single-man.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-man-140x80.jpg"
+          thumb_image:                  /assets/images/modules/masterslider/slider_5/ms-free-food-single-man-140x80.jpg
           slideinfo:                    false
 
         # slide 9
@@ -511,9 +511,9 @@ settings:
         - slide:
           alt:                          ms-free-food-single-woman
           title:                        ms-free-food-single-woman
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-woman.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_5/ms-free-food-single-woman.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-single-woman-140x80.jpg"
+          thumb_image:                  /assets/images/modules/masterslider/slider_5/ms-free-food-single-woman-140x80.jpg
           slideinfo:                    false
 
         # slide 10
@@ -521,10 +521,11 @@ settings:
         - slide:
           alt:                          ms-free-food-table
           title:                        ms-free-food-table
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-table.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_5/ms-free-food-table.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_image:                  "https://www.masterslider.com/wp-content/uploads/sites/5/2014/05/ms-free-food-table-140x80.jpg"
+          thumb_image:                  /assets/images/modules/masterslider/slider_5/ms-free-food-table-140x80.jpg
           slideinfo:                    false
+
 
     # --------------------------------------------------------------------------
     # Slider 6 - ThumbTabs (position bottom|horizontal)
@@ -571,7 +572,7 @@ settings:
         - slide:
           alt:                          Kitchen Design Ideas
           title:                        Kitchen Design Ideas
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876387431_d86867a3d9_b.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876385555_74a0d7d7ee_b.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
 
           thumbinfo:
@@ -588,7 +589,7 @@ settings:
         - slide:
           alt:                          Modern Wall Design
           title:                        Modern Wall Design
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876388511_d618d53455_b.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876387431_d86867a3d9_b.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
 
           thumbinfo:
@@ -605,7 +606,7 @@ settings:
         - slide:
           alt:                          Banquette Seating Kitchen
           title:                        Banquette Seating Kitchen
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876389463_db27a377e1_b.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876388511_d618d53455_b.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
 
           thumbinfo:
@@ -622,7 +623,7 @@ settings:
         - slide:
           alt:                          Harmony in Interior Design
           title:                        Harmony in Interior Design
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876390339_2e4dd9dbbb_b.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876389463_db27a377e1_b.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
 
           thumbinfo:
@@ -639,7 +640,7 @@ settings:
         - slide:
           alt:                          Make Your Workspace Better
           title:                        Make Your Workspace Better
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876390339_2e4dd9dbbb_b.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876390339_2e4dd9dbbb_b.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
 
           thumbinfo:
@@ -701,7 +702,7 @@ settings:
         - slide:
           alt:                          Kitchen Design Ideas
           title:                        Kitchen Design Ideas
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876387431_d86867a3d9_b.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876385555_74a0d7d7ee_b.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
 
           thumbinfo:
@@ -719,7 +720,7 @@ settings:
         - slide:
           alt:                          Modern Wall Design
           title:                        Modern Wall Design
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876388511_d618d53455_b.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876387431_d86867a3d9_b.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
 
           thumbinfo:
@@ -736,7 +737,7 @@ settings:
         - slide:
           alt:                          Banquette Seating Kitchen
           title:                        Banquette Seating Kitchen
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876389463_db27a377e1_b.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876388511_d618d53455_b.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
 
           thumbinfo:
@@ -753,7 +754,7 @@ settings:
         - slide:
           alt:                          Harmony in Interior Design
           title:                        Harmony in Interior Design
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876390339_2e4dd9dbbb_b.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876389463_db27a377e1_b.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
 
           thumbinfo:
@@ -770,7 +771,7 @@ settings:
         - slide:
           alt:                          Make Your Workspace Better
           title:                        Make Your Workspace Better
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2014/04/6876390339_2e4dd9dbbb_b.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_6_7/6876390339_2e4dd9dbbb_b.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
 
           thumbinfo:
@@ -821,7 +822,7 @@ settings:
         - slide:
           alt:                          Special slider for bloggers
           title:                        Special slider for bloggers
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider6-bg-slide2-1024x622.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_8/postslider6-bg-slide2-1024x622.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
 
@@ -853,7 +854,7 @@ settings:
         - slide:
           alt:                          We love architecture websites
           title:                        We love architecture websites
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-3.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_8/postslider-5-img-3.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
 
@@ -885,7 +886,7 @@ settings:
         - slide:
           alt:                          New Buildings, New Designs!
           title:                        New Buildings, New Designs!
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-2.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_8/postslider-5-img-2.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
 
@@ -917,7 +918,7 @@ settings:
         - slide:
           alt:                          Greatest Modern Architect Designs
           title:                        Greatest Modern Architect Designs
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2017/06/postslider-5-img-1.jpg"
+          foreground_image:             /assets/images/modules/masterslider/slider_8/postslider-5-img-1.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
 
@@ -985,9 +986,9 @@ settings:
         # slide 1
         #
         - slide:
-          alt:                          childhood-memories
-          title:                        childhood-memories
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/6-2.jpg"
+          alt:                          Childhood Memories
+          title:                        Childhood Memories
+          foreground_image:             /assets/images/modules/masterslider/slider_9/6-2.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
           slideinfo:
@@ -1000,7 +1001,7 @@ settings:
             tagline:                    John Wiliam
             tagline_color:              '#7a7a7a'
             tagline_animated:           false
-            tagline_upcase:             true
+            tagline_upcase:             false
             description: >
                                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                                         sed diam nonummy nibh euismod tincidunt.
@@ -1011,9 +1012,9 @@ settings:
         # slide 2
         #
         - slide:
-          alt:                          consectetuer-adipiscing
-          title:                        consectetuer-adipiscing
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/5-2.jpg"
+          alt:                          Consectetuer adipiscing elit
+          title:                        Consectetuer adipiscing elit
+          foreground_image:             /assets/images/modules/masterslider/slider_9/5-2.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
           slideinfo:
@@ -1021,7 +1022,7 @@ settings:
             boxed:                      false
             title:                      Consectetuer adipiscing elit
             title_color:                '#222222'
-            title_animated:             false
+            title_animated:             fadeInRight
             title_upcase:               true
             tagline:                    John Wiliam
             tagline_color:              '#7a7a7a'
@@ -1037,17 +1038,17 @@ settings:
         # slide 3
         #
         - slide:
-          alt:                          nonummy-nibh
-          title:                        nonummy-nibh
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/6-3.jpg"
+          alt:                          Suspendissue ut pulvinar mauris
+          title:                        Suspendissue ut pulvinar mauris
+          foreground_image:             /assets/images/modules/masterslider/slider_9/6-3.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
           slideinfo:
             rtext:                      300                                     # false or [100 .. 500]
             boxed:                      false
-            title:                      SUSPENDISSE UT PULVINAR MAURIS
+            title:                      Suspendissue ut pulvinar mauris
             title_color:                '#222222'
-            title_animated:             false
+            title_animated:             fadeInRight
             title_upcase:               true
             tagline:                    John Wiliam
             tagline_color:              '#7a7a7a'
@@ -1064,17 +1065,17 @@ settings:
         # slide 4
         #
         - slide:
-          alt:                          nibh-euismod
-          title:                        nibh-euismod
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/8.jpg"
+          alt:                          Sed dabibus sit amet felis
+          title:                        Sed dabibus sit amet felis
+          foreground_image:             /assets/images/modules/masterslider/slider_9/8.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
           slideinfo:
             rtext:                      300                                     # false or [100 .. 500]
             boxed:                      false
-            title:                      SED DAPIBUS SIT AMET FELIS
+            title:                      Sed dabibus sit amet felis
             title_color:                '#222222'
-            title_animated:             false
+            title_animated:             fadeInRight
             title_upcase:               true
             tagline:                    Gregory Wilson
             tagline_color:              '#7a7a7a'
@@ -1090,9 +1091,9 @@ settings:
         # slide 5
         #
         - slide:
-          alt:                          cheetags
-          title:                        cheetags
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/8-1.jpg"
+          alt:                          Cheetags on the edge
+          title:                        Cheetags on the edge
+          foreground_image:             /assets/images/modules/masterslider/slider_9/8-1.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
           slideinfo:
@@ -1100,7 +1101,7 @@ settings:
             boxed:                      false
             title:                      Cheetags on the edge
             title_color:                '#222222'
-            title_animated:             false
+            title_animated:             fadeInRight
             title_upcase:               true
             tagline:                    Gregory Wilson
             tagline_color:              '#7a7a7a'
@@ -1116,24 +1117,24 @@ settings:
         # slide 6
         #
         - slide:
-          alt:                          wp-content-uploads
-          title:
-          foreground_image:             "https://www.masterslider.com/wp-content/uploads/sites/5/2013/10/1-2.jpg"
+          alt:                          Consectetuer adipiscing elit
+          title:                        Consectetuer adipiscing elit
+          foreground_image:             /assets/images/modules/masterslider/slider_9/1-2.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
           slideinfo:
             rtext:                      300                                     # false or [100 .. 500]
             boxed:                      false
-            title:                      CONSECTETUR ADIPISCING ELIT
+            title:                      Consecteur adipiscing elit
             title_color:                '#222222'
-            title_animated:             false
+            title_animated:             fadeInRight
             title_upcase:               true
             tagline:                    Gregory Wilson
             tagline_color:              '#7a7a7a'
             tagline_animated:           false
             tagline_upcase:             true
             description: >
-                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                                        Lorem ipsum dolor sit amet, consec tetuer adipiscing elit,
                                         sed diam nonummy nibh euismod tincidunt.
 
             description_color:          '#9E9E9E'                               # md-gray-500
