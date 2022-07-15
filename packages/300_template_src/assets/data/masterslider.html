@@ -89,7 +89,7 @@ module_version:               {{module_version | debug}}
   {% comment %} Set base classes for a slider ('master-slider')
   ------------------------------------------------------------------------------ {% endcomment %}
 
-  {% assign lightbox  = slider.lightbox %}
+  {% assign lightbox  = slider.lightbox.enabled %}
 
   {% if slider.skin %}
     {% capture skin %}ms-skin-{{slider.skin}}{% endcapture %}
@@ -140,14 +140,47 @@ module_version:               {{module_version | debug}}
   <!-- MasterSlider Main -->
   <!-- div id="{{slider.id}}" class="master-slider {{skin}} {{partialview}}" -->
   <!-- div id="{{slider.id}}" class="master-slider {{skin}}" -->
+
   <div id="{{slider.id}}" class="master-slider {{skin}} {{partialview}}">
 
-    {% for slide in slider.slides %}
-    <div id="ms-slide-{{slider.id}}-{{forloop.index}}" class="ms-slide">
+    {% comment %} Place 'LightGallery' data
+    ----------------------------------------------------------------------------
+    <div id="lightgallery-{{slider.id}}">
+      {% for slide in slider.slides %}
+        <a id="lightGallery-{{slider.id}}-{{forloop.index}}" class="link-no-decoration"
+          href="{{slide.foreground_image}}"
+          data-title="{{slide.title}}">
+          <img
+            id="lightgallery-image-{{slider.id}}-{{forloop.index}}"
+            src="{{slide.foreground_image}}"
+            alt="{{slide.alt}}" title="{{slide.title}}"
+            style="display: none;"
+          />
+        </a>
+      {% endfor %}
+    </div>
+    ---------------------------------------------------------------------------- {% endcomment %}
 
-      {% comment %} Place Lighbox data if enabled
+    {% comment %} Place data for 'LightGallery' (later access)
+    ---------------------------------------------------------------------------- {% endcomment %}
+    <!-- [INFO   ] [~/assets/data/masterslider.html               ]  [Place 'LightGallery' data for id: {{slider.id}}] -->
+    <div id="lightgallery_{{slider.id}}" class="lightgallery-container" style="display: none;">
+      {% for slide in slider.slides %}
+      <img
+        id="{{slider.id}}_{{forloop.index}}"
+        src="{{slide.foreground_image}}"
+        alt="{{slide.alt}}" title="{{slide.title}}"
+      />
+      {% endfor %}
+    </div>
+
+    {% for slide in slider.slides %}
+    <div id="ms-slide-{{slider.id}}-{{forloop.index}}" class="ms-slide ms-slide-{{slider.id}}">
+
+      {% comment %} Place Lighbox button if enabled (active/selected)
       -------------------------------------------------------------------------- {% endcomment %}
-      {% if slider.lightbox and slider.options.layout != 'partialview' %}
+      {% if slider.lightbox.enabled and slider.options.layout != 'partialview' %}
+      <!-- [INFO   ] [~/assets/data/masterslider.html               ]  [Place 'Lighbox' button for id: {{slider.id}}] -->
       <div class="ms-nav-lightbox icon-flex" style="display: block;">
         <a id="lightbox-{{slider.id}}" class="link-no-decoration icon-wrapper-2x"
           href="{{slide.foreground_image}}"
@@ -161,6 +194,7 @@ module_version:               {{module_version | debug}}
       {% comment %} Place images
       -------------------------------------------------------------------------- {% endcomment %}
       <img
+        class="{{slider.id}}-lg-item"
         src="{{slide.background_image}}"
         alt="{{slide.alt}}" title="{{slide.title}}"
         data-src="{{slide.foreground_image}}"

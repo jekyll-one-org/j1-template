@@ -35,8 +35,10 @@ defaults:
   icon_size:                            2x
 
   skin:                                 default
-  lightbox:                             false
-  
+  lightbox:
+    enabled:                            false
+    type:                               lb                                      # lb | lg
+
 
   # ----------------------------------------------------------------------------
   # DEFAULT  settings
