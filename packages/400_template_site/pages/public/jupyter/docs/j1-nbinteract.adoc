@@ -43,12 +43,12 @@ resources:                              [ animate, clipboard, lightbox, nbintera
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/images/modules/attics/kirklai-1920x1280.jpg
-          alt:                          Photo by 𝓴𝓘𝓡𝓚 𝕝𝔸𝕀 on Unsplash
+        - url:                          /assets/images/modules/attics/yellow-cactus-1920x1280.jpg
+          alt:                          Photo by Yellow Cactus on Unsplash
           badge:
             type:                       unsplash
-            author:                     𝓴𝓘𝓡𝓚 𝕝𝔸𝕀
-            href:                       https://unsplash.com/@kirklai
+            author:                     Yellow Cactus
+            href:                       https://unsplash.com/@yellowcactus
 ---
 
 // Page Initializer

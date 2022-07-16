@@ -122,6 +122,21 @@
     # --------------------------------------------------------------------------
     # Roundtrip
     #
+    - title:                            Tester
+      icon:                             briefcase-edit-outline
+      dropdown:
+
+#       - title:                         MS Pro
+#         href:                          /pages/public/learn/masterslider-pro/
+#         icon:                          star-check
+
+#       - title:                         Plans
+#         href:                          /pages/public/learn/plan_tester/
+#         icon:                          star-check
+
+    # --------------------------------------------------------------------------
+    # Roundtrip
+    #
     - title:                            Roundtrip
       icon:                             briefcase-search-outline
       dropdown:
@@ -155,46 +170,68 @@
           icon:                         magnify
 
     # --------------------------------------------------------------------------
-    # Experimental
+    # Jupyter Notebooks
     #
-    - title:                            Experimental
-      icon:                             test-tube
+    - title:                            Jupyter Notebooks
+      icon:                             notebook-outline
       dropdown:
 
-        - title:                        Textbooks
-          icon:                         book-open-page-variant
+        - title:                        Where to go
+          href:                         /pages/public/jupyter/where-to-go/
+          icon:                         paw
+
+        # ----------------------------------------------------------------------
+        # Interactive Notebooks
+        #
+        - title:                        Distributed Notebooks
+          icon:                         notebook-outline
           dropdown:
 
-            - title:                    Widget Examples
-              href:                     /pages/public/jupyter/textbooks/j1-nb-test/
-              icon:                     script-text-play-outline
+            - title:                    Time Tables Visualization
+              href:                     /pages/public/jupyter/examples/distributed/j1-circular-times-table/
+              icon:                     notebook-outline
+            - title:                    ODEs in Python
+              href:                     /pages/public/jupyter/examples/distributed/odes-in-python/
+              icon:                     notebook-outline
+            - title:                    Common Used Widgets
+              href:                     /pages/public/jupyter/examples/distributed/common-used-widgets/
+              icon:                     notebook-outline
 
-            - title:                    Interactive Evaluation
-              href:                     /pages/public/jupyter/textbooks/odes-in-python/
-              icon:                     script-text-play-outline
-            - title:                    Climate Change
-              href:                     /pages/public/jupyter/textbooks/climate-change-forecast/
-              icon:                     script-text-play-outline
-
-        - title:                        Docs
-          icon:                         book-open-page-variant
+        # ----------------------------------------------------------------------
+        # Static Notebooks
+        #
+        - title:                        Localized Notebooks
+          icon:                         notebook-outline
           dropdown:
 
-            - title:                    J1 NBI Docs
+            - title:                    Climate Change Forecast
+              href:                     /pages/public/jupyter/examples/localized/climate-change-forecast/
+              icon:                     notebook-outline
+            - title:                    Visualizations using Altair
+              href:                     /pages/public/jupyter/examples/localized/j1-altair-visualizations/
+              icon:                     notebook-outline
+            - title:                    Visualizations using Bokeh
+              href:                     /pages/public/jupyter/examples/localized/j1-bokeh-visualizations/
+              icon:                     notebook-outline
+
+        # ----------------------------------------------------------------------
+        # Documentation
+        #
+        - title:                        NBI Documentation
+          icon:                         head-lightbulb
+          dropdown:
+
+            - title:                    NBI Integration
               href:                     /pages/public/jupyter/docs/j1-nbinteract-docs/
               icon:                     alpha-j-box
-
-            - title:                    NBI Docs
-              href:                     /pages/public/jupyter/textbooks/nbinteract-docs/
-              icon:                     alpha-j-box
-            - title:                    NBI Widgets
+            - title:                    NBI Wigets
               href:                     /pages/public/jupyter/docs/nbi-widgets/
-              icon:                     book
+              icon:                     alpha-j-box
             - title:                    BinderHub API
-              href:                     /pages/public/jupyter/docs/binderhub-api/
+              href:                     /pages/public/jupyter/docs/binderhub/
               icon:                     book
             - title:                    JupyterHub API
-              href:                     /pages/public/jupyter/docs/jupyterlab-api/
+              href:                     /pages/public/jupyter/docs/jupyterhub/
               icon:                     book
 
     # --------------------------------------------------------------------------
@@ -219,37 +256,33 @@
 - item:                                 Tools
   sublevel:
 
-    # --------------------------------------------------------------------------
-    # Previewer
-    #
-    - title:                            Previewer
-      icon:                             eye
-      dropdown:
-
-      - title:                          Country Flags
-        href:                           /pages/public/previewer/country_flags/
-        icon:                           flag
-      - title:                          MD Color Palette
-        href:                           /pages/public/previewer/color_palette/
-        icon:                           format-color-fill
-      - title:                          MDI Icons (regular)
-        href:                           /pages/public/previewer/mdi_font/
-        icon:                           alarm-light
-      - title:                          MDI Icons (light)
-        href:                           /pages/public/previewer/mdil_font/
-        icon:                           alarm-light-outline
-      - title:                          Twitter Emojis
-        href:                           /pages/public/previewer/twitter_emoji/
-        icon:                           emoticon-cool-outline
-      - title:                          Rouge Themes
-        href:                           /pages/public/previewer/rouge/
-        icon:                           code-parentheses
-      - title:                          Range Slider
-        href:                           /pages/public/previewer/range-slider/
-        icon:                           arrow-decision-outline
-      - title:                          Justified Gallery
-        href:                           /pages/public/previewer/justified_gallery/
-        icon:                           view-dashboard
+    - title:                            Master Slider
+      href:                             /pages/public/previewer/masterslider/
+      icon:                             gesture-swipe                           # export
+    - title:                            Country Flags
+      href:                             /pages/public/previewer/country_flags/
+      icon:                             flag
+    - title:                            MD Color Palette
+      href:                             /pages/public/previewer/color_palette/
+      icon:                             format-color-fill
+    - title:                            MDI Icons (regular)
+      href:                             /pages/public/previewer/mdi_font/
+      icon:                             alarm-light
+    - title:                            MDI Icons (light)
+      href:                             /pages/public/previewer/mdil_font/
+      icon:                             alarm-light-outline
+    - title:                            Twitter Emojis
+      href:                             /pages/public/previewer/twitter_emoji/
+      icon:                             emoticon-cool-outline
+    - title:                            Rouge Themes
+      href:                             /pages/public/previewer/rouge/
+      icon:                             code-parentheses
+    - title:                            Range Slider
+      href:                             /pages/public/previewer/range-slider/
+      icon:                             arrow-decision-outline
+    - title:                            Justified Gallery
+      href:                             /pages/public/previewer/justified_gallery/
+      icon:                             view-dashboard
 
 # ------------------------------------------------------------------------------
 # Menu BLOG
@@ -451,6 +484,9 @@
     - title:                            This site
       icon:                             home-variant-outline
       href:                             /pages/public/about/site
+    - title:                            Features
+      icon:                             wrench
+      href:                             /pages/public/about/features/
     - title:                            Privacy
       icon:                             heart
       href:                             /pages/public/legal/en/privacy/

@@ -1,7 +1,7 @@
 ---
 title:                                  Theme Previewer
-tagline:                                bs themes
-date:                                   2020-11-08 00:00:00
+tagline:                                bootstrap v5 themes
+date:                                   2020-01-01 00:00:00
 description: >
                                         Bootstrap is a HTML, CSS and JS Library that focuses on simplifying the
                                         development of modern web pages. The primary purpose of applying a theme
