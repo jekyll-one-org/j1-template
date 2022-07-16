@@ -57,16 +57,16 @@
 
 .j1-ms-info-title {
   text-align: center;
-  font-size: 26px !important;
+  font-size: 24px;
   font-weight: 600;
-  color: #f3f3f3;
+  color: ##BDBDBD;
 }
 
 .j1-ms-info-tagline {
   text-align: center;
   font-style: italic;
-  font-size: 24px !important;
-  font-weight: 300;
+  font-size: 18px;
+  font-weight: 400;
   color: #9E9E9E;
   margin-bottom: 1rem;
 }

@@ -254,6 +254,7 @@ j1.adapter.masterslider = (function (j1, window) {
               Object.keys(slider[index].controls).forEach(function(key) {
                 var msSliderManagerItem = '\n';
                 logger.info('\n' + 'slider control found id|key: ' + slider[index].id + '|' + key);
+
                 // merge settings, defaults into control
                 control = $.extend({}, controlOptions[key], slider[index].controls[key]);
                 // remove J1 config setting
@@ -268,13 +269,71 @@ j1.adapter.masterslider = (function (j1, window) {
 
               });
             } else {
-              logger.info('\n' + 'no slider controls found on id: ' + slider[key].id);
+              logger.debug('\n' + 'no slider controls found on id: ' + slider[key].id);
             }
           } else {
-            logger.info('\n' + 'slider found disabled on id: ' + slider[key].id);
+            logger.debug('\n' + 'slider found disabled on id: ' + slider[key].id);
           }
         });
       } // END setupControls
+
+      // initialize plugins on all sliders if 'enabled'
+      //
+      function setupPlugIns(options, slider, sliderManager) {
+        const pluginOptions = options.plugins;
+        var msSliderManager = sliderManager;
+        var plugins         = {};
+        var pluginSettings;
+        var index;
+        var i=0;
+
+        logger.info('\n' + 'generate slider plugins');
+
+        if (sliderManager) msSliderManager.innerHTML += newline;
+        Object.keys(slider).forEach(function(key) {
+          i++;                                                                  // instance index
+          index = parseInt(key);                                                // object index
+
+          if (slider[index].enabled) {
+            if (slider[index].plugins) {
+              Object.keys(slider[index].plugins).forEach(function(key) {
+                var msSliderManagerItem = '\n';
+                logger.info('\n' + 'slider plugin found id|key: ' + slider[index].id + '|' + key);
+
+                // merge settings, defaults into 'plugins'
+                plugins = $.extend({}, pluginOptions, slider[index].plugins);
+
+                // generate setup for plugin 'MSScrollParallax'
+                if (plugins.MSScrollParallax ) {
+                  // remove J1 config settings
+                  delete plugins.MSScrollParallax['enabled'];
+
+                  // create a 'properties' string
+                  pluginSettings = JSON.stringify(plugins.MSScrollParallax).replace(/"/g, '').replace(/{/g, '').replace(/}/g, '');
+                  logger.info('\n' + 'plugin MSScrollParallax found: ' + pluginSettings);
+
+                  // remove property names to get a pure 'parameter' string
+                  pluginSettings = pluginSettings.replace(/layers_parallax_depth:/g, '');
+                  pluginSettings = pluginSettings.replace(/background_parallax_depth:/g, '');
+                  pluginSettings = pluginSettings.replace(/fade_layers:/g, '');
+
+                  if (sliderManager) {
+                    msSliderManagerItem        = '    ' + 'MSScrollParallax.setup(masterslider_' + i + ', ' + pluginSettings + ');';
+                    msSliderManager.innerHTML +=  msSliderManagerItem + '\n';
+                  } else {
+//                  _this['MSScrollParallax'].setup(j1.masterslider.instances[index] + ', ' + pluginSettings);
+                    MSScrollParallax.setup(j1.masterslider.instances[index], pluginSettings );
+                  }
+                } // END plugin 'MSScrollParallax'
+              });
+            } else {
+              logger.debug('\n' + 'no slider plugins found on id: ' + slider[key].id);
+            }
+          } else {
+            logger.debug('\n' + 'slider found disabled on id: ' + slider[key].id);
+          }
+        });
+      } // END setupPlugIns
 
       // run the method 'setup' on all sliders 'enabled'
       //
@@ -295,7 +354,15 @@ j1.adapter.masterslider = (function (j1, window) {
           if (slider[index].enabled) {
             logger.info('\n' + 'slider is being initialized on id: ' + slider[key].id);
 
+            // merge settings, defaults into 'setup'
             setup = $.extend({}, settings.options, slider[index].options);
+
+            // write filter structure if required
+            if (setup.filters != null) {
+              var filterSettings = JSON.stringify(setup.filters).replace(/"/g, '');
+              setup.filters = filterSettings;
+              logger.info('\n' + 'filters found: ' + filterSettings);
+            }
 
             if (sliderManager) {
               msSliderManagerItem        = '    ' + 'masterslider_' + i + '.setup(' + '\'' + slider[key].id + '\'' + ', ' + JSON.stringify(setup) + ');'
@@ -304,14 +371,18 @@ j1.adapter.masterslider = (function (j1, window) {
               _this["masterslider_" + i].setup(slider[key].id, setup);
             }
 
+            // save slider config for later access
             if (save_config) {
-              // save slider config for later access
-              j1.masterslider.instances.push(_this["masterslider_" + i]);
+              if (sliderManager) {
+                msSliderManagerItem        = '    ' + 'j1.masterslider.instances.push(masterslider_' + i + ');';
+                msSliderManager.innerHTML +=  msSliderManagerItem + '\n';
+              } else {
+                j1.masterslider.instances.push(_this["masterslider_" + i]);
+              }
             }
           } else {
-            logger.debug('\n' + 'slider found disabled on id: ' + slider[key].id);
+            logger.info('\n' + 'slider found disabled on id: ' + slider[key].id);
           }
-
         });
 
         _this.setState('sliders_initialized');
@@ -332,6 +403,7 @@ j1.adapter.masterslider = (function (j1, window) {
 
       setupControls(options, slider, msSliderManager);
       setupSliders(options, slider, msSliderManager, save_config);
+      setupPlugIns(options, slider, msSliderManager);
 
     }, // END initSliders
 

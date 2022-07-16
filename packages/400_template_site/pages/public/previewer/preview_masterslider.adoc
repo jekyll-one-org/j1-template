@@ -276,7 +276,7 @@ masterslider::ms_00002[role="mt-4 mb-5"]
 masterslider::ms_00002[role="mt-4 mb-5"]
 
 
-== Slider 3 - SlideInfo (Boxed|Animated)
+== Slider 3 - SlideInfo (AutoPlay|Boxed|Animated)
 
 lorem:sentences[3]
 
@@ -325,7 +325,16 @@ settings:
       options:
 
         width:                          1200
-        height:                         500
+        height:                         600
+        autoplay:                       true
+        loop:                           true
+        speed:                          20
+        view:                           basic
+        filters:
+          grayscale:                    1
+          opacity:                      0.5
+          brightness:                   2
+
 
       # ------------------------------------------------------------------------
       # Slides
@@ -341,22 +350,21 @@ settings:
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
           slideinfo:
-            rtext:                      300
+            rtext:                      300                                     # false or [100 .. 500]
             boxed:                      true
-            title:                      Sample Title 1
-            title_color:                '#BDBDBD'
-            title_animated:             rotateInUpLeft
+            title:                      The Art of Life
+            title_color:                '#BDBDBD'                               # md-gray-400
+            title_animated:             fadeInRight
             title_upcase:               false
-            tagline:                    false
-            tagline_color:              false
-            tagline_animated:           false
+            tagline:                    places to enjoy
+            tagline_color:              false                                   # '#757575' md-gray-600
+            tagline_animated:           fadeInLeft
             tagline_upcase:             false
             description: >
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                        Ut enim ad minim veniam.
+                                        sed do eiusmod tempor incididunt.
 
-            description_color:          '#9E9E9E'
+            description_color:          '#9E9E9E'                               # md-gray-500
             description_animated:       fadeInRight
 
       ...

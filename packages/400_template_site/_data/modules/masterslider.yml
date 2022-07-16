@@ -119,6 +119,17 @@ settings:
         # NO controls used for this slider
 
       # ------------------------------------------------------------------------
+      # Slider plugins
+      #
+      plugins:
+
+        MSScrollParallax:
+          enabled:                      true
+          layers_parallax_depth:        50
+          background_parallax_depth:    80
+          fade_layers:                  false
+
+      # ------------------------------------------------------------------------
       # Slider options
       #
       options:
@@ -180,7 +191,18 @@ settings:
 
         slideinfo:
           enabled:                      true
-          margin:                       -134
+          margin:                       -133
+
+      # ------------------------------------------------------------------------
+      # Slider plugins
+      #
+      plugins:
+
+        MSScrollParallax:
+          enabled:                      true
+          layers_parallax_depth:        50
+          background_parallax_depth:    80
+          fade_layers:                  false
 
       # ------------------------------------------------------------------------
       # Slider options
@@ -189,6 +211,14 @@ settings:
 
         width:                          1200
         height:                         600
+        autoplay:                       true
+        loop:                           true
+        speed:                          20
+        view:                           basic                                   # flow
+        filters:
+          grayscale:                    90%
+          opacity:                      0.5
+          brightness:                   2
 
       # ------------------------------------------------------------------------
       # Slides

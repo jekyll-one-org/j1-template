@@ -187,7 +187,7 @@ defaults:
     swipe:                                true
     mouse:                                true
     keyboard:                             false
-    layout:                               boxed
+    layout:                               boxed                                 # default: boxed | fullwidth | fullscreen | fillwidth | autofill | partialview
     wheel:                                false
     autoplay:                             false
     instantStartLayers:                   false
@@ -200,23 +200,36 @@ defaults:
     smoothHeight:                         true
     endPause:                             false
     overPause:                            true
-    fillMode:                             fill
+    fillMode:                             fill                                  # default: fill | fit | stretch | center | tile
     centerControls:                       true
     startOnAppear:                        false
-    layersMode:                           center
+    layersMode:                           center                                # default: center | full
     autofillTarget:                       ''
     hideLayers:                           false
     fullscreenMargin:                     0
-    speed:                                20
-    dir:                                  h
+    speed:                                20                                    # default: 17, [0 .. 100]
+    dir:                                  h                                     # default: h | v
     responsive:                           true
     tabletWidth:                          768
     tabletHeight:                         null
     phoneWidth:                           480
     phoneHeight:                          null
     sizingReference:                      window
-    parallaxMode:                         swipe
-    view:                                 basic
+    parallaxMode:                         mouse                                 # default: mouse | swipe | mouse:x-only | mouse:y-only
+    filters:                              null
+    view:                                 basic                                 # default: basic | fade | mask | wave | flow | stack | scale | focus | parallaxMask | partialWave | fadeBasic | fadeWave | fadeFlow
+
+  plugins:
+
+    MSScrollParallax:
+      enabled:                            false
+      layers_parallax_depth:              50
+      background_parallax_depth:          40
+      fade_layers:                        false
+
+
+
+
 
 # ------------------------------------------------------------------------------
 # END config
