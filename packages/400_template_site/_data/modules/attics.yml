@@ -56,7 +56,7 @@ settings:
         padding_top:                    400
         padding_bottom:                 50
         opacity:                        0.5
-#       title_animate:                  fadeInDown
+#       title_animate:                  animate__fadeInDown
 #       raised_level:                   15
 #       background_color_1:             "#512DA8"                               # deep-purple-700
 #       background_color_2:             "#B39DDB"                               # deep-purple-200

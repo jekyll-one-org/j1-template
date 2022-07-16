@@ -35,14 +35,13 @@ comments:                               false
 fab_menu_id:                            page_ctrl_simple
 
 permalink:                              /pages/public/previewer/masterslider/
-regenerate:                             false
+regenerate:                             true
 
 resources:                              [ animate, clipboard, lightbox, lightGallery, masterslider, rouge ]
 resource_options:
   - attic:
       padding_top:                      400
       padding_bottom:                   50
-
       opacity:                          0.5
       slides:
         - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
@@ -188,9 +187,13 @@ masterslider::ms_00001[role="mt-4 mb-5"]
 masterslider::ms_00001[role="mt-4 mb-5"]
 
 
-== Slider 2 - Full Width
+== Slider 2 - Full Width + Lightbox
 
-lorem:sentences[3]
+MS sliders of type `fullwidth` can be used for example as delimters in
+text-dominated pages.
+
+TIP: For all MS sliders (except one of layout type 'partialview') a lightbox
+can be used to explore all the images of a slider.
 
 [[slider-settings-2]]
 === Slider settings
@@ -314,7 +317,7 @@ settings:
 
         slideinfo:
           enabled:                      true
-          margin:                       -120
+          margin:                       -115
 
       # ------------------------------------------------------------------------
       # Slider options
@@ -418,6 +421,9 @@ settings:
 
         thumblist:
           enabled:                      true
+          width:                        100
+          height:                       80
+          type:                         thumbs
           autohide:                     false
           dir:                          v
 
@@ -512,10 +518,11 @@ settings:
 
         thumblist:
           enabled:                      true
-          autohide:                     false
-          align:                        bottom
           width:                        140
           height:                       80
+          type:                         thumbs
+          autohide:                     false
+          align:                        bottom
           margin:                       5
           space:                        5
 

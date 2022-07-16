@@ -207,7 +207,7 @@ module_version:               {{module_version | debug}}
         <h3 class="notoc j1-ms-thumb-tagline">{{slide.thumbinfo.tagline}}</h3>
         {% endif %}
         {% if slide.thumbinfo.description %}
-        <p class="j1-ms-thumb-description">{{slide.thumbinfo.description}}</p>
+        <p class="j1-ms-thumb-description {{rtext}}">{{slide.thumbinfo.description}}</p>
         {% endif %}
       </div>
       {% endif %}
@@ -239,7 +239,7 @@ module_version:               {{module_version | debug}}
         {% endif %}
 
         {% if slide.slideinfo.title_animated %}
-          {% capture title_animated %}animated {{slide.slideinfo.title_animated}} {% endcapture %}
+          {% capture title_animated %}animate__animated animate__{{slide.slideinfo.title_animated}} {% endcapture %}
         {% else %}
           {% capture title_animated %} {% endcapture %}
         {% endif %}
@@ -255,7 +255,7 @@ module_version:               {{module_version | debug}}
         {% endif %}
 
         {% if slide.slideinfo.tagline_animated %}
-          {% capture tagline_animated %}animated {{slide.slideinfo.title_animated}} {% endcapture %}
+          {% capture tagline_animated %}animate__animated animate__{{slide.slideinfo.tagline_animated}} {% endcapture %}
         {% else %}
           {% capture tagline_animated %} {% endcapture %}
         {% endif %}
@@ -271,7 +271,7 @@ module_version:               {{module_version | debug}}
         {% endif %}
 
         {% if slide.slideinfo.description_animated %}
-          {% capture description_animated %}animated {{slide.slideinfo.description_animated}} {% endcapture %}
+          {% capture description_animated %}animate__animated animate__{{slide.slideinfo.description_animated}} {% endcapture %}
         {% else %}
           {% capture description_animated %} {% endcapture %}
         {% endif %}
@@ -283,7 +283,7 @@ module_version:               {{module_version | debug}}
         {% endif %}
 
         {% if slide.slideinfo.button.animated %}
-          {% capture button_animated %}animated {{slide.slideinfo.button.animated}} {% endcapture %}
+          {% capture button_animated %}animate__animated animate__{{slide.slideinfo.button.animated}} {% endcapture %}
         {% else %}
           {% capture button_animated %} {% endcapture %}
         {% endif %}
@@ -295,10 +295,10 @@ module_version:               {{module_version | debug}}
         {% endif %}
 
           {% if title %}
-          <h2 class="notoc j1-ms-info-title {{rtext}} {{title_animated}}" style="color: {{slide.slideinfo.title_color}};">{{title}}</h2>
+          <h2 class="notoc j1-ms-info-title {{title_animated}}" style="color: {{slide.slideinfo.title_color}};">{{title}}</h2>
           {% endif %}
           {% if tagline %}
-          <h3 class="notoc j1-ms-info-tagline {{rtext}} {{tagline_animated}}" style="color: {{slide.slideinfo.tagline_color}};">{{tagline}}</h3>
+          <h3 class="notoc j1-ms-info-tagline {{tagline_animated}}" style="color: {{slide.slideinfo.tagline_color}};">{{tagline}}</h3>
           {% endif %}
           {% if description %}
           <p class="j1-ms-info-description {{rtext}} {{description_animated}}" style="color: {{slide.slideinfo.description_color}};">{{description}}</p>

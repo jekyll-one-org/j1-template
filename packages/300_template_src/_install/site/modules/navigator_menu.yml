@@ -118,6 +118,10 @@
               href:                     "https://jekyll.one/pages/public/jupyter/docs/j1-nbinteract-docs/"
               target:                   _blank
               icon:                     alpha-j-box
+            - title:                    NBI Wigets
+              href:                     "https://jekyll.one/pages/public/jupyter/docs/nbi-widgets/"
+              icon:                     alpha-j-box
+              target:                   _blank
             - title:                    BinderHub API
               href:                     "https://jekyll.one/pages/public/jupyter/docs/binderhub/"
               target:                   _blank
