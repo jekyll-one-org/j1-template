@@ -16,7 +16,7 @@ fab_menu_id:                            page_ctrl_simple
 permalink:                              /pages/public/learn/masterslider-pro/
 regenerate:                             false
 
-resources:                              [ animate, mastersliderpro ]
+resources:                              [ animate, lightbox, lightGallery, mastersliderpro, rouge ]
 resource_options:
   - attic:
       padding_top:                      400
@@ -55,7 +55,7 @@ resource_options:
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 
-== Slider 1 - Simple Boxed
+== Slider 1 - Simple + SliderControls
 
 lorem:sentences[3]
 
@@ -64,7 +64,7 @@ lorem:sentences[3]
 masterslider::ms_00001[role="mt-3 mb-5"]
 
 
-== Slider 2 - Full Width
+== Slider 2 -  Full Width + Lightbox + MSScrollParallax
 
 lorem:sentences[3]
 
@@ -73,7 +73,7 @@ lorem:sentences[3]
 masterslider::ms_00002[role="mt-3 mb-5"]
 
 
-== Slider 3 - SlideInfo (Boxed|Animated)
+== Slider 3 - SlideInfo (boxed) + MSScrollParallax
 
 lorem:sentences[3]
 
@@ -82,7 +82,7 @@ lorem:sentences[3]
 masterslider::ms_00003[role="mt-3 mb-5"]
 
 
-== Slider 4 - ThumbView (position right|vertical)
+== Slider 4 - ThumbImage (right|vertical)
 
 lorem:sentences[2]
 
@@ -91,7 +91,7 @@ lorem:sentences[2]
 masterslider::ms_00004[role="mt-3 mb-5"]
 
 
-== Slider 5 - ThumbView  (position bottom|horizontal)
+== Slider 5 - ThumbImage (bottom|horizontal)
 
 lorem:sentences[2]
 
@@ -100,7 +100,7 @@ lorem:sentences[2]
 masterslider::ms_00005[role="mt-3 mb-5"]
 
 
-== Slider 6 - ThumbNail  (position bottom|horizontal)
+== Slider 6 - ThumbInfo (bottom|horizontal)
 
 lorem:sentences[2]
 
@@ -109,7 +109,7 @@ lorem:sentences[2]
 masterslider::ms_00006[role="mt-3 mb-5"]
 
 
-== Slider 7 - ThumbNail  (position right|vertical)
+== Slider 7 - ThumbInfo (right|vertical)
 
 lorem:sentences[2]
 
@@ -118,7 +118,7 @@ lorem:sentences[2]
 masterslider::ms_00007[role="mt-3 mb-5"]
 
 
-== Slider 8 - Blog articles (PartialView)
+== Slider 8 - Blog articles + PartialView
 
 lorem:sentences[3]
 
@@ -127,7 +127,7 @@ lorem:sentences[3]
 masterslider::ms_00008[role="mt-3 mb-5"]
 
 
-== Slider 9 - PartialView/MS-Info (info position below)
+== Slider 9 - SlideInfo (below) + PartialView
 
 lorem:sentences[3]
 

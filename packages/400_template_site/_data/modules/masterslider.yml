@@ -102,7 +102,7 @@ settings:
           slideinfo:                    false
 
     # --------------------------------------------------------------------------
-    # Slider 2 - Full Width
+    # Slider 2 - Full Width + Lightbox + MSScrollParallax
     #
     - slider:
       enabled:                          true
@@ -176,7 +176,7 @@ settings:
 
 
     # --------------------------------------------------------------------------
-    # Slider 3 - SlideInfo (Boxed|Animated)
+    # Slider 3 - SlideInfo + MSScrollParallax (Autoplay|Boxed|Animated)
     #
     - slider:
       enabled:                          true

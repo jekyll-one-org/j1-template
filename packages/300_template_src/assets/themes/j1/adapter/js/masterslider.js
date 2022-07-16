@@ -310,7 +310,7 @@ j1.adapter.masterslider = (function (j1, window) {
 
                   // create a 'properties' string
                   pluginSettings = JSON.stringify(plugins.MSScrollParallax).replace(/"/g, '').replace(/{/g, '').replace(/}/g, '');
-                  logger.info('\n' + 'plugin MSScrollParallax found: ' + pluginSettings);
+                  logger.debug('\n' + 'plugin MSScrollParallax found: ' + pluginSettings);
 
                   // remove property names to get a pure 'parameter' string
                   pluginSettings = pluginSettings.replace(/layers_parallax_depth:/g, '');

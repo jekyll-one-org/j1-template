@@ -91,7 +91,7 @@ MS slider, the template is automatically generated and loaded as required - no
 need for any programming or writing HTML code for your MS sliders.
 
 
-== Slider 1 - Simple
+== Slider 1 - Simple + SliderControls
 
 The example *Slider 1* is using the:
 
@@ -187,7 +187,7 @@ masterslider::ms_00001[role="mt-4 mb-5"]
 masterslider::ms_00001[role="mt-4 mb-5"]
 
 
-== Slider 2 - Full Width + Lightbox
+== Slider 2 - Full Width + Lightbox + MSScrollParallax
 
 MS sliders of type `fullwidth` can be used for example as delimters in
 text-dominated pages.
@@ -217,7 +217,7 @@ settings:
   sliders:
 
     # --------------------------------------------------------------------------
-    # Slider 2 - Full Width
+    # Slider 2 - Full Width + MSScrollParallax
     #
     - slider:
       enabled:                          true
@@ -232,6 +232,17 @@ settings:
       #
       controls:
         # NO controls used for this slider
+
+      # ------------------------------------------------------------------------
+      # Slider plugins
+      #
+      plugins:
+
+        MSScrollParallax:
+          enabled:                      true
+          layers_parallax_depth:        50
+          background_parallax_depth:    80
+          fade_layers:                  false
 
       # ------------------------------------------------------------------------
       # Slider options
@@ -276,7 +287,7 @@ masterslider::ms_00002[role="mt-4 mb-5"]
 masterslider::ms_00002[role="mt-4 mb-5"]
 
 
-== Slider 3 - SlideInfo (AutoPlay|Boxed|Animated)
+== Slider 3 - SlideInfo (boxed) + MSScrollParallax
 
 lorem:sentences[3]
 
@@ -302,7 +313,7 @@ settings:
   sliders:
 
     # --------------------------------------------------------------------------
-    # Slider 3 - SlideInfo (Boxed|Animated)
+    # Slider 3 - SlideInfo + MSScrollParallax (Autoplay|Boxed|Animated)
     #
     - slider:
       enabled:                          true
@@ -317,7 +328,18 @@ settings:
 
         slideinfo:
           enabled:                      true
-          margin:                       -115
+          margin:                       -133
+
+      # ------------------------------------------------------------------------
+      # Slider plugins
+      #
+      plugins:
+
+        MSScrollParallax:
+          enabled:                      true
+          layers_parallax_depth:        50
+          background_parallax_depth:    80
+          fade_layers:                  false
 
       # ------------------------------------------------------------------------
       # Slider options
@@ -330,11 +352,6 @@ settings:
         loop:                           true
         speed:                          20
         view:                           basic
-        filters:
-          grayscale:                    1
-          opacity:                      0.5
-          brightness:                   2
-
 
       # ------------------------------------------------------------------------
       # Slides
@@ -385,7 +402,7 @@ masterslider::ms_00003[role="mt-4 mb-5"]
 masterslider::ms_00003[role="mt-4 mb-5"]
 
 
-== Slider 4 - ThumbImage (position right|vertical)
+== Slider 4 - ThumbImage (right|vertical)
 
 lorem:sentences[2]
 
@@ -482,7 +499,7 @@ masterslider::ms_00004[role="mt-4 mb-5"]
 masterslider::ms_00004[role="mt-4 mb-5"]
 
 
-== Slider 5 - ThumbImage  (position bottom|horizontal)
+== Slider 5 - ThumbImage (bottom|horizontal)
 
 lorem:sentences[2]
 
@@ -575,7 +592,7 @@ masterslider::ms_00005[role="mt-4 mb-5"]
 masterslider::ms_00005[role="mt-4 mb-5"]
 
 
-== Slider 6 - ThumbInfo  (position bottom|horizontal)
+== Slider 6 - ThumbInfo (bottom|horizontal)
 
 lorem:sentences[2]
 
@@ -674,7 +691,7 @@ masterslider::ms_00006[role="mt-4 mb-5"]
 masterslider::ms_00006[role="mt-4 mb-5"]
 
 
-== Slider 7 - ThumbInfo  (position right|vertical)
+== Slider 7 - ThumbInfo (right|vertical)
 
 lorem:sentences[2]
 
@@ -779,7 +796,7 @@ masterslider::ms_00007[role="mt-4 mb-5"]
 masterslider::ms_00007[role="mt-4 mb-5"]
 
 
-== Slider 8 - Blog articles (PartialView)
+== Slider 8 - Blog articles + PartialView
 
 lorem:sentences[3]
 
@@ -887,7 +904,7 @@ masterslider::ms_00008[role="mt-4 mb-5"]
 masterslider::ms_00008[role="mt-3 mb-5"]
 
 
-== Slider 9 - PartialView/MS-Info (info position below)
+== Slider 9 - SlideInfo (below) + PartialView
 
 lorem:sentences[3]
 
