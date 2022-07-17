@@ -962,7 +962,7 @@ masterslider::ms_00007[role="mt-4 mb-5"]
 masterslider::ms_00007[role="mt-4 mb-5"]
 
 
-== Slider 8 - Blog articles + PartialView
+== Slider 8 - Blog Articles + PartialView
 
 The example *Slider 8* is using the following general settings:
 
@@ -1089,7 +1089,7 @@ masterslider::ms_00008[role="mt-4 mb-5"]
 masterslider::ms_00008[role="mt-3 mb-5"]
 
 
-== Slider 9 - SlideInfo (below) + PartialView
+== Slider 9 - SlideInfo|Below + PartialView
 
 The example *Slider 9* is using the following general settings:
 

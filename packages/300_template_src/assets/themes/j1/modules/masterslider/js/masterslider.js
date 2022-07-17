@@ -9,7 +9,6 @@
  * @date Feb 2022
  */
 
-
 /* ================== bin-debug/js/lite/tools/base.js =================== */
 window.averta = {};
 
@@ -47,6 +46,7 @@ window.averta = {};
 
     window._mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)
     window._touch  = 'ontouchstart' in document;
+
     $(document).ready(function(){
         window._jcsspfx         = getVendorPrefix();       // JS CSS VendorPrefix
         window._csspfx          = trans[window._jcsspfx];  // CSS VendorPrefix
@@ -54,7 +54,6 @@ window.averta = {};
         window._css3d           = supports3DTransforms();
         window._css2d           = supportsTransforms();
     });
-
 
     // Thanks to LEA VEROU
     // http://lea.verou.me/2009/02/find-the-vendor-prefix-of-the-current-browser/
@@ -83,7 +82,6 @@ window.averta = {};
 
         return arguments.callee.result = '';
     }
-
 
     // Thanks to Steven Benner.
     // http://stevenbenner.com/2010/03/javascript-regex-trick-parse-a-query-string-into-an-object/
@@ -213,7 +211,6 @@ window.averta = {};
         return -1;
       };
     }
-
 
     /**
      * check ie browser
@@ -5431,73 +5428,73 @@ MSViewEvents.CHANGE_END         = 'slideChangeEnd';
 
  ;(function (document, window, jQuery) {
 
- 	var filterUnits = {
- 		'hue-rotate':             'deg',
- 		'blur':                   'px'
- 	}, initialValues = {
- 		'opacity':                1,
- 		'contrast':               1,
- 		'brightness':             1,
- 		'saturate':               1,
- 		'hue-rotate':             0,
- 		'invert':                 0,
- 		'sepia':                  0,
- 		'blur':                   0,
- 		'grayscale':              0
- 	}
+    var filterUnits = {
+        'hue-rotate':             'deg',
+        'blur':                   'px'
+    }, initialValues = {
+        'opacity':                1,
+        'contrast':               1,
+        'brightness':             1,
+        'saturate':               1,
+        'hue-rotate':             0,
+        'invert':                 0,
+        'sepia':                  0,
+        'blur':                   0,
+        'grayscale':              0
+    }
 
- 	// check if master slider is available
- 	if (!window.MasterSlider) {
- 		return;
- 	}
+    // check if master slider is available
+    if (!window.MasterSlider) {
+        return;
+    }
 
- 	var Filters = function (slider) {
- 		this.slider = slider;
+    var Filters = function (slider) {
+        this.slider = slider;
 
- 		if ( this.slider.options.filters ) {
- 			slider.api.addEventListener(MSSliderEvent.INIT, this.init, this);
- 		}
- 	};
+        if ( this.slider.options.filters ) {
+            slider.api.addEventListener(MSSliderEvent.INIT, this.init, this);
+        }
+    };
 
- 	Filters.name = 'MSFilters';
- 	var p = Filters.prototype;
+    Filters.name = 'MSFilters';
+    var p = Filters.prototype;
 
- 	/**
- 	 * initiate the plugin
- 	*/
- 	p.init = function () {
- 		var api  = this.slider.api,
- 			  view = api.view;
+    /**
+     * initiate the plugin
+    */
+    p.init = function () {
+        var api  = this.slider.api,
+              view = api.view;
 
- 		this.filters 		           = this.slider.options.filters;
- 		this.slideList 		         = view.slideList;
- 		this.slidesCount 	         = view.slidesCount;
- 		this.dimension 		         = view[view.__dimension];
- 		this.target 		           = this.slider.options.filterTarget === 'slide' ? '$element' : '$bg_img';
+        this.filters                   = this.slider.options.filters;
+        this.slideList               = view.slideList;
+        this.slidesCount             = view.slidesCount;
+        this.dimension               = view[view.__dimension];
+        this.target                    = this.slider.options.filterTarget === 'slide' ? '$element' : '$bg_img';
     this.applyFiltersAllSlides = this.slider.options.applyFiltersAllSlides === true ? true : false;
- 		this.filterName 	         = window.MSBrowserInfo.webkit ? 'WebkitFilter' : 'filter';
+        this.filterName              = window.MSBrowserInfo.webkit ? 'WebkitFilter' : 'filter';
 
- 		// override the controller update callback
- 		var superFun = view.controller.__renderHook.fun,
- 			  superRef = view.controller.__renderHook.ref;
+        // override the controller update callback
+        var superFun = view.controller.__renderHook.fun,
+              superRef = view.controller.__renderHook.ref;
 
- 		view.controller.renderCallback( function (controller, value) {
- 			superFun.call(superRef, controller, value);
- 			this.applyEffect(value);
- 		}, this);
+        view.controller.renderCallback( function (controller, value) {
+            superFun.call(superRef, controller, value);
+            this.applyEffect(value);
+        }, this);
 
- 		this.applyEffect(view.controller.value);
- 	};
+        this.applyEffect(view.controller.value);
+    };
 
- 	/**
- 	 * Apply css effect to all slides based on slide position
- 	 * @param  {Number} value Current position of slider controller
- 	*/
- 	p.applyEffect = function (value) {
- 		var factor, slide;
+    /**
+     * Apply css effect to all slides based on slide position
+     * @param  {Number} value Current position of slider controller
+    */
+    p.applyEffect = function (value) {
+        var factor, slide;
 
- 		for( var i = 0; i < this.slidesCount; ++i ) {
- 			slide = this.slideList[i];
+        for( var i = 0; i < this.slidesCount; ++i ) {
+            slide = this.slideList[i];
       if (this.applyFiltersAllSlides) {
         // use filters on all slide positions
         factor = 1;
@@ -5505,42 +5502,42 @@ MSViewEvents.CHANGE_END         = 'slideChangeEnd';
         factor = Math.min(1 , Math.abs(value - slide.position) / this.dimension);
       }
 
- 			if ( slide[this.target] ) {
- 				if ( !window.MSBrowserInfo.msie ) {
- 					slide[this.target][0].style[this.filterName] = this.generateStyle(factor);
- 				} else if ( this.filters.opacity != null ) {
- 					slide[this.target].opacity( 1 - this.filters.opacity * factor);
- 				}
- 			}
- 		}
- 	};
+            if ( slide[this.target] ) {
+                if ( !window.MSBrowserInfo.msie ) {
+                    slide[this.target][0].style[this.filterName] = this.generateStyle(factor);
+                } else if ( this.filters.opacity != null ) {
+                    slide[this.target].opacity( 1 - this.filters.opacity * factor);
+                }
+            }
+        }
+    };
 
- 	/**
- 	 * Generate filter style based on slide distance factor
- 	 * @param  {Number} factor
- 	 * @return {String} CSS style
- 	*/
- 	p.generateStyle = function (factor) {
- 		var style = '',
- 			unit;
+    /**
+     * Generate filter style based on slide distance factor
+     * @param  {Number} factor
+     * @return {String} CSS style
+    */
+    p.generateStyle = function (factor) {
+        var style = '',
+            unit;
 
- 		for ( var filter in this.filters ) {
- 			unit = filterUnits[filter] || '';
-     	style += filter + '(' + ( initialValues[filter] + (this.filters[filter] - initialValues[filter]) * factor) + ') ';
- 		}
+        for ( var filter in this.filters ) {
+            unit = filterUnits[filter] || '';
+        style += filter + '(' + ( initialValues[filter] + (this.filters[filter] - initialValues[filter]) * factor) + ') ';
+        }
 
- 		return style;
- 	};
+        return style;
+    };
 
- 	/**
- 	 * destroy the plugin
- 	*/
- 	p.destroy = function(){
- 		this.slider.api.removeEventListener(MSSliderEvent.INIT, this.init, this);
- 	};
+    /**
+     * destroy the plugin
+    */
+    p.destroy = function(){
+        this.slider.api.removeEventListener(MSSliderEvent.INIT, this.init, this);
+    };
 
- 	// install plugin for master slider
- 	MasterSlider.registerPlugin(Filters);
+    // install plugin for master slider
+    MasterSlider.registerPlugin(Filters);
 
  })(document, window, jQuery);
 
@@ -5549,146 +5546,146 @@ MSViewEvents.CHANGE_END         = 'slideChangeEnd';
   * Master Slider MSScrollParallax plugin version for J1 Template
  */
  (function($){
- 	'use strict';
+    'use strict';
 
- 	window.MSScrollParallax = function (slider, parallax, bgparallax, fade) {
- 		this.fade        = fade;
- 		this.slider      = slider;
- 		this.parallax    = parallax/100;
- 		this.bgparallax  = bgparallax/100;
+    window.MSScrollParallax = function (slider, parallax, bgparallax, fade) {
+        this.fade        = fade;
+        this.slider      = slider;
+        this.parallax    = parallax/100;
+        this.bgparallax  = bgparallax/100;
 
- 		slider.api.addEventListener(MSSliderEvent.INIT, this.init, this);
- 		slider.api.addEventListener(MSSliderEvent.DESTROY, this.destory, this);
- 		slider.api.addEventListener(MSSliderEvent.CHANGE_END, this.resetLayers, this);
- 		slider.api.addEventListener(MSSliderEvent.CHANGE_START, this.updateCurrentSlide, this);
- 	};
+        slider.api.addEventListener(MSSliderEvent.INIT, this.init, this);
+        slider.api.addEventListener(MSSliderEvent.DESTROY, this.destory, this);
+        slider.api.addEventListener(MSSliderEvent.CHANGE_END, this.resetLayers, this);
+        slider.api.addEventListener(MSSliderEvent.CHANGE_START, this.updateCurrentSlide, this);
+    };
 
- 	window.MSScrollParallax.setup = function(slider, parallax, bgparallax, fade) {
- 		// disable in mobile devices
- 		if (window._mobile) {
- 			return;
- 		}
- 		if (parallax == null) {
- 			parallax    = 50;
- 		}
- 		if (bgparallax == null) {
- 			bgparallax  = 40;
- 		}
- 		return new MSScrollParallax(slider, parallax, bgparallax, fade);
- 	};
+    window.MSScrollParallax.setup = function(slider, parallax, bgparallax, fade) {
+        // disable in mobile devices
+        if (window._mobile) {
+            return;
+        }
+        if (parallax == null) {
+            parallax    = 50;
+        }
+        if (bgparallax == null) {
+            bgparallax  = 40;
+        }
+        return new MSScrollParallax(slider, parallax, bgparallax, fade);
+    };
 
- 	var p = window.MSScrollParallax.prototype;
+    var p = window.MSScrollParallax.prototype;
 
- 	p.init = function (e) {
- 		this.slider.$element.addClass('ms-scroll-parallax');
- 		this.sliderOffset = this.slider.$element.offset().top;
- 		this.updateCurrentSlide();
- 		// wrap layers element
- 		var slides = this.slider.api.view.slideList,
- 			slide;
- 		for(var i = 0, l = slides.length; i!==l ; i++) {
- 			slide = slides[i];
- 			if( slide.hasLayers ) {
- 				slide.layerController.$layers.wrap('<div class="ms-scroll-parallax-cont"></div>');
- 				slide.$scrollParallaxCont = slide.layerController.$layers.parent();
- 			}
- 		}
+    p.init = function (e) {
+        this.slider.$element.addClass('ms-scroll-parallax');
+        this.sliderOffset = this.slider.$element.offset().top;
+        this.updateCurrentSlide();
+        // wrap layers element
+        var slides = this.slider.api.view.slideList,
+            slide;
+        for(var i = 0, l = slides.length; i!==l ; i++) {
+            slide = slides[i];
+            if( slide.hasLayers ) {
+                slide.layerController.$layers.wrap('<div class="ms-scroll-parallax-cont"></div>');
+                slide.$scrollParallaxCont = slide.layerController.$layers.parent();
+            }
+        }
 
- 		$(window).on('scroll', {that:this}, this.moveParallax).trigger('scroll');
- 	};
+        $(window).on('scroll', {that:this}, this.moveParallax).trigger('scroll');
+    };
 
- 	p.resetLayers = function (e) {
- 		if (!this.lastSlide) {
- 			return;
- 		}
+    p.resetLayers = function (e) {
+        if (!this.lastSlide) {
+            return;
+        }
 
- 		var layers = this.lastSlide.$scrollParallaxCont;
- 		if (window._css2d) {
- 			if (layers) {
- 				layers[0].style[window._jcsspfx + 'Transform'] = '';
- 			}
- 			if (this.lastSlide.hasBG) {
- 				this.lastSlide.$imgcont[0].style[window._jcsspfx + 'Transform'] = '';
- 			}
- 		} else {
- 			if(layers) {
- 				layers[0].style.top = '';
- 			}
- 			if (this.lastSlide.hasBG) {
- 				this.lastSlide.$imgcont[0].style.top = '0px';
- 			}
- 		}
- 	};
+        var layers = this.lastSlide.$scrollParallaxCont;
+        if (window._css2d) {
+            if (layers) {
+                layers[0].style[window._jcsspfx + 'Transform'] = '';
+            }
+            if (this.lastSlide.hasBG) {
+                this.lastSlide.$imgcont[0].style[window._jcsspfx + 'Transform'] = '';
+            }
+        } else {
+            if(layers) {
+                layers[0].style.top = '';
+            }
+            if (this.lastSlide.hasBG) {
+                this.lastSlide.$imgcont[0].style.top = '0px';
+            }
+        }
+    };
 
- 	p.updateCurrentSlide = function (e) {
- 		this.lastSlide     = this.currentSlide;
- 		this.currentSlide  = this.slider.api.currentSlide;
- 		this.moveParallax({data:{that:this}});
- 	};
+    p.updateCurrentSlide = function (e) {
+        this.lastSlide     = this.currentSlide;
+        this.currentSlide  = this.slider.api.currentSlide;
+        this.moveParallax({data:{that:this}});
+    };
 
- 	p.moveParallax = function (e) {
- 		var that      = e.data.that,
- 			slider      = that.slider,
- 			offset      = that.sliderOffset,
- 			scrollTop   = $(window).scrollTop(),
- 			layers      = that.currentSlide.$scrollParallaxCont,
- 			out         = offset - scrollTop;
+    p.moveParallax = function (e) {
+        var that      = e.data.that,
+            slider      = that.slider,
+            offset      = that.sliderOffset,
+            scrollTop   = $(window).scrollTop(),
+            layers      = that.currentSlide.$scrollParallaxCont,
+            out         = offset - scrollTop;
 
- 		if (out <= 0) {
- 			if(layers) {
- 				if (window._css3d) {
- 					layers[0].style[window._jcsspfx + 'Transform'] = 'translateY(' + -out * that.parallax + 'px) translateZ(0.4px)';
- 				} else if (window._css2d) {
- 					layers[0].style[window._jcsspfx + 'Transform'] = 'translateY(' + -out * that.parallax + 'px)';
- 				} else {
- 					layers[0].style.top =  -out * that.parallax + 'px';
- 				}
- 			}
+        if (out <= 0) {
+            if(layers) {
+                if (window._css3d) {
+                    layers[0].style[window._jcsspfx + 'Transform'] = 'translateY(' + -out * that.parallax + 'px) translateZ(0.4px)';
+                } else if (window._css2d) {
+                    layers[0].style[window._jcsspfx + 'Transform'] = 'translateY(' + -out * that.parallax + 'px)';
+                } else {
+                    layers[0].style.top =  -out * that.parallax + 'px';
+                }
+            }
 
- 			that.updateSlidesBG(-out * that.bgparallax + 'px', true);
+            that.updateSlidesBG(-out * that.bgparallax + 'px', true);
 
- 			if (layers && that.fade) {
- 				layers.css('opacity',  (1 - Math.min(1, -out / slider.api.height)) );
- 			}
- 		} else {
- 			if (layers) {
- 				if (window._css2d) {
- 					layers[0].style[window._jcsspfx + 'Transform'] = '';
- 				} else {
- 					layers[0].style.top = '';
- 				}
- 			}
- 			that.updateSlidesBG('0px', false);
+            if (layers && that.fade) {
+                layers.css('opacity',  (1 - Math.min(1, -out / slider.api.height)) );
+            }
+        } else {
+            if (layers) {
+                if (window._css2d) {
+                    layers[0].style[window._jcsspfx + 'Transform'] = '';
+                } else {
+                    layers[0].style.top = '';
+                }
+            }
+            that.updateSlidesBG('0px', false);
 
- 			if (layers && that.fade) {
- 				layers.css('opacity',  1 );
- 			}
- 		}
- 	};
+            if (layers && that.fade) {
+                layers.css('opacity',  1 );
+            }
+        }
+    };
 
- 	p.updateSlidesBG = function(pos, fixed) {
- 		var slides = this.slider.api.view.slideList,
- 			position = (fixed &&  !window.MSBrowserInfo.msie && !window.MSBrowserInfo.opera ? 'fixed' : '');
+    p.updateSlidesBG = function(pos, fixed) {
+        var slides = this.slider.api.view.slideList,
+            position = (fixed &&  !window.MSBrowserInfo.msie && !window.MSBrowserInfo.opera ? 'fixed' : '');
 
- 		for (var i = 0, l = slides.length; i!==l ; i++) {
- 			if (slides[i].hasBG) {
- 				slides[i].$imgcont[0].style.position = position;
- 				slides[i].$imgcont[0].style.top = pos;
- 			}
+        for (var i = 0, l = slides.length; i!==l ; i++) {
+            if (slides[i].hasBG) {
+                slides[i].$imgcont[0].style.position = position;
+                slides[i].$imgcont[0].style.top = pos;
+            }
 
- 			if (slides[i].$bgvideocont) {
- 				slides[i].$bgvideocont[0].style.position = position;
- 				slides[i].$bgvideocont[0].style.top = pos;
- 			}
- 		}
- 	};
+            if (slides[i].$bgvideocont) {
+                slides[i].$bgvideocont[0].style.position = position;
+                slides[i].$bgvideocont[0].style.top = pos;
+            }
+        }
+    };
 
- 	p.destory = function () {
- 		slider.api.removeEventListener(MSSliderEvent.INIT, this.init, this);
- 		slider.api.removeEventListener(MSSliderEvent.DESTROY, this.destory, this);
- 		slider.api.removeEventListener(MSSliderEvent.CHANGE_END, this.resetLayers, this);
- 		slider.api.removeEventListener(MSSliderEvent.CHANGE_START, this.updateCurrentSlide, this);
- 		$(window).off('scroll', this.moveParallax);
- 	};
+    p.destory = function () {
+        slider.api.removeEventListener(MSSliderEvent.INIT, this.init, this);
+        slider.api.removeEventListener(MSSliderEvent.DESTROY, this.destory, this);
+        slider.api.removeEventListener(MSSliderEvent.CHANGE_END, this.resetLayers, this);
+        slider.api.removeEventListener(MSSliderEvent.CHANGE_START, this.updateCurrentSlide, this);
+        $(window).off('scroll', this.moveParallax);
+    };
 
  })(jQuery);
