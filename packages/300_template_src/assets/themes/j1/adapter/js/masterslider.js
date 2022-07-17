@@ -303,14 +303,14 @@ j1.adapter.masterslider = (function (j1, window) {
                 // merge settings, defaults into 'plugins'
                 plugins = $.extend({}, pluginOptions, slider[index].plugins);
 
-                // generate setup for plugin 'MSScrollParallax'
-                if (plugins.MSScrollParallax ) {
+                // generate setup for plugin 'J1ScrollParallax'
+                if (plugins.J1ScrollParallax ) {
                   // remove J1 config settings
-                  delete plugins.MSScrollParallax['enabled'];
+                  delete plugins.J1ScrollParallax['enabled'];
 
                   // create a 'properties' string
-                  pluginSettings = JSON.stringify(plugins.MSScrollParallax).replace(/"/g, '').replace(/{/g, '').replace(/}/g, '');
-                  logger.debug('\n' + 'plugin MSScrollParallax found: ' + pluginSettings);
+                  pluginSettings = JSON.stringify(plugins.J1ScrollParallax).replace(/"/g, '').replace(/{/g, '').replace(/}/g, '');
+                  logger.debug('\n' + 'plugin J1ScrollParallax found: ' + pluginSettings);
 
                   // remove property names to get a pure 'parameter' string
                   pluginSettings = pluginSettings.replace(/layers_parallax_depth:/g, '');
@@ -318,13 +318,12 @@ j1.adapter.masterslider = (function (j1, window) {
                   pluginSettings = pluginSettings.replace(/fade_layers:/g, '');
 
                   if (sliderManager) {
-                    msSliderManagerItem        = '    ' + 'MSScrollParallax.setup(masterslider_' + i + ', ' + pluginSettings + ');';
+                    msSliderManagerItem        = '    ' + 'J1ScrollParallax.setup(masterslider_' + i + ', ' + pluginSettings + ');';
                     msSliderManager.innerHTML +=  msSliderManagerItem + '\n';
                   } else {
-//                  _this['MSScrollParallax'].setup(j1.masterslider.instances[index] + ', ' + pluginSettings);
-                    MSScrollParallax.setup(j1.masterslider.instances[index], pluginSettings );
+                    J1ScrollParallax.setup(j1.masterslider.instances[index], pluginSettings );
                   }
-                } // END plugin 'MSScrollParallax'
+                } // END plugin 'J1ScrollParallax'
               });
             } else {
               logger.debug('\n' + 'no slider plugins found on id: ' + slider[key].id);
@@ -357,11 +356,10 @@ j1.adapter.masterslider = (function (j1, window) {
             // merge settings, defaults into 'setup'
             setup = $.extend({}, settings.options, slider[index].options);
 
-            // write filter structure if required
+            // log the filter object if enabled
             if (setup.filters != null) {
               var filterSettings = JSON.stringify(setup.filters).replace(/"/g, '');
-              setup.filters = filterSettings;
-              logger.info('\n' + 'filters found: ' + filterSettings);
+              logger.info('\n' + 'filters found: ' + filterSettings.replace(/{/g, '').replace(/}/g, ''));
             }
 
             if (sliderManager) {
@@ -446,7 +444,7 @@ j1.adapter.masterslider = (function (j1, window) {
     // registerEvents()
     // Currently NOT used (experimental)
     // -------------------------------------------------------------------------
-    registerEvents: function (slider) {
+    registerEvents: function (options, slider) {
       var index;
 
       var i=0;

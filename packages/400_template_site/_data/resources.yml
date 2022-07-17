@@ -1365,11 +1365,7 @@ resources:
                                           modules/masterslider/css/masterslider,
                                           modules/masterslider/css/theme/uno
                                         ]
-        files:                          [
-                                          modules/masterslider/js/plugins/MSFilters.js,
-                                          modules/masterslider/js/plugins/MSScrollParallax.js,
-                                          adapter/js/masterslider.js
-                                        ]
+        files:                          [ adapter/js/masterslider.js ]
         js:                             [
                                           modules/masterslider/js/plugins/jquery.easing,
                                           modules/masterslider/js/masterslider

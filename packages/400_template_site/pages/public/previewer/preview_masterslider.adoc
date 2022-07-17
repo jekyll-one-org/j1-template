@@ -91,24 +91,58 @@ MS slider, the template is automatically generated and loaded as required - no
 need for any programming or writing HTML code for your MS sliders.
 
 
-== Slider 1 - Simple + SliderControls
+== Slider 1 - Controls + Filters
 
-The example *Slider 1* is using the:
+The example *Slider 1* is using the following general settings:
 
-* skin `light-3`
-* layout `boxed`
+.Slider 1 settings
+[cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Setting |Value |Description
 
-in combination with the controls:
+|skin
+|`light-3`
+|
 
-* `arrows` (default settings)
-* `bullets` (default settings)
+|layout
+|`boxed`
+|
+
+|arrows
+|Default settings
+|
+
+|bullets
+|Default settings
+|
+
+|filters
+|grayscale
+|value: 0.5
+
+|filters
+|sepia
+|value: 0.5
+
+|===
+
 
 [[slider-settings-1]]
 === Slider settings
 
+For the standard MS Lite version, *no* filters are supported. J1 Template
+is using a modified/extended version for MS Lite to support filters. Note,
+the property `applyFiltersAllSlides` os only available for the J1 version of
+MS Lite.
+
+NOTE: Filters are applied to all (background) images of a slider except the
+active (visible/selected) slide. If `applyFiltersAllSlides` is set to `true`,
+filters are applied on all images *including* the *active* slide. This can
+be used for example to transform the images to grayscale, sepia etc.
+
 TIP: Find the *full* slider configuration in file `~/_data/masterslider.yml`.
 
-.Excerpt
+.Slider configuration (excerpt)
 [source, yaml]
 ----
 # ------------------------------------------------------------------------------
@@ -153,6 +187,10 @@ settings:
 
         width:                          1200
         height:                         600
+        applyFiltersAllSlides:          true
+        filters:
+          grayscale:                    0.5
+          sepia:                        0.5
 
       # ------------------------------------------------------------------------
       # Slides
@@ -162,8 +200,8 @@ settings:
         # slide 1
         #
         - slide:
-          alt:                          cat-1
-          title:                        cat-1
+          alt:                          Cat 1
+          title:                        Cat 1
           foreground_image:             /assets/images/modules/masterslider/slider_1/cat-1.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
@@ -187,20 +225,53 @@ masterslider::ms_00001[role="mt-4 mb-5"]
 masterslider::ms_00001[role="mt-4 mb-5"]
 
 
-== Slider 2 - Full Width + Lightbox + MSScrollParallax
+== Slider 2 - FullWidth + Lightbox + Parallax
 
-MS sliders of type `fullwidth` can be used for example as delimters in
-text-dominated pages.
+For example, MS sliders of type `fullwidth` can be used as delimiters in
+text-dominated pages. For all MS sliders (except one of layout `partialview`)
+a lightbox (default: Lightbox V2) can be used to explore all images of a
+slider in a full-sized view.
 
-TIP: For all MS sliders (except one of layout type 'partialview') a lightbox
-can be used to explore all the images of a slider.
+NOTE: Lightbox support is only available for J1 Template. The product
+version *MS Lite* and *MS Pro* does not support Lightboxes on sliders
+out-of-the-box.
+
+For the standard MS Lite version, *no* parallax effect is supported.
+J1 Template is using a modified/extended version for MS Lite to support
+a *parallax scrolling* effect on MS (lite) sliders. The following content
+gets smoothly over the slider while down-scrolling the page.
+
+The example *Slider 1* is using the following general settings:
+
+.Slider 2 settings
+[cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Setting |Value |Description
+
+
+|layout
+|`partialview`
+|
+
+
+
+|`filters`
+|grayscale
+|value: 0.5
+
+|`filters`
+|sepia
+|value: 0.5
+
+|===
+
 
 [[slider-settings-2]]
 === Slider settings
 
 TIP: Find the *full* slider configuration in file `~/_data/masterslider.yml`.
 
-.Excerpt
+.Slider configuration (excerpt)
 [source, yaml]
 ----
 # ------------------------------------------------------------------------------
@@ -238,7 +309,7 @@ settings:
       #
       plugins:
 
-        MSScrollParallax:
+        J1ScrollParallax:
           enabled:                      true
           layers_parallax_depth:        50
           background_parallax_depth:    80
@@ -287,16 +358,35 @@ masterslider::ms_00002[role="mt-4 mb-5"]
 masterslider::ms_00002[role="mt-4 mb-5"]
 
 
-== Slider 3 - SlideInfo (boxed) + MSScrollParallax
+== Slider 3 - SlideInfo|Boxed + MSScrollParallax
 
-lorem:sentences[3]
+The example *Slider 3* is using the following general settings:
+
+.Slider 3 settings
+[cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Setting |Value |Description
+
+|layout
+|`partialview`
+|
+
+|`filters`
+|grayscale
+|value: 0.5
+
+|`filters`
+|sepia
+|value: 0.5
+
+|===
 
 [[slider-settings-3]]
 === Slider settings
 
 TIP: Find the *full* slider configuration in file `~/_data/masterslider.yml`.
 
-.Excerpt
+.Slider configuration (excerpt)
 [source, yaml]
 ----
 # ------------------------------------------------------------------------------
@@ -335,7 +425,7 @@ settings:
       #
       plugins:
 
-        MSScrollParallax:
+        J1ScrollParallax:
           enabled:                      true
           layers_parallax_depth:        50
           background_parallax_depth:    80
@@ -404,14 +494,33 @@ masterslider::ms_00003[role="mt-4 mb-5"]
 
 == Slider 4 - ThumbImage (right|vertical)
 
-lorem:sentences[2]
+The example *Slider 4* is using the following general settings:
+
+.Slider 4 settings
+[cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Setting |Value |Description
+
+|layout
+|`partialview`
+|
+
+|`filters`
+|grayscale
+|value: 0.5
+
+|`filters`
+|sepia
+|value: 0.5
+
+|===
 
 [[slider-settings-4]]
 === Slider settings
 
 TIP: Find the *full* slider configuration in file `~/_data/masterslider.yml`.
 
-.Excerpt
+.Slider configuration (excerpt)
 [source, yaml]
 ----
 # ------------------------------------------------------------------------------
@@ -501,14 +610,33 @@ masterslider::ms_00004[role="mt-4 mb-5"]
 
 == Slider 5 - ThumbImage (bottom|horizontal)
 
-lorem:sentences[2]
+The example *Slider 5* is using the following general settings:
+
+.Slider 5 settings
+[cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Setting |Value |Description
+
+|layout
+|`partialview`
+|
+
+|`filters`
+|grayscale
+|value: 0.5
+
+|`filters`
+|sepia
+|value: 0.5
+
+|===
 
 [[slider-settings-5]]
 === Slider settings
 
 TIP: Find the *full* slider configuration in file `~/_data/masterslider.yml`.
 
-.Excerpt
+.Slider configuration (excerpt)
 [source, yaml]
 ----
 # ------------------------------------------------------------------------------
@@ -594,14 +722,33 @@ masterslider::ms_00005[role="mt-4 mb-5"]
 
 == Slider 6 - ThumbInfo (bottom|horizontal)
 
-lorem:sentences[2]
+The example *Slider 6* is using the following general settings:
+
+.Slider 6 settings
+[cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Setting |Value |Description
+
+|layout
+|`partialview`
+|
+
+|`filters`
+|grayscale
+|value: 0.5
+
+|`filters`
+|sepia
+|value: 0.5
+
+|===
 
 [[slider-settings-6]]
 === Slider settings
 
 TIP: Find the *full* slider configuration in file `~/_data/masterslider.yml`.
 
-.Excerpt
+.Slider configuration (excerpt)
 [source, yaml]
 ----
 # ------------------------------------------------------------------------------
@@ -693,14 +840,33 @@ masterslider::ms_00006[role="mt-4 mb-5"]
 
 == Slider 7 - ThumbInfo (right|vertical)
 
-lorem:sentences[2]
+The example *Slider 7* is using the following general settings:
+
+.Slider 7 settings
+[cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Setting |Value |Description
+
+|layout
+|`partialview`
+|
+
+|`filters`
+|grayscale
+|value: 0.5
+
+|`filters`
+|sepia
+|value: 0.5
+
+|===
 
 [[slider-settings-7]]
 === Slider settings
 
 TIP: Find the *full* slider configuration in file `~/_data/masterslider.yml`.
 
-.Excerpt
+.Slider configuration (excerpt)
 [source, yaml]
 ----
 # ------------------------------------------------------------------------------
@@ -798,14 +964,33 @@ masterslider::ms_00007[role="mt-4 mb-5"]
 
 == Slider 8 - Blog articles + PartialView
 
-lorem:sentences[3]
+The example *Slider 8* is using the following general settings:
+
+.Slider 8 settings
+[cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Setting |Value |Description
+
+|layout
+|`partialview`
+|
+
+|`filters`
+|grayscale
+|value: 0.5
+
+|`filters`
+|sepia
+|value: 0.5
+
+|===
 
 [[slider-settings-8]]
 === Slider settings
 
 TIP: Find the *full* slider configuration in file `~/_data/masterslider.yml`.
 
-.Excerpt
+.Slider configuration (excerpt)
 [source, yaml]
 ----
 # ------------------------------------------------------------------------------
@@ -906,14 +1091,33 @@ masterslider::ms_00008[role="mt-3 mb-5"]
 
 == Slider 9 - SlideInfo (below) + PartialView
 
-lorem:sentences[3]
+The example *Slider 9* is using the following general settings:
+
+.Slider 9 settings
+[cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Setting |Value |Description
+
+|layout
+|`partialview`
+|
+
+|`filters`
+|grayscale
+|value: 0.5
+
+|`filters`
+|sepia
+|value: 0.5
+
+|===
 
 [[slider-settings-9]]
 === Slider settings
 
 TIP: Find the *full* slider configuration in file `~/_data/masterslider.yml`.
 
-.Excerpt
+.Slider configuration (excerpt)
 [source, yaml]
 ----
 # ------------------------------------------------------------------------------
