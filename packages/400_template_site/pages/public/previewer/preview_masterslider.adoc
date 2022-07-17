@@ -225,7 +225,7 @@ masterslider::ms_00001[role="mt-4 mb-5"]
 masterslider::ms_00001[role="mt-4 mb-5"]
 
 
-== Slider 2 - FullWidth + Lightbox + Parallax
+== Slider 2 - FullWidth + Lightbox + ScrollParallax
 
 For example, MS sliders of type `fullwidth` can be used as delimiters in
 text-dominated pages. For all MS sliders (except one of layout `partialview`)
@@ -288,7 +288,7 @@ settings:
   sliders:
 
     # --------------------------------------------------------------------------
-    # Slider 2 - Full Width + MSScrollParallax
+    # Slider 2 - Full Width + ScrollParallax
     #
     - slider:
       enabled:                          true
@@ -309,7 +309,7 @@ settings:
       #
       plugins:
 
-        J1ScrollParallax:
+        MSScrollParallax:
           enabled:                      true
           layers_parallax_depth:        50
           background_parallax_depth:    80
@@ -358,7 +358,7 @@ masterslider::ms_00002[role="mt-4 mb-5"]
 masterslider::ms_00002[role="mt-4 mb-5"]
 
 
-== Slider 3 - SlideInfo|Boxed + MSScrollParallax
+== Slider 3 - SlideInfo|Boxed + ScrollParallax
 
 The example *Slider 3* is using the following general settings:
 
@@ -403,7 +403,7 @@ settings:
   sliders:
 
     # --------------------------------------------------------------------------
-    # Slider 3 - SlideInfo + MSScrollParallax (Autoplay|Boxed|Animated)
+    # Slider 3 - SlideInfo + ScrollParallax (Autoplay|Boxed|Animated)
     #
     - slider:
       enabled:                          true
@@ -425,7 +425,7 @@ settings:
       #
       plugins:
 
-        J1ScrollParallax:
+        MSScrollParallax:
           enabled:                      true
           layers_parallax_depth:        50
           background_parallax_depth:    80

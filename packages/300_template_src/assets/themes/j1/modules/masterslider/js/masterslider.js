@@ -5546,12 +5546,12 @@ MSViewEvents.CHANGE_END         = 'slideChangeEnd';
 
 
  /*
-  * Master Slider J1ScrollParallax plugin for J1 Template
+  * Master Slider MSScrollParallax plugin version for J1 Template
  */
  (function($){
  	'use strict';
 
- 	window.J1ScrollParallax = function (slider, parallax, bgparallax, fade) {
+ 	window.MSScrollParallax = function (slider, parallax, bgparallax, fade) {
  		this.fade        = fade;
  		this.slider      = slider;
  		this.parallax    = parallax/100;
@@ -5563,7 +5563,7 @@ MSViewEvents.CHANGE_END         = 'slideChangeEnd';
  		slider.api.addEventListener(MSSliderEvent.CHANGE_START, this.updateCurrentSlide, this);
  	};
 
- 	window.J1ScrollParallax.setup = function(slider, parallax, bgparallax, fade) {
+ 	window.MSScrollParallax.setup = function(slider, parallax, bgparallax, fade) {
  		// disable in mobile devices
  		if (window._mobile) {
  			return;
@@ -5574,10 +5574,10 @@ MSViewEvents.CHANGE_END         = 'slideChangeEnd';
  		if (bgparallax == null) {
  			bgparallax  = 40;
  		}
- 		return new J1ScrollParallax(slider, parallax, bgparallax, fade);
+ 		return new MSScrollParallax(slider, parallax, bgparallax, fade);
  	};
 
- 	var p = window.J1ScrollParallax.prototype;
+ 	var p = window.MSScrollParallax.prototype;
 
  	p.init = function (e) {
  		this.slider.$element.addClass('ms-scroll-parallax');
