@@ -66,10 +66,10 @@ fab_menu_id:                            page_ctrl_simple
 permalink:                              /pages/public/previewer/rouge/
 regenerate:                             false
 
-resources:                             [ animate, comments, clipboard, rouge ]
+resources:                              [ animate, comments, clipboard, rouge ]
 resource_options:
   - toccer:
-      collapseDepth:                    4
+      collapseDepth:                    3
   - attic:
       slides:
         - url:                          /assets/images/modules/attics/jessica-ruscello-1920x1280.jpg
