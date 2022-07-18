@@ -113,12 +113,26 @@ settings:
       enabled:                          true
 
       id:                               ms_00002
+      lightbox:
+        enabled:                        true
+        type:                           lb                                      # lb | lg
 
       # ------------------------------------------------------------------------
       # Slider controls
       #
       controls:
         # NO controls used for this slider
+
+      # ------------------------------------------------------------------------
+      # Slider plugins
+      #
+      plugins:
+
+        J1ScrollParallax:
+          enabled:                      false
+          layers_parallax_depth:        50
+          background_parallax_depth:    80
+          fade_layers:                  false
 
       # ------------------------------------------------------------------------
       # Slider options
@@ -183,6 +197,17 @@ settings:
         slideinfo:
           enabled:                      true
           margin:                       -133
+
+      # ------------------------------------------------------------------------
+      # Slider plugins
+      #
+      plugins:
+
+        J1ScrollParallax:
+          enabled:                      false
+          layers_parallax_depth:        50
+          background_parallax_depth:    80
+          fade_layers:                  false
 
       # ------------------------------------------------------------------------
       # Slider options

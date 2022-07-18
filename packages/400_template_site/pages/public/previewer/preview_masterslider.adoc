@@ -1,6 +1,6 @@
 ---
 title:                                  Master Slider
-tagline:                                common templates
+tagline:                                template examples
 date:                                   2020-11-03 00:00:00
 description: >
                                         Welcome to the preview page focussing on the image module. This page
@@ -26,10 +26,10 @@ keywords: >
                                         hyvor, disqus, git, github, netlify, heroku, apple, microsoft,
                                         provider, service, internet, support,
                                         google, analytics, advertising, search, console, silverlight, score,
-                                        j1, master, slider, template, integration
+                                        j1, master, slider, module, integration, template, example
 
 categories:                             [ Previewer ]
-tags:                                   [ Master Slider ]
+tags:                                   [ Master Slider, Template ]
 
 comments:                               false
 fab_menu_id:                            page_ctrl_simple
@@ -62,6 +62,9 @@ resource_options:
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
+:ms-slider--previewer:                  https://jekyll.one/pages/public/previewer/masterslider/
+:ms-module--documentation:              https://jekyll.one/pages/public/manuals/modules/masterslider/
+:ms-product--template-examples:         http://masterslider.com/extra/templates/?utm_source=mslite&utm_medium=lite&utm_content=free_demo&utm_campaign=masterslider
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -69,7 +72,7 @@ resource_options:
 
 // Load page attributes
 // -----------------------------------------------------------------------------
-{% include {{load_attributes}} scope="none" %}
+{% include {{load_attributes}} scope="global" %}
 
 
 // Page content
@@ -78,13 +81,13 @@ resource_options:
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 
-Welcome to the preview page focussing on the image module. This page shows
-some valuable features of the J1 Template to manage your image-based
-content using the *Master Slider* (MS) module `masterslider`.
+Welcome to the preview page of J1 Master Slider. This page shows some valuable
+features of how J1 Template can manage your image-based content using the
+*Master Slider* (MS) module `masterslider` as slideshows.
 
-NOTE: J1 Template uses the *free* version of Master Slider (MS Lite).
-The lite version does *not* support all features. Not all slider *layouts*
-and no *overlays* are supported by the lite version.
+NOTE: J1 Template uses the *free* version of Master Slider (MS Lite). The
+lite version does *not* support all features. Not all slider *layouts* and
+no *overlays* are supported by the lite version.
 
 MS sliders are based on so-called *templates*. A template defines the HTML
 portion, the base HTML structure of a slider in a webpage. The J1 module
@@ -92,14 +95,14 @@ portion, the base HTML structure of a slider in a webpage. The J1 module
 MS slider, the template is automatically generated and loaded as required - no
 need for any programming or writing HTML code for your MS sliders.
 
-WARNING: The Master Slider (MS Lite and Pro) is a so-called __jQuery__
-Plugin. _jQuery_ can simplify Javascript code a lot but will slow-down
-the runtime performance of the JS code. Expect for slower browsers and
-platforms, like mobiles or tablets, initializing an MS Slider will take
-a while to be finished.
+WARNING: The Master Slider (MS Lite and Pro) is a so-called _jQuery_ Plugin.
+_jQuery_ can simplify Javascript code a lot but will slow-down the runtime
+performance of the JS code. Expect for slower browsers and platforms, like
+mobiles or tablets, initializing an MS Slider will take a while to be
+finished.
 
 
-== Placements of sliders
+== Placements of Sliders
 
 To use (already configured) MS Sliders in your content sources, a
 *placeholder* is required for the MS Slider template code. The code of a
@@ -141,37 +144,66 @@ the MTML placeholder for a slider like so:
 NOTE: Find examples for the placements of sliders for Asciidoc and Markdown
 in section <<placement-slider-1>>.
 
+== Common MS Sliders
 
-== Slider 1 - Controls + Filters
+MS sliders are based on so-called *templates*. A template defines the HTML
+portion, the base HTML structure of a slider in a webpage. The J1 module
+`masterslider` is fully configurable. Based on the J1 configuration of an
+MS slider, the template is *automatically* generated and loaded as required.
+No need for any programming or writing HTML code for your MS sliders.
 
-The Slider 1 is using a quite simple configuration. This slider is a good base
-to try out the configuration features provided by MS Lite. Additionally, this
-slider is using the (CSS) filter feature of Master Slider. Filters can be used
-for example to *transform* the style of the images provided by a slider. In
-this example, the slider images are transformed* from style *color* to *sepia*.
+NOTE: Some of the examples are taken from the product pages of Master Slider at
+link:{ms-product--template-examples}[Ready to use sample sliders, {browser-window--new}].
 
-The example *Slider 1* is using the following general settings:
+Find a selection of common, auto-generated MS Sliders below.
 
-.Slider 1 settings
+
+=== Slider 1 -- Lightbox + Controls + Filters
+
+This MS Slider is using a quite simple configuration. This config is a good
+base to try out other configuration features provided by MS Lite. Additionally,
+this slider is using the (CSS) *filter* feature of Master Slider. Filters can
+be used for example to *transform* the *style* of the images provided by a
+slider. In this example, the slider images are transformed* from style *color*
+to *sepia*.
+
+NOTE: Lightbox support is only available for J1 Template. The product version
+*MS Lite* and *MS Pro* does not support Lightboxes on sliders
+out-of-the-box.
+
+TIP: Click on the Lightbox symbol mdi:image-outline[18px, md-gray] in the
+slides to see the base *colored* images.
+
+*Slider 1* is using the following general settings:
+
+.General settings
 [cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Setting |Value |Description
 
 |skin
 |`light-3`
-|
+|Skins control the design for the base UI elements `arrows` and `bullets`
 
 |layout
 |`boxed`
-|
+|The slider width and height is defined by the slider *options*
 
-|arrows
-|Default settings
-|
+|lightbox
+|`true`
+|Type of the lightbox `lb` (Lightbox V2)
 
-|bullets
-|Default settings
-|
+|controls
+|`arrows`
+|Default settings. The settngs are defined in `~/_data/defalt/masterslider.yml`.
+The design is taken as CSS styles taken from the MS Slider module *resources*
+(~/assets/themes/j1/modules/masterslider/css/skins).
+
+|controls
+|`bullets`
+|Default settings. The settngs are defined in `~/_data/defalt/masterslider.yml`.
+The design is taken as CSS styles taken from the MS Slider module *resources*
+(~/assets/themes/j1/modules/masterslider/css/skins).
 
 |filters
 |`grayscale`
@@ -185,10 +217,10 @@ The example *Slider 1* is using the following general settings:
 
 
 [[slider-settings-1]]
-=== Slider settings
+==== Slider settings
 
 For the standard version of MS Lite, *no* filters are supported. J1 Template
-is using a modified/extended version for MS Lite to support filters for your
+is using a extended version of MS Lite to support (CSS) filters for your
 silders.
 
 [NOTE]
@@ -200,7 +232,8 @@ For default, filters are applied to all (background) images of a slider
 except the *active* (visible/selected) slide. If `applyFiltersAllSlides` is
 set to `true`, filters are applied on *all* images including the *active*
 slide. This can be used for example to transform all the images of a slider
-to grayscale, sepia etc. or *combinations* of filters.
+to grayscale, sepia etc. or by *combinations* of filters to add multiple
+effects.
 ====
 
 TIP: Find the *full* slider configuration in the masterslider config file
@@ -231,7 +264,8 @@ settings:
       id:                               ms_00001
       skin:                             light-3
       lightbox:
-        enabled:                        false
+        enabled:                        true
+        type:                           lb
 
       # ------------------------------------------------------------------------
       # Slider controls
@@ -275,10 +309,14 @@ settings:
 ----
 
 [[placement-slider-1]]
-=== Placements of Slider 1
+==== Placement of the MS Slider
+
+Depending on the source you're using for your content, the methods to place
+an MS Slider depends. Find the examples for *Asciidoc* and *Markdown*
+below.
 
 [[slider-adoc-1]]
-==== Asciidoc Markup
+===== Asciidoc Markup
 
 To place a slider in your Asciidoc-based sources, the use of the extension
 `masterslider::` is recommended.
@@ -299,65 +337,46 @@ used like so
 ----
 
 [[slider-markdown-1]]
-==== Mardown Markup
+===== Mardown Markup
 
 To use MS sliders for content sources of type *Markdown*, simply write
-the MTML placeholder for a slider:
+the *HTML placeholder* for a slider:
 
 [source, html]
 ----
 <div id="p_ms_00001" class="master-slider-parent mt-4 mb-5"></div>
 ----
 
-
 [[rendered-slider-1]]
-=== Rendered slider
+==== Rendered slider
 
-// add placeholder for dynamic load (AJAX)
+// add placeholder for AJAX load
 //
 masterslider::ms_00001[role="mt-4 mb-5"]
 
 
-== Slider 2 - FullWidth + Lightbox + ScrollParallax
+=== Slider 2 -- FullWidth
 
 For example, MS sliders of type `fullwidth` can be used as delimiters in
 text-dominated pages. For all MS sliders (except one of layout `partialview`)
 a lightbox (default: Lightbox V2) can be used to explore all images of a
 slider in a full-sized view.
 
-NOTE: Lightbox support is only available for J1 Template. The product
-version *MS Lite* and *MS Pro* does not support Lightboxes on sliders
-out-of-the-box.
+*Slider 2* is using the following general settings:
 
-For the standard MS Lite version, *no* parallax effect is supported.
-J1 Template is using a modified/extended version for MS Lite to support
-a *parallax scrolling* effect on MS (lite) sliders. The following content
-gets smoothly over the slider while down-scrolling the page.
-
-The example *Slider 1* is using the following general settings:
-
-.Slider 2 settings
+.General settings
 [cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Setting |Value |Description
 
 |layout
-|`partialview`
-|
-
-|`filters`
-|grayscale
-|value: 0.5
-
-|`filters`
-|sepia
-|value: 0.5
+|`fullwidth`
+|The slider spans the full width of the page
 
 |===
 
-
 [[slider-settings-2]]
-=== Slider settings
+==== Slider settings
 
 TIP: Find the *full* slider configuration in the masterslider config file
 `~/_data/masterslider.yml`.
@@ -379,32 +398,18 @@ settings:
   sliders:
 
     # --------------------------------------------------------------------------
-    # Slider 2 - Full Width + ScrollParallax
+    # Slider 2 - FullWidth
     #
     - slider:
       enabled:                          true
 
       id:                               ms_00002
-      lightbox:
-        enabled:                        true
-        type:                           lb
 
       # ------------------------------------------------------------------------
       # Slider controls
       #
       controls:
         # NO controls used for this slider
-
-      # ------------------------------------------------------------------------
-      # Slider plugins
-      #
-      plugins:
-
-        J1ScrollParallax:
-          enabled:                      true
-          layers_parallax_depth:        50
-          background_parallax_depth:    80
-          fade_layers:                  false
 
       # ------------------------------------------------------------------------
       # Slider options
@@ -435,7 +440,7 @@ settings:
 ----
 
 [[slider-adoc-2]]
-=== Asciidoc Markup
+==== Asciidoc Markup
 
 [source, yaml]
 ----
@@ -443,37 +448,39 @@ masterslider::ms_00002[role="mt-4 mb-5"]
 ----
 
 [[rendered-slider-2]]
-=== Rendered slider
-// add placeholder for dynamic load (AJAX)
+==== Rendered slider
+
+// add placeholder for AJAX load
 //
 masterslider::ms_00002[role="mt-4 mb-5"]
 
 
-== Slider 3 - SlideInfo|Boxed + ScrollParallax
+=== Slider 3 -- SlideInfo|Boxed
 
-The example *Slider 3* is using the following general settings:
+One of the major features of sliders is to present additional animated
+elements, like text data, connected to the images presented by a slider:
+the slideshow. MS Slider provide functions to combine images and text
+elements: the *MSInfo* element.
 
-.Slider 3 settings
+*Slider 3* is using the following general settings:
+
+.General settings
 [cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Setting |Value |Description
 
 |layout
-|`partialview`
-|
+|`boxed`
+|The slider width and height is defined by the slider *options*
 
-|`filters`
-|grayscale
-|value: 0.5
-
-|`filters`
-|sepia
-|value: 0.5
+|controls
+|`slideinfo`
+|Details for *MSInfo* is configured slide-wise under key `slides`
 
 |===
 
 [[slider-settings-3]]
-=== Slider settings
+==== Slider settings
 
 TIP: Find the *full* slider configuration in the masterslider config file
 `~/_data/masterslider.yml`.
@@ -495,7 +502,7 @@ settings:
   sliders:
 
     # --------------------------------------------------------------------------
-    # Slider 3 - SlideInfo + ScrollParallax (Autoplay|Boxed|Animated)
+    # Slider 3 - SlideInfo (Autoplay|Boxed|Animated)
     #
     - slider:
       enabled:                          true
@@ -511,17 +518,6 @@ settings:
         slideinfo:
           enabled:                      true
           margin:                       -133
-
-      # ------------------------------------------------------------------------
-      # Slider plugins
-      #
-      plugins:
-
-        J1ScrollParallax:
-          enabled:                      true
-          layers_parallax_depth:        50
-          background_parallax_depth:    80
-          fade_layers:                  false
 
       # ------------------------------------------------------------------------
       # Slider options
@@ -570,7 +566,7 @@ settings:
 ----
 
 [[slider-adoc-3]]
-=== Asciidoc Markup
+==== Asciidoc Markup
 
 [source, yaml]
 ----
@@ -578,38 +574,42 @@ masterslider::ms_00003[role="mt-4 mb-5"]
 ----
 
 [[rendered-slider-3]]
-=== Rendered slider
+==== Rendered slider
 
-// add placeholder for dynamic load (AJAX)
+// add placeholder for AJAX load
 //
 masterslider::ms_00003[role="mt-4 mb-5"]
 
 
-== Slider 4 - ThumbImage (right|vertical)
+=== Slider 4 -- ThumbImage (right|vertical)
 
-The example *Slider 4* is using the following general settings:
+*Slider 4* is using the following general settings:
 
-.Slider 4 settings
+.General settings
 [cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Setting |Value |Description
 
 |layout
-|`partialview`
+|`boxed`
+|The slider width and height is defined by the slider *options*
+
+|controls
+|`bullets`
+|Default settings. Configuration properties are defined in
+`~/_data/defalt/masterslider.yml`
+
+|controls
+|`thumblist`
 |
-
-|`filters`
-|grayscale
-|value: 0.5
-
-|`filters`
-|sepia
-|value: 0.5
+|controls
+|`scrollbar`
+|
 
 |===
 
 [[slider-settings-4]]
-=== Slider settings
+==== Slider settings
 
 TIP: Find the *full* slider configuration in the masterslider config file
 `~/_data/masterslider.yml`.
@@ -688,7 +688,7 @@ settings:
 ----
 
 [[slider-adoc-4]]
-=== Asciidoc Markup
+==== Asciidoc Markup
 
 [source, yaml]
 ----
@@ -696,18 +696,18 @@ masterslider::ms_00004[role="mt-4 mb-5"]
 ----
 
 [[rendered-slider-4]]
-=== Rendered slider
+==== Rendered slider
 
-// add placeholder for dynamic load (AJAX)
+// add placeholder for AJAX load
 //
 masterslider::ms_00004[role="mt-4 mb-5"]
 
 
-== Slider 5 - ThumbImage (bottom|horizontal)
+=== Slider 5 -- ThumbImage (bottom|horizontal)
 
-The example *Slider 5* is using the following general settings:
+*Slider 5* is using the following general settings:
 
-.Slider 5 settings
+.General settings
 [cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Setting |Value |Description
@@ -727,7 +727,7 @@ The example *Slider 5* is using the following general settings:
 |===
 
 [[slider-settings-5]]
-=== Slider settings
+==== Slider settings
 
 TIP: Find the *full* slider configuration in the masterslider config file
 `~/_data/masterslider.yml`.
@@ -802,7 +802,7 @@ settings:
 ----
 
 [[slider-adoc-5]]
-=== Asciidoc Markup
+==== Asciidoc Markup
 
 [source, yaml]
 ----
@@ -810,18 +810,18 @@ masterslider::ms_00005[role="mt-4 mb-5"]
 ----
 
 [[rendered-slider-5]]
-=== Rendered slider
+==== Rendered slider
 
-// add placeholder for dynamic load (AJAX)
+// add placeholder for AJAX load
 //
 masterslider::ms_00005[role="mt-4 mb-5"]
 
 
-== Slider 6 - ThumbInfo (bottom|horizontal)
+=== Slider 6 -- ThumbInfo (bottom|horizontal)
 
-The example *Slider 6* is using the following general settings:
+*Slider 6* is using the following general settings:
 
-.Slider 6 settings
+.General settings
 [cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Setting |Value |Description
@@ -841,7 +841,7 @@ The example *Slider 6* is using the following general settings:
 |===
 
 [[slider-settings-6]]
-=== Slider settings
+==== Slider settings
 
 TIP: Find the *full* slider configuration in the masterslider config file
 `~/_data/masterslider.yml`.
@@ -922,7 +922,7 @@ settings:
 ----
 
 [[slider-adoc-6]]
-=== Asciidoc Markup
+==== Asciidoc Markup
 
 [source, yaml]
 ----
@@ -930,18 +930,18 @@ masterslider::ms_00006[role="mt-4 mb-5"]
 ----
 
 [[rendered-slider-6]]
-=== Rendered slider
+==== Rendered slider
 
-// add placeholder for dynamic load (AJAX)
+// add placeholder for AJAX load
 //
 masterslider::ms_00006[role="mt-4 mb-5"]
 
 
-== Slider 7 - ThumbInfo (right|vertical)
+=== Slider 7 -- ThumbInfo + Lightbox (right|vertical)
 
-The example *Slider 7* is using the following general settings:
+*Slider 7* is using the following general settings:
 
-.Slider 7 settings
+.General settings
 [cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Setting |Value |Description
@@ -961,7 +961,7 @@ The example *Slider 7* is using the following general settings:
 |===
 
 [[slider-settings-7]]
-=== Slider settings
+==== Slider settings
 
 TIP: Find the *full* slider configuration in the masterslider config file
 `~/_data/masterslider.yml`.
@@ -1048,7 +1048,7 @@ settings:
 ----
 
 [[slider-adoc-7]]
-=== Asciidoc Markup
+==== Asciidoc Markup
 
 [source, yaml]
 ----
@@ -1056,18 +1056,18 @@ masterslider::ms_00007[role="mt-4 mb-5"]
 ----
 
 [[rendered-slider-7]]
-=== Rendered slider
+==== Rendered slider
 
-// add placeholder for dynamic load (AJAX)
+// add placeholder for AJAX load
 //
 masterslider::ms_00007[role="mt-4 mb-5"]
 
 
-== Slider 8 - Blog Articles + PartialView
+=== Slider 8 -- Blog Articles + PartialView
 
-The example *Slider 8* is using the following general settings:
+*Slider 8* is using the following general settings:
 
-.Slider 8 settings
+.General settings
 [cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Setting |Value |Description
@@ -1087,7 +1087,7 @@ The example *Slider 8* is using the following general settings:
 |===
 
 [[slider-settings-8]]
-=== Slider settings
+==== Slider settings
 
 TIP: Find the *full* slider configuration in the masterslider config file
 `~/_data/masterslider.yml`.
@@ -1177,7 +1177,7 @@ settings:
 ----
 
 [[slider-adoc-8]]
-=== Asciidoc Markup
+==== Asciidoc Markup
 
 [source, yaml]
 ----
@@ -1185,18 +1185,18 @@ masterslider::ms_00008[role="mt-4 mb-5"]
 ----
 
 [[rendered-slider-8]]
-=== Rendered slider
+==== Rendered slider
 
-// add placeholder for dynamic load (AJAX)
+// add placeholder for AJAX load
 //
 masterslider::ms_00008[role="mt-3 mb-5"]
 
 
-== Slider 9 - SlideInfo|Below + PartialView
+=== Slider 9 -- SlideInfo|Below + PartialView
 
-The example *Slider 9* is using the following general settings:
+*Slider 9* is using the following general settings:
 
-.Slider 9 settings
+.General settings
 [cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Setting |Value |Description
@@ -1216,7 +1216,7 @@ The example *Slider 9* is using the following general settings:
 |===
 
 [[slider-settings-9]]
-=== Slider settings
+==== Slider settings
 
 TIP: Find the *full* slider configuration in the masterslider config file
 `~/_data/masterslider.yml`.
@@ -1327,7 +1327,7 @@ settings:
 ----
 
 [[slider-adoc-9]]
-=== Asciidoc Markup
+==== Asciidoc Markup
 
 [source, yaml]
 ----
@@ -1335,21 +1335,23 @@ masterslider::ms_00009[role="mt-4 mb-5"]
 ----
 
 [[rendered-slider-9]]
-=== Rendered slider
-// add placeholder for dynamic load (AJAX)
+==== Rendered slider
+
+// add placeholder for AJAX load
 //
 masterslider::ms_00009[role="mt-4 mb-5"]
 
 
+== More about the Slider Module
 
+If you're interested to learn more about MS Sliders, go for the
+link:{ms-module--documentation}[MS Slider module documentation, {browser-window--new}]
+to learn all options available for th J1 Module `masterslider`.
 
-
+Have Fun!
 
 
 ++++
 <style>
-
-
-
 </style>
 ++++
