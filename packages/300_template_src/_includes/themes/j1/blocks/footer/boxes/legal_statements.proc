@@ -50,7 +50,7 @@ legals: {{legals | debug}}
   {% endif %}
 
   {% if item.legal.enabled and item.legal.type == 'privacy' %}
-    <li class="{{item.legal.translate_statement}}"><a class="link-no-decoration" mhref="{{item.legal.href}}">{{item.legal.statement}}</a></li>
+    <li class="{{item.legal.translate_statement}}"><a class="link-no-decoration" href="{{item.legal.href}}">{{item.legal.statement}}</a></li>
   {% endif %}
 
   {% if item.legal.enabled and item.legal.type == 'licence' %}
