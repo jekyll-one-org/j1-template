@@ -807,15 +807,14 @@ settings:
       #
       options:
 
-        width:                          450
+        width:                          600
         height:                         300
         layout:                         partialview
         loop:                           true                                    # required for partialview!
         filters:
-#         contrast:                     1
           brightness:                   0.8
           grayscale:                    0.5
-          opacity:                      0.7
+          opacity:                      0.6
 
 
       # ------------------------------------------------------------------------
@@ -981,10 +980,8 @@ settings:
         layout:                         partialview
         loop:                           true                                    # required for partialview!
         filters:
-          grayscale:                    0.9
-#         brightness:                   1
-#         contrast:                     1
-#         opacity:                      0.5
+          grayscale:                    0.8
+          opacity:                      0.4
 
       # ------------------------------------------------------------------------
       # Slides

@@ -40,7 +40,7 @@
 
     {% for property in links %}
       <li>
-        <a href="{{property.link.href}}" class="{{property.link.title_translation}}" target="_blank" rel="noopener noreferrer">{{property.link.title}}</a>
+        <a class="link-no-decoration" href="{{property.link.href}}" class="{{property.link.title_translation}}" target="_blank" rel="noopener noreferrer">{{property.link.title}}</a>
         <div class="text-uppercase"><small>{{property.link.tagline}}</small></div>
       </li>
     {% endfor %}

@@ -38,31 +38,31 @@ legals: {{legals | debug}}
 {% for item in legals %}
 
   {% if item.legal.enabled and item.legal.type == 'copyright' %}
-    <li class="{{item.legal.translate_statement}}"><a href="{{item.legal.href}}">{{item.legal.statement}}</a></li>
+    <li class="{{item.legal.translate_statement}}"><a class="link-no-decoration" href="{{item.legal.href}}">{{item.legal.statement}}</a></li>
   {% endif %}
 
   {% if item.legal.enabled and item.legal.type == 'impress' %}
-    <li class="{{item.legal.translate_statement}}"><a href="{{item.legal.href}}">{{item.legal.statement}}</a></li>
+    <li class="{{item.legal.translate_statement}}"><a class="link-no-decoration" href="{{item.legal.href}}">{{item.legal.statement}}</a></li>
   {% endif %}
 
   {% if item.legal.enabled and item.legal.type == 'terms' %}
-    <li class="{{item.legal.translate_statement}}"><a href="{{item.legal.href}}">{{item.legal.statement}}</a></li>
+    <li class="{{item.legal.translate_statement}}"><a class="link-no-decoration" href="{{item.legal.href}}">{{item.legal.statement}}</a></li>
   {% endif %}
 
   {% if item.legal.enabled and item.legal.type == 'privacy' %}
-    <li class="{{item.legal.translate_statement}}"><a href="{{item.legal.href}}">{{item.legal.statement}}</a></li>
+    <li class="{{item.legal.translate_statement}}"><a class="link-no-decoration" mhref="{{item.legal.href}}">{{item.legal.statement}}</a></li>
   {% endif %}
 
   {% if item.legal.enabled and item.legal.type == 'licence' %}
-    <li class="{{item.legal.translate_statement}}"><a href="{{item.legal.href}}">{{item.legal.statement}}</a></li>
+    <li class="{{item.legal.translate_statement}}"><a class="link-no-decoration" href="{{item.legal.href}}">{{item.legal.statement}}</a></li>
   {% endif %}
 
   {% if item.legal.enabled and item.legal.type == 'support' %}
-    <li class="{{item.legal.translate_statement}}"><a href="{{item.legal.href}}">{{item.legal.statement}}</a></li>
+    <li class="{{item.legal.translate_statement}}"><a class="link-no-decoration" href="{{item.legal.href}}">{{item.legal.statement}}</a></li>
   {% endif %}
 
   {% if item.legal.enabled and item.legal.type == 'comments' %}
-    <li class="{{item.legal.translate_statement}}"><a href="{{item.legal.href}}">{{item.legal.statement}}</a></li>
+    <li class="{{item.legal.translate_statement}}"><a class="link-no-decoration" href="{{item.legal.href}}">{{item.legal.statement}}</a></li>
   {% endif %}
 
 {% endfor %}
