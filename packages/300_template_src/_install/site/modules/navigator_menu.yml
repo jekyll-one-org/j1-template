@@ -338,6 +338,7 @@
         - title:                        Atom
           href:                         "https://jekyll.one/pages/public/cheatsheets/atom/"
           icon:                         atom
+          target:                       _blank
 
     # --------------------------------------------------------------------------
     # Previewers
@@ -349,6 +350,7 @@
       - title:                          Master Slider
         href:                           "https://jekyll.one/pages/public/previewer/masterslider/"
         icon:                           gesture-swipe
+        target:                         _blank
       - title:                          Country Flags
         href:                           "https://jekyll.one/pages/public/previewer/country_flags/"
         icon:                           flag

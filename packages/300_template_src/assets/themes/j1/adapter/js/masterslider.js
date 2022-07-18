@@ -304,13 +304,14 @@ j1.adapter.masterslider = (function (j1, window) {
                 plugins = $.extend({}, pluginOptions, slider[index].plugins);
 
                 // generate setup for plugin 'MSScrollParallax'
-                if (plugins.MSScrollParallax ) {
+                // NOTE: for the MS config, the plugin 'MSScrollParallax'  is named ' J1ScrollParallax'
+                if (plugins.J1ScrollParallax) {
                   // remove J1 config settings
-                  delete plugins.MSScrollParallax['enabled'];
+                  delete plugins.J1ScrollParallax['enabled'];
 
                   // create a 'properties' string
-                  pluginSettings = JSON.stringify(plugins.MSScrollParallax).replace(/"/g, '').replace(/{/g, '').replace(/}/g, '');
-                  logger.debug('\n' + 'plugin MSScrollParallax found: ' + pluginSettings);
+                  pluginSettings = JSON.stringify(plugins.J1ScrollParallax).replace(/"/g, '').replace(/{/g, '').replace(/}/g, '');
+                  logger.debug('\n' + 'plugin J1ScrollParallax found: ' + pluginSettings);
 
                   // remove property names to get a pure 'parameter' string
                   pluginSettings = pluginSettings.replace(/layers_parallax_depth:/g, '');
@@ -321,7 +322,7 @@ j1.adapter.masterslider = (function (j1, window) {
                     msSliderManagerItem        = '    ' + 'MSScrollParallax.setup(masterslider_' + i + ', ' + pluginSettings + ');';
                     msSliderManager.innerHTML +=  msSliderManagerItem + '\n';
                   } else {
-                    MSScrollParallax.setup(j1.masterslider.instances[index], pluginSettings );
+                    MSScrollParallax.setup(j1.masterslider.instances[index], pluginSettings);
                   }
                 } // END plugin 'MSScrollParallax'
               });

@@ -94,7 +94,7 @@ j1.adapter.toccer = (function () {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
-  var environment         = '{{environment}}';                                  // Set environment
+  var environment         = '{{environment}}';
   var moduleOptions       = {};
   var toccerOptions       = {};
   var frontmatterOptions  = {};
@@ -135,41 +135,27 @@ j1.adapter.toccer = (function () {
       logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
-      // create settings object from frontmatterOptions
-      var frontmatterOptions = options != null ? $.extend({}, options) : {};
-
       // -----------------------------------------------------------------------
-      // options loader
+      // Options loader
       // -----------------------------------------------------------------------
       /* eslint-disable */
-      toccerOptions = $.extend({}, {{toccer_options | replace: 'nil', 'null' | replace: '=>', ':' }});
+      // create settings object from frontmatterOptions
+      frontmatterOptions  = options != null ? $.extend({}, options) : {};
+      toccerOptions       = $.extend({}, {{toccer_options | replace: 'nil', 'null' | replace: '=>', ':' }});
 
-      // Load (individual) frontmatter options (currently NOT used)
-      if (options != null) { frontmatterOptions = $.extend({}, options); }
-
+      // overload (individual) settings into 'moduleOptions'
       if (typeof frontmatterOptions !== 'undefined') {
-        moduleOptions = j1.mergeData(frontmatterOptions, toccerOptions);
+        moduleOptions = $.extend({}, toccerOptions, frontmatterOptions);
       }
       /* eslint-enable */
 
-      // save config settings into the toccer object for global access
+      // save config settings into the toccer object for later access
       _this['moduleOptions'] = moduleOptions;
 
-      // cast text-based booleans
-      var isToc = (moduleOptions.toc === 'true');
-      var isComments = (moduleOptions.comments === 'true');
-
-      if ( typeof moduleOptions.collapseDepth === 'undefined') {
-        moduleOptions.collapseDepth = 3;
-      }
-
-      if (isToc) {
+      if (j1.stringToBoolean(moduleOptions.toc)) {
         var dependencies_met_navigator = setInterval(function() {
-//        if ( j1.adapter.navigator.getState() == 'finished' ) {
           if ( j1.getState() == 'finished' ) {
-            var settings = j1.adapter.toccer.moduleOptions;
-
-            _this.initToccerCore(settings);
+            _this.initToccerCore(moduleOptions);
             _this.setState('finished');
 
             logger.debug('\n' + 'state: ' + _this.getState());
@@ -182,16 +168,10 @@ j1.adapter.toccer = (function () {
     }, // END init
 
     // -------------------------------------------------------------------------
-    // Set Toccer options
+    // Initialize the toccer on page
     // -------------------------------------------------------------------------
     initToccerCore: function (options) {
       var scrollOffset = j1.getScrollOffset();
-
-      if (options  !== undefined) {
-        var settings = $.extend({}, options);
-      } else {
-        var settings = false;
-      }
 
       _this.setState('running');
       logger.debug('\n' + 'state: ' + _this.getState());
@@ -202,14 +182,14 @@ j1.adapter.toccer = (function () {
         if ($('#toc_mmenu').length) {
           /* eslint-disable */
           tocbot.init({
-            log:                    moduleOptions.log,
-            activeLinkColor:        moduleOptions.activeLinkColor,
-            tocSelector:            moduleOptions.tocSelector,
-            headingSelector:        moduleOptions.headingSelector,
-            ignoreSelector:         moduleOptions.ignoreSelector,
-            contentSelector:        moduleOptions.contentSelector,
-            collapseDepth:          moduleOptions.collapseDepth,
-            throttleTimeout:        moduleOptions.throttleTimeout,
+            log:                    options.log,
+            activeLinkColor:        options.activeLinkColor,
+            tocSelector:            options.tocSelector,
+            headingSelector:        options.headingSelector,
+            ignoreSelector:         options.ignoreSelector,
+            contentSelector:        options.contentSelector,
+            collapseDepth:          options.collapseDepth,
+            throttleTimeout:        options.throttleTimeout,
             hasInnerContainers:     false,
             includeHtml:            false,
             linkClass:              'toc-link',
@@ -224,53 +204,17 @@ j1.adapter.toccer = (function () {
             positionFixedClass:     'is-position-fixed',
             fixedSidebarOffset:     'auto',
             scrollContainer:        null,
-            scrollSmooth:           moduleOptions.scrollSmooth,
-            scrollSmoothDuration:   moduleOptions.scrollSmoothDuration,
+            scrollSmooth:           options.scrollSmooth,
+            scrollSmoothDuration:   options.scrollSmoothDuration,
             scrollSmoothOffset:     scrollOffset,
             headingsOffset:         1,
-            throttleTimeout:        moduleOptions.throttleTimeout
+            throttleTimeout:        options.throttleTimeout
           });
           /* eslint-enable */
           logger.debug('\n' + 'met dependencies for: loadHTML');
           clearInterval(dependencies_met_ajax_load_finished);
         } // END AJAX load finished
       }, 25); // END dependencies_met_ajax_load_finished
-
-      // jadams, 2021-11-19: is this really neded?
-      //
-      // $(window).on('resize', function() {
-      //   var scrollOffset = j1.getScrollOffset();
-      //
-      //   tocbot.refresh({
-      //     log:                    moduleOptions.log,
-      //     activeLinkColor:        moduleOptions.activeLinkColor,
-      //     tocSelector:            moduleOptions.tocSelector,
-      //     headingSelector:        moduleOptions.headingSelector,
-      //     ignoreSelector:         moduleOptions.ignoreSelector,
-      //     contentSelector:        moduleOptions.contentSelector,
-      //     collapseDepth:          moduleOptions.collapseDepth,
-      //     throttleTimeout:        moduleOptions.throttleTimeout,
-      //     hasInnerContainers:     false,
-      //     includeHtml:            false,
-      //     linkClass:              'toc-link',
-      //     extraLinkClasses:       '',
-      //     activeLinkClass:        'is-active-link',
-      //     listClass:              'toc-list',
-      //     extraListClasses:       '',
-      //     isCollapsedClass:       'is-collapsed',
-      //     collapsibleClass:       'is-collapsible',
-      //     listItemClass:          'toc-list-item',
-      //     positionFixedSelector:  '',
-      //     positionFixedClass:     'is-position-fixed',
-      //     fixedSidebarOffset:     'auto',
-      //     scrollContainer:        null,
-      //     scrollSmooth:           moduleOptions.scrollSmooth,
-      //     scrollSmoothDuration:   moduleOptions.scrollSmoothDuration,
-      //     scrollSmoothOffset:     scrollOffset,
-      //     headingsOffset:         1,
-      //     throttleTimeout:        moduleOptions.throttleTimeout
-      //   });
-      // });
 
     }, // END initToccerCore
 

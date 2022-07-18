@@ -129,7 +129,7 @@ settings:
       #
       plugins:
 
-        MSScrollParallax:
+        J1ScrollParallax:
           enabled:                      true
           layers_parallax_depth:        50
           background_parallax_depth:    80
@@ -204,7 +204,7 @@ settings:
       #
       plugins:
 
-        MSScrollParallax:
+        J1ScrollParallax:
           enabled:                      true
           layers_parallax_depth:        50
           background_parallax_depth:    80
