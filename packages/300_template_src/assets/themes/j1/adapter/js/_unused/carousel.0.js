@@ -124,7 +124,7 @@ j1.adapter.carousel = (function (j1, window) {
       /* eslint-enable */
 
       if (typeof settings !== 'undefined') {
-        moduleOptions = j1.mergeData(moduleOptions, settings);
+        moduleOptions = $.extend({}, moduleOptions, settings);
       }
 
       _this.setState('started');

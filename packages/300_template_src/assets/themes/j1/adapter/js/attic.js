@@ -379,8 +379,7 @@ j1.adapter.attic = (function (j1, window) {
                 /* eslint-enable */
 
                 // Merge|Overload Attic OPTIONS
-                atticOptions = j1.mergeData(atticOptions, atticOptionsHeader);
-                atticOptions = j1.mergeData(atticOptions, atticOptionsBackstretch);
+                atticOptions = $.extend({}, atticOptions, atticOptionsHeader, atticOptionsBackstretch);
 
                 // Overload Attic OPTIONS by settings from frontmatterOptions
                 if (frontmatterOptions.background_color_1) atticOptions.background_color_1 = frontmatterOptions.background_color_1;

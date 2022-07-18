@@ -167,7 +167,7 @@ j1.adapter.translator = (function (j1, window) {
       /* eslint-enable */
 
       if (typeof settings !== 'undefined') {
-        moduleOptions = j1.mergeData(moduleOptions, settings);
+        moduleOptions = $.extend({}, moduleOptions, settings);
       }
 
       // add GT callback script dynamically in the head section

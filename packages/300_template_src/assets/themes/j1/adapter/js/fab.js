@@ -150,7 +150,7 @@ j1.adapter.fab = (function (j1, window) {
       if (options != null) { frontmatterOptions = $.extend({}, options); }
 
       if (typeof frontmatterOptions !== 'undefined') {
-        moduleOptions = j1.mergeData(fabOptions, frontmatterOptions);
+        moduleOptions = $.extend({}, fabOptions, frontmatterOptions);
       }
       /* eslint-enable */
 

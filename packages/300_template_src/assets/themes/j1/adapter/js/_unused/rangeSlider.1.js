@@ -131,7 +131,7 @@ j1.adapter.rangeSlider = (function (j1, window) {
       moduleOptions = $.extend({}, {{range_slider_options | replace: 'nil', 'null' | replace: '=>', ':' }});
 
       if (typeof frontmatterOptions !== 'undefined') {
-        moduleOptions = j1.mergeData(moduleOptions, frontmatterOptions);
+        moduleOptions = $.extend({}, moduleOptions, frontmatterOptions);;
       }
 
       var dependencies_met_j1_finished = setInterval(function() {

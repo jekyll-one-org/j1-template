@@ -124,11 +124,11 @@ j1.adapter.customModule = (function (j1, window) {
       logger.info('\n' + 'module is being initialized');
 
       // create settings object from frontmatterOptions
-      frontmatterOptions = options != null ? $.extend({}, options) : {};
-      moduleOptions = $.extend({}, {{dropdowns_options | replace: 'nil', 'null' | replace: '=>', ':' }});
+      frontmatterOptions  = options != null ? $.extend({}, options) : {};
+      moduleOptions       = $.extend({}, {{dropdowns_options | replace: 'nil', 'null' | replace: '=>', ':' }});
 
       if (typeof frontmatterOptions !== 'undefined') {
-        moduleOptions = j1.mergeData(moduleOptions, frontmatterOptions);
+        moduleOptions = $.extend({}, moduleOptions, frontmatterOptions);;
       }
 
       var dependencies_met_j1_finished = setInterval(function() {

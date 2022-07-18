@@ -158,7 +158,7 @@ j1.adapter.cookieConsent = (function (j1, window) {
       /* eslint-enable */
 
       if (typeof settings !== 'undefined') {
-        moduleOptions = j1.mergeData(moduleOptions, settings);
+        moduleOptions = $.extend({}, moduleOptions, settings);
       }
 
       if (moduleOptions.dialogLanguage === 'auto') {

@@ -124,7 +124,7 @@ j1.adapter.rtable = (function (j1, window) {
       moduleOptions = $.extend({}, {{rtable_options | replace: 'nil', 'null' | replace: '=>', ':' }});
 
       if (typeof frontmatterOptions !== 'undefined') {
-        moduleOptions = j1.mergeData(moduleOptions, frontmatterOptions);
+        moduleOptions = $.extend({}, moduleOptions, frontmatterOptions);;
       }
 
       var dependencies_met_j1_finished = setInterval(function() {

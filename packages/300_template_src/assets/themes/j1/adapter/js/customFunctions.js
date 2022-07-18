@@ -128,7 +128,7 @@ j1.adapter.customFunctions = (function (j1, window) {
       moduleOptions = $.extend({}, {{dropdowns_options | replace: 'nil', 'null' | replace: '=>', ':' }});
 
       if (typeof frontmatterOptions !== 'undefined') {
-        moduleOptions = j1.mergeData(moduleOptions, frontmatterOptions);
+        moduleOptions = $.extend({}, moduleOptions, frontmatterOptions);
       }
 
       var dependencies_met_j1_finished = setInterval(function() {
