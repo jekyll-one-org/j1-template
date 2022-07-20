@@ -1,0 +1,478 @@
+== *Slider UI Controls*
+
+UI Controls adds to the slide with "control" slider method.
+
+[source, js]
+----
+  var slider = new MasterSlider();
+
+  slider.setup(
+    'masterslider', {
+      width:800, height:350
+  });
+
+  // added arrow control to the slider.
+  slider.control('arrows');
+----
+
+====== arrows
+
+Adds arrow navigation to the slider (CSS class names: `ms-nav-next` and
+`ms-nav-prev`).
+
+.Slider control
+[cols="3,3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Default Value |Description
+
+|`autohide`
+|true
+|Whether the control hides when mouse leaves the slider.
+
+|`overVideo`
+|true
+|Whether the control visible over slide video while
+playing.
+
+|`hideUnder`
+|null
+|Hides the control if width of slider comes less than
+specified.
+
+|===
+
+====== Example:
+
+[source, js]
+----
+  var slider = new MasterSlider();
+  slider.setup(
+    'masterslider', {
+      width:800, height:350
+  });
+
+  slider.control(
+    'arrows', {
+      autohide:false
+  });
+----
+
+====== bullets
+
+This UI control adds one bullet for each slide and user can change slide
+by clicking on each bullet (CSS class name: `ms-bullets`).
+
+.Slider control
+[cols="3,3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Default Value |Description
+
+|`autohide`
+|true
+|Whether the control hides when mouse leaves the slider.
+
+|`overVideo`
+|true
+|Whether the control visible over slide video while playing.
+
+|`dir`
+|h
+|Specifies the direction of control. It accepts two values "h"
+(horizontal) and "v" (vertical)
+
+|`hideUnder`
+|null
+|Hides the control if width of slider comes less than specified.
+
+|`align`
+|bottom
+|Aligns the control to in or out of slider. It accepts
+"top" and "bottom" values.
+
+|`margin`
+|10
+|Specifies the space between the control and slider in pixel
+
+|===
+
+====== Example:
++
+[source, js]
+----
+  var slider = new MasterSlider();
+
+  slider.setup(
+    'masterslider', {
+      width:800, height:350
+  });
+
+  slider.control(
+    'bullets', {
+      autohide:false,
+      dir:"v",
+      align:"top"
+  });
+----
+
+====== thumblist
+
+This control searches for an element which has `ms-thumb` as class name
+in slider html then creates a list of thumbnails (CSS class name:
+`ms-thumb-list`).
+
+NOTE: You can create a div element with `ms-thumb` class name in each
+slide and use html instead of image in thumbnail list. Like following:
+
+[source, html]
+----
+  <!-- new slide -->
+  <div class="ms-slide">
+
+    <!-- slide background -->
+    <img src="masterslider/blank.gif" data-src="masterslider/images/3.jpg" alt="lorem ipsum dolor sit"/>
+
+    <!-- slide text title it shows in thumbnail list. -->
+    <div class="ms-thumb"Lorem ipsum dolore</div>
+
+  </div>
+  <!-- end of slide -->
+----
+
+.Slider control
+[cols="3,3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Default Value |Description
+
+|`autohide`
+|true
+|Whether the control hides when mouse leaves the slider.
+
+|`overVideo`
+|true
+|Whether the control visible over slide video while playing
+
+|`width`
+|100
+|Specifies the width of each thumb in pixel
+
+|`height`
+|100
+|Specifies the height of each thumb in pixel
+
+|`type`
+|"thumbs"
+|Specifies the type of control, it can used as "thumbs" or "tabs".
+
+|`dir`
+|h
+|Specifies the direction of control. It accepts two values "h"
+(horizontal) and "v" (vertical)
+
+|`speed`
+|17
+|Specifies scrolling speed. It accepts float values between 0 and 100
+
+|`hideUnder`
+|null
+|Hides the control if width of slider comes less than specified
+
+|`align`
+|"bottom"
+|Aligns the control to in or out of slider. It accepts
+"top", "bottom", "left" and "right" values.
+
+|`hover`
+|false
+|Whether change slides on hovering over thumbs
+
+|`arrows`
+|false
+|Whether add arrows in thumblist
+
+|`inset`
+|false
+|Whether insert the control inside or outside of slider
+
+|`margin`
+|10
+|Specifies the space between the control and slider in pixel
+
+|`space`
+|10
+|Specifies the space between thumbs or tabs
+
+|===
+
+====== Example:
+
+[source, js]
+----
+  var slider = new MasterSlider();
+
+  slider.setup(
+    'masterslider', {
+      width:800,
+      height:350
+  });
+
+  slider.control('bullets');
+  slider.control(
+    'thumblist', {
+      autohide:false,
+      dir:"v"
+  });
+----
+
+====== scrollbar
+
+This UI control adds a scroll bar in slider which moves when each slide
+changes (CSS class name: `ms-sbar`).
+
+.Slider control
+[cols="3,3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Default Value |Description
+
+|`autohide`
+|true
+|Whether the control hides when mouse leaves the slider.
+
+|`overVideo`
+|true
+|Whether the control visible over slide video while playing
+
+|`dir`
+|h
+|Specifies the direction of control. It accepts two values "h"
+(horizontal) and "v" (vertical)
+
+|`color`
+|"#3D3D3D"
+|Specifies the color scrollbar handle color.
+
+|`width`
+|4
+|Specifies the width of scrollbar handle in pixel
+
+|`hideUnder`
+|null
+|Hides the control if width of slider comes less than specified
+
+|`align`
+|bottom
+|Aligns the control to in or out of slider. It accepts
+"top", "bottom", "left" and "right" values.
+
+|`inset`
+|false
+|Whether insert the control inside or outside of slider
+
+|`margin`
+|10
+|Specifies the space between the control and slider in pixel
+
+|===
+
+====== Example:
+
+[source, js]
+----
+  var slider = new MasterSlider();
+
+  slider.setup(
+    'masterslider', {
+      width:800, height:350
+  });
+
+  slider.control(
+    'thumblist', {
+      autohide:false,
+      dir:"v"
+    });
+  slider.control(
+    'scrollbar', {
+      dir:"v"
+  });
+----
+
+
+====== circletimer
+
+It adds a circle timer into slider. This control only works in modern
+browsers (CSS class name: `ms-ctimer`).
+
+.Slider control
+[cols="3,3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Default Value |Description
+
+|`autohide`
+|true
+|Whether the control hides when mouse leaves the slider
+
+|`overVideo`
+|true
+|Whether the control visible over slide video while playing
+
+|`color`
+|"#A2A2A2"
+|Specifies the color of circle timer
+
+|`radius`
+|4
+|Specifies the radius of circle timer in pixels
+
+|`stroke`
+|10
+|Specifies the stroke of circle timer in pixels
+
+|`hideUnder`
+|null
+|Hides the control if width of slider comes less than specified
+
+|===
+
+====== Example:
+
+[source, js]
+----
+  var slider = new MasterSlider();
+
+  slider.setup(
+    'masterslider', {
+      width:800,
+      height:350
+  });
+
+  slider.control(
+    'thumblist', {
+      autohide:false,
+      dir:"v"
+  });
+  slider.control(
+    'circletimer', {
+      color:"#FFDD00",
+      stroke:20
+  });
+----
+
+====== timebar
+
+It adds a progress bar for timer in slider (CSS class name: `ms-timerbar`).
+
+.Slider control
+[cols="3,3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Default Value |Description
+
+|`autohide`
+|true
+|Whether the control hides when mouse leaves the slider
+
+|`overVideo`
+|true
+|Whether the control visible over slide video while playing
+
+|`color`
+|"#FFFFFF"
+|Specifies the color of timebar
+
+|`hideUnder`
+|null
+|Hides the control if width of slider comes less than specified
+
+|`align`
+|bottom
+|Aligns the control to in or out of slider. It accepts
+"top" and "bottom" values.
+
+|`inset`
+|false
+|Whether insert the control inside or outside of slider
+
+|`margin`
+|0
+|Specifies the space between the control and slider in pixel
+
+|===
+
+====== Example:
+
+[source, js]
+----
+  var slider = new MasterSlider();
+
+  slider.setup(
+    'masterslider', {
+      width:800,
+      height:350
+  });
+
+  slider.control('timebar');
+----
+
+
+====== slideinfo
+
+With this control you can specify a HTML value to each slide and slider
+will show the value of slide while it selected. This control searches for
+an element which has `ms-info` as class name in each slide.
+
+.Slider control
+[cols="3,3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Default Value |Description
+
+|`autohide`
+|true
+|Whether the control hides when mouse leaves the slider
+
+|`overVideo`
+|true
+|Whether the control visible over slide video while playing
+
+|`insertTo`
+|-
+|The HTML element that the info will be added in it
+
+|`size`
+|100
+|Specifies the width or height (based on specified direction)
+of slide info container in pixel
+
+|`hideUnder`
+|null
+|Hides the control if width of slider comes less than specified
+
+|`align`
+|"bottom"
+|Aligns the control to in or out of slider. It accepts
+"top", "bottom", "left" and "right" values
+
+|`inset`
+|false
+|Whether insert the control inside or outside of slider
+
+|`margin`
+|10
+|Specifies the space between the control and slider in pixel
+
+|===
+
+====== Example:
+
+[source, js]
+----
+  var slider = new MasterSlider();
+
+  slider.setup(
+    'masterslider', {
+      width:800,
+      height:350
+  });
+
+  slider.control(
+    'slideinfo', {
+      insertTo:'#info'
+  });
+----

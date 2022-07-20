@@ -1,0 +1,383 @@
+
+== MS Slider API
+
+=== Methods
+
+[source, js]
+----
+  var slider = new MasterSlider();
+  slider.setup('masterslider' , {width:800, height:350});
+
+  slider.api.index();           // returns current slider index.
+  slider.api.count();           // returns total number of slides.
+
+  slider.api.next();            // next slide.
+  slider.api.previous();        // previous slide.
+  slider.api.gotoSlide(4);      // moves to 4th slide.
+
+  slider.api.pause();           // pauses the slider timer.
+  slider.api.resume();          // resumes the slider timer.
+  slider.api.currentTime();     // returns the percentage of elapsed time.
+
+  slider.api.destroy();         // removes the slider.
+
+----
+
+=== Properties
+
+[source, js]
+----
+  slider.api.so                 // returns the object of slider options.
+
+  slider.api.view               // returns the slider transition object.
+  slider.api.view.slideList     // returns a array of all slides.
+  slider.api.viwe.currentSlide  // returns the current slide object.
+
+----
+
+=== Events
+
+[source, js]
+----
+  slider.api.addEventListener(MSSliderEvent.INIT , function() {
+    // dispatches when the slider's current slide change starts.
+  });
+
+  slider.api.addEventListener(MSSliderEvent.CHANGE_START , function() {
+    // dispatches when the slider's current slide change starts.
+  });
+
+  slider.api.addEventListener(MSSliderEvent.CHANGE_END , function() {
+    // dispatches when the slider's current slide change ends.
+  });
+
+  slider.api.addEventListener(MSSliderEvent.WAITING , function() {
+    // dispatches whenever the slider timer updates.
+  });
+
+  slider.api.addEventListener(MSSliderEvent.RESIZE , function() {
+    // dispatches when the slider is resized.
+  });
+
+  slider.api.addEventListener(MSSliderEvent.VIDEO_PLAY , function() {
+    // dispatches when the slide video played.
+  });
+
+  slider.api.addEventListener(MSSliderEvent.VIDEO_CLOSE , function() {
+    // dispatches when the slide video closed.
+  });
+
+  slider.api.view.addEventListener(MSViewEvents.SWIPE_START , function() {
+    // dispatches when swipe dragging starts.
+  });
+
+  slider.api.view.addEventListener(MSViewEvents.SWIPE_END , function() {
+    // dispatches when swipe dragging ends.
+  });
+
+  slider.api.view.addEventListener(MSViewEvents.SWIPE_MOVE , function() {
+    // dispatches when swipe dragging moves.
+  });
+
+  slider.api.view.addEventListener(MSViewEvents.SWIPE_CANCEL , function() {
+    // dispatches when swipe dragging cancels.
+  });
+
+----
+
+== MS Slider Skins
+
+Here you can find a list of available skins which included in dowload
+package.
+
+You can change the slider skin by following these steps:
+
+. Find and upload your preferred skin from "skins" folder.
+. Import "style.css" from the skin folder into your page like following:
+
+[source, html]
+----
+  <link rel="stylesheet" href="masterslider/skins/light-2/style.css" />
+----
+
+Specify skin class name to your slider element.
+
+[source, html]
+----
+  <!-- masterslider -->
+  <div class="master-slider ms-skin-light-2" id="masterslider">
+    <!-- slides goes here -->
+  </div>
+  <!-- end of masterslider -->
+----
+
+=== Skins
+
+[cols="3,3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Image Source file |Name |Class Name
+
+|image:assets/images/skins/default.gif[skin]
+|default
+|ms-skin-default
+
+|image:assets/images/skins/l-2.gif[skin]
+|Light 2
+|ms-skin-light-2
+
+|image:assets/images/skins/l-3.gif[skin]
+|Light 3
+|ms-skin-light-3
+
+|image:assets/images/skins/l-4.gif[skin]
+|Light 4
+|ms-skin-light-4
+
+|image:assets/images/skins/l-5.gif[skin]
+|Light 5
+|ms-skin-light-5
+
+|image:assets/images/skins/l-6.gif[skin]
+|Light 6
+|ms-skin-light-6
+
+|image:assets/images/skins/l-6-r.gif[skin]
+|Light 6 Round
+|ms-skin-light-6 ms-skin-round
+
+|image:assets/images/skins/cont.gif[skin]
+|Contrast
+|ms-skin-contrast
+
+|image:assets/images/skins/b-1.gif[skin]
+|Black 1
+|ms-skin-black-1
+
+|image:assets/images/skins/b-2.gif[skin]
+|Black 2
+|ms-skin-black-2
+
+|image:assets/images/skins/b-2-r.gif[skin]
+|Black 2 Round
+|ms-skin-black-2 ms-skin-round
+
+|image:assets/images/skins/metro.gif[skin]
+|Metro
+|ms-skin-metro
+
+|===
+
+== MS Slider Easing Functions
+
+IMPORTANT: This slider needs jQuery easing plugin for old browsers.
+You can include it into your page like following (in head section)
+
+[source, html]
+----
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+----
+
+=== Supported Easing Functions
+
+[cols="^6a,^6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Example
+
+|linear
+|
+++++
+<div class="easedemo" data-ease="linear">
+  <div class="playbtn"></div>
+  <div class="easebox" style="left: 440px;"></div>
+</div>
+++++
+
+|easeInCubic
+|
+
+|easeOutCubic
+|
+
+|easeInOutCubic
+|
+
+|easeInCirc
+|
+
+|easeOutCirc
+|
+
+|easeInOutCirc
+|
+
+|easeInExpo
+|
+
+|easeOutExpo
+|
+
+|easeInOutExpo
+|
+
+|easeInQuad
+|
+
+|easeOutQuad
+|
+
+|easeInOutQuad
+|
+
+|easeInQuart
+|
+
+|easeOutQuart
+|
+
+|easeInOutQuart
+|
+
+|easeInQuint
+|
+
+|easeOutQuint
+|
+
+|easeInOutQuint
+|
+
+|easeInSine
+|
+
+|easeOutSine
+|
+
+|easeInOutSine
+|
+
+|easeInBack
+|
+
+|easeOutBack
+|
+
+|easeInOutBack
+|
+
+|===
+
+
+
+++++
+<script>
+
+$(document).ready(function() {
+
+	SyntaxHighlighter.all();
+
+	CTween.fadeOut($('#loading') , 400 , true);
+	CTween.fadeIn($('#main-container').css('display' , 'block') , 400);
+
+	$(".easedemo").each(function(index){
+				var $this = $(this);
+				var tween;
+				var pbtn = $('<div class="playbtn"></div>').appendTo($this).click(function(){
+					if(tween) tween.reset();
+					box.css('left' , 0);
+					tween = CTween.animate(box , 1800 , {left:440} , {ease:$this.data('ease')});
+				});
+				var box = $('<div class="easebox"></div>').appendTo($this);
+			});
+
+	// init pages
+
+	var pages = $('.content-section');
+	var content = $('#content').addClass('float');
+	pages.css('display','none').addClass('float');
+
+	var currentPage;
+
+	function updatePage(){
+		var hash = window.location.hash;
+		if(hash === '' || hash === undefined) hash = '#intro';
+		var page = $(hash);
+		showPage(page);
+		if(currentPage)	hidePage(currentPage);
+		currentPage = page;
+		content.scrollTop(0);
+	}
+
+	var hide_tween ;
+
+	var showPage =  function(page){
+		$('a[href=#'+page.attr('id')+']').parent().addClass('active');
+
+		page.css({opacity:0 , display:'' , position:'relative' , top:'0px' , left:'0px'});
+		CTween.setPos(page,{x:500});
+		CTween.animate(page , 500 , {opacity:'1' , x:0} , {ease:'easeOutQuart'});
+
+		if(hide_tween && ((hide_tween.$element && hide_tween.$element[0] === page[0]) || (hide_tween[0] === page[0]))){
+			hide_tween.stop(true);
+		}
+
+	};
+
+	var hidePage = function(page){
+		$('a[href=#'+page.attr('id')+']').parent().removeClass('active');
+		page.css({position:'absolute'});
+		var to = {opacity:'0' , x : 500};
+		hide_tween = CTween.animate(page , 500 , to , {ease:'easeOutQuart', complete:function(){
+			page.css('display' , 'none');
+		}});
+	};
+
+
+	$(window).on('hashchange' , updatePage);
+	updatePage();
+
+	$(window).on('resize' , onresize);
+
+	function onresize(){
+		content.height($(window).height() - $('.header').height() - parseInt($('#content').css('padding-top'))*2 - 1);
+	}
+	onresize();
+
+
+	var sidebar = $('#sidebar'),
+		side_w	= $('.toc').outerWidth(),
+		show	= true,
+		togg	= $('.toggle'),
+		base_marg = parseInt(content.css('margin-left'));
+
+	togg.on('click',function(){
+		togg.toggleClass('out');
+		if(show){
+			show = false;
+			CTween.animate(sidebar , 500 , {left:-side_w+'px'} , {ease:'easeOutQuart'});
+			CTween.animate(content , 500 , {marginLeft:base_marg-side_w} , {ease:'easeOutQuart'});
+		}else{
+			show = true;
+			CTween.animate(sidebar , 500 , {left:'0px'} , {ease:'easeOutQuart'});
+			CTween.animate(content , 500 , {marginLeft:base_marg} , {ease:'easeOutQuart'});
+		}
+
+	});
+
+});
+
+</script>
+++++
+
+
+++++
+<style>
+
+.easedemo {
+    width: 500px;
+    height: 30px;
+    border: solid 1px rgb(213, 213, 213);
+    background: white;
+}
+
+</style>
+++++

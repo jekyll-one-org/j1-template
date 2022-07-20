@@ -5420,6 +5420,7 @@ MSViewEvents.CHANGE_END         = 'slideChangeEnd';
     window.msCli = function(f){f=f||'pause';var m=masterslider_instances;for(var i in m){m[i].api[f]();}}
 })(jQuery);
 
+
 /**
  * Master Slider Filters Plugin for J1 Template
  * This plugin adds CSS3 filters to the slides, like brightness, grayscale,
@@ -5445,15 +5446,15 @@ MSViewEvents.CHANGE_END         = 'slideChangeEnd';
 
     // check if master slider is available
     if (!window.MasterSlider) {
-        return;
+      return;
     }
 
     var Filters = function (slider) {
-        this.slider = slider;
+      this.slider = slider;
 
-        if ( this.slider.options.filters ) {
-            slider.api.addEventListener(MSSliderEvent.INIT, this.init, this);
-        }
+      if ( this.slider.options.filters ) {
+          slider.api.addEventListener(MSSliderEvent.INIT, this.init, this);
+      }
     };
 
     Filters.name = 'MSFilters';
@@ -5463,27 +5464,27 @@ MSViewEvents.CHANGE_END         = 'slideChangeEnd';
      * initiate the plugin
     */
     p.init = function () {
-        var api  = this.slider.api,
-              view = api.view;
+      var api  = this.slider.api,
+          view = api.view;
 
-        this.filters                   = this.slider.options.filters;
-        this.slideList               = view.slideList;
-        this.slidesCount             = view.slidesCount;
-        this.dimension               = view[view.__dimension];
-        this.target                    = this.slider.options.filterTarget === 'slide' ? '$element' : '$bg_img';
-    this.applyFiltersAllSlides = this.slider.options.applyFiltersAllSlides === true ? true : false;
-        this.filterName              = window.MSBrowserInfo.webkit ? 'WebkitFilter' : 'filter';
+      this.filters                = this.slider.options.filters;
+      this.slideList              = view.slideList;
+      this.slidesCount            = view.slidesCount;
+      this.dimension              = view[view.__dimension];
+      this.target                 = this.slider.options.filterTarget === 'slide' ? '$element' : '$bg_img';
+      this.applyFiltersAllSlides  = this.slider.options.applyFiltersAllSlides === true ? true : false;
+      this.filterName             = window.MSBrowserInfo.webkit ? 'WebkitFilter' : 'filter';
 
-        // override the controller update callback
-        var superFun = view.controller.__renderHook.fun,
-              superRef = view.controller.__renderHook.ref;
+      // override the controller update callback
+      var superFun = view.controller.__renderHook.fun,
+          superRef = view.controller.__renderHook.ref;
 
-        view.controller.renderCallback( function (controller, value) {
-            superFun.call(superRef, controller, value);
-            this.applyEffect(value);
-        }, this);
+      view.controller.renderCallback(function (controller, value) {
+          superFun.call(superRef, controller, value);
+          this.applyEffect(value);
+      }, this);
 
-        this.applyEffect(view.controller.value);
+      this.applyEffect(view.controller.value);
     };
 
     /**
@@ -5491,25 +5492,26 @@ MSViewEvents.CHANGE_END         = 'slideChangeEnd';
      * @param  {Number} value Current position of slider controller
     */
     p.applyEffect = function (value) {
-        var factor, slide;
+      var factor, slide;
 
-        for( var i = 0; i < this.slidesCount; ++i ) {
-            slide = this.slideList[i];
-      if (this.applyFiltersAllSlides) {
-        // use filters on all slide positions
-        factor = 1;
-      } else {
-        factor = Math.min(1 , Math.abs(value - slide.position) / this.dimension);
-      }
+      for( var i = 0; i < this.slidesCount; ++i ) {
+        slide = this.slideList[i];
 
-            if ( slide[this.target] ) {
-                if ( !window.MSBrowserInfo.msie ) {
-                    slide[this.target][0].style[this.filterName] = this.generateStyle(factor);
-                } else if ( this.filters.opacity != null ) {
-                    slide[this.target].opacity( 1 - this.filters.opacity * factor);
-                }
-            }
+        if (this.applyFiltersAllSlides) {
+          // use filters on all slide positions
+          factor = 1;
+        } else {
+          factor = Math.min(1 , Math.abs(value - slide.position) / this.dimension);
         }
+
+        if ( slide[this.target] ) {
+          if ( !window.MSBrowserInfo.msie ) {
+            slide[this.target][0].style[this.filterName] = this.generateStyle(factor);
+          } else if ( this.filters.opacity != null ) {
+            slide[this.target].opacity( 1 - this.filters.opacity * factor);
+          }
+        }
+      }
     };
 
     /**
@@ -5518,174 +5520,25 @@ MSViewEvents.CHANGE_END         = 'slideChangeEnd';
      * @return {String} CSS style
     */
     p.generateStyle = function (factor) {
-        var style = '',
-            unit;
+      var style = '',
+          unit;
 
-        for ( var filter in this.filters ) {
-            unit = filterUnits[filter] || '';
+      for (var filter in this.filters) {
+        unit = filterUnits[filter] || '';
         style += filter + '(' + ( initialValues[filter] + (this.filters[filter] - initialValues[filter]) * factor) + ') ';
-        }
+      }
 
-        return style;
+      return style;
     };
 
     /**
      * destroy the plugin
     */
-    p.destroy = function(){
-        this.slider.api.removeEventListener(MSSliderEvent.INIT, this.init, this);
+    p.destroy = function() {
+      this.slider.api.removeEventListener(MSSliderEvent.INIT, this.init, this);
     };
 
     // install plugin for master slider
     MasterSlider.registerPlugin(Filters);
 
  })(document, window, jQuery);
-
-
- /*
-  * Master Slider MSScrollParallax plugin version for J1 Template
- */
- (function($){
-    'use strict';
-
-    window.MSScrollParallax = function (slider, parallax, bgparallax, fade) {
-        this.fade        = fade;
-        this.slider      = slider;
-        this.parallax    = parallax/100;
-        this.bgparallax  = bgparallax/100;
-
-        slider.api.addEventListener(MSSliderEvent.INIT, this.init, this);
-        slider.api.addEventListener(MSSliderEvent.DESTROY, this.destory, this);
-        slider.api.addEventListener(MSSliderEvent.CHANGE_END, this.resetLayers, this);
-        slider.api.addEventListener(MSSliderEvent.CHANGE_START, this.updateCurrentSlide, this);
-    };
-
-    window.MSScrollParallax.setup = function(slider, parallax, bgparallax, fade) {
-        // disable in mobile devices
-        if (window._mobile) {
-            return;
-        }
-        if (parallax == null) {
-            parallax    = 50;
-        }
-        if (bgparallax == null) {
-            bgparallax  = 40;
-        }
-        return new MSScrollParallax(slider, parallax, bgparallax, fade);
-    };
-
-    var p = window.MSScrollParallax.prototype;
-
-    p.init = function (e) {
-        this.slider.$element.addClass('ms-scroll-parallax');
-        this.sliderOffset = this.slider.$element.offset().top;
-        this.updateCurrentSlide();
-        // wrap layers element
-        var slides = this.slider.api.view.slideList,
-            slide;
-        for(var i = 0, l = slides.length; i!==l ; i++) {
-            slide = slides[i];
-            if( slide.hasLayers ) {
-                slide.layerController.$layers.wrap('<div class="ms-scroll-parallax-cont"></div>');
-                slide.$scrollParallaxCont = slide.layerController.$layers.parent();
-            }
-        }
-
-        $(window).on('scroll', {that:this}, this.moveParallax).trigger('scroll');
-    };
-
-    p.resetLayers = function (e) {
-        if (!this.lastSlide) {
-            return;
-        }
-
-        var layers = this.lastSlide.$scrollParallaxCont;
-        if (window._css2d) {
-            if (layers) {
-                layers[0].style[window._jcsspfx + 'Transform'] = '';
-            }
-            if (this.lastSlide.hasBG) {
-                this.lastSlide.$imgcont[0].style[window._jcsspfx + 'Transform'] = '';
-            }
-        } else {
-            if(layers) {
-                layers[0].style.top = '';
-            }
-            if (this.lastSlide.hasBG) {
-                this.lastSlide.$imgcont[0].style.top = '0px';
-            }
-        }
-    };
-
-    p.updateCurrentSlide = function (e) {
-        this.lastSlide     = this.currentSlide;
-        this.currentSlide  = this.slider.api.currentSlide;
-        this.moveParallax({data:{that:this}});
-    };
-
-    p.moveParallax = function (e) {
-        var that      = e.data.that,
-            slider      = that.slider,
-            offset      = that.sliderOffset,
-            scrollTop   = $(window).scrollTop(),
-            layers      = that.currentSlide.$scrollParallaxCont,
-            out         = offset - scrollTop;
-
-        if (out <= 0) {
-            if(layers) {
-                if (window._css3d) {
-                    layers[0].style[window._jcsspfx + 'Transform'] = 'translateY(' + -out * that.parallax + 'px) translateZ(0.4px)';
-                } else if (window._css2d) {
-                    layers[0].style[window._jcsspfx + 'Transform'] = 'translateY(' + -out * that.parallax + 'px)';
-                } else {
-                    layers[0].style.top =  -out * that.parallax + 'px';
-                }
-            }
-
-            that.updateSlidesBG(-out * that.bgparallax + 'px', true);
-
-            if (layers && that.fade) {
-                layers.css('opacity',  (1 - Math.min(1, -out / slider.api.height)) );
-            }
-        } else {
-            if (layers) {
-                if (window._css2d) {
-                    layers[0].style[window._jcsspfx + 'Transform'] = '';
-                } else {
-                    layers[0].style.top = '';
-                }
-            }
-            that.updateSlidesBG('0px', false);
-
-            if (layers && that.fade) {
-                layers.css('opacity',  1 );
-            }
-        }
-    };
-
-    p.updateSlidesBG = function(pos, fixed) {
-        var slides = this.slider.api.view.slideList,
-            position = (fixed &&  !window.MSBrowserInfo.msie && !window.MSBrowserInfo.opera ? 'fixed' : '');
-
-        for (var i = 0, l = slides.length; i!==l ; i++) {
-            if (slides[i].hasBG) {
-                slides[i].$imgcont[0].style.position = position;
-                slides[i].$imgcont[0].style.top = pos;
-            }
-
-            if (slides[i].$bgvideocont) {
-                slides[i].$bgvideocont[0].style.position = position;
-                slides[i].$bgvideocont[0].style.top = pos;
-            }
-        }
-    };
-
-    p.destory = function () {
-        slider.api.removeEventListener(MSSliderEvent.INIT, this.init, this);
-        slider.api.removeEventListener(MSSliderEvent.DESTROY, this.destory, this);
-        slider.api.removeEventListener(MSSliderEvent.CHANGE_END, this.resetLayers, this);
-        slider.api.removeEventListener(MSSliderEvent.CHANGE_START, this.updateCurrentSlide, this);
-        $(window).off('scroll', this.moveParallax);
-    };
-
- })(jQuery);

@@ -240,7 +240,8 @@ Specifies slide changing direction. It accepts two values "h"
 The slide changing transition. Available settings are: +
 "fade", "mask", "wave", "flow",  "stack", "scale" +
 "focus", "parallaxMask", "partialWave", "fadeBasic", "fadeWave", "fadeFlow" +
-link:http://www.masterslider.com/doc/#views[More info here..., {browser-window--new}]
+
+link:http://www.masterslider.com/doc/#views[More info here..., {browser-window--new}] +
 
 NOTE: Other parameters than "basic" are only available for the *professional*
 version of MS.

@@ -176,7 +176,7 @@ slides to see the base *colored* images.
 
 *Slider 1* is using the following general settings:
 
-.General settings
+.General Settings Slider 1
 [cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Setting |Value |Description
@@ -187,7 +187,8 @@ slides to see the base *colored* images.
 
 |layout
 |`boxed`
-|The MS Slider width and height is defined by the slider *options*
+|The MS Slider properties `width` and `height` defined by the slider *options*
+are used to re-scale the slider's *images* in a *box*.
 
 |lightbox
 |`true`
@@ -355,23 +356,43 @@ the *HTML placeholder* for a MS Slider:
 masterslider::ms_00001[role="mt-4 mb-5"]
 
 
-=== MS Slider 2 -- FullWidth
+=== MS Slider 2 -- FullWidth + Lightbox
 
 For example, MS Sliders of type *FullWidth* can be used as delimiters in
 text-dominated pages. For all MS Sliders (except one of layout `partialview`)
 a lightbox (default: Lightbox V2) can be used to display all images of a
 MS Slider in a full-sized view.
 
+For a more eye-minded presentation, the function *autoplay* of a slder can be
+enabled.
+
+NOTE: Lightbox support is only available for J1 Template. The product version
+*MS Lite* and *MS Pro* does not support Lightboxes on sliders
+out-of-the-box.
+
+TIP: Click on the Lightbox symbol mdi:image-outline[18px, md-gray] in the
+slides to see the images *full-size*.
+
 *Slider 2* is using the following general settings:
 
-.General settings
+.General Settings Slider 2
 [cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Setting |Value |Description
 
 |layout
 |`fullwidth`
-|The MS Slider spans the full width of the page
+|The MS Slider spans the full width of the page. The MS Slider properties
+`width` and `height` defined by the slider *options* are used to re-scale
+the slider's images if required.
+
+|autoplay
+|`true`
+|Enables the autoplay of the slideshow.
+
+|lightbox
+|`true`
+|Type of the lightbox `lb` (Lightbox V2)
 
 |===
 
@@ -420,6 +441,9 @@ settings:
         fillMode:                       fill
         layersMode:                     center
         layout:                         fullwidth
+        autoplay:                       true
+        loop:                           true
+        speed:                          10
 
       # ------------------------------------------------------------------------
       # Slides
@@ -457,25 +481,42 @@ masterslider::ms_00002[role="mt-4 mb-5"]
 
 === MS Slider 3 -- SlideInfo|Boxed
 
-One of the major features of sliders is to present additional animated
+One of the major features of sliders is to present additional (animated)
 elements, like text data, connected to the images presented by a MS Slider:
-the slideshow. MS Slider provide functions to combine images and text
+the *slideshow*. MS Sliders provide functions to combine images and text
 elements: the *MSInfo* element.
 
 *Slider 3* is using the following general settings:
 
-.General settings
+.General Settings Slider 3
 [cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Setting |Value |Description
 
 |layout
 |`boxed`
-|The MS Slider width and height is defined by the slider *options*
+|The MS Slider properties `width` and `height` defined by the slider *options*
+are used to re-scale the slider's *images* in a *box*.
 
 |controls
 |`slideinfo`
-|Details for *MSInfo* is configured slide-wise under key `slides`
+|Details for *MSInfo* are configured slide-wise under key `slides`.
+
+|slideinfo
+|`rtext`
+|Value: 300. For the *MSInfo* element `description`, responsive text in level
+`300` is applied. +
+
+NOTE: The *MSInfo* elements `title` and  `tagline` are using CSS classes using
+*fixed* text sizes.
+
+|slideinfo
+|`boxed`
+|Value: `true`. A *background box* for better readability surrounds the
+ *MSInfo* elements if `boxed` is set to `true`. +
+
+NOTE: The property `boxed` for *MSInfo* elements are only available for
+J1 Template.
 
 |===
 
@@ -526,10 +567,6 @@ settings:
 
         width:                          1200
         height:                         600
-        autoplay:                       true
-        loop:                           true
-        speed:                          20
-        view:                           basic
 
       # ------------------------------------------------------------------------
       # Slides
@@ -539,27 +576,27 @@ settings:
         # slide 1
         #
         - slide:
-          alt:                          ms-free-food-restaurant
-          title:                        MS free food restaurant
+          alt:                          MS free image: Food Restaurant
+          title:                        MS free image: Food Restaurant
           foreground_image:             /assets/images/modules/masterslider/slider_3/ms-free-food-restaurant.jpg
           background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
           thumb_image:                  false
           slideinfo:
-            rtext:                      300                                     # false or [100 .. 500]
+            rtext:                      300
             boxed:                      true
             title:                      The Art of Life
-            title_color:                '#BDBDBD'                               # md-gray-400
+            title_color:                '#BDBDBD'
             title_animated:             fadeInRight
             title_upcase:               false
             tagline:                    places to enjoy
-            tagline_color:              false                                   # '#757575' md-gray-600
+            tagline_color:              false
             tagline_animated:           fadeInLeft
             tagline_upcase:             false
             description: >
                                         Lorem ipsum dolor sit amet, consectetur adipisicing elit,
                                         sed do eiusmod tempor incididunt.
 
-            description_color:          '#9E9E9E'                               # md-gray-500
+            description_color:          '#9E9E9E'
             description_animated:       fadeInRight
 
       ...
@@ -583,28 +620,45 @@ masterslider::ms_00003[role="mt-4 mb-5"]
 
 === MS Slider 4 -- ThumbImage (right|vertical)
 
-*Slider 4* is using the following general settings:
+To give the users better control over a slideshow, MS Sliders provide complex
+UI elements like *thumbs* placed side-by-side (left|right), at the top, or at
+the bottom of a slideshow.
 
-.General settings
+For *image* related MS Sliders, UI elements of type *image* (`thumbs`) may
+a good choice. *Slider 4* is using the following general settings:
+
+.General Settings Slider 4
 [cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Setting |Value |Description
 
 |layout
 |`boxed`
-|The MS Slider width and height is defined by the slider *options*
+|The MS Slider properties `width` and `height` defined by the slider *options*
+are used to re-scale the slider's *images* in a *box*.
 
 |controls
 |`bullets`
-|Default settings. Configuration properties are defined in
-`~/_data/defalt/masterslider.yml`
+|Default settings. The settngs are defined in `~/_data/defalt/masterslider.yml`.
+The design is taken as CSS styles taken from the MS Slider module *resources*
+(~/assets/themes/j1/modules/masterslider/css/skins).
 
 |controls
 |`thumblist`
-|
-|controls
-|`scrollbar`
-|
+|Generates a list of *thumb* elements specified by `type`.
+
+|type
+|`thumbs`
+|If *type* `thumbs` is given, *thumblist* elements are treated as *images*.
+
+|dir
+|`v`
+|Specifies the *direction* of the control. If value `v` is given, the list is
+generated in direction *vertical*.
+
+|align
+|`right`
+|Aligns the control to the *right*.
 
 |===
 
@@ -654,6 +708,7 @@ settings:
           type:                         thumbs
           autohide:                     false
           dir:                          v
+          align:                        right
 
         scrollbar:
           enabled:                      true
@@ -705,24 +760,45 @@ masterslider::ms_00004[role="mt-4 mb-5"]
 
 === MS Slider 5 -- ThumbImage (bottom|horizontal)
 
-*Slider 5* is using the following general settings:
+To give the users better control over a slideshow, MS Sliders provide complex
+UI elements like *thumbs* placed side-by-side (left|right), at the top, or at
+the bottom of a slideshow.
 
-.General settings
+For *image* related MS Sliders, UI elements of type *image* (`thumbs`) may
+a good choice. *Slider 4* is using the following general settings:
+
+.General Settings Slider 5
 [cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Setting |Value |Description
 
 |layout
-|`partialview`
-|
+|`boxed`
+|The MS Slider properties `width` and `height` defined by the slider *options*
+are used to re-scale the slider's *images* in a *box*.
 
-|`filters`
-|grayscale
-|value: 0.5
+|controls
+|`bullets`
+|Default settings. The settngs are defined in `~/_data/defalt/masterslider.yml`.
+The design is taken as CSS styles taken from the MS Slider module *resources*
+(~/assets/themes/j1/modules/masterslider/css/skins).
 
-|`filters`
-|sepia
-|value: 0.5
+|controls
+|`thumblist`
+|Generates a list of *thumb* elements specified by `type`
+
+|type
+|`thumbs`
+|If *type* `thumbs` is given, *thumblist* elements are treated as *images*.
+
+|dir
+|`h`
+|Specifies the *direction* of the control. If value `h` is given, the list is
+generated in direction *horizontal*
+
+|align
+|`bottom`
+|Aligns the control at the *bottom* (below the slider).
 
 |===
 
@@ -819,24 +895,40 @@ masterslider::ms_00005[role="mt-4 mb-5"]
 
 === MS Slider 6 -- ThumbInfo + FullWidth (bottom|horizontal)
 
-*Slider 6* is using the following general settings:
+To give the users better control over a slideshow, MS Sliders provide complex
+UI elements like *thumbs* placed side-by-side (left|right), at the top, or at
+the bottom of a slideshow.
 
-.General settings
+For *context* related MS Sliders, UI elements of type *text* (`tabs`) may
+a good choice. *Slider 6* is using the following general settings:
+
+.General Settings Slider 6
 [cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Setting |Value |Description
 
 |layout
-|`partialview`
-|
+|`fullwidth`
+|The MS Slider spans the full width of the page. The MS Slider properties
+`width` and `height` defined by the slider *options* are used to re-scale
+the slider's images if required.
 
-|`filters`
-|grayscale
-|value: 0.5
+|controls
+|`thumblist`
+|Generates a list of *thumb* elements specified by `type`
 
-|`filters`
-|sepia
-|value: 0.5
+|type
+|`tabs`
+|If *type* `tabs` is given, *thumblist* elements are treated as *text*.
+
+|dir
+|`h`
+|Specifies the *direction* of the control. If value `h` is given, the list is
+generated in direction *horizontal*.
+
+|align
+|`bottom`
+|Aligns the control at the *bottom* (below the slider).
 
 |===
 
@@ -939,24 +1031,46 @@ masterslider::ms_00006[role="mt-4 mb-5"]
 
 === MS Slider 7 -- ThumbInfo + Lightbox (right|vertical)
 
-*Slider 7* is using the following general settings:
+To give the users better control over a slideshow, MS Sliders provide complex
+UI elements like *thumbs* placed side-by-side (left|right), at the top, or at
+the bottom of a slideshow.
 
-.General settings
+NOTE: Lightbox support is only available for J1 Template. The product version
+*MS Lite* and *MS Pro* does not support Lightboxes on sliders
+out-of-the-box.
+
+TIP: Click on the Lightbox symbol mdi:image-outline[18px, md-gray] in the
+slides to see the images *full-size*.
+
+For *context* related MS Sliders, UI elements of type *text* (`tabs`) may
+a good choice. *Slider 7* is using the following general settings:
+
+.General Settings Slider 7
 [cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Setting |Value |Description
 
 |layout
-|`partialview`
-|
+|`boxed`
+|The MS Slider properties `width` and `height` defined by the slider *options*
+are used to re-scale the slider's *images* in a *box*.
 
-|`filters`
-|grayscale
-|value: 0.5
+|controls
+|`thumblist`
+|Generates a list of *thumb* elements specified by `type`.
 
-|`filters`
-|sepia
-|value: 0.5
+|type
+|`tabs`
+|If *type* `tabs` is given, *thumblist* elements are treated as *text*.
+
+|dir
+|`v`
+|Specifies the *direction* of the control. If value `v` is given, the list is
+generated in direction *vertical*.
+
+|align
+|`right`
+|Aligns the control to the *right*.
 
 |===
 
@@ -1065,24 +1179,48 @@ masterslider::ms_00007[role="mt-4 mb-5"]
 
 === MS Slider 8 -- Blog Articles + PartialView
 
+A slideshow is an excellent instrument to present information with minimal
+effort and space required on a webpage. For example, well-designed sliders
+can be useful for presenting *featured* blog articles to your visitors.
+A good design of your slideshows is important to get the attention of your
+readers and, in the very end, to generate *clicks* to your content pages.
+
+The layout `partialview` for MS Sliders can help a lot. The following
+slider presents a slideshow that combines an *MSInfo* element to access
+blog articles and the MS Layout *partialview*. A slideshow typically
+presents a larger number of slides, in this case, blog articles. The layout
+*partialview* accompanies the *active* slide by the images of their neighbors
+on the left and the right side. Focussing your readers on the *active* slide,
+you should take the neighbors a bit out of sight. Bringing images in a
+background position is easy to do by using CSS filters.
+
 *Slider 8* is using the following general settings:
 
-.General settings
+.General Settings Slider 8
 [cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Setting |Value |Description
 
 |layout
 |`partialview`
-|
+|The layout *partialview* accompanies the *active* slide by the images of
+their neighbors on the left and the right side.
+
+|controls
+|`slideinfo`
+|Details for *MSInfo* are configured slide-wise under key `slides`.
 
 |`filters`
 |grayscale
-|value: 0.5
+|Value: 0.5. The filter *grayscale* converts the input image to grayscale.
+The value of amount defines the proportion of the conversion. A value of 1
+is converts the image completely to grayscale.
 
 |`filters`
 |sepia
-|value: 0.5
+|Value: 0.5. The filter *sepia* converts the input image to sepia. The value
+of amount defines the proportion of the conversion. A value of 1 is completely
+sepia.
 
 |===
 
@@ -1194,24 +1332,48 @@ masterslider::ms_00008[role="mt-3 mb-5"]
 
 === MS Slider 9 -- SlideInfo|Below + PartialView
 
+A slideshow is an excellent instrument to present information with minimal
+effort and space required on a webpage. For example, well-designed sliders
+can be useful for presenting *important* statements to your visitors.
+A good design of your slideshows is important to get the attention of your
+readers and, in the very end, to generate *clicks* to your content pages.
+
+The layout `partialview` for MS Sliders can help a lot. The following
+slider presents a slideshow that combines an *MSInfo* element to present
+statements using the MS Layout *partialview*. A slideshow typically
+presents a larger number of slides. The layout *partialview* accompanies
+the *active* slide by the images of their neighbors on the left and the
+right side. Focussing your readers on the *active* slide, you should take
+the neighbors a bit out of sight. Bringing images in a background position
+is easy to do by using filters.
+
 *Slider 9* is using the following general settings:
 
-.General settings
+.General Settings Slider 9
 [cols="^3a,^3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Setting |Value |Description
 
 |layout
 |`partialview`
-|
+|The layout *partialview* accompanies the *active* slide by the images of
+their neighbors on the left and the right side.
+
+|controls
+|`slideinfo`
+|Details for *MSInfo* are configured slide-wise under key `slides`.
 
 |`filters`
 |grayscale
-|value: 0.5
+|Value: 0.8. The filter *grayscale* converts the input image to grayscale.
+The value of amount defines the proportion of the conversion. A value of 1
+is converts the image completely to grayscale.
 
 |`filters`
-|sepia
-|value: 0.5
+|opacity
+|Value: 0.4. The filter *opacity* applies transparency to the input image.
+The value of amount defines the proportion of the conversion. A value of 0
+is completely transparent.
 
 |===
 
@@ -1265,6 +1427,9 @@ settings:
         height:                         350
         layout:                         partialview
         loop:                           true
+        filters:
+          grayscale:                    0.8
+          opacity:                      0.4
 
       # ------------------------------------------------------------------------
       # Slides
