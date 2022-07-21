@@ -137,7 +137,7 @@
   {% if brand_position == "left" %}
     <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ place brand image to the: left ] -->
     {% if site.brand.image %}
-      <a href="#" id="navbar-brand" class="navbar-brand link-no-decoration"> <img src="{{site.data.j1_config.image_path}}/{{site.brand.image}}" style="height: {{site.brand.image_height}} !important;" alt="{{site.brand.text}}"></a>
+      <a href="#" id="navbar-brand" class="navbar-brand link-no-decoration"> <img src="{{site.data.j1_config.image_path}}/{{site.brand.image}}" height="{{site.brand.image_height}}" style="height: {{site.brand.image_height}} !important;" alt="{{site.brand.text}}"></a>
     {% else %}
       <a href="#" id="navbar-brand" class="navbar-brand link-no-decoration"> <b><font color="{{site.brand.text_color}}">{{site.brand.text}}</font></b></a>
     {% endif %}
@@ -147,7 +147,7 @@
   {% elsif brand_position == "right" %}
     <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ place brand to the: right ] -->
     {% if site.brand.image %}
-      <a href="#" id="navbar-brand" class="navbar-brand link-no-decoration"> <img src="{{site.data.j1_config.image_path}}/{{site.brand.image}}" style="height: {{site.brand.image_height}} !important;" alt="{{site.brand.text}}"></a>
+      <a href="#" id="navbar-brand" class="navbar-brand link-no-decoration"> <img src="{{site.data.j1_config.image_path}}/{{site.brand.image}}" height="{{site.brand.image_height}}" style="height: {{site.brand.image_height}} !important;" alt="{{site.brand.text}}"></a>
     {% else %}
       <a href="#" id="navbar-brand" class="navbar-brand link-no-decoration"> <b><font color="{{site.brand.text_color}}">{{site.brand.text}}</font></b></a>
     {% endif %}
@@ -158,7 +158,7 @@
   {% else %}
     <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ place brand to default position: left ] -->
     {% if site.brand.image %}
-      <a href="#" id="navbar-brand" class="navbar-brand link-no-decoration"> <img src="{{site.data.j1_config.image_path}}/{{site.brand.image}}" style="height: {{site.brand.image_height}} !important;" alt="{{site.brand.text}}"></a>
+      <a href="#" id="navbar-brand" class="navbar-brand link-no-decoration"> <img src="{{site.data.j1_config.image_path}}/{{site.brand.image}}" height="{{site.brand.image_height}}" style="height: {{site.brand.image_height}} !important;" alt="{{site.brand.text}}"></a>
     {% else %}
       <a href="#" id="navbar-brand" class="navbar-brand link-no-decoration"> <b><font color="{{site.brand.text_color}}">{{site.brand.text}}</font></b></a>
     {% endif %}
