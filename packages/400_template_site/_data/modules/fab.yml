@@ -61,13 +61,13 @@ settings:
     # --------------------------------------------------------------------------
     # FAB for scrolling to the page top position (default)
     #
-    - name:                             Default Plus
+    - name:                             Top and Reload
       enabled:                          true
-      id:                               default-plus
+      id:                               top-reload
       icon:                             plus
       icon_family:                      MDI
       icon_color:                       md-white
-      icon_hover:                       plus
+      icon_hover:                       chevron-up
       color:                            primary
 
       # ------------------------------------------------------------------------
@@ -77,7 +77,7 @@ settings:
         - item:                         To Top
           enabled:                      true
           id:                           fam_scroll_to_top
-          color:                        primary
+          color:                        md-green
           event_handler:                scroll_to_top
           icon:                         chevron-double-up
           icon_properties:
@@ -88,6 +88,7 @@ settings:
           color:                        md-red
           event_handler:                reload_page
           icon:                         reload
+          icon_properties:
 
     # --------------------------------------------------------------------------
     # FAB to open sidebar-based (Mmenu Drawer) table of contents (toccer)
@@ -98,7 +99,7 @@ settings:
       icon:                             plus
       icon_family:                      MDI
       icon_color:                       md-white
-      icon_hover:                       plus
+      icon_hover:                       chevron-up
       color:                            primary
 
       # ------------------------------------------------------------------------
@@ -108,7 +109,7 @@ settings:
         - item:                         To Top
           enabled:                      true
           id:                           fam_scroll_to_top
-          color:                        primary
+          color:                        md-green
           event_handler:                scroll_to_top
           icon:                         chevron-double-up
           icon_properties:
@@ -116,9 +117,10 @@ settings:
         - item:                         Table of Contents
           enabled:                      true
           id:                           open_mmenu_toc
-          color:                        info
+          color:                        md-green
           event_handler:                open_mmenu_toc
           icon:                         wrap
+          icon_properties:
 
     # --------------------------------------------------------------------------
     # FAB to open sidebar-based (Mmenu Drawer) table of contents (toccer)
@@ -129,7 +131,7 @@ settings:
       icon:                             plus
       icon_family:                      MDI
       icon_color:                       md-white
-      icon_hover:                       plus
+      icon_hover:                       chevron-up
       color:                            primary
 
       # ------------------------------------------------------------------------
@@ -139,7 +141,7 @@ settings:
         - item:                         To Top
           enabled:                      true
           id:                           fam_scroll_to_top
-          color:                        primary
+          color:                        md-green
           event_handler:                scroll_to_top
           icon:                         chevron-double-up
           icon_properties:
@@ -150,13 +152,15 @@ settings:
           color:                        md-red
           event_handler:                reload_page
           icon:                         reload
+          icon_properties:
 
         - item:                         Table of Contents
           enabled:                      true
           id:                           open_mmenu_toc
-          color:                        info
+          color:                        md-green
           event_handler:                open_mmenu_toc
           icon:                         wrap
+          icon_properties:
 
     # --------------------------------------------------------------------------
     # FAB for in-page navigation
@@ -167,7 +171,7 @@ settings:
       icon:                             plus
       icon_family:                      MDI
       icon_color:                       md-white
-      icon_hover:                       plus
+      icon_hover:                       chevron-up
       color:                            primary
 
       # ------------------------------------------------------------------------
@@ -205,6 +209,7 @@ settings:
           color:                        md-red
           event_handler:                reload_page
           icon:                         reload
+          icon_properties:
 
         - item:                         Table of Contents
           enabled:                      true
@@ -212,6 +217,7 @@ settings:
           color:                        md-green
           event_handler:                open_mmenu_toc
           icon:                         wrap
+          icon_properties:
 
 # ------------------------------------------------------------------------------
 # END config

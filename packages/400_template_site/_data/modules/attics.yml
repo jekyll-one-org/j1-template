@@ -67,8 +67,8 @@ settings:
     - name:                             Pages and Posts
       attic:
         enabled:                        true
-        id:                             attic_raw
-        layout:                         [ raw ]
+        id:                             attic_page_post
+        layout:                         [ page, post, blog_archive ]
         padding_top:                    400
         padding_bottom:                 50
         opacity:                        0.5
@@ -79,8 +79,8 @@ settings:
     - name:                             Raw pages
       attic:
         enabled:                        true
-        id:                             attic_page_post
-        layout:                         [ page, post, blog_archive ]
+        id:                             attic_raw
+        layout:                         [ raw ]
         padding_top:                    400
         padding_bottom:                 50
         opacity:                        0.5
@@ -92,7 +92,7 @@ settings:
       attic:
         enabled:                        true
         id:                             attic_text
-        layout:                         [ collection, app, raw ]
+        layout:                         [ collection, app ]
 
 # ------------------------------------------------------------------------------
 # END config
