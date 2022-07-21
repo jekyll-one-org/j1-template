@@ -56,6 +56,8 @@ regenerate:                             true
 {% assign advertising           = advertising_options.enabled %}
 {% assign advertising_provider  = advertising_options.provider %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}

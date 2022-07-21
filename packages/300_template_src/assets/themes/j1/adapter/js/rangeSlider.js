@@ -48,6 +48,8 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign range_slider_options  = range_slider_defaults | merge: range_slider_settings %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}

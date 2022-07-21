@@ -1,6 +1,6 @@
 ---
-title:                                  Rouge Previewer
-tagline:                                rouge themes
+title:                                  Rouge
+tagline:                                highlighter themes
 date:                                   2020-11-08 00:00:00
 description: >
                                         Previewer page for J1 module Rouge. Rouge is a pure Ruby
@@ -61,7 +61,7 @@ categories:                             [ Previewer ]
 tags:                                   [ Highlighter, Rouge ]
 
 scrollbar:                              false
-fab_menu_id:                            page_ctrl_simple
+fab_menu_id:                            page_ctrl
 
 permalink:                              /pages/public/previewer/rouge/
 regenerate:                             false

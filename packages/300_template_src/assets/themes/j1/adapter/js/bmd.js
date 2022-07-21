@@ -21,6 +21,22 @@ regenerate:                             false
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
+{% comment %} Liquid var initialization
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment         = site.environment %}
+{% assign template_config     = site.data.j1_config %}
+{% assign modules             = site.data.modules %}
+
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/bmd.js

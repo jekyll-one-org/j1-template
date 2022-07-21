@@ -58,6 +58,8 @@ regenerate:                             true
   {% assign theme_ext       = "min.css" %}
 {% endif %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
@@ -197,8 +199,8 @@ j1.adapter.themer = (function (j1, window) {
         // of the user state cookie
         interval_count += 1;
         if (user_state_detected) {
-           user_state        = j1.readCookie(cookie_names.user_state);
-           user_consent      = j1.readCookie(cookie_names.user_consent);
+           user_state   = j1.readCookie(cookie_names.user_state);
+           user_consent = j1.readCookie(cookie_names.user_consent);
 
            logger.info('\n' + 'cookie ' +  cookie_names.user_state + ' successfully loaded after: ' + interval_count * 25 + ' ms');
 
@@ -220,37 +222,15 @@ j1.adapter.themer = (function (j1, window) {
              }
            }
 
-           styleLoaded     = styleSheetLoaded(user_state.theme_css);
-           theme_css_html  = '<link rel="stylesheet" id="' + id + '" href="' + user_state.theme_css + '" type="text/css" />';
-
            // check cookie consistency
-           if (Object.keys(user_state).length > 2)  {
-             // loading theme CSS file except on UNO
-             if (!user_state.theme_name.includes('Uno') || !styleLoaded) {
-               $('head').append(theme_css_html);
-             }
-           } else {
-             logger.fatal('\n' + 'inconsistent state detected for cookie: ' + cookie_names.user_state);
-           }
+           // if (Object.keys(user_state).length > 2)  {
+           //   logger.debug('\n' + 'consistent state detected for cookie: ' + cookie_names.user_state);
+           // } else {
+           //   logger.fatal('\n' + 'inconsistent state detected for cookie: ' + cookie_names.user_state);
+           // }
 
            // set the theme switcher state
            user_state.theme_switcher = themerOptions.enabled;
-
-           // jadams, 2021-08-10: moved hide|show themes menu to
-           // j1 adapter (displayPage)
-           //
-           // jadams, 2021-07-25: hide|show themes menu on cookie consent
-           // (analysis|personalization) settings. BootSwatch is a 3rd party
-           // is using e.g GA. Because NO control is possible on 3rd parties,
-           // for GDPR compliance, themes feature may disabled on
-           // privacy settings
-           //
-           // if (!user_consent.analysis || !user_consent.personalization)  {
-           //   logger.warn('\n' + 'disable themes feature because of privacy settings');
-           //   $("#themes_menu").hide();
-           // } else {
-           //   $("#themes_menu").show();
-           // }
 
            if (themerOptions.enabled) {
            // enable BS ThemeSwitcher
@@ -280,11 +260,23 @@ j1.adapter.themer = (function (j1, window) {
            };
            /* eslint-enable */
 
-           logger.info('\n' + 'theme loaded: ' + user_state.theme_name);
-           logger.info('\n' + 'theme css file: ' + user_state.theme_css);
-           _this.setState('finished');
-           logger.debug('\n' + 'state: ' + _this.getState());
-           logger.info('\n' + 'module initialized successfully');
+           // continue processing if page is ready
+           var dependencies_met_theme_applied = setInterval (function () {
+             if (j1.getState() == 'finished') {
+               styleLoaded    = styleSheetLoaded(user_state.theme_css);
+               theme_css_html = '<link rel="stylesheet" id="' + id + '" href="' + user_state.theme_css + '" type="text/css" />';
+
+               // loading theme CSS file except on UNO
+               if (!user_state.theme_name.includes('Uno') || !styleLoaded) {
+                 $('head').append(theme_css_html);
+                 _this.setState('finished');
+                 logger.debug('\n' + 'state: ' + _this.getState());
+                 logger.info('\n' + 'module initialized successfully');
+                 clearInterval(dependencies_met_theme_applied);
+               }
+             }
+           }, 25); // END dependencies_met_theme_applied
+
          } else {
            _this.setState('finished');
            logger.debug('\n' + 'state: ' + _this.getState());

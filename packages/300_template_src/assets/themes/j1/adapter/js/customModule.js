@@ -50,6 +50,8 @@ regenerate:                             true
 {% assign custom_module_options  = custom_module_defaults | merge: custom_module_settings %}
 -------------------------------------------------------------------------------- {% endcomment %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}

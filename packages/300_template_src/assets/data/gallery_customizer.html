@@ -45,11 +45,6 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign customizer_options  = customizer_defaults | merge: customizer_settings %}
 
-{% assign production = false %}
-{% if environment == 'prod' or environment == 'production' %}
-  {% assign production = true %}
-{% endif %}
-
 {% comment %} i18n: language selection (supported languages: en|de)
 NOTE: currently NOT used
 --------------------------------------------------------------------------------
@@ -64,6 +59,16 @@ NOTE: currently NOT used
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign language = 'en' %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+{% comment %} Main
+================================================================================ {% endcomment %}
+
 <!-- [INFO   ] [~/assets/data/gallery_customizer.html   ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />
@@ -72,8 +77,6 @@ NOTE: currently NOT used
 <!-- [INFO   ] [~/assets/data/gallery_customizer.html   ] [ Placement of the Gallery container ] -->
 <div id="{{customizer_options.xhr_data_element}}" style="max-width: {{customizer_options.max_gallery_width}}px;">
 
-  {% comment %} Main
-  ------------------------------------------------------------------------------ {% endcomment %}
   <!-- [INFO   ] [~/assets/data/gallery_customizer.html   ] [Placement of the Drawer] -->
   <nav class="nav bmd-layout-container custom-size-300 bmd-drawer-f-l">
 

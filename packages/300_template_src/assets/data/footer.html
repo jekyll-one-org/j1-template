@@ -52,25 +52,25 @@ exclude_from_search:                    true
 {% assign footer_config_defaults = footer_config_defaults.defaults %}
 {% assign footer_config_settings = footer_config_settings.settings %}
 
-{% comment %} Variables
+{% comment %} Set HELPER variables
 -------------------------------------------------------------------------------- {% endcomment %}
+{% capture footer_config_file_name %}~/_data/modules/footer.yml{% endcapture %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
 
-{% comment %} Set HELPER variables
--------------------------------------------------------------------------------- {% endcomment %}
-{% capture footer_config_file_name %}~/_data/modules/footer.yml{% endcapture %}
+{% comment %} Main
+================================================================================ {% endcomment %}
 
 <!-- [INFO   ] [~/assets/data/footer.html                ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />
 </head>
 
-{% comment %} Main
-================================================================================ {% endcomment %}
 {% for items in footer_config_settings %}
   {% assign key             = items[0] %}
   {% assign value           = items[1] %}

@@ -46,6 +46,8 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign scroller_options  = scroller_settings %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}

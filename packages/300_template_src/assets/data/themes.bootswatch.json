@@ -39,11 +39,15 @@ exclude_from_search:                    true
 
 {% capture theme_path %}{{asset_path}}/modules/bs_theme_switcher/themes{% endcapture %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
 
+{% comment %} Main
+================================================================================ {% endcomment %}
 {% if environment == 'development' %}
 {
   "themes":

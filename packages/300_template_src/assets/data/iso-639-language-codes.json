@@ -32,7 +32,15 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment         = site.environment %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
 {
+
   "iso-639-languages":
   [
   	{ "af":     { "name": "Afrikaans" }},
@@ -100,6 +108,7 @@ exclude_from_search:                    true
   	{ "cy":     { "name": "Welsh" }},
   	{ "yi":     { "name": "Yiddish" }}
   ]
+
 }
 
 {% endcapture %}

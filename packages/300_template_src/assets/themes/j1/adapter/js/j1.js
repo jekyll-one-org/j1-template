@@ -84,7 +84,7 @@ regenerate:                             true
 {% assign themer_hideOnReload       = modules.themer_options.hideOnReload %}
 
 
-{% comment %} Set variables
+{% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}

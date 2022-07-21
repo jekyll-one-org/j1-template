@@ -48,6 +48,8 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign translate_options  = translate_defaults | merge: translate_settings %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}

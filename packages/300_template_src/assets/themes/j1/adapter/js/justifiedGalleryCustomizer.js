@@ -61,6 +61,8 @@ regenerate:                             true
 {% assign customizer_title            = customizer_options.title %}
 {% assign gallery_rowHeight           = customizer_options.gallery_settings.rowHeight %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}

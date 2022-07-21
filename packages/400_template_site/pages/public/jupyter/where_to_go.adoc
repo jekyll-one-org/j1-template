@@ -33,7 +33,7 @@ categories:                             [ Software, Python ]
 tags:                                   [ Binder, Jupyter, Notebooks ]
 
 scrollbar:                              false
-fab_menu_id:                            page_ctrl_simple
+fab_menu_id:                            page_ctrl
 personalization:                        true
 
 permalink:                              /pages/public/jupyter/where-to-go/

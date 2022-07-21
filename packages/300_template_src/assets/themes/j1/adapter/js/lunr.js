@@ -45,6 +45,8 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign lunr_search_options   = lunr_search_defaults | merge: lunr_search_settings %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}

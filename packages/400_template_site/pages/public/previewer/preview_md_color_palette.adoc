@@ -1,6 +1,6 @@
 ---
-title:                                  MD Colors Previewer
-tagline:                                color palette
+title:                                  Colors
+tagline:                                md color palette
 date:                                   2021-01-08 00:00:00
 description: >
                                         The color palette used by J1 Template is based on
@@ -40,7 +40,7 @@ categories:                             [ Previewer ]
 tags:                                   [ MD, Colors ]
 
 scrollbar:                              false
-fab_menu_id:                            page_ctrl_simple
+fab_menu_id:                            page_ctrl
 
 permalink:                              /pages/public/previewer/color_palette/
 regenerate:                             false

@@ -1,6 +1,6 @@
 ---
-title:                                  Range Slider Preview
-tagline:                                range sliders
+title:                                  Manual
+tagline:                                range slider
 date:                                   2022-02-20 00:00:00
 description: >
                                         Welcome to the preview page focussing on the Range Slider
@@ -31,7 +31,7 @@ categories:                             [ Previewer ]
 tags:                                   [ Modules, Slider, RangeSlider ]
 
 comments:                               false
-fab_menu_id:                            page_ctrl_simple
+fab_menu_id:                            page_ctrl
 
 permalink:                              /pages/public/previewer/range-slider/
 regenerate:                             false

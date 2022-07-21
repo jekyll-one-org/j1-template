@@ -26,6 +26,7 @@ regenerate:                             true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment         = site.environment %}
 {% assign template_config     = site.data.j1_config %}
 {% assign modules             = site.data.modules %}
 
@@ -43,10 +44,17 @@ regenerate:                             true
 {% assign module_version      = slider_options.module_version %}
 {% assign sliders             = slider_settings.sliders %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/masterslider.js
- # J1 Adapter for Averta MasterSlider Lite v2.50.0 (Aug 2016)
+ # J1 Adapter for Averta MasterSlider Lite v2.85.13 (Feb 2022)
  #
  # Product/Info:
  # https://jekyll.one

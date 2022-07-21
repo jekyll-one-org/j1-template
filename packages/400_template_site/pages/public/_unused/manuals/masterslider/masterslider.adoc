@@ -31,7 +31,7 @@ categories:                             [ Manuals ]
 tags:                                   [ Modules, Data Slider ]
 
 comments:                               false
-fab_menu_id:                            page_ctrl_simple
+fab_menu_id:                            page_ctrl
 
 permalink:                              /pages/public/manuals/modules/masterslider/
 regenerate:                             false

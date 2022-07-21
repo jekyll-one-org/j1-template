@@ -1,5 +1,5 @@
 ---
-title:                                  MDI Icon Previewer
+title:                                  MDI Icons
 tagline:                                select mdi icons
 date:                                   2020-11-08 00:00:00
 description: >
@@ -35,7 +35,7 @@ categories:                             [ Preview ]
 tags:                                   [ MDI, Icons, Fonts ]
 
 scrollbar:                              true
-fab_menu_id:                            page_ctrl_simple
+fab_menu_id:                            page_ctrl
 
 permalink:                              /pages/public/previewer/mdi_font/
 regenerate:                             false

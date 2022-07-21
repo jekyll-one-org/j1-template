@@ -33,7 +33,7 @@ categories:                             [ Manuals ]
 tags:                                   [ MsDropdown ]
 
 comments:                               true
-fab_menu_id:                            page_ctrl_simple
+fab_menu_id:                            page_ctrl
 
 permalink:                              /pages/public/manuals/msdropdown/
 regenerate:                             false

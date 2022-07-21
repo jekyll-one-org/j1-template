@@ -40,7 +40,7 @@ tags:                                   [ Translator, DeepL ]
 
 compress:                               false
 scrollbar:                              true
-fab_menu_id:                            page_ctrl_simple
+fab_menu_id:                            page_ctrl
 
 permalink:                              /pages/public/previewer/deepl-translator/
 regenerate:                             false

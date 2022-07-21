@@ -45,6 +45,8 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign jf_gallery_options    = jf_gallery_defaults | merge: jf_gallery_settings %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}

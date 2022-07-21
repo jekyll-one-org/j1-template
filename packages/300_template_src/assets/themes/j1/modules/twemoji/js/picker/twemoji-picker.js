@@ -297,8 +297,8 @@
   $.fn.twemojiPicker = function (i) {
     var h = $.data(this, "twemojiPicker");
     this.each(function () {
-      h ? h._init() : h = $.data(this, "twemojiPicker", new $.TwemojiPicker(this, i))
+      h ? h._init() : h = $.data(this, "twemojiPicker", new $.TwemojiPicker(this, i));
     });
     return h
   }
-})(jQuery, window);
+})(jQuery, window, document);

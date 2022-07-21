@@ -106,36 +106,36 @@
   {% assign nav_bar_color = 'light' %}
 {% endif %}
 
-{% capture nav_bar_default_css_classes %}navbar navigator navbar-expand-{{nav_navbar_media_breakpoint}} navbar-default{% endcapture %}
+{% capture nav_bar_default_css_classes %}navbar navigator bg-primary navbar-expand-{{nav_navbar_media_breakpoint}} navbar-default{% endcapture %}
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Generate search container
 -------------------------------------------------------------------------------- {% endcomment %}
-<!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ check for topsearch ] -->
+<!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ check for topsearch ] -->
 {% if topsearch_options.enabled %}
-  <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ start processing: topsearch ] -->
+  <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ start processing: topsearch ] -->
   {% include {{ topsearch_create }} options=topsearch_options %}
-  <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ end processing: topsearch ] -->
+  <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ end processing: topsearch ] -->
 {% endif %}
 
 {% comment %} Place MMobile NAV menu containers (HTML data loaded via AJAX)
 -------------------------------------------------------------------------------- {% endcomment %}
-<!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ start processing: mmenu ] -->
+<!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ start processing: mmenu ] -->
 {% for item in nav_mmenu_options.menus %}
-<!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ place mmenu container {{item.menu.xhr_container_id}} for AJAX load ] -->
+<!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ place mmenu container {{item.menu.xhr_container_id}} for AJAX load ] -->
 <nav id="{{item.menu.xhr_container_id}}"></nav>
 {% endfor %}
 
-<!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ start processing: navigation ] -->
+<!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ start processing: navigation ] -->
 <nav id="{{nav_bar_id}}" class="{{nav_bar_default_css_classes}} {{nav_bar_color}} {{nav_bar_fixed}} {{nav_bar_style}}">
 
   {% comment %} Place brand image
   ------------------------------------------------------------------------------ {% endcomment %}
-  <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ start processing: main menue ] -->
+  <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ start processing: main menue ] -->
   {% if brand_position == "left" %}
-    <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ place brand image to the: left ] -->
+    <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ place brand image to the: left ] -->
     {% if site.brand.image %}
       <a href="#" id="navbar-brand" class="navbar-brand link-no-decoration"> <img src="{{ site.data.j1_config.image_path }}/{{ site.brand.image }}" height="{{ site.brand.image_height }}" alt="{{ site.brand.text }}"></a>
     {% else %}
@@ -145,24 +145,24 @@
       <i class="mdi mdi-menu mdi-48px"></i>
     </button>
   {% elsif brand_position == "right" %}
-    <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ place brand to the: right ] -->
+    <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ place brand to the: right ] -->
     {% if site.brand.image %}
       <a href="#" id="navbar-brand" class="navbar-brand link-no-decoration"> <img src="{{ site.data.j1_config.image_path }}/{{ site.brand.image }}" height="{{ site.brand.image_height }}" alt="{{ site.brand.text }}"></a>
     {% else %}
       <a href="#" id="navbar-brand" class="navbar-brand link-no-decoration"> <b><font color="{{site.brand.text_color}}">{{ site.brand.text }}</font></b></a>
     {% endif %}
-    <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ place mobile menu button to the: left ] -->
+    <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ place mobile menu button to the: left ] -->
     <button id="mmenu-button" type="button" class="navigator navbar-toggler animated fadeIn" data-bs-toggle="collapse" data-bs-target="#{{nav_menu_id}}" aria-controls="{{nav_menu_id}}" aria-expanded="false" aria-label="Toggle navigation">
       <i class="mdi mdi-menu mdi-36px"></i>
     </button>
   {% else %}
-    <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ place brand to default position: left ] -->
+    <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ place brand to default position: left ] -->
     {% if site.brand.image %}
       <a href="#" id="navbar-brand" class="navbar-brand link-no-decoration"> <img src="{{ site.data.j1_config.image_path }}/{{ site.brand.image }}" height="{{ site.brand.image_height }}" alt="{{ site.brand.text }}"></a>
     {% else %}
       <a href="#" id="navbar-brand" class="navbar-brand link-no-decoration"> <b><font color="{{site.brand.text_color}}">{{ site.brand.text }}</font></b></a>
     {% endif %}
-    <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ place menu toggler to the: right ] -->
+    <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ place menu toggler to the: right ] -->
     <button id="navbar-toggler" type="button" class="navigator navbar-toggler animated fadeIn" data-bs-toggle="collapse" data-bs-target="#{{nav_menu_id}}" aria-controls="{{nav_menu_id}}" aria-expanded="false" aria-label="Toggle navigation">
       <i class="mdi mdi-menu mdi-48px"></i>
     </button>
@@ -170,15 +170,15 @@
 
   {% comment %} Place Desktop NAV menu container (HTML data loaded via AJAX)
   ------------------------------------------------------------------------------ {% endcomment %}
-  <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ start processing: nav bar ] -->
-  <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ place nav menu container for AJAX load (desktop) ] -->
+  <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ start processing: nav bar ] -->
+  <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ place nav menu container for AJAX load (desktop) ] -->
   <div id="{{nav_menu_id}}" class="collapse"></div>
 
   {% comment %} Place|Hide Quicklinks container (HTML data loaded via AJAX)
   ------------------------------------------------------------------------------ {% endcomment %}
-  <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ check for quicklinks ] -->
+  <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ check for quicklinks ] -->
   {% if quicklinks_options.enabled %}
-  <!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ place container for: quicklinks ] -->
+  <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ place container for: quicklinks ] -->
   <div id="{{nav_quicklinks_id}}" class="quicklink-nav collapse navbar-collapse justify-content-end"></div>
   {% endif %}
 
@@ -186,9 +186,9 @@
 
 {% comment %} Place container for sign in|out dialog used by J1 AuthClient
 -------------------------------------------------------------------------------- {% endcomment %}
-<!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ check for: authclient ] -->
-<!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ authclient enabled: {{auth_manager_options.enabled}} ] -->
-<!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ place container for: authclient ] -->
+<!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ check for: authclient ] -->
+<!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ authclient enabled: {{auth_manager_options.enabled}} ] -->
+<!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ place container for: authclient ] -->
 <div id="{{authclient_modals_id}}" class="authclient_modals"></div>
-<!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ end processing: auth_client ] -->
-<!-- [INFO   ] [j1.modules.navigator.generator.html   ] [ end processing: navigation ] -->
+<!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ end processing: auth_client ] -->
+<!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ end processing: navigation ] -->

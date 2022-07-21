@@ -64,11 +64,6 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% capture panel_config_file_name %}~/_data/blocks/panel.yml{% endcapture %}
 
-{% assign production = false %}
-{% if environment == 'prod' or environment == 'production' %}
-  {% assign production = true %}
-{% endif %}
-
 {% comment %} language detection|i18n
 -------------------------------------------------------------------------------- {% endcomment %}
 {% if site.language == "en" %}
@@ -89,13 +84,20 @@ exclude_from_search:                    true
   {% assign infinite_scroll_last = "Weitere Artikel finden Sie im" %}
 {% endif %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+{% comment %} Main
+================================================================================ {% endcomment %}
 <!-- [INFO   ] [~/assets/data/panel.html              ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />
 </head>
 
-{% comment %} Main
-================================================================================ {% endcomment %}
 {% for items in panel_config_settings %}
   {% assign key             = items[0] %}
   {% assign value           = items[1] %}

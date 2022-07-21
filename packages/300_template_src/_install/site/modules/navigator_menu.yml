@@ -325,22 +325,6 @@
   sublevel:
 
     # --------------------------------------------------------------------------
-    # CheatSheets
-    #
-    - title:                            CheatSheets
-      icon:                             bookshelf
-      dropdown:
-
-        - title:                        Asciidoc
-          href:                         "https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/"
-          icon:                         format-color-text
-          target:                       _blank
-        - title:                        Atom
-          href:                         "https://jekyll.one/pages/public/cheatsheets/atom/"
-          icon:                         atom
-          target:                       _blank
-
-    # --------------------------------------------------------------------------
     # Previewers
     #
     - title:                            Previewers
@@ -363,10 +347,6 @@
         href:                           "https://jekyll.one/pages/public/previewer/mdil_font/"
         icon:                           alarm-light-outline
         target:                         _blank
-      - title:                          Twitter Emojis
-        href:                           "https://jekyll.one/pages/public/previewer/twitter_emoji/"
-        icon:                           emoticon-cool-outline
-        target:                         _blank
       - title:                          Rouge Themes
         href:                           "https://jekyll.one/pages/public/previewer/rouge/"
         icon:                           code-parentheses
@@ -375,6 +355,22 @@
         href:                           "https://jekyll.one/pages/public/previewer/justified_gallery/"
         icon:                           view-dashboard
         target:                         _blank
+
+    # --------------------------------------------------------------------------
+    # CheatSheets
+    #
+    - title:                            CheatSheets
+      icon:                             bookshelf
+      dropdown:
+
+        - title:                        Asciidoc
+          href:                         "https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/"
+          icon:                         format-color-text
+          target:                       _blank
+        - title:                        Atom
+          href:                         "https://jekyll.one/pages/public/cheatsheets/atom/"
+          icon:                         atom
+          target:                       _blank
 
 # ------------------------------------------------------------------------------
 # Menu MANUALS
@@ -399,7 +395,7 @@
           icon:                         gesture-swipe
           target:                       _blank
         - title:                        Range Sliders
-          href:                         "https://jekyll.one/pages/public/manuals/modules/range-slider/"
+          href:                         "https://jekyll.one/pages/public/manuals/modules/rangeslider/"
           icon:                         view-module-outline
           target:                       _blank
         - title:                        Rouge

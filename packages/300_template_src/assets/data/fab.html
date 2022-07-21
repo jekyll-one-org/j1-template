@@ -89,18 +89,20 @@ fab_defaults: {{fab_defaults | debug}}
 {% assign fab_menu_icon_size = size %}
 -------------------------------------------------------------------------------- {% endcomment %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
 
+{% comment %} Main
+================================================================================ {% endcomment %}
 <!-- [INFO   ] [~/assets/data/fab.html                     ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />
 </head>
 
-{% comment %} Main
--------------------------------------------------------------------------------- {% endcomment %}
 <!-- [DEBUG  ] [~/assets/data/fab.html                     ] [collect all menu items] -->
 {% for menu in fab_menus %}
   {% if menu.enabled %}
@@ -121,12 +123,23 @@ fab_defaults: {{fab_defaults | debug}}
         <i id="fab-icon" class="mdi mdi-{{menu.icon}} md-white"></i>
       </button>
 
+      {% comment %} Collect (mini) FABs
+      ------------------------------------------------------------------------ {% endcomment %}
+      <!-- [DEBUG  ] [~/assets/data/fab.html                     ] [Collect (mini) FABs] -->
       <ul id="fab_menu_items">
         {% for item in menu.items %} {% if item.enabled %}
+
+        {% comment %} set default MDI icon color for the (mini) FAB
+        ------------------------------------------------------------------------ {% endcomment %}
+        {% if item.icon_properties %}
+          {% capture icon_properties %}{{item.icon_properties}} {{menu.icon_color}}{%endcapture%}
+        {% else %}
+          {% capture icon_properties %}{{menu.icon_color}}{%endcapture%}
+        {% endif %}
+
         <li>
-          <!-- a href="#void" id="{{item.id}}" class="btn-fab-floating btn-{{item.color}} raised-z{{fab_options.raised_level}}" style="display: none" -->
-          <a href="#" id="{{item.id}}" class="btn-fab-floating btn-{{item.color}} raised-z{{fab_options.raised_level}}" style="display: none">
-            <i id="fab-icon" class="mdi mdi-{{item.icon}} mdi-{{item.icon_properties}}"></i>
+          <a href="#void" id="{{item.id}}" class="btn-fab-floating btn-{{item.color}} raised-z{{fab_options.raised_level}}" style="display: none">
+            <i id="fab-icon" class="mdi mdi-{{item.icon}} {{icon_properties}}"></i>
           </a>
         </li>
         {% endif %} {% endfor %}

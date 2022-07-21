@@ -39,8 +39,8 @@ exclude_from_search:                    true
 {% assign private_settings = data.private %}
 
 
-{% comment %} Write config data as JSON string
--------------------------------------------------------------------------------- {% endcomment %}
+{% comment %} Main
+================================================================================ {% endcomment %}
 
 {{ private_settings | json }}
 

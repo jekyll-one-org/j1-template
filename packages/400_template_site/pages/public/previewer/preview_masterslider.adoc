@@ -1,6 +1,6 @@
 ---
 title:                                  Master Slider
-tagline:                                template examples
+tagline:                                common sliders
 date:                                   2020-11-03 00:00:00
 description: >
                                         Welcome to the preview page focussing on the image module. This page
@@ -32,7 +32,7 @@ categories:                             [ Previewer ]
 tags:                                   [ Master Slider, Template ]
 
 comments:                               false
-fab_menu_id:                            page_ctrl_simple
+fab_menu_id:                            page_ctrl
 
 permalink:                              /pages/public/previewer/masterslider/
 regenerate:                             true

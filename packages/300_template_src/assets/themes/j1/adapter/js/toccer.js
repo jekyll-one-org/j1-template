@@ -59,6 +59,8 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign toccer_options    = toccer_defaults | merge: toccer_settings %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}

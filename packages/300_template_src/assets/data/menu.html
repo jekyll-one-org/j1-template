@@ -63,11 +63,6 @@ exclude_from_search:                    true
 {% assign theme_preview         = themer_options.preview_page %}
 {% assign nav_menu_id           = nav_menu_options.id %}
 
-{% assign production = false %}
-{% if environment == 'prod' or environment == 'production' %}
-  {% assign production = true %}
-{% endif %}
-
 {% assign ext = '' %}
 {% if site.permalink == 'none' %}
   {% assign ext = '.html' %}
@@ -93,11 +88,13 @@ exclude_from_search:                    true
 {% assign nav_bar_translation   = nav_bar_options.translation %}
 
 {% comment %} Set navMenuOptions
+{% assign animate_in  = nav_menu_options.dropdown_animate_in %}
+{% assign animate_out = nav_menu_options.dropdown_animate_out %}
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign nav_menu_animation    = nav_menu_options.dropdown_animate %}
 {% if nav_menu_animation %}
-  {% assign animate_in  = nav_menu_options.dropdown_animate_in %}
-  {% assign animate_out = nav_menu_options.dropdown_animate_out %}
+  {% capture animate_in %}animate__{{nav_menu_options.dropdown_animate_in}}{% endcapture %}
+  {% capture animate_out %}animate__{{nav_menu_options.dropdown_animate_out}}{% endcapture %}
 {% endif %}
 
 {% comment %} Set base nav features
@@ -151,14 +148,20 @@ exclude_from_search:                    true
 {% include {{select_icon_size}} family=nav_menu_icon_family size=nav_menu_icon_size %}
 {% assign nav_menu_icon_size = size %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+{% comment %} Main
+See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-mathjax-processing-from-certain-html-elements
+================================================================================ {% endcomment %}
 <!-- [INFO   ] [~/assets/data/menu.html         ][ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />
 </head>
-
-{% comment %} Main
-See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-mathjax-processing-from-certain-html-elements
--------------------------------------------------------------------------------- {% endcomment %}
 
 <!-- [DEBUG  ] [~/assets/data/menu.html         ][collect all nav links for the navigation bar (navbar)] -->
 <!-- div id="{{nav_menu_id}}" class="{{dropdown_collapse}}" -->
@@ -305,11 +308,11 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
             {% for megabox in menu.megamenu %}
             <div class="col-menu col-md-{{columns_width_md}} col-sm-6">
               {% if megabox.icon == null %}
-                <div class="post-headline mt-2 mb-3">
+                <div class="megamenu-headline mt-2 mb-3">
                   <h2 class="title" style="font-size:1.25em !important">{{megabox.title}}</h2>
                 </div>
               {% else %}
-                <div class="post-headline mt-2 mb-3">
+                <div class="megamenu-headline mt-2 mb-3">
                   <h2 class="title" style="font-size:1.25em !important"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{megabox.icon}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{megabox.title}}</h2>
                 </div>
               {% endif %}

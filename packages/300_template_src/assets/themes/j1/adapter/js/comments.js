@@ -85,6 +85,8 @@ regenerate:                             true
   {% assign comments_headline = comments_options.comments_headline.de %}
 {% endif %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}

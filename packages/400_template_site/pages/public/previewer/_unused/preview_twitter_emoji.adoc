@@ -1,6 +1,6 @@
 ---
-title:                                  Emoji Icon Previewer
-tagline:                                select twitter emojis
+title:                                  Twitter Emojis
+tagline:                                select icons
 date:                                   2020-11-08 00:00:00
 description: >
                                         Twitter Emoji Icons V1 Previewer.Twitter Emoji is a colored
@@ -30,14 +30,15 @@ keywords: >
                                         hyvor, disqus, git, github, netlify, heroku, apple, microsoft,
                                         provider, service, internet, support,
                                         google, analytics, advertising, search, console, silverlight, score,
-                                        j1, template, jekyllone, comment
+                                        j1, template, jekyllone, comment,
+                                        twitter, emoji, picker, preview, previewer
 
 
 categories:                             [ Previewer ]
 tags:                                   [ Emoji, Icons, Fonts, Twitter ]
 
 scrollbar:                              true
-fab_menu_id:                            page_ctrl_simple
+fab_menu_id:                            page_ctrl
 
 permalink:                              /pages/public/previewer/twitter_emoji/
 regenerate:                             false

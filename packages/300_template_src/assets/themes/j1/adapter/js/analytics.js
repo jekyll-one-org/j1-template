@@ -53,6 +53,8 @@ regenerate:                             true
 {% assign analytics          = analytics_options.enabled %}
 {% assign analytics_provider = analytics_options.provider %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}

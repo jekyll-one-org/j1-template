@@ -39,7 +39,7 @@ categories:                             [ Previewer ]
 tags:                                   [ Bootstrap, Themes ]
 
 scrollbar:                              false
-fab_menu_id:                            page_ctrl_simple
+fab_menu_id:                            page_ctrl
 
 permalink:                              /pages/public/previewer/theme/
 regenerate:                             false

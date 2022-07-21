@@ -45,6 +45,8 @@ regenerate:                             false
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign framer_options    = framer_defaults | merge: framer_settings %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}

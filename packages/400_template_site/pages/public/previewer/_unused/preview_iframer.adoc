@@ -1,5 +1,5 @@
 ---
-title:                                  iFrame Preeviewer
+title:                                  iFramer
 tagline:                                magic iframes
 date:                                   2020-11-08 00:00:00
 description: >

@@ -46,6 +46,8 @@ regenerate:                             false
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}

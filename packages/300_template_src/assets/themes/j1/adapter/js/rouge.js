@@ -37,6 +37,13 @@ regenerate:                             false
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign template_config   = site.data.j1_config %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/rouge.js

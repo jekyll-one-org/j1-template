@@ -40,7 +40,15 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment = site.environment %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
 {
+
   "iso-639-languages":
   [
     {"imageCss": "flag-icon flag-icon-za     rectangle size-md", "value": "af",    "text": "Afrikaans · South Africa"},
@@ -213,6 +221,7 @@ exclude_from_search:                    true
     {"imageCss": "flag-icon flag-icon-ng     rectangle size-md", "value": "yo",    "text": "Yoruba · Nigeria"},
     {"imageCss": "flag-icon flag-icon-za     rectangle size-md", "value": "zu",    "text": "Zulu · South Africa"}
   ]
+
 }
 
 {% endcapture %}

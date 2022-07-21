@@ -52,6 +52,8 @@ regenerate:                             true
 {% assign logger_options        = logger_defaults | merge: logger_settings %}
 {% assign util_server_options   = util_server_defaults | merge: util_server_settings %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}

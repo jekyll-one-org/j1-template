@@ -31,7 +31,7 @@ categories:                             [ Previewer ]
 tags:                                   [ Modules, Data Slider ]
 
 comments:                               false
-fab_menu_id:                            page_ctrl_simple
+fab_menu_id:                            page_ctrl
 
 permalink:                              /pages/public/manuals/modules/range-slider/
 regenerate:                             false

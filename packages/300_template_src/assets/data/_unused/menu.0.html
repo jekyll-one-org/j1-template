@@ -88,13 +88,11 @@ exclude_from_search:                    true
 {% assign nav_bar_translation   = nav_bar_options.translation %}
 
 {% comment %} Set navMenuOptions
-{% assign animate_in  = nav_menu_options.dropdown_animate_in %}
-{% assign animate_out = nav_menu_options.dropdown_animate_out %}
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign nav_menu_animation    = nav_menu_options.dropdown_animate %}
 {% if nav_menu_animation %}
-  {% capture animate_in %}animate__{{nav_menu_options.dropdown_animate_in}}{% endcapture %}
-  {% capture animate_out %}animate__{{nav_menu_options.dropdown_animate_out}}{% endcapture %}
+  {% assign animate_in  = nav_menu_options.dropdown_animate_in %}
+  {% assign animate_out = nav_menu_options.dropdown_animate_out %}
 {% endif %}
 
 {% comment %} Set base nav features

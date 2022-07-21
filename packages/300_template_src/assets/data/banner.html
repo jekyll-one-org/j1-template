@@ -63,11 +63,15 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% capture banner_config_file_name %}~/_data/blocks/banner.yml{% endcapture %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
 
+{% comment %} Main
+================================================================================ {% endcomment %}
 <!-- [INFO   ] [~/assets/data/banner.html                 ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />

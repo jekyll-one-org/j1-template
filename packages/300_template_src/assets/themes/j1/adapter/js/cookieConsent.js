@@ -53,6 +53,8 @@ regenerate:                             true
 {% assign tracking_enabled    = analytics_options.enabled %}
 {% assign tracking_id         = analytics_options.google.trackingID %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}

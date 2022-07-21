@@ -31,11 +31,6 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment           = site.environment %}
 
-{% assign production = false %}
-{% if environment == 'prod' or environment == 'production' %}
-  {% assign production = true %}
-{% endif %}
-
 {% comment %} language detection
 -------------------------------------------------------------------------------- {% endcomment %}
 {% if site.language == "en" %}
@@ -54,7 +49,15 @@ exclude_from_search:                    true
   {% assign toc_text = "Inhaltsverzeichnis" %}
 {% endif %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
 
+{% comment %} Main
+================================================================================ {% endcomment %}
 <!-- [INFO   ] [~/assets/data/mmenu_toc.html            ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />

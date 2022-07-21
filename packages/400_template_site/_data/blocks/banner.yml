@@ -181,9 +181,12 @@ settings:
               cite_text_size:             300%
               cite_text_quotes:           false
               cite_text: >
-                                          <strong><span class="text-primary">Making is</span>
-                                          like Wanting, <br> but even
-                                          <span class="text-primary">Better</span></strong>
+                                          <strong>
+                                            <span class="text-primary">Making is</span>
+                                            <span class="text-light">like Wanting, <br> but even</span>
+                                            <span class="text-primary">Better</span>
+                                          </strong>
+
               text_color:                 "#E0E0E0"
               gridify:                    true
               size_y:                     450

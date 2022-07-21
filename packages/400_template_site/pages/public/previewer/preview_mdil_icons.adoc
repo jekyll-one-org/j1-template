@@ -1,5 +1,5 @@
 ---
-title:                                  MDI Light Icon Previewer
+title:                                  MDI Light Icons
 tagline:                                select mdil icons
 date:                                   2020-11-08 00:00:00
 description: >
@@ -35,7 +35,7 @@ categories:                             [ Preview ]
 tags:                                   [ MDIL, Icons, Fonts ]
 
 scrollbar:                              true
-fab_menu_id:                            page_ctrl_simple
+fab_menu_id:                            page_ctrl
 
 permalink:                              /pages/public/previewer/mdil_font/
 regenerate:                             false

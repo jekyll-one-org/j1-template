@@ -53,7 +53,8 @@ regenerate:                             true
 {% comment %} Liquid var initialization
 -------------------------------------------------------------------------------- {% endcomment %}
 
-
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}

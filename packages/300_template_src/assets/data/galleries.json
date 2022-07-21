@@ -58,12 +58,18 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign jg_config           = jg_config_defaults | merge: jg_config_settings %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
 
+{% comment %} Main
+================================================================================ {% endcomment %}
+
 {
+
 {% for item in jg_config.galleries %}
   "{{ item.gallery.id }}" : [
 
@@ -138,6 +144,7 @@ exclude_from_search:                    true
 
   ]{% if forloop.last %}{% else %},{% endif %}
 {% endfor %}
+
 }
 
 {% endcapture %}

@@ -67,6 +67,8 @@ regenerate: true
 {% assign nav_navbar_media_breakpoint   = navigator_defaults.nav_bar.media_breakpoint %}
 {% assign nav_mmenu_id                  = navigator_options.nav_mmenu.id %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}

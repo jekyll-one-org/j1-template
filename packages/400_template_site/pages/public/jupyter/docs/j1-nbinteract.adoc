@@ -33,7 +33,7 @@ categories:                             [ J1, Integration ]
 tags:                                   [ NBI, Notebooks, Distributed ]
 
 scrollbar:                              false
-fab_menu_id:                            page_ctrl_simple
+fab_menu_id:                            page_ctrl
 personalization:                        true
 
 permalink:                              /pages/public/jupyter/docs/j1-nbinteract-docs/
@@ -479,7 +479,7 @@ categories:                             [ J1, Integration ]
 tags:                                   [ NBI, nbinteract ]
 
 scrollbar:                              false
-fab_menu_id:                            page_ctrl_simple
+fab_menu_id:                            page_ctrl
 personalization:                        true <1>
 
 permalink:                              /pages/public/jupyter/docs/j1-nbinteract-docs/

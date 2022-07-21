@@ -116,7 +116,7 @@
       {% endif %}
 
       <li class="{{blog_position}}">
-        <div class="timeline-badge"><i class="tmicon rounded-x hidden-xs"></i></div>
+        <div class="timeline-badge"><i class="tmicon bg-primary rounded-x hidden-xs"></i></div>
         <div class="card raised-z5 timeline-panel">
 
           {% comment %} jadams, 2021-08-05:

@@ -46,7 +46,7 @@ $grid-breakpoint-ipad-pro:                        1024px;
 $grid-breakpoint-ipad-pro-min:                    1023px;
 
 // BS4 Overwrites
-$dropdown-menu-min-width:                         350px;
+$dropdown-menu-min-width:                         250px;
 
 // jadams, 2020-09-01: disabled local color setting
 // by globally loaded vars/colors
@@ -599,6 +599,7 @@ li.dropdown.nav-item.nav-sub-item:before {
   					}
   					&.navigator {
   						.nav-item .nav-link {
+                color: #fff !important;     // jadams, 2022-07-20: new links settings for the menubar
   							text-transform: none;
                 width: max-content;         // standard property
   							width: intrinsic;           // Safari/WebKit non-standard vendor property
@@ -610,6 +611,9 @@ li.dropdown.nav-item.nav-sub-item:before {
   							font-size: 1.1rem;
                 border-bottom: unset;       // jadams, 2022-05-06: remove dotted link decoration
   						}
+              .nav-item .nav-link:hover {
+                color: #757575 !important;  // jadams, 2022-07-20: md-gray-600
+              }
   						.dropdown.nav-item .nav-link {
   							text-transform: none;
   							width: max-content;         // standard property
@@ -626,7 +630,7 @@ li.dropdown.nav-item.nav-sub-item:before {
   						background-color: transparent;
               color: $lighten;
   						/* padding: 30px 15px; */
-              padding: 25px 10px;
+              padding: 28px 10px;
   						font-weight: 300;
   					}
   					.dropdown-menu .dropdown-menu {
@@ -636,6 +640,8 @@ li.dropdown.nav-item.nav-sub-item:before {
   					}
   					ul.dropdown-menu > li > a {
   						white-space: normal;
+              font-size: small;
+              color: #616161 !important;
   					}
   					&.navbar-right .dropdown-menu .dropdown-menu {
   						left: -200px;
@@ -742,24 +748,12 @@ li.dropdown.nav-item.nav-sub-item:before {
   					padding-left: 15px;
   					margin-left: 30px;
   				}
+          // jadams, 2022-07-21: initial bg color before page is being 'scrolled'
   				&.light {
-  					background-color: $lighten-300;
-            // jadams, 2020-07-25: removed border-bottom. Border cause flicker
-            // in page load ???. Now, the top of a menu is INSIDE the menubar!
-            // Make sense as a feature!
-            // BUT: dropdown is NOT posioned below 1st level entry
-            // TODO: Check 1st level dropdown pos with menu script
-  					// border-bottom: solid 3px $gray-50;
+  					background-color: $darken-400 !important;
   				}
   				&.dark {
-  					background-color: $darken-300;
-            // jadams, 2020-07-25: removed border-bottom. Border cause flicker
-            // in page load ???. Now, the top of a menu is INSIDE the menubar!
-            // Make sense as a feature!
-            // BUT: dropdown is NOT posioned below 1st level entry
-            // TODO: Check 1st level dropdown pos with menu script
-  					// border-bottom: solid 3px $gray-900;
-  					// border-left: solid 1px $gray-900;
+  					background-color: $lighten-400 !important;
   				}
   			}
   			&.menu-center {
@@ -786,31 +780,30 @@ li.dropdown.nav-item.nav-sub-item:before {
   			> .active > a {
   				bottom: -2px;
   				position: relative;
-  				border-bottom: solid 2px $gray-800;  // jadams: border-bottom: solid 2px $lime;
+  				border-bottom: solid 2px $gray-800;
   			}
-        // jadams, 2019-01-17: Added left/right borders
-        // jadams, 2020-10-13: REMOVED left/right borders
+        // dropdown menu
   			li.dropdown ul.dropdown-menu {
-  				padding-top: 2px;
-          // jadams, 2020-10-12: Unclear why this margin-top is needed if the
-          // height of menu bar is set (fix) to 80px
-          // TODO: check for reason
-  				margin-top: -1px;
+          // jadams, 2020-07-21: margin-top value cause the dropdown-menu
+          // to 'overlap' 1px with the menubar to *NOT* loose the focus
+          margin-top: -1px;
   				min-width: $dropdown-menu-min-width;
   				background: $white;
-  				border-top: solid 8px;
-//        border-right: solid 1px;
-//        border-left: solid 1px;
+          border-color: transparent;
+          border-bottom: 0px;
+          z-index: inherit;
   				> li {
   					a:hover {
-  						background-color: transparent;  // jadams, 2017-12-06: removed background color from dropdown elements;
+              // jadams, 2017-12-06: removed background color from dropdown elements;
+  						background-color: transparent;
   					}
   					&:last-child > a {
   						border-bottom: none;
   					}
   				}
   				ul.dropdown-menu {
-  					top: -3px;  // jadams, 2017-05-16, to check: top: -3px;
+            // jadams, 2017-05-16, to check: top: -3px;
+  					top: -3px;
   				}
   			}
   			&.on ul.dropdown-menu.megamenu-content .content {
@@ -827,29 +820,31 @@ li.dropdown.nav-item.nav-sub-item:before {
   }
 
   // QuickLinks
-  // -----------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
   .quicklink-nav {
-  	margin-left: 0; // jadams, 2020-07-02: set left to 0 to NOT conflict with brand icon for @media mobile
-  	margin-right: -20px;  // jadams: changed because of div header, org: margin-right: -15px;
+  	// jadams, 2020-07-02: set left to 0 to NOT conflict with brand icon for @media mobile
+    margin-left: 0;
+  	// jadams: changed because of div header, org: margin-right: -15px;
+    margin-right: -20px;
   	float: right;
   	position: relative;
   	display: inline-block;
-  	margin-right: 1.5rem; // jadams, 2020-07-02: set higher right space because of missing nav toggle button
+  	// jadams, 2020-07-02: set higher right space because of missing nav toggle button
+    margin-right: 1.5rem;
   	> ul {
-      //display: inline-block;
-  		// padding: 0;
-  		// margin: 0 0 -7px 0;
   		list-style: none;
       overflow: hidden;
   		> li {
   			float: left;
   			display: block;
   			> a {
-          color: $lighten;
+          // jadams, 2022-07-21
+          color: $lighten-400 !important;
   				display: block;
   				padding: 10px 5px;
   				position: relative;
-          border-bottom: unset;  // jadams, 2022-05-06: remove dotted link decoration
+          // jadams, 2022-05-06: remove dotted link decoration
+          border-bottom: unset;
   				span.badge {
   					position: absolute;
   					top: 50%;
@@ -861,7 +856,10 @@ li.dropdown.nav-item.nav-sub-item:before {
   					height: 15px;
   					padding-top: 2px;
   				}
-  			}
+  			} > a:hover {
+          // jadams, 2022-07-21
+          color: $lighten-900 !important;
+        }
   			&.dropdown ul.dropdown-menu {
   				border-radius: 0;
   				box-shadow: 0 0 0;
@@ -876,7 +874,7 @@ li.dropdown.nav-item.nav-sub-item:before {
   }
 
   // Top Search
-  // -----------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
   .top-search {
   	padding: 10px 0 10px 0;
   	display: none;
@@ -1002,10 +1000,6 @@ li.dropdown.nav-item.nav-sub-item:before {
 
 // Desktop Navigation
 // -----------------------------------------------------------------------------
-// blödsinn: @media screen and (min-width: $grid-breakpoint-lg),  screen and (max-width: 1024px) {
-// @media screen and (min-width: $grid-breakpoint-lg), (max-width: 1023px) {
-// jadams, 2020-09-29: bp für iPad Pro macht Schwierigkeiten auf dem Device !!! Disabled.
-// @media screen and (min-width: $grid-breakpoint-lg-min), screen and (orientation: portrait) and (min-width: $grid-breakpoint-ipad-pro-min) {
 @media screen and (min-width: $grid-breakpoint-lg-min) {
 	.dropdown-submenu {
 		position: relative;
@@ -1056,10 +1050,14 @@ li.dropdown.nav-item.nav-sub-item:before {
 				padding: .5em 1em .5em 1em;
         // padding: 1em 1em 1em 1em;
 			}
+      .megamenu-headline {
+        margin-bottom: 1.25rem;
+        border-bottom: 1px solid #BDBDBD;
+      }
       .dropdown-megamenu-item {
         padding-left: .25em;
         list-style: none;
-        font-size: .75em;
+        font-size: .95rem;
 			}
       .dropdown-megamenu-item:hover {
         background: #ECEFF1;
@@ -1072,8 +1070,8 @@ li.dropdown.nav-item.nav-sub-item:before {
 			padding: 0.5rem 1rem;
       margin-right: 0;
       border-right: 0px !important;
-      border-bottom: unset;                                                     // jadams, 2022-05-06: remove dotted link decoration
-
+      // jadams, 2022-05-06: remove dotted link decoration
+      border-bottom: unset;
 		}
     //jadams, 2019-02-01: TODO check what high for an dropdown item fits best
 		.dropdown .nav-item {
@@ -1100,6 +1098,7 @@ li.dropdown.nav-item.nav-sub-item:before {
 		li.dropdown ul.dropdown-menu {
 			&.megamenu-content {
 				left: 0;
+        top: 78px;
 			}
 			> li > a {
         display: inline-flex;
@@ -1123,13 +1122,7 @@ li.dropdown.nav-item.nav-sub-item:before {
 // Mobile Navigation I
 // -----------------------------------------------------------------------------
 // jadams, 2020-09-17: unclear what breakpoint should used for $grid-breakpoint-ipad-pro
-// quatsch: @media screen and (min-width: 992px), screen and (max-width: 1024px) {
-// quatsch: @media screen and (max-width: $grid-breakpoint-ipad-pro), screen and (max-width: $grid-breakpoint-md) {
-// quatsch: @media screen and (max-width: $grid-breakpoint-ipad-pro) {
 @media screen and (max-width: $grid-breakpoint-lg) {
-  // ul#desktop_menu {
-  //   display: none;
-  // }
 	nav {
 		&.navigator {
 			&.brand-center {
@@ -1565,7 +1558,7 @@ li.dropdown.nav-item.nav-sub-item:before {
 			}
 		}
 	}
-// jadams, 2020-09-29: ab hier für mobile navigation wichtig
+  // jadams, 2020-09-29: ab hier für mobile navigation wichtig
 	.quicklink-nav {
 		position: absolute;
 //  right: 2.5rem;

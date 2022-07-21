@@ -31,12 +31,6 @@ regenerate:                             true
 {% assign template_version    = site.version %}
 {% assign slider_id           = '' %}
 
-{% assign production = false %}
-{% if environment == 'prod' or environment == 'production' %}
-  {% assign production = true %}
-{% endif %}
-
-
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
 
@@ -61,6 +55,13 @@ regenerate:                             true
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign carousel_options    = carousel_defaults | merge: carousel_settings %}
+
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
 
 /*
  # -----------------------------------------------------------------------------

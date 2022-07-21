@@ -48,6 +48,8 @@ regenerate:                             true
 {% comment %} Set variables
 -------------------------------------------------------------------------------- {% endcomment %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}

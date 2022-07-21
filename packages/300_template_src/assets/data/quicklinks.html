@@ -230,6 +230,8 @@ exclude_from_search:                    true
 {% include {{select_icon_size}} family=quicklinks_options.icon_family size=quicklinks_options.icon_size %}
 {% assign icon_size = size %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
@@ -246,13 +248,13 @@ exclude_from_search:                    true
 {% assign show_google_translate_lang = false  %}
 {% assign translate_lang = 'gb'  %}
 
+{% comment %} Main
+================================================================================ {% endcomment %}
 <!-- [INFO   ][~/assets/data/quicklinks.html               ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />
 </head>
 
-{% comment %} Main
--------------------------------------------------------------------------------- {% endcomment %}
 <!-- [INFO   ] [~/assets/data/quicklinks.html               ] [AuthManager detected as: {{ show_auth_manager_icon }}] -->
 <!-- [INFO   ] [~/assets/data/quicklinks.html               ] [CookieConsent detected as: {{ consent_enabled }}] -->
 <!-- [INFO   ] [~/assets/data/quicklinks.html               ] [Show CookieConsent icon detected as: {{ show_cookieconsent_icon }}] -->
