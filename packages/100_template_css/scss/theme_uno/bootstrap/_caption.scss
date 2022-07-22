@@ -1,6 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/scss/theme_uno/bootstrap/_buttons.scss
+ # ~/scss/theme_uno/bootstrap/_caption.scss
+ # Provides custom styles and overloads
  #
  # Product/Info:
  # https://jekyll.one
@@ -12,11 +13,6 @@
  # -----------------------------------------------------------------------------
 */
 
-// OPTIMIZE: jadams, 2022-07-22: set dark colors for lighthouse optimization
-.btn-link {
-  color: $gray-900;
-}
-
-.btn {
-  color: $gray-900 !important;
+caption {
+  color: $gray-800;
 }

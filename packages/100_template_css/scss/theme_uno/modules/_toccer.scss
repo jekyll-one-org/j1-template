@@ -48,7 +48,7 @@
 }
 
 a.toc-link {
-  color: $grey-400 !important;
+  color: $grey-200 !important;
   height: 100%;
   font-size: 1rem;                                                              /* jadams, 2017-12-13: added font-size for toc-link */
   border-bottom: unset;
@@ -93,5 +93,5 @@ a.toc-link:hover {
 }
 
 .is-active-link::before {
-  background-color: $gray-600;
+  background-color: $blue;
 }

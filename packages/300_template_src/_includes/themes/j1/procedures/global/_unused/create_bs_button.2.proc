@@ -75,7 +75,7 @@
 
     {% comment %} jadams, 2021-04-24:
     TODO, mr-x on font-icon are to be scaled on icon-size (fixed on: mr-3)
-    ---------------------------------------------------------------------------- {% endcomment %}
+    -------------------------------------------------------------------------------- {% endcomment %}
 
     {% if button_tagline %}
       {% if button_href and button_target %}

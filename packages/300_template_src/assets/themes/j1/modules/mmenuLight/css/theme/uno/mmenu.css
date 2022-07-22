@@ -140,14 +140,14 @@ NOTE: For unknown reason, style "mm-ocd--left" is NOT applied correctly
 .menu-title {
     margin-bottom: 1.5rem;
     font-size: 28px;
-    color: #BDBDBD;
+    color: #EEEEEE;
     border-bottom: 1px solid #757575;
 }
 
 .mm-side .widget .heading {
     text-align: left;
-    color: #BDBDBD;
-    font-size: 18px;
+    color: #EEEEEE;
+    font-size: 20px;
     text-transform: uppercase;
     position: relative;
     margin-bottom: 10px;

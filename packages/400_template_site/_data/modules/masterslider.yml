@@ -1008,14 +1008,14 @@ settings:
             title_animated:             false
             title_upcase:               true
             tagline:                    John Wiliam
-            tagline_color:              '#7a7a7a'
+            tagline_color:              '#0D47A1'
             tagline_animated:           false
             tagline_upcase:             false
             description: >
                                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                                         sed diam nonummy nibh euismod tincidunt.
 
-            description_color:          '#9E9E9E'                               # md-gray-500
+            description_color:          '#616161'                               # md-gray-700
             description_animated:       false
 
         # slide 2

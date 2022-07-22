@@ -1518,5 +1518,10 @@ Have fun exploring the possibilies of MS Slider.
 
 ++++
 <style>
+
+/* caption {
+  color: #424242;
+} */
+
 </style>
 ++++
