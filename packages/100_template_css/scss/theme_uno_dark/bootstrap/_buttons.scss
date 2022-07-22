@@ -13,12 +13,10 @@
 */
 
 .btn {
-  color: $grey-400 !important;
-  // border-color: $darken-600 !important;
+  color: $grey-300 !important;
   text-shadow: 1px 1px 1px $darken-300;
   &:not([disabled]):not(.disabled).active,
   &.disabled {
-    // border-color: $darken-600 !important;
     box-shadow: none;
   }
   &:hover,
@@ -26,8 +24,7 @@
   &:not([disabled]):not(.disabled):active,
   &:not([disabled]):not(.disabled):active:hover,
   &:not([disabled]):not(.disabled).active:hover {
-    color: $gray-300 !important;
-    // border-color: $darken-600 !important;
+    color: $gray-900 !important;
   }
 }
 .btn-primary.btn-raised {
@@ -94,7 +91,7 @@
   }
 }
 .btn-link {
-  color: $gray-700 !important;
+  color: $gray-300 !important;
   border-color: transparent;
 }
 

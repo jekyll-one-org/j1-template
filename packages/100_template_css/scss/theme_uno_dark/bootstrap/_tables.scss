@@ -18,8 +18,10 @@ table {
   border: solid 1px $grey-800;
 }
 
+//  jadams, 2022-07-21: remove double borders
 thead, tbody, tfoot, tr, td, th {
-  border: 1px solid #bdbdbd !important;
+//  border: 1px solid #bdbdbd !important;
+    border: 0;
 }
 
 //  jadams, 2022-01-15: set border color to background color
@@ -29,23 +31,22 @@ table.tableblock > .title {
     border-bottom: 1px solid $grey-800;
 }
 
-//  jadams, 2022-01-15: set border color to background color
-// table.frame-all {
-//     border-top: 1px solid $grey-800 !important;
-//     border-left: 1px solid $grey-800 !important;
-// }
-
-// table tr th, table tr td {
-//     border-right: 1px solid $grey-800 !important;
-//     border-bottom: 1px solid $grey-800 !important;
-// }
-
 table thead, table tfoot {
   background: $blue-700;
 }
 
 table tr.even, table tr.alt, table tr:nth-of-type(even) {
-    background: rgba(0, 0, 0, 0.1) !important;
+  background: rgba(0, 0, 0, 0.1) !important;
+}
+
+//  jadams, 2022-07-21: remove borders and background colors
+.colist > table tr > td:last-of-type {
+  border: 0 !important;
+  background-color: $grey-800;
+}
+.colist > table tr th, .colist > table tr td {
+  border: 0 !important;
+  background-color: $grey-800;
 }
 
 .table {

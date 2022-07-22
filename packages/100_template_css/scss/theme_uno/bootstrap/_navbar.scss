@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/100_template_css/scss/theme_uno_dark/bootstrap/_body.scss
+ # ~/100_template_css/scss/theme_uno_dark/bootstrap/_navbar.scss
  #
  # Product/Info:
  # https://jekyll.one
@@ -12,8 +12,6 @@
  # -----------------------------------------------------------------------------
 */
 
-// Body
-// -----------------------------------------------------------------------------
-body {
-  background-color:   $blue-gray-50;
+.md-light {
+  background-color: $gray-300;
 }

@@ -13,66 +13,13 @@
   # NOTE:
   # Variables should follow the `$component-state-property-size` formula
   # for consistent naming.
-  # Example|s: $nav-link-disabled-color and $modal-content-box-shadow-xs.
+  #
+  # Example|s:
+  #   $nav-link-disabled-color
+  #   $modal-content-box-shadow-xs
+  #
   # ----------------------------------------------------------------------------
 */
-
-// Contents
-// jadams, 2019-11-21: Needs to be revised for BS@5
-// -----------------------------------------------------------------------------
-// Colors
-// Spacing
-// Body
-// Links
-// Paragraphs
-// Grid breakpoints
-// Grid containers
-// Grid columns
-// Fonts
-// Components
-// Tables
-// Buttons
-// Forms
-// Dropdowns
-// Z-index master list
-// Navs
-// Navbar
-// Pagination
-// Form states and alerts
-// Cards
-// Tooltips
-// Popovers
-// Badges
-// Modals
-// Alerts
-// Progress bars
-// List group
-// Image thumbnails
-// Figures
-// Breadcrumbs
-// Carousel
-// Close
-// Code
-
-// Body (reverse colors)
-// -----------------------------------------------------------------------------
-$body-bg:                                         $gray-800;                    // --bs-body-bg (background|dark)
-$body-color:                                      $gray-300;                    // --bs-body-color (foreground|light)
-
-// Colors
-// -----------------------------------------------------------------------------
-// $primary:                                         $blue-800 !default;
-// $secondary:                                       $gray-800 !default;
-// $success:                                         $green !default;
-// $info:                                            $cyan !default;
-// $warning:                                         $orange-700 !default;
-// $danger:                                          $red !default;
-// $light:                                           $gray-200 !default;
-// $dark:                                            $gray-900 !default;
-
-// Links
-// -----------------------------------------------------------------------------
-// $link-color:                                      $white !default;
 
 // Fonts
 // -----------------------------------------------------------------------------

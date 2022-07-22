@@ -12,11 +12,53 @@
  # -----------------------------------------------------------------------------
 */
 
-// OPTIMIZE: jadams, 2022-07-22: set dark colors for Google Lighthouse optimization
-.btn-link {
-  color: $gray-900;
+.btn {
+  color: unset !important;
 }
 
-.btn {
+.btn:hover {
+  background-color: $gray-400 !important;
+}
+
+// OPTIMIZE: jadams, 2022-07-22: set dark colors for Google Lighthouse optimization
+.btn-link {
+  color: $blue;
+}
+
+.btn-link:hover {
   color: $gray-900 !important;
+}
+
+.btn-outline-light {
+  border-color: $gray;
+  background-color: $gray-200;
+}
+
+
+.btn:disabled {
+    color: $gray-300 !important;
+    background-color: $gray-900;
+    border-color: $gray-900;
+}
+
+.btn.btn-light {
+  background-color: $gray-300;
+  border-color: $gray-300;
+}
+
+.btn.btn-light:hover {
+  color: $gray-100 !important;
+}
+
+.btn.btn-dark {
+    background-color: $gray;
+    border-color: $gray;
+}
+
+
+.btn-sm, .btn-group-sm > .btn {
+    --bs-btn-padding-y: 0.25rem;
+    --bs-btn-padding-x: 0.5rem;
+    --bs-btn-font-size: 0.82031rem;
+    --bs-btn-border-radius: 0.25rem;
 }

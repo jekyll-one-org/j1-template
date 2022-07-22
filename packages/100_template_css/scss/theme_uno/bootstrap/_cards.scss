@@ -30,6 +30,10 @@
     background-color: transparent;
   }
 
+  .card-body {
+    margin-top: 0;
+  }
+
   .card-footer {
     // assume footer is the set of actions?
     padding: .5rem;

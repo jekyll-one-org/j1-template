@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/100_template_css/scss/theme_uno_dark/bootstrap/_body.scss
+ # ~/scss/theme_uno/theme_uno_dark/bootstrap/_list_group.scss
  #
  # Product/Info:
  # https://jekyll.one
@@ -12,8 +12,11 @@
  # -----------------------------------------------------------------------------
 */
 
-// Body
-// -----------------------------------------------------------------------------
-body {
-  background-color:   $blue-gray-50;
+.list-group-item {
+  color: $gray-100;
+  background-color: $gray-500;
+}
+
+.list-group-item:hover {
+  background-color: $gray-900;
 }

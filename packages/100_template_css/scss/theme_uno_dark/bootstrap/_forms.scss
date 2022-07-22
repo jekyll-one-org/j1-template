@@ -76,21 +76,9 @@ select.form-control[multiple] {
 }
 
 .form-control {
-  display: block;
-  width: 100%;
   padding: 0.375rem 1rem;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
-  color: #212529;
-  background-color: $gray-400;                                                  // #BDBDBD
-  background-clip: padding-box;
-  border: 0 solid $white;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
   border-radius: 0.25rem;
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  background-color: $blue-600;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -108,9 +96,9 @@ select.form-control[multiple] {
 }
 
 .form-control:focus {
-  color: #212529;
-  background-color: #F5F5F5;
-  border-color: #95cfeb;
+  // color: #212529;
+  background-color: $gray-900;
+  // border-color: #95cfeb;
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(42, 159, 214, 0.25);
 }
@@ -266,7 +254,15 @@ select.form-control[multiple] {
 }
 
 
-
+// (B)MD override for labels on inputs|form groups
+.bmd-form-group.is-focused .bmd-label-floating,
+.bmd-form-group .is-focused .bmd-label-floating,
+.bmd-form-group.is-filled .bmd-label-floating,
+.bmd-form-group .is-filled .bmd-label-floating {
+  top: .25rem !important;
+  margin-left: unset !important;
+  color: $gray-100;
+}
 
 
 

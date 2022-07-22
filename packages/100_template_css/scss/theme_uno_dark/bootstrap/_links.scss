@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/scss/theme_uno/bootstrap/_links.scss
+ # ~/100_template_css/scss/theme_uno_dark/bootstrap/_links.scss
  # Provides custom styles and overloads
  #
  # Product/Info:
@@ -14,10 +14,12 @@
 */
 
 a {
-  color: $gray-600 !important;
+  text-decoration: none;
+  color: $gray-300 !important;
   // font-weight: 500 !important;
 }
 
 a:hover {
-  color: $gray-400 !important;
+  text-decoration: none;
+  color: $gray-600 !important;
 }

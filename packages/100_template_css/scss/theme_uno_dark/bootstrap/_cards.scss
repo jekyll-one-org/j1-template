@@ -15,14 +15,22 @@
 .card {
   border: 0;
   border-radius: 0;
-  background-color: #FAFAFA;
+  background-color: $gray-400;
   .card-header {
     border-bottom: 0;
   }
+  .card-body {
+    margin-top: 0;
+  }
+  .card-link {
+    color: $gray-700 !important;
+  }
+  .card-link:hover {
+    color: $gray-400 !important;
+  }
   .card-footer {
-//  background-color: $lighten-400 !important;
-    background-color: #F5F5F5 !important;
-    border-top: 1px dotted $darken-700;                                         // rgba(0, 0, 0, 0.7)
+    background-color: $gray-100 !important;
+    border-top: 1px dotted $darken-700;
   }
   hr {
     border-top: 1px solid $grey-600 !important;

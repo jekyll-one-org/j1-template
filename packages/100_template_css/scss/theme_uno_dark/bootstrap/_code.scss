@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/100_template_css/scss/theme_uno_dark/bootstrap/_body.scss
+ # ~/scss/theme_uno/theme_uno_dark/bootstrap/_code.scss
  #
  # Product/Info:
  # https://jekyll.one
@@ -12,8 +12,10 @@
  # -----------------------------------------------------------------------------
 */
 
-// Body
-// -----------------------------------------------------------------------------
-body {
-  background-color:   $blue-gray-50;
+code {
+  color: $gray-100;
+}
+
+code {
+  background-color: $darken-400 !important;
 }

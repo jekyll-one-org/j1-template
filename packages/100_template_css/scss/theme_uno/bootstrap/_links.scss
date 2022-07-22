@@ -27,12 +27,12 @@ a.link-no-decoration {
     text-decoration: none;
 }
 a.link-no-decoration:hover {
-    color: #BDBDBD !important;
+    color: $gray-600 !important;
     font-weight: 500 !important;
 }
 
 a:hover {
-  color: $gray-400 !important;
+  color: $gray-600 !important;
   font-weight: 500 !important;
 }
 
@@ -43,6 +43,6 @@ li > a {
 }
 
 li > a:hover {
-  color: $blue-gray-800  !important;
+  color: $gray-600  !important;
   font-weight: 500 !important;
 }

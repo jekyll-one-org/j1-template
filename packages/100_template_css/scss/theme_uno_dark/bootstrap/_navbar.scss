@@ -28,13 +28,10 @@
     border-width: 1px 0 0 0;
   }
   .nav-link {
-    /*
-    padding: 1rem;
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-    border-right: 1px solid $darken-200;
-    */
+    color: $gray-100 !important;
     &:hover,
     &:focus {
+      color: $gray-500 !important;
       @include btn-shadow-inverse($gray-800);
       border-left: 1px solid $darken-200;
     }
@@ -69,6 +66,7 @@
 }
 
 // Media breakpoints
+// -----------------------------------------------------------------------------
 
 @media screen and (max-width: 576px) {
   .navbar-expand-sm {
