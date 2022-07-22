@@ -16,9 +16,18 @@
  #  See: https://github.com/rouge-ruby/rouge/blob/master/LICENSE
  # -----------------------------------------------------------------------------
 */
+.highlight {
+  background-color: #f5f5f5;    /* $gray-100 */
+}
 
-.highlight table td { padding: 5px; }
-.highlight table pre { margin: 0; }
+.highlight table td {
+  padding: 5px;
+}
+
+.highlight table pre {
+  margin: 0;
+}
+
 .highlight .cm {
   color: #999988;
   font-style: italic;
@@ -226,7 +235,4 @@
 }
 .highlight .w {
   color: #bbbbbb;
-}
-.highlight {
-  background-color: #f8f8f8;
 }
