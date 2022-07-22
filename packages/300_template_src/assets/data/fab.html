@@ -120,7 +120,7 @@ fab_defaults: {{fab_defaults | debug}}
       {% endif %}
 
       <button type="button" id="{{menu.id}}_button" class="btn btn-fab btn-{{menu.color}} {{options}}" aria-label="fab-button">
-        <i id="fab-icon" class="mdi mdi-{{menu.icon}} md-white"></i>
+        <i id="fab-icon" class="mdi mdi-{{menu.icon}} {{menu.icon_color}}"></i>
       </button>
 
       {% comment %} Collect (mini) FABs

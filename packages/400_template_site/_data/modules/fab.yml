@@ -46,7 +46,7 @@ settings:
       id:                               default
       icon:                             chevron-double-up
       icon_family:                      MDI
-      icon_color:                       md-white
+      icon_color:                       md-gray-900
       icon_hover:                       chevron-double-up
       color:                            primary
 
@@ -66,7 +66,7 @@ settings:
       id:                               top-reload
       icon:                             plus
       icon_family:                      MDI
-      icon_color:                       md-white
+      icon_color:                       md-gray-900
       icon_hover:                       chevron-up
       color:                            primary
 
@@ -98,7 +98,7 @@ settings:
       id:                               open_toc
       icon:                             plus
       icon_family:                      MDI
-      icon_color:                       md-white
+      icon_color:                       md-gray-900
       icon_hover:                       chevron-up
       color:                            primary
 
@@ -130,7 +130,7 @@ settings:
       id:                               open_toc_reload
       icon:                             plus
       icon_family:                      MDI
-      icon_color:                       md-white
+      icon_color:                       md-gray-900
       icon_hover:                       chevron-up
       color:                            primary
 
@@ -170,7 +170,7 @@ settings:
       id:                               page_ctrl
       icon:                             plus
       icon_family:                      MDI
-      icon_color:                       md-white
+      icon_color:                       md-gray-900
       icon_hover:                       chevron-up
       color:                            primary
 
