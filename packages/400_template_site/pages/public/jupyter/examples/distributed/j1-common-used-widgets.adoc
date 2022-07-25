@@ -43,7 +43,7 @@ resources:                              [ animate, nbinteract, rouge ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/images/modules/attics/john-schnobrich-2-1920x1280.jpg
+        - url:                          /assets/images/modules/attics/1920x1280/john-schnobrich-2.jpg
           alt:                          Photo by John Schnobrich on Unsplash
           badge:
             type:                       unsplash

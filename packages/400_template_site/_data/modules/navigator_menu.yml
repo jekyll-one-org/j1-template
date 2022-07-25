@@ -263,6 +263,9 @@
       icon:                             eye
       dropdown:
 
+        - title:                        Current Theme
+          href:                         /pages/public/previewer/current_theme/
+          icon:                         theme-light-dark
         - title:                        Master Slider
           href:                         /pages/public/previewer/masterslider/
           icon:                         gesture-swipe
@@ -473,9 +476,9 @@
       title:                            Bootswatch
       icon:                             bootstrap
     - preview:                          enabled
-      title:                            Previewer
-      href:                             /pages/public/previewer/theme/
-      icon:                             eye
+      title:                            Preview
+      href:                             /pages/public/previewer/current_theme/
+      icon:                             theme-light-dark
 
 # ------------------------------------------------------------------------------
 # Menu ABOUT

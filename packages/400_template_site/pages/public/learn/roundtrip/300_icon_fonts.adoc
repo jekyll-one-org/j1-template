@@ -22,7 +22,8 @@ resources:                              [ animate, iconify ]
 resource_options:
   - attic:
       slides:
-        - url:                          /assets/images/pages/roundtrip/icon-fonts-1920x1280-bw.jpg
+#       - url:                          /assets/images/pages/roundtrip/icon-fonts-1920x1280-bw.jpg
+        - url:                          /assets/images/modules/attics/1920x1280/harpal-singh.jpg
           alt:                          Photo by Harpal Singh on Unsplash
           badge:
             type:                       unsplash

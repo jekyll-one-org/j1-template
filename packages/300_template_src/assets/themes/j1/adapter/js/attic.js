@@ -184,14 +184,29 @@ j1.adapter.attic = (function (j1, window) {
               $('.backstretch').addClass(atticOptions.spinner);
             }
 
+            // if (atticOptions.spinner) {
+            //   $('.backstretch').addClass(atticOptions.spinner);
+            // }
+
             // Collect backstretch instance data for Backstretch callbacks
             var backstretch_instance_data = $('#{{attic_id}}').data('backstretch');
 
-            {% comment %} Set the headerLoaded flag
+            {% comment %} Set the headerLoaded flag (page NOT visible)
             -------------------------------------------------------------------- {% endcomment %}
            $(window).on('backstretch.before', function (e, instance, index) {
+              var evt     = e;
+              var inst    = instance;
+              var idx     = index;
+//            logger.debug('\n' + 'state: ' + _this.getState());
+              console.log('module attic - entered: backstretch.before');
+
+              console.log('module attic - apply: CSS filters');
+              $('.backstretch').css('filter', 'sepia(1) brightness(0.9) contrast(0.6)');
+//            $('.backstretch').css('filter', 'sepia(1) brightness(0.9) contrast(0.6)');
+              $('.backstretch').css('filter', 'grayscale(1) contrast(1) brightness(1)');
+
               _this.setState('backstretch_before');
-              logger.debug('\n' + 'state: ' + _this.getState());
+//             console.log('module attic - set state: backstretch_before');
             });
 
             {% comment %} Add a caption (c) or badge (b) if configured
@@ -200,7 +215,7 @@ j1.adapter.attic = (function (j1, window) {
             $(window).on('backstretch.after', function (e, instance, index) {
               logText ='add caption text';
               _this.setState('backstretch_after');
-              logger.debug('\n' + 'state: ' + status);
+//            logger.debug('\n' + 'state: ' + status);
               // logger.debug(logText);
 
               if (typeof atticOptions.slides[index].caption != 'undefined') {

@@ -61,7 +61,7 @@ tag::urls[]
 :previewer-emoji:                                 /pages/public/previewer/twitter_emoji/
 :previewer-mdi:                                   /pages/public/previewer/mdi_font/
 
-:previewer-theme:                                 /pages/public/previewer/theme/
+:previewer-theme:                                 /pages/public/previewer/current_theme/
 
 :kickstarter-web-in-a-day:                        https://jekyll.one/pages/public/learn/kickstarter/web_in_a_day/meet_and_greet/
 end::urls[]

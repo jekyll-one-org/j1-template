@@ -473,9 +473,9 @@
       title:                            Bootswatch
       icon:                             bootstrap
     - preview:                          enabled
-      title:                            Previewer
-      href:                             /pages/public/previewer/theme/
-      icon:                             eye
+      title:                            Preview
+      href:                             /pages/public/previewer/current_theme/
+      icon:                             theme-light-dark
 
 # ------------------------------------------------------------------------------
 # Menu ABOUT

@@ -53,7 +53,7 @@ environment:                            development
 # ------------------------------------------------------------------------------
 #   Sets the build version of J1 Template Gem
 #
-version:                                2022.4.10
+version:                                2022.4.11
 
 # version
 # ------------------------------------------------------------------------------
@@ -253,7 +253,7 @@ robots:
 # Set the brand image and favicon (located in /asset/images)
 
 brand:
-  image:                                modules/icons/j1/j1-512x512.png
+  image:                                icons/j1/j1-512x512.png
   image_height:                         48px
   text:                                 Starter Web
   text_color:                           "#9E9E9E"
@@ -261,7 +261,7 @@ brand:
 # Set the favicon and type
 #
 favicon:
-  image:                                modules/icons/j1/j1-32x32.ico
+  image:                                icons/j1/j1-32x32.ico
   type:                                 image/ico
 
 # ==============================================================================

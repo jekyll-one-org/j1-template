@@ -1036,8 +1036,10 @@
             }
 
             // Trigger the "after" and "show" events
+            // jadams 2022-07-23: added missing 'before' event
             // "show" (as an event) is being deprecated (used only internallly)
-            $(['after', 'show']).each(function () {
+//          $(['after', 'show']).each(function () {
+            $(['before', 'after', 'show']).each(function () {
               that.$container.trigger($.Event('backstretch.' + this, evtOptions), [that, newIndex]);
             });
 

@@ -144,7 +144,7 @@ settings:
 
   enabled:                                true
   debug:                                  false
-  previewPage:                            /pages/public/previewer/theme/
+  previewPage:                            /pages/public/previewer/current_theme/
   default_theme_css:                      /assets/themes/j1/core/css/uno.css
   default_theme_name:                     Uno
   default_theme_author:                   J1 Team
