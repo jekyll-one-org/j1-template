@@ -273,6 +273,11 @@ j1.adapter.themer = (function (j1, window) {
                  logger.debug('\n' + 'state: ' + _this.getState());
                  logger.info('\n' + 'module initialized successfully');
                  clearInterval(dependencies_met_theme_applied);
+               } else if (user_state.theme_name.includes('Uno')) {
+                 _this.setState('finished');
+                 logger.debug('\n' + 'state: ' + _this.getState());
+                 logger.info('\n' + 'module initialized successfully');
+                 clearInterval(dependencies_met_theme_applied);
                }
              }
            }, 25); // END dependencies_met_theme_applied

@@ -882,7 +882,8 @@ li.dropdown.nav-item.nav-sub-item:before {
   	top: 0;
   	.input-group-addon {
   		border: none;
-  		color: rgba(0, 0, 0, 0.75); //  jadams, 2020-07-08: set input text color
+//		color: rgba(0, 0, 0, 0.75); //  jadams, 2020-07-08: set input text color
+      color: $gray-900; //  jadams, 2020-07-08: set input text color
   		padding-left: 0;
   		padding-right: 0;
   		background-color: transparent;
@@ -894,7 +895,10 @@ li.dropdown.nav-item.nav-sub-item:before {
   	input.form-control {
   		border: none;
   		box-shadow: 0 0 0;
-  		color: $white;
+      //  jadams, 2020-07-08: set input text color
+      //  jadams, 2022-07-25: disabled input text color
+      // because the (text-) color depends on the theme (light|dark) used
+  		// color: $gray-900;
   		height: 40px;
   		padding: 0 15px;
   		background-color: transparent;

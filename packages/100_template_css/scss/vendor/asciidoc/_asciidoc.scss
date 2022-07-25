@@ -87,7 +87,15 @@ code {
   padding: 0.125em 0.275em 0.125em 0.275em !important;
   border-radius: $border--radius;
   // background-color: rgba(0, 0, 0, 0.1) !important;
-  background-color: $darken-100 !important;
+  // background-color: $darken-100 !important;
+  background-color: $darken-100;
+}
+
+// jadams, 2022-07-25: additonal style because GEM/plugin
+// 'asciidoctor-rouge' is DISABLED for Ruby V3
+pre code {
+  padding: 0 !important;
+  background-color: transparent;
 }
 
 // Headings

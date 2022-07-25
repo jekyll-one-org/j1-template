@@ -1356,80 +1356,14 @@ j1.adapter.navigator = (function (j1, window) {
       style += '</style>';
       $('head').append(style);
 
+      // jadams, 2022-07-25: DISABLED
 //    $('head').append('<style>.top-search input.form-control { color: ' +navTopsearchOptions.input_color+ ' !important; }</style>');
-      style  = '<style>';
-      style += '  .top-search input.form-control {';
-      style += '    color: ' + navTopsearchOptions.input_color + ' !important;';
-      style += '  }';
-      style += '</style>';
-      $('head').append(style);
-
-      // Timeline styles
-      // -----------------------------------------------------------------------
-//       style  = '<style>';
-//       style += '  .timeline > li > .timeline-panel:after {';
-//       style += '    border-left: 14px solid ' + bg_scrolled + ';';
-//       style += '    border-right: 0 solid ' + bg_scrolled + ';';
-//       style += '  }';
-//       style += '</style>';
-//       $('head').append(style);
-//
-//       style  = '<style>';
-//       style += '  .tmicon {';
-//       style += '    background: ' + bg_scrolled + ';';
-//       style += '  }';
-//       style += '</style>';
-//       $('head').append(style);
-//
-//       // Heading styles
-//       // -----------------------------------------------------------------------
-// //    $('head').append('<style>.heading:after {background: ' +bg_scrolled+ ' !important;}</style>');
-//       style  = '<style>';
-//       style += '  .heading:after {';
-//       style += '    background: ' + bg_scrolled + ' !important;';
-//       style += '  }';
-//       style += '</style>';
-//       $('head').append(style);
-//
-//       // Tag Cloud styles
-//       // -----------------------------------------------------------------------
-// //    $('head').append('<style>.tag-cloud ul li a {background-color: ' +bg_scrolled+ ' !important;}</style>');
-//       style  = '<style>';
-//       style += '  .tag-cloud ul li a {';
-//       style += '    background: ' + bg_scrolled + ' !important;';
-//       style += '  }';
-//       style += '</style>';
-//       $('head').append(style);
-//
-//       // Toccer styles
-//       // -----------------------------------------------------------------------
-// //    $('head').append('<style>.is-active-link::before {background-color: ' +bg_scrolled+ ' !important;}</style>');
-//       style  = '<style>';
-//       style += '  .is-active-link::before {';
-//       style += '    background-color: ' + bg_scrolled + ' !important;';
-//       style += '  }';
-//       style += '</style>';
-//       $('head').append(style);
-//
-//       // BS extended Modal styles
-//       // -----------------------------------------------------------------------
-// //    $('head').append('<style>.modal-dialog.modal-notify.modal-primary .modal-header {background-color: ' +bg_scrolled+ ';}</style>');
-//       style  = '<style>';
-//       style += '  .modal-dialog.modal-notify.modal-primary .modal-header {';
-//       style += '    background-color: ' + bg_scrolled + ' !important;';
-//       style += '  }';
-//       style += '</style>';
-//       $('head').append(style);
-//
-//       // BS nav|pills styles
-//       // -----------------------------------------------------------------------
-// //    $('head').append('<style>.nav-pills .nav-link.active, .nav-pills .show > .nav-link {background-color: ' +bg_scrolled+ ' !important;}</style>');
-//       style  = '<style>';
-//       style += '  .nav-pills .nav-link.active, .nav-pills .show > .nav-link  {';
-//       style += '    background-color: ' + bg_scrolled + ' !important;';
-//       style += '  }';
-//       style += '</style>';
-//       $('head').append(style);
+      // style  = '<style>';
+      // style += '  .top-search input.form-control {';
+      // style += '    color: ' + navTopsearchOptions.input_color + ' !important;';
+      // style += '  }';
+      // style += '</style>';
+      // $('head').append(style);
 
       return true;
     }, // END applyThemeSettings

@@ -24,6 +24,12 @@
   margin-left: unset !important;
 }
 
+// jadams, 2022-07-25: TODO: Potentially, should bet set dynamically
+// by the NAV module (adapter) to reflect the type of theme (light|dark)
+.form-control, label, input::placeholder {
+  color: var(--bs-body-color) !important;
+}
+
 form {
   // ensure enough room at the bottom of any form to display a one-line bmd-help
   margin-bottom: ($bmd-help-size-ratio * $font-size-base) * $line-height-base;
