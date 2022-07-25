@@ -27,7 +27,8 @@ a.link-no-decoration {
     text-decoration: none;
 }
 a.link-no-decoration:hover {
-    color: $gray-50 !important;
+    // jadams, 2022-07-25: fixed color for light|dark themes
+    color: $darken-900 !important;
     font-weight: 500 !important;
 }
 
