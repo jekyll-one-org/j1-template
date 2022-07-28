@@ -147,6 +147,7 @@
           href:                         /pages/public/skeleton/documentation/
           icon:                         book-open-blank-variant
 
+
 # ------------------------------------------------------------------------------
 # Menu BLOG
 #
@@ -164,6 +165,7 @@
     - title:                            Archive
       href:                             /pages/public/blog/navigator/archive/
       icon:                             archive
+
 
 # ------------------------------------------------------------------------------
 # Menu ONLINE
@@ -302,21 +304,6 @@
           target:                       _blank
           icon:                         regex
 
-# ------------------------------------------------------------------------------
-# Menu Themes
-#
-- item:                                 Themes
-  theme_select:
-    - local_themes:                     enabled
-      title:                            Jekyll One
-      icon:                             alpha-j-box
-    - bootswatch_themes:                enabled
-      title:                            Bootswatch
-      icon:                             bootstrap
-    - preview:                          enabled
-      title:                            Preview
-      href:                             /pages/public/previewer/current_theme/
-      icon:                             theme-light-dark
 
 # ------------------------------------------------------------------------------
 # Menu MANUALS
@@ -614,6 +601,7 @@
           icon:                         calendar-blank
           target:                       _blank
 
+
 # ------------------------------------------------------------------------------
 # Menu TOOLS
 #
@@ -675,6 +663,24 @@
           href:                         "https://jekyll.one/pages/public/cheatsheets/atom/"
           icon:                         atom
           target:                       _blank
+
+
+# ------------------------------------------------------------------------------
+# Menu Themes
+#
+- item:                                 Themes
+  theme_select:
+    - local_themes:                     enabled
+      title:                            Jekyll One
+      icon:                             alpha-j-box
+    - bootswatch_themes:                enabled
+      title:                            Bootswatch
+      icon:                             bootstrap
+    - preview:                          enabled
+      title:                            Preview
+      href:                             /pages/public/previewer/current_theme/
+      icon:                             theme-light-dark
+
 
 # ------------------------------------------------------------------------------
 # Menu ABOUT
