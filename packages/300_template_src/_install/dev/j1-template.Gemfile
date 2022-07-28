@@ -11,5 +11,6 @@
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
 # ------------------------------------------------------------------------------
+#
 source 'https://rubygems.org'
 gemspec

@@ -11,62 +11,66 @@
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
 # ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# NOTE:
+# To install all gem needed for Jekyll and J1 Template:
+#   bundle install
 #
-#  To install all gem needed for Jekyll and J1 Template
-#
-#  bundle install
-#
-#  Note:  If all packages needed are installed, a list of all gem
-#         and dependencies installed for the bundle can created
-#         by running:
-#
-#         bundle list
+# TIP:
+# If all packages needed are installed, a list of all gem and dependencies
+# installed for the bundle canbe created by running:
+#   bundle list
 #
 # ------------------------------------------------------------------------------
-#
-#  If you see warnings like:
-#
+# NOTE:
+# If you see warnings like:
 #   WARN: Unresolved specs during Gem::Specification.reset
-#         cleanup your bundle by running:
-#
-#         gem cleanup
+# you may need to cleanup your bundle by running:
+#   gem cleanup
 #
 # ------------------------------------------------------------------------------
-source 'https://rubygems.org'
+
+# ------------------------------------------------------------------------------
+# Define the (download) source, Ruby GEMs are to be loaded from REMOTE
+#
+source 'https://rubygems.org' || source ENV['GEM_SOURCE']
+
+# ------------------------------------------------------------------------------
+# Specify your Ruby version if the J1 Project is used as an container-based
+# web application. This makes sure to use identical Ruby runtime environments
+# for BUILD and RUN (e.g. for Docker images or a Dyno on Heroku).
+#
+# ruby '3.1'
 
 # ------------------------------------------------------------------------------
 # Jekyll
-# NOTE: J1 Template is using Jekyll v3.8 and above
-#
-
 # ------------------------------------------------------------------------------
-# Use Jekyll version from GH master
-#
-# Support for Ruby version 3.1.2 (2022-04-12)
-# See: http://jekyllrb.com/news/2022/03/27/jekyll-3-9-2-released/
-
-# ------------------------------------------------------------------------------
-# NOTE: Install (latest) Jekyll version from Github
-# gem 'jekyll', github: 'jekyll/jekyll'
-
-# ------------------------------------------------------------------------------
-# Use Jekyll version 3.9.2 from RubyGems to support Ruby V3
-#
-gem 'jekyll', '= 3.9.2'
-gem 'webrick', '~> 1.7'
-
-# ------------------------------------------------------------------------------
-# Theme GEM J1 Template (NOT set for development system)
-#
 # NOTE:
-#   Install J1 GEM from 'remote'
-#     gem 'j1-template', '= 2022.3.0.rc1'
+# J1 Template is using Jekyll v4.0 and above
 #
-#   Install J1 GEM from 'local'
-#     gem 'j1-template', '= 2022.3.0.rc1', path: 'g:/install'
-#     gem 'j1-template', '= 2022.3.0.rc1', path: 'C:\Ruby31-x64\lib\ruby\gems\3.1.0\cache'
+# ------------------------------------------------------------------------------
+# NOTE:
+# Use|Install a Jekyll version loaded from 'Github' (branch: master):
+#  gem 'jekyll', github: 'jekyll/jekyll'
+# ------------------------------------------------------------------------------
+# NOTE:
+# For default, the Jekyll GEM is loaded from REMOTE
+# ------------------------------------------------------------------------------
 #
-# gem 'j1-template', '~> 2022.3.0.rc1'
+gem 'jekyll', '~> 4.0'
+
+# ------------------------------------------------------------------------------
+# Install Webrick GEM (internally used Web Server) if Ruby V3 is used
+#
+install_if -> { RUBY_VERSION =~ /3/ } do
+  gem 'webrick', '~> 1.7'
+end
+
+# ------------------------------------------------------------------------------
+# Specify the THEME GEM used for the project (NOT set for development system)
+#
+# gem 'j1-template', '~> 2022.4.10'
 
 # ------------------------------------------------------------------------------
 # PRODUCTION: Gem needed for the Jekyll and J1 prod environment
@@ -86,13 +90,13 @@ gem 'nokogiri-pretty', '>= 0.1.0'
 gem 'htmlbeautifier', '>= 1.2.1'
 
 # ------------------------------------------------------------------------------
-# Gem needed to compress JS and JSON files
+# Compress JS and JSON files
 #
 gem 'uglifier', '~> 4.2'
 gem 'json-minify', '~> 0.0.3'
 
 # ------------------------------------------------------------------------------
-# Gem needed to run JS to create Lunr the index
+# Run JS code (from Ruby) to create the index for Lunr
 #
 gem 'execjs', '~> 2.7'
 
@@ -102,28 +106,35 @@ gem 'execjs', '~> 2.7'
 gem 'tzinfo', '>= 1.2.2'
 
 # ------------------------------------------------------------------------------
-# Platform specific Gem
+# Platform specific GEM
 #
-
+# NOTE:
 # Windows does not include zoneinfo files (timezone support).
 # To provide zoneinfo, tzinfo-data gem is bundled on win platforms
 #
-gem 'tzinfo-data' if Gem.win_platform?
-
-# Windows Directory Monitor (WDM) monitor directories
+# ------------------------------------------------------------------------------
+# NOTE:
+# Windows Directory Monitor (WDM) required to monitor directories
 # for changes
 #
-gem 'wdm', '>= 0.1.1' if Gem.win_platform?
+# ------------------------------------------------------------------------------
+#
+if Gem.win_platform? do
+  gem 'tzinfo-data'
+  gem 'wdm', '>= 0.1.1'
+end
 
 # ------------------------------------------------------------------------------
 # Jekyll Plugins
-# If any (additional) plugins are used, they goes here:
+#
+# NOTE:
+# If any (additional) plugins are used, they goes here
+#
 # ------------------------------------------------------------------------------
-# NOTE: New settings to use Ruby V3 for Jekyll
 #
 group :jekyll_plugins do
-# gem 'algolia', '~> 2.0', '>= 2.0.4'                                           # New/latest (Jekyll-)Algolia gem
-  gem 'asciidoctor', '~> 2.0'                                                   # Required for Ruby V3
+# gem 'algolia', '~> 2.0', '>= 2.0.4'                                           # (Jekyll-)Algolia GEM if required
+  gem 'asciidoctor', '~> 2.0'                                                   # Required for Ruby V3 ony ???
 # gem 'asciidoctor-pdf', '>= 1.5.4'                                             # Used for PDF creation only
   gem 'jekyll-asciidoc', '>= 3.0.0'
 # gem 'jekyll-feed', ">= 0.15.1"
@@ -135,16 +146,20 @@ group :jekyll_plugins do
 end
 
 # ------------------------------------------------------------------------------
-# DEVELOPMENT: Gem needed for the Jekyll and J1 dev environment
+# GEM needed for the Jekyll and J1 dev environment
 #
-
+# NOTE:
 # For the build (npm|yarn), J1 Template is using scss_lint
 # for linting the SCSS (Sass) components.
 #
-# NOTE: scss_lint is based on old gem 'sass', '~> 3.5.5'. A replacement
+# ------------------------------------------------------------------------------
+# NOTE:
+# scss_lint is based on old gem 'sass', '~> 3.5.5'. A replacement
 # is needed (?) for a linter using the new Ruby Sass GEM (sassc)
 # gem 'scss_lint', '~> 0.56.0', require: false
-
+#
+# ------------------------------------------------------------------------------
+#
 gem 'sassc', '~> 2.4'
 gem 'bump', '~> 0.10'
 
@@ -153,17 +168,14 @@ gem 'bump', '~> 0.10'
 #
 
 # ------------------------------------------------------------------------------
-# Define your Ruby version if the J1 web is used as an container-based
-# web application, e.g. on Docker or a Heroku Dyno, to define and use
-# of identical Ruby runtime environments.
+# Ruby Task Manager
 #
-# ruby '3.1'
-
-# ------------------------------------------------------------------------------
+# NOTE:
 # Enable the `rake` Gem if needed. For container-based apps, Rake can
 # be used as a pre-processor engine running # tasks defined by a
 # Rakefile prior running the app|web.
 #
+# ------------------------------------------------------------------------------
 # gem 'rake', '~> 12.0'
 
 # html-proofer. Automate the process of checking links on your site
@@ -179,6 +191,9 @@ gem 'bump', '~> 0.10'
 # gem 'html-proofer', '~> 3.10'
 
 # ------------------------------------------------------------------------------
+# Web server used by applications
+#
+# NOTE:
 # Define the build environment and the web server for J1 sites that
 # runs as an web application. To improve the production (run-time)
 # performance for the web, the RubyGems e.g Puma or Passenger can be
@@ -190,47 +205,66 @@ gem 'bump', '~> 0.10'
 # For container-based apps, Rake can be used as a pre-processor engine
 # running # tasks defined by a Rakefile prior running the app|web.
 #
+# ------------------------------------------------------------------------------
+#
 # gem 'passenger', '>= 5.3'
 gem 'puma', '>= 5.5.2'
 
 # ------------------------------------------------------------------------------
+# Data encryption (currently NOT supported)
+#
+# NOTE:
 # OpenSSL provides SSL, TLS and general purpose cryptography. Used to
-# encrypt 'private' data (currently NOT supported)
+# encrypt 'private' data used by applications.
+#
+# ------------------------------------------------------------------------------
 #
 # gem 'openssl'
 
 # ------------------------------------------------------------------------------
+# Runtime environment for applications
+#
+# NOTE:
 # If J1 is transformed into a (Rack and Sinatra based) Web
 # application, the site can be secured using user authentication
 # for accessing private pages. J1 is using the Omniauth stack for
 # authentication. For default, the Omniauth (authentication) strategies
 # for Github, Twitter, Facebook and Patreon are implemented.
 #
+# ------------------------------------------------------------------------------
+#
 gem 'rack', '~> 2.2', '>= 2.2.3'
 gem 'rack-protection', '~> 2.0'
 gem 'rack-ssl-enforcer', '~> 0.2'
 gem 'rest-client', '~> 2.0'
-
-# NOTE: For the base gem omniauth, the currtent version >= 2 cannot be
-#       used. For unknown reason, a WRONG redirect URL is calculated
-#       e.g. for strategy oauth2/github
-#
-#       Wrong:    http://localhost:xxx/auth/github
-#       Correct:  https://github.com/login?client_id=xx&return=yyy
-#
-# gem 'omniauth', '~> 2.0'
-
-gem 'omniauth', '~> 1.0'                                                        # latest: 1.9.1
-gem 'omniauth-oauth2', '~> 1.7'
 gem 'sinatra', '~> 2.0'
-#gem 'sinatra-cross_origin', '~> 0.3'                                           # currently NOT used
 gem 'warden', '~> 1.2'
 
 # ------------------------------------------------------------------------------
-# Gem needed for J1 logger based on log4r (middleware)
+# Authentication
+#
+# NOTE:
+# For the base gem omniauth, the currtent version >= 2 cannot be
+# used. For unknown reason, a WRONG redirect URL is calculated
+# e.g. for strategy oauth2/github
+#   Wrong:    http://localhost:xxx/auth/github
+#   Correct:  https://github.com/login?client_id=xx&return=yyy
+#
+# ------------------------------------------------------------------------------
+# Note:
+# For upcoming J1 versions, v2.x version will be used
+# gem 'omniauth', '~> 2.0'
+# ------------------------------------------------------------------------------
+#
+gem 'omniauth', '~> 1.9'
+gem 'omniauth-oauth2', '~> 1.7'
+
+# ------------------------------------------------------------------------------
+# Logging
+# GEM required for J1 logger based on log4r (middleware)
+# ------------------------------------------------------------------------------
 #
 gem 'log4r', '~> 1.1', '>= 1.1.10'
-# gem 'uuid', '~> 2.3', '>= 2.3.8'                                              # should be removed, not longer needed
 gem 'date', '~> 2.0'
 
 # ------------------------------------------------------------------------------

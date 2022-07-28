@@ -20,7 +20,7 @@
 #   currently used from former Rubie 'jekyll-auth'
 #
 # ------------------------------------------------------------------------------
-#
+
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'j1/version'
@@ -56,49 +56,45 @@ Gem::Specification.new do |spec|
 
   # Dependencies: Jekyll
   #
-  spec.add_runtime_dependency 'jekyll', '~> 4.0'
+  spec.add_runtime_dependency 'jekyll', '= 3.9.2'
   spec.add_runtime_dependency 'pathutil', '~> 0.16'
   spec.add_runtime_dependency 'mercenary', '~> 0.3'
   spec.add_runtime_dependency 'colorator', '~> 1.0'
-
-  # Dependencies: Runtime Web Application
-  #
-  spec.add_runtime_dependency 'rack', '~> 2.0', '>= 2.0.8'
-  spec.add_runtime_dependency 'rack-protection', '~> 2.0'
-  spec.add_runtime_dependency 'rack-ssl-enforcer', '~> 0.2'
-  spec.add_runtime_dependency 'rest-client', '~> 2.0'
-  spec.add_runtime_dependency 'sinatra', '~> 2.0'
-  spec.add_runtime_dependency 'warden', '~> 1.2'
-
-  # Dependencies: Runtime Addons (currently NOT used)
-  #
-  # spec.add_runtime_dependency 'sinatra-cross_origin', '~> 0.3.1'
 
   # Dependencies: Logging
   #
   spec.add_runtime_dependency 'log4r', '~> 1.1', '>= 1.1.10'
   spec.add_runtime_dependency 'date', '~> 2.0'
 
-  # Dependencies: Authentication
+  # Dependencies: Web Application
   #
-  # NOTE:
-  # For the base gem omniauth, the currtent version >= 2 cannot be
-  # used. For unknown reason, a WRONG redirect URL is calculated
-  # e.g. for strategy oauth2/github
-  #   Wrong:    http://localhost:xxx/auth/github
-  #   Correct:  https://github.com/login?client_id=xx&return=yyy
+  spec.add_runtime_dependency 'rack', '~> 2.0', '>= 2.0.8'
+  spec.add_runtime_dependency 'rack-protection', '~> 2.0'
+  spec.add_runtime_dependency 'rack-ssl-enforcer', '~> 0.2'
+  spec.add_runtime_dependency 'rest-client', '~> 2.0'
+
+  # NOTE: For the base gem omniauth, the currtent version >= 2 cannot be
+  #       used. For unknown reason, a WRONG redirect URL is calculated
+  #       e.g. for strategy oauth2/github
+  #
+  #       Wrong:    http://localhost:xxx/auth/github
+  #       Correct:  https://github.com/login?client_id=xx&return=yyy
   #
   # spec.add_runtime_dependency 'omniauth', '~> 2.0'
-  # ----------------------------------------------------------------------------
-  #
+
   spec.add_runtime_dependency 'omniauth', '~> 1.0'
   spec.add_runtime_dependency 'omniauth-oauth2', '~> 1.7'
 
-  # Dependencies: Development
+  spec.add_runtime_dependency 'sinatra', '~> 2.0'
+# spec.add_runtime_dependency 'sinatra-cross_origin', '~> 0.3.1'                # currently NOT used
+
+  spec.add_runtime_dependency 'warden', '~> 1.2'
+
+  # Dev Dependencies: Development/Test
   #
   spec.add_runtime_dependency 'bump', '~> 0.8'
 
-  # Dependencies: Development Tools (currentlyNOT used)
+  # Additional dev Rubies NOT used
   #
   # spec.add_runtime_dependency 'pry', '~> 0.10'
   # spec.add_runtime_dependency 'rack-test', '~> 0.6'
