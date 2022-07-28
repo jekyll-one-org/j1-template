@@ -37,7 +37,7 @@ fab_menu_id:                            page_ctrl
 personalization:                        true
 
 permalink:                              /pages/public/jupyter/docs/j1-nbinteract-docs/
-regenerate:                             true
+regenerate:                             false
 
 resources:                              [ animate, clipboard, lightbox, nbinteract, rouge ]
 resource_options:
@@ -483,7 +483,7 @@ fab_menu_id:                            page_ctrl
 personalization:                        true <1>
 
 permalink:                              /pages/public/jupyter/docs/j1-nbinteract-docs/
-regenerate:                             true
+regenerate:                             false
 
 resources:                              [ nbinteract, rouge ] <2>
 ----

@@ -38,7 +38,7 @@ fab_menu_id:                            open_toc_reload
 personalization:                        true
 
 permalink:                              /pages/public/jupyter/textbooks/j1-testing-plotly/
-regenerate:                             true
+regenerate:                             false
 
 resources:                              [ animate, nbinteract, require, rouge ]
 resource_options:

@@ -15,7 +15,7 @@ fab_menu_id:                            default
 comments:                               false
 
 permalink:                              /pages/public/cookieConsent/
-regenerate:                             true
+regenerate:                             false
 
 resources:                              [ bsCookieConsent ]
 resource_options:

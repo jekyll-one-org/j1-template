@@ -1,0 +1,47 @@
+0. Clear all existing J1 related GEM (optional)
+
+  a. REQUIRED: Remove (all) old Template GEMs (forced)
+
+	gem uninstall --force --executables j1-template --all
+
+  b. OPTIONAL: Remove (all) existing USERIZED GEMs
+
+	If a .gem folder for the USER already exists, delete the sub-folder
+	'ruby' to not conflict with prior GEM installations
+
+
+1. Create a .gem folder for the USER (if NOT already exists)
+
+	mkdir %HOMEDRIVE%%HOMEPATH%\.gem
+
+
+2. Install J1 Template USERIZED (recommended)
+
+  Install J1 from remote
+
+	gem install j1-template --version 2022.5.0.rc1 --no-document --user-install
+
+
+3. Create a J1 Project folder
+
+	mkdir c:\j1-projects
+
+
+4. Generate a J1 Project
+
+	cd c:\j1-projects && j1 generate starter-2022.5.0.rc
+
+
+5. Setup and Run a J1 Project
+
+	cd c:\j1-projects\starter-2022.5.0.rc && j1 setup && j1 site
+
+
+
+== RubyGem commands
+
+gem environment gempath
+
+bundle info --path jekyll
+
+--local --user-install --no-document

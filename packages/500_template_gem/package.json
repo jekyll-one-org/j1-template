@@ -22,7 +22,7 @@
     "gemspec": "j1-template.gemspec",
     "gemfile": "Gemfile",
     "gemext":  "gem",
-    "gemversion": "2022.5.0.rc0",
+    "gemversion": "2022.5.0.rc1",
     "binaries": "true"
   },
   "ruby": {
@@ -33,7 +33,7 @@
     "clean": "run-p -s clean:* && run-p -s clean-bundle:*",
     "create": "run-s template-gem",
     "setup": "run-s bundle_install:*",
-    "install--local": "run-s -s install-local:* && run-s -s install-shared:*",
+    "install--local": "run-s -s install-local:*",
     "install--shared": "run-s -s install-shared:*",
     "install--remote": "run-s -s install-remote:*",
     "bundle_install:info": "echo Bundle the Development Rubies ..",

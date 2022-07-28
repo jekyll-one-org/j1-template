@@ -35,7 +35,7 @@ tags:                                   [ Binder, API ]
 scrollbar:                              false
 
 permalink:                              /pages/public/jupyter/docs/nbi-widgets/
-regenerate:                             true
+regenerate:                             false
 
 resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
