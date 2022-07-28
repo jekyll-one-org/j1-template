@@ -1,3 +1,0 @@
-# Enforce Unix newlines for all files
-# ------------------------------------------------------------------------------
-* text=auto eol=lf
