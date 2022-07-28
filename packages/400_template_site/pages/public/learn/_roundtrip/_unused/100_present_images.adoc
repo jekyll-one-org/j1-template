@@ -13,7 +13,7 @@ tags:                                   [ Introduction, Module, Image ]
 fab_menu_id:                            page_ctrl
 
 permalink:                              /pages/public/learn/roundtrip/present_images/
-regenerate:                             true
+regenerate:                             false
 
 resources:                              [
                                           animate, clipboard, carousel,

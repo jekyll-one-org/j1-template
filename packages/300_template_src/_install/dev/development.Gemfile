@@ -34,7 +34,7 @@
 # ------------------------------------------------------------------------------
 # Define the (download) source, Ruby GEMs are to be loaded from REMOTE
 #
-source 'https://rubygems.org' || source ENV['GEM_SOURCE']
+source 'https://rubygems.org'
 
 # ------------------------------------------------------------------------------
 # Specify your Ruby version if the J1 Project is used as an container-based
@@ -70,7 +70,7 @@ end
 # ------------------------------------------------------------------------------
 # Specify the THEME GEM used for the project (NOT set for development system)
 #
-# gem 'j1-template', '~> 2022.4.10'
+# gem 'j1-template', '~> 2022.5.0.rc0'
 
 # ------------------------------------------------------------------------------
 # PRODUCTION: Gem needed for the Jekyll and J1 prod environment
@@ -119,30 +119,34 @@ gem 'tzinfo', '>= 1.2.2'
 #
 # ------------------------------------------------------------------------------
 #
-if Gem.win_platform? do
+install_if -> { Gem.win_platform? } do
   gem 'tzinfo-data'
   gem 'wdm', '>= 0.1.1'
 end
 
 # ------------------------------------------------------------------------------
 # Jekyll Plugins
-#
-# NOTE:
-# If any (additional) plugins are used, they goes here
-#
-# ------------------------------------------------------------------------------
+# If any (additional) Jekyll Plugins are used, they goes here
 #
 group :jekyll_plugins do
-# gem 'algolia', '~> 2.0', '>= 2.0.4'                                           # (Jekyll-)Algolia GEM if required
-  gem 'asciidoctor', '~> 2.0'                                                   # Required for Ruby V3 ony ???
-# gem 'asciidoctor-pdf', '>= 1.5.4'                                             # Used for PDF creation only
+  # Base Jekyll Plugins (required)
+  #
+  gem 'asciidoctor', '~> 2.0'
   gem 'jekyll-asciidoc', '>= 3.0.0'
-# gem 'jekyll-feed', ">= 0.15.1"
-# gem 'jekyll-gist', '>= 1.5.0'                                                 # Useful ???
-# gem 'jekyll-redirect-from', '>= 0.16.0'                                       # Useful ???
-# gem 'jekyll-sass-converter', '>= 2.1.0'                                       # Used if SASS (file) conversion is enabled
-  gem 'jekyll-sitemap', '>= 1.2.0'
-  gem 'j1-paginator', '>= 2021.1.1'                                             # New version !!!
+  gem 'j1-paginator', '>= 2021.1.1'
+  #
+  # Additional Supporting GEMs (optional)
+  #
+  # gem 'algolia', '~> 2.0', '>= 2.0.4'                                         # Required for Algolia support only
+  # gem 'asciidoctor-pdf', '>= 1.5.4'                                           # Required for Asciidoctor PDF creation only
+  # gem 'jekyll-sass-converter', '>= 2.1.0'                                     # Required for Jekyll|SASS (file) conversion support
+  #
+  # Additional Jekyll Plugins  (optional)
+  #
+  gem 'jekyll-sitemap', '>= 1.2.0'                                              # Create XML sitemap (recommended)
+  # gem 'jekyll-feed', ">= 0.15.1"
+  # gem 'jekyll-gist', '>= 1.5.0'
+  # gem 'jekyll-redirect-from', '>= 0.16.0'
 end
 
 # ------------------------------------------------------------------------------
@@ -159,7 +163,6 @@ end
 # gem 'scss_lint', '~> 0.56.0', require: false
 #
 # ------------------------------------------------------------------------------
-#
 gem 'sassc', '~> 2.4'
 gem 'bump', '~> 0.10'
 
@@ -218,7 +221,6 @@ gem 'puma', '>= 5.5.2'
 # encrypt 'private' data used by applications.
 #
 # ------------------------------------------------------------------------------
-#
 # gem 'openssl'
 
 # ------------------------------------------------------------------------------
@@ -232,7 +234,6 @@ gem 'puma', '>= 5.5.2'
 # for Github, Twitter, Facebook and Patreon are implemented.
 #
 # ------------------------------------------------------------------------------
-#
 gem 'rack', '~> 2.2', '>= 2.2.3'
 gem 'rack-protection', '~> 2.0'
 gem 'rack-ssl-enforcer', '~> 0.2'
@@ -255,7 +256,6 @@ gem 'warden', '~> 1.2'
 # For upcoming J1 versions, v2.x version will be used
 # gem 'omniauth', '~> 2.0'
 # ------------------------------------------------------------------------------
-#
 gem 'omniauth', '~> 1.9'
 gem 'omniauth-oauth2', '~> 1.7'
 
@@ -263,7 +263,6 @@ gem 'omniauth-oauth2', '~> 1.7'
 # Logging
 # GEM required for J1 logger based on log4r (middleware)
 # ------------------------------------------------------------------------------
-#
 gem 'log4r', '~> 1.1', '>= 1.1.10'
 gem 'date', '~> 2.0'
 

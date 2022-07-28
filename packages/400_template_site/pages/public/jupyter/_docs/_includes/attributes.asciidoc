@@ -38,13 +38,13 @@ end::tags[]
 // -----------------------------------------------------------------------------
 tag::data[]
 
-:image-nbi-widget--bar:                           "assets/images/pages/nbinteract/manual/nbi_bar.jpg, Rendered Bar Chart"
-:image-nbi-widget--hist:                          "assets/images/pages/nbinteract/manual/nbi_hist.jpg, Rendered Histogram"
-:image-nbi-widget--line:                          "assets/images/pages/nbinteract/manual/nbi_line.jpg, Rendered Line Chart"
-:image-nbi-widget--scatter:                       "assets/images/pages/nbinteract/manual/nbi_scatter.jpg, Rendered Scatter Chart"
-:image-nbi-widget--scatter-drag:                  "assets/images/pages/nbinteract/manual/nbi_scatter_drag.jpg, Rendered interactive Scatter Chart"
-:image-nbi-widget--short-answer:                  "assets/images/pages/nbinteract/manual/nbi_short_answer.jpg, Rendered Short answer"
-:image-nbi-widget--multiple-choice:               "assets/images/pages/nbinteract/manual/nbi_multiple_choice.jpg, Rendered Multiple choice"
+:image-nbi-widget--bar:                           "pages/nbinteract/manual/nbi_bar.jpg, Rendered Bar Chart"
+:image-nbi-widget--hist:                          "pages/nbinteract/manual/nbi_hist.jpg, Rendered Histogram"
+:image-nbi-widget--line:                          "pages/nbinteract/manual/nbi_line.jpg, Rendered Line Chart"
+:image-nbi-widget--scatter:                       "pages/nbinteract/manual/nbi_scatter.jpg, Rendered Scatter Chart"
+:image-nbi-widget--scatter-drag:                  "pages/nbinteract/manual/nbi_scatter_drag.jpg, Rendered interactive Scatter Chart"
+:image-nbi-widget--short-answer:                  "pages/nbinteract/manual/nbi_short_answer.jpg, Rendered Short answer"
+:image-nbi-widget--multiple-choice:               "pages/nbinteract/manual/nbi_multiple_choice.jpg, Rendered Multiple choice"
 
 end::data[]
 

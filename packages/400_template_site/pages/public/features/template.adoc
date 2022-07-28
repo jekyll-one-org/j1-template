@@ -331,7 +331,6 @@ All features are available by configuration, and no programming is needed.
             icon:                         format-color-fill
 ----
 
-
 === Lightboxes
 
 A Lightbox is, in general, a helper which displays enlarged, almost
@@ -423,11 +422,11 @@ space. Sort of like mason fitting stones in a wall.
 [source, apib, role="noclip"]
 ----
 .Image Gallery
-gallery::jg-image--template-features[role="mb-5"]
+gallery::jg_example[role="mb-5"]
 ----
 
 .Image Gallery
-gallery::jg-image--template-features[role="mb-5"]
+gallery::jg_customizer[role="mb-5"]
 
 A JustifiedGallery provides not only images. See the next example of a gallery
 for HTML5 video content.
@@ -436,11 +435,11 @@ for HTML5 video content.
 [source, apib, role="noclip"]
 ----
 .Video Gallery (HTML5)
-gallery::video-html5--template-features[role="mb-5"]
+gallery::jg_video_html5[role="mb-5"]
 ----
 
 .Video Gallery (HTML5)
-gallery::video-html5--template-features[role="mb-5"]
+gallery::jg_video_html5[role="mb-5"]
 
 == Extensions
 

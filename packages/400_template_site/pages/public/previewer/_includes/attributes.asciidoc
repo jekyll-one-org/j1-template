@@ -28,8 +28,8 @@ end::tags[]
 // -----------------------------------------------------------------------------
 tag::data[]
 
-:lightbox-image-data--base-color-palette:         "pages/previewer/bs-color-palette.png, Bootstrap base color palette"
-:lightbox-image-data--md-color-palette:           "pages/previewer/material-design-color-palette.png, Material Design color palette"
+:lightbox-image-data--base-color-palette:         "assets/images/pages/previewer/bs-color-palette.png, Bootstrap base color palette"
+:lightbox-image-data--md-color-palette:           "assets/images/pages/previewer/material-design-color-palette.png, Material Design color palette"
 
 end::data[]
 

@@ -80,7 +80,6 @@ image:/assets/images/badges/myBinder.png[[Binder, link="{binder--home}", {browse
 image:/assets/images/badges/docsBinder.png[[Binder, link="{binder--docs}", {browser-window--new}]
 endif::[]
 
-
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 
@@ -185,7 +184,7 @@ interact_params (dict):
 ----
 
 .Available options (Python dict)
-[cols="^3a,^3a,^6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+[cols="3,3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Name |Value |Description
 
@@ -230,7 +229,7 @@ counts. Default: `True`
 |===
 
 .Available layout settings (Python dict)
-[cols="^3a,^3a,^6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+[cols="3,3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Name |Value |Description
 
@@ -330,7 +329,7 @@ y_fn (Array | (Array, *args -> Array int | Array float)):
 ----
 
 .Available options (Python dict)
-[cols="^3a,^3a,^6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+[cols="3,3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Name |Value |Description
 
@@ -365,7 +364,7 @@ y_fn (Array | (Array, *args -> Array int | Array float)):
 |===
 
 .Available layout settings (Python dict)
-[cols="^3a,^3a,^6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+[cols="3,3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Name |Value |Description
 
@@ -454,7 +453,7 @@ y_points (Array Number): y-values of points to plot
 ----
 
 .Available options (Python dict)
-[cols="^3a,^3a,^6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+[cols="3,3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Name |Value |Description
 
@@ -489,7 +488,7 @@ y_points (Array Number): y-values of points to plot
 |===
 
 .Available layout settings (Python dict)
-[cols="^3a,^3a,^6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+[cols="3,3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Name |Value |Description
 
@@ -592,7 +591,7 @@ y_fn (Array | (Array, *args -> Array int | Array float)):
 ----
 
 .Available options (Python dict)
-[cols="^3a,^3a,^6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+[cols="3,3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Name |Value |Description
 
@@ -632,7 +631,7 @@ y_fn (Array | (Array, *args -> Array int | Array float)):
 |===
 
 .Available layout settings (Python dict)
-[cols="^3a,^3a,^6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+[cols="3,3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Name |Value |Description
 
@@ -754,7 +753,7 @@ interact_params (dict):
 ----
 
 .Available options (Python dict)
-[cols="^3a,^3a,^6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+[cols="3,3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Name |Value |Description
 
@@ -789,7 +788,7 @@ interact_params (dict):
 |===
 
 .Available layout settings (Python dict)
-[cols="^3a,^3a,^6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+[cols="3,3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Name |Value |Description
 
@@ -846,7 +845,7 @@ nbinteract.multiple_choice(
 === Options
 
 .Available options (Python dict)
-[cols="^3a,^3a,^6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+[cols="3,3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Name |Value |Description
 
@@ -907,7 +906,7 @@ nbinteract.short_answer(
 === Options
 
 .Available options (Python dict)
-[cols="^3a,^3a,^6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
+[cols="3,3a,6a", subs=+macros, options="header", width="100%", role="rtable mt-3"]
 |===
 |Name |Value |Description
 
