@@ -1,0 +1,41 @@
+// From https://docs.netlify.com/configure-builds/manage-dependencies/
+
+== Ruby settings
+
+A build’s Ruby version is initially determined by the default version
+preinstalled on the site’s selected build image. We pin the site to
+that version so your builds won’t change even if the build image’s
+defaults change.
+
+You can choose the Ruby version we use to build your site in two
+different ways:
+
+* Set a RUBY_VERSION environment variable.
+* Add a .ruby-version file to the site’s base directory in your repository.
+  This will also tell any other developer using the repository which version
+  of Ruby it depends on.
+
+WARNING: No newlines in .ruby-version
+
+The .ruby-version file must include the version number only: x.y.z, with
+no trailing newline.
+
+Both methods above will accept any released version of Ruby, or any valid
+string that RVM understands. We recommend specifying a version of Ruby
+that matches your local development environment.
+
+If the version you select is preinstalled in your site’s selected build
+image, it will be available immediately. If not, your selected version
+will be installed using rvm and then cached to speed up subsequent builds.
+
+== Ruby dependencies
+
+If your build requires any Ruby dependencies, you must list these in a
+Gemfile saved in the site’s base directory in your repository. We use
+Bundler to install the dependencies in that file. You can visit the Bundler
+docs to learn how to manage Ruby dependencies with Bundler.
+
+If you run the bundle install command locally, Bundler will create a
+Gemfile.lock to record the gem names and versions installed. If you commit
+this file to the site’s base directory in your repository, we will install
+the exact versions specified in your Gemfile.lock.
