@@ -203,7 +203,7 @@ exclude_from_search:                    true
             {% if card_type == 'text' and card_enabled %}
 
             {% if badges %}
-            <div>
+            <div class="mb-3">
               <p>
                 <span>
                   <a class="image" href="https://badge.fury.io/rb/j1-template" target="_blank" rel="noopener noreferrer">
@@ -220,9 +220,28 @@ exclude_from_search:                    true
             <!-- Heading -->
             <div class="noclass">
               <div>
+                <!-- Sticker -->
+                <div class="sticker-right-200" style="display: block;">
+                  <a
+                		  id="banner-sticker-new-version"
+                		  class="link-no-decoration sticker-wrapper-200"
+                		  href="https://rubygems.org/gems/j1-template"
+                		  target="blank"
+                		  rel="noopener noreferrer">
+                		<img
+                			class="sticker"
+                			src="/assets/images/sticker/600x600/sticker-new-version.png"
+                			alt="Get new version 2022.5.0.rc2"
+                			title="Get new version 2022.5.0.rc2"
+                			style="width: 140px; height: 120px;"
+                		>
+                  </a>
+                </div>
+
                 <h2 class="g-font-weight-500 mb-0 {{card_title_translation}}">{{card_title}}</h2>
                 <p class="tagline mb-0">{{card_tagline}}</p>
                 <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-2"></div>
+
               </div>
             </div>
             <!-- End Heading -->

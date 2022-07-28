@@ -1,0 +1,56 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/extensions/_sticker.scss
+ # Provides styles for sticker images
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+// Sticker on the right
+// -----------------------------------------------------------------------------
+.sticker-wrapper-150 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: transparent;
+    overflow: hidden;
+}
+
+.sticker-wrapper-200 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: transparent;
+    overflow: hidden;
+}
+
+
+.sticker-right-150 {
+    margin-top: -40px;
+    right: 470px;
+    left: auto;
+    position: absolute;
+//  transform: rotate(60deg);
+    z-index: 110;
+}
+
+.sticker-right-200 {
+      margin-top: -60px;
+      right: 430px;
+      left: auto;
+      position: absolute;
+      z-index: 110;
+}
