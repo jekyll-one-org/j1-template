@@ -1,0 +1,250 @@
+---
+regenerate:                             true
+exclude_from_search:                    true
+---
+{% capture cache %}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/footer.html
+ # Liquid procedure to generate HTML (data) portion of the page footer for
+ # (fragmented) AJAX load
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #    {{ variable | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+<!-- [INFO   ] [~/assets/data/footer.html                ] [Footer generated: {{site.time}}] -->
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture select_color       %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %}
+{% capture select_icon_size   %}themes/{{site.template.name}}/procedures/global/select_icon_size.proc{% endcapture %}
+{% capture about_box          %}themes/{{site.template.name}}/blocks/footer/boxes/about_box.proc{% endcapture %}
+{% capture news_box           %}themes/{{site.template.name}}/blocks/footer/boxes/news_box.proc{% endcapture %}
+{% capture links_box          %}themes/{{site.template.name}}/blocks/footer/boxes/links_box.proc{% endcapture %}
+{% capture contacts_box       %}themes/{{site.template.name}}/blocks/footer/boxes/contacts_box.proc{% endcapture %}
+{% capture legal_statements   %}themes/{{site.template.name}}/blocks/footer/boxes/legal_statements.proc{% endcapture %}
+{% capture issue              %}themes/{{site.template.name}}/blocks/footer/boxes/issue.proc{% endcapture %}
+{% capture social_media_icons %}themes/{{site.template.name}}/blocks/footer/boxes/social_media_icons.proc{% endcapture %}
+
+{% comment %} Process YML config data
+================================================================================ {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign footer_config_defaults = site.data.blocks.defaults.footer %}
+{% assign footer_config_settings = site.data.blocks.footer %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment            = site.environment %}
+
+{% assign footer_config_defaults = footer_config_defaults.defaults %}
+{% assign footer_config_settings = footer_config_settings.settings %}
+
+{% comment %} Set HELPER variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture footer_config_file_name %}~/_data/modules/footer.yml{% endcapture %}
+
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+{% comment %} Main
+================================================================================ {% endcomment %}
+
+<!-- [INFO   ] [~/assets/data/footer.html                ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
+<head>
+  <meta name="robots" content="noindex, nofollow" />
+</head>
+
+{% for items in footer_config_settings %}
+  {% assign key             = items[0] %}
+  {% assign value           = items[1] %}
+  {% assign footer_config   = value %}
+
+  {% for items in footer_config %}
+    {% for footers in items %}
+
+      {% if debug %} footers: {{ footers }} {% endif %}
+
+      {% comment %} parse settings for MAIN keys
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% for footer in footers %}
+        {% assign data_type = footer | is_type %}
+        {% if data_type == 'hash' %}
+          {% assign footer_settings = footer %}
+        {% endif %}
+      {% endfor %}
+
+      {% if debug %} <!-- footer_settings.boxes: {{ footer_settings.boxes }} --> {% endif %}
+
+
+      {% comment %} process current footer
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% if footer_settings.enabled %}
+
+        {% assign enabled_boxes   = 0 %}
+        {% assign footer_options  = footer_config_defaults.footer | merge: footer_settings %}
+        {% if debug %} <!-- footer_options: {{ footer_options }} --> {% endif %}
+
+        {% comment %} Calculate number of enabled footer boxes
+        ------------------------------------------------------------------------ {% endcomment %}
+        {% for property in footer_options.boxes %}
+          {% if debug %} <!-- property:  {{property}} --> {% endif %}
+          {% if property.enabled %} {% assign enabled_boxes = enabled_boxes | plus:1 %} {% endif %}
+        {% endfor %}
+        {% assign footer_box_width_md = 12 | divided_by:enabled_boxes %}
+        <!-- [INFO   ] [~/assets/data/footer.html                ] [Set footer box column width to: {{ footer_box_width_md }}] -->
+
+        <!-- div id="{{footer_config_defaults.container-id}}" class="{{footer_options.theme}}" -->
+        <div id="{{footer_config_defaults.container-id}}">
+          <div class="footer">
+
+            <div class="container">
+              <div class="row">
+
+              {% comment %} Collect footer config data
+              ------------------------------------------------------------------ {% endcomment %}
+              {% for box in footer_options.boxes %}
+
+                {% comment %} COLLECT|PLACE footer boxes
+                ---------------------------------------------------------------- {% endcomment %}
+                {% case box.type %}
+
+                {% comment %} PLACE AboutBox
+                ---------------------------------------------------------------- {% endcomment %}
+                {% when 'about' %}
+                  {% if box.enabled %}
+                    {% include {{about_box}} title=box.title tagline=box.tagline text=box.text justify=box.justify %}
+                  {% endif %}
+
+                  {% comment %} Reset element variable
+                  -------------------------------------------------------------- {% endcomment %}
+                  {% assign footer_options.boxes = nil %}
+
+                {% comment %} PLACE NewsBox
+                ---------------------------------------------------------------- {% endcomment %}
+                {% when 'news' %}
+                  {% if box.enabled %}
+                    {% include {{news_box}} title=box.title tagline=box.tagline category=box.category max_posts=box.max_posts posts=site.posts %}
+                  {% endif %}
+
+                  {% comment %} Reset element variable
+                  -------------------------------------------------------------- {% endcomment %}
+                  {% assign footer_options.boxes = nil %}
+
+                {% comment %} PLACE LinksBox
+                --------------------------------------------------------------- {% endcomment %}
+                {% when 'references' %}
+                  {% if box.enabled %}
+                    {% include {{links_box}} title=box.title tagline=box.tagline links=box.links %}
+                  {% endif %}
+
+                  {% comment %} Reset element variable
+                  -------------------------------------------------------------- {% endcomment %}
+                  {% assign footer_options.boxes = nil %}
+
+                {% comment %} PLACE ContactsBox
+                --------------------------------------------------------------- {% endcomment %}
+                {% when 'contact' %}
+                  {% if box.enabled %}
+                    {% include {{contacts_box}} title=box.title tagline=box.tagline %}
+                  {% endif %}
+
+                  {% comment %} Reset element variable
+                  -------------------------------------------------------------- {% endcomment %}
+                  {% assign footer_options.boxes = nil %}
+
+                {% else %}
+                  {% comment %} Collect EXCEPTION
+                  -------------------------------------------------------------- {% endcomment %}
+                  {% unless box.type == 'exception_container' %}
+                  <div id="exception_container">
+                    <div id="{{panel_settings.id}}" class="container-fluid no-padding">
+                      <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
+                        <div class="box">
+                          <div class="content content-danger">
+                            <h2 class="notoc">
+                              <i class="mdi mdi-alarm-light mdi-3x mdi-md-red mr-1"></i>
+                              panel of type <big>{{panel_settings.type}}</big> not found
+                            </h2>
+                            <h4 class="notoc box-title">Check your configuration at {{panel_config_file_name}}</h4>
+                            <div class="box-description">
+                              Don't worry about this. Maybe you've a typo in the panel configuration.
+                              Check the panel config file for the unknown type. <br />
+                              Check for something wrong like:
+                              <div class="mt-2 mb-2">
+                                <b>id:       {{panel_settings.id}}</b>  <br />
+                                <b>type:     {{panel_settings.type}}</b> <br />
+                                <b>comment:  {{panel_settings.comment}}</b>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div> <!-- End panel {{panel_settings.id}} -->
+                  </div> <!-- End exception_container -->
+                  {% endunless %}
+
+                {% endcase %}
+
+                {% comment %} END footer boxes
+                ---------------------------------------------------------------- {% endcomment %}
+
+              {% endfor %}
+              </div>
+            </div>
+          </div>
+
+          {% comment %} COLLECT|PLACE copyright|issue date information
+          ---------------------------------------------------------------------- {% endcomment %}
+          <div class="copyright">
+            <div class="container">
+              <div class="row">
+                <!-- [INFO   ] [~/assets/data/footer.html                ] [Enable horizontal list using id #inline] -->
+                <div class="col-md-10" id="inline">
+                {% include {{legal_statements}} legals=footer_options.legals %}
+                </div>
+                <div class="col-md-10" id="inline">
+                {% include {{issue}} %}
+                </div>
+                <div class="col-md-2">
+                {% include {{social_media_icons}} icons=footer_options.icons %}
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        {% comment %} Reset element variables (already processed)
+        ------------------------------------------------------------------------ {% endcomment %}
+        {% assign footer_settings = nil %}
+
+      {% endif %}
+
+    {% endfor %}
+  {% endfor %}
+{% endfor %}
+
+{% endcapture %}
+{% if production %}
+  {% capture _LINE_FEED %}{% endcapture %}{% if site.compress_html.ignore.envs contains jekyll.environment %}{{ cache | strip_html_comments }}{% else %}{% capture _content %}{{ cache | strip_html_comments }}{% endcapture %}{% assign _profile = site.compress_html.profile %}{% if site.compress_html.endings == "all" %}{% assign _endings = "html head body li dt dd p rt rp optgroup option colgroup caption thead tbody tfoot tr td th" | split: " " %}{% else %}{% assign _endings = site.compress_html.endings %}{% endif %}{% for _element in _endings %}{% capture _end %}</{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _end %}{% endfor %}{% if _profile and _endings %}{% assign _profile_endings = _content | size | plus: 1 %}{% endif %}{% for _element in site.compress_html.startings %}{% capture _start %}<{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _start %}{% endfor %}{% if _profile and site.compress_html.startings %}{% assign _profile_startings = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.comments == "all" %}{% assign _comments = "<!-- -->" | split: " " %}{% else %}{% assign _comments = site.compress_html.comments %}{% endif %}{% if _comments.size == 2 %}{% capture _comment_befores %}.{{ _content }}{% endcapture %}{% assign _comment_befores = _comment_befores | split: _comments.first %}{% for _comment_before in _comment_befores %}{% if forloop.first %}{% continue %}{% endif %}{% capture _comment_outside %}{% if _carry %}{{ _comments.first }}{% endif %}{{ _comment_before }}{% endcapture %}{% capture _comment %}{% unless _carry %}{{ _comments.first }}{% endunless %}{{ _comment_outside | split: _comments.last | first }}{% if _comment_outside contains _comments.last %}{{ _comments.last }}{% assign _carry = false %}{% else %}{% assign _carry = true %}{% endif %}{% endcapture %}{% assign _content = _content | remove_first: _comment %}{% endfor %}{% if _profile %}{% assign _profile_comments = _content | size | plus: 1 %}{% endif %}{% endif %}{% assign _pre_befores = _content | split: "<pre" %}{% assign _content = "" %}{% for _pre_before in _pre_befores %}{% assign _pres = _pre_before | split: "</pre>" %}{% assign _pres_after = "" %}{% if _pres.size != 0 %}{% if site.compress_html.blanklines %}{% assign _lines = _pres.last | split: _LINE_FEED %}{% capture _pres_after %}{% for _line in _lines %}{% assign _trimmed = _line | split: " " | join: " " %}{% if _trimmed != empty or forloop.last %}{% unless forloop.first %}{{ _LINE_FEED }}{% endunless %}{{ _line }}{% endif %}{% endfor %}{% endcapture %}{% else %}{% assign _pres_after = _pres.last | split: " " | join: " " %}{% endif %}{% endif %}{% capture _content %}{{ _content }}{% if _pre_before contains "</pre>" %}<pre{{ _pres.first }}</pre>{% endif %}{% unless _pre_before contains "</pre>" and _pres.size == 1 %}{{ _pres_after }}{% endunless %}{% endcapture %}{% endfor %}{% if _profile %}{% assign _profile_collapse = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.clippings == "all" %}{% assign _clippings = "html head title base link meta style body article section nav aside h1 h2 h3 h4 h5 h6 hgroup header footer address p hr blockquote ol ul li dl dt dd figure figcaption main div table caption colgroup col tbody thead tfoot tr td th" | split: " " %}{% else %}{% assign _clippings = site.compress_html.clippings %}{% endif %}{% for _element in _clippings %}{% assign _edges = " <e;<e; </e>;</e>;</e> ;</e>" | replace: "e", _element | split: ";" %}{% assign _content = _content | replace: _edges[0], _edges[1] | replace: _edges[2], _edges[3] | replace: _edges[4], _edges[5] %}{% endfor %}{% if _profile and _clippings %}{% assign _profile_clippings = _content | size | plus: 1 %}{% endif %}{{ _content }}{% if _profile %} <table id="compress_html_profile_{{ site.time | date: "%Y%m%d" }}" class="compress_html_profile"> <thead> <tr> <td>Step <td>Bytes <tbody> <tr> <td>raw <td>{{ cache | strip_html_comments | size }}{% if _profile_endings %} <tr> <td>endings <td>{{ _profile_endings }}{% endif %}{% if _profile_startings %} <tr> <td>startings <td>{{ _profile_startings }}{% endif %}{% if _profile_comments %} <tr> <td>comments <td>{{ _profile_comments }}{% endif %}{% if _profile_collapse %} <tr> <td>collapse <td>{{ _profile_collapse }}{% endif %}{% if _profile_clippings %} <tr> <td>clippings <td>{{ _profile_clippings }}{% endif %} </table>{% endif %}{% endif %}
+{% else %}
+  {{ cache | pretty_print | remove:'<html><body>' | remove:'</body></html>' | strip_empty_lines }}
+{% endif %}
+{% assign cache = nil %}

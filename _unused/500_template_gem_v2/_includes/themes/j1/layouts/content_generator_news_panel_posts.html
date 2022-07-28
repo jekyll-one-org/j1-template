@@ -1,0 +1,429 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/_includes/themes/j1/layouts/content_generator_news_panel_posts.html
+ # Liquid template to create the content portion of all posts to be used
+ # for infinite scroll by the news panel (home page)
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #    liquid_var:      {{ liquid_var | debug }}
+ #    page_path:       {{ page_path | debug }}
+ #    page_url:        {{ page.url | remove_first:'page2/index.html' | debug }}
+ #    navigator_path:  {{ navigator_path | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign template_config             = site.data.j1_config %}
+{% assign blocks                      = site.data.blocks %}
+{% assign modules                     = site.data.modules %}
+{% assign builder                     = site.data.builder %}
+{% assign plugins                     = site.data.plugins %}
+
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign panel_config_defaults       = blocks.defaults.panel %}
+{% assign panel_config_settings       = blocks.panel %}
+{% assign bs_config                   = template_config.bootstrap %}
+
+{% assign blog_navigator_defaults     = modules.defaults.blog_navigator.defaults %}
+{% assign blog_navigator_settings     = modules.blog_navigator.settings %}
+{% assign paginator_defaults          = plugins.defaults.paginator.defaults %}
+{% assign paginator_settings          = plugins.paginator.settings %}
+
+{% assign panel_config_defaults       = panel_config_defaults.defaults %}
+{% assign panel_config_settings       = panel_config_settings.settings %}
+
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign blog_navigator_options              = blog_navigator_defaults | merge: blog_navigator_settings %}
+{% assign paginator_options                   = paginator_defaults | merge: paginator_settings %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign article_navigator                   = blog_navigator_settings.article_navigator %}
+{% assign article_previewer                   = blog_navigator_settings.article_previewer %}
+{% assign article_navigator_description       = blog_navigator_options.article_navigator.description %}
+{% assign article_previewer_description       = blog_navigator_options.article_previewer.description %}
+
+{% assign previewer                           = blog_navigator_options.previewer %}
+{% assign paginate                            = paginator_options.pagination.enabled %}
+
+{% assign truncate_words                      = site.excerpt_truncate_words %}
+
+
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+{% comment %} language detection  (i18n)
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if {{site.language}} == "en" %}
+  {% assign language = "en" %}
+{% elsif  {{site.language}} == "de"%}
+  {% assign language = "de" %}
+{% else %}
+  {% assign language = "en" %}
+{% endif %}
+
+{% if language == "en" %}
+  {% assign category_view_button_text         = blog_navigator_options.button_text.view_selector.category_view.en %}
+  {% assign date_view_button_text             = blog_navigator_options.button_text.view_selector.date_view.en %}
+  {% assign archive_view_button_text          = blog_navigator_options.button_text.view_selector.archive_view.en %}
+  {% assign tag_view_button_text              = blog_navigator_options.button_text.view_selector.tag_view.en %}
+
+  {% assign paginator_button_older_posts_text = blog_navigator_options.button_text.paginator.older_posts.en %}
+  {% assign paginator_button_newer_posts_text = blog_navigator_options.button_text.paginator.newer_posts.en %}
+  {% assign paginator_button_first_post_text  = blog_navigator_options.button_text.paginator.first_post.en %}
+  {% assign paginator_button_last_post_text   = blog_navigator_options.button_text.paginator.last_post.en %}
+
+  {% assign previewer_headline                = blog_navigator_options.article_previewer.page_text.en.headline %}
+  {% assign navigator_description_text        = blog_navigator_options.article_navigator.page_text.en.description %}
+  {% assign previewer_description_text        = blog_navigator_options.article_previewer.page_text.en.description %}
+{% endif %}
+
+{% if language == "de" %}
+  {% assign category_view_button_text         = blog_navigator_options.button_text.view_selector.category_view.de" %}
+  {% assign date_view_button_text             = blog_navigator_options.button_text.view_selector.date_view.de" %}
+  {% assign archive_view_button_text          = blog_navigator_options.button_text.view_selector.archive_view.de" %}
+  {% assign tag_view_button_text              = blog_navigator_options.button_text.view_selector.tag_view.de" %}
+
+  {% assign paginator_button_older_posts_text = blog_navigator_options.button_text.paginator.older_posts.de %}
+  {% assign paginator_button_newer_posts_text = blog_navigator_options.button_text.paginator.newer_posts.de %}
+  {% assign paginator_button_first_post_text  = blog_navigator_options.button_text.paginator.first_post.de %}
+  {% assign paginator_button_last_post_text   = blog_navigator_options.button_text.paginator.last_post.de %}
+
+  {% assign previewer_headline                = blog_navigator_options.article_previewer.page_text.de.headline %}
+  {% assign navigator_description_text        = blog_navigator_options.article_navigator.page_text.de.description %}
+  {% assign previewer_description_text        = blog_navigator_options.article_previewer.page_text.de.description %}
+{% endif %}
+
+{% if language == "en" %}
+  {% assign readmore_text = "read" %}
+{% endif %}
+
+{% if language == "de" %}
+  {% assign readmore_text = "lesen" %}
+{% endif %}
+
+{% comment %} Main
+================================================================================ {% endcomment %}
+{% for items in panel_config_settings %}
+  {% assign key             = items[0] %}
+  {% assign value           = items[1] %}
+  {% assign panel_config    = value %}
+
+  {% for items in panel_config %}
+    {% for panels in items %}
+
+      {% if debug %} panels: {{ panels }} {% endif %}
+
+      {% comment %} parse settings for MAIN keys
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% for panel in panels %}
+        {% assign data_type = panel | is_type %}
+        {% if data_type == 'hash' %}
+          {% assign panel_settings  = panel %}
+
+          {% assign id                      = panel_settings.id %}
+          {% assign enabled                 = panel_settings.enabled %}
+          {% assign type                    = panel_settings.type %}
+          {% assign icon_family             = panel_settings.icon_family | downcase %}
+          {% assign style                   = panel_settings.style %}
+          {% assign raised                  = panel_settings.raised %}
+          {% assign lane_span               = panel_settings.lane_span %}
+          {% assign title                   = panel_settings.title|strip_newlines %}
+          {% assign tagline                 = panel_settings.tagline|strip_newlines %}
+          {% assign buttons                 = panel_settings.buttons %}
+          {% assign header                  = panel_settings.header %}
+          {% assign properties              = panel_settings.properties %}
+          {% assign description_properties  = panel_settings.description_properties %}
+          {% assign cards                   = panel_settings.cards %}
+        {% endif %}
+      {% endfor %}
+
+      {% if lane_span == 'fixed' %}
+        {% assign container_class = 'container' %}
+      {% elsif lane_span == 'fluid' %}
+        {% assign container_class = 'container-fluid' %}
+      {% else %}
+        {% assign container_class = 'container' %}
+      {% endif %}
+
+      {% assign row_class = 'row' %}
+
+      {% if style == 'flat' %}
+        {% assign card_style = 'card-flat' %}
+      {% else %}
+        {% assign card_style = '' %}
+      {% endif %}
+
+      {% if raised %}
+        {% capture card_raised %}raised-z{{raised}}{% endcapture %}
+      {% else %}
+        {% assign card_raised = 'raised-z3' %}
+      {% endif %}
+
+      {% if icon_family == 'fontawesome' or icon_family == 'fontawesome5' or icon_family == 'fa'%}
+        {% assign icon_family = 'fa' %}
+      {% elsif icon_family == 'mdi' %}
+        {% assign icon_family = 'mdi' %}
+      {% elsif icon_family == 'iconify' %}
+        {% assign icon_family = 'iconify' %}
+      {% else'%}
+        {% assign icon_family = 'mdi' %}
+      {% endif %}
+
+      {% comment %} process current panel
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% if panel_settings.enabled %}
+
+        {% case panel_settings.type %}
+
+        {% comment %} Collect NEWS panel
+        ------------------------------------------------------------------------ {% endcomment %}
+        {% when 'news' %}
+        <!-- [INFO   ] [j1.layout.content_generator_news_panel_posts  ] [Begin content] -->
+        {% assign panel_options = panel_config_defaults.news|merge: panel_settings %}
+        {% if debug %}<!-- panel_options:  {{panel_options}} -->{% endif %}
+        <!-- Panel {{{panel_settings.id}}} -->
+        <section class="container">
+          <div class="row">
+
+            <!-- Add paginator if enabled -->
+            <div id="article_previewer">
+              <div class="previewer-headline">
+
+                <div class="post-headline">
+                  <h1 id="previewer" class="notoc mt-4">Paginator</h1>
+                </div>
+
+                {% if paginator.total_pages > 1 %}
+                <nav class="paginator mb-4">
+                  <ul class="pagination raised-z0">
+                    {% if paginator.previous_page %}
+                      <li class="page-item">
+                          <a class="page-link" href="{{ paginator.previous_page_path }}#article_navigator">{{paginator_button_newer_posts_text}}</a>
+                      </li>
+                    {% else %}
+                        <li class="page-item disabled"><a href="#void" class="page-link">{{paginator_button_first_post_text}}</a></li>
+                    {% endif %}
+
+                    {% if paginator.next_page %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{ paginator.next_page_path }}#article_navigator">{{paginator_button_older_posts_text}}</a>
+                    </li>
+                    {% else %}
+                        <li class="page-item disabled"><a href="#void" class="page-link">{{paginator_button_last_post_text}}</a></li>
+                    {% endif %}
+                  </ul>
+                </nav>
+                {% endif %}
+
+              </div>
+            </div>
+            <!-- end article previewer -->
+
+            {% assign header_available  = false %}
+            {% assign card_items        = panel_options.cards|size %}
+
+            {% for card in panel_options.cards %}
+              {% for items in card %}
+                {% for item in items[1] %}
+                  {% assign key   = item[0] %}
+                  {% assign value = item[1] %}
+                  {% if key == 'infinite_scroll' %} {% assign card_infinite_scroll  = value %} {% endif %}
+                  {% if key == 'animate' %}         {% assign card_animate          = value %} {% endif %}
+                  {% if key == 'block' %}           {% assign card_block            = value %} {% endif %}
+                  {% if key == 'num_per_row' %}     {% assign cards_per_row         = value %} {% endif %}
+                  {% if key == 'max_posts' %}       {% assign posts_max             = value %} {% endif %}
+                {% endfor %}
+              {% endfor %}
+
+              {% assign posts_written     = 0 %}
+              {% assign last_post_written = false %}
+
+              {% comment %} {% assign posts_max         = cards_per_row %} {% endcomment %}
+
+              {% comment %} default for card_block: card-deck
+              ------------------------------------------------------------------ {% endcomment %}
+              {% if card_block == "card-deck" or card_block == "card-list" %}
+                <!-- [INFO   ] [j1.assets.data.panel.html             ] [ blocktype detected as: {{card_block}} ] -->
+			        {% else %}
+				        <!-- [INFO   ] [j1.assets.data.panel.html             ] [ set blocktype to: card-deck ] -->
+                {% assign card_block = "card-deck" %}
+              {% endif %}
+
+              <!-- [INFO   ] [j1.assets.data.panel.html             ] [ blocktype detected as: {{card_block}} ] -->
+              {% if card_block == 'card-list' %}
+
+              {% if debug %}
+              <!-- paginator.per_page:      {{paginator.per_page}} -->
+              <!-- paginator.total_posts:   {{paginator.total_posts}} -->
+              {% endif %}
+
+              <div class="row">
+                <!-- post group-->
+                <ul id="{{panel_settings.id}}-scroll-group" class="scroll-group scroll-group-horizontal align-items-stretch flex-wrap">
+                  {% for post in paginator.posts %}
+                  <!-- post items-->
+                  <li id="{{panel_settings.id}}-scroll-item" class="scroll-group-item items-{{cards_per_row}} p-0">
+                    <article class="card card-same-height raised-z3 mb-5">
+                      {% if post.image %}
+                        <img class="img-fluid img-object--cover g-height-200" src="{{post.image}}" alt="{{post.title}}">
+                        {% assign post_width = '80x' %}
+                      {% else %}
+                        <img class="mt-2" src="" alt="">
+                        {% assign post_width = '100x' %}
+                      {% endif %}
+                      <h3 class="card-header bg-primary notoc notranslate">{{post.title}}</h3>
+                      <!-- Body|Excerpt -->
+                      <div class="card-body r-text-300">
+                        {{post.excerpt|truncatewords: truncate_words}}
+                      </div>
+                      <!-- End Body|Excerpt -->
+                      <div class="card-footer r-text-200">
+
+                        <div class="card-footer-text">
+                          {% if language == "en" %}
+                            <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
+                          {% endif %}
+                          {% if language == "de" %}
+                            <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
+                          {% endif %}
+
+                          {% assign category_blacklist = panel_settings.category_blacklist %}
+
+                          <!-- Cleanup categories by given blacklist -->
+                          {% assign my_categories = post.categories | difference: category_blacklist %}
+
+                          <!-- Build element strings -->
+                          {% assign categories    = my_categories |join: " · "  %}
+                          {% assign tags          = post.tags | join: " · "  %}
+
+                          <p class="result-item-text small mb-3 notranslate">
+                            <i class="mdi mdi-tag-text-outline mdi-18px mr-1"></i>
+                            <span class="sr-categories">{{categories}}</span>
+                            <br>
+                            <i class="mdi mdi-tag mdi-18px mr-1"></i>
+                            <span class="sr-tags">{{tags}}</span>
+                        </p>
+                        </div>
+                        <a class="card-link md-grey-900 text-lowercase"
+                           href="{{post.url}}">
+                           {{readmore_text}} · {{post.tagline}}
+                        </a>
+                      </div>
+                    </article>
+                  </li>
+                  {% endfor %}
+                  <!-- End post items -->
+                </ul>
+                <!-- End post group-->
+              </div>
+              {% endif %}
+
+              {% if card_block == 'card-deck' %}
+              <!-- Recent posts -->
+              <div id="{{panel_settings.id}}-scroll-group" class="row card-deck">
+              {% for post in paginator.posts %} {% for category in post.categories %}
+                {% if posts_written == posts_max %} {% assign last_post_written = true %} {% break %}{% endif %}
+
+                {% if category == post_category and last_post_written != true %}
+                  {% assign posts_written = posts_written|plus:1 %}
+                    <!-- Posts -->
+                    <article id="{{panel_settings.id}}-scroll-item" class="card raised-z3 mb-3">
+                      {% if post.image %}
+                        <img class="img-fluid img-object--cover g-height-200" src="{{post.image}}" alt="{{post.title}}">
+                        {% assign post_width = '80x' %}
+                      {% else %}
+                        <img class="mt-2" src="" alt="">
+                        {% assign post_width = '100x' %}
+                      {% endif %}
+                      <h3 class="card-header bg-primary notoc">{{post.title}}</h3>
+                      <!-- Body|Excerpt -->
+                      <div class="card-body r-text-300">
+                        {% comment %} {{post.excerpt|truncatewords: 50|replace:'...',' ...'|remove:'<div class="paragraph">'|remove:'</div>'|remove:'<p>'|remove:'</p>'}} {% endcomment %}
+                        {{post.excerpt|truncatewords: truncate_words}}
+                      </div>
+                      <!-- End Body|Excerpt -->
+                      <div class="card-footer r-text-200">
+
+                        <div class="card-footer-text">
+                          {% if language == "en" %}
+                            <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
+                          {% endif %}
+                          {% if language == "de" %}
+                            <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
+                          {% endif %}
+                        </div>
+                        <a class="card-link md-grey-900 text-lowercase"
+                           href="{{post.url}}">
+                           {{readmore_text}} · {{post.tagline}}
+                        </a>
+                      </div>
+                    </article>
+                    <!-- End Posts -->
+
+                    <!-- Calculate 'column setters' to manage BS break points for 'responsive' card deck (rcard-deck) -->
+                    {% assign sm = posts_written | modulo: bs_card_deck.break_on_sm %}
+                    {% assign md = posts_written | modulo: bs_card_deck.break_on_md %}
+                    {% assign lg = posts_written | modulo: bs_card_deck.break_on_lg %}
+                    {% assign xl = posts_written | modulo: bs_card_deck.break_on_xl %}
+
+                    <!-- Add 'column setters' for BS break points -->
+                    {% if sm == 0 %}
+                      <div class="w-100 d-none d-sm-block d-md-none"> <!-- break on sm --> </div>
+                    {% endif %}
+
+                    {% if md == 0 %}
+                      <div class="w-100 d-none d-md-block d-lg-none"> <!-- break on md --> </div>
+                    {% endif %}
+
+                    {% if lg == 0 %}
+                      <div class="w-100 d-none d-lg-block d-xl-none"> <!-- break on lg --> </div>
+                    {% endif %}
+
+                    {% if xl == 0 %}
+                      <div class="w-100 d-none d-xl-block" ><!-- break on xl --> </div>
+                    {% endif %}
+
+                {% endif %}
+              {% endfor %} {% endfor %}
+              </div>
+              {% endif %}
+              <!-- End recent posts -->
+            {% endfor %}
+
+          </div>
+          <!-- END container -->
+        </section>
+        <!-- End news panel: {{{panel_settings.id}}} -->
+
+        {% comment %} Reset element variables (already processed)
+        ------------------------------------------------------------------------ {% endcomment %}
+        {% assign panel_settings = nil %}
+
+        {% comment %} END NEWS panel
+        ------------------------------------------------------------------------ {% endcomment %}
+        {% endcase %}
+
+      {% endif %} {% comment %} endif enabled {% endcomment %}
+    {% endfor %}  {% comment %} END panels {% endcomment %}
+  {% endfor %}  {% comment %} END panel_config {% endcomment %}
+{% endfor %}  {% comment %} END panel_config_settings {% endcomment %}

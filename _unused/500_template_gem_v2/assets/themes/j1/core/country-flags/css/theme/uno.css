@@ -1,0 +1,75 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/core/country-flags/css/theme/uno.css
+ # Provides styles for the CSS Flags Previewer
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+.country {
+    padding: 4px;
+    line-height: 1.4;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 0;
+    transition: all .2s ease-in-out;
+    display: inline-block;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 24px;
+    width: 100%
+}
+
+.country .name {
+    font-size: 1.2em
+}
+
+.country .capital,.country .name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: normal;
+    color: #424242;
+}
+
+.country .capital {
+    font-size: .9em;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 4px;
+    color: #424242;
+}
+
+.country .country-code {
+    font-size: .7em;
+    color: #999
+}
+
+.country .flag {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px
+}
+
+.country:hover {
+    background-color: #eee
+}
+
+.nav-continents {
+    margin-bottom: 24px
+}
+
+.country-list .flag {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    max-width: 32px;
+    border-radius: 2px
+}

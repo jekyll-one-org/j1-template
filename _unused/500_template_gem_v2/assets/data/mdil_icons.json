@@ -1,0 +1,2422 @@
+---
+regenerate:                             false
+exclude_from_search:                    true
+---
+
+{% capture cache %}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/mdil_icons.json
+ # Liquid JSON template for ALL MDI Light icon META data used by MDIL Previewer
+ #
+ # Product/Info:
+ # https://github.com/Templarian/MaterialDesignLight
+ # http://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+ #  NOTE:
+ #  Be careful changing the Liquid code. If the code is changed, check
+ #  the integrity of the JSON data created. Corrupted JSON data makes
+ #  the Javascript of an Adapter|App to fail and no functionality will
+ #  be available for most UNCLEAR reasons.
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Process YML config data
+================================================================================ {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment  = site.environment %}
+
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+{% comment %} Main
+================================================================================ {% endcomment %}
+
+[
+    {
+        "id": "",
+        "name": "account",
+        "codepoint": "f004",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "alarm",
+        "codepoint": "F020",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "alarm-plus",
+        "codepoint": "F024",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "alert",
+        "codepoint": "f026",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "alert-circle",
+        "codepoint": "f028",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "alert-octagon",
+        "codepoint": "f029",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "arrange-bring-forward",
+        "codepoint": "f03d",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "arrange-bring-to-front",
+        "codepoint": "f03e",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "arrange-send-backward",
+        "codepoint": "f03f",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "arrange-send-to-back",
+        "codepoint": "f040",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "arrow-down",
+        "codepoint": "f045",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "arrow-down-circle",
+        "codepoint": "fcb7",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "arrow-left",
+        "codepoint": "f04d",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "arrow-left-circle",
+        "codepoint": "fcb9",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "arrow-right",
+        "codepoint": "f054",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "arrow-right-circle",
+        "codepoint": "fcbb",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "arrow-up",
+        "codepoint": "f05d",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "arrow-up-circle",
+        "codepoint": "fcbd",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "bank",
+        "codepoint": "f070",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "bell",
+        "codepoint": "f09a",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "bell-off",
+        "codepoint": "f09b",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "bluetooth",
+        "codepoint": "f0af",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "book",
+        "codepoint": "f0ba",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "book-multiple",
+        "codepoint": "f0bb",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "book-plus",
+        "codepoint": "f5db",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "bookmark",
+        "codepoint": "f0c0",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "border-all",
+        "codepoint": "f0c7",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "border-bottom",
+        "codepoint": "f0c8",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "border-horizontal",
+        "codepoint": "f0ca",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "border-inside",
+        "codepoint": "f0cb",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "border-left",
+        "codepoint": "f0cc",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "border-none",
+        "codepoint": "f0cd",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "border-outside",
+        "codepoint": "f0ce",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "border-right",
+        "codepoint": "f0cf",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "border-top",
+        "codepoint": "f0d1",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "border-vertical",
+        "codepoint": "f0d2",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "briefcase",
+        "codepoint": "f0d6",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "calendar",
+        "codepoint": "f0ed",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "camcorder",
+        "codepoint": "f0fc",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "camera",
+        "codepoint": "f100",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "cancel",
+        "codepoint": "f739",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "cart",
+        "codepoint": "f110",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "chart-areaspline",
+        "codepoint": "f127",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "chart-bar",
+        "codepoint": "f128",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "chart-histogram",
+        "codepoint": "f129",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "chart-line",
+        "codepoint": "f12a",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "chart-pie",
+        "codepoint": "f12b",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "check",
+        "codepoint": "f12c",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "chevron-double-down",
+        "codepoint": "f13c",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "chevron-double-left",
+        "codepoint": "f13d",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "chevron-double-right",
+        "codepoint": "f13e",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "chevron-double-up",
+        "codepoint": "f13f",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "chevron-down",
+        "codepoint": "f140",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "chevron-left",
+        "codepoint": "f141",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "chevron-right",
+        "codepoint": "f142",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "chevron-up",
+        "codepoint": "f143",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "circle",
+        "codepoint": "f764",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "clipboard",
+        "codepoint": "f147",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "clipboard-check",
+        "codepoint": "f14c",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "clipboard-plus",
+        "codepoint": "f750",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "clipboard-text",
+        "codepoint": "f14e",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "clock",
+        "codepoint": "f150",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "closed-caption",
+        "codepoint": "f15e",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "cloud",
+        "codepoint": "f15f",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "cloud-download",
+        "codepoint": "f162",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "cloud-upload",
+        "codepoint": "f167",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "comment",
+        "codepoint": "f17a",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "comment-alert",
+        "codepoint": "f17d",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "comment-text",
+        "codepoint": "f188",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "console",
+        "codepoint": "f18d",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "content-cut",
+        "codepoint": "f190",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "content-duplicate",
+        "codepoint": "f191",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "content-paste",
+        "codepoint": "f192",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "content-save",
+        "codepoint": "f193",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "content-save-all",
+        "codepoint": "f194",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "credit-card",
+        "codepoint": "f19b",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "credit-card-scan",
+        "codepoint": "f19d",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "crop",
+        "codepoint": "f19e",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "crop-free",
+        "codepoint": "f19f",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "currency-eur",
+        "codepoint": "f1ad",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "currency-gbp",
+        "codepoint": "f1ae",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "currency-rub",
+        "codepoint": "f1b1",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "currency-usd",
+        "codepoint": "f1b3",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "delete",
+        "codepoint": "f1c0",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "diamond-stone",
+        "codepoint": "f1c8",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "dots-horizontal",
+        "codepoint": "f1d8",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "dots-vertical",
+        "codepoint": "f1d9",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "download",
+        "codepoint": "f1da",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "eject",
+        "codepoint": "f1ea",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "email",
+        "codepoint": "f1ee",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "email-open",
+        "codepoint": "f1ef",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "eye",
+        "codepoint": "f208",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "eye-off",
+        "codepoint": "f209",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "factory",
+        "codepoint": "f20f",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "fast-forward",
+        "codepoint": "f211",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "file",
+        "codepoint": "f214",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "file-multiple",
+        "codepoint": "f222",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "file-plus",
+        "codepoint": "f751",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "flag",
+        "codepoint": "f23b",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "flash",
+        "codepoint": "f241",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "flask",
+        "codepoint": "f093",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "flask-empty",
+        "codepoint": "f094",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "folder",
+        "codepoint": "f24b",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "folder-multiple",
+        "codepoint": "f253",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "folder-plus",
+        "codepoint": "f257",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-align-bottom",
+        "codepoint": "f752",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-align-center",
+        "codepoint": "f260",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-align-justify",
+        "codepoint": "f261",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-align-left",
+        "codepoint": "f262",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-align-middle",
+        "codepoint": "f753",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-align-right",
+        "codepoint": "f263",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-align-top",
+        "codepoint": "f754",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-bold",
+        "codepoint": "f264",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-clear",
+        "codepoint": "f265",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-float-center",
+        "codepoint": "f267",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-float-left",
+        "codepoint": "f268",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-float-none",
+        "codepoint": "f269",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-float-right",
+        "codepoint": "f26a",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-indent-decrease",
+        "codepoint": "f275",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-indent-increase",
+        "codepoint": "f276",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-italic",
+        "codepoint": "f277",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-line-spacing",
+        "codepoint": "f278",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-list-bulleted",
+        "codepoint": "f279",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-list-checks",
+        "codepoint": "f755",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-list-numbers",
+        "codepoint": "f27b",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-quote-close",
+        "codepoint": "f27e",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-quote-open",
+        "codepoint": "f756",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-underline",
+        "codepoint": "f287",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-wrap-inline",
+        "codepoint": "f288",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-wrap-square",
+        "codepoint": "f289",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-wrap-tight",
+        "codepoint": "f28a",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "format-wrap-top-bottom",
+        "codepoint": "f28b",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "forum",
+        "codepoint": "f28c",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "fullscreen",
+        "codepoint": "f293",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "fullscreen-exit",
+        "codepoint": "f294",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "gift",
+        "codepoint": "f2a1",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "grid",
+        "codepoint": "f2c1",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "grid-large",
+        "codepoint": "f757",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "grid-off",
+        "codepoint": "f2c2",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "group",
+        "codepoint": "f2c3",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "hamburger",
+        "codepoint": "f684",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "heart",
+        "codepoint": "f2d1",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "heart-half",
+        "codepoint": "f6de",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "heart-off",
+        "codepoint": "f758",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "help",
+        "codepoint": "f2d6",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "help-circle",
+        "codepoint": "f2d7",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "hexagon",
+        "codepoint": "f2d8",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "home",
+        "codepoint": "f2dc",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "image",
+        "codepoint": "f2e9",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "inbox",
+        "codepoint": "f686",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "information",
+        "codepoint": "f2fc",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "label",
+        "codepoint": "f315",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "layers",
+        "codepoint": "f328",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "lightbulb",
+        "codepoint": "f335",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "lightbulb-on",
+        "codepoint": "f6e7",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "link",
+        "codepoint": "f337",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "link-variant",
+        "codepoint": "f339",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "lock",
+        "codepoint": "f33e",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "lock-open",
+        "codepoint": "f33f",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "login",
+        "codepoint": "f342",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "logout",
+        "codepoint": "f343",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "magnify",
+        "codepoint": "f349",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "magnify-minus",
+        "codepoint": "f34a",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "magnify-plus",
+        "codepoint": "f34b",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "map-marker",
+        "codepoint": "f34e",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "memory",
+        "codepoint": "f35b",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "menu",
+        "codepoint": "f35c",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "message",
+        "codepoint": "f361",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "message-alert",
+        "codepoint": "f362",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "message-image",
+        "codepoint": "f364",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "message-processing",
+        "codepoint": "f366",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "message-reply",
+        "codepoint": "f367",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "message-text",
+        "codepoint": "f369",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "message-video",
+        "codepoint": "f36b",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "microphone",
+        "codepoint": "f36c",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "microphone-off",
+        "codepoint": "f36d",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "minus",
+        "codepoint": "f374",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "minus-box",
+        "codepoint": "f375",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "minus-circle",
+        "codepoint": "f376",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "monitor",
+        "codepoint": "f379",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "monitor-multiple",
+        "codepoint": "f37a",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "music",
+        "codepoint": "f759",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "music-off",
+        "codepoint": "f75a",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "nfc-variant",
+        "codepoint": "f398",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "note",
+        "codepoint": "f39a",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "note-multiple",
+        "codepoint": "f6b7",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "note-plus",
+        "codepoint": "f39c",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "note-text",
+        "codepoint": "f39e",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "octagon",
+        "codepoint": "f3c3",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "paperclip",
+        "codepoint": "f3e2",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "pause",
+        "codepoint": "f3e4",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "pencil",
+        "codepoint": "f3eb",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "pin",
+        "codepoint": "f403",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "pin-off",
+        "codepoint": "f404",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "play",
+        "codepoint": "f40a",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "plus",
+        "codepoint": "f415",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "plus-box",
+        "codepoint": "f416",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "plus-circle",
+        "codepoint": "f417",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "power",
+        "codepoint": "f425",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "presentation",
+        "codepoint": "f428",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "presentation-play",
+        "codepoint": "f429",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "printer",
+        "codepoint": "f42a",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "redo-variant",
+        "codepoint": "f44f",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "refresh",
+        "codepoint": "f450",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "repeat",
+        "codepoint": "f456",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "repeat-off",
+        "codepoint": "f457",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "repeat-once",
+        "codepoint": "f458",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "rewind",
+        "codepoint": "f45f",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "rhombus",
+        "codepoint": "f70a",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "rss",
+        "codepoint": "f46b",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "script",
+        "codepoint": "f478",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "settings",
+        "codepoint": "f493",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "shield",
+        "codepoint": "f498",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "shuffle",
+        "codepoint": "f49d",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "signal",
+        "codepoint": "f4a2",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "sitemap",
+        "codepoint": "f4aa",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "skip-next",
+        "codepoint": "f4ad",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "skip-previous",
+        "codepoint": "f4ae",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "sleep",
+        "codepoint": "f4b2",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "sleep-off",
+        "codepoint": "f4b3",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "spellcheck",
+        "codepoint": "f4c6",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "square",
+        "codepoint": "f763",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "star",
+        "codepoint": "f4ce",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "star-half",
+        "codepoint": "f4d0",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "stop",
+        "codepoint": "f4db",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "tab",
+        "codepoint": "f4e9",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "tab-plus",
+        "codepoint": "f75b",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "table",
+        "codepoint": "f4eb",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "taco",
+        "codepoint": "f761",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "tag",
+        "codepoint": "f4f9",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "television",
+        "codepoint": "f502",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "thumb-down",
+        "codepoint": "f511",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "thumb-up",
+        "codepoint": "f513",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "thumbs-up-down",
+        "codepoint": "f515",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "tooltip",
+        "codepoint": "f523",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "tooltip-text",
+        "codepoint": "f528",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "triangle",
+        "codepoint": "f536",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "trophy",
+        "codepoint": "f538",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "undo-variant",
+        "codepoint": "f54d",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "unfold-less-horizontal",
+        "codepoint": "f54e",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "unfold-less-vertical",
+        "codepoint": "f75f",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "unfold-more-horizontal",
+        "codepoint": "f54f",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "unfold-more-vertical",
+        "codepoint": "f760",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "ungroup",
+        "codepoint": "f550",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "upload",
+        "codepoint": "f552",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "vector-arrange-above",
+        "codepoint": "f554",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "vector-arrange-below",
+        "codepoint": "f555",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "vector-combine",
+        "codepoint": "f558",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "vector-difference",
+        "codepoint": "f55a",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "vector-difference-ab",
+        "codepoint": "f55b",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "vector-difference-ba",
+        "codepoint": "f55c",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "vector-intersection",
+        "codepoint": "f55d",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "vector-union",
+        "codepoint": "f564",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "view-dashboard",
+        "codepoint": "f56e",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "view-module",
+        "codepoint": "f573",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "volume-high",
+        "codepoint": "f57e",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "volume-minus",
+        "codepoint": "f75d",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "volume-mute",
+        "codepoint": "f75e",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "volume-off",
+        "codepoint": "f581",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "volume-plus",
+        "codepoint": "f75c",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "wifi",
+        "codepoint": "f5a9",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    },
+    {
+        "id": "",
+        "name": "xml",
+        "codepoint": "f5c0",
+        "aliases": [],
+        "tags": [],
+        "author": "Google",
+        "version": "0.2.63"
+    }
+
+]
+
+{% endcapture %}
+{% if production %}
+  {{ cache | minifyJSON }}
+{% else %}
+  {{ cache | strip_empty_lines }}
+{% endif %}
+{% assign cache = nil %}

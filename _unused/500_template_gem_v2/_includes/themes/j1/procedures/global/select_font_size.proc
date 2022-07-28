@@ -1,0 +1,86 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #   ~/_includes/themes/j1/procedures/components/select_font_size.proc
+ #  Liquid PROCEDURE to calculate the VALUE for a given font-size
+ #
+ #  https://jekyll.one
+ #
+ #  Copyright (C) 2022 Juergen Adams
+ #
+ #  J1 Template is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ #
+ # -----------------------------------------------------------------------------
+ #   Components procedure. Calculate the CLASS of an icon for a given size
+ #   for a specific icon font.
+ #
+ #    Usage:
+ #      1)  assign the 'size' variable
+ #      2)  include the select_font_size.proc procedure
+ #
+ #  Example:
+ #
+ #  {% capture select_font_size %}themes/{{site.template.name}}/procedures/global/select_font_size.proc{% endcapture %}
+ #  {% assign my_size   = "large" %}
+ #
+ #  {% include {{select_font_size}} size=my_size %}
+ #  {% assign my_size = {{font_size}} %}
+ #
+ #  or
+ #
+ #  {% include {{select_font_size}} size="large" %}
+ #  {% assign my_size = {{font_size}} %}
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ #
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+
+{% comment %} Variables
+   ------------------------------------------------------------ {% endcomment %}
+
+{% assign size            = include.size | strip | downcase %}
+{% assign size_is_integer = size | is_numeric %}
+
+
+{% comment %} Liquid procedures
+   ------------------------------------------------------------ {% endcomment %}
+
+
+{% comment %} Main
+   ------------------------------------------------------------ {% endcomment %}
+
+  {% if size_is_integer == false %}
+
+    {% assign size_type_percent = size | contain_substr: "%" %}
+    {% assign size_type_px      = size | contain_substr: "px" %}
+    {% assign size_type_em      = size | contain_substr: "em" %}
+    {% assign size_type_pt      = size | contain_substr: "pt" %}
+
+    {% if size_type_percent or size_type_px or size_type_em or size_type_pt%}
+      {% assign font_size = size %}
+    {% else %}
+      {% if size == 'xxxlarge' %} {% assign font_size = '4.000em' %}  {% endif %}
+      {% if size == 'xx-large' %} {% assign font_size = 'xx-large' %} {% endif %}
+      {% if size == 'xxlarge' %}  {% assign font_size = '3.000em' %}  {% endif %}
+      {% if size == 'x-large' %}  {% assign font_size = 'x-large' %}  {% endif %}
+      {% if size == 'xlarge' %}   {% assign font_size = '2.250em' %}  {% endif %}
+      {% if size == 'larger' %}   {% assign font_size = '1.750em' %}  {% endif %}
+      {% if size == 'large' %}    {% assign font_size = '1.125em' %}  {% endif %}
+      {% if size == 'default' %}  {% assign font_size = '1.000em' %}  {% endif %}
+      {% if size == 'inherit' %}  {% assign font_size = 'inherit' %}  {% endif %}
+      {% if size == 'medium' %}   {% assign font_size = 'medium' %}   {% endif %}
+      {% if size == 'small' %}    {% assign font_size = '0.875em' %}  {% endif %}
+      {% if size == 'smaller' %}  {% assign font_size = '0.750em' %}  {% endif %}
+      {% if size == 'xsmall' %}   {% assign font_size = '0.500em' %}  {% endif %}
+      {% if size == 'x-small' %}  {% assign font_size = 'x-small' %}  {% endif %}
+      {% if size == 'xxsmall' %}  {% assign font_size = '0.375em' %}  {% endif %}
+      {% if size == 'xx-small' %} {% assign font_size = 'xx-small' %} {% endif %}
+      {% if size == 'xxxsmall' %} {% assign font_size = '0.250em' %}  {% endif %}
+    {% endif %}
+  {% else %}
+    {% capture font_size %}{{size}}px{% endcapture %}
+  {% endif %}

@@ -1,0 +1,221 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #   ~/_includes/themes/j1/procedures/posts/collate_calendar.proc
+ #  Liquid PROCEDURE to collate posts ordered like a calendar
+ #
+ #  http://jekyll.one
+ #
+ #  Copyright (C) 2022 Juergen Adams
+ #
+ #  J1 Template is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ #
+ # -----------------------------------------------------------------------------
+ #  NOTE:
+ #
+ #  Collate posts procedure. Collated posts ordered along a timeline.
+ #
+ #    Usage:
+ #
+ #        1) assign the 'posts_collate' variable to a valid array of posts
+ #        2) include the 'collate_calendar' procedure
+ #
+ #    Example:
+ #
+ #        {% assign posts_collate = site.posts %}
+ #        {% include themes/{{site.template.name}}/procedures/posts/collate_calendar.proc items=posts_collate %}
+ #
+ #    Ordering:#
+ #        Posts are displayed in reverse chronological order (descending).
+ #        For ascending chronological order:
+ #          Change the for loop to this:
+ #            => 'for post in posts_collate reversed'
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ #
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+
+{% comment %} Variables
+   ----------------------------------------------------------------------------- {% endcomment %}
+
+{% assign posts_collate  = include.items %}
+{% assign header_title   = false %}
+{% assign header_tagline = false %}
+
+
+{% comment %} Liquid procedures
+   ----------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Main
+   ----------------------------------------------------------------------------- {% endcomment %}
+
+  {% if include.header_title %}  {% assign header_title   = include.header_title %}  {% endif %}
+  {% if include.header_tagline %}{% assign header_tagline = include.header_tagline %}{% endif %}
+
+  {% if site.data.j1_config.posts_collate.provider == 'custom' %}
+    <!-- Use custom collator -->
+    {% include themes/{{site.template.name}}/procedures/posts/custom/collate_calendar %}
+  {% else %}
+    <!-- Use j1 collate calendar procedure -->
+
+      {% if header_title %}
+      <div class="row calendar-header-box">
+        <div class="text-center mb-3">
+          <h2 class="title notoc">{{header_title}}</h2>
+          {% if header_tagline %}
+          <div class="tagline">
+            <p>{{header_tagline}}</p>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endif %}
+
+    <ul class="calendar">
+    {% for post in posts_collate %}
+
+      {% capture this_year %}       {{ post.date | date: "%Y" }}{% endcapture %}
+      {% capture this_month %}      {{ post.date | date: "%B" }}{% endcapture %}
+      {% capture this_day %}        {{ post.date | date: "%d" }}{% endcapture %}
+
+      {% assign this_year   = this_year   | strip_newlines | strip %}
+      {% assign this_month  = this_month  | strip_newlines | strip %}
+      {% assign this_day    = this_day    | strip_newlines | strip %}
+
+      {% if forloop.first %}
+        {% assign previous_year   = this_year %}
+        {% assign previous_month  = this_month %}
+        {% assign previous_day    = this_day %}
+      {% endif %}
+
+      <li class="equal-height-columns">
+
+        <div class="tmtime">
+        {% if forloop.first %}
+          <h2 id="{{ 100000 | rand }}">{{this_year}}</h2>
+          <h3 id="{{ 100000 | rand }}">{{this_month}}</h3>
+          <h4 class="notoc">{{ this_day }}</h4>
+        {% elsif this_year == previous_year and this_month != previous_month %}
+          <h2 class="notoc">{{ this_year }}</h2>
+          <h3 id="{{ 100000 | rand }}">{{this_month}}</h3>
+          <h4 class="notoc">{{ this_day }}</h4>
+        {% elsif this_year == previous_year and this_month == previous_month %}
+          <h2 class="notoc">{{ this_year }}</h2>
+          <h3 class="notoc">{{ this_month }}</h3>
+          <h4 class="notoc">{{ this_day }}</h4>
+        {% elsif this_year != previous_year and this_month != previous_month %}
+          <h2 id="{{ 100000 | rand }}">{{ this_year }}</h2>
+          <h3 id="{{ 100000 | rand }}">{{previous_month}}</h3>
+          <h4 class="notoc">{{ this_day }}</h4>
+        {% elsif this_year != previous_year and this_month == previous_month %}
+          <h2 id="{{ 100000 | rand }}">{{ this_year }}</h2>
+          <h3 class="notoc">{{ this_month }}</h3>
+          <h4 class="notoc">{{ this_day }}</h4>
+        {% endif %}
+        </div>
+
+        <i class="tmicon rounded-x hidden-xs"></i>
+        <div class="tmlabel">
+           <a href="{{post.url}}#readmore"><div class="calendar-headline"><h4 id="{{ 100000 | rand }}">{{ post.title }}</h4></div></a>
+           <div class="row">
+            <!-- Collect image data from frontmatter -->
+            {% if post.image %}
+              {% assign image_name = post.image.name %}
+              {% assign image_path = post.image.path %}
+              {% if post.image.random %}
+                {% assign max_random  = image_name | regex_replace: '[a-zA-Z_-]*' %}
+                {% assign max_random  = max_random | regex_replace: '\.' %}
+                {% assign random      = max_random | rand %}
+                {% assign image_name  = image_name | regex_replace: '\d+', random %}
+              {% endif %}
+              {% capture image %}{{image_path}}/{{image_name}}{% endcapture %}
+            {% else %}
+              {% assign image = 'false' %}
+            {% endif %}
+
+            <!-- Collect icon data from frontmatter -->
+            <!-- Set the default icon|family -->
+            {% assign icon_family = 'fa' %}
+            {% if site.data.pages.builder.collate_timeline.icon %}
+              {% assign icon = site.data.pages.builder.collate_timeline.icon %}
+              {% if site.data.pages.builder.collate_timeline.icon_family == 'FontAwesome' %}
+                {% assign icon_family = 'fa' %}
+              {% endif %}
+              {% if site.data.pages.builder.collate_timeline.icon_family == 'Glyphicon' %}
+                {% assign icon_family = 'glyphicon' %}
+              {% endif %}
+            {% else %}
+              {% assign icon = 'false' %}
+            {% endif %}
+
+            {% if post.icon %}
+                {% assign icon         = post.icon.name %}
+                {% assign icon_family  = post.icon.family %}
+                {% if icon_family == 'FontAwesome' %}
+                  {% assign icon_family = 'fa' %}
+                {% endif %}
+                {% if icon_family == 'Glyphicon' %}
+                  {% assign icon_family = 'glyphicon' %}
+                {% endif %}
+            {% endif %}
+
+            {% if icon != 'false' and image == 'false' %}
+            <div class="col-md-12">
+              <i class="{{icon_family}} {{icon}} service-icon"></i>
+              <p>{{ post.excerpt }}</p>
+            </div>
+            {% endif %}
+
+            {% if icon == 'false' and image == 'false' %}
+            <div class="col-md-12">
+              <p>{{ post.excerpt }}</p>
+            </div>
+            {% endif %}
+
+            {% if image != 'false' %}
+            <div class="col-md-4">
+               <img class="img-fluid mb-2" src="{{ image }}" alt="">
+            </div>
+            <div class="col-md-8">
+              <p>{{ post.excerpt }}</p>
+            </div>
+            {% endif %}
+           </div>
+
+          <!-- Collect comment provider details -->
+          {% for sharing in site.data.pages.builder.collate_timeline.sharing_provider %}
+            {% assign provider      = sharing.provider %}
+            {% assign likes_count   = sharing.likes_count %}
+            {% assign comment_count = sharing.comment_count %}
+          {% endfor %}
+
+          <div class="calendar-footer mt-2">
+            <ul class="calendar-list-unstyled list-inline blog-info">
+              <li><i class="fa fa-clock-o"></i> {{ post.date | date: "%B %e, %Y" }} </li>
+              <!-- <li><i class="fa fa-comments-o"></i> <a href="#void"> 7 Comments</a></li> -->
+              <li><a href="#void"><i class="fa fa-comments-o"></i> 7 Comments</a></li>
+            </ul>
+              <a class="likes" href="#void"><i class="fa fa-heart"></i> 239</a>
+          </div>
+
+        </div>
+      </li>
+
+      {% capture previous_year %}   {{ post.date | date: "%Y" }}{% endcapture %}
+      {% capture previous_month %}  {{ post.date | date: "%B" }}{% endcapture %}
+      {% capture previous_day %}    {{ post.date | date: "%d" }}{% endcapture %}
+
+      {% assign previous_year   = previous_year   | strip_newlines | strip %}
+      {% assign previous_month  = previous_month  | strip_newlines | strip %}
+      {% assign previous_day    = previous_day    | strip_newlines | strip %}
+
+    {% endfor %}
+    </ul>
+  {% endif %}
+
+  <!-- Reset procedure variable -->
+  {% assign posts_collate = nil %}

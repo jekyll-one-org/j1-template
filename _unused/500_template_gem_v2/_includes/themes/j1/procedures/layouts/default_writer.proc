@@ -1,0 +1,162 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/_includes/themes/j1/procedures/layouts/default_writer.proc
+ # Liquid PROCEDURE to write|place the HTML markup for the layout DEFAULT
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #    liquid_var:  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% include themes/{{site.template.name}}/procedures/global/setup.proc %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign placement   = include.region %}
+{% assign items       = include.items  %}
+
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% for lanes in items %}
+  {% for lane in lanes %}
+
+    {% for parameters in lane %}
+      {% for parameter in parameters %}
+        {% assign data_type = parameter | is_type %}
+        {% if data_type == 'array' %}
+          {% assign key = parameter[0] %}
+          {% assign value = parameter[1] %}
+          {% if key == 'enabled' %}     {% assign enabled = value %}    {% endif %}
+          {% if key == 'region' %}      {% assign region = value %}     {% endif %}
+          {% if key == 'type' %}        {% assign type = value %}       {% endif %}
+          {% if key == 'base' %}        {% assign base = value %}       {% endif %}
+          {% if key == 'path' %}        {% assign path = value %}       {% endif %}
+          {% if key == 'file' %}        {% assign file = value %}       {% endif %}
+          {% if key == 'id' %}          {% assign id = value %}         {% endif %}
+          {% if key == 'class' %}       {% assign class = value %}      {% endif %}
+          {% if key == 'data' %}        {% assign data = value %}       {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+
+    {% comment %}  Skip all regions should NOT placed
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% unless region == placement %} {% continue %} {% endunless %}
+
+    {% comment %}  Skip all lanes DISABLED
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% if enabled %}
+
+    {% comment %} Process all REGIONS for the given layout
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% assign base = base | remove_first: '_includes/' %}
+
+    {% case region %}
+
+      {% comment %} Collect the HEAD region
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% when 'head' %}
+        {% if placement == 'head' %}
+          <!-- [INFO   ] [j1.layout.default_writer.proc         ] [ start processing: load region head, layout: {{page.layout}} ] -->
+          {% if type == 'async' %}
+            <div id="{{ id }}" class="{{ class }}"></div>
+          {% elsif type == 'sync' %}
+            {% capture path %}{{base}}/{{path}}/{{file}}{% endcapture %}
+            {% include {{ path }} region='head' %}
+          {% endif %}
+        {% endif %} {% comment %} END placement {% endcomment %}
+
+      {% comment %} Collect the BODY-NAVIGATION region
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% when 'body-navigation' %}
+        {% if placement == 'body-navigation' %}
+          <!-- [INFO   ] [j1.layout.default_writer.proc         ] [ start processing: load region body-navigation, layout: {{page.layout}} ] -->
+          {% if type == 'async' %}
+            <div id="{{ id }}" class="{{ class }}"></div>
+          {% elsif type == 'sync' %}
+            {% capture path %}{{base}}/{{path}}/{{file}}{% endcapture %}
+            {% include {{ path }} region='body-navigation' %}
+          {% endif %}
+        {% endif %}
+
+      {% comment %} Collect the BODY-HEADER region
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% when 'body-header' %}
+        {% if placement == 'body-header' %}
+          <!-- [INFO   ] [j1.layout.default_writer.proc         ] [ start processing: load region body-header, layout: {{page.layout}} ] -->
+          <!-- [INFO   ] [j1.layout.default_writer.proc         ] [ load page specific header data from yaml data file ] -->
+          {% if type == 'async' %}
+            <div id="{{ id }}" class="{{ class }}"></div>
+          {% elsif type == 'sync' %}
+            {% capture path %}{{base}}/{{path}}/{{file}}{% endcapture %}
+            {% include {{ path }} region='body-header' %}
+          {% endif %}
+        {% endif %} {% comment %} END if placement {% endcomment %}
+
+      {% comment %} Collect the BODY-FOOTER region
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% when 'body-footer' %}
+        {% if placement == 'body-footer' %}
+          <!-- [INFO   ] [j1.layout.default_writer.proc         ] [ start processing: load region body-footer, layout: {{page.layout}} ] -->
+          {% if type == 'async' %}
+            <footer id="{{ id }}" class="{{ class }}"></footer>
+          {% elsif type == 'sync' %}
+            {% capture path %}{{base}}/{{path}}/{{file}}{% endcapture %}
+            {% include {{ path }} region='body-footer' %}
+          {% endif %}
+        {% endif %} {% comment %} END if placement {% endcomment %}
+
+      {% else %}
+          {% comment %} Exception: Unknown region
+          ---------------------------------------------------------------------- {% endcomment %}
+          <div class="row mb-5">
+            <div class="col-md-6 col-md-offset-1">
+              <div class="card raised-z10 mt-5">
+                <div class="content content-danger">
+                  <h4 class="notoc">
+                    <i class="zmdi zmdi-alert-triangle zmdi-hc-3x pl-3"></i>
+                    Region <i>{{region}}</i> not allowed
+                  </h4>
+                  <h4 class="notoc card-title">Check your configuration</h4>
+                  <div class="card-description">
+                    Don't worry about this. May you've a typo in the LAYOUT
+                    configuration of this page ({{page.title}}). Check the
+                    (page) layout config file for the unsupported region. A
+                    line contains something wrong like:
+                    <br /><br /> <i>region: {{region}}</i><br /><br />
+                    Have a look at:
+                  </div>
+                  <div class="mb-5">
+                    <h5 class="notoc">_data/layout/[layout_name].yml</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+      {% endcase %}
+    {% endif %} {% comment %} END if (lane) enabled {% endcomment %}
+    <!-- [INFO   ] [j1.layout.default_writer.proc         ] [ end processing: load region head, layout: {{page.layout}} ] -->
+  {% endfor %}
+{% endfor %}
+
+{% comment %} END Process all items
+-------------------------------------------------------------------------------- {% endcomment %}
+<!-- [INFO   ] [j1.layout.default_writer.proc         ] [ placement for all lane items finished ] -->
+<!-- [DEBUG  ] [j1.layout.default_writer.proc         ] [ reset all lane items ] -->
+<!-- [INFO   ] [j1.layout.default_writer.proc         ] [ end processing ] -->
+{% assign items = nil %}
+
+

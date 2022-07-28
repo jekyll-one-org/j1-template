@@ -66,7 +66,7 @@ fab_menu_id:                            page_ctrl
 permalink:                              /pages/public/previewer/rouge/
 regenerate:                             false
 
-resources:                              [ animate, comments, clipboard, rouge ]
+resources:                              [ animate, clipboard, rouge ]
 resource_options:
   - toccer:
       collapseDepth:                    3
@@ -93,6 +93,7 @@ resource_options:
 //
 :rouge-line-class: line
 :rouge-line-id: X%i
+
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------

@@ -157,8 +157,19 @@ module J1
               J1.logger.info "#{timestamp} - GENERATE: Install patches on path #{user_path} ..."
               dest = user_path + '/gems/' + patch_gem_eventmachine + '/lib'
             end
+
             src = patch_eventmachine_source_path
-            FileUtils.cp_r(src, dest)
+
+            # Added to support Ruby V3.x.
+            if Dir.exist?(dest)
+              #             FileUtils.cp(src, dest)
+              J1.logger.info "#{timestamp} - GENERATE: Patches already installed, skip install."
+            else
+              # Create path (eventmachine-1.2.7-x64-mingw32) for Ruby V3
+              FileUtils.mkdir_p dest
+              FileUtils.cp_r(src, dest)
+              J1.logger.info "#{timestamp} - GENERATE: Install patches successful."
+            end
 
             if lib_version === '2.7'
               if options['system']

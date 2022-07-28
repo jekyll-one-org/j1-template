@@ -1,0 +1,82 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #   ~/_includes/themes/j1/procedures/components/select_icon_size.proc
+ #  Liquid PROCEDURE to calculate the CLASS for a given icon-size
+ #
+ #  https://jekyll.one
+ #
+ #  Copyright (C) 2022 Juergen Adams
+ #
+ #  J1 Template is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ #
+ # -----------------------------------------------------------------------------
+ #   Components procedure. Calculate the CLASS of an icon for a given size
+ #   for a specific icon font.
+ #
+ #    Usage:
+ #      1)  assign the 'family' and 'size' variables
+ #      2)  include the select_icon_size.proc procedure
+ #
+ #  Example:
+ #
+ #  {% capture select_icon_size %}themes/{{site.template.name}}/procedures/global/select_icon_size.proc{% endcapture %}
+ #  {% assign my_family = "MDI" %}
+ #  {% assign my_size   = "large" %}
+ #
+ #  {% include {{select_icon_size}} family=my_family size=my_size %}
+ #  {% assign my_size = {{size}} %}
+ #
+ #  or
+ #
+ #  {% include {{select_icon_size}} family="MDI" size="large" %}
+ #  {% assign my_size = {{size}} %}
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ #
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Variables
+   ------------------------------------------------------------ {% endcomment %}
+
+{% assign family = include.family | strip | downcase %}
+{% assign size   = include.size | strip | downcase %}
+
+
+{% comment %} Liquid procedures
+   ------------------------------------------------------------ {% endcomment %}
+
+
+{% comment %} Main
+   ------------------------------------------------------------ {% endcomment %}
+
+  {% if family == 'mdi' or family == 'material design icons' %}
+    {% if size == 'default' %}  {% assign size = '' %}           {% endif %}
+    {% if size == 'large' %}    {% assign size = 'mdi-18px' %}   {% endif %}
+    {% if size == 'larger' %}   {% assign size = 'mdi-24px' %}   {% endif %}
+    {% if size == 'xlarge' %}   {% assign size = 'mdi-36px' %}   {% endif %}
+    {% if size == 'xxlarge' %}  {% assign size = 'mdi-48px' %}   {% endif %}
+    {% if size == 'xxxlarge' %} {% assign size = 'mdi-48px' %}   {% endif %}
+  {% endif %}
+
+  {% if family == 'fontawesome' or family == 'fontawesome5' or family == 'fa' %}
+    {% if size == 'default' %}  {% assign size = 'fa-lg' %}     {% endif %}
+    {% if size == 'large' %}    {% assign size = 'fa-2x' %}     {% endif %}
+    {% if size == 'larger' %}   {% assign size = 'fa-3x' %}     {% endif %}
+    {% if size == 'xlarge' %}   {% assign size = 'fa-5x' %}     {% endif %}
+    {% if size == 'xxlarge' %}  {% assign size = 'fa-7x' %}     {% endif %}
+    {% if size == 'xxxlarge' %} {% assign size = 'fa-10x' %}    {% endif %}
+  {% endif %}
+
+  {% if family == 'iconify' %}
+    {% if size == 'default' %}  {% assign size = '' %}               {% endif %}
+    {% if size == 'large' %}    {% assign size = 'iconify-18px' %}   {% endif %}
+    {% if size == 'larger' %}   {% assign size = 'iconify-24px' %}   {% endif %}
+    {% if size == 'xlarge' %}   {% assign size = 'iconify-36px' %}   {% endif %}
+    {% if size == 'xxlarge' %}  {% assign size = 'iconify-48px' %}   {% endif %}
+    {% if size == 'xxxlarge' %} {% assign size = 'iconify-48px' %}   {% endif %}
+  {% endif %}
+

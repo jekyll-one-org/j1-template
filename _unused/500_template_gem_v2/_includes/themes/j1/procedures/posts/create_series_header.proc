@@ -1,0 +1,112 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_includes/themes/j1/procedures/posts/create_series_header.proc
+ #  Liquid PROCEDURE to create a series header for post series
+ #
+ #  http://jekyll.one
+ #
+ #  Copyright (C) 2022 Juergen Adams
+ #
+ #  J1 Template is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ #
+ # -----------------------------------------------------------------------------
+ #   Posts procedure. Generates ...
+ #
+ #    Usage:
+ #
+ #      1)  assign the 'page', 'post' and 'readmore' variables
+ #      2)  include the create_series_header.proc procedure
+ #
+ #    Example:
+ #
+ #      {% capture create_series_header %}themes/{{site.template.name}}/procedures/posts/create_series_header.proc{% endcapture %}
+ #      {% assign my_navigation_data = nav_data_array %}
+ #
+ #      {% include {{create_series_header}} page=page post=post %}
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{liquid_var | debug}}
+ #
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign readmore = false %}
+{% assign page     = include.page %}
+{% assign post     = include.post %}
+{% assign readmore = include.readmore %}
+
+{% comment %} i18n: language detection
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if site.language == "en" %}
+  {% assign language = "en" %}
+{% elsif site.language == "de" %}
+  {% assign language = "de" %}
+{% else %}
+  {% assign language = "en" %}
+{% endif %}
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign count = '0' %}
+{% assign idx = '0' %}
+{% assign list = '' %}
+
+{% capture open %}
+<div id="post_series">
+ <!-- series navigator block -->
+ <div class="series-navigator">
+  <div class="container content series-navigation">
+     <div class="row">
+       <div style="width: calc(100% - 5px)">
+         {% if site.language == "en" %}
+           {% assign series_heading = "This is <strong>part <<idx>> </strong> in a <strong><<count>>-part</strong> series:" %}
+         {% elsif site.language == "de" %}
+           {% assign series_heading = "indigenous ist <strong>Teil <<idx>> </strong> einer <strong><<count>>-er</strong> Serie:" %}
+         {% endif %}
+         <!-- series heading -->
+         <h4 id="blog_series_list" class="notoc mt-2 mr-2 mb-4">{{series_heading}}</h4>
+         <ul class="side-nav" style="width: calc(100% - 15px)">
+ {% endcapture %}
+         {% for post in site.posts reversed %}
+           {% if post.series == page.series %}
+             {% assign count = count | plus: 1 %}
+             {% if post.url == page.url %}
+               {% assign idx = count %}
+               {% assign excerpt = post.excerpt %}
+               {% assign excerpt_title = post.tagline|capitalize %}
+             {% endif %}
+             {% capture list_tmp %}{{list}}{% if page.url == post.url %}<li class="current" style="width: calc(100% - 5px)"><a data-proofer-ignore href="#void" style="width: calc(100% - 5px)">{{post.date|date: "%Y-%m-%d"}} · Part {{count}} · {{post.title}}</a>{% else %}<li style="width: calc(100% - 5px)"><a data-proofer-ignore href="{{site.baseurl}}{{post.url}}" style="width: calc(100% - 5px)">{{post.date|date: "%Y-%m-%d"}} · Part {{count}} · {{post.title}}</a>{% endif %}</li>{% endcapture %}
+             {% assign list = list_tmp %}
+           {% endif %}
+         {% endfor %}
+         {{open | replace: '<<count>>', count | replace: '<<idx>>', idx}}{{list}}
+         </ul>
+       </div>
+
+       <!-- place excerpt -->
+       <div class="mt-5 mr-3">
+         <h5 class="notoc series-exerpt-title">{{excerpt_title}}</h5>
+         <div class="series-exerpt">
+           <div class="paragraph mt-3">
+             <p>{{excerpt|strip_html}}</p>
+           </div>
+           {% if readmore %}
+           <div class="card-footer">
+             <a href="#readmore" class="btn btn-info pull-right smoothscroll"> <i class="mdi mdi-eye mdi-lg" style="color:#FFFFFF" %}=""></i> Read More </a>
+           </div>
+           {% endif %}
+
+         </div>
+       </div>
+     </div>
+
+   </div>
+ </div>
+</div>

@@ -1,0 +1,156 @@
+---
+regenerate:                             true
+exclude_from_search:                    true
+---
+
+{% capture cache %}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/galleries.json
+ # Liquid JSON template for ALL Galleries configured
+ #
+ # Product/Info:
+ # http://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+ # The Liquid template galleries.json is used by J1 Justified Gallery.
+ # This template is a helper that creates the gallery (JSON) data
+ # for all galleries configured (if enabled or NOT). It's used by
+ # the J1 Template Adapter to LOAD the gallery HTML markup portion
+ # via AJAX get.
+ #
+ # The Liquid template engine generates a JSON file as an object of
+ # arrays that contains all image data used by several sliders. See
+ # below the fields taken from the YAML data file:
+ # ~/_data/modules/j1_justified_gallery.yml.
+ # -----------------------------------------------------------------------------
+ # NOTE:
+ # Be careful changing the Liquid code. If the code is changed, check
+ # the integrity of the JSON data created. Corrupted JSON data makes
+ # the Javascript of an Adapter to fail and no functionality will
+ # be available for most UNCLEAR reasons.
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Process YML config data
+================================================================================ {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign modules             = site.data.modules %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment         = site.environment %}
+
+{% assign jg_config_defaults  = modules.defaults.justifiedGallery.defaults %}
+{% assign jg_config_settings  = modules.justifiedGallery.settings %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign jg_config           = jg_config_defaults | merge: jg_config_settings %}
+
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+{% comment %} Main
+================================================================================ {% endcomment %}
+
+{
+
+{% for item in jg_config.galleries %}
+  "{{ item.gallery.id }}" : [
+
+    {% if item.gallery.type == "image" %}
+      {% for image in item.gallery.images %}
+        {% assign image_no = forloop.index %}
+        {% capture image_full_path %}{{ item.gallery.images_path }}/{{ image }}{% endcapture %}
+      {
+        {% if item.gallery.captions_lightbox %}
+        {% for caption in item.gallery.captions_lightbox %}
+        {% if forloop.index == image_no %}
+        "captions_lightbox": "{{ caption }}",
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% if item.gallery.captions_gallery %}
+        {% for caption in item.gallery.captions_gallery %}
+        {% if forloop.index == image_no %}
+        "captions_gallery":  "{{ caption }}",
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        "img":               "{{ image_full_path }}"
+      }{% if forloop.last %}{% else %},{% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% if item.gallery.type == "video-html5" or item.gallery.type == "video-online"%}
+      {% for video in item.gallery.videos %}
+        {% assign image_no = forloop.index %}
+      {
+        "video":             "{{ video }}",
+        "image_path":        "{{ item.gallery.image_path }}",
+
+        {% if item.gallery.type == "video-html5" %}
+        "video_path":        "{{ item.gallery.video_path }}",
+        "video_id":          "{{ video | slugify }}",
+        {% endif %}
+
+        {% for poster in item.gallery.poster %}
+        {% if forloop.index == image_no %}
+        "poster":   	       "{{ poster }}",
+        {% endif %}
+        {% endfor %}
+
+        {% if item.gallery.captions_lightbox %}
+        {% for caption in item.gallery.captions_lightbox %}
+        {% if forloop.index == image_no %}
+        "captions_lightbox": "{{ caption }}",
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
+        {% if item.gallery.player_params %}
+        {% for params in item.gallery.player_params %}
+        {% if forloop.index == image_no %}
+        "player_params":     "{{ params }}",
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+
+        {% if item.gallery.captions_gallery %}
+        {% for caption in item.gallery.captions_gallery %}
+        {% if forloop.index == image_no %}
+        "captions_gallery":  "{{ caption }}"
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+      }{% if forloop.last %}{% else %},{% endif %}
+      {% endfor %}
+    {% endif %}
+
+  ]{% if forloop.last %}{% else %},{% endif %}
+{% endfor %}
+
+}
+
+{% endcapture %}
+{% if production %}
+  {{ cache | minifyJSON }}
+{% else %}
+  {{ cache | strip_empty_lines }}
+{% endif %}
+{% assign cache = nil %}

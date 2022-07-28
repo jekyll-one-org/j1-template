@@ -1,0 +1,740 @@
+# ------------------------------------------------------------------------------
+#  ~/_data/resources/resources.yml
+#  Configuration data to specify ALL the resources used by a site|layout
+#
+#  Product/Info:
+#  https://jekyll.one
+#
+#  Copyright (C) 2022 Juergen Adams
+#
+#  J1 Template is licensed under the MIT License.
+#  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+# NOTE:
+#   By J1 template, "Liquid Procedures" are being used intensively. To load
+#   HTML data for a layout, the loader procedure places the data based this
+#   YAML data file into the REGION specified with a LANE.
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# RESOURCE configuration settings for SYNCHRONOUS (sync) and
+# ASYNCHRONOUS (async|defer) LOAD for all LAYOUTS and (content) PAGES
+
+# ------------------------------------------------------------------------------
+# GLOBALS
+# ------------------------------------------------------------------------------
+#
+#   THE GLOBALS sequence (array) contains general parameters used for
+#   ALL resource definitions
+#
+# base_url
+# ------------------------------------------------------------------------------
+#   For J1 template, all CSS and JS resources are stored as ASSETS
+#   under ~/assets/themes/j1. To shorten the filenames to be configured,
+#   base_url points to the (base) asset path.
+#
+#   type:                           string
+#   default:                        /assets/themes/j1
+#
+# extensions
+# ------------------------------------------------------------------------------
+#   For CSS and JS resources, >>NO<< extention (.css|.js) are given
+#   for CSS and JS files configured with a RESOURCE. EXTENSIONS for
+#   CSS|JS resources are calculated AUTOMATICALLY based on the MODE
+#  (development|production) detected for a BUILD.
+#
+#   defaults
+# ------------------------------------------------------------------------------
+#     css_dev:                      css
+#     css_prod:                     min.css
+#     js_dev:                       js
+#     js_prod:                      min.js
+#
+# location
+# ------------------------------------------------------------------------------
+#   For J1 template, resources can be loaded from LOCAL assets folder
+#   (~/assets/themes/j1) OR from REMOTE using e.g. a CDN. Resources
+#   are written as LOCATORS, simple JSON objects consists in two
+#   key|value pairs. The keys are "local" or "remote" to indicate
+#   from which SOURCE a resource should be loaded from. The value
+#   each key specifies the respective source.
+#
+#   The PARAMETER location specifies the PREFERRED method to load a
+#   resource. If the location is set to (preferred) REMOTE but NO
+#   key|value pair is given for REMOTE, the VALUE from key LOCAL is
+#   taken as a FALLBACK. If NO key LOCAL is available, loading the
+#   resource will FAIL.
+#
+#   Example:
+#
+#    [
+#      { local:  "framework/jquery/base/jquery-3.2.1",
+#        remote: "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery"
+#      },
+#      { local:  "framework/jquery/cookie/js/cookie-1.4.1",
+#        remote: "https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie"
+#      },
+#      ...
+#    ]
+#
+#
+#   NOTE:
+#   The key|value pair for LOCAL should ALWAYS specified, respectively
+#   ALL resources should be available locally at least. This allows to
+#   run a website from local with NO internet access e.g for home or privat
+#   use.
+#
+#   NOTE:
+#   To load resources from REMOTE, access to the INTERNET is needed.
+#
+#   type:                           string (local|remote)
+#   default:                        local
+#
+# ------------------------------------------------------------------------------
+# RESOURCES
+# ------------------------------------------------------------------------------
+#
+#   THE RESOURCES sequence (array) contains collections of configuration
+#   parameters EACH resource for a specific LAYOUT and|or PAGE.
+#
+# resource
+# ------------------------------------------------------------------------------
+#   The resource collection (data group) contains multiple sequences
+#   (arrays) and mappings (hashes) that DEFINES a SET of HTML
+#   components to be loaded.
+#
+# enabled
+# ------------------------------------------------------------------------------
+#   Enables|Disables the use of a resource
+#
+#   type:                           boolean
+#   values:                         true|false
+#   default:                        true
+#
+# id
+# ------------------------------------------------------------------------------
+#   Specifies the ID of a ressoure.
+#
+#   type:                           string
+#   default:                        ""
+#
+# comment
+# ------------------------------------------------------------------------------
+#   Specifies a comment TEXT displayed with the browser console
+#   if a resource has been loaded. ADDITIONALY the comment is
+#   used for commenting the generated HTML markup for easier
+#   (post mortem) code analysis.
+#
+#   type:                           string
+#   default:                        ""
+#
+# region
+# ------------------------------------------------------------------------------
+#   Specifies the REGION the resources is being loaded
+#
+#   For LOAD optimization (or suppport of older BROWSERS that
+#   does NOT support async|defer load strategies) MODULES
+#   (resources that defines css AND js|initializer) can be
+#   loaded at the END of the BODY section (REGION body-footer).
+#
+#   For resources loaded DEFER, placing that code with the
+#   REGION "body-footer" might be an option for load OPTIMIZATION.
+#
+#   By default, ALL resources are loaded with the HEAD section
+#   (REGION head) assuming modern browsers managing script
+#   loading strategies for SYNC and DEFER.
+#
+#   type:                           string
+#   values:                         head|body-footer
+#   default:                        head
+#
+# layout
+# ------------------------------------------------------------------------------
+#   Specifies the LAYOUT the resources is loaded
+#
+#   type:                           sequence (array)
+#   values:                         home|page|post|app|all
+#   default:                        []
+#
+# required
+# ------------------------------------------------------------------------------
+#   Specifies if a resource is REQUIRED (loaded) for EVERY page
+#   (always) or loaded on ondemand only (ondemand). If a resource is
+#   configured to be loaded on ondemand, the resource (load) needs
+#   to be ENABLED with the FRONTMATTER of the (content) PAGE by
+#   setting the resource ID with RESOURCES sequence (array):
+#
+#   ---
+#   ...
+#   resources:                    [ ID, .. ,ID ]
+#   ...
+#   ---
+#
+#   NOTE:
+#   Resources like MODULES (e.g lightboxes, galleries) are NOT
+#   needed for each and every (content) page. To reduce the amount
+#   of data (CSS|JS files) loaded by a page, MODULES should loaded
+#   (and initialized) on ondemand.
+#
+#   type:                           string
+#   values:                         always|ondemand
+#   default:                        always
+#
+# script_load
+# ------------------------------------------------------------------------------
+#   Specifies HOW a js resource (script) is loaded by the
+#   BROWSER
+#
+#   type:                           string
+#   values:                         sync|async|defer
+#   default:                        sync
+#
+#   NOTE:
+#   Modern web browsers support the ASYNC and DEFER attributes
+#   on JS|SCRIPTS. These attributes instructs the browser it
+#   is safe to CONTINUE parsing (the HTML code) while the scripts
+#   are being DOWNLOADED.
+#
+#   Scripts with the ASYNC attribute are executed ASYCHRONOUSLY.
+#   This means the script is EXECUTED as soon as it is DOWNLOADED
+#   without BLOCKING the browser for processing in meantime.
+#
+#   Scripts with the DEFER attribute are EXECUTED in ORDER (i.e.
+#   first script 1, then script 2). This also does no BLOCKING
+#   the browser. Unlike ASYNC scripts, DEFER scripts are only
+#   executed AFTER the ENTIRE document has been loaded.
+#
+# pass_init_data
+# ------------------------------------------------------------------------------
+#   For default, init parameters are passed to J1 Adapters. This
+#   may cause issues for some resources NOT using an J1 Adapter.
+#   Set to false, if the (native) initializer of a resource should
+#   NOT get any template specific parameters at startup.
+#
+#   type:                           boolean
+#   values:                         true|false
+#   default:                        true
+#
+# data
+# ------------------------------------------------------------------------------
+#   Specifies FONT, CSS or JS resource files to be loaded
+#
+#   NOTE:
+#   >>NO<< .css or .js extention should be given with DATA for
+#   CSS and JS files as they are calculated automatically based
+#   on the mode (development|production) detected for a BUILD.
+#   It is recommended to load Javascript and CSS files using data
+#   type js and css if possible.
+#
+#   files
+#   ----------------------------------------------------------------------------
+#   Specifies general file resources the module depends on.
+#
+#   Ressources for fonts js and css shoud be loaded as FILES
+#   if NO extension is avaiable (e.g. fonts) or ONLY minified
+#   versions (e.g. js files from commercial products) are
+#   available.
+#
+#   type:                           sequence (array)
+#   values:                         JSON object for local|remote resources
+#   default:                        []
+#
+#   css
+#   ----------------------------------------------------------------------------
+#   Specifies CSS resources (NO .css extention) the module
+#   depends on.
+#
+#   type:                           sequence (array)
+#   values:                         JSON object for local|remote CSS resources
+#   default:                        []
+#
+#   js
+#   ----------------------------------------------------------------------------
+#   Specifies JAVASCRIPT resources (NO .js extention) the
+#   module depends on.
+#
+#   type:                           sequence (array)
+#   values:                         JSON object for local|remote JS resources
+#   default:                        []
+#
+#   init_function
+#   ----------------------------------------------------------------------------
+#   Specifies the name of the (J1|Module) initializer
+#   function to be started on document-ready (event).
+#
+#   type:                           string
+#   values:                         name
+#   default:                        ""
+#
+# ------------------------------------------------------------------------------
+# Resource SKELETON
+# ------------------------------------------------------------------------------
+#
+#  # ---------------------------------------------------------------------------
+#  # RESOURCE description
+#  - resource:
+#      enabled:                      true|false
+#      id:                           resource_id
+#      comment:                      Resources for YOUR_RESOURCE_NAME
+#      region:                       head|body-footer
+#      layout:                       [ layout_name(s)|all ]
+#      required:                     always|ondemand
+#      script_load:                  sync|defer|async
+#      pass_init_data:               true|false
+#      data:
+#
+#        css:                        [
+#                                       { local:  "path/to/1/css_file",
+#                                         remote: "URL 1st css_file"
+#                                       },
+#                                       { local:  "path/to/2/css_file",
+#                                         remote: "URL 2nd css_file"
+#                                       },
+#                                       ...
+#                                    ]
+#        files:                      [
+#                                       "path/to/1/file.ext",
+#                                       "path/to/2/file.ext",
+#                                       ...
+#                                    ]
+#        js:                         [
+#                                       { local:  "path/to/1/js_file",
+#                                         remote: "URL 1st js_file"
+#                                       },
+#                                       { local:  "path/to/2/js_file",
+#                                         remote: "URL 2nd js_file"
+#                                       },
+#                                       ...
+#                                    ]
+#        init_function:              [
+#                                     INITIALIZER_NAME.INIT_METHOD_NAME,
+#                                     INITIALIZER_NAME.INIT_METHOD_NAME,
+#                                     ...
+#                                    ]
+#
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# About this configuration (used for J1 CC only)
+#
+about_config:
+  title:                                Template resource configuration
+  scope:                                Resource definitions
+  location:                             _data/j1_config.yml
+
+# ------------------------------------------------------------------------------
+# GLOBAL configuration settings
+#
+globals:
+  base_path:                            /assets/themes/j1
+  location:                             local
+  extensions:
+    css_dev:                            css
+    css_prod:                           min.css
+    js_dev:                             js
+    js_prod:                            min.js
+
+
+# ------------------------------------------------------------------------------
+# RESOURCE configuration settings
+#
+resources:
+
+# ==============================================================================
+# J1 Core Resources loaded SYCHRONOUSLY
+# ------------------------------------------------------------------------------
+
+  # ----------------------------------------------------------------------------
+  #   J1 Template Core, integrated JS Resources
+  #
+  #   no  ressource id              module_name@version
+  #   --------------------------------------------------------------------------
+  #   1   n/a                           jquery@3.2.1
+  #   2   n/a                           popper@1.12.9
+  #   3   n/a                           jquery-mousewheel@3.1.13
+  #   4   n/a                           nouislider@10.0.0
+  #   5   n/a                           js-cookie@2.2.0
+  #   6   n/a                           moment@2.19.2
+  #   7   log4javascript                log4javascript@1.4.15
+  #   8   clipboard                     clipboard@1.7.1
+  #   9   smoothscroll                  smoothscroll-for-websites@1.4.6
+  #   10  bs_material_design            bootstrap-material-design@4.0.0-beta.4
+  #   11  j1_template_4                 j1_template_4@0.0.1
+  #   12  tocbot                        tocbot@3.0.2
+  #   13  jekyll_search                 simple_jekyll_search@1.1.5
+  #   14  back2top                      back2top@1.1
+  #   15  bs_theme_switcher             bs_theme_switcher@1.1.5
+  #   16  backstretch                   backstretch@2.1.16
+  #   17  cookiebar                     cookiebar@2015-07-24
+  #   18  bootstrap_datepicker          datepicker@1.7.1
+  #   19  bs_gallery                    bs_gallery@2017-12-27
+  #
+  # ----------------------------------------------------------------------------
+  #   J1 Template Core, integrated CSS Resources
+  #   See: _sass/readme.txt
+  # ----------------------------------------------------------------------------
+  #
+  - name:                               Core Resources
+    resource:
+      id:                               core
+      enabled:                          true
+      comment:                          Core Resources used by J1 Template
+      region:                           head
+      layout:                           [ all ]
+      required:                         always
+      script_load:                      sync
+      pass_init_data:                   true
+      data:
+        css:                            [ core/css/vendor ]
+        files:                          [
+                                           core/js/adapter/template.js,
+                                           core/js/adapter/back2top.js,
+                                           core/js/adapter/logger.js,
+                                           core/js/adapter/scroller.js,
+                                           core/js/adapter/searcher.js,
+                                           core/js/adapter/switcher.js,
+                                           core/js/adapter/stickybits.js,
+                                           core/js/adapter/cookie_consent.js
+                                        ]
+        js:                             [ core/js/template ]
+        init_function:                  [
+                                          j1.init,
+                                          j1.Back2Top.init,
+                                          j1.Logger.init,
+                                          j1.Scroller.init,
+                                          j1.Searcher.init,
+                                          j1.Switcher.init,
+                                          j1.Stickybits.init,
+                                          j1.cookieConsent.init
+                                        ]
+
+  # ----------------------------------------------------------------------------
+  # J1 Master Header
+  #
+  - name:                               J1 Master Header
+    resource:
+      id:                               attic
+      enabled:                          true
+      comment:                          Resources used by Master Header
+      region:                           head
+      layout:                           [ all ]
+      required:                         always
+      script_load:                      sync
+      pass_init_data:                   true
+      data:
+        css:                            []
+        files:                          [core/js/adapter/master_header.js]
+        js:                             []
+        init_function:                  [j1.attic.init]
+
+  # ----------------------------------------------------------------------------
+  # J1 Navigator
+  #
+  - name:                               J1 Navigator
+    resource:
+      id:                               navigator
+      enabled:                          true
+      comment:                          Resources used by Navigator
+      region:                           head
+      layout:                           [ all ]
+      required:                         always
+      script_load:                      sync
+      pass_init_data:                   true
+      data:
+        css:                            []
+        files:                          [core/js/adapter/navigator.js]
+        js:                             []
+        init_function:                  [j1.Navigator.init]
+
+  # ----------------------------------------------------------------------------
+  # J1 Toccer
+  #
+  - name:                               J1 Toccer
+    resource:
+      id:                               toccer
+      enabled:                          true
+      comment:                          Resources used by Toccer
+      layout:                           [ page, post, collection, blog_archive ]
+      region:                           head
+      required:                         always
+      script_load:                      defer
+      pass_init_data:                   true
+      data:
+        css:                            []
+        files:                          [core/js/adapter/toccer.js]
+        js:                             []
+        init_function:                  [j1.Toccer.init]
+
+  # ----------------------------------------------------------------------------
+  # J1 iFrame Resizer
+  #
+  - name:                               J1 iFramer
+    resource:
+      id:                               iframer
+      enabled:                          true
+      comment:                          Resources used by iFramer
+      layout:                           [ page, post, app ]
+      region:                           head
+      required:                         ondemand
+      script_load:                      defer
+      pass_init_data:                   true
+      data:
+        css:                            []
+        files:                          [core/js/adapter/iframer.js]
+        js:                             []
+        init_function:                  [j1.IFramer.init]
+
+  # ----------------------------------------------------------------------------
+  # J1 Bootstrap Gallery
+  #
+  - name:                               J1 Bootstrap Gallery
+    resource:
+      id:                               bs_gallery
+      enabled:                          true
+      comment:                          Resources used by Bootstrap Gallery
+      layout:                           [ page, post, app ]
+      region:                           head
+      required:                         ondemand
+      script_load:                      defer
+      pass_init_data:                   true
+      data:
+        css:                            []
+        files:                          [core/js/adapter/bs_gallery.js]
+        js:                             []
+        init_function:                  [j1.BsGallery.init]
+
+  # ----------------------------------------------------------------------------
+  # J1 Lightbox (Lightbox V2)
+  #
+  - name:                               J1 Lightbox
+    resource:
+      id:                               lightbox
+      enabled:                          true
+      comment:                          Resources used by Lightbox V2
+      layout:                           [ page, post, app ]
+      region:                           head
+      required:                         ondemand
+      script_load:                      defer
+      pass_init_data:                   true
+      data:
+        css:                            []
+        files:                          [core/js/adapter/lightbox.js]
+        js:                             []
+        init_function:                  [j1.Lightbox.init]
+
+
+# ==============================================================================
+# Additional Apps and Modules - loaded SYCHRONOUSLY (sync)
+# ------------------------------------------------------------------------------
+
+  # ----------------------------------------------------------------------------
+  # Rouge (Highlighter)
+  #
+  - name:                               Rouge Highlighter
+    resource:
+      id:                               rouge
+      enabled:                          true
+      comment:                          Theme CSS resources used by Rouge
+      region:                           head
+      layout:                           [ all ]
+      required:                         always
+      script_load:                      sync
+      pass_init_data:                   false
+      data:
+        css:                            []
+        files:                          [extensions/rouge/css/base16/theme.css]
+        js:                             []
+        init_function:                  []
+
+  # ----------------------------------------------------------------------------
+  # Stickyfill (CSS polyfill, https://github.com/wilddeer/stickyfill)
+  #
+  - name:                               Stickyfill
+    resource:
+      id:                               stickyfill
+      enabled:                          true
+      comment:                          Polyfill for CSS position sticky
+      region:                           head
+      layout:                           [ all ]
+      required:                         always
+      script_load:                      sync
+      pass_init_data:                   false
+      data:
+        css:                            []
+        files:                          [extensions/stickyfill/js/stickyfill.js]
+        js:                             []
+        init_function:                  []
+
+  # ----------------------------------------------------------------------------
+  # Alogolia
+  #
+  - name:                               Algolia Instantsearch
+    resource:
+      id:                               algolia
+      enabled:                          true
+      comment:                          Resources used by Algolia Instantsearch
+      region:                           head
+      layout:                           [ page, post, app ]
+      required:                         ondemand
+      script_load:                      sync
+      pass_init_data:                   false
+      data:
+        css:                            []
+        files:                          [
+                                          core/js/adapter/algolia.js,
+                                          "https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch-theme-algolia.min.css",
+                                          "https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch.min.css",
+                                          "https://cdn.jsdelivr.net/npm/instantsearch.js@2.6.0/dist/instantsearch.min.js"
+                                        ]
+        js:                             []
+        init_function:                  [j1.Algolia.init]
+
+  # ----------------------------------------------------------------------------
+  # Livereload
+  #
+  - name:                               Livereload (JS Client)
+    resource:
+      id:                               livereload
+      enabled:                          true
+      comment:                          JS Client for livereload
+      region:                           head
+      layout:                           [ all ]
+      required:                         always
+      script_load:                      sync
+      pass_init_data:                   false
+      data:
+        css:                            []
+        files:                          [ extensions/livereload/js/livereload.js ]
+        js:                             []
+        init_function:                  []
+
+
+
+# ==============================================================================
+# Additional Apps and Modules - loaded ASYCHRONOUSLY (defer)
+# ------------------------------------------------------------------------------
+
+  # ----------------------------------------------------------------------------
+  # J1 LightGallery (Lightbox used by Bootstrap Gallery|Justified Gallery)
+  #
+  - name:                               LightGallery
+    resource:
+      id:                               light_gallery
+      enabled:                          true
+      comment:                          Resources used by LightGallery
+      region:                           head
+      layout:                           [ home, page, post, raw, collection ]
+      required:                         ondemand
+      script_load:                      defer
+      pass_init_data:                   false
+      data:
+        css:                            []
+        files:                          [
+                                          extensions/lightGallery/css/lightgallery.css,
+                                          extensions/lightGallery/css/theme/uno.css,
+                                          extensions/lightGallery/css/lg-transitions.css,
+                                          extensions/lightGallery/css/lg-fb-comment-box.css,
+                                          extensions/lightGallery/js/lightgallery.js,
+                                          extensions/lightGallery/js/lg-autoplay.js,
+                                          extensions/lightGallery/js/lg-fullscreen.js,
+                                          extensions/lightGallery/js/lg-hash.js,
+                                          extensions/lightGallery/js/lg-pager.js,
+                                          extensions/lightGallery/js/lg-share.js,
+                                          extensions/lightGallery/js/lg-thumbnail.js,
+                                          extensions/lightGallery/js/lg-video.js,
+                                          extensions/lightGallery/js/lg-zoom.js,
+                                          extensions/videojs/js/video.4.12.15.min.js,
+                                          extensions/videojs/css/video-js.4.12.15.min.css,
+                                          extensions/vimeo_player/js/froogaloop2.min.js
+                                        ]
+        js:                             []
+        init_function:                  []
+
+  # ----------------------------------------------------------------------------
+  # J1 Carousel
+  #
+  - name:                               J1 Carousel
+    resource:
+      id:                               carousel
+      enabled:                          true
+      comment:                          Resources used by J1 Carousel
+      region:                           head
+      layout:                           [ home, page, post, collection ]
+      required:                         ondemand
+      script_load:                      defer
+      pass_init_data:                   true
+      data:
+        css:                            []
+        files:                          [
+                                          extensions/carousel/css/carousel.css,
+                                          extensions/carousel/css/carousel_transitions.css,
+                                          extensions/carousel/css/theme/uno.css,
+                                          extensions/carousel/js/j1_adapter_carousel.js,
+                                          extensions/carousel/js/carousel.js
+                                        ]
+        js:                             []
+        init_function:                  [j1.Carousel.init]
+
+  # ----------------------------------------------------------------------------
+  # J1 Justified Gallery
+  #
+  - name:                               J1 Justified Gallery
+    resource:
+      id:                               justified_gallery
+      enabled:                          true
+      comment:                          Resources used by Justified Gallery
+      region:                           head
+      layout:                           [ home, page, post, raw, collection ]
+      required:                         ondemand
+      script_load:                      defer
+      pass_init_data:                   true
+      data:
+        css:                            []
+        files:                          [
+                                          extensions/justified_gallery/css/justifiedGallery.css,
+                                          extensions/justified_gallery/css/theme/uno.css,
+                                          extensions/justified_gallery/js/justifiedGallery.js,
+                                          extensions/justified_gallery/js/j1_adapter_justified_gallery.js
+                                        ]
+        js:                             []
+        init_function:                  [j1.JustifiedGallery.init]
+
+  # ----------------------------------------------------------------------------
+  # DataTables
+  #
+  - name:                               DataTables
+    resource:
+      id:                               data_tables
+      enabled:                          true
+      comment:                          Resources used by DataTables
+      layout:                           [ page, post, collections ]
+      region:                           head
+      required:                         ondemand
+      script_load:                      defer
+      pass_init_data:                   false
+      data:
+        css:                            [ extensions/datatables/css/datatables ]
+        files:                          [ extensions/datatables/css/theme/uno.css ]
+        js:                             [ extensions/datatables/js/datatables ]
+        init_function:                  []
+
+  # ----------------------------------------------------------------------------
+  #  GDPR compatible Cookie Consent for J1 Template
+  #
+  - name:                               J1 CookieConsent
+    resource:
+      id:                               cookieConsent
+      enabled:                          true
+      comment:                          module cookieConsent
+      region:                           head
+      layout:                           [ all ]
+      required:                         always
+      preload:                          false                                   # property currently unused
+      script_load:                      sync
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            []
+        files:                          [ adapter/js/cookieConsent.js ]
+        js:                             [ modules/cookieConsent/js/cookieConsent ]
+        init_function:                  [ j1.adapter.cookieConsent.init ]

@@ -1,0 +1,100 @@
+# ------------------------------------------------------------------------------
+#  ~/_data/modules/j1_colorbox.yml
+#  Default configuration for J1 Colorbox module
+#
+#  Product/Info:
+#  https://jekyll.one
+#
+#  Copyright (C) 2022 Juergen Adams
+#
+#  J1 Template is licensed under the MIT License.
+#  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+#
+# ------------------------------------------------------------------------------
+
+
+# GENERAL settings
+# -------------------------------------------------------------------------
+
+# version
+# --------------------------------------------------------------------
+#   Current version of the module
+#
+#   values:                         string
+#   default:                        no defaults
+#
+version:                            0.0.1
+
+# enabled
+# --------------------------------------------------------------------
+#   Enables|Disables the use of LightGallery for the template system
+#
+enabled:                            true
+
+# -------------------------------------------------------------------
+# J1 Colorbox default settings
+#
+defaults:
+
+  # -------------------------------------------------------
+  # behavior and appearance
+  #
+  transition:                       elastic
+  speed:                            300
+  fadeOut:                          300
+  width:                            false
+  initialWidth:                     600
+  innerWidth:                       false
+  maxWidth:                         false
+  height:                           false
+  initialHeight:                    450
+  innerHeight:                      false
+  maxHeight:                        false
+  scalePhotos:                      true
+  scrolling:                        true
+  opacity:                          0.9
+  preloading:                       true
+  className:                        false
+  overlayClose:                     true
+  escKey:                           true
+  arrowKey:                         true
+  top:                              false
+  bottom:                           false
+  left:                             false
+  right:                            false
+  fixed:                            false
+  data:                             undefined
+  closeButton:                      true
+  fastIframe:                       true
+  open:                             false
+  reposition:                       true
+  loop:                             true
+  slideshow:                        false
+  slideshowAuto:                    true
+  slideshowSpeed:                   2500
+  slideshowStart:                   start slideshow
+  slideshowStop:                    stop slideshow
+  photoRegex:                       '/\.(gif|png|jp(e|g|eg)|bmp|ico|webp|jxr|svg)((#|\?).*)?$/i'
+
+  # -------------------------------------------------------
+  # alternate image paths for high-res displays
+  #
+  retinaImage:                      false
+  retinaUrl:                        false
+  retinaSuffix:                     '@2x.$1'
+
+  # -------------------------------------------------------
+  # internationalization
+  #
+  current:                          image {current} of {total}
+  previous:                         previous
+  next:                             next
+  close:                            close
+  xhrError:                         This content failed to load.
+  imgError:                         This image failed to load.
+
+  # -------------------------------------------------------
+  # accessbility
+  #
+  returnFocus:                      true
+  trapFocus:                        true

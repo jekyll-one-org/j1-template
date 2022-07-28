@@ -10,9 +10,11 @@
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
 # ------------------------------------------------------------------------------
+# WARNING: This configuration can only be used for Ruby V3
+# ------------------------------------------------------------------------------
 
 # ==============================================================================
-# 1. BUILD configuration
+# 1. BUILD configuration (Ruby V3)
 #
 # ------------------------------------------------------------------------------
 #
@@ -40,7 +42,7 @@
 #
 # ------------------------------------------------------------------------------
 #
-# environment
+# environment (Ruby V3)
 # ------------------------------------------------------------------------------
 # Sets the build environment of the website
 #
@@ -51,9 +53,9 @@ environment:                            development
 
 # version
 # ------------------------------------------------------------------------------
-#   Sets the build version of J1 Template Gem
+#   Sets the build version of J1 Template Gem (Ruby V3)
 #
-version:                                2022.4.11
+version:                                2022.3.0.rc1
 
 # version
 # ------------------------------------------------------------------------------
@@ -62,7 +64,7 @@ version:                                2022.4.11
 copyright:                              © 2022 J1 · All rights reserved
 
 # ==============================================================================
-# 2. THEME configuration
+# 2. THEME configuration (Ruby V3)
 #
 # ------------------------------------------------------------------------------
 #
@@ -74,15 +76,10 @@ copyright:                              © 2022 J1 · All rights reserved
 # components are available public at RubyGems.org.
 #
 #
-# theme (NOT set for development system)
+# theme
 # ------------------------------------------------------------------------------
-#   Sets the name of the (gem-based) theme used for Jekyll
+#   Sets the name of the (gem-based) theme used for Jekyll (Ruby V3)
 #   serve and build
-#
-#   Note: Do not change anything here because (gem-based) theme name
-#   information is bumped-in by the build process automatically
-#
-#   default:                            j1-template
 #
 theme:                                  j1-template
 
@@ -119,7 +116,7 @@ template:
   config:                               j1_config
 
 # ==============================================================================
-# 3. SITE configuration
+# 3. SITE configuration (Ruby V3)
 #
 # ------------------------------------------------------------------------------
 #
@@ -281,7 +278,7 @@ favicon:
   type:                                 image/ico
 
 # ==============================================================================
-# 4. JEKYLL specific site configuration
+# 4. JEKYLL specific site configuration (Ruby V3)
 #
 # ------------------------------------------------------------------------------
 #
@@ -527,7 +524,7 @@ whitelist:
   - jekyll-asciidoc
 
 # ==============================================================================
-# 5. PAGE configuration
+# 5. PAGE configuration (Ruby V3)
 #
 # ------------------------------------------------------------------------------
 #
@@ -669,7 +666,7 @@ defaults:
             collapseDepth:              3
 
 # ==============================================================================
-# 6. LAYOUT configuration
+# 6. LAYOUT configuration (Ruby V3)
 #
 # ------------------------------------------------------------------------------
 #

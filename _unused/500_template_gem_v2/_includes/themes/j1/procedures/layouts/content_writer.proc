@@ -1,0 +1,110 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/_includes/themes/j1/procedures/layouts/content_writer.proc
+ # Liquid PROCEDURE to load and place the content portion for J1 layouts
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #    liquid_var:  {{liquid_var | debug}}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% include themes/{{site.template.name}}/procedures/global/setup.proc %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign items           = include.items %}
+{% assign placement       = include.region %}
+
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+
+<!-- [INFO   ] [j1.layout.content_writer.proc         ] [ start processing: load CONTENT portion for layout: {{page.layout}} ] -->
+{% for lane in items %}
+  {% for items in lane %}
+
+    {% for parameters in items %}
+      {% for parameter in parameters %}
+        {% if parameter[0] %}
+          {% assign key   = parameter[0] %}
+          {% assign value = parameter[1] %}
+          {% if key == 'enabled' %}         {% assign enabled = value %}    {% endif %}
+          {% if key == 'region' %}          {% assign region = value %}     {% endif %}
+          {% if key == 'comment' %}         {% assign comment = value %}    {% endif %}
+          {% if key == 'type' %}            {% assign type = value %}       {% endif %}
+          {% if key == 'base' %}            {% assign base = value %}       {% endif %}
+          {% if key == 'path' %}            {% assign path = value %}       {% endif %}
+          {% if key == 'file' %}            {% assign file = value %}       {% endif %}
+          {% if key == 'id' %}              {% assign id = value %}         {% endif %}
+          {% if key == 'properties' %}      {% assign class = value %}      {% endif %}
+          {% if key == 'data' %}            {% assign data = value %}       {% endif %}
+        {% endif %}
+      {% endfor %}
+    {% endfor %}
+
+    {% comment %}  Skip all regions should NOT placed
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% unless region == placement %} {% continue %} {% endunless %}
+
+
+    {% comment %}  Skip all lanes DISABLED
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% if enabled %}
+
+      {% assign base = base | remove_first: '_includes/' %}
+
+      {% comment %} Process all REGIONS for the given layout
+      -------------------------------------------------------------------------- {% endcomment %}
+        {% case region %}
+
+          {% comment %} Collect the BODY-MAIN region
+          ---------------------------------------------------------------------- {% endcomment %}
+          {% when 'body-main' %}
+
+            {% if placement == 'body-main' %}
+              <!-- [INFO   ] [j1.layout.content_writer.proc         ] [ load region 'body-main' for layout: {{page.layout}} ] -->
+              {% if type == 'async' %}
+                <section id="{{id}}" class="{{class}}"></section>
+              {% elsif type == 'sync' %}
+                {% capture path %}{{base}}/{{path}}/{{file}}{% endcapture %}
+                {% include {{path}} %}
+              {% endif %}
+            {% endif %}  {% comment %} END placement {% endcomment %}
+
+          {% comment %} Collect the BODY-FOOTER region
+          ---------------------------------------------------------------------- {% endcomment %}
+          {% when 'body-footer' %}
+
+            {% if placement == 'body-footer' %}
+              <!-- [INFO   ] [j1.layout.content_writer.proc         ] [ load region body-footer for layout: {{page.layout}} ] -->
+              {% if type == 'async' %}
+                <div id="{{id}}" class="{{class}}"></div>
+              {% elsif type == 'sync' %}
+                {% capture path %}{{base}}/{{path}}/{{file}}{% endcapture %}
+                {% include {{path}} region='body-footer' %}
+              {% endif %}
+            {% endif %} {% comment %} END if placement {% endcomment %}
+
+        {% endcase %}
+
+    {% endif %} {% comment %} END if (lane) enabled {% endcomment %}
+
+  {% endfor %}
+{% endfor %}
+
+{% comment %} END Process all lane items
+-------------------------------------------------------------------------------- {% endcomment %}
+<!-- [INFO   ] [j1.layout.content_writer.proc         ] [ placement for all lane items finished ] -->
+<!-- [DEBUG  ] [j1.layout.content_writer.proc         ] [ reset all lane items ] -->
+<!-- [INFO   ] [j1.layout.content_writer.proc         ] [ end processing ] -->
+{% assign items = nil %}

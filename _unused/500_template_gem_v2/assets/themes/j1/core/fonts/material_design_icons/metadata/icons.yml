@@ -1,0 +1,5857 @@
+
+- name: access-point
+  search:
+    terms: []
+    category:
+  unicode: f002
+- name: access-point-network
+  search:
+    terms: []
+    category:
+  unicode: f003
+- name: account
+  search:
+    terms: []
+    category:
+  unicode: f004
+- name: account-alert
+  search:
+    terms: []
+    category:
+  unicode: f005
+- name: account-box
+  search:
+    terms: []
+    category:
+  unicode: f006
+- name: account-box-outline
+  search:
+    terms: []
+    category:
+  unicode: f007
+- name: account-card-details
+  search:
+    terms: []
+    category:
+  unicode: f5d2
+- name: account-check
+  search:
+    terms: []
+    category:
+  unicode: f008
+- name: account-circle
+  search:
+    terms: []
+    category:
+  unicode: f009
+- name: account-convert
+  search:
+    terms: []
+    category:
+  unicode: f00a
+- name: account-edit
+  search:
+    terms: []
+    category:
+  unicode: f6bb
+- name: account-key
+  search:
+    terms: []
+    category:
+  unicode: f00b
+- name: account-location
+  search:
+    terms: []
+    category:
+  unicode: f00c
+- name: account-minus
+  search:
+    terms: []
+    category:
+  unicode: f00d
+- name: account-multiple
+  search:
+    terms: []
+    category:
+  unicode: f00e
+- name: account-multiple-minus
+  search:
+    terms: []
+    category:
+  unicode: f5d3
+- name: account-multiple-outline
+  search:
+    terms: []
+    category:
+  unicode: f00f
+- name: account-multiple-plus
+  search:
+    terms: []
+    category:
+  unicode: f010
+- name: account-network
+  search:
+    terms: []
+    category:
+  unicode: f011
+- name: account-off
+  search:
+    terms: []
+    category:
+  unicode: f012
+- name: account-outline
+  search:
+    terms: []
+    category:
+  unicode: f013
+- name: account-plus
+  search:
+    terms: []
+    category:
+  unicode: f014
+- name: account-remove
+  search:
+    terms: []
+    category:
+  unicode: f015
+- name: account-search
+  search:
+    terms: []
+    category:
+  unicode: f016
+- name: account-settings
+  search:
+    terms: []
+    category:
+  unicode: f630
+- name: account-settings-variant
+  search:
+    terms: []
+    category:
+  unicode: f631
+- name: account-star
+  search:
+    terms: []
+    category:
+  unicode: f017
+- name: account-switch
+  search:
+    terms: []
+    category:
+  unicode: f019
+- name: adjust
+  search:
+    terms: []
+    category:
+  unicode: f01a
+- name: air-conditioner
+  search:
+    terms: []
+    category:
+  unicode: f01b
+- name: airballoon
+  search:
+    terms: []
+    category:
+  unicode: f01c
+- name: airplane
+  search:
+    terms: []
+    category:
+  unicode: f01d
+- name: airplane-landing
+  search:
+    terms: []
+    category:
+  unicode: f5d4
+- name: airplane-off
+  search:
+    terms: []
+    category:
+  unicode: f01e
+- name: airplane-takeoff
+  search:
+    terms: []
+    category:
+  unicode: f5d5
+- name: airplay
+  search:
+    terms: []
+    category:
+  unicode: f01f
+- name: alarm
+  search:
+    terms: []
+    category:
+  unicode: f020
+- name: alarm-bell
+  search:
+    terms: []
+    category:
+  unicode: f78d
+- name: alarm-check
+  search:
+    terms: []
+    category:
+  unicode: f021
+- name: alarm-light
+  search:
+    terms: []
+    category:
+  unicode: f78e
+- name: alarm-multiple
+  search:
+    terms: []
+    category:
+  unicode: f022
+- name: alarm-off
+  search:
+    terms: []
+    category:
+  unicode: f023
+- name: alarm-plus
+  search:
+    terms: []
+    category:
+  unicode: f024
+- name: alarm-snooze
+  search:
+    terms: []
+    category:
+  unicode: f68d
+- name: album
+  search:
+    terms: []
+    category:
+  unicode: f025
+- name: alert
+  search:
+    terms: []
+    category:
+  unicode: f026
+- name: alert-box
+  search:
+    terms: []
+    category:
+  unicode: f027
+- name: alert-circle
+  search:
+    terms: []
+    category:
+  unicode: f028
+- name: alert-circle-outline
+  search:
+    terms: []
+    category:
+  unicode: f5d6
+- name: alert-decagram
+  search:
+    terms: []
+    category:
+  unicode: f6bc
+- name: alert-octagon
+  search:
+    terms: []
+    category:
+  unicode: f029
+- name: alert-octagram
+  search:
+    terms: []
+    category:
+  unicode: f766
+- name: alert-outline
+  search:
+    terms: []
+    category:
+  unicode: f02a
+- name: all-inclusive
+  search:
+    terms: []
+    category:
+  unicode: f6bd
+- name: alpha
+  search:
+    terms: []
+    category:
+  unicode: f02b
+- name: alphabetical
+  search:
+    terms: []
+    category:
+  unicode: f02c
+- name: altimeter
+  search:
+    terms: []
+    category:
+  unicode: f5d7
+- name: amazon
+  search:
+    terms: []
+    category:
+  unicode: f02d
+- name: amazon-clouddrive
+  search:
+    terms: []
+    category:
+  unicode: f02e
+- name: ambulance
+  search:
+    terms: []
+    category:
+  unicode: f02f
+- name: amplifier
+  search:
+    terms: []
+    category:
+  unicode: f030
+- name: anchor
+  search:
+    terms: []
+    category:
+  unicode: f031
+- name: android
+  search:
+    terms: []
+    category:
+  unicode: f032
+- name: android-debug-bridge
+  search:
+    terms: []
+    category:
+  unicode: f033
+- name: android-head
+  search:
+    terms: []
+    category:
+  unicode: f78f
+- name: android-studio
+  search:
+    terms: []
+    category:
+  unicode: f034
+- name: angular
+  search:
+    terms: []
+    category:
+  unicode: f6b1
+- name: angularjs
+  search:
+    terms: []
+    category:
+  unicode: f6be
+- name: animation
+  search:
+    terms: []
+    category:
+  unicode: f5d8
+- name: apple
+  search:
+    terms: []
+    category:
+  unicode: f035
+- name: apple-finder
+  search:
+    terms: []
+    category:
+  unicode: f036
+- name: apple-ios
+  search:
+    terms: []
+    category:
+  unicode: f037
+- name: apple-keyboard-caps
+  search:
+    terms: []
+    category:
+  unicode: f632
+- name: apple-keyboard-command
+  search:
+    terms: []
+    category:
+  unicode: f633
+- name: apple-keyboard-control
+  search:
+    terms: []
+    category:
+  unicode: f634
+- name: apple-keyboard-option
+  search:
+    terms: []
+    category:
+  unicode: f635
+- name: apple-keyboard-shift
+  search:
+    terms: []
+    category:
+  unicode: f636
+- name: apple-mobileme
+  search:
+    terms: []
+    category:
+  unicode: f038
+- name: apple-safari
+  search:
+    terms: []
+    category:
+  unicode: f039
+- name: application
+  search:
+    terms: []
+    category:
+  unicode: f614
+- name: approval
+  search:
+    terms: []
+    category:
+  unicode: f790
+- name: apps
+  search:
+    terms: []
+    category:
+  unicode: f03b
+- name: archive
+  search:
+    terms: []
+    category:
+  unicode: f03c
+- name: arrange-bring-forward
+  search:
+    terms: []
+    category:
+  unicode: f03d
+- name: arrange-bring-to-front
+  search:
+    terms: []
+    category:
+  unicode: f03e
+- name: arrange-send-backward
+  search:
+    terms: []
+    category:
+  unicode: f03f
+- name: arrange-send-to-back
+  search:
+    terms: []
+    category:
+  unicode: f040
+- name: arrow-all
+  search:
+    terms: []
+    category:
+  unicode: f041
+- name: arrow-bottom-left
+  search:
+    terms: []
+    category:
+  unicode: f042
+- name: arrow-bottom-right
+  search:
+    terms: []
+    category:
+  unicode: f043
+- name: arrow-collapse
+  search:
+    terms: []
+    category:
+  unicode: f615
+- name: arrow-collapse-all
+  search:
+    terms: []
+    category:
+  unicode: f044
+- name: arrow-collapse-down
+  search:
+    terms: []
+    category:
+  unicode: f791
+- name: arrow-collapse-left
+  search:
+    terms: []
+    category:
+  unicode: f792
+- name: arrow-collapse-right
+  search:
+    terms: []
+    category:
+  unicode: f793
+- name: arrow-collapse-up
+  search:
+    terms: []
+    category:
+  unicode: f794
+- name: arrow-down
+  search:
+    terms: []
+    category:
+  unicode: f045
+- name: arrow-down-bold
+  search:
+    terms: []
+    category:
+  unicode: f72d
+- name: arrow-down-bold-box
+  search:
+    terms: []
+    category:
+  unicode: f72e
+- name: arrow-down-bold-box-outline
+  search:
+    terms: []
+    category:
+  unicode: f72f
+- name: arrow-down-bold-circle
+  search:
+    terms: []
+    category:
+  unicode: f047
+- name: arrow-down-bold-circle-outline
+  search:
+    terms: []
+    category:
+  unicode: f048
+- name: arrow-down-bold-unicodeagon-outline
+  search:
+    terms: []
+    category:
+  unicode: f049
+- name: arrow-down-box
+  search:
+    terms: []
+    category:
+  unicode: f6bf
+- name: arrow-down-drop-circle
+  search:
+    terms: []
+    category:
+  unicode: f04a
+- name: arrow-down-drop-circle-outline
+  search:
+    terms: []
+    category:
+  unicode: f04b
+- name: arrow-down-thick
+  search:
+    terms: []
+    category:
+  unicode: f046
+- name: arrow-expand
+  search:
+    terms: []
+    category:
+  unicode: f616
+- name: arrow-expand-all
+  search:
+    terms: []
+    category:
+  unicode: f04c
+- name: arrow-expand-down
+  search:
+    terms: []
+    category:
+  unicode: f795
+- name: arrow-expand-left
+  search:
+    terms: []
+    category:
+  unicode: f796
+- name: arrow-expand-right
+  search:
+    terms: []
+    category:
+  unicode: f797
+- name: arrow-expand-up
+  search:
+    terms: []
+    category:
+  unicode: f798
+- name: arrow-left
+  search:
+    terms: []
+    category:
+  unicode: f04d
+- name: arrow-left-bold
+  search:
+    terms: []
+    category:
+  unicode: f730
+- name: arrow-left-bold-box
+  search:
+    terms: []
+    category:
+  unicode: f731
+- name: arrow-left-bold-box-outline
+  search:
+    terms: []
+    category:
+  unicode: f732
+- name: arrow-left-bold-circle
+  search:
+    terms: []
+    category:
+  unicode: f04f
+- name: arrow-left-bold-circle-outline
+  search:
+    terms: []
+    category:
+  unicode: f050
+- name: arrow-left-bold-unicodeagon-outline
+  search:
+    terms: []
+    category:
+  unicode: f051
+- name: arrow-left-box
+  search:
+    terms: []
+    category:
+  unicode: f6c0
+- name: arrow-left-drop-circle
+  search:
+    terms: []
+    category:
+  unicode: f052
+- name: arrow-left-drop-circle-outline
+  search:
+    terms: []
+    category:
+  unicode: f053
+- name: arrow-left-thick
+  search:
+    terms: []
+    category:
+  unicode: f04e
+- name: arrow-right
+  search:
+    terms: []
+    category:
+  unicode: f054
+- name: arrow-right-bold
+  search:
+    terms: []
+    category:
+  unicode: f733
+- name: arrow-right-bold-box
+  search:
+    terms: []
+    category:
+  unicode: f734
+- name: arrow-right-bold-box-outline
+  search:
+    terms: []
+    category:
+  unicode: f735
+- name: arrow-right-bold-circle
+  search:
+    terms: []
+    category:
+  unicode: f056
+- name: arrow-right-bold-circle-outline
+  search:
+    terms: []
+    category:
+  unicode: f057
+- name: arrow-right-bold-unicodeagon-outline
+  search:
+    terms: []
+    category:
+  unicode: f058
+- name: arrow-right-box
+  search:
+    terms: []
+    category:
+  unicode: f6c1
+- name: arrow-right-drop-circle
+  search:
+    terms: []
+    category:
+  unicode: f059
+- name: arrow-right-drop-circle-outline
+  search:
+    terms: []
+    category:
+  unicode: f05a
+- name: arrow-right-thick
+  search:
+    terms: []
+    category:
+  unicode: f055
+- name: arrow-top-left
+  search:
+    terms: []
+    category:
+  unicode: f05b
+- name: arrow-top-right
+  search:
+    terms: []
+    category:
+  unicode: f05c
+- name: arrow-up
+  search:
+    terms: []
+    category:
+  unicode: f05d
+- name: arrow-up-bold
+  search:
+    terms: []
+    category:
+  unicode: f736
+- name: arrow-up-bold-box
+  search:
+    terms: []
+    category:
+  unicode: f737
+- name: arrow-up-bold-box-outline
+  search:
+    terms: []
+    category:
+  unicode: f738
+- name: arrow-up-bold-circle
+  search:
+    terms: []
+    category:
+  unicode: f05f
+- name: arrow-up-bold-circle-outline
+  search:
+    terms: []
+    category:
+  unicode: f060
+- name: arrow-up-bold-unicodeagon-outline
+  search:
+    terms: []
+    category:
+  unicode: f061
+- name: arrow-up-box
+  search:
+    terms: []
+    category:
+  unicode: f6c2
+- name: arrow-up-drop-circle
+  search:
+    terms: []
+    category:
+  unicode: f062
+- name: arrow-up-drop-circle-outline
+  search:
+    terms: []
+    category:
+  unicode: f063
+- name: arrow-up-thick
+  search:
+    terms: []
+    category:
+  unicode: f05e
+- name: assistant
+  search:
+    terms: []
+    category:
+  unicode: f064
+- name: asterisk
+  search:
+    terms: []
+    category:
+  unicode: f6c3
+- name: at
+  search:
+    terms: []
+    category:
+  unicode: f065
+- name: atom
+  search:
+    terms: []
+    category:
+  unicode: f767
+- name: attachment
+  search:
+    terms: []
+    category:
+  unicode: f066
+- name: audiobook
+  search:
+    terms: []
+    category:
+  unicode: f067
+- name: auto-fix
+  search:
+    terms: []
+    category:
+  unicode: f068
+- name: auto-upload
+  search:
+    terms: []
+    category:
+  unicode: f069
+- name: autorenew
+  search:
+    terms: []
+    category:
+  unicode: f06a
+- name: av-timer
+  search:
+    terms: []
+    category:
+  unicode: f06b
+- name: baby
+  search:
+    terms: []
+    category:
+  unicode: f06c
+- name: baby-buggy
+  search:
+    terms: []
+    category:
+  unicode: f68e
+- name: backburger
+  search:
+    terms: []
+    category:
+  unicode: f06d
+- name: backspace
+  search:
+    terms: []
+    category:
+  unicode: f06e
+- name: backup-restore
+  search:
+    terms: []
+    category:
+  unicode: f06f
+- name: bandcamp
+  search:
+    terms: []
+    category:
+  unicode: f674
+- name: bank
+  search:
+    terms: []
+    category:
+  unicode: f070
+- name: barcode
+  search:
+    terms: []
+    category:
+  unicode: f071
+- name: barcode-scan
+  search:
+    terms: []
+    category:
+  unicode: f072
+- name: barley
+  search:
+    terms: []
+    category:
+  unicode: f073
+- name: barrel
+  search:
+    terms: []
+    category:
+  unicode: f074
+- name: basecamp
+  search:
+    terms: []
+    category:
+  unicode: f075
+- name: basket
+  search:
+    terms: []
+    category:
+  unicode: f076
+- name: basket-fill
+  search:
+    terms: []
+    category:
+  unicode: f077
+- name: basket-unfill
+  search:
+    terms: []
+    category:
+  unicode: f078
+- name: battery
+  search:
+    terms: []
+    category:
+  unicode: f079
+- name: battery-10
+  search:
+    terms: []
+    category:
+  unicode: f07a
+- name: battery-20
+  search:
+    terms: []
+    category:
+  unicode: f07b
+- name: battery-30
+  search:
+    terms: []
+    category:
+  unicode: f07c
+- name: battery-40
+  search:
+    terms: []
+    category:
+  unicode: f07d
+- name: battery-50
+  search:
+    terms: []
+    category:
+  unicode: f07e
+- name: battery-60
+  search:
+    terms: []
+    category:
+  unicode: f07f
+- name: battery-70
+  search:
+    terms: []
+    category:
+  unicode: f080
+- name: battery-80
+  search:
+    terms: []
+    category:
+  unicode: f081
+- name: battery-90
+  search:
+    terms: []
+    category:
+  unicode: f082
+- name: battery-alert
+  search:
+    terms: []
+    category:
+  unicode: f083
+- name: battery-charging
+  search:
+    terms: []
+    category:
+  unicode: f084
+- name: battery-charging-100
+  search:
+    terms: []
+    category:
+  unicode: f085
+- name: battery-charging-20
+  search:
+    terms: []
+    category:
+  unicode: f086
+- name: battery-charging-30
+  search:
+    terms: []
+    category:
+  unicode: f087
+- name: battery-charging-40
+  search:
+    terms: []
+    category:
+  unicode: f088
+- name: battery-charging-60
+  search:
+    terms: []
+    category:
+  unicode: f089
+- name: battery-charging-80
+  search:
+    terms: []
+    category:
+  unicode: f08a
+- name: battery-charging-90
+  search:
+    terms: []
+    category:
+  unicode: f08b
+- name: battery-minus
+  search:
+    terms: []
+    category:
+  unicode: f08c
+- name: battery-negative
+  search:
+    terms: []
+    category:
+  unicode: f08d
+- name: battery-outline
+  search:
+    terms: []
+    category:
+  unicode: f08e
+- name: battery-plus
+  search:
+    terms: []
+    category:
+  unicode: f08f
+- name: battery-positive
+  search:
+    terms: []
+    category:
+  unicode: f090
+- name: battery-unknown
+  search:
+    terms: []
+    category:
+  unicode: f091
+- name: beach
+  search:
+    terms: []
+    category:
+  unicode: f092
+- name: beaker
+  search:
+    terms: []
+    category:
+  unicode: f68f
+- name: beats
+  search:
+    terms: []
+    category:
+  unicode: f097
+- name: beer
+  search:
+    terms: []
+    category:
+  unicode: f098
+- name: behance
+  search:
+    terms: []
+    category:
+  unicode: f099
+- name: bell
+  search:
+    terms: []
+    category:
+  unicode: f09a
+- name: bell-off
+  search:
+    terms: []
+    category:
+  unicode: f09b
+- name: bell-outline
+  search:
+    terms: []
+    category:
+  unicode: f09c
+- name: bell-plus
+  search:
+    terms: []
+    category:
+  unicode: f09d
+- name: bell-ring
+  search:
+    terms: []
+    category:
+  unicode: f09e
+- name: bell-ring-outline
+  search:
+    terms: []
+    category:
+  unicode: f09f
+- name: bell-sleep
+  search:
+    terms: []
+    category:
+  unicode: f0a0
+- name: beta
+  search:
+    terms: []
+    category:
+  unicode: f0a1
+- name: bible
+  search:
+    terms: []
+    category:
+  unicode: f0a2
+- name: bike
+  search:
+    terms: []
+    category:
+  unicode: f0a3
+- name: bing
+  search:
+    terms: []
+    category:
+  unicode: f0a4
+- name: binoculars
+  search:
+    terms: []
+    category:
+  unicode: f0a5
+- name: bio
+  search:
+    terms: []
+    category:
+  unicode: f0a6
+- name: biohazard
+  search:
+    terms: []
+    category:
+  unicode: f0a7
+- name: bitbucket
+  search:
+    terms: []
+    category:
+  unicode: f0a8
+- name: black-mesa
+  search:
+    terms: []
+    category:
+  unicode: f0a9
+- name: blackberry
+  search:
+    terms: []
+    category:
+  unicode: f0aa
+- name: blender
+  search:
+    terms: []
+    category:
+  unicode: f0ab
+- name: blinds
+  search:
+    terms: []
+    category:
+  unicode: f0ac
+- name: block-helper
+  search:
+    terms: []
+    category:
+  unicode: f0ad
+- name: blogger
+  search:
+    terms: []
+    category:
+  unicode: f0ae
+- name: bluetooth
+  search:
+    terms: []
+    category:
+  unicode: f0af
+- name: bluetooth-audio
+  search:
+    terms: []
+    category:
+  unicode: f0b0
+- name: bluetooth-connect
+  search:
+    terms: []
+    category:
+  unicode: f0b1
+- name: bluetooth-off
+  search:
+    terms: []
+    category:
+  unicode: f0b2
+- name: bluetooth-settings
+  search:
+    terms: []
+    category:
+  unicode: f0b3
+- name: bluetooth-transfer
+  search:
+    terms: []
+    category:
+  unicode: f0b4
+- name: blur
+  search:
+    terms: []
+    category:
+  unicode: f0b5
+- name: blur-linear
+  search:
+    terms: []
+    category:
+  unicode: f0b6
+- name: blur-off
+  search:
+    terms: []
+    category:
+  unicode: f0b7
+- name: blur-radial
+  search:
+    terms: []
+    category:
+  unicode: f0b8
+- name: bomb
+  search:
+    terms: []
+    category:
+  unicode: f690
+- name: bomb-off
+  search:
+    terms: []
+    category:
+  unicode: f6c4
+- name: bone
+  search:
+    terms: []
+    category:
+  unicode: f0b9
+- name: book
+  search:
+    terms: []
+    category:
+  unicode: f0ba
+- name: book-minus
+  search:
+    terms: []
+    category:
+  unicode: f5d9
+- name: book-multiple
+  search:
+    terms: []
+    category:
+  unicode: f0bb
+- name: book-multiple-variant
+  search:
+    terms: []
+    category:
+  unicode: f0bc
+- name: book-open
+  search:
+    terms: []
+    category:
+  unicode: f0bd
+- name: book-open-page-variant
+  search:
+    terms: []
+    category:
+  unicode: f5da
+- name: book-open-variant
+  search:
+    terms: []
+    category:
+  unicode: f0be
+- name: book-plus
+  search:
+    terms: []
+    category:
+  unicode: f5db
+- name: book-secure
+  search:
+    terms: []
+    category:
+  unicode: f799
+- name: book-unsecure
+  search:
+    terms: []
+    category:
+  unicode: f79a
+- name: book-variant
+  search:
+    terms: []
+    category:
+  unicode: f0bf
+- name: bookmark
+  search:
+    terms: []
+    category:
+  unicode: f0c0
+- name: bookmark-check
+  search:
+    terms: []
+    category:
+  unicode: f0c1
+- name: bookmark-music
+  search:
+    terms: []
+    category:
+  unicode: f0c2
+- name: bookmark-outline
+  search:
+    terms: []
+    category:
+  unicode: f0c3
+- name: bookmark-plus
+  search:
+    terms: []
+    category:
+  unicode: f0c5
+- name: bookmark-plus-outline
+  search:
+    terms: []
+    category:
+  unicode: f0c4
+- name: bookmark-remove
+  search:
+    terms: []
+    category:
+  unicode: f0c6
+- name: boombox
+  search:
+    terms: []
+    category:
+  unicode: f5dc
+- name: bootstrap
+  search:
+    terms: []
+    category:
+  unicode: f6c5
+- name: border-all
+  search:
+    terms: []
+    category:
+  unicode: f0c7
+- name: border-bottom
+  search:
+    terms: []
+    category:
+  unicode: f0c8
+- name: border-color
+  search:
+    terms: []
+    category:
+  unicode: f0c9
+- name: border-horizontal
+  search:
+    terms: []
+    category:
+  unicode: f0ca
+- name: border-inside
+  search:
+    terms: []
+    category:
+  unicode: f0cb
+- name: border-left
+  search:
+    terms: []
+    category:
+  unicode: f0cc
+- name: border-none
+  search:
+    terms: []
+    category:
+  unicode: f0cd
+- name: border-outside
+  search:
+    terms: []
+    category:
+  unicode: f0ce
+- name: border-right
+  search:
+    terms: []
+    category:
+  unicode: f0cf
+- name: border-style
+  search:
+    terms: []
+    category:
+  unicode: f0d0
+- name: border-top
+  search:
+    terms: []
+    category:
+  unicode: f0d1
+- name: border-vertical
+  search:
+    terms: []
+    category:
+  unicode: f0d2
+- name: bow-tie
+  search:
+    terms: []
+    category:
+  unicode: f677
+- name: bowl
+  search:
+    terms: []
+    category:
+  unicode: f617
+- name: bowling
+  search:
+    terms: []
+    category:
+  unicode: f0d3
+- name: box
+  search:
+    terms: []
+    category:
+  unicode: f0d4
+- name: box-cutter
+  search:
+    terms: []
+    category:
+  unicode: f0d5
+- name: box-shadow
+  search:
+    terms: []
+    category:
+  unicode: f637
+- name: bridge
+  search:
+    terms: []
+    category:
+  unicode: f618
+- name: briefcase
+  search:
+    terms: []
+    category:
+  unicode: f0d6
+- name: briefcase-check
+  search:
+    terms: []
+    category:
+  unicode: f0d7
+- name: briefcase-download
+  search:
+    terms: []
+    category:
+  unicode: f0d8
+- name: briefcase-upload
+  search:
+    terms: []
+    category:
+  unicode: f0d9
+- name: brightness-1
+  search:
+    terms: []
+    category:
+  unicode: f0da
+- name: brightness-2
+  search:
+    terms: []
+    category:
+  unicode: f0db
+- name: brightness-3
+  search:
+    terms: []
+    category:
+  unicode: f0dc
+- name: brightness-4
+  search:
+    terms: []
+    category:
+  unicode: f0dd
+- name: brightness-5
+  search:
+    terms: []
+    category:
+  unicode: f0de
+- name: brightness-6
+  search:
+    terms: []
+    category:
+  unicode: f0df
+- name: brightness-7
+  search:
+    terms: []
+    category:
+  unicode: f0e0
+- name: brightness-auto
+  search:
+    terms: []
+    category:
+  unicode: f0e1
+- name: broom
+  search:
+    terms: []
+    category:
+  unicode: f0e2
+- name: brush
+  search:
+    terms: []
+    category:
+  unicode: f0e3
+- name: buffer
+  search:
+    terms: []
+    category:
+  unicode: f619
+- name: bug
+  search:
+    terms: []
+    category:
+  unicode: f0e4
+- name: bulletin-board
+  search:
+    terms: []
+    category:
+  unicode: f0e5
+- name: bullhorn
+  search:
+    terms: []
+    category:
+  unicode: f0e6
+- name: bullseye
+  search:
+    terms: []
+    category:
+  unicode: f5dd
+- name: burst-mode
+  search:
+    terms: []
+    category:
+  unicode: f5de
+- name: bus
+  search:
+    terms: []
+    category:
+  unicode: f0e7
+- name: bus-articulated-end
+  search:
+    terms: []
+    category:
+  unicode: f79b
+- name: bus-articulated-front
+  search:
+    terms: []
+    category:
+  unicode: f79c
+- name: bus-double-decker
+  search:
+    terms: []
+    category:
+  unicode: f79d
+- name: bus-school
+  search:
+    terms: []
+    category:
+  unicode: f79e
+- name: bus-side
+  search:
+    terms: []
+    category:
+  unicode: f79f
+- name: cached
+  search:
+    terms: []
+    category:
+  unicode: f0e8
+- name: cake
+  search:
+    terms: []
+    category:
+  unicode: f0e9
+- name: cake-layered
+  search:
+    terms: []
+    category:
+  unicode: f0ea
+- name: cake-variant
+  search:
+    terms: []
+    category:
+  unicode: f0eb
+- name: calculator
+  search:
+    terms: []
+    category:
+  unicode: f0ec
+- name: calendar
+  search:
+    terms: []
+    category:
+  unicode: f0ed
+- name: calendar-blank
+  search:
+    terms: []
+    category:
+  unicode: f0ee
+- name: calendar-check
+  search:
+    terms: []
+    category:
+  unicode: f0ef
+- name: calendar-clock
+  search:
+    terms: []
+    category:
+  unicode: f0f0
+- name: calendar-multiple
+  search:
+    terms: []
+    category:
+  unicode: f0f1
+- name: calendar-multiple-check
+  search:
+    terms: []
+    category:
+  unicode: f0f2
+- name: calendar-plus
+  search:
+    terms: []
+    category:
+  unicode: f0f3
+- name: calendar-question
+  search:
+    terms: []
+    category:
+  unicode: f691
+- name: calendar-range
+  search:
+    terms: []
+    category:
+  unicode: f678
+- name: calendar-remove
+  search:
+    terms: []
+    category:
+  unicode: f0f4
+- name: calendar-text
+  search:
+    terms: []
+    category:
+  unicode: f0f5
+- name: calendar-today
+  search:
+    terms: []
+    category:
+  unicode: f0f6
+- name: call-made
+  search:
+    terms: []
+    category:
+  unicode: f0f7
+- name: call-merge
+  search:
+    terms: []
+    category:
+  unicode: f0f8
+- name: call-missed
+  search:
+    terms: []
+    category:
+  unicode: f0f9
+- name: call-received
+  search:
+    terms: []
+    category:
+  unicode: f0fa
+- name: call-split
+  search:
+    terms: []
+    category:
+  unicode: f0fb
+- name: camcorder
+  search:
+    terms: []
+    category:
+  unicode: f0fc
+- name: camcorder-box
+  search:
+    terms: []
+    category:
+  unicode: f0fd
+- name: camcorder-box-off
+  search:
+    terms: []
+    category:
+  unicode: f0fe
+- name: camcorder-off
+  search:
+    terms: []
+    category:
+  unicode: f0ff
+- name: camera
+  search:
+    terms: []
+    category:
+  unicode: f100
+- name: camera-burst
+  search:
+    terms: []
+    category:
+  unicode: f692
+- name: camera-enhance
+  search:
+    terms: []
+    category:
+  unicode: f101
+- name: camera-front
+  search:
+    terms: []
+    category:
+  unicode: f102
+- name: camera-front-variant
+  search:
+    terms: []
+    category:
+  unicode: f103
+- name: camera-gopro
+  search:
+    terms: []
+    category:
+  unicode: f7a0
+- name: camera-iris
+  search:
+    terms: []
+    category:
+  unicode: f104
+- name: camera-metering-center
+  search:
+    terms: []
+    category:
+  unicode: f7a1
+- name: camera-metering-matrix
+  search:
+    terms: []
+    category:
+  unicode: f7a2
+- name: camera-metering-partial
+  search:
+    terms: []
+    category:
+  unicode: f7a3
+- name: camera-metering-spot
+  search:
+    terms: []
+    category:
+  unicode: f7a4
+- name: camera-off
+  search:
+    terms: []
+    category:
+  unicode: f5df
+- name: camera-party-mode
+  search:
+    terms: []
+    category:
+  unicode: f105
+- name: camera-rear
+  search:
+    terms: []
+    category:
+  unicode: f106
+- name: camera-rear-variant
+  search:
+    terms: []
+    category:
+  unicode: f107
+- name: camera-switch
+  search:
+    terms: []
+    category:
+  unicode: f108
+- name: camera-timer
+  search:
+    terms: []
+    category:
+  unicode: f109
+- name: cancel
+  search:
+    terms: []
+    category:
+  unicode: f739
+- name: candle
+  search:
+    terms: []
+    category:
+  unicode: f5e2
+- name: candycane
+  search:
+    terms: []
+    category:
+  unicode: f10a
+- name: cannabis
+  search:
+    terms: []
+    category:
+  unicode: f7a5
+- name: car
+  search:
+    terms: []
+    category:
+  unicode: f10b
+- name: car-battery
+  search:
+    terms: []
+    category:
+  unicode: f10c
+- name: car-connected
+  search:
+    terms: []
+    category:
+  unicode: f10d
+- name: car-convertable
+  search:
+    terms: []
+    category:
+  unicode: f7a6
+- name: car-estate
+  search:
+    terms: []
+    category:
+  unicode: f7a7
+- name: car-hatchback
+  search:
+    terms: []
+    category:
+  unicode: f7a8
+- name: car-pickup
+  search:
+    terms: []
+    category:
+  unicode: f7a9
+- name: car-side
+  search:
+    terms: []
+    category:
+  unicode: f7aa
+- name: car-sports
+  search:
+    terms: []
+    category:
+  unicode: f7ab
+- name: car-wash
+  search:
+    terms: []
+    category:
+  unicode: f10e
+- name: caravan
+  search:
+    terms: []
+    category:
+  unicode: f7ac
+- name: cards
+  search:
+    terms: []
+    category:
+  unicode: f638
+- name: cards-outline
+  search:
+    terms: []
+    category:
+  unicode: f639
+- name: cards-playing-outline
+  search:
+    terms: []
+    category:
+  unicode: f63a
+- name: cards-variant
+  search:
+    terms: []
+    category:
+  unicode: f6c6
+- name: carrot
+  search:
+    terms: []
+    category:
+  unicode: f10f
+- name: cart
+  search:
+    terms: []
+    category:
+  unicode: f110
+- name: cart-off
+  search:
+    terms: []
+    category:
+  unicode: f66b
+- name: cart-outline
+  search:
+    terms: []
+    category:
+  unicode: f111
+- name: cart-plus
+  search:
+    terms: []
+    category:
+  unicode: f112
+- name: case-sensitive-alt
+  search:
+    terms: []
+    category:
+  unicode: f113
+- name: cash
+  search:
+    terms: []
+    category:
+  unicode: f114
+- name: cash-100
+  search:
+    terms: []
+    category:
+  unicode: f115
+- name: cash-multiple
+  search:
+    terms: []
+    category:
+  unicode: f116
+- name: cash-usd
+  search:
+    terms: []
+    category:
+  unicode: f117
+- name: cast
+  search:
+    terms: []
+    category:
+  unicode: f118
+- name: cast-connected
+  search:
+    terms: []
+    category:
+  unicode: f119
+- name: cast-off
+  search:
+    terms: []
+    category:
+  unicode: f789
+- name: castle
+  search:
+    terms: []
+    category:
+  unicode: f11a
+- name: cat
+  search:
+    terms: []
+    category:
+  unicode: f11b
+- name: cctv
+  search:
+    terms: []
+    category:
+  unicode: f7ad
+- name: ceiling-light
+  search:
+    terms: []
+    category:
+  unicode: f768
+- name: cellphone
+  search:
+    terms: []
+    category:
+  unicode: f11c
+- name: cellphone-android
+  search:
+    terms: []
+    category:
+  unicode: f11d
+- name: cellphone-basic
+  search:
+    terms: []
+    category:
+  unicode: f11e
+- name: cellphone-dock
+  search:
+    terms: []
+    category:
+  unicode: f11f
+- name: cellphone-iphone
+  search:
+    terms: []
+    category:
+  unicode: f120
+- name: cellphone-link
+  search:
+    terms: []
+    category:
+  unicode: f121
+- name: cellphone-link-off
+  search:
+    terms: []
+    category:
+  unicode: f122
+- name: cellphone-settings
+  search:
+    terms: []
+    category:
+  unicode: f123
+- name: certificate
+  search:
+    terms: []
+    category:
+  unicode: f124
+- name: chair-school
+  search:
+    terms: []
+    category:
+  unicode: f125
+- name: chart-arc
+  search:
+    terms: []
+    category:
+  unicode: f126
+- name: chart-areaspline
+  search:
+    terms: []
+    category:
+  unicode: f127
+- name: chart-bar
+  search:
+    terms: []
+    category:
+  unicode: f128
+- name: chart-bar-stacked
+  search:
+    terms: []
+    category:
+  unicode: f769
+- name: chart-bubble
+  search:
+    terms: []
+    category:
+  unicode: f5e3
+- name: chart-donut
+  search:
+    terms: []
+    category:
+  unicode: f7ae
+- name: chart-donut-variant
+  search:
+    terms: []
+    category:
+  unicode: f7af
+- name: chart-gantt
+  search:
+    terms: []
+    category:
+  unicode: f66c
+- name: chart-histogram
+  search:
+    terms: []
+    category:
+  unicode: f129
+- name: chart-line
+  search:
+    terms: []
+    category:
+  unicode: f12a
+- name: chart-line-stacked
+  search:
+    terms: []
+    category:
+  unicode: f76a
+- name: chart-line-variant
+  search:
+    terms: []
+    category:
+  unicode: f7b0
+- name: chart-pie
+  search:
+    terms: []
+    category:
+  unicode: f12b
+- name: chart-scatterplot-unicodebin
+  search:
+    terms: []
+    category:
+  unicode: f66d
+- name: chart-timeline
+  search:
+    terms: []
+    category:
+  unicode: f66e
+- name: check
+  search:
+    terms: []
+    category:
+  unicode: f12c
+- name: check-all
+  search:
+    terms: []
+    category:
+  unicode: f12d
+- name: check-circle
+  search:
+    terms: []
+    category:
+  unicode: f5e0
+- name: check-circle-outline
+  search:
+    terms: []
+    category:
+  unicode: f5e1
+- name: checkbox-blank
+  search:
+    terms: []
+    category:
+  unicode: f12e
+- name: checkbox-blank-circle
+  search:
+    terms: []
+    category:
+  unicode: f12f
+- name: checkbox-blank-circle-outline
+  search:
+    terms: []
+    category:
+  unicode: f130
+- name: checkbox-blank-outline
+  search:
+    terms: []
+    category:
+  unicode: f131
+- name: checkbox-marked
+  search:
+    terms: []
+    category:
+  unicode: f132
+- name: checkbox-marked-circle
+  search:
+    terms: []
+    category:
+  unicode: f133
+- name: checkbox-marked-circle-outline
+  search:
+    terms: []
+    category:
+  unicode: f134
+- name: checkbox-marked-outline
+  search:
+    terms: []
+    category:
+  unicode: f135
+- name: checkbox-multiple-blank
+  search:
+    terms: []
+    category:
+  unicode: f136
+- name: checkbox-multiple-blank-circle
+  search:
+    terms: []
+    category:
+  unicode: f63b
+- name: checkbox-multiple-blank-circle-outline
+  search:
+    terms: []
+    category:
+  unicode: f63c
+- name: checkbox-multiple-blank-outline
+  search:
+    terms: []
+    category:
+  unicode: f137
+- name: checkbox-multiple-marked
+  search:
+    terms: []
+    category:
+  unicode: f138
+- name: checkbox-multiple-marked-circle
+  search:
+    terms: []
+    category:
+  unicode: f63d
+- name: checkbox-multiple-marked-circle-outline
+  search:
+    terms: []
+    category:
+  unicode: f63e
+- name: checkbox-multiple-marked-outline
+  search:
+    terms: []
+    category:
+  unicode: f139
+- name: checkerboard
+  search:
+    terms: []
+    category:
+  unicode: f13a
+- name: chemical-weapon
+  search:
+    terms: []
+    category:
+  unicode: f13b
+- name: chevron-double-down
+  search:
+    terms: []
+    category:
+  unicode: f13c
+- name: chevron-double-left
+  search:
+    terms: []
+    category:
+  unicode: f13d
+- name: chevron-double-right
+  search:
+    terms: []
+    category:
+  unicode: f13e
+- name: chevron-double-up
+  search:
+    terms: []
+    category:
+  unicode: f13f
+- name: chevron-down
+  search:
+    terms: []
+    category:
+  unicode: f140
+- name: chevron-left
+  search:
+    terms: []
+    category:
+  unicode: f141
+- name: chevron-right
+  search:
+    terms: []
+    category:
+  unicode: f142
+- name: chevron-up
+  search:
+    terms: []
+    category:
+  unicode: f143
+- name: chili-hot
+  search:
+    terms: []
+    category:
+  unicode: f7b1
+- name: chili-medium
+  search:
+    terms: []
+    category:
+  unicode: f7b2
+- name: chili-mild
+  search:
+    terms: []
+    category:
+  unicode: f7b3
+- name: chip
+  search:
+    terms: []
+    category:
+  unicode: f61a
+- name: church
+  search:
+    terms: []
+    category:
+  unicode: f144
+- name: circle
+  search:
+    terms: []
+    category:
+  unicode: f764
+- name: circle-outline
+  search:
+    terms: []
+    category:
+  unicode: f765
+- name: cisco-webex
+  search:
+    terms: []
+    category:
+  unicode: f145
+- name: city
+  search:
+    terms: []
+    category:
+  unicode: f146
+- name: clipboard
+  search:
+    terms: []
+    category:
+  unicode: f147
+- name: clipboard-account
+  search:
+    terms: []
+    category:
+  unicode: f148
+- name: clipboard-alert
+  search:
+    terms: []
+    category:
+  unicode: f149
+- name: clipboard-arrow-down
+  search:
+    terms: []
+    category:
+  unicode: f14a
+- name: clipboard-arrow-left
+  search:
+    terms: []
+    category:
+  unicode: f14b
+- name: clipboard-check
+  search:
+    terms: []
+    category:
+  unicode: f14c
+- name: clipboard-flow
+  search:
+    terms: []
+    category:
+  unicode: f6c7
+- name: clipboard-outline
+  search:
+    terms: []
+    category:
+  unicode: f14d
+- name: clipboard-plus
+  search:
+    terms: []
+    category:
+  unicode: f750
+- name: clipboard-text
+  search:
+    terms: []
+    category:
+  unicode: f14e
+- name: clippy
+  search:
+    terms: []
+    category:
+  unicode: f14f
+- name: clock
+  search:
+    terms: []
+    category:
+  unicode: f150
+- name: clock-alert
+  search:
+    terms: []
+    category:
+  unicode: f5ce
+- name: clock-end
+  search:
+    terms: []
+    category:
+  unicode: f151
+- name: clock-fast
+  search:
+    terms: []
+    category:
+  unicode: f152
+- name: clock-in
+  search:
+    terms: []
+    category:
+  unicode: f153
+- name: clock-out
+  search:
+    terms: []
+    category:
+  unicode: f154
+- name: clock-start
+  search:
+    terms: []
+    category:
+  unicode: f155
+- name: close
+  search:
+    terms: []
+    category:
+  unicode: f156
+- name: close-box
+  search:
+    terms: []
+    category:
+  unicode: f157
+- name: close-box-outline
+  search:
+    terms: []
+    category:
+  unicode: f158
+- name: close-circle
+  search:
+    terms: []
+    category:
+  unicode: f159
+- name: close-circle-outline
+  search:
+    terms: []
+    category:
+  unicode: f15a
+- name: close-network
+  search:
+    terms: []
+    category:
+  unicode: f15b
+- name: close-octagon
+  search:
+    terms: []
+    category:
+  unicode: f15c
+- name: close-octagon-outline
+  search:
+    terms: []
+    category:
+  unicode: f15d
+- name: close-outline
+  search:
+    terms: []
+    category:
+  unicode: f6c8
+- name: closed-caption
+  search:
+    terms: []
+    category:
+  unicode: f15e
+- name: cloud
+  search:
+    terms: []
+    category:
+  unicode: f15f
+- name: cloud-braces
+  search:
+    terms: []
+    category:
+  unicode: f7b4
+- name: cloud-check
+  search:
+    terms: []
+    category:
+  unicode: f160
+- name: cloud-circle
+  search:
+    terms: []
+    category:
+  unicode: f161
+- name: cloud-download
+  search:
+    terms: []
+    category:
+  unicode: f162
+- name: cloud-off-outline
+  search:
+    terms: []
+    category:
+  unicode: f164
+- name: cloud-outline
+  search:
+    terms: []
+    category:
+  unicode: f163
+- name: cloud-print
+  search:
+    terms: []
+    category:
+  unicode: f165
+- name: cloud-print-outline
+  search:
+    terms: []
+    category:
+  unicode: f166
+- name: cloud-sync
+  search:
+    terms: []
+    category:
+  unicode: f63f
+- name: cloud-tags
+  search:
+    terms: []
+    category:
+  unicode: f7b5
+- name: cloud-upload
+  search:
+    terms: []
+    category:
+  unicode: f167
+- name: code-array
+  search:
+    terms: []
+    category:
+  unicode: f168
+- name: code-braces
+  search:
+    terms: []
+    category:
+  unicode: f169
+- name: code-brackets
+  search:
+    terms: []
+    category:
+  unicode: f16a
+- name: code-equal
+  search:
+    terms: []
+    category:
+  unicode: f16b
+- name: code-greater-than
+  search:
+    terms: []
+    category:
+  unicode: f16c
+- name: code-greater-than-or-equal
+  search:
+    terms: []
+    category:
+  unicode: f16d
+- name: code-less-than
+  search:
+    terms: []
+    category:
+  unicode: f16e
+- name: code-less-than-or-equal
+  search:
+    terms: []
+    category:
+  unicode: f16f
+- name: code-not-equal
+  search:
+    terms: []
+    category:
+  unicode: f170
+- name: code-not-equal-variant
+  search:
+    terms: []
+    category:
+  unicode: f171
+- name: code-parentheses
+  search:
+    terms: []
+    category:
+  unicode: f172
+- name: code-string
+  search:
+    terms: []
+    category:
+  unicode: f173
+- name: code-tags
+  search:
+    terms: []
+    category:
+  unicode: f174
+- name: code-tags-check
+  search:
+    terms: []
+    category:
+  unicode: f693
+- name: codepen
+  search:
+    terms: []
+    category:
+  unicode: f175
+- name: coffee
+  search:
+    terms: []
+    category:
+  unicode: f176
+- name: coffee-outline
+  search:
+    terms: []
+    category:
+  unicode: f6c9
+- name: coffee-to-go
+  search:
+    terms: []
+    category:
+  unicode: f177
+- name: coin
+  search:
+    terms: []
+    category:
+  unicode: f178
+- name: coins
+  search:
+    terms: []
+    category:
+  unicode: f694
+- name: collage
+  search:
+    terms: []
+    category:
+  unicode: f640
+- name: color-helper
+  search:
+    terms: []
+    category:
+  unicode: f179
+- name: comment
+  search:
+    terms: []
+    category:
+  unicode: f17a
+- name: comment-account
+  search:
+    terms: []
+    category:
+  unicode: f17b
+- name: comment-account-outline
+  search:
+    terms: []
+    category:
+  unicode: f17c
+- name: comment-alert
+  search:
+    terms: []
+    category:
+  unicode: f17d
+- name: comment-alert-outline
+  search:
+    terms: []
+    category:
+  unicode: f17e
+- name: comment-check
+  search:
+    terms: []
+    category:
+  unicode: f17f
+- name: comment-check-outline
+  search:
+    terms: []
+    category:
+  unicode: f180
+- name: comment-multiple-outline
+  search:
+    terms: []
+    category:
+  unicode: f181
+- name: comment-outline
+  search:
+    terms: []
+    category:
+  unicode: f182
+- name: comment-plus-outline
+  search:
+    terms: []
+    category:
+  unicode: f183
+- name: comment-processing
+  search:
+    terms: []
+    category:
+  unicode: f184
+- name: comment-processing-outline
+  search:
+    terms: []
+    category:
+  unicode: f185
+- name: comment-question-outline
+  search:
+    terms: []
+    category:
+  unicode: f186
+- name: comment-remove-outline
+  search:
+    terms: []
+    category:
+  unicode: f187
+- name: comment-text
+  search:
+    terms: []
+    category:
+  unicode: f188
+- name: comment-text-outline
+  search:
+    terms: []
+    category:
+  unicode: f189
+- name: compare
+  search:
+    terms: []
+    category:
+  unicode: f18a
+- name: compass
+  search:
+    terms: []
+    category:
+  unicode: f18b
+- name: compass-outline
+  search:
+    terms: []
+    category:
+  unicode: f18c
+- name: console
+  search:
+    terms: []
+    category:
+  unicode: f18d
+- name: console-line
+  search:
+    terms: []
+    category:
+  unicode: f7b6
+- name: contact-mail
+  search:
+    terms: []
+    category:
+  unicode: f18e
+- name: contacts
+  search:
+    terms: []
+    category:
+  unicode: f6ca
+- name: content-copy
+  search:
+    terms: []
+    category:
+  unicode: f18f
+- name: content-cut
+  search:
+    terms: []
+    category:
+  unicode: f190
+- name: content-duplicate
+  search:
+    terms: []
+    category:
+  unicode: f191
+- name: content-paste
+  search:
+    terms: []
+    category:
+  unicode: f192
+- name: content-save
+  search:
+    terms: []
+    category:
+  unicode: f193
+- name: content-save-all
+  search:
+    terms: []
+    category:
+  unicode: f194
+- name: content-save-settings
+  search:
+    terms: []
+    category:
+  unicode: f61b
+- name: contrast
+  search:
+    terms: []
+    category:
+  unicode: f195
+- name: contrast-box
+  search:
+    terms: []
+    category:
+  unicode: f196
+- name: contrast-circle
+  search:
+    terms: []
+    category:
+  unicode: f197
+- name: cookie
+  search:
+    terms: []
+    category:
+  unicode: f198
+- name: copyright
+  search:
+    terms: []
+    category:
+  unicode: f5e6
+- name: corn
+  search:
+    terms: []
+    category:
+  unicode: f7b7
+- name: counter
+  search:
+    terms: []
+    category:
+  unicode: f199
+- name: cow
+  search:
+    terms: []
+    category:
+  unicode: f19a
+- name: creation
+  search:
+    terms: []
+    category:
+  unicode: f1c9
+- name: credit-card
+  search:
+    terms: []
+    category:
+  unicode: f19b
+- name: credit-card-multiple
+  search:
+    terms: []
+    category:
+  unicode: f19c
+- name: credit-card-off
+  search:
+    terms: []
+    category:
+  unicode: f5e4
+- name: credit-card-plus
+  search:
+    terms: []
+    category:
+  unicode: f675
+- name: credit-card-scan
+  search:
+    terms: []
+    category:
+  unicode: f19d
+- name: crop
+  search:
+    terms: []
+    category:
+  unicode: f19e
+- name: crop-free
+  search:
+    terms: []
+    category:
+  unicode: f19f
+- name: crop-landscape
+  search:
+    terms: []
+    category:
+  unicode: f1a0
+- name: crop-portrait
+  search:
+    terms: []
+    category:
+  unicode: f1a1
+- name: crop-rotate
+  search:
+    terms: []
+    category:
+  unicode: f695
+- name: crop-square
+  search:
+    terms: []
+    category:
+  unicode: f1a2
+- name: crosshairs
+  search:
+    terms: []
+    category:
+  unicode: f1a3
+- name: crosshairs-gps
+  search:
+    terms: []
+    category:
+  unicode: f1a4
+- name: crown
+  search:
+    terms: []
+    category:
+  unicode: f1a5
+- name: cube
+  search:
+    terms: []
+    category:
+  unicode: f1a6
+- name: cube-outline
+  search:
+    terms: []
+    category:
+  unicode: f1a7
+- name: cube-send
+  search:
+    terms: []
+    category:
+  unicode: f1a8
+- name: cube-unfolded
+  search:
+    terms: []
+    category:
+  unicode: f1a9
+- name: cup
+  search:
+    terms: []
+    category:
+  unicode: f1aa
+- name: cup-off
+  search:
+    terms: []
+    category:
+  unicode: f5e5
+- name: cup-water
+  search:
+    terms: []
+    category:
+  unicode: f1ab
+- name: currency-btc
+  search:
+    terms: []
+    category:
+  unicode: f1ac
+- name: currency-chf
+  search:
+    terms: []
+    category:
+  unicode: f7b8
+- name: currency-cny
+  search:
+    terms: []
+    category:
+  unicode: f7b9
+- name: currency-eth
+  search:
+    terms: []
+    category:
+  unicode: f7ba
+- name: currency-eur
+  search:
+    terms: []
+    category:
+  unicode: f1ad
+- name: currency-gbp
+  search:
+    terms: []
+    category:
+  unicode: f1ae
+- name: currency-inr
+  search:
+    terms: []
+    category:
+  unicode: f1af
+- name: currency-jpy
+  search:
+    terms: []
+    category:
+  unicode: f7bb
+- name: currency-krw
+  search:
+    terms: []
+    category:
+  unicode: f7bc
+- name: currency-ngn
+  search:
+    terms: []
+    category:
+  unicode: f1b0
+- name: currency-rub
+  search:
+    terms: []
+    category:
+  unicode: f1b1
+- name: currency-sign
+  search:
+    terms: []
+    category:
+  unicode: f7bd
+- name: currency-try
+  search:
+    terms: []
+    category:
+  unicode: f1b2
+- name: currency-twd
+  search:
+    terms: []
+    category:
+  unicode: f7be
+- name: currency-usd
+  search:
+    terms: []
+    category:
+  unicode: f1b3
+- name: currency-usd-off
+  search:
+    terms: []
+    category:
+  unicode: f679
+- name: cursor-default
+  search:
+    terms: []
+    category:
+  unicode: f1b4
+- name: cursor-default-outline
+  search:
+    terms: []
+    category:
+  unicode: f1b5
+- name: cursor-move
+  search:
+    terms: []
+    category:
+  unicode: f1b6
+- name: cursor-pointer
+  search:
+    terms: []
+    category:
+  unicode: f1b7
+- name: cursor-text
+  search:
+    terms: []
+    category:
+  unicode: f5e7
+- name: database
+  unicode: f1b8
+- name: database-minus
+  unicode: f1b9
+- name: database-plus
+  unicode: f1ba
+- name: debug-step-into
+  unicode: f1bb
+- name: debug-step-out
+  unicode: f1bc
+- name: debug-step-over
+  unicode: f1bd
+- name: decagram
+  unicode: f76b
+- name: decagram-outline
+  unicode: f76c
+- name: decimal-decrease
+  unicode: f1be
+- name: decimal-increase
+  unicode: f1bf
+- name: delete
+  unicode: f1c0
+- name: delete-circle
+  unicode: f682
+- name: delete-empty
+  unicode: f6cb
+- name: delete-forever
+  unicode: f5e8
+- name: delete-sweep
+  unicode: f5e9
+- name: delete-variant
+  unicode: f1c1
+- name: delta
+  unicode: f1c2
+- name: deskphone
+  unicode: f1c3
+- name: desktop-classic
+  unicode: f7bf
+- name: desktop-mac
+  unicode: f1c4
+- name: desktop-tower
+  unicode: f1c5
+- name: details
+  unicode: f1c6
+- name: developer-board
+  unicode: f696
+- name: deviantart
+  unicode: f1c7
+- name: dialpad
+  unicode: f61c
+- name: diamond
+  unicode: f1c8
+- name: dice-1
+  unicode: f1ca
+- name: dice-2
+  unicode: f1cb
+- name: dice-3
+  unicode: f1cc
+- name: dice-4
+  unicode: f1cd
+- name: dice-5
+  unicode: f1ce
+- name: dice-6
+  unicode: f1cf
+- name: dice-d10
+  unicode: f76e
+- name: dice-d20
+  unicode: f5ea
+- name: dice-d4
+  unicode: f5eb
+- name: dice-d6
+  unicode: f5ec
+- name: dice-d8
+  unicode: f5ed
+- name: dice-multiple
+  unicode: f76d
+- name: dictionary
+  unicode: f61d
+- name: dip-switch
+  unicode: f7c0
+- name: directions
+  unicode: f1d0
+- name: directions-fork
+  unicode: f641
+- name: discord
+  unicode: f66f
+- name: disk
+  unicode: f5ee
+- name: disk-alert
+  unicode: f1d1
+- name: disqus
+  unicode: f1d2
+- name: disqus-outline
+  unicode: f1d3
+- name: division
+  unicode: f1d4
+- name: division-box
+  unicode: f1d5
+- name: dna
+  unicode: f683
+- name: dns
+  unicode: f1d6
+- name: do-not-disturb
+  unicode: f697
+- name: do-not-disturb-off
+  unicode: f698
+- name: dolby
+  unicode: f6b2
+- name: domain
+  unicode: f1d7
+- name: donkey
+  unicode: f7c1
+- name: dots-horizontal
+  unicode: f1d8
+- name: dots-horizontal-circle
+  unicode: f7c2
+- name: dots-vertical
+  unicode: f1d9
+- name: dots-vertical-circle
+  unicode: f7c3
+- name: douban
+  unicode: f699
+- name: download
+  unicode: f1da
+- name: download-network
+  unicode: f6f3
+- name: drag
+  unicode: f1db
+- name: drag-horizontal
+  unicode: f1dc
+- name: drag-vertical
+  unicode: f1dd
+- name: drawing
+  unicode: f1de
+- name: drawing-box
+  unicode: f1df
+- name: dribbble
+  unicode: f1e0
+- name: dribbble-box
+  unicode: f1e1
+- name: drone
+  unicode: f1e2
+- name: dropbox
+  unicode: f1e3
+- name: drupal
+  unicode: f1e4
+- name: duck
+  unicode: f1e5
+- name: dumbbell
+  unicode: f1e6
+- name: ear-hearing
+  unicode: f7c4
+- name: earth
+  unicode: f1e7
+- name: earth-box
+  unicode: f6cc
+- name: earth-box-off
+  unicode: f6cd
+- name: earth-off
+  unicode: f1e8
+- name: edge
+  unicode: f1e9
+- name: eject
+  unicode: f1ea
+- name: elephant
+  unicode: f7c5
+- name: elevation-decline
+  unicode: f1eb
+- name: elevation-rise
+  unicode: f1ec
+- name: elevator
+  unicode: f1ed
+- name: email
+  unicode: f1ee
+- name: email-alert
+  unicode: f6ce
+- name: email-open
+  unicode: f1ef
+- name: email-open-outline
+  unicode: f5ef
+- name: email-outline
+  unicode: f1f0
+- name: email-secure
+  unicode: f1f1
+- name: email-variant
+  unicode: f5f0
+- name: emby
+  unicode: f6b3
+- name: emoticon
+  unicode: f1f2
+- name: emoticon-cool
+  unicode: f1f3
+- name: emoticon-dead
+  unicode: f69a
+- name: emoticon-devil
+  unicode: f1f4
+- name: emoticon-excited
+  unicode: f69b
+- name: emoticon-happy
+  unicode: f1f5
+- name: emoticon-neutral
+  unicode: f1f6
+- name: emoticon-poop
+  unicode: f1f7
+- name: emoticon-sad
+  unicode: f1f8
+- name: emoticon-tongue
+  unicode: f1f9
+- name: engine
+  unicode: f1fa
+- name: engine-outline
+  unicode: f1fb
+- name: equal
+  unicode: f1fc
+- name: equal-box
+  unicode: f1fd
+- name: eraser
+  unicode: f1fe
+- name: eraser-variant
+  unicode: f642
+- name: escalator
+  unicode: f1ff
+- name: ethernet
+  unicode: f200
+- name: ethernet-cable
+  unicode: f201
+- name: ethernet-cable-off
+  unicode: f202
+- name: etsy
+  unicode: f203
+- name: ev-station
+  unicode: f5f1
+- name: eventbrite
+  unicode: f7c6
+- name: evernote
+  unicode: f204
+- name: exclamation
+  unicode: f205
+- name: exit-to-app
+  unicode: f206
+- name: export
+  unicode: f207
+- name: eye
+  unicode: f208
+- name: eye-off
+  unicode: f209
+- name: eye-off-outline
+  unicode: f6d0
+- name: eye-outline
+  unicode: f6cf
+- name: eyedropper
+  unicode: f20a
+- name: eyedropper-variant
+  unicode: f20b
+- name: face
+  unicode: f643
+- name: face-profile
+  unicode: f644
+- name: facebook
+  unicode: f20c
+- name: facebook-box
+  unicode: f20d
+- name: facebook-messenger
+  unicode: f20e
+- name: factory
+  unicode: f20f
+- name: fan
+  unicode: f210
+- name: fast-forward
+  unicode: f211
+- name: fast-forward-outline
+  unicode: f6d1
+- name: fax
+  unicode: f212
+- name: feather
+  unicode: f6d2
+- name: ferry
+  unicode: f213
+- name: file
+  unicode: f214
+- name: file-account
+  unicode: f73a
+- name: file-chart
+  unicode: f215
+- name: file-check
+  unicode: f216
+- name: file-cloud
+  unicode: f217
+- name: file-delimited
+  unicode: f218
+- name: file-document
+  unicode: f219
+- name: file-document-box
+  unicode: f21a
+- name: file-excel
+  unicode: f21b
+- name: file-excel-box
+  unicode: f21c
+- name: file-export
+  unicode: f21d
+- name: file-find
+  unicode: f21e
+- name: file-hidden
+  unicode: f613
+- name: file-image
+  unicode: f21f
+- name: file-import
+  unicode: f220
+- name: file-lock
+  unicode: f221
+- name: file-multiple
+  unicode: f222
+- name: file-music
+  unicode: f223
+- name: file-outline
+  unicode: f224
+- name: file-pdf
+  unicode: f225
+- name: file-pdf-box
+  unicode: f226
+- name: file-plus
+  unicode: f751
+- name: file-powerpoint
+  unicode: f227
+- name: file-powerpoint-box
+  unicode: f228
+- name: file-presentation-box
+  unicode: f229
+- name: file-restore
+  unicode: f670
+- name: file-send
+  unicode: f22a
+- name: file-tree
+  unicode: f645
+- name: file-video
+  unicode: f22b
+- name: file-word
+  unicode: f22c
+- name: file-word-box
+  unicode: f22d
+- name: file-xml
+  unicode: f22e
+- name: film
+  unicode: f22f
+- name: filmstrip
+  unicode: f230
+- name: filmstrip-off
+  unicode: f231
+- name: filter
+  unicode: f232
+- name: filter-outline
+  unicode: f233
+- name: filter-remove
+  unicode: f234
+- name: filter-remove-outline
+  unicode: f235
+- name: filter-variant
+  unicode: f236
+- name: find-replace
+  unicode: f6d3
+- name: fingerprint
+  unicode: f237
+- name: fire
+  unicode: f238
+- name: firefox
+  unicode: f239
+- name: fish
+  unicode: f23a
+- name: flag
+  unicode: f23b
+- name: flag-checkered
+  unicode: f23c
+- name: flag-outline
+  unicode: f23d
+- name: flag-outline-variant
+  unicode: f23e
+- name: flag-triangle
+  unicode: f23f
+- name: flag-variant
+  unicode: f240
+- name: flash
+  unicode: f241
+- name: flash-auto
+  unicode: f242
+- name: flash-off
+  unicode: f243
+- name: flash-outline
+  unicode: f6d4
+- name: flash-red-eye
+  unicode: f67a
+- name: flashlight
+  unicode: f244
+- name: flashlight-off
+  unicode: f245
+- name: flask
+  unicode: f093
+- name: flask-empty
+  unicode: f094
+- name: flask-empty-outline
+  unicode: f095
+- name: flask-outline
+  unicode: f096
+- name: flattr
+  unicode: f246
+- name: flip-to-back
+  unicode: f247
+- name: flip-to-front
+  unicode: f248
+- name: floppy
+  unicode: f249
+- name: flower
+  unicode: f24a
+- name: folder
+  unicode: f24b
+- name: folder-account
+  unicode: f24c
+- name: folder-download
+  unicode: f24d
+- name: folder-google-drive
+  unicode: f24e
+- name: folder-image
+  unicode: f24f
+- name: folder-lock
+  unicode: f250
+- name: folder-lock-open
+  unicode: f251
+- name: folder-move
+  unicode: f252
+- name: folder-multiple
+  unicode: f253
+- name: folder-multiple-image
+  unicode: f254
+- name: folder-multiple-outline
+  unicode: f255
+- name: folder-open
+  unicode: f76f
+- name: folder-outline
+  unicode: f256
+- name: folder-plus
+  unicode: f257
+- name: folder-remove
+  unicode: f258
+- name: folder-star
+  unicode: f69c
+- name: folder-upload
+  unicode: f259
+- name: font-awesome
+  unicode: f03a
+- name: food
+  unicode: f25a
+- name: food-apple
+  unicode: f25b
+- name: food-croissant
+  unicode: f7c7
+- name: food-fork-drink
+  unicode: f5f2
+- name: food-off
+  unicode: f5f3
+- name: food-variant
+  unicode: f25c
+- name: football
+  unicode: f25d
+- name: football-australian
+  unicode: f25e
+- name: football-helmet
+  unicode: f25f
+- name: forklift
+  unicode: f7c8
+- name: format-align-bottom
+  unicode: f752
+- name: format-align-center
+  unicode: f260
+- name: format-align-justify
+  unicode: f261
+- name: format-align-left
+  unicode: f262
+- name: format-align-middle
+  unicode: f753
+- name: format-align-right
+  unicode: f263
+- name: format-align-top
+  unicode: f754
+- name: format-annotation-plus
+  unicode: f646
+- name: format-bold
+  unicode: f264
+- name: format-clear
+  unicode: f265
+- name: format-color-fill
+  unicode: f266
+- name: format-color-text
+  unicode: f69d
+- name: format-float-center
+  unicode: f267
+- name: format-float-left
+  unicode: f268
+- name: format-float-none
+  unicode: f269
+- name: format-float-right
+  unicode: f26a
+- name: format-font
+  unicode: f6d5
+- name: format-header-1
+  unicode: f26b
+- name: format-header-2
+  unicode: f26c
+- name: format-header-3
+  unicode: f26d
+- name: format-header-4
+  unicode: f26e
+- name: format-header-5
+  unicode: f26f
+- name: format-header-6
+  unicode: f270
+- name: format-header-decrease
+  unicode: f271
+- name: format-header-equal
+  unicode: f272
+- name: format-header-increase
+  unicode: f273
+- name: format-header-pound
+  unicode: f274
+- name: format-horizontal-align-center
+  unicode: f61e
+- name: format-horizontal-align-left
+  unicode: f61f
+- name: format-horizontal-align-right
+  unicode: f620
+- name: format-indent-decrease
+  unicode: f275
+- name: format-indent-increase
+  unicode: f276
+- name: format-italic
+  unicode: f277
+- name: format-line-spacing
+  unicode: f278
+- name: format-line-style
+  unicode: f5c8
+- name: format-line-weight
+  unicode: f5c9
+- name: format-list-bulleted
+  unicode: f279
+- name: format-list-bulleted-type
+  unicode: f27a
+- name: format-list-checks
+  unicode: f755
+- name: format-list-numbers
+  unicode: f27b
+- name: format-page-break
+  unicode: f6d6
+- name: format-paint
+  unicode: f27c
+- name: format-paragraph
+  unicode: f27d
+- name: format-pilcrow
+  unicode: f6d7
+- name: format-quote-close
+  unicode: f27e
+- name: format-quote-open
+  unicode: f756
+- name: format-rotate-90
+  unicode: f6a9
+- name: format-section
+  unicode: f69e
+- name: format-size
+  unicode: f27f
+- name: format-strikethrough
+  unicode: f280
+- name: format-strikethrough-variant
+  unicode: f281
+- name: format-subscript
+  unicode: f282
+- name: format-superscript
+  unicode: f283
+- name: format-text
+  unicode: f284
+- name: format-textdirection-l-to-r
+  unicode: f285
+- name: format-textdirection-r-to-l
+  unicode: f286
+- name: format-title
+  unicode: f5f4
+- name: format-underline
+  unicode: f287
+- name: format-vertical-align-bottom
+  unicode: f621
+- name: format-vertical-align-center
+  unicode: f622
+- name: format-vertical-align-top
+  unicode: f623
+- name: format-wrap-inline
+  unicode: f288
+- name: format-wrap-square
+  unicode: f289
+- name: format-wrap-tight
+  unicode: f28a
+- name: format-wrap-top-bottom
+  unicode: f28b
+- name: forum
+  unicode: f28c
+- name: forward
+  unicode: f28d
+- name: foursquare
+  unicode: f28e
+- name: fridge
+  unicode: f28f
+- name: fridge-filled
+  unicode: f290
+- name: fridge-filled-bottom
+  unicode: f291
+- name: fridge-filled-top
+  unicode: f292
+- name: fuel
+  unicode: f7c9
+- name: fullscreen
+  unicode: f293
+- name: fullscreen-exit
+  unicode: f294
+- name: function
+  unicode: f295
+- name: gamepad
+  unicode: f296
+- name: gamepad-variant
+  unicode: f297
+- name: garage
+  unicode: f6d8
+- name: garage-open
+  unicode: f6d9
+- name: gas-cylinder
+  unicode: f647
+- name: gas-station
+  unicode: f298
+- name: gate
+  unicode: f299
+- name: gauge
+  unicode: f29a
+- name: gavel
+  unicode: f29b
+- name: gender-female
+  unicode: f29c
+- name: gender-male
+  unicode: f29d
+- name: gender-male-female
+  unicode: f29e
+- name: gender-transgender
+  unicode: f29f
+- name: gesture
+  unicode: f7ca
+- name: gesture-double-tap
+  unicode: f73b
+- name: gesture-swipe-down
+  unicode: f73c
+- name: gesture-swipe-left
+  unicode: f73d
+- name: gesture-swipe-right
+  unicode: f73e
+- name: gesture-swipe-up
+  unicode: f73f
+- name: gesture-tap
+  unicode: f740
+- name: gesture-two-double-tap
+  unicode: f741
+- name: gesture-two-tap
+  unicode: f742
+- name: ghost
+  unicode: f2a0
+- name: gift
+  unicode: f2a1
+- name: git
+  unicode: f2a2
+- name: github-box
+  unicode: f2a3
+- name: github-circle
+  unicode: f2a4
+- name: github-face
+  unicode: f6da
+- name: glass-flute
+  unicode: f2a5
+- name: glass-mug
+  unicode: f2a6
+- name: glass-stange
+  unicode: f2a7
+- name: glass-tulip
+  unicode: f2a8
+- name: glassdoor
+  unicode: f2a9
+- name: glasses
+  unicode: f2aa
+- name: gmail
+  unicode: f2ab
+- name: gnome
+  unicode: f2ac
+- name: gondola
+  unicode: f685
+- name: google
+  unicode: f2ad
+- name: google-analytics
+  unicode: f7cb
+- name: google-assistant
+  unicode: f7cc
+- name: google-cardboard
+  unicode: f2ae
+- name: google-chrome
+  unicode: f2af
+- name: google-circles
+  unicode: f2b0
+- name: google-circles-communities
+  unicode: f2b1
+- name: google-circles-extended
+  unicode: f2b2
+- name: google-circles-group
+  unicode: f2b3
+- name: google-controller
+  unicode: f2b4
+- name: google-controller-off
+  unicode: f2b5
+- name: google-drive
+  unicode: f2b6
+- name: google-earth
+  unicode: f2b7
+- name: google-glass
+  unicode: f2b8
+- name: google-keep
+  unicode: f6db
+- name: google-maps
+  unicode: f5f5
+- name: google-nearby
+  unicode: f2b9
+- name: google-pages
+  unicode: f2ba
+- name: google-photos
+  unicode: f6dc
+- name: google-physical-web
+  unicode: f2bb
+- name: google-play
+  unicode: f2bc
+- name: google-plus
+  unicode: f2bd
+- name: google-plus-box
+  unicode: f2be
+- name: google-translate
+  unicode: f2bf
+- name: google-wallet
+  unicode: f2c0
+- name: gradient
+  unicode: f69f
+- name: grease-pencil
+  unicode: f648
+- name: grid
+  unicode: f2c1
+- name: grid-large
+  unicode: f757
+- name: grid-off
+  unicode: f2c2
+- name: group
+  unicode: f2c3
+- name: guitar-acoustic
+  unicode: f770
+- name: guitar-electric
+  unicode: f2c4
+- name: guitar-pick
+  unicode: f2c5
+- name: guitar-pick-outline
+  unicode: f2c6
+- name: hackernews
+  unicode: f624
+- name: hamburger
+  unicode: f684
+- name: hand-pointing-right
+  unicode: f2c7
+- name: hanger
+  unicode: f2c8
+- name: hangouts
+  unicode: f2c9
+- name: harddisk
+  unicode: f2ca
+- name: headphones
+  unicode: f2cb
+- name: headphones-box
+  unicode: f2cc
+- name: headphones-off
+  unicode: f7cd
+- name: headphones-settings
+  unicode: f2cd
+- name: headset
+  unicode: f2ce
+- name: headset-dock
+  unicode: f2cf
+- name: headset-off
+  unicode: f2d0
+- name: heart
+  unicode: f2d1
+- name: heart-box
+  unicode: f2d2
+- name: heart-box-outline
+  unicode: f2d3
+- name: heart-broken
+  unicode: f2d4
+- name: heart-half
+  unicode: f6de
+- name: heart-half-full
+  unicode: f6dd
+- name: heart-half-outline
+  unicode: f6df
+- name: heart-off
+  unicode: f758
+- name: heart-outline
+  unicode: f2d5
+- name: heart-pulse
+  unicode: f5f6
+- name: help
+  unicode: f2d6
+- name: help-box
+  unicode: f78a
+- name: help-circle
+  unicode: f2d7
+- name: help-circle-outline
+  unicode: f625
+- name: help-network
+  unicode: f6f4
+- name: unicodeagon
+  unicode: f2d8
+- name: unicodeagon-multiple
+  unicode: f6e0
+- name: unicodeagon-outline
+  unicode: f2d9
+- name: high-definition
+  unicode: f7ce
+- name: highway
+  unicode: f5f7
+- name: history
+  unicode: f2da
+- name: hololens
+  unicode: f2db
+- name: home
+  unicode: f2dc
+- name: home-assistant
+  unicode: f7cf
+- name: home-automation
+  unicode: f7d0
+- name: home-circle
+  unicode: f7d1
+- name: home-map-marker
+  unicode: f5f8
+- name: home-modern
+  unicode: f2dd
+- name: home-outline
+  unicode: f6a0
+- name: home-variant
+  unicode: f2de
+- name: hook
+  unicode: f6e1
+- name: hook-off
+  unicode: f6e2
+- name: hops
+  unicode: f2df
+- name: hospital
+  unicode: f2e0
+- name: hospital-building
+  unicode: f2e1
+- name: hospital-marker
+  unicode: f2e2
+- name: hotel
+  unicode: f2e3
+- name: houzz
+  unicode: f2e4
+- name: houzz-box
+  unicode: f2e5
+- name: human
+  unicode: f2e6
+- name: human-child
+  unicode: f2e7
+- name: human-female
+  unicode: f649
+- name: human-greeting
+  unicode: f64a
+- name: human-handsdown
+  unicode: f64b
+- name: human-handsup
+  unicode: f64c
+- name: human-male
+  unicode: f64d
+- name: human-male-female
+  unicode: f2e8
+- name: human-pregnant
+  unicode: f5cf
+- name: humble-bundle
+  unicode: f743
+- name: image
+  unicode: f2e9
+- name: image-album
+  unicode: f2ea
+- name: image-area
+  unicode: f2eb
+- name: image-area-close
+  unicode: f2ec
+- name: image-broken
+  unicode: f2ed
+- name: image-broken-variant
+  unicode: f2ee
+- name: image-filter
+  unicode: f2ef
+- name: image-filter-black-white
+  unicode: f2f0
+- name: image-filter-center-focus
+  unicode: f2f1
+- name: image-filter-center-focus-weak
+  unicode: f2f2
+- name: image-filter-drama
+  unicode: f2f3
+- name: image-filter-frames
+  unicode: f2f4
+- name: image-filter-hdr
+  unicode: f2f5
+- name: image-filter-none
+  unicode: f2f6
+- name: image-filter-tilt-shift
+  unicode: f2f7
+- name: image-filter-vintage
+  unicode: f2f8
+- name: image-multiple
+  unicode: f2f9
+- name: import
+  unicode: f2fa
+- name: inbox
+  unicode: f686
+- name: inbox-arrow-down
+  unicode: f2fb
+- name: inbox-arrow-up
+  unicode: f3d1
+- name: incognito
+  unicode: f5f9
+- name: infinity
+  unicode: f6e3
+- name: information
+  unicode: f2fc
+- name: information-outline
+  unicode: f2fd
+- name: information-variant
+  unicode: f64e
+- name: instagram
+  unicode: f2fe
+- name: instapaper
+  unicode: f2ff
+- name: internet-explorer
+  unicode: f300
+- name: invert-colors
+  unicode: f301
+- name: itunes
+  unicode: f676
+- name: jeepney
+  unicode: f302
+- name: jira
+  unicode: f303
+- name: jsfiddle
+  unicode: f304
+- name: json
+  unicode: f626
+- name: keg
+  unicode: f305
+- name: kettle
+  unicode: f5fa
+- name: key
+  unicode: f306
+- name: key-change
+  unicode: f307
+- name: key-minus
+  unicode: f308
+- name: key-plus
+  unicode: f309
+- name: key-remove
+  unicode: f30a
+- name: key-variant
+  unicode: f30b
+- name: keyboard
+  unicode: f30c
+- name: keyboard-backspace
+  unicode: f30d
+- name: keyboard-caps
+  unicode: f30e
+- name: keyboard-close
+  unicode: f30f
+- name: keyboard-off
+  unicode: f310
+- name: keyboard-return
+  unicode: f311
+- name: keyboard-tab
+  unicode: f312
+- name: keyboard-variant
+  unicode: f313
+- name: kickstarter
+  unicode: f744
+- name: kodi
+  unicode: f314
+- name: label
+  unicode: f315
+- name: label-outline
+  unicode: f316
+- name: lambda
+  unicode: f627
+- name: lamp
+  unicode: f6b4
+- name: lan
+  unicode: f317
+- name: lan-connect
+  unicode: f318
+- name: lan-disconnect
+  unicode: f319
+- name: lan-pending
+  unicode: f31a
+- name: language-c
+  unicode: f671
+- name: language-cpp
+  unicode: f672
+- name: language-csharp
+  unicode: f31b
+- name: language-css3
+  unicode: f31c
+- name: language-go
+  unicode: f7d2
+- name: language-html5
+  unicode: f31d
+- name: language-javascript
+  unicode: f31e
+- name: language-php
+  unicode: f31f
+- name: language-python
+  unicode: f320
+- name: language-python-text
+  unicode: f321
+- name: language-r
+  unicode: f7d3
+- name: language-swift
+  unicode: f6e4
+- name: language-typescript
+  unicode: f6e5
+- name: laptop
+  unicode: f322
+- name: laptop-chromebook
+  unicode: f323
+- name: laptop-mac
+  unicode: f324
+- name: laptop-off
+  unicode: f6e6
+- name: laptop-windows
+  unicode: f325
+- name: lastfm
+  unicode: f326
+- name: launch
+  unicode: f327
+- name: lava-lamp
+  unicode: f7d4
+- name: layers
+  unicode: f328
+- name: layers-off
+  unicode: f329
+- name: lead-pencil
+  unicode: f64f
+- name: leaf
+  unicode: f32a
+- name: led-off
+  unicode: f32b
+- name: led-on
+  unicode: f32c
+- name: led-outline
+  unicode: f32d
+- name: led-strip
+  unicode: f7d5
+- name: led-variant-off
+  unicode: f32e
+- name: led-variant-on
+  unicode: f32f
+- name: led-variant-outline
+  unicode: f330
+- name: library
+  unicode: f331
+- name: library-books
+  unicode: f332
+- name: library-music
+  unicode: f333
+- name: library-plus
+  unicode: f334
+- name: lightbulb
+  unicode: f335
+- name: lightbulb-on
+  unicode: f6e7
+- name: lightbulb-on-outline
+  unicode: f6e8
+- name: lightbulb-outline
+  unicode: f336
+- name: link
+  unicode: f337
+- name: link-off
+  unicode: f338
+- name: link-variant
+  unicode: f339
+- name: link-variant-off
+  unicode: f33a
+- name: linkedin
+  unicode: f33b
+- name: linkedin-box
+  unicode: f33c
+- name: linux
+  unicode: f33d
+- name: loading
+  unicode: f771
+- name: lock
+  unicode: f33e
+- name: lock-open
+  unicode: f33f
+- name: lock-open-outline
+  unicode: f340
+- name: lock-outline
+  unicode: f341
+- name: lock-pattern
+  unicode: f6e9
+- name: lock-plus
+  unicode: f5fb
+- name: lock-reset
+  unicode: f772
+- name: locker
+  unicode: f7d6
+- name: locker-multiple
+  unicode: f7d7
+- name: login
+  unicode: f342
+- name: login-variant
+  unicode: f5fc
+- name: logout
+  unicode: f343
+- name: logout-variant
+  unicode: f5fd
+- name: looks
+  unicode: f344
+- name: loop
+  unicode: f6ea
+- name: loupe
+  unicode: f345
+- name: lumx
+  unicode: f346
+- name: magnet
+  unicode: f347
+- name: magnet-on
+  unicode: f348
+- name: magnify
+  unicode: f349
+- name: magnify-minus
+  unicode: f34a
+- name: magnify-minus-outline
+  unicode: f6eb
+- name: magnify-plus
+  unicode: f34b
+- name: magnify-plus-outline
+  unicode: f6ec
+- name: mail-ru
+  unicode: f34c
+- name: mailbox
+  unicode: f6ed
+- name: map
+  unicode: f34d
+- name: map-marker
+  unicode: f34e
+- name: map-marker-circle
+  unicode: f34f
+- name: map-marker-minus
+  unicode: f650
+- name: map-marker-multiple
+  unicode: f350
+- name: map-marker-off
+  unicode: f351
+- name: map-marker-outline
+  unicode: f7d8
+- name: map-marker-plus
+  unicode: f651
+- name: map-marker-radius
+  unicode: f352
+- name: margin
+  unicode: f353
+- name: markdown
+  unicode: f354
+- name: marker
+  unicode: f652
+- name: marker-check
+  unicode: f355
+- name: martini
+  unicode: f356
+- name: material-ui
+  unicode: f357
+- name: math-compass
+  unicode: f358
+- name: matrix
+  unicode: f628
+- name: maxcdn
+  unicode: f359
+- name: medical-bag
+  unicode: f6ee
+- name: medium
+  unicode: f35a
+- name: memory
+  unicode: f35b
+- name: menu
+  unicode: f35c
+- name: menu-down
+  unicode: f35d
+- name: menu-down-outline
+  unicode: f6b5
+- name: menu-left
+  unicode: f35e
+- name: menu-right
+  unicode: f35f
+- name: menu-up
+  unicode: f360
+- name: menu-up-outline
+  unicode: f6b6
+- name: message
+  unicode: f361
+- name: message-alert
+  unicode: f362
+- name: message-bulleted
+  unicode: f6a1
+- name: message-bulleted-off
+  unicode: f6a2
+- name: message-draw
+  unicode: f363
+- name: message-image
+  unicode: f364
+- name: message-outline
+  unicode: f365
+- name: message-plus
+  unicode: f653
+- name: message-processing
+  unicode: f366
+- name: message-reply
+  unicode: f367
+- name: message-reply-text
+  unicode: f368
+- name: message-settings
+  unicode: f6ef
+- name: message-settings-variant
+  unicode: f6f0
+- name: message-text
+  unicode: f369
+- name: message-text-outline
+  unicode: f36a
+- name: message-video
+  unicode: f36b
+- name: meteor
+  unicode: f629
+- name: metronome
+  unicode: f7d9
+- name: metronome-tick
+  unicode: f7da
+- name: micro-sd
+  unicode: f7db
+- name: microphone
+  unicode: f36c
+- name: microphone-off
+  unicode: f36d
+- name: microphone-outline
+  unicode: f36e
+- name: microphone-settings
+  unicode: f36f
+- name: microphone-variant
+  unicode: f370
+- name: microphone-variant-off
+  unicode: f371
+- name: microscope
+  unicode: f654
+- name: microsoft
+  unicode: f372
+- name: minecraft
+  unicode: f373
+- name: minus
+  unicode: f374
+- name: minus-box
+  unicode: f375
+- name: minus-box-outline
+  unicode: f6f1
+- name: minus-circle
+  unicode: f376
+- name: minus-circle-outline
+  unicode: f377
+- name: minus-network
+  unicode: f378
+- name: mixcloud
+  unicode: f62a
+- name: mixer
+  unicode: f7dc
+- name: monitor
+  unicode: f379
+- name: monitor-multiple
+  unicode: f37a
+- name: more
+  unicode: f37b
+- name: motorbike
+  unicode: f37c
+- name: mouse
+  unicode: f37d
+- name: mouse-off
+  unicode: f37e
+- name: mouse-variant
+  unicode: f37f
+- name: mouse-variant-off
+  unicode: f380
+- name: move-resize
+  unicode: f655
+- name: move-resize-variant
+  unicode: f656
+- name: movie
+  unicode: f381
+- name: movie-roll
+  unicode: f7dd
+- name: multiplication
+  unicode: f382
+- name: multiplication-box
+  unicode: f383
+- name: mushroom
+  unicode: f7de
+- name: mushroom-outline
+  unicode: f7df
+- name: music
+  unicode: f759
+- name: music-box
+  unicode: f384
+- name: music-box-outline
+  unicode: f385
+- name: music-circle
+  unicode: f386
+- name: music-note
+  unicode: f387
+- name: music-note-bluetooth
+  unicode: f5fe
+- name: music-note-bluetooth-off
+  unicode: f5ff
+- name: music-note-eighth
+  unicode: f388
+- name: music-note-half
+  unicode: f389
+- name: music-note-off
+  unicode: f38a
+- name: music-note-quarter
+  unicode: f38b
+- name: music-note-sixteenth
+  unicode: f38c
+- name: music-note-whole
+  unicode: f38d
+- name: music-off
+  unicode: f75a
+- name: nature
+  unicode: f38e
+- name: nature-people
+  unicode: f38f
+- name: navigation
+  unicode: f390
+- name: near-me
+  unicode: f5cd
+- name: needle
+  unicode: f391
+- name: nest-protect
+  unicode: f392
+- name: nest-thermostat
+  unicode: f393
+- name: netflix
+  unicode: f745
+- name: network
+  unicode: f6f2
+- name: new-box
+  unicode: f394
+- name: newspaper
+  unicode: f395
+- name: nfc
+  unicode: f396
+- name: nfc-tap
+  unicode: f397
+- name: nfc-variant
+  unicode: f398
+- name: ninja
+  unicode: f773
+- name: nintendo-switch
+  unicode: f7e0
+- name: nodejs
+  unicode: f399
+- name: note
+  unicode: f39a
+- name: note-multiple
+  unicode: f6b7
+- name: note-multiple-outline
+  unicode: f6b8
+- name: note-outline
+  unicode: f39b
+- name: note-plus
+  unicode: f39c
+- name: note-plus-outline
+  unicode: f39d
+- name: note-text
+  unicode: f39e
+- name: notification-clear-all
+  unicode: f39f
+- name: npm
+  unicode: f6f6
+- name: nuke
+  unicode: f6a3
+- name: 'null'
+  unicode: f7e1
+- name: numeric
+  unicode: f3a0
+- name: numeric-0-box
+  unicode: f3a1
+- name: numeric-0-box-multiple-outline
+  unicode: f3a2
+- name: numeric-0-box-outline
+  unicode: f3a3
+- name: numeric-1-box
+  unicode: f3a4
+- name: numeric-1-box-multiple-outline
+  unicode: f3a5
+- name: numeric-1-box-outline
+  unicode: f3a6
+- name: numeric-2-box
+  unicode: f3a7
+- name: numeric-2-box-multiple-outline
+  unicode: f3a8
+- name: numeric-2-box-outline
+  unicode: f3a9
+- name: numeric-3-box
+  unicode: f3aa
+- name: numeric-3-box-multiple-outline
+  unicode: f3ab
+- name: numeric-3-box-outline
+  unicode: f3ac
+- name: numeric-4-box
+  unicode: f3ad
+- name: numeric-4-box-multiple-outline
+  unicode: f3ae
+- name: numeric-4-box-outline
+  unicode: f3af
+- name: numeric-5-box
+  unicode: f3b0
+- name: numeric-5-box-multiple-outline
+  unicode: f3b1
+- name: numeric-5-box-outline
+  unicode: f3b2
+- name: numeric-6-box
+  unicode: f3b3
+- name: numeric-6-box-multiple-outline
+  unicode: f3b4
+- name: numeric-6-box-outline
+  unicode: f3b5
+- name: numeric-7-box
+  unicode: f3b6
+- name: numeric-7-box-multiple-outline
+  unicode: f3b7
+- name: numeric-7-box-outline
+  unicode: f3b8
+- name: numeric-8-box
+  unicode: f3b9
+- name: numeric-8-box-multiple-outline
+  unicode: f3ba
+- name: numeric-8-box-outline
+  unicode: f3bb
+- name: numeric-9-box
+  unicode: f3bc
+- name: numeric-9-box-multiple-outline
+  unicode: f3bd
+- name: numeric-9-box-outline
+  unicode: f3be
+- name: numeric-9-plus-box
+  unicode: f3bf
+- name: numeric-9-plus-box-multiple-outline
+  unicode: f3c0
+- name: numeric-9-plus-box-outline
+  unicode: f3c1
+- name: nut
+  unicode: f6f7
+- name: nutrition
+  unicode: f3c2
+- name: oar
+  unicode: f67b
+- name: octagon
+  unicode: f3c3
+- name: octagon-outline
+  unicode: f3c4
+- name: octagram
+  unicode: f6f8
+- name: octagram-outline
+  unicode: f774
+- name: odnoklassniki
+  unicode: f3c5
+- name: office
+  unicode: f3c6
+- name: oil
+  unicode: f3c7
+- name: oil-temperature
+  unicode: f3c8
+- name: omega
+  unicode: f3c9
+- name: onedrive
+  unicode: f3ca
+- name: onenote
+  unicode: f746
+- name: opacity
+  unicode: f5cc
+- name: open-in-app
+  unicode: f3cb
+- name: open-in-new
+  unicode: f3cc
+- name: openid
+  unicode: f3cd
+- name: opera
+  unicode: f3ce
+- name: orbit
+  unicode: f018
+- name: ornament
+  unicode: f3cf
+- name: ornament-variant
+  unicode: f3d0
+- name: owl
+  unicode: f3d2
+- name: package
+  unicode: f3d3
+- name: package-down
+  unicode: f3d4
+- name: package-up
+  unicode: f3d5
+- name: package-variant
+  unicode: f3d6
+- name: package-variant-closed
+  unicode: f3d7
+- name: page-first
+  unicode: f600
+- name: page-last
+  unicode: f601
+- name: page-layout-body
+  unicode: f6f9
+- name: page-layout-footer
+  unicode: f6fa
+- name: page-layout-header
+  unicode: f6fb
+- name: page-layout-sidebar-left
+  unicode: f6fc
+- name: page-layout-sidebar-right
+  unicode: f6fd
+- name: palette
+  unicode: f3d8
+- name: palette-advanced
+  unicode: f3d9
+- name: panda
+  unicode: f3da
+- name: pandora
+  unicode: f3db
+- name: panorama
+  unicode: f3dc
+- name: panorama-fisheye
+  unicode: f3dd
+- name: panorama-horizontal
+  unicode: f3de
+- name: panorama-vertical
+  unicode: f3df
+- name: panorama-wide-angle
+  unicode: f3e0
+- name: paper-cut-vertical
+  unicode: f3e1
+- name: paperclip
+  unicode: f3e2
+- name: parking
+  unicode: f3e3
+- name: passport
+  unicode: f7e2
+- name: pause
+  unicode: f3e4
+- name: pause-circle
+  unicode: f3e5
+- name: pause-circle-outline
+  unicode: f3e6
+- name: pause-octagon
+  unicode: f3e7
+- name: pause-octagon-outline
+  unicode: f3e8
+- name: paw
+  unicode: f3e9
+- name: paw-off
+  unicode: f657
+- name: pen
+  unicode: f3ea
+- name: pencil
+  unicode: f3eb
+- name: pencil-box
+  unicode: f3ec
+- name: pencil-box-outline
+  unicode: f3ed
+- name: pencil-circle
+  unicode: f6fe
+- name: pencil-circle-outline
+  unicode: f775
+- name: pencil-lock
+  unicode: f3ee
+- name: pencil-off
+  unicode: f3ef
+- name: pentagon
+  unicode: f6ff
+- name: pentagon-outline
+  unicode: f700
+- name: percent
+  unicode: f3f0
+- name: periodic-table-co2
+  unicode: f7e3
+- name: periscope
+  unicode: f747
+- name: pharmacy
+  unicode: f3f1
+- name: phone
+  unicode: f3f2
+- name: phone-bluetooth
+  unicode: f3f3
+- name: phone-classic
+  unicode: f602
+- name: phone-forward
+  unicode: f3f4
+- name: phone-hangup
+  unicode: f3f5
+- name: phone-in-talk
+  unicode: f3f6
+- name: phone-incoming
+  unicode: f3f7
+- name: phone-locked
+  unicode: f3f8
+- name: phone-log
+  unicode: f3f9
+- name: phone-minus
+  unicode: f658
+- name: phone-missed
+  unicode: f3fa
+- name: phone-outgoing
+  unicode: f3fb
+- name: phone-paused
+  unicode: f3fc
+- name: phone-plus
+  unicode: f659
+- name: phone-settings
+  unicode: f3fd
+- name: phone-voip
+  unicode: f3fe
+- name: pi
+  unicode: f3ff
+- name: pi-box
+  unicode: f400
+- name: piano
+  unicode: f67c
+- name: pig
+  unicode: f401
+- name: pill
+  unicode: f402
+- name: pillar
+  unicode: f701
+- name: pin
+  unicode: f403
+- name: pin-off
+  unicode: f404
+- name: pine-tree
+  unicode: f405
+- name: pine-tree-box
+  unicode: f406
+- name: pinterest
+  unicode: f407
+- name: pinterest-box
+  unicode: f408
+- name: pipe
+  unicode: f7e4
+- name: pipe-disconnected
+  unicode: f7e5
+- name: pistol
+  unicode: f702
+- name: pizza
+  unicode: f409
+- name: plane-shield
+  unicode: f6ba
+- name: play
+  unicode: f40a
+- name: play-box-outline
+  unicode: f40b
+- name: play-circle
+  unicode: f40c
+- name: play-circle-outline
+  unicode: f40d
+- name: play-pause
+  unicode: f40e
+- name: play-protected-content
+  unicode: f40f
+- name: playlist-check
+  unicode: f5c7
+- name: playlist-minus
+  unicode: f410
+- name: playlist-play
+  unicode: f411
+- name: playlist-plus
+  unicode: f412
+- name: playlist-remove
+  unicode: f413
+- name: playstation
+  unicode: f414
+- name: plex
+  unicode: f6b9
+- name: plus
+  unicode: f415
+- name: plus-box
+  unicode: f416
+- name: plus-box-outline
+  unicode: f703
+- name: plus-circle
+  unicode: f417
+- name: plus-circle-multiple-outline
+  unicode: f418
+- name: plus-circle-outline
+  unicode: f419
+- name: plus-network
+  unicode: f41a
+- name: plus-one
+  unicode: f41b
+- name: plus-outline
+  unicode: f704
+- name: pocket
+  unicode: f41c
+- name: pokeball
+  unicode: f41d
+- name: polaroid
+  unicode: f41e
+- name: poll
+  unicode: f41f
+- name: poll-box
+  unicode: f420
+- name: polymer
+  unicode: f421
+- name: pool
+  unicode: f606
+- name: popcorn
+  unicode: f422
+- name: pot
+  unicode: f65a
+- name: pot-mix
+  unicode: f65b
+- name: pound
+  unicode: f423
+- name: pound-box
+  unicode: f424
+- name: power
+  unicode: f425
+- name: power-plug
+  unicode: f6a4
+- name: power-plug-off
+  unicode: f6a5
+- name: power-settings
+  unicode: f426
+- name: power-socket
+  unicode: f427
+- name: power-socket-eu
+  unicode: f7e6
+- name: power-socket-uk
+  unicode: f7e7
+- name: power-socket-us
+  unicode: f7e8
+- name: prescription
+  unicode: f705
+- name: presentation
+  unicode: f428
+- name: presentation-play
+  unicode: f429
+- name: printer
+  unicode: f42a
+- name: printer-3d
+  unicode: f42b
+- name: printer-alert
+  unicode: f42c
+- name: printer-settings
+  unicode: f706
+- name: priority-high
+  unicode: f603
+- name: priority-low
+  unicode: f604
+- name: professional-unicodeagon
+  unicode: f42d
+- name: projector
+  unicode: f42e
+- name: projector-screen
+  unicode: f42f
+- name: publish
+  unicode: f6a6
+- name: pulse
+  unicode: f430
+- name: puzzle
+  unicode: f431
+- name: qqchat
+  unicode: f605
+- name: qrcode
+  unicode: f432
+- name: qrcode-scan
+  unicode: f433
+- name: quadcopter
+  unicode: f434
+- name: quality-high
+  unicode: f435
+- name: quicktime
+  unicode: f436
+- name: radar
+  unicode: f437
+- name: radiator
+  unicode: f438
+- name: radio
+  unicode: f439
+- name: radio-handheld
+  unicode: f43a
+- name: radio-tower
+  unicode: f43b
+- name: radioactive
+  unicode: f43c
+- name: radiobox-blank
+  unicode: f43d
+- name: radiobox-marked
+  unicode: f43e
+- name: raspberrypi
+  unicode: f43f
+- name: ray-end
+  unicode: f440
+- name: ray-end-arrow
+  unicode: f441
+- name: ray-start
+  unicode: f442
+- name: ray-start-arrow
+  unicode: f443
+- name: ray-start-end
+  unicode: f444
+- name: ray-vertex
+  unicode: f445
+- name: rdio
+  unicode: f446
+- name: react
+  unicode: f707
+- name: read
+  unicode: f447
+- name: readability
+  unicode: f448
+- name: receipt
+  unicode: f449
+- name: record
+  unicode: f44a
+- name: record-rec
+  unicode: f44b
+- name: recycle
+  unicode: f44c
+- name: reddit
+  unicode: f44d
+- name: redo
+  unicode: f44e
+- name: redo-variant
+  unicode: f44f
+- name: refresh
+  unicode: f450
+- name: regex
+  unicode: f451
+- name: relative-scale
+  unicode: f452
+- name: reload
+  unicode: f453
+- name: remote
+  unicode: f454
+- name: rename-box
+  unicode: f455
+- name: reorder-horizontal
+  unicode: f687
+- name: reorder-vertical
+  unicode: f688
+- name: repeat
+  unicode: f456
+- name: repeat-off
+  unicode: f457
+- name: repeat-once
+  unicode: f458
+- name: replay
+  unicode: f459
+- name: reply
+  unicode: f45a
+- name: reply-all
+  unicode: f45b
+- name: reproduction
+  unicode: f45c
+- name: resize-bottom-right
+  unicode: f45d
+- name: responsive
+  unicode: f45e
+- name: restart
+  unicode: f708
+- name: restore
+  unicode: f6a7
+- name: rewind
+  unicode: f45f
+- name: rewind-outline
+  unicode: f709
+- name: rhombus
+  unicode: f70a
+- name: rhombus-outline
+  unicode: f70b
+- name: ribbon
+  unicode: f460
+- name: rice
+  unicode: f7e9
+- name: ring
+  unicode: f7ea
+- name: road
+  unicode: f461
+- name: road-variant
+  unicode: f462
+- name: robot
+  unicode: f6a8
+- name: rocket
+  unicode: f463
+- name: roomba
+  unicode: f70c
+- name: rotate-3d
+  unicode: f464
+- name: rotate-left
+  unicode: f465
+- name: rotate-left-variant
+  unicode: f466
+- name: rotate-right
+  unicode: f467
+- name: rotate-right-variant
+  unicode: f468
+- name: rounded-corner
+  unicode: f607
+- name: router-wireless
+  unicode: f469
+- name: routes
+  unicode: f46a
+- name: rowing
+  unicode: f608
+- name: rss
+  unicode: f46b
+- name: rss-box
+  unicode: f46c
+- name: ruler
+  unicode: f46d
+- name: run
+  unicode: f70d
+- name: run-fast
+  unicode: f46e
+- name: sale
+  unicode: f46f
+- name: sass
+  unicode: f7eb
+- name: satellite
+  unicode: f470
+- name: satellite-variant
+  unicode: f471
+- name: saxophone
+  unicode: f609
+- name: scale
+  unicode: f472
+- name: scale-balance
+  unicode: f5d1
+- name: scale-bathroom
+  unicode: f473
+- name: scanner
+  unicode: f6aa
+- name: school
+  unicode: f474
+- name: screen-rotation
+  unicode: f475
+- name: screen-rotation-lock
+  unicode: f476
+- name: screwdriver
+  unicode: f477
+- name: script
+  unicode: f478
+- name: sd
+  unicode: f479
+- name: seal
+  unicode: f47a
+- name: search-web
+  unicode: f70e
+- name: seat-flat
+  unicode: f47b
+- name: seat-flat-angled
+  unicode: f47c
+- name: seat-individual-suite
+  unicode: f47d
+- name: seat-legroom-extra
+  unicode: f47e
+- name: seat-legroom-normal
+  unicode: f47f
+- name: seat-legroom-reduced
+  unicode: f480
+- name: seat-recline-extra
+  unicode: f481
+- name: seat-recline-normal
+  unicode: f482
+- name: security
+  unicode: f483
+- name: security-home
+  unicode: f689
+- name: security-network
+  unicode: f484
+- name: select
+  unicode: f485
+- name: select-all
+  unicode: f486
+- name: select-inverse
+  unicode: f487
+- name: select-off
+  unicode: f488
+- name: selection
+  unicode: f489
+- name: selection-off
+  unicode: f776
+- name: send
+  unicode: f48a
+- name: send-secure
+  unicode: f7ec
+- name: serial-port
+  unicode: f65c
+- name: server
+  unicode: f48b
+- name: server-minus
+  unicode: f48c
+- name: server-network
+  unicode: f48d
+- name: server-network-off
+  unicode: f48e
+- name: server-off
+  unicode: f48f
+- name: server-plus
+  unicode: f490
+- name: server-remove
+  unicode: f491
+- name: server-security
+  unicode: f492
+- name: set-all
+  unicode: f777
+- name: set-center
+  unicode: f778
+- name: set-center-right
+  unicode: f779
+- name: set-left
+  unicode: f77a
+- name: set-left-center
+  unicode: f77b
+- name: set-left-right
+  unicode: f77c
+- name: set-none
+  unicode: f77d
+- name: set-right
+  unicode: f77e
+- name: settings
+  unicode: f493
+- name: settings-box
+  unicode: f494
+- name: shape-circle-plus
+  unicode: f65d
+- name: shape-plus
+  unicode: f495
+- name: shape-polygon-plus
+  unicode: f65e
+- name: shape-rectangle-plus
+  unicode: f65f
+- name: shape-square-plus
+  unicode: f660
+- name: share
+  unicode: f496
+- name: share-variant
+  unicode: f497
+- name: shield
+  unicode: f498
+- name: shield-half-full
+  unicode: f77f
+- name: shield-outline
+  unicode: f499
+- name: shopping
+  unicode: f49a
+- name: shopping-music
+  unicode: f49b
+- name: shovel
+  unicode: f70f
+- name: shovel-off
+  unicode: f710
+- name: shredder
+  unicode: f49c
+- name: shuffle
+  unicode: f49d
+- name: shuffle-disabled
+  unicode: f49e
+- name: shuffle-variant
+  unicode: f49f
+- name: sigma
+  unicode: f4a0
+- name: sigma-lower
+  unicode: f62b
+- name: sign-caution
+  unicode: f4a1
+- name: sign-direction
+  unicode: f780
+- name: sign-text
+  unicode: f781
+- name: signal
+  unicode: f4a2
+- name: signal-2g
+  unicode: f711
+- name: signal-3g
+  unicode: f712
+- name: signal-4g
+  unicode: f713
+- name: signal-hspa
+  unicode: f714
+- name: signal-hspa-plus
+  unicode: f715
+- name: signal-off
+  unicode: f782
+- name: signal-variant
+  unicode: f60a
+- name: silverware
+  unicode: f4a3
+- name: silverware-fork
+  unicode: f4a4
+- name: silverware-spoon
+  unicode: f4a5
+- name: silverware-variant
+  unicode: f4a6
+- name: sim
+  unicode: f4a7
+- name: sim-alert
+  unicode: f4a8
+- name: sim-off
+  unicode: f4a9
+- name: sitemap
+  unicode: f4aa
+- name: skip-backward
+  unicode: f4ab
+- name: skip-forward
+  unicode: f4ac
+- name: skip-next
+  unicode: f4ad
+- name: skip-next-circle
+  unicode: f661
+- name: skip-next-circle-outline
+  unicode: f662
+- name: skip-previous
+  unicode: f4ae
+- name: skip-previous-circle
+  unicode: f663
+- name: skip-previous-circle-outline
+  unicode: f664
+- name: skull
+  unicode: f68b
+- name: skype
+  unicode: f4af
+- name: skype-business
+  unicode: f4b0
+- name: slack
+  unicode: f4b1
+- name: sleep
+  unicode: f4b2
+- name: sleep-off
+  unicode: f4b3
+- name: smoking
+  unicode: f4b4
+- name: smoking-off
+  unicode: f4b5
+- name: snapchat
+  unicode: f4b6
+- name: snowflake
+  unicode: f716
+- name: snowman
+  unicode: f4b7
+- name: soccer
+  unicode: f4b8
+- name: sofa
+  unicode: f4b9
+- name: solid
+  unicode: f68c
+- name: sort
+  unicode: f4ba
+- name: sort-alphabetical
+  unicode: f4bb
+- name: sort-ascending
+  unicode: f4bc
+- name: sort-descending
+  unicode: f4bd
+- name: sort-numeric
+  unicode: f4be
+- name: sort-variant
+  unicode: f4bf
+- name: soundcloud
+  unicode: f4c0
+- name: source-branch
+  unicode: f62c
+- name: source-commit
+  unicode: f717
+- name: source-commit-end
+  unicode: f718
+- name: source-commit-end-local
+  unicode: f719
+- name: source-commit-local
+  unicode: f71a
+- name: source-commit-next-local
+  unicode: f71b
+- name: source-commit-start
+  unicode: f71c
+- name: source-commit-start-next-local
+  unicode: f71d
+- name: source-fork
+  unicode: f4c1
+- name: source-merge
+  unicode: f62d
+- name: source-pull
+  unicode: f4c2
+- name: soy-sauce
+  unicode: f7ed
+- name: speaker
+  unicode: f4c3
+- name: speaker-off
+  unicode: f4c4
+- name: speaker-wireless
+  unicode: f71e
+- name: speedometer
+  unicode: f4c5
+- name: spellcheck
+  unicode: f4c6
+- name: spotify
+  unicode: f4c7
+- name: spotlight
+  unicode: f4c8
+- name: spotlight-beam
+  unicode: f4c9
+- name: spray
+  unicode: f665
+- name: square
+  unicode: f763
+- name: square-inc
+  unicode: f4ca
+- name: square-inc-cash
+  unicode: f4cb
+- name: square-outline
+  unicode: f762
+- name: square-root
+  unicode: f783
+- name: stackexchange
+  unicode: f60b
+- name: stackoverflow
+  unicode: f4cc
+- name: stadium
+  unicode: f71f
+- name: stairs
+  unicode: f4cd
+- name: standard-definition
+  unicode: f7ee
+- name: star
+  unicode: f4ce
+- name: star-circle
+  unicode: f4cf
+- name: star-half
+  unicode: f4d0
+- name: star-off
+  unicode: f4d1
+- name: star-outline
+  unicode: f4d2
+- name: steam
+  unicode: f4d3
+- name: steering
+  unicode: f4d4
+- name: step-backward
+  unicode: f4d5
+- name: step-backward-2
+  unicode: f4d6
+- name: step-forward
+  unicode: f4d7
+- name: step-forward-2
+  unicode: f4d8
+- name: stethoscope
+  unicode: f4d9
+- name: sticker
+  unicode: f5d0
+- name: sticker-emoji
+  unicode: f784
+- name: stocking
+  unicode: f4da
+- name: stop
+  unicode: f4db
+- name: stop-circle
+  unicode: f666
+- name: stop-circle-outline
+  unicode: f667
+- name: store
+  unicode: f4dc
+- name: store-24-hour
+  unicode: f4dd
+- name: stove
+  unicode: f4de
+- name: subdirectory-arrow-left
+  unicode: f60c
+- name: subdirectory-arrow-right
+  unicode: f60d
+- name: subway
+  unicode: f6ab
+- name: subway-variant
+  unicode: f4df
+- name: summit
+  unicode: f785
+- name: sunglasses
+  unicode: f4e0
+- name: surround-sound
+  unicode: f5c5
+- name: surround-sound-2-0
+  unicode: f7ef
+- name: surround-sound-3-1
+  unicode: f7f0
+- name: surround-sound-5-1
+  unicode: f7f1
+- name: surround-sound-7-1
+  unicode: f7f2
+- name: svg
+  unicode: f720
+- name: swap-horizontal
+  unicode: f4e1
+- name: swap-vertical
+  unicode: f4e2
+- name: swim
+  unicode: f4e3
+- name: switch
+  unicode: f4e4
+- name: sword
+  unicode: f4e5
+- name: sword-cross
+  unicode: f786
+- name: sync
+  unicode: f4e6
+- name: sync-alert
+  unicode: f4e7
+- name: sync-off
+  unicode: f4e8
+- name: tab
+  unicode: f4e9
+- name: tab-plus
+  unicode: f75b
+- name: tab-unselected
+  unicode: f4ea
+- name: table
+  unicode: f4eb
+- name: table-column-plus-after
+  unicode: f4ec
+- name: table-column-plus-before
+  unicode: f4ed
+- name: table-column-remove
+  unicode: f4ee
+- name: table-column-width
+  unicode: f4ef
+- name: table-edit
+  unicode: f4f0
+- name: table-large
+  unicode: f4f1
+- name: table-row-height
+  unicode: f4f2
+- name: table-row-plus-after
+  unicode: f4f3
+- name: table-row-plus-before
+  unicode: f4f4
+- name: table-row-remove
+  unicode: f4f5
+- name: tablet
+  unicode: f4f6
+- name: tablet-android
+  unicode: f4f7
+- name: tablet-ipad
+  unicode: f4f8
+- name: taco
+  unicode: f761
+- name: tag
+  unicode: f4f9
+- name: tag-faces
+  unicode: f4fa
+- name: tag-heart
+  unicode: f68a
+- name: tag-multiple
+  unicode: f4fb
+- name: tag-outline
+  unicode: f4fc
+- name: tag-plus
+  unicode: f721
+- name: tag-remove
+  unicode: f722
+- name: tag-text-outline
+  unicode: f4fd
+- name: target
+  unicode: f4fe
+- name: taxi
+  unicode: f4ff
+- name: teamviewer
+  unicode: f500
+- name: telegram
+  unicode: f501
+- name: television
+  unicode: f502
+- name: television-classic
+  unicode: f7f3
+- name: television-guide
+  unicode: f503
+- name: temperature-celsius
+  unicode: f504
+- name: temperature-fahrenheit
+  unicode: f505
+- name: temperature-kelvin
+  unicode: f506
+- name: tennis
+  unicode: f507
+- name: tent
+  unicode: f508
+- name: terrain
+  unicode: f509
+- name: test-tube
+  unicode: f668
+- name: text-shadow
+  unicode: f669
+- name: text-to-speech
+  unicode: f50a
+- name: text-to-speech-off
+  unicode: f50b
+- name: textbox
+  unicode: f60e
+- name: textbox-password
+  unicode: f7f4
+- name: texture
+  unicode: f50c
+- name: theater
+  unicode: f50d
+- name: theme-light-dark
+  unicode: f50e
+- name: thermometer
+  unicode: f50f
+- name: thermometer-lines
+  unicode: f510
+- name: thought-bubble
+  unicode: f7f5
+- name: thought-bubble-outline
+  unicode: f7f6
+- name: thumb-down
+  unicode: f511
+- name: thumb-down-outline
+  unicode: f512
+- name: thumb-up
+  unicode: f513
+- name: thumb-up-outline
+  unicode: f514
+- name: thumbs-up-down
+  unicode: f515
+- name: ticket
+  unicode: f516
+- name: ticket-account
+  unicode: f517
+- name: ticket-confirmation
+  unicode: f518
+- name: ticket-percent
+  unicode: f723
+- name: tie
+  unicode: f519
+- name: tilde
+  unicode: f724
+- name: timelapse
+  unicode: f51a
+- name: timer
+  unicode: f51b
+- name: timer-10
+  unicode: f51c
+- name: timer-3
+  unicode: f51d
+- name: timer-off
+  unicode: f51e
+- name: timer-sand
+  unicode: f51f
+- name: timer-sand-empty
+  unicode: f6ac
+- name: timer-sand-full
+  unicode: f78b
+- name: timetable
+  unicode: f520
+- name: toggle-switch
+  unicode: f521
+- name: toggle-switch-off
+  unicode: f522
+- name: tooltip
+  unicode: f523
+- name: tooltip-edit
+  unicode: f524
+- name: tooltip-image
+  unicode: f525
+- name: tooltip-outline
+  unicode: f526
+- name: tooltip-outline-plus
+  unicode: f527
+- name: tooltip-text
+  unicode: f528
+- name: tooth
+  unicode: f529
+- name: tor
+  unicode: f52a
+- name: tower-beach
+  unicode: f680
+- name: tower-fire
+  unicode: f681
+- name: trackpad
+  unicode: f7f7
+- name: traffic-light
+  unicode: f52b
+- name: train
+  unicode: f52c
+- name: tram
+  unicode: f52d
+- name: transcribe
+  unicode: f52e
+- name: transcribe-close
+  unicode: f52f
+- name: transfer
+  unicode: f530
+- name: transit-transfer
+  unicode: f6ad
+- name: translate
+  unicode: f5ca
+- name: treasure-chest
+  unicode: f725
+- name: tree
+  unicode: f531
+- name: trello
+  unicode: f532
+- name: trending-down
+  unicode: f533
+- name: trending-neutral
+  unicode: f534
+- name: trending-up
+  unicode: f535
+- name: triangle
+  unicode: f536
+- name: triangle-outline
+  unicode: f537
+- name: trophy
+  unicode: f538
+- name: trophy-award
+  unicode: f539
+- name: trophy-outline
+  unicode: f53a
+- name: trophy-variant
+  unicode: f53b
+- name: trophy-variant-outline
+  unicode: f53c
+- name: truck
+  unicode: f53d
+- name: truck-delivery
+  unicode: f53e
+- name: truck-fast
+  unicode: f787
+- name: truck-trailer
+  unicode: f726
+- name: tshirt-crew
+  unicode: f53f
+- name: tshirt-v
+  unicode: f540
+- name: tumblr
+  unicode: f541
+- name: tumblr-reblog
+  unicode: f542
+- name: tune
+  unicode: f62e
+- name: tune-vertical
+  unicode: f66a
+- name: twitch
+  unicode: f543
+- name: twitter
+  unicode: f544
+- name: twitter-box
+  unicode: f545
+- name: twitter-circle
+  unicode: f546
+- name: twitter-retweet
+  unicode: f547
+- name: uber
+  unicode: f748
+- name: ubuntu
+  unicode: f548
+- name: ultra-high-definition
+  unicode: f7f8
+- name: umbraco
+  unicode: f549
+- name: umbrella
+  unicode: f54a
+- name: umbrella-outline
+  unicode: f54b
+- name: undo
+  unicode: f54c
+- name: undo-variant
+  unicode: f54d
+- name: unfold-less-horizontal
+  unicode: f54e
+- name: unfold-less-vertical
+  unicode: f75f
+- name: unfold-more-horizontal
+  unicode: f54f
+- name: unfold-more-vertical
+  unicode: f760
+- name: ungroup
+  unicode: f550
+- name: unity
+  unicode: f6ae
+- name: untappd
+  unicode: f551
+- name: update
+  unicode: f6af
+- name: upload
+  unicode: f552
+- name: upload-network
+  unicode: f6f5
+- name: usb
+  unicode: f553
+- name: van-passenger
+  unicode: f7f9
+- name: van-utility
+  unicode: f7fa
+- name: vanish
+  unicode: f7fb
+- name: vector-arrange-above
+  unicode: f554
+- name: vector-arrange-below
+  unicode: f555
+- name: vector-circle
+  unicode: f556
+- name: vector-circle-variant
+  unicode: f557
+- name: vector-combine
+  unicode: f558
+- name: vector-curve
+  unicode: f559
+- name: vector-difference
+  unicode: f55a
+- name: vector-difference-ab
+  unicode: f55b
+- name: vector-difference-ba
+  unicode: f55c
+- name: vector-intersection
+  unicode: f55d
+- name: vector-line
+  unicode: f55e
+- name: vector-point
+  unicode: f55f
+- name: vector-polygon
+  unicode: f560
+- name: vector-polyline
+  unicode: f561
+- name: vector-radius
+  unicode: f749
+- name: vector-rectangle
+  unicode: f5c6
+- name: vector-selection
+  unicode: f562
+- name: vector-square
+  unicode: f001
+- name: vector-triangle
+  unicode: f563
+- name: vector-union
+  unicode: f564
+- name: verified
+  unicode: f565
+- name: vibrate
+  unicode: f566
+- name: video
+  unicode: f567
+- name: video-3d
+  unicode: f7fc
+- name: video-off
+  unicode: f568
+- name: video-switch
+  unicode: f569
+- name: view-agenda
+  unicode: f56a
+- name: view-array
+  unicode: f56b
+- name: view-carousel
+  unicode: f56c
+- name: view-column
+  unicode: f56d
+- name: view-dashboard
+  unicode: f56e
+- name: view-day
+  unicode: f56f
+- name: view-grid
+  unicode: f570
+- name: view-headline
+  unicode: f571
+- name: view-list
+  unicode: f572
+- name: view-module
+  unicode: f573
+- name: view-parallel
+  unicode: f727
+- name: view-quilt
+  unicode: f574
+- name: view-sequential
+  unicode: f728
+- name: view-stream
+  unicode: f575
+- name: view-week
+  unicode: f576
+- name: vimeo
+  unicode: f577
+- name: vine
+  unicode: f578
+- name: violin
+  unicode: f60f
+- name: visualstudio
+  unicode: f610
+- name: vk
+  unicode: f579
+- name: vk-box
+  unicode: f57a
+- name: vk-circle
+  unicode: f57b
+- name: vlc
+  unicode: f57c
+- name: voice
+  unicode: f5cb
+- name: voicemail
+  unicode: f57d
+- name: volume-high
+  unicode: f57e
+- name: volume-low
+  unicode: f57f
+- name: volume-medium
+  unicode: f580
+- name: volume-minus
+  unicode: f75d
+- name: volume-mute
+  unicode: f75e
+- name: volume-off
+  unicode: f581
+- name: volume-plus
+  unicode: f75c
+- name: vpn
+  unicode: f582
+- name: walk
+  unicode: f583
+- name: wall
+  unicode: f7fd
+- name: wallet
+  unicode: f584
+- name: wallet-giftcard
+  unicode: f585
+- name: wallet-membership
+  unicode: f586
+- name: wallet-travel
+  unicode: f587
+- name: wan
+  unicode: f588
+- name: washing-machine
+  unicode: f729
+- name: watch
+  unicode: f589
+- name: watch-export
+  unicode: f58a
+- name: watch-import
+  unicode: f58b
+- name: watch-vibrate
+  unicode: f6b0
+- name: water
+  unicode: f58c
+- name: water-off
+  unicode: f58d
+- name: water-percent
+  unicode: f58e
+- name: water-pump
+  unicode: f58f
+- name: watermark
+  unicode: f612
+- name: waves
+  unicode: f78c
+- name: weather-cloudy
+  unicode: f590
+- name: weather-fog
+  unicode: f591
+- name: weather-hail
+  unicode: f592
+- name: weather-lightning
+  unicode: f593
+- name: weather-lightning-rainy
+  unicode: f67d
+- name: weather-night
+  unicode: f594
+- name: weather-partlycloudy
+  unicode: f595
+- name: weather-pouring
+  unicode: f596
+- name: weather-rainy
+  unicode: f597
+- name: weather-snowy
+  unicode: f598
+- name: weather-snowy-rainy
+  unicode: f67e
+- name: weather-sunny
+  unicode: f599
+- name: weather-sunset
+  unicode: f59a
+- name: weather-sunset-down
+  unicode: f59b
+- name: weather-sunset-up
+  unicode: f59c
+- name: weather-windy
+  unicode: f59d
+- name: weather-windy-variant
+  unicode: f59e
+- name: web
+  unicode: f59f
+- name: webcam
+  unicode: f5a0
+- name: webhook
+  unicode: f62f
+- name: webpack
+  unicode: f72a
+- name: wechat
+  unicode: f611
+- name: weight
+  unicode: f5a1
+- name: weight-kilogram
+  unicode: f5a2
+- name: whatsapp
+  unicode: f5a3
+- name: wheelchair-accessibility
+  unicode: f5a4
+- name: white-balance-auto
+  unicode: f5a5
+- name: white-balance-incandescent
+  unicode: f5a6
+- name: white-balance-iridescent
+  unicode: f5a7
+- name: white-balance-sunny
+  unicode: f5a8
+- name: widgets
+  unicode: f72b
+- name: wifi
+  unicode: f5a9
+- name: wifi-off
+  unicode: f5aa
+- name: wii
+  unicode: f5ab
+- name: wiiu
+  unicode: f72c
+- name: wikipedia
+  unicode: f5ac
+- name: window-close
+  unicode: f5ad
+- name: window-closed
+  unicode: f5ae
+- name: window-maximize
+  unicode: f5af
+- name: window-minimize
+  unicode: f5b0
+- name: window-open
+  unicode: f5b1
+- name: window-restore
+  unicode: f5b2
+- name: windows
+  unicode: f5b3
+- name: wordpress
+  unicode: f5b4
+- name: worker
+  unicode: f5b5
+- name: wrap
+  unicode: f5b6
+- name: wrench
+  unicode: f5b7
+- name: wunderlist
+  unicode: f5b8
+- name: xaml
+  unicode: f673
+- name: xbox
+  unicode: f5b9
+- name: xbox-controller
+  unicode: f5ba
+- name: xbox-controller-battery-alert
+  unicode: f74a
+- name: xbox-controller-battery-empty
+  unicode: f74b
+- name: xbox-controller-battery-full
+  unicode: f74c
+- name: xbox-controller-battery-low
+  unicode: f74d
+- name: xbox-controller-battery-medium
+  unicode: f74e
+- name: xbox-controller-battery-unknown
+  unicode: f74f
+- name: xbox-controller-off
+  unicode: f5bb
+- name: xda
+  unicode: f5bc
+- name: xing
+  unicode: f5bd
+- name: xing-box
+  unicode: f5be
+- name: xing-circle
+  unicode: f5bf
+- name: xml
+  unicode: f5c0
+- name: xmpp
+  unicode: f7fe
+- name: yammer
+  unicode: f788
+- name: yeast
+  unicode: f5c1
+- name: yelp
+  unicode: f5c2
+- name: yin-yang
+  unicode: f67f
+- name: youtube-play
+  unicode: f5c3
+- name: zip-box
+  unicode: f5c4

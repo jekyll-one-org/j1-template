@@ -51,7 +51,8 @@ if item.quantity is 4...
 
 ==== Javascript
 
-[source, javascript, linenums, highlight='3-7']
+// [source, javascript, linenums, highlight='3-7']
+[source, js]
 ----
 // ---------------------------------------------------------------
 // helper functions
@@ -76,7 +77,8 @@ function styleSheetLoaded(styleSheet) {
 // :pygments-style: emacs
 // :icons: font
 
-[source, ruby, linenums]
+// [source, ruby, linenums]
+[source, ruby]
 ----
 # Load Asciidoctor extensions needed
 #

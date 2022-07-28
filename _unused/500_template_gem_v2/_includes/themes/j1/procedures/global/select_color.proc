@@ -1,0 +1,69 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #   ~/_includes/themes/j1/procedures/components/select_color.proc
+ #  Liquid PROCEDURE to calculate RGB color values from color NAMES
+ #
+ #  https://jekyll.one
+ #
+ #  Copyright (C) 2022 Juergen Adams
+ #
+ #  J1 Template is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ #
+ # -----------------------------------------------------------------------------
+ #   Global procedure. Read RGB color values from j1_colors.yml and returns
+ #   the color found with liquid var color
+ #
+ #    Usage:
+ #      1)  assign the 'color' variable to a color name. If the color (name)
+ #          couldn't be found, the color given with fallback is returned.
+ #      2)  include the select_color.proc procedure
+ #
+ #  Example:
+ #
+ #  {% capture select_color %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %}
+ #  {% assign my_color       = "md_indigo" %}
+ #  {% assign color_fallback = "#FAFAFA" %}
+ #
+ #  {% include {{select_color}} color=my_color fallback=color_fallback %}
+ #  {% assign my_color = {{color}} %}
+ #
+ #  or
+ #
+ #  {% include {{select_color}} color="md_indigo" fallback="#FAFAFA" %}
+ #  {% assign my_color = {{color}} %}
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  {{ liquid_var | debug }}
+ #  color:  {{ item[0] }}: {{ item[1] }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+
+{% comment %} Variables
+   ------------------------------------------------------------ {% endcomment %}
+
+{% assign j1_color_config = site.data.j1_colors %}
+{% assign color           = include.color %}
+{% assign color_fallback  = include.fallback %}
+
+
+{% comment %} Liquid procedures
+   ------------------------------------------------------------ {% endcomment %}
+
+
+{% comment %} Main
+   ------------------------------------------------------------ {% endcomment %}
+
+  {% for item in j1_color_config %}
+    {% if item[0] == color %}
+      {% assign color = item[1] %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
+  {% if color == include.color %}
+    {% assign color = color_fallback %}
+  {% endif %}
+

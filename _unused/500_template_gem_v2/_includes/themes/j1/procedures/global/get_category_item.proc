@@ -1,0 +1,80 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #   ~/_includes/themes/j1/procedures/components/get_category_item.proc
+ #  Liquid PROCEDURE to get the font-icon for a given category
+ #
+ #  https://jekyll.one
+ #
+ #  Copyright (C) 2022 Juergen Adams
+ #
+ #  J1 Template is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ #
+ # -----------------------------------------------------------------------------
+ #   Global procedure. Read RGB category values from j1_categorys.yml and returns
+ #   the category found with liquid var category
+ #
+ #    Usage:
+ #      1)  assign the 'category' variable to a category name. If the category (name)
+ #          couldn't be found, the category given with fallback is returned.
+ #      2)  include the get_category_item.proc procedure
+ #
+ #  Example:
+ #
+ #  {% capture get_category_item %}themes/{{site.template.name}}/procedures/global/get_category_item.proc{% endcapture %}
+ #  {% assign my_category = "md_indigo" %}
+ #
+ #  {% include {{get_category_item}} category=my_category %}
+ #  {% assign my_category_item = _category_item %}
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  {{ liquid_var | debug }}
+ #  _category_icons:  {{ item[0] }}: {{ item[1] }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Variables
+   ------------------------------------------------------------ {% endcomment %}
+
+{% assign _category       = include.category %}
+{% assign _category_icon  = nil %}
+
+{% assign _category_icons = site.data.categories %}
+
+
+{% comment %} Liquid procedures
+   ------------------------------------------------------------ {% endcomment %}
+
+
+{% comment %} Main
+   ------------------------------------------------------------ {% endcomment %}
+
+  {% for item in _category_icons %}
+    {% if item[0] == _category %}
+      {% assign _category = "found" %}
+      {% assign _category_icon = item[1] %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
+  {% if _category == include.category %}
+    {% assign icon_name = site.data.categories.default.icon_name | downcase %}
+    {% assign icon_family = site.data.categories.default.icon_family %}
+    {% assign icon_size = site.data.categories.default.icon_size %}
+  {% else%}
+    {% assign icon_name   = _category_icon.icon_name | downcase %}
+    {% assign icon_family = _category_icon.icon_family %}
+    {% assign icon_size   = _category_icon.icon_size %}
+  {% endif %}
+
+  {% if icon_family == "FontAwesome" %}
+    {% assign icon_family = "fa" %}
+  {% elsif icon_family == "Glyphicon" %}
+    {% assign icon_family = "glyphicon" %}
+  {% elsif icon_family == "MDI" %}
+    {% assign icon_family = "mdi" %}
+  {% elsif icon_family == "ZMDI" %}
+    {% assign icon_family = "zmdi" %}
+  {% endif %}
+

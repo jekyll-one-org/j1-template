@@ -1,0 +1,65 @@
+---
+layout:                                 default                                 # base layout the page inherits GLOBAL content
+debug:                                  false                                   # enable|disable additional debug information written to (static) content source
+---
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_layouts/page.html
+ #  Liquid layout template for all pages of content-type PAGE
+ #
+ #  Product/Info:
+ #  https://jekyll.one
+ #
+ #  Copyright (C) 2022 Juergen Adams
+ #
+ #  J1 Template is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ #
+ # -----------------------------------------------------------------------------
+ #  NOTE:
+ #    This is the layout for all content pages of type PAGE.
+ #    Layout PAGE is based on layout DEFAULT to inherit all
+ #    default (HTML) data used for ALL pages.
+ # -----------------------------------------------------------------------------
+ #  NOTE:
+ #    Do NOT add any CONTENT here.
+ #    For J1 template, Liquid procedures are being used intensively. To load
+ #    HTML data for a region (lane), the (Liquid) procedure "content_writer"
+ #    places the components specified in the connected YAML data file
+ #    'page.yml' located in folder: ~/_data/layouts.
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ #
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture default_writer %}themes/{{site.template.name}}/procedures/layouts/default_writer.proc{% endcapture %}
+{% capture content_writer %}themes/{{site.template.name}}/procedures/layouts/content_writer.proc{% endcapture %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign lanes_collate = site.data.layouts.page.lanes %}
+
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+  <!-- [INFO   ]  [j1.layout.page.html                   ] [ start content processing ] -->
+  {% comment %} Collect the BODY-HEADER region
+  ------------------------------------------------------------------------------ {% endcomment %}
+  <!-- [INFO   ] [j1.layout.page.html                    ] [ call default_writer for region: 'body-header' ] -->
+  <header id="header">
+    {% include  {{default_writer}} region='body-header' items=lanes_collate %}
+  </header>
+  <!-- [INFO   ] [j1.layout.page.html                    ] [ end default_writer processing for region: 'body-header' ] -->
+
+  {% comment %} Collect the BODY-CONTENT region
+  ------------------------------------------------------------------------------ {% endcomment %}
+  <!-- [INFO   ] [j1.layout.page.html                    ] [ call content_writer for region: 'body-main' ] -->
+  <div id="content" class="container mb-5">
+    {% include  {{content_writer}} region='body-main' items=lanes_collate %}
+  </div>
+  <!-- [INFO   ] [j1.layout.page.html                    ] [ end content_writer processing for region: 'body-main' ] -->

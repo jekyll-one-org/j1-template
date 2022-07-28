@@ -1,0 +1,70 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/cookie_consent.yml
+# Default configuration settings for J1 Cookie Consent module
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2022 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+#
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# About this configuration (used for J1 CC only)
+#
+about_config:
+  title:                                Cookie Consent
+  scope:                                User settings
+  location:                             _data/modules/cookie_consent.yml
+
+# ------------------------------------------------------------------------------
+# User settings
+#
+settings:
+
+  enabled:                              true  
+  modal_html_data_path:                 /assets/data/cookie_consent/index.html
+  modal_type:                           full
+  modal_position:                       top
+  stop_scrolling:                       true
+  consent_modal_id:                     cookie_consent_modals
+  consent_modals_title:                 Privacy
+  whitelisted_pages:                    [
+                                          /,
+                                          /pages/public/about/site/,
+                                          /pages/public/about/become_a_patron/
+                                          /pages/public/legal/en/impress/,
+                                          /pages/public/legal/en/privacy/,
+                                          /pages/public/legal/en/license_agreement/
+                                        ]
+
+  categories:
+    enabled:                            false
+    category_title:                     Cookie usage by category
+    category_description:               Usage Information
+    category_description_text:          By category, cookies may used for content pages if marked by <i class="fa md-green fa-check ml-1"></i>
+    category_session:                   Session Cookies
+    category_session_enabled:           true
+    category_persistent:                Persistent Cookies
+    category_persistent_enabled:        true
+    category_first_party:               First-party Cookies
+    category_first_party_enabled:       true
+    category_second_party:              Second-party Cookies
+    category_second_party_enabled:      false
+
+  buttons:
+    policy_button:                      false
+    policy_button_text:                 Cookie Policy
+    accept_button:                      true
+    accept_button_text:                 Yes, I accept cookies
+    decline_button:                     true
+    decline_button_text:                No, I refuse cookies
+
+
+# END config
+# ------------------------------------------------------------------------------
+
+

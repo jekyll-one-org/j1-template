@@ -1,0 +1,18 @@
+# ------------------------------------------------------------------------------
+#  ~/_data/j1_strings.yml
+#  Strings used (mainly) for translation purposes
+#
+#  Product/Info:
+#  https://jekyll.one
+#
+#  Copyright (C) 2022 Juergen Adams
+#
+#  J1 Template is licensed under the MIT License.
+#  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+
+# Jekyll Quick Search
+en:
+  search_placeholder:               quick search...
+  search_no_results:                No results found.
+  copyright:                        "&copy;2015 Company Name. All rights reserved."

@@ -42,18 +42,31 @@ source 'https://rubygems.org'
 # ------------------------------------------------------------------------------
 # Use Jekyll version from GH master
 #
-# Support for Ruby version 2.7 (DEC 2019)
-# See: https://github.com/jekyll/jekyll/issues/8049
+# Support for Ruby version 3.1.2 (2022-04-12)
+# See: http://jekyllrb.com/news/2022/03/27/jekyll-3-9-2-released/
+
+# ------------------------------------------------------------------------------
+# NOTE: Install (latest) Jekyll version from Github
 # gem 'jekyll', github: 'jekyll/jekyll'
 
 # ------------------------------------------------------------------------------
-# Use Jekyll version from RubyGems
+# Use Jekyll version 3.9.2 from RubyGems to support Ruby V3
 #
-gem 'jekyll', '~> 4.2'
+gem 'jekyll', '= 3.9.2'
+gem 'webrick', '~> 1.7'
 
-# Theme Rubies, default: J1 Template (NOT used for the development system)
+# ------------------------------------------------------------------------------
+# Theme GEM J1 Template (NOT set for development system)
 #
-# gem 'j1-template', '~> 2022.4.11'
+# NOTE:
+#   Install J1 GEM from 'remote'
+#     gem 'j1-template', '= 2022.3.0.rc1'
+#
+#   Install J1 GEM from 'local'
+#     gem 'j1-template', '= 2022.3.0.rc1', path: 'g:/install'
+#     gem 'j1-template', '= 2022.3.0.rc1', path: 'C:\Ruby31-x64\lib\ruby\gems\3.1.0\cache'
+#
+# gem 'j1-template', '~> 2022.3.0.rc1'
 
 # ------------------------------------------------------------------------------
 # PRODUCTION: Gem needed for the Jekyll and J1 prod environment
@@ -106,14 +119,12 @@ gem 'wdm', '>= 0.1.1' if Gem.win_platform?
 # Jekyll Plugins
 # If any (additional) plugins are used, they goes here:
 # ------------------------------------------------------------------------------
-# NOTE: asciidoctor v2.x (automatically loaded via ???) creates corrupted
-#  asciidoctor-rouge output. Currently, older/latest version v1.x is used
+# NOTE: New settings to use Ruby V3 for Jekyll
 #
 group :jekyll_plugins do
 # gem 'algolia', '~> 2.0', '>= 2.0.4'                                           # New/latest (Jekyll-)Algolia gem
-  gem 'asciidoctor', '= 1.5.8'                                                  # See notes!!!
+  gem 'asciidoctor', '~> 2.0'                                                   # Required for Ruby V3
 # gem 'asciidoctor-pdf', '>= 1.5.4'                                             # Used for PDF creation only
-  gem 'asciidoctor-rouge', '>= 0.4.0'
   gem 'jekyll-asciidoc', '>= 3.0.0'
 # gem 'jekyll-feed', ">= 0.15.1"
 # gem 'jekyll-gist', '>= 1.5.0'                                                 # Useful ???
@@ -124,6 +135,20 @@ group :jekyll_plugins do
 end
 
 # ------------------------------------------------------------------------------
+# DEVELOPMENT: Gem needed for the Jekyll and J1 dev environment
+#
+
+# For the build (npm|yarn), J1 Template is using scss_lint
+# for linting the SCSS (Sass) components.
+#
+# NOTE: scss_lint is based on old gem 'sass', '~> 3.5.5'. A replacement
+# is needed (?) for a linter using the new Ruby Sass GEM (sassc)
+# gem 'scss_lint', '~> 0.56.0', require: false
+
+gem 'sassc', '~> 2.4'
+gem 'bump', '~> 0.10'
+
+# ------------------------------------------------------------------------------
 # Web Application specific RubyGems
 #
 
@@ -132,7 +157,7 @@ end
 # web application, e.g. on Docker or a Heroku Dyno, to define and use
 # of identical Ruby runtime environments.
 #
-# ruby '2.7.2'
+# ruby '3.1'
 
 # ------------------------------------------------------------------------------
 # Enable the `rake` Gem if needed. For container-based apps, Rake can
@@ -170,9 +195,9 @@ gem 'puma', '>= 5.5.2'
 
 # ------------------------------------------------------------------------------
 # OpenSSL provides SSL, TLS and general purpose cryptography. Used to
-# encrypt 'private' data
+# encrypt 'private' data (currently NOT supported)
 #
-gem 'openssl'
+# gem 'openssl'
 
 # ------------------------------------------------------------------------------
 # If J1 is transformed into a (Rack and Sinatra based) Web
@@ -197,10 +222,8 @@ gem 'rest-client', '~> 2.0'
 
 gem 'omniauth', '~> 1.0'                                                        # latest: 1.9.1
 gem 'omniauth-oauth2', '~> 1.7'
-
 gem 'sinatra', '~> 2.0'
 #gem 'sinatra-cross_origin', '~> 0.3'                                           # currently NOT used
-
 gem 'warden', '~> 1.2'
 
 # ------------------------------------------------------------------------------
@@ -209,17 +232,6 @@ gem 'warden', '~> 1.2'
 gem 'log4r', '~> 1.1', '>= 1.1.10'
 # gem 'uuid', '~> 2.3', '>= 2.3.8'                                              # should be removed, not longer needed
 gem 'date', '~> 2.0'
-
-# ------------------------------------------------------------------------------
-# DEVELOPMENT: Gem needed for the Jekyll and J1 dev environment
-#
-
-# For the build (npm|yarn), J1 Template is using scss_lint
-# for linting the SCSS (CSS) components:
-#
-gem 'scss_lint', '~> 0.56.0'
-gem 'sass', '~> 3.5.0'
-gem 'bump', '~> 0.8'
 
 # ------------------------------------------------------------------------------
 # END

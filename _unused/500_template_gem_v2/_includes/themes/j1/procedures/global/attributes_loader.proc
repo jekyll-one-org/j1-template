@@ -1,0 +1,121 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/_includes/themes/j1/procedures/global/attributes_loader.proc
+ #
+ # Liquid PROCEDURE to setup the Asciidoc attributes for an (entry)
+ # document. Initializes the all include paths for folders: images,
+ # documents and tables
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+ # Usage:
+ #  1)  capture the 'load_attributes' variable by full path
+ #  2)  include|configure the load_attributes procedure
+ #
+ # Example:
+ #  {% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+ #  {% include {{load_attributes}} scope="global|local|all" %}
+ # -----------------------------------------------------------------------------
+ # NOTE:
+ #  Default:  scope="global"
+ # -----------------------------------------------------------------------------
+ # NOTE:
+ #  Include directive (include::)
+ #
+ #  The include directive looks like a >>block macro<< but it is a
+ #  >>preprocessor directive<< like ifdef and ifeval. It gets processed
+ #  before the lines are parsed into a document structure.
+ #
+ #  If the path relative, the processor resolves the path using the following
+ #  rules:
+ #
+ #    If the include directive is used in the main (top-level) document,
+ #    relative paths are resolved relative to the base directory. (The base
+ #    directory defaults to the directory of the main document and can be
+ #    overridden from the CLI or API).
+ #
+ #    If the include directive is used in a file that has >>itself<<
+ #    been included, the path is resolved relative to the including
+ #    (i.e. current) file.
+ # -----------------------------------------------------------------------------
+ # NOTE:
+ #  Calculation of Pathes
+ #
+ #  Web sources are loaded by the Web Server. The location imagesdir
+ #  is calculated relative to "_site" (web root). Asciidoc resources
+ #  are being collected by AsciiDoctor relative to "page_root".
+ # -----------------------------------------------------------------------------
+ # TODO:
+ #  For POSTS, currently the ASCIIDOC macro include:: does NOT work.
+ #  Path calculation needes to be fixed. Seems Jekyll is using different
+ #  flavours for page_path (for posts and pages).
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture get_page_path %}themes/{{site.template.name}}/procedures/global/get_page_path.proc{% endcapture %}
+{% include {{get_page_path}} %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign scope = include.scope %}
+{% assign path_elements = page.path|split:'/' %}
+
+{% comment %} Source pathes
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture content_root %}{{path_elements[0]}}/..{% endcapture %}
+{% capture page_root %}{{page_path|strip|remove_first:'./'}}{% endcapture %}
+
+{% comment %} Set PATH attributes
+-------------------------------------------------------------------------------- {% endcomment %}
+:content_root:                          {{content_root}}
+:page_root:                             {{page_root}}
+
+:globalincludedir:                      {{content_root}}/_includes
+:includedir:                            {{page_root}}/_includes
+
+:globaltabledir:                        {{content_root}}/_includes/tables
+:globaldocumentdir:                     {{content_root}}/_includes/documents
+:documentdir:                           {{page_root}}/_includes/documents
+:tabledir:                              {{page_root}}/_includes/tables
+
+// Load|Publish attributes from FILE|S
+// -----------------------------------------------------------------------------
+{% if scope == "global" %}
+include::{globalincludedir}/attributes.asciidoc[tag=tags]
+include::{globalincludedir}/attributes.asciidoc[tag=urls]
+include::{globalincludedir}/attributes.asciidoc[tag=footnotes]
+include::{globalincludedir}/attributes.asciidoc[tag=data]
+include::{globalincludedir}/attributes.asciidoc[tag=tables]
+include::{globalincludedir}/attributes.asciidoc[tag=documents]
+include::{globalincludedir}/attributes.asciidoc[tag=products]
+include::{globalincludedir}/attributes.asciidoc[tag=authors]
+{% elsif scope == "local" %}
+include::{includedir}/attributes.asciidoc[tag=tags]
+include::{includedir}/attributes.asciidoc[tag=urls]
+include::{includedir}/attributes.asciidoc[tag=footnotes]
+include::{includedir}/attributes.asciidoc[tag=data]
+include::{includedir}/attributes.asciidoc[tag=authors]
+{% elsif scope == "all" %}
+include::{globalincludedir}/attributes.asciidoc[tag=tags]
+include::{globalincludedir}/attributes.asciidoc[tag=urls]
+include::{globalincludedir}/attributes.asciidoc[tag=footnotes]
+include::{globalincludedir}/attributes.asciidoc[tag=data]
+include::{globalincludedir}/attributes.asciidoc[tag=tables]
+include::{globalincludedir}/attributes.asciidoc[tag=documents]
+include::{globalincludedir}/attributes.asciidoc[tag=products]
+include::{globalincludedir}/attributes.asciidoc[tag=authors]
+include::{includedir}/attributes.asciidoc[tag=tags]
+include::{includedir}/attributes.asciidoc[tag=urls]
+include::{includedir}/attributes.asciidoc[tag=footnotes]
+include::{includedir}/attributes.asciidoc[tag=data]
+include::{includedir}/attributes.asciidoc[tag=authors]
+{% else %}
+{% endif %}

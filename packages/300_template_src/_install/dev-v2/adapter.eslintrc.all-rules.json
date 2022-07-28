@@ -1,0 +1,22 @@
+{
+  "env": {
+    "browser": true
+  },
+  "parserOptions": {
+      "ecmaVersion": 2017
+  },
+  "rules": {
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "quotes": [
+      "warn",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ]
+  }
+}
