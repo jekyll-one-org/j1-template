@@ -29,12 +29,14 @@
 
 4. Generate a J1 Project
 
-	cd c:\j1-projects && j1 generate starter-2022.5.0.rc
+	cd c:\j1-projects && j1 generate starter-2022.5.0.rc1
 
 
 5. Setup and Run a J1 Project
 
-	cd c:\j1-projects\starter-2022.5.0.rc && j1 setup && j1 site
+	cd c:\j1-projects\starter-2022.5.0.rc1 && j1 setup && j1 site
+
+
 
 
 
