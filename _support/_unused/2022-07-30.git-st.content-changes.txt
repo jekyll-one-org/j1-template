@@ -1,0 +1,90 @@
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   Gemfile
+	modified:   _config.yml
+
+	modified:   _data/modules/comments.yml
+	modified:   _data/modules/defaults/comments.yml
+	modified:   _data/modules/justifiedGallery.yml
+	modified:   _data/modules/masterslider.yml
+	modified:   _data/modules/navigator_menu.yml
+
+	modified:   _includes/attributes.asciidoc
+	modified:   _plugins/asciidoctor-extensions/lightbox-block.rb
+	modified:   _plugins/lunr_index.rb
+
+	modified:   collections/posts/public/featured/_posts/_includes/attributes.asciidoc
+
+	modified:   package.json
+
+	modified:   pages/public/about/features.adoc
+	modified:   pages/public/blog/navigator/archive.html
+	modified:   pages/public/blog/navigator/archive/categoryview.html
+	modified:   pages/public/blog/navigator/archive/dateview.html
+	modified:   pages/public/blog/navigator/archive/tagview.html
+	modified:   pages/public/blog/navigator/index.html
+
+	modified:   pages/public/cheatsheets/atom/shortcuts.adoc
+
+	modified:   pages/public/features/general.adoc
+	modified:   pages/public/features/template.adoc
+
+	modified:   pages/public/jupyter/docs/_includes/attributes.asciidoc
+	modified:   pages/public/jupyter/docs/nbinteract-widget-manual.adoc
+	modified:   pages/public/jupyter/examples/distributed/j1-common-used-widgets.adoc
+	modified:   pages/public/jupyter/notebooks/j1-bokeh-tutorial/j1_bokeh_06_linking_and_interactions.ipynb
+	modified:   pages/public/jupyter/notebooks/textbooks/j1_bokeh_01_basic_plotting.html
+	modified:   pages/public/jupyter/notebooks/textbooks/j1_bokeh_02_styling_and_theming.html
+	modified:   pages/public/jupyter/notebooks/textbooks/j1_bokeh_03_data_sources_and_transformations.html
+	modified:   pages/public/jupyter/notebooks/textbooks/j1_bokeh_04_adding_annotations.html
+	modified:   pages/public/jupyter/notebooks/textbooks/j1_bokeh_05_presentation_layouts.html
+	modified:   pages/public/jupyter/notebooks/textbooks/j1_bokeh_06_linking_and_interactions.html
+	modified:   pages/public/jupyter/notebooks/textbooks/j1_bokeh_07_bar_and_categorical_data_plots.html
+	modified:   pages/public/jupyter/notebooks/textbooks/j1_bokeh_08_graph_and_network_plots.html
+	modified:   pages/public/jupyter/notebooks/textbooks/j1_bokeh_09_geographic_plots.html
+
+	modified:   pages/public/learn/kickstart/j1_in_a_day/_includes/attributes.asciidoc
+
+	modified:   pages/public/learn/roundtrip/100_present_images.adoc
+	modified:   pages/public/learn/roundtrip/400_asciidoc_extensions.adoc
+	modified:   pages/public/learn/roundtrip/_includes/attributes.asciidoc
+
+	modified:   pages/public/manuals/attic/_includes/attributes.asciidoc
+	modified:   pages/public/manuals/carousel/_includes/documents/100_owl_carousel_library.asciidoc
+	modified:   pages/public/manuals/carousel/_includes/documents/130_owl_carousel_examples.asciidoc
+	modified:   pages/public/manuals/carousel/carousel.adoc
+	modified:   pages/public/manuals/jekyll/user_guide/_includes/attributes.asciidoc
+	modified:   pages/public/manuals/jekyll/user_guide/_includes/documents/210_variables.asciidoc
+	modified:   pages/public/manuals/lightbox/_includes/attributes.asciidoc
+	modified:   pages/public/manuals/lightbox/_includes/documents/200_light_box2_library.asciidoc
+	modified:   pages/public/manuals/lightbox/_includes/documents/220_light_box2_examples.asciidoc
+	modified:   pages/public/manuals/lightbox/_includes/documents/300_light_gallery_library.asciidoc
+	modified:   pages/public/manuals/lightbox/_includes/documents/320_light_gallery_examples.asciidoc
+	modified:   pages/public/manuals/lightbox/lightbox.adoc
+	modified:   pages/public/manuals/navigator/_includes/attributes.asciidoc
+	modified:   pages/public/manuals/navigator/navigator.adoc
+  
+	modified:   pages/public/panels/intro_panel/_includes/attributes.asciidoc
+
+	modified:   pages/public/previewer/_includes/attributes.asciidoc
+	modified:   pages/public/previewer/_includes/documents/rouge/100_language_examples.asciidoc
+	modified:   pages/public/previewer/_unused/preview_deepl_translation.adoc
+	modified:   pages/public/previewer/_unused/preview_iframer.adoc
+	modified:   pages/public/previewer/_unused/preview_twitter_emoji.adoc
+	modified:   pages/public/previewer/preview_bootstrap_theme.adoc
+	modified:   pages/public/previewer/preview_css_flags.adoc
+	modified:   pages/public/previewer/preview_justified_gallery.html
+	modified:   pages/public/previewer/preview_masterslider.adoc
+	modified:   pages/public/previewer/preview_md_color_palette.adoc
+	modified:   pages/public/previewer/preview_mdi_icons.adoc
+	modified:   pages/public/previewer/preview_mdil_icons.adoc
+	modified:   pages/public/previewer/preview_rouge_themes.adoc
+
+	modified:   utilsrv/_defaults/package.json
+	modified:   utilsrv/package.json

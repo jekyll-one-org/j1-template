@@ -47,11 +47,11 @@ issues for private or professional use.
 
 ## General
 
-* Jekyll 4.2 support
-* Ruby 2.7 support
+* Jekyll V4 support
+* Ruby V3 support
 * Asciidoc (Asciidoctor) and Markdown support
 * Asciidoctor plugins included
-* Bootstrap V5 (v5.1.3)
+* Bootstrap V5 (v5.2)
 * Responsive Design
 * Material Design
 * Responsive Text
@@ -74,7 +74,7 @@ issues for private or professional use.
 * GDPR compatible cookie consent module included
 * Translator module (Google, Deepl) included
 * Clipboard module included
-* Floating Action Buttons included
+* Floating Action ButtoLaptopns included
 * Navigation modules included
 * Lightbox modules included
 * Gallery modules included
@@ -108,10 +108,8 @@ platforms.
 To run the Development System for J1 Template, the following languages and
 tools expected to be in place with your OS:
 
-* Ruby language, version >= 2.6 < 3.x
+* Ruby language, version >= 2.7
 * Python language, version > 2.7 <1>
-* RubyGems >= 3.2.4
-* Bundler >= 2.2.4
 * Javascript language (NodeJS), version >= 14.x < 15.x
 * NPM, version >= 6.14
 * YARN, version >= 1.22
@@ -119,8 +117,7 @@ tools expected to be in place with your OS:
 
 <1> required only for **full** Jupyter Notebook support
 
-Note, Ruby **3.x** versions are **not** supported for Jekyll and J1 either.
-More current or older versions of **NodeJS** may work, but not tested.
+Note: More current or older versions may work, but not tested.
 
 
 ## Development packages
@@ -132,8 +129,8 @@ are installed for your OS (Linux, OSX, or Windows).
 ### Development packages for Windows
 
 For Ruby on Windows, a installation using RubyInstaller is recommended. A
-current Ruby of version **2.7** is available at the
-[RubyInstaller](https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-2.7.4-1/rubyinstaller-devkit-2.7.4-1-x64.exe)
+current Ruby of version **3.1** is available at the
+[RubyInstaller](https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-3.1.2-1/rubyinstaller-devkit-3.1.2-1-x64.exe)
 site.
 
 Note, to automatically install a development environment for Ruby on Windows,
@@ -202,7 +199,7 @@ If Ruby and NodeJS are in place, some packeages are to be upgraded to more
 current versions. Install all packages system-wide with their respective
 product installation pathes.
 
-### Upgrades needed for Ruby <= v2.6
+### Upgrades needed for Ruby <= v2.7
 
 Install latest bundler for Ruby:
 
@@ -448,7 +445,7 @@ and `build` process to manage an initial setup for the (Lerna) Monorepo.
 
 ## Running the Starter Web
 
-Running the buildin **starter web** for development is done like so:
+Running the buildin **Starter Web** for development is done like so:
 
 ``` sh
 yarn site

@@ -1,0 +1,207 @@
+---
+title:                                  Bokeh
+tagline:                                data visualizations using bokeh
+date:                                   2022-05-27 00:00:00
+description: >
+                                        Bokeh is an interactive visualization library for modern web browsers. It
+                                        provides elegant, concise construction of versatile graphics, and affords
+                                        high-performance interactivity over large or streaming datasets. Bokeh can
+                                        help anyone who would like to quickly and easily make interactive plots,
+                                        dashboards, and data applications.
+keywords: >
+                                        opensource, free, load, download, start, starter, example,
+                                        high, easy, use, secure, encrypt, standard, popular,
+                                        generate, create, learn, distribute, publish, deploy,
+                                        beginner, advanced, expert, student, learner, writer, reader, visitor
+                                        framework, toolkit, integration, extension, module, api,
+                                        dynamic, static, generator, client, server, internet, local, localhost
+                                        page, web, website, webdesign, material, design, responsive,
+                                        javascript, nodejs, ruby, windows, linux, osx, mac, os,
+                                        http, https, html, html5, css, scss, style,
+                                        browser, firefox, chrome, edge, opera, safari,
+                                        configuration, generator, navigation, menu, dropdown, fab, action, button
+                                        application, interface, provider, api, repository,
+                                        cookie, language, translation, gdpr, dsgvo, privacy,
+                                        asciidoc, aciidoctor, bootstrap, jekyll, liquid,
+                                        hyvor, disqus, git, github, netlify, heroku, apple, microsoft,
+                                        provider, service, internet, support,
+                                        google, analytics, advertising, search, console, silverlight, score,
+                                        j1, template, jekyllone, comment,
+                                        python, jupyter, notebook, textbook, api, app, nbinteract,
+                                        nbi, integration, binder, binderhub, jupyterhub, bokeh
+
+categories:                             [ Software, Python ]
+tags:                                   [ Bokeh, Jupyter, Notebooks ]
+
+scrollbar:                              false
+fab_menu_id:                            open_toc_reload
+personalization:                        true
+
+permalink:                              /pages/public/jupyter/examples/static/j1-bokeh-tut-00/
+regenerate:                             false
+
+resources:                              [ clipboard, nbinteract, rouge ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/modules/attics/john-schnobrich-2-1920x1280.jpg
+          alt:                          Photo by John Schnobrich on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     John Schnobrich
+            href:                       https://unsplash.com/@johnschno
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                                   <attr-value>
+:binder-badges-enabled:                 true
+:binder-app-launch--tree:               https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?urlpath=/tree
+:binder-app-launch--notebook:           https://mybinder.org/v2/gh/jekyll-one/j1-binder-repo/main?filepath=notebooks/j1/j1_altair_interactive.ipynb
+
+:j1-bokeh-tut-01:                       /pages/public/jupyter/examples/static/j1-bokeh-tut-01/
+:j1-bokeh-tut-02:                       /pages/public/jupyter/examples/static/j1-bokeh-tut-02/
+:j1-bokeh-tut-03:                       /pages/public/jupyter/examples/static/j1-bokeh-tut-03/
+:j1-bokeh-tut-04:                       /pages/public/jupyter/examples/static/j1-bokeh-tut-04/
+:j1-bokeh-tut-05:                       /pages/public/jupyter/examples/static/j1-bokeh-tut-05/
+:j1-bokeh-tut-06:                       /pages/public/jupyter/examples/static/j1-bokeh-tut-06/
+:j1-bokeh-tut-07:                       /pages/public/jupyter/examples/static/j1-bokeh-tut-07/
+:j1-bokeh-tut-08:                       /pages/public/jupyter/examples/static/j1-bokeh-tut-08/
+:j1-bokeh-tut-09:                       /pages/public/jupyter/examples/static/j1-bokeh-tut-09/
+:j1-bokeh-tut-10:                       /pages/public/jupyter/examples/static/j1-bokeh-tut-10/
+:j1-bokeh-tut-11:                       /pages/public/jupyter/examples/static/j1-bokeh-tut-11/
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// See: https://altair-viz.github.io/
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+// image:/assets/images/badges/myBinder.png[Binder, link="https://mybinder.org/", {browser-window--new}]
+// image:/assets/images/badges/docsBinder.png[Binder, link="https://mybinder.readthedocs.io/en/latest/", {browser-window--new}]
+
+ifeval::[{binder-badges-enabled} == true]
+image:/assets/images/badges/notebookBinder.png[Binder, link="{binder-app-launch--notebook}", {browser-window--new}]
+image:https://mybinder.org/badge_logo.svg[Binder, link="{binder-app-launch--tree}", {browser-window--new}]
+endif::[]
+
+== Tutorial Overview
+
+The tutorial is broken into several sections, which are each presented in their own notebook:
+
+.  link:{j1-bokeh-tut-01}[Basic Plotting]
+.  link:{j1-bokeh-tut-02}[Styling and Theming]
+.  link:{j1-bokeh-tut-03}[Data Sources and Transformations]
+.  link:{j1-bokeh-tut-04}[Adding Annotations]
+.  link:{j1-bokeh-tut-05}[Presentation and Layouts]
+.  link:{j1-bokeh-tut-06}[Linking and Interactions]
+.  link:{j1-bokeh-tut-07}[Bar and Categorical Data Plots]
+.  link:{j1-bokeh-tut-08}[Graph and Network Plots]
+.  link:{j1-bokeh-tut-09}[Geographic Plots]
+.  link:{j1-bokeh-tut-10}[Exporting and Embedding]
+.  link:{j1-bokeh-tut-11}[Running Bokeh Applications]
+
+== Introduction and Setup
+
+Bokeh is an interactive visualization library that targets modern web browsers
+for presentation. It is good for:
+
+* Interactive visualization in modern browsers
+* Standalone HTML documents, or server-backed apps
+* Expressive and versatile graphics
+* Large, dynamic or streaming data
+* Easy usage from python (or Scala, or R, or...)
+
+IMPORTANT: No programming of Javascript is required using Bokeh
+
+Bokeh is an interactive visualization library for modern web browsers. It
+provides elegant, concise construction of versatile graphics, and affords
+high-performance interactivity over large or streaming datasets. Bokeh can
+help anyone who would like to quickly and easily make interactive plots,
+dashboards, and data applications.
+
+=== Clone or download the repo
+
+First get local copies of the tutorial notebooks:
+
+[source, sh]
+----
+$ git clone https://github.com/bokeh/bokeh-notebooks.git
+----
+
+Or download from: https://github.com/bokeh/bokeh-notebooks/archive/master.zip
+
+=== Install the dependencies
+
+This tutorial has been tested on:
+
+* bokeh 1.4.0
+* pandas 0.25.2
+* notebook 6.0.1
+* phantomjs 2.1.1
+* pillow 6.1.0
+* selenium 3.8.0
+
+Other combinations may work also.
+
+The quickest, easiest way to install is to use Anaconda (or Miniconda):
+
+==== Installing with Anaconda
+
+Install http://anaconda.com/downloads[anaconda]
+
+Anaconda should come with all the dependencies included, but you may need to update your versions.
+
+==== Installing with Miniconda
+
+Install http://conda.pydata.org/miniconda.html[miniconda].
+
+Use the command line to create an environment and install the packages:
+
+[source, sh]
+----
+conda env create
+source activate bokeh-notebooks
+----
+
+NOTE: Run this in the `tutorial` directory where `environment.yml` file is.
+
+Once you've got a base install, you can install the remaining dependencies with:
+
+[source, sh]
+----
+conda install phantomjs pillow selenium
+----
+
+=== Get the sample data
+
+Bokeh has a https://docs.bokeh.org/en/latest/docs/installation.html#sample-data[sample data]
+download that gives us some data to build demo visualizations. To get it run
+the following command at your command line:
+
+[source, sh]
+----
+$ bokeh sampledata
+----
+
+or run the following from within a Python interpreter:
+
+[source, python]
+----
+import bokeh.sampledata
+bokeh.sampledata.download()
+----

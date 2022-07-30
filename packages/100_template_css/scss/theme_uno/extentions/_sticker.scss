@@ -15,6 +15,23 @@
 
 // Sticker on the right
 // -----------------------------------------------------------------------------
+.sticker-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sticker {
+    position: absolute;
+    z-index: 110;
+}
+
+
+
+
+
+
+
 .sticker-wrapper-150 {
     display: flex;
     justify-content: center;
@@ -41,7 +58,7 @@
 .sticker-right-150 {
     margin-top: -40px;
     right: 470px;
-    left: auto;
+//    left: auto;
     position: absolute;
 //  transform: rotate(60deg);
     z-index: 110;

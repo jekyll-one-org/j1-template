@@ -347,24 +347,6 @@
               icon:                     file-percent
               target:                   _blank
 
-        - title:                        Plugins
-          icon:                         power-plug
-          dropdown:
-
-            - title:                    SiteMap
-#             href:                     "https://jekyll.one/pages/public/manuals/j1/plugins/sitemap/"
-              href:                     '#'
-              icon:                     map-marker-path
-              target:                   _blank
-            - title:                    Asciidoctor
-              href:                     "https://jekyll.one/pages/public/manuals/j1/plugins/asciidoctor/"
-              icon:                     hospital
-              target:                   _blank
-            - title:                    J1 Paginator
-              href:                     "https://jekyll.one/pages/public/manuals/j1/plugins/j1_paginator/"
-              icon:                     page-last
-              target:                   _blank
-
     # --------------------------------------------------------------------------
     # J1 Integrations
     #
@@ -435,7 +417,7 @@
           icon:                         hospital
           target:                       _blank
         - title:                        J1 Paginator
-          href:                         "https://jekyll.one/pages/public/manuals/jekyll/plugins/paginator_v2/"
+          href:                         "https://jekyll.one/pages/public/manuals/j1/plugins/j1_paginator/"
           icon:                         page-last
           target:                       _blank
 

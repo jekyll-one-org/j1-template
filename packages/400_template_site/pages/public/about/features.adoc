@@ -64,44 +64,52 @@ user of _Jekyll_, the latest version is available at
 === General
 
 * _Windows_, _Linux_ and _MacOS_ supported
-* _Jekyll_ v4.2 support
-* _Ruby_ v2.7 support
-* Asciidoc and Markdown support
+* _Jekyll_ v4.2 Support
+* _Ruby_ v3 Support
+* Asciidoc and Markdown Support
 * _Asciidoctor_ plugins included
-* _Bootstrap_ V5 support
+* _Bootstrap_ V5 Support
 * Responsive Design
 * Material Design
 * Responsive Text
-* Responsive HTML tables
-* Compressed HTML, CSS and Javascript support
+* Responsive HTML Tables
+* Compressed HTML, CSS and Javascript Support
 * Bootstrap Themes from _Bootswatch_ supported
-* Icon Font support for _MDI_, _FA_, _Iconify_ and _Twitter Emojis_
+* Icon Font Support for _MDI_, _FA_, _Iconify_ and _Twitter Emojis_
 * Themeable source code highlighting (_Rouge_)
-* Desktop and Mobile Web and navigation ready
+* Desktop and Mobile Web Navigation ready
 * Fully configurable, no programming needed
-* Near 100/100/100 _Google Lighthouse_ scores (performance depends on the webserver)
+* Near 100/100/100 _Google Lighthouse_ Scores
 
 === Modules and Extensions
 
 * _Bootstrap_ extensions included
 * _Asciidoctor_ extensions included
-* Smooth-Scoll support
-* Full-text search engine (Lunr) included
-* Blog Post navigation included
-* Cookie Consent module (GDPR compatible OptIn/Out) included
-* Clipboard module included
+* Infinite Scoll Support
+* Animate on Scroll Support
+* Smooth-Scoll Support
+* Full-text Search Engine (Lunr) included
+* Master Header Module included
+* Cookie Consent Module (GDPR compatible OptIn/Out) included
+* Clipboard Module included
 * Floating Action Buttons (FABs) included
-* Navigation modules included
-* Lightbox modules included
-* Gallery modules included
-* Carousel module included
-* Video modules included
+* Navigation Modules included
+* Desktop Web Navigation included
+* Mobile Web Navigation included
+* Blog Post Navigation included
+* Lightbox Modules included
+* Gallery Module included
+* Carousel Module included
+* Slider Module included
+* Video Player Modules included
 
 === Addons and Integrations
 
-* *Starter Web* including featured example content
-* *Royalty free* images included
-* Comment Provider support for _Disqus_ and _Hyvor_
-* _Github Sponsors_ support
-* _Google Analytics_ support (includes OptIn/OptOut support)
-* Deploy to _Github Pages_, _Netlify_ and _Heroku_ ready
+* *Starter Web* including featured Example Content
+* *Royalty free* Images included
+* Comment Provider Support for _Disqus_ and _Hyvor_
+* _Jupyter Notebook_ Support
+* _Github Sponsors_ Support
+* _Google_ Translation Support
+* _Google Analytics_ Support (includes OptIn/OptOut support)
+* Deploy on _Github Pages_, _Netlify_ and _Heroku_ ready

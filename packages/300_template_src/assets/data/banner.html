@@ -220,16 +220,19 @@ exclude_from_search:                    true
             <!-- Heading -->
             <div class="noclass">
               <div>
+
+                {% comment %} TODO:
+                -----------------------------------------------------------------
                 <!-- Sticker -->
-                <div class="sticker-right-200" style="display: block;">
+                <div class="sticker" style="margin-top: -20px; right: 470px; display: block;">
                   <a
                 		  id="banner-sticker-new-version"
-                		  class="link-no-decoration sticker-wrapper-200"
+                		  class="link-no-decoration sticker-wrapper"
                 		  href="https://rubygems.org/gems/j1-template"
                 		  target="blank"
                 		  rel="noopener noreferrer">
                 		<img
-                			class="sticker"
+                			class="sticker-image"
                 			src="/assets/images/sticker/600x600/sticker-new-version.png"
                 			alt="Get new version 2022.5.0.rc3"
                 			title="Get new version 2022.5.0.rc3"
@@ -237,6 +240,7 @@ exclude_from_search:                    true
                 		>
                   </a>
                 </div>
+                ---------------------------------------------------------------- {% endcomment %}
 
                 <h2 class="g-font-weight-500 mb-0 {{card_title_translation}}">{{card_title}}</h2>
                 <p class="tagline mb-0">{{card_tagline}}</p>

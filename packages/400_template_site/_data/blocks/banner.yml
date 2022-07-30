@@ -73,7 +73,7 @@ settings:
         id:                             home_teaser_banner
         comment:                        Top teaser shown on home page
         type:                           teaser
-        badges:                         true
+        badges:                         false
         icon_family:                    MDI
         properties:                     mt-3 mb-5
 
@@ -105,18 +105,18 @@ settings:
                                           Explore what's possible if you go for static websites.
                                         </p>
 
-              stickers:
-
-                - name:                 New Version
-                  sticker:
-                    enabled:            true
-                    id:                 new-version
-                    image:              /assets/images/sticker/600x600/sticker-new-version.png
-                    size:               200
-                    title:              Get new version 2022.5.0.rc3
-                    style:              "width: 140px; height: 120px;"
-                    href:               "https://rubygems.org/gems/j1-template"
-                    target:             blank
+#              stickers:
+#
+#                - name:                 New Version
+#                  sticker:
+#                    enabled:            true
+#                    id:                 new-version
+#                    image:              /assets/images/sticker/600x600/sticker-new-version.png
+#                    size:               200
+#                    title:              Get new version 2022.5.0.rc3
+#                    style:              "width: 140px; height: 120px;"
+#                    href:               "https://rubygems.org/gems/j1-template"
+#                    target:             blank
 
               buttons:
 

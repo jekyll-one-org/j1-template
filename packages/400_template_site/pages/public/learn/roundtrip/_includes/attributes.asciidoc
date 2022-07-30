@@ -58,7 +58,7 @@ tag::urls[]
 :url-github-gist--home:                           https://gist.github.com/
 :url-asciidoc-extensions--gist-example:           https://gist.github.com/mojavelinux/5546622
 
-:url-previewer--theme:                            /pages/public/previewer/current_theme/
+:url-previewer--theme:                            /pages/public/previewer/theme/
 
 :url-fa-icons--previewer:                         https://fontawesome.com/v5.15/icons?d=gallery&p=2
 :url-iconify-icons--previewer:                    https://icon-sets.iconify.design/
