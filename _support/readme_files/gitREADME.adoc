@@ -3,6 +3,55 @@
 git config --global user.name "Juergen Adams"
 git config --global user.email "juergen@jekyll.one"
 
+== Git status colors
+
+[cols="4a,8a", options="header", width="100%", role="rtable mt-3"]
+|===
+|Color |Description
+
+|`grey`
+|*Ignored* file or folder by `.gitignore`.
+
+|`green`
+|*New* file or folder.
+
+|`orange`
+|*Modified* file or folder.
+
+|`red`
+|*Deleted* file or folder.
+
+|`blue`
+|*Untracked* file or folder (may NOT used by Atom).
+
+|===
+
+
+== Git Aliases (~/.gitconfig)
+
+	aa 	= add .
+	st 	= status
+	sts = status -b -s
+	cm 	= commit -am
+	cs 	= commit --amend --no-edit
+	ce 	= commit --amend
+	cr 	= reset HEAD~1 --soft
+	cd 	= reset HEAD~1 --hard
+	cl 	= clone
+	br 	= branch
+	co 	= checkout
+	la 	= ls-files
+	ll 	= ls-tree --full-tree -r --name-only HEAD
+	lg 	= log --stat
+	df 	= diff
+	he 	= help
+	dw 	= diff --word-diff
+	ra 	= rm -r --cached .
+	rf 	= rm -rf --cached .
+	hi 	= log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+	ty 	= 'cat-file'
+	dp 	= 'cat-file'
+	pu 	= push
 
 == Create a new repository on the command line
 
