@@ -6,7 +6,7 @@ the best of OpenSource software for the Web and the Web site generator
 private or professional use. Explore this site to learn what's possible if
 you go to the Jekyll Way.
 
-![Screenshot](https://github.com/jekyll-one-org/j1-template/raw/main/home-screenshot.jpg "J1 Starter Web")
+![Screenshot](https://github.com/jekyll-one-org/j1-template/raw/main/starter-screenshot.jpg "J1 Starter Web")
 
 * Fully Responsive. J1 Template supports modern web browsers on all
   devices for best results on PCs, Tablets, and SmartPhones.
@@ -67,40 +67,53 @@ issues for private or professional use.
 ## Modules and Extensions
 
 * Bootstrap extensions included
+* Bootstrap Themes Support included
 * Asciidoctor extensions included
-* Smooth-srcoll support
-* Full-text search engine included (Lunr)
-* Blog Post navigation included
-* GDPR compatible cookie consent module included
-* Translator module (Google, Deepl) included
+* Advanced Banners and Panels included
+* Source Code Hightlighter (Rouge) included
+* Smooth Srcoll support
+* Infine Srcoll support
+* Animate on Srcoll support
+* Full-text Search Engine included (Lunr)
+* Desktop Web Navigation included
+* Mobile Web Navigation included
+* Blog Post Navigation included
+* GDPR compatible Cookie Consent module included
+* Translator module (Google Translator) included
+* Master Header module included
 * Clipboard module included
-* Floating Action ButtoLaptopns included
-* Navigation modules included
-* Lightbox modules included
-* Gallery modules included
+* TOC module included
+* Floating Action Buttons included
+* Lightbox module included
+* Gallery module included
 * Carousel module included
+* Slider module included
 * Video modules included
 
 ## Addons and Integrations
 
-* Featured example content included
-* Royalty free images included
-* Comment provider support for Hyvor and Disqus
+* Featured Example Content included
+* Royalty Free Images included
+* Asciidoc (Asciidoctor) and Markdown (Kramdown) support
+* Icon Fonts (FA, MDI, Iconify) included
+* Video Player (HTML, YouTube, Vimeo, Dailymotion) included
+* Scalable Text Support
+* Comment Provider support (Hyvor and Disqus)
 * Google Analytics support
-* Deploy on Github Pages (source only), Netlify and Heroku ready
 * Support for Jupyter Notebooks
+* Deploy on Github Pages (source only), Netlify and Heroku ready
 
 # Supported platforms
 
-J1 is supported on all current x64-based OS:
+J1 is supported on all current **x64-based** OS:
 
 * Windows 10, build >= 1903
 * Windows WSL 2
-* Linux, kernel version >= 4.15 (e.g. Ubuntu  18.x LTS)
+* Linux, Kernel version >= 4.15 (e.g. Ubuntu  18.x LTS)
 * OSX, version >= 10.10.5 (Yosemite)
 
-Note that 32-bit versions (x32) are generally **not** supported for all
-platforms.
+Note that 32-bit versions (x32) are generally **not** supported for
+**all** platforms.
 
 
 # Development languages and tools
@@ -109,34 +122,31 @@ To run the Development System for J1 Template, the following languages and
 tools expected to be in place with your OS:
 
 * Ruby language, version >= 2.7
-* Python language, version > 2.7 <1>
+* Python language, version > 2.7 (optional) <1>
 * Javascript language (NodeJS), version >= 14.x < 15.x
-* NPM, version >= 6.14
-* YARN, version >= 1.22 (optional) <2>
-* Git, version >= 2.29 (optional) <3>
+* Git, version >= 2.29 (optional) <2>
+* Jekyll, version 4.2.x
 
 <1> Required only for **full** Jupyter Notebook support.
-<2> Alternative CLI to manage NodeJS projects.
-<3>
+<2> Required only if J1 Projects should be managed as repos.
 
 **NOTE**: More current or older versions may work, but not tested.
 
-
 ## Development packages
 
-For some of the componentsJ1 is using, a working C/C++ development environment
-is needed to compile platform-specific libraries. Ensure that all dev packages
-are installed for your OS (Linux, OSX, or Windows).
+For some of the components J1 is using, a working C/C++ development
+environment is needed to compile platform-specific libraries. Ensure
+that all dev packages are installed for your OS (Linux, OSX, or Windows).
 
 ### Development packages for Windows
 
-For Ruby on Windows, a installation using RubyInstaller is recommended. A
-current Ruby of version **3.1** is available at the
+For Ruby on Windows, a installation using **RubyInstaller** is recommended.
+A current Ruby of version **3.1** is available at the
 [RubyInstaller](https://github.com/oneclick/rubyinstaller2/releases/download/RubyInstaller-3.1.2-1/rubyinstaller-devkit-3.1.2-1-x64.exe)
 site.
 
-Note, to automatically install a development environment for Ruby on Windows,
-a x64 version of Ruby should be installed that is already bundled with a
+Note, to automatically install a development environment for Ruby on *Windows*,
+a version of Ruby should be installed that is already **bundled** with a
 **DEVKIT** (MSYS2 toolchain).
 
 ### Development packages on Linux (Ubuntu)
@@ -178,7 +188,7 @@ ruby-dev
 ```
 
 Note that priviliged (administrative) user rights are needed to install
-system-wide software packages for the OS.
+system-wide software packages for Ruby and the OS.
 
 ### Development packages on OSX
 
@@ -224,15 +234,16 @@ management is `npm`. Besides `npm` there's another quite handy CLI for NPM
 available: *Yarn*.
 
 The CLI `yarn` is developed at Facebook and can be used as a replacement
-for `npm`. From a top-level perspective, both package management clients behave
-pretty much the same. The syntax `yarn` uses is shorter in writing, making
-the command-line look a bit more natural. Therefore, we prefer to use `yarn`.
+for `npm`. From a top-level perspective, both package management clients
+behave pretty much the same. The syntax `yarn` uses is shorter in writing,
+making the command-line look a bit more natural. Therefore, we prefer to
+use `yarn`.
 
-NOTE: Yarn adds some additional features to the NodeJS package management
-implemented for the needs at Facebook. Regarding the J1 development system,
-those add-ons are neither needed nor used.
+**NOTE**: Yarn adds some additional features to the NodeJS package
+management implemented for the needs at Facebook. To use J1 Template, those
+add-ons are neither needed nor used.
 
-Install latest NPM and Yarn packages for NodeJS:
+Install latest *NPM* and *Yarn* packages for *NodeJS*:
 
 ``` sh
 npm install -g npm@latest
@@ -245,14 +256,14 @@ Install and run a J1 template project is very simple:
 
 * Install J1 Template
 * Setup the Project
-* Run and develop the buildin Starter Web
+* Run the buildin Starter Web
 
 ## Installing J1 Template
 
 You can install J1 Template in two ways:
 
 * Installing the Ruby Gem of J1 Template (recommended)
-* Clone the J1 Template Repo from *Github*
+* Clone the current J1 Template Repo from *Github*
 
 The recommended method to install J1 is using the the **Ruby Gem**.
 If you're using *Git* already, cloning the Repo at *Github* may an
@@ -262,21 +273,21 @@ option.
 
 It is highly recommended to install all project-related Ruby GEMs so-called
 **userized**. The **user install** option of the *RubyGems* CLI **gem** will
-install all requested Ruby Gems in the **home directory** of a user. This
-prevents to pollute the System Ruby installation by packages only needed
-by specific users or projects.
+install all requested Ruby Gems in the **home directory** of a user.
+Installing userized prevents polluting the System Ruby Installation by
+packages only needed by specific users or projects.
 
-**IMPORTANT**: If you're on *Linux* (Unix) a system-wide installation of
+**IMPORTANT**: If you're on *Linux* (Unix), a system-wide installation of
 Ruby GEMs requires **elevated** user rights (root). *Userized* installations
 of Ruby packages can be done by all users **without** having elevated
 user rights.
 
-J1 Template is using the **user install** option internally by default.
-All depended Ruby GEMs will be installed in the users home directory in
+J1 Template uses the **user install** option internally by **default**.
+All depended Ruby GEMs are installed in the user's home directory in
 folder `.gem`.
 
-Prior to install the J1 Gem, make sure that a `.gem` already exists in
-your home directory.
+Prior to install the J1 Gem, make sure that a `.gem` folder already exists
+in your **home** directory.
 
 On *Windows*, run:
 
@@ -302,13 +313,13 @@ You can get it by **cloning** the repository using **Git**`:
 
     git clone https://github.com/jekyll-one/j1-template-starter.git
 
-The repo gets written to folder `j1-template`. Have a look and browse the
-folder. You'll see a structure like this:
+The repo gets written to folder `j1-template-starter`. Have a look and
+browse the folder. You'll see a structure like this:
 
 General J1 Project Repo structure:
 
 ``` sh
-  ├──── project
+  ├──── j1-template-starter
   │    └─── _data
   |    └─── _includes
   │    └─── _plugins
@@ -328,20 +339,22 @@ General J1 Project Repo structure:
   └──── README.md
 ```
 
+**NOTE**: It is recommended to rename the folder `j1-template-starter` of
+the cloned repo to a more specific (project) name.
+
 All development **tasks** are defined as NPM **scripts** with the project
-config file `package.json`. For your convinience, the J1 Template Gem
-comes with a build-in CLI **j1* run run all project-related commands;
+config file `package.json`. For your convenience, the J1 Template Gem
+comes with a build-in CLI **j1* run all project-related commands;
 no need to learn **npm** or how to manage **NodeJS** projects.
 
 
 ## Setup the Project
 
-The setup procedure depends on how you are installed J1 Template. If
-you are using the J1 GEM as recommended, you need to **create** a
-personal project first. If you have cloned the J1 Template Repo from
-*Github*, the project is already created by the clone folder and you
-can skip the creation of a project; continue on section
-**Initialize a J1 Project**.
+The setup procedure depends on how you installed J1 Template. If you are
+using the J1 GEM as recommended, you need to **create** a personal project
+first. If you have cloned the J1 Template Repo from *Github*, the project
+is already created by the clone folder, and you can skip the creation of
+a project; continue on section **Initialize a J1 Project**.
 
 ### Create a J1 Project
 
