@@ -672,6 +672,9 @@
     - title:                            This site
       icon:                             home-variant-outline
       href:                             /pages/public/about/site
+    - title:                            Reporting issues
+      icon:                             bug
+      href:                             /pages/public/about/reporting_issues/      
     - title:                            Privacy
       icon:                             heart
       href:                             /pages/public/legal/en/privacy/

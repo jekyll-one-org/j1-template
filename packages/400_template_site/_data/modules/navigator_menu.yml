@@ -488,6 +488,9 @@
     - title:                            This site
       icon:                             home-variant-outline
       href:                             /pages/public/about/site
+    - title:                            Reporting issues
+      icon:                             bug
+      href:                             /pages/public/about/reporting_issues/
     - title:                            Features
       icon:                             wrench
       href:                             /pages/public/about/features/
