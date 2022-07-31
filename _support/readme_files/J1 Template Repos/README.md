@@ -103,6 +103,7 @@ issues for private or professional use.
 * Support for Jupyter Notebooks
 * Deploy on Github Pages (source only), Netlify and Heroku ready
 
+
 # Supported platforms
 
 J1 is supported on all current **x64-based** OS:
@@ -250,15 +251,16 @@ npm install -g npm@latest
 npm install -g yarn@latest
 ```
 
-# Setting up the project
+# Managing J1 Projects
 
-Install and run a J1 template project is very simple:
+Managing J1 Template projects is very simple:
 
 * Install J1 Template
-* Setup the Project
-* Run the buildin Starter Web
+* Setup a project
+* Initialize the project
+* Run the J1 Project
 
-## Installing J1 Template
+## Install J1 Template
 
 You can install J1 Template in two ways:
 
@@ -286,7 +288,7 @@ J1 Template uses the **user install** option internally by **default**.
 All depended Ruby GEMs are installed in the user's home directory in
 folder `.gem`.
 
-Prior to install the J1 Gem, make sure that a `.gem` folder already exists
+Prior to install the J1 Gem, make sure that a `.gem` folder already **exists**
 in your **home** directory.
 
 On *Windows*, run:
@@ -342,9 +344,10 @@ General J1 Project Repo structure:
 **NOTE**: It is recommended to rename the folder `j1-template-starter` of
 the cloned repo to a more specific (project) name.
 
+
 All development **tasks** are defined as NPM **scripts** with the project
 config file `package.json`. For your convenience, the J1 Template Gem
-comes with a build-in CLI **j1* run all project-related commands;
+comes with a build-in CLI **j1** run all project-related commands;
 no need to learn **npm** or how to manage **NodeJS** projects.
 
 
@@ -353,7 +356,7 @@ no need to learn **npm** or how to manage **NodeJS** projects.
 The setup procedure depends on how you installed J1 Template. If you are
 using the J1 GEM as recommended, you need to **create** a personal project
 first. If you have cloned the J1 Template Repo from *Github*, the project
-is already created by the clone folder, and you can skip the creation of
+is already created by the clone's folder and you can skip the creation of
 a project; continue on section **Initialize a J1 Project**.
 
 ### Create a J1 Project
@@ -364,12 +367,11 @@ On *Windows*, run:
     mkdir %HOMEDRIVE%%HOMEPATH%\j1-projects
 
 Managing J1 Projects is simple: all tasks you need are run by the buildin
-CLI **j1*. To create a new project inside the projects folder, run:
+CLI **j1**. To create a new project inside the projects folder, run:
 
     cd %HOMEDRIVE%%HOMEPATH%\j1-projects && j1 generate my-starter
 
-This command creates an **initial** project structure in folder
-**my-starter**.
+This command creates a **initial** project in folder **my-starter**.
 
 ```
   2022-07-30 18:12:08 - GENERATE: Running bundle install in C:/Users/xxx/j1-projects/my-starter ...
@@ -389,13 +391,18 @@ This command creates an **initial** project structure in folder
   2022-07-30 18:12:13 - GENERATE: To setup the site, change to the project folder C:/Users/xxx/j1-projects/my-starter and run: j1 setup
 ```
 
-### Initialize a J1 Project
+## Initialize the project
 
 To make a project usable, is has to be initialzed first. This is needed
 only once after you create a **new** project.
 On *Windows*, run the `setup` task like so:
 
     cd %HOMEDRIVE%%HOMEPATH%\j1-projects\my-starter && j1 setup
+
+**NOTE**: While initializing a project, the J1 Template Gem is downloaded as
+a dependecy (if **not** already installed). For the users **cloned** the J1
+Template repo (as a project), the J1 GEM will be installed and all **j1**
+commands are available as well.
 
 ```
   Check consistency of the J1 project ...
@@ -409,7 +416,7 @@ On *Windows*, run the `setup` task like so:
   2022-07-30 18:17:48 - SETUP: Initialize the project ...
   2022-07-30 18:17:48 - SETUP: Be patient, this will take a while ...
   2022-07-30 18:17:49 - SETUP:
-  2022-07-30 18:17:49 - SETUP: > j1@2022.5.0-rc2 setup C:\Users\xxx\j1-projects\my-starter
+  2022-07-30 18:17:49 - SETUP: > j1@2022.5.0-rc3 setup C:\Users\xxx\j1-projects\my-starter
   2022-07-30 18:17:49 - SETUP: > npm --silent run setup-start && npm --silent run setup-base && run-s -s setup:*
   2022-07-30 18:17:49 - SETUP:
   2022-07-30 18:17:50 - SETUP: Setup project for first use ..
@@ -441,7 +448,7 @@ On *Windows*, run the `setup` task like so:
   2022-07-30 18:19:29 - SETUP: To open your site, run: j1 site
 ```
 
-### Run a J1 Project
+## Run the J1 Project
 
 After the setup process has been finished, you can run a project by running
 `j1 site`. Finally, the buildin Starter Web get openend in your default
@@ -454,7 +461,7 @@ browser. Let's start the journey ...
   Check setup state of the J1 project ...
   2022-07-30 18:26:18 - SITE: Starting up your site ...
   2022-07-30 18:26:18 - SITE:
-  2022-07-30 18:26:18 - SITE: > j1@2022.5.0-rc2 j1-site C:\Users\jadams\j1-projects\my-starter
+  2022-07-30 18:26:18 - SITE: > j1@2022.5.0-rc3 j1-site C:\Users\jadams\j1-projects\my-starter
   2022-07-30 18:26:18 - SITE: > run-p -s j1-site:*
   2022-07-30 18:26:18 - SITE:
   2022-07-30 18:26:20 - SITE: Startup UTILSRV ..
@@ -493,7 +500,7 @@ Check setup state of the J1 project ...
 REBUILD: Rebuild the projects website ...
 REBUILD: Be patient, this will take a while ...
 2022-07-30 18:45:09 - REBUILD:
-2022-07-30 18:45:09 - REBUILD: > j1@2022.5.0-rc2 rebuild C:\Users\xxx\j1-projects\my-starter
+2022-07-30 18:45:09 - REBUILD: > j1@2022.5.0-rc3 rebuild C:\Users\xxx\j1-projects\my-starter
 2022-07-30 18:45:09 - REBUILD: > run-s -s rebuild:* && run-s -s post-rebuild:*
 2022-07-30 18:45:09 - REBUILD:
 2022-07-30 18:45:10 - REBUILD: Rebuild site incremental ..
@@ -541,7 +548,7 @@ using Lerna for all packages:
   2022-07-30 18:29:07 - RESET: Reset the project to factory state ...
   2022-07-30 18:29:07 - RESET: Be patient, this will take a while ...
   2022-07-30 18:29:08 - RESET:
-  2022-07-30 18:29:08 - RESET: > j1@2022.5.0-rc2 reset C:\Users\xxx\j1-projects\my-starter
+  2022-07-30 18:29:08 - RESET: > j1@2022.5.0-rc3 reset C:\Users\xxx\j1-projects\my-starter
   2022-07-30 18:29:08 - RESET: > run-s -s reset:*
   2022-07-30 18:29:08 - RESET:
   2022-07-30 18:29:08 - RESET: Reset project to factory state ..
@@ -567,6 +574,5 @@ using Lerna for all packages:
 Start your work from the scratch by running the `setup` task again:
 
     j1 setup
-
 
 Happy Jekylling!
