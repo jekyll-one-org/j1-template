@@ -221,7 +221,7 @@ j1.adapter.masterslider = (function (j1, window) {
       // add jQuery ready() function once
       if (sliderManager) {
         msSliderManagerItem        = '$(function() {' + '\n';
-        msSliderManagerItem       += '  console.debug("initializing MS slider manager");' + '\n';
+        msSliderManagerItem       += '  console.debug("initializing MS Slider Manager");' + '\n';
         msSliderManagerItem       += '\n';
         msSliderManager.innerHTML  = msSliderManagerItem;
       }
@@ -405,7 +405,7 @@ j1.adapter.masterslider = (function (j1, window) {
         // close jQuery ready() function once
 
         var msSliderManagerItem;
-        msSliderManagerItem        = '\n' + '  console.debug("initializing MS slider manager finished");' + '\n';
+        msSliderManagerItem        = '\n' + '  console.debug("initializing MS Slider Manager finished");' + '\n';
         msSliderManagerItem       +=  '});' + '\n';
         msSliderManager.innerHTML +=  msSliderManagerItem + '\n';
 
