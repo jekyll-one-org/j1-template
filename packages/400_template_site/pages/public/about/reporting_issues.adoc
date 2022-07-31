@@ -34,7 +34,7 @@ resource_options:
 
 // Attribute settings for section control
 //
-:badges-enabled:                        true
+:badges-enabled:                        false
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
