@@ -138,10 +138,10 @@ j1.adapter.masterslider = (function (j1, window) {
       console.debug('module state: ' + _this.getState());
 
       // load HTML portion for all sliders configured
-      console.debug('load HTML portion for all sliders configured');
+      console.debug('loading HTML portion for all sliders configured');
       _this.loadSliderHTML(sliderOptions, sliders);
       // create an 'MasterSlider' instance for all sliders configured
-      console.debug('create an \'MasterSlider\' instance for all sliders configured');
+      console.debug('create an \'MasterSlider\' instance for all MS sliders configured');
       _this.createSliderInstances(sliders, msSliderManager);
 
       // initialize all sliders configured
@@ -149,6 +149,7 @@ j1.adapter.masterslider = (function (j1, window) {
         if (_this.getState() == 'data_loaded' && j1.getState() == 'finished') {
           logger.info('\n' + 'ms module version detected: ' + moduleVersion);
           logger.info('\n' + 'module is being initialized');
+          console.debug('MS slider module is being initialized');
           _this.initSliders(sliderOptions, sliders, msSliderManager, saveSliderConfig);
           clearInterval(dependencies_met_data_loaded);
         } // END dependencies_met_j1_finished
@@ -165,6 +166,7 @@ j1.adapter.masterslider = (function (j1, window) {
             if (sliderManager) document.body.appendChild(msSliderManager);
 
             logger.info('\n' + 'initializing module finished');
+            console.debug('initializing MS slider module finished');
             clearInterval(dependencies_met_module_finished);
         } // END dependencies_met_j1_finished
       }, 25);
@@ -214,16 +216,24 @@ j1.adapter.masterslider = (function (j1, window) {
     createSliderInstances: function (sliders, sliderManager) {
       var msSliderManager = sliderManager;
       var numSliders      = Object.keys(sliders).length;
+      var msSliderManagerItem;
+
+      // add jQuery ready() function once
+      if (sliderManager) {
+        msSliderManagerItem        = '$(function() {' + '\n';
+        msSliderManagerItem       += '  console.debug("initializing MS slider manager");' + '\n';
+        msSliderManagerItem       += '\n';
+        msSliderManager.innerHTML  = msSliderManagerItem;
+      }
 
       var i=0;
       Object.keys(sliders).forEach(function(key) {
-        var msSliderManagerItem;
         i++;
         console.debug('create slider instance on id: ' + sliders[key].id);
 
         if (sliderManager) {
-          msSliderManagerItem        =  'var masterslider_' + i + ' = new MasterSlider();' + '\n';
-          msSliderManager.innerHTML +=  msSliderManagerItem;
+          msSliderManagerItem        = '  var masterslider_' + i + ' = new MasterSlider();' + '\n';
+          msSliderManager.innerHTML += msSliderManagerItem;
         } else {
           _this["masterslider_" + i] = new MasterSlider();
         }
@@ -391,6 +401,13 @@ j1.adapter.masterslider = (function (j1, window) {
             logger.info('\n' + 'slider found disabled on id: ' + slider[key].id);
           }
         });
+
+        // close jQuery ready() function once
+
+        var msSliderManagerItem;
+        msSliderManagerItem        = '\n' + '  console.debug("initializing MS slider manager finished");' + '\n';
+        msSliderManagerItem       +=  '});' + '\n';
+        msSliderManager.innerHTML +=  msSliderManagerItem + '\n';
 
         _this.setState('sliders_initialized');
         logger.debug('\n' + 'state: ' + _this.getState());

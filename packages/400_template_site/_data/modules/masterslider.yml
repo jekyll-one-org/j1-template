@@ -24,10 +24,6 @@ description:
 #
 settings:
 
-  module_version:                       lite                                    # lite | pro
-  save_slider_config:                   true
-  slider_manager:                       false
-
   # ----------------------------------------------------------------------------
   # Sliders
   # ----------------------------------------------------------------------------

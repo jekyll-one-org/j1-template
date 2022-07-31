@@ -101,7 +101,8 @@ module.exports = merge(common, {
     port:                               devServerPort,
     allowedHosts:                       'all',                                  // host security setting. Only use it when you know what you're doing.
     headers: {                                                                  // Response header settings for the STATIC web (CORS)
-      'X-Builder-Engine-Powered-By':    'J1 Template'
+      'X-Builder-Template': 'J1 Template',
+      'X-Builder-Engine':   'Jekyll'
     },
     client: {
       logging:                          'info',                                 // default: info, can be error|warning|info|none

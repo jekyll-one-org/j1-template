@@ -55,7 +55,7 @@ environment:                            development
 # ------------------------------------------------------------------------------
 #   Sets the build version of J1 Template Gem
 #
-version:                                2022.5.0.rc3
+version:                                2022.5.0.rc4
 
 # version
 # ------------------------------------------------------------------------------
@@ -435,8 +435,8 @@ sass:
 #
 webrick:
   headers:
-    X-J1-Template: v2022.5.0.rc2
-    X-Builder-Engine-Powered-By: Jekyll v4.2.2
+    X-Builder-Template:                 J1 Template
+    X-Builder-Engine:                   Jekyll
 
 # ------------------------------------------------------------------------------
 # POSTS Management
