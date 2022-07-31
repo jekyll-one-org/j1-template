@@ -119,7 +119,7 @@
     "posttemplate-gem-site-files:utilsrv-remove": "shx rm -rf ./lib/starter_web/utilsrv/node_modules && shx rm -f ./lib/starter_web/utilsrv/yarn.lock && shx rm -f ./lib/starter_web/utilsrv/package-lock.json",
     "posttemplate-gem-site-files:about-remove": "shx rm -rf ./lib/starter_web/pages/public/about",
     "posttemplate-gem-site-files:about-copy": "shx mkdir ./lib/starter_web/pages/public/about && shx cp ../300_template_src/_install/templates/pages/about_site.adoc ./lib/starter_web/pages/public/about",
-    "posttemplate-gem-site-files:pages-copy-reporting-issues": "shx cp ../400_template_src/pages/about/reporting_issues.adoc ./lib/starter_web/pages/public/about",
+    "posttemplate-gem-site-files:pages-copy-reporting-issues": "shx cp ../400_template_site/pages/public/about/reporting_issues.adoc ./lib/starter_web/pages/public/about",
     "template-gem-permissions": "run-p -s template-gem-permission:*",
     "template-gem-permission:batch": "shx chmod a+x ./lib/starter_web/*sh",
     "template-gem-permission:j1_exe": "shx chmod a+x ./exe/j1",
