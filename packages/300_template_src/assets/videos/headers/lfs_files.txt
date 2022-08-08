@@ -1,4 +1,0 @@
-underground-broadway.mp4:                 https://github.com/jekyll-one-org/jekyll-one-lfs/raw/master/videos/underground-broadway.mp4
-victoria-oskolovich-on-vimeo.mp4:         https://github.com/jekyll-one-org/jekyll_one_com/raw/master/assets/videos/headers/victoria-oskolovich-on-vimeo.mp4
-sunset-lapse.mp4:                         https://github.com/jekyll-one-org/jekyll_one_com/raw/master/assets/videos/headers/sunset-lapse.mp4
-video-bg.mp4                              https://github.com/jekyll-one-org/jekyll_one_com/raw/master/assets/videos/headers/video-bg.mp4

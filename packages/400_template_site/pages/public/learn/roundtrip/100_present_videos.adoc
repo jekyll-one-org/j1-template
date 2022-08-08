@@ -24,10 +24,14 @@ resources:                              [
                                         ]
 resource_options:
   - attic:
+
+      circuit:                          false
+      notranslate:                      true
+
       slides:
 
         # Broadway Underground - still image (animate default)
-        - url:                          /assets/videos/headers/still/underground-broadway.jpg
+        - url:                          /assets/videos/headers/present_videos/still/underground-broadway.jpg
           alt:                          Broadway Underground
           title:                        Roundtrip
           tagline:                      present videos
@@ -35,7 +39,7 @@ resource_options:
           animateFirst:                 false
 
         # Broadway Underground - FAYETTE ST, moved file to Github/LFS
-        - url:                          https://github.com/jekyll-one-org/jekyll-one-lfs/raw/master/videos/underground-broadway.mp4
+        - url:                          /assets/videos/headers/present_videos/underground-broadway.mp4
           title:                        Roundtrip
           tagline:                      Broadway Underground
           alignY:                       0
@@ -44,7 +48,7 @@ resource_options:
           duration:                     12000
 
         # Broadway Underground - still image (animate random)
-        - url:                          /assets/videos/headers/still/underground-broadway.jpg
+        - url:                          /assets/videos/headers/present_videos/still/underground-broadway.jpg
           alt:                          Broadway Underground
           title:                        Roundtrip
           tagline:                      present videos
