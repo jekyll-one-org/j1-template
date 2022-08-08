@@ -1,6 +1,5 @@
 ---
-title:                                  Country Flags
-tagline:                                flags worldwide
+
 layout:                                 page
 date:                                   2020-11-08 00:00:00
 description: >
@@ -45,8 +44,11 @@ resources:                              [ animate, comments, clipboard, rouge, f
 resource_options:
   - attic:
       slides:
+
         - url:                          /assets/images/modules/attics/vladislav-klapin-2-1920x1280.jpg
           alt:                          Photo by Vladislav Klapin on Unsplash
+          title:                        Country Flags
+          tagline:                      flags worldwide
           badge:
             type:                       unsplash
             author:                     Vladislav Klapin

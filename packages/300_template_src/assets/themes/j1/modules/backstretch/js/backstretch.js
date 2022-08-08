@@ -731,7 +731,7 @@
 
         break;
 
-      case 'pushleft':
+          case 'pushleft':
           case 'push_left':
           case 'pushright':
           case 'push_right':

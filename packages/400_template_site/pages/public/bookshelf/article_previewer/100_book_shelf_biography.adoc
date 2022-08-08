@@ -17,8 +17,11 @@ resources:                              [ animate ]
 resource_options:
   - attic:
       slides:
+
         - url:                          /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
           alt:                          Photo by Giammarco on Unsplash
+          title:                        Biography
+          tagline:                      Today's People in the Book Shelf
           badge:
             type:                       unsplash
             author:                     Giammarco

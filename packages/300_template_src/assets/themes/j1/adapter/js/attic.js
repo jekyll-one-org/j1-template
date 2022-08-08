@@ -120,27 +120,38 @@ j1.adapter.attic = (function (j1, window) {
       // initialize state flag
       _this.state = 'pending';
 
-      // create settings object from frontmatter options
+      // create settings object from frontmatter
       var frontmatterOptions  = options != null ? $.extend({}, options) : {};
-      // create settings object from attic options
-      var atticOptions         = $.extend({}, {{attic_options | replace: 'nil', 'null' | replace: '=>', ':' }});
 
-      // Save frontmatterOptions in the j1 namespace
+      // create settings object from attic options
+      var atticDefaults = $.extend({}, {{attic_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      var atticSettings = $.extend({}, {{attic_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+
+//    merge all attic options
+      var atticOptions = $.extend({}, atticDefaults, atticSettings, frontmatterOptions);
+
+      // Save frontmatterOptions and atticOptions in the j1 namespace
       // to be used later by j1.template.init() to load the header
+      //
       _this['frontmatterOptions'] = frontmatterOptions;
+      _this['atticOptions']       = atticOptions;
 
       _this.setState('started');
       logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
-      _this.loadHeader(frontmatterOptions);
+      _this.loadHeader();
+
     }, // END init
 
     // -------------------------------------------------------------------------
     // Initialize all header supported
     // -------------------------------------------------------------------------
     loadHeader: function () {
-      var frontmatterOptions = _this.frontmatterOptions;
+      var frontmatterOptions  = _this.frontmatterOptions;
+      // merge all attic options
+      var atticOptions = $.extend({}, _this.atticOptions, _this.frontmatterOptions);
+
 
       {% comment %} Load data from header config (yaml data file)
       -------------------------------------------------------------------------- {% endcomment %}
@@ -184,57 +195,89 @@ j1.adapter.attic = (function (j1, window) {
               $('.backstretch').addClass(atticOptions.spinner);
             }
 
-            // if (atticOptions.spinner) {
-            //   $('.backstretch').addClass(atticOptions.spinner);
-            // }
-
             // Collect backstretch instance data for Backstretch callbacks
             var backstretch_instance_data = $('#{{attic_id}}').data('backstretch');
+
+            // Add event for pauseOnHover
+            //
+            if (atticOptions.pauseOnHover) {
+              $('#attic_home').hover (
+                function() {
+                  $('#{{attic_id}}').backstretch('pause'); },
+                function() {
+                  $('#{{attic_id}}').backstretch('resume'); }
+              );
+            }
 
             {% comment %} Set the headerLoaded flag (page NOT visible)
             -------------------------------------------------------------------- {% endcomment %}
            $(window).on('backstretch.before', function (e, instance, index) {
-              var evt     = e;
-              var inst    = instance;
-              var idx     = index;
-//            logger.debug('\n' + 'state: ' + _this.getState());
-              console.log('module attic - entered: backstretch.before');
+              var evt                 = e;
+              var inst                = instance;
+              var idx                 = index;
+              var atticOptions        = _this.atticOptions;
+              var textOverlayTitle    = instance.images[index].title
+              var textOverlayTagline  = instance.images[index].tagline;
+              var textOverlayHTML;
 
+              console.log('module attic - set state: backstretch_before');
+              _this.setState('backstretch_before');
+
+              if (index === backstretch_instance_data.images.length -1) {
+                if (atticOptions.circuit == false) {
+                  // Stop the slideshow after reached the last image
+                  $('#{{attic_id}}').backstretch('pause');
+                }
+                // remove class for the backstretch_intro background
+                $('.backstretch').removeClass(atticOptions.spinner);
+              }
+
+              console.log('module attic - entered: backstretch.before');
               console.log('module attic - apply: CSS filters');
+
               $('.backstretch').css('filter', 'sepia(1) brightness(0.9) contrast(0.6)');
-//            $('.backstretch').css('filter', 'sepia(1) brightness(0.9) contrast(0.6)');
               $('.backstretch').css('filter', 'grayscale(1) contrast(1) brightness(1)');
 
-              _this.setState('backstretch_before');
-//             console.log('module attic - set state: backstretch_before');
-            });
+              // mute the overlay content while sliding
+              $('.textOverlay').css('opacity', '0');
+
+              // mute the badge while sliding
+              $('.attic-caption').css('opacity', '0');
+
+            }); // END on('backstretch.before')
 
             {% comment %} Add a caption (c) or badge (b) if configured
             See: https://github.com/jquery-backstretch/jquery-backstretch/issues/194
             -------------------------------------------------------------------- {% endcomment %}
             $(window).on('backstretch.after', function (e, instance, index) {
-              logText ='add caption text';
-              _this.setState('backstretch_after');
-//            logger.debug('\n' + 'state: ' + status);
-              // logger.debug(logText);
+              var textOverlayTitle    = instance.images[index].title
+              var textOverlayTagline  = instance.images[index].tagline;
+              var atticOptions        = _this.atticOptions;
+              var frontmatterOptions  = _this.frontmatterOptions;
+              var textOverlayHTML;
 
-              if (typeof atticOptions.slides[index].caption != 'undefined') {
-                var cText = atticOptions.slides[index].caption.text;
-                var cLink = atticOptions.slides[index].caption.href;
+              if (typeof instance.images[index].badge != 'undefined') {
+                var bType               = instance.images[index].badge.type;
+                var bAuthor             = instance.images[index].badge.author;
+                var bLink               = instance.images[index].badge.href;
+              }
+
+              _this.setState('backstretch_after');
+
+              if (typeof instance.images[index].caption != 'undefined') {
+                var cText = instance.images[index].caption.text;
+                var cLink = instance.images[index].caption.href;
 
                 if (cLink) {
-                  $('.attic-caption').html('<a class="j1-masthead-caption-anchor" href="' +cLink+ '" target="_blank">'+cText+'</a>').show(); //.addClass('animated fadeInUp');
+                  $('.attic-caption').html('<a class="j1-masthead-caption-anchor" href="' + cLink + '" target="_blank">'+cText+'</a>').show();
                 } else {
-                  $('.attic-caption').text(cText).show(); //.addClass('animated fadeInUp');
+                  $('.attic-caption').text(cText).show();
                 }
-              } else if (typeof atticOptions.slides[index].badge != 'undefined') {
-                var bType   = atticOptions.slides[index].badge.type;
-                var bAuthor = atticOptions.slides[index].badge.author;
-                var bLink   = atticOptions.slides[index].badge.href;
+              } else if (typeof instance.images[index].badge != 'undefined') {
 
                 if (bType === 'unsplash') {
                   var badgeHTML = ''
-                      + '<div class="attic__badge">'
+                      + '<div class="attic__badge animate__animated animate__fadeIn animate__slower">'
                       + ' <a class="attic__badge_unsplash link-no-decoration"'
                       + '  href="' +bLink+ '?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"'
                       + '  target="_blank"'
@@ -244,52 +287,45 @@ j1.adapter.attic = (function (j1, window) {
                       + '    <svg xmlns="http://www.w3.org/2000/svg"'
                       + '	   class="attic__badge_unsplash_icon-size"'
                       + '      viewBox="0 0 32 32">'
-//                    + '      <title>search unsplash</title>'
                       + '      <path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path>'
                       + '    </svg>'
                       + '  </span>'
                       + '  <span class="attic__badge_unsplash_text">' +bAuthor+ '</span>'
                       + ' </a>'
                       + '</div>';
-
-                  $('.attic-caption').html(badgeHTML).show();
+                      $('.attic-caption').html(badgeHTML).hide();
                 }
               }
+
+              textOverlayHTML = ''
+                + '<div id="head-title" class="head-title animate__animated ">'
+                + '  <h2 id="head-title-text" class="notoc text-emphasis-stronger">' + textOverlayTitle + '</h2>'
+                + '</div>'
+                + '<div id="head-tagline" class="head-tagline animate__animated ">'
+                + '  <h3 id="head-tagline-tagline" class="notoc">' + textOverlayTagline + '</h3>'
+                + '</div>';
+               $('.textOverlay').html(textOverlayHTML).hide();
+
+              $('#head-title').addClass(atticOptions.title_animate);
+              $('#head-title').addClass(atticOptions.title_animate_delay);
+              $('#head-title').addClass(atticOptions.title_animate_duration);
+              $('#head-tagline').addClass(atticOptions.tagline_animate);
+              $('#head-tagline').addClass(atticOptions.tagline_animate_duration);
+
+              $('.textOverlay').show();
+              $('.textOverlay').css('opacity', '1');
+              $('.attic-caption').show();
+              $('.attic-caption').css('opacity', '1');
+
               _this.setState('finished');
               logger.debug('\n' + 'state: ' + _this.getState());
               logger.info('\n' + 'module initialized successfully');
-            });
-
-            {% comment %} Detect how show should run (only once|infinite loop)
-            -------------------------------------------------------------------- {% endcomment %}
-            {% if image_loop %}
-            $(window).on('backstretch.before', function (e, instance, index) {
-              _this.setState('backstretch_before_image_loop');
-              logger.debug('\n' + 'state: ' + _this.getState());
-              // remove class for the backstretch_intro background
-              if (index === backstretch_instance_data.images.length -1) {
-                $('.backstretch').removeClass(atticOptions.spinner);
-              }
-            });
-            {% else %}
-            $(window).on('backstretch.before', function (e, instance, index) {
-              _this.setState('backstretch_before_image_once');
-              logger.debug('\n' + 'state: ' + _this.getState());
-              // Stop the slideshow after reached the last image
-              if (index === backstretch_instance_data.images.length -1) {
-                $('#{{attic_id}}').backstretch('pause');
-                // remove class for the backstretch_intro background
-                $('.backstretch').removeClass(atticOptions.spinner);
-              }
-            });
-            {% endif %}
+            }); // END on('backstretch.after')
 
           } // END if attic_id exists
 
           // Initialize the header found in page
           if ($('#{{attic_id}}').length) {
-            // Load  Attic OPTIONS
-            var atticOptions = $.extend({}, {{attic_options | replace:'=>',':' }});
 
             {% comment %} Load data from header config file
             -------------------------------------------------------------------- {% endcomment %}
@@ -457,12 +493,20 @@ j1.adapter.attic = (function (j1, window) {
             var raised_level = 'raised-z' +atticOptions.raised_level;
             $('#{{attic_id}}').addClass(raised_level);
             $('#head-title').addClass(atticOptions.title_animate);
+            $('#head-title').addClass(atticOptions.title_animate_delay);
+            $('#head-title').addClass(atticOptions.title_animate_duration);
             $('#head-tagline').addClass(atticOptions.tagline_animate);
+            $('#head-tagline').addClass(atticOptions.tagline_animate_duration);
 
             var text_emphasis = 'text-emphasis-' +atticOptions.text_emphasis;
             $('#head-title-text').addClass(text_emphasis);
-            // $('#head-title-text').addClass(notranslate);
             $('#head-tagline-text').addClass(text_emphasis);
+
+            // check if attic should be translated
+            //
+            if (atticOptions.notranslate) {
+              $('#{{attic_id}}').addClass('notranslate');
+            }
 
             {% comment %} Add header CSS styles to <HEAD>
             -------------------------------------------------------------------- {% endcomment %}

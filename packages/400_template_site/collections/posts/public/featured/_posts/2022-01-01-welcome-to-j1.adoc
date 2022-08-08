@@ -16,8 +16,11 @@ resource_options:
   - attic:
       opacity:                          0.5
       slides:
+
         - url:                          /assets/images/modules/attics/katie-moum-1920x1280.jpg
           alt:                          Photo by Katie Moum on Unsplash
+          title:                        Welcome
+          tagline:                      jekyll for everyone
           alignY:                       0.3
           badge:
             type:                       unsplash

@@ -21,8 +21,11 @@ resources:                              [ animate ]
 resource_options:
   - attic:
       slides:
+
         - url:                          /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
           alt:                          Photo by Giammarco on Unsplash
+          title:                        Fantasy
+          tagline:                      Fantasy Literature in the Book Shelf
           badge:
             type:                       unsplash
             author:                     Giammarco

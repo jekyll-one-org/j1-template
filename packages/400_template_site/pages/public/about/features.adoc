@@ -20,8 +20,12 @@ regenerate:                             false
 resources:                              [ animate, lightbox ]
 resource_options:
   - attic:
+
       slides:
         - url:                          /assets/images/modules/attics/runner-1920x1200.jpg
+          alt:                          runner-1920x1200.jpg
+          title:                        J1 Template
+          tagline:                      features
 ---
 
 // Page Initializer

@@ -45,10 +45,14 @@ resources:                              [ animate, nbinteract, rouge ]
 resource_options:
   - toccer:
       collapseDepth:                    2
+
   - attic:
       slides:
+
         - url:                          /assets/images/modules/attics/john-schnobrich-2-1920x1280.jpg
           alt:                          Photo by John Schnobrich on Unsplash
+          title:                        Bokeh
+          tagline:                      data visualizations
           badge:
             type:                       unsplash
             author:                     John Schnobrich

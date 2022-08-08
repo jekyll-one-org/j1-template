@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "gem",
-  "version": "2022.3.0",
+  "version": "2022.5.1-rc0",
   "description": "RubyGem sources for J1 Starter",
   "main": "j1-template.gemspec",
   "config": {
@@ -22,7 +22,7 @@
     "gemspec": "j1-template.gemspec",
     "gemfile": "Gemfile",
     "gemext":  "gem",
-    "gemversion": "2022.5.0",
+    "gemversion": "2022.5.1.rc0",
     "binaries": "true"
   },
   "ruby": {
@@ -118,8 +118,9 @@
     "posttemplate-gem-site-files:pages-copy-jupyter": "shx cp -rf  ../300_template_src/_install/site/pages/public/jupyter/* ./lib/starter_web/pages/public/jupyter",
     "posttemplate-gem-site-files:utilsrv-remove": "shx rm -rf ./lib/starter_web/utilsrv/node_modules && shx rm -f ./lib/starter_web/utilsrv/yarn.lock && shx rm -f ./lib/starter_web/utilsrv/package-lock.json",
     "posttemplate-gem-site-files:about-remove": "shx rm -rf ./lib/starter_web/pages/public/about",
-    "posttemplate-gem-site-files:about-copy": "shx mkdir ./lib/starter_web/pages/public/about && shx cp ../300_template_src/_install/templates/pages/about_site.adoc ./lib/starter_web/pages/public/about",
-    "posttemplate-gem-site-files:pages-copy-reporting-issues": "shx cp ../400_template_site/pages/public/about/reporting_issues.adoc ./lib/starter_web/pages/public/about",
+    "posttemplate-gem-site-files:about-copy": "shx mkdir ./lib/starter_web/pages/public/about && shx cp -f ../300_template_src/_install/templates/pages/about_site.adoc ./lib/starter_web/pages/public/about/site.adoc",
+    "posttemplate-gem-site-files:pages-copy-reporting-issues": "shx cp -f ../400_template_site/pages/public/about/reporting_issues.adoc ./lib/starter_web/pages/public/about",
+    "posttemplate-gem-site-files:pages-copy-features": "shx cp -f ../400_template_site/pages/public/about/features.adoc ./lib/starter_web/pages/public/about",
     "template-gem-permissions": "run-p -s template-gem-permission:*",
     "template-gem-permission:batch": "shx chmod a+x ./lib/starter_web/*sh",
     "template-gem-permission:j1_exe": "shx chmod a+x ./exe/j1",

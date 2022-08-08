@@ -1,5 +1,5 @@
 ---
-title:                                  J1
+title:                                  J1 Template
 tagline:                                about
 date:                                   2022-01-01 00:00:00
 description: >
@@ -18,8 +18,12 @@ permalink:                              /pages/public/about/site/
 resources:                              [ animate ]
 resource_options:
   - attic:
+
       slides:
         - url:                          /assets/images/modules/attics/runner-1920x1200.jpg
+          alt:                          runner-1920x1200.jpg
+          title:                        J1 Template
+          tagline:                      about
 ---
 
 // Page Initializer

@@ -49,8 +49,11 @@ resources:                              [ animate, comments, clipboard, rouge ]
 resource_options:
   - attic:
       slides:
+
         - url:                          /assets/images/modules/attics/markus-spiske4-1920x1280.jpg
           alt:                          Photo by Markus Spiske on Unsplash
+          title:                        Colors
+          tagline:                      md color palette
           badge:
             type:                       unsplash
             author:                     Markus Spiske
