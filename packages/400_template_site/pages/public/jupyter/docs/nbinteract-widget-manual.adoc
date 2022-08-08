@@ -36,13 +36,17 @@ scrollbar:                              false
 
 permalink:                              /pages/public/jupyter/docs/nbi-widgets/
 regenerate:                             false
+fab_menu_id:                            page_ctrl
 
 resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
   - attic:
       slides:
+
         - url:                          /assets/images/modules/attics/yellow-cactus-1920x1280.jpg
           alt:                          Photo by Yellow Cactus on Unsplash
+          title:                        J1 NBI
+          tagline:                      nbinteract widgets
           badge:
             type:                       unsplash
             author:                     Yellow Cactus

@@ -32,25 +32,55 @@ regenerate:                             true
 resources:                              [ animate, scroller ]
 resource_options:
   - attic:
+
+      circuit:                          true
+      notranslate:                      true
+      pauseOnHover:                     true
+
+      duration:                         4000
+      transition:                       push_left|cover_up|cover_down|fade|fadeInOut
+      transitionDuration:               1200
+
       slides:
-        - url:                          /assets/images/modules/attics/1920x1280/alexander-redl.jpg
-          alt:                          Photo by Alexander Redl on Unsplash
+
+        - url:                          /assets/images/modules/attics/1920x1280/firmbee-com.jpg
+          alt:                          Photo by Firmbee.com on Unsplash
+          title:                        Jekyll One
+          tagline:                      ready to use build-in web
           badge:
             type:                       unsplash
-            author:                     Alexander Redl
-            href:                       https://unsplash.com/@alexanderredl
+            author:                     Firmbee.com
+            href:                       https://unsplash.com/@firmbee
+
+        - url:                          /assets/images/modules/attics/1920x1280/ben-kolde.jpg
+          alt:                          Photo by Ben Kolde on Unsplash
+          title:                        Create Your Web
+          tagline:                      build an fast and secure website
+          badge:
+            type:                       unsplash
+            author:                     Ben Kolde
+            href:                       https://unsplash.com/@benkolde
+
+        - url:                          /assets/images/modules/attics/spacex-1920x1280.jpg
+          alt:                          hoto by SpaceX on Unsplash
+          title:                        Start using J1 Template
+          tagline:                      go for rocketstart to be ready in minutes
+          badge:
+            type:                       unsplash
+            author:                     SpaceX
+            href:                       https://unsplash.com/@spacex
 ---
 
 <pre>
 
-  This page is created by the layout: {{ page.layout }}.
+  This page is created by the layout: home.
 
   If this text is displayed (instead of the home page expected),
   something went  wrong with the layout definitions. Check  the
   output of the Jekyll engine building this site.
 
   Check the  contents   of folder _layouts. Verify  if the base
-  layout  "{{ page.layout }}" exists  and the  referring  chain
+  layout  "home" exists  and the  referring  chain
   (inheritance) is correct.
 
 </pre>

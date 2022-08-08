@@ -1,5 +1,5 @@
 ---
-title:                                  Testing Plotly
+title:                                  Plotly
 tagline:                                interactive evaluation
 date:                                   2022-03-28 00:00:00
 description: >
@@ -44,7 +44,11 @@ resources:                              [ animate, nbinteract, require, rouge ]
 resource_options:
   - attic:
       slides:
+
         - url:                          /assets/images/modules/attics/runner-1920x1200.jpg
+          alt:                          runner-1920x1200.jpg
+          title:                        Plotly
+          tagline:                      interactive evaluation
 ---
 
 // Page Initializer

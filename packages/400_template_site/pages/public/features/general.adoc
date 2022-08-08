@@ -50,13 +50,17 @@ resources:                              [ animate, clipboard, rouge, lightbox, i
 resource_options:
   - toccer:
       collapseDepth:                    3
+
   - attic:
       padding_top:                      400
       padding_bottom:                   50
       opacity:                          0.5
       slides:
+
         - url:                          /assets/images/modules/attics/christina-1920x1280.jpg
           alt:                          Photo by Christina on Unsplash
+          title:                        General Features
+          tagline:                      platforms, frameworks, and devices
           alignY:                       top
           badge:
             type:                       unsplash

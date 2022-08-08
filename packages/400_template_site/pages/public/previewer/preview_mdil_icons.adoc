@@ -44,8 +44,11 @@ resources:                              [ animate, comments, clipboard, rouge, m
 resource_options:
   - attic:
       slides:
+
         - url:                          /assets/images/pages/roundtrip/icon-fonts-1920x1280-bw.jpg
           alt:                          icon-fonts-1920x1280-bw
+          title:                        MDI Light Icons
+          tagline:                      select mdil icons
 ---
 
 // Page Initializer

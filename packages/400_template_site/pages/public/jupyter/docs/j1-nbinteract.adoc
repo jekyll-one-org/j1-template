@@ -43,8 +43,11 @@ resources:                              [ animate, clipboard, lightbox, nbintera
 resource_options:
   - attic:
       slides:
+
         - url:                          /assets/images/modules/attics/yellow-cactus-1920x1280.jpg
           alt:                          Photo by Yellow Cactus on Unsplash
+          title:                        J1 NBI
+          tagline:                      jupyter notebook integration
           badge:
             type:                       unsplash
             author:                     Yellow Cactus

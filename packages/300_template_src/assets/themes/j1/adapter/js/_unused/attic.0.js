@@ -46,10 +46,11 @@ regenerate:                             true
 {% assign attic_settings       = modules.attics.settings %}
 
 {% comment %} Set config options
-
-{% assign attic_options        = attic_defaults | merge: attic_settings %}
 -------------------------------------------------------------------------------- {% endcomment %}
+{% assign attic_options        = attic_defaults | merge: attic_settings %}
 
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
@@ -119,8 +120,10 @@ j1.adapter.attic = (function (j1, window) {
       // initialize state flag
       _this.state = 'pending';
 
-      // create seetings object from frontmatterOptions
-      var frontmatterOptions = options != null ? $.extend({}, options) : {};
+      // create settings object from frontmatter options
+      var frontmatterOptions  = options != null ? $.extend({}, options) : {};
+      // create settings object from attic options
+      var atticOptions         = $.extend({}, {{attic_options | replace: 'nil', 'null' | replace: '=>', ':' }});
 
       // Save frontmatterOptions in the j1 namespace
       // to be used later by j1.template.init() to load the header
@@ -137,7 +140,6 @@ j1.adapter.attic = (function (j1, window) {
     // Initialize all header supported
     // -------------------------------------------------------------------------
     loadHeader: function () {
-
       var frontmatterOptions = _this.frontmatterOptions;
 
       {% comment %} Load data from header config (yaml data file)
@@ -182,14 +184,29 @@ j1.adapter.attic = (function (j1, window) {
               $('.backstretch').addClass(atticOptions.spinner);
             }
 
+            // if (atticOptions.spinner) {
+            //   $('.backstretch').addClass(atticOptions.spinner);
+            // }
+
             // Collect backstretch instance data for Backstretch callbacks
             var backstretch_instance_data = $('#{{attic_id}}').data('backstretch');
 
-            {% comment %} Set the headerLoaded flag
+            {% comment %} Set the headerLoaded flag (page NOT visible)
             -------------------------------------------------------------------- {% endcomment %}
            $(window).on('backstretch.before', function (e, instance, index) {
+              var evt     = e;
+              var inst    = instance;
+              var idx     = index;
+//            logger.debug('\n' + 'state: ' + _this.getState());
+              console.log('module attic - entered: backstretch.before');
+
+              console.log('module attic - apply: CSS filters');
+              $('.backstretch').css('filter', 'sepia(1) brightness(0.9) contrast(0.6)');
+//            $('.backstretch').css('filter', 'sepia(1) brightness(0.9) contrast(0.6)');
+              $('.backstretch').css('filter', 'grayscale(1) contrast(1) brightness(1)');
+
               _this.setState('backstretch_before');
-              logger.debug('\n' + 'state: ' + _this.getState());
+//             console.log('module attic - set state: backstretch_before');
             });
 
             {% comment %} Add a caption (c) or badge (b) if configured
@@ -198,7 +215,7 @@ j1.adapter.attic = (function (j1, window) {
             $(window).on('backstretch.after', function (e, instance, index) {
               logText ='add caption text';
               _this.setState('backstretch_after');
-              logger.debug('\n' + 'state: ' + status);
+//            logger.debug('\n' + 'state: ' + status);
               // logger.debug(logText);
 
               if (typeof atticOptions.slides[index].caption != 'undefined') {
@@ -218,7 +235,7 @@ j1.adapter.attic = (function (j1, window) {
                 if (bType === 'unsplash') {
                   var badgeHTML = ''
                       + '<div class="attic__badge">'
-                      + ' <a class="attic__badge_unsplash"'
+                      + ' <a class="attic__badge_unsplash link-no-decoration"'
                       + '  href="' +bLink+ '?utm_medium=referral&amp;utm_campaign=photographer-credit&amp;utm_content=creditBadge"'
                       + '  target="_blank"'
                       + '  rel="noopener noreferrer"'
@@ -227,7 +244,7 @@ j1.adapter.attic = (function (j1, window) {
                       + '    <svg xmlns="http://www.w3.org/2000/svg"'
                       + '	   class="attic__badge_unsplash_icon-size"'
                       + '      viewBox="0 0 32 32">'
-                      + '      <title>search unsplash</title>'
+//                    + '      <title>search unsplash</title>'
                       + '      <path d="M10 9V0h12v9H10zm12 5h10v18H0V14h10v9h12v-9z"></path>'
                       + '    </svg>'
                       + '  </span>'
@@ -258,9 +275,10 @@ j1.adapter.attic = (function (j1, window) {
             $(window).on('backstretch.before', function (e, instance, index) {
               _this.setState('backstretch_before_image_once');
               logger.debug('\n' + 'state: ' + _this.getState());
-              // Stop the slideshow after reached the last image
               if (index === backstretch_instance_data.images.length -1) {
-                $('#{{attic_id}}').backstretch('pause');
+                // Stop the slideshow after reached the last image
+                // $('#{{attic_id}}').backstretch('pause');
+
                 // remove class for the backstretch_intro background
                 $('.backstretch').removeClass(atticOptions.spinner);
               }
@@ -271,13 +289,15 @@ j1.adapter.attic = (function (j1, window) {
 
           // Initialize the header found in page
           if ($('#{{attic_id}}').length) {
+            // Load  Attic OPTIONS
+            var atticOptions = $.extend({}, {{attic_options | replace:'=>',':' }});
 
-          {% comment %} Load data from header config file
-          ---------------------------------------------------------------------- {% endcomment %}
+            {% comment %} Load data from header config file
+            -------------------------------------------------------------------- {% endcomment %}
 
-           {% comment %} NOTE:
-           Unclear why title_size|tagline_size evaluated to 1 if NOT set
-           --------------------------------------------------------------------- {% endcomment %}
+             {% comment %} NOTE:
+             Unclear why title_size|tagline_size evaluated to 1 if NOT set
+             ------------------------------------------------------------------- {% endcomment %}
 
             {% for item in attic_options.attics %}
               {% if item.attic.id == attic_id %}
@@ -286,6 +306,7 @@ j1.adapter.attic = (function (j1, window) {
                 {% assign r_text                = item.attic.r_text %}
                 {% assign text_emphasis         = item.attic.text_emphasis %}
                 {% assign padding_top           = item.attic.padding_top %}
+                {% assign padding_bottom        = item.attic.padding_bottom %}
                 {% assign padding_bottom        = item.attic.padding_bottom %}
                 {% assign margin_bottom         = item.attic.margin_bottom %}
 
@@ -296,39 +317,33 @@ j1.adapter.attic = (function (j1, window) {
                 {% assign title_animate         = item.attic.title.animate %}
                 {% assign title_align           = item.attic.title.align %}
 
-                {% if item.attic.tagline.size != 1 %}
-                {% assign tagline_size          = item.attic.tagline.size %}
-                {% endif %}
-                {% assign tagline_color         = item.attic.tagline.color %}
-                {% assign tagline_animate       = item.attic.tagline.animate %}
-                {% assign tagline_align         = item.attic.tagline.align %}
+                {% assign background_color_1    = item.attic.background_color_1 %}
+                {% assign background_color_2    = item.attic.background_color_2 %}
 
-                {% assign background_color_1    = item.attic.background_color.color_1 %}
-                {% assign background_color_2    = item.attic.background_color.color_2 %}
-
-                {% assign type                  = item.attic.image_header.type %}
-                {% assign slides                = item.attic.image_header.slides %}
-                {% assign opacity               = item.attic.image_header.opacity %}
-                {% assign spinner               = item.attic.image_header.spinner %}
-                {% assign alignX                = item.attic.image_header.alignX %}
-                {% assign alignY                = item.attic.image_header.alignY %}
-                {% assign scale                 = item.attic.image_header.scale %}
-                {% assign animateFirst          = item.attic.image_header.animateFirst %}
-                {% assign paused                = item.attic.image_header.paused %}
-                {% assign start                 = item.attic.image_header.start %}
-                {% assign preload               = item.attic.image_header.preload %}
-                {% assign preloadSize           = item.attic.image_header.preloadSize %}
-                {% assign bypassCss             = item.attic.image_header.bypassCss %}
-                {% assign transition            = item.attic.image_header.transition %}
-                {% assign duration              = item.attic.image_header.duration %}
-                {% assign transitionDuration    = item.attic.image_header.transitionDuration %}
-                {% assign animateFirst          = item.attic.image_header.animateFirst %}
-                {% assign sound                 = item.attic.image_header.sound %}
+                {% assign type                  = item.attic.type %}
+                {% assign slides                = item.attic.slides %}
+                {% assign opacity               = item.attic.opacity %}
+                {% assign spinner               = item.attic.spinner %}
+                {% assign alignX                = item.attic.alignX %}
+                {% assign alignY                = item.attic.alignY %}
+                {% assign scale                 = item.attic.scale %}
+                {% assign animateFirst          = item.attic.animateFirst %}
+                {% assign paused                = item.attic.paused %}
+                {% assign start                 = item.attic.start %}
+                {% assign preload               = item.attic.preload %}
+                {% assign preloadSize           = item.attic.preloadSize %}
+                {% assign bypassCss             = item.attic.bypassCss %}
+                {% assign transition            = item.attic.transition %}
+                {% assign duration              = item.attic.duration %}
+                {% assign transitionDuration    = item.attic.transitionDuration %}
+                {% assign animateFirst          = item.attic.animateFirst %}
+                {% assign sound                 = item.attic.sound %}
 
                 // Create and json object for HEADER options taken from
                 // header config (YAML data file)
                 /* eslint-disable */
-                var atticOptions = {
+                var atticOptionsHeader = {
+                  {% if opacity %}              "opacity":                {{ opacity | json }}, {% endif %}
                   {% if raised_level %}         "raised_level":           {{ raised_level | json }}, {% endif %}
                   {% if r_text %}               "r_text":                 {{ r_text | json }}, {% endif %}
                   {% if text_emphasis %}        "text_emphasis":          {{ text_emphasis | json }}, {% endif %}
@@ -347,6 +362,7 @@ j1.adapter.attic = (function (j1, window) {
                   {% if background_color_2 %}   "background_color_2":     {{ background_color_2 | json }}, {% endif %}
                 }
                 /* eslint-enable */
+
                 {% comment %} trans-script header|backstretch options
                 ---------------------------------------------------------------- {% endcomment %}
                 {% if type == 'video' %}
@@ -358,7 +374,7 @@ j1.adapter.attic = (function (j1, window) {
                 // Create an json object for BACKSTRETCH options taken from
                 // header config (yaml data file)
                 /* eslint-disable */
-                var atticOptions = {
+                var atticOptionsBackstretch = {
                   {% if spinner %}              "spinner":                {{ spinner | json }}, {% endif %}
                   {% if opacity %}              "opacity":                {{ opacity | json }}, {% endif %}
                   {% if slides %}               "slides":                 {{ slides | json }}, {% endif %}
@@ -378,14 +394,14 @@ j1.adapter.attic = (function (j1, window) {
                   {% if transitionDuration %}   "transitionDuration":     {{ transitionDuration | json }}, {% endif %}
                   {% if duration %}             "duration":               {{ duration | json }}, {% endif %}
                 }
-
-                // Load  Attic DEFAULTS
-                var attic_options = $.extend({}, {{attic_options | replace:'=>',':' }});
-
-                // Merge|Overload  Attic DEFAULTS by individual settings
-                // var atticOptions = j1.mergeData(attic_options, atticOptions);
-                var atticOptions = j1.mergeData(atticOptions, attic_options);
                 /* eslint-enable */
+
+                // Merge|Overload Attic OPTIONS
+                atticOptions = $.extend({}, atticOptions, atticOptionsHeader, atticOptionsBackstretch);
+
+                // Overload Attic OPTIONS by settings from frontmatterOptions
+                if (frontmatterOptions.background_color_1) atticOptions.background_color_1 = frontmatterOptions.background_color_1;
+                if (frontmatterOptions.background_color_2) atticOptions.background_color_2 = frontmatterOptions.background_color_2;
               {% else %}
                 {% continue %}
               {% endif %} // ENDIF attic_id
@@ -407,16 +423,14 @@ j1.adapter.attic = (function (j1, window) {
                 if (typeof frontmatterOptions.title.animate != 'undefined') { atticOptions.title_animate = frontmatterOptions.title.animate; }
                 if (typeof frontmatterOptions.title.align != 'undefined') { atticOptions.title_align = frontmatterOptions.title.align; }
               }
+
               if (typeof frontmatterOptions.tagline != 'undefined') {
                 if (typeof frontmatterOptions.tagline.color != 'undefined') { atticOptions.tagline_color = frontmatterOptions.tagline.color; }
                 if (typeof frontmatterOptions.tagline.size != 'undefined') { atticOptions.tagline_size = frontmatterOptions.tagline.size; }
                 if (typeof frontmatterOptions.tagline.animate != 'undefined') { atticOptions.tagline_animate = frontmatterOptions.tagline.animate; }
                 if (typeof frontmatterOptions.tagline.align != 'undefined') { atticOptions.tagline_align = frontmatterOptions.tagline.align; }
               }
-              if (typeof frontmatterOptions.background_color != 'undefined') {
-                if (typeof frontmatterOptions.background_color.color_1 != 'undefined') { atticOptions.background_color_1 = frontmatterOptions.background_color.color_1; }
-                if (typeof frontmatterOptions.background_color.color_2 != 'undefined') { atticOptions.background_color_2 = frontmatterOptions.background_color.color_1; }
-              }
+
               if (typeof frontmatterOptions.spinner != 'undefined') { atticOptions.spinner = frontmatterOptions.spinner; }
               if (typeof frontmatterOptions.opacity != 'undefined') { atticOptions.opacity = frontmatterOptions.opacity; }
               if (typeof frontmatterOptions.alignX != 'undefined') { atticOptions.alignX = frontmatterOptions.alignX; }
@@ -436,26 +450,6 @@ j1.adapter.attic = (function (j1, window) {
               if (typeof frontmatterOptions.transitionDuration != 'undefined') { atticOptions.transitionDuration = frontmatterOptions.transitionDuration; }
               if (typeof frontmatterOptions.slides != 'undefined') { atticOptions.slides = frontmatterOptions.slides; }
             }
-
-            {% comment %} Resolve symbolic color names
-            -------------------------------------------------------------------- {% endcomment %}
-            // atticOptions.title_color         = j1.setColorData(atticOptions.title_color);
-            // atticOptions.tagline_color       = j1.setColorData(atticOptions.tagline_color);
-            // atticOptions.background_color_1  = j1.setColorData(atticOptions.background_color_1);
-            // atticOptions.background_color_2  = j1.setColorData(atticOptions.background_color_2);
-
-            atticOptions.title_color         = atticOptions.title_color;
-            atticOptions.tagline_color       = atticOptions.tagline_color;
-            atticOptions.background_color_1  = atticOptions.background_color_1;
-            atticOptions.background_color_2  = atticOptions.background_color_2;
-
-            {% comment %} Resolve symbolic font sizes names
-            -------------------------------------------------------------------- {% endcomment %}
-            // atticOptions.title_size          = j1.setFontSize(atticOptions.title_size);
-            // atticOptions.tagline_size        = j1.setFontSize(atticOptions.tagline_size);
-
-            atticOptions.title_size          = atticOptions.title_size;
-            atticOptions.tagline_size        = atticOptions.tagline_size;
 
             {% comment %} Add header CSS classes
             -------------------------------------------------------------------- {% endcomment %}
@@ -477,11 +471,11 @@ j1.adapter.attic = (function (j1, window) {
 
             // Initialze header background gradient
             attic_style += '<style> .attic { ';
-            attic_style += 'background-image: -webkit-gradient(linear, left top, left bottom, from(' +atticOptions.background_color_1+ '), to(' +atticOptions.background_color_2+ ')) !important;';
-            attic_style += 'background-image: -webkit-linear-gradient(top, ' +atticOptions.background_color_1+ ' 0%, ' +atticOptions.background_color_2+ ' 100%) !important;';
-            attic_style += 'background-image: -o-linear-gradient(top, ' +atticOptions.background_color_1+ ' 0%, ' +atticOptions.background_color_2+ ' 100%) !important;';
-            attic_style += 'background-image: linear-gradient(to bottom, ' +atticOptions.background_color_1+ ' 0%, ' +atticOptions.background_color_2+ ' 100%) !important;';
-            attic_style += 'filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="' +atticOptions.background_color_1+ '", endColorstr="' +atticOptions.background_color_2+ '", GradientType=0) !important;';
+            attic_style += 'background-image: -webkit-gradient(linear, left top, left bottom, from(' +atticOptions.background_color_1 + '), to(' +atticOptions.background_color_2+ ')) !important;';
+            attic_style += 'background-image: -webkit-linear-gradient(top, ' +atticOptions.background_color_1 + ' 0%, ' +atticOptions.background_color_2 + ' 100%) !important;';
+            attic_style += 'background-image: -o-linear-gradient(top, ' +atticOptions.background_color_1 + ' 0%, ' +atticOptions.background_color_2 + ' 100%) !important;';
+            attic_style += 'background-image: linear-gradient(to bottom, ' +atticOptions.background_color_1 + ' 0%, ' +atticOptions.background_color_2 + ' 100%) !important;';
+            attic_style += 'filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="' +atticOptions.background_color_1 + '", endColorstr="' +atticOptions.background_color_2 + '", GradientType=0) !important;';
             attic_style += '} </style>';
             $('head').append(attic_style);
 

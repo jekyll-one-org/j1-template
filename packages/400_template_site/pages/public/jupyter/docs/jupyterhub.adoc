@@ -39,6 +39,7 @@ scrollbar:                              false
 
 permalink:                              /pages/public/jupyter/docs/jupyterhub/
 regenerate:                             false
+fab_menu_id:                            page_ctrl
 
 resources:                              [
                                           animate, clipboard, lightbox, rouge
@@ -47,8 +48,11 @@ resource_options:
   - attic:
       opacity:                          0.3
       slides:
+
         - url:                          /assets/images/modules/attics/shubham-dhage-2-1920x1280.jpg
           alt:                          Photo by Shubham Dhage on Unsplash
+          title:                        Jupyter
+          tagline:                      JupyterHub
           badge:
             type:                       unsplash
             author:                     Shubham Dhage

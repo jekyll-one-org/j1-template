@@ -41,13 +41,17 @@ resources:                              [ animate, clipboard, lightbox, lightGal
 resource_options:
   - toccer:
       collapseDepth:                    2
+
   - attic:
       padding_top:                      400
       padding_bottom:                   50
       opacity:                          0.5
       slides:
+
         - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
           alt:                          Photo by Ricardo Gomez Angel on Unsplash
+          title:                        Master Slider
+          tagline:                      common sliders
           badge:
             type:                       unsplash
             author:                     Ricardo Gomez Angel
