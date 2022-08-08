@@ -675,6 +675,9 @@
     - title:                            Reporting issues
       icon:                             bug
       href:                             /pages/public/about/reporting_issues/
+    - title:                            Features
+      icon:                             wrench
+      href:                             /pages/public/about/features/
     - title:                            Privacy
       icon:                             heart
       href:                             /pages/public/legal/en/privacy/
