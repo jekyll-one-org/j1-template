@@ -22,7 +22,7 @@
     "gemspec": "j1-template.gemspec",
     "gemfile": "Gemfile",
     "gemext":  "gem",
-    "gemversion": "2022.5.0",
+    "gemversion": "2022.5.1-rc0",
     "binaries": "true"
   },
   "ruby": {
