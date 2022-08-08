@@ -38,6 +38,9 @@ defaults:
   # Global settings for text- and image-based header
   #
   debug:                                false
+
+  circuit:                              false
+  notranslate:                          true
   pauseOnHover:                         false
 
   icon_family:                          MDI
