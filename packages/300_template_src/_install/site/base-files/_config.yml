@@ -220,7 +220,7 @@ doctype:                                html
 #   default:                            false
 #
 title:                                  Jekyll One
-slogan:                                 template for jekyll
+slogan:                                 j1 template starter web
 description: >
                                         Made for Jekyll · Made for Your Web
 keywords: >

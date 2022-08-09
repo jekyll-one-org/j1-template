@@ -47,7 +47,7 @@ cd C:\temp
 cd C:\temp\starter
 
 mklink /D "ziel" "quelle"
-mklink /D "C:\Temp\starter" "C:\Temp\starter 2022.5.1.rc0"
+mklink /D "C:\Temp\starter" "C:\Temp\starter 2022.5.1.rc1"
 
 
 == Gem build
