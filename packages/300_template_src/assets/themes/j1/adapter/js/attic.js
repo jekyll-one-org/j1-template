@@ -317,9 +317,11 @@ j1.adapter.attic = (function (j1, window) {
               $('.attic-caption').show();
               $('.attic-caption').css('opacity', '1');
 
-              // jadams, 2022-08-09: resize to make sure ???
-              // TODO: check if a resize fix the "multiline" issue
-              // for title/tagline
+              // jadams, 2022-08-09:
+              // resize the (background-)image to make sure the 'attic'
+              // container is changed in size (heigth) if title/tagline
+              // expands 'multiline' on small viewports
+              // e.g. on mobile devices
               //
               $('#{{attic_id}}').backstretch('resize');
 
