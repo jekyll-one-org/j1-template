@@ -129,9 +129,9 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
       <!-- [INFO   ] [~/assets/data/mmenu.html              ] [submenu level 1 detected] -->
       <li>
         {% if menu.icon == null %}
-          <a class="link-no-decoration" href="#">{{menu.item}}</a>
+          <a href="#">{{menu.item}}</a>
         {% else %}
-          <a class="link-no-decoration" href="#"> <i class="{{icon_style}} {{icon_family}}-{{menu.icon}} {{icon_size}} {{icon_color}} mr-2"></i>{{menu.item}}</a>
+          <a href="#"> <i class="{{icon_style}} {{icon_family}}-{{menu.icon}} {{icon_size}} {{icon_color}} mr-2"></i>{{menu.item}}</a>
         {% endif %}
 
         <ul>
@@ -139,15 +139,15 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
           {% if level_1.dropdown == null %}
             {% if level_1.icon == null %}
               {% if level_1.target == null %}
-                <li><a class="link-no-decoration" href="{{level_1.href}}{{ext}}">{{level_1.title}}</a></li>
+                <li><a href="{{level_1.href}}{{ext}}">{{level_1.title}}</a></li>
               {% else %}
-                <li><a class="link-no-decoration" href="{{level_1.href}}{{ext}}" target="{{level_1.target}}">{{level_1.title}}</a></li>
+                <li><a href="{{level_1.href}}{{ext}}" target="{{level_1.target}}">{{level_1.title}}</a></li>
               {% endif %}
             {% else %}
               {% if level_1.target == null %}
-                <li><a class="link-no-decoration" href="{{level_1.href}}{{ext}}"><i class="{{icon_style}} {{icon_family}}-{{level_1.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_1.title}}</a></li>
+                <li><a href="{{level_1.href}}{{ext}}"><i class="{{icon_style}} {{icon_family}}-{{level_1.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_1.title}}</a></li>
               {% else %}
-                <li><a class="link-no-decoration" href="{{level_1.href}}{{ext}}" target="{{level_1.target}}"><i class="{{icon_style}} {{icon_family}}-{{level_1.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_1.title}}</a></li>
+                <li><a href="{{level_1.href}}{{ext}}" target="{{level_1.target}}"><i class="{{icon_style}} {{icon_family}}-{{level_1.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_1.title}}</a></li>
               {% endif %}
             {% endif %}
           {% endif %}
@@ -156,9 +156,9 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
             <!-- [INFO   ] [~/assets/data/mmenu.html              ] [submenu level 2 (dropdown) detected] -->
             <li>
               {% if level_1.icon == null %}
-                <a class="link-no-decoration" href="#">{{level_1.title}}</a>
+                <a href="#">{{level_1.title}}</a>
               {% else %}
-                <a class="link-no-decoration" href="#"><i class="{{icon_style}} {{icon_family}}-{{level_1.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_1.title}}</a>
+                <a href="#"><i class="{{icon_style}} {{icon_family}}-{{level_1.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_1.title}}</a>
               {% endif %}
 
               <ul>
@@ -166,15 +166,15 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                   {% if level_2.dropdown == null %}
                     {% if level_2.icon == null %}
                       {% if level_2.target == null %}
-                        <li><a class="link-no-decoration" href="{{level_2.href}}{{ext}}">{{level_2.title}}</a></li>
+                        <li><a href="{{level_2.href}}{{ext}}">{{level_2.title}}</a></li>
                       {% else %}
-                        <li><a class="link-no-decoration" href="{{level_2.href}}{{ext}}" target="{{level_2.target}}">{{level_2.title}}</a></li>
+                        <li><a href="{{level_2.href}}{{ext}}" target="{{level_2.target}}">{{level_2.title}}</a></li>
                       {% endif %}
                     {% else %}
                       {% if level_2.target == null %}
-                        <li><a class="link-no-decoration" href="{{level_2.href}}{{ext}}"><i class="{{icon_style}} {{icon_family}}-{{level_2.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_2.title}}</a></li>
+                        <li><a href="{{level_2.href}}{{ext}}"><i class="{{icon_style}} {{icon_family}}-{{level_2.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_2.title}}</a></li>
                       {% else %}
-                        <li><a class="link-no-decoration" href="{{level_2.href}}{{ext}}" target="{{level_2.target}}"><i class="{{icon_style}} {{icon_family}}-{{level_2.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_2.title}}</a></li>
+                        <li><a href="{{level_2.href}}{{ext}}" target="{{level_2.target}}"><i class="{{icon_style}} {{icon_family}}-{{level_2.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_2.title}}</a></li>
                       {% endif %}
                     {% endif %}
                   {% endif %}
@@ -182,24 +182,24 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                     <!-- [INFO   ] [~/assets/data/mmenu.html              ] [submenu level 3 detected (last level supported)] -->
                     <li>
                       {% if level_2.icon == null %}
-                        <a class="link-no-decoration" href="#" >{{level_2.title}}</a>
+                        <a href="#" >{{level_2.title}}</a>
                       {% else %}
-                        <a class="link-no-decoration" href="#" ><i class="{{icon_style}} {{icon_family}}-{{level_2.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_2.title}}</a>
+                        <a href="#" ><i class="{{icon_style}} {{icon_family}}-{{level_2.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_2.title}}</a>
                       {% endif %}
 
                       <ul>
                       {% for level_3 in level_2.dropdown %}
                         {% if level_2.icon == null %}
                           {% if level_3.target == null %}
-                            <li><a class="link-no-decoration" href="{{level_3.href}}{{ext}}">{{level_3.title}}</a></li>
+                            <li><a href="{{level_3.href}}{{ext}}">{{level_3.title}}</a></li>
                           {% else %}
-                            <li><a class="link-no-decoration" href="{{level_3.href}}{{ext}}" target="{{level_3.target}}">{{level_3.title}}</a></li>
+                            <li><a href="{{level_3.href}}{{ext}}" target="{{level_3.target}}">{{level_3.title}}</a></li>
                           {% endif %}
                         {% else %}
                           {% if level_3.target == null %}
-                            <li><a class="link-no-decoration" href="{{level_3.href}}{{ext}}"><i class="{{icon_style}} {{icon_family}}-{{level_3.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_3.title}}</a></li>
+                            <li><a href="{{level_3.href}}{{ext}}"><i class="{{icon_style}} {{icon_family}}-{{level_3.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_3.title}}</a></li>
                           {% else %}
-                            <li><a class="link-no-decoration" href="{{level_3.href}}{{ext}}" target="{{level_3.target}}"><i class="{{icon_style}} {{icon_family}}-{{level_3.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_3.title}}</a></li>
+                            <li><a href="{{level_3.href}}{{ext}}" target="{{level_3.target}}"><i class="{{icon_style}} {{icon_family}}-{{level_3.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{level_3.title}}</a></li>
                           {% endif %}
                         {% endif %}
                         {% if level_3.divider %} <li class="divider"></li> {% endif %}
@@ -228,7 +228,7 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
       <!-- [INFO   ] [~/assets/data/mmenu.html              ] [Calculated size of mm_columns: {{columns_width_md}}] -->
 
       <li>
-        <a class="link-no-decoration" href="#" >{{menu.item}} </a>
+        <a href="#" >{{menu.item}} </a>
         <ul>
           <li>
             <div class="row">
@@ -247,9 +247,9 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                 <ul class="menu-col">
                 {% for links in megabox.column %}
                   {% if links.icon == null %}
-                    <li class="dropdown-megamenu-item"><a class="link-no-decoration" href="{{links.href}}{{ext}}" target="{{links.target}}">{{links.title}}</a></li>
+                    <li class="dropdown-megamenu-item"><a href="{{links.href}}{{ext}}" target="{{links.target}}">{{links.title}}</a></li>
                   {% else %}
-                    <li class="dropdown-megamenu-item"><a class="link-no-decoration" href="{{links.href}}{{ext}}" target="{{links.target}}"><i class="{{icon_style}} {{icon_family}}-{{links.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{links.title}}</a></li>
+                    <li class="dropdown-megamenu-item"><a href="{{links.href}}{{ext}}" target="{{links.target}}"><i class="{{icon_style}} {{icon_family}}-{{links.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{links.title}}</a></li>
                   {% endif %}
                 {% endfor %}
                 </ul>
@@ -273,16 +273,16 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
         {% if menu.icon == null %}
           <!-- [INFO   ] [~/assets/data/mmenu.html              ] [no icon for menu-item found -->
           {% if menu.target == null %}
-            <li> <a class="link-no-decoration" href="{{menu.href}}{{ext}}">{{menu.item}}</a> </li>
+            <li> <a href="{{menu.href}}{{ext}}">{{menu.item}}</a> </li>
           {% else %}
-            <li> <a class="link-no-decoration" href="{{menu.href}}{{ext}}" target="{{menu.target}}">{{menu.item}}</a> </li>
+            <li> <a href="{{menu.href}}{{ext}}" target="{{menu.target}}">{{menu.item}}</a> </li>
           {% endif %}
         {% elsif menu.icon %}
           <!-- [INFO   ] [~/assets/data/mmenu.html              ] [no icon for menu-item found -->
           {% if menu.target == null %}
-            <li> <a class="link-no-decoration" href="{{menu.href}}{{ext}}"><i class="{{icon_style}} {{icon_family}}-{{menu.icon}} {{icon_size}}"></i> {{menu.item}}</a> </li>
+            <li> <a href="{{menu.href}}{{ext}}"><i class="{{icon_style}} {{icon_family}}-{{menu.icon}} {{icon_size}}"></i> {{menu.item}}</a> </li>
           {% else %}
-            <li> <a class="link-no-decoration" href="{{menu.href}}{{ext}}" target="{{menu.target}}"><i class="{{icon_style}} {{icon_family}}-{{menu.icon}} {{icon_size}}"></i> {{menu.item}}</a> </li>
+            <li> <a href="{{menu.href}}{{ext}}" target="{{menu.target}}"><i class="{{icon_style}} {{icon_family}}-{{menu.icon}} {{icon_size}}"></i> {{menu.item}}</a> </li>
           {% endif %}
         {% else %}
           <!-- [FATAL ] [nav_menu.menu-top-level-only       ] [processing menu item failed] -->
@@ -297,7 +297,7 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
         {% when 'auth_client' %}
           <!-- [INFO   ] [~/assets/data/mmenu.html              ] [found menu-type: auth_client] -->
           <li id="menuBarSignInOut" class="dropdown nav-item">
-            <a class="link-no-decoration" href="#">{{menu.item}} </a>
+            <a href="#">{{menu.item}} </a>
 
             <ul>
               {% assign item_found = 'false' %}
@@ -306,7 +306,7 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                 <!-- [INFO   ] [~/assets/data/mmenu.html              ] [START: check signin] -->
                 {% if item.mode == 'signin' %}
                   <li>
-                    <a class="link-no-decoration" href="#" data-bs-toggle="modal" data-bs-target="#modalOmniSignIn"><i class="{{icon_style}} {{icon_family}}-{{item.icon}} {{icon_size}}"></i>{{item.title}}</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalOmniSignIn"><i class="{{icon_style}} {{icon_family}}-{{item.icon}} {{icon_size}}"></i>{{item.title}}</a>
                   </li>
                   {% assign item_found = 'true' %}
                 {% endif %}
@@ -315,7 +315,7 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                 <!-- [INFO   ] [~/assets/data/mmenu.html              ] [START: check signout] -->
                 {% if item.mode == 'signout' %}
                   <li>
-                    <a class="link-no-decoration" href="#" data-bs-toggle="modal" data-bs-target="#modalOmniSignOut"><i class="{{icon_style}} {{icon_family}}-{{item.icon}} {{icon_size}}"></i>{{item.title}}</a>
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalOmniSignOut"><i class="{{icon_style}} {{icon_family}}-{{item.icon}} {{icon_size}}"></i>{{item.title}}</a>
                   </li>
                   {% assign item_found = 'true' %}
                 {% endif %}
@@ -325,9 +325,9 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                 <!-- [FATAL  ] [~/assets/data/mmenu.html              ] [no valid menu item config found] -->
                   <li>
                     {% if item.title %}
-                      <a class="link-no-decoration" href="#" >Invalid: {{item.title}}</a>
+                      <a href="#" >Invalid: {{item.title}}</a>
                     {% else %}
-                      <a class="link-no-decoration" href="#" >Item invalid</a>
+                      <a href="#" >Item invalid</a>
                     {% endif %}
                   </li>
                 {% endif %}
@@ -345,7 +345,7 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
           {% if themer_options.enabled %}
             <!-- [INFO   ] [~/assets/data/mmenu.html              ] [found menu-type: theme_select] -->
             <li>
-              <a class="link-no-decoration" href="#">{{menu.item}} </a>
+              <a href="#">{{menu.item}} </a>
               {% if nav_menu_animation %}
               <ul>
               <!-- ul class="dropdown-menu data-in="{{nav_menu_animation}}" data-out="{{nav_menu_animation}}" -->
@@ -357,7 +357,7 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                   <!-- check for locally loaded J1 Themes -->
                   {% if item.local_themes and item.local_themes == 'enabled' %}
                     <li>
-                      <a class="link-no-decoration" href="#"><i class="{{icon_family}} {{icon_family}}-{{item.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{item.title}}</a>
+                      <a href="#"><i class="{{icon_family}} {{icon_family}}-{{item.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{item.title}}</a>
                       <ul id="local_themes_mmenu"></ul>
                     </li>
                     {% assign item_found = 'true' %}
@@ -365,14 +365,14 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                   <!-- check for remotely loaded (BootSwatch) Themes -->
                   {% if item.bootswatch_themes and item.bootswatch_themes == 'enabled' %}
                     <li>
-                      <a class="link-no-decoration" href="#"><i class="{{icon_family}} {{icon_family}}-{{item.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{item.title}}</a>
+                      <a href="#"><i class="{{icon_family}} {{icon_family}}-{{item.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{item.title}}</a>
                       <ul id="remote_themes_mmenu"></ul>
                     </li>
                     {% assign item_found = 'true' %}
                   {% endif %} <!-- end BootSwatch theme selector -->
                   {% if item.preview and item.preview == 'enabled' %}
                     <li>
-                      <a class="link-no-decoration" href="{{theme_preview}}" ><i class="{{icon_family}} {{icon_family}}-{{item.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{item.title}}</a>
+                      <a href="{{theme_preview}}" ><i class="{{icon_family}} {{icon_family}}-{{item.icon}} {{icon_size}} {{icon_color}} mr-2"></i> {{item.title}}</a>
                     </li>
                     {% assign item_found = 'true' %}
                     {% endif %} <!-- end theme preview -->
@@ -380,9 +380,9 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                     {% if item_found == 'false' %}
                     <li>
                       {% if item.title %}
-                        <a class="link-no-decoration" href="#" >Invalid: {{item.title}}</a>
+                        <a href="#" >Invalid: {{item.title}}</a>
                       {% else %}
-                        <a class="link-no-decoration" href="#" >Item invalid</a>
+                        <a href="#" >Item invalid</a>
                       {% endif %}
                     </li>
                   {% endif %} <!-- end fallback -->

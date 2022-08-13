@@ -32,21 +32,25 @@
 // BS4 media breakpoints
 // -----------------------------------------------------------------------------
 
+$grid-breakpoint-xxl:                             1400px;
 $grid-breakpoint-xl:                              1200px;
 $grid-breakpoint-lg:                              992px;
-$grid-breakpoint-lg-min:                          991px;
 $grid-breakpoint-md:                              768px;
-$grid-breakpoint-md-min:                          767px;
 $grid-breakpoint-sm:                              576px;
 $grid-breakpoint-xs:                              575px;
+
+$grid-breakpoint-lg-min:                          991px;
+$grid-breakpoint-lg-min:                          991px;
 
 // Device media breakpoints
 // -----------------------------------------------------------------------------
 $grid-breakpoint-ipad-pro:                        1024px;
 $grid-breakpoint-ipad-pro-min:                    1023px;
+$grid-breakpoint-ipad:                            768px;
 
 // BS4 Overwrites
 $dropdown-menu-min-width:                         250px;
+
 
 // BS@5
 // -----------------------------------------------------------------------------
@@ -1029,8 +1033,9 @@ li.dropdown.nav-item.nav-sub-item:before {
 } // END all
 
 // Desktop Navigation
+// Large devices (desktops, 992px and up)
 // -----------------------------------------------------------------------------
-@media screen and (min-width: $grid-breakpoint-lg-min) {
+@media screen and (min-width: $grid-breakpoint-lg) {
 	.dropdown-submenu {
 		position: relative;
 		> a::after {
@@ -1150,9 +1155,10 @@ li.dropdown.nav-item.nav-sub-item:before {
 }  // END MIN width: $grid-breakpoint-lg (992px)
 
 // Mobile Navigation I
+// Medium devices (tablets, 768px and up)
 // -----------------------------------------------------------------------------
 // jadams, 2020-09-17: unclear what breakpoint should used for $grid-breakpoint-ipad-pro
-@media screen and (max-width: $grid-breakpoint-lg) {
+@media screen and (min-width: $grid-breakpoint-md) {
 	nav {
 		&.navigator {
 			&.brand-center {
@@ -1644,10 +1650,10 @@ li.dropdown.nav-item.nav-sub-item:before {
 } // END MAX width: $grid-breakpoint-lg (992px)
 
 // Mobile Navigation II
+// Small devices (landscape phones, less than 768px)
 // -----------------------------------------------------------------------------
-@media screen and (max-width: $grid-breakpoint-lg), screen and (max-width: $grid-breakpoint-xs) {
+@media screen and (max-width: $grid-breakpoint-md) {
 // @media screen and (max-width: $grid-breakpoint-xs) {
-// @media screen and (max-width: $grid-breakpoint-md) {
   ul#desktop_menu {
     display: none;
   }

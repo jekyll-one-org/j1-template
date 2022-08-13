@@ -48,32 +48,6 @@ $grid-breakpoint-ipad-pro-min:                    1023px;
 // BS4 Overwrites
 $dropdown-menu-min-width:                         250px;
 
-// BS@5
-// -----------------------------------------------------------------------------
-// X-Small devices (portrait phones, less than 576px)
-// No media query for `xs` since this is the default in Bootstrap
-
-// Small devices (landscape phones, 576px and up)
-// ----------------------------------------------
-// @media (min-width: 576px) { ... }
-
-// Medium devices (tablets, 768px and up)
-// --------------------------------------
-// @media (min-width: 768px) { ... }
-
-// Large devices (desktops, 992px and up)
-// --------------------------------------
-// @media (min-width: 992px) { ... }
-
-// X-Large devices (large desktops, 1200px and up)
-// -----------------------------------------------
-// @media (min-width: 1200px) { ... }
-
-// XX-Large devices (larger desktops, 1400px and up)
-// -------------------------------------------------
-// @media (min-width: 1400px) { ... }
-
-
 // jadams, 2020-09-01: disabled local color setting
 // by globally loaded vars/colors
 

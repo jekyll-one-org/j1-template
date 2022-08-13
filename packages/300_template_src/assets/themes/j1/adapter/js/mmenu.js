@@ -290,9 +290,9 @@ j1.adapter.mmenu = (function (j1, window) {
             });
 
             // make sure the QL menu is shown, if mmenu is closed
-            // by mmenu backdrop
+            // by clicking the mmenu backdrop
             //
-            $(".mm-ocd").click(function() {
+            $('.mm-ocd__backdrop').click(function() {
               $('#quicklinks').show();
               return false
             });

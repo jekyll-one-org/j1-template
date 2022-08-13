@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  #  ~/assets/themes/j1/modules/mmenu_light/js/mmenu.js
- #  Mobile Menu v3.0.5 implementation for J1 Template
+ #  Mobile Menu v3.1.1 (April 2022) implementation for J1 Template
  #
  #  Product/Info:
  #  https://jekyll.one
@@ -16,17 +16,6 @@
  #  See: http://creativecommons.org/licenses/by/4.0/
  # -----------------------------------------------------------------------------
 */
-
-/*!
- * Mmenu Light
- * mmenujs.com/mmenu-light v3.0.8
- *
- * Copyright (c) Fred Heusschen
- * www.frebsite.nl
- *
- * License: CC-BY-4.0
- * http://creativecommons.org/licenses/by/4.0/
- */
 
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -111,453 +100,81 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/mmenu-light.js");
 /******/ })
 /************************************************************************/
-/******/ ([
-/* 0 */
+/******/ ({
+
+/***/ "./esm/core/index.js":
+/*!***************************!*\
+  !*** ./esm/core/index.js ***!
+  \***************************/
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-__webpack_require__.r(__webpack_exports__);
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_match_media_toggler_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../modules/match-media-toggler/index */ \"./esm/modules/match-media-toggler/index.js\");\n/* harmony import */ var _modules_sliding_panels_navigation_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../modules/sliding-panels-navigation/index */ \"./esm/modules/sliding-panels-navigation/index.js\");\n/* harmony import */ var _modules_offcanvas_drawer_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../modules/offcanvas-drawer/index */ \"./esm/modules/offcanvas-drawer/index.js\");\n\n\n\n/**\n * Class for a lightweight mobile menu.\n */\nvar MmenuLight = /** @class */ (function () {\n    /**\n     * Create a lightweight mobile menu.\n     *\n     * @param {HTMLElement} menu                HTML element for the menu.\n     * @param {string}      [mediaQuery='all']  Media queury to match for the menu.\n     */\n    function MmenuLight(menu, mediaQuery) {\n        if (mediaQuery === void 0) { mediaQuery = 'all'; }\n        //  Store the menu node.\n        this.menu = menu;\n        //  Create the toggler instance.\n        this.toggler = new _modules_match_media_toggler_index__WEBPACK_IMPORTED_MODULE_0__[\"default\"](mediaQuery);\n    }\n    /**\n     * Add navigation for the menu.\n     *\n     * @param {object} options Options for the navigation.\n     */\n    MmenuLight.prototype.navigation = function (options) {\n        var _this = this;\n        //  Only needs to be done ones.\n        if (!this.navigator) {\n            options = options || {};\n            var _a = options.title, title = _a === void 0 ? 'Menu' : _a, _b = options.selectedClass, selectedClass = _b === void 0 ? 'Selected' : _b, _c = options.slidingSubmenus, slidingSubmenus = _c === void 0 ? true : _c, _d = options.theme, theme = _d === void 0 ? 'light' : _d;\n            this.navigator = new _modules_sliding_panels_navigation_index__WEBPACK_IMPORTED_MODULE_1__[\"default\"](this.menu, title, selectedClass, slidingSubmenus, theme);\n            //  En-/disable\n            this.toggler.add(function () { return _this.menu.classList.add(_this.navigator.prefix); }, function () { return _this.menu.classList.remove(_this.navigator.prefix); });\n        }\n        return this.navigator;\n    };\n    /**\n     * Add off-canvas behavior to the menu.\n     *\n     * @param {object} options Options for the off-canvas drawer.\n     */\n    MmenuLight.prototype.offcanvas = function (options) {\n        var _this = this;\n        //  Only needs to be done ones.\n        if (!this.drawer) {\n            options = options || {};\n            var _a = options.position, position = _a === void 0 ? 'left' : _a;\n            this.drawer = new _modules_offcanvas_drawer_index__WEBPACK_IMPORTED_MODULE_2__[\"default\"](null, position);\n            /** Original location in the DOM for the menu. */\n            var orgLocation_1 = document.createComment('original menu location');\n            this.menu.after(orgLocation_1);\n            //  En-/disable\n            this.toggler.add(function () {\n                // Move the menu to the drawer.\n                _this.drawer.content.append(_this.menu);\n            }, function () {\n                // Close the drawer.\n                _this.drawer.close();\n                // Move the menu to the original position.\n                orgLocation_1.after(_this.menu);\n            });\n        }\n        return this.drawer;\n    };\n    return MmenuLight;\n}());\n/* harmony default export */ __webpack_exports__[\"default\"] = (MmenuLight);\n\n\n//# sourceURL=webpack:///./esm/core/index.js?");
 
-// CONCATENATED MODULE: ./esm/modules/match-media-toggler/index.js
-/**
- * Class for a match media toggler.
- */
-var MmToggler = /** @class */ (function () {
-    /**
-     * Create the match media.
-     *
-     * @param {string} mediaquery Media query to use.
-     */
-    function MmToggler(mediaquery) {
-        var _this = this;
-        this.listener = function (evnt) {
-            (evnt.matches ? _this.matchFns : _this.unmatchFns).forEach(function (listener) {
-                listener();
-            });
-        };
-        this.toggler = window.matchMedia(mediaquery);
-        this.toggler.addListener(this.listener);
-        this.matchFns = [];
-        this.unmatchFns = [];
-    }
-    /**
-     * Add a function to the list,
-     * also fires the added function.
-     *
-     * @param {Function} match      Function to fire when the media query matches.
-     * @param {Function} unmatch    Function to fire when the media query does not match.
-     */
-    MmToggler.prototype.add = function (match, unmatch) {
-        this.matchFns.push(match);
-        this.unmatchFns.push(unmatch);
-        (this.toggler.matches ? match : unmatch)();
-    };
-    return MmToggler;
-}());
-/* harmony default export */ var match_media_toggler = (MmToggler);
+/***/ }),
 
-// CONCATENATED MODULE: ./esm/modules/helpers.js
-/**
- * Convert a list to an array.
- *
- * @param 	{NodeList|HTMLCollection} list 	The list or collection to convert into an array.
- * @return	{array}							The array.
- */
-var r = function (list) {
-    return Array.prototype.slice.call(list);
-};
-/**
- * Find elements in the given context.
- *
- * @param 	{string}		selector			The query selector to search for.
- * @param 	{HTMLElement}	[context=document]	The context to search in.
- * @return	{HTMLElement[]}						The found list of elements.
- */
-var $ = function (selector, context) {
-    return r((context || document).querySelectorAll(selector));
-};
+/***/ "./esm/modules/helpers.js":
+/*!********************************!*\
+  !*** ./esm/modules/helpers.js ***!
+  \********************************/
+/*! exports provided: r, $ */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-// CONCATENATED MODULE: ./esm/modules/support.js
-/** Whether or not touch gestures are supported by the browser. */
-var touch = 'ontouchstart' in window ||
-    (navigator.msMaxTouchPoints ? true : false) ||
-    false;
-/** Whether or not its IE11 :/ */
-var IE11 = navigator.userAgent.indexOf('MSIE') > -1 ||
-    navigator.appVersion.indexOf('Trident/') > -1;
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"r\", function() { return r; });\n/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, \"$\", function() { return $; });\n/**\n * Convert a list to an array.\n *\n * @param \t{NodeList|HTMLCollection} list \tThe list or collection to convert into an array.\n * @return\t{array}\t\t\t\t\t\t\tThe array.\n */\nvar r = function (list) {\n    return Array.prototype.slice.call(list);\n};\n/**\n * Find elements in the given context.\n *\n * @param \t{string}\t\tselector\t\t\tThe query selector to search for.\n * @param \t{HTMLElement}\t[context=document]\tThe context to search in.\n * @return\t{HTMLElement[]}\t\t\t\t\t\tThe found list of elements.\n */\nvar $ = function (selector, context) {\n    return r((context || document).querySelectorAll(selector));\n};\n\n\n//# sourceURL=webpack:///./esm/modules/helpers.js?");
 
-// CONCATENATED MODULE: ./esm/modules/sliding-panels-navigation/index.js
+/***/ }),
 
+/***/ "./esm/modules/match-media-toggler/index.js":
+/*!**************************************************!*\
+  !*** ./esm/modules/match-media-toggler/index.js ***!
+  \**************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-var prefix = 'mm-spn';
-/**
- * Class for navigating in a mobile menu.
- */
-var sliding_panels_navigation_MmSlidingPanelsNavigation = /** @class */ (function () {
-    /**
-     * Class for navigating in a mobile menu.
-     *
-     * @param {HTMLElement} node            HTMLElement for the menu.
-     * @param {string}      title           The title for the menu.
-     * @param {string}      selectedClass   The class for selected listitems.
-     * @param {boolean}     slidingSubmenus Whether or not to use sliding submenus.
-     * @param {string}      theme           The color scheme for the menu.
-     */
-    function MmSlidingPanelsNavigation(node, title, selectedClass, slidingSubmenus, theme) {
-        this.node = node;
-        this.title = title;
-        this.slidingSubmenus = slidingSubmenus;
-        this.selectedClass = selectedClass;
-        //  Add classname.
-        this.node.classList.add(prefix);
-        //  Sliding submenus not supported in IE11.
-        if (IE11) {
-            this.slidingSubmenus = false;
-        }
-        this.node.classList.add(prefix + "--" + theme);
-        this.node.classList.add(prefix + "--" + (this.slidingSubmenus ? 'navbar' : 'vertical'));
-        this._setSelectedl();
-        this._initAnchors();
-    }
-    Object.defineProperty(MmSlidingPanelsNavigation.prototype, "prefix", {
-        /** Prefix for the class. */
-        get: function () {
-            return prefix;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * Open the given panel.
-     *
-     * @param {HTMLElement} panel Panel to open.
-     */
-    MmSlidingPanelsNavigation.prototype.openPanel = function (panel) {
-        /** Parent LI for the panel.  */
-        var listitem = panel.parentElement;
-        //  Sliding submenus
-        if (this.slidingSubmenus) {
-            /** Title above the panel to open. */
-            var title_1 = panel.dataset.mmSpnTitle;
-            //  Opening the main level UL.
-            if (listitem === this.node) {
-                this.node.classList.add(prefix + "--main");
-            }
-            //  Opening a sub level UL.
-            else {
-                this.node.classList.remove(prefix + "--main");
-                //  Find title from parent LI.
-                if (!title_1) {
-                    r(listitem.children).forEach(function (child) {
-                        if (child.matches('a, span')) {
-                            title_1 = child.textContent;
-                        }
-                    });
-                }
-            }
-            //  Use the default title.
-            if (!title_1) {
-                title_1 = this.title;
-            }
-            //  Set the title.
-            this.node.dataset.mmSpnTitle = title_1;
-            //  Unset all panels from being opened and parent.
-            $("." + prefix + "--open", this.node).forEach(function (open) {
-                open.classList.remove(prefix + "--open");
-                open.classList.remove(prefix + "--parent");
-            });
-            //  Set the current panel as being opened.
-            panel.classList.add(prefix + "--open");
-            panel.classList.remove(prefix + "--parent");
-            //  Set all parent panels as being parent.
-            var parent_1 = panel.parentElement.closest('ul');
-            while (parent_1) {
-                parent_1.classList.add(prefix + "--open");
-                parent_1.classList.add(prefix + "--parent");
-                parent_1 = parent_1.parentElement.closest('ul');
-            }
-        }
-        //  Vertical submenus
-        else {
-            /** Whether or not the panel is currently opened. */
-            var isOpened = panel.matches("." + prefix + "--open");
-            //  Unset all panels from being opened and parent.
-            $("." + prefix + "--open", this.node).forEach(function (open) {
-                open.classList.remove(prefix + "--open");
-            });
-            //  Toggle the current panel.
-            panel.classList[isOpened ? 'remove' : 'add'](prefix + "--open");
-            //  Set all parent panels as being opened.
-            var parent_2 = panel.parentElement.closest('ul');
-            while (parent_2) {
-                parent_2.classList.add(prefix + "--open");
-                parent_2 = parent_2.parentElement.closest('ul');
-            }
-        }
-    };
-    /**
-     * Initiate the selected listitem / open the current panel.
-     */
-    MmSlidingPanelsNavigation.prototype._setSelectedl = function () {
-        /** All selected LIs. */
-        var listitems = $('.' + this.selectedClass, this.node);
-        /** The last selected LI. */
-        var listitem = listitems[listitems.length - 1];
-        /** The opened UL. */
-        var panel = null;
-        if (listitem) {
-            panel = listitem.closest('ul');
-        }
-        if (!panel) {
-            panel = this.node.querySelector('ul');
-        }
-        this.openPanel(panel);
-    };
-    /**
-     * Initialize the click event handlers.
-     */
-    MmSlidingPanelsNavigation.prototype._initAnchors = function () {
-        var _this = this;
-        /**
-         * Clicking an A in the menu: prevent bubbling up to the LI.
-         *
-         * @param   {HTMLElement}    target The clicked element.
-         * @return  {boolean}       handled Whether or not the event was handled.
-         */
-        var clickAnchor = function (target) {
-            if (target.matches('a')) {
-                return true;
-            }
-            return false;
-        };
-        /**
-         * Click a LI or SPAN in the menu: open its submenu (if present).
-         *
-         * @param   {HTMLElement}    target The clicked element.
-         * @return  {boolean}               Whether or not the event was handled.
-         */
-        var openSubmenu = function (target) {
-            /** Parent listitem for the submenu.  */
-            var listitem;
-            //  Find the parent listitem.
-            if (target.closest('span')) {
-                listitem = target.parentElement;
-            }
-            else if (target.closest('li')) {
-                listitem = target;
-            }
-            else {
-                listitem = false;
-            }
-            if (listitem) {
-                r(listitem.children).forEach(function (panel) {
-                    if (panel.matches('ul')) {
-                        _this.openPanel(panel);
-                    }
-                });
-                return true;
-            }
-            return false;
-        };
-        /**
-         * Click the menu (the navbar): close the last opened submenu.
-         *
-         * @param   {HTMLElement}    target The clicked element.
-         * @return  {boolean}               Whether or not the event was handled.
-         */
-        var closeSubmenu = function (target) {
-            /** The opened ULs. */
-            var panels = $("." + prefix + "--open", target);
-            /** The last opened UL. */
-            var panel = panels[panels.length - 1];
-            if (panel) {
-                /** The second to last opened UL. */
-                var parent_3 = panel.parentElement.closest('ul');
-                if (parent_3) {
-                    _this.openPanel(parent_3);
-                    return true;
-                }
-            }
-            return false;
-        };
-        this.node.addEventListener('click', function (evnt) {
-            var target = evnt.target;
-            var handled = false;
-            handled = handled || clickAnchor(target);
-            handled = handled || openSubmenu(target);
-            handled = handled || closeSubmenu(target);
-            if (handled) {
-                evnt.stopImmediatePropagation();
-            }
-        });
-    };
-    return MmSlidingPanelsNavigation;
-}());
-/* harmony default export */ var sliding_panels_navigation = (sliding_panels_navigation_MmSlidingPanelsNavigation);
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/**\n * Class for a match media toggler.\n */\nvar MmToggler = /** @class */ (function () {\n    /**\n     * Create the match media.\n     *\n     * @param {string} mediaquery Media query to use.\n     */\n    function MmToggler(mediaquery) {\n        var _this = this;\n        this.listener = function (evnt) {\n            (evnt.matches ? _this.matchFns : _this.unmatchFns).forEach(function (listener) {\n                listener();\n            });\n        };\n        this.toggler = window.matchMedia(mediaquery);\n        this.toggler.addListener(this.listener);\n        this.matchFns = [];\n        this.unmatchFns = [];\n    }\n    /**\n     * Add a function to the list,\n     * also fires the added function.\n     *\n     * @param {Function} match      Function to fire when the media query matches.\n     * @param {Function} unmatch    Function to fire when the media query does not match.\n     */\n    MmToggler.prototype.add = function (match, unmatch) {\n        this.matchFns.push(match);\n        this.unmatchFns.push(unmatch);\n        (this.toggler.matches ? match : unmatch)();\n    };\n    return MmToggler;\n}());\n/* harmony default export */ __webpack_exports__[\"default\"] = (MmToggler);\n\n\n//# sourceURL=webpack:///./esm/modules/match-media-toggler/index.js?");
 
-// CONCATENATED MODULE: ./esm/modules/offcanvas-drawer/index.js
-var offcanvas_drawer_prefix = 'mm-ocd';
-/**
- * Class for off-canvas behavior.
- */
-var MmOffCanvasDrawer = /** @class */ (function () {
-    /**
-     * Class for off-canvas drawer.
-     *
-     * @param {HTMLElement} [node]          The element to put in the drawer.
-     * @param {String}      [position=left] The position of the drawer, can be "left" or "right".
-     * @param {Boolean}     toggle_mode     Whether or not to use toggle mode.
-     */
-    function MmOffCanvasDrawer(node, position, toggle_mode) {
-        var _this = this;
-        if (node === void 0) { node = null; }
-        //  Create the wrapper.
-        this.wrapper = document.createElement('div');
-        this.wrapper.classList.add("" + offcanvas_drawer_prefix);
-        this.wrapper.classList.add(offcanvas_drawer_prefix + "--" + position);
-        //  Create the drawer.
-        this.content = document.createElement('div');
-        this.content.classList.add(offcanvas_drawer_prefix + "__content");
-        this.wrapper.append(this.content);
-        //  Create the backdrop.
-        this.backdrop = document.createElement('div');
-        this.backdrop.classList.add(offcanvas_drawer_prefix + "__backdrop");
-        this.wrapper.append(this.backdrop);
-        //  Add the nodes to the <body>.
-        document.body.append(this.wrapper);
-        if (node) {
-            this.content.append(node);
-        }
-        //  Click the backdrop.
-        if (!toggle_mode) {
-            var close_1 = function (evnt) {
-                _this.close();
-                evnt.stopImmediatePropagation();
-            };
-            this.backdrop.addEventListener('touchstart', close_1, { passive: true });
-            this.backdrop.addEventListener('mousedown', close_1, { passive: true });
-        }
-    }
-    Object.defineProperty(MmOffCanvasDrawer.prototype, "prefix", {
-        /** Prefix for the class. */
-        get: function () {
-            return offcanvas_drawer_prefix;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    /**
-     * Open the drawer.
-     */
-    MmOffCanvasDrawer.prototype.open = function () {
-        this.wrapper.classList.add(offcanvas_drawer_prefix + "--open");
-        document.body.classList.add(offcanvas_drawer_prefix + "-opened");
-    };
-    /**
-     * Close the drawer.
-     */
-    MmOffCanvasDrawer.prototype.close = function () {
-        this.wrapper.classList.remove(offcanvas_drawer_prefix + "--open");
-        document.body.classList.remove(offcanvas_drawer_prefix + "-opened");
-    };
-    return MmOffCanvasDrawer;
-}());
-/* harmony default export */ var offcanvas_drawer = (MmOffCanvasDrawer);
+/***/ }),
 
-// CONCATENATED MODULE: ./esm/core/index.js
+/***/ "./esm/modules/offcanvas-drawer/index.js":
+/*!***********************************************!*\
+  !*** ./esm/modules/offcanvas-drawer/index.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nvar prefix = 'mm-ocd';\n/**\n * Class for off-canvas behavior.\n */\nvar MmOffCanvasDrawer = /** @class */ (function () {\n    /**\n     * Class for off-canvas drawer.\n     *\n     * @param {HTMLElement} [node]          The element to put in the drawer.\n     * @param {String}      [position=left] The position of the drawer, can be \"left\" or \"right\".\n     */\n    function MmOffCanvasDrawer(node, position) {\n        var _this = this;\n        if (node === void 0) { node = null; }\n        //  Create the wrapper.\n        this.wrapper = document.createElement('div');\n        this.wrapper.classList.add(\"\" + prefix);\n        this.wrapper.classList.add(prefix + \"--\" + position);\n        //  Create the drawer.\n        this.content = document.createElement('div');\n        this.content.classList.add(prefix + \"__content\");\n        this.wrapper.append(this.content);\n        //  Create the backdrop.\n        this.backdrop = document.createElement('div');\n        this.backdrop.classList.add(prefix + \"__backdrop\");\n        this.wrapper.append(this.backdrop);\n        //  Add the nodes to the <body>.\n        document.body.append(this.wrapper);\n        if (node) {\n            this.content.append(node);\n        }\n        //  Click the backdrop.\n        var close = function (evnt) {\n            _this.close();\n            evnt.stopImmediatePropagation();\n        };\n        this.backdrop.addEventListener('touchstart', close, { passive: true });\n        this.backdrop.addEventListener('mousedown', close, { passive: true });\n    }\n    Object.defineProperty(MmOffCanvasDrawer.prototype, \"prefix\", {\n        /** Prefix for the class. */\n        get: function () {\n            return prefix;\n        },\n        enumerable: false,\n        configurable: true\n    });\n    /**\n     * Open the drawer.\n     */\n    MmOffCanvasDrawer.prototype.open = function () {\n        this.wrapper.classList.add(prefix + \"--open\");\n        document.body.classList.add(prefix + \"-opened\");\n    };\n    /**\n     * Close the drawer.\n     */\n    MmOffCanvasDrawer.prototype.close = function () {\n        this.wrapper.classList.remove(prefix + \"--open\");\n        document.body.classList.remove(prefix + \"-opened\");\n    };\n    return MmOffCanvasDrawer;\n}());\n/* harmony default export */ __webpack_exports__[\"default\"] = (MmOffCanvasDrawer);\n\n\n//# sourceURL=webpack:///./esm/modules/offcanvas-drawer/index.js?");
 
+/***/ }),
 
-/**
- * Class for a lightweight mobile menu.
- */
-var core_MmenuLight = /** @class */ (function () {
-    /**
-     * Create a lightweight mobile menu.
-     *
-     * @param {HTMLElement} menu                HTML element for the menu.
-     * @param {string}      [mediaQuery='all']  Media queury to match for the menu.
-     */
-    function MmenuLight(menu, mediaQuery) {
-        if (mediaQuery === void 0) { mediaQuery = 'all'; }
-        //  Store the menu node.
-        this.menu = menu;
-        //  Create the toggler instance.
-        this.toggler = new match_media_toggler(mediaQuery);
-    }
-    /**
-     * Add navigation for the menu.
-     *
-     * @param {object} options Options for the navigation.
-     */
-    MmenuLight.prototype.navigation = function (options) {
-        var _this = this;
-        //  Only needs to be done ones.
-        if (!this.navigator) {
-            options = options || {};
-            var _a = options.title, title = _a === void 0 ? 'Menu' : _a, _b = options.selectedClass, selectedClass = _b === void 0 ? 'Selected' : _b, _c = options.slidingSubmenus, slidingSubmenus = _c === void 0 ? true : _c, _d = options.theme, theme = _d === void 0 ? 'light' : _d;
-            this.navigator = new sliding_panels_navigation(this.menu, title, selectedClass, slidingSubmenus, theme);
-            //  En-/disable
-            this.toggler.add(function () { return _this.menu.classList.add(_this.navigator.prefix); }, function () { return _this.menu.classList.remove(_this.navigator.prefix); });
-        }
-        return this.navigator;
-    };
-    /**
-     * Add off-canvas behavior to the menu.
-     *
-     * @param {object} options Options for the off-canvas drawer.
-     */
-    MmenuLight.prototype.offcanvas = function (options) {
-        var _this = this;
-        //  Only needs to be done ones.
-        if (!this.drawer) {
-            options = options || {};
-            var _a = options.position, position = _a === void 0 ? 'left' : _a, _b = options.toggle_mode, toggle_mode = _b === void 0 ? false : _b;
-            this.drawer = new offcanvas_drawer(null, position, toggle_mode);
-            /** Original location in the DOM for the menu. */
-            var orgLocation_1 = document.createComment('original menu location');
-            this.menu.after(orgLocation_1);
-            //  En-/disable
-            this.toggler.add(function () {
-                // Move the menu to the drawer.
-                _this.drawer.content.append(_this.menu);
-            }, function () {
-                // Close the drawer.
-                _this.drawer.close();
-                // Move the menu to the original position.
-                orgLocation_1.after(_this.menu);
-            });
-        }
-        return this.drawer;
-    };
-    return MmenuLight;
-}());
-/* harmony default export */ var core = (core_MmenuLight);
+/***/ "./esm/modules/sliding-panels-navigation/index.js":
+/*!********************************************************!*\
+  !*** ./esm/modules/sliding-panels-navigation/index.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-// CONCATENATED MODULE: ./src/mmenu-light.js
-/*!
- * Mmenu Light
- * mmenujs.com/mmenu-light
- *
- * Copyright (c) Fred Heusschen
- * www.frebsite.nl
- *
- * License: CC-BY-4.0
- * http://creativecommons.org/licenses/by/4.0/
- */
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../helpers */ \"./esm/modules/helpers.js\");\n\nvar prefix = 'mm-spn';\n/**\n * Class for navigating in a mobile menu.\n */\nvar MmSlidingPanelsNavigation = /** @class */ (function () {\n    /**\n     * Class for navigating in a mobile menu.\n     *\n     * @param {HTMLElement} node            HTMLElement for the menu.\n     * @param {string}      title           The title for the menu.\n     * @param {string}      selectedClass   The class for selected listitems.\n     * @param {boolean}     slidingSubmenus Whether or not to use sliding submenus.\n     * @param {string}      theme           The color scheme for the menu.\n     */\n    function MmSlidingPanelsNavigation(node, title, selectedClass, slidingSubmenus, theme) {\n        this.node = node;\n        this.title = title;\n        this.slidingSubmenus = slidingSubmenus;\n        this.selectedClass = selectedClass;\n        //  Add classname.\n        this.node.classList.add(prefix);\n        this.node.classList.add(prefix + \"--\" + theme);\n        this.node.classList.add(prefix + \"--\" + (this.slidingSubmenus ? 'navbar' : 'vertical'));\n        this._setSelectedl();\n        this._initAnchors();\n    }\n    Object.defineProperty(MmSlidingPanelsNavigation.prototype, \"prefix\", {\n        /** Prefix for the class. */\n        get: function () {\n            return prefix;\n        },\n        enumerable: false,\n        configurable: true\n    });\n    /**\n     * Open the given panel.\n     *\n     * @param {HTMLElement} panel Panel to open.\n     */\n    MmSlidingPanelsNavigation.prototype.openPanel = function (panel) {\n        /** Parent LI for the panel.  */\n        var listitem = panel.parentElement;\n        //  Sliding submenus\n        if (this.slidingSubmenus) {\n            /** Title above the panel to open. */\n            var title_1 = panel.dataset.mmSpnTitle;\n            //  Opening the main level UL.\n            if (listitem === this.node) {\n                this.node.classList.add(prefix + \"--main\");\n            }\n            //  Opening a sub level UL.\n            else {\n                this.node.classList.remove(prefix + \"--main\");\n                //  Find title from parent LI.\n                if (!title_1) {\n                    Object(_helpers__WEBPACK_IMPORTED_MODULE_0__[\"r\"])(listitem.children).forEach(function (child) {\n                        if (child.matches('a, span')) {\n                            title_1 = child.textContent;\n                        }\n                    });\n                }\n            }\n            //  Use the default title.\n            if (!title_1) {\n                title_1 = this.title;\n            }\n            //  Set the title.\n            this.node.dataset.mmSpnTitle = title_1;\n            //  Unset all panels from being opened and parent.\n            Object(_helpers__WEBPACK_IMPORTED_MODULE_0__[\"$\"])(\".\" + prefix + \"--open\", this.node).forEach(function (open) {\n                open.classList.remove(prefix + \"--open\");\n                open.classList.remove(prefix + \"--parent\");\n            });\n            //  Set the current panel as being opened.\n            panel.classList.add(prefix + \"--open\");\n            panel.classList.remove(prefix + \"--parent\");\n            //  Set all parent panels as being parent.\n            var parent_1 = panel.parentElement.closest('ul');\n            while (parent_1) {\n                parent_1.classList.add(prefix + \"--open\");\n                parent_1.classList.add(prefix + \"--parent\");\n                parent_1 = parent_1.parentElement.closest('ul');\n            }\n        }\n        //  Vertical submenus\n        else {\n            /** Whether or not the panel is currently opened. */\n            var isOpened = panel.matches(\".\" + prefix + \"--open\");\n            //  Unset all panels from being opened and parent.\n            Object(_helpers__WEBPACK_IMPORTED_MODULE_0__[\"$\"])(\".\" + prefix + \"--open\", this.node).forEach(function (open) {\n                open.classList.remove(prefix + \"--open\");\n            });\n            //  Toggle the current panel.\n            panel.classList[isOpened ? 'remove' : 'add'](prefix + \"--open\");\n            //  Set all parent panels as being opened.\n            var parent_2 = panel.parentElement.closest('ul');\n            while (parent_2) {\n                parent_2.classList.add(prefix + \"--open\");\n                parent_2 = parent_2.parentElement.closest('ul');\n            }\n        }\n    };\n    /**\n     * Initiate the selected listitem / open the current panel.\n     */\n    MmSlidingPanelsNavigation.prototype._setSelectedl = function () {\n        /** All selected LIs. */\n        var listitems = Object(_helpers__WEBPACK_IMPORTED_MODULE_0__[\"$\"])('.' + this.selectedClass, this.node);\n        /** The last selected LI. */\n        var listitem = listitems[listitems.length - 1];\n        /** The opened UL. */\n        var panel = null;\n        if (listitem) {\n            panel = listitem.closest('ul');\n        }\n        if (!panel) {\n            panel = this.node.querySelector('ul');\n        }\n        this.openPanel(panel);\n    };\n    /**\n     * Initialize the click event handlers.\n     */\n    MmSlidingPanelsNavigation.prototype._initAnchors = function () {\n        var _this = this;\n        /**\n         * Clicking an A in the menu: prevent bubbling up to the LI.\n         *\n         * @param   {HTMLElement}    target The clicked element.\n         * @return  {boolean}       handled Whether or not the event was handled.\n         */\n        var clickAnchor = function (target) {\n            // jadams, 2022-08-13:\n            // TODO: allow to open a panel on anchors\n            if (target.matches('a')) {\n                // openSubmenu(target);\n                return true;\n            }\n            return false;\n        };\n        /**\n         * Click a LI or SPAN in the menu: open its submenu (if present).\n         *\n         * @param   {HTMLElement}    target The clicked element.\n         * @return  {boolean}               Whether or not the event was handled.\n         */\n        var openSubmenu = function (target) {\n            /** Parent listitem for the submenu.  */\n            var listitem;\n            //  Find the parent listitem.\n            if (target.closest('span')) {\n                listitem = target.parentElement;\n            }\n            else if (target.closest('li')) {\n                listitem = target;\n            }\n            else {\n                listitem = false;\n            }\n            if (listitem) {\n                Object(_helpers__WEBPACK_IMPORTED_MODULE_0__[\"r\"])(listitem.children).forEach(function (panel) {\n                    if (panel.matches('ul')) {\n                        _this.openPanel(panel);\n                    }\n                });\n                return true;\n            }\n            return false;\n        };\n        /**\n         * Click the menu (the navbar): close the last opened submenu.\n         *\n         * @param   {HTMLElement}    target The clicked element.\n         * @return  {boolean}               Whether or not the event was handled.\n         */\n        var closeSubmenu = function (target) {\n            /** The opened ULs. */\n            var panels = Object(_helpers__WEBPACK_IMPORTED_MODULE_0__[\"$\"])(\".\" + prefix + \"--open\", target);\n            /** The last opened UL. */\n            var panel = panels[panels.length - 1];\n            if (panel) {\n                /** The second to last opened UL. */\n                var parent_3 = panel.parentElement.closest('ul');\n                if (parent_3) {\n                    _this.openPanel(parent_3);\n                    return true;\n                }\n            }\n            return false;\n        };\n        this.node.addEventListener('click', function (evnt) {\n            var target = evnt.target;\n            var handled = false;\n            handled = handled || clickAnchor(target);\n            handled = handled || openSubmenu(target);\n            handled = handled || closeSubmenu(target);\n            if (handled) {\n                evnt.stopImmediatePropagation();\n            }\n        });\n    };\n    return MmSlidingPanelsNavigation;\n}());\n/* harmony default export */ __webpack_exports__[\"default\"] = (MmSlidingPanelsNavigation);\n\n\n//# sourceURL=webpack:///./esm/modules/sliding-panels-navigation/index.js?");
 
-//	The module
+/***/ }),
 
+/***/ "./src/mmenu-light.js":
+/*!****************************!*\
+  !*** ./src/mmenu-light.js ***!
+  \****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-//  Export module
-/* harmony default export */ var mmenu_light = __webpack_exports__["default"] = (core);
-
-//	Global namespace
-window.MmenuLight = core;
-
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _esm_core_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../esm/core/index */ \"./esm/core/index.js\");\n/*!\n * Mmenu Light\n * mmenujs.com/mmenu-light\n *\n * Copyright (c) Fred Heusschen\n * www.frebsite.nl\n *\n * License: CC-BY-4.0\n * http://creativecommons.org/licenses/by/4.0/\n */\n\n//\tThe module\n\n\n//  Export module\n/* harmony default export */ __webpack_exports__[\"default\"] = (_esm_core_index__WEBPACK_IMPORTED_MODULE_0__[\"default\"]);\n\n//\tGlobal namespace\nwindow.MmenuLight = _esm_core_index__WEBPACK_IMPORTED_MODULE_0__[\"default\"];\n\n\n//# sourceURL=webpack:///./src/mmenu-light.js?");
 
 /***/ })
-/******/ ]);
+
+/******/ });

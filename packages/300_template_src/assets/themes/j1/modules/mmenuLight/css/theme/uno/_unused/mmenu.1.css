@@ -43,21 +43,7 @@
     background-color: #607d8b;
 }
 
-/* Navigator
-   ----------------------------------------------------------------------------- */
-
-.mm-spn li:after {
-   border-top: 0 !important;
-}
-
-.mm-spn a:not(:last-child):after {
-   border-right: 0 !important;
-}
-
-.mm-spn li:hover {
-    background-color: #424242;
-}
-
+/* Navigator */
 .mm-spn.mm-spn--navbar:after {
   text-align: left;  /* jadams, 2020-06-20: set menu title to the left */
   font-size: x-large; /* jadams, 2020-06-20: increase size of the menu title */
@@ -136,11 +122,10 @@
   color: #9e9e9e !important;
 }
 
-/* jadams, 2022-08-13: muted the anchor on hover, because (currently)
-   NO action on click
-*/
 .mm-spn a:hover {
-    color: #9e9e9e !important;
+    color: #fafafa !important;
+    /* text-decoration: none;
+    font-weight: 500; */
 }
 
 /* jadams, 2020-07-03: added hover to global style */
@@ -149,6 +134,7 @@ a.toc-link:hover {
     text-decoration: none;
     font-weight: 500;
 }
+
 
 /* Media breakpoints
    ----------------------------------------------------------------------------- */
