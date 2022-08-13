@@ -865,10 +865,10 @@
             logger.debug(logText);
           }
 
-          if ( boxHeight == 0 || boxWidth == 0 ) {
-            logText = '\n' + 'Kacke am Schuh';
-            logger.warn(logText);
-          }
+          // if ( boxHeight == 0 || boxWidth == 0 ) {
+          //   logText = '\n' + 'Kacke am Schuh';
+          //   logger.warn(logText);
+          // }
 
           var width, height;
           if (scale === 'fit' || scale === 'fit-smaller') {
