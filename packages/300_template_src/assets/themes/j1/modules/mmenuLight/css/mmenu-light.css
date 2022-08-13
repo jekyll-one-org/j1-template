@@ -182,11 +182,20 @@ body.mm-ocd-opened {
 	left: 0
 }
 
+/*
 .mm-spn ul.mm-spn--parent {
 	left: -30%;
 	overflow-y: hidden
 }
+*/
 
+/* jadams, 2022-08-13: enable scrolling like for TOCs */
+
+.mm-spn ul.mm-spn--parent {
+  left: -30%;
+  overflow-y: scroll;
+  position: relative;
+}
 .mm-spn li {
 	position: relative;
 	background: inherit;

@@ -26,10 +26,12 @@ a.link-no-decoration {
     border-bottom: unset;
     text-decoration: none;
 }
+
+// jadams, 2022-07-25: fixed color for light|dark themes
+// jadams, 2022-08-13: important settings conflics with e.g. mmenu; removed.
 a.link-no-decoration:hover {
-    // jadams, 2022-07-25: fixed color for light|dark themes
-    color: $darken-900 !important;
-    font-weight: 500 !important;
+    color: $darken-900;
+    font-weight: 500;
 }
 
 a:hover {
