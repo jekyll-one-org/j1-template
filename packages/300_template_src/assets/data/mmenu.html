@@ -345,7 +345,7 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
           {% if themer_options.enabled %}
             <!-- [INFO   ] [~/assets/data/mmenu.html              ] [found menu-type: theme_select] -->
             <li>
-              <span>{{menu.item}}</span>
+              <span id="themes_mmenu" style="display: block">{{menu.item}}</span>
               {% if nav_menu_animation %}
               <ul>
               <!-- ul class="dropdown-menu data-in="{{nav_menu_animation}}" data-out="{{nav_menu_animation}}" -->

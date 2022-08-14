@@ -173,15 +173,26 @@ j1.adapter.cookieConsent = (function (j1, window) {
       // initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (function (options) {
-        var expires     = '{{cookie_options.expires}}';
-        var same_site   = '{{cookie_options.same_site}}';
+        var same_site = '{{cookie_options.same_site}}';
+        var expires;
 
-        // // set domain used by cookies
-        // if (cookie_option_domain == 'auto') {
-        //   domainAttribute = domain ;
-        // } else  {
-        //   domainAttribute = '';
-        // }
+        if (moduleOptions.enabled) {
+          expires = '{{cookie_options.expires}}';
+        } else {
+          // expire permanent cookies to session
+          j1.expireCookie({ name: cookie_names.user_state });
+          j1.expireCookie({ name: cookie_names.user_consent });
+          j1.expireCookie({ name: cookie_names.user_translate });
+
+          // disable the themes menus
+          $('#themes_menu').css('display', 'none');
+          $('#themes_mmenu').css('display', 'none');
+          logger.warn('\n' + 'disable module: Themer');
+
+          // disable the quick link for (Google) Translation
+          $('#quickLinksTranslateButton').css('display', 'none');
+          logger.warn('\n' + 'disable module: Trranslator');
+        }
 
         // set domain used by cookies
         if (cookie_option_domain) {
@@ -203,23 +214,29 @@ j1.adapter.cookieConsent = (function (j1, window) {
 
         if ( j1.getState() === 'finished' ) {
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
 
-          j1.cookieConsent = new CookieConsent ({
-            contentURL:             moduleOptions.contentURL,                   // dialog content (modals) for all supported languages
-            cookieName:             cookie_names.user_consent,                  // name of the consent cookie
-            cookieStorageDays:      expires,                                    // lifetime of a cookie [0..365], 0: session cookie
-            cookieSameSite:         same_site,                                  // restrict consent cookie
-            cookieSecure:           secure,                                     // only sent to the server with an encrypted request over HTTPS
-            cookieDomain:           domainAttribute,                            // set domain (hostname|domain)
-            dialogLanguage:         moduleOptions.dialogLanguage,               // language for the dialog (modal)
-            whitelisted:            moduleOptions.whitelisted,                  // pages NO cookie dialog is shown
-            reloadPageOnChange:     moduleOptions.reloadPageOnChange,           // reload if setzings has changed
-            dialogContainerID:      moduleOptions.dialogContainerID,            // container, the dialog modal is (dynamically) loaded
-            xhrDataElement:         moduleOptions.xhrDataElement,               // container for all language-specific dialogs (modals)
-            postSelectionCallback:  moduleOptions.postSelectionCallback,        // callback function, called after the user has made his selection
-          });
+
+          if (moduleOptions.enabled) {
+            logger.debug('\n' + 'state: ' + _this.getState());
+            logger.info('\n' + 'module is being initialized');
+
+            j1.cookieConsent = new CookieConsent ({
+              contentURL:             moduleOptions.contentURL,                   // dialog content (modals) for all supported languages
+              cookieName:             cookie_names.user_consent,                  // name of the consent cookie
+              cookieStorageDays:      expires,                                    // lifetime of a cookie [0..365], 0: session cookie
+              cookieSameSite:         same_site,                                  // restrict consent cookie
+              cookieSecure:           secure,                                     // only sent to the server with an encrypted request over HTTPS
+              cookieDomain:           domainAttribute,                            // set domain (hostname|domain)
+              dialogLanguage:         moduleOptions.dialogLanguage,               // language for the dialog (modal)
+              whitelisted:            moduleOptions.whitelisted,                  // pages NO cookie dialog is shown
+              reloadPageOnChange:     moduleOptions.reloadPageOnChange,           // reload if setzings has changed
+              dialogContainerID:      moduleOptions.dialogContainerID,            // container, the dialog modal is (dynamically) loaded
+              xhrDataElement:         moduleOptions.xhrDataElement,               // container for all language-specific dialogs (modals)
+              postSelectionCallback:  moduleOptions.postSelectionCallback,        // callback function, called after the user has made his selection
+            });
+          } else {
+            logger.warn('\n' + 'module is disabled');
+          }
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());

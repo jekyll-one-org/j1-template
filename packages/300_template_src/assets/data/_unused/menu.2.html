@@ -202,9 +202,9 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
       <!-- [INFO   ] [~/assets/data/menu.html         ][submenu level 1 detected] -->
       <li class="dropdown nav-item">
         {% if menu.icon == null %}
-          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-hover="dropdown">{{ menu.item }}</a>
+          <span class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-hover="dropdown">{{ menu.item }}</span>
         {% else %}
-          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-hover="dropdown"> <i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{menu.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i>{{ menu.item }}</a>
+          <span class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-hover="dropdown"> <i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{menu.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i>{{ menu.item }}</span>
         {% endif %}
 
         <ul class="dropdown-menu {{nav_menu_position}} raised-z{{raised_level}}">
@@ -229,9 +229,9 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
             <!-- [INFO   ] [~/assets/data/menu.html         ][submenu level 2 (dropdown) detected ] -->
             <li class="dropdown nav-item nav-sub-item">
               {% if level_1.icon == null %}
-                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">{{ level_1.title }}</a>
+                <span class="dropdown-toggle" data-bs-toggle="dropdown">{{ level_1.title }}</span>
               {% else %}
-                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{level_1.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{ level_1.title }}</a>
+                <span class="dropdown-toggle" data-bs-toggle="dropdown"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{level_1.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{ level_1.title }}</span>
               {% endif %}
 
               <ul class="dropdown-menu {{nav_menu_position}} raised-z{{raised_level}}">
@@ -256,9 +256,9 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                     <!-- [INFO   ] [~/assets/data/menu.html         ][submenu level 3 detected (last level supported)] -->
                     <li class="dropdown nav-item nav-sub-item">
                       {% if level_2.icon == null %}
-                        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">{{ level_2.title }}</a>
+                        <span class="dropdown-toggle" data-bs-toggle="dropdown">{{ level_2.title }}</span>
                       {% else %}
-                        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{level_2.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{ level_2.title }}</a>
+                        <span class="dropdown-toggle" data-bs-toggle="dropdown"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{level_2.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{ level_2.title }}</span>
                       {% endif %}
                       <ul class="dropdown-menu {{nav_menu_position}} raised-z{{raised_level}}">
                       {% for level_3 in level_2.dropdown %}
@@ -406,9 +406,9 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                 <!-- [FATAL  ] [~/assets/data/menu.html         ][no valid menu item config found] -->
                   <li class="dropdown-item">
                     {% if item.title %}
-                      <a href="#" >Invalid: {{item.title}}</a>
+                       >Invalid: {{item.title}}</a>
                     {% else %}
-                      <a href="#" >Item invalid</a>
+                       >Item invalid</a>
                     {% endif %}
                   </li>
                 {% endif %}
@@ -425,8 +425,8 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
           {% when 'theme_select' %}
           {% if themer_options.enabled %}
             <!-- [INFO   ] [~/assets/data/menu.html         ][found menu-type: theme_select] -->
-            <li id="themes_menu" class="dropdown nav-item" style="display: block">
-              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-hover="dropdown">{{menu.item}} </a>
+            <li id="themes_menu" class="dropdown nav-item">
+              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-hover="dropdown">{{menu.item}}</a>
               {% if nav_menu_animation %}
               <ul class="dropdown-menu raised-z{{raised_level}}">
               <!-- ul class="dropdown-menu data-in="{{nav_menu_animation}}" data-out="{{nav_menu_animation}}" -->
@@ -438,7 +438,7 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                   <!-- check for locally loaded J1 Themes -->
                   {% if item.local_themes and item.local_themes == 'enabled' %}
                     <li class="dropdown nav-item nav-sub-item">
-                      <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" data-hover="dropdown"><i class="dropdown {{nav_menu_icon_family}} {{nav_menu_icon_family}}-{{item.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{item.title}}</a>
+                      < class="dropdown-toggle" data-bs-toggle="dropdown" data-hover="dropdown"><i class="dropdown {{nav_menu_icon_family}} {{nav_menu_icon_family}}-{{item.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{item.title}}</a>
                       <ul id="local_themes" class="dropdown-menu raised-z{{raised_level}}"></ul>
                     </li>
                     {% assign item_found = 'true' %}
