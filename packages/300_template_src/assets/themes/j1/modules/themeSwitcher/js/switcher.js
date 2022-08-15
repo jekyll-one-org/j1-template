@@ -19,7 +19,6 @@
  #       The original version cannot be used with J1 for theme menu creation!
  # -----------------------------------------------------------------------------
 */
-'use strict';
 
 // -----------------------------------------------------------------------------
 // ESLint shimming
@@ -43,6 +42,7 @@
 * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
 */
 
+'use strict';
 ;(function ($, window, document, undefined) {
 
   var old = $.fn.bootstrapThemeSwitcher;
