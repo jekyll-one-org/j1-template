@@ -45,7 +45,7 @@ resource_options:
   - attic:
       slides:
 
-        - url:                          /assets/images/modules/attics/vladislav-klapin-2-1920x1280.jpg
+        - url:                          /assets/images/modules/attics/vladislav-klapin-1920x1280.jpg
           alt:                          Photo by Vladislav Klapin on Unsplash
           title:                        Country Flags
           tagline:                      flags worldwide

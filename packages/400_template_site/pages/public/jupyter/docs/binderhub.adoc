@@ -46,7 +46,7 @@ resource_options:
       opacity:                          0.3
       slides:
 
-        - url:                          /assets/images/modules/attics/shubham-dhage-2-1920x1280.jpg
+        - url:                          /assets/images/modules/attics/shubham-dhage-1920x1280.jpg
           alt:                          Photo by Shubham Dhage on Unsplash
           title:                        Binder
           tagline:                      BinderHub
