@@ -314,8 +314,13 @@ j1.adapter.attic = (function (j1, window) {
 
               $('.textOverlay').show();
               $('.textOverlay').css('opacity', '1');
-              $('.attic-caption').show();
-              $('.attic-caption').css('opacity', '1');
+
+              // jadams, 2022-08-19: show a badge only if defined
+              //
+              if (typeof instance.images[index].badge != 'undefined') {
+                $('.attic-caption').show();
+                $('.attic-caption').css('opacity', '1');
+              }
 
               // jadams, 2022-08-09:
               // resize the (background-)image to make sure the 'attic'

@@ -352,9 +352,10 @@ p.tableblock > code:only-child {
 }
 
 //  jadams, 2020-07-10: add top margin for larger (image) items
+//  jadams, 2022-08-19: removed top margin
 p.tableblock {
   font-size: 1em;
-  margin-top: 1.5em;
+  // margin-top: 1.5em;
 }
 
 // Quote blocks

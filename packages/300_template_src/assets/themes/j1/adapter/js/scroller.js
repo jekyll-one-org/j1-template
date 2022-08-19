@@ -89,6 +89,13 @@ var logger;
 var logText;
 var lastPageInfo;
 
+// var platform_name         = platform.name;
+// var platform_version      = platform.version;
+// var platform_layout       = platform.layout;
+// var platform_os           = platform.os;
+// var platform_description  = platform.description;
+
+
   // ---------------------------------------------------------------------------
   // Main object
   // ---------------------------------------------------------------------------

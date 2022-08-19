@@ -17,6 +17,7 @@
 # NOTE:
 #   Theme is based on Asciidoctor default theme (default-theme.yml).
 # ------------------------------------------------------------------------------
+
 font:
   catalog:
     # Noto Serif supports Latin, Latin-1 Supplement, Latin Extended-A,
