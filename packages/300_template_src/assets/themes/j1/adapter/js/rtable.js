@@ -157,23 +157,13 @@ j1.adapter.rtable = (function (j1, window) {
             var log_text;
             // jadams, 2020-09-16: class 'rtable' indicate use of 'tablesaw'
             if ($(curTable).hasClass('rtable')) {
-
-
-//            This demonstration table contains all of the bells and whistles available in tablesaw: Swipe Mode, ModeSwitch, Minimap, Sortable, and SortableSwitch
-//         		<table class="tablesaw"
-//                data-tablesaw-mode="swipe"
-//                data-tablesaw-sortable
-//                data-tablesaw-sortable-switch
-//                data-tablesaw-minimap
-//                data-tablesaw-mode-switch
-//             >
-
-
-              // jadams, 2020-09-16: add needed CSS class/attribute for tablesaw
-//            $(curTable).removeClass('rtable');
+              // add needed CSS class/attribute for tablesaw
               $(curTable).addClass('table');
               $(curTable).addClass('tablesaw');
               $(curTable).attr('data-tablesaw-mode', moduleOptions.rtable.mode);
+
+              // Advanced mode NOT supported (mode stack only)
+              //
               // $(curTable).attr('data-tablesaw-sortable', '');
               // $(curTable).attr('data-tablesaw-sortable-switch', '');
               // $(curTable).attr('data-tablesaw-minimap', '');
@@ -201,8 +191,8 @@ j1.adapter.rtable = (function (j1, window) {
               }
             } // END if hasClass 'rtable'
 
-            // jadams, 2022-08-20: add needed div element needed for BS
-            // to move the table found for BS responsiveness
+            // add needed div element needed for BS to move the table found
+            // for BS responsiveness
             //
             if ($(curTable).hasClass(/table-responsive/)) {
               // see: https://stackoverflow.com/questions/2596833/how-to-move-child-element-from-one-parent-to-another-using-jquery

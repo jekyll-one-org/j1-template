@@ -4,7 +4,7 @@ tagline:                                responsive tables
 date:                                   2020-11-09 00:00:00
 description: >
                                         Creating a design for responsive tables is challenging. The approach used by
-                                        J1 Template is based on pure CSS on top of the classic Bootstrap styles for
+                                        J1 Template is based on pure CSS styles on top of the classic Bootstrap tags for
                                         simplicity and portability to be viewed best on all devices and browsers.
 
 categories:                             [ Roundtrip ]
@@ -61,13 +61,13 @@ resource_options:
 // -----------------------------------------------------------------------------
 [role="dropcap"]
 Creating a design for responsive tables is challenging. The approach used by
-J1 Template is based on pure CSS on top of the classic Bootstrap styles for
-simplicity and portability to be best viewed on all devices and browsers.
+J1 Template is based on pure CSS styles on top of the classic Bootstrap tags
+for simplicity and portability to be best viewed on all devices and browsers.
 
 == Table types
 
-But, for sure, the solution^s provided are a compromise. To fit the everyday
-needs for tables viewed on desktop and mobile devices, three types of
+But, for sure, the solutions provided are a compromise. To fit the everyday
+needs for tables viewed on desktop and mobile devices, two types of
 *responsive* tables are implemented by J1 Template:
 
 .Types of responsive tables
@@ -75,31 +75,22 @@ needs for tables viewed on desktop and mobile devices, three types of
 |===
 |Type |Style |Description
 
-|R Table, *responsive* (default)
+|R Table (J1)
 |`rtable`
 |J Table are used by J1 Template for default. Those tables are using the
 *responsive text* feature (see link:{url-roundtrip--typography}[Typography])
 with no additional CSS classes to be applied. For smaller viewports, the text
 scales down and should fit the cells automatically. The default text size for
-J1 is: `r-text-300`.
+J1 is `r-text-300`.
 
 |B Table (Bootstrap)
 |`table-responsive`
 |If adding the class `table-responsive`, it creates a responsive table based
 on Bootstrap CSS styles. The table will then scroll horizontally on small
-devices. Making any table responsive across *all* viewports, the additional
+devices. Making any table responsive across all viewports, the additional
 class `table-responsive` is to applied. For specific (Bootstrap) breakpoints,
-the classes `table-responsive-{lg-sm\| -md\| -lg \| -xl}` are available to
+the classes `table-responsive-{lg \| sm \| md \| lg \| xl}` are available to
 have better control on what viewport sizes tables are being transformed.
-
-|F Table, *fixed*
-|`no-rtext`
-|If the responsive text feature from J1 is *not* wanted, the CSS class
-`no-rtext` needs to be applied. J1 tables of type *fixed* are *not*
-responsive per default, but in combination with the CSS classes
-`table-responsive{-sm \| -md \| -lg \|-xl`} from Bootstrap, this type behaves
-like classic Bootstrap responsive tables (see above) but *no* responsive
-text is used.
 
 |===
 
@@ -116,9 +107,8 @@ pages.
 === Bootstrap tables
 
 Bootstrap tables support tables to be scrolled horizontally on smaller
-viewports. From a specified breakpoint and up, the table will behave normally
-and do not scroll horizontally.
-
+viewports. From a specified breakpoint and up, the table will behave
+normally and do not scroll horizontally.
 
 .Bootstrap using fixed text size `no-rtext`
 [source, asciidoc, role="noclip"]
@@ -282,11 +272,11 @@ Post's front matter by specifying a new date/time in the format
 
 Responsive Bootstrap tables support tables to be scrolled horizontally
 on smaller viewports. Making any table responsive across all viewports,
-the additional class `rtable` is used. For specific (Bootstrap)
-breakpoints, the classes `rtable{-sm|-md|-lg|-xl}` are available
-to better control over what viewport sizes table are transformed.
-From a specified breakpoint and up, the table will behave normally and do
-not scroll horizontally.
+the additional class `table-responsive` is used. For specific (Bootstrap)
+breakpoints, the classes `table-responsive-{ sm | md | lg |xl}` are
+available to better control over what viewport sizes table are transformed.
+From a specified breakpoint and up, the table will behave normally
+and do not scroll horizontally.
 
 === Bootstrap tables
 
@@ -294,7 +284,6 @@ Bootstrap responsive tables make use of the CSS `overflow-x: auto`, which
 clips off any content that goes beyond the bottom or top edges of the table.
 In particular, this can clip off dropdown menus and other third-party
 widgets.
-
 
 .Bootstrap using fixed text size `no-rtext`
 [source, asciidoc, role="noclip"]
@@ -371,14 +360,14 @@ the form `#RRGGBB`
 .R Table using fixed text size `no-rtext`
 [source, asciidoc, role="noclip"]
 ----
-[cols=",,,,", options="header", width="100%", role="rtable no-rtext"]
+[cols="2a,2a,2a,3a,3a", options="header", width="100%", role="rtable no-rtext mt-4"]
 |===
 |Parameter |Type |Default |Description |Example
 ...
 |===
 ----
 
-.R Table, fixed text size `no-rtext`
+.R Table using fixed text size `no-rtext`
 [cols="2a,2a,2a,3a,3a", options="header", width="100%", role="rtable no-rtext mt-4"]
 |===
 |Parameter |Type |Default |Description |Example
@@ -403,10 +392,10 @@ the form `#RRGGBB`
 
 |===
 
-.R Table using fixed text size `no-rtext`
+.R Table using responsive text size
 [source, asciidoc, role="noclip"]
 ----
-[cols=",,,,", options="header", width="100%", role="rtable no-rtext"]
+[cols="2a,2a,2a,3a,3a", options="header", width="100%", role="rtable mt-4"]
 |===
 |Parameter |Type |Default |Description |Example
 ...
