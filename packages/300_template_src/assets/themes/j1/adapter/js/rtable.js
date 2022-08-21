@@ -110,6 +110,16 @@ j1.adapter.rtable = (function (j1, window) {
         generated:   '{{site.time}}'
       }, options);
 
+      var bsMediaBreakpoints = {
+        xs: 575,
+        sm: 576,
+        md: 768,
+        lg: 992,
+        xl: 1200
+      };
+
+      var breakpoint;
+
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
@@ -147,15 +157,40 @@ j1.adapter.rtable = (function (j1, window) {
             var log_text;
             // jadams, 2020-09-16: class 'rtable' indicate use of 'tablesaw'
             if ($(curTable).hasClass('rtable')) {
-              // jadams, 2020-09-16: add needed CSS class/attribute for tablesaw
-              $(curTable).addClass('tablesaw');
-              $(curTable).attr('data-tablesaw-mode','stack');
 
-              Tablesaw.init(curTable, moduleOptions);
+
+//            This demonstration table contains all of the bells and whistles available in tablesaw: Swipe Mode, ModeSwitch, Minimap, Sortable, and SortableSwitch
+//         		<table class="tablesaw"
+//                data-tablesaw-mode="swipe"
+//                data-tablesaw-sortable
+//                data-tablesaw-sortable-switch
+//                data-tablesaw-minimap
+//                data-tablesaw-mode-switch
+//             >
+
+
+              // jadams, 2020-09-16: add needed CSS class/attribute for tablesaw
+//            $(curTable).removeClass('rtable');
+              $(curTable).addClass('table');
+              $(curTable).addClass('tablesaw');
+              $(curTable).attr('data-tablesaw-mode', moduleOptions.rtable.mode);
+              // $(curTable).attr('data-tablesaw-sortable', '');
+              // $(curTable).attr('data-tablesaw-sortable-switch', '');
+              // $(curTable).attr('data-tablesaw-minimap', '');
+              // $(curTable).attr('data-tablesaw-mode-switch', '');
+
+              Tablesaw.init(curTable, {
+                breakpoint:   moduleOptions.rtable.breakpoint
+              });
 
               // set initial state for all table/colgroup elements
               //
-              if ($(window).width() < moduleOptions.breakpoint) {
+              breakpoint = bsMediaBreakpoints[moduleOptions.rtable.breakpoint];
+              if (! breakpoint) {
+                breakpoint = bsMediaBreakpoints['lg'];
+              }
+
+              if ($(window).width() < breakpoint) {
                 log_text = '\n' + 'hide colgroups: ' + curTable.attr('id')
                 curTable.find('colgroup').hide();
                 logger.debug(log_text);
@@ -165,6 +200,44 @@ j1.adapter.rtable = (function (j1, window) {
                 logger.debug(log_text);
               }
             } // END if hasClass 'rtable'
+
+            // jadams, 2022-08-20: add needed div element needed for BS
+            // to move the table found for BS responsiveness
+            //
+            if ($(curTable).hasClass(/table-responsive/)) {
+              // see: https://stackoverflow.com/questions/2596833/how-to-move-child-element-from-one-parent-to-another-using-jquery
+              // see: https://github.com/NV/jquery-regexp-classes
+              //
+              const re                  = /table-responsive[-]*\w*/;
+              const myID                = 'b-table-' + Math.floor(Math.random() * 10000) + 1;
+              var myClasses             = $(curTable).attr("class");
+              var responsiveClassFound  = myClasses.match(re);
+              var responsiveClass;
+
+              if (responsiveClassFound) {
+                responsiveClass = responsiveClassFound[0];
+              } else {
+                // failsafe
+                log_text = '\n' + 'no matching responsive class found';
+                logger.warn(log_text);
+              }
+
+              // remove responsive class from the table
+              //
+              $(curTable).removeClass(/table-responsive[-]*\w+/);
+              $(curTable).addClass('table');
+
+              // add needed div element needed for BS
+              //
+              jQuery('<div>', {
+                id: myID,
+                class: responsiveClass
+              }).insertBefore($(curTable));
+
+              // move the table found for BS responsiveness
+              //
+              $('#' + myID ).append($(curTable));
+            } // END if hasClass 'table-responsive'
           });
 
           _this.setState('finished');
@@ -177,7 +250,7 @@ j1.adapter.rtable = (function (j1, window) {
     }, // END init
 
     // -------------------------------------------------------------------------
-    // messageHandler: MessageHandler for J1 CookieConsent module
+    // messageHandler:
     // Manage messages send from other J1 modules
     // -------------------------------------------------------------------------
     messageHandler: function (sender, message) {

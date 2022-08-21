@@ -16,7 +16,6 @@
  # See: https://github.com/filamentgroup/tablesaw/blob/master/LICENSE
  # -----------------------------------------------------------------------------
 */
-
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     define(["jquery"], function (jQuery) {
@@ -56,16 +55,18 @@
   		swipePreviousColumn:            "Previous column",
   		swipeNextColumn:                "Next column"
   	},
+
     // BS4 Media break points
-    // -----------------------------------------------------------------------------
-    breakpoint: {
-      xl:                             "1200px",
-      lg:                             "992px",
-      md:                             "768px",
-      sm:                             "576px",
-      xs:                             "575px",
-      default:                        "992px"
+    // -------------------------------------------------------------------------
+    bsMediaBreakpoints: {
+      xl:                             "1200",
+      lg:                             "992",
+      md:                             "768",
+      sm:                             "576",
+      xs:                             "575",
+      default:                        "992"
   	},
+
   	// cut the mustard
   	mustard:
   		"head" in document && // IE9+, Firefox 4+, Safari 5.1+, Mobile Safari 4.1+, Opera 11.5+, Android 2.3+
@@ -115,15 +116,15 @@
   });
 
   // ---------------------------------------------------------------------------
-  // enhance ???
+  // enhance Tablesaw for control elements (advanced mode)
   // ---------------------------------------------------------------------------
   if (Tablesaw.mustard) {
   	$(document.documentElement).addClass("tablesaw-enhanced");
   }
 
-  // -------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
   // plugin
-  // -------------------------------------------------------------------------
+  // ---------------------------------------------------------------------------
   (function() {
   	var pluginName = "tablesaw";
   	var classes = {
@@ -153,16 +154,17 @@
   		this.$table = $(element);
 
   		// only one <thead> and <tfoot> are allowed, per the specification
+      //
   		this.$thead = this.$table
   			.children()
   			.filter("thead")
   			.eq(0);
 
   		// multiple <tbody> are allowed, per the specification
+      //
   		this.$tbody = this.$table.children().filter("tbody");
 
   		this.mode = this.$table.attr("data-tablesaw-mode") || defaultMode;
-
   		this.$toolbar = null;
 
   		this.attributes = {
@@ -558,6 +560,7 @@
   		}, 300); // must be greater than the resize timeout below
   	});
 
+    //jadams: show|hide colgroup settings
   	var resizeTimeout;
   	$(window).on("resize", function() {
       var winWidth;
@@ -568,13 +571,14 @@
         if ($(curTable).hasClass('rtable')) {
           winWidth = $(window).width();
           // set show/hide all table/colgroup elements
-          //
-          if ($(window).width() < Tablesaw.options.breakpoint) {
+          if ($(window).width() < Tablesaw.bsMediaBreakpoints[Tablesaw.options.breakpoint]) {
             log_text = '\n' + 'hide colgroups: ' + curTable.attr('id')
+            // hide colgroups if table is collapsed
             curTable.find('colgroup').hide();
             logger.debug(log_text);
           } else {
             log_text = '\n' + 'show colgroup: ' + curTable.attr('id')
+            // show colgroups if table is expanded
             curTable.find('colgroup').show();
             logger.debug(log_text);
           }
@@ -585,12 +589,13 @@
   			window.clearTimeout(resizeTimeout);
   			resizeTimeout = window.setTimeout(function() {
   				$doc.trigger(events.resize);
-  			}, 150); // must be less than the scrolling timeout above.
+  			}, 150); // must be less than the scrolling timeout above
   		}
 
   	});
 
   	Tablesaw.Table = Table;
+
   })();
 
   (function() {
@@ -721,6 +726,7 @@
 
   	Tablesaw.Stack = Stack;
   })();
+
 	return Tablesaw;
 
 }));

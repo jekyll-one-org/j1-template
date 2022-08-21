@@ -72,6 +72,9 @@ window.j1.core.scrollSmooth             = require('./js/scroll-smooth/scroll-smo
 const J1Tocbot                            = require('./js/tocbot/tocbot.js');
 const J1AttrChangeListener                = require('./js/listen-attribute-changes/attrchange.js');
 
+// const J1jQueryExt                         = require('./js/jquery-extensions/jquery-regex.js');
+
+
 //const J1ThemeSwitcher                   = require('./js/bs_theme_switcher/switcher.js');
 // const J1MmenuLight                     = require('./js/mmenu-light/mmenu.js');
 

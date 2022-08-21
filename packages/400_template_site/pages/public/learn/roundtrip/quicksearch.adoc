@@ -294,7 +294,7 @@ searches.
 
 .Available fields (all documents)
 [cols="3a,3a,6a, options="header", width="100%", role="rtable mt-3"]
-|===============================================================================
+|===
 |Name |Value |Description\|Example\|s
 
 |`title`
@@ -333,7 +333,7 @@ summary what the document is all about.
 Example\|s: QuickSearch is based on the search engine Lunr, fully integrated
 with J1 Template  ...
 
-|===============================================================================
+|===
 
 
 ////

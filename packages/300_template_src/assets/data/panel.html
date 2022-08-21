@@ -693,10 +693,10 @@ exclude_from_search:                    true
                 			<li id="{{panel_settings.id}}-scroll-item" class="scroll-group-item items-{{cards_per_row}} p-0">
                         <article class="card card-same-height raised-z3 mb-5">
                           {% if post.image %}
-                            <img class="img-fluid img-object--cover g-height-200" src="{{post.image}}" alt="{{post.title}}">
+                            <img class="img-fluid img-object--cover g-height-200" src="{{post.image}}" alt="{{post.title}}" style="filter: grayscale(1) contrast(1) brightness(1);">
                             {% assign post_width = '80x' %}
                           {% else %}
-                            <img class="mt-2" src="" alt="">
+                            <img class="mt-2" src="" alt="" style="filter: grayscale(1) contrast(1) brightness(1);">
                             {% assign post_width = '100x' %}
                           {% endif %}
                           <h3 class="card-header bg-primary notoc notranslate">{{post.title}}</h3>
@@ -756,10 +756,10 @@ exclude_from_search:                    true
                     <!-- Posts -->
                     <article class="card raised-z3 mb-3">
                       {% if post.image %}
-                        <img class="img-fluid img-object--cover g-height-200" src="{{post.image}}" alt="{{post.title}}">
+                        <img class="img-fluid img-object--cover g-height-200" src="{{post.image}}" alt="{{post.title}}" style="filter: grayscale(1) contrast(1) brightness(1);">
                         {% assign post_width = '80x' %}
                       {% else %}
-                        <img class="mt-2" src="" alt="">
+                        <img class="mt-2" src="" alt="" style="filter: grayscale(1) contrast(1) brightness(1);">
                         {% assign post_width = '100x' %}
                       {% endif %}
                       <h3 class="card-header bg-primary notoc">{{post.title}}</h3>
