@@ -9,7 +9,7 @@ module J1
 
         def init_with_program(prog)
           prog.command(:setup) do |c|
-            c.description 'Initialize a J1 project for first use'
+            c.description 'Initialize a J1 Project for first use'
             c.syntax 'setup'
             c.option 'force', '--force',                ' Force to install patches even already exists'
             c.option 'system', '--system',              ' Install patches on the Ruby SYSTEM gem folder'

@@ -8,7 +8,7 @@ module J1
 
         def init_with_program(prog)
           prog.command(:patch) do |c|
-            c.description 'Install patches available for J1 projects'
+            c.description 'Install patches available for a J1 Project'
             c.syntax 'patch'
             c.option 'force', '--force',                'Force to install patches even already exists'
             c.option 'system', '--system',              'Install patches on the Ruby SYSTEM gem folder'

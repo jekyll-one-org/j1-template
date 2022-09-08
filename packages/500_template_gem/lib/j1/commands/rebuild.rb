@@ -8,7 +8,7 @@ module J1
 
         def init_with_program(prog)
           prog.command(:rebuild) do |c|
-            c.description 'Rebuild the J1 projects website'
+            c.description 'Rebuild a J1 Project'
             c.syntax 'rebuild'
             c.action do |args, options|
               J1::Commands::Rebuild.process(args, options)

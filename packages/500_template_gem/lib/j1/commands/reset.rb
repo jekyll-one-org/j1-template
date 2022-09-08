@@ -8,7 +8,7 @@ module J1
 
         def init_with_program(prog)
           prog.command(:reset) do |c|
-            c.description 'Reset a J1 project to factory state'
+            c.description 'Reset a J1 Project to factory state'
             c.syntax 'reset'
             c.action do |args, options|
               J1::Commands::Reset.process(args, options)

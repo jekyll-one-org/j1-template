@@ -8,7 +8,7 @@ module J1
 
         def init_with_program(prog)
           prog.command(:app) do |c|
-            c.description 'Run the site of a J1 Project as a WebApp'
+            c.description 'Run the site as an WebApp'
             c.syntax 'app'
             c.action do |args, options|
               J1::Commands::App.process(args, options)

@@ -8,7 +8,7 @@ module J1
 
         def init_with_program(prog)
           prog.command(:site) do |c|
-            c.description 'Run the website of a J1 project'
+            c.description 'Run the site of a J1 Project'
             c.syntax 'site'
             c.action do |args, options|
               J1::Commands::Site.process(args, options)
