@@ -31,7 +31,7 @@ require 'log4r'
 # require 'log4r/yamlconfigurator'
 require_relative 'j1_app/log4r/yamlconfigurator'
 require 'log4r/outputter/datefileoutputter'
-require 'log4r/outputter/emailoutputter'
+# require 'log4r/outputter/emailoutputter'
 include Log4r
 
 # Require local Rubies
