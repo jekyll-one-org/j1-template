@@ -9,7 +9,7 @@ module J1
 
         def init_with_program(prog)
           prog.command(:generate) do |c|
-            c.description 'Generates a J1 project scaffold in PATH'
+            c.description 'Generates a J1 Project scaffold in PATH'
             c.syntax 'generate PATH'
             c.option 'force', '--force',                'Force a site to be created even the PATH already exists'
             c.option 'skip-bundle', '--skip-bundle',    'Skip bundle install'
