@@ -1,0 +1,721 @@
+// Include sub-document
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+Installing and updating the development environment for J1 was a tough job.
+Creating and starting a J1 project, on the other hand, is much easier. After
+a handful of  steps you have arrived and can finally start your new web.
+In the following, you will know all the necessary work steps for
+managing a J1 project. There are different ways to create a J1 project or
+a new website. You already know one way: 1-click deployment via Netlify.
+This type of deployment has automatically created a new repo in your workspace
+on Github.
+
+The opposite way is, of course, also possible. That means you first create
+a J1 project locally on your PC and then connect the local project as a Git
+Repo with Github. It is also very easy to provide the website via Netlify.
+Only a few steps will be required to publish locally generated sites via
+Netlify.
+
+== Download and install J1 Template Gem
+
+The basis for the administration of J1 projects is the Ruby Gem `j1-template`.
+The first step is to download the current version of this module over the
+Internet. Modules (Gems) are loaded directly with the tools of the Ruby
+programming language: the Ruby Package Manager `gem` downloads and installs
+modules in one step.
+
+In general, modules for the Ruby language can be system-wide or only installed
+on a computer for specific users. The Installation of modules in user
+directories does not require elevated operating system rights and makes the
+loading of modules for projects much easier. Every user can manage the
+required modules for a project *without* administrative rights.
+
+.Install the Gem j1-template
+[source, sh]
+----
+cls && gem install j1-template --remote --user-install --no-document <1> <2> <3>
+----
+<1> Download the module via Internet from rubygems.org
+(`--remote`)
+<2> Copy/Install module userized, folder *home* of the user (.gem/ruby)
+(`--user-install`)
+<3> No need to install developer documents (skipped)
+(`--no-document`)
+
+J1 is a so-called gem-based template for the Jekyll generator.The software
+requires several other modules, automatically loaded as *dependencies*. Below
+you see a summary of the screen outputs of an installation:
+
+[source, no_theme, role="noclip"]
+----
+Fetching warden-1.2.9.gem
+Fetching rack-2.2.3.gem
+...
+WARNING:  You don't have c:/users/<user_name>/.gem/ruby/2.7.0/bin in your PATH, <2>
+          gem executables will not run.
+...
+Successfully installed rack-2.2.3
+Successfully installed warden-1.2.9
+...
+Building native extensions. This could take a while...  <1>
+...
+Successfully installed j1-template-2022.x.y
+64 gems installed
+----
+<1> During the Installation, platform-specific extensions are generated
+<2> An important note is the *warning* in the output of the installation.
+To do this, read <<Extend the search path>>.
+
+The first Installation of J1 will take a while. On the one hand, one must
+download several other gems (modules) for Ruby. On the other hand, some
+modules require the creation of platform-specific extensions for the
+respective operating system. However, all steps are automatic expire and
+do not require any further input.
+
+The Installation of Ruby modules in the user's *home* directory has a side
+effect that has to be taken into account: modules for Ruby can also contain
+*programs*. And that is the case for the J1 Template. To use the build-in
+control program `j1` from the module `j1-template`, expand the search path
+(PATH) for programs. The next section <<Extend the search path>>
+shows how to extend the search path on the  Windows operating system.
+
+=== Extend the search path
+
+Besides the depending components for website development, with the Gem
+`j1-template`, a easy to use control program `j1` is integrated to manage
+J1 projects. After Installation, all programs included in modules (gems)
+are installed in the user's home directory located in the following
+folder:
+
+[source, no_theme, role="noclip"]
+----
+C:\Users\<user_name>\.gem\ruby\2.7.0\bin
+----
+
+The search path (environment) is to expand to start gem-based applications.
+The extension of the search path for the operating system Windows is managed
+by running the following command in a shell (command prompt):
+
+.Extend the search path (Windows)
+[source, msshell]
+----
+SETX PATH "%PATH%;%HOMEDRIVE%%HOMEPATH%\.gem\ruby\2.7.0\bin"
+----
+
+.Output of SETX
+[source, no_theme, role="noclip"]
+----
+SUCCESS: Specified value was saved.
+----
+
+The extension of the search path, unfortunately, has a catch. The value of
+PATH in the environment of a user has been saved immediately but is still
+unknown in the *current* shell. Restart the shell to take effect the changes
+of the user's environment.
+
+IMPORTANT: Under Windows, this means: close all the previous started
+shells (all windows of type Command Prompt) and restart the apps. Restarting
+is required for all further steps to manage J1 projects, to be able to
+start the control command `j1` from a user's directory.
+
+=== Check the J1 control program
+
+The control program for J1 projects is `j1` is used to manage projects. After
+installing the Gem `j1-template`, check in a shell what version of J1 Template
+Gem has been loaded.
+
+.Version information of J1
+[source, sh]
+----
+j1 --version
+----
+
+.Output of the version information
+[source, no_theme, role="noclip"]
+----
+j1 2022.1.3
+----
+
+IMPORTANT: As of 02/22, the version from J1 is *2022.1.3*. Older versions
+should *not* be used from this on.
+
+Further information on using the CLI `j1` is available from the help function.
+
+.Help for j1
+[source, sh]
+----
+j1 --help
+----
+
+.Output of j1 help screen
+[source, no_theme, role="noclip"]
+----
+j1 2022.1.3 -- J1 Template is a gem-based Template made for Jekyll
+
+Usage:
+
+  j1 <subcommand> [options]
+
+Options:
+        -h, --help         Show this message
+        -v, --version      Print the name and version
+        -t, --trace        Show the full backtrace when an error occurs
+
+Subcommands:
+  generate              Generates a J1 project scaffold in PATH
+  help                  Show the help message, optionally for a given subcommand
+  patch                 Install patches available for J1 projects
+  rebuild               Rebuild the J1 projects website <1>
+  reset                 Reset a J1 project to factory state
+  setup                 Initialize a J1 project for first use
+  site                  Run the website of a J1 project
+----
+<1> `rebuild`, `reset`, `setup` and `site` are so-called *top-level*
+    commands to control J1 projects
+
+== Setting up the application Git
+
+You've installed the versioning system Git already, but the system is not
+configured yet. To create and use Git repos for local J1 projects, the
+CLI `git` can be used from command line. A basic setup of Git is very simple.
+Only two properties used by Git are required to set your account's default
+identity for the versioning system:
+
+* your user name
+* your personal email address
+
+Rum a command shell and run the following commands:
+
+.Setup your user name
+[source, sh]
+----
+git config --global user.name "<your_user_name>" <1>
+----
+<1>  Replace `<your_user_name>` by your user name used of the platform
+      you're using (the operating system Windows for example)
+
+.Setup your personal email address
+[source, sh]
+----
+git config --global user.email "<you@example.com>" <1>
+----
+<1>  Replace `<you@example.com>` by your personal email address
+
+That's all for the basic setup of Git. In the future, all Git commands will
+use these personal settings to identify what person has made changes to a
+repository and what email address is available for contact.
+
+== How to manage J1 projects
+
+Creating and starting a J1 project is very easy. Already after a handful
+of steps you have arrived, and you can start your new website. The next
+sections describe all the details on the steps for managing J1 projects.
+
+Here is an overview of the necessary steps:
+
+* setup a project
+* if required: setup a project as a repo (Git)
+* initialize a project
+* start a project and run the included website
+
+A project consists of several files and folders. A typical structure of a
+J1 project is shown below:
+
+.J1 Projekt structure
+----
+  ├──── .
+  │     └─ _data  <1>
+  │     └─ _includes <2>
+  │     └─ _plugins <3>
+  │     └─ assets <4>
+  │     └─ collections <5>
+  │     └─ pages <6>
+  │     └─ utilsrv
+  ├──── _config.yml <7>
+  ├──── config.ru
+  ├──── dot.gitattributes
+  ├──── dot.gitignore
+  ├──── dot.nojekyll
+  ├──── favicon.ico
+  ├──── Gemfile <8>
+  ├──── index.html <9>
+  └──── package.json <10>
+----
+<1> Configuration data for the website
+<2> Global includes used by all (Asciidoc) content sources
+<3> Build-in (Ruby) plugins
+<4> Static assets for the Web (images for example)
+<5> Content folder which contains all blog posts
+<6> Content folder which contains all (article) pages
+<7> Central Jekyll site configuration
+<8> Central Ruby Gemfile to declare all depending modules
+<9> Homepage for the Web
+<10> Central (NPM) project file to manage a website
+
+== Manage existing J1 projects
+
+The new website, which was created by Netlify using the 1-click method
+in the chapter link:{j1-kickstart-web-in-a-day--a-awesome-site}[Awesome Site],
+is a repo in the work area of your personal Github account. In the sense of
+the version management Git, this repo is the so-called *remote*, the *central*
+instance of your J1 project.
+
+NOTE: If you have'nt created a website at Github or you won't use the service
+providers Github and Netlify for now, you can create a local J1 Project. To
+create and manage pure local J1 projects, you don't need any service provider.
+Continue for pur local projects on the next section <<Create new J1 projects>>.
+
+The following steps will create a local *working copy*, the so-called *local*
+in terms of Git. With the help of the local working copy, the website can then
+be edited with the development environment and synchronized with the central
+instance on Github to develop your contents.
+
+First, connect to Github using your personal Github account from the
+link:{url-github--login}[Github login page, {browser-window--new}].
+
+.Remote repo (my-start) on Github
+lightbox::gh-repo--j1-template-starter-1[ 600, {data-gh-repo--j1-template-starter-1} ]
+
+callout::1[URL for your repo at Github ]
+callout::2[Access your personal account]
+callout::3[Select URI to access a repo from Git, ml-2 mb-3]
+
+=== Create a working copy
+
+Now it is necessary to use Git versioning for the first time. Similar to
+the control command `j1` for J1 projects, the control command for the
+administration of Git repos is the command `git`. To work on J1 projects,
+controlling the repositories via the command line is highly recommended.
+Most repository-related operations can be done by very simple commands that
+are also easy to remember.
+
+NOTE: To not blow up the tutorial by too much topics of learning Git, a quite
+handy summary of all `git` commands is available. All common commands used
+to manage repos for J1 projects are provided by the J1 Cheatsheet described in
+section link:{url-j1-cheatsheet--j1-git}[Git Cheatsheet, {browser-window--new}].
+
+First, create a directory on your PC in which your websites' future projects
+are to be created. In the following examples, projects are created in the
+project folder `C:\J1\Projects`.
+
+.Create a projects folder
+[source, sh]
+----
+mkdir C:\J1\Projects && cd C:\J1\Projects
+----
+
+Creating a (local) working copy from your (remote) repo at Github can be done
+this way:
+
+.Clone the repo at Github for a local working copy
+[source, sh]
+----
+git clone <URI_of_your_repo_at_Github> <1>
+----
+<1> URI: Copy the *URI* from the web interface at Gh as shown in the screen
+shot from above (3)
+
+What repo should be copied (cloned) is given by the URI to access Git repos at
+Github. Copy the URI for your repository from the Github web interface using
+the button *Code* for the *HTTPS* protocol.
+
+.Button Code at Github
+lightbox::gh-repo--button-code[ 600, {data-gh-repo--button-code} ]
+
+.Output of the git command `clone`
+[source, no_theme, role="noclip"]
+----
+Cloning into '<name_of_your_repo>'...
+remote: Enumerating objects: 1930, done.
+remote: Counting objects: 100% (1930/1930), done.
+remote: Compressing objects: 100% (777/777), done.
+remote: Total 1930 (delta 1022), reused 1927 (delta 1019), pack-reused 0
+Receiving objects: 100% (1930/1930), 27.76 MiB | 4.83 MiB/s, done.
+Resolving deltas: 100% (1022/1022), done.
+----
+
+Well done, that's all to create a local working copy using a Git command.
+Skip the next section and continue on <<Initialize a project>> to make your
+J1 project ready to use!
+
+== Create new J1 projects
+
+If the Gem `j1-template` is installed, completely *new* projects for
+J1-based websites can be generated from scratch. All projects for J1 are
+created using the control program `j1` (on the command line).
+
+If not already done, create a directory in which your websites' future
+projects (local copies) are to be created. In the following examples,
+projects are created in the project folder `C:\J1\Projects`.
+
+.Create the projects folder
+[source, sh]
+----
+mkdir C:\J1\Projects && cd C:\J1\Projects
+----
+
+The command `j1 generate` creates a new folder (my-start) on your
+project's location.
+
+.Create a new project
+[source, sh]
+----
+j1 generate my-start
+----
+
+.Output of generating a new site
+[source, no_theme, role="noclip"]
+----
+YYYY-MM-DD hh:mm:ss - GENERATE: Running bundle install in <path_to_your_projects>/my-start ...
+YYYY-MM-DD hh:mm:ss - GENERATE: Install bundle in USER gem folder ~/.gem ...
+YYYY-MM-DD hh:mm:ss - GENERATE: Fetching gem metadata from https://rubygems.org/...
+YYYY-MM-DD hh:mm:ss - GENERATE: Resolving dependencies...
+YYYY-MM-DD hh:mm:ss - GENERATE: Fetching rake 12.3.3
+YYYY-MM-DD hh:mm:ss - GENERATE: Installing rake 12.3.3
+YYYY-MM-DD hh:mm:ss - GENERATE: Using public_suffix 4.0.6
+YYYY-MM-DD hh:mm:ss - GENERATE: Using rouge 3.27.0
+YYYY-MM-DD hh:mm:ss - GENERATE: Using bundler 2.3.5
+YYYY-MM-DD hh:mm:ss - GENERATE: Fetching asciidoctor 1.5.8
+...
+YYYY-MM-DD hh:mm:ss - GENERATE: Fetching nokogiri 1.13.0 (x64-mingw32)
+YYYY-MM-DD hh:mm:ss - GENERATE: Installing nokogiri 1.13.0 (x64-mingw32)
+YYYY-MM-DD hh:mm:ss - GENERATE: Fetching nokogiri-pretty 0.1.0
+YYYY-MM-DD hh:mm:ss - GENERATE: Installing nokogiri-pretty 0.1.0
+YYYY-MM-DD hh:mm:ss - GENERATE: Fetching json-minify 0.0.3
+YYYY-MM-DD hh:mm:ss - GENERATE: Installing json-minify 0.0.3
+YYYY-MM-DD hh:mm:ss - GENERATE: Bundle complete! 33 Gemfile dependencies, 92 gems now installed.
+YYYY-MM-DD hh:mm:ss - GENERATE: Bundled gems are installed into `C:/Users/<user_name>/.gem`
+YYYY-MM-DD hh:mm:ss - GENERATE: Install patches in USER gem folder ~/.gem ...
+YYYY-MM-DD hh:mm:ss - GENERATE: Install patches on path C:/Users/<user_name>/.gem/ruby/2.7.0 ...
+YYYY-MM-DD hh:mm:ss - GENERATE: Skipped install patches for execjs-2.7.0 ...
+YYYY-MM-DD hh:mm:ss - GENERATE: Generated Jekyll site installed in folder <path_to_your_projects/my-start
+----
+
+The command `j1 generate starter` creates new directory `my-start` on your
+project's location, and all necessary project files are generated in this
+folder. If done, change to the specified directory (my-start). The final
+step in creating new projects is to bring the new project under the control
+of Git, the versioning system.
+
+=== Setting up Git for your project
+
+The versioning system is your safety net for managing projects. It is highly
+recommended to bring a project under version control. To initialize the new
+project for a Git repo, change the current folder to the project folder.
+
+.Change to your project folder
+[source, sh]
+----
+cls && cd C:\J1\Projects\my-start
+----
+
+.Initialize a new repo for the project (folder)
+[source, sh]
+----
+git add . && git commit -am "Initial version"
+----
+
+[CAUTION]
+====
+If you got an error like so:
+
+----
+Author identity unknown
+*** Please tell me who you are.
+
+Run
+
+  git config --global user.email "you@example.com"
+  git config --global user.name "Your Name"
+
+to set your account's default identity.
+Omit --global to set the identity only in this repository.
+
+fatal: unable to auto-detect email address (got 'user@hostname.(none)')
+----
+
+you need to setup your account's default identity first. To manage this,
+check the section <<Setting up Git>> for more details.
+====
+
+Your safety net is in place, a really good choice. To make a new *project*
+ready to use, continue on the next section's steps to initialize.
+
+
+== Initialize a project
+
+In this example, the name of the project is `my-start`. For the next steps
+in setting up the project, switch to your project folder.
+
+.Change to your project folder
+[source, sh]
+----
+cls && cd C:\J1\Projects\my-start
+----
+
+The project needs to be initialized *once*. An initialization will create
+additional resources (modules) for NodeJs and Ruby. The modules are necessary
+and loaded for controlling the development system of the website and for the
+execution of the builder engine Jekyll.
+
+NOTE: All tasks for developing a web are defined as scripts of the NodeJS
+package manager `NPM`. All scripts are defined in the central project
+configuration file `package.json`. Only a small set of top-level scripts
+are required to control a project.
+
+NOTE: A project can be controlled by the package managers `yarn` or `npm`
+via top-level scripts. For the people not experienced in using NodeJS projects,
+all scripts can be started using the CLI `j1` as well.
+
+The initialization of a project is operated by the control command `j1` via
+the task (top-level script) `setup`. Setting up a project will issue a large
+number of subtasks, but all of them will be processed automatically by the
+project control.
+
+.Initialize a project
+[source, sh]
+----
+j1 setup
+----
+
+For an overview of which subtasks are carried out for a `setup`, the output
+as a summary:
+
+.Ouput of setting up a site
+[source, no_theme, role="noclip"]
+----
+Check consistency of the J1 project ...
+YYYY-MM-DD hh:mm:ss - SETUP: Running bundle install in <path_to_your_projects>\my-start ...
+YYYY-MM-DD hh:mm:ss - SETUP: Install bundle in USER gem folder ~/.gem ...
+YYYY-MM-DD hh:mm:ss - SETUP: Using rake 12.3.3
+YYYY-MM-DD hh:mm:ss - SETUP: Using public_suffix 4.0.6
+YYYY-MM-DD hh:mm:ss - SETUP: Using addressable 2.8.0
+YYYY-MM-DD hh:mm:ss - SETUP: Using asciidoctor 1.5.8
+YYYY-MM-DD hh:mm:ss - SETUP: Using rouge 3.27.0
+...
+YYYY-MM-DD hh:mm:ss - SETUP: Bundle complete! 33 Gemfile dependencies, 92 gems now installed.
+YYYY-MM-DD hh:mm:ss - SETUP: Bundled gems are installed into `C:/Users/<user_name>/.gem`
+YYYY-MM-DD hh:mm:ss - SETUP: Install patches in USER gem folder ~/.gem ...
+YYYY-MM-DD hh:mm:ss - SETUP: Install patches on path C:/Users/<user_name>/.gem/ruby/2.7.0 ...
+YYYY-MM-DD hh:mm:ss - SETUP: Skipped install patches for execjs-2.7.0 ...
+YYYY-MM-DD hh:mm:ss - SETUP: Setup project for first use ..
+YYYY-MM-DD hh:mm:ss - SETUP: Bootstrap base modules ..
+YYYY-MM-DD hh:mm:ss - SETUP: done.
+YYYY-MM-DD hh:mm:ss - SETUP: Configure environment ..
+YYYY-MM-DD hh:mm:ss - SETUP: done.
+YYYY-MM-DD hh:mm:ss - SETUP: Create project folders ..
+YYYY-MM-DD hh:mm:ss - SETUP: Create log folder ..
+YYYY-MM-DD hh:mm:ss - SETUP: Create archived log folder ..
+YYYY-MM-DD hh:mm:ss - SETUP: Create etc folder ..
+YYYY-MM-DD hh:mm:ss - SETUP: done.
+YYYY-MM-DD hh:mm:ss - SETUP: Bootstrap project modules ..
+YYYY-MM-DD hh:mm:ss - SETUP: Bootstrap utility server modules ..
+YYYY-MM-DD hh:mm:ss - SETUP: done.
+YYYY-MM-DD hh:mm:ss - SETUP: Detect OS ..
+YYYY-MM-DD hh:mm:ss - SETUP: OS detected: Windows_NT
+YYYY-MM-DD hh:mm:ss - SETUP: Build site incremental ..
+YYYY-MM-DD hh:mm:ss - SETUP: Configuration file: <path_to_your_projects>/my-start/_config.yml
+YYYY-MM-DD hh:mm:ss - SETUP:             Source: <path_to_your_projects>/my-start
+YYYY-MM-DD hh:mm:ss - SETUP:        Destination: <path_to_your_projects>/my-start/_site
+YYYY-MM-DD hh:mm:ss - SETUP:  Incremental build: enabled
+YYYY-MM-DD hh:mm:ss - SETUP:       Generating...
+YYYY-MM-DD hh:mm:ss - SETUP:     J1 QuickSearch: creating search index ...
+YYYY-MM-DD hh:mm:ss - SETUP:     J1 QuickSearch: finished, index ready.
+YYYY-MM-DD hh:mm:ss - SETUP:       J1 Paginator: autopages, disabled|not configured
+YYYY-MM-DD hh:mm:ss - SETUP:       J1 Paginator: pagination enabled, start processing ...
+YYYY-MM-DD hh:mm:ss - SETUP:       J1 Paginator: finished, processed 2 pagination page|s
+YYYY-MM-DD hh:mm:ss - SETUP:                     done in 24.042 seconds.
+YYYY-MM-DD hh:mm:ss - SETUP:  Auto-regeneration: disabled. Use --watch to enable.
+YYYY-MM-DD hh:mm:ss - SETUP: .. build finished.
+YYYY-MM-DD hh:mm:ss - SETUP: Initializing the project finished successfully.
+YYYY-MM-DD hh:mm:ss - SETUP: To open your site, run: j1 site
+----
+
+The process of setting up a project takes a while. Usually a few minutes for
+the *first* run (depending on the performance of your Internet connection
+and your PC' hardware). If necessary, additional modules for NodeJS and
+Ruby downloaded and made it usable for the project.
+
+Understand the `setup` task as an extended process of installing the
+necessary modules for the project and then creating the new website
+using the Jekyll engine.
+
+== Start a project (website)
+
+After the project has been set up, all necessary components can be used,
+and all necessary steps to start a web have been completed. Running the
+starter web is also carried out by a top-level command accessible from the
+CLI command  `j1`.
+
+.Start the project's website
+[source, sh]
+----
+j1 site
+----
+
+The `site` task will do a lot for you again. What is now still required
+for the development of the website is then completed. Finally, the generated
+website is automatically opened in a browser after completing a start.
+
+NOTE: The browser started depends on the *standard* browser set up with
+your operating system.
+
+.Ouput of running a site
+[source, no_theme, role="noclip"]
+----
+Check consistency of the J1 project ...
+Check setup state of the J1 project ...
+YYYY-MM-DD hh:mm:ss - SITE: Starting up your site ...
+YYYY-MM-DD hh:mm:ss - SITE:
+YYYY-MM-DD hh:mm:ss - SITE: > j1@2022.1.3 j1-site
+YYYY-MM-DD hh:mm:ss - SITE: > run-p -s j1-YYYY-MM-DD hh:mm:ss - SITE:*
+YYYY-MM-DD hh:mm:ss - SITE:
+YYYY-MM-DD hh:mm:ss - SITE: UTILSRV disabled. Not started.
+YYYY-MM-DD hh:mm:ss - SITE: Configuration file: <path_to_your_projects>/my-start/_config.yml
+YYYY-MM-DD hh:mm:ss - SITE:             Source: <path_to_your_projects>/my-start
+YYYY-MM-DD hh:mm:ss - SITE:        Destination: <path_to_your_projects>/my-start/_site
+YYYY-MM-DD hh:mm:ss - SITE:  Incremental build: enabled
+YYYY-MM-DD hh:mm:ss - SITE:       Generating...
+YYYY-MM-DD hh:mm:ss - SITE:     J1 QuickSearch: creating search index ...
+YYYY-MM-DD hh:mm:ss - SITE:     J1 QuickSearch: finished, index ready.
+YYYY-MM-DD hh:mm:ss - SITE:       J1 Paginator: autopages, disabled|not configured
+YYYY-MM-DD hh:mm:ss - SITE:       J1 Paginator: pagination enabled, start processing ...
+YYYY-MM-DD hh:mm:ss - SITE:       J1 Paginator: finished, processed 2 pagination page|s
+YYYY-MM-DD hh:mm:ss - SITE:                     done in 9.018 seconds.
+YYYY-MM-DD hh:mm:ss - SITE:  Auto-regeneration: enabled for '.'
+YYYY-MM-DD hh:mm:ss - SITE: LiveReload address: http://localhost:35729
+YYYY-MM-DD hh:mm:ss - SITE:     Server address: http://localhost:40000/
+YYYY-MM-DD hh:mm:ss - SITE:   Server running... press ctrl-c to stop.
+YYYY-MM-DD hh:mm:ss - SITE:         LiveReload: Browser connected
+----
+
+
+== Rebuild a J1 projekt
+
+While developing a website, it may be necessary to rebuild a site. J1 projects
+are executed via Jekyll in an incremental mode with automatic *regeneration*.
+Automatic regeneration means that changes to your web content are automatically
+recognized, and the affected pages are recreated and loaded in the web browser.
+
+In a few cases, this will *not* work. If changes are made to the project's
+configuration, the website must be rebuilt. Performing the `rebuild` task
+will reconstruct a website from scratch.
+
+.Rebuild a projekt
+[source, sh]
+----
+j1 rebuild
+----
+
+.Ouput of rebuilding a website
+[source, no_theme, role="noclip"]
+----
+Check consistency of the J1 project ...
+Check setup state of the J1 project ...
+YYYY-MM-DD hh:mm:ss - REBUILD: Rebuild the projects website ...
+YYYY-MM-DD hh:mm:ss - REBUILD: Be patient, this will take a while ...
+YYYY-MM-DD hh:mm:ss - REBUILD:
+YYYY-MM-DD hh:mm:ss - REBUILD: > j1@2022.1.3 rebuild
+YYYY-MM-DD hh:mm:ss - REBUILD: > run-s -s YYYY-MM-DD hh:mm:ss - REBUILD:* && run-s -s post-YYYY-MM-DD hh:mm:ss - REBUILD:*
+YYYY-MM-DD hh:mm:ss - REBUILD:
+YYYY-MM-DD hh:mm:ss - REBUILD: Rebuild site incremental ..
+YYYY-MM-DD hh:mm:ss - REBUILD: Clean up site files ..
+YYYY-MM-DD hh:mm:ss - REBUILD: Configuration file: <path_to_your_projects>/my-start/_config.yml
+YYYY-MM-DD hh:mm:ss - REBUILD:            Cleaner: Removing _site...
+YYYY-MM-DD hh:mm:ss - REBUILD:            Cleaner: Removing ./.jekyll-metadata...
+YYYY-MM-DD hh:mm:ss - REBUILD:            Cleaner: Removing ./.jekyll-cache...
+YYYY-MM-DD hh:mm:ss - REBUILD:            Cleaner: Nothing to do for .sass-cache.
+YYYY-MM-DD hh:mm:ss - REBUILD: Configuration file: <path_to_your_projects>/my-start/_config.yml
+YYYY-MM-DD hh:mm:ss - REBUILD:             Source: <path_to_your_projects>/my-start
+YYYY-MM-DD hh:mm:ss - REBUILD:        Destination: <path_to_your_projects>/my-start/_site
+YYYY-MM-DD hh:mm:ss - REBUILD:  Incremental build: enabled
+YYYY-MM-DD hh:mm:ss - REBUILD:       Generating...
+YYYY-MM-DD hh:mm:ss - REBUILD:     J1 QuickSearch: creating search index ...
+YYYY-MM-DD hh:mm:ss - REBUILD:     J1 QuickSearch: finished, index ready.
+YYYY-MM-DD hh:mm:ss - REBUILD:       J1 Paginator: autopages, disabled|not configured
+YYYY-MM-DD hh:mm:ss - REBUILD:       J1 Paginator: pagination enabled, start processing ...
+YYYY-MM-DD hh:mm:ss - REBUILD:       J1 Paginator: finished, processed 2 pagination page|s
+YYYY-MM-DD hh:mm:ss - REBUILD:                     done in 22.983 seconds.
+YYYY-MM-DD hh:mm:ss - REBUILD:  Auto-regeneration: disabled. Use --watch to enable.
+YYYY-MM-DD hh:mm:ss - REBUILD: .. rebuild finished.
+YYYY-MM-DD hh:mm:ss - REBUILD: To open the site, run: yarn site
+YYYY-MM-DD hh:mm:ss - REBUILD: The projects website has been rebuild successfully.
+YYYY-MM-DD hh:mm:ss - REBUILD: To open the site, run: j1 site
+----
+
+The web can be restarted via the task `site` and loaded in the browser if
+a website is newly created.
+
+.Re-start the website of a project
+[source, sh]
+----
+j1 site
+----
+
+== Reset a J1 project
+
+Unfortunately, mistakes are inevitable. Wherever work is done, mistakes arise.
+Incorrect settings in the configuration of a J1 web can lead to the site no
+longer starting or undesirable behavior. In those cases, resetting a site's
+configuration to its original state *can* help.
+
+IMPORTANT: Resetting projects does not change any existing content. The
+content of the website remains unaffected.
+
+The `reset` task does the reset for you and cleans up all configurations,
+deletes modules and files that are no longer required.
+
+.Reset a project
+[source, sh]
+----
+j1 reset
+----
+
+.Ouput of resetting a project
+[source, no_theme, role="noclip"]
+----
+Check consistency of the J1 project ...
+Check setup state of the J1 project ...
+YYYY-MM-DD hh:mm:ss - RESET: Reset the project to factory state ...
+YYYY-MM-DD hh:mm:ss - RESET: Be patient, this will take a while ...
+YYYY-MM-DD hh:mm:ss - RESET:
+YYYY-MM-DD hh:mm:ss - RESET: > j1@2022.1.3 reset
+YYYY-MM-DD hh:mm:ss - RESET: > run-s -s YYYY-MM-DD hh:mm:ss - RESET:*
+YYYY-MM-DD hh:mm:ss - RESET:
+YYYY-MM-DD hh:mm:ss - RESET: Reset project to factory state ..
+YYYY-MM-DD hh:mm:ss - RESET: Clean up base modules ..
+YYYY-MM-DD hh:mm:ss - RESET: Clean up site files ..
+YYYY-MM-DD hh:mm:ss - RESET: Configuration file: <path_to_your_projects>/my-start/_config.yml
+YYYY-MM-DD hh:mm:ss - RESET:            Cleaner: Removing _site...
+YYYY-MM-DD hh:mm:ss - RESET:            Cleaner: Removing ./.jekyll-metadata...
+YYYY-MM-DD hh:mm:ss - RESET:            Cleaner: Removing ./.jekyll-cache...
+YYYY-MM-DD hh:mm:ss - RESET:            Cleaner: Nothing to do for .sass-cache.
+YYYY-MM-DD hh:mm:ss - RESET: Clean up projects files ..
+YYYY-MM-DD hh:mm:ss - RESET: Remove bundle config folder ..
+YYYY-MM-DD hh:mm:ss - RESET: Remove log folder ..
+YYYY-MM-DD hh:mm:ss - RESET: Remove etc folder ..
+YYYY-MM-DD hh:mm:ss - RESET: Remove various log files ..
+YYYY-MM-DD hh:mm:ss - RESET: Remove lock files ..
+YYYY-MM-DD hh:mm:ss - RESET: Clean up utility server ..
+YYYY-MM-DD hh:mm:ss - RESET: done.
+YYYY-MM-DD hh:mm:ss - RESET: The project reset finished successfully.
+YYYY-MM-DD hh:mm:ss - RESET: To setup the project, run: j1 setup
+----
+
+If the project has been reset, the project must be *initialized* again using
+the `setup` task.
+
+.Re-create a J1 project
+[source, sh]
+----
+j1 setup
+----
+
+If the project is set up again, the web can be restarted via the task `site`
+and loaded in the browseras you've done before already.
+
+.Restart the website
+[source, sh]
+----
+j1 site
+----

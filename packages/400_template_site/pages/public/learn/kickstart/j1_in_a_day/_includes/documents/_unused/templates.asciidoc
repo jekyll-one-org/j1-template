@@ -1,0 +1,249 @@
+---
+layout:                       page
+description:                  Jekyll-style Templates
+title:                        Templates
+tagline:                      Jekyll-style Templates
+group:                        pages
+toc:                          true
+---
+
+:website:                     https://www.elastic.co/
+:license:                     Apache License, Version 2.0
+:revdate:                     2015
+:revnumber:                   4.2.2
+
+//Ref
+:liquid-inheritance-gem:      https://github.com/danwrong/liquid-inheritance
+:liquid-inheritance:          http://www.sameratiani.com/2011/10/22/get-jekyll-working-with-liquid-inheritance.html
+
+// {% raw %} Disable from processing to preserve the liquid markup's in the document
+
+
+[.boxShadow]
+====
+Jekyll uses the Liquid templating language to process templates. 
+====
+
+== Filters
+
+All of the standard Liquid tags and filters are supported. Jekyll even adds a 
+few handy filters and tags of its own to make common tasks easier.
+
+[width="100%",cols="40%,60%",options="header", role="rtable mt-3"]
+|=======================================================================
+|Description |Filter and Output
+|*Relative URL*
+
+Prepend the `baseurl` value to the input. Useful if your site is hosted at a subpath rather than the root of the domain.
+| `{{ "/assets/style.css" \| relative_url }}` 
+
+*`my-baseurl/assets/style.css`*
+
+|*Absolute URL*
+
+Prepend the `url` and `baseurl` value to the input. 
+| `{{ "/assets/style.css" \| absolute_url }}`
+
+*`http://example.com/my-baseurl/assets/style.css`*
+
+|*Date to XML Schema*
+
+Convert a Date into XML Schema (ISO 8601) format. 
+| `{{ site.time \| date_to_xmlschema }}` 
+
+*`2008-11-07T13:07:54-08:00`*
+
+|*Date to RFC-822 Format*
+
+Convert a Date into the RFC-822 format used for RSS feeds.
+
+|`{{ site.time \| date_to_rfc822 }}`
+
+*`Mon, 07 Nov 2008 13:07:54 -0800`*
+
+|*Date to String*
+
+Convert a date to short format.
+
+|`{{ site.time \| date_to_string }}`
+
+*`07 Nov 2008`*
+
+|*Date to Long String*
+
+Format a date to long format.
+
+|`{{ site.time \| date_to_long_string }}`
+
+*`07 November 2008`*
+
+|*Where*
+
+Select all the objects in an array where the key has the given value.
+
+|`{{ site.members \| where:"graduation_year","2014" }}`
+
+|*Where Expression*
+
+Select all the objects in an array where the expression is true. Jekyll
+v3.2.0 & later.
+
+|`{{ site.members \| where_exp:"item",
+
+ "item.graduation_year == 2014" }}`
+
+`{{ site.members \| where_exp:"item", 
+
+"item.graduation_year < 2014" }}`
+
+`{{ site.members \| where_exp:"item", 
+
+"item.projects contains 'foo'" }}`
+
+|*Group By*
+
+Group an array's items by a given property.
+
+|`{{ site.members \| group_by:"graduation_year" }}`
+
+*`[{"name"=>"2013", "items"=>[...]}, 
+
+{"name"=>"2014", "items"=>[...]}]`*
+
+|*XML Escape*
+
+Escape some text for use in XML.
+
+|`{{ page.content \| xml_escape }}`
+
+|*CGI Escape*
+
+CGI escape a string for use in a URL. Replaces any special characters
+with appropriate %XX replacements.
+
+|`{{ "foo,bar;baz?" \| cgi_escape }}`
+
+*`foo%2Cbar%3Bbaz%3F`*
+
+|*URI Escape*
+
+URI escape a string.
+
+|`{{ "foo, bar \baz?" \| uri_escape }}`
+
+*`foo,%20bar%20%5Cbaz?`*
+
+|*Number of Words*
+
+Count the number of words in some text.
+
+|`{{ page.content \| number_of_words }}`
+
+*`1337`*
+
+|*Array to Sentence*
+
+Convert an array into a sentence. Useful for listing tags.
+
+|`{{ page.tags \| array_to_sentence_string }}`
+
+*`foo, bar, and baz`*
+
+|*Markdownify*
+
+Convert a Markdown-formatted string into HTML.
+
+|`{{ page.excerpt \| markdownify }}`
+
+|*Smartify*
+
+Convert "quotes" into &ldquo;smart quotes&rdquo;.
+
+|`{{ page.title \| smartify }}`
+
+|*Converting Sass/SCSS*
+
+Convert a Sass- or SCSS-formatted string into CSS.
+
+|`{{ some_scss \| scssify }}` 
+
+
+|*Slugify*
+
+Convert a string into a lowercase URL "slug". See below for options.
+
+|`{{ "The &#x5F;config.yml file" \| slugify }}`
+
+*`the-config-yml-file`*
+
+`{{ "The &#x5F;config.yml file" \| slugify: 'pretty' }}`
+
+*`the-&#x5F;config.yml-file`*
+
+|*Data To JSON*
+
+Convert Hash or Array to JSON.
+
+|`{{ site.data.projects \| jsonify }}`
+
+|*Normalize Whitespace*
+
+Replace any occurrence of whitespace with a single space.
+
+|`{{ "a \n b" \| normalize&#x5F;whitespace }}`
+
+|*Sort*
+
+Sort an array. Optional arguments for hashes: 1. property name 2. nils
+order (__first__ or __last__).
+
+|`{{ page.tags \| sort }}`
+
+`{{ site.posts \| sort: 'author' }}`
+
+`{{ site.pages \| sort: 'title', 'last' }}`
+
+|*Sample*
+
+Pick a random value from an array. Optional: pick multiple values.
+
+|`{{ site.pages \| sample }}`
+
+`{{ site.pages \| sample:2 }}`
+
+|*To Integer*
+
+Convert a string or boolean to integer.
+
+|`{{ some_var \| to_integer }}`
+
+|*Array Filters*
+
+Push, pop, shift, and unshift elements from an Array.
+
+These are **NON-DESTRUCTIVE**, i.e. they do not mutate the array, but
+rather make a copy and mutate that.
+
+|`{{ page.tags \| push: 'Spokane' }}`
+
+*`['Seattle', 'Tacoma', 'Spokane']`*
+
+`{{ page.tags \| pop }}`
+
+*`['Seattle']`*
+
+`{{ page.tags \| shift }}`
+
+*`['Tacoma']`*
+
+`{{ page.tags \| unshift: "Olympia" }}`
+
+*`['Olympia', 'Seattle', 'Tacoma']`*
+
+|*Inspect*
+
+Convert an object into its String representation for debugging.
+
+|`{{ some_var \| inspect }}`
+
+|=======================================================================

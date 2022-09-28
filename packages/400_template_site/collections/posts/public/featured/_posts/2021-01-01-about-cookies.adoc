@@ -5,20 +5,26 @@ tagline:                                good to know
 categories:                             [ Featured ]
 tags:                                   [ Cookies ]
 
-image:                                  /assets/images/modules/attics/cookies-1920x1200.jpg
+image:
+  path:                                 /assets/images/modules/attics/cookies-1920x1200.jpg
+  width:                                1920
+  height:                               1200
+  alt:                                  Cookies
 
 fab_menu_id:                            page_ctrl
 regenerate:                             false
 
 resources:                              [ animate ]
 resource_options:
-  - attic:
-      slides:
 
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+
+      slides:
         - url:                          /assets/images/modules/attics/cookies-1920x1200.jpg
           alt:                          Photo by Miroslava on Unsplash
-          title:                        Cookies
-          tagline:                      good to know
           badge:
             type:                       unsplash
             author:                     Miroslava

@@ -220,7 +220,7 @@ j1.adapter.attic = (function (j1, window) {
               var textOverlayTagline  = instance.images[index].tagline;
               var textOverlayHTML;
 
-              console.log('module attic - set state: backstretch_before');
+              // console.log('module attic - set state: backstretch_before');
               _this.setState('backstretch_before');
 
               if (index === backstretch_instance_data.images.length -1) {
@@ -232,8 +232,8 @@ j1.adapter.attic = (function (j1, window) {
                 $('.backstretch').removeClass(atticOptions.spinner);
               }
 
-              console.log('module attic - entered: backstretch.before');
-              console.log('module attic - apply: CSS filters');
+              // console.log('module attic - entered: backstretch.before');
+              // console.log('module attic - apply: CSS filters');
 
               $('.backstretch').css('filter', 'sepia(1) brightness(0.9) contrast(0.6)');
               $('.backstretch').css('filter', 'grayscale(1) contrast(1) brightness(1)');
@@ -255,6 +255,18 @@ j1.adapter.attic = (function (j1, window) {
               var atticOptions        = _this.atticOptions;
               var frontmatterOptions  = _this.frontmatterOptions;
               var textOverlayHTML;
+
+              // apply DEFAULT settings for textOverlayTitle|textOverlayTagline
+              // on the FIRST backstretch instance if title|tagline NOT set
+              //
+              if (index == 0) {
+                if (typeof instance.images[index].title == 'undefined') {
+                  textOverlayTitle    = frontmatterOptions.title;
+                }
+                if (typeof instance.images[index].tagline == 'undefined') {
+                  textOverlayTagline  = frontmatterOptions.tagline;
+                }
+              }
 
               if (typeof instance.images[index].badge != 'undefined') {
                 var bType               = instance.images[index].badge.type;
@@ -332,7 +344,7 @@ j1.adapter.attic = (function (j1, window) {
 
               _this.setState('finished');
               logger.debug('\n' + 'state: ' + _this.getState());
-              logger.info('\n' + 'module initialized successfully');
+              // logger.info('\n' + 'module initialized successfully');
             }); // END on('backstretch.after')
 
           } // END if attic_id exists

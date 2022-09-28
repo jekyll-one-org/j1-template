@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
 # ~/_plugins/lunr_index.rb
-# Creates an Lunr index file (json) to be used by J1 Lunr
+# Creates a index file (json) to be used by J1 Lunr
 #
 # Product/Info:
 # http://jekyll.one
@@ -16,10 +16,11 @@ require 'json'
 require 'uri'
 require 'execjs'
 require 'yaml'
+require 'nokogiri'
 
 module Jekyll
   module J1LunrSearch
-    #noinspection RubyTooManyInstanceVariablesInspection
+    #noinspection RubyTooManyInstanceVariablesInspection,RubyInterpreter
     class Indexer < Jekyll::Generator
       def initialize(config = {})
         super(config)
@@ -27,19 +28,17 @@ module Jekyll
         @mode = config['environment']
         @template = config['theme']
 
-        @module_path = File.join(File.dirname(__FILE__))
-        @module_path.slice! '_plugins'
-        @module_config_path = File.join(@module_path, config['data_dir'], 'modules')
-        @j1_config_path = config['data_dir']
+        @project_path                   = File.join(File.dirname(__FILE__)).sub('_plugins/index', '')
+        @module_config_path             = File.join(@project_path, config['data_dir'], 'modules')
+        @j1_config_path                 = config['data_dir']
 
-        @j1_config = YAML::load(File.open(File.join(@j1_config_path, 'j1_config.yml')))
-
-        @module_config_default = YAML::load(File.open(File.join(@module_config_path, 'defaults', 'lunr.yml')))
-        @module_config_user = YAML::load(File.open(File.join(@module_config_path,'lunr.yml')))
+        @j1_config                      = YAML::load(File.open(File.join(@j1_config_path, 'j1_config.yml')))
+        @module_config_default          = YAML::load(File.open(File.join(@module_config_path, 'defaults', 'lunr.yml')))
+        @module_config_user             = YAML::load(File.open(File.join(@module_config_path,'lunr.yml')))
 
         @module_config_default_settings = @module_config_default['defaults']
-        @module_config_user_settings = @module_config_user['settings']
-        @module_config = @module_config_default_settings.merge!(@module_config_user_settings)
+        @module_config_user_settings    = @module_config_user['settings']
+        @module_config                  = @module_config_default_settings.merge!(@module_config_user_settings)
 
         @lunr_config = {
           'excludes' => [],
@@ -63,18 +62,18 @@ module Jekyll
         @index_name = @lunr_config['index_name']
 
         # calculate the module path
-        # if NO template GEM is used (dev system), @module_path points
+        # if NO template GEM is used (dev system), @project_path points
         # in the project folder, otherwise (runtime system) to the Ruby
         # GEM installation folder!
         #
         if @template.nil?
-          @module_path = File.join(File.dirname(__FILE__), '../', @module_dir)
+          @project_path = File.join(File.dirname(__FILE__), '../../', @module_dir)
         else
           @gem_path    = `bundle info --path j1-template`
-          @module_path = File.join(@gem_path.chomp, @module_dir)
+          @project_path = File.join(@gem_path.chomp, @module_dir)
         end
 
-        @lunr_path = File.join(@module_path, 'lunr.min.js')
+        @lunr_path = File.join(@project_path, 'lunr.min.js')
         raise "Could not find #{@lunr_path}" unless File.exist?(@lunr_path)
 
         lunr_src = open(@lunr_path).read
@@ -112,7 +111,7 @@ module Jekyll
 
         if @module_config['rebuild'] == false
           if File.exist?(index_file)
-            Jekyll.logger.info 'J1 Lunr:', 'recreate index disabled.'
+            Jekyll.logger.info 'J1 Lunr:', 'rebuild index disabled'
             # Keep the index file from being cleaned by Jekyll
             #
             site.static_files << SearchIndexFile.new(site, site.dest, '/', @module_config['index_file'])
@@ -120,7 +119,7 @@ module Jekyll
           end
         end
 
-        Jekyll.logger.info 'J1 Lunr:', 'creating search index ...'
+        Jekyll.logger.info 'J1 Lunr:', 'generate search index'
 
         # gather posts and pages
         #
@@ -186,7 +185,7 @@ module Jekyll
         #
         FileUtils.mkdir_p(File.dirname(filepath))
         File.open(filepath, 'w') { |f| f.write(JSON.dump(total)) }
-        Jekyll.logger.info 'J1 Lunr:', "finished, index ready."
+#       Jekyll.logger.info 'J1 Lunr:', "finished, index ready."
         added_files = [filename]
 
         # Keep the written files from being cleaned by Jekyll
@@ -236,7 +235,6 @@ module Jekyll
   end
 end
 
-require 'nokogiri'
 module Jekyll
   module J1LunrSearch
     class PageRenderer
@@ -276,7 +274,7 @@ module Jekyll
   end
 end
 
-require 'nokogiri'
+
 module Jekyll
   module J1LunrSearch
     #noinspection RubyTooManyInstanceVariablesInspection
@@ -292,26 +290,31 @@ module Jekyll
             date = '2022-01-01 00:00:00'
           end
 
-          tagline     = site.data['tagline']
-          tags        = site.data['tags']
-          categories  = site.data['categories']
-          description = site.data['description']
-          title, url  = extract_title_and_url(site)
-          is_post     = site.is_a?(Jekyll::Document)
-          body        = renderer.render(site)
+          tagline           = site.data['tagline']
+          tags              = site.data['tags']
+          categories        = site.data['categories']
+          description       = site.data['description']
+          title, url        = extract_title_and_url(site)
+          is_post           = site.is_a?(Jekyll::Document)
+          body              = renderer.render(site)
 
           if description.nil? || description.length == 0
             description = 'No description available.'
+          else
+            description, keywords = description.split(/~~~/)
           end
 
-          if site.is_a?(Jekyll::Document)
-            excerpt = extract_excerpt(site)
-            unless excerpt.nil? || excerpt.length == 0
-              description = excerpt
-            end
-          end
+#         Previous code used  for Posts
+#
+#         if site.is_a?(Jekyll::Document)
+#           excerpt = extract_excerpt(site)
+#           unless excerpt.nil? || excerpt.length == 0
+#             description = excerpt
+#           end
+#         end
 
           SearchEntry.new(title, tagline, url, date, tags, categories, description, is_post, body, renderer)
+
         else
           raise 'Not supported'
         end
@@ -369,6 +372,6 @@ end
 
 module Jekyll
   module J1LunrSearch
-    VERSION = '2022.5.2'
+    VERSION = '2022.5.3'
   end
 end

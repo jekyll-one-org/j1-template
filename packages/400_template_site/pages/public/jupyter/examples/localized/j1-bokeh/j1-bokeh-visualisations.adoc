@@ -8,29 +8,14 @@ description: >
                                         high-performance interactivity over large or streaming datasets. Bokeh can
                                         help anyone who would like to quickly and easily make interactive plots,
                                         dashboards, and data applications.
-keywords: >
-                                        opensource, free, load, download, start, starter, example,
-                                        high, easy, use, secure, encrypt, standard, popular,
-                                        generate, create, learn, distribute, publish, deploy,
-                                        beginner, advanced, expert, student, learner, educator,
-                                        writer, reader, visitor,
-                                        framework, toolkit, integration, extension, module, api,
-                                        dynamic, static, generator, client, server, internet, local, localhost,
-                                        page, web, website, webdesign, material, design, responsive,
-                                        javascript, nodejs, ruby, windows, linux, osx, mac, os,
-                                        http, https, html, html5, css, scss, style,
-                                        browser, firefox, chrome, edge, opera, safari,
-                                        configuration, generator, navigation, menu, dropdown, fab, action, button,
-                                        application, interface, provider, api, repository,
-                                        cookie, language, translation, gdpr, dsgvo, privacy,
-                                        asciidoc, aciidoctor, bootstrap, jekyll, liquid,
-                                        hyvor, disqus, git, github, netlify, heroku, apple, microsoft,
-                                        provider, service, internet, support,
-                                        google, analytics, advertising, search, console, silverlight, score,
-                                        j1, nbi, j1-nbinteract, nbinteract, template, integration,
-                                        python, jupyter, notebook, textbook, api, app,
-                                        binder, binderhub, jupyterhub,
-                                        bokeh
+
+                                        ~~~ j1, jekyll, one, template, ruby, nodejs, gem, jamstack, module,
+                                        provider, google, netlify, bootstrap, facebook, twitter, open, source,
+                                        javascript, css, scss, html, yaml, service, internet, support, analytics,
+                                        advertising, search, console, silverlight, score,  1-Click, deployment,
+                                        responsive, design, theme, desktop, mobile, navigation, static, web, site,
+                                        blog, post, article, royalty, free, images, carousel, slider, gallery,
+                                        video, player, clipboard, cookie, consent, fulltext, search, engine.
 
 categories:                             [ Software, Python ]
 tags:                                   [ Bokeh, Jupyter, Notebooks, Localized ]
@@ -43,16 +28,16 @@ permalink:                              /pages/public/jupyter/examples/localized
 
 resources:                              [ animate, nbinteract, rouge ]
 resource_options:
+
   - toccer:
       collapseDepth:                    2
 
   - attic:
+
       slides:
 
         - url:                          /assets/images/modules/attics/john-schnobrich-2-1920x1280.jpg
           alt:                          Photo by John Schnobrich on Unsplash
-          title:                        Bokeh
-          tagline:                      data visualizations
           badge:
             type:                       unsplash
             author:                     John Schnobrich

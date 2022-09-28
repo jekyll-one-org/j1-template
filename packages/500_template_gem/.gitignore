@@ -26,8 +26,6 @@ tmp/
 
 \.sass-cache/
 
-**/*.txt
-
 **/*.old
 
 **/*.tmp

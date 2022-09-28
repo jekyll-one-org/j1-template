@@ -7,6 +7,14 @@ description: >
                                         shows some valuable features of the J1 Template to manage your image-based
                                         content using lightboxes, carousels (slider), and galleries.
 
+                                        ~~~ j1, jekyll, one, template, ruby, nodejs, gem, jamstack, module,
+                                        provider, google, netlify, bootstrap, facebook, twitter, open, source,
+                                        javascript, css, scss, html, yaml, service, internet, support, analytics,
+                                        advertising, search, console, silverlight, score,  1-Click, deployment,
+                                        responsive, design, theme, desktop, mobile, navigation, static, web, site,
+                                        blog, post, article, royalty, free, images, carousel, slider, gallery,
+                                        video, player, clipboard, cookie, consent, fulltext, search, engine.
+
 categories:                             [ Roundtrip ]
 tags:                                   [ Introduction, Module, Image ]
 
@@ -21,13 +29,13 @@ resources:                              [
                                           masterslider, rouge
                                         ]
 resource_options:
+
   - attic:
+
       slides:
 
         - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
           alt:                          Photo by Ricardo Gomez Angel on Unsplash
-          title:                        Roundtrip
-          tagline:                      present images
           badge:
             type:                       unsplash
             author:                     Ricardo Gomez Angel

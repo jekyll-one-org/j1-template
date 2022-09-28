@@ -9,33 +9,13 @@ description: >
                                         of Jekyll and valuable experience using HTML, CSS, and Javascript
                                         is required. J1 is different: easy to use, no programming is needed.
 
-keywords: >
-                                        features, modules, extensions, integrations,
-                                        Infinite srcoll, Animate on srcoll, Floating Action Buttons,
-                                        full-text search engine, cookie consent, translator, clipboard,
-                                        smooth-srcoll, enhanced navigation, lightboxes, image and video galleries,
-                                        text and image carousels, bootstrap extensions, asciidoctor extensions,
-                                        advanced banners and panels, blog post navigation, featured example content,
-                                        royalty free images, bootswatch, bootstrap, themes, comment providers,
-                                        google analytics, google ads, youtube video, vimeo video,
-                                        opensource, free, load, download, start, starter, example,
-                                        high, easy, use, secure, encrypt, standard, popular,
-                                        generate, develop, create, learn, distribute, publish, deploy,
-                                        beginner, advanced, expert, student, learner, writer, reader, visitor
-                                        framework, toolkit, integration, extension, module, api,
-                                        dynamic, static, generator, client, server, internet, local, localhost
-                                        page, web, website, webdesign, material, design, responsive,
-                                        javascript, nodejs, ruby, windows, linux, osx, mac, os,
-                                        http, https, html, html5, css, scss, style,
-                                        browser, firefox, chrome, edge, opera, safari,
-                                        configuration, generator, navigation, menu, dropdown, fab, action, button
-                                        application, interface, provider, api, repository,
-                                        cookie, language, translation, gdpr, dsgvo, privacy,
-                                        asciidoc, aciidoctor, bootstrap, jekyll, liquid,
-                                        hyvor, disqus, git, github, netlify, heroku, apple, microsoft,
-                                        provider, service, internet, support,
-                                        google, analytics, advertising, search, console, silverlight, score,
-                                        j1, template, jekyllone, comment
+                                        ~~~ j1, jekyll, one, template, ruby, nodejs, gem, jamstack, module,
+                                        provider, google, netlify, bootstrap, facebook, twitter, open, source,
+                                        javascript, css, scss, html, yaml, service, internet, support, analytics,
+                                        advertising, search, console, silverlight, score,  1-Click, deployment,
+                                        responsive, design, theme, desktop, mobile, navigation, static, web, site,
+                                        blog, post, article, royalty, free, images, carousel, slider, gallery,
+                                        video, player, clipboard, cookie, consent, fulltext, search, engine.
 
 categories:                             [ Features ]
 tags:                                   [ Module, Extension, Integration ]
@@ -66,12 +46,11 @@ resource_options:
       padding_top:                      400
       padding_bottom:                   50
       opacity:                          0.5
+
       slides:
 
         - url:                          /assets/images/modules/attics/christina-1920x1280.jpg
           alt:                          Photo by Christina on Unsplash
-          title:                        Features
-          tagline:                      Modules, Extensions and Integrations
           alignY:                       top
           badge:
             type:                       unsplash

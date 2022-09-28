@@ -3,7 +3,20 @@ title:                                  Asciidoctor PDF Themes
 tagline:                                Theming Guide for the Asciidoctor PDF Converter
 date:                                   2022-01-01 00:00:00
 description: >
-                                        Asciidoctor PDF Theming Guide
+                                        Asciidoctor PDF is a native PDF converter for AsciiDoc that plugs
+                                        into the pdf backend. It bypasses the requirement to generate an
+                                        intermediary format such as DocBook, Apache FO, or LaTeX. Instead,
+                                        you can use Asciidoctor PDF to convert your documents directly
+                                        from AsciiDoc to PDF. The aim of this library is to take the pain
+                                        out of creating PDF documents from AsciiDoc.
+
+                                        ~~~ j1, jekyll, one, template, ruby, nodejs, gem, jamstack, module,
+                                        provider, google, netlify, bootstrap, facebook, twitter, open, source,
+                                        javascript, css, scss, html, yaml, service, internet, support, analytics,
+                                        advertising, search, console, silverlight, score,  1-Click, deployment,
+                                        responsive, design, theme, desktop, mobile, navigation, static, web, site,
+                                        blog, post, article, royalty, free, images, carousel, slider, gallery,
+                                        video, player, clipboard, cookie, consent, fulltext, search, engine.
 
 categories:                             [ Knowledge ]
 tags:                                   [ Asciidoctor, PDF, Converter ]
@@ -13,8 +26,11 @@ regenerate:                             false
 
 resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
+
   - attic:
+
       slides:
+
         - url:                          /assets/images/modules/attics/sigmund-1920x1280.jpg
           alt:                          Photo by Sigmund on Unsplash
           alignY:                       0.3

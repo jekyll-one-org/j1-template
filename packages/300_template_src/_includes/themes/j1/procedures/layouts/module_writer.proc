@@ -139,7 +139,7 @@ NO need to load this again
               ------------------------------------------------------------------ {% endcomment %}
               {% if frontmatter_options %}
                 // [INFO   ] [j1.layout.module_writer.proc          ] [ pass module specific frontmatter options for: {{resource_settings.id}} ]
-                {% capture frontmatter_options %}{{frontmatter_options}}, {"layout": "{{page.layout}}", "scrollbar": "{{page.scrollbar}}", "toc": "{{page.toc}}", "comments": "{{page.comments}}"}{% endcapture %}
+                {% capture frontmatter_options %}{{frontmatter_options}}, {"layout": "{{page.layout}}", "title": "{{page.title}}", "tagline": "{{page.tagline}}", "scrollbar": "{{page.scrollbar}}", "toc": "{{page.toc}}", "comments": "{{page.comments}}"}{% endcapture %}
                 var settings = $.extend({}, {{frontmatter_options}});
 
                 {% comment %} create resource_settings.dependencies (if any)

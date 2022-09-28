@@ -1085,7 +1085,7 @@
             if ($(myID).is(':visible')) {
               // clear interval checking
               clearInterval(isVisible);
-              logger.info('\n' + 'container visible on id: ' + myID);
+              logger.debug('\n' + 'container visible on id: ' + myID);
               that.resize();
             }
           }, 50); // END 'isVisible'

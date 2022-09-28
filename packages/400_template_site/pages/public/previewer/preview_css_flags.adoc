@@ -1,6 +1,6 @@
 ---
-
-layout:                                 page
+title:                                  Country Flags
+tagline:                                flags worldwide
 date:                                   2020-11-08 00:00:00
 description: >
                                         Country flags are often used in the context of language-specific selections
@@ -8,28 +8,13 @@ description: >
                                         make language selections or country indicators more visual to support your
                                         visitors by making a more meaningful presentation.
 
-keywords: >
-                                        country, flag, selection, indicator, visual, rectangle, squared,
-                                        markup, style, render, modifier, overview, buildin,
-                                        panayiotis, lipiridis,
-                                        opensource, free, load, download, start, starter, example,
-                                        high, easy, use, secure, encrypt, standard, popular,
-                                        generate, develop, create, learn, distribute, publish, deploy,
-                                        beginner, advanced, expert, student, learner, writer, reader, visitor
-                                        framework, toolkit, integration, extension, module, api,
-                                        dynamic, static, generator, client, server, internet, local, localhost
-                                        page, web, website, webdesign, material, design, responsive,
-                                        javascript, nodejs, ruby, windows, linux, osx, mac, os,
-                                        http, https, html, html5, css, scss, style,
-                                        browser, firefox, chrome, edge, opera, safari,
-                                        configuration, generator, navigation, menu, dropdown, fab, action, button
-                                        application, interface, provider, api, repository,
-                                        cookie, language, translation, gdpr, dsgvo, privacy,
-                                        asciidoc, aciidoctor, bootstrap, jekyll, liquid,
-                                        hyvor, disqus, git, github, netlify, heroku, apple, microsoft,
-                                        provider, service, internet, support,
-                                        google, analytics, advertising, search, console, silverlight, score,
-                                        j1, template, jekyllone, comment
+                                        ~~~ j1, jekyll, one, template, ruby, nodejs, gem, jamstack, module,
+                                        provider, google, netlify, bootstrap, facebook, twitter, open, source,
+                                        javascript, css, scss, html, yaml, service, internet, support, analytics,
+                                        advertising, search, console, silverlight, score,  1-Click, deployment,
+                                        responsive, design, theme, desktop, mobile, navigation, static, web, site,
+                                        blog, post, article, royalty, free, images, carousel, slider, gallery,
+                                        video, player, clipboard, cookie, consent, fulltext, search, engine.
 
 categories:                             [ Previewer ]
 tags:                                   [ Country, Flags ]
@@ -40,15 +25,15 @@ scrollbar:                              false
 permalink:                              /pages/public/previewer/country_flags/
 regenerate:                             false
 
-resources:                              [ animate, comments, clipboard, rouge, flags_previewer ]
+resources:                              [ animate, comments, clipboard, flags_previewer, rouge ]
 resource_options:
+
   - attic:
+
       slides:
 
         - url:                          /assets/images/modules/attics/vladislav-klapin-1920x1280.jpg
           alt:                          Photo by Vladislav Klapin on Unsplash
-          title:                        Country Flags
-          tagline:                      flags worldwide
           badge:
             type:                       unsplash
             author:                     Vladislav Klapin

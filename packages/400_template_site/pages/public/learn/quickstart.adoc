@@ -8,6 +8,14 @@ description: >
                                         the "Starter web", a general-purpose scaffold to be modified
                                         for your needs.
 
+                                        ~~~ j1, jekyll, one, template, ruby, nodejs, gem, jamstack, module,
+                                        provider, google, netlify, bootstrap, facebook, twitter, open, source,
+                                        javascript, css, scss, html, yaml, service, internet, support, analytics,
+                                        advertising, search, console, silverlight, score,  1-Click, deployment,
+                                        responsive, design, theme, desktop, mobile, navigation, static, web, site,
+                                        blog, post, article, royalty, free, images, carousel, slider, gallery,
+                                        video, player, clipboard, cookie, consent, fulltext, search, engine.
+
 categories:                             [ Knowledge ]
 tags:                                   [ J1, Template, Quickstart ]
 
@@ -19,13 +27,13 @@ regenerate:                             false
 
 resources:                              [ animate, clipboard, rouge ]
 resource_options:
+
   - attic:
+
       slides:
 
         - url:                          /assets/images/modules/attics/matthew-dockery-1920x1280.jpg
           alt:                          Photo by Matthew Dockery on Unsplash
-          title:                        Quickstart
-          tagline:                      amazing site in 15 minutes
           badge:
             type:                       unsplash
             author:                     Matthew Dockery

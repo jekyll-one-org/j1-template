@@ -55,6 +55,10 @@ exclude_from_search:                    true
 {% assign panel_config_settings     = panel_config_settings.settings %}
 {% assign bs_card_deck              = bs_config.cards.card_deck %}
 
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign panel_config_options      = panel_config_defaults | merge: panel_config_settings %}
+
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign truncate_words            = site.excerpt_truncate_words %}
@@ -63,6 +67,18 @@ exclude_from_search:                    true
 {% comment %} Set HELPER variables (used by exception panel)
 -------------------------------------------------------------------------------- {% endcomment %}
 {% capture panel_config_file_name %}~/_data/blocks/panel.yml{% endcapture %}
+
+
+{% comment %} Collect CSS image filters
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if panel_config_options.filters %}
+  {% for filter in panel_config_options.filters %}
+    {% capture css_filters %}{{css_filters}} {{filter[0]}}({{filter[1]}}){% endcapture %}
+  {% endfor %}
+  {% capture image_filters %}filter:{{css_filters}}{% endcapture %}
+{% else %}
+  {% assign image_filters = '' %}
+{% endif %}
 
 {% comment %} language detection|i18n
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -693,10 +709,10 @@ exclude_from_search:                    true
                 			<li id="{{panel_settings.id}}-scroll-item" class="scroll-group-item items-{{cards_per_row}} p-0">
                         <article class="card card-same-height raised-z3 mb-5">
                           {% if post.image %}
-                            <img class="img-fluid img-object--cover g-height-200" src="{{post.image}}" alt="{{post.title}}" style="filter: grayscale(1) contrast(1) brightness(1);">
+                            <img class="img-fluid img-object--cover g-height-200" src="{{post.image.path}}" alt="{{post.title}}" style="{{image_filters}};;">
                             {% assign post_width = '80x' %}
                           {% else %}
-                            <img class="mt-2" src="" alt="" style="filter: grayscale(1) contrast(1) brightness(1);">
+                            <img class="mt-2" src="" alt="" style="{{image_filters}};;">
                             {% assign post_width = '100x' %}
                           {% endif %}
                           <h3 class="card-header bg-primary notoc notranslate">{{post.title}}</h3>
@@ -756,10 +772,10 @@ exclude_from_search:                    true
                     <!-- Posts -->
                     <article class="card raised-z3 mb-3">
                       {% if post.image %}
-                        <img class="img-fluid img-object--cover g-height-200" src="{{post.image}}" alt="{{post.title}}" style="filter: grayscale(1) contrast(1) brightness(1);">
+                        <img class="img-fluid img-object--cover g-height-200" src="{{post.image.path}}" alt="{{post.title}}" style="{{image_filters}};;">
                         {% assign post_width = '80x' %}
                       {% else %}
-                        <img class="mt-2" src="" alt="" style="filter: grayscale(1) contrast(1) brightness(1);">
+                        <img class="mt-2" src="" alt="" style="{{image_filters}};;">
                         {% assign post_width = '100x' %}
                       {% endif %}
                       <h3 class="card-header bg-primary notoc">{{post.title}}</h3>

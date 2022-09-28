@@ -1,0 +1,18 @@
+// Include sub-document
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+lorem:sentences[5]
+
+== Monitor a web
+// Disqus the basics of Jekyll content types: posts and pages
+Monitoring about to check what happens ...
+
+lorem:sentences[5]
+
+=== Check the resulting HTML code
+// Disqus the basics of the resulting  code
+lorem:sentences[5]
+
+=== Check available Module logs
+// Disqus check ...
+lorem:sentences[5]

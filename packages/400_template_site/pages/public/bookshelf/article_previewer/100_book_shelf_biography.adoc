@@ -8,6 +8,13 @@ description: >
 categories:                             [ Collection, Template ]
 tags:                                   [ Books ]
 
+sitemap:                                false
+exclude_from_search:                    true
+
+robots:
+  index:                                false
+  follow:                               false
+
 permalink:                              /pages/public/collections/bookshelf/biography/
 regenerate:                             false
 
@@ -15,13 +22,13 @@ fab_menu_id:                            open_toc
 
 resources:                              [ animate ]
 resource_options:
+
   - attic:
+
       slides:
 
         - url:                          /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
           alt:                          Photo by Giammarco on Unsplash
-          title:                        Biography
-          tagline:                      Today's People in the Book Shelf
           badge:
             type:                       unsplash
             author:                     Giammarco

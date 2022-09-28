@@ -138,8 +138,6 @@ group :jekyll_plugins do
   #
   # Additional Jekyll Plugins  (optional)
   #
-  gem 'jekyll-sitemap', '>= 1.2.0'                                              # Create XML sitemap (recommended)
-  # gem 'jekyll-feed', ">= 0.15.1"
   # gem 'jekyll-gist', '>= 1.5.0'
   # gem 'jekyll-redirect-from', '>= 0.16.0'
 end

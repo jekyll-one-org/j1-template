@@ -9,6 +9,14 @@ description: >
                                         everything else in the document so that messages get the
                                         user's attention.
 
+                                        ~~~ j1, jekyll, one, template, ruby, nodejs, gem, jamstack, module,
+                                        provider, google, netlify, bootstrap, facebook, twitter, open, source,
+                                        javascript, css, scss, html, yaml, service, internet, support, analytics,
+                                        advertising, search, console, silverlight, score,  1-Click, deployment,
+                                        responsive, design, theme, desktop, mobile, navigation, static, web, site,
+                                        blog, post, article, royalty, free, images, carousel, slider, gallery,
+                                        video, player, clipboard, cookie, consent, fulltext, search, engine.
+
 categories:                             [ Roundtrip ]
 tags:                                   [ Introduction, Bootstrap, Modal, Extension ]
 
@@ -20,13 +28,13 @@ regenerate:                             false
 
 resources:                              [ animate ]
 resource_options:
+
   - attic:
+
       slides:
 
         - url:                          /assets/images/pages/roundtrip/bootstrap-1920x1000-bw.jpg
           alt:                          bootstrap
-          title:                        Roundtrip
-          tagline:                      advanced bootstrap modals
 ---
 
 // Page Initializer

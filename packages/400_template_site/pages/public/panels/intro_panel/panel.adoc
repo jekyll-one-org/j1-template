@@ -9,6 +9,13 @@ description: >
                                         brilliant. J1 Template supports your Web for full responsiveness, for the
                                         best user experience on all modern devices.
 
+                                        ~~~ j1, jekyll, one, template, ruby, nodejs, gem, jamstack, module,
+                                        provider, google, netlify, bootstrap, facebook, twitter, open, source,
+                                        javascript, css, scss, html, yaml, service, internet, support, analytics,
+                                        advertising, search, console, silverlight, score,  1-Click, deployment,
+                                        responsive, design, theme, desktop, mobile, navigation, static, web, site,
+                                        blog, post, article, royalty, free, images, carousel, slider, gallery,
+                                        video, player, clipboard, cookie, consent, fulltext, search, engine.
 
 categories:                             [ Info ]
 tags:                                   [ Info, Jekyll, Template ]
@@ -31,13 +38,13 @@ resources:                              [
                                         ]
 
 resource_options:
+
   - attic:
+
       slides:
 
         - url:                          /assets/images/modules/attics/jessica-ruscello-1920x1280.jpg
           alt:                          responsive-text-1920x1280
-          title:                        J1 Template
-          tagline:                      creating responsive websites
           badge:
             type:                       unsplash
             author:                     Alexander Andrews

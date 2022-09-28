@@ -23,8 +23,8 @@ resource_options:
       padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/images/modules/attics/shutterstock_sponsor-1920x1280.jpg
-          alt:                          shutterstock_sponsor-1920x1280.jpg
+        - url:                          /assets/images/modules/attics/gift-from-hand-1920x1280.jpg
+          alt:                          gift-from-hand-1920x1280.jpg
 ---
 
 // Page Initializer

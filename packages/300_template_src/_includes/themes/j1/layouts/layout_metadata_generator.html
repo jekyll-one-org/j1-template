@@ -44,7 +44,7 @@
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
-<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ start processing: place meta tags (taken from site config|page frontmatter) ] -->
+<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ start meta-data processing: place meta tags (taken from site config|page frontmatter) ] -->
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ page|content encoding ] -->
 <meta http-equiv="Content-Type" content="text/html;charset={{site.coding}}" />
@@ -68,84 +68,8 @@
 <meta name="{{template_config.translation.google.meta_data}}" content="enabled" />
 {% endif %}
 
-{% if page.layout == 'home' %}
-  <title>{{site.slogan}}</title>
-{% else %}
-  <title>{{page.tagline}}</title>
-{% endif %}
-
-{% if page.layout == 'home' %}
-  {% if site.description %}
-    {% assign size = site.description|size %}
-    <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ SIZE of site description: {{size}} chars ] -->
-    {% if size >= 70 %}
-    <!-- [SEO    ] [j1.layout.meta_data_generator.html    ] [ Gratulations! Your site description has more than 70 chars. Recommended: 70-160 characters ] -->
-    {% else %}
-    <!-- [SEO    ] [j1.layout.meta_data_generator.html    ] [ Consider! IMPROVE|INCREASE your site description, recommended: 70-160 characters ] -->
-    {% endif %}
-    <meta name="description" content="{{site.description}}" />
-  {% endif %}
-{% else %}
-  {% if page.description %}
-    <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ detected content type: PAGE ] -->
-    {% assign size = site.description|size %}
-    <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ SIZE of page description: {{size}} chars ] -->
-    {% if size >= 70 %}
-    <!-- [SEO    ] [j1.layout.meta_data_generator.html    ] [ GRATULATIONS. Your page description has more than 70 characters. (Recommended: 70-160 characters) ] -->
-    {% else %}
-    <!-- [SEO    ] [j1.layout.meta_data_generator.html    ] [ Consider to IMPROVE|INCREASE your page description! ] -->
-    {% endif %}
-    <meta name="description" content="{{page.description}}" />
-  {% elsif page.excerpt %}
-    <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ detected content type: POST ] -->
-    {% assign size = page.excerpt|size %}
-    <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ SIZE of page exerpt: {{size}} chars ] -->
-    {% if size >= 70 %}
-    <!-- [SEO    ] [j1.layout.meta_data_generator.html    ] [ GRATULATIONS. Your page description (exerpt) has more than 70 characters. (Recommended: 70-160 characters) ] -->
-    {% else %}
-    <!-- [SEO    ] [j1.layout.meta_data_generator.html    ] [ Consider to IMPROVE|INCREASE your post excerpt for a valid page description! ] -->
-    {% endif %}
-    <meta name="description" content="{{page.excerpt|strip_html}}" />
-  {% else %}
-    <!-- [WARNING] [j1.layout.meta_data_generator.html    ] [ NO page description detected ] -->
-    <!-- [SEO    ] [j1.layout.meta_data_generator.html    ] [ Consider to add a page description! ] -->
-  {% endif %}
-{% endif %}
-
 {% if site.favicon.image %}
   <link rel="icon" type="{{site.favicon.type}}" href="{{site.data.j1_config.image_path}}/{{site.favicon.image}}" />
-{% endif %}
-
-{% if page.layout == 'home' %}
-  {% if page.author %}
-    <meta name="author" content="{{page.author}}" />
-  {% else %}
-    <meta name="author" content="{{site.author.name}}" />
-  {% endif %}
-{% else %}
-  {% if page.author %}
-    <meta name="author" content="{{page.author}}" />
-  {% else %}
-    <meta name="author" content="{{site.author.name}}" />
-  {% endif %}
-{% endif %}
-
-{% if page.layout == 'home' %}
-  {% if page.keywords %}
-    <meta name="keywords" content="{{page.keywords}}" />
-  {% else %}
-    {% if site.keywords %}
-      <meta name="keywords" content="{{site.keywords}}" />
-    {% endif %}
-  {% endif %}
-{% else %}
-  {% if page.keywords %}
-    <meta name="keywords" content="{{page.keywords}}" />
-  {% else %}
-    {% if site.keywords %}
-      <meta name="keywords" content="{{site.keywords}}" />
-    {% endif %}
-  {% endif %}
 {% endif %}
 
 {% comment %} Check robot settings from site configuration
@@ -258,8 +182,9 @@
 {{personalization}}
 
 
-{% comment %} SEO settings (optimization)
+{% comment %} SEO Optimization
 -------------------------------------------------------------------------------- {% endcomment %}
+<!-- [SEO    ] [j1.layout.meta_data_generator.html    ] [ start SEO Optimization ] -->
 
 {% comment %} PRELOAD fonts
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -346,4 +271,10 @@
   <!-- [SEO    ] [j1.layout.meta_data_generator.html    ] [ Consider! PRECONNECT 3rd party origins to establish early connections ] -->
 {% endif %}
 
-<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ end processing ] -->
+{% comment %} Add J1 SEO Tags
+-------------------------------------------------------------------------------- {% endcomment %}
+<!-- [SEO    ] [j1.layout.meta_data_generator.html    ] [ add J1 SEO Tags ] -->
+{% seo %}
+<!-- [SEO    ] [j1.layout.meta_data_generator.html    ] [ end SEO Optimization ] -->
+
+<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ end meta-data processing ] -->

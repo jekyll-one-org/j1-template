@@ -50,6 +50,7 @@ module Jekyll
   module J1_Filters
 
     EMPTY = ''
+    DOCTYPE_HTML = '<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/REC-html40/loose.dtd">'
 #   EMPTY_LINE = /^\s*\n/
     EMPTY_LINE = /^\s*$\n/
     MULTIPLE_SPACES = / +/
@@ -204,6 +205,16 @@ module Jekyll
     # --------------------------------------------------------------------------
     def strip_comments(input)
        input.to_s.gsub(Regexp.new(COMMENT_LINE), NOTHING)
+    end
+
+    # --------------------------------------------------------------------------
+    #  strip_doctype_html:
+    #
+    #  Example: stribg_var | strip_doctype_html
+    #
+    # --------------------------------------------------------------------------
+    def strip_doctype_html(input)
+       input.to_s.gsub(Regexp.new(DOCTYPE_HTML), NOTHING)
     end
 
     # --------------------------------------------------------------------------

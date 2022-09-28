@@ -62,13 +62,22 @@
 
 {% assign previewer                           = blog_navigator_options.previewer %}
 {% assign paginate                            = paginator_options.pagination.enabled %}
-
 {% assign truncate_words                      = site.excerpt_truncate_words %}
-
 
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
+{% endif %}
+
+{% comment %} Collect CSS image filters
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if blog_navigator_options.filters %}
+  {% for filter in blog_navigator_options.filters %}
+    {% capture css_filters %}{{css_filters}} {{filter[0]}}({{filter[1]}}){% endcapture %}
+  {% endfor %}
+  {% capture image_filters %}filter:{{css_filters}}{% endcapture %}
+{% else %}
+  {% assign image_filters = '' %}
 {% endif %}
 
 {% comment %} language detection  (i18n)
@@ -263,15 +272,15 @@
               {% comment %} default for card_block: card-deck
               ------------------------------------------------------------------ {% endcomment %}
               {% if card_block == "card-deck" or card_block == "card-list" %}
-                <!-- [INFO   ] [j1.assets.data.panel.html             ] [ blocktype detected as: {{card_block}} ] -->
+                <!-- [INFO   ] [j1.layouts.content_generator_news_panel_posts.html ] [ blocktype detected as: {{card_block}} ] -->
 			        {% else %}
-				        <!-- [INFO   ] [j1.assets.data.panel.html             ] [ set blocktype to: card-deck ] -->
+				        <!-- [INFO   ] [j1.layouts.content_generator_news_panel_posts.html ] [ set blocktype to: card-deck ] -->
                 {% assign card_block = "card-deck" %}
               {% endif %}
 
-              <!-- [INFO   ] [j1.assets.data.panel.html             ] [ blocktype detected as: {{card_block}} ] -->
+              <!-- [INFO   ] [j1.layouts.content_generator_news_panel_posts.html ] [ blocktype detected as: {{card_block}} ] -->
               {% if card_block == 'card-list' %}
-
+              <!-- [INFO   ] [j1.layouts.content_generator_news_panel_posts.html ] [ card block detected: 'card-list' ] -->
               {% if debug %}
               <!-- paginator.per_page:      {{paginator.per_page}} -->
               <!-- paginator.total_posts:   {{paginator.total_posts}} -->
@@ -284,13 +293,20 @@
                   <!-- post items-->
                   <li id="{{panel_settings.id}}-scroll-item" class="scroll-group-item items-{{cards_per_row}} p-0">
                     <article class="card card-same-height raised-z3 mb-5">
+                      <!-- [INFO   ] [j1.layouts.content_generator_news_panel_posts.html ] [ place post image ] -->
                       {% if post.image %}
-                        <img class="img-fluid img-object--cover g-height-200" src="{{post.image}}" alt="{{post.title}}">
+                        {% if post.image.path %}
+                          <img class="img-fluid img-object--cover g-height-200" src="{{post.image.path}}" alt="{{post.title}}" style="{{image_filters}};">
                         {% assign post_width = '80x' %}
+                        {% else %}
+                          <img class="img-fluid img-object--cover g-height-200" src="{{post.image}}" alt="{{post.title}}" style="{{image_filters}};">
+                        {% assign post_width = '80x' %}
+                        {% endif %}
                       {% else %}
                         <img class="mt-2" src="" alt="">
                         {% assign post_width = '100x' %}
                       {% endif %}
+
                       <h3 class="card-header bg-primary notoc notranslate">{{post.title}}</h3>
                       <!-- Body|Excerpt -->
                       <div class="card-body r-text-300">
@@ -339,6 +355,7 @@
               {% endif %}
 
               {% if card_block == 'card-deck' %}
+              <!-- [INFO   ] [j1.layouts.content_generator_news_panel_posts.html ] [ card block detected: 'card-deck' ] -->
               <!-- Recent posts -->
               <div id="{{panel_settings.id}}-scroll-group" class="row card-deck">
               {% for post in paginator.posts %} {% for category in post.categories %}
@@ -348,9 +365,15 @@
                   {% assign posts_written = posts_written|plus:1 %}
                     <!-- Posts -->
                     <article id="{{panel_settings.id}}-scroll-item" class="card raised-z3 mb-3">
+                      <!-- [INFO   ] [j1.layouts.content_generator_news_panel_posts.html ] [ place post image ] -->
                       {% if post.image %}
-                        <img class="img-fluid img-object--cover g-height-200" src="{{post.image}}" alt="{{post.title}}">
+                        {% if post.image.path %}
+                          <img class="img-fluid img-object--cover g-height-200" src="{{post.image.path}}" alt="{{post.title}}" style="{{image_filters}};">
                         {% assign post_width = '80x' %}
+                        {% else %}
+                          <img class="img-fluid img-object--cover g-height-200" src="{{post.image}}" alt="{{post.title}}" style="{{image_filters}};">
+                        {% assign post_width = '80x' %}
+                        {% endif %}
                       {% else %}
                         <img class="mt-2" src="" alt="">
                         {% assign post_width = '100x' %}

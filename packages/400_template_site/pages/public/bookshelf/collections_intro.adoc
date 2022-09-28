@@ -10,9 +10,17 @@ description: >
                                         aren't ordered as with posts (ordered by date), but have a set relationship
                                         with one another - hence the name: collection.
 
+                                        ~~~ j1, jekyll, one, template, ruby, nodejs, gem, jamstack, module,
+                                        provider, google, netlify, bootstrap, facebook, twitter, open, source,
+                                        javascript, css, scss, html, yaml, service, internet, support, analytics,
+                                        advertising, search, console, silverlight, score,  1-Click, deployment,
+                                        responsive, design, theme, desktop, mobile, navigation, static, web, site,
+                                        blog, post, article, royalty, free, images, carousel, slider, gallery,
+                                        video, player, clipboard, cookie, consent, fulltext, search, engine.
+
 categories:                             [ Collections ]
 tags:                                   [ Jekyll, Configuration ]
-
+regenerate:                             false
 
 fab_menu_id:                            open_toc
 
@@ -21,19 +29,17 @@ regenerate:                             false
 
 resources:                              [ animate, rouge ]
 resource_options:
+
   - attic:
+
       slides:
 
         - url:                          /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
           alt:                          Photo by Giammarco on Unsplash
-          title:                        Jekyll Collections
-          tagline:                      a brief introduction
           badge:
             type:                       unsplash
             author:                     Giammarco
             href:                       https://unsplash.com/@giamboscaro
-
-regenerate:                             false
 ---
 
 // Page Initializer

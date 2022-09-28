@@ -55,7 +55,7 @@ environment:                            development
 # ------------------------------------------------------------------------------
 #   Sets the build version of J1 Template Gem (Ruby V3)
 #
-version:                                2022.5.2
+version:                                2022.5.3
 
 # version
 # ------------------------------------------------------------------------------
@@ -454,27 +454,6 @@ liquid:
   error_mode:                           warn
 
 # ------------------------------------------------------------------------------
-# PLUGIN configuration
-#
-plugins:
-# - algolia
-  - asciidoctor
-# - asciidoctor-pdf
-  - jekyll-asciidoc
-# - jekyll-feed
-# - jekyll-gist
-# - jekyll-redirect-from
-# - jekyll-sass-converter
-  - jekyll-sitemap
-  - j1-paginator
-
-# ------------------------------------------------------------------------------
-# JEKYLL FEED
-#
-# feed:
-#   path:                                 /assets/data/atom.xml
-
-# ------------------------------------------------------------------------------
 # MARKDOWN
 #
 # Note:
@@ -491,6 +470,19 @@ kramdown:
   toc_levels:                           1..3
   smart_quotes:                         lsquo,rsquo,ldquo,rdquo
   syntax_highlighter:                   rouge
+
+# ------------------------------------------------------------------------------
+# PLUGIN configuration
+#
+plugins:
+# - algolia
+  - asciidoctor
+# - asciidoctor-pdf
+  - jekyll-asciidoc
+# - jekyll-feed
+# - jekyll-gist
+# - jekyll-redirect-from
+# - jekyll-sass-converter
 
 # ------------------------------------------------------------------------------
 # ASCIIDOCTOR (Asciidoc plugin)
@@ -587,8 +579,14 @@ defaults:
 
     values:
       layout:                           page
-      author:                           J1 Team
+      author:                           Jürgen Adams
       compress:                         true
+
+      image:
+        path:                           /assets/images/promo/home/screenshot.jpg
+        width:                          1200
+        height:                         800
+        alt:                            J1 Template Home
 
       robots:
         index:                          true
@@ -629,8 +627,14 @@ defaults:
 
     values:
       layout:                           post
-      author:                           J1 Team
+      author:                           Jürgen Adams
       compress:                         true
+
+      image:
+        path:                           /assets/images/promo/home/screenshot.jpg
+        width:                          1200
+        height:                         800
+        alt:                            J1 Template Home
 
       robots:
         index:                          true
@@ -657,7 +661,7 @@ defaults:
 
     values:
       layout:                           post
-      author:                           J1 Team
+      author:                           Jürgen Adams
       compress:                         true
 
       robots:
@@ -674,6 +678,7 @@ defaults:
       resource_options:
         - toccer:
             collapseDepth:              3
+
 
 # ==============================================================================
 # 6. LAYOUT configuration (Ruby V3)

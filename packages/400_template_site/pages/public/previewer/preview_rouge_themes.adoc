@@ -7,55 +7,13 @@ description: >
                                         syntax highlighter. It can highlight over 100 different
                                         languages fully integrated with J1 Template.
 
-keywords: >
-                                        previewer, tool, preview, overview,
-                                        highlighter, highlight, rouge, language
-                                        palette, primary, accent, illustration, scheme,
-                                        base16, base16.dark, base16.light, base16.monokai,
-                                        base16.monokai.dark, base16.monokai.light, base16.solarized,
-                                        base16.solarized.dark, base16.solarized.light, colorful,
-                                        github, gruvbox, gruvbox.dark, gruvbox.light, igorpro,
-                                        molokai, monokai, monokai.sublime, pastie, thankful_eyes, tulip,
-                                        abap, actionscript, apache, apiblueprint, applescript,
-                                        awk, biml, brainfuck, bsl, ceylon, cfscript, clojure,
-                                        clang, cmake, coffeescript, common_lisp, conf, console, coq,
-                                        cpp, c++, crystal, csharp, css, dlang, dart, diff, digdag,
-                                        docker, dot, eiffel, elixir, elm, erb, erlang, escape,
-                                        factor, fsharp, gherkin, glsl, golang, gradle, graphql,
-                                        groovy, hack, haml, handlebars, haskell, hcl, html, http,
-                                        hylang, idlang, igorpro, ini, io, irb, java, javascript,
-                                        jinja, json, json-doc, jsonnet, jsp, jsx, julia, kotlin,
-                                        lasso, liquid, literate_coffeescript, literate_haskell,
-                                        llvm, lua, m68k, magik, make, markdown, mathematica,
-                                        matlab, moonscript, mosel, mxml, nasm, nginx, nim, nix,
-                                        objective_c, ocaml, pascal, perl, php, plaintext, plist,
-                                        powershell, praat, prolog, prometheus, properties, protobuf,
-                                        puppet, python, kdb+, qml, rlang, racket, ruby, rust,
-                                        sass, scala, scheme, sed, shell, sieve, slim, smalltalk,
-                                        smarty, sml, sqf, sql, supercollider, swift, tap, tcl
-                                        terraform, tex, toml, tsx, tulip, turtle, twig, typescript,
-                                        vala, visualbasic, verilog, vhdl, viml, vue, wollok, xml,
-                                        xojo, yaml,
-                                        opensource, free, load, download, start, starter, example,
-                                        high, easy, use, secure, encrypt, standard, popular,
-                                        generate, develop, create, learn, distribute, publish, deploy,
-                                        beginner, advanced, expert, student, learner, writer, reader, visitor
-                                        framework, toolkit, integration, extension, module, api,
-                                        dynamic, static, generator, client, server, internet, local, localhost
-                                        page, web, website, webdesign, material, design, responsive,
-                                        javascript, nodejs, ruby, windows, linux, osx, mac, os,
-                                        http, https, html, html5, css, scss, style,
-                                        browser, firefox, chrome, edge, opera, safari,
-                                        configuration, generator, navigation, menu, dropdown, fab, action, button
-                                        application, interface, provider, api, repository,
-                                        cookie, language, translation, gdpr, dsgvo, privacy,
-                                        asciidoc, aciidoctor, bootstrap, jekyll, liquid,
-                                        hyvor, disqus, git, github, netlify, heroku, apple, microsoft,
-                                        provider, service, internet, support,
-                                        google, analytics, advertising, search, console, silverlight, score,
-                                        j1, template, jekyllone, comment
-
-
+                                        ~~~ j1, jekyll, one, template, ruby, nodejs, gem, jamstack, module,
+                                        provider, google, netlify, bootstrap, facebook, twitter, open, source,
+                                        javascript, css, scss, html, yaml, service, internet, support, analytics,
+                                        advertising, search, console, silverlight, score,  1-Click, deployment,
+                                        responsive, design, theme, desktop, mobile, navigation, static, web, site,
+                                        blog, post, article, royalty, free, images, carousel, slider, gallery,
+                                        video, player, clipboard, cookie, consent, fulltext, search, engine.
 
 categories:                             [ Previewer ]
 tags:                                   [ Highlighter, Rouge ]
@@ -68,16 +26,16 @@ regenerate:                             false
 
 resources:                              [ animate, clipboard, rouge ]
 resource_options:
+
   - toccer:
       collapseDepth:                    3
 
   - attic:
+
       slides:
 
         - url:                          /assets/images/modules/attics/jessica-ruscello-1920x1280.jpg
           alt:                          Photo by Jessica Ruscello Unsplash
-          title:                        Rouge
-          tagline:                      highlighter themes
           badge:
             type:                       unsplash
             author:                     Jessica Ruscello
