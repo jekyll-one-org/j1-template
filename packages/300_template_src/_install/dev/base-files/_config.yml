@@ -63,6 +63,7 @@ version:                                2022.5.3
 #
 copyright:                              © 2022 J1 · All rights reserved
 
+
 # ==============================================================================
 # 2. THEME configuration (Ruby V3)
 #
@@ -114,6 +115,7 @@ copyright:                              © 2022 J1 · All rights reserved
 template:
   name:                                 j1
   config:                               j1_config
+
 
 # ==============================================================================
 # 3. SITE configuration (Ruby V3)
@@ -276,6 +278,7 @@ brand:
 favicon:
   image:                                icons/j1/j1-32x32.ico
   type:                                 image/ico
+
 
 # ==============================================================================
 # 4. JEKYLL specific site configuration (Ruby V3)
@@ -485,6 +488,17 @@ plugins:
 # - jekyll-sass-converter
 
 # ------------------------------------------------------------------------------
+# ALGOLIA Search (Instantsearch)
+#
+algolia:
+  enabled:                              false
+  application_id:                       your_application_id
+  search_only_api_key:                  your_searchonly_api_key
+  index_name:                           your_index_name
+  extensions_to_index:                  [ adoc ]
+  files_to_exclude:                     []
+
+# ------------------------------------------------------------------------------
 # ASCIIDOCTOR (Asciidoc plugin)
 #
 asciidoc_attributes:                    &asciidoc_attributes
@@ -506,17 +520,6 @@ asciidoctor:
   attributes:                           *asciidoc_attributes
 
 # ------------------------------------------------------------------------------
-# ALGOLIA Search (Instantsearch)
-#
-algolia:
-  enabled:                              false
-  application_id:                       your_application_id
-  search_only_api_key:                  your_searchonly_api_key
-  index_name:                           your_index_name
-  extensions_to_index:                  [ adoc ]
-  files_to_exclude:                     []
-
-# ------------------------------------------------------------------------------
 # SAFEMODE
 #
 # If you want to use plugins when running Jekyll in safe mode,
@@ -524,6 +527,7 @@ algolia:
 #
 whitelist:
   - jekyll-asciidoc
+
 
 # ==============================================================================
 # 5. PAGE configuration (Ruby V3)
@@ -663,6 +667,12 @@ defaults:
       layout:                           post
       author:                           Jürgen Adams
       compress:                         true
+
+      image:
+        path:                           /assets/images/promo/home/screenshot.jpg
+        width:                          1200
+        height:                         800
+        alt:                            J1 Template Home
 
       robots:
         index:                          true

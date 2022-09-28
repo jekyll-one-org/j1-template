@@ -63,6 +63,7 @@ version:                                2022.5.3
 #
 copyright:                              © 2022 J1 · All rights reserved
 
+
 # ==============================================================================
 # 2. THEME configuration
 #
@@ -114,6 +115,7 @@ theme:                                  j1-template
 template:
   name:                                 j1
   config:                               j1_config
+
 
 # ==============================================================================
 # 3. SITE configuration
@@ -276,6 +278,7 @@ brand:
 favicon:
   image:                                icons/j1/j1-32x32.ico
   type:                                 image/ico
+
 
 # ==============================================================================
 # 4. JEKYLL specific site configuration
@@ -454,27 +457,6 @@ liquid:
   error_mode:                           warn
 
 # ------------------------------------------------------------------------------
-# PLUGIN configuration
-#
-plugins:
-# - algolia
-  - asciidoctor
-# - asciidoctor-pdf
-  - jekyll-asciidoc
-# - jekyll-feed
-# - jekyll-gist
-# - jekyll-redirect-from
-# - jekyll-sass-converter
-  - jekyll-sitemap
-  - j1-paginator
-
-# ------------------------------------------------------------------------------
-# JEKYLL FEED
-#
-# feed:
-#   path:                                 /assets/data/atom.xml
-
-# ------------------------------------------------------------------------------
 # MARKDOWN
 #
 # Note:
@@ -491,6 +473,29 @@ kramdown:
   toc_levels:                           1..3
   smart_quotes:                         lsquo,rsquo,ldquo,rdquo
   syntax_highlighter:                   rouge
+
+# ------------------------------------------------------------------------------
+# PLUGIN configuration
+#
+plugins:
+# - algolia
+  - asciidoctor
+# - asciidoctor-pdf
+  - jekyll-asciidoc
+# - jekyll-gist
+# - jekyll-redirect-from
+# - jekyll-sass-converter
+
+# ------------------------------------------------------------------------------
+# ALGOLIA Search (Instantsearch)
+#
+algolia:
+  enabled:                              false
+  application_id:                       your_application_id
+  search_only_api_key:                  your_searchonly_api_key
+  index_name:                           your_index_name
+  extensions_to_index:                  [ adoc ]
+  files_to_exclude:                     []
 
 # ------------------------------------------------------------------------------
 # ASCIIDOCTOR (Asciidoc plugin)
@@ -514,17 +519,6 @@ asciidoctor:
   attributes:                           *asciidoc_attributes
 
 # ------------------------------------------------------------------------------
-# ALGOLIA Search (Instantsearch)
-#
-algolia:
-  enabled:                              false
-  application_id:                       your_application_id
-  search_only_api_key:                  your_searchonly_api_key
-  index_name:                           your_index_name
-  extensions_to_index:                  [ adoc ]
-  files_to_exclude:                     []
-
-# ------------------------------------------------------------------------------
 # SAFEMODE
 #
 # If you want to use plugins when running Jekyll in safe mode,
@@ -532,6 +526,7 @@ algolia:
 #
 whitelist:
   - jekyll-asciidoc
+
 
 # ==============================================================================
 # 5. PAGE configuration
@@ -587,8 +582,14 @@ defaults:
 
     values:
       layout:                           page
-      author:                           J1 Team
+      author:                           Jürgen Adams
       compress:                         true
+
+      image:
+        path:                           /assets/images/promo/home/screenshot.jpg
+        width:                          1200
+        height:                         800
+        alt:                            J1 Template Home
 
       robots:
         index:                          true
@@ -629,8 +630,14 @@ defaults:
 
     values:
       layout:                           post
-      author:                           J1 Team
+      author:                           Jürgen Adams
       compress:                         true
+
+      image:
+        path:                           /assets/images/promo/home/screenshot.jpg
+        width:                          1200
+        height:                         800
+        alt:                            J1 Template Home
 
       robots:
         index:                          true
@@ -657,8 +664,14 @@ defaults:
 
     values:
       layout:                           post
-      author:                           J1 Team
+      author:                           Jürgen Adams
       compress:                         true
+
+      image:
+        path:                           /assets/images/promo/home/screenshot.jpg
+        width:                          1200
+        height:                         800
+        alt:                            J1 Template Home
 
       robots:
         index:                          true
@@ -674,6 +687,7 @@ defaults:
       resource_options:
         - toccer:
             collapseDepth:              3
+
 
 # ==============================================================================
 # 6. LAYOUT configuration
