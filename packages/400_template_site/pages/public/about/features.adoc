@@ -1,41 +1,35 @@
 ---
 title:                                  J1 Template
-tagline:                                top features
-date:                                   2022-09-15 00:00:00
+tagline:                                features
+date:                                   2021-04-13 00:00:00
 description: >
-                                        J1 Template is a gem-based template system to be used with the
-                                        static web site generator Jekyll. Find the top features of
-                                        Jekyll One Template and check what can be done for modern web sites
-                                        using j1 template. Download the latest version of the Ruby Gem for
-                                        the template system at https://rubygems.org/gems/j1-template/.
-
-                                        ~~~ j1, jekyll, one, template, ruby, nodejs, gem, jamstack, module,
-                                        provider, google, netlify, bootstrap, facebook, twitter, open, source,
-                                        javascript, css, scss, html, yaml, service, internet, support, analytics,
-                                        advertising, search, console, silverlight, score,  1-Click, deployment,
-                                        responsive, design, theme, desktop, mobile, navigation, static, web, site,
-                                        blog, post, article, royalty, free, images, carousel, slider, gallery,
-                                        video, player, clipboard, cookie, consent, fulltext, search, engine.
+                                        Things you should know about this site,
+                                        about the software used. Read a bit what
+                                        people, what companies has contributed
+                                        to make a project like J1 Template real.
 
 categories:                             [ About ]
-tags:                                   [ J1, Template, Features ]
+tags:                                   [ J1, Features ]
 
 scrollbar:                              false
-comments:                               false
-fab_menu_id:                            page_ctrl
+comments:                               true
 
 permalink:                              /pages/public/about/features/
 regenerate:                             false
 
-resources:                              [ animate, carousel, comments, lightbox ]
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/alexander-redl.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  Photo by Alexander Redl on Unsplash
+
+resources:                              [ animate, comments, lightbox ]
 resource_options:
-
   - attic:
-
-      padding_top:                      550
-
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
       slides:
-
         - url:                          /assets/images/modules/attics/1920x1280/alexander-redl.jpg
           alt:                          Photo by Alexander Redl on Unsplash
           badge:
@@ -73,13 +67,15 @@ endif::[]
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
+== Features
 
-J1 Template is a **gem**-based *template* system to be used with the static
-site generator _Jekyll_. Find the top features of Jekyll One Template and check
-what can be done for modern web sites using j1. Download the latest version of
-the Ruby Gem for the template system at {url-j1--download}[RubyGems, {browser-window--new}].
+J1 Template is a **gem**-based website *template* to be used with the static
+site generator _Jekyll_. The Template System cannot operate on its own.
+A Ruby development environment is needed to run J1. If you're an experienced
+user of _Jekyll_, the latest version is available at
+{url-j1--download}[RubyGems, {browser-window--new}].
 
-== General Features
+=== General
 
 * _Windows_, _Linux_ and _MacOS_ supported
 * _Jekyll_ v4.2 Support
@@ -99,11 +95,11 @@ the Ruby Gem for the template system at {url-j1--download}[RubyGems, {browser-wi
 * Fully configurable, no programming needed
 * Near 100/100/100 _Google Lighthouse_ Scores
 
-== Modules and Extensions
+=== Modules and Extensions
 
 * _Bootstrap_ extensions included
 * _Asciidoctor_ extensions included
-* Infinite Scroll Support
+* Infinite Scoll Support
 * Animate on Scroll Support
 * Smooth-Scoll Support
 * Full-text Search Engine (Lunr) included
@@ -121,7 +117,7 @@ the Ruby Gem for the template system at {url-j1--download}[RubyGems, {browser-wi
 * Slider Module included
 * Video Player Modules included
 
-== Addons and Integrations
+=== Addons and Integrations
 
 * *Starter Web* including featured Example Content
 * *Royalty free* Images included

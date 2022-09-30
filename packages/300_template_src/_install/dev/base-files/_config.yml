@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# ~/_config.yml (Ruby V3)
+# ~/_config.yml
 # Global Jekyll site configuration (development)
 #
 # Product/Info:
@@ -10,11 +10,9 @@
 # J1 Template is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
 # ------------------------------------------------------------------------------
-# WARNING: This configuration can only be used for Ruby V3
-# ------------------------------------------------------------------------------
 
 # ==============================================================================
-# 1. BUILD configuration (Ruby V3)
+# 1. BUILD configuration
 #
 # ------------------------------------------------------------------------------
 #
@@ -42,7 +40,7 @@
 #
 # ------------------------------------------------------------------------------
 #
-# environment (Ruby V3)
+# environment
 # ------------------------------------------------------------------------------
 # Sets the build environment of the website
 #
@@ -53,19 +51,19 @@ environment:                            development
 
 # version
 # ------------------------------------------------------------------------------
-#   Sets the build version of J1 Template Gem (Ruby V3)
+# Sets the build version of J1 Template Gem
 #
 version:                                2022.5.3
 
 # version
 # ------------------------------------------------------------------------------
-#   Sets the build version of J1 Template
+# Sets the build version of J1 Template
 #
 copyright:                              © 2022 J1 · All rights reserved
 
 
 # ==============================================================================
-# 2. THEME configuration (Ruby V3)
+# 2. THEME configuration
 #
 # ------------------------------------------------------------------------------
 #
@@ -76,19 +74,18 @@ copyright:                              © 2022 J1 · All rights reserved
 # managed by the Ruby bundler respectively by the GEM manager "gem". All
 # components are available public at RubyGems.org.
 #
-#
 # theme
 # ------------------------------------------------------------------------------
-#   Sets the name of the (gem-based) theme used for Jekyll (Ruby V3)
-#   serve and build
+# Sets the name of the (gem-based) theme used for Jekyll
+# serve and build
 #
 # theme:                                  j1-template
 
 # ------------------------------------------------------------------------------
-#   J1 Template configuration
-#   Sets J1 Template specific configurations
+# J1 Template configuration
+# Sets J1 Template specific configurations
 #
-#   Note:
+# NOTE:
 #   Parameter "theme" is used by Jekyll >= 3.2.0 for gem-based
 #   templates. For that reason, the configuration parameter for
 #   the J1 Template was changed to "template" to not conflict with
@@ -96,19 +93,19 @@ copyright:                              © 2022 J1 · All rights reserved
 #
 # template.name
 # ------------------------------------------------------------------------------
-#   Sets the theme "path" of J1 Template for the ~/assets/themes
-#   folder. To not conflict with other template systems, all
-#   template assets for J1 Template are stored under the default
-#   path "/assets/themes/j1".
+# Sets the theme "path" of J1 Template for the ~/assets/themes
+# folder. To not conflict with other template systems, all
+# template assets for J1 Template are stored under the default
+# path "/assets/themes/j1".
 #
-#   Note:
+# NOTE:
 #   Do NOT change template.name to other values.
 #
 #   default:                            j1
 #
 # template.config
 # ------------------------------------------------------------------------------
-#   Sets the name of the J1 Template configuration file
+# Sets the name of the J1 Template configuration file
 #
 #   default:                            j1_config
 #
@@ -118,7 +115,7 @@ template:
 
 
 # ==============================================================================
-# 3. SITE configuration (Ruby V3)
+# 3. SITE configuration
 #
 # ------------------------------------------------------------------------------
 #
@@ -126,13 +123,13 @@ template:
 #
 # language
 # ------------------------------------------------------------------------------
-#   Sets the language used by the website. The parameter language
-#   is used by Content-Language entity-header field (meta tag )
-#   that describes the natural language(s) of the intended audience
-#   for the enclosed entity. This might helpful for robots|search
-#   engines.
+# Sets the language used by the website. The parameter language
+# is used by Content-Language entity-header field (meta tag )
+# that describes the natural language(s) of the intended audience
+# for the enclosed entity. This might helpful for robots|search
+# engines.
 #
-#   Note:
+# NOTE:
 #   This might not be equivalent to all the languages used within
 #   the entity-body of the website but should describe the language
 #   the language the site is using "overall".
@@ -144,16 +141,16 @@ template:
 #
 # coding
 # ------------------------------------------------------------------------------
-#   Sets the content coding scheme (character encoding for the
-#   HTML documents) of the website. Used for the meta tag "charset".
+# Sets the content coding scheme (character encoding for the
+# HTML documents) of the website. Used for the meta tag "charset".
 #
 #   values:                             charset
 #   default:                            UTF-8
 #
 # doctype
 # ------------------------------------------------------------------------------
-#   Sets the HTML standard of the website. J1 template is using
-#   HTML5, therefor the doctype is: <!DOCTYPE html>
+# Sets the HTML standard of the website. J1 template is using
+# HTML5, therefor the doctype is: <!DOCTYPE html>
 #
 #   values:                             HTML doc types
 #   default:                            html
@@ -168,35 +165,35 @@ doctype:                                html
 
 # title
 # ------------------------------------------------------------------------------
-#   Sets the ...
+# Sets the ...
 #
 #   values:                             string
 #   default:                            no default
 #
 # slogan
 # ------------------------------------------------------------------------------
-#   Sets the <title> tag within the <head> section.
+# Sets the <title> tag within the <head> section.
 #
 #   values:                             string
 #   default:                            no default
 #
 # description
 # ------------------------------------------------------------------------------
-#   Sets the meta tag for "description"
+# Sets the meta tag for "description"
 #
 #   values:                             string
 #   default:                            no default
 #
 # keywords
 # ------------------------------------------------------------------------------
-#   Sets the meta tag for "keywords"
+# Sets the meta tag for "keywords"
 #
 #   values:                             string (comma separated)
 #   default:                            no default
 #
 # author.name
 # ------------------------------------------------------------------------------
-#   Sets the meta tag for "author"
+# Sets the meta tag for "author"
 #
 #   values:                             string (comma separated)
 #   default:                            no default
@@ -208,18 +205,19 @@ doctype:                                html
 #   is set to "noindex", if set to "true" the tag is set to
 #   "index"
 #
-#   values:                             boolean (true|false)
-#   default:                            false
+# values:                             boolean (true|false)
+# default:                            false
 #
 # robots.follow
 # ------------------------------------------------------------------------------
-#   Controls spider|robots of search engines. Sets the meta
-#   tag for "robots". If set to "false", the meta tag robots
-#   is set to "nofollow", if set to "true" the tag is set to
-#   "follow".
+# Controls spider|robots of search engines. Sets the meta
+# tag for "robots". If set to "false", the meta tag robots
+# is set to "nofollow", if set to "true" the tag is set to
+# "follow".
 #
 #   values:                             boolean (true|false)
 #   default:                            false
+# ------------------------------------------------------------------------------
 #
 title:                                  Jekyll One
 slogan:                                 template for jekyll
@@ -248,9 +246,11 @@ keywords: >
 author:
   name:                                 Juergen Adams
   email:                                juergen@jekyll.one
+  url:                                  https://jekyll.one/
   github:                               username
+  facebook:                             username
   twitter:                              username
-  feedburner:                           feedname
+# feedburner:                           feedname
 
 webmaster:
   email:                                webmaster@jekyll.one
@@ -281,7 +281,7 @@ favicon:
 
 
 # ==============================================================================
-# 4. JEKYLL specific site configuration (Ruby V3)
+# 4. JEKYLL specific site configuration
 #
 # ------------------------------------------------------------------------------
 #
@@ -307,22 +307,26 @@ favicon:
 # for best support of various Web Servers with NO addtional
 # configuration needed.
 #
-# Note: The build-in Web server Ruby "Webrick" for Jekyll support
+# NOTE: The build-in Web server Ruby "Webrick" for Jekyll support
 # pretty "links" out of the box. If other web servers are used to
 # serve the Web like Apache or Nginx, "extensionless" URLs are to
 # be enabled for those. See https://jekyllrb.com/docs/permalinks/
 # for more details.
 #
-# Note: For development, respectively "live-reload" functionality,
-# webpack-dev-server is used. The build-in Web server "Express"
-# for Webpack does *NOT* support "pretty links" out of the box.
+# NOTE:
+#   For development, respectively "live-reload" functionality,
+#   webpack-dev-server is used. The build-in Web server "Express"
+#   for Webpack does *NOT* support "pretty links" out of the box.
 #
-# Note: The permalink style can individualy configured by
-# frontmatter variables. It is highly recommended to use a
-# "pretty style" for individual permalinks as well. For that
-# reason, the permalink should always have a trailing backslash.
+# NOTE:
+#   The permalink style can individualy configured by
+#   frontmatter variables. It is highly recommended to use a
+#   "pretty style" for individual permalinks as well. For that
+#   reason, the permalink should always have a trailing backslash.
 #
-# See: https://jekyllrb.com/docs/permalinks/#template-variables
+#   See: https://jekyllrb.com/docs/permalinks/#template-variables
+#
+# ------------------------------------------------------------------------------
 #
 permalink:                              pretty
 
@@ -410,7 +414,8 @@ strict_front_matter:                    false
 # ------------------------------------------------------------------------------
 # SASS conversion options
 #
-#   style, possible values: compact|compressed|expanded|nested
+# Sets the style of the generate CSS file.
+# Possible values: compact|compressed|expanded|nested
 #
 sass:
   sass_dir:                             _sass/scss
@@ -459,8 +464,9 @@ liquid:
 # ------------------------------------------------------------------------------
 # MARKDOWN
 #
-# Note:
-# Option input/GFM turns on the recognition of Github Flavoured Markdown (GFM)
+# NOTE:
+#   Option input/GFM turns on the recognition of Github Flavoured
+#   Markdown (GFM)
 #
 markdown:                               kramdown
 markdown_ext:                           markdown,md
@@ -482,7 +488,6 @@ plugins:
   - asciidoctor
 # - asciidoctor-pdf
   - jekyll-asciidoc
-# - jekyll-feed
 # - jekyll-gist
 # - jekyll-redirect-from
 # - jekyll-sass-converter
@@ -507,7 +512,7 @@ asciidoc_attributes:                    &asciidoc_attributes
   icons:                                font
   imagesdir:                            /assets/images
   iconsdir:                             '{imagesdir}/icons/asciidoc'
-# experimental:                         true                                    # enable the UI macros, e.g kbd:[], for Asciidoctor globally
+  experimental:                         true                                    # enable the UI macros, e.g kbd:[], for Asciidoctor globally
 
 asciidoc:
   processor:                            asciidoctor
@@ -530,7 +535,7 @@ whitelist:
 
 
 # ==============================================================================
-# 5. PAGE configuration (Ruby V3)
+# 5. PAGE configuration
 #
 # ------------------------------------------------------------------------------
 #
@@ -543,7 +548,6 @@ excerpt_truncate_words:                 100
 # ------------------------------------------------------------------------------
 # FRONTMATTER defaults
 #
-
 # Using the YAML Front Matter is a way the (individual) configuration
 # for post and pages can be specified. Very often, a lot of config
 # options are repeated on each and every post or page. Setting the
@@ -584,6 +588,7 @@ defaults:
     values:
       layout:                           page
       author:                           Jürgen Adams
+      author_url:                       https://jekyll.one/
       compress:                         true
 
       image:
@@ -632,6 +637,7 @@ defaults:
     values:
       layout:                           post
       author:                           Jürgen Adams
+      author_url:                       https://jekyll.one/
       compress:                         true
 
       image:
@@ -666,6 +672,7 @@ defaults:
     values:
       layout:                           post
       author:                           Jürgen Adams
+      author_url:                       https://jekyll.one/
       compress:                         true
 
       image:
@@ -691,7 +698,7 @@ defaults:
 
 
 # ==============================================================================
-# 6. LAYOUT configuration (Ruby V3)
+# 6. LAYOUT configuration
 #
 # ------------------------------------------------------------------------------
 #
@@ -700,61 +707,62 @@ defaults:
 #
 # enabled
 # ------------------------------------------------------------------------------
-#   Enables|Disables the use of compress.
-#   If enabled, all HTML pages generated for ALL layout
-#   get compressed for production. To use compress, set
-#   the ENVIRONMENT to production and the value of
-#   compress_html.enable to "true".
+# Enables|Disables the use of compress.
+# If enabled, all HTML pages generated for ALL layout
+# get compressed for production. To use compress, set
+# the ENVIRONMENT to production and the value of
+# compress_html.enable to "true".
 #
-#   See http://jch.penibelst.de/ for more details.
+# See http://jch.penibelst.de/ for more details.
 #
 #   values:                             boolean (true|false)
 #   default:                            false
 #
 # profile
 # ------------------------------------------------------------------------------
-#   A boolean value to turn on the profile mode. If true, the
-#   layout creates a HTML table after the compressed content. The
-#   table contains the file size in bytes during the compressing
-#   steps.
+# A boolean value to turn on the profile mode. If true, the
+# layout creates a HTML table after the compressed content. The
+# table contains the file size in bytes during the compressing
+# steps.
 #
-#   The profile table provides attributes for styling and reading.
-#   The id ends with build’s timestamp to be unique enough.
+# The profile table provides attributes for styling and reading.
+# The id ends with build’s timestamp to be unique enough.
 #
 #   <table
 #     id="compress_html_profile_YYYYMMDD"
 #     class="compress_html_profile"
 #   >
 #
-#   This page itself is compressed in profile mode for analysis,
-#   testing or educational purposes only. The table written to
-#   the end of a page.
+# This page itself is compressed in profile mode for analysis,
+# testing or educational purposes only. The table written to
+# the end of a page.
 #
-#   NOTE: Never profile pages for public use.
+# NOTE:
+#   Never profile pages for public use.
 #
 #   values:                             boolean (true|false)
 #   default:                            false
 #
 # blanklines
 # ------------------------------------------------------------------------------
-#   A boolean value to turn on blanklines mode. This mode will
-#   only remove lines consisting of whitespace and leave other
-#   lines alone.
+# A boolean value to turn on blanklines mode. This mode will
+# only remove lines consisting of whitespace and leave other
+# lines alone.
 #
 #   values:                             boolean (true|false)
 #   default:                            false
 #
 # clippings
 # ------------------------------------------------------------------------------
-#   An array of elements to clip whitespace around them. The
-#   following elements may be safe to clip:
+# An array of elements to clip whitespace around them. The
+# following elements may be safe to clip:
 #
 #     - Metadata
 #     - Sections
 #     - Grouping content (except the pre element)
 #     - Tabular data
 #
-#   Use the shortcut all to clip all safe elements.
+# Use the shortcut all to clip all safe elements.
 #
 #   Example:
 #
@@ -765,9 +773,9 @@ defaults:
 #
 # comments
 # ------------------------------------------------------------------------------
-#   An array of exactly two comment tags to strip comments
-#   enclosed by them. The first string must be the start tag,
-#   the second must be the end tag.
+# An array of exactly two comment tags to strip comments
+# enclosed by them. The first string must be the start tag,
+# the second must be the end tag.
 #
 #   Example:
 #
@@ -778,8 +786,8 @@ defaults:
 #
 # startings
 # ------------------------------------------------------------------------------
-#   An array of elements with optional start tags. These start
-#   tags will be >>removed<<.
+# An array of elements with optional start tags. These start
+# tags will be >>removed<<.
 #
 #   Example:
 #
@@ -790,9 +798,9 @@ defaults:
 #
 # endings
 # ------------------------------------------------------------------------------
-#   An array of elements with optional end tags. These end tags
-#   will be >>removed<<. Use the shortcut all to remove all
-#   optional endings.
+# An array of elements with optional end tags. These end tags
+# will be >>removed<<. Use the shortcut all to remove all
+# optional endings.
 #
 #   Example:
 #
@@ -803,10 +811,10 @@ defaults:
 #
 # ignore.envs
 # ------------------------------------------------------------------------------
-#   An array of environments given by ENV["JEKYLL_ENV"]
-#   where the compress layout is IGNORED. This is useful
-#   while developing a website the content should NOT
-#   compressed.
+# An array of environments given by ENV["JEKYLL_ENV"]
+# where the compress layout is IGNORED. This is useful
+# while developing a website the content should NOT
+# compressed.
 #
 #   Example:
 #

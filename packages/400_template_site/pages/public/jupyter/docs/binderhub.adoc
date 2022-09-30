@@ -8,14 +8,6 @@ description: >
                                         BinderHub, an open-source tool that runs on Kubernetes, a portable,
                                         extensible, open-source platform for managing containerized services.
 
-                                        ~~~ j1, jekyll, one, template, ruby, nodejs, gem, jamstack, module,
-                                        provider, google, netlify, bootstrap, facebook, twitter, open, source,
-                                        javascript, css, scss, html, yaml, service, internet, support, analytics,
-                                        advertising, search, console, silverlight, score,  1-Click, deployment,
-                                        responsive, design, theme, desktop, mobile, navigation, static, web, site,
-                                        blog, post, article, royalty, free, images, carousel, slider, gallery,
-                                        video, player, clipboard, cookie, consent, fulltext, search, engine.
-
 categories:                             [ Software, Python ]
 tags:                                   [ Binder, API ]
 
@@ -26,14 +18,17 @@ permalink:                              /pages/public/jupyter/docs/binderhub/
 regenerate:                             false
 fab_menu_id:                            page_ctrl
 
+image:
+  path:                                 /assets/images/modules/attics/shubham-dhage-1920x1280.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  Photo by Shubham Dhage on Unsplash
+
 resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
-
   - attic:
       opacity:                          0.3
-
       slides:
-
         - url:                          /assets/images/modules/attics/shubham-dhage-1920x1280.jpg
           alt:                          Photo by Shubham Dhage on Unsplash
           badge:
@@ -247,7 +242,7 @@ ffmpeg
 The apt file is a simple text file that specifies OS packages. The format is
 simple: use one package to be installed *per line*.
 
-NOTE: The apt command is a powerful command-line tool that works with
+NOTE: The apt command is a powerful command line tool that works with
 Ubuntu's Advanced Packaging Tool (APT) performs such functions as
 installation of new software packages, upgrade of existing software packages,
 and even upgrading the entire Ubuntu system.

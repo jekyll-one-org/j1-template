@@ -314,7 +314,7 @@ additional interactive elements.
 
 === Exporting with `nbinteract`
 
-Installing the `nbinteract` package installs a command-line tool for
+Installing the `nbinteract` package installs a command line tool for
 converting notebooks into HTML pages. For example, to convert a notebook
 called `Hello.ipynb` using the Binder spec `calebs11/nbinteract-image/main`:
 

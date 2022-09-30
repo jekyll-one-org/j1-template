@@ -1,35 +1,30 @@
 ---
-title:                                  Use If-This-Than-That
+title:                                  If-This-Than-That
 tagline:                                sychronize RSS feeds with social media
-date:                                   2020-11-03 00:00:00 +100
+date:                                   2020-11-03 00:00:00
 description: >
                                         Welcome to the pages of J1 Template. If your here
                                         first time, a good decision you get on that page first.
                                         For sure, there is no better place to go.
-
-                                        ~~~ j1, jekyll, one, template, ruby, nodejs, gem, jamstack, module,
-                                        provider, google, netlify, bootstrap, facebook, twitter, open, source,
-                                        javascript, css, scss, html, yaml, service, internet, support, analytics,
-                                        advertising, search, console, silverlight, score,  1-Click, deployment,
-                                        responsive, design, theme, desktop, mobile, navigation, static, web, site,
-                                        blog, post, article, royalty, free, images, carousel, slider, gallery,
-                                        video, player, clipboard, cookie, consent, fulltext, search, engine.
 
 categories:                             [ Info ]
 tags:                                   [ Guidance, Start Places, Introduction ]
 
 fab_menu_id:                            default
 
+image:
+  path:                                 /assets/images/modules/attics/tldr-1920x800.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  Photo by Alexander Redl on Unsplash
+
 permalink:                              /pages/public/learn/use_itfft/
 regenerate:                             false
 
 resources:                              [ animate, comments ]
 resource_options:
-
   - attic:
-
       slides:
-
         - url:                          /assets/images/modules/attics/tldr-1920x800.jpg
           alt:                          Photo by Alexander Redl on Unsplash
           badge:

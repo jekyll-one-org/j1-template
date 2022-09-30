@@ -9,30 +9,25 @@ description: >
                                         Lab. All implemented Asciidoctor Extensions can be
                                         found in this article.
 
-                                        ~~~ j1, jekyll, one, template, ruby, nodejs, gem, jamstack, module,
-                                        provider, google, netlify, bootstrap, facebook, twitter, open, source,
-                                        javascript, css, scss, html, yaml, service, internet, support, analytics,
-                                        advertising, search, console, silverlight, score,  1-Click, deployment,
-                                        responsive, design, theme, desktop, mobile, navigation, static, web, site,
-                                        blog, post, article, royalty, free, images, carousel, slider, gallery,
-                                        video, player, clipboard, cookie, consent, fulltext, search, engine.
-
 
 categories:                             [ Roundtrip ]
 tags:                                   [ Introduction, Module, Asciidoc, Extension ]
 
 fab_menu_id:                            page_ctrl
 
+image:
+  path:                                 /assets/images/pages/roundtrip/puzzle-1920x1280-bw.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  puzzle-1920x1280-bw
+
 permalink:                              /pages/public/learn/roundtrip/asciidoc_extensions/
 regenerate:                             false
 
 resources:                              [ animate, clipboard, lightbox, iconify, twemoji, rouge ]
 resource_options:
-
   - attic:
-
       slides:
-
         - url:                          /assets/images/pages/roundtrip/puzzle-1920x1280-bw.jpg
           alt:                          puzzle-1920x1280-bw
 ---

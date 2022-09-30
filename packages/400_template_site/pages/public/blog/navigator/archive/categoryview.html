@@ -16,6 +16,12 @@ pagination:
   enabled:                              false
   permalink:                            /page:num/
 
+image:
+  path:                                 /assets/images/modules/attics/matthaeus-1920x1280.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  Photo by Matthaeus on Unsplash
+
 analytics:                              true
 comments:                               false
 
@@ -24,11 +30,12 @@ regenerate:                             false                                   
 
 resources:                              [ animate ]
 resource_options:
+
   - attic:
+      alignY:                           top
       slides:
         - url:                          /assets/images/modules/attics/matthaeus-1920x1280.jpg
-          alt:                          Photo by Matthaeus
-          alignY:                       top
+          alt:                          Photo by Matthaeus on Unsplash
           badge:
             type:                       unsplash
             author:                     Matthaeus
@@ -184,8 +191,9 @@ site_category_word_list:    {{site_category_word_list | debug}}
   {% endif %}
 
   <div class="post-headline">
-    <h1 id="post-headline notoc" class="mt-5">{{view_headline}}</h1>
+    <h2 id="post-headline notoc" class="mt-5">{{view_headline}}</h2>
   </div>
+
   {% assign tags = site.categories|sort %}
   {% for tag in tags %}
     {% assign category = tag|first %}
@@ -209,7 +217,9 @@ site_category_word_list:    {{site_category_word_list | debug}}
           {% endfor %}
 
           <article class="card raised-z3 mb-5">
-            <h3 id="{{100000|rand}}" class="card-header bg-primary notranslate">{{post.title}}</h3>
+            <div class="card-header bg-primary">
+              <h3 id="{{100000|rand}}" class="card-header bg-primary notranslate">{{post.title}}</h3>
+            </div>
             <div class="row mx-0">
               <!-- [INFO   ] [j1.pages.blog.navigator.categoryview     ] [Check if post image is available] -->
               {% if post.image %}

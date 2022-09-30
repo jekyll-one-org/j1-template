@@ -7,11 +7,13 @@ tags:                                   [ USA, Minnesota, Cities, Minneapolis ]
 
 series:                                 wiki-series
 
-image:
-  path:                                 /assets/images/collections/blog/wikipedia/minneapolis.1200x400.jpg
-  width:                                1200
-  height:                               400
-  alt:                                  Minneapolis
+image:                                  /assets/images/collections/blog/wikipedia/minneapolis.1200x400.jpg
+
+# image:
+#   path:                               /assets/images/collections/blog/wikipedia/minneapolis.1200x400.jpg
+#   width:                              1280
+#   height:                             400
+#   alt:                                Minneapolis
 
 fab_menu_id:                            open_toc_reload
 regenerate:                             false

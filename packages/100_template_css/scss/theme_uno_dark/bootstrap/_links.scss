@@ -23,3 +23,14 @@ a:hover {
   text-decoration: none;
   color: $gray-600 !important;
 }
+
+li > a {
+  color: #e0e0e0 !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+}
+
+li > a:hover {
+  color: #757575 !important;
+  font-weight: 500 !important;
+}

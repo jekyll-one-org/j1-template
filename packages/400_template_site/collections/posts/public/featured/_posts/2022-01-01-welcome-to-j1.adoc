@@ -6,11 +6,13 @@ tagline:                                jekyll for everyone
 categories:                             [ Featured ]
 tags:                                   [ J1, Jekyll ]
 
-image:
-  path:                                 /assets/images/modules/attics/katie-moum-1920x1280.jpg
-  width:                                1920
-  height:                               1280
-  alt:                                  Cookies
+image:                                  /assets/images/modules/attics/katie-moum-1920x1280.jpg
+
+# image:
+#   path:                               /assets/images/modules/attics/katie-moum-1920x1280.jpg
+#   width:                              1920
+#   height:                             1280
+#   alt:                                Jekyll for Everyone
 
 fab_menu_id:                            page_ctrl
 regenerate:                             false

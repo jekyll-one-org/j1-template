@@ -44,24 +44,24 @@ module J1Feed
       @template_name                    = @module_config['template_name']
       @feed_output                      = @module_config['feed_output']
 
-      if @module_config['excerpt_only']
-        Jekyll.logger.info "J1 Feed:", "generate feed for: excerpts only"
-      end
-
       if disabled_in_development?
         Jekyll.logger.info "J1 Feed:", "generate feed skipped in mode development"
         return
       end
 
       if plugin_disabled?
-        Jekyll.logger.info "J1 Feed:", "generate feed disabled"
+        Jekyll.logger.info "J1 Feed:", "generate feed: disabled"
         return
       end
 
+      if @module_config['excerpt_only']
+        Jekyll.logger.info "J1 Feed:", "generate feed for: excerpts only"
+      end
+
       if @module_config['posts_limit'] < 100
-        Jekyll.logger.info "J1 Feed:", "generate feed for: #posts to #{@module_config['posts_limit']}"
+        Jekyll.logger.info "J1 Feed:", "generate feed for: #posts of #{@module_config['posts_limit']}"
       else
-        Jekyll.logger.info "J1 Feed:", "generate feed for: #posts to unlimited"
+        Jekyll.logger.info "J1 Feed:", "generate feed for: #posts of unlimited"
       end
 
       collections.each do |name, meta|

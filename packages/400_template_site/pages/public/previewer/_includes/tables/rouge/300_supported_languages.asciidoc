@@ -315,7 +315,7 @@ have the whole beautiful world of Python at your fingertips, in Lisp form.
 
 |`idlang`
 |idlang
-|IDLang, the https://old.dataone.org/software-tools/interactive-data-language-idl[Interactive Data Language, {browser-window--new}]
+|IDLang, the https://www.l3harrisgeospatial.com/Software-Technology/IDL[Interactive Data Language, {browser-window--new}]
 (IDL). IDL is a high-level language for data manipulation, visualization and
 analysis. IDL has strong signal and image processing capabilities and extensive
 math and statistical functions.

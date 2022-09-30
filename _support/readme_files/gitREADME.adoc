@@ -91,7 +91,6 @@ Remote:
 
     git push --set-upstream origin main
 
-
 == Delete branches
 
 See:
@@ -110,13 +109,11 @@ Local:
 
   $ git branch -d <branch_name>
 
-
 == Create branch from commit
 
 Create a branch from a previous commit using Git:
 
   git branch branch_name <sha1-of-commit>
-
 
 == Reset repo to a commit
 
@@ -128,12 +125,10 @@ Remote:
 
   git push --force origin main
 
-
 == Push an existing repository from the command line
 
 git remote add github https://github.com/jekyll-one-org/heroku_starter_app.git
 git push -u github master
-
 
 == Removing non-repository files with git
 
@@ -157,7 +152,6 @@ Also removing ignored files :
 
 git clean -dfx
 
-
 == Delete a Git tag
 
 Use the “git tag” command with the “-d” option
@@ -169,7 +163,6 @@ Use the “git tag” command with the “-d” option
 === From remote
 
 git push -d origin v2022.5.3
-
 
 == Set a Git tag
 

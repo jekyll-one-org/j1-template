@@ -9,14 +9,6 @@ description: >
                                         brilliant. J1 Template supports your Web for full responsiveness, for the
                                         best user experience on all modern devices.
 
-                                        ~~~ j1, jekyll, one, template, ruby, nodejs, gem, jamstack, module,
-                                        provider, google, netlify, bootstrap, facebook, twitter, open, source,
-                                        javascript, css, scss, html, yaml, service, internet, support, analytics,
-                                        advertising, search, console, silverlight, score,  1-Click, deployment,
-                                        responsive, design, theme, desktop, mobile, navigation, static, web, site,
-                                        blog, post, article, royalty, free, images, carousel, slider, gallery,
-                                        video, player, clipboard, cookie, consent, fulltext, search, engine.
-
 
 categories:                             [ Info ]
 tags:                                   [ Plan, Template ]
@@ -27,6 +19,12 @@ robots:
 
 exclude_from_search:                    true
 
+image:
+  path:                                 /assets/images/modules/attics/gift-from-hand-1920x1280.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  Plan Details
+
 comments:                               false
 fab_menu_id:                            page_ctrl
 
@@ -35,13 +33,10 @@ regenerate:                             false
 
 resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
-
   - attic:
-
       slides:
-
         - url:                          /assets/images/modules/attics/gift-from-hand-1920x1280.jpg
-          tagline:                      plan details
+          alt:                          Plan Details
 ---
 
 // Page Initializer

@@ -7,14 +7,6 @@ description: >
                                         share interactive web pages easily. Interactive explanations of concepts are
                                         useful for communicating and explaining tricky concepts.
 
-                                        ~~~ j1, jekyll, one, template, ruby, nodejs, gem, jamstack, module,
-                                        provider, google, netlify, bootstrap, facebook, twitter, open, source,
-                                        javascript, css, scss, html, yaml, service, internet, support, analytics,
-                                        advertising, search, console, silverlight, score,  1-Click, deployment,
-                                        responsive, design, theme, desktop, mobile, navigation, static, web, site,
-                                        blog, post, article, royalty, free, images, carousel, slider, gallery,
-                                        video, player, clipboard, cookie, consent, fulltext, search, engine.
-
 categories:                             [ Software, Python ]
 tags:                                   [ Binder, Jupyter, Notebooks ]
 
@@ -22,17 +14,20 @@ scrollbar:                              false
 fab_menu_id:                            page_ctrl
 personalization:                        true
 
+image:
+  path:                                 /assets/images/modules/attics/tldr-1920x800.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  Photo by Alexander Redl on Unsplash
+
 permalink:                              /pages/public/jupyter/where-to-go/
 regenerate:                             false
 
 resources:                              [ animate, clipboard, rouge ]
 resource_options:
-
   - attic:
       opacity:                          0.3
-
       slides:
-
         - url:                          /assets/images/modules/attics/tldr-1920x800.jpg
           alt:                          Photo by Alexander Redl on Unsplash
           badge:

@@ -220,7 +220,7 @@ module Jekyll
     end
 
     class Drop < Jekyll::Drops::Drop
-      # include Jekyll::SeoTag::UrlHelper
+      include Jekyll::SeoTag::UrlHelper
 
       TITLE_SEPARATOR = " | "
       FORMAT_STRING_METHODS = [
@@ -663,55 +663,55 @@ module Jekyll
   end
 end
 
-module Jekyll
-  class SeoTag
-    # This module is deprecated, but is included in the Gem to avoid a breaking
-    # change and should be removed at the next major version bump
-    module JSONLD
-      METHODS_KEYS = {
-        :json_context   => "@context",
-        :type           => "@type",
-        :name           => "name",
-        :page_title     => "headline",
-        :json_author    => "author",
-        :json_image     => "image",
-        :date_published => "datePublished",
-        :date_modified  => "dateModified",
-        :description    => "description",
-        :publisher      => "publisher",
-        :main_entity    => "mainEntityOfPage",
-        :links          => "sameAs",
-        :canonical_url  => "url",
-      }.freeze
+# module Jekyll
+#   class SeoTag
+#     # This module is deprecated, but is included in the Gem to avoid a breaking
+#     # change and should be removed at the next major version bump
+#     module JSONLD
+#       METHODS_KEYS = {
+#         :json_context   => "@context",
+#         :type           => "@type",
+#         :name           => "name",
+#         :page_title     => "headline",
+#         :json_author    => "author",
+#         :json_image     => "image",
+#         :date_published => "datePublished",
+#         :date_modified  => "dateModified",
+#         :description    => "description",
+#         :publisher      => "publisher",
+#         :main_entity    => "mainEntityOfPage",
+#         :links          => "sameAs",
+#         :canonical_url  => "url",
+#       }.freeze
+#
+#       # Self should be a Jekyll::SeoTag::Drop instance (when extending the module)
+#       def json_ld
+#         Jekyll.logger.warn "Jekyll::SeoTag::JSONLD is deprecated"
+#         @json_ld ||= JSONLDDrop.new(self)
+#       end
+#     end
+#   end
+# end
 
-      # Self should be a Jekyll::SeoTag::Drop instance (when extending the module)
-      def json_ld
-        Jekyll.logger.warn "Jekyll::SeoTag::JSONLD is deprecated"
-        @json_ld ||= JSONLDDrop.new(self)
-      end
-    end
-  end
-end
 
-
-module Jekyll
-  class SeoTag
-    # Mixin to share common URL-related methods between class
-    module UrlHelper
-      private
-
-      # Determines if the given string is an absolute URL
-      #
-      # Returns true if an absolute URL
-      # Returns false if it's a relative URL
-      # Returns nil if it is not a string or can't be parsed as a URL
-      def absolute_url?(string)
-        return unless string
-
-        Addressable::URI.parse(string).absolute?
-      rescue Addressable::URI::InvalidURIError
-        nil
-      end
-    end
-  end
-end
+# module Jekyll
+#   class SeoTag
+#     # Mixin to share common URL-related methods between class
+#     module UrlHelper
+#       private
+#
+#       # Determines if the given string is an absolute URL
+#       #
+#       # Returns true if an absolute URL
+#       # Returns false if it's a relative URL
+#       # Returns nil if it is not a string or can't be parsed as a URL
+#       def absolute_url?(string)
+#         return unless string
+#
+#         Addressable::URI.parse(string).absolute?
+#       rescue Addressable::URI::InvalidURIError
+#         nil
+#       end
+#     end
+#   end
+# end

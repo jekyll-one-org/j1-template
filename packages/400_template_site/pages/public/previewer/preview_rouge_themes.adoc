@@ -7,16 +7,14 @@ description: >
                                         syntax highlighter. It can highlight over 100 different
                                         languages fully integrated with J1 Template.
 
-                                        ~~~ j1, jekyll, one, template, ruby, nodejs, gem, jamstack, module,
-                                        provider, google, netlify, bootstrap, facebook, twitter, open, source,
-                                        javascript, css, scss, html, yaml, service, internet, support, analytics,
-                                        advertising, search, console, silverlight, score,  1-Click, deployment,
-                                        responsive, design, theme, desktop, mobile, navigation, static, web, site,
-                                        blog, post, article, royalty, free, images, carousel, slider, gallery,
-                                        video, player, clipboard, cookie, consent, fulltext, search, engine.
-
 categories:                             [ Previewer ]
 tags:                                   [ Highlighter, Rouge ]
+
+image:
+  path:                                 /assets/images/modules/attics/jessica-ruscello-1920x1280.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  Photo by Jessica Ruscello Unsplash
 
 scrollbar:                              false
 fab_menu_id:                            page_ctrl
@@ -26,14 +24,10 @@ regenerate:                             false
 
 resources:                              [ animate, clipboard, rouge ]
 resource_options:
-
   - toccer:
       collapseDepth:                    3
-
   - attic:
-
       slides:
-
         - url:                          /assets/images/modules/attics/jessica-ruscello-1920x1280.jpg
           alt:                          Photo by Jessica Ruscello Unsplash
           badge:

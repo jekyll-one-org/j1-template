@@ -12,16 +12,14 @@ description: >
                                         from AsciiDoc to PDF. The aim of this library is to take the pain
                                         out of creating PDF documents from AsciiDoc.
 
-                                        ~~~ j1, jekyll, one, template, ruby, nodejs, gem, jamstack, module,
-                                        provider, google, netlify, bootstrap, facebook, twitter, open, source,
-                                        javascript, css, scss, html, yaml, service, internet, support, analytics,
-                                        advertising, search, console, silverlight, score,  1-Click, deployment,
-                                        responsive, design, theme, desktop, mobile, navigation, static, web, site,
-                                        blog, post, article, royalty, free, images, carousel, slider, gallery,
-                                        video, player, clipboard, cookie, consent, fulltext, search, engine.
-
 categories:                             [ Knowledge ]
 tags:                                   [ Asciidoctor, PDF, Converter ]
+
+image:
+  path:                                 /assets/images/modules/attics/sigmund-1920x1280.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  Photo by Sigmund on Unsplash
 
 sitemap:                                false
 robots:
@@ -33,14 +31,11 @@ regenerate:                             false
 
 resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
-
   - attic:
-
+    alignY:                             0.3
       slides:
-
         - url:                          /assets/images/modules/attics/sigmund-1920x1280.jpg
           alt:                          Photo by Sigmund on Unsplash
-          alignY:                       0.3
           badge:
             type:                       unsplash
             author:                     Sigmund

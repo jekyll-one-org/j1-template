@@ -10,14 +10,6 @@ description: >
                                         module supports the users for browsing articles by sorting criteria
                                         like category and date or browsing the archive for all articles.
 
-                                        ~~~ j1, jekyll, one, template, ruby, nodejs, gem, jamstack, module,
-                                        provider, google, netlify, bootstrap, facebook, twitter, open, source,
-                                        javascript, css, scss, html, yaml, service, internet, support, analytics,
-                                        advertising, search, console, silverlight, score,  1-Click, deployment,
-                                        responsive, design, theme, desktop, mobile, navigation, static, web, site,
-                                        blog, post, article, royalty, free, images, carousel, slider, gallery,
-                                        video, player, clipboard, cookie, consent, fulltext, search, engine.
-
 categories:                             [ Blog ]
 tags:                                   [ Navigator, Date ]
 
@@ -28,6 +20,12 @@ fab_menu_id:                            open_toc
 pagination:
   enabled:                              false
   permalink:                            /page:num/
+
+image:
+  path:                                 /assets/images/modules/attics/matthaeus-1920x1280.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  Photo by Matthaeus on Unsplash
 
 analytics:                              true
 advertising:                            false
@@ -40,12 +38,10 @@ resources:                              [ animate ]
 resource_options:
 
   - attic:
-
       alignY:                           top
       slides:
-
         - url:                          /assets/images/modules/attics/matthaeus-1920x1280.jpg
-          alt:                          Photo by Matthaeus
+          alt:                          Photo by Matthaeus on Unsplash
           badge:
             type:                       unsplash
             author:                     Matthaeus
@@ -207,7 +203,9 @@ site_category_word_list:    {{site_category_word_list | debug}}
       {% assign excerpt = post.excerpt|truncatewords: truncate_words|replace:'...',' ...' %}
       <li>
         <article class="card raised-z3 mb-5">
-          <h3 id="{{100000|rand}}" class="card-header bg-primary notranslate">{{post.title}}</h3>
+          <div class="card-header bg-primary">
+            <h3 id="{{100000|rand}}" class="card-header bg-primary notranslate">{{post.title}}</h3>
+          </div>
           <div class="row mx-0">
             <!-- [INFO   ] [j1.pages.blog.navigator.dateview         ] [Check if post image is available] -->
             {% if post.image %}
