@@ -1,0 +1,74 @@
+== site.webmaster_verifications
+
+=== Google
+
+See: https://developers.google.com/search/docs/advanced/crawling/special-tags?hl=de
+
+Du kannst dieses Tag auf der Startseite deiner Website zur Bestätigung der
+Inhaberschaft für die Search Console nutzen. Die Werte der Attribute
+name und content müssen einschließlich der Groß-/Kleinschreibung exakt
+mit dem Inhalt übereinstimmen, der dir übermittelt wurde.
+
+meta name: "google-site-verification"
+
+=== Facebook
+
+See: https://stackoverflow.com/questions/10836135/when-do-i-need-a-fbapp-id-or-fbadmins
+
+You can include either of these tags or both, depending on how many people
+you want to admin the Insights, etc. A single as fb:admins is pretty much a
+minimum requirement. The rest of the Open Graph tags will still be picked
+up when people share and like your URL, however it may cause problems in the
+future, so please include one of the above.
+
+fb:admins is specified like this:
+<meta property="fb:admins" content="USER_ID"/>
+OR
+<meta property="fb:admins" content="USER_ID,USER_ID2,USER_ID3"/>
+
+and fb:app_id like this:
+<meta property="fb:app_id" content="APPID"/>
+
+
+NOTE:
+To use the Like Button and have the Open Graph inspect your website, you need
+an application. So you need to associate the Like Button with a 'fb:app_id'.
+
+If you want other users to see the administration page for your website on
+Facebook you add fb:admins. So if you are the developer of the application
+and the website owner there is no need to add 'fb:admins'.
+
+==== facebook.author
+
+article:author lets a publisher link an article to the Facebook profile of
+the author. When the article is shared in News Feed, a "follow" button is
+displayed so people can follow the author. The author needs to have Follow
+activated on his or her profile for this button to appear.
+
+<meta property="article:author" content="https://www.facebook.com/fareedzakaria" />
+
+==== facebook.publisher
+
+See: https://developers.facebook.com/blog/post/2013/06/19/platform-updates--new-open-graph-tags-for-media-publishers-and-more/
+
+As mentioned in our https://developers.facebook.com/docs/sharing/best-practices[documentation],
+media publishers should include Open Graph tags in their article's HTML to
+generate better previews of their content when shared on Facebook. Toda
+we're introducing updates to two tags:
+
+`article:publisher` lets a publisher link an article to their own Facebook
+page. When the article is shared in News Feed, a "like" button is displayed
+so people can like the publisher page.
+<meta property="article:publisher" content="https://www.facebook.com/cnn" />
+
+==== facebook.app_id
+
+Including the fb:app_id tag in your HTML HEAD will allow the Facebook scraper
+to associate the Open Graph entity for that URL with an application. This
+will allow any admins of that app to view Insights about that URL and any
+social plugins connected with it.
+
+==== facebook.admins
+
+The fb:admins tag is similar, but allows you to just specify each user ID
+that you would like to give the permission to do the above.

@@ -1,0 +1,94 @@
+---
+layout:                 page
+description:            Jekyll commandline parameters
+title:                  Jekyll Commandline
+tagline:                Available Jekyll commandline parameters
+group:                  pages
+toc:                    true
+---
+
+:website:               https://jekyllrb.com/docs/posts/
+:revnumber:             3.2.1
+
+//Ref
+:liquid-date-formats:   http://docs.shopify.com/themes/liquid-documentation/filters/additional-filters#date
+
+
+[.boxShadow]
+====
+Not everything is a post or a page. Maybe you want to document the various
+methods in your OpenSource project, members of a team, or talks at a
+conference.
+
+Collections allow you to define a new type of document that behave like Pages
+or Posts do normally, but also have their own unique properties and namespace.
+====
+
+
+== Parameters
+
+
+
+[width="100%", cols="8,4",options="header", role="rtable mt-3"]
+|======================================================================
+|Setting |Options and Flags
+a|
+*Local Server Port*
+
+Listen on the given port.
+
+ a|
+`port: PORT`
+
+`--port PORT`
+
+a|
+*Local Server Hostname*
+
+Listen at the given hostname.
+
+ a|
+`host: HOSTNAME`
+
+`--host HOSTNAME`
+
+a|
+*Base URL*
+
+Serve the website from the given base URL
+
+ a|
+`baseurl: URL`
+
+`--baseurl URL`
+
+a|
+*Detach*
+
+Detach the server from the terminal
+
+ a|
+`detach: BOOL`
+
+`-B, --detach`
+
+a|
+*Skips the initial site build.*
+
+Skips the initial site build which occurs before the server is started.
+
+ |`--skip-initial-build`
+a|
+*X.509 (SSL) Private Key*
+
+SSL Private Key.
+
+ |`--ssl-key`
+a|
+*X.509 (SSL) Certificate*
+
+SSL Public certificate.
+
+ |`--ssl-cert`
+|======================================================================
+

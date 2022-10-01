@@ -1,0 +1,440 @@
+== Software
+
+See:  https://developers.google.com/search/docs/appearance/structured-data/software-app
+
+<html>
+  <head>
+    <title>Angry Birds</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Angry Birds",
+      "operatingSystem": "ANDROID",
+      "applicationCategory": "GameApplication",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.6",
+        "ratingCount": "8864"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "1.00",
+        "priceCurrency": "USD"
+      }
+    }
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
+
+
+
+== Anleitung (Howto)
+
+See:  https://developers.google.com/search/docs/advanced/structured-data/how-to
+
+<html>
+  <head>
+    <title>How to tile a kitchen backsplash</title>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "HowTo",
+      "name": "How to tile a kitchen backsplash",
+      "image": {
+        "@type": "ImageObject",
+        "url": "https://example.com/photos/1x1/photo.jpg",
+        "height": "406",
+        "width": "305"
+      },
+      "estimatedCost": {
+        "@type": "MonetaryAmount",
+        "currency": "USD",
+        "value": "100"
+      },
+      "supply": [
+        {
+          "@type": "HowToSupply",
+          "name": "tiles"
+        }, {
+          "@type": "HowToSupply",
+          "name": "thin-set mortar"
+        }, {
+          "@type": "HowToSupply",
+          "name": "tile grout"
+        }, {
+          "@type": "HowToSupply",
+          "name": "grout sealer"
+        }
+      ],
+      "tool": [
+        {
+          "@type": "HowToTool",
+          "name": "notched trowel"
+        }, {
+          "@type": "HowToTool",
+          "name": "bucket"
+        },{
+          "@type": "HowToTool",
+          "name": "large sponge"
+        }
+      ],
+      "step": [
+        {
+          "@type": "HowToStep",
+          "url": "https://example.com/kitchen#step1",
+          "name": "Prepare the surfaces",
+          "itemListElement": [{
+            "@type": "HowToDirection",
+            "text": "Turn off the power to the kitchen and then remove everything that is on the wall, such as outlet covers, switchplates, and any other item in the area that is to be tiled."
+          }, {
+            "@type": "HowToDirection",
+            "text": "Then clean the surface thoroughly to remove any grease or other debris and tape off the area."
+          }],
+          "image": {
+            "@type": "ImageObject",
+            "url": "https://example.com/photos/1x1/photo-step1.jpg",
+            "height": "406",
+            "width": "305"
+          }
+        }, {
+          "@type": "HowToStep",
+          "name": "Plan your layout",
+          "url": "https://example.com/kitchen#step2",
+          "itemListElement": [{
+            "@type": "HowToTip",
+            "text": "The creases created up until this point will be guiding lines for creating the four walls of your planter box."
+          }, {
+            "@type": "HowToDirection",
+            "text": "Lift one side at a 90-degree angle, and fold it in place so that the point on the paper matches the other two points already in the center."
+          }, {
+            "@type": "HowToDirection",
+            "text": "Repeat on the other side."
+          }],
+          "image": {
+            "@type": "ImageObject",
+            "url": "https://example.com/photos/1x1/photo-step2.jpg",
+            "height": "406",
+            "width": "305"
+          }
+        }, {
+          "@type": "HowToStep",
+          "name": "Prepare your and apply mortar (or choose adhesive tile)",
+          "url": "https://example.com/kitchen#step3",
+          "itemListElement": [{
+            "@type": "HowToDirection",
+            "text": "Follow the instructions on your thin-set mortar to determine the right amount of water to fill in your bucket. Once done, add the powder gradually and make sure it is thoroughly mixed."
+          }, {
+            "@type": "HowToDirection",
+            "text": "Once mixed, let it stand for a few minutes before mixing it again. This time do not add more water. Double check your thin-set mortar instructions to make sure the consistency is right."
+          }, {
+            "@type": "HowToDirection",
+            "text": "Spread the mortar on a small section of the wall with a trowel."
+          }, {
+            "@type": "HowToTip",
+            "text": "Thinset and other adhesives set quickly so make sure to work in a small area."
+          }, {
+            "@type": "HowToDirection",
+            "text": "Once it's applied, comb over it with a notched trowel."
+          }],
+          "image": {
+            "@type": "ImageObject",
+            "url": "https://example.com/photos/1x1/photo-step3.jpg",
+            "height": "406",
+            "width": "305"
+          }
+        }, {
+          "@type": "HowToStep",
+          "name": "Add your tile to the wall",
+          "url": "https://example.com/kitchen#step4",
+          "itemListElement": [{
+            "@type": "HowToDirection",
+            "text": "Place the tile sheets along the wall, making sure to add spacers so the tiles remain lined up."
+          }, {
+            "@type": "HowToDirection",
+            "text": "Press the first piece of tile into the wall with a little twist, leaving a small (usually one-eight inch) gap at the countertop to account for expansion. use a rubber float to press the tile and ensure it sets in the adhesive."
+          }, {
+            "@type": "HowToDirection",
+            "text": "Repeat the mortar and tiling until your wall is completely tiled, Working in small sections."
+          }],
+          "image": {
+            "@type": "ImageObject",
+            "url": "https://example.com/photos/1x1/photo-step4.jpg",
+            "height": "406",
+            "width": "305"
+          }
+        }, {
+          "@type": "HowToStep",
+          "name": "Apply the grout",
+          "url": "https://example.com/kitchen#step5",
+          "itemListElement": [{
+            "@type": "HowToDirection",
+            "text": "Allow the thin-set mortar to set. This usually takes about 12 hours. Don't mix the grout before the mortar is set, because you don't want the grout to dry out!"
+          }, {
+            "@type": "HowToDirection",
+            "text": "To apply, cover the area thoroughly with grout and make sure you fill all the joints by spreading it across the tiles vertically, horizontally, and diagonally. Then fill any remaining voids with grout."
+          }, {
+            "@type": "HowToDirection",
+            "text": "Then, with a moist sponge, sponge away the excess grout and then wipe clean with a towel. For easier maintenance in the future, think about applying a grout sealer."
+          }],
+          "image": {
+            "@type": "ImageObject",
+            "url": "https://example.com/photos/1x1/photo-step5.jpg",
+            "height": "406",
+            "width": "305"
+          }
+        }
+      ],
+      "totalTime": "P2D"
+    }
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
+
+
+
+== Multiple elements
+
+See: https://www.gutekueche.at/spaggetti-bolognese-rezept-22388
+
+<script type="application/ld+json">
+[
+  {
+    "@context": "http://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@id": "https://www.gutekueche.at",
+          "name": "Home"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@id": "https://www.gutekueche.at/rezepte",
+          "name": "Rezepte"
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@id": "https://www.gutekueche.at/spaggetti-bolognese-rezept-22388",
+          "name": "Spaghetti Bolognese"
+        }
+      }
+    ]
+  },
+  {
+    "@context": "http://schema.org",
+    "@type": "Recipe",
+    "name": "Spaghetti Bolognese",
+    "url": "https://www.gutekueche.at/spaggetti-bolognese-rezept-22388",
+    "mainEntityOfPage": "https://www.gutekueche.at/spaggetti-bolognese-rezept-22388",
+    "description": "Kochen Sie den Klassiker unter den Spaghetti Gerichten mit dem Spagetti Bolognese Rezept.",
+    "comment": [
+      {
+        "@type": "Comment",
+        "url": "https://www.gutekueche.at/spaggetti-bolognese-rezept-22388",
+        "dateCreated": "2016-04-25T17:51:16",
+        "text": "Sehr gutes Rezept, kleiner Tipp etwas Zitronenschale in die Soße reiben. Schmeckt dann wirklich lecker",
+        "creator": {
+          "@type": "Person",
+          "name": "Tom90"
+        }
+      },
+      {
+        "@type": "Comment",
+        "url": "https://www.gutekueche.at/spaggetti-bolognese-rezept-22388",
+        "dateCreated": "2016-05-11T12:18:54",
+        "text": "Ich habe den Rotwein weggelassen und die Karotten ganz fein geraspelt, damit die Kinder es essen. Schmeckt super lecker.",
+        "creator": {
+          "@type": "Person",
+          "name": "Silviatempelmayr"
+        }
+      },
+      {
+        "@type": "Comment",
+        "url": "https://www.gutekueche.at/spaggetti-bolognese-rezept-22388",
+        "dateCreated": "2019-04-26T10:15:46",
+        "text": "sehr gutes Rezept, allerdings lasse ich sie länger als 40 min köcheln, finde, dass es dann besser schmeckt.",
+        "creator": {
+          "@type": "Person",
+          "name": "Maisi"
+        }
+      },
+      {
+        "@type": "Comment",
+        "url": "https://www.gutekueche.at/spaggetti-bolognese-rezept-22388",
+        "dateCreated": "2020-02-24T20:13:04",
+        "text": "Mit einem Schuss Rotwein schmeckt es wirklich sehr gut. Ab und zu mache ich die vegetarische Variante mit mehr Gemüse.",
+        "creator": {
+          "@type": "Person",
+          "name": "Pesu07"
+        }
+      },
+      {
+        "@type": "Comment",
+        "url": "https://www.gutekueche.at/spaggetti-bolognese-rezept-22388",
+        "dateCreated": "2021-03-03T18:16:12",
+        "text": "Ser gutes Rezept, nur den Wein habe ich ausgelassen, dafür noch frischen Basilikum hinein gehachelt.",
+        "creator": {
+          "@type": "Person",
+          "name": "Teddypetzi"
+        }
+      },
+      {
+        "@type": "Comment",
+        "url": "https://www.gutekueche.at/spaggetti-bolognese-rezept-22388",
+        "dateCreated": "2021-05-17T18:47:35",
+        "text": "Ich muss meine Sauce Bolognese auch mal mit Rotwein probieren. Das Problem ist leider, dass bei uns niemand Rotwein trinkt, ich müsste ihn also nur zum Kochen kaufen.",
+        "creator": {
+          "@type": "Person",
+          "name": "Thanya"
+        }
+      },
+      {
+        "@type": "Comment",
+        "url": "https://www.gutekueche.at/spaggetti-bolognese-rezept-22388",
+        "dateCreated": "2021-10-01T09:45:20",
+        "text": "Zwei Esslöffel Rotwein sind viel zu wenig. Da kommt bei mir weitaus mehr rein und lasse die Flüssigkeit entsprechend reduzieren.",
+        "creator": {
+          "@type": "Person",
+          "name": "Katerchen"
+        }
+      },
+      {
+        "@type": "Comment",
+        "url": "https://www.gutekueche.at/spaggetti-bolognese-rezept-22388",
+        "dateCreated": "2021-10-20T20:57:36",
+        "text": "Sehr schönes Rezept, alles wirklich total easy und lecker, aber was bitte soll \"Faschiertes\" sein ???",
+        "creator": {
+          "@type": "Person",
+          "name": "Marco01"
+        }
+      },
+      {
+        "@type": "Comment",
+        "url": "https://www.gutekueche.at/spaggetti-bolognese-rezept-22388",
+        "dateCreated": "2021-10-21T11:38:49",
+        "text": "Mit \"Faschiertes Rindfleisch\" ist Rinderhackfleisch gemeint.",
+        "creator": {
+          "@type": "Person",
+          "name": "GuteKueche-Admin"
+        }
+      },
+      {
+        "@type": "Comment",
+        "url": "https://www.gutekueche.at/spaggetti-bolognese-rezept-22388",
+        "dateCreated": "2021-11-18T15:47:37",
+        "text": "Hallo, ich hab eine Frage zur Tomatensauce. Was genau wird darunter gemeint ? Ich gehe mal von Passierten Tomaten aus? Mit freundlichen Grüßen",
+        "creator": {
+          "@type": "Person",
+          "name": "umatwg"
+        }
+      }
+    ],
+    "image": [
+      "https://www.gutekueche.at/storage/media/recipe/27367/conv/spagetti-bolognese-default.jpg"
+    ],
+    "author": {
+      "@type": "Organization",
+      "name": "GuteKueche.at"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "GuteKueche.at",
+      "logo": [
+        {
+          "@type": "ImageObject",
+          "url": "https://www.gutekueche.at/assets/img/logos/600x60_gkatlogo.png",
+          "width": "600",
+          "height": "60"
+        },
+        {
+          "@type": "ImageObject",
+          "url": "https://www.gutekueche.at/assets/img/logos/600x600_gkatlogo.png",
+          "width": "600",
+          "height": "600"
+        }
+      ]
+    },
+    "datePublished": "2015-07-12",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": 4.65,
+      "reviewCount": 18558,
+      "worstRating": 1,
+      "bestRating": 5
+    },
+    "video": {
+      "@type": "VideoObject",
+      "name": "Spaghetti Bolognese",
+      "description": "Einfach und schnell zubereitet sind unsere Spaghetti Bolognese. Wir zeigen euch in diesem Video wie man diesen italienischen Klassiker auch zu Hause auf den Teller zaubert.",
+      "thumbnailUrl": [
+        "https://i.vimeocdn.com/video/1136249117-dfb9331271f4edbd84de748d9cb2d493f924f67868d471d5ab4da5570ab79c61-d_1280x720?r=pad"
+      ],
+      "contentUrl": null,
+      "embedUrl": "https://player.vimeo.com/video/548807192",
+      "uploadDate": "2021-05-13T11:09:41+00:00",
+      "duration": "PT01M06S"
+    },
+    "keywords": "Spaghetti Bolognese, Spaghetti Rezepte",
+    "prepTime": "PT20M",
+    "cookTime": "PT10M",
+    "totalTime": "PT30M",
+    "recipeYield": "4 Portionen",
+    "recipeCategory": "Spaghetti Rezepte",
+    "recipeIngredient": [
+      "350 g Faschiertes Rindfleisch",
+      "1 Stk Karotte",
+      "2 Stk Knoblauchzehen",
+      "1 EL Olivenöl für den Topf",
+      "2 EL Oregano",
+      "1 EL Petersilie",
+      "1 Prise Pfeffer",
+      "2 EL Rotwein",
+      "1 Prise Salz",
+      "370 g Spaghetti",
+      "2 EL Tomatenmark",
+      "400 g Tomatensauce",
+      "1 Stk Zwiebel"
+    ],
+    "recipeCuisine": "Italienische Rezepte",
+    "recipeInstructions": [
+      {
+        "@type": "HowToStep",
+        "text": "Die Zwiebel schälen und klein würfelig schneiden. Den Knoblauch schälen und in kleine Stücke hacken. Die Karotten waschen, schälen die harten Enden vom Stiel schneiden, den Rest sehr klein schneiden. Die Petersilie waschen, ausschütteln und fein hacken."
+      },
+      {
+        "@type": "HowToStep",
+        "text": "Danach reichlich Salz-Wasser aufkochen die Nudeln darin weichkochen (=al dente) und anschließend durch ein Sieb abgießen."
+      },
+      {
+        "@type": "HowToStep",
+        "text": "In der Zwischenzeit das Öl in einem Topf erhitzen und darin Knoblauch sowie den Zwiebel darin 4 Minuten dünsten. Die Karotten hinzufügen und weitere 2 Minuten mit dünsten."
+      },
+      {
+        "@type": "HowToStep",
+        "text": "Nun das Faschierte beimengen und kurz durchbraten. Tomatensauce, Oregano und Rotwein hinzufügen und die Flüssigkeit etwas reduzieren lassen. Den Deckel auf den Topf und bei kleiner Hitze gut 40-50 Minuten köcheln lassen."
+      },
+      {
+        "@type": "HowToStep",
+        "text": "Zum Schluss das Tomatenmark unterrühren und die Sauce mit Salz, Pfeffer und der Petersilie abschmecken."
+      },
+      {
+        "@type": "HowToStep",
+        "text": "Die gekochten Spagetti appetitlich auf Tellern anrichten, die Sauce darüber geben und mit ein paar frischen Basilikumblättern garnieren. Geschenktipp: Spezielle Rezeptkarten-Sets mit passender Rezeptbox, erhältlich in unserem neuen Onlineshop: shop.gutekueche.at"
+      }
+    ]
+  }
+]
+</script>

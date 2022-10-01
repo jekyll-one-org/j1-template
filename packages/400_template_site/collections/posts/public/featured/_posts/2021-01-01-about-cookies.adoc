@@ -5,22 +5,23 @@ tagline:                                good to know
 categories:                             [ Featured ]
 tags:                                   [ Cookies ]
 
-# Set values for SEO
-#
-logo:                                   /assets/images/icons/j1/j1-512x512.png
-image:                                  /assets/images/modules/attics/cookies-1920x1200.jpg
+# image:                                 /assets/images/modules/attics/cookies-1920x1200.jpg
+
+image:
+  path:                                 /assets/images/modules/attics/cookies-1920x1200.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  Cookies - Good to know
 
 fab_menu_id:                            page_ctrl
 regenerate:                             false
 
 resources:                              [ animate ]
 resource_options:
-
   - attic:
       padding_top:                      400
       padding_bottom:                   50
       opacity:                          0.5
-
       slides:
         - url:                          /assets/images/modules/attics/cookies-1920x1200.jpg
           alt:                          Photo by Miroslava on Unsplash

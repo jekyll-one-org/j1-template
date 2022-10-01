@@ -1,0 +1,8 @@
+// Include sub-document
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+lorem:sentences[5]
+
+== Using modules
+
+The chapter will be published shortly.

@@ -1,0 +1,62 @@
+// Include sub-document
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+The template J1 comes with a website included, a boilerplate for new a website
+This Web is called the *starter web*, a general-purpose scaffold to be modified
+for your needs.
+
+Digitization, the digital revolution of our time, offers incredible
+opportunities. Ten years ago, very few people could have predicted the
+new opportunities the Internet will offer today. I want to invite you on
+a journey to the webspace that few people know, even today.
+
+At the end of this chapter, which only takes a few minutes, you will have
+your presence, a website on the Internet. You don't need any software to
+be installed on your computer. You won't pay anything for this.
+
+IMPORTANT: If you have already worked on the section
+link:{url-j1--rocketstart}[Rocketstart, {browser-window--new}], you can
+skip this chapter. A Starter Web is on Github and Netlify already in place
+and can be used for the next section
+link:{j1-kickstart-web-in-a-day--dev-system}[Development System].
+
+Two service providers are required to make this happen: *Github* and *Netlify*.
+The platforms provided by Github and Netlify are used to build and control
+a J1 website on the Internet. Both providers give full access to their
+services with no limits.
+
+If you do not already have accounts, sign up to be prepared for the journey:
+
+* Sign up on link:https://github.com/signup?user_email=&source=form-home-signup[Github, {browser-window--new}]
+* Sign up on link:https://app.netlify.com/[Netlify, {browser-window--new}]
+
+[role="mt-4 mb-5"]
+NOTE: It is recommended to sign up for Github first. You can use the account
+data from Github to register on Netlify.
+
+== 1-Click Deployment
+
+The people on Netlify prepared a really easy process to bring a website live
+using a (JAMstack-based) template like J1 on the Internet in minutes. This
+is magic but real.
+
+The *1-Click Deployment* on Netlify opens a new window, a new tab in your
+browser. From the section
+link:{j1-rocketstart--deployment-ref}[Deployment Reference, {browser-window--new}]
+you find all the steps for this process in all details. To control the
+deployment process better, place the browser's windows side-by-side.
+
+Start the magic on Netlify!
+
+[subs=+macros]
+++++
+<div class="mt-4 mb-5 d-grid gap-2">
+  <a  href="https://app.netlify.com/start/deploy?repository=https://github.com/jekyll-one/j1-template-starter"
+      class="btn btn-light btn-flex btn-lg"
+      aria-label="1-click-deploy-netlify"
+      target="_blank" rel="noopener">
+      iconify:logos:netlify[3x mr-3]
+      1-Click-Deployment on Netlify
+  </a>
+</div>
+++++

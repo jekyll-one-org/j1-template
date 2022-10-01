@@ -1,0 +1,714 @@
+// Include sub-document
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+As you have seen, a website is created in just a few minutes with J1s built-in
+basic web. This section will deal with preparing a toolset to edit your site
+from your local workstation. On the one hand, the local editing corresponds
+to the basic idea of version management using Git. On the other hand, the
+local development system will make the work much easier.
+
+Setting up the required software and tools takes a lot of time. Depending on
+how proficient you are in installing applications, you will need between one
+and two hours to complete all installations.
+
+Enough of the long speech: Now comes your tool kit for your personal
+websites.
+
+[[needed-hardware]]
+== Required PC hardware
+
+Modern hardware is expected for all desktop computers or Laptops For your
+reference a typical setup looks like so:
+
+* a multi-core CPU,> = Intel i5 or AMD Ryzen 5
+* 8 GB of RAM, 3-4GB free memory
+* an internet connection, bandwidth> = 16k (simple DSL)
+* a current monitor, display size> = 21 inches
+
+For developing a website, some performance of your computer hardware is
+essential to work smoothly. It's no fun having to wait for ages to modify the
+project and process the changes. A modern monitor is necessary to run multiple
+programs in parallel on different windows on one screen in parallel. It is
+possible to use a laptop with a 15-inch display but be prepared for some
+inconveniences in its operation.
+
+== Work from command-line (Windows)
+
+For controlling J1 projects, a shell is required to run commands at the
+command line (Windows: command prompt). The easiest way to run a shell
+on Windows operating system is to create a shortcut for the command prompt
+`cmd.exe` on your desktop.
+
+* First, right-click the mouse on your desktop. This calls up a context
+  menu from which a new link can be created.
+* In the first dialog box, type cmd.exe for the program to run.
+* Then name the shortcut in the second dialog box to Shell.
+
+Take a detailed look at the steps in the following screenshots.
+
+.Create a new shortcut
+lightbox::windows--create-a-link-1[ 600, {data-windows--create-a-link-1} ]
+
+.Enter the command to be linked
+lightbox::windows--create-a-link-2[ 600, {data-windows--create-a-link-2} ]
+
+.Name the link
+lightbox::windows--create-a-link-3[ 600, {data-windows--create-a-link-3} ]
+
+With the help of this link, a command shell is started easily at any time.
+
+[[run-administrative-shell]]
+=== Administrative Shells
+
+It is necessary to work with elevated system rights from time to time.
+Working as an administrator will only be necessary for rare operations
+with the template system. For example, for updates to software installed
+system-wide.
+
+Right-click on the new desktop icon *Shell* you can reach the context menu.
+From the context, you can create a new shell as a administrator.
+
+.Starting a shell with elevated privileges (administrator)
+lightbox::windows--run-shell-as-admin[ 600, {data-windows--run-shell-as-admin} ]
+
+.UAC dialog for administrative shells
+lightbox::windows--run-shell-as-admin-uac[ 600, {data-windows--run-shell-as-admin-uac} ]
+
+.Shell (command prompt) as administrator
+lightbox::windows--run-shell-as-admin-started[ 600, {data-windows--run-shell-as-admin-started} ]
+
+Everything necessary to prepare the installation is now done. The next steps
+are necessary to install the toolset for the development environment managing
+J1 projects.
+
+== Development languages
+
+Jekyll and J1 Template can be used on all current 64-bit operating systems:
+
+* Windows 10|11
+* Linux, Kernelversion >= 4.15 (z.B. Ubuntu >= 18.x LTS)
+* Apple OSX, Version >= 10.10.5 (Yosemite)
+
+The 32-bit versions (x32) of the Windows and Linux operating systems *cannot*
+be used. In particular for the Windows operating system, 32-bit versions for
+simple home PCs are still widespread. It is easy to find out what architecture
+a Windows operating system is. To do this, copy the following command to the
+clipboard:
+
+[source, msshell]
+----
+cmd /K wmic os get osarchitecture
+----
+
+Paste the copied command into the Windows search on the taskbar (magnifying
+glass symbol). After copying, the app will start, and it will open a (new)
+window with a display of the respective architecture.
+
+.Display architecture (Windows)
+lightbox::windows--win-os-plattform[ 600, {data-windows--win-os-plattform} ]
+
+IMPORTANT: A connection to the Internet is required for the following
+software installations.
+
+To be able to run the development system for the J1 Template, the following
+programming languages are required:
+
+* Ruby, Version >= 2.6 < 3.x
+* NodeJS, Version >= 12.x
+
+To install the required versions of the programming languages for the
+Windows platform system, the appropriate download links can be found in
+the following table.
+
+.Download of recommended versions on Windows (02/22)
+[cols="2a,2a,8a", options="header", width="100%", role="rtable mt-3"]
+|===
+|Language |Architecture |Download
+
+|`Ruby`
+|`x64`
+|link:{url-rubyinstaller--download-v2-7-5}[Ruby Installer v2.7.5]
+
+|`NodeJS`
+|`x64`
+|link:{url-nodejs--windows-download-remommended}[NodeJS Installer v12.22]
+
+|===
+
+First, download both installers. The installation programs are required for
+the following sections.
+
+[CAUTION]
+====
+Administrative rights for the respective operating system are required
+to install the development tools. The software must be installed system-wide
+in privileged directories. For the Windows operating system, these are
+typically the directories `C:\Programs` and `C:\Program Files (x86)`.
+For Windows installations on private home PCs, these rights are granted to
+all users via the UAC procedure (User Account Control) of the user account
+control {fn-windows-os-en--uac}.
+====
+
+
+=== Install NodeJS
+
+The program for installing NodeJS *node-v12.22.0-x64.msi* was downloaded in
+the default download location. Start the installer directly from your browser
+or use the folder *Download* to start the installer program executable from
+there.
+
+[IMPORTANT]
+====
+In step *Additional tools* of the installation process, the DevKit for
+NodeJS can be installed. These tools are *not* required for the J1 development
+environment and should not be installed. The DevKit for NodeJS contains
+applications for generating platform-specific modules for NodeJS (JS libraries).
+Under Windows, this is quite a complex process. If necessary, a DevKit
+installation can be done later at any time in a separate step.
+====
+
+.Welcome message
+lightbox::nodejs--installer-dialog-1[ 600, {data-nodejs--installer-dialog-1} ]
+
+.License agreement
+lightbox::nodejs--installer-dialog-2[ 600, {data-nodejs--installer-dialog-2} ]
+
+.Target directory
+lightbox::nodejs--installer-dialog-3[ 600, {data-nodejs--installer-dialog-3} ]
+
+.Package selection
+lightbox::nodejs--installer-dialog-4[ 600, {data-nodejs--installer-dialog-4} ]
+
+.Additional tools
+lightbox::nodejs--installer-dialog-5[ 600, {data-nodejs--installer-dialog-5} ]
+
+.Installation dialog
+lightbox::nodejs--installer-dialog-6[ 600, {data-nodejs--installer-dialog-6} ]
+
+.UAC dialog for the final installation of NodeJS
+lightbox::nodejs--installer-dialog-7[ 600, {data-nodejs--installer-dialog-7} ]
+
+.Completion message
+lightbox::nodejs--installer-dialog-8[ 600, {data-nodejs--installer-dialog-8} ]
+
+=== Install Ruby
+
+The procedure for installing Ruby is very similar to installing NodeJS. Since
+the installation steps are the same in some parts, the description is a little
+more compact and skips some parts that you already know.
+
+The program for installing Ruby *rubyinstaller-devkit-2.7.2-1-x64.exe* was
+downloaded in the default download location. Start the installer directly
+from your browser or use the folder *Download* to start the installer program
+executable from
+there.
+
+.License agreement
+lightbox::ruby--installer-dialog-1[ 600, {data-ruby--installer-dialog-1} ]
+
+.Target directory
+lightbox::ruby--installer-dialog-2[ 600, {data-ruby--installer-dialog-2} ]
+
+.Completion message
+lightbox::ruby--installer-dialog-5[ 600, {data-ruby--installer-dialog-3} ]
+
+.Installation of the DevKit
+lightbox::ruby--installer-dialog-6[ 600, {data-ruby--installer-dialog-4} ]
+
+.Installation of the DevKit
+NOTE: For the final step of the Ruby installation, use option 3 to install
+all applications for the DevKit. To complete this installation, press Enter.
+
+The first part of setting up the development environment has been completed.
+Add additions and updates are required to use the latest versions of the tools
+for the development environment. Finally, the template system J1 can then be
+set up.
+
+[[additions-updates]]
+=== Additions and Updates
+
+After completing the NodeJS and Ruby installations, some additional
+components, such as updates, are required to work with J1.
+
+The necessary additions and updates can be applied directly at the command
+line. To process, use a shell with administrator rights to enter the
+necessary commands for the Windows operating system. Start an administrative
+shell as described in the section <<Administrative Shells>>.
+
+==== NodeJS
+
+Similar to Ruby, NodeJS uses a package manager to install and manage modules
+(libraries). The package manager for NodeJS is *NPM* (Node Packet Manager).
+In addition to *NPM*, there is another program for administering modules
+available for NodeJS: *Yarn*.
+
+NOTE: The package manager Yarn is being developed by Facebook and can be
+used as an alternative to NPM. In general, both programs behave in the same
+way. However, `yarn` is shorter and simpler when writing commands. The
+following examples use yarn as the package manager since the program is
+easier to use at the command line.
+
+For the installations of the current versions of *NPM* and *Yarn*, copy
+the following commands and paste the commands into the administrative
+shell:
+
+.Update of the package manager
+[source, sh]
+----
+npm install -g npm@latest && npm install -g yarn@latest <1>
+----
+<1> A *global* installation is carried out using the `-g` switch,
+    which is then available to all users
+
+==== Ruby
+
+The installation software for Ruby can be many months older than the current
+versions of the built-in base components. Keeping the most important basic
+components of a Ruby installation and available tools for Ruby up to date
+is highly recommended.
+
+===== Bundler
+
+Modules for Ruby (Gems) can be installed in different versions being.
+Depending on the project, however, a certain version is necessary.
+Otherwise, there will inevitably be conflicts in execution. To that very
+well-known problem of escaping the *hell* of dependencies, the module (Gem)
+`bundler` is used.
+
+NOTE: Which gem (modules) a project uses in what versions defines the
+configuration file `Gemfile`. Such a Gemfile is also used for J1 projects,
+that specifies all necessary modules in the required versions running
+Jekyll.
+
+Bundler provides the functions necessary for Ruby projects to obtain the
+modules in the required versions for the respective project. The Gem Bundler
+must be system-wide in Ruby’s privileged directories to be set up. Copy the
+following command and paste in the administrative shell:
+
+.Update bundler
+[source, sh]
+----
+gem install bundler --no-document
+----
+
+===== RubyGems
+
+The basic software RubyGems for the Ruby package manager `gem` is also a
+module: `rubygems`. An update is also recommended here, as the installation
+software for Ruby can be many months older than the current version of
+RubyGems.
+
+As usual, the module for RubyGems can be brought up to date with Ruby Package
+Manager. RubyGems must also be set up system-wide in Ruby's privileged
+directories. Copy the following commands and paste them into the administrative
+shell:
+
+.Update RubyGems (Windows)
+[source, sh]
+----
+gem install rubygems-update --no-document && ^
+update_rubygems --no-document && ^
+gem update --system
+----
+
+=== Checking versions
+
+The difficult part of installing and updating NodeJS and Ruby development
+tools is completed. The good news: updates are rarely necessary. Nevertheless,
+an update can prevent many difficulties that can be traced back to older
+software versions with new installations. And this is often not easy to find
+out!
+
+For all further work with J1, *no* administrative shell is required, and
+the (previous) command prompt as administrator can be closed. All further
+steps require a shell started as a *regular* user. Running commands in the
+user scope ensures that programs cannot make changes to the operating system
+without your knowledge can perform. Better safe than sorry.
+
+Start a shell via the *Command prompt* icon on the desktop and copy the
+following commands to display the versions of NodeJS and Ruby:
+
+.Display versions of NodeJS and Ruby (Windows)
+[source, sh]
+----
+cls && ^
+echo|set /p dummyName="NodeJS          " && node --version && ^
+echo|set /p dummyName="NPM             " && npm --version && ^
+echo|set /p dummyName="Yarn            " && yarn --version && ^
+echo|set /p dummyName="Ruby (Core)     " && ruby --version && ^
+echo|set /p dummyName="RubyGems        " && gem --version && ^
+bundler --version
+----
+
+.Versions of 01/22
+----
+NodeJS          v12.22.0
+NPM             8.3.0
+Yarn            1.22.17
+Ruby (Core)     ruby 2.7.4p191 (2021-07-07 revision a21a3b7d23) [x64-mingw32]
+RubyGems        3.3.4
+Bundler version 2.3.4
+----
+
+If difficulties are working with J1, the version status of the development
+environment can be very helpful and serve as an orientation as to whether
+incorrect versions are the cause of problems.
+
+== Development tools
+
+The elementary tools for managing and editing the contents of a web includes:
+
+* Git, the version management
+* Github CLI, GitHub command line interface
+* A source code editor (e.g. Atom)
+
+The version management Git is used to manage the sources of a J1 project.
+Versioning will do a lot for you. With the help of Git, you manage the
+central repo on Github, which is also a very secure backup of all project
+data. Even if there are errors in the local working copy, you can always
+fall back on working versions of your website.
+
+Version control will protect you from serious data loss. With the help of
+Git, you will first create a development version. With the help of the
+development version, you can make and test changes without changing the
+main version. You will find out how helpful it is to make significant
+changes without the risk of your site on the Internet being affected.
+
+Download the latest version (01/22) for Windows from here:
+link:{url-git--download-windows-x64}[Git v2.34.1].
+
+A powerful source code editor like Atom is the backbone of the developer
+toolset. The code editor is like a second skin for developers. Many important
+functions are already built into the editor or can be easily installed later.
+If you are already using such an editor, continue to use the tool. I'm
+pretty sure, you won't change the editor.
+
+For those who have not yet worked on any source projects, such an editor is
+recommended. Sure, it's another new tool to learn, but your efforts will be
+richly rewarded.
+
+Installing programs is anything but exciting. Learn about some product
+features during the installation, the screenshots of the individual steps
+of the installation are commented.
+
+The screenshots help you to choose the right options, and at the same
+time, you get to know several technical terms that can help with your
+work.
+
+=== Install the version control system Git
+
+The installation of the Git installer comes with a bunch of dialogs. Many
+Git settings are queried during installation. The individual steps are
+commented on to understand the various dialogs better.
+
+.UAC dialog to install Git
+lightbox::git--installer-dialog-1[ 600, {data-git--installer-dialog-1} ]
+
+.License agreement
+lightbox::git--installer-dialog-2[ 600, {data-git--installer-dialog-2} ]
+
+.Destination location
+lightbox::git--installer-dialog-3[ 600, {data-git--installer-dialog-3} ]
+
+[TIP]
+====
+To protect your Git installation bits for unwanted changes, the default
+(privileged) path `C:\Program Files\Git` is highly recommend.
+====
+
+.Select components
+lightbox::git--installer-dialog-4[ 600, {data-git--installer-dialog-4} ]
+
+[TIP]
+====
+Default selections make sense. To create some handy icons on the desktop,
+tick `Additional icons` on.
+====
+
+.Start menu folder (Windows)
+lightbox::git--installer-dialog-5[ 600, {data-git--installer-dialog-5} ]
+
+[TIP]
+====
+For users on Windows, it is recommended to create an additional folder
+for the (Windows) Start Menu. If your desktop icons get lost, you find
+all important applications from there.
+====
+
+.Default editor used by Git
+lightbox::git--installer-dialog-6[ 600, {data-git--installer-dialog-6} ]
+
+[TIP]
+====
+To add changes to the repo for versioning, a so-called *commit* is needed.
+Every commit is accompanied by a message text describing the changes. The
+message text can be given at command-line (git command commit) or edited
+in a simple text editor.
+
+The default editor for Git is `vi` (VIM), a widely used editor on Unix and
+Linux. For Windows users, using the vi editor will be a challenge. Leave
+VIM as the default editor for now. What GUI-based editor on Windows should
+be used for Git commits can be configured later.
+====
+
+.Name of initial branches
+lightbox::git--installer-dialog-7[ 600, {data-git--installer-dialog-7} ]
+
+[TIP]
+====
+Understand a branch for Git repos as the *name* of the current track of
+changes. The *main track* is named *master* for historical reasons. This
+name is *not* longer used today. To sync with Github, use *main* for
+the name.
+====
+
+.Adjusting the _PATH_ variable of the operating system (Windows)
+lightbox::git--installer-dialog-8[ 600, {data-git--installer-dialog-8} ]
+
+[TIP]
+====
+The Git versioning system is originally developed on Unix systems like
+*Linux*. Git on Windows uses native Unix/Linux commands under the hood
+supported by a compatibility system called *MSYS*. Like the command `find`,
+some of these commands are of the same name in Windows and MSYS.
+
+The default option is highly recommended to avoid conflict running
+commands having the same name.
+====
+
+.Choosing the SSH executable
+lightbox::git--installer-dialog-9[ 600, {data-git--installer-dialog-9} ]
+
+[TIP]
+====
+As already mentioned, Git has its roots in Unix. On Unix-like systems, the
+Secure Shell (SSH) subsystem is widely used to establish secure and encrypted
+connections. On Windows, no SSH subsystem is build-in.
+
+In most cases using Git on Windows, the default option (use of the bundled
+OpenSSH subsystem) should be used.
+====
+
+.Choosing HTTPS transport backend
+lightbox::git--installer-dialog-10[ 600, {data-git--installer-dialog-10} ]
+
+[TIP]
+====
+Similar to SSH, *SSL* libraries are not available on Windows by default.
+The Secure Shell (SSH) subsystem depends on *SSL* libraries to establish
+secure and encrypted connections.
+
+For compatibility reasons, use the default option (OpenSSL).
+====
+
+.Configure line endings for files
+lightbox::git--installer-dialog-11[ 600, {data-git--installer-dialog-11} ]
+
+[TIP]
+====
+So-called `line endings` separate all lines in a text file. Unfortunately,
+different operation operating systems are using different line endings.
+On Unix/Linux, the (hidden) character `LF` (line feed) is used, but on Windows,
+the characters `CR` (carriage return) *and* `LF` (CRLF) are used to separate
+lines in text files.
+
+The best compromise for managing *different* line endings are to let Git
+decide what type should be used. All (text) files checked-in a Git repo
+uses the character `LF` (Unix-style) but gets converted for check-out
+if required.
+====
+
+.Terminal emulation for the Git shell (Bash)
+lightbox::git--installer-dialog-12[ 600, {data-git--installer-dialog-12} ]
+
+[TIP]
+====
+As already mentioned, Git uses MSYS for Unix world commands to be executed
+on Windows. In addition to native Windows shells, such as the *cmd.exe*
+command prompt, the Git shell may be used as an alternative. Git shells
+are based on the Unix shell *bash*, which is widely used on Linux systems.
+A Windows shell is completely sufficient for working with J1 projects.
+Nevertheless, a *real* Unix shell can be helpful and useful on a case-by-case
+basis.
+
+Accept the default setting and leave the Git Shell unchanged.
+====
+
+.Default strategy for pushing/pulling Git repos
+lightbox::git--installer-dialog-13[ 600, {data-git--installer-dialog-13} ]
+
+[TIP]
+====
+You have already learned Git as a distributed versioning system. The
+essential character of this distribution is a remote repository and
+local working copies for editing the sources. Ultimately, the local
+working copies will have to be merged back into the remote repository.
+
+It is certainly easy to imagine that bringing these together will not
+be very easy and that this operation can produce errors. The version
+management Git provides different strategies to merge sources. The
+simplest and most common strategy is *fast-forward*. The strategy of
+*fast* merging is based on the assumption that the changes in the
+sources do not differ greatly. If changes are transferred very regularly
+to the remote repo, it is also the case that the sources do not differ
+very much from one another.
+
+This strategy is well suited for regular merging and can be adopted
+as a default setting.
+====
+
+.Github credential helper
+lightbox::git--installer-dialog-14[ 600, {data-git--installer-dialog-14} ]
+
+[TIP]
+====
+You have already got to know Github as a service provider and have an
+account for managing your repositories. Unfortunately, the Internet is
+not a peaceful place. Unfortunately, you have to say it that way over
+and over again.
+
+Nevertheless, ways have to be found to enable smooth work even if access
+to an account is necessary that belongs to a service provider on the Internet.
+The secure storage of account data on your PC is made possible by the Git
+Credential Helper.
+
+Accept the default settings here to synchronize the repositories' data in a
+simple and very safe way.
+====
+
+.Extra (advanced) options
+lightbox::git--installer-dialog-15[ 600, {data-git--installer-dialog-15} ]
+
+[TIP]
+====
+The version management also integrates extended functions of the operating
+system to manage files and directories. Extended functions apply to all
+operating systems.
+
+Accept both options for the best support for files and directories.
+====
+
+.Experimental (advanced) options
+lightbox::git--installer-dialog-16[ 600, {data-git--installer-dialog-16} ]
+
+[TIP]
+====
+Experimental functions can be helpful but are reserved for experienced
+users. These options are not required for using Git for J1 projects and
+should *not* be selected.
+====
+
+.Completion message
+lightbox::git--installer-dialog-17[ 600, {data-git--installer-dialog-17} ]
+
+[TIP]
+====
+Working with version control will be a theme in the following sections.
+At the moment, there is no repository. Starting a Git Shell doesn't make
+much sense.
+
+Reading the version information on software products is very important.
+The knowledge of relevant changes of a product applies particularly to
+upgrades when changing to a new version. In the case of a new installation,
+reading all the version details can be done later if the information matters.
+====
+
+=== Install Github CLI
+
+To control J1 projects, mostly simple commands are used, which are entered on
+the command line. The Github CLI is useful for working with Git repositories
+managed at Github.
+
+To download the installer, go for link:{url-github--cli}[Gihub CLI Home, {browser-window--new}]
+or download the latest installer (version of 01/22) for Windows from here
+link:{url-github--cli-v2-4-0}[Installer v2.4.0].
+
+The installation is very simple and can be done quickly in just a few steps.
+
+.Security warning on downloaded files (Windows)
+lightbox::github-cli--installer-dialog-1[ 600, {data-github-cli--installer-dialog-1} ]
+
+.Setup Wizard - Welcome
+lightbox::github-cli--installer-dialog-2[ 600, {data-github-cli--installer-dialog-2} ]
+
+.License agreement
+lightbox::github-cli--installer-dialog-3[ 600, {data-github-cli--installer-dialog-3} ]
+
+.Destination folder
+lightbox::github-cli--installer-dialog-4[ 600, {data-github-cli--installer-dialog-4} ]
+
+.Install dialog (requires elevated privileges)
+lightbox::github-cli--installer-dialog-5[ 600, {data-github-cli--installer-dialog-5} ]
+
+.UAC dialog to run the installation (Windows)
+lightbox::github-cli--installer-dialog-6[ 600, {data-github-cli--installer-dialog-6} ]
+
+.Completion message
+lightbox::github-cli--installer-dialog-7[ 600, {data-github-cli--installer-dialog-7} ]
+
+=== Install Code Editor Atom
+
+The installation of the Atom editor is done very quickly. A large number of
+useful presettings are made automatically by the installer. After the
+installation is complete, very few settings are required and the editor
+is ready for use.
+
+The individual steps are commented on to understand the various dialogs
+better.
+
+.Installer Message Window
+lightbox::atom--installer-dialog-1[ 600, {data-atom--installer-dialog-1} ]
+
+[TIP]
+====
+The installation of the Atom editor is fully automatic. All the necessary
+settings are made during the installation and can then be adjusted later
+should this be necessary.
+
+After completing the installation, the editor is started, and a few settings
+have to be made.
+====
+
+.Start Screen - URI Handler
+lightbox::atom--installer-dialog-2[ 600, {data-atom--installer-dialog-2} ]
+
+[TIP]
+====
+A Uniform Resource Identifier (URI) identifies a logical or physical
+resource used by web technologies. URIs provide a means of locating and
+retrieving information resources on a network, either the Internet or
+resources on local systems such as a computer filesystem.
+
+The editor Atom specifies the URI `atom://` to manage resources like
+addons and plugins. Let the editor register that URI to make the management
+of Atom specific resources are managed correctly.
+====
+
+.Start Screen - Telemetry Consent Tab
+lightbox::atom--installer-dialog-3[ 600, {data-atom--installer-dialog-3} ]
+
+[TIP]
+====
+Lastly, it is on you to send usage information back to the makers of Atom
+over an active Internet connection. I'm using Atom on Windows mainly for J1
+projects, and the editor's setup is very basic. I expect less relevant
+information to develop Atom as a product and reject on that.
+
+But, it is on you!
+====
+
+.Start Screen - Welcome Tab
+lightbox::atom--installer-dialog-4[ 600, {data-atom--installer-dialog-4} ]
+
+[TIP]
+====
+As an option, a welcome guide tab can be shown if you start a new editor
+instance. For the first time using Atom, this might be helping somewhat.
+A lot of excellent articles about using Atom are available on the Internet.
+
+It is on you to leave this enabled. You can disable the welcome guide
+at any time.
+====
+
+.Start Screen after base configuration is done
+lightbox::atom--installer-dialog-5[ 600, {data-atom--installer-dialog-5} ]

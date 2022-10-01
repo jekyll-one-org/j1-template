@@ -1,0 +1,1993 @@
+// Include sub-document
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+The content of a website matters; there is no doubt about that. Therefore,
+the first chapter on editing a website should be dedicated to this topic.
+Working on the content will be the largest part of all the tasks to create
+a website.
+
+As soon as you start work on the first page, you will notice that all
+pages are written as a source text. The sources are easy to read as they are
+plain text. However, it is not immediately apparent what the resulting page
+will look like when the actual HTML target is formatted and generated to be
+displayed in a browser.
+
+Using Sources may appear like a disadvantage to some. In particular, those who
+have had little contact with sources and their processing. Projects based on
+sources follow their laws in processing. Barely someone will be able to create
+error-free programs out of the box, nor will website authors create print-ready
+pages. Both programmers and authors are initially interested in writing down
+what they see on their minds: The concept. This very creative process of
+creating the concept would be interrupted again and again unnecessarily if
+one also had an eye on the final results.
+
+When working with sources, you will first be interested in the general idea.
+With a little practice and experience, you will be able to create the concept
+of writing down the skeleton of your idea as a source, which is also technically
+and formally correct as of the source text for later translation into a target
+system.
+
+JAM-Stack-based websites like J1 are programmed in the best sense. Each project
+requires appropriate programming languages; so does J1 Template and the
+JAM Stack: The Markup Languages. The sites based on Jekyll and J1 Template
+essentially use the markup languages ​​YAML for control and Asciidoc for
+formulating the content.
+
+The creation of websites is a craft and art at the same time. The craft
+requires suitable tools, the art your creativity. This chapter is designed
+to help you with both. Learning the craft and stimulating your creativity.
+
+When working with this section, some new questions will arise. Some of them
+could be these questions:
+
+* Which pages already exist?
+* How can the existing content used for your pages?
+* What types of content does Jekyll support?
+* How and in what way does the Jekyll builder engine generate web pages?
+* How does the template system J1 support the creation of new pages and
+  the modular structure of a website?
+* How can recurring components of a website be configured and made re-usable
+  with the help of the J1 Template?
+
+Let's start now. Learn how to create modern websites and present the content
+optimally using J1 Template.
+
+== Edit and fire up your site
+
+The primary tool for this exploration and editing is the source code editor.
+The editor is the swiss army knife, the ultimate tool for daily work on
+websites. The editor offers essential functions for fast and reliable
+editing of the content, such as creating and adapting the configuration of
+the template system.
+
+If not already done, start a new command shell, change the folder to your
+J1 project and fire up the build-in website:
+
+.Start the website of your project (Windows)
+[source, sh]
+----
+cls && cd C:\J1\Projects\my-start && j1 site
+----
+
+For the following example, the source code editor *Atom* is used. Start your
+editor and open your project's folder (the project `my-start` is used for
+all the next examples):
+
+.Atom - Project my-start
+lightbox::atom--project-my-start[ 800, {data-atom--project-my-start} ]
+
+callout::1[Menu section]
+callout::2[Project section, ml-2 mb-3]
+
+[role="mt-3"]
+From the project section (2), navigate in the *tree view* to the folder
+`pages/public/about` and double-click the file `about_site.adoc` to
+open and edit.
+
+== Explore existing content
+
+The quickest and most direct way to gain initial experience in dealing with
+a website's content is to examine pages that are already finished, that
+already exist. The website built into the J1 Template will help a lot to
+understand most of the elements used by the Jekyll engine and J1 Template.
+The site supports you to learn the J1 Template in a quite visual way and
+helps you to practice everyday routines and procedures.
+
+=== Page blocks
+
+In the editor on the right, you find all open files organized in tabs.
+For now, only a single file is opened: the about file `about_site.adoc`.
+To work on content pages, typically, you'll have to open multiple files in
+your editor, but it is easy to switch from one file to the next using
+those tabs.
+
+The following screenshots is showing a typical structure of a content page.
+You can identify two main blocks in each of a content file:
+
+* a control block
+* a content block
+
+The control block consists of the frontmatter and the prologue section. The
+name control block suggests that the control sections are used by the builder
+engine for individual page settings. The content block defines the unique
+content of a page. Remarkable here is, the block *content* does not contain
+any HTML code; no HTML markups.
+
+Assume that the page contains the *source* code for a HTML page that must be
+processed by a *magic* first, then it's understandable that writing content
+is not done by using HTML code. The page `about_site.adoc` is of type text,
+but the file extension is `.adoc`. The reason for that is, this text file
+contains source code of Asciidoc markup, not HTML.
+
+.Atom editor - Control block of a page
+lightbox::atom--page-about-site-1[ 800, {data-atom--page-about-site-1} ]
+
+callout::1[Frontmatter section ]
+callout::2[Prologue section, ml-2 mb-3]
+
+.Atom editor - Content block of a page
+lightbox::atom--page-about-site-2[ 800, {data-atom--page-about-site-2} ]
+
+callout::3[Content block, ml-2 mb-3]
+
+[role="mt-3"]
+You can guess that the *magic* behind processing the source files has to
+do with the Jekyll builder engine. Other magics are provided via the template
+system J1 in combination with Jekyll builder engine:
+
+* processing of the (J1) prologue section
+* processing Asciidoc code (markups)
+
+This very rough overview should be enough for the time being to do a few
+practical things: change existing content.
+
+=== Change existing source pages
+
+The page `about_site` has been discussed already, but how can this page be
+accessed? Now, J1's menu system comes into the game. Open the page as shown in
+the screenshot.
+
+.Menu bar - Open page "about_site"
+lightbox::menubar--open-page-about[ 800, {data-menubar--open-page-about} ]
+
+NOTE: The menu system of J1 is a module, a fairly complex component that
+provides a lot of functionality. The menu system supports visitors to get
+access to all website pages of type `page`. Because of the complexity of the
+menu module, it makes no sense to talk about it here in more detail. Find
+some information how to use the module in section <<J1 Modules>>.
+
+==== Add an additional paragraph
+
+For a simple change, duplicate the paragraph:
+
+----
+Whether you work solo or as part of a team, it’s always a great idea to
+help visitors ...
+----
+
+Mark the block in your editor and copy (`Ctrl + c`) and paste (`Ctrl + v`)
+this block below the existing one and save the file (`Ctrl + s`). In your
+shell, you see the changes has been detected and processed.
+
+.Output in the shell running the site
+----
+YYYY-MM-DD hh:mm:ss - SITE:       Regenerating: 1 file(s) changed at YYYY-MM-DD hh:mm:ss
+YYYY-MM-DD hh:mm:ss - SITE:                     pages/public/about/about_site.adoc
+YYYY-MM-DD hh:mm:ss - SITE:     J1 QuickSearch: creating search index ...
+YYYY-MM-DD hh:mm:ss - SITE:     J1 QuickSearch: finished, index ready.
+YYYY-MM-DD hh:mm:ss - SITE:       J1 Paginator: autopages, disabled|not configured
+YYYY-MM-DD hh:mm:ss - SITE:       J1 Paginator: pagination enabled, start processing ...
+YYYY-MM-DD hh:mm:ss - SITE:       J1 Paginator: finished, processed 2 pagination page|s
+YYYY-MM-DD hh:mm:ss - SITE:                     ...done in 9.6753299 seconds.
+----
+
+In the webbrowser, the page should has been automatically reloaded and shown
+like so:
+
+.Edited page - about_site
+lightbox::browser--edited-page-about-1[ 800, {data-browser--edited-page-about-1} ]
+
+
+[NOTE]
+====
+By default, Jekyll uses the *Webrick* webserver to `serve` a website in
+development mode. Webrick is a simple and Ruby-based webserver quite handy
+to run Jekyll as a standalone web application. If Jekyll runs in *incremental*
+mode (the default for J1 development), the server shows weird errors like
+those if content pages get modified and (automatically) rebuild and reloaded:
+
+----
+YYYY-MM-DD hh:mm:ss - SITE: [YYYY-MM-DD hh:mm:ss] ERROR Errno::ECONNABORTED:
+                            An established connection was aborted by the software
+                            in your host machine.
+                            @ io_fillbuf - fd:16
+YYYY-MM-DD hh:mm:ss - SITE: PATH_TO_RUBY/lib/ruby/2.7.0/webrick/httpserver.rb:82:in `eof?'
+YYYY-MM-DD hh:mm:ss - SITE: PATH_TO_RUBY/lib/ruby/2.7.0/webrick/httpserver.rb:82:in `run'
+YYYY-MM-DD hh:mm:ss - SITE: PATH_TO_RUBY/lib/ruby/2.7.0/webrick/server.rb:307:
+                            in `block in start_thread'
+----
+
+The good news: error messages of this type can be *ignored*. It seems this
+is a side-effect of the caching strategy of Jekyll if a site is served in
+incremental mode by Webrick. The bad news: no solution has been available to
+fix this issue until now. For the time being, please ignore all errors of
+this type.
+====
+
+==== Modify the Frontmatter
+
+A Frontmatter is a YAML data block and must be the first section in the file
+of all content pages. This section is defined by triple-dashed lines to set
+predefined variables or set custom ones of your own.
+
+The Frontmatter defines a set of variables and metadata on individual pages
+for the Jekyll build-in template engine *Liquid* as well as for the Markup
+processing engines to generate HTML code from *Markdown* and *Asciidoc*
+sources for the content. The template engine Liquid is used by Jekyll to create
+dynamically the common HTML code that is shared by all content pages of a page
+layout.
+
+NOTE: Find more information on Liquid with the
+link:{url-liquid--user-guide}[Liquid User Guide, {browser-window--new}].
+
+The Markup processing engines transform the content portion of an individual
+page into the resulting HTML code. The template engine Liquid and the Markup
+processing engines are working closely together. The engine Liquid produces
+the HTML code shared by all pages of a specific *layout* and injects the
+HTML-code portion generated by the Markup processing engines individually for
+a specific content page. Later in this chapter, with section <<Layouts>>,
+you'll learn more about the relationship of the processing engines to understand
+better how Jekyll (engines) processes the Source Pages of a website.
+
+.Don't repeat yourself
+[NOTE]
+====
+If you don't want to repeat yourself for frequently used Frontmatter
+variables over and over, define *defaults* for them and only override them
+where necessary. The defauls are configured with the Jekyll site configuration
+file `_config.yml` (find examples in section *FRONTMATTER defaults*) .
+This works both for predefined (Jekyll) and custom variables.
+====
+
+With the help of the Frontmatter, all web pages are customized in a very simple
+way. Typical individual settings of websites are the *page title* and the
+*tagline*. The page title describes which page it is. The tagline provides
+additional information about the content of the page in question.
+
+Other important individual page settings are:
+
+* the description (description), which is displayed in the local search
+  (QuickSearch) for hits as a summary of the page
+* the keywords generated as (HTML) metadata for each page. Search engines
+  use keywords to analyze the content of web pages and contribute to better
+  search results
+* the categories and tags to organize the content. Categories and tags are
+  displayed in the local search (QuickSearch) for hits on a page and can help
+  your visitors to classify better a page they have found
+* the permalink to optimize the catalogs of search engines (SEO) to simplify
+  the URLs of your web pages
+* the used J1 modules (resources) of the website, which are not *generally*
+  loaded for a page
+* the options of the loaded modules (resource_options), which allow individual
+  settings for each page
+
+===== Set the page title and/or tagline
+
+Use the `about_site` page again to modify the settings for the variables
+title and tagline:
+
+[source, yaml, role="noclip"]
+----
+title:                                  J1 Template
+tagline:                                about
+----
+
+Change the tagline like so:
+
+[source, no_template]
+----
+you should know about
+----
+
+and save the page. Creating (HTML) pages are a dynamic process. All changes
+to the Frontmatter are *dynamically* applied to the site. Sure, changing the
+tagline is a simple example, but it shows Jekyll's *dynamic* behavior. All
+values of variables are taken into account in the templates (layouts), and
+after re-creating a modified page, they also carry the adjusted settings.
+
+==== Modify the Prologue
+
+The Prologue (Page Initializer) is a feature of the J1 Template. Behind this
+are additional settings for the *Asciidoctor* generator, such as additional
+programs (procedures) of the template engine Liquid, which are automatically
+applied to each page.
+
+The settings for the Asciidoctor generator are formulated as *Asciidoc* markup
+language tags. The About page uses the `badges-enabled` tag to control the
+output of badges. When the value of the tag `badges-enabled` is set to `true`,
+an additional line with badges is generated in the further processing of the
+page:
+
+[source, no_template, role="noclip"]
+----
+  ifeval::[{badges-enabled} == true]
+  {badge-j1--license} {badge-j1--version-latest} {badge-j1-gh--last-commit} {badge-j1--downloads}
+  endif::[]
+----
+
+This is where another *magic* of J1 Template comes into play: procedures for
+the template engine Liquid and `attributes` (variables) evalualted by the
+Ascidoc processor Asciidoctor. With the help of both, collections of Asciidoc
+variables can be processed for a page.
+
+Collections of Asciidoc variables are stored in *files*. The files of these
+control variables are named `attributes.asciidoc` and can be found in two
+locations:
+
+* global: ~/_includes/attributes.asciidoc (your project folder, e.g. `my-start`)
+* local:  <your_page_folder>/_includes/attributes.asciidoc
+
+Asciidoc attributes (variables) defines:
+
+* frequently used URLs
+* Frequently used special characters and character chains (strings)
+* Author information
+* Data on image and video files
+
+The use of variables increases the readability of the source code and can
+significantly simplify the notation when using data elements for Asciidoc
+macros. Individual Asciidoc variables can be defined and frequently used
+attributes can be loaded from files via the prolog of the source code of a
+page.
+
+===== Conditional code blocks
+
+With the help of conditional code blocks, you can easily individualize the
+content of a page. A simple example of the application is the output of a line
+with badges common on the Internet. In the Prolog section of the source code,
+you can find the *local* attribute `badges-enabled`. The variable is used to
+control a conditional code block. Just rewrite the value of this (Asciidoc)
+variable to the value `true`.
+
+[source, no_template]
+----
+:badges-enabled:                        true
+----
+
+This means that the additional code is evaluated when the modified page is
+generated and transferred to the output of the HTML page.
+
+TIP: Try to find out what lies behind the attributes of each
+Badge (for example: `badge-j1--license`) are hidden.
+
+===== Attributes used for Asciidoc markups
+
+In addition to simple tags, the Asciidoc markup language offers a large set of
+macros for generating more complex HTML structures that can be used to integrate
+font icons (macro `icon:`) or HTTP hyper links ((macro `link:`) for example.
+Asciidoc attributes are very useful and will greatly simplify the notation of
+Ascidoc markups for macros.
+
+Add the following code to the `about_site` page and save the changes to
+include the additional lines of code in the HTML output:
+
+[source, no_template]
+----
+A battery symbol is used on the pages of the J1 Template documentation,
+which symbolizes the individual level of knowledge for the use of:
+
+* Functions for beginners of template system J1: {level--beginner}
+* Functions for users with basic knowledge of J1: {level--intermediate}
+* Advanced J1 features: {level--advanced}
+* Functions for experts in the application of J1: {level--expert}
+
+You find an overview of all the functions of the template system J1 on the
+page link:{url-j1--features}[J1 Template Features, {browser-window--new}].
+----
+
+In behind the attribute `{level--xyz}`, the Asciidoctor macro `icon:` is used.
+Check the global attribute configuration `~/_includes/attributes.asciidoc`
+for more details.
+
+[source, prometheus, role="noclip"]
+----
+// TAGS, global asciidoc attributes (variables)
+// -----------------------------------------------------------------------------
+tag::tags[]
+...
+:icon-battery--quarter:                           icon:battery-quarter[role="md-blue"]
+...
+// level indicators
+//
+:level--beginner:                                 {icon-battery--quarter}
+----
+
+The notation of the `link:` macro benefits in two ways in terms of
+readability:
+
+* the URL parameter is shorter than the actual HTML link and is easier
+  to read and understand in the source text due to the symbolic notation
+* the additional parameter via the `browser-window--new` attribute is
+  self-explanatory. Clicking on this link will open a *new* browser
+  tab to display the page and shows the content in a separate window.
+
+=== Complex changes on content sources
+
+For Jekyll, many templates are available that cover all typical use cases for
+websites. The bad story: most of them require programming and low-level
+customization. Deep knowledge of Jekyll and valuable experience of templating
+techniques using HTML, CSS, and Javascript are required.
+
+For J1, This *not* the case if you're using J1. Typical examples of using
+the configuration capabilities in conjunction with integrated software of the
+the following sections explain the template system.
+
+==== Asciidoc Extensions
+
+Jekyll, like Asciidoctor, is extendable by additional functions. One large
+number of plugins are available here. Extensive functional extensions
+are usually offered as additional Ruby GEMs. The gem-based ones Plugins
+are installed like ordinary GEM and then via the Site configuration
+`~/_config.yaml` included.
+
+[source, yaml, role="noclip"]
+----
+  # ----------------------------------------------------------------------------
+  # PLUGIN configuration
+  #
+  plugins:
+    - asciidoctor
+    - jekyll-asciidoc
+    - jekyll-sitemap
+    - j1-paginator
+----
+
+For minor extensions that don't necessarily require the procedures of Ruby GEM,
+the program code of a plugin is installable in the folder `~_plugins` of the
+J1 project. Plugins in the `~_plugins` directory *automatically* integrated
+without additional configuration settings. The restriction here compared to
+a GEM: The plugin's source must consist of only one file.
+
+.Plugin files and site configuration
+lightbox::atom-editor--plugin-files-site-config[ 800, {data-atom-editor--plugin-files-site-config} ]
+
+Many lightweight plugins are already available in the `~_plugins` directory.
+All extensions for the Asciidoc markup language or the engine *Asciidoctor*
+are stored in the directory  `~_plugins/asciidoctor-extensions`.
+
+The simpler and clearer the website's source code, the better the source to
+be read without generating the HTML output. In addition, the code becomes
+more compact and generally easier to write down. As simpler the code, the
+fewer errors can occur in the notation.
+
+Blocks that result in complex HTML markup in later HTML output are noted
+in Asciidoc via macros. Macros are parameterizable markups and the parameters
+control how the Asciidoc engine processes to generate target code.
+
+NOTE: There are two AsciiDoc macro types: block and inline. As for all macros,
+the block and inline forms differ by the number of colons that follow the macro
+name. The *block* form uses *two* colons (::), whereas the inline form only uses
+a single one (:).
+
+===== Inline Lorem Macros
+
+Inline macros can either be integrated within a section of the text, for
+example, a paragraph, or, like block macros, can create independent code
+sections. A good example of using these macros is so-called blind texts,
+known as **Lorem-Ipsum** texts. If a new content page is developed, the
+content of new articles should be written down in rough sections by the
+authors first. The sections outline the idea of what the page is supposed
+to describe, but the actual text is (still) unknown.
+
+Blind texts can be a great help when providing sketches of new pages with
+a type of text. The sketch will be much more similar to a *real* page with
+dummy text and will help the author develop the page's structure and content.
+
+NOTE: You can find examples of dummy texts supported by the J1 template
+in the round trip on the page
+link:{url-j1-learn--asciidoc_extensions}#blind-text-lorem[Asciidoc Extensions, {browser-window--new}].
+
+The page `about_site.adoc` should be used again for experiments with dummy
+texts. Suppose your new website describes your business as a Delivery service
+for breakfast buffets. The **About**  pages provide an overview of what
+the company can do for customers and what can be found on the pages of your
+presence.
+
+A sketch of the content could have the following sections:
+
+* Experience in catering since YYYY
+* Your services
+** Large selection of national and internal dishes
+** Compilation of buffets per person
+** Crockery and cutlery service
+* Your delivery service
+** Delivery areas
+** Delivery times and days
+* Contact addresses
+Contact person PPP +
+Service mailbox MMM
+
+These sections can initially be formulated as headings. This skeleton type
+makes the page clear whether sections are also be used later for the
+*final* text.
+
+.A headings skeleton
+[source, no_template]
+----
+== Experience in catering since YYYY
+== Our services
+=== Large selection of national and internal dishes
+=== Compilation of buffets per person
+=== Crockery and cutlery service
+== Our delivery service
+=== Delivery areas
+=== Delivery times and days
+== Contact addresses
+Contact person PPP +
+Service mailbox MMM
+----
+
+Copy the *heading skeleton* into the  `about_site.adoc` page. If the page
+is newly generated, you will find that pure headings do not look good.
+The source text resembles a real skeleton and is not pleasant to read
+from this perspective. Writing content is not easy. Terrible source code
+and websites are more than terrifying from a psychological point of view.
+The motivation at work will suffer, and many things that need to be done
+become more tedious and even harder to do.
+
+Change the first headings like this:
+
+[source, no_template]
+----
+== Experience in catering since YYYY
+
+lorem:sentences[5]
+
+lorem:sentences[7]
+
+== Our services
+
+lorem:sentences[7]
+
+lorem:sentences[5]
+
+=== Large selection of national and internal dishes
+
+lorem:sentences[5]
+----
+
+The impression of the page as a source and in the generated web page
+changes significantly. Customize the page with additional dummy texts
+and replace the placeholders *PPP* and *MMM* with appropriate Lorem macros.
+
+NOTE: Inline macros can be used like block macros if blank lines are
+placed around the inline macros. The blank lines create new sections,
+as are automatically generated with block macros.
+
+===== Image Block Macros
+
+Complex markup typically includes all elements related to images. These
+web page components will never be part of sections: they are separate,
+independent parts of a page.
+
+NOTE: The base path for all image-related data is a side-wide (Asciidoc)
+configuration (see `_config.yml`) and points per default to `/assets/images`.
+The base path is automatically added to each image. If you want to use the
+default asset path for images, a relative path needs to be given for
+`path/to/image`.
+
+A commonly used Asciidoc **Block** macro to place images on a page is the
+`image::` macro:
+
+.Macro to place images
+[source, no_template, role="noclip"]
+----
+.image_title
+image::<path_to_image>["<alt_text>", role="<additional CSS styles"]
+----
+
+NOTE: The `role` parameter for specifying additional CSS styles is
+*optional* in the `image::` macro and can be omitted.
+
+.Beispiel für das Einbinden eines Bilds
+image::/assets/images/modules/gallery/old_times/image_01.jpg["GrandPa's 80th Birthday", role="mb-4 wm-800"]
+
+Again, change the content of `about_site` to add a simple image to that page.
+To make it simple for now, use the image *GrandPa's 80th Birthday*. Add the
+following markup to that page and watch the outcome:
+
+[source, prometheus]
+----
+.Your added image
+image::/assets/images/modules/gallery/old_times/image_01.jpg["GrandPa's 80th Birthday", role="mb-4"]
+----
+
+The additional CSS style (role) `mb-4` comes from the *Bootstrap* framework and
+adds a `margin` below the image. Play a bit with the additional CSS styles. The
+parameter `wm-800` is a CSS style provided by J1 is used to limit the *witdh*
+of an block element to a maximum of *800 pixels* in a page. Add the next
+snippet below the existing one.
+
+[source, prometheus]
+----
+.Your added image - Limit the image width
+image::/assets/images/modules/gallery/old_times/image_01.jpg["GrandPa's 80th Birthday", role="mb-4 wm-800"]
+----
+
+Other, more complex Asciidoc Macros are available with J1 for image-based data
+discussed in section <<J1 Modules>>. More configuration changes on a page and
+additional configuration is needed to make use of J1 Modules like Lightboxes
+and Galleries for image data.
+
+===== Admonition Block Macros
+
+Admonition macros are emphased text elements placed in the running text
+but create independent sections. Admonitions are intended to draw the
+reader's attention to the text, noted in 5 different levels.
+
+.Macro types
+[cols="^4a,8a, subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Example
+
+|`NOTE`
+|NOTE: Your text for a *NOTE* goes here.
+
+|`TIP`
+|TIP: Your text for a *TIP* goes here.
+
+|`IMPORTANT`
+|IMPORTANT: Your text for a *IMPORTANT* message goes here.
+
+|`WARNING`
+|WARNING: Your text for a *WARNING* goes here.
+
+|`CAUTION`
+|CAUTION: Your text a *CAUTION* message goes here.
+
+|===
+
+Two variants can be used for the notation of Admonition Macros:
+
+.Admonition Markup, simplified
+[source, prometheus]
+----
+NOTE: Your text goes here.
+----
+
+.Admonition Markup, block element
+[source, prometheus]
+----
+.Admonition title
+[NOTE]
+====
+Your text goes here.
+====
+----
+
+The simplified notation is well suited if the text consists of only a few
+sentences and only Asciidoc *Inline* macros are used to design the test.
+The notation as a *Block* element is necessary if title lines or more
+complex block macros such as source blocks or tables are used.
+
+.Admonition using a title
+[NOTE]
+====
+Admonition NOTE written as a block element using a `title` element.
+====
+
+Add the `about_site` page again and add various Admonition macros to the
+source code. Use both spellings. A **Title** element can also be used for
+block notation.
+
+
+== Anatomy of source pages
+
+You were already able to examine the general structure of a source page
+in the <<Page blocks>> section. You learned that the source of a page
+consists of the **Control** block and the **content** block. Your
+modified `about_site` page might look like this:
+
+.Modified About page
+lightbox::pages-about--modified[ 800, {data-pages-about--modified}, role="mb-4" ]
+
+Besides the actual content of the page from the **Content** block
+mdi:alpha-c-circle[mdi-md, md-amber], there are a lot of other elements
+like that Navigation mdi:alpha-a-circle[mdi-md, md-amber] and page
+header mdi:alpha-b-circle[mdi-md, md-amber]. Look at other sites
+You'll find that all pages on your site have these elements on your site.
+
+This behavior is explained by the *page model* that the Jekyll builder
+engine uses to generate HTML pages. Besides the unique content of a page
+from the content block, all pages *inherit* components fundamentally
+required for each page. In other words, all pages consist of general
+elements that each page has and that unique content.
+
+The structure of an HTML page is complex. In addition to the *visible*
+elements displayed in the browser, many other *invisible* HTML elements
+are required for a complete web page. For this, take a look at the HTML
+code of a web page. Displaying the HTML code can be called up with the
+key combination kbd:[Ctrl+U]. The HTML code of the fairly simple page
+`about_site` consists of hundreds of lines. The code contains many
+invisible HTML elements, which are required for loading the *resources*
+used, for example. The resources of a page include the required *CSS styles*
+that give a page its shape and **Javascript** components responsible
+for the dynamic behavior of pages.
+
+An important promise of the template system J1 is: To create a website
+is no programming. No programming is required because all required programs
+exist already and are appropriately used by the builder engines to generate
+the resulting HTML codes of the pages. Knowledge of the details of these
+programs is not necessary, but it is very helpful to know how the HTML
+code of a page is created, how the Jekyll builder engine generates the
+resulting HTML code from source pages.
+
+=== Layouts
+
+Jekyll's page model for generating HTML code from page sources is difficult
+to understand. But even here, it is not necessary to know all the details.
+However, you should be familiar with principles: The *layouts*.
+
+Layouts are **construction** templates for HTML pages, each describing a
+specific *step* of processing. The resulting HTML code is created by
+applying several layouts in a specific order: *inheritance*.
+
+Jekyll applies a strategy of inheriting content along a line of inheritance
+to layouts. The unique content is created via the layout of the respective
+*page type*. For example, `page` for regular content pages or `post` for
+blog posts. Content shared across all pages is described using the `default`
+layout. As a very simple picture of processing pages with Jekyll can be the
+following (Inheritance) succession are understood:
+
+.Inheritance
+[source, no_template, role="noclip"]
+----
+  HTML-Code < Jekyll < layout-default < layout-page < Source code (Asciidoc)
+----
+
+Die Builder-Engine Jekyll liest zunächst den Quelltext einer Seite, beispielsweise
+die Seite `about_site`. Diese Seite ist mit dem Layout `page` verbunden. Die
+Konstruktionsvorlage `page` verarbeitet zunächst nur die individuellen Anteile
+dieser Seite. Layout `page` seinerseits ist mit dem Layout `default` verbunden.
+Der Konstruktionsschritt über das Layout `default` ergänzt alle generellen
+Komponenten einer Webseite und verbindet (vererbt) die Ergebisse aus dem Layout
+`page` mit den Ergebnissen der Verarbeitungen aus dem Layout `default` zu dem
+resultierenen HTML-Kode der Seite.
+
+NOTE: Layouts describe which programs are called and in which order.
+These programs are associated with configuration data that describes
+the details of the work step in question. All Configuration data is in
+the project directory `_data`. In this **data** directory, you will find
+a folder `layouts` containing control files with the same name for all
+available layouts.
+
+.Base layouts
+[cols="^2a,4a,6a, subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Layout |Configuration |Description
+
+|`default`
+|`_data/layouts/default.yml`
+|All general components of a website are generated via the `default`
+layout. General components include all resources (assets) such as
+CSS and Javascript data responsible for the design and dynamics of
+websites.
+
+|`page` \| `post`
+|`_data/layouts/page.yml` \| `_data/layouts/post.yml`
+|All individual components of a website of type *Page* are generated via
+the `page` layout. +
+All individual components of a website of type *Post* are generated via
+the `post` layout. +
+The page components are adjustable individually via the *Frontmatter* of
+the source code of posts and pages. The adjustable components include the
+(J1) modules used and HTML metadata such as `description` and `keywords`.
+
+
+|===
+
+IMPORTANT: The template system J1 uses many other layouts. To not completely
+go beyond the scope of this tutorial, these layouts will *not* be discussed.
+
+=== Zusammenfassung
+
+As said initially, Jekyll's page model for generating HTML code via layouts
+is not easy to understand. The key takeaways from the previous section
+should be:
+
+* HTML pages are not created as monolithic blocks but in individual
+  steps defined as layouts.
+* Layouts take on specific sub-tasks in the generation sequence
+* Layouts are linked to each other through an inheritance
+
+If you are interested, the configuration files of the layouts can provide
+information about which programs are started to generate the HTML code
+of a page in which order.
+
+In the source view of a browser to display the HTML code (kbd:[Ctrl+U]),
+you find for each program appropriate (HTML) comments. These comments give
+a good overview of how the HTML code came about.
+
+
+== Create content from scratch
+
+Authors should create source pages from scratch to create their content for a
+website. To not start completely from a *blank* page, J1 offers ready-made
+skeletons for new source pages. In the `~/pages/public/asciidoc_skeletons`
+folder, three different types support different methods of developing
+new pages.
+
+.Available Asciidoc skeletons for pages
+[cols="^4a,8a, subs=+macros, options="header", width="100%", role="rtable mt-3"]
+|===
+|Name |Description
+
+|`simple-document`
+|Simple documents are used quite often. If the number of chapters is about
+or less than three and the document is small in size. This document type
+use only *global* Asciidoc include files.
+
+|`multi-document`
+|Multi-chapter documents are used for more complex articles of a website. If
+the number of chapters is or exceeds three for an article, it could make sense
+to split a larger documents chapter-wise into separate files. This document
+type is based on  *multiple* Asciidoc documents and make use of local and
+global Asciidoc include files.
+
+|`documentation`
+|A document of type documentation (book) typically consists in a large
+number of chapters and sections. To make this manageable, book-type
+documents are splitted in multiple files placed in a nested folder
+structure. Complex AsciiDoc projects of type documentation can be worked
+on by multiple authors. +
+This document type use global and *multiple* local Asciidoc include files.
+|===
+
+=== Creating pages
+
+The skeleton of a page based on the template `simple-document` is used for
+all further experiments. This template is used very frequently, as many pages
+on a website only use a handful of chapters to structure the content.
+
+First, create a superordinate directory `~/pages/public/sandbox` to manage
+your new pages. Copy the whole `simple-document` folder from the
+`~/pages/public/asciidoc_skeletons` location to your new sandbox folder
+`~/pages/public/sandbox`.
+
+CAUTION: If you copy existing content folders that contain documents,
+conflicts will arise because the copy creates pages with identical URLs
+on the web. After copying, in Frontmatter of the new file, the `permalink`
+parameter must be adjusted.
+
+After completing the copy, a few things need to be adjusted:
+
+* Change the name of the folder `simple-document` to `simple-sandbox`
+* Open the file `simple.adoc` from this directory and write
+  the `permalink` parameter to the value `/pages/public/sandbox/simple/`
+  around.
+
+After the generation is complete, the new page is available in your web
+*my-site* under the URL:
+
+[source, html]
+----
+http://localhost:40000/pages/public/sandbox/simple/
+----
+
+.New page shown in a Browser
+lightbox::pages-skeleton--simple-page[ 1024, {data-pages-skeleton--simple-page}, role="mb-4" ]
+
+TIP: To better understand how the templates work, the three skeletons
+generate the same page content but based on a different source model.
+The sources are structured completely differently but deliver the same
+result in the generated website.
+
+This current content of the template  should not play any role for the
+following tests and can be overwritten by more initial settings. Open
+the `simple.adoc` page and replace the existing content with the following
+code:
+
+.New source code for `simple.adoc`
+[source, yaml]
+----
+---
+title:                                  Sandbox
+tagline:                                simple sandbox
+date:                                   2022-01-01 00:00:00
+description: >
+                                        Simple documents are used quite often. If the number
+                                        of chapters is about or less than three and the document
+                                        is small in size. This document type does not use any
+                                        (local) Asciidoc include files or attributes.
+
+categories:                             [ Knowledge ]
+tags:                                   [ Asciidoc, Sandbox, Document ]
+
+robots:
+  index:                                false
+  follow:                               false
+
+permalink:                              /pages/public/sandbox/simple/
+regenerate:                             false
+
+resources:                              [ animate, clipboard, lightbox, rouge ]
+resource_options:
+  - toccer:
+      collapseDepth:                    3
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/pages/skeleton/antonino-visalli-1920x1280.jpg
+          alt:                          Photo by Antonino Visalli on Unsplash
+          alignY:                       top
+          badge:
+            type:                       unsplash
+            author:                     Antonino Visalli
+            href:                       https://unsplash.com/@_visalli
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+The Asciidoc skeleton *simple-document* a helper for setting up a base file
+and folder structure for simple-document AsciiDoc pages based on _Jekyll_ and
+_J1 Template_. You need *both* to use this skeleton creating AsciiDoc
+documents from it.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+== Chapter 1
+
+lorem:sentences[5]
+
+== Chapter 2
+
+lorem:sentences[5]
+
+=== Section 1
+
+lorem:sentences[3]
+----
+
+==== Content categories
+
+The builder engine *Jekyll* differentiates between two different categories
+of content:
+
+* unordered content (pages)
+* ordered content (posts)
+
+Thus, all pages of type *Page* are unordered, while all *Blog Posts* are
+orderly. The property of order is only of interest to programmers. To make
+documents accessible to visitors, navigation options are needed. From the
+perspective of the Jekyll engine, there are no options for (automatic)
+structuring *Pages* for programmers. For *Posts*, this is quite different.
+
+The Template System J1 structures *Page* and *Post* type documents in its
+way. The template provides you with ready-made programs that structure a
+website's content and are accessible to visitors via navigation do. Authors
+have little exposure to the Jekyll builder engine's elementary delivery
+methods to visitors.
+
+J1 provides these  navigation components :
+
+* J1 Navigator, for *Page* type documents
+* J1 Blog Navigator, for *Post* type documents
+
+The *Posts Explorer* is used for navigating blog posts and is discussed in
+the subsequent <<J1 Blog Navigator>> section. The first thing to look at
+is how documents of the *Page* type can be made accessible to your visitors.
+
+==== J1 Navigator
+
+The *J1 Navigator* component is a module in the sense of J1. Modules are
+dynamic components and use CSS and Javascript elements to provide the
+necessary functionality for a website. One of the features provided
+by the module J1 Navigator is the *Menu Bar* that provides visitors
+dropdown menus to browse and select content pages.
+
+.Menu managed by the J1 Navigator
+lightbox::pages-j1-navigator--menu[ 800, {data-pages-j1-navigator--menu}, role="mb-4" ]
+
+The J1 Navigator module offers several other functions, but changes to
+the menu bar are the most common. To manage the menu bar settings more handy,
+the settings are separated into a configuration file:
+`~/_data/modules/navigator_menu.yml`.
+
+Open this file in your editor. The first impression conveys that the menu
+configuration isn't that easy either. The configuration is simple, but
+extensive existing settings appear initially complex.
+
+The menu system supports items with and without submenus (dropdowns). The
+simplest element in the menu bar is an item that does *not* create any
+other **sub**-menus (dropdowns). The configuration for an entry in *Level 0*
+has the following form:
+
+.Configuration of a menu entry of level 0
+[source, yaml]
+----
+# ------------------------------------------------------------------------------
+# Menu SANDBOX
+#
+- item:                                 Sandbox
+  href:                                 /pages/public/sandbox/simple/
+----
+
+Add the configuration from above to the file `~/_data/modules/navigator_menu.yml`
+below the entries of the *Learn* menu. The result should then look like this:
+
+.Menu entry of level 0
+lightbox::pages-j1-navigator--menu-sandbox[ 800, {data-pages-j1-navigator--menu-sandbox}, role="mb-4" ]
+
+An entry in *Level 1* is helpful to enable a little more options in the
+menu entries for sandbox documents. The submenu allows you to call up
+different pages as a dropdown. The configuration for an entry in *Level 1*
+has the following form:
+
+.Configuration of a menu entry of level 1
+[source, yaml]
+----
+# ------------------------------------------------------------------------------
+# Menu SANDBOX
+#
+- item:                                 Sandbox
+  sublevel:
+
+    - title:                            Simple Sandbox page
+      href:                             /pages/public/sandbox/simple/
+      icon:                             pencil-box-outline
+----
+
+.Menu entry of level 1
+lightbox::pages-j1-navigator--menu-sandbox-dropdown[ 800, {data-pages-j1-navigator--menu-sandbox-dropdown}, role="mb-4" ]
+
+Drop-down menus offer other advantages:
+
+* All entries can be provided with an *icon*
+* All entries have an *individual* text that can help
+  visitors to classify the content of a page
+
+The presented configuration of the sandbox shows that entries are not
+particularly complicated. Compare the settings of the menu bar of your
+site with the menu displayed in the browser. The principle of the menu
+configuration will certainly become a lot clearer quickly and will also
+help write more extensive entries.
+
+==== J1 Modules
+
+AsciiDoc macros have already been discussed in the <<Asciidoc Extensions>>
+section. Asciidoc macros, which make J1 *Modules* usable in websites, are
+a little more complex. The use of modules requires additional settings in
+configuration files, but again there are none programming required.
+
+J1 modules are *independent* Javascript programs integrated into the template
+system. Modules are listed as *Resources* (the actual programs) and integrated
+into the template system with the help of *adapters*. The adapters, complemental
+Javascript programs, ensure that no programming is required to use the module.
+Only suitable *settings* are necessary for using J1 Modules.
+
+TIP: All programs provided and integrated with J1 are *open-source projects*
+and can be used *free*.
+
+The task of Ascidoctor Macros for J1 Modules is to generate the necessary
+HTML markup within a website, which are required by the connected JavaScript
+programs to provide the dynamic functions of the website in the browser. The
+settings ensure the desired behavior of a module. The adapters *start* the
+respective Javascript programs when the website is displayed in the browser
+and run customizations if required.
+
+NOTE: Modules are complex J1 components and are certainly not easy to
+understand. From the perspective of **non**-programming authors, only the
+settings of the modules are important.
+
+Frequently used Asciidoc Macros for J1 modules used to embed *lightboxes*
+or *galleries* of images are:
+
+.Asciidoc Markup for single images
+[source, no_template, role="noclip"]
+----
+.block_title
+lightbox::<block_id>[ <images_width>, <images_data_id>, <role="<additional CSS styles>"> ]
+----
+
+.Example of a lightbox for single images
+lightbox::images-lightbox-standalone[ 800, {data-images-lightbox--standalone}, role="mb-4"]
+
+If more than a single image is given for a J1 Lightbox block, the images
+can be grouped to enable a simple sliding functionality through this group
+of related images. Enabling this function, the `group` option needs to be
+configured for the macro.
+
+.Asciidoc Markup for groups of images
+[source, no_template, role="noclip"]
+----
+.block_title
+lightbox::<block_id>[ <images_width>, <images_data_id>, <group_name>, <role="<additional CSS styles>"> ]
+----
+
+.Example of a lightbox displaying groups of images
+lightbox::images-lightbox-group[ 395, {data-images-lightbox--group}, lb_group, role="mb-4 wm-800" ]
+
+.Asciidoc Markup for image galleries
+[source, no_template, role="noclip"]
+----
+.block_title
+gallery::<gallery_id>[ <role="<additional CSS styles>"> ]
+----
+
+.Example of an image gallery
+gallery::jg_old_times_2[ role="mb-3 wm-800" ]
+
+NOTE: The `role` parameter for specifying additional CSS styles is
+*optional* in all macros and can be omitted.
+
+A Lightbox is a quite simple J1 Module to include single images or groups
+of images via a lightbox macro `lightbox::` on a page. In particular,
+displaying images for high resolutions using the `image::` macro cannot
+be used for original sizes on a page. Lightboxes can help here.
+The images are displayed in smaller sizes but can be expanded to their
+original resolution by clicking on the image.
+
+Apply the example *Lightbox for single images*  to your new sandbox document
+`simple.adoc` below the dummy text of the first chapter. The given source
+include the J1 Lightbox Module with an additional dummy text below:
+
+[source, prometheus]
+----
+lightbox::images-lightbox-standalone[ 800, {data-images-lightbox--standalone}, role="mb-4"]
+
+lorem:sentences[3]
+----
+
+The parameters in the Asciidoc markup have the following meaning:
+
+`images-lightbox-standalone`::
+All modules require an ID. The Asciidoc macro generates the necessary
+HTML markup for the module, but the generated HTML block requires
+a unique identifier. Modules can use the *ID* to distinguish between
+elements of the same *type* (lightbox for example). For the Lightbox module,
+the ID can be freely selected. However, it is advisable to derive the
+ID from the attribute's name to make uniqueness of the identifier sure.
+
+`800`::
+Limiting the size (width) of the image displayed on the page to 800 pixels.
+
+`data-images-lightbox--standalone`::
+The curly brackets address an Asciidoc *attribute*. The definition of
+these variables can be found in the *global* ascidoc attributes file
+`~/_includes/attributes.asciidoc`.
+
+`role="mb-4"`::
+Specifying `mb-4` (Bootstrap style) adds a CSS style for the lightbox
+that creates an additional border below the Lightbox element.
+
+In a second step, add the example *Lightbox displaying groups of images*
+to the sandbox document below the dummy text in the second chapter.
+The Asciidoc code for embedding the lightbox with an additional blind text
+is:
+
+[source, prometheus]
+----
+lightbox::images-lightbox-group[ 395, {data-images-lightbox--group}, lb_group, role="mb-4 wm-800" ]
+
+lorem:sentences[3]
+----
+
+The parameters in the Asciidoc markup have the following meaning:
+
+`lb_group`::
+The Asciidoc *attribute* `data-images-lightbox--group` contains two images.
+To display both images in the *Lightbox*, the parameter `lb_group` creates
+a *group* and you can switch between the images.
+
+`role="mb-4 wm-800"`::
+Again, the information supplements CSS styles for the lightbox. The
+styles apply an additional border below the Lightbox and limit the
+element's width on the page to 800 pixels.
+
+The lightbox module is quite simple. Only simple Asciidoc variables are
+required to configure the images.
+
+[source, prometheus, role="noclip"]
+----
+:data-images-lightbox--standalone: "modules/gallery/old_times/image_02.jpg, GrandPa's 80th Birthday"
+:data-images-lightbox--group:      "modules/gallery/old_times/image_03.jpg, GrandPa's annual journey, modules/gallery/old_times/image_04.jpg, GrandPa's annual journey"
+----
+
+The module of the simple lightbox is very well suited for individual images.
+Still, it becomes more difficult to use it for several images, and it is
+hardly possible to display more than two or three images as a group in a
+meaningful way. Galleries are a better solution for displaying of image
+groups, even in large numbers.
+
+The J1 template offers the very powerful **Justified Gallery**-Module for
+displaying larger groups of images. The configuration is more extensive
+since the module offers significantly more functions. The example
+*Image gallery* clearly shows the various functions.
+
+A picture gallery combines two J1 modules:
+
+* a gallery component (JustifiedGallery)
+* a powerful lightbox (LightGallery) that adds additional
+  functionality to the full-size image display
+
+Most J1 modules are only required on certain pages. Therefore, loading
+the required resources only makes sense if the components are used on a
+page. Which modules will be loaded for a page configured from the Frontmatter
+via the `resources` parameter of a page. To make use of an image gallery,
+replace the settings in the Frontmatter of the `simple.adoc` page with the
+following code:
+
+.Extendend resources for galleries
+[source, yaml]
+----
+resources:                              [ animate, clipboard, lightbox, lightGallery, justifiedGallery, rouge ]
+----
+
+TIP: The need to give additional information about a page's resources
+(modules) seems cumbersome. Site visitors reject the best pages with
+good design and excellent content if the page takes too long to be
+displayed in the browser. In addition to content and design, the
+*performance* of a website is essential. Reducing the number of
+resources for a page will significantly reduce the time required
+to load a page in a web browser.
+
+The macro for embedding an image gallery from the example shown
+*macro for image galleries* is:
+
+.Asciidoc Markup for an image gallery plus additional blind text
+[source, prometheus]
+----
+gallery::jg_old_times_2[ role="mb-4 wm-800" ]
+
+lorem:sentences[3]
+----
+
+The parameters in the Asciidoc markup have the following meaning:
+
+`jg_old_times_2`::
+Like any module, a unique *ID* is required to distinguish elements of
+the same *type*. In contrast to the markup of the lightbox `lightbox::`,
+this identifier is *not* freely selectable and must correspond to the
+ID of the *gallery* from the *configuration* of the module.
+
+`role="mb-3 wm-800"`::
+As with the lightbox module, the specifications add CSS styles for
+displaying the element on the page.
+
+It is noticeable that the notation of the markup uses fewer parameters
+than is the case with the lightbox macro `lightbox::`. The reason for
+this is the outsourcing of the settings to a separate configuration file
+`~/_data/modules/justifiedGallery.yml`.
+
+.Configuration of the gallery `jg_old_times_2`
+[source, yaml]
+----
+# ----------------------------------------------------------------------------
+# Old Times 2
+#
+- gallery:
+    enabled:                        true
+    id:                             jg_old_times_2
+    type:                           image
+
+    images_path:                    /assets/images/modules/gallery/old_times
+    thumb_path:                     /assets/images/modules/gallery/old_times
+
+    images:                         [
+                                      image_01.jpg, image_02.jpg,
+                                      image_03.jpg, image_04.jpg
+                                    ]
+    captions_gallery:               [
+                                      "GrandPa's 80th Birthday",
+                                      "GrandPa's 80th Birthday",
+                                      "GrandPa's annual journey",
+                                      "GrandPa's annual journey"
+                                    ]
+
+    gallery_options:
+      rowHeight:                    200
+      margins:                      5
+
+    lightbox_options:
+      lightbox:                     lg
+      mode:                         lg-fade
+      cssEasing:                    cubic-bezier(0.25, 0, 0.25, 1)
+----
+
+As the last step for this section, expand the Asciidoc markup code of the
+image gallery into the new sandbox document below the dummy text in the
+second chapter below the *Section 1* section.
+
+How do you like the custom sandbox page now?
+
+By adding images, the sandbox page has taken shape. The page has gained
+some dynamic in the browser but can still be read easily in the source
+text. The Asciidoc markups remain legible for the author without the website
+necessarily being called up in the browser. The decisive advantage of the
+Asciidoc markup language: even complex elements can be written down simple,
+remain legible, and the meaning stays understood.
+
+=== Creating posts
+
+Creating content for *Post* of type `post` does not differ from *Page* type
+articles. All Asciidoc markup can be used equally for both types without
+exception. That raises the question: What's the difference between Post and
+Pages if it's not the content?
+
+The difference between the two content types is determined by the methods
+of generation provided by the Jekyll post-builder engine. The site builder
+link:{url-jekyll--home}[Jekyll, {browser-window--new}] describes itself as
+*Blog-Aware*. The ability *Blog-Aware* is intended to describe that the
+generator offers special procedures for this type of content and offers
+extended possibilities for processing blog articles.
+
+==== Ordering posts
+
+As already described in the section <<Content categories>>, the content type
+`post` is *ordered*. In other words, unlike articles of type `page`, blog
+posts can be *sorted*. Things could be sorted by criteria like size, weight,
+or color. But how do you sort digital content and why?
+
+In the history of the development of web presentations on the Internet,
+various *purposes of use* of websites on the World Wide Web (WWW) have
+emerged. A special group of websites here is *news portals*. Portals use
+their methods to make the site's content, the news, available to the visitors.
+
+A good example of such a news portal is the
+link:{url-ny-times--home}[New York Times, {browser-window--new}]. The design
+of the site is surprisingly simple. The site presents its content, as simple
+blocks arranged in a sort of arrangement of different sized bricks of a wall.
+This **Mansory Grid** layout is particularly suitable if a so-called
+*Portfolio*, a collection of content to be presented.
+
+A similar *behavior* of displaying the *collection* of blog posts is used by
+the J1 Template on the homepage. The appearance of the *wall* like the *stones*
+(blocks) on the side, is completely different for J1 Template. However, the
+representations on the NYT portal are comparable to J1.
+
+.J1 Home - Latest News
+lightbox::images-j1-home-latest-news[ 800, {data-images-j1-home-latest-news}, role="mb-4"]
+
+Another **block** representation of posts is found in the J1 blog navigator
+on the preview page.
+
+.J1 Naviagtor - Preview
+lightbox::images-j1-blog-navigator-preview[ 800, {data-images-j1-blog-navigator-preview}, role="mb-4"]
+
+callout::1[Timeline]
+callout::2[Article block, ml-2 mb-0]
+callout::3[Block header, ml-2 mb-0]
+callout::5[Block preview, ml-2 mb-0]
+callout::5[Block footer, ml-2 mb-3]
+
+[role="mt-3"]
+An important criterion for arranging messages is the *time*. An article on the
+latest James Bond film in cinemas only makes sense if the year the film will
+be released (timeline) is clear. Each message is displayed in a summary block
+with a title (header), an excerpt of the respective contribution, and provides
+additional information in a footer.
+
+The order over time is shown on the homepage in the block *Latest News*. All
+articles are shown in *reverse* order of appearance, so new articles first.
+The footer shows two additional ordering criteria that are available for blog
+articles with Jekyll and J1:
+
+mdi:tag-text-outline[24px, md-blue mr-2 ml-3]
+Categories -- Sorting criterion to group articles by category +
+mdi:tag[24px, md-blue mr-2 ml-3]
+Tags -- Sorting criterion that provides information about the content
+of an article
+
+It is also possible to specify categories and tags for pages of the *Page*
+type, but the options for automatic evaluation that Jekyll offers for blog
+articles are missing here.
+
+TIP: The practical application of the sorting criteria is explained in more
+detail in the following section <<J1 Blog Navigator>>.
+
+==== Writing blog articles
+
+There are no major differences between posts and pages when it comes to
+creating the content. However, the organization of content types in a Jekyll
+project is different. If the items of type `page` are placed in the folder
+`pages`, then all items of type `post` are created in the directory
+`collections`.
+
+NOTE: In addition to posts, Jekyll offers the article type *collections* for
+ordered content, a kind of content that combines the properties of posts and
+pages. Collections extends Jekyll’s post and pages publishing functionality,
+to support *other* content types that aren’t ordered by date, but have
+a relationship with one another. Unfortunately, collections are not discussed
+in this tutorial. You can find a good description to understand collections
+in the blog of
+link:{url-ben-balter-blog--collections}[Ben Balter, {browser-window--new}].
+
+Another major difference to Pages is the structure of the *filenames* of blog
+articles. If you were able to assign the names of the articles in Pages freely,
+a fixed scheme for the names of the source pages must be observed in Posts. To
+create a post, add the source file to your `_posts` directory using the
+following format for the file name:
+
+----
+YEAR-MONTH-DAY-<title>.adoc
+----
+
+Where the placeholder `YEAR` is a four-digit number, the placeholders `MONTH`
+and `DAY` are both two-digit numbers. The file extension `adoc` represents the
+content format *Ascidoc* used in the file. For example, the following are
+examples of valid post filenames:
+
+----
+2021-01-01-about-cookies.adoc
+2021-03-28-welcome-to-j1.adoc
+----
+
+Like like for all pages, blog post files must begin with a Frontmatter which
+is typically used to set a layout and other data to control the processing.
+Note from here, the value for the frontmatter variable `layout` for posts
+is set to the value `post`.
+
+[source, yaml, role="noclip"]
+----
+---
+layout: post
+
+title:  "Welcome to Jekyll!"
+---
+
+== Welcome to Jekyll posts
+
+*Hello world*, this is my first Jekyll blog post.
+We hope you like it!
+----
+
+You don't have to start from a blank page, even with new blog articles.
+A simple template `simple-post` for new blog posts is available in the
+`~/collections/asciidoc_skeletons` folder.
+
+.Blog post templates
+[cols="^4a,8a", width="100%", options="header", role="rtable mt-3"]
+|===
+|Name |Description
+
+|`simple-post`
+|Simple documents are used quite often. If the number
+of chapters is about or less than three and the document
+is small in size. This document type does not use any
+(local) Asciidoc include files or attributes.
+
+|===
+
+By their nature, blog articles are *news*, which (should) reach a maximum of
+the size of simple articles of the type `pages` in terms of page length. It
+is conceivable that blog articles on one topic span several articles. A typical
+use case here is tutorials that are organized as blog articles. You can find
+out how to group blog articles as a series of posts using the methods of J1
+in the <<Grouping posts>> section.
+
+Create a new article for the further steps. Like new pages, copy the
+`simple-post` directory to the `~/collections/posts/public` folder and
+rename the source file. Use for the source of the new blog article in the
+folder `~/collections/posts/public/simple-post/_posts` the current date,
+for example:
+
+[source, text]
+----
+2022-03-06-new-post.adoc
+----
+
+WARNING: The template source has the extension `.ascidoc`, which suppresses
+the generation of the article because the filename doesn't match the expected
+*format*. All files with a *.ascidoc* extension are excluded via the site
+configuration settings in the file `~/_config.yml` using the parameter
+`exclude`.
+
+Then customize the front matter of the new post's source to your liking,
+for example:
+
+.Frontmatter settings for `simple-post.adoc`
+[source, yaml]
+----
+---
+layout:                                 post
+
+title:                                  Your first post article
+tagline:                                blog posts from scratch
+keywords: >
+                                        place, your, keywords, here
+
+categories:                             [ Examples ]
+tags:                                   [ Posts, Tutorial ]
+---
+----
+
+To start again with an empty structure for the new blog article, overwrite
+the source's content with a simple skeleton structure as well.
+
+.New source code for `simple-post.adoc`
+[source, prometheus]
+----
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+[[readmore]]
+== Chapter 1
+
+lorem:sentences[5]
+
+== Chapter 2
+
+lorem:sentences[5]
+----
+
+As mentioned, the methods of developing Posts content are no different from
+for Pages. You can make the same adjustments for the new blog article that
+you already got to know in the <<Creating pages>> section for ordinary
+(article) pages.
+
+Have fun with your experiments with the content of the posts!
+
+==== Categories generated by Jekyll
+
+Tags and categories are elementary classification criteria for the content
+type `post.` In addition to functions for evaluating the categories, the
+Jekyll builder engine offers another property: automatic categorization
+of blog articles. You have already seen the `~collections\posts` directory
+structure for the `post` content-type:
+
+.Folder structure below `collections`
+----
+  ├─ .
+  │  └─ collections <1>
+  │     └─ posts <2>
+  │        └─ private
+  │        └─ protected
+  │        └─ public <3>
+  │           └─ simple-post <3>
+  │              └─ _posts <4>
+----
+<1> global content folder `collections` (ordered content)
+<2> global content folder of the content type `post`
+<3> category folders
+<4> category content folder `_posts`
+
+The folder structure below `~collections\posts` is only used by the template system *J1* to organize the articles. However, Jekyll evaluates this folder structure and creates *automatic* categories, which are assigned to the respective *posts*. The directory structure that directs the builder engine automatically deducts the following categories:
+
+* posts
+* public
+* simple post
+
+These *automatic* categories are automatically assigned to all articles in
+the respective *category* content folder. For native Jekyll projects, this
+is certainly a good way to have categories generated via the builder engine.
+For the template system, the automatic category mappings are *not* very
+helpful. For J1 projects, there are tags on how to *explicitly* configure
+categories via the front matter of the articles. The explicit specification
+is much more flexible and allows the *specific* assignment of categories
+according to the authors' ideas, which are independent of the respective
+storage location of a contribution.
+
+Automatic categories are an integral part of Jekyll and, unfortunately,
+*cannot* be switched off. Appropriate settings must be made in the J1 site
+configuration `~_data/j1_config.yml` to dispense this functionality from
+Jekyll.
+
+To suppress the evaluation of the layouts via *J1*, all *not* desired
+automatic categories are to be specified manually in the `category_blacklist`
+variable:
+
+.Default settings of `category_blacklist`
+[source, yaml, role="noclip"]
+----
+# ==============================================================================
+# POST global configuration settings
+#
+# NOTE: Set global settings for the Jekyll builder-engine to control
+#       the HTML outputs generated by J1
+#
+# ------------------------------------------------------------------------------
+posts:
+  # ----------------------------------------------------------------------------
+  #   category_blacklist
+  #   --------------------------------------------------------------------------
+  #   List of categories (automatically) generated by Jekyll to be SKIPPED.
+  #   (Additional) Categories are generated by Jekyl from folder names but
+  #   NOT used for J1 to be displayed in preview boxes or J1 Posts Navigator
+  #   views.
+  #
+  #   Default:                          [ posts, public, private, protected, featured, series ]
+  #
+  # ----------------------------------------------------------------------------
+  category_blacklist:                   [ posts, public, private, protected, featured, series ]
+----
+
+NOTE: All *new* blog articles are created using the template system J1
+*automatically* included in all ads for posts. See the <<J1 Blog Navigator>>
+section for details on processing and displaying posts.
+
+The new blog article was automatically integrated via the *Creators Blog* preview boxes on the home page:
+
+.J1 Home - New post article
+lightbox::images-j1-home-new-post[ 800, {data-images-j1-home-new-post} ]
+
+However, the automatic category `simple-post` is evaluated and displayed
+in the preview box since the entry in the variable `category_blacklist` is
+still *missing*. Adjust settings in the J1 site configuration
+`~_data/j1_config.yml` accordingly:
+
+.Adjusted settings of `category_blacklist`
+[source, yaml]
+----
+    category_blacklist:                   [ posts, public, private, protected, featured, series, simple-post ]
+----
+
+==== J1 Blog Navigator
+
+You have learned that articles of the content type `page` have to be
+*manually* integrated via the *menu* system of the J1 Navigator. The
+integration of the content of blog articles is fundamentally different.
+All articles of lead to portfolios, i.e., collections of content managed
+via the J1 module *J1 Blog Navigator*. Manual integration is *not* necessary.
+The Navigator component manages the content automatically. Available blog
+articles are automatically adopted and displayed. Comparable to the menu
+system for simple pages, the *J1 Blog Navigator* provides *views* for
+surfing the content of the generated *Portfolios*.
+
+.J1 Blog Navigator
+lightbox::images-j1-blog-navigator[ 800, {data-images-j1-blog-navigator} ]
+
+The Blog Navigator is accessed via the menu bar via the *Blog* entry. By
+opening the entry *Blog Explorer* in the dropdown menu, you reach the main
+page of the module with all available portfolio **views**:
+
+* Categories -- articles are grouped by category
+* Date -- articles are grouped by date
+* Archive -- all articles available sorted from the youngest to the oldest
+
+.J1 Blog Explorer
+lightbox::images-j1-blog-navigator-explorer[ 800, {data-images-j1-blog-navigator-explorer}, role="mb-3" ]
+
+callout::1[portfolio viewers (ordered content)]
+callout::2[portfolio preview]
+
+[role="mt-3"]
+The Blog Explorer is very easy to use and intuitive for site visitors. Test
+the various options that the explorer provides via the portfolio views.
+The *J1 Blog Navigator* component can have various parameters be configured
+as a module. The settings for this are found in the central directory of the
+module configurations under `~/_data/modules`:
+
+* default settings: `defaults\blog_navigator.yml`
+* user settings: `blog_navigator.yml`
+
+==== Grouping posts
+
+In some cases, it may make sense to group blog articles into a group of
+related articles. The `post` layout offers this possibility, controlled
+via the `series` variable in the front matter.
+
+To try out the grouping feature, make a *copy* of the existing post
+`2022-03-06-new-post.adoc` in the same directory and give this source
+file a new name:
+
+.Name for the second post
+[source, text]
+----
+2022-03-06-new-post-2.adoc
+----
+
+Then adjust the *Frontmatter* of the two articles for the summary as a
+*group*. Override the following variables in *both* articles:
+
+.Frontmatter for `simple-post.adoc`
+[source, yaml]
+----
+---
+layout:                                 post
+
+title:                                  Your first post article
+tagline:                                blog posts from scratch
+keywords: >
+                                        place, your, keywords, here
+
+categories:                             [ Examples ]
+tags:                                   [ Posts, Tutorial ]
+
+image:                                  /assets/images/modules/attics/sigmund-1920x1280.jpg
+
+series:                                 simple-post
+regenerate:                             false
+---
+----
+
+.Frontmatter for `simple-post-2.adoc`
+[source, yaml]
+----
+---
+layout:                                 post
+
+title:                                  Your second post article
+tagline:                                blog posts from scratch
+keywords: >
+                                        place, your, keywords, here
+
+categories:                             [ Examples ]
+tags:                                   [ Posts, Tutorial ]
+
+image:                                  /assets/images/modules/attics/sigmund-1920x1280.jpg
+
+series:                                 simple-post
+regenerate:                             false
+---
+----
+
+By default, the variable's value in the front matter of an article is set to
+`false`. Setting the value to `false` results that the article does not
+belong to *any* group. The articles are grouped by changing the value of the
+variable `series` to `simple-post` in the frontmatter. After the generation is
+complete, open one of the two articles about the J1 Blog Explorer:
+
+.J1 Group Explorer
+lightbox::images-j1-blog-group-explorer[ 800, {data-images-j1-blog-group-explorer}, role="mb-3" ]
+
+callout::1[group explorer]
+callout::2[menu button]
+callout::3[group name]
+
+[role="mt-3"]
+An additional element *Group Explorer* has been created by processing the
+J1  templates for the layout `post`. Use the menu button to open the
+*Group Selector*.
+
+.J1 Group Selector
+lightbox::images-j1-blog-group-selector[ 800, {data-images-j1-blog-group-selector}, role="mb-3" ]
+
+The articles are grouped, and the individual contributions of the group
+can be selected by clicking on the selector. In principle, any number of
+articles can be grouped. Nevertheless, limiting a group to 3-6 articles
+is advisable to not confuse you vistors by huge article groups.
+
+== More about Frontmatter Variables
+
+If you compare the already existing articles with the pages you created,
+one thing stands out: The existing pages seem to *miss* some Frontmatter
+variables.
+
+To not repeat frequently used Frontmatter variables with *identical* values,
+it is advised to use default settings. Find the default settings of the
+Frontmatter variables with the site configuration `/_config.yml`.
+
+Here you define common values and are only overwritten in the sources if
+necessary. For all articles of content type `page`, the variable *layout*
+has the default value `page`.  The default value `posts` is set for all
+articles of content type `post`. Default values are configurable for
+many other variables not to repeat yourselves.
+
+.Jekyll Variables
+[cols="6a,6a", width="100%", options="header", role="table-responsive mt-3"]
+|===
+|Variable |Description
+
+|`layout`
+|The Layout used for a source page.
+
+|`regenerate`
+|If the builder-engine Jekyll runs in mode *incremental*, the variable
+controls if a source is regenerated *always* (`true`) or only on a
+*change* (`false`).
+
+|===
+
+The front matter variable `image:` is used to display *images*. The variable
+controls the image used in the **header**-sections for the boxes displayed.
+
+.Available J1 Variables
+[cols="6a,6a", width="100%", options="header", role="table-responsive mt-3"]
+|===
+|Variable |Description
+
+|`title`
+|Sets the *title* of a page. Shown in the master header (module attic) and is
+used for webbrowsers to name the tab or window..
+
+|`tagline`
+|Sets the *subtitle* of a page. Shown in the master header (module attic)
+below the title.
+
+|`keywords`
+|HTML meta-data key. The data of `keywords` is placed in content key of
+`meta name="keywords"`.
+
+|`categories`
+|A list *categories* used for the source. Categories are displayed in search
+results for all posts and pages. If the content is of type `post`, categories
+are shown in the preview boxes and used to order post articles in the
+<<J1 Blog Navigator>>.
+
+|`tags`
+|A list *tags* used for the source. Tags are displayed in search
+results for all posts and pages. If the content is of type `post`, tags
+are shown in the preview boxes.
+
+|`image`
+|If the content is of type `post`, the *image* is shown in the header of
+the preview box of that article.
+
+|`personalization`
+|If set to `true`, the page is only available for vistors if they agreed on
+*personalization* in the Cookie dialog. If personalization is rejected, the
+page is *not* presented and an error page is displayed.
+
+|`exclude_from_search`
+|If set to `true` the content page is *not* indexed an *not* displayed in
+the search results.
+
+|`series`
+|If the content is of type `post`, all posts are grouped by the *group name*
+given. If posts should not grouped, use the (default) value of `false`.
+
+|`toc`
+|Enables (`true`) or disables (`false`) an auto-generated *table of contents*,
+shown in the sidebar of a page.
+
+|`fab_menu_id`
+|Defines what *floating action button* should be used fo a page. Valid *id's*
+can be found in the *FAB* module configuration `~/_data/modules/fab.yml`
+
+|`scrollbar`
+|Enables (`true`) or disables (`false`) the use of the page *scrollbar* in the
+webbrowser.
+
+|===
+
+=== Configure Fontmatter defaults
+
+The (YAML) *Array* `defaults:` in the site configuration `/_config.yml` is
+responsible for configuring the default values. This array contains (nested)
+lists `scope` and `values` consisting of name-value pairs. Sounds difficult
+at first but is much easier to understand if you look at the configuration.
+
+.Frontmatter defaults from `~/_config.yml` file
+[source, yaml]
+----
+# ------------------------------------------------------------------------------
+# FRONTMATTER defaults
+#
+
+# Using the YAML Front Matter is a way the (individual) configuration
+# for post and pages can be specified. Very often, a lot of config
+# options are repeated on each and every post or page. Setting the
+# layout for each file, adding categories to a post, etc. might be
+# the same for the majority of your content.
+#
+# Instead of repeating this configuration each time a page is being
+# created, Jekyll provides a way to set these configuration items
+# as defaults in this site configuration (_config.yml).
+#
+defaults:
+
+# ----------------------------------------------------------------------------
+# PUBLIC - FEATURED
+#
+- scope:
+    path:                             posts/public/featured
+    type:                             posts
+
+  values:
+    layout:                           post
+    author:                           J1 Team
+    compress:                         true
+
+  # ----------------------------------------------------------------------------
+  # PUBLIC - SERIES
+  #
+  - scope:
+      type:                             posts
+      path:                             posts/public/series
+
+    values:
+      layout:                           post
+      author:                           J1 Team
+      compress:                         true
+----
+
+WARNING: All configuration files in Jekyll or J1 projects included
+Data of type `YAML`. The *indentations* in the notation of the configuration
+are *not* (only) for better readability. Indentation is an integral part of
+the data structure and must be *exactly* maintained.
+
+In the configuration shown, the default values of *Posts* are declared, with
+the parameters in the `scope` list having the following meaning:
+
+* `path` -- the *location* (directory) of the content
+* `type` -- the corresponding content type (here: `post`)
+
+The `values` list contains the desired Frontmatter variables for the default
+values to be set up. Find a complete list of the configuration for variables
+and their values for your new blog articles below:
+
+.Defaults for the *simple-post* folder
+[source, yaml]
+----
+# ----------------------------------------------------------------------------
+# PUBLIC - SIMPLE POST
+#
+- scope:
+    path:                             posts/public/simple-post
+    type:                             posts
+
+  values:
+    layout:                           post
+    author:                           J1 Team
+    compress:                         true
+    image:                            /assets/images/modules/attics/joanna-kosinska-1920x1280.jpg
+
+    robots:
+      index:                          true
+      follow:                         true
+
+    personalization:                  false
+    exclude_from_search:              false
+    series:                           false
+
+    toc:                              true
+    fab_menu_id:                      page_ctrl_simple
+    scrollbar:                        false
+
+    resource_options:
+      - toccer:
+          collapseDepth:              3
+----
+
+WARNING: Changes to *Site* configuration settings `/_config.yml` require
+a *restart* of the website.
+
+Add the settings from above in the configuration file `/_config.yml` below
+the existing settings for posts in the following section:
+
+[source, no_template, role="noclip"]
+----
+# ----------------------------------------------------------------------------
+# POSTS
+#
+----
+
+As a final adjustment to your blog articles, the variables `layout` can be
+*deleted* from the Frontmatter settings in the *simple-post* articles. To
+*activate* the changes to the site configuration, the running web must be
+stopped in the shell (Windows: command prompt)  and then restarted afterward.
+
+* stopping a running web: (kbd:[Ctrl+C])
+* (re)starting a web: `j1 site`
+
+TIP: Knowledge and experience dealing with the front matter will greatly
+help you on changes for your pages' behavior at runtime quickly and easily.
+
+By changing more front matter defaults, you can now make further adjustments
+to the variables in the Frontmatter. Try out how the changes affect your
+blog articles!

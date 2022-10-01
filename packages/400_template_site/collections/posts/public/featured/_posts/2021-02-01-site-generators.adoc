@@ -5,13 +5,13 @@ tagline:                                top open source tools
 categories:                             [ Featured ]
 tags:                                   [ Jekyll, Static, Site, Generators ]
 
-image:                                  /assets/images/modules/attics/machine-generator-1920x1280.jpg
+# image:                                /assets/images/modules/attics/machine-generator-1920x1280.jpg
 
-# image:
-#   path:                               /assets/images/modules/attics/machine-generator-1920x1280.jpg
-#   width:                              1920
-#   height:                             1280
-#   alt:                                Site Generators
+image:
+  path:                                 /assets/images/modules/attics/machine-generator-1920x1280.jpg
+  width:                                1920
+  height:                              1280
+  alt:                                 Site Generators
 
 fab_menu_id:                            page_ctrl
 regenerate:                             false

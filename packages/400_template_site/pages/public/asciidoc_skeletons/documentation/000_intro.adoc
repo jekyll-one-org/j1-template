@@ -22,6 +22,7 @@ image:
   alt:                                  Photo by Sigmund on Unsplash
 
 sitemap:                                false
+
 robots:
   index:                                false
   follow:                               false
@@ -32,7 +33,7 @@ regenerate:                             false
 resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
   - attic:
-    alignY:                             0.3
+      alignY:                             0.3
       slides:
         - url:                          /assets/images/modules/attics/sigmund-1920x1280.jpg
           alt:                          Photo by Sigmund on Unsplash

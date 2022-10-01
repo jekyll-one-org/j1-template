@@ -69,7 +69,10 @@
 {% endif %}
 
 {% if site.favicon.image %}
+  <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ favicon for browser ] -->
   <link rel="icon" type="{{site.favicon.type}}" href="{{site.data.j1_config.image_path}}/{{site.favicon.image}}" />
+  <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ favicon for the google crawler ] -->
+  <link rel="shortcut icon" href="{{site.data.j1_config.image_path}}/{{site.favicon.image}}" />
 {% endif %}
 
 {% comment %} Check robot settings from site configuration

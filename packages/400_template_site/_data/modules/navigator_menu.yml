@@ -120,6 +120,21 @@
       icon:                             paw
 
     # --------------------------------------------------------------------------
+    # Tutorial
+    #
+    - title:                            Tutorials
+      icon:                             wizard-hat
+      dropdown:
+
+        - title:                        Digital Marketing
+          icon:                         wizard-hat
+          dropdown:
+
+            - title:                    SEO optimization
+              href:                     /pages/public/learn/kickstart/seo_optimization/whats_about_seo/
+              icon:                     handshake
+
+    # --------------------------------------------------------------------------
     # Roundtrip
     #
     # - title:                            Tester

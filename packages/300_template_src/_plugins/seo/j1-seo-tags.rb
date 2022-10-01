@@ -141,8 +141,8 @@ module Jekyll
       def twitter
         return @twitter if defined? @twitter
 
-        twitter = author_hash["twitter"] || author_hash["name"]
-        @twitter = twitter.is_a?(String) ? twitter.sub(%r!^@!, "") : nil
+        twitter   = author_hash["twitter"] || author_hash["name"]
+        @twitter  = twitter.is_a?(String) ? twitter.sub(%r!^@!, "") : nil
       end
 
       private

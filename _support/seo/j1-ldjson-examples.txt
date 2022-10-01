@@ -1,0 +1,28 @@
+== BlogPosting
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "author": {
+    "@type": "Person",
+    "name": "Jürgen Adams"
+  },
+  "dateModified": "2021-02-01T00:00:00+00:00",
+  "datePublished": "2021-02-01T00:00:00+00:00",
+  "description": "This article highlights top OpenSource projects providing static site generators in many different programming languages. And Jekyll is only one of them. Have a look if a full-blown CMS is (really) needed for your project.",
+  "headline": "Site Generators",
+  "image": {
+    "width": 1920,
+    "height": 1280,
+    "alt": "Site Generators",
+    "url": "http://localhost:40000/assets/images/modules/attics/machine-generator-1920x1280.jpg",
+    "@type": "imageObject"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "http://localhost:40000/posts/public/featured/2021/02/01/site-generators/"
+  },
+  "url": "http://localhost:40000/posts/public/featured/2021/02/01/site-generators/"
+}
+</script>

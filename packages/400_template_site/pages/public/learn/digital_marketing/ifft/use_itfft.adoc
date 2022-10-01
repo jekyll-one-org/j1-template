@@ -75,7 +75,7 @@ The RSS Feed service lets you turn on and make Applets for RSS and Atom web feed
 
 2. Choose a trigger (If) --> New feed item
 
-* Feed URL https://jekyll.one/assets/data/atom.xml
+* Feed URL https://jekyll.one/assets/data/feeds/feed.xml
 
 3. Then That (add) --> Twitter --> Post a tweet
 
@@ -83,4 +83,4 @@ The RSS Feed service lets you turn on and make Applets for RSS and Atom web feed
 
 4. Continue to Review and finish
 
-If New feed item from https://jekyll.one/assets/data/atom.xml, then Post a tweet to @jurgen_adams
+If New feed item from https://jekyll.one/assets/data/feeds/feed.xml, then Post a tweet to @jurgen_adams

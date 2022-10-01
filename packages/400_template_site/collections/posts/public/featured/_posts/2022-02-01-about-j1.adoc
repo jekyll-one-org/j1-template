@@ -5,13 +5,13 @@ tagline:                                first version for the public is out
 categories:                             [ Featured ]
 tags:                                   [ J1, Template, Jekyll ]
 
-image:                                  /assets/images/modules/attics/1920x1280/alexander-redl.jpg
+# image:                                /assets/images/modules/attics/1920x1280/alexander-redl.jpg
 
-# image:
-#   path:                               /assets/images/modules/attics/1920x1280/alexander-redl.jpg
-#   width:                              1920
-#   height:                             1280
-#   alt:                                J1 Template
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/alexander-redl.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  J1 Template
 
 fab_menu_id:                            default
 regenerate:                             false
@@ -27,7 +27,7 @@ resource_options:
       opacity:                          0.5
 
       slides:
-        - url:                          /assets/images/modules/attics/1920x1280/alexander-redl.jpg
+        - url:                          /assets/images/modules/attics/1280x800/jekyll-generator.png # /assets/images/modules/attics/1920x1280/alexander-redl.jpg
           alt:                          Photo by Alex Holyoake on Unsplash
           badge:
             type:                       unsplash
