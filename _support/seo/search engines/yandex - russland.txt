@@ -1,11 +1,45 @@
 == Yandex Search Engine
 
+Registered by mobile:       001782652214
+Username:                   Juergen Adams
+Registerd Email (Google):   jrgnadams@gmail.com
+Benachrichtigungsadresse :  jadams@web.de
+
+
 See:
 
 * https://yandex.com/
-* https://webmasters.stackexchange.com/questions/59851/how-to-submit-sitemap-to-baidu
+* https://webmaster.yandex.com/
 
-=== Baidu Registrierung
+=== Yandex Registrierung
 
 Chinesische SIM-Karte (Hand-Nummer) und LOKALE Telefonnummer erforderlich.
 --> Nicht mehr möglich!!!
+
+
+=== Verify rights to https://jekyll.one
+
+To get access to settings and information, verify your site management rights.
+To verify your rights, use one of the methods listed below.
+
+
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    </head>
+    <body>Verification: 4f36262b4d00298c</body>
+</html>
+
+
+
+Add the following TXT record to the https://jekyll.one domain DNS (Netlify):
+
+yandex-verification: 4f36262b4d00298c
+
+Make sure that the URL of the site for which you are verifying your rights
+in Yandex Webmaster matches the URL of the site for which you are creating
+a DNS record. For example, URLs with and without the "www" prefix are
+considered different sites. Updating records can take a long time.
+If the site is running over IPv4 and IPv6, make sure that the site responds
+correctly using all IP addresses. When the DNS records are updated,
+click Check.

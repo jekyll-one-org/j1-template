@@ -1,0 +1,15 @@
+Hinzufügen des Clarity-Skripts zu Ihrer Website
+
+Dieser Clarity-Skriptcode ist einmalig für jekyll.one
+Kopieren Sie Ihr benutzerdefiniertes Skript-Tag und fügen Sie es in den
+Abschnitt <head> jeder Seite Ihrer Website oder App ein, für die Sie
+Clarity verwenden möchten
+
+<!-- Clarity tracking code for https://jekyll.one/ -->
+<script>
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i+"?ref=bwt";
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "dwrsnyqdgi");
+</script>
