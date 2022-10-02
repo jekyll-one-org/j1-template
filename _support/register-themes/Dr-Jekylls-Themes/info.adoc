@@ -1,0 +1,36 @@
+
+https://github.com/jekyll-one/themes
+
+D:\j1\github\j1-other\drjekyllthemes\themes
+
+
+Dr. Jekyll's Themes - Add Your Theme!
+
+(Yet Another) Static Website Theme Directory - see it live
+at drjekyllthemes.github.io
+
+== How-To Add Your Theme
+
+First fork the /themes repo on GitHub.
+
+=== Step 1:
+
+Add a new entry in the themes.yml data file and fill out all fields.
+
+Example:
+
+- name:      Basically Basic
+  github:    mmistakes/jekyll-theme-basically-basic
+  branch:    master                              ## note: defaults to master; only needed for gh-pages
+  demo_url:  https://mmistakes.github.io/jekyll-theme-basically-basic
+  author:    Michael Rose
+  thumbnail: basicallybasic.png
+  license:   MIT
+  gem:       jekyll-theme-basically-basic         ## optional
+  tags:     [minimal, responsive, blog, resume]   ## optional
+
+=== Step 2 - Add a thumbnail (screenshot preview pic)
+
+Make a 250 x 200 thumbnail and drop it in the `thumbnails` folder.
+
+Example: `thumbnails/basicallybasic.png` (250 x 200 px)

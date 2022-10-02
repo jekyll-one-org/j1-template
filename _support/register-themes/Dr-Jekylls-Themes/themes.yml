@@ -1,0 +1,9 @@
+- name:      J1 Template
+  github:    https://github.com/jekyll-one/j1-template-starter
+  branch:    main
+  demo_url:  https://j1-preview-netlify.netlify.app/
+  author:    Juergen Adams
+  thumbnail: j1-template.png
+  license:   MIT
+  gem:       j1-template
+  tags:      [multi-purpose, multipage, bootstrap, responsive, personal, dokumentation, blog, business, mobile-friendly]

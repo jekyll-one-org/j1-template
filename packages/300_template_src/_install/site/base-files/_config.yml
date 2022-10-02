@@ -244,15 +244,6 @@ keywords: >
                                         google, analytics, advertising, search, console, silverlight, score,
                                         j1, template, jekyllone, comment
 
-author:
-  name:                                 Juergen Adams
-  email:                                juergen@jekyll.one
-  url:                                  https://jekyll.one/
-  github:                               username
-  facebook:                             username
-  twitter:                              username
-# feedburner:                           feedname
-
 webmaster:
   email:                                webmaster@jekyll.one
 
@@ -537,7 +528,47 @@ whitelist:
 
 
 # ==============================================================================
-# 5. PAGE configuration
+# 5. SEO ans Social Media settings (gloal)
+#
+# ------------------------------------------------------------------------------
+#
+author:
+  name:                                 Juergen Adams
+  url:                                  https://jekyll.one/
+  email:                                jadams@web.de
+  github:
+  facebook:
+  twitter:
+  feedburner:
+
+
+logo:                                   /assets/images/icons/j1/j1-512x512.png
+
+image:
+  path:                                 /assets/images/promo/home/screenshot.jpg
+  width:                                1200
+  height:                               800
+  alt:                                  J1 Template Home
+
+twitter:
+  username:
+
+facebook:
+  author:
+  publisher:
+  app_id:
+  admins:
+
+webmaster_verifications:
+  facebook:
+  google:
+  bing:
+  yandex:
+  baidu:
+
+
+# ==============================================================================
+# 6. PAGE configuration
 #
 # ------------------------------------------------------------------------------
 #
@@ -589,10 +620,13 @@ defaults:
 
     values:
       layout:                           page
-      author:                           Jürgen Adams
-      author_url:                       https://jekyll.one/
       compress:                         true
 
+      author:
+        name:                           Juergen Adams
+        url:                            https://jekyll.one/
+
+      logo:                             /assets/images/icons/j1/j1-512x512.png
       image:
         path:                           /assets/images/promo/home/screenshot.jpg
         width:                          1200
@@ -638,10 +672,13 @@ defaults:
 
     values:
       layout:                           post
-      author:                           Jürgen Adams
-      author_url:                       https://jekyll.one/
       compress:                         true
 
+      author:
+        name:                           Juergen Adams
+        url:                            https://jekyll.one/
+
+      logo:                             /assets/images/icons/j1/j1-512x512.png
       image:
         path:                           /assets/images/promo/home/screenshot.jpg
         width:                          1200
@@ -673,10 +710,13 @@ defaults:
 
     values:
       layout:                           post
-      author:                           Jürgen Adams
-      author_url:                       https://jekyll.one/
       compress:                         true
 
+      author:
+        name:                           Juergen Adams
+        url:                            https://jekyll.one/
+
+      logo:                             /assets/images/icons/j1/j1-512x512.png
       image:
         path:                           /assets/images/promo/home/screenshot.jpg
         width:                          1200
@@ -700,7 +740,7 @@ defaults:
 
 
 # ==============================================================================
-# 6. LAYOUT configuration
+# 7. LAYOUT configuration
 #
 # ------------------------------------------------------------------------------
 #
