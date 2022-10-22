@@ -53,6 +53,10 @@ git config --global user.email "juergen@jekyll.one"
 	dp 	= 'cat-file'
 	pu 	= push
 
+== Make a new commit and create a new message if no changes are made to files
+
+  git commit --allow-empty -m "Empty test commit"
+
 == Create a new repository on the command line
 
 echo "# heroku_starter_app" >> README.md
@@ -148,7 +152,7 @@ directories as well:
 
 git clean -df
 
-Also removing ignored files :
+Also removing ignored files:
 
 git clean -dfx
 
@@ -194,6 +198,7 @@ Then:
 
   git commit -am "Cleanup files"
   git commit -am "New version 2022.6.0"
+  git commit --allow-empty -m "New version 2022.6.0"
   git commit -am "Prepare new version 2022.6.0"
   git commit -am "Latest files of version 2022.6.0"
 
@@ -227,4 +232,4 @@ You can turn off the warning with
 
   git config --global core.safecrlf false
 
-This will only turn off the warning, not the function itself.
+NOTE: This will only turn off the warning, not the function itself.
