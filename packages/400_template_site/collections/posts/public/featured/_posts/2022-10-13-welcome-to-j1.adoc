@@ -1,34 +1,29 @@
 ---
-title:                                  Welcome
-tagline:                                jekyll for everyone
-#date:                                  2022-01-01 00:00:00 +0100
+title:                                  Welcome to J1
+tagline:                                Jekyll For Everyone
+#date:                                  2022-10-13 00:00:00 +0100
 
 categories:                             [ Featured ]
 tags:                                   [ J1, Jekyll ]
 
-# image:                                /assets/images/modules/attics/katie-moum-1920x1280.jpg
+fab_menu_id:                            page_ctrl
+comments:                               false
 
 image:
   path:                                 /assets/images/modules/attics/katie-moum-1920x1280.jpg
   width:                                1920
-  height:                               1280
+  height:                               1200
   alt:                                  Jekyll for Everyone
 
-fab_menu_id:                            page_ctrl
 regenerate:                             false
-
-#share:                                  facebook
-
 resources:                              [ animate ]
 resource_options:
-
   - attic:
-      alignY:                           0.3
       opacity:                          0.5
-
       slides:
         - url:                          /assets/images/modules/attics/katie-moum-1920x1280.jpg
           alt:                          Photo by Katie Moum on Unsplash
+          alignY:                       0.3
           badge:
             type:                       unsplash
             author:                     Katie Moum
