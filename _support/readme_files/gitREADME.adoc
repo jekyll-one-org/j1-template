@@ -166,7 +166,7 @@ Use the “git tag” command with the “-d” option
 
 === From remote
 
-git push -d origin v2022.6.0
+  git push -d origin v2022.6.0
 
 == Set a Git tag
 
