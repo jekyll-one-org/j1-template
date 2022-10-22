@@ -300,7 +300,7 @@ lanes:
   # ----------------------------------------------------------------------------
   #
   - lane:
-      enabled:                          false
+      enabled:                          true
       id:                               home_service_panel
       region:                           body-main
       type:                             async
@@ -322,7 +322,7 @@ lanes:
   # ----------------------------------------------------------------------------
   #
   - lane:
-      enabled:                          true
+      enabled:                          false
       id:                               home_intro_panel
       region:                           body-main
       type:                             async
@@ -344,7 +344,7 @@ lanes:
   # ----------------------------------------------------------------------------
   #
   - lane:
-      enabled:                          true
+      enabled:                          false
       id:                               home_parallax_banner
       region:                           body-main
       type:                             async
@@ -387,7 +387,7 @@ lanes:
   # ----------------------------------------------------------------------------
   #
   - lane:
-      enabled:                          true
+      enabled:                          false
       id:                               home_news_panel
       region:                           body-main
       type:                             async

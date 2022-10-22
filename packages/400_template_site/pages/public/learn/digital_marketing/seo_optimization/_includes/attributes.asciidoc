@@ -75,8 +75,8 @@ tag::data[]
 :data-images-lightbox--standalone:                "assets/images/modules/gallery/old_times/image_02.jpg, GrandPa's 80th Birthday"
 :data-images-lightbox--group:                     "assets/images/modules/gallery/old_times/image_03.jpg, GrandPa's annual journey, assets/images/modules/gallery/old_times/image_04.jpg, GrandPa's annual journey"
 
-:data-kickstart-wiad--static-web-access:          "assets/images/collections/blog/featured/static-web-access.jpg, Accessing scheme for a static web"
-:data-kickstart-wiad--dynamic-web-access:         "assets/images/collections/blog/featured/dynamic-web-access.jpg, Accessing scheme for a CMS (dynamic web)"
+:data-kickstart-wiad--static-web-access:          "assets/images/collections/blog/featured/static-web-access.png, Accessing scheme for a static web"
+:data-kickstart-wiad--dynamic-web-access:         "assets/images/collections/blog/featured/dynamic-web-access.png, Accessing scheme for a CMS (dynamic web)"
 
 :data-windows--create-a-link-1:                   "assets/images/pages/kickstarter/web_in_a_day/300_dev_system/200-create-a-link-1.jpg, Create a new shortcut"
 :data-windows--create-a-link-2:                   "assets/images/pages/kickstarter/web_in_a_day/300_dev_system/200-create-a-link-2.jpg, Enter the command to be linked"

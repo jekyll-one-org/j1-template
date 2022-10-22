@@ -1,0 +1,26 @@
+== Common supported rich result types
+
+See:
+
+* https://support.google.com/webmasters/answer/7445569[Rich Results Test, {browser-window--new}]
+* https://developers.google.com/search/docs/advanced/structured-data/search-gallery[Structured Data Gallery, {browser-window--new}]
+
+Bla ..
+
+* https://developers.google.com/search/docs/data-types/article[Article, {browser-window--new}]
+* https://developers.google.com/search/docs/data-types/breadcrumb[Breadcrumb, {browser-window--new}]
+* https://developers.google.com/search/docs/data-types/carousel[Carousel, {browser-window--new}]
+* https://developers.google.com/search/docs/data-types/course[Course, {browser-window--new}]
+* https://developers.google.com/search/docs/data-types/dataset[Dataset, {browser-window--new}]
+* https://developers.google.com/search/docs/advanced/structured-data/qapage[Education Q&A, {browser-window--new}]
+* https://developers.google.com/search/docs/data-types/event[Event, {browser-window--new}]
+* https://developers.google.com/search/docs/data-types/faqpage{FAQ}
+* https://developers.google.com/search/docs/data-types/factcheck[Fact check, {browser-window--new}]
+* https://developers.google.com/search/docs/data-types/recipe#guided-recipes[Guided recipe, {browser-window--new}]
+* https://developers.google.com/search/docs/data-types/how-to[How-to, {browser-window--new}]
+* https://developers.google.com/search/docs/data-types/logo[Logo, {browser-window--new}]
+* https://developers.google.com/search/docs/advanced/structured-data/practice-problems[Practice Problems, {browser-window--new}]
+* https://developers.google.com/search/docs/data-types/product[Product snippet, {browser-window--new}]
+* https://developers.google.com/search/docs/data-types/qapage[Q&A page, {browser-window--new}]
+* https://developers.google.com/search/docs/data-types/software-app[Software app, {browser-window--new}]
+* https://developers.google.com/search/docs/data-types/video[Video, {browser-window--new}]
