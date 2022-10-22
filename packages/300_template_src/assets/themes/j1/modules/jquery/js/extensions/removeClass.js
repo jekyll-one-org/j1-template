@@ -1,3 +1,21 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/jquery/js/extensions/removeClass.js
+ # jQuery Plugin for J1 Template
+ # Used to to remove one or more class names from a selected element.
+ #
+ # Product/Info:
+ # https://jekyll.one
+ # https://github.com/Dogfalo/materialize
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Template is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+'use strict';
+
 ;(function(removeClass) {
 
 	jQuery.fn.removeClass = function( value ) {
