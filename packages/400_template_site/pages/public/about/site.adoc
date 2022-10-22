@@ -3,36 +3,29 @@ title:                                  J1 Template
 tagline:                                about
 date:                                   2022-01-01 00:00:00
 description: >
-                                        Whether you work solo or as part of a team, it’s always a great idea to
-                                        help visitors put a face to the names behind a website. The best place to
-                                        include a bit of information about you and your team is on your homepage
-                                        with an about page so that no one will miss it.
+                                        Things you should know about this site,
+                                        the people and the software and/or
+                                        services provided.
 
 categories:                             [ About ]
 tags:                                   [ Software, Platforms, Contributers ]
-
-image:
-  path:                                 /assets/images/modules/attics/1920x1280/alexander-redl.jpg
-  width:                                1920
-  height:                               1280
-  alt:                                  Photo by Alexander Redl on Unsplash
 
 scrollbar:                              false
 regenerate:                             false
 
 permalink:                              /pages/public/about/site/
 
-page_excerpts:                          true
-
 resources:                              [ animate ]
 resource_options:
   - attic:
-      padding_top:                      400
-      padding_bottom:                   50
-      opacity:                          0.5
+
+      padding_top:                      550
+
       slides:
         - url:                          /assets/images/modules/attics/1920x1280/alexander-redl.jpg
           alt:                          Photo by Alexander Redl on Unsplash
+          title:                        J1 Template
+          tagline:                      about
           badge:
             type:                       unsplash
             author:                     Alexander Redl
