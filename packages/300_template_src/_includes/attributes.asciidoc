@@ -71,7 +71,7 @@ tag::urls[]
 :url-bs-docs--components-carousel:                https://getbootstrap.com/docs/5.2/components/carousel/
 :url-bs-docs--components-collapse:                https://getbootstrap.com/docs/5.2/components/collapse/
 :url-bs-docs--components-dropdowns:               https://getbootstrap.com/docs/5.2/components/dropdowns/
-:url-bs-docs--components-forms:                   https://getbootstrap.com/docs/5.2/components/forms/
+:url-bs-docs--components-forms:                   https://getbootstrap.com/docs/5.2/forms/overview/
 :url-bs-docs--components-input_group:             https://getbootstrap.com/docs/5.2/components/input-group/
 :url-bs-docs--components-jumbotron:               https://getbootstrap.com/docs/5.2/components/jumbotron/
 :url-bs-docs--components-list_group:              https://getbootstrap.com/docs/5.2/components/list-group/

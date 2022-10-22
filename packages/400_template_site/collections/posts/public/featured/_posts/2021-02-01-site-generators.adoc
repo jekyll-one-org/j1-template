@@ -5,8 +5,6 @@ tagline:                                Top Open Source
 categories:                             [ Featured ]
 tags:                                   [ Jekyll, Static, Site, Generators ]
 
-# image:                                /assets/images/modules/attics/machine-generator-1920x1280.jpg
-
 image:
   path:                                 /assets/images/modules/attics/machine-generator-1920x1280.jpg
   width:                                1920
