@@ -52,7 +52,7 @@
    <div class="article-overview-heading">
 
      <h3 id="{{ 100000 | rand }}" class="article-overview-name">
-       <a href="{{ article.url }}#readmore">
+       <a class="link-no-decoration" href="{{ article.url }}#readmore">
          {% if article.nickname %}
            {{ article.nickname }}
          {% else %}

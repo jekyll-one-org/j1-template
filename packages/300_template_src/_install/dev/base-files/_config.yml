@@ -584,6 +584,26 @@ webmaster_verifications:
 excerpt_separator:                      excerpt__end
 excerpt_truncate_words:                 100
 
+  # ----------------------------------------------------------------------------
+  # Featured articles
+  #
+  # featured:
+  #   output:                             true
+  #   permalink:                          /collections/:collection/:name/
+  #
+  # # ----------------------------------------------------------------------------
+  # # Book shelf
+  # #
+  # biography:
+  #   output:                             true
+  #   permalink:                          /collections/public/:collection/:name/
+  # fantasy:
+  #   output:                             true
+  #   permalink:                          /collections/public/:collection/:name/
+  # romance:
+  #   output:                             true
+  #   permalink:                          /collections/public/:collection/:name/
+
 # ------------------------------------------------------------------------------
 # FRONTMATTER defaults
 #

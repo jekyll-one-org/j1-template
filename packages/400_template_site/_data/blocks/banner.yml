@@ -75,7 +75,7 @@ settings:
         type:                           teaser
         badges:                         false
         icon_family:                    MDI
-        properties:                     mt-3 mb-5
+        properties:                     mt-3 mb-9
 
         cards:
 

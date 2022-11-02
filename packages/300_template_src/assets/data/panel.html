@@ -25,10 +25,12 @@ exclude_from_search:                    true
 
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
-{% capture select_color     %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %}
-{% capture select_icon_size %}themes/{{site.template.name}}/procedures/global/select_icon_size.proc{% endcapture %}
-{% capture create_bs_button %}themes/{{site.template.name}}/procedures/global/create_bs_button.proc{% endcapture %}
-{% capture news_box %}themes/{{site.template.name}}/modules/footers/boxes/news_box.proc{% endcapture %}
+{% capture get_wave           %}themes/{{site.template.name}}/procedures/blocks/get_wave.proc{% endcapture %}
+
+{% capture select_color       %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %}
+{% capture select_icon_size   %}themes/{{site.template.name}}/procedures/global/select_icon_size.proc{% endcapture %}
+{% capture create_bs_button   %}themes/{{site.template.name}}/procedures/global/create_bs_button.proc{% endcapture %}
+{% capture news_box           %}themes/{{site.template.name}}/modules/footers/boxes/news_box.proc{% endcapture %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -145,6 +147,7 @@ exclude_from_search:                    true
           {% assign properties              = panel_settings.properties %}
           {% assign description_properties  = panel_settings.description_properties %}
           {% assign cards                   = panel_settings.cards %}
+          {% assign wave_properties         = panel_settings.wave %}
         {% endif %}
       {% endfor %}
 
@@ -180,6 +183,19 @@ exclude_from_search:                    true
         {% assign icon_family = 'mdi' %}
       {% endif %}
 
+      {% comment %} generate the HTML portion for the TOP wave element
+      ---------------------------------------------------------------------- {% endcomment %}
+      {% if wave_properties.top.enabled %}
+        {% include {{get_wave}} wave=wave_properties.top %}
+        {% assign panel_wave_top = _wave %}
+      {% endif %}
+
+      {% comment %} generate the HTML portion for the BOTTOM wave element
+      ---------------------------------------------------------------------- {% endcomment %}
+      {% if wave_properties.bottom.enabled %}
+        {% include {{get_wave}} wave=wave_properties.bottom %}
+        {% assign panel_wave_bottom = _wave %}
+      {% endif %}
 
       {% comment %} process current panel
       -------------------------------------------------------------------------- {% endcomment %}
@@ -191,11 +207,20 @@ exclude_from_search:                    true
         ------------------------------------------------------------------------ {% endcomment %}
         {% when 'intro' %}
         {% assign panel_options = panel_config_defaults.intro | merge: panel_settings %}
+
+        {% assign debug = true %}
         {% if debug %}<!-- panel_options:  {{panel_options}} -->{% endif %}
+
         <!-- Panel {{panel_settings.id}} -->
-        <section id="{{panel_settings.id}}" class="container">
+        <section id="{{panel_settings.id}}">
+
+          <!-- wave_properties.top:  {{ wave_properties.top | debug }} -->
+          {% if wave_properties.top.enabled %}
+            {{panel_wave_top}}
+          {% endif %}
+
           <!-- Main Container -->
-          <div class="row {{panel_settings.properties}}">
+          <div class="container {{panel_settings.properties}}">
 
             <!-- Heading -->
             <div>
@@ -331,7 +356,14 @@ exclude_from_search:                    true
 
           </div>
           <!-- END main container -->
+
+          <!-- wave_properties.bottom:  {{ wave_properties.bottom | debug }} -->
+          {% if wave_properties.bottom.enabled %}
+            {{panel_wave_bottom}}
+          {% endif %}
+
         </section>
+
         <!-- END Panel {{panel_settings.id}} -->
 
         {% comment %} Reset element variables (already processed)

@@ -41,7 +41,7 @@ source 'https://rubygems.org'
 # web application. This makes sure to use identical Ruby runtime environments
 # for BUILD and RUN (e.g. for Docker images or a Dyno on Heroku).
 #
-# ruby '3.1'
+# ruby '3.1.2'
 
 # ------------------------------------------------------------------------------
 # Jekyll
@@ -74,7 +74,7 @@ end
 # ------------------------------------------------------------------------------
 # Code Highlighter Rouge
 #
-gem 'rouge', '~> 3.3'
+gem 'rouge', '~> 4.0'
 
 # ------------------------------------------------------------------------------
 # XML|HTML processing
