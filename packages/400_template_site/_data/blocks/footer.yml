@@ -47,7 +47,7 @@ settings:
           top:                                                                  # wave on the TOP of a panel
             enabled:                      true
             position:                     top
-            height:                       1                                     # [1 .. 9]
+            height:                       3                                     # [1 .. 9]
             style:                        wave-3                                # default
             transform:                    false                                 # false or rotate|flip-x|flip-y and combinations
             opacity:                      1

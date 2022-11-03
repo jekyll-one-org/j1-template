@@ -706,7 +706,7 @@ settings:
         comment:                        Home News Panel
         type:                           news
         category_blacklist:             [ posts, public, private, protected, featured, series ]
-        properties:                     mt-5 mb-5
+        properties:                     mt-5 mb-7
 
         title:                          Creators Blog
         tagline:                        latest news
