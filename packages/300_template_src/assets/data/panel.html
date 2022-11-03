@@ -387,9 +387,15 @@ exclude_from_search:                    true
         {% endif %}
 
         <!-- Panel {{panel_settings.id}} -->
-        <section id="{{panel_settings.id}}" class="container">
+        <section id="{{panel_settings.id}}">
+
+          <!-- wave_properties.top:  {{ wave_properties.top | debug }} -->
+          {% if wave_properties.top.enabled %}
+            {{panel_wave_top}}
+          {% endif %}
+
           <!-- Main Container -->
-          <div class="row {{panel_settings.properties}}">
+          <div class="container {{panel_settings.properties}}">
             <!-- Heading -->
             <div>
               <div class="{{panel_settings.animate}} mb-2">
@@ -518,6 +524,12 @@ exclude_from_search:                    true
             -------------------------------------------------------------------- {% endcomment %}
 
           </div> <!-- END main container -->
+
+          <!-- wave_properties.bottom:  {{ wave_properties.bottom | debug }} -->
+          {% if wave_properties.bottom.enabled %}
+            {{panel_wave_bottom}}
+          {% endif %}
+
         </section> <!-- END Panel {{panel_settings.id}} -->
 
         {% comment %} Reset element variables (already processed)
@@ -537,9 +549,16 @@ exclude_from_search:                    true
         {% assign panel_options = panel_config_defaults.service | merge: panel_settings %}
         {% if debug %}<!-- panel_options:  {{panel_options}} -->{% endif %}
         <!-- Panel {{panel_settings.id}} -->
-        <section id="{{panel_settings.id}}" class="container">
+        <section id="{{panel_settings.id}}">
+
+          <!-- wave_properties.top:  {{ wave_properties.top | debug }} -->
+          {% if wave_properties.top.enabled %}
+            {{panel_wave_top}}
+          {% endif %}
+
+
           <!-- Main Container -->
-          <div class="noclass {{panel_settings.properties}}">
+          <div class="container {{panel_settings.properties}}">
 
             <!-- Heading -->
             <div class="noclass">
@@ -664,6 +683,12 @@ exclude_from_search:                    true
             <!-- End Cards -->
           </div>
           <!-- End Main Container -->
+
+          <!-- wave_properties.bottom:  {{ wave_properties.bottom | debug }} -->
+          {% if wave_properties.bottom.enabled %}
+            {{panel_wave_bottom}}
+          {% endif %}
+
         </section>
         <!-- END Panel {{panel_settings.id}} -->
 
@@ -683,7 +708,14 @@ exclude_from_search:                    true
 
         {% if debug %}<!-- panel_options:  {{panel_options}} -->{% endif %}
         <!-- Panel {{panel_settings.id}} -->
-        <section id="{{panel_settings.id}}" class="container">
+        <section id="{{panel_settings.id}}">
+
+          <!-- wave_properties.top:  {{ wave_properties.top | debug }} -->
+          {% if wave_properties.top.enabled %}
+            {{panel_wave_top}}
+          {% endif %}
+
+          <!-- Main Container -->
           <div class="container {{panel_settings.properties}}">
 
             {% if panel_options.title %}
@@ -877,7 +909,12 @@ exclude_from_search:                    true
             {% endfor %}
 
           </div>
-          <!-- END container -->
+          <!-- End Main Container -->
+
+          <!-- wave_properties.bottom:  {{ wave_properties.bottom | debug }} -->
+          {% if wave_properties.bottom.enabled %}
+            {{panel_wave_bottom}}
+          {% endif %}
 
         </section>
         <!-- End news panel: {{panel_settings.id}} -->

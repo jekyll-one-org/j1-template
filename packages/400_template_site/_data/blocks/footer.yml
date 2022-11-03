@@ -43,8 +43,7 @@ settings:
         theme:                          footer-light-theme
 
         wave:
-
-          top:                                                                  # wave on the TOP of a panel
+          top:
             enabled:                      true
             position:                     top
             height:                       3                                     # [1 .. 9]

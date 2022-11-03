@@ -26,10 +26,12 @@ exclude_from_search:                    true
 
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
-{% capture select_color     %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %}
-{% capture select_icon_size %}themes/{{site.template.name}}/procedures/global/select_icon_size.proc{% endcapture %}
-{% capture create_bs_button %}themes/{{site.template.name}}/procedures/global/create_bs_button.proc{% endcapture %}
-{% capture news_box %}themes/{{site.template.name}}/modules/footers/boxes/news_box.proc{% endcapture %}
+{% capture get_wave           %}themes/{{site.template.name}}/procedures/blocks/get_wave.proc{% endcapture %}
+
+{% capture select_color       %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %}
+{% capture select_icon_size   %}themes/{{site.template.name}}/procedures/global/select_icon_size.proc{% endcapture %}
+{% capture create_bs_button   %}themes/{{site.template.name}}/procedures/global/create_bs_button.proc{% endcapture %}
+{% capture news_box           %}themes/{{site.template.name}}/modules/footers/boxes/news_box.proc{% endcapture %}
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -105,6 +107,7 @@ exclude_from_search:                    true
           {% assign lane_span       = banner_settings.lane_span %}
           {% assign buttons         = banner_settings.buttons %}
           {% assign cards           = banner_settings.cards %}
+          {% assign wave_properties = banner_settings.wave %}
           {% assign properties      = banner_settings.properties %}
         {% endif %}
       {% endfor %}
@@ -115,6 +118,20 @@ exclude_from_search:                    true
         {% assign container_class = 'container-fluid' %}
       {% else %}
         {% assign container_class = 'container' %}
+      {% endif %}
+
+      {% comment %} generate the HTML portion for the TOP wave element
+      ---------------------------------------------------------------------- {% endcomment %}
+      {% if wave_properties.top.enabled %}
+        {% include {{get_wave}} wave=wave_properties.top %}
+        {% assign banner_wave_top = _wave %}
+      {% endif %}
+
+      {% comment %} generate the HTML portion for the BOTTOM wave element
+      ---------------------------------------------------------------------- {% endcomment %}
+      {% if wave_properties.bottom.enabled %}
+        {% include {{get_wave}} wave=wave_properties.bottom %}
+        {% assign banner_wave_bottom = _wave %}
       {% endif %}
 
       {% comment %} process current banner
@@ -145,8 +162,15 @@ exclude_from_search:                    true
         {% assign banner_options = banner_config_defaults.teaser | merge: banner_settings %}
         {% if debug %}<!-- banner_options:  {{banner_options}} -->{% endif %}
 
-        <section id="{{banner_settings.id}}" class="container">
-          <div class="row {{banner_settings.properties}}">
+        <section id="{{banner_settings.id}}">
+
+          <!-- wave_properties.top:  {{ wave_properties.top | debug }} -->
+          {% if wave_properties.top.enabled %}
+            {{banner_wave_top}}
+          {% endif %}
+
+          <!-- Main Container -->
+          <div class="container {{banner_settings.properties}}">
           {% assign card_items = cards | size %}
           {% for card in cards %}
 
@@ -271,6 +295,13 @@ exclude_from_search:                    true
           {% comment %} END cards
           ---------------------------------------------------------------------- {% endcomment %}
           </div>
+          <!-- End Main Container -->
+
+          <!-- wave_properties.bottom:  {{ wave_properties.bottom | debug }} -->
+          {% if wave_properties.bottom.enabled %}
+            {{banner_wave_bottom}}
+          {% endif %}
+
         </section> <!-- End banner {{ id }} -->
 
         {% comment %} Reset element variables (already processed)
