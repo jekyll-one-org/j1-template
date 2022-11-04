@@ -203,42 +203,18 @@ site_category_word_list:    {{site_category_word_list | debug}}
 
     {% if skip %} {% continue %} {% endif %}
 
-    {% assign first_letter = this_word | slice: 0, 1  %}
-    {% assign first_letter = first_letter | downcase %}
-
-    {% if letter_group contains first_letter %}
-      {% comment %} jadams, 2018-01-17: logic seems NOT work. Disabled.
-      --------------------------------------------------------------------------
-      <!-- jadams, 2018-01-17: logic seems NOT work. Disabled. -->
-      {% if letter_group_written == false %}
-        <h2 id="id_{{letter_group}}" class="toc-link mt-5 mb-5"><a alt="Back to top" href="#void"><i class="fa fa-tags mr-2"></i></a>{{letter_group | upcase}}</h2>
-        {% assign letter_group_written = true %}
-      {% endif %}
-      -------------------------------------------------------------------------- {% endcomment %}
-    {% else %}
-      {% assign letter_group_counter = letter_group_counter | plus:1 %}
-      {% assign letter_group = letter_group_array[letter_group_counter] %}
-
-      {% comment %} jadams, 2018-01-17: logic seems NOT work.
-                    Added workaround by checking if letter_group has a value
-      -------------------------------------------------------------------------- {% endcomment %}
-      {% if letter_group %}
-      <h2 id="id_{{letter_group}}" class="toc-link mb-3">
-        <a alt="Back to top" href="#void">
-          <i class="fa fa-tags mr-2"></i>
-        </a>{{letter_group | upcase}}
-      </h2>
-      {% endif %}
-      {% assign letter_group_written = true %}
-    {% endif %}
-
     {% comment %}
+    ----------------------------------------------------------------------------
     letter_group: {{letter_group | debug}}
     this_word: {{this_word | debug}}
     first_letter: {{first_letter | debug}}
+    ----------------------------------------------------------------------------
     {% endcomment %}
 
-    <h3 id="{{this_word | replace: '+','_' | replace: ' ','_' | downcase}}" class="toc-link"><a alt="Back to top" href="#void"><i class="fa fa-tag mr-2"></i></a>{{this_word}}</h3>
+    <h2 id="{{this_word | replace: '+','_' | replace: ' ','_' | downcase}}" class="toc-link mb-4">
+      <a class="link-no-decoration" alt="category headline" href="#void"><i class="fa fa-tag mr-2"></i></a>
+      {{this_word}}
+    </h2>
 
     {% for post in site.tags[this_word] %}{% if post.title != null %}
       {% include {{get_category}} post=post %}

@@ -26,6 +26,7 @@
 // Cards
 // -----------------------------------------------------------------------------
 .card {
+  background-color: $gray-100;
   &.card-same-height {
     height: calc(100% - 1.75rem);                                               // jadams, 2021-09-00: make (J1) cards same height
     overflow: hidden;
@@ -49,20 +50,20 @@
   margin-top: 1rem;                                                             // jadams, 2022-03-06: added additial space (above dropcaps)
   text-align: initial;
   color: $gray-dark !important;                                                 // jadams, 2021-11-20: optimize colors for themes
-  background-color: $lighten-700;                                               // jadams, 2021-11-20: optimize colors for themes
+  background-color: $gray-100;                                                  // jadams, 2022-11-03
   line-height: 1.5;
 }
 
 .card .card-footer {
-  line-height: 1.25;
-	padding: 1.25rem;
-	background-color: $lighten-500;                                               // jadams, 2021-11-20: optimize colors for themes
-  border-top: 1px dotted $darken-300;                                           // jadams, 2021-11-20: optimize colors for themes
+    line-height: 1.25;
+  	padding: 1.25rem;
+//  background-color: $lighten-500;                                             // jadams, 2022-11-03:
+    border-top: 1px dotted $darken-300;                                         // jadams, 2021-11-20: optimize colors for themes
 }
 
-.card .card-footer .footer-body {
-    color: $gray-900;
-}
+// .card .card-footer .footer-body {                                            // jadams, 2022-11-03:
+//     color: $gray-900;
+// }
 
 /* jadams: Overwrite Bootstraps heading margins for cards */
 /* .card > h1, h2, h3, h4, h5 { */
@@ -542,6 +543,7 @@ a.card-link {
 .card-testimonial {
   // margin-top: 60px;
   text-align: center;
+  background-color: $gray-100;
 }
 
 .card-tabs {

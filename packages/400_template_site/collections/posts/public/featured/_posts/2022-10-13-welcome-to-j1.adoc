@@ -3,8 +3,8 @@ title:                                  Welcome to J1
 tagline:                                Jekyll For Everyone
 #date:                                  2022-10-13 00:00:00 +0100
 
-categories:                             [ Featured ]
-tags:                                   [ J1, Jekyll ]
+categories:                             [ Jekyll ]
+tags:                                   [ J1, Template ]
 
 fab_menu_id:                            page_ctrl
 comments:                               false

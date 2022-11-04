@@ -2,7 +2,7 @@
 title:                                  Narcisse Snake Dens
 tagline:                                Largest Snake Population
 
-categories:                             [ Series ]
+categories:                             [ Wikipedia ]
 tags:                                   [ Canada, Cities, Narcisse ]
 
 series:                                 wiki-series

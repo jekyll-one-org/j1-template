@@ -186,14 +186,14 @@ exclude_from_search:                    true
       {% comment %} generate the HTML portion for the TOP wave element
       ---------------------------------------------------------------------- {% endcomment %}
       {% if wave_properties.top.enabled %}
-        {% include {{get_wave}} wave=wave_properties.top %}
+        {% include {{get_wave}} position="top" wave=wave_properties.top %}
         {% assign panel_wave_top = _wave %}
       {% endif %}
 
       {% comment %} generate the HTML portion for the BOTTOM wave element
       ---------------------------------------------------------------------- {% endcomment %}
       {% if wave_properties.bottom.enabled %}
-        {% include {{get_wave}} wave=wave_properties.bottom %}
+        {% include {{get_wave}} position="bottom" wave=wave_properties.bottom %}
         {% assign panel_wave_bottom = _wave %}
       {% endif %}
 

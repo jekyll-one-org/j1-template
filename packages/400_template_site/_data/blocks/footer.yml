@@ -41,15 +41,14 @@ settings:
         id:                             footer-en
         comment:                        Footer UNO EN-EN
         theme:                          footer-light-theme
+        properties:                     mt-8
 
         wave:
           top:
             enabled:                      true
-            position:                     top
             height:                       3                                     # [1 .. 9]
             style:                        wave-3                                # default
             transform:                    false                                 # false or rotate|flip-x|flip-y and combinations
-            opacity:                      1
             color:                        "#212121"
             background_color:             "#f5f5f5"
 

@@ -42,7 +42,7 @@
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign source      = include.source %}
 {% assign word_list   = include.word_list %}
-{% assign word_array  = word_list  | split:',' | sort %}
+{% assign word_array  = word_list | split:',' | sort %}
 
 {% if source == 'categories' %}
   {% assign categories = site.categories | sort %}

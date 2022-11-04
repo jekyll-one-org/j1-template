@@ -27,18 +27,17 @@ exclude_from_search:                    true
 
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
-{% capture get_wave           %}themes/{{site.template.name}}/procedures/blocks/get_wave.proc{% endcapture %}
-
 {% capture select_color       %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %}
 {% capture select_icon_size   %}themes/{{site.template.name}}/procedures/global/select_icon_size.proc{% endcapture %}
-{% capture about_box          %}themes/{{site.template.name}}/blocks/footer/boxes/about_box.proc{% endcapture %}
-{% capture news_box           %}themes/{{site.template.name}}/blocks/footer/boxes/news_box.proc{% endcapture %}
-{% capture links_box          %}themes/{{site.template.name}}/blocks/footer/boxes/links_box.proc{% endcapture %}
-{% capture contacts_box       %}themes/{{site.template.name}}/blocks/footer/boxes/contacts_box.proc{% endcapture %}
-{% capture legal_statements   %}themes/{{site.template.name}}/blocks/footer/boxes/legal_statements.proc{% endcapture %}
-{% capture issue              %}themes/{{site.template.name}}/blocks/footer/boxes/issue.proc{% endcapture %}
-{% capture social_media_icons %}themes/{{site.template.name}}/blocks/footer/boxes/social_media_icons.proc{% endcapture %}
 
+{% capture get_wave           %}themes/{{site.template.name}}/procedures/blocks/get_wave.proc{% endcapture %}
+{% capture about_box          %}themes/{{site.template.name}}/procedures/blocks/footer/boxes/about_box.proc{% endcapture %}
+{% capture news_box           %}themes/{{site.template.name}}/procedures/blocks/footer/boxes/news_box.proc{% endcapture %}
+{% capture links_box          %}themes/{{site.template.name}}/procedures/blocks/footer/boxes/links_box.proc{% endcapture %}
+{% capture contacts_box       %}themes/{{site.template.name}}/procedures/blocks/footer/boxes/contacts_box.proc{% endcapture %}
+{% capture legal_statements   %}themes/{{site.template.name}}/procedures/blocks/footer/boxes/legal_statements.proc{% endcapture %}
+{% capture issue              %}themes/{{site.template.name}}/procedures/blocks/footer/boxes/issue.proc{% endcapture %}
+{% capture social_media_icons %}themes/{{site.template.name}}/procedures/blocks/footer/boxes/social_media_icons.proc{% endcapture %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
@@ -65,6 +64,7 @@ exclude_from_search:                    true
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
+
 
 {% comment %} Main
 ================================================================================ {% endcomment %}
@@ -102,14 +102,14 @@ exclude_from_search:                    true
         {% comment %} generate the HTML portion for the TOP wave element
         ------------------------------------------------------------------------ {% endcomment %}
         {% if footer_settings.wave.top.enabled %}
-          {% include {{get_wave}} wave=footer_settings.wave.top %}
+          {% include {{get_wave}} position="top" wave=footer_settings.wave.top %}
           {% assign footer_wave_top = _wave %}
         {% endif %}
 
         {% comment %} generate the HTML portion for the BOTTOM wave element
         ------------------------------------------------------------------------ {% endcomment %}
         {% if footer_settings.wave.bottom.enabled %}
-          {% include {{get_wave}} wave=footer_settings.wave.bottom %}
+          {% include {{get_wave}} position="bottom" wave=footer_settings.wave.bottom %}
           {% assign footer_wave_bottom = _wave %}
         {% endif %}
 
@@ -127,7 +127,7 @@ exclude_from_search:                    true
 
         <!-- [INFO   ] [~/assets/data/footer.html                ] [Set footer box column width to: {{ footer_box_width_md }}] -->
         <!-- div id="{{footer_config_defaults.container-id}}" class="{{footer_options.theme}}" -->
-        <div id="{{footer_config_defaults.container-id}}">
+        <div id="{{footer_config_defaults.container-id}}" class="{{footer_settings.properties}}">
 
           <!-- footer_settings.wave.top:  {{ footer_settings.wave.top | debug }} -->
           <!-- [INFO   ] [~/assets/data/footer.html                ] [Check the footer TOP wave: {{ footer_settings.wave.top }}] -->
