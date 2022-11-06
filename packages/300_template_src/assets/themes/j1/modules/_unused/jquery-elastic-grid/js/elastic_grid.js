@@ -249,7 +249,7 @@ $(function() {
 
                 //initial a object
                 aObject = $('<a></a>');
-                aObject.attr('href', 'javascript:;;');
+                aObject.attr('href', 'javascript:void(0)');
 
                 //initial default photo
                 imgObject = $('<img/>');
@@ -287,6 +287,7 @@ $(function() {
         }
         ulObject.addClass('effect-'+config.filterEffect);
         ulObject.appendTo(container);
+
 /**************************************************************************
 * HOVER DIR
 ***************************************************************************/
@@ -316,7 +317,7 @@ $(function() {
         // Adding a data-id attribute. Required by the Quicksand plugin:
         elem.attr('data-id',i);
 
-        elem.addClass(config.showAllText.toLowerCase().replace(' ','-'));
+        // elem.addClass(config.showAllText.toLowerCase().replace(' ','-'));
         $.each(tags,function(key,value){
             // Removing extra whitespace:
             value = $.trim(value);
@@ -338,7 +339,7 @@ $(function() {
 
     if(numOfTag > 1){
         // Creating the "Everything" option in the menu:
-        createList(config.showAllText);
+        // createList(config.showAllText);
 
         // Looping though the arrays in itemsByTags:
         $.each(itemsByTags,function(k,v){
@@ -374,9 +375,9 @@ $(function() {
         localStorage.setItem("filter", true);
         localStorage.setItem("filter-all", false);
 
-        if (filterVal === config.showAllText.toLowerCase().replace(' ','-')) {
-            localStorage.setItem("filter-all", true);
-        }
+        // if (filterVal === config.showAllText.toLowerCase().replace(' ','-')) {
+        //     localStorage.setItem("filter-all", true);
+        // }
 
         $body.animate( { scrollTop : $this.offset().top }, settings.speed );
 
@@ -413,6 +414,7 @@ $(function() {
             li.appendTo(porfolio_filter);
         }
     }
+
 /**************************************************************************
 * EXPANDING
 ***************************************************************************/
@@ -503,7 +505,8 @@ $(function() {
                 scrollExtra = 0;
                 previewPos = -1;
                 // save item´s offset
-                saveItemInfo();
+                // jadams, 2011-11-05: disabled|fails in jQuery.load()
+                // saveItemInfo();
                 getWinSize();
                 var preview = $.data( this, 'preview' );
                 if( typeof preview != 'undefined' ) {
@@ -689,7 +692,7 @@ $(function() {
                             var largeURL = glarge[i];
 
                             var Objli = $('<li></li>');
-                            var ObjA = $('<a href="javascript:;;"></a>');
+                            var ObjA = $('<a href="javascript:void(0)"></a>');
                             var ObjImg = $('<img/>');
 
                             ObjImg.addClass('related_photo');
@@ -742,7 +745,6 @@ $(function() {
                         self.$details.find('.infosep, .og-grid-small').remove();
                     }
 
-
                     // preload large image and add it to the preview
                     // for smaller screens we don´t display the large image (the media query will hide the fullimage wrapper)
                     if( self.$fullimage.is( ':visible' ) ) {
@@ -756,30 +758,33 @@ $(function() {
                         var firstChild  = self.$item.children('a').find('img');
                         var $youtube    = firstChild.data( 'video' );
                         var $largePhoto = firstChild.data( 'largesrc' );
-                        if($largePhoto && (typeof $youtube != undefined)){
-                            img.load( function() {
-                                var $img = $( this );
-                                if( $img.attr( 'src' ) === $largePhoto ) {
-                                    self.$loading.hide();
-                                    // self.$fullimage.find('iframe, img').fadeOut(500, function(){
-                                    //     self.$fullimage.find('img').attr('src', $largePhoto);
-                                    // });
-                                    self.$fullimage.find( 'img' ).remove();
-                                    self.$largeImg = $img.fadeIn( 350 );
-                                    self.$fullimage.find('iframe').fadeOut(500, function(){
-                                        self.$fullimage.append( self.$largeImg );
-                                    });
-                                }
-                            } ).attr( 'src', eldata.large[0] );
 
-                        }else{
-                            self.$loading.hide();
-
-                            self.$fullimage.find('img').fadeOut(500, function(){
-                                // iframe.ready(function (){
-                                self.$fullimage.find('iframe').fadeIn(500).attr('src', $youtube);
+                        // jadams, 2011-11-05: disabled|fails in jQuery.load()
+                        var loadImage   = false;
+                        if ($largePhoto && (typeof $youtube != undefined) ) {
+                          img.load( $largePhoto, function() {
+                            var $img = $(this);
+                            if( $img.attr( 'src' ) === $largePhoto ) {
+                                self.$loading.hide();
+                                // self.$fullimage.find('iframe, img').fadeOut(500, function(){
+                                //     self.$fullimage.find('img').attr('src', $largePhoto);
                                 // });
-                            });
+                                self.$fullimage.find( 'img' ).remove();
+                                self.$largeImg = $img.fadeIn( 350 );
+                                self.$fullimage.find('iframe').fadeOut(500, function() {
+                                    self.$fullimage.append( self.$largeImg );
+                                });
+                            }
+                          } ).attr( 'src', eldata.large[0] );
+
+                        } else {
+                          self.$loading.hide();
+
+                          self.$fullimage.find('img').fadeOut(500, function(){
+                              // iframe.ready(function (){
+                              self.$fullimage.find('iframe').fadeIn(500).attr('src', $youtube);
+                              // });
+                          });
                         }
                     }
 
@@ -812,6 +817,10 @@ $(function() {
                         this.$largeImg.fadeOut( 'fast' );
                     }
                     this.$previewEl.css( 'height', 0 );
+
+                    // jadams
+                    this.$item.css( 'height', 10 );
+
                     // the current expanded item (might be different from this.$item)
                     var $expandedItem = $items.eq( this.expandedIdx );
                     $expandedItem.css( 'height', $expandedItem.data( 'height' ) ).on( transEndEventName, onEndFn );
@@ -825,15 +834,17 @@ $(function() {
                 return false;
 
             },
-            calcHeight : function() {
+             calcHeight : function(preHeight) {
+//            calcHeight : function() {
 
-                var heightPreview = winsize.height - this.$item.data( 'height' ) - marginExpanded,
-                    itemHeight = winsize.height;
+//              var heightPreview = winsize.height - this.$item.data('height', '800') - marginExpanded;
+                var heightPreview = winsize.height - preHeight - marginExpanded;
+                var itemHeight = winsize.height;
 
                 //console.log(heightPreview);
                 if( heightPreview < settings.minHeight ) {
                     heightPreview = settings.minHeight;
-                    itemHeight = settings.minHeight + this.$item.data( 'height' ) + marginExpanded;
+                    itemHeight = settings.minHeight + this.$item.data('height', preHeight) + marginExpanded;
                 }
                 //console.log(heightPreview);
                 //console.log(this.$item.data( 'height' ));
@@ -852,7 +863,8 @@ $(function() {
                         self.$item.addClass( 'og-expanded' );
                     };
 
-                this.calcHeight();
+//              this.calcHeight();
+                this.calcHeight(settings.minHeight);
                 this.$previewEl.css( 'height', this.height );
                 this.$item.css( 'height', this.itemHeight ).on( transEndEventName, onEndFn );
 
@@ -906,7 +918,8 @@ $(function() {
             getWinSize();
 
             // save item´s size and offset
-            saveItemInfo( true );
+            // jadams, 2011-11-05: disabled|fails in jQuery.load()
+            // saveItemInfo( true );
 
             //init filter
             localStorage.setItem("filter-all", true);

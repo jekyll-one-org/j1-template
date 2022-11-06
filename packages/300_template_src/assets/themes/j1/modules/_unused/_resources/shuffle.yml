@@ -1,0 +1,47 @@
+# ------------------------------------------------------------------------------
+# ~/_data/resources/resources.yml
+# Configuration data to specify ALL the resources used by a site|layout
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2022 Juergen Adams
+#
+# J1 Template is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+# NOTE:
+#   By J1 template, "Liquid Procedures" are being used intensively. To load
+#   HTML data for a layout, the loader procedure places the data based this
+#   YAML data file into the REGION specified with a LANE.
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# RESOURCE configuration settings
+#
+resources:
+
+  # ----------------------------------------------------------------------------
+  # Shuffle. JS API to create image-based portfolios (galleries)
+  #
+  - name:                               Shuffle
+    resource:
+      enabled:                          true
+
+      id:                               shuffle
+      comment:                          Module Shuffle
+      region:                           head
+      layout:                           [ page, post ]
+      required:                         ondemand
+      preload:                          false
+      script_load:                      sync
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            []
+        files:                          []
+        js:                             [ modules/shuffle/js/shuffle ]
+        init_function:                  []
+
+# ------------------------------------------------------------------------------
+# END config

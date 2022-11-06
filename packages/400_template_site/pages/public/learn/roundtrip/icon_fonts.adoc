@@ -19,8 +19,6 @@ image:
   height:                               1280
   alt:                                  Photo by Harpal Singh on Unsplash
 
-fab_menu_id:                            page_ctrl
-
 permalink:                              /pages/public/learn/roundtrip/mdi_icon_font/
 regenerate:                             false
 

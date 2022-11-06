@@ -46,14 +46,15 @@
 -------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Calculate|Set WAVE scales
+TODO: Check why corrections of plus:1 or minus:1 are required
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign wave_height = wave_settings.height %}
 
 {% if wave_height > 1 %}
   {% if position == 'top' %}
-    {% assign translate_y = wave_height|times:-4 %}
+    {% assign translate_y = wave_height|times:-4|plus:1 %}
   {% elsif position == 'bottom' %}
-    {% assign translate_y = wave_height|times:4 %}
+    {% assign translate_y = wave_height|times:4|minus:1 %}
   {% else %}
     {% assign translate_y = 1 %}
   {% endif %}
@@ -166,5 +167,6 @@
 {% endcase %}
 
 {% comment %} Generate WAVE container
+TODO: Check why corrections of margin-top:-1 or margin-bottom:-1 are required
 -------------------------------------------------------------------------------- {% endcomment %}
-{% capture _wave %}<div class="wavebox" style="background-color:{{wave_settings.background_color}}; margin-bottom: -1px; padding-top: -1px;">{{wave}}</div>{% endcapture %}
+{% capture _wave %}<div class="wavebox" style="background-color: {{wave_settings.background_color}}; margin-top: -1px; margin-bottom: -1px;">{{wave}}</div>{% endcapture %}

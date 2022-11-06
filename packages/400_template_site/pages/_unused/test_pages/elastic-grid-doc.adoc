@@ -11,7 +11,7 @@ categories:                             [ Testpages ]
 tags:                                   [ Example ]
 
 comments:                               false
-fab_menu_id:                            page_ctrl_simple
+fab_menu_id:                            page_ctrl
 
 permalink:                              /pages/public/learn/egrid_doc/
 regenerate:                             false
@@ -19,7 +19,7 @@ regenerate:                             false
 resources:                              [ animate, clipboard, elasticgrid, rouge ]
 resource_options:
   - attic:
-      padding_top:                      400
+      padding_top:                      400^^
       padding_bottom:                   50
       opacity:                          0.5
       slides:
@@ -353,12 +353,13 @@ resource_options:
     ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
   <script>document.createElement('section');var duration='500',easing='swing';</script>
+  <!--
   <script src="assets/js/jquery.js"></script>
   <script src="assets/js/jquery.scrollTo.js"></script>
   <script src="assets/js/jquery.easing.js"></script>
   <script src="assets/js/scripts.js"></script>
   <script src="assets/js/google-code-prettify/prettify.js"></script>
   <script src="assets/js/bootstrap-min.js"></script>
-
+  -->
 
 ++++

@@ -423,14 +423,14 @@ settings:
 
         wave:
           top:
-            enabled:                      false
+            enabled:                      true
             height:                       3                                     # [1 .. 9]
             style:                        wave-1                                # default
             color:                        "#dcdcdc"
             background_color:             "#f5f5f5"
             transform:                    false                                 # false or rotate|flip-x|flip-y and combinations
           bottom:
-            enabled:                      false
+            enabled:                      true
             height:                       3
             style:                        wave-4
             color:                        "#dcdcdc"
@@ -448,8 +448,8 @@ settings:
               icon_size:                mdi-6x
               icon_color:               md-white
               href:                     /pages/public/features/general_features/
-              title:                    Features
-              tagline:                  general features
+              title:                    Jekyll One
+              tagline:                  General Features
               header_translate:         notranslate
               text: >
                                         <p class="dropcap mt-3">
@@ -532,7 +532,7 @@ settings:
                                         </p>
                                         <p>
                                           <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-bootstrap"></i>
-                                          Bootstrap V4 <br />
+                                          Bootstrap V5 <br />
                                           <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-language-html5"></i>
                                           Enhanced HTML, CSS and Javascript <br />
                                           <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-grass"></i>
@@ -558,8 +558,8 @@ settings:
                                         </p>
                                         <p>
                                           Performance is a key factor for all users. To not get visitors  lost, J1
-                                          webs are highly optimized. All Websites will achieve  Google Lighthouse
-                                          scores for performance, accessibility, best practices, and SEO at the
+                                          webs are highly optimized. All Websites will achieve best Google Lighthouse
+                                          Scores for performance, accessibility, best practices, and SEO at a
                                           green level.
                                         </p>
                                         <p>
@@ -571,7 +571,7 @@ settings:
                                           <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-near-me"></i>
                                           Mobile Web Navigation <br />
                                           <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-lighthouse"></i>
-                                          Highest Google Lighthouse scores <br />
+                                          Highest Google Lighthouse Scores <br />
                                         </p>
 
                     title:              Devices
@@ -586,8 +586,8 @@ settings:
               icon_size:                mdi-6x
               icon_color:               md-white
               href:                     /pages/public/features/template_features/
-              title:                    Features
-              tagline:                  template features
+              title:                    Jekyll One
+              tagline:                  Template Features
               header_translate:         notranslate
               text: >
                                         <p class="dropcap mt-3">
