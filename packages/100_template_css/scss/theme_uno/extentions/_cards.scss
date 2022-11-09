@@ -30,6 +30,7 @@
   &.card-same-height {
     height: calc(100% - 1.75rem);                                               // jadams, 2021-09-00: make (J1) cards same height
     overflow: hidden;
+//  background-color: #ededed;                                                  // jadams, 2022-11-06: cause color conflicts if set fixed
   }
 }
 
@@ -572,6 +573,15 @@ a.card-link {
 .card-testimonial.card-plain .card-avatar {
   margin-top: 0;
 }
+
+// jadams 2022-11-06
+a.btn.btn-link.card-profile {
+    background-color: #ededed;
+}
+a.btn.btn-link.card-profile:hover {
+    background-color: #ededed;
+}
+
 
 // Testimonial Card
 // -----------------------------------------------------------------------------

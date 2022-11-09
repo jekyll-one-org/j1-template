@@ -35,7 +35,7 @@ comments:                               false
 exclude_from_search:                    true
 regenerate:                             false                                   # set to 'true', if update posts is required
 
-resources:                              [ animate ]
+resources:                              [ animate, scroller ]
 resource_options:
 
   - attic:
@@ -84,12 +84,12 @@ resource_options:
 {% endif %}
 
 {% include {{get_page_path}} mode='absolute' %}
+{% assign navigator_path = page_path|remove_first: '/archive' %}
 
-{% capture navigator %}{{page_path}}/{% endcapture %}
-{% capture blog_preview %}{{page_path}}/archive/preview/{% endcapture %}
-{% capture date_view %}{{page_path}}/archive/dateview/{% endcapture %}
-{% capture category_view %}{{page_path}}/archive/categoryview/{% endcapture %}
-{% capture tag_view %}{{page_path}}/archive/tagview/{% endcapture %}
+{% capture navigator %}{{navigator_path}}/{% endcapture %}
+{% capture date_view %}{{page_path}}/dateview/{% endcapture %}
+{% capture category_view %}{{page_path}}/categoryview/{% endcapture %}
+{% capture tag_view %}{{page_path}}/tagview/{% endcapture %}
 {% capture all_view %}{{page_path}}/{% endcapture %}
 
 {% comment %} Collect CSS image filters
@@ -149,8 +149,8 @@ site_category_word_list:    {{site_category_word_list | debug}}
 <!-- [INFO   ] [ {{page.url}} ] [Generate HTML}] -->
 <div class="paginator ml-3">
   <ul class="pagination raised-z0">
-    <li class="page-item"><a class="page-link" href="{{navigator | prepend: site.baseurl}}" alt="Blog View">Navigator</a></li>
-    <li class="page-item"><a class="page-link" href="{{category_view|prepend: site.baseurl}}" alt="View by Category">{{category_view_button_text}}</a></li>
+    <li class="page-item"><a class="page-link" href="{{navigator}}" alt="Blog View">Navigator</a></li>
+    <li class="page-item"><a class="page-link" href="{{category_view}}" alt="View by Category">{{category_view_button_text}}</a></li>
     <li class="page-item"><a class="page-link" href="{{date_view}}" alt="View by Date">{{date_view_button_text}}</a></li>
     <!-- li class="page-item"><a class="page-link" href="{{tag_view}}" alt="{{tag_view_button_text}}">By Tag</a></li -->
   </ul>

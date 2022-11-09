@@ -66,28 +66,28 @@
   {% capture browser_page_url %}{{page.url}}{% endcapture %}
 {% endif %}
 
-<!-- [INFO   ] [j1.page.{{page.title}}                   ] [Save the current page to UserState cookie] -->
+<!-- [INFO   ] [j1.page.{{page.title}}                   ] [Save the current page to j1_user_state cookie] -->
 <!-- script>
-        var logger   = log4javascript.getLogger("j1.page.{{page.title|downcase}}.init");
-        var cookieUserState = 'j1.user.state'
-        var log_text = 'Save the current browser page ({{page.title|downcase}}) to cookie: ' +cookieUserState;
+  var logger          = log4javascript.getLogger("j1.page.{{page.title|downcase}}.init");
+  var cookieUserState = 'j1.user.state'
+  var log_text        = 'Save the current browser page ({{page.title|downcase}}) to cookie: ' +cookieUserState;
 
-        var j1_user_state = {
-          'authenticated' : 'false',
-          'cookies_accepted' : 'false',
-          'theme_css' : 'unknown',
-          'theme_extension_css' : 'unknown',
-          'theme_name' : 'unknown',
-          'last_page' : 'unknown',
-          'last_provider' : 'unknown',
-          'last_signin' : 'unknown',
-          'provider' : 'unknown',
-          'user_name' : 'unknown',
-          'user_id' : 'unknown'
-        };
+  var j1_user_state = {
+    'authenticated' : 'false',
+    'cookies_accepted' : 'false',
+    'theme_css' : 'unknown',
+    'theme_extension_css' : 'unknown',
+    'theme_name' : 'unknown',
+    'last_page' : 'unknown',
+    'last_provider' : 'unknown',
+    'last_signin' : 'unknown',
+    'provider' : 'unknown',
+    'user_name' : 'unknown',
+    'user_id' : 'unknown'
+  };
 
-        // Set|Detect J1 App status
-        j1_user_state.last_page = "{{browser_page_url}}"
-        j1.setUserState( j1_user_state );
-        logger.info(log_text);
-        </script -->
+  // Set|Detect J1 App status
+  j1_user_state.last_page = "{{browser_page_url}}"
+  j1.setUserState( j1_user_state );
+  logger.info(log_text);
+</script -->

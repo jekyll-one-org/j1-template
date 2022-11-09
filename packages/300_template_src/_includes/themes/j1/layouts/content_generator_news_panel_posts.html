@@ -2,7 +2,7 @@
  # -----------------------------------------------------------------------------
  # ~/_includes/themes/j1/layouts/content_generator_news_panel_posts.html
  # Liquid template to create the content portion of all posts to be used
- # for infinite scroll by the news panel (home page)
+ # for infinite scroll by the news panel.
  #
  # Product/Info:
  # https://jekyll.one
@@ -26,43 +26,41 @@
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config             = site.data.j1_config %}
-{% assign blocks                      = site.data.blocks %}
-{% assign modules                     = site.data.modules %}
-{% assign builder                     = site.data.builder %}
-{% assign plugins                     = site.data.plugins %}
-
+{% assign template_config                 = site.data.j1_config %}
+{% assign blocks                          = site.data.blocks %}
+{% assign modules                         = site.data.modules %}
+{% assign builder                         = site.data.builder %}
+{% assign plugins                         = site.data.plugins %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign panel_config_defaults       = blocks.defaults.panel %}
-{% assign panel_config_settings       = blocks.panel %}
-{% assign bs_config                   = template_config.bootstrap %}
+{% assign panel_config_defaults           = blocks.defaults.panel %}
+{% assign panel_config_settings           = blocks.panel %}
+{% assign bs_config                       = template_config.bootstrap %}
 
-{% assign blog_navigator_defaults     = modules.defaults.blog_navigator.defaults %}
-{% assign blog_navigator_settings     = modules.blog_navigator.settings %}
-{% assign paginator_defaults          = plugins.defaults.paginator.defaults %}
-{% assign paginator_settings          = plugins.paginator.settings %}
+{% assign blog_navigator_defaults         = modules.defaults.blog_navigator.defaults %}
+{% assign blog_navigator_settings         = modules.blog_navigator.settings %}
+{% assign paginator_defaults              = plugins.defaults.paginator.defaults %}
+{% assign paginator_settings              = plugins.paginator.settings %}
 
-{% assign panel_config_defaults       = panel_config_defaults.defaults %}
-{% assign panel_config_settings       = panel_config_settings.settings %}
-
+{% assign panel_config_defaults           = panel_config_defaults.defaults %}
+{% assign panel_config_settings           = panel_config_settings.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign blog_navigator_options              = blog_navigator_defaults | merge: blog_navigator_settings %}
-{% assign paginator_options                   = paginator_defaults | merge: paginator_settings %}
+{% assign blog_navigator_options          = blog_navigator_defaults | merge: blog_navigator_settings %}
+{% assign paginator_options               = paginator_defaults | merge: paginator_settings %}
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign article_navigator                   = blog_navigator_settings.article_navigator %}
-{% assign article_previewer                   = blog_navigator_settings.article_previewer %}
-{% assign article_navigator_description       = blog_navigator_options.article_navigator.description %}
-{% assign article_previewer_description       = blog_navigator_options.article_previewer.description %}
+{% assign article_navigator               = blog_navigator_settings.article_navigator %}
+{% assign article_previewer               = blog_navigator_settings.article_previewer %}
+{% assign article_navigator_description   = blog_navigator_options.article_navigator.description %}
+{% assign article_previewer_description   = blog_navigator_options.article_previewer.description %}
 
-{% assign previewer                           = blog_navigator_options.previewer %}
-{% assign paginate                            = paginator_options.pagination.enabled %}
-{% assign truncate_words                      = site.excerpt_truncate_words %}
+{% assign previewer                       = blog_navigator_options.previewer %}
+{% assign paginate                        = paginator_options.pagination.enabled %}
+{% assign truncate_words                  = site.excerpt_truncate_words %}
 
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
@@ -131,7 +129,7 @@
 {% endif %}
 
 {% comment %} Main
-================================================================================ {% endcomment %}
+-------------------------------------------------------------------------------- {% endcomment %}
 {% for items in panel_config_settings %}
   {% assign key             = items[0] %}
   {% assign value           = items[1] %}

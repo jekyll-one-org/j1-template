@@ -123,7 +123,7 @@
         {% capture date_view %}{{archive_path}}/dateview/{% endcapture %}
         {% capture category_view %}{{archive_path}}/categoryview/{% endcapture %}
         {% capture tag_view %}{{archive_path}}/tagview/{% endcapture %}
-        {% capture all_view %}{{archive_path}}/{% endcapture %}
+        {% capture all_view %}{{archive_path}}/allview/{% endcapture %}
 
         {% comment %}
         ------------------------------------------------------------------------
@@ -217,35 +217,3 @@
 
     </div> <!-- end blog_navigator -->
   </main> <!-- end main -->
-
-  {% comment %} Calc|Write the Back URL
-  ------------------------------------------------------------------------------ {% endcomment %}
-  {% if site.permalink == 'none' %}
-    {% capture browser_page_url %}{{page.url}}.html {% endcapture %}
-  {% else %}
-    {% capture browser_page_url %}{{page.url}}{% endcapture %}
-  {% endif %}
-
-  <!-- [INFO   ] [j1.content_generator_blog_archive        ] [ {{page.title}} - save the current page to cookieUserState cookie: {{ browser_page_url }} ] -->
-  <script>
-    // Manage current page settings
-    $(document).ready(function() {
-      var dependencies_blog_generator = setInterval(function() {
-        if ( j1.adapter.themer.getState() == 'finished' ) {
-          // [INFO   ] [j1.content_generator_blog_archive        ] [ {{page.title}} - save the current page to cookieUserState cookie: {{ browser_page_url }} ]
-          var cookie_names                = j1.getCookieNames();
-          const user_state_cookie_name    = cookie_names.user_session;
-          var user_state                  = j1.readCookie(user_state_cookie_name);
-          var user_state_last_page        = "{{browser_page_url}}";
-          user_state.last_page            = user_state_last_page;
-          j1.writeCookie({
-            name: user_state_cookie_name,
-            data: user_state
-          });
-          // clear interval checking
-          clearInterval(dependencies_blog_generator);
-          }
-        }, 25);
-    });
-  </script>
-  <!-- [INFO   ] [j1.layout.content_generator_blog.html  ] [ end content ] -->

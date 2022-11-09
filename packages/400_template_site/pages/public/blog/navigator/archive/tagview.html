@@ -96,14 +96,13 @@ resource_options:
 {% assign letter_group_written  = false %}
 
 {% include {{get_page_path}} mode='absolute' %}
-{% assign navigator_path = page_path | remove_first:'archive' %}
+{% assign navigator_path = page_path | remove_first: 'archive' %}
 
 {% capture navigator %}{{navigator_path}}{% endcapture %}
-{% capture blog_preview %}{{page_path}}/preview/{% endcapture %}
 {% capture date_view %}{{page_path}}/dateview/{% endcapture %}
 {% capture category_view %}{{page_path}}/categoryview/{% endcapture %}
 {% capture tag_view %}{{page_path}}/tagview/{% endcapture %}
-{% capture all_view %}{{page_path}}/{% endcapture %}
+{% capture all_view %}{{page_path}}/allview/{% endcapture %}
 
 {% comment %} TODO: skip_words should configured by yaml data file?
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -175,10 +174,10 @@ site_category_word_list:    {{site_category_word_list | debug}}
 
 <div class="paginator ml-3">
   <ul class="pagination raised-z0">
-    <li class="page-item"><a class="page-link" href="{{navigator | prepend: site.baseurl}}" alt="Blog View">Navigator</a></li>
-    <li class="page-item"><a class="page-link" href="{{date_view | prepend: site.baseurl}}" alt="View by Date">By Date</a></li>
-    <li class="page-item"><a class="page-link" href="{{category_view | prepend: site.baseurl}}" alt="View by Category">By Category</a></li>
-    <li class="page-item"><a class="page-link" href="{{all_view | prepend: site.baseurl}}" alt="View All">All Posts</a></li>
+    <li class="page-item"><a class="page-link" href="{{navigator}}" alt="Blog View">Navigator</a></li>
+    <li class="page-item"><a class="page-link" href="{{date_view}}" alt="View by Date">By Date</a></li>
+    <li class="page-item"><a class="page-link" href="{{category_view}}" alt="View by Category">By Category</a></li>
+    <li class="page-item"><a class="page-link" href="{{all_view}}" alt="View All">All Posts</a></li>
   </ul>
 </div>
 

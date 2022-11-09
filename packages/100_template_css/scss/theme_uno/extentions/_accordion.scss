@@ -55,12 +55,13 @@
 	padding: 0.5rem 3rem;
 }
 
-.accordion .highlight .btn {
-	color: $primary;
-}
-.accordion .highlight i {
-	transform: rotate(180deg);
-}
+// jadams, 2022-^^-07: disabled animation as NOT work correctly
+// .accordion .highlight .btn {
+// 	color: $primary;
+// }
+// .accordion .highlight i {
+// 	transform: rotate(180deg);
+// }
 
 .collapsible-link[aria-expanded='true']::after {
   transform: rotate(90deg) translateX(-1px);
