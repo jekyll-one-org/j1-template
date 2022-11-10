@@ -366,16 +366,16 @@ p.tableblock {
   border: 0;
 }
 
-.quoteblock blockquote:before {
+.quoteblock
+ blockquote:before {
 	float: left;
 	color: #0d47a1;
-	margin-left: 0.1em;
+	margin-left: -6rem;
 	content: '\0022';
 	position: absolute;
 	font-size: 10em;
 	font-weight: 900;
 	opacity: 0.2;
-	left: 4%;
 	z-index: -1;
 	margin-top: -0.3em;
 }
@@ -594,7 +594,7 @@ table.tableblock > .title {
 .exampleblock {
 	margin-bottom: 1.25rem;
   border-radius: $border--radius;
-  background: $grey-50;
+  /* background: $grey-50; */
 }
 
 .exampleblock > .content > :first-child {
@@ -1110,18 +1110,13 @@ ul.disc {
   border-radius: .125rem;
 }
 
-// Mobile
+// Tablets and Mobiles
 // See: http://elvery.net/demo/responsive-tables/#no-more-tables
 // -----------------------------------------------------------------------------
 
-// Breakpoint SM
-@media only screen and (max-width: $breakpoint--sm) {
-  .admonitionblock > table td.content {
-      border-left: 0;
-  }
-}
-
+// Breakpoint Midsize Devices (Tablets)
 @media only screen and (max-width: $breakpoint--md) and (max-width: $breakpoint--lg) {
+
   .admonitionblock > table td.content {
       border-left: 0;
   }
@@ -1161,4 +1156,23 @@ ul.disc {
 		text-align:left;
 		font-weight: bold;
 	}
+
+  .quoteblock
+   blockquote:before {
+  	margin-left: -5.75rem;
+  }
+
+}
+
+// Breakpoint Small Devices (Mobiles)
+@media only screen and (max-width: $breakpoint--sm) {
+
+  .admonitionblock > table td.content {
+      border-left: 0;
+  }
+  .quoteblock
+   blockquote:before {
+  	margin-left: -5rem;
+  }
+
 }

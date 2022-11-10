@@ -10,7 +10,7 @@ description: >
                                         proprietary software.
 
 categories:                             [ Roundtrip ]
-tags:                                   [ Introduction, Module, Video ]
+tags:                                   [ Module, Video ]
 
 image:
   path:                                 /assets/videos/headers/present_videos/still/underground-broadway.jpg

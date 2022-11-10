@@ -7,8 +7,8 @@ description: >
                                         J1 Template is based on pure CSS styles on top of the classic Bootstrap tags for
                                         simplicity and portability to be viewed best on all devices and browsers.
 
-categories:                             [ Roundtrip ]
-tags:                                   [ Introduction, Bootstrap, Table, Extension ]
+categories:                             [ Roundtrip, Bootstrap ]
+tags:                                   [ Tables, Extension ]
 
 image:
   path:                                 /assets/images/pages/roundtrip/tables-1920x1280-bw.jpg
@@ -99,13 +99,13 @@ To see the transformation on a table in action, resize for desktop devices the
 browser window or use a device the viewport is smaller than 768px (mobiles or
 tablets).
 
-== Tables 2-column
+== Table 2-column
 
 Tables are widely used for documentation pages. Below, simple 2-column tables
 are used to explain some of the Jekyll variables for templating your content
 pages.
 
-=== Bootstrap tables
+=== Bootstrap table
 
 Bootstrap tables support tables to be scrolled horizontally on smaller
 viewports. From a specified breakpoint and up, the table will behave
@@ -189,7 +189,7 @@ Post's front matter by specifying a new date/time in the format
 |===
 
 
-=== Responsive tables
+=== Responsive table
 
 Responsive tables *rebuild* a table. The header is set to invisible, and
 all columns get vertically *stacked as rows*.
@@ -279,7 +279,7 @@ available to better control over what viewport sizes table are transformed.
 From a specified breakpoint and up, the table will behave normally
 and do not scroll horizontally.
 
-=== Bootstrap tables
+=== Bootstrap table
 
 Bootstrap responsive tables make use of the CSS `overflow-x: auto`, which
 clips off any content that goes beyond the bottom or top edges of the table.
@@ -356,7 +356,7 @@ the form `#RRGGBB`
 
 |===
 
-=== Responsive tables
+=== Responsive table
 
 .R Table using fixed text size `no-rtext`
 [source, asciidoc, role="noclip"]
@@ -436,4 +436,4 @@ An exciting feature may be the use of themes. But much, much more can the J1
 do for your Web Site.
 
 Check out what themes can do. Have a look at the
-link:{url-roundtrip--themes}[BS Themes] feature!
+link:{url-roundtrip--themes}[Bootstrap Themes] feature!

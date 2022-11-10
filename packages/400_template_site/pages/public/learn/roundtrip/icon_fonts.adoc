@@ -10,8 +10,8 @@ description: >
                                         loaded over the Internet using the so-called Unified OpenSource Icon
                                         Framework.
 
-categories:                             [ Roundtrip ]
-tags:                                   [ Introduction, Module, Icon, Fonts ]
+categories:                             [ Roundtrip, Icon Fonts ]
+tags:                                   [ Module, Icon ]
 
 image:
   path:                                 assets/images/pages/roundtrip/icon-fonts-1920x1280-bw.jpg

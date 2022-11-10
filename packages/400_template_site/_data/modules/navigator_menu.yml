@@ -32,31 +32,31 @@
       icon:                             briefcase-search-outline
       dropdown:
 
-        - title:                        Present images
+        - title:                        Present Images
           href:                         /pages/public/learn/roundtrip/present_images/
           icon:                         image
-        - title:                        Present videos
+        - title:                        Present Videos
           href:                         /pages/public/learn/roundtrip/present_videos/
           icon:                         video
-        - title:                        Typography
+        - title:                        Template Typography
           href:                         /pages/public/learn/roundtrip/typography/
           icon:                         format-text
-        - title:                        Icon fonts
+        - title:                        Icon Fonts
           href:                         /pages/public/learn/roundtrip/mdi_icon_font/
-          icon:                         fan
-        - title:                        Asciidoc extensions
+          icon:                         sprout
+        - title:                        Asciidoc Enhancements
           href:                         /pages/public/learn/roundtrip/asciidoc_extensions/
           icon:                         format-annotation-plus
-        - title:                        BS modal extensions
+        - title:                        Modal Extensions
           href:                         /pages/public/learn/roundtrip/modals/
           icon:                         image
-        - title:                        BS table extensions
+        - title:                        Responsive Tables
           href:                         /pages/public/learn/roundtrip/responsive_tables/
           icon:                         table
-        - title:                        BS themes
+        - title:                        Bootstrap Themes
           href:                         /pages/public/learn/roundtrip/themes/
           icon:                         theme-light-dark
-        - title:                        QuickSearch
+        - title:                        Lunr Search
           href:                         /pages/public/learn/roundtrip/quicksearch/
           icon:                         magnify
 
@@ -87,10 +87,10 @@
           icon:                         format-color-fill
         - title:                        MDI Icons (regular)
           href:                         /pages/public/previewer/mdi_font/
-          icon:                         alarm-light
+          icon:                         sprout
         - title:                        MDI Icons (light)
           href:                         /pages/public/previewer/mdil_font/
-          icon:                         alarm-light-outline
+          icon:                         sprout-outline
         - title:                        Rouge Themes
           href:                         /pages/public/previewer/rouge/
           icon:                         code-parentheses

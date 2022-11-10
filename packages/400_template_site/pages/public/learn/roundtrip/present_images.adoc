@@ -7,8 +7,8 @@ description: >
                                         shows some valuable features of the J1 Template to manage your image-based
                                         content using lightboxes, carousels (slider), and galleries.
 
-categories:                             [ Roundtrip, Module, Preview ]
-tags:                                   [ Image, Slider, Carousel, Lightbox ]
+categories:                             [ Roundtrip ]
+tags:                                   [ Module, Carousel, Lightbox, Image, Slider ]
 
 image:
   path:                                 /assets/images/modules/attics/1920x1280/quino-al-2.jpg

@@ -1,5 +1,5 @@
 ---
-title:                                  Typography
+title:                                  Template Typography
 tagline:                                Crucial Branding Element
 date:                                   2020-11-05 00:00:00
 description: >
@@ -9,7 +9,7 @@ description: >
                                         as something like images.
 
 categories:                             [ Roundtrip ]
-tags:                                   [ Introduction, Module, Typography ]
+tags:                                   [ Module, Typography ]
 
 image:
   path:                                 /assets/images/pages/roundtrip/typography-1920x1280-bw.jpg
