@@ -89,8 +89,9 @@ j1.adapter.waves = (function (j1, window) {
 var environment   = '{{environment}}';
 var cookie_names  = j1.getCookieNames();
 var user_state    = j1.readCookie(cookie_names.user_state);
+var themes_allowed;
+var theme_enabled;
 var theme;
-var themes_enabled;
 var _this;
 var logger;
 var logText;
@@ -141,21 +142,25 @@ var logText;
       var dependencies_met_page_ready = setInterval (function (options) {
 
         if ( j1.getState() === 'finished' ) {
-          themes_enabled  = waveOptions.themes.toString();
+          themes_allowed = waveOptions.themes.toString();
+          theme_enabled  = waveOptions.themes.indexOf(theme) > -1 ? true : false;
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
-          logger.info('\n' + 'theme detected: ' + theme);
 
-          if (themes_enabled === 'all' ) {
+          logger.debug('\n' + 'themes allowd: ' + themes_allowed);
+          logger.debug('\n' + 'theme detected: ' + theme);
+
+          if (themes_allowed === 'all' ) {
             logger.info('\n' + 'activate waves for theme: ' + 'all' );
             $('.wave').show();
-          } else if ( themes_enabled.includes(theme) ) {
+          } else if (theme_enabled) {
             logger.info('\n' + 'activate waves for theme: ' + theme );
             $('.wave').show();
           } else {
-            logger.warn('\n' + 'deactivate (hide) all waves');
+            logger.warn('\n' + 'no valid theme/s found');
+            logger.warn('\n' + 'deactivate (hide) waves');
             $('.wave').hide();
           }
 

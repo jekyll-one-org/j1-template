@@ -366,11 +366,11 @@ lanes:
   # ----------------------------------------------------------------------------
   #
   - lane:
-      enabled:                          false
+      enabled:                          true
       id:                               home_plan_panel
       region:                           body-main
       type:                             async
-      properties:                       elevated-z0
+      properties:                       elevated-z3
 
   # ----------------------------------------------------------------------------
   # NEWS panel

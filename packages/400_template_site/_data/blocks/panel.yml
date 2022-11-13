@@ -191,7 +191,7 @@ settings:
 
     - name:                             Home Plan Panel
       panel:
-        enabled:                        true
+        enabled:                        false
 
         id:                             home_plan_panel
         comment:                        Plan Panel
@@ -222,15 +222,15 @@ settings:
 
         wave:
           top:
-            enabled:                      false
-            height:                       3                                     # [1 .. 9]
-            style:                        wave-1                                # default
+            enabled:                      true
+            height:                       4                                     # [1 .. 9]
+            style:                        wave-4                                # default
             color:                        "#ababab"
             background_color:             "#f5f5f5"
             transform:                    false                                 # false or rotate|flip-x|flip-y and combinations
           bottom:
-            enabled:                      false
-            height:                       3
+            enabled:                      true
+            height:                       2
             style:                        wave-4
             color:                        "#ababab"
             background_color:             "#f5f5f5"
@@ -424,14 +424,14 @@ settings:
         wave:
           top:
             enabled:                      true
-            height:                       3                                     # [1 .. 9]
+            height:                       2                                     # [1 .. 9]
             style:                        wave-1                                # default
             color:                        "#ababab"
             background_color:             "#f5f5f5"
             transform:                    false                                 # false or rotate|flip-x|flip-y and combinations
           bottom:
             enabled:                      true
-            height:                       3
+            height:                       2
             style:                        wave-4
             color:                        "#ababab"
             background_color:             "#f5f5f5"
@@ -742,14 +742,14 @@ settings:
         wave:
           top:
             enabled:                      false
-            height:                       3                                     # [1 .. 9]
+            height:                       2                                     # [1 .. 9]
             style:                        wave-1                                # default
             color:                        "#ababab"
             background_color:             "#f5f5f5"
             transform:                    false                                 # false or rotate|flip-x|flip-y and combinations
           bottom:
             enabled:                      false
-            height:                       3
+            height:                       2
             style:                        wave-4
             color:                        "#ababab"
             background_color:             "#f5f5f5"

@@ -1902,8 +1902,8 @@ resources:
       id:                               waves
       comment:                          Module Waves
       region:                           head
-      layout:                           [ all ]
-      required:                         always                                  # ondemand
+      layout:                           [ home ]
+      required:                         ondemand
       preload:                          false
       script_load:                      sync
       dependencies:                     false
