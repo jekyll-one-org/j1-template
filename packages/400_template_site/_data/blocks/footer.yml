@@ -41,7 +41,7 @@ settings:
         id:                             footer-en
         comment:                        Footer UNO EN-EN
         theme:                          footer-light-theme
-        properties:                     mt-8
+        properties:                     mt-4
 
         wave:
           top:

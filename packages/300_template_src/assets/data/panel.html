@@ -184,14 +184,14 @@ exclude_from_search:                    true
       {% endif %}
 
       {% comment %} generate the HTML portion for the TOP wave element
-      ---------------------------------------------------------------------- {% endcomment %}
+      -------------------------------------------------------------------------- {% endcomment %}
       {% if wave_properties.top.enabled %}
         {% include {{get_wave}} position="top" wave=wave_properties.top %}
         {% assign panel_wave_top = _wave %}
       {% endif %}
 
       {% comment %} generate the HTML portion for the BOTTOM wave element
-      ---------------------------------------------------------------------- {% endcomment %}
+      -------------------------------------------------------------------------- {% endcomment %}
       {% if wave_properties.bottom.enabled %}
         {% include {{get_wave}} position="bottom" wave=wave_properties.bottom %}
         {% assign panel_wave_bottom = _wave %}
@@ -214,7 +214,6 @@ exclude_from_search:                    true
         <!-- Panel {{panel_settings.id}} -->
         <section id="{{panel_settings.id}}">
 
-          <!-- wave_properties.top:  {{ wave_properties.top | debug }} -->
           {% if wave_properties.top.enabled %}
             {{panel_wave_top}}
           {% endif %}
@@ -277,7 +276,7 @@ exclude_from_search:                    true
 
               {% if card_type == 'text' and card_enabled %}
                 {% assign card_raised = 'raised-z5' %}
-                <article class="card raised-z3 mb-3">
+                <article class="card raised-z0 mb-3">
                   <div class="card-header bg-primary pt-2 pb-2">
                     <div class="d-flex flex-row align-items-center">
                       <div class="mr-3">
@@ -301,7 +300,7 @@ exclude_from_search:                    true
                     </div>
                   </div>
 
-                  <div class="card-body g-min-height-200 r-text-300">{{card_text}}</div>
+                  <div class="card-body g-min-height-200 r-text-300 mt-0">{{card_text}}</div>
                   <div class="card-footer r-text-200 md-grey-900 text-lowercase">
                   {% for data in card_buttons %} {% for item in data %} {% for button in item[1] %}
                     {% assign key   = button[0] %}
@@ -389,13 +388,13 @@ exclude_from_search:                    true
         <!-- Panel {{panel_settings.id}} -->
         <section id="{{panel_settings.id}}">
 
-          <!-- wave_properties.top:  {{ wave_properties.top | debug }} -->
           {% if wave_properties.top.enabled %}
             {{panel_wave_top}}
           {% endif %}
 
           <!-- Main Container -->
           <div class="container {{panel_settings.properties}}">
+
             <!-- Heading -->
             <div>
               <div class="{{panel_settings.animate}} mb-2">
@@ -548,14 +547,13 @@ exclude_from_search:                    true
 
         {% assign panel_options = panel_config_defaults.service | merge: panel_settings %}
         {% if debug %}<!-- panel_options:  {{panel_options}} -->{% endif %}
+
         <!-- Panel {{panel_settings.id}} -->
         <section id="{{panel_settings.id}}">
 
-          <!-- wave_properties.top:  {{ wave_properties.top | debug }} -->
           {% if wave_properties.top.enabled %}
             {{panel_wave_top}}
           {% endif %}
-
 
           <!-- Main Container -->
           <div class="container {{panel_settings.properties}}">
@@ -622,7 +620,7 @@ exclude_from_search:                    true
 
               {% if card_enabled %}
               <li id="{{panel_settings.id}}-scroll-item" class="scroll-group-item items-{{card_items}} p-0">
-                <article class="card raised-z3 card-same-height mb-3">
+                <article class="card raised-z0 card-same-height mb-3">
                   <div class="card-profile mb-0">
 
                     <div class="card-icon mt-4">
@@ -637,7 +635,7 @@ exclude_from_search:                    true
                         <h6 class="notoc category text-gray {{card_header_translate}}">{{card_title}}</h6>
                         <h4 class="notoc card-title {{card_header_translate}}">{{card_tagline}}</h4>
                       </div>
-                      <div class="card-body g-min-height-300 r-text-300">{{card_text}}</div>
+                      <div class="card-body g-min-height-300 r-text-300 mt-0">{{card_text}}</div>
 
                       <div class="card-footer">
                         <div class="row {{panel_settings.id}}">
@@ -708,10 +706,10 @@ exclude_from_search:                    true
         {% assign panel_options = panel_config_defaults.news|merge: panel_settings %}
 
         {% if debug %}<!-- panel_options:  {{panel_options}} -->{% endif %}
+
         <!-- Panel {{panel_settings.id}} -->
         <section id="{{panel_settings.id}}">
 
-          <!-- wave_properties.top:  {{ wave_properties.top | debug }} -->
           {% if wave_properties.top.enabled %}
             {{panel_wave_top}}
           {% endif %}
@@ -772,7 +770,7 @@ exclude_from_search:                    true
                   {% if last_post_written != true %}
                     {% assign posts_written = posts_written|plus:1 %}
                 			<li id="{{panel_settings.id}}-scroll-item" class="scroll-group-item items-{{cards_per_row}} p-0">
-                        <article class="card card-same-height raised-z3 mb-5">
+                        <article class="card card-same-height raised-z0 mb-5">
                           {% if post.image %}
                             {% if post.image.path %}
                               <img class="img-fluid img-object--cover g-height-200" src="{{post.image.path}}" alt="{{post.title}}" style="{{image_filters}};">
@@ -787,7 +785,7 @@ exclude_from_search:                    true
                           {% endif %}
                           <h3 class="card-header bg-primary notoc notranslate">{{post.title}}</h3>
                           <!-- Body|Excerpt -->
-                          <div class="card-body r-text-300">
+                          <div class="card-body r-text-300 mt-0">
                             {% comment %} {{post.excerpt|truncatewords: 50|replace:'...',' ...'|remove:'<div class="paragraph">'|remove:'</div>'|remove:'<p>'|remove:'</p>'}} {% endcomment %}
                             {{post.excerpt|truncatewords: truncate_words}}
                           </div>
@@ -841,7 +839,7 @@ exclude_from_search:                    true
                 {% if category == post_category and last_post_written != true %}
                   {% assign posts_written = posts_written|plus:1 %}
                     <!-- Posts -->
-                    <article class="card raised-z3 mb-3">
+                    <article class="card raised-z0 mb-3">
                       {% if post.image %}
                         {% if post.image.path %}
                           <img class="img-fluid img-object--cover g-height-200" src="{{post.image.path}}" alt="{{post.title}}" style="{{image_filters}};">
@@ -856,7 +854,7 @@ exclude_from_search:                    true
                       {% endif %}
                       <h3 class="card-header bg-primary notoc">{{post.title}}</h3>
                       <!-- Body|Excerpt -->
-                      <div class="card-body r-text-300">
+                      <div class="card-body r-text-300 mt-0">
                         {% comment %} {{post.excerpt|truncatewords: 50|replace:'...',' ...'|remove:'<div class="paragraph">'|remove:'</div>'|remove:'<p>'|remove:'</p>'}} {% endcomment %}
                         {{post.excerpt|truncatewords: truncate_words}}
                       </div>

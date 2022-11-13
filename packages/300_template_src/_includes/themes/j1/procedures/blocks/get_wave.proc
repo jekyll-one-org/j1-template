@@ -48,13 +48,20 @@
 {% comment %} Calculate|Set WAVE scales
 TODO: Check why corrections of plus:1 or minus:1 are required
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign wave_height = wave_settings.height %}
+{% assign wave_height         = wave_settings.height %}
+{% assign wave_height_factor  = wave_settings.height|plus:1 %}
+{% assign min-height          = wave_height|times:10|plus:100 %}
+{% assign padding-value       = wave_height|times:10 %}
+
+{% capture padding %}{{padding-value}}px{% endcapture %}
 
 {% if wave_height > 1 %}
   {% if position == 'top' %}
-    {% assign translate_y = wave_height|times:-4|plus:1 %}
+    {% assign translate_y     = wave_height|times:-4|plus:1 %}
+    {% assign position_class  = 'wave-top' %}
   {% elsif position == 'bottom' %}
-    {% assign translate_y = wave_height|times:4|minus:1 %}
+    {% assign translate_y     = wave_height|times:4|minus:1 %}
+    {% assign position_class  = 'wave-bottom' %}
   {% else %}
     {% assign translate_y = 1 %}
   {% endif %}
@@ -65,6 +72,13 @@ TODO: Check why corrections of plus:1 or minus:1 are required
 {% else %}
   {% capture scale %}scale(1,1){% endcapture %}
 {% endif %}
+
+{% if wave_settings.background_color == 'auto' %}
+  {% assign wave_background_color = 'var(--bs-body-bg)' %}
+{% else %}
+  {% assign wave_background_color = wave_settings.background_color %}
+{% endif %}
+
 
 
 {% comment %} Set WAVE transformations
@@ -168,5 +182,11 @@ TODO: Check why corrections of plus:1 or minus:1 are required
 
 {% comment %} Generate WAVE container
 TODO: Check why corrections of margin-top:-1 or margin-bottom:-1 are required
--------------------------------------------------------------------------------- {% endcomment %}
 {% capture _wave %}<div class="wavebox" style="background-color: {{wave_settings.background_color}}; margin-top: -1px; margin-bottom: -1px;">{{wave}}</div>{% endcapture %}
+{% capture _wave %}<div class="wavebox" style="background-color: var(--bs-body-bg); margin-top: -1px; margin-bottom: -1px;">{{wave}}</div>{% endcapture %}
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if position == 'top' %}
+  {% capture _wave %}<div class="wave wave-top" style="padding-top: {{padding}}; background-color: {{wave_background_color}}; margin-top: -1px; margin-bottom: -1px;">{{wave}}</div>{% endcapture %}
+{% else %}
+  {% capture _wave %}<div class="wave wave-bottom" style="padding-bottom: {{padding}}; background-color: {{wave_background_color}}; margin-top: -1px; margin-bottom: -1px;">{{wave}}</div>{% endcapture %}
+{% endif %}

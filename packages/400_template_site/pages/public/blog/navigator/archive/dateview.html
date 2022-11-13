@@ -204,7 +204,7 @@ site_category_word_list:    {{site_category_word_list | debug}}
       {% comment %} {% assign excerpt = post.excerpt|truncatewords: truncate_words|replace:'...',' ...'|strip_html %} {% endcomment %}
       {% assign excerpt = post.excerpt|truncatewords: truncate_words|replace:'...',' ...' %}
       <li>
-        <article class="card raised-z3 mb-5">
+        <article class="card raised-z0 mb-5">
           <div class="card-header bg-primary">
             <h3 id="{{100000|rand}}" class="card-header bg-primary notranslate">{{post.title}}</h3>
           </div>
@@ -230,7 +230,7 @@ site_category_word_list:    {{site_category_word_list | debug}}
             {% endif %}
 
             <div class="col-md-6 p-0">
-              <div class="card-body r-text-300">{{excerpt}}</div>
+              <div class="card-body r-text-300 mt-0">{{excerpt}}</div>
               <div class="card-footer not-rounded r-text-200">
                 <div class="card-footer-text">
 

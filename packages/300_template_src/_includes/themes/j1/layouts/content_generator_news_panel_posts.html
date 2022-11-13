@@ -290,7 +290,7 @@
                   {% for post in paginator.posts %}
                   <!-- post items-->
                   <li id="{{panel_settings.id}}-scroll-item" class="scroll-group-item items-{{cards_per_row}} p-0">
-                    <article class="card card-same-height raised-z3 mb-5">
+                    <article class="card card-same-height raised-z0 mb-5">
                       <!-- [INFO   ] [j1.layouts.content_generator_news_panel_posts.html ] [ place post image ] -->
                       {% if post.image %}
                         {% if post.image.path %}
@@ -307,7 +307,7 @@
 
                       <h3 class="card-header bg-primary notoc notranslate">{{post.title}}</h3>
                       <!-- Body|Excerpt -->
-                      <div class="card-body r-text-300">
+                      <div class="card-body r-text-300 mt-0">
                         {{post.excerpt|truncatewords: truncate_words}}
                       </div>
                       <!-- End Body|Excerpt -->
@@ -362,7 +362,7 @@
                 {% if category == post_category and last_post_written != true %}
                   {% assign posts_written = posts_written|plus:1 %}
                     <!-- Posts -->
-                    <article id="{{panel_settings.id}}-scroll-item" class="card raised-z3 mb-3">
+                    <article id="{{panel_settings.id}}-scroll-item" class="card raised-z0 mb-3">
                       <!-- [INFO   ] [j1.layouts.content_generator_news_panel_posts.html ] [ place post image ] -->
                       {% if post.image %}
                         {% if post.image.path %}
@@ -378,7 +378,7 @@
                       {% endif %}
                       <h3 class="card-header bg-primary notoc">{{post.title}}</h3>
                       <!-- Body|Excerpt -->
-                      <div class="card-body r-text-300">
+                      <div class="card-body r-text-300 mt-0">
                         {% comment %} {{post.excerpt|truncatewords: 50|replace:'...',' ...'|remove:'<div class="paragraph">'|remove:'</div>'|remove:'<p>'|remove:'</p>'}} {% endcomment %}
                         {{post.excerpt|truncatewords: truncate_words}}
                       </div>

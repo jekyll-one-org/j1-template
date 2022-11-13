@@ -29,7 +29,7 @@
     # ROUNDTRIP
     #
     - title:                            Roundtrip
-      icon:                             briefcase-search-outline
+      icon:                             briefcase
       dropdown:
 
         - title:                        Present Images

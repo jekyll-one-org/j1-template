@@ -117,7 +117,7 @@
 
       <li class="{{blog_position}}">
         <div class="timeline-badge"><i class="tmicon bg-primary rounded-x hidden-xs"></i></div>
-        <div class="card raised-z5 timeline-panel">
+        <div class="card raised-z0 timeline-panel">
 
           {% comment %} jadams, 2021-08-05:
           NOTE: Changed headerlevel form h3 -> h2
@@ -208,7 +208,7 @@
           {% else %}
             <!-- !place_icon && !place_image -->
             <!-- div class="timeline-body" -->
-            <div class="card-body r-text-300">
+            <div class="card-body r-text-300 mt-0">
               <!-- div class="tagline">
                 <p class="card-subtitle">{{post.tagline}}</p>
               </div -->
