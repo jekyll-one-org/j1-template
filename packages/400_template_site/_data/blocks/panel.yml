@@ -79,14 +79,14 @@ settings:
             enabled:                      true
             height:                       2                                     # [1 .. 9]
             style:                        wave-1                                # default
-            color:                        "#ababab"                             # "#dcdcdc"
+            color:                        "#c4c4c4"                             # "#dcdcdc"
             background_color:             "#f5f5f5"                             # auto|rgb_value, "#f5f5f5"
             transform:                    false                                 # false or rotate|flip-x|flip-y and combinations
           bottom:
             enabled:                      true
             height:                       1
             style:                        wave-4
-            color:                        "#ababab"
+            color:                        "#c4c4c4"
             background_color:             "#f5f5f5"
             transform:                    rotate
 
@@ -104,7 +104,7 @@ settings:
               icon_size:                3x
               icon_color:
               text: >
-                                        <p class="dropcap mt-3">
+                                        <p class="dropcap">
                                           Current Technology and Design. Excellent performance in running
                                           a website. Use Jekyll One to present your content at its best.
                                         </p>
@@ -132,7 +132,7 @@ settings:
               icon_size:                3x
               icon_color:
               text: >
-                                        <p class="dropcap mt-3">
+                                        <p class="dropcap">
                                           The Web is everywhere. J1 Template supports modern web browsers
                                           on all devices for best results on PCs, Tablets, and SmartPhones.
                                         </p>
@@ -161,7 +161,7 @@ settings:
               icon_size:                3x
               icon_color:
               text: >
-                                        <p class="dropcap mt-3">
+                                        <p class="dropcap">
                                           No programming is needed to start using J1. The Template
                                           provides a large number of building blocks to develop
                                           modern web pages in minutes.
@@ -225,14 +225,14 @@ settings:
             enabled:                      true
             height:                       4                                     # [1 .. 9]
             style:                        wave-4                                # default
-            color:                        "#ababab"
+            color:                        "#c4c4c4"
             background_color:             "#f5f5f5"
             transform:                    false                                 # false or rotate|flip-x|flip-y and combinations
           bottom:
             enabled:                      true
             height:                       2
             style:                        wave-4
-            color:                        "#ababab"
+            color:                        "#c4c4c4"
             background_color:             "#f5f5f5"
             transform:                    rotate
 
@@ -426,14 +426,14 @@ settings:
             enabled:                      true
             height:                       2                                     # [1 .. 9]
             style:                        wave-1                                # default
-            color:                        "#ababab"
+            color:                        "#c4c4c4"
             background_color:             "#f5f5f5"
             transform:                    false                                 # false or rotate|flip-x|flip-y and combinations
           bottom:
             enabled:                      true
             height:                       2
             style:                        wave-4
-            color:                        "#ababab"
+            color:                        "#c4c4c4"
             background_color:             "#f5f5f5"
             transform:                    rotate
 
@@ -452,7 +452,7 @@ settings:
               tagline:                  General Features
               header_translate:         notranslate
               text: >
-                                        <p class="dropcap mt-3">
+                                        <p class="dropcap">
                                           Current software counts. Excellent tools in their latest versions
                                           make the rocket engine for each and every website. Jekyll One
                                           is using current software in their latest versions. All of them
@@ -590,7 +590,7 @@ settings:
               tagline:                  Template Features
               header_translate:         notranslate
               text: >
-                                        <p class="dropcap mt-3">
+                                        <p class="dropcap">
                                           For Jekyll, a huge number of templates are available that cover
                                           all typical use cases for websites. The bad story: most of them
                                           require programming and low-level customization. Deep knowledge
@@ -744,14 +744,14 @@ settings:
             enabled:                      false
             height:                       2                                     # [1 .. 9]
             style:                        wave-1                                # default
-            color:                        "#ababab"
+            color:                        "#c4c4c4"
             background_color:             "#f5f5f5"
             transform:                    false                                 # false or rotate|flip-x|flip-y and combinations
           bottom:
             enabled:                      false
             height:                       2
             style:                        wave-4
-            color:                        "#ababab"
+            color:                        "#c4c4c4"
             background_color:             "#f5f5f5"
             transform:                    rotate
 

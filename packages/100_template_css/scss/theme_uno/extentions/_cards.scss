@@ -48,7 +48,7 @@
 }
 
 .card-body {
-  margin-top: 1rem;                                                             // jadams, 2022-03-06: added additial space (above dropcaps)
+  margin-top: .75rem !important;                                                // jadams, 2022-11-13: added additial space (above dropcaps)
   text-align: initial;
   color: $gray-dark !important;                                                 // jadams, 2021-11-20: optimize colors for themes
   background-color: $gray-100;                                                  // jadams, 2022-11-03
@@ -572,12 +572,11 @@ a.card-link {
 
 // jadams 2022-11-06
 a.btn.btn-link.card-profile {
-    background-color: #ededed;
+    background-color: #e0e0e0;
 }
 a.btn.btn-link.card-profile:hover {
-    background-color: #ededed;
+    background-color: #e0e0e0;
 }
-
 
 // Testimonial Card
 // -----------------------------------------------------------------------------
