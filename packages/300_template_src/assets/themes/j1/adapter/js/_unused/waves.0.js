@@ -90,6 +90,7 @@ var environment     = '{{environment}}';
 var cookie_names    = j1.getCookieNames();
 var user_state      = j1.readCookie(cookie_names.user_state);
 var viewport_width  = $(window).width();
+var waves_breakpoint;
 var themes_allowed;
 var theme_enabled;
 var theme;
@@ -107,6 +108,9 @@ var logText;
     // adapter initializer
     // -------------------------------------------------------------------------
     init: function (options) {
+
+//    waves_breakpoint = 1023;
+      waves_breakpoint = 10;
 
       // [INFO   ] [j1.adapter.comments                    ] [ detected comments provider (j1_config): {{comments_provider}}} ]
       // [INFO   ] [j1.adapter.comments                    ] [ start processing load region head, layout: {{page.layout}} ]
@@ -155,10 +159,18 @@ var logText;
 
           if (themes_allowed === 'all' ) {
             logger.info('\n' + 'activate waves for theme: ' + 'all' );
-            $('.wave').show();
+            if (viewport_width < waves_breakpoint) {
+              $('.wave').hide();
+            } else {
+              $('.wave').show();
+            }
           } else if (theme_enabled) {
             logger.info('\n' + 'activate waves for theme: ' + theme );
-            $('.wave').show();
+            if (viewport_width < waves_breakpoint) {
+              $('.wave').hide();
+            } else {
+              $('.wave').show();
+            }
           } else {
             logger.warn('\n' + 'no valid theme/s found');
             logger.warn('\n' + 'deactivate (hide) waves');
@@ -169,6 +181,21 @@ var logText;
           clearInterval(dependencies_met_page_ready);
         }
       }, 25);
+
+      // -----------------------------------------------------------------------
+      // Register event 'reset on resize' to show|hide waves for viewports
+      // of mobile devices
+      // -----------------------------------------------------------------------
+      $(window).on('resize', function() {
+        var viewport_width  = $(window).width();
+
+        if (viewport_width < waves_breakpoint) {
+          $('.wave').hide();
+        } else {
+          $('.wave').show();
+        }
+
+      });
 
     }, // END init
 

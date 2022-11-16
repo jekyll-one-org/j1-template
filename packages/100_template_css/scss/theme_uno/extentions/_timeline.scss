@@ -152,14 +152,15 @@ a.timeline-list-unstyled:hover {
 }
 
 .timeline:before {
-	top: 0;
-	bottom: 0;
-	position: absolute;
-	content: " ";
-	width: 1px;
-	background-color: $gray-400;
-	left: 50%;
-	margin-left: -1.5px;
+  	top: 0;
+  	bottom: 0;
+  	position: absolute;
+  	content: " ";
+  	width: 1px;
+  	background-color: $gray-400;
+  	left: 50%;
+//  margin-left: -1.5px;
+    margin-left: -0.5px;
 }
 
 .timeline > li {
@@ -343,7 +344,8 @@ a.timeline-list-unstyled:hover {
 @media screen and (max-width: 767px) {
   ul.timeline:before {
     /* left: 40px; */
-    left: 0px;
+    left: 0;
+    margin-left: 0;
   }
 
   ul.timeline > li {
