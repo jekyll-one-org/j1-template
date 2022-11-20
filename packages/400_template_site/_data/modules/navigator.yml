@@ -222,11 +222,5 @@ settings:
     disqus_url:                         none                                    # https://disqus.com/
     patreon_url:                        none                                    # https://www.patreon.com/jekyll_one/posts
 
-  # ----------------------------------------------------------------------------
-  # NavTopsearch
-  #
-  # nav_topsearch:
-  #   enabled:                            true
-
 # ------------------------------------------------------------------------------
 # END config
