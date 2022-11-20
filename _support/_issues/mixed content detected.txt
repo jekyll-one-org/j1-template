@@ -1,0 +1,39 @@
+Insecure mixed content detected
+-------------------------------
+
+Although you have enabled HTTPS on your site, we’ve detected some
+content that’s still being served over an HTTP connection.
+
+5:40:26 PM: Section completed: building
+5:40:27 PM: Starting post processing
+5:40:27 PM: Post processing - HTML
+5:40:27 PM: Mixed content detected in: /assets/data/news_panel_posts/page4/index.html
+5:40:28 PM: --> insecure link urls:
+  - http://localhost:20000/assets/data/news_panel_posts/page4/
+5:40:28 PM: Mixed content detected in: /assets/data/news_panel_posts/index.html
+5:40:28 PM: --> insecure link urls:
+  - http://localhost:20000/assets/data/news_panel_posts/
+5:40:28 PM: Mixed content detected in: /assets/data/news_panel_posts/page2/index.html
+5:40:28 PM: --> insecure link urls:
+  - http://localhost:20000/assets/data/news_panel_posts/page2/
+
+...
+
+5:40:31 PM: Mixed content detected in: /pages/public/legal/en/comment_policy/index.html
+5:40:31 PM: --> insecure link urls:
+  - http://localhost:20000/pages/public/legal/en/comment_policy/
+5:40:32 PM: Mixed content detected in: /posts/public/featured/jekyll/2022/02/01/about-j1/index.html
+5:40:32 PM: --> insecure link urls:
+  - http://localhost:20000/posts/public/featured/jekyll/2022/02/01/about-j1/
+  - http://localhost:20000/posts/public/featured/jekyll/2021/02/01/site-generators/
+  - http://localhost:20000/posts/public/featured/2022/11/20/welcome-to-j1/
+
+
+What is mixed content?
+----------------------
+
+Mixed content occurs when initial HTML is loaded over a secure HTTPS
+connection, but other resources (such as images, videos, stylesheets, scripts)
+are loaded over an insecure HTTP connection. This is called mixed content
+because both HTTP and HTTPS content are being loaded to display the same
+page, and the initial request was secure over HTTPS.
