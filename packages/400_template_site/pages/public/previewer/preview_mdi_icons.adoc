@@ -1,6 +1,6 @@
 ---
 title:                                  MDI Icons
-tagline:                                select mdi icons
+tagline:                                Select Icons
 date:                                   2020-11-08 00:00:00
 description: >
                                         Previewer for Material Design Icons (MDI) for J1 Template.

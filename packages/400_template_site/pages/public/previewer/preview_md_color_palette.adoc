@@ -1,6 +1,6 @@
 ---
 title:                                  Colors
-tagline:                                md color palette
+tagline:                                MD Color Palette
 date:                                   2021-01-08 00:00:00
 description: >
                                         The color palette used by J1 Template is based on

@@ -56,9 +56,10 @@
     border-color: $gray;
 }
 
-// .btn-sm, .btn-group-sm > .btn {
-//     --bs-btn-padding-y: 0.25rem;
-//     --bs-btn-padding-x: 0.5rem;
-//     --bs-btn-font-size: 0.82031rem;
-//     --bs-btn-border-radius: 0.25rem;
-// }
+.btn-sm, .btn-group-sm > .btn {
+    --bs-btn-border-radius: $border-radius;
+}
+
+.btn-lg, .btn-group-lg > .btn {
+    --bs-btn-border-radius: $border-radius;
+}
