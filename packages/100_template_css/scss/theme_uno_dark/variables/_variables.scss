@@ -46,6 +46,18 @@ $table-dark-color:                                $white !default;
 $input-btn-padding-y:                             .75rem !default;
 $input-btn-padding-x:                             1rem !default;
 
+// Components
+// -----------------------------------------------------------------------------
+// scss-docs-start border-radius-variables
+$border-radius:                                   .125rem !default;
+// $border-radius:                                .375rem !default;
+// $border-radius-sm:                             .25rem !default;
+// $border-radius-lg:                             .5rem !default;
+// $border-radius-xl:                             1rem !default;
+// $border-radius-2xl:                            2rem !default;
+// $border-radius-pill:                           50rem !default;
+// scss-docs-end border-radius-variables
+
 // Forms
 // -----------------------------------------------------------------------------
 $input-disabled-bg:                                #ccc !default;

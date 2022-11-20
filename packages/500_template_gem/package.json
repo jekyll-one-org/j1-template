@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "gem",
-  "version": "2022.6.0",
+  "version": "2022.6.1",
   "description": "RubyGem sources for J1 Starter",
   "main": "j1-template.gemspec",
   "config": {
@@ -10,7 +10,7 @@
   "homepage": "https://jekyll.one",
   "author": {
     "name": "Juergen Adams",
-    "email": "jadams@jekyll-one.com",
+    "email": "jadams@jekyll.com",
     "url": "https://jekyll.one"
   },
   "license": "MIT",
@@ -22,7 +22,7 @@
     "gemspec": "j1-template.gemspec",
     "gemfile": "Gemfile",
     "gemext":  "gem",
-    "gemversion": "2022.6.0",
+    "gemversion": "2022.6.1",
     "binaries": "true"
   },
   "ruby": {

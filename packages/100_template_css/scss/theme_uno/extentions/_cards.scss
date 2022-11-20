@@ -26,7 +26,9 @@
 // Cards
 // -----------------------------------------------------------------------------
 .card {
-  background-color: $gray-100;
+    background-color: $gray-100;
+//  border-radius: .125rem !important;                                          // jadams, 2022-11-16: overwrite border-radius FIXED  (default: var(--bs-card-border-radius))
+
   &.card-same-height {
     height: calc(100% - 1.75rem);                                               // jadams, 2021-09-00: make (J1) cards same height
     overflow: hidden;

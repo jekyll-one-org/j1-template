@@ -80,6 +80,8 @@ regenerate:                             true
 
 {% assign nav_quicklinks_defaults       = navigator_defaults.nav_quicklinks %}
 {% assign nav_quicklinks_settings       = navigator_settings.nav_quicklinks %}
+{% assign nav_topsearch_defaults        = navigator_defaults.nav_topsearch %}
+{% assign nav_topsearch_settings        = navigator_settings.nav_topsearch %}
 {% assign nav_authclient_defaults       = authentication_defaults.auth_client %}
 {% assign nav_authclient_settings       = authentication_settings.auth_client %}
 
@@ -90,6 +92,7 @@ regenerate:                             true
 {% assign nav_bar_options               = nav_bar_defaults | merge: nav_bar_settings %}
 {% assign nav_menu_options              = nav_menu_defaults | merge: nav_menu_settings %}
 {% assign quicklinks_options            = nav_quicklinks_defaults | merge: nav_quicklinks_settings %}
+{% assign topsearch_options             = nav_topsearch_defaults | merge: nav_topsearch_settings %}
 {% assign authclient_options            = nav_authclient_defaults | merge: nav_authclient_settings %}
 
 {% assign nav_bar_id                    = navigator_defaults.nav_bar.id %}
@@ -228,10 +231,12 @@ j1.adapter.navigator = (function (j1, window) {
       var navBarConfig                              = {};
       var navMenuConfig                             = {};
       var navQuicklinksConfig                       = {};
+      var navTopsearchConfig                        = {};
       var navAuthClientConfig                       = {};
       var navBarOptions                             = {};
       var navMenuOptions                            = {};
       var navQuicklinksOptions                      = {};
+      var navTopsearchOptions                       = {};
       var navAuthClientOptions                      = {};
       var navAuthMAnagerConfig                      = {};
 
@@ -252,6 +257,7 @@ j1.adapter.navigator = (function (j1, window) {
       navBarConfig                                  = $.extend({}, {{nav_bar_options | replace: '=>', ':' }});
       navMenuConfig                                 = $.extend({}, {{nav_menu_options | replace: '=>', ':' }});
       navQuicklinksConfig                           = $.extend({}, {{quicklinks_options | replace: '=>', ':' }});
+      navTopsearchConfig                            = $.extend({}, {{topsearch_options | replace: '=>', ':' }});
       navAuthClientConfig                           = $.extend({}, {{authclient_options | replace: '=>', ':' }});
 
       navAuthMAnagerConfig                          = $.extend({}, {{authentication_options | replace: '=>', ':' }});
@@ -264,6 +270,7 @@ j1.adapter.navigator = (function (j1, window) {
       navBarOptions                                 = j1.mergeData(navBarConfig, navDefaults.nav_bar);
       navMenuOptions                                = j1.mergeData(navMenuConfig, navDefaults.nav_menu);
       navQuicklinksOptions                          = j1.mergeData(navQuicklinksConfig, navDefaults.nav_quicklinks);
+      navTopsearchOptions                           = j1.mergeData(navTopsearchConfig, navDefaults.nav_topsearch);
       navAuthClientConfig                           = j1.mergeData(navAuthClientConfig, navDefaults.nav_authclient);
 
       // save config settings into the adapter object for global access
@@ -272,6 +279,7 @@ j1.adapter.navigator = (function (j1, window) {
       _this['navBarOptions']         = navBarOptions;
       _this['navMenuOptions']        = navMenuOptions;
       _this['navQuicklinksOptions']  = navQuicklinksOptions;
+      _this['navTopsearchOptions']   = navTopsearchOptions;
       _this['navAuthClientConfig']   = navAuthClientConfig;
       _this['navAuthManagerConfig']  = navAuthMAnagerConfig;
 
@@ -414,7 +422,7 @@ j1.adapter.navigator = (function (j1, window) {
                   // apply module configuration settings
                   _this.applyNavigatorSettings (
                     navDefaults, navBarOptions, navMenuOptions,
-                    navQuicklinksOptions
+                    navQuicklinksOptions, navTopsearchOptions
                   );
 
                   // (static) delay applying styles until added CSS data
@@ -424,7 +432,7 @@ j1.adapter.navigator = (function (j1, window) {
                     logger.info('\n' + 'initializing dynamic CSS styles');
                     _this.applyThemeSettings (
                       navDefaults, navBarOptions, navMenuOptions,
-                      navQuicklinksOptions
+                      navQuicklinksOptions, navTopsearchOptions
                     );
                   }, 500);
 
@@ -445,7 +453,7 @@ j1.adapter.navigator = (function (j1, window) {
                 logger.info('\n' + 'apply dynamic CSS styles');
                 _this.applyThemeSettings (
                   navDefaults, navBarOptions, navMenuOptions,
-                  navQuicklinksOptions
+                  navQuicklinksOptions, navTopsearchOptions
                 );
 
                 logger.info('\n' + 'init auth client');
@@ -467,6 +475,13 @@ j1.adapter.navigator = (function (j1, window) {
       // ---------------------------------------------------------------------
       $(window).on('resize', function() {
         j1.core.navigator.manageDropdownMenu(navDefaults, navMenuOptions);
+
+        // jadams, 2020-07-10: cause severe trouble on mobile devices if
+        // OnScreen Kbd comes up and reduces the window size (resize event)
+        // DISABLED
+        // -------------------------------------------------------------------
+        // Hide|Close topSearch on resize event
+        // $('.top-search').slideUp();
 
         // Manage sticky NAV bars
         setTimeout (function() {
@@ -639,7 +654,7 @@ j1.adapter.navigator = (function (j1, window) {
     // applyThemeSettings
     // Apply CSS styles from current theme
     // -------------------------------------------------------------------------
-    applyThemeSettings: function (navDefaults, navBarOptions, navMenuOptions, navQuicklinksOptions) {
+    applyThemeSettings: function (navDefaults, navBarOptions, navMenuOptions, navQuicklinksOptions, navTopsearchOptions) {
       var logger              = log4javascript.getLogger('j1.adapter.navigator.applyThemeSettings');
       var gridBreakpoint_lg   = '992px';
       var gridBreakpoint_md   = '768px';
@@ -672,6 +687,11 @@ j1.adapter.navigator = (function (j1, window) {
       navQuicklinksOptions.icon_color                 = navQuicklinksOptions.icon_color;
       navQuicklinksOptions.icon_color_hover           = navQuicklinksOptions.icon_color_hover;
       navQuicklinksOptions.background_color           = navQuicklinksOptions.background_color;
+
+      // Set|Resolve navTopsearchOptions
+      // -----------------------------------------------------------------------
+      navTopsearchOptions.input_color                 = navTopsearchOptions.input_color;
+      navTopsearchOptions.background_color            = navTopsearchOptions.background_color;
 
       // Set dymanic styles
       // -----------------------------------------------------------------------
@@ -933,7 +953,24 @@ j1.adapter.navigator = (function (j1, window) {
 //       style += '  }';
 //       style += '</style>';
 //       $('head').append(style);
-
+//
+//       // navQuicklinks|navTopSearch
+//       // -----------------------------------------------------------------------
+// //    $('head').append('<style>.top-search { background-color: ' +navTopsearchOptions.background_color+ ' !important; }</style>');
+//       style  = '<style>';
+//       style += '  .top-search {';
+//       style += '    background-color: ' + navTopsearchOptions.background_color + ' !important;';
+//       style += '  }';
+//       style += '</style>';
+//       $('head').append(style);
+//
+// //    $('head').append('<style>.top-search input.form-control { color: ' +navTopsearchOptions.input_color+ ' !important; }</style>');
+//       style  = '<style>';
+//       style += '  .top-search input.form-control {';
+//       style += '    color: ' + navTopsearchOptions.input_color + ' !important;';
+//       style += '  }';
+//       style += '</style>';
+//       $('head').append(style);
 
       // Timeline styles
       // -----------------------------------------------------------------------
@@ -1009,7 +1046,7 @@ j1.adapter.navigator = (function (j1, window) {
     // applyNavigatorSettings
     // Apply settings from configuration
     // -------------------------------------------------------------------------
-    applyNavigatorSettings: function (navDefaults, navBarOptions, navMenuOptions, navQuicklinksOptions) {
+    applyNavigatorSettings: function (navDefaults, navBarOptions, navMenuOptions, navQuicklinksOptions, navTopsearchOptions) {
       var logger              = log4javascript.getLogger('j1.adapter.navigator.applyThemeSettings');
       var gridBreakpoint_lg   = '992px';
       var gridBreakpoint_md   = '768px';
@@ -1042,6 +1079,11 @@ j1.adapter.navigator = (function (j1, window) {
       navQuicklinksOptions.icon_color                 = navQuicklinksOptions.icon_color;
       navQuicklinksOptions.icon_color_hover           = navQuicklinksOptions.icon_color_hover;
       navQuicklinksOptions.background_color           = navQuicklinksOptions.background_color;
+
+      // Set|Resolve navTopsearchOptions
+      // -----------------------------------------------------------------------
+      navTopsearchOptions.input_color                 = navTopsearchOptions.input_color;
+      navTopsearchOptions.background_color            = navTopsearchOptions.background_color;
 
       // Set dymanic styles
       // -----------------------------------------------------------------------
@@ -1306,9 +1348,19 @@ j1.adapter.navigator = (function (j1, window) {
 
       // navQuicklinks|navTopSearch
       // -----------------------------------------------------------------------
+//    $('head').append('<style>.top-search { background-color: ' +navTopsearchOptions.background_color+ ' !important; }</style>');
+      style  = '<style>';
+      style += '  .top-search {';
+      style += '    background-color: ' + navTopsearchOptions.background_color + ' !important;';
+      style += '  }';
+      style += '</style>';
+      $('head').append(style);
+
+      // jadams, 2022-07-25: DISABLED
+//    $('head').append('<style>.top-search input.form-control { color: ' +navTopsearchOptions.input_color+ ' !important; }</style>');
       // style  = '<style>';
-      // style += '  .top-search {';
-      // style += '    background-color: ' + navTopsearchOptions.background_color + ' !important;';
+      // style += '  .top-search input.form-control {';
+      // style += '    color: ' + navTopsearchOptions.input_color + ' !important;';
       // style += '  }';
       // style += '</style>';
       // $('head').append(style);

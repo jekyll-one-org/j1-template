@@ -3,7 +3,7 @@ title:                                  Site Generators
 tagline:                                Top Open Source
 
 categories:                             [ Jekyll ]
-tags:                                   [ J1, Template ]
+tags:                                   [ Template ]
 
 image:
   path:                                 /assets/images/modules/attics/machine-generator-1920x1280.jpg

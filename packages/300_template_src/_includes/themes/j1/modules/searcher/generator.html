@@ -1,0 +1,61 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_includes/themes/j1/modules/searcher/generator.html
+ #  Liquid HTML template to create the HTML portion for the J1 Search Module
+ #
+ #  Product/Info:
+ #  https://jekyll.one
+ #
+ #  Copyright (C) 2022 Juergen Adams
+ #
+ #  J1 Template is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ #
+ # -----------------------------------------------------------------------------
+ #  Test data:
+ #   liquid_var: {{liquid_var | debug}}
+ #
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% include themes/{{site.template.name}}/procedures/global/setup.proc %}
+{% capture topsearch_create %}themes/{{site.template.name}}/modules/searcher/procedures/topsearch.proc{% endcapture %}
+
+
+{% comment %} Process YML config data
+================================================================================ {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign template_config         = site.data.j1_config %}
+{% assign blocks                  = site.data.blocks %}
+{% assign modules                 = site.data.modules %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign lunr_defaults           = site.data.modules.defaults.lunr.defaults %}
+{% assign lunr_settings           = site.data.modules.lunr.settings %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign topsearch_defaults      = lunr_defaults.topsearch %}
+{% assign topsearch_settings      = lunr_settings.topsearch %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign topsearch_options       = topsearch_defaults | merge: topsearch_settings %}
+
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Generate Search Modal
+-------------------------------------------------------------------------------- {% endcomment %}
+<!-- [INFO   ] [_includes/themes/j1/modules/searcher/generator.html ] [ check for topsearch ] -->
+{% if topsearch_options.enabled %}
+  <!-- [INFO   ] [~/_includes/themes/j1/modules/searcher/generator.html ] [ start processing: topsearch ] -->
+  {% include {{topsearch_create}} options=topsearch_options %}
+{% endif %}
+<!-- [INFO   ] _includes/themes/j1/modules/searcher/generator.html ] [ end processing: topsearch ] -->

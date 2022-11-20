@@ -4,7 +4,7 @@ tagline:                                Jekyll For Everyone
 #date:                                  2022-10-13 00:00:00 +0100
 
 categories:                             [ Jekyll ]
-tags:                                   [ J1, Template ]
+tags:                                   [ Template ]
 
 fab_menu_id:                            page_ctrl
 comments:                               false

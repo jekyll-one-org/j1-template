@@ -1893,7 +1893,7 @@ resources:
         init_function:                  []
 
   # ----------------------------------------------------------------------------
-  # Waves, JS implementation to provide ...
+  # Waves
   #
   - name:                               Waves
     resource:
@@ -1902,8 +1902,8 @@ resources:
       id:                               waves
       comment:                          Module Waves
       region:                           head
-      layout:                           [ home ]
-      required:                         ondemand
+      layout:                           [ all ]
+      required:                         always
       preload:                          false
       script_load:                      sync
       dependencies:                     false

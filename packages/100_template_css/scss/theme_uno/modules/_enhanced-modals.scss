@@ -262,9 +262,9 @@ body {
 		.modal-header {
 			background-color: $color_modal_primary;
 		}
-		.mdi {
-			color: $gray-100;
-		}
+		// .mdi {
+		// 	color: $gray-100;
+		// }
 	}
 	&.modal-info {
 		.badge {
@@ -273,9 +273,9 @@ body {
 		.modal-header {
 			background-color: $color_modal_info;
 		}
-		.mdi {
-			color: $gray-100;
-		}
+		// .mdi {
+		// 	color: $gray-100;
+		// }
 	}
 	&.modal-warning {
 		.badge {
@@ -284,9 +284,9 @@ body {
 		.modal-header {
 			background-color: $color_modal_warning;
 		}
-		.mdi {
-			color: $gray-100;
-		}
+		// .mdi {
+		// 	color: $gray-100;
+		// }
 	}
 	&.modal-success {
 		.badge {
@@ -295,9 +295,9 @@ body {
 		.modal-header {
 			background-color: $color_modal_success;
 		}
-		.mdi {
-			color: $gray-100;
-		}
+		// .mdi {
+		// 	color: $gray-100;
+		// }
 	}
 	&.modal-danger {
 		.badge {
@@ -306,8 +306,8 @@ body {
 		.modal-header {
 			background-color: $color_modal_danger;
 		}
-		.mdi {
-			color: $gray-100;
-		}
+		// .mdi {
+		// 	color: $gray-100;
+		// }
 	}
 }

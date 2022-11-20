@@ -23,7 +23,7 @@
 -------------------------------------------------------------------------------- {% endcomment %}
 {% include themes/{{site.template.name}}/procedures/global/setup.proc %}
 {% capture select_color %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %}
-{% capture topsearch_create %}themes/{{site.template.name}}/modules/navigator/procedures/topsearch.proc{% endcapture %}
+
 
 {% comment %} Not longer used (loaded via AJAX)
 --------------------------------------------------------------------------------
@@ -59,8 +59,6 @@
 {% assign nav_bar_settings            = navigator_settings.nav_bar %}
 {% assign nav_quicklinks_defaults     = navigator_defaults.nav_quicklinks %}
 {% assign nav_quicklinks_settings     = navigator_settings.nav_quicklinks %}
-{% assign nav_topsearch_defaults      = navigator_defaults.nav_topsearch %}
-{% assign nav_topsearch_settings      = navigator_settings.nav_topsearch %}
 
 {% assign nav_authclient_defaults     = authentication_defaults.auth_client %}
 {% assign nav_authclient_settings     = authentication_settings.auth_client %}
@@ -72,7 +70,6 @@
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign nav_bar_options             = nav_bar_defaults | merge: nav_bar_settings %}
 {% assign quicklinks_options          = nav_quicklinks_defaults | merge: nav_quicklinks_settings %}
-{% assign topsearch_options           = nav_topsearch_defaults | merge: nav_topsearch_settings %}
 {% assign authclient_options          = nav_authclient_defaults | merge: nav_authclient_settings %}
 {% assign authentication_options      = authentication_defaults | merge: authentication_settings %}
 {% assign auth_manager_options        = authentication_options.j1_auth %}
@@ -110,15 +107,6 @@
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
-
-{% comment %} Generate search container
--------------------------------------------------------------------------------- {% endcomment %}
-<!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ check for topsearch ] -->
-{% if topsearch_options.enabled %}
-  <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ start processing: topsearch ] -->
-  {% include {{topsearch_create}} options=topsearch_options %}
-  <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ end processing: topsearch ] -->
-{% endif %}
 
 {% comment %} Place MMobile NAV menu containers (HTML data loaded via AJAX)
 -------------------------------------------------------------------------------- {% endcomment %}

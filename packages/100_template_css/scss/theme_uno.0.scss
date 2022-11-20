@@ -21,13 +21,6 @@
   # ----------------------------------------------------------------------------
 */
 
-// See: https://stackoverflow.com/questions/10643107/what-does-default-in-a-css-property-value-mean
-// !default is used often in Bootstrap Sass. It is similar to a reverse
-// !important. All of Bootstraps Variables are set using !default to allow
-// the developer to further customize bootstrap. With !default sass will
-// only define a variable if it has NOT already been set.
-
-
 $theme: "UnoLight" !default;
 
 // BS|Theme BASE goes here
@@ -37,6 +30,11 @@ $theme: "UnoLight" !default;
 // -----------------------------------------------------------------------------
 @import "theme_uno/variables";
 
+// Functions|Mixins
+// -----------------------------------------------------------------------------
+@import "theme_uno/mixins";
+
+
 // BS|Theme SOURCE goes here
 // =============================================================================
 
@@ -44,9 +42,6 @@ $theme: "UnoLight" !default;
 // -----------------------------------------------------------------------------
 @import "~bootstrap/scss/bootstrap";
 
-// Functions|Mixins
-// -----------------------------------------------------------------------------
-@import "theme_uno/mixins";
 
 // BS|Theme overrides goes here
 // =============================================================================

@@ -84,6 +84,7 @@ j1.adapter.lunr = (function (j1, window) {
   var _this;
   var logger;
   var logText;
+  var modalBody;
 
   // ---------------------------------------------------------------------------
   // Helper functions
@@ -120,7 +121,7 @@ j1.adapter.lunr = (function (j1, window) {
       searchOptions = $.extend({}, {{lunr_search_options | replace: '=>', ':' | replace: 'nil', '""'}});
 
       // -----------------------------------------------------------------------
-      // lunr_search initializer
+      // lunr initializer
       // -----------------------------------------------------------------------
       var dependencies_met_j1_finished = setInterval(function() {
         if (j1.getState() == 'finished') {
@@ -149,6 +150,38 @@ j1.adapter.lunr = (function (j1, window) {
        _this.eventHandler();
 
     }, // END init
+
+    // -------------------------------------------------------------------------
+    // loadDialog (modal)
+    // -------------------------------------------------------------------------
+    loadDialog: function () {
+
+      logger.info('\n' + 'create|append search modal, id: ' + 'bratze');
+
+      _this.modal = document.createElement('div');
+      _this.modal.id = "topInfoModalContainer";
+      document.body.append(_this.modal);
+
+      {% raw %}
+      _this.modalScript       = document.createElement('script');
+      _this.modalScript.type  = 'text/mustache';
+      _this.modalScript.id    = 'search-results-template';
+      _this.modalScript.text  = '<ul style="list-style: none; margin-left: .5rem; margin-right: 4.25rem">' + '\n';
+      _this.modalScript.text += '{{#docs}}' + '\n';
+      _this.modalScript.text += '  <li>' + '\n';
+      _this.modalScript.text += '    <h4 class="result-item"> <a class="link-no-decoration" href="{{url}}" target="_blank">{{title}} · {{tagline}}</a> </h4>' + '\n';
+      _this.modalScript.text += '    <p class="result-item-text small text-muted mt-2 mb-0"> <i class="mdi mdi-calendar-blank mdi-18px mr-1"></i>{{displaydate}} </p>' + '\n';
+      _this.modalScript.text += '    <p class="result-item-text">{{description}}</p>' + '\n';
+      _this.modalScript.text += '      <i class="mdi mdi-tag-text-outline mdi-18px mr-1"></i><span class="sr-categories">{{#categories}} {{.}} · {{/categories}}</span>' + '\n';
+      _this.modalScript.text += '      <i class="mdi mdi-tag mdi-18px mr-1 ml-2"></i><span class="sr-tags">{{#tags}} {{.}} · {{/tags}}</span>' + '\n';
+      _this.modalScript.text += '    </p>' + '\n';
+      _this.modalScript.text += '  </li>' + '\n';
+      _this.modalScript.text += '{{/docs}}' + '\n';
+      _this.modalScript.text += '<ul>' + '\n';
+      {% endraw %}
+      document.body.append(_this.modalScript);
+
+    }, // END loadDialog
 
     // -------------------------------------------------------------------------
     // event handler

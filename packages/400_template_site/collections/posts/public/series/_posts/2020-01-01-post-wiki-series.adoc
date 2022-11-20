@@ -3,7 +3,7 @@ title:                                  Minneapolis
 tagline:                                Largest City Of Minnesota
 
 categories:                             [ Wikipedia ]
-tags:                                   [ USA, Cities, Minneapolis ]
+tags:                                   [ USA, Cities ]
 
 series:                                 wiki-series
 

@@ -3,7 +3,7 @@ title:                                  J1 Template
 tagline:                                First Version Is Out
 
 categories:                             [ Jekyll ]
-tags:                                   [ J1, Template ]
+tags:                                   [ Template ]
 
 image:
   path:                                 /assets/images/modules/attics/1920x1280/alexander-redl.jpg

@@ -57,11 +57,11 @@
 {% assign quick_search   = true %}
 {% assign elastic_search = false %}
 
-{% if topsearch_options.type == 'quick_search' %}
+{% if topsearch_options.type == 'quicksearch' %}
   {% assign quick_search   = true %}
 {% endif %}
 
-{% if topsearch_options.type == 'elastic_search' %}
+{% if topsearch_options.type == 'elasticsearch' %}
   {% assign elastic_search = true %}
   {% assign quick_search   = false %}
 {% endif %}

@@ -12,41 +12,35 @@
   # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
   # ----------------------------------------------------------------------------
   # NOTE:
-  # jadams, 2017-11-18: modified (applied fixes) to _drawer.scss|_forms.scss (mixins)
-  # See:
-  #  Issue #949 - https://github.com/FezVrasta/bootstrap-material-design/pull/949,
-  #  Fix base-level `&` (for Ruby Sass)
-  #  Pull request:
-  #  https://github.com/FezVrasta/bootstrap-material-design/pull/949/commits/f729cf1fa17561b46104dc1d3f268c7be3cf65f1
+  # Whenever possible, avoid modifying Bootstrap’s core files. For Sass,
+  # that means creating your own stylesheet that imports Bootstrap so you
+  # can modify and extend it.
+  #
+  # See: https://getbootstrap.com/docs/5.2/customize/sass/
+  #
   # ----------------------------------------------------------------------------
 */
 
-// See: https://stackoverflow.com/questions/10643107/what-does-default-in-a-css-property-value-mean
-// !default is used often in Bootstrap Sass. It is similar to a reverse
-// !important. All of Bootstraps Variables are set using !default to allow
-// the developer to further customize bootstrap. With !default sass will
-// only define a variable if it has NOT already been set.
-
-
-$theme: "UnoLight" !default;
-
-// BS|Theme BASE goes here
-// =============================================================================
-
-// Variables
-// -----------------------------------------------------------------------------
-@import "theme_uno/variables";
-
-// BS|Theme SOURCE goes here
-// =============================================================================
+// Include all of Bootstrap
+// Include any default variable overrides here (though functions won't be available)
 
 // BS source
 // -----------------------------------------------------------------------------
 @import "~bootstrap/scss/bootstrap";
 
+// Then add additional custom code here
+// -----------------------------------------------------------------------------
+
+$theme: "UnoLight" !default;
+
+// Variables
+// -----------------------------------------------------------------------------
+@import "theme_uno/variables";
+
 // Functions|Mixins
 // -----------------------------------------------------------------------------
 @import "theme_uno/mixins";
+
 
 // BS|Theme overrides goes here
 // =============================================================================
