@@ -1,5 +1,5 @@
-Insecure mixed content detected
--------------------------------
+Meldungen : Insecure mixed content detected
+-------------------------------------------
 
 Although you have enabled HTTPS on your site, we’ve detected some
 content that’s still being served over an HTTP connection.
@@ -37,3 +37,21 @@ connection, but other resources (such as images, videos, stylesheets, scripts)
 are loaded over an insecure HTTP connection. This is called mixed content
 because both HTTP and HTTPS content are being loaded to display the same
 page, and the initial request was secure over HTTPS.
+
+
+J1 Konfiguration
+--------------------------------------------------------------------------------
+
+Site config `_config.yml`
+
+# If your site has set a CNAME (pages.github.com), set the custom
+# domain http|s://your-site.domain here. Accessible in Liquid as
+# "site.url". For the development environment there is an EXCEPTION:
+# if you are running jekyll serve in a development environment,
+# site.url will be set to the value of host, port.
+#
+# url:                                  "http://localhost:20000"
+# url:                                  "https://j1-template-starter.netlify.app"
+
+#
+--> Parameter `url` auskommrentieren oder korrekt setzen

@@ -221,7 +221,7 @@ doctype:                                html
 # ------------------------------------------------------------------------------
 #
 title:                                  Jekyll One
-slogan:                                 template for jekyll
+tagline:                                Template For Jekyll
 description: >
                                         Made for Jekyll · Made for Your Web
 keywords: >
@@ -643,7 +643,7 @@ defaults:
       vimeo:                            true
 
       toc:                              true
-      fab_menu_id:                      page_ctrl_simple
+      fab_menu_id:                      page_ctrl
       scrollbar:                        false
 
       icons:
@@ -693,7 +693,7 @@ defaults:
       series:                           false
 
       toc:                              true
-      fab_menu_id:                      page_ctrl_simple
+      fab_menu_id:                      page_ctrl
       scrollbar:                        false
 
       resource_options:
@@ -730,7 +730,7 @@ defaults:
       exclude_from_search:              false
 
       toc:                              true
-      fab_menu_id:                      page_ctrl_simple
+      fab_menu_id:                      page_ctrl
       scrollbar:                        false
 
       resource_options:
