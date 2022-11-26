@@ -11,7 +11,7 @@ categories:                             [ Testpages ]
 tags:                                   [ Example ]
 
 comments:                               false
-fab_menu_id:                            page_ctrl_simple
+fab_menu_id:                            page_ctrl
 
 permalink:                              /pages/public/learn/flipcard1/
 regenerate:                             false

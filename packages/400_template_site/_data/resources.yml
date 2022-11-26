@@ -1887,10 +1887,33 @@ resources:
       data:
         css:                            []
         files:                          []
-        js:                             [
-                                          modules/requirejs/js/require
-                                        ]
+        js:                             [ modules/requirejs/js/require ]
         init_function:                  []
+
+  # ----------------------------------------------------------------------------
+  # Masonry
+  # Cascading grid layout library
+  #
+  # See: https://github.com/desandro/masonry
+  #
+  - name:                               Masonry
+    resource:
+      enabled:                          true
+
+      id:                               masonry
+      comment:                          Module Masonry
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand
+      preload:                          false
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            []
+        files:                          [ adapter/js/masonry.js ]
+        js:                             [ modules/masonry/js/masonry.pkgd ]
+        init_function:                  [ j1.adapter.masonry.init ]
 
   # ----------------------------------------------------------------------------
   # Waves

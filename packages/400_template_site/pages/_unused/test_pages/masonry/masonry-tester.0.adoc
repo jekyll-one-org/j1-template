@@ -1,0 +1,268 @@
+---
+title:                                  Masonry Tester
+tagline:                                Bootstrap and Masonry
+date:                                   2020-11-03 00:00:00
+description: >
+                                        Welcome to the preview page focussing on the image module. This page
+                                        shows some valuable features of the J1 Template to manage your image-based
+                                        content using lightboxes, carousels (slider), and galleries.
+
+categories:                             [ Testpages ]
+tags:                                   [ Example ]
+
+comments:                               false
+fab_menu_id:                            page_ctrl
+
+permalink:                              /pages/public/learn/masonry_cards/
+regenerate:                             false
+
+# resources:                              [ clipboard, rouge ]
+resources:                              [ clipboard, masonry, rouge ]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
+          alt:                          Photo by Ricardo Gomez Angel on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Ricardo Gomez Angel
+            href:                       https://unsplash.com/@ripato/portfolio
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+
+== Bootstrap and Masonry
+
+Integrate Masonry with the Bootstrap grid system and cards component.
+
+NOTE: By adding `data-masonry='{"percentPosition": true }'` to the
+`.row` wrapper, we can combine the powers of Bootstrap's responsive grid
+and Masonry's positioning.
+
+++++
+<div class="content mt-5">
+  <!-- div class="row masonry" data-masonry='{"percentPosition": "true" }' -->
+  <div class="row masonry">
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card">
+        <img class="img-fluid img-object--cover" src="/assets/images/modules/attics/katie-moum-1920x1280.jpg" alt="Welcome to J1" style="filter: grayscale(1) contrast(1) brightness(1);">
+
+        <div class="card-body">
+          <h5 class="card-title">Card title that wraps to a new line</h5>
+          <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card p-3">
+        <figure class="p-3 mb-0">
+          <blockquote class="blockquote">
+            <p>A well-known quote, contained in a blockquote element.</p>
+          </blockquote>
+          <figcaption class="blockquote-footer mb-0 text-muted">
+            Someone famous in <cite title="Source Title">Source Title</cite>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card">
+        <img class="img-fluid img-object--cover" src="/assets/images/modules/attics/katie-moum-1920x1280.jpg" alt="Welcome to J1" style="filter: grayscale(1) contrast(1) brightness(1);">
+
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <article class="card">
+      	<img class="img-fluid img-object--cover g-height-200" src="/assets/images/modules/attics/katie-moum-1920x1280.jpg" alt="Welcome to J1" style="filter: grayscale(1) contrast(1) brightness(1);">
+      	<h3 class="card-header bg-primary notoc notranslate">Welcome to J1</h3>
+      	<!-- Body|Excerpt -->
+      	<div class="card-body r-text-300 mt-0">
+      	  <div class="paragraph dropcap">
+      		<p class="dropcap"><span class="j1-dropcap">A</span>ll you’re doing at the end of the day is writing your content, and the J1
+      		  Template does all the tricky things: putting out HTML, Javascript, and CSS.
+      		  As a result, the site creation process gets out of your way.</p>
+      	  </div>
+      	</div>
+      	<!-- End Body|Excerpt -->
+      	<div class="card-footer r-text-200">
+      	  <div class="card-footer-text">
+      		<i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>2022 October, 13
+      		<!-- Cleanup categories by given blacklist -->
+      		<!-- Build element strings -->
+      		<p class="result-item-text small mb-3 notranslate">
+      		  <i class="mdi mdi-tag-text-outline mdi-18px mr-1"></i>
+      		  <span class="sr-categories">Jekyll</span>
+      		  <br>
+      		  <i class="mdi mdi-tag mdi-18px mr-1"></i>
+      		  <span class="sr-tags">Template</span>
+      		</p>
+      	  </div>
+      	  <a class="card-link md-grey-900 text-lowercase" href="/posts/public/featured/jekyll/2022/10/13/welcome-to-j1/">
+      		read · Jekyll For Everyone
+      	  </a>
+      	</div>
+      </article>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card bg-primary text-white text-center p-3">
+        <figure class="mb-0">
+          <blockquote class="blockquote">
+            <p>A well-known quote, contained in a blockquote element.</p>
+          </blockquote>
+          <figcaption class="blockquote-footer mb-0 text-white">
+            Someone famous in <cite title="Source Title">Source Title</cite>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card text-center">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">This card has a regular title and short paragraph of text below it.</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card">
+        <img class="img-fluid img-object--cover" src="/assets/images/modules/attics/katie-moum-1920x1280.jpg" alt="Welcome to J1" style="filter: grayscale(1) contrast(1) brightness(1);">
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card p-3 text-end">
+        <figure class="mb-0">
+          <blockquote class="blockquote">
+            <p>A well-known quote, contained in a blockquote element.</p>
+          </blockquote>
+          <figcaption class="blockquote-footer mb-0 text-muted">
+            Someone famous in <cite title="Source Title">Source Title</cite>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">This is another card with title and supporting text below. This card has some additional content to make it slightly taller overall.</p>
+          <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+++++
+
+
+++++
+<style>
+</style>
+++++
+
+
+++++
+<script>
+
+  $(document).ready(function() {
+
+    var dependencies_met_j1_finished = setInterval(function() {
+      if (j1.getState() == 'finished') {
+        var $grid = $('.masonry');
+
+        $grid.masonry({
+          percentPosition: true
+        });
+
+        $grid.on( 'click', '.card', function() {
+          // remove clicked element
+          // layout remaining item elements
+          $grid.masonry('remove', this).masonry('layout');
+          $grid.masonry('reloadItems');
+        });
+
+        clearInterval(dependencies_met_j1_finished);
+      } // END if j1.getState()
+    }, 25);
+   });
+
+</script>
+++++
+
+
+
+/////
+++++
+<script>
+
+  $(document).ready(function() {
+
+    var dependencies_met_j1_finished = setInterval(function() {
+      if (j1.getState() == 'finished') {
+
+        var $grid = $('.masonry');
+
+        $grid.on( 'click', '.card', function() {
+          // remove clicked element
+          $grid.masonry( 'remove', this )
+            // layout remaining item elements
+            .masonry('layout');
+        });
+
+
+        var elms = $('.masonry').masonry('getItemElements')
+
+//      var width = $(document).width();
+//        $(document).width( width + 500 );
+//        $('body').width( $(window).width() + 300 );
+
+        $('.masonry').masonry('reloadItems');
+        clearInterval(dependencies_met_j1_finished);
+      } // END if j1.getState()
+    }, 25);
+   });
+
+</script>
+++++
+/////
