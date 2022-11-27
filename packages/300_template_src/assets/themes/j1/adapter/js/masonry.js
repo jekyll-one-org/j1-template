@@ -127,11 +127,11 @@ var logText;
       var frontmatterOptions  = options != null ? $.extend({}, options) : {};
 
       // create settings object from comment options
-      var waveDefaults = $.extend({}, {{masonry_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      var waveSettings = $.extend({}, {{masonry_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      var masonryDefaults = $.extend({}, {{masonry_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      var masonrySettings = $.extend({}, {{masonry_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
 
       // merge all comment options
-      var waveOptions = $.extend({}, waveDefaults, waveSettings, frontmatterOptions);
+      var masonryOptions = $.extend({}, masonryDefaults, masonrySettings, frontmatterOptions);
 
       _this  = j1.adapter.masonry;
       theme  = user_state.theme_name;
@@ -148,18 +148,68 @@ var logText;
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
 
-          var $grid = $('#example-masonry');
+          {% for item in masonry_options.grids %}
+            {% if item.grid.enabled %}
+              {% assign grid_id = item.grid.id %}
 
-          $grid.masonry({
-            percentPosition: true
-          });
+              logger.info('\n' + 'found masonry on id: ' + '{{grid_id}}');
 
-          $grid.on( 'click', '.card', function() {
-            // remove clicked element
-            // layout remaining item elements
-            $grid.masonry('remove', this).masonry('layout');
-            $grid.masonry('reloadItems');
-          });
+              {% comment %} load default grid options
+              ------------------------------------------------------------------ {% endcomment %}
+              {% assign percent_position    = masonry_defaults.percentPosition %}
+              {% assign horizontal_order    = masonry_defaults.horizontalOrder %}
+              {% assign origin_left         = masonry_defaults.originLeft %}
+              {% assign origin_top          = masonry_defaults.originTop %}
+              {% assign init_layout         = masonry_defaults.initLayout %}
+              {% assign transition_duration = masonry_defaults.transitionDuration %}
+              {% assign stagger_duration    = masonry_defaults.stagger %}
+              {% assign gutter_size         = masonry_defaults.gutter %}
+
+              {% comment %} overload defaults by grid element options
+              ------------------------------------------------------------------ {% endcomment %}
+              {% if item.grid.percentPosition %}      {% assign percent_position    = item.grid.percentPosition %}    {% endif %}
+              {% if item.grid.horizontalOrder %}      {% assign horizontal_order    = item.grid.horizontalOrder %}    {% endif %}
+              {% if item.grid.originLeft %}           {% assign origin_left         = item.grid.originLeft %}         {% endif %}
+              {% if item.grid.originTop %}            {% assign origin_top          = item.grid.originTop %}          {% endif %}
+              {% if item.grid.initLayout %}           {% assign init_layout         = item.grid.initLayout %}         {% endif %}
+              {% if item.grid.transitionDuration %}   {% assign transition_duration = item.grid.transitionDuration %} {% endif %}
+              {% if item.grid.stagger %}              {% assign stagger_duration    = item.grid.stagger %}            {% endif %}
+              {% if item.grid.gutter %}               {% assign gutter_size         = item.grid.gutter %}             {% endif %}
+
+              var $grid_{{grid_id}} = $('#{{grid_id}}');
+
+              logger.info('\n' + 'initialize grid on id: ' + '{{grid_id}}');
+              // initialize the (masonry) grid
+              //
+              $grid_{{grid_id}}.masonry({
+                percentPosition:        {{percent_position}},
+                horizontalOrder:        {{horizontal_order}},
+                originLeft:             {{origin_left}},
+                originTop:              {{origin_top}},
+                initLayout:             {{init_layout}},
+                transitionDuration:     "{{transition_duration}}s",
+                stagger:                "{{stagger_duration}}",
+              });
+
+              logger.info('\n' + 'install event handlers on id: ' + '{{grid_id}}');
+              // grid event handler
+              //
+              $grid_{{grid_id}}.on( 'click', '.card', function() {
+                // remove clicked element
+                // layout remaining item elements
+                $grid_{{grid_id}}.masonry('remove', this).masonry('layout');
+                $grid_{{grid_id}}.masonry('reloadItems');
+              });
+
+            {% else %}
+
+              {% if item.grid.hideDisabled %}
+                // hide a grid if disabled
+                $('#{{item.grid.id}}').hide();
+              {% endif %}
+
+            {% endif %} // ENDIF grid enabled
+          {% endfor %} // ENDFOR (all) grids
 
           logger.info('\n' + 'initializing module finished');
           clearInterval(dependencies_met_page_ready);

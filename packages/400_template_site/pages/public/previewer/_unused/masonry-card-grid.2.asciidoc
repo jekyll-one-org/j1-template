@@ -13,7 +13,7 @@ tags:                                   [ Example ]
 comments:                               false
 fab_menu_id:                            page_ctrl
 
-permalink:                              /pages/public/learn/masonry_card_grid/
+permalink:                              /pages/public/learn/masonry_card_grid_2/
 regenerate:                             false
 
 resources:                              [ clipboard, masonry, rouge ]
@@ -59,6 +59,8 @@ fitting stones in a wall. You’ve probably seen it in use all over the Internet
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 
+== Bootstrap and Masonry
+
 // See: https://getbootstrap.com/docs/5.0/examples/masonry/
 // See: https://masonry.desandro.com/
 // See: https://tympanus.net/Development/GridLoadingEffects/index.html
@@ -69,7 +71,7 @@ NOTE: Initializing the mansory grid by `{"percentPosition": true }` on the
 `.row` wrapper, this combines the powers of Bootstrap's responsive grid
 and Masonry's positioning.
 
-[source, js, role="mb-5"]
+[source, js]
 ----
 $(document).ready(function() {
   var dependencies_met_j1_finished = setInterval(function() {
@@ -84,14 +86,10 @@ $(document).ready(function() {
 });
 ----
 
-
-== 3-Column Grid
-
-lorem:sentences[5]
-
 ++++
-<div class="content mt-5 mb-5">
-  <div id="example_masonry" class="row">
+<div class="content mt-5">
+  <!-- div class="row masonry" data-masonry='{"percentPosition": "true" }' -->
+  <div id="example-masonry" class="row">
 
     <div class="col-sm-6 col-lg-4 mb-4">
       <div class="card">
@@ -212,21 +210,14 @@ lorem:sentences[5]
         </div>
       </div>
     </div>
+
   </div>
-</div>
-++++
 
 
-== 2-Column Grid
-
-lorem:sentences[5]
-
-++++
-<div class="content mt-5">
-  <div id="example_masonry_2" class="row">
-
-    <div class="col-sm-6 col-lg-6 mb-4">
-      <article class="card raised-z0">
+  <ul id="home_news_panel-scroll-group" class="scroll-group scroll-group-horizontal align-items-stretch flex-wrap">
+    <!-- [INFO   ] [~/assets/data/panel.html              ] [ write post items (card_block == 'card-list')] -->
+    <li id="home_news_panel-scroll-item" class="scroll-group-item items-2 p-0">
+      <article class="card card-same-height raised-z0 mb-5">
         <img class="img-fluid img-object--cover g-height-300" src="/assets/images/modules/attics/katie-moum-1920x1280.jpg" alt="Welcome to J1" style="filter: grayscale(1) contrast(1) brightness(1);">
         <h3 class="card-header bg-primary notoc notranslate">Welcome to J1</h3>
         <!-- Body|Excerpt -->
@@ -256,10 +247,9 @@ lorem:sentences[5]
           </a>
         </div>
       </article>
-    </div>
-
-    <div class="col-sm-6 col-lg-6 mb-4">
-      <article class="card raised-z0">
+    </li>
+    <li id="home_news_panel-scroll-item" class="scroll-group-item items-2 p-0">
+      <article class="card card-same-height raised-z0 mb-5">
         <img class="img-fluid img-object--cover g-height-300" src="/assets/images/modules/attics/1920x1280/alexander-redl.jpg" alt="J1 Template" style="filter: grayscale(1) contrast(1) brightness(1);">
         <h3 class="card-header bg-primary notoc notranslate">J1 Template</h3>
         <!-- Body|Excerpt -->
@@ -290,10 +280,10 @@ lorem:sentences[5]
           </a>
         </div>
       </article>
-    </div>
+    </li>
 
-    <div class="col-sm-6 col-lg-6 mb-4">
-      <article class="card raised-z0">
+    <li id="home_news_panel-scroll-item" class="scroll-group-item items-2 p-0">
+      <article class="card card-same-height raised-z0 mb-5">
         <!-- [INFO   ] [j1.layouts.content_generator_news_panel_posts.html ] [ place post image ] -->
         <img class="img-fluid img-object--cover g-height-300" src="/assets/images/modules/attics/machine-generator-1920x1280.jpg" alt="Site Generators" style="filter: grayscale(1) contrast(0.8) brightness(0.8);">
         <h3 class="card-header bg-primary notoc notranslate">Site Generators</h3>
@@ -325,10 +315,10 @@ lorem:sentences[5]
           </a>
         </div>
       </article>
-    </div>
+    </li>
 
-    <div class="col-sm-6 col-lg-6 mb-4">
-      <article class="card raised-z0">
+    <li id="home_news_panel-scroll-item" class="scroll-group-item items-2 p-0">
+      <article class="card card-same-height raised-z0 mb-5">
         <!-- [INFO   ] [j1.layouts.content_generator_news_panel_posts.html ] [ place post image ] -->
         <img class="img-fluid img-object--cover g-height-300" src="/assets/images/modules/attics/cookies-1920x1200.jpg" alt="Cookies" style="filter: grayscale(1) contrast(0.8) brightness(0.8);">
         <h3 class="card-header bg-primary notoc notranslate">Cookies</h3>
@@ -359,10 +349,10 @@ lorem:sentences[5]
           </a>
         </div>
       </article>
-    </div>
+    </li>
 
-    <div class="col-sm-6 col-lg-6 mb-4">
-      <article class="card raised-z0">
+    <li id="home_news_panel-scroll-item" class="scroll-group-item items-2 p-0">
+      <article class="card card-same-height raised-z0 mb-5">
         <!-- [INFO   ] [j1.layouts.content_generator_news_panel_posts.html ] [ place post image ] -->
         <img class="img-fluid img-object--cover g-height-300" src="/assets/images/collections/blog/wikipedia/columbia-river.1200x400.jpg" alt="Columbia River" style="filter: grayscale(1) contrast(0.8) brightness(0.8);">
         <h3 class="card-header bg-primary notoc notranslate">Columbia River</h3>
@@ -394,10 +384,10 @@ lorem:sentences[5]
           </a>
         </div>
       </article>
-    </div>
+    </li>
 
-    <div class="col-sm-6 col-lg-6 mb-4">
-      <article class="card raised-z0">
+    <li id="home_news_panel-scroll-item" class="scroll-group-item items-2 p-0">
+      <article class="card card-same-height raised-z0 mb-5">
         <!-- [INFO   ] [j1.layouts.content_generator_news_panel_posts.html ] [ place post image ] -->
         <img class="img-fluid img-object--cover g-height-300" src="/assets/images/collections/blog/wikipedia/narcise-snake-pits.1200x400.jpg" alt="Narcisse Snake Dens" style="filter: grayscale(1) contrast(0.8) brightness(0.8);">
         <h3 class="card-header bg-primary notoc notranslate">Narcisse Snake Dens</h3>
@@ -429,8 +419,9 @@ lorem:sentences[5]
           </a>
         </div>
       </article>
-    </div>
+    </li>
+  </ul>
 
-  </div>
+
 </div>
 ++++
