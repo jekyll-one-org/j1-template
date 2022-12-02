@@ -1,26 +1,11 @@
-/*
- # -----------------------------------------------------------------------------
- # ~/vendor/fonts/md_icons/scss/_variables.scss
- # Var settings for MD Icons v7.0.96
- #
- # Product/Info:
- # https://jekyll.one
- #
- # Copyright (C) 2022 Juergen Adams
- #
- # J1 Template is licensed under the MIT License.
- # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
- # -----------------------------------------------------------------------------
-*/
-
-$mdi-filename:                          "materialdesignicons";
-$mdi-font-name:                         "Material Design Icons";
-$mdi-font-family:                       "materialdesignicons";
-$mdi-font-weight:                       "regular";
-$mdi-font-path:                         "/assets/themes/j1/core/fonts/material_design_icons/fonts" !default;
-$mdi-font-size-base:                    24px !default;
-$mdi-css-prefix:                        mdi !default;
-$mdi-version:                           "6.9.96" !default;
+$mdi-filename:         "materialdesignicons";
+$mdi-font-name:        "Material Design Icons";
+$mdi-font-family:      "materialdesignicons";
+$mdi-font-weight:      "normal";
+$mdi-font-path:        "../fonts" !default;
+$mdi-font-size-base:   24px !default;
+$mdi-css-prefix:       mdi !default;
+$mdi-version:          "7.0.96" !default;
 
 $mdi-icons: (
   "ab-testing": F01C9,
@@ -1880,7 +1865,6 @@ $mdi-icons: (
   "closed-caption-outline": F0DBD,
   "cloud": F015F,
   "cloud-alert": F09E0,
-  "cloud-alert-outline": F1BE0,
   "cloud-braces": F07B5,
   "cloud-check": F0160,
   "cloud-check-outline": F12CC,
