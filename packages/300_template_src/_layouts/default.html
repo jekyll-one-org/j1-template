@@ -111,14 +111,9 @@ debug:                                  false                                   
   {% comment %} collect the head section (region head)
   ------------------------------------------------------------------------------ {% endcomment %}
   <head data-proofer-ignore>
-
-    {% comment %}
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-LRlmVvLKVApDVGuspQFnRQJjkv0P7/YFrw84YYQtmYG4nK8c+M+NlmYDCv0rKWpG" crossorigin="anonymous">
-    {% endcomment %}
     <!-- [INFO   ] [j1.layout.default.html                ] [ call default_writer for region: 'head' ] -->
     {% include {{default_writer}} region='head' items=lanes_collate %}
     <!-- [INFO   ] [j1.layout.default.html                ] [ end default_writer for region: 'head' ] -->
-
   </head>
 
   <body class="nomathjax">

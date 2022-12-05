@@ -68,7 +68,8 @@
 
 // jadams, 2022-02-21: set bg color for dark theme compatibility
 .bmd-layout-drawer {
-  background: var(--bs-body-bg);
+//  background: var(--bs-body-bg);
+    background: var(--bs-gray-100);
 }
 
 // Sizing and positioning

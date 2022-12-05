@@ -2,7 +2,7 @@
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/_data/feed.xml
+ # ~/_data/templates/feed.xml
  # Liquid template to generate feed XML files
  #
  # Product/Info:

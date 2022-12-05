@@ -30,3 +30,10 @@
 .series-navigation ul li a {
   background-color: $grey-300;
 }
+.series-navigation ul li a:hover {
+    color: $blue !important;
+}
+
+.series-navigation ul li.current a {
+  background-color: rgba(255, 255, 255, 0.3);
+}
