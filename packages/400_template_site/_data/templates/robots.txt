@@ -1,4 +1,4 @@
-{% capture cache %}
+{%- capture cache %}
 
 {%- comment %}
  # -----------------------------------------------------------------------------
@@ -16,11 +16,11 @@
  # Test data:
  #   liquid_var: {{ liquid_var | debug }}
  # -----------------------------------------------------------------------------
-{% endcomment %}
+{% endcomment -%}
 
 Sitemap: {{ "sitemap.xml" | absolute_url }}
 
-{% endcapture %}
+{% endcapture -%}
 
 {%- comment %} POST processing of the generated file (robots.txt)
 -------------------------------------------------------------------------------- {% endcomment -%}
