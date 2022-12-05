@@ -12,9 +12,11 @@
  #
  # J1 Template is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
- #
  # -----------------------------------------------------------------------------
-{% endcomment -%}
+ # Test data:
+ #   liquid_var: {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
 
 Sitemap: {{ "sitemap.xml" | absolute_url }}
 

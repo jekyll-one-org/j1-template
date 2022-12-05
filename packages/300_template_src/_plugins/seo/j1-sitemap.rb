@@ -45,12 +45,13 @@ module Jekyll
       @sitemap_source_path ||= File.expand_path @sitemap_template_name, @template_source_folder
 
       if plugin_disabled?
-        Jekyll.logger.info "J1 Sitemap:", "generate sitemap files: disabled"
+        Jekyll.logger.info "J1 Sitemap:", "disabled"
         return
+      else
+        Jekyll.logger.info "J1 Sitemap:", "enabled"
+        Jekyll.logger.info "J1 Sitemap:", "generate sitemap files"
       end
-
-      Jekyll.logger.info "J1 Sitemap:", "generate map files"
-
+    
       @site.pages << sitemap unless file_exists?("sitemap.xml")
       @site.pages << robots unless file_exists?("robots.txt")
     end

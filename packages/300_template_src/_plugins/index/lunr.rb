@@ -109,6 +109,14 @@ module Jekyll
         rebuild = @module_config['rebuild']
         index_file = index_dest + @module_config['index_file']
 
+        if plugin_disabled?
+          Jekyll.logger.info 'J1 Lunr:', 'disabled'
+          return
+        else
+          Jekyll.logger.info 'J1 Lunr:', 'enabled'
+          Jekyll.logger.info 'J1 Lunr:', 'generate search index'
+        end
+
         if @module_config['rebuild'] == false
           if File.exist?(index_file)
             Jekyll.logger.info 'J1 Lunr:', 'rebuild index disabled'
@@ -118,8 +126,6 @@ module Jekyll
             return
           end
         end
-
-        Jekyll.logger.info 'J1 Lunr:', 'generate search index'
 
         # gather posts and pages
         #
@@ -196,6 +202,22 @@ module Jekyll
       end
 
       private
+
+      # Returns the plugin's config or an empty hash if not set
+      #
+      def config
+        @config ||= @module_config  || {}
+      end
+
+      # Check if plugin is enabled|disabled
+      #
+      def plugin_disabled?
+        if config['enabled']
+          false
+        else
+          true
+        end
+      end
 
       # load the stopwords (file)
       #
