@@ -15,7 +15,7 @@
 	mkdir %HOMEDRIVE%%HOMEPATH%\.gem
 
 
-2. Install J1 Template USERIZED (recommended)
+2. Install J1 Theme USERIZED (recommended)
 
   Install J1 from remote
 

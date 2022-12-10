@@ -1,0 +1,22 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/theme_uno_dark/bootstrap/_list_group.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+.list-group-item {
+  color: $gray-100;
+  background-color: $gray-500;
+}
+
+.list-group-item:hover {
+  background-color: $gray-900;
+}

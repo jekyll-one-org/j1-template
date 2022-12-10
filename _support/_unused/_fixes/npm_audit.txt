@@ -1,4 +1,4 @@
-X:\j1\github\j1_template\packages\100_template_css>npm audit
+X:\j1\github\j1_template\packages\100_theme_css>npm audit
 
                        === npm audit security report ===
 

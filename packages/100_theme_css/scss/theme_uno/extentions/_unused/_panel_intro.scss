@@ -1,0 +1,50 @@
+/*
+// -----------------------------------------------------------------------------
+// ~/scss/theme_uno/bootstrap/extensions/_panel_intro.scss
+// Provides all general styles for J1 Theme Intro Panel
+//
+// Product/Info:
+// https://jekyll.one
+//
+// Copyright (C) 2022 Juergen Adams
+//
+// J1 Theme is licensed under the MIT License.
+// See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+// -----------------------------------------------------------------------------
+*/
+
+// Content
+// -----------------------------------------------------------------------------
+
+// Service link block
+// -----------------------------------------------------------------------------
+ul.service-list > li > a {
+  display: block;
+  width: 100%;
+  border-bottom: dotted 1px #e0e0e0;
+  padding: 10px 30px 5px 30px;
+  color: #9E9E9E;
+  font-weight: 600;
+}
+
+ul.service-list > li > a:focus,
+ul.service-list > li > a:hover {
+  color: #3F51B5  !important;
+  text-decoration: none !important;
+}
+
+
+// Media Queries
+// -----------------------------------------------------------------------------
+
+@media screen and (max-width: 768px) {
+	.intro-panel {
+		margin: 3rem;
+	}
+}
+
+@media screen and (max-width: 640px) {
+	.intro-panel {
+		margin: 3rem;
+	}
+}

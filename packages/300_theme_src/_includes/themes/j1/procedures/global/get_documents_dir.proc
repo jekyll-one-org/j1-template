@@ -1,0 +1,67 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_includes/themes/j1/procedures/global/get_documents_dir.proc
+ #  Liquid PROCEDURE to get the (top-level) documents dir of an Asciidoc
+ #  main entry document.
+ #
+ #  https://jekyll.one
+ #
+ #  Copyright (C) 2022 Juergen Adams
+ #
+ #  J1 Theme is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ #   Components procedure. Calculate the HTML code for a given button TYPE
+ #   based on the button_data (hash) (e.g. taken from the panel configuration)
+ #
+ #    Usage:
+ #      1)  capture the 'get_documents_dir' variable by full path
+ #      2)  include|configure the get_documents_dir.proc procedure
+ #
+ #    Example:
+ #      {% capture get_documents_dir %}themes/{{site.template.name}}/procedures/global/get_documents_dir.proc{%endcapture%}
+ #      {% include {{get_documents_dir}} %}
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+--------------------------------------------------------------- {% endcomment %}
+{% capture get_page_path %}themes/{{site.template.name}}/procedures/global/get_page_path.proc{% endcapture %}
+
+{% comment %} Variables
+   ------------------------------------------------------------ {% endcomment %}
+{% assign folders = include.init_folders %}
+
+
+// NOTE: Calculation of Pathes
+// Web sources are loaded by the Web Server. The location imagesdir
+// is calculated relative to "web_root". Asciidoc resources are being
+// collected by AsciiDoctor relative to "page_root"
+
+{% comment %} Variables
+--------------------------------------------------------------- {% endcomment %}
+{% if site.source.size %} {% assign source_dir = site.source %} {% else %} {% assign source_path = "." %} {% endif %}
+
+{% include {{get_page_path}} %}
+{% capture page_root %}{{page_path}}{% endcapture %}
+{% capture web_root %}{{ page_path | remove_first: source_dir }}{% endcapture %}
+
+:includedir:                            {{page_root}}/000_includes
+:documentdir:                          {includedir}/documents
+:tabledir:                              {includedir}/tables
+//:tabledir:                              ../tables
+
+
+{% comment %} Moved imagesdir settings to the document
+---------------------------------------------------------------------------
+{% if page.collection %}
+{% assign imagesdir = site.asciidoc_attributes.imagesdir %}
+{% else %}
+:imagesdir:                             {{web_root}}/000_includes/images
+{% endif %}
+---------------------------------------------------------------------------
+{% endcomment %}

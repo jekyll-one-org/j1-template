@@ -1,0 +1,44 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/100_theme_css/scss/theme_uno_dark/bootstrap/_alert.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+.alert {
+  .close {
+    color: $close-color;
+    text-decoration: none;
+  }
+}
+.alert {
+  border: none;
+  // color: $grey-600;
+  a,
+  .alert-link {
+    color: $grey-400;
+    text-decoration: none;
+  }
+  .alert-link:hover {
+    color: $grey-700;
+  }
+  @each $color, $value in $theme-colors {
+    &-#{$color} {
+      background-color: $value;
+    }
+  }
+  &-light {
+    &,
+    & a:not(.btn),
+    & .alert-link {
+      color: $body-bg;
+    }
+  }
+}

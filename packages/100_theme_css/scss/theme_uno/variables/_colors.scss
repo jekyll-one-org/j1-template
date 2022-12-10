@@ -1,0 +1,186 @@
+// -----------------------------------------------------------------------------
+// ~/scss/theme_uno/variables/_colors.scss
+// Material Design (MD) colors (Google)
+// See: http://www.google.com/design/spec/style/color.html
+//
+// Product/Info:
+// https://jekyll.one
+//
+// Copyright (C) 2022 Juergen Adams
+//
+// J1 Theme is licensed under the MIT License.
+// See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+// -----------------------------------------------------------------------------
+@import "mde_colors";
+
+// Body (jadams, 2021-11-21: set body colors as var)
+// -----------------------------------------------------------------------------
+$body-bg:                                         $white !default;
+$body-color:                                      $gray-800 !default;
+
+// Colors
+// -----------------------------------------------------------------------------
+$primary:                                         $blue !default;
+$secondary:                                       $gray-600 !default;
+$success:                                         $green !default;
+$info:                                            $cyan !default;
+$warning:                                         $yellow-700 !default;
+$danger:                                          $red !default;
+$light:                                           $gray-300 !default;
+$dark:                                            $gray-900 !default;
+
+$theme-colors: (
+  "primary":    $primary,
+  "secondary":  $secondary,
+  "success":    $success,
+  "info":       $info,
+  "warning":    $warning,
+  "danger":     $danger,
+  "light":      $light,
+  "dark":       $dark
+) !default;
+
+// jadams, 2019-01-24: base font weight
+//
+$bmd-font-weight-base:                            400;
+
+// redefine ? TODO: do we need this bmd variant?  This is used as $body-color
+// -----------------------------------------------------------------------------
+$gray-light:                                      rgba($black, 0.26) !default;
+$gray-lighter:                                    rgba($black, 0.12) !default;
+$gray-alpha:                                      .54 !default;
+$gray:                                            rgba($black, $gray-alpha) !default;     // spec color
+$gray-dark:                                       rgba($black, 0.87) !default;            // used for text color - others use grey-600 which is considerably lighter
+
+$gray-light:                                      rgba($black, 0.26) !default;
+$gray-lighter:                                    rgba($black, 0.12) !default;
+$gray-alpha:                                      .54 !default;
+$gray:                                            rgba($black, $gray-alpha) !default;     // spec color
+$gray-dark:                                       rgba($black, 0.87) !default;            // used for text color - others use grey-600 which is considerably lighter
+
+
+// wondering if any of these could still be refactored out, but are definitely in use
+//
+$bmd-inverse:                                     rgba($white, 1) !default;
+$bmd-inverse-light:                               rgba($white, 0.84) !default;
+$bmd-inverse-lighter:                             rgba($white, 0.54) !default;
+
+$bmd-label-color:                                 $gray-700 !default;
+$bmd-label-color-inner-focus:                     $gray !default;               // e.g. radio label or text-muted not a control-label which is primary
+
+// BS variables NOT in files
+// -----------------------------------------------------------------------------
+$label-color-focus:                               $blue-800 !default;
+$label-color:                                     $gray !default;
+
+// (B)MD variables NOT in files
+// -----------------------------------------------------------------------------
+$bmd-label-color-focus:                           $blue-800 !default;
+$bmd-invalid-underline:                           $red-a700 !default;
+$bmd-readonly-underline:                          $gray-800 !default;
+
+//
+//-- unverified below here
+$bmd-brand-inverse:                               $blue-600 !default;
+// Typography elements FIXME: review to see if we actually need these
+$icon-color:                                      rgba($black, 0.5) !default;
+
+//
+// FIXME: Similar but not quite the same as Bootstrap variables
+// FIXME: these need to either a) be converted to $bmd- or b) converted to bs variables
+//
+
+// Inputs (BMD)
+// -----------------------------------------------------------------------------
+$bmd-bmd-label-static-size-ratio:                 75 / 100 !default;
+$bmd-help-size-ratio:                             75 / 100 !default;
+
+// $bmd-form-control-bg-repeat-y: repeat-y !default;
+// it could work with no-repeat, but on Safari it's bugged and repeat-y
+// is needed, but repeat-y is bugged on the warning icon.
+$bmd-form-control-bg-repeat-y:                    no-repeat !default;
+$bmd-form-control-bg-position:                    center bottom, center calc(100% - 1px) !default;
+$bmd-form-control-bg-size:                        0 100%, 100% 100% !default;
+$bmd-form-control-bg-size-active:                 100% 100%, 100% 100% !default;
+
+// jadams, 2021-11-14:  map theme-color NOT expanded in several scss files:
+// theme_uno/bootstrap/_forms.scss
+$bmd-form-color-default:                          $blue-700 !default;           // ???
+$bmd-form-color-success:                          $green !default;              // theme-color(success)
+$bmd-form-color-info:                             $cyan !default;               // theme-color(info)
+$bmd-form-color-warning:                          $yellow !default;             // theme-color(warning)
+$bmd-form-color-danger:                           $red !default;                // theme-color(danger)
+
+// Expandable  (BMD)
+// -----------------------------------------------------------------------------
+$input-text-button-size:                          32px !default;
+
+// Form (BMD)
+// -----------------------------------------------------------------------------
+// set as 1x font-size so that padding is easier calculated to match the spec.
+$bmd-form-line-height:                            1 !default;
+$bmd-label-top-margin-base:                       1rem !default;
+
+$bmd-form-line-height-lg:                         1 !default;
+$bmd-label-top-margin-lg:                         1rem !default; // 16px
+
+$bmd-form-line-height-sm:                         1 !default;
+$bmd-label-top-margin-sm:                         .75rem !default; // 12px
+
+$text-disabled:                                   #a8a8a8 !default;
+$background-disabled:                             #eaeaea !default;
+
+// Checkboxes  (BMD)
+// -----------------------------------------------------------------------------
+$bmd-checkbox-size:                               1.25rem !default;
+$bmd-checkbox-animation-ripple:                   500ms !default;
+$bmd-checkbox-animation-check:                    0.3s !default;
+$bmd-checkbox-checked-color:                      $blue-800 !default;
+$bmd-checkbox-label-padding:                      .3125rem !default; // 5px
+
+$bmd-checkbox-border-size:                        .125rem !default;
+$bmd-checkbox-border-color:                       $bmd-label-color-inner-focus !default;
+$bmd-checkbox-border-color-disabled:              $gray-light !default; //#bdbdbd !default;
+
+// Popovers and Popups  (BMD)
+// -----------------------------------------------------------------------------
+$bmd-popover-background:                          rgba(101, 101, 101, 0.9) !default;
+
+// Radio  (BMD)
+// -----------------------------------------------------------------------------
+$bmd-radio-border:                                .125rem !default; // 2px
+$bmd-radio-size:                                  1.25rem !default;
+$bmd-radio-ripple-offset:                         1em !default;
+$bmd-radio-label-padding:                         .3125rem !default; // 5px
+
+$bmd-radio-color-off:                             $bmd-label-color-inner-focus !default; // FIXME seems inconsistent, check spec
+$bmd-radio-color-on:                              $blue-800 !default;
+$bmd-radio-color-disabled:                        $gray-light; // light theme spec: Disabled: #000000, Opacity  26%
+$bmd-radio-color-disabled-inverse:                rgba(
+                                                    $white,
+                                                    0.30
+                                                  ); // dark theme spec: Disabled: #FFFFFF, Opacity  30%
+
+// Switches (BMD)
+// -----------------------------------------------------------------------------
+$bmd-switch-label-padding:                        .3125rem !default; // 5px
+$bmd-switch-width:                                2.125rem !default; // 34px
+$bmd-switch-height:                               .875rem !default; // 14px
+$bmd-switch-handle-size:                          1.25rem !default; // 20px (was 18px)
+
+$bmd-switch-handle-checked-bg:                    $blue-800 !default;
+$bmd-switch-handle-unchecked-bg:                  $gray !default;
+$bmd-switch-handle-disabled-bg:                   $gray-400 !default;
+$bmd-switch-unchecked-bg:                         $gray-light !default;
+$bmd-switch-checked-bg:                           desaturate(
+                                                    lighten($bmd-switch-handle-checked-bg, 28%),
+                                                    32%
+                                                  ); // kind of magic recipe
+$bmd-switch-disabled-bg:                          $gray-lighter !default;
+
+// Animations  (BMD)
+// -----------------------------------------------------------------------------
+$bmd-animation-curve-fast-out-slow-in:            cubic-bezier(0.4, 0, 0.2, 1) !default;
+$bmd-animation-curve-linear-out-slow-in:          cubic-bezier(0, 0, 0.2, 1) !default;
+$bmd-animation-curve-fast-out-linear-in:          cubic-bezier(0.4, 0, 1, 1) !default;
+$bmd-animation-curve-default:                     $bmd-animation-curve-fast-out-slow-in !default;

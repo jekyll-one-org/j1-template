@@ -1,6 +1,6 @@
 {
   "version": "2023.1.0",
-  "description": "Multi-package repository for J1 Template",
+  "description": "Multi-package repository for J1 Theme",
   "command": {
     "run": {
       "npmClient": "yarn",

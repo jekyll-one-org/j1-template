@@ -1,0 +1,1018 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/extensions/_typography.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # NOTE: Typography styles for resposive text (rtext)
+ #  Provides flowting text styles for dynamic|responsible text.
+ # Inspired by Materialize (http://materializecss.com/)
+ # TODO:1
+  # -----------------------------------------------------------------------------
+ # SPEC: r-text   - http://materializecss.com/typography.html
+ # SPEC: general  - https://www.google.com/design/spec/style/typography.html#typography-styles
+ # -----------------------------------------------------------------------------
+*/
+
+// no r-text
+// -----------------------------------------------------------------------------
+.no-r-text, .no-rtext {
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+// r-text base (500)
+// -----------------------------------------------------------------------------
+
+.r-text, .r-text-500 {
+  font-weight: 300;
+}
+
+@media only screen and (max-width: 320px) {
+  .r-text, .r-text-500 {
+    font-size: calc(1rem) !important;
+  }
+}
+
+@media only screen and (min-width: 360px) {
+  .r-text, .r-text-500 {
+    font-size: 1.2rem !important;
+  }
+}
+
+@media only screen and (min-width: 390px) {
+  .r-text, .r-text-500 {
+    font-size: 1.224rem !important;
+  }
+}
+
+@media only screen and (min-width: 420px) {
+  .r-text, .r-text-500 {
+    font-size: 1.248rem !important;
+  }
+}
+
+@media only screen and (min-width: 450px) {
+  .r-text, .r-text-500 {
+    font-size: 1.272rem !important;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .r-text, .r-text-500 {
+    font-size: 1.296rem !important;
+  }
+}
+
+@media only screen and (min-width: 510px) {
+  .r-text, .r-text-500 {
+    font-size: 1.32rem !important;
+  }
+}
+
+@media only screen and (min-width: 540px) {
+  .r-text, .r-text-500 {
+    font-size: 1.344rem !important;
+  }
+}
+
+@media only screen and (min-width: 570px) {
+  .r-text, .r-text-500 {
+    font-size: 1.368rem !important;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .r-text, .r-text-500 {
+    font-size: 1.392rem !important;
+  }
+}
+
+@media only screen and (min-width: 630px) {
+  .r-text, .r-text-500 {
+    font-size: 1.416rem !important;
+  }
+}
+
+@media only screen and (min-width: 660px) {
+  .r-text, .r-text-500 {
+    font-size: 1.44rem !important;
+  }
+}
+
+@media only screen and (min-width: 690px) {
+  .r-text, .r-text-500 {
+    font-size: 1.464rem !important;
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  .r-text, .r-text-500 {
+    font-size: 1.488rem !important;
+  }
+}
+
+@media only screen and (min-width: 750px) {
+  .r-text, .r-text-500 {
+    font-size: 1.512rem !important;
+  }
+}
+
+@media only screen and (min-width: 780px) {
+  .r-text, .r-text-500 {
+    font-size: 1.536rem !important;
+  }
+}
+
+@media only screen and (min-width: 810px) {
+  .r-text, .r-text-500 {
+    font-size: 1.56rem !important;
+  }
+}
+
+@media only screen and (min-width: 840px) {
+  .r-text, .r-text-500 {
+    font-size: 1.584rem !important;
+  }
+}
+
+@media only screen and (min-width: 870px) {
+  .r-text, .r-text-500 {
+    font-size: 1.608rem !important;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .r-text, .r-text-500 {
+    font-size: 1.632rem !important;
+  }
+}
+
+@media only screen and (min-width: 930px) {
+  .r-text, .r-text-500 {
+    font-size: 1.656rem !important;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  .r-text, .r-text-500 {
+    font-size: 1.68rem !important;
+  }
+}
+
+// $grid-breakpoint-xl:                              1200px;
+// $grid-breakpoint-lg:                              992px;
+
+// r-text 100
+// -----------------------------------------------------------------------------
+
+.r-text-100 {
+  font-weight: 300;
+}
+
+@media only screen and (max-width: 320px) {
+  .r-text-600 {
+    font-size: calc(1rem * 0.5) !important;
+  }
+}
+
+@media only screen and (min-width: 360px) {
+  .r-text-100 {
+    font-size: calc(1.2rem * 0.5) !important;
+  }
+}
+
+@media only screen and (min-width: 390px) {
+  .r-text-100 {
+    font-size: calc(1.224rem * 0.5) !important;
+  }
+}
+
+@media only screen and (min-width: 420px) {
+  .r-text-100 {
+    font-size: calc(1.248rem * 0.5) !important;
+  }
+}
+
+@media only screen and (min-width: 450px) {
+  .r-text-100 {
+    font-size: calc(1.272rem * 0.5) !important;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .r-text-100 {
+    font-size: calc(1.296rem * 0.5) !important;
+  }
+}
+
+@media only screen and (min-width: 510px) {
+  .r-text-100 {
+    font-size: calc(1.32rem * 0.5) !important;
+  }
+}
+
+@media only screen and (min-width: 540px) {
+  .r-text-100 {
+    font-size: calc(1.344rem * 0.5) !important;
+  }
+}
+
+@media only screen and (min-width: 570px) {
+  .r-text-100 {
+    font-size: calc(1.368rem * 0.5) !important;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .r-text-100 {
+    font-size: calc(1.392rem * 0.5) !important;
+  }
+}
+
+@media only screen and (min-width: 630px) {
+  .r-text-100 {
+    font-size: calc(1.416rem* 0.5) !important;
+  }
+}
+
+@media only screen and (min-width: 660px) {
+  .r-text-100 {
+    font-size: calc(1.44rem * 0.5) !important;
+  }
+}
+
+@media only screen and (min-width: 690px) {
+  .r-text-100 {
+    font-size: calc(1.464rem * 0.5) !important;
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  .r-text-100 {
+    font-size: calc(1.488rem * 0.5) !important;
+  }
+}
+
+@media only screen and (min-width: 750px) {
+  .r-text-100 {
+    font-size: calc(1.512rem * 0.5) !important;
+  }
+}
+
+@media only screen and (min-width: 780px) {
+  .r-text-100 {
+    font-size: calc(1.536rem * 0.5) !important;
+  }
+}
+
+@media only screen and (min-width: 810px) {
+  .r-text-100 {
+    font-size: calc(1.56rem * 0.5) !important;
+  }
+}
+
+@media only screen and (min-width: 840px) {
+  .r-text-100 {
+    font-size: calc(1.584rem * 0.5) !important;
+  }
+}
+
+@media only screen and (min-width: 870px) {
+  .r-text-100 {
+    font-size: calc(1.608rem * 0.5) !important;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .r-text-100 {
+    font-size: calc(1.632rem * 0.5) !important;
+  }
+}
+
+@media only screen and (min-width: 930px) {
+  .r-text-100 {
+    font-size: calc(1.656rem * 0.5) !important;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  .r-text-100 {
+    font-size: calc(1.68rem * 0.5) !important;
+  }
+}
+
+
+// r-text 200
+// -----------------------------------------------------------------------------
+
+.r-text-200 {
+  font-weight: 300;
+}
+
+@media only screen and (max-width: 320px) {
+  .r-text-600 {
+    font-size: calc(1rem * 0.6) !important;
+  }
+}
+
+@media only screen and (min-width: 360px) {
+  .r-text-200 {
+    font-size: calc(1.2rem * 0.6) !important;
+  }
+}
+
+@media only screen and (min-width: 390px) {
+  .r-text-200 {
+    font-size: calc(1.224rem * 0.6) !important;
+  }
+}
+
+@media only screen and (min-width: 420px) {
+  .r-text-200 {
+    font-size: calc(1.248rem * 0.6) !important;
+  }
+}
+
+@media only screen and (min-width: 450px) {
+  .r-text-200 {
+    font-size: calc(1.272rem * 0.6) !important;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .r-text-200 {
+    font-size: calc(1.296rem * 0.6) !important;
+  }
+}
+
+@media only screen and (min-width: 510px) {
+  .r-text-200 {
+    font-size: calc(1.32rem * 0.6) !important;
+  }
+}
+
+@media only screen and (min-width: 540px) {
+  .r-text-200 {
+    font-size: calc(1.344rem * 0.6) !important;
+  }
+}
+
+@media only screen and (min-width: 570px) {
+  .r-text-200 {
+    font-size: calc(1.368rem * 0.6) !important;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .r-text-200 {
+    font-size: calc(1.392rem * 0.6) !important;
+  }
+}
+
+@media only screen and (min-width: 630px) {
+  .r-text-200 {
+    font-size: calc(1.416rem* 0.6) !important;
+  }
+}
+
+@media only screen and (min-width: 660px) {
+  .r-text-200 {
+    font-size: calc(1.44rem * 0.6) !important;
+  }
+}
+
+@media only screen and (min-width: 690px) {
+  .r-text-200 {
+    font-size: calc(1.464rem * 0.6) !important;
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  .r-text-200 {
+    font-size: calc(1.488rem * 0.6) !important;
+  }
+}
+
+@media only screen and (min-width: 750px) {
+  .r-text-200 {
+    font-size: calc(1.512rem * 0.6) !important;
+  }
+}
+
+@media only screen and (min-width: 780px) {
+  .r-text-200 {
+    font-size: calc(1.536rem * 0.6) !important;
+  }
+}
+
+@media only screen and (min-width: 810px) {
+  .r-text-200 {
+    font-size: calc(1.56rem * 0.6) !important;
+  }
+}
+
+@media only screen and (min-width: 840px) {
+  .r-text-200 {
+    font-size: calc(1.584rem * 0.6) !important;
+  }
+}
+
+@media only screen and (min-width: 870px) {
+  .r-text-200 {
+    font-size: calc(1.608rem * 0.6) !important;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .r-text-200 {
+    font-size: calc(1.632rem * 0.6) !important;
+  }
+}
+
+@media only screen and (min-width: 930px) {
+  .r-text-200 {
+    font-size: calc(1.656rem * 0.6) !important;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  .r-text-200 {
+    font-size: calc(1.68rem * 0.6) !important;
+  }
+}
+
+
+// r-text 300
+// -----------------------------------------------------------------------------
+
+.r-text-300 {
+  font-weight: 300;
+}
+
+@media only screen and (max-width: 320px) {
+  .r-text-600 {
+    font-size: calc(1rem * 0.7) !important;
+  }
+}
+
+@media only screen and (min-width: 360px) {
+  .r-text-300 {
+    font-size: calc(1.2rem * 0.7) !important;
+  }
+}
+
+@media only screen and (min-width: 390px) {
+  .r-text-300 {
+    font-size: calc(1.224rem * 0.7) !important;
+  }
+}
+
+@media only screen and (min-width: 420px) {
+  .r-text-300 {
+    font-size: calc(1.248rem * 0.7) !important;
+  }
+}
+
+@media only screen and (min-width: 450px) {
+  .r-text-300 {
+    font-size: calc(1.272rem * 0.7) !important;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .r-text-300 {
+    font-size: calc(1.296rem * 0.7) !important;
+  }
+}
+
+@media only screen and (min-width: 510px) {
+  .r-text-300 {
+    font-size: calc(1.32rem * 0.7) !important;
+  }
+}
+
+@media only screen and (min-width: 540px) {
+  .r-text-300 {
+    font-size: calc(1.344rem * 0.7) !important;
+  }
+}
+
+@media only screen and (min-width: 570px) {
+  .r-text-300 {
+    font-size: calc(1.368rem * 0.7) !important;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .r-text-300 {
+    font-size: calc(1.392rem * 0.7) !important;
+  }
+}
+
+@media only screen and (min-width: 630px) {
+  .r-text-300 {
+    font-size: calc(1.416rem* 0.7) !important;
+  }
+}
+
+@media only screen and (min-width: 660px) {
+  .r-text-300 {
+    font-size: calc(1.44rem * 0.7) !important;
+  }
+}
+
+@media only screen and (min-width: 690px) {
+  .r-text-300 {
+    font-size: calc(1.464rem * 0.7) !important;
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  .r-text-300 {
+    font-size: calc(1.488rem * 0.7) !important;
+  }
+}
+
+@media only screen and (min-width: 750px) {
+  .r-text-300 {
+    font-size: calc(1.512rem * 0.7) !important;
+  }
+}
+
+@media only screen and (min-width: 780px) {
+  .r-text-300 {
+    font-size: calc(1.536rem * 0.7) !important;
+  }
+}
+
+@media only screen and (min-width: 810px) {
+  .r-text-300 {
+    font-size: calc(1.56rem * 0.7) !important;
+  }
+}
+
+@media only screen and (min-width: 840px) {
+  .r-text-300 {
+    font-size: calc(1.584rem * 0.7) !important;
+  }
+}
+
+@media only screen and (min-width: 870px) {
+  .r-text-300 {
+    font-size: calc(1.608rem * 0.7) !important;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .r-text-300 {
+    font-size: calc(1.632rem * 0.7) !important;
+  }
+}
+
+@media only screen and (min-width: 930px) {
+  .r-text-300 {
+    font-size: calc(1.656rem * 0.7) !important;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  .r-text-300 {
+    font-size: calc(1.68rem * 0.7) !important;
+  }
+}
+
+
+// r-text 400
+// -----------------------------------------------------------------------------
+
+.r-text-400 {
+  font-weight: 300;
+}
+
+
+@media only screen and (max-width: 320px) {
+  .r-text-600 {
+    font-size: calc(1rem * 0.8) !important;
+  }
+}
+
+@media only screen and (min-width: 360px) {
+  .r-text-400 {
+    font-size: calc(1.2rem * 0.8) !important;
+  }
+}
+
+@media only screen and (min-width: 390px) {
+  .r-text-400 {
+    font-size: calc(1.224rem * 0.8) !important;
+  }
+}
+
+@media only screen and (min-width: 420px) {
+  .r-text-400 {
+    font-size: calc(1.248rem * 0.8) !important;
+  }
+}
+
+@media only screen and (min-width: 450px) {
+  .r-text-400 {
+    font-size: calc(1.272rem * 0.8) !important;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .r-text-400 {
+    font-size: calc(1.296rem * 0.8) !important;
+  }
+}
+
+@media only screen and (min-width: 510px) {
+  .r-text-400 {
+    font-size: calc(1.32rem * 0.8) !important;
+  }
+}
+
+@media only screen and (min-width: 540px) {
+  .r-text-400 {
+    font-size: calc(1.344rem * 0.8) !important;
+  }
+}
+
+@media only screen and (min-width: 570px) {
+  .r-text-400 {
+    font-size: calc(1.368rem * 0.8) !important;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .r-text-400 {
+    font-size: calc(1.392rem * 0.8) !important;
+  }
+}
+
+@media only screen and (min-width: 630px) {
+  .r-text-400 {
+    font-size: calc(1.416rem* 0.8) !important;
+  }
+}
+
+@media only screen and (min-width: 660px) {
+  .r-text-400 {
+    font-size: calc(1.44rem * 0.8) !important;
+  }
+}
+
+@media only screen and (min-width: 690px) {
+  .r-text-400 {
+    font-size: calc(1.464rem * 0.8) !important;
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  .r-text-400 {
+    font-size: calc(1.488rem * 0.8) !important;
+  }
+}
+
+@media only screen and (min-width: 750px) {
+  .r-text-400 {
+    font-size: calc(1.512rem * 0.8) !important;
+  }
+}
+
+@media only screen and (min-width: 780px) {
+  .r-text-400 {
+    font-size: calc(1.536rem * 0.8) !important;
+  }
+}
+
+@media only screen and (min-width: 810px) {
+  .r-text-400 {
+    font-size: calc(1.56rem * 0.8) !important;
+  }
+}
+
+@media only screen and (min-width: 840px) {
+  .r-text-400 {
+    font-size: calc(1.584rem * 0.8) !important;
+  }
+}
+
+@media only screen and (min-width: 870px) {
+  .r-text-400 {
+    font-size: calc(1.608rem * 0.8) !important;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .r-text-400 {
+    font-size: calc(1.632rem * 0.8) !important;
+  }
+}
+
+@media only screen and (min-width: 930px) {
+  .r-text-400 {
+    font-size: calc(1.656rem * 0.8) !important;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  .r-text-400 {
+    font-size: calc(1.68rem * 0.8) !important;
+  }
+}
+
+@media only screen and (max-width: 360px) {
+  .r-text-400 {
+    font-size: calc(1.2rem * 0.8) !important;
+  }
+}
+
+
+// r-text 600
+// -----------------------------------------------------------------------------
+
+.r-text-600 {
+  font-weight: 300;
+}
+
+@media only screen and (max-width: 320px) {
+  .r-text-600 {
+    font-size: calc(1rem * 1.25) !important;
+  }
+}
+
+@media only screen and (min-width: 360px) {
+  .r-text-600 {
+    font-size: calc(1.2rem * 1.25) !important;
+  }
+}
+
+@media only screen and (min-width: 390px) {
+  .r-text-600 {
+    font-size: calc(1.224rem * 1.25) !important;
+  }
+}
+
+@media only screen and (min-width: 420px) {
+  .r-text-600 {
+    font-size: calc(1.248rem * 1.25) !important;
+  }
+}
+
+@media only screen and (min-width: 450px) {
+  .r-text-600 {
+    font-size: calc(1.272rem * 1.25) !important;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .r-text-600 {
+    font-size: calc(1.296rem * 1.25) !important;
+  }
+}
+
+@media only screen and (min-width: 510px) {
+  .r-text-600 {
+    font-size: calc(1.32rem * 1.25) !important;
+  }
+}
+
+@media only screen and (min-width: 540px) {
+  .r-text-600 {
+    font-size: calc(1.344rem * 1.25) !important;
+  }
+}
+
+@media only screen and (min-width: 570px) {
+  .r-text-600 {
+    font-size: calc(1.368rem * 1.25) !important;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .r-text-600 {
+    font-size: calc(1.392rem * 1.25) !important;
+  }
+}
+
+@media only screen and (min-width: 630px) {
+  .r-text-600 {
+    font-size: calc(1.416rem* 1.25) !important;
+  }
+}
+
+@media only screen and (min-width: 660px) {
+  .r-text-600 {
+    font-size: calc(1.44rem * 1.25) !important;
+  }
+}
+
+@media only screen and (min-width: 690px) {
+  .r-text-600 {
+    font-size: calc(1.464rem * 1.25) !important;
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  .r-text-600 {
+    font-size: calc(1.488rem * 1.25) !important;
+  }
+}
+
+@media only screen and (min-width: 750px) {
+  .r-text-600 {
+    font-size: calc(1.512rem * 1.25) !important;
+  }
+}
+
+@media only screen and (min-width: 780px) {
+  .r-text-600 {
+    font-size: calc(1.536rem * 1.25) !important;
+  }
+}
+
+@media only screen and (min-width: 810px) {
+  .r-text-600 {
+    font-size: calc(1.56rem * 1.25) !important;
+  }
+}
+
+@media only screen and (min-width: 840px) {
+  .r-text-600 {
+    font-size: calc(1.584rem * 1.25) !important;
+  }
+}
+
+@media only screen and (min-width: 870px) {
+  .r-text-600 {
+    font-size: calc(1.608rem * 1.25) !important;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .r-text-600 {
+    font-size: calc(1.632rem * 1.25) !important;
+  }
+}
+
+@media only screen and (min-width: 930px) {
+  .r-text-600 {
+    font-size: calc(1.656rem * 1.25) !important;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  .r-text-600 {
+    font-size: calc(1.68rem * 1.25) !important;
+  }
+}
+
+
+// r-text 700
+// -----------------------------------------------------------------------------
+
+.r-text-700 {
+  font-weight: 300;
+}
+
+@media only screen and (max-width: 320px) {
+  .r-text-600 {
+    font-size: calc(1rem * 1.5) !important;
+  }
+}
+
+@media only screen and (min-width: 360px) {
+  .r-text-700 {
+    font-size: 1.2rem * 1.5 !important;
+  }
+}
+
+@media only screen and (min-width: 390px) {
+  .r-text-700 {
+    font-size: 1.224rem * 1.5 !important;
+  }
+}
+
+@media only screen and (min-width: 420px) {
+  .r-text-700 {
+    font-size: 1.248rem * 1.5 !important;
+  }
+}
+
+@media only screen and (min-width: 450px) {
+  .r-text-700 {
+    font-size: 1.272rem * 1.5 !important;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  .r-text-700 {
+    font-size: 1.296rem * 1.5 !important;
+  }
+}
+
+@media only screen and (min-width: 510px) {
+  .r-text-700 {
+    font-size: 1.32rem * 1.5 !important;
+  }
+}
+
+@media only screen and (min-width: 540px) {
+  .r-text-700 {
+    font-size: 1.344rem * 1.5 !important;
+  }
+}
+
+@media only screen and (min-width: 570px) {
+  .r-text-700 {
+    font-size: 1.368rem * 1.5 !important;
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .r-text-700 {
+    font-size: 1.392rem * 1.5 !important;
+  }
+}
+
+@media only screen and (min-width: 630px) {
+  .r-text-700 {
+    font-size: 1.416rem * 1.5 !important;
+  }
+}
+
+@media only screen and (min-width: 660px) {
+  .r-text-700 {
+    font-size: 1.44rem * 1.5 !important;
+  }
+}
+
+@media only screen and (min-width: 690px) {
+  .r-text-700 {
+    font-size: 1.464rem * 1.5 !important;
+  }
+}
+
+@media only screen and (min-width: 720px) {
+  .r-text-700 {
+    font-size: 1.488rem * 1.5 !important;
+  }
+}
+
+@media only screen and (min-width: 750px) {
+  .r-text-700 {
+    font-size: 1.512rem * 1.5 !important;
+  }
+}
+
+@media only screen and (min-width: 780px) {
+  .r-text-700 {
+    font-size: 1.536rem * 1.5 !important;
+  }
+}
+
+@media only screen and (min-width: 810px) {
+  .r-text-700 {
+    font-size: 1.56rem * 1.5 !important;
+  }
+}
+
+@media only screen and (min-width: 840px) {
+  .r-text-700 {
+    font-size: 1.584rem * 1.5 !important;
+  }
+}
+
+@media only screen and (min-width: 870px) {
+  .r-text-700 {
+    font-size: 1.608rem * 1.5 !important;
+  }
+}
+
+@media only screen and (min-width: 900px) {
+  .r-text-700 {
+    font-size: 1.632rem * 1.5 !important;
+  }
+}
+
+@media only screen and (min-width: 930px) {
+  .r-text-700 {
+    font-size: 1.656rem * 1.5 !important;
+  }
+}
+
+@media only screen and (min-width: 960px) {
+  .r-text-700 {
+    font-size: 1.68rem * 1.5 !important;
+  }
+}

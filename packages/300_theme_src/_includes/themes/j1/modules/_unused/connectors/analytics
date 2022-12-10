@@ -1,0 +1,60 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_includes/themes/j1/modules/connectors/analytics
+ #  Liquid CONNECTOR for Analytic Providers supported by J1 Theme
+ #
+ #  Product/Info:
+ #  http://jekyll.one
+ #
+ #  Copyright (C) 2022 Juergen Adams
+ #
+ #  J1 Theme is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign analytics           = site.data.j1_config.analytics.enabled %}
+{% assign analytics_page      = page.analytics.enabled %}
+{% assign analytics_provider  = site.data.j1_config.analytics.provider %}
+
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Check analytics settings from SITE configuration
+-------------------------------------------------------------------------------- {% endcomment %}
+<!-- [INFO   ] [j1.modules.connectors.analytics       ] [ Check analytics settings from SITE configuration ] -->
+<!-- [INFO   ] [j1.modules.connectors.analytics       ] [ detected analytics (site): {{analytics}} ] -->
+
+{% comment %} Check analytics settings from PAGE configuration
+-------------------------------------------------------------------------------- {% endcomment %}
+<!-- [INFO   ] [j1.modules.connectors.analytics       ] [ Check analytics settings from PAGE configuration ] -->
+<!-- [INFO   ] [j1.modules.connectors.analytics       ] [ detected analytics (page): {{page.analytics}} ] -->
+
+{% if analytics_page <> nil %}
+  <!-- [INFO   ] [j1.modules.connectors.analytics       ] [ overload analytics settings from PAGE ] -->
+  {% assign analytics = analytics_page %}
+{% endif %}
+
+{% if analytics %}
+  <!-- [INFO   ] [j1.modules.connectors.analytics       ] [ detected analytics provider (j1_config): {{analytics_provider}}} ] -->
+  <!-- [INFO   ] [j1.modules.connectors.analytics       ] [ start processing load region head, layout: {{page.layout}} ] -->
+  {% case analytics_provider %}
+    {% when "google" %}
+      <!-- [INFO   ] [j1.modules.connectors.analytics       ] [ place Google Analytics ] -->
+      {% include themes/{{site.template.name}}/modules/connectors/analytic/google-analytics.html %}
+    {% when "custom" %}
+      <!-- [INFO   ] [j1.modules.connectors.analytics       ] [ place Custom Provider ] -->
+      {% include themes/{{site.template.name}}/modules/connectors/analytic/custom-analytics.html %}
+  {% endcase %}
+
+{% endif %}
+<!-- [INFO   ] [j1.modules.connectors.analytics       ] [ end processing ] -->

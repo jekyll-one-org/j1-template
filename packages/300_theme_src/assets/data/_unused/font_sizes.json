@@ -1,0 +1,42 @@
+---
+regenerate:                             false
+---
+
+{% capture cache %}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/font_sizes.json
+ # Liquid JSON template to translate "logical" font size names into their
+ # HTML values (px|em|rem)
+ #
+ # Product/Info:
+ # http://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% assign font_sizes = site.data.font_sizes %}
+
+{
+  {% for font_size in font_sizes %}
+
+    {% if forloop.last %}
+    "{{font_size[0]}}": "{{font_size[1]}}"
+    {% else %}
+    "{{font_size[0]}}": "{{font_size[1]}}",
+    {% endif %}
+
+  {% endfor %}
+}
+{% endcapture %}
+
+{{ cache | strip_empty_lines }}
+{% assign cache = nil %}

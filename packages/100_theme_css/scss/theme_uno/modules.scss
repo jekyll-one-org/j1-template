@@ -1,0 +1,27 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/bootstrap/modules.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # NOTE: This is the (SASS) entry point for build-in theme MODULES
+ # -----------------------------------------------------------------------------
+*/
+
+@import "modules/cookiebar";
+@import "modules/enhanced-modals";
+@import "modules/galleries";
+@import "modules/navigator";
+@import "modules/rouge";
+
+@import "modules/searcher";
+
+@import "modules/tocbot";
+@import "modules/toccer";
+@import "modules/totop";

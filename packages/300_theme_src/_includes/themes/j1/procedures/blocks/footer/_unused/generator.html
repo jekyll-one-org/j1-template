@@ -1,0 +1,151 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/_includes/templates/j1/blocks/footer/generator.html
+ # Liquid TEMPLATE to create the footer for all pages
+ #
+ # Product/Info:
+ # http://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # NOTE: obsolete since loaded via AJAX from HTML data file
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{liquid_var | debug}}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture analytics%}themes/{{site.template.name}}/modules/connectors/analytics{% endcapture %}
+{% capture about_box %}themes/{{site.template.name}}/blocks/footer/boxes/about_box.proc{% endcapture %}
+{% capture news_box %}themes/{{site.template.name}}/blocks/footer/boxes/news_box.proc{% endcapture %}
+{% capture links_box %}themes/{{site.template.name}}/blocks/footer/boxes/links_box.proc{% endcapture %}
+{% capture contacts_box %}themes/{{site.template.name}}/blocks/footer/boxes/contacts_box.proc{% endcapture %}
+{% capture legal_statements %}themes/{{site.template.name}}/blocks/footer/boxes/legal_statements.proc{% endcapture %}
+{% capture social_media_icons %}themes/{{site.template.name}}/blocks/footer/boxes/social_media_icons.proc{% endcapture %}
+
+{% comment %} Process YML config data
+================================================================================ {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign data                  = site.data %}
+{% assign blocks                = data.blocks %}
+
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign footer_defaults       = blocks.defaults.footer.defaults %}
+{% assign footer_settings       = blocks.footer.settings %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign footer_options        = footer_defaults | merge: footer_settings %}
+
+{% if data.j1_config.analytics.enabled %}
+  {% include analytics %}
+{% endif %}
+
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign enabled_boxes = 0 %}
+
+<!-- Calculate number of enabled FooterBoxes -->
+{% for item in footer_options %}
+  {% if item.footer_box %}
+    {% for boxes in item.footer_box %}
+      {% for box in boxes %}
+          {% for property in box %}
+            {% if property.enabled %} {% assign enabled_boxes = enabled_boxes | plus:1 %} {% endif %}
+          {% endfor %}
+      {% endfor %}
+    {% endfor %}
+  {% endif %}
+{% endfor %}
+
+{% assign item = nil %}
+
+<!-- Set footer column width to: {{footer_box_width_md}} -->
+{% assign footer_box_width_md = 12 | divided_by:enabled_boxes %}
+
+<div id="j1-footer" class="footer-light-theme">
+
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+      {% for item in footer_options %}
+        {% for box in item.footer_box %}
+          {% for item in box %}
+
+            <!-- Extract box elements from hash (of boxes) -->
+            {% assign box_type            = item[1].type %}
+            {% assign box_enabled         = item[1].enabled %}
+
+            {% comment %} Unused
+            --------------------------------------------------------------------
+            {% assign title               = item[1].title %}
+            {% assign address             = item[1].address.enabled %}
+            {% assign address_1           = item[1].address.address_1 %}
+            {% assign address_2           = item[1].address.address_2 %}
+            {% assign phone               = item[1].phone.enabled %}
+            {% assign phone_1             = item[1].phone.phone_1 %}
+            {% assign phone_2             = item[1].phone.phone_2 %}
+            {% assign internet            = item[1].internet.enabled %}
+            {% assign mail                = item[1].internet.mail %}
+            {% assign www                 = item[1].internet.www %}
+            {% assign text                = item[1].text %}
+            {% assign align               = item[1].align %}
+            {% assign posts_category      = item[1].selected_category %}
+            {% assign max_posts           = item[1].max_posts %}
+            {% assign links               = item[1].links %} 
+            -------------------------------------------------------------------- {% endcomment %}
+
+            {% if box_type == 'AboutBox' and box_enabled %}
+              <!-- Process AboutBox -->
+              {% include {{about_box}} %}
+            {% endif %}
+
+            {% if box_type == 'NewsBox' and box_enabled %}
+             <!-- Process NewsBox -->
+             {% assign posts_collate = site.posts %}
+             {% include {{news_box}} category=posts_category max_posts=max_posts posts=posts_collate %}
+            {% endif %}
+
+            {% if box_type == 'LinksBox' and box_enabled %}
+              <!-- Process LinksBox -->
+              {% include {{links_box}} links=links %}
+            {% endif %}
+
+            {% if box_type == 'ContactsBox' and box_enabled %}
+              <!-- Process ContactsBox -->
+              {% include {{contacts_box}} %}
+            {% endif %}
+
+          {% endfor %}
+        {% endfor %}
+      {% endfor %}
+      </div> <!-- END row -->
+    </div><!-- END container -->
+  </div>
+
+  <div class="copyright">
+    <div class="container">
+      <div class="row">
+        <!-- Enable horizontal list using id #inline-->
+        <div class="col-md-10" id="inline">
+        {% include {{legal_statements}} footer_config=footer_ %}
+        </div>
+        <div class="col-md-2">
+        {% include {{social_media_icons}} footer_config=footer_ %}
+        </div>
+      </div> <!-- End Container -->
+    </div>
+  </div>  <!-- End Copyright -->
+
+</div>

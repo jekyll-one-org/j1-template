@@ -1,0 +1,23 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno_dark/modules/_country-flags.scss
+ #
+ # Product/Info:
+ # http://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # NOTE: Provides styles for the module J1 Toccer
+ # -----------------------------------------------------------------------------
+*/
+
+.country {
+  background-color: #e0e0e0;  // $grey-300
+}
+
+.country:hover {
+  background-color: #bdbdbd !important; // $grey-400
+}

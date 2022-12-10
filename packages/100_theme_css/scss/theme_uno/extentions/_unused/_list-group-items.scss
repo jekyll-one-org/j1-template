@@ -1,0 +1,90 @@
+/*
+// -----------------------------------------------------------------------------
+// ~/scss/theme_uno/bootstrap/extensions/_list-group-items.scss
+// Provides styles for the BS/J1 list groups (card-deck replacement)
+//
+// Product/Info:
+// https://jekyll.one
+//
+// Copyright (C) 2022 Juergen Adams
+//
+// J1 Theme is licensed under the MIT License.
+// See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+// -----------------------------------------------------------------------------
+*/
+
+// See: https://codepen.io/migli/pen/gOOmYLb
+
+// Content
+// -----------------------------------------------------------------------------
+
+.list-group-item {
+	width: 95%;
+	margin: 1% !important;
+}
+
+/* Media breakpoints
+-------------------------------------------------------------------------------- */
+@media only screen and (min-width: 576px) {
+  .list-group-item {
+  	&.items-auto {
+  		width: 47%;
+  	}
+		&.items-1 {
+  		width: 95%;
+  	}
+    &.items-2 {
+  		width: 47%;
+  	}
+		&.items-3 {
+			width: 47%;
+  		// width: 31.333%;
+  	}
+		&.items-4 {
+			width: 47%;
+  		// width: 23%;
+  	}
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .list-group-item {
+  	&.items-auto {
+  		width: 31.333%;
+  	}
+		&.items-1 {
+  		width: 95%;
+  	}
+		&.items-2 {
+  		width: 47%;
+  	}
+		&.items-3 {
+			width: 47%;
+  		// width: 31.333%;
+  	}
+		&.items-4 {
+			width: 47%;
+  		// width: 23%;
+  	}
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .list-group-item {
+    &.items-auto {
+      width: 23%;
+    }
+		&.items-1 {
+  		width: 95%;
+  	}
+		&.items-2 {
+  		width: 47%;
+  	}
+		&.items-3 {
+  		width: 31.333%;
+  	}
+		&.items-4 {
+  		width: 23%;
+  	}
+  }
+}

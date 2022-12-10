@@ -5,5 +5,5 @@ G:\Meine Tutorials\Videos\web-erzeugen
 
 == Web folder
 
-X:\j1\github\j1-template\packages\300_template_src\assets\videos\tutorials
+X:\j1\github\j1-template\packages\300_theme_src\assets\videos\tutorials
 

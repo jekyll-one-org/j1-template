@@ -1,0 +1,168 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/theme_switcher.yml
+# User configuration settings for J1 Theme Switcher
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2022 Juergen Adams
+#
+# J1 Theme is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+#
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# J1 Theme Switcher settings
+#
+#   enabled
+#   ----------------------------------------------------------------------------
+#   Enables|Disables the use of J1 Theme Switcher
+#
+#     values:                           boolean (true|false)
+#     default:                          false
+#
+#   debug
+#   ----------------------------------------------------------------------------
+#   Enables|Disables the console log
+#
+#     values:                           boolean (true|false)
+#     default:                          false
+#
+#   cssThemeLink
+#   ----------------------------------------------------------------------------
+#   The ID used for the bootstrap theme css file
+#
+#     values:                           string
+#     default:                          bootstrapTheme
+#
+#   saveToCookie
+#   ----------------------------------------------------------------------------
+#   If true, a cookie will be saved with the currently selected theme
+#
+#     values:                           boolean (true|false)
+#     default:                          true
+#
+# cookieThemeName
+#   The name of the cookie to be used to store the theme name
+#
+#   values:                             string
+#   default:                            bootstrapTheme.name
+#
+#   cookieDefaultThemeName
+#   ----------------------------------------------------------------------------
+#   The name of the cookie to be used to store the default theme name
+#
+#     values:                           string
+#     default:                          bootstrapDefaultTheme.name
+#
+#   cookieThemeCss
+#   ----------------------------------------------------------------------------
+#   The name of the cookie to be used to store the css file name
+#   used for the theme
+#
+#     values:                           string
+#     default:                          bootstrapTheme.css
+#
+#   cookieExpiration
+#   ----------------------------------------------------------------------------
+#   The number of days the cookies should expire
+#
+#     values:                           integer
+#     default:                          7
+#
+#   cookiePath
+#   ----------------------------------------------------------------------------
+#   The path the cookie should be stored
+#
+#     values:                           string (path)
+#     default:                          /
+#
+#   defaultCssFile
+#   ----------------------------------------------------------------------------
+#   The default css file the plugin should use if it can not load
+#   the themes from Bootswatch
+#
+#     values:                           string (URI)
+#     default:                          https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css
+#
+#   bootswatchApiUrl
+#   ----------------------------------------------------------------------------
+#   The url for the bootswatch api
+#
+#     values:                           string (URI)
+#     default:                          http://api.bootswatch.com
+#
+#   bootswatchApiVersion
+#   ----------------------------------------------------------------------------
+#   The version of the bootswatch api to use
+#
+#     values:                           integer
+#     default:                          3
+#
+#   localFeed
+#   ----------------------------------------------------------------------------
+#   The path to a JSON file that contains the themes you want to use.
+#   If this parameter is used, the control will be loaded the themes
+#   from here and not go to the bootswatchApiUrl. A sample of the json
+#   file can be found at themes.json
+#
+#     values:                           string
+#     default:                          empty string
+#
+#   excludeBootswatch
+#   ----------------------------------------------------------------------------
+#   Comma separated list of BootSwatch names (e.g. Slate,Yeti) that
+#   should be excluded from the rendered <ul> or <select>
+#
+#     values:                           string
+#     default:                          empty string
+#
+#   hideOnReload
+#   ----------------------------------------------------------------------------
+#   Number of milliseconds (msec) the current page is hidden (display: none)
+#   to prevent "DOM flicker" aka "FOUC" (Flash of unstyled content)  while
+#   the css file is loaded|activated
+#
+#     values:                           integer
+#     default:                          150
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# About this configuration (used for J1 CC only)
+#
+about_config:
+
+  title:                                WebHook
+  scope:                                User settings
+  location:                             _data/modules/theme_switcher.yml
+
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+settings:
+
+  enabled:                                true
+  debug:                                  false
+  previewPage:                            /pages/public/previewer/current_theme/
+  default_theme_css:                      /assets/themes/j1/core/css/uno.css
+  default_theme_name:                     Uno
+  default_theme_author:                   J1 Team
+  default_theme_link:                     https://jekyll.one/
+  menu_icon_family:                       FontAwesome
+  menu_icon_color:                        rgba_darken
+  menu_icon_size:                         large
+  cssThemeLink:                           bootstrapTheme
+  saveToCookie:                           true
+  defaultCssFile:                         "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+  bootswatchApiUrl:                       "https://bootswatch.com/api"
+  bootswatchApiVersion:                   4
+  loadFromBootswatch:                     true
+  localFeed:                              /assets/data/themes.json
+  hideOnReload:                           150
+  excludeBootswatch:                      Sketchy
+  includeBootswatch:                      /assets/themes/j1/core/css/theme_extensions.css
+  skipIncludeBootswatch:                  Uno
+
+# END config
+# ------------------------------------------------------------------------------

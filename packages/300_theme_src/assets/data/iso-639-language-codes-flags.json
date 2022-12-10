@@ -1,0 +1,233 @@
+---
+regenerate:                             true
+exclude_from_search:                    true
+---
+
+{% capture cache %}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/iso-639-language-codes-flags.json
+ # The Liquid template is used by J1 Translator module to create dropdown
+ # elements DYNAMICALLY
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright · C) 2021 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # NOTE:
+ # Be carefull change the Liquid code. If the code is changed, check the
+ # integrity of the JSON data created. Invalid JSON data will cause the
+ # the J1 Translator module to fail.
+ # -----------------------------------------------------------------------------
+ # NOTE:
+ # Google translator, language codes
+ #  https://gist.github.com/JT5D/a2fdfefa80124a06f5a9
+ # ISO-639 language codes
+ #  https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes
+ #  http://www.lingoes.net/en/translator/langcode.htm
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #   {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment = site.environment %}
+
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+{
+
+  "iso-639-languages":
+  [
+    {"imageCss": "flag-icon flag-icon-za     rectangle size-md", "value": "af",    "text": "Afrikaans · South Africa"},
+    {"imageCss": "flag-icon flag-icon-gh     rectangle size-md", "value": "ak",    "text": "Akan · Ghana"},
+    {"imageCss": "flag-icon flag-icon-al     rectangle size-md", "value": "sq",    "text": "Albanian · Albania"},
+    {"imageCss": "flag-icon flag-icon-et     rectangle size-md", "value": "am",    "text": "Amharic · Ethiopia"},
+    {"imageCss": "flag-icon flag-icon-dz     rectangle size-md", "value": "ar",    "text": "Arabic · Algeria"},
+    {"imageCss": "flag-icon flag-icon-bh     rectangle size-md", "value": "ar",    "text": "Arabic · Bahrain"},
+    {"imageCss": "flag-icon flag-icon-td     rectangle size-md", "value": "ar",    "text": "Arabic · Chad"},
+    {"imageCss": "flag-icon flag-icon-km     rectangle size-md", "value": "ar",    "text": "Arabic · Comoros"},
+    {"imageCss": "flag-icon flag-icon-dj     rectangle size-md", "value": "ar",    "text": "Arabic · Djibouti"},
+    {"imageCss": "flag-icon flag-icon-eg     rectangle size-md", "value": "ar",    "text": "Arabic · Egypt"},
+    {"imageCss": "flag-icon flag-icon-iq     rectangle size-md", "value": "ar",    "text": "Arabic · Iraq"},
+    {"imageCss": "flag-icon flag-icon-jo     rectangle size-md", "value": "ar",    "text": "Arabic · Jordan"},
+    {"imageCss": "flag-icon flag-icon-kw     rectangle size-md", "value": "ar",    "text": "Arabic · Kuwait"},
+    {"imageCss": "flag-icon flag-icon-lb     rectangle size-md", "value": "ar",    "text": "Arabic · Lebanon"},
+    {"imageCss": "flag-icon flag-icon-ly     rectangle size-md", "value": "ar",    "text": "Arabic · Libya"},
+    {"imageCss": "flag-icon flag-icon-mr     rectangle size-md", "value": "ar",    "text": "Arabic · Mauritania"},
+    {"imageCss": "flag-icon flag-icon-ma     rectangle size-md", "value": "ar",    "text": "Arabic · Morocco"},
+    {"imageCss": "flag-icon flag-icon-om     rectangle size-md", "value": "ar",    "text": "Arabic · Oman"},
+    {"imageCss": "flag-icon flag-icon-ps     rectangle size-md", "value": "ar",    "text": "Arabic · Palestine"},
+    {"imageCss": "flag-icon flag-icon-qa     rectangle size-md", "value": "ar",    "text": "Arabic · Qatar"},
+    {"imageCss": "flag-icon flag-icon-sa     rectangle size-md", "value": "ar",    "text": "Arabic · Saudi Arabia"},
+    {"imageCss": "flag-icon flag-icon-so     rectangle size-md", "value": "ar",    "text": "Arabic · Somalia"},
+    {"imageCss": "flag-icon flag-icon-sd     rectangle size-md", "value": "ar",    "text": "Arabic · Sudan"},
+    {"imageCss": "flag-icon flag-icon-sy     rectangle size-md", "value": "ar",    "text": "Arabic · Syria"},
+    {"imageCss": "flag-icon flag-icon-tn     rectangle size-md", "value": "ar",    "text": "Arabic · Tunisia"},
+    {"imageCss": "flag-icon flag-icon-ae     rectangle size-md", "value": "ar",    "text": "Arabic · United Arab Emirates"},
+    {"imageCss": "flag-icon flag-icon-ye     rectangle size-md", "value": "ar",    "text": "Arabic · Yemen"},
+    {"imageCss": "flag-icon flag-icon-tz     rectangle size-md", "value": "ar",    "text": "Arabic · Zanzibar"},
+    {"imageCss": "flag-icon flag-icon-eh     rectangle size-md", "value": "ar",    "text": "Arabic · Western Sahara"},
+    {"imageCss": "flag-icon flag-icon-am     rectangle size-md", "value": "hy",    "text": "Armenian · Armenia"},
+    {"imageCss": "flag-icon flag-icon-az     rectangle size-md", "value": "az",    "text": "Azerbaijani · Azerbaijan"},
+    {"imageCss": "flag-icon flag-icon-es     rectangle size-md", "value": "eu",    "text": "Basque · Spain"},
+    {"imageCss": "flag-icon flag-icon-by     rectangle size-md", "value": "be",    "text": "Belarusian · Belarus"},
+    {"imageCss": "flag-icon flag-icon-zm     rectangle size-md", "value": "bem",   "text": "Bemba · Zambia"},
+    {"imageCss": "flag-icon flag-icon-in     rectangle size-md", "value": "bn",    "text": "Bengali · India"},
+    {"imageCss": "flag-icon flag-icon-in     rectangle size-md", "value": "bh",    "text": "Bihari · India"},
+    {"imageCss": "flag-icon flag-icon-ba     rectangle size-md", "value": "bs",    "text": "Bosnian · Bosnia and Herzegovina"},
+    {"imageCss": "flag-icon flag-icon-fr     rectangle size-md", "value": "br",    "text": "Breton · France"},
+    {"imageCss": "flag-icon flag-icon-bg     rectangle size-md", "value": "bg",    "text": "Bulgarian · Bulgaria"},
+    {"imageCss": "flag-icon flag-icon-kh     rectangle size-md", "value": "km",    "text": "Cambodian · Cambodia"},
+    {"imageCss": "flag-icon flag-icon-es     rectangle size-md", "value": "ca",    "text": "Catalan · Spain"},
+    {"imageCss": "flag-icon flag-icon-us     rectangle size-md", "value": "chr",   "text": "Cherokee · United States"},
+    {"imageCss": "flag-icon flag-icon-mz     rectangle size-md", "value": "ny",    "text": "Chichewa · Mozambique"},
+    {"imageCss": "flag-icon flag-icon-cn     rectangle size-md", "value": "zh-CN", "text": "Chinese · Simplified"},
+    {"imageCss": "flag-icon flag-icon-cn     rectangle size-md", "value": "zh-TW", "text": "Chinese · Traditional"},
+    {"imageCss": "flag-icon flag-icon-fr     rectangle size-md", "value": "co",    "text": "Corsican · France"},
+    {"imageCss": "flag-icon flag-icon-hr     rectangle size-md", "value": "hr",    "text": "Croatian · Croatia"},
+    {"imageCss": "flag-icon flag-icon-cz     rectangle size-md", "value": "cs",    "text": "Czech · Czech Republic"},
+    {"imageCss": "flag-icon flag-icon-dk     rectangle size-md", "value": "da",    "text": "Danish · Denmark"},
+    {"imageCss": "flag-icon flag-icon-nl     rectangle size-md", "value": "nl",    "text": "Dutch · Netherlands"},
+    {"imageCss": "flag-icon flag-icon-gb     rectangle size-md", "value": "en",    "text": "English · United Kingdom"},
+    {"imageCss": "flag-icon flag-icon-ee     rectangle size-md", "value": "et",    "text": "Estonian · Estonia"},
+    {"imageCss": "flag-icon flag-icon-gh     rectangle size-md", "value": "ee",    "text": "Ewe · Ghana"},
+    {"imageCss": "flag-icon flag-icon-tg     rectangle size-md", "value": "ee",    "text": "Ewe · Togo"},
+    {"imageCss": "flag-icon flag-icon-fo     rectangle size-md", "value": "fo",    "text": "Faroese · Faroe Islands"},
+    {"imageCss": "flag-icon flag-icon-ph     rectangle size-md", "value": "tl",    "text": "Filipino · Philippines"},
+    {"imageCss": "flag-icon flag-icon-fi     rectangle size-md", "value": "fi",    "text": "Finnish · Finland"},
+    {"imageCss": "flag-icon flag-icon-fr     rectangle size-md", "value": "fr",    "text": "French · French"},
+    {"imageCss": "flag-icon flag-icon-de     rectangle size-md", "value": "fy",    "text": "Frisian · Germany"},
+    {"imageCss": "flag-icon flag-icon-gh     rectangle size-md", "value": "gaa",   "text": "Ga · Ghana"},
+    {"imageCss": "flag-icon flag-icon-es     rectangle size-md", "value": "gl",    "text": "Galician · Spain"},
+    {"imageCss": "flag-icon flag-icon-ge     rectangle size-md", "value": "ka",    "text": "Georgian · Georgia"},
+    {"imageCss": "flag-icon flag-icon-de     rectangle size-md", "value": "de",    "text": "German · Germany"},
+    {"imageCss": "flag-icon flag-icon-gr     rectangle size-md", "value": "el",    "text": "Greek · Greece"},
+    {"imageCss": "flag-icon flag-icon-in     rectangle size-md", "value": "gn",    "text": "Guarani · India"},
+    {"imageCss": "flag-icon flag-icon-za     rectangle size-md", "value": "gu",    "text": "Gujarati · South Africa"},
+    {"imageCss": "flag-icon flag-icon-ht     rectangle size-md", "value": "ht",    "text": "Haitian Creole · Haiti"},
+    {"imageCss": "flag-icon flag-icon-ng     rectangle size-md", "value": "ha",    "text": "Hausa · Nigeria "},
+    {"imageCss": "flag-icon flag-icon-us     rectangle size-md", "value": "haw",   "text": "Hawaiian · United States"},
+    {"imageCss": "flag-icon flag-icon-il     rectangle size-md", "value": "iw",    "text": "Hebrew · Israel"},
+    {"imageCss": "flag-icon flag-icon-in     rectangle size-md", "value": "hi",    "text": "Hindi · India"},
+    {"imageCss": "flag-icon flag-icon-hu     rectangle size-md", "value": "hu",    "text": "Hungarian · Hungary"},
+    {"imageCss": "flag-icon flag-icon-is     rectangle size-md", "value": "is",    "text": "Icelandic · Iceland"},
+    {"imageCss": "flag-icon flag-icon-ng     rectangle size-md", "value": "ig",    "text": "Igbo · Nigeria"},
+    {"imageCss": "flag-icon flag-icon-id     rectangle size-md", "value": "id",    "text": "Indonesian · Indonesia"},
+    {"imageCss": "flag-icon flag-icon-ie     rectangle size-md", "value": "ga",    "text": "Irish · Ireland"},
+    {"imageCss": "flag-icon flag-icon-it     rectangle size-md", "value": "it",    "text": "Italian · Italy"},
+    {"imageCss": "flag-icon flag-icon-jp     rectangle size-md", "value": "ja",    "text": "Japanese · Japan"},
+    {"imageCss": "flag-icon flag-icon-id     rectangle size-md", "value": "jw",    "text": "Javanese · Indonesia"},
+    {"imageCss": "flag-icon flag-icon-in     rectangle size-md", "value": "kn",    "text": "Kannada · India"},
+    {"imageCss": "flag-icon flag-icon-kz     rectangle size-md", "value": "kk",    "text": "Kazakh · Kazakhstan"},
+    {"imageCss": "flag-icon flag-icon-rw     rectangle size-md", "value": "rw",    "text": "Kinyarwanda · Rwanda"},
+    {"imageCss": "flag-icon flag-icon-bi     rectangle size-md", "value": "rn",    "text": "Kirundi · Burundi"},
+    {"imageCss": "flag-icon flag-icon-cd     rectangle size-md", "value": "kg",    "text": "Kongo · Democratic Republic of the Congo"},
+    {"imageCss": "flag-icon flag-icon-kp     rectangle size-md", "value": "ko",    "text": "Korean · North Korea"},
+    {"imageCss": "flag-icon flag-icon-kr     rectangle size-md", "value": "ko",    "text": "Korean · South Korea"},
+    {"imageCss": "flag-icon flag-icon-sl     rectangle size-md", "value": "kri",   "text": "Krio · Sierra Leone"},
+    {"imageCss": "flag-icon flag-icon-tr     rectangle size-md", "value": "ku",    "text": "Kurdish · Turkey"},
+    {"imageCss": "flag-icon flag-icon-kg     rectangle size-md", "value": "ky",    "text": "Kyrgyz · Kyrgyzstan"},
+    {"imageCss": "flag-icon flag-icon-la     rectangle size-md", "value": "lo",    "text": "Laothian · Laos"},
+    {"imageCss": "flag-icon flag-icon-lv     rectangle size-md", "value": "lv",    "text": "Latvian · Latvia"},
+    {"imageCss": "flag-icon flag-icon-cd     rectangle size-md", "value": "ln",    "text": "Lingala · Democratic Republic of the Congo"},
+    {"imageCss": "flag-icon flag-icon-lt     rectangle size-md", "value": "lt",    "text": "Lithuanian · Lithuania"},
+    {"imageCss": "flag-icon flag-icon-zm     rectangle size-md", "value": "loz",   "text": "Lozi · Zambia"},
+    {"imageCss": "flag-icon flag-icon-ug     rectangle size-md", "value": "lg",    "text": "Luganda · Uganda"},
+    {"imageCss": "flag-icon flag-icon-ss     rectangle size-md", "value": "ach",   "text": "Luo · South Sudan"},
+    {"imageCss": "flag-icon flag-icon-ke     rectangle size-md", "value": "ach",   "text": "Luo · Kenya"},
+    {"imageCss": "flag-icon flag-icon-mk     rectangle size-md", "value": "mk",    "text": "Macedonian · Republic of North Macedonia"},
+    {"imageCss": "flag-icon flag-icon-mg     rectangle size-md", "value": "mg",    "text": "Malagasy · Madagascar"},
+    {"imageCss": "flag-icon flag-icon-mt     rectangle size-md", "value": "mg",    "text": "Maltese · Malta"},
+    {"imageCss": "flag-icon flag-icon-my     rectangle size-md", "value": "ms",    "text": "Malay · Malaysia"},
+    {"imageCss": "flag-icon flag-icon-in     rectangle size-md", "value": "ml",    "text": "Malayalam · India"},
+    {"imageCss": "flag-icon flag-icon-mt     rectangle size-md", "value": "mt",    "text": "Maltese · Malta"},
+    {"imageCss": "flag-icon flag-icon-nz     rectangle size-md", "value": "mi",    "text": "Maori · New Zealand"},
+    {"imageCss": "flag-icon flag-icon-in     rectangle size-md", "value": "mr",    "text": "Marathi · India"},
+    {"imageCss": "flag-icon flag-icon-mu     rectangle size-md", "value": "mfe",   "text": "Mauritian Creole · Mauritius"},
+    {"imageCss": "flag-icon flag-icon-md     rectangle size-md", "value": "mo",    "text": "Moldavian · Moldova"},
+    {"imageCss": "flag-icon flag-icon-mn     rectangle size-md", "value": "mn",    "text": "Mongolian · Mongolia"},
+    {"imageCss": "flag-icon flag-icon-me     rectangle size-md", "value": "sr-ME", "text": "Montenegrin · Montenegro"},
+    {"imageCss": "flag-icon flag-icon-np     rectangle size-md", "value": "ne",    "text": "Nepali · Nepal"},
+    {"imageCss": "flag-icon flag-icon-ng     rectangle size-md", "value": "pcm",   "text": "Nigerian Pidgin · Nigeria"},
+    {"imageCss": "flag-icon flag-icon-za     rectangle size-md", "value": "nso",   "text": "Northern Sotho · South Africa"},
+    {"imageCss": "flag-icon flag-icon-no     rectangle size-md", "value": "no",    "text": "Norwegian · Norway"},
+    {"imageCss": "flag-icon flag-icon-no     rectangle size-md", "value": "nn",    "text": "Norwegian · Nynorsk"},
+    {"imageCss": "flag-icon flag-icon-es     rectangle size-md", "value": "oc",    "text": "Occitan · Spain"},
+    {"imageCss": "flag-icon flag-icon-in     rectangle size-md", "value": "or",    "text": "Oriya · India"},
+    {"imageCss": "flag-icon flag-icon-et     rectangle size-md", "value": "om",    "text": "Oromo · Ethiopia"},
+    {"imageCss": "flag-icon flag-icon-af     rectangle size-md", "value": "ps",    "text": "Pashto · Afghanistan"},
+    {"imageCss": "flag-icon flag-icon-ir     rectangle size-md", "value": "fa",    "text": "Persian · Iran"},
+    {"imageCss": "flag-icon flag-icon-pl     rectangle size-md", "value": "pl",    "text": "Polish · Poland"},
+    {"imageCss": "flag-icon flag-icon-pt     rectangle size-md", "value": "pt",    "text": "Portuguese · Portugal"},
+    {"imageCss": "flag-icon flag-icon-pt     rectangle size-md", "value": "pt-BR", "text": "Portuguese · Brazil"},
+    {"imageCss": "flag-icon flag-icon-pt     rectangle size-md", "value": "pt-PT", "text": "Portuguese · Portugal"},
+    {"imageCss": "flag-icon flag-icon-in     rectangle size-md", "value": "pa",    "text": "Punjabi · India"},
+    {"imageCss": "flag-icon flag-icon-bo     rectangle size-md", "value": "qu",    "text": "Quechua · Bolivia"},
+    {"imageCss": "flag-icon flag-icon-ro     rectangle size-md", "value": "ro",    "text": "Romanian · Romania"},
+    {"imageCss": "flag-icon flag-icon-ch     rectangle size-md", "value": "rm",    "text": "Romansh · Switzerland"},
+    {"imageCss": "flag-icon flag-icon-ug     rectangle size-md", "value": "nyn",   "text": "Runyakitara · Uganda"},
+    {"imageCss": "flag-icon flag-icon-ru     rectangle size-md", "value": "ru",    "text": "Russian · Russia"},
+    {"imageCss": "flag-icon flag-icon-gb     rectangle size-md", "value": "gd",    "text": "Scots Gaelic · United Kingdom"},
+    {"imageCss": "flag-icon flag-icon-rs     rectangle size-md", "value": "sr",    "text": "Serbian · Serbia"},
+    {"imageCss": "flag-icon flag-icon-hr     rectangle size-md", "value": "sh",    "text": "Serbo-Croatian · Croatia"},
+    {"imageCss": "flag-icon flag-icon-ls     rectangle size-md", "value": "st",    "text": "Sesotho · Lesotho"},
+    {"imageCss": "flag-icon flag-icon-za     rectangle size-md", "value": "tn",    "text": "Setswana · South Africa"},
+    {"imageCss": "flag-icon flag-icon-sc     rectangle size-md", "value": "crs",   "text": "Seychellois Creole · Seychelles"},
+    {"imageCss": "flag-icon flag-icon-zw     rectangle size-md", "value": "sn",    "text": "Shona · Zimbabwe"},
+    {"imageCss": "flag-icon flag-icon-in     rectangle size-md", "value": "sd",    "text": "Sindhi · India"},
+    {"imageCss": "flag-icon flag-icon-lk     rectangle size-md", "value": "si",    "text": "Sinhalese · Sri Lanka"},
+    {"imageCss": "flag-icon flag-icon-sk     rectangle size-md", "value": "sk",    "text": "Slovak · Slovakia"},
+    {"imageCss": "flag-icon flag-icon-si     rectangle size-md", "value": "sl",    "text": "Slovenian · Slovenia"},
+    {"imageCss": "flag-icon flag-icon-so     rectangle size-md", "value": "so",    "text": "Somali · Somalia"},
+    {"imageCss": "flag-icon flag-icon-es     rectangle size-md", "value": "es",    "text": "Spanish · Spain"},
+    {"imageCss": "flag-icon flag-icon-es     rectangle size-md", "value": "es-419","text": "Spanish · Latin American"},
+    {"imageCss": "flag-icon flag-icon-sd     rectangle size-md", "value": "su",    "text": "Sundanese · Sudan"},
+    {"imageCss": "flag-icon flag-icon-tz     rectangle size-md", "value": "sw",    "text": "Swahili · Tanzania"},
+    {"imageCss": "flag-icon flag-icon-se     rectangle size-md", "value": "sv",    "text": "Swedish · Sweden"},
+    {"imageCss": "flag-icon flag-icon-tj     rectangle size-md", "value": "tg",    "text": "Tajik · Tajikistan"},
+    {"imageCss": "flag-icon flag-icon-in     rectangle size-md", "value": "ta",    "text": "Tamil · India"},
+    {"imageCss": "flag-icon flag-icon-ru     rectangle size-md", "value": "tt",    "text": "Tatar · Russia"},
+    {"imageCss": "flag-icon flag-icon-in     rectangle size-md", "value": "te",    "text": "Telugu · India"},
+    {"imageCss": "flag-icon flag-icon-th     rectangle size-md", "value": "th",    "text": "Thai · Thailand"},
+    {"imageCss": "flag-icon flag-icon-et     rectangle size-md", "value": "ti",    "text": "Tigrinya · Ethiopia"},
+    {"imageCss": "flag-icon flag-icon-to     rectangle size-md", "value": "to",    "text": "Tonga · Tonga"},
+    {"imageCss": "flag-icon flag-icon-cg     rectangle size-md", "value": "lua",   "text": "Tshiluba · Congo"},
+    {"imageCss": "flag-icon flag-icon-mw     rectangle size-md", "value": "tum",   "text": "Tumbuka · Malawi"},
+    {"imageCss": "flag-icon flag-icon-tr     rectangle size-md", "value": "tr",    "text": "Turkish · Turkey"},
+    {"imageCss": "flag-icon flag-icon-tm     rectangle size-md", "value": "tk",    "text": "Turkmen · Turkmenistan"},
+    {"imageCss": "flag-icon flag-icon-gh     rectangle size-md", "value": "tw",    "text": "Twi · Ghana"},
+    {"imageCss": "flag-icon flag-icon-cn     rectangle size-md", "value": "ug",    "text": "Uighur · China"},
+    {"imageCss": "flag-icon flag-icon-ua     rectangle size-md", "value": "uk",    "text": "Ukrainian · Ukraine"},
+    {"imageCss": "flag-icon flag-icon-pk     rectangle size-md", "value": "ur",    "text": "Urdu · Pakistan"},
+    {"imageCss": "flag-icon flag-icon-uz     rectangle size-md", "value": "uz",    "text": "Uzbek · Uzbekistan"},
+    {"imageCss": "flag-icon flag-icon-vn     rectangle size-md", "value": "vi",    "text": "Vietnamese · Vietnam"},
+    {"imageCss": "flag-icon flag-icon-gb-wls rectangle size-md", "value": "cy",    "text": "Welsh · Wales"},
+    {"imageCss": "flag-icon flag-icon-gm     rectangle size-md", "value": "wo",    "text": "Wolof · Gambia"},
+    {"imageCss": "flag-icon flag-icon-za     rectangle size-md", "value": "xh",    "text": "Xhosa · South Africa"},
+    {"imageCss": "flag-icon flag-icon-il     rectangle size-md", "value": "yi",    "text": "Yiddish · Israel"},
+    {"imageCss": "flag-icon flag-icon-ng     rectangle size-md", "value": "yo",    "text": "Yoruba · Nigeria"},
+    {"imageCss": "flag-icon flag-icon-za     rectangle size-md", "value": "zu",    "text": "Zulu · South Africa"}
+  ]
+
+}
+
+{% endcapture %}
+{% if production %}
+  {{ cache | minifyJSON }}
+{% else %}
+  {{ cache | strip_empty_lines }}
+{% endif %}
+{% assign cache = nil %}

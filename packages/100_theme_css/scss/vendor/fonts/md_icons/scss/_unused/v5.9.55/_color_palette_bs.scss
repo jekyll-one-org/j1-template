@@ -1,0 +1,92 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/vendor/fonts/md_icons/scss/_color_palette_bs.scss
+ # Bootstrap Color Palette for MD Icons v5.9.55
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+@import "../../../../theme_uno/variables/colors.scss";
+
+
+$theme-color-primary:                   $blue;
+$theme-color-secondary:                 $blue-grey;
+$theme-color-success:                   $green;
+$theme-color-info:                      $cyan;
+$theme-color-warning:                   $yellow;
+$theme-color-danger:                    $red;
+$theme-color-light:                     $grey-200;
+$theme-color-dark:                      $grey-800;
+$theme-color-white:                     $white;
+$theme-color-black:                     $black;
+
+.mdi-bs-primary {
+  color: $theme-color-primary;
+}
+a.mdi-bs-primary:hover,
+a.mdi-bs-primary:focus {
+  color: $blue-900;
+}
+
+.mdi-bs-secondary {
+  color: $theme-color-secondary;
+}
+a.mdi-bs-secondary:hover,
+a.mdi-bs-secondary:focus {
+  color: $blue-grey-900;
+}
+
+.mdi-bs-success {
+  color: $theme-color-success;
+}
+a.mdi-bs-success:hover,
+a.mdi-bs-success:focus {
+  color: $green-900;
+}
+
+.mdi-bs-info {
+  color: $theme-color-info;
+}
+a.mdi-bs-info:hover,
+a.mdi-bs-info:focus {
+  color: $cyan-900;
+}
+
+.mdi-bs-warning {
+  color: $theme-color-warning;
+}
+a.mdi-bs-warning:hover,
+a.mdi-bs-warning:focus {
+  color: $yellow-900;
+}
+
+.mdi-bs-danger {
+  color: $theme-color-danger;
+}
+a.mdi-bs-danger:hover,
+a.mdi-bs-danger:focus {
+  color: $red-900;
+}
+
+.mdi-bs-white {
+  color: $theme-color-white;
+}
+a.mdi-bs-white:hover,
+a.mdi-bs-white:focus {
+  color: $grey-100;
+}
+
+.mdi-bs-black {
+  color: $theme-color-black;
+}
+a.mdi-bs-black:hover,
+a.mdi-bs-black:focus {
+  color: $grey-100;
+}

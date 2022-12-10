@@ -1,0 +1,36 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/100_theme_css/scss/theme_uno_dark/bootstrap/_links.scss
+ # Provides custom styles and overloads
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+a {
+  text-decoration: none;
+  color: $gray-300 !important;
+  // font-weight: 500 !important;
+}
+
+a:hover {
+  text-decoration: none;
+  color: $gray-600 !important;
+}
+
+li > a {
+  color: #e0e0e0 !important;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+}
+
+li > a:hover {
+  color: #757575 !important;
+  font-weight: 500 !important;
+}

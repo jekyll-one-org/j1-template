@@ -1,0 +1,35 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/extensions/sticky.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ # https://github.com/wilddeer/stickyfill
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ #  J1 Theme is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ #
+ # -----------------------------------------------------------------------------
+ # TODO:
+ # For style sticky, the top offset (top:) should be set by JS dynamically
+ #
+ # -----------------------------------------------------------------------------
+*/
+
+@media only screen and (min-width: 993px) {
+  .sticky {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 100px;
+    align-self: flex-start;
+  }
+
+  /* Clearfix */
+  .sticky:before,
+  .sticky:after {
+      content: '';
+      display: table;
+  }
+}

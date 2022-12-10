@@ -1,10 +1,10 @@
-site@2020.0.25 lint:link_es_conf D:\j1\github\j1-template\packages\400_template_site
+site@2020.0.25 lint:link_es_conf D:\j1\github\j1-template\packages\400_theme_site
 > shx rm -f _site/assets/themes/j1/adapter/js/.eslintrc.json && lnk -s .eslintrc.json ./_site/assets/themes/j1/adapter/js
 
 info Visit https://yarnpkg.com/en/docs/cli/run for documentation about this command.
 
 lerna ERR! yarn run rebuild stderr:
-ERR! lnk EPERM: operation not permitted, symlink '..\..\..\..\..\..\.eslintrc.json' -> 'D:\j1\github\j1-template\packages\400_template_site\_site\assets\themes\j1\adapter\js\.eslintrc.json'
+ERR! lnk EPERM: operation not permitted, symlink '..\..\..\..\..\..\.eslintrc.json' -> 'D:\j1\github\j1-template\packages\400_theme_site\_site\assets\themes\j1\adapter\js\.eslintrc.json'
 
 see: https://github.com/nodejs/node/issues/18518
 

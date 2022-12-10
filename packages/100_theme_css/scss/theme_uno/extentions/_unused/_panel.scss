@@ -1,0 +1,36 @@
+/*
+// -----------------------------------------------------------------------------
+// ~/scss/theme_uno/bootstrap/extensions/_panel.scss
+// Provides all general styles for J1 Theme Panel
+//
+// Product/Info:
+// https://jekyll.one
+//
+// Copyright (C) 2022 Juergen Adams
+//
+// J1 Theme is licensed under the MIT License.
+// See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+// -----------------------------------------------------------------------------
+// Panel Block
+// -----------------------------------------------------------------------------
+*/
+
+.panel-fluid {
+  width: 100%;
+  padding: unset !important;
+  margin: unset !important;
+}
+
+.j1-panel-block.container, .j1-panel-block.container-fluid {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+// Media Queries
+// -----------------------------------------------------------------------------
+@media screen and (max-width: 768px) {
+  .j1-panel-block.row {
+    margin-left: .5rem !important;
+    margin-right: .5rem !important;
+  }
+}

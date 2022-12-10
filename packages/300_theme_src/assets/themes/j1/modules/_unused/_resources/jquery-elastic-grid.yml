@@ -1,0 +1,54 @@
+# ------------------------------------------------------------------------------
+# ~/_data/resources/resources.yml
+# Configuration data to specify ALL the resources used by a site|layout
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2022 Juergen Adams
+#
+# J1 Theme is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+# ------------------------------------------------------------------------------
+# NOTE:
+#   By J1 Theme, "Liquid Procedures" are being used intensively. To load
+#   HTML data for a layout, the loader procedure places the data based this
+#   YAML data file into the REGION specified with a LANE.
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# RESOURCE configuration settings
+#
+resources:
+
+  # ----------------------------------------------------------------------------
+  # ElasticGrid. JS API to create image-based portfolios (galleries)
+  #
+  - name:                               ElasticGrid
+    resource:
+      enabled:                          true
+
+      id:                               elasticgrid
+      comment:                          Module ElasticGrid
+      region:                           head
+      layout:                           [ page, post ]
+      required:                         ondemand
+      preload:                          false
+      script_load:                      sync
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            [ modules/jquery-elastic-grid/css/elastic_grid ]
+        files:                          [
+                                          modules/jquery-elastic-grid/js/classie.js,
+                                          modules/jquery-elastic-grid/js/modernizr.custom.js,
+                                          modules/jquery-elastic-grid/js/jquery.elastislide.js,
+                                          modules/jquery-elastic-grid/js/jquery.hoverdir.js,
+#                                         modules/jquery-elastic-grid/js/elastic_grid.encode.js,
+                                          modules/jquery-elastic-grid/js/elastic_grid.js
+                                        ]
+        js:                             []
+        init_function:                  []
+
+# ------------------------------------------------------------------------------
+# END config

@@ -1,0 +1,79 @@
+---
+regenerate:                             true
+exclude_from_search:                    true
+---
+
+{% capture cache %}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/themes.json
+ # The Liquid template themes.json is used by the Theme Switcher to locate
+ # the CSS files to be loaded on a switch for a specific theme
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # NOTE:
+ # Be carefull change the Liquid code. If the code is changed, check the
+ # interity of the JSON data created. Invalid JSON data will cause the
+ # Javascript portion of the Theme Switcher to fail and no valid CSS will
+ # be available to provide the needed styles to properly render your pages.
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #   {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment         = site.environment %}
+{% assign asset_path          = site.data.j1_config.asset_path %}
+{% assign custom_theme_config = site.data.j1_config.custom_theme %}
+{% assign custom_scss         = custom_theme_config.custom_scss %}
+
+{% capture theme_path %}{{asset_path}}/modules/bs_theme_switcher/themes{% endcapture %}
+
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+{% comment %} Main
+================================================================================ {% endcomment %}
+{% if environment == 'development' %}
+{
+  "themes":
+  [
+    {"name": "UnoLight",    "css": "{{asset_path}}/core/css/themes/unolight/bootstrap.css"},
+    {"name": "UnoDark",     "css": "{{asset_path}}/core/css/themes/uno-dark/bootstrap.css"},
+    {"name": "Vapor",       "css": "{{asset_path}}/core/css/themes/theme_vapor/bootstrap.css"},
+    {"name": "Bootstrap",   "css": "{{asset_path}}/core/css/themes/bootstrap/bootstrap.css"}
+  ]
+}
+{% else %}
+{
+  "themes":
+  [
+    {"name": "UnoLight",    "css": "{{asset_path}}/core/css/themes/unolight/bootstrap.min.css"},
+    {"name": "UnoDark",     "css": "{{asset_path}}/core/css/themes/uno-dark/bootstrap.min.css"},
+    {"name": "Vapor",       "css": "{{asset_path}}/core/css/themes/theme_vapor/bootstrap.min.css"},
+    {"name": "Bootstrap",   "css": "{{asset_path}}/core/css/themes/bootstrap/bootstrap.min.css"}
+  ]
+}
+{% endif %}
+
+{% endcapture %}
+{% if production %}
+  {{ cache | minifyJSON }}
+{% else %}
+  {{ cache | strip_empty_lines }}
+{% endif %}
+{% assign cache = nil %}

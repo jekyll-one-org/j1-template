@@ -1,0 +1,65 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/bootstrap/_buttons.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+// OPTIMIZE: jadams, 2022-07-22: set dark colors for Google Lighthouse optimization
+.btn {
+  color: $black !important;
+}
+
+// jadams 2022-11-06
+.btn:hover {
+  background-color: $gray-100; // !important;
+}
+
+// OPTIMIZE: jadams, 2022-07-22: set dark colors for Google Lighthouse optimization
+.btn-link {
+  color: $blue;
+}
+
+.btn-link:hover {
+  color: $gray-900 !important;
+}
+
+.btn-outline-light {
+  border-color: $gray;
+  background-color: $gray-200;
+}
+
+.btn:disabled {
+    color: $gray-300 !important;
+    background-color: $gray-900;
+    border-color: $gray-900;
+}
+
+.btn.btn-light {
+  background-color: $gray-300;
+  border-color: $gray-300;
+}
+
+.btn.btn-light:hover {
+  color: $gray-100 !important;
+}
+
+.btn.btn-dark {
+    background-color: $gray;
+    border-color: $gray;
+}
+
+.btn-sm, .btn-group-sm > .btn {
+    --bs-btn-border-radius: $border-radius;
+}
+
+.btn-lg, .btn-group-lg > .btn {
+    --bs-btn-border-radius: $border-radius;
+}

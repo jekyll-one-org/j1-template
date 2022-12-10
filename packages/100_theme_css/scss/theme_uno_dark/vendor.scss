@@ -1,0 +1,20 @@
+/*
+// -----------------------------------------------------------------------------
+// ~/100_theme_css/scss/theme_uno_dark/vendor.scss
+// CSS styles for vendor (3rd party) elements that extents the theme
+//
+// Product/Info:
+// https://jekyll.one
+//
+// Copyright (C) 2022 Juergen Adams
+//
+// J1 Theme is licensed under the MIT License.
+// See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+// -----------------------------------------------------------------------------
+*/
+
+// Vendor
+// -----------------------------------------------------------------------------
+@import "vendor/asciidoc/asciidoc.scss";
+@import "vendor/jupyter/theme_uno.scss";
+@import "vendor/twemoji/twemoji-picker.scss";

@@ -1,20 +1,20 @@
 Convert notebooks to HTML
 --------------------------------------------------------------------------------
 
-nbinteract -r D:\j1\github\j1-template-2022.2.x\packages\300_template_src\assets\data\jupyter\notebooks -t plain -s fake/fake
+nbinteract -r D:\j1\github\j1-template-2022.2.x\packages\300_theme_src\assets\data\jupyter\notebooks -t plain -s fake/fake
 
 nbinteract -r T:\J1\nbi-site\assets\data\jupyter\notebooks -t plain -s fake/fake
 
 nbinteract -r D:\j1\github\j1-sites\j1-nbi-site-2022.2.0\assets\data\jupyter\notebooks -t plain -s fake/fake
 
-nbinteract D:\j1\github\j1-template-2022.2.x\packages\400_template_site\pages\public\jupyter\notebooks\nbi\tutorial_interact.ipynb -t plain -s fake/fake
+nbinteract D:\j1\github\j1-template-2022.2.x\packages\400_theme_site\pages\public\jupyter\notebooks\nbi\tutorial_interact.ipynb -t plain -s fake/fake
 
-nbinteract -r D:\j1\github\j1-template-2022.2.x\packages\400_template_site\pages\public\jupyter\notebooks -o D:\j1\github\j1-template-2022.2.x\packages\400_template_site\pages\public\jupyter\notebooks\html -t plain -s fake/fake
+nbinteract -r D:\j1\github\j1-template-2022.2.x\packages\400_theme_site\pages\public\jupyter\notebooks -o D:\j1\github\j1-template-2022.2.x\packages\400_theme_site\pages\public\jupyter\notebooks\html -t plain -s fake/fake
 
-nbinteract D:\j1\github\j1-template-2022.2.x\packages\400_template_site\pages\public\jupyter\notebooks\nbi-docs\nbi_docs_recipes_layout.ipynb -t plain -s fake/fake
+nbinteract D:\j1\github\j1-template-2022.2.x\packages\400_theme_site\pages\public\jupyter\notebooks\nbi-docs\nbi_docs_recipes_layout.ipynb -t plain -s fake/fake
 
 nbinteract
-  -r "D:\j1\github\j1-template-2022.1.x\packages\400_template_site\assets\data\jupyter\notebooks"
+  -r "D:\j1\github\j1-template-2022.1.x\packages\400_theme_site\assets\data\jupyter\notebooks"
   -t plain
   -s fake/fake
 

@@ -1,0 +1,25 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/extensions/_bs-doc.scss
+ # Provides additional styles taken from BS DOC template
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+// Doc helpers
+// -----------------------------------------------------------------------------
+.doc-example {
+  background-color: $gray-100;
+  border: 1px solid $darken-400;
+  margin: 0;
+  padding: 1.5rem;
+  border-radius: 1px;
+  margin-bottom: 0.25rem;
+}

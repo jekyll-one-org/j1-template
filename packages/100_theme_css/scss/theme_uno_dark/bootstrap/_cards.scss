@@ -1,0 +1,44 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/100_theme_css/scss/theme_uno_dark/bootstrap/_cards.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+.card {
+  /* border: 0; */
+  /* border-radius: 0; */
+
+  background-color: $gray-400;
+
+  .card-header {
+    border-bottom: 0;
+  }
+  .card-body {
+    margin-top: 0;
+  }
+
+  /*
+  .card-link {
+    color: $gray-700 !important;
+  }
+  .card-link:hover {
+    color: $gray-900 !important;
+  }
+  */
+
+  .card-footer {
+    /* background-color: $gray-100 !important; */
+    /* border-top: 1px dotted $darken-700; */
+  }
+  hr {
+    border-top: 1px solid $grey-600 !important;
+  }
+}

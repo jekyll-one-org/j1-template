@@ -1,0 +1,51 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/vendor/flag-icons/variables.scss
+ # Additional styles for country flags
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+// Bootstrap sizes
+// -----------------------------------------------------------------------------
+
+.flag-icon.size-xs {
+  font-size: 1.250em;
+}
+
+.flag-icon.size-sm {
+  font-size: 1.375em;
+}
+
+.flag-icon.size-md {
+  font-size: 1.500em;
+  vertical-align: -10%;
+}
+
+.flag-icon.size-lg {
+  font-size: 1.750em;
+  vertical-align: -15%;
+}
+
+.flag-icon.size-xl {
+  font-size: 2.000em;
+  vertical-align: -17%;
+}
+
+// Additional Flag sizes
+// -----------------------------------------------------------------------------
+
+$flag-sizes: 1 2 3 4 5 6 7 8 9 10;
+
+@each $size in $flag-sizes {
+  .#{$flag-icon-css-prefix}.size-#{$size}x {
+    font-size: $size * 1rem;
+  }
+}

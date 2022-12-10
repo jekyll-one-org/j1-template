@@ -86,7 +86,7 @@ link-checker path [options]
 
 === Examples:
 
-link-checker X:\j1\github\j1-template\packages\400_template_site\_site\posts --json > link-checks.json
+link-checker X:\j1\github\j1-template\packages\400_theme_site\_site\posts --json > link-checks.json
 
 === Optionen
 
@@ -143,7 +143,7 @@ Install libcurl in Ruby bin folder
 === Examples
 
 bundle exec htmlproofer --check_html --file_ignore "/assets/themes/j1/*" ./_site/pages/public/about/site
-htmlproofer --assume-extension --allow-missing-href --checks-to-ignore "ImageCheck" --internal-domains localhost ./packages/400_template_site/_site/pages/public/about/site/
+htmlproofer --assume-extension --allow-missing-href --checks-to-ignore "ImageCheck" --internal-domains localhost ./packages/400_theme_site/_site/pages/public/about/site/
 
 === Usage
 

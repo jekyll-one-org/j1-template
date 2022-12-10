@@ -1,0 +1,93 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/vendor/fonts/md_icons/scss/color_palette_bs.scss
+ # BS (Bootstrap) Color Palette for MD Icons
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+@import "../../../../theme_uno/variables/_colors.scss";
+
+$theme-color-primary:                   $blue;
+$theme-color-secondary:                 $blue-grey;
+$theme-color-success:                   $green;
+$theme-color-info:                      $cyan;
+$theme-color-warning:                   $yellow;
+$theme-color-danger:                    $red;
+
+// TODO: Clarify what crazy styles are '*md-bg-primary'
+//
+.iconify-md-bg-primary {
+  color: $blue-grey;
+}
+a.iconify-md-bg-primary:hover,
+a.iconify-md-bg-primary:focus {
+  color: $blue-grey-200;
+}
+
+.iconify-bs-primary, .iconify-md-primary {
+  color: $theme-color-primary;
+}
+a.iconify-bs-primary:hover,
+a.iconify-bs-primary:focus,
+a.iconify-md-primary:hover,
+a.iconify-md-primary:focus {
+  color: #1A237E;
+}
+
+.iconify-bs-secondary, .iconify-md-secondary {
+  color: $theme-color-secondary;
+}
+a.iconify-bs-secondary:hover,
+a.iconify-bs-secondary:focus,
+a.iconify-md-secondary:hover,
+a.iconify-md-secondary:focus {
+  color: #880E4F;
+}
+
+.iconify-bs-success, .iconify-md-success {
+  color: $theme-color-success;
+}
+a.iconify-bs-success:hover,
+a.iconify-bs-success:focus,
+a.iconify-md-success:hover,
+a.iconify-md-success:focus {
+  color: #1B5E20;
+}
+
+.iconify-bs-info, .iconify-md-info {
+  color: $theme-color-info;
+}
+a.iconify-bs-info:hover,
+a.iconify-bs-info:focus,
+a.iconify-md-info:hover,
+a.iconify-md-info:focus {
+  color: #01579B;
+}
+
+.iconify-bs-warning, .iconify-md-warning {
+  color: $theme-color-warning;
+}
+a.iconify-bs-warning:hover,
+a.iconify-bs-warning:focus,
+a.iconify-md-warning:hover,
+a.iconify-md-warning:focus {
+  color: #F57F17;
+}
+
+.iconify-bs-danger, .iconify-bs-danger {
+  color: $theme-color-danger;
+}
+a.iconify-bs-danger:hover,
+a.iconify-bs-danger:focus,
+a.iconify-md-danger:hover,
+a.iconify-md-danger:focus {
+  color: #B71C1C;
+}

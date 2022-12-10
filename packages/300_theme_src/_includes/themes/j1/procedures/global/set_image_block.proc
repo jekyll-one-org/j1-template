@@ -1,0 +1,50 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_includes/themes/j1/procedures/global/set_image_block.proc
+ #  Liquid PROCEDURE to place an image as an image_block
+ #
+ #  https://jekyll.one
+ #
+ #  Copyright (C) 2022 Juergen Adams
+ #
+ #  J1 Theme is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ #   Components procedure. Place an image as an image_block using the the
+ #   default Lightbox "lightbox" to enlarge. The image source folder is
+ #   taken from :imagesdir: Asciidoc attribute.
+ #
+ #    Usage:
+ #      1)  capture the 'set_env_entry_document' variable by full path
+ #      2)  include|configure the set_env_entry_document.proc procedure
+ #
+ #    Example:
+ #      {% capture set_image_block %}themes/{{site.template.name}}/procedures/global/set_image_block.proc{%endcapture%}
+ #      {% include {{set_image_block}} image_name="name.png" image_title="Image title" image_width=800 %}
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+--------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Variables
+   ------------------------------------------------------------ {% endcomment %}
+{% assign image_name  = include.image_name %}
+{% assign image_title = include.image_title %}
+{% assign image_width = include.image_width %}
+
+
+[subs=attributes]
+++++
+<div class="imageblock mt-4 mb-4">
+  <div class="title">{{image_title}}</div>
+  <a href="{imagesdir}/{{image_name}}"
+     data-lightbox="{{image_name}}" data-title="{{image_title}}">
+    <img src="{imagesdir}/{{image_name}}" alt="{{image_title}}" width="800">
+  </a>
+</div>
+++++

@@ -4,7 +4,7 @@ gem install rubygems-update
 update_rubygems
 gem update --system
 
-# J1 Template MDE 4
+# J1 Theme MDE 4
 
 Welcome to your new gem! In this directory, you'll find the files you need to
 be able to package up your Ruby library into a gem. Put your Ruby code in the
@@ -90,10 +90,10 @@ push git commits and tags, and push the `.gem` file to
 ## Contributing
 
 Bug reports and pull requests are welcome at
-[GitHub](https://github.com/jekyll-one-org/J1 Template).
+[GitHub](https://github.com/jekyll-one-org/J1 Theme).
 
 
 ## License
 
 The gem is available as OpenSource under the terms of the
-[MIT License](https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE).
+[MIT License](https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md).

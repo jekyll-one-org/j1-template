@@ -1,0 +1,46 @@
+/*
+ # -----------------------------------------------------------------------------
+ #  ~/modules/rouge/css/themes.txt
+ #  All available Rouge themes
+ #
+ #  Product/Info:
+ #  https://jekyll.one
+ #  https://github.com/rouge-ruby/rouge
+ #
+ #  Copyright (C) 2022 Juergen Adams
+ #  Copyright (c) 2012 Jeanine Adkisson
+ #
+ #  J1 Theme is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ #  Rouge is licensed under the MIT License.
+ #  See: https://github.com/rouge-ruby/rouge/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+
+base16
+base16.dark
+base16.light
+base16.monokai
+base16.monokai.dark
+base16.monokai.light
+base16.solarized
+base16.solarized.dark
+base16.solarized.light
+colorful
+github
+gruvbox
+gruvbox.dark
+gruvbox.light
+igorpro
+molokai
+monokai
+monokai.sublime
+pastie
+thankful_eyes
+tulip
+
+
+Create a style, example for Theme CSS base16
+--------------------------------------------------------------------------------
+
+rougify style base16 > theme.base16.css

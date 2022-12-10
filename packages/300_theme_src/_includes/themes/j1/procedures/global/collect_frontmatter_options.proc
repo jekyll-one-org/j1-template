@@ -1,0 +1,60 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_includes/themes/j1/procedures/global/collect_frontmatter_options.proc
+ #  Liquid PROCEDURE to extract|collect frontmatter options from the current
+ #  PAGE for a given MODULE.
+ #  Returns a JSON string (object) of all name-value pairs found.
+ #
+ #  https://jekyll.one
+ #
+ #  Copyright (C) 2022 Juergen Adams
+ #
+ #  J1 Theme is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ #
+ # -----------------------------------------------------------------------------
+ #   Components procedure. Calculate the CLASS of an icon for a given size
+ #   for a specific icon font.
+ #
+ #    Usage:
+ #      1)  assign the 'page_options' variable
+ #      2)  include the collect_frontmatter_options.proc procedure
+ #
+ #    Example:
+ #
+ #      {% capture collect_frontmatter_options %}themes/{{site.template.name}}/procedures/global/collect_frontmatter_options.proc{% endcapture %}
+ #      {% assign my_module   = "j1_my_module_name" %}
+ #
+ #      {% include {{collect_frontmatter_options}} module=my_module %}
+ #      {% assign my_frontmatter_options = {{frontmatter_options}} %}
+ #
+ #    or
+ #
+ #      {% include {{collect_frontmatter_options}} module="j1_my_module_name" %}
+ #      {% assign my_frontmatter_options = {{frontmatter_options}} %}
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ #
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign module              = include.module %}
+{% assign all_module_config   = site.data.modules %}
+{% assign frontmatter_options = nil %}
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+{% for items in page.resource_options %}
+  {% for item in items %}
+    {% if item[0] == module %}
+      {% assign frontmatter_options = {{item[1] | replace:'=>',':'}} %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}

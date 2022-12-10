@@ -1,0 +1,85 @@
+/*
+ # -----------------------------------------------------------------------------
+ # # ~/vendor/flag-icons/animations.scss
+ # Animations for Country Flags
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+.#{$flag-icon-css-prefix}-spin:before {
+    -webkit-animation: #{$flag-icon-css-prefix}-spin 2s infinite linear;
+            animation: #{$flag-icon-css-prefix}-spin 2s infinite linear;
+}
+
+@-webkit-keyframes #{$flag-icon-css-prefix}-spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(359deg);
+              transform: rotate(359deg);
+    }
+}
+
+@keyframes #{$flag-icon-css-prefix}-spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+              transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(359deg);
+              transform: rotate(359deg);
+    }
+}
+
+
+.#{$flag-icon-css-prefix}-pulsed:before {
+  animation: pulse 2s infinite;
+  box-shadow: 0 0 0 rgba(204, 169, 44, 0.4);
+}
+
+.#{$flag-icon-css-prefix}-pulsed:hover {
+  animation: none;
+}
+
+@-webkit-keyframes #{$flag-icon-css-prefix}-pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.2, 1.2, 1.2);
+    transform: scale3d(1.2, 1.2, 1.2);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+
+@keyframes #{$flag-icon-css-prefix}-pulse {
+  from {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+
+  50% {
+    -webkit-transform: scale3d(1.2, 1.2, 1.2);
+    transform: scale3d(1.2, 1.2, 1.2);
+  }
+
+  to {
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}

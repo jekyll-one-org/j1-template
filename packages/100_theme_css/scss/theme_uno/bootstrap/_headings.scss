@@ -1,0 +1,15 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/bootstrap/_headings.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ # -----------------------------------------------------------------------------
+*/
+
+// Heading overrides
+// -----------------------------------------------------------------------------
+.h1, .h2, .h3, .h4, .h5, .h6, .h7, h1, h2, h3, h4, h5, h6 {
+  font-family: "Roboto Slab", Helvetica, Arial, sans-serif;
+  padding-bottom: .25rem;                                                       // jadams, 2022-12-07
+}

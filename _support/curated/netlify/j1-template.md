@@ -1,5 +1,5 @@
 ---
-title: Jekyll One Template - Create powerful modern static websites
+title: Jekyll One Theme - Create powerful modern static websites
 repo: https://github.com/jekyll-one-org/j1-template-starter
 preview: starter-screenshot.jpg
 example: https://j1-template-starter.netlify.app/
@@ -19,9 +19,9 @@ tags:
 
 ![Screenshot](https://jekyll.one/starter-screenshot.jpg)
 
-Jekyll One Template - Create powerful modern static websites.
+Jekyll One Theme - Create powerful modern static websites.
 
-* Fully Responsive. J1 Template supports modern web browsers on all
+* Fully Responsive. J1 Theme supports modern web browsers on all
   devices for best results on PCs, Tablets, and SmartPhones.
 * Full Bootstpap V4 support. Current Technology and Design. Excellent
   performance running desktop and mobile websites. Use Jekyll One to
@@ -33,7 +33,7 @@ Jekyll One Template - Create powerful modern static websites.
 ## Features
 
 J1 meets Jekyll and Bootstrap. And makes a lot of friends. The template
-system combines the best free software for the web. Jekyll One Template
+system combines the best free software for the web. Jekyll One Theme
 is OpenSource and the modules included are free to use as well.
 
 No license issues for private or professional use.

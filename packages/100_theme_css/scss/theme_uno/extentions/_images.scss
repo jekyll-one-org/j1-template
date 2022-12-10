@@ -1,0 +1,58 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/extentions/_images.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # See: https://www.digitalocean.com/community/tutorials/css-cropping-images__object--fit
+ # -----------------------------------------------------------------------------
+*/
+
+// background images
+// ------------------------------------------------------------------------------
+
+// The image will fill its given area, even if it  means losing
+// its aspect ratio.
+.img-bg--fill {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+// (foreground) images
+// ------------------------------------------------------------------------------
+
+// The image keeps its original aspect ratio, but resized so that the
+// longest of either the height or width can fit in the given dimensions.
+.img-object--contain {
+  object-fit: contain;
+}
+
+// The image keeps its original aspect ratio and the image area is
+// completely covered.
+.img-object--cover {
+  object-fit: cover;
+}
+
+// The image will fill its given area, even if it
+// means losing its aspect ratio (default initial value).
+.img-object--fill {
+  object-fit: fill;
+}
+
+// The image is not resized at all, and the original image size fills
+// the given area.
+.img-object--none {
+  object-fit: fill;
+}
+
+// The smaller of either contain or none.
+.img-object--scale-down {
+  object-fit: scale-down;
+}

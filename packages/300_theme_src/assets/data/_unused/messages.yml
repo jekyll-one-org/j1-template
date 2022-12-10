@@ -1,0 +1,131 @@
+---
+regenerate:                             false
+---
+
+{% capture j1_cache %}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/messages.json
+ # Conains ALL messages used by ALL modules for logging
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # NOTE:
+ # Be carefull change the Liquid code. If the code is changed, check the
+ # interity of the JSON data created. Invalid JSON data will cause modules
+ # to fail and no valid log messages could be generated.
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #   {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+# ------------------------------------------------------------------------------
+# DEBUG messages
+#
+debug:
+
+  - dataFound:                           
+      short_code:                       D0000
+      message:
+        text:                           "found "
+        cookie:                         "cookie"
+        cookie_user_state:              "user state"
+        data:                           "data"
+
+
+# ------------------------------------------------------------------------------
+# INFO messages
+#
+info:
+
+  - moduleInitialization:     
+      short_code:                       I0000
+      message:
+        text:                           "initialization "
+        started:                        "started"
+        finished:                       "finished"
+
+  - moduleState:                           
+      short_code:                       I0001
+      message:
+        text:                           "module state detected as "
+        enabled:                        "enabled"
+
+  - getData:                           
+      short_code:                       I0002
+      message:
+        text:                           "data for "
+        message_catalog:                "message catalog "
+        finished:                       "loaded"
+
+  - getState:                           
+      short_code:                       I0003
+      message:
+        text:                           "data for "
+        data_objects:                   "data objects "
+        finished:                       "loaded"
+
+  - setState:                           
+      short_code:                       I0004
+      message:
+        text:                           "state: "
+        started:                        "started"
+        running:                        "running"
+        finished:                       "finished"
+
+# ------------------------------------------------------------------------------
+# WARNING messages
+#
+warn:
+
+  - moduleState:                           
+      short_code:                       W0000
+      message:
+        text:                           "module state detected as "
+        disabled:                       "disabled"
+        failed:                         "failed"
+
+  - deleteData:     
+      short_code:                       W0001
+      message:
+        text:                           "delete all "
+        cookies:                        "cookies"
+        files:                          "files"
+
+# ------------------------------------------------------------------------------
+# ERROR messages
+#
+error:
+
+  - internalError:                           
+      short_code:                       E0000
+      message:
+        text:                           "internal error. "
+        stopped:                        "cannot continue"
+        
+
+  - getData:     
+      short_code:                       E0001
+      message:
+        text:                           "failed to get data "
+        xhr:                            "from XHR request"
+
+  - missingRequired:     
+      short_code:                       E0002
+      message:
+        text:                           "missing required "
+        parameters:                     "parameters"
+        options:                        "options"
+
+
+{% endcapture %}
+{{ j1_cache | strip_empty_lines }}
+{% assign j1_cache = nil %}

@@ -1,0 +1,35 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_includes/themes/j1/procedures/provider/ad/google-adsense.html
+ #  Support of advertising provider Google Adsense for J1 Theme
+ #
+ #  Product/Info:
+ #  http://jekyll.one
+ #
+ #  Copyright (C) 2022 Juergen Adams
+ #
+ #  J1 Theme is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign publisher_id = site.data.j1_config.advertising.google.publisher_id %}
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+<!-- script async
+  src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js">
+</script -->
+
+<!-- script
+  async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{publisher_id}}"
+  crossorigin="anonymous">
+</script -->

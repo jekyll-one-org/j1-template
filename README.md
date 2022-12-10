@@ -1,6 +1,6 @@
 # All you need for your new amazing site
 
-Jekyll meets Bootstrap - and makes a lot of friends. J1 Template combines
+Jekyll meets Bootstrap - and makes a lot of friends. J1 Theme combines
 the best of OpenSource software for the Web and the Web site generator
 `Jekyll`. J1 is OpenSource, and so are the packaged modules - no pain for
 private or professional use. Explore this site to learn what's possible if
@@ -8,7 +8,7 @@ you go to the Jekyll Way.
 
 ![Screenshot](https://github.com/jekyll-one-org/j1-template/raw/main/home-screenshot.jpg "J1 Starter Web")
 
-* Fully Responsive. J1 Template supports modern web browsers on all
+* Fully Responsive. J1 Theme supports modern web browsers on all
   devices for best results on PCs, Tablets, and SmartPhones.
 * Full Bootstpap V5 support. Current Technology and Design. Excellent
   performance running desktop and mobile websites. Use Jekyll One to
@@ -32,11 +32,11 @@ at [Netlify](https://j1-preview-netlify.netlify.app/).
 
 # Features
 
-The template combines the best free software for the web. Jekyll One Template
+The template combines the best free software for the web. Jekyll One Theme
 is OpenSource and the modules included are free to use as well. No license
 issues for private or professional use.
 
-* Fully Responsive. J1 Template supports modern web browsers on all
+* Fully Responsive. J1 Theme supports modern web browsers on all
   devices for best results on PCs, Tablets, and SmartPhones.
 * Full Bootstpap V5 support. Current Technology and Design. Excellent
   performance running desktop and mobile websites. Use Jekyll One to
@@ -105,7 +105,7 @@ platforms.
 
 # Development languages and tools
 
-To run the Development System for J1 Template, the following languages and
+To run the Development System for J1 Theme, the following languages and
 tools expected to be in place with your OS:
 
 * Ruby language, version >= 2.7
@@ -239,7 +239,7 @@ Install latest NPM and Yarn packages for NodeJS:
 
 # Setting up the project
 
-Running the J1 template project is very simple:
+Running the J1 Theme project is very simple:
 
 * Downlad the repo
 * Setup the project
@@ -247,7 +247,7 @@ Running the J1 template project is very simple:
 
 ## Checkout the Repo
 
-The repo for the J1 Template development system is published on Github.
+The repo for the J1 Theme development system is published on Github.
 You can get it from Github by cloning the repository using `git`:
 
 ``` sh
@@ -261,12 +261,12 @@ j1 development repo
 ```
   ├──── .git
   │    └─── packages
-  │         ├──  100_template_css
-  │         ├──  200_template_js
-  │         ├──  300_template_src
-  │         ├──  400_template_site
-  │         ├──  500_template_gem
-  │         └─── 600_template_utilsrv
+  │         ├──  100_theme_css
+  │         ├──  200_theme_js
+  │         ├──  300_theme_src
+  │         ├──  400_theme_site
+  │         ├──  500_theme_gem
+  │         └─── 600_theme_utilsrv
   ├──── .gitattributes
   ├──── .gitignore
   ├──── lerna.json
@@ -275,7 +275,7 @@ j1 development repo
   └──── README.md
 ```
 
-J1 template is a so-called *multi-package* project, a *Monorepo* managed by
+J1 Theme is a so-called *multi-package* project, a *Monorepo* managed by
 Lerna. A Monorepo is a strategy where multiple (sub-)projects are stored in a
 single repository instead of putting them into individual repositories.
 
@@ -340,40 +340,40 @@ lerna info Executing command in 3 packages: "yarn run build"
 css: $ npm run clean
 js: $ npm run clean && npm run lint
 site: $ run-s -s jekyll_build:*
-css: > css@2023.1.0 clean path_to_\j1-template\packages\100_template_css
+css: > css@2023.1.0 clean path_to_\j1-template\packages\100_theme_css
 css: > run-p -s clean:*
-js: > js@2023.1.0 clean path_to_\j1-template\packages\200_template_js
+js: > js@2023.1.0 clean path_to_\j1-template\packages\200_theme_js
 js: > run-p -s clean:*
-site: > site@2023.1.0 bundle path_to_\j1-template\packages\400_template_site
+site: > site@2023.1.0 bundle path_to_\j1-template\packages\400_theme_site
 site: > run-s -s bundler:*
 css: $ npm run build_css && npm run uglify_css
 site: Create bundle ..
-css: > css@2023.1.0 build_css path_to_\j1-template\packages\100_template_css
+css: > css@2023.1.0 build_css path_to_\j1-template\packages\100_theme_css
 css: > run-p -s theme_css:*
-js: > js@2023.1.0 lint path_to_\j1-template\packages\200_template_js
+js: > js@2023.1.0 lint path_to_\j1-template\packages\200_theme_js
 js: > run-p -s lint:*
 css: Rendering Complete, saving .css file...
-css: Wrote CSS to path_to_\j1-template\packages\100_template_css\dist\icon-fonts\fontawesome.css
+css: Wrote CSS to path_to_\j1-template\packages\100_theme_css\dist\icon-fonts\fontawesome.css
 css: Rendering Complete, saving .css file...
-css: Wrote CSS to path_to_\j1-template\packages\100_template_css\dist\icon-fonts\iconify.css
+css: Wrote CSS to path_to_\j1-template\packages\100_theme_css\dist\icon-fonts\iconify.css
 css: Rendering Complete, saving .css file...
 css: Rendering Complete, saving .css file...
-css: Wrote CSS to path_to_\j1-template\packages\100_template_css\dist\animate.css
+css: Wrote CSS to path_to_\j1-template\packages\100_theme_css\dist\animate.css
 ..
 js: $ npm run build-js
 css: Rendering Complete, saving .css file...
-css: Wrote CSS to path_to_\j1-template\packages\100_template_css\dist\themes\uno-dark\bootstrap.css
+css: Wrote CSS to path_to_\j1-template\packages\100_theme_css\dist\themes\uno-dark\bootstrap.css
 css: Rendering Complete, saving .css file...
-css: Wrote CSS to path_to_\j1-template\packages\100_template_css\dist\icon-fonts\materialdesign.css
+css: Wrote CSS to path_to_\j1-template\packages\100_theme_css\dist\icon-fonts\materialdesign.css
 css: Rendering Complete, saving .css file...
-css: Wrote CSS to path_to_\j1-template\packages\100_template_css\dist\themes\uno-light\bootstrap.css
-js: > js@2023.1.0 build-js path_to_\j1-template\packages\200_template_js
+css: Wrote CSS to path_to_\j1-template\packages\100_theme_css\dist\themes\uno-light\bootstrap.css
+js: > js@2023.1.0 build-js path_to_\j1-template\packages\200_theme_js
 js: > cross-var webpack --mode production --config $npm_package_wp_build
 site: Bundle Rubies using user path ..
-css: > css@2023.1.0 uglify_css path_to_\j1-template\packages\100_template_css
+css: > css@2023.1.0 uglify_css path_to_\j1-template\packages\100_theme_css
 css: > run-p -s uglify_css:*
 js: $ npm run uglify-js && npm run deploy
-js: > js@2023.1.0 uglify-js path_to_\j1-template\packages\200_template_js
+js: > js@2023.1.0 uglify-js path_to_\j1-template\packages\200_theme_js
 js: > terser dist/template.js -o dist/template.min.js -m --source-map
 ..
 site: Fetching gem metadata from https://rubygems.org/..........
@@ -387,9 +387,9 @@ site: Using rouge 3.26.0
 ..
 site: Bundle complete! 31 Gemfile dependencies, 88 gems now installed.
 ..
-site: Configuration file: path_to_/j1-template/packages/400_template_site/_config.yml
-site:             Source: path_to_/j1-template/packages/400_template_site
-site:        Destination: path_to_/j1-template/packages/400_template_site/_site
+site: Configuration file: path_to_/j1-template/packages/400_theme_site/_config.yml
+site:             Source: path_to_/j1-template/packages/400_theme_site
+site:        Destination: path_to_/j1-template/packages/400_theme_site/_site
 site:  Incremental build: enabled
 site:       Generating...
 site:     J1 QuickSearch: creating search index ...
@@ -464,22 +464,22 @@ utls: Startup UTILSRV ..
 utls: Log file exists :        messages_2021-08-11
 utls: Server enabled:          false
 utls: Environment detected as: dev
-utls: Daemon path set to:      path_to_\j1-template\packages\600_template_utilsrv
+utls: Daemon path set to:      path_to_\j1-template\packages\600_theme_utilsrv
 utls: Daemon verbosity set to: false
-utls: Project path set to:     path_to_\j1-template\packages\600_template_utilsrv/../400_template_site
-utls: Data path set to:        path_to_\j1-template\packages\600_template_utilsrv/../400_template_site/_data
-utls: Log file set to:         path_to_\j1-template\packages\600_template_utilsrv/../../log/messages_2021-08-11.log
+utls: Project path set to:     path_to_\j1-template\packages\600_theme_utilsrv/../400_theme_site
+utls: Data path set to:        path_to_\j1-template\packages\600_theme_utilsrv/../400_theme_site/_data
+utls: Log file set to:         path_to_\j1-template\packages\600_theme_utilsrv/../../log/messages_2021-08-11.log
 utls: Stop the server. Exiting ...
 utls: Reset file: messages_2021-08-11
 site: i ｢wds｣: Project is running at http://localhost:41000/
 site: i ｢wds｣: webpack output is served from /assets/themes/j1/core/js
-site: i ｢wds｣: Content not from webpack is served from path_to_\j1-template\packages\400_template_site\_site
-site: Configuration file: C:/Temp/j1-template/packages/400_template_site/_config.yml
+site: i ｢wds｣: Content not from webpack is served from path_to_\j1-template\packages\400_theme_site\_site
+site: Configuration file: C:/Temp/j1-template/packages/400_theme_site/_config.yml
 site: i ｢wdm｣: wait until bundle finished: /assets/themes/j1/core/js/template.js
 site: i ｢wdm｣:    53 modules
 site: i ｢wdm｣: Compiled successfully.
-site:             Source: C:/Temp/j1-template/packages/400_template_site
-site:        Destination: C:/Temp/j1-template/packages/400_template_site/_site
+site:             Source: C:/Temp/j1-template/packages/400_theme_site
+site:        Destination: C:/Temp/j1-template/packages/400_theme_site/_site
 site:  Incremental build: enabled
 site:       Generating...
 site:     J1 QuickSearch: creating search index ...
@@ -536,12 +536,12 @@ lerna success - gem
 lerna success - utls
 
 Remove js modules from all packages ..
-lerna info clean removing path_to_\j1-template\packages\100_template_css\node_modules
-lerna info clean removing path_to_\j1-template\packages\200_template_js\node_modules
-lerna info clean removing path_to_\j1-template\packages\300_template_src\node_modules
-lerna info clean removing path_to_\j1-template\packages\400_template_site\node_modules
-lerna info clean removing path_to_\j1-template\packages\500_template_gem\node_modules
-lerna info clean removing path_to_\j1-template\packages\600_template_utilsrv\node_modules
+lerna info clean removing path_to_\j1-template\packages\100_theme_css\node_modules
+lerna info clean removing path_to_\j1-template\packages\200_theme_js\node_modules
+lerna info clean removing path_to_\j1-template\packages\300_theme_src\node_modules
+lerna info clean removing path_to_\j1-template\packages\400_theme_site\node_modules
+lerna info clean removing path_to_\j1-template\packages\500_theme_gem\node_modules
+lerna info clean removing path_to_\j1-template\packages\600_theme_utilsrv\node_modules
 lerna success clean finished
 done.
 

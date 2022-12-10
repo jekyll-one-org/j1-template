@@ -1,4 +1,4 @@
-packages\400_template_site\package.json
+packages\400_theme_site\package.json
 --------------------------------------------------------------------------------
 
 Task jekyll_post_built fails on Unix|Linux

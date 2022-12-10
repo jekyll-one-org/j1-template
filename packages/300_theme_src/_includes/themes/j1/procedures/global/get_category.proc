@@ -1,0 +1,60 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #   ~/_includes/themes/j1/procedures/components/get_category.proc
+ #  Liquid PROCEDURE to get the font icon for a given category
+ #
+ #  https://jekyll.one
+ #
+ #  Copyright (C) 2022 Juergen Adams
+ #
+ #  J1 Theme is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ #
+ # -----------------------------------------------------------------------------
+ #   Global procedure. Read RGB category values from j1_categorys.yml and returns
+ #   the category found with liquid var category
+ #
+ #    Usage:
+ #      1)  assign the 'category' variable to a category name. If the category (name)
+ #          couldn't be found, the category given with fallback is returned.
+ #      2)  include the get_category.proc procedure
+ #
+ #  Example:
+ #
+ #  {% capture get_category %}themes/{{site.template.name}}/procedures/global/get_category.proc{% endcapture %}
+ #
+ #  {% include {{get_category}} post=my_post %}
+ #  {% assign my_category = {{_category}} %}
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  {{ liquid_var | debug }}
+ #  category:  {{ item[0] }}: {{ item[1] }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Variables
+   ------------------------------------------------------------ {% endcomment %}
+
+{% assign _categories = include.post.categories %}
+{% assign _category   = nil %}
+
+
+{% comment %} Liquid procedures
+   ------------------------------------------------------------ {% endcomment %}
+
+
+{% comment %} Main
+   ------------------------------------------------------------ {% endcomment %}
+
+  {% for item in _categories %}
+    {% if item == "posts"  %}
+      {% continue %}
+    {% else %}
+      {% assign _category = item %}
+      {% break %}
+    {% endif %}
+  {% endfor %}
+
+
+

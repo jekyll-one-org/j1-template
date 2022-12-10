@@ -27,7 +27,7 @@ Procedure
 
 0. Install the bundle for package 400
 
-  cd packages\400_template_site
+  cd packages\400_theme_site
   bundle install
 
 1. Compile eventmachine on the Windows host:

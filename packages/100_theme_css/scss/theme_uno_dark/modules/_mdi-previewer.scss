@@ -1,0 +1,39 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno_dark/modules/_mdi-previewer.scss
+ #
+ # Product/Info:
+ # http://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # NOTE: Provides styles for the module J1 Toccer
+ # -----------------------------------------------------------------------------
+*/
+
+.icons div {
+  color: #bdbdbd;  // grey-400
+}
+
+.icons div span {
+  color:  #bdbdbd;  // grey-400
+}
+
+.icons div span:hover {
+  color:  #757575;  // grey-600
+}
+
+.icons div code {
+  color: #424242;   // grey-900
+}
+
+.icons div code:hover {
+    color: #bdbdbd !important;     // grey-400
+}
+
+item {
+  background-color: rgba(255, 255, 255, 0.7) !important;    // lighten-700
+}

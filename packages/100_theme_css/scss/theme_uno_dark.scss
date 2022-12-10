@@ -1,0 +1,44 @@
+/*
+// -----------------------------------------------------------------------------
+// ~/100_theme_css/scss/theme_uno_dark.scss
+// Theme Uno - Dark (inspired by Slate@Bootswatch 4.5.2)
+//
+// Product/Info:
+// https://jekyll.one
+//
+// Copyright (C) 2022 Juergen Adams
+//
+// J1 Theme is licensed under the MIT License.
+// See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+// -----------------------------------------------------------------------------
+*/
+
+$theme: "UnoDark" !default;
+
+// BS variable overrides (BS|Theme variable overrides goes here)
+// -----------------------------------------------------------------------------
+@import "theme_uno_dark/variables";
+
+// Functions|Mixins
+// -----------------------------------------------------------------------------
+@import "theme_uno_dark/mixins";
+
+// BS|CSS source files
+// -----------------------------------------------------------------------------
+@import "~bootstrap/scss/bootstrap";
+
+// BS overrides (BS|CSS theme overrides goes here)
+// -----------------------------------------------------------------------------
+@import "theme_uno_dark/bootstrap";
+
+// Extentions
+// -----------------------------------------------------------------------------
+@import "theme_uno_dark/extentions";
+
+// Modules
+// -----------------------------------------------------------------------------
+@import "theme_uno_dark/modules";
+
+// Vendor
+// -----------------------------------------------------------------------------
+@import "theme_uno_dark/vendor";

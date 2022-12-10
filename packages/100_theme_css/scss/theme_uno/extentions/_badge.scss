@@ -1,0 +1,22 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/extensions/_badge.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # NOTE: General styles for tag boxes|clouds
+ # -----------------------------------------------------------------------------
+*/
+
+// Badge anchor links
+// -----------------------------------------------------------------------------
+
+span.badge > a {
+  color: $black !important;
+}

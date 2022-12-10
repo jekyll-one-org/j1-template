@@ -1,0 +1,30 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/100_theme_css/scss/theme_uno_dark/extentions/_timeline.scss
+ #
+ # Product/Info:
+ # https:#jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+// Timeline
+// -----------------------------------------------------------------------------
+
+.tmicon {
+    background: $primary !important;
+    box-shadow: 0 0 0 4px $grey-400 !important;
+}
+
+.timeline-panel:after {
+    border-right-color: $primary !important;
+    border-left-color: $primary !important;
+}
+
+.timeline:before {
+    background-color: $grey-400 !important;
+}

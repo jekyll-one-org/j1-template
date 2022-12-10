@@ -1,0 +1,49 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/vendor/fonts/md_icons/scss/_sizes_md.scss
+ # MD (Material Design) MDI Icon Font sizes
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+/* Bootstrap sizes
+----------------------------------------------------------------------------- */
+
+.iconify-xs {
+  font-size: 1.250em;
+}
+
+.iconify-sm {
+  font-size: 1.375em;
+}
+
+.iconify-md {
+  font-size: 1.500em;
+}
+
+.iconify-lg {
+  font-size: 1.750em;
+}
+
+.iconify-xl {
+  font-size: 2.000em;
+}
+
+/* Additional icon sizes
+----------------------------------------------------------------------------- */
+
+$iconify-css-prefix:  iconify;
+$icon-sizes:          1 2 3 4 5 6 7 8 9 10;
+
+@each $size in $icon-sizes {
+    .#{$iconify-css-prefix}-#{$size}x {
+      font-size: $size * 1rem;
+    }
+}

@@ -9,8 +9,8 @@
  #
  #  Copyright (C) 2022 Juergen Adams
  #
- #  J1 Template is licensed under MIT License.
- #  See: https://github.com/jekyll-one-org/J1 Template/blob/master/LICENSE
+ #  J1 Theme is licensed under MIT License.
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
 */
 'use strict';
@@ -31,7 +31,7 @@ var usage;
 const top_level_commands = [
   {
     header: 'J1',
-    content: 'J1 Template is using a NodeJS package files (package.js) to control the project. The package file implements a .. '
+    content: 'J1 Theme is using a NodeJS package files (package.js) to control the project. The package file implements a .. '
   },
   {
     header: 'Toplevel commands',
@@ -65,7 +65,7 @@ const app = [
   },
   {
     header: 'app',
-    content: 'J1 Template supports plain static webs ...'
+    content: 'J1 Theme supports plain static webs ...'
   },
   {
     header: 'Examples',
@@ -150,13 +150,13 @@ const gem = [
   },
   {
     header: 'gem',
-    content: 'Create or Install the J1 Template Rubie'
+    content: 'Create or Install the J1 Theme Rubie'
   },
   {
     header: 'Examples',
     content: [
-      { name: 'yarn gem create', summary: 'Creates the J1 Template Rubie from the Gem source folder.' },
-      { name: 'yarn gem install-local', summary: 'Installs the J1 Template Rubie from the (local) Gem source folder.' },
+      { name: 'yarn gem create', summary: 'Creates the J1 Theme Rubie from the Gem source folder.' },
+      { name: 'yarn gem install-local', summary: 'Installs the J1 Theme Rubie from the (local) Gem source folder.' },
     ]
   }
 ]

@@ -1,5 +1,5 @@
 ---
-title:    "J1 Template Starter"
+title:    "J1 Theme Starter"
 github:   https://github.com/jekyll-one/j1-template-starter
 demo:     https://j1-template-starter.netlify.app/
 author:   Jürgen Adams
@@ -17,12 +17,12 @@ archetype:
   - Multi Purpose
   - Documentation
   - Business
-description: J1 Template - Create powerful modern static websites.
+description: J1 Theme - Create powerful modern static websites.
 ---
 
 # A fully configurable Jekyll Theme
 
-* Fully Responsive. J1 Template supports modern web browsers on all
+* Fully Responsive. J1 Theme supports modern web browsers on all
   devices for best results on PCs, Tablets, and SmartPhones.
 * Full Bootstpap V4 support. Current Technology and Design. Excellent
   performance running desktop and mobile websites. Use Jekyll One to
@@ -33,11 +33,11 @@ description: J1 Template - Create powerful modern static websites.
 
 ## Features
 
-The template combines the best free software for the web. Jekyll One Template
+The template combines the best free software for the web. Jekyll One Theme
 is OpenSource and the modules included are free to use as well. No license
 issues for private or professional use.
 
-* Fully Responsive. J1 Template supports modern web browsers on all
+* Fully Responsive. J1 Theme supports modern web browsers on all
   devices for best results on PCs, Tablets, and SmartPhones.
 * Full Bootstpap V4 support. Current Technology and Design. Excellent
   performance running desktop and mobile websites. Use Jekyll One to

@@ -1,0 +1,231 @@
+# ------------------------------------------------------------------------------
+#  ~/_data/apps/j1_justified_gallery.yml
+#  Default configuration for J1 Justified Gallery (jg)
+#
+#  Product/Info:
+#  https://jekyll.one
+#
+#  Copyright (C) 2022 Juergen Adams
+#
+#  J1 Theme is licensed under the MIT License.
+#  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# GENERAL gallery settings
+#
+# enabled
+# ------------------------------------------------------------------------------
+#   Enables|Disables the use of a gallery
+#
+# jsonPath
+# ------------------------------------------------------------------------------
+#   All data items displayed by a gallery are being read from a
+#   JSON file automatically generated from that configuration.
+#   AJAX get method is used to supply the gallery with respective
+#   the HTML code at the time the gallery is initialized (by the
+#   J1 Adapter for J1 Justified Gallery).
+#
+#   values:                         string
+#   default:                        /assets/data/galleries.json
+#
+# instance_type
+# ------------------------------------------------------------------------------
+#   Specifies if a modules can be run as a single instance
+#   (only) or run in multiple instances.
+#
+#   NOTE: The parameter instance_type controls how MODULE runner
+#         manages configuration options.
+#
+#   values:                         single|multiple
+#   default:                        single
+#
+# defaults
+# ------------------------------------------------------------------------------
+#   All data items displayed by a gallery are being read from a
+#   JSON file automatically generated from that configuration.
+#
+#   values:                         string
+#   default:                        /assets/data/galleries.json
+#
+enabled:                            true
+jsonPath:                           /assets/data/galleries.json
+instance_type:                      multiple
+
+defaults:
+  rowHeight:                        170
+
+# ------------------------------------------------------------------------------
+# INSTANCE configuration
+#
+# lightbox_options
+# ------------------------------------------------------------------------------
+#
+#
+#   lightbox
+#   ----------------------------------------------------------------------------
+#   Specifies the lightbox used with the gallery
+#
+#   lb: Lightbox 2
+#   lg: LightGallery
+#   cb: Colorbox
+#
+#   values:                         lb|lg|cb
+#   default:                        lb
+# --------------------------------------------------------------------
+galleries:
+
+
+  # ----------------------------------------------------------------------------
+  # Live DEMO
+  #
+  - gallery:
+      enabled:                      true
+      type:                         image
+      id:                           jg_live_demo
+#     title:                        Masonry grid layout of Justified Gallery
+      show_delay:                   300
+      css_classes:                  mb-3
+      images_path:                  /assets/images/modules/gallery/justified_gallery
+      thumb_path:                   /assets/images/modules/gallery/justified_gallery
+      images:                       [
+                                      24096687789_c37d45712f_b.jpg, 23753792354_bd75d8dabc_b.jpg,
+                                      16961685188_f130144d60_b.jpg, 24014174029_2cfa940264_b.jpg,
+                                      13824674674_ca1e482394_b.jpg, 13824322785_104dc0968c_b.jpg,
+                                      8842312290_f310d491f4_b.jpg, 8811828736_88392f614a_b.jpg,
+                                      8400794773_932654a20e_b.jpg, 8157236803_78aa1698b6_b.jpg,
+                                      7948632554_01f6ae6b6f_b.jpg, 7822678460_ee98ff1f69_b.jpg,
+                                      7002395006_29fdc85f7a_b.jpg, 7062575651_b23918b11a_b.jpg,
+                                      6841267340_855273fd7e_b.jpg, 6791628438_affaa19e10_b.jpg,
+                                      6916180091_9c9559e463_b.jpg, 6880502467_d4b3c4b2a8_b.jpg,
+                                      6876412479_6268c6e2aa_b.jpg, 6840627709_92ed52fb41_b.jpg
+                                    ]
+      captions_gallery:             [
+                                      Peace of mind, Abu Dhabi,
+                                      Never stop climbing, Terme,
+                                      Deep sea, Above the World,
+                                      The Spring, Cat firmness,
+                                      Into the Sea, Bologna's T-Day,
+                                      Just in a dream Place, Erice,
+                                      Freedom, Maybe spring,
+                                      Love, These are the colors I love,
+                                      The Hope, Florence streets. Florence people.,
+                                      I Love You, The painter in Florence
+                                    ]
+      captions_lightbox:            [
+                                      <p>Peace of mind<p>,
+                                      Abu Dhabi,
+                                      Never stop climbing, Terme,
+                                      Deep sea, Above the World,
+                                      The Spring, Cat firmness,
+                                      Into the Sea, Bologna's T-Day,
+                                      Just in a dream Place, Erice,
+                                      Freedom, Maybe spring,
+                                      Love, These are the colors I love,
+                                      The Hope, Florence streets. Florence people.,
+                                      I Love You, The painter in Florence
+                                    ]
+      gallery_options:
+        rowHeight:                  120
+        margins:                    1
+      lightbox_options:
+        lightbox:                   lg
+        mode:                       lg-fade
+        cssEasing:                  cubic-bezier(0.25, 0, 0.25, 1)
+
+
+  # ----------------------------------------------------------------------------
+  # Gallery Customizer
+  #
+  - gallery:
+      enabled:                      true
+      type:                         image
+      id:                           jg_customizer
+      show_delay:                   300
+      css_classes:                  mb-3
+      images_path:                  /assets/images/modules/gallery/justified_gallery
+      thumb_path:                   /assets/images/modules/gallery/justified_gallery
+      images:                       [
+                                      24096687789_c37d45712f_b.jpg, 23753792354_bd75d8dabc_b.jpg,
+                                      16961685188_f130144d60_b.jpg, 24014174029_2cfa940264_b.jpg,
+                                      13824674674_ca1e482394_b.jpg, 13824322785_104dc0968c_b.jpg,
+                                      8842312290_f310d491f4_b.jpg,  8811828736_88392f614a_b.jpg,
+                                      8400794773_932654a20e_b.jpg,  8157236803_78aa1698b6_b.jpg,
+                                      7948632554_01f6ae6b6f_b.jpg,  7822678460_ee98ff1f69_b.jpg,
+                                      7002395006_29fdc85f7a_b.jpg,  7062575651_b23918b11a_b.jpg,
+                                      6841267340_855273fd7e_b.jpg,  6791628438_affaa19e10_b.jpg,
+                                      6916180091_9c9559e463_b.jpg,  6880502467_d4b3c4b2a8_b.jpg,
+                                      6876412479_6268c6e2aa_b.jpg,  6840627709_92ed52fb41_b.jpg
+                                    ]
+      captions_gallery:             [
+                                      Peace of mind, Abu Dhabi,
+                                      Never stop climbing, Terme,
+                                      Deep sea, Above the World,
+                                      The Spring, Cat firmness,
+                                      Into the Sea, Bologna's T-Day,
+                                      Just in a dream Place, Erice,
+                                      Freedom, Maybe spring,
+                                      Love, These are the colors I love,
+                                      The Hope, Florence streets. Florence people.,
+                                      I Love You, The painter in Florence
+                                    ]
+      captions_lightbox:            [
+                                      <p>Peace of mind<p>,
+                                      Abu Dhabi,
+                                      Never stop climbing, Terme,
+                                      Deep sea, Above the World,
+                                      The Spring, Cat firmness,
+                                      Into the Sea, Bologna's T-Day,
+                                      Just in a dream Place, Erice,
+                                      Freedom, Maybe spring,
+                                      Love, These are the colors I love,
+                                      The Hope, Florence streets. Florence people.,
+                                      I Love You, The painter in Florence
+                                    ]
+      gallery_options:
+        rowHeight:                  120
+        margins:                    1
+      lightbox_options:
+        lightbox:                   lg
+        mode:                       lg-fade
+        cssEasing:                  cubic-bezier(0.25, 0, 0.25, 1)
+
+
+  # ----------------------------------------------------------------------------
+  # Old Times
+  #
+  - gallery:
+      enabled:                      true
+      type:                         image
+      id:                           jg_old_times
+#     title:                        Old Times
+      show_delay:                   300
+      title:                        GrandPa around the 1930th
+      css_classes:                  mb-5
+      images_path:                  /assets/images/modules/gallery/old_times
+      thumb_path:                   /assets/images/modules/gallery/old_times
+      images:                       [
+                                      image_01.jpg, image_02.jpg,
+                                      image_03.jpg, image_04.jpg
+                                    ]
+      captions_gallery:             [
+                                      "GrandPa's 80th Birthday",
+                                      "GrandPa's 80th Birthday",
+                                      "GrandPa's annual journey",
+                                      "GrandPa's annual journey"
+                                    ]
+      captions_lightbox:            [
+                                      "<p>GrandPa's 80th Birthday</p><p>Collegues from the Painters Union</p>",
+                                      "<p>GrandPa's 80th Birthday</p><p>Family and Friends at the restaurant</p>",
+                                      "<p>GrandPa's annual journey</p><p>Down the Rhine</p>",
+                                      "<p>GrandPa's annual journey<p><p>Having some Wine</p>"
+                                    ]
+      gallery_options:
+        rowHeight:                  200
+        margins:                    5
+      lightbox_options:
+        lightbox:                   lg
+        mode:                       lg-fade
+        cssEasing:                  cubic-bezier(0.25, 0, 0.25, 1)
+
+

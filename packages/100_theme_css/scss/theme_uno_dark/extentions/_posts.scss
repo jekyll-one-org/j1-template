@@ -1,0 +1,39 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/100_theme_css/scss/theme_uno_dark/extentions/_posts.scss
+ #
+ # Product/Info:
+ # https:#jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+// Headlines
+// -----------------------------------------------------------------------------
+
+.post-headline h1,
+.post-headline h2 {
+    color: $grey-400;
+//  border-bottom: 1px dotted  $grey-800 !important;
+}
+
+// Series
+// -----------------------------------------------------------------------------
+.series-exerpt {
+  color: $grey-300;
+}
+
+.series-navigation ul li a {
+  background-color: $grey-300;
+}
+.series-navigation ul li a:hover {
+    color: $blue !important;
+}
+
+.series-navigation ul li.current a {
+  background-color: rgba(255, 255, 255, 0.3);
+}

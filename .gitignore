@@ -57,124 +57,124 @@ tmp/
 private.yml
 
 
-# Unneeded files for package 100_template_css
+# Unneeded files for package 100_theme_css
 # ------------------------------------------------------------------------------
-packages/100_template_css/dist/
+packages/100_theme_css/dist/
 
-packages/100_template_css/node_modules/
+packages/100_theme_css/node_modules/
 
-packages/100_template_css/yarn.lock
+packages/100_theme_css/yarn.lock
 
-packages/100_template_css/package-lock.json
+packages/100_theme_css/package-lock.json
 
-packages/100_template_css/report*.json
+packages/100_theme_css/report*.json
 
 
-# Unneeded files for package 200_template_js
+# Unneeded files for package 200_theme_js
 # ------------------------------------------------------------------------------
-packages/200_template_js/dist/
+packages/200_theme_js/dist/
 
-packages/200_template_js/log/
+packages/200_theme_js/log/
 
-packages/200_template_js/node_modules/
+packages/200_theme_js/node_modules/
 
-packages/200_template_js/yarn.lock
+packages/200_theme_js/yarn.lock
 
-packages/200_template_js/package-lock.json
+packages/200_theme_js/package-lock.json
 
 
-# Unneeded files for package 300_template_src
+# Unneeded files for package 300_theme_src
 # ------------------------------------------------------------------------------
-packages/300_template_src/assets/themes/j1/core/css/
+packages/300_theme_src/assets/themes/j1/core/css/
 
-packages/300_template_src/assets/themes/j1/core/js/template*
+packages/300_theme_src/assets/themes/j1/core/js/template*
 
-packages/300_template_src/assets/themes/j1/modules/nbinteract-core/js/nbinteract/j1-nbinteract-core*
+packages/300_theme_src/assets/themes/j1/modules/nbinteract-core/js/nbinteract/j1-nbinteract-core*
 
 
-# Unneeded files for package 400_template_site
+# Unneeded files for package 400_theme_site
 # Ignore symbolic links as simple files!!!
 # ------------------------------------------------------------------------------
-packages/400_template_site/_includes
+packages/400_theme_site/_includes
 
-packages/400_template_site/_layouts
+packages/400_theme_site/_layouts
 
-packages/400_template_site/_plugins
+packages/400_theme_site/_plugins
 
-packages/400_template_site/_install
+packages/400_theme_site/_install
 
-packages/400_template_site/_config.yml
+packages/400_theme_site/_config.yml
 
-packages/400_template_site/apps
+packages/400_theme_site/apps
 
-packages/400_template_site/assets
+packages/400_theme_site/assets
 
-packages/400_template_site/_data/j1_config.yml
+packages/400_theme_site/_data/j1_config.yml
 
-packages/400_template_site/_data/modules/cc.yml
+packages/400_theme_site/_data/modules/cc.yml
 
 
 # Ignore files and folders
 # ------------------------------------------------------------------------------
-packages/400_template_site/.idea/
+packages/400_theme_site/.idea/
 
-packages/400_template_site/.eslintrc.json
+packages/400_theme_site/.eslintrc.json
 
-packages/400_template_site/.sass-cache/
+packages/400_theme_site/.sass-cache/
 
-packages/400_template_site/.jekyll-cache/
+packages/400_theme_site/.jekyll-cache/
 
-packages/400_template_site/_sass/
+packages/400_theme_site/_sass/
 
-packages/400_template_site/node_modules/
+packages/400_theme_site/node_modules/
 
-packages/400_template_site/vendor/
+packages/400_theme_site/vendor/
 
-packages/400_template_site/_site/
+packages/400_theme_site/_site/
 
-packages/400_template_site/_tmp/
+packages/400_theme_site/_tmp/
 
-packages/400_template_site/.bundle/
+packages/400_theme_site/.bundle/
 
-packages/400_template_site/yarn.lock
+packages/400_theme_site/yarn.lock
 
-packages/400_template_site/package-lock.json
+packages/400_theme_site/package-lock.json
 
-packages/400_template_site/Gemfile.lock
+packages/400_theme_site/Gemfile.lock
 
-packages/400_template_site/.jekyll-metadata
+packages/400_theme_site/.jekyll-metadata
 
-packages/400_template_site/.jekyll-cache/
+packages/400_theme_site/.jekyll-cache/
 
-#packages/400_template_site/_config.yml
+#packages/400_theme_site/_config.yml
 
-packages/400_template_site/_data/private*.yml
+packages/400_theme_site/_data/private*.yml
 
-packages/400_template_site/collections/posts/featured/_posts/*welcome-to-J1 Template.adoc
+packages/400_theme_site/collections/posts/featured/_posts/*welcome-to-J1 Theme.adoc
 
-packages/400_template_site/pages/public/jupyter/notebooks/textbooks/
+packages/400_theme_site/pages/public/jupyter/notebooks/textbooks/
 
 
-# Unneeded files for package 500_template_gem
+# Unneeded files for package 500_theme_gem
 # ------------------------------------------------------------------------------
-packages/500_template_gem/.bundle/
+packages/500_theme_gem/.bundle/
 
-packages/500_template_gem/.idea/
+packages/500_theme_gem/.idea/
 
-packages/500_template_gem/apps/
+packages/500_theme_gem/apps/
 
-packages/500_template_gem/_*/
+packages/500_theme_gem/_*/
 
-packages/500_template_gem/node_modules/
+packages/500_theme_gem/node_modules/
 
-packages/500_template_gem/assets/
+packages/500_theme_gem/assets/
 
-packages/500_template_gem/.git/
+packages/500_theme_gem/.git/
 
-packages/500_template_gem/yarn.lock
+packages/500_theme_gem/yarn.lock
 
-packages/500_template_gem/package-lock.json
+packages/500_theme_gem/package-lock.json
 
-packages/500_template_gem/lib/starter_web/
+packages/500_theme_gem/lib/starter_web/
 
-packages/500_template_gem/**/_unused
+packages/500_theme_gem/**/_unused

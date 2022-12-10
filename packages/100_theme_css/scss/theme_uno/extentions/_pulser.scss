@@ -1,0 +1,216 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/extensions/pulser.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # NOTE: Util styles added on button elements to create an PULSED animation
+ # -----------------------------------------------------------------------------
+*/
+
+.pulsed .pulsed-z1 .pulsed-z2 .pulsed-z3{
+  overflow: visible !important;
+  position: relative;
+}
+
+.pulsed::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: inherit;
+  border-radius: inherit;
+  -webkit-transition: opacity .3s, -webkit-transform .3s;
+  transition: opacity .3s, -webkit-transform .3s;
+  transition: opacity .3s, transform .3s;
+  transition: opacity .3s, transform .3s, -webkit-transform .3s;
+  -webkit-animation: pulse-animation-z2 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  animation: pulse-animation-z2 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  z-index: -1;
+}
+
+.pulsed-z1::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: inherit;
+  border-radius: inherit;
+  -webkit-transition: opacity .3s, -webkit-transform .3s;
+  transition: opacity .3s, -webkit-transform .3s;
+  transition: opacity .3s, transform .3s;
+  transition: opacity .3s, transform .3s, -webkit-transform .3s;
+  -webkit-animation: pulsed-animation-z1 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  animation: pulsed-animation-z1 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  z-index: -1;
+}
+
+.pulsed-z2::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: inherit;
+  border-radius: inherit;
+  -webkit-transition: opacity .3s, -webkit-transform .3s;
+  transition: opacity .3s, -webkit-transform .3s;
+  transition: opacity .3s, transform .3s;
+  transition: opacity .3s, transform .3s, -webkit-transform .3s;
+  -webkit-animation: pulsed-animation-z2 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  animation: pulsed-animation-z2 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  z-index: -1;
+}
+
+.pulsed-z3::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: inherit;
+  border-radius: inherit;
+  -webkit-transition: opacity .3s, -webkit-transform .3s;
+  transition: opacity .3s, -webkit-transform .3s;
+  transition: opacity .3s, transform .3s;
+  transition: opacity .3s, transform .3s, -webkit-transform .3s;
+  -webkit-animation: pulsed-animation-z3 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  animation: pulsed-animation-z3 1s cubic-bezier(0.24, 0, 0.38, 1) infinite;
+  z-index: -1;
+}
+
+@-webkit-keyframes pulsed-animation-z1 {
+    0% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0;
+        -webkit-transform: scale(1.125);
+        transform: scale(1.125);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(1.125);
+        transform: scale(1.125);
+    }
+}
+
+@keyframes pulsed-animation-z1 {
+    0% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0;
+        -webkit-transform: scale(1.125);
+        transform: scale(1.125);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(1.125);
+        transform: scale(1.125);
+    }
+}
+
+@-webkit-keyframes pulsed-animation-z2 {
+    0% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0;
+        -webkit-transform: scale(1.25);
+        transform: scale(1.25);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(1.25);
+        transform: scale(1.25);
+    }
+}
+
+@keyframes pulsed-animation-z2 {
+    0% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0;
+        -webkit-transform: scale(1.25);
+        transform: scale(1.25);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(1.25);
+        transform: scale(1.25);
+    }
+}
+
+@-webkit-keyframes pulsed-animation-z3 {
+    0% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0;
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+    }
+}
+
+@keyframes pulsed-animation-z3 {
+    0% {
+        opacity: 1;
+        -webkit-transform: scale(1);
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0;
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+    }
+
+    100% {
+        opacity: 0;
+        -webkit-transform: scale(1.5);
+        transform: scale(1.5);
+    }
+}

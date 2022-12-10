@@ -1,0 +1,92 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/extensions/_scroll-group.scss
+ # Class for the scoller|infinite scroll (based|modified from BS list_groups)
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+//  List group
+// -----------------------------------------------------------------------------
+.scroll-group {
+  // #853 start -- https://github.com/twbs/bootstrap/pull/18981/files
+  @if $enable-flex {
+    display: flex;
+    flex-direction: row;
+  }
+
+  flex-grow: 1;
+  padding-left: 0;
+  margin-bottom: 0;
+  border-radius: 0.1rem;
+}
+
+.scroll-group-horizontal {
+    flex-direction: row;
+}
+
+//  List group items
+// -----------------------------------------------------------------------------
+.scroll-group-item {
+  // #853 start -- https://github.com/twbs/bootstrap/pull/18981/files
+  @if $enable-flex {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+  } @else {
+    display: block;
+  }
+  padding: 1rem;
+  line-height: 1;
+  background-color: transparent;
+  border: 0;
+  margin-right: 1%;
+}
+
+//  Media queries
+// -----------------------------------------------------------------------------
+@media only screen and (min-width: 576px) {
+  .scroll-group-item.items-auto {
+    width: 48.3%; }
+  .scroll-group-item.items-1 {
+    width: 96%; }
+  .scroll-group-item.items-2 {
+    width: 48.3%; }
+  .scroll-group-item.items-3 {
+    width: 48.3%; }
+  .scroll-group-item.items-4 {
+    width: 48.3%; }
+}
+
+@media only screen and (min-width: 768px) {
+  .scroll-group-item.items-auto {
+    width: 31.333%; }
+  .scroll-group-item.items-1 {
+    width: 96%; }
+  .scroll-group-item.items-2 {
+    width: 48.3%; }
+  .scroll-group-item.items-3 {
+    width: 48.3%; }
+  .scroll-group-item.items-4 {
+    width: 48.3%; }
+}
+
+@media only screen and (min-width: 992px) {
+  .scroll-group-item.items-auto {
+    width: 23.8%; }
+  .scroll-group-item.items-1 {
+    width: 96%; }
+  .scroll-group-item.items-2 {
+    width: 48.3%;
+    }
+  .scroll-group-item.items-3 {
+    width: 31.333%; }
+  .scroll-group-item.items-4 {
+    width: 23.8%; }
+}

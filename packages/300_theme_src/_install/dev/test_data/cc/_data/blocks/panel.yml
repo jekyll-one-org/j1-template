@@ -1,0 +1,331 @@
+# ------------------------------------------------------------------------------
+# ~/_data/components/j1_panel.yml
+# Template specific configuration data to configure panel lanes
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2022 Juergen Adams
+#
+# J1 Theme is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+#
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# About this configuration (used for CC only)
+#
+about_config:
+  title:                                Panel
+  scope:                                User settings
+  location:                             _data/blocks/panel.yml
+
+# ------------------------------------------------------------------------------
+# SETTINGS
+#
+settings:
+
+  # ----------------------------------------------------------------------------
+  # INTRO Panel
+  #
+  intro:
+    # --------------------------------------------------------------------------
+    # INTRO panel properties
+    #
+    - name:                             Home Intro Panel
+      panel:
+        enabled:                        true
+        id:                             home_intro_panel
+        comment:                        Home Intro Panel
+        type:                           intro
+        icon_family:                    MDI
+        style:                          flat
+        raised:
+        lane_span:                      fixed
+
+        cards:
+
+          - name:                       Full Responsive
+            card:
+              enabled:                  true
+              type:                     text
+              title:                    J1 Theme
+              tagline:                  Full Responsive
+              icon:                     responsive
+              icon_size:                8x
+              icon_color:               md-grey-800
+              text: >
+                                        The Web is everywhere. J1 Theme supports all Hardware.
+                                        for best results on PCs, Tablets and SmartPhones.
+                                        <br/><br/>
+                                        <i>Follow Your Visitors</i>
+
+              buttons:
+                - name:                 Read More
+                  button:
+                    text:               Read More
+                    class:              btn-primary btn-flex
+                    icon:               eye
+                    icon_size:          lg
+                    icon_color:         md-grey-50
+                    href:               /pages/public/panels/intro_panel#responsive-design
+
+          - name:                       HTML5
+            card:
+              enabled:                  true
+              type:                     text
+              title:                    J1 Theme
+              tagline:                  HTML5 &#xB7; CSS3 &#xB7; JS
+              icon:                     language-html5
+              icon_size:                8x
+              icon_color:               md-grey-800
+              text: >
+                                        Current Technology and Design.
+                                        Excellent Performance.
+                                        Present all Content Pages for Products,
+                                        Projects, Services at it's best.
+                                        <br/><br/>
+                                        <i>Make your Web Site unique</i>
+              buttons:
+                - name:                 Read More
+                  button:
+                    text:               Read More
+                    class:              btn-primary btn-flex
+                    icon:               eye
+                    icon_size:          lg
+                    icon_color:         md-grey-50
+                    href:               /pages/public/panels/intro_panel#current-technology
+
+          - name:                       Start in No Time
+            card:
+              enabled:                  true
+              type:                     text
+              title:                    J1 Theme
+              tagline:                  Start in No Time
+              icon:                     clock
+              icon_size:                8x
+              icon_color:               md-grey-800
+              text: >
+                                        No programming is needed. For J1 Theme,
+                                        a large number of building blocks are available
+                                        to manage the job.
+                                        <br/><br/>
+                                        <i>Configure what needs to be done</i>
+              buttons:
+                - name:                 Read More
+                  button:
+                    text:               Read More
+                    class:              btn-primary btn-flex
+                    icon:               eye
+                    icon_size:          lg
+                    icon_color:         md-grey-50
+                    href:               /pages/public/panels/intro_panel#launch-ready
+
+
+  # ----------------------------------------------------------------------------
+  # SERVICE Panel
+  #
+  service:
+    # --------------------------------------------------------------------------
+    # SERVICE panel properties
+    #
+    - name:                             Home Service Panel
+      panel:
+        enabled:                        true
+        id:                             home_service_panel
+        comment:                        Home Service Panel
+        type:                           service
+        icon_family:                    MDI
+        style:                          flat
+        lane_span:                      fixed
+
+        header:
+          enabled:                      true
+          title:                        J1 Theme Overview
+          description: >
+                                        Creating and managing Web sites using Jekyll is different
+                                        in compare to CMS Systems like Drupal, Joomla oder Wordpress.
+                                        No surprise: Jekyll One Theme is <b>different</b> as well.
+                                        Template systems are very common, a huge number of site
+                                        templates are available for all CMS and Web site generators.
+                                        The same to Jekyll. J1 Theme is <b>not</b> the first
+                                        template for Jekyll available - it is probably the <b>youngest</b>!
+                                        <br \><br \>
+                                        Classic templates are focussing the <b>layout</b> and <b>design</b>
+                                        of a web. They offer pre-build, standardized <b>building blocks</b>
+                                        and tools <b>designing</b> web sites. The are embedded into the
+                                        creators system and often hard to customize. J1 for Jekyll goes different.
+                                        J1 Theme combines layout, design and <b>functionality</b> for a web.
+                                        The template offers building blocks to create common page components,
+                                        implements a sytem independend markup language (Asciidoc and Markdown)
+                                        to create the content and adds a large number of usefull functions based
+                                        on common Javascript libraries for the web from a single source. That way,
+                                        J1 web sites behaves as one unit in design <b>and</b> functionality.
+                                        No breaks between the different components.
+                                        <br \><br \>
+                                        How get this managed? Find below the answers to how J1 Theme is
+                                        organized, the building blocks and functional components as an overview.
+                                        Read in in a quite compact form what J1 Theme constitutes: the <b>Core</b>,
+                                        the <b>Components</b> and the <b>Module</b>.
+
+
+        cards:
+
+          - name:                       The Core
+            card:
+              enabled:                  true
+              type:                     service
+              icon:                     bullseye
+              icon_size:                8x
+              icon_color:               md-grey-800
+              href:                     /pages/public/panel/service_panel/core
+              title:                    J1 Theme
+              tagline:                  The Core
+              text: >
+                                        The core integrates the site generator Jekyll into J1, contains all
+                                        base functions for page layout, design and configuration. Provides
+                                        procedures to generate web pages automatically based on a given layout
+                                        based on design settings.
+
+              services:
+
+                - name:                 Layout System
+                  service:
+                    title:              Layout System
+                    href:               /pages/public/panel/service_panel/core#layout-system
+
+                - name:                 Template Engine
+                  service:
+                    title:              Template Engine
+                    href:               /pages/public/panel/service_panel/core#template-engine
+
+                - name:                 Bootstrap Integration
+                  service:
+                    title:              Bootstrap Integration
+                    href:               /pages/public/panel/service_panel/core#bootstrap-integration
+
+          - name:                       The Components
+            card:
+              enabled:                  true
+              type:                     service
+              icon:                     locker-multiple
+              icon_size:                8x
+              icon_color:               md-grey-800
+              href:                     /pages/public/panel/service_panel/components/
+              title:                    J1 Theme
+              tagline:                  The Components
+              text: >
+                                        Building blocks ready-to-use to create common page components,
+                                        connections to systems and workflows of social networks like
+                                        Twitter or Facebook or Online Services like Disqus for
+                                        a blog-related Web and Comments.
+
+              services:
+
+                - name:                 Blocks
+                  service:
+                    title:              Blocks
+                    href:               /pages/public/panel/service_panel/components#panel
+
+                - name:                 Builder
+                  service:
+                    title:              Builder
+                    href:               /pages/public/panel/service_panel/components#builder
+
+                - name:                 Connectors
+                  service:
+                    title:              Connectors
+                    href:               /pages/public/panel/service_panel/components#connectors
+
+          - name:                       The Modules
+            card:
+              enabled:                  true
+              type:                     service
+              icon:                     language-javascript
+              icon_size:                8x
+              icon_color:               md-grey-800
+              href:                     /pages/public/panel/service_panel/modules/
+              title:                    J1 Theme
+              tagline:                  The Modules
+              text: >
+                                        Javascript libraries and ready-to-use applications gets
+                                        the site dynamic. JS modules add complex functionality
+                                        to Web pages to integrate for example image and video content or
+                                        provides sliders to present animated text or image data.
+
+              services:
+
+                - name:                 Slider
+                  service:
+                    title:              Slider
+                    href:               /pages/public/panel/service_panel/modules#slider
+
+                - name:                 Galleries
+                  service:
+                    title:              Galleries
+                    href:               /pages/public/panel/service_panel/modules#galleries
+
+                - name:                 Lightboxes
+                  service:
+                    title:              Lightboxes
+                    href:               /pages/public/panel/service_panel/modules#lightboxes
+
+  # ----------------------------------------------------------------------------
+  # NEWS Panel
+  #
+  news:
+    # --------------------------------------------------------------------------
+    # NEWS panel properties
+    #
+    - name:                             Home News Panel
+      panel:
+        enabled:                        true
+        id:                             home_news_panel
+        comment:                        Home Service Panel
+        type:                           news
+        style:                          flat
+        title:                          Current Articles · Most Read
+        tagline:
+        lane_span:                      fixed
+
+        cards:
+
+          - name:                       Last Current Posts
+            card:
+              enabled:                  true
+              type:                     last_current
+              category:                 featured
+              max_posts:                1
+
+          - name:                       Recent Posts
+            card:
+              enabled:                  true
+              type:                     recent
+              category:                 featured
+              max_posts:                3
+
+  # # ----------------------------------------------------------------------------
+  # # STEP Panel
+  # #
+  # step:
+  #   # --------------------------------------------------------------------------
+  #   # STEP panel properties
+  #   #
+  #   - name:                         Home Step Panel
+  #     panel:
+  #       enabled:                    false
+  #       id:                         home_step_panel
+  #       type:                       step
+  #       style:                      dark
+  #       lane_span:                  fixed
+  # 
+  #       cards:
+  #         - card:
+  #             title:                Marketing & Consulting
+  #             tagline: >
+  #                                   Donec id elit non mi porta gravida at eget
+  #                                   metus id elit mi egetine. Fusce dapibus
+  
+
+# END config
+# ------------------------------------------------------------------------------

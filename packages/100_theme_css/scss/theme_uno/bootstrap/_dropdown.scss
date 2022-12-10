@@ -1,0 +1,26 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/bootstrap/_dropdown.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+// Dropdown
+// -----------------------------------------------------------------------------
+
+// jadams, 2020-09-02: to be checked if overloading conflicts
+// with base BS styles (e.g. loaded as theme)
+.dropdown-item {
+  color: $gray !important;
+}
+
+.dropdown-item:focus, .dropdown-item:hover {
+  background-color: $gray-300 !important;
+}

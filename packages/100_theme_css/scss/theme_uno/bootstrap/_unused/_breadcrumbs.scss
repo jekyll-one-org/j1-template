@@ -1,0 +1,25 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/bootstrap/_breadcrumbs.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+.breadcrumb {
+    font-size: .9rem;
+    padding: 0 0 0 0.5rem !important;
+    background-color: $gray-200 !important;
+    border: 1px solid $gray-500;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    color: $gray-900;
+    content: "\20 \B7 \20" !important;
+}

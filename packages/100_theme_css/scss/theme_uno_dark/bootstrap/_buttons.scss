@@ -1,0 +1,107 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/100_theme_css/scss/theme_uno_dark/bootstrap/_buttons.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+.btn {
+  color: $grey-300 !important;
+  text-shadow: 1px 1px 1px $darken-300;
+  &:not([disabled]):not(.disabled).active,
+  &.disabled {
+    box-shadow: none;
+  }
+  &:hover,
+  &:focus,
+  &:not([disabled]):not(.disabled):active,
+  &:not([disabled]):not(.disabled):active:hover,
+  &:not([disabled]):not(.disabled).active:hover {
+    color: $gray-900 !important;
+  }
+}
+.btn-primary.btn-raised {
+  background-color: $grey-900 !important;
+  @include btn-shadow($primary);
+  &:not([disabled]):not(.disabled):hover,
+  &:not([disabled]):not(.disabled):focus,
+  &:not([disabled]):not(.disabled):active:hover,
+  &:not([disabled]):not(.disabled).active:hover {
+    @include btn-shadow-inverse($primary);
+  }
+}
+.btn-secondary.btn-raised {
+  @include btn-shadow($secondary);
+  &:not([disabled]):not(.disabled):hover,
+  &:not([disabled]):not(.disabled):focus,
+  &:not([disabled]):not(.disabled):active,
+  &:not([disabled]):not(.disabled).active {
+    @include btn-shadow-inverse($secondary);
+  }
+}
+.btn-success.btn-raised {
+  @include btn-shadow($success);
+  color: $white;
+  &:not([disabled]):not(.disabled):hover,
+  &:not([disabled]):not(.disabled):focus,
+  &:not([disabled]):not(.disabled):active,
+  &:not([disabled]):not(.disabled).active {
+    @include btn-shadow-inverse($success);
+  }
+}
+.btn-info.btn-raised {
+  @include btn-shadow($info);
+  color: $white;
+  &:not([disabled]):not(.disabled):hover,
+  &:not([disabled]):not(.disabled):focus,
+  &:not([disabled]):not(.disabled):active,
+  &:not([disabled]):not(.disabled).active {
+    @include btn-shadow-inverse($info);
+  }
+}
+.btn-warning.btn-raised {
+  @include btn-shadow($warning);
+  color: $white;
+  &:not([disabled]):not(.disabled):hover,
+  &:not([disabled]):not(.disabled):focus,
+  &:not([disabled]):not(.disabled):active,
+  &:not([disabled]):not(.disabled).active {
+    @include btn-shadow-inverse($warning);
+  }
+}
+.btn-danger.btn-raised {
+  @include btn-shadow($danger);
+  &:not([disabled]):not(.disabled):hover,
+  &:not([disabled]):not(.disabled):focus,
+  &:not([disabled]):not(.disabled):active,
+  &:not([disabled]):not(.disabled).active {
+    @include btn-shadow-inverse($danger);
+  }
+}
+.btn-outline.btn-raised {
+  &-primary {
+    color: $grey-100 !important;
+  }
+}
+.btn-link {
+  color: $gray-300 !important;
+  border-color: transparent;
+}
+
+.btn-group,
+.btn-group-vertical {
+  .btn.active {
+    border-color: $darken-600 !important;
+  }
+}
+
+.btn-check:focus + .btn, .btn:focus {
+  box-shadow: unset;
+}

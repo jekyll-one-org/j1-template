@@ -1,0 +1,155 @@
+# ------------------------------------------------------------------------------
+# ~/_data/apps/j1_navigator.yml
+# Configuration of the J1 NAV Module for all sub-modules 
+# except the main navigation bar
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2022 Juergen Adams
+#
+# J1 Theme is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+#
+# ------------------------------------------------------------------------------
+# NOTE:
+#   For main navigation bar settings, see j1_navigator_menu.yml
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# About this configuration (used for J1 CC only)
+#
+about_config:
+  title:                                Navigator
+  scope:                                Default settings
+  location:                             _data/modules/defaults/navigator.yml
+
+# ------------------------------------------------------------------------------
+# Default settings
+#
+defaults:
+
+  icon_family:                          MDI
+
+  nav_bar:
+    id:                                 navigator_nav_navbar_id
+    media_breakpoint:                   lg
+    brand_position:                     right
+    brand_type:                         image
+    brand_type_collapsed:               text
+    fixed:                              true
+    style:                              overlay
+    color:                              light
+    position:                           left
+    bottom_line_height:                 1
+    bottom_line_color:                  md_grey_200
+    background_color_full:              rgba_darken_400                         # rgba_darken
+    background_color_collapsed:         "#3f51b5"                               # "#20295B"
+    background_color_scrolled:          "#3f51b5"                               # "#20295B"
+
+  nav_menu:
+    id:                                 navigator_nav_menu_id
+    data_path:                          /assets/data/menu/index.html
+    raised_level:                       15
+    delay_menu_open:                    200
+    max_height:                         550
+    menu_font_size:                     larger
+    megamenu_font_size:                 large
+    icon_family:                        MDI
+    icon_style:                         mdi                                     # far regular icon
+    icon_color:                         "#9E9E9E"
+    icon_size:                          mdi-18px                                #larger
+    menu_item_color:                    rgba_lighten
+    menu_item_color_hover:              rgba_lighten_900
+    dropdown_style:                     raised
+    dropdown_item_style:                flat
+    dropdown_animate:                   false
+    dropdown_animate_in:                slideInDown
+    dropdown_animate_out:               fadeOutDown
+    dropdown_animate_duration:          .75
+    dropdown_item_width:                15
+    dropdown_menu_height_max:           25
+    dropdown_font_size:                 small
+    dropdown_padding_x:                 15
+    dropdown_padding_y:                 10
+    dropdown_item_color:                md_grey_900
+    dropdown_border_color:              "#3f51b5"                               #BS bg-primary
+    dropdown_border_top:                3
+    dropdown_border_radius:             0
+    dropdown_background_color_hover:    md_bluegrey_50
+    dropdown_background_color_active:   md_bluegrey_100
+
+  nav_quicklinks:
+    enabled:                            false
+    id:                                 navigator_nav_quicklinks_id
+    data_path:                          /assets/data/quicklinks/index.html
+    icon_family:                        MDI
+    icon_color:                         rgba_lighten
+    icon_color_hover:                   rgba_lighten_900
+    icon_size:                          larger
+
+    cookies_icon:                       cookie
+    top_search_icon:                    magnify
+
+    sidebar:                            true
+    sidebar_icon:                       dots-vertical
+    control_center:                     true
+    control_center_icon:                git
+    control_center_url:                 /pages/private/apps/site_manager/#cms_ui
+
+    disqus_icon:                        disqus
+    disqus_url:                         none
+    github_icon:                        github-circle
+    github_url:                         none
+    patreon_icon:                       patreon
+    patreon_url:                        none
+    facebook_icon:                      facebook
+    facebook_url:                       none
+    twitter_icon:                       twitter
+    twitter_url:                        none
+    signin:                             false
+    signin_client:                      enabled
+    signin_icon:                        login
+    signout_icon:                       logout
+
+  nav_topsearch:
+    enabled:                            false
+    id:                                 navigator_nav_topsearch_id
+    type:                               quicksearch
+    icon_family:                        MDI
+    icon_color:                         md_white
+    icon_size:                          xxxlarge
+    search_icon:                        magnify
+    close_icon:                         close
+    input_color:                        md_grey_900
+    background_color:                   md_grey_400
+    placeholder:                        QuickSearch
+    search_heading_lead:                ""
+    result_heading_lead:                ""
+
+  nav_sidebar:
+    enabled:                            false
+    id:                                 navigator_nav_sidebar_id
+    data_path:                          /assets/data/sidebar/index.html
+    width:                              380
+    icon_family:                        MDI
+    icon_color:                         md_white
+    icon_size:                          mdi-1x
+    sidebar_icon:                       dots-vertical
+    close_icon:                         close
+    background_color:                   md_grey_900
+
+  nav_authclient:
+    enabled:                            false
+    id:                                 navigator_nav_authclient_id
+    data_path:                          /assets/data/authclient/index.html
+    signin_modal_id:                    modalOmniSignIn
+    authclient_modals_id:               authclient_modals
+    hide_on_cookies_declined:           true
+    icon_family:                        MDI
+    signin_icon:                        login
+    signout_icon:                       logout
+
+
+# END config
+# ------------------------------------------------------------------------------

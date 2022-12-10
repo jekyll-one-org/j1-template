@@ -1,0 +1,18 @@
+/*
+ # ----------------------------------------------------------------------------
+ # ~/theme_uno_dark/vendor/bgplot/_theme_uno.scss
+ # Overload styles for nbinteract/bgplot widgets
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+.bqplot > svg .plotarea_background {
+   fill: #757575 !important;
+}

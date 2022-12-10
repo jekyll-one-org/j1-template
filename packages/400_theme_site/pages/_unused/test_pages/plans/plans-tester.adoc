@@ -1,0 +1,154 @@
+---
+title:                                  Tester
+tagline:                                plans
+date:                                   2020-11-03 00:00:00
+description: >
+                                        Welcome to the preview page focussing on the image module. This page
+                                        shows some valuable features of the J1 Theme to manage your image-based
+                                        content using lightboxes, carousels (slider), and galleries.
+
+categories:                             [ Testpages ]
+tags:                                   [ Example, Plans ]
+
+comments:                               false
+fab_menu_id:                            page_ctrl
+
+permalink:                              /pages/public/learn/plan_tester/
+regenerate:                             false
+
+resources:                              [ animate, clipboard, lightbox, rouge ]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/modules/attics/gift-from-hand-1920x1280.jpg
+          alt:                          gift-from-hand-1920x1280.jpg
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+== Plans
+
+_Github Sponsores_ support to invest in the open source projects you like to
+use or for businesses: you depend on. Contributors are working behind the
+scenes to make open source better for everyone -- give them the help and
+recognition they deserve.
+
+Fund our project that make up your web site easy to manage for excellent
+performance, reliability, and stability.
+
+++++
+<div class="container-fluid" role="main">
+  <div class="row g-0">
+    <div class="col">
+      <div id="plans-container" class="container mt-5">
+        <div class="row g-0">
+
+          <div class="col-sm-6 col-lg-3 mt-2 mb-2">
+            <div class="plan-card raised-z2">
+              <div class="plan-name">Starter</div>
+              <div class="plan-price">
+                <div class="price-currency">$</div>
+                <div class="price-amount">0</div>
+                <div class="price-period">/month</div>
+              </div>
+              <hr>
+              <div class="plan-benefits">
+                <div class="plan-benefit">Open source</div>
+                <div class="plan-disbenefit">This Plan displays a Beautiful Jekyll ad</div>
+                <div class="plan-disbenefit">No support offered</div>
+              </div>
+              <a class="btn btn-primary plan-select" href="/pages/public/plans/plan_details/" target="_blank" rel="noopener noreferrer">Select</a>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-3 mt-2 mb-2">
+            <div class="plan-card raised-z2">
+              <div class="plan-name">Base</div>
+              <div class="plan-price">
+                <div class="price-currency">$</div>
+                <div class="price-amount">2</div>
+                <div class="price-period">/month</div>
+              </div>
+              <hr>
+              <div class="plan-benefits">
+                <div class="plan-benefit">Warm fuzzy feeling knowing you're supporting open source</div>
+                <div class="plan-disbenefit">This Plan displays a Beautiful Jekyll ad</div>
+                <div class="plan-disbenefit">No support offered</div>
+              </div>
+              <a class="btn btn-primary plan-select" href="https://github.com/sponsors/daattali/sponsorships?tier_id=40732" target="_blank" rel="noopener noreferrer">Select</a>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-3 mt-2 mb-2">
+            <div class="plan-card raised-z5 recommended">
+              <div class="plan-name">Developer</div>
+              <div class="plan-price">
+                <div class="price-currency">$</div>
+                <div class="price-amount">5</div>
+                <div class="price-period">/month</div>
+              </div>
+              <hr>
+              <div class="plan-benefits">
+                <div class="plan-benefit">Warm fuzzy feeling knowing you're supporting open source</div>
+                <div class="plan-benefit"><strong>Remove Beautiful Jekyll ads</strong></div>
+                <div class="plan-benefit">Showcased as a <a href="https://beautifuljekyll.com/examples">Featured User</a></div>
+                <div class="plan-benefit">"Thank you" shout out on social media</div>
+                <div class="plan-disbenefit">No support offered</div>
+              </div>
+              <a class="btn btn-primary plan-select" href="https://github.com/sponsors/daattali/sponsorships?tier_id=7362" target="_blank" rel="noopener noreferrer">Select</a>
+            </div>
+          </div>
+
+          <div class="col-sm-6 col-lg-3 mt-2 mb-2">
+            <div class="plan-card raised-z2">
+              <div class="plan-name">Professional</div>
+              <div class="plan-price">
+                <div class="price-currency">$</div>
+                <div class="price-amount">10</div>
+                <div class="price-period">/month</div>
+              </div>
+              <hr>
+              <div class="plan-benefits">
+                <div class="plan-benefit">Warm fuzzy feeling knowing you're supporting open source</div>
+                <div class="plan-benefit"><strong>Remove Beautiful Jekyll ads</strong></div>
+                <div class="plan-benefit">Showcased as a <a href="https://beautifuljekyll.com/examples">Featured User</a></div>
+                <div class="plan-benefit">"Thank you" shout out on social media</div>
+                <div class="plan-benefit">Access to Dark Mode skin</div>
+                <div class="plan-benefit">Listed as an <a href="https://github.com/daattali/beautiful-jekyll#sponsors">Official Sponsor</a></div>
+                <div class="plan-benefit">Access to virtual office hours</div>
+              </div>
+              <a class="btn btn-primary plan-select" href="https://github.com/sponsors/daattali/sponsorships?tier_id=39856" target="_blank" rel="noopener noreferrer">Select</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+++++

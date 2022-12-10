@@ -1,0 +1,68 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/webhook.yml
+# User configuration settings for J1 (Github) WebHook module
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2022 Juergen Adams
+#
+# J1 Theme is licensed under the MIT License.
+# See: https://github.com/jekyll-one/J1 Theme/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# About this configuration (used for J1 CC only)
+#
+about_config:
+  title:                                WebHook
+  scope:                                User settings
+  location:                             _data/modules/webhook.yml
+
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+settings:
+
+  enabled:                              true
+  auth_status:                          authenticated
+  users:                                [ j1juergen ]
+
+  commit_detection:
+
+    modal_commit_detected:
+      enabled:                          true
+      autohide:                         false
+      autohidden:                       5000
+
+    modal_pull_response:
+      enabled:                          true
+      autohide:                         false
+      autohidden:                       3000
+
+  utility_server:
+
+    enabled:                            true
+    port:                               41001
+    origin:                             localhost
+    
+    oauth_client:
+      enabled:                            true
+
+    git_client:
+      enabled:                            true
+      pull:
+        execute:                          false                                   # true|false
+        response_success:                 The pull request to your local working copy finished successfully.
+        response_failed:                  "The pull request to your local working copy has failed. Reason: "
+
+    npm_client:
+      enabled:                            true
+      built:                              
+        execute:                          false                                   # true|false
+        response_success:                 The built request to your local site finished successfully.
+        response_failed:                  "The built request to your local fite has failed. Reason: "
+
+
+# END config
+# ------------------------------------------------------------------------------

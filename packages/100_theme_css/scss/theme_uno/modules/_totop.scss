@@ -1,0 +1,49 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/modules/_totop.scss
+ #
+ # Product/Info:
+ # http://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # NOTE: Styles for J1 Back2Top
+ # -----------------------------------------------------------------------------
+*/
+
+/*
+ ---------------------------------------------------------------------
+    NOTE: Styles
+            #topcontrol.position,
+            #topcontrol.background,
+            #topcontrol.content:after,
+            #topcontrol.font-family:after
+            #topcontrol.background:hover
+          set dynamically via  j1_adapter_back_to_top.js
+  --------------------------------------------------------------------
+*/
+
+// Colors
+$white: #fff;
+
+#topcontrol {
+	color: $white;
+	z-index: 99;
+	width: 30px;
+	height: 30px;
+	font-size: 20px;
+	border-radius: 3px !important;
+	&:after {
+		top: 0;
+		left: 5px;
+		position: absolute;
+		text-align: center;
+	}
+	&:hover {
+		color: $white;
+		transition: all 0.3s ease-in-out;
+	}
+}

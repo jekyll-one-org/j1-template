@@ -1,0 +1,88 @@
+/*
+  # ----------------------------------------------------------------------------
+  # ~/100_theme_css/scss/theme_uno.scss
+  # Theme Uno - Definitions AND partial index file|s (custom.scss)
+  #
+  # Product/Info:
+  # https:#jekyll.one
+  #
+  # Copyright (C) 2022 Juergen Adams
+  #
+  # J1 Theme is licensed under the MIT License.
+  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+  # ----------------------------------------------------------------------------
+  # NOTE:
+  # jadams, 2017-11-18: modified (applied fixes) to _drawer.scss|_forms.scss (mixins)
+  # See:
+  #  Issue #949 - https://github.com/FezVrasta/bootstrap-material-design/pull/949,
+  #  Fix base-level `&` (for Ruby Sass)
+  #  Pull request:
+  #  https://github.com/FezVrasta/bootstrap-material-design/pull/949/commits/f729cf1fa17561b46104dc1d3f268c7be3cf65f1
+  # ----------------------------------------------------------------------------
+*/
+
+// Option B: Include parts of Bootstrap
+// -----------------------------------------------------------------------------
+
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+// -----------------------------------------------------------------------------
+@import "../node_modules/bootstrap/scss/functions";
+
+
+// 2. Include any default variable overrides here
+// -----------------------------------------------------------------------------
+@import "theme_uno/variables";
+
+
+// 3. Include remainder of required Bootstrap stylesheets
+// -----------------------------------------------------------------------------
+@import "../node_modules/bootstrap/scss/variables";
+
+
+// 4. Include any default map overrides here
+// -----------------------------------------------------------------------------
+
+
+// 5. Include remainder of required parts
+// -----------------------------------------------------------------------------
+@import "../node_modules/bootstrap/scss/maps";
+@import "../node_modules/bootstrap/scss/mixins";
+@import "../node_modules/bootstrap/scss/root";
+
+
+// 6. Optionally include any other parts as needed
+// -----------------------------------------------------------------------------
+@import "../node_modules/bootstrap/scss/utilities";
+@import "../node_modules/bootstrap/scss/reboot";
+@import "../node_modules/bootstrap/scss/type";
+@import "../node_modules/bootstrap/scss/images";
+@import "../node_modules/bootstrap/scss/containers";
+@import "../node_modules/bootstrap/scss/grid";
+@import "../node_modules/bootstrap/scss/helpers";
+
+
+// 7. Optionally include utilities API last to generate classes based on the Sass map in `_utilities.scss`
+// -----------------------------------------------------------------------------
+@import "../node_modules/bootstrap/scss/utilities/api";
+
+// 8. Add additional custom code here
+// -----------------------------------------------------------------------------
+
+$theme: "UnoLight" !default;
+
+// Functions|Mixins
+// -----------------------------------------------------------------------------
+@import "theme_uno/mixins";
+
+// BS|Theme overrides goes here
+// -----------------------------------------------------------------------------
+
+@import "theme_uno/bootstrap";
+
+// BS|Theme Extentions
+// -----------------------------------------------------------------------------
+@import "theme_uno/extentions";
+
+// BS|Theme Modules
+// -----------------------------------------------------------------------------
+@import "theme_uno/modules";

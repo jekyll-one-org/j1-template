@@ -1,0 +1,53 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/_includes/themes/j1/procedures/global/setup.proc
+ # Liquid PROCEDURE to initialize variables for URLs and Paths dynamically
+ # used by several Liquid procedures
+ #
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} liquid procedures 
+jadams, 2019-08-23: no procedures should be used for initial setup
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} main (???)
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if site.template.setup_provider == "custom" %}
+  {% include custom/functions/setup %}
+{% else %}
+  {% if site.theme.safe and site.data.j1_config.base_path and site.data.j1_config.base_path != '' %}
+    {% assign base_path = site.data.j1_config.base_path %}
+    {% assign home_path = site.data.j1_config.base_path %}
+  {% else %}
+    {% assign base_path = nil %}
+    {% assign home_path = "/" %}
+  {% endif %}
+
+  {% if site.data.j1_config.asset_path %}
+    {% assign asset_path = site.data.j1_config.asset_path %}
+  {% else %}
+    {% capture asset_path %}{{ base_path }}/assets/themes/{{ page.theme.name }}{% endcapture %}
+  {% endif %}
+
+  {% if site.data.j1_config.app_path %}
+    {% assign app_path = site.data.j1_config.app_path %}
+  {% else %}
+    {% capture app_path %}{{ base_path }}/assets/apps{% endcapture %}
+  {% endif %}
+
+  {% if site.data.j1_config.image_path %}
+    {% assign image_path = site.data.j1_config.image_path %}
+  {% else %}
+    {% capture image_path %}{{ base_path }}/assets/images/{{ page.theme.name }}{% endcapture %}
+  {% endif %}
+{% endif %}

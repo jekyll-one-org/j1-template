@@ -1,0 +1,174 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/modules/_ssm.scss
+ #
+ # Product/Info:
+ # http://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # NOTE: Styles for J1 Sticky Side Menu
+ # -----------------------------------------------------------------------------
+*/
+
+
+#ssm-container {
+    position: fixed;
+    top: 0;
+    z-index: 4;
+    display: none;
+}
+
+.ssm-btns-right {
+    right: 0;
+}
+
+.ssm-btns-left {
+    left: 0;
+}
+
+/* jadams, 2020-06-16: */
+.ssm-btn {
+    background: #212121;
+}
+
+.ssm-share-btn {
+    background: #212121;
+}
+
+.ssm-sub-menu {
+    background: #212121;
+}
+
+span.ssm-btn-text {
+  margin-top: 8px;
+}
+
+#ssm-container ul {
+    padding: 0;
+    margin: 0;
+}
+
+#ssm-container ul li {
+    list-style: none;
+    line-height: 45px;
+    margin: 0;
+}
+
+#ssm-container ul li a {
+    color: #9e9e9e;
+    padding: 0 13px 0 0;
+    display: inline-flex;
+    line-height: 45px;
+    text-align: left;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+#ssm-container.ssm-btns-left ul li a {
+    text-align: right;
+    padding: 0 0 0 15px;
+}
+
+#ssm-container ul li:hover {
+    text-decoration: none;
+    background: #d2d4dc;
+}
+
+#ssm-container .ssm-share-btn {
+    position: relative;
+}
+
+#ssm-container .ssm-share-btn a {
+    padding: 0;
+}
+
+#ssm-container.ssm-btns-left .ssm-share-btn i.ssm-share-icon {
+    float: right !important;
+}
+
+#ssm-container ul li.ssm-share-btn:hover .ssm-sub-menu {
+    display: block;
+}
+
+.ssm-sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 100%;
+    margin: 0 0 0 -50px;
+    width: 155px;
+    display: none;
+}
+
+#ssm-container.ssm-btns-right .ssm-sub-menu {
+    right: -100%;
+    margin: 0 0 0 -110px;
+    left: 0;
+}
+
+#ssm-container .ssm-sub-menu a {
+    padding: 0 !important;
+    text-align: left !important;
+}
+
+/* Old icon font styles */
+/*
+#ssm-container ul li span {
+    line-height: 45px;
+    width: 50px;
+    text-align: center;
+    display: inline-block;
+}
+
+#ssm-container.ssm-btns-left ul li span {
+    float: right;
+}
+
+#ssm-container .ssm-share-btn span,
+#ssm-container.ssm-btns-left .ssm-share-btn span {
+    float: none;
+}
+*/
+
+/*
+#ssm-container.ssm-anim-icons ul li {
+    transition: transform 100ms;
+}
+
+#ssm-container.ssm-anim-icons.ssm-btns-right ul li:hover {
+    transform: translate(-15px, 0);
+}
+
+#ssm-container.ssm-anim-icons.ssm-btns-left ul li:hover {
+    transform: translate(15px, 0);
+}
+*/
+
+/* jadams, 2020-08-07: media query WRONG on the container class.
+Padding on CONTAINER cause irritating paddings on HOME page
+TODO: Padding needs to be isolated on SSM (if used)
+See: packages\200_theme_js\js\sticky-side-menu\ssm.js
+-------------------------------------------------------------------------------- */
+
+/* Responsive */
+/* jadams, 2020-06-29: media query for SSM (space for ssm)
+-------------------------------------------------------------------------------- */
+/* Landscape iPad, 768px */
+/*
+@media only screen and (min-width: 576px) and (max-width: 768px){
+  .container, .container-fluid {
+    padding-right: 30px !important;
+  }
+}
+*/
+
+/* Small devices (landscape phones, up to 576px) */
+/* @media only screen and (max-width: 576px) {
+  .container, .container-fluid {
+    padding-right: 30px !important;
+  }
+}
+*/

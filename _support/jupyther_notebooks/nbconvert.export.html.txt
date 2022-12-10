@@ -2,16 +2,16 @@
 
 == Full Export
 
-  jupyter nbconvert --execute --to html D:\j1\github\j1-template-2022.2.x\packages\400_template_site\pages\public\jupyter\notebooks\j1\j1_docs_hist.ipynb
+  jupyter nbconvert --execute --to html D:\j1\github\j1-template-2022.2.x\packages\400_theme_site\pages\public\jupyter\notebooks\j1\j1_docs_hist.ipynb
 
 
 == Export with NO Bootstrap CSS embedded
 
 === ODEs in Python (selected)
 
-  jupyter nbconvert --template basic --to html --execute D:\j1\github\j1-template-2022.2.x\packages\400_template_site\pages\public\jupyter\notebooks\j1\j1_ode_selected.ipynb
+  jupyter nbconvert --template basic --to html --execute D:\j1\github\j1-template-2022.2.x\packages\400_theme_site\pages\public\jupyter\notebooks\j1\j1_ode_selected.ipynb
 
 
 === nbi.hist example
 
-  jupyter nbconvert --template basic --to html --execute D:\j1\github\j1-template-2022.2.x\packages\400_template_site\pages\public\jupyter\notebooks\j1\j1_docs_hist.ipynb
+  jupyter nbconvert --template basic --to html --execute D:\j1\github\j1-template-2022.2.x\packages\400_theme_site\pages\public\jupyter\notebooks\j1\j1_docs_hist.ipynb

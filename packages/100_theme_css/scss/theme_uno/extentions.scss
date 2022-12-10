@@ -1,0 +1,97 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/extentions.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # NOTE: This is the (SASS) entry point for all theme extentions
+ # -----------------------------------------------------------------------------
+*/
+
+// Modules and Components
+// -----------------------------------------------------------------------------
+@import "extentions/accordion";
+@import "extentions/advertising";
+@import "extentions/attic";
+@import "extentions/badge";
+@import "extentions/banner";
+
+// @import "extentions/banner_news";                                            // disabled|to be removed or moved
+// @import "extentions/banner_parallax";                                        // disabled|to be removed or moved
+// @import "extentions/banner_teaser";                                          // disabled|to be removed or moved
+// @import "extentions/blog_calendar";                                          // disabled|to be removed or moved
+// @import "extentions/blog";                                                   // disabled|to be removed or moved
+
+@import "extentions/bs-doc";
+@import "extentions/cards";
+@import "extentions/collection";
+
+// @import "extentions/container";                                              // jadams, 2021-11-17: disabled
+
+@import "extentions/drawer";                                                    // jadams, 2021-11-21: Moved (bmd) drawer to extensions
+@import "extentions/dropcap";
+@import "extentions/fab";
+@import "extentions/footer";
+@import "extentions/images";
+@import "extentions/lane";
+@import "extentions/pages";
+@import "extentions/plans";
+
+// @import "extentions/forms";                                                  // disabled|to be removed or moved
+// @import "extentions/grid";                                                   // disabled|to be removed or moved
+// @import "extentions/icons";                                                  // disabled
+// @import "extentions/page";                                                   // disabled|to be removed or moved
+// @import "extentions/pagination";                                             // disabled|to be removed or moved
+// @import "extentions/panel_intro";                                            // disabled|to be removed or moved
+// @import "extentions/panel_news";                                             // disabled|to be removed or moved
+// @import "extentions/panel_service";                                          // disabled|to be removed or moved
+// @import "extentions/panel";                                                  // disabled|to be removed or moved
+// @import "extentions/parallax";                                               // disabled|to be removed or moved
+// @import "extentions/posts_featured";                                         // jadams, 2020-08-29: disabled|to be removed or moved
+
+@import "extentions/posts";
+@import "extentions/pulser";
+@import "extentions/radios";
+@import "extentions/ripples";
+@import "extentions/scroll-group";                                              // jadams, 2021-11-17: additional class for the scoller|infinite scroll
+@import "extentions/scrollbars";
+@import "extentions/sticker";
+@import "extentions/switches";
+
+// @import "extentions/sticky";                                                 // jadams, 2020-08-29: disabled|to be removed or moved
+// @import "extentions/rtable";                                                 // jadams, 2020-08-29: disabled|to be removed or moved
+// @import "extentions/sidebar";                                                // disabled|to be removed or moved
+// @import "extentions/slider_parallax";                                        // disabled|to be removed or moved
+// @import "extentions/slider";                                                 // disabled|to be removed or moved
+// @import "extentions/_spinner";                                               // disabled
+
+@import "extentions/tags";
+@import "extentions/timeline";
+@import "extentions/transitions";
+@import "extentions/transparency";
+@import "extentions/typography";
+@import "extentions/utilities";
+@import "extentions/utilities";
+@import "extentions/wave";
+
+// MDE styles
+// -----------------------------------------------------------------------------
+@import "extentions/mde/buttons";
+// @import "extentions/mde/cards";                                              // disabled
+
+@import "extentions/mde/color_palette";
+
+// @import "extentions/mde/olor_palette.active";                                // jadams, 2021-11-17: not implemented yet
+// @import "extentions/mde/color_palette.focus";                                // jadams, 2021-11-17: not implemented yet
+
+@import "extentions/mde/color_table";
+@import "extentions/mde/elevation";
+
+// @import "extentions/mde/nav_tabs_pills";                                     // jadams, 2021-11-18: disabled
+// @import "extentions/mde/transparency";                                       // jadams, 2021-11-18: disabled

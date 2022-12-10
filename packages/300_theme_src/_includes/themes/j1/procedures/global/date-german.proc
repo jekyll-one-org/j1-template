@@ -1,0 +1,67 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_includes/themes/j1/procedures/global/date-german.proc
+ #  Liquid PROCEDURE to calculate a GERMAN date string
+ #
+ #  https://jekyll.one
+ #
+ #  Copyright (C) 2022 Juergen Adams
+ #
+ #  J1 Theme is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ #
+ # -----------------------------------------------------------------------------
+ #   Global procedure. Calculates the absolute path of the current page
+ #   relative to the web root. The path is resturned by the liquid variable
+ #   page_url.
+ #
+ #    Usage:
+ #
+ #      1)  include the get_page_url.proc procedure
+ #      2)  assign|use the page_url variable
+ #
+ #    Example:
+ #
+ #    {% capture date-german %}themes/{{site.template.name}}/procedures/global/date-german.proc{% endcapture %}
+ #
+ #    {% include {{date-german}} %}
+ #    {% assign my_date_de = date-german date=post.date %}
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ #
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Ruby implementaion for i18n date
+See: https://github.com/uwolf/jekyll-i18n-date
+NOTE already implemented as an plugin: ~/_plugins/date-i18n.rb
+-------------------------------------------------------------------------------- {% endcomment %}
+
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+
+
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% assign formattedDate = '' %}
+
+{% if include.showDay %}
+    {% assign formattedDate = include.date | date: '%-d' | append: '. '%}
+{% endif %}
+
+{% assign monthNames = 'Januar,Februar,März,April,Mai,Juni,Juli,August,September,Oktober,November,Dezember' %}
+{% assign monthNames = monthNames | split: ',' %}
+{% assign month = include.date | date: '%-m' | minus: 1 %}
+
+{% assign formattedDate = formattedDate | append: monthNames[month] %}
+{% assign formattedDate = include.date | date: '%Y' | prepend: ' ' | prepend: formattedDate %}

@@ -1,11 +1,11 @@
-# J1 Template SASS sourcen
+# J1 Theme SASS sourcen
 
 The gem-based version of J1 comes with *no* CSS/SASS files. For developing
 respectively changing the CSS sources, go for the J1 Development System at:
-Github [jekyll-one/j1_template](https://github.com/jekyll-one-org/J1 Template).
+Github [jekyll-one/j1_template](https://github.com/jekyll-one-org/J1 Theme).
 
 To use CSS/SASS files for development with the RubyGem version, copy the
-folder scss out of the package `100_template_css` under `_sass` in the root
+folder scss out of the package `100_theme_css` under `_sass` in the root
 directory of your Jekyll Web. 
 
 To enable SASS processing, edit the SASS documents in folder 

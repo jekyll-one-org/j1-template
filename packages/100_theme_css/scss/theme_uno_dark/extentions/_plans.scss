@@ -1,0 +1,26 @@
+/*
+// -----------------------------------------------------------------------------
+// ~/100_theme_css/scss/theme_uno_dark/extentions/_plans.scss
+// Provides general styles for the J1 Plan Banner
+//
+// Product/Info:
+// https://jekyll.one
+//
+// Copyright (C) 2022 Juergen Adams
+//
+// J1 Theme is licensed under the MIT License.
+// See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+// -----------------------------------------------------------------------------
+*/
+
+// Content
+// -----------------------------------------------------------------------------
+
+.plan-card {
+  background: #393a3b;
+  color: #e4e6eb;
+}
+
+.plan-card.recommended {
+  box-shadow: 0 0.0625rem 0.125rem rgba(255,255,255,.2), 0 0.3125rem 0.9375rem rgba(255,255,255,.1), 0 0.625rem 5rem 0 rgba(255,255,255,.1);
+}

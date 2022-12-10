@@ -1,0 +1,100 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #   ~/_includes/themes/j1/procedures/components/create_word_cloud.proc
+ #  Liquid PROCEDURE to create a word cloud from a list of comma separated
+ #  words.
+ #
+ #  https://jekyll.one
+ #
+ #  Copyright (C) 2022 Juergen Adams
+ #
+ #  J1 Theme is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ #
+ # -----------------------------------------------------------------------------
+ #  Components procedure. Create the HTML code (to be included in a page) for
+ #  a word cloud generated from a LIST of comma separated WORDS. All words are
+ #  counted against a given SOURCE (how often they are found).
+ #  Supported SOURCES are: tags|categories
+ #
+ #    Usage:
+ #      1)  assign the 'source' and 'word_list' variables
+ #      2)  include the create_word_cloud.proc procedure
+ #
+ #  Example:
+ #
+ #  {% capture create_word_cloud %}themes/{{site.template.name}}/procedures/global/create_word_cloud.proc{% endcapture %}
+ #
+ #  {% capture my_site_tag_list %}{% for tag in site.tags %}{{ tag | first }}{% unless forloop.last %},{% endunless %}{% endfor %}{% endcapture %}
+ #  {% include {{create_word_cloud}} source="tags" word_list=my_site_tag_list %}
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ #
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign source      = include.source %}
+{% assign word_list   = include.word_list %}
+{% assign word_array  = word_list | split:',' | sort %}
+
+{% if source == 'categories' %}
+  {% assign categories = site.categories | sort %}
+{% endif %}
+
+{% comment %} Main
+--------------------------------------------------------------------------------
+  jadams, 2020-07-24: style cart creates a unwanted border, removed
+                      card styles
+  jadams, 2020-07-24: class "cart" is NOT longer overloaded since CSS
+                      generation has changed
+                      <!-- div class="card tag__box raised-z0 mt-0 mb-2" -->
+
+  {% capture href %}#{{tag|downcase|prepend: site.baseurl}}{% endcapture %}
+-------------------------------------------------------------------------------- {% endcomment %}
+
+<!-- div id="word-cloud" class="row ml-3 mr-3" -->
+<!-- jadams, 2021-11-20: justify word cloud BETTER with paginator buttons -->
+<div id="word-cloud" class="row g-0 ml-3">
+  <div class="tag__box mt-0 mb-2">
+    <div class="tag__cloud">
+
+    {% unless word_list %}
+      {% assign word_list = 'empty wordlist' %}
+      <div class="content"><b>Cannot create word cloud. <span class="color-red">EMPTY or INVALID word cloud specified: <i>{{word_list}}</i></span></b></div>
+    {% else  %}
+      <ul class="content">
+        {% if source == 'categories' %}
+          {% for tag in word_array %}
+            <li class="badge-tag">
+              <a href="#{{tag|downcase}}">
+                {{ tag | capitalize }}
+                <span>{{ site.categories[tag] | size }}</span>
+              </a>
+            </li>
+          {% endfor %}
+        {% elsif source == 'tags' %}
+          {% for tag in word_array %}
+            <li class="badge-tag">
+              <a href="#{{ tag | replace: '+','_' | replace: ' ','_' | downcase }}">
+                {{ tag }}
+                <span>{{ site.tags[tag] | size }}</span>
+              </a>
+            </li>
+          {% endfor %}
+        {% else %}
+          {% unless source %} {% assign source = 'wrong parameter or missing' %} {% endunless %}
+          <b>Cannot create word cloud. <span class="color-red">Unknown SOURCE of word cloud specified: <i>{{source}}</i></span></b>
+        {% endif %}
+      </ul>
+    {% endunless %}
+
+    </div> <!-- end tag__cloud -->
+  </div> <!-- end tag__box -->
+</div> <!-- end row -->

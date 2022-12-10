@@ -1,0 +1,178 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/_includes/themes/j1/procedures/blocks/get_wave.proc
+ # Liquid PROCEDURE to generate the HTML portion of a wave element
+ # applied to J1 block elements (like footers, banners and panels).
+ #
+ # https://jekyll.one
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ #
+ # -----------------------------------------------------------------------------
+ #  Global procedure. Read RGB category values from j1_categorys.yml and returns
+ #  the category found with liquid var category
+ #
+ #   Usage:
+ #     1)  load (capture) the procedure 'get_wave.proc'
+ #     2)  reference (include) the procedure 'get_wave.proc'
+ #     3)  assign the 'wave' variable to (hash) data the wave element is
+ #         defined.
+ #     4)  finally, assign the resulting HTML data (for output)
+ #
+ #  Example:
+ #
+ #  {% capture get_wave %}themes/{{site.template.name}}/procedures/blocks/get_wave.proc{% endcapture %}
+ #
+ #  {% include {{get_wave}} wave=footer_settings.wave %}
+ #  {% assign my_wave = {{_wave}} %}
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  {{ liquid_var | debug }}
+ #  category:  {{ item[0] }}: {{ item[1] }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign position      = include.position %}
+{% assign wave_settings = include.wave %}
+{% assign _wave         = nil %}
+
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Calculate|Set WAVE scales
+TODO: Check why corrections of plus:1 or minus:1 are required
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign wave_height         = wave_settings.height %}
+{% assign wave_height_factor  = wave_settings.height|plus:1 %}
+{% assign min-height          = wave_height|times:10|plus:100 %}
+
+{% if wave_height > 1 %}
+  {% if position == 'top' %}
+    {% assign translate_y     = wave_height|times:6|plus:2 %}
+    {% assign position_class  = 'wave-top' %}
+  {% elsif position == 'bottom' %}
+    {% assign translate_y     = wave_height|times:4|minus:1 %}
+    {% assign position_class  = 'wave-bottom' %}
+  {% else %}
+    {% assign translate_y = 1 %}
+  {% endif %}
+{% endif %}
+
+{% if wave_height > 1 %}
+  {% capture scale %}translate(0,{{translate_y}}) scale(1,1.{{wave_height}}){% endcapture %}
+{% else %}
+  {% capture scale %}scale(1,1){% endcapture %}
+{% endif %}
+
+
+{% comment %} Set WAVE transformations
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign wave_transforms = wave_settings.transform|normalize_whitespace|split:' ' %}
+
+{% assign wave_transform = '' %}
+{% assign transform_filters = '' %}
+
+{% for item in wave_transforms %}
+  {% if item == 'rotate' %}
+    {% capture wave_transform %}rotate(180){% endcapture %}
+  {% elsif item == 'flip-x' %}
+    {% capture wave_transform %}scale(1,-1){% endcapture %}
+  {% elsif item == 'flip-y' %}
+    {% capture wave_transform %}scale(-1,1){% endcapture %}
+  {% else %}
+    {% capture wave_transform %}{% endcapture %}
+  {% endif %}
+
+  {% capture transform_filters %}{{transform_filters}} {{wave_transform}}{% endcapture %}
+{% endfor %}
+
+{% capture wave_transform %}transform="{{transform_filters}}"{% endcapture %}
+
+
+{% comment %} Set WAVE styles
+-------------------------------------------------------------------------------- {% endcomment %}
+{% case wave_settings.style %}
+  {% when 'wave-1' %}
+  {% capture wave %}
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 1280 100"
+    transform="{{scale}}{{transform_filters}}">
+    <path
+       fill="{{wave_settings.color}}"
+       fill-opacity="1"
+       d="m 0,71.532704 h 71.111114 c 71.111116,0 213.333326,0 355.555566,-18.948546 C 568.88891,33.279773 711.11114,-4.0835522 853.33336,0.36446289 995.55556,4.8124779 1137.7778,52.851042 1208.8889,76.2476 L 1280,100 v 0 h -71.1111 c -71.1111,0 -213.33334,0 -355.55554,0 -142.22222,0 -284.44445,0 -426.66668,0 -142.22224,0 -284.44445,0 -355.555566,0 H 0 Z"
+    />
+  />
+  {% endcapture %}
+
+  {% when 'wave-2' %}
+  {% capture wave %}
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 1280 100"
+    transform="{{scale}}{{transform_filters}}">
+    <path
+       fill="{{wave_settings.color}}"
+       fill-opacity="1"
+       d="M 0,13.637791 106.66667,8.8698767 C 213.33334,3.7421199 426.66668,-5.2539441 640.00003,4.0120013 853.33333,13.637791 1066.6667,42.425196 1173.3334,56.8189 L 1280,71.212604 V 100 h -106.6666 c -106.6667,0 -320.00007,0 -533.33337,0 -213.33335,0 -426.66669,0 -533.33336,0 H 0 Z"
+    />
+  />
+  {% endcapture %}
+
+  {% when 'wave-3' %}
+  {% capture wave %}
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 1280 100"
+    transform="{{scale}}{{transform_filters}}">
+    <path
+       fill="{{wave_settings.color}}"
+       fill-opacity="1"
+       d="m 0,0 106.66667,11.111108 c 106.66666,11.111113 320,33.333338 533.33333,46.284725 213.33333,13.09028 426.6667,16.5625 533.3333,18.541667 L 1280,77.777779 V 100 h -106.6667 c -106.6666,0 -319.99997,0 -533.3333,0 -213.33333,0 -426.66667,0 -533.33333,0 H 0 Z"
+    />
+  />
+  {% endcapture %}
+
+  {% when 'wave-4' %}
+  {% capture wave %}
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    transform: rotate(180deg)
+    viewBox="0 0 1280 100"
+    transform="{{scale}}{{transform_filters}}">
+    <path
+       fill="{{wave_settings.color}}"
+       fill-opacity="1"
+       d="m 0,0 106.66667,11.111108 c 106.66666,11.111113 320,33.333338 533.33333,46.284725 213.33333,13.09028 426.6667,16.5625 533.3333,18.541667 L 1280,77.777779 V 100 h -106.6667 c -106.6666,0 -319.99997,0 -533.3333,0 -213.33333,0 -426.66667,0 -533.33333,0 H 0 Z"
+    />
+  />
+  {% endcapture %}
+
+  {% else %}
+  {% capture wave %}
+  <svg
+     xmlns="http://www.w3.org/2000/svg"
+     viewBox="0 0 1280 100">
+     <path
+       fill="{{wave_settings.color}}"
+       fill-opacity="1"
+       d="m 0,71.532704 h 71.111114 c 71.111116,0 213.333326,0 355.555566,-18.948546 C 568.88891,33.279773 711.11114,-4.0835522 853.33336,0.36446289 995.55556,4.8124779 1137.7778,52.851042 1208.8889,76.2476 L 1280,100 v 0 h -71.1111 c -71.1111,0 -213.33334,0 -355.55554,0 -142.22222,0 -284.44445,0 -426.66668,0 -142.22224,0 -284.44445,0 -355.555566,0 H 0 Z"
+     />
+  />
+  {% endcapture %}
+
+{% endcase %}
+
+{% comment %} Generate WAVE container
+TODO: Check why corrections of margin-top:-1 or margin-bottom:-1 are required
+{% capture _wave %}<div class="wavebox" style="background-color: {{wave_settings.background_color}}; margin-top: -1px; margin-bottom: -1px;">{{wave}}</div>{% endcapture %}
+{% capture _wave %}<div class="wavebox" style="background-color: var(--bs-body-bg); margin-top: -1px; margin-bottom: -1px;">{{wave}}</div>{% endcapture %}
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture _wave %}<div class="wavebox {{position_class}}" style="min-height: {{min-height}}px; background-color: {{wave_settings.background_color}}; margin-top: -1px; margin-bottom: -1px;">{{wave}}</div>{% endcapture %}

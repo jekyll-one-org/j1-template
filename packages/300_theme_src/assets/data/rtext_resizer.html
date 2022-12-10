@@ -1,0 +1,134 @@
+---
+regenerate:                             true
+exclude_from_search:                    true
+---
+{% capture cache %}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/rtext_resizer.html
+ # Liquid PROCEDURE to generate the HTML (data) portion used
+ # by J1 RText Resizer
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #   liquid_var: {{ liquid_var | debug }}
+ #   customizer_options: {{ customizer_options | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% comment %} Set global settings
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment         = site.environment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign apps                = site.data.apps %}
+{% assign modules             = site.data.modules %}
+
+{% comment %} Set config data (currently NOT used)
+--------------------------------------------------------------------------------
+{% assign customizer_defaults = apps.defaults.justifiedGalleryCustomizer.defaults %}
+{% assign customizer_settings = apps.justifiedGalleryCustomizer.settings %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign customizer_options  = customizer_defaults | merge: customizer_settings %}
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} i18n: language selection (supported languages: en|de)
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if site.language == 'en' or site.language == 'de' %}
+  {% assign language = site.language %}
+{% else %}
+  {% assign language = 'en' %}
+{% endif %}
+
+{% assign language = 'en' %}
+
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+{% comment %} Main
+================================================================================ {% endcomment %}
+<!-- [INFO   ] [~/assets/data/rtext_resizer.html              ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
+<head>
+  <meta name="robots" content="noindex, nofollow" />
+</head>
+
+{% comment %} i18n: translations
+-------------------------------------------------------------------------------- {% endcomment %}
+<!-- div id for the resizer modal -->
+<div id="rtext_resizer_modal">
+
+  {% if language == 'en' %}
+    <!-- [INFO   ] [j1.rtext_resizer                   ] [HTML portion of the modal] -->
+  <div class="modal fade right" id="fluidModalRTextResizer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-side modal-top-right modal-notify modal-success" role="document">
+      <!-- Content -->
+      <div class="modal-content">
+        <!--Header-->
+        <div class="modal-header">
+          <p class="lead">Text Resizer</p>
+          <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+            <i class="mdi mdi-close mdi-dark mdi-48px"></i>
+          </button>
+        </div>
+        <!-- Body -->
+        <div class="modal-body">
+          <div class="text align-left">
+            <p>
+              Change the text size for the main window by the switches from below:
+            </p>
+          </div>
+          <div class="ml-3 mt-5 mb-5">
+            <div class="switch">
+              <label>
+                <input id="textsize-300" name="textsize-300" type="checkbox" checked>
+                300 - Default Size
+              </label>
+            </div>
+            <div class="switch">
+              <label>
+                <input id="textsize-400" name="textsize-400" type="checkbox">
+                400 - Larger Size
+              </label>
+            </div>
+            <div class="switch">
+              <label>
+                <input id="textsize-500" name="textsize-500" type="checkbox">
+                500 - Largest Size
+              </label>
+            </div>
+          </div>
+        </div>
+        <!-- END Content -->
+      </div>
+    </div>
+  </div>
+  <!-- [INFO   ] [~/assets/data/rtext_resizer.html              ] [ end modal for r-text resizer ] -->
+  {% endif %}
+
+</div>
+
+
+{% endcapture %}
+{% if production %}
+  {% capture _LINE_FEED %}{% endcapture %}{% if site.compress_html.ignore.envs contains jekyll.environment %}{{ cache | strip_html_comments }}{% else %}{% capture _content %}{{ cache | strip_html_comments }}{% endcapture %}{% assign _profile = site.compress_html.profile %}{% if site.compress_html.endings == "all" %}{% assign _endings = "html head body li dt dd p rt rp optgroup option colgroup caption thead tbody tfoot tr td th" | split: " " %}{% else %}{% assign _endings = site.compress_html.endings %}{% endif %}{% for _element in _endings %}{% capture _end %}</{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _end %}{% endfor %}{% if _profile and _endings %}{% assign _profile_endings = _content | size | plus: 1 %}{% endif %}{% for _element in site.compress_html.startings %}{% capture _start %}<{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _start %}{% endfor %}{% if _profile and site.compress_html.startings %}{% assign _profile_startings = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.comments == "all" %}{% assign _comments = "<!-- -->" | split: " " %}{% else %}{% assign _comments = site.compress_html.comments %}{% endif %}{% if _comments.size == 2 %}{% capture _comment_befores %}.{{ _content }}{% endcapture %}{% assign _comment_befores = _comment_befores | split: _comments.first %}{% for _comment_before in _comment_befores %}{% if forloop.first %}{% continue %}{% endif %}{% capture _comment_outside %}{% if _carry %}{{ _comments.first }}{% endif %}{{ _comment_before }}{% endcapture %}{% capture _comment %}{% unless _carry %}{{ _comments.first }}{% endunless %}{{ _comment_outside | split: _comments.last | first }}{% if _comment_outside contains _comments.last %}{{ _comments.last }}{% assign _carry = false %}{% else %}{% assign _carry = true %}{% endif %}{% endcapture %}{% assign _content = _content | remove_first: _comment %}{% endfor %}{% if _profile %}{% assign _profile_comments = _content | size | plus: 1 %}{% endif %}{% endif %}{% assign _pre_befores = _content | split: "<pre" %}{% assign _content = "" %}{% for _pre_before in _pre_befores %}{% assign _pres = _pre_before | split: "</pre>" %}{% assign _pres_after = "" %}{% if _pres.size != 0 %}{% if site.compress_html.blanklines %}{% assign _lines = _pres.last | split: _LINE_FEED %}{% capture _pres_after %}{% for _line in _lines %}{% assign _trimmed = _line | split: " " | join: " " %}{% if _trimmed != empty or forloop.last %}{% unless forloop.first %}{{ _LINE_FEED }}{% endunless %}{{ _line }}{% endif %}{% endfor %}{% endcapture %}{% else %}{% assign _pres_after = _pres.last | split: " " | join: " " %}{% endif %}{% endif %}{% capture _content %}{{ _content }}{% if _pre_before contains "</pre>" %}<pre{{ _pres.first }}</pre>{% endif %}{% unless _pre_before contains "</pre>" and _pres.size == 1 %}{{ _pres_after }}{% endunless %}{% endcapture %}{% endfor %}{% if _profile %}{% assign _profile_collapse = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.clippings == "all" %}{% assign _clippings = "html head title base link meta style body article section nav aside h1 h2 h3 h4 h5 h6 hgroup header footer address p hr blockquote ol ul li dl dt dd figure figcaption main div table caption colgroup col tbody thead tfoot tr td th" | split: " " %}{% else %}{% assign _clippings = site.compress_html.clippings %}{% endif %}{% for _element in _clippings %}{% assign _edges = " <e;<e; </e>;</e>;</e> ;</e>" | replace: "e", _element | split: ";" %}{% assign _content = _content | replace: _edges[0], _edges[1] | replace: _edges[2], _edges[3] | replace: _edges[4], _edges[5] %}{% endfor %}{% if _profile and _clippings %}{% assign _profile_clippings = _content | size | plus: 1 %}{% endif %}{{ _content }}{% if _profile %} <table id="compress_html_profile_{{ site.time | date: "%Y%m%d" }}" class="compress_html_profile"> <thead> <tr> <td>Step <td>Bytes <tbody> <tr> <td>raw <td>{{ cache | strip_html_comments | size }}{% if _profile_endings %} <tr> <td>endings <td>{{ _profile_endings }}{% endif %}{% if _profile_startings %} <tr> <td>startings <td>{{ _profile_startings }}{% endif %}{% if _profile_comments %} <tr> <td>comments <td>{{ _profile_comments }}{% endif %}{% if _profile_collapse %} <tr> <td>collapse <td>{{ _profile_collapse }}{% endif %}{% if _profile_clippings %} <tr> <td>clippings <td>{{ _profile_clippings }}{% endif %} </table>{% endif %}{% endif %}
+{% else %}
+  {{ cache | pretty_print | remove:'<html><body>' | remove:'</body></html>' | strip_empty_lines }}
+{% endif %}
+{% assign cache = nil %}

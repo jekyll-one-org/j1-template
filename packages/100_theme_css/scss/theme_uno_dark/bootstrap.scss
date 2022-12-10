@@ -1,0 +1,68 @@
+/*
+// -----------------------------------------------------------------------------
+// ~/100_theme_css/scss/theme_uno_dark/bootstrap.scss
+// Bootstrap Overloads
+//
+// Product/Info:
+// https://jekyll.one
+//
+// Copyright (C) 2022 Juergen Adams
+//
+// J1 Theme is licensed under the MIT License.
+// See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+// -----------------------------------------------------------------------------
+*/
+
+// Contents
+// jadams, 2019-11-21: Needs to be revised for BS@5
+// -----------------------------------------------------------------------------
+// Spacing
+// Body
+// Links
+// Paragraphs
+// Grid breakpoints
+// Grid containers
+// Grid columns
+// Fonts
+// Components
+// Tables
+// Buttons
+// Forms
+// Dropdowns
+// Z-index master list
+// Navs
+// Navbar
+// Pagination
+// Form states and alerts
+// Cards
+// Tooltips
+// Popovers
+// Badges
+// Modals
+// Alerts
+// Progress bars
+// List group
+// Image thumbnails
+// Figures
+// Breadcrumbs
+// Carousel
+// Close
+// Code
+
+@import "bootstrap/alert";
+@import "bootstrap/badge";
+// @import "bootstrap/body";                                                    // jadams, 2020-11-18: NO custom styles used
+@import "bootstrap/breadcrumbs";
+@import "bootstrap/buttons";
+// @import "bootstrap/cards";                                                   // jadams, 2020-11-18: NO custom styles used
+@import "bootstrap/code";
+@import "bootstrap/dropdowns";
+@import "bootstrap/forms";
+@import "bootstrap/links";
+@import "bootstrap/list_group";
+// @import "bootstrap/navbar";                                                  // jadams, 2020-11-18: NO custom styles used
+@import "bootstrap/navs";
+// @import "bootstrap/pagination";                                              // jadams, 2020-11-18: NO custom styles used
+@import "bootstrap/progress";
+@import "bootstrap/tables";
+@import "bootstrap/typography";
