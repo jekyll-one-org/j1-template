@@ -19,6 +19,8 @@ regenerate:                             false
 resources:                              [ animate ]
 resource_options:
   - attic:
+      padding_top:                      600
+      padding_bottom:                   50
       opacity:                          0.5
       slides:
         - url:                          /assets/images/modules/attics/katie-moum-1920x1280.jpg
