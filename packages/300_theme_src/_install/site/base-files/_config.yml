@@ -53,7 +53,7 @@ environment:                            development
 # ------------------------------------------------------------------------------
 # Sets the build version of J1 Theme Gem
 #
-version:                                2023.1.0
+version:                                2023.0.0
 
 # version
 # ------------------------------------------------------------------------------
@@ -74,13 +74,13 @@ copyright:                              © 2022 J1 · All rights reserved
 # managed by the Ruby bundler respectively by the GEM manager "gem". All
 # components are available public at RubyGems.org.
 #
-#
 # theme
 # ------------------------------------------------------------------------------
-# Sets the name of the (gem-based) theme used for Jekyll
-# serve and build
+#   Sets the name of the (gem-based) theme used for Jekyll
+#   serve and build (currently set to old gem|name: j1-template
 #
-theme:                                  j1-template
+# theme:                                j1-theme
+theme:
 
 # ------------------------------------------------------------------------------
 # J1 Theme configuration
