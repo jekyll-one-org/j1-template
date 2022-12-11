@@ -1,0 +1,163 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/defaults/particles.yml
+# Default configuration for J1 Particles Module
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2022 Juergen Adams
+#
+# J1 Theme is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description (used for J1 CC only)
+#
+description:
+
+  title:                                J1 Particle Module
+  scope:                                Default settings
+  location:                             _data/modules/defaults/particles.yml
+
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+defaults:
+
+  # ----------------------------------------------------------------------------
+  # GENERAL gallery settings
+  #
+  # enabled
+  # ----------------------------------------------------------------------------
+  #   Enables|Disables the use of a gallery
+  #
+  # xhr_data_path
+  # ----------------------------------------------------------------------------
+  #   All data items displayed by a gallery are being read from a
+  #   JSON file automatically generated from that configuration.
+  #   AJAX get method is used to supply the gallery with respective
+  #   the HTML code at the time the gallery is initialized (by the
+  #   J1 Adapter for J1 Particle Module).
+  #
+  #   values:                           string
+  #   default:                          /assets/data/galleries.json
+  #
+  # instance_type
+  # ----------------------------------------------------------------------------
+  #   Specifies if a modules can be run as a single instance
+  #   (only) or run in multiple instances.
+  #
+  #   NOTE: The parameter instance_type controls how MODULE runner
+  #         manages configuration options.
+  #
+  #   values:                           single|multiple
+  #   default:                          single
+  #
+  # rowHeight
+  # ----------------------------------------------------------------------------
+  #   All data items displayed by a gallery are being read from a
+  #   JSON file automatically generated from that configuration.
+  #
+  #   values:                           string
+  #   default:                          /assets/data/particles.yml
+  #
+  enabled:                              false
+  xhr_data_path:                        /assets/data/particles.yml
+
+  json_data:
+
+    particles:
+
+      number:
+        value:                            400
+        density:
+          enable:                         true
+          value_area:                     800
+
+      color:
+        value:                            '#ffffff'
+
+      shape:
+        type:                             circle
+        stroke:
+          width:                          0
+          color:                          '#ff0000'
+        polygon:
+          nb_sides:                       5
+        image:
+          src:                            ''
+          width:                          100
+          height:                         100
+
+      opacity:
+        value:                            1
+        random:                           false
+        anim:
+          enable:                         false
+          speed:                          2
+          opacity_min:                    0
+          sync:                           false
+
+      size:
+        value:                            20
+        random:                           false
+        anim:
+          enable:                         false
+          speed:                          20
+          size_min:                       0
+          sync:                           false
+
+      line_linked:
+        enable:                           true
+        distance:                         100
+        color:                            '#ffffff'
+        opacity: 1
+        width: 1
+      move:
+        enable:                           true
+        speed:                            2
+        direction:                        none
+        random:                           false
+        straight:                         false
+        out_mode:                         out
+        bounce:                           false
+        attract:
+          enable:                         false
+          rotateX:                        3000
+          rotateY:                        3000
+
+    interactivity:
+
+      detect_on:                          canvas
+
+      events:
+        onhover:
+          enable:                         true
+          mode:                           grab
+        onclick:
+          enable:                         true
+          mode:                           push
+        resize:                           true
+
+      modes:
+        grab:
+          distance:                       100
+          line_linked:
+            opacity:                      1
+        bubble:
+          distance:                       200
+          size:                           80
+          duration:                       0.4
+        repulse:
+          distance:                       200
+          duration:                       0.4
+        push:
+          particles_nb:                   4
+        remove:
+          particles_nb:                   2
+
+    retina_detect:                      false
+
+# ------------------------------------------------------------------------------
+# END config

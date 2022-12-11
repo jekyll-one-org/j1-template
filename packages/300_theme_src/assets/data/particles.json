@@ -1,0 +1,150 @@
+---
+regenerate:                             true
+exclude_from_search:                    true
+---
+
+{% capture cache %}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/particles.json
+ # Liquid JSON template for ALL Particles configured
+ #
+ # Product/Info:
+ # http://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # The Liquid template galleries.json is used by J1 Justified Gallery.
+ # This template is a helper that creates the gallery (JSON) data
+ # for all galleries configured (if enabled or NOT). It's used by
+ # the J1 Theme Adapter to LOAD the gallery HTML markup portion
+ # via AJAX get.
+ #
+ # The Liquid template engine generates a JSON file as an object of
+ # arrays that contains all image data used by several sliders. See
+ # below the fields taken from the YAML data file:
+ # ~/_data/modules/j1_justified_gallery.yml.
+ # -----------------------------------------------------------------------------
+ # NOTE:
+ # Be careful changing the Liquid code. If the code is changed, check
+ # the integrity of the JSON data created. Corrupted JSON data makes
+ # the Javascript of an Adapter to fail and no functionality will
+ # be available for most UNCLEAR reasons.
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Process YML config data
+================================================================================ {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign modules                     = site.data.modules %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment                 = site.environment %}
+
+{% assign particles_config_defaults  = modules.defaults.particles.defaults %}
+{% assign particles_config_settings  = modules.particles.settings %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign particles_config           = particles_config_defaults | merge: particles_config_settings %}
+
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+{% comment %} Main
+================================================================================ {% endcomment %}
+
+
+  {
+    "particles": {
+      "number": {
+        "value": 150,
+        "density": {
+          "enable": true,
+          "value_area": 800
+        }
+      },
+      "color": {
+        "value": "#ffffff"
+      },
+      "shape": {
+        "type": "image",
+        "stroke": {
+          "width": 0,
+          "color": "#000000"
+        },
+        "polygon": {
+          "nb_sides": 5
+        },
+        "image": {
+          "src": "/assets/themes/j1/modules/particles/css/images/snowflake-1.png",
+          "width": 100,
+          "height": 100
+        }
+      },
+      "opacity": {
+        "value": 0.5,
+        "random": true,
+        "anim": {
+          "enable": false,
+          "speed": 1,
+          "opacity_min": 0.1,
+          "sync": false
+        }
+      },
+      "size": {
+        "value": 10,
+        "random": true,
+        "anim": {
+          "enable": false,
+          "speed": 40,
+          "size_min": 0.1,
+          "sync": false
+        }
+      },
+      "line_linked": {
+        "enable": false,
+        "distance": 500,
+        "color": "#ffffff",
+        "opacity": 0.4,
+        "width": 2
+      },
+      "move": {
+        "enable": true,
+        "speed": 1.5,
+        "direction": "bottom",
+        "random": false,
+        "straight": false,
+        "out_mode": "out",
+        "bounce": false,
+        "attract": {
+          "enable": false,
+          "rotateX": 600,
+          "rotateY": 1200
+        }
+      }
+    }
+  }
+
+
+{% endcapture %}
+{% if production %}
+  {{ cache | minifyJSON }}
+{% else %}
+  {{ cache | strip_empty_lines }}
+{% endif %}
+{% assign cache = nil %}

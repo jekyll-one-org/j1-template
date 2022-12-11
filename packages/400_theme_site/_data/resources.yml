@@ -1937,5 +1937,27 @@ resources:
         js:                             []
         init_function:                  [ j1.adapter.waves.init ]
 
+  # ----------------------------------------------------------------------------
+  # Waves
+  #
+  - name:                               Particles
+    resource:
+      enabled:                          true
+
+      id:                               particles
+      comment:                          Module Particles
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand
+      preload:                          false
+      script_load:                      sync
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            []
+        files:                          [ adapter/js/particles.js ]
+        js:                             [ modules/particles/js/particles ]
+        init_function:                  [ j1.adapter.particles.init ]
+
 # ------------------------------------------------------------------------------
 # END config

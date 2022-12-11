@@ -1,0 +1,68 @@
+---
+title:                                  Tester
+tagline:                                Particles Tester
+date:                                   2022-12-11 00:00:00 +100
+description: >
+                                        Welcome to the pages of J1 Theme. If your here
+                                        first time, a good decision you get on that page first.
+                                        For sure, there is no better place to go.
+keywords: >
+                                        Jekyll, Theme, step, find, project, roundtrip, trip,
+
+categories:                             [ Info ]
+tags:                                   [ Places, Introduction ]
+
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/alexander-redl.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  Photo by Alexander Redl on Unsplash
+
+fab_menu_id:                            default
+
+permalink:                              /pages/public/learn/particles_tester/
+regenerate:                             false
+
+resources:                              [ animate, comments, particles ]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/alexander-redl.jpg
+          alt:                          Photo by Alexander Redl on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Alexander Redl
+            href:                       https://unsplash.com/@alexanderredl
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:url-j1-jupyter-notebooks--where-to-go: /pages/public/jupyter/where-to-go/
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="none" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents (if any) (if any)
+// -----------------------------------------------------------------------------
+Welcome to the pages of the J1 Theme. If you are here the first time, a
+good decision you get on that page first. For sure, there is no better place
+to go. The crucial first step in finding your way to Jekyll is done.
+Congratulations. The *Learn* section contains all you need to learn what
+Jekyll and J1 can do for your website, for your new static web - if you like.
