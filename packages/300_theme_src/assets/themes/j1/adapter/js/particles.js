@@ -2,7 +2,7 @@
 regenerate:                             true
 ---
 
-{% capture cache %}
+{%- capture cache %}
 
 {% comment %}
  # -----------------------------------------------------------------------------
@@ -189,9 +189,6 @@ var logText;
     // -------------------------------------------------------------------------
     init: function (options) {
 
-      // [INFO   ] [j1.adapter.comments                    ] [ detected comments provider (j1_config): {{comments_provider}}} ]
-      // [INFO   ] [j1.adapter.comments                    ] [ start processing load region head, layout: {{page.layout}} ]
-
       // -----------------------------------------------------------------------
       // Default module settings
       // -----------------------------------------------------------------------
@@ -253,14 +250,13 @@ var logText;
                   // load particles config from yaml data file (dataUrl)
                   $.get(dataUrl)
                   .done(function (data) {
-                      allConfigs = yaml.loadAll(data, 'utf8');
+                    allConfigs = yaml.loadAll(data, 'utf8');
 
                     {% for item in particles_settings.particles %}
                       {% if item.particle.enabled %}
 
                       {% assign particle_id = item.particle.id %}
                       particleID = '{{ particle_id }}';
-
 
                       if (particleID == 'snowflake') {
                         // pass the data >>object<<
@@ -335,10 +331,10 @@ var logText;
   }; // END return
 })(j1, window);
 
-{% endcapture %}
-{% if production %}
+{% endcapture -%}
+{%- if production -%}
   {{ cache | minifyJS }}
-{% else %}
+{%- else -%}
   {{ cache | strip_empty_lines }}
-{% endif %}
+{%- endif- %}
 {% assign cache = nil %}
