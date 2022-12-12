@@ -30,7 +30,7 @@ toc:                                    true
 permalink:                              /pages/public/legal/en/comment_policy/
 regenerate:                             false
 
-resources:                              [ animate, clipboard, particles, rouge ]
+resources:                              [ animate, clipboard, rouge ]
 resource_options:
   - attic:
       padding_top:                      600

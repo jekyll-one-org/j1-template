@@ -241,8 +241,10 @@ j1.adapter.attic = (function (j1, window) {
               // mute the badge while sliding
               $('.attic-caption').css('opacity', '0');
 
-              // re-initialze particles on a slideshow
-              j1.adapter.particles.init();
+              // re-initialze particles on a slideshow if exists
+              if ($('.particles-js-canvas-el').length > 0) {
+                j1.adapter.particles.init();
+              }
 
             }); // END on('backstretch.before')
 

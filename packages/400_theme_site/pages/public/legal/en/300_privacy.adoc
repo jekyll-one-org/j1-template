@@ -28,7 +28,7 @@ toc:                                    true
 permalink:                              /pages/public/legal/en/privacy/
 regenerate:                             false
 
-resources:                              [ animate, clipboard, particles, rouge ]
+resources:                              [ animate, clipboard, rouge ]
 resource_options:
   - attic:
       padding_top:                      600

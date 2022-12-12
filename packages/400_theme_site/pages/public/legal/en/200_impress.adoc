@@ -8,15 +8,15 @@ description: >
 categories:                             [ Site ]
 tags:                                   [ Impress ]
 
-robots:
-  index:                                false
-  follow:                               false
-
 image:
   path:                                 /assets/images/modules/attics/1920x1280/j1-theme-mockup.jpg
   width:                                1920
   height:                               1280
   alt:                                  J1 Themes Mockup
+
+robots:
+  index:                                false
+  follow:                               false
 
 sitemap:                                false
 exclude_from_search:                    true
@@ -28,7 +28,7 @@ toc:                                    false
 permalink:                              /pages/public/legal/en/impress/
 regenerate:                             false
 
-resources:                              [ animate, clipboard, particles, rouge ]
+resources:                              [ animate, clipboard, rouge ]
 resource_options:
   - attic:
       padding_top:                      600
