@@ -232,9 +232,6 @@ j1.adapter.attic = (function (j1, window) {
                 $('.backstretch').removeClass(atticOptions.spinner);
               }
 
-              // console.log('module attic - entered: backstretch.before');
-              // console.log('module attic - apply: CSS filters');
-
               $('.backstretch').css('filter', 'sepia(1) brightness(0.9) contrast(0.6)');
               $('.backstretch').css('filter', 'grayscale(1) contrast(1) brightness(1)');
 
@@ -243,6 +240,9 @@ j1.adapter.attic = (function (j1, window) {
 
               // mute the badge while sliding
               $('.attic-caption').css('opacity', '0');
+
+              // re-initialze particles on a slideshow
+              j1.adapter.particles.init();
 
             }); // END on('backstretch.before')
 
@@ -307,6 +307,7 @@ j1.adapter.attic = (function (j1, window) {
                       + '</div>';
                       $('.attic-caption').html(badgeHTML).hide();
                 }
+
               }
 
               textOverlayHTML = ''
