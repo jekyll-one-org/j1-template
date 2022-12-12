@@ -1,44 +1,37 @@
 ---
-title:                                  Reporting
-tagline:                                Report J1 Issues
+title:                                  Help On Issues
+tagline:                                Report J1 Failures
 date:                                   2022-01-01 00:00:00
 description: >
                                         Although I endeavor to keep this site as up-to-date as possible, even the
                                         best sites will have some bugs. If you spot any typos, factually outdated
                                         or incorrect information, formatting errors, or similar problems, please
                                         report issues so I can correct them.
-keywords: >
-                                      Jekyll, Theme, step, find, project, roundtrip, trip,
 
 categories:                             [ About ]
 tags:                                   [ Issues ]
 
-comments:                               false
-#fab_menu_id:                            page_ctrl
-scrollbar:                              false
-regenerate:                             false
-
 image:
-  path:                                 /assets/images/modules/attics/1920x1280/alexander-redl.jpg
+  path:                                 /assets/images/modules/attics/1920x1280/j1-theme-mockup.jpg
   width:                                1920
   height:                               1280
-  alt:                                  Photo by Alexander Redl on Unsplash
+  alt:                                  J1 Themes Mockup
 
+comments:                               false
+scrollbar:                              false
+
+regenerate:                             false
 permalink:                              /pages/public/about/reporting_issues/
 
-resources:                              [ animate ]
+resources:                              [ animate, particles ]
 resource_options:
   - attic:
-      padding_top:                      400
+      padding_top:                      600
       padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/images/modules/attics/1920x1280/alexander-redl.jpg
-          alt:                          Photo by Alexander Redl on Unsplash
-          badge:
-            type:                       unsplash
-            author:                     Alexander Redl
-            href:                       https://unsplash.com/@alexanderredl
+        - url:                          /assets/images/modules/attics/1920x1280/j1-theme-mockup.jpg
+          alt:                          J1 Themes Mockup
 ---
 
 // Page Initializer
