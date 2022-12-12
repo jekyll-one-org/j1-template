@@ -113,10 +113,8 @@ settings:
               stroke:
                 width:                  0
                 color:                  "#000000"
-
               polygon:
                 nb_sides:               5
-
               image:
                 src:                    /assets/themes/j1/modules/particles/css/images/snowflake-1.png
                 width:                  100
@@ -165,8 +163,29 @@ settings:
             events:
               onhover:
                 enable:                 false
+                mode:                   grab
               onclick:
                 enable:                 false
+                mode:                   push
+
+            modes:
+              grab:
+                distance:               100
+                line_linked:
+                  opacity:              0.75
+              bubble:
+                distance:               100
+                size:                   40
+                duration:               0.4
+                opacity:                0.4
+                speed:                  3
+              repulse:
+                distance:               200
+                duration:               1.2
+              push:
+                particles_nb:           4
+              remove:
+                particles_nb:           2
 
           retina_detect:                false
 
