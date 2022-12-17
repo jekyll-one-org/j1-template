@@ -1,0 +1,215 @@
+---
+title:                                  Jekyll FAQ
+tagline:                                Common Questions
+
+categories:                             [ FAQ ]
+tags:                                   [ Jekyll ]
+
+series:                                 faq
+
+image:
+  path:                                 /assets/images/promo/jekyll/jekyll-generator.jpg
+  width:                                1920
+  height:                               1200
+  alt:                                  Jekyll Common Questions
+
+fab_menu_id:                            page_ctrl
+comments:                               false
+regenerate:                             false
+
+share:                                  facebook
+
+resources:                              [ animate ]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/promo/jekyll/jekyll-generator.jpg
+          alt:                          Jekyll Common Questions
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+// Place an excerpt at the most top position
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+Welcome to the FAQ page on Jekyll, a popular Static Site Generator (SSG).
+Many questions about Jekyll are found on the Internet and many more answers.
+On this page, some comprehensive answers are found for all people using the
+J1 Theme or having plans to do so.
+
+excerpt__end
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+// What (Was ist)  ...
+// -----------------------------------------------------------------------------
+
+[role="mt-5"]
+== What is Jekyll?
+
+Jekyll is a popular Static Site Generator (SSG). As the name SSG implies,
+the generator component creates websites, but Jekyll is not a content
+management system (CMS) like _WordPress_. A static site generator is a
+perfect toolset to create and manage personal, project, or documentation
+sites because they do not rapidly change their content.
+
+The generator concept dispenses with the convenience of a website editing
+system using centralized stored content in databases, in favor of editing
+simple files with the help of text editors. SSGs like Jekyll  read the code
+of a content page from simple text files that contain rendering information
+already.
+
+The makers of Jekyll describe it this way:
+
+[quote, The Jekyll Project]
+____
+Think of it like a file-based CMS, without all the complexity. Jekyll takes
+your content, renders Markdown and Liquid templates, and spits out a complete,
+static website ready to be served by Apache, Nginx or another web server.
+____
+
+An SSG creates websites based on static content sources and generates web
+pages that a web server can directly deliver. A CMS creates dynamic content
+pages that require a web server and a rendering system to present web pages
+to the users. The outcome of an SSG like _Jekyll_ and a CMS like _WordPress_
+may be quite the same, but the required software and infrastructure are
+very different in terms of complexity.
+
+Find more to know:  +
+mdi:link-variant[24px, md-blue mr-2 ml-3]
+link:{url-jekyll--philosophy}[The Philosophy of Jekyll, {browser-window--new}]
+
+[role="mt-5"]
+== What Are Static Site Generators?
+
+lorem:sentences[5]
+
+
+// How (Wie) ...
+// -----------------------------------------------------------------------------
+
+[role="mt-5"]
+== How to install Jekyll?
+
+lorem:sentences[5]
+
+Find more to know:  +
+mdi:link-variant[24px, md-blue mr-2 ml-3]
+link:{url-jekyll--philosophy}[The Philosophy of Jekyll, {browser-window--new}]
+
+[role="mt-5"]
+== How to use Jekyll?
+// https://jekyllrb.com/docs/step-by-step/01-setup/
+
+lorem:sentences[5]
+
+Find more to know:  +
+mdi:link-variant[24px, md-blue mr-2 ml-3]
+link:{url-jekyll--philosophy}[The Philosophy of Jekyll, {browser-window--new}]
+
+
+
+//   Is (Ist ...) ...
+// -----------------------------------------------------------------------------
+
+[role="mt-5"]
+== Is Jekyll still used?
+
+lorem:sentences[5]
+
+[role="mt-5"]
+== Is Jekyll a CMS?
+
+lorem:sentences[5]
+
+[role="mt-5"]
+== Is Jekyll faster than WordPress?
+
+lorem:sentences[5]
+
+[role="mt-5"]
+== Is Jekyll a framework
+
+lorem:sentences[5]
+
+[role="mt-5"]
+== Is Jekyll a programming language?
+
+lorem:sentences[5]
+
+[role="mt-5"]
+== Is Jekyll based on Ruby?
+
+lorem:sentences[5]
+
+[role="mt-5"]
+== Is Jekyll a Ruby Gem?
+
+lorem:sentences[5]
+
+[role="mt-5"]
+== Is Jekyll using Ruby on Rails?
+
+lorem:sentences[5]
+
+[role="mt-5"]
+== Is knowledge of Ruby needed to use Jekyll?
+
+lorem:sentences[5]
+
+[role="mt-5"]
+== Is Jekyll using Markdown?
+
+lorem:sentences[5]
+
+[role="mt-5"]
+== Is Jekyll using Asciidoc?
+
+lorem:sentences[5]
+
+
+// Can (Kann man ...) ...
+// -----------------------------------------------------------------------------
+
+[role="mt-5"]
+== Can I use HTML with Jekyll
+
+lorem:sentences[5]
+
+[role="mt-5"]
+== Can I use CSS with Jekyll
+
+lorem:sentences[5]
+
+[role="mt-5"]
+== Can I use Javascript with Jekyll
+
+lorem:sentences[5]
+
+[role="mt-5"]
+== Can I use Bootstrap with Jekyll
+
+lorem:sentences[5]

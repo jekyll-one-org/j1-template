@@ -1,0 +1,96 @@
+---
+title:                                  J1 Theme FAQ
+tagline:                                Common Questions
+
+categories:                             [ FAQ ]
+tags:                                   [ Jekyll ]
+
+series:                                 faq
+
+image:
+  path:                                 /assets/images/promo/jekyll/jekyll-generator.jpg
+  width:                                1920
+  height:                               1200
+  alt:                                  J1 Theme Common Questions
+
+fab_menu_id:                            page_ctrl
+comments:                               false
+regenerate:                             false
+
+share:                                  facebook
+
+resources:                              [ animate ]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/promo/jekyll/jekyll-generator.jpg
+          alt:                          J1 Theme Common Questions
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:badges-enabled:                        false
+
+// Place an excerpt at the most top position
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+Welcome to the FAQ page focussing on the J1 Template, a powerful theme and
+template system for Jekyll. Many questions about Jekyll and Jekyll Themes
+can be found on the Internet and, therefore, many more answers. This page
+gives all people using the J1 Template system - or having plans to do -
+comprehensive answers they wouldn't find anywhere else.
+
+excerpt__end
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Static Site Generator: SSG
+
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+// What (Was ist)  ...
+// -----------------------------------------------------------------------------
+
+[role="mt-5"]
+== What is JekyllOne (J1)?
+
+lorem:sentences[5]
+
+
+//   Is (Ist ...) ...
+// -----------------------------------------------------------------------------
+
+
+
+// Can (Kann ich ...) ...
+// -----------------------------------------------------------------------------
+
+
+
+// How (Wie) ...
+// -----------------------------------------------------------------------------
+
+[role="mt-5"]
+== How To Use JekyllOne?
+
+lorem:sentences[5]

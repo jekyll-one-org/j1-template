@@ -1,0 +1,98 @@
+Questions
+================================================================================
+
+
+Jekyll  - What (Was ist)
+------------------------
+
+  What is Jekyll
+
+  What is a gem-based theme?
+
+  What is a layout?
+
+  Is (Ist ...)
+  ------------
+
+  Is Jekyll still used?
+
+    Bla, bla
+
+    Is Jekyll a CMS?
+    Is Jekyll faster than WordPress?
+
+    Is Jekyll a framework?
+    Is Jekyll a programming language?
+    Is Jekyll based on Ruby?
+    Is Jekyll a Ruby gem?
+    Is Jekyll using Ruby on Rails?
+    Is knowledge of Ruby needed to use Jekyll?
+
+    Is Jekyll using Markdown?
+    Is Jekyll using Asciidoc?
+
+  Can (Kann man ...)
+  ------------------
+
+  Can Jekyll?
+
+    Can I use HTML with Jekyll?
+    Can I use CSS with Jekyll?
+    Can I use Javascript with Jekyll?
+    Can I use Bootstrap with Jekyll?
+
+
+Jekyll - Why (Warum)
+--------------------
+
+  Why is Jekyll used?
+
+
+Jekyll - How (Wie)
+------------------
+
+  How to install Jekyll?
+
+  How to use Jekyll?
+  --> https://jekyllrb.com/docs/step-by-step/01-setup/
+
+
+
+
+JekyllOne - what Why How  (Was Warum Wie)
+-----------------------------------------
+
+JekyllOne - What (Was ist)
+--------------------------
+
+  What is JekyllOne?
+
+  Is (Ist ...)
+  ------------
+
+  Is JekyllOne using Jekyll?
+  Is JekyllOne using Plugins?
+  Is JekyllOne using Markdown?
+  Is JekyllOne using Asciidoc?
+  Is JekyllOne using SEO?
+
+  Can (Kann man ...)
+  ------------------
+  Can I use HTML with JekyllOne?
+  Can I use CSS with JekyllOne?
+  Can I use Javascript with JekyllOne?
+  Can I use Bootstrap with JekyllOne?
+  Can I use Markdown with JekyllOne?
+  Can I use Asciidoc with JekyllOne?
+
+JekyllOne - Why (Warum)
+-----------------------
+
+  Why is JekyllOne used?
+
+
+JekyllOne - How (Wie)
+---------------------
+
+  How to install JekyllOne?
+  How to useJekyllOne?

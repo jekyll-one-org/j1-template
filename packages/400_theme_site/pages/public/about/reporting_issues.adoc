@@ -15,7 +15,7 @@ categories:                             [ About ]
 tags:                                   [ Issues ]
 
 image:
-  path:                                 /assets/images/modules/attics/1920x1280/j1-theme-mockup.jpg
+  path:                                 /assets/images/modules/attics/1920x1280/j1-theme-mockup-1.jpg
   width:                                1920
   height:                               1280
   alt:                                  J1 Theme Mockup
@@ -33,7 +33,7 @@ resource_options:
       padding_bottom:                   50
       opacity:                          0.5
       slides:
-        - url:                          /assets/images/modules/attics/1920x1280/j1-theme-mockup.jpg
+        - url:                          /assets/images/modules/attics/1920x1280/j1-theme-mockup-1.jpg
           alt:                          J1 Themes Mockup
 ---
 
