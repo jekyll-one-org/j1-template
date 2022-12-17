@@ -92,7 +92,7 @@ lorem:sentences[5]
   	<li id="home_news_panel-scroll-item" class="list-group-item items-2 p-0">
 
   	  <article class="card card-same-height raised-z3 mb-3">
-  		<img class="img-fluid img-object--cover g-height-200" src="/assets/images/modules/attics/1920x1280/alexander-redl.jpg" alt="J1 Theme">
+  		<img class="img-fluid img-object--cover g-height-200" src="/assets/images/modules/attics/1920x1280/j1-theme-mockup-1.jpg" alt="J1 Theme">
   		<h3 class="card-header bg-primary notoc">J1 Theme</h3>
   		<!-- Body|Excerpt -->
   		<div class="card-body r-text-300 mt-4">

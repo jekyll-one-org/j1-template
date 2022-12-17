@@ -93,7 +93,7 @@ $(document).ready(function() {
 
     <div class="col-sm-6 col-lg-4 mb-4">
       <div class="card">
-        <img class="img-fluid img-object--cover g-height-300" src="/assets/images/modules/attics/1920x1280/alexander-redl.jpg" alt="J1 Theme" style="filter: grayscale(0) contrast(1) brightness(1);">
+        <img class="img-fluid img-object--cover g-height-300" src="/assets/images/modules/attics/1920x1280/j1-theme-mockup-1.jpg" alt="J1 Theme" style="filter: grayscale(0) contrast(1) brightness(1);">
         <div class="card-body">
           <h5 class="card-title">Card title that wraps to a new line</h5>
           <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
@@ -250,7 +250,7 @@ $(document).ready(function() {
     </li>
     <li id="home_news_panel-scroll-item" class="scroll-group-item items-2 p-0">
       <article class="card card-same-height raised-z0 mb-5">
-        <img class="img-fluid img-object--cover g-height-300" src="/assets/images/modules/attics/1920x1280/alexander-redl.jpg" alt="J1 Theme" style="filter: grayscale(1) contrast(1) brightness(1);">
+        <img class="img-fluid img-object--cover g-height-300" src="/assets/images/modules/attics/1920x1280/j1-theme-mockup-1.jpg" alt="J1 Theme" style="filter: grayscale(1) contrast(1) brightness(1);">
         <h3 class="card-header bg-primary notoc notranslate">J1 Theme</h3>
         <!-- Body|Excerpt -->
         <div class="card-body r-text-300 mt-0">
