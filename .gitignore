@@ -150,9 +150,8 @@ packages/400_theme_site/.jekyll-cache/
 
 packages/400_theme_site/_data/private*.yml
 
-packages/400_theme_site/collections/posts/featured/_posts/*welcome-to-J1 Theme.adoc
+packages/400_theme_site/collections/posts/public/faq/
 
-packages/400_theme_site/pages/public/jupyter/notebooks/textbooks/
 
 
 # Unneeded files for package 500_theme_gem
