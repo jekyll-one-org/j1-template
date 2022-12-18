@@ -335,6 +335,7 @@ permalink:                              pretty
 # "site.url". For the development environment there is an EXCEPTION:
 # if you are running jekyll serve in a development environment,
 # site.url will be set to the value of host, port.
+# NOTE: Required setting for the sitemap plugin, for example.
 #
 url:                                  "http://localhost:40000"
 
