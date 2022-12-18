@@ -107,7 +107,6 @@ link:{url-jekyll--philosophy}[The Philosophy of Jekyll, {browser-window--new}]
 
 lorem:sentences[5]
 
-bla
 
 // How (Wie) ...
 // -----------------------------------------------------------------------------

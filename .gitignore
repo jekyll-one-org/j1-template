@@ -150,7 +150,7 @@ packages/400_theme_site/.jekyll-cache/
 
 packages/400_theme_site/_data/private*.yml
 
-packages/400_theme_site/collections/posts/public/faq/
+packages/400_theme_site/collections/posts/public/faq/*
 
 
 
