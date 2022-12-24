@@ -1,12 +1,14 @@
 ---
 title:                                  MDI Light Icons
 tagline:                                Select Icons
-date:                                   2020-11-08 00:00:00
+date:                                   2022-12-08 00:00:00
 description: >
-                                        Previewer for the light Material Design Icons (MDIL) for J1 Theme.
-                                        Material Design Icons is a growing icon collection allows
-                                        designers and developers targeting various platforms to download
-                                        icons in the format, color and size they need for any project.
+
+                                        Light Material Design Icons MDIL for J1 Theme are a very
+                                        elpful design resource to support navigation components
+                                        or links by meaningful icons. The Icon set is a growing
+                                        collection fully integrated by the Jekyll theme usable
+                                        out-of-the-box.
 
 categories:                             [ Preview ]
 tags:                                   [ MDIL, Icons, Fonts ]
@@ -52,19 +54,119 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // https://github.com/Templarian/MaterialDesignLight
-
-// Include sub-documents (if any)
-// -----------------------------------------------------------------------------
-_Material Design Light_ (MDIL) is a helpful design resource for Web Sites that
-follow _Google's_ specification of Material Design. *MDIL* is a subset of the
-Material Design Icons (MDI) set managed by *Austin Andrews* and contributors.
+[role="dropcap"]
+Material Design Light MDIL is a helpful design resource supported by the
+theme JekyllOne for Web Sites that follow _Google's_ specification of Material
+Design. MDIL is a subset of the Material Design Icons (MDI) set managed by
+_Austin Andrews_ and contributors.
 
 The icon set is still work in progress. The team is in the process of building
 the icon set into a fully fledged alternative to MDI. Have a look at
 https://github.com/Templarian/MaterialDesignLight[MaterialDesignLight, {browser-window--new}]
 for latest versions.
 
-==  Icon Overview
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="mt-4"]
+== HTML Markup
+
+There is no official markup for font icons, but 2 markups are widely used.
+Both markups can be used in block elements like the anchor tag `<a>`. That
+way, it's on you what to use for font icons.
+
+[source, html]
+----
+<span class="mdil mdil-name" role="img" aria-label="name" ></span> <1>
+<i class="mdil mdil-name"></i> <1> <2>
+----
+<1> Both forms are consistent with the HTML5 spec
+<2> It's short and the `<i>` tag may associated for an **i**con
+    (semantic meaning)
+
+NOTE: The `<i>` tag provides more meaning to machines because of the HTML spec,
+it provides more meaning to humans because the `i` can easily associated with
+`icon`. And it's only one letter long - that win! And if you make sure to
+include equivalent text either inside the `<i>` tag or right next to it
+(as Twitter for Bootstrap does), then screen readers understand where to
+click to reply, the link is usable if CSS doesn't load, and human readers
+with good eyesight and a decent browser see a pretty icon.
+
+== Asciidoc Markup
+
+For pages using Asciidoc for the source (default), a easier solution is to
+use  Markups from Asciidoc.
+
+.Markup using a pass block
+[source, html]
+----
+pass:[<i class="mdil mdil-<name> mdil-<size> mdil-<modifier>"></i>]
+----
+
+Material Designs Icons can be used as inline icons by using
+the `mdil:` inline macro:
+
+.Markup using a inline macro
+[source, no_template, role="noclip"]
+----
+mdil:icon_name[icon_size, modifier] <1> <2> <3>
+----
+<1> All `icon_name` can be found on the preview page for
+    link:{url-previewer--mdil-icons}[MDI Light Icon Previewer]
+<2> The `icon_size` attribute can be one of: `xs`, `sm`, `lg` and `1x` to `10x`
+<3> The `modifier` can be used to set the e.g the color (md-blue), an
+    animation (fa-pulsed) or the orientation (fa-rotate-45)
+
+.Click on button `VIEW` to see how it's looks alike
+[source, no_template, role="noclip"]
+----
+mdil:bank[2x, ml-3 mr-2 mb-2] Bank
+----
+
+[.result]
+====
+mdil:bank[2x, ml-3 mr-2 mb-2] Bank
+====
+
+NOTE: Parameters `icon_size` and `modifier` are optional. If not given,
+the icons `size` is set to default  (`1x`), the color to `black` and no
+settings for the `modifier` are applied.
+
+== Sizes
+
+For more eye-minded placement, or to place emphasis on, all icons can be
+specified in different sizes by the optional parameter `size`.
+
+NOTE: The size of an icon is typically specified relative to the base font
+size. Today, the base font size is set to `16px`. That mean for for font
+icons, that the width of an icon is set to `32px` if a relative size
+of `2x` is specified.
+
+See with the following what sizes are available.
+
+=== Fixed Size
+
+If needed, the icon size can given in absolute sizes from `18px` to `48px`.
+
+include::{tabledir}/mdil_icons/100_absolute_sizes.asciidoc[]
+
+////
+=== BS Grid Size
+
+For a better Bootstrap integration, the icon size can be given like the
+view-port shortcuts `xs`, `sm`, `md`, `lg` and `xl`.
+
+include::{tabledir}/mdil_icons/110_bs_grid_sizes.asciidoc[]
+////
+
+=== Relative Size
+
+All icons can be specifier relativ to the base size of `1em` from `1x` to `10x`.
+See the examples with the table below.
+
+include::{tabledir}/mdil_icons/120_relative_sizes.asciidoc[]
+
+
+== Icon Overview
 
 The Material Design Light Icon Font support a growing set of 250+ icons
 (v0.2.63) from a wide varity of topics.

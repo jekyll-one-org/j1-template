@@ -1,11 +1,14 @@
 ---
 title:                                  Rouge
 tagline:                                Highlighter Themes
-date:                                   2020-11-08 00:00:00
+date:                                   2022-12-08 00:00:00
 description: >
-                                        Previewer page for J1 module Rouge. Rouge is a pure Ruby
-                                        syntax highlighter. It can highlight over 100 different
-                                        languages fully integrated with J1 Theme.
+                                        Rouge is a pure Ruby library for syntax highlighting
+                                        and is fully supported by Jekyll. The library is
+                                        integrated with the J1 Theme and supports 100+ script
+                                        and programming languages. Multiple styles are available
+                                        to customize the highlighter Rouge for light or dark
+                                        J1 Themes.
 
 categories:                             [ Previewer ]
 tags:                                   [ Highlighter, Rouge ]
@@ -62,24 +65,31 @@ resource_options:
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+Rouge is a pure Ruby library for syntax highlighting and is fully supported
+by Jekyll. The library is integrated with the J1 Theme and supports 100+
+script and programming languages. Multiple styles are available to customize
+the highlighter for light or dark J1 Themes.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-== Theme selector
+[role="dropcap"]
+== Styles selector
 
 For the default theme `Uno` of J1 Theme, the following _Rouge_ themes
 are used:
 
-* light:  `uno.light` (based on `github`)
-* dark:   `uno.dark`  (based on `gruvbox`)
+* light: `uno.light` (based on the style `github`)
+* dark:  `uno.dark`  (based on the style `gruvbox`)
 
-NOTE: The default themes used for J1 Theme can be configured with the
-global template config file `~/_data/j1_config.yml`.
+NOTE: The default styles used for J1 Theme can be configured with the
+global template configuration file `~/_data/j1_config.yml`.
 
-Make a selection from the select button below to preview a theme.
+Make a selection from the select button below to preview a style for the
+Rouge Syntax Highlighter.
 
 ++++
-<div class="btn-group" role="group" aria-label="Button to select a theme">
+<div class="btn-group" role="group" aria-label="Button to select a style">
   <!-- See: https://stackoverflow.com/questions/47242702/force-bootstrap-dropdown-menu-to-always-display-at-the-bottom-and-allow-it-go-of -->
   <!-- NOTE: control the behaviour of popper.js for positioning -->
   <!-- NOTE: set attribute data-flip="false" to open the SELECT list at the BOTTOM of the BUTTON -->
@@ -90,7 +100,7 @@ Make a selection from the select button below to preview a theme.
     data-bs-target="#navbarDropdown"
     aria-haspopup="true"
     aria-expanded="false">
-    Select a theme <span class="caret ml-2"></span>
+    Select a style <span class="caret ml-2"></span>
   </button>
   <ul class="dropdown-menu scrollable-menu" role="menu" aria-labelledby="btnGroupThemesDropdown">
     <li><a class="dropdown-item" href="#void"  onclick="j1.adapter.rouge.reaplyStyles('uno.light')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>uno.light</a></li>

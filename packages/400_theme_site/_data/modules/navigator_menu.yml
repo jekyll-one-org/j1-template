@@ -53,8 +53,8 @@
         - title:                        Responsive Tables
           href:                         /pages/public/learn/roundtrip/responsive_tables/
           icon:                         table
-        - title:                        Bootstrap Themes
-          href:                         /pages/public/learn/roundtrip/themes/
+        - title:                        Bootstrap Styles
+          href:                         /pages/public/learn/roundtrip/styles/
           icon:                         theme-light-dark
         - title:                        Lunr Search
           href:                         /pages/public/learn/roundtrip/quicksearch/
@@ -67,9 +67,9 @@
   sublevel:
 
     # --------------------------------------------------------------------------
-    # PREVIEWERS
+    # PREVIEWER
     #
-    - title:                            Previewers
+    - title:                            Previewer
       icon:                             eye
       dropdown:
 
@@ -94,7 +94,7 @@
         - title:                        MDI Icons (light)
           href:                         /pages/public/previewer/mdil_font/
           icon:                         sprout-outline
-        - title:                        Rouge Themes
+        - title:                        Rouge Styles
           href:                         /pages/public/previewer/rouge/
           icon:                         code-parentheses
         - title:                        Justified Gallery
@@ -276,21 +276,21 @@
           icon:                         regex
 
 # ------------------------------------------------------------------------------
-# Menu THEMES
+# Menu STYLES
 #
 - item:                                 Themes
   theme_select:
 
+    - preview:                          enabled
+      title:                            Theme Preview
+      href:                             /pages/public/previewer/current_theme/
+      icon:                             eye
     - local_themes:                     enabled
       title:                            Jekyll One
       icon:                             alpha-j-box
     - bootswatch_themes:                enabled
       title:                            Bootswatch
       icon:                             bootstrap
-    - preview:                          enabled
-      title:                            Preview
-      href:                             /pages/public/previewer/current_theme/
-      icon:                             theme-light-dark
 
 # ------------------------------------------------------------------------------
 # Menu ABOUT

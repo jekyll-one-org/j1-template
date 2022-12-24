@@ -1,16 +1,18 @@
 ---
 title:                                  Where to go
 tagline:                                Fasten Your Way
-date:                                   2020-11-03 00:00:00 +100
+date:                                   2022-11-03 00:00:00 +100
 description: >
-                                        Welcome to the pages of J1 Theme. If your here
-                                        first time, a good decision you get on that page first.
-                                        For sure, there is no better place to go.
+                                        Welcome to the info pages of J1 Theme. A good decision
+                                        to get on that page first. Certainly, there is no better
+                                        place to learn what J1 Theme can do and what pages are
+                                        available to experience more.
 keywords: >
-                                        Jekyll, Theme, step, find, project, roundtrip, trip,
+                                        Jekyll, Theme, JekyllOne, Info, Introduction, Rocketstart,
+                                        Roundtrip,
 
 categories:                             [ Info ]
-tags:                                   [ Places, Introduction ]
+tags:                                   [ Introduction ]
 
 image:
   path:                                 /assets/images/modules/attics/1920x1280/alexander-redl.jpg
@@ -58,14 +60,16 @@ resource_options:
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+Welcome to the info pages of J1 Theme. A good decision to get on that page
+first. Certainly, there is no better place to learn what J1 Theme can do
+and what pages are available to experience more.
 
 // Include sub-documents (if any) (if any)
 // -----------------------------------------------------------------------------
-Welcome to the pages of the J1 Theme. If you are here the first time, a
-good decision you get on that page first. For sure, there is no better place
-to go. The crucial first step in finding your way to Jekyll is done.
-Congratulations. The *Learn* section contains all you need to learn what
-Jekyll and J1 can do for your website, for your new static web - if you like.
+The crucial first step in finding your way to Jekyll is done. Congratulations.
+The *Learn* section contains all you need to learn what Jekyll and J1 can do
+for your website, for your new static web - if you like.
 
 Roundtrip::
 In this section, you’ll find a tour to show some of the main features of

@@ -3,12 +3,14 @@ title:                                  Theme Typography
 tagline:                                Crucial Branding Element
 date:                                   2020-11-05 00:00:00
 description: >
-                                        The character font serves as one of the most crucial branding elements for
-                                        any business. Typography matters for any media presenting text. The text will
-                                        take on an important role of acting not only as plain text but will also serve
-                                        as something like images.
+                                        The Jekyll Theme JekyllOne places the character font as
+                                        one of the most crucial branding elements for any website.
+                                        Typography matters for any media presenting text. The text
+                                        will take on an important role of acting not only as plain
+                                        text but also as something like images.
 keywords: >
-                                        Jekyll, Theme, step, find, project, roundtrip, trip,
+                                        Jekyll, Theme, JekyllOne, Brand, Typography, Font,
+                                        Roundtrip
 
 categories:                             [ Roundtrip ]
 tags:                                   [ Module, Typography ]
@@ -22,7 +24,7 @@ image:
 permalink:                              /pages/public/learn/roundtrip/typography/
 regenerate:                             false
 
-resources:                              [ animate, rouge, clipboard, lightbox ]
+resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
   - attic:
       opacity:                          0.3
@@ -59,15 +61,15 @@ resource_options:
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+The Jekyll Theme JekyllOne places the character font as one of the most
+crucial branding elements for any website. Typography matters for any media
+presenting text. The text will take on an important role of acting not only
+as plain text but also as something like images.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-[role="dropcap"]
-The character font serves as one of the most crucial branding elements for
-any business. Typography matters for any media presenting text. The text will
-take on an important role of acting as plain text but will also serve
-as something like images.
-
+[role="mt-4"]
 == Responsive Text
 
 Sadly, one common flaw is seen in many templates and frameworks: a lack of

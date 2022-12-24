@@ -1,12 +1,13 @@
 ---
 title:                                  MDI Icons
 tagline:                                Select Icons
-date:                                   2020-11-08 00:00:00
+date:                                   2022-12-08 00:00:00
 description: >
-                                        Previewer for Material Design Icons (MDI) for J1 Theme.
-                                        Material Design Icons is a growing icon collection allows
-                                        designers and developers targeting various platforms to download
-                                        icons in the format, color and size they need for any project.
+                                        Material Design Icons MDI for J1 Theme are a very
+                                        elpful design resource to support navigation components
+                                        or links by meaningful icons. The Icon set is a growing
+                                        collection fully integrated by the Jekyll theme usable
+                                        out-of-the-box.
 
 categories:                             [ Preview ]
 tags:                                   [ MDI, Icons, Fonts ]
@@ -51,24 +52,17 @@ resource_options:
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+_Material Design Icons_ MDI is a very helpful design resource for Web Design
+that is based on _Google's_ specification of Material Design. *MDI* is a
+community-driven project to create an increased icon-set based on the official
+Material Design Icon repository provided by _Google_. The Icon set is a
+growing collection fully integrated by the Jekyll theme usable
+out-of-the-box.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-== Material Design Icons
-
-_Material Design Icons_ (MDI) is a very helpful design resource for Web Design
-that is based on _Google's_ specification of Material Design. *MDI* is a
-community-driven project to create an increased icon-set based on the official
-Material Design Icon repository provided by _Google_.
-
-*MDI* is a fast growing collection to allow designers and developers targeting
-various platforms to download icons in the format, color and size they needed
-for a project. In the current *MDI* version (v5.9.55), 5900+ icons - plus
-converted icons from the official icon set created by _Google_ - are available.
-
-_J1 Theme_ supports the full set of *MDI* icons for the Web (Webfont, WOFF).
-The icon set is fully integrated and can be used out-of-the-box.
-
+[role="mt-4"]
 == HTML Markup
 
 There is no *official* markup for font icons, but 2 markups are widely used.

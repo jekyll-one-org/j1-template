@@ -1,11 +1,13 @@
 ---
 title:                                  Master Slider
-tagline:                                Common Sliders
-date:                                   2020-11-03 00:00:00
+tagline:                                Common Slideshows
+date:                                   2022-12-03 00:00:00
 description: >
-                                        Welcome to the preview page focussing on the image module. This page
-                                        shows some valuable features of the J1 Theme to manage your image-based
-                                        content using Master Slider.
+                                        J1 Theme integrates the free version of Master Slider (MS) Lite.
+                                        For the Jekyll Theme JekyllOne, no programming skills are needed
+                                        for Master Slider; slideshows are integrated based on configurations.
+                                        Note the lite version does not support all features. The lite version
+                                        supports not all slider layouts and no overlays.
 
 categories:                             [ Previewer ]
 tags:                                   [ Master Slider, Template ]
@@ -62,17 +64,13 @@ resource_options:
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-// Include sub-documents (if any)
-// -----------------------------------------------------------------------------
-
+[role="dropcap"]
 Welcome to the preview page of J1 Master Slider. This page shows some valuable
 features of how J1 Theme can manage your image-based content using the
-*Master Slider* (MS) module `masterslider` as slideshows.
-
-NOTE: J1 Theme uses the *free* version of Master Slider (MS Lite). The
-lite version does *not* support all features. Not all MS Slider *layouts* and
-no *overlays* are supported by the lite version.
+*Master Slider* (MS) module `masterslider` as slideshows. J1 Theme uses the
+*free* version of Master Slider (MS Lite). The lite version does not support
+all features. Not all MS Slider layouts and no overlays are supported by the
+lite version.
 
 MS Sliders are based on so-called *templates*. A template defines the HTML
 portion, the base HTML structure of a MS Slider in a webpage. The J1 module
@@ -86,7 +84,9 @@ performance of the JS code. Expect for slower browsers and platforms, like
 mobiles or tablets, initializing an MS Slider will take a while to be
 finished.
 
-
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="mt-5"]
 == Placements of Sliders
 
 To use (already configured) MS Sliders in your content sources, a

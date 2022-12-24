@@ -367,7 +367,7 @@
     # --------------------------------------------------------------------------
     # Previewers
     #
-    - title:                            Previewers
+    - title:                            Previewer
       icon:                             eye
       dropdown:
 
@@ -580,16 +580,16 @@
 #
 - item:                                 Themes
   theme_select:
+    - preview:                          enabled
+      title:                            Preview
+      href:                             /pages/public/previewer/current_theme/
+      icon:                             eye
     - local_themes:                     enabled
       title:                            Jekyll One
       icon:                             alpha-j-box
     - bootswatch_themes:                enabled
       title:                            Bootswatch
       icon:                             bootstrap
-    - preview:                          enabled
-      title:                            Preview
-      href:                             /pages/public/previewer/current_theme/
-      icon:                             theme-light-dark
 
 
 # ------------------------------------------------------------------------------

@@ -1,13 +1,12 @@
 ---
 title:                                  Colors
 tagline:                                MD Color Palette
-date:                                   2021-01-08 00:00:00
+date:                                   2022-12-08 00:00:00
 description: >
-                                        The color palette used by J1 Theme is based on
-                                        the definitions of Google's Material Design (MD).
-                                        The color scheme comprises primary and accent colors
-                                        that can be used for illustration or to develop individual
-                                        brand colors of a website, designed to work harmoniously
+                                        The color palette used by J1 Theme is based on the definitions
+                                        of Google's Material Design. The color scheme comprises primary
+                                        and accent colors that can be used for illustration or to develop
+                                        individual brand colors of a website, designed to work harmoniously
                                         with each other.
 
 categories:                             [ Previewer ]
@@ -57,11 +56,7 @@ resource_options:
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-// Include sub-documents (if any)
-// -----------------------------------------------------------------------------
-== J1 Color Palette
-
+[role="dropcap"]
 The color palette used by J1 Theme is based on the definitions of Google's
 *Material Design* (MD). The color scheme comprises primary and accent colors
 that can be used for illustration or to develop individual brand colors of a
@@ -73,7 +68,10 @@ Android or iOS. Google suggests using the 500 colors as the primary colors for
 your web and the other colors as accents colors to support the content for
 better reading or orientation.
 
-=== Red and Pink
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="mt-4"]
+== Red and Pink
 ++++
 <div class="row col-list">
   <div class="color-palette col-lg-12">
@@ -119,7 +117,7 @@ better reading or orientation.
 </div>
 ++++
 
-=== Purple and Deep Purple
+== Purple and Deep Purple
 ++++
 <div class="row col-list">
   <div class="color-palette col-lg-12">
@@ -165,7 +163,7 @@ better reading or orientation.
 </div>
 ++++
 
-=== Indigo and Blue
+== Indigo and Blue
 ++++
 <div class="row col-list">
   <div class="color-palette col-lg-12">
@@ -211,7 +209,7 @@ better reading or orientation.
 </div>
 ++++
 
-=== Light Blue and Cyan
+== Light Blue and Cyan
 ++++
 <div class="row col-list">
   <div class="color-palette col-lg-12">
@@ -257,7 +255,7 @@ better reading or orientation.
 </div>
 ++++
 
-=== Teal and Green
+== Teal and Green
 ++++
 <div class="row col-list">
   <div class="color-palette col-lg-12">
@@ -303,7 +301,7 @@ better reading or orientation.
 </div>
 ++++
 
-=== Light Green and Lime
+== Light Green and Lime
 ++++
 <div class="row col-list">
   <div class="color-palette col-lg-12">
@@ -349,7 +347,7 @@ better reading or orientation.
 </div>
 ++++
 
-=== Yellow and Amber
+== Yellow and Amber
 ++++
 <div class="row col-list">
   <div class="color-palette col-lg-12">
@@ -395,7 +393,7 @@ better reading or orientation.
 </div>
 ++++
 
-=== Orange and Deep Orange
+== Orange and Deep Orange
 ++++
 <div class="row col-list">
   <div class="color-palette col-lg-12">
@@ -441,7 +439,7 @@ better reading or orientation.
 </div>
 ++++
 
-=== Brown and Gray
+== Brown and Gray
 ++++
 <div class="row col-list">
   <div class="color-palette col-lg-12">
@@ -479,7 +477,7 @@ better reading or orientation.
 </div>
 ++++
 
-=== Blue Gray and BW
+== Blue Gray and BW
 ++++
 <div class="row col-list">
   <div class="color-palette col-lg-12">

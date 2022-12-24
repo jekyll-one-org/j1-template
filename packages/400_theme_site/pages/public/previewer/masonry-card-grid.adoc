@@ -1,11 +1,11 @@
 ---
 title:                                  Masonry Grid
 tagline:                                Bootstrap Cards and Masonry
-date:                                   2020-11-03 00:00:00
+date:                                   2022-12-03 00:00:00
 description: >
-                                        Masonry is a JavaScript grid layout library. It works by placing elements in
-                                        optimal position based on available vertical space, sort of like a mason
-                                        fitting stones in a wall. You’ve probably seen it in use all over the Internet.
+                                        J1 Theme supports Masonry, a JavaScript grid layout library.
+                                        Masonry places elements in an optimal position based on available
+                                        vertical space, like mason fitting stones in a wall.
 
 categories:                             [ Testpages ]
 tags:                                   [ Example ]
@@ -51,14 +51,13 @@ resource_options:
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+[role="dropcap"]
 Masonry is a JavaScript grid layout library. It works by placing elements in
 an optimal position based on available vertical space, sort of like a mason
 fitting stones in a wall. You’ve probably seen it in use all over the Internet.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-
 // See: https://getbootstrap.com/docs/5.0/examples/masonry/
 // See: https://masonry.desandro.com/
 // See: https://tympanus.net/Development/GridLoadingEffects/index.html
@@ -84,7 +83,7 @@ $(document).ready(function() {
 });
 ----
 
-
+[role="mt-4"]
 == 3-Column Grid
 
 lorem:sentences[5]
