@@ -69,14 +69,17 @@ settings:
         # ICON settings
         #
         icons:
+          github:
+            enabled:                    true
+            href:                       "https://github.com/jekyll-one/j1-template-starter"
           facebook:
-            enabled:                    false
+            enabled:                    true
             href:                       "#void"
           twitter:
             enabled:                    false
             href:                       "#void"
 
-        # --------------------------------------------------------------------------
+        # ----------------------------------------------------------------------
         # LEGAL settings
         #
         legals:

@@ -28,9 +28,20 @@
 <!-- [INFO   ] [social_media_icons.proc            ] [ place icons configured ] -->
 <ul class="social-icons">
 {% for icon in icons %}
-  {% assign key             = icon[0] %}
-  {% assign value           = icon[1] %}
-    {% if key == 'facebook' and value.enabled  %}<li><a id="footerFacebookButton" href="{{value.href}}" data-original-title="Facebook" class="rounded-circle social_facebook"></a></li>{% endif %}
-    {% if key == 'twitter'  and value.enabled  %}<li><a id="footerTwitterButton" href="{{value.href}}" data-original-title="Twitter" class="rounded-circle social_twitter"></a></li>{% endif %}
+  {% assign key   = icon[0] %}
+  {% assign value = icon[1] %}
+
+    {% if key == 'amazon'       and value.enabled  %}<li><a id="footerAmazonButton" href="{{value.href}}" data-original-title="Amazon" class="rounded-circle social_amazon"target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+    {% if key == 'behance'      and value.enabled  %}<li><a id="footerBehanceButton" href="{{value.href}}" data-original-title="Behance" class="rounded-circle social_behance"target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+    {% if key == 'blogger'      and value.enabled  %}<li><a id="footerBloggerButton" href="{{value.href}}" data-original-title="Blogger" class="rounded-circle social_blogger"target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+    {% if key == 'dribbble'     and value.enabled  %}<li><a id="footerDribbbleButton" href="{{value.href}}" data-original-title="Dribbble" class="rounded-circle social_dribbble"target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+    {% if key == 'dropbox'      and value.enabled  %}<li><a id="footerDropboxButton" href="{{value.href}}" data-original-title="Dropbox" class="rounded-circle social_dropbox"target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+    {% if key == 'evernote'     and value.enabled  %}<li><a id="footerEvernoteButton" href="{{value.href}}" data-original-title="Evernote" class="rounded-circle social_evernote"target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+    {% if key == 'facebook'     and value.enabled  %}<li><a id="footerFacebookButton" href="{{value.href}}" data-original-title="Facebook" class="rounded-circle social_facebook"target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+    {% if key == 'forrst'       and value.enabled  %}<li><a id="footerForrstButton" href="{{value.href}}" data-original-title="Forrst" class="rounded-circle social_forrst"target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+    {% if key == 'github'       and value.enabled  %}<li><a id="footerGithubButton" href="{{value.href}}" data-original-title="Github" class="rounded-circle social_github"target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+    {% comment %} More Icons ... {% endcomment %}
+    {% if key == 'twitter'      and value.enabled  %}<li><a id="footerTwitterButton" href="{{value.href}}" data-original-title="Twitter" class="rounded-circle social_twitter"target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+    {% comment %} More Icons ... {% endcomment %}
 {% endfor %}
 </ul>
