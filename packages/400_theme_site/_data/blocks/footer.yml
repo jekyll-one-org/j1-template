@@ -166,8 +166,7 @@ settings:
                                         Source and the modules packed as well.
                                         <br><br>
                                         <b>No pain for private or professional purposes.</b>
-
-            justify:                    true
+            justify:                    false
 
           # --------------------------------------------------------------------
           # NEWS box
