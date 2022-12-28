@@ -1,0 +1,20 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/theme_uno/bootstrap/utilities/_text.scss
+ # Provides additional text styles
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2022 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+// Added missing 'text-justify' class for Bootstrap 5
+//
+.text-justify {
+  text-align: justify;
+}

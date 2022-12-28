@@ -153,8 +153,7 @@ defaults:
                                         Source and the modules packed as well.
                                         <br><br>
                                         <b>No pain for private or professional use.</b>
-
-        justify:                        true
+        justify:                        false
 
       # ------------------------------------------------------------------------
       # NEWS box

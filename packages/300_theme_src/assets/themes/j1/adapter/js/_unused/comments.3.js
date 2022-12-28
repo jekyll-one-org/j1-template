@@ -173,7 +173,7 @@ var logText;
       var commentOptions = $.extend({}, commentDefaults, commentSettings, frontmatterOptions);
 
       // check comment options from frontmatter
-      if (commentOptions.enabled) {
+      if (j1.stringToBoolean(commentOptions.comments)) {
       {% if site_id %}
 
       _this = j1.adapter.comments;
@@ -363,8 +363,6 @@ var logText;
         }
       }, 25);
     {% endif %}
-
-
     }, // END init
 
     // -------------------------------------------------------------------------

@@ -1,17 +1,15 @@
 ---
 title:                                  Theme Preview
-tagline:                                Explore current styles
+tagline:                                Explore Current Styles
 date:                                   2022-12-01 00:00:00
 description: >
-                                        JekyllOne, a theme for multifunctional Bootstrap-based and
-                                        responsive websites, offers various unique functionalities
-                                        compared to other Jekyll themes and templates. Styles for
-                                        Bootstrap are used to customize the appearance of a website
-                                        based on the basic rules and definitions of Bootstrap's
-                                        CSS styles.
+                                        JekyllOne is a theme for multifunctional Bootstrap-based and responsive
+                                        websites, and offers various unique functionalities compared to other themes
+                                        and templates for Jekyll. Themes for Bootstrap are used to customize the appearance
+                                        of a website based on the basic rules and definitions of Bootstrap's CSS styles.
 
 categories:                             [ Previewer ]
-tags:                                   [ Bootstrap, Styles ]
+tags:                                   [ Bootstrap, CSS, Theme ]
 
 image:
   path:                                 /assets/images/pages/roundtrip/themes-1920x1280-bw.jpg
@@ -113,9 +111,9 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
-JekyllOne, is a theme for multifunctional Bootstrap-based and responsive
-websites, offers various unique functionalities compared to other Jekyll
-themes and templates. Styles for Bootstrap are used to customize the appearance
+JekyllOne is a theme for multifunctional Bootstrap-based and responsive
+websites, and offers various unique functionalities compared to other themes
+and templates for Jekyll. Themes for Bootstrap are used to customize the appearance
 of a website based on the basic rules and definitions of Bootstrap's CSS styles.
 
 // Include sub-documents (if any)
@@ -125,7 +123,7 @@ of a website based on the basic rules and definitions of Bootstrap's CSS styles.
   <div id="theme" class="document-title row g-0 mt-4 mb-3"></div>
 ++++
 
-Styles for Bootstrap are used to customize the appearance of a website based
+Bootstrap themes are used to customize the appearance of a website based
 on the basic rules and definitions of Bootstrap's (CSS) styles. The use or
 change of a theme does not alter the functionality of the underlying Bootstrap
 framework but modifies, for example, the color scheme, fonts, or font sizes.
