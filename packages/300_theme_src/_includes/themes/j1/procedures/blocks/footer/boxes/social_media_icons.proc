@@ -6,7 +6,7 @@
  # Product/Info:
  # http://jekyll.one
  #
- # Copyright (C) 2022 Juergen Adams
+ # Copyright (C) 2023 Juergen Adams
  #
  # J1 Theme is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -28,20 +28,32 @@
 <!-- [INFO   ] [social_media_icons.proc            ] [ place icons configured ] -->
 <ul class="social-icons">
 {% for icon in icons %}
+
   {% assign key   = icon[0] %}
   {% assign value = icon[1] %}
 
-    {% if key == 'amazon'       and value.enabled  %}<li><a id="footerAmazonButton" href="{{value.href}}" data-original-title="Amazon" class="rounded-circle social_amazon"target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
-    {% if key == 'behance'      and value.enabled  %}<li><a id="footerBehanceButton" href="{{value.href}}" data-original-title="Behance" class="rounded-circle social_behance"target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
-    {% if key == 'blogger'      and value.enabled  %}<li><a id="footerBloggerButton" href="{{value.href}}" data-original-title="Blogger" class="rounded-circle social_blogger"target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
-    {% if key == 'dribbble'     and value.enabled  %}<li><a id="footerDribbbleButton" href="{{value.href}}" data-original-title="Dribbble" class="rounded-circle social_dribbble"target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
-    {% if key == 'dropbox'      and value.enabled  %}<li><a id="footerDropboxButton" href="{{value.href}}" data-original-title="Dropbox" class="rounded-circle social_dropbox"target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
-    {% if key == 'evernote'     and value.enabled  %}<li><a id="footerEvernoteButton" href="{{value.href}}" data-original-title="Evernote" class="rounded-circle social_evernote"target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
-    {% if key == 'facebook'     and value.enabled  %}<li><a id="footerFacebookButton" href="{{value.href}}" data-original-title="Facebook" class="rounded-circle social_facebook"target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
-    {% if key == 'forrst'       and value.enabled  %}<li><a id="footerForrstButton" href="{{value.href}}" data-original-title="Forrst" class="rounded-circle social_forrst"target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
-    {% if key == 'github'       and value.enabled  %}<li><a id="footerGithubButton" href="{{value.href}}" data-original-title="Github" class="rounded-circle social_github"target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
-    {% comment %} More Icons ... {% endcomment %}
-    {% if key == 'twitter'      and value.enabled  %}<li><a id="footerTwitterButton" href="{{value.href}}" data-original-title="Twitter" class="rounded-circle social_twitter"target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
-    {% comment %} More Icons ... {% endcomment %}
+  {% if key == 'amazon'       and value.enabled  %}<li><a id="footerAmazonButton"       href="{{value.href}}" data-original-title="Amazon"      class="rounded-circle social_amazon     "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+  {% if key == 'behance'      and value.enabled  %}<li><a id="footerBehanceButton"      href="{{value.href}}" data-original-title="Behance"     class="rounded-circle social_behance    "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+  {% if key == 'blogger'      and value.enabled  %}<li><a id="footerBloggerButton"      href="{{value.href}}" data-original-title="Blogger"     class="rounded-circle social_blogger    "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+  {% if key == 'dribbble'     and value.enabled  %}<li><a id="footerDribbbleButton"     href="{{value.href}}" data-original-title="Dribbble"    class="rounded-circle social_dribbble   "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+  {% if key == 'dropbox'      and value.enabled  %}<li><a id="footerDropboxButton"      href="{{value.href}}" data-original-title="Dropbox"     class="rounded-circle social_dropbox    "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+  {% if key == 'evernote'     and value.enabled  %}<li><a id="footerEvernoteButton"     href="{{value.href}}" data-original-title="Evernote"    class="rounded-circle social_evernote   "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+  {% if key == 'facebook'     and value.enabled  %}<li><a id="footerFacebookButton"     href="{{value.href}}" data-original-title="Facebook"    class="rounded-circle social_facebook   "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+  {% if key == 'forrst'       and value.enabled  %}<li><a id="footerForrstButton"       href="{{value.href}}" data-original-title="Forrst"      class="rounded-circle social_forrst     "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+  {% if key == 'github'       and value.enabled  %}<li><a id="footerGithubButton"       href="{{value.href}}" data-original-title="Github"      class="rounded-circle social_github     "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+  {% if key == 'googleplus'   and value.enabled  %}<li><a id="footerGooglePlusButton"   href="{{value.href}}" data-original-title="GooglePlus"  class="rounded-circle social_github     "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+  {% if key == 'instagram'    and value.enabled  %}<li><a id="footerTnstagramButton"    href="{{value.href}}" data-original-title="Instagram"   class="rounded-circle social_instagram  "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+  {% if key == 'linkedin'     and value.enabled  %}<li><a id="footerLinkedinButton"     href="{{value.href}}" data-original-title="linkedin"    class="rounded-circle social_linkedin   "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+  {% if key == 'pintrest'     and value.enabled  %}<li><a id="footerPintrestButton"     href="{{value.href}}" data-original-title="Pintrest"    class="rounded-circle social_pintrest   "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+  {% if key == 'rss'          and value.enabled  %}<li><a id="footerRssButton"          href="{{value.href}}" data-original-title="RSS"         class="rounded-circle social_rss        "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+  {% if key == 'skype'        and value.enabled  %}<li><a id="footerSkypeButton"        href="{{value.href}}" data-original-title="Skype"       class="rounded-circle social_skype      "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+  {% if key == 'spotify'      and value.enabled  %}<li><a id="footerSpotifyButton"      href="{{value.href}}" data-original-title="Spotify"     class="rounded-circle social_spotify    "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+  {% if key == 'twitter'      and value.enabled  %}<li><a id="footerTwitterButton"      href="{{value.href}}" data-original-title="Twitter"     class="rounded-circle social_twitter    "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+  {% if key == 'vimeo'        and value.enabled  %}<li><a id="footerVimeoButton"        href="{{value.href}}" data-original-title="Vimeo"       class="rounded-circle social_vimeo      "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+  {% if key == 'vk'           and value.enabled  %}<li><a id="footerVkButton"           href="{{value.href}}" data-original-title="VK"          class="rounded-circle social_vk         "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+  {% if key == 'xing'         and value.enabled  %}<li><a id="footerXingButton"         href="{{value.href}}" data-original-title="Xing"        class="rounded-circle social_xing       "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+  {% if key == 'yahoo'        and value.enabled  %}<li><a id="footerYahooButton"        href="{{value.href}}" data-original-title="Yahoo"       class="rounded-circle social_yahoo      "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+  {% if key == 'youtube'      and value.enabled  %}<li><a id="footerYoutubeButton"      href="{{value.href}}" data-original-title="Youtube"     class="rounded-circle social_youtube    "target="_blank" rel="noopener noreferrer"></a></li>{% endif %}
+
 {% endfor %}
 </ul>
