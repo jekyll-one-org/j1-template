@@ -1,5 +1,5 @@
 [role="mt-4"]
-== The Styles Menu
+== The Themes Menu
 
 Styles adjust the website's appearance based on the core CSS rules and
 definitions of Bootstrap. Styles do not change the framework's functionality
@@ -14,8 +14,8 @@ We encourage you to spend some time first on learning CSS. To learn what is the
 link:{url-w3schools--css-tutorial}[design base, {browser-window--new}] of each
 and every website.
 
-.Styles menu
-lightbox::images--styles-menu[ 1280, {data-images--styles-menu} ]
+.Themes menu
+lightbox::images--themes-menu[ 1280, {data-images--themes-menu} ]
 
 Thanks to the people at link:{url-bootswatch--home}[Bootswatch, {browser-window--new}],
 a great set of already prepared Bootstrap stylesheets in various designs are

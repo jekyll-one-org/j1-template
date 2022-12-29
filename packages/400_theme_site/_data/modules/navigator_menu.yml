@@ -53,8 +53,8 @@
         - title:                        Responsive Tables
           href:                         /pages/public/learn/roundtrip/responsive_tables/
           icon:                         table
-        - title:                        Bootstrap Styles
-          href:                         /pages/public/learn/roundtrip/styles/
+        - title:                        Bootstrap Themes
+          href:                         /pages/public/learn/roundtrip/themes/
           icon:                         theme-light-dark
         - title:                        Lunr Search
           href:                         /pages/public/learn/roundtrip/quicksearch/

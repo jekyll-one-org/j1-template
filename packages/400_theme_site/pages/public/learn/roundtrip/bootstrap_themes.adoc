@@ -1,13 +1,13 @@
 ---
-title:                                  Bootstrap Styles
-tagline:                                J1 Styles Feature
+title:                                  Bootstrap Themes
+tagline:                                J1 Themes Feature
 date:                                   2020-11-10 00:00:00
 description: >
                                         JekyllOne, a Jekyll Theme for multifunctional Bootstrap-based and responsive
                                         websites, offers various unique functionalities compared to other Jekyll
-                                        themes and templates. Bootstrap styles for the J1 Theme are based on the
+                                        themes and templates. Bootstrap Themes for the J1 Theme are based on the
                                         free and open-source CSS front-end framework Bootstrap of version V5.
-                                        The Bootstrap styles feature for J1 Theme enables the presentation of
+                                        The Bootstrap themes for J1 Theme enables the presentation of
                                         different versions (skins) of the same site using already prepared
                                         Bootstrap CSS templates.
 keywords: >
@@ -22,7 +22,7 @@ image:
   height:                               1280
   alt:                                  Photo by Clem Onojeghuo on Unsplash
 
-permalink:                              /pages/public/learn/roundtrip/styles/
+permalink:                              /pages/public/learn/roundtrip/themes/
 regenerate:                             true
 
 resources:                              [ animate, rouge, clipboard, lightbox ]
@@ -59,12 +59,10 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
-JekyllOne, a Jekyll Theme for multifunctional Bootstrap-based and responsive
-websites, offers various unique functionalities compared to other Jekyll
-themes and templates. Bootstrap styles for the J1 Theme are based on the
-free and open-source CSS front-end framework of version V5. The Bootstrap
-styles feature for J1 Theme enables the presentation of different versions
-of the same site using already prepared Bootstrap CSS templates.
+Bootstrap Themes for the J1 Theme are based on the free and open-source
+CSS front-end framework of version V5. The Bootstrap themes feature enables
+the presentation of different versions of the same site using already prepared
+Bootstrap CSS templates.
 
 link:{url-bs--home}[Bootstrap, {browser-window--new}] is an HTML, CSS and
 Javascripts Library that focuses on simplifying the development of modern web
@@ -72,7 +70,7 @@ pages. The primary purpose of applying the framework to J1 is to provide a
 general standard for colors, sizes, fonts, and the overall layout of a
 J1-based site.
 
-Using Bootstrap styles results in a uniform appearance for the content in
+Using Bootstrap Themes results in a uniform appearance for the content in
 terms of the overall layout, text, tables, and form elements across all
 modern web browsers available on the market. In addition, developers can take
 advantage of CSS classes defined in Bootstrap to customize content
