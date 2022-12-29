@@ -78,7 +78,7 @@ individually.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-include::{documentdir}/styles_bootstrap.asciidoc[]
+include::{documentdir}/themes_bootstrap.asciidoc[]
 
 == What next
 
