@@ -1,7 +1,7 @@
 /*! jg-video - v1 - 2020-04-10
 * based on lg-video - v1.2.2 - 2018-05-01
 * http://sachinchoolur.github.io/lightGallery
-* Copyright (C) 2022 Juergen Adams
+* Copyright (C) 2023 Juergen Adams
 * Copyright (C) 2018 Sachin N; Licensed GPLv3
 */
 

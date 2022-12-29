@@ -7,7 +7,7 @@
  # https://jekyll.one
  # https://github.com/fgnass/spin.js
  #
- # Copyright (C) 2022 Juergen Adams
+ # Copyright (C) 2023 Juergen Adams
  # Copyright (c) 2011-2018 Felix Gnass
  #
  # J1 Theme is licensed under the MIT License.

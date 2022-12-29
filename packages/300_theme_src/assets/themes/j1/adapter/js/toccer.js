@@ -13,7 +13,7 @@ regenerate:                             true
  # https://jekyll.one
  # https://tscanlin.github.io/tocbot
  #
- # Copyright (C) 2022 Juergen Adams
+ # Copyright (C) 2023 Juergen Adams
  #
  # J1 Theme is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -75,7 +75,7 @@ regenerate:                             true
  # https://jekyll.one
  # https://tscanlin.github.io/tocbot
  #
- # Copyright (C) 2022 Juergen Adams
+ # Copyright (C) 2023 Juergen Adams
  #
  # J1 Theme is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md

@@ -7,7 +7,7 @@
  # https://jekyll.one
  # http://lokeshdhakar.com/projects/lightbox2/
  #
- # Copyright (C) 2022 Juergen Adams
+ # Copyright (C) 2023 Juergen Adams
  # Copyright (C) 2015-2019 Lokesh Dhakar
  #
  # J1 Theme is licensed under the MIT License.

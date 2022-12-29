@@ -12,7 +12,7 @@ regenerate:                             true
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2022 Juergen Adams
+ # Copyright (C) 2023 Juergen Adams
  #
  # J1 Theme is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
@@ -126,7 +126,7 @@ ToDo: Remove configuration from j1_navigator.yml
  # Product/Info:
  # {{site.data.template_settings.theme_author_url}}
  #
- # Copyright (C) 2022 Juergen Adams
+ # Copyright (C) 2023 Juergen Adams
  #
  # J1 Theme is licensed under the MIT License.
  # For details, see {{site.data.template_settings.theme_author_url}}
