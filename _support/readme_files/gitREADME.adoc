@@ -160,7 +160,7 @@ git clean -dfx
 
 Use the “git tag” command with the “-d” option
 
-== From local
+=== From local
 
   git tag -d v2023.0.0
 

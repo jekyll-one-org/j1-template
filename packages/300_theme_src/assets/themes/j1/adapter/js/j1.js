@@ -1278,7 +1278,7 @@ var j1 = (function (options) {
 
       // skip invalid anchors|selectors
       //
-      if (typeof anchor === 'undefined' || anchor.includes('googtrans') || !$(selector).length) {
+      if (typeof anchor === 'undefined' || anchor.includes('slide') || anchor.includes('googtrans') || !$(selector).length) {
         return false;
       }
 
