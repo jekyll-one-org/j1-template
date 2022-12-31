@@ -131,7 +131,7 @@
 //              video = '<iframe loading="lazy" class="lg-video-object lg-youtube lg-tiktok' + addClass + '" width="340" height="700"  src="https://www.tiktok.com/embed/' + isVideo.tiktok[2] + a + '" frameborder="0" scrolling=no allow="fullscreen"></iframe>';
 //              video = '<iframe class="lg-video-object lg-youtube ' + addClass + '" width="560" height="315"  src="https://www.tiktok.com/embed/' + isVideo.tiktok[2] + a + '" frameborder="0" scrolling=no allowfullscreen name="yp_embed_video" frameborder="0"></iframe>';
 //              video = '<iframe loading="lazy" class="lg-video-object lg-tiktok ' + addClass + '" width="340" height="700"  src="https://www.tiktok.com/embed/' + isVideo.tiktok[2] + '" frameborder="0" scrolling=no allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="allowfullscreen" name="yp_embed_video" frameborder="0"></iframe>';
-                video = '<iframe class="lg-video-object lg-tiktok ' + addClass + '" height="700" width="340" src="https://www.tiktok.com/embed/' + isVideo.tiktok[2] + '" frameborder="0" scrolling="no" allow="allowfullscreen"></iframe>';
+                video = '<iframe class="lg-video-object lg-tiktok ' + addClass + '" height="700" width="340" src="//www.tiktok.com/embed/' + isVideo.tiktok[2] + '" frameborder="0" scrolling="no" allow="allowfullscreen"></iframe>';
 
               } else if (isVideo.youporn) {
 
@@ -140,7 +140,7 @@
                     a = a + '&' + $.param(this.core.s.youtubePlayerParams);
                 }
 
-                video = '<iframe class="lg-video-object lg-youtube ' + addClass + '" width="560" height="315"  src="https://www.youporn.com/embed/' + isVideo.youporn[1] + a + '" frameborder="0" scrolling=no allowfullscreen name="yp_embed_video" frameborder="0"></iframe>';
+                video = '<iframe class="lg-video-object lg-youtube ' + addClass + '" width="560" height="315"  src="//www.youporn.com/embed/' + isVideo.youporn[1] + a + '" frameborder="0" scrolling=no allowfullscreen name="yp_embed_video" frameborder="0"></iframe>';
 
               } else if (isVideo.vimeo) {
 
@@ -175,7 +175,7 @@
                     a = a + '&' + $.param(this.core.s.vkPlayerParams);
                 }
 
-                video = '<iframe class="lg-video-object lg-vk ' + addClass + '" width="560" height="315" src="http://vk.com/video_ext.php?' + isVideo.vk[1] + a + '" frameborder="0" allowfullscreen></iframe>';
+                video = '<iframe class="lg-video-object lg-vk ' + addClass + '" width="560" height="315" src="//vk.com/video_ext.php?' + isVideo.vk[1] + a + '" frameborder="0" allowfullscreen></iframe>';
 
             }
 
