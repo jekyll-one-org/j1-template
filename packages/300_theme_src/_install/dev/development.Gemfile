@@ -68,10 +68,6 @@ install_if -> { RUBY_VERSION =~ /3/ } do
 end
 
 # ------------------------------------------------------------------------------
-# PRODUCTION: Gem needed for the Jekyll and J1 prod environment
-#
-
-# ------------------------------------------------------------------------------
 # Code Highlighter Rouge
 #
 gem 'rouge', '~> 4.0'
