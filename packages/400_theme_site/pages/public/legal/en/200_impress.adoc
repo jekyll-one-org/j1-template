@@ -65,8 +65,7 @@ WARNING: This document *does not* constitute any *legal advice*. It is
 highly recommended to verify legal aspects and implications.
 endif::[]
 
-
-// Page content
+// NOTE
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Ist ein Impressum gesetzlich vorgeschrieben?
 // Ein Impressum ist auf allen kommerziellen Websites, die im
@@ -76,6 +75,15 @@ endif::[]
 //
 // Wenn Sie lediglich einen persönlichen Blog ohne Werbung haben und kein
 // Geld damit verdienen, ist das Impressum nicht erforderlich.
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+The content and works published on this website are governed by the copyright
+laws of Germany. Any duplication, processing, distribution, or any form of
+utilization beyond the scope of copyright law shall require the prior written
+consent of the author or authors in question.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
