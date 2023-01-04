@@ -19,7 +19,7 @@
 
   Install J1 from remote
 
-	gem install j1-template --version 2023.0.0 --no-document --user-install
+	gem install j1-template --version 2023.0.1 --no-document --user-install
 
 
 3. Create a J1 Project folder
@@ -29,12 +29,12 @@
 
 4. Generate a J1 Project
 
-	cd c:\j1-projects && j1 generate starter-2023.0.0
+	cd c:\j1-projects && j1 generate starter-2023.0.1
 
 
 5. Setup and Run a J1 Project
 
-	cd c:\j1-projects\starter-2023.0.0 && j1 setup && j1 site
+	cd c:\j1-projects\starter-2023.0.1 && j1 setup && j1 site
 
 
 
