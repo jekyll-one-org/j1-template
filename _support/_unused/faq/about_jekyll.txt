@@ -1,0 +1,234 @@
+== Quora
+
+
+=== What are the best Jekyll themes?
+// https://www.quora.com/What-are-the-best-Jekyll-themes
+
+Check the JekyllOne (J1) theme at https://jekyll.one/. J1 Theme uses Jekyll
+and the framework Bootstrap. The theme is fully configurable and combines the
+best of free software for the web. JekyllOne is OpenSource and the modules
+included are free to use as well!
+
+
+=== Which is better to create a static site: HTML or Jekyll?
+// https://www.quora.com/Which-is-better-to-create-a-static-site-HTML-or-Jekyll
+
+As soon as more than a few pages are planned for the static site, I recommend
+using a static site generator (SSG) like Jekyll instead of writing HTML files
+manually. Jekyll supports a configurable layout system based on templates to
+generate HTML pages with the same look and feel.
+
+Multiple templates are
+available for Jekyll, and many are free to use (open source). For example,
+check the theme JekyllOne (J1) at https://jekyll.one/. The J1 Theme uses
+Jekyll and the framework Bootstrap to generate a well-known look and feel for
+the generated HTML output. The Theme is fully configurable and combines the
+best free software for the web. JekyllOne is OpenSource and the modules
+included are free to use as well!
+
+
+=== What is Jekyll? How does it relate to HTML and CSS?
+// https://www.quora.com/What-is-Jekyll-How-does-it-relate-to-HTML-and-CSS/
+
+Jekyll is a so-called static site generator (SSG). In other words: You can
+generate a static website, the HTML pages, with it. Jekyll supports a configurable
+layout system based on templates to generate HTML pages with the same look
+and feel based on CSS.
+
+For example,
+check the theme JekyllOne (J1) at https://jekyll.one/. The J1 Theme uses
+Jekyll and the framework Bootstrap to generate a well-known look and feel for
+the generated HTML output. The Theme is fully configurable and combines the
+best free software for the web. JekyllOne is OpenSource and the modules
+included are free to use as well!
+
+
+=== What are the advantages of using Jekyll to create static pages?
+// https://www.quora.com/What-are-the-advantages-of-using-Jekyll-to-create-static-pages
+
+Jekyll is a well-known static site generator (SSG), properly maintained over
+the years until now (latest version 4.3.1 of 2022). Using an SSG like Jekyll
+means using a simple command line on your local computer to generate a
+website's static files (HTML, CSS, etc.). Jekyll does not require any
+server-side software (as needed for WordPress) and strips everything down
+to the bare minimum, eliminating a lot of complexity.
+
+The advantages of using Jekyll could be summarized as follows:
+
+* simplicity: requires no server maintenance or any updates (like WordPress)
+* security: no extraneous libraries, no databases for hackers to attack
+* costs: free hosting on GitHub or Netlify
+
+Jekyll is a well-known software supported by an active community. A lot free
+addons (plugins) are available to extend Jekyll for additional features.
+To create an individual look and feel for the website generated, a huge
+number of free themes are available for Jekyll.
+
+
+=== Why should I use Jekyll?
+// https://www.quora.com/Why-should-I-use-Jekyll
+
+Jekyll is a well-known static site generator (SSG), properly maintained over
+the years until now (latest version 4.3.1 of 2022). Using an SSG like Jekyll
+means using a simple command line on your local computer to generate a
+website's static files (HTML, CSS, etc.). Jekyll does not require any
+server-side software (as needed for WordPress) and strips everything down
+to the bare minimum, eliminating a lot of complexity.
+
+The advantages of using Jekyll could be summarized as follows:
+
+* simplicity: requires no server maintenance or any updates (like WordPress)
+* security: no extraneous libraries, no databases for hackers to attack
+* costs: free hosting on GitHub or Netlify
+
+Jekyll is a well-known software supported by an active community. A lot free
+addons (plugins) are available to extend Jekyll for additional features.
+To create an individual look and feel for the website generated, a huge
+number of free themes are available for Jekyll.
+
+For example,
+check the theme JekyllOne (J1) at https://jekyll.one/. The J1 Theme uses
+Jekyll and the framework Bootstrap to generate a well-known look and feel for
+the generated HTML output. The Theme is fully configurable and combines the
+best free software for the web. JekyllOne is OpenSource and the modules
+included are free to use as well!
+
+
+=== What are the most famous static websites?
+// https://ourdarkanddeepweb.quora.com/What-are-the-most-famous-static-websites
+
+
+It is hard to answer what the most famous static websites are. But it is easy
+to point you to famous static websites. I know some sites that are using the
+SSG Jekyll to generate and publish their site based on static HTML pages:
+
+* Bitcoin, https://bitcoin.org/, Repo at Github:    https://github.com/bitcoin/bitcoin
+* Docker Docs, https://docs.docker.com/, Repo at Github:   https://github.com/docker/docs
+
+If you want a static website for your project, check the JekyllOne (J1)
+theme at https://jekyll.one/. The theme uses Jekyll and the framework
+Bootstrap to generate a well-known look and feel for the generated HTML
+output. The theme is fully configurable and combines the best free software
+for the web. JekyllOne is OpenSource and the modules included are free to
+use as well!
+
+
+=== What are some examples of static websites?
+// https://www.quora.com/What-are-some-examples-of-static-websites
+
+The questioon is quite open, but I can point you to some (live) websites
+on the Internet using static HTML pages:
+
+* My project JekyllOne at: https://jekyll.one/
+* Bitcoin at: https://bitcoin.org/
+* Docker Docs at: https://docs.docker.com/
+
+If you like, check Jekyll and the theme JekyllOne (J1) at https://jekyll.one/.
+Using the SSG Jekyll, you can generate a full featuted static website. Jekyll
+supports a configurable layout system based on templates to generate HTML
+pages with the same look and feel based on CSS.
+
+JekyllOne uses the well-known CSS framework Bootstrap. The theme is fully
+configurable and combines the best of free software for the web.
+JekyllOne is OpenSource and the modules included are free to use as well!
+
+
+=== What is an Static site generator?
+// https://www.quora.com/What-is-an-Static-site-generator
+
+Static website generators (SSGs) are programs that create HTML pages of a
+website from text-based template files or already prepared HTML sources.
+A SSG represent an alternative to a database-based system (CMS) such as
+WordPress. In content management systems, the content of a website is not
+managed in simple text files but stored in (relational) databases such as
+MySQL.
+A typical CMS-driven website works by building each and every page dynamically.
+That means fetching the content from a database to pass them over to a template
+system (engine) to load the page content, adding the required structure
+information (e.g., CSS styles) and Javascript components if needed. This means every page is assembled on demand.
+A Static Site Generator takes a different approach and generates all the pages
+of the website upfront. That does not necessarily mean that a static website
+is always built from scratch. Modern generators support a so-called incremental
+build, as does. When there are changes detected to the content, only selected
+pages will rebuild.
+
+In the case of blogs, documentation sites, or company websites, CMS and
+website builders are used for this, but static site generators have distinct
+advantages over a typically much more complex content management solution:
+
+* Speed:: Websites created with a static website generator are
+  characterized by excellent user speed. Files are processed when
+  the page is created and not when the user views the page.
+* Version Control:: Although the content of dynamic web projects
+  is stored separately from the code in databases, a static website
+  usually resides in simple text files that are fairly easy to maintain.
+  Structurally, the content elements do not differ from other parts
+  of the code base, so version management is set up without any problems.
+* Security:: The advantage of websites built with static website
+  builders is that they offer little potential for attack, unlike,
+  for example, content management systems like WordPress, which
+  are vulnerable to security vulnerabilities and need to be updated
+  regularly. The risk potential is limited to the one-off access
+  by the customer when accessing the site. Since this is usually
+  not about more than the delivery of structured HTML pages,
+  the probability of unwanted access is minimal.
+* Easy Maintenance:: The number of components required for SSGs is
+  comparatively small, but these are only relevant during development.
+  While other solutions for live operation require various modules,
+  databases, libraries, frameworks, and packages and have to be
+  updated regularly, static pages are only tied to a functioning
+  web server.
+
+For example, check Jekyll and the theme JekyllOne (J1) at Jekyll One
+(https://jekyll.one/). The J1 Theme uses Jekyll and the framework Bootstrap
+to generate a well-known look and feel for the generated HTML output. The
+Theme is fully configurable and combines the best free software for the web.
+JekyllOne is OpenSource and the modules included are free to use as well!
+
+
+=== What is a Jekyll site?
+// https://www.quora.com/What-is-a-Jekyll-site
+
+A Jekyll site is a static website generated by the site generator (SSG)
+Jekyll. (SSGs), static website generators are programs that create HTML
+pages of a website from text-based template files or already prepared HTML
+sources.
+
+For example, check Jekyll and the theme JekyllOne (J1) at Jekyll One
+(https://jekyll.one/). The J1 Theme uses Jekyll and the framework
+Bootstrap to generate a well-known look and feel for the generated HTML
+output. The Theme is fully configurable and combines the best free
+software for the web. JekyllOne is OpenSource and the modules included
+are free to use as well!
+
+
+=== How do I create a Jekyll site?
+
+The best answer on this very open question is: learn Jekyll and how to use it.
+Nearly an uncountable number of articles around the SSG (static website generator)
+Jekyll are available on the Internet.
+
+So what could be a starting point?
+
+My recommendations on this are start at the Makers of Jekyll and read
+
+* the Jekyll 101 at https://jekyllrb.com/docs/step-by-step/01-setup/
+
+Continue on my website to create a website in minutes and start learn how to
+use Jekyll at:
+
+* [JekyllOne](https://jekyll.one/)
+
+
+=== How does Jekyll work?
+// https://www.quora.com/Is-Jekyll-still-used
+
+
+=== How does Jekyll work?
+// https://www.quora.com/unanswered/How-does-Jekyll-work
+
+The latest version of Jekyll v4.3.1 is issued in October 2022 and version
+v4.4.0 is being prepared for 2023. The next version of Jeykyll V5 is under
+construction and a tentative roadmap is discussed at
+
+https://github.com/jekyll/jekyll/issues/9156
