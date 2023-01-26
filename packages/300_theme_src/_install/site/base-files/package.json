@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "j1",
-  "version": "2023.0.2",
+  "version": "2023.0.3",
   "description": "J1 Theme Starter Web",
   "homepage": "https://your.site",
   "author": {
@@ -138,6 +138,7 @@
     "nbi-export--all": "cross-var nbinteract -r $npm_package_nbi_opt_nbi_input_folder -o $npm_package_nbi_opt_nbi_output_folder -t $npm_package_nbi_opt_output_type -s $npm_package_nbi_opt_credentials"
   },
   "dependencies": {
+    "bootstrap": "^5.2",
     "cross-env": "^7.0.3",
     "cross-var": "^1.1.0",
     "getos": "^3.2.1",

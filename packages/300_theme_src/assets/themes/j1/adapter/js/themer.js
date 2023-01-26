@@ -235,7 +235,7 @@ j1.adapter.themer = (function (j1, window) {
            if (themerOptions.enabled) {
            // enable BS ThemeSwitcher
            logger.info('\n' + 'themes detected as: enabled');
-           logger.info('\n' + 'theme is being initialized: ' + user_state.theme_name);
+           logger.info('\n' + 'remote themes are being initialized: ' + user_state.theme_name);
 
            /* eslint-disable */
            // load list of remote themes
@@ -259,6 +259,10 @@ j1.adapter.themer = (function (j1, window) {
              skipIncludeBootswatch:    themerOptions.skipIncludeBootswatch
            };
            /* eslint-enable */
+         } else {
+           logger.warn('\n' + 'themes detected as: disabled');
+           logger.warn('\n' + 'no remote themes are available');
+         }
 
            // continue processing if page is ready
            var dependencies_met_theme_applied = setInterval (function () {
@@ -282,11 +286,11 @@ j1.adapter.themer = (function (j1, window) {
              }
            }, 25); // END dependencies_met_theme_applied
 
-         } else {
-           _this.setState('finished');
-           logger.debug('\n' + 'state: ' + _this.getState());
-           logger.info('\n' + 'themes detected as: disabled');
-         }
+         // } else {
+         //   _this.setState('finished');
+         //   logger.debug('\n' + 'state: ' + _this.getState());
+         //   logger.info('\n' + 'themes detected as: disabled');
+         // }
           clearInterval(dependencies_met_user_state_available);
         }
 

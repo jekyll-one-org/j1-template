@@ -406,34 +406,52 @@ j1.adapter.navigator = (function (j1, window) {
             // event handler|css styles
             // -----------------------------------------------------------------
             var dependencies_met_initialized = setInterval(function() {
-              // initialize if page and themer ready
-              if (j1.getState() === 'finished' && j1.adapter.themer.getState() === 'finished') {
+              if (themerEnabled) {
+                // for themes, initialize if themer is finished
+                if (j1.adapter.themer.getState() === 'finished') {
+                  _this.setState('processing');
+
+                  // apply module configuration settings
+                  _this.applyNavigatorSettings (
+                    navDefaults, navBarOptions, navMenuOptions,
+                    navQuicklinksOptions
+                  );
+
+                  // (static) delay applying styles until added CSS data
+                  // of the theme is processed by the browser
+                  setTimeout (function() {
+                    // set general|global theme colors
+                    logger.info('\n' + 'initializing dynamic CSS styles');
+                    _this.applyThemeSettings (
+                      navDefaults, navBarOptions, navMenuOptions,
+                      navQuicklinksOptions
+                    );
+                  }, 500);
+
+                  logger.info('\n' + 'init auth client');
+                  _this.initAuthClient(_this.navAuthManagerConfig);
+
+                  _this.setState('finished');
+                  logger.debug('\n' + 'state: ' + _this.getState());
+                  logger.info('\n' + 'module initialized successfully');
+                  logger.debug('\n' + 'met dependencies for: j1');
+                  clearInterval(dependencies_met_initialized);
+                }
+              } else {
+                // no themes used
                 _this.setState('processing');
 
-                // apply module configuration settings
-                _this.applyNavigatorSettings (
+                // set general|global theme colors
+                logger.info('\n' + 'apply dynamic CSS styles');
+                _this.applyThemeSettings (
                   navDefaults, navBarOptions, navMenuOptions,
                   navQuicklinksOptions
                 );
 
-                // (static) delay applying styles until added CSS data
-                // of the theme is processed by the browser
-                setTimeout (function() {
-                  // set general|global theme colors
-                  logger.info('\n' + 'initializing dynamic CSS styles');
-                  _this.applyThemeSettings (
-                    navDefaults, navBarOptions, navMenuOptions,
-                    navQuicklinksOptions
-                  );
-                }, 500);
-
                 logger.info('\n' + 'init auth client');
                 _this.initAuthClient(_this.navAuthManagerConfig);
-
                 _this.setState('finished');
                 logger.debug('\n' + 'state: ' + _this.getState());
-                logger.info('\n' + 'module initialized successfully');
-                logger.debug('\n' + 'met dependencies for: j1');
                 clearInterval(dependencies_met_initialized);
               }
             }, 25); // END 'dependencies_met_initialized'
@@ -622,54 +640,11 @@ j1.adapter.navigator = (function (j1, window) {
     // Apply CSS styles from current theme
     // -------------------------------------------------------------------------
     applyThemeSettings: function (navDefaults, navBarOptions, navMenuOptions, navQuicklinksOptions) {
-
       var logger              = log4javascript.getLogger('j1.adapter.navigator.applyThemeSettings');
       var gridBreakpoint_lg   = '992px';
       var gridBreakpoint_md   = '768px';
       var gridBreakpoint_sm   = '576px';
-
-      var navbar_scrolled_color;
-      var navbar_scrolled_style;
-      var bg_scrolled;
-      var bg_collapsed;
-      var style;
-
-      // Set dymanic styles
-      // -----------------------------------------------------------------------
-
-      // read current background colors
-      var bg_primary    = $('#bg-primary').css('background-color');
-      var bg_table      = $('body').css('background-color');
-
-      // set navbar background colors
-      bg_scrolled   = bg_primary;
-      bg_collapsed  = bg_primary;
-
-      // navBar styles
-      // -----------------------------------------------------------------------
-
       var navPrimaryColor     = navDefaults.nav_primary_color;
-
-      if (navBarOptions.background_color_scrolled == 'default' ) {
-        navbar_scrolled_color = bg_primary;
-      } else {
-//      navbar_scrolled_color = '#212529';
-        navbar_scrolled_color = navBarOptions.background_color_scrolled;
-      }
-
-
-      navbar_scrolled_style  = '<style id="navbar_scrolled_color">';
-      navbar_scrolled_style += '  .navbar-scrolled {';
-      navbar_scrolled_style += '    background-color: ' + navbar_scrolled_color + ' !important;';
-      navbar_scrolled_style += '  }';
-      navbar_scrolled_style += '</style>';
-
-      $('head').append(navbar_scrolled_style);
-
-      // set current body background color for all tables
-      // -----------------------------------------------------------------------
-      $('table').css('background', bg_table);
-
 
       logger.info('\n' + 'set dynamic styles for the theme loaded');
 
@@ -697,6 +672,281 @@ j1.adapter.navigator = (function (j1, window) {
       navQuicklinksOptions.icon_color                 = navQuicklinksOptions.icon_color;
       navQuicklinksOptions.icon_color_hover           = navQuicklinksOptions.icon_color_hover;
       navQuicklinksOptions.background_color           = navQuicklinksOptions.background_color;
+
+      // Set dymanic styles
+      // -----------------------------------------------------------------------
+      var style;
+
+      var navbar_scrolled_style;
+//    var navbar_scrolled_color = '#212529';
+      var navbar_scrolled_color = navBarOptions.background_color_scrolled;
+
+      navbar_scrolled_style  = '<style id="navbar_scrolled_color">';
+      navbar_scrolled_style += '  .navbar-scrolled {';
+      navbar_scrolled_style += '    background-color: ' + navbar_scrolled_color + ' !important;';
+      navbar_scrolled_style += '  }';
+      navbar_scrolled_style += '</style>';
+
+      $('head').append(navbar_scrolled_style);
+
+      // read current background colors
+      var bg_primary    = $('#bg-primary').css('background-color');
+      var bg_table      = $('body').css('background-color');
+
+      // set navbar background colors
+//    var bg_scrolled   = bg_primary;
+      var bg_scrolled   = navbar_scrolled_color;
+      var bg_collapsed  = bg_primary;
+
+      // navBar styles
+      // -----------------------------------------------------------------------
+
+      // set current body background color for all tables
+      $('table').css('background', bg_table);
+
+// //    $('head').append('<style>.mdi-bg-primary {color: ' +bg_scrolled+ ';}</style>');
+//       style  = '<style>';
+//       style += '  .mdi-bg-primary {';
+//       style += '    color: ' + bg_scrolled;
+//       style += '  }';
+//       style += '</style>';
+//       $('head').append(style);
+//
+//       // Size of brand image
+// //    $('head').append('<style>.navbar-brand > img { height: {{brand_image_height}}px !important; }</style>');
+//       style  = '<style>';
+//       style += '  .navbar-brand > img {';
+//       style += '     height: {{brand_image_height}}px !important;';
+//       style += '  }';
+//       style += '</style>';
+//       $('head').append(style);
+//
+//       // Navbar transparent-light (light)
+// //    $('head').append('<style>@media (min-width: ' +gridBreakpoint_lg+ ') { nav.navbar.navigator.navbar-transparent.light { background-color: ' +navBarOptions.background_color_full+ ' !important; border-bottom: solid 0px !important; } }</style>');
+//       style  = '<style>';
+//       style += '  @media screen and (min-width: ' + gridBreakpoint_lg + ') {';
+//       style += '    nav.navbar.navigator.navbar-transparent.light {';
+//       style += '      background-color: ' + navBarOptions.background_color_full + ' !important;';
+//       style += '      border-bottom: solid 0px !important;';
+//       style += '    }';
+//       style += '  }';
+//       style += '</style>';
+//       $('head').append(style);
+//
+// //    $('head').append('<style>@media (min-width: ' +gridBreakpoint_lg+ ') { nav.navbar.navigator.navbar-scrolled.light { background-color: ' +bg_scrolled+ ' !important; } }</style>');
+//       // style  = '<style>';
+//       // style += '  @media screen and (min-width: ' + gridBreakpoint_lg + ') {';
+//       // style += '    nav.navbar.navigator.navbar-scrolled.light {';
+//       // style += '      background-color: ' + bg_scrolled + ' !important;';
+//       // style += '    }';
+//       // style += '  }';
+//       // style += '</style>';
+//       // $('head').append(style);
+//
+// //    $('head').append('<style id="dynNav">@media (max-width: ' +gridBreakpoint_md+ ') { nav.navbar.navigator.navbar-transparent.light { background-color: ' +navBarOptions.background_color_full+ ' !important; border-bottom: solid 0px !important; } }</style>');
+//       style  = '<style id="dynNav">';
+//       style += '  @media screen and (max-width: ' + gridBreakpoint_md + ') {';
+//       style += '    nav.navbar.navigator.navbar-transparent.light {';
+//       style += '      background-color: ' + navBarOptions.background_color_full + ' !important;';
+//       style += '      border-bottom: solid 0px !important;';
+//       style += '    }';
+//       style += '  }';
+//       style += '</style>';
+//       $('head').append(style);
+//
+// //    $('head').append('<style id="dynNav">@media (max-width: ' +gridBreakpoint_md+ ') { nav.navbar.navigator.navbar-scrolled.light { background-color: ' +bg_scrolled+ ' !important; } }</style>');
+//       // style  = '<style id="dynNav">';
+//       // style += '  @media screen and (max-width: ' + gridBreakpoint_md + ') {';
+//       // style += '    nav.navbar.navigator.navbar-scrolled.light {';
+//       // style += '      background-color: ' + bg_scrolled + ' !important;';
+//       // style += '    }';
+//       // style += '  }';
+//       // style += '</style>';
+//       // $('head').append(style);
+//
+// //    $('head').append('<style id="dynNav">@media (min-width: ' +gridBreakpoint_md+ ') { nav.navbar.navigator.navbar-transparent.light { background-color: ' +navBarOptions.background_color_full+ ' !important; border-bottom: solid 0px !important; } }</style>');
+//       style  = '<style id="dynNav">';
+//       style += '  @media screen and (min-width: ' + gridBreakpoint_md + ') {';
+//       style += '    nav.navbar.navigator.navbar-transparent.light {';
+//       style += '      background-color: ' + navBarOptions.background_color_full + ' !important;';
+//       style += '      border-bottom: solid 0px !important;';
+//       style += '    }';
+//       style += '  }';
+//       style += '</style>';
+//       $('head').append(style);
+//
+// //   $('head').append('<style id="dynNav">@media (min-width: ' +gridBreakpoint_md+ ') { nav.navbar.navigator.navbar-scrolled.light { background-color: ' +bg_scrolled+ ' !important; } }</style>');
+//       // style  = '<style id="dynNav">';
+//       // style += '  @media screen and (min-width: ' + gridBreakpoint_md + ') {';
+//       // style += '    nav.navbar.navigator.navbar-scrolled.light {';
+//       // style += '      background-color: ' + bg_scrolled + ' !important;';
+//       // style += '    }';
+//       // style += '  }';
+//       // style += '</style>';
+//       // $('head').append(style);
+//
+// //    $('head').append('<style id="dynNav">@media (max-width: ' +gridBreakpoint_sm+ ') { nav.navbar.navigator.navbar-transparent.light { background-color: ' +navBarOptions.background_color_full+ ' !important; border-bottom: solid 0px !important; } }</style>');
+//       style  = '<style id="dynNav">';
+//       style += '  @media screen and (max-width: ' + gridBreakpoint_sm + ') {';
+//       style += '    nav.navbar.navigator.navbar-transparent.light {';
+//       style += '      background-color: ' + navBarOptions.background_color_full + ' !important;';
+//       style += '      border-bottom: solid 0px !important;';
+//       style += '    }';
+//       style += '  }';
+//       style += '</style>';
+//       $('head').append(style);
+//
+// //    $('head').append('<style id="dynNav">@media (max-width: ' +gridBreakpoint_sm+ ') { nav.navbar.navigator.navbar-scrolled.light { background-color: ' +bg_scrolled+ ' !important; } }</style>');
+//       // style  = '<style id="dynNav">';
+//       // style += '  @media screen and (max-width: ' + gridBreakpoint_sm + ') {';
+//       // style += '    nav.navbar.navigator.navbar-scrolled.light {';
+//       // style += '      background-color: ' + bg_scrolled + ' !important;';
+//       // style += '    }';
+//       // style += '  }';
+//       // style += '</style>';
+//       // $('head').append(style);
+//
+//
+//       // navQuicklinks styles
+//       // -----------------------------------------------------------------------
+// //    $('head').append('<style>.quicklink-nav> ul > li > a { color: ' +navQuicklinksOptions.icon_color+ ' !important; }</style>');
+//       style  = '<style>';
+//       style += '  .quicklink-nav> ul > li > a {';
+//       style += '    color: ' + navQuicklinksOptions.icon_color + ' !important;';
+//       style += '  }';
+//       style += '</style>';
+//       $('head').append(style);
+//
+// //    $('head').append('<style>.quicklink-nav> ul > li > a:hover { color: ' +navQuicklinksOptions.icon_color_hover+ ' !important; }</style>');
+//       style  = '<style>';
+//       style += '  .quicklink-nav> ul > li > a:hover {';
+//       style += '    color: ' + navQuicklinksOptions.icon_color_hover + ' !important;';
+//       style += '  }';
+//       style += '</style>';
+//       $('head').append(style);
+//
+//
+//       // navMenu styles
+//       // -----------------------------------------------------------------------
+//
+// //    $('head').append('<style>.dropdown-menu > .active > a { background-color: transparent !important; }</style>');
+//       // Remove background for anchor
+//       style  = '<style>';
+//       style += '  .dropdown-menu > .active > a {';
+//       style += '    background-color: transparent !important;';
+//       style += '  }';
+//       style += '</style>';
+//       $('head').append(style);
+//
+// //    $('head').append('<style>@media (min-width: ' +gridBreakpoint_lg+ ') { nav.navbar.navigator .dropdown-item:focus, nav.navbar.navigator .dropdown-item:hover, nav.navbar.navigator .nav-sub-item:focus, nav.navbar.navigator .nav-sub-item:hover { background: ' +navMenuOptions.dropdown_background_color_hover+ ' !important; }}</style>');
+//       // hover menu-item|menu-sub-item
+//       style  = '<style>';
+//       style += '  @media screen and (min-width: ' + gridBreakpoint_lg + ') {';
+//       style += '    nav.navbar.navigator .dropdown-item:focus,';
+//       style += '    nav.navbar.navigator .dropdown-item:hover,';
+//       style += '    nav.navbar.navigator .nav-sub-item:focus,';
+//       style += '    nav.navbar.navigator .nav-sub-item:hover {';
+//       style += '       background: ' + navMenuOptions.dropdown_background_color_hover + ' !important;';
+//       style += '    }';
+//       style += '  }';
+//       style += '</style>';
+//       $('head').append(style);
+//
+// //    $('head').append('<style>@media (min-width: ' +gridBreakpoint_lg+ ') { nav.navbar.navigator ul.nav.navbar-right .dropdown-menu .dropdown-menu { left: -' +navMenuOptions.dropdown_item_min_width+ 'rem !important; } }</style>');
+//       // Limit 1st dropdown item width
+//       style  = '<style>';
+//       style += '  @media screen and (min-width: ' + gridBreakpoint_lg + ') {';
+//       style += '    nav.navbar.navigator ul.nav.navbar-right .dropdown-menu .dropdown-menu  {';
+//       style += '       left: -' + navMenuOptions.dropdown_item_min_width + 'rem !important;';
+//       style += '    }';
+//       style += '  }';
+//       style += '</style>';
+//       $('head').append(style);
+//
+// //    $('head').append('<style>@media (min-width: ' +gridBreakpoint_lg+ ') { nav.navbar.navigator li.dropdown ul.dropdown-menu ul.dropdown-menu  { top: -' +navMenuOptions.dropdown_border_top+ 'px !important; max-height: ' +navMenuOptions.dropdown_menu_max_height+ 'em; } }</style>');
+//       // Limit last (2nd) dropdown in height
+//       style  = '<style>';
+//       style += '  @media screen and (min-width: ' + gridBreakpoint_lg + ') {';
+//       style += '    nav.navbar.navigator li.dropdown ul.dropdown-menu ul.dropdown-menu  {';
+//       style += '       top: -' + navMenuOptions.dropdown_border_top + 'px !important;';
+//       style += '       max-height: ' + navMenuOptions.dropdown_menu_max_height + 'em;';
+//       style += '    }';
+//       style += '  }';
+//       style += '</style>';
+//
+//       //  Set dropdown item colors
+// //    $('head').append('<style>@media (min-width: ' +gridBreakpoint_lg+ ') { nav.navbar.navigator ul.nav > li > a { color: ' +navMenuOptions.menu_item_color+ ' !important; } }</style>');
+//       style  = '<style>';
+//       style += '  @media screen and (min-width: ' + gridBreakpoint_lg + ') {';
+//       style += '    nav.navbar.navigator ul.nav > li > a  {';
+//       style += '       color: ' + navMenuOptions.menu_item_color + ' !important;';
+//       style += '    }';
+//       style += '  }';
+//       style += '</style>';
+//
+// //    $('head').append('<style>@media (min-width: ' +gridBreakpoint_lg+ ') { nav.navbar.navigator ul.nav > li > a:hover { color: ' +navMenuOptions.menu_item_color_hover+ ' !important; } }</style>');
+//       style  = '<style>';
+//       style += '  @media screen and (min-width: ' + gridBreakpoint_lg + ') {';
+//       style += '    nav.navbar.navigator ul.nav > li > a:hover {';
+//       style += '       color: ' + navMenuOptions.menu_item_color_hover + ' !important;';
+//       style += '    }';
+//       style += '  }';
+//       style += '</style>';
+//
+// //    $('head').append('<style>@media (min-width: ' + gridBreakpoint_lg + ') { nav.navbar.navigator li.dropdown ul.dropdown-menu { animation-duration: ' +navMenuOptions.dropdown_animate_duration+ 's !important; color: #616161 !important; min-width: ' +navMenuOptions.dropdown_item_min_width+ 'rem !important; border-top: solid ' +navMenuOptions.dropdown_border_top+ 'px !important; border-radius: ' +navMenuOptions.dropdown_border_radius+ 'px !important; left: 0; } }</style>');
+//       // Dropdown menu styles
+//       style  = '<style>';
+//       style += '  @media screen and (min-width: ' + gridBreakpoint_lg + ') {';
+//       style += '    nav.navbar.navigator li.dropdown ul.dropdown-menu {';
+//       style += '       animation-duration: ' + navMenuOptions.dropdown_animate_duration + 's !important;';
+//       style += '       color: #616161 !important;';
+//       style += '       min-width: ' + navMenuOptions.dropdown_item_min_width + 'rem !important;';
+//       style += '       border-top: solid ' + navMenuOptions.dropdown_border_top + 'px !important;';
+//       style += '       border-radius: ' + navMenuOptions.dropdown_border_radius + 'px !important;';
+//       style += '       left: 0;';
+//       style += '    }';
+//       style += '  }';
+//       style += '</style>';
+//       $('head').append(style);
+//
+//
+//       {% if dropdown_style == 'raised' %}
+// //    $('head').append('<style>@media (min-width: ' +gridBreakpoint_lg+ ') { nav.navbar.navigator li.dropdown ul.dropdown-menu { box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2) !important; } }</style>');
+//       style  = '<style>';
+//       style += '  @media screen and (min-width: ' + gridBreakpoint_lg + ') {';
+//       style += '    nav.navbar.navigator li.dropdown ul.dropdown-menu {';
+//       style += '       box-shadow: 0 16px 38px -12px rgba(0, 0, 0, 0.56), 0 4px 25px 0px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2) !important;';
+//       style += '    }';
+//       style += '  }';
+//       style += '</style>';
+//       $('head').append(style);
+//       {% endif %}
+//
+// //    $('head').append('<style>@media (min-width: ' +gridBreakpoint_lg+ ') { nav.navbar.navigator li.dropdown ul.dropdown-menu > li > a { color: ' +navMenuOptions.dropdown_item_color+ ' !important; font-size: ' +navMenuOptions.dropdown_font_size+ ' !important; font-weight: 400; } }</style>');
+//       // configure dropdown_font_size|color
+//       style  = '<style>';
+//       style += '  @media screen and (min-width: ' + gridBreakpoint_lg + ') {';
+//       style += '    nav.navbar.navigator li.dropdown ul.dropdown-menu > li > a {';
+//       style += '       color: ' + navMenuOptions.dropdown_item_color + ' !important;';
+//       style += '       font-size: ' + navMenuOptions.dropdown_font_size + ' !important;';
+//       style += '       font-weight: 400;';
+//       style += '    }';
+//       style += '  }';
+//       style += '</style>';
+//       $('head').append(style);
+//
+// //    $('head').append('<style>@media (min-width: ' +gridBreakpoint_lg+ ') { nav.navbar.navigator ul.dropdown-menu.megamenu-content .content ul.menu-col li a { color: ' +navMenuOptions.dropdown_item_color+ ' !important; font-size: ' +navMenuOptions.megamenu_font_size+ ' !important; font-weight: 400; } }</style>');
+//       style  = '<style>';
+//       style += '  @media screen and (min-width: ' + gridBreakpoint_lg + ') {';
+//       style += '    nav.navbar.navigator ul.dropdown-menu.megamenu-content .content ul.menu-col li a {';
+//       style += '       color: ' + navMenuOptions.dropdown_item_color + ' !important;';
+//       style += '       font-size: ' + navMenuOptions.megamenu_font_size + ' !important;';
+//       style += '       font-weight: 400;';
+//       style += '    }';
+//       style += '  }';
+//       style += '</style>';
+//       $('head').append(style);
+
 
       // Timeline styles
       // -----------------------------------------------------------------------
@@ -717,6 +967,7 @@ j1.adapter.navigator = (function (j1, window) {
 
       // Heading styles
       // -----------------------------------------------------------------------
+//    $('head').append('<style>.heading:after {background: ' +bg_scrolled+ ' !important;}</style>');
       style  = '<style>';
       style += '  .heading:after {';
       style += '    background: ' + bg_scrolled + ' !important;';
@@ -726,6 +977,7 @@ j1.adapter.navigator = (function (j1, window) {
 
       // Tag Cloud styles
       // -----------------------------------------------------------------------
+//    $('head').append('<style>.tag-cloud ul li a {background-color: ' +bg_scrolled+ ' !important;}</style>');
       style  = '<style>';
       style += '  .tag-cloud ul li a {';
       style += '    background: ' + bg_scrolled + ' !important;';
@@ -735,6 +987,7 @@ j1.adapter.navigator = (function (j1, window) {
 
       // Toccer styles
       // -----------------------------------------------------------------------
+//    $('head').append('<style>.is-active-link::before {background-color: ' +bg_scrolled+ ' !important;}</style>');
       style  = '<style>';
       style += '  .is-active-link::before {';
       style += '    background-color: ' + bg_scrolled + ' !important;';
@@ -744,6 +997,7 @@ j1.adapter.navigator = (function (j1, window) {
 
       // BS extended Modal styles
       // -----------------------------------------------------------------------
+//    $('head').append('<style>.modal-dialog.modal-notify.modal-primary .modal-header {background-color: ' +bg_scrolled+ ';}</style>');
       style  = '<style>';
       style += '  .modal-dialog.modal-notify.modal-primary .modal-header {';
       style += '    background-color: ' + bg_scrolled + ' !important;';
@@ -753,6 +1007,7 @@ j1.adapter.navigator = (function (j1, window) {
 
       // BS nav|pills styles
       // -----------------------------------------------------------------------
+//    $('head').append('<style>.nav-pills .nav-link.active, .nav-pills .show > .nav-link {background-color: ' +bg_scrolled+ ' !important;}</style>');
       style  = '<style>';
       style += '  .nav-pills .nav-link.active, .nav-pills .show > .nav-link  {';
       style += '    background-color: ' + bg_scrolled + ' !important;';
@@ -763,31 +1018,16 @@ j1.adapter.navigator = (function (j1, window) {
       return true;
     }, // END applyThemeSettings
 
-
     // -------------------------------------------------------------------------
     // applyNavigatorSettings
     // Apply settings from configuration
     // -------------------------------------------------------------------------
     applyNavigatorSettings: function (navDefaults, navBarOptions, navMenuOptions, navQuicklinksOptions) {
-
       var logger              = log4javascript.getLogger('j1.adapter.navigator.applyThemeSettings');
       var gridBreakpoint_lg   = '992px';
       var gridBreakpoint_md   = '768px';
       var gridBreakpoint_sm   = '576px';
-
       var navPrimaryColor     = navDefaults.nav_primary_color;
-      var navbar_scrolled_style;
-      var navbar_scrolled_color = '#212529';
-
-      navbar_scrolled_style  = '<style id="navbar_scrolled_color">';
-      navbar_scrolled_style += '  .navbar-scrolled {';
-      navbar_scrolled_style += '    background-color: ' + navbar_scrolled_color + ' !important;';
-      navbar_scrolled_style += '  }';
-      navbar_scrolled_style += '</style>';
-
-      $('head').append(navbar_scrolled_style);
-
-
 
       logger.info('\n' + 'set dynamic styles for the theme loaded');
 
@@ -824,9 +1064,11 @@ j1.adapter.navigator = (function (j1, window) {
       var bg_primary    = $('#bg-primary').css('background-color');
       var bg_table      = $('body').css('background-color');
 
+      var navbar_scrolled_color = navBarOptions.background_color_scrolled;
 
       // set navbar background colors
-      var bg_scrolled   = bg_primary;
+//    var bg_scrolled   = bg_primary;
+      var bg_scrolled   = navbar_scrolled_color;
       var bg_collapsed  = bg_primary;
 
       // navBar styles

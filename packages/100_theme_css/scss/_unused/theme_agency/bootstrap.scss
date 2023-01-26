@@ -1,0 +1,53 @@
+/*
+  # ----------------------------------------------------------------------------
+  #  # ~/scss/theme_agency/bootstrap.scss
+  # Theme AGENCY - Definitions AND partial index file|s
+  #
+  # Product/Info:
+  # https:#jekyll.one
+  # https://github.com/StartBootstrap/startbootstrap-agency
+  #
+  # Copyright (C) 2023 Juergen Adams
+  # Copyright (C) 2022 StartBootstrap
+  #
+  # J1 Theme is licensed under the MIT License.
+  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+  # Theme Agency is licensed under the MIT License.
+  # See: https://github.com/StartBootstrap/startbootstrap-agency/blob/master/LICENSE
+  # ----------------------------------------------------------------------------
+  # NOTE:
+  # jadams, 2023-01-18: disabled (comment) all partials NOT needed for
+  #         the use with J1 Template
+  #
+  # ----------------------------------------------------------------------------
+*/
+
+//
+// Agency Bootstrap CSS
+//
+
+// Import variables
+// -----------------------------------------------------------------------------
+@import "./variables.scss";
+
+// Import Bootstrap
+// -----------------------------------------------------------------------------
+@import "~bootstrap/scss/bootstrap.scss";
+
+// Global CSS
+// -----------------------------------------------------------------------------
+@import "./global.scss";
+
+// Components
+// -----------------------------------------------------------------------------
+@import "./components/buttons.scss";
+@import "./components/navbar.scss";
+
+// Sections
+// -----------------------------------------------------------------------------
+@import "./sections/contact.scss";
+@import "./sections/footer.scss";
+@import "./sections/masthead.scss";
+@import "./sections/portfolio.scss";
+@import "./sections/team.scss";
+#@import "./sections/timeline.scss";

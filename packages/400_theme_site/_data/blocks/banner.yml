@@ -100,9 +100,10 @@ settings:
               enabled:                  true
               width:                    12
               type:                     text
+              position:                 left                                    # left | center
               title:                    Jekyll One Theme
-              translate_title:          notranslate                             # translate|notranslate
               tagline:                  <b>powerful modern static websites</b>
+              translate_description:    notranslate                             # translate|notranslate
               description_properties:   mt-3 mb-3
               description: >
                                         <p class="dropcap">

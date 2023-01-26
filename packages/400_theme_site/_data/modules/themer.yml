@@ -30,6 +30,5 @@ settings:
   debug:                                false
   saveToCookie:                         true
 
-
 # ------------------------------------------------------------------------------
 # END config

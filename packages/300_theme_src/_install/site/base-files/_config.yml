@@ -53,7 +53,7 @@ environment:                            development
 # ------------------------------------------------------------------------------
 # Sets the build version of J1 Theme Gem
 #
-version:                                2023.0.2
+version:                                2023.0.3
 
 # version
 # ------------------------------------------------------------------------------
@@ -412,7 +412,8 @@ strict_front_matter:                    false
 #
 sass:
   sass_dir:                             _sass/scss
-  style:                                expanded
+  style:                                expanded                                # possible values: nested expanded compact compressed
+
 
 # ------------------------------------------------------------------------------
 # WEBRICK Customizations
@@ -689,13 +690,13 @@ defaults:
         index:                          true
         follow:                         true
 
-      personalization:                  false
-      exclude_from_search:              false
-      series:                           false
-
       toc:                              true
       fab_menu_id:                      default
       scrollbar:                        false
+      personalization:                  false
+      exclude_from_search:              false
+      page_navigation:                  true
+      series:                           false
 
       resource_options:
         - toccer:
@@ -727,17 +728,16 @@ defaults:
         index:                          true
         follow:                         true
 
-      personalization:                  false
-      exclude_from_search:              false
-
       toc:                              true
       fab_menu_id:                      default
       scrollbar:                        false
+      personalization:                  false
+      exclude_from_search:              false
+      page_navigation:                  true
 
       resource_options:
         - toccer:
             collapseDepth:              3
-
 
 # ==============================================================================
 # 7. LAYOUT configuration

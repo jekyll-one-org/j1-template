@@ -78,7 +78,11 @@
 <div class="paginator">
   <ul class="pagination raised-z0">
 
-    {% comment %} Set PREVIOUS page
+    {% comment %} Set HOME page BUTTON (always)
+    ---------------------------------------------------------------------------- {% endcomment %}
+      <li class="page-item"><a class="page-link" href="/" title="Home">Home</a></li>
+
+    {% comment %} Set PREVIOUS page BUTTON
     ---------------------------------------------------------------------------- {% endcomment %}
     {% if page.previous %}
       <li class="page-item"><a class="page-link" href="{{page.previous.url | absolute_url}}" title="{{page.previous.title}}">{{pager_previous_button_text}}</a></li>
@@ -86,7 +90,7 @@
       <li class="page-item disabled"><a class="page-link">{{pager_first_button_text}}</a></li>
     {% endif %}
 
-    {% comment %} Set NEXT page
+    {% comment %} Set NEXT page BUTTON
     ---------------------------------------------------------------------------- {% endcomment %}
     {% if page.next %}
       <li class="page-item"><a class="page-link" href="{{page.next.url | absolute_url}}" title="{{page.next.title}}">{{pager_next_button_text}}</a></li>
@@ -94,7 +98,7 @@
       <li class="page-item disabled"><a class="page-link" href="#void">{{pager_last_button_text}}</a></li>
     {% endif %}
 
-    {% comment %} Set BACK page (PagerURL)
+    {% comment %} Set BACK page (PagerURL) BUTTON
     ---------------------------------------------------------------------------- {% endcomment %}
     <!-- [INFO   ] [procedures.global.pager.proc          ] [Manage the current pager settings for: {{builder_path}}] -->
     <script>

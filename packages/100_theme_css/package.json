@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "css",
-  "version": "2023.0.2",
+  "version": "2023.0.3",
   "description": "CSS bundle for J1 Theme",
   "main": "theme_uno.scss",
   "config": {
@@ -43,8 +43,8 @@
     "theme_css:theme_bootstrap": "node-sass --importer=node_modules/node-sass-tilde-importer theme-bootstrap.scss dist/themes/bootstrap/bootstrap.css 2>log/theme_bootstrap.log",
     "theme_css:theme_uno_light": "node-sass --importer=node_modules/node-sass-tilde-importer theme-uno.scss dist/themes/unolight/bootstrap.css 2>log/theme_uno_light.log",
     "theme_css:theme_uno_dark": "node-sass --importer=node_modules/node-sass-tilde-importer theme-uno-dark.scss dist/themes/unodark/bootstrap.css 2>log/theme_uno_dark.log",
-    "theme_css:theme_agency": "node-sass --importer=node_modules/node-sass-tilde-importer theme-agency.scss dist/themes/agency/bootstrap.css 2>log/theme_agency.log",
-    "theme_css:theme_vapor": "node-sass --importer=node_modules/node-sass-tilde-importer theme_vapor.scss dist/themes/theme_vapor/bootstrap.css 2>log/theme_vapor.log",
+    "_theme_css:theme_agency": "node-sass --importer=node_modules/node-sass-tilde-importer theme-agency.scss dist/themes/agency/bootstrap.css 2>log/theme_agency.log",
+    "_theme_css:theme_vapor": "node-sass --importer=node_modules/node-sass-tilde-importer theme_vapor.scss dist/themes/theme_vapor/bootstrap.css 2>log/theme_vapor.log",
 
     "theme_css:nbinteract-tutorial": "node-sass --importer=node_modules/node-sass-tilde-importer nbinteract-tutorial.scss dist/nbinteract-tutorial/styles.css 2>log/nbinteract-tutorial.log",
     "theme_css:icons_fontawesome": "node-sass --importer=node_modules/node-sass-tilde-importer icons-fontawesome.scss dist/icon-fonts/fontawesome.css 2>log/fontawesome.log",
@@ -57,8 +57,9 @@
     "uglify_css:theme_bootstrap": "postcss dist/themes/bootstrap/bootstrap.css -o dist/themes/bootstrap/bootstrap.min.css",
     "uglify_css:theme_uno_light": "postcss dist/themes/unolight/bootstrap.css -o dist/themes/unolight/bootstrap.min.css",
     "uglify_css:theme_uno_dark": "postcss dist/themes/unodark/bootstrap.css -o dist/themes/unodark/bootstrap.min.css",
-    "uglify_css:theme_agency": "postcss dist/themes/agency/bootstrap.css -o dist/themes/agency/bootstrap.min.css",
-    "uglify_css:theme_vapor": "postcss dist/themes/theme_vapor/bootstrap.css -o dist/themes/theme_vapor/bootstrap.min.css",
+    "_uglify_css:theme_agency": "postcss dist/themes/agency/bootstrap.css -o dist/themes/agency/bootstrap.min.css",
+    "_uglify_css:theme_vapor": "postcss dist/themes/theme_vapor/bootstrap.css -o dist/themes/theme_vapor/bootstrap.min.css",
+
     "uglify_css:nbinteract-tutorial": "postcss dist/nbinteract-tutorial/styles.css -o dist/nbinteract-tutorial/styles.min.css",
     "uglify_css:icons_fontawesome": "postcss dist/icon-fonts/fontawesome.css -o dist/icon-fonts/fontawesome.min.css",
     "uglify_css:icons_iconify": "postcss dist/icon-fonts/iconify.css -o dist/icon-fonts/iconify.min.css",
@@ -67,10 +68,10 @@
     "uglify_css:animate": "postcss dist/animate.css -o dist/animate.min.css",
     "uglify_css:vendor": "postcss dist/vendor.css -o dist/vendor.min.css",
 
-    "deploy": "run-p -s mkdir:* && run-p -s deploy:*",
-    "mkdir:css_core": "shx mkdir -p ../400_theme_site/assets/themes/j1/core/css",
-    "mkdir:css_agency": "shx mkdir -p ../400_theme_site/assets/themes/j1/core/css/themes/theme_agency",
-    "deploy:css_all": "shx cp -rf dist/* ../400_theme_site/assets/themes/j1/core/css"
+    "deploy": "run-p -s deploy:*",
+    "deploy:rm_css_core": "rm -rf ../300_theme_src/assets/themes/j1/core/css",
+    "deploy:cp_css_core": "shx mkdir -p ../300_theme_src/assets/themes/j1/core/css",
+    "deploy:css_all": "shx cp -rf dist/* ../300_theme_src/assets/themes/j1/core/css"
   },
   "dependencies": {
     "cssnano": "^5.0.10",

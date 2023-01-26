@@ -35,6 +35,10 @@ settings:
   nav_bar:
     enabled:                            true
     fixed:                              true
+#   background_color_collapsed:         "#212529"                               # Theme Agency
+#   background_color_scrolled:          "#212529"                               # Theme Agency
+    background_color_scrolled:          default                                 # default: theme|bg_primary
+    background_color_collapsed:         default                                 # default: theme|bg_primary
 
   # ----------------------------------------------------------------------------
   # NavMenu (Desktop)

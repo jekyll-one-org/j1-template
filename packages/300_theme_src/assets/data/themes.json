@@ -54,8 +54,7 @@ exclude_from_search:                    true
   [
     {"name": "UnoLight",    "css": "{{asset_path}}/core/css/themes/unolight/bootstrap.css"},
     {"name": "UnoDark",     "css": "{{asset_path}}/core/css/themes/unodark/bootstrap.css"},
-    {"name": "Bootstrap",   "css": "{{asset_path}}/core/css/themes/bootstrap/bootstrap.css"},
-    {"name": "Agency",      "css": "{{asset_path}}/core/css/themes/agency/bootstrap.css"}
+    {"name": "Bootstrap",   "css": "{{asset_path}}/core/css/themes/bootstrap/bootstrap.css"}
   ]
 }
 {% else %}
@@ -64,8 +63,7 @@ exclude_from_search:                    true
   [
     {"name": "UnoLight",    "css": "{{asset_path}}/core/css/themes/unolight/bootstrap.min.css"},
     {"name": "UnoDark",     "css": "{{asset_path}}/core/css/themes/unodark/bootstrap.min.css"},
-    {"name": "Bootstrap",   "css": "{{asset_path}}/core/css/themes/bootstrap/bootstrap.min.css"},
-    {"name": "Agency",      "css": "{{asset_path}}/core/css/themes/agency/bootstrap.min.css"}
+    {"name": "Bootstrap",   "css": "{{asset_path}}/core/css/themes/bootstrap/bootstrap.min.css"}
   ]
 }
 {% endif %}

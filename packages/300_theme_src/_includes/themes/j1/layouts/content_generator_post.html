@@ -79,8 +79,14 @@
   <!-- Blog post CONTENT -->
   <div class="row">
     <main id="main-content" class="r-text-{{rtext_size}} js-toc-content">
-      <!-- Include a pager at top position -->
-      {% include {{pager}} %}
+      {% if page.page_navigation %}
+        <!-- Include a PAGER (top position) -->
+        {% include {{pager}} %}
+      {% else %}
+        <!-- Skip to include a PAGER -->
+      {% endif %}
+
+      <!-- place blog post HEADLINE -->
       <div class="post-headline mt-4">
         {% if language == "en" %}
           <h1 class="notoc">{{ page.date | localize: "%Y %B, %e" }}</h1>

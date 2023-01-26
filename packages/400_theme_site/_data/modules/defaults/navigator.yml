@@ -90,8 +90,8 @@ defaults:
     bottom_line_height:                 1
     bottom_line_color:                  "#EEEEEE"                               # md-grey-200
     background_color_full:              rgba(0, 0, 0, 0.8)                      # darken-600
-    background_color_collapsed:         "#2196F3"                               # md-blue
-    background_color_scrolled:          "#2196F3"                               # md-blue
+#   background_color_collapsed:         "#2196F3"                               # # default: theme|bg_primary
+#   background_color_scrolled:          "#2196F3"                               # # default: theme|bg_primary
 
   # ----------------------------------------------------------------------------
   # NavMenu (Mobile)
