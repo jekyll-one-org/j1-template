@@ -2986,6 +2986,7 @@ endif::[]
   theme_slogans.UnoLight  = 'A touch of light';
   theme_slogans.UnoDark   = 'A night mode style';
   theme_slogans.Bootstrap = 'Bootstrap V5 default theme';
+  theme_slogans.Agency    = 'A popular Bootstrap V5 theme from StartBootstrap';
 
   theme_slogans.Cerulean  = 'A calm blue sky';
   theme_slogans.Cosmo     = 'An ode to Metro';

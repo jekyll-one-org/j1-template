@@ -51,13 +51,15 @@ $theme: "Agency" !default;
 // Components
 // -----------------------------------------------------------------------------
 @import "theme_agency/components/buttons.scss";
-@import "theme_agency/components/navbar.scss";
+// @import "theme_agency/components/navbar.scss";
 
-// Theme CSS sections
+
+// Sections
 // -----------------------------------------------------------------------------
-@import "theme_agency/sections/masthead.scss";
-@import "theme_agency/sections/portfolio.scss";
-@import "theme_agency/sections/timeline.scss";
-@import "theme_agency/sections/team.scss";
+@import "theme_agency/sections/agency_timeline.scss";
 @import "theme_agency/sections/contact.scss";
-@import "theme_agency/sections/footer.scss";
+// @import "theme_agency/sections/footer.scss";
+// @import "theme_agency/sections/masthead.scss";
+@import "theme_agency/sections/portfolio.scss";
+@import "theme_agency/sections/team.scss";
+// @import "theme_agency/sections/timeline.scss";
