@@ -1,7 +1,7 @@
 {% comment %}
  # -----------------------------------------------------------------------------
- #   ~/_includes/themes/j1/procedures/posts/create_ad_block.proc
- #  Liquid PROCEDURE to create a series header for post series
+ #   ~/_includes/themes/j1/procedures/posts/create_collection_article_preview.proc
+ #  Liquid PROCEDURE to create a series header for collection articles
  #
  #  http://jekyll.one
  #

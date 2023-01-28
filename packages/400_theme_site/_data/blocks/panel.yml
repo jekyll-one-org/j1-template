@@ -86,7 +86,7 @@ settings:
           bottom:
             enabled:                      true
             height:                       2
-            style:                        wave-1
+            style:                        wave-4
             color:                        "#c4c4c4"
             background_color:             "#f5f5f5"
             transform:                    flip-y flip-x

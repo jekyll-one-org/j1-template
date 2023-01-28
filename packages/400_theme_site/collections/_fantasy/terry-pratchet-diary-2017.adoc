@@ -1,0 +1,64 @@
+---
+layout:                                 collection
+title:                                  The Terry Pratchett Diary 2017
+tagline:                                Sir Terry Pratchett left us, far too early ...
+date:                                   2016-11-23 19:16:49
+description: >
+                                        Sir Terry Pratchett left us, far too early, in March 2015. To celebrate his
+                                        life and works, we've given over the 2017 Discworld Diary - which will be a
+                                        perennial diary - to remembrances and tributes from some of those who knew
+                                        and loved him and his extraordinary body of work.
+
+tags:                                   [ Fantasy, Thrillers, Adventure, Knight ]
+categories:                             [ Book, Fantasy ]
+
+book:
+  cover:                                https://d39ttiideeq0ys.cloudfront.net/assets/images/book/large/9781/4732/9781473208339.jpg
+  format:                               hardback
+  pages:                                128
+  publisher:                            Orion Publishing Co
+  author:                               Terry Pratchett
+  ISBN10:                               1473208335
+  ISBN13:                               9781473208339
+  rank:                                 4576
+toc:                                    false
+
+regenerate:                             false
+
+resources:                              []
+resource_options:                       []
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set page (local) attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+// Place an excerpt at the most top position
+// -----------------------------------------------------------------------------
+image:{{page.book.cover}}[width=200, role="mr-4 float-left"]
+Sir Terry Pratchett left us, far too early, in March 2015. To celebrate his
+life and works, we've given over the 2017 Discworld Diary - which will be a
+perennial diary - to remembrances and tributes from some of those who knew
+and loved him and his extraordinary body of work.
+
+Contributors include Neil Gaiman, A S Byatt, Terry Pratchett's literary agent
+Colin Smythe, co-author of the Long Earth books Stephen Baxter, famed
+bookseller Rog Peyton, and many more.
+
+With an introduction from his daughter Rhianna Pratchett and an afterword from
+longtime friend and colleague Rob Wilkins.
+
+[role="clearfix mb-3"]
+excerpt__end
+
+
+// Content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[[readmore]]
+With an introduction from his daughter Rhianna Pratchett and an afterword from
+longtime friend and colleague Rob Wilkins.

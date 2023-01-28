@@ -1,0 +1,61 @@
+---
+title:                                  Romance
+tagline:                                Romance Literature in the Book Shelf
+date:                                   2020-11-03 12:00:00
+description: >
+                                        Jekyll Collections
+
+tags:                                   [ Jekyll, Collection, Bookshelf ]
+categories:                             [ Preview ]
+
+fam:                                    true
+fam_menu_id:                            open_toc
+
+permalink:                              /pages/public/collections/bookshelf/romance/
+regenerate:                             true
+
+resources:                              []
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
+          alt:                          giammarco-boscaro-1920x1280
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set page (local) attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture create_collection_article_preview %}themes/{{site.template.name}}/procedures/collections/create_collection_article_preview.proc{% endcapture %}
+
+{% comment %} Debugging
+-------------------------------------------------------------------------------- {% endcomment %}
+{% comment %} site.biography:  {{ site.biography | debug }} {% endcomment %}
+
+
+// Content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[[navigator]]
+== Romance
+
+lorem:sentences[5]
+
+lorem:sentences[2]
+
+++++
+<div class="row mb-4">
+  <div class="col-md-12 col-xs-12">
+    {% include {{create_collection_article_preview}} collection=site.romance %}
+  </div>
+</div>
+++++

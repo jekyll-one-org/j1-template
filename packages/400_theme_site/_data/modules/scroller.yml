@@ -50,7 +50,7 @@ settings:
         scrollOffset:                   200
 
     # --------------------------------------------------------------------------
-    # News Panel
+    # News Panel (ScrollGroup)
     #
     - scroller:
         enabled:                        true
@@ -59,8 +59,8 @@ settings:
         container:                      home_news_panel-scroll-group
         pagePath:                       /assets/data/news_panel_posts/page
         elementScroll:                  true                                    # false = window, true = container
-        scrollOffset:                   100
-        lastPage:                       3
+        scrollOffset:                   200
+        lastPage:                       2                                       # 1 page "equals" 2 posts
         infoLastPage:                   true
 
         lastPageInfo_en: >
@@ -71,7 +71,7 @@ settings:
                                         <a href="/pages/public/blog/navigator/" class="link-no-decoration">Blog Navigator</a>
 
     # --------------------------------------------------------------------------
-    # Blog Navigator Preview
+    # Blog Navigator Preview (Timeline)
     #
     - scroller:
         enabled:                        true
@@ -81,7 +81,7 @@ settings:
         pagePath:                       /pages/public/blog/navigator/page
         elementScroll:                  true
         scrollOffset:                   200
-        lastPage:                       4
+        lastPage:                       4                                       # 1 page "equals" 2 posts
         infoLastPage:                   false
 
         lastPageInfo_en:                ""

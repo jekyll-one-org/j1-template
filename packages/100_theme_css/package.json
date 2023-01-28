@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "css",
-  "version": "2023.0.3",
+  "version": "2023.0.4",
   "description": "CSS bundle for J1 Theme",
   "main": "theme_uno.scss",
   "config": {

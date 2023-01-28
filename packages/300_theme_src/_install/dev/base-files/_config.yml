@@ -53,7 +53,7 @@ environment:                            development
 # ------------------------------------------------------------------------------
 # Sets the build version of J1 Theme Gem
 #
-version:                                2023.0.3
+version:                                2023.0.4
 
 # version
 # ------------------------------------------------------------------------------
@@ -486,12 +486,11 @@ kramdown:
 #
 plugins:
 # - algolia
-  - asciidoctor
 # - asciidoctor-pdf
-  - jekyll-asciidoc
 # - jekyll-gist
 # - jekyll-redirect-from
-# - jekyll-sass-converter
+  - asciidoctor
+  - jekyll-asciidoc
 
 # ------------------------------------------------------------------------------
 # ALGOLIA Search (Instantsearch)
@@ -593,17 +592,17 @@ excerpt_truncate_words:                 100
   #   permalink:                          /collections/:collection/:name/
   #
   # # ----------------------------------------------------------------------------
-  # # Book shelf
-  # #
-  # biography:
-  #   output:                             true
-  #   permalink:                          /collections/public/:collection/:name/
-  # fantasy:
-  #   output:                             true
-  #   permalink:                          /collections/public/:collection/:name/
-  # romance:
-  #   output:                             true
-  #   permalink:                          /collections/public/:collection/:name/
+  # Book shelf
+  #
+  biography:
+    output:                             true
+    permalink:                          /collections/public/:collection/:name/
+  fantasy:
+    output:                             true
+    permalink:                          /collections/public/:collection/:name/
+  romance:
+    output:                             true
+    permalink:                          /collections/public/:collection/:name/
 
 # ------------------------------------------------------------------------------
 # FRONTMATTER defaults
@@ -660,20 +659,6 @@ defaults:
         height:                         800
         alt:                            J1 Theme Home
 
-      robots:
-        index:                          true
-        follow:                         true
-
-      personalization:                  false
-      exclude_from_search:              false
-
-      youtube:                          true
-      vimeo:                            true
-
-      toc:                              true
-      fab_menu_id:                      page_ctrl
-      scrollbar:                        false
-
       icons:
         family:                         MDI
         color:                          md-blue
@@ -681,6 +666,19 @@ defaults:
 
       images:
         dir:                            /assets/images/pages
+
+      robots:
+        index:                          true
+        follow:                         true
+
+      toc:                              true
+      fab_menu_id:                      page_ctrl
+      scrollbar:                        false
+      personalization:                  false
+      exclude_from_search:              false
+
+      youtube:                          true
+      vimeo:                            true
 
       resource_options:
         - toccer:
@@ -717,11 +715,11 @@ defaults:
         follow:                         true
 
       toc:                              true
-      fab_menu_id:                      default
+      fab_menu_id:                      open_toc_reload
       scrollbar:                        false
+      page_navigation:                  true
       personalization:                  false
       exclude_from_search:              false
-      page_navigation:                  true
       series:                           false
 
       resource_options:
@@ -755,11 +753,11 @@ defaults:
         follow:                         true
 
       toc:                              true
-      fab_menu_id:                      default
+      fab_menu_id:                      open_toc_reload
       scrollbar:                        false
+      page_navigation:                  true
       personalization:                  false
       exclude_from_search:              false
-      page_navigation:                  true
 
       resource_options:
         - toccer:
