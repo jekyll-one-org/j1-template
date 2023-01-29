@@ -1,13 +1,13 @@
 ---
 layout:                                 page
+
 title:                                  What's up
 tagline:                                Jekyll Collections Overview
 date:                                   2020-11-03 12:00:00
 description: >
                                         Jekyll Collections Overview
-
-tags:                                   [ Jekyll, Collections ]
-categories:                             [ Info, Overview ]
+categories:                             [ Jekyll, Collection ]
+tags:                                   [ Info, Overview ]
 
 fam:                                    true
 fam_menu_id:                            open_toc

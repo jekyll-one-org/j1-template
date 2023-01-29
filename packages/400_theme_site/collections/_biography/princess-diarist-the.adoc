@@ -40,7 +40,8 @@ resource_options:                       []
 
 // Place an excerpt at the most top position
 // -----------------------------------------------------------------------------
-image:{{page.book.cover}}[width=200, role="mr-4 float-left"]
+// image:{{page.book.cover}}[width=200, role="mr-4 float-left"]
+
 The Princess Diarist is Carrie Fisher's intimate, hilarious and revealing
 recollection of what happened behind the scenes on one of the most famous
 film sets of all time, the first Star Wars movie.
@@ -51,23 +52,25 @@ had preserved-plaintive love poems, unbridled musings with youthful naivete,
 and a vulnerability that she barely
 recognized.
 
-[role="clearfix mb-3"]
-excerpt__end
-
-
-// Content
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-[[readmore]]
 Today, her fame as an author, actress, and pop-culture icon is indisputable,
 but in 1977, Carrie Fisher was just a (sort-of) regular teenager.
 
+excerpt__end
+
+// Content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="mt-5"]
+image:{{page.book.cover}}[width=350, role="mr-4 float-left"]
+
+[[readmore]]
 With these excerpts from her handwritten notebooks, The Princess Diarist is
 Fisher's intimate and revealing recollection of what happened on one of the
-most famous film sets of all time-and what developed behind the scenes. And
-today, as she reprises her most iconic role for the latest Star Wars trilogy,
-Fisher also ponders the joys and insanity of celebrity, and the absurdity of
-a life spawned by Hollywood royalty, only to be surpassed by her own outer-space
-royalty.
+most famous film sets of all time-and what developed behind the scenes.
+
+And today, as she reprises her most iconic role for the latest Star Wars
+trilogy, Fisher also ponders the joys and insanity of celebrity, and the
+absurdity of a life spawned by Hollywood royalty, only to be surpassed by
+her own outer-space royalty.
 
 Laugh-out-loud hilarious and endlessly quotable, The Princess Diarist brims
 with the candour and introspection of a diary while offering shrewd insight

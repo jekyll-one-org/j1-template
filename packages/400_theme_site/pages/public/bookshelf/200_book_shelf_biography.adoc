@@ -1,15 +1,14 @@
 ---
 title:                                  Biography
-tagline:                                Today's People in the Book Shelf
+tagline:                                Today's People
 date:                                   2020-11-03 12:00:00
 description: >
                                         Jekyll Collections
 
-tags:                                   [ Jekyll, Collection, Bookshelf ]
-categories:                             [ Preview ]
+categories:                             [ Jekyll, Collection ]
+tags:                                   [ Preview, Bookshelf ]
 
-fam:                                    true
-fam_menu_id:                            open_toc
+fab_menu_id:                            open_toc
 
 permalink:                              /pages/public/collections/bookshelf/biography/
 regenerate:                             true

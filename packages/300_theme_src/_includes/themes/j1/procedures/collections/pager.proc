@@ -1,0 +1,127 @@
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/_includes/themes/j1/procedures/collections/pager.proc
+ # HTML/Liquid procedure to create a pager for content of type "collection"
+ #
+ # Product/Info:
+ # http://jekyll.one
+ #
+ # Copyright (C) 2023 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # NOTE:
+ #    This pager reads the "page path" from cookie "cookieUserState". This
+ #    data is used to return from a previous (page builder) page.
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #    liquid_var:  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Process YML config data
+================================================================================ {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign template_config               = site.data.j1_config %}
+{% assign blocks                        = site.data.blocks %}
+{% assign modules                       = site.data.modules %}
+{% assign plugins                       = site.data.plugins %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign blog_navigator_defaults       = modules.defaults.blog_navigator.defaults %}
+{% assign blog_navigator_settings       = modules.blog_navigator.settings %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign blog_navigator_options        = blog_navigator_defaults | merge: blog_navigator_settings %}
+
+
+{% comment %} Language detection
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if {{site.language}} == "en" %}
+  {% assign language = "en" %}
+{% elsif  {{site.language}} == "de"%}
+  {% assign language = "de" %}
+{% else %}
+  {% assign language = "en" %}
+{% endif %}
+
+{% comment %} Set language specific button text
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if language == "en" %}
+  {% assign pager_previous_button_text  = blog_navigator_options.button_text.pager.previous.en %}
+  {% assign pager_next_button_text      = blog_navigator_options.button_text.pager.next.en %}
+  {% assign pager_back_button_text      = blog_navigator_options.button_text.pager.back.en %}
+  {% assign pager_first_button_text     = blog_navigator_options.button_text.pager.first.en %}
+  {% assign pager_last_button_text      = blog_navigator_options.button_text.pager.last.en %}
+{% endif %}
+
+{% if language == "de" %}
+  {% assign pager_previous_button_text  = blog_navigator_options.button_text.pager.previous.de %}
+  {% assign pager_next_button_text      = blog_navigator_options.button_text.pager.next.de %}
+  {% assign pager_back_button_text      = blog_navigator_options.button_text.pager.back.de %}
+  {% assign pager_first_button_text     = blog_navigator_options.button_text.pager.first.de %}
+  {% assign pager_last_button_text      = blog_navigator_options.button_text.pager.last.de %}
+{% endif %}
+
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+<!-- [INFO   ] [procedures.collections.pager.proc     ] [ manage the current pager settings ] -->
+<div class="paginator">
+  <ul class="pagination raised-z0">
+
+    {% comment %} Set HOME page BUTTON (always)
+    ---------------------------------------------------------------------------- {% endcomment %}
+      <li class="page-item"><a class="page-link" href="/" title="Home">Home</a></li>
+
+    {% comment %} Set PREVIOUS page BUTTON
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% if page.previous %}
+      <li class="page-item"><a class="page-link" href="{{page.previous.url | absolute_url}}" title="{{page.previous.title}}">{{pager_previous_button_text}}</a></li>
+    {% else %}
+      <li class="page-item disabled"><a class="page-link">{{pager_first_button_text}}</a></li>
+    {% endif %}
+
+    {% comment %} Set NEXT page BUTTON
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% if page.next %}
+      <li class="page-item"><a class="page-link" href="{{page.next.url | absolute_url}}" title="{{page.next.title}}">{{pager_next_button_text}}</a></li>
+    {% else %}
+      <li class="page-item disabled"><a class="page-link" href="#void">{{pager_last_button_text}}</a></li>
+    {% endif %}
+
+    {% comment %} Set BACK page (PagerURL) BUTTON (currently NOT used)
+    ----------------------------------------------------------------------------
+    <!-- [INFO   ] [procedures.global.pager.proc          ] [ manage the current pager settings for: {{builder_path}}] -->
+    <script>
+      var cookie_names           = j1.getCookieNames();
+      var user_state_cookie_name = cookie_names.user_session;
+      var user_state             = j1.readCookie(user_state_cookie_name);
+      var re                     = new RegExp('navigator|dateview|tagview|archive');
+      var last_pager             = user_state.last_pager;
+      var last_pager_url;
+
+      <!-- [INFO   ] [procedures.global.pager.proc          ] [ calculate BackURL from User State Cookie for page: {{page.title}}] -->
+      if (re.test(last_pager)) {
+        last_pager_url = '<li class="page-item"><a class="page-link" href="' + last_pager + '" title="Back to {{pager_back_button_text}}">{{pager_back_button_text}}</a></li>';
+      } else {
+        last_pager_url = '<li class="page-item disabled"><a class="page-link" title="Back to {{pager_back_button_text}}">{{pager_back_button_text}}</a></li>';
+      }
+      document.write( last_pager_url );
+      j1.writeCookie({
+        name: user_state_cookie_name,
+        data: user_state
+      });
+    </script>
+    ---------------------------------------------------------------------------- {% endcomment %}
+
+  </ul>
+</div>
