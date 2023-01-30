@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<!-- Mirrored from mediathekviewweb.de/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Jan 2023 15:47:36 GMT -->
+<!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
+<head data-cast-api-enabled="true">
+  <title>MediathekViewWeb</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/png" href="static/favicon.png" sizes="96x96">
+
+  <link id="bootstrap-theme" rel="stylesheet" href="static/bootstrap-lumen.min.css" />
+  <link rel="stylesheet" href="static/video-js.min.css" />
+  <link rel="stylesheet" href="static/icons/material-icons.css" />
+  <link rel="stylesheet" href="static/roboto/roboto.css" />
+  <link rel="stylesheet" href="static/index.css" />
+
+  <!-- Add Polyfills if using Internet Explorer -->
+  <script>
+    if (window.navigator.userAgent.indexOf("MSIE ") > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = '../polyfill.io/v3/polyfill.min4078.js?flags=gated';
+      document.head.appendChild(script);
+    }
+  </script>
+
+  <script defer src="static/jquery.min.js"></script>
+  <script defer src="static/js.cookie.min.js"></script>
+  <script defer src="static/bootstrap.min.js"></script>
+  <script defer src="static/socket.io.min.js"></script>
+  <script defer src="static/jquery.dataTables.min.js"></script>
+  <script defer src="static/lodash.min.js"></script>
+  <script defer src="static/video.min.js"></script>
+  <script defer src="static/index.js"></script>
+  <script type="text/javascript">
+    if (typeof localStorage != 'undefined') {
+      var allowCookies = localStorage.getItem('allowCookies') == 'true';
+      var lastAllowCookiesAskedString = localStorage.getItem('allowCookiesAsked') ?? 0;
+      var lastAllowCookiesAsked = parseInt(lastAllowCookiesAskedString);
+
+      if (!allowCookies && (lastAllowCookiesAsked == NaN || (lastAllowCookiesAsked < (Date.now() - 7 * 24 * 60 * 60 * 1000)))) {
+        localStorage.removeItem('allowCookies');
+      }
+
+      if (allowCookies) {
+        var adsense = document.createElement("script");
+        adsense.type = "text/javascript";
+        adsense.setAttribute('data-ad-client', 'ca-pub-2430783446079517');
+        adsense.setAttribute('async', 'async');
+        adsense.src = "../pagead2.googlesyndication.com/pagead/js/f.txt";
+        document.head.appendChild(adsense);
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <div id="videooverlay" class="overlay initiallyHidden" tabindex="0">
+    <a id="videocloseButton" class="closeButton">&times;</a>
+    <div class="row overlay-content">
+      <div class="col-lg-3 col-md-2 col-sm-2 col-xs-1"></div>
+      <div class="col-lg-6 col-md-8 col-sm-8 col-xs-10 noPadding">
+        <div id="videocontent"></div>
+      </div>
+      <div class="col-lg-3 col-md-2 col-sm-2 col-xs-1"></div>
+    </div>
+  </div>
+
+  <div id="blur" class="no-filter">
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a id="logo" class="navbar-brand" href="#">MediathekViewWeb</a>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar">
+          <ul class="nav navbar-nav">
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=BDVH46DLCM7E8&amp;source=url" target="_blank">Spenden</a></li>
+            <li><a id="forumButton" target="_blank" href="https://forum.mediathekview.de/category/11/offizeller-client-mediathekviewweb">Forum</a></li>
+            <li><a id="contactButton" href="mailto:kontakt@mediathekviewweb.de" data-onclick-return-false>Kontakt</a></li>
+            <li><a id="githubButton" target="_blank" href="https://github.com/mediathekview/mediathekviewweb">GitHub</a></li>
+
+            <li class="dropdown">
+              <a class="dropdown-toggle about" data-toggle="dropdown">Über
+                <span class="caret"></span>
+              </a>
+
+              <ul class="dropdown-menu">
+                <li><a id="donateButton" target="_blank" href="donate.html">Spenden</a></li>
+                <li><a id="impressumButton" target="_blank" href="impressum.html">Impressum</a></li>
+                <li><a id="datenschutzButton" target="_blank" href="datenschutz.html">Datenschutz</a></li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container">
+
+      <div id="browserWarning" class="showafter1s" style="border: 3px solid red; padding: 10px; margin: 15px">
+        <span><a target="_blank" href="https://github.com/mediathekview/mediathekviewweb/issues/8">Dein Browser wird
+            nicht unterstützt</a> oder Javascript ist deaktiviert</span>
+      </div>
+
+      <div id="main-view">
+        <div class="row">
+          <div class="col-lg-8 col-md-7 col-sm-7">
+            <div class="input-group">
+              <span id="searchSpan" class="input-group-addon" data-toggle="popover" title="Selektoren" data-trigger="hover"
+                    data-html="true" data-placement="bottom"
+                    data-content="!Sender</br>#Thema</br>+Titel</br>*Beschreibung</br>&amp;lt;x (in minuten)</br>&amp;gt;x (in minuten)">Suche</span>
+              <input id="queryInput" type="text" class="form-control" autofocus>
+            </div>
+            <a tabIndex="-1"><i id="queryInputClearButton" class="material-icons">clear</i></a>
+          </div>
+
+          <div class="col-lg-4 col-md-5 col-sm-5">
+            <div class="input-group" id="queryParameters">
+              <span class="input-group-addon">
+                <input type="checkbox" name="everywhere" id="everywhereCheckbox">
+                <label for="everywhereCheckbox">Überall</label>
+              </span>
+
+              <span class="input-group-addon">
+                <input type="checkbox" name="future" id="futureCheckbox" checked>
+                <label for="futureCheckbox">Zukünftige</label>
+              </span>
+
+              <span class="input-group-btn">
+                <button id="rssFeedButton" class="btn btn-default" type="button"><i class="material-icons icon-small">rss_feed</i></button>
+                <button id="helpButton" class="btn btn-default" type="button">Hilfe</button>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <br>
+
+        <table id="mediathek" class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th data-onclick-sort="channel">Sender</th>
+              <th fielddata-is-disabled="topic">Thema</th>
+              <th fielddata-is-disabled="title">Titel</th>
+              <th><i class="material-icons">description</i></th>
+              <th data-onclick-sort="timestamp">Datum</th>
+              <th>Zeit</th>
+              <th data-onclick-sort="duration">Dauer</th>
+              <th>Video</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+
+        <div class="smallMarginTop">
+          <div class="floatRight">
+            <ul id="pagination" class="pagination paginationstyle">
+            </ul>
+          </div>
+          <div class="floatLeft">
+            <p id="queryInfoLabel"></p>
+          </div>
+        </div>
+
+      </div>
+
+      <div id="generic-html-view" class="initiallyHidden">
+        <button id="genericHtmlViewBackButton" class="btn btn-default" type="button">Zurück</button>
+        <div id="genericHtmlContent"></div>
+      </div>
+
+      <div id="connectingModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Keine Verbindung</h4>
+            </div>
+            <div class="modal-body">
+              <i class="material-icons spin-left" style="display: inline-flex; vertical-align: middle; font-size: 2.5em;">sync</i>
+              <span style="font-size:1.2em; vertical-align: middle;">Verbinde...</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="indexingModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Server aktualisiert Datenbank...</h4>
+            </div>
+            <div class="modal-body">
+              <div class="progress">
+                <div id="parsingProgressbar" class="progress-bar progress-bar-striped active" role="progressbar" style="min-width: 2em;">
+                  0%
+                </div>
+              </div>
+              <div class="progress">
+                <div id="indexingProgressbar" class="progress-bar progress-bar-striped active" role="progressbar" style="min-width: 2em;">
+                  0%
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4">Einträge:
+                  <div id="indexingMessage">0</div>
+                </div>
+                <div class="col-sm-4">Dauer:
+                  <div id="indexingTimeLabel">0</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="contactModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+              <h4 class="modal-title">Kontakt</h4>
+            </div>
+            <div class="modal-body">
+              <p>Für gefundene Fehler oder Verbesserungsvorschläge verwende bitte die <a target="_blank" href="https://github.com/mediathekview/mediathekviewweb/issues">Issues auf
+                  GitHub.</a></p>
+              <p>Für fehlende Sendungen gibt es Hilfe <a target="_blank" href="https://forum.mediathekview.de/">im Forum</a>.</p>
+              <p>Für alles andere oder im Fall, dass du kein GitHub Account hast/willst, schreibe mir eine Mail: <a target="_blank"
+                   href="mailto:kontakt@mediathekviewweb.de">kontakt@mediathekviewweb.de</a>. Bitte keine Anfragen zu fehlenden Sendungen per Mail!</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="cookieModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Cookies</h4>
+            </div>
+            <div class="modal-body">
+              <p>
+                Diese Website verwendet Cookies für die Darstellung von Werbung. Hierbei werden Daten an Google übertragen. Nähere Informationen dazu finden Sie in unserer
+                <a target="_blank" href="datenschutz.html">Datenschutzerklärung</a>.
+                Klicken Sie auf „Akzeptieren“, um Cookies zu akzeptieren und direkt unsere Website besuchen zu können.
+              </p>
+
+              <p>
+                <a target="_blank" href="impressum.html">Impressum aufrufen</a>
+              </p>
+
+              <p>
+                Sollten Sie mit den Werbe-Cookies nicht einverstanden sein, bitten wir Sie über eine
+                <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=BDVH46DLCM7E8&amp;source=url" target="_blank">Spende</a>
+                nachzudenken, um den Weiterbetrieb der Website zu ermöglichen.
+              </p>
+
+              <button id="cookieDenyButton" class="btn btn-default margin-right-1" type="button">Ablehnen</button>
+              <button id="cookieAcceptButton" class="btn btn-success" type="button">Akzeptieren</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</body>
+
+
+<!-- Mirrored from mediathekviewweb.de/ by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 05 Jan 2023 15:47:41 GMT -->
+</html>
