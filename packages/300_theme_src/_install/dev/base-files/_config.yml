@@ -585,24 +585,17 @@ excerpt_separator:                      excerpt__end
 excerpt_truncate_words:                 100
 
 # ------------------------------------------------------------------------------
-# Collections
+# COLLECTION settings
+# See: https://jekyllrb.com/docs/collections/#collections
 #
-# featured:
-#   output:                             true
-#   permalink:                          /biography/:collection/:name/
-#
-# ------------------------------------------------------------------------------
-# Book shelf
-#
-biography:
-  output:                             true
-  permalink:                          /collections/public/:collection/:name/
-fantasy:
-  output:                             true
-  permalink:                          /collections/public/:collection/:name/
-romance:
-  output:                             true
-  permalink:                          /collections/public/:collection/:name/
+collections:
+
+  # ----------------------------------------------------------------------------
+  # Book shelf
+  #
+  biography:
+    output:                             true
+    permalink:                          /collections/public/:collection/:name/
 
 # ------------------------------------------------------------------------------
 # FRONTMATTER defaults
@@ -762,6 +755,20 @@ defaults:
       resource_options:
         - toccer:
             collapseDepth:              3
+
+  # ----------------------------------------------------------------------------
+  # Collections
+  #
+
+  # ----------------------------------------------------------------------------
+  # Biography (Book Shelf)
+  #
+  - scope:
+      type:                             biography
+      path:                             collections/_biography
+
+    values:
+      layout:                           page
 
 
 # ==============================================================================
