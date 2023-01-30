@@ -1,32 +1,42 @@
 ---
 layout:                                 collection
 
-title:                                  When Breath Becomes Air
-tagline:                                Paul Kalanithi was diagnosed with inoperable lung cancer ...
-date:                                   2016-10-27 19:16:49
+title:                                  Paul Kalanithi
+tagline:                                Diagnosed with inoperable lung cancer
+date:                                   2023-01-27 00:00:00 +0100
 description: >
                                         When Breath Becomes Air chronicles Kalanithi's transformation
-                                        from a medical student into a patient
+                                        from a medical student into a patient. Paul Kalanithi at the age
+                                        of thirty-six, on the verge of completing a decade’s training as
+                                        a neurosurgeon, was diagnosed with inoperable lung cancer.
 
-tags:                                   [ Memoirs, Neurosurgery, Life, Doctor ]
 categories:                             [ Book, Biography ]
+tags:                                   [ Medicine, Doctor ]
 
 book:
   cover:                                https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9781/8479/9781847923677.jpg
   format:                               hardback
   pages:                                256
   publisher:                            Vintage Publishing
+  published:                            2016
   author:                               Paul Kalanithi
   ISBN10:                               1847923674
   ISBN13:                               9781847923677
   rank:                                 40
 
-toc:                                    false
-
+fab_menu_id:                            default
+scrollbar:                              false
 regenerate:                             false
 
 resources:                              []
-resource_options:                       []
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
+          alt:                          giammarco-boscaro-1920x1280
 ---
 
 // Page Initializer

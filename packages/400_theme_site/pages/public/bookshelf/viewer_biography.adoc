@@ -1,16 +1,19 @@
 ---
 title:                                  Biography
 tagline:                                Today's People
-date:                                   2020-11-03 12:00:00
+date:                                   2023-01-29 00:00:00
 description: >
-                                        Jekyll Collections
+                                        Today's people is a collection contains the biography's
+                                        of celebrities well known by most of us. Find the books issued
+                                        by musicans, actors and more.
+
 
 categories:                             [ Jekyll, Collection ]
 tags:                                   [ Preview, Bookshelf ]
 
 fab_menu_id:                            open_toc
 
-permalink:                              /pages/public/collections/bookshelf/biography/
+permalink:                              /pages/public/bookshelf/biography/
 regenerate:                             true
 
 resources:                              []
@@ -45,9 +48,10 @@ resource_options:
 // Content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [[navigator]]
-== Biography
+lorem:sentences[8]
 
-lorem:sentences[5]
+[role="mb-6"]
+lorem:sentences[3]
 
 ++++
 <div class="row mb-4">

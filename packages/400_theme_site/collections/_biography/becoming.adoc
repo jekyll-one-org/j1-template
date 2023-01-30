@@ -1,31 +1,41 @@
 ---
 layout:                                 collection
 title:                                  Becoming
-tagline:                                Memoir by the former First Lady of the USA
-date:                                   2018-11-13 19:16:49 +0100
+tagline:                                Former First Lady of the USA
+date:                                   2023-01-27 00:00:00 +0100
 description: >
                                         Intimate, powerful, and inspiring memoir by the former
-                                        First Lady of the USA
+                                        First Lady of the USA. In a life filled with meaning and
+                                        accomplishment, Michelle Obama has emerged as one of the
+                                        most iconic and compelling women of our era.
 
-tags:                                   [ Memoirs, Political, Journalism ]
 categories:                             [ Book, Biography ]
+tags:                                   [ Political, Journalism ]
 
 book:
   cover:                                https://images-na.ssl-images-amazon.com/images/I/414JfiBCutL.jpg
   format:                               hardback
   pages:                                430
   publisher:                            Penguin Random House LLC
+  published:                            2018
   author:                               Michelle Obama
   ISBN10:                               0008128308
   ISBN13:                               978-3-442-31487-4
   rank:                                 817
 
-toc:                                    false
-
+fab_menu_id:                            default
+scrollbar:                              false
 regenerate:                             false
 
 resources:                              []
-resource_options:                       []
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
+          alt:                          giammarco-boscaro-1920x1280
 ---
 
 // Collection Initializer (posts|collections)

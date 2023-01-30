@@ -83,7 +83,7 @@ settings:
         enabled:                        true
 
         id:                             attic_page_post
-        layout:                         [ page, post, blog_archive ]
+        layout:                         [ collection, page, post, blog_archive ]
         padding_top:                    400
         padding_bottom:                 50
         opacity:                        0.5
@@ -113,7 +113,7 @@ settings:
         enabled:                        true
 
         id:                             attic_text
-        layout:                         [ collection, app ]
+        layout:                         [ app ]
 
 # ------------------------------------------------------------------------------
 # END config

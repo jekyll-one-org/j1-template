@@ -1,32 +1,43 @@
 ---
 layout:                                 collection
 title:                                  The Princess Diarist
-tagline:                                Behind the scenes on one of the most famous film sets
-date:                                   2016-10-27 19:16:49
+tagline:                                One of the most famous film sets
+date:                                   2023-01-27 00:00:00 +0100
 description: >
                                         Carrie Fisher's intimate, hilarious and revealing
                                         recollection of what happened behind the scenes on
-                                        one of the most famous film sets
+                                        one of the most famous film sets. Today, her fame as an
+                                        author, actress, and pop-culture icon is indisputable,
+                                        but in 1977, Carrie Fisher was just a (sort-of) regular
+                                        teenager.
 
-tags:                                   [ Memoirs, Films, Actors, Science, Fiction ]
 categories:                             [ Book, Biography ]
+tags:                                   [ Actor ]
 
 book:
   cover:                                https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9780/5930/9780593077566.jpg
   format:                               hardback
   pages:                                272
   publisher:                            Transworld Publishers Ltd.
+  published:                            2016
   author:                               Carrie Fisher
   ISBN10:                               0593077563
   ISBN13:                               9780593077566
   rank:                                 5690
 
-toc:                                    false
-
+fab_menu_id:                            default
+scrollbar:                              false
 regenerate:                             false
 
 resources:                              []
-resource_options:                       []
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
+          alt:                          giammarco-boscaro-1920x1280
 ---
 
 // Page Initializer

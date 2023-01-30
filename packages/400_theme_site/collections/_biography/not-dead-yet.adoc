@@ -2,31 +2,40 @@
 layout:                                 collection
 
 title:                                  Not Dead Yet
-tagline:                                Phil Collins - The Autobiography
-date:                                   2016-10-27 19:16:49
+tagline:                                Phil Collins Autobiography
+date:                                   2023-01-27 00:00:00 +0100
 description: >
                                         Phil Collins unvarnished story of the songs and shows, the hits and pans,
-                                        his marriages and divorces
+                                        his marriages and divorces. This is the story of his epic career, from
+                                        child actor to one of the most successful songwriters of the pop music era.
 
-tags:                                   [ Memoirs, Musicians ]
 categories:                             [ Book, Biography ]
+tags:                                   [ Musician ]
 
 book:
   cover:                                https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/7808/9781780895123.jpg
   format:                               hardback
   pages:                                464
   publisher:                            Cornerstone
+  published:                            2016
   author:                               Phil Collins
   ISBN10:                               1780895127
   ISBN13:                               9781780895123
   rank:                                 1367
 
-toc:                                    false
-
+fab_menu_id:                            default
+scrollbar:                              false
 regenerate:                             false
 
 resources:                              []
-resource_options:                       []
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
+          alt:                          giammarco-boscaro-1920x1280
 ---
 
 // Page Initializer

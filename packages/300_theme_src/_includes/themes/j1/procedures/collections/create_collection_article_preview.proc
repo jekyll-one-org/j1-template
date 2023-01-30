@@ -32,9 +32,17 @@
  # -----------------------------------------------------------------------------
 {% endcomment %}
 
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign template_config     = site.data.j1_config %}
+{% assign blocks              = site.data.blocks %}
+{% assign modules             = site.data.modules %}
+{% assign plugins             = site.data.plugins %}
+
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign articles = include.collection %}
+{% assign category_blacklist  = template_config.posts.category_blacklist %}
+{% assign articles            = include.collection %}
 
 {% comment %} Debug templates
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -47,6 +55,13 @@
 
  {% comment %} article_url:  {{ article.url | debug }} {% endcomment %}
  {% comment %} article:  {{ article | debug }} {% endcomment %}
+
+ <!-- Cleanup categories by given blacklist -->
+ {% assign my_categories = article.categories | difference: category_blacklist %}
+
+ <!-- Build element strings -->
+ {% assign categories    = my_categories |join: " · "  %}
+ {% assign tags          = article.tags | join: " · "  %}
 
  <article class="card raised-z0 mb-5">
 
@@ -73,16 +88,16 @@
 
        <div class="card-footer not-rounded r-text-200">
          <div class="card-footer-text">
-           <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{article.date | localize: "%Y %B, %e"}}</i>
+           <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i> {{article.book.published}}</i>
 
            <!-- Cleanup categories by given blacklist -->
            <!-- Build element strings -->
            <p class="result-item-text small mb-3 notranslate">
              <i class="mdi mdi-tag-text-outline mdi-18px mr-1"></i>
-             <span class="sr-categories">Jekyll</span>
+             <span class="sr-categories">{{categories}}</span>
              <br>
              <i class="mdi mdi-tag mdi-18px mr-1"></i>
-             <span class="sr-tags">Theme</span>
+             <span class="sr-tags">{{tags}}</span>
            </p>
          </div>
 
@@ -95,6 +110,5 @@
    </div>
 
  </article>
-
 
 {% endfor %}

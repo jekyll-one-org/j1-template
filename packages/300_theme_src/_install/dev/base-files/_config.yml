@@ -45,7 +45,7 @@
 # Sets the build environment of the website
 #
 #   values:                             development|production
-#   default:                            production
+#   default:                            development
 #
 environment:                            development
 
