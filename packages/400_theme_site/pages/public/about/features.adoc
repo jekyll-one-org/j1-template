@@ -1,5 +1,5 @@
 ---
-title:                                  Jekyll One
+title:                                  J1 Starter
 tagline:                                Learn The Features
 date:                                   2022-12-31 00:00:00
 description: >
