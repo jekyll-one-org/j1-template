@@ -53,7 +53,7 @@ environment:                            development
 # ------------------------------------------------------------------------------
 # Sets the build version of J1 Theme Gem
 #
-version:                                2023.0.5
+version:                                2023.0.6
 
 # version
 # ------------------------------------------------------------------------------
@@ -220,10 +220,14 @@ doctype:                                html
 #   default:                            false
 # ------------------------------------------------------------------------------
 #
-title:                                  Jekyll One
-tagline:                                Template For Jekyll
+title:                                  J1 Starter Theme
+tagline:                                Explore What Jekyll Can Do
 description: >
-                                        Made for Jekyll · Made for Your Web
+                                        Jekyll One Starter Theme. This template gives web developers
+                                        and hobbyists a clean implementation in Jekyll for starting
+                                        new projects and combines the best of open source software
+                                        for the Web. Jekyll One is open source and the modules packed
+                                        as well. No pain for private or professional purposes.
 keywords: >
                                         opensource, free, load, download, start, starter, example,
                                         high, easy, use, secure, encrypt, standard, popular,

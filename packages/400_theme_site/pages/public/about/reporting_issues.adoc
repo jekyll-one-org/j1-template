@@ -1,6 +1,6 @@
 ---
-title:                                  Help On Issues
-tagline:                                Report on JekyllOne Failures
+title:                                  Jekyll One
+tagline:                                Report on Failures
 date:                                   2022-01-01 00:00:00
 description: >
                                         Please report on JekyllOne failures. Although I endeavor
@@ -20,8 +20,9 @@ image:
   height:                               1280
   alt:                                  J1 Theme Mockup
 
-comments:                               false
+fab_menu_id:                            default
 scrollbar:                              false
+comments:                               false
 
 regenerate:                             false
 permalink:                              /pages/public/about/reporting_issues/
@@ -59,7 +60,7 @@ resource_options:
 {% include {{load_attributes}} scope="global" %}
 
 ifeval::[{badges-enabled} == true]
-[role="mb-4"]
+[role="mb-5"]
 {badge-j1--version-latest} {badge-j1--downloads}
 endif::[]
 
@@ -74,8 +75,6 @@ report issues so I can correct them.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-== Report an issue
-
 The source pages for the J1 Theme Starter are maintained in a _GitHub_
 repository. _GitHub_ provides both an issue tracker and a history of changes.
 To report problems with the content and display, simply open a new issue and

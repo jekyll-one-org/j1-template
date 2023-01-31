@@ -113,6 +113,8 @@ packages/400_theme_site/_data/j1_config.yml
 
 packages/400_theme_site/_data/modules/cc.yml
 
+packages/400_theme_site/_data/_unused/
+
 
 # Ignore files and folders
 # ------------------------------------------------------------------------------

@@ -16,10 +16,10 @@
 
 // Content
 // -----------------------------------------------------------------------------
-.no-attic {                                                                     // fake attic used if NO attic is enabled for a layout
+// fake attic used if NO attic is enabled for a layout
+// see: _data/modules/attics.yml
+.no-attic {
     padding-top: 80px;
-    margin-bottom: 50px;
-    background-color: $gray-900;
 }
 
 .attic {
@@ -98,7 +98,7 @@
 }
 @media screen and (max-width: 992px) {
   .no-attic {
-      padding-top: 48px;
+      padding-top: 48px !important;
   }
 }
 
@@ -113,7 +113,7 @@
 }
 @media screen and (max-width: 768px) {
   .no-attic {
-      padding-top: 48px;
+      padding-top: 48px !important;
   }
 }
 
@@ -125,7 +125,7 @@
 }
 @media screen and (max-width: 480px) {
   .no-attic {
-      padding-top: 48px;
+      padding-top: 48px !important;
   }
 }
 

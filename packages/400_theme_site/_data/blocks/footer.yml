@@ -169,14 +169,15 @@ settings:
             type:                       about
             enabled:                    true
 
-            title:                      J1 Theme
+            title:                      J1 Starter
             title_translation:          notranslate
             tagline:                    featured template for jekyll
             text: >
-                                        Jekyll meets Bootstrap - and makes a lot of friends.
-                                        J1 Theme combines the best of OpenSource software for
-                                        the Web and the Web site generator Jekyll. J1 is Open
-                                        Source and the modules packed as well.
+                                        J1 Starter. This template gives web developers
+                                        and hobbyists a clean implementation in Jekyll for starting
+                                        new projects and combines the best of open source software
+                                        for the Web. Jekyll One is open source and the modules packed
+                                        as well.
                                         <br><br>
                                         <b>No pain for private or professional purposes.</b>
             justify:                    false
