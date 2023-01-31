@@ -1,6 +1,6 @@
 ---
 title:                                  Lunr Search
-tagline:                                QuickSearch for J1
+tagline:                                QuickSearch For J1
 date:                                   2020-11-08 00:00:00
 description: >
                                         The QuickSearch option for the J1 Theme is based on the

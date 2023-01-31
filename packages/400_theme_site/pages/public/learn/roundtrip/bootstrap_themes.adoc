@@ -1,6 +1,6 @@
 ---
 title:                                  Bootstrap Themes
-tagline:                                J1 Themes Feature
+tagline:                                J1 Theme Feature
 date:                                   2020-11-10 00:00:00
 description: >
                                         JekyllOne, a Jekyll Theme for multifunctional Bootstrap-based and responsive

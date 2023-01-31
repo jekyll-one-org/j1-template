@@ -1,6 +1,6 @@
 ---
-title:                                  J1 Theme
-tagline:                                plan details
+title:                                  J1 Starter
+tagline:                                Plan Setails
 date:                                   2020-11-03 00:00:00
 description: >
                                         A good user experience browsing a Web site is one of the most important

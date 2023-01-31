@@ -1,6 +1,6 @@
 ---
 title:                                  Master Slider
-tagline:                                Common Slideshows
+tagline:                                Common Slide Shows
 date:                                   2022-12-03 00:00:00
 description: >
                                         J1 Theme integrates the free version of Master Slider (MS) Lite.
