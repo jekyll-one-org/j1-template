@@ -1,5 +1,5 @@
 ---
-title:                                  Jekyll One
+title:                                  J1 Starter
 tagline:                                About This Site
 date:                                   2022-01-01 00:00:00
 description: >
@@ -17,7 +17,7 @@ image:
   height:                               1280
   alt:                                  J1 Theme Mockup
 
-fab_menu_id:                            page_ctrl
+fab_menu_id:                            default
 scrollbar:                              false
 comments:                               false
 
@@ -57,7 +57,7 @@ resource_options:
 {% include {{load_attributes}} scope="global" %}
 
 ifeval::[{badges-enabled} == true]
-[role="mb-4"]
+[role="mb-5"]
 {badge-j1--version-latest} {badge-j1--downloads}
 endif::[]
 
@@ -70,8 +70,6 @@ services provided by this project.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-== About this site
-
 Whether you work solo or as part of a team, it’s always a great idea to
 help visitors put a face to the names behind a website. The best place to
 include a bit of information about you and your team is on your homepage with
