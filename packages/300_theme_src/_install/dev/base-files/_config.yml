@@ -61,6 +61,12 @@ version:                                2023.0.6
 #
 copyright:                              © 2023 J1 · All rights reserved
 
+# noscript
+# ------------------------------------------------------------------------------
+# Enables|Disables a noscript page
+#
+noscript:                               false
+
 
 # ==============================================================================
 # 2. THEME configuration

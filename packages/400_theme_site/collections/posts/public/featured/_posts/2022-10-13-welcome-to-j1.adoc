@@ -64,7 +64,6 @@ excerpt__end
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-
 [[readmore]]
 == What is a static site?
 

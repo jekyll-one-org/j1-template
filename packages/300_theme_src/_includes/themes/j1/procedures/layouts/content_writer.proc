@@ -74,7 +74,7 @@
             {% if placement == 'body-main' %}
               <!-- [INFO   ] [j1.layout.content_writer.proc         ] [ load region 'body-main' for layout: {{page.layout}} ] -->
               {% if type == 'async' %}
-                <section id="{{id}}" class="{{class}}"></section>
+                <div id="{{id}}" class="{{class}}"></div>
               {% elsif type == 'sync' %}
                 {% capture path %}{{base}}/{{path}}/{{file}}{% endcapture %}
                 {% include {{path}} %}

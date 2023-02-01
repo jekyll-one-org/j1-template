@@ -70,7 +70,6 @@ endif::[]
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-
 Many large today's companies like {url-docker--docs}[Docker, {browser-window--new}]
 are using template-based systems to create their documentation sites. Or like
 {url-oreilly-atlas--home}[O'Reilly Atlas, {browser-window--new}],
