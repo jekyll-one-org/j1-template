@@ -167,6 +167,14 @@
           href:                         https://jekyllrb.com/
           target:                       _blank
           icon:                         flask
+        - title:                        Jekyll Talk
+          href:                         https://talk.jekyllrb.com/
+          target:                       _blank
+          icon:                         flask
+        - title:                        Asciidoctor
+          href:                         https://asciidoctor.org/
+          target:                       _blank
+          icon:                         hospital
         - title:                        Ruby
           href:                         https://www.ruby-lang.org/en/
           target:                       _blank
@@ -243,8 +251,16 @@
           href:                         http://www.methods.co.nz/asciidoc/faq.html
           target:                       _blank
           icon:                         format-color-text
-        - title:                        Asciidoctor
-          href:                         http://asciidoctor.org/
+        - title:                        Asciidoctor Docs
+          href:                         https://docs.asciidoctor.org/asciidoctor/latest/
+          target:                       _blank
+          icon:                         hospital
+        - title:                        Asciidoctor QuickReference
+          href:                         https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+          target:                       _blank
+          icon:                         hospital
+        - title:                        Asciidoctor Writers Gude
+          href:                         https://asciidoctor.org/docs/asciidoc-writers-guide/
           target:                       _blank
           icon:                         hospital
 
@@ -263,6 +279,14 @@
           href:                         https://www.appdevtools.com/
           target:                       _blank
           icon:                         cached
+        - title:                        Nu Html Checker
+          href:                         https://validator.w3.org/nu/
+          target:                       _blank
+          icon:                         language-html5
+        - title:                        Closing Tag Checker
+          href:                         https://www.aliciaramirez.com/closing-tags-checker/
+          target:                       _blank
+          icon:                         language-html5
         - title:                        Convert CSS to Sass
           href:                         http://sebastianpontow.de/css2compass/
           target:                       _blank
