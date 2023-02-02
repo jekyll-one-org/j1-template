@@ -176,24 +176,24 @@ defaults:
         en:                             Newer Posts
         de:                             Neuere Beiträge
       first_post:
-        en:                             First Page
+        en:                             First
         de:                             Erste Seite
       last_post:
-        en:                             Last Page
+        en:                             Last
         de:                             Letzte Seite
 
     view_selector:
       category_view:
-        en:                             By Category
+        en:                             Category
         de:                             Nach Kategorie
       date_view:
-        en:                             By Date
+        en:                             Date
         de:                             Nach Datum
       archive_view:
-        en:                             All Posts
+        en:                             All
         de:                             Alle Beiträge
       tag_view:
-        en:                             By Tag
+        en:                             Tag
         de:                             Nach Tag
 
   article_navigator:

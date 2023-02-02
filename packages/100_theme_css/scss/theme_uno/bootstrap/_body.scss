@@ -42,3 +42,19 @@ body {
 .hide-scrollbar::-webkit-scrollbar {
   width: 0px;
 }
+
+// jadams, 2023-02-02: fade-in effect on page load
+//
+// body {
+//     animation: fadeInAnimation ease 3s;
+//     animation-iteration-count: 1;
+//     animation-fill-mode: forwards;
+// }
+// @keyframes fadeInAnimation {
+//     0% {
+//         opacity: 0;
+//     }
+//     100% {
+//         opacity: 1;
+//     }
+// }

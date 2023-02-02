@@ -379,6 +379,14 @@ body:
   font-weight:                          400
   line-height:                          1.5
 
+  # ----------------------------------------------------------------------------
+  # animation on page load
+  # See: https://www.geeksforgeeks.org/how-to-create-fade-in-effect-on-page-load-using-css/
+  #
+  animation:                            true
+  animation_type:                       fadeIn                                  # currently, only fadeIn supported
+  animation_duration:                   3
+
 # ------------------------------------------------------------------------------
 # PAGE settings
 # ------------------------------------------------------------------------------

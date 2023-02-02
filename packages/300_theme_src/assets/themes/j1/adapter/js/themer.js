@@ -202,6 +202,8 @@ j1.adapter.themer = (function (j1, window) {
       _this.state = 'started';
       logger.debug('\n' + 'state: ' + _this.getState());
 
+      $('#no_flicker').hide();
+
       // jadams, 2021-07-25: problem seems NOT an timing issue on the iPad
       // platform. (General) Dependency should be REMOVED!!!
       // TODO: Isolate redirect for iPad ONLY!!!
@@ -280,6 +282,7 @@ j1.adapter.themer = (function (j1, window) {
                // continue processing if page is ready
                var dependencies_met_theme_loaded = setInterval (function () {
                  if (j1.getState() == 'finished') {
+//                 $('#no_flicker').hide();
                    theme_css_html = '<link rel="stylesheet" id="' + id + '" href="' + user_state.theme_css + '" type="text/css" />';
                    $('head').append(theme_css_html);
 
@@ -330,9 +333,10 @@ j1.adapter.themer = (function (j1, window) {
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module initialized successfully');
-
+          $('#no_flicker').show();
           clearInterval(dependencies_met_theme_applied);
         }
+
       }, 25); // END dependencies_met_theme_applied
 
     }, // END init
