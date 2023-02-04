@@ -36,6 +36,7 @@ resources:                              [
 
 resource_options:
   - attic:
+      padding_top:                      600
       slides:
         - url:                          /assets/images/modules/attics/jessica-ruscello-1920x1280.jpg
           alt:                          Photo by Alexander Andrews on Unsplash

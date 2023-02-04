@@ -260,7 +260,7 @@
                   <i class="mdi mdi-tag mdi-18px mr-1"></i>
                   <span class="sr-tags">{{tags}}</span>
               </p>
-              <a class="card-link md-grey-900 text-lowercase"
+              <a class="card-link text-lowercase"
                 href="{{post.url}}#readmore">
                 {{readmore_text}} · {{post.tagline}}
               </a>

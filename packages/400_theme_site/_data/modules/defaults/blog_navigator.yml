@@ -170,31 +170,31 @@ defaults:
 
     paginator:
       older_posts:
-        en:                             Older Posts
-        de:                             Ältere Beiträge
+        en:                             Older
+        de:                             Ältere
       newer_posts:
-        en:                             Newer Posts
-        de:                             Neuere Beiträge
+        en:                             Newer
+        de:                             Neuere
       first_post:
         en:                             First
-        de:                             Erste Seite
+        de:                             Erste
       last_post:
         en:                             Last
-        de:                             Letzte Seite
+        de:                             Letzte
 
     view_selector:
       category_view:
         en:                             Category
-        de:                             Nach Kategorie
+        de:                             Kategorie
       date_view:
         en:                             Date
-        de:                             Nach Datum
+        de:                             Datum
       archive_view:
         en:                             All
-        de:                             Alle Beiträge
+        de:                             Alle
       tag_view:
         en:                             Tag
-        de:                             Nach Tag
+        de:                             Tag
 
   article_navigator:
     page_text:
@@ -204,18 +204,18 @@ defaults:
         description: >
                                         Navigate through all of the articles available on this site. To do this,
                                         use the various display pages to find the articles that interest you.
-                                        The <b>By Category</b> page lists articles on a specific <b>topic</b>.
+                                        The <b>Category</b> page lists articles on a specific <b>topic</b>.
                                         If you are looking for articles by publication date, you can use the view
-                                        Use <b>By Date</b>. All articles in reverse order of appearance can be
-                                        found in the view <b>All Posts</b>.
+                                        <b>Date</b>. All articles in reverse order of appearance can be
+                                        found in the view <b>All</b>.
       de:
         description: >
                                         Navigieren Sie durch alle auf dieser Site verfügbaren Artikel. Verenden Sie
                                         dazu die verschiedenen Anzeigeseiten um die Beitäge finden, die Sie interessieren.
-                                        Die Seite <b>Nach Kategorie</b> listet Artikel zu einem bestimmten <b>Thema</b>.
+                                        Die Seite <b>Kategorie</b> listet Artikel zu einem bestimmten <b>Thema</b>.
                                         Suchen Sie nach Artikeln nach einem Erscheinungsdatum, könne Sie die Ansicht
-                                        <b>Nach Datum</b> verwenden. Alle Artikel in umgekehrter Reihenfolge ihres
-                                        Erscheinens sind in der Ansicht <b>Alle Beiträge</b> zu finden.
+                                        <b>Datum</b> verwenden. Alle Artikel in umgekehrter Reihenfolge ihres
+                                        Erscheinens sind in der Ansicht <b>Alle</b> zu finden.
 
   article_previewer:
     page_text:
@@ -229,21 +229,21 @@ defaults:
                                         <i class="mdi mdi-plus"></i>FAB button</a> you can reach a table of contents
                                         <a href="#" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> of all available articles
-                                        in the same order. To preview older posts, use the button <b>Older Posts</b> from
-                                        the Preview Bar. For newer posts use the button <b>Newer Posts</b> for more recent
+                                        in the same order. To preview older posts, use the button <b>Older</b> from
+                                        the Preview Bar. For newer posts use the button <b>Newer</b> for more recent
                                         articles.
       de:
         headline:                       Vorschau
         description: >
-                                        Alle Artikel sind in umgekehrter Reihenfolge ihres Erscheinens
-                                        gruppiert. Aktuellere Beiträge werden zuerst angezeigt. Über den FAB-Button
+                                        Alle Artikel sind in umgekehrter Reihenfolge ihres Erscheinens gruppiert.
+                                        Aktuellere Beiträge werden zuerst angezeigt. Über den FAB-Button
                                         <a href="#" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-plus"></i>FAB button</a> erreichen Sie ein
                                         Inhaltsverzeichnis <a href="#" class="btn-fab-floating btn-small btn-md-blue">
                                         <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> über alle verfübaren Artikel
                                         in gleicher Reihenfolge. Zur Anzeige älterer Artikel, verwenden Sie die Schältfläche
-                                        <b>Ältere Beiträge</b>. Für jüngere Posts klicken Sie auf die Schältfläche
-                                        <b>Neuere Beiträge</b>.
+                                        <b>Ältere</b>. Für jüngere Posts klicken Sie auf die Schältfläche
+                                        <b>Neuere</b>.
 
   archive_view:
     page_text:
@@ -264,8 +264,8 @@ defaults:
                                         <br><br>
                                         From the navigation bar, <b>Navigator</b> takes you back to the
                                         <b>main page</b> of the Navigator. Articles ordered by <b>category</b>
-                                        can be found in the view <b>By Category</b>. To search for posts
-                                        in the archive by <b>date</b>, go for the view <b>By Date</b>.
+                                        can be found in the view <b>Category</b>. To search for posts
+                                        in the archive by <b>date</b>, go for the view <b>Date</b>.
       de:
         headline:                       Alle Beiträge
         description: >
@@ -280,8 +280,8 @@ defaults:
                                         <br><br>
                                         In der Navigationszeile gelangen Sie über <b>Navigator</b> zurück zur
                                         <b>Hauptseite</b> des Navigators. Artikel nach ihrer Kategorie sind über die Seite
-                                        <b>Nach Kategorie</b> zu finden. Um Beiträge im Archiv nach <b>Datum</b>
-                                        zu durchsuchen, rufen Sie die Anzeige <b>Nach Datum</b> auf.
+                                        <b>Kategorie</b> zu finden. Um Beiträge im Archiv nach <b>Datum</b>
+                                        zu durchsuchen, rufen Sie die Anzeige <b>Datum</b> auf.
 
   category_view:
     page_text:
@@ -302,8 +302,8 @@ defaults:
                                         <br><br>
                                         From the navigation bar, <b>Navigator</b> takes you back to the
                                         <b>main page</b> of the Navigator. To search for articles in the
-                                        archive by date, go for the view <b>By Date</b>. All articles in
-                                        reverse order of appearance can be found in the view <b>All Posts</b>.
+                                        archive by date, go for the view <b>Date</b>. All articles in
+                                        reverse order of appearance can be found in the view <b>All</b>.
 
       de:
         headline:                       Artikel nach Kategorie
@@ -320,9 +320,9 @@ defaults:
                                         <br><br>
                                         In der Navigationszeile gelangen Sie über <b>Navigator</b> zurück zur
                                         <b>Hauptseite</b> des Navigators. Um Artikel im Archiv nach <b>Datum</b>
-                                        zu durchsuchen, rufen Sie die Anzeige <b>Nach Datum</b> auf. Alle Artikel
+                                        zu durchsuchen, rufen Sie die Anzeige <b>Datum</b> auf. Alle Artikel
                                         in umgekehrter Reihenfolge ihres Erscheinens sind in der Ansicht
-                                        <b>Alle Beiträge</b> zu finden.
+                                        <b>Alle</b> zu finden.
 
   date_view:
     page_text:
@@ -343,8 +343,8 @@ defaults:
                                         <br><br>
                                         From the navigation bar, <b>Navigator</b> takes you back to the
                                         <b>main page</b> of the Navigator. To search for articles in the
-                                        archive by category, go for the view <b>By Category</b>. All articles
-                                        in reverse order of appearance can be found in the view <b>All Posts</b>.
+                                        archive by category, go for the view <b>Category</b>. All articles
+                                        in reverse order of appearance can be found in the view <b>All</b>.
       de:
         headline:                       Artikel nach Datum
         description: >
@@ -360,8 +360,8 @@ defaults:
                                         <br><br>
                                         In der Navigationszeile gelangen Sie über <b>Navigator</b> zurück zur
                                         <b>Hauptseite</b> des Navigators. Um Artikel im Archiv nach <b>Kategorien</b> zu durchsuchen,
-                                        rufen Sie die Anzeige <b>Nach Kategorie</b> auf. Alle Artikel in umgekehrter
-                                        Reihenfolge ihres Erscheinens sind in der Ansicht <b>Alle Beiträge</b>
+                                        rufen Sie die Anzeige <b>Kategorie</b> auf. Alle Artikel in umgekehrter
+                                        Reihenfolge ihres Erscheinens sind in der Ansicht <b>Alle</b>
                                         zu finden.
 
   tag_view:
@@ -383,8 +383,8 @@ defaults:
                                         <br><br>
                                         From the navigation bar, <b>Navigator</b> takes you back to the
                                         <b>main page</b> of the Navigator. To search for articles in the
-                                        archive by category, go for the view <b>By Category</b>. All articles
-                                        in reverse order of appearance can be found in the view <b>All Posts</b>.
+                                        archive by category, go for the view <b>Category</b>. All articles
+                                        in reverse order of appearance can be found in the view <b>All</b>.
       de:
         headline:                       Artikel nach Tag
         description: >
@@ -400,8 +400,8 @@ defaults:
                                         <br><br>
                                         In der Navigationszeile gelangen Sie über <b>Navigator</b> zurück zur
                                         <b>Hauptseite</b> des Navigators. Um Artikel im Archiv nach <b>Kategorien</b> zu durchsuchen,
-                                        rufen Sie die Anzeige <b>Nach Kategorie</b> auf. Alle Artikel in umgekehrter
-                                        Reihenfolge ihres Erscheinens sind in der Ansicht <b>Alle Beiträge</b>
+                                        rufen Sie die Anzeige <b>Kategorie</b> auf. Alle Artikel in umgekehrter
+                                        Reihenfolge ihres Erscheinens sind in der Ansicht <b>Alle</b>
                                         zu finden.
 
 # ------------------------------------------------------------------------------

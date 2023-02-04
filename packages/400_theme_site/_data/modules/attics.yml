@@ -89,8 +89,9 @@ settings:
         opacity:                        0.5
 
         filters:
-          grayscale:                    0.5
-          sepia:                        0.5
+          grayscale:                    1
+          contrast:                     0.8
+          brightness:                   0.8
 
     # --------------------------------------------------------------------------
     # layouts raw
@@ -104,6 +105,11 @@ settings:
         padding_top:                    400
         padding_bottom:                 50
         opacity:                        0.5
+
+        filters:
+          grayscale:                    1
+          contrast:                     0.8
+          brightness:                   0.8
 
     # --------------------------------------------------------------------------
     #  layouts collection|app|raw

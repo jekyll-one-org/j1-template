@@ -12,7 +12,7 @@ categories:                             [ Previewer ]
 tags:                                   [ Bootstrap, CSS, Theme ]
 
 image:
-  path:                                 /assets/images/pages/roundtrip/themes-1920x1280-bw.jpg
+  path:                                 /assets/images/modules/attics/themes-1920x1280-bw.jpg
   width:                                1920
   height:                               1280
   alt:                                  Photo by Clem Onojeghuo on Unsplash
@@ -29,8 +29,9 @@ resource_options:
   - toccer:
       collapseDepth:                    3
   - attic:
+      padding_top:                      600  
       slides:
-        - url:                          /assets/images/pages/roundtrip/themes-1920x1280-bw.jpg
+        - url:                          /assets/images/modules/attics/themes-1920x1280-bw.jpg
           alt:                          Photo by Clem Onojeghuo on Unsplash
           badge:
             type:                       unsplash
@@ -267,7 +268,7 @@ colors. Then, customize with `.bg-*` utilities.
           </li>
           <li class="nav-item dropdown">
             <a class="link-no-decoration nav-link dropdown-toggle" data-bs-toggle="dropdown"
-              ref="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+              href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
             <div class="dropdown-menu">
               <a class="link-no-decoration dropdown-item" href="#">Action</a>
               <a class="link-no-decoration dropdown-item" href="#">Another action</a>
@@ -1375,7 +1376,7 @@ link:{url-bs-docs--components-forms}[Bootstrap Docs {char-middot} Forms, {browse
 <div class="doc-example mb-3">
   <form>
     <div class="form-group">
-      <input type="email" class="form-control" id="exampleInputEmail1" autocomplete="none">
+      <input type="email" class="form-control" id="exampleInputEmail1">
       <label for="exampleInputEmail1" class="bmd-label-floating">Email address</label>
       <!-- span class="form-clear d-none"><i class="mdi mdi-2x mdi-format-clear"></i></span-->
       <span class="bmd-help">We'll never share your email with anyone else.</span>
@@ -2556,7 +2557,6 @@ it (the backdrop).
   class="modal fade"
   tabindex="-1"
   role="dialog"
-  aria-labelledby="exampleStaticModalLabel" aria-hidden="true"
   data-keyboard="false"
   data-backdrop="static">
   <div class="modal-dialog">
@@ -2985,7 +2985,7 @@ endif::[]
 
   theme_slogans.UnoLight  = 'A touch of light';
   theme_slogans.UnoDark   = 'A night mode style';
-  theme_slogans.Bootstrap = 'Bootstrap V5 default theme';
+  theme_slogans.Bootstrap = 'Bootstrap V5 default themeref="#"
   theme_slogans.Agency    = 'A popular Bootstrap V5 theme from StartBootstrap';
 
   theme_slogans.Cerulean  = 'A calm blue sky';

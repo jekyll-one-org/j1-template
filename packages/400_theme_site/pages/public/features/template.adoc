@@ -44,10 +44,7 @@ resource_options:
       collapseDepth:                    3
 
   - attic:
-      padding_top:                      400
-      padding_bottom:                   50
-      opacity:                          0.5
-      alignY:                           top
+      padding_top:                      600
       slides:
         - url:                          /assets/images/modules/attics/christina-1920x1280.jpg
           alt:                          Photo by Christina on Unsplash

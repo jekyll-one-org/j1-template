@@ -1,7 +1,7 @@
 /*
 // -----------------------------------------------------------------------------
-// ~/100_theme_css/scss/theme_uno_dark/extentions.scss
-// CSS styles for additional elements that extents the theme
+// ~/scss/theme_uno/extensions/_dropcap.scss
+// Provides general styles for the J1 Dropcaps
 //
 // Product/Info:
 // https://jekyll.one
@@ -13,18 +13,13 @@
 // -----------------------------------------------------------------------------
 */
 
-// Extentions (list)
+// Content
 // -----------------------------------------------------------------------------
-
-// Posts
-// Timeline
-
-@import "extentions/bs-doc";
-@import "extentions/drawer";
-@import "extentions/dropcap";
-@import "extentions/lanes";
-@import "extentions/plans";
-@import "extentions/posts";
-@import "extentions/switches";
-@import "extentions/tags";
-@import "extentions/timeline";
+.j1-dropcap {
+  font: 2em/0.8 "Roboto Slab", sans-serif;
+  line-height: 1.25rem;
+  color: #212121;
+  float: left;
+  padding-right: .125rem;
+  margin-right: .125rem !important;
+}

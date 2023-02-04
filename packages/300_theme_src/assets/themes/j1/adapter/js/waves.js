@@ -141,8 +141,9 @@ var logText;
       // initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (function (options) {
-
-        if ( j1.getState() === 'finished' ) {
+        var pageState   = $('#no_flicker').css("display");
+        var pageVisible = (pageState == 'block') ? true: false;
+        if ( j1.getState() === 'finished' && pageVisible ) {
           themes_allowed = waveOptions.themes.toString();
           theme_enabled  = waveOptions.themes.indexOf(theme) > -1 ? true : false;
 
@@ -155,17 +156,25 @@ var logText;
 
           if (themes_allowed === 'all' ) {
             logger.info('\n' + 'activate waves for theme: ' + 'all' );
-            $('.wave').show();
+            setTimeout (function() {
+              $('.wave').show();
+              logger.info('\n' + 'initializing module finished');
+            }, 200);
           } else if (theme_enabled) {
             logger.info('\n' + 'activate waves for theme: ' + theme );
-            $('.wave').show();
+            setTimeout (function() {
+              $('.wave').show();
+              logger.info('\n' + 'initializing module finished');
+            }, 200);
           } else {
             logger.warn('\n' + 'no valid theme/s found');
             logger.warn('\n' + 'deactivate (hide) waves');
-            $('.wave').hide();
+            setTimeout (function() {
+              $('.wave').hide();
+              logger.info('\n' + 'initializing module finished');
+            }, 200);
           }
 
-          logger.info('\n' + 'initializing module finished');
           clearInterval(dependencies_met_page_ready);
         }
       }, 25);

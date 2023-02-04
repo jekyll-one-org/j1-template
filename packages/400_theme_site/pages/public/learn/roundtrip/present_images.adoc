@@ -33,6 +33,7 @@ resources:                              [
                                         ]
 resource_options:
   - attic:
+      padding_top:                      600
       slides:
         - url:                          /assets/images/modules/attics/1920x1280/quino-al-2.jpg
           alt:                          Photo by Quino Al Angel on Unsplash

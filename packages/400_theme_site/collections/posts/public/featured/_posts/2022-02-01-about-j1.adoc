@@ -21,8 +21,6 @@ resources:                              [ animate ]
 resource_options:
   - attic:
       padding_top:                      600
-      padding_bottom:                   50
-      opacity:                          0.8
       slides:
         - url:                          /assets/images/modules/attics/1920x1280/j1-theme-mockup-1.jpg
           alt:                          Photo by Alex Holyoake on Unsplash

@@ -326,7 +326,7 @@ lanes:
       id:                               home_intro_panel
       region:                           body-main
       type:                             async
-      properties:                       elevated-z3
+      properties:                       elevated-z1
 
   # ----------------------------------------------------------------------------
   # PARALLAX banner

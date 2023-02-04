@@ -14,11 +14,12 @@
 */
 
 // jadams, 2020-11-15: set text color for (all) anchors (Google optimisation)
+// jadams, 2023-02-02: set text color for (all) anchors to THEME defaults
 a {
-  color: $gray-700 !important;
-  font-weight: 500 !important;
-  text-decoration: none;
-  border-bottom: 1px dotted;
+//  color: $gray-700 !important;
+    font-weight: 500 !important;
+    text-decoration: none;
+    border-bottom: 1px dotted;
 }
 
 // jadams, 2022-06-09: undecorated anchor link

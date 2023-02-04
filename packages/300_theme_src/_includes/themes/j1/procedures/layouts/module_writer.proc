@@ -126,7 +126,7 @@ NO need to load this again
 
         <!-- [INFO   ] [j1.layout.module_writer.proc          ] [ place J1 adapter for resource: {{resource_settings.id}} ] -->
         <script>
-          $(document).ready(function() {
+          $(function() {
             var logger = log4javascript.getLogger("j1.module_loader");
             var log_text = '{{resource_settings.comment|strip}} is being initialized';
             logger.info(log_text);

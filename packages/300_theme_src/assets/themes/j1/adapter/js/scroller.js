@@ -126,11 +126,19 @@ var lastPageInfo;
       logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
-      _this.generate_scrollers();
+      // initialize scrollers if page is available and visible
+      var dependencies_met_page_ready = setInterval (function (options) {
+        var pageState   = $('#no_flicker').css("display");
+        var pageVisible = (pageState == 'block') ? true: false;
+        if ( j1.getState() === 'finished' && pageVisible ) {
+          _this.generate_scrollers();
+          _this.setState('finished');
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'module initialized successfully');
+          clearInterval(dependencies_met_page_ready);
+        }
+      }, 25);
 
-      _this.setState('finished');
-      logger.debug('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module initialized successfully');
     }, // END init
 
     // -------------------------------------------------------------------------

@@ -26,6 +26,7 @@ regenerate:                             false
 resources:                              [ animate, clipboard, lightbox, iconify, rouge ]
 resource_options:
   - attic:
+      padding_top:                      600
       slides:
         - url:                          /assets/images/pages/roundtrip/puzzle-1920x1280-bw.jpg
           alt:                          puzzle-1920x1280-bw

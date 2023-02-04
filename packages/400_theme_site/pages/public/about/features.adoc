@@ -33,8 +33,6 @@ resources:                              [ animate, lightbox ]
 resource_options:
   - attic:
       padding_top:                      600
-      padding_bottom:                   50
-      opacity:                          0.5
       slides:
         - url:                          /assets/images/modules/attics/1920x1280/j1-theme-mockup-1.jpg
           alt:                          J1 Themes Mockup

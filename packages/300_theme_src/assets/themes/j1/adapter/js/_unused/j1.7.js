@@ -176,8 +176,8 @@ var j1 = (function (options) {
   var pageHeight;
   var pageBaseHeight;                                                              // height of a page dynamic detected in ResizeObserver
 
-  var growthRatio                   = 0.00;
-  var previousGrowthRatio           = 0.00;
+  var growthRatio                   = 100;
+  var previousGrowthRatio           = 100;
   var previousPageHeight;
   var documentHeight;
 
@@ -393,12 +393,7 @@ var j1 = (function (options) {
         }
       }
 
-      var dependencies_met_page_loaded = setInterval (function () {
-        if (j1.getState() == 'finished') {
-          j1.registerEvents(logger);
-        }
-        clearInterval(dependencies_met_page_loaded);
-      }, 25); // END dependencies_met_page_loaded
+      j1.registerEvents(logger);
 
       // detect middleware (mode 'app') and update user session cookie
       // -----------------------------------------------------------------------
@@ -557,14 +552,15 @@ var j1 = (function (options) {
       // -----------------------------------------------------------------------
       // additional BS helpers from j1.core
       // -----------------------------------------------------------------------
-
       j1.core.bsFormClearButton();
 
       // finalize and display current page
       j1.displayPage();
 
       // scroll to an anchor in current page if given in URL
-      j1.scrollToAnchor();
+      setTimeout (function() {
+        j1.scrollToAnchor();
+      }, timeoutScrollDynamicPages);
     },
 
     // -------------------------------------------------------------------------
@@ -930,6 +926,146 @@ var j1 = (function (options) {
             }
           }
 
+          // TODO: check why some init function are to be called DELAYED
+          // show the page delayed
+          setTimeout (function() {
+
+            // display the page loaded is managed by module "themer"
+            // $('#no_flicker').css('display', 'block');
+
+            // enable (body) animation on page load if enabled
+            if (bodyAnimation) {
+              var body_animation_fadein  = '<style id="body_animation">';
+              body_animation_fadein     += '  body {';
+              body_animation_fadein     += '    animation: fadeInAnimation ease ' + bodyAnimationDuration + 's;';
+              body_animation_fadein     += '    animation-iteration-count: 1;';
+              body_animation_fadein     += '    animation-fill-mode: forwards;';
+              body_animation_fadein     += '  }';
+              body_animation_fadein     += '  @keyframes fadeInAnimation {';
+              body_animation_fadein     += '    0% {';
+              body_animation_fadein     += '    	opacity: 0;';
+              body_animation_fadein     += '    }';
+              body_animation_fadein     += '    100% {';
+              body_animation_fadein     += '    	opacity: 1;';
+              body_animation_fadein     += '    }';
+              body_animation_fadein     += '  }';
+              body_animation_fadein     += '</style>';
+
+              $('head').append(body_animation_fadein);
+            }
+
+            // jadams, 2021-12-06: Check if access to cookies for this site failed.
+            // Possibly, a third-party domain or an attacker tries to access it.
+            if (checkCookies) {
+              var j1Cookies = j1.findCookie('j1');
+              if (!j1.existsCookie(cookie_names.user_state)) {
+                logger.error('\n' + 'Access to cookie failed or cookie not found: ' + cookie_names.user_state);
+                logger.info('\n' + 'j1 cookies found:' + j1Cookies.length);
+                // redirect to error page: blocked content
+                window.location.href = '/446.html';
+              } else {
+                logger.info('\n' + 'j1 cookies found:' + j1Cookies.length);
+              }
+            }
+
+            // manage Dropcaps if translation is enabled|disabled
+            // -----------------------------------------------------------------
+            if (user_translate.translationEnabled) {
+             logger.info('\n' + 'translation enabled: ' + user_translate.translationEnabled);
+             logger.debug('\n' + 'skipped processing of dropcaps');
+            } else {
+             // initialize dropcaps
+             logger.info('\n' + 'post processing: createDropCap');
+             j1.core.createDropCap();
+            }
+
+            // TODO: should MOVED to Cookiebar ???
+            // show|hide cookie icon
+            if (j1.existsCookie(cookie_names.user_consent)) {
+              // Display cookie icon
+              logText = '\n' + 'show cookie icon';
+              logger.info(logText);
+              $('#quickLinksCookieButton').css('display', 'block');
+            } else {
+              logText = '\n' + 'hide cookie icon';
+              logger.info(logText);
+              // Display cookie icon
+              $('#quickLinksCookieButton').css('display', 'none');
+            }
+
+            // TODO: should MOVED to ControlCenter Adapter ???
+            // -----------------------------------------------------------------
+            // show cc icon (currently NOT supported)
+            // $('#quickLinksControlCenterButton').css('display', 'block');
+
+            if (j1.authEnabled()) {
+              if (user_session.authenticated === 'true') {
+                // set signout
+                logger.info('\n' + 'show signout icon');
+                $('#navLinkSignInOut').attr('data-bs-target','#modalOmniSignOut');
+                $('#iconSignInOut').removeClass('mdi-login').addClass('mdi-logout');
+              } else {
+                // set signin
+                logger.info('\n' + 'show signin icon');
+                $('#navLinkSignInOut').attr('data-bs-target','#modalOmniSignIn');
+                $('#iconSignInOut').removeClass('mdi-logout').addClass('mdi-login');
+              }
+              logger.info('\n' + 'authentication detected as: ' + user_session.authenticated);
+              $('#quickLinksSignInOutButton').css('display', 'block');
+            }
+
+            // TODO: should MOVED to Themer ???
+            // jadams, 2021-07-25: hide|show themes menu on cookie consent
+            // (analysis|personalization) settings. BootSwatch is a 3rd party
+            // is using e.g GA. Because NO control is possible on 3rd parties,
+            // for GDPR compliance, themes feature may disabled on
+            // privacy settings
+            if (!user_consent.personalization)  {
+              logger.debug('\n' + 'disable themes feature because of privacy settings');
+              logger.debug('\n' + 'personalization not allowed, privacy settings for personalization: ' + user_consent.personalization);
+              $("#themes_menu").hide();
+            } else {
+              $("#themes_menu").show();
+            }
+
+            // detect if a loaded page has been chenged
+            if (user_session.previous_page !== user_session.current_page) {
+              logText = '\n' + 'page change detected';
+              logger.info(logText);
+              logText = '\n' + 'previous page: ' + user_session.previous_page;
+              logger.info(logText);
+              logText = '\n' + 'current page: ' + user_session.current_page;
+              logger.info(logText);
+            }
+
+            // update sidebar for changed theme data
+            logger.info('\n' + 'update sidebar');
+            user_state        = j1.readCookie(cookie_names.user_state);
+            current_user_data = j1.mergeData(user_session, user_state);
+            j1.core.navigator.updateSidebar(current_user_data);
+
+            // set|log status
+            state = 'finished';
+            j1.setState(state);
+            logText = '\n' + 'state: ' + state;
+            logger.info(logText);
+            logText = '\n' + 'page finalized successfully';
+            logger.info(logText);
+          }, flickerTimeout);
+        });
+      } else {
+        // web mode
+        // ---------------------------------------------------------------------
+
+        // TODO: check why some init function are to be called DELAYED
+        // show the page delayed
+        setTimeout (function() {
+          logger.info('\n' + 'state: finished');
+          logger.info('\n' + 'page initialization: finished');
+
+          // display the page loaded is managed by module "themer"
+          // $('#no_flicker').css('display', 'block');
+
           // enable (body) animation on page load if enabled
           if (bodyAnimation) {
             var body_animation_fadein  = '<style id="body_animation">';
@@ -947,11 +1083,9 @@ var j1 = (function (options) {
             body_animation_fadein     += '    }';
             body_animation_fadein     += '  }';
             body_animation_fadein     += '</style>';
+
             $('head').append(body_animation_fadein);
           }
-
-          // display the page loaded is managed by module "themer"
-          // $('#no_flicker').css('display', 'block');
 
           // jadams, 2021-12-06: Check if access to cookies for this site failed.
           // Possibly, a third-party domain or an attacker tries to access it.
@@ -963,20 +1097,63 @@ var j1 = (function (options) {
               // redirect to error page: blocked content
               window.location.href = '/446.html';
             } else {
+
               logger.info('\n' + 'j1 cookies found:' + j1Cookies.length);
             }
           }
 
+          // jadams, 2021-11-19: test code for 'tapTarget' of 'materializeCss'
+          // See:
+          //  https://stackoverflow.com/questions/49422111/opening-tap-target-in-materialize-css-for-2-seconds
+          // -------------------------------------------------------------------
+          // $('#features').tapTarget();
+          // $('#features').click(function(e) {
+          //   logger.info('\n' + 'call default action');
+          //   $('#features').tapTarget('open');
+          // });
+
+          // jadams, 2021-11-19: additional code for accordions (collapsible)
+          // used e.g for the 'SERVICE Panel'
+          // -------------------------------------------------------------------
+          // Add minus icon for collapse element which is open by default
+          $(".collapse.show").each(function(){
+              $(this).prev(".card-header").addClass("highlight");
+          });
+
+          // Highlight open collapsed element
+          $(".card-header .btn").click(function(){
+              $(".card-header").not($(this).parents()).removeClass("highlight");
+              $(this).parents(".card-header").toggleClass("highlight");
+          });
+
           // manage Dropcaps if translation is enabled|disabled
-          // -----------------------------------------------------------------
+          // -------------------------------------------------------------------
           if (user_translate.translationEnabled) {
-           logger.info('\n' + 'translation enabled: ' + user_translate.translationEnabled);
-           logger.debug('\n' + 'skipped processing of dropcaps');
+            logger.info('\n' + 'translation enabled: ' + user_translate.translationEnabled);
+            logger.debug('\n' + 'skipped processing of dropcaps');
           } else {
-           // initialize dropcaps
-           logger.info('\n' + 'post processing: createDropCap');
-           j1.core.createDropCap();
+            // initialize dropcaps
+            logger.info('\n' + 'post processing: createDropCap');
+            j1.core.createDropCap();
           }
+
+          logger.info('\n' + 'mode detected: web');
+          logger.info('\n' + 'hide signin icon');
+          $('#quickLinksSignInOutButton').css('display', 'none');
+
+          user_session.current_page = current_url.pathname;
+          logger.debug('\n' + 'write to cookie : ' + cookie_names.user_session);
+          cookie_written = j1.writeCookie({
+              name:     cookie_names.user_session,
+              data:     user_session,
+              secure:   secure,
+              expires:  0
+          });
+
+          // TODO: should MOVED to ControlCenter Adapter ???
+          // -----------------------------------------------------------------
+          // show cc icon (currently NOT supported)
+          // $('#quickLinksControlCenterButton').css('display', 'block');
 
           // TODO: should MOVED to Cookiebar ???
           // show|hide cookie icon
@@ -990,27 +1167,6 @@ var j1 = (function (options) {
             logger.info(logText);
             // Display cookie icon
             $('#quickLinksCookieButton').css('display', 'none');
-          }
-
-          // TODO: should MOVED to ControlCenter Adapter ???
-          // -----------------------------------------------------------------
-          // show cc icon (currently NOT supported)
-          // $('#quickLinksControlCenterButton').css('display', 'block');
-
-          if (j1.authEnabled()) {
-            if (user_session.authenticated === 'true') {
-              // set signout
-              logger.info('\n' + 'show signout icon');
-              $('#navLinkSignInOut').attr('data-bs-target','#modalOmniSignOut');
-              $('#iconSignInOut').removeClass('mdi-login').addClass('mdi-logout');
-            } else {
-              // set signin
-              logger.info('\n' + 'show signin icon');
-              $('#navLinkSignInOut').attr('data-bs-target','#modalOmniSignIn');
-              $('#iconSignInOut').removeClass('mdi-logout').addClass('mdi-login');
-            }
-            logger.info('\n' + 'authentication detected as: ' + user_session.authenticated);
-            $('#quickLinksSignInOutButton').css('display', 'block');
           }
 
           // TODO: should MOVED to Themer ???
@@ -1040,6 +1196,29 @@ var j1 = (function (options) {
           // update sidebar for changed theme data
           logger.info('\n' + 'update sidebar');
           user_state        = j1.readCookie(cookie_names.user_state);
+
+          if (template_version_changed) {
+            if (typeof template_previous_version == 'undefined') template_previous_version = 'na';
+            logger.warn('\n' + 'template version detected as changed');
+            logger.warn('\n' + 'template version previous|current: ' +  template_previous_version + '|' + template_version);
+            // Update the user_state cookie
+            // TODO:  replace theme_version by template_version as they
+            //        are alwas the same
+            //        disable: user_state.theme_version = template_version;
+            //
+            user_state.template_version = template_version;
+            cookie_written = j1.writeCookie({
+            	name:     cookie_names.user_state,
+            	data:     user_state,
+            	secure:   secure,
+            	expires:  365
+            });
+            logger.warn('\n' + 'template version updated to: ' +  template_version);
+          } else {
+            logger.info('\n' + 'template version detected: ' +  user_state.template_version);
+          }
+
+          // set current user data
           current_user_data = j1.mergeData(user_session, user_state);
           j1.core.navigator.updateSidebar(current_user_data);
 
@@ -1050,182 +1229,7 @@ var j1 = (function (options) {
           logger.info(logText);
           logText = '\n' + 'page finalized successfully';
           logger.info(logText);
-
-        });
-      } else {
-        // web mode
-        // ---------------------------------------------------------------------
-
-        logger.info('\n' + 'state: finished');
-        logger.info('\n' + 'page initialization: finished');
-
-        // enable (body) animation on page load if enabled
-        if (bodyAnimation) {
-          var body_animation_fadein  = '<style id="body_animation">';
-          body_animation_fadein     += '  body {';
-          body_animation_fadein     += '    animation: fadeInAnimation ease ' + bodyAnimationDuration + 's;';
-          body_animation_fadein     += '    animation-iteration-count: 1;';
-          body_animation_fadein     += '    animation-fill-mode: forwards;';
-          body_animation_fadein     += '  }';
-          body_animation_fadein     += '  @keyframes fadeInAnimation {';
-          body_animation_fadein     += '    0% {';
-          body_animation_fadein     += '    	opacity: 0;';
-          body_animation_fadein     += '    }';
-          body_animation_fadein     += '    100% {';
-          body_animation_fadein     += '    	opacity: 1;';
-          body_animation_fadein     += '    }';
-          body_animation_fadein     += '  }';
-          body_animation_fadein     += '</style>';
-
-          $('head').append(body_animation_fadein);
-        }
-
-        // display the page loaded is managed by module "themer"
-        // $('#no_flicker').css('display', 'block');
-
-        // jadams, 2021-12-06: Check if access to cookies for this site failed.
-        // Possibly, a third-party domain or an attacker tries to access it.
-        if (checkCookies) {
-          var j1Cookies = j1.findCookie('j1');
-          if (!j1.existsCookie(cookie_names.user_state)) {
-            logger.error('\n' + 'Access to cookie failed or cookie not found: ' + cookie_names.user_state);
-            logger.info('\n' + 'j1 cookies found:' + j1Cookies.length);
-            // redirect to error page: blocked content
-            window.location.href = '/446.html';
-          } else {
-
-            logger.info('\n' + 'j1 cookies found:' + j1Cookies.length);
-          }
-        }
-
-        // jadams, 2021-11-19: test code for 'tapTarget' of 'materializeCss'
-        // See:
-        //  https://stackoverflow.com/questions/49422111/opening-tap-target-in-materialize-css-for-2-seconds
-        // -------------------------------------------------------------------
-        // $('#features').tapTarget();
-        // $('#features').click(function(e) {
-        //   logger.info('\n' + 'call default action');
-        //   $('#features').tapTarget('open');
-        // });
-
-        // jadams, 2021-11-19: additional code for accordions (collapsible)
-        // used e.g for the 'SERVICE Panel'
-        // -------------------------------------------------------------------
-        // Add minus icon for collapse element which is open by default
-        $(".collapse.show").each(function(){
-            $(this).prev(".card-header").addClass("highlight");
-        });
-
-        // Highlight open collapsed element
-        $(".card-header .btn").click(function(){
-            $(".card-header").not($(this).parents()).removeClass("highlight");
-            $(this).parents(".card-header").toggleClass("highlight");
-        });
-
-        // manage Dropcaps if translation is enabled|disabled
-        // -------------------------------------------------------------------
-        if (user_translate.translationEnabled) {
-          logger.info('\n' + 'translation enabled: ' + user_translate.translationEnabled);
-          logger.debug('\n' + 'skipped processing of dropcaps');
-        } else {
-          // initialize dropcaps
-          logger.info('\n' + 'post processing: createDropCap');
-          j1.core.createDropCap();
-        }
-
-        logger.info('\n' + 'mode detected: web');
-        logger.info('\n' + 'hide signin icon');
-        $('#quickLinksSignInOutButton').css('display', 'none');
-
-        user_session.current_page = current_url.pathname;
-        logger.debug('\n' + 'write to cookie : ' + cookie_names.user_session);
-        cookie_written = j1.writeCookie({
-            name:     cookie_names.user_session,
-            data:     user_session,
-            secure:   secure,
-            expires:  0
-        });
-
-        // TODO: should MOVED to ControlCenter Adapter ???
-        // -----------------------------------------------------------------
-        // show cc icon (currently NOT supported)
-        // $('#quickLinksControlCenterButton').css('display', 'block');
-
-        // TODO: should MOVED to Cookiebar ???
-        // show|hide cookie icon
-        if (j1.existsCookie(cookie_names.user_consent)) {
-          // Display cookie icon
-          logText = '\n' + 'show cookie icon';
-          logger.info(logText);
-          $('#quickLinksCookieButton').css('display', 'block');
-        } else {
-          logText = '\n' + 'hide cookie icon';
-          logger.info(logText);
-          // Display cookie icon
-          $('#quickLinksCookieButton').css('display', 'none');
-        }
-
-        // TODO: should MOVED to Themer ???
-        // jadams, 2021-07-25: hide|show themes menu on cookie consent
-        // (analysis|personalization) settings. BootSwatch is a 3rd party
-        // is using e.g GA. Because NO control is possible on 3rd parties,
-        // for GDPR compliance, themes feature may disabled on
-        // privacy settings
-        if (!user_consent.personalization)  {
-          logger.debug('\n' + 'disable themes feature because of privacy settings');
-          logger.debug('\n' + 'personalization not allowed, privacy settings for personalization: ' + user_consent.personalization);
-          $("#themes_menu").hide();
-        } else {
-          $("#themes_menu").show();
-        }
-
-        // detect if a loaded page has been chenged
-        if (user_session.previous_page !== user_session.current_page) {
-          logText = '\n' + 'page change detected';
-          logger.info(logText);
-          logText = '\n' + 'previous page: ' + user_session.previous_page;
-          logger.info(logText);
-          logText = '\n' + 'current page: ' + user_session.current_page;
-          logger.info(logText);
-        }
-
-        // update sidebar for changed theme data
-        logger.info('\n' + 'update sidebar');
-        user_state        = j1.readCookie(cookie_names.user_state);
-
-        if (template_version_changed) {
-          if (typeof template_previous_version == 'undefined') template_previous_version = 'na';
-          logger.warn('\n' + 'template version detected as changed');
-          logger.warn('\n' + 'template version previous|current: ' +  template_previous_version + '|' + template_version);
-          // Update the user_state cookie
-          // TODO:  replace theme_version by template_version as they
-          //        are alwas the same
-          //        disable: user_state.theme_version = template_version;
-          //
-          user_state.template_version = template_version;
-          cookie_written = j1.writeCookie({
-          	name:     cookie_names.user_state,
-          	data:     user_state,
-          	secure:   secure,
-          	expires:  365
-          });
-          logger.warn('\n' + 'template version updated to: ' +  template_version);
-        } else {
-          logger.info('\n' + 'template version detected: ' +  user_state.template_version);
-        }
-
-        // set current user data
-        current_user_data = j1.mergeData(user_session, user_state);
-        j1.core.navigator.updateSidebar(current_user_data);
-
-        // set|log status
-        state = 'finished';
-        j1.setState(state);
-        logText = '\n' + 'state: ' + state;
-        logger.info(logText);
-        logText = '\n' + 'page finalized successfully';
-        logger.info(logText);
-
+        }, flickerTimeout);
       }
     },
 
@@ -2363,14 +2367,11 @@ var j1 = (function (options) {
       var logger = log4javascript.getLogger('j1.adapter.scrollToAnchor');
 
       var dependencies_met_page_displayed = setInterval (function () {
-        var pageState = $('#no_flicker').css("display");
-        if (j1.getState() == 'finished' && pageState == 'block' && j1['pageMonitor'].pageType !== 'unknown') {
+        if (j1.getState() == 'finished' && j1['pageMonitor'].currentGrowthRatio >= 100) {
           if (j1['pageMonitor'].pageType == 'static') {
-            setTimeout (function() {
-              logger.info('\n' + 'Scroller: Scroll static page')
-              const scrollOffset = j1.getScrollOffset();
-              j1.scrollTo(scrollOffset);
-            }, 1000);
+            logger.info('\n' + 'Scroller: Scroll static page')
+            const scrollOffset = j1.getScrollOffset();
+            j1.scrollTo(scrollOffset);
             clearInterval(dependencies_met_page_displayed);
           } else if (j1['pageMonitor'].pageType == 'dynamic') {
             setTimeout (function() {
@@ -2438,64 +2439,75 @@ var j1 = (function (options) {
 
         j1['pageMonitor'].eventNo += 1;
 
-        // Skip first Observer events as data returne found  unusable
-        if (j1['pageMonitor'].eventNo == 2) {
-          // Set initial data from second event
-          j1['pageMonitor'].pageBaseHeight      = document.body.scrollHeight;
-          j1['pageMonitor'].currentPageHeight   = document.body.scrollHeight;
-          j1['pageMonitor'].previousPageHeight  = document.body.scrollHeight;
-          j1['pageMonitor'].previousGrowthRatio = 0.00;
-
-          pageBaseHeight      = document.body.scrollHeight;
+        if (!j1['pageMonitor'].pageBaseHeight) {
+          // set INITAIL page properties
+          //
+          pageBaseHeight      = documentHeight;
           previousGrowthRatio = 100;
           growthRatio         = 0.00;
+
+          j1['pageMonitor'].pageBaseHeight      = documentHeight;
+          j1['pageMonitor'].currentPageHeight   = documentHeight;
+          j1['pageMonitor'].previousGrowthRatio = previousGrowthRatio;
+          j1['pageMonitor'].growthRatio         = growthRatio;
         } else {
-          // collect 'pageHeight' from 'entries'
-          // NOTE: each entry is an instance of ResizeObserverEntry
-          for (const entry of entries) {
-            pageBaseHeight = j1['pageMonitor'].pageBaseHeight;
-            if (pageBaseHeight > 0) {
-              // get the page height (rounded to int) from observer
-              //
-              pageHeight = Math.round(entry.contentRect.height);
-              j1['pageMonitor'].currentPageHeight = pageHeight;
+          // set PREVIOUS page properties taken from GLOBAL vars
+          //
+          j1['pageMonitor'].previousPageHeight  = pageHeight;
+          j1['pageMonitor'].previousGrowthRatio = previousGrowthRatio;
+        }
 
-              // total growth ratio
-              pageGrowthRatio = pageHeight / pageBaseHeight * 100;
-              pageGrowthRatio = pageGrowthRatio.toFixed(2);
+        // collect 'pageHeight' from 'entries'
+        // NOTE: each entry is an instance of ResizeObserverEntry
+        for (const entry of entries) {
+          pageBaseHeight = j1['pageMonitor'].pageBaseHeight;
 
-              j1['pageMonitor'].currentGrowthRatio = pageGrowthRatio;
+          // get the page height (rounded to int) from observer
+          //
+          pageHeight = Math.round(entry.contentRect.height);
+          j1['pageMonitor'].currentPageHeight = pageHeight;
 
-              growthRatio = ((pageGrowthRatio / previousGrowthRatio) - 1) * 100;
-              growthRatio = growthRatio.toFixed(2);
-              j1['pageMonitor'].growthRatio = growthRatio;
+          // total growth ratio
+          pageGrowthRatio = pageHeight / pageBaseHeight * 100;
+          pageGrowthRatio = pageGrowthRatio.toFixed(2);
+
+          j1['pageMonitor'].currentGrowthRatio = pageGrowthRatio;
+
+          growthRatio = ((pageGrowthRatio / previousGrowthRatio) - 1) * 100;
+          growthRatio = growthRatio.toFixed(2);
+          j1['pageMonitor'].growthRatio = growthRatio;
+        }
+
+        // detect the page 'type'
+        //
+        if (growthRatio > 0) {
+          // scroll the page to top if content has grown
+          //
+          if (scrollDynamicPagesTopOnChange) {
+            // limit scrolling to reduce the flicker (for chromium browsers)
+            if (j1['pageMonitor'].eventNo > 3) {
+              window.scrollTo(0, 0);
             }
           }
-          // detect the page 'type'
-          if (growthRatio >= 10) {
-            j1['pageMonitor'].pageType = 'dynamic';
+          // set the page type to 'dynamic' if content has grown
+          //
+          j1['pageMonitor'].pageType = 'dynamic';
 
-//          logger.debug('\n' + 'Observer: previousPageHeight|currentPageHeight (px): ', j1['pageMonitor'].previousPageHeight + '|' + pageHeight);
-//          logger.debug('\n' + 'Observer: growthRatio relative|absolute (%): ', growthRatio + '|' + pageGrowthRatio);
+          logger.debug('\n' + 'Observer: previousPageHeight|currentPageHeight (px): ', j1['pageMonitor'].previousPageHeight + '|' + pageHeight);
+          logger.debug('\n' + 'Observer: growthRatio relative|absolute (%): ', growthRatio + '|' + pageGrowthRatio);
 
-            logger.debug('\n' + 'Observer: page growthRatio (%): ', j1['pageMonitor'].growthRatio);
-            logger.debug('\n' + 'Observer: page detected as: dynamic');
-
-          } else {
-            // set the page type to 'static' if low growth detected
-            //
-            logger.debug('\n' + 'Observer: page growthRatio (%): ', j1['pageMonitor'].growthRatio);
-            j1['pageMonitor'].pageType = 'static';
-            logger.debug('\n' + 'Observer: page detected as: static');
-          }
-        } // END Observer data evaluation
-      }); // END Observer
+        } else {
+          // set the page type to 'static' if no growth detected
+          //
+          j1['pageMonitor'].pageType = 'static';
+        }
+      });
 
       // monitor the page growth if visible
-      var dependencies_met_page_finished = setInterval (function () {
+      var dependencies_met_page_displayed = setInterval (function () {
         if (j1.getState() == 'finished') {
           observer.observe(document.querySelector('body'));                     //    observer.observe(document.querySelector('#content'));
-          clearInterval(dependencies_met_page_finished);
+          clearInterval(dependencies_met_page_displayed);
         }
       }, 25);
 

@@ -34,6 +34,7 @@ regenerate:                             false
 resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
   - attic:
+      padding_top:                      600
       slides:
         - url:                          /assets/images/modules/attics/gift-from-hand-1920x1280.jpg
           alt:                          Plan Details

@@ -374,6 +374,80 @@ resources:
         init_function:                  [ j1.init ]
 
   # ----------------------------------------------------------------------------
+  # Bootstrap V5 JS components
+  #
+  # See: https://getbootstrap.com/docs/5.0/getting-started/introduction/
+  #
+  - name:                               Bootstrap JS
+    resource:
+      enabled:                          true
+
+      id:                               bs5
+      comment:                          Module Bootstrap JS
+      region:                           head
+      layout:                           [ all ]
+      required:                         always
+      preload:                          false
+      script_load:                      async
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            []
+        files:                          []
+        js:                             [ modules/bootstrap/js/bootstrap ]
+        init_function:                  []
+
+  # ----------------------------------------------------------------------------
+  # Bootstrap Material Design (BMD), responsive UI framework for Bootstrap
+  #
+  # See: https://github.com/mdbootstrap/bootstrap-material-design/tree/4.1.3
+  #
+  - name:                               BMD
+    resource:
+      enabled:                          true
+
+      id:                               bmd
+      comment:                          Module BMD
+      region:                           head
+      layout:                           [ all ]
+      required:                         always
+      preload:                          false                                   # property currently unused
+      script_load:
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            []
+        files:                          [ adapter/js/bmd.js ]
+        js:                             [ modules/bmd/js/bmd ]
+        init_function:                  [ j1.adapter.bmd.init ]
+
+  # ----------------------------------------------------------------------------
+  # Materialize, responsive JS (Vanilla) UI framework (currently NOT used)
+  #
+  # See: https://materializecss.com/
+  #
+  - name:                               Materialize
+    resource:
+      enabled:                          false
+
+      id:                               materialze
+      comment:                          Module Materialize
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand
+      preload:                          false                                   # property currently unused
+      script_load:
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            []
+        files:                          [
+                                          modules/materialize/js/fam.js
+                                        ]
+        js:                             [ modules/materialize/js/cash ]
+        init_function:                  []
+
+  # ----------------------------------------------------------------------------
   # Google Analytics OptIn, a browser library to opt-in in Google Analytics
   #
   # See: https://github.com/luciomartinez/gtag-opt-in
@@ -395,34 +469,6 @@ resources:
         css:                            []
         files:                          []
         js:                             [ modules/gtag-opt-in/js/gtag-opt-in ]
-        init_function:                  []
-
-  # ----------------------------------------------------------------------------
-  # jQueryUI, curated set of user interface interactions, effects, widgets,
-  # and themes built on top of jQuery
-  #
-  # See: https://jqueryui.com/
-  #
-  - name:                               jQueryUI
-    resource:
-      enabled:                          true
-
-      id:                               jquery-ui
-      comment:                          Module jQueryUI
-      region:                           head
-      layout:                           [ all ]
-      required:                         ondemand
-      preload:                          false
-      script_load:                      defer
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            [
-                                          modules/jquery/css/jquery-ui/jquery-ui,
-                                          modules/jquery/css/jquery-ui/jquery-ui.theme
-                                        ]
-        files:                          []
-        js:                             [ modules/jquery/js/jquery-ui ]
         init_function:                  []
 
   # ----------------------------------------------------------------------------
@@ -628,6 +674,91 @@ resources:
         init_function:                  [ j1.adapter.cookieConsent.init ]
 
   # ----------------------------------------------------------------------------
+  # lunr search engine, JS API used for the QuickSearch feature
+  # of J1 Theme based on the Lunr JS API
+  #
+  # See: https://lunrjs.com/
+  #
+  - name:                               Lunr
+    resource:
+      enabled:                          true
+
+      id:                               lunr
+      comment:                          Module Lunr
+      region:                           head
+      layout:                           [ all ]
+      required:                         always
+      preload:                          false
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            [ modules/lunr/css/j1 ]
+        files:                          [ adapter/js/lunr.js ]
+        js:                             [
+                                          modules/lunr/js/lunr,
+                                          modules/lunr/js/mustache,
+                                          modules/lunr/js/dateformat,
+                                          modules/lunr/js/uri,
+                                          modules/lunr/js/j1
+                                        ]
+        init_function:                  [ j1.adapter.lunr.init ]
+
+  # ----------------------------------------------------------------------------
+  # Floating Action Buttons, JS API to create FABs
+  #
+  - name:                               J1 Floating Action Buttons
+    resource:
+      enabled:                          true
+
+      id:                               fab
+      comment:                          Module J1 Floating Action Buttons
+      region:                           head
+      layout:                           [ all ]
+      required:                         always
+      preload:                          false
+      script_load:
+      dependencies:                     false
+      pass_init_data:                   true
+      data:
+        css:                            []                                      # styles moved to Template CSS
+        files:                          [
+                                          modules/fab/js/cash.js,               # adapted|old (1.3.5) version from Materialize
+                                          modules/fab/js/fab.js,                # modified version for J1 (former: button.js)
+                                          adapter/js/fab.js
+                                        ]
+        js:                             []
+        init_function:                  [ j1.adapter.fab.init ]
+
+  # ----------------------------------------------------------------------------
+  # jQueryUI, curated set of user interface interactions, effects, widgets,
+  # and themes built on top of jQuery
+  #
+  # See: https://jqueryui.com/
+  #
+  - name:                               jQueryUI
+    resource:
+      enabled:                          true
+
+      id:                               jquery-ui
+      comment:                          Module jQueryUI
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand
+      preload:                          false
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            [
+                                          modules/jquery/css/jquery-ui/jquery-ui,
+                                          modules/jquery/css/jquery-ui/jquery-ui.theme
+                                        ]
+        files:                          []
+        js:                             [ modules/jquery/js/jquery-ui ]
+        init_function:                  []
+
+  # ----------------------------------------------------------------------------
   # jqMouseWheel, cross-browser mouse wheel support (currently NOT used)
   #
   # See: https://github.com/jquery/jquery-mousewheel
@@ -642,7 +773,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       preload:                          false                                   # property currently unused
-      script_load:
+      script_load:                      async
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -666,87 +797,13 @@ resources:
       layout:                           [ all ]
       required:                         always
       preload:                          false                                   # property currently unused
-      script_load:
+      script_load:                      async
       dependencies:                     false
       pass_init_data:                   false
       data:
         css:                            []
         files:                          []
         js:                             [ modules/themeSwitcher/js/switcher ]
-        init_function:                  []
-
-  # ----------------------------------------------------------------------------
-  # Bootstrap V5 JS components
-  #
-  # See: https://getbootstrap.com/docs/5.0/getting-started/introduction/
-  #
-  - name:                               Bootstrap JS
-    resource:
-      enabled:                          true
-
-      id:                               bs5
-      comment:                          Module Bootstrap JS
-      region:                           head
-      layout:                           [ all ]
-      required:                         always
-      preload:                          false
-      script_load:
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            []
-        files:                          []
-        js:                             [ modules/bootstrap/js/bootstrap ]
-        init_function:                  []
-
-  # ----------------------------------------------------------------------------
-  # Bootstrap Material Design (BMD), responsive UI framework for Bootstrap
-  #
-  # See: https://github.com/mdbootstrap/bootstrap-material-design/tree/4.1.3
-  #
-  - name:                               BMD
-    resource:
-      enabled:                          true
-
-      id:                               bmd
-      comment:                          Module BMD
-      region:                           head
-      layout:                           [ all ]
-      required:                         always
-      preload:                          false                                   # property currently unused
-      script_load:
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            []
-        files:                          [ adapter/js/bmd.js ]
-        js:                             [ modules/bmd/js/bmd ]
-        init_function:                  [ j1.adapter.bmd.init ]
-
-  # ----------------------------------------------------------------------------
-  # Materialize, responsive JS (Vanilla) UI framework (currently NOT used)
-  #
-  # See: https://materializecss.com/
-  #
-  - name:                               Materialize
-    resource:
-      enabled:                          false
-
-      id:                               materialze
-      comment:                          Module Materialize
-      region:                           head
-      layout:                           [ all ]
-      required:                         ondemand
-      preload:                          false                                   # property currently unused
-      script_load:
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            []
-        files:                          [
-                                          modules/materialize/js/fam.js
-                                        ]
-        js:                             [ modules/materialize/js/cash ]
         init_function:                  []
 
   # ----------------------------------------------------------------------------
@@ -765,7 +822,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       preload:                          false                                   # property currently unused
-      script_load:
+      script_load:                      async
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -819,63 +876,6 @@ resources:
         files:                          []
         js:                             []
         init_function:                  []
-
-  # ----------------------------------------------------------------------------
-  # Floating Action Buttons, JS API to create FABs
-  #
-  - name:                               J1 Floating Action Buttons
-    resource:
-      enabled:                          true
-
-      id:                               fab
-      comment:                          Module J1 Floating Action Buttons
-      region:                           head
-      layout:                           [ all ]
-      required:                         always
-      preload:                          false
-      script_load:
-      dependencies:                     false
-      pass_init_data:                   true
-      data:
-        css:                            []                                      # styles moved to Template CSS
-        files:                          [
-                                          modules/fab/js/cash.js,               # adapted|old (1.3.5) version from Materialize
-                                          modules/fab/js/fab.js,                # modified version for J1 (former: button.js)
-                                          adapter/js/fab.js
-                                        ]
-        js:                             []
-        init_function:                  [ j1.adapter.fab.init ]
-
-  # ----------------------------------------------------------------------------
-  # lunr search engine, JS API used for the QuickSearch feature
-  # of J1 Theme based on the Lunr JS API
-  #
-  # See: https://lunrjs.com/
-  #
-  - name:                               Lunr
-    resource:
-      enabled:                          true
-
-      id:                               lunr
-      comment:                          Module Lunr
-      region:                           head
-      layout:                           [ all ]
-      required:                         always
-      preload:                          false
-      script_load:                      defer
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            [ modules/lunr/css/j1 ]
-        files:                          [ adapter/js/lunr.js ]
-        js:                             [
-                                          modules/lunr/js/lunr,
-                                          modules/lunr/js/mustache,
-                                          modules/lunr/js/dateformat,
-                                          modules/lunr/js/uri,
-                                          modules/lunr/js/j1
-                                        ]
-        init_function:                  [ j1.adapter.lunr.init ]
 
   # ----------------------------------------------------------------------------
   # rtextResizer (currently NOT used)
@@ -939,7 +939,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       preload:                          false
-      script_load:
+      script_load:                      async
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -963,7 +963,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       preload:                          false
-      script_load:
+      script_load:                      async
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -1109,7 +1109,7 @@ resources:
       region:                           head
       required:                         ondemand
       preload:                          false
-      script_load:
+      script_load:                      async
       dependencies:                     false
       pass_init_data:                   true
       data:
@@ -1359,9 +1359,9 @@ resources:
       layout:                           [ all ]
       required:                         ondemand
       preload:                          false
-      script_load:
+      script_load:                      defer
       dependencies:                     false
-      pass_init_data:                   true
+      pass_init_data:                   false
       data:
         css:                            [
                                           modules/masterslider/css/masterslider,
@@ -1379,7 +1379,7 @@ resources:
   #
   - name:                               Master Slider Professional
     resource:
-      enabled:                          true
+      enabled:                          false
 
       id:                               mastersliderpro
       comment:                          Module Master Slider Pro
@@ -1387,9 +1387,9 @@ resources:
       layout:                           [ all ]
       required:                         ondemand
       preload:                          false
-      script_load:
+      script_load:                      defer
       dependencies:                     false
-      pass_init_data:                   true
+      pass_init_data:                   false
       data:
         css:                            [
                                           modules/masterslider_pro/css/masterslider,
@@ -1413,7 +1413,6 @@ resources:
                                         ]
         js:                             [ modules/masterslider_pro/js/masterslider ]
         init_function:                  [ j1.adapter.masterslider.init ]
-
 
   # ----------------------------------------------------------------------------
   # Justified Gallery, JS implementation for full-featured image galleries
@@ -1689,7 +1688,7 @@ resources:
       layout:                           [ all ]
       required:                         ondemand
       preload:                          false
-      script_load:
+      script_load:                      async
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -1714,7 +1713,7 @@ resources:
       layout:                           [ all ]
       required:                         ondemand
       preload:                          false
-      script_load:
+      script_load:                      async
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -1736,7 +1735,7 @@ resources:
       layout:                           [ all ]
       required:                         ondemand
       preload:                          false
-      script_load:
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -1762,7 +1761,7 @@ resources:
       layout:                           [ all ]
       required:                         ondemand
       preload:                          false
-      script_load:
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -1928,7 +1927,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       preload:                          false
-      script_load:
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -1950,7 +1949,7 @@ resources:
       layout:                           [ all ]
       required:                         ondemand
       preload:                          false
-      script_load:
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
       data:

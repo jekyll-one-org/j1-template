@@ -1,6 +1,6 @@
 ---
 title:                                  Simple Document Skeleton
-tagline:                                Create Typical Articles 
+tagline:                                Create Typical Articles
 date:                                   2022-01-01 00:00:00
 description: >
                                         Simple documents are used quite often. If the number
@@ -37,9 +37,7 @@ resource_options:
   - toccer:
       collapseDepth:                    3
   - attic:
-      padding_top:                      400
-      padding_bottom:                   50
-      opacity:                          0.5
+      padding_top:                      600
       slides:
         - url:                          /assets/images/modules/attics/sigmund-1920x1280.jpg
           alt:                          Photo by Sigmund on Unsplash

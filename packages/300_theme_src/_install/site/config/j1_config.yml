@@ -166,7 +166,7 @@ cookies:
 #   NOTE: Used for developent mode ONLY
 #   NOTE: See ~/packages/300_theme_src/_layouts/default.html
 # ------------------------------------------------------------------------------
-flicker_timeout:                        150
+flicker_timeout:                        250
 
 # ------------------------------------------------------------------------------
 # HTML PrettyPrint
@@ -423,7 +423,7 @@ body:
 #
 # ------------------------------------------------------------------------------
 #
-timeoutScrollDynamicPages:              2000
+timeoutScrollDynamicPages:              2000                                    # 2000
 scrollDynamicPagesTopOnChange:          false
 
 # ------------------------------------------------------------------------------

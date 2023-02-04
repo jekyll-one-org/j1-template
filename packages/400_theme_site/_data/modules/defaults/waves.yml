@@ -26,7 +26,7 @@ description:
 defaults:
   enabled:                              false
 
-  themes:                               [ all ]
+  themes:                               [ UnoLight ]
 
 # ------------------------------------------------------------------------------
 # END config

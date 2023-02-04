@@ -137,16 +137,16 @@ j1.adapter.masterslider = (function (j1, window) {
       _this.setState('started');
       console.debug('module state: ' + _this.getState());
 
-      // load HTML portion for all sliders configured
+      // load HTML portion for sliders configured
       console.debug('loading HTML portion for all sliders configured');
       _this.loadSliderHTML(sliderOptions, sliders);
       // create an 'MasterSlider' instance for all sliders configured
       console.debug('create an \'MasterSlider\' instance for all MS sliders configured');
       _this.createSliderInstances(sliders, msSliderManager);
 
-      // initialize all sliders configured
+      // initialize sliders configured if HTML portion (of sliders) loaded
       var dependencies_met_data_loaded = setInterval(function() {
-        if (_this.getState() == 'data_loaded' && j1.getState() == 'finished') {
+        if (_this.getState() == 'data_loaded') {
           logger.info('\n' + 'ms module version detected: ' + moduleVersion);
           logger.info('\n' + 'module is being initialized');
           console.debug('MS slider module is being initialized');
@@ -155,19 +155,20 @@ j1.adapter.masterslider = (function (j1, window) {
         } // END dependencies_met_j1_finished
       }, 25);
 
-      // final state messages
+      // load the slider manager to DISPLAY instances in page (if visible)
       var dependencies_met_module_finished = setInterval(function() {
-        if (_this.getState() == 'sliders_initialized' && j1.getState() == 'finished') {
-            _this.setState('finished');
-
-            // Currently NOT used (experimental)
-            // _this.registerEvents(j1.masterslider.instances);
-
-            if (sliderManager) document.body.appendChild(msSliderManager);
-
-            logger.info('\n' + 'initializing module finished');
-            console.debug('initializing MS slider module finished');
-            clearInterval(dependencies_met_module_finished);
+        var pageState   = $('#no_flicker').css("display");
+        var pageVisible = (pageState == 'block') ? true: false;
+        if (_this.getState() == 'sliders_initialized' && pageVisible ) {
+            // TODO: Check why a timeout is required to load the SliderManager
+            setTimeout (function() {
+              if (sliderManager) document.body.appendChild(msSliderManager);
+              // final state|messages
+              _this.setState('finished');
+              logger.info('\n' + 'initializing module finished');
+              console.debug('initializing MS slider module finished');
+              clearInterval(dependencies_met_module_finished);
+            }, 200);
         } // END dependencies_met_j1_finished
       }, 25);
 

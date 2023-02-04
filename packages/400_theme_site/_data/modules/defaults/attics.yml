@@ -43,48 +43,55 @@ defaults:
   notranslate:                          true
   pauseOnHover:                         false
 
-  icon_family:                          MDI
+  icon_family:                          MDI                                     # MDI | FontAweSome
   icon_color:                           "#9E9E9E"                               # md-gray
   icon_size:                            default
 
   raised_level:                         0
   r_text:                               enabled
   text_emphasis:                        stronger
+
   padding_top:                          200
   padding_bottom:                       50
   margin_bottom:                        50
 
   title_size:                           3em
   title_color:                          rgba(255, 255, 255, 0.8)                # rgba_lighten_800
-  title_animate:                        animate__bounceInDown                   # fadeInDown fadeInLeft
-  title_animate_duration:               animate__slower
-# title_animate_delay:                  animate__delay-2s
-  title_align:                          left
+  title_align:                          left                                    # left | center | right (BS text alignment text-xxx)
+  title_animate:                        animate__bounceInDown                   # all options allowed from animate
+  title_animate_duration:               animate__slower                         # all options allowed from animate
+# title_animate_delay:                  animate__delay-2s                       # all options allowed from animate
+
 
   tagline_size:                         1.5em
-  tagline_color:                        rgba(255, 255, 255, 0.8)                # rgba_lighten_800
+  tagline_color:                        rgba(255, 255, 255, 0.8)
+  tagline_align:                        left
   tagline_animate:                      animate__fadeInRight
   tagline_animate_duration:             animate__slower
 # tagline_animate_delay:                animate__delay-2s
-  tagline_align:                        left
+
 
   # gradient effect (all image color typas)
   #
-# background_color_1:                   "#000"                                  # black
-# background_color_2:                   "#78909C"                               # md-bluegray-400
+  # background_color_1:                   "#000"                                # black
+  # background_color_2:                   "#78909C"                             # md-bluegray-400
 
   # duo-color effect, base color 'blue' (requires gray-scaled images)
   #
   background_color_1:                   "#0D47A1"                               # md-blue-900
   background_color_2:                   "#0D47A1"                               # md-blue-900
 
+  # currently NOT supported
+  #
   action_enabled:                       false
   action_url:                           "#void"
   action_button:                        btn-default
   action_icon:                          download                                # cloud-action
-  action_icon_family:                   MDI                                     # FontAweSome
+  action_icon_family:                   MDI                                     # MDI | FontAweSome
   action_text:                          Download Now
 
+  # currently NOT supported
+  #
   logo_enabled:                         false
   logo_url:                             /assets/images/modules/icons/j1/j1-512x512.png
   logo_alt:                             Jekyll-One-Template
@@ -176,7 +183,7 @@ defaults:
 
 
   # ----------------------------------------------------------------------------
-  # Attic properties (Layout specific settings)
+  # Attic layout properties (Layout specific)
   #
   attics:
 
