@@ -151,24 +151,6 @@ cookies:
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
-#   flicker_timeout
-#   ----------------------------------------------------------------------------
-#   Number of milliseconds (ms) the current page is hidden (display: none)
-#   to prevent "DOM flicker" (aka "FOUC": Flash of unstyled content)
-#
-#   TODO: To be checked if needed
-#
-#   prettify
-#   ----------------------------------------------------------------------------
-#   If set to true, all generated HTML pages (by Liquid|Jekyll) get
-#   formatted "pretty" by layout "default".
-#
-#   NOTE: Used for developent mode ONLY
-#   NOTE: See ~/packages/300_theme_src/_layouts/default.html
-# ------------------------------------------------------------------------------
-flicker_timeout:                        250
-
-# ------------------------------------------------------------------------------
 # HTML PrettyPrint
 #
 prettify:                               true
@@ -182,7 +164,6 @@ prettify:                               true
 #
 # ------------------------------------------------------------------------------
 pages:
-
 
 # ==============================================================================
 # POST global configuration settings
@@ -366,24 +347,6 @@ preconnect:
 fa:
   color:                                default
 
-# ------------------------------------------------------------------------------
-# Body style settings
-#
-body:
-  scrollbar:                            false
-  background-color:                     md_gray_50
-  font-color:                           md_gray_900
-  font-size:                            1em
-  font-weight:                          400
-  line-height:                          1.5
-
-  # ----------------------------------------------------------------------------
-  # animation on page load
-  # See: https://www.geeksforgeeks.org/how-to-create-fade-in-effect-on-page-load-using-css/
-  #
-  animation:                            true
-  animation_type:                       fadeIn                                  # currently, only fadeIn supported
-  animation_duration:                   3
 
 # ------------------------------------------------------------------------------
 # PAGE settings
@@ -391,6 +354,30 @@ body:
 
 # ------------------------------------------------------------------------------
 # SmoothScroll settings
+#
+# ------------------------------------------------------------------------------
+#   flicker_timeout
+#   ----------------------------------------------------------------------------
+#   Number of milliseconds (ms) the current page is hidden (display: none)
+#   to prevent "DOM flicker" (aka "FOUC": Flash of unstyled content)
+#
+#   TODO: To be checked if needed
+#
+#   prettify
+#   ----------------------------------------------------------------------------
+#   If set to true, all generated HTML pages (by Liquid|Jekyll) get
+#   formatted "pretty" by layout "default".
+#
+#   NOTE: Used for developent mode ONLY
+#   NOTE: See ~/packages/300_theme_src/_layouts/default.html
+# ------------------------------------------------------------------------------
+#
+#   page_on_load_timeout
+#   ----------------------------------------------------------------------------
+#   Delays the scrolling of ??????????.
+#
+#   values:                             (unsigned) int
+#   default:                            1000
 #
 #   timeoutScrollDynamicPages
 #   ----------------------------------------------------------------------------
@@ -421,8 +408,29 @@ body:
 #
 # ------------------------------------------------------------------------------
 #
+# flicker_timeout:                      250                                     # NOT used anymore
+page_on_load_timeout:                   1000                                    # some modules needs a timeout to be loaded correctly (e.g wave, )
 timeoutScrollDynamicPages:              2000                                    # 2000
 scrollDynamicPagesTopOnChange:          false
+
+# ------------------------------------------------------------------------------
+# Body style settings
+#
+body:
+  scrollbar:                            false
+  background-color:                     md_gray_50
+  font-color:                           md_gray_900
+  font-size:                            1em
+  font-weight:                          400
+  line-height:                          1.5
+
+  # ----------------------------------------------------------------------------
+  # animation on page load
+  # See: https://www.geeksforgeeks.org/how-to-create-fade-in-effect-on-page-load-using-css/
+  #
+  animation:                            true
+  animation_type:                       fadeIn                                  # currently, only fadeIn supported
+  animation_duration:                   3
 
 # ------------------------------------------------------------------------------
 # END config
