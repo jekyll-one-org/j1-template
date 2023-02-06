@@ -101,21 +101,19 @@ settings:
               width:                    12
               type:                     text
               position:                 left                                    # left | center
-              title:                    Jekyll One
-              tagline:                  <b>powerful modern static websites</b>
+              title:                    J1
+              tagline:                  <b>modern static websites</b>
               translate_description:    notranslate                             # translate|notranslate
               description_properties:   mt-3 mb-3
               description: >
                                         <p class="dropcap">
-                                          The J1 Starter Theme is a full-featured template for Jekyll to
+                                          The Starter Theme is a full-featured template for Jekyll to
                                           create modern dynamic websites. The Starter Theme gives web
                                           developers and hobbyists a rich toolset to build great sites
                                           and easy-to-use project management to simplify the build and
                                           deployment processes.
-                                        </p>
-                                        <p>
-                                          Jekyll One meets Jekyll and Bootstrap and makes a lot of friends.
-                                          The template system combines the best free software for the Web.
+                                          J1 meets Jekyll and Bootstrap and makes a lot of friends.
+                                          The template combines the best free software for the Web.
                                           JekyllOne is open source, and the modules packed are also free
                                           to use. No license issues for private or professional purposes.
                                         </p>
@@ -151,7 +149,7 @@ settings:
                     icon:               rocket-launch
                     icon_color:
                     icon_size:          3x
-                    href:               "https://jekyll.one/pages/public/learn/rocketstart/"
+                    href:               https://jekyll.one/pages/public/learn/rocketstart/
                     target:             blank
 
                 - name:                 Download
@@ -166,7 +164,7 @@ settings:
                     icon:               briefcase-download-outline
                     icon_color:
                     icon_size:          3x
-                    href:               "https://rubygems.org/gems/j1-template"
+                    href:               https://rubygems.org/gems/j1-template
                     target:             blank
 
   # ----------------------------------------------------------------------------

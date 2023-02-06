@@ -106,6 +106,7 @@ the color scheme, fonts, sizes, or the appearance of more complex elements
 like forms or tables. Additionally, a theme may add additional components
 but in the *sense* of Bootstrap's framework rules and philosophy.
 
+[role="mb-4"]
 It is expected that many people will change the template for their needs. To
 create unique websites. Fundamental to do this is are CSS styles
 defined by Bootstrap.
@@ -256,12 +257,14 @@ Content Management Systems (CMS) like WordPress, Joomla, or Drupal, many
 modules are available to extend a site by, e.g., Apps like image galleries,
 video players, calendars, etc.
 
+[role="mb-4"]
 That is a bit different for static webs as they don’t have a central Management
 System as CMS does to integrate external code. There no ecosystem, no
 marketplace to get apps and modules from.
 
 gallery::jg_old_times[]
 
+[role="mt-4"]
 Luckily, it is not that hard to integrate external components into the world
 of Jekyll. One of J1 is to give people a ready-to-use toolset without the
 need to install, to integrate features that are expected as a need.

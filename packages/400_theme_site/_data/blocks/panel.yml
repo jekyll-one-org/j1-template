@@ -54,21 +54,20 @@ settings:
         properties:                     pt-5 pb-5
 
         position:                       left                                    # left | center
-        title:                          All in One
+        title:                          Theme
         tagline:                        top features
         title_translate:                notranslate                             # translate|notranslate
-        description_properties:         mt-3 mr-3 mb-3
+        description_properties:         mt-3 mr-3 mb-5
         description: >
                                         <p class="dropcap">
                                           People quite often ask if static websites make sense
                                           for anything beyond a one-page website. Some others see in
                                           static websites the stone age of the World Wide Web. What's
                                           about static websites today? What's achievable?
-                                        </p>
-                                        <p>
-                                          This board highlights top features, which make static webs
-                                          not only an option, but an attractive method to create fast,
-                                          secure, and sophisticated websites for many use cases.
+                                          This board highlights top features of the JekyllOne Template,
+                                          which make static webs not only an option, but an attractive
+                                          method to create fast, secure, and sophisticated websites for
+                                          many use cases.
                                         </p>
 
         style:                          flat
@@ -92,34 +91,6 @@ settings:
             transform:                    flip-y flip-x
 
         cards:
-
-          - name:                       Tools
-            card:
-              enabled:                  true
-              type:                     text
-              title:                    Tools
-              title_translate:          notranslate                             # translate|notranslate
-              tagline:                  J1 Theme
-              icon:                     tools
-              icon_family:              MDI
-              icon_size:                3x
-              icon_color:
-              text: >
-                                        <p class="dropcap">
-                                          Current Technology and Design. Excellent performance in running
-                                          a website. Use Jekyll One to present your content at its best.
-                                        </p>
-
-              buttons:
-                - name:                 Read More
-                  button:
-                    type:               text
-                    text:               Make your Web Site unique
-                    class:
-                    icon:
-                    icon_size:
-                    icon_color:
-                    href:               /pages/public/panels/intro_panel#current-technology
 
           - name:                       Design
             card:
@@ -149,6 +120,34 @@ settings:
                     icon_size:
                     icon_color:
                     href:               /pages/public/panels/intro_panel#responsive-design
+
+          - name:                       Tools
+            card:
+              enabled:                  true
+              type:                     text
+              title:                    Tools
+              title_translate:          notranslate                             # translate|notranslate
+              tagline:                  J1 Theme
+              icon:                     tools
+              icon_family:              MDI
+              icon_size:                3x
+              icon_color:
+              text: >
+                                        <p class="dropcap">
+                                          Current Technology and Design. Excellent performance in running
+                                          a website. Use Jekyll One to present your content at its best.
+                                        </p>
+
+              buttons:
+                - name:                 Read More
+                  button:
+                    type:               text
+                    text:               Make your Web Site unique
+                    class:
+                    icon:
+                    icon_size:
+                    icon_color:
+                    href:               /pages/public/panels/intro_panel#current-technology
 
           - name:                       Time
             card:
@@ -406,8 +405,6 @@ settings:
                                           anything beyond a one-page website. Some others see in
                                           static websites the stone age of the World Wide Web.
                                           What's about static websites today? What's achievable?
-                                        </p>
-                                        <p>
                                           This board highlights top features, which make static webs
                                           not only an option but a state-of-the-art technology to create
                                           fast, secure, and sophisticated websites for many use cases.
@@ -730,20 +727,16 @@ settings:
         properties:                     pt-5 pb-5
 
         position:                       left                                    # left | center
-        title:                          Creators Blog
+        title:                          Blog
         tagline:                        latest news
         translate_description:          notranslate                             # translate|notranslate
-        description_properties:         mt-3 mr-3 mb-3
+        description_properties:         mt-3 mr-3 mb-5
         description: >
                                         <p class="dropcap">
                                           Explore the blog and find interesting articles around Jekyll and
                                           website creation processes in general. And this blog is an excellent
                                           example of how J1 and Jekyll can be used for blogging.
                                         </p>
-                                        <p>
-                                          Have fun!
-                                        </p>
-
         wave:
           top:
             enabled:                      false

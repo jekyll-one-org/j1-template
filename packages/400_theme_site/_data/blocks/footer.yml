@@ -123,7 +123,7 @@ settings:
 
           - name:                       Comments
             legal:
-              enabled:                  true
+              enabled:                  false
 
               type:                     comments
               statement:                Comments
@@ -169,11 +169,11 @@ settings:
             type:                       about
             enabled:                    true
 
-            title:                      J1 Starter
+            title:                      Starter
             title_translation:          notranslate
             tagline:                    featured template for jekyll
             text: >
-                                        J1 Starter. This template gives web developers and hobbyists
+                                        This template gives web developers and hobbyists
                                         a clean implementation in Jekyll for starting new projects
                                         and combines the best of open source software for the Web.
                                         Jekyll One is open source and the modules packed
@@ -189,7 +189,7 @@ settings:
             type:                       news
             enabled:                    true
 
-            title:                      Starter Blog
+            title:                      Blog
             title_translation:          notranslate                             # translate|notranslate
             tagline:                    latest news
             category:                   featured
