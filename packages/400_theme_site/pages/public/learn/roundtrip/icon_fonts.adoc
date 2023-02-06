@@ -1,5 +1,5 @@
 ---
-title:                                  Icon Fonts
+title:                                  Icons
 tagline:                                Popular Icons Sets
 date:                                   2020-11-06 00:00:00
 description: >

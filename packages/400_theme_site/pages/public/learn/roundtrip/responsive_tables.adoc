@@ -1,6 +1,6 @@
 ---
-title:                                  Responsive Tables
-tagline:                                Tables Viewed Best On All Devices
+title:                                  Tables
+tagline:                                Viewed Best On All Devices
 date:                                   2020-11-09 00:00:00
 description: >
                                         The Jekyll Theme JekyllOne supports a new design for

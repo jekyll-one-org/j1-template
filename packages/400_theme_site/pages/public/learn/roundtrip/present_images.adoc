@@ -1,6 +1,6 @@
 ---
-title:                                  Present Images
-tagline:                                Manage Image Contents
+title:                                  Image
+tagline:                                Present Images
 date:                                   2020-11-03 00:00:00
 description: >
                                         J1 Theme support valuable features to manage your image-based

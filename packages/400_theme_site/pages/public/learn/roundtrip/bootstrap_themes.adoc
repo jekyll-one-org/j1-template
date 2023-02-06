@@ -1,6 +1,6 @@
 ---
-title:                                  Theme Feature
-tagline:                                Bootstrap Themes
+title:                                  Themes
+tagline:                                Bootstrap Styles
 date:                                   2020-11-10 00:00:00
 description: >
                                         J1 Starter, a Jekyll theme for multifunctional Bootstrap-based and responsive
@@ -17,7 +17,7 @@ categories:                             [ Roundtrip ]
 tags:                                   [ Bootstrap, Module, Theme ]
 
 image:
-  path:                                 /assets/images/pages/roundtrip/themes-1920x1280-bw.jpg
+  path:                                 /assets/images/modules/attics//themes-1920x1280-bw.jpg
   width:                                1920
   height:                               1280
   alt:                                  Photo by Clem Onojeghuo on Unsplash
@@ -30,7 +30,7 @@ resource_options:
   - attic:
       padding_top:                      600
       slides:
-        - url:                          /assets/images/pages/roundtrip/themes-1920x1280-bw.jpg
+        - url:                          /assets/images/modules/attics//themes-1920x1280-bw.jpg
           alt:                          Photo by Clem Onojeghuo on Unsplash
           badge:
             type:                       unsplash
@@ -60,10 +60,10 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
-Bootstrap themes for the J1 are based on the free and open-source CSS front-end
-framework of version V5. The Bootstrap themes feature enables the presentation
-of different versions of the same site using already prepared Bootstrap
-CSS templates.
+Bootstrap styles for the J1 are based on the free and open-source CSS front-end
+framework of version V5. The Bootstrap theme feature enables the presentation
+of different versions of the same site using already prepared Bootstrap CSS
+styles.
 
 link:{url-bs--home}[Bootstrap, {browser-window--new}] is an HTML, CSS and
 Javascripts Library that focuses on simplifying the development of modern web

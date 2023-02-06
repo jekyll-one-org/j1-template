@@ -1,5 +1,5 @@
 ---
-title:                                  Theme Typography
+title:                                  Typography
 tagline:                                Crucial Branding Element
 date:                                   2020-11-05 00:00:00
 description: >
@@ -27,7 +27,7 @@ regenerate:                             false
 resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
   - attic:
-      padding_top:                      600  
+      padding_top:                      600
       opacity:                          0.3
       preload:                          0
       transitionDuration:               fast

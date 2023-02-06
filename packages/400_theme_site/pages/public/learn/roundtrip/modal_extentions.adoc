@@ -1,5 +1,5 @@
 ---
-title:                                  Modal Extensions
+title:                                  Modals
 tagline:                                Improve Visitor Experience
 date:                                   2020-11-08 00:00:00
 description: >
