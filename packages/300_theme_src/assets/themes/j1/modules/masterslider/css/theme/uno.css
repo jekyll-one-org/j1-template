@@ -45,7 +45,7 @@
 }
 
 .j1-ms-info-boxed {
-  margin-top: -165px;
+  margin-top: -140px;
   font-family: "Lato";
   padding-top: 10px;
   padding-right: 90px;
@@ -58,7 +58,7 @@
 
 .j1-ms-info-title {
   text-align: center;
-  font-size: 24px;
+  font-size: 24px !important;
   font-weight: 600;
   color: ##BDBDBD;
 }
@@ -66,7 +66,7 @@
 .j1-ms-info-tagline {
   text-align: center;
   font-style: italic;
-  font-size: 18px;
+  font-size: 18px !important;
   font-weight: 400;
   color: #9E9E9E;
   margin-bottom: 1rem;
@@ -74,23 +74,23 @@
 
 .j1-ms-info-description {
   text-align: center;
-  font-size: 18px;
+  font-size: 18px !important;
   font-weight: 300;
 }
 
 .j1-ms-thumb-title {
-  font-size: 18px;
+  font-size: 18px !important;
   font-weight: 600;
 }
 
 .j1-ms-thumb-tagline {
-  font-size: 16px;
+  font-size: 16px !important;
   font-weight: 400;
   font-style: italic;
   margin-bottom: 1rem;
 }
 
 .j1-ms-thumb-description {
-  font-size: 16px;
+  font-size: 16px !important;
   font-weight: 300;
 }

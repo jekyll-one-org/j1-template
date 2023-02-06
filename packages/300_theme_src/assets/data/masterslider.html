@@ -215,7 +215,8 @@ module_version:               {{module_version | debug}}
         <h3 class="notoc j1-ms-thumb-tagline">{{slide.thumbinfo.tagline}}</h3>
         {% endif %}
         {% if slide.thumbinfo.description %}
-        <p class="j1-ms-thumb-description {{rtext}}">{{slide.thumbinfo.description}}</p>
+        <!-- p class="j1-ms-thumb-description {{rtext}}">{{slide.thumbinfo.description}}</p -->
+        <p class="j1-ms-thumb-description">{{slide.thumbinfo.description}}</p>
         {% endif %}
       </div>
       {% endif %}
@@ -309,7 +310,8 @@ module_version:               {{module_version | debug}}
           <h3 class="notoc j1-ms-info-tagline {{tagline_animated}}" style="color: {{slide.slideinfo.tagline_color}};">{{tagline}}</h3>
           {% endif %}
           {% if description %}
-          <p class="j1-ms-info-description {{rtext}} {{description_animated}}" style="color: {{slide.slideinfo.description_color}};">{{description}}</p>
+          <!-- p class="j1-ms-info-description {{rtext}} {{description_animated}}" style="color: {{slide.slideinfo.description_color}};">{{description}}</p -->
+          <p class="j1-ms-info-description {{description_animated}}" style="color: {{slide.slideinfo.description_color}};">{{description}}</p>
           {% endif %}
 
           {% if button %}

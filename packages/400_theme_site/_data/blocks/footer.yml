@@ -45,12 +45,12 @@ settings:
 
         wave:
           top:
-            enabled:                      true
-            height:                       4                                     # [1 .. 9]
-            style:                        wave-4
-            transform:                    false                                 # false or rotate|flip-x|flip-y and combinations
-            color:                        "#212121"
-            background_color:             "#f5f5f5"
+            enabled:                    true
+            height:                     4                                       # [1 .. 9]
+            style:                      wave-4
+            transform:                  false                                   # false or rotate|flip-x|flip-y and combinations
+            color:                      "#212121"
+            background_color:           "#f5f5f5"
 
         # ----------------------------------------------------------------------
         # ISSUE settings
@@ -69,25 +69,25 @@ settings:
         # ICON settings
         #
         icons:
+          github:
+            enabled:                    true
+            href:                       https://github.com/jekyll-one/j1-starter
           facebook:
             enabled:                    true
             href:                       "#void"
-#           href:                       "https://www.facebook.com/<your_profile>/"
+#           href:                       https://www.facebook.com/<your_profile>/
           twitter:
             enabled:                    true
             href:                       "#void"
-#           href:                       "https://twitter.com/<your_profile>/"
-          github:
-            enabled:                    true
-            href:                       "https://github.com/jekyll-one/j1-template-starter"
+#           href:                       https://twitter.com/<your_profile>/
           xing:
             enabled:                    true
             href:                       "#void"
-#           href:                       "https://www.xing.com/profile/<your_profile>/"
+#           href:                       https://www.xing.com/profile/<your_profile>/
           linkedin:
             enabled:                    true
             href:                       "#void"
-#           href:                       "https://www.linkedin.com/in/<your_profile>/"
+#           href:                       https://www.linkedin.com/in/<your_profile>/
 
         # ----------------------------------------------------------------------
         # LEGAL settings
@@ -173,10 +173,10 @@ settings:
             title_translation:          notranslate
             tagline:                    featured template for jekyll
             text: >
-                                        J1 Starter. This template gives web developers
-                                        and hobbyists a clean implementation in Jekyll for starting
-                                        new projects and combines the best of open source software
-                                        for the Web. Jekyll One is open source and the modules packed
+                                        J1 Starter. This template gives web developers and hobbyists
+                                        a clean implementation in Jekyll for starting new projects
+                                        and combines the best of open source software for the Web.
+                                        Jekyll One is open source and the modules packed
                                         as well.
                                         <br><br>
                                         <b>No pain for private or professional purposes.</b>
@@ -189,7 +189,7 @@ settings:
             type:                       news
             enabled:                    true
 
-            title:                      Creators Blog
+            title:                      Starter Blog
             title_translation:          notranslate                             # translate|notranslate
             tagline:                    latest news
             category:                   featured
@@ -255,7 +255,7 @@ settings:
             internet:
               enabled:                  true
               home_text:                JekyllOne
-              home_link:                'https://jekyll.one/'
+              home_link:                https://jekyll.one/
               mail_1:                   contact@jekyll.one
               mail_2:                   webmaster@jekyll.one
 
