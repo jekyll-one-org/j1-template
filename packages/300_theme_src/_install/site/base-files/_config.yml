@@ -51,13 +51,13 @@ environment:                            development
 
 # version
 # ------------------------------------------------------------------------------
-# Sets the build version of J1 Theme Gem
+# Sets the build version of the site
 #
 version:                                2023.0.11
 
-# version
+# copyright
 # ------------------------------------------------------------------------------
-# Sets the build version of J1 Theme
+# Sets the copyright info of the site
 #
 copyright:                              © 2023 J1 · All rights reserved
 
