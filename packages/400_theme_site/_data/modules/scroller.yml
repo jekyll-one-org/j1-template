@@ -65,10 +65,10 @@ settings:
 
         lastPageInfo_en: >
                                         More articles can be found with the
-                                        <a href="/pages/public/blog/navigator/" class="link-no-decoration">Blog Navigator</a>
+                                        <a href="/pages/public/blog/navigator/" class="link-no-decoration">Navigator</a>
         lastPageInfo_de: >
                                         Weitere Artikel finden Sie im
-                                        <a href="/pages/public/blog/navigator/" class="link-no-decoration">Blog Navigator</a>
+                                        <a href="/pages/public/blog/navigator/" class="link-no-decoration">Navigator</a>
 
     # --------------------------------------------------------------------------
     # Blog Navigator Preview (Timeline)
