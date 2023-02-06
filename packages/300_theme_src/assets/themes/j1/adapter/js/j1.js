@@ -169,6 +169,7 @@ var j1 = (function (options) {
 
   // defaults for dynamic pages
   var timeoutScrollDynamicPages     = '{{template_config.timeoutScrollDynamicPages}}';
+
   var scrollDynamicPagesTopOnChange = '{{template_config.scrollDynamicPagesTopOnChange}}';
   var pageGrowthRatio               = 0;                                          // ratio a dynamic page has grown in height
   var pageBaseHeigth                = 0;                                          // base height of a dynamic page (not grown)
@@ -458,7 +459,8 @@ var j1 = (function (options) {
           }, 25);
         })
         .catch(function(error) {
-          // jadams, 2018-08-31: Why a hell a setTimeout is needed ???
+          // jadams, 2018-08-31
+          // TODO:  Check why a timeout is required
           setTimeout (function() {
             var logger                  = log4javascript.getLogger('j1.init');
             user_session                = j1.readCookie(cookie_names.user_session);
@@ -833,7 +835,7 @@ var j1 = (function (options) {
 
     // -------------------------------------------------------------------------
     // displayPage
-    // show the page after timeout of {{flickerTimeout}} ms
+    // DISABLED: show the page after timeout of {{flickerTimeout}} ms
     // -------------------------------------------------------------------------
     // NOTE:
     //  jadams, 2019-08-21: for unknown reason, the user state data
@@ -843,7 +845,7 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     displayPage: function (options) {
       var logger              = log4javascript.getLogger('j1.adapter.displayPage');
-      var flickerTimeout      = {{template_config.flicker_timeout}};
+//    var flickerTimeout      = {{template_config.flicker_timeout}};
       var url                 = new liteURL(window.location.href);
       var baseUrl             = url.origin;
       var secure              = (url.protocol.includes('https')) ? true : false;
@@ -2363,29 +2365,36 @@ var j1 = (function (options) {
       var logger = log4javascript.getLogger('j1.adapter.scrollToAnchor');
 
       var dependencies_met_page_displayed = setInterval (function () {
-        var pageState = $('#no_flicker').css("display");
-        if (j1.getState() == 'finished' && pageState == 'block' && j1['pageMonitor'].pageType !== 'unknown') {
+        var pageState   = $('#no_flicker').css("display");
+        var pageVisible = (pageState == 'block') ? true: false;
+        if (j1.getState() == 'finished' && j1['pageMonitor'].pageType !== 'unknown' && pageVisible) {
+
+          // TODO: Check why a timeout is required to run the smmoth scroller (j1.scrollTo)
           if (j1['pageMonitor'].pageType == 'static') {
             setTimeout (function() {
               logger.info('\n' + 'Scroller: Scroll static page')
               const scrollOffset = j1.getScrollOffset();
               j1.scrollTo(scrollOffset);
-            }, 1000);
+            }, {{template_config.page_on_load_timeout}} );
             clearInterval(dependencies_met_page_displayed);
           } else if (j1['pageMonitor'].pageType == 'dynamic') {
             setTimeout (function() {
               const scrollOffset = j1.getScrollOffset();
               j1.scrollTo(scrollOffset);
               logger.info('\n' + 'Scroller: Scroll dynamic page on timeout')
-            }, timeoutScrollDynamicPages);
+//          }, timeoutScrollDynamicPages);
+          }, {{template_config.page_on_load_timeout}} );
             clearInterval(dependencies_met_page_displayed);
           } else {
             // failsave fallback
-            logger.warn('\n' + 'Scroller: Scroll page of unknown type')
-            const scrollOffset = j1.getScrollOffset();
-            j1.scrollTo(scrollOffset);
+            setTimeout (function() {
+              logger.warn('\n' + 'Scroller: Scroll page of unknown type')
+              const scrollOffset = j1.getScrollOffset();
+              j1.scrollTo(scrollOffset);
+            }, {{template_config.page_on_load_timeout}} );
             clearInterval(dependencies_met_page_displayed);
           }
+
         }
       }, 25);
     },

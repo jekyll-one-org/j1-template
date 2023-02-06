@@ -154,25 +154,26 @@ var logText;
           logger.debug('\n' + 'themes allowd: ' + themes_allowed);
           logger.debug('\n' + 'theme detected: ' + theme);
 
+          // TODO: Check why a timeout is required to enable|disable the wave elements
           if (themes_allowed === 'all' ) {
             logger.info('\n' + 'activate waves for theme: ' + 'all' );
             setTimeout (function() {
               $('.wave').show();
               logger.info('\n' + 'initializing module finished');
-            }, 200);
+            }, {{template_config.page_on_load_timeout}} );
           } else if (theme_enabled) {
             logger.info('\n' + 'activate waves for theme: ' + theme );
             setTimeout (function() {
               $('.wave').show();
               logger.info('\n' + 'initializing module finished');
-            }, 200);
+            }, {{template_config.page_on_load_timeout}} );
           } else {
             logger.warn('\n' + 'no valid theme/s found');
             logger.warn('\n' + 'deactivate (hide) waves');
             setTimeout (function() {
               $('.wave').hide();
               logger.info('\n' + 'initializing module finished');
-            }, 200);
+            }, {{template_config.page_on_load_timeout}} );
           }
 
           clearInterval(dependencies_met_page_ready);

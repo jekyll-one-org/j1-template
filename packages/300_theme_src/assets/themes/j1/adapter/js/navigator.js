@@ -418,6 +418,7 @@ j1.adapter.navigator = (function (j1, window) {
 
                 // (static) delay applying styles until added CSS data
                 // of the theme is processed by the browser
+                // TODO: Check why a timeout is required to load dynamic styles in a page
                 setTimeout (function() {
                   // set general|global theme colors
                   logger.info('\n' + 'initializing dynamic CSS styles');
@@ -425,7 +426,7 @@ j1.adapter.navigator = (function (j1, window) {
                     navDefaults, navBarOptions, navMenuOptions,
                     navQuicklinksOptions
                   );
-                }, 500);
+                }, {{template_config.page_on_load_timeout}} );
 
                 logger.info('\n' + 'init auth client');
                 _this.initAuthClient(_this.navAuthManagerConfig);
@@ -451,6 +452,7 @@ j1.adapter.navigator = (function (j1, window) {
         j1.core.navigator.manageDropdownMenu(navDefaults, navMenuOptions);
 
         // Manage sticky NAV bars
+        // TODO: Check why a timeout is required to manage sticky NAV bars on RESIZE a page
         setTimeout (function() {
           j1.core.navigator.navbarSticky();
         }, 500);
