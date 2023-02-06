@@ -65,7 +65,7 @@
 #
 - item:                                 Blog
   sublevel:
-    - title:                            Blog Navigator
+    - title:                            Navigator
       href:                             /pages/public/blog/navigator/
       icon:                             near-me
     - title:                            Categories
@@ -347,6 +347,7 @@
 #
 - item:                                 Online
   megamenu:
+
     - title:                            Sites
       icon:                             web
       column:
@@ -354,6 +355,14 @@
           href:                         https://jekyllrb.com/
           target:                       _blank
           icon:                         flask
+        - title:                        Jekyll Talk
+          href:                         https://talk.jekyllrb.com/
+          target:                       _blank
+          icon:                         flask
+        - title:                        Asciidoctor
+          href:                         https://asciidoctor.org/
+          target:                       _blank
+          icon:                         hospital
         - title:                        Ruby
           href:                         https://www.ruby-lang.org/en/
           target:                       _blank
@@ -430,8 +439,16 @@
           href:                         http://www.methods.co.nz/asciidoc/faq.html
           target:                       _blank
           icon:                         format-color-text
-        - title:                        Asciidoctor
-          href:                         http://asciidoctor.org/
+        - title:                        Asciidoctor Docs
+          href:                         https://docs.asciidoctor.org/asciidoctor/latest/
+          target:                       _blank
+          icon:                         hospital
+        - title:                        Asciidoctor QuickReference
+          href:                         https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+          target:                       _blank
+          icon:                         hospital
+        - title:                        Asciidoctor Writers Gude
+          href:                         https://asciidoctor.org/docs/asciidoc-writers-guide/
           target:                       _blank
           icon:                         hospital
 
@@ -442,6 +459,22 @@
           href:                         http://www.freeformatter.com/
           target:                       _blank
           icon:                         cached
+        - title:                        BeautifyTools
+          href:                         https://beautifytools.com/
+          target:                       _blank
+          icon:                         cached
+        - title:                        AppDevTools
+          href:                         https://www.appdevtools.com/
+          target:                       _blank
+          icon:                         cached
+        - title:                        Nu Html Checker
+          href:                         https://validator.w3.org/nu/
+          target:                       _blank
+          icon:                         language-html5
+        - title:                        Closing Tag Checker
+          href:                         https://www.aliciaramirez.com/closing-tags-checker/
+          target:                       _blank
+          icon:                         language-html5
         - title:                        Convert CSS to Sass
           href:                         http://sebastianpontow.de/css2compass/
           target:                       _blank
@@ -458,18 +491,10 @@
           href:                         http://yaml-online-parser.appspot.com/
           target:                       _blank
           icon:                         code-braces
-        - title:                        XML-YAML Converter
-          href:                         http://codebeautify.org/xml-to-yaml
-          target:                       _blank
-          icon:                         xml
         - title:                        Character Codes
           href:                         http://character-code.com/
           target:                       _blank
           icon:                         alpha-a-box-outline
-        - title:                        Wordcloud Generator
-          href:                         https://www.jasondavies.com/wordcloud/
-          target:                       _blank
-          icon:                         cloud
         - title:                        RegEx 101
           href:                         https://regex101.com/
           target:                       _blank
@@ -483,7 +508,7 @@
 # ------------------------------------------------------------------------------
 # Menu Themes
 #
-- item:                                 Themes
+- item:                                 Theme
   theme_select:
     - preview:                          enabled
       title:                            Preview
@@ -502,10 +527,10 @@
 #
 - item:                                 About
   sublevel:
-    - title:                            This site
+    - title:                            Site
       icon:                             home-variant-outline
       href:                             /pages/public/about/site/
-    - title:                            Reporting issues
+    - title:                            Issues
       icon:                             bug
       href:                             /pages/public/about/reporting_issues/
     - title:                            Features
@@ -514,12 +539,6 @@
     - title:                            Privacy
       icon:                             heart
       href:                             /pages/public/legal/en/privacy/
-    - title:                            Impress
-      icon:                             gavel
-      href:                             /pages/public/legal/en/impress/
-    - title:                            Comments
-      icon:                             comment
-      href:                             /pages/public/legal/en/comment_policy/
 
 # ------------------------------------------------------------------------------
 # END config
