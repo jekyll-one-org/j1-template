@@ -28,6 +28,7 @@ defaults:
   module_version:                       lite                                    # lite | pro
   save_slider_config:                   true
   slider_manager:                       true
+  slider_manager_load_timeout:          500                                     # depending on the browser performace, loading the slider manager is delayed
 
   icon_family:                          MDI
   icon_class:                           false                                   # false | fas | fab (Fontawsesome only)

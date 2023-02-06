@@ -160,7 +160,7 @@ j1.adapter.masterslider = (function (j1, window) {
         var pageState   = $('#no_flicker').css("display");
         var pageVisible = (pageState == 'block') ? true: false;
         if (_this.getState() == 'sliders_initialized' && pageVisible ) {
-            // TODO: Check why a timeout is required to load the SliderManager
+            // TODO: Check why a timeout is required to load the Slider Manager
             setTimeout (function() {
               if (sliderManager) document.body.appendChild(msSliderManager);
               // final state|messages
@@ -168,7 +168,7 @@ j1.adapter.masterslider = (function (j1, window) {
               logger.info('\n' + 'initializing module finished');
               console.debug('initializing MS slider module finished');
               clearInterval(dependencies_met_module_finished);
-            }, 200);
+            }, sliderOptions.slider_manager_load_timeout);
         } // END dependencies_met_j1_finished
       }, 25);
 
