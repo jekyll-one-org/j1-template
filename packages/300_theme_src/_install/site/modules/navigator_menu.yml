@@ -32,31 +32,31 @@
       icon:                             briefcase-search-outline
       dropdown:
 
-        - title:                        Present images
+        - title:                        Image
           href:                         /pages/public/learn/roundtrip/present_images/
           icon:                         image
-        - title:                        Present videos
+        - title:                        Video
           href:                         /pages/public/learn/roundtrip/present_videos/
           icon:                         video
         - title:                        Typography
           href:                         /pages/public/learn/roundtrip/typography/
           icon:                         format-text
-        - title:                        Icon fonts
+        - title:                        Icons
           href:                         /pages/public/learn/roundtrip/mdi_icon_font/
           icon:                         fan
-        - title:                        Asciidoc extensions
+        - title:                        Extensions
           href:                         /pages/public/learn/roundtrip/asciidoc_extensions/
           icon:                         format-annotation-plus
-        - title:                        BS modal extensions
+        - title:                        Modals
           href:                         /pages/public/learn/roundtrip/modals/
           icon:                         image
-        - title:                        BS table extensions
+        - title:                        Tables
           href:                         /pages/public/learn/roundtrip/responsive_tables/
           icon:                         table
-        - title:                        BS themes
+        - title:                        Themes
           href:                         /pages/public/learn/roundtrip/themes/
           icon:                         theme-light-dark
-        - title:                        QuickSearch
+        - title:                        Search
           href:                         /pages/public/learn/roundtrip/quicksearch/
           icon:                         magnify
 
