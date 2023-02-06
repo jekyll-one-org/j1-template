@@ -1,5 +1,5 @@
 ---
-title:                                  J1 Starter
+title:                                  Starter
 tagline:                                About This Site
 date:                                   2022-01-01 00:00:00
 description: >
@@ -22,14 +22,12 @@ scrollbar:                              false
 comments:                               false
 
 regenerate:                             false
-permalink:                              /pages/public/about/site/
+permalink:                              /pages/public/about/starter/
 
 resources:                              [ animate ]
 resource_options:
   - attic:
       padding_top:                      600
-      padding_bottom:                   50
-      opacity:                          0.5
       slides:
         - url:                          /assets/images/modules/attics/1920x1280/j1-theme-mockup-1.jpg
           alt:                          J1 Themes Mockup

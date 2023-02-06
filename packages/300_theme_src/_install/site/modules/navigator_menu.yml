@@ -527,9 +527,9 @@
 #
 - item:                                 About
   sublevel:
-    - title:                            Site
+    - title:                            Starter
       icon:                             home-variant-outline
-      href:                             /pages/public/about/site/
+      href:                             /pages/public/about/starter/
     - title:                            Issues
       icon:                             bug
       href:                             /pages/public/about/reporting_issues/
