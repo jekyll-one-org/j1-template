@@ -226,8 +226,8 @@ doctype:                                html
 #   default:                            false
 # ------------------------------------------------------------------------------
 #
-title:                                  J1 Starter Theme
-tagline:                                Explore What Jekyll Can Do
+title:                                  Starter
+tagline:                                Build-In Theme
 description: >
                                         Jekyll One Starter Theme. This template gives web developers
                                         and hobbyists a clean implementation in Jekyll for starting
