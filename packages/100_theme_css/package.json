@@ -68,10 +68,7 @@
     "uglify_css:animate": "postcss dist/animate.css -o dist/animate.min.css",
     "uglify_css:vendor": "postcss dist/vendor.css -o dist/vendor.min.css",
 
-    "deploy": "run-p -s deploy:*",
-    "deploy:rm_css_core": "rm -rf ../300_theme_src/assets/themes/j1/core/css",
-    "deploy:cp_css_core": "shx mkdir -p ../300_theme_src/assets/themes/j1/core/css",
-    "deploy:css_all": "shx cp -rf dist/* ../300_theme_src/assets/themes/j1/core/css"
+    "deploy": "shx cp -rf dist/* ../300_theme_src/assets/themes/j1/core/css"
   },
   "dependencies": {
     "cssnano": "^5.0.10",
