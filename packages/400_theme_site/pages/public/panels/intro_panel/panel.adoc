@@ -12,9 +12,6 @@ description: >
 categories:                             [ Info ]
 tags:                                   [ Info, Jekyll, Template ]
 
-comments:                               false
-fab_menu_id:                            page_ctrl
-
 robots:
   index:                                false
   follow:                               false
@@ -25,6 +22,8 @@ image:
   height:                               1280
   alt:                                  Photo by Alexander Andrews on Unsplash
 
+comments:                               false
+fab_menu_id:                            open_toc
 exclude_from_search:                    true
 permalink:                              /pages/public/panels/intro_panel/
 regenerate:                             false

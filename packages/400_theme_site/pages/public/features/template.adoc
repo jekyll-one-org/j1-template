@@ -15,11 +15,6 @@ keywords: >
 categories:                             [ Features ]
 tags:                                   [ Module, Extension, Integration ]
 
-sitemap:                                true
-advertising:                            false
-comments:                               false
-fab_menu_id:                            page_ctrl
-
 robots:
   index:                                true
   follow:                               true
@@ -30,6 +25,10 @@ image:
   height:                               1280
   alt:                                  Photo by Christina on Unsplash
 
+sitemap:                                true
+advertising:                            false
+fab_menu_id:                            open_toc
+comments:                               false
 permalink:                              /pages/public/features/template_features/
 regenerate:                             true
 

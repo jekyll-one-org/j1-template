@@ -23,7 +23,6 @@ image:
 fab_menu_id:                            default
 scrollbar:                              false
 comments:                               false
-
 regenerate:                             false
 permalink:                              /pages/public/about/reporting_issues/
 

@@ -25,7 +25,6 @@ image:
 fab_menu_id:                            default
 scrollbar:                              false
 comments:                               false
-
 permalink:                              /pages/public/about/features/
 regenerate:                             false
 

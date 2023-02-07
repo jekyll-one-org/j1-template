@@ -21,7 +21,6 @@ image:
   alt:                                  Photo by Alexander Redl on Unsplash
 
 fab_menu_id:                            default
-
 permalink:                              /pages/public/learn/where_to_go/
 regenerate:                             false
 
