@@ -58,7 +58,7 @@ resource_options:
 
 // Load page attributes
 // -----------------------------------------------------------------------------
-{% include {{load_attributes}} scope="none" %}
+{% include {{load_attributes}} scope="global" %}
 
 
 // Page content

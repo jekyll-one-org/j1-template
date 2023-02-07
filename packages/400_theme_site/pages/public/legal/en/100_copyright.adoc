@@ -56,7 +56,7 @@ resource_options:
 
 // Load page attributes
 // -----------------------------------------------------------------------------
-{% include {{load_attributes}} scope="none" %}
+{% include {{load_attributes}} scope="global" %}
 
 ifeval::[{legal-warning} == true]
 WARNING: This document *does not* constitute any *legal advice*. It is
