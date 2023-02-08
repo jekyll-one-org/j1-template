@@ -75,22 +75,26 @@ exclude_from_search:                    true
     class="modal fade top"
     tabindex="-1"
     role="dialog"
-    aria-labelledby="myModalLabel" aria-hidden="true"
+    aria-labelledby="searchModalLabel" aria-hidden="true"
     data-keyboard="false"
     data-backdrop="static">
 
     <div class="modal-dialog modal-frame modal-top modal-notify modal-info" role="document">
 
-      <!-- Content -->
+      <!-- Modal Content -->
       <div class="modal-content">
-        <!-- Body -->
+        <!-- Modal Body -->
         <div class="modal-body">
           <div id="navigator_nav_topsearch" class="top-search ml-4 mr-4">
             <span class="bmd-form-group">
               <div class="input-group">
-                <span class="input-group-addon"><i class="mdi mdi-magnify mdi-2x mb-2" style="color:#9E9E9E"></i></span>
+                <span class="input-group-addon">
+                  <i class="mdi mdi-magnify mdi-2x mb-2" style="color:#9E9E9E"></i>
+                </span>
                 <input id="search-query" type="text" name="q" placeholder="Your search expression" autocomplete="off" class="form-control">
-                <span id="clear-topsearch" class="form-clear form-clear-searcher d-none" style="margin-top: 0.75rem"> <i class="mdi mdi-format-clear mdi-2x" style="color:#9E9E9E"></i> </span>
+                <span id="clear-topsearch" class="form-clear form-clear-searcher d-none" style="margin-top: 0.75rem">
+                  <i class="mdi mdi-format-clear mdi-2x" style="color:#9E9E9E"></i>
+                </span>
               </div>
             </span>
             <!-- [INFO   ] [~/assets/data/top_search_modal.html                    ] [ place: results container ] -->
@@ -108,7 +112,7 @@ exclude_from_search:                    true
 
 </div>
 
-{% comment %} END Modal Google Translator dialog (en-EN)
+{% comment %} END Modal Top Search dialog
 -------------------------------------------------------------------------------- {% endcomment %}
 
 {% endcapture %}

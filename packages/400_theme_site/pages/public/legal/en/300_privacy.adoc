@@ -15,10 +15,10 @@ robots:
   follow:                               false
 
 image:
-  path:                                 /assets/images/modules/attics/1920x1280/j1-theme-mockup-1.jpg
+  path:                                 /assets/images/modules/attics/1920x1280/j1-starter-mockup-1.jpg
   width:                                1920
   height:                               1280
-  alt:                                  Photo by Markus Spiske on Unsplash
+  alt:                                  J1 Starter Mockup
 
 sitemap:                                false
 exclude_from_search:                    true
@@ -35,8 +35,8 @@ resource_options:
   - attic:
       padding_top:                      600
       slides:
-        - url:                          /assets/images/modules/attics/1920x1280/j1-theme-mockup-1.jpg
-          alt:                          J1 Themes Mockup
+        - url:                          /assets/images/modules/attics/1920x1280/j1-starter-mockup-1.jpg
+          alt:                          J1 Starter Mockup
 ---
 
 // Page Initializer

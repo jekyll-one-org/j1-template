@@ -1,5 +1,5 @@
 ---
-title:                                  J1 Starter
+title:                                  Starter
 tagline:                                Learn The Features
 date:                                   2022-12-31 00:00:00
 description: >
@@ -17,10 +17,10 @@ categories:                             [ About ]
 tags:                                   [ J1, Features ]
 
 image:
-  path:                                 /assets/images/modules/attics/1920x1280/j1-theme-mockup-1.jpg
+  path:                                 /assets/images/modules/attics/1920x1280/j1-starter-mockup-1.jpg
   width:                                1920
   height:                               1280
-  alt:                                  J1 Theme Mockup
+  alt:                                  J1 Starter Mockup
 
 fab_menu_id:                            default
 scrollbar:                              false
@@ -33,8 +33,8 @@ resource_options:
   - attic:
       padding_top:                      600
       slides:
-        - url:                          /assets/images/modules/attics/1920x1280/j1-theme-mockup-1.jpg
-          alt:                          J1 Themes Mockup
+        - url:                          /assets/images/modules/attics/1920x1280/j1-starter-mockup-1.jpg
+          alt:                          J1 Starter Mockup
 ---
 
 // Page Initializer

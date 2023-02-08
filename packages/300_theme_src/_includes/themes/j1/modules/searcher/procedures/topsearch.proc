@@ -95,9 +95,9 @@
 
       <div class="modal-dialog modal-frame modal-top modal-notify modal-info" role="document">
 
-        <!-- Content -->
+        <!-- MODAL Content -->
         <div class="modal-content">
-          <!-- Body -->
+          <!-- MODAL Body -->
           <div class="modal-body">
             <div id="navigator_nav_topsearch" class="top-search ml-4 mr-4">
               <div class="bmd-form-group">
@@ -105,7 +105,7 @@
                   <span class="input-group-addon"><i class="mdi mdi-magnify mdi-2x mb-2" style="color:#9E9E9E"></i></span>
                   <input id="search-query" type="text" name="q" placeholder="Your search expression" autocomplete="off" class="form-control">
                   <span id="clear-topsearch" class="form-clear form-clear-searcher d-none" style="margin-top: 0.75rem"> <i class="mdi mdi-format-clear mdi-2x" style="color:#9E9E9E"></i> </span>
-                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="margin-top: 24px;"></button>
                 </div>
               </div>
               <!-- [INFO   ] [~/assets/data/top_search_modal.html                    ] [ place: results container ] -->
@@ -115,7 +115,7 @@
             </div>
           </div>
         </div>
-        <!-- END Content -->
+        <!-- END MODAL Content -->
 
       </div>
     </div>
