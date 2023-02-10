@@ -47,14 +47,19 @@ exclude_from_search:                    true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign template_config           = site.data.j1_config %}
 {% assign blocks                    = site.data.blocks %}
+{% assign modules                   = site.data.modules %}
+
 {% assign panel_config_defaults     = blocks.defaults.panel %}
 {% assign panel_config_settings     = blocks.panel %}
+{% assign scroller_config_settings  = modules.scroller.settings %}
+{% assign scroller_config_scrollers = scroller_config_settings.scrollers %}
 {% assign bs_config                 = template_config.bootstrap %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign panel_config_defaults     = panel_config_defaults.defaults %}
 {% assign panel_config_settings     = panel_config_settings.settings %}
+{% assign scroller_config_settings  = panel_config_defaults.defaults %}
 {% assign bs_card_deck              = bs_config.cards.card_deck %}
 
 {% comment %} Set config options
@@ -108,6 +113,7 @@ exclude_from_search:                    true
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
+
 
 {% comment %} Main
 ================================================================================ {% endcomment %}
@@ -244,8 +250,35 @@ exclude_from_search:                    true
             <div class="{{description_properties}}">{{panel_settings.description}}</div>
             <!-- End Heading -->
 
+            {% comment %} extract scroller config (HoH)
+            -------------------------------------------------------------------- {% endcomment %}
+            {% assign scroller_config.enabled  = false %}
+            {% for scroller in scroller_config_scrollers %}
+              {% for element in scroller %}
+                {% assign elm_key   = element[0] %}
+                {% assign elm_value = element[1] %}
+
+                {% for setting in elm_value %}
+                  {% assign setting_key   = setting[0] %}
+                  {% assign setting_value = setting[1] %}
+                  {% if setting_value == panel_settings.id %}
+                    {% assign scroller_config  = elm_value %}
+                    {% break %}
+                  {% endif %}
+                {% endfor %}
+
+              {% endfor %}
+            {% endfor %}
+
             <!-- Cards -->
-            <div class="card-deck {{panel_settings.id}}" style="display: none;">
+            {% if scroller_config.enabled %}
+            <!-- Scroller ENABLED -->
+              <div class="card-deck {{panel_settings.id}}" style="display: none;">
+            {% else %}
+            <!-- Scroller DISABLED -->
+              <div class="card-deck {{panel_settings.id}}">
+            {% endif %}
+
               {% assign card_items = cards|size %}
               {% for card in cards %}
 
@@ -274,7 +307,7 @@ exclude_from_search:                    true
                 {% assign icon_size = size %}
 
                 {% comment %} extract link for card icon
-                ------------------------------------------------------------------ {% endcomment %}
+                ---------------------------------------------------------------- {% endcomment %}
                 {% for items in card_buttons %} {% for item in items %}
                   {% if item[0] == 'button' %}
                     {% for elm in item[1] %}
@@ -392,6 +425,27 @@ exclude_from_search:                    true
         {% else %}
           {% assign provider_url = 'https://deadlink.de/' %}
         {% endif %}
+
+
+        {% comment %} extract scroller config (HoH)
+        ------------------------------------------------------------------------ {% endcomment %}
+        {% assign scroller_config.enabled  = false %}
+        {% for scroller in scroller_config_scrollers %}
+          {% for element in scroller %}
+            {% assign elm_key   = element[0] %}
+            {% assign elm_value = element[1] %}
+
+            {% for setting in elm_value %}
+              {% assign setting_key   = setting[0] %}
+              {% assign setting_value = setting[1] %}
+              {% if setting_value == panel_settings.id %}
+                {% assign scroller_config  = elm_value %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+
+          {% endfor %}
+        {% endfor %}
 
         <!-- Panel {{panel_settings.id}} -->
         <div id="{{panel_settings.id}}_content">
@@ -568,6 +622,27 @@ exclude_from_search:                    true
         {% assign panel_options = panel_config_defaults.service | merge: panel_settings %}
         {% if debug %}<!-- panel_options:  {{panel_options}} -->{% endif %}
 
+
+        {% comment %} extract scroller config (HoH)
+        ------------------------------------------------------------------------ {% endcomment %}
+        {% assign scroller_config.enabled  = false %}
+        {% for scroller in scroller_config_scrollers %}
+          {% for element in scroller %}
+            {% assign elm_key   = element[0] %}
+            {% assign elm_value = element[1] %}
+
+            {% for setting in elm_value %}
+              {% assign setting_key   = setting[0] %}
+              {% assign setting_value = setting[1] %}
+              {% if setting_value == panel_settings.id %}
+                {% assign scroller_config  = elm_value %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+
+          {% endfor %}
+        {% endfor %}
+
         <!-- Panel {{panel_settings.id}} -->
         <div id="{{panel_settings.id}}_content">
 
@@ -621,96 +696,98 @@ exclude_from_search:                    true
 
             {% comment %} Set a scroller if enabled
             -------------------------------------------------------------------- {% endcomment %}
-            {% if panel_settings.scroller %}
+            <!-- Cards -->
+            {% if scroller_config.enabled %}
+            <!-- Scroller ENABLED -->
             <div class="noclass {{panel_settings.id}}" style="display: none;">
             {% else %}
+            <!-- Scroller DISABLED -->
             <div class="noclass {{panel_settings.id}}">
             {% endif %}
+              <ul id="{{panel_settings.id}}-scroll-group" class="scroll-group scroll-group-horizontal align-items-stretch flex-wrap">
+              {% for card in cards %}
 
-            <ul id="{{panel_settings.id}}-scroll-group" class="scroll-group scroll-group-horizontal align-items-stretch flex-wrap">
-            {% for card in cards %}
-
-              {% comment %} extract card properties (AoH)
-              ------------------------------------------------------------------ {% endcomment %}
-              {% for items in card %}
-                {% for item in items[1] %}
-                  {% assign key   = item[0] %}
-                  {% assign value = item[1] %}
-                  {% if key == 'enabled' %}           {% assign card_enabled          = value %}                  {% endif %}
-                  {% if key == 'id' %}                {% assign card_id               = value %}                  {% endif %}
-                  {% if key == 'href' %}              {% assign card_href             = value %}                  {% endif %}
-                  {% if key == 'icon' %}              {% assign card_icon             = value %}                  {% endif %}
-                  {% if key == 'icon_family' %}       {% assign icon_family           = value | downcase %}       {% endif %}
-                  {% if key == 'icon_size' %}         {% assign icon_size             = value %}                  {% endif %}
-                  {% if key == 'icon_color' %}        {% assign icon_color            = value %}                  {% endif %}
-                  {% if key == 'title' %}             {% assign card_title            = value | strip_newlines %} {% endif %}
-                  {% if key == 'tagline' %}           {% assign card_tagline          = value | strip_newlines %} {% endif %}
-                  {% if key == 'header_translate' %}  {% assign card_header_translate = value %}                  {% endif %}
-                  {% if key == 'text' %}              {% assign card_text             = value | strip_newlines %} {% endif %}
-                  {% if key == 'services' %}          {% assign services                      = value %}                  {% endif %}
+                {% comment %} extract card properties (AoH)
+                ---------------------------------------------------------------- {% endcomment %}
+                {% for items in card %}
+                  {% for item in items[1] %}
+                    {% assign key   = item[0] %}
+                    {% assign value = item[1] %}
+                    {% if key == 'enabled' %}           {% assign card_enabled          = value %}                  {% endif %}
+                    {% if key == 'id' %}                {% assign card_id               = value %}                  {% endif %}
+                    {% if key == 'href' %}              {% assign card_href             = value %}                  {% endif %}
+                    {% if key == 'icon' %}              {% assign card_icon             = value %}                  {% endif %}
+                    {% if key == 'icon_family' %}       {% assign icon_family           = value | downcase %}       {% endif %}
+                    {% if key == 'icon_size' %}         {% assign icon_size             = value %}                  {% endif %}
+                    {% if key == 'icon_color' %}        {% assign icon_color            = value %}                  {% endif %}
+                    {% if key == 'title' %}             {% assign card_title            = value | strip_newlines %} {% endif %}
+                    {% if key == 'tagline' %}           {% assign card_tagline          = value | strip_newlines %} {% endif %}
+                    {% if key == 'header_translate' %}  {% assign card_header_translate = value %}                  {% endif %}
+                    {% if key == 'text' %}              {% assign card_text             = value | strip_newlines %} {% endif %}
+                    {% if key == 'services' %}          {% assign services                      = value %}                  {% endif %}
+                  {% endfor %}
                 {% endfor %}
-              {% endfor %}
 
-              {% if card_enabled %}
-              <li id="{{panel_settings.id}}-scroll-item" class="scroll-group-item items-{{card_items}} p-0">
-                <article class="card raised-z0 card-same-height mb-3">
-                  <div class="card-profile mb-0">
+                {% if card_enabled %}
+                <li id="{{panel_settings.id}}-scroll-item" class="scroll-group-item items-{{card_items}} p-0">
+                  <article class="card raised-z0 card-same-height mb-3">
+                    <div class="card-profile mb-0">
 
-                    <div class="card-icon mt-4">
-                      <a href="{{card_href}}" class="link-no-decoration">
-                        <i class="card-icon-circle raised-z0 {{icon_family}} {{icon_family}}-{{card_icon}} {{icon_size}} {{icon_color}} card-icon-background-color-primary"></i>
-                      </a>
-                    </div>
-
-                    <div class="content mt-4">
-
-                      <div class="card-header">
-                        <h6 class="notoc category text-gray {{card_header_translate}}">{{card_title}}</h6>
-                        <h4 class="notoc card-title {{card_header_translate}}">{{card_tagline}}</h4>
+                      <div class="card-icon mt-4">
+                        <a href="{{card_href}}" class="link-no-decoration">
+                          <i class="card-icon-circle raised-z0 {{icon_family}} {{icon_family}}-{{card_icon}} {{icon_size}} {{icon_color}} card-icon-background-color-primary"></i>
+                        </a>
                       </div>
-                      <div class="card-body g-min-height-350 r-text-300 mt-0">{{card_text}}</div>
 
-                      <div class="card-footer">
-                        <div class="row {{panel_settings.id}}">
-                        	<div id="{{card_id}}" class="accordion">
-                            {% for list in services %}
-                        	  <div class="card">
-                          		<div class="card-header" id="headingOne">
-                          		  <h2 class="clearfix mb-0">
-                            			<a class="btn btn-link card-profile collapsed" href="#void" data-bs-toggle="collapse" data-bs-target="#{{list.service.id}}" aria-expanded="false" aria-controls="{{list.service.id}}">
-                                    <!-- i class="fa fa-chevron-circle-down"></i -->
-                                    <i class="fa fa-chevron-circle-right"></i>
-                                    {{list.service.title}}
-                                  </a>
-                          		  </h2>
-                          		</div>
-                          		<div id="{{list.service.id}}" class="collapse mb-4" aria-labelledby="{{list.service.id}}" data-bs-parent="#{{card_id}}">
-                          		  <div class="footer-body ml-5 r-text-200">
-                                  {{list.service.description}}
-                                  <hr>
-                                  <a class="card-link text-lowercase" href="{{list.service.href}}">
-                                    {{readmore_text}} · {{list.service.title}}
-                                  </a>
-                                </div>
-                          		</div>
-                        	  </div>
-                            {% endfor %}
-                        	</div>
+                      <div class="content mt-4">
+
+                        <div class="card-header">
+                          <h6 class="notoc category text-gray {{card_header_translate}}">{{card_title}}</h6>
+                          <h4 class="notoc card-title {{card_header_translate}}">{{card_tagline}}</h4>
                         </div>
+                        <div class="card-body g-min-height-350 r-text-300 mt-0">{{card_text}}</div>
+
+                        <div class="card-footer">
+                          <div class="row {{panel_settings.id}}">
+                          	<div id="{{card_id}}" class="accordion">
+                              {% for list in services %}
+                          	  <div class="card">
+                            		<div class="card-header" id="headingOne">
+                            		  <h2 class="clearfix mb-0">
+                              			<a class="btn btn-link card-profile collapsed" href="#void" data-bs-toggle="collapse" data-bs-target="#{{list.service.id}}" aria-expanded="false" aria-controls="{{list.service.id}}">
+                                      <!-- i class="fa fa-chevron-circle-down"></i -->
+                                      <i class="fa fa-chevron-circle-right"></i>
+                                      {{list.service.title}}
+                                    </a>
+                            		  </h2>
+                            		</div>
+                            		<div id="{{list.service.id}}" class="collapse mb-4" aria-labelledby="{{list.service.id}}" data-bs-parent="#{{card_id}}">
+                            		  <div class="footer-body ml-5 r-text-200">
+                                    {{list.service.description}}
+                                    <hr>
+                                    <a class="card-link text-lowercase" href="{{list.service.href}}">
+                                      {{readmore_text}} · {{list.service.title}}
+                                    </a>
+                                  </div>
+                            		</div>
+                          	  </div>
+                              {% endfor %}
+                          	</div>
+                          </div>
+                        </div>
+
                       </div>
 
                     </div>
+                  </article>
+                </li>
+                <!-- end service card -->
+                {% endif %}
 
-                  </div>
-                </article>
-              </li>
-              <!-- end service card -->
-              {% endif %}
-
-            {% endfor %}
-            {% comment %} END cards
-            -------------------------------------------------------------------- {% endcomment %}
-            </ul>
+              {% endfor %}
+              {% comment %} END cards
+              ----------------------------------------------------------------- {% endcomment %}
+              </ul>
             </div>
             <!-- End Cards -->
           </div>
@@ -737,7 +814,25 @@ exclude_from_search:                    true
 
         {% assign panel_options = panel_config_defaults.news|merge: panel_settings %}
 
-        {% if debug %}<!-- panel_options:  {{panel_options}} -->{% endif %}
+        {% comment %} extract scroller config (HoH)
+        ------------------------------------------------------------------------ {% endcomment %}
+        {% assign scroller_config.enabled  = false %}
+        {% for scroller in scroller_config_scrollers %}
+          {% for element in scroller %}
+            {% assign elm_key   = element[0] %}
+            {% assign elm_value = element[1] %}
+
+            {% for setting in elm_value %}
+              {% assign setting_key   = setting[0] %}
+              {% assign setting_value = setting[1] %}
+              {% if setting_value == panel_settings.id %}
+                {% assign scroller_config  = elm_value %}
+                {% break %}
+              {% endif %}
+            {% endfor %}
+
+          {% endfor %}
+        {% endfor %}
 
         <!-- Panel {{panel_settings.id}} -->
         <div id="{{panel_settings.id}}_content">
