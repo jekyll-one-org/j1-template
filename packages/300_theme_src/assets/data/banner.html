@@ -162,7 +162,8 @@ exclude_from_search:                    true
         {% assign banner_options = banner_config_defaults.teaser | merge: banner_settings %}
         {% if debug %}<!-- banner_options:  {{banner_options}} -->{% endif %}
 
-        <section id="{{banner_settings.id}}">
+        <!-- section id="teaser_{{banner_settings.id}}" -->
+        <div id="{{banner_settings.id}}_content">
 
           {% if wave_properties.top.enabled %}
             {{banner_wave_top}}
@@ -312,7 +313,7 @@ exclude_from_search:                    true
             {{banner_wave_bottom}}
           {% endif %}
 
-        </section> <!-- End banner {{ id }} -->
+        </div> <!-- End banner {{ id }} -->
 
         {% comment %} Reset element variables (already processed)
         ------------------------------------------------------------------------ {% endcomment %}
@@ -328,10 +329,10 @@ exclude_from_search:                    true
 
         {% comment %} Set image banner DEFAULTS
         gridifier:  {{ gridifier | debug }}
-        ------------------------------------------------------------------ {% endcomment %}
+        ------------------------------------------------------------------------ {% endcomment %}
         {% assign gridifier = image_options.gridifier %}
 
-        <div id="{{banner_settings.id}}" class="{{banner_settings.properties}}">
+        <div id="{{banner_settings.id}}_content" class="{{banner_settings.properties}}">
         {% assign banner_options = banner_config_defaults.image | merge: banner_settings %}
         {% if debug %}<!-- banner_options:  {{banner_options}} -->{% endif %}
 
@@ -383,7 +384,7 @@ exclude_from_search:                    true
         {% comment %} Collect PARALLAX banner
         ------------------------------------------------------------------------ {% endcomment %}
         {% when 'parallax' %}
-        <div id="{{banner_settings.id}}" class="parallax">
+        <div id="{{banner_settings.id}}_content" class="parallax">
         {% assign banner_options = banner_config_defaults.parallax | merge: banner_settings %}
         {% if debug %}<!-- banner_options:  {{banner_options}} -->{% endif %}
 

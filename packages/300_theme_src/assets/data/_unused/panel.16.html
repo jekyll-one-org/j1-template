@@ -214,7 +214,7 @@ exclude_from_search:                    true
         {% if debug %}<!-- panel_options:  {{panel_options}} -->{% endif %}
 
         <!-- Panel {{panel_settings.id}} -->
-        <div id="{{panel_settings.id}}_content">
+        <section id="sec_{{panel_settings.id}}">
 
           {% if wave_properties.top.enabled %}
             {{panel_wave_top}}
@@ -244,8 +244,11 @@ exclude_from_search:                    true
             <div class="{{description_properties}}">{{panel_settings.description}}</div>
             <!-- End Heading -->
 
+            {% comment %} TODO: Check if a scroller is enabled
+            -------------------------------------------------------------------- {% endcomment %}
             <!-- Cards -->
-            <div class="card-deck {{panel_settings.id}}" style="display: none;">
+            <!-- div class="card-deck {{panel_settings.id}}" style="display: none;" -->
+            <div class="card-deck {{panel_settings.id}}">
               {% assign card_items = cards|size %}
               {% for card in cards %}
 
@@ -274,7 +277,7 @@ exclude_from_search:                    true
                 {% assign icon_size = size %}
 
                 {% comment %} extract link for card icon
-                ------------------------------------------------------------------ {% endcomment %}
+                ---------------------------------------------------------------- {% endcomment %}
                 {% for items in card_buttons %} {% for item in items %}
                   {% if item[0] == 'button' %}
                     {% for elm in item[1] %}
@@ -369,7 +372,7 @@ exclude_from_search:                    true
             {{panel_wave_bottom}}
           {% endif %}
 
-        </div>
+        </section>
 
         <!-- END Panel {{panel_settings.id}} -->
 
@@ -394,7 +397,7 @@ exclude_from_search:                    true
         {% endif %}
 
         <!-- Panel {{panel_settings.id}} -->
-        <div id="{{panel_settings.id}}_content">
+        <section id="{{panel_settings.id}}">
 
           {% if wave_properties.top.enabled %}
             {{panel_wave_top}}
@@ -445,7 +448,7 @@ exclude_from_search:                    true
               {% endfor %}
             {% endfor %}
 
-            {% comment %} Set a scroller if enabled (cuurently NOT supported)
+            {% comment %} Set a scroller if enabled (currently NOT supported)
             --------------------------------------------------------------------
             {% if panel_settings.scroller %}
             <div id="{{panel_settings.id}}" style="display: none;">
@@ -549,7 +552,7 @@ exclude_from_search:                    true
             {{panel_wave_bottom}}
           {% endif %}
 
-        </div> <!-- END Panel {{panel_settings.id}} -->
+        </section> <!-- END Panel {{panel_settings.id}} -->
 
         {% comment %} Reset element variables (already processed)
         ------------------------------------------------------------------------ {% endcomment %}
@@ -569,7 +572,7 @@ exclude_from_search:                    true
         {% if debug %}<!-- panel_options:  {{panel_options}} -->{% endif %}
 
         <!-- Panel {{panel_settings.id}} -->
-        <div id="{{panel_settings.id}}_content">
+        <section id="{{panel_settings.id}}">
 
           {% if wave_properties.top.enabled %}
             {{panel_wave_top}}
@@ -720,7 +723,7 @@ exclude_from_search:                    true
             {{panel_wave_bottom}}
           {% endif %}
 
-        </div>
+        </section>
         <!-- END Panel {{panel_settings.id}} -->
 
         {% comment %} Reset element variables (already processed)
@@ -740,7 +743,7 @@ exclude_from_search:                    true
         {% if debug %}<!-- panel_options:  {{panel_options}} -->{% endif %}
 
         <!-- Panel {{panel_settings.id}} -->
-        <div id="{{panel_settings.id}}_content">
+        <section id="{{panel_settings.id}}">
 
           {% if wave_properties.top.enabled %}
             {{panel_wave_top}}
@@ -829,7 +832,10 @@ exclude_from_search:                    true
                           <h3 class="card-header bg-primary notoc notranslate">{{post.title}}</h3>
                           <!-- Body|Excerpt -->
                           <div class="card-body r-text-300 mt-0">
-                            {% comment %} {{post.excerpt|truncatewords: 50|replace:'...',' ...'|remove:'<div class="paragraph">'|remove:'</div>'|remove:'<p>'|remove:'</p>'}} {% endcomment %}
+                            {% comment %}
+                            -----------------------------------------------------
+                            {{post.excerpt|truncatewords: 50|replace:'...',' ...'|remove:'<div class="paragraph">'|remove:'</div>'|remove:'<p>'|remove:'</p>'}}
+                            {% endcomment %}
                             {{post.excerpt|truncatewords: truncate_words}}
                           </div>
                           <!-- End Body|Excerpt -->
@@ -898,7 +904,10 @@ exclude_from_search:                    true
                       <h3 class="card-header bg-primary notoc">{{post.title}}</h3>
                       <!-- Body|Excerpt -->
                       <div class="card-body r-text-300 mt-0">
-                        {% comment %} {{post.excerpt|truncatewords: 50|replace:'...',' ...'|remove:'<div class="paragraph">'|remove:'</div>'|remove:'<p>'|remove:'</p>'}} {% endcomment %}
+                        {% comment %}
+                        --------------------------------------------------------
+                        {{post.excerpt|truncatewords: 50|replace:'...',' ...'|remove:'<div class="paragraph">'|remove:'</div>'|remove:'<p>'|remove:'</p>'}}
+                        {% endcomment %}
                         {{post.excerpt|truncatewords: truncate_words}}
                       </div>
                       <!-- End Body|Excerpt -->
@@ -957,7 +966,7 @@ exclude_from_search:                    true
             {{panel_wave_bottom}}
           {% endif %}
 
-        </div>
+        </section>
         <!-- End news panel: {{panel_settings.id}} -->
 
         {% comment %} Reset element variables (already processed)
@@ -971,8 +980,8 @@ exclude_from_search:                    true
         {% comment %} Collect EXCEPTION panel: given type NOT found
         ------------------------------------------------------------------------ {% endcomment %}
         {% unless panel_settings.id == 'exception_container' %}
-        <div id="{{panel_settings.id}}_content">
-          <div class="container-fluid no-padding">
+        <div id="exception_container">
+          <div id="{{panel_settings.id}}" class="container-fluid no-padding">
             <div class="col-md-12 col-sm-12 col-xs-12 no-padding">
               <div class="box">
                 <div class="content content-danger">

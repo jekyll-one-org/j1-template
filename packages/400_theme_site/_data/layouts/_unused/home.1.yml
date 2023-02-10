@@ -210,7 +210,6 @@ lanes:
   - lane:
       enabled:                          true
       id:                               home_teaser_banner
-#     id:                               teaser
       region:                           body-main
       type:                             async
       properties:                       elevated-z0
@@ -389,7 +388,7 @@ lanes:
   #
   - lane:
       enabled:                          true
-      id:                               home_news_panel
+      id:                               news_panel                              # home_news_panel
       region:                           body-main
       type:                             async
       properties:                       elevated-z0

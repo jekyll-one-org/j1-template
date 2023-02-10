@@ -54,20 +54,24 @@ settings:
         properties:                     pt-5 pb-5
 
         position:                       left                                    # left | center
-        title:                          Theme
-        tagline:                        top features
+        title:                          Features
+        tagline:                        power of jekyll one
         title_translate:                notranslate                             # translate|notranslate
         description_properties:         mt-3 mr-3 mb-5
         description: >
                                         <p class="dropcap">
                                           People quite often ask if static websites make sense
-                                          for anything beyond a one-page website. Some others see in
-                                          static websites the stone age of the World Wide Web. What's
-                                          about static websites today? What's achievable?
-                                          This board highlights top features of the JekyllOne Template,
-                                          which make static webs not only an option, but an attractive
-                                          method to create fast, secure, and sophisticated websites for
-                                          many use cases.
+                                          for anything beyond a one-page website.
+                                        <p>
+                                          The answer is <b>yes</b>! Static websites can make sense for any
+                                          type of website, from a portfolio website to an e-commerce store.
+                                          Static websites are becoming increasingly popular because they are
+                                          faster, more secure, and easier to maintain than traditional dynamic
+                                          websites. Static websites are also great for SEO (search engine optimization)
+                                          as they are easier for search engines to crawl and index.
+                                        </p>
+                                        <p class="tagline">
+                                          <b>Learn the top features of JekyllOne.</b>
                                         </p>
 
         style:                          flat

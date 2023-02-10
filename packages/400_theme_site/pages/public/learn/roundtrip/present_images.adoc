@@ -120,12 +120,14 @@ under the link:{url-j1-docs--lightbox-module}[Lightbox module, {browser-window--
 
 == Lightbox block examples
 
+[role="mb-4"]
 Find below an example of using the lightbox Lightbox standalone. See how
 single (individual) images are linked for use with Lightbox.
 
 .Lightbox block for standalone images
 lightbox::example-standalone[ 800, {data-images-standalone}, role="mb-4" ]
 
+[role="mb-4"]
 Lightbox supports image groups (image sets). Click on the images below to
 see how Lightbox manages a group of images.
 
@@ -134,6 +136,7 @@ lightbox::example-group[ 395, {data-images-group}, group, role="mb-4 wm-800" ]
 
 === LightGallery example
 
+[role="mb-4"]
 LightGallery provides more complex functions on image data. The module
 supports a gallery-style thumbnail preview plus image resizing, a download
 dialog, sharing provider support, and more helpful. Check what
@@ -141,7 +144,7 @@ LightGallery can do this by the following example.
 
 gallery::jg_old_times[ role="mb-4 wm-800" ]
 
-== J1 Carousel App
+== J1 Carousel
 
 J1 Carousel is based on OWL Carousel V1 in the latest (and unfortunately
 last) version of 1.3.3. OWL Carousel is a clean and neat _jQuery_ slider
@@ -157,12 +160,13 @@ business use. And offers a lot of great features!
 
 === Simple Text Carousel
 
+[role="mb-4"]
 A slider or carousel is typically used for displaying images. Still, the
 implementation for the J1 Theme supports a lot more sources to be
 displayed as a slide show: simple text, for example.
 
-.Carousel example
-carousel::demo_text_carousel[role="mb-3"]
+.Text Carousel
+carousel::demo_text_carousel[role="mb-4"]
 
 Important statements or topics can be placed, e.g., on top of an article or
 a paragraph, to give them better visibility. In one line, you can present
@@ -171,14 +175,15 @@ line. No much space is needed!
 
 === Parallax Text Carousel
 
+[role="mb-4"]
 A more eye-minded type of text-based slide show is a parallax text slider. If
 you want to emphasize your statements focussing the meaning, this kind of a
 slide show may be interesting. Image-based slide shows may draw off the
 reader's attention from the text, therefore a pure text-based presentation
 maybe the better choice.
 
-.Carousel example
-carousel::demo_text_carousel_parallax[role="mb-3"]
+.Parallax Text
+carousel::demo_text_carousel_parallax[role="mb-4"]
 
 Parallax text shows can be placed as banners on a page. For text shows,
 different animations are available. Internally, J1 Theme uses some of
@@ -200,8 +205,8 @@ data.
 A simple image show is useful, for example, as an animated (or not animated)
 banner presenting exciting things about your site or the products offered.
 
-.Carousel example
-carousel::demo_simple[role="mb-3"]
+.Image Carousel
+carousel::demo_simple[role="mb-4"]
 
 === Carousel + Caption + Lightbox
 
@@ -210,7 +215,7 @@ This example shows some pictures having individual caption text and supports
 a lightbox to enlarge images full size. For the example below, an almost simple
 lightbox is used: Lightbox2; or short: lightbox.
 
-.Carousel example
+.Image Carousel + Lightbox
 carousel::demo_cats[role="mb-3"]
 
 The J1 module lightbox is a simple Lightbox but offers a bunch of impressive
@@ -225,8 +230,8 @@ Here you find an example of a single image slide show with controls enabled
 to browse all images back and forth. An indicator below the slider shows how
 many images the show contains.
 
-.Carousel example
-carousel::demo_oneslide[role="mb-3"]
+.One Slide Carousel
+carousel::demo_oneslide[role="mb-4"]
 
 == J1 Master Slider
 
@@ -274,16 +279,18 @@ Lightboxes on sliders out-of-the-box.
 TIP: Click on the Lightbox symbol mdi:image-outline[18px, md-gray] in the
 slides to see the *colored* images configured for the slider.
 
-masterslider::ms_00001[role="mt-4 mb-5"]
+.Slider using Controls
+masterslider::ms_00001[role="mb-5"]
 
-=== MS Slider using Text Elements
+=== MS Slider using Text Elements (MSInfo)
 
 One of the major features of sliders is to present additional (animated)
 elements, like text data, connected to the images presented by a slider:
 the slideshow. MS Slider provides functions to combine images and text
-elements: the *MSInfo* element.
+elements: the MSInfo element.
 
-masterslider::ms_00003[role="mt-4 mb-5"]
+.Slider using Text Elements
+masterslider::ms_00003[role="mb-5"]
 
 === MS Slider using ThumbImages
 
@@ -292,28 +299,37 @@ elements like *thumbs* placed side-by-side (left|right), at the top, or at
 the bottom of a slideshow. Find two examples to control a slideshow by
 *thumb images*.
 
-masterslider::ms_00004[role="mt-4 mb-5"]
+.Slider using ThumbImages
+masterslider::ms_00004[role="mb-5"]
 
-masterslider::ms_00005[role="mt-4 mb-5"]
+=== MS Slider using ThumbInfo
 
-=== MS Slider using MS Info in a complex Layout
+To give the users better control over a slideshow, MS Slider provides
+complex UI elements like thumbs placed side-by-side (left|right), at the
+top, or at the bottom of a slideshow.
+
+.Slider using ThumbInfo
+masterslider::ms_00007[role="mb-5"]
+
+=== MS Slider using Layout partialview
 
 The following slider presents a slideshow that combines an MSInfo element
 at the bottom and the MS Layout `partialview`. A slideshow typically presents
-a larger number of slides. The layout `partialview` accompanies the *active*
+a larger number of slides. The layout `partialview` accompanies the active
 slide by their neighbors on the left and the right.
 
-masterslider::ms_00009[role="mt-4"]
+.Slider using Layout partialview
+masterslider::ms_00009[role="mb-5"]
 
-=== More about Master Sliders
+=== More about Master Slider
 
-If you're interested to learn more about MS Sliders, go for the following
+If you're interested to learn more about MS Slider, go for the following
 documents:
 
-* link:{url-j1-masterslider-slider-previewer}[MS Slider Previewer, {browser-window--new}]
-* link:{url-j1-docs--masterslider-module}[MS Slider module documentation, {browser-window--new}]
+* MS Slider link:{url-j1-masterslider-slider-previewer}[Previewer, {browser-window--new}]
+* MS Slider link:{url-j1-docs--masterslider-module}[Module documentation, {browser-window--new}]
 
-
+[role="mt-5"]
 == JustifiedGallery
 
 link:{url-justified-gallery--home}[JustifiedGallery, {browser-window--new}]
@@ -323,6 +339,7 @@ supported to enlarge the images of a gallery. See the gallery in action; and
 for sure, all that you see is even responsive. Change the size of your current
 browser window, by width or height to see what will happen!
 
+[role="mb-4"]
 Pictures you've made are typically not even in size. Images may have the
 same size (resolution), but some are orientated landscapes, or others
 may be portraits. For that reason, a more powerful gallery is needed to create
@@ -331,8 +348,8 @@ layout. It works by placing elements in an optimal position based on available
 horizontal and vertical space. Sort of like mason fitting stones in a wall.
 You'll have seen it in use all over the Internet!
 
-.JustifiedGallery example
-gallery::jg_customizer[role="mb-4"]
+.Masonry Grid Gallery
+gallery::jg_customizer[role="mb-5"]
 
 == What next
 

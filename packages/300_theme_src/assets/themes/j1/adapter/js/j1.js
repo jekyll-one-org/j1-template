@@ -538,8 +538,10 @@ var j1 = (function (options) {
         expires:  0
       });
 
+      // -----------------------------------------------------------------------
+      // load|initialize page resources for block elements
       // NOTE: asynchronous calls should be rewitten to xhrData
-      // initialize page resources for blocks
+      // -----------------------------------------------------------------------
       j1.initBanner(settings);
       j1.initPanel(settings);
       j1.initFooter(settings);
@@ -557,16 +559,16 @@ var j1 = (function (options) {
       });
 
       // -----------------------------------------------------------------------
-      // additional BS helpers from j1.core
+      // run additional helpers from j1.core
       // -----------------------------------------------------------------------
-
       j1.core.bsFormClearButton();
 
-      // finalize and display current page
-      j1.displayPage();
+      // -----------------------------------------------------------------------
+      // finalize current page
+      // -----------------------------------------------------------------------
+      //
+      j1.finalizePage();
 
-      // scroll to an anchor in current page if given in URL
-      j1.scrollToAnchor();
     },
 
     // -------------------------------------------------------------------------
@@ -623,7 +625,7 @@ var j1 = (function (options) {
 
             {% for banner in banners %}
                 {% for item in banner %}
-                  {% assign key = item[0] %}
+                  {% assign key   = item[0] %}
                   {% assign value = item[1] %}
 
                   {% if key and debug %} item:value  {{key}}:{{value}} {% endif %}
@@ -664,7 +666,7 @@ var j1 = (function (options) {
           if (selector.length) {
             logText = '\n' + 'loading banner on id: ' +banner[i];
             logger.info(logText);
-            var banner_data_path = '{{banner_data_path}} ' + id;
+            var banner_data_path = '{{banner_data_path}} ' + id + '_content';
             selector.load(banner_data_path, cb_load_closure(id));
           }
         }
@@ -767,7 +769,7 @@ var j1 = (function (options) {
           if ( selector.length ) {
             logText = '\n' + 'loading panel on id: ' +panel[i];
             logger.info(logText);
-            var panel_data_path = '{{panel_data_path}} ' + id;
+            var panel_data_path = '{{panel_data_path}} ' + id + '_content';
             selector.load(panel_data_path, cb_load_closure(id));
           }
         }
@@ -834,7 +836,7 @@ var j1 = (function (options) {
     },
 
     // -------------------------------------------------------------------------
-    // displayPage
+    // finalizePage
     // DISABLED: show the page after timeout of {{flickerTimeout}} ms
     // -------------------------------------------------------------------------
     // NOTE:
@@ -843,8 +845,8 @@ var j1 = (function (options) {
     //  To make correct data sure for APP mode, a status request is done
     //  to load the current state from the middleware (skipped in WEB mode)
     // -------------------------------------------------------------------------
-    displayPage: function (options) {
-      var logger              = log4javascript.getLogger('j1.adapter.displayPage');
+    finalizePage: function (options) {
+      var logger              = log4javascript.getLogger('j1.adapter.finalizePage');
 //    var flickerTimeout      = {{template_config.flicker_timeout}};
       var url                 = new liteURL(window.location.href);
       var baseUrl             = url.origin;
@@ -896,7 +898,7 @@ var j1 = (function (options) {
 
         $.when ($.ajax(ep_status))
         .then(function(data) {
-          var logger = log4javascript.getLogger('j1.displayPage');
+          var logger = log4javascript.getLogger('j1.finalizePage');
 
           user_session = j1.mergeData(user_session, data);
 
@@ -1044,6 +1046,19 @@ var j1 = (function (options) {
           user_state        = j1.readCookie(cookie_names.user_state);
           current_user_data = j1.mergeData(user_session, user_state);
           j1.core.navigator.updateSidebar(current_user_data);
+
+          // initiate smooth scroller if page is ready and visible
+          var dependencies_met_page_ready = setInterval (function (options) {
+            var pageState   = $('#no_flicker').css("display");
+            var pageVisible = (pageState == 'block') ? true: false;
+            if ( j1.getState() === 'finished' && pageVisible ) {
+              setTimeout (function() {
+                // scroll to an anchor in current page if given in URL
+                j1.scrollToAnchor();
+              }, {{template_config.page_on_load_timeout}} );
+              clearInterval(dependencies_met_page_ready);
+            }
+          }, 25);
 
           // set|log status
           state = 'finished';
@@ -1220,6 +1235,19 @@ var j1 = (function (options) {
         current_user_data = j1.mergeData(user_session, user_state);
         j1.core.navigator.updateSidebar(current_user_data);
 
+        // initiate smooth scroller if page is ready and visible
+        var dependencies_met_page_ready = setInterval (function (options) {
+          var pageState   = $('#no_flicker').css("display");
+          var pageVisible = (pageState == 'block') ? true: false;
+          if ( j1.getState() === 'finished' && pageVisible ) {
+            setTimeout (function() {
+              // scroll to an anchor in current page if given in URL
+              j1.scrollToAnchor();
+            }, {{template_config.page_on_load_timeout}} );
+            clearInterval(dependencies_met_page_ready);
+          }
+        }, 25);
+
         // set|log status
         state = 'finished';
         j1.setState(state);
@@ -1227,7 +1255,6 @@ var j1 = (function (options) {
         logger.info(logText);
         logText = '\n' + 'page finalized successfully';
         logger.info(logText);
-
       }
     },
 
