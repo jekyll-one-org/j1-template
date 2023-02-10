@@ -210,7 +210,6 @@ lanes:
   - lane:
       enabled:                          true
       id:                               home_teaser_banner
-#     id:                               teaser
       region:                           body-main
       type:                             async
       properties:                       elevated-z0
