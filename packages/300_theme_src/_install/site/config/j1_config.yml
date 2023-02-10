@@ -243,7 +243,7 @@ body:
   #
   animation:                            true
   animation_type:                       fadeIn                                  # currently, only fadeIn supported
-  animation_duration:                   3
+  animation_duration:                   2
 
 
 # ==============================================================================
