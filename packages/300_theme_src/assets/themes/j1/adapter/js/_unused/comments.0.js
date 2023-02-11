@@ -165,7 +165,7 @@ var logText;
       // create settings object from frontmatter
       var frontmatterOptions  = options != null ? $.extend({}, options) : {};
 
-      // create settings object from comment options
+      // create settings object from module options
       var commentDefaults = $.extend({}, {{comments_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       var commentSettings = $.extend({}, {{comments_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
 

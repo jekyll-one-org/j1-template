@@ -35,9 +35,9 @@ regenerate:                             true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config   = site.data.j1_config %}
-{% assign blocks            = site.data.blocks %}
-{% assign modules           = site.data.modules %}
+{% assign template_config      = site.data.j1_config %}
+{% assign blocks               = site.data.blocks %}
+{% assign modules              = site.data.modules %}
 
 {% comment %} Set config data (settings only)
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -95,10 +95,13 @@ var date                    = new Date();
 var timestamp_now           = date.toISOString();
 var gadScript               = document.createElement('script');
 var adInitializerScript     = document.createElement('script');
-var autoHideOnUnfilled      = {{advertising_options.google.autoHideOnUnfilled}};
-var addBorderOnUnfilled     = {{advertising_options.google.addBorderOnUnfilled}};
-var checkTrackingProtection = {{advertising_options.google.checkTrackingProtection}};
-var showErrorPageOnBlocked  = {{advertising_options.google.showErrorPageOnBlocked}};
+var advertisingDefaults;
+var aadvertisingSettings;
+var advertisingOptions;
+var autoHideOnUnfilled;
+var addBorderOnUnfilled;
+var checkTrackingProtection;
+var showErrorPageOnBlocked;
 var adInitializerScriptText;
 var tracking_protection;
 var url;
@@ -127,6 +130,16 @@ var logText;
     {% if advertising %}
       // [INFO   ] [j1.adapter.advertising                  ] [ detected advertising provider (j1_config): {{advertising_provider}}} ]
       // [INFO   ] [j1.adapter.advertising                  ] [ start processing load region head, layout: {{page.layout}} ]
+
+      // Load  module DEFAULTS|CONFIG
+      advertisingDefaults     = $.extend({},   {{analytics_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      aadvertisingSettings    = $.extend({},   {{analytics_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      advertisingOptions      = $.extend(true, {}, advertisingDefaults, aadvertisingSettings);
+
+      autoHideOnUnfilled      = analyticsOptions.google.autoHideOnUnfilled;
+      addBorderOnUnfilled     = analyticsOptions.google.addBorderOnUnfilled;
+      checkTrackingProtection = analyticsOptions.google.checkTrackingProtection;
+      showErrorPageOnBlocked  = analyticsOptions.google.showErrorPageOnBlocked;
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -159,7 +172,7 @@ var logText;
       var dependencies_met_page_ready = setInterval(function() {
         if (j1.getState() == 'finished') {
 
-          providerID          = '{{advertising_options.google.publisherID}}';
+          providerID          = advertisingOptions.publisherID;
           advertisingProvider = 'Google Adsense';
           validProviderID = (providerID.includes('your')) ? false : true;
           if (!validProviderID) {

@@ -60,6 +60,9 @@ regenerate:                             true
   {% assign production = true %}
 {% endif %}
 
+{% comment %} analytics_options:  {{ analytics_options | debug }} {% endcomment %}
+
+
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/analytics.js
@@ -91,15 +94,18 @@ var url               = new liteURL(window.location.href);
 var hostname          = url.hostname;
 var environment       = '{{environment}}';
 var gaScript          = document.createElement('script');
-var providerID        = '{{analytics_options.google.trackingID}}';
-var skipAllHosts      = '{{analytics_options.google.skipAllHosts}}';
-var validProviderID   = (providerID.includes('your')) ? false : true;
-var optInOut          = {{analytics_options.google.optInOut}};
-var anonymizeIP       = {{analytics_options.google.anonymizeIP}};
 var cookie_names      = j1.getCookieNames();
 var date              = new Date();
 var timestamp_now     = date.toISOString();
 var skipHost          = false;
+var analyticsDefaults;
+var analyticsSettings;
+var analyticsOptions;
+var providerID;
+var skipAllHosts;
+var optInOut;
+var anonymizeIP;
+var validProviderID;
 var skipHosts;
 var gaCookies;
 var user_consent;
@@ -120,12 +126,22 @@ var logText;
     init: function (options) {
 
     {% if analytics %}
+
+      // Load  module DEFAULTS|CONFIG
+      analyticsDefaults = $.extend({}, {{analytics_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      analyticsSettings = $.extend({}, {{analytics_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      analyticsOptions  = $.extend(true, {}, analyticsDefaults, analyticsSettings);
+
       // [INFO   ] [j1.adapter.analytics                    ] [ detected analytics provider (j1_config): {{analytics_provider}}} ]
       // [INFO   ] [j1.adapter.analytics                    ] [ start processing load region head, layout: {{page.layout}} ]
-
       {% case analytics_provider %}
       {% when "google" %}
       // [INFO   ] [j1.adapter.analytics                    ] [ place provider: Google Adsense ]
+      providerID        = analyticsOptions.google.trackingID;
+      skipAllHosts      = analyticsOptions.google.skipAllHosts;
+      optInOut          = analyticsOptions.google.optInOut;
+      anonymizeIP       = analyticsOptions.google.anonymizeIP;
+      validProviderID   = (providerID.includes('your')) ? false : true;
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -162,7 +178,7 @@ var logText;
       var dependencies_met_page_ready = setInterval(function() {
         if (j1.getState() == 'finished') {
 
-          gaExists  = document.getElementById('google-tag-manager');
+          gaExists  = document.getElementById('google-tag-manager') === null ? false : true;
           skipHosts = skipAllHosts.replace(/,/g, ' ');
           skipHost = skipHosts.includes(hostname);
 
@@ -183,7 +199,7 @@ var logText;
           }
 
           user_consent  = j1.readCookie(cookie_names.user_consent);
-          if (user_consent.analysis) {
+          if (user_consent.analysis && !skipHost ) {
             if (validProviderID) {
               logger.info('\n' + 'user consent on analytics: ' + user_consent.analysis);
               logger.info('\n' + 'enable Google Analytics on ID: ' + providerID);

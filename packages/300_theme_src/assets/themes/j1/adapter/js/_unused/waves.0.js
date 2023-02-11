@@ -130,7 +130,7 @@ var logText;
       // create settings object from frontmatter
       var frontmatterOptions  = options != null ? $.extend({}, options) : {};
 
-      // create settings object from comment options
+      // create settings object from module options
       var waveDefaults = $.extend({}, {{wave_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       var waveSettings = $.extend({}, {{wave_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
 

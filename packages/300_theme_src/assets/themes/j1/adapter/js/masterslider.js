@@ -26,23 +26,22 @@ regenerate:                             true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment         = site.environment %}
-{% assign template_config     = site.data.j1_config %}
-{% assign modules             = site.data.modules %}
+{% assign environment                = site.environment %}
+{% assign template_config            = site.data.j1_config %}
+{% assign modules                    = site.data.modules %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign slider_defaults     = modules.defaults.masterslider.defaults %}
-{% assign slider_settings     = modules.masterslider.settings %}
+{% assign master_slider_defaults     = modules.defaults.masterslider.defaults %}
+{% assign master_slider_settings     = modules.masterslider.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign slider_options      = slider_defaults | merge: slider_settings %}
-{% assign lightbox_enabled    = slider_options.enable_lightbox %}
-{% assign slider_manager      = slider_options.slider_manager %}
-{% assign save_slider_config  = slider_options.save_slider_config %}
-{% assign module_version      = slider_options.module_version %}
-{% assign sliders             = slider_settings.sliders %}
+{% assign master_slider_options      = master_slider_defaults | merge: master_slider_settings %}
+{% assign lightbox_enabled           = master_slider_options.enable_lightbox %}
+{% assign slider_manager             = master_slider_options.slider_manager %}
+{% assign save_slider_config         = master_slider_options.save_slider_config %}
+{% assign module_version             = master_slider_options.module_version %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -50,6 +49,7 @@ regenerate:                             true
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
+
 
 /*
  # -----------------------------------------------------------------------------
@@ -83,9 +83,11 @@ j1.adapter.masterslider = (function (j1, window) {
   var sliderManager     = j1.stringToBoolean('{{slider_manager}}');
   var lightboxEnabled   = j1.stringToBoolean('{{lightbox_enabled}}');
   var saveSliderConfig  = j1.stringToBoolean('{{save_slider_config}}');
-  var sliderOptions     = {};
-  var sliders           = {};
   var newline           = '\n';
+
+  var masterSliderDefaults;
+  var masterSliderSettings;
+  var masterSliderOptions;
   var _this;
   var logger;
   var logText;
@@ -123,9 +125,10 @@ j1.adapter.masterslider = (function (j1, window) {
         generated:   '{{site.time}}'
       }, options);
 
-      // collect slider data
-      sliderOptions = $.extend({}, {{slider_options | replace: 'nil', 'null' | replace: '=>', ':' }});
-      sliders       = $.extend({}, {{slider_options.sliders | replace: 'nil', 'null' | replace: '=>', ':' }});
+      // Load  module DEFAULTS|CONFIG
+      masterSliderDefaults = $.extend({}, {{master_slider_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      masterSliderSettings = $.extend({}, {{master_slider_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      masterSliderOptions = $.extend({}, masterSliderDefaults, masterSliderSettings);
 
       // -----------------------------------------------------------------------
       // Global variable settings
@@ -139,10 +142,10 @@ j1.adapter.masterslider = (function (j1, window) {
 
       // load HTML portion for sliders configured
       console.debug('loading HTML portion for all sliders configured');
-      _this.loadSliderHTML(sliderOptions, sliders);
+      _this.loadSliderHTML(masterSliderOptions, masterSliderOptions.sliders);
       // create an 'MasterSlider' instance for all sliders configured
       console.debug('create an \'MasterSlider\' instance for all MS sliders configured');
-      _this.createSliderInstances(sliders, msSliderManager);
+      _this.createSliderInstances(masterSliderOptions.sliders, msSliderManager);
 
       // initialize sliders configured if HTML portion (of sliders) loaded
       var dependencies_met_data_loaded = setInterval(function() {
@@ -150,7 +153,7 @@ j1.adapter.masterslider = (function (j1, window) {
           logger.info('\n' + 'ms module version detected: ' + moduleVersion);
           logger.info('\n' + 'module is being initialized');
           console.debug('MS slider module is being initialized');
-          _this.initSliders(sliderOptions, sliders, msSliderManager, saveSliderConfig);
+          _this.initSliders(masterSliderOptions, masterSliderOptions.sliders, msSliderManager, saveSliderConfig);
           clearInterval(dependencies_met_data_loaded);
         } // END dependencies_met_j1_finished
       }, 25);
@@ -167,8 +170,8 @@ j1.adapter.masterslider = (function (j1, window) {
               _this.setState('finished');
               logger.info('\n' + 'initializing module finished');
               console.debug('initializing MS slider module finished');
-              clearInterval(dependencies_met_module_finished);
-            }, sliderOptions.slider_manager_load_timeout);
+            }, masterSliderOptions.slider_manager_load_timeout);
+            clearInterval(dependencies_met_module_finished);
         } // END dependencies_met_j1_finished
       }, 25);
 
@@ -199,7 +202,7 @@ j1.adapter.masterslider = (function (j1, window) {
           j1.loadHTML({
             xhr_container_id: xhr_container_id,
             xhr_data_path:    xhr_data_path,
-            xhr_data_element: sliders[key].id
+            xhr_data_element: slider[key].id
           });
         } else {
           console.debug('slider found disabled on id: ' + slider[key].id);
@@ -272,7 +275,7 @@ j1.adapter.masterslider = (function (j1, window) {
             if (slider[index].controls) {
               Object.keys(slider[index].controls).forEach(function(key) {
                 var msSliderManagerItem = '\n';
-                logger.info('\n' + 'slider control found id|key: ' + slider[index].id + '|' + key);
+                logger.debug('\n' + 'slider control found id|key: ' + slider[index].id + '|' + key);
 
                 // merge settings, defaults into control
                 control = $.extend({}, controlOptions[key], slider[index].controls[key]);
@@ -306,7 +309,7 @@ j1.adapter.masterslider = (function (j1, window) {
         var index;
         var i=0;
 
-        logger.info('\n' + 'generate slider plugins');
+        logger.debug('\n' + 'generate slider plugins');
 
         if (sliderManager) msSliderManager.innerHTML += newline;
         Object.keys(slider).forEach(function(key) {
@@ -379,7 +382,7 @@ j1.adapter.masterslider = (function (j1, window) {
             // log the filter object if enabled
             if (setup.filters != null) {
               var filterSettings = JSON.stringify(setup.filters).replace(/"/g, '');
-              logger.info('\n' + 'filters found: ' + filterSettings.replace(/{/g, '').replace(/}/g, ''));
+              logger.debug('\n' + 'filters found: ' + filterSettings.replace(/{/g, '').replace(/}/g, ''));
             }
 
             if (sliderManager) {

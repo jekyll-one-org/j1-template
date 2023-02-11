@@ -209,7 +209,7 @@ var logText;
       // create settings object from frontmatter
       var frontmatterOptions  = options != null ? $.extend({}, options) : {};
 
-      // create settings object from comment options
+      // create settings object from module options
       var waveDefaults = $.extend({}, {{particles_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       var particlesettings = $.extend({}, {{particles_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
 

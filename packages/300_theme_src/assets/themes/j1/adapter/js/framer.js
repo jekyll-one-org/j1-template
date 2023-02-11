@@ -85,7 +85,9 @@ j1.adapter.framer = (function (j1, window) {
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment   = '{{environment}}';
-  var moduleOptions = {};
+  var framerDefaults;
+  var framerSettings;
+  var framerOptions;
   var _this;
   var logger;
   var logText;
@@ -121,42 +123,36 @@ j1.adapter.framer = (function (j1, window) {
           _this   = j1.adapter.framer;
           logger  = log4javascript.getLogger('j1.adapter.framer');
 
+          // Load  module DEFAULTS|CONFIG
+          framerDefaults = $.extend({}, {{framer_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+          framerSettings = $.extend({}, {{framer_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+          framerOptions  = $.extend(true, {}, framerDefaults, framerSettings);
+
           // initialize state flag
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
 
-          {% comment %} Load module config from yml data
-          -------------------------------------------------------------------------- {% endcomment %}
-          // Load  module DEFAULTS|CONFIG
-          /* eslint-disable */
-          moduleOptions = $.extend({}, {{framer_options | replace: '=>', ':' | replace: 'nil', '""'}});
-          /* eslint-enable */
-
-          if (typeof settings !== 'undefined') {
-            moduleOptions = $.extend({}, moduleOptions, settings);
-          }
-
           iFrameResize({
-            log:                      moduleOptions.log,
-            autoResize:               moduleOptions.autoResize,
-            bodyBackground:           moduleOptions.bodyBackground,
-            bodyMargin:               moduleOptions.bodyMargin,
-            checkOrigin:              moduleOptions.checkOrigin,
-            inPageLinks:              moduleOptions.inPageLinks,
-            interval:                 moduleOptions.interval,
-            heightCalculationMethod:  moduleOptions.heightCalculationMethod,
-            maxHeight:                moduleOptions.maxHeight,
-            minWidth:                 moduleOptions.minWidth,
-            maxWidth:                 moduleOptions.maxWidth,
-            minHeight:                moduleOptions.minHeight,
-            resizeFrom:               moduleOptions.resizeFrom,
-            scrolling:                moduleOptions.scrolling,
-            sizeHeight:               moduleOptions.sizeHeight,
-            sizeWidth:                moduleOptions.sizeWidth,
-            tolerance:                moduleOptions.tolerance,
-            widthCalculationMethod:   moduleOptions.widthCalculationMethod,
-            targetOrigin:             moduleOptions.checkOrigin
+            log:                      framerOptions.log,
+            autoResize:               framerOptions.autoResize,
+            bodyBackground:           framerOptions.bodyBackground,
+            bodyMargin:               framerOptions.bodyMargin,
+            checkOrigin:              framerOptions.checkOrigin,
+            inPageLinks:              framerOptions.inPageLinks,
+            interval:                 framerOptions.interval,
+            heightCalculationMethod:  framerOptions.heightCalculationMethod,
+            maxHeight:                framerOptions.maxHeight,
+            minWidth:                 framerOptions.minWidth,
+            maxWidth:                 framerOptions.maxWidth,
+            minHeight:                framerOptions.minHeight,
+            resizeFrom:               framerOptions.resizeFrom,
+            scrolling:                framerOptions.scrolling,
+            sizeHeight:               framerOptions.sizeHeight,
+            sizeWidth:                framerOptions.sizeWidth,
+            tolerance:                framerOptions.tolerance,
+            widthCalculationMethod:   framerOptions.widthCalculationMethod,
+            targetOrigin:             framerOptions.checkOrigin
           });
 
           _this.setState('finished');

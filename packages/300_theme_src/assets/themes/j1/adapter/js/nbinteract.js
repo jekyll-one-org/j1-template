@@ -82,8 +82,6 @@ j1.adapter.nbinteract = (function (j1, window) {
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment     = '{{environment}}';
-  var moduleOptions   = {};
-  var moduleSettings  = {};
   var message         = {};
   var flags            = {
     checkURL:   false
@@ -144,6 +142,9 @@ j1.adapter.nbinteract = (function (j1, window) {
   var widgetCells;
   var widgetCellsRendered;
   var nbiNotebookReady;
+  var nbinteractDefaults;
+  var nbinteractSettings;
+  var nbinteractOptions;
   var Events;
 
   // ---------------------------------------------------------------------------
@@ -181,20 +182,24 @@ j1.adapter.nbinteract = (function (j1, window) {
         generated:   '{{site.time}}'
       }, options);
 
-      moduleOptions = $.extend({}, {{nbinteract_options | replace: 'nil', 'null' | replace: '=>', ':' }});
-
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
       _this                   = j1.adapter.nbinteract;
       logger                  = log4javascript.getLogger('j1.adapter.nbinteract');
-      nbiModalAutoClose       = moduleOptions.nbi_messages_auto_close;
-      nbiModalAutoCloseDelay  = moduleOptions.nbi_messages_auto_close_delay;
-      nbiInitTimeout          = moduleOptions.nbi_init_timeout;
-      nbiShowMessages         = moduleOptions.show_nbi_messages;
-      nbiIndicateNbiActivity  = moduleOptions.indicate_nbi_activity;
-      nbiInitMathJax          = moduleOptions.nbi_init_mathjax;
-      nbiNotebookReady        = moduleOptions.notebook_ready;
+
+      // Load  module DEFAULTS|CONFIG
+      nbinteractDefaults      = $.extend({}, {{nbinteract_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      nbinteractSettings      = $.extend({}, {{nbinteract_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      nbinteractOptions       = $.extend({}, nbinteractDefaults, nbinteractSettings);
+
+      nbiModalAutoClose       = nbinteractOptions.nbi_messages_auto_close;
+      nbiModalAutoCloseDelay  = nbinteractOptions.nbi_messages_auto_close_delay;
+      nbiInitTimeout          = nbinteractOptions.nbi_init_timeout;
+      nbiShowMessages         = nbinteractOptions.show_nbi_messages;
+      nbiIndicateNbiActivity  = nbinteractOptions.indicate_nbi_activity;
+      nbiInitMathJax          = nbinteractOptions.nbi_init_mathjax;
+      nbiNotebookReady        = nbinteractOptions.notebook_ready;
 
       // -----------------------------------------------------------------------
       // load|configure Mathjax
@@ -205,7 +210,7 @@ j1.adapter.nbinteract = (function (j1, window) {
       // -----------------------------------------------------------------------
       // load|configure NBI dialog (modal)
       // -----------------------------------------------------------------------
-      _this.loadDialog(moduleOptions);
+      _this.loadDialog(nbinteractOptions);
 
       // -----------------------------------------------------------------------
       // load all modals (HTML portion) used by NBI
@@ -215,7 +220,7 @@ j1.adapter.nbinteract = (function (j1, window) {
       // -----------------------------------------------------------------------
       // load all textbooks (HTML portion) configured|enabled
       // -----------------------------------------------------------------------
-      _this.loadNbiTextbooks(moduleOptions);
+      _this.loadNbiTextbooks(nbinteractOptions);
 
       // -----------------------------------------------------------------------
       // run a spinner to indicate activity of 'nbInteract' if enabled
@@ -241,7 +246,7 @@ j1.adapter.nbinteract = (function (j1, window) {
       // connect to the configured BinderHub instance to create a
       // Jupyter kernel if required
       // -----------------------------------------------------------------------
-      _this.interactNbiTextbooks(moduleOptions);
+      _this.interactNbiTextbooks(nbinteractOptions);
 
       // toggle hide|show the FAB button, if to wait on 'last_widget' rendered
       //
@@ -1207,7 +1212,7 @@ j1.adapter.nbinteract = (function (j1, window) {
 
         // stop the (progress) spinner
         //
-        if (moduleOptions.indicate_nbi_activity) {
+        if (nbinteractOptions.indicate_nbi_activity) {
           spinner.stop();
         }
 

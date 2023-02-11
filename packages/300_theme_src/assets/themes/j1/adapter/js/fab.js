@@ -90,6 +90,8 @@ j1.adapter.fab = (function (j1, window) {
   var dclFinished   = false;
   var moduleOptions = {};
   var cookie_names  = j1.getCookieNames();
+  var fabDefaults;
+  var fabSettings;
   var fabOptions;
   var frontmatterOptions;
   var user_state;
@@ -139,31 +141,22 @@ j1.adapter.fab = (function (j1, window) {
       logger.info('\n' + 'set module state to: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
-      // create settings object from frontmatterOptions
-      var frontmatterOptions = options != null ? $.extend({}, options) : {};
+      // create settings object from frontmatter (page settings)
+      frontmatterOptions  = options != null ? $.extend({}, options) : {};
 
-      // -----------------------------------------------------------------------
-      // options loader
-      // -----------------------------------------------------------------------
-      /* eslint-disable */
-      fabOptions = $.extend({}, {{fab_options | replace: 'nil', 'null' | replace: '=>', ':' }});
-
-      // Load (individual) frontmatter options (currently NOT used)
-      if (options != null) { frontmatterOptions = $.extend({}, options); }
-
-      if (typeof frontmatterOptions !== 'undefined') {
-        moduleOptions = $.extend({}, fabOptions, frontmatterOptions);
-      }
-      /* eslint-enable */
+      // Load  module DEFAULTS|CONFIG
+      fabDefaults = $.extend({}, {{fab_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      fabSettings = $.extend({}, {{fab_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      fabOptions  = $.extend(true, {}, fabDefaults, fabSettings, frontmatterOptions);
 
       // save config settings into the FAB object for global access
       //
-      _this['moduleOptions'] = moduleOptions;
+      _this['moduleOptions'] = fabOptions;
 
       var dependencies_met_navigator = setInterval(function() {
         if (j1.adapter.navigator.getState() == 'finished') {
           logger.debug('\n' + 'met dependencies for: navigator');
-          _this.fabLoader(moduleOptions);
+          _this.fabLoader(fabOptions);
           clearInterval(dependencies_met_navigator);
         }
       }, 25);

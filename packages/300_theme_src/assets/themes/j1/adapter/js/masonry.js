@@ -59,6 +59,7 @@ regenerate:                             true
   {% assign production = true %}
 {% endif %}
 
+
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/masonry.js
@@ -90,6 +91,9 @@ var environment     = '{{environment}}';
 var cookie_names    = j1.getCookieNames();
 var user_state      = j1.readCookie(cookie_names.user_state);
 var viewport_width  = $(window).width();
+var masonryDefaults;
+var masonrySettings;
+var masonryOptions;
 var themes_allowed;
 var theme_enabled;
 var theme;
@@ -122,21 +126,15 @@ var logText;
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
-
-      // create settings object from frontmatter
-      var frontmatterOptions  = options != null ? $.extend({}, options) : {};
-
-      // create settings object from comment options
-      var masonryDefaults = $.extend({}, {{masonry_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      var masonrySettings = $.extend({}, {{masonry_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-
-      // merge all comment options
-      var masonryOptions = $.extend({}, masonryDefaults, masonrySettings, frontmatterOptions);
-
       _this  = j1.adapter.masonry;
       theme  = user_state.theme_name;
       logger = log4javascript.getLogger('j1.adapter.masonry');
 
+      // Load  module DEFAULTS|CONFIG
+      masonryDefaults = $.extend({}, {{masonry_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      masonrySettings = $.extend({}, {{masonry_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      masonryOptions = $.extend({}, masonryDefaults, masonrySettings);
+  
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------

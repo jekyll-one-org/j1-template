@@ -92,6 +92,7 @@ regenerate:                             true
   {% assign production = true %}
 {% endif %}
 
+
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/comments.js
@@ -122,14 +123,18 @@ j1.adapter.comments = (function (j1, window) {
 var environment       = '{{environment}}';
 var date              = new Date();
 var timestamp_now     = date.toISOString();
+var cookie_names      = j1.getCookieNames();
 var comments_provider = '{{comments_provider}}';
 var dqApiScript       = document.createElement('script');
 var hvApiScript       = document.createElement('script');
 var hvCallbackScript  = document.createElement('script');
-var providerID        = '{{site_id}}';
-var validProviderID   = (providerID.includes('your')) ? false : true;
 var comments_headline = '{{comments_headline}}';
-var cookie_names      = j1.getCookieNames();
+var providerID;
+var validProviderID;
+var commentsDefaults;
+var commentsSettings;
+var commentsOptions;
+var frontmatterOptions;
 var user_consent;
 var _this;
 var logger;
@@ -146,224 +151,214 @@ var logText;
     // -------------------------------------------------------------------------
     init: function (options) {
 
-    {% if comments %}
-      // [INFO   ] [j1.adapter.comments                    ] [ detected comments provider (j1_config): {{comments_provider}}} ]
-      // [INFO   ] [j1.adapter.comments                    ] [ start processing load region head, layout: {{page.layout}} ]
-
-      // -----------------------------------------------------------------------
-      // Default module settings
-      // -----------------------------------------------------------------------
-      var settings = $.extend({
-        module_name: 'j1.adapter.comments',
-        generated:   '{{site.time}}'
-      }, options);
-
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
 
-      // create settings object from frontmatter
-      var frontmatterOptions  = options != null ? $.extend({}, options) : {};
+      // create settings object from frontmatter (page settings)
+      frontmatterOptions  = options != null ? $.extend({}, options) : {};
 
-      // create settings object from comment options
-      var commentDefaults = $.extend({}, {{comments_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      var commentSettings = $.extend({}, {{comments_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      // Load  module DEFAULTS|CONFIG
+      commentsDefaults          = $.extend({}, {{comments_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      commentsSettings          = $.extend({}, {{comments_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      commentsOptions           = $.extend(true, {}, commentsDefaults, commentsSettings, frontmatterOptions);
 
-      // merge all comment options
-      var commentOptions = $.extend({}, commentDefaults, commentSettings, frontmatterOptions);
+      // overload module config from page settings (frontmatter)
+      if (typeof commentsOptions.comments !== 'undefined' ) {
+        commentsOptions.enabled = (commentsOptions.comments) === 'true' ? true : false;
+      }
 
-      // check comment options from frontmatter
-      if (commentOptions.enabled) {
-      {% if site_id %}
+      if (commentsOptions.enabled) {
+        // [INFO   ] [j1.adapter.comments                    ] [ detected comments provider (j1_config): {{comments_provider}}} ]
+        // [INFO   ] [j1.adapter.comments                    ] [ start processing load region head, layout: {{page.layout}} ]
 
-      _this = j1.adapter.comments;
-      logger = log4javascript.getLogger('j1.adapter.comments');
+        // ---------------------------------------------------------------------
+        // Default module settings
+        // ---------------------------------------------------------------------
+        var settings = $.extend({
+          module_name: 'j1.adapter.comments',
+          generated:   '{{site.time}}'
+        }, options);
 
-      {% case comments_provider %}
-      {% when "hyvor" %}
-      // [INFO   ] [j1.adapter.comments                    ] [ place provider: Hyvor Talk ]
+        _this = j1.adapter.comments;
+        logger = log4javascript.getLogger('j1.adapter.comments');
 
-      var dependencies_met_page_ready = setInterval(function() {
-        if (j1.getState() == 'finished') {
+        // check the site ID to be used for a provider
+        providerID      = (typeof commentsOptions.site_id == "number") ? commentsOptions.site_id.toString() : commentsOptions.hyvor.site_id;
+        validProviderID = (providerID.includes('your')) ? false : true;
 
-          if (!validProviderID) {
-            logger.warn('\n' + 'invalid site id detected for Hyvor Talk: ' + providerID);
-            logger.info('\n' + 'skip initialization for provider: ' + comments_provider);
+        {% case comments_provider %}
+        {% when "hyvor" %}
+        // [INFO   ] [j1.adapter.comments                    ] [ place provider: Hyvor Talk ]
+
+        var dependencies_met_page_ready = setInterval(function() {
+          if (j1.getState() == 'finished') {
+
+            if (!validProviderID) {
+              logger.warn('\n' + 'invalid site id detected for Hyvor Talk: ' + providerID);
+              logger.info('\n' + 'skip initialization for provider: ' + comments_provider);
+              clearInterval(dependencies_met_page_ready);
+              return false;
+            }
+
+            // initialize state flag, issue init message
+            // -----------------------------------------------------------------
+            _this.setState('started');
+            logger.debug('\n' + 'state: ' + _this.getState());
+            logger.info('\n' + 'module is being initialized for provider: ' + comments_provider);
+
+            // place|remove initialization code
+            // -----------------------------------------------------------------
+            user_consent  = j1.readCookie(cookie_names.user_consent);
+            if (user_consent.personalization) {
+              // enable Hyvor Talk
+              // ---------------------------------------------------------------
+              $('#main-content').append('<h2 id="leave-a-comment" class="mt-4">{{comments_headline}}</h2>');
+              logger.info('\n' + 'user consent on comments: ' + user_consent.personalization);
+              logger.info('\n' + 'enable comments provider' + ' {{comments_provider}} on siteID: ' + providerID);
+
+              // add Hyvor Talk Web API
+              // NOTE: don't change the script id
+              // ---------------------------------------------------------------
+              hvApiScript.id    = 'hyvor-embed';
+              hvApiScript.src   = '//talk.hyvor.com/web-api/embed.js';
+              hvApiScript.async = true;
+              document.head.appendChild(hvApiScript);
+
+              // add Hyvor Talk callback script
+              // ---------------------------------------------------------------
+              hvCallbackScript.id   = 'hyvor-callback';
+              hvCallbackScript.text  = '\n';
+              hvCallbackScript.text += 'var HYVOR_TALK_WEBSITE = "' + providerID + '"\n';
+              hvCallbackScript.text += 'var HYVOR_TALK_CONFIG = {' + '\n';
+              hvCallbackScript.text += '		  url: false,' + '\n';
+              hvCallbackScript.text += '      id: false' + '\n';
+              hvCallbackScript.text += '	  };' + '\n';
+              document.head.appendChild(hvCallbackScript);
+
+              // add Hyvor Talk comment container
+              // NOTE: don't change the div id
+              // ---------------------------------------------------------------
+              $('#main-content').append('<div id="hyvor-talk-view"></div>');
+
+              // add recommended title to the comments iframe for SEO optimization
+              // ---------------------------------------------------------------
+              var dependencies_met_load_provider_finished = setInterval (function () {
+                if ($('#hyvor-talk-view').children().length) {
+                  $('#hyvor-talk-iframe').prop('title', 'Hyvor comments iframe');
+                  clearInterval(dependencies_met_load_provider_finished);
+                }
+              }, 25);
+            } else {
+              // disable Hyvor Talk
+              // ---------------------------------------------------------------
+              logger.info('\n' + 'user consent on comments: ' + user_consent.personalization);
+              logger.warn('\n' + 'disable Hyvor Talk on site id: ' + providerID);
+
+              // remove Hyvor Talk resources
+              // ---------------------------------------------------------------
+              $('#leave-a-comment').remove();
+              $('#hyvor-embed').remove();
+              $('#hyvor-callback').remove();
+              $('#hyvor-talk-view').remove();
+            }
             clearInterval(dependencies_met_page_ready);
-            return false;
-          }
+          } // END if getState 'finished'
+        }, 25);
 
-          // initialize state flag, issue init message
-          // -------------------------------------------------------------------
-          _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized for provider: ' + comments_provider);
+        {% when "disqus" %}
+        // [INFO   ] [j1.adapter.comments                    ] [ place provider: Disqus ]
+        var dependencies_met_page_ready = setInterval(function() {
+          if (j1.getState() == 'finished') {
 
-          // place|remove initialization code
-          // -------------------------------------------------------------------
-          user_consent  = j1.readCookie(cookie_names.user_consent);
-          if (user_consent.personalization) {
-            // enable Hyvor Talk
+            if (!validProviderID) {
+              logger.warn('\n' + 'invalid short name detected for Disqus: ' + providerID);
+              logger.info('\n' + 'skip initialization for provider: ' + comments_provider);
+              clearInterval(dependencies_met_page_ready);
+              return;
+            }
+
+            // initialize state flag, issue init message
             // -----------------------------------------------------------------
-            $('#main-content').append('<h2 id="leave-a-comment" class="mt-4">{{comments_headline}}</h2>');
-            logger.info('\n' + 'user consent on comments: ' + user_consent.personalization);
-            logger.info('\n' + 'enable comments provider' + ' {{comments_provider}} on siteID: ' + providerID);
+            _this.setState('started');
+            logger.debug('\n' + 'state: ' + _this.getState());
+            logger.info('\n' + 'module is being initialized for provider: ' + comments_provider);
 
-            // add Hyvor Talk Web API
-            // NOTE: don't change the script id
+            // place|remove initialization code
             // -----------------------------------------------------------------
-            hvApiScript.id    = 'hyvor-embed';
-            hvApiScript.src   = '//talk.hyvor.com/web-api/embed.js';
-            hvApiScript.async = true;
-            document.head.appendChild(hvApiScript);
+            user_consent  = j1.readCookie(cookie_names.user_consent);
+            if (user_consent.personalization) {
+              $('#main-content').append('<h2 id="leave-a-comment" class="mt-4">{{comments_headline}}</h2>');
+              logger.info('\n' + 'user consent on comments: ' + user_consent.personalization);
+              logger.info('\n' + 'enable comments provider' + ' {{comments_provider}} on short name: ' + providerID);
 
-            // add Hyvor Talk callback script
-            // -----------------------------------------------------------------
-            hvCallbackScript.id   = 'hyvor-callback';
-            hvCallbackScript.text  = '\n';
-            hvCallbackScript.text += 'var HYVOR_TALK_WEBSITE = ' + providerID + '\n';
-            hvCallbackScript.text += 'var HYVOR_TALK_CONFIG = {' + '\n';
-            hvCallbackScript.text += '		  url: false,' + '\n';
-            hvCallbackScript.text += '      id: false' + '\n';
-            hvCallbackScript.text += '	  };' + '\n';
-            document.head.appendChild(hvCallbackScript);
+              // old Disqus Web API init
+              // ---------------------------------------------------------------
+              // var disqus_shortname = '{{site_id}}';
+              // // ------------------------------------------------------------
+              // // RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE
+              // // SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+              // // LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT:
+              // // https://disqus.com/admin/universalcode/#configuration-variables
+              // // ------------------------------------------------------------
+              // //
+              // // var disqus_config = function () {
+              // // this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+              // // Replace PAGE_IDENTIFIER with your page's unique
+              // // identifier variable
+              // // this.page.identifier = PAGE_IDENTIFIER;
+              // // };
+              // //
+              // // DON'T EDIT BELOW THIS LINE
+              // // ------------------------------------------------------------
+              // (function() {
+              //     var d = document,
+              //         s = d.createElement('script');
+              //     s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+              //     s.setAttribute('data-timestamp', +new Date());
+              //     (d.head || d.body).appendChild(s);
+              // })();
 
-            // add Hyvor Talk comment container
-            // NOTE: don't change the div id
-            // -----------------------------------------------------------------
-            $('#main-content').append('<div id="hyvor-talk-view"></div>');
+              // add|initialize Disqus Web API
+              // ---------------------------------------------------------------
+              dqApiScript.id    = 'dq-web-api';
+              dqApiScript.src   = '//' + providerID + '.disqus.com/embed.js";'
+              dqApiScript.setAttribute("data-timestamp", '"' + timestamp_now + '"');
+              document.head.appendChild(dqApiScript);
+
+              // add Disqus comment container
+              // ---------------------------------------------------------------
+              $('#main-content').append('<div id="disqus_thread"></div>');
+            } else {
+              logger.info('\n' + 'user consent on comments: ' + user_consent.personalization);
+              logger.warn('\n' + 'disable comments provider' + ' {{comments_provider}} on short name: ' + providerID);
+              $('#leave-a-comment').remove();
+              $('#dq-web-api').remove();
+              $('#hdisqus_thread').remove();
+            }
 
             // add recommended title to the comments iframe for SEO optimization
-            // -------------------------------------------------------------------
-            var dependencies_met_load_provider_finished = setInterval (function () {
-              if ($('#hyvor-talk-view').children().length) {
-                $('#hyvor-talk-iframe').prop('title', 'Hyvor comments iframe');
-                clearInterval(dependencies_met_load_provider_finished);
-              }
-            }, 25);
-          } else {
-            // disable Hyvor Talk
             // -----------------------------------------------------------------
-            logger.info('\n' + 'user consent on comments: ' + user_consent.personalization);
-            logger.warn('\n' + 'disable Hyvor Talk on site id: ' + providerID);
+            // var dependencies_met_load_provider_finished = setInterval (function () {
+            //   if ($('#disqus_thread').children().length) {
+            //     $('#hyvor-talk-iframe').prop('title', 'Disqus comments iframe');
+            //     clearInterval(dependencies_met_load_provider_finished);
+            //   }
+            // }, 25);
 
-            // remove Hyvor Talk resources
-            // -----------------------------------------------------------------
-            $('#leave-a-comment').remove();
-            $('#hyvor-embed').remove();
-            $('#hyvor-callback').remove();
-            $('#hyvor-talk-view').remove();
-          }
-          clearInterval(dependencies_met_page_ready);
-        } // END if getState 'finished'
-      }, 25);
-
-      {% when "disqus" %}
-      // [INFO   ] [j1.adapter.comments                    ] [ place provider: Disqus ]
-      var dependencies_met_page_ready = setInterval(function() {
-        if (j1.getState() == 'finished') {
-
-          if (!validProviderID) {
-            logger.warn('\n' + 'invalid short name detected for Disqus: ' + providerID);
-            logger.info('\n' + 'skip initialization for provider: ' + comments_provider);
             clearInterval(dependencies_met_page_ready);
-            return;
+          } // END if getState 'finished'
+        }, 25);
+        {% endcase %}
+      } else {
+        var dependencies_met_page_ready = setInterval(function() {
+          if (j1.getState() == 'finished') {
+            logger = log4javascript.getLogger('j1.adapter.comments');
+            logger.info('\n' + 'comment services: disabled');
+            clearInterval(dependencies_met_page_ready);
           }
-
-          // initialize state flag, issue init message
-          // -------------------------------------------------------------------
-          _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized for provider: ' + comments_provider);
-
-          // place|remove initialization code
-          // -------------------------------------------------------------------
-          user_consent  = j1.readCookie(cookie_names.user_consent);
-          if (user_consent.personalization) {
-            $('#main-content').append('<h2 id="leave-a-comment" class="mt-4">{{comments_headline}}</h2>');
-            logger.info('\n' + 'user consent on comments: ' + user_consent.personalization);
-            logger.info('\n' + 'enable comments provider' + ' {{comments_provider}} on short name: ' + providerID);
-
-            // old Disqus Web API init
-            // -----------------------------------------------------------------
-            // var disqus_shortname = '{{site_id}}';
-            // // -----------------------------------------------------------------
-            // // RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE
-            // // SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-            // // LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT:
-            // // https://disqus.com/admin/universalcode/#configuration-variables
-            // // -----------------------------------------------------------------
-            // //
-            // // var disqus_config = function () {
-            // // this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-            // // Replace PAGE_IDENTIFIER with your page's unique
-            // // identifier variable
-            // // this.page.identifier = PAGE_IDENTIFIER;
-            // // };
-            // //
-            // // DON'T EDIT BELOW THIS LINE
-            // // -----------------------------------------------------------------
-            // (function() {
-            //     var d = document,
-            //         s = d.createElement('script');
-            //     s.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            //     s.setAttribute('data-timestamp', +new Date());
-            //     (d.head || d.body).appendChild(s);
-            // })();
-
-            // add|initialize Disqus Web API
-            // -----------------------------------------------------------------
-            dqApiScript.id    = 'dq-web-api';
-            dqApiScript.src   = '//' + providerID + '.disqus.com/embed.js";'
-            dqApiScript.setAttribute("data-timestamp", '"' + timestamp_now + '"');
-            document.head.appendChild(dqApiScript);
-
-            // add Disqus comment container
-            // -----------------------------------------------------------------
-            $('#main-content').append('<div id="disqus_thread"></div>');
-          } else {
-            logger.info('\n' + 'user consent on comments: ' + user_consent.personalization);
-            logger.warn('\n' + 'disable comments provider' + ' {{comments_provider}} on short name: ' + providerID);
-            $('#leave-a-comment').remove();
-            $('#dq-web-api').remove();
-            $('#hdisqus_thread').remove();
-          }
-
-          // add recommended title to the comments iframe for SEO optimization
-          // -------------------------------------------------------------------
-          // var dependencies_met_load_provider_finished = setInterval (function () {
-          //   if ($('#disqus_thread').children().length) {
-          //     $('#hyvor-talk-iframe').prop('title', 'Disqus comments iframe');
-          //     clearInterval(dependencies_met_load_provider_finished);
-          //   }
-          // }, 25);
-
-          clearInterval(dependencies_met_page_ready);
-        } // END if getState 'finished'
-      }, 25);
-      {% endcase %}
-
-    {% else %}
-      var dependencies_met_page_ready = setInterval(function() {
-        if (j1.getState() == 'finished') {
-          logger = log4javascript.getLogger('j1.adapter.comments');
-          logger.warn('\n' + 'provider or site ID for comment services wrong or not set');
-          clearInterval(dependencies_met_page_ready);
-        }
-      }, 25);
-    {% endif %}
-    } // END if 'commentOptions.comments'
-
-    {% else %}
-      var dependencies_met_page_ready = setInterval(function() {
-        if (j1.getState() == 'finished') {
-          logger = log4javascript.getLogger('j1.adapter.comments');
-          logger.info('\n' + 'comment services: disabled');
-          clearInterval(dependencies_met_page_ready);
-        }
-      }, 25);
-    {% endif %}
-
+        }, 25);
+      } // END if 'commentsOptions.comments'
 
     }, // END init
 

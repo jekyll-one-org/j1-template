@@ -83,9 +83,10 @@ j1.adapter.dropdowns = (function (j1, window) {
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment   = '{{environment}}';
-  var moduleOptions = {};
   var instances     = [];
-  var frontmatterOptions;
+  var dropdownsDefaults;
+  var dropdownsSettings;
+  var dropdownsOptions;
   var _this;
   var logger;
   var logText;
@@ -118,19 +119,15 @@ j1.adapter.dropdowns = (function (j1, window) {
       _this   = j1.adapter.dropdowns;
       logger  = log4javascript.getLogger('j1.adapter.dropdowns');
 
+      // Load  module DEFAULTS|CONFIG
+      dropdownsDefaults = $.extend({}, {{comments_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      dropdownsSettings = $.extend({}, {{comments_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      dropdownsOptions  = $.extend(true, {}, dropdownsDefaults, dropdownsSettings);
 
       // initialize state flag
       _this.setState('started');
       logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
-
-      // create settings object from frontmatterOptions
-      frontmatterOptions = options != null ? $.extend({}, options) : {};
-      moduleOptions = $.extend({}, {{dropdowns_options | replace: 'nil', 'null' | replace: '=>', ':' }});
-
-      if (typeof frontmatterOptions !== 'undefined') {
-        moduleOptions = $.extend({}, moduleOptions, frontmatterOptions);;
-      }
 
       var dependencies_met_j1_finished = setInterval(function() {
         if (j1.getState() == 'finished') {

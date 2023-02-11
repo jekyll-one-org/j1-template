@@ -1240,6 +1240,8 @@ var j1 = (function (options) {
           var pageState   = $('#no_flicker').css("display");
           var pageVisible = (pageState == 'block') ? true: false;
           if ( j1.getState() === 'finished' && pageVisible ) {
+            // TODO: Hide GoogleTranslator
+            // $('.skiptranslate').hide();
             setTimeout (function() {
               // scroll to an anchor in current page if given in URL
               j1.scrollToAnchor();

@@ -391,6 +391,6 @@ end
 
 module Jekyll
   module J1LunrSearch
-    VERSION = '2023.0.13'
+    VERSION = '2023.0.14'
   end
 end

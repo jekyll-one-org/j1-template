@@ -66,6 +66,7 @@ regenerate:                             true
   {% assign production = true %}
 {% endif %}
 
+
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/toccer.js
@@ -97,9 +98,10 @@ j1.adapter.toccer = (function () {
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment         = '{{environment}}';
-  var moduleOptions       = {};
-  var toccerOptions       = {};
-  var frontmatterOptions  = {};
+  var toccerDefaults;
+  var toccerSettings;
+  var toccerOptions;
+  var frontmatterOptions;
   var _this;
   var logger;
   var logText;
@@ -132,32 +134,26 @@ j1.adapter.toccer = (function () {
       _this   = j1.adapter.toccer;
       logger  = log4javascript.getLogger('j1.adapter.toccer');
 
+      // create settings object from frontmatter
+      frontmatterOptions  = options != null ? $.extend({}, options) : {};
+
+      // Load  module DEFAULTS|CONFIG
+      toccerDefaults       = $.extend({}, {{toccer_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      toccerSettings       = $.extend({}, {{toccer_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      toccerOptions        = $.extend(true, {}, toccerDefaults, toccerSettings, frontmatterOptions);
+
       // initialize state flag
       _this.setState('started');
       logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
-      // -----------------------------------------------------------------------
-      // Options loader
-      // -----------------------------------------------------------------------
-      /* eslint-disable */
-      // create settings object from frontmatterOptions
-      frontmatterOptions  = options != null ? $.extend({}, options) : {};
-      toccerOptions       = $.extend({}, {{toccer_options | replace: 'nil', 'null' | replace: '=>', ':' }});
-
-      // overload (individual) settings into 'moduleOptions'
-      if (typeof frontmatterOptions !== 'undefined') {
-        moduleOptions = $.extend({}, toccerOptions, frontmatterOptions);
-      }
-      /* eslint-enable */
-
       // save config settings into the toccer object for later access
-      _this['moduleOptions'] = moduleOptions;
+      _this['moduleOptions'] = toccerOptions;
 
-      if (j1.stringToBoolean(moduleOptions.toc)) {
+      if (j1.stringToBoolean(toccerOptions.toc)) {
         var dependencies_met_navigator = setInterval(function() {
           if ( j1.getState() == 'finished' ) {
-            _this.initToccerCore(moduleOptions);
+            _this.initToccerCore(toccerOptions);
             _this.setState('finished');
 
             logger.debug('\n' + 'state: ' + _this.getState());

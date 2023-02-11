@@ -1715,7 +1715,7 @@ resources:
       preload:                          false
       script_load:                      async
       dependencies:                     false
-      pass_init_data:                   false
+      pass_init_data:                   true
       data:
         css:                            []
         files:                          [ adapter/js/comments.js ]

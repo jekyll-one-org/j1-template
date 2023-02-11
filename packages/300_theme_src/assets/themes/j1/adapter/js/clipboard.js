@@ -69,7 +69,9 @@ j1.adapter.clipboard = (function (j1, window) {
   // globals
   // ---------------------------------------------------------------------------
   var environment   = '{{environment}}';
-  var moduleOptions = {};
+  var clipboardDefaults;
+  var clipboardSettings;
+  var clipboardOptions;
   var logger;
   var logText;
   var _this;
@@ -103,6 +105,11 @@ j1.adapter.clipboard = (function (j1, window) {
       _this     = j1.adapter.clipboard;
       language  = '{{site.language}}';
       logger    = log4javascript.getLogger('j1.adapter.clipboard');
+
+      // Load  module DEFAULTS|CONFIG
+      clipboardDefaults = $.extend({},   {{analytics_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      clipboardSettings = $.extend({},   {{analytics_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      clipboardOptions  = $.extend(true, {}, clipboardDefaults, clipboardSettings);
 
       // initialize state flag
       _this.state = 'started';
