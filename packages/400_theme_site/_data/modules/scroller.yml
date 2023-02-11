@@ -31,7 +31,7 @@ settings:
     # Intro Panel
     #
     - scroller:
-        enabled:                        true
+        enabled:                        false
         type:                           showOnScroll
         id:                             home_intro_panel
         container:                      home_intro_panel
