@@ -334,7 +334,7 @@ globals:
 resources:
 
   # ============================================================================
-  # J1 Resources loaded ALWAYS
+  # J1 Resources loaded ALWAYS, script_load set to CLASSIC (empty)
   # ----------------------------------------------------------------------------
 
   # ----------------------------------------------------------------------------
@@ -388,7 +388,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       preload:                          false
-      script_load:                      async
+      script_load:
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -462,7 +462,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       preload:                          false
-      script_load:                      defer
+      script_load:
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -689,7 +689,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       preload:                          false
-      script_load:                      defer
+      script_load:
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -746,7 +746,7 @@ resources:
       layout:                           [ all ]
       required:                         ondemand
       preload:                          false
-      script_load:                      defer
+      script_load:
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -773,7 +773,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       preload:                          false                                   # property currently unused
-      script_load:                      async
+      script_load:
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -797,7 +797,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       preload:                          false                                   # property currently unused
-      script_load:                      async
+      script_load:
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -822,7 +822,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       preload:                          false                                   # property currently unused
-      script_load:                      async
+      script_load:
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -844,7 +844,7 @@ resources:
       layout:                           [ home, page, post, collection, blog_archive, app ]
       required:                         always
       preload:                          false
-      script_load:                      defer
+      script_load:
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -868,7 +868,7 @@ resources:
       region:                           head
       required:                         always
       preload:                          false
-      script_load:                      defer
+      script_load:
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -890,7 +890,7 @@ resources:
       layout:                           [ home, page, post, collection, blog_archive ]
       required:                         always                                  # always | ondemand
       preload:                          false                                   # property currently unused
-      script_load:                      defer
+      script_load:
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -915,7 +915,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       preload:                          false
-      script_load:                      async
+      script_load:
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -939,7 +939,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       preload:                          false
-      script_load:                      async
+      script_load:
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -963,7 +963,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       preload:                          false
-      script_load:                      async
+      script_load:
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -974,7 +974,7 @@ resources:
 
 
   # ============================================================================
-  # J1 Resources loaded ONDEMAND
+  # J1 Resources loaded ONDEMAND, script_load set to async | defer
   # ----------------------------------------------------------------------------
 
   # ----------------------------------------------------------------------------

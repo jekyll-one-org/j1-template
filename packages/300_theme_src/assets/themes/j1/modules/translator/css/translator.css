@@ -24,10 +24,18 @@
 }
 
 /* hide the powered by */
-.goog-logo-link {display: none !important;}
-.goog-te-gadget {height: 28px !important;  overflow: hidden;}
-/* .goog-te-gadget {display: none !important;} */
+.goog-logo-link {
+  display: none !important;
+}
+.goog-te-gadget {
+  height: 28px !important;  overflow: hidden;
+}
 
-/* remove the top frame */
-body{top: 0 !important;}
-.goog-te-banner-frame{display: none !important;}
+/* hide the Google Translator TopBar (top frame) */
+/* See: https://stackoverflow.com/questions/11248673/hiding-google-translate-bar */
+body {
+  top: 0 !important;
+}
+body > .skiptranslate {
+  display: none;
+}

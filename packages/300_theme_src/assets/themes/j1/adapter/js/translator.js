@@ -180,7 +180,6 @@ j1.adapter.translator = (function (j1, window) {
       gtCallbackScript.text += '    layout:       google.translate.TranslateElement.FloatPosition.TOP_LEFT' + '\n';
       gtCallbackScript.text += '  },' + '\n';
       gtCallbackScript.text += '  "google_translate_element");' + '\n';
-//    gtCallbackScript.text += '  j1.adapter.translator.postTranslateElementInit(gtAPI);' + '\n';
       gtCallbackScript.text += '}' + '\n';
       document.head.appendChild(gtCallbackScript);
 
@@ -201,7 +200,9 @@ j1.adapter.translator = (function (j1, window) {
           domainAttribute = '';
         }
 
-        if ( j1.getState() === 'finished' ) {
+        var pageState   = $('#no_flicker').css("display");
+        var pageVisible = (pageState == 'block') ? true: false;
+        if ( j1.getState() === 'finished' && pageVisible ) {
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
@@ -218,11 +219,6 @@ j1.adapter.translator = (function (j1, window) {
               secure:   secure,
               expires:  expires
             });
-          }
-
-          // hide the google translate element if exists
-          if ($('google_translate_element')) {
-            $('google_translate_element').hide();
           }
 
           // show|hide translate button if enabled
@@ -291,9 +287,6 @@ j1.adapter.translator = (function (j1, window) {
           if (user_translate.analysis && user_translate.personalization && user_translate.translationEnabled) {
             if (translatorOptions.translatorName === 'google') {
               head.appendChild(gtTranslateScript);
-              if ($('google_translate_element')) {
-                $('google_translate_element').hide();
-              }
             }
           } else {
             if (translatorOptions.translatorName === 'google') {
