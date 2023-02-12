@@ -101,16 +101,16 @@ defaults:
                                         <br />Required Cookie Settings:
                                         <ul>
                                           <li style="list-style-type: none;">
-                                            <code>Traffic Analysis</code>
+                                            <b>Analysis</b>
                                             <p>
-                                              For the use of Google Translations, your consent on <b>Analysis</b>
+                                              For the use of Google Translations, your consent on analysis
                                               in the privacy settings is required.
                                             </p>
                                           </li>
                                           <li style="list-style-type: none;">
-                                            <code>Personal Data</code>
+                                            <b>Personalization</b>
                                             <p>
-                                              For the use of Google Translations, your consent on <b>Personalization</b>
+                                              For the use of Google Translations, your consent on personalization
                                               in the privacy settings is required.
                                             </p>
                                           </li>
@@ -125,18 +125,18 @@ defaults:
                                         <br />
                                         <ul>
                                           <li style="list-style-type: none;">
-                                            <code>Traffic Analysen</code>
+                                            <b>Analysen</b>
                                             <p>
                                               Für die Nutzung von Übersetzungen ist Ihre Zustimmung zu
-                                              <b>Analysen</b> in den Einstellungen Ihrer Privatsphäre
+                                              Analysen in den Einstellungen Ihrer Privatsphäre
                                               erforderlich.
                                             </p>
                                           </li>
                                           <li style="list-style-type: none;">
-                                            <code>Personalisierung</code>
+                                            <b>Personalisierung</b>
                                             <p>
                                               Für die Nutzung von Übersetzungen ist Ihre Zustimmung zur
-                                              <b>Personalisierung</b> in den Einstellungen Ihrer Privatsphäre
+                                              Personalisierung in den Einstellungen Ihrer Privatsphäre
                                               erforderlich.
                                             </p>
                                           </li>
