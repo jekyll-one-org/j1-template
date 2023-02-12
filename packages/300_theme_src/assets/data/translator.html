@@ -81,10 +81,10 @@ exclude_from_search:                    true
           <p class="mb-3">{{translate_options.google.modal_settings.body_text.en}}</p>
         </div>
         <p style="font-size: 90%">{{translate_options.google.modal_settings.language_selector_title.en}}</p>
-        <div id="dropdownJSON" class="mb-2" style="display:none"></div>
+        <div id="dropdownJSON" class="notranslate mb-4" style="display:none"></div>
         <p>
           <a href="#google-privacy" data-bs-toggle="collapse" class="">Privacy Notice</a>
-          <a href="#google-options" data-bs-toggle="collapse" class="float-right">My Settings</a>
+          <a href="#google-options" data-bs-toggle="collapse" class="float-right">Privacy</a>
         </p>
 
         <div id="google-privacy" class="collapse">
@@ -102,7 +102,7 @@ exclude_from_search:                    true
               <label>
                 <input id="checkboxAnalysis" type="checkbox" name="checkboxAnalysis" checked>
                 <span class="bmd-switch-track"></span>
-                Analysis enabled (Your Privacy)
+                Analysis
               </label>
             </div>
           </div>
@@ -112,7 +112,7 @@ exclude_from_search:                    true
               <label>
                 <input id="checkboxPersonalization" type="checkbox" name="checkboxPersonalization" checked>
                 <span class="bmd-switch-track"></span>
-                Personalization enabled (Your Privacy)
+                Personalization
               </label>
             </div>
           </div>
@@ -122,7 +122,7 @@ exclude_from_search:                    true
               <label>
                 <input id="checkboxuseLanguageFromBrowser" type="checkbox" name="checkboxuseLanguageFromBrowser" checked disabled>
                 <span class="bmd-switch-track"></span>
-                Language settings taken from browser
+                Language taken from browser
               </label>
             </div>
           </div>
@@ -132,23 +132,22 @@ exclude_from_search:                    true
               <label>
                 <input id="checkboxTranslateAllPages" type="checkbox" name="checkboxTranslateAllPages" checked disabled>
                 <span class="bmd-switch-track"></span>
-                Translation of all pages
+                Translate all pages
               </label>
             </div>
           </div>
 
-          <div class="translator-option" data-name="translationEnabled">
+          <!-- div class="translator-option" data-name="translationEnabled">
             <div class="switch mb-1">
               <label>
                 <input id="checkboxTranslationEnabled" type="checkbox" name="checkboxTranslationEnabled" checked>
                 <span class="bmd-switch-track"></span>
-                Translation enabled
+                Translation Service
               </label>
             </div>
-          </div>
+          </div -->
 
         </div>
-
       </div>
 
       <div class="modal-footer">
