@@ -60,15 +60,18 @@ settings:
         description_properties:         mt-3 mr-3 mb-5
         description: >
                                         <p class="dropcap">
-                                          People quite often ask if static websites make sense
-                                          for anything beyond a one-page website.
+                                          People quite often ask if static websites make sense for
+                                          anything beyond a one-page website. The answer is clearly
+                                          <b>yes</b>!
+                                        </p>
                                         <p>
-                                          The answer is <b>yes</b>! Static websites can make sense for any
-                                          type of website, from a portfolio website to an e-commerce store.
-                                          Static websites are becoming increasingly popular because they are
-                                          faster, more secure, and easier to maintain than traditional dynamic
-                                          websites. Static websites are also great for SEO (search engine optimization)
-                                          as they are easier for search engines to crawl and index.
+                                          Static websites can make sense for any type of website, from
+                                          a portfolio website to an e-commerce store. Static websites
+                                          are becoming increasingly popular because they are faster,
+                                          more secure, and easier to maintain than traditional dynamic
+                                          websites. Static websites are also great for SEO (search engine
+                                          optimization) as they are easier for search engines to crawl
+                                          and index.
                                         </p>
                                         <p class="tagline">
                                           <b>Learn the top features of JekyllOne.</b>

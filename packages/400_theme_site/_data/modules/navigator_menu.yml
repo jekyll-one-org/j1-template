@@ -63,8 +63,8 @@
 # ------------------------------------------------------------------------------
 # TopLevel item FEATURES
 #
-# - item:                                 Features
-#   href:                                 /#home_intro_panel
+- item:                                 Features
+  href:                                 /#home_intro_panel
 
 # ------------------------------------------------------------------------------
 # TopLevel item BLOG
