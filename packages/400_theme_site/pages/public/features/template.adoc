@@ -29,8 +29,8 @@ sitemap:                                true
 advertising:                            false
 fab_menu_id:                            open_toc
 comments:                               false
-permalink:                              /pages/public/features/template_features/
 regenerate:                             true
+permalink:                              /pages/public/features/template_features/
 
 resources:                              [
                                           animate, clipboard, comments, rouge, lightbox, carousel,

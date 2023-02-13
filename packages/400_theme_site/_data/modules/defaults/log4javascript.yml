@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/log4javascript.yml
+# ~/_data/modules/defaults/log4javascript.yml
 # Default configuration for J1 Logger module
 #
 # Product/Info:
@@ -22,10 +22,11 @@ description:
   location:                             _data/modules/defaults/log4javascript.yml
 
 # ------------------------------------------------------------------------------
-# User configuration settings
+# Default configuration settings
 #
 defaults:
   enabled:                              true
+  tz_offset:                            GMT+01:00
 
   # ----------------------------------------------------------------------------
   # APPENDER configurations
@@ -34,6 +35,7 @@ defaults:
 
     # --------------------------------------------------------------------------
     # CONSOLE appender
+    #
     - name:                             Console Appender
       appender:
         name:                           consoleAppender
@@ -45,6 +47,7 @@ defaults:
 
     # --------------------------------------------------------------------------
     # AJAX appender
+    #
     - name:                             Ajax Appender
       appender:
         name:                           ajaxAppender
@@ -62,9 +65,9 @@ defaults:
         rolling_files:                  false
         mode:                           append
 
-
     # --------------------------------------------------------------------------
     # POPUP appender
+    #
     - name:                             Popup Appender
       appender:
         name:                           popupAppender
@@ -85,6 +88,7 @@ defaults:
 
     # --------------------------------------------------------------------------
     # J1 PARENT logger (j1)
+    #
     - name:                             Parent Logger
       logger:
         type:                           parent

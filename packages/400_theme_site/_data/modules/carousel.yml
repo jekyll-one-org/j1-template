@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
 # ~/_data/modules/carousel.yml
-# Default configuration for J1 Carousel (based on Owl Carousel V1)
+# User configuration for J1 Carousel (based on Owl Carousel V1)
 #
 # Product/Info:
 # https://jekyll.one
@@ -25,25 +25,6 @@ description:
 #
 settings:
 
-  # ----------------------------------------------------------------------------
-  # GENERAL Carousel settings
-  #
-  # enabled
-  # ----------------------------------------------------------------------------
-  #   Enables|Disables the use of a carousel|slider
-  #
-  # xhr_data_path
-  # ----------------------------------------------------------------------------
-  #   All data items displayed by a slider are being read from a
-  #   JSON file automatically generated from that configuration.
-  #   AJAX get method is used to supply the slider with respective
-  #   the HTML code at the time the slider is initialized (by the
-  #   J1 Adapter for J1 Owl Sliders).
-  #
-  #   values:                             string
-  #   default:                            /assets/data/carousel.json
-  #
-  # ----------------------------------------------------------------------------
   enabled:                              true
 
   # ----------------------------------------------------------------------------

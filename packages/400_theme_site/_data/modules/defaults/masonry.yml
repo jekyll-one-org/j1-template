@@ -118,15 +118,18 @@ defaults:
   #
   # ----------------------------------------------------------------------------
   enabled:                              false
-  hideDisabled:                         true
 
+  # ----------------------------------------------------------------------------
+  # Masonry options
+  # ----------------------------------------------------------------------------
+  hideDisabled:                         true
   initLayout:                           false
   originTop:                            false
   originLeft:                           false
   percentPosition:                      false
   horizontalOrder:                      false
   stagger:                              30
-  transitionDuration:                   0.4
+  transitionDuration:                   0.8
 
 # columnWidth:                          200
 # itemSelector:                         '.grid-item'

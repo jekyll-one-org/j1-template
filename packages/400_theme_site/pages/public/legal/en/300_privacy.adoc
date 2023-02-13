@@ -26,9 +26,8 @@ fab_menu_id:                            open_toc
 scrollbar:                              false
 comments:                               false
 toc:                                    true
-
-permalink:                              /pages/public/legal/en/privacy/
 regenerate:                             false
+permalink:                              /pages/public/legal/en/privacy/
 
 resources:                              [ animate, clipboard, comments, rouge ]
 resource_options:

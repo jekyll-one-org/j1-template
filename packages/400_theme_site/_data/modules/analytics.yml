@@ -25,9 +25,13 @@ description:
 #
 settings:
   enabled:                              true
+  trackingID:                           your-tracking-id
 
+  # ----------------------------------------------------------------------------
+  # Provider settings
+  # ----------------------------------------------------------------------------
   google:
-    trackingID:                         your-tracking-id
+    anonymizeIP:                        true
 
 # ------------------------------------------------------------------------------
 # END config

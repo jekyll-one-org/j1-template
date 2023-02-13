@@ -23,11 +23,12 @@ image:
   height:                               1280
   alt:                                  Photo by Quino Al Angel on Unsplash
 
-permalink:                              /pages/public/learn/roundtrip/present_images/
+comments:                               false
 regenerate:                             false
+permalink:                              /pages/public/learn/roundtrip/present_images/
 
 resources:                              [
-                                          animate, clipboard, carousel,
+                                          animate, clipboard, carousel, comments,
                                           justifiedGallery, lightbox, lightGallery,
                                           masterslider, rouge
                                         ]

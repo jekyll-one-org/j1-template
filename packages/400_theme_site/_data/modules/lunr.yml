@@ -26,18 +26,9 @@ description:
 settings:
   enabled:                              true
 
-  placement:                            navbar
-  target:                               _blank
-  rebuild:                              true
-  full_index:                           false
-
-  stopwords_locale:                     en
-  min_length:                           3
-
-
   # ----------------------------------------------------------------------------
-  # TopSearch
-  #
+  # Search options
+  # ----------------------------------------------------------------------------
   topsearch:
     enabled:                            true
 

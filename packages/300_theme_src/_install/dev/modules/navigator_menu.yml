@@ -61,10 +61,23 @@
           icon:                         magnify
 
 # ------------------------------------------------------------------------------
+# TopLevel item FEATURES
+#
+- item:                                 Features
+  href:                                 /#home_intro_panel
+
+# ------------------------------------------------------------------------------
+# TopLevel item BLOG
+#
+# - item:                                 Blog
+#   href:                                 /#home_news_panel
+
+# ------------------------------------------------------------------------------
 # Menu BLOG
 #
 - item:                                 Blog
   sublevel:
+
     - title:                            Navigator
       href:                             /pages/public/blog/navigator/
       icon:                             near-me

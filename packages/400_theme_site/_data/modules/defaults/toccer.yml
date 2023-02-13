@@ -21,7 +21,7 @@ about_config:
   location:                             _data/modules/defaults/toccer.yml
 
 # ------------------------------------------------------------------------------
-# User configuration settings
+# Default configuration settings
 #
 defaults:
 
@@ -46,7 +46,7 @@ defaults:
   enabled:                              true
 
   # ----------------------------------------------------------------------------
-  # MODULE settings
+  # Toccer options
   #
   # tocSelector
   # ----------------------------------------------------------------------------

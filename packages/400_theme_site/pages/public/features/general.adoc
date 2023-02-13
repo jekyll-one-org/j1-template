@@ -28,9 +28,8 @@ sitemap:                                true
 advertising:                            false
 comments:                               false
 fab_menu_id:                            open_toc
-
-permalink:                              /pages/public/features/general_features/
 regenerate:                             false
+permalink:                              /pages/public/features/general_features/
 
 resources:                              [ animate, clipboard, comments, rouge, lightbox, iconify ]
 resource_options:

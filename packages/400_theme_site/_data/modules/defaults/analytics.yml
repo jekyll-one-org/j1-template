@@ -53,6 +53,9 @@ defaults:
   enabled:                              false
 
   provider:                             google
+  trackingID:                           your-tracking-id
+  skipAllHosts:                         localhost, 127.0.0.1
+
   google:
     # --------------------------------------------------------------------------
     # Provider settings
@@ -95,10 +98,8 @@ defaults:
     #
     # --------------------------------------------------------------------------
     #
-    skipAllHosts:                       localhost, 127.0.0.1
-    trackingID:                         your-tracking-id
     optInOut:                           true
-    anonymizeIP:                        true
+    anonymizeIP:                        false
 
 # ------------------------------------------------------------------------------
 # END config

@@ -25,9 +25,9 @@ image:
   height:                               1280
   alt:                                  Broadway Underground
 
-permalink:                              /pages/public/learn/roundtrip/present_videos/
 regenerate:                             false
 personalization:                        true
+permalink:                              /pages/public/learn/roundtrip/present_videos/
 
 resources:                              [
                                           animate, lightGallery, justifiedGallery, video_js,

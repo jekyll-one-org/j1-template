@@ -26,6 +26,9 @@ description:
 defaults:
   enabled:                              false
 
+  show_cookie_icon:                     false
+  expire_cookies_on_required_only:      true
+
   reloadPageOnChange:                   true
   autoShowDialog:                       true                                    # show consent dialog if NO consent cookie found
   dialogLanguage:                       content                                 # auto|content|one of dialogLanguages

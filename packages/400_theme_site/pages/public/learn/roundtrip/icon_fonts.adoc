@@ -22,8 +22,8 @@ image:
   height:                               1280
   alt:                                  Photo by Harpal Singh on Unsplash
 
-permalink:                              /pages/public/learn/roundtrip/mdi_icon_font/
 regenerate:                             false
+permalink:                              /pages/public/learn/roundtrip/mdi_icon_font/
 
 resources:                              [ animate, iconify ]
 resource_options:

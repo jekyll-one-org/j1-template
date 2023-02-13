@@ -22,8 +22,8 @@ image:
   height:                               1280
   alt:                                  Bootstrap Framework Logo
 
-permalink:                              /pages/public/learn/roundtrip/modals/
 regenerate:                             false
+permalink:                              /pages/public/learn/roundtrip/modals/
 
 resources:                              [ animate ]
 resource_options:

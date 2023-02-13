@@ -27,9 +27,8 @@ fab_menu_id:                            default
 scrollbar:                              false
 comments:                               false
 toc:                                    false
-
-permalink:                              /pages/public/legal/en/impress/
 regenerate:                             false
+permalink:                              /pages/public/legal/en/impress/
 
 resources:                              [ animate ]
 resource_options:

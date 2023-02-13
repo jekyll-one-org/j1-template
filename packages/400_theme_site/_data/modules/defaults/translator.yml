@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-#  ~/_data/modules/defaults/google_translate.yml
-#  Default configuration settings for J1 Google Translate module
+#  ~/_data/modules/defaults/translator.yml
+#  Default configuration settings for J1 Translator module
 #
 #  Product/Info:
 #  https://jekyll.one
@@ -26,6 +26,9 @@ about_config:
 defaults:
   enabled:                              false
 
+  # ----------------------------------------------------------------------------
+  # Translator options
+  # ----------------------------------------------------------------------------
   translationEnabled:                   false
   hideTranslatorIcon:                   false                                   # hide translator icon if translation not allowed (cookie consent)
   disableLanguageSelector:              false                                   # disable language dropdown for translation in dialog (modal)

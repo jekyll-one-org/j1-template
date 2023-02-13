@@ -21,8 +21,8 @@ image:
   alt:                                  puzzle-1920x1280-bw
 
 comments:                               false
-permalink:                              /pages/public/learn/roundtrip/asciidoc_extensions/
 regenerate:                             false
+permalink:                              /pages/public/learn/roundtrip/asciidoc_extensions/
 
 resources:                              [ animate, clipboard, comments, lightbox, iconify, rouge ]
 resource_options:

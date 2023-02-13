@@ -22,8 +22,8 @@ image:
   height:                               1280
   alt:                                  Photo by Clem Onojeghuo on Unsplash
 
-permalink:                              /pages/public/learn/roundtrip/themes/
 regenerate:                             true
+permalink:                              /pages/public/learn/roundtrip/themes/
 
 resources:                              [ animate, rouge, clipboard, lightbox ]
 resource_options:

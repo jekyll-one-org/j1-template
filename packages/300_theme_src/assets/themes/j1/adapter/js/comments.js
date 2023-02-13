@@ -184,7 +184,7 @@ var logText;
         logger = log4javascript.getLogger('j1.adapter.comments');
 
         // check the site ID to be used for a provider
-        providerID      = (typeof commentsOptions.site_id == "number") ? commentsOptions.site_id.toString() : commentsOptions.hyvor.site_id;
+        providerID      = (typeof commentsOptions.site_id == "number") ? commentsOptions.site_id.toString() : commentsOptions.site_id;
         validProviderID = (providerID.includes('your')) ? false : true;
 
         {% case comments_provider %}
@@ -195,7 +195,7 @@ var logText;
           if (j1.getState() == 'finished') {
 
             if (!validProviderID) {
-              logger.warn('\n' + 'invalid site id detected for Hyvor Talk: ' + providerID);
+              logger.debug('\n' + 'invalid site id detected for Hyvor Talk: ' + providerID);
               logger.info('\n' + 'skip initialization for provider: ' + comments_provider);
               clearInterval(dependencies_met_page_ready);
               return false;
@@ -253,7 +253,7 @@ var logText;
               // disable Hyvor Talk
               // ---------------------------------------------------------------
               logger.info('\n' + 'user consent on comments: ' + user_consent.personalization);
-              logger.warn('\n' + 'disable Hyvor Talk on site id: ' + providerID);
+              logger.debug('\n' + 'disable Hyvor Talk on site id: ' + providerID);
 
               // remove Hyvor Talk resources
               // ---------------------------------------------------------------
@@ -272,7 +272,7 @@ var logText;
           if (j1.getState() == 'finished') {
 
             if (!validProviderID) {
-              logger.warn('\n' + 'invalid short name detected for Disqus: ' + providerID);
+              logger.debug('\n' + 'invalid short name detected for Disqus: ' + providerID);
               logger.info('\n' + 'skip initialization for provider: ' + comments_provider);
               clearInterval(dependencies_met_page_ready);
               return;
@@ -331,7 +331,7 @@ var logText;
               $('#main-content').append('<div id="disqus_thread"></div>');
             } else {
               logger.info('\n' + 'user consent on comments: ' + user_consent.personalization);
-              logger.warn('\n' + 'disable comments provider' + ' {{comments_provider}} on short name: ' + providerID);
+              logger.debug('\n' + 'disable comments provider' + ' {{comments_provider}} on short name: ' + providerID);
               $('#leave-a-comment').remove();
               $('#dq-web-api').remove();
               $('#hdisqus_thread').remove();

@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/log4r.yml
+# ~/_data/modules/defaults/log4r.yml
 # Default configuration for J1 Logger module (Ruby)
 #
 # Product/Info:
@@ -20,18 +20,21 @@ description:
   scope:                                Default settings
   location:                             _data/modules/log4r.yml
 
+# ------------------------------------------------------------------------------
+# Default configuration settings
+#
 log4r_config:
 
-  # ============================================================================
+  # ----------------------------------------------------------------------------
   # BASE configurations (pre config)
-  #
+  # ----------------------------------------------------------------------------
   pre_config:
     global:
       level:                            DEBUG
     root:
       level:                            DEBUG
 
-  # ============================================================================
+  # ----------------------------------------------------------------------------
   # LOGGER configurations
   #   j1.mw
   #   j1.mw.auth_mgr

@@ -10,8 +10,8 @@ categories:                             [ Jekyll, Collection ]
 tags:                                   [ Info, Overview ]
 
 fab_menu_id:                            open_toc
-permalink:                              /pages/public/collections/whats_up/
 regenerate:                             false
+permalink:                              /pages/public/collections/whats_up/
 
 resource_options:
   - attic:

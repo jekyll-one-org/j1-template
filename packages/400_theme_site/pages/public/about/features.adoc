@@ -25,8 +25,8 @@ image:
 fab_menu_id:                            default
 scrollbar:                              false
 comments:                               false
-permalink:                              /pages/public/about/features/
 regenerate:                             false
+permalink:                              /pages/public/about/features/
 
 resources:                              [ animate, lightbox ]
 resource_options:

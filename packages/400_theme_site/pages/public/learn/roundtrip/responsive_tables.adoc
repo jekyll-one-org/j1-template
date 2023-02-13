@@ -25,8 +25,8 @@ flowtext:                               false
 fab_menu_id:                            page_ctrl
 scrollbar:                              true
 
-permalink:                              /pages/public/learn/roundtrip/responsive_tables/
 regenerate:                             true
+permalink:                              /pages/public/learn/roundtrip/responsive_tables/
 
 resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:

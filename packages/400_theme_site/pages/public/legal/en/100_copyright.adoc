@@ -28,8 +28,8 @@ scrollbar:                              false
 comments:                               false
 toc:                                    true
 
-permalink:                              /pages/public/legal/en/copyright/
 regenerate:                             false
+permalink:                              /pages/public/legal/en/copyright/
 
 resources:                              [ animate, clipboard, comments, rouge ]
 resource_options:

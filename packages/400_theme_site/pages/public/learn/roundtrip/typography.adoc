@@ -21,8 +21,8 @@ image:
   height:                               1280
   alt:                                  Photo by Alice Donovan Rousel on Unsplash
 
-permalink:                              /pages/public/learn/roundtrip/typography/
 regenerate:                             false
+permalink:                              /pages/public/learn/roundtrip/typography/
 
 resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
