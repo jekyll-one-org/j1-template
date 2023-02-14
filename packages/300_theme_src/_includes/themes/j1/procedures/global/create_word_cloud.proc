@@ -73,7 +73,7 @@
         {% if source == 'categories' %}
           {% for tag in word_array %}
             <li class="badge-tag">
-              <a href="#{{tag|downcase}}">
+              <a class="bg-primary" href="#{{tag|downcase}}">
                 {{ tag | capitalize }}
                 <span>{{ site.categories[tag] | size }}</span>
               </a>
@@ -82,7 +82,7 @@
         {% elsif source == 'tags' %}
           {% for tag in word_array %}
             <li class="badge-tag">
-              <a href="#{{ tag | replace: '+','_' | replace: ' ','_' | downcase }}">
+              <a class="bg-primary" href="#{{ tag | replace: '+','_' | replace: ' ','_' | downcase }}">
                 {{ tag }}
                 <span>{{ site.tags[tag] | size }}</span>
               </a>

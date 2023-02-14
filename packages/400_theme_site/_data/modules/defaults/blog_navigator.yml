@@ -228,9 +228,9 @@ defaults:
         headline:                       Preview
         description: >
                                         All articles are reverse ordered by date. The current articles are displayed
-                                        first. From the FAB button <a href="#" class="btn-fab-floating btn-small btn-md-blue">
+                                        first. From the FAB button <a href="#" class="btn-fab-floating btn-small bg-primary">
                                         <i class="mdi mdi-plus"></i>FAB button</a> you can reach a table of contents
-                                        <a href="#" class="btn-fab-floating btn-small btn-md-blue">
+                                        <a href="#" class="btn-fab-floating btn-small bg-primary">
                                         <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> of all available articles
                                         in the same order. To preview older posts, use the button <b>Older</b> from
                                         the Preview Bar. For newer posts use the button <b>Newer</b> for more recent
@@ -240,9 +240,9 @@ defaults:
         description: >
                                         Alle Artikel sind in umgekehrter Reihenfolge ihres Erscheinens gruppiert.
                                         Aktuellere Beiträge werden zuerst angezeigt. Über den FAB-Button
-                                        <a href="#" class="btn-fab-floating btn-small btn-md-blue">
+                                        <a href="#" class="btn-fab-floating btn-small bg-primary">
                                         <i class="mdi mdi-plus"></i>FAB button</a> erreichen Sie ein
-                                        Inhaltsverzeichnis <a href="#" class="btn-fab-floating btn-small btn-md-blue">
+                                        Inhaltsverzeichnis <a href="#" class="btn-fab-floating btn-small bg-primary">
                                         <i class="mdi mdi-wrap mdi-"></i>open_mmenu_toc</a> über alle verfübaren Artikel
                                         in gleicher Reihenfolge. Zur Anzeige älterer Artikel, verwenden Sie die Schältfläche
                                         <b>Ältere</b>. Für jüngere Posts klicken Sie auf die Schältfläche
@@ -258,10 +258,10 @@ defaults:
                                         Check out <b>all</b> articles in the blog posts <b>archive</b>.
                                         Below, find articles available this site sorted from the youngest
                                         to the oldest. From the FAB button <button type="button" class="btn-fab-floating
-                                        btn-small btn-md-blue raised-z5" aria-label="fab-button">
+                                        btn-small bg-primary raised-z5" aria-label="fab-button">
                                         <i class="mdi mdi-plus"></i></button> you can reach a
                                         table of contents <button type="button" class="btn-fab-floating btn-small
-                                        btn-md-blue raised-z5" aria-label="fab-button">
+                                        bg-primary raised-z5" aria-label="fab-button">
                                         <i class="mdi mdi-wrap"></i></button> of all available
                                         articles in the same order.
                                         <br><br>
@@ -275,9 +275,9 @@ defaults:
                                         Auf dieser Seite finden Sie alle Artikel aus dem <b>Archiv</b> der
                                         Blog-Beiträge. Die Artikel sind in umgekehrter Reihenfolge ihres Erscheinens
                                         gruppiert. Aktuellere Beiträge werden zuerst angezeigt. Über den FAB-Button
-                                        <button type="button" class="btn-fab-floating btn-small btn-md-blue raised-z5"
+                                        <button type="button" class="btn-fab-floating btn-small bg-primary raised-z5"
                                         aria-label="fab-button"> <i class="mdi mdi-plus"></i></button> erreichen Sie ein
-                                        Inhaltsverzeichnis <button type="button" class="btn-fab-floating btn-small btn-md-blue
+                                        Inhaltsverzeichnis <button type="button" class="btn-fab-floating btn-small bg-primary
                                         raised-z5" aria-label="fab-button"> <i class="mdi mdi-wrap"></i></button>
                                         über alle verfübaren Artikel in gleicher Reihenfolge.
                                         <br><br>
@@ -296,10 +296,10 @@ defaults:
                                         On this page you will find all articles from the <b>archive</b>
                                         of the blog posts. The articles are grouped by <b>category</b>.
                                         From the FAB button <button type="button" class="btn-fab-floating
-                                        btn-small btn-md-blue raised-z5" aria-label="fab-button">
+                                        btn-small bg-primary raised-z5" aria-label="fab-button">
                                         <i class="mdi mdi-plus"></i></button> you can reach a
                                         table of contents <button type="button" class="btn-fab-floating btn-small
-                                        btn-md-blue raised-z5" aria-label="fab-button">
+                                        bg-primary raised-z5" aria-label="fab-button">
                                         <i class="mdi mdi-wrap"></i></button> of all available articles
                                         in the same order.
                                         <br><br>
@@ -314,10 +314,10 @@ defaults:
                                         Auf dieser Seite finden Sie alle Artikel aus dem <b>Archiv</b> der
                                         Blog-Beiträge. Die Artikel sind nach <b>Kategorie</b> gruppiert.
                                         Über den FAB-Button
-                                        <button type="button" class="btn-fab-floating btn-small btn-md-blue raised-z5"
+                                        <button type="button" class="btn-fab-floating btn-small bg-primary raised-z5"
                                         aria-label="fab-button"> <i class="mdi mdi-plus"></i></button>
                                         erreichen Sie ein Inhaltsverzeichnis
-                                        <button type="button" class="btn-fab-floating btn-small btn-md-blue
+                                        <button type="button" class="btn-fab-floating btn-small bg-primary
                                         raised-z5" aria-label="fab-button"> <i class="mdi mdi-wrap"></i></button>
                                         über alle verfübaren Artikel in gleicher Reihenfolge.
                                         <br><br>
@@ -337,10 +337,10 @@ defaults:
                                         On this page you will find all articles from the <b>archive</b>
                                         of the blog posts. The articles are grouped by <b>Date</b>.
                                         From the FAB button <button type="button" class="btn-fab-floating
-                                        btn-small btn-md-blue raised-z5" aria-label="fab-button">
+                                        btn-small bg-primary raised-z5" aria-label="fab-button">
                                         <i class="mdi mdi-plus"></i></button> you can reach a
                                         table of contents <button type="button" class="btn-fab-floating btn-small
-                                        btn-md-blue raised-z5" aria-label="fab-button">
+                                        bg-primary raised-z5" aria-label="fab-button">
                                         <i class="mdi mdi-wrap"></i></button> of all available articles
                                         in the same order.
                                         <br><br>
@@ -354,10 +354,10 @@ defaults:
                                         Auf dieser Seite finden Sie alle Artikel aus dem <b>Archiv</b> der
                                         Blog-Beiträge. Die Artikel sind nach <b>Datum</b> gruppiert.
                                         Über den FAB-Button <button type="button" class="btn-fab-floating
-                                        btn-small btn-md-blue raised-z5" aria-label="fab-button">
+                                        btn-small bg-primary raised-z5" aria-label="fab-button">
                                         <i class="mdi mdi-plus"></i></button> erreichen Sie ein
                                         Inhaltsverzeichnis <button type="button" class="btn-fab-floating btn-small
-                                        btn-md-blue raised-z5" aria-label="fab-button">
+                                        bg-primary raised-z5" aria-label="fab-button">
                                         <i class="mdi mdi-wrap"></i></button> über alle verfübaren Artikel
                                         in gleicher Reihenfolge.
                                         <br><br>
@@ -377,10 +377,10 @@ defaults:
                                         On this page you will find all articles from the <b>archive</b>
                                         of the blog posts. The articles are grouped by <b>Tag</b>.
                                         From the FAB button <button type="button" class="btn-fab-floating
-                                        btn-small btn-md-blue raised-z5" aria-label="fab-button">
+                                        btn-small bg-primary raised-z5" aria-label="fab-button">
                                         <i class="mdi mdi-plus"></i></button> you can reach a
                                         table of contents <button type="button" class="btn-fab-floating btn-small
-                                        btn-md-blue raised-z5" aria-label="fab-button">
+                                        bg-primary raised-z5" aria-label="fab-button">
                                         <i class="mdi mdi-wrap"></i></button> of all available articles
                                         in the same order.
                                         <br><br>
@@ -394,10 +394,10 @@ defaults:
                                         Auf dieser Seite finden Sie alle Artikel aus dem <b>Archiv</b> der
                                         Blog-Beiträge. Die Artikel sind nach <b>Tag</b> gruppiert.
                                         Über den FAB-Button <button type="button" class="btn-fab-floating
-                                        btn-small btn-md-blue raised-z5" aria-label="fab-button">
+                                        btn-small bg-primary raised-z5" aria-label="fab-button">
                                         <i class="mdi mdi-plus"></i></button> erreichen Sie ein
                                         Inhaltsverzeichnis <button type="button" class="btn-fab-floating btn-small
-                                        btn-md-blue raised-z5" aria-label="fab-button">
+                                        bg-primary raised-z5" aria-label="fab-button">
                                         <i class="mdi mdi-wrap"></i></button> über alle verfübaren Artikel
                                         in gleicher Reihenfolge.
                                         <br><br>
