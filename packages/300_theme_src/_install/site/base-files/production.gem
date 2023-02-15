@@ -79,7 +79,7 @@ gem 'j1-template', '~> 2023.0.0'
 
 # Loaded from gem.fury.io
 #source 'https://gem.fury.io/jekyll-one-org/' do
-#  gem 'j1-template', '~> 2023.0.16'
+#  gem 'j1-template', '~> 2023.0.17'
 #end
 
 # ------------------------------------------------------------------------------

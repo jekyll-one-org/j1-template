@@ -27,7 +27,6 @@ fab_menu_id:                            open_toc
 scrollbar:                              false
 comments:                               false
 toc:                                    true
-
 regenerate:                             false
 permalink:                              /pages/public/legal/en/copyright/
 
