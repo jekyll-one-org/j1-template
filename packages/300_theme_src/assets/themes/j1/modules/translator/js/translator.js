@@ -50,10 +50,25 @@ function Translator(props) {
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
         expires = "; expires=" + date.toUTCString();
       }
+
+      // if (cookieSecure) {
+      //   document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + '; ' + 'Domain=' + cookieDomain + '; ' + 'Secure=' + cookieSecure + ';';
+      // } else {
+      //   document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + ';' + 'Domain=' + cookieDomain + '; ';
+      // }
+
       if (cookieSecure) {
-        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + '; ' + 'Domain=' + cookieDomain + '; ' + 'Secure=' + cookieSecure + ';';
+        if (cookieDomain) {
+          document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + '; ' + 'Domain=' + cookieDomain + '; ' + 'Secure=' + cookieSecure + ';';
+        } else {
+          document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + '; ' + 'Secure=' + cookieSecure + ';';
+        }
       } else {
-        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + ';' + 'Domain=' + cookieDomain + '; ';
+        if (cookieDomain) {
+          document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + ';' + 'Domain=' + cookieDomain + '; ';
+        } else {
+          document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + ';';
+        }
       }
     },
     get: function (name) {
@@ -73,9 +88,6 @@ function Translator(props) {
     return undefined;
     }
   };
-
-  logger.info('\n' + 'initializing core module: started');
-  logger.info('\n' + 'state: started');
 
   // ---------------------------------------------------------------------------
   // default property settings
@@ -122,7 +134,7 @@ function Translator(props) {
   this.props.xhrDataElement = this.props.xhrDataElement + '-' + this.props.dialogLanguage;
 
   logger.info('\n' + 'initializing core module: started');
-  logger.info('\n' + 'state: started');
+  logger.debug('\n' + 'state: started');
 
   var translationDefaultSettings = {
     "translatorName":         "google",
@@ -639,6 +651,6 @@ function Translator(props) {
   }; // END getSettings
 
   logger.info('\n' + 'initializing core module finished');
-  logger.info('\n' + 'state: finished');
+  logger.debug('\n' + 'state: finished');
 
 } // END Translator

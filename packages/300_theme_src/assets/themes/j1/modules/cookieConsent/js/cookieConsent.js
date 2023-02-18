@@ -99,11 +99,17 @@ function CookieConsent(props) {
       //------------------------------------------------------------------------
 
       if (cookieSecure) {
-//      document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + '; ' + 'Domain=' + cookieDomain + '; ' + 'Secure=' + cookieSecure + ';';
-        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + '; ' + 'Secure=' + cookieSecure + ';';
+        if (cookieDomain) {
+          document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + '; ' + 'Domain=' + cookieDomain + '; ' + 'Secure=' + cookieSecure + ';';
+        } else {
+          document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + '; ' + 'Secure=' + cookieSecure + ';';
+        }
       } else {
-//      document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + ';' + 'Domain=' + cookieDomain + '; ';
-        document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + ';';
+        if (cookieDomain) {
+          document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + ';' + 'Domain=' + cookieDomain + '; ';
+        } else {
+          document.cookie = name + "=" + (value_encoded || '') + expires + '; Path=/; SameSite=' + cookieSameSite + ';';
+        }
       }
     },
     get: function (name) {
