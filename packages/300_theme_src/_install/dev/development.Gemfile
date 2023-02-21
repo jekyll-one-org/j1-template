@@ -117,7 +117,7 @@ end
 
 # ------------------------------------------------------------------------------
 # Jekyll Plugins
-# If any (additional) Jekyll Plugins are used, they goes here
+# If any (additional) Jekyll Plugins are required, they goes here
 #
 group :jekyll_plugins do
   # Base Jekyll Plugins (required)

@@ -167,14 +167,24 @@ a.card-title:hover {
   font-weight: 500;
 }
 
-.card .card-title a {
-  color: $red !important;
-  text-decoration: none !important;
-}
+// jadams, 2023-02-21, removed importance flag
+// .card .card-title a {
+//   color: $red !important;
+//   text-decoration: none !important;
+// }
 
+// .card .card-title > a:focus, .card .card-title > a:hover {
+//   color: $blue !important;
+//   text-decoration: none !important;
+// }
+
+.card .card-title a {
+  color: $red;
+  text-decoration: none;
+}
 .card .card-title > a:focus, .card .card-title > a:hover {
-  color: $blue !important;
-  text-decoration: none !important;
+  color: $blue;
+  text-decoration: none;
 }
 
 .card-pricing > .card-title {

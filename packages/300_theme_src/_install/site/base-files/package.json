@@ -124,7 +124,7 @@
     "setup:detect-os": "echo Detect OS .. && cross-env if-env OS=Windows_NT && cross-var echo \"OS detected: $OS\" || OS=$(echo $(getos)) && echo \"OS detected: $OS\" && echo done.",
     "setup:site": "run-s -s build",
     "site": "run-p -s site:*",
-    "site:jekyll": "echo Startup the site .. && cross-env SINATRA_ACTIVESUPPORT_WARNING=false bundle exec jekyll s --incremental --livereload --livereload-port $npm_package_jekyll_opt_livereload_port --open",
+    "site:jekyll": "echo Startup the site .. && cross-var cross-env SINATRA_ACTIVESUPPORT_WARNING=false bundle exec jekyll s --incremental --livereload --livereload-port $npm_package_jekyll_opt_livereload_port --open",
     "site:utilsrv": "npm --prefix ./utilsrv --silent run utilsrv",
     "j1-site": "run-p -s j1-site:*",
     "j1-site:jekyll": "bundle exec jekyll s --incremental --livereload --open",

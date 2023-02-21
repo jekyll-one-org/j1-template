@@ -545,7 +545,7 @@ whitelist:
 
 
 # ==============================================================================
-# 5. SEO ans Social Media settings (gloal)
+# 5. SEO and Social Media settings (global)
 #
 # ------------------------------------------------------------------------------
 #
@@ -908,6 +908,8 @@ defaults:
 #   default:                            empty array
 #
 # ------------------------------------------------------------------------------
+
+# Copmress (HTML) settings
 #
 compress_html:
   enabled:                              true
