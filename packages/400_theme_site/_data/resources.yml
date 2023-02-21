@@ -1958,5 +1958,31 @@ resources:
         js:                             [ modules/particles/js/particles ]
         init_function:                  [ j1.adapter.particles.init ]
 
+
+  # ----------------------------------------------------------------------------
+  # Slick
+  # Ultimate Slider library
+  #
+  # See: https://github.com/kenwheeler/slick/
+  #
+  - name:                               Slick
+    resource:
+      enabled:                          true
+
+      id:                               slick
+      comment:                          Module Slick
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand
+      preload:                          false
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            [ modules/slick/css/slick ]
+        files:                          [ adapter/js/slick.js ]
+        js:                             [ modules/slick/js/slick ]
+        init_function:                  [ j1.adapter.slick.init ]
+
 # ------------------------------------------------------------------------------
 # END config
