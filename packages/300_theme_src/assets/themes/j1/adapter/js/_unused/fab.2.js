@@ -185,9 +185,7 @@ j1.adapter.fab = (function (j1, window) {
       // Initialize FAB button
       // ---------------------------------------------------------------------
       var dependencies_met_fab_initialized = setInterval (function () {
-        var pageState   = $('#no_flicker').css("display");
-        var pageVisible = (pageState == 'block') ? true: false;
-        if (j1.xhrDOMState['#' + fabOptions.xhr_container_id] == 'success' && j1.getState() == 'finished' && pageVisible) {
+        if (j1.xhrDOMState['#' + fabOptions.xhr_container_id] == 'success' && j1.getState() == 'finished') {
           _this.setState('loaded');
           logger.info('\n' + 'set module state to: ' + _this.getState());
           logger.info('\n' + 'HTML data for FAB: ' + _this.getState());
