@@ -125,6 +125,15 @@ $sidebar-width:                                   380px;
 // https://stackoverflow.com/questions/4770025/how-to-disable-scrolling-temporarily
 // https://stackoverflow.com/questions/9280258/prevent-body-scrolling-but-allow-overlay-scrolling
 
+
+.nav-icon {
+    color: $gray-700;
+}
+
+.nav-icon:hover {
+    color: $gray-400;
+}
+
 // default|general color for navbar and nav-menus
 .nav-primary {
     background-color: $nav-primary;                                             // md-blue-900
@@ -214,9 +223,10 @@ li.dropdown.nav-item.nav-sub-item:before {
   		flex-wrap: nowrap;
   	}
   	&.navbar-nav.navigator {
-      margin-top: 0px;
+      margin-top: 0;
   		padding-top: 0;
-      font-family: "Roboto Slab", Helvetica, Arial, sans-serif;
+//    jadams, 2023-02-22: disabled font-family
+//    font-family: "Roboto Slab", Helvetica, Arial, sans-serif;
   	}
   }
   ul.menu-col {
@@ -256,12 +266,15 @@ li.dropdown.nav-item.nav-sub-item:before {
   	text-transform: uppercase;
   }
 
+  // jadams, 2023-02-22: removed importance
   .navbar-default .navbar-nav > li > a {
   	&:focus {
-  		background-color: transparent !important;
+  		// background-color: transparent;
+      background-color: $lighten-500;
   	}
   	&:hover {
-  		background-color: transparent !important;
+  		// background-color: transparent;
+      background-color: $lighten-500;
   	}
   }
 
@@ -598,7 +611,9 @@ li.dropdown.nav-item.nav-sub-item:before {
   			background-color: $nav-primary;
   			border: none;
   			z-index: 9;
-  			padding: 0;
+        padding-top: 40px;                                                      // jadams, 2023-02-22
+        padding-right: 40px;                                                      // jadams, 2023-02-22
+        padding-bottom: 40px;                                                   // jadams, 2023-02-22
   			width: 100%;
   			box-shadow: unset;
         height: $nav-min-height;
@@ -625,29 +640,29 @@ li.dropdown.nav-item.nav-sub-item:before {
   					}
   					&.navigator {
   						.nav-item .nav-link {
-                color: #fff !important;     // jadams, 2022-07-20: new links settings for the menubar
+                color: $gray-700 !important;              // jadams, 2023-02-22
   							text-transform: none;
-                width: max-content;         // standard property
-  							width: intrinsic;           // Safari/WebKit non-standard vendor property
-                width: -moz-max-content;    // Firefox/Gecko
-                width: -webkit-max-content; // Chrome
-                width: -o-max-content;      // Opera
-                width: -ms-max-content;     // MS Internet Explorer (IE11)
-  							font-weight: 400;
-  							font-size: 1.1rem;
-                border-bottom: unset;       // jadams, 2022-05-06: remove dotted link decoration
+                width: max-content;                       // Standard property
+  							width: intrinsic;                         // Safari/WebKit non-standard vendor property
+                width: -moz-max-content;                  // Firefox/Gecko
+                width: -webkit-max-content;               // Chrome
+                width: -o-max-content;                    // Opera
+                width: -ms-max-content;                   // MS Internet Explorer (IE11)
+  							font-weight: 400 !important;              // jadams, 2023-02-22
+  							font-size: 1rem !important;               // jadams, 2023-02-22
+                border-bottom: unset;                     // jadams, 2022-05-06: remove dotted link decoration
   						}
               .nav-item .nav-link:hover {
-                color: #757575 !important;  // jadams, 2022-07-20: md-gray-600
+                color: $gray-400 !important;              // jadams, 2023-02-22
               }
   						.dropdown.nav-item .nav-link {
   							text-transform: none;
-  							width: max-content;         // standard property
-  							width: intrinsic;           // Safari/WebKit non-standard vendor property
-                width: -moz-max-content;    // Firefox/Gecko
-                width: -webkit-max-content; // Chrome
-                width: -o-max-content;      // Opera
-                width: -ms-max-content;     // MS Internet Explorer (IE11)
+  							width: max-content;                       // Standard property
+  							width: intrinsic;                         // Safari/WebKit non-standard vendor property
+                width: -moz-max-content;                  // Firefox/Gecko
+                width: -webkit-max-content;               // Chrome
+                width: -o-max-content;                    // Opera
+                width: -ms-max-content;                   // MS Internet Explorer (IE11)
   							font-weight: 400;
   							font-size: 1.1rem;
   						}
@@ -775,12 +790,13 @@ li.dropdown.nav-item.nav-sub-item:before {
   					margin-left: 30px;
   				}
           // jadams, 2022-07-21: initial bg color before page is being 'scrolled'
-  				&.light {
-  					background-color: $darken-400 !important;
-  				}
-  				&.dark {
-  					background-color: $lighten-400 !important;
-  				}
+          // jadams, 2023-02-22: disabled
+  				// &.light {
+  				// 	background-color: $darken-400 !important;
+  				// }
+  				// &.dark {
+  				// 	background-color: $lighten-400 !important;
+  				// }
   			}
   			&.menu-center {
   				.container {
@@ -812,7 +828,7 @@ li.dropdown.nav-item.nav-sub-item:before {
   			li.dropdown ul.dropdown-menu {
           // jadams, 2020-07-21: margin-top value cause the dropdown-menu
           // to 'overlap' 1px with the menubar to *NOT* loose the focus
-          margin-top: -1px;
+          margin-top: 8px;
   				min-width: $dropdown-menu-min-width;
   				background: $white;
           border-color: transparent;
@@ -865,7 +881,7 @@ li.dropdown.nav-item.nav-sub-item:before {
   			display: block;
   			> a {
           // jadams, 2022-07-21
-          color: $lighten-400 !important;
+          color: $lighten-400;
   				display: block;
   				padding: 10px 5px;
   				position: relative;
@@ -1549,7 +1565,7 @@ li.dropdown.nav-item.nav-sub-item:before {
 				}
 			}
 			&.navbar-transparent.light {
-				background-color: rgba(0, 0, 0, 0.4) !important;
+				background-color: rgba(0, 0, 0, 0.4);
 				border-bottom: 0;
 			}
 		}

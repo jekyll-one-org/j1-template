@@ -13,7 +13,7 @@
 // SPEC: https://www.google.com/design/spec/components/tabs.html#tabs-specs
 // -----------------------------------------------------------------------------
 
-$nav-min-height:                                  80px;
+$nav-min-height:                                  100px;                        // jadams, 2023-02-22
 $nav-scrolled-max-height:                         48px;                         // for media-breakpoints < lg only
 
 $nav-disabled-link-color:                         $gray-light !default;

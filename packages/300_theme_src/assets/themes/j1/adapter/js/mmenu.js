@@ -384,9 +384,10 @@ j1.adapter.mmenu = (function (j1, window) {
                 callback: function (event) {
                   logger.debug('\n' + 'hide|show the nav menu');
                   // switch off|on the (main) nav menu
-                  $('#' + 'navbar-brand').toggle();
-                  $('#' + navMenuOptions.nav_main_menu).toggle();
-                  $('#' + navMenuOptions.nav_quicklinks).toggle();
+                  $('#' + 'navigator_nav_navbar').toggle();
+                  // $('#' + 'navbar-brand').toggle();
+                  // $('#' + navMenuOptions.nav_main_menu).toggle();
+                  // $('#' + navMenuOptions.nav_quicklinks).toggle();
                 }
               });
 

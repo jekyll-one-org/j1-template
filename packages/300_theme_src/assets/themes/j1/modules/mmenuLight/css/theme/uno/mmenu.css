@@ -187,9 +187,9 @@ NOTE: For unknown reason, style "mm-ocd--left" is NOT applied correctly
    Large devices (desktops, 992px and up)
 */
 @media only screen and (min-width: 992px) {
-  .mm-ocd {
-    top: 80px; /* drawer top offset to NAV bar */
-  }
+  /* .mm-ocd {
+    top: 100px; /* drawer top offset to NAV bar */
+  } */
   .mm-ocd__content {
       background-color: #000; /* black */
   }

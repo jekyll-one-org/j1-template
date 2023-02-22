@@ -406,8 +406,10 @@ j1.adapter.navigator = (function (j1, window) {
             // event handler|css styles
             // -----------------------------------------------------------------
             var dependencies_met_initialized = setInterval(function() {
+              var pageState   = $('#no_flicker').css("display");
+              var pageVisible = (pageState == 'block') ? true: false;
               // initialize if page and themer ready
-              if (j1.getState() === 'finished' && j1.adapter.themer.getState() === 'finished') {
+              if (j1.getState() === 'finished' && j1.adapter.themer.getState() === 'finished' && pageVisible) {
                 _this.setState('processing');
 
                 // apply module configuration settings
@@ -836,6 +838,17 @@ j1.adapter.navigator = (function (j1, window) {
 
       // set current body background color for all tables
       $('table').css('background', bg_table);
+
+//    $('head').append('<style> nav.navbar.navigator ul.nav.navigator .nav-item .nav-link { color: #212121 !important; } </style>');
+      style  = '<style>';
+      style += '  nav.navbar.navigator ul.nav.navigator .nav-item .nav-link {';
+      style += '    color: ' + navBarOptions.menu_item_color;
+      style += '  }';
+      style += '</style>';
+      $('head').append(style);
+
+
+
 
 //    $('head').append('<style>.mdi-bg-primary {color: ' +bg_scrolled+ ';}</style>');
       style  = '<style>';

@@ -1313,10 +1313,10 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     getScrollOffset: function () {
       var scrollOffset;
-      var offsetCorrection = 0;
+      var offsetCorrection = -80;                                               // padding of the navbar
 
       var $pagehead     = $('.attic');
-      var $navbar       = $('nav.navbar');
+      var $navbar       = $('#navigator_nav_navbar');
       var $adblock      = $('#adblock');
       var navbarType    = $navbar.hasClass('navbar-fixed') ? 'fixed' : 'scrolled';
       var fontSize      = $('body').css('font-size').replace('px','');
@@ -2430,6 +2430,7 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     scrollToAnchor: function () {
       var logger = log4javascript.getLogger('j1.adapter.scrollToAnchor');
+      var scrollOffset;
 
       var dependencies_met_page_displayed = setInterval (function () {
         var pageState   = $('#no_flicker').css("display");
@@ -2439,24 +2440,23 @@ var j1 = (function (options) {
           // TODO: Check why a timeout is required to run the smmoth scroller (j1.scrollTo)
           if (j1['pageMonitor'].pageType == 'static') {
             setTimeout (function() {
-              logger.info('\n' + 'Scroller: Scroll static page')
-              const scrollOffset = j1.getScrollOffset();
+              logger.debug('\n' + 'Scroller: Scroll static page');
+              scrollOffset = j1.getScrollOffset();
               j1.scrollTo(scrollOffset);
-            }, {{template_config.page_on_load_timeout}} );
+            }, {{template_config.timeoutScrollStaticPages}} );
             clearInterval(dependencies_met_page_displayed);
           } else if (j1['pageMonitor'].pageType == 'dynamic') {
             setTimeout (function() {
-              const scrollOffset = j1.getScrollOffset();
+              scrollOffset = j1.getScrollOffset();
               j1.scrollTo(scrollOffset);
-              logger.info('\n' + 'Scroller: Scroll dynamic page on timeout')
-//          }, timeoutScrollDynamicPages);
-          }, {{template_config.page_on_load_timeout}} );
+              logger.debug('\n' + 'Scroller: Scroll dynamic page on timeout');
+          }, {{template_config.timeoutScrollDynamicPages}} );
             clearInterval(dependencies_met_page_displayed);
           } else {
             // failsave fallback
             setTimeout (function() {
-              logger.warn('\n' + 'Scroller: Scroll page of unknown type')
-              const scrollOffset = j1.getScrollOffset();
+              logger.debug('\n' + 'Scroller: Scroll page of unknown type');
+              scrollOffset = j1.getScrollOffset();
               j1.scrollTo(scrollOffset);
             }, {{template_config.page_on_load_timeout}} );
             clearInterval(dependencies_met_page_displayed);

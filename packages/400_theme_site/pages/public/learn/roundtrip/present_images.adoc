@@ -358,4 +358,12 @@ Hopefully, you've enjoyed exploring the possibilities J1 offers for managing
 and displaying digital image content. But much, much more can the J1 do for
 your web.
 
+The J1 Theme support playing video on web pages by HTML5 Video, the new
+standard of HTML. HTML5 Video implements a pure HTML way to show video on
+the web. Modern browsers support the video tag `<video>` for the HTML5 video
+standard. The previous proprietary de facto standard software like Flash
+Player, Quicktime, or Silverlight is no longer needed as the Jekyll theme
+JekyllOne provides HTML5 Video support for local video content and from
+online sources on the Internet.
+
 Incredible? See the next example page link:{url-roundtrip--present-videos}[Present Videos].

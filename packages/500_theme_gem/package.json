@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "gem",
-  "version": "2023.0.17",
+  "version": "2023.0.18",
   "description": "RubyGem sources for J1 Starter",
   "main": "j1-template.gemspec",
   "config": {
@@ -22,7 +22,7 @@
     "gemspec": "j1-template.gemspec",
     "gemfile": "Gemfile",
     "gemext":  "gem",
-    "gemversion": "2023.0.17",
+    "gemversion": "2023.0.18",
     "binaries": "true"
   },
   "ruby": {

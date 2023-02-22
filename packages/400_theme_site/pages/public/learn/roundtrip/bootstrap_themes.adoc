@@ -3,13 +3,11 @@ title:                                  Themes
 tagline:                                Bootstrap Styles
 date:                                   2020-11-10 00:00:00
 description: >
-                                        J1 Starter, a Jekyll theme for multifunctional Bootstrap-based and responsive
-                                        websites, offers various unique functionalities compared to other Jekyll
-                                        themes and templates. Bootstrap themes for the J1 theme are based on the
-                                        free and open-source CSS front-end framework Bootstrap of version V5.
-                                        The Bootstrap themes for J1 theme enables the presentation of
-                                        different versions (skins) of the same site using already prepared
-                                        Bootstrap CSS templates.
+                                        J1 Theme offers various unique functionalities compared to other Jekyll
+                                        themes and templates. Bootstrap themes for the J1 Theme are based on the
+                                        free and open-source CSS front-end framework Bootstrap of version V5. The
+                                        Bootstrap themes for the J1 enable the presentation of different versions
+                                        (skins) of the same site using already prepared Bootstrap CSS templates.
 keywords: >
                                         Jekyll, Theme, JekyllOne, CSS, Bootstrap, Style, Skin, Roundtrip
 
@@ -73,8 +71,8 @@ J1-based site.
 
 Using Bootstrap themes results in a uniform appearance for the content in
 terms of the overall layout, text, tables, and form elements across all
-modern web browsers available on the market. In addition, developers can take
-advantage of CSS classes defined in Bootstrap to customize content
+modern web browsers available on the market. In addition, developers can
+take advantage of CSS classes defined in Bootstrap to customize content
 individually.
 
 // Include sub-documents (if any)
@@ -83,7 +81,17 @@ include::{documentdir}/themes_bootstrap.asciidoc[]
 
 == What next
 
-An important feature for larger webs is searching. The visitors should be able
-to search your site to find pages and posts they are interested in. Check what
-is searching a J1 website all about at
+The search option for the J1 Theme is based on the search engine Lunr and
+is fully integrated with the template. Lunr is designed to be lightweight
+yet full-featured to provide users with a great search experience. Using
+Lunr for a Jekyll website, there is no need to integrate complex external,
+server-sided search engines like Google or Bing.
+
+Visitors should be able to search your site to find pages and posts they
+are interested in. Usability is one of the top criteria for all visitors
+browsing your site. A good user experience and excellent content are key
+factors for the success of a website. Nothing in this business is guaranteed,
+but user experience efforts are good reasons your readers will return.
+
+Check what is searching a J1 website all about at
 link:{url-roundtrip--quicksearch}[Lunr Search].

@@ -442,5 +442,17 @@ Expectedly you've enjoyed exploring all the possibilities J1 offers so far.
 An exciting feature may be the use of themes. But much, much more can the J1
 do for your Web Site.
 
+J1 Theme offers various unique functionalities compared to other Jekyll
+themes and templates. Bootstrap themes for the J1 Theme are based on the
+free and open-source CSS front-end framework Bootstrap of version V5. The
+Bootstrap themes for the J1 enable the presentation of different versions
+(skins) of the same site using already prepared Bootstrap CSS templates.
+
+Using Bootstrap themes results in a uniform appearance for the content in
+terms of the overall layout, text, tables, and form elements across all
+modern web browsers available on the market. In addition, developers can
+take advantage of CSS classes defined in Bootstrap to customize content
+individually.
+
 Check out what themes can do. Have a look at the
 link:{url-roundtrip--themes}[Bootstrap Themes] feature!

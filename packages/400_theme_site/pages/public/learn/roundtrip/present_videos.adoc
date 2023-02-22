@@ -237,9 +237,21 @@ gallery::jg_video_online_vk[role="mb-5"]
 == What next
 
 Images and videos are pretty visual. And it can be impressive, for sure.
-But the most visual component is the text for all pages, for all sites on the
-Internet. To see how text could be presented great for modern responsive
-websites, check the section Typography next.
+But the most visual component is the text for all pages, for all sites on
+the Internet.
+
+Sadly, one common flaw is seen in many templates and frameworks: a lack of
+support for genuinely responsive text. While elements on a page resize
+fluidly, the text still resizes on a fixed basis. To avoid this issue,
+especially for heavily text-focused pages, J1 Theme supports styles that
+fluidly scale text size and line height to optimize readability for the user.
+
+The Jekyll Theme JekyllOne places the character font as one of the most
+crucial branding elements for any website. Typography matters for any media
+presenting text. The text will take on an important role of acting not only
+as plain text but also as something like images. To see how text could be
+presented great for modern responsive websites, check the section
+Typography next.
 
 What? Please find out how it works.
 Go for: link:{url-roundtrip--typography}[Typography], then.

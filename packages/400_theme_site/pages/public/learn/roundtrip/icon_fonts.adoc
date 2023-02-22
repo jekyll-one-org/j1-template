@@ -582,5 +582,14 @@ Have you've enjoyed the possibilities J1 offers for managing and
 manipulating font icons. Do you think these icon sets can fit your needs?
 Using Iconify, for all topics, you will find a suitable icon. And it's simple.
 
-To check more features of the J1 Theme, go for the
+J1 Theme implements some handy Ruby-based enhancements for Asciidoctor.
+Providing extensions for a Jekyll theme is a unique feature of JekyllOne (J1)
+compared to other Jekyll themes and templates. Most extensions are based on
+well-documented examples from the Asciidoctor Extensions Lab.
+
+To make the use of modules for the template easier, some more extensions
+support you to place for example lightboxes, sliders, galleries or fonts icons
+using Asciidoc block elements. I'm sure, you'll love it.
+
+To check the more the J1 Theme offers, go for the
 link:{url-roundtrip--asciidoc-extensions}[Asciidoc Extensions] made for J1!
