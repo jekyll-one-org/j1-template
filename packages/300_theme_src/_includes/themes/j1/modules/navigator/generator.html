@@ -103,7 +103,7 @@
   {% assign nav_bar_color = 'light' %}
 {% endif %}
 
-{% capture nav_bar_default_css_classes %}navbar navigator navbar-expand-{{nav_navbar_media_breakpoint}} navbar-default{% endcapture %}
+{% capture nav_bar_default_css_classes %}navbar navigator navbar-expand-{{nav_navbar_media_breakpoint}} navbar-default d-flex {% endcapture %}
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -167,7 +167,7 @@
   <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ check for quicklinks ] -->
   {% if quicklinks_options.enabled %}
   <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/generator.html ] [ place container for: quicklinks ] -->
-  <div id="{{nav_quicklinks_id}}" class="quicklink-nav collapse navbar-collapse justify-content-end"></div>
+  <div id="{{nav_quicklinks_id}}" class="quicklink-nav collapse navbar-collapse justify-content-end pr-4"></div>
   {% endif %}
 
 </nav>

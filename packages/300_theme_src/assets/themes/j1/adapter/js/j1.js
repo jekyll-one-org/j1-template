@@ -1313,7 +1313,7 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     getScrollOffset: function () {
       var scrollOffset;
-      var offsetCorrection = -80;                                               // padding of the navbar
+      var offsetCorrection = 0;
 
       var $pagehead     = $('.attic');
       var $navbar       = $('#navigator_nav_navbar');

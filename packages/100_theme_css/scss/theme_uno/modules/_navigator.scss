@@ -606,17 +606,20 @@ li.dropdown.nav-item.nav-sub-item:before {
   	}
   	&.navbar {
   		&.navigator {
-  			margin-bottom: 0;
-  			border-radius: 0;
-  			background-color: $nav-primary;
+//      padding: 10px;                                                          // jadams, 2023-02-24
+        padding: unset;                                                         // jadams, 2023-02-24
+//			margin-bottom: 0;
+//			border-radius: 0;
+//			background-color: $nav-primary;
   			border: none;
   			z-index: 9;
-        padding-top: 40px;                                                      // jadams, 2023-02-22
-        padding-right: 40px;                                                      // jadams, 2023-02-22
-        padding-bottom: 40px;                                                   // jadams, 2023-02-22
+//      padding-top: 40px;                                                      // jadams, 2023-02-24
+//      padding-right: 40px;                                                    // jadams, 2023-02-24
+//      padding-bottom: 40px;                                                   // jadams, 2023-02-24
   			width: 100%;
   			box-shadow: unset;
-        height: $nav-min-height;
+        box-sizing: unset;
+//      height: $nav-min-height;
   			ul {
   				&.nav {
   					li {
@@ -677,7 +680,7 @@ li.dropdown.nav-item.nav-sub-item:before {
   					.dropdown-menu .dropdown-menu {
   						top: 0;
   						left: 100%;
-  						margin-top: -2px;
+//						margin-top: -2px;                                                 // jadams, 2023-02-24: disabled
   					}
   					ul.dropdown-menu > li > a {
   						white-space: normal;
@@ -786,8 +789,8 @@ li.dropdown.nav-item.nav-sub-item:before {
   			&.navbar-transparent {
           // jadams, 2020-07-02: removed left classes to not CONFLICT with brand icon for @media mobile
   				.quicklink-nav {
-  					padding-left: 15px;
-  					margin-left: 30px;
+//					padding-left: 15px;
+//					margin-left: 30px;
   				}
           // jadams, 2022-07-21: initial bg color before page is being 'scrolled'
           // jadams, 2023-02-22: disabled
@@ -828,7 +831,7 @@ li.dropdown.nav-item.nav-sub-item:before {
   			li.dropdown ul.dropdown-menu {
           // jadams, 2020-07-21: margin-top value cause the dropdown-menu
           // to 'overlap' 1px with the menubar to *NOT* loose the focus
-          margin-top: 8px;
+          margin-top: -8px;                                                     // jadams, 2023-02-24: adjust menu items for menu|submenu in height
   				min-width: $dropdown-menu-min-width;
   				background: $white;
           border-color: transparent;
@@ -845,7 +848,7 @@ li.dropdown.nav-item.nav-sub-item:before {
   				}
   				ul.dropdown-menu {
             // jadams, 2017-05-16, to check: top: -3px;
-  					top: -3px;
+  					// top: -3px;                                                       // jadams, 2023-02-24: disabled
   				}
   			}
   			&.on ul.dropdown-menu.megamenu-content .content {
@@ -865,14 +868,12 @@ li.dropdown.nav-item.nav-sub-item:before {
   // ---------------------------------------------------------------------------
   .quicklink-nav {
   	// jadams, 2020-07-02: set left to 0 to NOT conflict with brand icon for @media mobile
-    margin-left: 0;
-  	// jadams: changed because of div header, org: margin-right: -15px;
-    margin-right: -20px;
+    // margin-left: 0;
+    // margin-right: -20px;                                                        // jadams: changed because of div header, org: margin-right: -15px;
+    // margin-right: 1.5rem;                                                       // jadams, 2020-07-02: set higher right space because of missing nav toggle button
   	float: right;
   	position: relative;
   	display: inline-block;
-  	// jadams, 2020-07-02: set higher right space because of missing nav toggle button
-    margin-right: 1.5rem;
   	> ul {
   		list-style: none;
       overflow: hidden;
@@ -1082,8 +1083,7 @@ li.dropdown.nav-item.nav-sub-item:before {
 			padding: 0.5rem 1rem;
       margin-right: 0;
       border-right: 0px !important;
-      // jadams, 2022-05-06: remove dotted link decoration
-      border-bottom: unset;
+      border-bottom: unset;                                                     // jadams, 2022-05-06: remove dotted link decoration
 		}
     //jadams, 2019-02-01: TODO check what high for an dropdown item fits best
 		.dropdown .nav-item {
@@ -1102,7 +1102,7 @@ li.dropdown.nav-item.nav-sub-item:before {
       // jadams, 2020-11-16: overflow-y: auto breaks 3rd level of the menu
       // TODO: Fix /assets/data/menu.html
 			.dropdown-menu .dropdown-menu {
-				margin-top: -2px;
+//		margin-top: -2px;                                                         // jadams, 2023-02-24: disabled
         max-height: 350px;
         /* overflow-y: auto; */
 			}
@@ -1191,14 +1191,20 @@ li.dropdown.nav-item.nav-sub-item:before {
 		}
 		&.navbar.navigator {
 			background-color: $nav-primary;
-      min-height: unset;
-      max-height: $nav-scrolled-max-height;
-			.navbar-brand {
-				display: inline-block;
-				float: none !important;
-				margin: 0 !important;
-				padding: 0 1rem;
-			}
+//    min-height: unset;                                                        // jadams, 2023-02-22
+//    max-height: $nav-scrolled-max-height;
+			// .navbar-brand {
+			// 	display: inline-block;
+			// 	float: none !important;
+			// 	margin: 0 !important;
+			// 	padding: 0 1rem;
+			// }
+      .navbar-brand {
+  			padding: 0.5rem 1rem;
+//      margin-right: 0;                                                        // jadams, 2023-02-22
+//      border-right: 0px !important;
+//      border-bottom: unset;                                                   // jadams, 2022-05-06: remove dotted link decoration
+  		}
 			.navbar-header {
 				float: none;
 				display: block;
@@ -1444,17 +1450,17 @@ li.dropdown.nav-item.nav-sub-item:before {
       // jadams, 2020-07-02: new padding|right to adjust toggler
       // with ssm buttons vertically
 			.navbar-toggler {
-        color: rgba(255, 255, 255, 0.5);
-        padding-top: .35rem;
-        padding-right: .5rem;
-        padding-bottom: .5rem;
+//      color: rgba(255, 255, 255, 0.5);                                        // jadams, 2023-02-22: new navbar background color
+//      padding-top: .35rem;                                                    // jadams, 2023-02-24
+        padding-right: 1.25rem;                                                 // jadams, 2023-02-24
+//      padding-bottom: .5rem;                                                  // jadams, 2023-02-24
         border: 0;
         border-color: transparent;
         border-radius: 0;
-        box-shadow: unset;                                                      // jadams, 2022-05-11: overload BS
+        box-shadow: unset;
         z-index: 2;                                                             // jadams, 2020-09-20: addedd z-index to not overlap with nav/quickLinks
   			&:hover {
-  					color: rgba(255, 255, 255, 0.9);
+  					color: $gray-400;                                                   // rgba(255, 255, 255, 0.9);
   			}
 			}
 			.dropdown-item {

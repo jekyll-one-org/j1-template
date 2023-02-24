@@ -34,6 +34,7 @@ settings:
   #
   nav_bar:
     enabled:                            true
+
     fixed:                              true
 
   # ----------------------------------------------------------------------------
@@ -41,7 +42,9 @@ settings:
   #
   nav_menu:
     enabled:                            true
+
     delay_open_menu:                    150
+    raised_level:                       0                                       # jadams, 2023-02-24: disabled
 
   # ----------------------------------------------------------------------------
   # NavMenu (MMobile)
