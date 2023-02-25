@@ -17,9 +17,8 @@
   color: $black !important;
 }
 
-// jadams 2022-11-06
 .btn:hover {
-  background-color: $gray-100; // !important;
+  background-color: $gray-50;                                                     // jadams 2023-02-25
 }
 
 // OPTIMIZE: jadams, 2022-07-22: set dark colors for Google Lighthouse optimization

@@ -103,6 +103,11 @@
     # --------------------------------------------------------------------------
     # Modules
     #
+
+    - title:                            Where to go
+      href:                             https://jekyll.one/pages/public/manuals/where_to_go/
+      icon:                             paw
+
     - title:                            Modules
       icon:                             alpha-j-box
       dropdown:

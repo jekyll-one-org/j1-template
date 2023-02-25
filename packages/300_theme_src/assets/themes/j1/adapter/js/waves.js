@@ -72,6 +72,8 @@ regenerate:                             true
  # J1 Theme is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
+ # NOTE: Wave styles defind in /assets/data/panel.html, key 'wave'
+ # -----------------------------------------------------------------------------
  #  Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
 */
