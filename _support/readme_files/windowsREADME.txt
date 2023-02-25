@@ -26,6 +26,6 @@ mklink /j .\ruby .\ruby-2.4.5p335
 mklink /j .\python .\python-2.7.18
 mklink /j .\python .\python-3.8.2
 
-mklink /j .\starter .\starter-2023.0.18
+mklink /j .\starter .\starter-2023.1.0
 
 mklink /j .\tocbot .\tocbot-4.11.2
