@@ -83,12 +83,12 @@ label.checkbox-inline {
     &:checked {
       // FIXME: once working - combine further to reduce code
       + .checkbox-decorator .check {
-        color: $bmd-checkbox-checked-color;
-        border-color: $bmd-checkbox-checked-color;
+        color: var(--bs-primary);                                               // jadams, 2023-02-26
+        border-color: var(--bs-primary);                                        // jadams, 2023-02-26
       }
 
       + .checkbox-decorator .check::before {
-        color: $bmd-checkbox-checked-color;
+        color: var(--bs-primary);                                               // jadams, 2023-02-26
         box-shadow: 0 0 0 10px, 10px -10px 0 10px, 32px 0 0 20px, 032px 0 20px,
           -5px 5px 0 10px, 20px -12px 0 11px;
         animation: checkbox-on $bmd-checkbox-animation-check forwards;

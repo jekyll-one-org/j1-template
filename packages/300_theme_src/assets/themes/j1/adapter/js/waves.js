@@ -135,7 +135,7 @@ var logText;
       // create settings object from module options
       waveDefaults = $.extend({}, {{wave_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       waveSettings = $.extend({}, {{wave_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      waveOptions = $.extend(true, {}, waveDefaults, waveSettings, frontmatterOptions);
+      waveOptions  = $.extend(true, {}, waveDefaults, waveSettings, frontmatterOptions);
 
       _this  = j1.adapter.waves;
       theme  = user_state.theme_name;

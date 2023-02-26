@@ -26,13 +26,24 @@
       width: $bmd-switch-width;
       height: $bmd-switch-height;
       cursor: pointer;
+
+      // background-image: linear-gradient(
+      //   to right,
+      //   $bmd-switch-unchecked-bg 0%,
+      //   $bmd-switch-unchecked-bg 50%,
+      //   $bmd-switch-checked-bg 50%,
+      //   $bmd-switch-checked-bg 100%
+      // );
+
+      // jadams, 2023-02-26: let the track gray
       background-image: linear-gradient(
         to right,
         $bmd-switch-unchecked-bg 0%,
         $bmd-switch-unchecked-bg 50%,
-        $bmd-switch-checked-bg 50%,
-        $bmd-switch-checked-bg 100%
+        $bmd-switch-unchecked-bg 50%,
+        $bmd-switch-unchecked-bg 90%
       );
+
       background-position: 0%;
       background-size: $bmd-switch-width * 2 $bmd-switch-height;
       border-radius: $bmd-switch-width;
@@ -76,7 +87,7 @@
             left: unquote(
               "calc(100% - #{$bmd-switch-handle-size})"
             ); //calc(100% - $bmd-switch-handle-size);
-            background-color: $bmd-switch-handle-checked-bg;
+            background-color: var(--bs-primary);
           }
         }
       }

@@ -35,19 +35,26 @@ settings:
   nav_bar:
     enabled:                            true
 
-    fixed:                              true
-
   # ----------------------------------------------------------------------------
   # NavMenu (Desktop)
   #
   nav_menu:
     enabled:                            true
 
-    delay_open_menu:                    150
-    raised_level:                       0                                       # jadams, 2023-02-24: disabled
+  # ----------------------------------------------------------------------------
+  # NavQuicklinks
+  #
+  nav_quicklinks:
+    enabled:                            true
 
   # ----------------------------------------------------------------------------
-  # NavMenu (MMobile)
+  # NavTopsearch
+  #
+  nav_topsearch:
+    enabled:                            true
+
+  # ----------------------------------------------------------------------------
+  # NavMenu (Mobile)
   #
   nav_mmenu:
     enabled:                            true
@@ -209,27 +216,6 @@ settings:
                       value:            ??cookie-state
                       href:             ??provider_privacy_url
                       target:           none
-
-  # ----------------------------------------------------------------------------
-  # NavQuicklinks
-  #
-  nav_quicklinks:
-    enabled:                            true
-
-    home_url:                           /                                       # none | URL
-    back_url:                           none                                    # none | URL
-
-    r_text_sizer:                       false                                   # true | false
-
-    github_url:                         none                                    # https://github.com/jekyll-one
-    disqus_url:                         none                                    # https://disqus.com/
-    patreon_url:                        none                                    # https://www.patreon.com/jekyll_one/posts
-
-  # ----------------------------------------------------------------------------
-  # NavTopsearch
-  #
-  nav_topsearch:
-    enabled:                            true
 
 # ------------------------------------------------------------------------------
 # END config

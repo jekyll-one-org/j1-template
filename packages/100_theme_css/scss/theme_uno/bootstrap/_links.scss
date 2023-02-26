@@ -36,17 +36,17 @@ a.link-no-decoration:hover {
 }
 
 a:hover {
-  color: $gray-600 !important;
+  color: $gray-600;                                                             // jadams, 2023-02-26: removed !important
   font-weight: 500 !important;
 }
 
 li > a {
-  color: $gray-700 !important;
+  color: $gray-700;                                                             // jadams, 2023-02-26: removed !important
   font-weight: 500 !important;
   text-decoration: none !important;
 }
 
 li > a:hover {
-  color: $gray-600  !important;
+  color: $gray-400;                                                             // jadams, 2023-02-26: removed !important
   font-weight: 500 !important;
 }

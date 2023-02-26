@@ -18,22 +18,22 @@
   padding: 0.25rem 0.5rem;
   color: #fff;
   text-align: center;
-  background-color: $blue !important;
+  background-color: var(--bs-primary) !important;
   border-radius: 0.25rem;
 }
 
 .bs-tooltip-top .tooltip-arrow::before {
-  border-top-color: $blue !important;
+  border-top-color: var(--bs-primary) !important;
 }
 
 .bs-tooltip-end .tooltip-arrow::before {
-  border-right-color: $blue !important;
+  border-right-color: var(--bs-primary) !important;
 }
 
 .bs-tooltip-bottom .tooltip-arrow::before {
-  border-bottom-color: $blue !important;
+  border-bottom-color: var(--bs-primary) !important;
 }
 
 .bs-tooltip-start .tooltip-arrow::before {
-  border-left-color: $blue !important;
+  border-left-color: var(--bs-primary) !important;
 }

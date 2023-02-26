@@ -43,7 +43,7 @@ label.radio-inline {
       width: $bmd-radio-size;
       height: $bmd-radio-size;
       content: "";
-      background-color: $bmd-radio-color-on;
+      background-color: var(--bs-primary);                                      // jadams, 2023-02-26
       border-radius: 50%;
       transition: transform ease .28s;
       transform: scale3d(0, 0, 0);
@@ -63,7 +63,7 @@ label.radio-inline {
     opacity: 0;
 
     &:checked ~ .bmd-radio {
-      @include bmd-radio-color($bmd-radio-color-on);
+      @include bmd-radio-color(var(--bs-primary));
 
       &::before {
         transform: scale3d(0.5, 0.5, 1);
