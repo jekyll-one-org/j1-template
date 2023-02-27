@@ -15,7 +15,6 @@
 # Description (used for J1 CC only)
 #
 description:
-
   title:                                J1 Translator
   scope:                                User settings
   location:                             _data/modules/translator.yml

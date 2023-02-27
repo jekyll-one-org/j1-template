@@ -25,7 +25,6 @@
 # Description (used for J1 CC only)
 #
 description:
-
   title:                                Attics
   scope:                                User settings
   location:                             _data/modules/attics.yml

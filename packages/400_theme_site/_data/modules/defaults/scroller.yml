@@ -19,7 +19,6 @@
 # Description (used for J1 CC only)
 #
 description:
-
   title:                                Scroller API
   scope:                                Default settings
   location:                             _data/modules/defaults/scroller.yml
@@ -29,6 +28,12 @@ description:
 #
 defaults:
   enabled:                              false
+
+  # ----------------------------------------------------------------------------
+  # SmoothScroll options
+  # ----------------------------------------------------------------------------
+  smoothscroll:
+    offsetCorrection:                   0                                       # offset in pixels
 
 # ------------------------------------------------------------------------------
 # END config

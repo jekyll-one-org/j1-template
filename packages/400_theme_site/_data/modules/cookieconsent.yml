@@ -15,7 +15,6 @@
 # Description (used for J1 CC only)
 #
 description:
-
   title:                                CookieConsent
   scope:                                User settings
   location:                             _data/modules/cookieconsent.yml

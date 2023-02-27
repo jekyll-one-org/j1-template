@@ -15,7 +15,6 @@
 # Description (used for J1 CC only)
 #
 description:
-
   title:                                Toccer
   scope:                                Default settings
   location:                             _data/modules/toccer.yml

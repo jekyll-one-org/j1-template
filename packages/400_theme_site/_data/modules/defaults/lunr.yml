@@ -15,7 +15,6 @@
 # Description (used for J1 CC only)
 #
 description:
-
   title:                                J1 Lunr
   scope:                                Default settings
   location:                             _data/modules/defaults/lunr.yml

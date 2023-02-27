@@ -19,7 +19,6 @@
 # Description (used for J1 CC only)
 #
 description:
-
   title:                                Range Slider Module
   scope:                                User settings
   location:                             _data/modules/rangeSlider.yml

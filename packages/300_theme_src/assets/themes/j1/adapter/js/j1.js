@@ -60,6 +60,9 @@ regenerate:                             true
 {% assign themer_defaults           = modules.defaults.themer.defaults %}
 {% assign themer_settings           = modules.themer.settings %}
 
+{% assign scroller_defaults         = modules.defaults.scroller.defaults %}
+{% assign scroller_settings         = modules.scroller.settings %}
+
 {% assign tracking_enabled          = modules.analytics.enabled %}
 {% assign tracking_id               = modules.analytics.google.trackingID %}
 
@@ -135,10 +138,13 @@ var j1 = (function (options) {
   // globals
   // ---------------------------------------------------------------------------
   // base page resources
-  var rePager                     =  new RegExp('navigator|dateview|tagview|archive');
-  var environment                 = '{{environment}}';
-  var moduleOptions               = {};
-  var j1_runtime_data             = {};
+  var rePager          =  new RegExp('navigator|dateview|tagview|archive');
+  var environment      = '{{environment}}';
+  var moduleOptions    = {};
+  var j1_runtime_data  = {};
+  var scrollerSettings = {};
+  var scrollerOptions  = {};
+  var scrollerDefaults = {};
   var _this;
   var settings;
   var json_data;
@@ -146,6 +152,9 @@ var j1 = (function (options) {
   var baseUrl;
   var referrer;
   var documentHeight;
+
+  var scrollOffset;
+  var scrollOffsetCorrection;
 
   // defaults for status information
   var state                         = 'not_started';
@@ -300,6 +309,11 @@ var j1 = (function (options) {
 
       // create settings object from frontmatter options
       var frontmatterOptions  = options != null ? $.extend({}, options) : {};
+
+      // Load scroller module DEFAULTS|CONFIGs
+      scrollerDefaults = $.extend({}, {{scroller_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      scrollerSettings = $.extend({}, {{scroller_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      scrollerOptions  = $.extend(true, {}, scrollerDefaults, scrollerSettings);
 
       // settings for dynamic pages
       scrollDynamicPagesTopOnChange = frontmatterOptions.scrollDynamicPagesTopOnChange ? frontmatterOptions.scrollDynamicPagesTopOnChange : '{{template_config.scrollDynamicPagesTopOnChange}}';
@@ -1311,9 +1325,9 @@ var j1 = (function (options) {
     // getScrollOffset()
     // Calculate offset for a correct (smooth) scroll position
     // -------------------------------------------------------------------------
-    getScrollOffset: function () {
-      var scrollOffset;
-      var offsetCorrection = 0;
+    getScrollOffset: function (offsetCorrection) {
+//     var scrollOffset;
+//      var offsetCorrection = 0;
 
       var $pagehead     = $('.attic');
       var $navbar       = $('#navigator_nav_navbar');
@@ -2441,13 +2455,15 @@ var j1 = (function (options) {
           if (j1['pageMonitor'].pageType == 'static') {
             setTimeout (function() {
               logger.debug('\n' + 'Scroller: Scroll static page');
-              scrollOffset = j1.getScrollOffset();
+              scrollOffsetCorrection = scrollerOptions.smoothscroll.offsetCorrection;
+              scrollOffset = j1.getScrollOffset(scrollOffsetCorrection);
               j1.scrollTo(scrollOffset);
             }, {{template_config.timeoutScrollStaticPages}} );
             clearInterval(dependencies_met_page_displayed);
           } else if (j1['pageMonitor'].pageType == 'dynamic') {
             setTimeout (function() {
-              scrollOffset = j1.getScrollOffset();
+              scrollOffsetCorrection = scrollerOptions.smoothscroll.offsetCorrection;
+              scrollOffset = j1.getScrollOffset(scrollOffsetCorrection);
               j1.scrollTo(scrollOffset);
               logger.debug('\n' + 'Scroller: Scroll dynamic page on timeout');
           }, {{template_config.timeoutScrollDynamicPages}} );
@@ -2456,7 +2472,8 @@ var j1 = (function (options) {
             // failsave fallback
             setTimeout (function() {
               logger.debug('\n' + 'Scroller: Scroll page of unknown type');
-              scrollOffset = j1.getScrollOffset();
+              scrollOffsetCorrection = scrollerOptions.smoothscroll.offsetCorrection;
+              scrollOffset = j1.getScrollOffset(scrollOffsetCorrection);
               j1.scrollTo(scrollOffset);
             }, {{template_config.page_on_load_timeout}} );
             clearInterval(dependencies_met_page_displayed);
@@ -2498,9 +2515,10 @@ var j1 = (function (options) {
       // see: https://stackoverflow.com/questions/14866775/detect-document-height-change
       //
       const observer = new ResizeObserver(entries => {
-        const body              = document.body,
-              html              = document.documentElement,
-              scrollOffset      = j1.getScrollOffset();
+        var scrollOffsetCorrection  = scrollerOptions.smoothscroll.offsetCorrection;
+        const body                  = document.body,
+              html                  = document.documentElement,
+              scrollOffset          = j1.getScrollOffset(scrollOffsetCorrection);
 
         // get the page height from the DOM
         //

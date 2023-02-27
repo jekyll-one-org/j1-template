@@ -52,6 +52,10 @@ regenerate:                             true
 
 {% assign toccer_defaults   = modules.defaults.toccer.defaults %}
 {% assign toccer_settings   = modules.toccer.settings %}
+
+{% assign scroller_defaults = modules.defaults.scroller.defaults %}
+{% assign scroller_settings = modules.scroller.settings %}
+
 {% assign footer_config     = modules.j1_footer %}
 {% assign footer_id         = modules.j1_footer.global.id %}
 
@@ -65,8 +69,6 @@ regenerate:                             true
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
-
-
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/toccer.js
@@ -97,7 +99,10 @@ j1.adapter.toccer = (function () {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
-  var environment         = '{{environment}}';
+  var environment      = '{{environment}}';
+  var scrollerSettings = {};
+  var scrollerOptions  = {};
+  var scrollerDefaults = {};
   var toccerDefaults;
   var toccerSettings;
   var toccerOptions;
@@ -137,10 +142,15 @@ j1.adapter.toccer = (function () {
       // create settings object from frontmatter
       frontmatterOptions  = options != null ? $.extend({}, options) : {};
 
-      // Load  module DEFAULTS|CONFIG
+      // Load module DEFAULTS|CONFIG
       toccerDefaults       = $.extend({}, {{toccer_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       toccerSettings       = $.extend({}, {{toccer_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       toccerOptions        = $.extend(true, {}, toccerDefaults, toccerSettings, frontmatterOptions);
+
+      // Load scroller module DEFAULTS|CONFIG
+      scrollerDefaults = $.extend({}, {{scroller_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      scrollerSettings = $.extend({}, {{scroller_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      scrollerOptions  = $.extend(true, {}, scrollerDefaults, scrollerSettings);
 
       // initialize state flag
       _this.setState('started');
@@ -169,7 +179,8 @@ j1.adapter.toccer = (function () {
     // Initialize the toccer on page
     // -------------------------------------------------------------------------
     initToccerCore: function (options) {
-      var scrollOffset = j1.getScrollOffset();
+      var scrollOffsetCorrection = scrollerOptions.smoothscroll.offsetCorrection;
+      var scrollOffset = j1.getScrollOffset(scrollOffsetCorrection);
 
       _this.setState('running');
       logger.debug('\n' + 'state: ' + _this.getState());

@@ -19,7 +19,6 @@
 # Description (used for J1 CC only)
 #
 description:
-
   title:                                Dropdowns Module
   scope:                                User settings
   location:                             _data/modules/dropdowns.yml

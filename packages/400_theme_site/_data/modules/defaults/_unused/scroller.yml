@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/framer.yml
-# User configuration settings for iFrameResizer
+# ~/_data/modules/defaults/scroller.yml
+# User configuration for J1 Scroller API
 #
 # Product/Info:
 # https://jekyll.one
@@ -9,26 +9,33 @@
 #
 # J1 Theme is licensed under the MIT License.
 # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+#
+# ------------------------------------------------------------------------------
+# NOTE:
+#
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
 # Description (used for J1 CC only)
 #
 description:
-  title:                                Framer
-  scope:                                User settings
-  location:                             _data/modules/framer.yml
+  title:                                Scroller API
+  scope:                                Default settings
+  location:                             _data/modules/defaults/scroller.yml
 
 # ------------------------------------------------------------------------------
-# User settings
+# Default settings
 #
-settings:
-  enabled:                            false
+defaults:
+  enabled:                              false
+
+  scrollOffsetCorrection:               0                                       # offset in pixels
 
   # ----------------------------------------------------------------------------
-  # Framer options
+  # SmoothScroll options
   # ----------------------------------------------------------------------------
-  autoResize:                         true
+  smoothscroll:
+    offsetCorrection:                   0
 
 # ------------------------------------------------------------------------------
 # END config

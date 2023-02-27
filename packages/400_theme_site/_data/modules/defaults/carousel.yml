@@ -15,7 +15,6 @@
 # Description (used for J1 CC only)
 #
 description:
-
   title:                                Carousel
   scope:                                Default settings
   location:                             _data/apps/default/carousel.yml

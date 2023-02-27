@@ -15,7 +15,6 @@
 # Description (used for J1 CC only)
 #
 description:
-
   title:                                J1 Masonry
   scope:                                User settings
   location:                             _data/modules/masonry.yml

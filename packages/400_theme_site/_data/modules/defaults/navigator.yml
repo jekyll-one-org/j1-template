@@ -20,7 +20,6 @@
 # Description (used for J1 CC only)
 #
 description:
-
   title:                                Navigator
   scope:                                Default settings
   location:                             _data/modules/defaults/navigator.yml
@@ -172,8 +171,8 @@ defaults:
     xhr_data_path:                      /assets/data/quicklinks/index.html
 
     icon_family:                        MDI
-    icon_color:                         '#212121'                               # rgba-lighten:     rgba(255, 255, 255, 0.5)
-    icon_color_hover:                   '#9E9E9E'                               # rgba-lighten-900: rgba(255, 255, 255, 0.9)
+    icon_color:                         '#424242'                               # gray-800
+    icon_color_hover:                   '#9E9E9E'                               # gray-500
     icon_size:                          mdi-2x
 
     # Link buttons
