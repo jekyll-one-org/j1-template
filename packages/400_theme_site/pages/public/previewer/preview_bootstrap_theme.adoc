@@ -113,8 +113,9 @@ resource_options:
 [role="dropcap"]
 JekyllOne is a theme for multifunctional Bootstrap-based and responsive
 websites, and offers various unique functionalities compared to other themes
-and templates for Jekyll. Themes for Bootstrap are used to customize the appearance
-of a website based on the basic rules and definitions of Bootstrap's CSS styles.
+and templates for Jekyll. Themes for Bootstrap are used to customize the
+appearance of a website based on the basic rules and definitions of Bootstrap's
+CSS styles.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
