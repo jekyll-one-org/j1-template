@@ -674,7 +674,7 @@ defaults:
         follow:                         true
 
       toc:                              true
-      fab_menu_id:                      page_ctrl
+      fab_menu_id:                      open_toc
       scrollbar:                        false
       personalization:                  false
       exclude_from_search:              false
@@ -717,7 +717,7 @@ defaults:
         follow:                         true
 
       toc:                              true
-      fab_menu_id:                      open_toc_reload
+      fab_menu_id:                      open_toc
       scrollbar:                        false
       page_navigation:                  true
       personalization:                  false
@@ -755,7 +755,7 @@ defaults:
         follow:                         true
 
       toc:                              true
-      fab_menu_id:                      open_toc_reload
+      fab_menu_id:                      open_toc
       scrollbar:                        false
       page_navigation:                  true
       personalization:                  false

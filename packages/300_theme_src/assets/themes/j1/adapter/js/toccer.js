@@ -99,14 +99,14 @@ j1.adapter.toccer = (function () {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
-  var environment      = '{{environment}}';
-  var scrollerSettings = {};
-  var scrollerOptions  = {};
-  var scrollerDefaults = {};
-  var toccerDefaults;
-  var toccerSettings;
-  var toccerOptions;
-  var frontmatterOptions;
+  var environment         = '{{environment}}';
+  var scrollerSettings    = {};
+  var scrollerOptions     = {};
+  var scrollerDefaults    = {};
+  var toccerDefaults      = {};
+  var toccerSettings      = {};
+  var toccerOptions       = {};
+  var frontmatterOptions  = {};
   var _this;
   var logger;
   var logText;
@@ -136,21 +136,21 @@ j1.adapter.toccer = (function () {
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
-      _this   = j1.adapter.toccer;
-      logger  = log4javascript.getLogger('j1.adapter.toccer');
+      _this               = j1.adapter.toccer;
+      logger              = log4javascript.getLogger('j1.adapter.toccer');
 
       // create settings object from frontmatter
       frontmatterOptions  = options != null ? $.extend({}, options) : {};
 
       // Load module DEFAULTS|CONFIG
-      toccerDefaults       = $.extend({}, {{toccer_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      toccerSettings       = $.extend({}, {{toccer_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      toccerOptions        = $.extend(true, {}, toccerDefaults, toccerSettings, frontmatterOptions);
+      toccerDefaults      = $.extend({}, {{toccer_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      toccerSettings      = $.extend({}, {{toccer_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      toccerOptions       = $.extend(true, {}, toccerDefaults, toccerSettings, frontmatterOptions);
 
       // Load scroller module DEFAULTS|CONFIG
-      scrollerDefaults = $.extend({}, {{scroller_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      scrollerSettings = $.extend({}, {{scroller_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      scrollerOptions  = $.extend(true, {}, scrollerDefaults, scrollerSettings);
+      scrollerDefaults    = $.extend({}, {{scroller_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      scrollerSettings    = $.extend({}, {{scroller_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      scrollerOptions     = $.extend(true, {}, scrollerDefaults, scrollerSettings);
 
       // initialize state flag
       _this.setState('started');
@@ -162,7 +162,9 @@ j1.adapter.toccer = (function () {
 
       if (j1.stringToBoolean(toccerOptions.toc)) {
         var dependencies_met_navigator = setInterval(function() {
-          if ( j1.getState() == 'finished' ) {
+          var pageState   = $('#no_flicker').css("display");
+          var pageVisible = (pageState == 'block') ? true: false;
+          if ( j1.getState() == 'finished' && pageVisible ) {
             _this.initToccerCore(toccerOptions);
             _this.setState('finished');
 
