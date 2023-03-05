@@ -6,7 +6,7 @@ the best of OpenSource software for the Web and the Web site generator
 private or professional use. Explore this site to learn what's possible if
 you go to the Jekyll Way.
 
-![Screenshot](https://github.com/jekyll-one-org/j1-template/raw/main/home-screenshot.jpg "J1 Starter Web")
+![Screenshot](https://github.com/jekyll-one-org/j1-template/raw/main/starter-screenshot.jpg "J1 Starter Web")
 
 * Fully Responsive. J1 Theme supports modern web browsers on all
   devices for best results on PCs, Tablets, and SmartPhones.
@@ -26,7 +26,7 @@ Have fun!
 The template comes with a Web included, a skeleton for your new Web site.
 This Web is called the **Starter Web**, a general-purpose Website scaffold to
 be modified for your needs. The built-in Starter Web can be visited live
-at [Netlify](https://j1-preview-netlify.netlify.app/).
+at [Netlify](https://starter.jekyll.one/).
 
 **Have fun exploring what a modern static web, a Jekyll site can do**!
 
@@ -51,7 +51,7 @@ issues for private or professional use.
 * Ruby V3 support
 * Asciidoc (Asciidoctor) and Markdown support
 * Asciidoctor plugins included
-* Bootstrap V5 (v5.2)
+* Bootstrap V5
 * Responsive Design
 * Material Design
 * Responsive Text
@@ -108,7 +108,7 @@ platforms.
 To run the Development System for J1 Theme, the following languages and
 tools expected to be in place with your OS:
 
-* Ruby language, version >= 2.7
+* Ruby language, version v4
 * Python language, version > 2.7 <1>
 * Javascript language (NodeJS), version >= 14.x < 15.x
 * NPM, version >= 6.14
