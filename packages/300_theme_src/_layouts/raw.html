@@ -1,0 +1,69 @@
+---
+layout:                                 default                                 # base layout the page inherits GLOBAL content
+debug:                                  false                                   # enable|disable additional debug information written to (static) content source
+---
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_layouts/raw.html
+ #  Liquid layout template for all pages of content-type RAW
+ #
+ #  Product/Info:
+ #  https://jekyll.one
+ #
+ #  Copyright (C) 2023 Juergen Adams
+ #
+ #  J1 Theme is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ #
+ # -----------------------------------------------------------------------------
+ #  NOTE:
+ #    This is the layout for all content pages of type RAW.
+ #    Layout RAW is based on layout BASE to inherit all (HTML) data.
+ # -----------------------------------------------------------------------------
+ #  NOTE:
+ #    This is the layout is used mainly for pure HTML content
+ #    with NO other markup used.
+ # -----------------------------------------------------------------------------
+ #  NOTE:
+ #    Do NOT add any CONTENT here.
+ #    For J1 Theme, Liquid procedures are being used intensively. To load
+ #    HTML data for a region (lane), the (Liquid) procedure "content_writer"
+ #    places the components specified in the connected YAML data file
+ #    'raw.yml' located in folder: ~/_data/layouts.
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ #
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture default_writer %}themes/{{site.template.name}}/procedures/layouts/default_writer.proc{% endcapture %}
+{% capture content_writer %}themes/{{site.template.name}}/procedures/layouts/content_writer.proc{% endcapture %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign lanes_collate = site.data.layouts.raw.lanes %}
+
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+
+  {% comment %} Collect the BODY-HEADER region
+  ------------------------------------------------------------------------------ {% endcomment %}
+  <!-- [INFO   ] [j1.layout.raw.html                 ] [ call default_writer for region: 'body-header' ] -->
+  <header id="header">
+    {% include {{default_writer}} region='body-header' items=lanes_collate %}
+  </header>
+  <!-- [INFO   ] [j1.layout.raw.html                  ] [end processing default_writer for region: 'body-header' ] -->
+
+  {% comment %} Collect the BODY-MAIN region
+  ------------------------------------------------------------------------------ {% endcomment %}
+  <!-- [INFO   ] [j1.layout.raw.html                 ] [ call content_writer for region: 'body-main' ] -->
+  <!-- div class="raw_container" style="padding-right: 0px; padding-left: 0px;" -->
+  <div class="container">
+    {% include {{content_writer}} region='body-main' items=lanes_collate %}
+  </div>
+  <!-- [INFO   ] [j1.layout.raw.html                  ] [end processing content_writer for region: 'body-main' ] -->
