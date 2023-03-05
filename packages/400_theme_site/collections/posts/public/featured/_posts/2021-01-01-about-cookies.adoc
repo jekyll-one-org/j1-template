@@ -50,20 +50,7 @@ are bothered all the time to accept cookies. For good reasons.
 
 excerpt__end
 
-//  Load Liquid procedures
-// -----------------------------------------------------------------------------
-{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
 
-// Load page attributes
-// -----------------------------------------------------------------------------
-{% include {{load_attributes}} scope="global" %}
-
-
-// Page content
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-// Include sub-documents (if any)
-// -----------------------------------------------------------------------------
 == What are cookies technically
 
 In short: a  cookie is a small piece of data that a website asks your
