@@ -1,15 +1,14 @@
-slick
--------
+## slick
 
 [1]: <https://github.com/kenwheeler/slick>
 
 _the last carousel you'll ever need_
 
-#### Demo
+### Demo
 
 [http://kenwheeler.github.io/slick](http://kenwheeler.github.io/slick/)
 
-#### CDN
+### CDN
 
 To start working with Slick right away, there's a couple of CDN choices availabile
 to serve the files as close, and fast as possible to your users:
@@ -17,7 +16,7 @@ to serve the files as close, and fast as possible to your users:
 - https://cdnjs.com/libraries/slick-carousel
 - https://www.jsdelivr.com/projects/jquery.slick
 
-##### Example using jsDelivr
+#### Example using jsDelivr
 
 Just add a link to the css file in your `<head>`:
 
@@ -34,7 +33,7 @@ Then, before your closing ```<body>``` tag add:
 <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 ```
 
-#### Package Managers
+### Package Managers
 
 ```sh
 # Bower
@@ -44,7 +43,7 @@ bower install --save slick-carousel
 npm install slick-carousel
 ```
 
-#### Contributing
+### Contributing
 
 PLEASE review CONTRIBUTING.markdown prior to requesting a feature, filing a pull request or filing an issue.
 
@@ -119,7 +118,7 @@ verticalSwiping | boolean | false | Changes swipe direction to vertical
 waitForAnimate | boolean | true | Ignores requests to advance the slide while animating
 zIndex | number | 1000 | Set the zIndex values for slides, useful for IE9 and lower
 
-##### Responsive Option Example
+#### Responsive Option Example
 The responsive option, and value, is quite unique and powerful.
 You can use it like so:
 
@@ -195,7 +194,7 @@ lazyLoaded | event, slick, image, imageSource | Fires after image loads lazily
 lazyLoadError | event, slick, image, imageSource | Fires after image fails to load
 
 
-#### Methods
+### Methods
 
 Methods are called on slick instances through the slick method itself in version 1.4, see below:
 
@@ -236,7 +235,7 @@ Method | Argument | Description
  | `{ option: value, option: value, ... }, refresh` | change  [multiple `option`s](https://github.com/kenwheeler/slick#settings) to corresponding `value`s.
 
 
-#### Example
+### Example
 
 Initialize with:
 
@@ -260,7 +259,7 @@ $(element).slick('unslick');
 ```
 
 
-#### Sass Variables
+### Sass Variables
 
 Variable | Type | Default | Description
 ------ | ---- | ------- | -----------
@@ -275,15 +274,15 @@ $slick-next-character | string | '\2192' | Unicode character code for the next a
 $slick-dot-character | string | '\2022' | Unicode character code for the navigation dot icon
 $slick-dot-size | pixels | 6px | Size of the navigation dots
 
-#### Browser support
+### Browser support
 
 Slick works on IE8+ in addition to other modern browsers such as Chrome, Firefox, and Safari.
 
-#### Dependencies
+### Dependencies
 
 jQuery 1.7
 
-#### License
+### License
 
 Copyright (c) 2017 Ken Wheeler
 

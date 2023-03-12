@@ -29,7 +29,8 @@ settings:
   # SmoothScroll options
   # ----------------------------------------------------------------------------
   smoothscroll:
-    offsetCorrection:                   0
+    offsetCorrection:                   -10
+    offsetCorrectionLocal:              -90
 
   # ----------------------------------------------------------------------------
   # Scroller configurations

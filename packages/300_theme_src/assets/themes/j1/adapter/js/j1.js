@@ -2636,7 +2636,23 @@ var j1 = (function (options) {
       window.onkeyup = function (event) {
         if (event.keyCode == 27) window.history.back();
       };
-    }
+
+      $("a[href*='#']:not([href='#'])").click(function() {
+        if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
+        var target = $(this.hash);
+        target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
+        if (target.length) {
+          var scrollOffsetCorrection  = scrollerOptions.smoothscroll.offsetCorrectionLocal;
+          var offset                  = target.offset().top + scrollOffsetCorrection;
+          $('html,body').animate({
+            scrollTop: offset
+          }, 1000);
+          return false;
+        }
+      }
+     });
+
+   } // END registerEvents
   };
 }) (j1, window);
 

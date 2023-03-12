@@ -154,10 +154,10 @@ j1.adapter.slick = (function (j1, window) {
             ]
           });
 
-          $('.masonry-container').masonry({
-            itemSelector: '.masonry-container > div',
-            columnWidth: 1
-          });
+          // $('.masonry-container').masonry({
+          //   itemSelector: '.masonry-container > div',
+          //   columnWidth: 1
+          // });
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
