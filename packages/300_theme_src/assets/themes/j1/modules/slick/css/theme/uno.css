@@ -41,8 +41,9 @@ h3.slide-item {
 	background: #fff url('../../images/ajax-loader.gif') center center no-repeat;
 }
 
-/* Slides
+/* Slides (disabled)
 -------------------------------------------------------------------------------- */
+/*
 .slick-slide .image {
   padding: 10px;
 }
@@ -54,6 +55,7 @@ h3.slide-item {
 .slick-slide img.slick-loading {
   border: 0;
 }
+*/
 
 /* Dots
 -------------------------------------------------------------------------------- */
