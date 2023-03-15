@@ -41,6 +41,10 @@ h3.slide-item {
 	background: #fff url('../../images/ajax-loader.gif') center center no-repeat;
 }
 
+.slider-parent {
+    overflow: hidden;
+}
+
 /* Slides (disabled)
 -------------------------------------------------------------------------------- */
 /*

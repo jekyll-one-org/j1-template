@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_plugins/asciidoctor-extensions/carousel-block.rb
-# Asciidoctor extension for J1 Carousel (Owl Carousel)
+# ~/_plugins/asciidoctor-extensions/masterslider-block.rb
+# Asciidoctor extension for J1 Masterslider
 #
 # Product/Info:
 # https://jekyll.one
@@ -14,8 +14,9 @@
 require 'asciidoctor/extensions' unless RUBY_ENGINE == 'opal'
 include Asciidoctor
 
-# A block macro that embeds a (Master) Slider (patent) block
-# into the output document
+# ------------------------------------------------------------------------------
+# A block macro that embeds a (Master) Slider (parent) block
+# into the output document.
 #
 # Usage:
 #
@@ -25,7 +26,7 @@ include Asciidoctor
 #
 #   .The slider title
 #   masterslider::ms_00001[role="mt-3 mb-5"]
-#
+# ------------------------------------------------------------------------------
 Asciidoctor::Extensions.register do
 
   class MasterSliderBlockMacro < Extensions::BlockMacroProcessor
