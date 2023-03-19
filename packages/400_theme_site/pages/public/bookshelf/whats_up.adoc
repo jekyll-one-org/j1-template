@@ -55,7 +55,7 @@ Source: https://ben.balter.com/2015/02/20/jekyll-collections/[Ben Balter: Jekyll
 {% if page.image.name %}
 .{{page.tagline}}
 [role="mb-5"]
-image::{{page.image.name}}[{{page.title}}]
+image::{{page.image.name}}[{{page.title}}, width=1280]
 {% endif %}
 
 Most Jekyll sites are organized around two types of content, posts (ordered)

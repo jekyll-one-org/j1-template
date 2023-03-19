@@ -55,7 +55,7 @@ description:
 #   enable focusOnChange in addition to this.
 #
 #   values:                             boolean
-#   default:                            true
+#   default:                            false
 #
 # adaptiveHeight
 # ----------------------------------------------------------------------------
@@ -418,18 +418,18 @@ defaults:
   # ----------------------------------------------------------------------------
   # Base settings
   #
-  accessibility:                        true
+  accessibility:                        true                                    # slick() may fatl if enabled (true)
   adaptiveHeight:                       false
-  # appendArrows:                       $(element)
-  # appendDots:                         $(element)
-  arrows:                               true
-  # asNavFor:                           $(element)
+  # appendArrows:                       $(element)                              # currently NOT supported
+  # appendDots:                         $(element)                              # currently NOT supported
+  arrows:                               false
+  # asNavFor:                           $(element)                              # currently NOT supported
   autoplay:                             false
   autoplaySpeed:                        3000
   centerMode:                           false
   centerPadding:                        '50px'
   cssEase:                              'ease'
-  # customPaging:                       n/a
+  # customPaging:                       n/a                                     # currently NOT supported
   dots:                                 false
   dotsClass:                            'slick-dots'
   draggable:                            true
@@ -442,12 +442,12 @@ defaults:
   initialSlide:                         0
   lazyLoad:                             'ondemand'
   mobileFirst:                          false
-  # nextArrow:                          selector
+  # nextArrow:                          selector                                # currently NOT supported
   pauseOnDotsHover:                     false
   pauseOnFocus:                         true
   pauseOnHover:                         true
-  # prevArrow:                          selector
-  respondTo:                            window'
+  # prevArrow:                          selector                                # currently NOT supported
+  respondTo:                            'window'
   responsive:                           null
   rows:                                 1
   rtl:                                  false
@@ -469,41 +469,6 @@ defaults:
   zIndex:                               1000
 
   # ----------------------------------------------------------------------------
-  # Responsive
-  #
-  breakpoints:
-
-    - xl:                               1280
-      slidesToShow:                     3
-
-    - lg:                               1024
-      slidesToShow:                     3
-
-    - md:                               600
-      slidesToShow:                     2
-
-    - sm:                               480
-      slidesToShow:                     1
-
-  # ----------------------------------------------------------------------------
-  # CSS Styles
-  #
-  baseClass:                            slick-carousel
-  theme:                                slick-theme
-
-  # ----------------------------------------------------------------------------
-  # Lazy load
-  #
-  lazyLoad:                             false
-  lazyFollow:                           true
-  lazyEffect:                           fade
-
-  # ----------------------------------------------------------------------------
-  # Auto height
-  #
-  autoHeight:                           false
-
-  # ----------------------------------------------------------------------------
   # AJAX (JSON)
   #
   # All data items displayed by a carousel are being read
@@ -512,7 +477,7 @@ defaults:
   # AJAX methods are used to supply the needed HTML code at
   # the time the carousel is initialized (by the Initializer)
   #
-  xhr_data_path:                        /assets/data/slick.json
+  xhr_data_path:                        /assets/data/slick
 
 # ------------------------------------------------------------------------------
 # END config

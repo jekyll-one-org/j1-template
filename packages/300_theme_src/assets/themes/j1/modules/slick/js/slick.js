@@ -474,6 +474,7 @@
       breakpoint, targetBreakpoint, respondToWidth, triggerBreakpoint = false;
     var sliderWidth = _.$slider.width();
     var windowWidth = window.innerWidth || $(window).width();
+
     if (_.respondTo === 'window') {
       respondToWidth = windowWidth;
     } else if (_.respondTo === 'slider') {
@@ -481,10 +482,12 @@
     } else if (_.respondTo === 'min') {
       respondToWidth = Math.min(windowWidth, sliderWidth);
     }
+
     if (_.options.responsive &&
       _.options.responsive.length &&
       _.options.responsive !== null) {
       targetBreakpoint = null;
+
       for (breakpoint in _.breakpoints) {
         if (_.breakpoints.hasOwnProperty(breakpoint)) {
           if (_.originalSettings.mobileFirst === false) {
@@ -498,6 +501,7 @@
           }
         }
       }
+
       if (targetBreakpoint !== null) {
         if (_.activeBreakpoint !== null) {
           if (targetBreakpoint !== _.activeBreakpoint || forceUpdate) {
@@ -542,7 +546,8 @@
           triggerBreakpoint = targetBreakpoint;
         }
       }
-      // only trigger breakpoints during an actual break. not on initialize.
+
+      // only trigger breakpoints during an actual break and  not on initialize
       if (!initial && triggerBreakpoint !== false) {
         _.$slider.trigger('breakpoint', [_, triggerBreakpoint]);
       }

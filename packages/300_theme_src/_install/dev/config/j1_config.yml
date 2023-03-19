@@ -263,7 +263,7 @@ posts:
   #   views.
   #
   # ----------------------------------------------------------------------------
-  category_blacklist:                   [ posts, public, private, protected, featured, series ]
+  category_blacklist:                   [ posts, public, private, protected, featured, parsa ]
 
 
 # ==============================================================================

@@ -1,0 +1,99 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/carousel.yml
+# User configuration for J1 Carousel (based on Owl Carousel V1)
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2023 Juergen Adams
+#
+# J1 Theme is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description (used for J1 CC only)
+#
+description:
+
+  title:                                Slick
+  scope:                                User settings
+  location:                             _data/apps/slick.yml
+
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+settings:
+  enabled:                              true
+
+  # ----------------------------------------------------------------------------
+  # Slider settings
+  # ----------------------------------------------------------------------------
+  sliders:
+
+    # --------------------------------------------------------------------------
+    # FEATURED posts
+    #
+    - slider:
+      enabled:                        true
+
+      id:                             featured_post_slider
+      type:                           post
+      group:                          featured                                  # generate data only for group (specified in article/post)
+
+      # ----------------------------------------------------------------------
+      # Lightbox options
+      #
+      lightbox:
+        enabled:                      false
+        type:                         lb
+
+      # ----------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+        dots:                         false
+        speed:                        300
+        autoplay:                     true
+        arrows:                       false
+        slidesToShow:                 3
+        slidesToScroll:               1
+        responsive:                   true
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        # slide 1
+        #
+        - slide:
+          alt:                          Cat 1
+          title:                        Cat 1
+          foreground_image:             /assets/images/modules/masterslider/slider_1/cat-1.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+          slideinfo:                    false
+
+        # slide 2
+        #
+        - slide:
+          alt:                          Cat 2
+          title:                        Cat 2
+          foreground_image:             /assets/images/modules/masterslider/slider_1/cat-2.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+          slideinfo:                    false
+
+        # slide 3
+        #
+        - slide:
+          alt:                          Cat 3
+          title:                        Cat 3
+          foreground_image:             /assets/images/modules/masterslider/slider_1/cat-3.jpg
+          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
+          thumb_image:                  false
+          slideinfo:                    false
+
+# ------------------------------------------------------------------------------
+# END config

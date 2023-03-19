@@ -72,7 +72,7 @@ resource_options:
 == Full Responsive
 
 [role="mb-3"]
-image::/assets/images/pages/panels/responsive-text-1920x800.jpg[{{page.title}}]
+image::/assets/images/pages/panels/responsive-text-1920x800.jpg[{{page.title}}, width=1280]
 
 A good user experience browsing a Web site is one of the most important
 features a website offers as a must, besides excellent content. Presenting
@@ -126,7 +126,7 @@ modifications; your unique design.
 == HTML5 · CSS3 · JS
 
 [role="mb-3"]
-image::/assets/images/pages/panels/florian-olivo-1920x800.jpg[{{page.title}}]
+image::/assets/images/pages/panels/florian-olivo-1920x800.jpg[{{page.title}}, width=1280]
 
 The Internet is a rapidly changing world. Like the fashion industries, new
 trends are set every year. J1 Theme combines modern technologies for the
@@ -185,7 +185,7 @@ solutions like Adobe Flash to build modern web pages based on open standards.
 === Javascript
 
 [role="mb-3"]
-image::/assets/images/pages/panels/modules-apps-1920x800.jpg[{{page.title}}]
+image::/assets/images/pages/panels/modules-apps-1920x800.jpg[{{page.title}}, width=1280]
 
 JavaScript is a text-based programming language used on the client-side and
 server-side to make web pages interactive. HTML and CSS are languages that
@@ -217,7 +217,7 @@ JavaScript is needed to use the build-in JS-based modules.
 == Start in No Time
 
 [role="mb-3"]
-image::/assets/images/pages/panels/no-time-1920x800.jpg[{{page.title}}]
+image::/assets/images/pages/panels/no-time-1920x800.jpg[{{page.title}}, width=1280]
 
 The base idea of the J1 Theme is to give all people a toolset at their
 hands to create a website with no need to start by web development or

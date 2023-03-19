@@ -134,13 +134,15 @@ var logText;
       masonryDefaults = $.extend({}, {{masonry_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       masonrySettings = $.extend({}, {{masonry_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       masonryOptions = $.extend({}, masonryDefaults, masonrySettings);
-  
+
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (function (options) {
+        var pageState   = $('#no_flicker').css("display");
+        var pageVisible = (pageState == 'block') ? true: false;
 
-        if ( j1.getState() === 'finished' ) {
+        if ( j1.getState() === 'finished' && pageVisible ) {
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());

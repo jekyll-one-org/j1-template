@@ -1,0 +1,58 @@
+<!-- footer style="background: #f3955e !important;" -->
+<footer class="bg-secondary">
+  <div class="section">
+
+    <div class="container">
+      <div class="row">
+
+        {% if site.logo %}
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <a href="{{site.baseurl}}/" class="link-no-decoration">
+            <img src="{{site.logo | relative_url}}" alt="{{site.title}}" class="img-fluid">
+          </a>
+        </div>
+        {% endif %}
+
+        {% if site.contact.address %}
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h4>Address</h4>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark">{{site.contact.address.city}}</li>
+            <li class="font-secondary text-dark">{{site.contact.address.street}}</li>
+          </ul>
+        </div>
+        {% endif %}
+
+        {% if site.contact %}
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h4>Contact Info</h4>
+          <ul class="list-unstyled">
+            <li class="font-secondary text-dark">Tel:  {{site.contact.phone}}</li>
+            <li class="font-secondary text-dark">Mail: {{site.contact.email}}</li>
+          </ul>
+        </div>
+        {% endif %}
+
+        {% if site.social %}
+        <div class="col-md-3 col-sm-6 mb-4 mb-md-0">
+          <h4>Follow</h4>
+          <ul class="list-inline d-inline-block">
+            {% for social in site.social %}
+            <li class="list-inline-item mx-1">
+              <a href="{{ social.link }}" class="text-dark link-no-decoration" target="blank" rel="noopener" alt="Social Media" aria-label="Social Media">
+                <i class="{{ social.icon }}"></i>
+              </a>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+      </div>
+    </div>
+
+  </div>
+
+  <div class="text-center pb-5">{{site.copyright | markdownify}}</div>
+
+</footer>

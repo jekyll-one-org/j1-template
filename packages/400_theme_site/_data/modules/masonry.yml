@@ -15,6 +15,7 @@
 # Description (used for J1 CC only)
 #
 description:
+
   title:                                J1 Masonry
   scope:                                User settings
   location:                             _data/modules/masonry.yml
@@ -34,12 +35,41 @@ settings:
   # Masonry settings
   # ----------------------------------------------------------------------------
   grids:
+
     # --------------------------------------------------------------------------
-    # Example Grid 1
+    # All posts
     #
-    - name:                             Example Grid 1
+    - name:                             All posts
       grid:
         enabled:                        true
+        hideDisabled:                   true
+
+        id:                             all_posts
+        originTop:                      true
+        originLeft:                     true
+        initLayout:                     true
+        percentPosition:                true
+
+    # --------------------------------------------------------------------------
+    # Categories
+    #
+    - name:                             Categories
+      grid:
+        enabled:                        true
+        hideDisabled:                   true
+
+        id:                             category
+        originTop:                      true
+        originLeft:                     true
+        initLayout:                     true
+        percentPosition:                true
+
+    # --------------------------------------------------------------------------
+    # Example Grid
+    #
+    - name:                             Example Grid
+      grid:
+        enabled:                        false
         hideDisabled:                   true
 
         id:                             example_masonry
@@ -53,20 +83,6 @@ settings:
 #       columnWidth:                    200
 #       itemSelector:                   '.grid-item'
 #       gutter:                         50
-
-    # --------------------------------------------------------------------------
-    # Example Grid 2
-    #
-    - name:                             Example Grid 2
-      grid:
-        enabled:                        true
-        hideDisabled:                   true
-
-        id:                             example_masonry_2
-        originTop:                      true
-        originLeft:                     true
-        initLayout:                     true
-        percentPosition:                true
 
 # ------------------------------------------------------------------------------
 # END config

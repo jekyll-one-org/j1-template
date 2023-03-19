@@ -1,0 +1,232 @@
+---
+title:                                  J1 Slick
+tagline:                                Slider Previews
+date:                                   2023-03-02 00:00:00
+description: >
+                                        Slick slider is a popular jQuery plugin for creating responsive and fully
+                                        customizable sliders on websites created by J1. It allows developers to easily
+                                        create beautiful and dynamic carousels that can display images, videos, or any
+                                        other type of content in a visually appealing way.
+
+categories:                             [ Previewer ]
+tags:                                   [ Slick, Slider, Example ]
+
+comments:                               false
+fab_menu_id:                            open_toc
+
+permalink:                              /pages/public/previewer/slick/
+regenerate:                             true
+
+resources:                              [ clipboard, rouge, slick ]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
+          alt:                          Photo by Ricardo Gomez Angel on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Ricardo Gomez Angel
+            href:                       https://unsplash.com/@ripato/portfolio
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="none" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+Slick slider is a popular jQuery plugin for creating responsive and fully
+customizable sliders on websites created by J1. It allows developers to easily
+create beautiful and dynamic carousels that can display images, videos, or any
+other type of content in a visually appealing way.
+
+The plugin is designed to be lightweight, fast, and easy to use, making it a
+popular choice for all web developers. It has many features, including
+multiple navigation options, lazy loading, or autoplay. Slick sliders are
+compatible with all modern browsers and devices, making it a great choice to
+create a responsive and mobile-friendly website.
+
+[role="mb-5"]
+The slider for J1 Template is a *best friend* for all web programmers because
+of its flexibility, a rich set of callbacks and simple configuration to make
+carousels as individual and powerful as possible. Find by the following examples
+what Slick sliders can do.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+== Posts Slider
+
+A Posts Slider for J1 Template is a pre-defined carousel type to display news
+articles on a webpage. It is a popular way to showcase a selection of posts
+visually appealingly and can be useful for highlighting important or *featured*
+content.
+
+Posts sliders pull content from a specific category or tag. Carousels may
+display post titles, featured images, and excerpts. Slick sliders for the J1
+Theme can be easily customized in various ways, such as changing the number
+of posts displayed, the slider speed, or the navigation options.
+
+.Asciidoc configuration
+[source, config, role="noclip mb-2"]
+----
+slick::post_slider[role="mt-4 mb-4"]
+----
+
+.Post silder
+slick::post_slider[role="mt-1"]
+
+.Configuration settings (YAML)
+[source, yaml, role="mt-5"]
+----
+# --------------------------------------------------------------------------
+# POST slider
+#
+- slider:
+  enabled:                          true
+
+  id:                               post_slider
+  selector:                         post-slider
+  type:                             post
+  group:                            Life
+
+  # ------------------------------------------------------------------------
+  # Slider options
+  #
+  options:
+    autoplay:                       true
+    slidesToShow:                   3
+    slidesToScroll:                 1
+    responsive:                     true
+
+  # ------------------------------------------------------------------------
+  # Reponsive options
+  #
+  responsive:
+    - breakpoint:
+      settings:
+        breakOn:                    1024
+        slidesToShow:               2
+        slidesToScroll:             2
+    - breakpoint:
+      settings:
+        breakOn:                    600
+        slidesToShow:               1
+        slidesToScroll:             1
+        dots:                       true
+    - breakpoint:
+      settings:
+        breakOn:                    480
+        slidesToShow:               1
+        slidesToScroll:             1
+
+----
+[role="mb-5"]
+Posts sliders typically used on the homepage of a website, within blog posts
+or articles, or on dedicated archive or category pages. They can increase
+user engagement and keep visitors on a website for longer by presenting
+content dynamically and visually appealingly.
+
+== Slider + Arrows and Dots
+
+Responsive sliders are carousels designed to adapt and resize automatically
+to fit different screen sizes and devices, such as desktops, laptops, tablets,
+and smartphones. They are created using responsive design techniques, allowing
+web developers to create a single slider that can be optimized for various
+devices without needing separate versions or code.
+
+Responsive Slick sliders can be useful for ensuring that content is displayed
+correctly and consistently across different devices and for providing an
+optimal user experience for all visitors to a website. They use techniques
+such as fluid grid layouts, flexible images, and media queries to adjust the
+slider size and layout based on the screen size and orientation of the device.
+
+.Asciidoc configuration
+[source, config, role="noclip mb-2"]
+----
+slick::example_slider_arrows_dots[role="mt-4 mb-6"]
+----
+
+// .Example silder using Arrows + Dots
+slick::example_slider_arrows_dots[role="mt-1"]
+
+.Configuration settings (YAML)
+[source, yaml, role="mt-5 mb-5""]
+----
+# --------------------------------------------------------------------------
+# EXAMPLE slider 1
+#
+- slider:
+  enabled:                          true
+
+  id:                               example_slider_arrows_dots
+  selector:                         example-slider-arrows-dots
+  type:                             example
+
+  # ------------------------------------------------------------------------
+  # Slider options
+  #
+  options:
+    arrows:                         true
+    dots:                           true
+    speed:                          300
+    autoplay:                       false
+    slidesToShow:                   3
+    slidesToScroll:                 1
+    responsive:                     true
+
+  # ------------------------------------------------------------------------
+  # Reponsive options
+  #
+  responsive:
+    - breakpoint:
+      settings:
+        breakOn:                    1024
+        slidesToShow:               2
+        slidesToScroll:             2
+    - breakpoint:
+      settings:
+        breakOn:                    600
+        slidesToShow:               1
+        slidesToScroll:             1
+    - breakpoint:
+      settings:
+        breakOn:                    480
+        slidesToShow:               1
+        slidesToScroll:             1
+----
+
+
+== General Features
+
+Slick sliders are using various tools and frameworks, such as Bootstrap, jQuery,
+and pure CSS. Slick offers a wide range of customization options, such as slide
+transitions, autoplay, navigation controls to create a visually appealing and
+interactive user experience.
+
+* Carousels are fully responsive for configurable screen sizes
+* Separate slider option settings per breakpoint
+* Uses CSS3 if available for a browser, fully functional if not
+* Swipe enabled. Or disabled, if prefered
+* Desktop mouse dragging
+* Infinite looping and Autoplay
+* Fully accessible with arrow key and dots navigation
+* Add, remove, filter and unfilter slides
+* Rich set of callbacks to enable individual behaviour of sliders
