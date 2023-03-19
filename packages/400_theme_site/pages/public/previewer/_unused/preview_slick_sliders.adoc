@@ -14,7 +14,7 @@ comments:                               false
 fab_menu_id:                            page_ctrl
 
 permalink:                              /pages/public/previewer/slick/
-regenerate:                             true
+regenerate:                             false
 
 resources:                              [ clipboard, rouge, slick ]
 resource_options:

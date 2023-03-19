@@ -30,7 +30,7 @@ exclude_from_search:                    false
 fab_menu_id:                            page_ctrl
 scrollbar:                              false
 toc:                                    true
-regenerate:                             true
+regenerate:                             false
 permalink:                              /pages/public/skeleton/documentation/
 
 resources:                              [ animate, clipboard, lightbox, rouge ]

@@ -14,7 +14,7 @@ comments:                               false
 fab_menu_id:                            page_ctrl
 
 permalink:                              /pages/public/learn/shuffle-adding-removing-items/
-regenerate:                             true
+regenerate:                             false
 
 resources:                              [ animate, clipboard, shuffle, rouge ]
 resource_options:

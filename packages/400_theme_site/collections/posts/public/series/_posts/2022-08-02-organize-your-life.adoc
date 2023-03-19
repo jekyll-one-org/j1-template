@@ -1,14 +1,12 @@
 ---
-layout:                                 post
-
-title:                                  Growth
-tagline:                                Organize Your Life With Simple Rules
+title:                                  Life With Simple Rules
+tagline:                                Growth
 description: >
                                         Modern life refers to the way of life and the
                                         living conditions that have evolved with technological
                                         advancements, urbanization, and globalization.
 
-categories:                             [ Modern Life ]
+categories:                             [ Life ]
 tags:                                   [ Growth ]
 
 image:
@@ -17,13 +15,11 @@ image:
   height:                               1280
   alt:                                  Post Image
 
-group:                                  Modern Life                             # goup used to e.g. collect slider data
-series:                                 Modern Life
-toc:                                    true
-fab_menu_id:                            open_toc
-scrollbar:                              false
+group:                                  Life
+series:                                 Life
 regenerate:                             false
 
+resources:                              [ animate ]
 resource_options:
   - attic:
       padding_top:                      600
