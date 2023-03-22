@@ -102,11 +102,11 @@ lorem:sentences[3]
             "button_list": [
               {
                 "title": "Demo",
-                "url": "javascript:void(0)"
+                "url": "#!"
               },
               {
                 "title": "Download",
-                "url": "javascript:void(0)"
+                "url": "#!"
               }
             ],
             "tags": [
@@ -132,11 +132,11 @@ lorem:sentences[3]
             "button_list": [
               {
                 "title": "Demo",
-                "url": "javascript:void(0)"
+                "url": "#!"
               },
               {
                 "title": "Download",
-                "url": "javascript:void(0)"
+                "url": "#!"
               }
             ],
             "tags": [
@@ -161,11 +161,11 @@ lorem:sentences[3]
             "button_list": [
               {
                 "title": "Demo",
-                "url": "javascript:void(0)"
+                "url": "#!"
               },
               {
                 "title": "Download",
-                "url": "javascript:void(0)"
+                "url": "#!"
               }
             ],
             "tags": [
@@ -187,11 +187,11 @@ lorem:sentences[3]
             "button_list": [
               {
                 "title": "Demo",
-                "url": "javascript:void(0)"
+                "url": "#!"
               },
               {
                 "title": "Download",
-                "url": "javascript:void(0)"
+                "url": "#!"
               }
             ],
             "tags": [
@@ -217,11 +217,11 @@ lorem:sentences[3]
             "button_list": [
               {
                 "title": "Demo",
-                "url": "javascript:void(0)"
+                "url": "#!"
               },
               {
                 "title": "Download",
-                "url": "javascript:void(0)"
+                "url": "#!"
               }
             ],
             "tags": [
@@ -246,11 +246,11 @@ lorem:sentences[3]
             "button_list": [
               {
                 "title": "Demo",
-                "url": "javascript:void(0)"
+                "url": "#!"
               },
               {
                 "title": "Download",
-                "url": "javascript:void(0)"
+                "url": "#!"
               }
             ],
             "tags": [

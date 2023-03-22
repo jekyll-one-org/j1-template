@@ -39,7 +39,7 @@ resource_options:
 
 // Place an excerpt at the most top position
 // -----------------------------------------------------------------------------
-[role="dropcap"]
+[role="dropcap mb-4"]
 Modern life refers to the way of life and the living conditions that have
 evolved with technological advancements, urbanization, and globalization. It
 includes the various social, economic, and cultural changes due to these
@@ -61,7 +61,7 @@ excerpt__end
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-== Modern Life · Technology
+== Modern Life
 
 Modern life is characterized by the widespread use of technology and the
 internet, which have made communication, information sharing, and access to
@@ -69,7 +69,7 @@ services more convenient and efficient. People can now work remotely, shop
 online, access entertainment, and connect with others from anywhere in the
 world.
 
-[role="mb-5"]
+[role="mb-4"]
 Urbanization has also been a significant factor in shaping Modern life.
 Cities have become commerce, industry, and innovation centers, attracting
 people from rural areas for better opportunities. Urbanization has led to
@@ -90,7 +90,7 @@ living while also addressing its negative consequences.
 [role="mt-3 mb-5"]
 image::parsa/posts/post-img.jpg[{{page.tagline}}, width=1280]
 
-Here are five golden rules for Modern life:
+Five golden rules for Modern life:
 
 . Prioritize your health and wellness: In the fast-paced world of modern
   living, it's important to prioritize your physical and mental health. A

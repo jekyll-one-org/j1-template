@@ -82,15 +82,15 @@ resource_options:
 
 ++++
 <!-- Dropdown trigger -->
-<a class="dropdown-trigger btn btn-info mt-3 mb-4" href="#" data-target="my-dropdown">Dropdown MyFlags</a>
+<a class="dropdown-trigger btn btn-info mt-3 mb-4" href="javascript:void(0)" data-target="my-dropdown">Dropdown MyFlags</a>
 
 <!-- Dropdown content -->
 <ul id="my-dropdown" class="dropdown-content">
-  <li><a href="#"><i class="flag-icon flag-icon-de squared size-2x"></i>Germany</a></li>
+  <li><a href="javascript:void(0)"><i class="flag-icon flag-icon-de squared size-2x"></i>Germany</a></li>
   <li class="divider" tabindex="-1"></li>
-  <li><a href="#"><i class="flag-icon flag-icon-be squared size-2x"></i>Belgium</a></li>
-  <li><a href="#"><i class="flag-icon flag-icon-dk squared size-2x"></i>Denmark</a></li>
-  <li><a href="#"><i class="flag-icon flag-icon-es squared size-2x"></i>Spain</a></li>
+  <li><a href="javascript:void(0)"><i class="flag-icon flag-icon-be squared size-2x"></i>Belgium</a></li>
+  <li><a href="javascript:void(0)"><i class="flag-icon flag-icon-dk squared size-2x"></i>Denmark</a></li>
+  <li><a href="javascript:void(0)"><i class="flag-icon flag-icon-es squared size-2x"></i>Spain</a></li>
 </ul>
 ++++
 
@@ -104,15 +104,15 @@ the icon inside the `anchor` tag.
 [source, html]
 ----
 <!-- Dropdown trigger -->
-<a class="dropdown-trigger btn btn-info" href="#" data-target="my-dropdown">Dropdown MyFlags</a>
+<a class="dropdown-trigger btn btn-info" href="javascript:void(0)" data-target="my-dropdown">Dropdown MyFlags</a>
 
 <!-- Dropdown content -->
 <ul id="my-dropdown" class="dropdown-content">
-  <li><a href="#"><i class="flag-icon flag-icon-de squared size-2x"></i>Germany</a></li>
+  <li><a href="javascript:void(0)"><i class="flag-icon flag-icon-de squared size-2x"></i>Germany</a></li>
   <li class="divider" tabindex="-1"></li>
-  <li><a href="#"><i class="flag-icon flag-icon-be squared size-2x"></i>Belgium</a></li>
-  <li><a href="#"><i class="flag-icon flag-icon-dk squared size-2x"></i>Denmark</a></li>
-  <li><a href="#"><i class="flag-icon flag-icon-es squared size-2x"></i>Spain</a></li>
+  <li><a href="javascript:void(0)"><i class="flag-icon flag-icon-be squared size-2x"></i>Belgium</a></li>
+  <li><a href="javascript:void(0)"><i class="flag-icon flag-icon-dk squared size-2x"></i>Denmark</a></li>
+  <li><a href="javascript:void(0)"><i class="flag-icon flag-icon-es squared size-2x"></i>Spain</a></li>
 </ul>
 ----
 

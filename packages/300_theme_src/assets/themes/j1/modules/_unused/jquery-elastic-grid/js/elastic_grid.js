@@ -249,7 +249,7 @@ $(function() {
 
                 //initial a object
                 aObject = $('<a></a>');
-                aObject.attr('href', 'javascript:void(0)');
+                aObject.attr('href', '#!');
 
                 //initial default photo
                 imgObject = $('<img/>');

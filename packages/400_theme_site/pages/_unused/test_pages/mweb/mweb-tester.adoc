@@ -96,7 +96,7 @@ resource_options:
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a id="logo" class="navbar-brand" href="#">MediathekViewWeb</a>
+          <a id="logo" class="navbar-brand" href="javascript:void(0)">MediathekViewWeb</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar">
           <ul class="nav navbar-nav">
