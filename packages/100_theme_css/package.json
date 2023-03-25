@@ -31,10 +31,11 @@
     "clean:lock": "shx rm -f *.lock && shx rm -f package-lock.json",
     "clean:dist": "shx rm -rf dist/*",
     "clean:tmp": "shx rm -f *.tmp && shx rm -rf tmp/",
+    "clean:theme-css": "shx rm -rf ../300_theme_src/assets/themes/j1/core/css",
     "prebuild": "npm run clean && shx mkdir log",
     "build": "npm run build_css && npm run uglify_css",
     "postbuild": "npm run deploy",
-    "prerebuild": "npm run clean && shx mkdir log",
+    "prerebuild": "npm run clean && shx mkdir log && shx mkdir -p ../300_theme_src/assets/themes/j1/core/css",
     "rebuild": "npm run build_css && npm run uglify_css",
     "postrebuild": "npm run deploy",
     "build_css": "run-p -s theme_css:*",
@@ -68,7 +69,7 @@
     "uglify_css:animate": "postcss dist/animate.css -o dist/animate.min.css",
     "uglify_css:vendor": "postcss dist/vendor.css -o dist/vendor.min.css",
 
-    "deploy": "shx cp -rf dist/* ../300_theme_src/assets/themes/j1/core/css"
+    "deploy": "shx mkdir -p ../300_theme_src/assets/themes/j1/core/css && shx cp -rf dist/* ../300_theme_src/assets/themes/j1/core/css"
   },
   "dependencies": {
     "cssnano": "^5.0.10",
