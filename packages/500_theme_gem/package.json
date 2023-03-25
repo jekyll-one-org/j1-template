@@ -100,7 +100,7 @@
     "template-gem-site-files:collections": "shx cp -r ../400_theme_site/collections ./lib/starter_web",
     "template-gem-site-files:pages": "shx cp -r ../400_theme_site/pages ./lib/starter_web",
     "template-gem-site-files:index": "shx cp ../400_theme_site/index.html ./lib/starter_web",
-    "template-gem-site-files:site-base-files": "shx cp -f ../300_theme_src/_install/site/base-files/* ./lib/starter_web",
+    "template-gem-site-files:site-base-files": "shx cp -rf ../300_theme_src/_install/site/base-files/* ./lib/starter_web",
     "template-gem-site-files:site-template-config": "shx cp -f ../300_theme_src/_install/site/config/j1_config.yml ./lib/starter_web/_data/",
     "template-gem-site-files:site-base-gemfile": "shx mv ./lib/starter_web/production.gem ./lib/starter_web/Gemfile",
     "template-gem-site-files:netlify-test-data": "echo shx cp -r ../400_theme_site/_cc_test_data/ ./lib/starter_web/",
