@@ -74,10 +74,10 @@ Gem::Specification.new do |spec|
   #
   # spec.add_runtime_dependency 'sinatra-cross_origin', '~> 0.3.1'
 
-  # Dependencies: Logging
+  # Dependencies:Required for J1 logger based on log4r (middleware)
   #
   spec.add_runtime_dependency 'log4r', '~> 1.1', '>= 1.1.10'
-  spec.add_runtime_dependency 'date', '~> 2.0'
+  spec.add_runtime_dependency 'date', '~> 3.0'
 
   # Dependencies: Authentication
   #

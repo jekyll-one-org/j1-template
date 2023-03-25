@@ -150,6 +150,7 @@ group :jekyll_plugins do
   # Additional Jekyll Plugins  (optional)
   #
   # gem 'jekyll-admin', '~> 0.11'
+  # gem 'jekyll-archives', '~> 2.2'
   # gem 'jekyll-gist', '>= 1.5.0'
   # gem 'jekyll-redirect-from', '>= 0.16.0'
 end
@@ -219,7 +220,6 @@ gem 'bump', '~> 0.10'
 #
 # ------------------------------------------------------------------------------
 #
-# gem 'passenger', '>= 5.3'
 gem 'puma', '>= 6.0'
 
 # ------------------------------------------------------------------------------
@@ -273,7 +273,7 @@ gem 'omniauth-oauth2', '~> 1.7'
 # GEM required for J1 logger based on log4r (middleware)
 # ------------------------------------------------------------------------------
 gem 'log4r', '~> 1.1', '>= 1.1.10'
-gem 'date', '~> 2.0'
+gem 'date', '~> 3.0'
 
 # ------------------------------------------------------------------------------
 # END
