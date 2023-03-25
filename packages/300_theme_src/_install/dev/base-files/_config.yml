@@ -277,7 +277,7 @@ robots:
 # BRAND configuration
 # Set the brand image and favicon (located in /asset/images)
 brand:
-  image:                                icons/j1/scalable/j1.svg
+  image:                                icons/j1/j1-512x512.png
   image_height:                         48px
   text:                                 Jekyll One
   text_color:                           "#9E9E9E"
