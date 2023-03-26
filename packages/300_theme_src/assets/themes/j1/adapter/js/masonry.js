@@ -189,6 +189,7 @@ var logText;
                 initLayout:             {{init_layout}},
                 transitionDuration:     "{{transition_duration}}s",
                 stagger:                "{{stagger_duration}}",
+//              gutter:                 {{gutter_size}},
               });
 
               logger.info('\n' + 'install event handlers on id: ' + '{{grid_id}}');

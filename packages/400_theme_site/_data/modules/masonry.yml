@@ -51,6 +51,20 @@ settings:
         percentPosition:                true
 
     # --------------------------------------------------------------------------
+    # Post Series
+    #
+    - name:                             Post Series
+      grid:
+        enabled:                        true
+        hideDisabled:                   true
+
+        id:                             post_series_grid
+        originTop:                      true
+        originLeft:                     true
+        initLayout:                     true
+        percentPosition:                true
+
+    # --------------------------------------------------------------------------
     # Categories
     #
     - name:                             Categories
@@ -65,7 +79,7 @@ settings:
         percentPosition:                true
 
     # --------------------------------------------------------------------------
-    # Example Grid
+    # Example Grid (all options)
     #
     - name:                             Example Grid
       grid:
@@ -83,6 +97,62 @@ settings:
 #       columnWidth:                    200
 #       itemSelector:                   '.grid-item'
 #       gutter:                         50
+
+    # --------------------------------------------------------------------------
+    # Card Grid
+    #
+    - name:                             Card Grid
+      grid:
+        enabled:                        true
+        hideDisabled:                   true
+
+        id:                             card_masonry
+        originTop:                      true
+        originLeft:                     true
+        initLayout:                     true
+        percentPosition:                true
+
+    # --------------------------------------------------------------------------
+    # Image Grid
+    #
+    - name:                             Image Grid
+      grid:
+        enabled:                        true
+        hideDisabled:                   true
+
+        id:                             image_masonry
+        originTop:                      true
+        originLeft:                     true
+        initLayout:                     true
+        percentPosition:                true
+
+    # --------------------------------------------------------------------------
+    # Image Grid + Lightbox
+    #
+    - name:                             Image Grid + Lightbox
+      grid:
+        enabled:                        true
+        hideDisabled:                   true
+
+        id:                             image_masonry_lightbox
+        originTop:                      true
+        originLeft:                     true
+        initLayout:                     true
+        percentPosition:                true
+
+    # --------------------------------------------------------------------------
+    # Image Grid + LightGallery
+    #
+    - name:                             Image Grid + LighGallery
+      grid:
+        enabled:                        false
+        hideDisabled:                   true
+
+        id:                             image_masonry_lightgalley
+        originTop:                      true
+        originLeft:                     true
+        initLayout:                     true
+        percentPosition:                true
 
 # ------------------------------------------------------------------------------
 # END config

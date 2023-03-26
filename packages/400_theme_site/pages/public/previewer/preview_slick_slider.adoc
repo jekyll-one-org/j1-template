@@ -13,16 +13,15 @@ tags:                                   [ Slick, Slider, Example ]
 
 comments:                               false
 fab_menu_id:                            open_toc
-
-permalink:                              /pages/public/previewer/slick/
+scrollbar:                              false
 regenerate:                             false
+permalink:                              /pages/public/previewer/slick/
+
 
 resources:                              [ clipboard, rouge, slick ]
 resource_options:
   - attic:
-      padding_top:                      400
-      padding_bottom:                   50
-      opacity:                          0.5
+      padding_top:                      600
       slides:
         - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
           alt:                          Photo by Ricardo Gomez Angel on Unsplash
@@ -72,14 +71,14 @@ what Slick sliders can do.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-== Posts Slider
+== Post Slider
 
-A Posts Slider for J1 Template is a pre-defined carousel type to display news
+A Post Slider for J1 Template is a pre-defined carousel type to display news
 articles on a webpage. It is a popular way to showcase a selection of posts
 visually appealingly and can be useful for highlighting important or *featured*
 content.
 
-Posts sliders pull content from a specific category or tag. Carousels may
+Post sliders pull content from a specific category or tag. Carousels may
 display post titles, featured images, and excerpts. Slick sliders for the J1
 Theme can be easily customized in various ways, such as changing the number
 of posts displayed, the slider speed, or the navigation options.

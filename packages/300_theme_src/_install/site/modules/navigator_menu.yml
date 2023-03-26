@@ -341,6 +341,9 @@
       - title:                          Slick Slider
         href:                           /pages/public/previewer/slick/
         icon:                           view-carousel
+      - title:                          Masonry
+        href:                           /pages/public/previewer/masonry/
+        icon:                           view-dashboard-variant
 
       - title:                          MD Color Palette
         href:                           https://jekyll.one/pages/public/previewer/color_palette/

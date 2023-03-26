@@ -1,0 +1,469 @@
+---
+title:                                  J1 Masonry
+tagline:                                Preview
+date:                                   2020-11-03 00:00:00
+description: >
+                                        The term masonry is commonly used in web development to
+                                        refer to a grid layout system for arranging elements on a webpage.
+                                        The masonry layout, also known as the Pinterest-style layout, is
+                                        a popular choice for displaying images of varying sizes aesthetically
+                                        pleasingly.
+
+categories:                             [ Previewer ]
+tags:                                   [ Masonry, Example ]
+
+comments:                               false
+fab_menu_id:                            open_toc
+scrollbar:                              false
+regenerate:                             false
+permalink:                              /pages/public/previewer/masonry/
+
+resources:                              [
+                                          clipboard, lightbox, masonry,
+                                          rouge, slick
+                                        ]
+resource_options:
+  - attic:
+      padding_top:                      600
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/hayden-mills-2.jpg
+          alt:                          Photo by Hayden Mills on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Hayden Mills
+            href:                       https://unsplash.com/@haydmills
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+The term *Masonry* is commonly used in web development to refer to a grid
+layout system for arranging elements on a webpage. The masonry layout, also
+known as the **Pinterest**-style layout, is a popular choice for displaying
+images of varying sizes aesthetically pleasingly.
+
+J1 Masonry is based on the popular JavaScript library *Masonry* that enables
+the creation of responsive, dynamic grid layouts. It uses a unique algorithm
+to arrange elements vertically, then horizontally in the grid. The result is
+a visually appealing layout that works well with images and other content of
+varying sizes.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+== Post Slider
+
+A Post Slider for J1 Template is a pre-defined carousel type to display
+news articles on a webpage. It is a popular way to showcase a selection of
+posts visually appealingly and can be useful for highlighting important or
+*featured* content.
+
+The following slider example pulls the post content from a series of posts
+having a specific tag specified in the *Frontmatter*:
+
+.Frontmatter configuration (posts)
+[source, config, role="noclip mb-2"]
+----
+...
+group:                                  Life
+series:                                 Life
+...
+----
+
+.Post silder
+slick::post_slider[role="mt-3 mb-3"]
+
+Alternatively, such a series can be arranged in a different way using the *J1
+Masonry* module as shown below.
+
+== Masonry Grid on Posts
+
+J1 Masonry is easy to use and can be added to a webpage with just a few
+lines. The module provides a flexible configuration that allows developers
+to customize the layout, adjust the column width and gutter size, and add
+animations and other effects.
+
+++++
+<div id="post_series_grid" class="post-series-grid mb-4">
+  <!-- Collect data only if group matches -->
+  <div class="col-lg-4 col-sm-6 mb-2 mb-lg-0 mt-1 px-1">
+    <article class="card bg-dark text-center text-white border-0 rounded-0">
+      <!-- img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-5.jpg" alt="Life With Simple Rules" style="filter: grayscale(1) contrast(0.8) brightness(0.6);" -->
+      <img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-5.jpg" alt="Life With Simple Rules">
+      <div class="card-img-overlay">
+        <div class="card-content mt-5 pb-1">
+          <a class="d-block text-white text-uppercase link-no-decoration" href="life" style="font-size: 24px;">Life</a>
+          <ul class="list-inline d-flex justify-content-center py-1 mb-6">
+            <li class="list-inline-item">
+              <i class="mdi mdi-account md-black mdi-18px mr-1" style="margin-right: 8px;"></i>
+              Juergen  ·  
+            </li>
+            <li class="list-inline-item">
+              <i class="mdi mdi-calendar-blank md-black mdi-18px mr-1"></i>
+              Sep 02, 2022
+            </li>
+          </ul>
+          <h4 class="notoc card-title">
+            <a class="text-white link-no-decoration" href="/posts/public/series/life/2022/09/02/organize-your-life/">Health</a>
+          </h4>
+        </div>
+      </div>
+    </article>
+  </div>
+  <!-- Collect data only if group matches -->
+  <div class="col-lg-4 col-sm-6 mb-2 mb-lg-0 mt-1 px-1">
+    <article class="card bg-dark text-center text-white border-0 rounded-0">
+      <!-- img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-4.jpg" alt="Life With Simple Rules" style="filter: grayscale(1) contrast(0.8) brightness(0.6);" -->
+      <img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-4.jpg" alt="Life With Simple Rules">
+      <div class="card-img-overlay">
+        <div class="card-content mt-5 pb-1">
+          <a class="d-block text-white text-uppercase link-no-decoration" href="life" style="font-size: 24px;">Life</a>
+          <ul class="list-inline d-flex justify-content-center py-1 mb-6">
+            <li class="list-inline-item">
+              <i class="mdi mdi-account md-black mdi-18px mr-1" style="margin-right: 8px;"></i>
+              Juergen  ·  
+            </li>
+            <li class="list-inline-item">
+              <i class="mdi mdi-calendar-blank md-black mdi-18px mr-1"></i>
+              Sep 01, 2022
+            </li>
+          </ul>
+          <h4 class="notoc card-title">
+            <a class="text-white link-no-decoration" href="/posts/public/series/life/2022/09/01/organize-your-life/">Mindset</a>
+          </h4>
+        </div>
+      </div>
+    </article>
+  </div>
+  <!-- Collect data only if group matches -->
+  <div class="col-lg-4 col-sm-6 mb-2 mb-lg-0 mt-1 px-1">
+    <article class="card bg-dark text-center text-white border-0 rounded-0">
+      <!-- img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-3.jpg" alt="Life With Simple Rules" style="filter: grayscale(1) contrast(0.8) brightness(0.6);" -->
+      <img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-3.jpg" alt="Life With Simple Rules">
+      <div class="card-img-overlay">
+        <div class="card-content mt-5 pb-1">
+          <a class="d-block text-white text-uppercase link-no-decoration" href="life" style="font-size: 24px;">Life</a>
+          <ul class="list-inline d-flex justify-content-center py-1 mb-6">
+            <li class="list-inline-item">
+              <i class="mdi mdi-account md-black mdi-18px mr-1" style="margin-right: 8px;"></i>
+              Juergen  ·  
+            </li>
+            <li class="list-inline-item">
+              <i class="mdi mdi-calendar-blank md-black mdi-18px mr-1"></i>
+              Aug 03, 2022
+            </li>
+          </ul>
+          <h4 class="notoc card-title">
+            <a class="text-white link-no-decoration" href="/posts/public/series/life/2022/08/03/organize-your-life/">Technology</a>
+          </h4>
+        </div>
+      </div>
+    </article>
+  </div>
+  <!-- Collect data only if group matches -->
+  <div class="col-lg-4 col-sm-6 mb-2 mb-lg-0 mt-1 px-1">
+    <article class="card bg-dark text-center text-white border-0 rounded-0">
+      <!-- img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-2.jpg" alt="Life With Simple Rules" style="filter: grayscale(1) contrast(0.8) brightness(0.6);" -->
+      <img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-2.jpg" alt="Life With Simple Rules">
+      <div class="card-img-overlay">
+        <div class="card-content mt-5 pb-1">
+          <a class="d-block text-white text-uppercase link-no-decoration" href="life" style="font-size: 24px;">Life</a>
+          <ul class="list-inline d-flex justify-content-center py-1 mb-6">
+            <li class="list-inline-item">
+              <i class="mdi mdi-account md-black mdi-18px mr-1" style="margin-right: 8px;"></i>
+              Juergen  ·  
+            </li>
+            <li class="list-inline-item">
+              <i class="mdi mdi-calendar-blank md-black mdi-18px mr-1"></i>
+              Aug 02, 2022
+            </li>
+          </ul>
+          <h4 class="notoc card-title">
+            <a class="text-white link-no-decoration" href="/posts/public/series/life/2022/08/02/organize-your-life/">Growth</a>
+          </h4>
+        </div>
+      </div>
+    </article>
+  </div>
+  <!-- Collect data only if group matches -->
+  <div class="col-lg-4 col-sm-6 mb-2 mb-lg-0 mt-1 px-1">
+    <article class="card bg-dark text-center text-white border-0 rounded-0">
+      <!-- img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-1.jpg" alt="Life With Simple Rules" style="filter: grayscale(1) contrast(0.8) brightness(0.6);" -->
+      <img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-1.jpg" alt="Life With Simple Rules">
+      <div class="card-img-overlay">
+        <div class="card-content mt-5 pb-1">
+          <a class="d-block text-white text-uppercase link-no-decoration" href="life" style="font-size: 24px;">Life</a>
+          <ul class="list-inline d-flex justify-content-center py-1 mb-6">
+            <li class="list-inline-item">
+              <i class="mdi mdi-account md-black mdi-18px mr-1" style="margin-right: 8px;"></i>
+              Juergen  ·  
+            </li>
+            <li class="list-inline-item">
+              <i class="mdi mdi-calendar-blank md-black mdi-18px mr-1"></i>
+              Aug 01, 2022
+            </li>
+          </ul>
+          <h4 class="notoc card-title">
+            <a class="text-white link-no-decoration" href="/posts/public/series/life/2022/08/01/organize-your-life/">Lifestyle</a>
+          </h4>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
+++++
+
+NOTE: The J1 Masonry module supports a series of posts out of the box. If the
+grid type of `post-series` is given, all posts of a group (series) are
+generated automatically as Bootstrap Cards of type *post*.
+
+[role="mb-4"]
+The Masonry Javascript module has become a go-to library for web developers
+who need to create dynamic grid layouts, especially for websites that showcase
+many images or other visual content like post series for example.
+
+== Masonry Grid on Images
+
+J1 Masonry is a great tool to create dynamic image galleries. Image galleries
+are popular on many websites, and masonry can be a useful tool for creating
+dynamic and visually appealing galleries. By using masonry, you can create a
+gallery that displays images of different sizes in an aesthetically pleasing
+and functional way.
+
+=== Grid on Image Cards
+
+J1 Masonry can also provide responsive design, so your gallery will adjust to
+different screen sizes and devices. A responsive design is particularly useful
+for mobile devices with limited-screen real estate.
+
+.Frontmatter configuration (posts)
+[source, html, role="noclip mb-2"]
+----
+<div class="content mt-5 mb-5">
+  <div id="card_masonry" class="row">
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card">
+        <img  class="img-fluid img-object--cover g-height-300"
+              src="/assets/images/modules/gallery/mega_cities/denys-nevozhai-1_b.jpg"
+              alt="Jin Mao Tower Shanghai">
+      </div>
+    </div>
+
+    ...
+
+  </div>
+</div>
+----
+
+The following examplye shows images defined as *Bootrap* (BS) Cards and
+displayed *even* in size.
+
+WARNING: All images are re-calculated to a height of *300px* using the CSS
+style `g-height-300`. To fit the aspect ratio, the CSS style `img-object--cover`
+is applied, which causes images to be resized to fit their container.
+
+++++
+<div class="content mt-5 mb-5">
+  <div id="card_masonry" class="row">
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card">
+        <img class="img-fluid img-object--cover g-height-300" src="/assets/images/modules/gallery/mega_cities/denys-nevozhai-1_b.jpg" alt="Jin Mao Tower Shanghai">
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card">
+        <img class="img-fluid img-object--cover g-height-300" src="/assets/images/modules/gallery/mega_cities/thomas-tucker_b.jpg" alt="Sunset over Taipei City">
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card">
+        <img class="img-fluid img-object--cover g-height-300" src="/assets/images/modules/gallery/mega_cities/emmad-mazhari_b.jpg" alt="Chicago">
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <article class="card">
+        <img class="img-fluid img-object--cover g-height-300" src="/assets/images/modules/gallery/mega_cities/johan-mouchet_b.jpg" alt="The Queen Bee at the Eureka Tower">
+      </article>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card">
+        <img class="img-fluid img-object--cover g-height-300" src="/assets/images/modules/gallery/mega_cities/federico-rizzarelli_b.jpg" alt="Shanhai">
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="card">
+        <img class="img-fluid img-object--cover g-height-300" src="/assets/images/modules/gallery/mega_cities/gints-gailis_b.jpg" alt="Shangri-La Hotel Jakarta ">
+      </div>
+    </div>
+
+  </div>
+</div>
+++++
+
+
+=== Grid on Images in different sizes
+
+Using an image gallery to display images of different sizes can be challenging,
+resulting in an uneven or unbalanced layout. However, this is where masonry
+can be particularly useful.
+
+==== Simple Image Grid
+
+Masonry uses a dynamic grid system to position images to create a visually
+appealing and balanced layout. A dynamic grid system means you can display
+images of different sizes without worrying about them looking out of place
+or disrupting the overall flow of the gallery.
+
+++++
+<div class="content mt-5 mb-5">
+  <div id="image_masonry" class="row">
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="no_card">
+        <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/denys-nevozhai-1_b.jpg" alt="Jin Mao Tower Shanghai">
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="no_card">
+        <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/thomas-tucker_b.jpg" alt="Sunset over Taipei City">
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="no_card">
+        <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/emmad-mazhari_b.jpg" alt="Chicago">
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <article class="no_card">
+        <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/johan-mouchet_b.jpg" alt="The Queen Bee at the Eureka Tower">
+      </article>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="no_card">
+        <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/federico-rizzarelli_b.jpg" alt="Shanhai">
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="no_card">
+        <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/gints-gailis_b.jpg" alt="Shangri-La Hotel Jakarta ">
+      </div>
+    </div>
+
+  </div>
+</div>
+++++
+
+==== Image Grid + Lightbox
+
+A Lightbox is, in general, a helper which displays enlarged, almost
+screen-filling versions of images (or videos) while dimming the remainder
+of the page. The technique, introduced by Lightbox2, gained widespread
+popularity thanks to its simple style. The term lightbox has been employed
+since then for Javascript libraries to support such functionality.
+
+A lightbox supports image groups (image sets). Click on the images below to
+see how a Lightbox manages a group of images.
+
+++++
+<div class="content mt-5 mb-5">
+  <div id="image_masonry_lightbox" class="row">
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="grid-sizer">
+        <a  class="notoc link-no-decoration"
+            href="/assets/images/modules/gallery/mega_cities/denys-nevozhai-1_b.jpg"
+            data-lightbox="masonry-image-group"
+            data-title="Jin Mao Tower Shanghai">
+          <img class="img-fluid" src="/assets/images/modules/gallery/mega_cities/denys-nevozhai-1_b.jpg" alt="Jin Mao Tower Shanghai">
+        </a>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="grid-sizer">
+        <a  class="notoc link-no-decoration"
+            href="/assets/images/modules/gallery/mega_cities/thomas-tucker_b.jpg"
+            data-lightbox="masonry-image-group"
+            data-title="Sunset over Taipei City">
+          <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/thomas-tucker_b.jpg" alt="Sunset over Taipei City">
+        </a>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="grid-sizer">
+        <a  class="notoc link-no-decoration"
+            href="/assets/images/modules/gallery/mega_cities/emmad-mazhari_b.jpg"
+            data-lightbox="masonry-image-group"
+            data-title="Chicago">
+          <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/emmad-mazhari_b.jpg" alt="Chicago">
+        </a>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="grid-sizer">
+        <a  class="notoc link-no-decoration"
+            href="/assets/images/modules/gallery/mega_cities/johan-mouchet_b.jpg"
+            data-lightbox="masonry-image-group"
+            data-title="The Queen Bee at the Eureka Tower">
+          <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/johan-mouchet_b.jpg" alt="The Queen Bee at the Eureka Tower">
+        </a>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="grid-sizer">
+        <a  class="notoc link-no-decoration"
+            href="/assets/images/modules/gallery/mega_cities/federico-rizzarelli_b.jpg"
+            data-lightbox="masonry-image-group"
+            data-title="Shanghai">
+          <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/federico-rizzarelli_b.jpg" alt="Shanghai">
+        </a>
+      </div>
+    </div>
+
+    <div class="col-sm-6 col-lg-4 mb-4">
+      <div class="grid-sizer">
+        <a  class="notoc link-no-decoration"
+            href="/assets/images/modules/gallery/mega_cities/gints-gailis_b.jpg"
+            data-lightbox="masonry-image-group"
+            data-title="Shangri-La Hotel Jakarta">
+          <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/gints-gailis_b.jpg" alt="Shangri-La Hotel Jakarta">
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+++++
