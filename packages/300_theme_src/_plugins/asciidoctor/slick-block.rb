@@ -25,7 +25,8 @@ include Asciidoctor
 # Example:
 #
 #   .The slider title
-#   slick::ms_00001[role="mt-3 mb-5"]
+#   slick::image_slider[role="mt-3 mb-5"]
+#
 # ------------------------------------------------------------------------------
 Asciidoctor::Extensions.register do
 
@@ -38,7 +39,7 @@ Asciidoctor::Extensions.register do
     def process parent, target, attrs
 
       title_html  = (attrs.has_key? 'title') ? %(<div class="slider-title">#{attrs['title']}</div>\n) : nil
-      html = %(#{title_html} <div id="#{target}" class="slider-parent #{attrs['role']}"></div>)
+      html = %(#{title_html} <div id="#{target}_parent" class="slider-parent #{attrs['role']}"></div>)
       create_pass_block parent, html, attrs, subs: nil
     end
   end

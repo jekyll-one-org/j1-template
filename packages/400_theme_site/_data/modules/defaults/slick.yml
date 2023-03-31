@@ -416,7 +416,25 @@ defaults:
   enabled:                              false
 
   # ----------------------------------------------------------------------------
-  # Base settings
+  # AJAX (JSON)
+  #
+  # All data items displayed by a carousel are being read
+  # from a JSON file (default: carousel.json) automatically
+  # generated from that configuration.
+  # AJAX methods are used to supply the needed HTML code at
+  # the time the carousel is initialized (by the Initializer)
+  #
+  xhr_data_path:                        /assets/data/slick
+
+  # ------------------------------------------------------------------------
+  # Lightbox options
+  #
+  lightbox:
+    enabled:                            false
+    type:                               lb                                      # currently only type 'lb' supported
+
+  # ----------------------------------------------------------------------------
+  # Base Slider settings
   #
   accessibility:                        true                                    # slick() may fatl if enabled (true)
   adaptiveHeight:                       false
@@ -467,17 +485,6 @@ defaults:
   verticalSwiping:                      false
   waitForAnimate:                       true
   zIndex:                               1000
-
-  # ----------------------------------------------------------------------------
-  # AJAX (JSON)
-  #
-  # All data items displayed by a carousel are being read
-  # from a JSON file (default: carousel.json) automatically
-  # generated from that configuration.
-  # AJAX methods are used to supply the needed HTML code at
-  # the time the carousel is initialized (by the Initializer)
-  #
-  xhr_data_path:                        /assets/data/slick
 
 # ------------------------------------------------------------------------------
 # END config

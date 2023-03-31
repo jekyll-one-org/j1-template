@@ -78,7 +78,7 @@ regenerate:                             true
 j1.adapter.slick = (function (j1, window) {
   var environment               = '{{environment}}';
   var responsiveSettings        = [];
-  var sliderResponsiveSettings  = [];
+//var sliderResponsiveSettings  = '[' + '\n';
   var _this;
   var logger;
   var logText;
@@ -87,6 +87,7 @@ j1.adapter.slick = (function (j1, window) {
   var slickOptions;
   var sliderOptions;
   var sliderSettings;
+  var sliderResponsiveSettings = [];
 
   // ---------------------------------------------------------------------------
   // Helper functions
@@ -101,9 +102,9 @@ j1.adapter.slick = (function (j1, window) {
     // Initializer
     // -------------------------------------------------------------------------
     init: function (options) {
-      var xhrLoadState                = 'pending';                              // (initial) load state for the HTML portion of the slider
-      var load_dependencies           = {};                                     // dynamic variable
-      var sliderResponsiveSettingsOBJ = {};                                     // initial object for responsive settings
+      var load_dependencies             = {};                                   // dynamic variable
+      var xhrLoadState                  = 'pending';                            // (initial) load state for the HTML portion of the slider
+      var sliderResponsiveSettingsOBJ   = {};                                   // initial object for responsive settings
       var dependency;
       var sliderResponsiveSettingsYAML;
       var sliderResponsiveSettingsSTRING
@@ -134,6 +135,7 @@ j1.adapter.slick = (function (j1, window) {
       // load HTML portion for all sliders
       console.debug('loading HTML portion for all Slick sliders configured');
       _this.loadSliderHTML(slickOptions, slickOptions.sliders);
+      // _this.eventManager();
 
       // -----------------------------------------------------------------------
       // initializer
@@ -195,28 +197,27 @@ j1.adapter.slick = (function (j1, window) {
               sliderResponsiveSettingsYAML    = yaml.loadAll(sliderResponsiveSettings, 'utf8');
               sliderResponsiveSettingsOBJ     = sliderResponsiveSettingsYAML[0];
               sliderResponsiveSettingsSTRING  = JSON.stringify(sliderResponsiveSettingsOBJ, null, 4);
+
               logger.debug('\n' + 'responsive settings on id #{{slider.id}}: ' + '\n' + sliderResponsiveSettingsSTRING);
+
+              // add required space ABOVE the slider
+              // if (sliderSettings.arrows) {
+              //   $('#{{slider.id}}_parent').addClass('slick-arrows');
+              // }
 
               $('.{{slider.selector}}').on('init', function(event, slick) {
                 logger.info('\n' + 'slider initialized on id: {{slider.id}}');
                 if ({{slider.lightbox.enabled}}) {
                   logger.info('\n' + 'initialize lightbox on id: {{slider.id}}');
                   $('#{{slider.id}}').slickLightbox({
-                    background:               'rgba(0,0,0,.8)',
-                    closeOnEscape:            true,
-                    closeOnBackdropClick:     true,
-                    navigateByKeyboard:       true,
-                    destroyTimeout:           500,
-                    src:                      '{{slider.lightbox.src}}',
-                    itemSelector:             '{{slider.lightbox.itemSelector}}',
-                    imageMaxHeight:           0.9,
-                    lazy:                     false,
+                    src:            '{{slider.lightbox.src}}',
+                    itemSelector:   '{{slider.lightbox.itemSelector}}'
                   });
                 }
               });
 
-              // setup the slider
               logger.info('\n' + 'slider is being setup on id: ' + '{{slider.id}}');
+              // setup the slider
               $('.{{slider.selector}}').slick({
                 accessibility:              sliderSettings.accessibility,
                 adaptiveHeight:             sliderSettings.adaptiveHeight,
@@ -279,6 +280,68 @@ j1.adapter.slick = (function (j1, window) {
     }, // END init
 
     // -------------------------------------------------------------------------
+    // eventManager()
+    // load all master sliders (HTML portion) dynanically configured
+    // and enabled (AJAX) from data file
+    // NOTE: Make sure the placeholder is available in the content page
+    // eg. using the asciidoc extension masterslider::
+    // -------------------------------------------------------------------------
+    eventManager: function () {
+
+      // window.onload = function() {
+      //   var $buttons = $(":button");
+      //   if ($buttons.length) {
+      //     $.each( $buttons, function(index, value) {
+      //       if (value.className.includes('slick-prev')) {
+      //         logger.info('\n' + 'button found on load: ' + index + ': ' + value.offsetParent.id );
+      //       }
+      //     });
+      //   }
+      // };
+
+      window.addEventListener('resize', function(event) {
+
+        setTimeout (function() {
+          var $buttons      = $(':button');
+          var $slider       = $('.slider-parent');
+
+          if ($slider.length) {
+            $.each( $slider, function(index, value) {
+              var slider_button = false;
+
+              if ($buttons.length) {
+                $.each( $buttons, function(index, value) {
+                  if (value.className.includes('slick-prev')) {
+                    // logger.info('\n' + 'button found on resize: ' + index + ': ' + value.offsetParent.id );
+                    slider_button = true;
+                  }
+                });
+              }
+
+//            if (value.className.includes('slick-arrows') && slider_button) {
+              if (slider_button) {
+                logger.info('\n' + 'slider with button found on resize for id: ' + value.id);
+                $('#' + value.id).addClass('slick-arrows');
+              } else {
+                logger.info('\n' + 'remove class on resize for id: ' + value.id);
+                $('#' + value.id).removeClass('slick-arrows');
+              }
+            });
+          }
+
+          // if ($buttons.length) {
+          //   $.each( $buttons, function(index, value) {
+          //     if (value.className.includes('slick-prev')) {
+          //       logger.info('\n' + 'button found on resize: ' + index + ': ' + value.offsetParent.id );
+          //     }
+          //   });
+          // }
+
+        }, 1000);
+      });
+    },
+
+    // -------------------------------------------------------------------------
     // loadSliderHTML()
     // load all master sliders (HTML portion) dynanically configured
     // and enabled (AJAX) from data file
@@ -297,9 +360,9 @@ j1.adapter.slick = (function (j1, window) {
       _this.setState('load_data');
       Object.keys(slider).forEach(function(key) {
         if (slider[key].enabled) {
-          xhr_container_id = slider[key].id + '_parent';
-
           console.debug('load HTML data on Slick slider id: ' + slider[key].id);
+
+          xhr_container_id = slider[key].id + '_parent';
           j1.loadHTML({
             xhr_container_id: xhr_container_id,
             xhr_data_path:    xhr_data_path,

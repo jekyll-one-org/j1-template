@@ -153,38 +153,63 @@ module_version:               {{module_version | debug}}
     {% if slider.type == 'example' %}
     <!-- Example slider -->
     <div id="{{slider.id}}" class="{{slider.selector}}">
-      {% for i in (1..slider.slides) %}
       <div>
-        <h3 class="slide-item notoc">{{i}}</h3>
+        <h3 class="slide-item notoc">1</h3>
       </div>
-      {% endfor %}
+      <div>
+        <h3 class="slide-item notoc">2</h3>
+      </div>
+      <div>
+        <h3 class="slide-item notoc">3</h3>
+      </div>
+      <div>
+        <h3 class="slide-item notoc">4</h3>
+      </div>
+      <div>
+        <h3 class="slide-item notoc">5</h3>
+      </div>
+      <div>
+        <h3 class="slide-item notoc">6</h3>
+      </div>
+      <div>
+        <h3 class="slide-item notoc">7</h3>
+      </div>
+      <div>
+        <h3 class="slide-item notoc">8</h3>
+      </div>
     </div>
     <!-- /Example slider -->
     {% endif %}
 
     {% if slider.type == 'image' %}
     <!-- Image slider -->
-    <div id="{{slider.id}}" class="{{slider.selector}}">
+    <div class="content">
+      <div id="{{slider.id}}" class="{{slider.selector}}">
 
-      {% for slide in slider.slides %}
-      <div class="col-sm-6 col-lg-4 mb-4">
-        <div class="card">
-        {% if slider.lightbox.enabled %}
-        <a href="{{slide.image}}" data-caption="{{slide.title}}">
-          <img class="{{slider.styles}}" src="{{slide.image}}" alt="{{slide.title}}">
-        </a>
-        {% else %}
-        <img id="{{forloop.index}}" class="{{slider.styles}}" src="{{slide.image}}" alt="{{slide.title}}">
-        {% endif %}
-        </div>
+        {% for slide in slider.slides %}
+          <div class="col-sm-6 col-lg-4 mb-4">
+            <div class="card">
+            {% if slider.lightbox.enabled %}
+              <a  class="notoc link-no-decoration"
+                  href="{{slide.image}}"
+                  data-lightbox="{{slider.id}}-image-group"
+                  data-title="{{slide.title}}">
+                <img class="{{slider.styles}}" src="{{slide.image}}" alt="{{slide.title}}">
+              </a>
+              {% else %}
+                <img id="{{forloop.index}}" class="{{slider.styles}}" src="{{slide.image}}" alt="{{slide.title}}">
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+
       </div>
-      {% endfor %}
-
     </div>
     <!-- /Image slider -->
     {% endif %}
 
   {% endif %}
+
 {% endfor %}
 <!-- [INFO   ] [~/assets/data/slick.html               ]  [end collecting all slider items] -->
 

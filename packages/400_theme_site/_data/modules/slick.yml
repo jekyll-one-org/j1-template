@@ -43,12 +43,20 @@ settings:
       group:                            Life                                    # generate slides only for group (specified in article/post)
 
       # ------------------------------------------------------------------------
+      # Lightbox options
+      #
+      lightbox:
+        enabled:                        false
+
+      # ------------------------------------------------------------------------
       # Slider options
       #
       options:
         autoplay:                       true
         slidesToShow:                   3
         slidesToScroll:                 1
+        arrows:                         false
+        dots:                           false
         responsive:                     true                                    # enables reponsive options to generate breakpoint properties for slick()
 
       # ------------------------------------------------------------------------
@@ -72,7 +80,6 @@ settings:
             slidesToShow:               1
             slidesToScroll:             1
 
-
     # --------------------------------------------------------------------------
     # EXAMPLE slider 1
     #
@@ -84,6 +91,12 @@ settings:
       type:                             example
 
       # ------------------------------------------------------------------------
+      # Lightbox options
+      #
+      lightbox:
+        enabled:                        false
+
+      # ------------------------------------------------------------------------
       # Slider options
       #
       options:
@@ -91,7 +104,7 @@ settings:
         dots:                           true
         autoplay:                       false
         slidesToShow:                   3
-        slidesToScroll:                 1
+        slidesToScroll:                 3
         responsive:                     true
 
       # ------------------------------------------------------------------------
@@ -116,22 +129,29 @@ settings:
             slidesToShow:               1
             slidesToScroll:             1
 
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:                           9
+
     # --------------------------------------------------------------------------
-    # DEFAULT slider
+    # IMAGE slider
     #
     - slider:
-      enabled:                          false
+      enabled:                          true
 
-      id:                               default_slider
-      selector:                         default-slider
-      type:                             default
+      id:                               image_slider
+      selector:                         image-slider
+      type:                             image
+      styles:                           img-fluid img-object--cover g-height-300
 
       # ------------------------------------------------------------------------
       # Lightbox options
       #
       lightbox:
-        enabled:                        false
-        type:                           lb
+        enabled:                        true
+        src:                            src
+        itemSelector:                   .card img
 
       # ------------------------------------------------------------------------
       # Slider options
@@ -141,8 +161,8 @@ settings:
         dots:                           true
         speed:                          300
         autoplay:                       false
-        slidesToShow:                   3
-        slidesToScroll:                 1
+        slidesToShow:                   2
+        slidesToScroll:                 2
         responsive:                     true
 
       # ------------------------------------------------------------------------
@@ -154,16 +174,22 @@ settings:
             breakOn:                    1024
             slidesToShow:               2
             slidesToScroll:             2
+#            arrows:                     false
+#            dots:                       true
         - breakpoint:
           settings:
-            breakOn:                    600
+            breakOn:                    800
             slidesToShow:               1
             slidesToScroll:             1
+#            arrows:                     false
+#            dots:                       true
         - breakpoint:
           settings:
             breakOn:                    480
             slidesToShow:               1
             slidesToScroll:             1
+#            arrows:                     false
+#            dots:                       true
 
       # ------------------------------------------------------------------------
       # Slides
@@ -172,33 +198,39 @@ settings:
 
         # slide 1
         #
-        - slide:
-          alt:                          Slide 1
-          title:                        Slide 1
-          foreground_image:             /assets/images/modules/masterslider/slider_1/cat-1.jpg
-          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_image:                  false
-          slideinfo:                    false
+        - slide:                        # slide 1
+          title:                        Jin Mao Tower Shanghai
+          image:                        /assets/images/modules/gallery/mega_cities/denys-nevozhai-1_b.jpg
 
         # slide 2
         #
         - slide:
-          alt:                          Cat 2
-          title:                        Cat 2
-          foreground_image:             /assets/images/modules/masterslider/slider_1/cat-2.jpg
-          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_image:                  false
-          slideinfo:                    false
+          title:                        Sunset over Taipei City
+          image:                        /assets/images/modules/gallery/mega_cities/thomas-tucker_b.jpg
 
         # slide 3
         #
         - slide:
-          alt:                          Cat 3
-          title:                        Cat 3
-          foreground_image:             /assets/images/modules/masterslider/slider_1/cat-3.jpg
-          background_image:             /assets/themes/j1/modules/masterslider/css/blank.gif
-          thumb_image:                  false
-          slideinfo:                    false
+          title:                        Chicago
+          image:                        /assets/images/modules/gallery/mega_cities/emmad-mazhari_b.jpg
+
+        # slide 4
+        #
+        - slide:
+          title:                        The Queen Bee at the Eureka Tower
+          image:                        /assets/images/modules/gallery/mega_cities/johan-mouchet_b.jpg
+
+        # slide 5
+        #
+        - slide:
+          title:                        Shanghai
+          image:                        /assets/images/modules/gallery/mega_cities/federico-rizzarelli_b.jpg
+
+        # slide 6
+        #
+        - slide:
+          title:                        Shangri-La Hotel Jakarta
+          image:                        /assets/images/modules/gallery/mega_cities/gints-gailis_b.jpg
 
 # ------------------------------------------------------------------------------
 # END config

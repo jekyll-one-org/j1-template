@@ -17,7 +17,7 @@
 /* Example slider
 -------------------------------------------------------------------------------- */
 h2.slide-item, h3.slide-item {
-    background: var(--bs-gray-300);
+    background: var(--bs-gray-400);
     color: var(--bs-gray-800);
     font-size: 36px;
     line-height: 150px;
@@ -34,16 +34,30 @@ h2.slide-item, h3.slide-item {
 .slider-title {
     font-style: italic;
     font-weight: 500;
+    margin-left: 5px;
 }
 
 /* Cards
 -------------------------------------------------------------------------------- */
-/*
-.card .card-title a {
-  color: var(--bs-primary) !important;
-  text-decoration: none;
+.card [class*="header-"], .card [class*="content-"] {
+  color: var(--bs-gray-400) !important;
 }
-*/
+
+.card .card-title a {
+  color: var(--bs-gray-400) !important;
+}
+
+.card .card-title > a:focus,
+.card .card-title > a:hover {
+  /* color: var(--bs-primary) !important; */
+  color: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* Links
+-------------------------------------------------------------------------------- */
+a.link-no-decoration:hover {
+  color: rgba(255, 255, 255, 0.4) !important;
+}
 
 /* Images
 -------------------------------------------------------------------------------- */
@@ -56,10 +70,15 @@ h2.slide-item, h3.slide-item {
 
 /* Arrows
 -------------------------------------------------------------------------------- */
+.slick-arrows {
+    /* padding-top: 3.25rem; */
+}
+
 .slick-arrow {
     position: absolute;                                                         /* position of the arrow */
     margin-left: 20px;
     margin-right: 20px;
+    /* padding-top: 1.75rem; */
     z-index: 10;                                                                /* show on top of a slide */
 }
 
@@ -145,14 +164,11 @@ h2.slide-item, h3.slide-item {
 /* Media breakpoints, all screens
 -------------------------------------------------------------------------------- */
 @media all {
-  .silder-arrows {
-  	margin-top: 60px;
-  }
 
   .slick-prev,
   .slick-next {
     display: block;                                                             /* shown by default */
-    top: -12%;                                                                   /* center button in slide */
+    top: 50%;                                                                   /* center button in slide */
   	font-size: 0;                                                               /* disable button text */
   	border: none;                                                               /* disable button decoration */
   	outline: none;                                                              /* disable button decoration */
@@ -191,13 +207,14 @@ h2.slide-item, h3.slide-item {
   	font-size: 40px;
   	line-height: 1;
   	opacity: .75;
-  	color: var(--bs-primary);
+  	/* color: var(--bs-primary); */
+    color: var(--bs-white);
   	-webkit-font-smoothing: antialiased;
   	-moz-osx-font-smoothing: grayscale;
   }
 
   .slick-prev {
-  	left: 40%;
+  	left: 0%;
   }
 
   .slick-prev:before {
@@ -209,7 +226,7 @@ h2.slide-item, h3.slide-item {
   }
 
   .slick-next {
-  	right: 40%;
+  	right: 0%;
   }
 
   .slick-next:before {
@@ -223,8 +240,10 @@ h2.slide-item, h3.slide-item {
 
 /* Media breakpoints, tablet|mobile
 -------------------------------------------------------------------------------- */
+/*
 @media screen and (max-width: 992px) {
-  .silder-arrows {
+  .siick-arrow,
+  .siick-arrows {
   	margin-top: 0 !important;
   }
   .slick-prev {
@@ -234,3 +253,4 @@ h2.slide-item, h3.slide-item {
   	display: none !important;
   }
 }
+*/

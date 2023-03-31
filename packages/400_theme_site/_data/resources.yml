@@ -1979,9 +1979,16 @@ resources:
       dependencies:                     false
       pass_init_data:                   false
       data:
-        css:                            [ modules/slick/css/slick, modules/slick/css/theme/uno  ]
+        css:                            [
+                                          modules/slick/lightbox/css/slick-lightbox,
+                                          modules/slick/slider/css/slick,
+                                          modules/slick/slider/css/theme/uno
+                                        ]
         files:                          [ adapter/js/slick.js ]
-        js:                             [ modules/slick/js/slick ]
+        js:                             [
+                                          modules/slick/lightbox/js/slick-lightbox,
+                                          modules/slick/slider/js/slick
+                                        ]
         init_function:                  [ j1.adapter.slick.init ]
 
 # ------------------------------------------------------------------------------

@@ -18,7 +18,7 @@ regenerate:                             false
 permalink:                              /pages/public/previewer/slick/
 
 
-resources:                              [ clipboard, rouge, slick ]
+resources:                              [ clipboard, lightbox, rouge, slick ]
 resource_options:
   - attic:
       padding_top:                      600
@@ -63,7 +63,7 @@ multiple navigation options, lazy loading, or autoplay. Slick sliders are
 compatible with all modern browsers and devices, making it a great choice to
 create a responsive and mobile-friendly website.
 
-[role="mb-5"]
+[role="mb-4"]
 The slider for J1 Template is a *best friend* for all web programmers because
 of its flexibility, a rich set of callbacks and simple configuration to make
 carousels as individual and powerful as possible. Find by the following examples
@@ -71,6 +71,25 @@ what Slick sliders can do.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
+== General Features
+
+Slick sliders are using various tools and frameworks, such as Bootstrap, jQuery,
+and pure CSS. Slick offers a wide range of customization options, such as slide
+transitions, autoplay, navigation controls to create a visually appealing and
+interactive user experience.
+
+[role="mb-4"]
+* Carousels are fully responsive for configurable screen sizes
+* Separate slider option settings per breakpoint
+* Uses CSS3 if available for a browser, fully functional if not
+* Swipe enabled. Or disabled, if prefered
+* Desktop mouse dragging
+* Infinite looping and Autoplay
+* Fully accessible with arrow key and dots navigation
+* Add, remove, filter and unfilter slides
+* Rich set of callbacks to enable individual behaviour of sliders
+
+
 == Post Slider
 
 A Post Slider for J1 Template is a pre-defined carousel type to display news
@@ -78,22 +97,24 @@ articles on a webpage. It is a popular way to showcase a selection of posts
 visually appealingly and can be useful for highlighting important or *featured*
 content.
 
-Post sliders pull content from a specific category or tag. Carousels may
-display post titles, featured images, and excerpts. Slick sliders for the J1
-Theme can be easily customized in various ways, such as changing the number
-of posts displayed, the slider speed, or the navigation options.
+[role="mb-4"]
+J1 Post sliders pull content from a specific category. All Carousels for posts
+display the post category, the post title, the author and date. All Slick
+sliders for the J1 Theme can be easily customized in various ways, such as
+changing the number of posts displayed, the slider speed, or the navigation
+options.
 
 .Asciidoc configuration
-[source, config, role="noclip mb-2"]
+[source, config, role="noclip mb-3"]
 ----
-slick::post_slider[role="mt-4 mb-4"]
+slick::post_slider[]
 ----
 
 .Post silder
-slick::post_slider[role="mt-1"]
+slick::post_slider[role="mb-4"]
 
 .Configuration settings (YAML)
-[source, yaml, role="mt-5"]
+[source, yaml, role="mb-4"]
 ----
 # --------------------------------------------------------------------------
 # POST slider
@@ -137,13 +158,15 @@ slick::post_slider[role="mt-1"]
         slidesToScroll:             1
 
 ----
-[role="mb-5"]
+
+[role="mb-4"]
 Posts sliders typically used on the homepage of a website, within blog posts
 or articles, or on dedicated archive or category pages. They can increase
 user engagement and keep visitors on a website for longer by presenting
 content dynamically and visually appealingly.
 
-== Slider + Arrows and Dots
+
+== Example Slider + Arrows + Dots
 
 Responsive sliders are carousels designed to adapt and resize automatically
 to fit different screen sizes and devices, such as desktops, laptops, tablets,
@@ -151,6 +174,7 @@ and smartphones. They are created using responsive design techniques, allowing
 web developers to create a single slider that can be optimized for various
 devices without needing separate versions or code.
 
+[role="mb-4"]
 Responsive Slick sliders can be useful for ensuring that content is displayed
 correctly and consistently across different devices and for providing an
 optimal user experience for all visitors to a website. They use techniques
@@ -160,14 +184,14 @@ slider size and layout based on the screen size and orientation of the device.
 .Asciidoc configuration
 [source, config, role="noclip mb-2"]
 ----
-slick::example_slider_arrows_dots[role="mt-4 mb-6"]
+slick::example_slider_arrows_dots[role="mb-5"]
 ----
 
-// .Example silder using Arrows + Dots
-slick::example_slider_arrows_dots[role="mt-1"]
+.Example silder using Arrows + Dots
+slick::example_slider_arrows_dots[role="mb-5"]
 
 .Configuration settings (YAML)
-[source, yaml, role="mt-5 mb-5""]
+[source, yaml, role="mb-4"]
 ----
 # --------------------------------------------------------------------------
 # EXAMPLE slider 1
@@ -213,19 +237,23 @@ slick::example_slider_arrows_dots[role="mt-1"]
 ----
 
 
-== General Features
+== Image Slider
 
-Slick sliders are using various tools and frameworks, such as Bootstrap, jQuery,
-and pure CSS. Slick offers a wide range of customization options, such as slide
-transitions, autoplay, navigation controls to create a visually appealing and
-interactive user experience.
+An image slider, also known as a slideshow, is a graphical user interface
+element commonly used in web design and development to showcase a series of
+images or visual content dynamically and interactively.
 
-* Carousels are fully responsive for configurable screen sizes
-* Separate slider option settings per breakpoint
-* Uses CSS3 if available for a browser, fully functional if not
-* Swipe enabled. Or disabled, if prefered
-* Desktop mouse dragging
-* Infinite looping and Autoplay
-* Fully accessible with arrow key and dots navigation
-* Add, remove, filter and unfilter slides
-* Rich set of callbacks to enable individual behaviour of sliders
+[role="mb-4"]
+An image slider typically consists of a container with images and a navigation
+system, including buttons, arrows, or dots that allow users to move back and
+forth between images or select a specific image. Image sliders can also include
+animation effects, such as fade-in or slide-in transitions between images, to
+make the presentation more engaging and visually appealing.
+
+.Image silder
+slick::image_slider[role="mb-5"]
+
+[role="mb-5"]
+Image sliders are commonly used in website headers, landing pages, galleries,
+and product showcases to draw attention to specific content or to provide an
+overview of a collection of images.

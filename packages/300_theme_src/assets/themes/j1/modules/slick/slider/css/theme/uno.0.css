@@ -1,0 +1,241 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/slick/css/theme/uno.css
+ # Provides Slicks styles for J1 Theme Uno
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+@charset 'UTF-8';
+
+/* Example slider
+-------------------------------------------------------------------------------- */
+h2.slide-item, h3.slide-item {
+    background: var(--bs-gray-300);
+    color: var(--bs-gray-800);
+    font-size: 36px;
+    line-height: 150px;
+    margin: 1%;
+    text-align: center;
+}
+
+/* All slider
+-------------------------------------------------------------------------------- */
+.slick-loading .slick-list {
+	background: #fff url('../../images/ajax-loader.gif') center center no-repeat;
+}
+
+.slider-title {
+    font-style: italic;
+    font-weight: 500;
+}
+
+/* Cards
+-------------------------------------------------------------------------------- */
+/*
+.card .card-title a {
+  color: var(--bs-primary) !important;
+  text-decoration: none;
+}
+*/
+
+/* Images
+-------------------------------------------------------------------------------- */
+/*
+.slick-slide img {
+  width: 150px;
+  height: 200px;
+}
+*/
+
+/* Arrows
+-------------------------------------------------------------------------------- */
+.slick-arrows {
+    padding-top: 3.25rem;                                                       /* like BS mt-6 */                                                               /* show on top of a slide */
+}
+
+.slick-arrow {
+    position: absolute;                                                         /* position of the arrow */
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 1.75rem;
+    z-index: 10;                                                                /* show on top of a slide */
+}
+
+/* Dots
+-------------------------------------------------------------------------------- */
+/*
+.slick-dotted.slick-slider {
+	margin-bottom: 30px;
+}
+*/
+
+.slick-dots {
+	position: absolute;
+	bottom: -25px;
+	display: block;
+	width: 100%;
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	text-align: center;
+}
+
+.slick-dots li {
+	position: relative;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	margin: 0 5px;
+	padding: 0;
+	cursor: pointer;
+}
+
+.slick-dots li button {
+	font-size: 0;
+	line-height: 0;
+	display: block;
+	width: 20px;
+	height: 20px;
+	padding: 5px;
+	cursor: pointer;
+	color: transparent;
+	border: 0;
+	outline: none;
+	background: transparent;
+}
+
+.slick-dots li button:hover,
+.slick-dots li button:focus {
+	outline: none;
+}
+
+.slick-dots li button:hover:before,
+.slick-dots li button:focus:before {
+	opacity: 1;
+}
+
+.slick-dots li button:before {
+	font-family: 'slick';
+	font-size: 12px;
+	line-height: 20px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 20px;
+	height: 20px;
+	content: '•';
+	text-align: center;
+	opacity: .25;
+	color: black;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.slick-dots li.slick-active button:before {
+	opacity: .75;
+	color: black;
+}
+
+/* Arrows
+-------------------------------------------------------------------------------- */
+
+
+/* Media breakpoints, all screens
+-------------------------------------------------------------------------------- */
+@media all {
+
+  .slick-prev,
+  .slick-next {
+    display: block;                                                             /* shown by default */
+    top: -12%;                                                                   /* center button in slide */
+  	font-size: 0;                                                               /* disable button text */
+  	border: none;                                                               /* disable button decoration */
+  	outline: none;                                                              /* disable button decoration */
+  	background: transparent;                                                    /* disable button background */
+    -webkit-transform: translate(0, -50%);                                      /* move upwards by 50% */
+    -moz-transform: translate(0, -50%);
+  	-ms-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+  	transform: translate(0, -50%);
+  }
+
+  .slick-prev:hover,
+  .slick-prev:focus,
+  .slick-next:hover,
+  .slick-next:focus {
+  	color: transparent;
+  	outline: none;
+  	background: transparent;
+  }
+
+  .slick-prev:hover:before,
+  .slick-prev:focus:before,
+  .slick-next:hover:before,
+  .slick-next:focus:before {
+  	opacity: 1;
+  }
+
+  .slick-prev.slick-disabled:before,
+  .slick-next.slick-disabled:before {
+  	opacity: .25;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+  	font-family: 'slick';
+  	font-size: 40px;
+  	line-height: 1;
+  	opacity: .75;
+  	color: var(--bs-primary);
+  	-webkit-font-smoothing: antialiased;
+  	-moz-osx-font-smoothing: grayscale;
+  }
+
+  .slick-prev {
+  	left: 40%;
+  }
+
+  .slick-prev:before {
+  	content: '←';
+  }
+
+  [dir='rtl'] .slick-prev:before {
+  	content: '→';
+  }
+
+  .slick-next {
+  	right: 40%;
+  }
+
+  .slick-next:before {
+  	content: '→';
+  }
+
+  [dir='rtl'] .slick-next:before {
+  	content: '←';
+  }
+}
+
+/* Media breakpoints, tablet|mobile
+-------------------------------------------------------------------------------- */
+/*
+@media screen and (max-width: 992px) {
+  .siick-arrow,
+  .siick-arrows {
+  	margin-top: 0 !important;
+  }
+  .slick-prev {
+  	display: none !important;
+  }
+  .slick-next {
+  	display: none !important;
+  }
+}
+*/
