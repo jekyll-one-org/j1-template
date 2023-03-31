@@ -7,8 +7,8 @@ exclude_from_search:                    true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/data/slick.html
- # Liquid procedure to generate the HTML portion for all Silick Sliders
+ # ~/assets/data/masonty.html
+ # Liquid procedure to generate the HTML portion for all Masonty Grids
  # configured
  #
  # Product/Info:
@@ -19,7 +19,7 @@ exclude_from_search:                    true
  # J1 Theme is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
- # NOTE: Data loaded dynamically by J1 Master Slider module (AJAX)
+ # NOTE: Data loaded dynamically by J1 Masonry module (AJAX)
  # -----------------------------------------------------------------------------
  # Test data:
  #    {{variable | debug}}
@@ -43,13 +43,13 @@ exclude_from_search:                    true
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment         = site.environment %}
-{% assign slider_defaults     = modules.defaults.slick.defaults %}
-{% assign slider_settings     = modules.slick.settings %}
+{% assign masonry_defaults    = modules.defaults.masonry.defaults %}
+{% assign masonry_settings    = modules.masonry.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign slider_options      = slider_defaults | merge: slider_settings %}
-{% assign sliders             = slider_settings.sliders %}
+{% assign grids               = masonry_settings.grids %}
+
 
 {% comment %} Configure permalink settings
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -57,6 +57,15 @@ exclude_from_search:                    true
 {% if site.permalink == 'none' %}
   {% assign ext = '.html' %}
 {% endif %}
+
+{% comment %} Currently NOT used
+--------------------------------------------------------------------------------
+{% include {{select_color}} color=masonry_icon_color fallback="#9E9E9E" %}
+{% assign masonry_icon_color = color %}
+
+{% include {{select_icon_size}} family=masonry_icon_family size=masonry_icon_size %}
+{% assign masonry_icon_size = size %}
+-------------------------------------------------------------------------------- {% endcomment %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -67,29 +76,27 @@ exclude_from_search:                    true
 
 {% comment %} Main
 ================================================================================ {% endcomment %}
-<!-- [INFO   ] [~/assets/data/masterslider.html               ]  [ set meta data (robots) to exclude HTML datafiles from index ] -->
+<!-- [INFO   ] [~/assets/data/masonry.html                    ]  [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />
 </head>
 
-{% comment %} Main
+{% comment %} Collect grids
 -------------------------------------------------------------------------------- {% endcomment %}
-<!-- [INFO   ] [~/assets/data/masterslider.html               ]  [collect all slider items] -->
-{% for slider in sliders %}
-  {% if slider.enabled %}
+{% for grid in grids %}
+  {% if grid.enabled %}
 
-    {% comment %} Collect slides
+    {% comment %} Collect posts|group
     ---------------------------------------------------------------------------- {% endcomment %}
-    {% if slider.type == 'post' %}
-      <!-- Posts -->
-      <!-- div id="{{slider.id}}" class="row {{slider.selector}}" -->
-      <div id="{{slider.id}}" class="{{slider.selector}}">
+    {% if grid.type == 'post' %}
+      <!-- Posts|Group -->
+      <!-- Collect data only if group matches -->
+      <div id="{{grid.id}}" class="row pl-2 mb-4">
         {% for post in site.posts %}
-        {% if post.group contains slider.group %}
-        <!-- Collect data only if group matches -->
-        <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 px-1">
+        {% if post.group contains grid.group %}
+
+        <div class="col-lg-4 col-md-3 col-sm-6 mb-2 px-1">
           <article class="card bg-dark text-center text-white border-0 rounded-0">
-            <!-- img class="card-img rounded-0 img-fluid w-100" src="{{post.image.path | relative_url}}" alt="{{post.title}}" style="filter: grayscale(1) contrast(0.8) brightness(0.6);" -->
             <img class="card-img rounded-0 img-fluid w-100" src="{{post.image.path | relative_url}}" alt="{{post.title}}" style="filter: contrast(1) brightness(0.5);">
             <div class="card-img-overlay">
               <div class="card-content mt-6">
@@ -104,10 +111,6 @@ exclude_from_search:                    true
 
                 {% for category in categories %}
                 {% if category contains post.group %}
-                <!--a  class="d-block text-white text-uppercase link-no-decoration"
-                    href="{{site.jekyll-archives.category_archive_path | relative_url}}bla_{{category | slugify}}"
-                    style="font-size: 24px;">{{category}}
-                </a -->
                 <a  class="d-block text-white text-uppercase link-no-decoration"
                     href="/pages/public/blog/navigator/archive/categoryview/#{{category | slugify}}"
                     style="font-size: 24px;">{{category}}
@@ -116,15 +119,15 @@ exclude_from_search:                    true
                 {% endfor %}
 
                 <ul class="list-inline d-flex justify-content-center mb-5">
-        					<li class="list-inline-item">
+                  <li class="list-inline-item">
                     <i class="mdi mdi-account md-gray-400 mdi-24px mr-1" style="margin-right: 8px;"></i>
                     {{site.author.name | split: ' ' | first}} &nbsp;&middot;&nbsp;&nbsp;
                   </li>
-        					<li class="list-inline-item">
+                  <li class="list-inline-item">
                     <i class="mdi mdi-calendar-blank md-gray-400 mdi-24px mr-1"></i>
                     {{post.date | date: '%b %d, %Y'}}
                   </li>
-        				</ul>
+                </ul>
                 <h4 class="notoc card-title">
                   <a class="text-white link-no-decoration" href="{{post.url | relative_url}}">{{post.tags[0]}}</a>
                 </h4>
@@ -132,49 +135,16 @@ exclude_from_search:                    true
             </div>
           </article>
         </div>
+
         {% endif %}
         {% endfor %}
       </div>
-    <!-- /Posts -->
-    {% endif %}
-
-    {% if slider.type == 'example' %}
-    <!-- Example slider -->
-    <div id="{{slider.id}}" class="{{slider.selector}}">
-      {% for i in (1..slider.slides) %}
-      <div>
-        <h3 class="slide-item notoc">{{i}}</h3>
-      </div>
-      {% endfor %}
-    </div>
-    <!-- /Example slider -->
-    {% endif %}
-
-    {% if slider.type == 'image' %}
-    <!-- Image slider -->
-    <div id="{{slider.id}}" class="{{slider.selector}}">
-
-      {% for slide in slider.slides %}
-      <div class="col-sm-6 col-lg-4 mb-4">
-        <div class="card">
-        {% if slider.lightbox.enabled %}
-        <a href="{{slide.image}}" data-caption="{{slide.title}}">
-          <img class="{{slider.styles}}" src="{{slide.image}}" alt="{{slide.title}}">
-        </a>
-        {% else %}
-        <img id="{{forloop.index}}" class="{{slider.styles}}" src="{{slide.image}}" alt="{{slide.title}}">
-        {% endif %}
-        </div>
-      </div>
-      {% endfor %}
-
-    </div>
-    <!-- /Image slider -->
+      <!-- /Posts|Group -->
     {% endif %}
 
   {% endif %}
 {% endfor %}
-<!-- [INFO   ] [~/assets/data/slick.html               ]  [end collecting all slider items] -->
+<!-- [INFO   ] [~/assets/data/masonry.html                    ]  [end collecting all grid items] -->
 
 {% endcapture %}
 

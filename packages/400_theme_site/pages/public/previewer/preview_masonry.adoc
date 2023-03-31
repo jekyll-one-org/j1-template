@@ -102,22 +102,21 @@ to customize the layout, adjust the column width and gutter size, and add
 animations and other effects.
 
 ++++
-<div id="post_series_grid" class="post-series-grid mb-4">
-  <!-- Collect data only if group matches -->
-  <div class="col-lg-4 col-sm-6 mb-2 mb-lg-0 mt-1 px-1">
+<div id="post_series_grid" class="row pl-2 mb-4">
+  <div class="col-lg-4 col-md-3 col-sm-6 mb-2 px-1">
     <article class="card bg-dark text-center text-white border-0 rounded-0">
-      <!-- img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-5.jpg" alt="Life With Simple Rules" style="filter: grayscale(1) contrast(0.8) brightness(0.6);" -->
-      <img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-5.jpg" alt="Life With Simple Rules">
+      <img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-5.jpg" alt="Life With Simple Rules" style="filter: contrast(1) brightness(0.5);">
       <div class="card-img-overlay">
-        <div class="card-content mt-5 pb-1">
-          <a class="d-block text-white text-uppercase link-no-decoration" href="life" style="font-size: 24px;">Life</a>
-          <ul class="list-inline d-flex justify-content-center py-1 mb-6">
+        <div class="card-content mt-6">
+          <a class="d-block text-white text-uppercase link-no-decoration" href="/pages/public/blog/navigator/archive/categoryview/#life" style="font-size: 24px;">Life
+          </a>
+          <ul class="list-inline d-flex justify-content-center mb-5">
             <li class="list-inline-item">
-              <i class="mdi mdi-account md-black mdi-18px mr-1" style="margin-right: 8px;"></i>
+              <i class="mdi mdi-account md-gray-400 mdi-24px mr-1" style="margin-right: 8px;"></i>
               Juergen  ·  
             </li>
             <li class="list-inline-item">
-              <i class="mdi mdi-calendar-blank md-black mdi-18px mr-1"></i>
+              <i class="mdi mdi-calendar-blank md-gray-400 mdi-24px mr-1"></i>
               Sep 02, 2022
             </li>
           </ul>
@@ -128,21 +127,20 @@ animations and other effects.
       </div>
     </article>
   </div>
-  <!-- Collect data only if group matches -->
-  <div class="col-lg-4 col-sm-6 mb-2 mb-lg-0 mt-1 px-1">
+  <div class="col-lg-4 col-md-3 col-sm-6 mb-2 px-1">
     <article class="card bg-dark text-center text-white border-0 rounded-0">
-      <!-- img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-4.jpg" alt="Life With Simple Rules" style="filter: grayscale(1) contrast(0.8) brightness(0.6);" -->
-      <img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-4.jpg" alt="Life With Simple Rules">
+      <img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-4.jpg" alt="Life With Simple Rules" style="filter: contrast(1) brightness(0.5);">
       <div class="card-img-overlay">
-        <div class="card-content mt-5 pb-1">
-          <a class="d-block text-white text-uppercase link-no-decoration" href="life" style="font-size: 24px;">Life</a>
-          <ul class="list-inline d-flex justify-content-center py-1 mb-6">
+        <div class="card-content mt-6">
+          <a class="d-block text-white text-uppercase link-no-decoration" href="/pages/public/blog/navigator/archive/categoryview/#life" style="font-size: 24px;">Life
+          </a>
+          <ul class="list-inline d-flex justify-content-center mb-5">
             <li class="list-inline-item">
-              <i class="mdi mdi-account md-black mdi-18px mr-1" style="margin-right: 8px;"></i>
+              <i class="mdi mdi-account md-gray-400 mdi-24px mr-1" style="margin-right: 8px;"></i>
               Juergen  ·  
             </li>
             <li class="list-inline-item">
-              <i class="mdi mdi-calendar-blank md-black mdi-18px mr-1"></i>
+              <i class="mdi mdi-calendar-blank md-gray-400 mdi-24px mr-1"></i>
               Sep 01, 2022
             </li>
           </ul>
@@ -153,21 +151,20 @@ animations and other effects.
       </div>
     </article>
   </div>
-  <!-- Collect data only if group matches -->
-  <div class="col-lg-4 col-sm-6 mb-2 mb-lg-0 mt-1 px-1">
+  <div class="col-lg-4 col-md-3 col-sm-6 mb-2 px-1">
     <article class="card bg-dark text-center text-white border-0 rounded-0">
-      <!-- img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-3.jpg" alt="Life With Simple Rules" style="filter: grayscale(1) contrast(0.8) brightness(0.6);" -->
-      <img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-3.jpg" alt="Life With Simple Rules">
+      <img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-3.jpg" alt="Life With Simple Rules" style="filter: contrast(1) brightness(0.5);">
       <div class="card-img-overlay">
-        <div class="card-content mt-5 pb-1">
-          <a class="d-block text-white text-uppercase link-no-decoration" href="life" style="font-size: 24px;">Life</a>
-          <ul class="list-inline d-flex justify-content-center py-1 mb-6">
+        <div class="card-content mt-6">
+          <a class="d-block text-white text-uppercase link-no-decoration" href="/pages/public/blog/navigator/archive/categoryview/#life" style="font-size: 24px;">Life
+          </a>
+          <ul class="list-inline d-flex justify-content-center mb-5">
             <li class="list-inline-item">
-              <i class="mdi mdi-account md-black mdi-18px mr-1" style="margin-right: 8px;"></i>
+              <i class="mdi mdi-account md-gray-400 mdi-24px mr-1" style="margin-right: 8px;"></i>
               Juergen  ·  
             </li>
             <li class="list-inline-item">
-              <i class="mdi mdi-calendar-blank md-black mdi-18px mr-1"></i>
+              <i class="mdi mdi-calendar-blank md-gray-400 mdi-24px mr-1"></i>
               Aug 03, 2022
             </li>
           </ul>
@@ -178,21 +175,20 @@ animations and other effects.
       </div>
     </article>
   </div>
-  <!-- Collect data only if group matches -->
-  <div class="col-lg-4 col-sm-6 mb-2 mb-lg-0 mt-1 px-1">
+  <div class="col-lg-4 col-md-3 col-sm-6 mb-2 px-1">
     <article class="card bg-dark text-center text-white border-0 rounded-0">
-      <!-- img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-2.jpg" alt="Life With Simple Rules" style="filter: grayscale(1) contrast(0.8) brightness(0.6);" -->
-      <img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-2.jpg" alt="Life With Simple Rules">
+      <img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-2.jpg" alt="Life With Simple Rules" style="filter: contrast(1) brightness(0.5);">
       <div class="card-img-overlay">
-        <div class="card-content mt-5 pb-1">
-          <a class="d-block text-white text-uppercase link-no-decoration" href="life" style="font-size: 24px;">Life</a>
-          <ul class="list-inline d-flex justify-content-center py-1 mb-6">
+        <div class="card-content mt-6">
+          <a class="d-block text-white text-uppercase link-no-decoration" href="/pages/public/blog/navigator/archive/categoryview/#life" style="font-size: 24px;">Life
+          </a>
+          <ul class="list-inline d-flex justify-content-center mb-5">
             <li class="list-inline-item">
-              <i class="mdi mdi-account md-black mdi-18px mr-1" style="margin-right: 8px;"></i>
+              <i class="mdi mdi-account md-gray-400 mdi-24px mr-1" style="margin-right: 8px;"></i>
               Juergen  ·  
             </li>
             <li class="list-inline-item">
-              <i class="mdi mdi-calendar-blank md-black mdi-18px mr-1"></i>
+              <i class="mdi mdi-calendar-blank md-gray-400 mdi-24px mr-1"></i>
               Aug 02, 2022
             </li>
           </ul>
@@ -203,21 +199,20 @@ animations and other effects.
       </div>
     </article>
   </div>
-  <!-- Collect data only if group matches -->
-  <div class="col-lg-4 col-sm-6 mb-2 mb-lg-0 mt-1 px-1">
+  <div class="col-lg-4 col-md-3 col-sm-6 mb-2 px-1">
     <article class="card bg-dark text-center text-white border-0 rounded-0">
-      <!-- img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-1.jpg" alt="Life With Simple Rules" style="filter: grayscale(1) contrast(0.8) brightness(0.6);" -->
-      <img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-1.jpg" alt="Life With Simple Rules">
+      <img class="card-img rounded-0 img-fluid w-100" src="/assets/images/parsa/posts/featured/post-1.jpg" alt="Life With Simple Rules" style="filter: contrast(1) brightness(0.5);">
       <div class="card-img-overlay">
-        <div class="card-content mt-5 pb-1">
-          <a class="d-block text-white text-uppercase link-no-decoration" href="life" style="font-size: 24px;">Life</a>
-          <ul class="list-inline d-flex justify-content-center py-1 mb-6">
+        <div class="card-content mt-6">
+          <a class="d-block text-white text-uppercase link-no-decoration" href="/pages/public/blog/navigator/archive/categoryview/#life" style="font-size: 24px;">Life
+          </a>
+          <ul class="list-inline d-flex justify-content-center mb-5">
             <li class="list-inline-item">
-              <i class="mdi mdi-account md-black mdi-18px mr-1" style="margin-right: 8px;"></i>
+              <i class="mdi mdi-account md-gray-400 mdi-24px mr-1" style="margin-right: 8px;"></i>
               Juergen  ·  
             </li>
             <li class="list-inline-item">
-              <i class="mdi mdi-calendar-blank md-black mdi-18px mr-1"></i>
+              <i class="mdi mdi-calendar-blank md-gray-400 mdi-24px mr-1"></i>
               Aug 01, 2022
             </li>
           </ul>
@@ -240,6 +235,7 @@ The Masonry Javascript module has become a go-to library for web developers
 who need to create dynamic grid layouts, especially for websites that showcase
 many images or other visual content like post series for example.
 
+/////
 == Masonry Grid on Images
 
 J1 Masonry is a great tool to create dynamic image galleries. Image galleries
@@ -467,3 +463,4 @@ see how a Lightbox manages a group of images.
   </div>
 </div>
 ++++
+/////
