@@ -14,60 +14,67 @@
 */
 @charset 'UTF-8';
 
-/* Examples
+/* Example slider
 -------------------------------------------------------------------------------- */
-h3.slide-item {
-    background: #b9b2b2;
-    color: #0c0c0d;
+h2.slide-item, h3.slide-item {
+    background: var(--bs-gray-300);
+    color: var(--bs-gray-800);
     font-size: 36px;
-    line-height: 100px;
-    margin: 10px;
-    padding: 2%;
-    position: relative;
+    line-height: 150px;
+    margin: 1%;
     text-align: center;
 }
 
-/* Slider
+/* All slider
 -------------------------------------------------------------------------------- */
-.slick-slider {
-  margin: 1.5rem auto 1.5rem auto;
-}
-
-/* .slick-slider.slick-arrows {
-  margin: 1.5rem 3rem 1.5rem 3rem;
-} */
-
-.slick-list .slick-loading {
+.slick-loading .slick-list {
 	background: #fff url('../../images/ajax-loader.gif') center center no-repeat;
 }
 
-/* jadams, 2023-03-15 TODO: slider source to be fixed for the nav elements
-.slider-parent {
-    overflow: hidden;
+.slider-title {
+    font-style: italic;
+    font-weight: 500;
+}
+
+/* Cards
+-------------------------------------------------------------------------------- */
+/*
+.card .card-title a {
+  color: var(--bs-primary) !important;
+  text-decoration: none;
 }
 */
 
-/* Slides (disabled)
+/* Images
 -------------------------------------------------------------------------------- */
 /*
-.slick-slide .image {
-  padding: 10px;
-}
 .slick-slide img {
-  border: 5px solid #fff;
-  display: block;
-  width: 100%;
-}
-.slick-slide img.slick-loading {
-  border: 0;
+  width: 150px;
+  height: 200px;
 }
 */
+
+/* Arrows
+-------------------------------------------------------------------------------- */
+.slick-arrows {
+    padding-top: 3.25rem;                                                       /* like BS mt-6 */                                                               /* show on top of a slide */
+}
+
+.slick-arrow {
+    position: absolute;                                                         /* position of the arrow */
+    margin-left: 20px;
+    margin-right: 20px;
+    padding-top: 1.75rem;
+    z-index: 10;                                                                /* show on top of a slide */
+}
 
 /* Dots
 -------------------------------------------------------------------------------- */
+/*
 .slick-dotted.slick-slider {
 	margin-bottom: 30px;
 }
+*/
 
 .slick-dots {
 	position: absolute;
@@ -136,35 +143,27 @@ h3.slide-item {
 	color: black;
 }
 
-/* Media breakpoints
--------------------------------------------------------------------------------- */
-
 /* Arrows
 -------------------------------------------------------------------------------- */
 
 
-/* All Media screens
--------------------- */
-/*
+/* Media breakpoints, all screens
+-------------------------------------------------------------------------------- */
 @media all {
+
   .slick-prev,
   .slick-next {
-  	font-size: 0;
-  	line-height: 0;
-  	position: absolute;
-  	top: 50%;
-  	display: block;
-  	width: 20px;
-  	height: 20px;
-  	padding: 0;
-  	-webkit-transform: translate(0, -50%);
+    display: block;                                                             /* shown by default */
+    top: -12%;                                                                   /* center button in slide */
+  	font-size: 0;                                                               /* disable button text */
+  	border: none;                                                               /* disable button decoration */
+  	outline: none;                                                              /* disable button decoration */
+  	background: transparent;                                                    /* disable button background */
+    -webkit-transform: translate(0, -50%);                                      /* move upwards by 50% */
+    -moz-transform: translate(0, -50%);
   	-ms-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
   	transform: translate(0, -50%);
-  	cursor: pointer;
-  	color: transparent;
-  	border: none;
-  	outline: none;
-  	background: transparent;
   }
 
   .slick-prev:hover,
@@ -194,18 +193,13 @@ h3.slide-item {
   	font-size: 40px;
   	line-height: 1;
   	opacity: .75;
-  	color: #757575;
+  	color: var(--bs-primary);
   	-webkit-font-smoothing: antialiased;
   	-moz-osx-font-smoothing: grayscale;
   }
 
   .slick-prev {
-  	left: -40px;
-  }
-
-  [dir='rtl'] .slick-prev {
-  	right: -40px;
-  	left: auto;
+  	left: 40%;
   }
 
   .slick-prev:before {
@@ -217,12 +211,7 @@ h3.slide-item {
   }
 
   .slick-next {
-  	right: -20px;
-  }
-
-  [dir='rtl'] .slick-next {
-  	right: auto;
-  	left: -20px;
+  	right: 40%;
   }
 
   .slick-next:before {
@@ -232,16 +221,15 @@ h3.slide-item {
   [dir='rtl'] .slick-next:before {
   	content: '←';
   }
-
 }
-*/
 
-/* Tablet | Mobiles
-------------------- */
+/* Media breakpoints, tablet|mobile
+-------------------------------------------------------------------------------- */
 /*
 @media screen and (max-width: 992px) {
-  .slick-slider.slick-arrows {
-    margin: 1.5rem auto 1.5rem auto;
+  .siick-arrow,
+  .siick-arrows {
+  	margin-top: 0 !important;
   }
   .slick-prev {
   	display: none !important;
