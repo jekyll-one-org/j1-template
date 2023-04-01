@@ -192,13 +192,13 @@ var logText;
               });
 
               // grid event handler
-              logger.info('\n' + 'install event handlers on id: ' + '{{grid_id}}');
-              $grid_{{grid_id}}.on( 'click', '.card', function() {
-                // remove clicked element
-                // layout remaining item elements
-                $grid_{{grid_id}}.masonry('remove', this).masonry('layout');
-                $grid_{{grid_id}}.masonry('reloadItems');
-              });
+              // logger.info('\n' + 'install event handlers on id: ' + '{{grid_id}}');
+              // $grid_{{grid_id}}.on( 'click', '.card', function() {
+              //   // remove clicked element
+              //   // layout remaining item elements
+              //   $grid_{{grid_id}}.masonry('remove', this).masonry('layout');
+              //   $grid_{{grid_id}}.masonry('reloadItems');
+              // });
 
             {% else %}
               {% if grid.hideDisabled %}

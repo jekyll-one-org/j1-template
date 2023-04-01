@@ -45,12 +45,58 @@ settings:
 
       id:                             post_series_grid
       type:                           post
-      group:                          Life                                    # generate grid elements only for group
+      group:                          Life                                      # generate grid elements only for group
+      category:                       Life                                      # generate grid elements only for group
 
       originTop:                      true
       originLeft:                     true
       initLayout:                     true
       percentPosition:                true
+
+    # --------------------------------------------------------------------------
+    # Card Images
+    #
+    - grid:
+      enabled:                        true
+      hideDisabled:                   true
+
+      id:                             card_image_example
+      type:                           card_image
+      image_base_path:                /assets/images/modules/gallery/mega_cities
+
+      originTop:                      true
+      originLeft:                     true
+      initLayout:                     true
+      percentPosition:                true
+
+      # ------------------------------------------------------------------------
+      # Images
+      #
+      images:
+
+        - item:                         # image 1
+          title:                        Jin Mao Tower Shanghai
+          image:                        denys-nevozhai-1_b.jpg
+
+        - item:                         # image 2
+          title:                        Sunset over Taipei City
+          image:                        thomas-tucker_b.jpg
+
+        - item:                         # image 3
+          title:                        Chicago
+          image:                        emmad-mazhari_b.jpg
+
+        - item:                         # image 4
+          title:                        The Queen Bee at the Eureka Tower
+          image:                        johan-mouchet_b.jpg
+
+        - item:                         # image 5
+          title:                        Shanghai
+          image:                        federico-rizzarelli_b.jpg
+
+        - item:                         # image 6
+          title:                        Shangri-La Hotel Jakarta
+          image:                        gints-gailis_b.jpg
 
 # ------------------------------------------------------------------------------
 # END config

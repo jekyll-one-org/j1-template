@@ -197,7 +197,7 @@ j1.adapter.slick = (function (j1, window) {
               sliderResponsiveSettingsSTRING  = JSON.stringify(sliderResponsiveSettingsOBJ, null, 4);
               logger.debug('\n' + 'responsive settings on id #{{slider.id}}: ' + '\n' + sliderResponsiveSettingsSTRING);
 
-              $('.{{slider.selector}}').on('init', function(event, slick) {
+              $('.{{slider.id | replace: '_','-' }}').on('init', function(event, slick) {
                 logger.info('\n' + 'slider initialized on id: {{slider.id}}');
                 if ({{slider.lightbox.enabled}}) {
                   logger.info('\n' + 'initialize lightbox on id: {{slider.id}}');
@@ -217,7 +217,7 @@ j1.adapter.slick = (function (j1, window) {
 
               // setup the slider
               logger.info('\n' + 'slider is being setup on id: ' + '{{slider.id}}');
-              $('.{{slider.selector}}').slick({
+              $('.{{slider.id | replace: '_','-' }}').slick({
                 accessibility:              sliderSettings.accessibility,
                 adaptiveHeight:             sliderSettings.adaptiveHeight,
                 arrows:                     sliderSettings.arrows,
@@ -280,8 +280,8 @@ j1.adapter.slick = (function (j1, window) {
 
     // -------------------------------------------------------------------------
     // loadSliderHTML()
-    // load all master sliders (HTML portion) dynanically configured
-    // and enabled (AJAX) from data file
+    // load all Slick sliders (HTML portion) dynanically configured
+    // and enabled (AJAX) from YAMLdata file
     // NOTE: Make sure the placeholder is available in the content page
     // eg. using the asciidoc extension masterslider::
     // -------------------------------------------------------------------------

@@ -38,7 +38,6 @@ settings:
       enabled:                          true
 
       id:                               post_slider
-      selector:                         post-slider                             # class used for slick to initialize on
       type:                             post
       group:                            Life                                    # generate slides only for group (specified in article/post)
 
@@ -52,10 +51,10 @@ settings:
       # Slider options
       #
       options:
-        autoplay:                       false
+        autoplay:                       true
         slidesToShow:                   3
         slidesToScroll:                 1
-        arrows:                         false
+        arrows:                         true
         dots:                           false
         responsive:                     true                                    # enables reponsive options to generate breakpoint properties for slick()
 
@@ -87,7 +86,6 @@ settings:
       enabled:                          true
 
       id:                               example_slider_arrows_dots
-      selector:                         example-slider-arrows-dots
       type:                             example
 
       # ------------------------------------------------------------------------
@@ -141,9 +139,89 @@ settings:
       enabled:                          true
 
       id:                               image_slider
-      selector:                         image-slider
       type:                             image
-      styles:                           img-fluid img-object--cover g-height-300
+      image_base_path:                  /assets/images/modules/gallery/mega_cities
+      image_styles:                     img-fluid img-object--cover g-height-300
+
+      # ------------------------------------------------------------------------
+      # Lightbox options
+      #
+      lightbox:
+        enabled:                        false
+
+      # ------------------------------------------------------------------------
+      # Slider options
+      #
+      options:
+        arrows:                         true
+        dots:                           true
+        speed:                          300
+        autoplay:                       false
+        slidesToShow:                   2
+        slidesToScroll:                 2
+        responsive:                     true
+
+      # ------------------------------------------------------------------------
+      # Reponsive options
+      #
+      responsive:
+        - breakpoint:
+          settings:
+            breakOn:                    1024
+            slidesToShow:               2
+            slidesToScroll:             2
+        - breakpoint:
+          settings:
+            breakOn:                    800
+            slidesToShow:               1
+            slidesToScroll:             1
+        - breakpoint:
+          settings:
+            breakOn:                    480
+            dots:                       false
+            slidesToShow:               1
+            slidesToScroll:             1
+
+      # ------------------------------------------------------------------------
+      # Slides
+      #
+      slides:
+
+        - slide:                        # slide 1
+          title:                        Jin Mao Tower Shanghai
+          image:                        denys-nevozhai-1_b.jpg
+
+        - slide:                        # slide 2
+          title:                        Sunset over Taipei City
+          image:                        thomas-tucker_b.jpg
+
+        - slide:                        # slide 3
+          title:                        Chicago
+          image:                        emmad-mazhari_b.jpg
+
+        - slide:                        # slide 4
+          title:                        The Queen Bee at the Eureka Tower
+          image:                        johan-mouchet_b.jpg
+
+        - slide:                        # slide 5
+          title:                        Shanghai
+          image:                        federico-rizzarelli_b.jpg
+
+        - slide:                        # slide 6
+          title:                        Shangri-La Hotel Jakarta
+          image:                        gints-gailis_b.jpg
+
+
+    # --------------------------------------------------------------------------
+    # IMAGE slider  + Lightbox
+    #
+    - slider:
+      enabled:                          true
+
+      id:                               image_slider_lightbox
+      type:                             image
+      image_base_path:                  /assets/images/modules/gallery/mega_cities
+      image_styles:                     img-fluid img-object--cover g-height-300
 
       # ------------------------------------------------------------------------
       # Lightbox options
@@ -174,63 +252,45 @@ settings:
             breakOn:                    1024
             slidesToShow:               2
             slidesToScroll:             2
-#            arrows:                     false
-#            dots:                       true
         - breakpoint:
           settings:
             breakOn:                    800
             slidesToShow:               1
             slidesToScroll:             1
-#            arrows:                     false
-#            dots:                       true
         - breakpoint:
           settings:
             breakOn:                    480
             slidesToShow:               1
             slidesToScroll:             1
-#            arrows:                     false
-#            dots:                       true
 
       # ------------------------------------------------------------------------
       # Slides
       #
       slides:
 
-        # slide 1
-        #
         - slide:                        # slide 1
           title:                        Jin Mao Tower Shanghai
-          image:                        /assets/images/modules/gallery/mega_cities/denys-nevozhai-1_b.jpg
+          image:                        denys-nevozhai-1_b.jpg
 
-        # slide 2
-        #
-        - slide:
+        - slide:                        # slide 2
           title:                        Sunset over Taipei City
-          image:                        /assets/images/modules/gallery/mega_cities/thomas-tucker_b.jpg
+          image:                        thomas-tucker_b.jpg
 
-        # slide 3
-        #
-        - slide:
+        - slide:                        # slide 3
           title:                        Chicago
-          image:                        /assets/images/modules/gallery/mega_cities/emmad-mazhari_b.jpg
+          image:                        emmad-mazhari_b.jpg
 
-        # slide 4
-        #
-        - slide:
+        - slide:                        # slide 4
           title:                        The Queen Bee at the Eureka Tower
-          image:                        /assets/images/modules/gallery/mega_cities/johan-mouchet_b.jpg
+          image:                        johan-mouchet_b.jpg
 
-        # slide 5
-        #
-        - slide:
+        - slide:                        # slide 5
           title:                        Shanghai
-          image:                        /assets/images/modules/gallery/mega_cities/federico-rizzarelli_b.jpg
+          image:                        federico-rizzarelli_b.jpg
 
-        # slide 6
-        #
-        - slide:
+        - slide:                        # slide 6
           title:                        Shangri-La Hotel Jakarta
-          image:                        /assets/images/modules/gallery/mega_cities/gints-gailis_b.jpg
+          image:                        gints-gailis_b.jpg
 
 # ------------------------------------------------------------------------------
 # END config

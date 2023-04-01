@@ -119,6 +119,17 @@ defaults:
   enabled:                              false
 
   # ----------------------------------------------------------------------------
+  # AJAX (JSON)
+  #
+  # All data items displayed by a carousel are being read
+  # from a JSON file (default: carousel.json) automatically
+  # generated from that configuration.
+  # AJAX methods are used to supply the needed HTML code at
+  # the time the carousel is initialized (by the Initializer)
+  #
+  xhr_data_path:                        /assets/data/masonry
+
+  # ----------------------------------------------------------------------------
   # Masonry options
   # ----------------------------------------------------------------------------
   hideDisabled:                         true

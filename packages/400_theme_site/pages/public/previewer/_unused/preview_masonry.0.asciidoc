@@ -68,7 +68,7 @@ varying sizes.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-/////
+
 == Post Slider
 
 A Post Slider for J1 Template is a pre-defined carousel type to display
@@ -93,7 +93,6 @@ slick::post_slider[role="mt-3 mb-3"]
 
 Alternatively, such a series can be arranged in a different way using the *J1
 Masonry* module as shown below.
-/////
 
 == Masonry Grid on Posts
 
@@ -102,25 +101,129 @@ lines. The module provides a flexible configuration that allows developers
 to customize the layout, adjust the column width and gutter size, and add
 animations and other effects.
 
-[role="mb-4"]
-J1 Masonry posts grid pull content from a specific category. All Grids for posts
-display the post category, the post title, the author and date. All Masonry
-Grids for the J1 Theme can be easily customized in various ways, such as
-changing the number of posts displayed, the masonry speed, and other options.
-
-.Asciidoc configuration
-[source, config, role="noclip mb-3"]
-----
-masonry::post_series_grid[]
-----
-
-// .Masonry Post Grid
-// masonry::post_series_grid[role="mb-4"]
-
-
 ++++
-<!--div id="post_slider_parent" class="slider-parent mb-4" -->
-<div id="post_series_grid_parent" class="mb-4"></div>
+<div id="post_series_grid" class="row pl-2 mb-4">
+  <div class="col-lg-4 col-sm-6 mb-2 px-1">
+    <article class="card bg-dark text-center text-white border-0 rounded-0">
+      <img class="card-img img-fluid img-object--cover g-height-300" src="/assets/images/parsa/posts/featured/post-5.jpg" alt="Life With Simple Rules" style="filter: contrast(1) brightness(0.5);">
+      <div class="card-img-overlay">
+        <div class="card-content mt-6">
+          <a class="d-block text-white text-uppercase link-no-decoration" href="/pages/public/blog/navigator/archive/categoryview/#life" style="font-size: 24px;">Life
+          </a>
+          <ul class="list-inline d-flex justify-content-center mb-5">
+            <li class="list-inline-item">
+              <i class="mdi mdi-account md-gray-400 mdi-24px mr-1" style="margin-right: 8px;"></i>
+              Juergen  ·  
+            </li>
+            <li class="list-inline-item">
+              <i class="mdi mdi-calendar-blank md-gray-400 mdi-24px mr-1"></i>
+              Sep 02, 2022
+            </li>
+          </ul>
+          <h4 class="notoc card-title">
+            <a class="text-white link-no-decoration" href="/posts/public/series/life/2022/09/02/organize-your-life/">Health</a>
+          </h4>
+        </div>
+      </div>
+    </article>
+  </div>
+  <div class="col-lg-4 col-sm-6 mb-2 px-1">
+    <article class="card bg-dark text-center text-white border-0 rounded-0">
+      <img class="card-img img-fluid img-object--cover g-height-300" src="/assets/images/parsa/posts/featured/post-4.jpg" alt="Life With Simple Rules" style="filter: contrast(1) brightness(0.5);">
+      <div class="card-img-overlay">
+        <div class="card-content mt-6">
+          <a class="d-block text-white text-uppercase link-no-decoration" href="/pages/public/blog/navigator/archive/categoryview/#life" style="font-size: 24px;">Life
+          </a>
+          <ul class="list-inline d-flex justify-content-center mb-5">
+            <li class="list-inline-item">
+              <i class="mdi mdi-account md-gray-400 mdi-24px mr-1" style="margin-right: 8px;"></i>
+              Juergen  ·  
+            </li>
+            <li class="list-inline-item">
+              <i class="mdi mdi-calendar-blank md-gray-400 mdi-24px mr-1"></i>
+              Sep 01, 2022
+            </li>
+          </ul>
+          <h4 class="notoc card-title">
+            <a class="text-white link-no-decoration" href="/posts/public/series/life/2022/09/01/organize-your-life/">Mindset</a>
+          </h4>
+        </div>
+      </div>
+    </article>
+  </div>
+  <div class="col-lg-4 col-sm-6 mb-2 px-1">
+    <article class="card bg-dark text-center text-white border-0 rounded-0">
+      <img class="card-img img-fluid img-object--cover g-height-300" src="/assets/images/parsa/posts/featured/post-3.jpg" alt="Life With Simple Rules" style="filter: contrast(1) brightness(0.5);">
+      <div class="card-img-overlay">
+        <div class="card-content mt-6">
+          <a class="d-block text-white text-uppercase link-no-decoration" href="/pages/public/blog/navigator/archive/categoryview/#life" style="font-size: 24px;">Life
+          </a>
+          <ul class="list-inline d-flex justify-content-center mb-5">
+            <li class="list-inline-item">
+              <i class="mdi mdi-account md-gray-400 mdi-24px mr-1" style="margin-right: 8px;"></i>
+              Juergen  ·  
+            </li>
+            <li class="list-inline-item">
+              <i class="mdi mdi-calendar-blank md-gray-400 mdi-24px mr-1"></i>
+              Aug 03, 2022
+            </li>
+          </ul>
+          <h4 class="notoc card-title">
+            <a class="text-white link-no-decoration" href="/posts/public/series/life/2022/08/03/organize-your-life/">Technology</a>
+          </h4>
+        </div>
+      </div>
+    </article>
+  </div>
+  <div class="col-lg-4 col-sm-6 mb-2 px-1">
+    <article class="card bg-dark text-center text-white border-0 rounded-0">
+      <img class="card-img img-fluid img-object--cover g-height-300" src="/assets/images/parsa/posts/featured/post-2.jpg" alt="Life With Simple Rules" style="filter: contrast(1) brightness(0.5);">
+      <div class="card-img-overlay">
+        <div class="card-content mt-6">
+          <a class="d-block text-white text-uppercase link-no-decoration" href="/pages/public/blog/navigator/archive/categoryview/#life" style="font-size: 24px;">Life
+          </a>
+          <ul class="list-inline d-flex justify-content-center mb-5">
+            <li class="list-inline-item">
+              <i class="mdi mdi-account md-gray-400 mdi-24px mr-1" style="margin-right: 8px;"></i>
+              Juergen  ·  
+            </li>
+            <li class="list-inline-item">
+              <i class="mdi mdi-calendar-blank md-gray-400 mdi-24px mr-1"></i>
+              Aug 02, 2022
+            </li>
+          </ul>
+          <h4 class="notoc card-title">
+            <a class="text-white link-no-decoration" href="/posts/public/series/life/2022/08/02/organize-your-life/">Growth</a>
+          </h4>
+        </div>
+      </div>
+    </article>
+  </div>
+  <div class="col-lg-4 col-sm-6 mb-2 px-1">
+    <article class="card bg-dark text-center text-white border-0 rounded-0">
+      <img class="card-img img-fluid img-object--cover g-height-300" src="/assets/images/parsa/posts/featured/post-1.jpg" alt="Life With Simple Rules" style="filter: contrast(1) brightness(0.5);">
+      <div class="card-img-overlay">
+        <div class="card-content mt-6">
+          <a class="d-block text-white text-uppercase link-no-decoration" href="/pages/public/blog/navigator/archive/categoryview/#life" style="font-size: 24px;">Life
+          </a>
+          <ul class="list-inline d-flex justify-content-center mb-5">
+            <li class="list-inline-item">
+              <i class="mdi mdi-account md-gray-400 mdi-24px mr-1" style="margin-right: 8px;"></i>
+              Juergen  ·  
+            </li>
+            <li class="list-inline-item">
+              <i class="mdi mdi-calendar-blank md-gray-400 mdi-24px mr-1"></i>
+              Aug 01, 2022
+            </li>
+          </ul>
+          <h4 class="notoc card-title">
+            <a class="text-white link-no-decoration" href="/posts/public/series/life/2022/08/01/organize-your-life/">Lifestyle</a>
+          </h4>
+        </div>
+      </div>
+    </article>
+  </div>
+</div>
 ++++
 
 NOTE: The J1 Masonry module supports a series of posts out of the box. If the
@@ -146,16 +249,15 @@ J1 Masonry can also provide responsive design, so your gallery will adjust to
 different screen sizes and devices. A responsive design is particularly useful
 for mobile devices with limited-screen real estate.
 
-.HTML settings
+.Frontmatter configuration (posts)
 [source, html, role="noclip mb-2"]
 ----
 <div class="content mt-5 mb-5">
   <div id="card_masonry" class="row">
 
-    <!-- resposive items: 3-2-1 -->
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-2 px-1">
+    <div class="col-lg-4 col-sm-6 mb-4">
       <div class="card">
-        <img  class="card-img img-fluid img-object--cover g-height-300"
+        <img  class="img-fluid img-object--cover g-height-300"
               src="/assets/images/modules/gallery/mega_cities/denys-nevozhai-1_b.jpg"
               alt="Jin Mao Tower Shanghai">
       </div>
@@ -178,37 +280,37 @@ is applied, which causes images to be resized to fit their container.
 <div class="content mt-5 mb-5">
   <div id="card_masonry" class="row">
 
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-2 px-1">
+    <div class="col-lg-4 col-sm-6 mb-4">
       <div class="card">
         <img class="card-img img-fluid img-object--cover g-height-300" src="/assets/images/modules/gallery/mega_cities/denys-nevozhai-1_b.jpg" alt="Jin Mao Tower Shanghai">
       </div>
     </div>
 
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-2 px-1">
+    <div class="col-lg-4 col-sm-6 mb-4">
       <div class="card">
-        <img class="card-img img-fluid img-object--cover g-height-300" src="/assets/images/modules/gallery/mega_cities/thomas-tucker_b.jpg" alt="Sunset over Taipei City">
+        <img class="card-imgimg-fluid img-object--cover g-height-300" src="/assets/images/modules/gallery/mega_cities/thomas-tucker_b.jpg" alt="Sunset over Taipei City">
       </div>
     </div>
 
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-2 px-1">
+    <div class="col-lg-4 col-sm-6 mb-4">
       <div class="card">
         <img class="card-img img-fluid img-object--cover g-height-300" src="/assets/images/modules/gallery/mega_cities/emmad-mazhari_b.jpg" alt="Chicago">
       </div>
     </div>
 
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-2 px-1">
+    <div class="col-lg-4 col-sm-6 mb-4">
       <article class="card">
         <img class="card-img img-fluid img-object--cover g-height-300" src="/assets/images/modules/gallery/mega_cities/johan-mouchet_b.jpg" alt="The Queen Bee at the Eureka Tower">
       </article>
     </div>
 
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-2 px-1">
+    <div class="col-lg-4 col-sm-6 mb-4">
       <div class="card">
         <img class="card-img img-fluid img-object--cover g-height-300" src="/assets/images/modules/gallery/mega_cities/federico-rizzarelli_b.jpg" alt="Shanhai">
       </div>
     </div>
 
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-2 px-1">
+    <div class="col-lg-4 col-sm-6 mb-4">
       <div class="card">
         <img class="card-img img-fluid img-object--cover g-height-300" src="/assets/images/modules/gallery/mega_cities/gints-gailis_b.jpg" alt="Shangri-La Hotel Jakarta ">
       </div>
