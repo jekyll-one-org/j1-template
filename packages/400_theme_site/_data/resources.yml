@@ -1890,31 +1890,6 @@ resources:
         init_function:                  []
 
   # ----------------------------------------------------------------------------
-  # Masonry
-  # Cascading grid layout library
-  #
-  # See: https://github.com/desandro/masonry
-  #
-  - name:                               Masonry
-    resource:
-      enabled:                          true
-
-      id:                               masonry
-      comment:                          Module Masonry
-      region:                           head
-      layout:                           [ all ]
-      required:                         ondemand
-      preload:                          false
-      script_load:                      defer
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            []
-        files:                          [ adapter/js/masonry.js ]
-        js:                             [ modules/masonry/js/masonry.pkgd ]
-        init_function:                  [ j1.adapter.masonry.init ]
-
-  # ----------------------------------------------------------------------------
   # Waves
   #
   - name:                               Waves
@@ -1937,7 +1912,7 @@ resources:
         init_function:                  [ j1.adapter.waves.init ]
 
   # ----------------------------------------------------------------------------
-  # Waves
+  # Particles
   #
   - name:                               Particles
     resource:
@@ -1957,7 +1932,6 @@ resources:
         files:                          [ adapter/js/particles.js ]
         js:                             [ modules/particles/js/particles ]
         init_function:                  [ j1.adapter.particles.init ]
-
 
   # ----------------------------------------------------------------------------
   # Slick
@@ -1990,6 +1964,31 @@ resources:
                                           modules/slick/slider/js/slick
                                         ]
         init_function:                  [ j1.adapter.slick.init ]
+
+  # ----------------------------------------------------------------------------
+  # Masonry
+  # Cascading grid layout library
+  #
+  # See: https://github.com/desandro/masonry
+  #
+  - name:                               Masonry
+    resource:
+      enabled:                          true
+
+      id:                               masonry
+      comment:                          Module Masonry
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand
+      preload:                          false
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            [ modules/masonry/css/theme/uno ]
+        files:                          [ adapter/js/masonry.js ]
+        js:                             [ modules/masonry/js/masonry.pkgd ]
+        init_function:                  [ j1.adapter.masonry.init ]
 
 # ------------------------------------------------------------------------------
 # END config

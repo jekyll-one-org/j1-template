@@ -55,12 +55,12 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
-The term *Masonry* is commonly used in web development to refer to a grid
-layout system for arranging elements on a webpage. The masonry layout, also
+The recnical term *Masonry* is used in web development to refer to a *grid
+layout* system for arranging elements on a webpage. The masonry layout, also
 known as the **Pinterest**-style layout, is a popular choice for displaying
 images of varying sizes aesthetically pleasingly.
 
-J1 Masonry is based on the popular JavaScript library *Masonry* that enables
+J1 Masonry is based on the popular JavaScript library _Masonry_ that enables
 the creation of responsive, dynamic grid layouts. It uses a unique algorithm
 to arrange elements vertically, then horizontally in the grid. The result is
 a visually appealing layout that works well with images and other content of
@@ -68,33 +68,6 @@ varying sizes.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-/////
-== Post Slider
-
-A Post Slider for J1 Template is a pre-defined carousel type to display
-news articles on a webpage. It is a popular way to showcase a selection of
-posts visually appealingly and can be useful for highlighting important or
-*featured* content.
-
-The following slider example pulls the post content from a series of posts
-having a specific tag specified in the *Frontmatter*:
-
-.Frontmatter configuration (posts)
-[source, config, role="noclip mb-2"]
-----
-...
-group:                                  Life
-series:                                 Life
-...
-----
-
-.Post silder
-slick::post_slider[role="mt-3 mb-3"]
-
-Alternatively, such a series can be arranged in a different way using the *J1
-Masonry* module as shown below.
-/////
-
 == Masonry Grid on Posts
 
 J1 Masonry is easy to use and can be added to a webpage with just a few
@@ -114,14 +87,8 @@ changing the number of posts displayed, the masonry speed, and other options.
 masonry::post_series_grid[]
 ----
 
-// .Masonry Post Grid
-// masonry::post_series_grid[role="mb-4"]
-
-
-++++
-<!--div id="post_slider_parent" class="slider-parent mb-4" -->
-<div id="post_series_grid_parent" class="mb-4"></div>
-++++
+.Masonry Post Grid
+masonry::post_series_grid[role="mb-4"]
 
 NOTE: The J1 Masonry module supports a series of posts out of the box. If the
 grid type of `post-series` is given, all posts of a group (series) are
@@ -132,6 +99,7 @@ The Masonry Javascript module has become a go-to library for web developers
 who need to create dynamic grid layouts, especially for websites that showcase
 many images or other visual content like post series for example.
 
+
 == Masonry Grid on Images
 
 J1 Masonry is a great tool to create dynamic image galleries. Image galleries
@@ -140,224 +108,64 @@ dynamic and visually appealing galleries. By using masonry, you can create a
 gallery that displays images of different sizes in an aesthetically pleasing
 and functional way.
 
-=== Grid on Image Cards
+=== Bootstrap Image Cards
 
-J1 Masonry can also provide responsive design, so your gallery will adjust to
-different screen sizes and devices. A responsive design is particularly useful
-for mobile devices with limited-screen real estate.
+Bootstrap cards are a popular component of the Bootstrap front-end framework
+that provides a flexible and customizable way to display content on a website.
+A card is a container for content that can be styled and arranged in various
+ways to suit the website's needs.
 
-.HTML settings
-[source, html, role="noclip mb-2"]
+.Asciidoc configuration
+[source, config, role="noclip mb-3"]
 ----
-<div class="content mt-5 mb-5">
-  <div id="card_masonry" class="row">
-
-    <!-- resposive items: 3-2-1 -->
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-2 px-1">
-      <div class="card">
-        <img  class="card-img img-fluid img-object--cover g-height-300"
-              src="/assets/images/modules/gallery/mega_cities/denys-nevozhai-1_b.jpg"
-              alt="Jin Mao Tower Shanghai">
-      </div>
-    </div>
-
-    ...
-
-  </div>
-</div>
+masonry::bs_image_cards_example[role="mb-4"]
 ----
 
-The following examplye shows images defined as *Bootrap* (BS) Cards and
-displayed *even* in size.
+.BS Image Cards + Lightbox
+masonry::bs_image_cards_example[role="mb-4"]
 
-WARNING: All images are re-calculated to a height of *300px* using the CSS
-style `g-height-300`. To fit the aspect ratio, the CSS style `img-object--cover`
-is applied, which causes images to be resized to fit their container.
 
-++++
-<div class="content mt-5 mb-5">
-  <div id="card_masonry" class="row">
-
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-2 px-1">
-      <div class="card">
-        <img class="card-img img-fluid img-object--cover g-height-300" src="/assets/images/modules/gallery/mega_cities/denys-nevozhai-1_b.jpg" alt="Jin Mao Tower Shanghai">
-      </div>
-    </div>
-
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-2 px-1">
-      <div class="card">
-        <img class="card-img img-fluid img-object--cover g-height-300" src="/assets/images/modules/gallery/mega_cities/thomas-tucker_b.jpg" alt="Sunset over Taipei City">
-      </div>
-    </div>
-
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-2 px-1">
-      <div class="card">
-        <img class="card-img img-fluid img-object--cover g-height-300" src="/assets/images/modules/gallery/mega_cities/emmad-mazhari_b.jpg" alt="Chicago">
-      </div>
-    </div>
-
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-2 px-1">
-      <article class="card">
-        <img class="card-img img-fluid img-object--cover g-height-300" src="/assets/images/modules/gallery/mega_cities/johan-mouchet_b.jpg" alt="The Queen Bee at the Eureka Tower">
-      </article>
-    </div>
-
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-2 px-1">
-      <div class="card">
-        <img class="card-img img-fluid img-object--cover g-height-300" src="/assets/images/modules/gallery/mega_cities/federico-rizzarelli_b.jpg" alt="Shanhai">
-      </div>
-    </div>
-
-    <div class="col-lg-4 col-md-6 col-sm-12 mb-2 px-1">
-      <div class="card">
-        <img class="card-img img-fluid img-object--cover g-height-300" src="/assets/images/modules/gallery/mega_cities/gints-gailis_b.jpg" alt="Shangri-La Hotel Jakarta ">
-      </div>
-    </div>
-
-  </div>
-</div>
-++++
-
-/////
 === Grid on Images in different sizes
 
 Using an image gallery to display images of different sizes can be challenging,
 resulting in an uneven or unbalanced layout. However, this is where masonry
 can be particularly useful.
 
-==== Simple Image Grid
+==== Base Image Grid
 
 Masonry uses a dynamic grid system to position images to create a visually
 appealing and balanced layout. A dynamic grid system means you can display
 images of different sizes without worrying about them looking out of place
 or disrupting the overall flow of the gallery.
 
-++++
-<div class="content mt-5 mb-5">
-  <div id="image_masonry" class="row">
+.Asciidoc configuration
+[source, config, role="noclip mb-3"]
+----
+masonry::image_grid_example[role="mb-4"]
+----
 
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="no_card">
-        <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/denys-nevozhai-1_b.jpg" alt="Jin Mao Tower Shanghai">
-      </div>
-    </div>
-
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="no_card">
-        <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/thomas-tucker_b.jpg" alt="Sunset over Taipei City">
-      </div>
-    </div>
-
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="no_card">
-        <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/emmad-mazhari_b.jpg" alt="Chicago">
-      </div>
-    </div>
-
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <article class="no_card">
-        <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/johan-mouchet_b.jpg" alt="The Queen Bee at the Eureka Tower">
-      </article>
-    </div>
-
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="no_card">
-        <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/federico-rizzarelli_b.jpg" alt="Shanhai">
-      </div>
-    </div>
-
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="no_card">
-        <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/gints-gailis_b.jpg" alt="Shangri-La Hotel Jakarta ">
-      </div>
-    </div>
-
-  </div>
-</div>
-++++
+.Image Grid
+masonry::image_grid_example[role="mb-4"]
 
 ==== Image Grid + Lightbox
 
 A Lightbox is, in general, a helper which displays enlarged, almost
 screen-filling versions of images (or videos) while dimming the remainder
 of the page. The technique, introduced by Lightbox2, gained widespread
-popularity thanks to its simple style. The term lightbox has been employed
+popularity thanks to its simple style. The term *lightbox* has been employed
 since then for Javascript libraries to support such functionality.
+
+.Asciidoc configuration
+[source, config, role="noclip mb-3"]
+----
+masonry::image_grid_lightbox_example[role="mb-4"]
+----
+
+.Image Grid
+masonry::image_grid_lightbox_example[role="mb-4"]
 
 A lightbox supports image groups (image sets). Click on the images below to
 see how a Lightbox manages a group of images.
 
-++++
-<div class="content mt-5 mb-5">
-  <div id="image_masonry_lightbox" class="row">
-
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="grid-sizer">
-        <a  class="notoc link-no-decoration"
-            href="/assets/images/modules/gallery/mega_cities/denys-nevozhai-1_b.jpg"
-            data-lightbox="masonry-image-group"
-            data-title="Jin Mao Tower Shanghai">
-          <img class="img-fluid" src="/assets/images/modules/gallery/mega_cities/denys-nevozhai-1_b.jpg" alt="Jin Mao Tower Shanghai">
-        </a>
-      </div>
-    </div>
-
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="grid-sizer">
-        <a  class="notoc link-no-decoration"
-            href="/assets/images/modules/gallery/mega_cities/thomas-tucker_b.jpg"
-            data-lightbox="masonry-image-group"
-            data-title="Sunset over Taipei City">
-          <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/thomas-tucker_b.jpg" alt="Sunset over Taipei City">
-        </a>
-      </div>
-    </div>
-
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="grid-sizer">
-        <a  class="notoc link-no-decoration"
-            href="/assets/images/modules/gallery/mega_cities/emmad-mazhari_b.jpg"
-            data-lightbox="masonry-image-group"
-            data-title="Chicago">
-          <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/emmad-mazhari_b.jpg" alt="Chicago">
-        </a>
-      </div>
-    </div>
-
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="grid-sizer">
-        <a  class="notoc link-no-decoration"
-            href="/assets/images/modules/gallery/mega_cities/johan-mouchet_b.jpg"
-            data-lightbox="masonry-image-group"
-            data-title="The Queen Bee at the Eureka Tower">
-          <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/johan-mouchet_b.jpg" alt="The Queen Bee at the Eureka Tower">
-        </a>
-      </div>
-    </div>
-
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="grid-sizer">
-        <a  class="notoc link-no-decoration"
-            href="/assets/images/modules/gallery/mega_cities/federico-rizzarelli_b.jpg"
-            data-lightbox="masonry-image-group"
-            data-title="Shanghai">
-          <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/federico-rizzarelli_b.jpg" alt="Shanghai">
-        </a>
-      </div>
-    </div>
-
-    <div class="col-sm-6 col-lg-4 mb-4">
-      <div class="grid-sizer">
-        <a  class="notoc link-no-decoration"
-            href="/assets/images/modules/gallery/mega_cities/gints-gailis_b.jpg"
-            data-lightbox="masonry-image-group"
-            data-title="Shangri-La Hotel Jakarta">
-          <img class="img-fluid img-object--cover" src="/assets/images/modules/gallery/mega_cities/gints-gailis_b.jpg" alt="Shangri-La Hotel Jakarta">
-        </a>
-      </div>
-    </div>
-
-  </div>
-</div>
-++++
-/////
+NOTE: The default lightbox for Masonry Grids is _Lightbox2_, the classic
+lightbox widely used on the Internet.
