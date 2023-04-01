@@ -167,7 +167,7 @@ user engagement and keep visitors on a website for longer by presenting
 content dynamically and visually appealingly.
 
 
-== Example Slider + Arrows + Dots
+== Example Slider
 
 Responsive sliders are carousels designed to adapt and resize automatically
 to fit different screen sizes and devices, such as desktops, laptops, tablets,
