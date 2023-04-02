@@ -62,6 +62,7 @@ settings:
         originLeft:                     true
         initLayout:                     true
         percentPosition:                true
+#       gutter:                         5
 
     # --------------------------------------------------------------------------
     # Bootstrap Card Images
@@ -90,6 +91,7 @@ settings:
         originLeft:                     true
         initLayout:                     true
         percentPosition:                true
+#       gutter:                         5
 
       # ------------------------------------------------------------------------
       # Images
@@ -147,6 +149,7 @@ settings:
         originLeft:                     true
         initLayout:                     true
         percentPosition:                true
+#       gutter:                         5
 
       # ------------------------------------------------------------------------
       # Images
@@ -204,6 +207,7 @@ settings:
         originLeft:                     true
         initLayout:                     true
         percentPosition:                true
+#       gutter:                         5
 
       # ------------------------------------------------------------------------
       # Images

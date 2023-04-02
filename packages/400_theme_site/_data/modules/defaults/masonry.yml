@@ -140,10 +140,11 @@ defaults:
   horizontalOrder:                      false
   stagger:                              30
   transitionDuration:                   0.8
+  gutter:                               5
 
 # columnWidth:                          200
 # itemSelector:                         '.grid-item'
-# gutter:                               50
+
 
 # ------------------------------------------------------------------------------
 # END config
