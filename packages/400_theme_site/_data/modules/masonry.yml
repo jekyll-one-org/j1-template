@@ -123,13 +123,13 @@ settings:
           file:                         gints-gailis_b.jpg
 
     # --------------------------------------------------------------------------
-    # Image Grid
+    # Bae Image Grid
     #
     - grid:
       enabled:                          true
       hideDisabled:                     true
 
-      id:                               image_grid_example
+      id:                               image_grid_base
       type:                             image_grid
       image_base_path:                  /assets/images/modules/gallery/mega_cities
       image_styles:                     img-fluid
@@ -187,7 +187,7 @@ settings:
       enabled:                          true
       hideDisabled:                     true
 
-      id:                               image_grid_lightbox_example
+      id:                               image_grid_lightbox
       type:                             image_grid
       image_base_path:                  /assets/images/modules/gallery/mega_cities
       image_styles:                     img-fluid

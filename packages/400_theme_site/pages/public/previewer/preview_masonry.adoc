@@ -141,11 +141,11 @@ or disrupting the overall flow of the gallery.
 .Asciidoc configuration
 [source, config, role="noclip mb-3"]
 ----
-masonry::image_grid_example[role="mb-4"]
+masonry::image_grid_base[role="mb-4"]
 ----
 
 .Image Grid
-masonry::image_grid_example[role="mb-4"]
+masonry::image_grid_base[role="mb-4"]
 
 ==== Image Grid + Lightbox
 
@@ -158,11 +158,11 @@ since then for Javascript libraries to support such functionality.
 .Asciidoc configuration
 [source, config, role="noclip mb-3"]
 ----
-masonry::image_grid_lightbox_example[role="mb-4"]
+masonry::image_grid_lightbox[role="mb-4"]
 ----
 
-.Image Grid
-masonry::image_grid_lightbox_example[role="mb-4"]
+.Image Grid + Lightbox
+masonry::image_grid_lightbox[role="mb-4"]
 
 A lightbox supports image groups (image sets). Click on the images below to
 see how a Lightbox manages a group of images.
