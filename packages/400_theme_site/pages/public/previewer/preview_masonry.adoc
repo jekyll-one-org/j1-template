@@ -84,11 +84,11 @@ changing the number of posts displayed, the masonry speed, and other options.
 .Asciidoc configuration
 [source, config, role="noclip mb-3"]
 ----
-masonry::post_series_grid[]
+masonry::post_series_grid_example[]
 ----
 
 .Masonry Post Grid
-masonry::post_series_grid[role="mb-4"]
+masonry::post_series_grid_example[role="mb-4"]
 
 NOTE: The J1 Masonry module supports a series of posts out of the box. If the
 grid type of `post-series` is given, all posts of a group (series) are
@@ -141,11 +141,11 @@ or disrupting the overall flow of the gallery.
 .Asciidoc configuration
 [source, config, role="noclip mb-3"]
 ----
-masonry::image_grid_base[role="mb-4"]
+masonry::image_grid_base_example[role="mb-4"]
 ----
 
-.Image Grid
-masonry::image_grid_base[role="mb-4"]
+.Image Grid + No Gutters
+masonry::image_grid_base_example[role="mb-4"]
 
 ==== Image Grid + Lightbox
 
@@ -158,11 +158,11 @@ since then for Javascript libraries to support such functionality.
 .Asciidoc configuration
 [source, config, role="noclip mb-3"]
 ----
-masonry::image_grid_lightbox[role="mb-4"]
+masonry::image_grid_lightbox_example[role="mb-4"]
 ----
 
-.Image Grid + Lightbox
-masonry::image_grid_lightbox[role="mb-4"]
+.Image Grid + Gutters + Lightbox
+masonry::image_grid_lightbox_example[role="mb-4"]
 
 A lightbox supports image groups (image sets). Click on the images below to
 see how a Lightbox manages a group of images.

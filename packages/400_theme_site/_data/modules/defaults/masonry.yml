@@ -23,16 +23,20 @@ description:
 # Default settings
 #
 defaults:
+  enabled:                              false
 
   # ----------------------------------------------------------------------------
-  # Masonry (grid) configuration
+  # Masonry MODULE options
+  # ----------------------------------------------------------------------------
   #
-  #  enabled
+  #  initTimeout
   #  --------------------------------------------------------------------------
-  #  Enables|Disables the grid
+  #  Delays the initialization of a grid after the HTML code is loaded.
+  #  The delay depends on the browser used repectively how long it takes
+  #  the DOM is updated for the dynamically loaded HTML code (AJAX).
   #
-  #  values:                           true|false
-  #  default:                          no defaults
+  #  values:                           integer (ms)
+  #  default:                          500
   #
   #  hideDisabled
   #  --------------------------------------------------------------------------
@@ -40,7 +44,24 @@ defaults:
   #  for the element specified by `id`.
   #
   #  values:                           true|false
-  #  default:                          no defaults
+  #  default:                          true
+  #
+  # ----------------------------------------------------------------------------
+  initTimeout:                          500
+  hideDisabled:                         true
+
+  # ----------------------------------------------------------------------------
+  # AJAX (HTML)
+  #
+  # The HTML portion of a grid are being read from a HTML file generated
+  # automatically from its configuration for all grids configured.
+  # AJAX methods are used to supply the needed HTML code at the time
+  # a grid is initialized by the JS adapter.
+  #
+  xhr_data_path:                        /assets/data/masonry
+
+  # ----------------------------------------------------------------------------
+  # Masonry API options
   #
   #  id
   #  --------------------------------------------------------------------------
@@ -109,42 +130,29 @@ defaults:
   #  --------------------------------------------------------------------------
   #  Enables|Disables layout on initialization. Disabled for J1 by default.
   #  If initLayout is to `false`, layout is DISABLED on initialization.
-  #  Used to MANUALLY  initialize a layout by methods or add events BEFORE
+  #  Used to MANUALLY initialize a layout by methods or add events BEFORE
   #  the initial initialization of a layout (grid).
   #
   #  values:                           true|false
-  #  default:                          false
+  #  default:                          true
   #
   # ----------------------------------------------------------------------------
-  enabled:                              false
-
-  # ----------------------------------------------------------------------------
-  # AJAX (JSON)
-  #
-  # All data items displayed by a carousel are being read
-  # from a JSON file (default: carousel.json) automatically
-  # generated from that configuration.
-  # AJAX methods are used to supply the needed HTML code at
-  # the time the carousel is initialized (by the Initializer)
-  #
-  xhr_data_path:                        /assets/data/masonry
 
   # ----------------------------------------------------------------------------
   # Masonry options
   # ----------------------------------------------------------------------------
-  hideDisabled:                         true
-  initLayout:                           false
-  originTop:                            false
-  originLeft:                           false
-  percentPosition:                      false
-  horizontalOrder:                      false
-  stagger:                              30
-  transitionDuration:                   0.8
-  gutter:                               5
-
-# columnWidth:                          200
-# itemSelector:                         '.grid-item'
-
+  initLayout:                           true
+  originTop:                            true
+  originLeft:                           true
+  percentPosition:                      true
+  horizontalOrder:                      true
+  stagger:                              0.03                                    # given in seconds, 30ms
+  transitionDuration:                   0.80                                    # given in seconds, 800ms
+  gutter:                               0                                       # default: 10
+  itemSelector:                         false                                   # default: grid-item (CSS class)
+  resize:                               true
+  containerStyle:                       null                                    # NOT used
+  columnWidth:                          80                                      # NOT used
 
 # ------------------------------------------------------------------------------
 # END config

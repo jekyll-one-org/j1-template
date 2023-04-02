@@ -27,12 +27,13 @@ settings:
   enabled:                              true
 
   # ----------------------------------------------------------------------------
-  # Masonry options
+  # Masonry MODULE settings
   # ----------------------------------------------------------------------------
-  transitionDuration:                   0.5
+  hideDisabled:                         true
+  initTimeout:                          500
 
   # ----------------------------------------------------------------------------
-  # Masonry settings
+  # Grid and Masonry API option settings
   # ----------------------------------------------------------------------------
   grids:
 
@@ -43,10 +44,11 @@ settings:
       enabled:                          true
       hideDisabled:                     true
 
-      id:                               post_series_grid
+      id:                               post_series_grid_example
       type:                             post
       group:                            Life                                    # generate grid elements only for group
       category:                         Life                                    # generate grid elements only for group
+      bs_gutter:                        1
 
       # ------------------------------------------------------------------------
       # Lightbox options
@@ -62,7 +64,6 @@ settings:
         originLeft:                     true
         initLayout:                     true
         percentPosition:                true
-#       gutter:                         5
 
     # --------------------------------------------------------------------------
     # Bootstrap Card Images
@@ -75,13 +76,13 @@ settings:
       type:                             bs_image_cards
       image_base_path:                  /assets/images/modules/gallery/mega_cities
       image_styles:                     img-fluid img-object--cover g-height-300
+      bs_gutter:                        1
 
       # ------------------------------------------------------------------------
       # Lightbox options
       #
       lightbox:
         enabled:                        true
-        type:                           lb
 
       # ------------------------------------------------------------------------
       # Masonry options
@@ -91,7 +92,6 @@ settings:
         originLeft:                     true
         initLayout:                     true
         percentPosition:                true
-#       gutter:                         5
 
       # ------------------------------------------------------------------------
       # Images
@@ -123,23 +123,23 @@ settings:
           file:                         gints-gailis_b.jpg
 
     # --------------------------------------------------------------------------
-    # Bae Image Grid
+    # Base Image Grid
     #
     - grid:
       enabled:                          true
       hideDisabled:                     true
 
-      id:                               image_grid_base
+      id:                               image_grid_base_example
       type:                             image_grid
       image_base_path:                  /assets/images/modules/gallery/mega_cities
       image_styles:                     img-fluid
+      bs_gutter:                        0
 
       # ------------------------------------------------------------------------
       # Lightbox options
       #
       lightbox:
         enabled:                        false
-        type:                           lb
 
       # ------------------------------------------------------------------------
       # Masonry options
@@ -149,7 +149,6 @@ settings:
         originLeft:                     true
         initLayout:                     true
         percentPosition:                true
-#       gutter:                         5
 
       # ------------------------------------------------------------------------
       # Images
@@ -187,17 +186,17 @@ settings:
       enabled:                          true
       hideDisabled:                     true
 
-      id:                               image_grid_lightbox
+      id:                               image_grid_lightbox_example
       type:                             image_grid
       image_base_path:                  /assets/images/modules/gallery/mega_cities
       image_styles:                     img-fluid
+      bs_gutter:                        1
 
       # ------------------------------------------------------------------------
       # Lightbox options
       #
       lightbox:
         enabled:                        true
-        type:                           lb
 
       # ------------------------------------------------------------------------
       # Masonry options
@@ -207,7 +206,6 @@ settings:
         originLeft:                     true
         initLayout:                     true
         percentPosition:                true
-#       gutter:                         5
 
       # ------------------------------------------------------------------------
       # Images

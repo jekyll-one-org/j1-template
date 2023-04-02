@@ -91,15 +91,16 @@ exclude_from_search:                    true
     {% if grid.type == 'post' %}
       <!-- Posts|Group -->
       <!-- Collect data only if group matches -->
-      <div id="{{grid.id}}" class="row g-0">
+      <div id="{{grid.id}}" class="{{grid.id | replace: '_','-' }}">
+        <div class="row px-2">
         {% for post in site.posts %}
         {% if post.group contains grid.group %}
 
         <!-- resposive items: 3-2-1 -->
-        <div class="col-lg-4 col-md-6 col-sm-12 px-{{grid.bs_gutter}} py-{{grid.bs_gutter}}">
+        <div class="col-lg-4 col-md-6 col-sm-12 mb-1">
           <article class="card bg-dark text-center text-white border-0 rounded-0">
             <img class="card-img img-object--cover g-height-300" src="{{post.image.path | relative_url}}" alt="{{post.title}}" style="filter: contrast(1) brightness(0.5);">
-            <!-- div class="card-img-overlay" -->
+            <div class="card-img-overlay">
               <div class="card-content mt-6">
                 {% if post %}
                   {% assign categories = post.categories %}
@@ -139,6 +140,7 @@ exclude_from_search:                    true
 
         {% endif %}
         {% endfor %}
+        </div>
       </div>
       <!-- /Posts|Group -->
     {% endif %}
@@ -147,10 +149,10 @@ exclude_from_search:                    true
     ---------------------------------------------------------------------------- {% endcomment %}
     {% if grid.type == 'bs_image_cards' %}
     <!-- Card Image Grid -->
-    <div id="{{grid.id}}" class="{{grid.id | replace: '_','-' }} mx-2">
-      <div class="row">
+    <div id="{{grid.id}}" class="{{grid.id | replace: '_','-' }}">
+      <div class="row px-2">
       {% for image in grid.images %}
-      <div class="col-lg-4 col-md-6 col-sm-12 px-{{grid.bs_gutter}} py-{{grid.bs_gutter}}">
+      <div class="col-lg-4 col-md-6 col-sm-12 px-1 py-1">
         <div class="card">
         {% if grid.lightbox.enabled %}
         <a href="{{grid.image_base_path}}/{{image.file}}"
@@ -174,9 +176,10 @@ exclude_from_search:                    true
     ---------------------------------------------------------------------------- {% endcomment %}
     {% if grid.type == 'image_grid' %}
     <!-- Image Grid -->
-    <div id="{{grid.id}}" class="row g-0 {{grid.id | replace: '_','-' }}">
+    <div id="{{grid.id}}" class="{{grid.id | replace: '_','-' }}">
+
       {% for image in grid.images %}
-      <div class="col-lg-4 col-md-6 col-sm-12 px-{{grid.bs_gutter}} py-{{grid.bs_gutter}}">
+      <div class="col-lg-4 col-md-6 col-sm-12 px-1 py-1">
         <div class="nocard">
         {% if grid.lightbox.enabled %}
         <a href="{{grid.image_base_path}}/{{image.file}}"
@@ -191,6 +194,7 @@ exclude_from_search:                    true
         </div>
       </div>
       {% endfor %}
+
     </div>
     <!-- /Image Grid -->
     {% endif %}

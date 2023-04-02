@@ -167,7 +167,10 @@ var logText;
               {% assign transition_duration = masonry_defaults.transitionDuration %}
               {% assign stagger_duration    = masonry_defaults.stagger %}
               {% assign gutter_size         = masonry_defaults.gutter %}
+              {% assign resize              = masonry_defaults.resize %}
               {% assign itemSelector        = masonry_defaults.itemSelector %}
+              {% assign containerStyle      = masonry_defaults.containerStyle %}
+              {% assign columnWidth         = masonry_defaults.columnWidth %}
 
               {% comment %} overload defaults by grid element options
               ------------------------------------------------------------------ {% endcomment %}
@@ -179,7 +182,10 @@ var logText;
               {% if grid.options.transitionDuration %} {% assign transition_duration = grid.options.transitionDuration %} {% endif %}
               {% if grid.options.stagger %}            {% assign stagger_duration    = grid.options.stagger %}            {% endif %}
               {% if grid.options.gutter %}             {% assign gutter_size         = grid.options.gutter %}             {% endif %}
+              {% if grid.options.resize %}             {% assign resize              = grid.options.resize %}             {% endif %}
               {% if grid.options.itemSelector %}       {% assign itemSelector        = grid.options.itemSelector %}       {% endif %}
+              {% if grid.options.containerStyle %}     {% assign containerStyle      = grid.options.containerStyle %}     {% endif %}
+              {% if grid.options.columnWidth %}        {% assign columnWidth         = grid.options.columnWidth %}     {% endif %}
 
               // create dynamic loader variable|s
               dependency = 'dependencies_met_html_loaded_{{grid.id}}';
@@ -190,53 +196,43 @@ var logText;
                 // check if HTML portion of the slider is loaded successfully (loadSliderHTML)
                 xhrLoadState = j1.xhrDOMState['#{{grid.id}}_parent'];
                 if ( xhrLoadState === 'success' ) {
+                  setTimeout (function() {
+                    var $grid_{{grid_id}} = $('#{{grid_id}}');
+                    logger.info('\n' + 'initialize grid on id: ' + '{{grid_id}}');
 
-                  var $grid_{{grid_id}} = $('#{{grid_id}}');
-                  logger.info('\n' + 'initialize grid on id: ' + '{{grid_id}}');
+                    // grid event handler
+                    logger.info('\n' + 'install event handlers for grid on id: ' + '{{grid_id}}');
+                    $grid_{{grid_id}}.on('layoutComplete', function() {
+                      // initializing (layout) completed
+                      logger.debug('\n' + 'initializing layout completed for grid on id: ' + '{{grid_id}}');
+                    });
 
-                  // grid event handler
-                  logger.info('\n' + 'install event handlers for grid on id: ' + '{{grid_id}}');
-                  $grid_{{grid_id}}.on('layoutComplete', function() {
-                    // initializing (layout) completed
-                    logger.debug('\n' + 'initializing layout completed for grid on id: ' + '{{grid_id}}');
-                  });
-
-                  // setup thegrid
-                  logger.info('\n' + 'grid is being setup on id: ' + '{{grid.id}}');
-                  $grid_{{grid_id}}.masonry({
-                    percentPosition:        {{percent_position}},
-                    horizontalOrder:        {{horizontal_order}},
-                    originLeft:             {{origin_left}},
-                    originTop:              {{origin_top}},
-                    initLayout:             {{init_layout}},
-                    transitionDuration:     "{{transition_duration}}s",
-                    stagger:                "{{stagger_duration}}",
-                    gutter:                 {{gutter_size}},
-//                  itemSelector:           "{{itemSelector}}",
-
-                  });
+                    // setup the grid
+                    logger.info('\n' + 'grid is being setup on id: ' + '{{grid.id}}');
+                    $grid_{{grid_id}}.masonry({
+                      percentPosition:        {{percent_position}},
+                      horizontalOrder:        {{horizontal_order}},
+                      originLeft:             {{origin_left}},
+                      originTop:              {{origin_top}},
+                      initLayout:             {{init_layout}},
+                      transitionDuration:     "{{transition_duration}}s",
+                      stagger:                "{{stagger_duration}}s",
+                      resize:                 {{resize}},
+                      gutter:                 {{gutter_size}},
+//                    containerStyle:         "{{containerStyle}}",
+//                    columnWidth:             {{columnWidth}},
+                    });
+                  }, masonryOptions.initTimeout);
                 }
                 clearInterval(load_dependencies['dependencies_met_html_loaded_{{grid.id}}']);
               }, 25); // END dependencies_met_html_loaded
 
-              // grid event handler
-              // logger.info('\n' + 'install event handlers on id: ' + '{{grid_id}}');
-              // $grid_{{grid_id}}.on('click', '.card', function() {
-              //   // remove clicked element
-              //   // layout remaining item elements
-              //   $grid_{{grid_id}}.masonry('remove', this).masonry('layout');
-              //   $grid_{{grid_id}}.masonry('reloadItems');
-              // });
-
-//            logger.info('\n' + 'initializing module finished');
-              // _this.eventHandler($grid_{{grid_id}});
-
             {% else %}
               logger.info('\n' + 'found grid disabled on id: {{grid.id}}');
-              {% if grid.hideDisabled %}
+              {% if masonryOptions.hideDisabled %}
                 // hide a grid if disabled
                 logger.debug('\n' + 'hide grid disabled on id: {{grid.id}}');
-                $('#{{grid.grid.id}}').hide();
+                $('#{{grid.id}}').hide();
               {% endif %}
             {% endif %} // ENDIF grid enabled
 
@@ -250,10 +246,9 @@ var logText;
 
     // -------------------------------------------------------------------------
     // loadGridHTML()
-    // load all masonry grids (HTML portion) dynanically configured
-    // and enabled (AJAX) from YAML data file
-    // NOTE: Make sure the placeholder is available in the content page
-    // eg. using the asciidoc extension masonry::
+    // loads the HTML portion via AJAX (j1.loadHTML) for all grids configured.
+    // NOTE: Make sure the placeholder DIV is available in the content
+    // page e.g. using the asciidoc extension masonry::
     // -------------------------------------------------------------------------
     loadGridHTML: function (options, grid) {
       var numGrids      = Object.keys(grid).length;
@@ -268,7 +263,7 @@ var logText;
         if (grid[key].enabled) {
           xhr_container_id = grid[key].id + '_parent';
 
-          console.debug('load HTML data on grid id: ' + grid[key].id);
+          console.debug('load HTML portion on grid id: ' + grid[key].id);
           j1.loadHTML({
             xhr_container_id: xhr_container_id,
             xhr_data_path:    xhr_data_path,
@@ -282,27 +277,6 @@ var logText;
       console.debug('grids loaded in page enabled|all: ' + active_grids + '|' + numGrids);
       _this.setState('data_loaded');
     }, // END loadSliderHTML
-
-    // -------------------------------------------------------------------------
-    // eventHandler()
-    // manage events for all grids configured
-    // -------------------------------------------------------------------------
-    eventHandler: function ($grid) {
-      logger.info('\n' + 'install event handlers on id: ' + '{{grid_id}}');
-
-      logger.info('\n' + 'install event handlers on id: ' + '{{grid_id}}');
-      $grid.on( 'click', '.card', function() {
-        // remove clicked element
-        // layout remaining item elements
-        $grid.masonry('remove', this).masonry('layout');
-        $grid.masonry('reloadItems');
-      });
-
-      $grid.on( 'layoutComplete', function() {
-        console.log('layout done, just this ones');
-      });
-
-    }, // END eventHandler
 
     // -------------------------------------------------------------------------
     // messageHandler()
