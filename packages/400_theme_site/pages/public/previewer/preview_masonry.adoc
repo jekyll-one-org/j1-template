@@ -84,11 +84,11 @@ changing the number of posts displayed, the masonry speed, and other options.
 .Asciidoc configuration
 [source, config, role="noclip mb-3"]
 ----
-masonry::post_series_grid_example[]
+masonry::post_series_example[role="mb-4"]
 ----
 
 .Masonry Post Grid
-masonry::post_series_grid_example[role="mb-4"]
+masonry::post_series_example[role="mb-4"]
 
 NOTE: The J1 Masonry module supports a series of posts out of the box. If the
 grid type of `post-series` is given, all posts of a group (series) are

@@ -44,7 +44,7 @@ settings:
       enabled:                          true
       hideDisabled:                     true
 
-      id:                               post_series_grid_example
+      id:                               post_series_example
       type:                             post
       group:                            Life                                    # generate grid elements only for group
       category:                         Life                                    # generate grid elements only for group
