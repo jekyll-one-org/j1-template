@@ -1,6 +1,6 @@
 ---
 title:                                  Romance
-tagline:                                Romance Literature in the Book Shelf
+tagline:                                Romance Literature
 date:                                   2023-01-29 00:00:00
 description: >
                                         Romance Literature in the Book Shelf

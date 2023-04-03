@@ -1,6 +1,6 @@
 ---
 title:                                  Fantasy
-tagline:                                Fantasy Literature in the Book Shelf
+tagline:                                Fantasy Literature
 date:                                   2023-01-29 00:00:00
 description: >
                                         Fantasy Literature in the Book Shelf
