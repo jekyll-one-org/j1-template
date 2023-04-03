@@ -44,7 +44,6 @@ resource_options:
             href:                       https://unsplash.com/@quinoal
 ---
 
-
 // Page Initializer
 // =============================================================================
 // Enable the Liquid Preprocessor

@@ -18,6 +18,7 @@ book:
   publisher:                            HarperCollins Publishers
   published:                            2016
   author:                               Jeremy Paxman
+
   ISBN10:                               0008128308
   ISBN13:                               9780008128302
   rank:                                 16817
@@ -26,13 +27,17 @@ fab_menu_id:                            default
 scrollbar:                              false
 regenerate:                             false
 
-resources:                              []
+resources:                              [ animate ]
 resource_options:
   - attic:
       padding_top:                      600
       slides:
         - url:                          /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
-          alt:                          giammarco-boscaro-1920x1280
+          alt:                          Photo by Giammarco on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Giammarco
+            href:                       https://unsplash.com/@giamboscaro
 ---
 
 // Page Initializer
@@ -59,7 +64,6 @@ in public life have escaped. From John Major to Theresa May, from Tony Blair
 to Ed Miliband, Paxman had them quaking in their boots.
 
 excerpt__end
-
 
 // Content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -7,20 +7,24 @@ description: >
                                         of celebrities well known by most of us. Find the books issued
                                         by musicans, actors and more.
 
-categories:                             [ Jekyll, Collection ]
-tags:                                   [ Preview, Bookshelf ]
+categories:                             [ Biography, Collection ]
+tags:                                   [ Preview ]
 
 fab_menu_id:                            open_toc
 regenerate:                             false
 permalink:                              /pages/public/bookshelf/biography/
 
-resources:                              []
+resources:                              [ animate ]
 resource_options:
   - attic:
       padding_top:                      600
       slides:
         - url:                          /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
-          alt:                          giammarco-boscaro-1920x1280
+          alt:                          Photo by Giammarco on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Giammarco
+            href:                       https://unsplash.com/@giamboscaro
 ---
 
 // Page Initializer
@@ -34,20 +38,41 @@ resource_options:
 
 {% comment %} Liquid procedures
 -------------------------------------------------------------------------------- {% endcomment %}
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
 {% capture create_collection_article_preview %}themes/{{site.template.name}}/procedures/collections/create_collection_article_preview.proc{% endcapture %}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="none" %}
 
 {% comment %} Debugging
 -------------------------------------------------------------------------------- {% endcomment %}
-{% comment %} site.biography:  {{ site.biography | debug }} {% endcomment %}
+{% comment %} site.biography: {{ site.biography | debug }} {% endcomment %}
 
 
-// Content
+// Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [[navigator]]
-lorem:sentences[8]
+A biography is a written account of a person's life, typically focusing on
+major achievements, events, and experiences. It can be a detailed record of
+a person's life, covering everything from their birth and childhood to their
+personal and professional accomplishments and even their death.
 
-[role="mb-6"]
-lorem:sentences[3]
+[role="mb-4"]
+Biographies can be written by someone or someone else and found in various
+formats, including books, articles, and online sources. A biography aims to
+provide insight into a person's life, personality, and achievements and to
+inspire and inform readers about their accomplishments and contributions
+to society.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+== Available articles
+
+[role="mb-4"]
+Find below all available articles in the collection. The content is
+automatically generated and taken from the articles this collection
+contains.
 
 ++++
 <div class="row mb-4">

@@ -48,8 +48,8 @@ exclude_from_search:                    true
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign grids               = masonry_settings.grids %}
-
+{% assign masonry_options     = masonry_defaults | merge: masonry_settings %}
+{% assign grids               = masonry_options.grids %}
 
 {% comment %} Configure permalink settings
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -97,7 +97,7 @@ exclude_from_search:                    true
         <!-- resposive items: 3-2-1 -->
         <!-- div class="col-lg-4 col-md-6 col-sm-12 px-{{grid.bs_gutter}} py-{{grid.bs_gutter}}" -->
         <!-- div class="col-xl-{{grid.responsive.xl}} col-lg-{{grid.responsive.lg}} col-md-{{grid.responsive.md}} col-sm-{{grid.responsive.sm}} col-{{grid.responsive.xs}} px-{{grid.bs_gutter}} py-{{grid.bs_gutter}}" -->
-        <div class="col-xl-{{masonry_settings.responsive.xl}} col-lg-{{masonry_settings.responsive.lg}} col-md-{{masonry_settings.responsive.md}} col-sm-{{masonry_settings.responsive.sm}} col-{{masonry_settings.responsive.xs}} px-{{grid.bs_gutter}} py-{{grid.bs_gutter}}">
+        <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{grid.bs_gutter}} py-{{grid.bs_gutter}}">
           <article class="card bg-dark text-center text-white border-0 rounded-0">
             <img class="card-img img-object--cover g-height-300" src="{{post.image.path | relative_url}}" alt="{{post.title}}" style="filter: contrast(1) brightness(0.5);">
             <!-- div class="card-img-overlay" -->
@@ -149,17 +149,17 @@ exclude_from_search:                    true
     <!-- Card Image Grid -->
     <div id="{{grid.id}}" class="{{grid.id | replace: '_','-' }} row g-0 mx-2">
       {% for image in grid.images %}
-      <div class="col-xl-{{masonry_settings.responsive.xl}} col-lg-{{masonry_settings.responsive.lg}} col-md-{{masonry_settings.responsive.md}} col-sm-{{masonry_settings.responsive.sm}} col-{{masonry_settings.responsive.xs}} px-{{grid.bs_gutter}} py-{{grid.bs_gutter}}">
+      <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{grid.bs_gutter}} py-{{grid.bs_gutter}}">
         <div class="card">
-        {% if grid.lightbox.enabled %}
-        <a href="{{grid.image_base_path}}/{{image.file}}"
-           data-lightbox="{{grid.id}}-image-group"
-           data-caption="{{image.title}}"
-           data-title="{{image.title}}">
-          <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.title}}">
-        </a>
+          {% if grid.lightbox.enabled %}
+          <a href="{{grid.image_base_path}}/{{image.file}}"
+             data-lightbox="{{grid.id}}-image-group"
+             data-caption="{{image.title}}"
+             data-title="{{image.title}}">
+            <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.title}}">
+          </a>
         {% else %}
-        <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.title}}">
+          <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.title}}">
         {% endif %}
         </div>
       </div>
@@ -174,18 +174,18 @@ exclude_from_search:                    true
     <!-- Image Grid -->
     <div id="{{grid.id}}" class="row g-0 mx-3 {{grid.id | replace: '_','-' }}">
       {% for image in grid.images %}
-      <div class="col-xl-{{masonry_settings.responsive.xl}} col-lg-{{masonry_settings.responsive.lg}} col-md-{{masonry_settings.responsive.md}} col-sm-{{masonry_settings.responsive.sm}} col-{{masonry_settings.responsive.xs}} px-{{grid.bs_gutter}} py-{{grid.bs_gutter}}">
+      <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{grid.bs_gutter}} py-{{grid.bs_gutter}}">
         <div class="nocard">
-        {% if grid.lightbox.enabled %}
-        <a href="{{grid.image_base_path}}/{{image.file}}"
-           data-lightbox="{{grid.id}}-image-group"
-           data-caption="{{image.title}}"
-           data-title="{{image.title}}">
+          {% if grid.lightbox.enabled %}
+          <a href="{{grid.image_base_path}}/{{image.file}}"
+             data-lightbox="{{grid.id}}-image-group"
+             data-caption="{{image.title}}"
+             data-title="{{image.title}}">
+            <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.title}}">
+          </a>
+          {% else %}
           <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.title}}">
-        </a>
-        {% else %}
-        <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.title}}">
-        {% endif %}
+          {% endif %}
         </div>
       </div>
       {% endfor %}

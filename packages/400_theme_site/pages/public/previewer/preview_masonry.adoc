@@ -3,11 +3,10 @@ title:                                  J1 Masonry
 tagline:                                Preview
 date:                                   2020-11-03 00:00:00
 description: >
-                                        The term masonry is commonly used in web development to
-                                        refer to a grid layout system for arranging elements on a webpage.
-                                        The masonry layout, also known as the Pinterest-style layout, is
-                                        a popular choice for displaying images of varying sizes aesthetically
-                                        pleasingly.
+                                        J1 Template implements the Masonry module based on the Javascript
+                                        library Masonry, a popular grid layout library by David DeSandro.
+                                        The masonry or the Pinterest-style layout is a popular choice for
+                                        aesthetically pleasing images of varying sizes.
 
 categories:                             [ Previewer ]
 tags:                                   [ Masonry, Example ]
@@ -19,8 +18,8 @@ regenerate:                             false
 permalink:                              /pages/public/previewer/masonry/
 
 resources:                              [
-                                          clipboard, lightbox, masonry,
-                                          rouge, slick
+                                          clipboard, justifiedGallery, lightbox,
+                                          lightGallery, masonry, rouge
                                         ]
 resource_options:
   - attic:
@@ -42,7 +41,7 @@ resource_options:
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
-:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+:url-roundtrip--present-videos:         /pages/public/learn/roundtrip/present_videos/
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -90,6 +89,37 @@ masonry::post_series_example[role="mb-4"]
 .Masonry Post Grid
 masonry::post_series_example[role="mb-4"]
 
+.Configuration settings (YAML)
+[source, yaml, role="noclip mb-4"]
+----
+# --------------------------------------------------------------------------
+# Post Series
+#
+- grid:
+  enabled:                          true
+
+  id:                               post_series_example
+  type:                             post
+  group:                            Life
+  bs_gutter:                        1
+
+  # ------------------------------------------------------------------------
+  # Lightbox options
+  #
+  lightbox:
+    enabled:                        false
+
+  # ------------------------------------------------------------------------
+  # Masonry options
+  #
+  options:
+    originTop:                      true
+    originLeft:                     true
+    initLayout:                     true
+    percentPosition:                true
+----
+
+
 NOTE: The J1 Masonry module supports a series of posts out of the box. If the
 grid type of `post-series` is given, all posts of a group (series) are
 generated automatically as Bootstrap Cards of type *post*.
@@ -124,6 +154,47 @@ masonry::bs_image_cards_example[role="mb-4"]
 .BS Image Cards + Lightbox
 masonry::bs_image_cards_example[role="mb-4"]
 
+.Configuration settings (YAML)
+[source, yaml, role="noclip mb-4"]
+----
+# --------------------------------------------------------------------------
+# Bootstrap Card Images
+#
+- grid:
+  enabled:                          true
+
+  id:                               bs_image_cards_example
+  type:                             bs_image_cards
+  image_base_path:                  /assets/images/modules/gallery/mega_cities
+  image_styles:                     img-fluid img-object--cover g-height-300
+  bs_gutter:                        1                                       # [0 .. 5]
+
+  # ------------------------------------------------------------------------
+  # Lightbox options
+  #
+  lightbox:
+    enabled:                        true
+
+  # ------------------------------------------------------------------------
+  # Masonry options
+  #
+  options:
+    originTop:                      true
+    originLeft:                     true
+    initLayout:                     true
+    percentPosition:                true
+
+  # ------------------------------------------------------------------------
+  # Images
+  #
+  images:
+
+    - image:                        # image 1
+      title:                        Man posing at the rooftop of Jin Mao Tower Shanghai - China
+      file:                         denys-nevozhai-1_b.jpg
+
+      ...
+----
 
 === Grid on Images in different sizes
 
@@ -147,6 +218,48 @@ masonry::image_grid_base_example[role="mb-4"]
 .Image Grid + No Gutters
 masonry::image_grid_base_example[role="mb-4"]
 
+.Configuration settings (YAML)
+[source, yaml, role="noclip mb-4"]
+----
+# --------------------------------------------------------------------------
+# Base Image Grid
+#
+- grid:
+  enabled:                          true
+
+  id:                               image_grid_base_example
+  type:                             image_grid
+  image_base_path:                  /assets/images/modules/gallery/mega_cities
+  image_styles:                     img-fluid
+  bs_gutter:                        0
+
+  # ------------------------------------------------------------------------
+  # Lightbox options
+  #
+  lightbox:
+    enabled:                        false
+
+  # ------------------------------------------------------------------------
+  # Masonry options
+  #
+  options:
+    originTop:                      true
+    originLeft:                     true
+    initLayout:                     true
+    percentPosition:                true
+
+  # ------------------------------------------------------------------------
+  # Images
+  #
+  images:
+
+    - image:                        # image 1
+      title:                        Man posing at the rooftop of Jin Mao Tower Shanghai - China
+      file:                         denys-nevozhai-1_b.jpg
+
+      ...
+----
+
 ==== Image Grid + Lightbox
 
 A Lightbox is, in general, a helper which displays enlarged, almost
@@ -161,11 +274,75 @@ since then for Javascript libraries to support such functionality.
 masonry::image_grid_lightbox_example[role="mb-4"]
 ----
 
+A lightbox supports image groups (image sets). Click on the images below to
+see how a Lightbox manages a group of images shown in your grid.
+
 .Image Grid + Gutters + Lightbox
 masonry::image_grid_lightbox_example[role="mb-4"]
 
-A lightbox supports image groups (image sets). Click on the images below to
-see how a Lightbox manages a group of images.
+.Configuration settings (YAML)
+[source, yaml, role="noclip mb-4"]
+----
+# --------------------------------------------------------------------------
+# Image Grid + Lightbox
+#
+- grid:
+  enabled:                          true
+
+  id:                               image_grid_lightbox_example
+  type:                             image_grid
+  image_base_path:                  /assets/images/modules/gallery/mega_cities
+  image_styles:                     img-fluid
+  bs_gutter:                        1
+
+  # ------------------------------------------------------------------------
+  # Lightbox options
+  #
+  lightbox:
+    enabled:                        true
+
+  # ------------------------------------------------------------------------
+  # Masonry options
+  #
+  options:
+    originTop:                      true
+    originLeft:                     true
+    initLayout:                     true
+    percentPosition:                true
+
+  # ------------------------------------------------------------------------
+  # Images
+  #
+  images:
+
+    - image:                        # image 1
+      title:                        Man posing at the rooftop of Jin Mao Tower Shanghai - China
+      file:                         denys-nevozhai-1_b.jpg
+
+      ...
+----
 
 NOTE: The default lightbox for Masonry Grids is _Lightbox2_, the classic
 lightbox widely used on the Internet.
+
+[role="mt-5"]
+== Justified Gallery
+
+[role="mb-4"]
+As an alternative to grids on image contents arranged by Masonry, the module
+*JustifiedGallery* can be used to display photos in a masonry-styled image
+gallery. link:{url-justified-gallery--home}[JustifiedGallery, {browser-window--new}]
+is a great _jQuery_ Plugin to create responsive, infinite, and high-quality
+justified image galleries.
+
+.Masonry Layout of JustifiedGallery
+gallery::jg_customizer[role="mb-4"]
+
+Digital image content, pictures or videos, are easy to make. Today, every
+mobile has a camera. Presenting a bunch of photos or videos is done very
+easily by using *Justified Gallery*. Videos created by a digicam or a mobile
+can be played by J1 Theme using the HTML5 Video support. Present
+videos you have made at it’s best.
+
+TIP: Find more on how to present video contens using *JustifiedGallery* on the example
+page link:{url-roundtrip--present-videos}[Present Videos, {browser-window--new}].

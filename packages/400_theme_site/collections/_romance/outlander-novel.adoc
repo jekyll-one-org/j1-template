@@ -1,0 +1,96 @@
+---
+title:                                  Outlander
+tagline:                                The Land and Lore of Scotland
+date:                                   2016-11-28 00:00:0
+
+book:
+  cover:                                https://d4rri9bdfuube.cloudfront.net/assets/images/book/large/9780/4402/9780440212560.jpg
+  format:                               paperback
+  pages:                                850
+  publisher:                            Bantam Doubleday Dell Publishing Group Inc
+  author:                               Diana Gabaldon
+  ISBN10:                               0440212561
+  ISBN13:                               9780440212560
+  rank:                                 297
+
+categories:                             [ Collection, Books ]
+tags:                                   [ Romance, Historical, Fiction ]
+
+regenerate:                             false
+
+resources:                              [ animate ]
+resource_options:
+  - attic:
+      padding_top:                      600
+      slides:
+        - url:                          /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
+          alt:                          Photo by Giammarco on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Giammarco
+            href:                       https://unsplash.com/@giamboscaro
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+// Place an excerpt at the most top position
+// -----------------------------------------------------------------------------
+// image:{{page.book.cover}}[width=200, role="mr-4 float-left"]
+
+Claire Randall is leading a double life. She has a husband in one century,
+and a lover in another...
+
+In 1945, Claire Randall, a former combat nurse, is back from the war and
+reunited with her husband on a second honeymoon--when she innocently touches
+aboulder in one of the ancient stone circles that dot the British Isles.
+Suddenly she is a Sassenach--an "outlander"--in a Scotland torn by war and
+raiding border clans in the year of our Lord...1743.
+
+Hurled back in time by forces she cannot understand, Claire's destiny in soon
+inextricably intertwined with Clan MacKenzie and the forbidden Castle Leoch.
+She is catapulted without warning into the intrigues of lairds and spies that
+may threaten her life ...and shatter her heart.
+
+excerpt__end
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="none" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+[[readmore]]
+For here, James Fraser, a gallant young Scots warrior, shows her a passion so
+fierce and a love so absolute that Claire becomes a woman torn between fidelity
+and desire...and between two vastly different men in two irreconcilable lives.
+
+_Absorbing and heartwarming .. lavishly evokes the land and lore of Scotland_
+
+*Publishers Weekly*
+
+_Stunning!_
+
+*Los Angeles Daily News*
+
+_It is a large canvas that Gabaldon paints, filled with strong passions and
+derring-do. Strong willed and sensual, Claire is an engaging modern heroine
+plopped down in a simpler, more primitive time .. Great fun .. marvelous
+and fantastic adventures, romance, sex .. perfect escape reading!_
+
+*San Francisco Chronicle*

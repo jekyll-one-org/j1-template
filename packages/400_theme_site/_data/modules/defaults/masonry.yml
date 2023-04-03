@@ -50,6 +50,16 @@ defaults:
   initTimeout:                          500
   hideDisabled:                         true
 
+  # ------------------------------------------------------------------------
+  # Bootstrap responsive options
+  #
+  responsive:
+    xs:                                 12                                      # viewport: <  576px, 1 colum|s
+    sm:                                 12                                      # viewport: ≥  576px, 1 colum|s
+    md:                                 6                                       # viewport: ≥  768px, 2 colum|s
+    lg:                                 4                                       # viewport: ≥  992px, 3 colum|s
+    xl:                                 3                                       # viewport: ≥ 1200px, 4 colum|s
+
   # ----------------------------------------------------------------------------
   # AJAX (HTML)
   #
