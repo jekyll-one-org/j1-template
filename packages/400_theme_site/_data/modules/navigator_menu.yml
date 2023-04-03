@@ -70,15 +70,22 @@
       icon:                             application
       dropdown:
 
-        - title:                        Biography
-          href:                         /pages/public/bookshelf/biography/
-          icon:                         book-marker
-        - title:                        Fantasy
-          href:                         /pages/public/bookshelf/fantasy/
-          icon:                         book-marker
-        - title:                        Romance
-          href:                         /pages/public/bookshelf/romance/
-          icon:                         book-marker
+        - title:                        Jekyll Collections
+          href:                         /pages/public/collections/jekyll_collections/
+          icon:                         head-question
+
+        - title:                        Previewers
+          icon:                         eye
+          dropdown:
+            - title:                    Biography
+              href:                     /pages/public/bookshelf/biography/
+              icon:                     book-marker
+            - title:                    Fantasy
+              href:                     /pages/public/bookshelf/fantasy/
+              icon:                     book-marker
+            - title:                    Romance
+              href:                     /pages/public/bookshelf/romance/
+              icon:                     book-marker
 
 # ------------------------------------------------------------------------------
 # TopLevel item FEATURES

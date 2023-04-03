@@ -1,26 +1,35 @@
 ---
 layout:                                 page
 
-title:                                  What's up
-tagline:                                Jekyll Collections Overview
-date:                                   2020-11-03 12:00:00
+title:                                  Jekyll Collections
+tagline:                                What Collections Are
+date:                                   2023-01-03 00:00:00
 description: >
                                         Jekyll Collections Overview
 categories:                             [ Jekyll, Collection ]
 tags:                                   [ Info, Overview ]
 
+image:
+  path:                                 /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  Photo by Giammarco on Unsplash
+
 fab_menu_id:                            open_toc
 regenerate:                             false
-permalink:                              /pages/public/collections/whats_up/
+permalink:                              /pages/public/collections/jekyll_collections/
 
+resources:                              [ animate ]
 resource_options:
   - attic:
       padding_top:                      600
       slides:
         - url:                          /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
-          alt:                          giammarco-boscaro-1920x1280
-
-regenerate:                             false
+          alt:                          Photo by Giammarco on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Giammarco
+            href:                       https://unsplash.com/@giamboscaro
 ---
 
 // Page Initializer
@@ -32,31 +41,30 @@ regenerate:                             false
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
 
-// Place an excerpt at the most top position
-// -----------------------------------------------------------------------------
-Collections are Jekyll's most powerful and simultaneously least understood
-feature. Collections add another possibility, or use-case, outside of Jekyll's
-post- and page-publishing functionality. Collections have the potential to
-bring Jekyll's zen-like simplicity to all sorts of other types of content that
-aren't ordered as with posts (ordered by date), but have a set *relationship*
-with one another - hence the name: _collection_.
-
-[role="clearfix mb-3"]
-excerpt__end
-
 
 // Content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-[[readmore]]
-== Traditional - Posts and pages
+[role="dropcap"]
+Collections are Jekyll's most powerful and simultaneously least understood
+feature of the generator. Collections add another possibility, or use-case,
+outside of Jekyll's post- and page-publishing functionality. Collections have
+the potential to bring Jekyll's zen-like simplicity to all sorts of other types
+of content that aren't ordered as with posts (ordered by date), but have a
+set *relationship* with one another - hence the name: _collection_.
 
-Source: https://ben.balter.com/2015/02/20/jekyll-collections/[Ben Balter: Jekyll Collections]
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+== Posts and Pages
 
+////
 {% if page.image.name %}
 .{{page.tagline}}
 [role="mb-5"]
 image::{{page.image.name}}[{{page.title}}, width=1280]
 {% endif %}
+////
+
+Source: https://ben.balter.com/2015/02/20/jekyll-collections/[Ben Balter: Jekyll Collections]
 
 Most Jekyll sites are organized around two types of content, posts (ordered)
 and pages (un-ordered).

@@ -8,6 +8,12 @@ description: >
 categories:                             [ Romance, Collection ]
 tags:                                   [ Preview ]
 
+image:
+  path:                                 /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  Photo by Giammarco on Unsplash
+
 robots:
   index:                                false
   follow:                               false
@@ -50,7 +56,7 @@ resource_options:
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-[[navigator]]
+[role="dropcap"]
 The romance genre is a popular category of books that consistently churns out
 bestsellers. The aim of the genre is simple, showcasing a love story where
 two people overcome adversity to obtain their happily ever after. According to

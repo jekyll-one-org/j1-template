@@ -10,6 +10,12 @@ description: >
 categories:                             [ Biography, Collection ]
 tags:                                   [ Preview ]
 
+image:
+  path:                                 /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  Photo by Giammarco on Unsplash
+
 fab_menu_id:                            open_toc
 regenerate:                             false
 permalink:                              /pages/public/bookshelf/biography/
@@ -52,7 +58,7 @@ resource_options:
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-[[navigator]]
+[role="dropcap"]
 A biography is a written account of a person's life, typically focusing on
 major achievements, events, and experiences. It can be a detailed record of
 a person's life, covering everything from their birth and childhood to their

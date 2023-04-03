@@ -8,6 +8,12 @@ description: >
 categories:                             [ Fantasy, Collection ]
 tags:                                   [ Preview ]
 
+image:
+  path:                                 /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  Photo by Giammarco on Unsplash
+
 robots:
   index:                                false
   follow:                               false
@@ -50,7 +56,7 @@ resource_options:
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-[[navigator]]
+[role="dropcap"]
 The fantasy genre has become popular the past few years. Once a genre
 restricted to a few Tolkien fanatics and literature freaks, Fantasy has
 now gone mainstream in a big way, from the mega-popular Harry Potter series
