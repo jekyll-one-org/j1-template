@@ -19,7 +19,7 @@ permalink:                              /pages/public/previewer/masonry/
 
 resources:                              [
                                           clipboard, justifiedGallery, lightbox,
-                                          lightGallery, masonry, rouge
+                                          lightGallery, masonry, rouge, slick
                                         ]
 resource_options:
   - attic:
@@ -59,14 +59,27 @@ layout* system for arranging elements on a webpage. The masonry layout, also
 known as the **Pinterest**-style layout, is a popular choice for displaying
 images of varying sizes aesthetically pleasingly.
 
-J1 Masonry is based on the popular JavaScript library _Masonry_ that enables
-the creation of responsive, dynamic grid layouts. It uses a unique algorithm
-to arrange elements vertically, then horizontally in the grid. The result is
-a visually appealing layout that works well with images and other content of
-varying sizes.
+J1 Masonry is based on the popular JavaScript library _Masonry_, which enables
+the creation of responsive, dynamic grid layouts of *large* groups of content.
+It uses a unique algorithm to arrange elements vertically, then horizontally
+in the grid. The result is a visually appealing layout that works well with
+images and other content of varying sizes.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
+== Responsive Slider
+
+A J1 Slider may be an alternative for a masonry-styled grid to display groups
+of posts, articles, or images in quite a *compact* way. The negative aspect of
+using sliders on *larger* groups of elements is the limited number of elements
+displayed on a slideshow. Sliders are typically used for so-called featured
+content to show *specific* elements the website visitors should find on a
+most top position of your homepage as an eye-catcher.
+
+.Post Silder
+slick::post_slider[role="mb-4"]
+
+
 == Masonry Grid on Posts
 
 J1 Masonry is easy to use and can be added to a webpage with just a few
