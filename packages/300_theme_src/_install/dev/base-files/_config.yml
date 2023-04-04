@@ -479,6 +479,7 @@ kramdown:
 plugins:
 # - algolia
 # - asciidoctor-pdf
+# - jekyll-archives
 # - jekyll-gist
 # - jekyll-redirect-from
   - asciidoctor
