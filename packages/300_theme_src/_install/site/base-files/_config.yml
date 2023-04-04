@@ -235,25 +235,8 @@ description: >
                                         for the Web. Jekyll One is open source and the modules packed
                                         as well. No pain for private or professional purposes.
 keywords: >
-                                        opensource, free, load, download, start, starter, example,
-                                        high, easy, use, secure, encrypt, standard, popular,
-                                        generate, create, learn, distribute, publish, deploy,
-                                        beginner, advanced, expert, student, learner, writer, reader, visitor
-                                        framework, toolkit, integration, extension, module, api,
-                                        dynamic, static, generator, client, server, internet, local, localhost
-                                        page, web, website, webdesign, material, design, responsive,
-                                        javascript, nodejs, ruby, windows, linux, osx, mac, os,
-                                        http, https, html, html5, css, scss, style,
-                                        browser, firefox, chrome, edge, opera, safari,
-                                        configuration, generator, navigation, menu, dropdown, fab, action, button
-                                        application, interface, provider, api, repository,
-                                        cookie, language, translation, gdpr, dsgvo, privacy,
-                                        asciidoc, aciidoctor, bootstrap, jekyll, liquid,
-                                        hyvor, disqus, git, github, netlify, heroku, apple, microsoft,
-                                        provider, service, internet, support,
-                                        google, analytics, advertising, search, console, silverlight, score,
-                                        j1, template, jekyllone, comment
-
+                                        opensource, free, j1, template, jekyll, jekyllone, web, sites,
+                                        static, jamstack
 author:
   name:                                 Juergen Adams
   email:                                juergen@jekyll.one
@@ -607,6 +590,14 @@ collections:
     output:                             true
     permalink:                          /collections/public/:collection/:name/
 
+  fantasy:
+    output:                             true
+    permalink:                          /collections/public/:collection/:name/
+
+  romance:
+    output:                             true
+    permalink:                          /collections/public/:collection/:name/
+
 # ------------------------------------------------------------------------------
 # FRONTMATTER defaults
 #
@@ -771,11 +762,25 @@ defaults:
   #
 
   # ----------------------------------------------------------------------------
-  # Biography (Book Shelf)
+  # Book Shelf
   #
   - scope:
       type:                             biography
       path:                             collections/_biography
+
+    values:
+      layout:                           page
+
+  - scope:
+      type:                             fantasy
+      path:                             collections/_fantasy
+
+    values:
+      layout:                           page
+
+  - scope:
+      type:                             romance
+      path:                             collections/_romance
 
     values:
       layout:                           page
