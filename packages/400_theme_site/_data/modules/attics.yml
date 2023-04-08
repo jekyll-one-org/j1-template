@@ -33,6 +33,7 @@ description:
 # SETTINGS
 #
 settings:
+  enabled:                              false
 
   # ----------------------------------------------------------------------------
   # Global properties (all layouts)
@@ -49,7 +50,7 @@ settings:
     #
     - name:                             Home
       attic:
-        enabled:                        false
+        enabled:                        true
 
         id:                             attic_home
         layout:                         home

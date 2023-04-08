@@ -129,9 +129,7 @@ j1.adapter.attic = (function (j1, window) {
       // create settings object from attic options
       var atticDefaults = $.extend({}, {{attic_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       var atticSettings = $.extend({}, {{attic_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-
-//    merge all attic options
-      var atticOptions = $.extend(true, {}, atticDefaults, atticSettings, frontmatterOptions);
+      var atticOptions  = $.extend(true, {}, atticDefaults, atticSettings, frontmatterOptions);
 
       // Save frontmatterOptions and atticOptions in the j1 namespace
       // to be used later by j1.template.init() to load the header
@@ -147,12 +145,18 @@ j1.adapter.attic = (function (j1, window) {
         var pageState   = $('#no_flicker').css("display");
         var pageVisible = (pageState == 'block') ? true: false;
         if ( j1.getState() === 'finished' && pageVisible ) {
+          {% if attic_options.enabled %}
           logger.info('\n' + 'create all attics configured');
           _this.createAllAttics();
           clearInterval(dependencies_met_page_ready);
+          {% else %}
+          logger.warn('\n' + 'found module attics disabled');
+          // add additional top space
+          $('#content').addClass('mt-5');
+          clearInterval(dependencies_met_page_ready);
+          {% endif %}
         }
       }, 25);
-
     }, // END init
 
     // -------------------------------------------------------------------------
@@ -161,7 +165,7 @@ j1.adapter.attic = (function (j1, window) {
     createAllAttics: function () {
       var frontmatterOptions  = _this.frontmatterOptions;
       // merge all attic options
-      var atticOptions = $.extend({}, _this.atticOptions, _this.frontmatterOptions);
+      var atticOptions = $.extend(true, {}, _this.atticOptions, _this.frontmatterOptions);
 
       {% comment %} Load data from header config (yaml data file)
       -------------------------------------------------------------------------- {% endcomment %}
@@ -220,6 +224,8 @@ j1.adapter.attic = (function (j1, window) {
                   loop:                           atticOptions.loop,
                   mute:                           atticOptions.mute
               });
+            } else {
+              logger.warn('\n' + 'no attic container found on id: {{attic_id}}');
             }
 
             {% comment %} Add a spinner if configured
@@ -620,7 +626,7 @@ j1.adapter.attic = (function (j1, window) {
         {% else %}
           {% assign attic_id = item.attic.id %}
           // add additional top space
-          $('#content').addClass('mt-7');
+          $('#content').addClass('mt-8');
           logger.info('\n' + 'found attic disabled on id: {{attic_id}}');
         {% endif %} // END if header enabled
       {% endfor %} // END for item in header_config.attics

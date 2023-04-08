@@ -85,6 +85,8 @@
      {% endif %}
 
   {% else %}
+    <!-- [INFO   ] [~/_includes/themes/j1/modules/attics/generator.html ] [ attic disabled for layout: {{page.layout}} ] -->
+    {% assign attic_id = item.attic.id %}
     {% assign attic_enabled = item.attic.enabled %}
   {% endif %}
 {% endfor %}

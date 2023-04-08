@@ -1,0 +1,48 @@
+<!-- Custom Header -->
+<!-- [INFO   ] [~/_includes/custom/templates/custom_header.html     ] [ create attic for layout: {{page.layout}}] -->
+<header class="masthead bg-primary text-white text-center">
+  <div class="container d-flex align-items-center flex-column">
+
+    <!-- Masthead Image-->
+    <div>
+      <img class="masthead-avatar mb-5" src="/assets/images/custom/header/avatar.svg" alt="Custom Header Aavatar" aria-label="Custom Header Aavatar">
+    </div>
+    <!-- /Masthead Image-->
+
+    <!-- Masthead Title|Tagline -->
+    <div class="mt-5">
+      <div id="head-title" class="animate__animated animate__fadeInLeft animate__slower">
+        <h1 class="masthead-heading text-uppercase mb-0">{{page.title}}</h1>
+      </div>
+
+      <div id="head-tagline" class="animate__animated animate__fadeInLeft animate__slower">
+        <p class="masthead-subheading font-weight-light mb-0">{{page.tagline}}</p>
+      </div>
+    </div>
+    <!-- /Masthead Title|Tagline -->
+
+  </div>
+</header>
+<!-- /Custom Header -->
+
+<!-- Custom Header CSS -->
+<style>
+  .masthead {
+    padding-top: calc(6rem + 80px);
+    padding-bottom: 4rem;
+
+    .masthead-heading {
+        font-size: 2.75rem;
+        line-height: 2.75rem;
+    }
+
+    .masthead-subheading {
+        font-size: 1.25rem;
+    }
+
+    .masthead-avatar {
+        width: 15rem;
+    }
+  }
+</style>
+<!-- /Custom Header CSS -->

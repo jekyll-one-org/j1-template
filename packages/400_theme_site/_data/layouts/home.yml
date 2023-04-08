@@ -165,16 +165,28 @@ lanes:
   #   set to 'true to generate the required placeholder. The property
   #   'enabled' of a master header to switch on|off an attic is set on a
   #   per LAYOUT basis defined in the attics configuration file 'attics.yml'.
+  # NOTE:
+  #   If the default header (attic) is DISABLED (enabled set to false),
+  #   the correcponding module has to be DISABLED as well
   # ----------------------------------------------------------------------------
   #
   - lane:
-      enabled:                          true
+      enabled:                          false
       id:                               header
       region:                           body-header
       type:                             sync
       base:                             _includes/themes/j1
       path:                             modules/attics
       file:                             generator.html
+
+  - lane:
+      enabled:                          true
+      id:                               custom_header
+      region:                           body-header
+      type:                             sync
+      base:                             _includes/custom
+      path:                             templates
+      file:                             custom_header.html
 
   # ----------------------------------------------------------------------------
   # CONTENT region (region body-main)
