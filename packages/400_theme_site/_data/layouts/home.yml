@@ -171,7 +171,7 @@ lanes:
   # ----------------------------------------------------------------------------
   #
   - lane:
-      enabled:                          false
+      enabled:                          true
       id:                               header
       region:                           body-header
       type:                             sync
@@ -180,7 +180,7 @@ lanes:
       file:                             generator.html
 
   - lane:
-      enabled:                          true
+      enabled:                          false
       id:                               custom_header
       region:                           body-header
       type:                             sync
