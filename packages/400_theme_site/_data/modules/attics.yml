@@ -33,7 +33,7 @@ description:
 # SETTINGS
 #
 settings:
-  enabled:                              false
+  enabled:                              true
 
   # ----------------------------------------------------------------------------
   # Global properties (all layouts)
