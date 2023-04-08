@@ -49,7 +49,7 @@ settings:
     #
     - name:                             Home
       attic:
-        enabled:                        true
+        enabled:                        false
 
         id:                             attic_home
         layout:                         home

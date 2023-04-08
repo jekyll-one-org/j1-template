@@ -56,11 +56,6 @@ regenerate:                             true
   {% assign production = true %}
 {% endif %}
 
-
-
-
-
-
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/attic.js
@@ -136,7 +131,7 @@ j1.adapter.attic = (function (j1, window) {
       var atticSettings = $.extend({}, {{attic_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
 
 //    merge all attic options
-      var atticOptions = $.extend({}, atticDefaults, atticSettings, frontmatterOptions);
+      var atticOptions = $.extend(true, {}, atticDefaults, atticSettings, frontmatterOptions);
 
       // Save frontmatterOptions and atticOptions in the j1 namespace
       // to be used later by j1.template.init() to load the header
@@ -148,18 +143,25 @@ j1.adapter.attic = (function (j1, window) {
       logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
-      _this.loadHeader();
+      var dependencies_met_page_ready = setInterval (function (options) {
+        var pageState   = $('#no_flicker').css("display");
+        var pageVisible = (pageState == 'block') ? true: false;
+        if ( j1.getState() === 'finished' && pageVisible ) {
+          logger.info('\n' + 'create all attics configured');
+          _this.createAllAttics();
+          clearInterval(dependencies_met_page_ready);
+        }
+      }, 25);
 
     }, // END init
 
     // -------------------------------------------------------------------------
     // Initialize all header supported
     // -------------------------------------------------------------------------
-    loadHeader: function () {
+    createAllAttics: function () {
       var frontmatterOptions  = _this.frontmatterOptions;
       // merge all attic options
       var atticOptions = $.extend({}, _this.atticOptions, _this.frontmatterOptions);
-
 
       {% comment %} Load data from header config (yaml data file)
       -------------------------------------------------------------------------- {% endcomment %}
@@ -181,6 +183,8 @@ j1.adapter.attic = (function (j1, window) {
 
           // Create the SPECIFIC header loader FUNCTION of type: {{attic_id}}
           function {{attic_id}} (atticOptions) {
+
+            logger.info('\n' + 'initialize attic on id: {{attic_id}}');
 
             // convert attic filter settings to object to array to string
             atticFilters = $.extend({}, {{item.attic.filters | replace: 'nil', 'null' | replace: '=>', ':' }});
@@ -379,7 +383,7 @@ j1.adapter.attic = (function (j1, window) {
 
               _this.setState('finished');
               logger.debug('\n' + 'state: ' + _this.getState());
-              // logger.info('\n' + 'module initialized successfully');
+              logger.info('\n' + 'finished attic on id: {{attic_id}}');
             }); // END on('backstretch.after')
 
           } // END if attic_id exists
@@ -605,14 +609,19 @@ j1.adapter.attic = (function (j1, window) {
             if (typeof atticOptions.slides != 'undefined') {
               // Load the image header if the page is ready (visible)
               $(function() {
-                // logger.debug('\n' + 'Load image header on: ' + {{attic_id}});
-                logger.debug('\n' + 'Load image header');
+                // logger.info('\n' + 'Load image header on id: {{attic_id}}');
                 {{attic_id}}(atticOptions);
                 _this.setState('completed');
                 logger.debug('\n' + 'state: ' + _this.getState());
               });
             }
           } // END if header id found in page
+
+        {% else %}
+          {% assign attic_id = item.attic.id %}
+          // add additional top space
+          $('#content').addClass('mt-7');
+          logger.info('\n' + 'found attic disabled on id: {{attic_id}}');
         {% endif %} // END if header enabled
       {% endfor %} // END for item in header_config.attics
 
