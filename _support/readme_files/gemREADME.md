@@ -50,3 +50,16 @@ You can also use version comparators like >= or ~>
 ``` sh
   gem install j1-template -v 2023.1.1 --source 'https://gem.fury.io/jekyll-one-org/' --user-install --no-document
 ```
+
+
+### Clean up old Gem versions on GEM_PATH
+
+To clean up old versions of installed gems use below command
+
+  gem cleanup [GEMNAME …]
+
+The cleanup command removes old versions of gems from GEM_HOME that are not
+required to meet a dependency. If a gem is installed elsewhere in GEM_PATH
+the cleanup command won’t delete it.
+
+If no gems are named all gems in GEM_HOME are cleaned.
