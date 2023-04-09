@@ -2,6 +2,7 @@ require "log4r/logger"
 require "log4r/outputter/staticoutputter"
 require "log4r/logserver"
 require "log4r/outputter/remoteoutputter"
+
 require 'yaml'
 
 module Log4r
@@ -18,7 +19,8 @@ module Log4r
     # Define a parameter with a value
     def self.[]=(param, value); @@params[param] = value end
 
-    def self.custom_levels(levels)
+
+    def self.custom_levels( levels)
       return Logger.root if levels.size == 0
       for i in 0...levels.size
         name = levels[i].to_s
@@ -29,45 +31,44 @@ module Log4r
       Log4r.define_levels *levels
     end
 
-    # Given a filename, loads the YAML configuration for Log4r
-    def self.load_yaml_file(filename)
-      actual_load( File.open(filename))
+    # Given a filename, loads the YAML configuration for Log4r.
+    def self.load_yaml_file( filename)
+      actual_load( File.open( filename))
     end
 
-    # You can load a String YAML configuration instead of a file
-    def self.load_yaml_string(string)
-      actual_load(string)
+    # You can load a String YAML configuration instead of a file.
+    def self.load_yaml_string( string)
+      actual_load( string)
     end
 
-
-    ############################################################################
+    #######
     private
-    ############################################################################
+    #######
 
-    def self.actual_load(yaml_docs)
+    def self.actual_load( yaml_docs)
       log4r_config = nil
       # See:    https://ruby-doc.org/stdlib-2.4.1/libdoc/psych/rdoc/Psych.html#method-c-load_documents
       # NOTE:   'load_documents' method from Psych is deprecated (removed since ruby 2.5)
       # NOTE:   use ::load_stream instead
 #     YAML.load_documents( yaml_docs){ |doc|
-      YAML.load_stream(yaml_docs){ |doc|
-        doc.has_key?('log4r_config') and log4r_config = doc['log4r_config'] and break
+      YAML.load_stream( yaml_docs){ |doc|
+        doc.has_key?( 'log4r_config') and log4r_config = doc['log4r_config'] and break
       }
       if log4r_config.nil?
         raise ConfigError,
-          "Key 'log4r_config:' not defined in yaml documents", caller[1..-1]
+              "Key 'log4r_config:' not defined in yaml documents", caller[1..-1]
       end
-      decode_yaml(log4r_config)
+      decode_yaml( log4r_config)
     end
 
-    def self.decode_yaml(cfg)
-      decode_pre_config(cfg['pre_config'])
-      cfg['outputters'].each{ |op| decode_outputter(op)}
-      cfg['loggers'].each{ |lo| decode_logger(lo)}
-      cfg['logserver'].each{ |lo| decode_logserver(lo)} unless cfg['logserver'].nil?
+    def self.decode_yaml( cfg)
+      decode_pre_config( cfg['pre_config'])
+      cfg['outputters'].each{ |op| decode_outputter( op)}
+      cfg['loggers'].each{ |lo| decode_logger( lo)}
+      cfg['logserver'].each{ |lo| decode_logserver( lo)} unless cfg['logserver'].nil?
     end
 
-    def self.decode_pre_config(pre)
+    def self.decode_pre_config( pre)
       return Logger.root if pre.nil?
       decode_custom_levels( pre['custom_levels'])
       global_config( pre['global'])
@@ -75,34 +76,33 @@ module Log4r
       decode_parameters( pre['parameters'])
     end
 
-    def self.decode_custom_levels(levels)
+    def self.decode_custom_levels( levels)
       return Logger.root if levels.nil?
-      begin custom_levels(levels)
+      begin custom_levels( levels)
       rescue TypeError => te
         raise ConfigError, te.message, caller[1..-4]
       end
     end
 
-    def self.global_config(e)
+    def self.global_config( e)
       return if e.nil?
       globlev = e['level']
       return if globlev.nil?
-      lev = LNAMES.index(globlev)                                               # find value in LNAMES
-      Log4rTools.validate_level(lev, 4)                                         # choke on bad level
+      lev = LNAMES.index(globlev)     # find value in LNAMES
+      Log4rTools.validate_level(lev, 4)  # choke on bad level
       Logger.global.level = lev
     end
 
-    def self.decode_parameters(params)
+    def self.decode_parameters( params)
       params.each{ |p| @@params[p['name']] = p['value']} unless params.nil?
     end
 
-    def self.decode_outputter(op)
+    def self.decode_outputter( op)
       # fields
-      name    = op['name']
-      type    = op['type']
-      level   = op['level']
+      name = op['name']
+      type = op['type']
+      level = op['level']
       only_at = op['only_at']
-
       # validation
       raise ConfigError, "Outputter missing name", caller[1..-3] if name.nil?
       raise ConfigError, "Outputter missing type", caller[1..-3] if type.nil?
@@ -116,7 +116,7 @@ module Log4r
         end
       end
 
-      formatter = decode_formatter(op['formatter'])
+      formatter = decode_formatter( op['formatter'])
 
       opts = {}
       opts[:level] = LNAMES.index(level) unless level.nil?
@@ -126,13 +126,13 @@ module Log4r
         Outputter[name] = Log4r.const_get(type).new name, opts
       rescue Exception => ae
         raise ConfigError,
-          "Problem creating outputter: #{ae.message}", caller[1..-3]
+              "Problem creating outputter: #{ae.message}", caller[1..-3]
       end
-      Outputter[name].only_at(*only_levels) if only_levels.size > 0
+      Outputter[name].only_at( *only_levels) if only_levels.size > 0
       Outputter[name]
     end
 
-    def self.decode_formatter(fo)
+    def self.decode_formatter( fo)
       return nil if fo.nil?
       type = fo['type']
       raise ConfigError, "Formatter missing type", caller[1..-4] if type.nil?
@@ -168,19 +168,19 @@ module Log4r
       str
     end
 
-    def self.decode_logger(lo)
+    def self.decode_logger( lo)
       l = Logger.new lo['name']
-      decode_logger_common(l, lo)
+      decode_logger_common( l, lo)
     end
 
-    def self.decode_logserver(lo)
+    def self.decode_logserver( lo)
       name = lo['name']
       uri  = lo['uri']
       l = LogServer.new name, uri
       decode_logger_common(l, lo)
     end
 
-    def self.decode_logger_common(l, lo)
+    def self.decode_logger_common( l, lo)
       level    = lo['level']
       additive = lo['additive']
       trace    = lo['trace']

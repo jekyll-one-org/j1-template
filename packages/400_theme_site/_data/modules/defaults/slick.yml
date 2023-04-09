@@ -12,10 +12,9 @@
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
-# Description (used for J1 CC only)
+# Description
 #
 description:
-
   title:                                Slick
   scope:                                Default settings
   location:                             _data/apps/default/slick.yml

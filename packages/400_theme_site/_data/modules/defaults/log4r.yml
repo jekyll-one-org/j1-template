@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/defaults/log4r.yml
+# ~/_data/modules/log4r.yml
 # Default configuration for J1 Logger module (Ruby)
 #
 # Product/Info:
@@ -12,28 +12,25 @@
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
-# Description (used for J1 CC only)
+# Description
 #
 description:
   title:                                Ruby Logger
   scope:                                Default settings
   location:                             _data/modules/log4r.yml
 
-# ------------------------------------------------------------------------------
-# Default configuration settings
-#
 log4r_config:
 
-  # ----------------------------------------------------------------------------
+  # ============================================================================
   # BASE configurations (pre config)
-  # ----------------------------------------------------------------------------
+  #
   pre_config:
     global:
       level:                            DEBUG
     root:
       level:                            DEBUG
 
-  # ----------------------------------------------------------------------------
+  # ============================================================================
   # LOGGER configurations
   #   j1.mw
   #   j1.mw.auth_mgr
@@ -48,6 +45,7 @@ log4r_config:
   #   j1.mw.auth_mgr.api.state
   #   j1.mw.auth_mgr.api.validate
   # ----------------------------------------------------------------------------
+  #
   loggers:
 
     - name:                             j1.mw
@@ -134,6 +132,7 @@ log4r_config:
   #   date_pattern: '%Y-%m-%d %H:%M:%S.%L'      (%L: milli)
   #   date_pattern: '%Y-%m-%d %H:%M:%S.%L %z'   (milli + %z: timezone)
   # ----------------------------------------------------------------------------
+  #
   outputters:
 
     - name:                             console

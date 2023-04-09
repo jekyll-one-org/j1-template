@@ -242,3 +242,9 @@ You can turn off the warning with
   git config --global core.safecrlf false
 
 NOTE: This will only turn off the warning, not the function itself.
+
+
+== Upload Gem to Gemfury
+
+git remote add fury https://jekyll-one@git.fury.io/jekyll-one-org/<package-name>.git
+git push fury master
