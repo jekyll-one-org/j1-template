@@ -15,10 +15,9 @@
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
-# About this configuration (used for J1 CC only)
+# Description
 #
-about_config:
-
+description:
   title:                                Utility Services
   scope:                                User settings
   location:                             _data/utilities/util_srv.yml
@@ -27,8 +26,7 @@ about_config:
 # USER configuration settings
 #
 settings:
-
-  enabled:                              true                                    # if set to true, util server will be started
+  enabled:                              false                                   # if set to true, util server will be started
 
   ssl:                                  false
   origin:                               localhost

@@ -19,7 +19,7 @@
     "yarn": ">=1.6"
   },
   "utilsrv": {
-    "enabled": "true"
+    "enabled": "false"
   },
   "scripts": {
     "audit": "npm audit",

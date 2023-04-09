@@ -15,10 +15,9 @@
 # ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
-# Description (used for J1 CC only)
+# Description
 #
 description:
-
   title:                                Utility Services
   scope:                                Default settings
   location:                             _data/utilities/defaults/util_srv.yml
