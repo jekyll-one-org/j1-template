@@ -314,11 +314,9 @@ slick::image_slider[role="mb-5"]
   slides:
 
     - slide:                        # slide 1
-      title:                        Jin Mao Tower Shanghai
       image:                        denys-nevozhai-1_b.jpg
 
     - slide:                        # slide 2
-      title:                        Sunset over Taipei City
       image:                        thomas-tucker_b.jpg
 
      ...
@@ -329,8 +327,7 @@ Image sliders are commonly used in website headers, landing pages, galleries,
 and product showcases to draw attention to specific content or to provide an
 overview of a collection of images.
 
-
-=== Image Slider + Lightbox
+=== Image Slider + Captions + Lightbox
 
 [role="mb-4"]
 A Lightbox is, in general, a helper which displays enlarged, almost
@@ -339,7 +336,7 @@ of the page. The technique, introduced by Lightbox2, gained widespread
 popularity thanks to its simple style. The term lightbox has been employed
 since then for Javascript libraries to support such functionality.
 
-.Slider + Arrows + Dots + Lightbox (responsive)
+.Slider + Arrows + Dots + Captions + Lightbox
 slick::image_slider_lightbox[role="mb-5"]
 
 The Lighbox used for Slick sliders is _Slick-Lighbox_, an addon package
@@ -350,7 +347,7 @@ fired on all images of a slider if enabled:
 [source, yaml, role="noclip mb-4"]
 ----
 # ------------------------------------------------------------------------------
-# IMAGE slider  + Lightbox
+# IMAGE slider + Captions + Lightbox
 #
 - slider:
   enabled:                          true
@@ -360,13 +357,30 @@ fired on all images of a slider if enabled:
   image_base_path:                  /assets/images/modules/gallery/mega_cities
   styles:                           img-fluid img-object--cover g-height-300
 
+  # ------------------------------------------------------------------------
+  # Caption options
+  #
+  captions:
+    enabled:                        true
+
   # ----------------------------------------------------------------------------
   # Lightbox options
   #
   lightbox:
     enabled:                        true
-    src:                            src
-    itemSelector:                   .card img
+
+  # ----------------------------------------------------------------------------
+  # Slides
+  #
+  slides:
+
+    - slide:                        # slide 1
+      image:                        denys-nevozhai-1_b.jpg
+      caption:                      Man posing at the rooftop of Jin Mao Tower Shanghai - China
+
+    - slide:                        # slide 2
+      image:                        thomas-tucker_b.jpg
+      caption:                      Sunset over Taipei City - Taiwan
 
   ...
 ----

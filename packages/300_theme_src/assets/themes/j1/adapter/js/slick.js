@@ -21,6 +21,8 @@ regenerate:                             true
  #  {{ liquid_var | debug }}
  # cookie_options: {{ cookie_options | debug }}
  # -----------------------------------------------------------------------------
+ # See: https://github.com/kenwheeler/slick
+ # -----------------------------------------------------------------------------
 {% endcomment %}
 
 {% comment %} Liquid var initialization
@@ -132,8 +134,8 @@ j1.adapter.slick = (function (j1, window) {
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
-      _this         = j1.adapter.slick;
-      logger        = log4javascript.getLogger('j1.adapter.slick');
+      _this                 = j1.adapter.slick;
+      logger                = log4javascript.getLogger('j1.adapter.slick');
 
       _this.setState('started');
       logger.debug('\n' + 'state: ' + _this.getState());
@@ -209,6 +211,7 @@ j1.adapter.slick = (function (j1, window) {
                 logger.info('\n' + 'slider initialized on id: {{slider.id}}');
                 if ({{slider.lightbox.enabled}}) {
                   logger.info('\n' + 'initialize lightbox on id: {{slider.id}}');
+
                   // See: http://mreq.github.io/slick-lightbox/demo/
                   $('#{{slider.id}}').slickLightbox({
                     caption:                  slickLightboxOptions.caption,
@@ -221,12 +224,25 @@ j1.adapter.slick = (function (j1, window) {
                     imageMaxHeight:           slickLightboxOptions.imageMaxHeight,
                     lazy:                     slickLightboxOptions.lazy,
                   });
+
+                  // See: https://codepen.io/Svarnoy85/pen/NzQPpe
+                  // $(".captions").slick({
+                  //   asNavFor: '.slides',
+                  //   infinite: false,
+                  //   speed: 200,
+                  //   fade: true,
+                  //   appendArrows: $('.pagination'),
+                  //   prevArrow: '<div class="pagination__button"><i class="mdi mdi-18px mdi-arrow-left"></i></div>',
+                  //   nextArrow: '<div class="pagination__button"><i class="mdi mdi-18px mdi-arrow-right"></i></div>'
+                  // });
+
                 }
               });
 
               // setup the slider
               logger.info('\n' + 'slider is being setup on id: ' + '{{slider.id}}');
               $('.{{slider.id | replace: '_','-' }}').slick({
+//              asNavFor:                   '.captions',
                 accessibility:              sliderSettings.accessibility,
                 adaptiveHeight:             sliderSettings.adaptiveHeight,
                 arrows:                     sliderSettings.arrows,
@@ -281,7 +297,6 @@ j1.adapter.slick = (function (j1, window) {
           logger.info('\n' + 'module initialization finished');
 
           clearInterval(dependencies_met_page_ready);
-
         }
       }, 25);
 
