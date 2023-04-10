@@ -1,0 +1,422 @@
+---
+title:                                  J1 Slick
+tagline:                                Slider Previews
+date:                                   2023-03-02 00:00:00
+description: >
+                                        Slick slider is a popular jQuery plugin for creating responsive and fully
+                                        customizable sliders on websites created by J1. It allows developers to easily
+                                        create beautiful and dynamic carousels that can display images, videos, or any
+                                        other type of content in a visually appealing way.
+
+categories:                             [ Previewer ]
+tags:                                   [ Slick, Slider, Example ]
+
+comments:                               false
+fab_menu_id:                            open_toc
+scrollbar:                              false
+regenerate:                             false
+permalink:                              /pages/public/previewer/slick/
+
+
+resources:                              [ clipboard, lightbox, rouge, slick ]
+resource_options:
+  - attic:
+      padding_top:                      600
+      slides:
+        - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
+          alt:                          Photo by Ricardo Gomez Angel on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Ricardo Gomez Angel
+            href:                       https://unsplash.com/@ripato/portfolio
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+Slick slider is a popular jQuery plugin for creating responsive and fully
+customizable sliders on websites created by J1. It allows developers to easily
+create beautiful and dynamic carousels that can display images, videos, or any
+other type of content in a visually appealing way.
+
+The plugin is designed to be lightweight, fast, and easy to use, making it a
+popular choice for all web developers. It has many features, including
+multiple navigation options, lazy loading, or autoplay. Slick sliders are
+compatible with all modern browsers and devices, making it a great choice to
+create a responsive and mobile-friendly website.
+
+[role="mb-4"]
+The slider for J1 Template is a *best friend* for all web programmers because
+of its flexibility, a rich set of callbacks and simple configuration to make
+carousels as individual and powerful as possible. Find by the following examples
+what Slick sliders can do.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+== Example Images
+
+////
+[source, config]
+----
+placeholder:300x600[300x600, 90CAF9]
+----
+
+lorem:image[300x300]
+
+placeholder:300x600[300x600, 90CAF9]
+
+:placeholder_300x600: placeholder:300x600[300x600, 90CAF9]
+////
+
+[subs=attributes, macros]
+++++
+<div>
+  <ul id="bumms">
+    <li><a href="{placeholder_kitten_300x300}" data-caption="Placeholder kitten image 300x300">Placeholder kitten image 300x300</a></li>
+    <li><a href="{placeholder_kitten_500x500}" data-caption="Placeholder kitten image 500x500">Placeholder kitten image 500x500</a></li>
+  </ul>
+</div>
+++++
+
+++++
+<div>
+  <ul id="slb">
+    <li><a href="http://placekitten.com/1600/1300" data-caption="Lorem ipsum 1600x1300">http://placekitten.com/1600/1300</a></li>
+    <li><a href="http://placekitten.com/1630/1280" data-caption="Lorem ipsum 1630x1280">http://placekitten.com/1630/1280</a></li>
+    <li><a href="http://placekitten.com/1500/1250" data-caption="Lorem ipsum 1500x1250">http://placekitten.com/1500/1250</a></li>
+  </ul>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $('#slb').slickLightbox({
+      itemSelector: '> li > a'
+    });
+    $('#bumms').slickLightbox({
+      itemSelector: '> li > a'
+    });
+  });
+</script>
+++++
+
+2196F3
+
+== General Features
+
+Slick sliders are using various tools and frameworks, such as Bootstrap, jQuery,
+and pure CSS. Slick offers a wide range of customization options, such as slide
+transitions, autoplay, navigation controls to create a visually appealing and
+interactive user experience.
+
+[role="mb-4"]
+* Carousels are fully responsive for configurable screen sizes
+* Separate slider option settings per breakpoint
+* Uses CSS3 if available for a browser, fully functional if not
+* Swipe enabled. Or disabled, if prefered
+* Desktop mouse dragging
+* Infinite looping and Autoplay
+* Fully accessible with arrow key and dots navigation
+* Add, remove, filter and unfilter slides
+* Rich set of callbacks to enable individual behaviour of sliders
+
+== Post Slider
+
+A Post Slider for J1 Template is a pre-defined carousel type to display news
+articles on a webpage. It is a popular way to showcase a selection of posts
+visually appealingly and can be useful for highlighting important or *featured*
+content for your post articles.
+
+[role="mb-4"]
+Post sliders pull content from a specific category/group. All Carousels for
+posts display the post category, the post title, the author information and
+date. All Slick sliders for the J1 Theme can be easily customized in various
+ways, such as changing the number of posts displayed, the slider speed, or
+the navigation options like *Arrows* and *Dots*.
+
+.Asciidoc configuration
+[source, config, role="noclip mb-3"]
+----
+slick::post_slider[]
+----
+
+.Post Silder + Autoplay + Arrows (responsive)
+slick::post_slider[role="mb-4"]
+
+.Configuration settings (YAML)
+[source, yaml, role="noclip mb-4"]
+----
+# ------------------------------------------------------------------------------
+# POST slider
+#
+- slider:
+  enabled:                          true
+
+  id:                               post_slider
+  type:                             post
+  group:                            Life
+
+  # ----------------------------------------------------------------------------
+  # Slider options
+  #
+  options:
+    autoplay:                       true
+    slidesToShow:                   3
+    slidesToScroll:                 1
+    arrows:                         true
+    dots:                           false
+    responsive:                     true
+
+  # ----------------------------------------------------------------------------
+  # Reponsive options
+  #
+  responsive:
+    - breakpoint:
+      settings:
+        breakOn:                    1024
+        slidesToShow:               2
+        slidesToScroll:             2
+    - breakpoint:
+      settings:
+        breakOn:                    600
+        slidesToShow:               1
+        slidesToScroll:             1
+        dots:                       true
+    - breakpoint:
+      settings:
+        breakOn:                    480
+        slidesToShow:               1
+        slidesToScroll:             1
+
+----
+
+[role="mb-4"]
+Posts sliders typically used on the homepage of a website, within blog posts
+or articles, or on dedicated archive or category pages. They can increase
+user engagement and keep visitors on a website for longer by presenting
+content dynamically and visually appealingly.
+
+
+== Example Slider
+
+Responsive sliders are carousels designed to adapt and resize automatically
+to fit different screen sizes and devices, such as desktops, laptops, tablets,
+and smartphones. They are created using responsive design techniques, allowing
+web developers to create a single slider that can be optimized for various
+devices without needing separate versions or code.
+
+[role="mb-4"]
+Responsive Slick sliders can be useful for ensuring that content is displayed
+correctly and consistently across different devices and for providing an
+optimal user experience for all visitors to a website. They use techniques
+such as fluid grid layouts, flexible images, and media queries to adjust the
+slider size and layout based on the screen size and orientation of the device.
+
+.Asciidoc configuration
+[source, config, role="noclip mb-2"]
+----
+slick::example_slider_arrows_dots[role="mb-5"]
+----
+
+.Example Silder using Arrows + Dots (responsive)
+slick::example_slider_arrows_dots[role="mb-5"]
+
+.Configuration settings (YAML)
+[source, yaml, role="noclip mb-4"]
+----
+# ------------------------------------------------------------------------------
+# EXAMPLE slider 1
+#
+- slider:
+  enabled:                          true
+
+  id:                               example_slider_arrows_dots
+  type:                             example
+
+  # ----------------------------------------------------------------------------
+  # Slider options
+  #
+  options:
+    arrows:                         true
+    dots:                           true
+    speed:                          300
+    autoplay:                       false
+    slidesToShow:                   3
+    slidesToScroll:                 1
+    responsive:                     true
+
+  # ----------------------------------------------------------------------------
+  # Reponsive options
+  #
+  responsive:
+    - breakpoint:
+      settings:
+        breakOn:                    1024
+        slidesToShow:               2
+        slidesToScroll:             2
+    - breakpoint:
+      settings:
+        breakOn:                    600
+        slidesToShow:               1
+        slidesToScroll:             1
+    - breakpoint:
+      settings:
+        breakOn:                    480
+        slidesToShow:               1
+        slidesToScroll:             1
+----
+
+
+== Image Sliders
+
+An image slider, also known as a slideshow, is a graphical user interface
+element commonly used in web design and development to showcase a series of
+images or visual content dynamically and interactively.
+
+=== Simple Image Slider
+
+[role="mb-4"]
+An image slider typically consists of a container with images and a navigation
+system, including buttons, arrows, or dots that allow users to move back and
+forth between images or select a specific image. Image sliders can also include
+animation effects, such as fade-in or slide-in transitions between images, to
+make the presentation more engaging and visually appealing.
+
+.Simple Slider + Arrows + Dots
+slick::image_slider[role="mb-5"]
+
+.Configuration settings (YAML)
+[source, yaml, role="noclip mb-4"]
+----
+# ------------------------------------------------------------------------------
+# IMAGE slider
+#
+- slider:
+  enabled:                          true
+
+  id:                               image_slider
+  type:                             image
+  image_base_path:                  /assets/images/modules/gallery/mega_cities
+  image_styles:                     img-fluid img-object--cover g-height-300
+
+  # ----------------------------------------------------------------------------
+  # Lightbox options
+  #
+  lightbox:
+    enabled:                        false
+
+  # ----------------------------------------------------------------------------
+  # Slider options
+  #
+  options:
+    arrows:                         true
+    dots:                           true
+    speed:                          300
+    autoplay:                       false
+    slidesToShow:                   2
+    slidesToScroll:                 2
+    responsive:                     true
+
+  # ----------------------------------------------------------------------------
+  # Reponsive options
+  #
+  responsive:
+    - breakpoint:
+      settings:
+        breakOn:                    1024
+        slidesToShow:               2
+        slidesToScroll:             2
+    - breakpoint:
+      settings:
+        breakOn:                    800
+        slidesToShow:               1
+        slidesToScroll:             1
+    - breakpoint:
+      settings:
+        breakOn:                    480
+        dots:                       false
+        slidesToShow:               1
+        slidesToScroll:             1
+
+  # ----------------------------------------------------------------------------
+  # Slides
+  #
+  slides:
+
+    - slide:                        # slide 1
+      title:                        Jin Mao Tower Shanghai
+      image:                        denys-nevozhai-1_b.jpg
+
+    - slide:                        # slide 2
+      title:                        Sunset over Taipei City
+      image:                        thomas-tucker_b.jpg
+
+     ...
+----
+
+[role="mb-5"]
+Image sliders are commonly used in website headers, landing pages, galleries,
+and product showcases to draw attention to specific content or to provide an
+overview of a collection of images.
+
+
+=== Image Slider + Lightbox
+
+[role="mb-4"]
+A Lightbox is, in general, a helper which displays enlarged, almost
+screen-filling versions of images (or videos) while dimming the remainder
+of the page. The technique, introduced by Lightbox2, gained widespread
+popularity thanks to its simple style. The term lightbox has been employed
+since then for Javascript libraries to support such functionality.
+
+.Slider + Arrows + Dots + Lightbox (responsive)
+slick::image_slider_lightbox[role="mb-5"]
+
+The Lighbox used for Slick sliders is _Slick-Lighbox_, an addon package
+build-in the J1 Module for Slick. The Lighbox is autoatically configured and
+fired on all images of a slider if enabled:
+
+.Configuration settings (YAML)
+[source, yaml, role="noclip mb-4"]
+----
+# ------------------------------------------------------------------------------
+# IMAGE slider  + Lightbox
+#
+- slider:
+  enabled:                          true
+
+  id:                               image_slider_lightbox
+  type:                             image
+  image_base_path:                  /assets/images/modules/gallery/mega_cities
+  styles:                           img-fluid img-object--cover g-height-300
+
+  # ----------------------------------------------------------------------------
+  # Lightbox options
+  #
+  lightbox:
+    enabled:                        true
+    src:                            src
+    itemSelector:                   .card img
+
+  ...
+----
+
+NOTE: For image sliders, the lightbox properties `src` and `itemSelector` are
+to be configured for every instance the lightbox should be applied.

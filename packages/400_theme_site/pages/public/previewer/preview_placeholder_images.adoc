@@ -1,0 +1,144 @@
+---
+title:                                  Placeholder Images
+tagline:                                Previews
+date:                                   2023-04-10 00:00:00
+description: >
+                                        Placeholder images are an important tool for designers and developers
+                                        as they allow them to create and test the layout and functionality
+                                        of a website or application before the final content is available.
+
+categories:                             [ Previewer ]
+tags:                                   [ Placeholder, Design, Resource ]
+
+comments:                               false
+fab_menu_id:                            open_toc
+scrollbar:                              false
+regenerate:                             false
+permalink:                              /pages/public/previewer/placeholder_images/
+
+resources:                              [ clipboard, lightbox, rouge, slick ]
+resource_options:
+  - attic:
+      padding_top:                      600
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/kelly-sikkemal.jpg
+          alt:                          Photo by Kelly Sikkema on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Kelly Sikkema
+            href:                       https://unsplash.com/de/@kellysikkema
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// Find an [example lightbox](https://codepen.io/mreq/pen/KgQrQa) on Codepen.
+
+[role="dropcap"]
+Placeholder images are temporary images used to represent visual content
+that is not yet available or finalized. They are often used as a substitute
+for actual images during a website or application's development or design
+phase. Placeholder images are typically simple, generic images that can be
+easily replaced later with the actual images once they are available.
+
+[role="mb-4"]
+Overall, placeholder images are an important tool for designers and developers
+as they allow them to create and test the layout and functionality of a website
+or application before the final content is available.
+
+////
+[source, config]
+----
+placeholder:300x600[300x600, 90CAF9]
+----
+
+lorem:image[300x300]
+
+placeholder:300x600[300x600, 90CAF9]
+
+:placeholder_300x600: placeholder:300x600[300x600, 90CAF9]
+
+[subs=attributes, macros]
+++++
+<div>
+  <ul id="bumms">
+    <li><a href="{placeholder_kitten_300x300}" data-caption="Placeholder kitten image 300x300">Placeholder kitten image 300x300</a></li>
+    <li><a href="{placeholder_kitten_500x500}" data-caption="Placeholder kitten image 500x500">Placeholder kitten image 500x500</a></li>
+  </ul>
+</div>
+++++
+////
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+== Placekitten.com
+
+_Placekitten.com_ is a website that provides placeholder images of cute
+kittens in various sizes and formats. Designer Phil Hawksworth created it
+as a fun and quirky alternative to the generic placeholder images commonly
+used in web development.
+
+++++
+<div id="captions-demo" class="row captions-demo mx-1" >
+  <div class="col-lg-4 col-md-6 col-sm-12 col-12 px-1 py-1">
+    <a href="https://placekitten.com/1024/768" data-caption="Image size 1024x768" target="_blank">
+      <img class="img-fluid img-object--cover g-height-300" src="https://placekitten.com/1024/768" alt="Image size 1024x768">
+    </a>
+  </div>
+  <div class="col-lg-4 col-md-6 col-sm-12 col-12 px-1 py-1">
+    <a href="https://placekitten.com/1280/1024" data-caption="Image size 1280x1024" target="_blank">
+      <img class="img-fluid img-object--cover g-height-300" src="https://placekitten.com/1280/1024" alt="Image size 1280x1024">
+    </a>
+  </div>
+  <div class="col-lg-4 col-md-6 col-sm-12 col-12 px-1 py-1">
+    <a class="img-thumbnail" href="https://placekitten.com/1920/1280" data-caption="Image size 1920x1280" target="_blank">
+      <img class="img-fluid img-object--cover g-height-300" src="https://placekitten.com/1920/1280" alt="Image size 1920x1280">
+    </a>
+  </div>
+</div>
+
+<!-- div>
+  <ul id="slb">
+    <li><a href="https://placekitten.com/1600/1300" data-caption="Lorem ipsum 1600x1300">https://placekitten.com/1600/1300</a></li>
+    <li><a href="https://placekitten.com/1630/1280" data-caption="Lorem ipsum 1630x1280">https://placekitten.com/1630/1280</a></li>
+    <li><a href="https://placekitten.com/1500/1250" data-caption="Lorem ipsum 1500x1250">https://placekitten.com/1500/1250</a></li>
+  </ul>
+</div-->
+
+<script>
+  $(document).ready(function(){
+
+    // $('.captions-demo').slick();
+
+    $('#slb').slickLightbox({
+      itemSelector: '> li > a'
+    });
+
+    $('#bumms').slickLightbox({
+      itemSelector: '> li > a'
+    });
+
+    $('#captions-demo').slickLightbox({
+      caption:      'caption',
+      useHistoryApi: true
+    });
+
+  });
+</script>
+++++

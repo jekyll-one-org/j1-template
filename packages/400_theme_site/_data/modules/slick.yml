@@ -187,27 +187,27 @@ settings:
       slides:
 
         - slide:                        # slide 1
-          title:                        Jin Mao Tower Shanghai
+          title:                        Man posing at the rooftop of Jin Mao Tower Shanghai - China
           image:                        denys-nevozhai-1_b.jpg
 
         - slide:                        # slide 2
-          title:                        Sunset over Taipei City
+          title:                        Sunset over Taipei City - Taiwan
           image:                        thomas-tucker_b.jpg
 
         - slide:                        # slide 3
-          title:                        Chicago
+          title:                        Chicago - United States
           image:                        emmad-mazhari_b.jpg
 
         - slide:                        # slide 4
-          title:                        The Queen Bee at the Eureka Tower
+          title:                        The Queen Bee at the Eureka Tower - Melbourne Southbank Australia
           image:                        johan-mouchet_b.jpg
 
         - slide:                        # slide 5
-          title:                        Shanghai
+          title:                        Shanghai - China
           image:                        federico-rizzarelli_b.jpg
 
         - slide:                        # slide 6
-          title:                        Shangri-La Hotel Jakarta
+          title:                        Shangri-La Hotel Jakarta - Indonesia
           image:                        gints-gailis_b.jpg
 
 
@@ -268,27 +268,27 @@ settings:
       slides:
 
         - slide:                        # slide 1
-          title:                        Jin Mao Tower Shanghai
+          title:                        Man posing at the rooftop of Jin Mao Tower Shanghai - China
           image:                        denys-nevozhai-1_b.jpg
 
         - slide:                        # slide 2
-          title:                        Sunset over Taipei City
+          title:                        Sunset over Taipei City - Taiwan
           image:                        thomas-tucker_b.jpg
 
         - slide:                        # slide 3
-          title:                        Chicago
+          title:                        Chicago - United States
           image:                        emmad-mazhari_b.jpg
 
         - slide:                        # slide 4
-          title:                        The Queen Bee at the Eureka Tower
+          title:                        The Queen Bee at the Eureka Tower - Melbourne Southbank Australia
           image:                        johan-mouchet_b.jpg
 
         - slide:                        # slide 5
-          title:                        Shanghai
+          title:                        Shanghai - China
           image:                        federico-rizzarelli_b.jpg
 
         - slide:                        # slide 6
-          title:                        Shangri-La Hotel Jakarta
+          title:                        Shangri-La Hotel Jakarta - Indonesia
           image:                        gints-gailis_b.jpg
 
 # ------------------------------------------------------------------------------

@@ -91,7 +91,6 @@ exclude_from_search:                    true
         <!-- Collect data only if group matches -->
         <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 px-1">
           <article class="card bg-dark text-center text-white border-0 rounded-0">
-            <!-- img class="card-img rounded-0 img-fluid w-100" src="{{post.image.path | relative_url}}" alt="{{post.title}}" style="filter: grayscale(1) contrast(0.8) brightness(0.6);" -->
             <img class="card-img rounded-0 img-fluid w-100" src="{{post.image.path | relative_url}}" alt="{{post.title}}" style="filter: contrast(1) brightness(0.5);">
             <div class="card-img-overlay">
               <div class="card-content mt-6">
@@ -106,13 +105,9 @@ exclude_from_search:                    true
 
                 {% for category in categories %}
                 {% if category contains post.group %}
-                <!--a  class="d-block text-white text-uppercase link-no-decoration"
-                    href="{{site.jekyll-archives.category_archive_path | relative_url}}bla_{{category | slugify}}"
-                    style="font-size: 24px;">{{category}}
-                </a -->
-                <a  class="d-block text-white text-uppercase link-no-decoration"
-                    href="/pages/public/blog/navigator/archive/categoryview/#{{category | slugify}}"
-                    style="font-size: 24px;">{{category}}
+                <a class="d-block text-white text-uppercase link-no-decoration"
+                   href="/pages/public/blog/navigator/archive/categoryview/#{{category | slugify}}"
+                   style="font-size: 24px;">{{category}}
                 </a>
                 {% endif %}
                 {% endfor %}
@@ -164,7 +159,7 @@ exclude_from_search:                    true
       <div class="col-sm-6 col-lg-4 mb-4">
         <div class="card">
         {% if slider.lightbox.enabled %}
-        <a href="{{slider.image_base_path}}/{{slide.image}}" data-caption="{{slide.title}}">
+        <a href="{{slider.image_base_path}}/{{slide.image}}" data-caption="{{slide.title}}" target="_blank">
           <img class="{{slider.image_styles}}" src="{{slider.image_base_path}}/{{slide.image}}" alt="{{slide.title}}">
         </a>
         {% else %}

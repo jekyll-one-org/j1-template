@@ -201,14 +201,15 @@ j1.adapter.slick = (function (j1, window) {
                 logger.info('\n' + 'slider initialized on id: {{slider.id}}');
                 if ({{slider.lightbox.enabled}}) {
                   logger.info('\n' + 'initialize lightbox on id: {{slider.id}}');
+                  // See: http://mreq.github.io/slick-lightbox/demo/
                   $('#{{slider.id}}').slickLightbox({
+                    caption:                  'caption',
+                    useHistoryApi:            true,
                     background:               'rgba(0,0,0,.8)',
                     closeOnEscape:            true,
                     closeOnBackdropClick:     true,
                     navigateByKeyboard:       true,
                     destroyTimeout:           500,
-                    src:                      '{{slider.lightbox.src}}',
-                    itemSelector:             '{{slider.lightbox.itemSelector}}',
                     imageMaxHeight:           0.9,
                     lazy:                     false,
                   });

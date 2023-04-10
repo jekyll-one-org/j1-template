@@ -442,6 +442,30 @@ tag::urls[]
 :url-nodejs--​windows-download-remommended:        https://nodejs.org/dist/v12.22.0/node-v12.22.0-x64.msi
 :url-j1--​template-starter:                        https://github.com/jekyll-one/j1-template-starter
 
+:placeholder_image_100x100:                       https://placehold.it/100x100/
+:placeholder_image_200x200:                       https://placehold.it/200x200/
+:placeholder_image_300x300:                       https://placehold.it/300x300/
+:placeholder_image_400x400:                       https://placehold.it/400x400/
+:placeholder_image_500x500:                       https://placehold.it/500x500/
+
+:placeholder_image_100x600:                       https://placehold.it/100x600/
+:placeholder_image_200x600:                       https://placehold.it/200x600/
+:placeholder_image_300x600:                       https://placehold.it/300x600/
+:placeholder_image_400x600:                       https://placehold.it/400x600/
+:placeholder_image_500x600:                       https://placehold.it/500x600/
+
+:placeholder_kitten_100x100:                      https://placekitten.com/100/100/
+:placeholder_kitten_200x200:                      https://placekitten.com/200/200/
+:placeholder_kitten_300x300:                      https://placekitten.com/300/300/
+:placeholder_kitten_400x400:                      https://placekitten.com/400/400/
+:placeholder_kitten_500x500:                      https://placekitten.com/500/500/
+
+:placeholder_kitten_100x600:                      https://placekitten.com/100/600/
+:placeholder_kitten_200x600:                      https://placekitten.com/200/600/
+:placeholder_kitten_300x600:                      https://placekitten.com/300/600/
+:placeholder_kitten_400x600:                      https://placekitten.com/400/600/
+:placeholder_kitten_500x600:                      https://placekitten.com/500/600/
+
 end::urls[]
 
 

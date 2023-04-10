@@ -254,3 +254,48 @@ a.link-no-decoration:hover {
   }
 }
 */
+
+/* Slider Controls and Captions
+See: https://codepen.io/Svarnoy85/pen/NzQPpe
+-------------------------------------------------------------------------------- */
+.controls {
+  display: flex;
+  width: 100%;
+}
+
+.captions {
+  flex: 1;
+  width: 100px;
+  padding: 10px;
+  margin-top: 2px;
+  color: #7b7b7b;
+  background: #fff;
+}
+.caption {
+  outline: 0 !important;
+}
+
+.pagination {
+  display: flex;
+  margin-top: 2px;
+}
+.pagination__button {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ccc;
+  background: #fff;
+  width: 40px;
+  height: 40px;
+  margin-left: 2px;
+}
+.pagination__button:hover {
+  color: #fff;
+  background: #2aa1c0;
+}
+.pagination__button.slick-disabled {
+  cursor: not-allowed;
+  background: #ccc;
+  color: #fff;
+}

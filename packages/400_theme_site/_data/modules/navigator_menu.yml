@@ -367,6 +367,9 @@
       - title:                          Current Theme
         href:                           /pages/public/previewer/current_theme/
         icon:                           theme-light-dark
+      - title:                          Placeholder Images
+        href:                           /pages/public/previewer/placeholder_images/
+        icon:                           image
       - title:                          Slick
         href:                           /pages/public/previewer/slick/
         icon:                           view-carousel
