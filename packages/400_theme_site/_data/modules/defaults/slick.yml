@@ -61,13 +61,13 @@ defaults:
   lightbox:
     enabled:                            false
     type:                               slick                                   # only type 'slick' supported
+    caption:                            false
+    useHistoryApi:                      false
     background:                         rgba(0,0,0,.8)                          # slick lightbox options
     closeOnEscape:                      true
     closeOnBackdropClick:               true
     navigateByKeyboard:                 true
     destroyTimeout:                     500
-    src:                                src
-    itemSelector:                       .card img
     imageMaxHeight:                     0.9
     lazy:                               false
 

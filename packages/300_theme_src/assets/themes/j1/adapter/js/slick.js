@@ -28,15 +28,17 @@ regenerate:                             true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment         = site.environment %}
-{% assign blocks              = site.data.blocks %}
-{% assign modules             = site.data.modules %}
-{% assign template_config     = site.data.j1_config %}
+{% assign environment             = site.environment %}
+{% assign blocks                  = site.data.blocks %}
+{% assign modules                 = site.data.modules %}
+{% assign template_config         = site.data.j1_config %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign slick_defaults      = modules.defaults.slick.defaults %}
-{% assign slick_settings      = modules.slick.settings %}
+{% assign slick_defaults          = modules.defaults.slick.defaults %}
+{% assign slick_settings          = modules.slick.settings %}
+{% assign slick_lightbox_defaults = modules.defaults.slick.defaults.lightbox %}
+{% assign slick_lightbox_settings = modules.slick.settings.lightbox %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -84,6 +86,9 @@ j1.adapter.slick = (function (j1, window) {
   var logText;
   var slickDefaults;
   var slickSettings;
+  var slickLightboxDefaults;
+  var slickLightboxSettings;
+  var slickLightboxOptions;
   var slickOptions;
   var sliderOptions;
   var sliderSettings;
@@ -117,9 +122,12 @@ j1.adapter.slick = (function (j1, window) {
       }, options);
 
       // Load  module DEFAULTS|CONFIG
-      slickDefaults = $.extend({}, {{slick_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      slickSettings = $.extend({}, {{slick_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      slickOptions  = $.extend(true, {}, slickDefaults, slickSettings);
+      slickDefaults         = $.extend({}, {{slick_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      slickSettings         = $.extend({}, {{slick_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      slickLightboxDefaults = $.extend({}, {{slick_lightbox_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      slickLightboxSettings = $.extend({}, {{slick_lightbox_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      slickLightboxOptions  = $.extend(true, {}, slickLightboxDefaults, slickLightboxSettings);
+      slickOptions          = $.extend(true, {}, slickDefaults, slickSettings);
 
       // -----------------------------------------------------------------------
       // Global variable settings
@@ -203,15 +211,15 @@ j1.adapter.slick = (function (j1, window) {
                   logger.info('\n' + 'initialize lightbox on id: {{slider.id}}');
                   // See: http://mreq.github.io/slick-lightbox/demo/
                   $('#{{slider.id}}').slickLightbox({
-                    caption:                  'caption',
-                    useHistoryApi:            true,
-                    background:               'rgba(0,0,0,.8)',
-                    closeOnEscape:            true,
-                    closeOnBackdropClick:     true,
-                    navigateByKeyboard:       true,
-                    destroyTimeout:           500,
-                    imageMaxHeight:           0.9,
-                    lazy:                     false,
+                    caption:                  slickLightboxOptions.caption,
+                    useHistoryApi:            slickLightboxOptions.useHistoryApi,
+                    background:               slickLightboxOptions.background,
+                    closeOnEscape:            slickLightboxOptions.closeOnEscape,
+                    closeOnBackdropClick:     slickLightboxOptions.closeOnBackdropClick,
+                    navigateByKeyboard:       slickLightboxOptions.navigateByKeyboard,
+                    destroyTimeout:           slickLightboxOptions.destroyTimeout,
+                    imageMaxHeight:           slickLightboxOptions.imageMaxHeight,
+                    lazy:                     slickLightboxOptions.lazy,
                   });
                 }
               });

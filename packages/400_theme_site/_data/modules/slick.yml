@@ -25,6 +25,14 @@ description:
 settings:
   enabled:                              true
 
+  # ------------------------------------------------------------------------
+  # Global Lightbox options
+  #
+  lightbox:
+    enabled:                            true
+    caption:                            caption
+    background:                         false
+
   # ----------------------------------------------------------------------------
   # Slider settings
   # ----------------------------------------------------------------------------
@@ -147,6 +155,7 @@ settings:
       #
       lightbox:
         enabled:                        false
+        caption:                        caption
 
       # ------------------------------------------------------------------------
       # Slider options
@@ -227,8 +236,6 @@ settings:
       #
       lightbox:
         enabled:                        true
-        src:                            src
-        itemSelector:                   .card img
 
       # ------------------------------------------------------------------------
       # Slider options
