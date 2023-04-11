@@ -110,7 +110,7 @@ the navigation options like *Arrows* and *Dots*.
 slick::post_slider[]
 ----
 
-.Post Silder + Autoplay + Arrows
+.Post Silder + Autoplay + Arrows + Gutters
 slick::post_slider[role="mb-4"]
 
 .Configuration settings (YAML)
@@ -125,6 +125,7 @@ slick::post_slider[role="mb-4"]
   id:                               post_slider
   type:                             post
   group:                            Life
+  gutters:                          1
 
   # ----------------------------------------------------------------------------
   # Slider options
@@ -252,7 +253,7 @@ forth between images or select a specific image. Image sliders can also include
 animation effects, such as fade-in or slide-in transitions between images, to
 make the presentation more engaging and visually appealing.
 
-.Slider + Arrows + Dots + Gutter
+.Slider + Arrows + Dots + Gutters
 slick::image_slider[role="mb-5"]
 
 .Configuration settings (YAML)
@@ -268,7 +269,7 @@ slick::image_slider[role="mb-5"]
   type:                             image
   image_base_path:                  /assets/images/modules/gallery/mega_cities
   image_styles:                     img-fluid img-object--cover g-height-300
-  gutter:                           1
+  gutters:                          1
 
   # ----------------------------------------------------------------------------
   # Lightbox options
@@ -357,9 +358,9 @@ fired on all images of a slider if enabled:
   type:                             image
   image_base_path:                  /assets/images/modules/gallery/mega_cities
   styles:                           img-fluid img-object--cover g-height-400
-  gutter:                           0
+  gutters:                          0
 
-  # ------------------------------------------------------------------------
+  # ----------------------------------------------------------------------------
   # Caption options
   #
   captions:

@@ -95,9 +95,7 @@ exclude_from_search:                    true
         {% for post in site.posts %} {% if post.group contains grid.group %}
 
         <!-- resposive items: 3-2-1 -->
-        <!-- div class="col-lg-4 col-md-6 col-sm-12 px-{{grid.bs_gutter}} py-{{grid.bs_gutter}}" -->
-        <!-- div class="col-xl-{{grid.responsive.xl}} col-lg-{{grid.responsive.lg}} col-md-{{grid.responsive.md}} col-sm-{{grid.responsive.sm}} col-{{grid.responsive.xs}} px-{{grid.bs_gutter}} py-{{grid.bs_gutter}}" -->
-        <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{grid.bs_gutter}} py-{{grid.bs_gutter}}">
+        <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{grid.gutters}} py-{{grid.gutters}}">
           <article class="card bg-dark text-center text-white border-0 rounded-0">
             <img class="card-img img-object--cover g-height-300" src="{{post.image.path | relative_url}}" alt="{{post.title}}" style="filter: contrast(1) brightness(0.5);">
             <!-- div class="card-img-overlay" -->
@@ -114,8 +112,8 @@ exclude_from_search:                    true
                 {% for category in categories %}
                 {% if category contains post.category %}
                 <a  class="d-block text-white text-uppercase link-no-decoration"
-                    href="/pages/public/blog/navigator/archive/categoryview/#{{category | slugify}}"
-                    style="font-size: 24px;">{{category}}
+                    href="/pages/public/blog/navigator/archive/categoryview/#{{grid.group | slugify}}"
+                    style="font-size: 24px;">{{grid.group}}
                 </a>
                 {% endif %}
                 {% endfor %}
@@ -149,7 +147,7 @@ exclude_from_search:                    true
     <!-- Card Image Grid -->
     <div id="{{grid.id}}" class="{{grid.id | replace: '_','-' }} row g-0 mx-2">
       {% for image in grid.images %}
-      <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{grid.bs_gutter}} py-{{grid.bs_gutter}}">
+      <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{grid.gutters}} py-{{grid.gutters}}">
         <div class="card">
           {% if grid.lightbox.enabled %}
           <a href="{{grid.image_base_path}}/{{image.file}}"
@@ -174,7 +172,7 @@ exclude_from_search:                    true
     <!-- Image Grid -->
     <div id="{{grid.id}}" class="row g-0 mx-3 {{grid.id | replace: '_','-' }}">
       {% for image in grid.images %}
-      <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{grid.bs_gutter}} py-{{grid.bs_gutter}}">
+      <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{grid.gutters}} py-{{grid.gutters}}">
         <div class="nocard">
           {% if grid.lightbox.enabled %}
           <a href="{{grid.image_base_path}}/{{image.file}}"

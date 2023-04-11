@@ -114,7 +114,7 @@ masonry::post_series_example[role="mb-4"]
   id:                               post_series_example
   type:                             post
   group:                            Life
-  bs_gutter:                        1
+  gutters:                          1
 
   # ------------------------------------------------------------------------
   # Lightbox options
@@ -180,7 +180,7 @@ masonry::bs_image_cards_example[role="mb-4"]
   type:                             bs_image_cards
   image_base_path:                  /assets/images/modules/gallery/mega_cities
   image_styles:                     img-fluid img-object--cover g-height-300
-  bs_gutter:                        1                                       # [0 .. 5]
+  gutters:                          1
 
   # ------------------------------------------------------------------------
   # Lightbox options
@@ -244,7 +244,7 @@ masonry::image_grid_base_example[role="mb-4"]
   type:                             image_grid
   image_base_path:                  /assets/images/modules/gallery/mega_cities
   image_styles:                     img-fluid
-  bs_gutter:                        0
+  gutters:                          0
 
   # ------------------------------------------------------------------------
   # Lightbox options
@@ -306,7 +306,7 @@ masonry::image_grid_lightbox_example[role="mb-4"]
   type:                             image_grid
   image_base_path:                  /assets/images/modules/gallery/mega_cities
   image_styles:                     img-fluid
-  bs_gutter:                        1
+  gutters:                          1
 
   # ------------------------------------------------------------------------
   # Lightbox options

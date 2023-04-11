@@ -6,7 +6,7 @@ description: >
                                         living conditions that have evolved with technological
                                         advancements, urbanization, and globalization.
 
-categories:                             [ Life ]
+categories:                             [ Life, Series ]
 tags:                                   [ Health ]
 image:
   path:                                 /assets/images/parsa/posts/featured/post-5.jpg

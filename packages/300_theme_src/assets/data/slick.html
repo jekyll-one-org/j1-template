@@ -89,7 +89,7 @@ exclude_from_search:                    true
         {% for post in site.posts %}
         {% if post.group contains slider.group %}
         <!-- Collect data only if group matches -->
-        <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 pr-{{slider.gutter}}">
+        <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 pr-{{slider.options.gutters}}">
           <article class="card bg-dark text-center text-white border-0 rounded-0">
             <img class="card-img rounded-0 img-fluid w-100" src="{{post.image.path | relative_url}}" alt="{{post.title}}" style="filter: contrast(1) brightness(0.5);">
             <div class="card-img-overlay">
@@ -155,7 +155,7 @@ exclude_from_search:                    true
     <!-- Image slider -->
     <div id="{{slider.id}}" class="{{slider.id | replace: '_','-' }}">
       {% for slide in slider.slides %}
-      <div class="col-sm-6 col-lg-4 pr-{{slider.gutter}} mb-4">
+      <div class="col-sm-6 col-lg-4 pr-{{slider.options.gutters}} mb-4">
         <div class="card">
         {% if slider.lightbox.enabled %}
         <a class="card-link" href="{{slider.image_base_path}}/{{slide.image}}" data-caption="{{slide.caption}}" target="_blank">

@@ -227,19 +227,26 @@ j1.adapter.slick = (function (j1, window) {
                   });
                 } // END slider lightbox enabled
 
-                // correct top position for the arrows if captions are used
+                logger.info('\n' + 'adjust positions of arrows on id: {{slider.id}}');
+                var buttons = $("#{{slider.id}} > button");
+
+                // respect gutters for calculation
+                var percentage_right = 3 + sliderSettings.gutters;
+                $.each($(buttons), function(index, button) {
+                  if (button.textContent.includes("Next")) {
+                    $(button).attr('style','right: ' + percentage_right + '%');
+                  }
+                });
+                // correct top position for both arrows if captions are used
                 if ($('#{{slider.id}}_controls').length) {
                   logger.info('\n' + 'adjust top position of arrows on id: {{slider.id}}');
 
                   var buttons = $("#{{slider.id}} > button");
-                  setTimeout (function() {
-                    $.each($(buttons), function(index, button) {
-                      $(button).attr('style','top: 45%');
-                    });
-                  }, 100);
+                  $.each($(buttons), function(index, button) {
+                    $(button).attr('style','top: 45%');
+                  });
                 }
-
-              });
+              }); // END on slider init
 
               // setup the slider
               logger.info('\n' + 'slider is being setup on id: ' + '{{slider.id}}');

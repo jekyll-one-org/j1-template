@@ -39,7 +39,7 @@ settings:
       id:                               post_series_example
       type:                             post
       group:                            Life                                    # generate grid elements only for the group
-      bs_gutter:                        1                                       # [0 .. 5]
+      gutters:                          1                                       # [0 .. 5]
 
       # ------------------------------------------------------------------------
       # Lightbox options
@@ -66,7 +66,7 @@ settings:
       type:                             bs_image_cards
       image_base_path:                  /assets/images/modules/gallery/mega_cities
       image_styles:                     img-fluid img-object--cover g-height-300
-      bs_gutter:                        1                                       # [0 .. 5]
+      gutters:                          1                                       # [0 .. 5]
 
       # ------------------------------------------------------------------------
       # Lightbox options
@@ -122,7 +122,7 @@ settings:
       type:                             image_grid
       image_base_path:                  /assets/images/modules/gallery/mega_cities
       image_styles:                     img-fluid
-      bs_gutter:                        0                                       # [0 .. 5]
+      gutters:                          0                                       # [0 .. 5]
 
       # ------------------------------------------------------------------------
       # Lightbox options
@@ -178,7 +178,7 @@ settings:
       type:                             image_grid
       image_base_path:                  /assets/images/modules/gallery/mega_cities
       image_styles:                     img-fluid
-      bs_gutter:                        1                                       # [0 .. 5]
+      gutters:                          1                                       # [0 .. 5]
 
       # ------------------------------------------------------------------------
       # Lightbox options

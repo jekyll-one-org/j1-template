@@ -25,7 +25,7 @@ description:
 settings:
   enabled:                              true
 
-  # ------------------------------------------------------------------------
+  # ----------------------------------------------------------------------------
   # Global Lightbox options
   #
   lightbox:
@@ -33,7 +33,7 @@ settings:
     caption:                            caption
     background:                         false
 
-  # ------------------------------------------------------------------------
+  # ----------------------------------------------------------------------------
   # Caption options (Slider)
   #
   captions:
@@ -53,7 +53,6 @@ settings:
       id:                               post_slider
       type:                             post
       group:                            Life                                    # generate slides only for group (specified in article/post)
-      gutter:                           1                                       # 0 .. 3
 
       # ------------------------------------------------------------------------
       # Lightbox options
@@ -66,10 +65,11 @@ settings:
       #
       options:
         autoplay:                       true
-        slidesToShow:                   3
-        slidesToScroll:                 1
         arrows:                         true
         dots:                           false
+        gutters:                        1                                       # 0 .. 5
+        slidesToShow:                   3
+        slidesToScroll:                 1
         responsive:                     true                                    # enables reponsive options to generate breakpoint properties for slick()
 
       # ------------------------------------------------------------------------
@@ -152,7 +152,6 @@ settings:
       type:                             image
       image_base_path:                  /assets/images/modules/gallery/mega_cities
       image_styles:                     img-fluid img-object--cover g-height-300
-      gutter:                           1                                       # 0 .. 3
 
       # ------------------------------------------------------------------------
       # Lightbox options
@@ -165,10 +164,11 @@ settings:
       # Slider options
       #
       options:
+        autoplay:                       false
         arrows:                         true
         dots:                           true
+        gutters:                        1                                       # 0 .. 5
         speed:                          300
-        autoplay:                       false
         slidesToShow:                   2
         slidesToScroll:                 2
         responsive:                     true
@@ -228,7 +228,6 @@ settings:
       type:                             image
       image_base_path:                  /assets/images/modules/gallery/mega_cities
       image_styles:                     img-fluid img-object--cover g-height-400
-      gutter:                           0                                       # 0 .. 3
 
       # ------------------------------------------------------------------------
       # Caption options
@@ -246,10 +245,11 @@ settings:
       # Slider options
       #
       options:
+        autoplay:                       false
         arrows:                         true
         dots:                           true
+        gutters:                        0                                       # 0 .. 5
         speed:                          300
-        autoplay:                       false
         slidesToShow:                   2
         slidesToScroll:                 2
         responsive:                     true
