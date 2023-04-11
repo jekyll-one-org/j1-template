@@ -91,7 +91,7 @@ settings:
         pagePath:                       /pages/public/blog/navigator/page
         elementScroll:                  true
         scrollOffset:                   200
-        lastPage:                       4                                       # 1 page "equals" 2 posts
+        lastPage:                       1000000                                 # high number "means" ALL pages|posts to load
         infoLastPage:                   false
 
         lastPageInfo_en:                ""
