@@ -53,6 +53,7 @@ settings:
       id:                               post_slider
       type:                             post
       group:                            Life                                    # generate slides only for group (specified in article/post)
+      gutter:                           1                                       # 0 .. 3
 
       # ------------------------------------------------------------------------
       # Lightbox options
@@ -151,6 +152,7 @@ settings:
       type:                             image
       image_base_path:                  /assets/images/modules/gallery/mega_cities
       image_styles:                     img-fluid img-object--cover g-height-300
+      gutter:                           1                                       # 0 .. 3
 
       # ------------------------------------------------------------------------
       # Lightbox options
@@ -225,7 +227,8 @@ settings:
       id:                               image_slider_lightbox
       type:                             image
       image_base_path:                  /assets/images/modules/gallery/mega_cities
-      image_styles:                     img-fluid img-object--cover g-height-300
+      image_styles:                     img-fluid img-object--cover g-height-400
+      gutter:                           0                                       # 0 .. 3
 
       # ------------------------------------------------------------------------
       # Caption options

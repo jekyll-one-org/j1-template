@@ -268,6 +268,7 @@ slick::image_slider[role="mb-5"]
   type:                             image
   image_base_path:                  /assets/images/modules/gallery/mega_cities
   image_styles:                     img-fluid img-object--cover g-height-300
+  gutter:                           1
 
   # ----------------------------------------------------------------------------
   # Lightbox options
@@ -355,7 +356,8 @@ fired on all images of a slider if enabled:
   id:                               image_slider_lightbox
   type:                             image
   image_base_path:                  /assets/images/modules/gallery/mega_cities
-  styles:                           img-fluid img-object--cover g-height-300
+  styles:                           img-fluid img-object--cover g-height-400
+  gutter:                           0
 
   # ------------------------------------------------------------------------
   # Caption options

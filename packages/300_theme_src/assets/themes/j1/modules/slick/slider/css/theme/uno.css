@@ -39,6 +39,10 @@ h2.slide-item, h3.slide-item {
 
 /* Cards
 -------------------------------------------------------------------------------- */
+.card {
+  border: none !important;
+}
+
 .card [class*="header-"], .card [class*="content-"] {
   color: var(--bs-gray-400) !important;
 }
@@ -76,8 +80,8 @@ a.link-no-decoration:hover {
 
 .slick-arrow {
     position: absolute;                                                         /* position of the arrow */
-    margin-left: 20px;
-    margin-right: 20px;
+    /* margin-left: 20px; */
+    /* margin-right: 20px; */
     /* padding-top: 1.75rem; */
     z-index: 10;                                                                /* show on top of a slide */
 }
@@ -214,7 +218,7 @@ a.link-no-decoration:hover {
   }
 
   .slick-prev {
-  	left: 0%;
+  	left: 3%;
   }
 
   .slick-prev:before {
@@ -226,7 +230,7 @@ a.link-no-decoration:hover {
   }
 
   .slick-next {
-  	right: 0%;
+  	right: 3%;
   }
 
   .slick-next:before {

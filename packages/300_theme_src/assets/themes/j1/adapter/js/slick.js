@@ -209,6 +209,7 @@ j1.adapter.slick = (function (j1, window) {
 
               $('.{{slider.id | replace: '_','-' }}').on('init', function(event, slick) {
                 logger.info('\n' + 'slider initialized on id: {{slider.id}}');
+
                 if ({{slider.lightbox.enabled}}) {
                   logger.info('\n' + 'initialize lightbox on id: {{slider.id}}');
 
@@ -224,25 +225,25 @@ j1.adapter.slick = (function (j1, window) {
                     imageMaxHeight:           slickLightboxOptions.imageMaxHeight,
                     lazy:                     slickLightboxOptions.lazy,
                   });
+                } // END slider lightbox enabled
 
-                  // See: https://codepen.io/Svarnoy85/pen/NzQPpe
-                  // $(".captions").slick({
-                  //   asNavFor: '.slides',
-                  //   infinite: false,
-                  //   speed: 200,
-                  //   fade: true,
-                  //   appendArrows: $('.pagination'),
-                  //   prevArrow: '<div class="pagination__button"><i class="mdi mdi-18px mdi-arrow-left"></i></div>',
-                  //   nextArrow: '<div class="pagination__button"><i class="mdi mdi-18px mdi-arrow-right"></i></div>'
-                  // });
+                // correct top position for the arrows if captions are used
+                if ($('#{{slider.id}}_controls').length) {
+                  logger.info('\n' + 'adjust top position of arrows on id: {{slider.id}}');
 
+                  var buttons = $("#{{slider.id}} > button");
+                  setTimeout (function() {
+                    $.each($(buttons), function(index, button) {
+                      $(button).attr('style','top: 45%');
+                    });
+                  }, 100);
                 }
+
               });
 
               // setup the slider
               logger.info('\n' + 'slider is being setup on id: ' + '{{slider.id}}');
               $('.{{slider.id | replace: '_','-' }}').slick({
-//              asNavFor:                   '.captions',
                 accessibility:              sliderSettings.accessibility,
                 adaptiveHeight:             sliderSettings.adaptiveHeight,
                 arrows:                     sliderSettings.arrows,
