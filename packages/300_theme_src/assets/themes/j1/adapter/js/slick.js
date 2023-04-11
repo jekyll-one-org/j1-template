@@ -386,5 +386,9 @@ j1.adapter.slick = (function (j1, window) {
 })(j1, window);
 
 {% endcapture %}
-{{ cache | strip_empty_lines }}
+{% if production %}
+  {{ cache | minifyJS }}
+{% else %}
+  {{ cache | strip_empty_lines }}
+{% endif %}
 {% assign cache = nil %}

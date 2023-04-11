@@ -110,7 +110,7 @@ the navigation options like *Arrows* and *Dots*.
 slick::post_slider[]
 ----
 
-.Post Silder + Autoplay + Arrows (responsive)
+.Post Silder + Autoplay + Arrows
 slick::post_slider[role="mb-4"]
 
 .Configuration settings (YAML)
@@ -188,7 +188,7 @@ slider size and layout based on the screen size and orientation of the device.
 slick::example_slider_arrows_dots[role="mb-5"]
 ----
 
-.Example Silder using Arrows + Dots (responsive)
+.Example Silder using Arrows + Dots
 slick::example_slider_arrows_dots[role="mb-5"]
 
 .Configuration settings (YAML)
@@ -252,7 +252,7 @@ forth between images or select a specific image. Image sliders can also include
 animation effects, such as fade-in or slide-in transitions between images, to
 make the presentation more engaging and visually appealing.
 
-.Simple Slider + Arrows + Dots
+.Slider + Arrows + Dots + Gutter
 slick::image_slider[role="mb-5"]
 
 .Configuration settings (YAML)
