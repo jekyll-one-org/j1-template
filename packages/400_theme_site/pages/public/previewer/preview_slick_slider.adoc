@@ -125,17 +125,17 @@ slick::post_slider[role="mb-4"]
   id:                               post_slider
   type:                             post
   group:                            Life
-  gutters:                          1
 
   # ----------------------------------------------------------------------------
   # Slider options
   #
   options:
     autoplay:                       true
-    slidesToShow:                   3
-    slidesToScroll:                 1
     arrows:                         true
     dots:                           false
+    gutters:                        1
+    slidesToShow:                   3
+    slidesToScroll:                 1
     responsive:                     true
 
   # ----------------------------------------------------------------------------
@@ -208,10 +208,10 @@ slick::example_slider_arrows_dots[role="mb-5"]
   # Slider options
   #
   options:
+    autoplay:                       false
     arrows:                         true
     dots:                           true
     speed:                          300
-    autoplay:                       false
     slidesToShow:                   3
     slidesToScroll:                 1
     responsive:                     true
@@ -269,7 +269,6 @@ slick::image_slider[role="mb-5"]
   type:                             image
   image_base_path:                  /assets/images/modules/gallery/mega_cities
   image_styles:                     img-fluid img-object--cover g-height-300
-  gutters:                          1
 
   # ----------------------------------------------------------------------------
   # Lightbox options
@@ -281,10 +280,11 @@ slick::image_slider[role="mb-5"]
   # Slider options
   #
   options:
+    autoplay:                       false
     arrows:                         true
     dots:                           true
+    gutters:                        1
     speed:                          300
-    autoplay:                       false
     slidesToShow:                   2
     slidesToScroll:                 2
     responsive:                     true
@@ -358,7 +358,6 @@ fired on all images of a slider if enabled:
   type:                             image
   image_base_path:                  /assets/images/modules/gallery/mega_cities
   styles:                           img-fluid img-object--cover g-height-400
-  gutters:                          0
 
   # ----------------------------------------------------------------------------
   # Caption options
@@ -371,6 +370,19 @@ fired on all images of a slider if enabled:
   #
   lightbox:
     enabled:                        true
+
+  # ------------------------------------------------------------------------
+  # Slider options
+  #
+  options:
+    autoplay:                       false
+    arrows:                         true
+    dots:                           true
+    gutters:                        0
+    speed:                          300
+    slidesToShow:                   2
+    slidesToScroll:                 2
+    responsive:                     true
 
   # ----------------------------------------------------------------------------
   # Slides
