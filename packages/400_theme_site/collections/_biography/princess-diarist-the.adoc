@@ -10,10 +10,11 @@ description: >
                                         but in 1977, Carrie Fisher was just a (sort-of) regular
                                         teenager.
 
-image:                                  https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9780/5930/9780593077566.jpg
-
 categories:                             [ Book ]
 tags:                                   [ Biography, Actor ]
+
+image:
+  path:                                 https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9780/5930/9780593077566.jpg
 
 book:
   cover:                                https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9780/5930/9780593077566.jpg
@@ -26,8 +27,6 @@ book:
   ISBN13:                               9780593077566
   rank:                                 5690
 
-fab_menu_id:                            default
-scrollbar:                              false
 regenerate:                             false
 
 resources:                              [ animate ]

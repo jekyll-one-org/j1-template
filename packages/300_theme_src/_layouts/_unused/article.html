@@ -1,18 +1,65 @@
 ---
-layout:                                 default
+layout:                                 default                                 # base layout the page inherits GLOBAL content
+debug:                                  false                                   # enable|disable additional debug information written to (static) content source
 ---
 
-<!-- Content -->
-<section class="page-section" id="content">
-  <div class="container">
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item active" aria-current="page">{{page.category}}</li>
-    </ol>
-    <h2 class="section-heading text-uppercase">{{page.title}}</h2>
-    <div class="row">
-      <div class="col-md-12">
-        {{ content }}
-      </div>
-    </div>
+{% comment %}
+ # -----------------------------------------------------------------------------
+ #  ~/_layouts/article.html
+ #  Liquid layout template for all pages of the content-type ARTICLE
+ #
+ #  Product/Info:
+ #  https://jekyll.one
+ #
+ #  Copyright (C) 2023 Juergen Adams
+ #
+ #  J1 Theme is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ #
+ # -----------------------------------------------------------------------------
+ #  NOTE:
+ #    This is the layout for all content pages of type ARTICLE.
+ #    Layout ARTICLE is based on layout (base) DEFAULT to inherit all
+ #    default (HTML) data used for ALL pages.
+ # -----------------------------------------------------------------------------
+ #  NOTE:
+ #    Do NOT add any CONTENT here.
+ #    For J1 Theme, Liquid procedures are being used intensively. To load
+ #    HTML data for a region (lane), the (Liquid) procedure "content_writer"
+ #    places the components specified in the connected YAML data file
+ #    'article.yml' located in folder: ~/_data/layouts.
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  liquid_var:  {{ liquid_var | debug }}
+ #
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture default_writer %}themes/{{site.template.name}}/procedures/layouts/default_writer.proc{% endcapture %}
+{% capture content_writer %}themes/{{site.template.name}}/procedures/layouts/content_writer.proc{% endcapture %}
+
+{% comment %} Variables
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign lanes_collate = site.data.layouts.article.lanes %}
+
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+
+  {% comment %} Collect the BODY-HEADER region
+  ------------------------------------------------------------------------------ {% endcomment %}
+  <!-- [INFO   ] [j1.layout.article.html                  ] [ call default_writer for region: 'body-header' ] -->
+  <header id="header">
+    {% include  {{default_writer}} region='body-header' items=lanes_collate %}
+  </header>
+  <!-- [INFO   ] [j1.layout.article.html                  ] [ end processing default_writer for region: 'body-header' ] -->
+
+  {% comment %} Collect the BODY-MAIN region
+  ------------------------------------------------------------------------------ {% endcomment %}
+  <!-- [INFO   ] [j1.layout.article.html                  ] [ call content_writer for region: 'body-main' ] -->
+  <div id="content" class="container">
+    {% include  {{content_writer}} region='body-main' items=lanes_collate %}
   </div>
-</section>
+  <!-- [INFO   ] [j1.layout.article.html                  ] [ end processing content_writer forvregion: 'body-main' ] -->

@@ -11,7 +11,8 @@ description: >
 categories:                             [ Book ]
 tags:                                   [ Biography, Political, Journalism ]
 
-image:                                  https://images-na.ssl-images-amazon.com/images/I/414JfiBCutL.jpg
+image:
+  path:                                 https://images-na.ssl-images-amazon.com/images/I/414JfiBCutL.jpg
 
 book:
   cover:                                https://images-na.ssl-images-amazon.com/images/I/414JfiBCutL.jpg
@@ -24,8 +25,6 @@ book:
   ISBN13:                               978-3-442-31487-4
   rank:                                 817
 
-fab_menu_id:                            default
-scrollbar:                              false
 regenerate:                             false
 
 resources:                              [ animate ]

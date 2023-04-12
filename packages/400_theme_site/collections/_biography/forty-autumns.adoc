@@ -10,7 +10,8 @@ description: >
 categories:                             [ Book ]
 tags:                                   [ Biography, Historical ]
 
-image:                                  https://d20eq91zdmkqd.cloudfront.net/assets/images/book/large/9781/4087/9781408707265.jpg
+image:
+  path:                                 https://d20eq91zdmkqd.cloudfront.net/assets/images/book/large/9781/4087/9781408707265.jpg
 
 book:
   cover:                                https://d20eq91zdmkqd.cloudfront.net/assets/images/book/large/9781/4087/9781408707265.jpg
@@ -23,8 +24,6 @@ book:
   ISBN13:                               9781408707265
   rank:                                 106052
 
-fab_menu_id:                            default
-scrollbar:                              false
 regenerate:                             false
 
 resources:                              [ animate ]

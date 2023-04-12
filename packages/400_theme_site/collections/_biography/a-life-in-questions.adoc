@@ -10,7 +10,8 @@ description: >
 categories:                             [ Book ]
 tags:                                   [ Biography, Political, Journalism ]
 
-image:                                  https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9780/0081/9780008128302.jpg
+image:
+  path:                                 https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9780/0081/9780008128302.jpg
 
 book:
   cover:                                https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9780/0081/9780008128302.jpg
@@ -24,8 +25,6 @@ book:
   ISBN13:                               9780008128302
   rank:                                 16817
 
-fab_menu_id:                            default
-scrollbar:                              false
 regenerate:                             false
 
 resources:                              [ animate ]

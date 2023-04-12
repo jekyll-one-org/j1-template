@@ -10,7 +10,8 @@ description: >
 categories:                             [ Book ]
 tags:                                   [ Biography, Musician ]
 
-image:                                  https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/4711/9781471157790.jpg
+image:
+  path:                                 https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/4711/9781471157790.jpg
 
 book:
   cover:                                https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/4711/9781471157790.jpg
@@ -23,8 +24,6 @@ book:
   ISBN13:                               9781471157790
   rank:                                 23
 
-fab_menu_id:                            default
-scrollbar:                              false
 regenerate:                             false
 
 resources:                              [ animate ]

@@ -11,7 +11,8 @@ description: >
 categories:                             [ Book ]
 tags:                                   [ Biography, Medicine, Doctor ]
 
-image:                                  https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9781/8479/9781847923677.jpg
+image:
+  path:                                 https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9781/8479/9781847923677.jpg
 
 book:
   cover:                                https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9781/8479/9781847923677.jpg
@@ -24,8 +25,6 @@ book:
   ISBN13:                               9781847923677
   rank:                                 40
 
-fab_menu_id:                            default
-scrollbar:                              false
 regenerate:                             false
 
 resources:                              [ animate ]
