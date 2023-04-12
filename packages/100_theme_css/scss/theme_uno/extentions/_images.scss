@@ -28,6 +28,28 @@
 // (foreground) images
 // ------------------------------------------------------------------------------
 
+// The image keeps its original aspect ratio, but resized to max-width
+.img-object--w100 {
+    width: 100%;
+    max-width: 100px;
+}
+.img-object--w200 {
+    width: 100%;
+    max-width: 200px;
+}
+.img-object--w300 {
+    width: 100%;
+    max-width: 300px;
+}
+.img-object--w400 {
+    width: 100%;
+    max-width: 400px;
+}
+.img-object--w500 {
+    width: 100%;
+    max-width: 500px;
+}
+
 // The image keeps its original aspect ratio, but resized so that the
 // longest of either the height or width can fit in the given dimensions.
 .img-object--contain {

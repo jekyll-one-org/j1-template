@@ -268,15 +268,17 @@ exclude_from_search:                    true
                 ---------------------------------------------------------------- {% endcomment %}
 
                 {% if heading_position == 'left' %}
-                <h2 class="g-font-weight-500 mb-0 {{card_translate_description}}">{{card_title}}</h2>
-                <p class="tagline mb-0 card_translate_description">{{card_tagline}}</p>
-                <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-2"></div>
+                <div>
+                  <h2 class="g-font-weight-500 mb-0 {{card_translate_description}}">{{card_title}}</h2>
+                  <p class="tagline mb-0 {{card_translate_description}}">{{card_tagline}}</p>
+                  <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-2"></div>
+                </div>
                 {% endif%}
 
                 {% if heading_position == 'center' %}
                 <div class="text-center mb-2">
                 	<h2 class="mb-0 {{card_translate_description}}">{{card_title}}</h2>
-                	<p class="h4 mb-0 text-muted card_translate_description"><i>{{card_tagline}}</i></p>
+                	<p class="h4 mb-0 text-muted {{card_translate_description}}"><i>{{card_tagline}}</i></p>
                 	<div class="d-inline-block g-width-50 g-height-2 bg-primary mb-2"></div>
                 </div>
                 {% endif%}

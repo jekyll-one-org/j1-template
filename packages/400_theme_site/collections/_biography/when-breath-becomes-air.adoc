@@ -1,6 +1,4 @@
 ---
-layout:                                 collection
-
 title:                                  Paul Kalanithi
 tagline:                                Diagnosed with inoperable lung cancer
 date:                                   2023-01-27 00:00:00 +0100
@@ -10,8 +8,10 @@ description: >
                                         of thirty-six, on the verge of completing a decade’s training as
                                         a neurosurgeon, was diagnosed with inoperable lung cancer.
 
-categories:                             [ Book, Biography ]
-tags:                                   [ Medicine, Doctor ]
+categories:                             [ Book ]
+tags:                                   [ Biography, Medicine, Doctor ]
+
+image:                                  https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9781/8479/9781847923677.jpg
 
 book:
   cover:                                https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9781/8479/9781847923677.jpg

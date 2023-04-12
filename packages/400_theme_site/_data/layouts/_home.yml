@@ -305,6 +305,7 @@ lanes:
       path:                             templates
       file:                             portfolio.html
 
+
   # ----------------------------------------------------------------------------
   # SERVICE panel
   #
@@ -387,7 +388,7 @@ lanes:
   # ----------------------------------------------------------------------------
   #
   - lane:
-      enabled:                          true
+      enabled:                          false
       id:                               home_plan_panel
       region:                           body-main
       type:                             async

@@ -1,6 +1,4 @@
 ---
-layout:                                 collection
-
 title:                                  Not Dead Yet
 tagline:                                Phil Collins Autobiography
 date:                                   2023-01-27 00:00:00 +0100
@@ -9,8 +7,10 @@ description: >
                                         his marriages and divorces. This is the story of his epic career, from
                                         child actor to one of the most successful songwriters of the pop music era.
 
-categories:                             [ Book, Biography ]
-tags:                                   [ Musician ]
+categories:                             [ Book ]
+tags:                                   [ Biography, Musician ]
+
+image:                                  https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/7808/9781780895123.jpg
 
 book:
   cover:                                https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/7808/9781780895123.jpg

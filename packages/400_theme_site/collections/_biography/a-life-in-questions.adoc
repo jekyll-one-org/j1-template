@@ -1,5 +1,4 @@
 ---
-layout:                                 collection
 title:                                  A Life in Questions
 tagline:                                Memoirs from the legend of Newsnight
 date:                                   2023-01-27 00:00:00 +0100
@@ -8,8 +7,10 @@ description: >
                                         The witty, incisive and frank memoirs from the legend of Newsnight
                                         and long-standing quiz master of University Challenge.
 
-categories:                             [ Book, Biography ]
-tags:                                   [ Political, Journalism ]
+categories:                             [ Book ]
+tags:                                   [ Biography, Political, Journalism ]
+
+image:                                  https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9780/0081/9780008128302.jpg
 
 book:
   cover:                                https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9780/0081/9780008128302.jpg

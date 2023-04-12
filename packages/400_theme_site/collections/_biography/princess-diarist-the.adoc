@@ -1,5 +1,4 @@
 ---
-layout:                                 collection
 title:                                  The Princess Diarist
 tagline:                                One of the most famous film sets
 date:                                   2023-01-27 00:00:00 +0100
@@ -11,8 +10,10 @@ description: >
                                         but in 1977, Carrie Fisher was just a (sort-of) regular
                                         teenager.
 
-categories:                             [ Book, Biography ]
-tags:                                   [ Actor ]
+image:                                  https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9780/5930/9780593077566.jpg
+
+categories:                             [ Book ]
+tags:                                   [ Biography, Actor ]
 
 book:
   cover:                                https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9780/5930/9780593077566.jpg

@@ -1,5 +1,4 @@
 ---
-layout:                                 collection
 title:                                  Becoming
 tagline:                                Former First Lady of the USA
 date:                                   2023-01-27 00:00:00 +0100
@@ -9,8 +8,10 @@ description: >
                                         accomplishment, Michelle Obama has emerged as one of the
                                         most iconic and compelling women of our era.
 
-categories:                             [ Book, Biography ]
-tags:                                   [ Political, Journalism ]
+categories:                             [ Book ]
+tags:                                   [ Biography, Political, Journalism ]
+
+image:                                  https://images-na.ssl-images-amazon.com/images/I/414JfiBCutL.jpg
 
 book:
   cover:                                https://images-na.ssl-images-amazon.com/images/I/414JfiBCutL.jpg

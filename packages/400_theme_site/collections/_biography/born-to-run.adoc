@@ -1,5 +1,4 @@
 ---
-layout:                                 collection
 title:                                  Born to Run
 tagline:                                A legendary Rock Star’s Memoir
 date:                                   2023-01-27 00:00:00 +0100
@@ -8,8 +7,10 @@ description: >
                                         lovers and loners, artists, freaks or anyone who has ever
                                         wanted to be baptized in the holy river of rock and roll.
 
-categories:                             [ Book, Biography ]
-tags:                                   [ Musician ]
+categories:                             [ Book ]
+tags:                                   [ Biography, Musician ]
+
+image:                                  https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/4711/9781471157790.jpg
 
 book:
   cover:                                https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/4711/9781471157790.jpg
