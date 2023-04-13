@@ -57,6 +57,32 @@ settings:
         percentPosition:                true
 
     # --------------------------------------------------------------------------
+    # Collection Articles
+    #
+    - grid:
+      enabled:                          true
+
+      id:                               collection_articles_example
+      type:                             collection
+      collection:                       portfolio                               # generate grid elements (articles) for the collection
+      gutters:                          1                                       # [0 .. 5]
+
+      # ------------------------------------------------------------------------
+      # Lightbox options
+      #
+      lightbox:
+        enabled:                        false
+
+      # ------------------------------------------------------------------------
+      # Masonry options
+      #
+      options:
+        originTop:                      true
+        originLeft:                     true
+        initLayout:                     true
+        percentPosition:                true
+
+    # --------------------------------------------------------------------------
     # Bootstrap Card Images
     #
     - grid:

@@ -21,11 +21,11 @@
 
 {% comment %} Set collection data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign collection_name             = "biography" %}
+{% assign collection_name             = "portfolio" %}
 
 {% comment %} Set grid data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign grid_title                  = "Portfolio" %}
+{% assign grid_title                  = collection_name | capitalize %}
 {% assign grid_tagline                = "what i do" %}
 {% assign card_translate_description  = "notranslate" %}
 
@@ -46,7 +46,7 @@
 
     <!-- Grid Header -->
     <div class="mb-5">
-      <h2 class="g-font-weight-500 mb-0 {{card_translate_description}}">{{collection_name | capitalize}}</h2>
+      <h2 class="g-font-weight-500 mb-0 {{card_translate_description}}">{{grid_title}}</h2>
       <p class="tagline mb-0 {{card_translate_description}}"><b>{{grid_tagline}}</b></p>
       <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-2"></div>
     </div>

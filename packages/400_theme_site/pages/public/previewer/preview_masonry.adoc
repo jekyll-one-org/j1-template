@@ -80,6 +80,18 @@ most top position of your homepage as an eye-catcher.
 slick::post_slider[role="mb-4"]
 
 
+== Masonry Grid on Collections
+
+.Asciidoc configuration
+[source, config, role="noclip mb-3"]
+----
+masonry::collection_articles_example[role="mb-4"]
+----
+
+.Masonry Collection Grid
+masonry::collection_articles_example[role="mb-4"]
+
+
 == Masonry Grid on Posts
 
 J1 Masonry is easy to use and can be added to a webpage with just a few

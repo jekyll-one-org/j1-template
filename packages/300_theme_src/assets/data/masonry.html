@@ -141,6 +141,59 @@ exclude_from_search:                    true
       <!-- /Posts|Group -->
     {% endif %}
 
+
+    {% comment %} Collect collection grids
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% if grid.type == 'collection' %}
+
+    {% comment %} Set collection data
+    -------------------------------------------------------------------------------- {% endcomment %}
+    {% assign collection_name             = {{grid.collection}} %}
+
+    {% comment %} Set grid data
+    -------------------------------------------------------------------------------- {% endcomment %}
+    {% assign grid_title                  = collection_name | capitalize %}
+    {% assign card_translate_description  = "notranslate" %}
+
+    {% comment %} Collect collection documents
+    -------------------------------------------------------------------------------- {% endcomment %}
+    {% for collection in site.collections %}
+      {% if collection.label contains collection_name %}
+        {% assign articles = collection.docs %}
+        {% break %}
+      {% endif %}
+    {% endfor %}
+
+    <!-- Collection|Articles -->
+    <div id="{{grid.id}}" class="{{grid.id | replace: '_','-' }} row g-0 mx-2">
+      <!-- div class="row mb-5" -->
+        {% for article in articles %}
+        <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{grid.gutters}} py-{{grid.gutters}}">
+          <!-- Article item -->
+          <div class="article-item article-item--w400">
+            <a class="article-link" data-bs-toggle="modal" href="#articleModal{{forloop.index}}">
+              <div class="article-hover">
+                <div class="article-hover-content">
+                  <i class="mdi mdi-plus mdi-10x"></i>
+                </div>
+              </div>
+              <img class="img-fluid img-object--w400" src="{{article.image.path}}" alt="{{article.title}}" />
+            </a>
+            <div class="article-caption">
+              <div class="article-caption-heading">
+                <a class="card-link" href="{{article.url}}">{{article.title}}</a>
+              </div>
+              <div class="article-caption-subheading text-muted">{{article.tags[0]}}</div>
+            </div>
+          </div>
+          <!-- /Article item -->
+        </div>
+        {% endfor %}
+      <!-- /div -->
+    </div>
+    <!-- /Collection|Articles -->
+    {% endif %}
+
     {% comment %} Collect Bootrap Image Card Grids
     ---------------------------------------------------------------------------- {% endcomment %}
     {% if grid.type == 'bs_image_cards' %}
