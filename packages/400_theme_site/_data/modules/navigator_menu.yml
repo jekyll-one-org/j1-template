@@ -93,12 +93,6 @@
 # ------------------------------------------------------------------------------
 # TopLevel item FEATURES
 #
-- item:                                 Portfolio
-  href:                                 /#portfolio
-
-# ------------------------------------------------------------------------------
-# TopLevel item FEATURES
-#
 - item:                                 Features
   href:                                 /#home_intro_panel
 

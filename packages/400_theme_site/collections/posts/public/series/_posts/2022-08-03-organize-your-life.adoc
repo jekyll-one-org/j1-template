@@ -10,7 +10,7 @@ categories:                             [ Life, Series ]
 tags:                                   [ Technology ]
 
 image:
-  path:                                 /assets/images/parsa/posts/featured/post-3.jpg
+  path:                                 /assets/images/posts/featured/post-3.jpg
   width:                                1920
   height:                               1280
   alt:                                  Post Image
@@ -24,7 +24,7 @@ resource_options:
   - attic:
       padding_top:                      600
       slides:
-        - url:                          /assets/images/parsa/posts/featured/post-3.jpg
+        - url:                          /assets/images/posts/featured/post-3.jpg
           alt:                          Post Image
 ---
 
@@ -88,7 +88,7 @@ it is essential to strike a balance between embracing the benefits of modern
 living while also addressing its negative consequences.
 
 [role="mt-3 mb-5"]
-image::parsa/posts/post-img.jpg[{{page.tagline}}, width=1280]
+image::posts/post-img.jpg[{{page.tagline}}, width=1280]
 
 Five golden rules for Modern life:
 
