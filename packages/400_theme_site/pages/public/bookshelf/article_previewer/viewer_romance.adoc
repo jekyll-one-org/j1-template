@@ -5,8 +5,8 @@ date:                                   2023-01-29 00:00:00
 description: >
                                         Romance Literature in the Book Shelf
 
-categories:                             [ Romance, Collection ]
-tags:                                   [ Preview ]
+categories:                             [ Books ]
+tags:                                   [ Romance, Preview ]
 
 image:
   path:                                 /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
@@ -18,11 +18,13 @@ robots:
   index:                                false
   follow:                               false
 
+toc:                                    false
+fab_menu_id:                            default
 fab_menu_id:                            open_toc
 regenerate:                             false
 permalink:                              /pages/public/bookshelf/romance/
 
-resources:                              [ animate ]
+resources:                              [ animate, masonry ]
 resource_options:
   - attic:
       padding_top:                      600
@@ -65,13 +67,16 @@ readership.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-== Available articles
+== Available Books
 
 [role="mb-4"]
-Find below all available articles in the collection. The content is
+Find below all available articles in the `romance` collection. The content is
 automatically generated and taken from the articles this collection
 contains.
 
+masonry::collection_romance[role="mb-4"]
+
+////
 ++++
 <div class="row mb-4">
   <div class="col-md-12 col-xs-12">
@@ -79,3 +84,4 @@ contains.
   </div>
 </div>
 ++++
+////

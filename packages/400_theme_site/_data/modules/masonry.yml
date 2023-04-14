@@ -15,7 +15,7 @@
 # Description
 #
 description:
-  title:                                J1 Masonry
+  caption:                               J1 Masonry
   scope:                                User settings
   location:                             _data/modules/masonry.yml
 
@@ -56,15 +56,17 @@ settings:
         initLayout:                     true
         percentPosition:                true
 
+
     # --------------------------------------------------------------------------
-    # Collection Articles
+    # Collection Portfolio
     #
     - grid:
       enabled:                          true
 
-      id:                               collection_articles_example
+      id:                               collection_portfolio
       type:                             collection
       collection:                       portfolio                               # generate grid elements (articles) for the collection
+      translate_titles:                 false
       gutters:                          1                                       # [0 .. 5]
 
       # ------------------------------------------------------------------------
@@ -74,6 +76,12 @@ settings:
         enabled:                        false
 
       # ------------------------------------------------------------------------
+      # Preview options
+      #
+      preview:
+        enabled:                        true
+
+      # ------------------------------------------------------------------------
       # Masonry options
       #
       options:
@@ -81,6 +89,106 @@ settings:
         originLeft:                     true
         initLayout:                     true
         percentPosition:                true
+
+    # --------------------------------------------------------------------------
+    # Collection Biography
+    #
+    - grid:
+      enabled:                          true
+
+      id:                               collection_biography
+      type:                             collection
+      collection:                       biography                               # generate grid elements (articles) for the collection
+      translate_titles:                 false
+      gutters:                          1                                       # [0 .. 5]
+
+      # ------------------------------------------------------------------------
+      # Lightbox options
+      #
+      lightbox:
+        enabled:                        false
+
+      # ------------------------------------------------------------------------
+      # Preview options
+      #
+      preview:
+        enabled:                        true
+
+      # ------------------------------------------------------------------------
+      # Masonry options
+      #
+      options:
+        originTop:                      true
+        originLeft:                     true
+        initLayout:                     true
+        percentPosition:                true
+
+    # --------------------------------------------------------------------------
+    # Collection Fantasy
+    #
+    - grid:
+      enabled:                          true
+
+      id:                               collection_fantasy
+      type:                             collection
+      collection:                       fantasy                                 # generate grid elements (articles) for the collection
+#     translate_titles:                 false
+      gutters:                          1                                       # [0 .. 5]
+
+      # ------------------------------------------------------------------------
+      # Lightbox options
+      #
+      lightbox:
+        enabled:                        false
+
+      # ------------------------------------------------------------------------
+      # Preview options
+      #
+      preview:
+        enabled:                        true
+
+      # ------------------------------------------------------------------------
+      # Masonry options
+      #
+      options:
+        originTop:                      true
+        originLeft:                     true
+        initLayout:                     true
+        percentPosition:                true
+
+    # --------------------------------------------------------------------------
+    # Collection Romance
+    #
+    - grid:
+      enabled:                          true
+
+      id:                               collection_romance
+      type:                             collection
+#     translate_titles:                 true
+      collection:                       romance                                 # generate grid elements (articles) for the collection
+      gutters:                          1                                       # [0 .. 5]
+
+      # ------------------------------------------------------------------------
+      # Lightbox options
+      #
+      lightbox:
+        enabled:                        false
+
+      # ------------------------------------------------------------------------
+      # Preview options
+      #
+      preview:
+        enabled:                        true
+
+      # ------------------------------------------------------------------------
+      # Masonry options
+      #
+      options:
+        originTop:                      true
+        originLeft:                     true
+        initLayout:                     true
+        percentPosition:                true
+
 
     # --------------------------------------------------------------------------
     # Bootstrap Card Images
@@ -115,27 +223,27 @@ settings:
       images:
 
         - image:                        # image 1
-          title:                        Man posing at the rooftop of Jin Mao Tower Shanghai - China
+          caption:                      Man posing at the rooftop of Jin Mao Tower Shanghai - China
           file:                         denys-nevozhai-1_b.jpg
 
         - image:                        # image 2
-          title:                        Sunset over Taipei City - Taiwan
+          caption:                      Sunset over Taipei City - Taiwan
           file:                         thomas-tucker_b.jpg
 
         - image:                        # image 3
-          title:                        Chicago - United States
+          caption:                      Chicago - United States
           file:                         emmad-mazhari_b.jpg
 
         - image:                        # image 4
-          title:                        The Queen Bee at the Eureka Tower - Melbourne Southbank Australia
+          caption:                      The Queen Bee at the Eureka Tower - Melbourne Southbank Australia
           file:                         johan-mouchet_b.jpg
 
         - image:                        # image 5
-          title:                        Shanghai - China
+          caption:                      Shanghai - China
           file:                         federico-rizzarelli_b.jpg
 
         - image:                        # image 6
-          title:                        Shangri-La Hotel Jakarta - Indonesia
+          caption:                      Shangri-La Hotel Jakarta - Indonesia
           file:                         gints-gailis_b.jpg
 
     # --------------------------------------------------------------------------
@@ -171,27 +279,27 @@ settings:
       images:
 
         - image:                        # image 1
-          title:                        Man posing at the rooftop of Jin Mao Tower Shanghai - China
+          caption:                      Man posing at the rooftop of Jin Mao Tower Shanghai - China
           file:                         denys-nevozhai-1_b.jpg
 
         - image:                        # image 2
-          title:                        Sunset over Taipei City - Taiwan
+          caption:                      Sunset over Taipei City - Taiwan
           file:                         thomas-tucker_b.jpg
 
         - image:                        # image 3
-          title:                        Chicago - United States
+          caption:                      Chicago - United States
           file:                         emmad-mazhari_b.jpg
 
         - image:                        # image 4
-          title:                        The Queen Bee at the Eureka Tower - Melbourne Southbank Australia
+          caption:                      The Queen Bee at the Eureka Tower - Melbourne Southbank Australia
           file:                         johan-mouchet_b.jpg
 
         - image:                        # image 5
-          title:                        Shanghai - China
+          caption:                      Shanghai - China
           file:                         federico-rizzarelli_b.jpg
 
         - image:                        # image 6
-          title:                        Shangri-La Hotel Jakarta - Indonesia
+          caption:                      Shangri-La Hotel Jakarta - Indonesia
           file:                         gints-gailis_b.jpg
 
     # --------------------------------------------------------------------------
@@ -227,27 +335,27 @@ settings:
       images:
 
         - image:                        # image 1
-          title:                        Man posing at the rooftop of Jin Mao Tower Shanghai - China
+          caption:                      Man posing at the rooftop of Jin Mao Tower Shanghai - China
           file:                         denys-nevozhai-1_b.jpg
 
         - image:                        # image 2
-          title:                        Sunset over Taipei City - Taiwan
+          caption:                      Sunset over Taipei City - Taiwan
           file:                         thomas-tucker_b.jpg
 
         - image:                        # image 3
-          title:                        Chicago - United States
+          caption:                      Chicago - United States
           file:                         emmad-mazhari_b.jpg
 
         - image:                        # image 4
-          title:                        The Queen Bee at the Eureka Tower - Melbourne Southbank Australia
+          caption:                      The Queen Bee at the Eureka Tower - Melbourne Southbank Australia
           file:                         johan-mouchet_b.jpg
 
         - image:                        # image 5
-          title:                        Shanghai - China
+          caption:                      Shanghai - China
           file:                         federico-rizzarelli_b.jpg
 
         - image:                        # image 6
-          title:                        Shangri-La Hotel Jakarta - Indonesia
+          caption:                      Shangri-La Hotel Jakarta - Indonesia
           file:                         gints-gailis_b.jpg
 
 # ------------------------------------------------------------------------------

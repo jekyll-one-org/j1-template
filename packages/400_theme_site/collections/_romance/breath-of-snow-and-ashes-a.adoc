@@ -2,6 +2,18 @@
 title:                                  A Breath of Snow and Ashes
 tagline:                                Extraordinary story of 18th-century Scotsman Jamie Fraser
 date:                                   2016-11-24 00:00:00
+description: >
+                                        The year is 1772, and on the eve of the American Revolution, the long fuse of
+                                        rebellion has already been lit. Men lie dead in the streets of Boston, and
+                                        in the backwoods of North Carolina, isolated cabins burn in the forest. With
+                                        chaos brewing, the governor calls upon Jamie Fraser to unite the backcountry
+                                        and safeguard the colony for King and Crown.
+
+categories:                             [ Books ]
+tags:                                   [ Romance, Historical ]
+
+image:
+  path:                                 https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9780/4402/9780440225805.jpg
 
 book:
   cover:                                https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9780/4402/9780440225805.jpg
@@ -12,9 +24,6 @@ book:
   ISBN10:                               0440225809
   ISBN13:                               9780440225805
   rank:                                 844
-
-categories:                             [ Collection, Books ]
-tags:                                   [ Romance, Historical ]
 
 regenerate:                             false
 

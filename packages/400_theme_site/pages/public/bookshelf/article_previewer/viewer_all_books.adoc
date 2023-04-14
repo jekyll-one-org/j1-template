@@ -1,12 +1,14 @@
 ---
-title:                                  Fantasy
-tagline:                                Fantasy Literature
+title:                                  Bookshelf
+tagline:                                All Books
 date:                                   2023-01-29 00:00:00
 description: >
-                                        Fantasy Literature in the Book Shelf
+                                        Today's people is a collection contains the biography's
+                                        of celebrities well known by most of us. Find the books issued
+                                        by musicans, actors and more.
 
 categories:                             [ Books ]
-tags:                                   [ Fantasy, Preview ]
+tags:                                   [ Bookshelf ]
 
 image:
   path:                                 /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
@@ -14,14 +16,10 @@ image:
   height:                               1280
   alt:                                  Photo by Giammarco on Unsplash
 
-robots:
-  index:                                false
-  follow:                               false
-
-toc:                                    false
-fab_menu_id:                            default
+toc:                                    true
+fab_menu_id:                            open_toc
 regenerate:                             false
-permalink:                              /pages/public/bookshelf/fantasy/
+permalink:                              /pages/public/bookshelf/bookshelf/
 
 resources:                              [ animate, masonry ]
 resource_options:
@@ -41,7 +39,7 @@ resource_options:
 // Enable the Liquid Preprocessor
 :page-liquid:
 
-// Set (local) page attributes here
+// Set page (local) attributes here
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
 
@@ -54,33 +52,56 @@ resource_options:
 // -----------------------------------------------------------------------------
 {% include {{load_attributes}} scope="none" %}
 
+{% comment %} Debugging
+site.biography: {{ site.biography | debug }}
+-------------------------------------------------------------------------------- {% endcomment %}
+
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
+Find below all available articles in the Bookshelf. The content is
+automatically generated and taken from the articles of the `collections`
+the *Bookshelf* contains:
+
+* biography
+* fantasy
+* romance
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+== Biography
+
+A biography is a written account of a person's life, typically focusing on
+major achievements, events, and experiences. It can be a detailed record of
+a person's life, covering everything from their birth and childhood to their
+personal and professional accomplishments and even their death.
+
+[role="mb-4"]
+Biographies can be written by someone or someone else and found in various
+formats, including books, articles, and online sources. A biography aims to
+provide insight into a person's life, personality, and achievements and to
+inspire and inform readers about their accomplishments and contributions
+to society.
+
+masonry::collection_biography[role="mb-5"]
+
+== Fantasy
+
 The fantasy genre has become popular the past few years. Once a genre
 restricted to a few Tolkien fanatics and literature freaks, Fantasy has
 now gone mainstream in a big way, from the mega-popular Harry Potter series
 capturing the world's attention for a decade; brought Fantasy to readers of
 all ages.
 
-// Include sub-documents (if any)
-// -----------------------------------------------------------------------------
-== Available Books
+masonry::collection_fantasy[role="mb-5"]
 
-[role="mb-4"]
-Find below all available articles in the `fantasy` collection. The content is
-automatically generated and taken from the articles this collection
-contains.
+== Romance
 
-masonry::collection_fantasy[role="mb-4"]
+The romance genre is a popular category of books that consistently churns out
+bestsellers. The aim of the genre is simple, showcasing a love story where
+two people overcome adversity to obtain their happily ever after. According to
+the Romance Writers of America, women count for 82% percent of the genre’s
+readership.
 
-////
-++++
-<div class="row mb-4">
-  <div class="col-md-12 col-xs-12">
-    {% include {{create_collection_article_preview}} collection=site.fantasy %}
-  </div>
-</div>
-++++
-////
+masonry::collection_romance[role="mb-5"]

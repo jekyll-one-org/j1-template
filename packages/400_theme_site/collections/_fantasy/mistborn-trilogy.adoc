@@ -2,6 +2,17 @@
 title:                                  Mistborn Trilogy
 tagline:                                The Final Empire, the Well of Ascension, the Hero of Ages
 date:                                   2016-11-19 00:00:00
+description: >
+                                        A word of mouth bestseller in the USA Brandon Sanderson's Mistborn trilogy
+                                        have now become a massive hit in the UK, introducing readers to the work of
+                                        one of the genre's great talents. A master of world building, sweeping plots,
+                                        believable characters and engrossing magic systems.
+
+categories:                             [ Books ]
+tags:                                   [ Fantasy, Magic, Heroes ]
+
+image:
+  path:                                 https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/4732/9781473213692.jpg
 
 book:
   cover:                                https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/4732/9781473213692.jpg
@@ -12,9 +23,6 @@ book:
   ISBN10:                               147321369X
   ISBN13:                               9781473213692
   rank:                                 731
-
-categories:                             [ Collection, Books ]
-tags:                                   [ Fantasy, Magic, Heroes ]
 
 regenerate:                             false
 

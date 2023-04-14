@@ -65,6 +65,11 @@ It uses a unique algorithm to arrange elements vertically, then horizontally
 in the grid. The result is a visually appealing layout that works well with
 images and other content of varying sizes.
 
+J1 Masonry is easy to use and can be added to a webpage with just a few
+lines. The module provides a flexible configuration that allows developers
+to customize the layout, adjust the column width and gutter size, and add
+animations and other effects.
+
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 == Responsive Slider
@@ -82,28 +87,71 @@ slick::post_slider[role="mb-4"]
 
 == Masonry Grid on Collections
 
+J1 Masonry `collections grid` pulls content from a specific collection. All
+grids for collections display the *articles* a collection contains. Additionally,
+the article title and the (first) tag of an article are shown. All Masonry
+Grids for the J1 Theme can be easily customized in various ways, such as
+changing the number of posts displayed, the masonry speed, and other options.
+
 .Asciidoc configuration
 [source, config, role="noclip mb-3"]
 ----
-masonry::collection_articles_example[role="mb-4"]
+masonry::collection_biography[role="mb-4"]
 ----
 
-.Masonry Collection Grid
-masonry::collection_articles_example[role="mb-4"]
+A biography is a written account of a person's life, typically focusing on
+major achievements, events, and experiences. It can be a detailed record of
+a person's life, covering everything from their birth and childhood to their
+personal and professional accomplishments and even their death.
 
+[role="mb-4"]
+Biographies can be written by someone or someone else and found in various
+formats, including books, articles, and online sources. A biography aims to
+provide insight into a person's life, personality, and achievements and to
+inspire and inform readers about their accomplishments and contributions
+to society.
+
+.Masonry Collection Grid
+masonry::collection_biography[role="mb-4"]
+
+.Configuration settings (YAML)
+[source, yaml, role="noclip mb-4"]
+----
+# ------------------------------------------------------------------------------
+# Collection Biography
+#
+- grid:
+  enabled:                          true
+
+  id:                               collection_biography
+  type:                             collection
+  collection:                       biography
+  gutters:                          1
+
+  # ----------------------------------------------------------------------------
+  # Lightbox options
+  #
+  lightbox:
+    enabled:                        false
+
+  # ----------------------------------------------------------------------------
+  # Masonry options
+  #
+  options:
+    originTop:                      true
+    originLeft:                     true
+    initLayout:                     true
+    percentPosition:                true
+
+----
 
 == Masonry Grid on Posts
 
-J1 Masonry is easy to use and can be added to a webpage with just a few
-lines. The module provides a flexible configuration that allows developers
-to customize the layout, adjust the column width and gutter size, and add
-animations and other effects.
-
-[role="mb-4"]
-J1 Masonry posts grid pull content from a specific category. All Grids for posts
-display the post category, the post title, the author and date. All Masonry
-Grids for the J1 Theme can be easily customized in various ways, such as
-changing the number of posts displayed, the masonry speed, and other options.
+J1 Masonry `posts grid` pull content from a specific category. All Grids for
+posts display the post category, the post title, the author and date. All
+Masonry grids for the J1 Theme can be easily customized in various ways, such
+as changing the number of posts displayed, the masonry speed, and other
+options.
 
 .Asciidoc configuration
 [source, config, role="noclip mb-3"]

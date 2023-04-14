@@ -1,7 +1,20 @@
 ---
 title:                                  Harry Potter and the Deathly Hallows
-tagline:                                Lord Voldemort and the Death Eaters are not far ..
+tagline:                                Lord Voldemort and the Death Eaters ..
 date:                                   2016-11-17 00:00:00
+description: >
+                                        The Dark Lord is breathing fear into everything Harry loves, and to stop him
+                                        Harry will have to find and destroy the remaining Horcruxes. The final battle
+                                        must begin - Harry must stand and face his enemy. These new editions of the
+                                        classic and internationally bestselling, multi-award-winning series feature
+                                        instantly pick-up-able new jackets by Jonny Duddle, with huge child appeal,
+                                        to bring Harry Potter to the next generation of readers.
+
+categories:                             [ Books ]
+tags:                                   [ Fantasy, Magic, Harry, Potter ]
+
+image:
+  path:                                 https://d4rri9bdfuube.cloudfront.net/assets/images/book/large/9781/4088/9781408855713.jpg
 
 book:
   cover:                                https://d4rri9bdfuube.cloudfront.net/assets/images/book/large/9781/4088/9781408855713.jpg
@@ -12,9 +25,6 @@ book:
   ISBN10:                               1408855712
   ISBN13:                               9781408855713
   rank:                                 797
-
-categories:                             [ Collection, Books ]
-tags:                                   [ Fantasy, Magic, Harry, Potter ]
 
 regenerate:                             false
 

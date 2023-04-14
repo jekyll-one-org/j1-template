@@ -2,6 +2,17 @@
 title:                                  Sword of Destiny
 tagline:                                Geralt is a witcher ...
 date:                                   2016-11-21 00:00:00
+description: >
+                                        Geralt is a witcher, a man whose magic powers, enhanced by long training
+                                        and a mysterious elixir, have made him a brilliant fighter and a merciless
+                                        assassin. Yet he is no ordinary murderer: his targets are the multifarious
+                                        monsters and vile fiends that ravage the land and attack the innocent.
+
+categories:                             [ Books ]
+tags:                                   [ Fantasy, Thriller, Adventure, Knight ]
+
+image:
+  path:                                 https://d4rri9bdfuube.cloudfront.net/assets/images/book/large/9781/4732/9781473211544.jpg
 
 book:
   cover:                                https://d4rri9bdfuube.cloudfront.net/assets/images/book/large/9781/4732/9781473211544.jpg
@@ -12,9 +23,6 @@ book:
   ISBN10:                               1473211549
   ISBN13:                               9781473211544
   rank:                                 1305
-
-categories:                             [ Collection, Books ]
-tags:                                   [ Fantasy, Thriller, Adventure, Knight ]
 
 regenerate:                             false
 

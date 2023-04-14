@@ -7,8 +7,8 @@ description: >
                                         of celebrities well known by most of us. Find the books issued
                                         by musicans, actors and more.
 
-categories:                             [ Biography, Collection ]
-tags:                                   [ Preview ]
+categories:                             [ Books ]
+tags:                                   [ Biography, Preview ]
 
 image:
   path:                                 /assets/images/modules/attics/giammarco-boscaro-1920x1280.jpg
@@ -16,11 +16,12 @@ image:
   height:                               1280
   alt:                                  Photo by Giammarco on Unsplash
 
-fab_menu_id:                            open_toc
+toc:                                    false
+fab_menu_id:                            default
 regenerate:                             false
 permalink:                              /pages/public/bookshelf/biography/
 
-resources:                              [ animate ]
+resources:                              [ animate, masonry ]
 resource_options:
   - attic:
       padding_top:                      600
@@ -59,6 +60,19 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
+Find below all available articles the `Booskhelf` collections contains.
+The content is automatically generated and taken from the articles the
+collections contains.
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+== Available Books
+
+[role="mb-4"]
+Find below all available articles in the `biography` collection. The content
+is automatically generated and taken from the articles this collection
+contains.
+
 A biography is a written account of a person's life, typically focusing on
 major achievements, events, and experiences. It can be a detailed record of
 a person's life, covering everything from their birth and childhood to their
@@ -71,15 +85,9 @@ provide insight into a person's life, personality, and achievements and to
 inspire and inform readers about their accomplishments and contributions
 to society.
 
-// Include sub-documents (if any)
-// -----------------------------------------------------------------------------
-== Available articles
+masonry::collection_biography[role="notoc mb-4"]
 
-[role="mb-4"]
-Find below all available articles in the collection. The content is
-automatically generated and taken from the articles this collection
-contains.
-
+////
 ++++
 <div class="row mb-4">
   <div class="col-md-12 col-xs-12">
@@ -87,3 +95,4 @@ contains.
   </div>
 </div>
 ++++
+////

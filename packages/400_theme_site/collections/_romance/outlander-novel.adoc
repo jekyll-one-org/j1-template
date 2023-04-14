@@ -2,6 +2,18 @@
 title:                                  Outlander
 tagline:                                The Land and Lore of Scotland
 date:                                   2016-11-28 00:00:0
+description: >
+                                        In 1945, Claire Randall, a former combat nurse, is back from the war and
+                                        reunited with her husband on a second honeymoon--when she innocently touches
+                                        aboulder in one of the ancient stone circles that dot the British Isles.
+                                        Suddenly she is a Sassenach--an "outlander"--in a Scotland torn by war and
+                                        raiding border clans in the year of our Lord ... 1743.
+
+categories:                             [ Books ]
+tags:                                   [ Romance, Historical, Fiction ]
+
+image:
+  path:                                 https://d4rri9bdfuube.cloudfront.net/assets/images/book/large/9780/4402/9780440212560.jpg
 
 book:
   cover:                                https://d4rri9bdfuube.cloudfront.net/assets/images/book/large/9780/4402/9780440212560.jpg
@@ -12,9 +24,6 @@ book:
   ISBN10:                               0440212561
   ISBN13:                               9780440212560
   rank:                                 297
-
-categories:                             [ Collection, Books ]
-tags:                                   [ Romance, Historical, Fiction ]
 
 regenerate:                             false
 

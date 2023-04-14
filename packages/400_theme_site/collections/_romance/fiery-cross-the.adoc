@@ -2,6 +2,19 @@
 title:                                  The Fiery Cross
 tagline:                                Crossing the boundaries of genre, unrivalled storytelling
 date:                                   2016-11-26 00:00:00
+description: >
+                                        The story of Outlander begins just after the Second World War, when a British
+                                        field nurse named Claire Randall walks through a cleft stone in the Scottish
+                                        highlands and is transported back some two hundred years to 1743. Here, now,
+                                        is The Fiery Cross, the eagerly awaited fifth volume in this remarkable,
+                                        award-winning series of historical novels. The year is 1771, and war is
+                                        approaching. Jamie Fraser s wife has told him so.
+
+categories:                             [ Books ]
+tags:                                   [ Romance, Historical,  Fantasy, Fiction ]
+
+image:
+  path:                                 https://d20eq91zdmkqd.cloudfront.net/assets/images/book/large/9780/4402/9780440221661.jpg
 
 book:
   cover:                                https://d20eq91zdmkqd.cloudfront.net/assets/images/book/large/9780/4402/9780440221661.jpg
@@ -12,9 +25,6 @@ book:
   ISBN10:                               0440221668
   ISBN13:                               9780440221661
   rank:                                 820
-
-categories:                             [ Collection, Books ]
-tags:                                   [ Romance, Historical,  Fantasy, Fiction ]
 
 regenerate:                             false
 

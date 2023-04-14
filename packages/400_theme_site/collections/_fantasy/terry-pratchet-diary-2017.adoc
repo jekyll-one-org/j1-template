@@ -2,6 +2,17 @@
 title:                                  The Terry Pratchett Diary 2017
 tagline:                                Sir Terry Pratchett left us, far too early ...
 date:                                   2016-11-23 00:00:00
+description: >
+                                        Sir Terry Pratchett left us, far too early, in March 2015. To celebrate his
+                                        life and works, we've given over the 2017 Discworld Diary - which will be a
+                                        perennial diary - to remembrances and tributes from some of those who knew
+                                        and loved him and his extraordinary body of work.
+
+categories:                             [ Books ]
+tags:                                   [ Fantasy, Thrillers, Adventure, Knight ]
+
+image:
+  path:                                 https://d39ttiideeq0ys.cloudfront.net/assets/images/book/large/9781/4732/9781473208339.jpg
 
 book:
   cover:                                https://d39ttiideeq0ys.cloudfront.net/assets/images/book/large/9781/4732/9781473208339.jpg
@@ -12,9 +23,6 @@ book:
   ISBN10:                               1473208335
   ISBN13:                               9781473208339
   rank:                                 4576
-
-categories:                             [ Collection, Books ]
-tags:                                   [ Fantasy, Thrillers, Adventure, Knight ]
 
 regenerate:                             false
 

@@ -2,6 +2,19 @@
 title:                                  Harry Potter and the Philosopher's Stone
 tagline:                                Full-color illustrated hardback edition
 date:                                   2016-11-18 00:00:00
+description: >
+                                        When a letter arrives for unhappy but ordinary Harry Potter, a decade-old
+                                        secret is revealed to him that apparently he's the last to know. His parents
+                                        were wizards, killed by a Dark Lord's curse when Harry was just a baby, and
+                                        which he somehow survived. Leaving his unsympathetic aunt and uncle for
+                                        Hogwarts School of Witchcraft and Wizardry, Harry stumbles upon a sinister
+                                        mystery when he finds a three-headed dog guarding a room on the third floor.
+
+categories:                             [ Books ]
+tags:                                   [ Fantasy, Magic, Harry, Potter ]
+
+image:
+  path:                                 https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/4088/9781408845646.jpg
 
 book:
   cover:                                https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/4088/9781408845646.jpg
@@ -12,9 +25,6 @@ book:
   ISBN10:                               1408845644
   ISBN13:                               9781408845646
   rank:                                 39
-
-categories:                             [ Collection, Books ]
-tags:                                   [ Fantasy, Magic, Harry, Potter ]
 
 regenerate:                             false
 

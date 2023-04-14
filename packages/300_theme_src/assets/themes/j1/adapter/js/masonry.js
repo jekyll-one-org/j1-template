@@ -203,8 +203,16 @@ var logText;
                     // grid event handler
                     logger.info('\n' + 'install event handlers for grid on id: ' + '{{grid_id}}');
                     $grid_{{grid_id}}.on('layoutComplete', function() {
-                      // initializing (layout) completed
+                      // initializing (grid layout) completed
                       logger.debug('\n' + 'initializing layout completed for grid on id: ' + '{{grid_id}}');
+
+                      // correct position for artice modals (previwes)
+                      logger.debug('\n' + 'adjust positions of all modals on id: {{grid_id.id}}');
+                      var preview_modals = $("#{{grid_id}} > .article-modal");
+                      $.each($(preview_modals), function(index, modal) {
+                          $(modal).attr('style', 'left: 0%');
+                      });
+
                     });
 
                     // setup the grid

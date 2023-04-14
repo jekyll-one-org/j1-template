@@ -2,6 +2,17 @@
 title:                                  It Ends with Us
 tagline:                                Sometimes the one loves you is the one who hurts you the most
 date:                                   2016-11-27 00:00:00
+description: >
+                                        Lily hasn't always had it easy, but that's never stopped her from working
+                                        hard for the life she wants. She's come a long way from the small town in
+                                        Maine where she grew up - she graduated from college, moved to Boston, and
+                                        started her own business.
+
+categories:                             [ Books ]
+tags:                                   [ Romance, Historical, Tragic ]
+
+image:
+  path:                                 https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/4711/9781471156267.jpg
 
 book:
   cover:                                https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/4711/9781471156267.jpg
@@ -12,9 +23,6 @@ book:
   ISBN10:                               1471156265
   ISBN13:                               9781471156267
   rank:                                 355
-
-categories:                             [ Collection, Books ]
-tags:                                   [ Romance, Historical, Tragic ]
 
 regenerate:                             false
 

@@ -2,6 +2,16 @@
 title:                                  The Dressmaker
 tagline:                                An irresistible gothic tale of small-town revenge
 date:                                   2016-11-25 00:00:00
+description: >
+                                        Tilly Dunnage left her hometown of Dungatar in rural Australia under a black
+                                        cloud of accusation. Years later Tilly, now a couturier for the Paris fashion
+                                        houses, returns home to make amends with her mentally unstable mother.
+
+categories:                             [ Books ]
+tags:                                   [ Romance, Historical,  Fantasy, Fiction ]
+
+image:
+  path:                                 https://d20eq91zdmkqd.cloudfront.net/assets/images/book/large/9781/8466/9781846689949.jpg
 
 book:
   cover:                                https://d20eq91zdmkqd.cloudfront.net/assets/images/book/large/9781/8466/9781846689949.jpg
@@ -12,9 +22,6 @@ book:
   ISBN10:                               1846689945
   ISBN13:                               9781846689949
   rank:                                 80
-
-categories:                             [ Collection, Books ]
-tags:                                   [ Romance, Historical,  Fantasy, Fiction ]
 
 regenerate:                             false
 

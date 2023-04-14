@@ -2,6 +2,21 @@
 title:                                  Ready Player One
 tagline:                                It's the year 2044, and the real world has become an ugly place ..
 date:                                   2016-11-20 00:00:00
+description: >
+                                        Like most of humanity, Wade Watts escapes this depressing reality by spending
+                                        his waking hours jacked into the OASIS, a sprawling virtual utopia where you
+                                        can be anything you want to be, where you can live and play and fall in love
+                                        on any of ten thousand planets. And like most of humanity, Wade is obsessed
+                                        by the ultimate lottery ticket that lies concealed within this alternate
+                                        reality: OASIS founder James Halliday, who dies with no heir, has promised
+                                        that control of the OASIS - and his massive fortune - will go to the person
+                                        who can solve the riddles he has left scattered throughout his creation.
+
+categories:                             [ Books ]
+tags:                                   [ Fantasy, Thrillers, Adventure, Science, Fiction ]
+
+image:
+  path:                                 https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9780/0995/9780099560432.jpg
 
 book:
   cover:                                https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9780/0995/9780099560432.jpg
@@ -12,9 +27,6 @@ book:
   ISBN10:                               0099560437
   ISBN13:                               9780099560432
   rank:                                 142
-
-categories:                             [ Collection, Books ]
-tags:                                   [ Fantasy, Thrillers, Adventure, Science, Fiction ]
 
 regenerate:                             false
 
