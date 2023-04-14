@@ -148,7 +148,7 @@ exclude_from_search:                    true
 
     {% comment %} Set collection data
     -------------------------------------------------------------------------------- {% endcomment %}
-    {% assign collection_name             = {{grid.collection}} %}
+    {% assign collection_name             = grid.collection %}
 
     {% comment %} Set grid data
     -------------------------------------------------------------------------------- {% endcomment %}
@@ -167,7 +167,7 @@ exclude_from_search:                    true
     <!-- Collection|Articles -->
     <div id="{{grid.id}}" class="{{grid.id | replace: '_','-' }} row g-0 mx-2">
 
-      {% if {{grid.translate_titles}} %}
+      {% if grid.translate_titles %}
         {% assign translate = "" %}
       {% else %}
         {% assign translate = "notranslate" %}
@@ -177,17 +177,15 @@ exclude_from_search:                    true
       <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{grid.gutters}} py-{{grid.gutters}}">
         <!-- Article item -->
         <div id="{{article.title | downcase | replace: ' ' ,'_'}}" class="article-item article-item--w400">
-          {% if {{grid.preview.enabled}} %}
-          <div class="notoc">
-            <a class="article-link" data-bs-toggle="modal" href="#articleModal_{{grid.id}}_{{forloop.index}}">
-              <div class="article-hover">
-                <div class="article-hover-content">
-                  <i class="mdi mdi-plus mdi-10x"></i>
-                </div>
+          {% if grid.preview.enabled %}
+          <a class="article-link" data-bs-toggle="modal" href="#articleModal_{{grid.id}}_{{forloop.index}}">
+            <div class="article-hover">
+              <div class="article-hover-content">
+                <i class="mdi mdi-plus mdi-10x"></i>
               </div>
-              <img class="img-fluid img-object--w400" src="{{article.image.path}}" alt="{{article.title}}" />
-            </a>
-          </div>
+            </div>
+            <img class="img-fluid img-object--w400" src="{{article.image.path}}" alt="{{article.title}}" />
+          </a>
           {% else %}
           <img class="img-fluid img-object--w400" src="{{article.image.path}}" alt="{{article.title}}" />
           {% endif %}
@@ -202,7 +200,7 @@ exclude_from_search:                    true
       </div>
 
       <!-- Article Modal-->
-      {% if {{grid.preview.enabled}} %}
+      {% if grid.preview.enabled %}
       <div id="articleModal_{{grid.id}}_{{forloop.index}}" class="article-modal modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">

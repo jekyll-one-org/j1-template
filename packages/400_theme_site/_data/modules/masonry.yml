@@ -66,7 +66,7 @@ settings:
       id:                               collection_portfolio
       type:                             collection
       collection:                       portfolio                               # generate grid elements (articles) for the collection
-      translate_titles:                 false
+      translate_titles:                 false                                   # default: false
       gutters:                          1                                       # [0 .. 5]
 
       # ------------------------------------------------------------------------
@@ -99,7 +99,7 @@ settings:
       id:                               collection_biography
       type:                             collection
       collection:                       biography                               # generate grid elements (articles) for the collection
-      translate_titles:                 false
+      translate_titles:                 false                                   # default: false
       gutters:                          1                                       # [0 .. 5]
 
       # ------------------------------------------------------------------------
@@ -132,7 +132,7 @@ settings:
       id:                               collection_fantasy
       type:                             collection
       collection:                       fantasy                                 # generate grid elements (articles) for the collection
-#     translate_titles:                 false
+#     translate_titles:                 false                                   # default: false
       gutters:                          1                                       # [0 .. 5]
 
       # ------------------------------------------------------------------------
@@ -164,7 +164,7 @@ settings:
 
       id:                               collection_romance
       type:                             collection
-#     translate_titles:                 true
+#     translate_titles:                 true                                    # default: false
       collection:                       romance                                 # generate grid elements (articles) for the collection
       gutters:                          1                                       # [0 .. 5]
 
