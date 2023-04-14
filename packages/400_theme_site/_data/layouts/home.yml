@@ -303,7 +303,7 @@ lanes:
       type:                             sync
       base:                             _includes/custom
       path:                             templates
-      file:                             portfolio.html
+      file:                             collection.html
 
   # ----------------------------------------------------------------------------
   # SERVICE panel
