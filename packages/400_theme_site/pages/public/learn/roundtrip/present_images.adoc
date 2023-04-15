@@ -233,7 +233,8 @@ many images the show contains.
 .One Slide Carousel
 carousel::demo_oneslide[role="mb-4"]
 
-== J1 Slick Carousel
+
+== J1 Slick Carousels
 
 _Slick_ is a popular jQuery plugin for creating responsive and fully
 customizable carousels created by J1 Template. It allows developers to easily
@@ -252,7 +253,7 @@ of its flexibility, a rich set of callbacks and simple configuration to make
 carousels as individual and powerful as possible. Find by the following examples
 what Slick carousels can do.
 
-=== Image Carousel
+=== Slick Image Carousel
 
 [role="mb-4"]
 An _Slick_ image carousel typically consists of a container with images and
@@ -264,7 +265,7 @@ between images, to make the presentation more engaging and visually appealing.
 .Carousel + Arrows + Dots + Captions + Lightbox
 slick::image_carousel_mega_cities_lightbox[role="mb-5"]
 
-=== Carousel from Collections
+=== Slick Carousel from Collections
 
 A Carousel from a collection for J1 Template is a *pre-defined* carousel type
 to display collection articles on a webpage. It is a popular way to showcase a
@@ -282,8 +283,10 @@ slick::collection_carousel_biography[role="mb-3"]
 
 === More about Slick Carousels
 
+[role="mb-4"]
 If you're interested to learn more about _Slick_, go previewer page
 link:{url-j1-slick-previewer}[Slick Previewer, {browser-window--new}],
+
 
 == J1 Master Slider
 
