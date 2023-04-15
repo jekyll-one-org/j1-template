@@ -12,4 +12,4 @@
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
 */
-@charset 'UTF-8';.slick-lightbox-close{position:absolute;top:15px;right:15px;display:block;height:50px;width:70px;line-height:0;font-size:0;cursor:pointer;background:transparent;color:transparent;padding:0;border:0}.slick-lightbox-close:focus{outline:0}.slick-lightbox-close:before{font-family:"slick";font-size:70px;line-height:1;color:white;opacity:.85;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;content:'×'}
+@charset 'UTF-8';.slick-lightbox-close{right:15px;width:50px;cursor:pointer;background:transparent;color:transparent}.slick-lightbox-close:before{font-size:70px;line-height:.5 !important;color:white;opacity:.85;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}

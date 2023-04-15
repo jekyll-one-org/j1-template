@@ -15,32 +15,18 @@
 @charset 'UTF-8';
 
 .slick-lightbox-close {
-	position: absolute;
-	top: 15px;
 	right: 15px;
-	display: block;
-	height: 50px;
-	width: 70px;
-	line-height: 0;
-	font-size: 0;
+	width: 50px;
 	cursor: pointer;
 	background: transparent;
 	color: transparent;
-	padding: 0;
-	border: none
-}
-
-.slick-lightbox-close:focus {
-	outline: none
 }
 
 .slick-lightbox-close:before {
-	font-family: "slick";
 	font-size: 70px;
-	line-height: 1;
+	line-height: .5 !important;
 	color: white;
 	opacity: 0.85;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	content: '×'
 }
