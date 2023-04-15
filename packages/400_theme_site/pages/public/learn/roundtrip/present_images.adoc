@@ -144,6 +144,7 @@ LightGallery can do this by the following example.
 
 gallery::jg_old_times[ role="mb-4 wm-800" ]
 
+
 == J1 Carousel
 
 J1 Carousel is based on OWL Carousel V1 in the latest (and unfortunately
@@ -234,24 +235,18 @@ many images the show contains.
 carousel::demo_oneslide[role="mb-4"]
 
 
-== J1 Slick Carousels
-
-_Slick_ is a popular jQuery plugin for creating responsive and fully
-customizable carousels created by J1 Template. It allows developers to easily
-create beautiful and dynamic carousels that can display images, videos, or any
-other type of content in a visually appealing way.
-
-The plugin is designed to be lightweight, fast, and easy to use, making it a
-popular choice for all web developers. It has many features, including
-multiple navigation options, lazy loading, or autoplay. Slick carousels are
-compatible with all modern browsers and devices, making it a great choice to
-create a responsive and mobile-friendly website.
+== J1 Slick Carousel
 
 [role="mb-4"]
-The slider for J1 Template is a *best friend* for all web programmers because
-of its flexibility, a rich set of callbacks and simple configuration to make
-carousels as individual and powerful as possible. Find by the following examples
-what Slick carousels can do.
+_Slick_ is a popular jQuery plugin for creating responsive and fully
+customizable carousels. It allows developers to easily create beautiful
+and dynamic carousels that can display images, videos, or any other type
+of content in a visually appealing way. The plugin is designed to be
+lightweight, fast, and easy to use, making it a popular choice for all web
+developers. It has many features, including multiple navigation options,
+lazy loading, or autoplay. Slick carousels are compatible with all modern
+browsers and devices, making it a great choice to create a responsive and
+mobile-friendly website.
 
 === Slick Image Carousel
 
@@ -267,12 +262,10 @@ slick::image_carousel_mega_cities_lightbox[role="mb-5"]
 
 === Slick Carousel from Collections
 
-A Carousel from a collection for J1 Template is a *pre-defined* carousel type
-to display collection articles on a webpage. It is a popular way to showcase a
-collection visually.
-
 [role="mb-4"]
-Collection carousels pull content from a specific *collection*. All Carousels
+A carousel from a collection for J1 Template is a *pre-defined* carousel
+type to display collection *articles* on a webpage as a carousel. Collection
+carousels pull content from a specific *collection*. All Carousels
 for collections display the article image and a link to the article as a
 caption. All Slick carousels for the J1 Theme can be easily customized in
 various ways, such as changing the slider speed, or the navigation options
@@ -378,13 +371,14 @@ masterslider::ms_00009[role="mb-5"]
 
 === More about Master Slider
 
+[role="mb-5"]
 If you're interested to learn more about MS Slider, go for the following
 documents:
 
 * MS Slider link:{url-j1-masterslider-slider-previewer}[Previewer, {browser-window--new}]
 * MS Slider link:{url-j1-docs--masterslider-module}[Module documentation, {browser-window--new}]
 
-[role="mt-5"]
+
 == JustifiedGallery
 
 link:{url-justified-gallery--home}[JustifiedGallery, {browser-window--new}]

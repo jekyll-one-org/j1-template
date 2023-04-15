@@ -73,7 +73,7 @@ settings:
         dots:                           false
         gutters:                        1                                       # 0 .. 5
         slidesToShow:                   3
-        slidesToScroll:                 1
+        slidesToScroll:                 3
         responsive:                     true                                    # enables reponsive options to generate breakpoint properties for slick()
 
       # ------------------------------------------------------------------------
@@ -126,7 +126,7 @@ settings:
         dots:                           true
         gutters:                        1                                       # 0 .. 5
         slidesToShow:                   3
-        slidesToScroll:                 1
+        slidesToScroll:                 3
         responsive:                     true                                    # enables reponsive options to generate breakpoint properties for slick()
 
       # ------------------------------------------------------------------------
@@ -179,7 +179,7 @@ settings:
         dots:                           false
         gutters:                        1                                       # 0 .. 5
         slidesToShow:                   3
-        slidesToScroll:                 1
+        slidesToScroll:                 3
         responsive:                     true                                    # enables reponsive options to generate breakpoint properties for slick()
 
       # ------------------------------------------------------------------------
@@ -229,10 +229,10 @@ settings:
       options:
         autoplay:                       false
         arrows:                         true
-        dots:                           false
+        dots:                           true
         gutters:                        1                                       # 0 .. 5
         slidesToShow:                   3
-        slidesToScroll:                 1
+        slidesToScroll:                 3
         responsive:                     true                                    # enables reponsive options to generate breakpoint properties for slick()
 
       # ------------------------------------------------------------------------
@@ -278,10 +278,10 @@ settings:
       # Carousel options
       #
       options:
-        autoplay:                       true
+        autoplay:                       false
         arrows:                         true
         dots:                           false
-        gutters:                        4                                       # 0 .. 5
+        gutters:                        1                                       # 0 .. 5
         slidesToShow:                   3
         slidesToScroll:                 1
         responsive:                     true                                    # enables reponsive options to generate breakpoint properties for slick()

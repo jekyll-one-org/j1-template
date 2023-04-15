@@ -37,8 +37,8 @@ exclude_from_search:                    true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config     = site.data.j1_config %}
-{% assign modules             = site.data.modules %}
+{% assign template_config       = site.data.j1_config %}
+{% assign modules               = site.data.modules %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -78,7 +78,7 @@ exclude_from_search:                    true
 {% for carousel in carousels %}
   {% if carousel.enabled %}
 
-  {% comment %} Generate HTML portion for all sliders (enabled)
+  {% comment %} Generate HTML portion for all sliders enabled
   ------------------------------------------------------------------------------ {% endcomment %}
 
     {% comment %} Collect Collection Carousels
@@ -94,7 +94,7 @@ exclude_from_search:                    true
       {% for collection in site.collections %}
         {% if collection.label contains collection_name %}
           {% assign articles     = collection.docs %}
-          {% assign num_articles = collection.docs | size | minus:4 %}
+          {% assign num_articles = articles | size %}
           {% break %}
         {% endif %}
       {% endfor %}
@@ -102,50 +102,46 @@ exclude_from_search:                    true
       <!-- Articles -->
       <div id="{{carousel.id}}" class="{{carousel.id | replace: '_','-' }}">
 
-        {% for article in articles %}
+        {% if article in articles == num_articles %}
+          {% break %}
+        {% endif %}
 
-          {% comment %} DEBUG
-          ----------------------------------------------------------------------
-          {% if forloop.index == num_articles %}
-            num_articles:  {{num_articles | debug}}
-            forloop.index: {{forloop.index | debug}}
-            {% break %}
-          {% endif %}
-          ---------------------------------------------------------------------- {% endcomment %}
+        {% if forloop.index ==  %}
+        {% endif %}
 
-          {% if carousel.translate_links %}
-            {% assign translate = "" %}
-          {% else %}
-            {% assign translate = "notranslate" %}
-          {% endif %}
+        {% if carousel.translate_links %}
+          {% assign translate = "" %}
+        {% else %}
+          {% assign translate = "notranslate" %}
+        {% endif %}
 
-          {% if carousel.link_new_window %}
-            {% assign target = "_blank" %}
-          {% else %}
-            {% assign target = "" %}
-          {% endif %}
+        {% if carousel.link_new_window %}
+          {% assign target = "_blank" %}
+        {% else %}
+          {% assign target = "" %}
+        {% endif %}
 
-          <!-- Article slide -->
-          <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 pr-{{carousel.options.gutters}}">
+        <!-- Article slide -->
+        <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 pr-{{carousel.options.gutters}}">
 
-            <div id="{{article.title | downcase | replace: ' ' ,'_'}}" class="article-item">
-              <img class="{{carousel.image_styles}}" src="{{article.image.path}}" alt="{{article.title}}" />
-              <!-- Article link (caption) -->
-              <div id="{{carousel.id}}_controls" class="controls">
-                <div class="captions">
-                  <div class="caption">
-                    <a class="card-link {{translate}}"
-                       href="{{article.url}}"
-                       target="{{target}}">
-                       {{article.tags[0]}}&nbsp;&middot;&nbsp;{{article.title}}
-                    </a>
-                  </div>
+          <div id="{{article.title | downcase | replace: ' ' ,'_'}}" class="article-item">
+            <img class="{{carousel.image_styles}}" src="{{article.image.path}}" alt="{{article.title}}" />
+            <!-- Article link (caption) -->
+            <div id="{{carousel.id}}_controls" class="controls">
+              <div class="captions">
+                <div class="caption">
+                  <a class="card-link {{translate}}"
+                     href="{{article.url}}"
+                     target="{{target}}">
+                     {{article.tags[0]}}&nbsp;&middot;&nbsp;{{article.title}}
+                  </a>
                 </div>
               </div>
-              <!-- /Article link -->
             </div>
+            <!-- /Article link -->
           </div>
-          <!-- /Article slide -->
+        </div>
+        <!-- /Article slide -->
 
         {% endfor %}
 
@@ -177,7 +173,7 @@ exclude_from_search:                    true
           <article class="card bg-dark text-center text-white border-0 rounded-0">
             <img class="card-img rounded-0 img-fluid w-100" src="{{post.image.path | relative_url}}" alt="{{post.title}}" style="filter: contrast(1) brightness(0.5);">
             <div class="card-img-overlay">
-              <div class="card-content mt-4">
+              <div class="card-content mt-6">
                 {% if post %}
                   {% assign categories = post.categories %}
                 {% else %}
@@ -197,7 +193,7 @@ exclude_from_search:                    true
                 {% endif %}
                 {% endfor %}
 
-                <ul class="list-inline d-flex justify-content-center mb-3">
+                <ul class="list-inline d-flex justify-content-center mb-5">
         					<li class="list-inline-item">
                     <i class="mdi mdi-account md-gray-400 mdi-24px mr-1" style="margin-right: 8px;"></i>
                     {{site.author.name | split: ' ' | first}} &nbsp;&middot;&nbsp;&nbsp;
@@ -252,7 +248,6 @@ exclude_from_search:                    true
         {% if carousel.captions.enabled %}
         <div id="{{carousel.id}}_controls" class="controls">
           <div class="captions">
-            <!-- div class="caption">{{slide.caption | truncate: 80}}</div -->
             <div class="caption">{{slide.caption}}</div>
           </div>
         </div>

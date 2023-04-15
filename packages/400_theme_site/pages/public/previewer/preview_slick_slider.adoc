@@ -144,7 +144,7 @@ slick::collection_carousel_biography[role="mb-3"]
     dots:                           true
     gutters:                        1
     slidesToShow:                   3
-    slidesToScroll:                 1
+    slidesToScroll:                 3
     responsive:                     true
 
   # ----------------------------------------------------------------------------
@@ -168,6 +168,7 @@ slick::collection_carousel_biography[role="mb-3"]
         slidesToShow:               1
         slidesToScroll:             1
 ----
+
 
 == Carousel from Posts
 
