@@ -8,7 +8,7 @@ exclude_from_search:                    true
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/assets/data/slick.html
- # Liquid procedure to generate the HTML portion for all Slick Carousels
+ # Liquid procedure to generate the HTML portion for all Silick Sliders
  # configured
  #
  # Product/Info:
@@ -42,14 +42,14 @@ exclude_from_search:                    true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment           = site.environment %}
-{% assign carousel_defaults     = modules.defaults.slick.defaults %}
-{% assign carousel_settings     = modules.slick.settings %}
+{% assign environment         = site.environment %}
+{% assign slider_defaults     = modules.defaults.slick.defaults %}
+{% assign slider_settings     = modules.slick.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign carousel_options      = carousel_defaults | merge: carousel_settings %}
-{% assign carousels             = carousel_settings.carousels %}
+{% assign slider_options      = slider_defaults | merge: slider_settings %}
+{% assign sliders             = slider_settings.sliders %}
 
 {% comment %} Configure permalink settings
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -67,29 +67,29 @@ exclude_from_search:                    true
 
 {% comment %} Main
 ================================================================================ {% endcomment %}
-<!-- [INFO   ] [~/assets/data/slick.html                      ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
+<!-- [INFO   ] [~/assets/data/masterslider.html               ]  [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
   <meta name="robots" content="noindex, nofollow" />
 </head>
 
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
-<!-- [INFO   ] [~/assets/data/slick.html                      ]   [collect all carousel items] -->
-{% for carousel in carousels %}
-  {% if carousel.enabled %}
+<!-- [INFO   ] [~/assets/data/masterslider.html               ]  [collect all slider items] -->
+{% for slider in sliders %}
+  {% if slider.enabled %}
 
   {% comment %} Generate HTML portion for all sliders (enabled)
   ------------------------------------------------------------------------------ {% endcomment %}
 
-    {% comment %} Collect Collection Carousels
+    {% comment %} Collect Collection Sliders
     ---------------------------------------------------------------------------- {% endcomment %}
-    {% if carousel.type == 'collection' %}
+    {% if slider.type == 'collection' %}
 
-      {% comment %} Set Collection data
+      {% comment %} Set collection data
       -------------------------------------------------------------------------- {% endcomment %}
-      {% assign collection_name  = carousel.collection %}
+      {% assign collection_name             = slider.collection %}
 
-      {% comment %} Collect Collection documents
+      {% comment %} Collect collection documents
       -------------------------------------------------------------------------- {% endcomment %}
       {% for collection in site.collections %}
         {% if collection.label contains collection_name %}
@@ -99,71 +99,64 @@ exclude_from_search:                    true
       {% endfor %}
 
       <!-- Articles -->
-      <div id="{{carousel.id}}" class="{{carousel.id | replace: '_','-' }}">
+      <div id="{{slider.id}}" class="{{slider.id | replace: '_','-' }}">
 
         {% for article in articles %}
 
-          {% if carousel.translate_links %}
-            {% assign translate = "" %}
-          {% else %}
-            {% assign translate = "notranslate" %}
-          {% endif %}
-
-          {% if carousel.link_new_window %}
-            {% assign target = "_blank" %}
-          {% else %}
-            {% assign target = "" %}
-          {% endif %}
-
-          <!-- Article slide -->
-          <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 pr-{{carousel.options.gutters}}">
-
-            <div id="{{article.title | downcase | replace: ' ' ,'_'}}" class="article-item">
-              <img class="{{carousel.image_styles}}" src="{{article.image.path}}" alt="{{article.title}}" />
-              <!-- Article link (caption) -->
-              <div id="{{carousel.id}}_controls" class="controls">
-                <div class="captions">
-                  <div class="caption">
-                    <a class="card-link {{translate}}"
-                       href="{{article.url}}"
-                       target="{{target}}">
-                       {{article.tags[0]}}&nbsp;&middot;&nbsp;{{article.title}}
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <!-- /Article link -->
-            </div>
-          </div>
-          <!-- /Article slide -->
-
-        {% endfor %}
-
-      </div>
-      <!-- /Articles -->
-    {% endif %}
-
-    {% comment %} Collect Post Carousels
-    ---------------------------------------------------------------------------- {% endcomment %}
-    {% if carousel.type == 'post' %}
-      <!-- Posts -->
-      <div id="{{carousel.id}}" class="{{carousel.id | replace: '_','-' }}">
-        {% for post in site.posts %}
-        {% if post.group contains carousel.group %}
-
-        {% if carousel.translate_links %}
+        {% if slider.translate_links %}
           {% assign translate = "" %}
         {% else %}
           {% assign translate = "notranslate" %}
         {% endif %}
 
-        {% if carousel.link_new_window %}
+        {% if slider.link_new_window %}
+          {% assign target = "_blank" %}
+        {% else %}
+          {% assign target = "" %}
+        {% endif %}
+
+        <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 pr-{{slider.options.gutters}}">
+          <!-- Article item -->
+          <div id="{{article.title | downcase | replace: ' ' ,'_'}}" class="article-item article-item--w400">
+            <!-- img class="img-fluid img-object--w400" src="{{article.image.path}}" alt="{{article.title}}" -->
+            <img class="{{slider.image_styles}}" src="{{article.image.path}}" alt="{{article.title}}" />
+            <div class="article-caption">
+              <div class="article-caption-heading">
+                <a class="card-link {{translate}}" href="{{article.url}}" target="{{target}}">{{article.title}}</a>
+              </div>
+              <!-- div class="article-caption-subheading text-muted">{{article.tags[0]}}</div -->
+            </div>
+          </div>
+          <!-- /Article item -->
+
+        </div>
+        {% endfor %}
+
+      </div>
+
+    {% endif %}
+
+    {% comment %} Collect Post Sliders
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% if slider.type == 'post' %}
+      <!-- Posts -->
+      <div id="{{slider.id}}" class="{{slider.id | replace: '_','-' }}">
+        {% for post in site.posts %}
+        {% if post.group contains slider.group %}
+
+        {% if slider.translate_links %}
+          {% assign translate = "" %}
+        {% else %}
+          {% assign translate = "notranslate" %}
+        {% endif %}
+
+        {% if slider.link_new_window %}
           {% assign target = "_blank" %}
         {% else %}
           {% assign target = "" %}
         {% endif %}
         <!-- Collect data only if group matches -->
-        <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 pr-{{carousel.options.gutters}}">
+        <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 pr-{{slider.options.gutters}}">
           <article class="card bg-dark text-center text-white border-0 rounded-0">
             <img class="card-img rounded-0 img-fluid w-100" src="{{post.image.path | relative_url}}" alt="{{post.title}}" style="filter: contrast(1) brightness(0.5);">
             <div class="card-img-overlay">
@@ -213,12 +206,12 @@ exclude_from_search:                    true
     <!-- /Posts -->
     {% endif %}
 
-    {% comment %} Collect Example Carousels
+    {% comment %} Collect Example Sliders
     ---------------------------------------------------------------------------- {% endcomment %}
-    {% if carousel.type == 'example' %}
+    {% if slider.type == 'example' %}
     <!-- Example slider -->
-    <div id="{{carousel.id}}" class="{{carousel.id | replace: '_','-' }}">
-      {% for i in (1..carousel.slides) %}
+    <div id="{{slider.id}}" class="{{slider.id | replace: '_','-' }}">
+      {% for i in (1..slider.slides) %}
       <div>
         <h3 class="slide-item notoc">{{i}}</h3>
       </div>
@@ -227,32 +220,32 @@ exclude_from_search:                    true
     <!-- /Example slider -->
     {% endif %}
 
-    {% comment %} Collect Image Carousels
+    {% comment %} Collect Image Sliders
     ---------------------------------------------------------------------------- {% endcomment %}
-    {% if carousel.type == 'image' %}
+    {% if slider.type == 'image' %}
     <!-- Image slider -->
-    <div id="{{carousel.id}}" class="{{carousel.id | replace: '_','-' }}">
-      {% for slide in carousel.slides %}
-      <div class="col-sm-6 col-lg-4 pr-{{carousel.options.gutters}}">
+    <div id="{{slider.id}}" class="{{slider.id | replace: '_','-' }}">
+      {% for slide in slider.slides %}
+      <div class="col-sm-6 col-lg-4 pr-{{slider.options.gutters}} mb-4">
         <div class="card">
-        {% if carousel.lightbox.enabled %}
-        <a class="card-link" href="{{carousel.image_base_path}}/{{slide.image}}" data-caption="{{slide.caption}}" target="_blank">
-          <img class="{{carousel.image_styles}}" src="{{carousel.image_base_path}}/{{slide.image}}" alt="{{slide.caption}}">
+        {% if slider.lightbox.enabled %}
+        <a class="card-link" href="{{slider.image_base_path}}/{{slide.image}}" data-caption="{{slide.caption}}" target="_blank">
+          <img class="{{slider.image_styles}}" src="{{slider.image_base_path}}/{{slide.image}}" alt="{{slide.caption}}">
         </a>
-        {% if carousel.captions.enabled %}
-        <div id="{{carousel.id}}_controls" class="controls">
+        {% if slider.captions.enabled %}
+        <div id="{{slider.id}}_controls" class="controls">
           <div class="captions">
             <div class="caption">{{slide.caption}}</div>
           </div>
         </div>
         {% endif %}
         {% else %}
-        <img id="{{carousel.id}}_image_{{forloop.index}}" class="{{carousel.image_styles}}" src="{{carousel.image_base_path}}/{{slide.image}}" alt="{{slide.caption}}">
+        <img id="{{forloop.index}}" class="{{slider.image_styles}}" src="{{slider.image_base_path}}/{{slide.image}}" alt="{{slide.caption}}">
         {% endif %}
         </div>
       </div>
       {% endfor %}
-      {% if carousel.captions.enabled %}
+      {% if slider.captions.enabled %}
       <!--div class="pagination"></div -->
       {% endif %}
     </div>
@@ -261,7 +254,7 @@ exclude_from_search:                    true
 
   {% endif %}
 {% endfor %}
-<!-- [INFO   ] [~/assets/data/slick.html                      ] [end collecting all carousel items] -->
+<!-- [INFO   ] [~/assets/data/slick.html               ]  [end collecting all slider items] -->
 
 {% endcapture %}
 

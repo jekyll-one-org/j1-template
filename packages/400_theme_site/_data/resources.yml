@@ -1955,6 +1955,7 @@ resources:
       data:
         css:                            [
                                           modules/slick/lightbox/css/slick-lightbox,
+                                          modules/slick/lightbox/css/theme/uno,
                                           modules/slick/slider/css/slick,
                                           modules/slick/slider/css/theme/uno
                                         ]

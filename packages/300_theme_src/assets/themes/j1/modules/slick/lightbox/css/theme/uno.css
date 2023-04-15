@@ -1,0 +1,46 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/assets/themes/j1/modules/slick/lightbox/css/theme/uno.css
+ # Provides Slicks styles for J1 Theme Uno
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+@charset 'UTF-8';
+
+.slick-lightbox-close {
+	position: absolute;
+	top: 15px;
+	right: 15px;
+	display: block;
+	height: 50px;
+	width: 70px;
+	line-height: 0;
+	font-size: 0;
+	cursor: pointer;
+	background: transparent;
+	color: transparent;
+	padding: 0;
+	border: none
+}
+
+.slick-lightbox-close:focus {
+	outline: none
+}
+
+.slick-lightbox-close:before {
+	font-family: "slick";
+	font-size: 70px;
+	line-height: 1;
+	color: white;
+	opacity: 0.85;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	content: '×'
+}

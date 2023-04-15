@@ -90,7 +90,7 @@ exclude_from_search:                    true
     ---------------------------------------------------------------------------- {% endcomment %}
     {% if grid.type == 'post' %}
       <!-- Posts|Group -->
-      <div id="{{grid.id}}" class="{{grid.id | replace: '_','-' }} row g-0 mx-2">
+      <div id="{{grid.id}}" class="{{grid.id | replace: '_','-' }} row g-0">
         <!-- Collect posts only if group matches -->
         {% for post in site.posts %} {% if post.group contains grid.group %}
 
@@ -148,12 +148,7 @@ exclude_from_search:                    true
 
     {% comment %} Set collection data
     -------------------------------------------------------------------------------- {% endcomment %}
-    {% assign collection_name             = grid.collection %}
-
-    {% comment %} Set grid data
-    -------------------------------------------------------------------------------- {% endcomment %}
-    {% assign grid_title                  = collection_name | capitalize %}
-    {% assign card_translate_description  = "notranslate" %}
+    {% assign collection_name   = grid.collection %}
 
     {% comment %} Collect collection documents
     -------------------------------------------------------------------------------- {% endcomment %}
@@ -165,7 +160,7 @@ exclude_from_search:                    true
     {% endfor %}
 
     <!-- Collection|Articles -->
-    <div id="{{grid.id}}" class="{{grid.id | replace: '_','-' }} row g-0 mx-2">
+    <div id="{{grid.id}}" class="{{grid.id | replace: '_','-' }} row g-0">
 
       {% if grid.translate_titles %}
         {% assign translate = "" %}
@@ -257,7 +252,7 @@ exclude_from_search:                    true
     ---------------------------------------------------------------------------- {% endcomment %}
     {% if grid.type == 'bs_image_cards' %}
     <!-- Card Image Grid -->
-    <div id="{{grid.id}}" class="{{grid.id | replace: '_','-' }} row g-0 mx-2">
+    <div id="{{grid.id}}" class="{{grid.id | replace: '_','-' }} row g-0">
       {% for image in grid.images %}
       <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{grid.gutters}} py-{{grid.gutters}}">
         <div class="card">

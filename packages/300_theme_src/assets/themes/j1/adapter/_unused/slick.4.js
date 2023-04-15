@@ -82,7 +82,7 @@ regenerate:                             true
 j1.adapter.slick = (function (j1, window) {
   var environment               = '{{environment}}';
   var responsiveSettings        = [];
-  var carouselResponsiveSettings  = [];
+  var sliderResponsiveSettings  = [];
   var _this;
   var logger;
   var logText;
@@ -92,8 +92,8 @@ j1.adapter.slick = (function (j1, window) {
   var slickLightboxSettings;
   var slickLightboxOptions;
   var slickOptions;
-  var carouselOptions;
-  var carouselSettings;
+  var sliderOptions;
+  var sliderSettings;
 
   // ---------------------------------------------------------------------------
   // Helper functions
@@ -108,12 +108,12 @@ j1.adapter.slick = (function (j1, window) {
     // Initializer
     // -------------------------------------------------------------------------
     init: function (options) {
-      var xhrLoadState                = 'pending';                              // (initial) load state for the HTML portion of the carousel
+      var xhrLoadState                = 'pending';                              // (initial) load state for the HTML portion of the slider
       var load_dependencies           = {};                                     // dynamic variable
-      var carouselResponsiveSettingsOBJ = {};                                     // initial object for responsive settings
+      var sliderResponsiveSettingsOBJ = {};                                     // initial object for responsive settings
       var dependency;
-      var carouselResponsiveSettingsYAML;
-      var carouselResponsiveSettingsSTRING;
+      var sliderResponsiveSettingsYAML;
+      var sliderResponsiveSettingsSTRING;
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -141,9 +141,9 @@ j1.adapter.slick = (function (j1, window) {
       logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
-      // load HTML portion for all carousels
-      console.debug('loading HTML portion for all carousels configured');
-      _this.loadCarouselHTML(slickOptions, slickOptions.carousels);
+      // load HTML portion for all sliders
+      console.debug('loading HTML portion for all sliders configured');
+      _this.loadSliderHTML(slickOptions, slickOptions.sliders);
 
       // -----------------------------------------------------------------------
       // initializer
@@ -154,67 +154,67 @@ j1.adapter.slick = (function (j1, window) {
 
         if ( j1.getState() === 'finished' && pageVisible ) {
 
-          {% for carousel in slick_settings.carousels %} {% if carousel.enabled %}
-          logger.info('\n' + 'carousel is being initialized on id: ' + '{{carousel.id}}');
+          {% for slider in slick_settings.sliders %} {% if slider.enabled %}
+          logger.info('\n' + 'slider is being initialized on id: ' + '{{slider.id}}');
 
-          {% if carousel.options.responsive %}
-          logger.info('\n' + 'collect responsive settings for carousel on id: ' + '{{carousel.id}}');
-          // collect breakpoint settings from carousel config
-          responsiveSettings = $.extend({}, {{carousel.responsive | replace: 'nil', 'null' | replace: '=>', ':' }});
-          // generate carousel breakpoint settings as YAML data structure
-          carouselResponsiveSettings  = '[' ;
+          {% if slider.options.responsive %}
+          logger.info('\n' + 'collect responsive settings for slider on id: ' + '{{slider.id}}');
+          // collect breakpoint settings from slider config
+          responsiveSettings = $.extend({}, {{slider.responsive | replace: 'nil', 'null' | replace: '=>', ':' }});
+          // generate slider breakpoint settings as YAML data structure
+          sliderResponsiveSettings  = '[' ;
           for (const [obj_key, obj_value] of Object.entries(responsiveSettings)) {
             var length = Object.keys(obj_value.settings).length;
             var count = 0;
             for (const [key, value] of Object.entries(obj_value.settings)) {
               count++;
               if (key == 'breakOn' && count == 1) {
-                carouselResponsiveSettings += '  {' ;
-                carouselResponsiveSettings += '    breakpoint: ' + value + ',' ;
-                carouselResponsiveSettings += '    settings: {' ;
+                sliderResponsiveSettings += '  {' ;
+                sliderResponsiveSettings += '    breakpoint: ' + value + ',' ;
+                sliderResponsiveSettings += '    settings: {' ;
               } else {
-                carouselResponsiveSettings += '      ' + key + ': ' + value + ',' ;
+                sliderResponsiveSettings += '      ' + key + ': ' + value + ',' ;
               }
               // close current breakpoint element
               if (count == length) {
-                carouselResponsiveSettings += '    }' ;
-                carouselResponsiveSettings += '  },' ;
+                sliderResponsiveSettings += '    }' ;
+                sliderResponsiveSettings += '  },' ;
               }
             }
           } // End generate breakpoint YAML elements
 
           // close breakpoint YAML data
-          carouselResponsiveSettings += ']';
+          sliderResponsiveSettings += ']';
           {% endif %}
 
           // create dynamic loader variable|s
-          dependency = 'dependencies_met_html_loaded_{{carousel.id}}';
+          dependency = 'dependencies_met_html_loaded_{{slider.id}}';
           load_dependencies[dependency] = '';
 
-          // initialize carousel if HTML portion successfully loaded
-          load_dependencies['dependencies_met_html_loaded_{{carousel.id}}'] = setInterval (function (options) {
-            // check if HTML portion of the carousel is loaded successfully (loadcarouselHTML)
-            xhrLoadState = j1.xhrDOMState['#{{carousel.id}}_parent'];
+          // initialize slider if HTML portion successfully loaded
+          load_dependencies['dependencies_met_html_loaded_{{slider.id}}'] = setInterval (function (options) {
+            // check if HTML portion of the slider is loaded successfully (loadSliderHTML)
+            xhrLoadState = j1.xhrDOMState['#{{slider.id}}_parent'];
             if ( xhrLoadState === 'success' ) {
 
-              // collect general carousel settings
-              carouselOptions  = $.extend({}, {{carousel.options | replace: 'nil', 'null' | replace: '=>', ':' }});
-              carouselSettings = $.extend(true, {}, slickDefaults, carouselOptions );
+              // collect general slider settings
+              sliderOptions  = $.extend({}, {{slider.options | replace: 'nil', 'null' | replace: '=>', ':' }});
+              sliderSettings = $.extend(true, {}, slickDefaults, sliderOptions );
 
-              // convert carousel responsive settings to object (carouselResponsiveSettingsOBJ)
-              carouselResponsiveSettingsYAML    = yaml.loadAll(carouselResponsiveSettings, 'utf8');
-              carouselResponsiveSettingsOBJ     = carouselResponsiveSettingsYAML[0];
-              carouselResponsiveSettingsSTRING  = JSON.stringify(carouselResponsiveSettingsOBJ, null, 4);
-              logger.debug('\n' + 'responsive settings on carousel id #{{carousel.id}}: ' + '\n' + carouselResponsiveSettingsSTRING);
+              // convert slider responsive settings to object (sliderResponsiveSettingsOBJ)
+              sliderResponsiveSettingsYAML    = yaml.loadAll(sliderResponsiveSettings, 'utf8');
+              sliderResponsiveSettingsOBJ     = sliderResponsiveSettingsYAML[0];
+              sliderResponsiveSettingsSTRING  = JSON.stringify(sliderResponsiveSettingsOBJ, null, 4);
+              logger.debug('\n' + 'responsive settings on slider id #{{slider.id}}: ' + '\n' + sliderResponsiveSettingsSTRING);
 
-              $('.{{carousel.id | replace: '_','-' }}').on('init', function(event, slick) {
-                logger.info('\n' + 'carousel initialized on id: {{carousel.id}}');
+              $('.{{slider.id | replace: '_','-' }}').on('init', function(event, slick) {
+                logger.info('\n' + 'slider initialized on id: {{slider.id}}');
 
-                if ({{carousel.lightbox.enabled}}) {
-                  logger.info('\n' + 'initialize lightbox on id: {{carousel.id}}');
+                if ({{slider.lightbox.enabled}}) {
+                  logger.info('\n' + 'initialize lightbox on id: {{slider.id}}');
 
                   // See: http://mreq.github.io/slick-lightbox/demo/
-                  $('#{{carousel.id}}').slickLightbox({
+                  $('#{{slider.id}}').slickLightbox({
                     caption:                  slickLightboxOptions.caption,
                     useHistoryApi:            slickLightboxOptions.useHistoryApi,
                     background:               slickLightboxOptions.background,
@@ -225,80 +225,80 @@ j1.adapter.slick = (function (j1, window) {
                     imageMaxHeight:           slickLightboxOptions.imageMaxHeight,
                     lazy:                     slickLightboxOptions.lazy,
                   });
-                } // END carousel lightbox enabled
+                } // END slider lightbox enabled
 
-                logger.info('\n' + 'adjust positions of arrows on id: {{carousel.id}}');
-                var buttons = $("#{{carousel.id}} > button");
+                logger.info('\n' + 'adjust positions of arrows on id: {{slider.id}}');
+                var buttons = $("#{{slider.id}} > button");
 
                 // respect gutters for calculation
-                var percentage_right = 3 + carouselSettings.gutters;
+                var percentage_right = 3 + sliderSettings.gutters;
                 $.each($(buttons), function(index, button) {
                   if (button.textContent.includes("Next")) {
                     $(button).attr('style','right: ' + percentage_right + '%');
                   }
                 });
                 // correct top position for both arrows if captions are used
-                if ($('#{{carousel.id}}_controls').length) {
-                  logger.info('\n' + 'adjust top position of arrows on id: {{carousel.id}}');
+                if ($('#{{slider.id}}_controls').length) {
+                  logger.info('\n' + 'adjust top position of arrows on id: {{slider.id}}');
 
-                  var buttons = $("#{{carousel.id}} > button");
+                  var buttons = $("#{{slider.id}} > button");
                   $.each($(buttons), function(index, button) {
                     $(button).attr('style','top: 45%');
                   });
                 }
-              }); // END on carousel init
+              }); // END on slider init
 
-              // setup the carousel
-              logger.info('\n' + 'carousel is being setup on id: ' + '{{carousel.id}}');
-              $('.{{carousel.id | replace: '_','-' }}').slick({
-                accessibility:              carouselSettings.accessibility,
-                adaptiveHeight:             carouselSettings.adaptiveHeight,
-                arrows:                     carouselSettings.arrows,
-                autoplay:                   carouselSettings.autoplay,
-                autoplaySpeed:              carouselSettings.autoplaySpeed,
-                centerMode:                 carouselSettings.centerMode,
-                centerPadding:              carouselSettings.centerPadding,
-                cssEase:                    carouselSettings.cssEase,
-                dots:                       carouselSettings.dots,
-                dotsClass:                  carouselSettings.dotsClass,
-                draggable:                  carouselSettings.draggable,
-                easing:                     carouselSettings.easing,
-                edgeFriction:               carouselSettings.edgeFriction,
-                fade:                       carouselSettings.fade,
-                focusOnSelect:              carouselSettings.focusOnSelect,
-                focusOnChange:              carouselSettings.focusOnChange,
-                infinite:                   carouselSettings.infinite,
-                initialSlide:               carouselSettings.initialSlide,
-                lazyLoad:                   carouselSettings.lazyLoad,
-                mobileFirst:                carouselSettings.mobileFirst,
-                pauseOnDotsHover:           carouselSettings.pauseOnDotsHover,
-                pauseOnFocus:               carouselSettings.pauseOnFocus,
-                pauseOnHover:               carouselSettings.pauseOnHover,
-                respondTo:                  carouselSettings.respondTo,
-                rows:                       carouselSettings.rows,
-                rtl:                        carouselSettings.rtl,
-                slide:                      carouselSettings.slide,
-                slidesPerRow:               carouselSettings.slidesPerRow,
-                slidesToScroll:             carouselSettings.slidesToScroll,
-                slidesToShow:               carouselSettings.slidesToShow,
-                speed:                      carouselSettings.speed,
-                swipe:                      carouselSettings.swipe,
-                swipeToSlide:               carouselSettings.swipeToSlide,
-                touchMove:                  carouselSettings.touchMove,
-                touchThreshold:             carouselSettings.touchThreshold,
-                useCSS:                     carouselSettings.useCSS,
-                useTransform:               carouselSettings.useTransform,
-                variableWidth:              carouselSettings.variableWidth,
-                vertical:                   carouselSettings.vertical,
-                verticalSwiping:            carouselSettings.verticalSwiping,
-                waitForAnimate:             carouselSettings.waitForAnimate,
-                zIndex:                     carouselSettings.zIndex,
-                responsive:                 carouselResponsiveSettingsOBJ
+              // setup the slider
+              logger.info('\n' + 'slider is being setup on id: ' + '{{slider.id}}');
+              $('.{{slider.id | replace: '_','-' }}').slick({
+                accessibility:              sliderSettings.accessibility,
+                adaptiveHeight:             sliderSettings.adaptiveHeight,
+                arrows:                     sliderSettings.arrows,
+                autoplay:                   sliderSettings.autoplay,
+                autoplaySpeed:              sliderSettings.autoplaySpeed,
+                centerMode:                 sliderSettings.centerMode,
+                centerPadding:              sliderSettings.centerPadding,
+                cssEase:                    sliderSettings.cssEase,
+                dots:                       sliderSettings.dots,
+                dotsClass:                  sliderSettings.dotsClass,
+                draggable:                  sliderSettings.draggable,
+                easing:                     sliderSettings.easing,
+                edgeFriction:               sliderSettings.edgeFriction,
+                fade:                       sliderSettings.fade,
+                focusOnSelect:              sliderSettings.focusOnSelect,
+                focusOnChange:              sliderSettings.focusOnChange,
+                infinite:                   sliderSettings.infinite,
+                initialSlide:               sliderSettings.initialSlide,
+                lazyLoad:                   sliderSettings.lazyLoad,
+                mobileFirst:                sliderSettings.mobileFirst,
+                pauseOnDotsHover:           sliderSettings.pauseOnDotsHover,
+                pauseOnFocus:               sliderSettings.pauseOnFocus,
+                pauseOnHover:               sliderSettings.pauseOnHover,
+                respondTo:                  sliderSettings.respondTo,
+                rows:                       sliderSettings.rows,
+                rtl:                        sliderSettings.rtl,
+                slide:                      sliderSettings.slide,
+                slidesPerRow:               sliderSettings.slidesPerRow,
+                slidesToScroll:             sliderSettings.slidesToScroll,
+                slidesToShow:               sliderSettings.slidesToShow,
+                speed:                      sliderSettings.speed,
+                swipe:                      sliderSettings.swipe,
+                swipeToSlide:               sliderSettings.swipeToSlide,
+                touchMove:                  sliderSettings.touchMove,
+                touchThreshold:             sliderSettings.touchThreshold,
+                useCSS:                     sliderSettings.useCSS,
+                useTransform:               sliderSettings.useTransform,
+                variableWidth:              sliderSettings.variableWidth,
+                vertical:                   sliderSettings.vertical,
+                verticalSwiping:            sliderSettings.verticalSwiping,
+                waitForAnimate:             sliderSettings.waitForAnimate,
+                zIndex:                     sliderSettings.zIndex,
+                responsive:                 sliderResponsiveSettingsOBJ
               });
-              clearInterval(load_dependencies['dependencies_met_html_loaded_{{carousel.id}}']);
+              clearInterval(load_dependencies['dependencies_met_html_loaded_{{slider.id}}']);
             }
           }, 25); // END
-          {% endif %} {% endfor %} // ENDFOR (all) carousels
+          {% endif %} {% endfor %} // ENDFOR (all) sliders
 
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -311,40 +311,40 @@ j1.adapter.slick = (function (j1, window) {
     }, // END init
 
     // -------------------------------------------------------------------------
-    // loadcarouselHTML()
-    // load all Slick carousels (HTML portion) dynanically configured
+    // loadSliderHTML()
+    // load all Slick sliders (HTML portion) dynanically configured
     // and enabled (AJAX) from YAMLdata file
     // NOTE: Make sure the placeholder is available in the content page
-    // eg. using the asciidoc extension mastercarousel::
+    // eg. using the asciidoc extension masterslider::
     // -------------------------------------------------------------------------
-    loadCarouselHTML: function (options, carousel) {
-      var numcarousels      = Object.keys(carousel).length;
-      var active_carousels  = numcarousels;
+    loadSliderHTML: function (options, slider) {
+      var numSliders      = Object.keys(slider).length;
+      var active_sliders  = numSliders;
       var xhr_data_path   = options.xhr_data_path + '/index.html';
       var xhr_container_id;
 
-      // console.debug('load HTML portion of all carousels configured found in page');
-      console.debug('number of carousels found: ' + numcarousels);
+      // console.debug('load HTML portion of all sliders configured found in page');
+      console.debug('number of sliders found: ' + numSliders);
 
       _this.setState('load_data');
-      Object.keys(carousel).forEach(function(key) {
-        if (carousel[key].enabled) {
-          xhr_container_id = carousel[key].id + '_parent';
+      Object.keys(slider).forEach(function(key) {
+        if (slider[key].enabled) {
+          xhr_container_id = slider[key].id + '_parent';
 
-          console.debug('load HTML data on carousel id: ' + carousel[key].id);
+          console.debug('load HTML data on slider id: ' + slider[key].id);
           j1.loadHTML({
             xhr_container_id: xhr_container_id,
             xhr_data_path:    xhr_data_path,
-            xhr_data_element: carousel[key].id
+            xhr_data_element: slider[key].id
           });
         } else {
-          console.debug('carousel found disabled on id: ' + carousel[key].id);
-          active_carousels--;
+          console.debug('slider found disabled on id: ' + slider[key].id);
+          active_sliders--;
         }
       });
-      console.debug('carousels loaded in page enabled|all: ' + active_carousels + '|' + numcarousels);
+      console.debug('sliders loaded in page enabled|all: ' + active_sliders + '|' + numSliders);
       _this.setState('data_loaded');
-    }, // END loadcarouselHTML
+    }, // END loadSliderHTML
 
     // -------------------------------------------------------------------------
     // messageHandler: MessageHandler for J1 CookieConsent module

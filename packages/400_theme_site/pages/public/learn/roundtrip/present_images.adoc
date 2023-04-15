@@ -15,7 +15,7 @@ keywords: >
                                         Roundtrip
 
 categories:                             [ Roundtrip ]
-tags:                                   [ Module, Carousel, Lightbox, Image, Slider ]
+tags:                                   [ Module, Carousel, Lightbox, Image, Slider, Slick ]
 
 image:
   path:                                 /assets/images/modules/attics/1920x1280/quino-al-2.jpg
@@ -30,7 +30,7 @@ permalink:                              /pages/public/learn/roundtrip/present_im
 resources:                              [
                                           animate, clipboard, carousel, comments,
                                           justifiedGallery, lightbox, lightGallery,
-                                          masterslider, rouge
+                                          masterslider, rouge, slick
                                         ]
 resource_options:
   - attic:
@@ -63,7 +63,7 @@ resource_options:
 :url-j1-docs--masterslider-module:      https://jekyll.one/pages/public/manuals/modules/masterslider/
 
 :url-j1-masterslider-slider-previewer:  https://jekyll.one/pages/public/previewer/masterslider/
-
+:url-j1-slick-previewer:                /pages/public/previewer/slick/
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -232,6 +232,58 @@ many images the show contains.
 
 .One Slide Carousel
 carousel::demo_oneslide[role="mb-4"]
+
+== J1 Slick Carousel
+
+_Slick_ is a popular jQuery plugin for creating responsive and fully
+customizable carousels created by J1 Template. It allows developers to easily
+create beautiful and dynamic carousels that can display images, videos, or any
+other type of content in a visually appealing way.
+
+The plugin is designed to be lightweight, fast, and easy to use, making it a
+popular choice for all web developers. It has many features, including
+multiple navigation options, lazy loading, or autoplay. Slick carousels are
+compatible with all modern browsers and devices, making it a great choice to
+create a responsive and mobile-friendly website.
+
+[role="mb-4"]
+The slider for J1 Template is a *best friend* for all web programmers because
+of its flexibility, a rich set of callbacks and simple configuration to make
+carousels as individual and powerful as possible. Find by the following examples
+what Slick carousels can do.
+
+=== Image Carousel
+
+[role="mb-4"]
+An _Slick_ image carousel typically consists of a container with images and
+a navigation system, including buttons, arrows, or dots that allow users to
+move back and forth between images or select a specific image. Image carousels
+can also include animation effects, such as fade-in or slide-in transitions
+between images, to make the presentation more engaging and visually appealing.
+
+.Carousel + Arrows + Dots + Captions + Lightbox
+slick::image_carousel_mega_cities_lightbox[role="mb-5"]
+
+=== Carousel from Collections
+
+A Carousel from a collection for J1 Template is a *pre-defined* carousel type
+to display collection articles on a webpage. It is a popular way to showcase a
+collection visually.
+
+[role="mb-4"]
+Collection carousels pull content from a specific *collection*. All Carousels
+for collections display the article image and a link to the article as a
+caption. All Slick carousels for the J1 Theme can be easily customized in
+various ways, such as changing the slider speed, or the navigation options
+like *Arrows* and *Dots*.
+
+.Collection Biography + Arrows + Dots + Gutters
+slick::collection_carousel_biography[role="mb-3"]
+
+=== More about Slick Carousels
+
+If you're interested to learn more about _Slick_, go previewer page
+link:{url-j1-slick-previewer}[Slick Previewer, {browser-window--new}],
 
 == J1 Master Slider
 

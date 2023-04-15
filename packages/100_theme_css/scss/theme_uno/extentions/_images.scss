@@ -50,6 +50,27 @@
     max-width: 500px;
 }
 
+.img-object--h100 {
+    height: 100%;
+    max-height: 100px;
+}
+.img-object--h200 {
+    width: 100%;
+    max-width: 200px;
+}
+.img-object--h300 {
+    width: 100%;
+    max-width: 300px;
+}
+.img-object--h400 {
+    width: 100%;
+    max-width: 400px;
+}
+.img-object--h500 {
+    width: 100%;
+    max-width: 500px;
+}
+
 // The image keeps its original aspect ratio, but resized so that the
 // longest of either the height or width can fit in the given dimensions.
 .img-object--contain {

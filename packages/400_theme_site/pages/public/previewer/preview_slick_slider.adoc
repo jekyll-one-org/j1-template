@@ -1,15 +1,15 @@
 ---
 title:                                  J1 Slick
-tagline:                                Slider Previews
+tagline:                                Carousel Previews
 date:                                   2023-03-02 00:00:00
 description: >
-                                        Slick slider is a popular jQuery plugin for creating responsive and fully
-                                        customizable sliders on websites created by J1. It allows developers to easily
-                                        create beautiful and dynamic carousels that can display images, videos, or any
+                                        Slick is a popular jQuery plugin for creating responsive and fully
+                                        customizable carousels created by J1 Template. It allows developers to easily
+                                        create beautiful and dynamic shows that can display images, videos, or any
                                         other type of content in a visually appealing way.
 
 categories:                             [ Previewer ]
-tags:                                   [ Slick, Slider, Example ]
+tags:                                   [ Slick, Carousel, Example ]
 
 comments:                               false
 fab_menu_id:                            open_toc
@@ -18,7 +18,7 @@ regenerate:                             false
 permalink:                              /pages/public/previewer/slick/
 
 
-resources:                              [ clipboard, lightbox, rouge, slick ]
+resources:                              [ animate, clipboard, lightbox, rouge, slick ]
 resource_options:
   - attic:
       padding_top:                      600
@@ -52,14 +52,14 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
-Slick slider is a popular jQuery plugin for creating responsive and fully
-customizable sliders on websites created by J1. It allows developers to easily
+_Slick_ is a popular jQuery plugin for creating responsive and fully
+customizable carousels created by J1 Template. It allows developers to easily
 create beautiful and dynamic carousels that can display images, videos, or any
 other type of content in a visually appealing way.
 
 The plugin is designed to be lightweight, fast, and easy to use, making it a
 popular choice for all web developers. It has many features, including
-multiple navigation options, lazy loading, or autoplay. Slick sliders are
+multiple navigation options, lazy loading, or autoplay. Slick carousels are
 compatible with all modern browsers and devices, making it a great choice to
 create a responsive and mobile-friendly website.
 
@@ -67,16 +67,16 @@ create a responsive and mobile-friendly website.
 The slider for J1 Template is a *best friend* for all web programmers because
 of its flexibility, a rich set of callbacks and simple configuration to make
 carousels as individual and powerful as possible. Find by the following examples
-what Slick sliders can do.
+what Slick carousels can do.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 == General Features
 
-Slick sliders are using various tools and frameworks, such as Bootstrap, jQuery,
-and pure CSS. Slick offers a wide range of customization options, such as slide
-transitions, autoplay, navigation controls to create a visually appealing and
-interactive user experience.
+Slick carousels are using various tools and frameworks, such as Bootstrap,
+jQuery, and pure CSS. Slick offers a wide range of customization options, like
+slide transitions, autoplay, navigation controls to create a visually appealing
+and interactive user experience.
 
 [role="mb-4"]
 * Carousels are fully responsive for configurable screen sizes
@@ -89,29 +89,108 @@ interactive user experience.
 * Add, remove, filter and unfilter slides
 * Rich set of callbacks to enable individual behaviour of sliders
 
+== Carousel from Collections
 
-== Post Slider
-
-A Post Slider for J1 Template is a pre-defined carousel type to display news
-articles on a webpage. It is a popular way to showcase a selection of posts
-visually appealingly and can be useful for highlighting important or *featured*
-content for your post articles.
+A Carousel from a collection for J1 Template is a *pre-defined* carousel type
+to display collection articles on a webpage. It is a popular way to showcase a
+collection visually.
 
 [role="mb-4"]
-Post sliders pull content from a specific category/group. All Carousels for
-posts display the post category, the post title, the author information and
-date. All Slick sliders for the J1 Theme can be easily customized in various
-ways, such as changing the number of posts displayed, the slider speed, or
-the navigation options like *Arrows* and *Dots*.
+Collection carousels pull content from a specific *collection*. All Carousels
+for collections display the article image and a link to the article as a
+caption. All Slick carousels for the J1 Theme can be easily customized in
+various ways, such as changing the slider speed, or the navigation options
+like *Arrows* and *Dots*.
 
 .Asciidoc configuration
 [source, config, role="noclip mb-3"]
 ----
-slick::post_slider[]
+slick::collection_carousel_biography[]
 ----
 
-.Post Silder + Autoplay + Arrows + Gutters
-slick::post_slider[role="mb-4"]
+.Collection Biography + Arrows + Dots + Gutters
+slick::collection_carousel_biography[role="mb-3"]
+
+
+.Configuration settings (YAML)
+[source, yaml, role="noclip mt-3 mb-5"]
+----
+# ------------------------------------------------------------------------------
+# COLLECTION slider (romance)
+#
+- slider:
+  enabled:                          true
+
+  id:                               collection_carousel_biography
+  type:                             collection
+  collection:                       biography
+  translate_links:                  false
+  link_new_window:                  true
+  gutters:                          1
+  image_styles:                     img-fluid img-object--cover img-object--w500 g-height-500
+
+  # ----------------------------------------------------------------------------
+  # Lightbox options
+  #
+  lightbox:
+    enabled:                        false
+
+  # ----------------------------------------------------------------------------
+  # Carousel options
+  #
+  options:
+    autoplay:                       false
+    arrows:                         true
+    dots:                           true
+    gutters:                        1
+    slidesToShow:                   3
+    slidesToScroll:                 1
+    responsive:                     true
+
+  # ----------------------------------------------------------------------------
+  # Reponsive options
+  #
+  responsive:
+    - breakpoint:
+      settings:
+        breakOn:                    1024
+        slidesToShow:               2
+        slidesToScroll:             2
+    - breakpoint:
+      settings:
+        breakOn:                    600
+        slidesToShow:               1
+        slidesToScroll:             1
+        dots:                       true
+    - breakpoint:
+      settings:
+        breakOn:                    480
+        slidesToShow:               1
+        slidesToScroll:             1
+----
+
+== Carousel from Posts
+
+A Carousel from posts for J1 Template is a *pre-defined* carousel type to
+display post articles on a webpage. It is a popular way to showcase a
+selection of post articles visually appealingly and can be useful for
+highlighting important or *featured* content for your posts content.
+
+[role="mb-4"]
+Post carousels pull news articles from a specific *group*. All Carousels for
+posts display the post category, the title, the author information and
+date. All Slick carousels for the J1 Theme can be easily customized in
+various ways, such as changing the number of posts displayed, the slider
+speed, or the navigation options like *Arrows* and *Dots*.
+
+.Asciidoc configuration
+[source, config, role="noclip mb-3"]
+----
+slick::post_carousel_life[]
+----
+
+.Post Silder (Life) + Autoplay + Arrows + Gutters
+slick::post_carousel_life[role="mb-4"]
 
 .Configuration settings (YAML)
 [source, yaml, role="noclip mb-4"]
@@ -122,12 +201,12 @@ slick::post_slider[role="mb-4"]
 - slider:
   enabled:                          true
 
-  id:                               post_slider
+  id:                               post_carousel_life
   type:                             post
   group:                            Life
 
   # ----------------------------------------------------------------------------
-  # Slider options
+  # Carousel options
   #
   options:
     autoplay:                       true
@@ -162,35 +241,36 @@ slick::post_slider[role="mb-4"]
 ----
 
 [role="mb-4"]
-Posts sliders typically used on the homepage of a website, within blog posts
-or articles, or on dedicated archive or category pages. They can increase
+Post carousels typically used on the homepage of a website, within blog
+articles, or on dedicated archive or category pages. They can increase
 user engagement and keep visitors on a website for longer by presenting
 content dynamically and visually appealingly.
 
 
-== Example Slider
+== Example Carousel
 
-Responsive sliders are carousels designed to adapt and resize automatically
-to fit different screen sizes and devices, such as desktops, laptops, tablets,
+Responsive carousels are designed to adapt and resize automatically to fit
+different screen sizes and devices, such as desktops, laptops, tablets,
 and smartphones. They are created using responsive design techniques, allowing
-web developers to create a single slider that can be optimized for various
+web developers to create a carousel that can be optimized for various
 devices without needing separate versions or code.
 
 [role="mb-4"]
-Responsive Slick sliders can be useful for ensuring that content is displayed
+Responsive Slick carousels can be useful for ensuring that content is displayed
 correctly and consistently across different devices and for providing an
 optimal user experience for all visitors to a website. They use techniques
 such as fluid grid layouts, flexible images, and media queries to adjust the
-slider size and layout based on the screen size and orientation of the device.
+carousels size and layout based on the screen size and orientation of the
+device.
 
 .Asciidoc configuration
 [source, config, role="noclip mb-2"]
 ----
-slick::example_slider_arrows_dots[role="mb-5"]
+slick::example_carousel_arrows_dots[role="mb-5"]
 ----
 
 .Example Silder using Arrows + Dots
-slick::example_slider_arrows_dots[role="mb-5"]
+slick::example_carousel_arrows_dots[role="mb-5"]
 
 .Configuration settings (YAML)
 [source, yaml, role="noclip mb-4"]
@@ -201,11 +281,11 @@ slick::example_slider_arrows_dots[role="mb-5"]
 - slider:
   enabled:                          true
 
-  id:                               example_slider_arrows_dots
+  id:                               example_carousel_arrows_dots
   type:                             example
 
   # ----------------------------------------------------------------------------
-  # Slider options
+  # Carousel options
   #
   options:
     autoplay:                       false
@@ -238,23 +318,29 @@ slick::example_slider_arrows_dots[role="mb-5"]
 ----
 
 
-== Image Sliders
+== Carousels from Images
 
 An image slider, also known as a slideshow, is a graphical user interface
 element commonly used in web design and development to showcase a series of
 images or visual content dynamically and interactively.
 
-=== Simple Image Slider
+=== Simple Image Carousel
 
 [role="mb-4"]
-An image slider typically consists of a container with images and a navigation
-system, including buttons, arrows, or dots that allow users to move back and
-forth between images or select a specific image. Image sliders can also include
-animation effects, such as fade-in or slide-in transitions between images, to
-make the presentation more engaging and visually appealing.
+An _Slick_ image carousel typically consists of a container with images and
+a navigation system, including buttons, arrows, or dots that allow users to
+move back and forth between images or select a specific image. Image sliders
+can also include animation effects, such as fade-in or slide-in transitions
+between images, to make the presentation more engaging and visually appealing.
 
-.Slider + Arrows + Dots + Gutters
-slick::image_slider[role="mb-5"]
+.Asciidoc configuration
+[source, config, role="noclip mb-2"]
+----
+slick::image_carousel_mega_cities[role="mb-5"]
+----
+
+.Carousel + Arrows + Dots + Gutters
+slick::image_carousel_mega_cities[role="mb-5"]
 
 .Configuration settings (YAML)
 [source, yaml, role="noclip mb-4"]
@@ -265,7 +351,7 @@ slick::image_slider[role="mb-5"]
 - slider:
   enabled:                          true
 
-  id:                               image_slider
+  id:                               image_carousel_mega_cities
   type:                             image
   image_base_path:                  /assets/images/modules/gallery/mega_cities
   image_styles:                     img-fluid img-object--cover g-height-300
@@ -277,7 +363,7 @@ slick::image_slider[role="mb-5"]
     enabled:                        false
 
   # ----------------------------------------------------------------------------
-  # Slider options
+  # Carousel options
   #
   options:
     autoplay:                       false
@@ -329,7 +415,7 @@ Image sliders are commonly used in website headers, landing pages, galleries,
 and product showcases to draw attention to specific content or to provide an
 overview of a collection of images.
 
-=== Image Slider + Captions + Lightbox
+=== Image Carousel + Captions + Lightbox
 
 [role="mb-4"]
 A Lightbox is, in general, a helper which displays enlarged, almost
@@ -338,10 +424,16 @@ of the page. The technique, introduced by Lightbox2, gained widespread
 popularity thanks to its simple style. The term lightbox has been employed
 since then for Javascript libraries to support such functionality.
 
-.Slider + Arrows + Dots + Captions + Lightbox
-slick::image_slider_lightbox[role="mb-5"]
+.Asciidoc configuration
+[source, config, role="noclip mb-2"]
+----
+slick::image_carousel_mega_cities_lightbox[role="mb-5"]
+----
 
-The Lighbox used for Slick sliders is _Slick-Lighbox_, an addon package
+.Carousel + Arrows + Dots + Captions + Lightbox
+slick::image_carousel_mega_cities_lightbox[role="mb-5"]
+
+The Lighbox used for Slick carousels is _Slick-Lighbox_, an addon package
 build-in the J1 Module for Slick. The Lighbox is autoatically configured and
 fired on all images of a slider if enabled:
 
@@ -354,7 +446,7 @@ fired on all images of a slider if enabled:
 - slider:
   enabled:                          true
 
-  id:                               image_slider_lightbox
+  id:                               image_carousel_mega_cities_lightbox
   type:                             image
   image_base_path:                  /assets/images/modules/gallery/mega_cities
   styles:                           img-fluid img-object--cover g-height-400
@@ -371,8 +463,8 @@ fired on all images of a slider if enabled:
   lightbox:
     enabled:                        true
 
-  # ------------------------------------------------------------------------
-  # Slider options
+  # ----------------------------------------------------------------------------
+  # Carousel options
   #
   options:
     autoplay:                       false
@@ -400,5 +492,5 @@ fired on all images of a slider if enabled:
   ...
 ----
 
-NOTE: For image sliders, the lightbox properties `src` and `itemSelector` are
-to be configured for every instance the lightbox should be applied.
+NOTE: For image carousels, the lightbox properties `src` and `itemSelector`
+are to be configured for *every instance* a *lightbox* should be applied.

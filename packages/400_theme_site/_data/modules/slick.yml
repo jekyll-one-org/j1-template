@@ -34,25 +34,29 @@ settings:
     background:                         false
 
   # ----------------------------------------------------------------------------
-  # Caption options (Slider)
+  # Caption options (Carousel)
   #
   captions:
     enabled:                            true
 
   # ----------------------------------------------------------------------------
-  # Slider settings
+  # Carousel settings
   # ----------------------------------------------------------------------------
-  sliders:
+  carousels:
 
     # --------------------------------------------------------------------------
-    # POST slider
+    # COLLECTION Carousel (portfolio)
     #
-    - slider:
+    - carousel:
       enabled:                          true
 
-      id:                               post_slider
-      type:                             post
-      group:                            Life                                    # generate slides only for group (specified in article/post)
+      id:                               collection_carousel_portfolio
+      type:                             collection
+      collection:                       portfolio                               # generate grid elements (articles) for the collection specified
+      translate_links:                  false                                   # default: false
+      link_new_window:                  true                                    # default: false
+      gutters:                          1                                       # [0 .. 5]
+      image_styles:                     img-fluid img-object--cover img-object--w500 g-height-500
 
       # ------------------------------------------------------------------------
       # Lightbox options
@@ -61,10 +65,10 @@ settings:
         enabled:                        false
 
       # ------------------------------------------------------------------------
-      # Slider options
+      # Carousel options
       #
       options:
-        autoplay:                       true
+        autoplay:                       false
         arrows:                         true
         dots:                           false
         gutters:                        1                                       # 0 .. 5
@@ -94,12 +98,222 @@ settings:
             slidesToScroll:             1
 
     # --------------------------------------------------------------------------
-    # EXAMPLE slider 1
+    # COLLECTION Carousel (biography)
     #
-    - slider:
+    - carousel:
       enabled:                          true
 
-      id:                               example_slider_arrows_dots
+      id:                               collection_carousel_biography
+      type:                             collection
+      collection:                       biography                               # generate grid elements (articles) for the collection specified
+      translate_links:                  false                                   # default: false
+      link_new_window:                  true                                    # default: false
+      gutters:                          1                                       # [0 .. 5]
+      image_styles:                     img-fluid img-object--cover img-object--w500 g-height-500
+
+      # ------------------------------------------------------------------------
+      # Lightbox options
+      #
+      lightbox:
+        enabled:                        false
+
+      # ------------------------------------------------------------------------
+      # Carousel options
+      #
+      options:
+        autoplay:                       false
+        arrows:                         true
+        dots:                           true
+        gutters:                        1                                       # 0 .. 5
+        slidesToShow:                   3
+        slidesToScroll:                 1
+        responsive:                     true                                    # enables reponsive options to generate breakpoint properties for slick()
+
+      # ------------------------------------------------------------------------
+      # Reponsive options
+      #
+      responsive:
+        - breakpoint:
+          settings:
+            breakOn:                    1024
+            slidesToShow:               2
+            slidesToScroll:             2
+        - breakpoint:
+          settings:
+            breakOn:                    600
+            slidesToShow:               1
+            slidesToScroll:             1
+            dots:                       true
+        - breakpoint:
+          settings:
+            breakOn:                    480
+            slidesToShow:               1
+            slidesToScroll:             1
+
+    # --------------------------------------------------------------------------
+    # COLLECTION Carousel (fantasy)
+    #
+    - carousel:
+      enabled:                          true
+
+      id:                               collection_carousel_fantasy
+      type:                             collection
+      collection:                       fantasy                                 # generate grid elements (articles) for the collection specified
+      translate_links:                  false                                   # default: false
+      link_new_window:                  true                                    # default: false
+      gutters:                          1                                       # [0 .. 5]
+      image_styles:                     img-fluid img-object--cover img-object--w500 g-height-500
+
+      # ------------------------------------------------------------------------
+      # Lightbox options
+      #
+      lightbox:
+        enabled:                        false
+
+      # ------------------------------------------------------------------------
+      # Carousel options
+      #
+      options:
+        autoplay:                       false
+        arrows:                         true
+        dots:                           false
+        gutters:                        1                                       # 0 .. 5
+        slidesToShow:                   3
+        slidesToScroll:                 1
+        responsive:                     true                                    # enables reponsive options to generate breakpoint properties for slick()
+
+      # ------------------------------------------------------------------------
+      # Reponsive options
+      #
+      responsive:
+        - breakpoint:
+          settings:
+            breakOn:                    1024
+            slidesToShow:               2
+            slidesToScroll:             2
+        - breakpoint:
+          settings:
+            breakOn:                    600
+            slidesToShow:               1
+            slidesToScroll:             1
+            dots:                       true
+        - breakpoint:
+          settings:
+            breakOn:                    480
+            slidesToShow:               1
+            slidesToScroll:             1
+
+    # --------------------------------------------------------------------------
+    # COLLECTION Carousel (romance)
+    #
+    - carousel:
+      enabled:                          true
+
+      id:                               collection_carousel_romance
+      type:                             collection
+      collection:                       romance                                 # generate grid elements (articles) for the collection specified
+      translate_links:                  false                                   # default: false
+      link_new_window:                  true                                    # default: false
+      gutters:                          1                                       # [0 .. 5]
+      image_styles:                     img-fluid img-object--cover img-object--w500 g-height-500
+
+      # ------------------------------------------------------------------------
+      # Lightbox options
+      #
+      lightbox:
+        enabled:                        false
+
+      # ------------------------------------------------------------------------
+      # Carousel options
+      #
+      options:
+        autoplay:                       false
+        arrows:                         true
+        dots:                           false
+        gutters:                        1                                       # 0 .. 5
+        slidesToShow:                   3
+        slidesToScroll:                 1
+        responsive:                     true                                    # enables reponsive options to generate breakpoint properties for slick()
+
+      # ------------------------------------------------------------------------
+      # Reponsive options
+      #
+      responsive:
+        - breakpoint:
+          settings:
+            breakOn:                    1024
+            slidesToShow:               2
+            slidesToScroll:             2
+        - breakpoint:
+          settings:
+            breakOn:                    600
+            slidesToShow:               1
+            slidesToScroll:             1
+            dots:                       true
+        - breakpoint:
+          settings:
+            breakOn:                    480
+            slidesToShow:               1
+            slidesToScroll:             1
+
+    # --------------------------------------------------------------------------
+    # POST Carousel (Life)
+    #
+    - carousel:
+      enabled:                          true
+
+      id:                               post_carousel_life
+      type:                             post
+      group:                            Life                                    # generate slides only for group (specified in article/post)
+      translate_links:                  false                                   # default: false
+      link_new_window:                  true                                    # default: false
+
+      # ------------------------------------------------------------------------
+      # Lightbox options
+      #
+      lightbox:
+        enabled:                        false
+
+      # ------------------------------------------------------------------------
+      # Carousel options
+      #
+      options:
+        autoplay:                       true
+        arrows:                         true
+        dots:                           false
+        gutters:                        4                                       # 0 .. 5
+        slidesToShow:                   3
+        slidesToScroll:                 1
+        responsive:                     true                                    # enables reponsive options to generate breakpoint properties for slick()
+
+      # ------------------------------------------------------------------------
+      # Reponsive options
+      #
+      responsive:
+        - breakpoint:
+          settings:
+            breakOn:                    1024
+            slidesToShow:               2
+            slidesToScroll:             2
+        - breakpoint:
+          settings:
+            breakOn:                    600
+            slidesToShow:               1
+            slidesToScroll:             1
+            dots:                       true
+        - breakpoint:
+          settings:
+            breakOn:                    480
+            slidesToShow:               1
+            slidesToScroll:             1
+
+    # --------------------------------------------------------------------------
+    # EXAMPLE Carousel
+    #
+    - carousel:
+      enabled:                          true
+
+      id:                               example_carousel_arrows_dots
       type:                             example
       slides:                           9
 
@@ -110,7 +324,7 @@ settings:
         enabled:                        false
 
       # ------------------------------------------------------------------------
-      # Slider options
+      # Carousel options
       #
       options:
         arrows:                         true
@@ -143,12 +357,12 @@ settings:
             slidesToScroll:             1
 
     # --------------------------------------------------------------------------
-    # IMAGE slider
+    # IMAGE Carousel
     #
-    - slider:
+    - carousel:
       enabled:                          true
 
-      id:                               image_slider
+      id:                               image_carousel_mega_cities
       type:                             image
       image_base_path:                  /assets/images/modules/gallery/mega_cities
       image_styles:                     img-fluid img-object--cover g-height-300
@@ -161,7 +375,7 @@ settings:
         caption:                        caption
 
       # ------------------------------------------------------------------------
-      # Slider options
+      # Carousel options
       #
       options:
         autoplay:                       false
@@ -219,12 +433,12 @@ settings:
 
 
     # --------------------------------------------------------------------------
-    # IMAGE slider + Captions + Lightbox
+    # IMAGE Carousel + Captions + Lightbox
     #
-    - slider:
+    - carousel:
       enabled:                          true
 
-      id:                               image_slider_lightbox
+      id:                               image_carousel_mega_cities_lightbox
       type:                             image
       image_base_path:                  /assets/images/modules/gallery/mega_cities
       image_styles:                     img-fluid img-object--cover g-height-400
@@ -242,7 +456,7 @@ settings:
         enabled:                        true
 
       # ------------------------------------------------------------------------
-      # Slider options
+      # Carousel options
       #
       options:
         autoplay:                       false

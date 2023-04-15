@@ -65,11 +65,24 @@ a.link-no-decoration:hover {
 
 /* Images
 -------------------------------------------------------------------------------- */
+/*
+.slick-slide img {
+  width: 150px;
+  height: 200px;
+}
+*/
 
 /* Arrows
 -------------------------------------------------------------------------------- */
+.slick-arrows {
+    /* padding-top: 3.25rem; */
+}
+
 .slick-arrow {
     position: absolute;                                                         /* position of the arrow */
+    /* margin-left: 20px; */
+    /* margin-right: 20px; */
+    /* padding-top: 1.75rem; */
     z-index: 10;                                                                /* show on top of a slide */
 }
 
@@ -118,114 +131,133 @@ a.link-no-decoration:hover {
 	outline: none;
 }
 
-.slick-dots li:hover {
-  opacity: 1;
-}
-
-.slick-dots li.slick-active {
-  opacity: 1;
-}
-
+.slick-dots li button:hover:before,
 .slick-dots li button:focus:before {
 	opacity: 1;
 }
 
+/*
 .slick-dots li button:before {
 	font-family: 'slick';
 	font-size: 12px;
 	line-height: 20px;
 	position: absolute;
-	top: 1px;
+	top: 0;
 	left: 0;
 	width: 20px;
 	height: 20px;
 	content: '•';
 	text-align: center;
-	opacity: 0;
+	opacity: .25;
 	color: black;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
 
+/*
 .slick-dots li.slick-active button:before {
-	opacity: 1;
+	opacity: .75;
 	color: black;
 }
+*/
 
 /* Arrows
 -------------------------------------------------------------------------------- */
-.slick-prev,
-.slick-next {
-  display: block;                                                             /* shown by default */
-  top: 50%;                                                                   /* center button in slide */
-	font-size: 0;                                                               /* disable button text */
-	border: none;                                                               /* disable button decoration */
-	outline: none;                                                              /* disable button decoration */
-	background: transparent;                                                    /* disable button background */
-  -webkit-transform: translate(0, -50%);                                      /* move upwards by 50% */
-  -moz-transform: translate(0, -50%);
-	-ms-transform: translate(0, -50%);
-  -o-transform: translate(0, -50%);
-	transform: translate(0, -50%);
+
+
+/* Media breakpoints, all screens
+-------------------------------------------------------------------------------- */
+@media all {
+
+  .slick-prev,
+  .slick-next {
+    display: block;                                                             /* shown by default */
+    top: 50%;                                                                   /* center button in slide */
+  	font-size: 0;                                                               /* disable button text */
+  	border: none;                                                               /* disable button decoration */
+  	outline: none;                                                              /* disable button decoration */
+  	background: transparent;                                                    /* disable button background */
+    -webkit-transform: translate(0, -50%);                                      /* move upwards by 50% */
+    -moz-transform: translate(0, -50%);
+  	-ms-transform: translate(0, -50%);
+    -o-transform: translate(0, -50%);
+  	transform: translate(0, -50%);
+  }
+
+  .slick-prev:hover,
+  .slick-prev:focus,
+  .slick-next:hover,
+  .slick-next:focus {
+  	color: transparent;
+  	outline: none;
+  	background: transparent;
+  }
+
+  .slick-prev:hover:before,
+  .slick-prev:focus:before,
+  .slick-next:hover:before,
+  .slick-next:focus:before {
+  	opacity: 1;
+  }
+
+  .slick-prev.slick-disabled:before,
+  .slick-next.slick-disabled:before {
+  	opacity: .25;
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+  	font-family: 'slick';
+  	font-size: 40px;
+  	line-height: 1;
+  	opacity: .75;
+  	/* color: var(--bs-primary); */
+    color: var(--bs-white);
+  	-webkit-font-smoothing: antialiased;
+  	-moz-osx-font-smoothing: grayscale;
+  }
+
+  .slick-prev {
+  	left: 3%;
+  }
+
+  .slick-prev:before {
+  	content: '←';
+  }
+
+  [dir='rtl'] .slick-prev:before {
+  	content: '→';
+  }
+
+  .slick-next {
+  	right: 3%;
+  }
+
+  .slick-next:before {
+  	content: '→';
+  }
+
+  [dir='rtl'] .slick-next:before {
+  	content: '←';
+  }
 }
 
-.slick-prev:hover,
-.slick-prev:focus,
-.slick-next:hover,
-.slick-next:focus {
-	color: transparent;
-	outline: none;
-	background: transparent;
+/* Media breakpoints, tablet|mobile
+-------------------------------------------------------------------------------- */
+/*
+@media screen and (max-width: 992px) {
+  .siick-arrow,
+  .siick-arrows {
+  	margin-top: 0 !important;
+  }
+  .slick-prev {
+  	display: none !important;
+  }
+  .slick-next {
+  	display: none !important;
+  }
 }
-
-.slick-prev:hover:before,
-.slick-prev:focus:before,
-.slick-next:hover:before,
-.slick-next:focus:before {
-	opacity: 1;
-}
-
-.slick-prev.slick-disabled:before,
-.slick-next.slick-disabled:before {
-	opacity: .25;
-}
-
-.slick-prev:before,
-.slick-next:before {
-	font-family: 'slick';
-	font-size: 40px;
-	line-height: 1;
-	opacity: .75;
-	/* color: var(--bs-primary); */
-  color: var(--bs-white);
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-}
-
-.slick-prev {
-	left: 3%;
-}
-
-.slick-prev:before {
-	content: '←';
-}
-
-[dir='rtl'] .slick-prev:before {
-	content: '→';
-}
-
-.slick-next {
-	right: 3%;
-}
-
-.slick-next:before {
-	content: '→';
-}
-
-[dir='rtl'] .slick-next:before {
-	content: '←';
-}
-
+*/
 
 /* Slider Controls and Captions
 See: https://codepen.io/Svarnoy85/pen/NzQPpe
