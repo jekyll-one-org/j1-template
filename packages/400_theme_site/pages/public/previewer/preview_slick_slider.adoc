@@ -111,7 +111,6 @@ slick::collection_carousel_biography[]
 .Collection Biography + Arrows + Dots + Gutters
 slick::collection_carousel_biography[role="mb-3"]
 
-
 .Configuration settings (YAML)
 [source, yaml, role="noclip mt-3 mb-5"]
 ----
@@ -128,12 +127,6 @@ slick::collection_carousel_biography[role="mb-3"]
   link_new_window:                  true
   gutters:                          1
   image_styles:                     img-fluid img-object--cover img-object--w500 g-height-500
-
-  # ----------------------------------------------------------------------------
-  # Lightbox options
-  #
-  lightbox:
-    enabled:                        false
 
   # ----------------------------------------------------------------------------
   # Carousel options

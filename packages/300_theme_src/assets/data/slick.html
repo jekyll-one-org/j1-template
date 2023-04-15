@@ -78,6 +78,10 @@ exclude_from_search:                    true
 {% for carousel in carousels %}
   {% if carousel.enabled %}
 
+  {% comment %} Set Carousel defaults
+  {% assign carousel.lightbox.enabled  = false %}
+  -------------------------------------------------------------------------- {% endcomment %}
+
   {% comment %} Generate HTML portion for all sliders (enabled)
   ------------------------------------------------------------------------------ {% endcomment %}
 
@@ -103,15 +107,6 @@ exclude_from_search:                    true
       <div id="{{carousel.id}}" class="{{carousel.id | replace: '_','-' }}">
 
         {% for article in articles %}
-
-          {% comment %} DEBUG
-          ----------------------------------------------------------------------
-          {% if forloop.index == num_articles %}
-            num_articles:  {{num_articles | debug}}
-            forloop.index: {{forloop.index | debug}}
-            {% break %}
-          {% endif %}
-          ---------------------------------------------------------------------- {% endcomment %}
 
           {% if carousel.translate_links %}
             {% assign translate = "" %}
@@ -156,6 +151,7 @@ exclude_from_search:                    true
     {% comment %} Collect Post Carousels
     ---------------------------------------------------------------------------- {% endcomment %}
     {% if carousel.type == 'post' %}
+
       <!-- Posts -->
       <div id="{{carousel.id}}" class="{{carousel.id | replace: '_','-' }}">
         {% for post in site.posts %}
@@ -226,48 +222,52 @@ exclude_from_search:                    true
     {% comment %} Collect Example Carousels
     ---------------------------------------------------------------------------- {% endcomment %}
     {% if carousel.type == 'example' %}
-    <!-- Example slider -->
-    <div id="{{carousel.id}}" class="{{carousel.id | replace: '_','-' }}">
-      {% for i in (1..carousel.slides) %}
-      <div>
-        <h3 class="slide-item notoc">{{i}}</h3>
+
+      <!-- Example slider -->
+      <div id="{{carousel.id}}" class="{{carousel.id | replace: '_','-' }}">
+        {% for i in (1..carousel.slides) %}
+        <div>
+          <h3 class="slide-item notoc">{{i}}</h3>
+        </div>
+        {% endfor %}
       </div>
-      {% endfor %}
-    </div>
     <!-- /Example slider -->
+
     {% endif %}
 
     {% comment %} Collect Image Carousels
     ---------------------------------------------------------------------------- {% endcomment %}
     {% if carousel.type == 'image' %}
-    <!-- Image slider -->
-    <div id="{{carousel.id}}" class="{{carousel.id | replace: '_','-' }}">
-      {% for slide in carousel.slides %}
-      <div class="col-sm-6 col-lg-4 pr-{{carousel.options.gutters}}">
-        <div class="card">
-        {% if carousel.lightbox.enabled %}
-        <a class="card-link" href="{{carousel.image_base_path}}/{{slide.image}}" data-caption="{{slide.caption}}" target="_blank">
-          <img class="{{carousel.image_styles}}" src="{{carousel.image_base_path}}/{{slide.image}}" alt="{{slide.caption}}">
-        </a>
-        {% if carousel.captions.enabled %}
-        <div id="{{carousel.id}}_controls" class="controls">
-          <div class="captions">
-            <!-- div class="caption">{{slide.caption | truncate: 80}}</div -->
-            <div class="caption">{{slide.caption}}</div>
+
+      <!-- Image slider -->
+      <div id="{{carousel.id}}" class="{{carousel.id | replace: '_','-' }}">
+        {% for slide in carousel.slides %}
+        <div class="col-sm-6 col-lg-4 pr-{{carousel.options.gutters}}">
+          <div class="card">
+          {% if carousel.lightbox.enabled %}
+          <a class="card-link" href="{{carousel.image_base_path}}/{{slide.image}}" data-caption="{{slide.caption}}" target="_blank">
+            <img class="{{carousel.image_styles}}" src="{{carousel.image_base_path}}/{{slide.image}}" alt="{{slide.caption}}">
+          </a>
+          {% if carousel.captions.enabled %}
+          <div id="{{carousel.id}}_controls" class="controls">
+            <div class="captions">
+              <!-- div class="caption">{{slide.caption | truncate: 80}}</div -->
+              <div class="caption">{{slide.caption}}</div>
+            </div>
+          </div>
+          {% endif %}
+          {% else %}
+          <img id="{{carousel.id}}_image_{{forloop.index}}" class="{{carousel.image_styles}}" src="{{carousel.image_base_path}}/{{slide.image}}" alt="{{slide.caption}}">
+          {% endif %}
           </div>
         </div>
+        {% endfor %}
+        {% if carousel.captions.enabled %}
+        <!--div class="pagination"></div -->
         {% endif %}
-        {% else %}
-        <img id="{{carousel.id}}_image_{{forloop.index}}" class="{{carousel.image_styles}}" src="{{carousel.image_base_path}}/{{slide.image}}" alt="{{slide.caption}}">
-        {% endif %}
-        </div>
       </div>
-      {% endfor %}
-      {% if carousel.captions.enabled %}
-      <!--div class="pagination"></div -->
-      {% endif %}
-    </div>
-    <!-- /Image slider -->
+      <!-- /Image slider -->
+
     {% endif %}
 
   {% endif %}

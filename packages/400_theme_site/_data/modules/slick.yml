@@ -59,12 +59,6 @@ settings:
       image_styles:                     img-fluid img-object--cover img-object--w500 g-height-500
 
       # ------------------------------------------------------------------------
-      # Lightbox options
-      #
-      lightbox:
-        enabled:                        false
-
-      # ------------------------------------------------------------------------
       # Carousel options
       #
       options:
@@ -110,12 +104,6 @@ settings:
       link_new_window:                  true                                    # default: false
       gutters:                          1                                       # [0 .. 5]
       image_styles:                     img-fluid img-object--cover img-object--w500 g-height-500
-
-      # ------------------------------------------------------------------------
-      # Lightbox options
-      #
-      lightbox:
-        enabled:                        false
 
       # ------------------------------------------------------------------------
       # Carousel options
@@ -165,12 +153,6 @@ settings:
       image_styles:                     img-fluid img-object--cover img-object--w500 g-height-500
 
       # ------------------------------------------------------------------------
-      # Lightbox options
-      #
-      lightbox:
-        enabled:                        false
-
-      # ------------------------------------------------------------------------
       # Carousel options
       #
       options:
@@ -218,12 +200,6 @@ settings:
       image_styles:                     img-fluid img-object--cover img-object--w500 g-height-500
 
       # ------------------------------------------------------------------------
-      # Lightbox options
-      #
-      lightbox:
-        enabled:                        false
-
-      # ------------------------------------------------------------------------
       # Carousel options
       #
       options:
@@ -269,12 +245,6 @@ settings:
       link_new_window:                  true                                    # default: false
 
       # ------------------------------------------------------------------------
-      # Lightbox options
-      #
-      lightbox:
-        enabled:                        false
-
-      # ------------------------------------------------------------------------
       # Carousel options
       #
       options:
@@ -316,12 +286,6 @@ settings:
       id:                               example_carousel_arrows_dots
       type:                             example
       slides:                           9
-
-      # ------------------------------------------------------------------------
-      # Lightbox options
-      #
-      lightbox:
-        enabled:                        false
 
       # ------------------------------------------------------------------------
       # Carousel options

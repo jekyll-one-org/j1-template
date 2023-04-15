@@ -210,7 +210,14 @@ j1.adapter.slick = (function (j1, window) {
               $('.{{carousel.id | replace: '_','-' }}').on('init', function(event, slick) {
                 logger.info('\n' + 'carousel initialized on id: {{carousel.id}}');
 
-                if ({{carousel.lightbox.enabled}}) {
+                var lightbox_enabled = "{{carousel.lightbox.enabled}}";
+                if (lightbox_enabled.length) {
+                  lightbox_enabled = true;
+                } else {
+                  lightbox_enabled = false;
+                }
+
+                if (lightbox_enabled) {
                   logger.info('\n' + 'initialize lightbox on id: {{carousel.id}}');
 
                   // See: http://mreq.github.io/slick-lightbox/demo/
