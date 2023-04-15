@@ -111,11 +111,13 @@ slick::collection_carousel_biography[]
 .Collection Biography + Arrows + Dots + Gutters
 slick::collection_carousel_biography[role="mb-3"]
 
+NOTE: For collection carousels, *no* lightbox is supported.
+
 .Configuration settings (YAML)
 [source, yaml, role="noclip mt-3 mb-5"]
 ----
 # ------------------------------------------------------------------------------
-# COLLECTION slider (romance)
+# COLLECTION carousel (biography)
 #
 - slider:
   enabled:                          true
@@ -183,14 +185,16 @@ speed, or the navigation options like *Arrows* and *Dots*.
 slick::post_carousel_life[]
 ----
 
-.Post Silder (Life) + Autoplay + Arrows + Gutters
+.Post Carousel (Life) + Autoplay + Arrows + Gutters
 slick::post_carousel_life[role="mb-4"]
+
+NOTE: For post carousels, *no* lightbox is supported.
 
 .Configuration settings (YAML)
 [source, yaml, role="noclip mb-4"]
 ----
 # ------------------------------------------------------------------------------
-# POST slider
+# POST carousel
 #
 - slider:
   enabled:                          true
@@ -240,7 +244,6 @@ articles, or on dedicated archive or category pages. They can increase
 user engagement and keep visitors on a website for longer by presenting
 content dynamically and visually appealingly.
 
-
 == Example Carousel
 
 Responsive carousels are designed to adapt and resize automatically to fit
@@ -266,11 +269,13 @@ slick::example_carousel_arrows_dots[role="mb-5"]
 .Example Silder using Arrows + Dots
 slick::example_carousel_arrows_dots[role="mb-5"]
 
+NOTE: For example carousels, *no* lightbox is supported.
+
 .Configuration settings (YAML)
 [source, yaml, role="noclip mb-4"]
 ----
 # ------------------------------------------------------------------------------
-# EXAMPLE slider 1
+# EXAMPLE carousel
 #
 - slider:
   enabled:                          true
@@ -311,7 +316,6 @@ slick::example_carousel_arrows_dots[role="mb-5"]
         slidesToScroll:             1
 ----
 
-
 == Carousels from Images
 
 An image slider, also known as a slideshow, is a graphical user interface
@@ -333,14 +337,14 @@ between images, to make the presentation more engaging and visually appealing.
 slick::image_carousel_mega_cities[role="mb-5"]
 ----
 
-.Carousel + Arrows + Dots + Gutters
+.Image Carousel + Arrows + Dots + Gutters
 slick::image_carousel_mega_cities[role="mb-5"]
 
 .Configuration settings (YAML)
 [source, yaml, role="noclip mb-4"]
 ----
 # ------------------------------------------------------------------------------
-# IMAGE slider
+# IMAGE carousel
 #
 - slider:
   enabled:                          true
@@ -424,7 +428,7 @@ since then for Javascript libraries to support such functionality.
 slick::image_carousel_mega_cities_lightbox[role="mb-5"]
 ----
 
-.Carousel + Arrows + Dots + Captions + Lightbox
+.Image Carousel + Arrows + Dots + Captions + Lightbox
 slick::image_carousel_mega_cities_lightbox[role="mb-5"]
 
 The Lighbox used for Slick carousels is _Slick-Lighbox_, an addon package
@@ -435,7 +439,7 @@ fired on all images of a slider if enabled:
 [source, yaml, role="noclip mb-4"]
 ----
 # ------------------------------------------------------------------------------
-# IMAGE slider + Captions + Lightbox
+# IMAGE carousel + Captions + Lightbox
 #
 - slider:
   enabled:                          true
@@ -485,6 +489,3 @@ fired on all images of a slider if enabled:
 
   ...
 ----
-
-NOTE: For image carousels, the lightbox properties `src` and `itemSelector`
-are to be configured for *every instance* a *lightbox* should be applied.
