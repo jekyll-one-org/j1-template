@@ -114,6 +114,7 @@ j1.adapter.slick = (function (j1, window) {
       var dependency;
       var carouselResponsiveSettingsYAML;
       var carouselResponsiveSettingsSTRING;
+      var slick_lightbox_enabled;
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -210,14 +211,14 @@ j1.adapter.slick = (function (j1, window) {
               $('.{{carousel.id | replace: '_','-' }}').on('init', function(event, slick) {
                 logger.info('\n' + 'carousel initialized on id: {{carousel.id}}');
 
-                var lightbox_enabled = "{{carousel.lightbox.enabled}}";
-                if (lightbox_enabled.length) {
-                  lightbox_enabled = true;
+                // check if a lightbox is enabled
+                if ("{{carousel.lightbox.enabled}}".length) {
+                  slick_lightbox_enabled = true;
                 } else {
-                  lightbox_enabled = false;
+                  slick_lightbox_enabled = false;
                 }
 
-                if (lightbox_enabled) {
+                if (slick_lightbox_enabled) {
                   logger.info('\n' + 'initialize lightbox on id: {{carousel.id}}');
 
                   // See: http://mreq.github.io/slick-lightbox/demo/
