@@ -79,19 +79,19 @@ settings:
 
         wave:
           top:
-            enabled:                      false
-            height:                       3                                     # [1 .. 9]
-            style:                        wave-1                                # default
-            color:                        "#dcdcdc"
-            background_color:             "#f5f5f5"
-            transform:                    false                                 # false or rotate|flip-x|flip-y and combinations
+            enabled:                    false
+            height:                     3                                       # [1 .. 9]
+            style:                      wave-1                                  # default
+            color:                      "#DCDCDC"
+            background_color:           "#F5F5F5"
+            transform:                  false                                   # false or rotate|flip-x|flip-y and combinations
           bottom:
-            enabled:                      false
-            height:                       3
-            style:                        wave-4
-            color:                        "#dcdcdc"
-            background_color:             "#f5f5f5"
-            transform:                    rotate
+            enabled:                    false
+            height:                     3
+            style:                      wave-4
+            color:                      "#DCDCDC"
+            background_color:           "#F5F5F5"
+            transform:                  rotate
 
         cards:
 
@@ -185,36 +185,36 @@ settings:
     # --------------------------------------------------------------------------
     # home_parallax_banner
     #
-    - name:                               Home Parallax Banner
+    - name:                             Home Parallax Banner
       banner:
-        enabled:                          true
+        enabled:                        true
 
-        id:                               home_parallax_banner
-        comment:                          Main parallax banner shown on home page
-        type:                             parallax
+        id:                             home_parallax_banner
+        comment:                        Main parallax banner shown on home page
+        type:                           parallax
         properties:
 
         cards:
 
-          - name:                         Quote settings
+          - name:                       Quote settings
             card:
-              enabled:                    true
-              type:                       quote
-#             cite:                       J1 Team
-              cite_text_size:             300%
-              cite_text_quotes:           false
+              enabled:                  true
+              type:                     quote
+#             cite:                     J1 Team
+              cite_text_size:           300%
+              cite_text_quotes:         false
               cite_text: >
-                                          <strong>
-                                            <span class="text-primary">Making is</span>
-                                            <span class="text-light">like Wanting, <br> but even</span>
-                                            <span class="text-primary">Better</span>
-                                          </strong>
+                                        <strong>
+                                          <span class="text-primary">Making is</span>
+                                          <span class="text-light">like Wanting, <br> but even</span>
+                                          <span class="text-primary">Better</span>
+                                        </strong>
 
-              text_color:                 "#E0E0E0"
-              gridify:                    true
-              size_y:                     450
-              darken:                     6
-              background_image:           /assets/images/modules/attics/ideas-start-here-1920x1280-bw.jpg
+              text_color:               "#E0E0E0"
+              gridify:                  true
+              size_y:                   450
+              darken:                   6
+              background_image:         /assets/images/modules/attics/ideas-start-here-1920x1280-bw.jpg
 
 
   # ----------------------------------------------------------------------------
@@ -228,23 +228,22 @@ settings:
     # --------------------------------------------------------------------------
     # home_image_banner
     #
-    - name:                               Home Image Banner
+    - name:                             Home Image Banner
       banner:
-        enabled:                          true
+        enabled:                        true
 
-        id:                               home_image_banner
-        comment:                          Image banner shown on home page
-        type:                             image
-        properties:                       mt-6 mb-6
+        id:                             home_image_banner
+        comment:                        Image banner shown on home page
+        type:                           image
+        properties:                     mt-6 mb-6
 
         image:
-          gridify:                        false
-          height:                         450
-          justify:                        true
-          brightness:                     80
-          opacity:                        false
-          picture:                        /assets/images/modules/attics/ideas-start-here-1920x1280-bw.jpg
-
+          gridify:                      false
+          height:                       450
+          justify:                      true
+          brightness:                   80
+          opacity:                      false
+          picture:                      /assets/images/modules/attics/ideas-start-here-1920x1280-bw.jpg
 
 # ------------------------------------------------------------------------------
 # END config

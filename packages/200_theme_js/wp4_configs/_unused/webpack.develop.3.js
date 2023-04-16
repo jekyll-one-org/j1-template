@@ -130,17 +130,18 @@ module.exports = merge(common, {
         watchOptions: {                                                         // see: https://webpack.js.org/configuration/watch/#watchoptions
 //        stdin:                        true,                                   // stop watching when stdin stream has ended
 //        followSymlinks:               true,                                   // follow symbolic links while looking for a file
-          poll:                         false,                                  // turn on polling by passing true for e.g. NFS or machines in VirtualBox, WSL, Containers, or Docker. When set poll to 'true', the default poll interval is to set to '5000', or specify a poll interval in 'milliseconds'
+          poll:                         500000000,                              // true|false|integer. Turn on polling by passing true for e.g. NFS or machines in VirtualBox, WSL, Containers, or Docker. When set poll to 'true', the default poll interval is to set to '5000', or specify a poll interval in 'milliseconds'
           aggregateTimeout:             500,                                    // delay before rebuilding once the first file changed
         }
       },
       // see: https://webpack.js.org/configuration/dev-server/#watch
       watch: {                                                                  // watch the files served by the static.directory option. File changes will trigger a full page reload
         ignored: [                                                              // !!! unclear why ALL Jekyll folders ignored !!!
+                                        jekyllSiteApps,
                                         jekyllSiteAssets,
+                                        jekyllSiteCollections,
                                         jekyllSitePages,
-                                        jekyllSitePosts,
-                                        jekyllSiteCollections
+                                        jekyllSitePosts
         ],
         usePolling:                     false                                   // disable polling to watch files
       }

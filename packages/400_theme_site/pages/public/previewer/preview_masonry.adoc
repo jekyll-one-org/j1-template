@@ -83,7 +83,7 @@ content to show *specific* elements the website visitors should find on a
 most top position of your homepage as an eye-catcher.
 
 .Post Silder
-slick::post_slider[role="mb-4"]
+slick::post_carousel_life[role="mb-4"]
 
 
 == Masonry Grid on Collections

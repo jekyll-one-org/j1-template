@@ -244,7 +244,7 @@ lanes:
       id:                               divider-1
       region:                           body-main
       type:                             async
-      properties:                       mt-4 mr-0 mb-4 ml-0
+      properties:                       row banner-divider mt-4 mr-0 mb-4 ml-0
 
   # ----------------------------------------------------------------------------
   # IMAGE banner
@@ -303,29 +303,7 @@ lanes:
       type:                             sync
       base:                             _includes/custom
       path:                             templates
-      file:                             collection.html
-
-  # ----------------------------------------------------------------------------
-  # SERVICE panel
-  #
-  #   Complex, but fully configurake display element (mainly used on landing
-  #   pages) to give a detailed inside view on the services provided by
-  #   the website. Find the configuration with:
-  #
-  #     panels:  ~/_data/blocks/panel.yml
-  #
-  # NOTE:
-  #   The property 'id' of a panel element MUST be the same as specified
-  #   the configuration for panels (panel.yml).
-  #
-  # ----------------------------------------------------------------------------
-  #
-  - lane:
-      enabled:                          false
-      id:                               home_service_panel
-      region:                           body-main
-      type:                             async
-      properties:                       elevated-z3
+      file:                             collection_panel.html
 
   # ----------------------------------------------------------------------------
   # INTRO panel
@@ -372,6 +350,28 @@ lanes:
       properties:                       elevated-z0
 
   # ----------------------------------------------------------------------------
+  # SERVICE panel
+  #
+  #   Complex, but fully configurake display element (mainly used on landing
+  #   pages) to give a detailed inside view on the services provided by
+  #   the website. Find the configuration with:
+  #
+  #     panels:  ~/_data/blocks/panel.yml
+  #
+  # NOTE:
+  #   The property 'id' of a panel element MUST be the same as specified
+  #   the configuration for panels (panel.yml).
+  #
+  # ----------------------------------------------------------------------------
+  #
+  - lane:
+      enabled:                          false
+      id:                               home_service_panel
+      region:                           body-main
+      type:                             async
+      properties:                       elevated-z1
+
+  # ----------------------------------------------------------------------------
   # PLAN panel
   #
   #   Displays a fully configurable pricing plan. For commercial use or
@@ -387,11 +387,11 @@ lanes:
   # ----------------------------------------------------------------------------
   #
   - lane:
-      enabled:                          true
+      enabled:                          false
       id:                               home_plan_panel
       region:                           body-main
       type:                             async
-      properties:                       elevated-z3
+      properties:                       elevated-z1
 
   # ----------------------------------------------------------------------------
   # NEWS panel

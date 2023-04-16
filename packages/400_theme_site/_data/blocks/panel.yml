@@ -87,14 +87,14 @@ settings:
             height:                       2                                     # [1 .. 9]
             style:                        wave-1                                # default
             color:                        "#EEEEEE"                             # "#dcdcdc"
-            background_color:             "#fafafa"                             # auto|rgb_value, "#fafafa"
+            background_color:             "#FAFAFA"                             # auto|rgb_value, "#FAFAFA"
             transform:                    false                                 # false or rotate|flip-x|flip-y and combinations
           bottom:
             enabled:                      true
             height:                       2
             style:                        wave-4
             color:                        "#EEEEEE"
-            background_color:             "#fafafa"
+            background_color:             "#FAFAFA"
             transform:                    flip-y flip-x
 
         cards:
@@ -198,7 +198,7 @@ settings:
 
     - name:                             Home Plan Panel
       panel:
-        enabled:                        false
+        enabled:                        true
 
         id:                             home_plan_panel
         comment:                        Plan Panel
@@ -234,14 +234,14 @@ settings:
             height:                       4                                     # [1 .. 9]
             style:                        wave-4                                # default
             color:                        "#EEEEEE"
-            background_color:             "#fafafa"
+            background_color:             "#FAFAFA"
             transform:                    false                                 # false or rotate|flip-x|flip-y and combinations
           bottom:
             enabled:                      true
             height:                       2
             style:                        wave-4
             color:                        "#EEEEEE"
-            background_color:             "#fafafa"
+            background_color:             "#FAFAFA"
             transform:                    rotate
 
         cards:
@@ -434,14 +434,14 @@ settings:
             height:                       2                                     # [1 .. 9]
             style:                        wave-1                                # default
             color:                        "#EEEEEE"
-            background_color:             "#fafafa"
+            background_color:             "#FAFAFA"
             transform:                    false                                 # false or rotate|flip-x|flip-y and combinations
           bottom:
             enabled:                      true
             height:                       2
             style:                        wave-4
             color:                        "#EEEEEE"
-            background_color:             "#fafafa"
+            background_color:             "#FAFAFA"
             transform:                    rotate
 
         cards:
@@ -750,14 +750,14 @@ settings:
             height:                       2                                     # [1 .. 9]
             style:                        wave-1                                # default
             color:                        "#EEEEEE"
-            background_color:             "#fafafa"
+            background_color:             "#FAFAFA"
             transform:                    false                                 # false or rotate|flip-x|flip-y and combinations
           bottom:
             enabled:                      false
             height:                       2
             style:                        wave-4
             color:                        "#EEEEEE"
-            background_color:             "#fafafa"
+            background_color:             "#FAFAFA"
             transform:                    rotate
 
         cards:

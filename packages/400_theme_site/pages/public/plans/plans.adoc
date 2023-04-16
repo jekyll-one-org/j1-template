@@ -1,13 +1,12 @@
 ---
 title:                                  J1 Starter
-tagline:                                Plan Setails
+tagline:                                Plan Details
 date:                                   2020-11-03 00:00:00
 description: >
-                                        A good user experience browsing a Web site is one of the most important
-                                        features a website offers as a must, besides excellent content. Presenting
-                                        content at its best on all devices for all window sizes makes a great Web
-                                        brilliant. J1 Theme supports your Web for full responsiveness, for the
-                                        best user experience on all modern devices.
+                                        Service plans give customers a clear understanding of what services
+                                        they will receive, how they will be provided, and what they will cost. Service
+                                        plans help ensure that the service provider and the customer are on the same
+                                        page and can work together effectively.
 
 categories:                             [ Info ]
 tags:                                   [ Plan, Template ]
@@ -17,7 +16,7 @@ robots:
   follow:                               false
 
 image:
-  path:                                 /assets/images/modules/attics/gift-from-hand-1920x1280.jpg
+  path:                                 /assets/images/modules/attics/1920x1280/kira-auf-der-heide.jpg
   width:                                1920
   height:                               1280
   alt:                                  Plan Details
@@ -33,8 +32,12 @@ resource_options:
   - attic:
       padding_top:                      600
       slides:
-        - url:                          /assets/images/modules/attics/gift-from-hand-1920x1280.jpg
-          alt:                          Plan Details
+        - url:                          /assets/images/modules/attics/1920x1280/kira-auf-der-heide.jpg
+          alt:                          Photo by Kira auf der Heide on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Kira auf der Heide
+            href:                       https://unsplash.com/@kadh
 ---
 
 // Page Initializer
@@ -61,14 +64,24 @@ resource_options:
 // -----------------------------------------------------------------------------
 == Plans
 
-lorem:sentences[5]
+Service plans are typically contracts or agreements between a service provider
+and a customer, outlining the terms and conditions of a particular service or
+set of services that will be provided.
 
-lorem:sentences[3]
+Service plans may include details such as the scope of the service, the level
+of support provided, the duration of the contract, the payment terms, and any
+additional fees or charges. Some service plans may also include warranties or
+guarantees, outlining what the customer can expect regarding quality or
+reliability.
+
+Overall, service plans give customers a clear understanding of what services
+they will receive, how they will be provided, and what they will cost. Service
+plans help ensure that the service provider and the customer are on the same
+page and can work together effectively.
 
 === Starter
 
 lorem:sentences[5]
-
 
 === Base
 
