@@ -585,6 +585,13 @@ excerpt_truncate_words:                 100
 collections:
 
   # ----------------------------------------------------------------------------
+  # Portfolio
+  #
+  portfolio:
+    output:                             true
+    permalink:                          /collections/public/:collection/:name/
+
+  # ----------------------------------------------------------------------------
   # Book shelf
   #
   biography:
@@ -761,6 +768,16 @@ defaults:
   # ----------------------------------------------------------------------------
   # Collections
   #
+
+  # ----------------------------------------------------------------------------
+  # Portfolio
+  #
+  - scope:
+      type:                             portfolio
+      path:                             collections/_portfolio
+
+    values:
+      layout:                           page
 
   # ----------------------------------------------------------------------------
   # Book Shelf
