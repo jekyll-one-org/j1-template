@@ -74,7 +74,7 @@
           href:                         /pages/public/collections/jekyll_collections/
           icon:                         head-question
 
-        - title:                        Previewers
+        - title:                        Bookshelf Collection
           icon:                         eye
           dropdown:
             - title:                    Bookshelf
