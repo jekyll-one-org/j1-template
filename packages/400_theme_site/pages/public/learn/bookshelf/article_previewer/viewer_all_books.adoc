@@ -3,9 +3,9 @@ title:                                  Bookshelf
 tagline:                                All Books
 date:                                   2023-01-29 00:00:00
 description: >
-                                        Today's people is a collection contains the biography's
-                                        of celebrities well known by most of us. Find the books issued
-                                        by musicans, actors and more.
+                                        All available articles in the Bookshelf. The content is
+                                        automatically generated and taken from the articles of the
+                                        collections in the Bookshelf contains.
 
 categories:                             [ Books ]
 tags:                                   [ Bookshelf ]
@@ -64,9 +64,9 @@ Find below all available articles in the Bookshelf. The content is
 automatically generated and taken from the articles of the `collections`
 the *Bookshelf* contains:
 
-* biography
-* fantasy
-* romance
+* Biography
+* Fantasy
+* Romance
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
