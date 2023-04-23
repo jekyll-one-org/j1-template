@@ -1,0 +1,34 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/extensions/_people.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # NOTE: Additional styles for page articles (pages)
+ # -----------------------------------------------------------------------------
+*/
+
+// Provides all styles for
+// -----------------------------------------------------------------------------
+
+.people-member {
+    margin-bottom: 3rem;
+    text-align: center;
+
+    img {
+        width: 14rem;
+        height: 14rem;
+        border: 0.5rem solid fade-out($black, 0.9);
+    }
+
+    h4 {
+        margin-top: 1.5rem;
+        margin-bottom: 0;
+    }
+}

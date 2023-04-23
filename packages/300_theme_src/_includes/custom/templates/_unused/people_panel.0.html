@@ -1,0 +1,86 @@
+<!--
+ # -----------------------------------------------------------------------------
+ #  ~/assets/custom/content/templates/people_panel.html
+ #
+ #  Product/Info:
+ #  http://jekyll.one
+ #
+ #  Copyright (C) 2023 Juergen Adams
+ #
+ #  J1 Theme is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #    liquid_var:  {{liquid_var | debug}}
+ # -----------------------------------------------------------------------------
+-->
+
+{% comment %} Process YML config data
+================================================================================ {% endcomment %}
+
+{% comment %} Set collection data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign collection_name             = "people" %}
+
+{% comment %} Set grid data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign grid_title                  = collection_name | capitalize %}
+{% assign grid_tagline                = "who we are" %}
+{% assign card_translate_description  = "notranslate" %}
+
+{% comment %} Collect collection documents
+-------------------------------------------------------------------------------- {% endcomment %}
+{% for collection in site.collections %}
+  {% if collection.label contains collection_name %}
+    {% assign articles = collection.docs %}
+    {% break %}
+  {% endif %}
+{% endfor %}
+
+{% comment %} Main
+-------------------------------------------------------------------------------- {% endcomment %}
+<!-- People Grid -->
+<section id="{{collection_name}}" class="page-section elevated-z1">
+  <div class="container">
+
+    <!-- Header -->
+    <div class="mb-5">
+      <h2 class="g-font-weight-500 mb-0 {{card_translate_description}}">{{grid_title}}</h2>
+      <p class="tagline mb-0 {{card_translate_description}}"><b>{{grid_tagline}}</b></p>
+      <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-2"></div>
+    </div>
+    <!-- /Header -->
+
+    <div class="row">
+      {% for article in articles %}
+
+      article:  {{article | debug}}
+
+      <div class="col-lg-4">
+        <div class="people-member">
+          <img class="mx-auto rounded-circle" src="{{ article.image.path | relative_url }}" alt="{{ article.person.name | escape }}" />
+          <h3 class="mt-2">{{ article.person.name }}</h3>
+          <p>{{ article.person.role }}</p>
+          <a class="btn btn-dark btn-social mx-2" href="javascript:void(0)" aria-label="{{ person.name | escape }} Twitter Profile"><i class="fab fa-twitter"></i></a>
+          <a class="btn btn-dark btn-social mx-2" href="javascript:void(0)" aria-label="{{ person.name | escape }} Facebook Profile"><i class="fab fa-facebook-f"></i></a>
+          <a class="btn btn-dark btn-social mx-2" href="javascript:void(0)" aria-label="{{ person.name | escape }} LinkedIn Profile"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="row">
+      <div class="col-lg-8 mx-auto text-center">
+        <p class="large">
+          Meeting with professionals can be a great way to get expert advice
+          and assistance in creating a successful website or online presence.
+          <br /> <br />
+          You're welcome!
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- /People Grid -->
