@@ -297,7 +297,7 @@ lanes:
       file:                             bs5_accordion.html
 
   - lane:
-      enabled:                          true
+      enabled:                          false
       id:                               custom_content
       region:                           body-main
       type:                             sync
