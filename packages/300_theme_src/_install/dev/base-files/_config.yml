@@ -584,6 +584,16 @@ excerpt_truncate_words:                 100
 collections:
 
   # ----------------------------------------------------------------------------
+  # People
+  #
+  - scope:
+      type:                             people
+      path:                             collections/_people
+
+    values:
+      layout:                           page
+
+  # ----------------------------------------------------------------------------
   # Portfolio
   #
   portfolio:
