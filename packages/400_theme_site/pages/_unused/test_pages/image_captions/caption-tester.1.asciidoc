@@ -1,0 +1,97 @@
+---
+title:                                  Tester
+tagline:                                Image Captions
+date:                                   2020-11-03 00:00:00
+description: >
+                                        Welcome to the preview page focussing on the image module. This page
+                                        shows some valuable features of the J1 Theme to manage your image-based
+                                        content using lightboxes, carousels (slider), and galleries.
+
+categories:                             [ Testpages ]
+tags:                                   [ Example, Plans ]
+
+toc:                                    false
+comments:                               false
+fab_menu_id:                            default
+
+permalink:                              /pages/public/learn/caption_tester/
+regenerate:                             false
+
+resources:                              [ animate, clipboard, lightbox, rouge ]
+resource_options:
+  - attic:
+      padding_top:                      600
+      slides:
+        - url:                          /assets/images/modules/attics/themes-1920x1280-bw.jpg
+          alt:                          Photo by Clem Onojeghuo on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Clem Onojeghuo
+            href:                       https://unsplash.com/@clemono
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// See: https://www.webnots.com/how-to-create-css-image-caption-effects/
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+Create CSS Image Caption Effects. When you upload an image to a server, it
+has properties like URL, title, caption, alt text and description. However,
+you can only see the image and caption on the published website. Generally,
+webmasters focus to showcase the image and forget the importance of caption.
+In this article we will show you how to create CSS image caption effects to
+showcase your image captions in an attractive manner.
+
+++++
+<div class="row">
+
+  <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
+    <div class="caption-control slidedown">
+     <img src="https://placekitten.com/300/300" width="300" height="300" alt="Image Caption Slidedown">
+     <div class="caption">Slide down caption. <a href="#">Link</a> possible.</div>
+    </div>
+  </div>
+
+  <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
+    <div class="caption-control split-horiz">
+     <img src="https://placekitten.com/300/300" width="300" height="300" alt="Image Caption Split Horizontal">
+     <div class="caption">Horizontal Split Style Caption Caption Caption Caption Caption Caption Caption Caption.</div>
+    </div>
+  </div>
+
+  <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
+    <div class="caption-control split-vert">
+     <img src="https://placekitten.com/300/300" width="300" height="300" alt="Image Caption Split Vertical">
+     <div class="caption">Vertical Split Style Caption</div>
+    </div>
+  </div>
+
+  <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
+    <div class="caption-control slideup">
+     <img src="https://placekitten.com/300/300" width="300" height="300" alt="Image Caption Slideup">
+     <div class="caption">Image Slide Up Caption Caption Caption Caption Caption Caption Caption Caption</div>
+    </div>
+  </div>
+
+</div>
+++++

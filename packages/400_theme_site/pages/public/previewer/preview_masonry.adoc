@@ -127,13 +127,7 @@ masonry::collection_biography[role="mb-3"]
   id:                               collection_biography
   type:                             collection
   collection:                       biography
-  gutters:                          1
-
-  # ----------------------------------------------------------------------------
-  # Lightbox options
-  #
-  lightbox:
-    enabled:                        false
+  gutters:                          true
 
   # ----------------------------------------------------------------------------
   # Masonry options
@@ -143,7 +137,6 @@ masonry::collection_biography[role="mb-3"]
     originLeft:                     true
     initLayout:                     true
     percentPosition:                true
-
 ----
 
 == Masonry Grid on Posts
@@ -175,13 +168,7 @@ masonry::post_series_example[role="mb-4"]
   id:                               post_series_example
   type:                             post
   group:                            Life
-  gutters:                          1
-
-  # ------------------------------------------------------------------------
-  # Lightbox options
-  #
-  lightbox:
-    enabled:                        false
+  gutters:                          true
 
   # ------------------------------------------------------------------------
   # Masonry options
@@ -212,7 +199,7 @@ dynamic and visually appealing galleries. By using masonry, you can create a
 gallery that displays images of different sizes in an aesthetically pleasing
 and functional way.
 
-=== Bootstrap Image Cards
+=== Image Cards
 
 Bootstrap cards are a popular component of the Bootstrap front-end framework
 that provides a flexible and customizable way to display content on a website.
@@ -222,32 +209,34 @@ ways to suit the website's needs.
 .Asciidoc configuration
 [source, config, role="noclip mb-3"]
 ----
-masonry::bs_image_cards_example[role="mb-4"]
+masonry::image_cards_example[role="mb-4"]
 ----
 
-.BS Image Cards + Lightbox
-masonry::bs_image_cards_example[role="mb-4"]
+.BS Image Cards + Lightbox + Captions
+masonry::image_cards_example[role="mb-4"]
 
 .Configuration settings (YAML)
 [source, yaml, role="noclip mb-4"]
 ----
 # --------------------------------------------------------------------------
-# Bootstrap Card Images
+# Bootstrap Image Cards + Lightbox + Captions
 #
 - grid:
   enabled:                          true
 
-  id:                               bs_image_cards_example
-  type:                             bs_image_cards
+  id:                               image_cards_example
+  type:                             image_cards
   image_base_path:                  /assets/images/modules/gallery/mega_cities
   image_styles:                     img-fluid img-object--cover g-height-300
-  gutters:                          1
+  lightbox:                         true
+  gutters:                          true
 
   # ------------------------------------------------------------------------
-  # Lightbox options
+  # Captions
   #
-  lightbox:
+  caption:
     enabled:                        true
+    position:                       bottom
 
   # ------------------------------------------------------------------------
   # Masonry options
@@ -264,8 +253,8 @@ masonry::bs_image_cards_example[role="mb-4"]
   images:
 
     - image:                        # image 1
-      title:                        Man posing at the rooftop of Jin Mao Tower Shanghai - China
       file:                         denys-nevozhai-1_b.jpg
+      caption:                      Man posing at the rooftop of Jin Mao Tower Shanghai - China
 
       ...
 ----
@@ -289,14 +278,14 @@ or disrupting the overall flow of the gallery.
 masonry::image_grid_base_example[role="mb-4"]
 ----
 
-.Image Grid + No Gutters
+.Image Grid + No Gutters + Captions
 masonry::image_grid_base_example[role="mb-4"]
 
 .Configuration settings (YAML)
 [source, yaml, role="noclip mb-4"]
 ----
 # --------------------------------------------------------------------------
-# Base Image Grid
+# Base Image Grid + Captions
 #
 - grid:
   enabled:                          true
@@ -305,13 +294,15 @@ masonry::image_grid_base_example[role="mb-4"]
   type:                             image_grid
   image_base_path:                  /assets/images/modules/gallery/mega_cities
   image_styles:                     img-fluid
-  gutters:                          0
+  lightbox:                         false
+  gutters:                          false
 
   # ------------------------------------------------------------------------
-  # Lightbox options
+  # Captions
   #
-  lightbox:
-    enabled:                        false
+  caption:
+    enabled:                        true
+    position:                       bottom
 
   # ------------------------------------------------------------------------
   # Masonry options
@@ -328,8 +319,8 @@ masonry::image_grid_base_example[role="mb-4"]
   images:
 
     - image:                        # image 1
-      title:                        Man posing at the rooftop of Jin Mao Tower Shanghai - China
       file:                         denys-nevozhai-1_b.jpg
+      caption:                      Man posing at the rooftop of Jin Mao Tower Shanghai - China
 
       ...
 ----
@@ -351,14 +342,14 @@ masonry::image_grid_lightbox_example[role="mb-4"]
 A lightbox supports image groups (image sets). Click on the images below to
 see how a Lightbox manages a group of images shown in your grid.
 
-.Image Grid + Gutters + Lightbox
+.Image Grid + Gutters + Lightbox + Captions
 masonry::image_grid_lightbox_example[role="mb-4"]
 
 .Configuration settings (YAML)
 [source, yaml, role="noclip mb-4"]
 ----
 # --------------------------------------------------------------------------
-# Image Grid + Lightbox
+# Image Grid + Lightbox + Captions
 #
 - grid:
   enabled:                          true
@@ -367,13 +358,15 @@ masonry::image_grid_lightbox_example[role="mb-4"]
   type:                             image_grid
   image_base_path:                  /assets/images/modules/gallery/mega_cities
   image_styles:                     img-fluid
-  gutters:                          1
+  lightbox:                         true
+  gutters:                          true
 
   # ------------------------------------------------------------------------
-  # Lightbox options
+  # Captions
   #
-  lightbox:
+  caption:
     enabled:                        true
+    position:                       bottom
 
   # ------------------------------------------------------------------------
   # Masonry options
@@ -390,8 +383,8 @@ masonry::image_grid_lightbox_example[role="mb-4"]
   images:
 
     - image:                        # image 1
-      title:                        Man posing at the rooftop of Jin Mao Tower Shanghai - China
       file:                         denys-nevozhai-1_b.jpg
+      caption:                      Man posing at the rooftop of Jin Mao Tower Shanghai - China
 
       ...
 ----

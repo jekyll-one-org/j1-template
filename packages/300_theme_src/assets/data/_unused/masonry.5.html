@@ -89,20 +89,13 @@ exclude_from_search:                    true
     {% comment %} Collect posts|group grids
     ---------------------------------------------------------------------------- {% endcomment %}
     {% if grid.type == 'post' %}
-
-      {% if grid.gutters %}
-        {% assign gutter = 1  %}
-      {% else %}
-        {% assign gutter = 0  %}
-      {% endif %}
-
       <!-- Posts|Group -->
       <div id="{{grid.id}}" class="row {{grid.id | replace: '_','-' }} g-0">
         <!-- Collect posts only if group matches -->
         {% for post in site.posts %} {% if post.group contains grid.group %}
 
         <!-- resposive items: 3-2-1 -->
-        <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{gutter}} py-{{gutter}}">
+        <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{grid.gutters}} py-{{grid.gutters}}">
           <article class="card bg-dark text-center text-white border-0 rounded-0">
             <img class="card-img img-object--cover g-height-300" src="{{post.image.path | relative_url}}" alt="{{post.title}}" style="filter: contrast(1) brightness(0.5);">
             <!-- div class="card-img-overlay" -->
@@ -175,14 +168,8 @@ exclude_from_search:                    true
         {% assign translate = "notranslate" %}
       {% endif %}
 
-      {% if grid.gutters %}
-        {% assign gutter = 1  %}
-      {% else %}
-        {% assign gutter = 0  %}
-      {% endif %}
-
       {% for article in articles %}
-      <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{gutter}} py-{{gutter}}">
+      <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{grid.gutters}} py-{{grid.gutters}}">
         <!-- Article item -->
         <div id="{{article.title | downcase | replace: ' ' ,'_'}}" class="article-item article-item--w400">
           {% if grid.preview.enabled %}
@@ -263,100 +250,52 @@ exclude_from_search:                    true
 
     {% comment %} Collect Bootrap Image Card Grids
     ---------------------------------------------------------------------------- {% endcomment %}
-    {% if grid.type == 'image_cards' %}
-
-      {% if grid.gutters %}
-        {% assign gutter = 1  %}
-      {% else %}
-        {% assign gutter = 0  %}
-      {% endif %}
-
-      <!-- Card Image Grid -->
-      <div id="{{grid.id}}" class="row {{grid.id | replace: '_','-' }} g-0">
-        {% for image in grid.images %}
-        <div class="col-xl-{{masonry_otions.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{gutter}} py-{{gutter}}">
-          <div class="card">
-            {% if grid.lightbox %}
-            <div class="{{grid.caption.position}}">
-              <a href="{{grid.image_base_path}}/{{image.file}}"
-                 data-lightbox="{{grid.id}}-image-group"
-                 data-caption="{{image.caption}}"
-                 data-title="{{image.caption}}">
-                <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.caption}}">
-              </a>
-              {% if grid.caption.enabled %}
-              <div class="caption">{{image.caption}}</div>
-              {% endif %}
-            </div>
-            {% else %}
-            <div class="{{grid.caption.position}}">
-              <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.caption}}">
-              {% if grid.caption.enabled %}
-              <div class="caption">{{image.caption}}</div>
-              {% endif %}
-            </div>
-            {% endif %}
-          </div>
+    {% if grid.type == 'bs_image_cards' %}
+    <!-- Card Image Grid -->
+    <div id="{{grid.id}}" class="row {{grid.id | replace: '_','-' }} g-0">
+      {% for image in grid.images %}
+      <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{grid.gutters}} py-{{grid.gutters}}">
+        <div class="card">
+          {% if grid.lightbox.enabled %}
+          <a href="{{grid.image_base_path}}/{{image.file}}"
+             data-lightbox="{{grid.id}}-image-group"
+             data-caption="{{image.caption}}"
+             data-title="{{image.caption}}">
+            <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.caption}}">
+          </a>
+        {% else %}
+          <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.caption}}">
+        {% endif %}
         </div>
-        {% endfor %}
       </div>
-      <!-- /Card Image Grid -->
+      {% endfor %}
+    </div>
+    <!-- /Card Image Grid -->
     {% endif %}
 
     {% comment %} Collect Image Grids
     ---------------------------------------------------------------------------- {% endcomment %}
     {% if grid.type == 'image_grid' %}
-
-      {% if grid.gutters %}
-        {% assign gutter = 1  %}
-      {% else %}
-        {% assign gutter = 0  %}
-      {% endif %}
-
-      <!-- Image Grid -->
-      <div id="{{grid.id}}" class="row {{grid.id | replace: '_','-' }} g-0">
-        {% for image in grid.images %}
-        <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{gutter}} py-{{gutter}}">
-          {% if grid.lightbox %}
-          <div class="{{grid.caption.position}}">
-            <a href="{{grid.image_base_path}}/{{image.file}}"
-               data-lightbox="{{grid.id}}-image-group"
-               data-caption="{{image.caption}}"
-               data-title="{{image.caption}}">
-              <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.caption}}">
-              {% if grid.caption.enabled %}
-                {% if grid.gutters and grid.caption.position == 'top' %}
-                  <div class="caption" style="top: calc(2px + {{gutter}}*4px - {{gutter}}px); width: calc(100% - {{gutter}}*3%);">{{image.caption}}</div>
-                {% elsif grid.gutters and grid.caption.position == 'center' %}
-                  <div class="caption" style="width: calc(100% - {{gutter}}*3%);">{{image.caption}}</div>
-                {% elsif grid.gutters and grid.caption.position == 'bottom' %}
-                  <div class="caption" style="top: calc(100% - {{gutter}}*1% - 1px); width: calc(100% - {{gutter}}*3%);">{{image.caption}}</div>
-                {% else %}
-                  <div class="caption">{{image.caption}}</div>
-                {% endif %}
-              {% endif %}
-            </a>
-          </div>
+    <!-- Image Grid -->
+    <div id="{{grid.id}}" class="row {{grid.id | replace: '_','-' }} g-0">
+      {% for image in grid.images %}
+      <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{grid.gutters}} py-{{grid.gutters}}">
+        <div class="nocard">
+          {% if grid.lightbox.enabled %}
+          <a href="{{grid.image_base_path}}/{{image.file}}"
+             data-lightbox="{{grid.id}}-image-group"
+             data-caption="{{image.caption}}"
+             data-title="{{image.caption}}">
+            <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.caption}}">
+          </a>
           {% else %}
-            <div class="{{grid.caption.position}}">
-              <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.caption}}">
-              {% if grid.caption.enabled %}
-                {% if grid.gutters and grid.caption.position == 'top' %}
-                  <div class="caption" style="top: calc(2px + {{gutter}}*4px - {{gutter}}px); width: calc(100% - {{gutter}}*3%);">{{image.caption}}</div>
-                {% elsif grid.gutters and grid.caption.position == 'center' %}
-                  <div class="caption" style="width: calc(100% - {{gutter}}*3%);">{{image.caption}}</div>
-                {% elsif grid.gutters and grid.caption.position == 'bottom' %}
-                  <div class="caption" style="top: calc(100% - {{gutter}}*1%); width: calc(100% - {{gutter}}*3%);">{{image.caption}}</div>
-                {% else %}
-                  <div class="caption">{{image.caption}}</div>
-                {% endif %}
-              {% endif %}
-            </div>
+          <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.caption}}">
           {% endif %}
         </div>
-        {% endfor %}
       </div>
-      <!-- /Image Grid -->
+      {% endfor %}
+    </div>
+    <!-- /Image Grid -->
     {% endif %}
 
   {% endif %}

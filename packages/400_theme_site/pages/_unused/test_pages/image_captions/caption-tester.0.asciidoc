@@ -1,0 +1,287 @@
+---
+title:                                  Tester
+tagline:                                image captions
+date:                                   2020-11-03 00:00:00
+description: >
+                                        Welcome to the preview page focussing on the image module. This page
+                                        shows some valuable features of the J1 Theme to manage your image-based
+                                        content using lightboxes, carousels (slider), and galleries.
+
+categories:                             [ Testpages ]
+tags:                                   [ Example, Plans ]
+
+comments:                               false
+fab_menu_id:                            page_ctrl
+
+permalink:                              /pages/public/learn/caption_tester/
+regenerate:                             false
+
+resources:                              [ animate, clipboard, lightbox, rouge ]
+resource_options:
+  - attic:
+      padding_top:                      600
+      slides:
+        - url:                          /assets/images/modules/attics/themes-1920x1280-bw.jpg
+          alt:                          Photo by Clem Onojeghuo on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Clem Onojeghuo
+            href:                       https://unsplash.com/@clemono
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+== Image Captions
+
+Fund our project that make up your web site easy to manage for excellent
+performance, reliability, and stability.
+
+++++
+<div class="row">
+
+  <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
+    <div class="caption-control slidedown">
+     <img src="https://placekitten.com/300/300" width="300" height="300" alt="Image Caption Slidedown">
+     <div class="caption">Slide down caption. <a href="#">Link</a> possible.</div>
+    </div>
+  </div>
+
+  <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
+    <div class="caption-control split-horiz">
+     <img src="https://placekitten.com/300/300" width="300" height="300" alt="Image Caption Split Horizontal">
+     <div class="caption">Horizontal Split Style Caption Caption Caption Caption Caption Caption Caption Caption.</div>
+    </div>
+  </div>
+
+  <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
+    <div class="caption-control split-vert">
+     <img src="https://placekitten.com/300/300" width="300" height="300" alt="Image Caption Split Vertical">
+     <div class="caption">Vertical Split Style Caption</div>
+    </div>
+  </div>
+
+  <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12 col-12">
+    <div class="caption-control slideup">
+     <img src="https://placekitten.com/300/300" width="300" height="300" alt="Image Caption Slideup">
+     <div class="caption">Image Slide Up Caption Caption Caption Caption Caption Caption Caption Caption</div>
+    </div>
+  </div>
+
+</div>
+++++
+
+++++
+<style>
+
+/* General styles
+-------------------------------------------------------------------------------- */
+.caption-control {
+ margin: 0;
+ padding: 0;
+ display: inline-block;
+ position: relative;
+ overflow: hidden;
+}
+
+.caption-control::before, .caption-control::after {
+ content: '';
+ width: 100%;
+ height: 100%;
+ background: black;
+ position: absolute;
+ opacity: 0.3;
+ top: 0;
+ left: 0;
+ -moz-transform: translate3d(0, -100%, 0);
+ -webkit-transform: translate3d(0, -100%, 0);
+ transform: translate3d(0, -100%, 0);
+ -moz-transition: all 0.5s;
+ -webkit-transition: all 0.5s;
+ transition: all 0.5s;
+}
+
+.caption {
+ position: absolute;
+ text-align: center;
+ padding: 10px;
+ /* padding-bottom: 30px; */
+ /* margin-bottom: 10px; */
+ background: rgba(255, 255, 255, .8);
+ z-index: 999;
+ width: 100%;
+ max-height: 100%;
+ overflow: hidden;
+ top: 50%;
+ -webkit-transform: translate3d(-100%, -50%, 0);
+ transform: translate3d(-100%, -50%, 0);
+ -webkit-transition: all 0.5s;
+ transition: all 0.5s;
+ line-height: 30px;
+ font-weight: 500;
+ font-size: 16px;
+}
+
+.caption a {
+ text-decoration: none;
+}
+
+img {
+ display: block;
+}
+
+/* Slidedown Caption
+-------------------------------------------------------------------------------- */
+.slidedown:hover::before {
+  -moz-transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+}
+
+.slidedown:hover .caption {
+  padding-bottom: 10px;
+  opacity: 1;
+  -moz-transform: translate3d(0, -50%, 0);
+  -webkit-transform: translate3d(0, -50%, 0);
+  transform: translate3d(0, -50%, 0);
+  -moz-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  -moz-transition-delay: 0.5s;
+  -webkit-transition-delay: 0.5s;
+  transition-delay: 0.5s;
+}
+
+/* Horizontal Split Caption
+-------------------------------------------------------------------------------- */
+.split-horiz::after {
+  -moz-transform: translate3d(0, 100%, 0);
+  -webkit-transform: translate3d(0, 100%, 0);
+  transform: translate3d(0, 100%, 0);
+}
+
+.split-horiz:hover::before {
+  -moz-transform: translate3d(0, -50%, 0);
+  -webkit-transform: translate3d(0, -50%, 0);
+  transform: translate3d(0, -50%, 0);
+}
+
+.split-horiz:hover::after {
+  -moz-transform: translate3d(0, 50%, 0);
+  -webkit-transform: translate3d(0, 50%, 0);
+  transform: translate3d(0, 50%, 0);
+}
+
+.split-horiz:hover .caption {
+  padding-bottom: 10px;
+  opacity: 1;
+  -moz-transform: translate3d(0, -50%, 0);
+  -webkit-transform: translate3d(0, -50%, 0);
+  transform: translate3d(0, -50%, 0);
+  -moz-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  -moz-transition-delay: 0.5s;
+  -webkit-transition-delay: 0.5s;
+  transition-delay: 0.5s;
+}
+
+
+/* Vertical Split Caption
+-------------------------------------------------------------------------------- */
+.split-vert::before {
+  -moz-transform: translate3d(-100%, 0, 0);
+  -webkit-transform: translate3d(-100%, 0, 0);
+  transform: translate3d(-100%, 0, 0);
+}
+
+.split-vert::after {
+  -moz-transform: translate3d(100%, 0, 0);
+  -webkit-transform: translate3d(100%, 0, 0);
+  transform: translate3d(100%, 0, 0);
+}
+
+.split-vert:hover::before {
+ -moz-transform: translate3d(-50%, 0, 0);
+ -webkit-transform: translate3d(-50%, 0, 0);
+ transform: translate3d(-50%, 0, 0);
+}
+
+.split-vert:hover::after {
+ -moz-transform: translate3d(50%, 0, 0);
+ -webkit-transform: translate3d(50%, 0, 0);
+ transform: translate3d(50%, 0, 0);
+}
+
+.split-vert:hover .caption {
+  padding-bottom: 10px;
+  opacity: 1;
+  -moz-transform: translate3d(0, -50%, 0);
+  -webkit-transform: translate3d(0, -50%, 0);
+  transform: translate3d(0, -50%, 0);
+  -moz-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  -moz-transition-delay: 0.5s;
+  -webkit-transition-delay: 0.5s;
+  transition-delay: 0.5s;
+}
+
+/* Slideup Caption
+-------------------------------------------------------------------------------- */
+.slideup img {
+ -moz-transform: translate3d(0, 0, 0);
+ -webkit-transform: translate3d(0, 0, 0);
+ transform: translate3d(0, 0, 0);
+ -moz-transition: all 0.5s;
+ -webkit-transition: all 0.5s;
+ transition: all 0.5s;
+}
+
+.slideup .caption {
+ top: 100%;
+ opacity: 1;
+ -moz-transform: translate3d(0, 0, 0);
+ -webkit-transform: translate3d(0, 0, 0);
+ transform: translate3d(0, 0, 0);
+}
+
+.slideup:hover img {
+ -moz-transform: translate3d(0, -20px, 0);
+ -webkit-transform: translate3d(0, -20px, 0);
+ transform: translate3d(0, -20px, 0);
+}
+
+.slideup:hover .caption {
+  padding-bottom: 30px;
+ -moz-transform: translate3d(0, -100%, 0);
+ -webkit-transform: translate3d(0, -100%, 0);
+ transform: translate3d(0, -100%, 0);
+ -moz-transition: all 0.5s;
+ -webkit-transition: all 0.5s;
+ transition: all 0.5s;
+}
+
+</style>
+++++

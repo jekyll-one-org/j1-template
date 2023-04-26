@@ -1,0 +1,110 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno/extensions/_caption.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+/* General styles
+-------------------------------------------------------------------------------- */
+.caption-control {
+ margin: 0;
+ padding: 0;
+ display: inline-block;
+ position: relative;
+ overflow: hidden;
+}
+
+.caption-control::before, .caption-control::after {
+ content: '';
+ width: 100%;
+ height: 100%;
+ background: black;
+ position: absolute;
+ opacity: 0.3;
+ top: 0;
+ left: 0;
+ transform: translate3d(0, -100%, 0);
+ -moz-transform: translate3d(0, -100%, 0);
+ -webkit-transform: translate3d(0, -100%, 0);
+ transition: all 0.5s;
+ -moz-transition: all 0.5s;
+ -webkit-transition: all 0.5s;
+}
+
+.caption {
+ position: absolute;
+ text-align: center;
+ padding: 10px;
+ padding-bottom: 10px;
+ /* padding-bottom: 30px; */
+ /* margin-bottom: 10px; */
+ color: #bdbdbd;
+ /* background: rgba(255, 255, 255, .8); */
+ background: rgba(0, 0, 0, .1);
+ /* background: #212121; */
+ z-index: 999;
+ width: 100%;
+ max-height: 100%;
+ overflow: hidden;
+ /* top: 50%; */
+ /* line-height: 30px; */
+ font-weight: 500;
+ font-size: 16px;
+ transform: translate3d(-100%, -50%, 0);
+ -webkit-transform: translate3d(-100%, -50%, 0);
+ -webkit-transition: all 0.5s;
+ transition: all 0.5s;
+}
+
+.caption a {
+ text-decoration: none;
+}
+
+img {
+ display: block;
+}
+
+/* Bottom Caption
+-------------------------------------------------------------------------------- */
+.bottom .caption {
+ top: 100%;
+ opacity: 1;
+ transform: translate3d(0, 0, 0);
+ -moz-transform: translate3d(0, 0, 0);
+ -webkit-transform: translate3d(0, 0, 0);
+}
+
+.bottom:hover .caption {
+  /* padding-bottom: 10px; */
+  transform: translate3d(0, -100%, 0);
+  -moz-transform: translate3d(0, -100%, 0);
+  -webkit-transform: translate3d(0, -100%, 0);
+  transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+}
+
+/* Centered Caption
+-------------------------------------------------------------------------------- */
+.center:hover .caption {
+  /* padding-bottom: 10px; */
+  top: 50%;
+  opacity: 1;
+  transform: translate3d(0, -50%, 0);
+  -moz-transform: translate3d(0, -50%, 0);
+  -webkit-transform: translate3d(0, -50%, 0);
+  transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -webkit-transition: all 0.5s;
+  transition-delay: 0.5s;
+  -moz-transition-delay: 0.5s;
+  -webkit-transition-delay: 0.5s;
+}
