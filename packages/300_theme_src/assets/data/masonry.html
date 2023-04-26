@@ -185,7 +185,7 @@ exclude_from_search:                    true
       <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{gutter}} py-{{gutter}}">
         <!-- Article item -->
         <div id="{{article.title | downcase | replace: ' ' ,'_'}}" class="article-item article-item--w400">
-          {% if grid.preview.enabled %}
+          {% if grid.preview %}
           <a class="article-link" data-bs-toggle="modal" href="#articleModal_{{grid.id}}_{{forloop.index}}">
             <div class="article-hover">
               <div class="article-hover-content">
@@ -208,7 +208,7 @@ exclude_from_search:                    true
       </div>
 
       <!-- Article Modal-->
-      {% if grid.preview.enabled %}
+      {% if grid.preview %}
       <div id="articleModal_{{grid.id}}_{{forloop.index}}" class="article-modal modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
@@ -242,7 +242,7 @@ exclude_from_search:                    true
                     </ul>
                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
                       <i class="mdi mdi-close mdi-24px mx-2"></i>
-                      Close Overview
+                      Close Preview
                     </button>
                   </div>
                 </div>

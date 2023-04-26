@@ -112,7 +112,7 @@ provide insight into a person's life, personality, and achievements and to
 inspire and inform readers about their accomplishments and contributions
 to society.
 
-.Masonry Collection Grid
+.Collection Grid + No Preview + No Gutters
 masonry::collection_biography[role="mb-3"]
 
 .Configuration settings (YAML)
@@ -127,6 +127,41 @@ masonry::collection_biography[role="mb-3"]
   id:                               collection_biography
   type:                             collection
   collection:                       biography
+  preview:                          false
+  gutters:                          false
+
+  # ----------------------------------------------------------------------------
+  # Masonry options
+  #
+  options:
+    originTop:                      true
+    originLeft:                     true
+    initLayout:                     true
+    percentPosition:                true
+----
+
+.Collection Grid + Preview + Gutters
+masonry::collection_fantasy[role="mb-3"]
+
+.Asciidoc configuration
+[source, config, role="noclip mb-3"]
+----
+masonry::collection_fantasy[role="mb-4"]
+----
+
+.Configuration settings (YAML)
+[source, yaml, role="noclip mb-4"]
+----
+# ------------------------------------------------------------------------------
+# Collection Biography
+#
+- grid:
+  enabled:                          true
+
+  id:                               collection_fantasy
+  type:                             collection
+  collection:                       fantasy
+  preview:                          true
   gutters:                          true
 
   # ----------------------------------------------------------------------------
@@ -138,6 +173,7 @@ masonry::collection_biography[role="mb-3"]
     initLayout:                     true
     percentPosition:                true
 ----
+
 
 == Masonry Grid on Posts
 
@@ -153,7 +189,7 @@ options.
 masonry::post_series_example[role="mb-4"]
 ----
 
-.Masonry Post Grid
+.Post Grid + Gutters
 masonry::post_series_example[role="mb-4"]
 
 .Configuration settings (YAML)
@@ -212,14 +248,14 @@ ways to suit the website's needs.
 masonry::image_cards_example[role="mb-4"]
 ----
 
-.BS Image Cards + Lightbox + Captions
+.Image Cards + Lightbox + Gutters + Captions
 masonry::image_cards_example[role="mb-4"]
 
 .Configuration settings (YAML)
 [source, yaml, role="noclip mb-4"]
 ----
 # --------------------------------------------------------------------------
-# Bootstrap Image Cards + Lightbox + Captions
+# Image Cards + Lightbox + Gutters + Captions
 #
 - grid:
   enabled:                          true
@@ -278,14 +314,14 @@ or disrupting the overall flow of the gallery.
 masonry::image_grid_base_example[role="mb-4"]
 ----
 
-.Image Grid + No Gutters + Captions
+.Image Grid + No Lightbox + No Gutters + No Captions
 masonry::image_grid_base_example[role="mb-4"]
 
 .Configuration settings (YAML)
 [source, yaml, role="noclip mb-4"]
 ----
 # --------------------------------------------------------------------------
-# Base Image Grid + Captions
+# Image Grid + No Lightbox + No Gutters + No Captions
 #
 - grid:
   enabled:                          true
@@ -301,7 +337,7 @@ masonry::image_grid_base_example[role="mb-4"]
   # Captions
   #
   caption:
-    enabled:                        true
+    enabled:                        false
     position:                       bottom
 
   # ------------------------------------------------------------------------
@@ -325,36 +361,36 @@ masonry::image_grid_base_example[role="mb-4"]
       ...
 ----
 
-==== Image Grid + Lightbox
+==== Full Image Grid
 
 A Lightbox is, in general, a helper which displays enlarged, almost
 screen-filling versions of images (or videos) while dimming the remainder
-of the page. The technique, introduced by Lightbox2, gained widespread
+of the page. The technique, introduced by Lightbox V2, gained widespread
 popularity thanks to its simple style. The term *lightbox* has been employed
 since then for Javascript libraries to support such functionality.
 
 .Asciidoc configuration
 [source, config, role="noclip mb-3"]
 ----
-masonry::image_grid_lightbox_example[role="mb-4"]
+masonry::image_grid_full_example[role="mb-4"]
 ----
 
 A lightbox supports image groups (image sets). Click on the images below to
 see how a Lightbox manages a group of images shown in your grid.
 
 .Image Grid + Gutters + Lightbox + Captions
-masonry::image_grid_lightbox_example[role="mb-4"]
+masonry::image_grid_full_example[role="mb-4"]
 
 .Configuration settings (YAML)
 [source, yaml, role="noclip mb-4"]
 ----
 # --------------------------------------------------------------------------
-# Image Grid + Lightbox + Captions
+# Image Grid + Lightbox + Gutters + Captions
 #
 - grid:
   enabled:                          true
 
-  id:                               image_grid_lightbox_example
+  id:                               image_grid_full_example
   type:                             image_grid
   image_base_path:                  /assets/images/modules/gallery/mega_cities
   image_styles:                     img-fluid
@@ -389,8 +425,9 @@ masonry::image_grid_lightbox_example[role="mb-4"]
       ...
 ----
 
-NOTE: The default lightbox for Masonry Grids is _Lightbox2_, the classic
-lightbox widely used on the Internet.
+NOTE: The lightbox for Masonry Grids is _Lightbox V2_, the classic lightbox
+widely used on the Internet.
+
 
 [role="mt-5"]
 == Justified Gallery
@@ -411,5 +448,5 @@ easily by using *Justified Gallery*. Videos created by a digicam or a mobile
 can be played by J1 Theme using the HTML5 Video support. Present
 videos you have made at it’s best.
 
-TIP: Find more on how to present video contens using *JustifiedGallery* on the example
+TIP: Find more on how to present video content using *JustifiedGallery* on the example
 page link:{url-roundtrip--present-videos}[Present Videos, {browser-window--new}].

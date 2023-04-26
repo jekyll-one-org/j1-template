@@ -89,14 +89,8 @@ settings:
       type:                             collection
       collection:                       biography                               # generate grid elements (articles) for the collection
       translate_titles:                 false                                   # default: false
-      lightbox:                         false
-      gutters:                          true
-
-      # ------------------------------------------------------------------------
-      # Preview options
-      #
-      preview:
-        enabled:                        true
+      preview:                          false
+      gutters:                          false
 
       # ------------------------------------------------------------------------
       # Masonry options
@@ -116,15 +110,9 @@ settings:
       id:                               collection_fantasy
       type:                             collection
       collection:                       fantasy                                 # generate grid elements (articles) for the collection
-#     translate_titles:                 false                                   # default: false
-      lightbox:                         false
+      translate_titles:                 false                                   # default: false
+      preview:                          true
       gutters:                          true
-
-      # ------------------------------------------------------------------------
-      # Preview options
-      #
-      preview:
-        enabled:                        true
 
       # ------------------------------------------------------------------------
       # Masonry options
@@ -143,17 +131,10 @@ settings:
 
       id:                               collection_romance
       type:                             collection
-#     translate_titles:                 true                                    # default: false
+      translate_titles:                 true                                    # default: false
       collection:                       romance                                 # generate grid elements (articles) for the collection
-      lightbox:                         false
+      preview:                          true
       gutters:                          true
-
-
-      # ------------------------------------------------------------------------
-      # Preview options
-      #
-      preview:
-        enabled:                        true
 
       # ------------------------------------------------------------------------
       # Masonry options
@@ -166,7 +147,7 @@ settings:
 
 
     # --------------------------------------------------------------------------
-    # Bootstrap Image Cards + Lightbox + Captions
+    # Image Cards + Lightbox + Gutters + Captions
     #
     - grid:
       enabled:                          true
@@ -224,7 +205,7 @@ settings:
           caption:                      Shangri-La Hotel Jakarta - Indonesia
 
     # --------------------------------------------------------------------------
-    # Base Image Grid + No Gutters
+    # Image Grid + No Lightbox + No Gutters + No Captions
     #
     - grid:
       enabled:                          true
@@ -240,7 +221,7 @@ settings:
       # Caption options
       #
       caption:
-        enabled:                        true
+        enabled:                        false
         position:                       bottom                                  # top|bottom|center
 
       # ------------------------------------------------------------------------
@@ -282,12 +263,12 @@ settings:
           caption:                      Shangri-La Hotel Jakarta - Indonesia
 
     # --------------------------------------------------------------------------
-    # Image Grid + Lightbox
+    # Image Grid + Lightbox + Gutters + Captions
     #
     - grid:
       enabled:                          true
 
-      id:                               image_grid_lightbox_example
+      id:                               image_grid_full_example
       type:                             image_grid
       image_base_path:                  /assets/images/modules/gallery/mega_cities
       image_styles:                     img-fluid

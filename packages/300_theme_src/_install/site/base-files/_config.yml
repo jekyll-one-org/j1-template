@@ -587,12 +587,9 @@ collections:
   # ----------------------------------------------------------------------------
   # People
   #
-  - scope:
-      type:                             people
-      path:                             collections/_people
-
-    values:
-      layout:                           page
+  people:
+    output:                             true
+    permalink:                          /collections/public/:collection/:name/
 
   # ----------------------------------------------------------------------------
   # Portfolio
