@@ -1,5 +1,5 @@
 ---
-title:                                  Paul Kalanithi
+title:                                  When Breath Becomes Air
 tagline:                                Diagnosed with inoperable lung cancer
 date:                                   2023-01-27 00:00:00 +0100
 description: >

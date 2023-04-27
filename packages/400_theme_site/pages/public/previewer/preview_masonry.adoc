@@ -73,26 +73,27 @@ animations and other effects.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-== Responsive Slider
+== Responsive Carousel
 
-A J1 Slider may be an alternative for a masonry-styled grid to display groups
+A carousel may be an alternative for a masonry-styled grid to display groups
 of posts, articles, or images in quite a *compact* way. The negative aspect of
 using sliders on *larger* groups of elements is the limited number of elements
 displayed on a slideshow. Sliders are typically used for so-called featured
 content to show *specific* elements the website visitors should find on a
 most top position of your homepage as an eye-catcher.
 
-.Post Silder
-slick::post_carousel_life[role="mb-4"]
+.Collection carousel (Biography)
+slick::collection_carousel_biography[role="mb-4"]
 
 
-== Masonry Grid on Collections
+== Masonry Grid on collections
 
-J1 Masonry `collections grid` pulls content from a specific collection. All
-grids for collections display the *articles* a collection contains. Additionally,
-the article title and the (first) tag of an article are shown. All Masonry
-Grids for the J1 Theme can be easily customized in various ways, such as
-changing the number of posts displayed, the masonry speed, and other options.
+The J1 Masonry `collections grid` pulls content from a specific collection.
+All grids for collections display the *articles* a collection contains.
+Additionally, the article title and the (first) tag of an article are shown.
+All Masonry grids for the J1 Theme can be easily customized in various ways,
+such as changing the number of posts displayed, the masonry speed, and other
+options.
 
 .Asciidoc configuration
 [source, config, role="noclip mb-3"]
@@ -112,7 +113,7 @@ provide insight into a person's life, personality, and achievements and to
 inspire and inform readers about their accomplishments and contributions
 to society.
 
-.Collection Grid + No Preview + No Gutters
+.Collection Grid + No Preview + No Gutters (Biography)
 masonry::collection_biography[role="mb-3"]
 
 .Configuration settings (YAML)
@@ -140,7 +141,7 @@ masonry::collection_biography[role="mb-3"]
     percentPosition:                true
 ----
 
-.Collection Grid + Preview + Gutters
+.Collection Grid + Preview + Gutters (Fantasy)
 masonry::collection_fantasy[role="mb-3"]
 
 .Asciidoc configuration
@@ -189,7 +190,7 @@ options.
 masonry::post_series_example[role="mb-4"]
 ----
 
-.Post Grid + Gutters
+.Post Grid + Gutters (Life)
 masonry::post_series_example[role="mb-4"]
 
 .Configuration settings (YAML)
@@ -314,7 +315,7 @@ or disrupting the overall flow of the gallery.
 masonry::image_grid_base_example[role="mb-4"]
 ----
 
-.Image Grid + No Lightbox + No Gutters + No Captions
+.Image Grid + No Lightbox + No Gutters + No Captions (Mega Cities)
 masonry::image_grid_base_example[role="mb-4"]
 
 .Configuration settings (YAML)
@@ -378,7 +379,7 @@ masonry::image_grid_full_example[role="mb-4"]
 A lightbox supports image groups (image sets). Click on the images below to
 see how a Lightbox manages a group of images shown in your grid.
 
-.Image Grid + Gutters + Lightbox + Captions
+.Image Grid + Gutters + Lightbox + Captions (Mega Cities)
 masonry::image_grid_full_example[role="mb-4"]
 
 .Configuration settings (YAML)

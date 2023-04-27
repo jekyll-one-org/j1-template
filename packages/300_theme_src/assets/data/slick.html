@@ -121,21 +121,16 @@ exclude_from_search:                    true
           {% endif %}
 
           <!-- Article slide -->
-          <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 pr-{{carousel.options.gutters}}">
-
-            <div id="{{article.title | downcase | replace: ' ' ,'_'}}" class="article-item">
+          <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 pr-{{carousel.gutters}}">
+            <div id="{{article.title | downcase | replace: ' ' ,'_'}}" class="card bottom">
               <img class="{{carousel.image_styles}}" src="{{article.image.path}}" alt="{{article.title}}" />
               <!-- Article link (caption) -->
-              <div id="{{carousel.id}}_controls" class="controls">
-                <div class="captions">
-                  <div class="caption">
-                    <a class="card-link {{translate}}"
-                       href="{{article.url}}"
-                       target="{{target}}">
-                       {{article.tags[0]}}&nbsp;&middot;&nbsp;{{article.title}}
-                    </a>
-                  </div>
-                </div>
+              <div class="caption">
+                <a class="article-link {{translate}}"
+                   href="{{article.url}}"
+                   target="{{target}}">
+                   {{article.tags[0]}}&nbsp;&middot;&nbsp;{{article.title}}
+                </a>
               </div>
               <!-- /Article link -->
             </div>
@@ -168,10 +163,12 @@ exclude_from_search:                    true
         {% else %}
           {% assign target = "" %}
         {% endif %}
+
         <!-- Collect data only if group matches -->
-        <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 pr-{{carousel.options.gutters}}">
-          <article class="card bg-dark text-center text-white border-0 rounded-0">
-            <img class="card-img rounded-0 img-fluid w-100" src="{{post.image.path | relative_url}}" alt="{{post.title}}" style="filter: contrast(1) brightness(0.5);">
+        <div class="col-lg-3 col-sm-6 mb-2 mb-lg-0 pr-{{carousel.gutters}}">
+          <article class="card bg-dark text-center text-white border-0 rounded-0 bottom">
+            <img class="card-img {{carousel.image_styles}}" src="{{post.image.path | relative_url}}" alt="{{post.title}}" style="filter: contrast(1) brightness(0.5); height: {{carousel.image_height}}">
+
             <div class="card-img-overlay">
               <div class="card-content mt-4">
                 {% if post %}
@@ -196,19 +193,31 @@ exclude_from_search:                    true
                 <ul class="list-inline d-flex justify-content-center mb-3">
         					<li class="list-inline-item">
                     <i class="mdi mdi-account md-gray-400 mdi-24px mr-1" style="margin-right: 8px;"></i>
-                    {{site.author.name | split: ' ' | first}} &nbsp;&middot;&nbsp;&nbsp;
+                    {{site.author.name | split: ' ' | first}} &nbsp;&middot;&nbsp;
                   </li>
         					<li class="list-inline-item">
                     <i class="mdi mdi-calendar-blank md-gray-400 mdi-24px mr-1"></i>
                     {{post.date | date: '%b %d, %Y'}}
                   </li>
         				</ul>
-                <h4 class="card-title notoc">
+
+                <!-- h4 class="card-title notoc">
                   <a class="text-white link-no-decoration {{translate}}"
                      href="{{post.url | relative_url}}"
                      target="{{target}}">{{post.tags[0]}}
                   </a>
-                </h4>
+                </h4 -->
+
+                <!-- Post link (caption) -->
+                <div class="caption">
+                  <a class="article-link {{translate}}"
+                     href="{{post.url}}"
+                     target="{{target}}">
+                     {{post.tags[0]}}
+                  </a>
+                </div>
+                <!-- /Article link -->
+
               </div>
             </div>
           </article>
@@ -227,7 +236,7 @@ exclude_from_search:                    true
       <div id="{{carousel.id}}" class="{{carousel.id | replace: '_','-' }}">
         {% for i in (1..carousel.slides) %}
         <div>
-          <h3 class="slide-item notoc">{{i}}</h3>
+          <{{carousel.style}} class="slide-item notoc mr-{{carousel.gutters}}" style="line-height: {{carousel.height}};">{{i}}</{{carousel.style}}>
         </div>
         {% endfor %}
       </div>
@@ -242,29 +251,24 @@ exclude_from_search:                    true
       <!-- Image slider -->
       <div id="{{carousel.id}}" class="{{carousel.id | replace: '_','-' }}">
         {% for slide in carousel.slides %}
-        <div class="col-sm-6 col-lg-4 pr-{{carousel.options.gutters}}">
-          <div class="card">
+        <div class="col-sm-6 col-lg-4 pr-{{carousel.gutters}}">
+          <div class="card {{carousel.captions.position}}">
           {% if carousel.lightbox.enabled %}
-          <a class="card-link" href="{{carousel.image_base_path}}/{{slide.image}}" data-caption="{{slide.caption}}" target="_blank">
-            <img class="{{carousel.image_styles}}" src="{{carousel.image_base_path}}/{{slide.image}}" alt="{{slide.caption}}">
-          </a>
-          {% if carousel.captions.enabled %}
-          <div id="{{carousel.id}}_controls" class="controls">
-            <div class="captions">
-              <!-- div class="caption">{{slide.caption | truncate: 80}}</div -->
-              <div class="caption">{{slide.caption}}</div>
-            </div>
-          </div>
-          {% endif %}
+            <a class="card-link" href="{{carousel.image_base_path}}/{{slide.image}}" data-caption="{{slide.caption}}" target="_blank">
+              <img class="{{carousel.image_styles}}" src="{{carousel.image_base_path}}/{{slide.image}}" alt="{{slide.caption}}" style="height: {{carousel.image_height}}">
+            </a>
+            {% if carousel.captions.enabled %}
+              <div id="{{carousel.id}}_caption"class="caption">{{slide.caption}}</div>
+            {% endif %}
           {% else %}
-          <img id="{{carousel.id}}_image_{{forloop.index}}" class="{{carousel.image_styles}}" src="{{carousel.image_base_path}}/{{slide.image}}" alt="{{slide.caption}}">
+            <img class="{{carousel.image_styles}}" src="{{carousel.image_base_path}}/{{slide.image}}" alt="{{slide.caption}}" style="height: {{carousel.image_height}}">
+            {% if carousel.captions.enabled %}
+              <div id="{{carousel.id}}_caption"class="caption">{{slide.caption}}</div>
+            {% endif %}
           {% endif %}
           </div>
         </div>
         {% endfor %}
-        {% if carousel.captions.enabled %}
-        <!--div class="pagination"></div -->
-        {% endif %}
       </div>
       <!-- /Image slider -->
 

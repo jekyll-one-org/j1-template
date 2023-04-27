@@ -146,7 +146,7 @@ j1.adapter.slick = (function (j1, window) {
       console.debug('loading HTML portion for all carousels configured');
       _this.loadCarouselHTML(slickOptions, slickOptions.carousels);
 
-      // Re-Init all carousels in page if window is resized
+
       window.onresize = function() {
         location.reload();
       }
@@ -216,14 +216,14 @@ j1.adapter.slick = (function (j1, window) {
               $('.{{carousel.id | replace: '_','-' }}').on('init', function(event, slick) {
                 logger.info('\n' + 'carousel initialized on id: {{carousel.id}}');
 
-                slick_lightbox_enabled = '{{carousel.lightbox.enabled}}';
+                slick_lightbox_enabled = true
 
-                // check if a lightbox is used|enabled
-                if ( slick_lightbox_enabled !== '' && slick_lightbox_enabled == 'true' ) {
-                  slick_lightbox_enabled = true;
-                } else {
-                  slick_lightbox_enabled = false;
-                }
+                // check if a lightbox is enabled
+                // if ({{carousel.lightbox.enabled}}) {
+                //   slick_lightbox_enabled = true;
+                // } else {
+                //   slick_lightbox_enabled = false;
+                // }
 
                 if (slick_lightbox_enabled) {
                   logger.info('\n' + 'initialize lightbox on id: {{carousel.id}}');
@@ -245,55 +245,62 @@ j1.adapter.slick = (function (j1, window) {
                 logger.info('\n' + 'adjust positions of arrows on id: {{carousel.id}}');
                 var buttons = $("#{{carousel.id}} > button");
 
-                // recalculate right arrow position based on gutter settings
-                //
+                // respect gutters for calculation
                 var percentage_right = 3 + carouselSettings.gutters;
                 $.each($(buttons), function(index, button) {
                   if (button.textContent.includes("Next")) {
-                    $(button).attr('style','right: ' + percentage_right + '%');
+                    // $(button).attr('style','right: ' + percentage_right + '%');
                   }
                 });
 
-                // add CSS style for individual top position for all carousels
-                //
+                // correct top position for both arrows if captions are used
                 if ($('#{{carousel.id}}_caption')) {
                   logger.info('\n' + 'adjust top position of arrows on id: {{carousel.id}}');
+
                   var buttons = $("#{{carousel.id}} > button");
                   $.each($(buttons), function(index, button) {
                     $(button).addClass('slick-arrow-{{carousel.id}}');
+                    // $(button).attr('style','top: 45%');
                   });
-                }
 
+                }
               }); // END on carousel init
 
-              // calculate individual arrow positions for all carousels
-              //
+              function debounce(callback, timeout = 300) {
+                let timer;
+
+                var buttons = $("#{{carousel.id}} > button");
+                $.each($(buttons), function(index, button) {
+                  $(button).addClass('slick-arrow-{{carousel.id}}');
+                  // $(button).attr('style','top: 45%');
+                });
+
+                return (...args) => {
+                  clearTimeout(timer);
+                  timer = setTimeout(() => { callback.apply(this, args); }, timeout);
+                };
+              }
+
               function positionSlickArrows (e) {
+
                 var dependencies_met_page_ready = setInterval (function (options) {
-                  var pageState   = $('#no_flicker').css('display');
+                  var pageState   = $('#no_flicker').css("display");
                   var pageVisible = (pageState == 'block') ? true: false;
-                  var slideImageHeight;
                   if ( j1.getState() === 'finished' && pageVisible ) {
-                    const carousel_type = '{{carousel.type}}';
                     const $slick = $('.{{carousel.id | replace: '_','-' }}');
                     const $slides = $slick.find('.slick-slide');
                     const $currentSlide = $slides.filter((index, slide) => $(slide).hasClass('slick-current'));
-
-                    if (carousel_type == 'example') {
-                      slideImageHeight = ($currentSlide.find('{{carousel.style}}').height() / 2) - 25;
-                    } else {
-                      slideImageHeight = ($currentSlide.find('img').height() / 2) - 20;
-                    }
-
-                    logger.info('\n' + 'adjust top arrow position (centered) by ' + slideImageHeight + ' on id: {{carousel.id}}');
+                    const slideImageHeight = ($currentSlide.find('img').height() / 2) - 20;
                     $('.slick-arrow-{{carousel.id}}').css('top', slideImageHeight + 'px');
+//                  $('.slick-arrow.{{carousel.id}}').css('top', slideImageHeight + 'px');
+//                   $('.slick-arrow').css('top', slideImageHeight + 'px');
+                    logger.info('\n' + 'adjusted top position by ' + slideImageHeight + ' of arrows on id: {{carousel.id}}');
                     clearInterval(dependencies_met_page_ready);
                   }
                 }, 25);
+
               }
 
-              // set individual arrow positions for a carousel
-              //
               $('.{{carousel.id | replace: '_','-' }}').on('init afterChange', positionSlickArrows);
 
               // setup the carousel
@@ -343,6 +350,9 @@ j1.adapter.slick = (function (j1, window) {
                 zIndex:                     carouselSettings.zIndex,
                 responsive:                 carouselResponsiveSettingsOBJ
               });
+
+              // $(window).resize(debounce(positionSlickArrows, 100));
+              // $(window).resize(positionSlickArrows);
 
               clearInterval(load_dependencies['dependencies_met_html_loaded_{{carousel.id}}']);
             }
