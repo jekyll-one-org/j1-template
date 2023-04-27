@@ -108,9 +108,10 @@ j1.adapter.slick = (function (j1, window) {
     // Initializer
     // -------------------------------------------------------------------------
     init: function (options) {
-      var xhrLoadState                = 'pending';                              // (initial) load state for the HTML portion of the carousel
-      var load_dependencies           = {};                                     // dynamic variable
-      var carouselResponsiveSettingsOBJ = {};                                     // initial object for responsive settings
+      var xhrLoadState                  = 'pending';                            // (initial) load state for the HTML portion of the carousel
+      var load_dependencies             = {};                                   // dynamic variable
+      var carouselResponsiveSettingsOBJ = {};                                   // initial object for responsive settings
+      var reload_on_resize              = false;
       var dependency;
       var carouselResponsiveSettingsYAML;
       var carouselResponsiveSettingsSTRING;
@@ -146,9 +147,11 @@ j1.adapter.slick = (function (j1, window) {
       console.debug('loading HTML portion for all carousels configured');
       _this.loadCarouselHTML(slickOptions, slickOptions.carousels);
 
-      // Re-Init all carousels in page if window is resized
-      window.onresize = function() {
-        location.reload();
+      // Re-Init all carousels in page if window is resized (if enabled)
+      if (reload_on_resize) {
+        window.onresize = function() {
+          location.reload();
+        }
       }
 
       // -----------------------------------------------------------------------

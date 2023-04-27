@@ -86,7 +86,7 @@ most top position of your homepage as an eye-catcher.
 slick::collection_carousel_biography[role="mb-4"]
 
 
-== Masonry Grid on collections
+== Grid on Collections
 
 The J1 Masonry `collections grid` pulls content from a specific collection.
 All grids for collections display the *articles* a collection contains.
@@ -128,6 +128,9 @@ masonry::collection_biography[role="mb-3"]
   id:                               collection_biography
   type:                             collection
   collection:                       biography
+  image_styles:                     img-fluid
+  image_height:                     470px
+  image_width:                      400px
   preview:                          false
   gutters:                          false
 
@@ -162,6 +165,9 @@ masonry::collection_fantasy[role="mb-4"]
   id:                               collection_fantasy
   type:                             collection
   collection:                       fantasy
+  image_styles:                     img-fluid
+  image_height:                     470px
+  image_width:                      400px
   preview:                          true
   gutters:                          true
 
@@ -176,7 +182,7 @@ masonry::collection_fantasy[role="mb-4"]
 ----
 
 
-== Masonry Grid on Posts
+== Grid on Posts
 
 J1 Masonry `posts grid` pull content from a specific category. All Grids for
 posts display the post category, the post title, the author and date. All
@@ -205,6 +211,8 @@ masonry::post_series_example[role="mb-4"]
   id:                               post_series_example
   type:                             post
   group:                            Life
+  image_styles:                     img-fluid
+  image_height:                     300px
   gutters:                          true
 
   # ------------------------------------------------------------------------
@@ -228,7 +236,7 @@ who need to create dynamic grid layouts, especially for websites that showcase
 many images or other visual content like post series for example.
 
 
-== Masonry Grid on Images
+== Grid on Images
 
 J1 Masonry is a great tool to create dynamic image galleries. Image galleries
 are popular on many websites, and masonry can be a useful tool for creating
@@ -236,7 +244,7 @@ dynamic and visually appealing galleries. By using masonry, you can create a
 gallery that displays images of different sizes in an aesthetically pleasing
 and functional way.
 
-=== Image Cards
+=== Bootstrap Cards
 
 Bootstrap cards are a popular component of the Bootstrap front-end framework
 that provides a flexible and customizable way to display content on a website.
@@ -246,11 +254,11 @@ ways to suit the website's needs.
 .Asciidoc configuration
 [source, config, role="noclip mb-3"]
 ----
-masonry::image_cards_example[role="mb-4"]
+masonry::card_example[role="mb-4"]
 ----
 
 .Image Cards + Lightbox + Gutters + Captions
-masonry::image_cards_example[role="mb-4"]
+masonry::card_example[role="mb-4"]
 
 .Configuration settings (YAML)
 [source, yaml, role="noclip mb-4"]
@@ -261,8 +269,8 @@ masonry::image_cards_example[role="mb-4"]
 - grid:
   enabled:                          true
 
-  id:                               image_cards_example
-  type:                             image_cards
+  id:                               card_example
+  type:                             card
   image_base_path:                  /assets/images/modules/gallery/mega_cities
   image_styles:                     img-fluid img-object--cover g-height-300
   lightbox:                         true
@@ -296,13 +304,13 @@ masonry::image_cards_example[role="mb-4"]
       ...
 ----
 
-=== Grid on Images in different sizes
+=== Images
 
 Using an image gallery to display images of different sizes can be challenging,
 resulting in an uneven or unbalanced layout. However, this is where masonry
 can be particularly useful.
 
-==== Base Image Grid
+==== Base Grid
 
 Masonry uses a dynamic grid system to position images to create a visually
 appealing and balanced layout. A dynamic grid system means you can display
@@ -328,7 +336,7 @@ masonry::image_grid_base_example[role="mb-4"]
   enabled:                          true
 
   id:                               image_grid_base_example
-  type:                             image_grid
+  type:                             image
   image_base_path:                  /assets/images/modules/gallery/mega_cities
   image_styles:                     img-fluid
   lightbox:                         false
@@ -362,7 +370,7 @@ masonry::image_grid_base_example[role="mb-4"]
       ...
 ----
 
-==== Full Image Grid
+==== Full Grid
 
 A Lightbox is, in general, a helper which displays enlarged, almost
 screen-filling versions of images (or videos) while dimming the remainder
@@ -392,7 +400,7 @@ masonry::image_grid_full_example[role="mb-4"]
   enabled:                          true
 
   id:                               image_grid_full_example
-  type:                             image_grid
+  type:                             image
   image_base_path:                  /assets/images/modules/gallery/mega_cities
   image_styles:                     img-fluid
   lightbox:                         true

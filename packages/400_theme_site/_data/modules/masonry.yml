@@ -40,6 +40,11 @@ settings:
       type:                             post
       group:                            Life                                    # generate grid elements only for the group
       gutters:                          true
+      image_styles:                     img-fluid img-object--cover
+      image_height:                     300px
+      image_width:                      300px
+      translate_links:                  false                                   # default: false
+      link_new_window:                  true                                    # default: false
 
       # ------------------------------------------------------------------------
       # Masonry options
@@ -60,6 +65,9 @@ settings:
       id:                               collection_portfolio
       type:                             collection
       collection:                       portfolio                               # generate grid elements (articles) for the collection
+      image_styles:                     img-fluid
+      image_height:                     300px
+      image_width:                      300px
       translate_titles:                 false                                   # default: false
       lightbox:                         false
       gutters:                          true
@@ -88,6 +96,9 @@ settings:
       id:                               collection_biography
       type:                             collection
       collection:                       biography                               # generate grid elements (articles) for the collection
+      image_styles:                     img-fluid
+      image_height:                     470px
+      image_width:                      400px
       translate_titles:                 false                                   # default: false
       preview:                          false
       gutters:                          false
@@ -110,6 +121,9 @@ settings:
       id:                               collection_fantasy
       type:                             collection
       collection:                       fantasy                                 # generate grid elements (articles) for the collection
+      image_styles:                     img-fluid
+      image_height:                     470px
+      image_width:                      400px
       translate_titles:                 false                                   # default: false
       preview:                          true
       gutters:                          true
@@ -133,6 +147,9 @@ settings:
       type:                             collection
       translate_titles:                 true                                    # default: false
       collection:                       romance                                 # generate grid elements (articles) for the collection
+      image_styles:                     img-fluid
+      image_height:                     470px
+      image_width:                      400px
       preview:                          true
       gutters:                          true
 
@@ -152,10 +169,11 @@ settings:
     - grid:
       enabled:                          true
 
-      id:                               image_cards_example
-      type:                             image_cards
+      id:                               card_example
+      type:                             card
       image_base_path:                  /assets/images/modules/gallery/mega_cities
-      image_styles:                     img-fluid img-object--cover g-height-300
+      image_styles:                     img-fluid
+      image_height:                     300px
       lightbox:                         true
       gutters:                          true
 
@@ -211,7 +229,7 @@ settings:
       enabled:                          true
 
       id:                               image_grid_base_example
-      type:                             image_grid
+      type:                             image
       image_base_path:                  /assets/images/modules/gallery/mega_cities
       image_styles:                     img-fluid
       lightbox:                         false
@@ -269,7 +287,7 @@ settings:
       enabled:                          true
 
       id:                               image_grid_full_example
-      type:                             image_grid
+      type:                             image
       image_base_path:                  /assets/images/modules/gallery/mega_cities
       image_styles:                     img-fluid
       lightbox:                         true

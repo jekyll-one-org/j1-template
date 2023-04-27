@@ -365,11 +365,15 @@
       - title:                          Current Theme
         href:                           /pages/public/previewer/current_theme/
         icon:                           theme-light-dark
+
+      - title:                          Placeholder Images
+        href:                           https://jekyll.one/pages/public/previewer/placeholder_images/
+        icon:                           image
       - title:                          Slick Slider
-        href:                           /pages/public/previewer/slick/
+        href:                           https://jekyll.one/pages/public/previewer/slick/
         icon:                           view-carousel
       - title:                          Masonry
-        href:                           /pages/public/previewer/masonry/
+        href:                           https://jekyll.one/pages/public/previewer/masonry/
         icon:                           view-dashboard-variant
 
       - title:                          MD Color Palette
