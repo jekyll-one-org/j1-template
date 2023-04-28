@@ -370,8 +370,9 @@
       - title:                          Current Theme
         href:                           /pages/public/previewer/current_theme/
         icon:                           theme-light-dark
-      - title:                          Placeholder Images
-        href:                           /pages/public/previewer/placeholder_images/
+
+      - title:                          Image Placeholders
+        href:                           /pages/public/previewer/image_placeholder/
         icon:                           image
       - title:                          Slick
         href:                           /pages/public/previewer/slick/

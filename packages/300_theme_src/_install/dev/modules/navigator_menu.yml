@@ -366,14 +366,14 @@
         href:                           /pages/public/previewer/current_theme/
         icon:                           theme-light-dark
 
-      - title:                          Placeholder Images
-        href:                           https://jekyll.one/pages/public/previewer/placeholder_images/
+      - title:                          Image Placeholders
+        href:                           /pages/public/previewer/image_placeholder/
         icon:                           image
-      - title:                          Slick Slider
-        href:                           https://jekyll.one/pages/public/previewer/slick/
+      - title:                          Slick
+        href:                           /pages/public/previewer/slick/
         icon:                           view-carousel
       - title:                          Masonry
-        href:                           https://jekyll.one/pages/public/previewer/masonry/
+        href:                           /pages/public/previewer/masonry/
         icon:                           view-dashboard-variant
 
       - title:                          MD Color Palette

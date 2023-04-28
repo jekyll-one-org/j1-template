@@ -147,7 +147,7 @@ j1.adapter.slick = (function (j1, window) {
       console.debug('loading HTML portion for all carousels configured');
       _this.loadCarouselHTML(slickOptions, slickOptions.carousels);
 
-      // Re-Init all carousels in page if window is resized (if enabled)
+      // Re-Init all carousels in a page if window is resized (if enabled)
       if (reload_on_resize) {
         window.onresize = function() {
           location.reload();
@@ -269,6 +269,20 @@ j1.adapter.slick = (function (j1, window) {
 
               }); // END on carousel init
 
+              function debounce(callback, timeout = 300) {
+                let timer;
+                var buttons = $("#{{carousel.id}} > button");
+
+                $.each($(buttons), function(index, button) {
+                  $(button).addClass('slick-arrow-{{carousel.id}}');
+                });
+
+                return (...args) => {
+                  clearTimeout(timer);
+                  timer = setTimeout(() => { callback.apply(this, args); }, timeout);
+                };
+              }
+
               // calculate individual arrow positions for all carousels
               //
               function positionSlickArrows (e) {
@@ -346,6 +360,9 @@ j1.adapter.slick = (function (j1, window) {
                 zIndex:                     carouselSettings.zIndex,
                 responsive:                 carouselResponsiveSettingsOBJ
               });
+
+              // NOT issued correctly (disabled for now)
+              // $(window).resize(debounce(positionSlickArrows, 100));
 
               clearInterval(load_dependencies['dependencies_met_html_loaded_{{carousel.id}}']);
             }
