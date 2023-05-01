@@ -65,7 +65,7 @@ settings:
       id:                               collection_portfolio
       type:                             collection
       collection:                       portfolio                               # generate grid elements (articles) for the collection
-      image_styles:                     img-fluid
+      image_styles:                     img-fluid img-object--cover
       image_height:                     300px
       image_width:                      300px
       translate_titles:                 false                                   # default: false
@@ -96,7 +96,7 @@ settings:
       id:                               collection_biography
       type:                             collection
       collection:                       biography                               # generate grid elements (articles) for the collection
-      image_styles:                     img-fluid
+      image_styles:                     img-fluid img-object--cover
       image_height:                     470px
       image_width:                      400px
       translate_titles:                 false                                   # default: false
@@ -121,7 +121,7 @@ settings:
       id:                               collection_fantasy
       type:                             collection
       collection:                       fantasy                                 # generate grid elements (articles) for the collection
-      image_styles:                     img-fluid
+      image_styles:                     img-fluid img-object--cover
       image_height:                     470px
       image_width:                      400px
       translate_titles:                 false                                   # default: false
@@ -147,7 +147,7 @@ settings:
       type:                             collection
       translate_titles:                 true                                    # default: false
       collection:                       romance                                 # generate grid elements (articles) for the collection
-      image_styles:                     img-fluid
+      image_styles:                     img-fluid img-object--cover
       image_height:                     470px
       image_width:                      400px
       preview:                          true
