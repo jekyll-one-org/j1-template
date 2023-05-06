@@ -17,7 +17,7 @@ image:
   alt:                                  Photo by Markus Spiske on Unsplash
 
 flowtext:                               false
-fab_menu_id:                            page_ctrl
+fab_menu_id:                            open_toc
 scrollbar:                              true
 
 permalink:                              /pages/public/learn/roundtrip/responsive_tables/

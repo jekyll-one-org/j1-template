@@ -11,7 +11,7 @@ categories:                             [ Testpages ]
 tags:                                   [ Example ]
 
 comments:                               false
-fab_menu_id:                            page_ctrl
+fab_menu_id:                            open_toc
 
 permalink:                              /pages/public/learn/scroller-3/
 regenerate:                             false
