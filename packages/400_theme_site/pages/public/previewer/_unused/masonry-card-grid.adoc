@@ -13,7 +13,7 @@ tags:                                   [ Example ]
 permalink:                              /pages/public/learn/masonry_card_grid/
 
 comments:                               false
-fab_menu_id:                            page_ctrl
+fab_menu_id:                            open_toc
 regenerate:                             false
 
 resources:                              [ clipboard, comments, masonry, rouge ]

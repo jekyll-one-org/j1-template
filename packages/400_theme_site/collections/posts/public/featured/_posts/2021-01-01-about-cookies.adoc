@@ -11,7 +11,7 @@ image:
   height:                               1280
   alt:                                  Cookies - Good to know
 
-fab_menu_id:                            page_ctrl
+fab_menu_id:                            open_toc
 comments:                               false
 regenerate:                             false
 

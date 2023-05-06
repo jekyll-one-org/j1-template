@@ -33,7 +33,7 @@ tags:                                   [ J1Dropdowns ]
 
 
 comments:                               false
-fab_menu_id:                            page_ctrl
+fab_menu_id:                            open_toc
 
 permalink:                              /pages/public/manuals/j1Dropdowns/
 regenerate:                             false
