@@ -36,12 +36,13 @@ resource_options:
 
 // Page Initializer
 // =============================================================================
-// Enable the Liquid Preprocessorpage-liquid:
+// Enable the Liquid Preprocessor
+:page-liquid:
 
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
-:url-roundtrip--present-videos:         /pages/public/learn/roundtrip/present_videos/
+:images-dir:                            {imagesdir}/pages/roundtrip/100_present_images
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -49,34 +50,34 @@ resource_options:
 
 // Load page attributes
 // -----------------------------------------------------------------------------
-{% include {{load_attributes}} scope="global" %}
+{% include {{load_attributes}} scope="none" %}
+
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
-The recnical term *Masonry* is used in web development to refer to a *grid
-layout* system for arranging elements on a webpage. The masonry layout, also
+The tecnical term *Masonry* is used in web development to refer to a *grid*
+layout system for arranging elements on a webpage. The masonry layout, also
 known as the **Pinterest**-style layout, is a popular choice for displaying
 images of varying sizes aesthetically pleasingly.
 
+[role="mb-4"]
 J1 Masonry is based on the popular JavaScript library _Masonry_, which enables
 the creation of responsive, dynamic grid layouts of *large* groups of content.
 It uses a unique algorithm to arrange elements vertically, then horizontally
 in the grid. The result is a visually appealing layout that works well with
-images and other content of varying sizes.
-
-J1 Masonry is easy to use and can be added to a webpage with just a few
-lines. The module provides a flexible configuration that allows developers
-to customize the layout, adjust the column width and gutter size, and add
-animations and other effects.
+images and other content of varying sizes. The Masonry module  is easy to use
+and can be added to a webpage with just a few lines. The module provides a
+flexible configuration that allows developers to customize the layout, adjust
+the column width and gutter size, and add animations and other effects.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 == Responsive Carousel
 
 A carousel may be an alternative for a masonry-styled grid to display groups
-of posts, articles, or images in quite a *compact* way. The negative aspect of
-using sliders on *larger* groups of elements is the limited number of elements
+of posts, articles, or images in quite a compact way. The negative aspect of
+using sliders on larger groups of elements is the limited number of elements
 displayed on a slideshow. Sliders are typically used for so-called featured
 content to show *specific* elements the website visitors should find on a
 most top position of your homepage as an eye-catcher.
@@ -95,28 +96,16 @@ such as changing the number of posts displayed, the masonry speed, and other
 options.
 
 .Asciidoc configuration
-[source, config, role="noclip mb-3"]
+[source, config, role="noclip mt-4 mb-4"]
 ----
 masonry::collection_biography[]
 ----
-
-A biography is a written account of a person's life, typically focusing on
-major achievements, events, and experiences. It can be a detailed record of
-a person's life, covering everything from their birth and childhood to their
-personal and professional accomplishments and even their death.
-
-[role="mb-4"]
-Biographies can be written by someone or someone else and found in various
-formats, including books, articles, and online sources. A biography aims to
-provide insight into a person's life, personality, and achievements and to
-inspire and inform readers about their accomplishments and contributions
-to society.
 
 .Collection Grid + No Preview + No Gutters (Biography)
 masonry::collection_biography[role="mb-3"]
 
 .Configuration settings (YAML)
-[source, yaml, role="noclip mb-4"]
+[source, yaml, role="noclip mt-4 mb-4"]
 ----
 # ------------------------------------------------------------------------------
 # Collection Biography
@@ -147,13 +136,13 @@ masonry::collection_biography[role="mb-3"]
 masonry::collection_fantasy[role="mb-3"]
 
 .Asciidoc configuration
-[source, config, role="noclip mb-3"]
+[source, config, role="noclip mt-4 mb-4"]
 ----
 masonry::collection_fantasy[]
 ----
 
 .Configuration settings (YAML)
-[source, yaml, role="noclip mb-4"]
+[source, yaml, role="noclip mt-4 mb-4"]
 ----
 # ------------------------------------------------------------------------------
 # Collection Biography
@@ -190,7 +179,7 @@ as changing the number of posts displayed, the masonry speed, and other
 options.
 
 .Asciidoc configuration
-[source, config, role="noclip mb-3"]
+[source, config, role="noclip mt-4 mb-4"]
 ----
 masonry::post_series_example[]
 ----
@@ -199,7 +188,7 @@ masonry::post_series_example[]
 masonry::post_series_example[role="mb-4"]
 
 .Configuration settings (YAML)
-[source, yaml, role="noclip mb-4"]
+[source, yaml, role="noclip mt-4 mb-4"]
 ----
 # --------------------------------------------------------------------------
 # Post Series
@@ -251,7 +240,7 @@ A card is a container for content that can be styled and arranged in various
 ways to suit the website's needs.
 
 .Asciidoc configuration
-[source, config, role="noclip mb-3"]
+[source, config, role="noclip mt-4 mb-4"]
 ----
 masonry::card_example[]
 ----
@@ -260,7 +249,7 @@ masonry::card_example[]
 masonry::card_example[role="mb-4"]
 
 .Configuration settings (YAML)
-[source, yaml, role="noclip mb-4"]
+[source, yaml, role="noclip mt-4 mb-4"]
 ----
 # --------------------------------------------------------------------------
 # Image Cards + Lightbox + Gutters + Captions
@@ -317,7 +306,7 @@ images of different sizes without worrying about them looking out of place
 or disrupting the overall flow of the gallery.
 
 .Asciidoc configuration
-[source, config, role="noclip mb-3"]
+[source, config, role="noclip mt-4 mb-4"]
 ----
 masonry::image_grid_base_example[]
 ----
@@ -326,7 +315,7 @@ masonry::image_grid_base_example[]
 masonry::image_grid_base_example[role="mb-4"]
 
 .Configuration settings (YAML)
-[source, yaml, role="noclip mb-4"]
+[source, yaml, role="noclip mt-4 mb-4"]
 ----
 # --------------------------------------------------------------------------
 # Image Grid + No Lightbox + No Gutters + No Captions
@@ -371,26 +360,28 @@ masonry::image_grid_base_example[role="mb-4"]
 
 ==== Full Grid
 
-A Lightbox is, in general, a helper which displays enlarged, almost
-screen-filling versions of images (or videos) while dimming the remainder
-of the page. The technique, introduced by Lightbox V2, gained widespread
-popularity thanks to its simple style. The term *lightbox* has been employed
-since then for Javascript libraries to support such functionality.
+The full grid is using additonally a so-called *lightbox*. A lightbox is a
+helper which displays enlarged, almost screen-filling versions of images
+(or videos) while dimming the remainder of the page. The technique,
+introduced by Lightbox V2, gained widespread popularity thanks to its simple
+style. The term *lightbox* has been employed since then for Javascript
+libraries to support such functionality.
 
 .Asciidoc configuration
-[source, config, role="noclip mb-3"]
+[source, config, role="noclip mt-4 mb-4"]
 ----
 masonry::image_grid_full_example[]
 ----
 
-A lightbox supports image groups (image sets). Click on the images below to
-see how a Lightbox manages a group of images shown in your grid.
+A lightbox supports single images and image groups (image sets). Click on the
+images below to see how a Lightbox manages a group of images shown in your
+grid.
 
 .Image Grid + Gutters + Lightbox + Captions
 masonry::image_grid_full_example[role="mb-4"]
 
 .Configuration settings (YAML)
-[source, yaml, role="noclip mb-4"]
+[source, yaml, role="noclip mt-4 mb-4"]
 ----
 # --------------------------------------------------------------------------
 # Image Grid + Lightbox + Gutters + Captions
@@ -433,8 +424,8 @@ masonry::image_grid_full_example[role="mb-4"]
       ...
 ----
 
-NOTE: The lightbox for Masonry Grids is _Lightbox V2_, the classic lightbox
-widely used on the Internet.
+NOTE: The lightbox placed on Masonry Grids is _Lightbox V2_, the classic
+lightbox widely used on the Internet.
 
 ////
 ==== Full Grid + Filters
@@ -447,7 +438,7 @@ adding gradients, and more.
 NOTE: Find available CSS Image Filters in section <<CSS3 Filter Functions>>.
 
 .Asciidoc configuration
-[source, config, role="noclip mb-3"]
+[source, config, role="noclip mt-4 mb-4"]
 ----
 masonry::image_grid_full_example_filters[]
 ----
