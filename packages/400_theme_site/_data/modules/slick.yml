@@ -56,7 +56,8 @@ settings:
       collection:                       portfolio                               # generate grid elements (articles) for the collection specified
       translate_links:                  false                                   # default: false
       link_new_window:                  true                                    # default: false
-      image_styles:                     img-fluid img-object--cover img-object--w500 g-height-500
+      image_styles:                     img-fluid img-object--cover
+      image_height:                     500px
 
       # ------------------------------------------------------------------------
       # Carousel options
@@ -102,7 +103,8 @@ settings:
       collection:                       biography                               # generate grid elements (articles) for the collection specified
       translate_links:                  false                                   # default: false
       link_new_window:                  true                                    # default: false
-      image_styles:                     img-fluid img-object--cover img-object--w500 g-height-500
+      image_styles:                     img-fluid img-object--cover
+      image_height:                     500px
 
       # ------------------------------------------------------------------------
       # Carousel options
@@ -148,7 +150,8 @@ settings:
       collection:                       fantasy                                 # generate grid elements (articles) for the collection specified
       translate_links:                  false                                   # default: false
       link_new_window:                  true                                    # default: false
-      image_styles:                     img-fluid img-object--cover img-object--w500 g-height-500
+      image_styles:                     img-fluid img-object--cover
+      image_height:                     500px
 
       # ------------------------------------------------------------------------
       # Carousel options
@@ -194,7 +197,8 @@ settings:
       collection:                       romance                                 # generate grid elements (articles) for the collection specified
       translate_links:                  false                                   # default: false
       link_new_window:                  true                                    # default: false
-      image_styles:                     img-fluid img-object--cover img-object--w500 g-height-500
+      image_styles:                     img-fluid img-object--cover
+      image_height:                     500px
 
       # ------------------------------------------------------------------------
       # Carousel options
@@ -242,6 +246,63 @@ settings:
       image_height:                     300px
       translate_links:                  false                                   # default: false
       link_new_window:                  true                                    # default: false
+
+      # ------------------------------------------------------------------------
+      # Carousel options
+      #
+      options:
+        autoplay:                       false
+        arrows:                         true
+        dots:                           true
+        slidesToShow:                   3
+        slidesToScroll:                 1
+        responsive:                     true                                    # enables reponsive options to generate breakpoint properties for slick()
+
+      # ------------------------------------------------------------------------
+      # Reponsive options
+      #
+      responsive:
+        - breakpoint:
+          settings:
+            breakOn:                    1024
+            slidesToShow:               2
+            slidesToScroll:             2
+        - breakpoint:
+          settings:
+            breakOn:                    600
+            slidesToShow:               1
+            slidesToScroll:             1
+            dots:                       true
+        - breakpoint:
+          settings:
+            breakOn:                    480
+            slidesToShow:               1
+            slidesToScroll:             1
+
+    # --------------------------------------------------------------------------
+    # POST Carousel (Life | Sepia)
+    #
+    - carousel:
+      enabled:                          true
+
+      id:                               post_carousel_life_sepia
+      type:                             post
+      gutters:                          1                                       # 0 .. 5
+      group:                            Life                                    # generate slides only for group (specified in article/post)
+      image_styles:                     img-fluid img-object--cover
+      image_height:                     300px
+      translate_links:                  false                                   # default: false
+      link_new_window:                  true                                    # default: false
+
+      # ------------------------------------------------------------------------
+      # CSS filter options
+      #
+      filters:
+        enabled:                        true
+        grayscale:                      0.8
+        contrast:                       0.8
+        brightness:                     0.7
+        sepia:                          1
 
       # ------------------------------------------------------------------------
       # Carousel options

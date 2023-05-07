@@ -56,7 +56,7 @@ defaults:
   xhr_data_path:                        /assets/data/slick
 
   # ----------------------------------------------------------------------------
-  # Lightbox options
+  # Lightbox options (Slick Ligghtbox)
   # ----------------------------------------------------------------------------
   lightbox:
     enabled:                            false
@@ -70,6 +70,15 @@ defaults:
     destroyTimeout:                     500
     imageMaxHeight:                     0.9
     lazy:                               false
+
+  # ----------------------------------------------------------------------------
+  # CSS filter options
+  # ----------------------------------------------------------------------------
+  filters:
+    enabled:                            false
+    grayscale:                          1
+    contrast:                           1
+    brightness:                         1
 
   # ----------------------------------------------------------------------------
   # Slider options

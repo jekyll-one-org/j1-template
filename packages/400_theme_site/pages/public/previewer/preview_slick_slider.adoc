@@ -225,7 +225,6 @@ NOTE: For post carousels, currently *no* lightbox supported.
     slidesToScroll:                 1
     responsive:                     true                                    # enables reponsive options to generate breakpoint properties for slick()
 
-
   # ----------------------------------------------------------------------------
   # Reponsive options
   #
@@ -255,21 +254,106 @@ articles, or on dedicated archive or category pages. They can increase
 user engagement and keep visitors on a website for longer by presenting
 content dynamically and visually appealingly.
 
+=== Carousel using (CSS) Image Filters
+
+The filter property is specified as none or one or more of the functions
+listed below. If the parameter for any function is invalid, the function
+returns none. Except where noted, the functions that take a value expressed
+with a percent sign (as in 34%) also accept the value expressed as decimal
+(as in 0.34).
+
+NOTE: Find available CSS Image Filters in section <<CSS3 Filter Functions>>.
+
+.Asciidoc configuration
+[source, config, role="noclip mb-3"]
+----
+slick::post_carousel_life_sepia[]
+----
+
+.Post Carousel + Image Filters (Life)
+slick::post_carousel_life_sepia[role="mb-4"]
+
+.Configuration settings (YAML)
+[source, yaml, role="noclip mb-4"]
+----
+# ------------------------------------------------------------------------------
+# POST Carousel (Life | Sepia)
+#
+- carousel:
+  enabled:                          true
+
+  id:                               post_carousel_life_sepia
+  type:                             post
+  gutters:                          1
+  group:                            Life
+  image_styles:                     img-fluid img-object--cover
+  image_height:                     300px
+  translate_links:                  false
+  link_new_window:                  true
+
+  # ----------------------------------------------------------------------------
+  # CSS filter options
+  #
+  filters:
+    enabled:                        true
+    grayscale:                      0.8
+    contrast:                       0.8
+    brightness:                     0.7
+    sepia:                          1
+
+  # ----------------------------------------------------------------------------
+  # Carousel options
+  #
+  options:
+    autoplay:                       false
+    arrows:                         true
+    dots:                           true
+    slidesToShow:                   3
+    slidesToScroll:                 1
+    responsive:                     true
+
+  # ----------------------------------------------------------------------------
+  # Reponsive options
+  #
+  responsive:
+    - breakpoint:
+      settings:
+        breakOn:                    1024
+        slidesToShow:               2
+        slidesToScroll:             2
+    - breakpoint:
+      settings:
+        breakOn:                    600
+        slidesToShow:               1
+        slidesToScroll:             1
+        dots:                       true
+    - breakpoint:
+      settings:
+        breakOn:                    480
+        slidesToShow:               1
+        slidesToScroll:             1
+----
+
+
 == Example Carousel
 
-Responsive carousels are designed to adapt and resize automatically to fit
-different screen sizes and devices, such as desktops, laptops, tablets,
-and smartphones. They are created using responsive design techniques, allowing
-web developers to create a carousel that can be optimized for various
-devices without needing separate versions or code.
+Example carousels are often created for testing purposes or as temporary
+placeholders that can be replaced later with a fully functional and productive
+carousel version. They serve as visual representations or prototypes to
+demonstrate how a carousel might look and function in a given context.
+Example carousels allow designers, developers, and stakeholders to evaluate
+a carousel's design, user experience, and functionality before investing
+time and resources in building the final version.
+
+Using example carousels, developers can gather feedback, make necessary
+adjustments, and iterate on the design before implementing the final carousel.
+These placeholders are usually used during the early stages of development
+or in situations with limited content available for the carousel.
 
 [role="mb-4"]
-Responsive Slick carousels can be useful for ensuring that content is displayed
-correctly and consistently across different devices and for providing an
-optimal user experience for all visitors to a website. They use techniques
-such as fluid grid layouts, flexible images, and media queries to adjust the
-carousels size and layout based on the screen size and orientation of the
-device.
+Once the design and functionality of the carousel are finalized, the example
+carousel can be replaced with the productive version that integrates with
+the actual content or data.
 
 .Asciidoc configuration
 [source, config, role="noclip mb-2"]
@@ -504,4 +588,157 @@ fired on all images of a slider if enabled:
       caption:                      Man posing at the rooftop of Jin Mao Tower Shanghai - China
 
   ...
+----
+
+== CSS3 Filter Functions
+
+// See: https://developer.mozilla.org/en-US/docs/Web/CSS/filter#filter_functions
+
+The filter property is specified as none or one or more of the functions
+listed below. If the parameter for any function is invalid, the function
+returns none. Except where noted, the functions that take a value expressed
+with a percent sign (as in 34%) also accept the value expressed as decimal
+(as in 0.34).
+
+=== blur()
+
+The blur() function applies a Gaussian blur to the input image. The value
+of radius defines the value of the standard deviation to the Gaussian
+function, or how many pixels on the screen blend into each other, so a
+larger value will create more blur. The initial value for interpolation is 0.
+The parameter is specified as a CSS length, but does not accept percentage
+values.
+
+.Examples
+[source, css]
+----
+filter: blur(5)
+filter: blur(50)
+----
+
+=== brightness()
+
+The brightness() function applies a linear multiplier to the input image,
+making it appear more or less bright. A value of 0% will create an image
+that is completely black. A value of 100% leaves the input unchanged. Other
+values are linear multipliers on the effect. Values of an amount over 100%
+are allowed, providing brighter results. The initial value for interpolation
+is 1.
+
+.Examples
+[source, css]
+----
+filter: brightness(1)
+filter: brightness(0.3)
+----
+
+=== contrast()
+
+The contrast() function adjusts the contrast of the input image. A value
+of 0% will create an image that is completely gray. A value of 100% leaves
+the input unchanged. Values of an amount over 100% are allowed, providing
+results with more contrast. The initial value for interpolation is 1.
+
+.Examples
+[source, css]
+----
+filter: contrast(2)
+----
+
+=== grayscale()
+
+The grayscale() function converts the input image to grayscale. The value
+of amount defines the proportion of the conversion. A value of 100% is
+completely grayscale. A value of 0% leaves the input unchanged. Values
+between 0% and 100% are linear multipliers on the effect. The initial value
+for interpolation is 0.
+
+.Examples
+[source, css]
+----
+filter: grayscale(1)
+filter: grayscale(0.5)
+----
+
+=== hue-rotate()
+
+The hue-rotate() function applies a hue rotation on the input image. The value
+of angle defines the number of degrees around the color circle the input
+samples will be adjusted. A value of 0deg leaves the input unchanged. The initial value for interpolation is 0. Though there is no maximum value; the effect of values above 360deg wraps around.
+
+.Examples
+[source, css]
+----
+filter: hue-rotate(90)
+----
+
+=== invert()
+
+The invert() function inverts the samples in the input image. The value of
+amount defines the proportion of the conversion. A value of 100% is completely
+inverted. A value of 0% leaves the input unchanged. Values between 0% and 100%
+are linear multipliers on the effect. The initial value for interpolation is 0.
+
+.Examples
+[source, css]
+----
+filter: invert(100%)
+filter: invert(1)
+filter: invert(0.6)
+----
+
+=== opacity()
+
+The opacity() function applies transparency to the samples in the input image.
+The value of amount defines the proportion of the conversion. A value of 0%
+is completely transparent. A value of 100% leaves the input unchanged. Values
+between 0% and 100% are linear multipliers on the effect. This is equivalent
+to multiplying the input image samples by amount. The initial value for
+interpolation is 1. This function is similar to the more established opacity
+property; the difference is that with filters, some browsers provide hardware
+acceleration for better performance.
+
+.Examples
+[source, css]
+----
+filter: opacity(1)
+filter: opacity(0.5)
+----
+
+=== saturate()
+
+The saturate() function saturates the input image. The value of amount
+defines the proportion of the conversion. A value of 0% is completely
+un-saturated. A value of 100% leaves the input unchanged. Other values are
+linear multipliers on the effect. Values of amount over 100% are allowed,
+providing super-saturated results. The initial value for interpolation is 1.
+
+[source, css]
+----
+filter: saturate(200%)
+----
+
+.Examples
+=== sepia()
+
+The sepia() function converts the input image to sepia. The value of amount
+defines the proportion of the conversion. A value of 100% is completely sepia.
+A value of 0% leaves the input unchanged. Values between 0% and 100% are
+linear multipliers on the effect. The initial value for interpolation is 0.
+
+[source, css]
+----
+filter: sepia(1)
+filter: sepia(0.5)
+----
+
+=== Combining functions
+
+You may combine any number of functions to manipulate the rendering. The
+following example enhances the contrast and brightness of the image:
+
+.Example
+[source, css]
+----
+filter: grayscale(0.5) sepia(0.5)
 ----
