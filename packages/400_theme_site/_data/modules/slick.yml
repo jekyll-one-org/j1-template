@@ -346,7 +346,7 @@ settings:
       type:                             example
       gutters:                          1
       style:                            h3
-      height:                           150px
+      height:                           200px
       slides:                           9
 
       # ------------------------------------------------------------------------

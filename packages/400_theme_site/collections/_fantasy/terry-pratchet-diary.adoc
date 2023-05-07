@@ -1,5 +1,5 @@
 ---
-title:                                  The Terry Pratchett Diary 2017
+title:                                  The Terry Pratchett Diary
 tagline:                                Sir Terry Pratchett left us, far too early ...
 date:                                   2016-11-23 00:00:00
 description: >

@@ -101,7 +101,6 @@ exclude_from_search:                    true
         <!-- Collect posts only if group matches -->
         {% for post in site.posts %} {% if post.group contains grid.group %}
 
-
         {% if grid.translate_links %}
           {% assign translate = "" %}
         {% else %}
@@ -114,11 +113,25 @@ exclude_from_search:                    true
           {% assign target = "" %}
         {% endif %}
 
+        {% comment %} Collect CSS image filters
+        ------------------------------------------------------------------------ {% endcomment %}
+        {% assign css_filters   = masonry_options.filters | merge: grid.filters %}
+        {% assign image_filters = 'filter:' %}
+
+        {% if css_filters.enabled %}
+          {% for filter in css_filters %}
+            {% if filter[0] contains 'enabled' %}
+              {% continue %}
+            {% endif %}
+            {% capture image_filters %}{{image_filters}} {{filter[0]}}({{filter[1]}}){% endcapture %}
+          {% endfor %}
+        {% endif %}
+
         <!-- resposive items: 3-2-1 -->
         <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{gutter}} py-{{gutter}}">
 
           <article class="card bg-dark text-center text-white border-0 rounded-0 bottom">
-            <img class="card-img {{grid.image_styles}}" src="{{post.image.path | relative_url}}" alt="{{post.title}}" style="filter: contrast(1) brightness(0.5); height: {{grid.image_height}}; width: {{grid.image_width}}">
+            <img class="card-img {{grid.image_styles}}" src="{{post.image.path | relative_url}}" alt="{{post.title}}" style="{{image_filters}}; height: {{grid.image_height}};">
             <div class="card-content mt-5">
 
               {% if post %}
@@ -204,6 +217,20 @@ exclude_from_search:                    true
         {% assign gutter = 0  %}
       {% endif %}
 
+      {% comment %} Collect CSS image filters
+      ------------------------------------------------------------------------ {% endcomment %}
+      {% assign css_filters   = masonry_options.filters | merge: grid.filters %}
+      {% assign image_filters = 'filter:' %}
+
+      {% if css_filters.enabled %}
+        {% for filter in css_filters %}
+          {% if filter[0] contains 'enabled' %}
+            {% continue %}
+          {% endif %}
+          {% capture image_filters %}{{image_filters}} {{filter[0]}}({{filter[1]}}){% endcapture %}
+        {% endfor %}
+      {% endif %}
+
       {% for article in articles %}
       <div class="col-xl-{{masonry_options.responsive.xl}} col-lg-{{masonry_options.responsive.lg}} col-md-{{masonry_options.responsive.md}} col-sm-{{masonry_options.responsive.sm}} col-{{masonry_options.responsive.xs}} px-{{gutter}} py-{{gutter}}">
         <!-- Article item -->
@@ -215,11 +242,10 @@ exclude_from_search:                    true
                 <i class="mdi mdi-plus mdi-10x"></i>
               </div>
             </div>
-            <img class="{{grid.image_styles}}" src="{{article.image.path}}" alt="{{article.title}}" style="height: {{grid.image_height}}; width: {{grid.image_width}}">
+            <img class="{{grid.image_styles}}" src="{{article.image.path}}" alt="{{article.title}}" style="{{image_filters}}; height: {{grid.image_height}}; width: {{grid.image_width}}">
           </a>
           {% else %}
-            <!-- img class="img-fluid img-object--w400" src="{{article.image.path}}" alt="{{article.title}}" / -->
-            <img class="{{grid.image_styles}}" src="{{article.image.path}}" alt="{{article.title}}" style="height: {{grid.image_height}}; width: {{grid.image_width}}">
+            <img class="{{grid.image_styles}}" src="{{article.image.path}}" alt="{{article.title}}" style="{{image_filters}}; height: {{grid.image_height}}; width: {{grid.image_width}}">
           {% endif %}
           <div class="article-caption">
             <div class="article-caption-heading">
@@ -295,6 +321,20 @@ exclude_from_search:                    true
         {% assign gutter = 0  %}
       {% endif %}
 
+      {% comment %} Collect CSS image filters
+      ------------------------------------------------------------------------ {% endcomment %}
+      {% assign css_filters   = masonry_options.filters | merge: grid.filters %}
+      {% assign image_filters = 'filter:' %}
+
+      {% if css_filters.enabled %}
+        {% for filter in css_filters %}
+          {% if filter[0] contains 'enabled' %}
+            {% continue %}
+          {% endif %}
+          {% capture image_filters %}{{image_filters}} {{filter[0]}}({{filter[1]}}){% endcapture %}
+        {% endfor %}
+      {% endif %}
+
       <!-- Card Image Grid -->
       <div id="{{grid.id}}" class="row {{grid.id | replace: '_','-' }} g-0">
         {% for image in grid.images %}
@@ -306,7 +346,7 @@ exclude_from_search:                    true
                  data-lightbox="{{grid.id}}-image-group"
                  data-caption="{{image.caption}}"
                  data-title="{{image.caption}}">
-                <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.caption}}" style="height: {{grid.image_height}}">
+                <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.caption}}" style="{{image_filters}}; height: {{grid.image_height}}">
               </a>
               {% if grid.caption.enabled %}
               <div class="caption">{{image.caption}}</div>
@@ -337,6 +377,20 @@ exclude_from_search:                    true
         {% assign gutter = 0  %}
       {% endif %}
 
+      {% comment %} Collect CSS image filters
+      ------------------------------------------------------------------------ {% endcomment %}
+      {% assign css_filters   = masonry_options.filters | merge: grid.filters %}
+      {% assign image_filters = 'filter:' %}
+
+      {% if css_filters.enabled %}
+        {% for filter in css_filters %}
+          {% if filter[0] contains 'enabled' %}
+            {% continue %}
+          {% endif %}
+          {% capture image_filters %}{{image_filters}} {{filter[0]}}({{filter[1]}}){% endcapture %}
+        {% endfor %}
+      {% endif %}
+
       <!-- Image Grid -->
       <div id="{{grid.id}}" class="row {{grid.id | replace: '_','-' }} g-0">
         {% for image in grid.images %}
@@ -346,9 +400,9 @@ exclude_from_search:                    true
             <a href="{{grid.image_base_path}}/{{image.file}}"
                data-lightbox="{{grid.id}}-image-group"
                data-caption="{{image.caption}}"
+               data-containerStyle="{{image_filters}}"
                data-title="{{image.caption}}">
-              <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.caption}}">
-              {% if grid.caption.enabled %}
+              <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.caption}}" style="{{image_filters}}">              {% if grid.caption.enabled %}
                 {% if grid.gutters and grid.caption.position == 'top' %}
                   <div class="caption" style="top: calc(2px + {{gutter}}*4px - {{gutter}}px); width: calc(100% - {{gutter}}*3%);">{{image.caption}}</div>
                 {% elsif grid.gutters and grid.caption.position == 'center' %}
@@ -363,7 +417,7 @@ exclude_from_search:                    true
           </div>
           {% else %}
             <div class="{{grid.caption.position}}">
-              <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.caption}}">
+              <img id="{{forloop.index}}" class="{{grid.image_styles}}" src="{{grid.image_base_path}}/{{image.file}}" alt="{{image.caption}}" style="{{image_filters}}">
               {% if grid.caption.enabled %}
                 {% if grid.gutters and grid.caption.position == 'top' %}
                   <div class="caption" style="top: calc(2px + {{gutter}}*4px - {{gutter}}px); width: calc(100% - {{gutter}}*3%);">{{image.caption}}</div>

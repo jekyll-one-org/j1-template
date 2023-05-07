@@ -128,7 +128,8 @@ NOTE: For collection carousels, currently *no* lightbox supported.
   collection:                       biography
   translate_links:                  false
   link_new_window:                  true
-  image_styles:                     img-fluid img-object--cover img-object--w500 g-height-500
+  image_styles:                     img-fluid img-object--cover
+  image_height:                     500px
 
   # ----------------------------------------------------------------------------
   # Carousel options
@@ -254,13 +255,13 @@ articles, or on dedicated archive or category pages. They can increase
 user engagement and keep visitors on a website for longer by presenting
 content dynamically and visually appealingly.
 
+////
 === Carousel using Image Filters
 
 The CSS3 filter property provides a range of image filters that allow you
 to apply various visual effects to images using only CSS. These filters can
 alter the appearance of images by adjusting colors, blurring or sharpening,
 adding gradients, and more.
-
 
 NOTE: Find available CSS Image Filters in section <<CSS3 Filter Functions>>.
 
@@ -333,7 +334,7 @@ slick::post_carousel_life_sepia[role="mb-4"]
         slidesToShow:               1
         slidesToScroll:             1
 ----
-
+////
 
 == Example Carousel
 
@@ -345,20 +346,19 @@ Example carousels allow designers, developers, and stakeholders to evaluate
 a carousel's design, user experience, and functionality before investing
 time and resources in building the final version.
 
+[role="mb-4"]
 Using example carousels, developers can gather feedback, make necessary
 adjustments, and iterate on the design before implementing the final carousel.
 These placeholders are usually used during the early stages of development
-or in situations with limited content available for the carousel.
-
-[role="mb-4"]
-Once the design and functionality of the carousel are finalized, the example
-carousel can be replaced with the productive version that integrates with
+or in situations with limited content available for the carousel. Once the
+design and functionality of the carousel are finalized, the example carousel
+can be replaced with the productive version that integrates with
 the actual content or data.
 
 .Asciidoc configuration
 [source, config, role="noclip mb-2"]
 ----
-slick::example_carousel_arrows_dots[role="mb-5"]
+slick::example_carousel_arrows_dots[]
 ----
 
 .Example carousel using Arrows + Dots
@@ -379,7 +379,7 @@ NOTE: For example carousels, *no* lightbox supported.
   type:                             example
   gutters:                          1
   style:                            h3
-  height:                           150px
+  height:                           200px
   slides:                           9
 
   # ----------------------------------------------------------------------------
@@ -416,14 +416,14 @@ NOTE: For example carousels, *no* lightbox supported.
 
 == Carousels from Images
 
-An image slider, also known as a slideshow, is a graphical user interface
-element commonly used in web design and development to showcase a series of
-images or visual content dynamically and interactively.
+A image carousel is a graphical user interface element commonly used in web
+design and development to showcase a series of images or visual content
+dynamically and interactively.
 
 === Simple Image Carousel
 
 [role="mb-4"]
-An _Slick_ image carousel typically consists of a container with images and
+A _Slick_ image carousel typically consists of a container with images and
 a navigation system, including buttons, arrows, or dots that allow users to
 move back and forth between images or select a specific image. Image sliders
 can also include animation effects, such as fade-in or slide-in transitions
@@ -432,7 +432,7 @@ between images, to make the presentation more engaging and visually appealing.
 .Asciidoc configuration
 [source, config, role="noclip mb-2"]
 ----
-slick::image_carousel_simple[role="mb-5"]
+slick::image_carousel_simple[]
 ----
 
 .Image Carousel + No Arrows + No Dots + No Gutters + No Captions +No Lightbox
@@ -451,7 +451,8 @@ slick::image_carousel_simple[role="mb-5"]
   type:                             image
   gutters:                          0
   image_base_path:                  /assets/images/modules/gallery/mega_cities
-  image_styles:                     img-fluid img-object--cover g-height-300
+  image_styles:                     img-fluid img-object--cover
+  image_height:                     300px
 
   # ----------------------------------------------------------------------------
   # Lightbox options
@@ -528,7 +529,7 @@ since then for Javascript libraries to support such functionality.
 .Asciidoc configuration
 [source, config, role="noclip mb-2"]
 ----
-slick::image_carousel_full[role="mb-5"]
+slick::image_carousel_full[]
 ----
 
 .Image Carousel + Arrows + Dots + Gutters + Captions + Lightbox
@@ -551,7 +552,8 @@ fired on all images of a slider if enabled:
   type:                             image
   gutters:                          1
   image_base_path:                  /assets/images/modules/gallery/mega_cities
-  styles:                           img-fluid img-object--cover g-height-400
+  image_styles:                     img-fluid img-object--cover
+  image_height:                     300px
 
   # ----------------------------------------------------------------------------
   # Lightbox options
@@ -590,6 +592,7 @@ fired on all images of a slider if enabled:
   ...
 ----
 
+////
 == CSS3 Filter Functions
 
 // See: https://developer.mozilla.org/en-US/docs/Web/CSS/filter#filter_functions
@@ -742,3 +745,4 @@ following example enhances the contrast and brightness of the image:
 ----
 filter: grayscale(0.5) sepia(0.5)
 ----
+////

@@ -61,6 +61,15 @@ defaults:
     xl:                                 3                                       # viewport: ≥ 1200px, 4 colum|s
 
   # ----------------------------------------------------------------------------
+  # CSS filter options
+  #
+  filters:
+    enabled:                            false
+    grayscale:                          1
+    contrast:                           1
+    brightness:                         1
+
+  # ----------------------------------------------------------------------------
   # AJAX (HTML)
   #
   # The HTML portion of a grid are being read from a HTML file generated

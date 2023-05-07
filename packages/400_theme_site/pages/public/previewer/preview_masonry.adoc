@@ -36,8 +36,7 @@ resource_options:
 
 // Page Initializer
 // =============================================================================
-// Enable the Liquid Preprocessor
-:page-liquid:
+// Enable the Liquid Preprocessorpage-liquid:
 
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
@@ -98,7 +97,7 @@ options.
 .Asciidoc configuration
 [source, config, role="noclip mb-3"]
 ----
-masonry::collection_biography[role="mb-4"]
+masonry::collection_biography[]
 ----
 
 A biography is a written account of a person's life, typically focusing on
@@ -150,7 +149,7 @@ masonry::collection_fantasy[role="mb-3"]
 .Asciidoc configuration
 [source, config, role="noclip mb-3"]
 ----
-masonry::collection_fantasy[role="mb-4"]
+masonry::collection_fantasy[]
 ----
 
 .Configuration settings (YAML)
@@ -193,7 +192,7 @@ options.
 .Asciidoc configuration
 [source, config, role="noclip mb-3"]
 ----
-masonry::post_series_example[role="mb-4"]
+masonry::post_series_example[]
 ----
 
 .Post Grid + Gutters (Life)
@@ -254,7 +253,7 @@ ways to suit the website's needs.
 .Asciidoc configuration
 [source, config, role="noclip mb-3"]
 ----
-masonry::card_example[role="mb-4"]
+masonry::card_example[]
 ----
 
 .Image Cards + Lightbox + Gutters + Captions
@@ -320,10 +319,10 @@ or disrupting the overall flow of the gallery.
 .Asciidoc configuration
 [source, config, role="noclip mb-3"]
 ----
-masonry::image_grid_base_example[role="mb-4"]
+masonry::image_grid_base_example[]
 ----
 
-.Image Grid + No Lightbox + No Gutters + No Captions (Mega Cities)
+.Image Grid + No Lightbox + No Gutters + No Captions
 masonry::image_grid_base_example[role="mb-4"]
 
 .Configuration settings (YAML)
@@ -381,13 +380,13 @@ since then for Javascript libraries to support such functionality.
 .Asciidoc configuration
 [source, config, role="noclip mb-3"]
 ----
-masonry::image_grid_full_example[role="mb-4"]
+masonry::image_grid_full_example[]
 ----
 
 A lightbox supports image groups (image sets). Click on the images below to
 see how a Lightbox manages a group of images shown in your grid.
 
-.Image Grid + Gutters + Lightbox + Captions (Mega Cities)
+.Image Grid + Gutters + Lightbox + Captions
 masonry::image_grid_full_example[role="mb-4"]
 
 .Configuration settings (YAML)
@@ -437,6 +436,235 @@ masonry::image_grid_full_example[role="mb-4"]
 NOTE: The lightbox for Masonry Grids is _Lightbox V2_, the classic lightbox
 widely used on the Internet.
 
+////
+==== Full Grid + Filters
+
+The CSS3 filter property provides a range of image filters that allow you
+to apply various visual effects to images using only CSS. These filters can
+alter the appearance of images by adjusting colors, blurring or sharpening,
+adding gradients, and more.
+
+NOTE: Find available CSS Image Filters in section <<CSS3 Filter Functions>>.
+
+.Asciidoc configuration
+[source, config, role="noclip mb-3"]
+----
+masonry::image_grid_full_example_filters[]
+----
+
+.Image Grid + Gutters + Lightbox + Captions + Filters
+masonry::image_grid_full_example_filters[role="mb-4"]
+
+.Configuration settings (YAML)
+[source, yaml, role="noclip mb-4"]
+----
+# --------------------------------------------------------------------------
+# Image Grid + Lightbox + Gutters + Captions
+#
+- grid:
+  enabled:                          true
+
+  id:                               image_grid_full_example
+  type:                             image
+  image_base_path:                  /assets/images/modules/gallery/mega_cities
+  image_styles:                     img-fluid
+  lightbox:                         true
+  gutters:                          true
+
+  # ------------------------------------------------------------------------
+  # Captions
+  #
+  caption:
+    enabled:                        true
+    position:                       bottom
+
+  # ------------------------------------------------------------------------
+  # CSS filter options (Sepia)
+  #
+  filters:
+    enabled:                        true
+    grayscale:                      0.8
+    contrast:                       0.8
+    brightness:                     0.7
+    sepia:                          1
+
+  # ------------------------------------------------------------------------
+  # Masonry options
+  #
+  options:
+    originTop:                      true
+    originLeft:                     true
+    initLayout:                     true
+    percentPosition:                true
+
+  # ------------------------------------------------------------------------
+  # Images
+  #
+  images:
+
+    - image:                        # image 1
+      file:                         denys-nevozhai-1_b.jpg
+      caption:                      Man posing at the rooftop of Jin Mao Tower Shanghai - China
+
+      ...
+----
+////
+
+////
+[role="mt-5"]
+== CSS3 Filter Functions
+
+// See: https://developer.mozilla.org/en-US/docs/Web/CSS/filter#filter_functions
+
+The filter property is specified as none or one or more of the functions
+listed below. If the parameter for any function is invalid, the function
+returns none. Except where noted, the functions that take a value expressed
+with a percent sign (as in 34%) also accept the value expressed as decimal
+(as in 0.34).
+
+=== blur()
+
+The blur() function applies a Gaussian blur to the input image. The value
+of radius defines the value of the standard deviation to the Gaussian
+function, or how many pixels on the screen blend into each other, so a
+larger value will create more blur. The initial value for interpolation is 0.
+The parameter is specified as a CSS length, but does not accept percentage
+values.
+
+.Examples
+[source, css]
+----
+filter: blur(5)
+filter: blur(50)
+----
+
+=== brightness()
+
+The brightness() function applies a linear multiplier to the input image,
+making it appear more or less bright. A value of 0% will create an image
+that is completely black. A value of 100% leaves the input unchanged. Other
+values are linear multipliers on the effect. Values of an amount over 100%
+are allowed, providing brighter results. The initial value for interpolation
+is 1.
+
+.Examples
+[source, css]
+----
+filter: brightness(1)
+filter: brightness(0.3)
+----
+
+=== contrast()
+
+The contrast() function adjusts the contrast of the input image. A value
+of 0% will create an image that is completely gray. A value of 100% leaves
+the input unchanged. Values of an amount over 100% are allowed, providing
+results with more contrast. The initial value for interpolation is 1.
+
+.Examples
+[source, css]
+----
+filter: contrast(2)
+----
+
+=== grayscale()
+
+The grayscale() function converts the input image to grayscale. The value
+of amount defines the proportion of the conversion. A value of 100% is
+completely grayscale. A value of 0% leaves the input unchanged. Values
+between 0% and 100% are linear multipliers on the effect. The initial value
+for interpolation is 0.
+
+.Examples
+[source, css]
+----
+filter: grayscale(1)
+filter: grayscale(0.5)
+----
+
+=== hue-rotate()
+
+The hue-rotate() function applies a hue rotation on the input image. The value
+of angle defines the number of degrees around the color circle the input
+samples will be adjusted. A value of 0deg leaves the input unchanged. The initial value for interpolation is 0. Though there is no maximum value; the effect of values above 360deg wraps around.
+
+.Examples
+[source, css]
+----
+filter: hue-rotate(90)
+----
+
+=== invert()
+
+The invert() function inverts the samples in the input image. The value of
+amount defines the proportion of the conversion. A value of 100% is completely
+inverted. A value of 0% leaves the input unchanged. Values between 0% and 100%
+are linear multipliers on the effect. The initial value for interpolation is 0.
+
+.Examples
+[source, css]
+----
+filter: invert(100%)
+filter: invert(1)
+filter: invert(0.6)
+----
+
+=== opacity()
+
+The opacity() function applies transparency to the samples in the input image.
+The value of amount defines the proportion of the conversion. A value of 0%
+is completely transparent. A value of 100% leaves the input unchanged. Values
+between 0% and 100% are linear multipliers on the effect. This is equivalent
+to multiplying the input image samples by amount. The initial value for
+interpolation is 1. This function is similar to the more established opacity
+property; the difference is that with filters, some browsers provide hardware
+acceleration for better performance.
+
+.Examples
+[source, css]
+----
+filter: opacity(1)
+filter: opacity(0.5)
+----
+
+=== saturate()
+
+The saturate() function saturates the input image. The value of amount
+defines the proportion of the conversion. A value of 0% is completely
+un-saturated. A value of 100% leaves the input unchanged. Other values are
+linear multipliers on the effect. Values of amount over 100% are allowed,
+providing super-saturated results. The initial value for interpolation is 1.
+
+[source, css]
+----
+filter: saturate(200%)
+----
+
+.Examples
+=== sepia()
+
+The sepia() function converts the input image to sepia. The value of amount
+defines the proportion of the conversion. A value of 100% is completely sepia.
+A value of 0% leaves the input unchanged. Values between 0% and 100% are
+linear multipliers on the effect. The initial value for interpolation is 0.
+
+[source, css]
+----
+filter: sepia(1)
+filter: sepia(0.5)
+----
+
+=== Combining functions
+
+You may combine any number of functions to manipulate the rendering. The
+following example enhances the contrast and brightness of the image:
+
+.Example
+[source, css]
+----
+filter: grayscale(0.5) sepia(0.5)
+----
+
 
 [role="mt-5"]
 == Justified Gallery
@@ -459,3 +687,4 @@ videos you have made at it’s best.
 
 TIP: Find more on how to present video content using *JustifiedGallery* on the example
 page link:{url-roundtrip--present-videos}[Present Videos, {browser-window--new}].
+////
