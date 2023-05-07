@@ -193,7 +193,7 @@ NOTE: For post carousels, currently *no* lightbox supported.
 .Configuration settings (YAML)
 [source, yaml, role="noclip mb-4"]
 ----
-# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # POST Carousel (Life)
 #
 - carousel:
@@ -208,13 +208,13 @@ NOTE: For post carousels, currently *no* lightbox supported.
   translate_links:                  false
   link_new_window:                  true
 
-  # ------------------------------------------------------------------------
+  # ----------------------------------------------------------------------------
   # Lightbox options
   #
   lightbox:
     enabled:                        false
 
-  # ------------------------------------------------------------------------
+  # ----------------------------------------------------------------------------
   # Carousel options
   #
   options:
@@ -223,7 +223,7 @@ NOTE: For post carousels, currently *no* lightbox supported.
     dots:                           true
     slidesToShow:                   3
     slidesToScroll:                 1
-    responsive:                     true                                    # enables reponsive options to generate breakpoint properties for slick()
+    responsive:                     true
 
   # ----------------------------------------------------------------------------
   # Reponsive options
@@ -254,13 +254,13 @@ articles, or on dedicated archive or category pages. They can increase
 user engagement and keep visitors on a website for longer by presenting
 content dynamically and visually appealingly.
 
-=== Carousel using (CSS) Image Filters
+=== Carousel using Image Filters
 
-The filter property is specified as none or one or more of the functions
-listed below. If the parameter for any function is invalid, the function
-returns none. Except where noted, the functions that take a value expressed
-with a percent sign (as in 34%) also accept the value expressed as decimal
-(as in 0.34).
+The CSS3 filter property provides a range of image filters that allow you
+to apply various visual effects to images using only CSS. These filters can
+alter the appearance of images by adjusting colors, blurring or sharpening,
+adding gradients, and more.
+
 
 NOTE: Find available CSS Image Filters in section <<CSS3 Filter Functions>>.
 
@@ -369,7 +369,7 @@ NOTE: For example carousels, *no* lightbox supported.
 .Configuration settings (YAML)
 [source, yaml, role="noclip mb-4"]
 ----
-# --------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # EXAMPLE Carousel
 #
 - carousel:
@@ -382,7 +382,7 @@ NOTE: For example carousels, *no* lightbox supported.
   height:                           150px
   slides:                           9
 
-  # ------------------------------------------------------------------------
+  # ----------------------------------------------------------------------------
   # Carousel options
   #
   options:
@@ -459,7 +459,7 @@ slick::image_carousel_simple[role="mb-5"]
   lightbox:
     enabled:                        false
 
-  # ------------------------------------------------------------------------
+  # ----------------------------------------------------------------------------
   # Caption options
   #
   captions:
@@ -559,7 +559,7 @@ fired on all images of a slider if enabled:
   lightbox:
     enabled:                        true
 
-  # ------------------------------------------------------------------------
+  # ----------------------------------------------------------------------------
   # Caption options
   #
   captions:
