@@ -462,7 +462,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       preload:                          false
-      script_load:
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -586,7 +586,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       preload:                          false                                   # property currently unused
-      script_load:
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -717,7 +717,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       preload:                          false
-      script_load:
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   true
       data:
@@ -821,7 +821,7 @@ resources:
       region:                           head
       layout:                           [ all ]
       required:                         always
-      preload:                          false                                   # property currently unused
+      script_load:                      defer
       script_load:
       dependencies:                     false
       pass_init_data:                   false
@@ -844,7 +844,7 @@ resources:
       layout:                           [ home, page, post, collection, blog_archive, app ]
       required:                         always
       preload:                          false
-      script_load:
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -915,7 +915,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       preload:                          false
-      script_load:
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -939,7 +939,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       preload:                          false
-      script_load:
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -963,7 +963,7 @@ resources:
       layout:                           [ all ]
       required:                         always
       preload:                          false
-      script_load:
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
       data:

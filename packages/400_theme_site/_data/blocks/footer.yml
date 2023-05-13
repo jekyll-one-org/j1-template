@@ -74,19 +74,19 @@ settings:
             href:                       https://github.com/jekyll-one/j1-starter
           facebook:
             enabled:                    true
-            href:                       "#void"
+            href:                       "#"
 #           href:                       https://www.facebook.com/<your_profile>/
           twitter:
             enabled:                    true
-            href:                       "#void"
+            href:                       "#"
 #           href:                       https://twitter.com/<your_profile>/
           xing:
             enabled:                    true
-            href:                       "#void"
+            href:                       "#"
 #           href:                       https://www.xing.com/profile/<your_profile>/
           linkedin:
             enabled:                    true
-            href:                       "#void"
+            href:                       "#"
 #           href:                       https://www.linkedin.com/in/<your_profile>/
 
         # ----------------------------------------------------------------------

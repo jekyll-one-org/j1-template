@@ -58,10 +58,10 @@ defaults:
     icons:
       facebook:
         enabled:                        false
-        href:                           "#void"
+        href:                           "#"
       twitter:
         enabled:                        false
-        href:                           "#void"
+        href:                           "#"
 
     # --------------------------------------------------------------------------
     # LEGAL settings

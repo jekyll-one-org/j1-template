@@ -84,7 +84,7 @@ defaults:
   # currently NOT supported
   #
   action_enabled:                       false
-  action_url:                           "#void"
+  action_url:                           "#"
   action_button:                        btn-default
   action_icon:                          download                                # cloud-action
   action_icon_family:                   MDI                                     # MDI | FontAweSome

@@ -145,20 +145,16 @@ j1.adapter.attic = (function (j1, window) {
         var pageState   = $('#no_flicker').css("display");
         var pageVisible = (pageState == 'block') ? true: false;
         if ( j1.getState() === 'finished' && pageVisible ) {
-          {% if attic_options.enabled %}
-          logger.info('\n' + 'create all attics configured');
 
-          // hide page while attic is being created
-          // jadams, 2023-05-12: Visible page/attic cause high number
-          // for cumulative layout shift (CLS)
-          //
           $('#no_flicker').css('display', 'none');
 
+          {% if attic_options.enabled %}
+          logger.info('\n' + 'create all attics configured');
           _this.createAllAttics();
           clearInterval(dependencies_met_page_ready);
           {% else %}
-          logger.debug('\n' + 'found module attics disabled');
-          // add additional top space if attics are disabled
+          logger.warn('\n' + 'found module attics disabled');
+          // add additional top space
           $('#content').addClass('mt-5');
           clearInterval(dependencies_met_page_ready);
           {% endif %}
@@ -208,6 +204,11 @@ j1.adapter.attic = (function (j1, window) {
 
             // Fire backstretch for all slides of the header on attic_id
             if ($('#{{attic_id}}').length) {
+
+              // hide attic
+              // $('#{{attic_id}}').css('display', 'none');
+              // $('#no_flicker').css('display', 'none');
+
               $('#{{attic_id}}').backstretch(
                 atticOptions.slides, {
                   debug:                          atticOptions.debug,
@@ -386,16 +387,17 @@ j1.adapter.attic = (function (j1, window) {
                 $('.attic-caption').css('opacity', '1');
               }
 
-              // show page if attic created
-              $('#no_flicker').css('display', 'block');
-
               // jadams, 2022-08-09:
               // resize the (background-)image to make sure the 'attic'
               // container is changed in size (heigth) if title/tagline
               // expands 'multiline' on small viewports
               // e.g. on mobile devices
               //
-              $('#{{attic_id}}').backstretch('resize');
+              // jadams, 2023-05-12: DIABLE because cause high number of
+              // Cumulative Layout Shift (CLS)
+              // $('#{{attic_id}}').backstretch('resize');
+
+              $('#no_flicker').css('display', 'block');
 
               _this.setState('finished');
               logger.debug('\n' + 'state: ' + _this.getState());

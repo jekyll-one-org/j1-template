@@ -3,10 +3,23 @@
 //
 
 // Override the default Bootstrap base font family
-// 
+//
 // Roboto Slab is being used below and is brought in
 // via Google fonts in the head of src/pug/index.pug.
 // The fonts listed afterwards are fallbacks.
+
+// $font-family-base: "Roboto Slab",
+// -apple-system,
+// BlinkMacSystemFont,
+// "Segoe UI",
+// Roboto,
+// "Helvetica Neue",
+// Arial,
+// sans-serif,
+// "Apple Color Emoji",
+// "Segoe UI Emoji",
+// "Segoe UI Symbol",
+// "Noto Color Emoji";
 
 $font-family-base: "Roboto Slab",
 -apple-system,
@@ -15,30 +28,37 @@ BlinkMacSystemFont,
 Roboto,
 "Helvetica Neue",
 Arial,
-sans-serif,
-"Apple Color Emoji",
-"Segoe UI Emoji",
-"Segoe UI Symbol",
-"Noto Color Emoji";
+sans-serif;
+
 
 // Override the default Bootstrap headings font family
-// 
+//
 // Montserrat is being used below and is brought in
 // via Google fonts in the head of src/pug/index.pug.
 // The fonts listed afterwards are fallbacks.
 
-$headings-font-family: "Montserrat",
+// $headings-font-family: "Montserrat",
+// -apple-system,
+// BlinkMacSystemFont,
+// "Segoe UI",
+// Roboto,
+// "Helvetica Neue",
+// Arial,
+// sans-serif,
+// "Apple Color Emoji",
+// "Segoe UI Emoji",
+// "Segoe UI Symbol",
+// "Noto Color Emoji";
+
+$headings-font-family: "Roboto",
 -apple-system,
 BlinkMacSystemFont,
 "Segoe UI",
 Roboto,
 "Helvetica Neue",
 Arial,
-sans-serif,
-"Apple Color Emoji",
-"Segoe UI Emoji",
-"Segoe UI Symbol",
-"Noto Color Emoji";
+sans-serif;
+
 
 // Create a subheadings font family
 

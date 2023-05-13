@@ -206,10 +206,10 @@ or forced
 Then:
 
   git commit -am "Cleanup files"
-  git commit -am "New version 2023.2.2"
-  git commit --allow-empty -m "New version 2023.2.2"
-  git commit -am "Prepare new version 2023.2.2"
-  git commit -am "Latest files of version 2023.2.2"
+  git commit -am "New version 2023.2.3"
+  git commit --allow-empty -m "New version 2023.2.3"
+  git commit -am "Prepare new version 2023.2.3"
+  git commit -am "Latest files of version 2023.2.3"
 
 == Add file permissions on Windows
 

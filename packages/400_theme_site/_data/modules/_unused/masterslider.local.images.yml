@@ -855,7 +855,7 @@ settings:
               margin:                   mt-4
               animated:                 fadeInRight
               class:                    btn btn-primary btn-sm
-              link:                     '#void'
+              link:                     '#'
               text:                     Read More
 
         # slide 2
@@ -887,7 +887,7 @@ settings:
               margin:                   mt-4
               animated:                 fadeInRight
               class:                    btn btn-primary btn-sm
-              link:                     '#void'
+              link:                     '#'
               text:                     Read More
 
         # slide 3
@@ -919,7 +919,7 @@ settings:
               margin:                   mt-4
               animated:                 fadeInRight
               class:                    btn btn-primary btn-sm
-              link:                     '#void'
+              link:                     '#'
               text:                     Read More
 
         # slide 4
@@ -951,7 +951,7 @@ settings:
               margin:                   mt-4
               animated:                 fadeInRight
               class:                    btn btn-primary btn-sm
-              link:                     '#void'
+              link:                     '#'
               text:                     Read More
 
 

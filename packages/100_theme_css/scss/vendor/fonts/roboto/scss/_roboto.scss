@@ -21,30 +21,35 @@
 
 @font-face {
   font-family: "Roboto";
-  src: local(Roboto Thin), url("/assets/themes/j1/core/fonts/roboto/fonts/Roboto-Thin.woff2") format("woff2"), url("/assets/themes/j1/core/fonts/roboto/fonts/Roboto-Thin.woff") format("woff");
   font-weight: 100;
+  font-display: swap;
+  src: local(Roboto Thin), url("/assets/themes/j1/core/fonts/roboto/fonts/Roboto-Thin.woff2") format("woff2"), url("/assets/themes/j1/core/fonts/roboto/fonts/Roboto-Thin.woff") format("woff");
 }
 
 @font-face {
   font-family: "Roboto";
-  src: local(Roboto Light), url("/assets/themes/j1/core/fonts/roboto/fonts/Roboto-Light.woff2") format("woff2"), url("/assets/themes/j1/core/fonts/roboto/fonts/Roboto-Light.woff") format("woff");
   font-weight: 300;
+  font-display: swap;
+  src: local(Roboto Light), url("/assets/themes/j1/core/fonts/roboto/fonts/Roboto-Light.woff2") format("woff2"), url("/assets/themes/j1/core/fonts/roboto/fonts/Roboto-Light.woff") format("woff");
 }
 
 @font-face {
   font-family: "Roboto";
-  src: local(Roboto Regular), url("/assets/themes/j1/core/fonts/roboto/fonts/Roboto-Regular.woff2") format("woff2"), url("/assets/themes/j1/core/fonts/roboto/fonts/Roboto-Regular.woff") format("woff");
   font-weight: 400;
+  font-display: swap;
+  src: local(Roboto Regular), url("/assets/themes/j1/core/fonts/roboto/fonts/Roboto-Regular.woff2") format("woff2"), url("/assets/themes/j1/core/fonts/roboto/fonts/Roboto-Regular.woff") format("woff");
 }
 
 @font-face {
   font-family: "Roboto";
-  src: local(Roboto Medium), url("/assets/themes/j1/core/fonts/roboto/fonts/Roboto-Medium.woff2") format("woff2"), url("/assets/themes/j1/core/fonts/roboto/fonts/Roboto-Medium.woff") format("woff");
   font-weight: 500;
+  font-display: swap;
+  src: local(Roboto Medium), url("/assets/themes/j1/core/fonts/roboto/fonts/Roboto-Medium.woff2") format("woff2"), url("/assets/themes/j1/core/fonts/roboto/fonts/Roboto-Medium.woff") format("woff");
 }
 
 @font-face {
   font-family: "Roboto";
-  src: local(Roboto Bold), url("/assets/themes/j1/core/fonts/roboto/fonts/Roboto-Bold.woff2") format("woff2"), url("/assets/themes/j1/core/fonts/roboto/fonts/Roboto-Bold.woff") format("woff");
   font-weight: 700;
+  font-display: swap;
+  src: local(Roboto Bold), url("/assets/themes/j1/core/fonts/roboto/fonts/Roboto-Bold.woff2") format("woff2"), url("/assets/themes/j1/core/fonts/roboto/fonts/Roboto-Bold.woff") format("woff");
 }
