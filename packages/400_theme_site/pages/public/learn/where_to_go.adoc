@@ -27,7 +27,6 @@ permalink:                              /pages/public/learn/where_to_go/
 resources:                              [ animate, comments ]
 resource_options:
   - attic:
-      padding_top:                      600
       slides:
         - url:                          /assets/images/modules/attics/1920x1280/alexander-redl.jpg
           alt:                          Photo by Alexander Redl on Unsplash

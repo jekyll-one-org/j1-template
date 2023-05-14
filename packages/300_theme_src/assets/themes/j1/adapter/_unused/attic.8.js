@@ -171,36 +171,25 @@ j1.adapter.attic = (function (j1, window) {
     // -------------------------------------------------------------------------
     createAllAttics: function () {
       var frontmatterOptions  = _this.frontmatterOptions;
-
       // merge all attic options
       var atticOptions = $.extend(true, {}, _this.atticOptions, _this.frontmatterOptions);
 
-      {% comment %} Load data from attic config (yaml data files)
+      {% comment %} Load data from header config (yaml data file)
       -------------------------------------------------------------------------- {% endcomment %}
       {% for item in attic_options.attics %}
         {% if item.attic.enabled %}
           {% assign attic_id = item.attic.id %}
-
           // Create the SPECIFIC header loader FUNCTION for id: {{attic_id}}
           function {{attic_id}} (atticOptions) {
-            var atticOptionsFilters = {};
-            var atticItemFilters    = {};
-            var atticFilters        = {};
-            var my_attic      	    = $.extend({}, {{item.attic | replace: 'nil', 'null' | replace: '=>', ':' }});
+
+            var my_attic = $.extend({}, {{item.attic | replace: 'nil', 'null' | replace: '=>', ':' }});
 
             logger.info('\n' + 'initialize attic on id: {{attic_id}}');
 
-            // collect attic filter settings to object to array to string
-            //
-            {% if item.attic.filters %}
-              atticItemFilters = $.extend({}, {{item.attic.filters | replace: 'nil', 'null' | replace: '=>', ':' }});
-            {% endif %}
-
-            atticOptionsFilters = atticOptions.filters;
-            atticFilters        = $.extend(true, {}, atticOptionsFilters, atticItemFilters);
-            filterArray         = [];
-
-            $.each(atticFilters, function(idx2, val2) {
+            // convert attic filter settings to object to array to string
+            atticFilters = $.extend({}, {{item.attic.filters | replace: 'nil', 'null' | replace: '=>', ':' }});
+            filterArray = [];
+            $.each(atticFilters, function(idx2,val2) {
               var str = idx2 + '(' + val2 + ')';
               filterArray.push(str);
             });
@@ -370,7 +359,7 @@ j1.adapter.attic = (function (j1, window) {
                 + '  <h3 id="head-tagline-text" class="notoc text-' + atticOptions.tagline_align + '">' + textOverlayTagline + '</h3>'
                 + '</div>';
 
-              // hide textOverlay while animate classes are being calculated
+              // hide textOverlay while animate classes are applied
               //
               $('.textOverlay').html(textOverlayHTML).hide();
 
@@ -623,31 +612,20 @@ j1.adapter.attic = (function (j1, window) {
             attic_style += '} </style>';
             $('head').append(attic_style);
 
-            // collect individual (title|tagline) options
-            //
-            var my_attic      	= $.extend({}, {{item.attic | replace: 'nil', 'null' | replace: '=>', ':' }});
-            var padding_top     = !!my_attic.padding_top ? my_attic.padding_top : atticOptions.padding_top;
-            var padding_bottom  = !!my_attic.padding_bottom ? my_attic.padding_bottom : atticOptions.padding_bottom;
-            var margin_bottom   = !!my_attic.margin_bottom ? my_attic.margin_bottom : atticOptions.margin_bottom;
-
-            // frontmatter options takes precedence
-            //
-            if (typeof frontmatterOptions.padding_top != 'undefined')     { padding_top    = frontmatterOptions.padding_top; }
-            if (typeof frontmatterOptions.padding_bottom != 'undefined')  { padding_bottom = frontmatterOptions.padding_bottom; }
-            if (typeof frontmatterOptions.margin_bottom != 'undefined')   { margin_bottom  = frontmatterOptions.margin_bottom; }
-
+            // Initialze header sizes
             attic_style = '';
-            attic_style = '<style> .attic { padding-top: ' +padding_top+ 'px; padding-bottom: ' +padding_bottom+ 'px; margin-bottom: ' +margin_bottom+ 'px; text-shadow: 0 1px 0 rgba(0,0,0,.1); </style>';
-            $('head').append(attic_style);
+            attic_style = '<style> .attic { padding-top: ' +atticOptions.padding_top+ 'px; padding-bottom: ' +atticOptions.padding_bottom+ 'px; margin-bottom: ' +atticOptions.margin_bottom+ 'px; text-shadow: 0 1px 0 rgba(0,0,0,.1); </style>';
 
+            $('head').append(attic_style);
             $('head').append('<style> .attic .head-title h2 { color: ' +atticOptions.title_color+ ';font-size: ' +atticOptions.title_size+ ' !important; text-align: ' +atticOptions.title_align+ ';} </style>');
             $('head').append('<style> .attic .head-tagline h3 { color: ' +atticOptions.tagline_color+ ';font-size: ' +atticOptions.tagline_size+ ' !important; text-align: ' +atticOptions.tagline_align+ '; } </style>');
 
-            // Add opacity to ALL header (backstretch) images
+            // Add opacity to all header images
             // See: https://tympanus.net/codrops/2013/11/07/css-overlay-techniques/
-            var item_opacity        = !!my_attic.opacity ? my_attic.opacity : atticOptions.opacity;
-            var backstretch_opacity = '<style> .backstretch-item { opacity: ' +item_opacity+ '; </style>';
-            $('head').append(backstretch_opacity);
+            var attic_opacity;
+
+            attic_opacity = '<style> .backstretch-item { opacity: ' +atticOptions.opacity+ '; </style>';
+            $('head').append(attic_opacity);
 
             _this.setState('initialized');
             logger.debug('\n' + 'state: ' + _this.getState());

@@ -35,7 +35,6 @@ resource_options:
   - toccer:
       collapseDepth:                    3
   - attic:
-      padding_top:                      600
       slides:
         - url:                          /assets/images/modules/attics/sigmund-1920x1280.jpg
           alt:                          Photo by Sigmund on Unsplash

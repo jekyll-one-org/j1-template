@@ -21,7 +21,6 @@ permalink:                              /pages/public/previewer/slick/
 resources:                              [ animate, clipboard, lightbox, rouge, slick ]
 resource_options:
   - attic:
-      padding_top:                      600
       slides:
         - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
           alt:                          Photo by Ricardo Gomez Angel on Unsplash

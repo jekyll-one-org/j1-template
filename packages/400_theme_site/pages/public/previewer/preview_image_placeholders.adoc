@@ -19,7 +19,6 @@ permalink:                              /pages/public/previewer/image_placeholde
 resources:                              [ clipboard, lightbox, rouge, slick ]
 resource_options:
   - attic:
-      padding_top:                      600
       slides:
         - url:                          /assets/images/modules/attics/1920x1280/kelly-sikkemal.jpg
           alt:                          Photo by Kelly Sikkema on Unsplash

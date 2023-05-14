@@ -34,7 +34,6 @@ resources:                              [
                                         ]
 resource_options:
   - attic:
-      padding_top:                      600
       slides:
         - url:                          /assets/images/modules/attics/1920x1280/quino-al-2.jpg
           alt:                          Photo by Quino Al Angel on Unsplash
@@ -62,8 +61,8 @@ resource_options:
 :url-j1-docs--lightbox-module:          https://jekyll.one/pages/public/manuals/modules/lightbox/
 :url-j1-docs--masterslider-module:      https://jekyll.one/pages/public/manuals/modules/masterslider/
 
-:url-j1-masterslider-slider-previewer:  https://jekyll.one/pages/public/previewer/masterslider/
-:url-j1-slick-previewer:                /pages/public/previewer/slick/
+:url-j1-masterslider-previewer:         https://jekyll.one/pages/public/previewer/masterslider/
+:url-j1-slick-previewer:                https://jekyll.one/pages/public/previewer/slick/
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -375,7 +374,7 @@ masterslider::ms_00009[role="mb-5"]
 If you're interested to learn more about MS Slider, go for the following
 documents:
 
-* MS Slider link:{url-j1-masterslider-slider-previewer}[Previewer, {browser-window--new}]
+* MS Slider link:{url-j1-masterslider-previewer}[Previewer, {browser-window--new}]
 * MS Slider link:{url-j1-docs--masterslider-module}[Module documentation, {browser-window--new}]
 
 

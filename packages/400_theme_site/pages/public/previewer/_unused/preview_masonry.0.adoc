@@ -21,7 +21,6 @@ permalink:                              /pages/public/previewer/masonry/
 resources:                              [ clipboard, masonry, rouge ]
 resource_options:
   - attic:
-      padding_top:                      600
       slides:
         - url:                          /assets/images/modules/attics/1920x1280/hayden-mills-2.jpg
           alt:                          Photo by Hayden Mills on Unsplash

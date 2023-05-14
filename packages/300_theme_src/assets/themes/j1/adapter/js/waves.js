@@ -146,7 +146,7 @@ var logText;
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (function (options) {
         var pageState   = $('#no_flicker').css("display");
-        var pageVisible = (pageState == 'block') ? true: false;
+        var pageVisible = (pageState == 'block') ? true : false;
         if ( j1.getState() === 'finished' && pageVisible ) {
           themes_allowed = waveOptions.themes.toString();
           theme_enabled  = waveOptions.themes.indexOf(theme) > -1 ? true : false;

@@ -28,7 +28,6 @@ permalink:                              /pages/public/learn/roundtrip/mdi_icon_f
 resources:                              [ animate, iconify ]
 resource_options:
   - attic:
-      padding_top:                      600
       slides:
         - url:                          /assets/images/pages/roundtrip/icon-fonts-1920x1280-bw.jpg
           alt:                          Photo by Harpal Singh on Unsplash

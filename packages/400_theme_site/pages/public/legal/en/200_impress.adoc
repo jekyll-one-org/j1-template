@@ -33,7 +33,6 @@ permalink:                              /pages/public/legal/en/impress/
 resources:                              [ animate ]
 resource_options:
   - attic:
-      padding_top:                      600
       slides:
         - url:                          /assets/images/modules/attics/1920x1280/j1-starter-mockup-1.jpg
           alt:                          J1 Starter Mockup

@@ -30,7 +30,6 @@ permalink:                              /pages/public/plans/plan_details/
 resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
   - attic:
-      padding_top:                      600
       slides:
         - url:                          /assets/images/modules/attics/1920x1280/kira-auf-der-heide.jpg
           alt:                          Photo by Kira auf der Heide on Unsplash

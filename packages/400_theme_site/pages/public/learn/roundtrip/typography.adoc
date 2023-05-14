@@ -27,7 +27,6 @@ permalink:                              /pages/public/learn/roundtrip/typography
 resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
   - attic:
-      padding_top:                      600
       opacity:                          0.3
       preload:                          0
       transitionDuration:               fast

@@ -35,7 +35,6 @@ resources:                              [
                                         ]
 resource_options:
   - attic:
-      padding_top:                      600
       slides:
 
         # Broadway Underground - still image (animate default)

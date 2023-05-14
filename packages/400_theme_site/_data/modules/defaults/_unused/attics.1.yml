@@ -20,10 +20,6 @@
 #   HTML data for a layout, the loader procedure places the data based this
 #   YAML data file into the REGION specified with a LANE.
 # ------------------------------------------------------------------------------
-# NOTE:
-#   Animations on tite|tagline are taken from 'animate.css'
-#   See: https://animate.style/
-# ------------------------------------------------------------------------------
 
 # ------------------------------------------------------------------------------
 # Description
@@ -59,10 +55,26 @@ settings:
         id:                             attic_home
         layout:                         home
 
-        padding_top:                    600
+        title_animate:                  animate__fadeInDown                     # all animations allowed from animate
+        title_animate_duration:         animate__fast                           # animate__default | animate__slow | animate__slower | animate__fast | animate__faster
+
+        tagline_animate:                animate__fadeInRight
+        tagline_animate_duration:       animate__fast
+
+        padding_top:                    400
+        padding_bottom:                 50
+        opacity:                        0.5
+
+        background_color_1:             "#0D47A1"                               # md-blue-900 | transparent
+        background_color_2:             "#0D47A1"                               # md-blue-900 | transparent
+
+        filters:
+          grayscale:                    1
+          contrast:                     0.8
+          brightness:                   0.8
 
     # --------------------------------------------------------------------------
-    # Attic Pages
+    # layout Page
     #
     - name:                             Pages
       attic:
@@ -71,11 +83,23 @@ settings:
         id:                             attic_page
         layout:                         [ page ]
 
-        title_animate:                  animate__fadeInDown
-        padding_top:                    600
+        title_animate:                  animate__fadeInDown                     # all animations allowed from animate
+        title_animate_duration:         animate__slow                           # animate__default | animate__slow | animate__slower | animate__fast | animate__faster
+
+        tagline_animate:                animate__fadeInRight
+        tagline_animate_duration:       animate__slow
+
+        padding_top:                    400
+        padding_bottom:                 50
+        opacity:                        0.5
+
+        filters:
+          grayscale:                    0.5
+          contrast:                     0.8
+          brightness:                   0.8
 
     # --------------------------------------------------------------------------
-    # Attic Posts
+    # layout Post
     #
     - name:                             Posts
       attic:
@@ -84,23 +108,43 @@ settings:
         id:                             attic_post
         layout:                         [ collection, post ]
 
-        title_animate:                  animate__fadeInDown
-        padding_top:                    600
+        title_animate:                  animate__fadeInDown                     # all animations allowed from animate
+        title_animate_duration:         animate__slow                           # animate__default | animate__slow | animate__slower | animate__fast | animate__faster
+
+        tagline_animate:                animate__fadeInRight
+        tagline_animate_duration:       animate__slow
+
+        padding_top:                    400
+        padding_bottom:                 50
+        opacity:                        0.5
+
+        filters:
+          grayscale:                    1
+          contrast:                     0.8
+          brightness:                   0.8
 
     # --------------------------------------------------------------------------
-    # Attic Raw
+    # layout Raw
     #
-    - name:                             Raw
+    - name:                             Raw Pages
       attic:
         enabled:                        true
 
         id:                             attic_raw
         layout:                         [ raw ]
+        padding_top:                    400
+        padding_bottom:                 50
+        opacity:                        0.5
+
+        filters:
+          grayscale:                    1
+          contrast:                     0.8
+          brightness:                   0.8
 
     # --------------------------------------------------------------------------
-    #  Attic Text
+    #  layout App
     #
-    - name:                             Text
+    - name:                             Apps
       attic:
         enabled:                        true
 

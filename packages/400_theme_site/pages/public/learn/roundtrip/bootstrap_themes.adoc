@@ -26,7 +26,6 @@ permalink:                              /pages/public/learn/roundtrip/themes/
 resources:                              [ animate, rouge, clipboard, lightbox ]
 resource_options:
   - attic:
-      padding_top:                      600
       slides:
         - url:                          /assets/images/modules/attics//themes-1920x1280-bw.jpg
           alt:                          Photo by Clem Onojeghuo on Unsplash

@@ -33,7 +33,6 @@ resource_options:
   - toccer:
       collapseDepth:                    3
   - attic:
-      padding_top:                      600
       slides:
         - url:                          /assets/images/modules/attics/lunr-1280x800.jpg
           alt:                          Lunr Search Engine

@@ -31,7 +31,6 @@ permalink:                              /pages/public/learn/roundtrip/responsive
 resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
   - attic:
-      padding_top:                      600
       slides:
         - url:                          /assets/images/pages/roundtrip/tables-1920x1280-bw.jpg
           alt:                          Photo by Markus Spiske on Unsplash
