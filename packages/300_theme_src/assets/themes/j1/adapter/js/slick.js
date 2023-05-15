@@ -158,10 +158,11 @@ j1.adapter.slick = (function (j1, window) {
       // initializer
       // -----------------------------------------------------------------------
       var dependencies_met_page_ready = setInterval (function (options) {
-        var pageState   = $('#no_flicker').css("display");
-        var pageVisible = (pageState == 'block') ? true: false;
+        var pageState     = $('#no_flicker').css("display");
+        var pageVisible   = (pageState == 'block') ? true: false;
+        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if ( j1.getState() === 'finished' && pageVisible ) {
+        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
 
           {% for carousel in slick_settings.carousels %} {% if carousel.enabled %}
           logger.info('\n' + 'carousel is being initialized on id: ' + '{{carousel.id}}');

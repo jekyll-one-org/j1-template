@@ -148,11 +148,14 @@ j1.adapter.attic = (function (j1, window) {
           {% if attic_options.enabled %}
           logger.info('\n' + 'create all attics configured');
 
-          // hide page while attic is being created
-          // jadams, 2023-05-12: Visible page/attic cause high number
-          // for cumulative layout shift (CLS)
-          //
-          $('#no_flicker').css('display', 'none');
+          if (atticOptions.hide_oninit) {
+            // hide page while attic is being created
+            // jadams, 2023-05-12: Visible page/attic cause high number
+            // for cumulative layout shift (CLS)
+            //
+            logger.debug('\n' + 'hide attics on initia.lization');
+            $('#no_flicker').css('display', 'none');
+          }
 
           _this.createAllAttics();
           clearInterval(dependencies_met_page_ready);

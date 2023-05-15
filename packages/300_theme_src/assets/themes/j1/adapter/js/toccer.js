@@ -164,7 +164,9 @@ j1.adapter.toccer = (function () {
         var dependencies_met_navigator = setInterval(function() {
           var pageState   = $('#no_flicker').css("display");
           var pageVisible = (pageState == 'block') ? true: false;
-          if ( j1.getState() == 'finished' && pageVisible ) {
+          var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+
+          if (j1.getState() == 'finished' && pageVisible && atticFinished) {
             _this.initToccerCore(toccerOptions);
             _this.setState('finished');
 

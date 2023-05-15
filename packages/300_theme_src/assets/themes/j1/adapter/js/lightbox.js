@@ -132,9 +132,11 @@ j1.adapter.lightbox = (function (j1, window) {
       lightboxOptions           = $.extend(true, {}, lightboxDefaults, lightboxSettings, frontmatterOptions);
 
       var dependencies_met_j1_finished = setInterval(function() {
-        var pageState   = $('#no_flicker').css("display");
-        var pageVisible = (pageState == 'block') ? true: false;
-        if (j1.getState() == 'finished' && pageVisible) {
+        var pageState     = $('#no_flicker').css("display");
+        var pageVisible   = (pageState == 'block') ? true: false;
+        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+
+        if (j1.getState() == 'finished' && pageVisible && atticFinished) {
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());

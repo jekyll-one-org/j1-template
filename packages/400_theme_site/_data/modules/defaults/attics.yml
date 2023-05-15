@@ -42,6 +42,7 @@ defaults:
   # Global settings for text- and image-based header
   #
   debug:                                false
+  hide_oninit:                          true
 
   circuit:                              false
   notranslate:                          true

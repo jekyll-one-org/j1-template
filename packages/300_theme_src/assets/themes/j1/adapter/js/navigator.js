@@ -406,10 +406,12 @@ j1.adapter.navigator = (function (j1, window) {
             // event handler|css styles
             // -----------------------------------------------------------------
             var dependencies_met_initialized = setInterval(function() {
-              var pageState   = $('#no_flicker').css("display");
-              var pageVisible = (pageState == 'block') ? true: false;
+              var pageState     = $('#no_flicker').css("display");
+              var pageVisible   = (pageState == 'block') ? true: false;
+              var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+
               // initialize if page and themer ready
-              if (j1.getState() === 'finished' && j1.adapter.themer.getState() === 'finished' && pageVisible) {
+              if (j1.getState() === 'finished' && j1.adapter.themer.getState() === 'finished' && pageVisible && atticFinished) {
                 _this.setState('processing');
 
                 // apply module configuration settings

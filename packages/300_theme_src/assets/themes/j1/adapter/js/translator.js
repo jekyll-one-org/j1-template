@@ -202,9 +202,11 @@ j1.adapter.translator = (function (j1, window) {
           domainAttribute = '';
         }
 
-        var pageState   = $('#no_flicker').css("display");
-        var pageVisible = (pageState == 'block') ? true: false;
-        if ( j1.getState() === 'finished' && pageVisible ) {
+        var pageState     = $('#no_flicker').css("display");
+        var pageVisible   = (pageState == 'block') ? true: false;
+        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+
+        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');

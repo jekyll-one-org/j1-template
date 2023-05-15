@@ -144,9 +144,11 @@ var lastPageInfo;
 
       // initialize scrollers if page is available and visible
       var dependencies_met_page_ready = setInterval (function (options) {
-        var pageState   = $('#no_flicker').css("display");
-        var pageVisible = (pageState == 'block') ? true: false;
-        if ( j1.getState() === 'finished' && pageVisible ) {
+        var pageState     = $('#no_flicker').css("display");
+        var pageVisible   = (pageState == 'block') ? true: false;
+        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+
+        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
           _this.generate_scrollers();
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
