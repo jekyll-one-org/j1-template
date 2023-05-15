@@ -130,7 +130,11 @@ j1.adapter.dropdowns = (function (j1, window) {
       logger.info('\n' + 'module is being initialized');
 
       var dependencies_met_j1_finished = setInterval(function() {
-        if (j1.getState() == 'finished') {
+        var pageState     = $('#no_flicker').css("display");
+        var pageVisible   = (pageState == 'block') ? true : false;
+        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+
+        if (j1.getState() == 'finished' && pageVisible && atticFinished) {
           var elms = document.querySelectorAll('.dropdowns');
 
           // -------------------------------------------------------------------

@@ -130,7 +130,11 @@ j1.adapter.justifiedGallery = (function (j1, window) {
       logger = log4javascript.getLogger('j1.adapter.justifiedGallery');
 
       var dependencies_met_j1_finished= setInterval(function() {
-        if (j1.getState() == 'finished') {
+        var pageState     = $('#no_flicker').css("display");
+        var pageVisible   = (pageState == 'block') ? true : false;
+        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+
+        if (j1.getState() == 'finished' && pageVisible && atticFinished) {
           // initialize state flag
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());

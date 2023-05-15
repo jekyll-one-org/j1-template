@@ -131,7 +131,11 @@ j1.adapter.carousel = (function (j1, window) {
       carouselOptions  = $.extend(true, {}, carouselDefaults, carouselSettings);
 
       var dependencies_met_page_finished = setInterval(function() {
-        if (j1.getState() == 'finished') {
+        var pageState     = $('#no_flicker').css("display");
+        var pageVisible   = (pageState == 'block') ? true : false;
+        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+
+        if (j1.getState() == 'finished' && pageVisible && atticFinished) {
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());

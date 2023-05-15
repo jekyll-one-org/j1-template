@@ -154,7 +154,11 @@ j1.adapter.fab = (function (j1, window) {
       _this['moduleOptions'] = fabOptions;
 
       var dependencies_met_navigator = setInterval(function() {
-        if (j1.adapter.navigator.getState() == 'finished') {
+        var pageState     = $('#no_flicker').css("display");
+        var pageVisible   = (pageState == 'block') ? true : false;
+        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+
+        if (j1.adapter.navigator.getState() == 'finished' && pageVisible && atticFinished) {
           logger.debug('\n' + 'met dependencies for: navigator');
           _this.fabLoader(fabOptions);
           clearInterval(dependencies_met_navigator);
