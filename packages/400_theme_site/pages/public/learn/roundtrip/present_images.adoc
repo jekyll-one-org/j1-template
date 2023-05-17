@@ -23,7 +23,6 @@ image:
   height:                               1280
   alt:                                  Photo by Quino Al Angel on Unsplash
 
-comments:                               false
 regenerate:                             false
 permalink:                              /pages/public/learn/roundtrip/present_images/
 

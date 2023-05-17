@@ -15,7 +15,6 @@ image:
   height:                               1280
   alt:                                  Photo by Giammarco on Unsplash
 
-fab_menu_id:                            open_toc
 regenerate:                             false
 permalink:                              /pages/public/collections/jekyll_collections/
 

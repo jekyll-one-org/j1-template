@@ -17,9 +17,6 @@ image:
   height:                               1280
   alt:                                  Photo by Clem Onojeghuo on Unsplash
 
-comments:                               false
-fab_menu_id:                            open_toc
-scrollbar:                              false
 regenerate:                             false
 permalink:                              /pages/public/previewer/current_theme/
 

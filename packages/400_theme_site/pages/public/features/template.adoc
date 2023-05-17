@@ -25,10 +25,6 @@ image:
   height:                               1280
   alt:                                  Photo by Christina on Unsplash
 
-sitemap:                                true
-advertising:                            false
-fab_menu_id:                            open_toc
-comments:                               false
 regenerate:                             false
 permalink:                              /pages/public/features/template_features/
 

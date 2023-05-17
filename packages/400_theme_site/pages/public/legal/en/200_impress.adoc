@@ -24,7 +24,6 @@ image:
 sitemap:                                false
 exclude_from_search:                    true
 fab_menu_id:                            default
-scrollbar:                              false
 comments:                               false
 toc:                                    false
 regenerate:                             false

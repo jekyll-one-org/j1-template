@@ -10,9 +10,6 @@ description: >
 categories:                             [ Previewer ]
 tags:                                   [ Placeholder, Image, Design, Resource ]
 
-comments:                               false
-fab_menu_id:                            open_toc
-scrollbar:                              false
 regenerate:                             false
 permalink:                              /pages/public/previewer/image_placeholder/
 

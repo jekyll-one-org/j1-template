@@ -11,9 +11,6 @@ description: >
 categories:                             [ Previewer ]
 tags:                                   [ Masonry, Example ]
 
-comments:                               false
-fab_menu_id:                            open_toc
-scrollbar:                              false
 regenerate:                             false
 permalink:                              /pages/public/previewer/masonry/
 

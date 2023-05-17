@@ -18,8 +18,6 @@ image:
   alt:                                  J1 Starter Mockup
 
 fab_menu_id:                            default
-scrollbar:                              false
-comments:                               false
 regenerate:                             false
 permalink:                              /pages/public/about/starter/
 

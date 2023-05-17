@@ -20,7 +20,6 @@ robots:
 
 toc:                                    false
 fab_menu_id:                            default
-fab_menu_id:                            open_toc
 regenerate:                             false
 permalink:                              /pages/public/bookshelf/romance/
 

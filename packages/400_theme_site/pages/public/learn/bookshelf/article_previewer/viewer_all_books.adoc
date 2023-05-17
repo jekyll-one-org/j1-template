@@ -16,8 +16,6 @@ image:
   height:                               1280
   alt:                                  Photo by Giammarco on Unsplash
 
-toc:                                    true
-fab_menu_id:                            open_toc
 regenerate:                             false
 permalink:                              /pages/public/bookshelf/bookshelf/
 

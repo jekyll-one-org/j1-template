@@ -23,8 +23,6 @@ image:
   height:                               1280
   alt:                                  Lunr Search Engine
 
-toc:                                    true
-scrollbar:                              false
 regenerate:                             false
 permalink:                              /pages/public/learn/roundtrip/quicksearch/
 
