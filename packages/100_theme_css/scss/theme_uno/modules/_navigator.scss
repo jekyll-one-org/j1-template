@@ -475,7 +475,6 @@ li.dropdown.nav-item.nav-sub-item:before {
   			li.dropdown ul.dropdown-menu {
           // jadams, 2020-07-21: margin-top value cause the dropdown-menu
           // to 'overlap' 1px with the menubar to *NOT* loose the focus
-          margin-top: -8px;                                                     // jadams, 2023-02-24: adjust menu items for menu|submenu in height
   				min-width: $dropdown-menu-min-width;
   				background: $white;
           border-color: transparent;
