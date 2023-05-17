@@ -144,10 +144,7 @@ j1.adapter.attic = (function (j1, window) {
       var dependencies_met_page_ready = setInterval (function (options) {
         var pageState   = $('#no_flicker').css("display");
         var pageVisible = (pageState == 'block') ? true: false;
-
-        // run on 'pageVisible'
-        //
-        if (pageVisible) {
+        if ( j1.getState() === 'finished' && pageVisible ) {
           {% if attic_options.enabled %}
           logger.info('\n' + 'create all attics configured');
 
@@ -187,15 +184,14 @@ j1.adapter.attic = (function (j1, window) {
         {% if item.attic.enabled %}
           {% assign attic_id = item.attic.id %}
 
-          // Create ATTIC RUNNER for id: {{attic_id}}
-          //
+          // Create the SPECIFIC header loader FUNCTION for id: {{attic_id}}
           function {{attic_id}} (atticOptions) {
             var atticOptionsFilters = {};
             var atticItemFilters    = {};
             var atticFilters        = {};
             var my_attic      	    = $.extend({}, {{item.attic | replace: 'nil', 'null' | replace: '=>', ':' }});
 
-            logger.info('\n' + 'ATTIC RUNNER on id {{attic_id}}: started');
+            logger.info('\n' + 'initialize attic on id: {{attic_id}}');
 
             // collect attic filter settings to object to array to string
             //
@@ -213,8 +209,7 @@ j1.adapter.attic = (function (j1, window) {
             });
             filterStr = filterArray.join(' ');
 
-            // fire backstretch for all slides on attic_id
-            //
+            // Fire backstretch for all slides of the header on attic_id
             if ($('#{{attic_id}}').length) {
               $('#{{attic_id}}').backstretch(
                 atticOptions.slides, {
@@ -263,9 +258,9 @@ j1.adapter.attic = (function (j1, window) {
               );
             }
 
-            // run callback backstretch.before
-            //
-            $(window).on('backstretch.before', function (e, instance, index) {
+            {% comment %} Set the headerLoaded flag (page NOT visible)
+            -------------------------------------------------------------------- {% endcomment %}
+           $(window).on('backstretch.before', function (e, instance, index) {
               var evt                 = e;
               var inst                = instance;
               var idx                 = index;
@@ -300,12 +295,11 @@ j1.adapter.attic = (function (j1, window) {
                 j1.adapter.particles.init();
               }
 
-            }); // // END callback backstretch.before
+            }); // END on('backstretch.before')
 
-            // run callback backstretch.after
-            // NOTE: add a 'caption' or 'badge' if configured
-            // SEE:  https://github.com/jquery-backstretch/jquery-backstretch/issues/194
-            //
+            {% comment %} Add a caption (c) or badge (b) if configured
+            See: https://github.com/jquery-backstretch/jquery-backstretch/issues/194
+            -------------------------------------------------------------------- {% endcomment %}
             $(window).on('backstretch.after', function (e, instance, index) {
               var textOverlayTitle    = instance.images[index].title
               var textOverlayTagline  = instance.images[index].tagline;
@@ -313,8 +307,8 @@ j1.adapter.attic = (function (j1, window) {
               var frontmatterOptions  = _this.frontmatterOptions;
               var textOverlayHTML;
 
-              // apply FRONTMATTER settings for title|tagline if
-              // NOT set with the FIRST backstretch (image) instance
+              // apply DEFAULT settings for textOverlayTitle|textOverlayTagline
+              // on the FIRST backstretch instance if title|tagline NOT set
               //
               if (index == 0) {
                 if (typeof instance.images[index].title == 'undefined') {
@@ -367,7 +361,9 @@ j1.adapter.attic = (function (j1, window) {
 
               }
 
-              // TODO: Add additional styles to head-title-text|head-tagline (e.g. text-center)
+              // TODO: Add additional styles to head-title-text|head-tagline-
+              // text (e.g. text-center)
+              // atticOptions.tagline_align
               //
               textOverlayHTML = ''
                 + '<div id="head-title" class="head-title animate__animated ">'
@@ -377,7 +373,7 @@ j1.adapter.attic = (function (j1, window) {
                 + '  <h3 id="head-tagline-text" class="notoc text-' + atticOptions.tagline_align + '">' + textOverlayTagline + '</h3>'
                 + '</div>';
 
-              // hide textOverlay while animate classes are being applied
+              // hide textOverlay while animate classes are being calculated
               //
               $('.textOverlay').html(textOverlayHTML).hide();
 
@@ -427,19 +423,21 @@ j1.adapter.attic = (function (j1, window) {
 
               _this.setState('finished');
               logger.debug('\n' + 'state: ' + _this.getState());
-              logger.info('\n' + 'ATTIC RUNNER on id {{attic_id}}: finished');
-              logger.info('\n' + 'module initializaton: finished');
-
-            }); // END callback backstretch.after
+              logger.info('\n' + 'finished attic on id: {{attic_id}}');
+            }); // END on('backstretch.after')
 
           } // END if attic_id exists
 
-          // run attic found in page: {{attic_id}}
-          //
+          // Initialize the header found in page
           if ($('#{{attic_id}}').length) {
-            // apply CSS styles
-            // NOTE: unclear why title_size|tagline_size evaluated to 1 if NOT set
-            //
+
+            {% comment %} Load data from header config file
+            -------------------------------------------------------------------- {% endcomment %}
+
+             {% comment %} NOTE:
+             Unclear why title_size|tagline_size evaluated to 1 if NOT set
+             ------------------------------------------------------------------- {% endcomment %}
+
             {% for item in attic_options.attics %}
               {% if item.attic.id == attic_id %}
 
@@ -537,12 +535,10 @@ j1.adapter.attic = (function (j1, window) {
                 }
                 /* eslint-enable */
 
-                // merge|overload Attic OPTIONS
-                //
+                // Merge|Overload Attic OPTIONS
                 atticOptions = $.extend({}, atticOptions, atticOptionsHeader, atticOptionsBackstretch);
 
-                // overload Attic OPTIONS by settings from frontmatterOptions
-                //
+                // Overload Attic OPTIONS by settings from frontmatterOptions
                 if (frontmatterOptions.background_color_1) atticOptions.background_color_1 = frontmatterOptions.background_color_1;
                 if (frontmatterOptions.background_color_2) atticOptions.background_color_2 = frontmatterOptions.background_color_2;
               {% else %}
@@ -550,8 +546,8 @@ j1.adapter.attic = (function (j1, window) {
               {% endif %} // ENDIF attic_id
             {% endfor %} // ENDFOR item in header_config.attics
 
-            // frontmatter takes precedence (over header options)
-            //
+            {% comment %} frontmatter takes precedence (over header options)
+            -------------------------------------------------------------------- {% endcomment %}
             if (frontmatterOptions) {
               if (typeof frontmatterOptions.raised_level != 'undefined') { atticOptions.raised_level = frontmatterOptions.raised_level; }
               if (typeof frontmatterOptions.r_text != 'undefined') { atticOptions.r_text = frontmatterOptions.r_text; }
@@ -594,11 +590,11 @@ j1.adapter.attic = (function (j1, window) {
               if (typeof frontmatterOptions.slides != 'undefined') { atticOptions.slides = frontmatterOptions.slides; }
             }
 
-            // add r-text|raised_level settings
-            //
+            {% comment %} Add header CSS classes
+            -------------------------------------------------------------------- {% endcomment %}
             if (atticOptions.r_text == 'enabled') { $('#{{attic_id}}').addClass('r-text'); }
-            var raised_level = 'raised-z' +atticOptions.raised_level;
 
+            var raised_level = 'raised-z' +atticOptions.raised_level;
             $('#{{attic_id}}').addClass(raised_level);
             $('#head-title').addClass(atticOptions.title_animate);
             $('#head-title').addClass(atticOptions.title_animate_delay);
@@ -616,12 +612,11 @@ j1.adapter.attic = (function (j1, window) {
               $('#{{attic_id}}').addClass('notranslate');
             }
 
-            // add header CSS styles to <HEAD>
-            //
+            {% comment %} Add header CSS styles to <HEAD>
+            -------------------------------------------------------------------- {% endcomment %}
             var attic_style = '';
 
-            // initialze header background gradient
-            //
+            // Initialze header background gradient
             attic_style += '<style> .attic { ';
             attic_style += 'background-image: -webkit-gradient(linear, left top, left bottom, from(' +atticOptions.background_color_1 + '), to(' +atticOptions.background_color_2+ ')) !important;';
             attic_style += 'background-image: -webkit-linear-gradient(top, ' +atticOptions.background_color_1 + ' 0%, ' +atticOptions.background_color_2 + ' 100%) !important;';
@@ -653,7 +648,6 @@ j1.adapter.attic = (function (j1, window) {
 
             // Add opacity to ALL header (backstretch) images
             // See: https://tympanus.net/codrops/2013/11/07/css-overlay-techniques/
-            //
             var item_opacity        = !!my_attic.opacity ? my_attic.opacity : atticOptions.opacity;
             var backstretch_opacity = '<style> .backstretch-item { opacity: ' +item_opacity+ '; </style>';
             $('head').append(backstretch_opacity);
@@ -661,38 +655,36 @@ j1.adapter.attic = (function (j1, window) {
             _this.setState('initialized');
             logger.debug('\n' + 'state: ' + _this.getState());
 
-            // start the ATTIC RUNNER on 'page ready'
-            //
-            $(function() {
-              var dependencies_met_attic_ready = setInterval (function (options) {
-                if (_this.getState() === 'initialized') {
-                  logger.info('\n' + 'start the ATTIC RUNNER on id: {{attic_id}}');
-                  {{attic_id}} (atticOptions);
-                  clearInterval(dependencies_met_attic_ready);
-                }
-              }, 25);
-            });
-
-          } // END apply CSS styles|start ATTIC RUNNER
+            {% comment %} Run the image header if any
+            -------------------------------------------------------------------- {% endcomment %}
+            if (typeof atticOptions.slides != 'undefined') {
+              // Load the image header if the page is ready (visible)
+              $(function() {
+                // logger.info('\n' + 'Load image header on id: {{attic_id}}');
+                {{attic_id}}(atticOptions);
+                _this.setState('completed');
+                logger.debug('\n' + 'state: ' + _this.getState());
+              });
+            }
+          } // END if header id found in page
 
         {% else %}
           {% assign attic_id = item.attic.id %}
           // add additional top space
           $('#content').addClass('mt-8');
-          logger.info('\n' + 'found attic on id {{attic_id}}: disabled');
+          logger.info('\n' + 'found attic disabled on id: {{attic_id}}');
         {% endif %} // END if header enabled
       {% endfor %} // END for item in header_config.attics
 
       // NO header found in page
-      // if ($('#no_header').length) {
-      //   _this.setState('completed');
-      //   logger.debug('\n' + 'state: ' + _this.getState());
-      //   logger.warn('\n' + 'no header configured or found in page');
-      // }
+      if ($('#no_header').length) {
+        _this.setState('completed');
+        logger.debug('\n' + 'state: ' + _this.getState());
+        logger.warn('\n' + 'no header configured or found in page');
+      }
 
       return true;
-
-    }, // END apply CSS styles|start ATTIC RUNNER
+    }, // END loadHeader
 
     // -------------------------------------------------------------------------
     // messageHandler: MessageHandler for J1 CookieConsent module

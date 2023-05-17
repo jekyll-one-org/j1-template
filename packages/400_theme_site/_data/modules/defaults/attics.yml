@@ -42,7 +42,7 @@ defaults:
   # Global settings for text- and image-based header
   #
   debug:                                false
-  hide_oninit:                          true
+  hide_oninit:                          false
 
   circuit:                              false
   notranslate:                          true
@@ -83,6 +83,12 @@ defaults:
   #
   background_color_1:                   "#0D47A1"                               # md-blue-900
   background_color_2:                   "#0D47A1"                               # md-blue-900
+
+  # placeholder slide, used if NO slides given in FRONTMATTER (of a page|post)
+  #
+  slides:
+    - url:                              /assets/images/modules/attics/placeholder/1x1.png
+      alt:                              Placeholder background image
 
   # CSS filter setting applied on (backstretch|background) image
   #

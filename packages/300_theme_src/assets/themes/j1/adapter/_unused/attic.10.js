@@ -139,7 +139,6 @@ j1.adapter.attic = (function (j1, window) {
 
       _this.setState('started');
       logger.debug('\n' + 'state: ' + _this.getState());
-      logger.info('\n' + 'module is being initialized');
 
       var dependencies_met_page_ready = setInterval (function (options) {
         var pageState   = $('#no_flicker').css("display");
@@ -147,36 +146,42 @@ j1.adapter.attic = (function (j1, window) {
 
         // run on 'pageVisible'
         //
-        if (pageVisible) {
+        if ( j1.getState() === 'finished' && pageVisible ) {
+
           {% if attic_options.enabled %}
-          logger.info('\n' + 'create all attics configured');
+          logger.debug('\n' + 'found module attics: enabled');
+          logger.info('\n' + 'module initializaton: started');
 
           if (atticOptions.hide_oninit) {
             // hide page while attic is being created
             // jadams, 2023-05-12: Visible page/attic cause high number
             // for cumulative layout shift (CLS)
             //
-            logger.debug('\n' + 'hide attics on initia.lization');
+            logger.debug('\n' + 'hide attics on initialization');
             $('#no_flicker').css('display', 'none');
           }
 
           _this.createAllAttics();
           clearInterval(dependencies_met_page_ready);
+
           {% else %}
-          logger.debug('\n' + 'found module attics disabled');
+          logger.debug('\n' + 'found module attics: disabled');
           // add additional top space if attics are disabled
           $('#content').addClass('mt-5');
           clearInterval(dependencies_met_page_ready);
           {% endif %}
         }
+
       }, 25);
+
     }, // END init
 
     // -------------------------------------------------------------------------
-    // Initialize all header supported
+    // create all attics configured|enabled
     // -------------------------------------------------------------------------
     createAllAttics: function () {
       var frontmatterOptions  = _this.frontmatterOptions;
+      var slides              = [];
 
       // merge all attic options
       var atticOptions = $.extend(true, {}, _this.atticOptions, _this.frontmatterOptions);
@@ -184,6 +189,7 @@ j1.adapter.attic = (function (j1, window) {
       {% comment %} Load data from attic config (yaml data files)
       -------------------------------------------------------------------------- {% endcomment %}
       {% for item in attic_options.attics %}
+
         {% if item.attic.enabled %}
           {% assign attic_id = item.attic.id %}
 
@@ -249,10 +255,11 @@ j1.adapter.attic = (function (j1, window) {
               $('.backstretch').addClass(atticOptions.spinner);
             }
 
-            // Collect backstretch instance data for Backstretch callbacks
+            // collect backstretch instance data (for backstretch callbacks)
+            //
             var backstretch_instance_data = $('#{{attic_id}}').data('backstretch');
 
-            // Add event for pauseOnHover
+            // add event for pauseOnHover
             //
             if (atticOptions.pauseOnHover) {
               $('#attic_id').hover (
@@ -266,15 +273,8 @@ j1.adapter.attic = (function (j1, window) {
             // run callback backstretch.before
             //
             $(window).on('backstretch.before', function (e, instance, index) {
-              var evt                 = e;
-              var inst                = instance;
-              var idx                 = index;
-              var atticOptions        = _this.atticOptions;
-              var textOverlayTitle    = instance.images[index].title
-              var textOverlayTagline  = instance.images[index].tagline;
-              var textOverlayHTML;
 
-              // console.log('module attic - set state: backstretch_before');
+              logger.debug('\n' + 'entered callback \"backstretch.before\" for attic on id: {{attic_id}}');
               _this.setState('backstretch_before');
 
               if (index === backstretch_instance_data.images.length -1) {
@@ -286,7 +286,7 @@ j1.adapter.attic = (function (j1, window) {
                 $('.backstretch').removeClass(atticOptions.spinner);
               }
 
-              // Add collected CSS filters
+              // add collected CSS filters
               $('.backstretch').css('filter', filterStr);
 
               // mute the overlay content while sliding
@@ -295,12 +295,14 @@ j1.adapter.attic = (function (j1, window) {
               // mute the badge while sliding
               $('.attic-caption').css('opacity', '0');
 
-              // re-initialze particles on a slideshow if exists
+              // initialze 'particles' on a slideshow if exists
               if ($('.particles-js-canvas-el').length > 0) {
                 j1.adapter.particles.init();
               }
 
-            }); // // END callback backstretch.before
+              logger.debug('\n' + 'finished callback \"backstretch.before\" for attic on id: {{attic_id}}');
+
+            }); // END callback backstretch.before
 
             // run callback backstretch.after
             // NOTE: add a 'caption' or 'badge' if configured
@@ -312,6 +314,9 @@ j1.adapter.attic = (function (j1, window) {
               var atticOptions        = _this.atticOptions;
               var frontmatterOptions  = _this.frontmatterOptions;
               var textOverlayHTML;
+
+              logger.debug('\n' + 'entered callback \"backstretch.after\" for attic on id: {{attic_id}}');
+              _this.setState('backstretch_after');
 
               // apply FRONTMATTER settings for title|tagline if
               // NOT set with the FIRST backstretch (image) instance
@@ -425,6 +430,8 @@ j1.adapter.attic = (function (j1, window) {
               //
               $('#{{attic_id}}').backstretch('resize');
 
+              logger.debug('\n' + 'finished callback \"backstretch.after\" for attic on id: {{attic_id}}');
+
               _this.setState('finished');
               logger.debug('\n' + 'state: ' + _this.getState());
               logger.info('\n' + 'ATTIC RUNNER on id {{attic_id}}: finished');
@@ -432,11 +439,11 @@ j1.adapter.attic = (function (j1, window) {
 
             }); // END callback backstretch.after
 
-          } // END if attic_id exists
+          } // END create ATTIC RUNNER
 
           // run attic found in page: {{attic_id}}
           //
-          if ($('#{{attic_id}}').length) {
+          if ($('#{{attic_id}}').length)
             // apply CSS styles
             // NOTE: unclear why title_size|tagline_size evaluated to 1 if NOT set
             //
@@ -454,6 +461,7 @@ j1.adapter.attic = (function (j1, window) {
                 {% if item.attic.title.size != 1 %}
                 {% assign title_size            = item.attic.title.size %}
                 {% endif %}
+
                 {% assign title_color           = item.attic.title.color %}
                 {% assign title_animate         = item.attic.title.animate %}
                 {% assign title_align           = item.attic.title.align %}
@@ -537,12 +545,10 @@ j1.adapter.attic = (function (j1, window) {
                 }
                 /* eslint-enable */
 
-                // merge|overload Attic OPTIONS
-                //
+                // Merge|Overload Attic OPTIONS
                 atticOptions = $.extend({}, atticOptions, atticOptionsHeader, atticOptionsBackstretch);
 
-                // overload Attic OPTIONS by settings from frontmatterOptions
-                //
+                // Overload Attic OPTIONS by settings from frontmatterOptions
                 if (frontmatterOptions.background_color_1) atticOptions.background_color_1 = frontmatterOptions.background_color_1;
                 if (frontmatterOptions.background_color_2) atticOptions.background_color_2 = frontmatterOptions.background_color_2;
               {% else %}
@@ -597,7 +603,7 @@ j1.adapter.attic = (function (j1, window) {
             // add r-text|raised_level settings
             //
             if (atticOptions.r_text == 'enabled') { $('#{{attic_id}}').addClass('r-text'); }
-            var raised_level = 'raised-z' +atticOptions.raised_level;
+            var raised_level = 'raised-z' +atticOptions.raised_level
 
             $('#{{attic_id}}').addClass(raised_level);
             $('#head-title').addClass(atticOptions.title_animate);
@@ -679,11 +685,13 @@ j1.adapter.attic = (function (j1, window) {
           {% assign attic_id = item.attic.id %}
           // add additional top space
           $('#content').addClass('mt-8');
-          logger.info('\n' + 'found attic on id {{attic_id}}: disabled');
+          logger.info('\n' + 'found attic on id: {{attic_id}}: disabled');
         {% endif %} // END if header enabled
+
       {% endfor %} // END for item in header_config.attics
 
       // NO header found in page
+      //
       // if ($('#no_header').length) {
       //   _this.setState('completed');
       //   logger.debug('\n' + 'state: ' + _this.getState());
@@ -692,7 +700,7 @@ j1.adapter.attic = (function (j1, window) {
 
       return true;
 
-    }, // END apply CSS styles|start ATTIC RUNNER
+    }, // END createAllAttics
 
     // -------------------------------------------------------------------------
     // messageHandler: MessageHandler for J1 CookieConsent module
