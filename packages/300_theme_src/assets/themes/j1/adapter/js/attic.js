@@ -187,15 +187,15 @@ j1.adapter.attic = (function (j1, window) {
         {% if item.attic.enabled %}
           {% assign attic_id = item.attic.id %}
 
-          // Create ATTIC RUNNER for id: {{attic_id}}
+          // Create RUNNER for id: {{attic_id}}
           //
-          function {{attic_id}} (atticOptions) {
+          function {{attic_id}}_runner (atticOptions) {
             var atticOptionsFilters = {};
             var atticItemFilters    = {};
             var atticFilters        = {};
             var my_attic      	    = $.extend({}, {{item.attic | replace: 'nil', 'null' | replace: '=>', ':' }});
 
-            logger.info('\n' + 'ATTIC RUNNER on id {{attic_id}}: started');
+            logger.info('\n' + 'RUNNER on id {{attic_id}}: started');
 
             // collect attic filter settings to object to array to string
             //
@@ -427,7 +427,7 @@ j1.adapter.attic = (function (j1, window) {
 
               _this.setState('finished');
               logger.debug('\n' + 'state: ' + _this.getState());
-              logger.info('\n' + 'ATTIC RUNNER on id {{attic_id}}: finished');
+              logger.info('\n' + 'RUNNER on id {{attic_id}}: finished');
               logger.info('\n' + 'module initializaton: finished');
 
             }); // END callback backstretch.after
@@ -661,13 +661,13 @@ j1.adapter.attic = (function (j1, window) {
             _this.setState('initialized');
             logger.debug('\n' + 'state: ' + _this.getState());
 
-            // start the ATTIC RUNNER on 'page ready'
+            // start RUNNER on page 'ready'|module state 'initialized'
             //
             $(function() {
               var dependencies_met_attic_ready = setInterval (function (options) {
                 if (_this.getState() === 'initialized') {
-                  logger.info('\n' + 'start the ATTIC RUNNER on id: {{attic_id}}');
-                  {{attic_id}} (atticOptions);
+                  logger.info('\n' + 'start RUNNER on id: {{attic_id}}');
+                  {{attic_id}}_runner (atticOptions);
                   clearInterval(dependencies_met_attic_ready);
                 }
               }, 25);

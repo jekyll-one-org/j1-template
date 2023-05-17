@@ -59,7 +59,6 @@ excerpt__end
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-[[readmore]]
 == What is a static site?
 
 A static site serves the content straight to the user as it is stored on

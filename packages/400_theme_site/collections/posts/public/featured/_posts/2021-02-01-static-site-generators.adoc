@@ -61,7 +61,6 @@ excerpt__end
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-[[readmore]]
 == Dynamic page access
 
 // [role="mb-3"]

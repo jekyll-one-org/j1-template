@@ -62,20 +62,20 @@ settings:
         padding_top:                    600
 
     # --------------------------------------------------------------------------
-    # Attic Pages
+    # Pages
     #
     - name:                             Pages
       attic:
         enabled:                        true
 
         id:                             attic_page
-        layout:                         [ page ]
+        layout:                         page
 
         title_animate:                  animate__fadeInDown
         padding_top:                    600
 
     # --------------------------------------------------------------------------
-    # Attic Posts
+    # Posts
     #
     - name:                             Posts
       attic:
@@ -86,26 +86,6 @@ settings:
 
         title_animate:                  animate__fadeInDown
         padding_top:                    600
-
-    # --------------------------------------------------------------------------
-    # Attic Raw
-    #
-    - name:                             Raw
-      attic:
-        enabled:                        true
-
-        id:                             attic_raw
-        layout:                         [ raw ]
-
-    # --------------------------------------------------------------------------
-    #  Attic Text
-    #
-    - name:                             Text
-      attic:
-        enabled:                        true
-
-        id:                             attic_text
-        layout:                         [ app ]
 
 # ------------------------------------------------------------------------------
 # END config
