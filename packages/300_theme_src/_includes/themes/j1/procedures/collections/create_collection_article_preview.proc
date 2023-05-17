@@ -101,7 +101,7 @@
            </p>
          </div>
 
-         <a class="card-link text-lowercase" href="{{ article.url }}#readmore">
+         <a class="card-link text-lowercase" href="{{ article.url }}">
            read · {{article.tagline}}
          </a>
        </div>

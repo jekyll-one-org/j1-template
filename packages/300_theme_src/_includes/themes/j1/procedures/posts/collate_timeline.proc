@@ -176,7 +176,7 @@
               </div>
               <div class="card-footer r-text-200 text-lowercase">
 
-                <a href="{{post.url}}#readmore"
+                <a href="{{post.url}}"
                    class="btn btn-secondary btn-flex mb-0">
                    <i class="mdi mdi-eye mdi-lg mr-1" style="color:#FFFFFF;">
                    </i> {{readmore_text}} · {{post.tagline}}
@@ -198,7 +198,7 @@
               </div>
               <div class="card-footer r-text-200 text-lowercase">
 
-                <a href="{{post.url}}#readmore"
+                <a href="{{post.url}}"
                    class="btn btn-secondary btn-flex mb-0">
                    <i class="mdi mdi-eye mdi-lg mr-1" style="color:#FFFFFF;">
                    </i> {{readmore_text}} · {{post.tagline}}
@@ -261,7 +261,7 @@
                   <span class="sr-tags">{{tags}}</span>
               </p>
               <a class="card-link text-lowercase"
-                href="{{post.url}}#readmore">
+                href="{{post.url}}">
                 {{readmore_text}} · {{post.tagline}}
               </a>
             </div>

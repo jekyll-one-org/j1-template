@@ -120,7 +120,9 @@
 
         <i class="tmicon rounded-x hidden-xs"></i>
         <div class="tmlabel">
-           <a href="{{post.url}}#readmore"><div class="calendar-headline"><h4 id="{{ 100000 | rand }}">{{ post.title }}</h4></div></a>
+           <a href="{{post.url}}">
+             <div class="calendar-headline"><h4 id="{{ 100000 | rand }}">{{ post.title }}</h4></div>
+           </a>
            <div class="row">
             <!-- Collect image data from frontmatter -->
             {% if post.image %}

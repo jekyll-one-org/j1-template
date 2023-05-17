@@ -78,11 +78,11 @@ resource_options:
       <div class="col-md-6 p-0">
         <div class="card-body r-text-300">All you’re doing at the end of the day is writing your content, and the J1 Theme does all the tricky things: putting out HTML, Javascript, and CSS. As a result, the site creation process gets out of your way.   Sounds fun, isn’t it?  ...</div>
         <div class="card-footer r-text-200">
-          
+
           <div class="card-footer-text">
             <i class="mdi mdi-calendar-blank mdi-md-grey mr-1"></i> 2021 March, 28
           </div>
-          <a class="card-link text-muted text-lowercase" href="/posts/public/featured/2021/03/28/welcome-to-j1/#readmore">
+          <a class="card-link text-muted text-lowercase" href="/posts/public/featured/2021/03/28/welcome-to-j1/">
           Read · jekyll for everyone
           </a>
         </div>
@@ -101,7 +101,7 @@ resource_options:
       <div class="card-footer-text">
         <i class="mdi mdi-calendar-blank mr-1"></i> 2021 March, 28
       </div>
-      <a class="card-link md-grey-800 font-weight-bold g-font-size-12 text-uppercase" href="/posts/public/featured/2021/03/28/welcome-to-j1/#readmore">
+      <a class="card-link md-grey-800 font-weight-bold g-font-size-12 text-uppercase" href="/posts/public/featured/2021/03/28/welcome-to-j1/">
       Read · jekyll for everyone
       </a>
     </div>
