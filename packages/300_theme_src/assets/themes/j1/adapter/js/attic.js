@@ -149,7 +149,7 @@ j1.adapter.attic = (function (j1, window) {
         //
         if (pageVisible) {
           {% if attic_options.enabled %}
-          logger.info('\n' + 'create all attics configured');
+          logger.info('\n' + 'module initializaton: started');
 
           if (atticOptions.hide_oninit) {
             // hide page while attic is being created
@@ -194,8 +194,6 @@ j1.adapter.attic = (function (j1, window) {
             var atticItemFilters    = {};
             var atticFilters        = {};
             var my_attic      	    = $.extend({}, {{item.attic | replace: 'nil', 'null' | replace: '=>', ':' }});
-
-            logger.info('\n' + 'RUNNER on id {{attic_id}}: started');
 
             // collect attic filter settings to object to array to string
             //
@@ -427,7 +425,7 @@ j1.adapter.attic = (function (j1, window) {
 
               _this.setState('finished');
               logger.debug('\n' + 'state: ' + _this.getState());
-              logger.info('\n' + 'RUNNER on id {{attic_id}}: finished');
+              logger.info('\n' + 'initialize attic on id {{attic_id}}: finished');
               logger.info('\n' + 'module initializaton: finished');
 
             }); // END callback backstretch.after
@@ -666,7 +664,7 @@ j1.adapter.attic = (function (j1, window) {
             $(function() {
               var dependencies_met_attic_ready = setInterval (function (options) {
                 if (_this.getState() === 'initialized') {
-                  logger.info('\n' + 'start RUNNER on id: {{attic_id}}');
+                  logger.info('\n' + 'initialize attic on id {{attic_id}}: started');
                   {{attic_id}}_runner (atticOptions);
                   clearInterval(dependencies_met_attic_ready);
                 }
@@ -679,7 +677,7 @@ j1.adapter.attic = (function (j1, window) {
           {% assign attic_id = item.attic.id %}
           // add additional top space
           $('#content').addClass('mt-8');
-          logger.info('\n' + 'found attic on id {{attic_id}}: disabled');
+          logger.info('\n' + 'attic on id {{attic_id}}: disabled');
         {% endif %} // END if header enabled
       {% endfor %} // END for item in header_config.attics
 
