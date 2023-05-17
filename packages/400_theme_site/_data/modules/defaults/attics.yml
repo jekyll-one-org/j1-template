@@ -87,7 +87,7 @@ defaults:
   # placeholder slide, used if NO slides given in FRONTMATTER (of a page|post)
   #
   slides:
-    - url:                              /assets/images/modules/attics/placeholder/1x1.png
+    - url:                              /assets/images/modules/attics/placeholder/transparent-1920x1280.png
       alt:                              Placeholder background image
 
   # CSS filter setting applied on (backstretch|background) image
