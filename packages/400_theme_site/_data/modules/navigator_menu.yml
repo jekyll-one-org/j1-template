@@ -311,11 +311,14 @@
       icon:                             toolbox
       dropdown:
 
+        - title:                        HTML Validation
+          href:                         https://jekyll.one/pages/public/toolbox/html_validation/
+          icon:                         language-html5
         - title:                        Pandoc
-          href:                         https://jekyll.one/pages/public/manuals/pandoc/
+          href:                         https://jekyll.one/pages/public/toolbox/pandoc/
           icon:                         cog-transfer
-        - title:                        Platform Info
-          href:                         https://jekyll.one/pages/public/manuals/platform/
+        - title:                        Platform
+          href:                         https://jekyll.one/pages/public/toolbox/platform/
           icon:                         folder-information
 
         # ----------------------------------------------------------------------
@@ -348,16 +351,16 @@
           dropdown:
 
             - title:                    Liquid
-              href:                     https://jekyll.one/pages/public/manuals/liquid/user_guide/
+              href:                     https://jekyll.one/pages/public/toolbox/liquid/
               icon:                     mustache
             - title:                    Commandline
-              href:                     https://jekyll.one/pages/public/manuals/jekyll/user_guide/commandline/
+              href:                     https://jekyll.one/pages/public/toolbox/jekyll/commandline/
               icon:                     console-line
             - title:                    Configuration
-              href:                     https://jekyll.one/pages/public/manuals/jekyll/user_guide/configuration/
+              href:                     https://jekyll.one/pages/public/toolbox/jekyll/configuration/
               icon:                     code-braces
             - title:                    Time and Date formats
-              href:                     https://jekyll.one/pages/public/manuals/jekyll/user_guide/date_formats/
+              href:                     https://jekyll.one/pages/public/toolbox/jekyll/date_time_formats/
               icon:                     calendar-blank
 
     # --------------------------------------------------------------------------
@@ -370,7 +373,6 @@
       - title:                          Current Theme
         href:                           /pages/public/previewer/current_theme/
         icon:                           theme-light-dark
-
       - title:                          Image Placeholders
         href:                           /pages/public/previewer/image_placeholder/
         icon:                           image
@@ -380,7 +382,6 @@
       - title:                          Masonry
         href:                           /pages/public/previewer/masonry/
         icon:                           view-dashboard-variant
-
       - title:                          MD Color Palette
         href:                           https://jekyll.one/pages/public/previewer/color_palette/
         icon:                           format-color-fill
@@ -514,28 +515,31 @@
     - title:                            Tools
       icon:                             wrench
       column:
+
         - title:                        FreeFormatter
           href:                         http://www.freeformatter.com/
-          target:                       _blank
-          icon:                         cached
-        - title:                        BeautifyTools
-          href:                         https://beautifytools.com/
           target:                       _blank
           icon:                         cached
         - title:                        AppDevTools
           href:                         https://www.appdevtools.com/
           target:                       _blank
           icon:                         cached
+
+        - title:                        W3C Validator
+          href:                         https://validator.w3.org/
+          target:                       _blank
+          icon:                         language-html5
         - title:                        Nu Html Checker
           href:                         https://validator.w3.org/nu/
           target:                       _blank
           icon:                         language-html5
+
         - title:                        Closing Tag Checker
           href:                         https://www.aliciaramirez.com/closing-tags-checker/
           target:                       _blank
           icon:                         language-html5
         - title:                        Convert CSS to Sass
-          href:                         http://sebastianpontow.de/css2compass/
+          href:                         https://www.cssportal.com/css-to-scss/
           target:                       _blank
           icon:                         language-css3
         - title:                        CSS Matic Tools
@@ -551,7 +555,7 @@
           target:                       _blank
           icon:                         code-braces
         - title:                        Character Codes
-          href:                         http://character-code.com/
+          href:                         https://html.spec.whatwg.org/multipage/named-characters.html
           target:                       _blank
           icon:                         alpha-a-box-outline
         - title:                        RegEx 101
@@ -562,7 +566,6 @@
           href:                         http://www.regexlib.com/
           target:                       _blank
           icon:                         regex
-
 
 # ------------------------------------------------------------------------------
 # Menu Themes

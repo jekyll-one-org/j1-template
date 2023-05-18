@@ -1,0 +1,278 @@
+---
+title:                                  HTML Validation
+tagline:                                Check Code Correctness
+date:                                   2023-05-01 00:00:00
+description: >
+                                        Websites are developed worldwide according to the W3C standard.
+                                        The W3C is the World Wide Web Consortium that defines standards
+                                        for web development.
+
+categories:                             [ Tools ]
+tags:                                   [ HTML, Check ]
+
+robots:
+  index:                                false
+  follow:                               false
+
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/mohammad-rahmani.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  Photo by Mohammad Rahmani on Unsplash
+
+regenerate:                             false
+permalink:                              /pages/public/learn/tools/html_validation/
+
+resources:                              [ animate, clipboard, lightbox, rouge ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/mohammad-rahmani.jpg
+          alt:                          Photo by Mohammad Rahmani on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Mohammad Rahmani
+            href:                       https://unsplash.com/de/@afgprogrammer
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                                       <attr-value>
+:w3c--hone:                                           https://www.w3.org/
+:w3c--html-validator-online:                          https://validator.w3.org/
+:w3c--valid-dtd-list:                                 https://www.w3.org/QA/2002/04/valid-dtd-list.html
+:whatwg--hone:                                        https://whatwg.org/
+:whatwg--nu-validator-online:                         https://validator.nu/
+:github--nu-validator:                                https://validator.github.io/validator/
+:appdevtools--html-validator-online:                  https://appdevtools.com/html-validator
+:freeformatter--html-validator-online:                https://www.freeformatter.com/html-validator.html
+
+:data-images--html-validator-online:                  "assets/images/pages/html_validator/w3c-validator.jpg, W3C Markup Validation Service"
+:data-images--nu-validator-online:                    "assets/images/pages/html_validator/w3c-nu-checker.jpg, Nu Html Checker"
+:data-images--appdevtools-html-validator-online:      "assets/images/pages/html_validator/appdevtools-html-validator.jpg, AppDevTools - Html Validator"
+:data-images--freeformatter-html-validator-online:    "assets/images/pages/html_validator/freeformatter-html-validator.jpg, Freeformatter -  Html Validator"
+
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+An HTML validator is a program that checks the formal validity (correctness)
+of a document for compliance with the W3C HTML standards. For example, a
+validator checks a document for:
+
+* missing necessary elements, e.g. such as `<head>` and `</head>`
+* faulty elements like `<span>` as a direct child of `<ul>`
+* missing attributes such as `<alt>` on the `<img>` tag
+* invalid attributes like `<alt>` at the `<ul>` tag
+* unknown elements or attributes such as `<fantasy>`
+* wrong nested elements such as using `<h2>` *before* `<h1>`
+
+The web designer thus receives valuable information on the development of
+valid websites according to the World Wide Web Consortium (W3C) standards.
+
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+== The W3C
+
+The link:{w3c--hone}[W3C (World Wide Web Consortium), {browser-window--new}]
+is an international community and standards organization that develops and
+maintains open standards for the World Wide Web. It was founded in 1994 by
+*Tim Berners-Lee*, the inventor of the World Wide Web.
+
+The primary mission of the _W3C_ is to ensure the long-term growth and stability
+of the web by promoting interoperability and fostering the development of open
+and accessible web technologies. The consortium comprises member organizations,
+including companies, educational institutions, governmental bodies, and
+individual participants who contribute to developing web standards.
+
+By developing and promoting web standards, the _W3C_ plays a crucial role in
+maintaining the integrity and interoperability of the World Wide Web. Its work
+helps shape the future of web technologies and ensures a consistent and
+accessible web experience for users worldwide.
+
+=== W3C Compliance
+
+You should create W3C-compliant websites as much as possible to display your
+websites correctly. Try to create your source code as validly as possible with
+your HTML editor and thus adhere to the World Wide Web Consortium (W3C) web
+standards. The benefits of doing this are obvious:
+
+* your internet pages are displayed correctly by different browsers
+* your web pages will be smaller and load faster.
+* after some training, your websites can be created and developed more easily.
+* every web developer can further develop your web pages according to the standards.
+* Your websites are future-proof and safer.
+* compliance with the specifications of the _W3C_ consortium improves the search
+  engine rankings of your website (SEO, Search Engine Optimization)
+
+=== W3C Validator
+
+The *W3C Validator*, also known as the *W3C Markup Validation Service*, is a
+tool provided by the World Wide Web Consortium (W3C) that allows you to check
+the validity and conformance of web documents against the W3C standards.
+
+The *W3C Validator* primarily validates HTML (Hypertext Markup Language),
+CSS (Cascading Style Sheets), and some XML-based document formats. It examines
+the markup code and checks if it adheres to the syntax and rules specified by
+the respective W3C standards.
+
+To use the *W3C Validator*, you must provide the URL or upload the web document
+file you want to validate. The validator then processes the document, performs
+the necessary checks, and generates a report highlighting any errors or
+warnings found.
+
+The report includes detailed information about the issues encountered,
+line numbers, and suggestions for resolving them. You can easily check the
+syntax of your code with the
+link:{w3c--html-validator-online}[W3C Markup Validation Service, {browser-window--new}]:
+
+. access the _W3C_'s Free HTML and CSS Validator.
+. enter the *URL* of the web page to be checked, upload the HTML code as
+  a file, or enter the code directly
+. click on button `Check` and you're done!
+
+.W3C Markup Validation Service
+lightbox::w3c-html-validator-online[ 1280, {data-images--html-validator-online}, role="mb-3" ]
+
+As a result of the first test step, you will receive an overview of the HTML
+and CSS errors found with precise instructions on fixing them. For example,
+you will find exact line details and error causes in the test result. Typical
+issues are a forgotten closing tag like `</p>`, the deprecated use of a CSS
+statement, or incorrect nesting of tags, e.g., B. Using `<h2>` before `<h1>`.
+The check results allow you to correct your document's mistakes easily.
+
+NOTE: In a second test step, you can have your source code edited
+automatically via *More Options* and *Clean up Markup with HTML-Tidy*.
+
+The _W3C_'s Markup Validation Service also supports validating the Document
+Type Definition (DTD) for HTML. For example, the HTML validator checks that
+the document has a <head> section and uses the correct HTML skeleton and
+doctype.
+
+[source, html]
+----
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+  </head>
+
+  <body>
+  </body>
+
+</html>
+----
+
+Overall, the *W3C Validator* offers many helpful functions for checking the
+correct HTML syntax. The validator also supports the development of
+barrier-free or barrier-free websites. Unfortunately, the testing service
+does not offer the possibility of validating the source text for different
+browser versions.
+
+
+== The WHATWG
+
+The _WHATWG_ (Web Hypertext Application Technology Working Group) is a
+community-driven organization focused on developing and evolving web standards.
+It was formed in 2004 as a response to perceived stagnation in developing HTML
+and related web technologies within the _W3C_ (World Wide Web Consortium).
+
+The primary goal of the _WHATWG_ is to maintain and develop specifications for
+web technologies that are practical, forward-looking, and responsive to the
+needs of web developers and users. The organization follows an open and
+consensus-based approach, encouraging active participation from individuals
+and organizations involved in web development.
+
+In addition to HTML, the _WHATWG_ is involved in developing other web
+technologies, such as the DOM (Document Object Model) API, web APIs, and
+related specifications. It focuses on practical implementation details,
+interoperability, and addressing real-world challenges faced by web
+developers.
+
+While the _WHATWG_ operates independently of the_W3C_, the two organizations
+have ongoing collaboration and communication. The _WHATWG_'s work has
+influenced the development of HTML and related standards within the _W3C_,
+leading to a convergence of efforts in some areas.
+
+=== Nu Html Checker
+
+The link:{whatwg--nu-validator-online}[Nu Html Checker, {browser-window--new}]
+is an open-source validator developed by _WHATWG_ (Web Hypertext Application
+Technology Working Group) for validating HTML documents. It is designed to
+check the conformance of HTML code against the HTML Living Standard, which
+is the specification maintained by the link:{whatwg--hone}[WHATWG, {browser-window--new}].
+
+The *Nu Html Checker* is based on the same underlying engine as the HTML
+parsing algorithm used in modern web browsers. It provides an accurate and
+up-to-date analysis of HTML documents, considering the evolving nature of
+web standards. This validation tool is based on the HTML validator developed
+by *Henri Sivonen*. It tests for correctly using HTML, CSS, and graphics in
+the SVG file format. However, the document type definition (DTD) must be
+tested here. The *Nu Html Checker* is open source and is being further
+developed link:{github--nu-validator}[as a project, {browser-window--new}]
+hosted at Github.
+
+The *Nu Html Checker* is based on the same underlying engine as the HTML
+parsing algorithm used in modern web browsers. It provides an accurate and
+up-to-date analysis of HTML documents, considering the evolving nature of
+web standards.
+
+.Nu Html Checker
+lightbox::w3c-nu-validator-online[ 1280, {data-images--nu-validator-online}, role="mb-3" ]
+
+The *Nu Html Checker* is *free* for Linux, Windows, and macOS. You can verify
+a URL, enter an HTML code snippet, or upload a file. The *Nu Html Checker*
+complements the *W3C Validator* and provides an alternative option for validating
+HTML code. Developers and organizations widely use it to ensure the conformance,
+quality, and accessibility of their HTML documents, aligning with the latest
+standards defined by _WHATWG_.
+
+
+== HTML Validator Alternatives
+
+Two other HTML validators allow you to validate code via file upload or code
+entry. Both can be used for *free* as well.
+
+=== AppDevTools
+
+The HTML Validator at link:{appdevtools--html-validator-online}[appdevtools.com, {browser-window--new}]
+is also based on the _WHATWG_'s *Nu Html Checker*. As a special feature, this
+validator allows validating of only parts of the HTML code. To do this,
+activate the *Fragment* option. The HTML code is then treated as *part*
+of an HTML document, not a complete one.
+
+.AppDevTools - Html Validator
+lightbox::appdevtools-html-validator-online[ 1280, {data-images--appdevtools-html-validator-online}, role="mb-3" ]
+
+NOTE: The site *appdevtools.com* provides additional validators for *YAML*
+and *JSON*. The free format HTML validator is based on the _W3C_'s Nu Html
+Checker. The online tool supports HTML5, SVG 1.1, MathML 3.0, ITS 2.0, and
+RDFa Lite 1.1.
+
+=== FreeFormatter
+
+The site link:{freeformatter--html-validator-online}[freeformatter.com, {browser-window--new}]
+offers additional validators for XML and JSON. The additional tools may
+perfectly accompany your tests for some other aspects of your code.
+
+.Freeformatter -  Html Validator
+lightbox::freeformatter-html-validator-online[ 1280, {data-images--freeformatter-html-validator-online}, role="mb-3" ]
+
+NOTE: The site *freeformatter.com* provides a rich set of additional tools
+that are quite helpful for developing a website in general.
