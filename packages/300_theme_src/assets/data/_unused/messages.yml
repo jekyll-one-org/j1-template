@@ -2,7 +2,7 @@
 regenerate:                             false
 ---
 
-{% capture j1_cache %}
+{%- capture j1_cache -%}
 
 {% comment %}
  # -----------------------------------------------------------------------------
@@ -32,7 +32,7 @@ regenerate:                             false
 #
 debug:
 
-  - dataFound:                           
+  - dataFound:
       short_code:                       D0000
       message:
         text:                           "found "
@@ -46,34 +46,34 @@ debug:
 #
 info:
 
-  - moduleInitialization:     
+  - moduleInitialization:
       short_code:                       I0000
       message:
         text:                           "initialization "
         started:                        "started"
         finished:                       "finished"
 
-  - moduleState:                           
+  - moduleState:
       short_code:                       I0001
       message:
         text:                           "module state detected as "
         enabled:                        "enabled"
 
-  - getData:                           
+  - getData:
       short_code:                       I0002
       message:
         text:                           "data for "
         message_catalog:                "message catalog "
         finished:                       "loaded"
 
-  - getState:                           
+  - getState:
       short_code:                       I0003
       message:
         text:                           "data for "
         data_objects:                   "data objects "
         finished:                       "loaded"
 
-  - setState:                           
+  - setState:
       short_code:                       I0004
       message:
         text:                           "state: "
@@ -86,14 +86,14 @@ info:
 #
 warn:
 
-  - moduleState:                           
+  - moduleState:
       short_code:                       W0000
       message:
         text:                           "module state detected as "
         disabled:                       "disabled"
         failed:                         "failed"
 
-  - deleteData:     
+  - deleteData:
       short_code:                       W0001
       message:
         text:                           "delete all "
@@ -105,20 +105,20 @@ warn:
 #
 error:
 
-  - internalError:                           
+  - internalError:
       short_code:                       E0000
       message:
         text:                           "internal error. "
         stopped:                        "cannot continue"
-        
 
-  - getData:     
+
+  - getData:
       short_code:                       E0001
       message:
         text:                           "failed to get data "
         xhr:                            "from XHR request"
 
-  - missingRequired:     
+  - missingRequired:
       short_code:                       E0002
       message:
         text:                           "missing required "
@@ -126,6 +126,6 @@ error:
         options:                        "options"
 
 
-{% endcapture %}
+{%- endcapture -%}
 {{ j1_cache | strip_empty_lines }}
 {% assign j1_cache = nil %}

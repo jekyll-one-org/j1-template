@@ -3,7 +3,7 @@ layout:                                 compress                                
 debug:                                  false                                   # enable|disable additional debug information written to (static) content source
 ---
 
-{% capture j1_cache %}
+{%- capture j1_cache -%}
 
 {% comment %}
  # -----------------------------------------------------------------------------
@@ -93,7 +93,8 @@ debug:                                  false                                   
   {% assign body_scrollbar = page.scrollbar %}
 {% endif %}
 
-{% comment %} main
+
+{% comment %} MAIN
 -------------------------------------------------------------------------------- {% endcomment %}
 <!DOCTYPE {{ site.doctype }}>
 <html lang="{{site.language}}">

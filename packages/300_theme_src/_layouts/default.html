@@ -3,7 +3,7 @@ layout:                                 compress                                
 debug:                                  false                                   # enable|disable additional debug information written to (static) content source
 ---
 
-{% capture j1_cache %}
+{%- capture j1_cache -%}
 
 {% comment %}
  # -----------------------------------------------------------------------------
@@ -32,6 +32,10 @@ debug:                                  false                                   
  #   (e.g. 'home.html' or 'page.html') that extents the layout DEFAULT by
  #   additional data for your specific needs based on YAML configuration
  #   data files.
+ # -----------------------------------------------------------------------------
+ # NOTE:
+ #   Output whitespace control: '%-' and '-%'for all liquid markups to strip
+ #   blank lines from the rendered HTML.
  # -----------------------------------------------------------------------------
  # Test data:
  #  {{ lanes_collate | debug }}
@@ -274,40 +278,37 @@ debug:                                  false                                   
     <!-- [INFO   ] [j1.layout.default.html                ] [ end page processing ] -->
 </html>
 
-{% endcapture %}
+{%- endcapture -%}
 
 {% comment %} POST processing of the generated page using (captured) cache
 -------------------------------------------------------------------------------- {% endcomment %}
-{% case environment %}
+{%- case environment -%}
 
   {% comment %} DEVELOPMENT mode
-  {{ j1_cache | regex_replace: 'js-nbinteract-widget', 'btn btn-primary btn-raised js-nbinteract-widget' | regex_replace: '<h[1-2].*?>(.*?)<\/h[1-2]>', '<h2>\1</h2>' | regex_replace: '&#182;|¶' | strip_empty_lines | remove: '<p>excerpt__end</p>' | pretty_print }}
   ------------------------------------------------------------------------------ {% endcomment %}
-  {% when 'development' or 'dev' or 'test' %}
-    {% if prettify %}
+  {%- when 'development' or 'dev' or 'test' -%}
+    {%- if prettify -%}
       {{ j1_cache | strip_empty_lines | remove: '<p>excerpt__end</p>' | pretty_print }}
-    {% else %}
+    {%- else -%}
       {{ j1_cache | strip_empty_lines | remove: '<p>excerpt__end</p>' }}
-    {% endif %} {% comment %} END prettify {% endcomment %}
+    {%- endif- %}
+    {% comment %} END prettify {% endcomment %}
 
   {% comment %} PRODUCTION mode
   ------------------------------------------------------------------------------ {% endcomment %}
-  {% when 'production' or 'prod' %}
-    {% unless compress %}
-      {% if prettify %}
+  {%- when 'production' or 'prod' -%}
+    {%- unless compress -%}
+      {%- if prettify -%}
         {{ j1_cache | remove: '<p>excerpt__end</p>' | strip_html_comments | strip_js_comments | strip_empty_lines | pretty_print }}
-      {% else %}
+      {%- else -%}
         {{ j1_cache | remove: '<p>excerpt__end</p>' | strip_html_comments | strip_js_comments | strip_empty_lines  }}
-      {% endif %} {% comment %} END prettify {% endcomment %}
-    {% endunless %} {% comment %} UNLESS compress {% endcomment %}
-
-	{% if compress %}
-      {{ j1_cache | remove: '<p>excerpt__end</p>' | strip_html_comments | strip_js_comments | strip_empty_lines  }}
-	{% endif %}
+      {%- endif -%} {%- comment -%} END prettify {%- endcomment -%}
+    {%- endunless -%}
+    {% comment %} UNLESS compress {% endcomment %}
 
   {% comment %} UNKNOWN mode
   ------------------------------------------------------------------------------ {% endcomment %}
-  {% else %}
+  {%- else -%}
     {{ j1_cache | remove: '<p>excerpt__end</p>'| strip_empty_lines  }}
 
-{% endcase %}
+{%- endcase -%}
