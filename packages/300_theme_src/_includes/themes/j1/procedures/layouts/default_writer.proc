@@ -135,7 +135,7 @@
                     configuration of this page ({{page.title}}). Check the
                     (page) layout config file for the unsupported region. A
                     line contains something wrong like:
-                    <br /><br /> <i>region: {{region}}</i><br /><br />
+                    <br><br> <i>region: {{region}}</i><br><br>
                     Have a look at:
                   </div>
                   <div class="mb-5">
@@ -158,5 +158,3 @@
 <!-- [DEBUG  ] [j1.layout.default_writer.proc         ] [ reset all lane items ] -->
 <!-- [INFO   ] [j1.layout.default_writer.proc         ] [ end processing ] -->
 {% assign items = nil %}
-
-

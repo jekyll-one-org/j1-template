@@ -60,32 +60,32 @@
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ start meta-data processing: place meta tags (taken from site config|page frontmatter) ] -->
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ page|content encoding ] -->
-<meta http-equiv="Content-Type" content="text/html;charset={{site.coding}}" />
+<meta http-equiv="Content-Type" content="text/html;charset={{site.coding}}">
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ added for MS Edge Browser ] -->
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ initial zoom level when the page is first loaded by the browser ] -->
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ added version info for the templte ] -->
-<meta name="template version" content="{{site.version}}" />
+<meta name="template version" content="{{site.version}}">
 
 {% if template_config.translation.enabled %}
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ add google translator meta tag to enable customized translations ] -->
-<meta name="translation" content="enabled" />
+<meta name="translation" content="enabled">
 {% endif %}
 
 {% if template_config.translation.google %}
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ add google translator meta tag to enable customized translations ] -->
-<meta name="{{template_config.translation.google.meta_data}}" content="enabled" />
+<meta name="{{template_config.translation.google.meta_data}}" content="enabled">
 {% endif %}
 
 {% if site.favicon.image %}
   <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ favicon for browser ] -->
-  <link rel="icon" type="{{site.favicon.type}}" href="{{site.data.j1_config.image_path}}/{{site.favicon.image}}" />
+  <link rel="icon" type="{{site.favicon.type}}" href="{{site.data.j1_config.image_path}}/{{site.favicon.image}}">
   <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ favicon for the google crawler ] -->
-  <link rel="shortcut icon" href="{{site.data.j1_config.image_path}}/{{site.favicon.image}}" />
+  <link rel="shortcut icon" href="{{site.data.j1_config.image_path}}/{{site.favicon.image}}">
 {% endif %}
 
 {% comment %} Check robot settings from site configuration
@@ -93,18 +93,18 @@
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ Check robot settings from SITE configuration ] -->
 {% if site.robots.index and site.robots.index <> nil %}
   <!-- [DEBUG  ] [j1.layout.meta_data_generator.html    ] [ Found SITE configuration robots_index: {{site.robots.index}} ] -->
-  {% capture robots_index %}<meta name="robots" content="index" />{% endcapture %}
+  {% capture robots_index %}<meta name="robots" content="index">{% endcapture %}
 {% else %}
   <!-- [DEBUG  ] [j1.layout.meta_data_generator.html    ] [ Set DEFAULT configuration robots_index: noindex  ] -->
-  {% capture robots_index %}<meta name="robots" content="noindex" />{% endcapture %}
+  {% capture robots_index %}<meta name="robots" content="noindex">{% endcapture %}
 {% endif %}
 
 {% if site.robots.follow and site.robots.follow <> nil %}
   <!-- [DEBUG  ] [j1.layout.meta_data_generator.html    ] [ Found SITE configuration robots_follow: {{site.robots.index}} ] -->
-  {% capture robots_follow %}<meta name="robots" content="follow" />{% endcapture %}
+  {% capture robots_follow %}<meta name="robots" content="follow">{% endcapture %}
 {% else %}
   <!-- [DEBUG  ] [j1.layout.meta_data_generator.html    ] [ Set DEFAULT configuration robots_follow: nofollow  ] -->
-  {% capture robots_follow %}<meta name="robots" content="nofollow" />{% endcapture %}
+  {% capture robots_follow %}<meta name="robots" content="nofollow">{% endcapture %}
 {% endif %}
 
 {% comment %} page.robots.index:  {{ page.robots.index | debug }} {% endcomment %}
@@ -115,19 +115,19 @@
 <!-- [DEBUG  ] [j1.layout.meta_data_generator.html    ] [ Found PAGE configuration robots_index: {{page.robots.index}} ] -->
 <!-- [DEBUG  ] [j1.layout.meta_data_generator.html    ] [ Found PAGE configuration robots_follow: {{page.robots.follow}} ] -->
 {% if page.robots.index %}
-  {% capture robots_index %}<meta name="robots" content="index" />{% endcapture %}
+  {% capture robots_index %}<meta name="robots" content="index">{% endcapture %}
 {% endif %}
 
 {% if page.robots.index == false %}
-  {% capture robots_index %}<meta name="robots" content="noindex" />{% endcapture %}
+  {% capture robots_index %}<meta name="robots" content="noindex">{% endcapture %}
 {% endif %}
 
 {% if page.robots.follow %}
-  {% capture robots_follow %}<meta name="robots" content="follow" />{% endcapture %}
+  {% capture robots_follow %}<meta name="robots" content="follow">{% endcapture %}
 {% endif %}
 
 {% if page.robots.follow == false %}
-  {% capture robots_follow %}<meta name="robots" content="nofollow" />{% endcapture %}
+  {% capture robots_follow %}<meta name="robots" content="nofollow">{% endcapture %}
 {% endif %}
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ Place detected/overloaded meta tags for robots ] -->
@@ -136,63 +136,63 @@
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ meta tag for provider APIs: analytics ] -->
 {% if page.analytics and site.data.j1_config.analytics.enabled %}
-  {% capture analytics %}<meta name="analytics" content="true" />{% endcapture %}
+  {% capture analytics %}<meta name="analytics" content="true">{% endcapture %}
 {% else %}
-  {% capture analytics %}<meta name="analytics" content="false" />{% endcapture %}
+  {% capture analytics %}<meta name="analytics" content="false">{% endcapture %}
 {% endif %}
 
 {{analytics}}
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ meta tag for provider APIs: comments ] -->
 {% if page.comments and site.data.j1_config.comments.enabled %}
-  {% capture comments %}<meta name="comments" content="true" />{% endcapture %}
+  {% capture comments %}<meta name="comments" content="true">{% endcapture %}
 {% else %}
-  {% capture comments %}<meta name="comments" content="false" />{% endcapture %}
+  {% capture comments %}<meta name="comments" content="false">{% endcapture %}
 {% endif %}
 
 {{comments}}
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ meta tag for provider APIs: advertising ] -->
 {% if page.advertising and site.data.j1_config.advertising.enabled %}
-  {% capture advertising %}<meta name="advertising" content="true" />{% endcapture %}
+  {% capture advertising %}<meta name="advertising" content="true">{% endcapture %}
 {% else %}
-  {% capture advertising %}<meta name="advertising" content="false" />{% endcapture %}
+  {% capture advertising %}<meta name="advertising" content="false">{% endcapture %}
 {% endif %}
 
 {{advertising}}
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ meta tag for provider APIs: advertising ] -->
 {% if page.translation and site.data.j1_config.translation.enabled %}
-  {% capture translation %}<meta name="translation" content="true" />{% endcapture %}
+  {% capture translation %}<meta name="translation" content="true">{% endcapture %}
 {% else %}
-  {% capture translation %}<meta name="translation" content="false" />{% endcapture %}
+  {% capture translation %}<meta name="translation" content="false">{% endcapture %}
 {% endif %}
 
 {{translation}}
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ meta tag for provider APIs: youtube ] -->
 {% if page.youtube %}
-  {% capture youtube %}<meta name="youtube" content="true" />{% endcapture %}
+  {% capture youtube %}<meta name="youtube" content="true">{% endcapture %}
 {% else %}
-  {% capture youtube %}<meta name="youtube" content="false" />{% endcapture %}
+  {% capture youtube %}<meta name="youtube" content="false">{% endcapture %}
 {% endif %}
 
 {{youtube}}
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ meta tag for provider APIs: vimeo ] -->
 {% if page.vimeo %}
-  {% capture vimeo %}<meta name="vimeo" content="true" />{% endcapture %}
+  {% capture vimeo %}<meta name="vimeo" content="true">{% endcapture %}
 {% else %}
-  {% capture vimeo %}<meta name="vimeo" content="false" />{% endcapture %}
+  {% capture vimeo %}<meta name="vimeo" content="false">{% endcapture %}
 {% endif %}
 
 {{vimeo}}
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ meta tag for privacy settings: personalization ] -->
 {% if page.personalization %}
-  {% capture personalization %}<meta name="personalization" content="true" />{% endcapture %}
+  {% capture personalization %}<meta name="personalization" content="true">{% endcapture %}
 {% else %}
-  {% capture personalization %}<meta name="personalization" content="false" />{% endcapture %}
+  {% capture personalization %}<meta name="personalization" content="false">{% endcapture %}
 {% endif %}
 
 {{personalization}}
@@ -216,7 +216,7 @@
   {% assign cors  = template_config.preload.font.cors %}
   {% assign fonts = template_config.preload.font.fonts %}
   {% for font in fonts %}
-    <link rel="preload" as="font" href="{{font}}" {{cors}} />
+    <link rel="preload" as="font" href="{{font}}" {{cors}}>
   {% endfor %}
 {% else %}
   <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ PRELOAD of fonts: disabled ] -->
@@ -231,12 +231,12 @@
   {% assign css   = template_config.preload.css.css %}
   {% assign files = template_config.preload.css.files %}
   {% for file in css %}
-    <link rel="preload" as="style" href="{{file}}.{{ext_css}}" />
+    <link rel="preload" as="style" href="{{file}}.{{ext_css}}">
   {% endfor %}
 
   {% for file in files %}
     <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ PRELOAD css as FILE ] -->
-    <link rel="preload" as="style" href="{{file}}" />
+    <link rel="preload" as="style" href="{{file}}">
   {% endfor %}
 {% else %}
   <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ PRELOAD of css: disabled ] -->
@@ -251,12 +251,12 @@
   {% assign js    = template_config.preload.js.js %}
   {% assign files = template_config.preload.js.files %}
   {% for file in js %}
-    <link rel="preload" as="script" href="{{file}}.{{ext_js}}" />
+    <link rel="preload" as="script" href="{{file}}.{{ext_js}}">
   {% endfor %}
 
   {% for file in files %}
     <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ PRELOAD js as FILE ] -->
-    <link rel="preload" as="script" href="{{file}}" />
+    <link rel="preload" as="script" href="{{file}}">
   {% endfor %}
 {% else %}
   <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ PRELOAD of js: disabled ] -->
@@ -270,7 +270,7 @@
   <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ request PRELOAD of images to prioritize fetching ] -->
   {% assign files = template_config.preload.image.files %}
   {% for file in files %}
-    <link rel="preload" as="image" href="{{file}}" />
+    <link rel="preload" as="image" href="{{file}}">
   {% endfor %}
 {% else %}
   <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ PRELOAD of images: disabled ] -->
@@ -285,8 +285,8 @@
   {% assign urls = template_config.preconnect.urls %}
   {% for url in urls %}
     <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ establish early connection: {{url}} ] -->
-    <link rel="dns-prefetch" href="{{url}}" />
-    <link rel="preconnect"   href="{{url}}" />
+    <link rel="dns-prefetch" href="{{url}}">
+    <link rel="preconnect"   href="{{url}}">
   {% endfor %}
 {% else %}
   <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ PRECONNECT remote URLs: disabled ] -->
