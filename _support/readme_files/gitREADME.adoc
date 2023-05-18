@@ -1,7 +1,7 @@
 == Add (global) Committer identity
 
-git config --global user.name "Juergen Adams"
-git config --global user.email "juergen@jekyll.one"
+  git config --global user.name "Juergen Adams"
+  git config --global user.email "juergen@jekyll.one"
 
 == Git status colors
 
@@ -71,75 +71,79 @@ git push -u origin master
 git branch -a zeigt alle lokalen und entfernten Branches an, hingegen -r
 nur die entfernten Branches anzeigt.
 
-  $ git branch -a
-  $ git branch -r
+  git branch -a
+  git branch -r
 
 == Rename a branch
 
-If you want to rename a branch while pointed to any branch, do:
+If you want to rename a local branch while pointed to `any` branch, do:
 
-  local:  git branch -m <oldname> <newname>
+  git branch -m <oldname> <newname>
 
-If you want to rename the current branch, you can do:
+If you want to rename the `current` local branch, you can do:
 
-  local:  git branch -m <newname>
+  git branch -m <newname>
 
-If you want to push the local branch and reset the upstream branch:
+If you want rename a the local branch *and* push|reset the `upstream` branch:
 
-  remote: git push origin -u <newname>
-  remote: git push origin --delete <old_name>
+  git push origin -u <newname>
+  git push origin --delete <old_name>
 
-== Push current branch to main
+== Push current branch to remote (main)
 
-Remote:
+  git push --set-upstream origin main
 
-    git push --set-upstream origin main
+== Create branches
+
+Create a branch on your local machine *and* switch in this branch:
+
+  git checkout -b [name_of_your_new_branch]
 
 == Delete branches
 
 See:
   {https://stackoverflow.com/questions/2003505/how-do-i-delete-a-git-branch-locally-and-remotely}[Stackoverflow]
 
-Remote:
+=== Delete branches from `remote`
 
-  $ git push -d <remote_name> <branch_name>
+  git push -d <remote_name> <branch_name>
 
-Note that in most cases the remote name is origin. In such a case you'll
+NOTE: In most cases the remote name is origin. In such a case you'll
 have to use the command like so.
 
-  $ git push -d origin <branch_name>
+  git push -d origin <branch_name>
 
-Local:
+=== Delete branches from `local`
 
-  $ git branch -d <branch_name>
+  git branch -d <branch_name>
 
 == Create branch from commit
 
-Create a branch from a previous commit using Git:
+Create a branch from a previous `commit`:
 
   git branch branch_name <sha1-of-commit>
 
 == Reset repo to a commit
 
-Local:
+=== Reset from `local`
 
   git reset --hard 217a618
 
-Remote:
+=== Reset from `remote`
 
   git push --force origin main
 
 == Push an existing repository from the command line
 
-git remote add github https://github.com/jekyll-one-org/heroku_starter_app.git
-git push -u github master
+  git remote add github https://github.com/jekyll-one-org/heroku_starter_app.git
+  git push -u github master
 
 == Removing non-repository files with git
 
 See: https://stackoverflow.com/questions/5037480/removing-non-repository-files-with-git
 
-If you want to see which files will be deleted you can use the -n
-option before you run the actual command:
+If you want to see which files will be deleted you can use the
+option -n *before* you run the actual command:
 
   git clean -n
 
@@ -150,39 +154,38 @@ removing them.
 Given the -f flag to remove the files, and the -d flag to remove empty
 directories as well:
 
-git clean -df
+  git clean -df
 
 Also removing ignored files:
 
-git clean -dfx
+  git clean -dfx
 
 
 == Modify most recent commit message
 
-The git commit option `--amend` allows you to change the most
-recent commit message:
+The git commit option `--amend` allows you to change the *most recent*
+commit message:
 
   git commit --amend -m "New commit message"
 
-
 == Delete a Git tag
 
-Use the “git tag” command with the “-d” option
+Use the git 'tag' command with the '-d' option
 
 === From local
 
-  git tag -d v2023.1.4
+  git tag -d v2023.3.0
 
 === From remote
 
-  git push -d origin v2023.1.4
+  git push -d origin v2023.3.0
 
 == Set a Git tag
 
-# When modifying remember to issue a new tag command in git before committing,
-# then push the new tag
-#
-  git tag -a v2023.1.4 -m "v2023.1.4"
+When modifying remember to issue a new tag command in git before committing,
+then push the new tag
+
+  git tag -a v2023.3.0 -m "v2023.3.0"
   git push origin --tags
 
 == Update Git Index (cache) completely
@@ -193,9 +196,7 @@ The series of commands below will remove all of the items from the Git
 Index (not from the working directory or local repo), and then updates
 the Git Index, while respecting git ignores.
 
-PS: Index = Cache
-
-First:
+NOTE: Index = Cache
 
   git rm -r --cached . && git add .
 
@@ -222,29 +223,26 @@ for windows os.
 
   git update-index --chmod=+x 'name-of-shell-script'
 
-== List all of committed files
+== List all committed files
 
 List all files in the repo, including those that are only staged but not
 yet committed:
 
   git ls-files
 
-Lists all of the already committed files being tracked by the repo:
+Lists all of the *already* committed files being tracked by the repo:
 
   git ls-tree --full-tree -r --name-only HEAD
 
-== Turn off warnings
+== Disable warning `CRLF will be replaced by LF`
 
-=== Disable warning: CRLF will be replaced by LF
-
-You can turn off the warning with
+You can turn off the warning with:
 
   git config --global core.safecrlf false
 
 NOTE: This will only turn off the warning, not the function itself.
 
-
 == Upload Gem to Gemfury
 
-git remote add fury https://jekyll-one@git.fury.io/jekyll-one-org/<package-name>.git
-git push fury master
+  git remote add fury https://jekyll-one@git.fury.io/jekyll-one-org/<package-name>.git
+  git push fury master
