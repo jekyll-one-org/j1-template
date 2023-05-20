@@ -29,6 +29,20 @@
       icon:                             paw
 
     # --------------------------------------------------------------------------
+    # Cheatsheet
+    #
+    - title:                            Cheatsheet
+      icon:                             book
+      dropdown:
+
+        - title:                        Git
+          href:                         /pages/public/learn/cheatsheet/git/
+          icon:                         git
+        - title:                        Gem
+          href:                         /pages/public/learn/cheatsheet/gem/
+          icon:                         language-ruby
+
+    # --------------------------------------------------------------------------
     # Roundtrip
     #
     - title:                            Roundtrip

@@ -682,6 +682,7 @@ defaults:
 
       toc:                              true
       fab_menu_id:                      open_toc
+      comments:                         false
       scrollbar:                        false
       personalization:                  false
       exclude_from_search:              false
@@ -725,6 +726,7 @@ defaults:
 
       toc:                              true
       fab_menu_id:                      open_toc
+      comments:                         false
       scrollbar:                        false
       page_navigation:                  true
       personalization:                  false
@@ -763,6 +765,7 @@ defaults:
 
       toc:                              true
       fab_menu_id:                      open_toc
+      comments:                         false
       scrollbar:                        false
       page_navigation:                  true
       personalization:                  false

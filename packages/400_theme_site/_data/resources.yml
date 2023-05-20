@@ -1991,5 +1991,30 @@ resources:
         js:                             [ modules/masonry/js/masonry.pkgd ]
         init_function:                  [ j1.adapter.masonry.init ]
 
+  # ----------------------------------------------------------------------------
+  # Icon Picker
+  # Configurable Font Icon Picker (based on universal-icon-picker)
+  #
+  # See: https://github.com/migliori/universal-icon-picker
+  #
+  - name:                               IconPicker
+    resource:
+      enabled:                          true
+
+      id:                               iconpicker
+      comment:                          Module IconPicker
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand
+      preload:                          false
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            [ modules/iconPicker/css/universal-icon-picker ]
+        files:                          [ adapter/js/iconPicker.js ]
+        js:                             [ modules/iconPicker/js/universal-icon-picker ]
+        init_function:                  [ j1.adapter.iconPicker.init ]
+
 # ------------------------------------------------------------------------------
 # END config

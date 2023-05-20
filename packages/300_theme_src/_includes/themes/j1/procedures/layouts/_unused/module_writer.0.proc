@@ -127,6 +127,10 @@ NO need to load this again
         <!-- [INFO   ] [j1.layout.module_writer.proc          ] [ place J1 adapter for resource: {{resource_settings.id}} ] -->
         <script>
           $(function() {
+            var logger = log4javascript.getLogger("j1.module_loader");
+            var log_text = '{{resource_settings.comment|strip}} is being initialized';
+            logger.info(log_text);
+
             {% comment %} place initializer|s
             -------------------------------------------------------------------- {% endcomment %}
             {% for init_function in data_value %}
@@ -146,16 +150,20 @@ NO need to load this again
                   var max_count      = {{dependency_check_max_count}};
                     interval_count += 1;
                     if ( {{depends}} ) {
-                      {{init_function}} (settings);
+                      {{init_function}}( settings );
+                      logger.info('dependencies of module {{resource_settings.id}} met for: {{resource_settings.dependencies}}');
+                      logger.debug('dependencies of module {{resource_settings.id}} met after: ' + interval_count * {{dependency_check_cycle}} + ' ms');
                       clearInterval(dependencies_met_{{resource_settings.id}});
                       }
                     if (interval_count > max_count) {
+                      logger.warn('dependency check failed for module: {{resource_settings.id}}');
                       clearInterval(dependencies_met_{{resource_settings.id}});
-                      {{init_function}} (settings);
+                      logger.warn('run initializer {{resource_settings.id}} unchecked for: {{resource_settings.dependencies}}');
+                      {{init_function}}(settings);
                     }
                   }, {{dependency_check_cycle}});
                 {% else %}
-                  {{init_function}} (settings);
+                  {{init_function}}(settings);
                 {% endif %}
               {% else %}
                 {% comment %} no module specific frontmatter options
@@ -178,16 +186,20 @@ NO need to load this again
                     var dependencies_met_{{resource_settings.id}} = setInterval(function() {
                       interval_count += 1;
                       if ( {{depends}} ) {
-                        {{init_function}} (settings);
+                        {{init_function}}(settings);
+                        logger.info('dependencies of module {{resource_settings.id}} met for: {{resource_settings.dependencies}}');
+                        logger.debug('dependencies of module {{resource_settings.id}} met after: ' + interval_count * {{dependency_check_cycle}} + ' ms');
                         clearInterval(dependencies_met_{{resource_settings.id}});
                         }
                       if (interval_count > max_count) {
+                        logger.warn('dependency check failed for module: {{resource_settings.id}}');
                         clearInterval(dependencies_met_{{resource_settings.id}});
-                        {{init_function}} (settings);
+                        logger.warn('run initializer {{resource_settings.id}} unchecked for: {{resource_settings.dependencies}}');
+                        {{init_function}}(settings);
                       }
                     }, {{dependency_check_cycle}});
                   {% else %}
-                    {{init_function}} (settings);
+                    {{init_function}}(settings);
                   {% endif %}
                 {% else %}
                   {% comment %} no default settings
@@ -200,12 +212,16 @@ NO need to load this again
                     var max_count      = {{dependency_check_max_count}};
                     var dependencies_met_{{resource_settings.id}} = setInterval(function() {
                       interval_count += 1;
-                      if ({{depends}}) {
+                      if ( {{depends}} ) {
                         {{init_function}}();
+                        logger.info('dependencies of module {{resource_settings.id}} met for: {{resource_settings.dependencies}}');
+                        logger.debug('dependencies of module {{resource_settings.id}} met after: ' + interval_count * {{dependency_check_cycle}} + ' ms');
                         clearInterval(dependencies_met_{{resource_settings.id}});
                         }
                       if (interval_count > max_count) {
+                        logger.warn('dependency check failed for module: {{resource_settings.id}}');
                         clearInterval(dependencies_met_{{resource_settings.id}});
+                        logger.warn('run initializer {{resource_settings.id}} unchecked for: {{resource_settings.dependencies}}');
                         {{init_function}}();
                       }
                     }, {{dependency_check_cycle}});

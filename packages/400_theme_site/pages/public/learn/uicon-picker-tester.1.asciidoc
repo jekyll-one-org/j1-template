@@ -1,0 +1,100 @@
+---
+title:                                  Tester
+tagline:                                Icon Picker
+date:                                   2023-05-20 00:00:00
+description: >
+                                        Welcome to the preview page focussing on the image module. This page
+                                        shows some valuable features of the J1 Theme to manage your image-based
+                                        content using lightboxes, carousels (slider), and galleries.
+
+categories:                             [ Testpages ]
+tags:                                   [ Example ]
+
+comments:                               false
+fab_menu_id:                            open_toc
+
+permalink:                              /pages/public/learn/icon-picker/
+regenerate:                             false
+
+resources:                              [ animate, clipboard, rouge, lightbox, iconpicker ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/pages/roundtrip/icon-fonts-1920x1280-bw.jpg
+          alt:                          Icon Fonts
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+
+== Icon Picker
+
+++++
+<button id="selector" title="Open the icon picker">Click to open</button>
+<p class="mt-3"> Selected Icon </p>
+<div id="output" class="output-icon mt-3 mb-5"></div>
+++++
+
+++++
+<script>
+
+  $(function() {
+
+    // const options = {
+    //     iconLibraries: [
+    //         'happy-icons.min.json',
+    //         'font-awesome.min.json'
+    //     ],
+    //     iconLibrariesCss: [
+    //         'happy-icons.min.css',
+    //         'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css'
+    //     ],
+    //     resetSelector: '#uip-reset-btn',
+    //     onSelect: function(jsonIconData) {
+    //         document.getElementById('output-icon').innerHTML = jsonIconData.iconMarkup;
+    //         console.log(jsonIconData);
+    //     },
+    //     onReset: function() {
+    //         document.getElementById('output-icon').innerHTML = '';
+    //     }
+    // }
+
+    var uip = new UniversalIconPicker('#selector', {
+      iconLibraries: [
+          'font-awesome.min.json',
+          'mdi-icons.min.json'
+      ],
+      iconLibrariesCss: [
+          'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
+          'https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.2.96/css/materialdesignicons.min.css'
+      ],
+      onSelect: function(jsonIconData) {
+          document.getElementById('output').innerHTML = jsonIconData.iconMarkup;
+          console.log(jsonIconData);
+      }
+    });
+
+  });
+
+</script>
+++++

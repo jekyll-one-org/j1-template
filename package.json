@@ -103,6 +103,7 @@
     "child-script": "cross-env if-env BUNDLE_VENDORIZE=true && echo bundle vendorized || echo bundle global"
   },
   "dependencies": {
+    "@migliori/universal-icon-picker": "^1.1.6",
     "command-line-usage": "^6.1.1",
     "cross-env": "^7.0.3",
     "cross-var": "^1.1.0",
