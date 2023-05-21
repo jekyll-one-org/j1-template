@@ -120,7 +120,7 @@ const loadedDependencies = [];
         this.sideBarBtn = '';
         this.sideBarList = [];
 
-        this.universalWrap = '<div class="uip-modal uip-open" id="uip-modal' + this.idSuffix + '"><div class="uip-modal--content"><div class="uip-modal--header"><div class="uip-modal--header-logo-area"><span class="uip-modal--header-logo-title">Icon Picker</span></div><div class="uip-modal--header-close-btn"><img src="' + iconPickerUrl + '/images/xmark-solid.svg" width="40" height="40" alt="Close" title="Close" /></div></div><div class="uip-modal--body"><div id="uip-modal--sidebar' + this.idSuffix + '" class="uip-modal--sidebar"><div class="uip-modal--sidebar-tabs"></div></div><div id="uip-modal--icon-preview-wrap' + this.idSuffix + '" class="uip-modal--icon-preview-wrap"><div class="uip-modal--icon-search"><input name="" value="" placeholder="Filter by name..."><img src="' + iconPickerUrl + '/images/magnifying-glass-solid.svg" width="20" height="16" alt="Search" title="Search" /></div><div class="uip-modal--icon-preview-inner"><div id="uip-modal--icon-preview' + this.idSuffix + '" class="uip-modal--icon-preview"></div></div></div></div><div class="uip-modal--footer"><button class="uip-insert-icon-button mt-3 mb-3 mr-6">Copy to clipboard</button></div></div></div>';
+        this.universalWrap = '<div class="uip-modal uip-open" id="uip-modal' + this.idSuffix + '"><div class="uip-modal--content"><div class="uip-modal--header"><div class="uip-modal--header-logo-area"><span class="uip-modal--header-logo-title">Icon Picker</span></div><div class="uip-modal--header-close-btn"><img src="' + iconPickerUrl + '/images/xmark-solid.svg" width="20" height="16" alt="Close" title="Close" /></div></div><div class="uip-modal--body"><div id="uip-modal--sidebar' + this.idSuffix + '" class="uip-modal--sidebar"><div class="uip-modal--sidebar-tabs"></div></div><div id="uip-modal--icon-preview-wrap' + this.idSuffix + '" class="uip-modal--icon-preview-wrap"><div class="uip-modal--icon-search"><input name="" value="" placeholder="Filter by name..."><img src="' + iconPickerUrl + '/images/magnifying-glass-solid.svg" width="20" height="16" alt="Search" title="Search" /></div><div class="uip-modal--icon-preview-inner"><div id="uip-modal--icon-preview' + this.idSuffix + '" class="uip-modal--icon-preview"></div></div></div></div><div class="uip-modal--footer"><button class="uip-insert-icon-button mt-3 mb-3 mr-6">Insert</button></div></div></div>';
 
         this.universalDomEle = createDomEle(this.universalWrap);
         this.sidebarTabs = this.universalDomEle.querySelector('.uip-modal--sidebar-tabs');
@@ -138,7 +138,7 @@ const loadedDependencies = [];
     UniversalIconPicker.prototype = {
 
         /* Public functions
-        ------------------------------------------------------------------------ */
+        -------------------------------------------------- */
 
         init: function () {
             this._loadCssFiles();
@@ -200,9 +200,8 @@ const loadedDependencies = [];
 
                             this.options.onSelect(jsonOutput);
                         }
-                        // jadams, 2023-05-21: disable modal CLOSE on a select
-                        // this.universalDomEle.classList.add('uip-close');
-                        // this.universalDomEle.classList.remove('uip-open');
+                        this.universalDomEle.classList.add('uip-close');
+                        this.universalDomEle.classList.remove('uip-open');
                     });
                 } else {
                     // Icon library open if dom element exist
@@ -246,7 +245,7 @@ const loadedDependencies = [];
         },
 
         /* Private functions
-        ------------------------------------------------------------------------ */
+        -------------------------------------------------- */
 
         _clickHandlerFunc: function (e) {
             if (!e.currentTarget.classList.contains('universal-active')) {
@@ -262,7 +261,6 @@ const loadedDependencies = [];
             let markup = '',
                 library = libraryItem['icon-style'],
                 prefix = libraryItem['prefix'];
-
             if (this.options.allowEmpty) {
                 markup += '<div class="uip-icon-item" data-library-id="' + library + '" data-filter="" data-library-name="' + libraryName + '"><div class="uip-icon-item-inner"><i class="' + prefix + ' uip-icon-none">&nbsp;</i><div class="uip-icon-item-name" title="None">None</div></div></div>';
             }

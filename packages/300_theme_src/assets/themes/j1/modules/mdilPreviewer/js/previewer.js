@@ -81,10 +81,12 @@
           document.body.removeChild(copied);
         }, 1500);
       };
+
       // Skip info record 0 (j=1) ???
       for (var j=0; j<icons.length; j++) {
-        var div = document.createElement('div'),
-          i = document.createElement('i');
+        var div = document.createElement('div');
+        var i = document.createElement('i');
+
         div.setAttribute("id", "mdi-icon");
 
         i.className = 'mdil mdil-2x mdil-' + icons[j].name;

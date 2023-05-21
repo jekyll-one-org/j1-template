@@ -151,8 +151,16 @@ var logText;
             iconLibraries:    iconPickerDefaults.iconLibraries,
             iconLibrariesCss: iconPickerDefaults.iconLibrariesCss,
             onSelect: function(jsonIconData) {
-              document.getElementById('output').innerHTML = jsonIconData.iconMarkup;
-              console.log(jsonIconData);
+              // copy selected icon to clipboard (iconClass)
+              var copyFrom = document.createElement('textarea');
+              copyFrom.value = jsonIconData.iconClass;
+              document.body.appendChild(copyFrom);
+              copyFrom.select();
+              document.execCommand('copy');
+              setTimeout(function () {
+                document.body.removeChild(copyFrom);
+              }, 500);
+              // console.log(jsonIconData);
             }
           });
 

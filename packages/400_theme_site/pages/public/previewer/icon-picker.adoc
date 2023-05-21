@@ -62,17 +62,18 @@ NOTE: The *free* version of FontAwesome does *not* support the full icon
 set available. The commercial Pro version supports *26.000+* icons but
 requires a *paid* subscription plan.
 
+To open the IconPicker, click on the button *IconPicker*.
+
 ++++
-<div class="mt-5 mb-4 d-grid gap-2">
-  <a  id="icon_picker" href="#"
-      class="btn btn-info btn-flex btn-lg"
-      aria-label="Icon Picker">
-      <i class="mdi mdi-emoticon mdi-2x mr-2"></i>
-      Open the icon picker
+<div class="mt-3 mb-4 d-grid gap-2">
+  <a id="icon_picker" href="#"
+     class="btn btn-info btn-flex btn-lg"
+     aria-label="Icon Picker">
+     <i class="mdi mdi-emoticon mdi-2x mr-2"></i>
+     Open the IconPicker
   </a>
 </div>
-
-<div id="output" class="output-icon mt-3 mb-5">
-  <!-- p class="mt-3 mb-3"> Selected Icon </p -->
-</div>
 ++++
+
+TIP: *Double-click* an icon copies the selected icon (class) data to
+the *clipboard*.
