@@ -1,6 +1,6 @@
 ---
 title:                                  Icon Picker
-tagline:                                Select And Preview Font Icons
+tagline:                                Preview Font Icons
 date:                                   2023-05-20 00:00:00
 description: >
                                         J1 Theme supports popular icons font sets out-of-the-box.
