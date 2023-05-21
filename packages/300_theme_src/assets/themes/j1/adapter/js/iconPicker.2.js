@@ -93,7 +93,6 @@ var iconPickerSettings;
 var iconPickerOptions;
 var frontmatterOptions;
 var icon_picker;
-var icon_picker_button_id;
 var _this;
 var logger;
 var logText;
@@ -144,11 +143,9 @@ var logText;
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized on id: icon_picker');
+          logger.info('\n' + 'module is being initialized');
 
-          icon_picker_button_id = '#' + iconPickerDefaults.picker_button_id;
-
-          icon_picker = new UniversalIconPicker(icon_picker_button_id, {
+          icon_picker = new UniversalIconPicker('#icon_picker', {
             iconLibraries:    iconPickerDefaults.iconLibraries,
             iconLibrariesCss: iconPickerDefaults.iconLibrariesCss,
             onSelect: function(jsonIconData) {
@@ -160,6 +157,31 @@ var logText;
           logger.info('\n' + 'initializing module finished');
           clearInterval(dependencies_met_page_ready);
         }
+
+        $('#icon_picker_selector').on('click', function() {
+          console.log('Handler for click called');
+
+          // if ($('.uip-close')[0]){
+          //   console.log('Selector modal: closed');
+          // } else if ($('.uip-open')[0])  {
+          //   console.log('Selector modal: open');
+          // }
+
+          // if (document.querySelector('.uip-open') !== null) {
+          //     console.log('Selector modal: open');
+          // } else {
+          //   console.log('quatsch');
+          }
+
+        });
+
+        // Icon library close by clicking close button
+        document.querySelector('.uip-modal--header-close-btn').addEventListener('click', () => {
+          // this.universalDomEle.classList.add('uip-close');
+          // this.universalDomEle.classList.remove('uip-open');
+          console.log('modal close clicked', event);
+        });
+
       }, 25);
 
     }, // END init

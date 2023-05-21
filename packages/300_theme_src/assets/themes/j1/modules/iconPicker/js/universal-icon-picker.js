@@ -147,16 +147,21 @@ const loadedDependencies = [];
             this._loadIconLibraries().then(() => {
                 this.iconLibrariesLoaded = true;
                 if (!document.getElementById('uip-modal' + this.idSuffix)) {
-                    //push universal dom to body
+                    // push universal dom to body
                     document.body.appendChild(this.universalDomEle);
 
-                    //Icon library close by clicking close button
+                    // jadams, 2023-05-21: disable page scrolling if modal is OPEN
+                    document.body.classList.add('stop-scrolling');
+
+                    // Icon library close by clicking close button
                     this.universalDomEle.querySelector('.uip-modal--header-close-btn').addEventListener('click', () => {
                         this.universalDomEle.classList.add('uip-close');
                         this.universalDomEle.classList.remove('uip-open');
+                        // jadams, 2023-05-21: (re-)enable page scrolling if modal is CLOSED
+                        document.body.classList.remove('stop-scrolling');
                     });
 
-                    //Insert button
+                    // Insert button
                     this.universalDomEle.querySelector('.uip-insert-icon-button').addEventListener('click', () => {
                         let selected = this.universalDomEle.querySelector('.universal-selected');
 
@@ -183,9 +188,11 @@ const loadedDependencies = [];
                         this.universalDomEle.classList.remove('uip-open');
                     });
                 } else {
-                    //Icon library open if dom element exist
+                    // Icon library open if dom element exist
                     this.universalDomEle.classList.remove('uip-close');
                     this.universalDomEle.classList.add('uip-open');
+                    // jadams, 2023-05-21: disable page scrolling if modal is OPEN
+                    document.body.classList.add('stop-scrolling');
                 }
 
                 if (!this.iconEventsLoaded) {

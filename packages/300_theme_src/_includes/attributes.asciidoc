@@ -141,6 +141,7 @@ tag::urls[]
 
 :url-fontawesome--home:                           https://fontawesome.com/
 :url-fontawesome--icons:                          https://fontawesome.com/icons?d=gallery
+:url-fontawesome--free-preview:                   https://fontawesome.com/search?m=free&o=r
 :url-fontawesome--get-started:                    https://fontawesome.com/get-started
 :url-fontawesome-free--gh-repo:                   https://github.com/FortAwesome/Font-Awesome/
 :url-fsevents--gh-repo:                           https://github.com/fsevents/fsevents/
@@ -296,7 +297,13 @@ tag::urls[]
 
 :url-mdi--home:                                   https://materialdesignicons.com/
 :url-mdi--gh-repo:                                https://github.com/Templarian/MaterialDesign/
-:url-mdi--cheatsheet:                             https://pictogrammers.github.io/@mdi/font/5.9.55/
+:url-mdi--preview:                                https://pictogrammers.com/library/mdi/
+:url-mdi--cheatsheet:                             https://pictogrammers.github.io/@mdi/font/7.2.96/
+
+:url-mdil--home:                                  https://materialdesignicons.com/
+:url-mdil--gh-repo:                               https://github.com/Pictogrammers/MaterialDesignLight
+:url-mdil--preview:                               https://pictogrammers.com/library/mdil/
+:url-mdil--cheatsheet:                            https://pictogrammers.github.io/@mdi/font/7.2.96/
 
 :url-materialize--home:                           https://materializecss.com/
 :url-materialize--gh-repo:                        https://github.com/Dogfalo/materialize/

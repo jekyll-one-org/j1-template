@@ -1,0 +1,78 @@
+---
+title:                                  Icon Picker
+tagline:                                Select And Preview Font Icons
+date:                                   2023-05-20 00:00:00
+description: >
+                                        J1 Theme supports popular icons font sets out-of-the-box.
+                                        The icon sets Material Design Icons (MDI) and FontAwesome
+                                        (FA) are exellent in design and have a rich set of different
+                                        icons for many categories used for the Web.
+
+categories:                             [ Previewer ]
+tags:                                   [ Icon Sets, FA, MDI ]
+
+fab_menu_id:                            default
+
+permalink:                              /pages/public/previewer/icon-picker/
+regenerate:                             false
+
+resources:                              [ animate, clipboard, iconpicker ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/pages/roundtrip/icon-fonts-1920x1280-bw.jpg
+          alt:                          Icon Fonts
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+J1 Theme supports popular icons font sets out-of-the-box. The icon sets
+Material Design Icons (MDI) and FontAwesome (FA) are exellent in design
+and have a rich set of different icons for many categories used for the Web.
+
+The J1 Icon Picker supports the icons font sets:
+
+* link:{url-mdil--preview}[Material Design Icons (Light),  {browser-window--new}], 260+ icons of version v0.2.63 (Feb 2023)
+* link:{url-mdi--preview}[Material Design Icons (Regular), {browser-window--new}], 7200+ icons of version v7.2.96 (March 2023)
+* link:{url-fontawesome--free-preview}[FontAwesome Icons,  {browser-window--new}], 2000+ icons of version v6.4.0 (March 2023)
+
+[role="mt-4"]
+NOTE: The *free* version of FontAwesome does *not* support the full icon
+set available. The commercial Pro version supports *26.000+* icons but
+requires a *paid* subscription plan.
+
+++++
+<div class="mt-5 mb-4 d-grid gap-2">
+  <a  id="icon_picker" href="#"
+      class="btn btn-info btn-flex btn-lg"
+      aria-label="Icon Picker">
+      <i class="mdi mdi-emoticon mdi-2x mr-2"></i>
+      Open the icon picker
+  </a>
+</div>
+
+<div id="output" class="output-icon mt-3 mb-5">
+  <!-- p class="mt-3 mb-3"> Selected Icon </p -->
+</div>
+++++

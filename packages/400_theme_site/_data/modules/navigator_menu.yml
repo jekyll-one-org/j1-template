@@ -409,6 +409,9 @@
       - title:                          Current Theme
         href:                           /pages/public/previewer/current_theme/
         icon:                           theme-light-dark
+      - title:                          Icon Picker
+        href:                           /pages/public/previewer/icon-picker/
+        icon:                           emoticon-cool-outline
       - title:                          Image Placeholders
         href:                           /pages/public/previewer/image_placeholder/
         icon:                           image

@@ -87,13 +87,14 @@ j1.adapter.iconPicker = (function (j1, window) {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
-var environment           = '{{environment}}';
+var environment     = '{{environment}}';
 var iconPickerDefaults;
 var iconPickerSettings;
 var iconPickerOptions;
 var frontmatterOptions;
 var icon_picker;
-var icon_picker_button_id;
+var iconLibraries;
+var iconLibrariesCss;
 var _this;
 var logger;
 var logText;
@@ -132,6 +133,7 @@ var logText;
       _this  = j1.adapter.iconPicker;
       logger = log4javascript.getLogger('j1.adapter.iconPicker');
 
+
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
@@ -144,13 +146,35 @@ var logText;
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized on id: icon_picker');
+          logger.info('\n' + 'module is being initialized');
 
-          icon_picker_button_id = '#' + iconPickerDefaults.picker_button_id;
 
-          icon_picker = new UniversalIconPicker(icon_picker_button_id, {
-            iconLibraries:    iconPickerDefaults.iconLibraries,
-            iconLibrariesCss: iconPickerDefaults.iconLibrariesCss,
+          let txt = "";
+          iconPickerDefaults.iconLibraries.forEach(myFunction);
+
+          function myFunction(value, index, array) {
+            txt += '\'' + value + '\',';
+          }
+
+
+
+          iconLibraries     = JSON.stringify(iconPickerDefaults.iconLibraries);
+          var myString      = iconLibraries.replace(/^\[|\]$/g, '');
+
+//        var iconLibrariesJSON = iconLibraries.substring(1).substr(0, iconLibraries.length-1);
+//        iconLibrariesJSON = iconLibraries.substr(0, iconLibrariesJSON.length-1);
+//        iconLibraries = iconLibraries.substring(1, str.length - 1);
+//        iconLibraries = iconLibraries.substring(0, str.length - 1);
+
+          iconLibrariesCss  = JSON.stringify(iconPickerDefaults.iconLibrariesCss);
+
+          icon_picker = new UniversalIconPicker('#selector', {
+            iconLibraries:    [ txt ],
+            iconLibrariesCss: [
+              'https://cdn.jsdelivr.net/npm/@mdi/light-font@0.2.63/css/materialdesignicons-light.min.css',
+              'https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.2.96/css/materialdesignicons.min.css',
+              'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css',
+            ],
             onSelect: function(jsonIconData) {
               document.getElementById('output').innerHTML = jsonIconData.iconMarkup;
               console.log(jsonIconData);
