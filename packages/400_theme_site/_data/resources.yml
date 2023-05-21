@@ -1194,54 +1194,6 @@ resources:
         init_function:                  []
 
   # ----------------------------------------------------------------------------
-  # MDI Previewer, preview page (UI) for MDI icons
-  #
-  # See: https://materialdesignicons.com/
-  #
-  - name:                               MDI Previewer
-    resource:
-      enabled:                          true
-
-      id:                               mdi_previewer
-      comment:                          Module MDI Previewer
-      layout:                           [ page ]
-      region:                           head
-      required:                         ondemand
-      preload:                          false
-      script_load:                      defer
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            [ modules/mdiPreviewer/css/previewer ]
-        files:                          []
-        js:                             [ modules/mdiPreviewer/js/previewer ]
-        init_function:                  []
-
-  # ----------------------------------------------------------------------------
-  # MDIl Previewer, preview page (UI) for MDI icons (light)
-  #
-  # See: https://materialdesignicons.com/cdn/light/0.2.63/
-  #
-  - name:                               MDIL Previewer
-    resource:
-      enabled:                          true
-
-      id:                               mdil_previewer
-      comment:                          Module MDIL Previewer
-      layout:                           [ page ]
-      region:                           head
-      required:                         ondemand
-      preload:                          false
-      script_load:                      defer
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            [ modules/mdilPreviewer/css/previewer ]
-        files:                          []
-        js:                             [ modules/mdilPreviewer/js/previewer ]
-        init_function:                  []
-
-  # ----------------------------------------------------------------------------
   # Iconify Framework, JS API to use Iconify icons
   #
   # See: https://iconify.design/

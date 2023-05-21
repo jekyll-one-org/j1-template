@@ -29,6 +29,20 @@
       icon:                             paw
 
     # --------------------------------------------------------------------------
+    # Cheatsheet
+    #
+    - title:                            Cheatsheet
+      icon:                             book
+      dropdown:
+
+        - title:                        Git
+          href:                         /pages/public/learn/cheatsheet/git/
+          icon:                         git
+        - title:                        Gem
+          href:                         /pages/public/learn/cheatsheet/gem/
+          icon:                         language-ruby
+
+    # --------------------------------------------------------------------------
     # Roundtrip
     #
     - title:                            Roundtrip
@@ -130,6 +144,13 @@
     # --------------------------------------------------------------------------
     # Modules
     #
+
+    - title:                            Where to go
+      href:                             https://jekyll.one/pages/public/manuals/where_to_go/
+      icon:                             paw
+      target:                           _blank
+
+
     - title:                            Modules
       icon:                             alpha-j-box
       dropdown:
@@ -137,49 +158,58 @@
         - title:                        Master Header
           href:                         https://jekyll.one/pages/public/manuals/modules/attic/
           icon:                         window-shutter
+          target:                       _blank
         - title:                        Carousel
           href:                         https://jekyll.one/pages/public/manuals/modules/carousel/
           icon:                         view-carousel
+          target:                       _blank
         - title:                        Cookie Consent
           href:                         https://jekyll.one/pages/public/manuals/modules/cookie_consent/
-#         href:                         '#'
           icon:                         cookie
+          target:                       _blank
         - title:                        Galleries
           href:                         https://jekyll.one/pages/public/manuals/modules/gallery/
           icon:                         view-dashboard-variant
+          target:                       _blank
         - title:                        Lightbox
           href:                         https://jekyll.one/pages/public/manuals/modules/lightbox/
           icon:                         flashlight
+          target:                       _blank
         - title:                        Logger
           href:                         https://jekyll.one/pages/public/manuals/modules/logger/
           icon:                         math-log
         - title:                        Master Slider
           href:                         https://jekyll.one/pages/public/manuals/modules/masterslider/
           icon:                         gesture-swipe
+          target:                       _blank
         - title:                        Mobile Menu
           href:                         https://jekyll.one/pages/public/manuals/mmenu/
           icon:                         menu
+          target:                       _blank
         - title:                        MSDropdown
           href:                         https://jekyll.one/pages/public/manuals/msdropdown/
           icon:                         form-dropdown
+          target:                       _blank
         - title:                        Navigator
           href:                         https://jekyll.one/pages/public/manuals/modules/navigator/
-#         href:                         '#'
+          target:                       _blank
           icon:                         near-me
         - title:                        Range Slider
           href:                         https://jekyll.one/pages/public/manuals/modules/rangeslider/
           icon:                         distribute-vertical-center
+          target:                       _blank
         - title:                        Code Hightlighter Rouge
           href:                         https://jekyll.one/pages/public/manuals/rouge/user_guide/
           icon:                         format-color-fill
+          target:                       _blank
         - title:                        Themer
           href:                         https://jekyll.one/pages/public/manuals/modules/themer/
-#         href:                         '#'
           icon:                         theme-light-dark
+          target:                       _blank
         - title:                        Toccer
           href:                         https://jekyll.one/pages/public/manuals/modules/toccer/
-#         href:                         '#'
           icon:                         wrap
+          target:                       _blank
 
     # --------------------------------------------------------------------------
     # J1 Components
@@ -193,8 +223,6 @@
           href:                         '#'
           icon:                         garage
         - title:                        Layouts
-#         href:                         https://jekyll.one/pages/public/manuals/j1/layouts/
-#         href:                         '#'
           href:                         https://jekyllrb.com/docs/layouts/
           icon:                         page-layout-body
           target:                       _blank
@@ -206,9 +234,11 @@
             - title:                    Banner And Panel
               href:                     https://jekyll.one/pages/public/manuals/j1/blocks/banner_panel/
               icon:                     order-bool-descending
+              target:                   _blank
             - title:                    Footer
               href:                     https://jekyll.one/pages/public/manuals/j1/blocks/footer/
               icon:                     order-bool-ascending
+              target:                   _blank
 
         - title:                        Content
           icon:                         file
@@ -217,13 +247,16 @@
             - title:                    Pages
               href:                     https://jekyll.one/pages/public/manuals/j1/content/pages/
               icon:                     file-document
+              target:                   _blank
             - title:                    Posts
               href:                     https://jekyll.one/pages/public/manuals/j1/content/posts/
               icon:                     file-delimited
+              target:                   _blank
 
 #           - title:                    Collections
 #             href:                     https://jekyll.one/pages/public/manuals/j1/content/collections/
 #             icon:                     file-percent
+#             target:                   _blank
 
     # --------------------------------------------------------------------------
     # J1 Integrations
@@ -288,6 +321,7 @@
             - title:                    Asciidoctor
               href:                     https://jekyll.one/pages/public/manuals/j1/plugins/asciidoctor/
               icon:                     hospital
+              target:                   _blank
             - title:                    J1 Paginator
 #             href:                     https://jekyll.one/pages/public/manuals/j1/plugins/j1_paginator/
               href:                     '#'
@@ -306,12 +340,18 @@
       icon:                             toolbox
       dropdown:
 
+        - title:                        HTML Validation
+          href:                         https://jekyll.one/pages/public/toolbox/html_validation/
+          icon:                         language-html5
+          target:                       _blank
         - title:                        Pandoc
-          href:                         https://jekyll.one/pages/public/manuals/pandoc/
+          href:                         https://jekyll.one/pages/public/toolbox/pandoc/
           icon:                         cog-transfer
-        - title:                        Platform Info
-          href:                         https://jekyll.one/pages/public/manuals/platform/
+          target:                       _blank
+        - title:                        Platform
+          href:                         https://jekyll.one/pages/public/toolbox/platform/
           icon:                         folder-information
+          target:                       _blank
 
         # ----------------------------------------------------------------------
         # AsciiDoc
@@ -343,17 +383,21 @@
           dropdown:
 
             - title:                    Liquid
-              href:                     https://jekyll.one/pages/public/manuals/liquid/user_guide/
+              href:                     https://jekyll.one/pages/public/toolbox/liquid/
               icon:                     mustache
+              target:                   _blank
             - title:                    Commandline
-              href:                     https://jekyll.one/pages/public/manuals/jekyll/user_guide/commandline/
+              href:                     https://jekyll.one/pages/public/toolbox/jekyll/commandline/
               icon:                     console-line
+              target:                   _blank
             - title:                    Configuration
-              href:                     https://jekyll.one/pages/public/manuals/jekyll/user_guide/configuration/
+              href:                     https://jekyll.one/pages/public/toolbox/jekyll/configuration/
               icon:                     code-braces
+              target:                   _blank
             - title:                    Time and Date formats
-              href:                     https://jekyll.one/pages/public/manuals/jekyll/user_guide/date_formats/
+              href:                     https://jekyll.one/pages/public/toolbox/jekyll/date_time_formats/
               icon:                     calendar-blank
+              target:                   _blank
 
     # --------------------------------------------------------------------------
     # Previewers
@@ -365,36 +409,46 @@
       - title:                          Current Theme
         href:                           /pages/public/previewer/current_theme/
         icon:                           theme-light-dark
-
+      - title:                          Icon Picker
+        href:                           /pages/public/previewer/icon-picker/
+        icon:                           emoticon-cool-outline
       - title:                          Image Placeholders
         href:                           /pages/public/previewer/image_placeholder/
         icon:                           image
-      - title:                          Slick
-        href:                           /pages/public/previewer/slick/
-        icon:                           view-carousel
-      - title:                          Masonry
-        href:                           /pages/public/previewer/masonry/
-        icon:                           view-dashboard-variant
 
+      - title:                          Slick
+        href:                           https://jekyll.one/pages/public/previewer/slick/
+        icon:                           view-carousel
+        target:                         _blank
+      - title:                          Masonry
+        href:                           https://jekyll.one/pages/public/previewer/masonry/
+        icon:                           view-dashboard-variant
+        target:                         _blank
       - title:                          MD Color Palette
         href:                           https://jekyll.one/pages/public/previewer/color_palette/
         icon:                           format-color-fill
+        target:                         _blank
       - title:                          Master Slider
         href:                           https://jekyll.one/pages/public/previewer/masterslider/
         icon:                           gesture-swipe
+        target:                         _blank
       - title:                          Country Flags
         href:                           https://jekyll.one/pages/public/previewer/country_flags/
         icon:                           flag
+        target:                         _blank
       - title:                          MDI Icons (regular)
         href:                           https://jekyll.one/pages/public/previewer/mdi_font/
         icon:                           sprout
+        target:                         _blank
       - title:                          MDI Icons (light)
         href:                           https://jekyll.one/pages/public/previewer/mdil_font/
         icon:                           sprout-outline
+        target:                         _blank
         icon:                           emoticon-cool-outline
       - title:                          Rouge Styles
         href:                           https://jekyll.one/pages/public/previewer/rouge/
         icon:                           code-parentheses
+        target:                         _blank
 
 # ------------------------------------------------------------------------------
 # Menu ONLINE
@@ -509,28 +563,31 @@
     - title:                            Tools
       icon:                             wrench
       column:
+
         - title:                        FreeFormatter
           href:                         http://www.freeformatter.com/
-          target:                       _blank
-          icon:                         cached
-        - title:                        BeautifyTools
-          href:                         https://beautifytools.com/
           target:                       _blank
           icon:                         cached
         - title:                        AppDevTools
           href:                         https://www.appdevtools.com/
           target:                       _blank
           icon:                         cached
+
+        - title:                        W3C Validator
+          href:                         https://validator.w3.org/
+          target:                       _blank
+          icon:                         language-html5
         - title:                        Nu Html Checker
           href:                         https://validator.w3.org/nu/
           target:                       _blank
           icon:                         language-html5
+
         - title:                        Closing Tag Checker
           href:                         https://www.aliciaramirez.com/closing-tags-checker/
           target:                       _blank
           icon:                         language-html5
         - title:                        Convert CSS to Sass
-          href:                         http://sebastianpontow.de/css2compass/
+          href:                         https://www.cssportal.com/css-to-scss/
           target:                       _blank
           icon:                         language-css3
         - title:                        CSS Matic Tools
@@ -546,7 +603,7 @@
           target:                       _blank
           icon:                         code-braces
         - title:                        Character Codes
-          href:                         http://character-code.com/
+          href:                         https://html.spec.whatwg.org/multipage/named-characters.html
           target:                       _blank
           icon:                         alpha-a-box-outline
         - title:                        RegEx 101
@@ -557,7 +614,6 @@
           href:                         http://www.regexlib.com/
           target:                       _blank
           icon:                         regex
-
 
 # ------------------------------------------------------------------------------
 # Menu Themes

@@ -390,11 +390,13 @@
       - title:                          Current Theme
         href:                           /pages/public/previewer/current_theme/
         icon:                           theme-light-dark
-
-      - title:                          Placeholder Images
-        href:                           https://jekyll.one/pages/public/previewer/placeholder_images/
+      - title:                          Icon Picker
+        href:                           /pages/public/previewer/icon-picker/
+        icon:                           emoticon-cool-outline
+      - title:                          Image Placeholders
+        href:                           /pages/public/previewer/image_placeholder/
         icon:                           image
-        target:                         _blank
+
       - title:                          Slick Slider
         href:                           https://jekyll.one/pages/public/previewer/slick/
         icon:                           view-carousel
@@ -403,7 +405,6 @@
         href:                           https://jekyll.one/pages/public/previewer/masonry/
         icon:                           view-dashboard-variant
         target:                         _blank
-
       - title:                          MD Color Palette
         href:                           https://jekyll.one/pages/public/previewer/color_palette/
         icon:                           format-color-
