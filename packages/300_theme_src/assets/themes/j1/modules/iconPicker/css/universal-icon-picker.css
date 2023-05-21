@@ -1,3 +1,19 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/theme_uno/modules/iconPicker/css/universal-icon-picker.css
+ # UniversalIconPicker v.1.1.0 implementation for J1 Theme
+ #
+ # Product/Info:
+ # https://jekyll.one
+ # https://github.com/migliori/universal-icon-picker
+ #
+ # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2023 Gilles Migliori
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
 .uip-modal {
   position: fixed;
   height: 100%;
