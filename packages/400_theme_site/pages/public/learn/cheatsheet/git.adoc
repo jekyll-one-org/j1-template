@@ -61,6 +61,45 @@ and options in the official Git documentation.
 
 == Git status colors
 
+In the Git version control system, the output of the git status command can
+be displayed with different colors to provide visual cues about the state of
+your repository. The colors help you quickly identify modified, added,
+deleted, or untracked files, among other things. The specific colors used
+can depend on your terminal configuration, but here are the default colors
+commonly used by Git:
+
+* Untracked files: Untracked files are displayed in red color by default.
+  These are files that Git is not currently tracking.
+* Modified files: Modified files are displayed in green color by default.
+  These files have been modified but still need to be staged for commit.
+* Staged files: Staged files, ready to be committed, are usually displayed
+  in a different color from modified files. By default, staged files are
+  not assigned a specific color, but they appear in a separate section
+  from modified files.
+* Renamed or moved files: Renamed or moved files are displayed in green,
+  indicating that they have been renamed or moved since the last commit.
+* Deleted files: Deleted files are displayed in red, indicating that they
+  have been removed from the repository.
+* Unmerged files: Unmerged files, resulting from conflicts during a merge
+  operation, are typically displayed in a different color, such as yellow or purple.
+
+It's important to note that the actual colors displayed may vary depending
+on your terminal configuration and settings. You can customize the colors
+used by Git by modifying your terminal's color scheme or configuring
+Git-specific color options in your Git configuration file (~/.gitconfig).
+
+[source, ini]
+----
+[color "status"]
+  ignored = grey
+  added = yellow
+  changed = green
+  deleted = red
+  new = orange
+  untracked = magenta
+----
+
+.Default color scheme
 [cols="4a,8a", options="header", width="100%", role="rtable mt-3"]
 |===
 |Color |Description
@@ -83,6 +122,12 @@ and options in the official Git documentation.
 |===
 
 == Common Aliases (~/.gitconfig)
+
+Git aliases allow you to create shortcuts or alternative names for Git
+commands and workflows, making it easier and faster to execute common
+operations. You can define aliases in your Git configuration file
+(~/.gitconfig), either globally for all repositories or locally for a
+specific repository.
 
 [source, ini]
 ----
@@ -112,6 +157,7 @@ and options in the official Git documentation.
 	pu 	= push
 ----
 
+[role="mt-3"]
 == Branch commands
 
 Git is a distributed version control system that allows you to manage
@@ -234,6 +280,15 @@ git checkout -b dummy origin/dummy_branch
 git checkout 4b4690d00
 ----
 
+|`checkout -b <branch-name> <commit hash>`
+|Checkout from a *previously* created (existing) commit `<commit hash>`
+to a new *local* branch `<branch-name>`.
+|
+[source.sh]
+----
+git checkout -b new_branch 4b4690d00
+----
+
 |`checkout <tag name>`
 |Checkout a branch based on a *tag* in a detached HEAD state.
 |
@@ -243,7 +298,7 @@ git checkout v2023.2.6
 ----
 
 |`checkout -b <branch-name> <tag-name>`
-|Checkout a *new* branch based on a *tag*.
+|Checkout a *new* local branch `<branch-name>` based on a *tag*.
 |
 [source.sh]
 ----
@@ -252,7 +307,20 @@ git checkout -b b2023.2.6 v2023.2.6
 
 |===
 
+.Detached HEAD state
+[TIP]
+====
+In Git, the *detached HEAD* state refers to a situation where the
+currently checked out commit is *not* associated with a *branch*. Instead
+of being on a branch, the HEAD points directly to a specific *commit*.
 
+When you typically work on a branch in Git, the HEAD is associated with that
+branch, and any new commits you create will be added to the branch's history.
+However, in a detached HEAD state, any new commits you create will not be
+part of any branch. The HEAD points directly to the commit.
+====
+
+[role="mt-4"]
 == Cherry Pick Commands
 
 The `git cherry-pick` command is used to apply *specific commits* from
@@ -408,7 +476,7 @@ Here’s what each part of the command means:
   repository will be cloned. Git will create a new directory using the
   repository's name if not specified.
 
-
+[role="mt-4"]
 == Commit Commands
 
 The git `commit` command is used to record *changes* to the repository. It
@@ -526,7 +594,7 @@ used Git config commands:
 * `git config --local` – Customize settings that are Git repository
   specific and overwrite Git configurations on the global and system level.
 
-
+[role="mt-4"]
 == Merge Commands
 
 When using Git, several commands are available to perform a merge operation.
@@ -535,24 +603,76 @@ The most commonly used commands for merging branches are `git merge` and
 
 Here's an overview of these commands:
 
-* git merge – Combine two or more development histories together. Used in
-  combination with fetch, this will combine the fetched
-  history from a remote branch into the currently checked out local branch.
-* git merge <branch-name> – Merge changes from one branch into the branch you
-  currently have checked out.
-* git merge --abort – Aborts the merge process and restores  project’s state
-  to before the merge was attempted. This works as a failsafe when a conflict
-  occurs.
-* git merge --continue – Attempt to complete a merge that was stopped due to
-  file conflicts after resolving the merge conflict.
-* git merge --squash – Combine all changes from the branch being
-  merged into a single commit rather than preserving them as individual
-  commits.
-* git merge --no-commit – Combine branch into the current branch, but do
-  not make a new commit.
-* git merge --no-ff – Creates a merge commit instead of attempting a fast-forward.
+[cols="3a, 4a, 5a", options="header", width="100%", role="rtable mt-3 mb-3"]
+|===
+|Command |Description |Example
 
-NOTE: These are the basic commands for merging branches in Git. Additionally,
+|`merge`
+|Combine two or more development histories together. Used in
+combination with fetch, this will combine the fetched history
+from a remote branch into the currently checked out local branch.
+|
+[source.sh]
+----
+git merge
+----
+
+|`merge <branch-name>`
+|Merge changes from one branch into the branch you currently
+have checked out.
+|
+[source.sh]
+----
+git merge develop
+----
+
+|`merge --abort`
+|Aborts the merge process and restores  project’s state
+to before the merge was attempted. This works as a failsafe when
+a conflict occurs.
+|
+[source.sh]
+----
+git merge --abort develop
+----
+
+|`merge --continue`
+|Attempt to complete a merge that was stopped due to file conflicts
+after *resolving* the merge *conflict*.
+|
+[source.sh]
+----
+git merge --continue develop
+----
+
+|`merge --squash`
+|Combine all changes from the branch being merged into a single
+commit rather than preserving them as individual commits.
+|
+[source.sh]
+----
+git merge --squash
+----
+
+|`merge --no-commit`
+|Combine branch into the current branch, but do not make a new commit.
+|
+[source.sh]
+----
+git merge --no-commit develop
+----
+
+|`merge --no-ff`
+|Creates a merge commit instead of attempting a *fast-forward*.
+|
+[source.sh]
+----
+git merge --no-ff develop
+----
+
+|===
+
+TIP: These are the basic commands for merging branches in Git. Additionally,
 you can use some more options and flags with these commands to modify their
 behavior. I recommend consulting the Git documentation for a more comprehensive
 understanding of the available options and scenarios where merging can be
@@ -561,33 +681,55 @@ used effectively.
 [role="mt-4"]
 == Pull Commands
 
-The `git pull` command fetches and merges changes from a remote repository
-into the *current branch*. Here's an overview of the `git pull` command and
+The `git pull` command *fetches* and *merges* changes from a remote repository
+into the *current branch*. Here's an overview of the `pull` command and
 its commonly used options:
 
-* git pull – This will perform a `git fetch` followed by a
-  `git merge FETCH_HEAD`, and will allow you to fetch from and integrate
-  with another repository or a local branch.
-* git pull --quiet – Suppress the output text after both `git fetch`
-  and `git merge`.
-* git pull --verbose – Expand the output text after both `git fetch`
-  and `git merge`.
+[cols="3a, 4a, 5a", options="header", width="100%", role="rtable mt-3 mb-3"]
+|===
+|Command |Description |Example
 
-=== Pull Commands related to a merge
+|`pull`
+|This command fetches, and merges changes from the *remote* repository into
+your current *local* branch.
+|
+[source.sh]
+----
+git pull
+----
+
+|`pull --quiet`
+|Suppress the output text after both `git fetch` and `git merge`.
+|
+[source.sh]
+----
+git pull --quiet
+----
+|`pull --verbose`
+|Expand the output text after both `git fetch` and `git merge`.
+|
+[source.sh]
+----
+git pull --verbose
+----
+
+|===
+
+=== Commands related to a `merge`
 
 When performing a `git pull` command, you typically *fetch and merge* the
 latest changes from a remote repository into your current branch. Here
 are some common scenarios related to merging during a `pull`:
 
-* git pull --squash – Combine all changes from the branch being
+* `git pull --squash` – Combine all changes from the branch being
   merged into a single commit, rather than preserving the individual
   commits.
-* git pull --no-commit – Combine the currently checked out
+* `git pull --no-commit` – Combine the currently checked out
   branch with the remote upstream branch.
-* git pull --no-ff –  Create a merge commit in all cases, even
+* `git pull --no-ff` –  Create a merge commit in all cases, even
   when the merge could instead be resolved as a fast-forward.
 
-=== Pull Commands related to a fetch
+=== Commands related to a `fetch`
 
 When using Git, the `git pull` command *fetches and merges* changes from a
 remote repository into your local repository. It combines the `git fetch`
@@ -597,15 +739,16 @@ the `git merge` command (to incorporate those changes into your local branch).
 Here are some `git pull` commands and related options you can use in
 different scenarios:
 
-* git pull --all  – Fetch all remotes. 
-* git pull --depth=<depth – Fetch a limited number of commits. 
-* git pull --dry-run – Show the action that would be completed
+* `git pull --all`  – Fetch all remotes. 
+* `git pull --depth=<depth>` – Fetch a limited number of commits. 
+* `git pull --dry-run` – Show the action that would be completed
   without actually making changes to your repo.
-* git pull --prune – Remove all remote references that no longer
+* `git pull --prune` – Remove all remote references that no longer
   exist on the remote.
-* git pull --no-tags – Do not fetch tags.
+* `git pull --no-tags` – Do not fetch tags.
 
 
+[role="mt-4"]
 == Push Commands
 
 The `git push` command *uploads* local repository commits to a *remote*
@@ -613,20 +756,59 @@ repository. It is used to share your changes with others or to update
 a remote repository with your latest work. Here's an overview of the `push`
 command and its commonly used options:
 
-* git push – Push the current checked out branch to the default
-  remote `origin`. 
-* git push <remote> <branch> – Push the specified branch along
-  with all of its necessary commits to your destination remote
-  repository. 
-* git push <remote> --force – Force a Git push in a
-  non-fast-forward merge. This option forces the update of a remote ref
-  even when that is not the ancestor of the local ref. This can cause the
-  remote repository to loose commits, so use with care.
-* git push <remote> --all – Push all local branches to a specified remote.
-* git push <remote> --tags – Push all local tags to a specified
-  remote. Tags are not automatically sent when using `--all`.
+[cols="3a, 4a, 5a", options="header", width="100%", role="rtable mt-3 mb-3"]
+|===
+|Command |Description |Example
+
+|`push`
+|Push the current checked out branch to the *default* remote `origin`. 
+|
+[source.sh]
+----
+git push
+----
+
+|`push <remote> <branch>`
+|Push the specified *local* branch along with all of its necessary commits
+to your destination *remote* repository. 
+|
+[source.sh]
+----
+git push origin main
+----
+
+|`push <remote> --force`
+|Force a Git push in a non-fast-forward merge. This option forces
+the update of a remote ref even when that is not the ancestor of the
+local ref. This can cause the remote repository to loose commits,
+so use with care.
+|
+[source.sh]
+----
+git push <remote> --force
+----
+
+|`push <remote> --all`
+|Push *all* local branches to a specified remote.
+|
+[source.sh]
+----
+git push <remote> --all
+----
+
+|`git push <remote> --tags`
+|Push all local tags to a specified remote (can ommitted for *default* remote).
+Note that tags are *not* automatically sent when using `--all`.
+|
+[source.sh]
+----
+git push origin --tags
+----
+
+|===
 
 
+[role="mt-4"]
 == Rebase Commands
 
 The `git rebase` command that integrates changes from one branch onto
@@ -635,24 +817,63 @@ moving, combining, or deleting commits.
 
 Here are some commonly used Git rebase commands:
 
-* git rebase <target branch name> – Rebase your currently
-  checked out branch onto a target branch. This rewrites a commit(s) from
-  the source branch and applies it on the top of the target branch.
-* git rebase --continue – Proceed with a Git rebase] after you
-  have resolved a conflict between files.
-* git rebase --skip – Skip an action that results in a conflict
-  to proceed with a Git rebase.
-* git rebase --abort  – Cancel a Git rebase. Your branch will be
-  back in the state it was before you started the rebase.
-* git rebase <target branch name> -i – Initiate interactive
-  rebase from your currently checked out branch onto a target branch.
+[cols="3a, 4a, 5a", options="header", width="100%", role="rtable mt-3 mb-3"]
+|===
+|Command |Description |Example
 
-NOTE: The command `rebase` is a flexible way to *manipulate* the commit
+|`rebase <target branch name>`
+|Rebase your currently checked out branch onto a target branch.
+This rewrites a commit(s) from the source branch and applies it on
+the top of the target branch.
+|
+[source.sh]
+----
+git rebase <target branch name>
+----
+
+|`rebase --continue`
+|Proceed with a Git rebase after you have resolved a conflict
+between files.
+|
+[source.sh]
+----
+git rebase --continue
+----
+
+|`rebase --skip`
+|Skip an action that results in a conflict to proceed with a Git rebase.
+|
+[source.sh]
+----
+git rebase --skip
+----
+
+|`rebase --abort`
+|Cancel a Git rebase. Your branch will be back in the state it was
+before you started the rebase.
+|
+[source.sh]
+----
+git rebase --abort
+----
+
+|`rebase <target branch name> -i`
+|Initiate interactive rebase from your currently checked
+out branch onto a target branch.
+|
+[source.sh]
+----
+git rebase <target branch name> -i
+----
+
+|===
+
+CAUTION: The command `rebase` is a flexible way to *manipulate* the commit
 *history*. Still, it's important to use it *cautiously*, especially when
 working on *shared* branches (like the *main* branch), as it rewrite the
 commit history and potentially cause issues for other collaborators.
 
-
+[role="mt-4"]
 == Stash Commands
 
 Git stash is a command that *temporarily* saves *changes* you have made to
@@ -661,22 +882,73 @@ apply the changes *later*.
 
 Here are some commonly used stash commands:
 
-* git stash – Create a stash with local modifications and revert
-  back to the head commit.
-* git stash list – Display a list of all stashes in your
-  repository.
-* git stash show – View the content of your most recent stash.
-  This will show your stashed changes as a diff between the stashed
-  content and the commit from back when the stash was created.
-* git stash drop <stash> – Remove a stash from the list of
-  stashes in your repository.
-* git stash pop <stash> – Apply a stash to the top of the
-  current working tree and remove it from your list of stashes.
-* git stash apply <stash> – Apply a stash on top of the current
-  working tree. The stash will not be removed from your list of stashes.
-* git stash clear – Remove all stashes from your repository.
+[cols="3a, 4a, 5a", options="header", width="100%", role="rtable mt-3 mb-3"]
+|===
+|Command |Description |Example
 
-NOTE: Stashing is useful when *switching* branches or *temporarily*
+|`stash`
+|Create a stash with local modifications and revert back to the head commit.
+|
+[source.sh]
+----
+git stash
+----
+
+|`stash list`
+|Display a list of all stashes in your repository.
+|
+[source.sh]
+----
+git stash list
+----
+
+|`stash show`
+|View the content of your most recent stash. This will show your
+stashed changes as a diff between the stashed content and the commit
+from back when the stash was created.
+|
+[source.sh]
+----
+git stash show
+----
+
+|`stash drop <stash>`
+|Remove a stash from the list of stashes in your repository.
+|
+[source.sh]
+----
+git stash drop <stash>
+----
+
+|`stash pop <stash>`
+|Apply a stash to the top of the current working tree and remove
+it from your list of stashes.
+|
+[source.sh]
+----
+git stash pop <stash>
+----
+
+|`stash apply <stash>`
+|Apply a stash on top of the current working tree. The stash
+will not be removed from your list of stashes.
+|
+[source.sh]
+----
+git stash apply <stash>
+----
+
+|`stash clear`
+|Remove all stashes from your repository.
+|
+[source.sh]
+----
+git stash clear
+----
+
+|===
+
+TIP: Stashing is useful when *switching* branches or *temporarily*
 setting aside your changes *without committing* them. It allows you to
 work on different tasks or switch contexts without losing your current work.
 
