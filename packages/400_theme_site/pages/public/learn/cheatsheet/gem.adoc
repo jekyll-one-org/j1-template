@@ -3,10 +3,10 @@ title:                                  Gem Cheatsheet
 tagline:                                Commands for daily use
 date:                                   2023-05-19 00:00:00 +100
 description: >
-                                        Welcome to the info pages of J1 Theme. A good decision
-                                        to get on that page first. Certainly, there is no better
-                                        place to learn what J1 Theme can do and what pages are
-                                        available to experience more.
+                                        RubyGems is a package manager for the Ruby programming language. It provides
+                                        a convenient way to distribute and manage software packages, called gems,
+                                        written in Ruby. With RubyGems, developers can easily install, uninstall, and
+                                        manage Ruby libraries and applications.
 keywords: >
                                         Jekyll, Theme, JekyllOne, Info, Manual, Cheatsheet, Ruby, Gem
 
@@ -22,7 +22,7 @@ image:
 regenerate:                             false
 permalink:                              /pages/public/learn/cheatsheet/gem/
 
-resources:                              [ animate, comments, clipboard, rouge ]
+resources:                              [ animate, clipboard, rouge ]
 resource_options:
   - attic:
       slides:
@@ -55,12 +55,52 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [role="dropcap"]
-Welcome to the info pages of J1 Theme. A good decision to get on that page
-first. Certainly, there is no better place to learn what J1 Theme can do
-and what pages are available to experience more.
+RubyGems is a package manager for the Ruby programming language. It provides
+a convenient way to distribute and manage software packages, called GEMs,
+written in Ruby. With RubyGems, developers can easily install, uninstall, and
+manage Ruby libraries and applications. It simplifies obtaining and managing
+the dependencies needed for a Ruby project by automatically resolving and
+installing the GEMs required.
+
+NOTE: The term `gem` is related to the *tool* provided by RubyGems. `GEM`
+(capital letters) means the *library* to be managed by the command `gem`
+at the command line.
+
+RubyGems also provides a centralized *repository*, the RubyGems website
+at https://rubygems.org/[rubygems.org, {browser-window--new}], where developers
+can publish their *GEMs* for others to use. The website serves as a searchable
+catalog of available GEMs, allowing developers to discover and download GEMs
+for their projects.
+
+TIP: In addition to the default RubyGems repository, developers can
+configure their GEM sources or specify alternative sources when installing
+GEMs. This flexibility allows private GEM repositories or custom sources to
+be used as needed.
+
+RubyGems comes pre-installed with a Ruby installation. It provides
+a command-line interface, the `gem` command, for performing various
+operations, such as installing GEMS, listing installed libraries,
+updating GEMs, and managing library sources.
+
+Here are *common* commands you can use with the `gem` command:
+
+* *install*     -- Installs a GEM from the default RubyGems repository
+* *uninstall*   -- Uninstalls a GEM
+* *update*      -- Updates installed GEMs to their latest versions
+* *search*      -- Searches for GEMs matching a specific term
+* *list*        -- Lists all installed GEMs
+* *info*        -- Provides information about a specific GEM
+* *cleanup*     -- Removes old versions of installed GEMs, keeping only the latest version
+
+The following examples give your a good overview of the most *common*
+commands managin Ruby GEMs for daily use. All examples are focussing the *J1*
+template to make it easier for users using the template system. Anyway, all
+commands can be used for *any* Ruby Appication by simply replacing the *name*
+of the GEM as you need.
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
+[role="mt-5"]
 == Update Rubygems
 
 [source, sh]
@@ -70,7 +110,16 @@ update_rubygems
 gem update --system
 ----
 
-== Install a Ruby Gem
+[role="mt-5"]
+== Install commands
+
+The `gem install` command installs software packages (libraries)
+in the Ruby programming language. The command will then search for the GEM
+specified on the _RubyGems_ website (or the configured GEM repository),
+download it, and install it on your system.
+
+
+=== Install from a Gemfile
 
 Add this line to your application's Gemfile:
 
@@ -86,7 +135,7 @@ and install the locally created RubGem as:
 gem install --local j1-template --no-document
 ----
 
-== Userized Installation
+=== Userized Installation
 
 When you use the **--user-install option**, RubyGems will install the gems
 to a directory inside your home directory, someth
@@ -116,14 +165,15 @@ You can also use version comparators like >= or ~>
 gem install j1-template -v "~> 2023.3.2" --user-install --no-document
 ----
 
-=== Install a Gem from different source
+=== Install a Gem from a different source
 
 [source, sh]
 ----
 gem install j1-template -v 2023.3.2 --source 'https://gem.fury.io/jekyll-one-org/' --user-install --no-document
 ----
 
-### Clean up old Gem versions on GEM_PATH
+[role="mt-5"]
+== Clean up old GEM versions (on GEM_PATH)
 
 To clean up old versions of installed gems use below command
 

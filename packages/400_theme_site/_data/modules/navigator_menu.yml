@@ -35,6 +35,9 @@
       icon:                             book
       dropdown:
 
+        - title:                        YAML
+          href:                         /pages/public/learn/cheatsheet/yaml/
+          icon:                         alpha-y-box-outline
         - title:                        Git
           href:                         /pages/public/learn/cheatsheet/git/
           icon:                         git

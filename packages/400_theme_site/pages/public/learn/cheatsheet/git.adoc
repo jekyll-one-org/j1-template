@@ -22,7 +22,7 @@ image:
 regenerate:                             false
 permalink:                              /pages/public/learn/cheatsheet/git/
 
-resources:                              [ animate, comments, clipboard, rouge ]
+resources:                              [ animate, clipboard, rouge ]
 resource_options:
   - attic:
       slides:
@@ -125,40 +125,38 @@ Git-specific color options in your Git configuration file (~/.gitconfig).
 
 Git aliases allow you to create shortcuts or alternative names for Git
 commands and workflows, making it easier and faster to execute common
-operations. You can define aliases in your Git configuration file
-(~/.gitconfig), either globally for all repositories or locally for a
+operations. You can define aliases in your personal Git configuration file
+`~/.gitconfig`, either globally for all repositories or locally for a
 specific repository.
 
 [source, ini]
 ----
 [alias]
-	aa 	= add .
-	st 	= status
-	sts = status -b -s
-	cm 	= commit -am
-	cs 	= commit --amend --no-edit
-	ce 	= commit --amend
-	cr 	= reset HEAD~1 --soft
-	cd 	= reset HEAD~1 --hard
-	cl 	= clone
-	br 	= branch
-	co 	= checkout
-	la 	= ls-files
-	ll 	= ls-tree --full-tree -r --name-only HEAD
-	lg 	= log --stat
-	df 	= diff
-	he 	= help
-	dw 	= diff --word-diff
-	ra 	= rm -r --cached .
-	rf 	= rm -rf --cached .
-	hi 	= log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
-	ty 	= 'cat-file'
-	dp 	= 'cat-file'
-	pu 	= push
+  ad 	= add .
+  br 	= branch
+  co 	= commit -am
+  cs 	= commit --amend --no-edit
+  ce 	= commit --amend
+  cr 	= reset HEAD~1 --soft
+  cd 	= reset HEAD~1 --hard
+  cl 	= clone
+  ck 	= checkout
+  df 	= diff
+  dw 	= diff --word-diff
+  he 	= help
+  hi 	= log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+  la 	= ls-files
+  ll 	= ls-tree --full-tree -r --name-only HEAD
+  lg 	= log --stat
+  pu 	= push
+  rm 	= rm -r --cached .
+  rf 	= rm -rf --cached .
+  st 	= status
+  ty 	= 'cat-file'
 ----
 
 [role="mt-3"]
-== Branch commands
+== Branch
 
 Git is a distributed version control system that allows you to manage
 multiple code branches within a repository. A branch in is used to keep
