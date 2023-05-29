@@ -679,6 +679,7 @@ j1.adapter.attic = (function (j1, window) {
           //
           $('#content').addClass('mt-3');
           logger.warn('\n' + 'attic on id {{attic_id}}: disabled');
+          $('#no_flicker').css('display', 'block');
         {% endif %} // END if header enabled
       {% endfor %} // END for item in header_config.attics
 
