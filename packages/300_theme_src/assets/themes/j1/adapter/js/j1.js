@@ -410,7 +410,9 @@ var j1 = (function (options) {
 
       var dependencies_met_page_loaded = setInterval (function () {
         if (j1.getState() == 'finished') {
-          j1.registerEvents(logger);
+          // register observers
+          //
+          j1.registerMonitors();
         }
         clearInterval(dependencies_met_page_loaded);
       }, 25); // END dependencies_met_page_loaded
@@ -2513,12 +2515,13 @@ var j1 = (function (options) {
     }, // END stringToBoolean
 
     // -------------------------------------------------------------------------
-    // registerEvents()
+    // registerMonitors()
     //
     // -------------------------------------------------------------------------
-    registerEvents: function (logger) {
+    registerMonitors: function () {
 
-      // Add PerformanceObserver to monitor the 'CLS' of a page load
+      // add PerformanceObserver to monitor the 'CLS' of a page load
+      // see: https://requestmetrics.com/web-performance/cumulative-layout-shift
       //
       var cls     = 0;
       var prevCLS = 1000000000; // suppress first page changes
@@ -2568,11 +2571,12 @@ var j1 = (function (options) {
         prevCLS = roundedCLS;
       });
 
-      // Add ResizeObserver to monitor the page height of dynamic pages
+      // add ResizeObserver to monitor the page height of dynamic pages
       // see: https://stackoverflow.com/questions/14866775/detect-document-height-change
       //
       const resizeObserver = new ResizeObserver(entries => {
         var scrollOffsetCorrection  = scrollerOptions.smoothscroll.offsetCorrection;
+        var logger                = log4javascript.getLogger('ResizeObserver');
         const body                  = document.body,
               html                  = document.documentElement,
               scrollOffset          = j1.getScrollOffset(scrollOffsetCorrection);
@@ -2589,9 +2593,11 @@ var j1 = (function (options) {
 
         j1['pageMonitor'].eventNo += 1;
 
-        // Skip first Observer events as data returne found  unusable
+        // skip first Observer event
+        //
         if (j1['pageMonitor'].eventNo == 2) {
           // Set initial data from second event
+          //
           j1['pageMonitor'].pageBaseHeight      = document.body.scrollHeight;
           j1['pageMonitor'].currentPageHeight   = document.body.scrollHeight;
           j1['pageMonitor'].previousPageHeight  = document.body.scrollHeight;
@@ -2602,7 +2608,7 @@ var j1 = (function (options) {
           growthRatio         = 0.00;
         } else {
           // collect 'pageHeight' from 'entries'
-          // NOTE: each entry is an instance of ResizeObserverEntry
+          //
           for (const entry of entries) {
             pageBaseHeight = j1['pageMonitor'].pageBaseHeight;
             if (pageBaseHeight > 0) {
@@ -2612,6 +2618,7 @@ var j1 = (function (options) {
               j1['pageMonitor'].currentPageHeight = pageHeight;
 
               // total growth ratio
+              //
               pageGrowthRatio = pageHeight / pageBaseHeight * 100;
               pageGrowthRatio = pageGrowthRatio.toFixed(2);
 
@@ -2623,22 +2630,20 @@ var j1 = (function (options) {
             }
           }
           // detect the page 'type'
+          //
           if (growthRatio >= 5) {
             j1['pageMonitor'].pageType = 'dynamic';
 
-//          logger.debug('\n' + 'ResizeObserver: previousPageHeight|currentPageHeight (px): ', j1['pageMonitor'].previousPageHeight + '|' + pageHeight);
-//          logger.debug('\n' + 'ResizeObserver: growthRatio relative|absolute (%): ', growthRatio + '|' + pageGrowthRatio);
-
-            logger.debug('\n' + 'ResizeObserver: page growthRatio (%): ', j1['pageMonitor'].growthRatio);
-            logger.debug('\n' + 'ResizeObserver: page detected as: dynamic');
+            logger.debug('\n' + 'page growthRatio (%): ', j1['pageMonitor'].growthRatio);
+            logger.debug('\n' + 'page detected as: dynamic');
 
           } else {
             // set the page type to 'static' if low growth detected
             //
             if (typeof j1['pageMonitor'].growthRatio != 'undefined' && j1['pageMonitor'].growthRatio > 0) {
-              logger.debug('\n' + 'ResizeObserver: page growthRatio (%): ', j1['pageMonitor'].growthRatio);
+              logger.debug('\n' + 'page growthRatio (%): ', j1['pageMonitor'].growthRatio);
               j1['pageMonitor'].pageType = 'static';
-              logger.debug('\n' + 'ResizeObserver: page detected as: static');
+              logger.debug('\n' + 'page detected as: static');
             }
           }
         } // END Observer data evaluation
@@ -2717,7 +2722,7 @@ var j1 = (function (options) {
       }
      });
 
-   } // END registerEvents
+   } // END registerMonitors
   };
 }) (j1, window);
 
