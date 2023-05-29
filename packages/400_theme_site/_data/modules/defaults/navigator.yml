@@ -90,11 +90,8 @@ defaults:
     position:                           left
     bottom_line_height:                 1
     bottom_line_color:                  "#EEEEEE"                               # md-grey-200
-    background_color_full:              '#fff'                                  # rgba(0, 0, 0, 0.8) darken-600
-    background_color_collapsed:         '#fff'                                  # default: theme|bg_primary
-    background_color_scrolled:          '#fff'                                 # default: theme|bg_primary
-#   background_color_collapsed:         "#2196F3"                               # default: theme|bg_primary
-#   background_color_scrolled:          "#2196F3"                               # default: theme|bg_primary
+    background_color_full:              'rgba(255, 255, 255, 0.8)'              # rgba(0, 0, 0, 0.8) lighten-800
+    background_color_scrolled:          'var(--bs-primary)'                     # default: theme|bs-primary
 
   # ----------------------------------------------------------------------------
   # NavMenu (Mobile)

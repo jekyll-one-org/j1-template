@@ -43,6 +43,7 @@ settings:
   # Global properties (all layouts)
   #
   debug:                                false
+  hide_page_oninit:                     true                                    # hide page on 'init' to optimze CLS
 
   # ----------------------------------------------------------------------------
   # Layout specific properties

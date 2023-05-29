@@ -411,7 +411,8 @@ j1.adapter.navigator = (function (j1, window) {
               var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
               // initialize if page and themer ready
-              if (j1.getState() === 'finished' && j1.adapter.themer.getState() === 'finished' && pageVisible && atticFinished) {
+//            if (j1.getState() === 'finished' && j1.adapter.themer.getState() === 'finished' && pageVisible && atticFinished) {
+              if (j1.getState() === 'finished' && j1.adapter.themer.getState() === 'finished' && pageVisible) {
                 _this.setState('processing');
 
                 // apply module configuration settings

@@ -2535,36 +2535,37 @@ var j1 = (function (options) {
           // omit entries likely caused by user input
           if (!entry.hadRecentInput) {
             cls += entry.value;
-            roundedCLS = cls.toFixed(2);
+            roundedCLS = cls.toFixed(3);
           }
 
-          if (entry.sources) {
+          // if (entry.sources) {
+          //
+          //   for (const {node, currentRect, previousRect} of entry.sources) {
+          //
+          //     if (typeof node.firstElementChild != 'null' && typeof node.firstElementChild != 'undefined') {
+          //
+          //       var id = '';
+          //       try {
+          //         id = node.firstElementChild.id;
+          //       }
+          //       catch(err) {
+          //         id = 'missing';
+          //       }
+          //
+          //       if (id !== 'missing' && id !== '') {
+          //         logger.debug('\n' + 'Cumulative Layout Shift (CLS) on id: ', id);
+          //         logger.debug('\n' + 'Cumulative Layout Shift (CLS): ', roundedCLS);
+          //       }
+          //
+          //     }
+          //   }
+          // }
 
-            for (const {node, currentRect, previousRect} of entry.sources) {
-
-              if (typeof node.firstElementChild != 'null' && typeof node.firstElementChild != 'undefined') {
-
-                var id = '';
-                try {
-                  id = node.firstElementChild.id;
-                }
-                catch(err) {
-                  id = 'missing';
-                }
-
-                if (id !== 'missing' && id !== '') {
-                  logger.debug('\n' + 'Cumulative Layout Shift (CLS) on id: ', id);
-                  logger.debug('\n' + 'Cumulative Layout Shift (CLS): ', roundedCLS);
-                }
-
-              }
-            }
-          }
         });
 
         if (roundedCLS > prevCLS) {
           if (roundedCLS > 0.25) {
-            logger.warn('\n' + 'Cumulative Layout Shift (CLS): ', roundedCLS);
+            logger.debug('\n' + 'Cumulative Layout Shift (CLS): ', roundedCLS);
           }
         }
 
@@ -2629,19 +2630,19 @@ var j1 = (function (options) {
               j1['pageMonitor'].growthRatio = growthRatio;
             }
           }
-          // detect the page 'type'
+          // detect the 'page type'
           //
           if (growthRatio >= 5) {
             j1['pageMonitor'].pageType = 'dynamic';
 
-            logger.debug('\n' + 'page growthRatio: ' + j1['pageMonitor'].growthRatio + '%');
+            logger.debug('\n' + 'growthRatio: ' + j1['pageMonitor'].growthRatio + '%');
             logger.debug('\n' + 'page detected as: dynamic');
 
           } else {
             // set the page type to 'static' if low growth detected
             //
             if (typeof j1['pageMonitor'].growthRatio != 'undefined' && j1['pageMonitor'].growthRatio > 0) {
-              logger.debug('\n' + 'page growthRatio: ' + j1['pageMonitor'].growthRatio + '%');
+              logger.debug('\n' + 'growthRatio: ' + j1['pageMonitor'].growthRatio + '%');
               j1['pageMonitor'].pageType = 'static';
               logger.debug('\n' + 'page detected as: static');
             }
@@ -2650,16 +2651,20 @@ var j1 = (function (options) {
       }); // END Observer
 
       // run observers to monitor page
+      //
       var dependencies_met_page_finished = setInterval (function () {
         if (j1.getState() == 'finished') {
+
           // monitor 'CLS'
           performanceObserverCLS.observe({
             type: 'layout-shift',
             buffered: true
           });
-          // monitor 'growth'
+
+          // monitor 'page growth'
           resizeObserver.observe(document.querySelector('body'));
           clearInterval(dependencies_met_page_finished);
+
         }
       }, 25);
 

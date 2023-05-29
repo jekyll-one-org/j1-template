@@ -574,13 +574,22 @@ quotation marks after the command.
 commit --amend -m "New commit message"
 ----
 
-|`git commit -m "message text"`
+|`commit -m "message text"`
 |Add a Git commit message. Add your message in quotation marks
 following the command.
 |
 [source, sh]
 ----
 git commit -m "message text"
+----
+
+|`commit -am "message text"`
+|Combine options `a` and `m` to add all modified and deleted files and
+provide a commit message in a *single* command.
+|
+[source, sh]
+----
+git commit -am "message text"
 ----
 
 |===
@@ -606,18 +615,19 @@ git config --global user.email "my@mail.address"
 ----
 
 |`config --global user.name "name"`
-|Sets the *user name* associated with your Git commits and other Git actions.
+|Sets the *user name* associated with your Git commits and other
+Git actions.
 |
 [source, sh]
 ----
 git config --global user.name "My Name"
 ----
 
-|`git config --global core.editor "editor"`
+|`config --global core.editor "editor"`
 |Sets the text editor Git should use when creating commit messages.
 Replace [editor] with your preferred text editor (e.g., "vim," "nano,"
-"subl" for Sublime Text). On *Windows*, set the *path* to your preferred
-editor like 'C:/Program Files (x86)/Notepad++/notepad++.exe'.
+"subl" for Sublime Text). On *Windows*, set the *path* to your
+preferred editor like `C:/Program Files (x86)/Notepad++/notepad++.exe`.
 |
 [source, sh]
 ----
@@ -633,7 +643,7 @@ git config --list
 ----
 
 |`config --local --edit`
-|Opens the Git configuration file fron the current *repo* (`~/.git/config`)
+|Opens the Git configuration file fron the current *repo* (`.git/config`)
 in the default text editor, allowing you to *manually* edit the settings.
 |
 [source, sh]
@@ -642,7 +652,7 @@ git config --local --edit
 ----
 
 |`config --global --edit`
-|Opens your *personal* Git configuration file (`.gitconfig`) from the
+|Opens your *personal* Git configuration file (`~/.gitconfig`) from the
 *home* directory in the default text editor, allowing you to *manually*
 edit the settings.
 |
@@ -652,7 +662,7 @@ git config --global --edit
 ----
 
 |`config --system --edit`
-|Opens the Git *application* configuration file (`~/Git/etc/gitconfig`)
+|Opens the Git *application* configuration file (`<Git folder>/etc/gitconfig`)
 in the default text editor, allowing you to *manually* edit the settings.
 |
 [source, sh]
@@ -1029,7 +1039,6 @@ work on different tasks or switch contexts without losing your current work.
 
 Find some already *prepared* Git commands used quite often.
 
-
 === Clearing the index
 
 The commands below will *remove* all of the items from the Git *index* (not
@@ -1064,28 +1073,28 @@ git rm -rf --cached . && git add .
 git commit -am "Cleanup files"
 ----
 
-|`commit -am "New version 2023.3.2"`
+|`commit -am "New version 2023.3.3"`
 |Commit a specific *version*.
 |
 [source, sh]
 ----
-git commit -am "New version 2023.3.2"
+git commit -am "New version 2023.3.3"
 ----
 
-|`commit --allow-empty -m "New version 2023.3.2"`
+|`commit --allow-empty -m "New version 2023.3.3"`
 |Commit a specific version but *no* (file) changes applied.
 |
 [source, sh]
 ----
-git commit --allow-empty -m "New version 2023.3.2"
+git commit --allow-empty -m "New version 2023.3.3"
 ----
 
-|`commit -am "Prepare new version 2023.3.2"`
+|`commit -am "Prepare new version 2023.3.3"`
 |Commit a specific version but changes are *not* final.
 |
 [source, sh]
 ----
-git commit -am "Prepare new version 2023.3.2"
+git commit -am "Prepare new version 2023.3.3"
 ----
 
 |`commit -am "Latest files"`
@@ -1334,14 +1343,14 @@ Use the git 'tag' command with the '-d' option
 
 [source, sh]
 ----
-git tag -d v2023.3.2
+git tag -d v2023.3.3
 ----
 
 .from remote
 
 [source, sh]
 ----
-git push -d origin v2023.3.2
+git push -d origin v2023.3.3
 ----
 
 
@@ -1352,7 +1361,7 @@ then push the new tag
 
 [source, sh]
 ----
-git tag -a v2023.3.2 -m "v2023.3.2"
+git tag -a v2023.3.3 -m "v2023.3.3"
 git push origin --tags
 ----
 
@@ -1384,10 +1393,10 @@ Then:
 [source, sh]
 ----
 git commit -am "Cleanup files"
-git commit -am "New version 2023.3.2"
-git commit --allow-empty -m "New version 2023.3.2"
-git commit -am "Prepare new version 2023.3.2"
-git commit -am "Latest files of version 2023.3.2"
+git commit -am "New version 2023.3.3"
+git commit --allow-empty -m "New version 2023.3.3"
+git commit -am "Prepare new version 2023.3.3"
+git commit -am "Latest files of version 2023.3.3"
 ----
 
 
