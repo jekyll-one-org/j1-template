@@ -162,7 +162,8 @@ j1.adapter.slick = (function (j1, window) {
         var pageVisible   = (pageState == 'block') ? true: false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
+//      if (j1.getState() === 'finished' && pageVisible && atticFinished) {
+        if (j1.getState() === 'finished' && pageVisible) {
 
           {% for carousel in slick_settings.carousels %} {% if carousel.enabled %}
           logger.info('\n' + 'carousel is being initialized on id: ' + '{{carousel.id}}');

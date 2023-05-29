@@ -134,7 +134,8 @@ j1.adapter.dropdowns = (function (j1, window) {
         var pageVisible   = (pageState == 'block') ? true : false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if (j1.getState() == 'finished' && pageVisible && atticFinished) {
+//      if (j1.getState() == 'finished' && pageVisible && atticFinished) {
+        if (j1.getState() == 'finished' && pageVisible) {
           var elms = document.querySelectorAll('.dropdowns');
 
           // -------------------------------------------------------------------

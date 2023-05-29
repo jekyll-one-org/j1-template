@@ -149,7 +149,8 @@ var logText;
         var pageVisible   = (pageState == 'block') ? true : false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
+//      if (j1.getState() === 'finished' && pageVisible && atticFinished) {
+        if (j1.getState() === 'finished' && pageVisible) {
           themes_allowed = waveOptions.themes.toString();
           theme_enabled  = waveOptions.themes.indexOf(theme) > -1 ? true : false;
 

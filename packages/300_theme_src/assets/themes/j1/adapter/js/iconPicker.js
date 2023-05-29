@@ -140,7 +140,8 @@ var logText;
         var pageVisible   = (pageState == 'block') ? true : false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
+//      if (j1.getState() === 'finished' && pageVisible && atticFinished) {
+        if (j1.getState() === 'finished' && pageVisible) {
           icon_picker_button_id = '#' + iconPickerDefaults.picker_button_id;
 
           _this.setState('started');

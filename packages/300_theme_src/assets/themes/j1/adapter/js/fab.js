@@ -158,7 +158,8 @@ j1.adapter.fab = (function (j1, window) {
         var pageVisible   = (pageState == 'block') ? true : false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if (j1.adapter.navigator.getState() == 'finished' && pageVisible && atticFinished) {
+//      if (j1.adapter.navigator.getState() == 'finished' && pageVisible && atticFinished) {
+        if (j1.adapter.navigator.getState() == 'finished' && pageVisible) {
           logger.debug('\n' + 'met dependencies for: navigator');
           _this.fabLoader(fabOptions);
           clearInterval(dependencies_met_navigator);
