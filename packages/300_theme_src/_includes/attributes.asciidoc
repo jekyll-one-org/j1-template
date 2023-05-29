@@ -352,8 +352,8 @@ tag::urls[]
 
 :url-previewer--county-flags:                     https://jekyll.one/pages/public/previewer/country_flags/
 :url-previewer--emoji:                            https://jekyll.one/pages/public/previewer/twitter_emoji/
-:url-previewer--mdi-icons:                        https://jekyll.one/pages/public/previewer/mdi_font/
-:url-previewer--mdil-icons:                       https://jekyll.one/pages/public/previewer/mdil_font/
+:url-previewer--mdi-icons:                        https://jekyll.one/pages/public/fonticons/mdi/
+:url-previewer--mdil-icons:                       https://jekyll.one/pages/public/fonticons/mdil/
 :url-previewer--rouge-themes:                     https://jekyll.one/pages/public/previewer/rouge/
 
 :url-puma--home:                                  https://puma.io/

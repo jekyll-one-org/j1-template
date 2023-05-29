@@ -900,6 +900,25 @@ var j1 = (function (options) {
           });
       }
 
+      // const performanceObserver = new PerformanceObserver((list) => {
+      //   for (const entry of list.getEntries()) {
+      //     // Count layout shifts without recent user input only
+      //     if (!entry.hadRecentInput) {
+      //       console.log("LayoutShift value:", entry.value);
+      //       if (entry.sources) {
+      //         for (const { node, currentRect, previousRect } of entry.sources)
+      //           console.log("LayoutShift source:", node, {
+      //             currentRect,
+      //             previousRect,
+      //           });
+      //       }
+      //     }
+      //   }
+      // });
+      //
+      // if ('performance' in window) {
+      //   performanceObserver.observe({ type: "layout-shift", buffered: true });
+      // }
       // if personalized content detected, page requires user consent
       // -----------------------------------------------------------------------
       if (personalization && !user_consent.personalization) {
@@ -1262,6 +1281,23 @@ var j1 = (function (options) {
           if ( j1.getState() === 'finished' && pageVisible ) {
             // TODO: Hide GoogleTranslator
             // $('.skiptranslate').hide();
+
+            // const performanceObserver = new PerformanceObserver((list) => {
+            //   for (const entry of list.getEntries()) {
+            //     // Count layout shifts without recent user input only
+            //     if (!entry.hadRecentInput) {
+            //       console.log("LayoutShift value:", entry.value);
+            //       if (entry.sources) {
+            //         for (const { node, currentRect, previousRect } of entry.sources)
+            //           console.log("LayoutShift source:", node, {
+            //             currentRect,
+            //             previousRect,
+            //           });
+            //       }
+            //     }
+            //   }
+            // });
+            // performanceObserver.observe({ type: "layout-shift", buffered: true });
 
             setTimeout (function() {
               // scroll to an anchor in current page if given in URL
@@ -2518,59 +2554,91 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     registerEvents: function (logger) {
 
-      // Add PerformanceObserver to monitor the 'CLS' of a page load
-      //
-      var cls     = 0;
-      var prevCLS = 1000000000; // suppress first page changes
-      var roundedCLS;
-
-      const performanceObserverCLS = new PerformanceObserver(entryList => {
-        var logger  = log4javascript.getLogger('PerformanceObserver');
-        var entries = entryList.getEntries() || [];
-
-        entries.forEach(entry => {
-          // omit entries likely caused by user input
-          if (!entry.hadRecentInput) {
-            cls += entry.value;
-            roundedCLS = cls.toFixed(2);
-          }
-
-          if (entry.sources) {
-
-            for (const {node, currentRect, previousRect} of entry.sources) {
-
-              if (typeof node.firstElementChild != 'null' && typeof node.firstElementChild != 'undefined') {
-
-                var id = '';
-                try {
-                  id = node.firstElementChild.id;
-                }
-                catch(err) {
-                  id = 'missing';
-                }
-
-                if (id !== 'missing' && id !== '') {
-                  logger.debug('\n' + 'Cumulative Layout Shift (CLS) on id: ', id);
-                  logger.debug('\n' + 'Cumulative Layout Shift (CLS): ', roundedCLS);
-                }
-
-              }
-            }
-          }
-        });
-
-        if (roundedCLS > prevCLS) {
-          if (roundedCLS > 0.25) {
-            logger.warn('\n' + 'Cumulative Layout Shift (CLS): ', roundedCLS);
-          }
-        }
-
-        prevCLS = roundedCLS;
-      });
-
       // Add ResizeObserver to monitor the page height of dynamic pages
       // see: https://stackoverflow.com/questions/14866775/detect-document-height-change
       //
+      // const regex = /[]/g;
+
+      const cb = (list) => {
+        list.getEntries().forEach(entry => {
+          // console.log('PerformanceObserver', entry);
+          if (entry.sources) {
+            for (const { node, currentRect, previousRect } of entry.sources)
+              console.log("LayoutShift source:", node, {
+                currentRect,
+                previousRect,
+              });
+          }
+        });
+      }
+
+      // const observer = new PerformanceObserver(cb)
+      // observer.observe({ entryTypes: [
+      //       "element",
+      //       "event",
+      //       "first-input",
+      //       "largest-contentful-paint",
+      //       "layout-shift",
+      //       "longtask",
+      //       "mark",
+      //       "measure",
+      //       "navigation",
+      //       "paint",
+      //       "resource"
+      //     ]
+      // });
+
+      // const observer = new PerformanceObserver(cb)
+      // observer.observe({ entryTypes: [
+      //       "largest-contentful-paint",
+      //       "layout-shift"
+      //     ]
+      // });
+
+      var cls = 0;
+      var performanceObserver = new PerformanceObserver(entryList => {
+          var entries = entryList.getEntries() || [];
+          // var cls = 0;
+          entries.forEach(e => {
+            // omit entries likely caused by user input
+            if (!e.hadRecentInput) {
+                cls += e.value;
+            }
+          });
+          var roundedCLS = cls.toFixed(2);
+          console.log(`Cumulative Layout Shift: ${roundedCLS}`);
+      }).observe({ type: "layout-shift", buffered: true })
+
+
+      // const performanceObserver = new PerformanceObserver(cb => {
+      //   for (const entry of cb.getEntries()) {
+      //     // Count layout shifts without recent user input only
+      //     console.log('PerformanceObserver, type: ', entry.entryType);
+      //     console.log('PerformanceObserver, entry: ', entry);
+      //
+      //     // Count layout shifts without recent user input only
+      //     if (!entry.hadRecentInput && entry.value > 0.01 ) {
+      //       console.log("LayoutShift value:", entry.value);
+      //       if (entry.sources) {
+      //         for (const { node, currentRect, previousRect } of entry.sources)
+      //           console.log("LayoutShift source:", node, {
+      //             currentRect,
+      //             previousRect,
+      //           });
+      //       }
+      //     }
+
+      // var cls = 0;
+      // entry.forEach(e => {
+      //   if (!e.hadRecentInput) { // omit entries likely caused by user input
+      //     cls += e.value;
+      //   }
+      //   console.log("LayoutShift value:", cls);
+      // });
+      //
+      //   }
+      // });
+
       const resizeObserver = new ResizeObserver(entries => {
         var scrollOffsetCorrection  = scrollerOptions.smoothscroll.offsetCorrection;
         const body                  = document.body,
@@ -2644,16 +2712,21 @@ var j1 = (function (options) {
         } // END Observer data evaluation
       }); // END Observer
 
-      // run observers to monitor page
+      // monitor the page growth if visible
       var dependencies_met_page_finished = setInterval (function () {
         if (j1.getState() == 'finished') {
-          // monitor 'CLS'
-          performanceObserverCLS.observe({
-            type: 'layout-shift',
-            buffered: true
-          });
-          // monitor 'growth'
+
+//           performanceObserver.observe({ entryTypes: [
+// //             "largest-contentful-paint",
+//                 "layout-shift"
+//               ],
+//               buffered: true
+//           });
+
+          // performanceObserver.observe({ type: "layout-shift", buffered: true });
+          // resizeObserver.observe(document.querySelector('#content'));
           resizeObserver.observe(document.querySelector('body'));
+
           clearInterval(dependencies_met_page_finished);
         }
       }, 25);

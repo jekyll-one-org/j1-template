@@ -151,12 +151,15 @@ j1.adapter.attic = (function (j1, window) {
           {% if attic_options.enabled %}
           logger.info('\n' + 'module initializaton: started');
 
-          if (atticOptions.hide_oninit) {
-            // hide page while attic is being created
-            // jadams, 2023-05-12: Visible page/attic cause high number
-            // for cumulative layout shift (CLS)
+          // jadams, 2023-05-28: TODO
+          // move 'hide_page_oninit' to j1 because the 'attic'
+          // does NOT cause the CLS issues
+          if (atticOptions.hide_page_oninit) {
+            // hide whole page while attic is being created
+            // jadams, 2023-05-12: page visible while loading banners and panels
+            // cause high numbers for cumulative layout shift (CLS)
             //
-            logger.debug('\n' + 'hide attics on initia.lization');
+            logger.debug('\n' + 'hide attic on initialization');
             $('#no_flicker').css('display', 'none');
           }
 

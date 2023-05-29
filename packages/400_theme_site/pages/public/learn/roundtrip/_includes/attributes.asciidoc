@@ -29,7 +29,7 @@ tag::urls[]
 
 :url-light-gallery--license:                      http://sachinchoolur.github.io/lightGallery/docs/license.html
 
-:url-material-design-icons--cheatsheet:           https://jekyll.one/pages/public/previewer/mdi_font/
+:url-material-design-icons--cheatsheet:           https://jekyll.one/pages/public/fonticons/mdi/
 
 :url-asciidoctor-extensions--lab:                 https://github.com/asciidoctor/asciidoctor-extensions-lab
 :url-asciidoctor-extensions--use-extension:       https://github.com/asciidoctor/asciidoctor-extensions-lab#using-an-extension

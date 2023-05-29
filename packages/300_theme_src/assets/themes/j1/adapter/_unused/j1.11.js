@@ -201,6 +201,9 @@ var j1 = (function (options) {
   var user_session_detected;
   var cookie_written;
 
+  // all CLS measures
+  var all_cls = [];
+
   // defaults for the template
   var template_version;
   var template_previous_version;
@@ -2518,59 +2521,68 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     registerEvents: function (logger) {
 
-      // Add PerformanceObserver to monitor the 'CLS' of a page load
+      // Add ResizeObserver to monitor the page height of dynamic pages
+      // see: https://stackoverflow.com/questions/14866775/detect-document-height-change
       //
-      var cls     = 0;
-      var prevCLS = 1000000000; // suppress first page changes
-      var roundedCLS;
 
+      // const cb = (list) => {
+      //   list.getEntries().forEach(entry => {
+      //     // console.log('PerformanceObserver', entry);
+      //     if (entry.sources) {
+      //       for (const { node, currentRect, previousRect } of entry.sources)
+      //         console.log("Cumulative Layout Shift (CLS) source:", node, {
+      //           currentRect,
+      //           previousRect,
+      //         });
+      //     }
+      //   });
+      // }
+
+      var cls = 0;
+      var roundedCLS;
+      var prevCLS = 1;                                                          // skip FIRST cls value calculated
       const performanceObserverCLS = new PerformanceObserver(entryList => {
-        var logger  = log4javascript.getLogger('PerformanceObserver');
+        var logger = log4javascript.getLogger('PerformanceObserver');
         var entries = entryList.getEntries() || [];
 
         entries.forEach(entry => {
           // omit entries likely caused by user input
           if (!entry.hadRecentInput) {
             cls += entry.value;
-            roundedCLS = cls.toFixed(2);
+            roundedCLS = cls.toFixed(3);
           }
 
-          if (entry.sources) {
+          // if (entry.sources) {
+          //   for (const { node, currentRect, previousRect } of entry.sources) {
+          //     // logger.debug('\n' + 'Cumulative Layout Shift (CLS) source: ', node, {
+          //     //   currentRect,
+          //     //   previousRect,
+          //     // });
+          //
+          //     console.debug("Cumulative Layout Shift (CLS) source:", node, {
+          //       currentRect,
+          //       previousRect,
+          //     });
+          //   }
+          // }
 
-            for (const {node, currentRect, previousRect} of entry.sources) {
-
-              if (typeof node.firstElementChild != 'null' && typeof node.firstElementChild != 'undefined') {
-
-                var id = '';
-                try {
-                  id = node.firstElementChild.id;
-                }
-                catch(err) {
-                  id = 'missing';
-                }
-
-                if (id !== 'missing' && id !== '') {
-                  logger.debug('\n' + 'Cumulative Layout Shift (CLS) on id: ', id);
-                  logger.debug('\n' + 'Cumulative Layout Shift (CLS): ', roundedCLS);
-                }
-
-              }
+          if (roundedCLS > prevCLS) {
+            if (roundedCLS > 0.25) {
+              logger.warn('\n' + 'Cumulative Layout Shift (CLS): ', roundedCLS);
             }
           }
-        });
 
-        if (roundedCLS > prevCLS) {
-          if (roundedCLS > 0.25) {
-            logger.warn('\n' + 'Cumulative Layout Shift (CLS): ', roundedCLS);
-          }
-        }
-
-        prevCLS = roundedCLS;
+          prevCLS = roundedCLS;
       });
 
-      // Add ResizeObserver to monitor the page height of dynamic pages
-      // see: https://stackoverflow.com/questions/14866775/detect-document-height-change
-      //
+      // check Performance API is available
+      if ('performance' in window) {
+        performanceObserverCLS.observe({
+          type:       'layout-shift',
+          buffered:   true
+        });
+      }
+
       const resizeObserver = new ResizeObserver(entries => {
         var scrollOffsetCorrection  = scrollerOptions.smoothscroll.offsetCorrection;
         const body                  = document.body,
@@ -2644,15 +2656,10 @@ var j1 = (function (options) {
         } // END Observer data evaluation
       }); // END Observer
 
-      // run observers to monitor page
+      // monitor the page growth if visible
       var dependencies_met_page_finished = setInterval (function () {
         if (j1.getState() == 'finished') {
-          // monitor 'CLS'
-          performanceObserverCLS.observe({
-            type: 'layout-shift',
-            buffered: true
-          });
-          // monitor 'growth'
+          // resizeObserver.observe(document.querySelector('#content'));
           resizeObserver.observe(document.querySelector('body'));
           clearInterval(dependencies_met_page_finished);
         }

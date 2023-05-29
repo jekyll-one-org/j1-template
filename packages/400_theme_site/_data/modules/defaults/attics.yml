@@ -42,7 +42,7 @@ defaults:
   # Global settings for text- and image-based header
   #
   debug:                                false
-  hide_oninit:                          true
+  hide_page_oninit:                     false                                   # hide page on 'init' to optimze CLS
 
   circuit:                              false
   notranslate:                          true

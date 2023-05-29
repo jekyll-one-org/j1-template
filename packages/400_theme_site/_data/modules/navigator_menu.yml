@@ -35,6 +35,9 @@
       icon:                             book
       dropdown:
 
+        - title:                        J1
+          href:                         /pages/public/learn/cheatsheet/j1/
+          icon:                         alpha-j-box-outline
         - title:                        YAML
           href:                         /pages/public/learn/cheatsheet/yaml/
           icon:                         alpha-y-box-outline

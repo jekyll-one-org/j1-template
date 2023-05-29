@@ -59,6 +59,7 @@ from the command line. Git offers rich features for version control,
 collaboration, and project management. You can explore more Git commands
 and options in the official Git documentation.
 
+[role="mt-5"]
 == Git status colors
 
 In the Git version control system, the output of the git status command can
@@ -121,7 +122,9 @@ Git-specific color options in your Git configuration file (~/.gitconfig).
 
 |===
 
-== Common Aliases (~/.gitconfig)
+
+[role="mt-5"]
+== Git Aliases
 
 Git aliases allow you to create shortcuts or alternative names for Git
 commands and workflows, making it easier and faster to execute common
@@ -155,8 +158,8 @@ specific repository.
   ty 	= 'cat-file'
 ----
 
-[role="mt-3"]
-== Branch
+[role="mt-5"]
+== Branch Commands
 
 Git is a distributed version control system that allows you to manage
 multiple code branches within a repository. A branch in is used to keep
@@ -172,15 +175,15 @@ the changes it to the main branch for a new stable version.
 |`branch`
 |Display a list of *local* branches in your repository.
 |
-[source.sh]
+[source, sh]
 ----
 git branch
 ----
 
 |`branch -a`
-|Display a list of both *local* and remote branches in your repository.
+|Display a list of both *local* and *remote* branches in your repository.
 |
-[source.sh]
+[source, sh]
 ----
 git branch -a
 ----
@@ -189,7 +192,7 @@ git branch -a
 |Delete a *local* branch. This will *not* work if the branch to
 delete *has unmerged changes*.
 |
-[source.sh]
+[source, sh]
 ----
 git branch -d dummy_branch
 ----
@@ -197,23 +200,31 @@ git branch -d dummy_branch
 |`branch -D <branch-name>`
 |Delete a *local* branch *with unmerged changes*.
 |
-[source.sh]
+[source, sh]
 ----
 git branch -D dummy_branch
 ----
 
 |`branch -m <branch-name> <new-branch-name>`
-|Rename a branch.
+|Rename a *local* branch.
 |
-[source.sh]
+[source, sh]
 ----
 git branch -m master main
+----
+
+|`branch -m <branch-name>`
+|Rename the *current* local branch
+|
+[source, sh]
+----
+git branch -m main
 ----
 
 |`branch -r`
 |Display a list of *remote* branches in your repository.
 |
-[source.sh]
+[source, sh]
 ----
 git branch -r
 ----
@@ -221,7 +232,7 @@ git branch -r
 |`push <remote> --delete <remote branch>`
 |Delete a *remote* branch.
 |
-[source.sh]
+[source, sh]
 ----
 git push origin --delete dummy_branch
 ----
@@ -230,7 +241,7 @@ git push origin --delete dummy_branch
 |Set an *upstream* branch. Running this command will push your *local*
 branch to the new *remote* branch.
 |
-[source.sh]
+[source, sh]
 ----
 git push --set-upstream dummy_branch
 ----
@@ -249,7 +260,7 @@ create new branches, or restore files to a *previous state*.
 |`checkout <branch-name>`
 |Switch to a different branch.
 |
-[source.sh]
+[source, sh]
 ----
 git checkout main
 ----
@@ -257,7 +268,7 @@ git checkout main
 |`checkout -b <branch-name>`
 |*Create* a new branch and switch to it.
 |
-[source.sh]
+[source, sh]
 ----
 git checkout -b develop
 ----
@@ -265,7 +276,7 @@ git checkout -b develop
 |`checkout -b <branch-name> <remote-name>/<branch-name>`
 |Create a *local* branch from a *remote* (branch) and checkout that branch.
 |
-[source.sh]
+[source, sh]
 ----
 git checkout -b dummy origin/dummy_branch
 ----
@@ -273,7 +284,7 @@ git checkout -b dummy origin/dummy_branch
 |`checkout <commit hash>`
 |Checkout from a *previously* created (existing) commit.
 |
-[source.sh]
+[source, sh]
 ----
 git checkout 4b4690d00
 ----
@@ -282,7 +293,7 @@ git checkout 4b4690d00
 |Checkout from a *previously* created (existing) commit `<commit hash>`
 to a new *local* branch `<branch-name>`.
 |
-[source.sh]
+[source, sh]
 ----
 git checkout -b new_branch 4b4690d00
 ----
@@ -290,7 +301,7 @@ git checkout -b new_branch 4b4690d00
 |`checkout <tag name>`
 |Checkout a branch based on a *tag* in a detached HEAD state.
 |
-[source.sh]
+[source, sh]
 ----
 git checkout v2023.2.6
 ----
@@ -298,7 +309,7 @@ git checkout v2023.2.6
 |`checkout -b <branch-name> <tag-name>`
 |Checkout a *new* local branch `<branch-name>` based on a *tag*.
 |
-[source.sh]
+[source, sh]
 ----
 git checkout -b b2023.2.6 v2023.2.6
 ----
@@ -318,7 +329,7 @@ However, in a detached HEAD state, any new commits you create will not be
 part of any branch. The HEAD points directly to the commit.
 ====
 
-[role="mt-4"]
+[role="mt-5"]
 == Cherry Pick Commands
 
 The `git cherry-pick` command is used to apply *specific commits* from
@@ -342,7 +353,7 @@ immediately commit the changes onto the new branch.
 |`cherry-pick <commit_hash>`
 |Apply a commit’s changes onto a different branch.
 |
-[source.sh]
+[source, sh]
 ----
 git cherry-pick <commit_hash>
 ----
@@ -351,7 +362,7 @@ git cherry-pick <commit_hash>
 |Apply changes from multiple commits to the current branch. The commits are
 applied in the order specified.
 |
-[source.sh]
+[source, sh]
 ----
 git cherry-pick <commit_hash1> <commit_hash2>
 ----
@@ -361,7 +372,7 @@ git cherry-pick <commit_hash1> <commit_hash2>
 specified commit but does not create a new commit. This allows you to
 modify the changes before committing them.
 |
-[source.sh]
+[source, sh]
 ----
 git cherry-pick -n <commit_hash>
 ----
@@ -370,7 +381,7 @@ git cherry-pick -n <commit_hash>
 |Opens the commit message editor before committing the cherry-picked
 changes. It allows you to modify the commit message.
 |
-[source.sh]
+[source, sh]
 ----
 git cherry-pick --edit <commit_hash>
 ----
@@ -379,7 +390,7 @@ git cherry-pick --edit <commit_hash>
 |Continues the cherry-pick process after resolving any conflicts that
 occurred during the cherry-pick operation.
 |
-[source.sh]
+[source, sh]
 ----
 git cherry-pick --continue
 ----
@@ -388,7 +399,7 @@ git cherry-pick --continue
 |Aborts the cherry-pick operation and returns the branch to its original
 state before the cherry-pick was started.
 |
-[source.sh]
+[source, sh]
 ----
 git cherry-pick --abort
 ----
@@ -402,7 +413,8 @@ commit it’s been cherry picked, you can either continue working
 with the changes before committing, or you can immediately commit
 the changes onto the target branch.
 
-[role="mt-4"]
+
+[role="mt-5"]
 == Clone Commands
 
 The git clone command creates a copy of a Git repository in a new directory.
@@ -416,7 +428,7 @@ commit history.
 |`clone <repository-url>`
 |Clone a specified remote repository.
 |
-[source.sh]
+[source, sh]
 ----
 git clone <repository-url>
 ----
@@ -424,7 +436,7 @@ git clone <repository-url>
 |`clone <repository-url> <directory-name>`
 |Clone a repository and name the local directory.
 |
-[source.sh]
+[source, sh]
 ----
 git clone <repository-url> <directory-name>
 ----
@@ -433,7 +445,7 @@ git clone <repository-url> <directory-name>
 |Clone a repository and name the remote (`<name>`). If you do not wish
 to name the remote, Git will provide the default name `origin`.
 |
-[source.sh]
+[source, sh]
 ----
 git clone <repository-url> --origin <name>
 ----
@@ -441,7 +453,7 @@ git clone <repository-url> --origin <name>
 |`clone <repository-url> --branch <branch-name>`
 |Clone a repository and checkout the specific branch. 
 |
-[source.sh]
+[source, sh]
 ----
 git clone <repository-url> --branch <branch-name>
 ----
@@ -449,7 +461,7 @@ git clone <repository-url> --branch <branch-name>
 |`clone <repository-url> --depth <depth>`
 |Clone a repository with a specified number of commits (`<depth>`). 
 |
-[source.sh]
+[source, sh]
 ----
 git clone <repository-url> --depth <depth>
 ----
@@ -457,7 +469,7 @@ git clone <repository-url> --depth <depth>
 |`clone <repository-url> --no-tags`
 |Clone a repository without copying the repo’s tags.
 |
-[source.sh]
+[source, sh]
 ----
 git clone <repository-url> --no-tags
 ----
@@ -474,7 +486,8 @@ Here’s what each part of the command means:
   repository will be cloned. Git will create a new directory using the
   repository's name if not specified.
 
-[role="mt-4"]
+
+[role="mt-5"]
 == Commit Commands
 
 The git `commit` command is used to record *changes* to the repository. It
@@ -520,7 +533,7 @@ SHA-1 hash, and added to the repository's commit *history*.
 |Display a list of files in your staging directory with accompanying
 file status.
 |
-[source.sh]
+[source, sh]
 ----
 git status
 ----
@@ -529,7 +542,7 @@ git status
 |Stage file changes. Running this command with an associated file name
 will stage the file changes to your staging directory.
 | Commit *all* files iin the *current* folder indicazed by `.` (dot)
-[source.sh]
+[source, sh]
 ----
 git add .
 ----
@@ -538,7 +551,7 @@ git add .
 |Save changes to your Git repository. Running this command with an
 associated file name will save the file changes to your repo.
 |
-[source.sh]
+[source, sh]
 ----
 git commit
 ----
@@ -547,7 +560,7 @@ git commit
 |Add all modified and deleted files in your working directory to the
 current commit.
 |
-[source.sh]
+[source, sh]
 ----
 git commit -a
 ----
@@ -556,7 +569,7 @@ git commit -a
 |Amend a Git commit. Edit a Git commit message by adding a message in
 quotation marks after the command.
 |
-[source.sh]
+[source, sh]
 ----
 commit --amend -m "New commit message"
 ----
@@ -565,7 +578,7 @@ commit --amend -m "New commit message"
 |Add a Git commit message. Add your message in quotation marks
 following the command.
 |
-[source.sh]
+[source, sh]
 ----
 git commit -m "message text"
 ----
@@ -579,20 +592,78 @@ Git config commands configure various aspects of Git, such as user
 information, default behavior, aliases, etc. Here are some commonly
 used Git config commands:
 
-* `git config --global` –  Customize configurations stored in your home
-  directory, and can overwrite Git config system settings.
-* `git config --email` – Sets the email associated with your Git commits
-  and other Git actions.
-* `git config --system` – Customize configuration settings for your
-  operating system.
-* `git --config user.name` – Sets the username associated with your Git
-  commits and other Git actions.
-* `git config --list` – View all of your Git config settings including
-  the local, global, and system levels.
-* `git config --local` – Customize settings that are Git repository
-  specific and overwrite Git configurations on the global and system level.
+[cols="3a, 4a, 5a", options="header", width="100%", role="rtable mt-3 mb-5"]
+|===
+|Command |Description |Example
 
-[role="mt-4"]
+|`config --global user.email "email@address"`
+|Sets the *email address* associated with your Git commits and
+other Git actions.
+|
+[source, sh]
+----
+git config --global user.email "my@mail.address"
+----
+
+|`config --global user.name "name"`
+|Sets the *user name* associated with your Git commits and other Git actions.
+|
+[source, sh]
+----
+git config --global user.name "My Name"
+----
+
+|`git config --global core.editor "editor"`
+|Sets the text editor Git should use when creating commit messages.
+Replace [editor] with your preferred text editor (e.g., "vim," "nano,"
+"subl" for Sublime Text). On *Windows*, set the *path* to your preferred
+editor like 'C:/Program Files (x86)/Notepad++/notepad++.exe'.
+|
+[source, sh]
+----
+git config --global core.editor "vim"
+----
+
+|`config --list`
+|Lists *all* the Git configuration settings currently set on your system.
+|
+[source, sh]
+----
+git config --list
+----
+
+|`config --local --edit`
+|Opens the Git configuration file fron the current *repo* (`~/.git/config`)
+in the default text editor, allowing you to *manually* edit the settings.
+|
+[source, sh]
+----
+git config --local --edit
+----
+
+|`config --global --edit`
+|Opens your *personal* Git configuration file (`.gitconfig`) from the
+*home* directory in the default text editor, allowing you to *manually*
+edit the settings.
+|
+[source, sh]
+----
+git config --global --edit
+----
+
+|`config --system --edit`
+|Opens the Git *application* configuration file (`~/Git/etc/gitconfig`)
+in the default text editor, allowing you to *manually* edit the settings.
+|
+[source, sh]
+----
+git config --system --edit
+----
+
+|===
+
+
+[role="mt-5"]
 == Merge Commands
 
 When using Git, several commands are available to perform a merge operation.
@@ -610,7 +681,7 @@ Here's an overview of these commands:
 combination with fetch, this will combine the fetched history
 from a remote branch into the currently checked out local branch.
 |
-[source.sh]
+[source, sh]
 ----
 git merge
 ----
@@ -619,7 +690,7 @@ git merge
 |Merge changes from one branch into the branch you currently
 have checked out.
 |
-[source.sh]
+[source, sh]
 ----
 git merge develop
 ----
@@ -629,7 +700,7 @@ git merge develop
 to before the merge was attempted. This works as a failsafe when
 a conflict occurs.
 |
-[source.sh]
+[source, sh]
 ----
 git merge --abort develop
 ----
@@ -638,7 +709,7 @@ git merge --abort develop
 |Attempt to complete a merge that was stopped due to file conflicts
 after *resolving* the merge *conflict*.
 |
-[source.sh]
+[source, sh]
 ----
 git merge --continue develop
 ----
@@ -647,7 +718,7 @@ git merge --continue develop
 |Combine all changes from the branch being merged into a single
 commit rather than preserving them as individual commits.
 |
-[source.sh]
+[source, sh]
 ----
 git merge --squash
 ----
@@ -655,7 +726,7 @@ git merge --squash
 |`merge --no-commit`
 |Combine branch into the current branch, but do not make a new commit.
 |
-[source.sh]
+[source, sh]
 ----
 git merge --no-commit develop
 ----
@@ -663,7 +734,7 @@ git merge --no-commit develop
 |`merge --no-ff`
 |Creates a merge commit instead of attempting a *fast-forward*.
 |
-[source.sh]
+[source, sh]
 ----
 git merge --no-ff develop
 ----
@@ -676,7 +747,8 @@ behavior. I recommend consulting the Git documentation for a more comprehensive
 understanding of the available options and scenarios where merging can be
 used effectively.
 
-[role="mt-4"]
+
+[role="mt-5"]
 == Pull Commands
 
 The `git pull` command *fetches* and *merges* changes from a remote repository
@@ -691,7 +763,7 @@ its commonly used options:
 |This command fetches, and merges changes from the *remote* repository into
 your current *local* branch.
 |
-[source.sh]
+[source, sh]
 ----
 git pull
 ----
@@ -699,14 +771,14 @@ git pull
 |`pull --quiet`
 |Suppress the output text after both `git fetch` and `git merge`.
 |
-[source.sh]
+[source, sh]
 ----
 git pull --quiet
 ----
 |`pull --verbose`
 |Expand the output text after both `git fetch` and `git merge`.
 |
-[source.sh]
+[source, sh]
 ----
 git pull --verbose
 ----
@@ -746,7 +818,7 @@ different scenarios:
 * `git pull --no-tags` – Do not fetch tags.
 
 
-[role="mt-4"]
+[role="mt-5"]
 == Push Commands
 
 The `git push` command *uploads* local repository commits to a *remote*
@@ -761,7 +833,7 @@ command and its commonly used options:
 |`push`
 |Push the current checked out branch to the *default* remote `origin`. 
 |
-[source.sh]
+[source, sh]
 ----
 git push
 ----
@@ -770,7 +842,7 @@ git push
 |Push the specified *local* branch along with all of its necessary commits
 to your destination *remote* repository. 
 |
-[source.sh]
+[source, sh]
 ----
 git push origin main
 ----
@@ -781,7 +853,7 @@ the update of a remote ref even when that is not the ancestor of the
 local ref. This can cause the remote repository to loose commits,
 so use with care.
 |
-[source.sh]
+[source, sh]
 ----
 git push <remote> --force
 ----
@@ -789,7 +861,7 @@ git push <remote> --force
 |`push <remote> --all`
 |Push *all* local branches to a specified remote.
 |
-[source.sh]
+[source, sh]
 ----
 git push <remote> --all
 ----
@@ -798,7 +870,7 @@ git push <remote> --all
 |Push all local tags to a specified remote (can ommitted for *default* remote).
 Note that tags are *not* automatically sent when using `--all`.
 |
-[source.sh]
+[source, sh]
 ----
 git push origin --tags
 ----
@@ -806,7 +878,7 @@ git push origin --tags
 |===
 
 
-[role="mt-4"]
+[role="mt-5"]
 == Rebase Commands
 
 The `git rebase` command that integrates changes from one branch onto
@@ -824,7 +896,7 @@ Here are some commonly used Git rebase commands:
 This rewrites a commit(s) from the source branch and applies it on
 the top of the target branch.
 |
-[source.sh]
+[source, sh]
 ----
 git rebase <target branch name>
 ----
@@ -833,7 +905,7 @@ git rebase <target branch name>
 |Proceed with a Git rebase after you have resolved a conflict
 between files.
 |
-[source.sh]
+[source, sh]
 ----
 git rebase --continue
 ----
@@ -841,7 +913,7 @@ git rebase --continue
 |`rebase --skip`
 |Skip an action that results in a conflict to proceed with a Git rebase.
 |
-[source.sh]
+[source, sh]
 ----
 git rebase --skip
 ----
@@ -850,7 +922,7 @@ git rebase --skip
 |Cancel a Git rebase. Your branch will be back in the state it was
 before you started the rebase.
 |
-[source.sh]
+[source, sh]
 ----
 git rebase --abort
 ----
@@ -859,7 +931,7 @@ git rebase --abort
 |Initiate interactive rebase from your currently checked
 out branch onto a target branch.
 |
-[source.sh]
+[source, sh]
 ----
 git rebase <target branch name> -i
 ----
@@ -871,7 +943,8 @@ CAUTION: The command `rebase` is a flexible way to *manipulate* the commit
 working on *shared* branches (like the *main* branch), as it rewrite the
 commit history and potentially cause issues for other collaborators.
 
-[role="mt-4"]
+
+[role="mt-5"]
 == Stash Commands
 
 Git stash is a command that *temporarily* saves *changes* you have made to
@@ -887,7 +960,7 @@ Here are some commonly used stash commands:
 |`stash`
 |Create a stash with local modifications and revert back to the head commit.
 |
-[source.sh]
+[source, sh]
 ----
 git stash
 ----
@@ -895,7 +968,7 @@ git stash
 |`stash list`
 |Display a list of all stashes in your repository.
 |
-[source.sh]
+[source, sh]
 ----
 git stash list
 ----
@@ -905,7 +978,7 @@ git stash list
 stashed changes as a diff between the stashed content and the commit
 from back when the stash was created.
 |
-[source.sh]
+[source, sh]
 ----
 git stash show
 ----
@@ -913,7 +986,7 @@ git stash show
 |`stash drop <stash>`
 |Remove a stash from the list of stashes in your repository.
 |
-[source.sh]
+[source, sh]
 ----
 git stash drop <stash>
 ----
@@ -922,7 +995,7 @@ git stash drop <stash>
 |Apply a stash to the top of the current working tree and remove
 it from your list of stashes.
 |
-[source.sh]
+[source, sh]
 ----
 git stash pop <stash>
 ----
@@ -931,7 +1004,7 @@ git stash pop <stash>
 |Apply a stash on top of the current working tree. The stash
 will not be removed from your list of stashes.
 |
-[source.sh]
+[source, sh]
 ----
 git stash apply <stash>
 ----
@@ -939,7 +1012,7 @@ git stash apply <stash>
 |`stash clear`
 |Remove all stashes from your repository.
 |
-[source.sh]
+[source, sh]
 ----
 git stash clear
 ----
@@ -950,6 +1023,119 @@ TIP: Stashing is useful when *switching* branches or *temporarily*
 setting aside your changes *without committing* them. It allows you to
 work on different tasks or switch contexts without losing your current work.
 
+
+[role="mt-5"]
+== Common commands
+
+Find some already *prepared* Git commands used quite often.
+
+
+=== Clearing the index
+
+The commands below will *remove* all of the items from the Git *index* (not
+from the *working directory* or local repo) and then (re-)update from
+local folder `.`.
+
+.Clear the index and re-add all files
+[source, sh]
+----
+git rm -r --cached . && git add .
+----
+
+or forced
+
+.Clear the index forced and re-add all files
+[source, sh]
+----
+git rm -rf --cached . && git add .
+----
+
+=== Commit commands
+
+[cols="3a, 4a, 5a", options="header", width="100%", role="rtable mt-3 mb-3"]
+|===
+|Command |Description |Example
+
+|`commit -am "Cleanup files"`
+|Commit when files are *cleaned*. *No* files are changed but some *deleted*.
+|
+[source, sh]
+----
+git commit -am "Cleanup files"
+----
+
+|`commit -am "New version 2023.3.2"`
+|Commit a specific *version*.
+|
+[source, sh]
+----
+git commit -am "New version 2023.3.2"
+----
+
+|`commit --allow-empty -m "New version 2023.3.2"`
+|Commit a specific version but *no* (file) changes applied.
+|
+[source, sh]
+----
+git commit --allow-empty -m "New version 2023.3.2"
+----
+
+|`commit -am "Prepare new version 2023.3.2"`
+|Commit a specific version but changes are *not* final.
+|
+[source, sh]
+----
+git commit -am "Prepare new version 2023.3.2"
+----
+
+|`commit -am "Latest files"`
+|Commit latest changes but *no* specific reason given.
+|
+[source, sh]
+----
+git commit -am "Latest files"
+----
+
+|===
+
+=== Create a new repository on the command line
+
+[source, sh]
+----
+echo "# Heroku starter_app" >> README.md
+git init
+git add README.md
+git commit -m "initial commit"
+
+git remote add origin https://github.com/jekyll-one-org/my_heroku_starter_app.git
+git push -u origin main
+----
+
+
+=== Add file permissions on Windows
+
+Change file permissions *Unix-style* (chmod) when are on Windows. This may
+helpful when shell scripts are created and *execute* rights are required
+to be stored in the *repo*.
+
+[source, sh]
+----
+git update-index --chmod=+x 'name-of-shell-script'
+----
+
+NOTE: See for more details on
+https://medium.com/@akash1233/change-file-permissions-when-working-with-git-repos-on-windows-ea22e34d5cee[Change file permissions when working on windows, {browser-window--new}]
+
+=== Disable warning `CRLF will be replaced by LF`
+
+You can turn off the warning with:
+
+[source, sh]
+----
+git config --global core.safecrlf false
+----
+
+NOTE: This will only turn off the warning, not the *function* itself.
 
 
 
