@@ -2634,14 +2634,14 @@ var j1 = (function (options) {
           if (growthRatio >= 5) {
             j1['pageMonitor'].pageType = 'dynamic';
 
-            logger.debug('\n' + 'page growthRatio (%): ', j1['pageMonitor'].growthRatio);
+            logger.debug('\n' + 'page growthRatio: ' + j1['pageMonitor'].growthRatio + '%');
             logger.debug('\n' + 'page detected as: dynamic');
 
           } else {
             // set the page type to 'static' if low growth detected
             //
             if (typeof j1['pageMonitor'].growthRatio != 'undefined' && j1['pageMonitor'].growthRatio > 0) {
-              logger.debug('\n' + 'page growthRatio (%): ', j1['pageMonitor'].growthRatio);
+              logger.debug('\n' + 'page growthRatio: ' + j1['pageMonitor'].growthRatio + '%');
               j1['pageMonitor'].pageType = 'static';
               logger.debug('\n' + 'page detected as: static');
             }
