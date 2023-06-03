@@ -93,12 +93,11 @@ j1.adapter.advertising = (function (j1, window) {
 var environment             = '{{environment}}';
 var date                    = new Date();
 var timestamp_now           = date.toISOString();
-var gasScript               = document.createElement('script');
+var gadScript               = document.createElement('script');
 var adInitializerScript     = document.createElement('script');
 var advertisingDefaults;
 var aadvertisingSettings;
 var advertisingOptions;
-var frontmatterOptions;
 var autoHideOnUnfilled;
 var addBorderOnUnfilled;
 var checkTrackingProtection;
@@ -111,8 +110,8 @@ var hostname;
 var cookie_names;
 var user_consent;
 var advertisingProvider;
-var publisherID;
-var validPublisherID;
+var providerID;
+var validProviderID;
 var _this;
 var logger;
 var logText;
@@ -127,6 +126,20 @@ var logText;
     // adapter initializer
     // -------------------------------------------------------------------------
     init: function (options) {
+
+    {% if advertising %}
+      // [INFO   ] [j1.adapter.advertising                  ] [ detected advertising provider (j1_config): {{advertising_provider}}} ]
+      // [INFO   ] [j1.adapter.advertising                  ] [ start processing load region head, layout: {{page.layout}} ]
+
+      // Load  module DEFAULTS|CONFIG
+      advertisingDefaults     = $.extend({},   {{analytics_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      aadvertisingSettings    = $.extend({},   {{analytics_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      advertisingOptions      = $.extend(true, {}, advertisingDefaults, aadvertisingSettings);
+
+      autoHideOnUnfilled      = analyticsOptions.google.autoHideOnUnfilled;
+      addBorderOnUnfilled     = analyticsOptions.google.addBorderOnUnfilled;
+      checkTrackingProtection = analyticsOptions.google.checkTrackingProtection;
+      showErrorPageOnBlocked  = analyticsOptions.google.showErrorPageOnBlocked;
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -144,48 +157,29 @@ var logText;
       url                   = new liteURL(window.location.href);
       hostname              = url.hostname;
 
-      // create settings object from frontmatter
-      frontmatterOptions      = options != null ? $.extend({}, options) : {};
+      {% case advertising_provider %}
+      {% when "google" %}
+      // [INFO   ] [j1.adapter.advertising                  ] [ place provider: Google Adsense ]
 
-      advertisingDefaults     = $.extend({},   {{advertising_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      aadvertisingSettings    = $.extend({},   {{advertising_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      advertisingOptions      = $.extend(true, {}, advertisingDefaults, aadvertisingSettings);
+      _this = j1.adapter.advertising;
+      logger = log4javascript.getLogger('j1.adapter.advertising.google');
 
-      autoHideOnUnfilled      = advertisingOptions.google.autoHideOnUnfilled;
-      addBorderOnUnfilled     = advertisingOptions.google.addBorderOnUnfilled;
-      checkTrackingProtection = advertisingOptions.google.checkTrackingProtection;
-      showErrorPageOnBlocked  = advertisingOptions.google.showErrorPageOnBlocked;
+      // initialize state flag
+      _this.setState('started');
+      logger.debug('\n' + 'state: ' + _this.getState());
+      logger.info('\n' + 'module is being initialized');
 
-      var dependencies_met_page_ready = setInterval (function (options) {
-        var pageState     = $('#no_flicker').css("display");
-        var pageVisible   = (pageState == 'block') ? true: false;
-        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+      var dependencies_met_page_ready = setInterval(function() {
+        if (j1.getState() == 'finished') {
 
-        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
-        {% if advertising %}
-
-          {% case advertising_provider %}
-          {% when "google" %}
-          // [INFO   ] [j1.adapter.advertising                  ] [ place provider: Google Adsense ]
-
-          _this = j1.adapter.advertising;
-          logger = log4javascript.getLogger('j1.adapter.advertising.google');
-
-          // initialize state flag
-          _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
-
-          publisherID         = advertisingOptions.google.publisherID;
+          providerID          = advertisingOptions.publisherID;
           advertisingProvider = 'Google Adsense';
-          validPublisherID    = (publisherID.includes('your')) ? false : true;
-
-          if (!validPublisherID) {
-            logger.warn('\n' + 'invalid publisherID detected for Google Adsense (GAS): ' + publisherID);
+          validProviderID = (providerID.includes('your')) ? false : true;
+          if (!validProviderID) {
+            logger.warn('\n' + 'invalid publisherID detected for Google Adsense (GAS): ' + providerID);
             logger.info('\n' + 'skip initialization for provider: ' + advertisingProvider);
+            clearInterval(dependencies_met_page_ready);
             return false;
-          } else {
-            logger.info('\n' + 'use publisherID for Google Adsense (GAS): ' + publisherID);
           }
 
           if (user_consent.personalization) {
@@ -194,15 +188,14 @@ var logText;
             // -----------------------------------------------------------------
             // _this.place_ads();
 
-            // add GAS API (Google Adsense) dynamically in head section
-            // loaded async
+            // add gad api dynamically in the head section
             // -----------------------------------------------------------------
-            logger.info('\n' + 'add Google Adsense (GAS) API in section: head');
-            gasScript.async = true;
-            gasScript.id    = 'gas-api';
-            gasScript.src   = '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
-            gasScript.setAttribute('data-ad-client', publisherID);
-            document.head.appendChild(gasScript);
+            logger.info('\n' + 'add gas api in section: head');
+            gadScript.async = true;
+            gadScript.id    = 'gas-api';
+            gadScript.src   = '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
+            gadScript.setAttribute('data-ad-client', 'ca-pub-3885670015316130');
+            document.head.appendChild(gadScript);
 
             // setup monitor for state changes on all ads configured
             // ---------------------------------------------------------------
@@ -213,10 +206,11 @@ var logText;
             // -------------------------------------------------------------------
             if (checkTrackingProtection) {
               logger.debug('\n' + 'run checks for tracking protection');
-
               _this.check_tracking_protection();
+
               var dependencies_met_tracking_check_ready = setInterval (function (options) {
                 if (typeof tracking_protection !== 'undefined' ) {
+
                   var browser_tracking_feature = navigator.DoNotTrack;
 
                   if (!tracking_protection && !browser_tracking_feature) {
@@ -236,8 +230,6 @@ var logText;
                 clearInterval(dependencies_met_tracking_check_ready);
               }, 25);
             } else {
-              // no protection check enabled
-
               // setup monitor for state changes on all ads configured
               // ---------------------------------------------------------------
               logger.info('\n' + 'setup monitoring');
@@ -248,7 +240,7 @@ var logText;
               logger.info('\n' + 'module initialized successfully');
               clearInterval(dependencies_met_tracking_check_ready);
             }
-
+            clearInterval(dependencies_met_page_ready);
           } else {
             // manage GAD cookies if no consent is given|rejected
             // -----------------------------------------------------------------
@@ -282,25 +274,27 @@ var logText;
                 }
               }
             }
-
+            clearInterval(dependencies_met_page_ready);
           } // END if user_consent.personalization
+        } // END if getState 'finished'
+      }, 25);
 
-          {% when "custom" %}
-          // [INFO   ] [j1.adapter.advertising                  ] [ place provider: Custom Provider ]
-          {% endcase %}
-          // [INFO   ] [j1.adapter.advertising                  ] [ end processing ]
-          {% else %}
-            var ads_found = document.getElementsByClassName('adsbygoogle').length;
-            logger = log4javascript.getLogger('j1.adapter.advertising.google');
-            logger.warn('\n' + 'found ads in page: #' + ads_found);
-            logger.warn('\n' + 'no ads initialized, advertising disabled');
-          {% endif %}
-
+      {% when "custom" %}
+      // [INFO   ] [j1.adapter.advertising                  ] [ place provider: Custom Provider ]
+      {% endcase %}
+      // [INFO   ] [j1.adapter.advertising                  ] [ end processing ]
+      {% else %}
+      var dependencies_met_page_ready = setInterval(function() {
+        if (j1.getState() == 'finished') {
+          var ads_found = document.getElementsByClassName('adsbygoogle').length;
+          logger = log4javascript.getLogger('j1.adapter.advertising.google');
+          logger.warn('\n' + 'found ads in page: #' + ads_found);
+          logger.warn('\n' + 'no ads initialized, advertising disabled');
           clearInterval(dependencies_met_page_ready);
         }
       }, 25);
-
-    return;
+      {% endif %}
+      return;
     }, // END init
 
     // -------------------------------------------------------------------------
@@ -318,20 +312,17 @@ var logText;
         callback: function (event) {
           if (event.newValue === 'unfilled') {
             var elm             = event.target.dataset;
-            var adSlotIsVisible = $('.adsbygoogle').is(":visible");
+            var adSlotIsVisible = $('#' + elm.adSlot ).is(":visible");
             if (adSlotIsVisible) {
-              logger.warn('\n' + 'found ad in state ' + event.newValue + ' on slot: ' + elm.adSlot);
-              if (addBorderOnUnfilled) {
-                $('.adsbygoogle').addClass('border--dotted');
-              }
-
-              if (autoHideOnUnfilled) {
-                logger.info('\n' + ' hide ad for slot: ' + elm.adSlot);
-                $('.adsbygoogle').hide();
+              if (addBorderOnUnfilled) { $('.adsbygoogle').addClass('border--dotted'); }
+              if (elm.adClient) {
+                logger.warn('\n' + 'found ad state ' + event.newValue + ' for slot: ' + elm.adSlot);
+                if (autoHideOnUnfilled) {
+                  logger.warn('\n' + ' hide ad for slot: ' + elm.adSlot);
+                  $('#' + elm.adSlot ).hide();
+                }
               }
             }
-          } else {
-            // logger.info('\n' + 'found ad in state ' + event.newValue + ' on slot: ' + elm.adSlot);
           }
         }
       });
@@ -391,7 +382,15 @@ var logText;
       logger.info(logText);
 
       // START loadig ads
+      var dependencies_met_page_ready = setInterval (function (options) {
+        if (j1.getState() === 'finished') {
 
+          {% comment %} See loop for loading elements with adapter/scroller.js
+          ---------------------------------------------------------------------- {% endcomment %}
+          clearInterval(dependencies_met_page_ready);
+
+        }
+      });
       // END place ads
     },
 

@@ -148,8 +148,9 @@ var lastPageInfo;
         var pageVisible   = (pageState == 'block') ? true: false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-//      if (j1.getState() === 'finished' && pageVisible && atticFinished) {
-        if (j1.getState() === 'finished' && pageVisible) {
+//      if (j1.getState() === 'finished' && pageVisible) {
+        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
+
           _this.generate_scrollers();
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());

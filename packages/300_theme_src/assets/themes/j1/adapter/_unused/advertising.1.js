@@ -98,7 +98,6 @@ var adInitializerScript     = document.createElement('script');
 var advertisingDefaults;
 var aadvertisingSettings;
 var advertisingOptions;
-var frontmatterOptions;
 var autoHideOnUnfilled;
 var addBorderOnUnfilled;
 var checkTrackingProtection;
@@ -111,8 +110,8 @@ var hostname;
 var cookie_names;
 var user_consent;
 var advertisingProvider;
-var publisherID;
-var validPublisherID;
+var providerID;
+var validProviderID;
 var _this;
 var logger;
 var logText;
@@ -128,41 +127,40 @@ var logText;
     // -------------------------------------------------------------------------
     init: function (options) {
 
-      // -----------------------------------------------------------------------
-      // Default module settings
-      // -----------------------------------------------------------------------
-      var settings = $.extend({
-        module_name: 'j1.adapter.advertising',
-        generated:   '{{site.time}}'
-      }, options);
-
-      // -----------------------------------------------------------------------
-      // Global variable settings
-      // -----------------------------------------------------------------------
-      cookie_names          = j1.getCookieNames();
-      user_consent          = j1.readCookie(cookie_names.user_consent);
-      url                   = new liteURL(window.location.href);
-      hostname              = url.hostname;
-
-      // create settings object from frontmatter
-      frontmatterOptions      = options != null ? $.extend({}, options) : {};
-
-      advertisingDefaults     = $.extend({},   {{advertising_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      aadvertisingSettings    = $.extend({},   {{advertising_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      advertisingOptions      = $.extend(true, {}, advertisingDefaults, aadvertisingSettings);
-
-      autoHideOnUnfilled      = advertisingOptions.google.autoHideOnUnfilled;
-      addBorderOnUnfilled     = advertisingOptions.google.addBorderOnUnfilled;
-      checkTrackingProtection = advertisingOptions.google.checkTrackingProtection;
-      showErrorPageOnBlocked  = advertisingOptions.google.showErrorPageOnBlocked;
-
       var dependencies_met_page_ready = setInterval (function (options) {
-        var pageState     = $('#no_flicker').css("display");
-        var pageVisible   = (pageState == 'block') ? true: false;
-        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+        var pageState   = $('#no_flicker').css("display");
+        var pageVisible = (pageState == 'block') ? true: false;
 
-        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
+        if ( j1.getState() === 'finished' && pageVisible ) {
         {% if advertising %}
+          // [INFO   ] [j1.adapter.advertising                  ] [ detected advertising provider (j1_config): {{advertising_provider}}} ]
+          // [INFO   ] [j1.adapter.advertising                  ] [ start processing load region head, layout: {{page.layout}} ]
+
+          // Load  module DEFAULTS|CONFIG
+          advertisingDefaults     = $.extend({},   {{advertising_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+          aadvertisingSettings    = $.extend({},   {{advertising_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+          advertisingOptions      = $.extend(true, {}, advertisingDefaults, aadvertisingSettings);
+
+          autoHideOnUnfilled      = advertisingOptions.google.autoHideOnUnfilled;
+          addBorderOnUnfilled     = advertisingOptions.google.addBorderOnUnfilled;
+          checkTrackingProtection = advertisingOptions.google.checkTrackingProtection;
+          showErrorPageOnBlocked  = advertisingOptions.google.showErrorPageOnBlocked;
+
+          // -----------------------------------------------------------------------
+          // Default module settings
+          // -----------------------------------------------------------------------
+          var settings = $.extend({
+            module_name: 'j1.adapter.advertising',
+            generated:   '{{site.time}}'
+          }, options);
+
+          // -----------------------------------------------------------------------
+          // Global variable settings
+          // -----------------------------------------------------------------------
+          cookie_names          = j1.getCookieNames();
+          user_consent          = j1.readCookie(cookie_names.user_consent);
+          url                   = new liteURL(window.location.href);
+          hostname              = url.hostname;
 
           {% case advertising_provider %}
           {% when "google" %}
@@ -176,16 +174,16 @@ var logText;
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module is being initialized');
 
-          publisherID         = advertisingOptions.google.publisherID;
+          providerID          = advertisingOptions.google.publisherID;
           advertisingProvider = 'Google Adsense';
-          validPublisherID    = (publisherID.includes('your')) ? false : true;
-
-          if (!validPublisherID) {
-            logger.warn('\n' + 'invalid publisherID detected for Google Adsense (GAS): ' + publisherID);
+          validProviderID = (providerID.includes('your')) ? false : true;
+          if (!validProviderID) {
+            logger.warn('\n' + 'invalid publisherID detected for Google Adsense (GAS): ' + providerID);
             logger.info('\n' + 'skip initialization for provider: ' + advertisingProvider);
+            clearInterval(dependencies_met_page_ready);
             return false;
           } else {
-            logger.info('\n' + 'use publisherID for Google Adsense (GAS): ' + publisherID);
+            logger.info('\n' + 'use publisherID for Google Adsense (GAS): ' + providerID);
           }
 
           if (user_consent.personalization) {
@@ -195,13 +193,12 @@ var logText;
             // _this.place_ads();
 
             // add GAS API (Google Adsense) dynamically in head section
-            // loaded async
             // -----------------------------------------------------------------
             logger.info('\n' + 'add Google Adsense (GAS) API in section: head');
             gasScript.async = true;
             gasScript.id    = 'gas-api';
             gasScript.src   = '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
-            gasScript.setAttribute('data-ad-client', publisherID);
+            gasScript.setAttribute('data-ad-client', providerID);
             document.head.appendChild(gasScript);
 
             // setup monitor for state changes on all ads configured
@@ -213,10 +210,11 @@ var logText;
             // -------------------------------------------------------------------
             if (checkTrackingProtection) {
               logger.debug('\n' + 'run checks for tracking protection');
-
               _this.check_tracking_protection();
+
               var dependencies_met_tracking_check_ready = setInterval (function (options) {
                 if (typeof tracking_protection !== 'undefined' ) {
+
                   var browser_tracking_feature = navigator.DoNotTrack;
 
                   if (!tracking_protection && !browser_tracking_feature) {
@@ -236,8 +234,6 @@ var logText;
                 clearInterval(dependencies_met_tracking_check_ready);
               }, 25);
             } else {
-              // no protection check enabled
-
               // setup monitor for state changes on all ads configured
               // ---------------------------------------------------------------
               logger.info('\n' + 'setup monitoring');
@@ -248,7 +244,7 @@ var logText;
               logger.info('\n' + 'module initialized successfully');
               clearInterval(dependencies_met_tracking_check_ready);
             }
-
+            clearInterval(dependencies_met_page_ready);
           } else {
             // manage GAD cookies if no consent is given|rejected
             // -----------------------------------------------------------------
@@ -295,9 +291,8 @@ var logText;
             logger.warn('\n' + 'found ads in page: #' + ads_found);
             logger.warn('\n' + 'no ads initialized, advertising disabled');
           {% endif %}
-
-          clearInterval(dependencies_met_page_ready);
         }
+        clearInterval(dependencies_met_page_ready);
       }, 25);
 
     return;
@@ -391,7 +386,15 @@ var logText;
       logger.info(logText);
 
       // START loadig ads
+      var dependencies_met_page_ready = setInterval (function (options) {
+        if (j1.getState() === 'finished') {
 
+          {% comment %} See loop for loading elements with adapter/scroller.js
+          ---------------------------------------------------------------------- {% endcomment %}
+          clearInterval(dependencies_met_page_ready);
+
+        }
+      });
       // END place ads
     },
 

@@ -166,8 +166,9 @@ j1.adapter.toccer = (function () {
           var pageVisible = (pageState == 'block') ? true: false;
           var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-//        if (j1.getState() == 'finished' && pageVisible && atticFinished) {
-          if (j1.getState() == 'finished' && pageVisible) {
+//        if (j1.getState() == 'finished' && pageVisible) {
+          if (j1.getState() == 'finished' && pageVisible && atticFinished) {
+
             _this.initToccerCore(toccerOptions);
             _this.setState('finished');
 

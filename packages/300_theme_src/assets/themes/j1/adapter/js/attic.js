@@ -675,9 +675,15 @@ j1.adapter.attic = (function (j1, window) {
 
         {% else %}
           {% assign attic_id = item.attic.id %}
+          _this.setState('finished');
+          logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'initialize attic on id {{attic_id}}: finished');
+          logger.info('\n' + 'module initializaton: finished');
+
           // add additional top space if attic disabled
           //
           $('#content').addClass('mt-3');
+
           logger.warn('\n' + 'attic on id {{attic_id}}: disabled');
           $('#no_flicker').css('display', 'block');
         {% endif %} // END if header enabled

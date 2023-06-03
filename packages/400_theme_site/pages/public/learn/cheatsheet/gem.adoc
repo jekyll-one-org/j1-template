@@ -22,7 +22,7 @@ image:
 regenerate:                             false
 permalink:                              /pages/public/learn/cheatsheet/gem/
 
-resources:                              [ animate, clipboard, rouge ]
+resources:                              [ advertising, animate, clipboard, rouge ]
 resource_options:
   - attic:
       slides:
@@ -50,6 +50,32 @@ resource_options:
 // Load page attributes
 // -----------------------------------------------------------------------------
 {% include {{load_attributes}} scope="global" %}
+
+// Google Ads
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+++++
+<!-- ad container -->
+<div id="google-ad-1" class="mb-5">
+  <ins class="adsbygoogle"
+    style="display: block;"
+    data-ad-client="pub-3885670015316130"
+    data-ad-slot="0000000001"
+    data-ad-format="auto"
+    data-full-width-responsive="true">
+  </ins>
+</div>
+
+<!-- ad container -->
+<!-- div id="google-ad-2" class="mb-5">
+  <ins class="adsbygoogle"
+    style="display: block;"
+    data-ad-client="pub-3885670015316130"
+    data-ad-slot="0000000002"
+    data-ad-format="auto"
+    data-full-width-responsive="true">
+  </ins>
+</div -->
+++++
 
 
 // Page content

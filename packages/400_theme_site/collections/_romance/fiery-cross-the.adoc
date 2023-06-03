@@ -54,10 +54,6 @@ resource_options:
 // -----------------------------------------------------------------------------
 // image:{{page.book.cover}}[width=200, role="mr-4 float-left"]
 
-Crossing the boundaries of genre with its unrivalled storytelling, Diana
-Gabaldon's new novel is a gift both to her millions of loyal fans and to
-the lucky readers who have yet to discover her.
-
 In the ten years since her extraordinary debut novel, Outlander, was published,
 beloved author Diana Gabaldon has entertained scores of readers with her
 heart-stirring stories and remarkable characters. The four volumes of her
@@ -81,8 +77,14 @@ excerpt__end
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-
 [[readmore]]
+[role="mt-5"]
+image:{{page.book.cover}}[width=350, role="mr-4 float-left"]
+
+Crossing the boundaries of genre with its unrivalled storytelling, Diana
+Gabaldon's new novel is a gift both to her millions of loyal fans and to
+the lucky readers who have yet to discover her.
+
 The story of Outlander begins just after the Second World War, when a British
 field nurse named Claire Randall walks through a cleft stone in the Scottish
 highlands and is transported back some two hundred years to 1743. Here, now,

@@ -57,13 +57,6 @@ life and works, we've given over the 2017 Discworld Diary - which will be a
 perennial diary - to remembrances and tributes from some of those who knew
 and loved him and his extraordinary body of work.
 
-Contributors include Neil Gaiman, A S Byatt, Terry Pratchett's literary agent
-Colin Smythe, co-author of the Long Earth books Stephen Baxter, famed
-bookseller Rog Peyton, and many more.
-
-With an introduction from his daughter Rhianna Pratchett and an afterword from
-longtime friend and colleague Rob Wilkins.
-
 excerpt__end
 
 //  Load Liquid procedures
@@ -80,7 +73,13 @@ excerpt__end
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-
 [[readmore]]
-With an introduction from his daughter Rhianna Pratchett and an afterword from
-longtime friend and colleague Rob Wilkins.
+[role="mt-5"]
+image:{{page.book.cover}}[width=350, role="mr-4 float-left"]
+
+Contributors include Neil Gaiman, A S Byatt, Terry Pratchett's literary agent
+Colin Smythe, co-author of the Long Earth books Stephen Baxter, famed
+bookseller Rog Peyton, and many more.
+
+NOTE: With an introduction from his daughter Rhianna Pratchett and an afterword
+from longtime friend and colleague Rob Wilkins.

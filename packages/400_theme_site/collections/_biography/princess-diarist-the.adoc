@@ -57,12 +57,10 @@ resource_options:
 
 The Princess Diarist is Carrie Fisher's intimate, hilarious and revealing
 recollection of what happened behind the scenes on one of the most famous
-film sets of all time, the first Star Wars movie.
-
-When Carrie Fisher recently discovered the journals she kept during the
-filming of the first Star Wars movie, she was astonished to see what they
-had preserved-plaintive love poems, unbridled musings with youthful naivete,
-and a vulnerability that she barely
+film sets of all time, the first Star Wars movie. When Carrie Fisher recently
+discovered the journals she kept during the filming of the first Star Wars
+movie, she was astonished to see what they had preserved-plaintive love poems,
+unbridled musings with youthful naivete, and a vulnerability that she barely
 recognized.
 
 Today, her fame as an author, actress, and pop-culture icon is indisputable,
@@ -76,15 +74,25 @@ excerpt__end
 image:{{page.book.cover}}[width=350, role="mr-4 float-left"]
 
 [[readmore]]
+In "The Princess Diarist," Carrie Fisher shares her experiences and reflections
+on the making of the original "Star Wars" trilogy. The book primarily focuses
+on her time filming the first "Star Wars" film, released in 1977, when she
+was nineteen.
+
+Fisher writes candidly about her insecurity, complex relationship with fame,
+and experiences as a young actress thrust into the spotlight. She also reveals
+a previously undisclosed romantic relationship with co-star Harrison Ford
+during the filming of "Star Wars."
+
 With these excerpts from her handwritten notebooks, The Princess Diarist is
 Fisher's intimate and revealing recollection of what happened on one of the
 most famous film sets of all time-and what developed behind the scenes.
-
 And today, as she reprises her most iconic role for the latest Star Wars
 trilogy, Fisher also ponders the joys and insanity of celebrity, and the
 absurdity of a life spawned by Hollywood royalty, only to be surpassed by
 her own outer-space royalty.
 
-Laugh-out-loud hilarious and endlessly quotable, The Princess Diarist brims
-with the candour and introspection of a diary while offering shrewd insight
-into the type of stardom that few will ever experience.
+"The Princess Diarist" is a memoir and a reflection on the impact of
+"Star Wars" on Fisher's life and career. It offers insights into the
+challenges of fame, the pressures of being part of a beloved franchise,
+and the lasting cultural significance of Princess Leia as a character.

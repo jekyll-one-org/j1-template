@@ -79,8 +79,10 @@ excerpt__end
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-
 [[readmore]]
+[role="mt-5"]
+image:{{page.book.cover}}[width=350, role="mr-4 float-left"]
+
 The year is 1772, and on the eve of the American Revolution, the long fuse of
 rebellion has already been lit. Men lie dead in the streets of Boston, and
 in the backwoods of North Carolina, isolated cabins burn in the forest. With

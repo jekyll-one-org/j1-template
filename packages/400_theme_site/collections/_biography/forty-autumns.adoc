@@ -54,11 +54,10 @@ resource_options:
 
 In Forty Autumns, Nina Willner recounts the history of three generations of
 her family - mothers, sisters, daughters and cousins - separated by forty years
-of Soviet rule, and reunited after the fall of the Berlin Wall.
-
-Shortly after the end of the Second World War, as the Soviets took control
-of the eastern part of Germany, Hanna, a schoolteacher's daughter, escaped
-with nothing more than a small suitcase and the clothes on her back.
+of Soviet rule, and reunited after the fall of the Berlin Wall. Shortly after
+the end of the Second World War, as the Soviets took control of the eastern
+part of Germany, Hanna, a schoolteacher's daughter, escaped with nothing more
+than a small suitcase and the clothes on her back.
 
 As Hanna built a new life in the West, her relatives (her mother, father and
 eight siblings) remained in the East. The construction of the Berlin Wall
@@ -72,6 +71,12 @@ excerpt__end
 image:{{page.book.cover}}[width=350, role="mr-4 float-left"]
 
 [[readmore]]
+The book traces the story of the author's family, spanning four decades
+and multiple generations. The central focus is on Willner's mother's side of
+the family, who were separated by the construction of the Berlin Wall in 1961.
+The author's mother, Hanna, escaped to West Germany, while her mother,
+siblings, and other relatives remained in East Germany.
+
 Hanna fell in love and moved to America. She made many attempts to establish
 contact with her family, but most were unsuccessful. Her father was under
 close observation; her mother, younger sister Heidi and the others struggled
@@ -88,6 +93,7 @@ Though separated by only a few miles, Nina and her relatives led entirely
 different lives. Once the Berlin Wall came down, and the families were
 reunited, Nina Willner discovered an extraordinary story.
 
-In Forty Autumns she vividly brings to life many accounts of courage and
-survival, set against the backdrop of four decades that divided a nation
-and the world.
+"Forty Autumns" highlights the resilience, determination, and courage of
+individuals who lived through the division of Germany. It sheds light on
+the sacrifices made by families separated by the Berlin Wall and the
+enduring power of love and hope in the face of adversity.

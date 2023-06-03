@@ -27,9 +27,15 @@ description:
 # User settings
 #
 settings:
+  enabled:                              true
 
   google:
-    publisherID:                        '<your-publisher-id>'
+    # jekyll.one                        pub-3885670015316130
+    # freeformatter.com                 ca-pub-2485708030241382
+    publisherID:                        pub-3885670015316130                    # <your-publisher-id>'
+
+    autoHideOnUnfilled:                 false
+    addBorderOnUnfilled:                true
 
   # ----------------------------------------------------------------------------
   # Ad settings

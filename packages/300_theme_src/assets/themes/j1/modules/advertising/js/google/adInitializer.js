@@ -99,7 +99,7 @@ $(document).ready(function() {
 
       if (user_consent.personalization) {
         if (ads_found) {
-          logger.info('\n' + 'initialize all ads in page: #' + ads_found);
+          logger.info('\n' + 'initialize all ads in page, found: ' + ads_found);
           [].forEach.call(document.querySelectorAll('.adsbygoogle'), function() {
             (adsbygoogle = window.adsbygoogle || []).push({});
           });

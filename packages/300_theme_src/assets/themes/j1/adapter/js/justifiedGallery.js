@@ -134,8 +134,9 @@ j1.adapter.justifiedGallery = (function (j1, window) {
         var pageVisible   = (pageState == 'block') ? true : false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-//      if (j1.getState() == 'finished' && pageVisible && atticFinished) {
-        if (j1.getState() == 'finished' && pageVisibled) {
+//      if (j1.getState() == 'finished' && pageVisible) {
+        if (j1.getState() == 'finished' && pageVisible && atticFinished) {
+
           // initialize state flag
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());

@@ -59,10 +59,6 @@ world and much loved characters in this full-color illustrated hardback
 edition of the nation's favourite children's book - Harry Potter and the
 Philosopher's Stone.
 
-Brimming with rich detail and humour that perfectly complements J.K. Rowling's
-timeless classic, Jim Kay's glorious illustrations will captivate fans and new
-readers alike.
-
 excerpt__end
 
 //  Load Liquid procedures
@@ -79,8 +75,14 @@ excerpt__end
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-
 [[readmore]]
+[role="mt-5"]
+image:{{page.book.cover}}[width=350, role="mr-4 float-left"]
+
+Brimming with rich detail and humour that perfectly complements J.K. Rowling's
+timeless classic, Jim Kay's glorious illustrations will captivate fans and new
+readers alike.
+
 When a letter arrives for unhappy but ordinary Harry Potter, a decade-old
 secret is revealed to him that apparently he's the last to know. His parents
 were wizards, killed by a Dark Lord's curse when Harry was just a baby, and

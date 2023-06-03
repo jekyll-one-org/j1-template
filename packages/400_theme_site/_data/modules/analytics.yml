@@ -23,8 +23,8 @@ description:
 # User configuration settings
 #
 settings:
-  enabled:                              true
-  trackingID:                           your-tracking-id
+  enabled:                              false
+  trackingID:                           '<your-tracking-id>'
 
   # ----------------------------------------------------------------------------
   # Provider settings

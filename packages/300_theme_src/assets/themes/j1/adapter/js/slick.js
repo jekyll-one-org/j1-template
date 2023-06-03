@@ -36,7 +36,10 @@ regenerate:                             true
 {% assign template_config         = site.data.j1_config %}
 
 {% comment %} Set config data
--------------------------------------------------------------------------------- {% endcomment %}
+-------------------------------------------------------------------------------- {% endcomment
+{% assign attic_defaults          = modules.defaults.attics.defaults %}
+{% assign attic_settings          = modules.attics.settings %}
+
 {% assign slick_defaults          = modules.defaults.slick.defaults %}
 {% assign slick_settings          = modules.slick.settings %}
 {% assign slick_lightbox_defaults = modules.defaults.slick.defaults.lightbox %}
@@ -86,6 +89,9 @@ j1.adapter.slick = (function (j1, window) {
   var _this;
   var logger;
   var logText;
+  var atticDefaults;
+  var atticSettings;
+  var atticOptions;
   var slickDefaults;
   var slickSettings;
   var slickLightboxDefaults;
@@ -126,6 +132,10 @@ j1.adapter.slick = (function (j1, window) {
       }, options);
 
       // Load  module DEFAULTS|CONFIG
+      atticDefaults         = $.extend({}, {{attic_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      atticSettings         = $.extend({}, {{attic_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      atticOptions          = $.extend(true, {}, atticDefaults, atticSettings);
+
       slickDefaults         = $.extend({}, {{slick_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       slickSettings         = $.extend({}, {{slick_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       slickLightboxDefaults = $.extend({}, {{slick_lightbox_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
@@ -162,8 +172,7 @@ j1.adapter.slick = (function (j1, window) {
         var pageVisible   = (pageState == 'block') ? true: false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-//      if (j1.getState() === 'finished' && pageVisible && atticFinished) {
-        if (j1.getState() === 'finished' && pageVisible) {
+        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
 
           {% for carousel in slick_settings.carousels %} {% if carousel.enabled %}
           logger.info('\n' + 'carousel is being initialized on id: ' + '{{carousel.id}}');

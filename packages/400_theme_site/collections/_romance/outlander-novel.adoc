@@ -62,11 +62,6 @@ aboulder in one of the ancient stone circles that dot the British Isles.
 Suddenly she is a Sassenach--an "outlander"--in a Scotland torn by war and
 raiding border clans in the year of our Lord...1743.
 
-Hurled back in time by forces she cannot understand, Claire's destiny in soon
-inextricably intertwined with Clan MacKenzie and the forbidden Castle Leoch.
-She is catapulted without warning into the intrigues of lairds and spies that
-may threaten her life ...and shatter her heart.
-
 excerpt__end
 
 //  Load Liquid procedures
@@ -83,8 +78,15 @@ excerpt__end
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
-
 [[readmore]]
+[role="mt-5"]
+image:{{page.book.cover}}[width=350, role="mr-4 float-left"]
+
+Hurled back in time by forces she cannot understand, Claire's destiny in soon
+inextricably intertwined with Clan MacKenzie and the forbidden Castle Leoch.
+She is catapulted without warning into the intrigues of lairds and spies that
+may threaten her life ...and shatter her heart.
+
 For here, James Fraser, a gallant young Scots warrior, shows her a passion so
 fierce and a love so absolute that Claire becomes a woman torn between fidelity
 and desire...and between two vastly different men in two irreconcilable lives.

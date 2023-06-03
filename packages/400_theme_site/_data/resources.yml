@@ -19,6 +19,7 @@
 # ------------------------------------------------------------------------------
 # RESOURCE configuration settings for SYNCHRONOUS (sync) and
 # ASYNCHRONOUS (async|defer) LOAD for all LAYOUTS and (content) PAGES
+# See: https://javascript.info/script-async-defer
 
 # ------------------------------------------------------------------------------
 # GLOBALS
@@ -1109,7 +1110,7 @@ resources:
       region:                           head
       required:                         ondemand
       preload:                          false
-      script_load:                      async
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   true
       data:
@@ -1640,7 +1641,7 @@ resources:
       layout:                           [ all ]
       required:                         ondemand
       preload:                          false
-      script_load:                      async
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   false
       data:
@@ -1665,7 +1666,7 @@ resources:
       layout:                           [ all ]
       required:                         ondemand
       preload:                          false
-      script_load:                      async
+      script_load:                      defer
       dependencies:                     false
       pass_init_data:                   true
       data:
