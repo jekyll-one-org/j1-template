@@ -30,83 +30,124 @@ settings:
   enabled:                              true
 
   google:
-    # jekyll.one                        pub-3885670015316130
-    # freeformatter.com                 ca-pub-2485708030241382
+#   publisherID:                        pub-3885670015316130                    # jekyll.one
     publisherID:                        pub-3885670015316130                    # <your-publisher-id>'
 
     autoHideOnUnfilled:                 false
     addBorderOnUnfilled:                true
 
-  # ----------------------------------------------------------------------------
-  # Ad settings
-  # ----------------------------------------------------------------------------
+    # --------------------------------------------------------------------------
+    # Container settings
+    #
+    #   enabled
+    #   ------------------------------------------------------------------------
+    #   Enables or disables the ad unit (container). If an container is
+    #   disabled, this unit get NOT initialized for ads on any page.
+    #
+    #   values:                       true|false
+    #   default:                      true
+    #
+    #   id
+    #   ------------------------------------------------------------------------
+    #   Enables or disables the ad unit (container). If an container is
+    #   disabled, this unit get NOT initialized for ads on any page.
+    #
+    #   values:                       string
+    #   default:                      none
+    #
+    #   placement (currently NOT supported)
+    #   ------------------------------------------------------------------------
+    #   Defines the placements of the unit container specified. For default
+    #   (manual), all ad units are placed on (home/content) pages manually
+    #   by adding the <ins>-code.
+    #
+    #   values:                       manual|auto|content-top|content-bottom
+    #   default:                      manual
+    #
+    # --------------------------------------------------------------------------
+
+    # --------------------------------------------------------------------------
+    # Ad settings
+    #
+    #   styles
+    #   ------------------------------------------------------------------------
+    #   Defines the CSS style|s
+    #
+    #   values:                       string
+    #   default:                      display: block
+    #
+    #   slot
+    #   ------------------------------------------------------------------------
+    #   Defines the slot id
+    #
+    #   values:                       number
+    #   default:                      none
+    #
+    #   format
+    #   ------------------------------------------------------------------------
+    #   Defines the (auto)-format settings
+    #
+    #   values:                       string
+    #   default:                      auto
+    #
+    #   responsive
+    #   ------------------------------------------------------------------------
+    #   Enables|Disables responsive display if pages changes in width ot height
+    #
+    #   values:                       string
+    #   default:                      none
+    #
+    #   test
+    #   ------------------------------------------------------------------------
+    #   For testing only. If ad-test is enabled (on), clicks and impressions
+    #   NOT recorded by the service and advertisers are NOT charged.
+    #
+    #   values:                       on|off
+    #   default:                      off
+    #
+    # --------------------------------------------------------------------------
+
+    # --------------------------------------------------------------------------
+    # All advertising container/ad available
+    # --------------------------------------------------------------------------
     ads:
-      # ------------------------------------------------------------------------
-      # Attributes
-      #
-      #   enabled
-      #   ----------------------------------------------------------------------
-      #   Enables or disables an ad unit (container). If an container is
-      #   disabled, this unit get NOT initialized for ads on any page.
-      #
-      #   values:                       [true|false]
-      #   default:                      true
-      #
-      #   placement (currently NOT supported)
-      #   ----------------------------------------------------------------------
-      #   Defines the placements of the unit container specified. For default
-      #   (manual), all ad units are placed on (home/content) pages manually
-      #   by adding the <ins>-code.
-      #
-      #   values:                       [manual|auto|content-top|content-bottom]
-      #   default:                      manual
-      #
-      #   adSlot (currently NOT supported)
-      #   ----------------------------------------------------------------------
-      #   Defines the slot-id of the unit container specified.
-      #
-      #   values:                       string
-      #   default:                      none
-      #
-      #   adTest (currently NOT supported)
-      #   ------------------------------------------------------------------------
-      #   For testing only. If adTest is enabled (true), clicks and impressions
-      #   aren't recorded by the ad service and advertisers aren't charged.
-      #
-      #   values:                       [true|false]
-      #   default:                      false
-      #
-      # --------------------------------------------------------------------------
 
       # ------------------------------------------------------------------------
-      # Google Ad resposive full-width
+      # Ad on slot id "1234567890"
       #
-#     - name:                           display-ad-horizontal-1
-#       ad:
-#         enabled:                      true
-#         placement:                    manual
-#         adSlot:                       xxxx..xxx
-#         adTest:                       false
+      - ad:
+
+        # container settings
+        # ----------------------------------------------------------------------
+        enabled:                        true
+        id:                             ad_1234567890
+
+        # ad settings
+        # ----------------------------------------------------------------------
+        publisherID:                    pub-3885670015316130
+        test:                           "on"
+        styles:                         "display: block;"
+        slot:                           1234567890
+        format:                         auto
+        responsive:                     true
 
       # ------------------------------------------------------------------------
-      # Google Ad resposive full-width
+      # Ad on slot id "1929248609"
       #
-#     - name:                           display-ad-horizontal-2
-#       ad:
-#         enabled:                      false
-#         placement:                    manual
-#         adSlot:                       xxxx..xxx
-#         adTest:                       false
+      - ad:
+        # container settings
+        # ----------------------------------------------------------------------
+        enabled:                        false
+        id:                             ad_1929248609
 
-      # ------------------------------------------------------------------------
-      # Google Ad resposive full-width
-      #
-#     - name:                           in-article-ad-1
-#       ad:
-#         enabled:                      false
-#         placement:                    manual
-#         adSlot:                       xxxx..xxx
-#         adTest:                       false
+        # ad settings
+        # ----------------------------------------------------------------------
+        publisherID:                    pub-3885670015316130
+        test:                           "off"
+        style:                          "display: block;"
+        slot:                           1929248609
+        format:                         auto
+        responsive:                     true
 
 # ------------------------------------------------------------------------------
 # END config

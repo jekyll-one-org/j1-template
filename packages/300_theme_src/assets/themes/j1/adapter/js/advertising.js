@@ -39,14 +39,14 @@ regenerate:                             true
 {% assign blocks               = site.data.blocks %}
 {% assign modules              = site.data.modules %}
 
-{% comment %} Set config data (settings only)
+{% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign cookie_defaults      = modules.defaults.cookies.defaults %}
 {% assign cookie_settings      = modules.cookies.settings %}
 {% assign advertising_defaults = modules.defaults.advertising.defaults %}
 {% assign advertising_settings = modules.advertising.settings %}
 
-{% comment %} Set config options (settings only)
+{% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign cookie_options       = cookie_defaults | merge: cookie_settings %}
 {% assign advertising_options  = advertising_defaults | merge: advertising_settings %}
@@ -94,6 +94,8 @@ var environment             = '{{environment}}';
 var date                    = new Date();
 var timestamp_now           = date.toISOString();
 var gasScript               = document.createElement('script');
+var gasDiv                  = document.createElement('div');
+var gasIns                  = document.createElement('ins');
 var adInitializerScript     = document.createElement('script');
 var advertisingDefaults;
 var aadvertisingSettings;
@@ -139,6 +141,8 @@ var logText;
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
+      logger                = log4javascript.getLogger('j1.adapter.advertising.google');
+      _this                 = j1.adapter.advertising;
       cookie_names          = j1.getCookieNames();
       user_consent          = j1.readCookie(cookie_names.user_consent);
       url                   = new liteURL(window.location.href);
@@ -168,9 +172,6 @@ var logText;
           {% when "google" %}
           // [INFO   ] [j1.adapter.advertising                  ] [ place provider: Google Adsense ]
 
-          _this = j1.adapter.advertising;
-          logger = log4javascript.getLogger('j1.adapter.advertising.google');
-
           // initialize state flag
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -181,7 +182,7 @@ var logText;
           validPublisherID    = (publisherID.includes('your')) ? false : true;
 
           if (!validPublisherID) {
-            logger.warn('\n' + 'invalid publisherID detected for Google Adsense (GAS): ' + publisherID);
+            logger.debug('\n' + 'invalid publisherID detected for Google Adsense (GAS): ' + publisherID);
             logger.info('\n' + 'skip initialization for provider: ' + advertisingProvider);
             return false;
           } else {
@@ -189,10 +190,6 @@ var logText;
           }
 
           if (user_consent.personalization) {
-            // place all ads configured for the page
-            // NOTE: currently NOT implemented/used
-            // -----------------------------------------------------------------
-            // _this.place_ads();
 
             // add GAS API (Google Adsense) dynamically in head section
             // loaded async
@@ -224,7 +221,7 @@ var logText;
                     logger.info(logText);
                   } else {
                     logText = '\n' + 'tracking protection: enabled';
-                    logger.warn(logText);
+                    logger.debug(logText);
 
                     if (showErrorPageOnBlocked) {
                       logger.error('\n' + 'redirect to error page (blocked content): HTML-447');
@@ -250,11 +247,12 @@ var logText;
             }
 
           } else {
+
             // manage GAD cookies if no consent is given|rejected
             // -----------------------------------------------------------------
             var gasCookies = j1.findCookie('__ga');
-            logger.warn('\n' + 'consent on cookies disabled for personalization');
-            logger.warn('\n' + 'initialization of module advertising skipped');
+            logger.debug('\n' + 'consent on cookies disabled for personalization');
+            logger.debug('\n' + 'initialization of module advertising skipped');
 
             // remove cookies on invalid GAS config or left from a previous
             // session/page view if they exists
@@ -273,7 +271,7 @@ var logText;
             if (checkTrackingProtection) {
               if (!user_consent.personalization) {
                 logText = '\n' + 'consent on cookies disabled for personalization';
-                logger.warn(logText);
+                logger.debug(logText);
 
                 if (showErrorPageOnBlocked) {
                   logger.error('\n' + 'redirect to error page (blocked content): HTML-447');
@@ -292,8 +290,8 @@ var logText;
           {% else %}
             var ads_found = document.getElementsByClassName('adsbygoogle').length;
             logger = log4javascript.getLogger('j1.adapter.advertising.google');
-            logger.warn('\n' + 'found ads in page: #' + ads_found);
-            logger.warn('\n' + 'no ads initialized, advertising disabled');
+            logger.debug('\n' + 'found ads in page: #' + ads_found);
+            logger.debug('\n' + 'no ads initialized, advertising disabled');
           {% endif %}
 
           clearInterval(dependencies_met_page_ready);
@@ -320,7 +318,7 @@ var logText;
             var elm             = event.target.dataset;
             var adSlotIsVisible = $('.adsbygoogle').is(":visible");
             if (adSlotIsVisible) {
-              logger.warn('\n' + 'found ad in state ' + event.newValue + ' on slot: ' + elm.adSlot);
+              logger.debug('\n' + 'found ad in state ' + event.newValue + ' on slot: ' + elm.adSlot);
               if (addBorderOnUnfilled) {
                 $('.adsbygoogle').addClass('border--dotted');
               }
@@ -380,20 +378,6 @@ var logText;
       }
       checkTrackingProtection();
     }, // END check_tracking_protection
-
-    // -------------------------------------------------------------------------
-    // place_ads()
-    // place ads configured|enabled
-    // -------------------------------------------------------------------------
-    place_ads: function () {
-
-      logText = '\n' + 'ads are being placed';
-      logger.info(logText);
-
-      // START loadig ads
-
-      // END place ads
-    },
 
     // -------------------------------------------------------------------------
     // messageHandler()

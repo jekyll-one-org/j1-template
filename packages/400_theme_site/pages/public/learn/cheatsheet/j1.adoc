@@ -54,6 +54,9 @@ resource_options:
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
 [role="dropcap"]
 RubyGems is a package manager for the Ruby programming language. It provides
 a convenient way to distribute and manage software packages, called GEMs,

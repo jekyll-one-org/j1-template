@@ -38,18 +38,18 @@ regenerate:                             true
 {% assign blocks                = site.data.blocks %}
 {% assign modules               = site.data.modules %}
 
-{% comment %} Set config data (settings only)
+{% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign cookie_defaults       = modules.defaults.cookies.defaults %}
 {% assign cookie_settings       = modules.cookies.settings %}
 
-{% assign advertising_options   = modules.defaults.advertising.defaults %}
+{% assign advertising_defaults  = modules.defaults.advertising.defaults %}
 {% assign advertising_settings  = modules.advertising.settings %}
 
-{% comment %} Set config options (settings only)
+{% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign cookie_options        = cookie_defaults | merge: cookie_settings %}
-{% assign advertising_options   = advertising_options | merge: advertising_settings %}
+{% assign advertising_options   = advertising_defaults | merge: advertising_settings %}
 
 {% comment %} Variables
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -75,47 +75,94 @@ regenerate:                             true
  #  See: https://github.com/jekyll-one/J1 Theme/blob/master/LICENSE
  # -----------------------------------------------------------------------------
 */
+$(function () {
 
-$(document).ready(function() {
-  // [INFO   ] [j1.adapter.advertising                  ] [ detected advertising provider: {{advertising_provider}}} ]
-  // [INFO   ] [j1.adapter.advertising                  ] [ advertising detected as: {{advertising}} ]
-  {% if advertising %}
-  var logger              = log4javascript.getLogger('j1.core.advertising.google');
-  var ads_found           = document.getElementsByClassName('adsbygoogle').length;
-  var cookie_names        = j1.getCookieNames();
-  var user_consent        = j1.readCookie(cookie_names.user_consent);
-  var providerID          = '{{advertising_options.google.publisherID}}';
-  var validProviderID     = (providerID.includes('your')) ? false : true;
-  var advertisingProvider = 'Google Adsense';
+var dependencies_met_page_visible = setInterval (function (options) {
+  var pageState     = $('#no_flicker').css("display");
+  var pageVisible   = (pageState == 'block') ? true: false;
 
-  var dependencies_met_page_ready = setInterval (function (options) {
-    if (j1.getState() === 'finished') {
+  if (j1.getState() === 'finished' && pageVisible) {
+    {% if advertising %}
 
-      if (!validProviderID) {
-        logger.warn('\n' + 'disabled provider: ' + advertisingProvider);
-        clearInterval(dependencies_met_page_ready);
-        return false;
-      }
+    var logger                = log4javascript.getLogger('j1.core.advertising.google');
+    var cookie_names          = j1.getCookieNames();
+    var user_consent          = j1.readCookie(cookie_names.user_consent);
+    var providerID            = '{{advertising_options.google.publisherID}}';
+    var validProviderID       = (providerID.includes('your')) ? false : true;
+    var advertisingProvider   = 'Google Adsense';
+    var advertisingDefaults   = $.extend({},   {{advertising_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+    var aadvertisingSettings  = $.extend({},   {{advertising_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+    var advertisingOptions    = $.extend(true, {}, advertisingDefaults, aadvertisingSettings);
+    var ad_containers;
+    var ads_found;
 
-      if (user_consent.personalization) {
-        if (ads_found) {
-          logger.info('\n' + 'initialize all ads in page, found: ' + ads_found);
-          [].forEach.call(document.querySelectorAll('.adsbygoogle'), function() {
-            (adsbygoogle = window.adsbygoogle || []).push({});
-          });
-        } else {
-          logger.warn('\n' + 'no ads found in page');
-        }
+      // START create|loading adverting containers enabled
+      ad_containers = advertisingOptions.google.ads;
+      ad_containers.forEach(function (ad) {
+        if (ad.enabled) {
+          var currentDiv = document.getElementById(ad.id);
+          var ins        = document.createElement('ins');
+
+          currentDiv.appendChild(ins);
+          var insID = 'ins_' + ad.id;
+          ins.setAttribute('id', insID);
+          ins.className = "adsbygoogle";
+
+          document.getElementById(insID).setAttribute('style', ad.styles);
+          document.getElementById(insID).setAttribute('data-ad-test', ad.test);
+          document.getElementById(insID).setAttribute('data-ad-client', ad.publisherID);
+          document.getElementById(insID).setAttribute('data-ad-slot', ad.slot);
+          document.getElementById(insID).setAttribute('data-ad-format', ad.format);
+          document.getElementById(insID).setAttribute('data-full-width-responsive', ad.responsive);
+
+          logger.info('\n' + 'placed ad details in page on id: : ' + ad.id);
+        };
+
+      });
+      // END loading adverting containers
+
+      ads_found = document.getElementsByClassName('adsbygoogle').length;
+      if (ads_found) {
+        logger.info('\n' + 'ads initialized: ' + ads_found);
+        [].forEach.call(document.querySelectorAll('.adsbygoogle'), function() {
+          (adsbygoogle = window.adsbygoogle || []).push({});
+        });
       } else {
-        logger.warn('\n' + 'initializing ads skipped');
-        logger.warn('\n' + 'consent on cookies disabled for personalization');
+        logger.warn('\n' + 'no ads found in page');
       }
-      clearInterval(dependencies_met_page_ready);
-    }
-  }, 25);
-  {% else %}
-  // [WARN   ] [j1.core.advertising                     ] [ no init code placed ]
-  {% endif %}
+
+      var dependencies_met_page_ready = setInterval (function (options) {
+      if (j1.getState() === 'finished') {
+
+        if (!validProviderID) {
+          logger.warn('\n' + 'disabled provider: ' + advertisingProvider);
+          clearInterval(dependencies_met_page_ready);
+          return false;
+        }
+
+        if (user_consent.personalization) {
+            // ???
+        } else {
+          logger.warn('\n' + 'initializing ads skipped');
+          logger.warn('\n' + 'consent on cookies disabled for personalization');
+        }
+        clearInterval(dependencies_met_page_ready);
+      }
+    }, 25);
+
+    {% else %}
+    // [WARN   ] [j1.core.advertising                     ] [ no init code placed ]
+    {% endif %}
+
+    clearInterval(dependencies_met_page_visible);
+  }
+}, 25);
+
+
+  // [INFO   ] [j1.core.advertising.google              ] [ detected advertising provider: {{advertising_provider}}} ]
+  // [INFO   ] [j1.core.advertising.google              ] [ advertising detected as: {{advertising}} ]
+
+
 });
 
 {% endcapture %}

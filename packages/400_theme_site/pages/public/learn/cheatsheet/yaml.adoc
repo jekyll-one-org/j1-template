@@ -55,6 +55,9 @@ resource_options:
 
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
 [role="dropcap"]
 _YAML_ (short for YAML Ain't Markup Language) is a human-readable data
 serialization format. Its simplicity and readability stand out, making it
