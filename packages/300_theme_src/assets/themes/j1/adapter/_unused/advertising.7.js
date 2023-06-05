@@ -175,21 +175,21 @@ var logText;
           // initialize state flag
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
+          logger.info('\n' + 'adsense api is being initialized');
+
+          publisherID         = advertisingOptions.google.publisherID;
+          advertisingProvider = 'Google Adsense';
+          validPublisherID    = (publisherID.includes('your')) ? false : true;
+
+          if (!validPublisherID) {
+            logger.debug('\n' + 'invalid publisherID detected for Google Adsense (GAS): ' + publisherID);
+            logger.info('\n' + 'skip initialization for provider: ' + advertisingProvider);
+            return false;
+          } else {
+            logger.info('\n' + 'use publisherID for Google Adsense (GAS): ' + publisherID);
+          }
 
           if (user_consent.personalization) {
-            logger.info('\n' + 'adsense api is being initialized');
-
-            publisherID         = advertisingOptions.google.publisherID;
-            advertisingProvider = 'Google Adsense';
-            validPublisherID    = (publisherID.includes('your')) ? false : true;
-
-            if (!validPublisherID) {
-              logger.debug('\n' + 'invalid publisherID detected for Google Adsense (GAS): ' + publisherID);
-              logger.info('\n' + 'skip initialization for provider: ' + advertisingProvider);
-              return false;
-            } else {
-              logger.info('\n' + 'use publisherID for Google Adsense (GAS): ' + publisherID);
-            }
 
             // add GAS API (Google Adsense) dynamically in head section
             // loaded async
@@ -242,10 +242,6 @@ var logText;
             }
 
           } else {
-            // user consent on personalization "false"
-            //
-            logger.warn('\n' + 'user consent on personalization: ' + user_consent.personalization);
-            logger.warn('\n' + 'initializing module: skipped');
 
             // manage GAD cookies if no consent is given|rejected
             // -----------------------------------------------------------------
@@ -316,7 +312,7 @@ var logText;
             var elm             = event.target.dataset;
             var adSlotIsVisible = $('.adsbygoogle').is(":visible");
             if (adSlotIsVisible) {
-              logger.warn('\n' + 'monitoring detected ad on slot ' + elm.adSlot  + ' in state: ' + event.newValue);
+              logger.warn('\n' + 'found ad on slot ' + elm.adSlot  + ' in state: ' + event.newValue);
               if (addBorderOnUnfilled) {
                 $('.adsbygoogle').addClass('border--dotted');
               }

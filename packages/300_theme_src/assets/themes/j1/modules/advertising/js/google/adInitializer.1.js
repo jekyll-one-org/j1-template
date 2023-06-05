@@ -99,27 +99,23 @@ var dependencies_met_page_visible = setInterval (function (options) {
       // START create|loading adverting containers enabled
       ad_containers = advertisingOptions.google.ads;
       ad_containers.forEach(function (ad) {
-        if (user_consent.personalization) {
-          if (ad.enabled) {
-            var currentDiv = document.getElementById(ad.id);
-            var ins        = document.createElement('ins');
+        if (ad.enabled) {
+          var currentDiv = document.getElementById(ad.id);
+          var ins        = document.createElement('ins');
 
-            currentDiv.appendChild(ins);
-            var insID = 'ins_' + ad.id;
-            ins.setAttribute('id', insID);
-            ins.className = "adsbygoogle";
+          currentDiv.appendChild(ins);
+          var insID = 'ins_' + ad.id;
+          ins.setAttribute('id', insID);
+          ins.className = "adsbygoogle";
 
-            document.getElementById(insID).setAttribute('style', ad.styles);
-            document.getElementById(insID).setAttribute('data-ad-test', ad.test);
-            document.getElementById(insID).setAttribute('data-ad-client', ad.publisherID);
-            document.getElementById(insID).setAttribute('data-ad-slot', ad.slot);
-            document.getElementById(insID).setAttribute('data-ad-format', ad.format);
-            document.getElementById(insID).setAttribute('data-full-width-responsive', ad.responsive);
+          document.getElementById(insID).setAttribute('style', ad.styles);
+          document.getElementById(insID).setAttribute('data-ad-test', ad.test);
+          document.getElementById(insID).setAttribute('data-ad-client', ad.publisherID);
+          document.getElementById(insID).setAttribute('data-ad-slot', ad.slot);
+          document.getElementById(insID).setAttribute('data-ad-format', ad.format);
+          document.getElementById(insID).setAttribute('data-full-width-responsive', ad.responsive);
 
-            logger.info('\n' + 'add settings on id: ' + ad.id);
-          }
-        } else {
-          logger.warn('\n' + 'skip settings on all ads');
+          logger.info('\n' + 'add settings on id: ' + ad.id);
         };
 
       });
@@ -127,7 +123,7 @@ var dependencies_met_page_visible = setInterval (function (options) {
 
       ads_found = document.getElementsByClassName('adsbygoogle').length;
       if (ads_found) {
-        logger.info('\n' + 'ads found in page (total): ' + ads_found);
+        logger.info('\n' + 'ads initialized in page (total): ' + ads_found);
         [].forEach.call(document.querySelectorAll('.adsbygoogle'), function() {
           (adsbygoogle = window.adsbygoogle || []).push({});
         });
@@ -144,6 +140,13 @@ var dependencies_met_page_visible = setInterval (function (options) {
           return false;
         }
 
+        if (user_consent.personalization) {
+          // logger.info('\n' + 'user consent on personalization: ' + user_consent.personalization);
+        } else {
+          logger.warn('\n' + 'consent on cookies disabled for personalization');
+          logger.warn('\n' + 'user consent on personalization: ' + user_consent.personalization);
+          logger.warn('\n' + 'initializing all ads skipped');
+        }
         clearInterval(dependencies_met_page_ready);
       }
     }, 25);
