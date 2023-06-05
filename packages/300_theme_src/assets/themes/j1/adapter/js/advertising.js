@@ -324,7 +324,7 @@ var logText;
             var elm             = event.target.dataset;
             var adSlotIsVisible = $('.adsbygoogle').is(":visible");
             if (adSlotIsVisible) {
-              logger.warn('\n' + 'monitoring detected ad on slot ' + elm.adSlot  + ' in state: ' + event.newValue);
+              logger.warn('\n' + 'detected ad on slot ' + elm.adSlot  + ' in state: ' + event.newValue);
               if (addBorderOnUnfilled) {
                 $('.adsbygoogle').addClass('border--dotted');
               }
