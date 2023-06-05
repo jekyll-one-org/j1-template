@@ -116,10 +116,10 @@ var dependencies_met_page_visible = setInterval (function (options) {
             document.getElementById(insID).setAttribute('data-ad-format', ad.format);
             document.getElementById(insID).setAttribute('data-full-width-responsive', ad.responsive);
 
-            logger.info('\n' + 'add settings on id: ' + ad.id);
+            logger.info('\n' + 'added settings for ad on id: ' + ad.id);
           }
         } else {
-          logger.warn('\n' + 'skip settings on all ads');
+          logger.warn('\n' + 'skippped to add settings on all ads');
         };
 
       });
