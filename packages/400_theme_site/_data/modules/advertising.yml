@@ -30,6 +30,7 @@ settings:
   enabled:                              true
 
   google:
+#   publisherID:                        pub-123456789012345                     # fake id for testing (localhost) ONLY!
     publisherID:                        <your-publisher-id>
 
     autoHideOnUnfilled:                 false
@@ -66,7 +67,7 @@ settings:
     # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
-    # Ad settings
+    # Ad Properties
     #
     #   styles
     #   ------------------------------------------------------------------------
@@ -74,6 +75,13 @@ settings:
     #
     #   values:                       string
     #   default:                      display: block
+    #
+    #   publisherID
+    #   ------------------------------------------------------------------------
+    #   Defines the publisher id used for an advertising
+    #
+    #   values:                       ca-pub-number|pub-number
+    #   default:                      none
     #
     #   slot
     #   ------------------------------------------------------------------------
@@ -91,7 +99,7 @@ settings:
     #
     #   responsive
     #   ------------------------------------------------------------------------
-    #   Enables|Disables responsive display if pages changes in width ot height
+    #   Enables|Disables responsive display if pages changes in width or height
     #
     #   values:                       boolean
     #   default:                      true
@@ -121,9 +129,9 @@ settings:
         enabled:                        true
         id:                             ad_1234567890
 
-        # ad settings
+        # ad properties
         # ----------------------------------------------------------------------
-        publisherID:                    pub-3885670015316130
+        publisherID:                    <your-publisher-id>
         test:                           "on"
         styles:                         "display: block;"
         slot:                           1234567890
@@ -139,9 +147,9 @@ settings:
         enabled:                        false
         id:                             ad_1929248609
 
-        # ad settings
+        # ad properties
         # ----------------------------------------------------------------------
-        publisherID:                    pub-3885670015316130
+        publisherID:                    <your-publisher-id>
         test:                           "off"
         styles:                         "display: block;"
         slot:                           1929248609

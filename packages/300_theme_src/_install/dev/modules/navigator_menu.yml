@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/j1_navigator_menu.yml (run-time)
+# ~/_data/modules/j1_navigator_menu.yml (dev)
 # Configuration of the J1 NAV Module for the main navigation bar
 #
 # Product/Info:
@@ -35,6 +35,12 @@
       icon:                             book
       dropdown:
 
+        - title:                        J1
+          href:                         /pages/public/learn/cheatsheet/j1/
+          icon:                         alpha-j-box-outline
+        - title:                        YAML
+          href:                         /pages/public/learn/cheatsheet/yaml/
+          icon:                         alpha-y-box-outline
         - title:                        Git
           href:                         /pages/public/learn/cheatsheet/git/
           icon:                         git
@@ -409,6 +415,10 @@
       - title:                          Current Theme
         href:                           /pages/public/previewer/current_theme/
         icon:                           theme-light-dark
+      - title:                          Google Adsense
+        href:                           /pages/public/learn/gad/
+        icon:                           image
+
       - title:                          Icon Picker
         href:                           /pages/public/previewer/icon-picker/
         icon:                           emoticon-cool-outline

@@ -1,0 +1,243 @@
+---
+title:                                  Google Adsense
+tagline:                                Preview  Advertising
+date:                                   2023-05-19 00:00:00 +100
+description: >
+                                        AdSense is an advertising platform provided by Google,
+                                        fully integrated into J1 Template for easy use, that
+                                        allows website owners and content creators to earn
+                                        money by displaying targeted advertisements on their
+                                        online properties.
+keywords: >
+                                        Jekyll, Theme, JekyllOne, Info, Preview, Google, Adsense
+
+categories:                             [ Manual ]
+tags:                                   [ Cheatsheet, Adsense ]
+
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/eleni-afiontzi.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  Photo by Eleni Afiontzi on Unsplash
+
+regenerate:                             false
+permalink:                              /pages/public/learn/gad/
+
+resources:                              [ advertising, animate, clipboard, rouge ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/eleni-afiontzi.jpg
+          alt:                          Photo by Eleni Afiontzi on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Eleni Afiontzi
+            href:                       https://unsplash.com/de/@eleniafiontzi
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Google Ad at top position
+// -----------------------------------------------------------------------------
+gad::ad_1234567890["mb-5"]
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+AdSense is an advertising platform provided by Google that allows website
+owners and content creators to earn money by displaying targeted advertisements
+on their online properties. It is one of the most popular and widely used
+advertising networks on the internet.
+
+NOTE: It's important to note that AdSense has policies and guidelines that
+publishers must adhere to. Violations of these policies can lead to penalties
+or even account suspension. Publishers need to ensure that their content and
+website comply with the AdSense program policies to maintain their
+eligibility for the program.
+
+== Benefits using AdSense
+
+With AdSense, website owners can participate in the program to monetize
+their websites, blogs, or YouTube channels. AdSense provides a way for
+publishers to generate revenue by displaying relevant ads matched to their
+site's content or videos When a visitor clicks on an ad displayed through
+AdSense, the website owner earns a portion of the revenue generated from
+that click. The amount earned per click can vary depending on factors such
+as the advertiser's bid, the ad's keywords' competitiveness, and the
+website's overall performance.
+
+AdSense uses contextual targeting to display ads relevant to the website's
+content. Using the service means that the ads are tailored to match the
+interests of the visitors, increasing the likelihood of clicks and conversions
+for advertisers. Google handles the entire ad selection, delivery, and
+payment process, making it a convenient solution for website owners who
+want to monetize their online presence. AdSense also provides various
+customization options, allowing publishers to control the appearance and
+placement of ads on their websites.
+
+
+== J1 Integration
+
+lorem:sentences[5]
+
+gad::ad_1929248609["mt-4 mb-4"]
+
+=== Setup
+
+lorem:sentences[10]
+
+.Frontmatter sttinss (resources)
+[source, yaml, role="noclip"]
+----
+title:                                  Google Adsense
+tagline:                                Preview  Advertising
+
+...
+
+resources:                              [ advertising, animate, clipboard, rouge ]
+
+...
+----
+
+lorem:sentences[5]
+
+=== Asciidoc Extension
+
+lorem:sentences[5]
+
+[source, bash, role="noclip"]
+----
+gad::ad_id[role="additional container classes"]
+----
+
+.Example
+[source, bash, role="noclip"]
+----
+gad::ad_1234567890["mt-4 mb-4"]
+----
+
+lorem:sentences[5]
+
+.Generated HTML code
+[source, html, role="noclip"]
+----
+<div id="ad_1234567890" class="gad-container mt-4 mb-4">
+  <ins id="ins_ad_1234567890"
+      style="display: block"
+      data-ad-test="on"
+      data-ad-client="ca-pub-123456789012345"
+      data-ad-slot="1234567890"
+      data-ad-format="auto"
+      data-full-width-responsive="true">
+  </ins>
+</div>
+----
+
+lorem:sentences[5]
+
+
+== Module Configuration
+
+lorem:sentences[10]
+
+[source, yaml, role="noclip"]
+----
+# ------------------------------------------------------------------------------
+# User settings
+#
+settings:
+  enabled:                              true
+
+  google:
+#   publisherID:                        pub-123456789012345
+    publisherID:                        <your-publisher-id>
+
+    autoHideOnUnfilled:                 false
+    addBorderOnUnfilled:                true
+
+  # ----------------------------------------------------------------------------
+  # All advertising container/ad available
+  # ----------------------------------------------------------------------------
+  ads:
+
+    # --------------------------------------------------------------------------
+    # Ad on slot id "1234567890"
+    #
+    - ad:
+
+      # container settings
+      # ------------------------------------------------------------------------
+      enabled:                        true
+      id:                             ad_1234567890
+
+      # ad properties
+      # ------------------------------------------------------------------------
+      publisherID:                    <your-publisher-id>
+      test:                           "on"
+      styles:                         "display: block;"
+      slot:                           1234567890
+      format:                         auto
+      responsive:                     true
+----
+
+lorem:sentences[5]
+
+=== Properties
+
+lorem:sentences[5]
+
+.Property settings
+[cols="2a, 2a, 3a, 5a", options="header", width="100%", role="rtable mt-3 mb-5"]
+|===
+|Prperty |Values |Default |Description
+
+|`styles`
+|string
+|display: block
+|Defines the CSS styles applied on an specific advertising. Contains *CSS*
+classes separated by an colon (`;`).
+
+|`publisherID`
+|string
+|ca-pub-number\|pub-number
+|Defines the publisher id used for an advertising. *Current* accounts at
+Adsense using the format of `pub-number`.
+
+|`format`
+|string
+|auto
+|Enables **auto**-format settings.
+
+|`responsive`
+|boolean
+|true
+|Enables\|Disables *responsive display* if pages changes in width or height.
+Used e.g on *mobile* devices to adjust an advertising for the view port.
+
+|`test`
+|string (on\|off)
+|off
+|For testing only. If `test` is enabled (`on`), clicks and impressions
+*not* recorded by the service and advertisers are *not* charged. If tests
+are done on *localhost*, property `test` must set to `on`.
+
+|===

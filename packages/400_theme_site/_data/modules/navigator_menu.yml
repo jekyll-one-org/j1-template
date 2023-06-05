@@ -28,10 +28,6 @@
       href:                             /pages/public/learn/where_to_go/
       icon:                             paw
 
-    - title:                            Google Adsense (Test)
-      href:                             /pages/public/learn/gad/
-      icon:                             paw
-
     # --------------------------------------------------------------------------
     # Cheatsheet
     #
@@ -419,6 +415,10 @@
       - title:                          Current Theme
         href:                           /pages/public/previewer/current_theme/
         icon:                           theme-light-dark
+      - title:                          Google Adsense
+        href:                           /pages/public/learn/gad/
+        icon:                           image
+
       - title:                          Icon Picker
         href:                           /pages/public/previewer/icon-picker/
         icon:                           emoticon-cool-outline
