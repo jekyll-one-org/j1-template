@@ -1647,7 +1647,7 @@ resources:
       data:
         css:                            []
         files:                          [
-                                          modules/advertising/js/google/adInitializer.js,
+                                          modules/advertising/js/adInitializer.js,
                                           adapter/js/advertising.js
                                         ]
         js:                             []

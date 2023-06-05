@@ -56,10 +56,6 @@ resource_options:
 // Page content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-// Google Ad at top position
-// -----------------------------------------------------------------------------
-gad::ad_1234567890["mb-5"]
-
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 [role="dropcap"]
@@ -99,7 +95,15 @@ placement of ads on their websites.
 
 lorem:sentences[5]
 
-gad::ad_1929248609["mt-4 mb-4"]
+=== Examples
+
+lorem:sentences[5]
+
+gad::ad_1234567890["mt-4 mb-4"]
+
+lorem:sentences[5]
+
+gad::ad_1234567890-2["mt-4 mb-4"]
 
 === Setup
 

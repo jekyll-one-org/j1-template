@@ -30,8 +30,8 @@ settings:
   enabled:                              true
 
   google:
-#   publisherID:                        pub-123456789012345                     # fake id for testing (localhost) ONLY!
-    publisherID:                        <your-publisher-id>
+    publisherID:                        pub-123456789012345                     # fake for testing (localhost) ONLY!
+#   publisherID:                        <your-publisher-id>
 
     autoHideOnUnfilled:                 false
     addBorderOnUnfilled:                true
@@ -131,7 +131,26 @@ settings:
 
         # ad properties
         # ----------------------------------------------------------------------
-        publisherID:                    <your-publisher-id>
+        publisherID:                    pub-123456789012345
+        test:                           "on"
+        styles:                         "display: block;"
+        slot:                           1234567890
+        format:                         auto
+        responsive:                     true
+
+      # ------------------------------------------------------------------------
+      # Ad on slot id "1234567890" #2
+      #
+      - ad:
+
+        # container settings
+        # ----------------------------------------------------------------------
+        enabled:                        true
+        id:                             ad_1234567890-2
+
+        # ad properties
+        # ----------------------------------------------------------------------
+        publisherID:                    pub-123456789012345
         test:                           "on"
         styles:                         "display: block;"
         slot:                           1234567890

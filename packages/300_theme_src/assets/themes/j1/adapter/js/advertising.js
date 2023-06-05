@@ -141,7 +141,7 @@ var logText;
       // -----------------------------------------------------------------------
       // Global variable settings
       // -----------------------------------------------------------------------
-      logger                = log4javascript.getLogger('j1.adapter.advertising.google');
+      logger                = log4javascript.getLogger('j1.adapter.advertising');
       _this                 = j1.adapter.advertising;
       cookie_names          = j1.getCookieNames();
       user_consent          = j1.readCookie(cookie_names.user_consent);
@@ -298,7 +298,7 @@ var logText;
           // [INFO   ] [j1.adapter.advertising                  ] [ end processing ]
           {% else %}
             var ads_found = document.getElementsByClassName('adsbygoogle').length;
-            logger = log4javascript.getLogger('j1.adapter.advertising.google');
+            logger = log4javascript.getLogger('j1.adapter.advertising');
             logger.debug('\n' + 'found ads in page: #' + ads_found);
             logger.debug('\n' + 'no ads initialized, advertising disabled');
           {% endif %}

@@ -6,8 +6,8 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/modules/advertising/js/google/adInitializer.js
- # Liquid template for Google Adsense to initialze all units in a page
+ # ~/assets/themes/j1/modules/advertising/js/adInitializer.js
+ # Liquid template to initialze all ad units in a page
  #
  # Product/Info:
  # https://jekyll.one
@@ -26,8 +26,8 @@ regenerate:                             true
 
 {% comment %} Set global settings
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment       = site.environment %}
-{% assign asset_path        = "/assets/themes/j1" %}
+{% assign environment           = site.environment %}
+{% assign asset_path            = "/assets/themes/j1" %}
 
 {% comment %} Process YML config data
 ================================================================================ {% endcomment %}
@@ -63,8 +63,8 @@ regenerate:                             true
 
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/modules/advertising/js/google/adInitializer.js
- # JS helper for Google Adsense to initialze all units in a page
+ # ~/assets/themes/j1/modules/advertising/js/adInitializer.js
+ # JS helper to initialze all ad units in a page
  #
  #  Product/Info:
  #  http://jekyll.one
@@ -84,7 +84,7 @@ $(function () {
     if (j1.getState() === 'finished' && pageVisible) {
     {% if advertising %}
 
-        var logger                = log4javascript.getLogger('j1.core.advertising.google');
+        var logger                = log4javascript.getLogger('j1.core.advertising');
         var cookie_names          = j1.getCookieNames();
         var user_consent          = j1.readCookie(cookie_names.user_consent);
         var providerID            = '{{advertising_options.google.publisherID}}';
@@ -102,7 +102,7 @@ $(function () {
           return false;
         }
 
-        // START create|loading adverting containers enabled
+        // START create|loading adverting for containers enabled
         ad_containers = advertisingOptions.google.ads;
         ad_containers.forEach(function (ad) {
           if (user_consent.personalization) {
@@ -122,10 +122,10 @@ $(function () {
               document.getElementById(insID).setAttribute('data-ad-format', ad.format);
               document.getElementById(insID).setAttribute('data-full-width-responsive', ad.responsive);
 
-              logger.info('\n' + 'added settings for ad on id: ' + ad.id);
+              logger.info('\n' + 'added settings on container id ' + ad.id + ' for slot: ' + ad.slot);
             }
           } else {
-            logger.warn('\n' + 'skippped to add settings on all ads');
+            logger.warn('\n' + 'skipped add settings on all ad containers');
           };
 
         });
