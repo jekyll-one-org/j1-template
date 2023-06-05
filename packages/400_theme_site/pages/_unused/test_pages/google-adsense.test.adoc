@@ -1,0 +1,74 @@
+---
+title:                                  Google Adsense
+tagline:                                Testpage
+date:                                   2023-05-19 00:00:00 +100
+description: >
+                                        RubyGems is a package manager for the Ruby programming language. It provides
+                                        a convenient way to distribute and manage software packages, called gems,
+                                        written in Ruby. With RubyGems, developers can easily install, uninstall, and
+                                        manage Ruby libraries and applications.
+keywords: >
+                                        Jekyll, Theme, JekyllOne, Info, Manual, Cheatsheet, Ruby, Gem
+
+categories:                             [ Manual ]
+tags:                                   [ Cheatsheet, Gem ]
+
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/recha-oktaviani.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  Photo by Recha Oktaviani on Unsplash
+
+regenerate:                             false
+permalink:                              /pages/public/learn/gad/
+
+resources:                              [ advertising, animate, clipboard, rouge ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/recha-oktaviani.jpg
+          alt:                          Photo by Recha Oktaviani on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Recha Oktaviani
+            href:                       https://unsplash.com/de/@rechaoktaviani
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+// Google Ad at top position
+// -----------------------------------------------------------------------------
+gad::ad_1234567890["mb-5"]
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+RubyGems is a package manager for the Ruby programming language. It provides
+a convenient way to distribute and manage software packages, called GEMs.
+With RubyGems, developers can easily install, uninstall, and manage Ruby
+libraries and applications. It simplifies obtaining and managing the
+dependencies needed for a Ruby project by automatically resolving and
+installing the GEMs required.
+
+NOTE: The term `gem` is related to the *tool* provided by RubyGems. `GEM`
+(capital letters) means the *library* to be managed by the command `gem`
+at the command line.
