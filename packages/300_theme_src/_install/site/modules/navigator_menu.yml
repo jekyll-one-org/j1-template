@@ -390,10 +390,11 @@
       - title:                          Current Theme
         href:                           /pages/public/previewer/current_theme/
         icon:                           theme-light-dark
-      - title:                          Google Adsense
-        href:                           /pages/public/learn/gad/
-        icon:                           image
 
+      - title:                          Google Adsense
+        href:                           https://jekyll.one/pages/public/previewer/gad/
+        icon:                           image
+        target:                         _blank
       - title:                          Icon Picker
         href:                           https://jekyll.one/pages/public/previewer/icon-picker/
         icon:                           emoticon-cool-outline

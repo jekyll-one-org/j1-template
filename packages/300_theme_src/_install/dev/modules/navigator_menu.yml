@@ -416,7 +416,7 @@
         href:                           /pages/public/previewer/current_theme/
         icon:                           theme-light-dark
       - title:                          Google Adsense
-        href:                           /pages/public/learn/gad/
+        href:                           /pages/public/previewer/gad/
         icon:                           image
 
       - title:                          Icon Picker
