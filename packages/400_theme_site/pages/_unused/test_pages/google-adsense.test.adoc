@@ -58,6 +58,7 @@ resource_options:
 // Google Ad at top position
 // -----------------------------------------------------------------------------
 gad::ad_1234567890["mb-5"]
+// gad::ad_1929248609["mb-5"]
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
@@ -72,3 +73,15 @@ installing the GEMs required.
 NOTE: The term `gem` is related to the *tool* provided by RubyGems. `GEM`
 (capital letters) means the *library* to be managed by the command `gem`
 at the command line.
+
+== Section 1
+
+lorem:sentences[15]
+
+== Section 2
+
+lorem:sentences[15]
+
+== Section 3
+
+lorem:sentences[15]
