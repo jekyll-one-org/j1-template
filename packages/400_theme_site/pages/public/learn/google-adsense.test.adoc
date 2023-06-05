@@ -85,9 +85,3 @@ lorem:sentences[15]
 == Section 3
 
 lorem:sentences[15]
-
-++++
--->
-<style>
-</style>
-++++
