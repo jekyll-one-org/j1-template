@@ -296,8 +296,6 @@ var logText;
           clearInterval(dependencies_met_page_ready);
         }
       }, 25);
-
-    return;
     }, // END init
 
     // -------------------------------------------------------------------------
@@ -374,6 +372,7 @@ var logText;
           });
         }
       }
+
       checkTrackingProtection();
     }, // END check_tracking_protection
 
