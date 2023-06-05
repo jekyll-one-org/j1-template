@@ -58,7 +58,6 @@ resource_options:
 // Google Ad at top position
 // -----------------------------------------------------------------------------
 gad::ad_1234567890["mb-5"]
-// gad::ad_1929248609["mb-5"]
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
@@ -80,7 +79,11 @@ lorem:sentences[15]
 
 == Section 2
 
-lorem:sentences[15]
+lorem:sentences[5]
+
+gad::ad_1929248609["mt-4 mb-4"]
+
+lorem:sentences[10]
 
 == Section 3
 
