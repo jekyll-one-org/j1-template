@@ -115,7 +115,7 @@ var dependencies_met_page_visible = setInterval (function (options) {
           document.getElementById(insID).setAttribute('data-ad-format', ad.format);
           document.getElementById(insID).setAttribute('data-full-width-responsive', ad.responsive);
 
-          logger.info('\n' + 'placed ad details in page on id: : ' + ad.id);
+          logger.info('\n' + 'add settings on id: ' + ad.id);
         };
 
       });
@@ -123,7 +123,7 @@ var dependencies_met_page_visible = setInterval (function (options) {
 
       ads_found = document.getElementsByClassName('adsbygoogle').length;
       if (ads_found) {
-        logger.info('\n' + 'ads initialized: ' + ads_found);
+        logger.info('\n' + 'ads initialized in page (total): ' + ads_found);
         [].forEach.call(document.querySelectorAll('.adsbygoogle'), function() {
           (adsbygoogle = window.adsbygoogle || []).push({});
         });

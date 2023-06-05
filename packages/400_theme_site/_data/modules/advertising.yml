@@ -94,8 +94,8 @@ settings:
     #   ------------------------------------------------------------------------
     #   Enables|Disables responsive display if pages changes in width ot height
     #
-    #   values:                       string
-    #   default:                      none
+    #   values:                       boolean
+    #   default:                      true
     #
     #   test
     #   ------------------------------------------------------------------------
@@ -144,7 +144,7 @@ settings:
         # ----------------------------------------------------------------------
         publisherID:                    pub-3885670015316130
         test:                           "off"
-        style:                          "display: block;"
+        styles:                         "display: block;"
         slot:                           1929248609
         format:                         auto
         responsive:                     true

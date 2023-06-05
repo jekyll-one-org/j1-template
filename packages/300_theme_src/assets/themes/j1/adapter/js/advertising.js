@@ -175,7 +175,7 @@ var logText;
           // initialize state flag
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module is being initialized');
+          logger.info('\n' + 'adsense api is being initialized');
 
           publisherID         = advertisingOptions.google.publisherID;
           advertisingProvider = 'Google Adsense';
@@ -200,14 +200,15 @@ var logText;
             gasScript.src   = '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
             gasScript.setAttribute('data-ad-client', publisherID);
             document.head.appendChild(gasScript);
+            logger.info('\n' + 'adsense api initialized');
 
             // setup monitor for state changes on all ads configured
-            // ---------------------------------------------------------------
-            logger.debug('\n' + 'setup monitoring');
-            _this.monitor_ads();
+            // -----------------------------------------------------------------
+            logger.info('\n' + 'setup ad monitoring');
+            _this.ad_monitor();
 
             // run protection check
-            // -------------------------------------------------------------------
+            // -----------------------------------------------------------------
             if (checkTrackingProtection) {
               logger.debug('\n' + 'run checks for tracking protection');
 
@@ -234,12 +235,6 @@ var logText;
               }, 25);
             } else {
               // no protection check enabled
-
-              // setup monitor for state changes on all ads configured
-              // ---------------------------------------------------------------
-              logger.info('\n' + 'setup monitoring');
-              _this.monitor_ads();
-
               _this.setState('finished');
               logger.debug('\n' + 'state: ' + _this.getState());
               logger.info('\n' + 'module initialized successfully');
@@ -256,7 +251,7 @@ var logText;
 
             // remove cookies on invalid GAS config or left from a previous
             // session/page view if they exists
-            // ---------------------------------------------------------------------
+            // ------------------------------------------------------------------
             gasCookies.forEach(function (item) {
               // Remove cookies from Google Ads
               if (hostname == 'localhost') {
@@ -302,15 +297,14 @@ var logText;
     }, // END init
 
     // -------------------------------------------------------------------------
-    // monitor_ads()
+    // ad_monitor()
     // monitor for state changes on the ad placed in pages (if any)
     //
     // NOTE: Check visibility state of the adSlot to prevent multiple
     // processing of the same slot
     // -------------------------------------------------------------------------
-    monitor_ads: function () {
-      var logger = log4javascript.getLogger('j1.adapter.advertising.monitor.ads');
-
+    ad_monitor: function () {
+      // logger.info('\n' + 'setup ad monitoring');
       $('.adsbygoogle').attrchange({
         trackValues: true,
         callback: function (event) {
@@ -318,13 +312,13 @@ var logText;
             var elm             = event.target.dataset;
             var adSlotIsVisible = $('.adsbygoogle').is(":visible");
             if (adSlotIsVisible) {
-              logger.debug('\n' + 'found ad in state ' + event.newValue + ' on slot: ' + elm.adSlot);
+              logger.warn('\n' + 'found ad on slot ' + elm.adSlot  + ' in state: ' + event.newValue);
               if (addBorderOnUnfilled) {
                 $('.adsbygoogle').addClass('border--dotted');
               }
 
               if (autoHideOnUnfilled) {
-                logger.info('\n' + ' hide ad for slot: ' + elm.adSlot);
+                logger.info('\n' + ' hide ad on slot: ' + elm.adSlot);
                 $('.adsbygoogle').hide();
               }
             }
