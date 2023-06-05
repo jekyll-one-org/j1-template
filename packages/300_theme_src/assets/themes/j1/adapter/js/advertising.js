@@ -168,6 +168,16 @@ var logText;
         if (j1.getState() === 'finished' && pageVisible && atticFinished) {
         {% if advertising %}
 
+          var advertisingProvider   = 'Google Adsense';
+          var providerID            = '{{advertising_options.google.publisherID}}';
+          var validProviderID       = (providerID.includes('pub-')) ? true : false;
+          if (!validProviderID) {
+            logger.warn('\n' + 'invalid publisher id: ' + providerID);
+            logger.info('\n' + 'module disabled' );
+            clearInterval(dependencies_met_page_ready);
+            return false;
+          }
+
           {% case advertising_provider %}
           {% when "google" %}
           // [INFO   ] [j1.adapter.advertising                  ] [ place provider: Google Adsense ]
@@ -186,7 +196,7 @@ var logText;
             if (!validPublisherID) {
               logger.debug('\n' + 'invalid publisherID detected for Google Adsense (GAS): ' + publisherID);
               logger.info('\n' + 'skip initialization for provider: ' + advertisingProvider);
-              return false;
+              // return false;
             } else {
               logger.info('\n' + 'use publisherID for Google Adsense (GAS): ' + publisherID);
             }

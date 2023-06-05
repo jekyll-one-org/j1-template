@@ -30,8 +30,7 @@ settings:
   enabled:                              true
 
   google:
-#   publisherID:                        pub-3885670015316130                    # jekyll.one
-    publisherID:                        pub-3885670015316130                    # <your-publisher-id>'
+    publisherID:                        <your-publisher-id>
 
     autoHideOnUnfilled:                 false
     addBorderOnUnfilled:                true

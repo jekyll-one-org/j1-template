@@ -1,0 +1,6 @@
+Google Adsense
+================================================================================
+
+google:
+# publisherID:                        pub-3885670015316130                      # jekyll.one
+  publisherID:                        <your-publisher-id>
