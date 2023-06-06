@@ -163,7 +163,7 @@ j1.adapter.attic = (function (j1, window) {
           _this.createAllAttics();
           clearInterval(dependencies_met_page_ready);
           {% else %}
-          logger.warn('\n' + 'found module attics disabled');
+          logger.debug('\n' + 'found module attics disabled');
           // add additional top space if attics are disabled
           $('#content').addClass('mt-5');
           clearInterval(dependencies_met_page_ready);
@@ -423,10 +423,10 @@ j1.adapter.attic = (function (j1, window) {
               //
               $('#{{attic_id}}').backstretch('resize');
 
-             _this.setState('finished');
-             logger.debug('\n' + 'state: ' + _this.getState());
+              _this.setState('finished');
+              logger.debug('\n' + 'state: ' + _this.getState());
               logger.info('\n' + 'initialize attic on id {{attic_id}}: finished');
-             logger.info('\n' + 'module initializaton: finished');
+              logger.info('\n' + 'module initializaton: finished');
 
             }); // END callback backstretch.after
 
