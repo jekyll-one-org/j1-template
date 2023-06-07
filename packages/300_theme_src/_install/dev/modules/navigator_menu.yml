@@ -29,26 +29,6 @@
       icon:                             paw
 
     # --------------------------------------------------------------------------
-    # Cheatsheet
-    #
-    - title:                            Cheatsheet
-      icon:                             book
-      dropdown:
-
-        - title:                        J1
-          href:                         /pages/public/learn/cheatsheet/j1/
-          icon:                         alpha-j-box-outline
-        - title:                        YAML
-          href:                         /pages/public/learn/cheatsheet/yaml/
-          icon:                         alpha-y-box-outline
-        - title:                        Git
-          href:                         /pages/public/learn/cheatsheet/git/
-          icon:                         git
-        - title:                        Gem
-          href:                         /pages/public/learn/cheatsheet/gem/
-          icon:                         language-ruby
-
-    # --------------------------------------------------------------------------
     # Roundtrip
     #
     - title:                            Roundtrip
@@ -84,6 +64,34 @@
           icon:                         magnify
 
     # --------------------------------------------------------------------------
+    # Cheatsheets
+    #
+    - title:                            Cheatsheet
+      icon:                             book
+      dropdown:
+
+        - title:                        J1
+#         href:                         /pages/public/learn/cheatsheet/j1/
+          href:                         https://jekyll.one/pages/public/learn/cheatsheet/j1/
+          icon:                         alpha-j-box-outline
+          target:                       _blank
+        - title:                        YAML
+#         href:                         /pages/public/learn/cheatsheet/yaml/
+          href:                         https://jekyll.one/pages/public/learn/cheatsheet/yaml/
+          icon:                         alpha-y-box-outline
+          target:                       _blank
+        - title:                        Git
+#         href:                         /pages/public/learn/cheatsheet/git/
+          href:                         https://jekyll.one/pages/public/learn/cheatsheet/git/
+          icon:                         git
+          target:                       _blank
+        - title:                        Gem
+#         href:                         /pages/public/learn/cheatsheet/gem/
+          href:                         https://jekyll.one/pages/public/learn/cheatsheet/gem/
+          icon:                         language-ruby
+          target:                       _blank
+
+    # --------------------------------------------------------------------------
     # Collections
     #
     - title:                            Collections
@@ -91,24 +99,97 @@
       dropdown:
 
         - title:                        Jekyll Collections
-          href:                         /pages/public/collections/jekyll_collections/
+          href:                         /pages/public/learn/bookshelf/jekyll_collections/
+#         href:                         https://jekyll.one/pages/public/learn/bookshelf/jekyll_collections/
           icon:                         head-question
+          target:                       _blank
 
         - title:                        Bookshelf Collection
           icon:                         eye
           dropdown:
             - title:                    Bookshelf
-              href:                     /pages/public/bookshelf/bookshelf/
+              href:                     /pages/public/learn/bookshelf/article_previewer/all_books/
+#             href:                     https://jekyll.one/pages/public/learn/bookshelf/article_previewer/all_books/
               icon:                     book-marker
+              target:                   _blank
             - title:                    Biography
-              href:                     /pages/public/bookshelf/biography/
+              href:                     /pages/public/learn/bookshelf/article_previewer/biography/
+#             href:                     https://jekyll.one/pages/public/learn/bookshelf/article_previewer/biography/
               icon:                     book-marker
+              target:                   _blank
             - title:                    Fantasy
-              href:                     /pages/public/bookshelf/fantasy/
+              href:                     /pages/public/learn/bookshelf/article_previewer/fantasy/
+#             href:                     https://jekyll.one/pages/public/learn/bookshelf/article_previewer/fantasy/
               icon:                     book-marker
+              target:                   _blank
             - title:                    Romance
-              href:                     /pages/public/bookshelf/romance/
+              href:                     /pages/public/learn/bookshelf/article_previewer/romance/
+#             href:                     https://jekyll.one/pages/public/learn/bookshelf/article_previewer/romance/
               icon:                     book-marker
+              target:                   _blank
+
+    # --------------------------------------------------------------------------
+    # Tutorials
+    #
+    - title:                            Tutorials
+      icon:                             wizard-hat
+      dropdown:
+
+        - title:                        Rocketstart
+          href:                         https://jekyll.one/pages/public/learn/rocketstart/
+          icon:                         rocket-launch
+          target:                       _blank
+
+
+        - title:                        Site Development
+          href:                         https://jekyll.one/pages/public/learn/devstart/
+          icon:                         launch
+
+        - title:                        Jekyll In A Day
+          icon:                         alpha-j-box
+          dropdown:
+
+            - title:                    Meet & Greet
+              href:                     https://jekyll.one/pages/public/learn/kickstart/web_in_a_day/meet_and_greet/
+              icon:                     human-queue
+              target:                   _blank
+            - title:                    A awesome Site
+              href:                     https://jekyll.one/pages/public/learn/kickstart/web_in_a_day/a_awesome_site/
+              icon:                     sitemap
+              target:                   _blank
+            - title:                    Development System
+              href:                     https://jekyll.one/pages/public/learn/kickstart/web_in_a_day/dev_system/
+              icon:                     hammer-wrench
+              target:                   _blank
+            - title:                    Project Management
+              href:                     https://jekyll.one/pages/public/learn/kickstart/web_in_a_day/manage_projects/
+              icon:                     abacus
+              target:                   _blank
+            - title:                    Creating content
+              href:                     https://jekyll.one/pages/public/learn/kickstart/web_in_a_day/create_content/
+              icon:                     file-document-edit
+              target:                   _blank
+
+        - title:                        Learning SEO
+          icon:                         wizard-hat
+          dropdown:
+
+            - title:                    What SEO Is
+              href:                     https://jekyll.one/pages/public/learn/kickstart/learning_seo/what_seo_is/
+              icon:                     search-web
+              target:                   _blank
+            - title:                    Factors of Success
+              href:                     https://jekyll.one/pages/public/learn/kickstart/learning_seo/success_factors/
+              icon:
+              target:                   _blank
+            - title:                    Structured Data
+              href:                     https://jekyll.one/pages/public/learn/kickstart/learning_seo/structured_data/
+              icon:                     sitemap
+              target:                   _blank
+            - title:                    Content Optimization
+              href:                     https://jekyll.one/pages/public/learn/kickstart/learning_seo/content_optimization/
+              icon:                     calculator-variant-outline
+              target:                   _blank
 
 # ------------------------------------------------------------------------------
 # TopLevel item FEATURES
@@ -446,13 +527,9 @@
         href:                           https://jekyll.one/pages/public/previewer/country_flags/
         icon:                           flag
         target:                         _blank
-      - title:                          MDI Icons (regular)
-        href:                           https://jekyll.one/pages/public/previewer/mdi_font/
+      - title:                          Font Icons
+        href:                           https://jekyll.one/pages/public/previewer/icon-picker/
         icon:                           sprout
-        target:                         _blank
-      - title:                          MDI Icons (light)
-        href:                           https://jekyll.one/pages/public/previewer/mdil_font/
-        icon:                           sprout-outline
         target:                         _blank
         icon:                           emoticon-cool-outline
       - title:                          Rouge Styles
