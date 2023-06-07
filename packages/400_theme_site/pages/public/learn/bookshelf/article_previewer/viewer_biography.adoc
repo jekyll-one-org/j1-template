@@ -19,7 +19,7 @@ image:
 toc:                                    false
 fab_menu_id:                            default
 regenerate:                             false
-permalink:                              /pages/public/bookshelf/biography/
+permalink:                              /pages/public/learn/bookshelf/article_previewer/biography/
 
 resources:                              [ animate, masonry ]
 resource_options:

@@ -45,7 +45,7 @@ resource_options:
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
 :url-j1--cheatsheet-template:           /pages/public/learn/cheatsheet/j1/
-:url-j1--jekyll-collections:            https://jekyll.one/pages/pages/public/collections/jekyll_collections/
+:url-j1--jekyll-collections:            /pages/public/learn/bookshelf/jekyll_collections/
 :url-j1--tutorial-j1-in-a-day:          https://jekyll.one/pages/public/learn/kickstart/web_in_a_day/meet_and_greet/
 :url-j1--tutorial-learning-seo:         https://jekyll.one/pages/public/learn/kickstart/learning_seo/what_seo_is
 

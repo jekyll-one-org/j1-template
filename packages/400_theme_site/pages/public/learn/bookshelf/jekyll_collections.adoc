@@ -16,7 +16,7 @@ image:
   alt:                                  Photo by Giammarco on Unsplash
 
 regenerate:                             false
-permalink:                              /pages/public/collections/jekyll_collections/
+permalink:                              /pages/public/learn/bookshelf/jekyll_collections/
 
 resources:                              [ animate ]
 resource_options:

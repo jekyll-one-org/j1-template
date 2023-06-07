@@ -21,7 +21,7 @@ robots:
 toc:                                    false
 fab_menu_id:                            default
 regenerate:                             false
-permalink:                              /pages/public/bookshelf/romance/
+permalink:                              /pages/public/learn/bookshelf/article_previewer/romance/
 
 resources:                              [ animate, masonry ]
 resource_options:
