@@ -1,8 +1,9 @@
 ---
-title:                                  YAML Cheatsheet
-tagline:                                Markups for daily use
+title:                                  YAML
+tagline:                                Cheatsheet for daily use
 date:                                   2023-05-19 00:00:00 +100
 description: >
+                                        The Cheatsheet discuss YAML Markups for daily use.
                                         YAML (short for "YAML Ain't Markup Language") is a human-readable data
                                         serialization format. Its simplicity and readability stand out, making it
                                         popular for configuration files and data exchange between systems.
@@ -59,6 +60,7 @@ resource_options:
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 [role="dropcap"]
+The Cheatsheet discuss Yaml Markups for daily use.
 _YAML_ (short for YAML Ain't Markup Language) is a human-readable data
 serialization format. Its simplicity and readability stand out, making it
 popular for configuration files and data exchange between systems.

@@ -22,6 +22,11 @@ image:
   height:                               1280
   alt:                                  Portfolio Image
 
+toc:                                    false
+fab_menu_id:                            default
+scrollbar:                              false
+regenerate:                             false
+
 resources:                              [ animate ]
 resource_options:
   - attic:

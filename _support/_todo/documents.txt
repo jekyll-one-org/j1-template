@@ -1,0 +1,65 @@
+Pages
+--------------------------------------------------------------------------------
+
+Cheatsheets
+-----------
+
+- J1
+- Gem
+
+
+Previewer
+---------
+
+- google_adsense.adoc
+
+
+Manuals
+--------------------------------------------------------------------------------
+
+Muset-Vorlage:	masterslider
+
+- google_adsense
+- attic
+- carousel
+- cookie consent
+- galleries  (Lorem Ipsum !!!)
+- lightbox
+- logger
+- mmenu
+- msdropdown (Lorem Ipsum !!!), rausnehmen ???
+- navigator
+- rouge (Lorem Ipsum !!!)
+- themer
+- toccer
+- searcher
+
+
+Components
+--------------------------------------------------------------------------------
+
+- Resources
+- Layouts
+- Blocks/banner_panel
+- Blocks/footer
+- Content/pages
+- Content/posts
+
+
+Integrations
+--------------------------------------------------------------------------------
+
+- Google/Translate
+- Google/Analytics
+- Google/Advertising
+
+
+Plugins
+--------------------------------------------------------------------------------
+
+- Internal/Sitemap
+- Internal/SEO Tags
+- Internal/Feeds
+
+- External/Asciidoctor
+- External/J1 Paginator

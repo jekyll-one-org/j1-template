@@ -9,7 +9,7 @@ description: >
                                         most iconic and compelling women of our era.
 
 categories:                             [ Book ]
-tags:                                   [ Biography, Political, Journalism ]
+tags:                                   [ Biography ]
 
 image:
   path:                                 https://images-na.ssl-images-amazon.com/images/I/414JfiBCutL.jpg
@@ -25,6 +25,9 @@ book:
   ISBN13:                               978-3-442-31487-4
   rank:                                 817
 
+toc:                                    false
+fab_menu_id:                            default
+scrollbar:                              false
 regenerate:                             false
 
 resources:                              [ animate ]
@@ -51,8 +54,6 @@ resource_options:
 
 // Place an excerpt at the most top position
 // -----------------------------------------------------------------------------
-// image:{{page.book.cover}}[width=200, role="mr-4 float-left"]
-
 In a life filled with meaning and accomplishment, Michelle Obama has emerged
 as one of the most iconic and compelling women of our era. As First Lady of
 the United States of America—the first African American to serve in that
@@ -67,7 +68,7 @@ excerpt__end
 
 // Content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-[role="mt-5"]
+[role="mt-4"]
 image:{{page.book.cover}}[width=350, role="mr-4 float-left"]
 
 [[readmore]]

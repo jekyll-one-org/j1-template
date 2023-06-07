@@ -9,7 +9,7 @@ description: >
                                         a neurosurgeon, was diagnosed with inoperable lung cancer.
 
 categories:                             [ Book ]
-tags:                                   [ Biography, Medicine, Doctor ]
+tags:                                   [ Biography ]
 
 image:
   path:                                 https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9781/8479/9781847923677.jpg
@@ -25,6 +25,9 @@ book:
   ISBN13:                               9781847923677
   rank:                                 40
 
+toc:                                    false
+fab_menu_id:                            default
+scrollbar:                              false
 regenerate:                             false
 
 resources:                              [ animate ]
@@ -51,8 +54,6 @@ resource_options:
 
 // Place an excerpt at the most top position
 // -----------------------------------------------------------------------------
-// image:{{page.book.cover}}[width=200, role="mr-4 float-left"]
-
 Paul Kalanithi at the age of thirty-six, on the verge of completing a
 decade's training as a neurosurgeon, was diagnosed with inoperable lung
 cancer. Paul Kalanithi died while working on this profoundly moving book,
@@ -68,7 +69,7 @@ excerpt__end
 
 // Content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-[role="mt-5"]
+[role="mt-4"]
 image:{{page.book.cover}}[width=350, role="mr-4 float-left"]
 
 [[readmore]]

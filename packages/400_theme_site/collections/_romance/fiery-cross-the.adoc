@@ -1,6 +1,6 @@
 ---
 title:                                  The Fiery Cross
-tagline:                                Crossing the boundaries of genre, unrivalled storytelling
+tagline:                                Unrivalled storytelling
 date:                                   2016-11-26 00:00:00
 description: >
                                         The story of Outlander begins just after the Second World War, when a British
@@ -11,7 +11,7 @@ description: >
                                         approaching. Jamie Fraser s wife has told him so.
 
 categories:                             [ Books ]
-tags:                                   [ Romance, Historical,  Fantasy, Fiction ]
+tags:                                   [ Romance ]
 
 image:
   path:                                 https://d20eq91zdmkqd.cloudfront.net/assets/images/book/large/9780/4402/9780440221661.jpg
@@ -26,6 +26,9 @@ book:
   ISBN13:                               9780440221661
   rank:                                 820
 
+toc:                                    false
+fab_menu_id:                            default
+scrollbar:                              false
 regenerate:                             false
 
 resources:                              [ animate ]
@@ -52,8 +55,6 @@ resource_options:
 
 // Place an excerpt at the most top position
 // -----------------------------------------------------------------------------
-// image:{{page.book.cover}}[width=200, role="mr-4 float-left"]
-
 In the ten years since her extraordinary debut novel, Outlander, was published,
 beloved author Diana Gabaldon has entertained scores of readers with her
 heart-stirring stories and remarkable characters. The four volumes of her
@@ -78,8 +79,8 @@ excerpt__end
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 [[readmore]]
-[role="mt-5"]
-image:{{page.book.cover}}[width=350, role="mr-4 float-left"]
+[role="mt-4"]
+image:{{page.book.cover}}[width=350, role="mr-4 mb-5 float-left"]
 
 Crossing the boundaries of genre with its unrivalled storytelling, Diana
 Gabaldon's new novel is a gift both to her millions of loyal fans and to

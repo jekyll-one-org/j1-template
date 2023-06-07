@@ -27,6 +27,8 @@ social_media:
   linkedin:
     href:                               https://www.linkedin.com/
 
+toc:                                    false
+fab_menu_id:                            default
 comments:                               false
 sitemap:                                false
 personalization:                        false

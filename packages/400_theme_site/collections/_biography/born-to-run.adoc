@@ -8,7 +8,7 @@ description: >
                                         wanted to be baptized in the holy river of rock and roll.
 
 categories:                             [ Book ]
-tags:                                   [ Biography, Musician ]
+tags:                                   [ Biography ]
 
 image:
   path:                                 https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9781/4711/9781471157790.jpg
@@ -24,6 +24,9 @@ book:
   ISBN13:                               9781471157790
   rank:                                 23
 
+toc:                                    false
+fab_menu_id:                            default
+scrollbar:                              false
 regenerate:                             false
 
 resources:                              [ animate ]
@@ -50,8 +53,6 @@ resource_options:
 
 // Place an excerpt at the most top position
 // -----------------------------------------------------------------------------
-// image:{{page.book.cover}}[width=200, role="mr-4 float-left"]
-
 Over the past seven years, Bruce Springsteen has protectedly devoted himself to
 write the story of his life, bringing to these pages the same honesty, humour
 and originality found in his songs. Bruce Springsteen and the E Street Band
@@ -68,7 +69,7 @@ excerpt__end
 
 // Content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-[role="mt-5]
+[role="mt-4]
 image:{{page.book.cover}}[width=350, role="mr-4 float-left"]
 
 [[readmore]]

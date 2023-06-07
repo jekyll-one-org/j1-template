@@ -1,6 +1,6 @@
 ---
 title:                                  The Dressmaker
-tagline:                                An irresistible gothic tale of small-town revenge
+tagline:                                Gothic tale of small-town revenge
 date:                                   2016-11-25 00:00:00
 description: >
                                         Tilly Dunnage left her hometown of Dungatar in rural Australia under a black
@@ -8,7 +8,7 @@ description: >
                                         houses, returns home to make amends with her mentally unstable mother.
 
 categories:                             [ Books ]
-tags:                                   [ Romance, Historical,  Fantasy, Fiction ]
+tags:                                   [ Romance ]
 
 image:
   path:                                 https://d20eq91zdmkqd.cloudfront.net/assets/images/book/large/9781/8466/9781846689949.jpg
@@ -23,6 +23,9 @@ book:
   ISBN13:                               9781846689949
   rank:                                 80
 
+toc:                                    false
+fab_menu_id:                            default
+scrollbar:                              false
 regenerate:                             false
 
 resources:                              [ animate ]
@@ -49,8 +52,6 @@ resource_options:
 
 // Place an excerpt at the most top position
 // -----------------------------------------------------------------------------
-// image:{{page.book.cover}}[width=200, role="mr-4 float-left"]
-
 Tilly Dunnage left her hometown of Dungatar in rural Australia under a black
 cloud of accusation. Years later Tilly, now a couturier for the Paris fashion
 houses, returns home to make amends with her mentally unstable mother.
@@ -72,8 +73,8 @@ excerpt__end
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 [[readmore]]
-[role="mt-5"]
-image:{{page.book.cover}}[width=350, role="mr-4 float-left"]
+[role="mt-4"]
+image:{{page.book.cover}}[width=350, role="mr-4 mb-5 float-left"]
 
 Mid-century Dungatar is a small town, and small towns have long memories.
 At first she wins over the suspicious locals with her extraordinary

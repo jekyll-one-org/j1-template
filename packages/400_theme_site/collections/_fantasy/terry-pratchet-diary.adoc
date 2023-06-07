@@ -1,6 +1,6 @@
 ---
-title:                                  The Terry Pratchett Diary
-tagline:                                Sir Terry Pratchett left us, far too early ...
+title:                                  Terry Pratchett Diary
+tagline:                                Sir Terry Pratchett left us
 date:                                   2016-11-23 00:00:00
 description: >
                                         Sir Terry Pratchett left us, far too early, in March 2015. To celebrate his
@@ -9,7 +9,7 @@ description: >
                                         and loved him and his extraordinary body of work.
 
 categories:                             [ Books ]
-tags:                                   [ Fantasy, Thrillers, Adventure, Knight ]
+tags:                                   [ Fantasy ]
 
 image:
   path:                                 https://d39ttiideeq0ys.cloudfront.net/assets/images/book/large/9781/4732/9781473208339.jpg
@@ -24,6 +24,9 @@ book:
   ISBN13:                               9781473208339
   rank:                                 4576
 
+toc:                                    false
+fab_menu_id:                            default
+scrollbar:                              false
 regenerate:                             false
 
 resources:                              [ animate ]
@@ -50,8 +53,6 @@ resource_options:
 
 // Place an excerpt at the most top position
 // -----------------------------------------------------------------------------
-// image:{{page.book.cover}}[width=200, role="mr-4 float-left"]
-
 Sir Terry Pratchett left us, far too early, in March 2015. To celebrate his
 life and works, we've given over the 2017 Discworld Diary - which will be a
 perennial diary - to remembrances and tributes from some of those who knew
@@ -74,8 +75,8 @@ excerpt__end
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 [[readmore]]
-[role="mt-5"]
-image:{{page.book.cover}}[width=350, role="mr-4 float-left"]
+[role="mt-4"]
+image:{{page.book.cover}}[width=350, role="mr-4 mb-5 float-left"]
 
 Contributors include Neil Gaiman, A S Byatt, Terry Pratchett's literary agent
 Colin Smythe, co-author of the Long Earth books Stephen Baxter, famed

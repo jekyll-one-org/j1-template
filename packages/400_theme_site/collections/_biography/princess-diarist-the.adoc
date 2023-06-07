@@ -11,7 +11,7 @@ description: >
                                         teenager.
 
 categories:                             [ Book ]
-tags:                                   [ Biography, Actor ]
+tags:                                   [ Biography ]
 
 image:
   path:                                 https://d3by36x8sj6cra.cloudfront.net/assets/images/book/large/9780/5930/9780593077566.jpg
@@ -27,6 +27,9 @@ book:
   ISBN13:                               9780593077566
   rank:                                 5690
 
+toc:                                    false
+fab_menu_id:                            default
+scrollbar:                              false
 regenerate:                             false
 
 resources:                              [ animate ]
@@ -53,8 +56,6 @@ resource_options:
 
 // Place an excerpt at the most top position
 // -----------------------------------------------------------------------------
-// image:{{page.book.cover}}[width=200, role="mr-4 float-left"]
-
 The Princess Diarist is Carrie Fisher's intimate, hilarious and revealing
 recollection of what happened behind the scenes on one of the most famous
 film sets of all time, the first Star Wars movie. When Carrie Fisher recently
@@ -70,7 +71,7 @@ excerpt__end
 
 // Content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-[role="mt-5"]
+[role="mt-4"]
 image:{{page.book.cover}}[width=350, role="mr-4 float-left"]
 
 [[readmore]]

@@ -71,25 +71,17 @@
       dropdown:
 
         - title:                        J1
-#         href:                         /pages/public/learn/cheatsheet/j1/
-          href:                         https://jekyll.one/pages/public/learn/cheatsheet/j1/
+          href:                         /pages/public/learn/cheatsheet/j1/
           icon:                         alpha-j-box-outline
-          target:                       _blank
         - title:                        YAML
-#         href:                         /pages/public/learn/cheatsheet/yaml/
-          href:                         https://jekyll.one/pages/public/learn/cheatsheet/yaml/
+          href:                         /pages/public/learn/cheatsheet/yaml/
           icon:                         alpha-y-box-outline
-          target:                       _blank
         - title:                        Git
-#         href:                         /pages/public/learn/cheatsheet/git/
-          href:                         https://jekyll.one/pages/public/learn/cheatsheet/git/
+          href:                         /pages/public/learn/cheatsheet/git/
           icon:                         git
-          target:                       _blank
         - title:                        Gem
-#         href:                         /pages/public/learn/cheatsheet/gem/
-          href:                         https://jekyll.one/pages/public/learn/cheatsheet/gem/
+          href:                         /pages/public/learn/cheatsheet/gem/
           icon:                         language-ruby
-          target:                       _blank
 
     # --------------------------------------------------------------------------
     # Collections
@@ -99,33 +91,24 @@
       dropdown:
 
         - title:                        Jekyll Collections
-          href:                         https://jekyll.one/pages/public/collections/jekyll_collections/
+          href:                         /pages/public/collections/jekyll_collections/
           icon:                         head-question
-          target:                       _blank
 
         - title:                        Bookshelf Collection
           icon:                         eye
           dropdown:
             - title:                    Bookshelf
               href:                     /pages/public/bookshelf/bookshelf/
-#             href:                     https://jekyll.one/pages/public/bookshelf/bookshelf/
               icon:                     book-marker
-              target:                   _blank
             - title:                    Biography
               href:                     /pages/public/bookshelf/biography/
-#             href:                     https://jekyll.one/pages/public/bookshelf/biography/
               icon:                     book-marker
-              target:                   _blank
             - title:                    Fantasy
               href:                     /pages/public/bookshelf/fantasy/
-#             href:                     https://jekyll.one/pages/public/bookshelf/fantasy/
               icon:                     book-marker
-              target:                   _blank
             - title:                    Romance
               href:                     /pages/public/bookshelf/romance/
-#             href:                     https://jekyll.one/pages/public/bookshelf/romance/
               icon:                     book-marker
-              target:                   _blank
 
     # --------------------------------------------------------------------------
     # Tutorials
@@ -526,9 +509,13 @@
         href:                           https://jekyll.one/pages/public/previewer/country_flags/
         icon:                           flag
         target:                         _blank
-      - title:                          Font Icons
-        href:                           https://jekyll.one/pages/public/previewer/icon-picker/
+      - title:                          MDI Icons (regular)
+        href:                           https://jekyll.one/pages/public/previewer/mdi_font/
         icon:                           sprout
+        target:                         _blank
+      - title:                          MDI Icons (light)
+        href:                           https://jekyll.one/pages/public/previewer/mdil_font/
+        icon:                           sprout-outline
         target:                         _blank
         icon:                           emoticon-cool-outline
       - title:                          Rouge Styles

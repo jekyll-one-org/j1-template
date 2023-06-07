@@ -1,6 +1,6 @@
 ---
 title:                                  A Breath of Snow and Ashes
-tagline:                                Extraordinary story of 18th-century Scotsman Jamie Fraser
+tagline:                                Story of a 18th-century Scotsman
 date:                                   2016-11-24 00:00:00
 description: >
                                         The year is 1772, and on the eve of the American Revolution, the long fuse of
@@ -10,7 +10,7 @@ description: >
                                         and safeguard the colony for King and Crown.
 
 categories:                             [ Books ]
-tags:                                   [ Romance, Historical ]
+tags:                                   [ Romance ]
 
 image:
   path:                                 https://d1w7fb2mkkr3kw.cloudfront.net/assets/images/book/large/9780/4402/9780440225805.jpg
@@ -25,6 +25,9 @@ book:
   ISBN13:                               9780440225805
   rank:                                 844
 
+toc:                                    false
+fab_menu_id:                            default
+scrollbar:                              false
 regenerate:                             false
 
 resources:                              [ animate ]
@@ -51,8 +54,6 @@ resource_options:
 
 // Place an excerpt at the most top position
 // -----------------------------------------------------------------------------
-// image:{{page.book.cover}}[width=200, role="mr-4 float-left"]
-
 Eagerly anticipated by her legions of fans, this sixth novel in Diana Gabaldon's
 bestselling Outlander saga is a masterpiece of historical fiction from one of
 the most popular authors of our time.
@@ -80,8 +81,8 @@ excerpt__end
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 [[readmore]]
-[role="mt-5"]
-image:{{page.book.cover}}[width=350, role="mr-4 float-left"]
+[role="mt-4"]
+image:{{page.book.cover}}[width=350, role="mr-4 mb-5 float-left"]
 
 The year is 1772, and on the eve of the American Revolution, the long fuse of
 rebellion has already been lit. Men lie dead in the streets of Boston, and

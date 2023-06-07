@@ -1,3 +1,10 @@
+//See
+// -----------------------------------------------------------------------------
+//
+//  https://bunkat.github.io/schedule/
+//  https://github.com/bunkat/schedule
+
+
 // var sched = later.parse.text('every 5 seconds'),
 //     occurrences = later.schedule(sched).next(10);
 //

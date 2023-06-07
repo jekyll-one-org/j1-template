@@ -1,12 +1,12 @@
 ---
-title:                                  Git Sheatsheet
-tagline:                                Commands for daily use
+title:                                  Git
+tagline:                                Sheatsheet for daily use
 date:                                   2023-05-19 00:00:00 +100
 description: >
-                                        The Cheatsheet discuss just a few examples of the many
-                                        Git commands available from the command line. Git offers
-                                        rich features for version control, collaboration, and
-                                        project management.
+                                        The Cheatsheet discuss Git commands for daily use.
+                                        Many Git commands available from the command line.
+                                        Git offers rich features for version control, collaboration,
+                                        and project management.
 keywords: >
                                         Jekyll, Theme, JekyllOne, Cheatsheet, Git, Commandline
 
@@ -57,7 +57,7 @@ resource_options:
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
 [role="dropcap"]
-The cheatshett discuss just a few examples of the many Git commands available
+The Cheatsheet discuss Git commands for daily use. Many Git commands are available
 from the command line. Git offers rich features for version control,
 collaboration, and project management. You can explore more Git commands
 and options in the official Git documentation.
