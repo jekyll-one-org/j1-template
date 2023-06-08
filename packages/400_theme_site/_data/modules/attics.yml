@@ -52,6 +52,10 @@ settings:
 
         id:                             attic_home
         layout:                         home
+        title_animate:                  animate__bounceInDown                   # animate__bounceIn | animate__bounceInDown
+        title_animate_duration:         animate__fast                           # false | animate__slow | animate__slower | animate__fast | animate__faster
+        tagline_animate:                animate__fadeInRight
+        tagline_animate_duration:       animate__slow
 
         padding_top:                    600
 
@@ -65,7 +69,6 @@ settings:
         id:                             attic_page
         layout:                         page
 
-        title_animate:                  animate__fadeInDown
         padding_top:                    600
 
     # --------------------------------------------------------------------------

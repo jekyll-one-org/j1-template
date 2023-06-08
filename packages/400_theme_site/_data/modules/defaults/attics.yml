@@ -165,7 +165,7 @@ defaults:
   paused:                               false
 
   # preload, controls how many images preload at a time
-  preload:                              2
+  preload:                              5
 
   # preloadSize, controls how many images are preloaded
   # in parallel
