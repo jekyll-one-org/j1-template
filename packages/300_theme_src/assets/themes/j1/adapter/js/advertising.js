@@ -165,7 +165,8 @@ var logText;
         var pageVisible   = (pageState == 'block') ? true: false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
+//      if (j1.getState() === 'finished' && pageVisible && atticFinished) {
+        if (j1.getState() === 'finished' && pageVisible) {
         {% if advertising %}
 
           var advertisingProvider   = 'Google Adsense';
@@ -242,7 +243,7 @@ var logText;
                   }
                 }
                 clearInterval(dependencies_met_tracking_check_ready);
-              }, 25);
+              }, 5);
             } else {
               // no protection check enabled
               _this.setState('finished');
@@ -305,7 +306,7 @@ var logText;
 
           clearInterval(dependencies_met_page_ready);
         }
-      }, 25);
+      }, 5);
     }, // END init
 
     // -------------------------------------------------------------------------

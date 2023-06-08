@@ -300,7 +300,7 @@ j1.adapter.logger = (function (j1, window) {
 
           return true;
         }
-      }, 25); // END 'mode detected'
+      }, 5); // END 'mode detected'
     }, // END init
 
     // -------------------------------------------------------------------------

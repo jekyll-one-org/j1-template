@@ -162,7 +162,7 @@ j1.adapter.framer = (function (j1, window) {
           clearInterval(dependencies_met_page_finished);
           return true;
         }
-      }, 25);
+      }, 5);
     }, // END init
 
     // -------------------------------------------------------------------------

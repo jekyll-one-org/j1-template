@@ -148,8 +148,8 @@ var lastPageInfo;
         var pageVisible   = (pageState == 'block') ? true: false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-//      if (j1.getState() === 'finished' && pageVisible) {
-        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
+        if (j1.getState() === 'finished' && pageVisible) {
+//      if (j1.getState() === 'finished' && pageVisible && atticFinished) {
 
           _this.generate_scrollers();
           _this.setState('finished');
@@ -157,7 +157,7 @@ var lastPageInfo;
           logger.info('\n' + 'module initialized successfully');
           clearInterval(dependencies_met_page_ready);
         }
-      }, 25);
+      }, 5);
 
     }, // END init
 
@@ -263,7 +263,7 @@ var lastPageInfo;
 
           clearInterval(dependencies_met_page_ready);
         }
-      }, 25);
+      }, 5);
       // END generate scrollers
     },
 

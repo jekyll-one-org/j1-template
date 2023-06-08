@@ -151,7 +151,7 @@ j1.adapter.clipboard = (function (j1, window) {
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module initialized successfully');
         }
-      }, 25); // END dependencies_met_j1_finished
+      }, 5); // END dependencies_met_j1_finished
     },
 
     // -------------------------------------------------------------------------

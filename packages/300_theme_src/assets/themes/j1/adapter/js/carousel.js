@@ -135,8 +135,8 @@ j1.adapter.carousel = (function (j1, window) {
         var pageVisible   = (pageState == 'block') ? true : false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-//      if (j1.getState() == 'finished' && pageVisible) {
-        if (j1.getState() == 'finished' && pageVisible && atticFinished) {
+        if (j1.getState() == 'finished' && pageVisible) {
+//      if (j1.getState() == 'finished' && pageVisible && atticFinished) {
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -213,7 +213,7 @@ j1.adapter.carousel = (function (j1, window) {
                       $('#{{slider_id}} > .owl-wrapper-outer').addClass('ml-3');
                       clearInterval(dependency_met_owl_initialized);
                     }
-                  }, 25); // END dependency_met_owl_initialized
+                  }, 5); // END dependency_met_owl_initialized
                 {% endif %} {% endunless %}
 
                 // place additional parallax styles if enabled
@@ -374,9 +374,9 @@ j1.adapter.carousel = (function (j1, window) {
 
               clearInterval(dependencies_met_sliders_processed);
             }
-          }, 25); // END 'dependencies_met_sliders_processed'
+          }, 5); // END 'dependencies_met_sliders_processed'
         } // END if j1.getState 'finished'
-      }, 25); // END 'dependencies_met_page_finished'
+      }, 5); // END 'dependencies_met_page_finished'
     }, // END init
 
     // -------------------------------------------------------------------------

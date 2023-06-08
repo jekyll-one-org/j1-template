@@ -243,10 +243,10 @@ j1.adapter.rangeSlider = (function (j1, window) {
               }
             } // ENF if elms
             clearInterval(dependencies_met_elms_loaded);
-          }, 25);
+          }, 5);
           clearInterval(dependencies_met_j1_finished);
         } // END dependencies_met_j1_finished
-      }, 25);
+      }, 5);
 
     }, // END init
 

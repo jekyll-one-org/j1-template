@@ -143,7 +143,7 @@ j1.adapter.lunr = (function (j1, window) {
 
           clearInterval(dependencies_met_j1_finished);
         } // END dependencies_met_j1_finished
-      }, 25);
+      }, 5);
 
        _this.eventHandler();
 

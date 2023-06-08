@@ -140,8 +140,8 @@ var logText;
         var pageVisible   = (pageState == 'block') ? true : false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-//      if (j1.getState() === 'finished' && pageVisible) {
-        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
+        if (j1.getState() === 'finished' && pageVisible) {
+//      if (j1.getState() === 'finished' && pageVisible && atticFinished) {
           icon_picker_button_id = '#' + iconPickerDefaults.picker_button_id;
 
           _this.setState('started');
@@ -168,7 +168,7 @@ var logText;
           logger.info('\n' + 'initializing module finished');
           clearInterval(dependencies_met_page_ready);
         }
-      }, 25);
+      }, 5);
 
     }, // END init
 

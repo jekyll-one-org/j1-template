@@ -172,6 +172,7 @@ j1.adapter.slick = (function (j1, window) {
         var pageVisible   = (pageState == 'block') ? true: false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
+//      if (j1.getState() === 'finished' && pageVisible) {
         if (j1.getState() === 'finished' && pageVisible && atticFinished) {
 
           {% for carousel in slick_settings.carousels %} {% if carousel.enabled %}
@@ -317,7 +318,7 @@ j1.adapter.slick = (function (j1, window) {
                     $('.slick-arrow-{{carousel.id}}').css('top', slideImageHeight + 'px');
                     clearInterval(dependencies_met_page_ready);
                   }
-                }, 25);
+                }, 5);
               }
 
               // set individual arrow positions for a carousel
@@ -377,7 +378,7 @@ j1.adapter.slick = (function (j1, window) {
 
               clearInterval(load_dependencies['dependencies_met_html_loaded_{{carousel.id}}']);
             }
-          }, 25); // END
+          }, 5); // END
           {% endif %} {% endfor %} // ENDFOR (all) carousels
 
           _this.setState('finished');
@@ -386,7 +387,7 @@ j1.adapter.slick = (function (j1, window) {
 
           clearInterval(dependencies_met_page_ready);
         }
-      }, 25);
+      }, 5);
 
     }, // END init
 

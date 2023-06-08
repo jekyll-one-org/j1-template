@@ -147,7 +147,8 @@ var logText;
         var pageVisible   = (pageState == 'block') ? true: false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if ( j1.getState() === 'finished' && pageVisible && atticFinished) {
+//      if ( j1.getState() === 'finished' && pageVisible && atticFinished) {
+        if ( j1.getState() === 'finished' && pageVisible) {
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -234,7 +235,7 @@ var logText;
                   }, masonryOptions.initTimeout);
                 }
                 clearInterval(load_dependencies['dependencies_met_html_loaded_{{grid.id}}']);
-              }, 25); // END dependencies_met_html_loaded
+              }, 5); // END dependencies_met_html_loaded
 
             {% else %}
               logger.info('\n' + 'found grid disabled on id: {{grid.id}}');
@@ -249,7 +250,7 @@ var logText;
           logger.info('\n' + 'initializing module finished');
           clearInterval(dependencies_met_page_ready);
         }
-      }, 25);
+      }, 5);
 
     }, // END init
 

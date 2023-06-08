@@ -151,7 +151,7 @@ j1.adapter.customModule = (function (j1, window) {
 
           clearInterval(dependencies_met_j1_finished);
         } // END dependencies_met_j1_finished
-      }, 25);
+      }, 5);
 
     }, // END init
 

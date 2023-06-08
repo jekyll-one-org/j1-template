@@ -149,8 +149,8 @@ var logText;
         var pageVisible   = (pageState == 'block') ? true : false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-//      if (j1.getState() === 'finished' && pageVisible) {
-        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
+        if (j1.getState() === 'finished' && pageVisible) {
+//      if (j1.getState() === 'finished' && pageVisible && atticFinished) {
 
           themes_allowed = waveOptions.themes.toString();
           theme_enabled  = waveOptions.themes.indexOf(theme) > -1 ? true : false;
@@ -186,7 +186,7 @@ var logText;
 
           clearInterval(dependencies_met_page_ready);
         }
-      }, 25);
+      }, 5);
 
     }, // END init
 

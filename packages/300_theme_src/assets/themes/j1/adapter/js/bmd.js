@@ -117,7 +117,7 @@ j1.adapter.bmd = (function (j1, window) {
           logger.info('\n' + 'initializing module finished');
           clearInterval(dependencies_met_j1_finished);
         } // END dependencies_met_j1_finished
-      }, 25);
+      }, 5);
 
     }, // END init
 

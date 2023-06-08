@@ -158,14 +158,14 @@ j1.adapter.fab = (function (j1, window) {
         var pageVisible   = (pageState == 'block') ? true : false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-//      if (j1.adapter.navigator.getState() == 'finished' && pageVisible) {
-        if (j1.adapter.navigator.getState() == 'finished' && pageVisible && atticFinished) {
+        if (j1.adapter.navigator.getState() == 'finished' && pageVisible) {
+//      if (j1.adapter.navigator.getState() == 'finished' && pageVisible && atticFinished) {
 
           logger.debug('\n' + 'met dependencies for: navigator');
           _this.fabLoader(fabOptions);
           clearInterval(dependencies_met_navigator);
         }
-      }, 25);
+      }, 5);
 
     }, // END init
 
@@ -195,7 +195,8 @@ j1.adapter.fab = (function (j1, window) {
         var pageVisible   = (pageState == 'block') ? true: false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if (j1.xhrDOMState['#' + fabOptions.xhr_container_id] == 'success' && j1.getState() == 'finished' && pageVisible && atticFinished ) {
+//      if (j1.xhrDOMState['#' + fabOptions.xhr_container_id] == 'success' && j1.getState() == 'finished' && pageVisible && atticFinished ) {
+        if (j1.xhrDOMState['#' + fabOptions.xhr_container_id] == 'success' && j1.getState() == 'finished' && pageVisible ) {
           _this.setState('loaded');
           logger.info('\n' + 'set module state to: ' + _this.getState());
           logger.info('\n' + 'HTML data for FAB: ' + _this.getState());
@@ -211,7 +212,7 @@ j1.adapter.fab = (function (j1, window) {
 
           clearInterval(dependencies_met_fab_initialized);
         }
-      }, 25); // END dependencies_met_fab_initialized
+      }, 5); // END dependencies_met_fab_initialized
     }, // END dataLoader
 
     // -------------------------------------------------------------------------
@@ -305,7 +306,7 @@ j1.adapter.fab = (function (j1, window) {
                         $('#open_mmenu_toc').show();
                         clearInterval(dependencies_met_toccer_finished);
                       }
-                    }, 25); // END dependencies_met_toccer_finished
+                    }, 5); // END dependencies_met_toccer_finished
                   } else {
                     logger.info('\n' + 'found toc in page: disabled');
                   }
@@ -365,7 +366,7 @@ j1.adapter.fab = (function (j1, window) {
                       $actionButton.prop('id', 'open_mmenu_toc');
                       clearInterval(dependencies_met_toccer_finished);
                     }
-                  }, 25); // END dependencies_met_toccer_finished
+                  }, 5); // END dependencies_met_toccer_finished
                 } else {
                   logger.info('\n' + 'found toc in page: disabled');
                   logger.info('\n' + 'eventhandler: disabled');

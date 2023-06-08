@@ -415,7 +415,7 @@ var j1 = (function (options) {
           j1.registerMonitors();
         }
         clearInterval(dependencies_met_page_loaded);
-      }, 25); // END dependencies_met_page_loaded
+      }, 5); // END dependencies_met_page_loaded
 
       // detect middleware (mode 'app') and update user session cookie
       // -----------------------------------------------------------------------
@@ -472,7 +472,7 @@ var j1 = (function (options) {
                 clearInterval(dependencies_met_page_displayed);
               }
             }
-          }, 25);
+          }, 5);
         })
         .catch(function(error) {
           // jadams, 2018-08-31
@@ -1080,7 +1080,7 @@ var j1 = (function (options) {
               }, {{template_config.page_on_load_timeout}} );
               clearInterval(dependencies_met_page_ready);
             }
-          }, 25);
+          }, 5);
 
           // set|log status
           state = 'finished';
@@ -1271,7 +1271,7 @@ var j1 = (function (options) {
             }, {{template_config.page_on_load_timeout}} );
             clearInterval(dependencies_met_page_ready);
           }
-        }, 25);
+        }, 5);
 
         // set|log status
         state = 'finished';
@@ -2070,7 +2070,7 @@ var j1 = (function (options) {
             return false;
           }
         }
-      }, 25);
+      }, 5);
     },
 
     // -------------------------------------------------------------------------
@@ -2128,7 +2128,7 @@ var j1 = (function (options) {
             return false;
           }
         }
-      }, 25);
+      }, 5);
     },
 
     // -------------------------------------------------------------------------
@@ -2489,7 +2489,7 @@ var j1 = (function (options) {
           }
 
         }
-      }, 25);
+      }, 5);
     },
 
     // -------------------------------------------------------------------------
@@ -2666,7 +2666,7 @@ var j1 = (function (options) {
           clearInterval(dependencies_met_page_finished);
 
         }
-      }, 25);
+      }, 5);
 
       // -----------------------------------------------------------------------
       // final updates before browser page|tab

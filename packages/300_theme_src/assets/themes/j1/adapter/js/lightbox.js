@@ -136,8 +136,8 @@ j1.adapter.lightbox = (function (j1, window) {
         var pageVisible   = (pageState == 'block') ? true: false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-//      if (j1.getState() == 'finished' && pageVisible) {
-        if (j1.getState() == 'finished' && pageVisible && atticFinished) {
+         if (j1.getState() == 'finished' && pageVisible) {
+//       if (j1.getState() == 'finished' && pageVisible && atticFinished) {
 
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -164,7 +164,7 @@ j1.adapter.lightbox = (function (j1, window) {
 
           clearInterval(dependencies_met_j1_finished);
         } // END dependencies_met_j1_finished
-      }, 25);
+      }, 5);
 
       // jadams, 2023-05-07: place CSS styles in GENERAL on a LIGHTBOX V2 doesn't help.
       // a lightbox shoud restpect the individual IMAGE styles
@@ -181,7 +181,7 @@ j1.adapter.lightbox = (function (j1, window) {
 
           clearInterval(dependencies_met_lb_v2_finished);
         }
-      }, 25); // END dependencies_met_lb_v2_finished
+      }, 5); // END dependencies_met_lb_v2_finished
 
     }, // END init lightbox
 

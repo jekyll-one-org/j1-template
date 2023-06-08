@@ -248,7 +248,7 @@ var logText;
                   $('#hyvor-talk-iframe').prop('title', 'Hyvor comments iframe');
                   clearInterval(dependencies_met_load_provider_finished);
                 }
-              }, 25);
+              }, 5);
             } else {
               // disable Hyvor Talk
               // ---------------------------------------------------------------
@@ -264,7 +264,7 @@ var logText;
             }
             clearInterval(dependencies_met_page_ready);
           } // END if getState 'finished'
-        }, 25);
+        }, 5);
 
         {% when "disqus" %}
         // [INFO   ] [j1.adapter.comments                    ] [ place provider: Disqus ]
@@ -344,11 +344,11 @@ var logText;
             //     $('#hyvor-talk-iframe').prop('title', 'Disqus comments iframe');
             //     clearInterval(dependencies_met_load_provider_finished);
             //   }
-            // }, 25);
+            // }, 5);
 
             clearInterval(dependencies_met_page_ready);
           } // END if getState 'finished'
-        }, 25);
+        }, 5);
         {% endcase %}
       } else {
         var dependencies_met_page_ready = setInterval(function() {
@@ -357,7 +357,7 @@ var logText;
             logger.info('\n' + 'comment services: disabled');
             clearInterval(dependencies_met_page_ready);
           }
-        }, 25);
+        }, 5);
       } // END if 'commentsOptions.comments'
 
     }, // END init

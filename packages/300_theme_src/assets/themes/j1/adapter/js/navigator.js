@@ -391,11 +391,11 @@ j1.adapter.navigator = (function (j1, window) {
                       clearInterval(dependencies_met_remote_themes_loaded);
                     }
                     clearInterval(dependencies_met_page_finished);
-                  }, 25);
+                  }, 5);
                 }
 //              _this.setState('initialized');
                 _this.setState('finished');
-              }, 25); // END 'dependencies_met_page_finished'
+              }, 5); // END 'dependencies_met_page_finished'
             } else {
               logText = '\n' + 'theme switcher detected as: disabled';
               logger.info(logText);
@@ -411,8 +411,8 @@ j1.adapter.navigator = (function (j1, window) {
               var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
               // initialize if page and themer ready
-//            if (j1.getState() === 'finished' && j1.adapter.themer.getState() === 'finished' && pageVisible) {
-              if (j1.getState() === 'finished' && j1.adapter.themer.getState() === 'finished' && pageVisible && atticFinished) {
+              if (j1.getState() === 'finished' && j1.adapter.themer.getState() === 'finished' && pageVisible) {
+//            if (j1.getState() === 'finished' && j1.adapter.themer.getState() === 'finished' && pageVisible && atticFinished) {
                 _this.setState('processing');
 
                 // apply module configuration settings
@@ -442,11 +442,11 @@ j1.adapter.navigator = (function (j1, window) {
                 logger.debug('\n' + 'met dependencies for: j1');
                 clearInterval(dependencies_met_initialized);
               }
-            }, 25); // END 'dependencies_met_initialized'
+            }, 5); // END 'dependencies_met_initialized'
             logger.debug('\n' + 'met dependencies for: themer');
             clearInterval(dependencies_met_load_menu_finished);
           }
-        }, 25); // END 'dependencies_met_load_menu_finished'
+        }, 5); // END 'dependencies_met_load_menu_finished'
 
       // --------------------------------------------------------------------
       // Register event 'reset on resize' to call j1.core.navigator on

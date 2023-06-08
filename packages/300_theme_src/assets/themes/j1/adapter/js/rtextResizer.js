@@ -217,7 +217,7 @@ j1.adapter.rtextResizer = (function (j1, window) {
           logger.info('\n' + 'initializing module finished');
           logger.debug('\n' + 'met dependencies for: loadHTML');
         } // END dependencies_met_data_loaded
-      }, 25);
+      }, 5);
     }, // END init
 
     // -------------------------------------------------------------------------

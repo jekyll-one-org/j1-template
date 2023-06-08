@@ -156,7 +156,7 @@ j1.adapter.masterslider = (function (j1, window) {
           _this.initSliders(masterSliderOptions, masterSliderOptions.sliders, msSliderManager, saveSliderConfig);
           clearInterval(dependencies_met_data_loaded);
         } // END dependencies_met_j1_finished
-      }, 25);
+      }, 5);
 
       // load the slider manager to DISPLAY instances in page (if visible)
       var dependencies_met_module_finished = setInterval(function() {
@@ -164,7 +164,8 @@ j1.adapter.masterslider = (function (j1, window) {
         var pageVisible   = (pageState == 'block') ? true : false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if (_this.getState() == 'sliders_initialized' && pageVisible && atticFinished) {
+//      if (_this.getState() == 'sliders_initialized' && pageVisible && atticFinished) {
+        if (_this.getState() == 'sliders_initialized' && pageVisible) {
             // TODO: Check why a timeout is required to load the Slider Manager
             setTimeout (function() {
               if (sliderManager) document.body.appendChild(msSliderManager);
@@ -175,7 +176,7 @@ j1.adapter.masterslider = (function (j1, window) {
             }, masterSliderOptions.slider_manager_load_timeout);
             clearInterval(dependencies_met_module_finished);
         } // END dependencies_met_j1_finished
-      }, 25);
+      }, 5);
 
     }, // END init
 

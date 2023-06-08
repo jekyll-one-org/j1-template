@@ -191,13 +191,13 @@ var logText;
                   logger.warn('\n' + 'container id not found: ' + '#' + particleID);
                 }
                 clearInterval(dependencies_met_attic_ready);
-              }, 25);
+              }, 5);
             {% endif %}
           {% endfor %}
 
           clearInterval(dependencies_met_page_ready);
         }
-      }, 25);
+      }, 5);
 
     }, // END init
 

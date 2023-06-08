@@ -134,8 +134,8 @@ j1.adapter.dropdowns = (function (j1, window) {
         var pageVisible   = (pageState == 'block') ? true : false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-//      if (j1.getState() == 'finished' && pageVisible) {
-        if (j1.getState() == 'finished' && pageVisible && atticFinished) {
+        if (j1.getState() == 'finished' && pageVisible) {
+//      if (j1.getState() == 'finished' && pageVisible && atticFinished) {
 
           var elms = document.querySelectorAll('.dropdowns');
 
@@ -207,7 +207,7 @@ j1.adapter.dropdowns = (function (j1, window) {
 
           clearInterval(dependencies_met_j1_finished);
         } // END dependencies_met_j1_finished
-      }, 25);
+      }, 5);
 
     }, // END init
 

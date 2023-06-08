@@ -271,7 +271,7 @@ j1.adapter.cookieConsent = (function (j1, window) {
 
           clearInterval(dependencies_met_page_ready);
         }
-      }, 25);
+      }, 5);
     }, // END init
 
     // -------------------------------------------------------------------------

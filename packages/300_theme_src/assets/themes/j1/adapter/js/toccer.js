@@ -166,8 +166,8 @@ j1.adapter.toccer = (function () {
           var pageVisible = (pageState == 'block') ? true: false;
           var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-//        if (j1.getState() == 'finished' && pageVisible) {
-          if (j1.getState() == 'finished' && pageVisible && atticFinished) {
+          if (j1.getState() == 'finished' && pageVisible) {
+//        if (j1.getState() == 'finished' && pageVisible && atticFinished) {
 
             _this.initToccerCore(toccerOptions);
             _this.setState('finished');
@@ -177,7 +177,7 @@ j1.adapter.toccer = (function () {
             logger.debug('\n' + 'met dependencies for: j1');
             clearInterval(dependencies_met_navigator);
           }
-        }, 25);
+        }, 5);
       }
     }, // END init
 
@@ -229,7 +229,7 @@ j1.adapter.toccer = (function () {
           logger.debug('\n' + 'met dependencies for: loadHTML');
           clearInterval(dependencies_met_ajax_load_finished);
         } // END AJAX load finished
-      }, 25); // END dependencies_met_ajax_load_finished
+      }, 5); // END dependencies_met_ajax_load_finished
 
     }, // END initToccerCore
 
