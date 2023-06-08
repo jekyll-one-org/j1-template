@@ -24,7 +24,7 @@ fab_menu_id:                            default
 regenerate:                             false
 permalink:                              /pages/public/learn/where_to_go/
 
-resources:                              [ animate, comments ]
+resources:                              [ animate ]
 resource_options:
   - attic:
       slides:

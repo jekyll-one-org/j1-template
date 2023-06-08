@@ -28,6 +28,10 @@
       href:                             /pages/public/learn/where_to_go/
       icon:                             paw
 
+    - title:                            Optimize LCP
+      href:                             /pages/public/learn/optimize_lcp/
+      icon:                             quadcopter
+
     # --------------------------------------------------------------------------
     # Roundtrip
     #

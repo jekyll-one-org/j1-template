@@ -356,6 +356,13 @@ rouge:
   theme_dark:                           uno.dark
 
 # ------------------------------------------------------------------------------
+# Font AweSome settings
+#
+fa:
+  color:                                default
+
+
+# ------------------------------------------------------------------------------
 # SEO settings (optimization)
 #
 
@@ -385,13 +392,17 @@ rouge:
 # ------------------------------------------------------------------------------
 preload:
 
+  image:
+    preload:                            false
+    files:                              [ /assets/images/modules/icons/j1/j1-512x512.png ]
+
   font:
     preload:                              false
     cors:                                 crossorigin
     fonts:                                []
 
   css:
-    preload:                              true
+    preload:                              false
     css:                                  [
                                             /assets/themes/j1/core/css/themes/unolight/bootstrap,
                                             /assets/themes/j1/core/css/vendor
@@ -399,7 +410,7 @@ preload:
     files:                                []
 
   js:
-    preload:                              true
+    preload:                              false
     js:                                   [
                                             /assets/themes/j1/modules/bmd/js/bmd,
                                             /assets/themes/j1/modules/backstretch/js/backstretch,
@@ -410,10 +421,7 @@ preload:
                                             /assets/themes/j1/adapter/js/logger.js,
                                             /assets/themes/j1/adapter/js/bmd.js,
                                             /assets/themes/j1/adapter/js/navigator.js
-                                          ]
-  image:
-    preload:                              false
-    files:                                [ /assets/images/modules/icons/j1/j1-512x512.png ]
+                                        ]
 
 # ------------------------------------------------------------------------------
 # PRECONNECT settings
@@ -428,12 +436,6 @@ preload:
 preconnect:
   enabled:                              true
   urls:                                 [ "https://bootswatch.com" ]
-
-# ------------------------------------------------------------------------------
-# Font AweSome settings
-#
-fa:
-  color:                                default
 
 # ------------------------------------------------------------------------------
 # END config
