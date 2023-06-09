@@ -164,7 +164,7 @@ j1.adapter.lightbox = (function (j1, window) {
 
           clearInterval(dependencies_met_j1_finished);
         } // END dependencies_met_j1_finished
-      }, 5);
+      }, 10);
 
       // jadams, 2023-05-07: place CSS styles in GENERAL on a LIGHTBOX V2 doesn't help.
       // a lightbox shoud restpect the individual IMAGE styles
@@ -181,7 +181,7 @@ j1.adapter.lightbox = (function (j1, window) {
 
           clearInterval(dependencies_met_lb_v2_finished);
         }
-      }, 5); // END dependencies_met_lb_v2_finished
+      }, 10); // END dependencies_met_lb_v2_finished
 
     }, // END init lightbox
 

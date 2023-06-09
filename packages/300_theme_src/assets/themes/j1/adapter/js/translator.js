@@ -335,7 +335,7 @@ j1.adapter.translator = (function (j1, window) {
 
           clearInterval(dependencies_met_page_ready);
         }
-      }, 5);
+      }, 10);
     }, // END init
 
     // -------------------------------------------------------------------------

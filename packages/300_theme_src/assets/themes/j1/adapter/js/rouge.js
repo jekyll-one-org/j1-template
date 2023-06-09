@@ -172,7 +172,7 @@ j1.adapter.rouge = (function (j1, window) {
 
           clearInterval(dependencies_met_j1_finished);
         } // END dependencies_met_j1_finished
-      }, 5);
+      }, 10);
 
       var dependencies_met_rouge_theme_loaded = setInterval (function () {
         if (j1.adapter.rouge.getState() === 'finished') {
@@ -183,7 +183,7 @@ j1.adapter.rouge = (function (j1, window) {
           }
           clearInterval(dependencies_met_rouge_theme_loaded);
         }
-      }, 5); // END 'dependencies_met_rouge_theme_loaded'
+      }, 10); // END 'dependencies_met_rouge_theme_loaded'
 
     }, // END init
 

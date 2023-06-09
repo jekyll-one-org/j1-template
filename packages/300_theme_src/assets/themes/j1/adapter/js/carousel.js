@@ -213,7 +213,7 @@ j1.adapter.carousel = (function (j1, window) {
                       $('#{{slider_id}} > .owl-wrapper-outer').addClass('ml-3');
                       clearInterval(dependency_met_owl_initialized);
                     }
-                  }, 5); // END dependency_met_owl_initialized
+                  }, 10); // END dependency_met_owl_initialized
                 {% endif %} {% endunless %}
 
                 // place additional parallax styles if enabled
@@ -374,9 +374,9 @@ j1.adapter.carousel = (function (j1, window) {
 
               clearInterval(dependencies_met_sliders_processed);
             }
-          }, 5); // END 'dependencies_met_sliders_processed'
+          }, 10); // END 'dependencies_met_sliders_processed'
         } // END if j1.getState 'finished'
-      }, 5); // END 'dependencies_met_page_finished'
+      }, 10); // END 'dependencies_met_page_finished'
     }, // END init
 
     // -------------------------------------------------------------------------

@@ -117,9 +117,6 @@ regenerate:                             true
  # J1 Theme is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
- #  TODO:
- #
- # -----------------------------------------------------------------------------
  # Adapter generated: {{site.time}}
  # -----------------------------------------------------------------------------
 */
@@ -408,14 +405,7 @@ var j1 = (function (options) {
         }
       }
 
-      var dependencies_met_page_loaded = setInterval (function () {
-        if (j1.getState() == 'finished') {
-          // register observers
-          //
-          j1.registerMonitors();
-        }
-        clearInterval(dependencies_met_page_loaded);
-      }, 5); // END dependencies_met_page_loaded
+      j1.registerMonitors();
 
       // detect middleware (mode 'app') and update user session cookie
       // -----------------------------------------------------------------------
@@ -472,7 +462,7 @@ var j1 = (function (options) {
                 clearInterval(dependencies_met_page_displayed);
               }
             }
-          }, 5);
+          }, 10);
         })
         .catch(function(error) {
           // jadams, 2018-08-31
@@ -1080,7 +1070,7 @@ var j1 = (function (options) {
               }, {{template_config.page_on_load_timeout}} );
               clearInterval(dependencies_met_page_ready);
             }
-          }, 5);
+          }, 10);
 
           // set|log status
           state = 'finished';
@@ -1271,7 +1261,7 @@ var j1 = (function (options) {
             }, {{template_config.page_on_load_timeout}} );
             clearInterval(dependencies_met_page_ready);
           }
-        }, 5);
+        }, 10);
 
         // set|log status
         state = 'finished';
@@ -1688,12 +1678,10 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     // MAX-AGE Cookies: To leave cookies for a specific time, set the expires
     // part into a FUTUTE date. FOR GDPR compliance, MAX-AGE is 365 days.
-    // TODO:
-    //    Change attribute "Secure" to true, if HTTPS is used.
-    //    Checks and config changes are to be done.
+    // TODO:  Change attribute "Secure" to true, if HTTPS is used.
+    //        Checks and config changes are to be done.
     // -------------------------------------------------------------------------
-    // TODO:
-    //    Handling of  attribute "SameSite".
+    // TODO: Handling of  attribute "SameSite".
     //    Config to use this attribute should be configurable
     //    (what config file?).
     //    Disabled use for now in general.
@@ -2070,7 +2058,7 @@ var j1 = (function (options) {
             return false;
           }
         }
-      }, 5);
+      }, 10);
     },
 
     // -------------------------------------------------------------------------
@@ -2128,7 +2116,7 @@ var j1 = (function (options) {
             return false;
           }
         }
-      }, 5);
+      }, 10);
     },
 
     // -------------------------------------------------------------------------
@@ -2489,7 +2477,7 @@ var j1 = (function (options) {
           }
 
         }
-      }, 5);
+      }, 10);
     },
 
     // -------------------------------------------------------------------------
@@ -2520,56 +2508,82 @@ var j1 = (function (options) {
     // -------------------------------------------------------------------------
     registerMonitors: function () {
 
-      // add PerformanceObserver to monitor the 'CLS' of a page load
-      // see: https://requestmetrics.com/web-performance/cumulative-layout-shift
+      // add PerformanceObserver to monitor the 'LCP' of a page load
+      // see: https://developer.mozilla.org/en-US/docs/Web/API/LargestContentfulPaint
       //
-      var cls     = 0;
-      var prevCLS = 1000000000; // suppress first page changes
-      var roundedCLS;
+      var lcp;
+      var cumulated_lcp = 0;
+      const performanceObserverLCP = new PerformanceObserver((entryList) => {
+        var logger        = log4javascript.getLogger('PerformanceObserver');
+        const entries     = entryList.getEntries();
+        // Use the latest LCP candidate
+        const lastEntry   = entries[entries.length - 1];
+        var lastEntryText = JSON.stringify(lastEntry, null, 2);
 
+        cumulated_lcp += lastEntry.renderTime;
+        // lcp = cumulated_lcp.toFixed(3);
+        var lcp_full = cumulated_lcp/1000;
+        lcp = lcp_full.toFixed(3);
+
+        if ( lastEntry.url != '' ) {
+          logger.debug('\n' + 'Largest Contentful Paint (LCP), image/url:', lastEntry.url);
+        } else {
+          logger.debug('\n' + 'Largest Contentful Paint (LCP), text:' + '\n', lastEntry.element.innerText.substring(0, 80) + ' ...');
+        }
+
+        // logger.debug('\n' + 'Largest Contentful Paint (LCP):', lastEntryText);
+        logger.debug('\n' + 'Largest Contentful Paint (LCP), cumulated:', lcp);
+      });
+
+      var cls;
+      var cumulated_cls = 0;
       const performanceObserverCLS = new PerformanceObserver(entryList => {
         var logger  = log4javascript.getLogger('PerformanceObserver');
         var entries = entryList.getEntries() || [];
 
         entries.forEach(entry => {
-          // omit entries likely caused by user input
-          if (!entry.hadRecentInput) {
-            cls += entry.value;
-            roundedCLS = cls.toFixed(3);
-          }
 
-          // if (entry.sources) {
-          //
-          //   for (const {node, currentRect, previousRect} of entry.sources) {
-          //
-          //     if (typeof node.firstElementChild != 'null' && typeof node.firstElementChild != 'undefined') {
-          //
-          //       var id = '';
-          //       try {
-          //         id = node.firstElementChild.id;
-          //       }
-          //       catch(err) {
-          //         id = 'missing';
-          //       }
-          //
-          //       if (id !== 'missing' && id !== '') {
-          //         logger.debug('\n' + 'Cumulative Layout Shift (CLS) on id: ', id);
-          //         logger.debug('\n' + 'Cumulative Layout Shift (CLS): ', roundedCLS);
-          //       }
-          //
-          //     }
-          //   }
-          // }
+          // var entryID = entry.sources[0].node.firstElementChild.id;
+          // logger.debug('\n' + 'Cumulative Layout Shift (CLS), entry object:', entryID);
+
+          // var entryText = JSON.stringify(entry.sources[0], null, 2);
+          // logger.debug('\n' + 'Cumulative Layout Shift (CLS), entry object:', entryText);
+
+          if (entry.sources) {
+
+            // omit entries likely caused by user input
+            if (!entry.hadRecentInput) {
+              // cumulate values
+              cumulated_cls += entry.value;
+              cls = cumulated_cls.toFixed(3);
+            }
+
+            for (const {node, currentRect, previousRect} of entry.sources) {
+
+              if (typeof node.firstElementChild != 'null' && typeof node.firstElementChild != 'undefined') {
+
+                var id = '';
+                try {
+                  id = node.firstElementChild.id;
+                }
+                catch(err) {
+                  id = 'missing';
+                }
+
+                if (id !== 'missing' && id !== '' && cls > 0.01) {
+                  logger.debug('\n' + 'Cumulative Layout Shift (CLS), entry id: ', id);
+                  logger.debug('\n' + 'Cumulative Layout Shift (CLS): ', cls);
+                }
+
+                // if (cls > 0.01) {
+                //   logger.debug('\n' + 'Cumulative Layout Shift (CLS): ', cls);
+                // }
+
+              }
+            }
+          }
 
         });
-
-        if (roundedCLS > prevCLS) {
-          if (roundedCLS > 0.25) {
-            logger.debug('\n' + 'Cumulative Layout Shift (CLS): ', roundedCLS);
-          }
-        }
-
-        prevCLS = roundedCLS;
       });
 
       // add ResizeObserver to monitor the page height of dynamic pages
@@ -2650,23 +2664,28 @@ var j1 = (function (options) {
         } // END Observer data evaluation
       }); // END Observer
 
-      // run observers to monitor page
+      // -----------------------------------------------------------------------
+      // run all observers for page monitoring
+      // -----------------------------------------------------------------------
+
+      // monitor 'LCP'
       //
-      var dependencies_met_page_finished = setInterval (function () {
-        if (j1.getState() == 'finished') {
+      performanceObserverLCP.observe({
+         type: 'largest-contentful-paint',
+         buffered: true
+      });
 
-          // monitor 'CLS'
-          performanceObserverCLS.observe({
-            type: 'layout-shift',
-            buffered: true
-          });
+      // monitor 'CLS'
+      //
+      performanceObserverCLS.observe({
+         type: 'layout-shift',
+         buffered: true
+      });
 
-          // monitor 'page growth'
-          resizeObserver.observe(document.querySelector('body'));
-          clearInterval(dependencies_met_page_finished);
-
-        }
-      }, 5);
+      // monitor 'GROWTH'
+      resizeObserver.observe(
+        document.querySelector('body')
+      );
 
       // -----------------------------------------------------------------------
       // final updates before browser page|tab
@@ -2728,6 +2747,7 @@ var j1 = (function (options) {
      });
 
    } // END registerMonitors
+
   };
 }) (j1, window);
 

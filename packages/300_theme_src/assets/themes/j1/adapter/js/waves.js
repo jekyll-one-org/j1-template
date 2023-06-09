@@ -186,7 +186,7 @@ var logText;
 
           clearInterval(dependencies_met_page_ready);
         }
-      }, 5);
+      }, 10);
 
     }, // END init
 

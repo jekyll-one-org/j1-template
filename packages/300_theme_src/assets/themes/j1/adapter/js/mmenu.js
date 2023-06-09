@@ -342,7 +342,7 @@ j1.adapter.mmenu = (function (j1, window) {
             $('#{{item.menu.content.id}}').show();
             logger.info('\n' + 'initializing mmenu finished on id: #{{menu_id}}');
           }; // END mmenu_loaded
-        }, 5); // END dependencies_met_mmenu_loaded
+        }, 10); // END dependencies_met_mmenu_loaded
         {% endif %} // ENDIF content_type: NAVIGATION
 
         {% if item.menu.content.type == "drawer" %}
@@ -417,7 +417,7 @@ j1.adapter.mmenu = (function (j1, window) {
               clearInterval(dependencies_met_{{menu_id}}_loaded);
               $('#{{item.menu.content.id}}').show();
           }; // END if menu_loaded
-        }, 5); // END dependencies_met_mmenu_loaded
+        }, 10); // END dependencies_met_mmenu_loaded
         logger.info('\n' + 'initializing mmenu finished on id: #{{menu_id}}');
         {% endif %} // ENDIF content_type: DRAWER
         } // END menus|drawers

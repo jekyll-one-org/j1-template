@@ -243,7 +243,7 @@ var logText;
                   }
                 }
                 clearInterval(dependencies_met_tracking_check_ready);
-              }, 5);
+              }, 10);
             } else {
               // no protection check enabled
               _this.setState('finished');
@@ -306,7 +306,7 @@ var logText;
 
           clearInterval(dependencies_met_page_ready);
         }
-      }, 5);
+      }, 10);
     }, // END init
 
     // -------------------------------------------------------------------------

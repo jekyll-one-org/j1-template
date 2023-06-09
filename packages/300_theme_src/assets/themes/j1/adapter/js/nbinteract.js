@@ -258,7 +258,7 @@ j1.adapter.nbinteract = (function (j1, window) {
           } else {
             $('.fab-btn').hide();
           }
-        }, 5);  // END interval dependencies_met_page_rendered
+        }, 10);  // END interval dependencies_met_page_rendered
       }
 
     }, // END init
@@ -545,7 +545,7 @@ j1.adapter.nbinteract = (function (j1, window) {
 
                   clearInterval(dependencies_met_nb_loaded);
                 } // END dependencies_met_nb_loaded
-              }, 5);
+              }, 10);
               return;
             }
             // END textbook_id: {{ textbook_id }}
@@ -566,7 +566,7 @@ j1.adapter.nbinteract = (function (j1, window) {
           }
 
         }
-      }, 5);  // END dependencies_met_binder_responsive
+      }, 10);  // END dependencies_met_binder_responsive
 
     },
 
@@ -671,7 +671,7 @@ j1.adapter.nbinteract = (function (j1, window) {
                     logger.debug('\n' + 'last widget rendered ' + outputDiv.id + ' : ' + outputDiv.clientHeight);
                     clearInterval(dependencies_met_page_rendered);
                   }
-                }, 5);  // END interval
+                }, 10);  // END interval
               } // END for all ID
 
               var dependencies_met_widgets_updated = setInterval(function() {
@@ -699,7 +699,7 @@ j1.adapter.nbinteract = (function (j1, window) {
 
                   clearInterval(dependencies_met_widgets_updated);
                 }
-              }, 5);  // END interval
+              }, 10);  // END interval
             } // END if cleanup Altair
 
             // disable MathJax for all HTML 'output_wrapper' elements
@@ -751,10 +751,10 @@ j1.adapter.nbinteract = (function (j1, window) {
                       }
                       clearInterval(dependencies_met_mathjax_rendered);
                     }
-                  }, 5);  // END interval dependencies_met_mathjax_rendered
+                  }, 10);  // END interval dependencies_met_mathjax_rendered
                   clearInterval(dependencies_met_mathjax_available);
                 };
-              }, 5);  // END interval dependencies_met_mathjax_available
+              }, 10);  // END interval dependencies_met_mathjax_available
 
             } // END // disable translation on MathJax
 
@@ -1100,7 +1100,7 @@ j1.adapter.nbinteract = (function (j1, window) {
 
             clearInterval(dependencies_met_page_rendered);
           }
-        }, 5);  // END interval dependencies_met_page_rendered
+        }, 10);  // END interval dependencies_met_page_rendered
 
         // ---------------------------------------------------------------------
         // show the quicklinks icon
@@ -1134,7 +1134,7 @@ j1.adapter.nbinteract = (function (j1, window) {
             //clearInterval(dependencies_met_mathjax_rendered);
           }
           clearInterval(dependencies_met_mathjax_rendered);
-        }, 5);  // END interval dependencies_met_mathjax_rendered
+        }, 10);  // END interval dependencies_met_mathjax_rendered
 
       } // END message command/mathjax
 

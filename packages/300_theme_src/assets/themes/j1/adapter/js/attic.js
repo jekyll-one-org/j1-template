@@ -169,7 +169,7 @@ j1.adapter.attic = (function (j1, window) {
           clearInterval(dependencies_met_page_ready);
           {% endif %}
         }
-      }, 5);
+      }, 10);
     }, // END init
 
     // -------------------------------------------------------------------------
@@ -668,7 +668,7 @@ j1.adapter.attic = (function (j1, window) {
                   {{attic_id}}_runner (atticOptions);
                   clearInterval(dependencies_met_attic_ready);
                 }
-              }, 5);
+              }, 10);
             });
 
           } // END apply CSS styles|start ATTIC RUNNER

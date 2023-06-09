@@ -1083,12 +1083,13 @@
           var myID = '#' + that.$container['0']['id'];
           var isVisible = setInterval(function() {
             if ($(myID).is(':visible')) {
-              // clear interval checking
-              clearInterval(isVisible);
               logger.debug('\n' + 'container visible on id: ' + myID);
               that.resize();
+
+              // clear interval checking
+              clearInterval(isVisible);
             }
-          }, 50); // END 'isVisible'
+          }, 10); // END 'isVisible'
 
         });
 
@@ -1605,9 +1606,10 @@
     var ytAPILoadInt = setInterval(function () {
       if (window['YT'] && window['YT'].loaded) {
         $(window).trigger('youtube_api_load');
+
         clearTimeout(ytAPILoadInt);
       }
-    }, 50);
+    }, 10);
   };
 
   var getDeviceOrientation = function () {

@@ -165,7 +165,7 @@ j1.adapter.fab = (function (j1, window) {
           _this.fabLoader(fabOptions);
           clearInterval(dependencies_met_navigator);
         }
-      }, 5);
+      }, 10);
 
     }, // END init
 
@@ -212,7 +212,7 @@ j1.adapter.fab = (function (j1, window) {
 
           clearInterval(dependencies_met_fab_initialized);
         }
-      }, 5); // END dependencies_met_fab_initialized
+      }, 10); // END dependencies_met_fab_initialized
     }, // END dataLoader
 
     // -------------------------------------------------------------------------
@@ -306,7 +306,7 @@ j1.adapter.fab = (function (j1, window) {
                         $('#open_mmenu_toc').show();
                         clearInterval(dependencies_met_toccer_finished);
                       }
-                    }, 5); // END dependencies_met_toccer_finished
+                    }, 10); // END dependencies_met_toccer_finished
                   } else {
                     logger.info('\n' + 'found toc in page: disabled');
                   }
@@ -366,7 +366,7 @@ j1.adapter.fab = (function (j1, window) {
                       $actionButton.prop('id', 'open_mmenu_toc');
                       clearInterval(dependencies_met_toccer_finished);
                     }
-                  }, 5); // END dependencies_met_toccer_finished
+                  }, 10); // END dependencies_met_toccer_finished
                 } else {
                   logger.info('\n' + 'found toc in page: disabled');
                   logger.info('\n' + 'eventhandler: disabled');

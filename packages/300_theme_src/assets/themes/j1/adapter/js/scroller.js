@@ -157,7 +157,7 @@ var lastPageInfo;
           logger.info('\n' + 'module initialized successfully');
           clearInterval(dependencies_met_page_ready);
         }
-      }, 5);
+      }, 10);
 
     }, // END init
 
@@ -263,7 +263,7 @@ var lastPageInfo;
 
           clearInterval(dependencies_met_page_ready);
         }
-      }, 5);
+      }, 10);
       // END generate scrollers
     },
 

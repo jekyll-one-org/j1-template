@@ -235,7 +235,7 @@ var logText;
                   }, masonryOptions.initTimeout);
                 }
                 clearInterval(load_dependencies['dependencies_met_html_loaded_{{grid.id}}']);
-              }, 5); // END dependencies_met_html_loaded
+              }, 10); // END dependencies_met_html_loaded
 
             {% else %}
               logger.info('\n' + 'found grid disabled on id: {{grid.id}}');
@@ -250,7 +250,7 @@ var logText;
           logger.info('\n' + 'initializing module finished');
           clearInterval(dependencies_met_page_ready);
         }
-      }, 5);
+      }, 10);
 
     }, // END init
 

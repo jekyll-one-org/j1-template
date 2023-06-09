@@ -20,10 +20,11 @@ regenerate:                             true
  # Tocbot is licensed under under the MIT License.
  # For details, see https://tscanlin.github.io/tocbot
  # -----------------------------------------------------------------------------
- # TODO:
- # 2019-03-10:  Old BS Affix code is to be removed
+ # jadams, 2019-03-10:
+ # TODO: Old BS Affix code is to be removed
  # -----------------------------------------------------------------------------
- # TODO:
+  # jadams, 2019-03-10:
+ # TODO: Manage heights
  #  Height of the window
  #    $(window).height()
  #  should be calculated and checked against the effective height of
@@ -177,7 +178,7 @@ j1.adapter.toccer = (function () {
             logger.debug('\n' + 'met dependencies for: j1');
             clearInterval(dependencies_met_navigator);
           }
-        }, 5);
+        }, 10);
       }
     }, // END init
 
@@ -229,7 +230,7 @@ j1.adapter.toccer = (function () {
           logger.debug('\n' + 'met dependencies for: loadHTML');
           clearInterval(dependencies_met_ajax_load_finished);
         } // END AJAX load finished
-      }, 5); // END dependencies_met_ajax_load_finished
+      }, 10); // END dependencies_met_ajax_load_finished
 
     }, // END initToccerCore
 

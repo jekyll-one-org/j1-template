@@ -156,7 +156,7 @@ j1.adapter.masterslider = (function (j1, window) {
           _this.initSliders(masterSliderOptions, masterSliderOptions.sliders, msSliderManager, saveSliderConfig);
           clearInterval(dependencies_met_data_loaded);
         } // END dependencies_met_j1_finished
-      }, 5);
+      }, 10);
 
       // load the slider manager to DISPLAY instances in page (if visible)
       var dependencies_met_module_finished = setInterval(function() {
@@ -176,7 +176,7 @@ j1.adapter.masterslider = (function (j1, window) {
             }, masterSliderOptions.slider_manager_load_timeout);
             clearInterval(dependencies_met_module_finished);
         } // END dependencies_met_j1_finished
-      }, 5);
+      }, 10);
 
     }, // END init
 

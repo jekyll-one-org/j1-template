@@ -168,7 +168,7 @@ var logText;
           logger.info('\n' + 'initializing module finished');
           clearInterval(dependencies_met_page_ready);
         }
-      }, 5);
+      }, 10);
 
     }, // END init
 

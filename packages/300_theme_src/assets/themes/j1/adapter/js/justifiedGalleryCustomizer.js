@@ -282,7 +282,7 @@ j1.adapter.justifiedGalleryCustomizer = (function (j1, window) {
                 });
                 clearInterval(dependencies_met_sliders_loaded);
               }
-            }, 5);
+            }, 10);
           } // END if formId (customizer ui)
 
           // -----------------------------------------------------------
@@ -302,7 +302,7 @@ j1.adapter.justifiedGalleryCustomizer = (function (j1, window) {
           logger.debug('\n' + 'met dependencies for: loadHTML');
           clearInterval(dependencies_met_data_loaded);
         } // END dependencies_met_data_loaded
-      }, 5);
+      }, 10);
     }, // END init
 
     // -------------------------------------------------------------------------

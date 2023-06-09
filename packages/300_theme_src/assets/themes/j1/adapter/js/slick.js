@@ -318,7 +318,7 @@ j1.adapter.slick = (function (j1, window) {
                     $('.slick-arrow-{{carousel.id}}').css('top', slideImageHeight + 'px');
                     clearInterval(dependencies_met_page_ready);
                   }
-                }, 5);
+                }, 10);
               }
 
               // set individual arrow positions for a carousel
@@ -378,7 +378,7 @@ j1.adapter.slick = (function (j1, window) {
 
               clearInterval(load_dependencies['dependencies_met_html_loaded_{{carousel.id}}']);
             }
-          }, 5); // END
+          }, 10); // END
           {% endif %} {% endfor %} // ENDFOR (all) carousels
 
           _this.setState('finished');
@@ -387,7 +387,7 @@ j1.adapter.slick = (function (j1, window) {
 
           clearInterval(dependencies_met_page_ready);
         }
-      }, 5);
+      }, 10);
 
     }, // END init
 

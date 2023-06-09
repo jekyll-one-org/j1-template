@@ -226,7 +226,7 @@ var logText;
           {% endif %}
         }
         clearInterval(dependencies_met_page_ready);
-      }, 5);
+      }, 10);
 
       return;
     }, // END init

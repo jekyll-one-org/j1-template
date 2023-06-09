@@ -292,7 +292,7 @@ j1.adapter.themer = (function (j1, window) {
                    $('head').append(theme_css_html);
                    clearInterval(dependencies_met_theme_loaded);
                  }
-               }, 5); // END dependencies_met_theme_loaded
+               }, 10); // END dependencies_met_theme_loaded
              } else {
                // invalid theme, fallback on default
                logger.warn('\n' + 'themes CSS invalid: ' + user_state.theme_css);
@@ -324,7 +324,7 @@ j1.adapter.themer = (function (j1, window) {
            });
           clearInterval(dependencies_met_user_state_available);
         }
-      }, 5); // END dependencies_met_user_state_available
+      }, 10); // END dependencies_met_user_state_available
 
       // set final module state if theme loaded
       var dependencies_met_theme_applied = setInterval (function () {
@@ -344,7 +344,7 @@ j1.adapter.themer = (function (j1, window) {
           clearInterval(dependencies_met_theme_applied);
         }
 
-      }, 5); // END dependencies_met_theme_applied
+      }, 10); // END dependencies_met_theme_applied
 
     }, // END init
 

@@ -150,7 +150,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
 
           clearInterval(dependencies_met_j1_finished);
         }
-      }, 5);
+      }, 10);
     },
 
     // -----------------------------------------------------------------------
