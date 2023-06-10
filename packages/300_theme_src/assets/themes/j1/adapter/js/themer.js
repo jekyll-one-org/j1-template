@@ -209,6 +209,7 @@ j1.adapter.themer = (function (j1, window) {
 
       // hide page (until theme is loaded)
       $('#no_flicker').hide();
+      $('#content').hide();
 
       // jadams, 2021-07-25: problem seems NOT an timing issue on the iPad
       // platform. (General) Dependency should be REMOVED!!!
@@ -332,14 +333,14 @@ j1.adapter.themer = (function (j1, window) {
         styleLoaded = styleSheetLoaded(user_state.theme_css);
 
         if (styleLoaded) {
+          // show page (theme is loaded)
+          $('#no_flicker').show();
+
           logger.info('\n' + 'theme loaded successfully: ' + user_state.theme_name);
           logger.debug('\n' + 'theme CSS loaded: ' + user_state.theme_css);
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
           logger.info('\n' + 'module initialized successfully');
-
-          // show page (theme is loaded)
-          $('#no_flicker').show();
 
           clearInterval(dependencies_met_theme_applied);
         }

@@ -26,7 +26,7 @@
 }
 
 .footer p {
-  color: $lighten;
+  color: $lighten-900;
   font-size: 1em;
   font-family: sans-serif;
 }
@@ -177,7 +177,7 @@
 
 // jadams, 2022-01-16: set text color
 .copyright .terms-menu li a {
-  color: rgba(255, 255, 255, 0.5) !important;
+  color: $lighten !important;
 }
 
 /*Social Icons*/

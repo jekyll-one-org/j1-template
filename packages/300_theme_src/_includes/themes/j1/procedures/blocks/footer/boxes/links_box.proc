@@ -32,7 +32,7 @@
 <!-- [INFO   ] [links_box.proc                     ] [ place links box ] -->
 <div class="col-md-{{footer_box_width_md}}">
 
-  <h2 class="text-uppercase g-color-white-opacity-0_6 g-font-size-18 mb-0 {{title_translation}}">{{title}}</h2>
+  <h2 class="text-uppercase g-color-white-opacity-0_9 g-font-size-18 mb-0 {{title_translation}}">{{title}}</h2>
   <p class="tagline mb-0"> <large>{{tagline}}</large> </p>
   <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-1"></div>
 

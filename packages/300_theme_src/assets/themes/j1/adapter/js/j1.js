@@ -142,13 +142,15 @@ var j1 = (function (options) {
   var scrollerSettings = {};
   var scrollerOptions  = {};
   var scrollerDefaults = {};
-  var _this;
+  var _this            = j1;;
   var settings;
   var json_data;
   var ep;
   var baseUrl;
   var referrer;
   var documentHeight;
+
+  var banner            = [];
 
   var scrollOffset;
   var scrollOffsetCorrection;
@@ -405,6 +407,7 @@ var j1 = (function (options) {
         }
       }
 
+      logger.info('\n' + 'register monitors');
       j1.registerMonitors();
 
       // detect middleware (mode 'app') and update user session cookie
@@ -548,10 +551,39 @@ var j1 = (function (options) {
       // load|initialize page resources for block elements
       // NOTE: asynchronous calls should be rewitten to xhrData
       // -----------------------------------------------------------------------
-      j1.initBanner(settings);
-      j1.initPanel(settings);
-      j1.initFooter(settings);
 
+      var dependencies_met_page_ready = setInterval (function (options) {
+        var pageState     = $('#no_flicker').css("display");
+        var pageVisible   = (pageState == 'block') ? true : false;
+        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+
+        if (j1.getState() === 'finished' && pageVisible) {
+          logger.info('\n' + 'load block elements');
+          j1.initBanner(settings);
+          j1.initPanel(settings);
+          j1.initFooter(settings);
+
+          var dependencies_met_blocks_ready = setInterval (function (settings) {
+            var banner_state        = j1.getXhrDataState('#home_teaser_banner');
+            var service_panel_state = j1.getXhrDataState('#home_service_panel');
+            var news_panel_state    = j1.getXhrDataState('#home_news_panel');
+            var footer_state        = j1.getXhrDataState('#j1_footer');
+
+            // show content section for dynamic 'block elements' to optimze CLS
+            if (banner_state == 'success' && service_panel_state == 'success' && news_panel_state == 'success' && footer_state == 'success') {
+              // show main content
+              $('#content').show();
+              clearInterval(dependencies_met_blocks_ready);
+            }
+          }, 10);
+
+          // show content for (dynamic) 'page content' to optimze CLS
+          $('#content').show();
+          clearInterval(dependencies_met_page_ready);
+        }
+      }, 10);
+
+      j1.xhrDOMState["#home_teaser_banner"] == 'success'
       state = 'running';
       logger.debug('\n' + 'state: ' + state);
 
@@ -595,7 +627,7 @@ var j1 = (function (options) {
       var cb_load_closure = function(banner_id) {
         return function ( responseTxt, statusTxt, xhr ) {
           if ( statusTxt ==  'success' ) {
-            var logger = log4javascript.getLogger('j1.adapter.xhrData');
+            // var logger = log4javascript.getLogger('j1.adapter.xhrData');
             logText = '\n' + 'loading banner completed on id: ' +banner_id;
             logger.info(logText);
             j1.setXhrDataState(banner_id, statusTxt);
@@ -968,6 +1000,7 @@ var j1 = (function (options) {
 
           // display the page loaded is managed by module "themer"
           // $('#no_flicker').css('display', 'block');
+          // $('#no_flicker').show();
 
           // jadams, 2021-12-06: Check if access to cookies for this site failed.
           // Possibly, a third-party domain or an attacker tries to access it.
@@ -1111,6 +1144,7 @@ var j1 = (function (options) {
 
         // display the page loaded is managed by module "themer"
         // $('#no_flicker').css('display', 'block');
+        // $('#no_flicker').show();
 
         // jadams, 2021-12-06: Check if access to cookies for this site failed.
         // Possibly, a third-party domain or an attacker tries to access it.
@@ -2521,19 +2555,25 @@ var j1 = (function (options) {
         var lastEntryText = JSON.stringify(lastEntry, null, 2);
 
         cumulated_lcp += lastEntry.renderTime;
-        // lcp = cumulated_lcp.toFixed(3);
         var lcp_full = cumulated_lcp/1000;
         lcp = lcp_full.toFixed(3);
 
         if ( lastEntry.url != '' ) {
           logger.debug('\n' + 'Largest Contentful Paint (LCP), image/url:', lastEntry.url);
         } else {
-          logger.debug('\n' + 'Largest Contentful Paint (LCP), text:' + '\n', lastEntry.element.innerText.substring(0, 80) + ' ...');
+          // jadams, 2023-06-07:
+          // logger.debug('\n' + 'Largest Contentful Paint (LCP), text:' + '\n', lastEntry.element.innerText.substring(0, 80) + ' ...');
         }
 
         // logger.debug('\n' + 'Largest Contentful Paint (LCP):', lastEntryText);
-        logger.debug('\n' + 'Largest Contentful Paint (LCP), cumulated:', lcp);
-      });
+
+        if (lcp > 2.5) {
+            logger.warn('\n' + 'Largest Contentful Paint (LCP), cumulated:', lcp);
+        } else {
+            logger.info('\n' + 'Largest Contentful Paint (LCP), cumulated:', lcp);
+        }
+
+      }); // END observer
 
       var cls;
       var cumulated_cls = 0;
@@ -2559,9 +2599,7 @@ var j1 = (function (options) {
             }
 
             for (const {node, currentRect, previousRect} of entry.sources) {
-
               if (typeof node.firstElementChild != 'null' && typeof node.firstElementChild != 'undefined') {
-
                 var id = '';
                 try {
                   id = node.firstElementChild.id;
@@ -2571,20 +2609,21 @@ var j1 = (function (options) {
                 }
 
                 if (id !== 'missing' && id !== '' && cls > 0.01) {
-                  logger.debug('\n' + 'Cumulative Layout Shift (CLS), entry id: ', id);
-                  logger.debug('\n' + 'Cumulative Layout Shift (CLS): ', cls);
+                  if (cls > 0.1) {
+                    logger.warn('\n' + 'Cumulative Layout Shift (CLS), entry id: ', id);
+                    logger.warn('\n' + 'Cumulative Layout Shift (CLS): ', cls);
+                  } else {
+                    logger.info('\n' + 'Cumulative Layout Shift (CLS), entry id: ', id);
+                    logger.info('\n' + 'Cumulative Layout Shift (CLS): ', cls);
+                  }
                 }
+              } // END if typeof
+            } // END for
+          } // END if  entry.sources
 
-                // if (cls > 0.01) {
-                //   logger.debug('\n' + 'Cumulative Layout Shift (CLS): ', cls);
-                // }
+        }); // END forEach entry
 
-              }
-            }
-          }
-
-        });
-      });
+      }); // END observer
 
       // add ResizeObserver to monitor the page height of dynamic pages
       // see: https://stackoverflow.com/questions/14866775/detect-document-height-change
@@ -2643,7 +2682,8 @@ var j1 = (function (options) {
               growthRatio = growthRatio.toFixed(2);
               j1['pageMonitor'].growthRatio = growthRatio;
             }
-          }
+          } // END for entries
+
           // detect the 'page type'
           //
           if (growthRatio >= 5) {
@@ -2660,8 +2700,10 @@ var j1 = (function (options) {
               j1['pageMonitor'].pageType = 'static';
               logger.debug('\n' + 'page detected as: static');
             }
-          }
-        } // END Observer data evaluation
+          } // END if growthRatio
+
+        } // END if j1['pageMonitor']
+
       }); // END Observer
 
       // -----------------------------------------------------------------------
