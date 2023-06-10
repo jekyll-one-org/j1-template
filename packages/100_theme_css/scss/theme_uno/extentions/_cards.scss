@@ -437,6 +437,11 @@ a.card-title:hover {
 a.card-link {
   text-decoration: none;
   border-bottom: unset;
+  color: $gray-900;
+}
+
+a.card-link:hover {
+  color: $gray-600;
 }
 
 // Cards variants

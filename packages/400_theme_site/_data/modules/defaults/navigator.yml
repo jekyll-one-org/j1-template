@@ -85,8 +85,9 @@ defaults:
     fixed:                              true
     style:                              overlay
     color:                              light
-    nav_item_color:                     '#212121'                               # gray-900 rgba-lighten
-    nav_item_color_hover:               '#9E9E9E'                               # gray-500 rgba-lighten-400
+    nav_item_color:                     '#212121'                               # gray-900|rgba-lighten
+    nav_item_color_hover:               '#EEEEEE'                               # gray-200|rgba-lighten-400
+    nav_item_background_image:          'linear-gradient(#afabab, #1c1c1c 40%, #212121);'
     position:                           left
     bottom_line_height:                 1
     bottom_line_color:                  "#EEEEEE"                               # md-grey-200
@@ -136,7 +137,7 @@ defaults:
     icon_color:                         "#9E9E9E"                               # md-grey
     icon_size:                          mdi-sm
     menu_item_color:                    '#212121'                               # gray-900 rgba-lighten
-    menu_item_color_hover:              '#9E9E9E'                               # gray-500 rgba-lighten-900
+    menu_item_color_hover:              '#EEEEEE'                               # gray-500 rgba-lighten-900
     dropdown_style:                     raised
     dropdown_color:                     '#2196f3'
     dropdown_left:                      12                                      # px
@@ -168,8 +169,8 @@ defaults:
     xhr_data_path:                      /assets/data/quicklinks/index.html
 
     icon_family:                        MDI
-    icon_color:                         '#424242'                               # gray-800
-    icon_color_hover:                   '#9E9E9E'                               # gray-500
+    icon_color:                         '#212121'                               # gray-900
+    icon_color_hover:                   '#FAFAFA'                               # gray-50
     icon_size:                          mdi-2x
 
     # Link buttons

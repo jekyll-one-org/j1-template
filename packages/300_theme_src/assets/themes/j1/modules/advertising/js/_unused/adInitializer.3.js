@@ -147,7 +147,7 @@ $(function () {
     {% endif %}
       clearInterval(dependencies_met_page_visible);
     }
-  }, 25);
+  }, 10);
 
 });
 

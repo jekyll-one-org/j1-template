@@ -862,7 +862,7 @@ $(function() {
                     _0xabcbxe._slideToItem(_0xabcbxe[_0x73f6[98]]);
                     setTimeout(function() {
                         _0xabcbxe._addTransition();
-                    }, 25);
+                    }, 10);
                 }
                 ;_0xabcbxe[_0x73f6[207]][_0x73f6[259]]();
             });
@@ -1102,7 +1102,7 @@ $(function() {
             _0xabcbx11 < this[_0x73f6[98]] ? this._slideToItem(this[_0x73f6[98]]) : this._slide(_0x73f6[279], this[_0x73f6[297]]);
             setTimeout(function() {
                 _0xabcbxe._addTransition();
-            }, 25);
+            }, 10);
             if (_0xabcbx12) {
                 _0xabcbx12[_0x73f6[26]]();
             }

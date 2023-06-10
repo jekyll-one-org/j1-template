@@ -41,7 +41,7 @@ settings:
       banner:
         enabled:                        true
 
-        id:                             divider-1
+        id:                             banner_divider_1
         comment:                        Divider Banner 1
         type:                           divider
 
@@ -49,7 +49,7 @@ settings:
       banner:
         enabled:                        true
 
-        id:                             divider-2
+        id:                             banner_divider_2
         comment:                        Divider Banner 2
         type:                           divider
 
@@ -70,7 +70,7 @@ settings:
       banner:
         enabled:                        true
 
-        id:                             home_teaser_banner
+        id:                             banner_home_teaser
         comment:                        Top teaser shown on home page
         type:                           teaser
         badges:                         false
@@ -189,7 +189,7 @@ settings:
       banner:
         enabled:                        true
 
-        id:                             home_parallax_banner
+        id:                             banner_home_parallax
         comment:                        Main parallax banner shown on home page
         type:                           parallax
         properties:
@@ -232,7 +232,7 @@ settings:
       banner:
         enabled:                        true
 
-        id:                             home_image_banner
+        id:                             banner_home_image
         comment:                        Image banner shown on home page
         type:                           image
         properties:                     mt-6 mb-6

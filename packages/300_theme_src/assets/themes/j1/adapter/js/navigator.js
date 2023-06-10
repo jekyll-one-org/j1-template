@@ -852,6 +852,7 @@ j1.adapter.navigator = (function (j1, window) {
       style  = '<style>';
       style += '  li.nav-item > a:hover {';
       style += '    color: ' + navBarOptions.nav_item_color_hover + ' !important;';
+      style += '    background-image: ' + navBarOptions.nav_item_background_image + ' !important;';
       style += '  }';
       style += '</style>';
       $('head').append(style);

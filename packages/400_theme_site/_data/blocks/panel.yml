@@ -47,7 +47,7 @@ settings:
       panel:
         enabled:                        true
 
-        id:                             home_intro_panel
+        id:                             panel_home_intro
         comment:                        Home Intro Panel
         type:                           intro
         animate:                        false
@@ -200,7 +200,7 @@ settings:
       panel:
         enabled:                        true
 
-        id:                             home_plan_panel
+        id:                             panel_home_plan
         comment:                        Plan Panel
         type:                           plan
         scroller:                       false
@@ -396,7 +396,7 @@ settings:
       panel:
         enabled:                        true
 
-        id:                             home_service_panel
+        id:                             panel_home_service
         comment:                        Home Service Panel
         type:                           service
         scroller:                       true
@@ -727,7 +727,7 @@ settings:
       panel:
         enabled:                        true
 
-        id:                             home_news_panel
+        id:                             panel_home_news
         comment:                        Home News Panel
         type:                           news
         category_blacklist:             [ posts, public, private, protected, featured, series ]

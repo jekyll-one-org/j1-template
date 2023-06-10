@@ -77,22 +77,19 @@
         $(message).insertAfter(options.elementID);
       }
 
-      // jadams, 2021-11-08: for testing reason, registerScrollEvent delayed
-      // until page_ready state
+      // jadams, 2023-06-10: delay register scroll events until page ready
       var dependencies_met_page_ready = setInterval (function () {
         if (j1.getState() === 'finished') {
 
-          // initialize infinite scroll
+          // initialize 'infinite scroll'
           if ( options.type === 'infiniteScroll') {
             logger.info('\n' + 'processing mode: ' + options.type);
-            logger.info('\n' + 'loading items from path: ' + options.pagePath);
             logger.info('\n' + 'monitoring element set to: ' + this.scroller);
             _this.registerScrollEvent(options);
           }
-          // initialize show on scroll
+          // initialize 'show on scroll'
           if ( options.type === 'showOnScroll') {
             logger.info('\n' + 'processing mode: ' + options.type);
-            logger.info('\n' + 'loading items from path: ' + options.pagePath);
             logger.info('\n' + 'monitoring element set to: ' + this.scroller);
             _this.registerScrollEvent(options);
           }
@@ -100,7 +97,7 @@
           logger.info('\n' + 'state: finished');
           clearInterval(dependencies_met_page_ready);
         }
-      }, 25);
+      }, 10);
     },
 
     // -------------------------------------------------------------------------

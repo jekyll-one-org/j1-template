@@ -487,6 +487,64 @@ var j1 = (function (options) {
               expires:  0
             });
 
+            // -----------------------------------------------------------------------
+            // load|initialize page resources for block elements
+            // NOTE: asynchronous calls should be rewitten to xhrData
+            // NOTE: Find $('#content').hide() conterpart in themer adapter
+            // -----------------------------------------------------------------------
+            var dependencies_met_page_ready = setInterval (function (options) {
+              var pageState     = $('#no_flicker').css("display");
+              var pageVisible   = (pageState == 'block') ? true : false;
+              var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+              var banner_blocks = document.querySelectorAll('[id^="banner"]');
+              var panel_blocks  = document.querySelectorAll('[id^="panel"]');
+
+              if (j1.getState() === 'finished' && pageVisible) {
+                logger.info('\n' + 'load block elements');
+                j1.initBanner(settings);
+                j1.initPanel(settings);
+                j1.initFooter(settings);
+
+                if (banner_blocks.length || panel_blocks.length) {
+                  var dependencies_met_blocks_ready = setInterval (function (settings) {
+                    var banner_state = 'failed';
+                    var panel_state  = 'failed';
+                    var footer_state = j1.getXhrDataState('#j1_footer');
+
+                    // check banner states if HTML content loaded successfully
+                    Object.entries(j1.xhrDataState).forEach(entry => {
+                      const [key, value] = entry;
+                      if (key.includes('banner')) {
+                        banner_state = value;
+                      }
+                    });
+
+                    // check panel states if HTML content  loaded successfully
+                    Object.entries(j1.xhrDataState).forEach(entry => {
+                      const [key, value] = entry;
+                      if (key.includes('panel')) {
+                        panel_state = value;
+                      }
+                    });
+
+                    // show the content section for 'block content' to optimze CLS
+                    if (banner_state == 'success' && panel_state == 'success' && footer_state == 'success') {
+                      // show main content
+                      $('#content').show();
+                      clearInterval(dependencies_met_blocks_ready);
+                      clearInterval(dependencies_met_page_ready);
+
+
+                    }
+                  }, 10);
+                } else {
+                  // show the content for 'page content' to optimze CLS
+                  $('#content').show();
+                  clearInterval(dependencies_met_page_ready);
+                }
+              }
+            }, 10);
+
             j1.setState(curr_state);
             logger.debug('\n' + 'state: ' + j1.getState());
           }, detectTimeout);
@@ -518,7 +576,7 @@ var j1 = (function (options) {
       // Save last page access
       // see: https://stackoverflow.com/questions/3528324/how-to-get-the-previous-url-in-javascript
       // see: https://developer.mozilla.org/de/docs/Web/API/Window/history
-      //
+      // -----------------------------------------------------------------------
       user_session.timestamp      = timestamp_now;
       referrer                    = new liteURL(document.referrer);
       current_page                = window.location.pathname;
@@ -550,12 +608,14 @@ var j1 = (function (options) {
       // -----------------------------------------------------------------------
       // load|initialize page resources for block elements
       // NOTE: asynchronous calls should be rewitten to xhrData
+      // NOTE: Find $('#content').hide() conterpart in themer adapter
       // -----------------------------------------------------------------------
-
       var dependencies_met_page_ready = setInterval (function (options) {
         var pageState     = $('#no_flicker').css("display");
         var pageVisible   = (pageState == 'block') ? true : false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+        var banner_blocks = document.querySelectorAll('[id^="banner"]');
+        var panel_blocks  = document.querySelectorAll('[id^="panel"]');
 
         if (j1.getState() === 'finished' && pageVisible) {
           logger.info('\n' + 'load block elements');
@@ -563,27 +623,47 @@ var j1 = (function (options) {
           j1.initPanel(settings);
           j1.initFooter(settings);
 
-          var dependencies_met_blocks_ready = setInterval (function (settings) {
-            var banner_state        = j1.getXhrDataState('#home_teaser_banner');
-            var service_panel_state = j1.getXhrDataState('#home_service_panel');
-            var news_panel_state    = j1.getXhrDataState('#home_news_panel');
-            var footer_state        = j1.getXhrDataState('#j1_footer');
+          if (banner_blocks.length || panel_blocks.length) {
+            var dependencies_met_blocks_ready = setInterval (function (settings) {
+              var banner_state = 'failed';
+              var panel_state  = 'failed';
+              var footer_state = j1.getXhrDataState('#j1_footer');
 
-            // show content section for dynamic 'block elements' to optimze CLS
-            if (banner_state == 'success' && service_panel_state == 'success' && news_panel_state == 'success' && footer_state == 'success') {
-              // show main content
-              $('#content').show();
-              clearInterval(dependencies_met_blocks_ready);
-            }
-          }, 10);
+              // check banner states if HTML content loaded successfully
+              Object.entries(j1.xhrDataState).forEach(entry => {
+                const [key, value] = entry;
+                if (key.includes('banner')) {
+                  banner_state = value;
+                }
+              });
 
-          // show content for (dynamic) 'page content' to optimze CLS
-          $('#content').show();
-          clearInterval(dependencies_met_page_ready);
+              // check panel states if HTML content  loaded successfully
+              Object.entries(j1.xhrDataState).forEach(entry => {
+                const [key, value] = entry;
+                if (key.includes('panel')) {
+                  panel_state = value;
+                }
+              });
+
+              // show the content section for 'block content' to optimze CLS
+              if (banner_state == 'success' && panel_state == 'success' && footer_state == 'success') {
+                // show main content
+                $('#content').show();
+                clearInterval(dependencies_met_blocks_ready);
+                clearInterval(dependencies_met_page_ready);
+
+
+              }
+            }, 10);
+          } else {
+            // show the content for 'page content' to optimze CLS
+            $('#content').show();
+            clearInterval(dependencies_met_page_ready);
+          }
         }
       }, 10);
 
-      j1.xhrDOMState["#home_teaser_banner"] == 'success'
+//    j1.xhrDOMState["#home_teaser_banner"] == 'success'
       state = 'running';
       logger.debug('\n' + 'state: ' + state);
 
@@ -750,7 +830,7 @@ var j1 = (function (options) {
             j1.setXhrDataState(panel_id, statusTxt);
             j1.setXhrDomState(panel_id, statusTxt);
             // Set|Log status
-            state = 'Error';
+            state = 'error';
             logger.error('\n' + 'state: ' + state);
           }
         };

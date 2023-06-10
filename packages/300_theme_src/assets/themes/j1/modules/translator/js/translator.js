@@ -390,7 +390,7 @@ function Translator(props) {
                 clearInterval(dependencies_met_msDropdownJSON_loaded);
               }
             }
-          }, 25);
+          }, 10);
 
         }); // END modal on 'shown'
 

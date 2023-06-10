@@ -156,7 +156,34 @@ li.nav-item > a {
 // jadams, 2021-03-05: sub-menu indicator (text/chevron)
 // TODO: to be integrated in li.dropdown scss structure
 
-li.dropdown.nav-item.nav-sub-item:before {
+// li.dropdown.nav-item.nav-sub-item:before {
+//   content: '';
+//   display: block;
+//   position: absolute;
+//   top: 20px;
+//   right: 25px;
+//   z-index: 0;
+//   width: 10px;
+//   height: 10px;
+//   border-top: 2px solid;
+//   border-right: 2px solid;
+//   opacity: .4;
+//   -webkit-transform: rotate(
+//     45deg
+//     ) translate(0, -50%);
+//         -ms-transform: rotate(45deg) translate(0, -50%);
+//         transform: rotate(
+//           45deg
+//           ) translate(0, -50%);
+// }
+
+li.dropdown.nav-sub-item {
+  font-size: 1rem;
+  line-height: 2rem;
+  padding: 0.5em 1em .5em 1em;
+}
+
+li.dropdown.nav-sub-item:before {
   content: '';
   display: block;
   position: absolute;
@@ -176,7 +203,6 @@ li.dropdown.nav-item.nav-sub-item:before {
           45deg
           ) translate(0, -50%);
 }
-
 
 // -----------------------------------------------------------------------------
 // BS Overload Classes
@@ -854,6 +880,10 @@ li.dropdown.nav-item.nav-sub-item:before {
 					// 	margin-bottom: .5rem;
 					// }
 				}
+        .nav-icon {
+					width: 95%;
+					line-height: 1rem;
+				}
         // jadams, 2019-01-18: applying hover styles to the parent
         &.open {
           border-bottom: 0px;
@@ -1052,7 +1082,7 @@ li.dropdown.nav-item.nav-sub-item:before {
         box-shadow: unset;
         z-index: 2;                                                             // jadams, 2020-09-20: addedd z-index to not overlap with nav/quickLinks
   			&:hover {
-  					color: $gray-400;                                                   // rgba(255, 255, 255, 0.9);
+  				color: $gray-50;                                                      // jadams, 2023-06-12
   			}
 			}
 			.dropdown-item {
@@ -1067,14 +1097,32 @@ li.dropdown.nav-item.nav-sub-item:before {
 				max-height: 48px;
 				overflow-y: hidden;
 			}
-			li.dropdown {
-				&.nav-item {
-					&.nav-sub-item {
-						font-size: 1rem;
-						line-height: 2rem;
-					}
-				}
-			}
+
+      // jadams 2023-06-12: disabled
+      //
+			// li.dropdown {
+			// 	&.nav-item {
+      //     background-image: unset !important;
+			// 		&.nav-sub-item {
+			// 			font-size: 1rem;
+			// 			line-height: 2rem;
+      //       padding: 0.5em 1em .5em 1em;
+      //       background-image: none;
+			// 		}
+			// 	}
+			// }
+
+      // jadams 2023-06-12: unclear why role is NOT applied correctly
+      // disabled for now
+      //
+      // li.dropdown {
+			// 	&.nav-sub-item {
+			// 		font-size: 1rem;
+			// 		line-height: 2rem;
+      //     padding: 0.5em 1em .5em 1em;
+			// 	}
+			// }
+
 			.dropdown .megamenu-content .col-menu {
 				.title {
 					padding: 10px 15px 10px 0;

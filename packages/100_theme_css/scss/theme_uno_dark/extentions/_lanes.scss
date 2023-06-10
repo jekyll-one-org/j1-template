@@ -14,85 +14,26 @@
  # -----------------------------------------------------------------------------
 */
 
-// .elevated-z0 {
-//   background-color: transparent;
-//   // padding-top: 0;
-//   // padding-bottom: 0;
-//   // border-top: 0;
-//   // border-bottom: 0;
-// }
-//
-// .elevated-z1 {
-//   background-color: rgba(255, 255, 255, 0.1);
-//   // background-color: rgba(0, 0, 0, 0.1);
-//   // background-color: $grey-900;
-//   // padding-top: .1rem;
-//   // padding-bottom: .1rem;
-//   // border-top: 0;
-//   // border-bottom: 0;
-// }
-//
-// .elevated-z2 {
-//   background-color: rgba(255, 255, 255, 0.2);
-//   // background-color: rgba(0, 0, 0, 0.2);
-//   // background-color: $grey-900;
-//   // padding-top: .1rem;
-//   // padding-bottom: .1rem;
-//   // border-top: 1px solid rgba(0, 0, 0, 0.01);
-//   // border-bottom: 1px solid rgba(0, 0, 0, 0.01);
-// }
-//
-// .elevated-z3 {
-//   background-color: rgba(255, 255, 255, 0.3);
-//   // background-color: rgba(0, 0, 0, 0.3);
-//   // background-color: $grey-900;
-//   // padding-top: .1rem;
-//   // padding-bottom: .1rem;
-//   // border-top: 1px solid rgba(0, 0, 0, 0.02);
-//   // border-bottom: 1px solid rgba(0, 0, 0, 0.02);
-// }
-//
-// .elevated-z4 {
-//   background-color: rgba(255, 255, 255, 0.4);
-//   // background-color: rgba(0, 0, 0, 0.4);
-//   // background-color: $grey-900;
-//   // padding-top: .1rem;
-//   // padding-bottom: .1rem;
-//   // border-top: 1px solid rgba(0, 0, 0, 0.03);
-//   // border-bottom: 1px solid rgba(0, 0, 0, 0.03);
-// }
-//
-// .elevated-z5 {
-//   background-color: rgba(255, 255, 255, 0.5);
-//   // background-color: rgba(0, 0, 0, 0.5);
-//   // background-color: $grey-900;
-//   // padding-top: .1rem;
-//   // padding-bottom: .1rem;
-//   // border-top: 1px solid rgba(0, 0, 0, 0.04);
-//   // border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-// }
-
-
 .elevated-z0 {
   background-color: transparent;
 }
 
 .elevated-z1 {
-  background-color: #757575;                                                    // md-gray-600
+  background-color: rgba(255,255,255, 0.3);                                     // lighten-300
 }
 
 .elevated-z2 {
-  background-color: #616161;                                                    //md-gray-700
+  background-color: rgba(255,255,255, 0.5);                                     // lighten-500
 }
 
 .elevated-z3 {
-  background-color: #424242;                                                    //md-gray-800
+  background-color: rgba(255,255,255, 0.7);                                     // lighten-700
 }
 
 .elevated-z4 {
-  background-color: #212121;                                                    //md-gray-900
+  background-color: rgba(255,255,255, 0.7);                                     // lighten-700
 }
 
 .elevated-z5 {
-  background-color: #000;                                                       //md-black
+  background-color: rgba(255,255,255, 0.7);                                     // lighten-700
 }

@@ -15,19 +15,21 @@
 // Paginator
 // -----------------------------------------------------------------------------
 .page-link {
-  border-radius: 0px !important;
-  margin-right: 5px !important;
-  border: 1px solid $gray-700 !important;
+    border-radius: 0px !important;
+    margin-right: 5px !important;
+    border: 1px solid $gray-700 !important;
+    color:  $darken-800 !important;
 }
 
 .page-link:hover, .page-link:focus {
-  background-color: $gray-900 !important;
-  border-color: $gray-300 !important;
+    background-color: $gray-900 !important;
+    border-color: $gray-300 !important;
+    color:  $lighten-400 !important;
 }
 
-.page-link:hover {
-  color:  $gray-50 !important;
-}
+// .page-link:hover {
+//   color:  $gray-50 !important;
+// }
 
 .pagination-lg .page-link {
     padding: 0.5rem !important;

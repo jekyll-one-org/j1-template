@@ -100,13 +100,6 @@ var logger;
 var logText;
 var lastPageInfo;
 
-// var platform_name         = platform.name;
-// var platform_version      = platform.version;
-// var platform_layout       = platform.layout;
-// var platform_os           = platform.os;
-// var platform_description  = platform.description;
-
-
   // ---------------------------------------------------------------------------
   // Main object
   // ---------------------------------------------------------------------------
@@ -142,15 +135,13 @@ var lastPageInfo;
       logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
 
-      // initialize scrollers if page is available and visible
       var dependencies_met_page_ready = setInterval (function (options) {
         var pageState     = $('#no_flicker').css("display");
         var pageVisible   = (pageState == 'block') ? true: false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if (j1.getState() === 'finished' && pageVisible) {
-//      if (j1.getState() === 'finished' && pageVisible && atticFinished) {
-
+        // initialize scrollers if page is fully available|visible
+        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
           _this.generate_scrollers();
           _this.setState('finished');
           logger.debug('\n' + 'state: ' + _this.getState());
@@ -166,7 +157,6 @@ var lastPageInfo;
     // generate scrollers configured|enabled
     // -------------------------------------------------------------------------
     generate_scrollers: function () {
-
       logger = log4javascript.getLogger('j1.adapter.scroller');
 
       logText = '\n' + 'scrollers are being initialized';

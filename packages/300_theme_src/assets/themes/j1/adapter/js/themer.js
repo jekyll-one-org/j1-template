@@ -207,8 +207,12 @@ j1.adapter.themer = (function (j1, window) {
       _this.state = 'started';
       logger.debug('\n' + 'state: ' + _this.getState());
 
-      // hide page (until theme is loaded)
+      // hide page until 'theme' is loaded
       $('#no_flicker').hide();
+
+      // jadams, 2023-06-10: Added to optimze 'CLS' of a page load.
+      // Find conterpart (show) in the j1.adapter
+      // hide content until 'page' is loaded
       $('#content').hide();
 
       // jadams, 2021-07-25: problem seems NOT an timing issue on the iPad

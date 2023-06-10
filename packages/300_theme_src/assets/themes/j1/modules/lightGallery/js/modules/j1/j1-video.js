@@ -277,7 +277,7 @@
                         $el.addClass('lg-video-playing');
                         clearInterval(player_loaded);
                       }
-                    }, 25);
+                    }, 10);
 
                     $el.addClass('lg-video-playing');
                 }
@@ -392,7 +392,7 @@
                 }
                 clearInterval(player_loaded);
             }
-          }, 25);
+          }, 10);
         }
     
         $.fn.lightGallery.modules.video = Video;

@@ -221,7 +221,7 @@ lanes:
   #
   - lane:
       enabled:                          true
-      id:                               home_teaser_banner
+      id:                               banner_home_teaser
       region:                           body-main
       type:                             async
       properties:                       elevated-z0
@@ -241,7 +241,7 @@ lanes:
   #
   - lane:
       enabled:                          false
-      id:                               divider-1
+      id:                               banner_divider_1
       region:                           body-main
       type:                             async
       properties:                       row banner-divider mt-4 mr-0 mb-4 ml-0
@@ -262,7 +262,7 @@ lanes:
   #
   - lane:
       enabled:                          false
-      id:                               home_image_banner
+      id:                               banner_home_image
       region:                           body-main
       type:                             async
 
@@ -331,7 +331,7 @@ lanes:
   #
   - lane:
       enabled:                          true
-      id:                               home_intro_panel
+      id:                               panel_home_intro
       region:                           body-main
       type:                             async
       properties:                       elevated-z1
@@ -353,7 +353,7 @@ lanes:
   #
   - lane:
       enabled:                          false
-      id:                               home_parallax_banner
+      id:                               banner_home_parallax
       region:                           body-main
       type:                             async
       properties:                       elevated-z0
@@ -375,7 +375,7 @@ lanes:
   #
   - lane:
       enabled:                          false
-      id:                               home_service_panel
+      id:                               panel_home_service
       region:                           body-main
       type:                             async
       properties:                       elevated-z1
@@ -397,7 +397,7 @@ lanes:
   #
   - lane:
       enabled:                          false
-      id:                               home_plan_panel
+      id:                               panel_home_plan
       region:                           body-main
       type:                             async
       properties:                       elevated-z1
@@ -418,7 +418,7 @@ lanes:
   #
   - lane:
       enabled:                          true
-      id:                               home_news_panel
+      id:                               panel_home_news
       region:                           body-main
       type:                             async
       properties:                       elevated-z0

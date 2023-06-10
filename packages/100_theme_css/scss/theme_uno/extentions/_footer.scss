@@ -71,14 +71,14 @@
 }
 
 .footer .link-news li a {
-  color: $lighten !important;
+  color: $lighten-900 !important;
   margin-bottom: 0;
   font-size: 1em;
   font-weight: 700;
 }
 
 .footer .link-news a:hover {
-	color: #FAFAFA !important;
+	color: $lighten-300 !important;
   text-decoration: none;
 }
 

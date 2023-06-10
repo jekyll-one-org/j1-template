@@ -146,7 +146,7 @@ var dependencies_met_page_visible = setInterval (function (options) {
 
         clearInterval(dependencies_met_page_ready);
       }
-    }, 25);
+    }, 10);
 
     {% else %}
     // [WARN   ] [j1.core.advertising                     ] [ no init code placed ]
@@ -154,7 +154,7 @@ var dependencies_met_page_visible = setInterval (function (options) {
 
     clearInterval(dependencies_met_page_visible);
   }
-}, 25);
+}, 10);
 
 });
 

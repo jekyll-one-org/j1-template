@@ -227,7 +227,7 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
           {% if level_1.divider %} <li class="divider"></li> {% endif %}
           {% if level_1.dropdown %}
             <!-- [INFO   ] [~/assets/data/menu.html         ][submenu level 2 (dropdown) detected ] -->
-            <li class="dropdown nav-item nav-sub-item">
+            <li class="dropdown nav-sub-item">
               {% if level_1.icon == null %}
                 <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">{{ level_1.title }}</a>
               {% else %}
@@ -254,7 +254,7 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                   {% if level_2.divider %} <li class="divider"></li> {% endif %}
                   {% if level_2.dropdown %}
                     <!-- [INFO   ] [~/assets/data/menu.html         ][submenu level 3 detected (last level supported)] -->
-                    <li class="dropdown nav-item nav-sub-item">
+                    <li class="dropdown nav-sub-item">
                       {% if level_2.icon == null %}
                         <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">{{ level_2.title }}</a>
                       {% else %}
@@ -437,7 +437,7 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                 {% for item in menu.theme_select %}
                   <!-- check for locally loaded J1 Themes -->
                   {% if item.local_themes and item.local_themes == 'enabled' %}
-                    <li class="dropdown nav-item nav-sub-item">
+                    <li class="dropdown nav-sub-item">
                       <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" data-hover="dropdown"><i class="dropdown {{nav_menu_icon_family}} {{nav_menu_icon_family}}-{{item.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{item.title}}</a>
                       <ul id="local_themes" class="dropdown-menu raised-z{{raised_level}}"></ul>
                     </li>
@@ -445,7 +445,7 @@ See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-ma
                   {% endif %} <!-- end J1 theme selector -->
                   <!-- check for remotely loaded (BootSwatch) Themes -->
                   {% if item.bootswatch_themes and item.bootswatch_themes == 'enabled' %}
-                    <li class="dropdown nav-item nav-sub-item">
+                    <li class="dropdown nav-sub-item">
                       <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" data-hover="dropdown"><i class="dropdown {{nav_menu_icon_family}} {{nav_menu_icon_family}}-{{item.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{item.title}}</a>
                       <ul id="remote_themes" class="dropdown-menu scrollable-menu raised-z{{raised_level}}"></ul>
                     </li>
