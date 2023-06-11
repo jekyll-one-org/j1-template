@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/scss/theme_uno_dark/modules/_searcher.scss
+ # ~/scss/theme_uno_dark/modules/_attic.scss
  #
  # Product/Info:
  # http://jekyll.one
@@ -10,10 +10,18 @@
  # J1 Theme is licensed under the MIT License
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
- # NOTE: Provides styles for the module J1 Searcher
+ # NOTE: Provides styles for the module J1 Header (attic)
  # -----------------------------------------------------------------------------
 */
 
-.panel-search p {
-    color: $gray-600;
+.copyright {
+  background: $blue-gray-800;
+  }
+
+.copyright .terms-menu li a {
+    color: rgba(255, 255, 255, 0.7) !important;
+}
+
+.footer-issue {
+    color: rgba(255, 255, 255, 0.7);
 }

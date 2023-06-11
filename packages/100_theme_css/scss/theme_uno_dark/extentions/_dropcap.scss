@@ -18,7 +18,7 @@
 .j1-dropcap {
   font: 2em/0.8 "Roboto Slab", sans-serif;
   line-height: 1.25rem;
-  color: #212121;
+  color: $gray-400;                                                               // gray-400
   float: left;
   padding-right: .125rem;
   margin-right: .125rem !important;

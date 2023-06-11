@@ -16,7 +16,7 @@
 // bqplot widgets overwrites
 // -----------------------------------------------------------------------------
 .bqplot > svg .plotarea_background {
-   fill: #9E9E9E !important;
+   fill: $gray-600 !important;
 }
 
 // ipywigets overwrites

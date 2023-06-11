@@ -12,88 +12,54 @@
   # ----------------------------------------------------------------------------
 */
 
-// Root overwrites
+// Color system
 // -----------------------------------------------------------------------------
 
-// :root {
-//   --bs-blue: #2196f3;
-//   --bs-indigo: #3f51b5;
-//   --bs-purple: #9c27b0;
-//   --bs-pink: #e91e63;
-//   --bs-red: #f44336;
-//   --bs-orange: #ff9800;
-//   --bs-yellow: #ffeb3b;
-//   --bs-green: #4caf50;
-//   --bs-teal: #009688;
-//   --bs-cyan: #00bcd4;
-//   --bs-black: #000;
-//   --bs-white: #fff;
-//   --bs-gray: #757575;
-//   --bs-gray-dark: #424242;
-//   --bs-gray-100: #f5f5f5;
-//   --bs-gray-200: #eee;
-//   --bs-gray-300: #e0e0e0;
-//   --bs-gray-400: #bdbdbd;
-//   --bs-gray-500: #9e9e9e;
-//   --bs-gray-600: #757575;
-//   --bs-gray-700: #616161;
-//   --bs-gray-800: #424242;
-//   --bs-gray-900: #212121;
-//   --bs-primary: #2196f3;
-//   --bs-secondary: #757575;
-//   --bs-success: #4caf50;
-//   --bs-info: #00bcd4;
-//   --bs-warning: #fbc02d;
-//   --bs-danger: #f44336;
-//   --bs-light: #e0e0e0;
-//   --bs-dark: #212121;
-//   --bs-primary-rgb: 33, 150, 243;
-//   --bs-secondary-rgb: 117, 117, 117;
-//   --bs-success-rgb: 76, 175, 80;
-//   --bs-info-rgb: 0, 188, 212;
-//   --bs-warning-rgb: 251, 192, 45;
-//   --bs-danger-rgb: 244, 67, 54;
-//   --bs-light-rgb: 158, 158, 158;
-//   --bs-dark-rgb: 33, 33, 33;
-//   --bs-white-rgb: 255, 255, 255;
-//   --bs-black-rgb: 0, 0, 0;
-// }
+$white:    #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #ebebeb !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #888 !default;
+$gray-700: #444 !default;
+$gray-800: #303030 !default;
+$gray-900: #222 !default;
+$black:    #000 !default;
 
-.bg-light {
-  background-color: $gray !important;
-}
+$blue:    #2196F3 !default;
+$indigo:  #6610f2 !default;
+$purple:  #6f42c1 !default;
+$pink:    #e83e8c !default;
+$red:     #e74c3c !default;
+$orange:  #fd7e14 !default;
+$yellow:  #f39c12 !default;
+$green:   #00bc8c !default;
+$teal:    #20c997 !default;
+$cyan:    #3498db !default;
 
-.md-light {
-  background-color: $gray !important;
-}
+$primary:       $blue !default;
+$secondary:     $gray-700 !default;
+$success:       $green !default;
+$info:          $cyan !default;
+$warning:       $yellow !default;
+$danger:        $red !default;
+$light:         $gray-500 !default;
+$dark:          $gray-800 !default;
 
-// Body (reverse colors)
-// -----------------------------------------------------------------------------
-$body-bg:                                         $gray-800;                    // --bs-body-bg (background|dark)
-$body-color:                                      $gray-400;                    // --bs-body-color (foreground|light)
+$min-contrast-ratio:   1.9 !default;
+
+// Body
+
+$body-bg:                   $gray-900 !default;
+$body-color:                $gray-100 !default;
 
 // Links
-// -----------------------------------------------------------------------------
-// $link-color:                                      $white !default;
 
-// Colors
-// -----------------------------------------------------------------------------
-$primary:                                         $blue !default;
-$secondary:                                       $gray-600 !default;
-$success:                                         $green !default;
-$info:                                            $cyan !default;
-$warning:                                         $yellow-700 !default;
-$danger:                                          $red !default;
-$light:                                           $gray-300 !default;
-$dark:                                            $gray-900 !default;
+$link-color:                $success !default;
 
-$theme-colors: (
-  "primary":    $primary,
-  "secondary":  $secondary,
-  "success":    $success,
-  "info":       $info,
-  "warning":    $warning,
-  "danger":     $danger,
-  "light":      $light,
-  "dark":       $dark
-) !default;
+p {
+  &tagline {
+    color: $gray-300;
+  }
+}

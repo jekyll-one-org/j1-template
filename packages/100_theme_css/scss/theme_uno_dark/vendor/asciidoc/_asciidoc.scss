@@ -13,6 +13,10 @@
  # -----------------------------------------------------------------------------
 */
 
-.bqplot > svg .plotarea_background {
-   fill: #757575 !important;
+.quoteblock .attribution {
+    color: $gray-400 !important;
+}
+
+caption {
+    color: $gray-400 !important;
 }

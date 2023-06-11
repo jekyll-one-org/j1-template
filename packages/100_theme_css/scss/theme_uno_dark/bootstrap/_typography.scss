@@ -19,15 +19,21 @@
  # SPEC: general  - https://www.google.com/design/spec/style/typography.html#typography-styles
  # -----------------------------------------------------------------------------
 */
+
 b,
 strong {
-  color: $gray-900;
-}
+  color: $gray-200;
+  font-weight: 500;
+  }
 
 cite, em, var, address, dfn {
-  color: $blue;
+  color: $white;
+}
+
+.quoteblock blockquote:before {
+  color: $gray-300 !important;
 }
 
 .blockquote-footer {
-    color: $blue;
+    color: $gray-300;
 }

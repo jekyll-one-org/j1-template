@@ -62,8 +62,8 @@
 // Tag Cloud classes
 // -----------------------------------------------------------------------------
 .tag__cloud {
-	margin-bottom: 10px;
-	margin-top: 20px;
+	// margin-bottom: 10px;
+	// margin-top: 20px;
 	ul {
 		margin: 0;
 		padding: 0;
@@ -87,12 +87,11 @@
 				font-weight: 400;
 				text-decoration: none;
 				transition: .2s;
-				&:hover {
-					span {
-						color: $primary;
-					}
-				}
 			}
+      a:hover {
+        background-color: $darken-200 !important;
+      }
+
 			span {
 				position: absolute;
 				top: 5px;

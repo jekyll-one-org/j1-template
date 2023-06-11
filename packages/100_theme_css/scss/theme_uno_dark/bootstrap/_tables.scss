@@ -12,10 +12,16 @@
  # -----------------------------------------------------------------------------
 */
 
+.table {
+    --bs-table-bg: var(--bs-gray-300) !important;
+}
+
+
+/*
 //  jadams, 2022-01-15: set border color to background color
 table {
-  background: $grey-400;
-  border: solid 1px $grey-800;
+  background: $gray-400;
+  border: solid 1px $gray-800;
 }
 
 //  jadams, 2022-07-21: remove double borders
@@ -26,9 +32,9 @@ thead, tbody, tfoot, tr, td, th {
 
 //  jadams, 2022-01-15: set border color to background color
 table.tableblock > .title {
-    border-right: 1px solid $grey-800;
-    border-left: 1px solid $grey-800;
-    border-bottom: 1px solid $grey-800;
+    border-right: 1px solid $gray-800;
+    border-left: 1px solid $gray-800;
+    border-bottom: 1px solid $gray-800;
 }
 
 table thead, table tfoot {
@@ -42,11 +48,11 @@ table tr.even, table tr.alt, table tr:nth-of-type(even) {
 //  jadams, 2022-07-21: remove borders and background colors
 .colist > table tr > td:last-of-type {
   border: 0 !important;
-  background-color: $grey-800;
+  background-color: $gray-800;
 }
 .colist > table tr th, .colist > table tr td {
   border: 0 !important;
-  background-color: $grey-800;
+  background-color: $gray-800;
 }
 
 .table {
@@ -151,3 +157,4 @@ table tr.even, table tr.alt, table tr:nth-of-type(even) {
     }
   }
 }
+*/

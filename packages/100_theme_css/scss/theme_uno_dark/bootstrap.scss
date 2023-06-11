@@ -49,11 +49,11 @@
 // Close
 // Code
 
-@import "bootstrap/alert";
+// @import "bootstrap/alert";
 @import "bootstrap/badge";
 @import "bootstrap/body";
-@import "bootstrap/breadcrumbs";
-@import "bootstrap/buttons";
+// @import "bootstrap/breadcrumbs";
+// @import "bootstrap/buttons";
 // @import "bootstrap/cards";                                                   // jadams, 2020-11-18: NO custom styles used
 @import "bootstrap/code";
 @import "bootstrap/dropdowns";
@@ -61,8 +61,8 @@
 @import "bootstrap/links";
 @import "bootstrap/list_group";
 // @import "bootstrap/navbar";                                                  // jadams, 2020-11-18: NO custom styles used
-@import "bootstrap/navs";
-// @import "bootstrap/pagination";                                              // jadams, 2020-11-18: NO custom styles used
+// @import "bootstrap/navs";
+@import "bootstrap/pagination";                                              // jadams, 2020-11-18: NO custom styles used
 @import "bootstrap/progress";
 @import "bootstrap/tables";
 @import "bootstrap/typography";

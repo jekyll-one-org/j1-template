@@ -12,8 +12,8 @@ categories:                             [ Site ]
 tags:                                   [ Copyright ]
 
 robots:
-  index:                                false
-  follow:                               false
+  index:                                true
+  follow:                               true
 
 image:
   path:                                 /assets/images/modules/attics/1920x1280/j1-starter-mockup-1.jpg

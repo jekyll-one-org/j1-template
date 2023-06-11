@@ -56,5 +56,5 @@ footer_options.issue:            {{footer_options.issue | debug}}
 <!-- [INFO   ] [issue.proc                         ] [ issue date information ] -->
 {% if footer_options.issue.enabled %}
 <!-- [INFO   ] [issue.proc                         ] [ place issue ] -->
-<p style="color: rgba(255, 255, 255, 0.5)">{{modified}}</p>
+<p class="footer-issue">{{modified}}</p>
 {% endif %}
