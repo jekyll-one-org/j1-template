@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/scss/theme_uno/bootstrap/readme.scss
+ # ~/scss/theme_uno/readme.txt
  #
  # Product/Info:
  # https://jekyll.one
@@ -12,7 +12,7 @@
  # -----------------------------------------------------------------------------
 */
 
-Theme Uno
+Theme Uno (light)
 
 Theme Uno is the default theme|skin for J1 Theme. This themes has a
 1:1 copy under ~/src/scss to create the CSS files at *build-time*.

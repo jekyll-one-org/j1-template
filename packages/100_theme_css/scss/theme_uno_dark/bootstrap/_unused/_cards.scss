@@ -15,7 +15,6 @@
 .card {
   /* border: 0; */
   /* border-radius: 0; */
-
   background-color: $gray-400;
 
   .card-header {
@@ -24,19 +23,15 @@
   .card-body {
     margin-top: 0;
   }
-
-  /*
-  .card-link {
+  a.card-link {
     color: $gray-700 !important;
   }
-  .card-link:hover {
+  a.card-link:hover {
     color: $gray-900 !important;
   }
-  */
-
   .card-footer {
-    /* background-color: $gray-100 !important; */
-    /* border-top: 1px dotted $darken-700; */
+      /* background-color: $gray-100 !important; */
+      /* border-top: 1px dotted $darken-700; */
   }
   hr {
     border-top: 1px solid $grey-600 !important;

@@ -27,14 +27,6 @@
 
 // @import "~bootstrap/scss/bootstrap";
 
-// MD variables
-// -----------------------------------------------------------------------------
-// @import "variables/colors-map";                                              // jadams, 2021-11-19: disabled
-// @import "variables/drawer";                                                  // jadams, 2021-11-19: disabled
-// @import "variables/layout";                                                  // jadams, 2021-11-19: disabled
-// @import "variables/menu";                                                    // jadams, 2021-11-19: disabled
-// @import "variables/snackbar";                                                // jadams, 2021-11-19: disabled
-
 // Additional or customized variables
 // -----------------------------------------------------------------------------
 
@@ -77,14 +69,3 @@ $enable-flex:                           true;                                   
 $enable-shadows:                        true;                                   // enable shadows, set to false to turn off shadows
 @import "~bootstrap/scss/functions";                                            // from bootstrap node_module
 @import "~bootstrap/scss/variables";                                            // from bootstrap node_module
-
-// MD variables
-// -----------------------------------------------------------------------------
-// @import "variables/drawer";
-// @import "variables/layout";
-// @import "variables/menu";
-// @import "variables/snackbar";
-//
-// Additional or customized variables
-// -----------------------------------------------------------------------------
-// @import "variables/custom";

@@ -1,0 +1,21 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno_dark/modules/_scroller.scss
+ #
+ # Product/Info:
+ # http://jekyll.one
+ #
+ # Copyright (C) 2023 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # NOTE: Provides styles for the module J1 Scroller
+ # -----------------------------------------------------------------------------
+*/
+
+/* plugin controls
+-------------------------------------------------------------------------------- */
+.page-load-status, .page-scroll-last {
+    color: $gray-300 !important;
+}

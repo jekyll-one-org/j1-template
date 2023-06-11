@@ -14,8 +14,9 @@
  # -----------------------------------------------------------------------------
 */
 
-// Addon mixins
+// Mixins
 // -----------------------------------------------------------------------------
+
 @import "mixins/animations";
 @import "mixins/breakpoints";
 
@@ -24,8 +25,8 @@
 @import "mixins/drawer";
 @import "mixins/flexbox";
 @import "mixins/forms";
-@import "mixins/hover_bs4";
 @import "mixins/hover_bmd";
+@import "mixins/hover_bs4";
 @import "mixins/layout";
 @import "mixins/navs";
 @import "mixins/prefix";
