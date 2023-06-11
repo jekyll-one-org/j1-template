@@ -229,7 +229,7 @@ pages:
 # ------------------------------------------------------------------------------
 #
 # flicker_timeout:                      250                                     # NOT used anymore
-page_on_load_timeout:                   10                                    # Default: 1000, some modules needs a timeout to be loaded correctly (e.g wave, )
+page_on_load_timeout:                   1000                                    # Default: 1000, some modules needs a timeout to be loaded correctly (e.g wave, )
 timeoutScrollDynamicPages:              2000                                    # Default: 2000
 scrollDynamicPagesTopOnChange:          false                                   # currently NOT used
 
