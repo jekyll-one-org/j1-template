@@ -1,0 +1,69 @@
+/*
+  # ----------------------------------------------------------------------------
+  # ~/100_theme_css/scss/theme_uno_dark/variables/_colors.scss
+  #
+  # Product/Info:
+  # https://jekyll.one
+  #
+  # Copyright (C) 2023 Juergen Adams
+  #
+  # J1 Theme is licensed under the MIT License.
+  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+  # ----------------------------------------------------------------------------
+*/
+
+// Color system
+// -----------------------------------------------------------------------------
+
+$theme:                                 "dark" !default;
+
+$white:                                 #fff !default;
+$gray-100:                              #f8f9fa !default;
+$gray-200:                              #ebebeb !default;
+$gray-300:                              #dee2e6 !default;
+$gray-400:                              #ced4da !default;
+$gray-500:                              #adb5bd !default;
+$gray-600:                              #888 !default;
+$gray-700:                              #444 !default;
+$gray-800:                              #303030 !default;
+$gray-900:                              #222 !default;
+$black:                                 #000 !default;
+
+// MD colors
+//
+$blue-50:                               #e3f2fd !default;
+$blue-100:                              #bbdefb !default;
+$blue-200:                              #90caf9 !default;
+$blue-300:                              #64b5f6 !default;
+$blue-400:                              #42a5f5 !default;
+$blue-500:                              #2196f3 !default;
+$blue-600:                              #1e88e5 !default;
+$blue-700:                              #1976d2 !default;
+$blue-800:                              #1565c0 !default;
+$blue-900:                              #0d47a1 !default;
+$blue-a100:                             #82b1ff !default;
+$blue-a200:                             #448aff !default;
+$blue-a400:                             #2979ff !default;
+$blue-a700:                             #2962ff !default;
+
+$blue:                                  #2196F3 !default;
+$indigo:                                #6610f2 !default;
+$purple:                                #6f42c1 !default;
+$pink:                                  #e83e8c !default;
+$red:                                   #e74c3c !default;
+$orange:                                #fd7e14 !default;
+$yellow:                                #f39c12 !default;
+$green:                                 #00bc8c !default;
+$teal:                                  #20c997 !default;
+$cyan:                                  #3498db !default;
+
+$primary:                               $blue !default;
+$secondary:                             $gray-700 !default;
+$success:                               $green !default;
+$info:                                  $cyan !default;
+$warning:                               $yellow !default;
+$danger:                                $red !default;
+$light:                                 $gray-500 !default;
+$dark:                                  $gray-800 !default;
+
+$min-contrast-ratio:                    1.9 !default;

@@ -649,7 +649,7 @@ lorem:sentences[5]
 All macro types available for `lorem:` to be used for blind text can be
 found with the following table below.
 
-//.Tabelle
+.Macros available
 [cols="5,2,5a", options="header", role="rtable mb-2"]
 |===
 |Macro | Type |Example
@@ -679,7 +679,7 @@ lorem:sentences[5]
 |
 lorem:date[]
 
-|`date[strftime]` e.g. `date[%Y-%m-%d]``
+|`date[strftime]` e.g. `date[%Y-%m-%d]`
 |date
 |
 lorem:date[%Y-%m-%d]

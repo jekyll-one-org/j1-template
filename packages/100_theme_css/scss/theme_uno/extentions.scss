@@ -14,25 +14,15 @@
  # -----------------------------------------------------------------------------
 */
 
-// MDE
+// Extensions (MDE)
 // -----------------------------------------------------------------------------
 
 @import "extentions/mde/buttons";
-// @import "extentions/mde/cards";                                              // disabled
-
 @import "extentions/mde/color_palette";
-
-// @import "extentions/mde/olor_palette.active";                                // jadams, 2021-11-17: not implemented yet
-// @import "extentions/mde/color_palette.focus";                                // jadams, 2021-11-17: not implemented yet
-
 @import "extentions/mde/color_table";
 @import "extentions/mde/elevation";
 
-// @import "extentions/mde/nav_tabs_pills";                                     // jadams, 2021-11-18: disabled
-// @import "extentions/mde/transparency";                                       // jadams, 2021-11-18: disabled
-
-
-// Extensions
+// Extensions (Theme)
 // -----------------------------------------------------------------------------
 
 @import "extentions/accordion";
@@ -48,7 +38,6 @@
 // @import "extentions/blog_calendar";                                          // disabled|to be removed or moved
 // @import "extentions/blog";                                                   // disabled|to be removed or moved
 
-@import "extentions/bs-doc";
 @import "extentions/caption";
 @import "extentions/cards";
 @import "extentions/collection";

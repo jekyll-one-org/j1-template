@@ -39,6 +39,14 @@ resource_options:
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
 
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
 
 // Content
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -62,33 +70,36 @@ image::{{page.image.name}}[{{page.title}}, width=1280]
 {% endif %}
 ////
 
-Source: https://ben.balter.com/2015/02/20/jekyll-collections/[Ben Balter: Jekyll Collections]
+Source: https://ben.balter.com/2015/02/20/jekyll-collections/[Ben Balter: Jekyll Collections, {browser-window--new}]
 
 Most Jekyll sites are organized around two types of content, posts (ordered)
 and pages (un-ordered).
 
-* *http://jekyllrb.com/docs/posts/[Posts]* are organized reverse
-chronologically. You might use them for blog posts on a personal blog,
-or articles on a news site. You can recognize a post by its filename.
-Posts live in the `&#x5F;posts` folder, and are always named in the form of
-`YYYY-MM-DD-post-title.md`. Because posts are dated, they're
-traditionally not updated regularly once published.
+* http://jekyllrb.com/docs/posts/[Posts, {browser-window--new}] are organized
+  reverse chronologically. You might use them for blog posts on a personal blog,
+  or articles on a news site. You can recognize a post by its filename.
+  Posts live in the `posts` folder, and are always named in the form of
+  `YYYY-MM-DD-post-title.md`. Because posts are dated, they're
+  traditionally not updated regularly once published.
 
-* *http://jekyllrb.com/docs/pages/[Pages]* are documents that don't have
-a relationship with one another. They can live anywhere within the
-site's source directory and don't have a set naming pattern. If you have
-a personal blog, you might have an `index.html` page
-(https://ben.balter.com/[the site's main page which is used to list
-posts]), or https://ben.balter.com/about/[an about me page], to name two
-examples. Because pages aren't date specific, pages are often updated
-over time to maintain accuracy.
+* http://jekyllrb.com/docs/pages/[Pages, {browser-window--new}] are documents
+  that don't have a relationship with one another. They can live anywhere within
+  the   site's source directory and don't have a set naming pattern. If you
+  have a personal blog, you might have an `index.html` page
+  (https://ben.balter.com/[the site's main page which is used to list
+  posts, {browser-window--new}]),
+  or
+  https://ben.balter.com/about/[an about me page, {browser-window--new}],
+  to name two examples. Because pages aren't date specific, pages are often
+  updated over time to maintain accuracy.
 
 The problem is, not everything you might want to publish using a Jekyll
 falls cleanly into the those two categories of content. As I noted in
 https://github.com/jekyll/jekyll/issues/1941[the original pitch], "If
 people are using blog posts for a non-blog post thing, Jekyll has
 already failed". That's where Jekyll's
-http://jekyllrb.com/docs/collections/[collections] come in.
+http://jekyllrb.com/docs/collections/[collections, {browser-window--new}]
+come in.
 
 
 == Not a post, a page - but a collection?
@@ -99,15 +110,15 @@ bring Jekyll's zen-like simplicity to all sorts of other types of content that
 aren't ordered as with posts (ordered by date), but have a set _relationship_
 with one another - hence the name: _collection_. If you're familiar with
 traditional CMS's, you can think of collections like
-http://codex.wordpress.org/Post_Types[WordPress custom post types] or
-https://www.drupal.org/node/774728[Drupal custom content types], except
-you do not need to program a specific class, learn any back-end
+http://codex.wordpress.org/Post_Types[WordPress custom post types, {browser-window--new}]]
+or https://www.drupal.org/node/774728[Drupal custom content types, {browser-window--new}]],
+except you do not need to program a specific class, learn any back-end
 languages, and the syntax used to specify them is very easily readable.
 
 What then, might you use collections for? Let's say you're making a
 website for a bakery and want to list the different cupcakes varieties
 you sell. You might use a collection called *cupcakes*. You'd create a
-`&#x5F;cupcakes` folder, and would add `chocolate.md` or `vanilla.md` to it.
+`cupcakes` folder, and would add `chocolate.md` or `vanilla.md` to it.
 And just like posts or pages, your list of cupcakes would be accessible
 as `site.cupcakes`.
 
@@ -119,12 +130,12 @@ one-another in the sense that they're all cupcakes.
 
 [NOTE]
 ====
-Collections are a very new feature to Jekyll, and according to the
-official documentation may be subject to change
-http://jekyllrb.com/docs/collections/[Jekyll Documentation on
-Collections]; but you should not let that put you off of using them,
-because Jekyll is open-source, which means you should trust the
-community to work-together for the best common-case solution.
+Collections are a very young feature to Jekyll, and according to the
+official documentation may be subject to change Jekyll Documentation on
+http://jekyllrb.com/docs/collections/[Collections, {browser-window--new}]],
+you should not let that put you off of using them, because Jekyll is
+open-source, which means you should trust the community to work-together
+for the best common-case solution.
 ====
 
 
@@ -133,7 +144,7 @@ community to work-together for the best common-case solution.
 But what if one day you decided to expand your offerings and sell
 cookies in addition to cupcakes. Simply introduce a "cookies"
 collection, adding `chocolate-chip.md` and `peanut-butter.md` to a
-`&#x5F;cookies` directory, exposing the cookies as `site.cookies`. You'll
+`cookies` directory, exposing the cookies as `site.cookies`. You'll
 notice the collections concept start to show its value here. Pages
 wouldn't make sense here, because you'd want to be able to list cupcakes
 and cookies separately, and besides for both being baked goods, the one
@@ -147,14 +158,14 @@ to display all products, with specific includes for `cupcakes` and
 `cookies`.
 
 Abstractly, because they're not outputted by default, you can think of
-collections somewhat like http://jekyllrb.com/docs/datafiles/[Jekyll's
-`&#x5F;data` folder support], but with the potential to generate content, and
-be placed into their own specific part of your Jekyll site, so a lot
-more robust. Like `&#x5F;data` files, they can support arbitrary key/values
-through frontmatter, but they also support a full content body (like
-posts and pages), and can be broken out into separate files. If I wanted
-to break out my bakery's hours, I might have a `&#x5F;data/hours.yml` file
-that looked something like this:
+collections somewhat like Jekyll's
+ http://jekyllrb.com/docs/datafiles/[data folder support, {browser-window--new}],
+but with the potential to generate content, and be placed into their own
+specific part of your Jekyll site, so a lot more robust. Like `data` files,
+they can support arbitrary key/values through frontmatter, but they also
+support a full content body (like posts and pages), and can be broken out
+into separate files. If I wanted to break out my bakery's hours, I might
+have a `data/hours.yml` file that looked something like this:
 
 [source,yaml]
 ----
@@ -175,14 +186,15 @@ data and a plugin to turn it into pages; using collections allows the
 site owner to focus on the content.
 
 For a more concrete example, take a look at
-https://github.com/github/choosealicense.com[the source] for
-http://choosealicense.com[choosealicense.com] a site which helps explain
-OpenSource licenses like the MIT or GPL license. There are pages like
-"about" and "terms of service", but the actual licenses live in
-https://github.com/github/choosealicense.com/tree/gh-pages/&#x5F;licenses[a
-licenses collection] and are displayed via
-https://github.com/github/choosealicense.com/blob/gh-pages/licenses.html[a
-licensed page].
+https://github.com/github/choosealicense.com[the source, {browser-window--new}]
+for
+http://choosealicense.com[choosealicense.com, {browser-window--new}]
+a site which helps explain OpenSource licenses like the MIT or GPL license.
+There are pages like *about* and *terms of service*, but the actual licenses
+live in
+https://github.com/github/choosealicense.com/tree/gh-pages/licenses[a licenses collection, {browser-window--new}]
+and are displayed via
+https://github.com/github/choosealicense.com/blob/gh-pages/licenses.html[a licensed page, {browser-window--new}].
 
 === Other use-cases
 
@@ -197,7 +209,7 @@ your site.
 
 The examples above were a slight simplification. There's one other step.
 Before you can use a collection, you need to tell Jekyll about it. Going
-back to our bakery example above, I might have a `&#x5F;config.yml` file that
+back to our bakery example above, I might have a `config.yml` file that
 looks something like this:
 
 [source,yaml]
@@ -207,16 +219,16 @@ collections:
   - cookies
 ----
 
-This tells Jekyll to look in the `&#x5F;cupcakes` and `&#x5F;cookies` folders
+This tells Jekyll to look in the `cupcakes` and `cookies` folders
 for documents, and to read them into the appropriate collection, including
-http://jekyllrb.com/docs/frontmatter/[YAML front matter], just as it
-would posts (but again, without the date, because collection documents
-aren't date specific).
+http://jekyllrb.com/docs/frontmatter/[YAML front matter, {browser-window--new}],
+just as it would posts (but again, without the date, because collection
+documents aren't date specific).
 
 By default, collections are read in (and exposed as `site.[collection]`,
 an alias per-collection), but not included in the final site; at least
 not individually like you might expect posts or pages to. If you wanted
-a page for each type of cupcake, you'd have to modify the `&#x5F;config.yml`
+a page for each type of cupcake, you'd have to modify the `config.yml`
 a bit:
 
 [source,yaml]
@@ -227,12 +239,11 @@ collections:
     permalink: /cupcakes/:path/
 ----
 
-That way, `&#x5F;cupcakes/chocolate.md` is outputted as
-`cupcakes/chocolate/index.html` when the site is built and would be
-accessible as `example.com/cupcakes/chocolate/`. The other advantage,
-is, because the data is now structured and machine readable (rather than
-in plain text), you could also use the `jsonify` filter to output that
-same information as an API for use elsewhere.
+That way, `cupcakes/chocolate.md` is outputted as `cupcakes/chocolate/index.html`
+when the site is built and would be accessible as `example.com/cupcakes/chocolate/`.
+The other advantage, is, because the data is now structured and machine readable
+(rather than in plain text), you could also use the `jsonify` filter to output
+that same information as an API for use elsewhere.
 
 
 === When to use a post, a page, or a collection
@@ -266,24 +277,23 @@ group of "things" that can be logically grouped by a common theme
 (that's not their date). Here's a few examples:
 
 * Listing employees on your company's "about" page (or a project's
-maintainers)
+  maintainers)
 * Documenting methods in an OpenSource project (or the project's that
-use it, or the plugins available)
+  use it, or the plugins available)
 * Organizing jobs on your résumé (or talks given, papers written)
-* https://github.com/blog/1939-how-github-uses-github-to-document-GitHub[Articles
-on a support site]
+* https://github.com/blog/1939-how-github-uses-github-to-document-GitHub[Articles on a support site, {browser-window--new}]
 * Recipes on your personal blog (or restaurant reviews, or dishes on a
-menu)
+  menu)
 * Students in a class (or courses being offered, or listing the faculty)
 * Cheats, tips, tricks and walkthroughs for games (by platform)
 * Creating re-usable content snippets for your site such as
-testimonials, forms, sentences, buzz-words or call-outs
+  testimonials, forms, sentences, buzz-words or call-outs
 * And honestly just about anything else
 
 Collections are a powerful (and often misunderstood) Jekyll feature, but
 hopefully you've now got an idea or two for your next Jekyll project. Of
 course, if you're looking to dig in to collections, be sure to check out
-http://jekyllrb.com/docs/collections/[the formal documentation] for a
-much more in-depth explanation.
+http://jekyllrb.com/docs/collections/[the formal documentation, {browser-window--new}]
+for a much more in-depth explanation.
 
 Happy Jekylling!

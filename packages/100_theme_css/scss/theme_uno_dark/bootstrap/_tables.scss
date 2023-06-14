@@ -12,8 +12,19 @@
  # -----------------------------------------------------------------------------
 */
 
-.table {
-    --bs-table-bg: var(--bs-gray-300) !important;
+table {
+    background: $blue-gray-700 !important;
+}
+
+table thead tr th,
+table thead tr td,
+table tfoot tr th,
+table tfoot tr td {
+    color: $gray-300 !important;
+}
+
+.tablesaw-cell-content {
+    color: $gray-300;
 }
 
 

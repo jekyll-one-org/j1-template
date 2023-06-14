@@ -14,16 +14,14 @@
 */
 
 a {
-  color: $gray-300;
+  color: $blue-gray-300;
   text-decoration: none !important;
   font-weight: 500 !important;
-  border-bottom: unset !important;
 }
 
 a:hover {
   text-decoration: none !important;
-  border-bottom: unset !important;
-  color: $gray-500 !important;
+  color: $blue-gray-500 !important;
   font-weight: 500 !important;
 }
 

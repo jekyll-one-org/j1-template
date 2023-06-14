@@ -1,0 +1,23 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/100_theme_css/scss/theme_uno_dark/extentions/_bs-doc.scss
+ #
+ # Product/Info:
+ # https:#jekyll.one
+ #
+ # Copyright (C) 2023 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+// Doc helper
+// -----------------------------------------------------------------------------
+
+.doc-example {
+  padding: 1.5rem;
+  border-radius: 1px;
+  border: 1px solid $gray-500;
+  background-color: transparent;
+}

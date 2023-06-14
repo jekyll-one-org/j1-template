@@ -13,13 +13,14 @@
 // -----------------------------------------------------------------------------
 @import "mde_colors";
 
+// Colors(Bootstrap)
+// -----------------------------------------------------------------------------
+
 // Body (jadams, 2021-11-21: set body colors as var)
 // -----------------------------------------------------------------------------
 $body-bg:                                         $white !default;
 $body-color:                                      $gray-800 !default;
 
-// Colors
-// -----------------------------------------------------------------------------
 $primary:                                         $blue !default;
 $secondary:                                       $gray-600 !default;
 $success:                                         $green !default;
@@ -30,15 +31,21 @@ $light:                                           $gray-300 !default;
 $dark:                                            $gray-900 !default;
 
 $theme-colors: (
-  "primary":    $primary,
-  "secondary":  $secondary,
-  "success":    $success,
-  "info":       $info,
-  "warning":    $warning,
-  "danger":     $danger,
-  "light":      $light,
-  "dark":       $dark
+  "primary":                                      $primary,
+  "secondary":                                    $secondary,
+  "success":                                      $success,
+  "info":                                         $info,
+  "warning":                                      $warning,
+  "danger":                                       $danger,
+  "light":                                        $light,
+  "dark":                                         $dark
 ) !default;
+
+$link-color:                                      $blue-900 !default;
+
+
+// Colors (BMD)
+// -----------------------------------------------------------------------------
 
 // jadams, 2019-01-24: base font weight
 //

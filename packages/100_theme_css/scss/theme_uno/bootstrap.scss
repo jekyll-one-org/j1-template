@@ -53,17 +53,20 @@
 
 @import "bootstrap/alerts";
 @import "bootstrap/body";
+@import "bootstrap/bs-doc";
 @import "bootstrap/bs4styles";
 @import "bootstrap/buttons";
 @import "bootstrap/caption";
 @import "bootstrap/checkboxes";
-@import "bootstrap/code";                                                       // jadams, 2020-08-18: custom styles from FOLDER custom
-// @import "bootstrap/dropdown";                                                // jadams, 2023-02-26: disabled
+@import "bootstrap/code";
+
+// @import "bootstrap/dropdown";
+
 @import "bootstrap/forms";
-@import "bootstrap/headings";                                                   // jadams, 2021-09-03: new heading style (Roboto Slap)
+@import "bootstrap/headings";
 @import "bootstrap/input-group";
 @import "bootstrap/layout";
-@import "bootstrap/links";                                                      // jadams, 2020-08-18: custom styles from FOLDER custom
+@import "bootstrap/links";
 @import "bootstrap/modal";
 @import "bootstrap/navbar";
 @import "bootstrap/pagination";

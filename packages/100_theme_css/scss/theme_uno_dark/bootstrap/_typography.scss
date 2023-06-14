@@ -20,18 +20,27 @@
  # -----------------------------------------------------------------------------
 */
 
+// Typography
+// -----------------------------------------------------------------------------
+
+p {
+  &tagline {
+    color: $gray-300;
+  }
+}
+
 b,
 strong {
-  color: $gray-200;
-  font-weight: 500;
-  }
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500;
+}
 
 cite, em, var, address, dfn {
-  color: $white;
+    color: $white;
 }
 
 .quoteblock blockquote:before {
-  color: $gray-300 !important;
+    color: $gray-300 !important;
 }
 
 .blockquote-footer {

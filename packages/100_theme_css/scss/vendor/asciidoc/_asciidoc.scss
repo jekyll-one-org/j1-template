@@ -81,22 +81,22 @@ $table__header--font-size:              95%;
 }
 
 // jadams, 2020-08-16: added background color|padding
-code {
-  // font-weight: bold;
-  word-break: break-word;
-  padding: 0.125em 0.275em 0.125em 0.275em !important;
-  border-radius: $border--radius;
-  // background-color: rgba(0, 0, 0, 0.1) !important;
-  // background-color: $darken-100 !important;
-  background-color: $darken-100;
-}
+// code {
+//   // font-weight: bold;
+//   word-break: break-word;
+//   padding: 0.125em 0.275em 0.125em 0.275em !important;
+//   border-radius: $border--radius;
+//   // background-color: rgba(0, 0, 0, 0.1) !important;
+//   // background-color: $darken-100 !important;
+//   background-color: $darken-100;
+// }
 
 // jadams, 2022-07-25: additonal style because GEM/plugin
 // 'asciidoctor-rouge' is DISABLED for Ruby V3
-pre code {
-  padding: 0 !important;
-  background-color: transparent;
-}
+// pre code {
+//   padding: 0 !important;
+//   background-color: transparent;
+// }
 
 // Headings
 // -----------------------------------------------------------------------------
@@ -326,10 +326,11 @@ tfoot tr th p {
   font-weight: bold;
 }
 
-p.tableblock > code:only-child {
-  background: none;
-  padding: 0;
-}
+// jadams 2023-06.12: conflicts with '<code>'
+// p.tableblock > code:only-child {
+//   background: none;
+//   padding: 0;
+// }
 
 //  jadams, 2020-07-10: add top margin for larger (image) items
 //  jadams, 2022-08-19: removed top margin

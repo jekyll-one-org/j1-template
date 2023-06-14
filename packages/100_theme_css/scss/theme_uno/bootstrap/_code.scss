@@ -13,6 +13,18 @@
  # -----------------------------------------------------------------------------
 */
 
-code {
+code, pre {
+  border-radius: 2px;
+  font-weight: 500;
+  word-break: break-word;
+  padding: 0.125em 0.275em 0.125em 0.275em;
   color: $gray-900;
+  background-color: $darken-100;
+}
+
+// jadams, 2022-07-25: additonal style because GEM/plugin
+// 'asciidoctor-rouge' is DISABLED for Ruby V3
+pre code {
+  padding: 0 !important;
+  background-color: transparent !important;
 }

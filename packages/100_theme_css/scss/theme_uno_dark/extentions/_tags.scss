@@ -15,8 +15,12 @@
 // Tags
 // -----------------------------------------------------------------------------
 
-.tagbox {
-    background: $body-bg;
+// .tagbox {
+//     background: $blue-gray-300 !important;
+// }
+
+.tag__cloud ul li a {
+  background-color: $blue-gray-300 !important;
 }
 
 .tag__cloud ul li a:hover {

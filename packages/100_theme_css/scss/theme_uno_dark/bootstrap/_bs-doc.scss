@@ -1,9 +1,9 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/scss/theme_uno/theme_uno_dark/bootstrap/_pagination.scss
+ # ~/100_theme_css/scss/theme_uno_dark/extentions/_bs-doc.scss
  #
  # Product/Info:
- # https://jekyll.one
+ # https:#jekyll.one
  #
  # Copyright (C) 2023 Juergen Adams
  #
@@ -12,6 +12,9 @@
  # -----------------------------------------------------------------------------
 */
 
-.pagination {
-    --bs-pagination-bg: #eeeeee;
+// Doc
+// -----------------------------------------------------------------------------
+
+.doc-example {
+    background-color: $blue-gray-300 !important;
 }

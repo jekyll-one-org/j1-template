@@ -20,9 +20,12 @@ legend {
   border: 0;
 }
 
+.form-control, input::placeholder, label {
+    color: $gray-400 !important;
+}
+
 .input-group-addon {
   background-image: unset;
-//@include btn-shadow($secondary);
   text-shadow: 1px 1px 1px $darken-300;
   color: $white;
 }
@@ -54,7 +57,7 @@ legend {
 
 .form-control,
 .form-control:focus {
-  background-color: $blue-400;
+  background-color: $blue-gray-400 !important;
 }
 
 select.form-control[size],
@@ -84,7 +87,7 @@ select.form-control[multiple] {
 .form-control {
   padding: 0.375rem 1rem;
   border-radius: 0.25rem;
-  background-color: $blue-600;
+  background-color: $blue-gray-600;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -139,7 +142,7 @@ select.form-control[multiple] {
 }
 
 .form-control:disabled, .form-control[readonly] {
-  background-color: $blue;                                                      // #2196F3;
+  background-color: $blue-gray;                                                      // #2196F3;
   opacity: 1;
 }
 

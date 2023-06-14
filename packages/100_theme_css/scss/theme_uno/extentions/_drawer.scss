@@ -121,7 +121,7 @@
 
 // jadams, 2019-01-21: Flat style, no focus ring
 .drawer-toggler {
-  color: rgba(255, 255, 255, 0.5);
+  color: rgba(255, 255, 255, 0.9);
   padding: .25rem .75rem;
   font-size: 1.25rem;
   line-height: 1;
@@ -133,7 +133,7 @@
 
 // jadams, 2020-07-03-21: Added general style
 .drawer-toggler:focus, .drawer-toggler:hover {
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.4);
 }
 
 //  Custom sizes
