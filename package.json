@@ -111,7 +111,7 @@
     "getos-cli": "^1.0.0",
     "if-env": "^1.0.4",
     "later": "^1.2.0",
-    "lerna": "^6.6.1",
+    "lerna": "^6.6.2",
     "node-schedule": "^2.1.0",
     "nouislider": "^15.5.1",
     "npm-delay": "^1.0.4",

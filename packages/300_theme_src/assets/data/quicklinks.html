@@ -29,172 +29,146 @@ exclude_from_search:                    true
 {% capture select_color     %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %}
 {% capture select_icon_size %}themes/{{site.template.name}}/procedures/global/select_icon_size.proc{% endcapture %}
 
-{% assign apps                    = site.data.apps %}
-{% assign modules                 = site.data.modules %}
+{% assign apps                      = site.data.apps %}
+{% assign modules                   = site.data.modules %}
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign j1_config               = site.data.j1_config %}
-{% assign authentication_defaults = modules.defaults.authentication.defaults %}
-{% assign authentication_settings = modules.authentication.settings %}
-{% assign navigator_defaults      = modules.defaults.navigator.defaults %}
-{% assign navigator_settings      = modules.navigator.settings %}
-{% assign consent_defaults        = modules.defaults.cookieconsent.defaults %}
-{% assign consent_settings        = modules.cookieconsent.settings %}
-{% assign lunr_search_defaults    = modules.defaults.lunr.defaults %}
-{% assign lunr_search_settings    = modules.lunr.settings %}
-{% assign nbi_defaults            = modules.defaults.nbinteract.defaults %}
+{% assign j1_config                 = site.data.j1_config %}
+{% assign authentication_defaults   = modules.defaults.authentication.defaults %}
+{% assign authentication_settings   = modules.authentication.settings %}
+{% assign navigator_defaults        = modules.defaults.navigator.defaults %}
+{% assign navigator_settings        = modules.navigator.settings %}
+{% assign consent_defaults          = modules.defaults.cookieconsent.defaults %}
+{% assign consent_settings          = modules.cookieconsent.settings %}
+{% assign lunr_search_defaults      = modules.defaults.lunr.defaults %}
+{% assign lunr_search_settings      = modules.lunr.settings %}
+
+{% assign translator_defaults       = modules.defaults.translator.defaults %}
+{% assign translator_settings       = modules.translator.settings %}
+{% assign toggler_defaults          = modules.defaults.theme_toggler.defaults %}
+{% assign toggler_settings          = modules.theme_toggler.settings %}
 
 
-{% comment %} Control Center disabled
+{% comment %} Modules disabled
 --------------------------------------------------------------------------------
-{% assign cc_app_config_defaults  = apps.defaults.cc.defaults %}
-{% assign cc_app_config_settings  = apps.cc.settings %}
--------------------------------------------------------------------------------- {% endcomment %}
+{% assign nbi_defaults              = modules.defaults.nbinteract.defaults %}
+{% assign cc_app_config_defaults    = apps.defaults.cc.defaults %}
+{% assign cc_app_config_settings    = apps.cc.settings %}
+--------------------------------------------------------------------------------
+{% endcomment %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment             = site.environment %}
+{% assign environment               = site.environment %}
 
-{% assign nav_quicklinks_defaults = navigator_defaults.nav_quicklinks %}
-{% assign nav_quicklinks_settings = navigator_settings.nav_quicklinks %}
+{% assign nav_quicklinks_defaults   = navigator_defaults.nav_quicklinks %}
+{% assign nav_quicklinks_settings   = navigator_settings.nav_quicklinks %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign authentication_options  = authentication_defaults | merge: authentication_settings %}
-{% assign lunr_search_options     = lunr_search_defaults | merge: lunr_search_settings %}
-{% assign quicklinks_options      = nav_quicklinks_defaults | merge: nav_quicklinks_settings %}
-{% assign consent_options         = consent_defaults | merge: consent_settings %}
+{% assign authentication_options    = authentication_defaults | merge: authentication_settings %}
+{% assign lunr_search_options       = lunr_search_defaults | merge: lunr_search_settings %}
+{% assign quicklinks_options        = nav_quicklinks_defaults | merge: nav_quicklinks_settings %}
+{% assign consent_options           = consent_defaults | merge: consent_settings %}
+{% assign translator_options        = translator_defaults | merge: translator_settings %}
+{% assign toggler_options           = toggler_defaults | merge: toggler_settings %}
 
 {% comment %} Control Center disabled
 --------------------------------------------------------------------------------
-{% assign cc_app_config_options   = cc_app_config_defaults | merge: cc_app_config_settings %}
--------------------------------------------------------------------------------- {% endcomment %}
+{% assign cc_app_config_options     = cc_app_config_defaults | merge: cc_app_config_settings %}
+--------------------------------------------------------------------------------
+{% endcomment %}
 
 {% comment %} Set authentication properties
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign authentication_enabled  = authentication_options.j1_auth.enabled %}
-{% assign auth_client_config      = authentication_options.auth_client %}
+{% assign authentication_enabled    = authentication_options.j1_auth.enabled %}
+{% assign auth_client_config        = authentication_options.auth_client %}
 
 {% comment %} Set quicklinks properties
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign icon_family             = quicklinks_options.icon_family | downcase %}
+{% assign icon_family               = quicklinks_options.icon_family | downcase %}
 
 {% comment %} Link buttons
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign home_icon               = quicklinks_options.home_icon %}
-{% assign home_url                = quicklinks_options.home_url %}
-{% assign home_label              = quicklinks_options.home_label %}
+{% assign home_icon                 = quicklinks_options.home_icon %}
+{% assign home_url                  = quicklinks_options.home_url %}
+{% assign home_label                = quicklinks_options.home_label %}
 
-{% assign back_icon               = quicklinks_options.back_icon %}
-{% assign back_url                = quicklinks_options.back_url %}
+{% assign back_icon                 = quicklinks_options.back_icon %}
+{% assign back_url                  = quicklinks_options.back_url %}
 {% assign back_label                = quicklinks_options.back_label %}
 
-{% assign disqus_icon             = quicklinks_options.disqus_icon %}
-{% assign github_icon             = quicklinks_options.github_icon %}
-{% assign patreon_icon            = quicklinks_options.patreon_icon %}
-{% assign facebook_icon           = quicklinks_options.facebook_icon %}
-{% assign twitter_icon            = quicklinks_options.twitter_icon %}
+{% assign disqus_icon               = quicklinks_options.disqus_icon %}
+{% assign github_icon               = quicklinks_options.github_icon %}
+{% assign patreon_icon              = quicklinks_options.patreon_icon %}
+{% assign facebook_icon             = quicklinks_options.facebook_icon %}
+{% assign twitter_icon              = quicklinks_options.twitter_icon %}
 
-{% assign disqus_url              = quicklinks_options.disqus_url %}
-{% assign github_url              = quicklinks_options.github_url %}
-{% assign patreon_url             = quicklinks_options.patreon_url %}
-{% assign facebook_url            = quicklinks_options.facebook_url %}
-{% assign twitter_url             = quicklinks_options.twitter_url %}
+{% assign disqus_url                = quicklinks_options.disqus_url %}
+{% assign github_url                = quicklinks_options.github_url %}
+{% assign patreon_url               = quicklinks_options.patreon_url %}
+{% assign facebook_url              = quicklinks_options.facebook_url %}
+{% assign twitter_url               = quicklinks_options.twitter_url %}
 
-{% assign disqus_label            = quicklinks_options.disqus_label %}
-{% assign github_label            = quicklinks_options.github_label %}
-{% assign patreon_label           = quicklinks_options.patreon_label %}
-{% assign facebook_label          = quicklinks_options.facebook_label %}
-{% assign twitter_label           = quicklinks_options.twitter_label %}
+{% assign disqus_label              = quicklinks_options.disqus_label %}
+{% assign github_label              = quicklinks_options.github_label %}
+{% assign patreon_label             = quicklinks_options.patreon_label %}
+{% assign facebook_label            = quicklinks_options.facebook_label %}
+{% assign twitter_label             = quicklinks_options.twitter_label %}
 
 {% comment %} Action buttons
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign cookies_icon            = quicklinks_options.cookies_icon %}
-{% assign cookies_action          = quicklinks_options.cookies_action %}
-{% assign cookies_label           = quicklinks_options.cookies_label %}
+{% assign cookies_icon              = quicklinks_options.cookies_icon %}
+{% assign cookies_action            = quicklinks_options.cookies_action %}
+{% assign cookies_label             = quicklinks_options.cookies_label %}
 
-{% assign translate_icon          = quicklinks_options.translate_icon %}
-{% assign translate_action        = quicklinks_options.translate_action %}
-{% assign translate_label         = quicklinks_options.translate_label %}
+{% assign quicksearch_icon          = quicklinks_options.quicksearch_icon %}
+{% assign quicksearch_action        = quicklinks_options.quicksearch_action %}
+{% assign quicksearch_label         = quicklinks_options.quicksearch_label %}
 
-{% assign quicksearch_icon         = quicklinks_options.quicksearch_icon %}
-{% assign quicksearch_action       = quicklinks_options.quicksearch_action %}
-{% assign quicksearch_label        = quicklinks_options.quicksearch_label %}
+{% assign translate_icon            = quicklinks_options.translate_icon %}
+{% assign translate_action          = quicklinks_options.translate_action %}
+{% assign translate_label           = quicklinks_options.translate_label %}
 
-{% assign translator_icon         = quicklinks_options.translator_icon %}
-{% assign translator_action       = quicklinks_options.translator_action %}
-{% assign translator_label        = quicklinks_options.translator_label %}
+{% assign theme_toggler_icon        = quicklinks_options.theme_toggler_icon %}
+{% assign theme_toggler_action      = quicklinks_options.theme_toggler_action %}
+{% assign theme_toggler_label       = quicklinks_options.theme_toggler_label %}
 
-{% assign notebooks_icon          = quicklinks_options.notebooks_icon %}
-{% assign notebooks_action        = quicklinks_options.notebooks_action %}
-{% assign notebooks_label         = quicklinks_options.notebooks_label %}
+{% comment %} Unused buttons
+--------------------------------------------------------------------------------
+{% assign r_text_icon               = quicklinks_options.r_text_icon %}
+{% assign r_text_action             = quicklinks_options.r_text_action %}
+{% assign r_text_label              = quicklinks_options.r_text_label %}
 
-{% assign r_text_icon             = quicklinks_options.r_text_icon %}
-{% assign r_text_action           = quicklinks_options.r_text_action %}
-{% assign r_text_label            = quicklinks_options.r_text_label %}
+{% assign translator_icon           = quicklinks_options.translator_icon %}
+{% assign translator_action         = quicklinks_options.translator_action %}
+{% assign translator_label          = quicklinks_options.translator_label %}
+
+{% assign notebooks_icon            = quicklinks_options.notebooks_icon %}
+{% assign notebooks_action          = quicklinks_options.notebooks_action %}
+{% assign notebooks_label           = quicklinks_options.notebooks_label %}
+--------------------------------------------------------------------------------
+{% endcomment %}
 
 {% comment %} Legacy buttons
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign signin_icon             = auth_client_config.signin_icon %}
-{% assign signout_icon            = auth_client_config.signout_icon %}
-{% assign signin_modal_id         = auth_client_config.signin_modal_id %}
+{% assign signin_icon               = auth_client_config.signin_icon %}
+{% assign signout_icon              = auth_client_config.signout_icon %}
+{% assign signin_modal_id           = auth_client_config.signin_modal_id %}
 
-{% assign control_center_icon     = cc_app_config_options.quicklinks_icon %}
-{% assign control_center_url      = cc_app_config_options.quicklinks_url %}
+{% assign control_center_icon       = cc_app_config_options.quicklinks_icon %}
+{% assign control_center_url        = cc_app_config_options.quicklinks_url %}
 
-
-{% comment %} Show|Hide Quicksearch icon
+{% comment %} Show|Hide QuickLink icons
 -------------------------------------------------------------------------------- {% endcomment %}
-{% if lunr_search_options.enabled %}
-  {% assign show_quicksearch_icon = true  %}
-{% else %}
-  {% assign show_quicksearch_icon = false %}
-{% endif %}
+{% assign show_quicksearch_icon     = lunr_search_options.enabled  %}
+{% assign show_translator_icon      = translator_options.enabled  %}
+{% assign show_theme_toggler_icon   = toggler_options.enabled  %}
+{% assign show_control_center_icon  = cc_app_config_options.enabled %}
+{% assign show_auth_manager_icon    = authentication_enabled  %}
 
-{% comment %} Show|Hide Translator icon
--------------------------------------------------------------------------------- {% endcomment %}
-{% if j1_config.translation.enabled %}
-  {% assign show_translator_icon = true  %}
-{% else %}
-  {% assign show_translator_icon = false %}
-{% endif %}
-
-{% comment %} Show|Hide Notebooks icon
--------------------------------------------------------------------------------- {% endcomment %}
-{% if nbi_defaults.enabled %}
-  {% assign show_notebooks_icon = true  %}
-{% else %}
-  {% assign show_notebooks_icon = false %}
-{% endif %}
-
-{% comment %} Show|Hide AuthManager icon
--------------------------------------------------------------------------------- {% endcomment %}
-{% if authentication_enabled %}
-  {% assign show_auth_manager_icon = true  %}
-{% else %}
-  {% assign show_auth_manager_icon = false %}
-{% endif %}
-
-<!--
-  authentication_enabled: {{ authentication_enabled | debug }}
--->
-
-{% comment %} Show|Hide Control Center icon
--------------------------------------------------------------------------------- {% endcomment %}
-{% if cc_app_config_options.enabled %}
-  {% assign show_control_center_icon = true %}
-{% else %}
-  {% assign show_control_center_icon = false %}
-{% endif %}
-
-{% comment %} Show|Hide RSizer icon
--------------------------------------------------------------------------------- {% endcomment %}
-{% if quicklinks_options.r_text_icon %}
-  {% assign show_r_text_icon = true %}
-{% else %}
-  {% assign show_r_text_icon = false %}
-{% endif %}
+<!-- authentication_enabled: {{ authentication_enabled | debug }} -->
 
 {% comment %} Show|Hide CookieConsent icon
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -216,12 +190,35 @@ exclude_from_search:                    true
   {% assign show_cookieconsent_icon = false %}
 {% endif %}
 
+{% comment %} QuickLink icons (Disabled)
+--------------------------------------------------------------------------------
+
+{% assign show_control_center_icon  = cc_app_config_options.enabled %}
+{% assign show_notebooks_icon       = nbi_defaults.enabled  %}
+
+{% comment %} Show|Hide RSizer icon
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if quicklinks_options.r_text_icon %}
+  {% assign show_r_text_icon = true %}
+{% else %}
+  {% assign show_r_text_icon = false %}
+{% endif %}
+
+{% comment %} Show|Hide Google Translate icon
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign show_google_translate_icon = true  %}
+{% assign show_google_translate_lang = false  %}
+{% assign translate_lang = 'gb'  %}
+
+--------------------------------------------------------------------------------
+{% endcomment %}
+
 
 {% comment %} Select icon family and size (color set dynamically by adapter)
 -------------------------------------------------------------------------------- {% endcomment %}
 {% if quicklinks_options.icon_family == 'FontAwesome' or quicklinks_options.icon_family == 'FontAwesome4' or quicklinks_options.icon_family == 'FontAwesome5' %}
   {% assign icon_family = 'fa' %}
-{% elsif quicklinks_options.icon_family == 'MDI' or quicklinks_options.icon_family == 'Material Design Icons'%}
+{% elsif quicklinks_options.icon_family == 'MDI' or quicklinks_options.icon_family == 'Material Design Icons' %}
   {% assign icon_family = 'mdi' %}
 {% else %}
   {% assign icon_family = 'mdi' %}
@@ -237,16 +234,6 @@ exclude_from_search:                    true
   {% assign production = true %}
 {% endif %}
 
-{% comment %} Unused
---------------------------------------------------------------------------------
-{% assign show_google_translate_icon = true  %}
-{% assign show_google_translate_lang = false  %}
-{% assign translate_lang = 'gb'  %}
--------------------------------------------------------------------------------- {% endcomment %}
-
-{% assign show_google_translate_icon = true  %}
-{% assign show_google_translate_lang = false  %}
-{% assign translate_lang = 'gb'  %}
 
 {% comment %} Main
 ================================================================================ {% endcomment %}
@@ -279,16 +266,18 @@ exclude_from_search:                    true
   {% if show_quicksearch_icon %}<li id="quickLinksSearchButton" class="nav-icon {{quicksearch_action}}"><a href="#" aria-label="{{quicksearch_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{quicksearch_icon}} {{icon_size}}"></i></a></li>{% endif %}
   {% if show_auth_manager_icon %}<li id="quickLinksSignInOutButton" class="nav-icon sign-inout" style="display: none;"><a class="nav-icon" id="navLinkSignInOut" aria-label="SignOut" href="#" data-bs-toggle="modal" data-bs-target="#{{signin_modal_id}}"><i id="iconSignInOut" class="nav-icon {{icon_family}} {{icon_family}}-{{signin_icon}} {{icon_size}}"></i></a></li>{% endif %}
   {% if show_cookieconsent_icon %}<li id="quickLinksCookieButton" class="nav-icon {{cookies_action}}" style="display: block;"><a href="#" aria-label="{{cookies_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{cookies_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if show_r_text_icon %}<li id="quickLinksRTextButton" class="nav-icon {{r_text_action}}" style="display: block;"><a class="nav-icon" href="#" aria-label="{{r_text_label}}" data-bs-toggle="modal" data-bs-target="#fluidModalRTextResizer"><i class="nav-icon {{icon_family}} {{icon_family}}-{{r_text_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if show_google_translate_icon %}<li id="quickLinksTranslateButton" class="nav-icon {{translate_action}}" style="display: block;"><a href="#" aria-label="{{translate_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{translate_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if show_notebooks_icon %}<li id="quickLinksNotebookseButton" class="nav-icon {{notebooks_action}}" style="display: none;"><a href="#" aria-label="{{translate_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{notebooks_icon}} {{icon_size}}"></i></a></li>{% endif %}
+  {% if show_translator_icon %}<li id="quickLinksTranslateButton" class="nav-icon {{translate_action}}" style="display: block;"><a href="#" aria-label="{{translate_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{translate_icon}} {{icon_size}}"></i></a></li>{% endif %}
+  {% if show_theme_toggler_icon %}<li id="quickLinksThemeTogglerButton" class="nav-icon {{theme_toggler_action}}" style="display: block;"><a href="#" aria-label="{{theme_toggler_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{theme_toggler_icon}} {{icon_size}}"></i></a></li>{% endif %}
 
   {% comment %} Unused
   ------------------------------------------------------------------------------
+  {% if show_r_text_icon %}<li id="quickLinksRTextButton" class="nav-icon {{r_text_action}}" style="display: block;"><a class="nav-icon" href="#" aria-label="{{r_text_label}}" data-bs-toggle="modal" data-bs-target="#fluidModalRTextResizer"><i class="nav-icon {{icon_family}} {{icon_family}}-{{r_text_icon}} {{icon_size}}"></i></a></li>{% endif %}
+  {% if show_notebooks_icon %}<li id="quickLinksNotebookseButton" class="nav-icon {{notebooks_action}}" style="display: none;"><a href="#" aria-label="{{translate_label}}"><i class="nav-icon {{icon_family}} {{icon_family}}-{{notebooks_icon}} {{icon_size}}"></i></a></li>{% endif %}
   {% if show_control_center_icon %}<li id="quickLinksControlCenterButton" class="nav-icon control-center" style="display: block;"><a class="nav-icon" href="{{control_center_url}}" aria-label="ControlCenter"><i class="nav-icon {{icon_family}} {{icon_family}}-{{control_center_icon}} {{icon_size}}"></i></a></li>{% endif %}
-  {% if show_translator_icon %}<li id="quickLinksLanguageButton" class="nav-icon translator"><a class="nav-icon" href="#void" aria-label="Translator"><i class="nav-icon {{icon_family}} {{icon_family}}-{{translator_icon}} {{icon_size}}"></i></a></li>{% endif %}
+  {% if show_google_translate_icon %}<li id="quickLinksLanguageButton" class="nav-icon translator"><a class="nav-icon" href="#void" aria-label="Translator"><i class="nav-icon {{icon_family}} {{icon_family}}-{{translator_icon}} {{icon_size}}"></i></a></li>{% endif %}
   {% if show_google_translate_lang %}<li id="quickLinksTranslateLangButton" sclass="nav-icon" style="display: block;"><a href="javascript:j1.translator.showDialog()" aria-label="Google Translate"><i class="nav-icon flag-icon flag-icon-{{translate_lang}} rectangle size-md"></i></a></li>{% endif %}
-  ------------------------------------------------------------------------------ {% endcomment %}
+  ------------------------------------------------------------------------------
+  {% endcomment %}
 
 </ul>
 

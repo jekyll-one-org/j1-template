@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-#  ~/_data/modules/wave.yml
-#  User configuration settings for J1 Wave module
+#  ~/_data/modules/theme_toggler.yml
+#  User configuration settings for J1 Theme Toggler module
 #
 #  Product/Info:
 #  https://jekyll.one
@@ -15,20 +15,15 @@
 # Description
 #
 description:
-  title:                                J1 Wave
+  title:                                J1 Theme Toggler
   scope:                                User settings
-  location:                             _data/modules/wave.yml
+  location:                             _data/modules/theme_toggler.yml
 
 # ------------------------------------------------------------------------------
 # User configuration settings
 #
 settings:
   enabled:                              true
-
-  # ----------------------------------------------------------------------------
-  # Wave options
-  # ----------------------------------------------------------------------------
-  themes:                               [ UnoLight ]
 
 # ------------------------------------------------------------------------------
 # END config

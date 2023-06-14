@@ -1,0 +1,92 @@
+---
+title:                                  Theme Switch
+tagline:                                Testpage
+date:                                   2023-05-19 00:00:00 +100
+description: >
+                                        RubyGems is a package manager for the Ruby programming language. It provides
+                                        a convenient way to distribute and manage software packages, called gems,
+                                        written in Ruby. With RubyGems, developers can easily install, uninstall, and
+                                        manage Ruby libraries and applications.
+keywords: >
+                                        Jekyll, Theme, JekyllOne, Info, Manual, Cheatsheet, Ruby, Gem
+
+categories:                             [ Manual ]
+tags:                                   [ Cheatsheet, Gem ]
+
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/recha-oktaviani.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  Photo by Recha Oktaviani on Unsplash
+
+regenerate:                             false
+permalink:                              /pages/public/learn/style_switch/
+
+resources:                              [ animate, clipboard, rouge ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/recha-oktaviani.jpg
+          alt:                          Photo by Recha Oktaviani on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Recha Oktaviani
+            href:                       https://unsplash.com/de/@rechaoktaviani
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// See: https://cssdeck.com/blog/simple-jquery-stylesheet-switcher/
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+Here I have three links, each with a `rel` attribute indicating which CSS
+file the link will load. Technically, I could have just as easily put this
+information in the `href` attribute, but I didn’t want to for one specific
+reason: if the user has JavaScript disabled and the CSS file is listed in
+the href, then clicking the link will send the user to the CSS file directly
+(not loading it like we intended). But our way, if JS is disabled, the user
+gets nothing at all: which is certainly preferable to the less savory
+alternative.
+
+++++
+<ul id="nav_theme_switch">
+  <li><a href="#" rel="/assets/themes/j1/core/css/themes/unolight/bootstrap.css" data-theme="UnoLight">UnoLight</a></li>
+  <li><a href="#" rel="/assets/themes/j1/core/css/themes/unodark/bootstrap.css"  data-theme="UnoDark">UnoDark</a></li>
+</ul>
+++++
+
+NOTE: The term `gem` is related to the *tool* provided by RubyGems. `GEM`
+(capital letters) means the *library* to be managed by the command `gem`
+at the command line.
+
+== Section 1
+
+lorem:sentences[15]
+
+== Section 2
+
+lorem:sentences[15]
+
+== Section 3
+
+lorem:sentences[15]

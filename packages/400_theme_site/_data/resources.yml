@@ -1969,5 +1969,28 @@ resources:
         js:                             [ modules/iconPicker/js/universal-icon-picker ]
         init_function:                  [ j1.adapter.iconPicker.init ]
 
+  # ----------------------------------------------------------------------------
+  # Theme Toggler
+  # Configurable JS Toggler to switch between themes
+  #
+  - name:                               Theme Toggler
+    resource:
+      enabled:                          true
+
+      id:                               theme_toggler
+      comment:                          Module Theme Toggler
+      region:                           head
+      layout:                           [ all ]
+      required:                         always
+      preload:                          false
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            []
+        files:                          [ adapter/js/themeToggler.js ]
+        js:                             []
+        init_function:                  [ j1.adapter.themeToggler.init ]
+
 # ------------------------------------------------------------------------------
 # END config

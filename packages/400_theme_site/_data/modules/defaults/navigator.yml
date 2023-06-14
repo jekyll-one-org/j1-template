@@ -170,7 +170,7 @@ defaults:
 
     icon_family:                        MDI
     icon_color:                         '#212121'                               # gray-900
-    icon_color_hover:                   '#FAFAFA'                               # gray-50
+    icon_color_hover:                   '#757575'                               # gray-600
     icon_size:                          mdi-2x
 
     # Link buttons
@@ -217,9 +217,13 @@ defaults:
     translate_action:                   translate
     translate_label:                    Google Translate
 
-    notebooks_icon:                     notebook
-    notebooks_action:                   nbi-notebooks
-    notebooks_label:                    NBI Notebooks
+    theme_toggler_icon:                 lightbulb-outline
+    theme_toggler_action:               themeToggler
+    theme_toggler_label:                Theme Toggler
+
+#   notebooks_icon:                     notebook
+#   notebooks_action:                   nbi-notebooks
+#   notebooks_label:                    NBI Notebooks
 
     r_text_icon:                        false                                   # format-text
     r_text_action:                      rtext
