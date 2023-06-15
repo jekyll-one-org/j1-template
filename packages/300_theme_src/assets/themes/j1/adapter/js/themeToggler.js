@@ -88,29 +88,23 @@ j1.adapter.themeToggler = (function (j1, window) {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
-var environment     = '{{environment}}';
-var cookie_names    = j1.getCookieNames();
-var user_state      = j1.readCookie(cookie_names.user_state);
-var viewport_width  = $(window).width();
+var environment       = '{{environment}}';
+var cookie_names      = j1.getCookieNames();
+var user_state        = j1.readCookie(cookie_names.user_state);
+var viewport_width    = $(window).width();
+var url               = new liteURL(window.location.href);
+var secure            = (url.protocol.includes('https')) ? true : false;
+var cookie_names      = j1.getCookieNames();
+var user_state        = {};
+var light_theme_css;
+var dark_theme_css;
+var light_theme_name;
+var dark_theme_name;
 var togglerDefaults;
 var togglerSettings;
 var togglerOptions;
 var frontmatterOptions;
-var themes_allowed;
-var theme_enabled;
-var theme;
-
-var logger              = log4javascript.getLogger('j1.adapter.theme_toggler');
-var url                 = new liteURL(window.location.href);
-var secure              = (url.protocol.includes('https')) ? true : false;
-var cookie_names        = j1.getCookieNames();
-var user_state          = {};
-var theme_css;
-var light_theme_css     = '/assets/themes/j1/core/css/themes/unolight/bootstrap.css';
-var dark_theme_css      = '/assets/themes/j1/core/css/themes/unodark/bootstrap.css';
-var theme_name;
-var light_theme_name    = 'UnoLight';
-var dark_theme_name     = 'UnoDark';
+var logger;
 var logText;
 
   // ---------------------------------------------------------------------------
@@ -123,6 +117,7 @@ var logText;
     // adapter initializer
     // -------------------------------------------------------------------------
     init: function (options) {
+      logger = log4javascript.getLogger('j1.adapter.theme_toggler');
 
       // -----------------------------------------------------------------------
       // Default module settings
@@ -137,12 +132,21 @@ var logText;
       // -----------------------------------------------------------------------
 
       // create settings object from frontmatter
+      //
       frontmatterOptions  = options != null ? $.extend({}, options) : {};
 
       // create settings object from module options
-      togglerDefaults = $.extend({}, {{toggler_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      togglerSettings = $.extend({}, {{toggler_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      togglerOptions  = $.extend(true, {}, togglerDefaults, togglerSettings, frontmatterOptions);
+      //
+      togglerDefaults     = $.extend({}, {{toggler_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
+      togglerSettings     = $.extend({}, {{toggler_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      togglerOptions      = $.extend(true, {}, togglerDefaults, togglerSettings, frontmatterOptions);
+
+      // toggle themes
+      //
+      light_theme_name    = togglerOptions.themes.light.name;
+      light_theme_css     = togglerOptions.themes.light.css_file;
+      dark_theme_name     = togglerOptions.themes.dark.name;
+      dark_theme_css      = togglerOptions.themes.dark.css_file;;
 
       // -----------------------------------------------------------------------
       // initializer
@@ -170,12 +174,10 @@ var logText;
                 user_state.theme_name = dark_theme_name;
                 user_state.theme_css  = dark_theme_css;
                 user_state.theme_icon = 'mdi-lightbulb';
-                // $('#quickLinksthemeTogglerButton a i').toggleClass('mdi-lightbulb');
               } else {
                 user_state.theme_name = light_theme_name;
                 user_state.theme_css  = light_theme_css;
                 user_state.theme_icon = 'mdi-lightbulb-outline';
-                // $('#quickLinksthemeTogglerButton a i').toggleClass('mdi-lightbulb-outline');
               }
 
               logger.info('\n' + 'switch theme to: ' + user_state.theme_name);

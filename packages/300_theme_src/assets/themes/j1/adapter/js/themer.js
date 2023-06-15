@@ -212,8 +212,9 @@ j1.adapter.themer = (function (j1, window) {
 
       // jadams, 2023-06-10: Added to optimze 'CLS' of a page load.
       // Find conterpart (show) in the j1.adapter
-      // hide content until 'page' is loaded
+      // hide content|footer until 'page' is loaded
       $('#content').hide();
+      $('#j1_footer').hide();
 
       // jadams, 2021-07-25: problem seems NOT an timing issue on the iPad
       // platform. (General) Dependency should be REMOVED!!!

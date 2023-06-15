@@ -28,7 +28,15 @@ defaults:
   # ----------------------------------------------------------------------------
   # Toggler options
   # ----------------------------------------------------------------------------
-  themes:                               [ UnoLight, UnoDark ]
+  themes:
+
+    light:
+      name:                           UnoLight
+      css_file:                       /assets/themes/j1/core/css/themes/unolight/bootstrap.css
+
+    dark:
+      name:                           UnoDark
+      css_file:                       /assets/themes/j1/core/css/themes/unodark/bootstrap.css
 
 # ------------------------------------------------------------------------------
 # END config

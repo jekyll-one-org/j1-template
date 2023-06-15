@@ -346,7 +346,6 @@ var j1 = (function (options) {
         eventNo:              0,
         pageType:             'unknown',
         pageBaseHeight:       0,
-//      totalGrowthRatio:     0,
         currentPageHeight:    0,
         previousPageHeight:   0,
         currentGrowthRatio:   0,
@@ -498,18 +497,22 @@ var j1 = (function (options) {
               var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
               var banner_blocks = document.querySelectorAll('[id^="banner"]');
               var panel_blocks  = document.querySelectorAll('[id^="panel"]');
+              var footer_blocks  = document.getElementById('j1_footer');
+              var banner_state;
+              var panel_state;
+              var footer_state;
 
-              if (j1.getState() === 'finished' && pageVisible) {
+              if (j1.getState() === 'finished' && pageVisible && atticFinished) {
                 logger.info('\n' + 'load block elements');
+                j1.initFooter(settings);
                 j1.initBanner(settings);
                 j1.initPanel(settings);
-                j1.initFooter(settings);
 
                 if (banner_blocks.length || panel_blocks.length) {
                   var dependencies_met_blocks_ready = setInterval (function (settings) {
-                    var banner_state = 'failed';
-                    var panel_state  = 'failed';
-                    var footer_state = j1.getXhrDataState('#j1_footer');
+                    banner_state = 'failed';
+                    panel_state  = 'failed';
+                    footer_state = j1.getXhrDataState('#j1_footer');
 
                     // check banner states if HTML content loaded successfully
                     Object.entries(j1.xhrDataState).forEach(entry => {
@@ -531,16 +534,21 @@ var j1 = (function (options) {
                     if (banner_state == 'success' && panel_state == 'success' && footer_state == 'success') {
                       // show main content
                       $('#content').show();
-                      clearInterval(dependencies_met_blocks_ready);
+                      $('#j1_footer').show();
+
                       clearInterval(dependencies_met_page_ready);
-
-
+                      clearInterval(dependencies_met_blocks_ready);
                     }
                   }, 10);
                 } else {
-                  // show the content for 'page content' to optimze CLS
-                  $('#content').show();
-                  clearInterval(dependencies_met_page_ready);
+                  // show the content section for 'block content' to optimze CLS
+                  footer_state = j1.getXhrDataState('#j1_footer');
+                  if (footer_state == 'success') {
+                    $('#content').show();
+                    $('#j1_footer').show();
+
+                    clearInterval(dependencies_met_page_ready);
+                  }
                 }
               }
             }, 10);
@@ -616,18 +624,22 @@ var j1 = (function (options) {
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
         var banner_blocks = document.querySelectorAll('[id^="banner"]');
         var panel_blocks  = document.querySelectorAll('[id^="panel"]');
+        var footer_blocks = document.querySelectorAll('[id^="panel"]');
+        var banner_state;
+        var panel_state;
+        var footer_state;
 
-        if (j1.getState() === 'finished' && pageVisible) {
+        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
           logger.info('\n' + 'load block elements');
+          j1.initFooter(settings);
           j1.initBanner(settings);
           j1.initPanel(settings);
-          j1.initFooter(settings);
 
           if (banner_blocks.length || panel_blocks.length) {
             var dependencies_met_blocks_ready = setInterval (function (settings) {
-              var banner_state = 'failed';
-              var panel_state  = 'failed';
-              var footer_state = j1.getXhrDataState('#j1_footer');
+              banner_state = 'failed';
+              panel_state  = 'failed';
+              footer_state = j1.getXhrDataState('#j1_footer');
 
               // check banner states if HTML content loaded successfully
               Object.entries(j1.xhrDataState).forEach(entry => {
@@ -649,21 +661,25 @@ var j1 = (function (options) {
               if (banner_state == 'success' && panel_state == 'success' && footer_state == 'success') {
                 // show main content
                 $('#content').show();
-                clearInterval(dependencies_met_blocks_ready);
+                $('#j1_footer').show();
+
                 clearInterval(dependencies_met_page_ready);
-
-
+                clearInterval(dependencies_met_blocks_ready);
               }
             }, 10);
           } else {
-            // show the content for 'page content' to optimze CLS
-            $('#content').show();
-            clearInterval(dependencies_met_page_ready);
+            // show the content section for 'block content' to optimze CLS
+            footer_state = j1.getXhrDataState('#j1_footer');
+            if ( footer_state == 'success') {
+              $('#content').show();
+              $('#j1_footer').show();
+
+              clearInterval(dependencies_met_page_ready);
+            }
           }
         }
       }, 10);
 
-//    j1.xhrDOMState["#home_teaser_banner"] == 'success'
       state = 'running';
       logger.debug('\n' + 'state: ' + state);
 
@@ -1180,7 +1196,8 @@ var j1 = (function (options) {
               setTimeout (function() {
                 // scroll to an anchor in current page if given in URL
                 j1.scrollToAnchor();
-              }, {{template_config.page_on_load_timeout}} );
+              }, {{template_config.page_on_load_timeout}});
+
               clearInterval(dependencies_met_page_ready);
             }
           }, 10);
@@ -1366,13 +1383,11 @@ var j1 = (function (options) {
           var pageState   = $('#no_flicker').css("display");
           var pageVisible = (pageState == 'block') ? true: false;
           if ( j1.getState() === 'finished' && pageVisible ) {
-            // TODO: Hide GoogleTranslator
-            // $('.skiptranslate').hide();
-
             setTimeout (function() {
               // scroll to an anchor in current page if given in URL
               j1.scrollToAnchor();
-            }, {{template_config.page_on_load_timeout}} );
+            }, {{template_config.page_on_load_timeout}});
+
             clearInterval(dependencies_met_page_ready);
           }
         }, 10);

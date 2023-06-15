@@ -1042,7 +1042,7 @@ settings:
                                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                                         sed diam nonummy nibh euismod tincidunt.
 
-            description_color:          '#9E9E9E'                               # md-gray-500
+            description_color:          '#616161'                               # md-gray-700
             description_animated:       false
 
         # slide 3
@@ -1069,7 +1069,7 @@ settings:
                                         sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                                         Ut enim ad minim veniam.
 
-            description_color:          '#9E9E9E'                               # md-gray-500
+            description_color:          '#616161'                               # md-gray-700
             description_animated:       false
 
         # slide 4
@@ -1095,7 +1095,7 @@ settings:
                                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                                         sed diam nonummy nibh euismod tincidunt.
 
-            description_color:          '#9E9E9E'                               # md-gray-500
+            description_color:          '#616161'                               # md-gray-700
             description_animated:       false
 
         # slide 5
@@ -1121,7 +1121,7 @@ settings:
                                         Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
                                         sed diam nonummy nibh euismod tincidunt.
 
-            description_color:          '#9E9E9E'                               # md-gray-500
+            description_color:          '#616161'                               # md-gray-700
             description_animated:       false
 
         # slide 6
@@ -1147,7 +1147,7 @@ settings:
                                         Lorem ipsum dolor sit amet, consec tetuer adipiscing elit,
                                         sed diam nonummy nibh euismod tincidunt.
 
-            description_color:          '#9E9E9E'                               # md-gray-500
+            description_color:          '#616161'                               # md-gray-700
             description_animated:       false
 
 # ------------------------------------------------------------------------------

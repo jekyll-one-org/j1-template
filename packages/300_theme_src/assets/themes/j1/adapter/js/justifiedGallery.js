@@ -275,6 +275,9 @@ j1.adapter.justifiedGallery = (function (j1, window) {
                 var lightbox          = '{{lightbox}}';
 
                 if (captions_lightbox != null && lightbox == 'lg') {
+                  // VIDEO content use 'lightGallery'
+                  // jadams 2023-06-18: NOT possible to add an href element (required for SEO)
+                  //
                   content +=  '<a data-sub-html="' +captions_lightbox+ '" ';
                   {% if gallery_type == "video-html5" %}
                   content += ' data-html="#' +video_id+ '">' + '\n';
@@ -283,10 +286,11 @@ j1.adapter.justifiedGallery = (function (j1, window) {
                   content += ' data-src="' +video+ '"';
                   content += ' data-options="' +player_params+ '"' + '>' + '\n';
                   {% endif %}
-                  content +=  'href="' +img+ '">' + '\n';
+                  content +=  'href="' +img+ '"' + '\n';
                   content +=  '<img src="' +img+ '" img alt="' +captions_lightbox+ '">' + '\n';
                   content +=  '<span><img class="justified-gallery img-overlay" src="/assets/themes/j1/modules/lightGallery/css/themes/icons/play-button.png" alt="Play Button"></span>' + '\n';
                 } else {
+                  // IMAGE content use default 'Lightbox'
                   content +=  '<a data-sub-html="' +captions_gallery+ '" ';
                   content +=  'href="' +img+ '">' + '\n';
                   content +=  '<img src="' +img+ '" img alt="' +captions_gallery+ '">' + '\n';
