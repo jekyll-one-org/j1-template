@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
  #  ~/modules/rouge/css/uno.light/theme.css
- #  Rouge theme Uno Light (based on theme github)
+ #  Rouge theme UnoLight (based on theme github)
  #
  #  Product/Info:
  #  https://jekyll.one
@@ -51,7 +51,7 @@
 }
 .highlight .err {
   color: #a61717;
-  background-color: #e3d2d2;
+  background-color: transparent;
 }
 .highlight .gd {
   color: #000000;

@@ -1,7 +1,7 @@
 /*
  # -----------------------------------------------------------------------------
- #  ~/modules/rouge/css/thankful_eyes/theme.css
- #  Rouge theme thankful_eyes
+ #  ~/modules/rouge/css/uno.dark/theme.css
+ #  Rouge theme UnoDark (based on theme thankful_eyes)
  #
  #  Product/Info:
  #  https://jekyll.one
@@ -32,7 +32,7 @@
   font-weight: bold;
 }
 .highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
-  color: #6c8b9f;
+  color: #212121;
   font-style: italic;
 }
 .highlight .cp {
@@ -41,8 +41,8 @@
   font-style: italic;
 }
 .highlight .err {
-  color: #fefeec;
-  background-color: #263238;                                                    /* blue-gray-300 */
+  color: #a61717;
+  background-color: #919191;
 }
 .highlight .gr {
   color: #cc0000;
