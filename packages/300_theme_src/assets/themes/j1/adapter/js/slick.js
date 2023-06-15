@@ -167,14 +167,13 @@ j1.adapter.slick = (function (j1, window) {
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
+      // make sure the 'content' section is VISIBLE BEFORE setting-up sliders
+      //
       var dependencies_met_page_ready = setInterval (function (options) {
-        var pageState     = $('#no_flicker').css("display");
-        var pageVisible   = (pageState == 'block') ? true: false;
-        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+        var contentState    = $('#content').css("display");
+        var ContentVisible  = (contentState == 'block') ? true: false;
 
-//      if (j1.getState() === 'finished' && pageVisible) {
-        if (j1.getState() === 'finished' && pageVisible && atticFinished) {
-
+        if (j1.getState() === 'finished' && ContentVisible) {
           {% for carousel in slick_settings.carousels %} {% if carousel.enabled %}
           logger.info('\n' + 'carousel is being initialized on id: ' + '{{carousel.id}}');
 
@@ -299,10 +298,11 @@ j1.adapter.slick = (function (j1, window) {
               //
               function positionSlickArrows (e) {
                 var dependencies_met_page_ready = setInterval (function (options) {
-                  var pageState   = $('#no_flicker').css('display');
-                  var pageVisible = (pageState == 'block') ? true: false;
+                  var contentState    = $('#content').css("display");
+                  var ContentVisible  = (contentState == 'block') ? true: false;
                   var slideImageHeight;
-                  if ( j1.getState() === 'finished' && pageVisible ) {
+
+                  if ( j1.getState() === 'finished' && ContentVisible ) {
                     const carousel_type = '{{carousel.type}}';
                     const $slick = $('.{{carousel.id | replace: '_','-' }}');
                     const $slides = $slick.find('.slick-slide');
