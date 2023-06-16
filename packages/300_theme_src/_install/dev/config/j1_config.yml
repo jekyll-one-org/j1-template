@@ -208,9 +208,9 @@ pages:
 #   browser.
 #
 #   values:                             (unsigned) int
-#   default:                            2000
+#   default:                            1000
 #
-#   scrollDynamicPagesTopOnChange
+#   scrollDynamicPagesTopOnChange (currently NOT used)
 #   ----------------------------------------------------------------------------
 #   Enables|Disables scrolling a dynamic page to the top positon of the
 #   browser window if content of DYNAMIC pages has changed.
@@ -228,9 +228,9 @@ pages:
 #
 # ------------------------------------------------------------------------------
 #
-page_on_load_timeout:                   1000                                    # Default: 1000
-timeoutScrollDynamicPages:              2000                                    # Default: 2000
-scrollDynamicPagesTopOnChange:          false                                   # currently NOT used
+page_on_load_timeout:                   1000
+timeoutScrollDynamicPages:              1000
+scrollDynamicPagesTopOnChange:          false
 
 # ------------------------------------------------------------------------------
 # Body style settings

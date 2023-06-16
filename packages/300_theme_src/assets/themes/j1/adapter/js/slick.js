@@ -167,7 +167,7 @@ j1.adapter.slick = (function (j1, window) {
       // -----------------------------------------------------------------------
       // initializer
       // -----------------------------------------------------------------------
-      // make sure the 'content' section is VISIBLE BEFORE setting-up sliders
+      // make sure the 'content' section is visible BEFORE setting-up sliders
       //
       var dependencies_met_page_ready = setInterval (function (options) {
         var contentState    = $('#content').css("display");

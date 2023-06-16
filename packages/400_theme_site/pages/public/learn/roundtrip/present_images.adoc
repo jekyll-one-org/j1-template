@@ -278,7 +278,7 @@ slick::collection_carousel_biography[role="mb-5"]
 If you're interested to learn more about _Slick_, go previewer page
 link:{url-j1-slick-previewer}[Slick Previewer, {browser-window--new}],
 
-
+[#masterSlider]
 == J1 Master Slider
 
 The Javascript tool _Master Slider_ is a 3rd party plugin fully integrated
@@ -293,6 +293,7 @@ all features: the functionality of  *filters*, *layouts* are limited and no
 // platforms, like mobiles or tablets, initializing an MS Slider will take
 // a while to be finished.
 
+[#carouselSlider]
 === Carousels versus Sliders
 
 Sliders and Carousels are focussing quite the same thing: presenting image data
@@ -311,6 +312,7 @@ TIP: For more details of the dimplementation of Master Slider of J1 Theme, see
 find  documentation at
 link:{url-j1-docs--masterslider-module}[Master Slider module, {browser-window--new}].
 
+[#controlsFiltersLightbox]
 === MS Slider using Controls + Filters + Lightbox
 
 The following slider uses the (CSS) filter feature of Master Slider.
@@ -328,6 +330,7 @@ slides to see the *colored* images configured for the slider.
 .Slider using Controls
 masterslider::ms_00001[role="mb-5"]
 
+[#textElements]
 === MS Slider using Text Elements (MSInfo)
 
 One of the major features of sliders is to present additional (animated)
@@ -338,6 +341,7 @@ elements: the MSInfo element.
 .Slider using Text Elements
 masterslider::ms_00003[role="mb-5"]
 
+[#thumbImages]
 === MS Slider using ThumbImages
 
 To give the users better control over a slideshow, sliders provide complex UI
@@ -348,6 +352,7 @@ the bottom of a slideshow. Find two examples to control a slideshow by
 .Slider using ThumbImages
 masterslider::ms_00004[role="mb-5"]
 
+[#thumbInfo]
 === MS Slider using ThumbInfo
 
 To give the users better control over a slideshow, MS Slider provides
@@ -357,6 +362,7 @@ top, or at the bottom of a slideshow.
 .Slider using ThumbInfo
 masterslider::ms_00007[role="mb-5"]
 
+[#partialview]
 === MS Slider using Layout partialview
 
 The following slider presents a slideshow that combines an MSInfo element
@@ -367,6 +373,7 @@ slide by their neighbors on the left and the right.
 .Slider using Layout partialview
 masterslider::ms_00009[role="mb-5"]
 
+[#aboutMasterSlider]
 === More about Master Slider
 
 If you're interested to learn more about MS Slider, go for the following
