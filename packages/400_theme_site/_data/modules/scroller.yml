@@ -29,7 +29,7 @@ settings:
   # SmoothScroll options
   # ----------------------------------------------------------------------------
   smoothscroll:
-    offsetCorrection:                   -8
+    offsetCorrection:                   -9
     offsetCorrectionLocal:              -90
 
   # ----------------------------------------------------------------------------
@@ -65,7 +65,7 @@ settings:
     - scroller:
         enabled:                        true
         type:                           infiniteScroll
-        id:                             panel_home_news
+        id:                             preview_content
         container:                      panel_home_news-scroll-group
         pagePath:                       /assets/data/news_panel_posts/page
         elementScroll:                  true                                    # false = window, true = container
@@ -86,7 +86,7 @@ settings:
     - scroller:
         enabled:                        true
         type:                           infiniteScroll
-        id:                             blog_navigator_preview
+        id:                             preview_content                         # blog_navigator_preview
         container:                      timeline
         pagePath:                       /pages/public/blog/navigator/page
         elementScroll:                  true

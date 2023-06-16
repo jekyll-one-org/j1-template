@@ -103,6 +103,7 @@
 # Layout configuration settings
 #
 lanes:
+
   # ----------------------------------------------------------------------------
   # HEADER region (body-header)
   #   The header region contains the 'master' header displayed on all pages.
@@ -212,5 +213,5 @@ lanes:
       path:                             layouts
       file:                             content_generator_page.html
 
-# ------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 # END config

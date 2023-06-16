@@ -7,7 +7,7 @@ regenerate:                             true
 {% comment %}
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/scroller.js
- # Liquid template to adapt the J1 Scroller jQuery plugin
+ # Liquid template to adapt scroller plugin
  #
  # Product/Info:
  # https://jekyll.one
@@ -61,10 +61,11 @@ TODO: Check|Fix the (Liquid) merge issue for scroller_options
   {% assign production = true %}
 {% endif %}
 
+
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/adapter/js/scroller.js
- # J1 Adapter for the J1 Scroller jQuery plugin
+ # J1 Adapter for scroller
  #
  # Product/Info:
  # https://jekyll.one
@@ -124,14 +125,12 @@ var lastPageInfo;
       _this = j1.adapter.scroller;
       logger = log4javascript.getLogger('j1.adapter.scroller');
 
-      // load  module DEFAULTS|CONFIG
-      //
+      // Load  module DEFAULTS|CONFIG
       scrollerDefaults = $.extend({}, {{scroller_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
       scrollerSettings = $.extend({}, {{scroller_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
       scrollerOptions  = $.extend(true, {}, scrollerDefaults, scrollerSettings);
 
       // initialize state flag
-      //
       _this.setState('started');
       logger.debug('\n' + 'state: ' + _this.getState());
       logger.info('\n' + 'module is being initialized');
@@ -141,7 +140,6 @@ var lastPageInfo;
         var ContentVisible  = (contentState == 'block') ? true: false;
 
         // initialize scrollers if content is fully available|visible
-        //
         if (j1.getState() === 'finished' && ContentVisible) {
           _this.generate_scrollers();
           _this.setState('finished');
@@ -182,7 +180,6 @@ var lastPageInfo;
       {% assign lastPageInfo_de = item.scroller.lastPageInfo_de %}
 
       // scroller_id: {{ scroller_id }}
-      //
       logText = '\n' + 'scroller of type {{item.scroller.type}} is being initialized on: ' + '{{scroller_id}}';
       logger.info(logText);
 
@@ -203,8 +200,7 @@ var lastPageInfo;
         lastPageInfo += '</p></div>';
       }
 
-      // create an (scroller) instance of 'infiniteScroll'
-      //
+      // Create an scroller instance of infiniteScroll if container exists
       if ($(container).length) {
         $(container).scroller({
           id:             '{{scroller_id}}',
@@ -231,12 +227,10 @@ var lastPageInfo;
       var container = '#' + '{{container}}';
 
       // scroller_id: {{ scroller_id }}
-      //
       logText = '\n' + 'scroller of type {{item.scroller.type}} is being initialized on: ' + '{{scroller_id}}';
       logger.info(logText);
 
-      // create an (scroller) instance of 'showOnScroll'
-      //
+      // Create an scroller instance of showOnScroll if container exists
       if ($(container).length) {
         $(container).scroller({
           id:             '{{scroller_id}}',
@@ -248,9 +242,11 @@ var lastPageInfo;
       }
 
       {% endif %}
+
       // END scroller_id: {{ scroller_id }}
       {% endif %} {% endfor %}
       // END generate scrollers
+
     },
 
     // -------------------------------------------------------------------------

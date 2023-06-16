@@ -734,7 +734,7 @@ exclude_from_search:                    true
                     <div class="card-profile mb-0">
 
                       <div class="card-icon mt-4">
-                        <a href="{{card_href}}" class="link-no-decoration">
+                        <a href="{{card_href}}" class="link-no-decoration" aria-label="Read more on features">
                           <i class="card-icon-circle raised-z0 {{icon_family}} {{icon_family}}-{{card_icon}} {{icon_size}} {{icon_color}} card-icon-background-color-primary"></i>
                         </a>
                       </div>
@@ -742,7 +742,7 @@ exclude_from_search:                    true
                       <div class="content mt-4">
 
                         <div class="card-header">
-                          <h6 class="notoc category text-gray {{card_header_translate}}">{{card_title}}</h6>
+                          <h6 class="notoc category {{card_header_translate}}">{{card_title}}</h6>
                           <h4 class="notoc card-title {{card_header_translate}}">{{card_tagline}}</h4>
                         </div>
                         <div class="card-body g-min-height-350 r-text-300 mt-0">{{card_text}}</div>
@@ -899,7 +899,7 @@ exclude_from_search:                    true
 
               <!-- [INFO   ] [~/assets/data/panel.html              ] [ blocktype detected as: {{card_block}} ] -->
               {% if card_block == 'card-list' %}
-              <div class="no-class">
+              <div class="preview_content">
                 <ul id="{{panel_settings.id}}-scroll-group" class="scroll-group scroll-group-horizontal align-items-stretch flex-wrap">
                   <!-- [INFO   ] [~/assets/data/panel.html              ] [ write post items (card_block == 'card-list')] -->
                 {% for post in site.posts %}

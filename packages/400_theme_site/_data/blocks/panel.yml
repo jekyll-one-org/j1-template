@@ -493,11 +493,11 @@ settings:
                                           Not get lost in project management.
                                         </p>
                                         <p>
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-language-ruby"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-language-ruby"></i>
                                           Ruby 2.7 <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-language-ruby"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-language-ruby"></i>
                                           Jekyll 4.3 <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-nodejs"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-nodejs"></i>
                                           NodeJS 14.x <br />
                                         </p>
                     title:              Platforms
@@ -538,13 +538,13 @@ settings:
                                           Configure what is to be done.
                                         </p>
                                         <p>
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-bootstrap"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-bootstrap"></i>
                                           Bootstrap V5 <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-language-html5"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-language-html5"></i>
                                           Enhanced HTML, CSS and Javascript <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-grass"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-grass"></i>
                                           Icon Fonts <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-application-settings"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-application-settings"></i>
                                           Fully configurable components <br />
                                         </p>
                     title:              Frameworks
@@ -573,11 +573,11 @@ settings:
                                         Support your visitors.
                                         </p>
                                         <p>
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-devices"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-devices"></i>
                                           Desktop and Mobile support <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-near-me"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-near-me"></i>
                                           Mobile Web Navigation <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-lighthouse"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-lighthouse"></i>
                                           Highest Google Lighthouse Scores <br />
                                         </p>
 
@@ -623,29 +623,29 @@ settings:
                                           Use whats's prepared already.
                                         </p>
                                         <p>
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-mouse-move-down"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-mouse-move-down"></i>
                                           Infinite srcoll <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-mouse-move-down"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-mouse-move-down"></i>
                                           Animate on srcoll <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-animation"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-animation"></i>
                                           Floating Action Buttons <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-magnify"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-magnify"></i>
                                           Full-text search engine (Lunr) <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-cookie"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-cookie"></i>
                                           Cookie consent (GDPR compatible) <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-translate"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-translate"></i>
                                           Translator (Google, Deepl) <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-clipboard"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-clipboard"></i>
                                           Clipboard <br />
-                                          <i class="mdi mdi-24px md-blue mdi-rotate-90 ml-3 mr-2 mdi-forwardburger"></i>
+                                          <i class="mdi mdi-24px md-blue-700 mdi-rotate-90 ml-3 mr-2 mdi-forwardburger"></i>
                                           Smooth-srcoll <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-near-me"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-near-me"></i>
                                           Enhanced Navigation <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-lightbulb-on"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-lightbulb-on"></i>
                                           Lightboxes <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-folder-multiple-image"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-folder-multiple-image"></i>
                                           Image and Video Galleries <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-view-carousel"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-view-carousel"></i>
                                           Text and Image Carousels <br />
                                         </p>
 
@@ -666,17 +666,17 @@ settings:
                                           Make your site unique.
                                         </p>
                                         <p>
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-bootstrap"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-bootstrap"></i>
                                           Bootstrap extensions <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-format-annotation-plus"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-format-annotation-plus"></i>
                                           Asciidoctor extensions <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-group"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-group"></i>
                                           Advanced banners and panels <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-near-me"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-near-me"></i>
                                           Blog Post navigation <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-content-duplicate"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-content-duplicate"></i>
                                           Featured example content <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-image"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-image"></i>
                                           Royalty free images <br />
                                         </p>
                     title:              Extensions
@@ -696,17 +696,17 @@ settings:
                                           Check what services powers your site.
                                         </p>
                                         <p>
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-theme-light-dark"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-theme-light-dark"></i>
                                           Bootstrap Themes <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-comment"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-comment"></i>
                                           Comment providers <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-google-analytics"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-google-analytics"></i>
                                           Google Analytics <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-google-ads"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-google-ads"></i>
                                           Google Ads <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-youtube"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-youtube"></i>
                                           YouTube Video <br />
-                                          <i class="mdi mdi-24px md-blue ml-3 mr-2 mdi-vimeo"></i>
+                                          <i class="mdi mdi-24px md-blue-700 ml-3 mr-2 mdi-vimeo"></i>
                                           Vimeo Video <br />
                                         </p>
                     title:              Integrations

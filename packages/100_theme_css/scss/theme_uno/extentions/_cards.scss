@@ -149,8 +149,8 @@
   pointer-events: none;
 }
 
-.card .card-title {
-  color: $gray-900;
+.card .card-title:not([class*="text-"]) {
+  color: $gray-100;
 }
 
 a.card-title:hover {
@@ -285,7 +285,7 @@ a.card-title:hover {
 }
 
 .card .category:not([class*="text-"]) {
-  color: $gray;
+  color: $gray-300;
 }
 
 

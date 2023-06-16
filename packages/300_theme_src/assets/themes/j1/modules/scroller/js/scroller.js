@@ -6,9 +6,9 @@
  # Product/Info:
  # https://jekyll.one
  #
- # Copyright (C) 2023 Juergen Adams
+ # Copyright (C) 2022 Juergen Adams
  #
- # J1 Theme is licensed under the MIT License.
+ # J1 Template is licensed under the MIT License.
  # For details, see: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
  # NOTE: Based on https://github.com/jquery-boilerplate/jquery-boilerplate
@@ -23,7 +23,8 @@
 ;(function($, window, document, undefined) {
   'use strict';
 
-  // Create the defaults
+  // create the defaults
+  //
   var pluginName = 'scroller',
   defaults = {
     type:                 'infiniteScroll',
@@ -38,22 +39,26 @@
     onAfterLoad:          function (){}                                         // callback after new items are loaded
   };
 
-  // Plugin constructor
+  // plugin constructor
+  //
   function Plugin (element, options) {
     this.element            = element;
     this.settings           = $.extend( {}, defaults, options);
     this.settings.elementID = '#' + this.element.id;
 
     // call the initializer
+    //
     this.init(this.settings);
   }
 
-  // Avoid plugin prototype conflicts
+  // avoid plugin prototype conflicts
+  //
   $.extend(Plugin.prototype, {
-    // -----------------------------------------------------------------------
+
+    // -------------------------------------------------------------------------
     // init()
     // plugin initializer
-    // -----------------------------------------------------------------------
+    // -------------------------------------------------------------------------
     init: function(options) {
       var _this  = this;
       var logger = log4javascript.getLogger('j1.scroller.core.init');
@@ -72,24 +77,24 @@
         $(spinner).insertAfter(options.elementID);
       }
 
-      if (options.infoLastPage) {
-        var message = options.lastPageInfo;
-        $(message).insertAfter(options.elementID);
-      }
-
-      // jadams, 2023-06-10: delay register scroll events until page ready
+      // registerScrollEvent delayed until page_ready state
+      //
       var dependencies_met_page_ready = setInterval (function () {
         if (j1.getState() === 'finished') {
 
-          // initialize 'infinite scroll'
+          // initialize infinite scroll
+          //
           if ( options.type === 'infiniteScroll') {
             logger.info('\n' + 'processing mode: ' + options.type);
+            logger.info('\n' + 'loading items from path: ' + options.pagePath);
             logger.info('\n' + 'monitoring element set to: ' + this.scroller);
             _this.registerScrollEvent(options);
           }
-          // initialize 'show on scroll'
+          // initialize show on scroll
+          //
           if ( options.type === 'showOnScroll') {
             logger.info('\n' + 'processing mode: ' + options.type);
+            logger.info('\n' + 'loading items from path: ' + options.pagePath);
             logger.info('\n' + 'monitoring element set to: ' + this.scroller);
             _this.registerScrollEvent(options);
           }
@@ -97,7 +102,7 @@
           logger.info('\n' + 'state: finished');
           clearInterval(dependencies_met_page_ready);
         }
-      }, 10);
+      }, 25);
     },
 
     // -------------------------------------------------------------------------
@@ -106,17 +111,18 @@
     // -------------------------------------------------------------------------
     isInViewport: function (elm, offset) {
       // if the element doesn't exist, abort
+      //
     	if( elm.length == 0 ) {
     		return;
     	}
-    	var $window = jQuery(window);
-    	var viewport_top = $window.scrollTop();
-    	var viewport_height = $window.height();
-    	var viewport_bottom = viewport_top + viewport_height;
-    	var $elm = jQuery(elm);
-    	var top = $elm.offset().top + offset;
-    	var height = $elm.height();
-    	var bottom = top + height;
+    	var $window          = jQuery(window);
+    	var viewport_top     = $window.scrollTop();
+    	var viewport_height  = $window.height();
+    	var viewport_bottom  = viewport_top + viewport_height;
+    	var $elm             = jQuery(elm);
+    	var top              = $elm.offset().top + offset;
+    	var height           = $elm.height();
+    	var bottom           = top + height;
 
     	return (top >= viewport_top && top < viewport_bottom) ||
     	(bottom > viewport_top && bottom <= viewport_bottom) ||
@@ -141,20 +147,22 @@
 
       if (_this.settings.elementScroll) {
         // check scroll position of the container items are to be added
-        var $window = $(window);
-        var viewport_top = $window.scrollTop();
+        //
+        var $window         = $(window);
+        var viewport_top    = $window.scrollTop();
         var viewport_height = $window.height();
         var viewport_bottom = viewport_top + viewport_height - options.scrollOffset;
-        var $elm = $(options.elementID);
-        var top = $elm.offset().top + clientHeight;
-        var height = $elm.height();
-        bottom = top + height;
+        var $elm            = $(options.elementID);
+        var top             = $elm.offset().top + clientHeight;
+        var height          = $elm.height();
+        bottom              = top + height;
 
         return (top >= viewport_top && top < viewport_bottom) ||
         (bottom > viewport_top && bottom <= viewport_bottom) ||
         (height > viewport_height && top <= viewport_top && bottom >= viewport_bottom);
       } else {
         // check scroll position of the (overall) window
+        //
         return (window.innerHeight + window.pageYOffset + options.scrollOffset >= document.body.offsetHeight);
       }
     },
@@ -168,11 +176,13 @@
       var _this = this;
       var logger = log4javascript.getLogger('j1.scroller.core.registerScrollEvent');
 
-      // scroller type infiniteScroll
+      // scroller type 'infiniteScroll'
+      //
       if (options.type === 'infiniteScroll') {
         logger.info('\n' + 'register scroll event of type: ' + options.type);
 
         // register event function DYNAMICALLY
+        //
         _this[options.id] = function (event) {
           var options = _this.settings;
 
@@ -194,11 +204,13 @@
         logger.info('\n' + 'scroll event: registered');
       }
 
-      // scroller type showOnScroll
+      // scroller type 'showOnScroll'
+      //
       if (options.type === 'showOnScroll') {
         logger.info('\n' + 'register scroll event of type: ' + options.type);
 
         // register event function DYNAMICALLY
+        //
         _this[options.id] = function (event) {
           if (_this.isInViewport ($('#' + options.id ), options.scrollOffset)) {
       			logger.info('\n' + 'specified container is in view: ' + options.id);
@@ -225,12 +237,15 @@
       logger.debug('\n' + 'trigger loading ');
 
       // initialze loader flag
+      //
       if (this.itemsLoaded === false) return false;
 
-      // set loader flag (false == not loaded)
+      // set loader flag (false == not loaded
+      //
       this.itemsLoaded = false;
 
       // display spinner while loading
+      //
       if (options.loadStatus) {
         logger.info('\n' + 'show: spinner');
         $('.loader-ellips').show();
@@ -263,8 +278,6 @@
             }
 
             logger.error('\n' + 'loading new items failed, HTTP response: ' + xmlhttp.status );
-            // set loader flag (true == loaded)
-            // return _this.itemsLoaded = false;
             _this.itemsLoaded = false;
           }
         }
@@ -284,7 +297,7 @@
 
       logger.debug('\n' + 'load new items');
       newHTML.innerHTML = HTMLText;
-      var childItems = newHTML.querySelectorAll(options.elementID + ' > *');
+      var childItems    = newHTML.querySelectorAll(options.elementID + ' > *');
       return childItems;
     },
 
@@ -298,17 +311,21 @@
       var cookie_names    = j1.getCookieNames();
       var user_translate  = j1.readCookie(cookie_names.user_translate);
 
-      logger.debug('\n' + 'append new items');
       items.forEach(function (item) {
-        _this.element.appendChild(item);
+        var elmID = _this.element.id
+  //    _this.element.id.append(item);
+        document.getElementById(elmID).appendChild(item);
+        logger.debug('\n' + 'new item appended');
       });
 
       // no dropcaps if translation enabled
+      //
       if (user_translate.translationEnabled) {
         logger.info('\n' + 'translation enabled: ' + user_translate.translationEnabled);
         logger.warn('\n' + 'skipped processing of dropcaps');
       } else {
         // initialize dropcaps
+        //
         logger.info('\n' + 'post processing: createDropCap');
         j1.core.createDropCap();
       }
@@ -331,6 +348,7 @@
   }); // END prototype
 
   // wrapper around the constructor to prevent multiple instantiations
+  //
   $.fn [pluginName] = function(options) {
     return this.each(function() {
       if (!$.data( this, "plugin_" + pluginName)) {

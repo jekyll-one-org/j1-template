@@ -274,7 +274,7 @@ lanes:
   #   NOTE:
   #
   #   For Jekyll, only includes from folder '~/_includes' are accepted
-  #   to load HTML data (include) files from.
+  #   to load|include HTML data files from.
   #
   # ----------------------------------------------------------------------------
   #
