@@ -141,103 +141,13 @@ link:{url-bs-docs--components-navbar}[Bootstrap Docs {char-middot} Navbar, {brow
 
 Theming the navbar has never been easier thanks to the combination of
 theming classes and background-color utilities. Choose from `.navbar-light`
-for use with light background colors, or '.navbar-dark' for dark background
+for use with light background colors, or `.navbar-dark` for dark background
 colors. Then, customize with `.bg-*` utilities.
 
 ++++
 <div class="doc-example mb-3">
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
-    <div class="container-fluid">
-      <a class="link-no-decoration navbar-brand" href="javascript:void(0)">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-        data-bs-target="#navbarColor01" aria-controls="navbarColor01"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
 
-      <div class="collapse navbar-collapse ml-2" id="navbarColor01">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="link-no-decoration nav-link active" href="javascript:void(0)">Home
-              <span class="visually-hidden">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="link-no-decoration nav-link" href="javascript:void(0)">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="link-no-decoration nav-link" href="javascript:void(0)">Pricing</a>
-          </li>
-          <li class="nav-item">
-            <a class="link-no-decoration nav-link" href="javascript:void(0)">About</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="link-no-decoration nav-link dropdown-toggle" data-bs-toggle="dropdown"
-              href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu">
-              <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Action</a>
-              <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Another action</a>
-              <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Something else here</a>
-              <div class="dropdown-divider"></div>
-              <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Separated link</a>
-            </div>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <input class="form-control mt-1" type="text" placeholder="Search">
-          <button class="btn btn-secondary btn-sm ml-3" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
-    <div class="container-fluid">
-      <a class="link-no-decoration navbar-brand" href="javascript:void(0)">Navbar</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-        data-bs-target="#navbarColor02" aria-controls="navbarColor02"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse ml-2" id="navbarColor02">
-        <ul class="navbar-nav me-auto">
-          <li class="nav-item">
-            <a class="link-no-decoration nav-link active" href="javascript:void(0)">Home
-              <span class="visually-hidden">(current)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="link-no-decoration nav-link" href="javascript:void(0)">Features</a>
-          </li>
-          <li class="nav-item">
-            <a class="link-no-decoration nav-link" href="javascript:void(0)">Pricing</a>
-          </li>
-          <li class="nav-item">
-            <a class="link-no-decoration nav-link" href="javascript:void(0)">About</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="link-no-decoration nav-link dropdown-toggle" data-bs-toggle="dropdown"
-              href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-            <div class="dropdown-menu">
-              <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Action</a>
-              <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Another action</a>
-              <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Something else here</a>
-              <div class="dropdown-divider"></div>
-              <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Separated link</a>
-            </div>
-          </li>
-        </ul>
-        <form class="d-flex">
-          <input class="form-control mt-1" type="text" placeholder="Search">
-          <button class="btn btn-secondary btn-sm ml-3" type="submit">Search</button>
-        </form>
-      </div>
-    </div>
-  </nav>
-
-
-  <nav class="navbar navbar-expand-lg navbar-light md-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light mb-3">
     <div class="container-fluid">
       <a class="link-no-decoration navbar-brand" href="javascript:void(0)">Navbar</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -276,7 +186,52 @@ colors. Then, customize with `.bg-*` utilities.
         </ul>
         <form class="d-flex">
           <input class="form-control mt-1" type="text" placeholder="Search">
-          <button class="btn btn-secondary btn-sm ml-3" type="submit">Search</button>
+          <button class="btn btn-light btn-sm ml-3" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-info">
+    <div class="container-fluid">
+      <a class="link-no-decoration navbar-brand" href="javascript:void(0)">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarColor01" aria-controls="navbarColor01"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse ml-2" id="navbarColor01">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="link-no-decoration nav-link active" href="javascript:void(0)">Home
+              <span class="visually-hidden">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="link-no-decoration nav-link" href="javascript:void(0)">Features</a>
+          </li>
+          <li class="nav-item">
+            <a class="link-no-decoration nav-link" href="javascript:void(0)">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="link-no-decoration nav-link" href="javascript:void(0)">About</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="link-no-decoration nav-link dropdown-toggle" data-bs-toggle="dropdown"
+              href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+            <div class="dropdown-menu">
+              <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Action</a>
+              <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Another action</a>
+              <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Something else here</a>
+              <div class="dropdown-divider"></div>
+              <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Separated link</a>
+            </div>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control mt-1" type="text" placeholder="Search">
+          <button class="btn btn-light btn-sm ml-3" type="submit">Search</button>
         </form>
       </div>
     </div>
@@ -287,16 +242,16 @@ colors. Then, customize with `.bg-*` utilities.
 
 [source, html]
 ----
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-light md-light mb-3">
+  <div class="container-fluid">
     <a class="link-no-decoration navbar-brand" href="javascript:void(0)">Navbar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-      data-bs-target="#navbarColor01" aria-controls="navbarColor01"
+      data-bs-target="#navbarColor03" aria-controls="navbarColor03"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse ml-2" id="navbarColor01">
+    <div class="collapse navbar-collapse ml-2" id="navbarColor03">
       <ul class="navbar-nav me-auto">
         <li class="nav-item">
           <a class="link-no-decoration nav-link active" href="javascript:void(0)">Home
@@ -326,11 +281,11 @@ colors. Then, customize with `.bg-*` utilities.
       </ul>
       <form class="d-flex">
         <input class="form-control mt-1" type="text" placeholder="Search">
-        <button class="btn btn-secondary btn-sm ml-3" type="submit">Search</button>
+        <button class="btn btn-primary btn-sm ml-3" type="submit">Search</button>
       </form>
     </div>
   </div>
-  </nav>
+</nav>
 ----
 endif::[]
 
@@ -1195,9 +1150,10 @@ ifeval::[{typography_headings} == true]
 
 HTML headings provide valuable information by highlighting important topics
 and the structure of the document. The HTML5 standard offers six levels of
-heading tags, ranging from <h1> through <h6>. The lower the heading level, the
-higher its importance. Therefore <h1> tag defines the most important heading,
-whereas the <h6> tag defines the least important heading in a document.
+heading tags, ranging from `<h1>` through `<h6>`. The lower the heading level,
+the higher its importance. Therefore `<h1>` tag defines the most important
+heading, whereas the `<h6>` tag defines the least important heading in a
+document.
 
 ++++
 <div class="doc-example mb-3">
@@ -1446,17 +1402,6 @@ focus state, sizing, and more.
 ++++
 
 For file inputs, swap the `.form-control` for `.form-control-file`.
-
-// ++++
-// <div class="doc-example mb-3">
-//   <form>
-//     <div class="form-group">
-//       <input type="file" class="form-control-file" id="exampleFormControlFile1">
-//       <label for="exampleFormControlFile1" class="bmd-label-floating">Example file input</label>
-//     </div>
-//   </form>
-// </div>
-// ++++
 
 ++++
 <div class="doc-example mb-3">
@@ -1785,7 +1730,7 @@ ifeval::[{navs_breadcrumbs} == true]
 Breadcrumbs indicate the current page’s location within a navigational
 hierarchy that automatically adds separators via CSS.
 
-Separators are automatically added in CSS through ::before and content.
+Separators are automatically added in CSS through `::before` and `content`.
 
 ++++
 <div class="doc-example mb-3">
@@ -1811,7 +1756,7 @@ ifeval::[{navs_pagination} == true]
 We use a large block of connected links for our pagination, making links
 hard to miss and easily scalable—all while providing large hit areas.
 Pagination is built with list HTML elements so screen readers can announce
-the number of available links. Use a wrapping <nav> element to identify
+the number of available links. Use a wrapping `<nav>` element to identify
 it as a navigation section to screen readers and other assistive technologies.
 
 ++++
@@ -1901,8 +1846,7 @@ ifeval::[{indicators} == true]
 
 With Bootstrap, indicators are elememts to raise the users awareness. Alerts
 are dynamic elememts that can be used to *indicate* success or something went
-wrong.  Contrasting *Badges, static BS elememts, to raise attention e.g for
-something *new*.
+*wrong*.
 
 ifeval::[{indicators_alerts} == true]
 === Alerts
@@ -1912,7 +1856,7 @@ handful of available and flexible alert messages.
 
 Alerts are available for any length of text, as well as an optional dismiss
 button. For proper styling, use one of the eight required contextual classes
-(e.g., .alert-success). For inline dismissal, use the alerts
+(e.g.,  `.alert-success`). For inline dismissal, use the alerts
 https://getbootstrap.com/docs/4.0/components/alerts/#dismissing[jQuery plugin].
 
 mdi:bootstrap[18px, mdi-md-deep-purple-400]
@@ -2089,7 +2033,7 @@ ifeval::[{progress} == true]
 Bootstrap custom progress bars featuring support for stacked bars, animated
 backgrounds, and text labels. Progress components are built with two HTML
 elements, some CSS to set the width, and a few attributes. We don’t use the
-HTML5 <progress> element, ensuring you can stack progress bars, animate them,
+HTML5 `<progress>` element, ensuring you can stack progress bars, animate them,
 and place text labels over them.
 
 mdi:bootstrap[18px, mdi-md-deep-purple-400]
@@ -2453,7 +2397,7 @@ ifeval::[{dialogs_modals} == true]
 Use Bootstrap’s JavaScript modal plugin to add dialogs to your site for
 lightboxes, user notifications, or completely custom content. Modals are
 built with HTML, CSS, and JavaScript. They’re positioned over everything
-else in the document and remove scroll from the <body> so that modal
+else in the document and remove scroll from the `<body>` so that modal
 content scrolls instead.
 
 mdi:bootstrap[18px, mdi-md-deep-purple-400]
@@ -2625,7 +2569,7 @@ the height.
 
 |*Scrollable long content*
 |It#s also possible to create a scrollable modal that allows scroll the
-modal body. Try the demo and scroll the content.
+modal *body*. Try the demo and scroll the content.
 |
 ++++
 <div class="ml-0">
@@ -2839,9 +2783,10 @@ endif::[]
 ifeval::[{dialogs_popovers_tooltips} == true]
 === Tooltips and Popovers
 
-Popovers and Tooltips rely on the 3rd party library __Popper.js__ for positioning.
-To make them properly positioned, the Javascript library `popper.min.js` has to
-be included before `bootstrap.js` in order to make popovers and tooltips to work.
+Popovers and Tooltips rely on the 3rd party library _Popper.js_ for
+positioning. To make them properly positioned, the Javascript library
+`popper.min.js` has to be included *before* `bootstrap.js` in order to make
+popovers and tooltips to work.
 
 mdi:bootstrap[18px, mdi-md-deep-purple-400]
 link:{url-bs-docs--components-tooltips}[Bootstrap Docs {char-middot} Tooltips, {browser-window--new}]
