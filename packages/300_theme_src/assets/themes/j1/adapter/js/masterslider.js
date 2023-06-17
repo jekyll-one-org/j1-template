@@ -227,12 +227,12 @@ j1.adapter.masterslider = (function (j1, window) {
       var msSliderManagerItem;
 
       // add jQuery ready() function once
-      if (sliderManager) {
-        msSliderManagerItem        = '$(function() {' + '\n';
-        msSliderManagerItem       += '  // console.debug("initializing MS Slider Manager");' + '\n';
-        msSliderManagerItem       += '\n';
-        msSliderManager.innerHTML  = msSliderManagerItem;
-      }
+      // if (sliderManager) {
+      //   msSliderManagerItem        = '$(function() {' + '\n';
+      //   msSliderManagerItem       += '  // console.debug("initializing MS Slider Manager");' + '\n';
+      //   msSliderManagerItem       += '\n';
+      //   msSliderManager.innerHTML  = msSliderManagerItem;
+      // }
 
       var i=0;
       Object.keys(sliders).forEach(function(key) {
@@ -410,10 +410,10 @@ j1.adapter.masterslider = (function (j1, window) {
           }
         });
 
-        var msSliderManagerItem;
-        msSliderManagerItem        = '\n' + '  console.debug("initializing MS Slider Manager finished");' + '\n';
-        msSliderManagerItem       +=  '});' + '\n';
-        msSliderManager.innerHTML +=  msSliderManagerItem + '\n';
+        // var msSliderManagerItem;
+        // msSliderManagerItem        = '\n' + '  console.debug("initializing MS Slider Manager finished");' + '\n';
+        // msSliderManagerItem       +=  '});' + '\n';
+        // msSliderManager.innerHTML +=  msSliderManagerItem + '\n';
 
         _this.setState('sliders_initialized');
         logger.debug('\n' + 'state: ' + _this.getState());

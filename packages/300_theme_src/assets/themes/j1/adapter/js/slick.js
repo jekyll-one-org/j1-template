@@ -154,7 +154,7 @@ j1.adapter.slick = (function (j1, window) {
       logger.info('\n' + 'module is being initialized');
 
       // load HTML portion for all carousels
-      console.debug('loading HTML portion for all carousels configured');
+      // console.debug('loading HTML portion for all carousels configured');
       _this.loadCarouselHTML(slickOptions, slickOptions.carousels);
 
       // Re-Init all carousels in a page if window is resized (if enabled)
@@ -404,26 +404,25 @@ j1.adapter.slick = (function (j1, window) {
       var xhr_data_path   = options.xhr_data_path + '/index.html';
       var xhr_container_id;
 
-      // console.debug('load HTML portion of all carousels configured found in page');
-      console.debug('number of carousels found: ' + numcarousels);
+      // console.debug('number of carousels found: ' + numcarousels);
 
       _this.setState('load_data');
       Object.keys(carousel).forEach(function(key) {
         if (carousel[key].enabled) {
           xhr_container_id = carousel[key].id + '_parent';
 
-          console.debug('load HTML data on carousel id: ' + carousel[key].id);
+          // console.debug('load HTML data on carousel id: ' + carousel[key].id);
           j1.loadHTML({
             xhr_container_id: xhr_container_id,
             xhr_data_path:    xhr_data_path,
             xhr_data_element: carousel[key].id
           });
         } else {
-          console.debug('carousel found disabled on id: ' + carousel[key].id);
+          // console.debug('carousel found disabled on id: ' + carousel[key].id);
           active_carousels--;
         }
       });
-      console.debug('carousels loaded in page enabled|all: ' + active_carousels + '|' + numcarousels);
+      // console.debug('carousels loaded in page enabled|all: ' + active_carousels + '|' + numcarousels);
       _this.setState('data_loaded');
     }, // END loadcarouselHTML
 
