@@ -2636,53 +2636,69 @@ var j1 = (function (options) {
     //
     // -------------------------------------------------------------------------
     registerMonitors: function () {
+      var cls;
+      var lcp
+      var cumulated_cls = 0;
+      var cumulated_lcp = 0;
+      const development = ('{{environment}}'.includes('prod')) ? false : true;
 
-      // add PerformanceObserver to monitor the 'LCP' of a page load
+      // PerformanceObserver to monitor the 'LCP' of a page load
       // see: https://developer.mozilla.org/en-US/docs/Web/API/LargestContentfulPaint
       //
-      var lcp;
-      var cumulated_lcp = 0;
       const performanceObserverLCP = new PerformanceObserver((entryList) => {
-        var logger        = log4javascript.getLogger('PerformanceObserver');
         const entries     = entryList.getEntries();
+
+        // logger API used for deveöopment only
+        //
+        if (development) {
+          var logger = log4javascript.getLogger('PerformanceObserver');
+        }
+
         // Use the latest LCP candidate
         const lastEntry   = entries[entries.length - 1];
         var lastEntryText = JSON.stringify(lastEntry, null, 2);
 
-        cumulated_lcp += lastEntry.renderTime;
-        var lcp_full = cumulated_lcp/1000;
-        lcp = lcp_full.toFixed(3);
+        cumulated_lcp  += lastEntry.renderTime;
+        var lcp_full    = cumulated_lcp/1000;
+        lcp             = lcp_full.toFixed(3);
 
-        if ( lastEntry.url != '' ) {
-          logger.debug('\n' + 'Largest Contentful Paint (LCP), image/url:', lastEntry.url);
+        var url       = lastEntry.url;
+        var pathname  = url.replace( /^[a-zA-Z]{3,5}\:\/{2}[a-zA-Z0-9_.:-]+\//, '' );
+
+        if (development && lastEntry.url != '') {
+          logger.debug('\n' + 'Largest Contentful Paint (LCP), url:', pathname);
         } else {
-          // jadams, 2023-06-07:
-          // logger.debug('\n' + 'Largest Contentful Paint (LCP), text:' + '\n', lastEntry.element.innerText.substring(0, 80) + ' ...');
+          console.debug(`Largest Contentful Paint (LCP), url: ${pathname}`);
         }
 
-        // logger.debug('\n' + 'Largest Contentful Paint (LCP):', lastEntryText);
-
-        if (lcp > 2.5) {
+        if (development) {
+          if (lcp > 2.5) {
             logger.warn('\n' + 'Largest Contentful Paint (LCP), cumulated:', lcp);
-        } else {
+          } else {
             logger.info('\n' + 'Largest Contentful Paint (LCP), cumulated:', lcp);
+          }
+        } else {
+          if (lcp > 2.5) {
+            console.warn(`Largest Contentful Paint (LCP), cumulated: ${lcp}`);
+          } else {
+            console.debug(`Largest Contentful Paint (LCP), cumulated: ${lcp}`);
+          }
         }
 
-      }); // END observer
+      }); // END performanceObserverLCP
 
-      var cls;
-      var cumulated_cls = 0;
+      // PerformanceObserver to monitor the 'CLS' of a page load
+      //
       const performanceObserverCLS = new PerformanceObserver(entryList => {
-        var logger  = log4javascript.getLogger('PerformanceObserver');
         var entries = entryList.getEntries() || [];
 
+        // logger API used for deveöopment only
+        //
+        if (development) {
+          var logger = log4javascript.getLogger('PerformanceObserver');
+        }
+
         entries.forEach(entry => {
-
-          // var entryID = entry.sources[0].node.firstElementChild.id;
-          // logger.debug('\n' + 'Cumulative Layout Shift (CLS), entry object:', entryID);
-
-          // var entryText = JSON.stringify(entry.sources[0], null, 2);
-          // logger.debug('\n' + 'Cumulative Layout Shift (CLS), entry object:', entryText);
 
           if (entry.sources) {
 
@@ -2690,11 +2706,11 @@ var j1 = (function (options) {
             if (!entry.hadRecentInput) {
               // cumulate values
               cumulated_cls += entry.value;
-              cls = cumulated_cls.toFixed(3);
+              cls            = cumulated_cls.toFixed(3);
             }
 
             for (const {node, currentRect, previousRect} of entry.sources) {
-              if (typeof node.firstElementChild != 'null' && typeof node.firstElementChild != 'undefined') {
+              if (node.hasOwnProperty('firstElementChild') && typeof node.firstElementChild != 'null' && typeof node.firstElementChild != 'undefined') {
                 var id = '';
                 try {
                   id = node.firstElementChild.id;
@@ -2703,7 +2719,7 @@ var j1 = (function (options) {
                   id = 'missing';
                 }
 
-                if (id !== 'missing' && id !== '' && cls > 0.01) {
+                if (development && id !== 'missing' && id !== '' && cls > 0.01) {
                   if (cls > 0.1) {
                     logger.warn('\n' + 'Cumulative Layout Shift (CLS), entry id: ', id);
                     logger.warn('\n' + 'Cumulative Layout Shift (CLS): ', cls);
@@ -2718,17 +2734,22 @@ var j1 = (function (options) {
 
         }); // END forEach entry
 
-      }); // END observer
+      }); // END performanceObserverCLS
 
-      // add ResizeObserver to monitor the page height of dynamic pages
+      // ResizeObserver to monitor the changes on page height (dynamic pages)
       // see: https://stackoverflow.com/questions/14866775/detect-document-height-change
       //
       const resizeObserver = new ResizeObserver(entries => {
         var scrollOffsetCorrection  = scrollerOptions.smoothscroll.offsetCorrection;
-        var logger                = log4javascript.getLogger('ResizeObserver');
         const body                  = document.body,
               html                  = document.documentElement,
               scrollOffset          = j1.getScrollOffset(scrollOffsetCorrection);
+
+        // logger API used for deveöopment only
+        //
+        if (development) {
+          var logger = log4javascript.getLogger('ResizeObserver');
+        }
 
         // get the page height from the DOM
         //
@@ -2784,22 +2805,26 @@ var j1 = (function (options) {
           if (growthRatio >= 5) {
             j1['pageMonitor'].pageType = 'dynamic';
 
-            logger.debug('\n' + 'growthRatio: ' + j1['pageMonitor'].growthRatio + '%');
-            logger.debug('\n' + 'page detected as: dynamic');
+            if (development) {
+              logger.debug('\n' + 'growthRatio: ' + j1['pageMonitor'].growthRatio + '%');
+              logger.debug('\n' + 'page detected as: dynamic');
+            }
 
           } else {
             // set the page type to 'static' if low growth detected
             //
             if (typeof j1['pageMonitor'].growthRatio != 'undefined' && j1['pageMonitor'].growthRatio > 0) {
-              logger.debug('\n' + 'growthRatio: ' + j1['pageMonitor'].growthRatio + '%');
               j1['pageMonitor'].pageType = 'static';
-              logger.debug('\n' + 'page detected as: static');
+              if (development) {
+                logger.debug('\n' + 'growthRatio: ' + j1['pageMonitor'].growthRatio + '%');
+                logger.debug('\n' + 'page detected as: static');
+              }
             }
           } // END if growthRatio
 
         } // END if j1['pageMonitor']
 
-      }); // END Observer
+      }); // END resizeObserver
 
       // -----------------------------------------------------------------------
       // run all observers for page monitoring

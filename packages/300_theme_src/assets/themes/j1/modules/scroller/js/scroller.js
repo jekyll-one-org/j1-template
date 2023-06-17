@@ -72,16 +72,6 @@
         _this.scroller = window;
       }
 
-      if (options.loadStatus) {
-        var spinner = '<div class="loader-ellips" style="display: none"> <span class="loader-ellips__dot"></span> <span class="loader-ellips__dot"></span> <span class="loader-ellips__dot"></span> <span class="loader-ellips__dot"></span> </div>';
-        $(spinner).insertAfter(options.elementID);
-      }
-
-      if (options.infoLastPage) {
-        var message = options.lastPageInfo;
-        $(message).insertAfter(options.elementID);
-      }
-
       // registerScrollEvent delayed until page_ready state
       //
       var dependencies_met_page_ready = setInterval (function () {
