@@ -624,7 +624,7 @@ var j1 = (function (options) {
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
         var banner_blocks = document.querySelectorAll('[id^="banner"]');
         var panel_blocks  = document.querySelectorAll('[id^="panel"]');
-        var footer_blocks = document.querySelectorAll('[id^="panel"]');
+        var footer_blocks  = document.getElementById('j1_footer');
         var banner_state;
         var panel_state;
         var footer_state;
