@@ -137,7 +137,6 @@ j1.adapter.masterslider = (function (j1, window) {
       logger  = log4javascript.getLogger('j1.adapter.masterslider');
 
       // initialize state flag
-      //
       _this.setState('started');
       // console.debug('module state: ' + _this.getState());
 
@@ -149,7 +148,6 @@ j1.adapter.masterslider = (function (j1, window) {
       _this.createSliderInstances(masterSliderOptions.sliders, msSliderManager);
 
       // initialize sliders configured if HTML portion (of sliders) loaded
-      //
       var dependencies_met_data_loaded = setInterval(function() {
         if (_this.getState() == 'data_loaded') {
           logger.info('\n' + 'ms module version detected: ' + moduleVersion);
@@ -160,13 +158,14 @@ j1.adapter.masterslider = (function (j1, window) {
         } // END dependencies_met_j1_finished
       }, 10);
 
-      // make sure the 'content' section is visible BEFORE setting-up sliders
-      //
+      // load the slider manager to DISPLAY instances in page (if visible)
       var dependencies_met_module_finished = setInterval(function() {
-        var contentState    = $('#content').css("display");
-        var contentVisible  = (contentState == 'block') ? true: false;
+        var pageState     = $('#no_flicker').css("display");
+        var pageVisible   = (pageState == 'block') ? true : false;
+        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
-        if (_this.getState() == 'sliders_initialized' && contentVisible) {
+//      if (_this.getState() == 'sliders_initialized' && pageVisible && atticFinished) {
+        if (_this.getState() == 'sliders_initialized' && pageVisible) {
             // TODO: Check why a timeout is required to load the Slider Manager
             setTimeout (function() {
               if (sliderManager) document.body.appendChild(msSliderManager);
@@ -410,6 +409,8 @@ j1.adapter.masterslider = (function (j1, window) {
           }
         });
 
+        // close jQuery ready() function once
+
         var msSliderManagerItem;
         msSliderManagerItem        = '\n' + '  console.debug("initializing MS Slider Manager finished");' + '\n';
         msSliderManagerItem       +=  '});' + '\n';
@@ -487,6 +488,11 @@ j1.adapter.masterslider = (function (j1, window) {
           logger.debug('\n' + 'slider events are being initialized on id: ' + index);
 
           slider[index].api.addEventListener(MSSliderEvent.WAITING, function(e) {
+          var brutze = e;
+
+          // var currentSlide = masterslider_1.api.view.currentSlide;
+          // var currentSlide = currSlider.api.view.currentSlide;
+
           var controller      = e.target.view.controller;
           var controllerValue = e.target.view.controller.value;
           var isLoading       = e.target.currentSlide.$loading.length;
@@ -499,6 +505,28 @@ j1.adapter.masterslider = (function (j1, window) {
           }
 
         });
+
+        // var currSlider = 'masterslider_1';
+        // currSlider.api.addEventListener(MSSliderEvent.CHANGE_START, function(currSlider) {
+        //   // var currentSlide = masterslider_1.api.view.currentSlide;
+        //   var currentSlide = currSlider.api.view.currentSlide;
+        //
+        //   // dispatches when the slider's current slide change starts.
+        //   logger.info('\n' + 'slider is being changed on id: ');
+        // });
+
+        // var selector = "#" + slider[key].id;
+        // if ($(selector).length) {
+        //   $(document).on("click", selector, function(e) {
+        //     // e.preventDefault();
+        //
+        //     var elm     = e.currentTarget.attributes[0];
+        //     var img_src = e.target.currentSrc;
+        //     var id      = e.handleObj.selector;
+        //
+        //     logger.info('\n' + 'click event on id: ' + e.currentTarget.id);
+        //   });
+        // }
 
       });
 
