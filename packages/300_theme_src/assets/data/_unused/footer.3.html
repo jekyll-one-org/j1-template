@@ -44,26 +44,19 @@ exclude_from_search:                    true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config        = site.data.j1_config %}
-{% assign blocks                 = site.data.blocks %}
-{% assign modules                = site.data.modules %}
-
-{% comment %} Set config options
--------------------------------------------------------------------------------- {% endcomment %}
-{% assign footer_config_defaults = blocks.defaults.footer %}
-{% assign footer_config_settings = blocks.footer %}
+{% assign template_config           = site.data.j1_config %}
+{% assign blocks                    = site.data.blocks %}
+{% assign modules                   = site.data.modules %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign environment            = site.environment %}
-
-{% assign footer_config_defaults = footer_config_defaults.defaults %}
-{% assign footer_config_settings = footer_config_settings.settings %}
+{% assign environment               = site.environment %}
+{% assign footer_defaults           = blocks.defaults.footer.defaults %}
+{% assign footer_settings           = blocks.footer.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign footer_options         = footer_config_defaults | merge: footer_config_settings %}
-
+{% assign footer_options            = footer_defaults | merge: footer_settings %}
 
 {% comment %} Set HELPER variables
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -85,7 +78,7 @@ exclude_from_search:                    true
   <meta name="robots" content="noindex, nofollow" />
 </head>
 
-{% for items in footer_config_settings %}
+{% for items in footer_settings %}
   {% assign key             = items[0] %}
   {% assign value           = items[1] %}
   {% assign footer_config   = value %}
@@ -125,7 +118,7 @@ exclude_from_search:                    true
         {% endif %}
 
         {% assign enabled_boxes   = 0 %}
-        {% assign footer_options  = footer_config_defaults.footer | merge: footer_settings %}
+        {% assign footer_options  = footer_defaults.footer | merge: footer_settings %}
         {% if debug %} <!-- footer_options: {{ footer_options }} --> {% endif %}
 
         {% comment %} Calculate number of enabled footer boxes
@@ -137,11 +130,12 @@ exclude_from_search:                    true
         {% assign footer_box_width_md = 12 | divided_by:enabled_boxes %}
 
         <!-- [INFO   ] [~/assets/data/footer.html                ] [Set footer box column width to: {{ footer_box_width_md }}] -->
-        <!-- div id="{{footer_config_defaults.container-id}}" class="{{footer_options.theme}}" -->
-        <div id="{{footer_settings.id}}" class=" {{footer_settings.properties}}">
+        <!-- div id="{{footer_defaults.container-id}}" class="{{footer_options.theme}}" -->
+        <div id="{{footer_settings.active_footer}}" class=" {{footer_settings.properties}}">
 
+          footer_config: {{ footer_config | debug }}
 
-          {% if footer_settings.wave.top.enabled %}
+          {% if footer_config.wave.top.enabled %}
             {{footer_wave_top}}
           {% endif %}
 

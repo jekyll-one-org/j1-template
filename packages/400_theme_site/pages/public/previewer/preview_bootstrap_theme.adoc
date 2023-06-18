@@ -236,7 +236,6 @@ colors. Then, customize with `.bg-*` utilities.
     </div>
   </nav>
 
-
   <nav class="navbar navbar-expand-lg navbar-light md-light">
     <div class="container-fluid">
       <a class="link-no-decoration navbar-brand" href="javascript:void(0)">Navbar</a>
@@ -287,8 +286,8 @@ colors. Then, customize with `.bg-*` utilities.
 
 [source, html]
 ----
-  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
+  <div class="container-fluid">
     <a class="link-no-decoration navbar-brand" href="javascript:void(0)">Navbar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
       data-bs-target="#navbarColor01" aria-controls="navbarColor01"
@@ -330,7 +329,97 @@ colors. Then, customize with `.bg-*` utilities.
       </form>
     </div>
   </div>
-  </nav>
+</nav>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
+  <div class="container-fluid">
+    <a class="link-no-decoration navbar-brand" href="javascript:void(0)">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarColor02" aria-controls="navbarColor02"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse ml-2" id="navbarColor02">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="link-no-decoration nav-link active" href="javascript:void(0)">Home
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="link-no-decoration nav-link" href="javascript:void(0)">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="link-no-decoration nav-link" href="javascript:void(0)">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="link-no-decoration nav-link" href="javascript:void(0)">About</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="link-no-decoration nav-link dropdown-toggle" data-bs-toggle="dropdown"
+            href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+          <div class="dropdown-menu">
+            <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Action</a>
+            <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Another action</a>
+            <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Something else here</a>
+            <div class="dropdown-divider"></div>
+            <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Separated link</a>
+          </div>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control mt-1" type="text" placeholder="Search">
+        <button class="btn btn-secondary btn-sm ml-3" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+<nav class="navbar navbar-expand-lg navbar-light md-light">
+  <div class="container-fluid">
+    <a class="link-no-decoration navbar-brand" href="javascript:void(0)">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+      data-bs-target="#navbarColor03" aria-controls="navbarColor03"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse ml-2" id="navbarColor03">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item">
+          <a class="link-no-decoration nav-link active" href="javascript:void(0)">Home
+            <span class="visually-hidden">(current)</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="link-no-decoration nav-link" href="javascript:void(0)">Features</a>
+        </li>
+        <li class="nav-item">
+          <a class="link-no-decoration nav-link" href="javascript:void(0)">Pricing</a>
+        </li>
+        <li class="nav-item">
+          <a class="link-no-decoration nav-link" href="javascript:void(0)">About</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="link-no-decoration nav-link dropdown-toggle" data-bs-toggle="dropdown"
+            href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+          <div class="dropdown-menu">
+            <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Action</a>
+            <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Another action</a>
+            <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Something else here</a>
+            <div class="dropdown-divider"></div>
+            <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Separated link</a>
+          </div>
+        </li>
+      </ul>
+      <form class="d-flex">
+        <input class="form-control mt-1" type="text" placeholder="Search">
+        <button class="btn btn-secondary btn-sm ml-3" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>
 ----
 endif::[]
 

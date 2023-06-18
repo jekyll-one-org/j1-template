@@ -45,10 +45,14 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign themer_defaults   = modules.defaults.themer.defaults %}
 {% assign themer_settings   = modules.themer.settings %}
+{% assign footer_defaults   = blocks.defaults.footer.defaults %}
+{% assign footer_settings   = blocks.footer.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign themer_options    = themer_defaults| merge: themer_settings %}
+{% assign footer_options    = footer_defaults | merge: footer_settings %}
+{% assign footer_id         = footer_options.active_footer %}
 {% assign default_theme     = template_config.theme %}
 {% assign theme_base        = "core/css/themes" %}
 
@@ -64,7 +68,6 @@ regenerate:                             true
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
 {% endif %}
-
 
 /*
  # -----------------------------------------------------------------------------
@@ -214,7 +217,7 @@ j1.adapter.themer = (function (j1, window) {
       // Find conterpart (show) in the j1.adapter
       // hide content|footer until 'page' is loaded
       $('#content').hide();
-      $('#j1_footer').hide();
+      $('{{footer_id}}').hide();
 
       // jadams, 2021-07-25: problem seems NOT an timing issue on the iPad
       // platform. (General) Dependency should be REMOVED!!!

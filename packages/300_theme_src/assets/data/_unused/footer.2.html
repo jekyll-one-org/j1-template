@@ -18,6 +18,9 @@ exclude_from_search:                    true
  # J1 Theme is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
+ # NOTE: All footer id's are prefixed by 'foooter_'
+ #
+ # -----------------------------------------------------------------------------
  # Test data:
  #    {{ variable | debug }}
  # -----------------------------------------------------------------------------
@@ -44,25 +47,18 @@ exclude_from_search:                    true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config        = site.data.j1_config %}
-{% assign blocks                 = site.data.blocks %}
-{% assign modules                = site.data.modules %}
-
-{% comment %} Set config options
--------------------------------------------------------------------------------- {% endcomment %}
-{% assign footer_config_defaults = blocks.defaults.footer %}
-{% assign footer_config_settings = blocks.footer %}
+{% assign footer_defaults         = site.data.blocks.defaults.footer %}
+{% assign footer_settings         = site.data.blocks.settings.footer %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign environment            = site.environment %}
-
-{% assign footer_config_defaults = footer_config_defaults.defaults %}
-{% assign footer_config_settings = footer_config_settings.settings %}
+{% assign footer_defaults        = footer_config_defaults.defaults %}
+{% assign footer_settings        = footer_config_settings.settings %}
 
 {% comment %} Set config options
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign footer_options         = footer_config_defaults | merge: footer_config_settings %}
+{% assign footer_options            = footer_defaults | merge: footer_settings %}
 
 
 {% comment %} Set HELPER variables
@@ -76,6 +72,7 @@ exclude_from_search:                    true
   {% assign production = true %}
 {% endif %}
 
+{{ variable | debug }}
 
 {% comment %} Main
 ================================================================================ {% endcomment %}
@@ -138,8 +135,7 @@ exclude_from_search:                    true
 
         <!-- [INFO   ] [~/assets/data/footer.html                ] [Set footer box column width to: {{ footer_box_width_md }}] -->
         <!-- div id="{{footer_config_defaults.container-id}}" class="{{footer_options.theme}}" -->
-        <div id="{{footer_settings.id}}" class=" {{footer_settings.properties}}">
-
+        <div id="{{footer_options.active_footer}}" class=" {{footer_settings.properties}}">
 
           {% if footer_settings.wave.top.enabled %}
             {{footer_wave_top}}

@@ -11,7 +11,9 @@
 # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
 #
 # ------------------------------------------------------------------------------
-
+# NOTE: All footer id's has to be prefixed by 'footer_'
+#
+# ------------------------------------------------------------------------------
 # ------------------------------------------------------------------------------
 # Description (used for J1 CC only)
 #
@@ -25,6 +27,9 @@ description:
 # SETTINGS
 #
 settings:
+  enabled:                              true
+
+  active_footer:                        footer_uno
 
   # ----------------------------------------------------------------------------
   # FOOTER properties
@@ -32,15 +37,14 @@ settings:
   footers:
 
     # --------------------------------------------------------------------------
-    # Footer UNO light
+    # Footer UNO
     #
-    - name:                             Footer UNO light
+    - name:                             Footer UNO
       footer:
         enabled:                        true
 
-        id:                             footer-en
+        id:                             footer_uno
         comment:                        Footer UNO EN-EN
-        theme:                          footer-light-theme
         properties:                     mt-4
 
         wave:

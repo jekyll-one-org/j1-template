@@ -44,14 +44,8 @@ exclude_from_search:                    true
 
 {% comment %} Set config files
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign template_config        = site.data.j1_config %}
-{% assign blocks                 = site.data.blocks %}
-{% assign modules                = site.data.modules %}
-
-{% comment %} Set config options
--------------------------------------------------------------------------------- {% endcomment %}
-{% assign footer_config_defaults = blocks.defaults.footer %}
-{% assign footer_config_settings = blocks.footer %}
+{% assign footer_config_defaults = site.data.blocks.defaults.footer %}
+{% assign footer_config_settings = site.data.blocks.footer %}
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -59,11 +53,6 @@ exclude_from_search:                    true
 
 {% assign footer_config_defaults = footer_config_defaults.defaults %}
 {% assign footer_config_settings = footer_config_settings.settings %}
-
-{% comment %} Set config options
--------------------------------------------------------------------------------- {% endcomment %}
-{% assign footer_options         = footer_config_defaults | merge: footer_config_settings %}
-
 
 {% comment %} Set HELPER variables
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -138,8 +127,7 @@ exclude_from_search:                    true
 
         <!-- [INFO   ] [~/assets/data/footer.html                ] [Set footer box column width to: {{ footer_box_width_md }}] -->
         <!-- div id="{{footer_config_defaults.container-id}}" class="{{footer_options.theme}}" -->
-        <div id="{{footer_settings.id}}" class=" {{footer_settings.properties}}">
-
+        <div id="{{footer_config_defaults.container-id}}" class=" {{footer_settings.properties}}">
 
           {% if footer_settings.wave.top.enabled %}
             {{footer_wave_top}}

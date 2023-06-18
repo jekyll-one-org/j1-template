@@ -47,15 +47,11 @@ regenerate:                             true
 
 {% comment %} Set config data
 -------------------------------------------------------------------------------- {% endcomment %}
-{% assign banner_defaults           = blocks.defaults.banner.defaults %}
-{% assign banner_settings           = blocks.banner.settings %}
-
-{% assign panel_defaults            = blocks.defaults.panel.defaults %}
-{% assign panel_settings            = blocks.panel.settings %}
-
-{% assign footer_defaults           = blocks.defaults.footer.defaults %}
-{% assign footer_settings           = blocks.footer.settings %}
-
+{% assign banner_config_defaults    = blocks.defaults.banner.defaults %}
+{% assign banner_config_settings    = blocks.banner.settings %}
+{% assign panel_config_defaults     = blocks.defaults.panel.defaults %}
+{% assign panel_config_settings     = blocks.panel.settings %}
+{% assign footer_config_defaults    = blocks.defaults.footer.defaults %}
 {% assign toccer_defaults           = modules.defaults.toccer.defaults %}
 
 {% assign cookie_defaults           = modules.defaults.cookies.defaults %}
@@ -78,20 +74,18 @@ regenerate:                             true
 {% assign toccer_options            = toccer_defaults | merge: toccer_settings %}
 {% assign themer_options            = themer_defaults| merge: themer_settings %}
 {% assign cookie_options            = cookie_defaults | merge: cookie_settings %}
-{% assign footer_options            = footer_defaults | merge: footer_settings %}
 
 {% assign authentication_options    = authentication_defaults | merge: authentication_settings %}
 
-
-
-{% assign footer_id                 = footer_options.active_footer %}
-{% assign footer_data_path          = footer_defaults.data_path %}
-{% assign banner_data_path          = banner_defaults.data_path %}
-{% assign panel_data_path           = panel_defaults.data_path %}
+{% assign footer_id                 = footer_config_defaults.container-id %}
+{% assign footer_data_path          = footer_config_defaults.data_path %}
+{% assign banner_data_path          = banner_config_defaults.data_path %}
+{% assign panel_data_path           = panel_config_defaults.data_path %}
 
 {% assign themer_enabled            = modules.themer_options.enabled %}
 {% assign themer_reloadPageOnChange = modules.themer_options.reloadPageOnChange %}
 {% assign themer_hideOnReload       = modules.themer_options.hideOnReload %}
+
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -492,97 +486,66 @@ var j1 = (function (options) {
               expires:  0
             });
 
-            // -----------------------------------------------------------------
+            // -----------------------------------------------------------------------
             // load|initialize page resources for block elements
             // NOTE: asynchronous calls should be rewitten to xhrData
             // NOTE: Find $('#content').hide() conterpart in themer adapter
-            // -----------------------------------------------------------------
+            // -----------------------------------------------------------------------
             var dependencies_met_page_ready = setInterval (function (options) {
               var pageState     = $('#no_flicker').css("display");
               var pageVisible   = (pageState == 'block') ? true : false;
               var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
-              var banner_blocks = document.querySelectorAll('[id^="banner"]').length;
-              var panel_blocks  = document.querySelectorAll('[id^="panel"]').length;
-              var footer_blocks = document.querySelectorAll('[id^="footer"]').length;
-              var banners_exits = (banner_blocks > 0) ? true : false;
-              var panels_exists = (panel_blocks > 0)  ? true : false;
-              var footer_exists = (footer_blocks > 0) ? true : false;
+              var banner_blocks = document.querySelectorAll('[id^="banner"]');
+              var panel_blocks  = document.querySelectorAll('[id^="panel"]');
+              var footer_blocks  = document.getElementById('j1_footer');
               var banner_state;
               var panel_state;
               var footer_state;
 
               if (j1.getState() === 'finished' && pageVisible && atticFinished) {
                 logger.info('\n' + 'load block elements');
-                if (banners_exits) {j1.initBanner(settings);}
-                if (panels_exists) {j1.initPanel(settings)};
-                if (footer_exists) {j1.initFooter(settings);}
+                j1.initFooter(settings);
+                j1.initBanner(settings);
+                j1.initPanel(settings);
 
-                if (banner_blocks || panel_blocks) {
-                  // pages having banners or panels
-
+                if (banner_blocks.length || panel_blocks.length) {
                   var dependencies_met_blocks_ready = setInterval (function (settings) {
-                    if (footer_exists) {
-                      footer_state = j1.getXhrDataState('#{{footer_id}}');
-                    } else {
-                      // pages w/o footer
-                      footer_state = 'success';
-                    }
+                    banner_state = 'failed';
+                    panel_state  = 'failed';
+                    footer_state = j1.getXhrDataState('#j1_footer');
 
-                    // check bannern if HTML content loaded successfully
-                    //
-                    if (banners_exits) {
-                      Object.entries(j1.xhrDataState).forEach(entry => {
-                        const [key, value] = entry;
-                        if (key.includes('banner')) {
-                          banner_state = value;
-                        }
-                      });
-                    } else {
-                      // pages w/o banners
-                      banner_state = 'success';
-                    }
+                    // check banner states if HTML content loaded successfully
+                    Object.entries(j1.xhrDataState).forEach(entry => {
+                      const [key, value] = entry;
+                      if (key.includes('banner')) {
+                        banner_state = value;
+                      }
+                    });
 
-                    // check panels if HTML content loaded successfully
-                    //
-                    if (panels_exists)  {
-                      Object.entries(j1.xhrDataState).forEach(entry => {
-                        const [key, value] = entry;
-                        if (key.includes('panel')) {
-                          panel_state = value;
-                        }
-                      });
-                    } else {
-                      // pages w/o panels
-                      panel_state = 'success';
-                    }
+                    // check panel states if HTML content  loaded successfully
+                    Object.entries(j1.xhrDataState).forEach(entry => {
+                      const [key, value] = entry;
+                      if (key.includes('panel')) {
+                        panel_state = value;
+                      }
+                    });
 
                     // show the content section for 'block content' to optimze CLS
-                    //
                     if (banner_state == 'success' && panel_state == 'success' && footer_state == 'success') {
-                      // show the content|footer
-                      //
+                      // show main content
                       $('#content').show();
-                      $('#{{footer_id}}').show();
+                      $('#j1_footer').show();
 
                       clearInterval(dependencies_met_page_ready);
                       clearInterval(dependencies_met_blocks_ready);
                     }
                   }, 10);
                 } else {
-                  // pages w/o banners or panels
-
-                  if (footer_exists) {
-                    footer_state = j1.getXhrDataState('#{{footer_id}}');
-                  } else {
-                    // pages w/o footer
-                    footer_state = 'success';
-                  }
-
-                  // show the content|footer
-                  //
-                  if ( footer_state == 'success') {
+                  // show the content section for 'block content' to optimze CLS
+                  footer_state = j1.getXhrDataState('#j1_footer');
+                  if (footer_state == 'success') {
                     $('#content').show();
-                    $('#{{footer_id}}').show();
+                    $('#j1_footer').show();
 
                     clearInterval(dependencies_met_page_ready);
                   }
@@ -659,88 +622,57 @@ var j1 = (function (options) {
         var pageState     = $('#no_flicker').css("display");
         var pageVisible   = (pageState == 'block') ? true : false;
         var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
-        var banner_blocks = document.querySelectorAll('[id^="banner"]').length;
-        var panel_blocks  = document.querySelectorAll('[id^="panel"]').length;
-        var footer_blocks = document.querySelectorAll('[id^="footer"]').length;
-        var banners_exits = (banner_blocks > 0) ? true : false;
-        var panels_exists = (panel_blocks > 0)  ? true : false;
-        var footer_exists = (footer_blocks > 0) ? true : false;
+        var banner_blocks = document.querySelectorAll('[id^="banner"]');
+        var panel_blocks  = document.querySelectorAll('[id^="panel"]');
+        var footer_blocks  = document.getElementById('j1_footer');
         var banner_state;
         var panel_state;
         var footer_state;
 
         if (j1.getState() === 'finished' && pageVisible && atticFinished) {
           logger.info('\n' + 'load block elements');
-          if (banners_exits) {j1.initBanner(settings);}
-          if (panels_exists) {j1.initPanel(settings)};
-          if (footer_exists) {j1.initFooter(settings);}
+          j1.initFooter(settings);
+          j1.initBanner(settings);
+          j1.initPanel(settings);
 
-          if (banner_blocks || panel_blocks) {
-            // pages having banners or panels
-
+          if (banner_blocks.length || panel_blocks.length) {
             var dependencies_met_blocks_ready = setInterval (function (settings) {
-              if (footer_exists) {
-                footer_state = j1.getXhrDataState('#{{footer_id}}');
-              } else {
-                // pages w/o footer
-                footer_state = 'success';
-              }
+              banner_state = 'failed';
+              panel_state  = 'failed';
+              footer_state = j1.getXhrDataState('#j1_footer');
 
-              // check bannern if HTML content loaded successfully
-              //
-              if (banners_exits) {
-                Object.entries(j1.xhrDataState).forEach(entry => {
-                  const [key, value] = entry;
-                  if (key.includes('banner')) {
-                    banner_state = value;
-                  }
-                });
-              } else {
-                // pages w/o banners
-                banner_state = 'success';
-              }
+              // check banner states if HTML content loaded successfully
+              Object.entries(j1.xhrDataState).forEach(entry => {
+                const [key, value] = entry;
+                if (key.includes('banner')) {
+                  banner_state = value;
+                }
+              });
 
-              // check panels if HTML content loaded successfully
-              //
-              if (panels_exists)  {
-                Object.entries(j1.xhrDataState).forEach(entry => {
-                  const [key, value] = entry;
-                  if (key.includes('panel')) {
-                    panel_state = value;
-                  }
-                });
-              } else {
-                // pages w/o panels
-                panel_state = 'success';
-              }
+              // check panel states if HTML content  loaded successfully
+              Object.entries(j1.xhrDataState).forEach(entry => {
+                const [key, value] = entry;
+                if (key.includes('panel')) {
+                  panel_state = value;
+                }
+              });
 
               // show the content section for 'block content' to optimze CLS
-              //
               if (banner_state == 'success' && panel_state == 'success' && footer_state == 'success') {
-                // show the content|footer
-                //
+                // show main content
                 $('#content').show();
-                $('#{{footer_id}}').show();
+                $('#j1_footer').show();
 
                 clearInterval(dependencies_met_page_ready);
                 clearInterval(dependencies_met_blocks_ready);
               }
             }, 10);
           } else {
-            // pages w/o banners or panels
-
-            if (footer_exists) {
-              footer_state = j1.getXhrDataState('#{{footer_id}}');
-            } else {
-              // pages w/o footer
-              footer_state = 'success';
-            }
-
-            // show the content|footer
-            //
+            // show the content section for 'block content' to optimze CLS
+            footer_state = j1.getXhrDataState('#j1_footer');
             if ( footer_state == 'success') {
               $('#content').show();
-              $('#{{footer_id}}').show();
+              $('#j1_footer').show();
 
               clearInterval(dependencies_met_page_ready);
             }
@@ -812,7 +744,7 @@ var j1 = (function (options) {
 
       {% comment %} Collect all banner id|s configured
       -------------------------------------------------------------------------- {% endcomment %}
-      {% for items in banner_settings %}
+      {% for items in banner_config_settings %}
         {% assign key   = items[0] %}
         {% assign value = items[1] %}
 
@@ -853,7 +785,7 @@ var j1 = (function (options) {
           {% assign banner_config       = nil %}
 
         {% endfor %}  {% comment %} END banner_config {% endcomment %}
-      {% endfor %}  {% comment %} END banner_settings {% endcomment %}
+      {% endfor %}  {% comment %} END banner_config_settings {% endcomment %}
 
       {% comment %} REGISTER exceptions container
       -------------------------------------------------------------------------- {% endcomment %}
@@ -922,7 +854,7 @@ var j1 = (function (options) {
 
       {% comment %} Collect all panel id|s configured
       -------------------------------------------------------------------------- {% endcomment %}
-      {% for items in panel_settings %}
+      {% for items in panel_config_settings %}
         {% assign key   = items[0] %}
         {% assign value = items[1] %}
 
@@ -962,7 +894,7 @@ var j1 = (function (options) {
 
           {% endfor %}  {% comment %} END panels {% endcomment %}
         {% endfor %}  {% comment %} END panel_config {% endcomment %}
-      {% endfor %}  {% comment %} END panel_settings {% endcomment %}
+      {% endfor %}  {% comment %} END panel_config_settings {% endcomment %}
 
       if (panel.length) {
         for (var i in panel) {
@@ -1024,7 +956,7 @@ var j1 = (function (options) {
 
       var id = '#' + '{{footer_id}}';
       var selector = $(id);
-      if (selector.length) {
+      if ( selector.length ) {
         var footer_data_path = '{{footer_data_path}} ' + id;
         selector.load(footer_data_path, cb_load_closure(id));
       } else {
