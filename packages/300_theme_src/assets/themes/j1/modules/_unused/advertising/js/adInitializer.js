@@ -78,10 +78,13 @@ regenerate:                             true
 $(function () {
 
   var dependencies_met_page_visible = setInterval (function (options) {
-    var pageState     = $('#no_flicker').css("display");
-    var pageVisible   = (pageState == 'block') ? true: false;
+    var contentState    = $('#content').css("display");
+    var contentVisible  = (contentState == 'block') ? true: false;
+    var ads_found       = document.getElementsByClassName('adsbygoogle').length;
+    var ads_initialized = 0;
 
-    if (j1.getState() === 'finished' && pageVisible) {
+    if (j1.getState() === 'finished' && contentVisible && ads_found) {
+
     {% if advertising %}
 
         var logger                = log4javascript.getLogger('j1.core.advertising');
@@ -94,7 +97,6 @@ $(function () {
         var aadvertisingSettings  = $.extend({},   {{advertising_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
         var advertisingOptions    = $.extend(true, {}, advertisingDefaults, aadvertisingSettings);
         var ad_containers;
-        var ads_found;
 
         if (!validProviderID) {
           // skip setup processes
@@ -106,9 +108,10 @@ $(function () {
         ad_containers = advertisingOptions.google.ads;
         ad_containers.forEach(function (ad) {
           if (user_consent.personalization) {
+            var currentDiv = document.getElementById(ad.id);
+
             if (ad.enabled) {
-              var currentDiv = document.getElementById(ad.id);
-              var ins        = document.createElement('ins');
+              var ins = document.createElement('ins');
 
               currentDiv.appendChild(ins);
               var insID = 'ins_' + ad.id;
@@ -122,7 +125,9 @@ $(function () {
               document.getElementById(insID).setAttribute('data-ad-format', ad.format);
               document.getElementById(insID).setAttribute('data-full-width-responsive', ad.responsive);
 
-              logger.info('\n' + 'added settings on container id ' + ad.id + ' for slot: ' + ad.slot);
+              ads_initialized ++
+            } else {
+              logger.warn('\n' + 'ad disabled on id ' + ad.id + ' for slot: ' + ad.slot);
             }
           } else {
             logger.warn('\n' + 'skipped add settings on all ad containers');
@@ -131,11 +136,17 @@ $(function () {
         });
         // END loading adverting containers
 
-        ads_found = document.getElementsByClassName('adsbygoogle').length;
-        if (ads_found) {
-          logger.info('\n' + 'ads found in page (total): ' + ads_found);
-          [].forEach.call(document.querySelectorAll('.adsbygoogle'), function() {
-            (adsbygoogle = window.adsbygoogle || []).push({});
+        if (ads_initialized > 0) {
+          logger.info('\n' + 'ads enabled found in page (total): ' + ads_found);
+//        var google_ads = document.querySelectorAll('.adsbygoogle');
+          var google_ads = document.getElementsByClassName('adsbygoogle');
+          var counter    = document.getElementsByClassName('adsbygoogle').length -1;
+
+          [].forEach.call(google_ads, function() {
+            if (counter > 0) {
+              (adsbygoogle = window.adsbygoogle || []).push({});
+            }
+            counter --;
           });
         } else {
           logger.warn('\n' + 'no ads found in page');

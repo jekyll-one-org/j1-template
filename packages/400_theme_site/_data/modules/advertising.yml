@@ -28,11 +28,13 @@ description:
 #
 settings:
   enabled:                              true
+  placement:                            manual
 
   google:
-    publisherID:                        pub-123456789012345                     # fake for testing (localhost) ONLY!
+    publisherID:                        ca-pub-3885670015316130                 # jekyll.one
 #   publisherID:                        <your-publisher-id>
 
+    autoPlaceAds:                       false
     autoHideOnUnfilled:                 false
     addBorderOnUnfilled:                true
 
@@ -47,27 +49,33 @@ settings:
     #   values:                       true|false
     #   default:                      true
     #
-    #   id
-    #   ------------------------------------------------------------------------
-    #   Enables or disables the ad unit (container). If an container is
-    #   disabled, this unit get NOT initialized for ads on any page.
-    #
-    #   values:                       string
-    #   default:                      none
-    #
     #   placement (currently NOT supported)
     #   ------------------------------------------------------------------------
-    #   Defines the placements of the unit container specified. For default
-    #   (manual), all ad units are placed on (home/content) pages manually
-    #   by adding the <ins>-code.
+    #   Defines the placement of ad unit containers. For default
+    #   (manual), all ad units are placed on content pages manually
+    #   by adding the <ins>-code on the id (Ad Properties) specified.
     #
-    #   values:                       manual|auto|content-top|content-bottom
+    #   values:                       auto|manual
     #   default:                      manual
     #
     # --------------------------------------------------------------------------
 
     # --------------------------------------------------------------------------
     # Ad Properties
+    #
+    #   id
+    #   ------------------------------------------------------------------------
+    #   Unique ad id (on an page)
+    #
+    #   values:                       ad_integer
+    #   default:                      none
+    #
+    #   layout
+    #   ------------------------------------------------------------------------
+    #   Set the layout the is used
+    #
+    #   values:                       home|page|post
+    #   default:                      none
     #
     #   styles
     #   ------------------------------------------------------------------------
@@ -126,17 +134,40 @@ settings:
 
         # container settings
         # ----------------------------------------------------------------------
-        enabled:                        true
+        enabled:                        false
+
         id:                             ad_1234567890
+        layout:                         home
 
         # ad properties
         # ----------------------------------------------------------------------
-        publisherID:                    pub-123456789012345
+        publisherID:                    ca-pub-1531613038856700
         test:                           "on"
         styles:                         "display: block;"
         slot:                           1234567890
         format:                         auto
-        responsive:                     true
+        responsive:                     false
+
+      # ------------------------------------------------------------------------
+      # Ad on slot id "1234567890"
+      #
+      - ad:
+
+        # container settings
+        # ----------------------------------------------------------------------
+        enabled:                        false
+
+        id:                             ad_1234567890
+        layout:                         page
+
+        # ad properties
+        # ----------------------------------------------------------------------
+        publisherID:                    ca-pub-1531613038856700
+        test:                           "on"
+        styles:                         "display: block;"
+        slot:                           1234567890
+        format:                         auto
+        responsive:                     false
 
       # ------------------------------------------------------------------------
       # Ad on slot id "1234567890" #2
@@ -145,12 +176,14 @@ settings:
 
         # container settings
         # ----------------------------------------------------------------------
-        enabled:                        true
-        id:                             ad_1234567890-2
+        enabled:                        false
+
+        id:                             ad_1234567890_2
+        layout:                         page
 
         # ad properties
         # ----------------------------------------------------------------------
-        publisherID:                    pub-123456789012345
+        publisherID:                    ca-pub-1531613038856700
         test:                           "on"
         styles:                         "display: block;"
         slot:                           1234567890
@@ -164,7 +197,9 @@ settings:
         # container settings
         # ----------------------------------------------------------------------
         enabled:                        false
+
         id:                             ad_1929248609
+        layout:                         page
 
         # ad properties
         # ----------------------------------------------------------------------

@@ -55,6 +55,7 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign advertising           = advertising_options.enabled %}
 {% assign advertising_provider  = advertising_options.provider %}
+{% assign layout                = page.layout %}
 
 {% comment %} Detect prod mode
 -------------------------------------------------------------------------------- {% endcomment %}
@@ -90,15 +91,17 @@ j1.adapter.advertising = (function (j1, window) {
 
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
-var environment             = '{{environment}}';
-var date                    = new Date();
-var timestamp_now           = date.toISOString();
-var gasScript               = document.createElement('script');
-var gasDiv                  = document.createElement('div');
-var gasIns                  = document.createElement('ins');
-var adInitializerScript     = document.createElement('script');
+var environment           = '{{environment}}';
+var date                  = new Date();
+var timestamp_now         = date.toISOString();
+var gasScript             = document.createElement('script');
+var gasDiv                = document.createElement('div');
+var gasIns                = document.createElement('ins');
+var adInitializerScript   = document.createElement('script');
+var advertisingProvider   = 'Google Adsense';
+var layout;
 var advertisingDefaults;
-var aadvertisingSettings;
+var advertisingSettings;
 var advertisingOptions;
 var frontmatterOptions;
 var autoHideOnUnfilled;
@@ -112,9 +115,8 @@ var baseUrl;
 var hostname;
 var cookie_names;
 var user_consent;
-var advertisingProvider;
 var publisherID;
-var validPublisherID;
+var validpublisherID;
 var _this;
 var logger;
 var logText;
@@ -149,31 +151,37 @@ var logText;
       hostname              = url.hostname;
 
       // create settings object from frontmatter
+      //
       frontmatterOptions      = options != null ? $.extend({}, options) : {};
 
+      // initialze advertisingOptions
+      //
       advertisingDefaults     = $.extend({},   {{advertising_defaults | replace: 'nil', 'null' | replace: '=>', ':' }});
-      aadvertisingSettings    = $.extend({},   {{advertising_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
-      advertisingOptions      = $.extend(true, {}, advertisingDefaults, aadvertisingSettings);
-
+      advertisingSettings     = $.extend({},   {{advertising_settings | replace: 'nil', 'null' | replace: '=>', ':' }});
+      advertisingOptions      = $.extend(true, {}, advertisingDefaults, advertisingSettings, frontmatterOptions);
+      layout                  = advertisingOptions.layout;
+      publisherID             = advertisingOptions.google.publisherID;
+      validpublisherID        = (publisherID.includes('pub-')) ? true : false;
       autoHideOnUnfilled      = advertisingOptions.google.autoHideOnUnfilled;
       addBorderOnUnfilled     = advertisingOptions.google.addBorderOnUnfilled;
       checkTrackingProtection = advertisingOptions.google.checkTrackingProtection;
       showErrorPageOnBlocked  = advertisingOptions.google.showErrorPageOnBlocked;
 
+      // run initialization on 'contentVisible'
+      //
       var dependencies_met_page_ready = setInterval (function (options) {
-        var pageState     = $('#no_flicker').css("display");
-        var pageVisible   = (pageState == 'block') ? true: false;
-        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
+        var contentState      = $('#content').css("display");
+        var contentVisible    = (contentState == 'block') ? true: false;
 
-//      if (j1.getState() === 'finished' && pageVisible && atticFinished) {
-        if (j1.getState() === 'finished' && pageVisible) {
+        if (j1.getState() === 'finished' && contentVisible) {
+
+        {% comment %} detect|load code if 'advertising' is 'enabled'
+        ------------------------------------------------------------------------ {% endcomment %}
         {% if advertising %}
+          _this.ad_initializer();
 
-          var advertisingProvider   = 'Google Adsense';
-          var providerID            = '{{advertising_options.google.publisherID}}';
-          var validProviderID       = (providerID.includes('pub-')) ? true : false;
-          if (!validProviderID) {
-            logger.warn('\n' + 'invalid publisher id: ' + providerID);
+          if (!validpublisherID) {
+            logger.warn('\n' + 'invalid publisher id: ' + publisherID);
             logger.info('\n' + 'module disabled' );
             clearInterval(dependencies_met_page_ready);
             return false;
@@ -190,22 +198,18 @@ var logText;
           if (user_consent.personalization) {
             logger.info('\n' + 'adsense api is being initialized');
 
-            publisherID         = advertisingOptions.google.publisherID;
-            advertisingProvider = 'Google Adsense';
-            validPublisherID    = (publisherID.includes('your')) ? false : true;
-
-            if (!validPublisherID) {
-              logger.debug('\n' + 'invalid publisherID detected for Google Adsense (GAS): ' + publisherID);
+            if (!validpublisherID) {
+              logger.debug('\n' + 'invalid publisherID detected for Google Adsense: ' + publisherID);
               logger.info('\n' + 'skip initialization for provider: ' + advertisingProvider);
               // return false;
             } else {
-              logger.info('\n' + 'use publisherID for Google Adsense (GAS): ' + publisherID);
+              logger.info('\n' + 'use publisherID for Google Adsense: ' + publisherID);
             }
 
             // add GAS API (Google Adsense) dynamically in head section
             // loaded async
             // -----------------------------------------------------------------
-            logger.info('\n' + 'add Google Adsense (GAS) API in section: head');
+            logger.info('\n' + 'add Google AdsenseAPI in section: head');
             gasScript.async = true;
             gasScript.id    = 'gas-api';
             gasScript.src   = '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
@@ -215,8 +219,15 @@ var logText;
 
             // setup monitor for state changes on all ads configured
             // -----------------------------------------------------------------
-            logger.info('\n' + 'setup ad monitoring');
-            _this.ad_monitor();
+            setTimeout(function () {
+              var ads_found = document.getElementsByClassName('adsbygoogle').length;
+              if (ads_found > 0) {
+                logger.info('\n' + 'setup Google Ad monitoring');
+                _this.ad_monitor();
+              } else {
+                logger.warn('\n' + 'no initialized Google Ads found in page');
+              }
+            }, 1000);
 
             // run protection check
             // -----------------------------------------------------------------
@@ -302,7 +313,7 @@ var logText;
             logger = log4javascript.getLogger('j1.adapter.advertising');
             logger.debug('\n' + 'found ads in page: #' + ads_found);
             logger.debug('\n' + 'no ads initialized, advertising disabled');
-          {% endif %}
+          {% endif %} // END if 'advertising'
 
           clearInterval(dependencies_met_page_ready);
         }
@@ -310,21 +321,111 @@ var logText;
     }, // END init
 
     // -------------------------------------------------------------------------
+    // ad_initializer()
+    // initialze all ad units in a page (ins elements)
+    // -------------------------------------------------------------------------
+    ad_initializer: function () {
+
+      var dependencies_met_page_visible = setInterval (function (options) {
+        var contentState    = $('#content').css("display");
+        var contentVisible  = (contentState == 'block') ? true: false;
+        var ads_found       = document.getElementsByClassName('adsbygoogle').length;
+        var ads_initialized = 0;
+        var ad_containers;
+
+        if (j1.getState() === 'finished' && contentVisible && ads_found) {
+          if (!validpublisherID) {
+            // skip setup processes
+            clearInterval(dependencies_met_page_visible);
+            return false;
+          }
+
+          // START create|loading adverting for containers enabled
+          ad_containers = advertisingOptions.google.ads;
+          ad_containers.forEach(function (ad) {
+            if (user_consent.personalization) {
+              var currentDiv = document.getElementById(ad.id);
+
+              if (ad.enabled && ad.layout == layout) {
+                var ins = document.createElement('ins');
+
+                currentDiv.appendChild(ins);
+                var insID = 'ins_' + ad.id;
+                ins.setAttribute('id', insID);
+                ins.className = "adsbygoogle";
+
+                document.getElementById(insID).setAttribute('style', ad.styles);
+                document.getElementById(insID).setAttribute('data-ad-test', ad.test);
+                document.getElementById(insID).setAttribute('data-ad-client', ad.publisherID);
+                document.getElementById(insID).setAttribute('data-ad-slot', ad.slot);
+                document.getElementById(insID).setAttribute('data-ad-format', ad.format);
+                document.getElementById(insID).setAttribute('data-full-width-responsive', ad.responsive);
+
+                ads_initialized ++;
+              } else {
+                if (ad.layout == layout) {
+                  logger.warn('\n' + 'ad disabled on id ' + ad.id + ' for slot: ' + ad.slot);
+                }
+              }
+            } else {
+              logger.warn('\n' + 'skipped add settings on all ad containers');
+            } // END if user_consent.personalization
+
+          });
+          // END loading adverting containers
+
+          if (ads_initialized > 0) {
+            logger.info('\n' + 'ads enabled found in page (total): ' + ads_found);
+            var google_ads = document.getElementsByClassName('adsbygoogle');
+            var counter    = document.getElementsByClassName('adsbygoogle').length;
+
+            // jadams, 2023-06-22:
+            // skip last element in google_ads (adsbygoogle-noablate)
+            // TODO: clarify for what reason an 'ins' element with
+            // class 'adsbygoogle-noablate' is added by Googgle Adsense
+            // Possible reason: publisherID is 'wrong|fake' or NOT 'verified'
+            //
+            counter--;
+
+            [].forEach.call(google_ads, function() {
+              // skip last element in google_ads (adsbygoogle-noablate)
+              if (counter > 0) {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+              }
+              counter --;
+            });
+          } else {
+            logger.warn('\n' + 'no ads found in page for layout: ' + layout);
+          } // END if ads_initialized
+
+          clearInterval(dependencies_met_page_visible);
+        } // END contentVisible|ads_found
+
+      }, 10); // END dependencies_met_page_visible
+
+    }, // END ad_initializer
+
+    // -------------------------------------------------------------------------
     // ad_monitor()
     // monitor for state changes on the ad placed in pages (if any)
     //
     // NOTE: Check visibility state of the adSlot to prevent multiple
     // processing of the same slot
+    //
+    // NOTE: Skip ad containers with class 'adsbygoogle-noablate'
+    //
     // -------------------------------------------------------------------------
     ad_monitor: function () {
-      // logger.info('\n' + 'setup ad monitoring');
       $('.adsbygoogle').attrchange({
         trackValues: true,
         callback: function (event) {
           if (event.newValue === 'unfilled') {
             var elm             = event.target.dataset;
+            var elm_classes     = event.target.className;
+            var validAdContainer = (elm_classes.includes('adsbygoogle-noablate')) ? false : true;
             var adSlotIsVisible = $('.adsbygoogle').is(":visible");
-            if (adSlotIsVisible) {
+
+            if (adSlotIsVisible && validAdContainer) {
               logger.warn('\n' + 'detected ad on slot ' + elm.adSlot  + ' in state: ' + event.newValue);
               if (addBorderOnUnfilled) {
                 $('.adsbygoogle').addClass('border--dotted');
@@ -337,10 +438,10 @@ var logText;
             }
           } else {
             // logger.info('\n' + 'found ad in state ' + event.newValue + ' on slot: ' + elm.adSlot);
-          }
+          } // END if 'unfilled'
         }
       });
-    },
+    }, // END ad_monitor
 
     // -------------------------------------------------------------------------
     // check_tracking_protection()

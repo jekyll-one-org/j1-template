@@ -200,7 +200,7 @@ resource_options:
         <hr class="notop">
       </div>
       <p>
-        <img alt="" src="assets/images/explanation.png">
+        <img alt="" src="assets/images/explanation.jpg">
       </p>
     </section>
     <section id="the_options">

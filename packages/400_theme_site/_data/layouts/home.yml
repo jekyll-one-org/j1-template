@@ -206,6 +206,22 @@ lanes:
   # ----------------------------------------------------------------------------
 
   # ----------------------------------------------------------------------------
+  # Google Adsense
+  #
+  #   Generate ad containers for Google Adsense on the 'home' page
+  #
+  # ----------------------------------------------------------------------------
+  #
+  - lane:
+      enabled:                          true
+      id:                               google_adsense_container
+      region:                           body-main
+      type:                             sync
+      base:                             _includes/google
+      path:                             templates
+      file:                             google_ads.html
+
+  # ----------------------------------------------------------------------------
   # TEASER banner
   #
   #   Simple intro element for a page to give an overview on the contents

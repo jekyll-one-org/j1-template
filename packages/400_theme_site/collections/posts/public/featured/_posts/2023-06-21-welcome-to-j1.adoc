@@ -1,10 +1,10 @@
 ---
 title:                                  Welcome
 tagline:                                Jekyll For Everyone
-#date:                                  2023-02-01 00:00:00 +0100
+#date:                                  2023-06-21 00:00:00 +0100
 
-categories:                             [ Jekyll ]
-tags:                                   [ J1, Jekyll ]
+categories:                             [ Jekyll, Featured ]
+tags:                                   [ Template, Jekyll ]
 
 image:
   path:                                 /assets/images/modules/attics/katie-moum-1920x1280.jpg
@@ -12,6 +12,8 @@ image:
   height:                               1200
   alt:                                  Jekyll for Everyone
 
+group:                                  Featured
+series:                                 Featured
 regenerate:                             false
 
 resources:                              [ animate ]
