@@ -99,17 +99,17 @@ lorem:sentences[5]
 
 lorem:sentences[5]
 
-gad::ad_1234567890["mt-4 mb-4"]
+gad::ad_7522184684["mt-4 mb-4"]
 
 lorem:sentences[5]
 
-gad::ad_1234567890-2["mt-4 mb-4"]
+gad::ad_7522184684_2["mt-4 mb-4"]
 
 === Setup
 
 lorem:sentences[10]
 
-.Frontmatter sttinss (resources)
+.Frontmatter settinss (resources)
 [source, yaml, role="noclip"]
 ----
 title:                                  Google Adsense
@@ -136,7 +136,7 @@ gad::ad_id[role="additional container classes"]
 .Example
 [source, bash, role="noclip"]
 ----
-gad::ad_1234567890["mt-4 mb-4"]
+gad::ad_7522184684["mt-4 mb-4"]
 ----
 
 lorem:sentences[5]
@@ -144,14 +144,15 @@ lorem:sentences[5]
 .Generated HTML code
 [source, html, role="noclip"]
 ----
-<div id="ad_1234567890" class="gad-container mt-4 mb-4">
-  <ins id="ins_ad_1234567890"
-      style="display: block"
-      data-ad-test="on"
-      data-ad-client="ca-pub-123456789012345"
-      data-ad-slot="1234567890"
-      data-ad-format="auto"
-      data-full-width-responsive="true">
+<div id="ad_7522184684" class="gad-container mb-5">
+  <ins id="ins_ad_7522184684"
+    class="adsbygoogle"
+    style="display:block; text-align:center;"
+    data-ad-test="on"
+    data-ad-layout="in-article"
+    data-ad-format="fluid"
+    data-ad-client="<your-publisher-id>"
+    data-ad-slot="7522184684">
   </ins>
 </div>
 ----
@@ -172,9 +173,7 @@ settings:
   enabled:                              true
 
   google:
-#   publisherID:                        pub-123456789012345
     publisherID:                        <your-publisher-id>
-
     autoHideOnUnfilled:                 false
     addBorderOnUnfilled:                true
 
@@ -183,24 +182,26 @@ settings:
   # ----------------------------------------------------------------------------
   ads:
 
-    # --------------------------------------------------------------------------
-    # Ad on slot id "1234567890"
+    # ------------------------------------------------------------------------
+    # Ad on slot id "7522184684"
     #
     - ad:
 
       # container settings
-      # ------------------------------------------------------------------------
+      # ----------------------------------------------------------------------
       enabled:                        true
-      id:                             ad_1234567890
+
+      id:                             ad_7522184684
+      layout:                         home
 
       # ad properties
-      # ------------------------------------------------------------------------
+      # ----------------------------------------------------------------------
       publisherID:                    <your-publisher-id>
       test:                           "on"
-      styles:                         "display: block;"
-      slot:                           1234567890
-      format:                         auto
-      responsive:                     true
+      styles:                         "display:block; text-align:center;"
+      slot:                           7522184684
+      ad_layout:                      in-article
+      format:                         fluid
 ----
 
 lorem:sentences[5]
@@ -216,26 +217,31 @@ lorem:sentences[5]
 
 |`styles`
 |string
-|display: block
+|none
 |Defines the CSS styles applied on an specific advertising. Contains *CSS*
-classes separated by an colon (`;`).
+classes separated by an colon (`;`). Taken from the ad-code generated
+by Adsense. +
+Example: `display:block; text-align:center;`.
 
 |`publisherID`
 |string
 |ca-pub-number\|pub-number
 |Defines the publisher id used for an advertising. *Current* accounts at
-Adsense using the format of `pub-number`.
+Adsense using the format of `ca-pub-1234567890123456` (fake id).
 
 |`format`
 |string
-|auto
-|Enables **auto**-format settings.
+|none
+|Enables **auto**-format settings. Taken from the ad-code generated
+by Adsense. +
+Example: `fluid`.
 
-|`responsive`
-|boolean
-|true
-|Enables\|Disables *responsive display* if pages changes in width or height.
-Used e.g on *mobile* devices to adjust an advertising for the view port.
+|`ad_layout`
+|string
+|none
+|Specifies the layout of the *ad*. Taken from the ad-code generated
+by Adsense. +
+Example: `in-article`.
 
 |`test`
 |string (on\|off)

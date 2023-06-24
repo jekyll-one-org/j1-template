@@ -43,8 +43,10 @@
 {% comment %} Main
 google_ads: {{google_ads | debug}}
 -------------------------------------------------------------------------------- {% endcomment %}
+
 <div class="container">
 
+  <!-- [INFO   ] [~/_includes/google/templates/google_ads.html        ] [ create ad containers for layout: {{layout}}] -->
   {% for ad in google_ads %} {% if ad.enabled and ad.layout == layout %}
   <!-- Ad container settings -->
   <div id="{{ad.id}}" class="gad-container mb-5" data-layout="{{layout}}"></div>

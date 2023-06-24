@@ -178,7 +178,6 @@ var logText;
         {% comment %} detect|load code if 'advertising' is 'enabled'
         ------------------------------------------------------------------------ {% endcomment %}
         {% if advertising %}
-
           _this.ad_initializer();
 
           if (!validpublisherID) {
@@ -190,10 +189,9 @@ var logText;
 
           {% case advertising_provider %}
           {% when "google" %}
-          // [INFO   ] [j1.adapter.advertising                              ] [ place provider: Google Adsense ]
+          // [INFO   ] [j1.adapter.advertising                  ] [ place provider: Google Adsense ]
 
           // initialize state flag
-          //
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
 
@@ -203,7 +201,7 @@ var logText;
             if (!validpublisherID) {
               logger.debug('\n' + 'invalid publisherID detected for Google Adsense: ' + publisherID);
               logger.info('\n' + 'skip initialization for provider: ' + advertisingProvider);
-              return false;
+              // return false;
             } else {
               logger.info('\n' + 'use publisherID for Google Adsense: ' + publisherID);
             }
@@ -222,7 +220,7 @@ var logText;
             // setup monitor for state changes on all ads configured
             // -----------------------------------------------------------------
             setTimeout(function () {
-              var ads_found = (document.getElementsByClassName('adsbygoogle').length > 0) ? true : false;
+              var ads_found = document.getElementsByClassName('adsbygoogle').length;
               if (ads_found > 0) {
                 logger.info('\n' + 'setup Google Ad monitoring');
                 _this.ad_monitor();
@@ -331,7 +329,7 @@ var logText;
       var dependencies_met_page_visible = setInterval (function (options) {
         var contentState    = $('#content').css("display");
         var contentVisible  = (contentState == 'block') ? true: false;
-        var ads_found       = (document.getElementsByClassName('adsbygoogle').length > 0) ? true : false;
+        var ads_found       = document.getElementsByClassName('adsbygoogle').length;
         var ads_initialized = 0;
         var ad_containers;
 
@@ -357,11 +355,11 @@ var logText;
                 ins.className = "adsbygoogle";
 
                 document.getElementById(insID).setAttribute('style', ad.styles);
-                document.getElementById(insID).setAttribute('data-ad-test', ad.test)
-                document.getElementById(insID).setAttribute('data-ad-layout', ad.ad_layout);
-                document.getElementById(insID).setAttribute('data-ad-format', ad.format);
+                document.getElementById(insID).setAttribute('data-ad-test', ad.test);
                 document.getElementById(insID).setAttribute('data-ad-client', ad.publisherID);
                 document.getElementById(insID).setAttribute('data-ad-slot', ad.slot);
+                document.getElementById(insID).setAttribute('data-ad-format', ad.format);
+                document.getElementById(insID).setAttribute('data-full-width-responsive', ad.responsive);
 
                 ads_initialized ++;
               } else {

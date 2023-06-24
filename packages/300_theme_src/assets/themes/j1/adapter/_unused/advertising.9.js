@@ -190,10 +190,9 @@ var logText;
 
           {% case advertising_provider %}
           {% when "google" %}
-          // [INFO   ] [j1.adapter.advertising                              ] [ place provider: Google Adsense ]
+          // [INFO   ] [j1.adapter.advertising                  ] [ place provider: Google Adsense ]
 
           // initialize state flag
-          //
           _this.setState('started');
           logger.debug('\n' + 'state: ' + _this.getState());
 
@@ -203,7 +202,7 @@ var logText;
             if (!validpublisherID) {
               logger.debug('\n' + 'invalid publisherID detected for Google Adsense: ' + publisherID);
               logger.info('\n' + 'skip initialization for provider: ' + advertisingProvider);
-              return false;
+              // return false;
             } else {
               logger.info('\n' + 'use publisherID for Google Adsense: ' + publisherID);
             }
@@ -331,7 +330,8 @@ var logText;
       var dependencies_met_page_visible = setInterval (function (options) {
         var contentState    = $('#content').css("display");
         var contentVisible  = (contentState == 'block') ? true: false;
-        var ads_found       = (document.getElementsByClassName('adsbygoogle').length > 0) ? true : false;
+//      var ads_found       = document.getElementsByClassName('adsbygoogle').length;
+        var ads_found       = (document.getElementsByClassName('adsbygoogle').length > 0) ? true : false; 
         var ads_initialized = 0;
         var ad_containers;
 
@@ -362,6 +362,7 @@ var logText;
                 document.getElementById(insID).setAttribute('data-ad-format', ad.format);
                 document.getElementById(insID).setAttribute('data-ad-client', ad.publisherID);
                 document.getElementById(insID).setAttribute('data-ad-slot', ad.slot);
+//              document.getElementById(insID).setAttribute('data-full-width-responsive', ad.responsive);
 
                 ads_initialized ++;
               } else {

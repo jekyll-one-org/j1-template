@@ -19,7 +19,7 @@ image:
   height:                               1280
   alt:                                  Photo by Recha Oktaviani on Unsplash
 
-regenerate:                             false
+regenerate:                             true
 permalink:                              /pages/public/learn/gad/
 
 resources:                              [ advertising, animate, clipboard, rouge ]
@@ -57,7 +57,7 @@ resource_options:
 
 // Google Ad at top position
 // -----------------------------------------------------------------------------
-gad::ad_7522184684["mb-5"]
+// gad::ad_752218468["mb-5"]
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------
@@ -81,7 +81,7 @@ lorem:sentences[15]
 
 lorem:sentences[5]
 
-gad::ad_7522184684_2["mb-5"]
+// gad::ad_752218468_2["mb-5"]
 
 lorem:sentences[10]
 

@@ -395,7 +395,7 @@ exclude:                                [
                                           package-lock.json, package.json,
                                           '*.ignore',
                                           '*.bat', '*.sh', '*.tmp', 'dot.*',
-                                          '*.txt', '*.log', '*.ppt*', '*.pdf',
+                                          '*.log', '*.ppt*', '*.pdf',
                                           '*.zip', '*.7z', '*.tgz', '*.tar',
                                           '*.a2p', '*.asciidoc'
                                         ]
