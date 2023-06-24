@@ -70,6 +70,7 @@ or even account suspension. Publishers need to ensure that their content and
 website comply with the AdSense program policies to maintain their
 eligibility for the program.
 
+[role="mt-5"]
 == Benefits using AdSense
 
 With AdSense, website owners can participate in the program to monetize
@@ -90,26 +91,32 @@ want to monetize their online presence. AdSense also provides various
 customization options, allowing publishers to control the appearance and
 placement of ads on their websites.
 
-
+[role="mt-5"]
 == J1 Integration
 
-lorem:sentences[5]
+To make the implementation of _Google Adsense_ as easy as possible,
+J1 Template integrates all required scripts with the *Advertising* module.
+First, find examples of how *Google Ads* are integrated into a *page*.
 
 === Examples
 
-lorem:sentences[5]
+A common type for *Google Ads* is the type `in-article`.
 
 gad::ad_7522184684["mt-4 mb-4"]
 
-lorem:sentences[5]
+A common type for *Google Ads* is the type `in-article`.
 
 gad::ad_7522184684_2["mt-4 mb-4"]
 
+[role="mt-4"]
 === Setup
 
-lorem:sentences[10]
+Setting up the *Advertising* requires to *enable* the module on every page
+by requesting the *module* to be loaded by the `resources` record. Add the
+*id* of the module `advertising` to enable the processing the ads you have
+configured.
 
-.Frontmatter settinss (resources)
+.Frontmatter settings (resources)
 [source, yaml, role="noclip"]
 ----
 title:                                  Google Adsense
@@ -124,9 +131,13 @@ resources:                              [ advertising, animate, clipboard, rouge
 
 lorem:sentences[5]
 
+[role="mt-4"]
 === Asciidoc Extension
 
-lorem:sentences[5]
+Making ads on a page easier, the Asciidoc Extention `gad::` supports you in
+placing a container into your source code. While your page is being processed
+by _Jekyll_, the module places a `<div>` element and fills in on module
+*initialization*.
 
 [source, bash, role="noclip"]
 ----
@@ -139,7 +150,7 @@ gad::ad_id[role="additional container classes"]
 gad::ad_7522184684["mt-4 mb-4"]
 ----
 
-lorem:sentences[5]
+The *HTML code* generated for an ad (id `ad_7522184684`) looks like so:
 
 .Generated HTML code
 [source, html, role="noclip"]
@@ -157,12 +168,15 @@ lorem:sentences[5]
 </div>
 ----
 
-lorem:sentences[5]
+NOTE: On module *initialization*, all `<div>` elements get registered with
+*Google AdSense* to fill the *container* by active advertising.
 
-
+[role="mt-5"]
 == Module Configuration
 
-lorem:sentences[10]
+The module configuration requires first to set your `publisherID` *globally*
+to register a page with *Google AdSense*. In a second step, all *ads*
+(ad blocks, slot ids) registered with your AdSense account are to be defined.
 
 [source, yaml, role="noclip"]
 ----
@@ -202,13 +216,57 @@ settings:
       slot:                           7522184684
       ad_layout:                      in-article
       format:                         fluid
+
+      # ------------------------------------------------------------------------
+      # Ad on slot id "7522184684"
+      #
+      - ad:
+
+        # container settings
+        # ----------------------------------------------------------------------
+        enabled:                        true
+
+        id:                             ad_7522184684
+        layout:                         page
+
+        # ad properties
+        # ----------------------------------------------------------------------
+        publisherID:                    ca-pub-3885670015316130
+        test:                           "on"
+        styles:                         "display:block; text-align:center;"
+        slot:                           7522184684
+        ad_layout:                      in-article
+        format:                         fluid
+
+      # ------------------------------------------------------------------------
+      # Ad on slot id "7522184684" #2
+      #
+      - ad:
+
+        # container settings
+        # ----------------------------------------------------------------------
+        enabled:                        true
+
+        id:                             ad_7522184684_2
+        layout:                         page
+
+        # ad properties
+        # ----------------------------------------------------------------------
+        publisherID:                    ca-pub-3885670015316130
+        test:                           "on"
+        styles:                         "display:block; text-align:center;"
+        slot:                           7522184684
+        ad_layout:                      in-article
+        format:                         fluid
 ----
 
-lorem:sentences[5]
+NOTE: You can define the same ad block (slot id) multiple times, but a unique
+`id` has to be configured each ad block.
 
+[role="mt-4"]
 === Properties
 
-lorem:sentences[5]
+Find all property settings for ad blocks below.
 
 .Property settings
 [cols="2a, 2a, 3a, 5a", options="header", width="100%", role="rtable mt-3 mb-5"]

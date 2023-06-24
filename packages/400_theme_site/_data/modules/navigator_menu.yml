@@ -26,7 +26,7 @@
 
     - title:                            Where to go
       href:                             /pages/public/learn/where_to_go/
-      icon:                             paw
+      icon:                             foot-print
 
     - title:                            Core Web Vitals
       href:                             /pages/public/learn/core_web_vitals/
@@ -242,7 +242,7 @@
 
     - title:                            Where to go
       href:                             https://jekyll.one/pages/public/manuals/where_to_go/
-      icon:                             paw
+      icon:                             foot-print
       target:                           _blank
 
 
