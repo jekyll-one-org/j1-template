@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/100_theme_css/scss/theme_uno_dark/bootstrap/_typography.scss
+ # ~/scss/theme_uno_dark/bootstrap/_typography.scss
  #
  # Product/Info:
  # https://jekyll.one
@@ -23,9 +23,13 @@
 // Typography
 // -----------------------------------------------------------------------------
 
+.text-muted {
+    color: $blue-gray-200 !important;
+}
+
 p {
   &tagline {
-    color: $gray-300;
+    color: $blue-gray-300;
   }
 }
 
@@ -40,9 +44,9 @@ cite, em, var, address, dfn {
 }
 
 .quoteblock blockquote:before {
-    color: $gray-300 !important;
+    color: $blue-gray-300 !important;
 }
 
 .blockquote-footer {
-    color: $gray-300;
+    color: $blue-gray-300;
 }

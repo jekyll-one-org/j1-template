@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/100_theme_css/scss/theme_uno_dark/bootstrap/_forms.scss
+ # ~/scss/theme_uno_dark/bootstrap/_forms.scss
  #
  # Product/Info:
  # https://jekyll.one
@@ -65,7 +65,7 @@ select.form-control[multiple] {
   overflow-y: hidden;
 }
 
-.text-muted, .bmd-help {
+.bmd-help {
   --bs-text-opacity: 1;
   color: $gray-400 !important;
 }

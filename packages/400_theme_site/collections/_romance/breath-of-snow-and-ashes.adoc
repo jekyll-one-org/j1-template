@@ -82,7 +82,19 @@ excerpt__end
 // -----------------------------------------------------------------------------
 [[readmore]]
 [role="mt-4"]
-image:{{page.book.cover}}[width=350, role="mr-4 mb-5 float-left"]
+image:{{page.book.cover}}[role="mr-4 mb-5 float-left"]
+
+As the Frasers settle in North Carolina, they face various challenges, both
+personal and political. Claire continues her work as a healer, while Jamie
+becomes involved in the growing revolutionary movement. The couple must
+navigate dangerous circumstances, including encounters with hostile
+Native American tribes, conflicts with the British army, and the looming
+threat of war.
+
+Meanwhile, their daughter Brianna and her husband Roger, who have also
+traveled back in time from the 20th century, face their struggles. They
+must adapt to life in the past, confront personal tragedies, and navigate
+the complexities of their relationship and family dynamics.
 
 The year is 1772, and on the eve of the American Revolution, the long fuse of
 rebellion has already been lit. Men lie dead in the streets of Boston, and

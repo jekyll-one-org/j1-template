@@ -12,22 +12,26 @@
  # -----------------------------------------------------------------------------
 */
 
-a.card-link:hover {
-    color: #f5f5f5 !important;
-}
+// a.card-link:hover {
+//     color: #78909C !important;
+// }
 
 .card .card-header {
-    background-color: #78909c;
+    background-color: $blue-gray-400;
 }
 
 .card .card-footer {
-    background-color: #78909c;
+    background-color: $blue-gray-400;
+}
+
+a.card-link:hover {
+    color: $blue-gray-200 !important;
 }
 
 a.btn.btn-link.card-profile {
-    background-color: #78909c;
+    background-color: $blue-gray-400;
 }
 
 a.btn.btn-link.card-profile:hover {
-    background-color: #78909c;
+    background-color: $blue-gray-400;
 }

@@ -1,0 +1,37 @@
+/*
+ # -----------------------------------------------------------------------------
+ # ~/scss/theme_uno_dark/extensions/_article.scss
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
+
+.article-item {
+    max-width: 26rem;
+    margin-left: auto;
+    margin-right: auto;
+
+  .article-link {
+      position: relative;
+      display: block;
+      margin: 0 auto;
+      color: $blue-gray-800;
+      border-bottom: none;
+    }
+
+    .article-link:hover {
+      color: $blue-gray-100 !important;
+    }
+
+    .article-caption {
+        padding: 1.5rem;
+        text-align: center;
+        background-color: $blue-gray-400;
+    }
+}

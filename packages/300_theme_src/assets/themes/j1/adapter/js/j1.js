@@ -2778,7 +2778,8 @@ var j1 = (function (options) {
             }
 
             for (const {node, currentRect, previousRect} of entry.sources) {
-              if (node.hasOwnProperty('firstElementChild') && typeof node.firstElementChild != 'null' && typeof node.firstElementChild != 'undefined') {
+              var hasProperty = (node.hasOwnProperty('firstElementChild')) ? true : false;
+              if ( hasProperty && typeof node.firstElementChild != 'null' && typeof node.firstElementChild != 'undefined') {
                 var id = '';
                 try {
                   id = node.firstElementChild.id;

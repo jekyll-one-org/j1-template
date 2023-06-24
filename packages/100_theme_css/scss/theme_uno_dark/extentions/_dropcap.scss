@@ -1,6 +1,6 @@
 /*
 // -----------------------------------------------------------------------------
-// ~/scss/theme_uno/extensions/_dropcap.scss
+// ~/scss/theme_uno_dark/extensions/_dropcap.scss
 // Provides general styles for the J1 Dropcaps
 //
 // Product/Info:
@@ -17,5 +17,5 @@
 // -----------------------------------------------------------------------------
 
 .j1-dropcap {
-  color: #9E9E9E !important;                                                    // $gray
+  color: $gray-100 !important;
 }
