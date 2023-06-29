@@ -108,6 +108,7 @@ j1.adapter.themer = (function (j1, window) {
   // globals
   // ---------------------------------------------------------------------------
   var environment               = '{{environment}}';
+  var development               = (environment.includes('dev') ? true : false);
   var url                       = new liteURL(window.location.href);
   var secure                    = (url.protocol.includes('https')) ? true : false;
   var user_state                = {};
@@ -208,7 +209,9 @@ j1.adapter.themer = (function (j1, window) {
 
       // initialize state flag
       _this.state = 'started';
-      logger.debug('\n' + 'state: ' + _this.getState());
+      if (development) {
+        logger.debug('\n' + 'state: ' + _this.getState());
+      }
 
       // hide page until 'theme' is loaded
       $('#no_flicker').hide();
@@ -235,7 +238,9 @@ j1.adapter.themer = (function (j1, window) {
            user_state   = j1.readCookie(cookie_names.user_state);
            user_consent = j1.readCookie(cookie_names.user_consent);
 
-           logger.debug('\n' + 'cookie ' +  cookie_names.user_state + ' successfully loaded after: ' + interval_count * 25 + ' ms');
+           if (development) {
+             logger.debug('\n' + 'cookie ' +  cookie_names.user_state + ' successfully loaded after: ' + interval_count * 25 + ' ms');
+           }
 
            // initial theme data
            if (user_state.theme_css === '') {
@@ -252,7 +257,9 @@ j1.adapter.themer = (function (j1, window) {
              });
 
              if (!cookie_written) {
-               logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_consent);
+               if (development) {
+                 logger.error('\n' + 'failed to write cookie: ' + cookie_names.user_consent);
+               }
              }
            }
 
@@ -260,8 +267,10 @@ j1.adapter.themer = (function (j1, window) {
            user_state.theme_switcher = themerOptions.enabled;
            if (themerOptions.enabled) {
              // enable BS ThemeSwitcher
-             logger.info('\n' + 'themes detected as: ' + themerOptions.enabled);
-             logger.info('\n' + 'remote themes are being initialized');
+             if (development) {
+               logger.info('\n' + 'themes detected as: ' + themerOptions.enabled);
+               logger.info('\n' + 'remote themes are being initialized');
+             }
 
              /* eslint-disable */
              // load list of remote themes
@@ -286,8 +295,10 @@ j1.adapter.themer = (function (j1, window) {
              };
              /* eslint-enable */
            } else {
-             logger.warn('\n' + 'themes detected as: disabled');
-             logger.warn('\n' + 'no remote themes are available');
+             if (development) {
+               logger.warn('\n' + 'themes detected as: disabled');
+               logger.warn('\n' + 'no remote themes are available');
+             }
           }
 
           // validate theme to be loaded
@@ -304,10 +315,17 @@ j1.adapter.themer = (function (j1, window) {
                }, 10); // END dependencies_met_theme_loaded
              } else {
                // invalid theme, fallback on default
-               logger.warn('\n' + 'themes CSS invalid: ' + user_state.theme_css);
+               if (development) {
+                 logger.warn('\n' + 'themes CSS invalid: ' + user_state.theme_css);
+               }
+
                theme_css_html = '<link rel="stylesheet" id="' + id + '" href="' + default_theme_css + '" type="text/css" />';
-               logger.warn('\n' + 'set default theme :' + default_theme_name);
-               logger.debug('\n' + 'theme CSS loaded: ' + default_theme_css);
+
+               if (development) {
+                 logger.warn('\n' + 'set default theme :' + default_theme_name);
+                 logger.debug('\n' + 'theme CSS loaded: ' + default_theme_css);
+               }
+
                $('head').append(theme_css_html);
 
                // write theme defaults to cookie
@@ -344,11 +362,17 @@ j1.adapter.themer = (function (j1, window) {
           // show page (theme is loaded)
           $('#no_flicker').show();
 
-          logger.info('\n' + 'theme loaded successfully: ' + user_state.theme_name);
-          logger.debug('\n' + 'theme CSS loaded: ' + user_state.theme_css);
+          if (development) {
+            logger.info('\n' + 'theme loaded successfully: ' + user_state.theme_name);
+            logger.debug('\n' + 'theme CSS loaded: ' + user_state.theme_css);
+          }
+
           _this.setState('finished');
-          logger.debug('\n' + 'state: ' + _this.getState());
-          logger.info('\n' + 'module initialized successfully');
+
+          if (development) {
+            logger.debug('\n' + 'state: ' + _this.getState());
+            logger.info('\n' + 'module initialized successfully');
+          }
 
           clearInterval(dependencies_met_theme_applied);
         }
@@ -365,13 +389,20 @@ j1.adapter.themer = (function (j1, window) {
       var json_message = JSON.stringify(message, undefined, 2);
 
       logText = '\n' + 'received message from ' + sender + ': ' + json_message;
-      logger.info(logText);
+
+      if (development) {
+        logger.info(logText);
+      }
 
       // -----------------------------------------------------------------------
       //  Process commands|actions
       // -----------------------------------------------------------------------
       if (message.type === 'command' && message.action === 'module_initialized') {
-        logger.info('\n' + message.text);
+
+        if (development) {
+          logger.info('\n' + message.text);
+        }
+
         //
         // Place handling of other command|action here
         //

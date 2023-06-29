@@ -11,7 +11,7 @@ categories:                             [ Previewer ]
 tags:                                   [ Placeholder, Image, Design, Resource ]
 
 regenerate:                             false
-permalink:                              /pages/public/previewer/image_placeholder/
+permalink:                              /pages/public/tools/previewer/image_placeholder/
 
 resources:                              [ clipboard, lightbox, rouge, slick ]
 resource_options:

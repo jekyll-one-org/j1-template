@@ -20,7 +20,7 @@ image:
   alt:                                  Photo by Recha Oktaviani on Unsplash
 
 regenerate:                             false
-permalink:                              /pages/public/learn/cheatsheet/yaml/
+permalink:                              /pages/public/tools/cheatsheet/yaml/
 
 resources:                              [ animate, clipboard, rouge ]
 resource_options:

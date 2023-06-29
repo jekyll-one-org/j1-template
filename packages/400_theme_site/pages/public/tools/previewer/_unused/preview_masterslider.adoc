@@ -21,7 +21,7 @@ image:
 comments:                               false
 fab_menu_id:                            open_toc
 
-permalink:                              /pages/public/previewer/masterslider/
+permalink:                              /pages/public/tools/previewer/masterslider/
 regenerate:                             false
 
 resources:                              [ animate, clipboard, comments, lightbox, lightGallery, masterslider, rouge ]
@@ -49,7 +49,7 @@ resource_options:
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
-:ms-slider--previewer:                  https://jekyll.one/pages/public/previewer/masterslider/
+:ms-slider--previewer:                  https://jekyll.one/pages/public/tools/previewer/masterslider/
 :ms-module--documentation:              https://jekyll.one/pages/public/manuals/modules/masterslider/
 :ms-product--template-examples:         http://masterslider.com/extra/templates/?utm_source=mslite&utm_medium=lite&utm_content=free_demo&utm_campaign=masterslider
 

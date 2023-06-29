@@ -12,7 +12,7 @@ categories:                             [ Previewer ]
 tags:                                   [ Masonry, Example ]
 
 regenerate:                             false
-permalink:                              /pages/public/previewer/masonry/
+permalink:                              /pages/public/tools/previewer/masonry/
 
 resources:                              [
                                           animate, clipboard, justifiedGallery,

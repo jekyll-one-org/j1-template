@@ -13,7 +13,7 @@ tags:                                   [ Icon Sets, FA, MDI ]
 
 fab_menu_id:                            default
 
-permalink:                              /pages/public/previewer/icon-picker/
+permalink:                              /pages/public/tools/previewer/icon-picker/
 regenerate:                             false
 
 resources:                              [ animate, clipboard, iconpicker ]

@@ -15,7 +15,7 @@ comments:                               false
 fab_menu_id:                            open_toc
 scrollbar:                              false
 regenerate:                             false
-permalink:                              /pages/public/previewer/slick/
+permalink:                              /pages/public/tools/previewer/slick/
 
 
 resources:                              [ clipboard, lightbox, rouge, slick ]

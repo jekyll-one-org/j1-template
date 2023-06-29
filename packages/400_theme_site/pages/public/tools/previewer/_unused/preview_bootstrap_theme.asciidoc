@@ -17,8 +17,11 @@ image:
   height:                               1280
   alt:                                  Photo by Clem Onojeghuo on Unsplash
 
+comments:                               false
+fab_menu_id:                            open_toc
+scrollbar:                              false
 regenerate:                             false
-permalink:                              /pages/public/previewer/current_theme/
+permalink:                              /pages/public/tools/previewer/current_theme/
 
 resources:                              [ animate, clipboard, rouge ]
 resource_options:
@@ -236,6 +239,7 @@ colors. Then, customize with `.bg-*` utilities.
     </div>
   </nav>
 
+
   <nav class="navbar navbar-expand-lg navbar-light md-light">
     <div class="container-fluid">
       <a class="link-no-decoration navbar-brand" href="javascript:void(0)">Navbar</a>
@@ -286,8 +290,8 @@ colors. Then, customize with `.bg-*` utilities.
 
 [source, html]
 ----
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
-  <div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
     <a class="link-no-decoration navbar-brand" href="javascript:void(0)">Navbar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
       data-bs-target="#navbarColor01" aria-controls="navbarColor01"
@@ -329,97 +333,7 @@ colors. Then, customize with `.bg-*` utilities.
       </form>
     </div>
   </div>
-</nav>
-
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-3">
-  <div class="container-fluid">
-    <a class="link-no-decoration navbar-brand" href="javascript:void(0)">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-      data-bs-target="#navbarColor02" aria-controls="navbarColor02"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse ml-2" id="navbarColor02">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="link-no-decoration nav-link active" href="javascript:void(0)">Home
-            <span class="visually-hidden">(current)</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="link-no-decoration nav-link" href="javascript:void(0)">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="link-no-decoration nav-link" href="javascript:void(0)">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a class="link-no-decoration nav-link" href="javascript:void(0)">About</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="link-no-decoration nav-link dropdown-toggle" data-bs-toggle="dropdown"
-            href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-          <div class="dropdown-menu">
-            <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Action</a>
-            <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Another action</a>
-            <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Something else here</a>
-            <div class="dropdown-divider"></div>
-            <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Separated link</a>
-          </div>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control mt-1" type="text" placeholder="Search">
-        <button class="btn btn-secondary btn-sm ml-3" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</nav>
-
-<nav class="navbar navbar-expand-lg navbar-light md-light">
-  <div class="container-fluid">
-    <a class="link-no-decoration navbar-brand" href="javascript:void(0)">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-      data-bs-target="#navbarColor03" aria-controls="navbarColor03"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse ml-2" id="navbarColor03">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <a class="link-no-decoration nav-link active" href="javascript:void(0)">Home
-            <span class="visually-hidden">(current)</span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a class="link-no-decoration nav-link" href="javascript:void(0)">Features</a>
-        </li>
-        <li class="nav-item">
-          <a class="link-no-decoration nav-link" href="javascript:void(0)">Pricing</a>
-        </li>
-        <li class="nav-item">
-          <a class="link-no-decoration nav-link" href="javascript:void(0)">About</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="link-no-decoration nav-link dropdown-toggle" data-bs-toggle="dropdown"
-            href="javascript:void(0)" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
-          <div class="dropdown-menu">
-            <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Action</a>
-            <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Another action</a>
-            <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Something else here</a>
-            <div class="dropdown-divider"></div>
-            <a class="link-no-decoration dropdown-item" href="javascript:void(0)">Separated link</a>
-          </div>
-        </li>
-      </ul>
-      <form class="d-flex">
-        <input class="form-control mt-1" type="text" placeholder="Search">
-        <button class="btn btn-secondary btn-sm ml-3" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</nav>
+  </nav>
 ----
 endif::[]
 
@@ -1771,11 +1685,11 @@ ifeval::[{navs} == true]
 == Navs
 
 Navigation available in Bootstrap shares general markup and styles, from the
-base `.nav` class to the active and disabled states. Swap modifier classes to
+base .nav class to the active and disabled states. Swap modifier classes to
 switch between each style.
 
-The base `.nav` component is built with a flexbox and provides a strong
-foundation for building all navigation components. It includes some style
+The base .nav component is built with a flexbox and provides a strong foundation
+for building all navigation components. It includes some style
 overrides (for working with lists), link padding for larger hit areas,
 and basic disabled styling.
 
@@ -1785,43 +1699,51 @@ link:{url-bs-docs--components-navs}[Bootstrap Docs {char-middot} Navs, {browser-
 ifeval::[{navs_tabs} == true]
 === Tabs
 
-Tabs takes the basic nav from above and adds the `.nav-tabs` class to generate
-a tabbed interface. Use them to create tabbable regions with the BS5 tab
+Tabs takes the basic nav from above and adds the .nav-tabs class to generate
+a tabbed interface. Use them to create tabbable regions with our tab
 JavaScript plugin.
 
 ++++
 <div class="doc-example mb-3">
-
-  <ul id="myTab" class="nav nav-tabs mb-3" role="tablist">
-    <li class="nav-item mr-1" role="presentation">
-      <button id="home-tab" class="nav-link active" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Home</button>
+  <ul class="nav nav-tabs mb-3">
+    <li class="nav-item">
+      <a class="link-no-decoration nav-link active" data-bs-toggle="tab" href="#home">Home</a>
     </li>
-    <li class="nav-item mr-1" role="presentation">
-      <button id="profile-tab" class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false" tabindex="-1">Profile</button>
+    <li class="nav-item">
+      <a class="link-no-decoration nav-link" data-bs-toggle="tab" href="#profile">Profile</a>
     </li>
-    <li class="nav-item mr-1" role="presentation">
-      <button id="contact-tab" class="nav-link" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button" role="tab" aria-controls="contact-tab-pane" aria-selected="false" tabindex="-1">Contact</button>
+    <li class="nav-item dropdown">
+      <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"
+        role="button"
+        aria-haspopup="true" aria-expanded="false">
+        Dropdown
+      </a>
+      <div class="dropdown-menu">
+        <a href="javascript:void(0)" class="dropdown-item">Action</a>
+        <a href="javascript:void(0)" class="dropdown-item">Another action</a>
+        <a href="javascript:void(0)" class="dropdown-item">Something else here</a>
+        <div class="dropdown-divider"></div>
+        <a href="javascript:void(0)" class="dropdown-item">Separated link</a>
+      </div>
     </li>
-    <li class="nav-item mr-1" role="presentation">
-      <button id="disabled-tab" class="nav-link" data-bs-toggle="tab" data-bs-target="#disabled-tab-pane" type="button" role="tab" aria-controls="disabled-tab-pane" aria-selected="false" disabled="" tabindex="-1">Disabled</button>
+    <li class="nav-item">
+      <a href="javascript:void(0)" class="nav-link disabled">Disabled</a>
     </li>
   </ul>
-
   <div id="myTabContent" class="tab-content">
-    <div id="home-tab-pane" class="tab-pane fade active show" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-      <p>This is some placeholder content the <strong>Home tab's</strong> associated content. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
+    <div class="tab-pane fade active show" id="home">
+      <p>Raw denim you probably haven't heard of them jean shorts Austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica. Reprehenderit butcher retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid. Aliquip placeat salvia cillum iphone. Seitan aliquip quis cardigan american apparel, butcher voluptate nisi qui.</p>
     </div>
-    <div id="profile-tab-pane" class="tab-pane fade" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-      <p>This is some placeholder content the <strong>Profile tab's</strong> associated content. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
+    <div class="tab-pane fade" id="profile">
+      <p>Food truck fixie locavore, accusamus mcsweeney's marfa nulla single-origin coffee squid. Exercitation +1 labore velit, blog sartorial PBR leggings next level wes anderson artisan four loko farm-to-table craft beer twee. Qui photo booth letterpress, commodo enim craft beer mlkshk aliquip jean shorts ullamco ad vinyl cillum PBR. Homo nostrud organic, assumenda labore aesthetic magna delectus mollit.</p>
     </div>
-    <div id="contact-tab-pane" class="tab-pane fade" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
-      <p>This is some placeholder content the <strong>Contact tab's</strong> associated content. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
+    <div class="tab-pane fade" id="dropdown1">
+      <p>Etsy mixtape wayfarers, ethical wes anderson tofu before they sold out mcsweeney's organic lomo retro fanny pack lo-fi farm-to-table readymade. Messenger bag gentrify pitchfork tattooed craft beer, iphone skateboard locavore carles etsy salvia banksy hoodie helvetica. DIY synth PBR banksy irony. Leggings gentrify squid 8-bit cred pitchfork.</p>
     </div>
-    <div id="disabled-tab-pane" class="tab-pane fade" role="tabpanel" aria-labelledby="disabled-tab" tabindex="0">
-      <p>This is some placeholder content the <strong>Disabled tab's</strong> associated content.</p>
+    <div class="tab-pane fade" id="dropdown2">
+      <p>Trust fund seitan letterpress, keytar raw denim keffiyeh etsy art party before they sold out master cleanse gluten-free squid scenester freegan cosby sweater. Fanny pack portland seitan DIY, art party locavore wolf cliche high life echo park Austin. Cred vinyl keffiyeh DIY salvia PBR, banh mi before they sold out farm-to-table VHS viral locavore cosby sweater.</p>
     </div>
   </div>
-
 </div>
 ++++
 endif::[]
@@ -1829,41 +1751,61 @@ endif::[]
 ifeval::[{navs_pills} == true]
 === Pills
 
-Take that same HTML as Tabs, but use `.nav-pills` class instead.
+Take that same HTML as Tabs, but use .nav-pills class instead.
 
 ++++
 <div class="doc-example mb-3">
+  <div class="row mb-5">
 
-  <ul id="pills-tab" class="nav nav-pills mb-3" role="tablist">
-    <li class="nav-item mr-1" role="presentation">
-      <button id="pills-home-tab" class="nav-link active" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
-    </li>
-    <li class="nav-item mr-1" role="presentation">
-      <button id="pills-profile-tab" class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false" tabindex="-1">Profile</button>
-    </li>
-    <li class="nav-item mr-1" role="presentation">
-      <button id="pills-contact-tab" class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false" tabindex="-1">Contact</button>
-    </li>
-    <li class="nav-item mr-1" role="presentation">
-      <button id="pills-disabled-tab" class="nav-link" data-bs-toggle="pill" data-bs-target="#pills-disabled" type="button" role="tab" aria-controls="pills-disabled" aria-selected="false" disabled="" tabindex="-1">Disabled</button>
-    </li>
-  </ul>
-
-  <div id="pills-tabContent" class="tab-content">
-    <div id="pills-home" class="tab-pane fade active show" role="tabpanel" aria-labelledby="pills-home-tab" tabindex="0">
-      <p>This is some placeholder content the <strong>Home tab's</strong> associated content. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
+    <div class="col-md-6 p-0">
+      <h4 class="notoc">Standard Pills</h4>
+      <ul class="nav nav-pills">
+        <li class="nav-item mr-1 mb-2">
+          <a href="javascript:void(0)" class="nav-link active">Active</a>
+        </li>
+        <li class="nav-item dropdown mr-1">
+          <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+          <div class="dropdown-menu">
+            <a href="javascript:void(0)" class="dropdown-item">Action</a>
+            <a href="javascript:void(0)" class="dropdown-item">Another action</a>
+            <a href="javascript:void(0)" class="dropdown-item">Something else here</a>
+            <div class="dropdown-divider"></div>
+            <a href="javascript:void(0)" class="dropdown-item">Separated link</a>
+          </div>
+        </li>
+        <li class="nav-item mr-1 mb-2">
+          <a href="javascript:void(0)" class="nav-link">Link</a>
+        </li>
+        <li class="nav-item mr-1 mb-2">
+          <a href="javascript:void(0)" class="nav-link disabled">Disabled</a>
+        </li>
+      </ul>
     </div>
-    <div id="pills-profile" class="tab-pane fade" role="tabpanel" aria-labelledby="pills-profile-tab" tabindex="0">
-      <p>This is some placeholder content the <strong>Profile tab's</strong> associated content. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
-    </div>
-    <div id="pills-contact" class="tab-pane fade" role="tabpanel" aria-labelledby="pills-contact-tab" tabindex="0">
-      <p>This is some placeholder content the <strong>Contact tab's</strong> associated content. Clicking another tab will toggle the visibility of this one for the next. The tab JavaScript swaps classes to control the content visibility and styling. You can use it with tabs, pills, and any other <code>.nav</code>-powered navigation.</p>
-    </div>
-    <div id="pills-disabled" class="tab-pane fade" role="tabpanel" aria-labelledby="pills-disabled-tab" tabindex="0">
-      <p>This is some placeholder content the <strong>Disabled tab's</strong> associated content.</p>
+    <div class="col-md-6 p-0">
+      <h5 class="notoc">Stacked Pills (vertical)</h5>
+      <ul class="nav nav-pills flex-column mb-4">
+        <li class="nav-item mb-2">
+          <a href="javascript:void(0)" class="nav-link active">Active</a>
+        </li>
+        <li class="nav-item dropdown mb-1">
+          <a href="javascript:void(0)" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+          <div class="dropdown-menu">
+            <a href="javascript:void(0)" class="dropdown-item">Action</a>
+            <a href="javascript:void(0)" class="dropdown-item">Another action</a>
+            <a href="javascript:void(0)" class="dropdown-item">Something else here</a>
+            <div class="dropdown-divider"></div>
+            <a href="javascript:void(0)" class="dropdown-item">Separated link</a>
+          </div>
+        </li>
+        <li class="nav-item mb-2">
+          <a href="javascript:void(0)" class="nav-link">Link</a>
+        </li>
+        <li class="nav-item mb-2">
+          <a href="javascript:void(0)" class="nav-link disabled">Disabled</a>
+        </li>
+      </ul>
     </div>
   </div>
-
 </div>
 ++++
 endif::[]

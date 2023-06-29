@@ -18,7 +18,7 @@ image:
   alt:                                  Photo by Clem Onojeghuo on Unsplash
 
 regenerate:                             false
-permalink:                              /pages/public/previewer/current_theme/
+permalink:                              /pages/public/tools/previewer/current_theme/
 
 resources:                              [ animate, clipboard, rouge ]
 resource_options:

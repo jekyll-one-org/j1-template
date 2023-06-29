@@ -16,7 +16,7 @@ comments:                               false
 fab_menu_id:                            open_toc
 scrollbar:                              false
 regenerate:                             false
-permalink:                              /pages/public/previewer/masonry/
+permalink:                              /pages/public/tools/previewer/masonry/
 
 resources:                              [
                                           clipboard, lightbox, masonry,

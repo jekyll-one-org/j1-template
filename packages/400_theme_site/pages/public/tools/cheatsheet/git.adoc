@@ -20,7 +20,7 @@ image:
   alt:                                  Photo by Recha Oktaviani on Unsplash
 
 regenerate:                             false
-permalink:                              /pages/public/learn/cheatsheet/git/
+permalink:                              /pages/public/tools/cheatsheet/git/
 
 resources:                              [ animate, clipboard, rouge ]
 resource_options:

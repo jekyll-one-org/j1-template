@@ -13,7 +13,7 @@ tags:                                   [ Example ]
 comments:                               false
 fab_menu_id:                            open_toc
 
-permalink:                              /pages/public/previewer/slick/
+permalink:                              /pages/public/tools/previewer/slick/
 regenerate:                             false
 
 resources:                              [ clipboard, rouge, slick ]

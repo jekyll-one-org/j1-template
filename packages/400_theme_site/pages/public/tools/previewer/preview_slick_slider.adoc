@@ -12,7 +12,7 @@ categories:                             [ Previewer ]
 tags:                                   [ Slick, Carousel, Example ]
 
 regenerate:                             false
-permalink:                              /pages/public/previewer/slick/
+permalink:                              /pages/public/tools/previewer/slick/
 
 
 resources:                              [ animate, clipboard, lightbox, rouge, slick ]

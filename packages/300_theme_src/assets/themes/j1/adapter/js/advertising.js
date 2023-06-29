@@ -6,7 +6,7 @@ regenerate:                             true
 
 {% comment %}
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/adapter/js/advertising.js
+ # ~/assets/theFdames/j1/adapter/js/advertising.js
  # Liquid template to adapt advertising plugin
  #
  # Product/Info:
@@ -92,6 +92,8 @@ j1.adapter.advertising = (function (j1, window) {
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
 var environment           = '{{environment}}';
+var production            = (environment.includes('prod') ? true : false);
+var development           = (environment.includes('dev') ? true : false);
 var date                  = new Date();
 var timestamp_now         = date.toISOString();
 var gasScript             = document.createElement('script');
@@ -182,8 +184,10 @@ var logText;
           _this.ad_initializer();
 
           if (!validpublisherID) {
-            logger.warn('\n' + 'invalid publisher id: ' + publisherID);
-            logger.info('\n' + 'module disabled' );
+            if (development) {
+              logger.warn('\n' + 'invalid publisher id: ' + publisherID);
+              logger.info('\n' + 'module disabled' );
+            }
             clearInterval(dependencies_met_page_ready);
             return false;
           }
@@ -195,46 +199,65 @@ var logText;
           // initialize state flag
           //
           _this.setState('started');
-          logger.debug('\n' + 'state: ' + _this.getState());
+          if (development) {
+            logger.debug('\n' + 'state: ' + _this.getState());
+          }
 
           if (user_consent.personalization) {
-            logger.info('\n' + 'adsense api is being initialized');
-
-            if (!validpublisherID) {
-              logger.debug('\n' + 'invalid publisherID detected for Google Adsense: ' + publisherID);
-              logger.info('\n' + 'skip initialization for provider: ' + advertisingProvider);
-              return false;
-            } else {
-              logger.info('\n' + 'use publisherID for Google Adsense: ' + publisherID);
+            if (development) {
+              logger.info('\n' + 'adsense api is being initialized');
             }
 
-            // add GAS API (Google Adsense) dynamically in head section
-            // loaded async
-            // -----------------------------------------------------------------
-            logger.info('\n' + 'add Google AdsenseAPI in section: head');
+            if (!validpublisherID) {
+              if (development) {
+                logger.debug('\n' + 'invalid publisherID detected for Google Adsense: ' + publisherID);
+                logger.info('\n' + 'skip initialization for provider: ' + advertisingProvider);
+              }
+              return false;
+            } else {
+              if (development) {
+                logger.info('\n' + 'use publisherID for Google Adsense: ' + publisherID);
+              }
+            }
+
+            // add Google Adsense API dynamically in head section loaded async
+            //
+            if (development) {
+              logger.info('\n' + 'add Google AdsenseAPI in section: head');
+            }
+
             gasScript.async = true;
             gasScript.id    = 'gas-api';
             gasScript.src   = '//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js';
             gasScript.setAttribute('data-ad-client', publisherID);
             document.head.appendChild(gasScript);
-            logger.info('\n' + 'adsense api initialized');
+
+            if (development) {
+              logger.info('\n' + 'adsense api initialized');
+            }
 
             // setup monitor for state changes on all ads configured
-            // -----------------------------------------------------------------
+            //
             setTimeout(function () {
               var ads_found = (document.getElementsByClassName('adsbygoogle').length > 0) ? true : false;
               if (ads_found > 0) {
-                logger.info('\n' + 'setup Google Ad monitoring');
+                if (development) {
+                  logger.info('\n' + 'setup Google Ad monitoring');
+                }
                 _this.ad_monitor();
               } else {
-                logger.warn('\n' + 'no initialized Google Ads found in page');
+                if (development) {
+                  logger.warn('\n' + 'no initialized Google Ads found in page');
+                }
               }
             }, 1000);
 
             // run protection check
-            // -----------------------------------------------------------------
+            //
             if (checkTrackingProtection) {
-              logger.debug('\n' + 'run checks for tracking protection');
+              if (development) {
+                logger.debug('\n' + 'run checks for tracking protection');
+              }
 
               _this.check_tracking_protection();
               var dependencies_met_tracking_check_ready = setInterval (function (options) {
@@ -242,46 +265,57 @@ var logText;
                   var browser_tracking_feature = navigator.DoNotTrack;
 
                   if (!tracking_protection && !browser_tracking_feature) {
-                    logText = '\n' + 'tracking protection: disabled';
-                    logger.info(logText);
+                    if (development) {
+                      logText = '\n' + 'tracking protection: disabled';
+                      logger.info(logText);
+                    }
                   } else {
-                    logText = '\n' + 'tracking protection: enabled';
-                    logger.debug(logText);
+                    if (development) {
+                      logText = '\n' + 'tracking protection: enabled';
+                      logger.debug(logText);
+                    }
 
                     if (showErrorPageOnBlocked) {
-                      logger.error('\n' + 'redirect to error page (blocked content): HTML-447');
+                      if (development) {
+                        logger.error('\n' + 'redirect to error page (blocked content): HTML-447');
+                      }
                       // redirect to error page: blocked content
                       window.location.href = '/447.html';
                     }
                   }
                 }
+
                 clearInterval(dependencies_met_tracking_check_ready);
               }, 10);
             } else {
               // no protection check enabled
               _this.setState('finished');
-              logger.debug('\n' + 'state: ' + _this.getState());
-              logger.info('\n' + 'module initialized successfully');
+
+              if (development) {
+                logger.debug('\n' + 'state: ' + _this.getState());
+                logger.info('\n' + 'module initialized successfully');
+              }
+
               clearInterval(dependencies_met_tracking_check_ready);
             }
 
           } else {
             // user consent on personalization "false"
             //
-            logger.warn('\n' + 'user consent on personalization: ' + user_consent.personalization);
-            logger.warn('\n' + 'initializing module: skipped');
+           if (production) {
+              console.debug('cookies for personalization rejected');
+              console.debug('initialization of module advertising skipped');
+            } else {
+              logger.warn('\n' + 'user consent on personalization: ' + user_consent.personalization);
+              logger.warn('\n' + 'initializing module: skipped');
+            }
 
-            // manage GAD cookies if no consent is given|rejected
-            // -----------------------------------------------------------------
-            var gasCookies = j1.findCookie('__ga');
-            logger.debug('\n' + 'consent on cookies disabled for personalization');
-            logger.debug('\n' + 'initialization of module advertising skipped');
-
-            // remove cookies on invalid GAS config or left from a previous
-            // session/page view if they exists
-            // ------------------------------------------------------------------
+            // if consent is rejected, detect and remove Adsense cookies
+            //
+            var gasCookies = j1.findCookie('__g');
             gasCookies.forEach(function (item) {
-              // Remove cookies from Google Ads
+              // remove Google Ad cookies
+              //
               if (hostname == 'localhost') {
                 j1.removeCookie({ name: item, domain: false, secure: false });
               } else {
@@ -290,14 +324,18 @@ var logText;
             });
 
             // manage tracking protection
-            // -----------------------------------------------------------------
+            //
             if (checkTrackingProtection) {
               if (!user_consent.personalization) {
-                logText = '\n' + 'consent on cookies disabled for personalization';
-                logger.debug(logText);
+                if (development) {
+                  logText = '\n' + 'consent on cookies disabled for personalization';
+                  logger.debug(logText);
+                }
 
                 if (showErrorPageOnBlocked) {
-                  logger.error('\n' + 'redirect to error page (blocked content): HTML-447');
+                  if (development) {
+                    logger.error('\n' + 'redirect to error page (blocked content): HTML-447');
+                  }
                   // redirect to error page: blocked content
                   window.location.href = '/448.html';
                 }
@@ -312,9 +350,11 @@ var logText;
           // [INFO   ] [j1.adapter.advertising                  ] [ end processing ]
           {% else %}
             var ads_found = document.getElementsByClassName('adsbygoogle').length;
-            logger = log4javascript.getLogger('j1.adapter.advertising');
-            logger.debug('\n' + 'found ads in page: #' + ads_found);
-            logger.debug('\n' + 'no ads initialized, advertising disabled');
+            if (development) {
+              logger = log4javascript.getLogger('j1.adapter.advertising');
+              logger.debug('\n' + 'found ads in page: #' + ads_found);
+              logger.debug('\n' + 'no ads initialized, advertising disabled');
+            }
           {% endif %} // END if 'advertising'
 
           clearInterval(dependencies_met_page_ready);
@@ -338,11 +378,13 @@ var logText;
         if (j1.getState() === 'finished' && contentVisible && ads_found) {
           if (!validpublisherID) {
             // skip setup processes
+            //
             clearInterval(dependencies_met_page_visible);
             return false;
           }
 
-          // START create|loading adverting for containers enabled
+          // create|loading adverting for containers enabled
+          //
           ad_containers = advertisingOptions.google.ads;
           ad_containers.forEach(function (ad) {
             if (user_consent.personalization) {
@@ -358,26 +400,46 @@ var logText;
 
                 document.getElementById(insID).setAttribute('style', ad.styles);
                 document.getElementById(insID).setAttribute('data-ad-test', ad.test)
-                document.getElementById(insID).setAttribute('data-ad-layout', ad.ad_layout);
-                document.getElementById(insID).setAttribute('data-ad-format', ad.format);
                 document.getElementById(insID).setAttribute('data-ad-client', ad.publisherID);
                 document.getElementById(insID).setAttribute('data-ad-slot', ad.slot);
+                document.getElementById(insID).setAttribute('data-ad-format', ad.ad_format);
+
+                if (ad.ad_layout == 'display') {
+                  document.getElementById(insID).setAttribute('data-full-width-responsive', ad.ad_responsive);
+                }
+
+                // if (ad.ad_layout == 'in-article') {
+                //   document.getElementById(insID).setAttribute('data-ad-format', ad.ad_format);
+                // }
+
+                if (ad.ad_layout == 'multiplex') {
+                  document.getElementById(insID).setAttribute('data-matched-content-ui-typ', ad.ui_type);
+                  document.getElementById(insID).setAttribute('data-matched-content-columns-num', ad.ui_columns);
+                  document.getElementById(insID).setAttribute('data-matched-content-rows-num', ad.ui_rows);
+                }
 
                 ads_initialized ++;
               } else {
                 if (ad.layout == layout) {
-                  logger.warn('\n' + 'ad disabled on id ' + ad.id + ' for slot: ' + ad.slot);
+                  if (development) {
+                    logger.warn('\n' + 'ad disabled on id ' + ad.id + ' for slot: ' + ad.slot);
+                  }
                 }
               }
             } else {
-              logger.warn('\n' + 'skipped add settings on all ad containers');
+              if (development) {
+                logger.warn('\n' + 'skipped add settings on all ad containers');
+              }
             } // END if user_consent.personalization
 
           });
           // END loading adverting containers
 
           if (ads_initialized > 0) {
-            logger.info('\n' + 'ads enabled found in page (total): ' + ads_found);
+            if (development) {
+              logger.info('\n' + 'ads enabled found in page (total): ' + ads_initialized);
+            }
+
             var google_ads = document.getElementsByClassName('adsbygoogle');
             var counter    = document.getElementsByClassName('adsbygoogle').length;
 
@@ -397,7 +459,9 @@ var logText;
               counter --;
             });
           } else {
-            logger.warn('\n' + 'no ads found in page for layout: ' + layout);
+            if (development) {
+              logger.warn('\n' + 'no ads found in page for layout: ' + layout);
+            }
           } // END if ads_initialized
 
           clearInterval(dependencies_met_page_visible);
@@ -421,28 +485,59 @@ var logText;
       $('.adsbygoogle').attrchange({
         trackValues: true,
         callback: function (event) {
-          if (event.newValue === 'unfilled') {
-            var elm             = event.target.dataset;
-            var elm_classes     = event.target.className;
-            var validAdContainer = (elm_classes.includes('adsbygoogle-noablate')) ? false : true;
-            var adSlotIsVisible = $('.adsbygoogle').is(":visible");
+          var elm               = event.target.dataset;
+          var elm_classes       = event.target.className;
+          var validAdContainer  = (elm_classes.includes('adsbygoogle-noablate')) ? false : true;
+          var environment       = '{{environment}}';
+          var production        = (environment.includes('prod') ? true : false);
+          var adSlotIsVisible   = $('.adsbygoogle').is(":visible");
 
-            if (adSlotIsVisible && validAdContainer) {
-              logger.warn('\n' + 'detected ad on slot ' + elm.adSlot  + ' in state: ' + event.newValue);
+          if (adSlotIsVisible && validAdContainer && event.newValue !== event.oldValue) {
+            if (event.newValue === 'unfilled') {
+              if (production) {
+                console.debug('detected ad blocks in state: unfilled');
+              } else {
+                logger.warn('\n' + 'detected ad on slot ' + elm.adSlot + ' in state: ' + event.newValue);
+              }
               if (addBorderOnUnfilled) {
                 $('.adsbygoogle').addClass('border--dotted');
               }
-
               if (autoHideOnUnfilled) {
-                logger.info('\n' + ' hide ad on slot: ' + elm.adSlot);
+                if (development) {
+                  logger.info('\n' + ' hide ad on slot: ' + elm.adSlot);
+                }
                 $('.adsbygoogle').hide();
               }
-            }
-          } else {
-            // logger.info('\n' + 'found ad in state ' + event.newValue + ' on slot: ' + elm.adSlot);
-          } // END if 'unfilled'
-        }
-      });
+            } else if (event.newValue === 'filled') {
+              if (development) {
+                logger.info('\n' + 'detected ad on slot ' + elm.adSlot + ' in state: ' + event.newValue);
+              }
+            } else {
+              var filled = (event.newValue.includes('display') ? true : false);
+              var unfilled = (event.newValue.includes('dotted') ? true : false);
+              if (filled) {
+                if (production) {
+                  console.info('detected ad blocks in state: filled');
+                } else {
+                  logger.info('\n' + 'detected ad block on slot ' + elm.adSlot + ' in state: filled');
+                }
+              } else if (unfilled) {
+                if (production) {
+                  console.info('detected ad blocks in state: unfilled');
+                } else {
+                  logger.info('\n' + 'detected ad block on slot ' + elm.adSlot + ' in state: unfilled');
+                }
+              } else {
+                if (production) {
+                  console.warn('unknown ad state detected: ' + event.newValue);
+                } else {
+                  logger.warn('\n' + 'unknown ad state detected on slot ' + elm.adSlot + ' : ' + event.newValue);
+                }
+              }
+            } // END if 'event.newValue'
+          } // END if 'adSlotIsVisible'
+        } // END 'callback'
+      }); // END 'attrchange'
     }, // END ad_monitor
 
     // -------------------------------------------------------------------------
@@ -460,8 +555,10 @@ var logText;
     check_tracking_protection: function () {
       var logger = log4javascript.getLogger('j1.adapter.advertising.monitor.tracking');
 
-      logText = '\n' + 'check for trackingprotection';
-      logger.info(logText);
+      if (development) {
+        logText = '\n' + 'check for trackingprotection';
+        logger.info(logText);
+      }
 
       function checkTrackingProtection() {
         if (!checkTrackingProtection.promise) {
@@ -482,7 +579,9 @@ var logText;
             tracking_protection = false;
           }).catch(e => {
             tracking_protection = true;
-            logger.debug('\n' + 'detection details: ' + e);
+            if (development) {
+              logger.debug('\n' + 'detection details: ' + e);
+            }
           });
         }
       }
@@ -497,8 +596,10 @@ var logText;
     messageHandler: function (sender, message) {
       var json_message = JSON.stringify(message, undefined, 2);
 
-      logText = '\n' + 'received message from ' + sender + ': ' + json_message;
-      logger.debug(logText);
+      if (development) {
+        logText = '\n' + 'received message from ' + sender + ': ' + json_message;
+        logger.debug(logText);
+      }
 
       // -----------------------------------------------------------------------
       //  Process commands|actions
@@ -507,7 +608,9 @@ var logText;
         //
         // Place handling of command|action here
         //
-        logger.info('\n' + message.text);
+        if (development) {
+          logger.info('\n' + message.text);
+        }
       }
 
       //
