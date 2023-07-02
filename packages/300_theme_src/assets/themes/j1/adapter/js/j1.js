@@ -415,8 +415,6 @@ var j1 = (function (options) {
 
       logger.info('\n' + 'register monitors');
       j1.registerMonitors();
-//    j1.registerLazyLoadCss();
-
 
       // detect middleware (mode 'app') and update user session cookie
       // -----------------------------------------------------------------------
