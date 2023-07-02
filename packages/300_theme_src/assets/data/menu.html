@@ -132,14 +132,17 @@ exclude_from_search:                    true
 {% assign icon_family = nav_menu_icon_family | strip | downcase %}
 
 {% if icon_family == 'fontawesome' or icon_family == 'fontawesome5' %}
-  {% assign nav_menu_icon_family  = 'fa' %}
-  {% assign nav_menu_icon_style   = nav_menu_icon_style %}
+  {% assign nav_menu_icon_family    = 'fa' %}
+  {% assign nav_menu_icon_style     = nav_menu_icon_style %}
 {% elsif icon_family == 'mdi' %}
-  {% assign nav_menu_icon_family  = 'mdi' %}
-  {% assign nav_menu_icon_style   = nav_menu_icon_style %}
+  {% assign nav_menu_icon_family    = 'mdi' %}
+  {% assign nav_menu_icon_style     = nav_menu_icon_style %}
+  {% elsif icon_family == 'mdib' %}
+    {% assign nav_menu_icon_family  = 'mdib' %}
+    {% assign nav_menu_icon_style   = nav_menu_icon_style %}
 {% else %}
-  {% assign nav_menu_icon_family  = 'mdi' %}
-  {% assign nav_menu_icon_style   = nav_menu_icon_style %}
+  {% assign nav_menu_icon_family    = 'mdib' %}
+  {% assign nav_menu_icon_style     = nav_menu_icon_style %}
 {% endif %}
 
 {% include {{select_color}} color=nav_menu_icon_color fallback="#9E9E9E" %}

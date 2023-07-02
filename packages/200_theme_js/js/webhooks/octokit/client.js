@@ -1,12 +1,11 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/js/webhooks/octokit/client.js
- # Provides J1 WebHook JavaScript Core functions based on GH Octokit Webhooks
+ # ~/200_theme_js/js/webhooks/octokit/client.js
+ # Provides J1 WebHook JavaScript Core functions based on
+ # GH Octokit Webhooks
  #
  # Product/Info:
  # https://jekyll.one
- #
- # 
  #
  # J1 Theme is licensed under the MIT License.
  # See: https://github.com/jekyll-one/J1 Theme/blob/master/LICENSE

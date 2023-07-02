@@ -446,11 +446,11 @@
         href:                           https://jekyll.one/pages/public/previewer/country_flags/
         icon:                           flag
         target:                         _blank
-      - title:                          MDI Icons (regular)
+      - title:                          mdib Icons (regular)
         href:                           https://jekyll.one/pages/public/previewer/mdi_font/
         icon:                           sprout
         target:                         _blank
-      - title:                          MDI Icons (light)
+      - title:                          mdib Icons (light)
         href:                           https://jekyll.one/pages/public/previewer/mdil_font/
         icon:                           sprout-outline
         target:                         _blank

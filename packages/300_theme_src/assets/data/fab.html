@@ -70,14 +70,17 @@ fab_defaults: {{fab_defaults | debug}}
 {% assign icon_family = fab_menu_icon_family | strip | downcase %}
 
 {% if icon_family == 'fontawesome' or icon_family == 'fontawesome5' %}
-  {% assign fab_menu_icon_family  = 'fa' %}
-  {% assign fab_menu_icon_style   = fab_menu_icon_style %}
+  {% assign fab_menu_icon_family    = 'fa' %}
+  {% assign fab_menu_icon_style     = fab_menu_icon_style %}
 {% elsif icon_family == 'mdi' %}
-  {% assign fab_menu_icon_family  = 'mdi' %}
-  {% assign fab_menu_icon_style   = fab_menu_icon_style %}
+  {% assign fab_menu_icon_family    = 'mdi' %}
+  {% assign fab_menu_icon_style     = fab_menu_icon_style %}
+  {% elsif icon_family == 'mdib' %}
+    {% assign fab_menu_icon_family  = 'mdib' %}
+    {% assign fab_menu_icon_style   = fab_menu_icon_style %}
 {% else %}
-  {% assign fab_menu_icon_family  = 'mdi' %}
-  {% assign fab_menu_icon_style   = fab_menu_icon_style %}
+  {% assign fab_menu_icon_family    = 'mdib' %}
+  {% assign fab_menu_icon_style     = fab_menu_icon_style %}
 {% endif %}
 
 {% comment %} unused

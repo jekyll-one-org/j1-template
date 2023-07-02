@@ -55,6 +55,7 @@ window.platform                         = require('platform');
 // -----------------------------------------------------------------------------
 window.j1.adapter                       = require('./js/adapter/adapter.js');
 window.j1.anime                         = require('./js/anime/anime.js');       // added for fam
+window.j1.lazyCss                       = require('./js/lazyCss/lazyCss.js');
 window.j1.core                          = require('./js/core/core.js');
 window.j1.core.navigator                = require('./js/navigator/navigator.js');
 window.j1.core.asciidoctor              = require('./js/asciidoctor/asciidoctor.js');
@@ -70,9 +71,10 @@ window.j1.core.scrollSmooth             = require('./js/scroll-smooth/scroll-smo
 //const J1JekyllSearch                    = require('./js/jekyll_search/jekyll_search.js');
 //const J1Yaml                            = require('js-yaml');
 const J1Tocbot                            = require('./js/tocbot/tocbot.js');
+// const J1LazyCss                           = require('./js/lazyCss/lazyCss.js');
 const J1AttrChangeListener                = require('./js/listen-attribute-changes/attrchange.js');
 
-// const J1jQueryExt                         = require('./js/jquery-extensions/jquery-regex.js');
+// const J1jQueryExt                      = require('./js/jquery-extensions/jquery-regex.js');
 
 
 //const J1ThemeSwitcher                   = require('./js/bs_theme_switcher/switcher.js');

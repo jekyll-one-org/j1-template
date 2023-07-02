@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- #  ~200_theme_js/js/asciidoctor/asciidoctor.js
+ #  ~/200_theme_js/js/asciidoctor/asciidoctor.js
  #  Provides JS functions to (dynamically) modify Asciidoctor HTML elements
  #
  #  Product/Info:

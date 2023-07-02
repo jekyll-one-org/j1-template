@@ -1,12 +1,10 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/js/scroll-smooth/scroll-smooth.js
+ # ~/200_theme_js/js/scroll-smooth/scroll-smooth.js
  # Provides Javascript functions for smooth scrolling
  #
  # Product/Info:
  # http://jekyll.one
- #
- #
  #
  # J1 Theme is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md

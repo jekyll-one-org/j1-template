@@ -356,16 +356,12 @@ resources:
       pass_init_data:                   true
       data:
         css:                            [
-                                          modules/spinner/css/spin,
-                                          core/css/icon-fonts/mdi,
-                                          core/css/icon-fonts/mdil,
-                                          core/css/icon-fonts/fontawesome,
-                                          core/css/themes/unolight/bootstrap,
+                                          core/css/icon-fonts/mdib,
+#                                         core/css/themes/unolight/bootstrap,
                                           core/css/vendor
                                         ]
         files:                          [ adapter/js/j1.js ]
         js:                             [
-                                          modules/spinner/js/spin,
                                           modules/jquery/js/jquery,
                                           modules/jquery/js/extensions/hasClass,
                                           modules/jquery/js/extensions/removeClass,
@@ -827,7 +823,7 @@ resources:
       dependencies:                     false
       pass_init_data:                   false
       data:
-        css:                            [ modules/rtable/css/theme/uno/rtable ]
+        css:                            []
         files:                          [ adapter/js/rtable.js ]
         js:                             [ modules/rtable/js/rtable ]
         init_function:                  [ j1.adapter.rtable.init ]
@@ -859,24 +855,24 @@ resources:
   #
   # See: https://github.com/lipis/flag-icons
   #
-  - name:                               CSS Flags Previewer
-    resource:
-      enabled:                          true
-
-      id:                               css_flags_previewer
-      comment:                          Module CSS Flags Previewer
-      layout:                           [ all ]
-      region:                           head
-      required:                         always
-      preload:                          false
-      script_load:
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            [ core/country-flags/css/theme/uno ]
-        files:                          []
-        js:                             []
-        init_function:                  []
+  # - name:                               CSS Flags Previewer
+  #   resource:
+  #     enabled:                          true
+  #
+  #     id:                               css_flags_previewer
+  #     comment:                          Module CSS Flags Previewer
+  #     layout:                           [ all ]
+  #     region:                           head
+  #     required:                         always
+  #     preload:                          false
+  #     script_load:
+  #     dependencies:                     false
+  #     pass_init_data:                   false
+  #     data:
+  #       css:                            [ core/country-flags/css/theme/uno ]
+  #       files:                          []
+  #       js:                             []
+  #       init_function:                  []
 
   # ----------------------------------------------------------------------------
   # rtextResizer (currently NOT used)
@@ -922,6 +918,7 @@ resources:
       data:
         css:                            []
         files:                          [ modules/msDropdown/css/themes/uno/msDropdown.css ]
+        files:                          []
         js:                             [ modules/msDropdown/js/msDropdown ]
         init_function:                  []
 
@@ -1991,6 +1988,29 @@ resources:
         files:                          [ adapter/js/themeToggler.js ]
         js:                             []
         init_function:                  [ j1.adapter.themeToggler.init ]
+
+  # ----------------------------------------------------------------------------
+  # dynamicLoader
+  # Configurable JS
+  #
+  - name:                               dynamicLoader
+    resource:
+      enabled:                          true
+
+      id:                               dynamic_loader
+      comment:                          Module dynamicLoader
+      region:                           head
+      layout:                           [ all ]
+      required:                         always
+      preload:                          false
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            []
+        files:                          [ adapter/js/dynamicLoader.js ]
+        js:                             []
+        init_function:                  [ j1.adapter.dynamicLoader.init ]
 
 # ------------------------------------------------------------------------------
 # END config

@@ -72,34 +72,6 @@
           icon:                         magnify
 
     # --------------------------------------------------------------------------
-    # Cheatsheets
-    #
-    - title:                            Cheatsheet
-      icon:                             book
-      dropdown:
-
-        - title:                        J1
-#         href:                         /pages/public/tools/cheatsheet/j1/
-          href:                         https://jekyll.one/pages/public/tools/cheatsheet/j1/
-          icon:                         alpha-j-box-outline
-          target:                       _blank
-        - title:                        YAML
-#         href:                         /pages/public/tools/cheatsheet/yaml/
-          href:                         https://jekyll.one/pages/public/tools/cheatsheet/yaml/
-          icon:                         alpha-y-box-outline
-          target:                       _blank
-        - title:                        Git
-#         href:                         /pages/public/tools/cheatsheet/git/
-          href:                         https://jekyll.one/pages/public/tools/cheatsheet/git/
-          icon:                         git
-          target:                       _blank
-        - title:                        Gem
-#         href:                         /pages/public/tools/cheatsheet/gem/
-          href:                         https://jekyll.one/pages/public/tools/cheatsheet/gem/
-          icon:                         language-ruby
-          target:                       _blank
-
-    # --------------------------------------------------------------------------
     # Collections
     #
     - title:                            Collections
@@ -326,11 +298,11 @@
           icon:                         emoticon-cool-outline
           dropdown:
 
-            - title:                    MDI Icons (Regular)
+            - title:                    mdib Icons (Regular)
               href:                     https://jekyll.one/pages/public/manuals/components/fonticons/mdi/
               icon:                     emoticon-cool-outline
 
-            - title:                    MDI Icons (Light)
+            - title:                    mdib Icons (Light)
               href:                     https://jekyll.one/pages/public/manuals/components/fonticons/mdil/
               icon:                     emoticon-cool-outline
 
@@ -455,17 +427,15 @@
       - title:                          Current Theme
         href:                           /pages/public/tools/previewer/current_theme/
         icon:                           theme-light-dark
-      - title:                          Google Adsense
-        href:                           /pages/public/tools/previewer/gad/
-        icon:                           image
 
       - title:                          Icon Picker
-        href:                           /pages/public/tools/previewer/icon-picker/
+        href:                           https://jekyll.one/pages/public/tools/previewer/icon-picker/
         icon:                           emoticon-cool-outline
-      - title:                          Image Placeholders
-        href:                           /pages/public/tools/previewer/image_placeholder/
+        target:                         _blank
+      - title:                          Google Adsense
+        href:                           https://jekyll.one/pages/public/tools/previewer/gad/
         icon:                           image
-
+        target:                         _blank
       - title:                          Slick
         href:                           https://jekyll.one/pages/public/tools/previewer/slick/
         icon:                           view-carousel
@@ -503,18 +473,18 @@
       icon:                             book
       dropdown:
 
-        - title:                        J1
-          href:                         /pages/public/tools/cheatsheet/j1/
-          icon:                         alpha-j-box-outline
         - title:                        YAML
-          href:                         /pages/public/tools/cheatsheet/yaml/
+          href:                         https://jekyll.one/pages/public/tools/cheatsheet/yaml/
           icon:                         alpha-y-box-outline
+          target:                       _blank
         - title:                        Git
-          href:                         /pages/public/tools/cheatsheet/git/
+          href:                         https://jekyll.one/pages/public/tools/cheatsheet/git/
           icon:                         git
+          target:                       _blank
         - title:                        Gem
-          href:                         /pages/public/tools/cheatsheet/gem/
+          href:                         https://jekyll.one/pages/public/tools/cheatsheet/gem/
           icon:                         language-ruby
+          target:                       _blank
 
     # --------------------------------------------------------------------------
     # Tools
@@ -638,7 +608,7 @@
         - title:                        cdnJS
           href:                         https://cdnjs.com/
           target:                       _blank
-          icon:                         arrow-down-bold-hexagon-outline
+          icon:                         cloud
 
     - title:                            Knowledge
       icon:                             lightbulb-on
@@ -762,7 +732,6 @@
     - bootswatch_themes:                enabled
       title:                            Bootswatch
       icon:                             bootstrap
-
 
 # ------------------------------------------------------------------------------
 # Menu ABOUT

@@ -47,11 +47,11 @@
     "_theme_css:theme_agency": "node-sass --importer=node_modules/node-sass-tilde-importer theme-agency.scss dist/themes/agency/bootstrap.css 2>log/theme_agency.log",
     "_theme_css:theme_vapor": "node-sass --importer=node_modules/node-sass-tilde-importer theme_vapor.scss dist/themes/theme_vapor/bootstrap.css 2>log/theme_vapor.log",
 
-    "_theme_css:nbinteract-tutorial": "node-sass --importer=node_modules/node-sass-tilde-importer nbinteract-tutorial.scss dist/nbinteract-tutorial/styles.css 2>log/nbinteract-tutorial.log",
     "theme_css:icons_fontawesome": "node-sass --importer=node_modules/node-sass-tilde-importer icons-fontawesome.scss dist/icon-fonts/fontawesome.css 2>log/fontawesome.log",
     "theme_css:icons_iconify": "node-sass --importer=node_modules/node-sass-tilde-importer icons-iconify.scss dist/icon-fonts/iconify.css 2>log/iconify.log",
-    "theme_css:icons_materialdesign": "node-sass --importer=node_modules/node-sass-tilde-importer icons-materialdesign.scss dist/icon-fonts/mdi.css 2>log/mdi-icons.log",
-    "theme_css:icons_materialdesign_light": "node-sass --importer=node_modules/node-sass-tilde-importer icons-materialdesign-light.scss dist/icon-fonts/mdil.css 2>log/mdil-icons.log",
+    "theme_css:icons_mdi_base": "node-sass --importer=node_modules/node-sass-tilde-importer icons-materialdesign-base.scss dist/icon-fonts/mdib.css 2>log/mdib-icons.log",
+    "theme_css:icons_mdi_regular": "node-sass --importer=node_modules/node-sass-tilde-importer icons-materialdesign-regular.scss dist/icon-fonts/mdi.css 2>log/mdi-icons.log",
+    "theme_css:icons_mdi_light": "node-sass --importer=node_modules/node-sass-tilde-importer icons-materialdesign-light.scss dist/icon-fonts/mdil.css 2>log/mdil-icons.log",
     "theme_css:animate": "node-sass --importer=node_modules/node-sass-tilde-importer animate.scss dist/animate.css 2>log/animate.log",
     "theme_css:vendor": "node-sass --importer=node_modules/node-sass-tilde-importer vendor.scss dist/vendor.css 2>log/vendor.log",
 
@@ -64,8 +64,9 @@
     "_uglify_css:nbinteract-tutorial": "postcss dist/nbinteract-tutorial/styles.css -o dist/nbinteract-tutorial/styles.min.css",
     "uglify_css:icons_fontawesome": "postcss dist/icon-fonts/fontawesome.css -o dist/icon-fonts/fontawesome.min.css",
     "uglify_css:icons_iconify": "postcss dist/icon-fonts/iconify.css -o dist/icon-fonts/iconify.min.css",
-    "uglify_css:icons_materialdesign": "postcss dist/icon-fonts/mdi.css -o dist/icon-fonts/mdi.min.css",
-    "uglify_css:icons_materialdesign_light": "postcss dist/icon-fonts/mdil.css -o dist/icon-fonts/mdil.min.css",
+    "uglify_css:icons_mdi_base": "postcss dist/icon-fonts/mdib.css -o dist/icon-fonts/mdib.min.css",
+    "uglify_css:icons_mdi_regular": "postcss dist/icon-fonts/mdi.css -o dist/icon-fonts/mdi.min.css",
+    "uglify_css:icons_mdi_light": "postcss dist/icon-fonts/mdil.css -o dist/icon-fonts/mdil.min.css",
     "uglify_css:animate": "postcss dist/animate.css -o dist/animate.min.css",
     "uglify_css:vendor": "postcss dist/vendor.css -o dist/vendor.min.css",
 

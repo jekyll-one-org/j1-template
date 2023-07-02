@@ -52,9 +52,14 @@ regenerate:                             true
 -------------------------------------------------------------------------------- {% endcomment %}
 {% assign themer_options    = themer_defaults| merge: themer_settings %}
 {% assign footer_options    = footer_defaults | merge: footer_settings %}
+{% assign footer            = 'active_footer' %}
 {% assign footer_id         = footer_options.active_footer %}
 {% assign default_theme     = template_config.theme %}
 {% assign theme_base        = "core/css/themes" %}
+
+
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
 
 {% if environment == "development" or environment == "test" %}
   {% assign theme_ext       = "css" %}
@@ -62,8 +67,6 @@ regenerate:                             true
   {% assign theme_ext       = "min.css" %}
 {% endif %}
 
-{% comment %} Detect prod mode
--------------------------------------------------------------------------------- {% endcomment %}
 {% assign production = false %}
 {% if environment == 'prod' or environment == 'production' %}
   {% assign production = true %}
@@ -117,7 +120,7 @@ j1.adapter.themer = (function (j1, window) {
   var user_state_detected       = false;
   var styleLoaded               = false;
   var id                        = 'default';
-  var cssExtension              = (environment === 'production') ? '.min.css' : '.css';
+  var cssExtension              = (development) ? '.css' : '.min.css';
   var default_theme_name        = '{{default_theme.name}}';
   var default_theme_author      = '{{default_theme.author}}';
   var default_theme_author_url  = '{{default_theme.author_url}}';
@@ -205,7 +208,7 @@ j1.adapter.themer = (function (j1, window) {
       baseUrl     = url.origin;
       error_page  = url.origin + '/204.html';
       j1Cookies   = j1.findCookie('j1');
-      gaCookies   = j1.findCookie('_ga');
+      gaCookies   = j1.findCookie('__g');
 
       // initialize state flag
       _this.state = 'started';
@@ -220,7 +223,7 @@ j1.adapter.themer = (function (j1, window) {
       // Find conterpart (show) in the j1.adapter
       // hide content|footer until 'page' is loaded
       $('#content').hide();
-      $('{{footer_id}}').hide();
+      $('.{{footer}}').hide();
 
       // jadams, 2021-07-25: problem seems NOT an timing issue on the iPad
       // platform. (General) Dependency should be REMOVED!!!

@@ -82,8 +82,7 @@ regenerate:                             true
 
 {% assign authentication_options    = authentication_defaults | merge: authentication_settings %}
 
-
-
+{% assign footer                    = 'active_footer' %}
 {% assign footer_id                 = footer_options.active_footer %}
 {% assign footer_data_path          = footer_defaults.data_path %}
 {% assign banner_data_path          = banner_defaults.data_path %}
@@ -164,6 +163,8 @@ var j1 = (function (options) {
   // defaults for status information
   var state                         = 'not_started';
   var mode                          = 'not_detected';
+
+  var performance_monitors_enabled  = ('{{template_config.monitor.performance_observer}}' === 'true') ? true: false;
 
   // defaults for tracking providers
   var tracking_enabled              = ('{{tracking_enabled}}' === 'true') ? true: false;
@@ -414,6 +415,8 @@ var j1 = (function (options) {
 
       logger.info('\n' + 'register monitors');
       j1.registerMonitors();
+//    j1.registerLazyLoadCss();
+
 
       // detect middleware (mode 'app') and update user session cookie
       // -----------------------------------------------------------------------
@@ -562,7 +565,7 @@ var j1 = (function (options) {
                       // show the content|footer
                       //
                       $('#content').show();
-                      $('#{{footer_id}}').show();
+                      $('.{{footer}}').show();
 
                       clearInterval(dependencies_met_page_ready);
                       clearInterval(dependencies_met_blocks_ready);
@@ -582,7 +585,7 @@ var j1 = (function (options) {
                   //
                   if ( footer_state == 'success') {
                     $('#content').show();
-                    $('#{{footer_id}}').show();
+                    $('.{{footer}}').show();
 
                     clearInterval(dependencies_met_page_ready);
                   }
@@ -720,7 +723,7 @@ var j1 = (function (options) {
                 // show the content|footer
                 //
                 $('#content').show();
-                $('#{{footer_id}}').show();
+                $('.{{footer}}').show();
 
                 clearInterval(dependencies_met_page_ready);
                 clearInterval(dependencies_met_blocks_ready);
@@ -740,7 +743,7 @@ var j1 = (function (options) {
             //
             if ( footer_state == 'success') {
               $('#content').show();
-              $('#{{footer_id}}').show();
+              $('.{{footer}}').show();
 
               clearInterval(dependencies_met_page_ready);
             }
@@ -2700,6 +2703,64 @@ var j1 = (function (options) {
     }, // END stringToBoolean
 
     // -------------------------------------------------------------------------
+    // registerLazyLoadCss()
+    // CSS loader to speed up inital rendering
+    //
+    // Requires the following config serrings:
+    //
+    //    src:        the 'location' of the CSS file
+    //    selector:   the 'selector' that triggers the observer
+    //    rootMargin: the 'margin' before the load is trigged
+    //
+    // -------------------------------------------------------------------------
+    //
+    registerLazyLoadCss: function () {
+
+      console.log('register CSS files for lazy loading');
+
+      // load MDI Light CSS
+      //
+      j1.lazyCss().observe({
+        'src':        '/assets/themes/j1/core/css/icon-fonts/mdil.min.css',
+        'selector':   '.mdil',
+        'rootMargin': '150px 0px'
+      });
+
+      // load MDI Regular CSS
+      //
+      j1.lazyCss().observe({
+        'src':        '/assets/themes/j1/core/css/icon-fonts/mdi.min.css',
+        'selector':   '.mdi',
+        'rootMargin': '150px 0px'
+      });
+
+      // load FA CSS
+      //
+      j1.lazyCss().observe({
+        'src':        '/assets/themes/j1/core/css/icon-fonts/fontawesome.min.css',
+        'selector':   '.fa',
+        'rootMargin': '150px 0px'
+      });
+
+      // load rTable CSS
+      //
+      j1.lazyCss().observe({
+        'src':        '/assets/themes/j1/modules/rtable/css/theme/uno/rtable.min.css',
+        'selector':   '.rtable',
+        'rootMargin': '150px 0px'
+      });
+
+      // load CountryFlags CSS
+      //
+      j1.lazyCss().observe({
+        'src':        '/assets/themes/j1/core/country-flags/css/theme/uno.min.css',
+        'selector':   '.flag-icon',
+        'rootMargin': '150px 0px'
+      });
+
+    }, // END registerLazyLoadCss
+
+    // -------------------------------------------------------------------------
     // registerMonitors()
     //
     // -------------------------------------------------------------------------
@@ -2899,19 +2960,22 @@ var j1 = (function (options) {
       // run all observers for page monitoring
       // -----------------------------------------------------------------------
 
-      // monitor 'LCP'
-      //
-      performanceObserverLCP.observe({
-         type: 'largest-contentful-paint',
-         buffered: true
-      });
+      if (performance_monitors_enabled) {
+        // monitor 'LCP'
+        //
+        performanceObserverLCP.observe({
+           type: 'largest-contentful-paint',
+           buffered: true
+        });
 
-      // monitor 'CLS'
-      //
-      performanceObserverCLS.observe({
-         type: 'layout-shift',
-         buffered: true
-      });
+        // monitor 'CLS'
+        //
+        performanceObserverCLS.observe({
+           type: 'layout-shift',
+           buffered: true
+        });
+
+      } // END if 'performance_monitors'
 
       // monitor 'GROWTH'
       resizeObserver.observe(

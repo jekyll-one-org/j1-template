@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/assets/themes/j1/modules/fam/js/fam.js
+ # ~/200_theme_js/js/fam/fam.js
  # Provides JS Core for J1 Module FAM (Floating Button Menu)
  #
  # Product/Info:

@@ -1,6 +1,6 @@
 /*
  # -----------------------------------------------------------------------------
- # ~/js/adoc_result_viewer/view_results.js
+ # ~/200_theme_js/js/adoc_result_viewer/view_results.js
  # Provides JavaScript functions displaying results for Asciidoctor
  # example block
  #

@@ -1,13 +1,21 @@
 /*
-  A simple jQuery function that can add listeners on attribute change.
-  http://meetselva.github.io/attrchange/
-
-  About License:
-  Copyright (C) 2013-2014 Selvakumar Arumugam
-  You may use attrchange plugin under the terms of the MIT Licese.
-  https://github.com/meetselva/attrchange/blob/master/MIT-License.txt
+ # -----------------------------------------------------------------------------
+ # ~/200_theme_js/js/listen-attribute-changes/attrchange.js
+ # A simple jQuery function that can add listeners on attribute change.
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2013-2014 Selvakumar Arumugam
+ # Copyright (C) 2023 Juergen Adams
+ #
+ # Attrchange is licensed under the MIT License.
+ # See: https://github.com/meetselva/attrchange/blob/master/MIT-License.txt
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
 */
-
 ;(function($) {
 
 	function isDOMAttrModifiedSupported() {

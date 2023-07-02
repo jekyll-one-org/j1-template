@@ -247,7 +247,7 @@ lanes:
   #   Generate ad containers for Google Adsense on the 'home' page
   #
   - lane:
-      enabled:                          true
+      enabled:                          false
       id:                               google_adsense_container
       region:                           body-main
       type:                             sync

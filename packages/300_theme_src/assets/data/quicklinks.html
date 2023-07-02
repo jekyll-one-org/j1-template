@@ -220,8 +220,10 @@ exclude_from_search:                    true
   {% assign icon_family = 'fa' %}
 {% elsif quicklinks_options.icon_family == 'MDI' or quicklinks_options.icon_family == 'Material Design Icons' %}
   {% assign icon_family = 'mdi' %}
+{% elsif quicklinks_options.icon_family == 'mdib' or quicklinks_options.icon_family == 'Material Design Icons' %}
+  {% assign icon_family = 'mdib' %}
 {% else %}
-  {% assign icon_family = 'mdi' %}
+  {% assign icon_family = 'mdib' %}
 {% endif %}
 
 {% include {{select_icon_size}} family=quicklinks_options.icon_family size=quicklinks_options.icon_size %}

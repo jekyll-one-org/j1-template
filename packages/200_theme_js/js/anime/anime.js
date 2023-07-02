@@ -1,10 +1,22 @@
 /*
- * anime.js v3.2.0
- * (c) 2020 Julian Garnier
- * Released under the MIT license
- * animejs.com
- */
-
+ # -----------------------------------------------------------------------------
+ # ~/200_theme_js/js/anime/anime.js
+ # lightweight JavaScript animation library with a simple, yet powerful API.
+ # v3.2.0
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2020 Julian Garnier
+ # Copyright (C) 2023 Juergen Adams
+ #
+ # Anime is licensed under the MIT License.
+ # See: https://github.com/juliangarnier/anime/blob/master/LICENSE.md
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+*/
 'use strict';
 
 // Defaults
@@ -242,7 +254,7 @@ var penner = (function () {
       var a = minMax(amplitude, 1, 10);
       var p = minMax(period, .1, 2);
       return function (t) {
-        return (t === 0 || t === 1) ? t : 
+        return (t === 0 || t === 1) ? t :
           -a * Math.pow(2, 10 * (t - 1)) * Math.sin((((t - 1) - (p / (Math.PI * 2) * Math.asin(1 / a))) * (Math.PI * 2)) / p);
       }
     }
@@ -258,7 +270,7 @@ var penner = (function () {
     var easeIn = functionEasings[name];
     eases['easeIn' + name] = easeIn;
     eases['easeOut' + name] = function (a, b) { return function (t) { return 1 - easeIn(a, b)(1 - t); }; };
-    eases['easeInOut' + name] = function (a, b) { return function (t) { return t < 0.5 ? easeIn(a, b)(t * 2) / 2 : 
+    eases['easeInOut' + name] = function (a, b) { return function (t) { return t < 0.5 ? easeIn(a, b)(t * 2) / 2 :
       1 - easeIn(a, b)(t * -2 + 2) / 2; }; };
   });
 
@@ -515,7 +527,7 @@ function getRectLength(el) {
 
 function getLineLength(el) {
   return getDistance(
-    {x: getAttribute(el, 'x1'), y: getAttribute(el, 'y1')}, 
+    {x: getAttribute(el, 'x1'), y: getAttribute(el, 'y1')},
     {x: getAttribute(el, 'x2'), y: getAttribute(el, 'y2')}
   );
 }
@@ -856,7 +868,7 @@ var pausedInstances = [];
 var raf;
 
 var engine = (function () {
-  function play() { 
+  function play() {
     raf = requestAnimationFrame(step);
   }
   function step(t) {

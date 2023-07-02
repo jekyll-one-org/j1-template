@@ -86,14 +86,14 @@ settings:
 
         wave:
           top:
-            enabled:                      true
+            enabled:                      false
             height:                       2                                     # [1 .. 9]
             style:                        wave-1                                # default
             color:                        "#EEEEEE"                             # "#dcdcdc"
             background_color:             "#FAFAFA"                             # auto|rgb_value, "#FAFAFA"
             transform:                    false                                 # false or rotate|flip-x|flip-y and combinations
           bottom:
-            enabled:                      true
+            enabled:                      false
             height:                       2
             style:                        wave-4
             color:                        "#EEEEEE"
@@ -110,7 +110,7 @@ settings:
               title_translate:          notranslate                             # translate|notranslate
               tagline:                  J1 Theme
               icon:                     responsive
-              icon_family:              MDI
+              icon_family:              mdib
               icon_size:                3x
               icon_color:
               text: >
@@ -139,7 +139,7 @@ settings:
               title_translate:          notranslate                             # translate|notranslate
               tagline:                  J1 Theme
               icon:                     tools
-              icon_family:              MDI
+              icon_family:              mdib
               icon_size:                3x
               icon_color:
               text: >
@@ -167,7 +167,7 @@ settings:
               title_translate:          notranslate                             # translate|notranslate
               tagline:                  J1 Theme
               icon:                     clock
-              icon_family:              MDI
+              icon_family:              mdib
               icon_size:                3x
               icon_color:
               text: >
@@ -233,14 +233,14 @@ settings:
 
         wave:
           top:
-            enabled:                      true
+            enabled:                      defaultCssFile
             height:                       4                                     # [1 .. 9]
             style:                        wave-4                                # default
             color:                        "#EEEEEE"
             background_color:             "#FAFAFA"
             transform:                    false                                 # false or rotate|flip-x|flip-y and combinations
           bottom:
-            enabled:                      true
+            enabled:                      false
             height:                       2
             style:                        wave-4
             color:                        "#EEEEEE"
@@ -433,14 +433,14 @@ settings:
 
         wave:
           top:
-            enabled:                      true
+            enabled:                      false
             height:                       2                                     # [1 .. 9]
             style:                        wave-1                                # default
             color:                        "#EEEEEE"
             background_color:             "#FAFAFA"
             transform:                    false                                 # false or rotate|flip-x|flip-y and combinations
           bottom:
-            enabled:                      true
+            enabled:                      false
             height:                       2
             style:                        wave-4
             color:                        "#EEEEEE"
@@ -454,7 +454,7 @@ settings:
               enabled:                  true
               id:                       card_1
               icon:                     globe-model
-              icon_family:              MDI
+              icon_family:              mdib
               icon_size:                mdi-6x
               icon_color:               md-white
               href:                     /pages/public/features/general_features/
@@ -592,7 +592,7 @@ settings:
               enabled:                  true
               id:                       card_2
               icon:                     gift
-              icon_family:              MDI
+              icon_family:              mdib
               icon_size:                mdi-6x
               icon_color:               md-white
               href:                     /pages/public/features/template_features/

@@ -138,7 +138,7 @@ settings:
 
         # container settings
         # ----------------------------------------------------------------------
-        enabled:                        true
+        enabled:                        false
 
         id:                             ad_5128488466
         layout:                         home
@@ -148,7 +148,7 @@ settings:
         # ad properties
         # ----------------------------------------------------------------------
         publisherID:                    ca-pub-3885670015316130
-        test:                           "off"
+        test:                           "on"
         styles:                         "display:block;"
         slot:                           5128488466
         ad_layout:                      display
@@ -172,7 +172,7 @@ settings:
         # ad properties
         # ----------------------------------------------------------------------
         publisherID:                    ca-pub-3885670015316130
-        test:                           "off"
+        test:                           "on"
         styles:                         "display:block;"
         slot:                           7284712660
         ad_layout:                      display
@@ -199,7 +199,7 @@ settings:
         # ad properties
         # ----------------------------------------------------------------------
         publisherID:                    ca-pub-3885670015316130
-        test:                           "off"
+        test:                           "on"
         styles:                         "display:block;"
         slot:                           5128488466
         ad_layout:                      display
@@ -222,7 +222,7 @@ settings:
         # ad properties
         # ----------------------------------------------------------------------
         publisherID:                    ca-pub-3885670015316130
-        test:                           "off"
+        test:                           "on"
         styles:                         "display:block; text-align:center;"
         slot:                           7522184684
         ad_layout:                      in-article

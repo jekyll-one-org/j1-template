@@ -36,14 +36,14 @@ defaults:
   #
   #   icon_family
   #   ----------------------------------------------------------------------------
-  #   Set the Icon font (Material Design Icon MDI|FontAwesone FA)
+  #   Set the Icon font (Material Design Icon mdib|FontAwesone FA)
   #
-  #   values:                         familiy (MDI|FA)
-  #   default:                        MDI
+  #   values:                         familiy (mdib|FA)
+  #   default:                        mdib
   #
   #   icon_style
   #   ----------------------------------------------------------------------------
-  #   Select the style (FA only, for MDI always mdi)
+  #   Select the style (FA only, for mdib always mdi)
   #
   #   values:                         style (mdi|far|fas|fab)
   #   default:                        mdi
@@ -62,7 +62,7 @@ defaults:
   #   values:                         size string (all supported size names mdi-*)
   #   default:                        true
   #
-  icon_family:                          MDI
+  icon_family:                          mdib
   icon_style:                           mdi
   icon_color:                           mdi-grey
   icon_size:                            mdi-sm
@@ -131,7 +131,7 @@ defaults:
     max_height:                         550                                     # px
     menu_font_size:                     larger
     megamenu_font_size:                 small
-    icon_family:                        MDI
+    icon_family:                        mdib
     icon_style:                         mdi                                     # far regular icon
     icon_color:                         "#9E9E9E"                               # md-grey
     icon_size:                          mdi-sm
@@ -167,7 +167,7 @@ defaults:
     xhr_data_element:                   quicklinks
     xhr_data_path:                      /assets/data/quicklinks/index.html
 
-    icon_family:                        MDI
+    icon_family:                        mdib
     icon_color:                         rgba(255, 255, 255, 0.5)                # rgba-lighten
     icon_color_hover:                   rgba(255, 255, 255, 0.9)                # rgba-lighten-900
     icon_size:                          mdi-2x
@@ -233,7 +233,7 @@ defaults:
     container_id:                       navigator_nav_topsearch
 
     type:                               quicksearch
-    icon_family:                        MDI
+    icon_family:                        mdib
     icon_color:                         "#FFFFFF"                               # md-white
     icon_size:                          mdi-2x
     search_icon:                        magnify

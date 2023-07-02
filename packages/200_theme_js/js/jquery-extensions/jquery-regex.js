@@ -1,26 +1,15 @@
 /*
  # -----------------------------------------------------------------------------
- #  ~/js/navigator/navigator.js
- #  Provides all JavaScript core functions for J1 Navigator
+ #  ~/200_theme_js/js/jquery-extensions/jquery-regex.js
+ #  Provides additional jQuery functions
  #
  #  Product/Info:
  #  https://jekyll.one
- #  https://github.com/adamnurdin01/bootsnav
- #  http://corenav.anurdin.net/
  #
  #  Copyright (C) 2023 Juergen Adams
- #  Copyright (C) 2016 adamnurdin01
  #
  #  J1 Theme is licensed under MIT License.
  #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
- #  Bootsnav is licensed under MIT License.
- #  See: https://github.com/adamnurdin01/navigator
- #
- # -----------------------------------------------------------------------------
- # NOTE:
- #  jadams, 2020-06-21:
- #    J1 Navigator needs a general revision on BS4 code and functionalities
- #    Current, only base function are tested with BS4 (was coded for BS3)
  # -----------------------------------------------------------------------------
 */
 
