@@ -53,6 +53,9 @@ window.platform                         = require('platform');
 // Following source objects|modules are *explicitely* forced to be
 // exposed for run-time to the global namespace (window).
 // -----------------------------------------------------------------------------
+// window.deeplTranslator               = require('./js/deepl-translator');     // J1 Module deeplAPI used instead
+// window.j1.fam                        = require('./js/fam/fam.js');           // cannot used until NOT rewritten to jQuery
+
 window.j1.adapter                       = require('./js/adapter/adapter.js');
 window.j1.anime                         = require('./js/anime/anime.js');       // added for fam
 window.j1.lazyCss                       = require('./js/lazyCss/lazyCss.js');
@@ -61,24 +64,16 @@ window.j1.core.navigator                = require('./js/navigator/navigator.js')
 window.j1.core.asciidoctor              = require('./js/asciidoctor/asciidoctor.js');
 window.j1.core.scrollSmooth             = require('./js/scroll-smooth/scroll-smooth.js');
 
-// window.deeplTranslator               = require('./js/deepl-translator');     // J1 Module deeplAPI used instead
-// window.j1.fam                        = require('./js/fam/fam.js');           // cannot used until NOT rewritten to jQuery
-
 // Following source objects|modules are *implicetly* forced to be
 // exposed for run-time to the global namespace (window).
 // -----------------------------------------------------------------------------
-//const Bootstrap                         = require('./js/bootstrap/bootstrap.js');
-//const J1JekyllSearch                    = require('./js/jekyll_search/jekyll_search.js');
-//const J1Yaml                            = require('js-yaml');
-const J1Tocbot                            = require('./js/tocbot/tocbot.js');
-// const J1LazyCss                           = require('./js/lazyCss/lazyCss.js');
-const J1AttrChangeListener                = require('./js/listen-attribute-changes/attrchange.js');
-
+// const J1Yaml                           = require('js-yaml');
 // const J1jQueryExt                      = require('./js/jquery-extensions/jquery-regex.js');
-
-
-//const J1ThemeSwitcher                   = require('./js/bs_theme_switcher/switcher.js');
+// const J1ThemeSwitcher                  = require('./js/bs_theme_switcher/switcher.js');
 // const J1MmenuLight                     = require('./js/mmenu-light/mmenu.js');
+
+const J1Tocbot                            = require('./js/tocbot/tocbot.js');
+const J1AttrChangeListener                = require('./js/listen-attribute-changes/attrchange.js');
 
 // Passing log data over Internet|SeeMe (currently NOT used)
 // -----------------------------------------------------------------------------
@@ -92,7 +87,6 @@ const J1AttrChangeListener                = require('./js/listen-attribute-chang
 // -----------------------------------------------------------------------------
 // window.j1.core.webhooks              = require('./js/webhooks/octokit/client.js');
 
-
 // Test|Custom modules (currently NOT used)
 // -----------------------------------------------------------------------------
 // window.j1promiseTest                 = require('./js/custom/test_promises.js');
@@ -104,7 +98,6 @@ const J1AttrChangeListener                = require('./js/listen-attribute-chang
 // exposed for run-time to the global namespace (window).
 // -----------------------------------------------------------------------------
 // const Bootstrap                      = require('./js/bootstrap/bootstrap.js');
-
 // const J1JekyllSearch                 = require('./js/jekyll_search/jekyll_search.js'); // Buffer Kack
 // const J1Tocbot                       = require('./js/tocbot/tocbot.js');
 
