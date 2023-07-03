@@ -244,7 +244,7 @@
           target:                       _blank
         - title:                        Logger
           href:                         https://jekyll.one/pages/public/manuals/modules/logger/
-          icon:                         math-log
+          icon:                         file-document-edit-outline
         - title:                        Master Slider
           href:                         https://jekyll.one/pages/public/manuals/modules/masterslider/
           icon:                         gesture-swipe
@@ -263,7 +263,7 @@
           icon:                         near-me
         - title:                        Range Slider
           href:                         https://jekyll.one/pages/public/manuals/modules/rangeslider/
-          icon:                         distribute-vertical-center
+          icon:                         abacus
           target:                       _blank
         - title:                        Code Hightlighter Rouge
           href:                         https://jekyll.one/pages/public/manuals/rouge/user_guide/

@@ -168,10 +168,10 @@ j1.adapter.lunr = (function (j1, window) {
       _this.modalScript.text += '{{#docs}}' + '\n';
       _this.modalScript.text += '  <li>' + '\n';
       _this.modalScript.text += '    <h4 class="result-item"> <a class="link-no-decoration" href="{{url}}" target="_blank">{{title}} · {{tagline}}</a> </h4>' + '\n';
-      _this.modalScript.text += '    <p class="result-item-text small text-muted mt-2 mb-0"> <i class="mdi mdi-calendar-blank mdi-18px mr-1"></i>{{displaydate}} </p>' + '\n';
+      _this.modalScript.text += '    <p class="result-item-text small text-muted mt-2 mb-0"> <i class="mdib mdib-calendar-blank mdib-18px mr-1"></i>{{displaydate}} </p>' + '\n';
       _this.modalScript.text += '    <p class="result-item-text">{{description}}</p>' + '\n';
-      _this.modalScript.text += '      <i class="mdi mdi-tag-text-outline mdi-18px mr-1"></i><span class="sr-categories">{{#categories}} {{.}} · {{/categories}}</span>' + '\n';
-      _this.modalScript.text += '      <i class="mdi mdi-tag mdi-18px mr-1 ml-2"></i><span class="sr-tags">{{#tags}} {{.}} · {{/tags}}</span>' + '\n';
+      _this.modalScript.text += '      <i class="mdib mdib-tag-text-outline mdib-18px mr-1"></i><span class="sr-categories">{{#categories}} {{.}} · {{/categories}}</span>' + '\n';
+      _this.modalScript.text += '      <i class="mdib mdib-tag mdib-18px mr-1 ml-2"></i><span class="sr-tags">{{#tags}} {{.}} · {{/tags}}</span>' + '\n';
       _this.modalScript.text += '    </p>' + '\n';
       _this.modalScript.text += '  </li>' + '\n';
       _this.modalScript.text += '{{/docs}}' + '\n';

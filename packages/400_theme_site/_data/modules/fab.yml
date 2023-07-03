@@ -195,7 +195,7 @@ settings:
           color:                        md-green
           event_handler:                scroll_previous_section
           icon:                         step-backward
-          icon_properties:              mdi-rotate-90
+          icon_properties:              mdib-rotate-90
 
         - item:                         Next Section
           enabled:                      true
@@ -203,7 +203,7 @@ settings:
           color:                        md-green
           event_handler:                scroll_next_section
           icon:                         step-forward
-          icon_properties:              mdi-rotate-90
+          icon_properties:              mdib-rotate-90
 
         - item:                         Reload Page
           enabled:                      true

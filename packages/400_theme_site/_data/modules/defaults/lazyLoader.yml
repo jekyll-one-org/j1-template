@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
-# ~/_data/modules/fab.yml
-# Default Configuration of the FAB Module (Floating Action Button)
+# ~/_data/modules/defaults/lazyLoader.yml
+# Default Configuration of the lazyLoader Module
 #
 # Product/Info:
 # https://jekyll.one
@@ -19,9 +19,9 @@
 # Description
 #
 description:
-  title:                                dynamicLoader
+  title:                                lazyLoader
   scope:                                Default settings
-  location:                             _data/modules/defaults/dynamicLoader.yml
+  location:                             _data/modules/defaults/lazyLoader.yml
 
 # ------------------------------------------------------------------------------
 # Default settings

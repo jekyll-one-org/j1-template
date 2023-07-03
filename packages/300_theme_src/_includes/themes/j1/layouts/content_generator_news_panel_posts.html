@@ -188,12 +188,14 @@
 
       {% if icon_family == 'fontawesome' or icon_family == 'fontawesome5' or icon_family == 'fa'%}
         {% assign icon_family = 'fa' %}
+      {% elsif icon_family == 'mdib' %}
+        {% assign icon_family = 'mdib' %}
       {% elsif icon_family == 'mdi' %}
         {% assign icon_family = 'mdi' %}
       {% elsif icon_family == 'iconify' %}
         {% assign icon_family = 'iconify' %}
       {% else'%}
-        {% assign icon_family = 'mdi' %}
+        {% assign icon_family = 'mdib' %}
       {% endif %}
 
       {% comment %} process current panel
@@ -228,7 +230,7 @@
                           <a class="page-link" href="{{ paginator.previous_page_path }}#article_navigator">{{paginator_button_newer_posts_text}}</a>
                       </li>
                     {% else %}
-                        <li class="page-item disabled"><a href="#void" class="page-link">{{paginator_button_first_post_text}}</a></li>
+                        <li class="page-item disabled"><a href="#" class="page-link">{{paginator_button_first_post_text}}</a></li>
                     {% endif %}
 
                     {% if paginator.next_page %}
@@ -236,7 +238,7 @@
                         <a class="page-link" href="{{ paginator.next_page_path }}#article_navigator">{{paginator_button_older_posts_text}}</a>
                     </li>
                     {% else %}
-                        <li class="page-item disabled"><a href="#void" class="page-link">{{paginator_button_last_post_text}}</a></li>
+                        <li class="page-item disabled"><a href="#" class="page-link">{{paginator_button_last_post_text}}</a></li>
                     {% endif %}
                   </ul>
                 </nav>
@@ -315,10 +317,10 @@
 
                         <div class="card-footer-text">
                           {% if language == "en" %}
-                            <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
+                            <i class="mdib mdib-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
                           {% endif %}
                           {% if language == "de" %}
-                            <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
+                            <i class="mdib mdib-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
                           {% endif %}
 
                           {% assign category_blacklist = panel_settings.category_blacklist %}
@@ -331,10 +333,10 @@
                           {% assign tags          = post.tags | join: " · "  %}
 
                           <p class="result-item-text small mb-3 notranslate">
-                            <i class="mdi mdi-tag-text-outline mdi-18px mr-1"></i>
+                            <i class="mdib mdib-tag-text-outline mdib-18px mr-1"></i>
                             <span class="sr-categories">{{categories}}</span>
                             <br>
-                            <i class="mdi mdi-tag mdi-18px mr-1"></i>
+                            <i class="mdib mdib-tag mdib-18px mr-1"></i>
                             <span class="sr-tags">{{tags}}</span>
                         </p>
                         </div>
@@ -387,10 +389,10 @@
 
                         <div class="card-footer-text">
                           {% if language == "en" %}
-                            <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
+                            <i class="mdib mdib-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
                           {% endif %}
                           {% if language == "de" %}
-                            <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
+                            <i class="mdib mdib-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
                           {% endif %}
                         </div>
                         <a class="card-link text-lowercase"

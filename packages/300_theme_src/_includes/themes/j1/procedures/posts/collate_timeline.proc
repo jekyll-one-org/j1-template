@@ -178,7 +178,7 @@
 
                 <a href="{{post.url}}"
                    class="btn btn-secondary btn-flex mb-0">
-                   <i class="mdi mdi-eye mdi-lg mr-1" style="color:#FFFFFF;">
+                   <i class="mdib mdib-eye mdib-lg mr-1" style="color:#FFFFFF;">
                    </i> {{readmore_text}} · {{post.tagline}}
                 </a>
               </div>
@@ -200,7 +200,7 @@
 
                 <a href="{{post.url}}"
                    class="btn btn-secondary btn-flex mb-0">
-                   <i class="mdi mdi-eye mdi-lg mr-1" style="color:#FFFFFF;">
+                   <i class="mdib mdib-eye mdib-lg mr-1" style="color:#FFFFFF;">
                    </i> {{readmore_text}} · {{post.tagline}}
                 </a>
               </div>
@@ -231,19 +231,19 @@
               <div class="card-footer-text">
                 {% if post.date %}
                   {% if language == "en" %}
-                    <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
+                    <i class="mdib mdib-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
                   {% endif %}
                   {% if language == "de" %}
-                    <i class="mdi mdi-calendar-blank md-md-grey-900 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
+                    <i class="mdib mdib-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
                   {% endif %}
                 {% endif %}
                 {% if likes_count %}
                 <span class="font-weight-bold"> · </span>
-                <i class="mdi mdi-heart md-grey-900 mr-1"></i> {{likes_count}}
+                <i class="mdib mdib-heart md-grey-900 mr-1"></i> {{likes_count}}
                 {% endif %}
                 {% if comment_count %}
                 <span class="font-weight-bold"> · </span>
-                <i class="mdi mdi-comment md-grey-900 mr-1"></i> {{comment_count}}
+                <i class="mdib mdib-comment md-grey-900 mr-1"></i> {{comment_count}}
                 {% endif %}
 
                 <!-- Cleanup categories by given blacklist -->
@@ -254,10 +254,10 @@
                 {% assign tags          = post.tags | join: " · "  %}
 
                 <p class="result-item-text small mb-3 notranslate">
-                  <i class="mdi mdi-tag-text-outline mdi-18px mr-1"></i>
+                  <i class="mdib mdib-tag-text-outline mdib-18px mr-1"></i>
                   <span class="sr-categories">{{categories}}</span>
                   <br>
-                  <i class="mdi mdi-tag mdi-18px mr-1"></i>
+                  <i class="mdib mdib-tag mdib-18px mr-1"></i>
                   <span class="sr-tags">{{tags}}</span>
               </p>
               <a class="card-link text-lowercase"

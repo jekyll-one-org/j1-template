@@ -290,7 +290,7 @@ j1.adapter.justifiedGalleryCustomizer = (function (j1, window) {
           // See: https://jsfiddle.net/prathviraj080/vbbbw46a/1/
           //
           $('button.drawer-toggler').click(function(){
-            $('button.drawer-toggler span.mdi').toggleClass('mdi-menu mdi-close');
+            $('button.drawer-toggler span.mdi').toggleClass('mdib-menu mdib-close');
           });
           $('button.drawer-toggler').click(function(){
             $('button.drawer-toggler').toggleClass('fadeIn rotateIn');

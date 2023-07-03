@@ -123,7 +123,7 @@ fab_defaults: {{fab_defaults | debug}}
       {% endif %}
 
       <button type="button" id="{{menu.id}}_button" class="btn btn-fab btn-{{menu.color}} {{options}}" aria-label="fab-button">
-        <i id="fab-icon" class="mdi mdi-{{menu.icon}} {{menu.icon_color}}"></i>
+        <i id="fab-icon" class="mdib mdib-{{menu.icon}} {{menu.icon_color}}"></i>
       </button>
 
       {% comment %} Collect (mini) FABs
@@ -142,7 +142,7 @@ fab_defaults: {{fab_defaults | debug}}
 
         <li>
           <a href="#" id="{{item.id}}" class="btn-fab-floating btn-{{item.color}} raised-z{{fab_options.raised_level}}" style="display: none">
-            <i id="fab-icon" class="mdi mdi-{{item.icon}} {{icon_properties}}"></i>
+            <i id="fab-icon" class="mdib mdib-{{item.icon}} {{icon_properties}}"></i>
           </a>
         </li>
         {% endif %} {% endfor %}

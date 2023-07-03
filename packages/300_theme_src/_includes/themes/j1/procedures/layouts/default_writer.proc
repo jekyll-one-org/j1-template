@@ -126,7 +126,7 @@
               <div class="card raised-z10 mt-5">
                 <div class="content content-danger">
                   <h4 class="notoc">
-                    <i class="zmdi zmdi-alert-triangle zmdi-hc-3x pl-3"></i>
+                    <i class="mdib mdib-alert-triangle mdib-3x pl-3"></i>
                     Region <i>{{region}}</i> not allowed
                   </h4>
                   <h4 class="notoc card-title">Check your configuration</h4>

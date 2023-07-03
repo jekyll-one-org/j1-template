@@ -1,7 +1,7 @@
 {
-	"prefix": "mdi mdi-",
-	"icon-style": "mdi",
-	"list-icon": "mdi mdi-vector-square",
+	"prefix": "mdib mdib-",
+	"icon-style": "mdib",
+	"list-icon": "mdib mdib-vector-square",
 	"version": "7.2.96",
 	"icons": [
     "ab-testing",

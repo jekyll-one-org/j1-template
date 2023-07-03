@@ -155,11 +155,11 @@ exclude_from_search:                    true
 
               <ul class="list-inline d-flex justify-content-center mb-5">
                 <li class="list-inline-item">
-                  <i class="mdi mdi-account md-gray-400 mdi-24px mr-1" style="margin-right: 8px;"></i>
+                  <i class="mdib mdib-account mdib-24px md-gray-400 mr-1" style="margin-right: 8px;"></i>
                   {{site.author.name | split: ' ' | first}} &nbsp;&middot;&nbsp;&nbsp;
                 </li>
                 <li class="list-inline-item">
-                  <i class="mdi mdi-calendar-blank md-gray-400 mdi-24px mr-1"></i>
+                  <i class="mdib mdib-calendar-blank mdib-24px md-gray-400 mr-1"></i>
                   {{post.date | date: '%b %d, %Y'}}
                 </li>
               </ul>
@@ -239,7 +239,7 @@ exclude_from_search:                    true
           <a class="article-link" data-bs-toggle="modal" href="#articleModal_{{grid.id}}_{{forloop.index}}">
             <div class="article-hover">
               <div class="article-hover-content">
-                <i class="mdi mdi-plus mdi-10x"></i>
+                <i class="mdib mdib-plus mdib-10x"></i>
               </div>
             </div>
             <img class="{{grid.image_styles}}" src="{{article.image.path}}" alt="{{article.title}}" style="{{image_filters}}; height: {{grid.image_height}}; width: {{grid.image_width}}">
@@ -291,7 +291,7 @@ exclude_from_search:                    true
                       </li -->
                     </ul>
                     <button class="btn btn-primary btn-xl text-uppercase" data-bs-dismiss="modal" type="button">
-                      <i class="mdi mdi-close mdi-24px mx-2"></i>
+                      <i class="mdib mdib-close mdib-24px mx-2"></i>
                       Close Preview
                     </button>
                   </div>

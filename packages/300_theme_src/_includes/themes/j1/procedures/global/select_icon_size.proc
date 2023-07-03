@@ -52,7 +52,15 @@
 
 {% comment %} Main
    ------------------------------------------------------------ {% endcomment %}
-
+   {% if family == 'mdib' %}
+     {% if size == 'default' %}  {% assign size = '' %}           {% endif %}
+     {% if size == 'large' %}    {% assign size = 'mdib-18px' %}   {% endif %}
+     {% if size == 'larger' %}   {% assign size = 'mdib-24px' %}   {% endif %}
+     {% if size == 'xlarge' %}   {% assign size = 'mdib-36px' %}   {% endif %}
+     {% if size == 'xxlarge' %}  {% assign size = 'mdib-48px' %}   {% endif %}
+     {% if size == 'xxxlarge' %} {% assign size = 'mdib-48px' %}   {% endif %}
+   {% endif %}
+   
   {% if family == 'mdi' or family == 'material design icons' %}
     {% if size == 'default' %}  {% assign size = '' %}           {% endif %}
     {% if size == 'large' %}    {% assign size = 'mdi-18px' %}   {% endif %}
@@ -79,4 +87,3 @@
     {% if size == 'xxlarge' %}  {% assign size = 'iconify-48px' %}   {% endif %}
     {% if size == 'xxxlarge' %} {% assign size = 'iconify-48px' %}   {% endif %}
   {% endif %}
-

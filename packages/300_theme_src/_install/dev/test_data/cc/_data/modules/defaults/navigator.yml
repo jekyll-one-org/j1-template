@@ -1,6 +1,6 @@
 # ------------------------------------------------------------------------------
 # ~/_data/apps/j1_navigator.yml
-# Configuration of the J1 NAV Module for all sub-modules 
+# Configuration of the J1 NAV Module for all sub-modules
 # except the main navigation bar
 #
 # Product/Info:
@@ -29,7 +29,7 @@ about_config:
 #
 defaults:
 
-  icon_family:                          MDI
+  icon_family:                          mdib
 
   nav_bar:
     id:                                 navigator_nav_navbar_id
@@ -55,10 +55,10 @@ defaults:
     max_height:                         550
     menu_font_size:                     larger
     megamenu_font_size:                 large
-    icon_family:                        MDI
-    icon_style:                         mdi                                     # far regular icon
+    icon_family:                        mdib
+    icon_style:                         mdib
     icon_color:                         "#9E9E9E"
-    icon_size:                          mdi-18px                                #larger
+    icon_size:                          mdib-18px                                #larger
     menu_item_color:                    rgba_lighten
     menu_item_color_hover:              rgba_lighten_900
     dropdown_style:                     raised
@@ -132,9 +132,9 @@ defaults:
     id:                                 navigator_nav_sidebar_id
     data_path:                          /assets/data/sidebar/index.html
     width:                              380
-    icon_family:                        MDI
+    icon_family:                        mdib
     icon_color:                         md_white
-    icon_size:                          mdi-1x
+    icon_size:                          mdib-1x
     sidebar_icon:                       dots-vertical
     close_icon:                         close
     background_color:                   md_grey_900

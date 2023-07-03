@@ -88,15 +88,15 @@
 
        <div class="card-footer not-rounded r-text-200">
          <div class="card-footer-text">
-           <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i> {{article.book.published}}</i>
+           <i class="mdib mdib-calendar-blank md-grey-900 mr-1"></i> {{article.book.published}}</i>
 
            <!-- Cleanup categories by given blacklist -->
            <!-- Build element strings -->
            <p class="result-item-text small mb-3 notranslate">
-             <i class="mdi mdi-tag-text-outline mdi-18px mr-1"></i>
+             <i class="mdib mdib-tag-text-outline mdib-18px mr-1"></i>
              <span class="sr-categories">{{categories}}</span>
              <br>
-             <i class="mdi mdi-tag mdi-18px mr-1"></i>
+             <i class="mdib mdib-tag mdib-18px mr-1"></i>
              <span class="sr-tags">{{tags}}</span>
            </p>
          </div>

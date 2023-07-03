@@ -242,9 +242,9 @@ j1.adapter.carousel = (function (j1, window) {
                   {% endif %}
 
                   {% if text_color %}
-                  $('#{{slider_id}}').addClass('mdi-{{text_color}}');
+                  $('#{{slider_id}}').addClass('md-{{text_color}}');
                   {% else %}
-                  $('#{{slider_id}}').addClass('mdi-md-grey-100');
+                  $('#{{slider_id}}').addClass('md-grey-100');
                   {% endif %}
 
                   {% if font_size %}

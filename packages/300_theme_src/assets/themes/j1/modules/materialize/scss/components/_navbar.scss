@@ -23,7 +23,7 @@ nav {
   a { color: $navbar-font-color; }
 
   i,
-  [class^="mdi-"], [class*="mdi-"],
+  [class^="mdib-"], [class*="mdib-"],
   i.material-icons {
     display: block;
     font-size: 24px;
@@ -91,7 +91,7 @@ nav {
     }
 
     i,
-    [class^="mdi-"], [class*="mdi-"],
+    [class^="mdib-"], [class*="mdib-"],
     i.material-icons {
       float: left;
       margin-right: 15px;

@@ -164,7 +164,7 @@ var logText;
             //
             if ($('#quickLinksThemeTogglerButton').length) {
               if (user_state.theme_name == dark_theme_name) {
-                $('#quickLinksThemeTogglerButton a i').toggleClass('mdi-lightbulb mdi-lightbulb-outline');
+                $('#quickLinksThemeTogglerButton a i').toggleClass('mdib-lightbulb mdib-lightbulb-outline');
               }
             }
 
@@ -173,11 +173,11 @@ var logText;
               if (user_state.theme_name == light_theme_name) {
                 user_state.theme_name = dark_theme_name;
                 user_state.theme_css  = dark_theme_css;
-                user_state.theme_icon = 'mdi-lightbulb';
+                user_state.theme_icon = 'mdib-lightbulb';
               } else {
                 user_state.theme_name = light_theme_name;
                 user_state.theme_css  = light_theme_css;
-                user_state.theme_icon = 'mdi-lightbulb-outline';
+                user_state.theme_icon = 'mdib-lightbulb-outline';
               }
 
               logger.info('\n' + 'switch theme to: ' + user_state.theme_name);

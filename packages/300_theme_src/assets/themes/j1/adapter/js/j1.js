@@ -458,12 +458,12 @@ var j1 = (function (options) {
                   // set signout
                   logger.info('\n' + 'show signout icon');
                   $('#navLinkSignInOut').attr('data-bs-target','#modalOmniSignOut');
-                  $('#iconSignInOut').removeClass('mdi-login').addClass('mdi-logout');
+                  $('#iconSignInOut').removeClass('mdib-login').addClass('mdib-logout');
                 } else {
                   // set signin
                   logger.info('\n' + 'show signin icon');
                   $('#navLinkSignInOut').attr('data-bs-target','#modalOmniSignIn');
-                  $('#iconSignInOut').removeClass('mdi-logout').addClass('mdi-login');
+                  $('#iconSignInOut').removeClass('mdib-logout').addClass('mdib-login');
                 }
                 logger.info('\n' + 'authentication detected as: ' + user_session.authenticated);
                 $('#quickLinksSignInOutButton').css('display', 'block');
@@ -1216,12 +1216,12 @@ var j1 = (function (options) {
               // set signout
               logger.info('\n' + 'show signout icon');
               $('#navLinkSignInOut').attr('data-bs-target','#modalOmniSignOut');
-              $('#iconSignInOut').removeClass('mdi-login').addClass('mdi-logout');
+              $('#iconSignInOut').removeClass('mdib-login').addClass('mdib-logout');
             } else {
               // set signin
               logger.info('\n' + 'show signin icon');
               $('#navLinkSignInOut').attr('data-bs-target','#modalOmniSignIn');
-              $('#iconSignInOut').removeClass('mdi-logout').addClass('mdi-login');
+              $('#iconSignInOut').removeClass('mdib-logout').addClass('mdib-login');
             }
             logger.info('\n' + 'authentication detected as: ' + user_session.authenticated);
             $('#quickLinksSignInOutButton').css('display', 'block');
@@ -2487,8 +2487,8 @@ var j1 = (function (options) {
     //   // var tabs_pills_link_color_active    = j1.setColorData('md_blue');         // j1.getStyleValue('btn-info', 'background-color');
     //   // var tabs_pills_link_color_hover     = j1.setColorData('md_gray_300');     // j1.getStyleValue('btn-secondary', 'background-color');
     //
-    //   // var tabs_pills_link_color_active    = 'mdi-blue';
-    //   // var tabs_pills_link_color_hover     = 'mdi-gray-300';
+    //   // var tabs_pills_link_color_active    = 'md-blue';
+    //   // var tabs_pills_link_color_hover     = 'md-gray-300';
     //
     //   // nav module
     //   // -----------------------------------------------------------------------
@@ -2837,7 +2837,11 @@ var j1 = (function (options) {
             }
 
             for (const {node, currentRect, previousRect} of entry.sources) {
-              var hasProperty = (node.hasOwnProperty('firstElementChild')) ? true : false;
+              var hasProperty = node.hasOwnProperty('firstElementChild');
+              if (hasProperty == null) {
+                hasProperty = false;
+              }
+
               if (hasProperty) {
                 var id = '';
                 try {

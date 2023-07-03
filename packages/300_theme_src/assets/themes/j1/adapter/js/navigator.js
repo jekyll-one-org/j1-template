@@ -487,11 +487,11 @@ j1.adapter.navigator = (function (j1, window) {
         if (user_session.authenticated === 'true') {
           // Set SignOut
           $('#navLinkSignInOut').attr('data-bs-target', '#modalOmniSignOut');
-          $('#iconSignInOut').removeClass('mdi-login').addClass('mdi-logout');
+          $('#iconSignInOut').removeClass('mdib-login').addClass('mdib-logout');
         } else {
           // Set SignIn
           $('#navLinkSignInOut').attr('data-bs-target', '#modalOmniSignIn');
-          $('#iconSignInOut').removeClass('mdi-logout').addClass('mdi-login');
+          $('#iconSignInOut').removeClass('mdib-logout').addClass('mdib-login');
         }
       }
 
@@ -889,11 +889,9 @@ j1.adapter.navigator = (function (j1, window) {
       style += '</style>';
       $('head').append(style);
 
-
-
 //    $('head').append('<style>.mdi-bg-primary {color: ' +bg_scrolled+ ';}</style>');
       style  = '<style>';
-      style += '  .mdi-bg-primary {';
+      style += '  var(--bg-primary) {';
       style += '    color: ' + bg_scrolled;
       style += '  }';
       style += '</style>';

@@ -12,7 +12,7 @@
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # -----------------------------------------------------------------------------
 */
-module.exports = function lazyCss () {
+module.exports = function lazyCSS () {
   let options = {};
 
   const observe = (o) => {

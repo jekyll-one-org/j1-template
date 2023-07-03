@@ -336,7 +336,7 @@ exclude_from_search:                    true
                           {% else %}
                             <span>
                               {% if card_icon_color == 'bg-primary' %}
-                                <i class="{{card_icon_family}} {{card_icon_family}}-{{card_icon}} {{card_icon_family}}-{{card_icon_size}} mdi-md-white"></i>
+                                <i class="{{card_icon_family}} {{card_icon_family}}-{{card_icon}} {{card_icon_family}}-{{card_icon_size}} md-white"></i>
                               {% else %}
                                 <i class="{{card_icon_family}} {{card_icon_family}}-{{card_icon}} {{card_icon_family}}-{{card_icon_size}} {{card_icon_family}}-{{card_icon_color}}"></i>
                               {% endif %}
@@ -935,10 +935,10 @@ exclude_from_search:                    true
 
                             <div class="card-footer-text">
                               {% if language == "en" %}
-                                <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
+                                <i class="mdib mdib-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
                               {% endif %}
                               {% if language == "de" %}
-                                <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
+                                <i class="mdib mdib-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
                               {% endif %}
 
                               <!-- Cleanup categories by given blacklist -->
@@ -949,10 +949,10 @@ exclude_from_search:                    true
                               {% assign tags          = post.tags | join: " · "  %}
 
                               <p class="result-item-text small mb-3 notranslate">
-                                <i class="mdi mdi-tag-text-outline mdi-18px mr-1"></i>
+                                <i class="mdib mdib-tag-text-outline mdib-18px mr-1"></i>
                                 <span class="sr-categories">{{categories}}</span>
                                 <br>
-                                <i class="mdi mdi-tag mdi-18px mr-1"></i>
+                                <i class="mdib mdib-tag mdib-18px mr-1"></i>
                                 <span class="sr-tags">{{tags}}</span>
                             </p>
                             </div>
@@ -1004,10 +1004,10 @@ exclude_from_search:                    true
 
                         <div class="card-footer-text">
                           {% if language == "en" %}
-                            <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
+                            <i class="mdib mdib-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%Y %B, %e"}}
                           {% endif %}
                           {% if language == "de" %}
-                            <i class="mdi mdi-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
+                            <i class="mdib mdib-calendar-blank md-grey-900 mr-1"></i>{{post.date | localize: "%-d. %B %Y"}}
                           {% endif %}
                         </div>
                         <a class="card-link text-lowercase"
@@ -1075,7 +1075,7 @@ exclude_from_search:                    true
               <div class="box">
                 <div class="content content-danger">
                   <h2 class="notoc">
-                    <i class="mdi mdi-alarm-light mdi-3x mdi-md-red mr-1"></i>
+                    <i class="mdib mdib-alarm-light mdib-3x md-red mr-1"></i>
                     panel of type <big>{{panel_settings.type}}</big> not found
                   </h2>
                   <h4 class="notoc box-title">Check your configuration at {{panel_config_file_name}}</h4>

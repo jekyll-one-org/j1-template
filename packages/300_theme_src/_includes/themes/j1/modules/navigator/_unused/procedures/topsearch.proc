@@ -91,10 +91,10 @@
     <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/procedures/topsearch.proc ] [ start processing: top search ] -->
     <div id="{{topsearch_id}}" class="top-search ml-4 mr-4" style="display: none;">
     	<div class="input-group">
-    	  <span class="input-group-addon"><i class="mdi mdi-magnify mdi-2x mb-2" style="color:#9E9E9E"></i></span>
+    	  <span class="input-group-addon"><i class="mdib mdib-magnify mdib-2x mb-2" style="color:#9E9E9E"></i></span>
     	  <input id="search-query" type="text" name="q" placeholder="{{placeholder}}" autocomplete="off" class="form-control">
-    	  <span id="clear-topsearch" class="form-clear form-clear-searcher d-none" style="margin-top: 0.75rem"><i class="mdi mdi-format-clear mdi-2x" style="color:#9E9E9E"></i></span>
-    	  <span class="input-group-addon close-search"><i class="mdi mdi-close mdi-3x" style="color:#9E9E9E"></i></span>
+    	  <span id="clear-topsearch" class="form-clear form-clear-searcher d-none" style="margin-top: 0.75rem"><i class="mdib mdib-format-clear mdib-2x" style="color:#9E9E9E"></i></span>
+    	  <span class="input-group-addon close-search"><i class="mdib mdib-close mdib-3x" style="color:#9E9E9E"></i></span>
     	</div>
 
       <!-- [INFO   ] [~/_includes/themes/j1/modules/navigator/procedures/topsearch.proc ] [ place: results container ] -->
@@ -110,12 +110,12 @@
           <li>
             <h4 class="result-item"> <a class="link-no-decoration" href="{{url}}" target="_blank">{{title}} · {{tagline}}</a> </h4>
             <p class="result-item-text small text-muted mt-2 mb-0">
-              <i class="mdi mdi-calendar-blank mdi-18px mr-1"></i>{{displaydate}}
+              <i class="mdib mdib-calendar-blank mdib-18px mr-1"></i>{{displaydate}}
             </p>
             <p class="result-item-text">{{description}}</p>
             <p class="result-item-text small text-muted mb-3">
-              <i class="mdi mdi-tag-text-outline mdi-18px mr-1"></i><span class="sr-categories">{{#categories}} {{.}} · {{/categories}}</span>
-              <i class="mdi mdi-tag mdi-18px mr-1 ml-2"></i><span class="sr-tags">{{#tags}} {{.}} · {{/tags}}</span>
+              <i class="mdib mdib-tag-text-outline mdib-18px mr-1"></i><span class="sr-categories">{{#categories}} {{.}} · {{/categories}}</span>
+              <i class="mdib mdib-tag mdib-18px mr-1 ml-2"></i><span class="sr-tags">{{#tags}} {{.}} · {{/tags}}</span>
             </p>
           </li>
         {{/docs}}
