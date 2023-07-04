@@ -1,0 +1,81 @@
+---
+regenerate:                             false
+---
+
+{% capture cache %}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/runtime-data.yml
+ # Liquid YAML template to generate (selected) data taken from J1 Module  
+ # data files processed by e.g. J1 adapters at runtime
+ #
+ # Product/Info:
+ # http://jekyll.one
+ #
+ # Copyright (C) 2023 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # NOTE:
+ # Be careful changing the Liquid code. If the code is changed, check
+ # the integrity of the YAML data created. Corrupted YAML data makes
+ # the Javascript of J1 adapters to fail (e.g j1.js) and some  
+ # functionality will be unavailable for most UNCLEAR reasons.
+ #
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Set global settings
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment             = site.environment %}
+{% assign template_version        = site.version %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign template_config         = site.data.j1_config %}
+{% assign blocks                  = site.data.blocks %}
+{% assign modules                 = site.data.modules %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign authentication_defaults = modules.defaults.authentication.defaults %}
+{% assign authentication_settings = modules.authentication.settings %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign authentication_options  = authentication_defaults | merge: authentication_settings %}
+
+{% assign j1_auth_enabled         = authentication_options.j1_auth.enabled %}
+
+
+# ------------------------------------------------------------------------------
+# ~/assets/data/runtime-data.yml
+# Selected YAML data taken from J1 module config files to be processed by e.g.
+# J1 adapters at runtime
+#
+# Product/Info:
+# http://jekyll.one
+#
+# Copyright (C) 2023 Juergen Adams
+#
+# J1 Theme is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# AUTH Manager (j1_auth) settings
+#
+j1_auth:
+  enabled:                              {{j1_auth_enabled}}
+
+{% endcapture %}
+{{ cache | strip_empty_lines }}
+{% assign cache = nil %}

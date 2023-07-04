@@ -1,0 +1,121 @@
+---
+regenerate:                             true
+exclude_from_search:                    true
+---
+
+{% capture cache %}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/carousel.json
+ # Liquid JSON template for ALL (Owl Carousel) sliders configured
+ #
+ # Product/Info:
+ # http://jekyll.one
+ #
+ # Copyright (C) 2023 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # The Liquid template sliders.json is used by J1 Slider (Owl Carousel).
+ # This template is a helper that creates the carousel (JSON) data
+ # for all sliders configured (if enabled or NOT). It's used by
+ # the J1 Theme Adapter to LOAD the carousel HTML markup portion
+ # via AJAX get.
+ #
+ # The Liquid template engine generates a JSON file as an object of
+ # arrays that contains all image data used by several sliders. See
+ # below the fields taken from the YAML data file:
+ # ~/_data/apps/j1_carousel.yml.
+ # -----------------------------------------------------------------------------
+ # NOTE:
+ # Be careful changing the Liquid code. If the code is changed, check
+ # the integrity of the JSON data created. Corrupted JSON data makes
+ # the Javascript of an Adapter to fail and no functionality will
+ # be available for most UNCLEAR reasons.
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #  {{ liquid_var | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Process YML config data
+================================================================================ {% endcomment %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment         = site.environment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign modules             = site.data.modules %}
+
+{% comment %} Set config data (carousel settings only)
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign carousel_settings   = modules.carousel.settings %}
+
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+{% comment %} Main
+================================================================================ {% endcomment %}
+
+{
+  {% for item in carousel_settings.carousel %}
+    "{{item.show.id}}" : [
+    {% if item.show.type == 'image' %}
+      {% for image in item.show.images %}
+        {% assign image_no = forloop.index %}
+        {% capture image_full_path %}{{ item.show.images_path }}/{{ image }}{% endcapture %}
+      {
+        {% if item.show.lightbox %}
+        "lb"         : "{{ item.show.lightbox }}",
+        {% for caption in item.show.lb_caption %}
+        {% if forloop.index == image_no %}
+        "lb_caption" : "{{ caption }}",
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        "img"        : "{{ image_full_path }}",
+        "alt"        : "Slider Image {{ forloop.index }}"{% if item.show.links %},{% endif %}
+        {% if item.show.links %}
+        {% for link in item.show.links %}
+        {% if forloop.index == image_no %}
+        "href"       : "{{ link }}"
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+      }{% if forloop.last %}{% else %},{% endif %}
+      {% endfor %}
+    {% endif %}
+    {% if item.show.type == 'text' %}
+      {% for text in item.show.text %}
+        {% assign txt_no = forloop.index %}
+      {
+        "text"    : "{{ text }}"{% if item.show.links %},{% endif %}
+        {% if item.show.links %}
+        {% for link in item.show.links %}
+        {% if forloop.index == txt_no %}
+        "href"       : "{{ link }}"
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+      }{% if forloop.last %}{% else %},{% endif %}
+      {% endfor %}
+    {% endif %}
+    ]{% if forloop.last %}{% else %},{% endif %}
+  {% endfor %}
+}
+
+{% endcapture %}
+{% if production %}
+  {{ cache | minifyJSON }}
+{% else %}
+  {{ cache | strip_empty_lines }}
+{% endif %}
+{% assign cache = nil %}

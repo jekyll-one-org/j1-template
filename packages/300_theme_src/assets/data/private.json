@@ -1,0 +1,49 @@
+---
+regenerate:                             true
+exclude_from_search:                    true
+---
+
+{% capture cache %}
+
+{% comment %}
+# ------------------------------------------------------------------------------
+# ~/assets/data/private.json
+# The private.yml file is used to set sensitive private data used by
+# J1 components to configure security and authentication settings
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2023 Juergen Adams
+#
+# J1 Theme is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1_template/blob/master/LICENSE
+# ------------------------------------------------------------------------------
+# NOTE:
+#   As this file contains very confidential data, a productive private.yml
+#   file should ALWAYS be excluded from ANY source published to the public
+#   (e.g. a repo at Github)
+# ------------------------------------------------------------------------------
+
+{% endcomment %}
+
+{% comment %} Process YML config data
+================================================================================ {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign data             = site.data %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign private_settings = data.private %}
+
+
+{% comment %} Main
+================================================================================ {% endcomment %}
+
+{{ private_settings | json }}
+
+{% endcapture %}
+{{ cache | encodeBase64 }}
+{% assign cache = nil %}

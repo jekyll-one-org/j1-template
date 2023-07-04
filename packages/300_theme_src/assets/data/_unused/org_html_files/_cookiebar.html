@@ -1,0 +1,285 @@
+---
+regenerate:                             true
+---
+
+{% capture cache %}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/cookiebar_modals.html
+ # Liquid PROCEDURE to generate the HTML (data) portion of all modals used
+ # by J1 Cookiebar module
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #   liquid_var: {{ liquid_var | debug }}
+ #   config: {{ config | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Set global settings
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment     = site.environment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign modules         = site.data.modules %}
+
+{% comment %} Process YML config data
+================================================================================ {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign cookie_defaults = modules.defaults.cookiebar.defaults %}
+{% assign cookie_settings = modules.cookiebar.settings %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign cookie_options  = cookie_defaults | merge: cookie_settings %}
+
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+
+{% comment %} Main
+================================================================================ {% endcomment %}
+<!-- [INFO   ] [j1.assets.data.cookiebar.html             ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
+<head data-proofer-ignore>
+  <meta name="robots" content="noindex, nofollow" />
+</head>
+
+{% comment %} Modal cookie consent dialog
+-------------------------------------------------------------------------------- {% endcomment %}
+<div id="topFullCookieConsent" class="modal fade top"
+  tabindex="-1"
+  role="dialog"
+  data-backdrop="false"
+  aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
+
+    <!-- Content -->
+    <div class="modal-content">
+
+      <!--Header-->
+      <div class="modal-header">
+        <p class="lead">{{cookie_options.consent_modals_title}}</p>
+      </div>
+
+      <!-- Body -->
+      <div class="modal-body">
+
+        <!-- About cookies -->
+        <div class="px-2">
+          <p class="pt-1 pr-2">{{cookie_options.policy_about}}</p>
+        </div>
+      </div> <!-- END Body -->
+
+      <!-- Footer -->
+      <div class="modal-footer justify-content-center">
+        {% if cookie_options.buttons.policy_button %}
+        <a id="policyButton" type="button"
+           class="btn btn-flex btn-primary mb-2 mr-2" style="width: 20rem">
+           <i class="mdi mdi-18px mdi-white mdi-read mr-2"></i>
+           {{cookie_options.buttons.policy_button_text}}
+        </a>
+        {% endif %}
+        <a id="acceptButton" type="button"
+           class="btn btn-flex btn-primary mb-2 mr-2" style="width: 20rem"
+           data-bs-dismiss="modal">
+           <i class="mdi mdi-18px mdi-white mdi-check mr-2"></i>
+           {{cookie_options.buttons.accept_button_text}}
+        </a>
+        {% if cookie_options.buttons.decline_button %}
+        <a id="declineButton" type="button"
+           class="btn btn-flex btn-primary mb-2 mr-2" style="width: 20rem"
+           data-bs-dismiss="modal">
+           <i class="mdi mdi-18px mdi-white mdi-close mr-2"></i>
+           {{cookie_options.buttons.decline_button_text}}
+        </a>
+        {% endif %}
+      </div> <!-- END Footer -->
+
+      <!-- Hidden Content -->
+      <div class="cookie-policy">
+        {% if cookie_options.buttons.policy_button_text %}
+        <div id="modal-footer" class="modal-footer-hidden">
+          <div id="cookiePolicyInfo" class="card card-flat" style="display: none">
+            <div class="content">
+              <h4 class="notoc card-title">{{cookie_options.cookie_policy_title}}</h4>
+              <h6 class="notoc category text-gray">{{cookie_options.cookie_policy_tagline | asciidocify}}</h6>
+
+              <!-- Cookie categories -->
+              {% if cookie_options.categories.enabled %}
+              <div class="px-2">
+                <h6 class="card-subtitle text-muted mb-2 mr-2">{{cookie_options.categories.category_title}}</h6>
+                <table class="tableblock frame-all grid-all stretch table-responsive-stacked-lg">
+                  <colgroup>
+                    <col style="width: 33.3333%;">
+                    <col style="width: 16.6666%;">
+                    <col style="width: 50.0001%;">
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th class="tableblock halign-left valign-top">Cookie</th>
+                      <th class="tableblock halign-left valign-top">Usage</th>
+                      <th class="tableblock halign-left valign-top">Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td class="tableblock halign-left valign-top">
+                        <p class="tableblock">{{cookie_options.categories.category_session}}</p>
+                      </td>
+                      <td class="tableblock halign-left valign-top">
+                        <div class="content"><i class="fa md-green fa-check"></i></div>
+                      </td>
+                      <td class="tableblock halign-left valign-top">
+                        <p class="tableblock">{{cookie_options.categories.category_description_text}}</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="tableblock halign-left valign-top">
+                        <p class="tableblock">{{cookie_options.categories.category_persistent}}</p>
+                      </td>
+                      <td class="tableblock halign-left valign-top">
+                        <div class="content"><i class="fa md-green fa-check"></i></div>
+                      </td>
+                      <td class="tableblock halign-left valign-top">
+                        <p class="tableblock">{{cookie_options.categories.category_description_text}}</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="tableblock halign-left valign-top">
+                        <p class="tableblock">{{cookie_options.categories.category_first_party}}</p>
+                      </td>
+                      <td class="tableblock halign-left valign-top">
+                        <div class="content"><i class="fa md-green fa-check"></i></div>
+                      </td>
+                      <td class="tableblock halign-left valign-top">
+                        <p class="tableblock">{{cookie_options.categories.category_description_text}}</p>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="tableblock halign-left valign-top">
+                        <p class="tableblock">{{cookie_options.categories.category_second_party}}</p>
+                      </td>
+                      <td class="tableblock halign-left valign-top">
+                        <div class="content"><i class="fa md-green fa-check"></i></div>
+                      </td>
+                      <td class="tableblock halign-left valign-top">
+                        <p class="tableblock">{{cookie_options.categories.category_description_text}}</p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              {% endif %}
+              <div class="card-description">{{ cookie_options.cookie_policy_text | asciidocify}}</div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+      </div> <!-- END Hidden Content -->
+    </div> <!-- END Content -->
+  </div>
+</div> <!-- END Modal -->
+{% comment %} END Modal cookie consent dialog
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Modal revoke cookies dialog
+-------------------------------------------------------------------------------- {% endcomment %}
+<div id="cookieRevokeCentralDanger"
+     class="modal fade top"
+     tabindex="-1"
+     role="dialog"
+     data-backdrop="false"
+     aria-modal="true"
+     aria-labelledby="RevokeCookieConsent">
+  <div class="modal-dialog modal-frame modal-top modal-notify modal-danger" role="document">
+    <!-- Content -->
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <p class="lead">Revoke Cookie Consent</p>
+      </div>
+      <!--END Header-->
+      <!-- Body -->
+      <div class="modal-body">
+        <div class="text-left">
+          <div class="sectionbody">
+            <div class="paragraph">
+              <p>If you do <strong>not</strong> wish to receive <strong>cookies</strong> anymore from <strong>this site</strong>, you can
+                revoke the cookie consent you’ve given. Furthermore, you may be able to refuse
+                them by adjusting your <strong>browser</strong> settings to <strong>reject on cookies</strong>.
+              </p>
+            </div>
+            <!-- div class="admonitionblock caution">
+              <table>
+                <tbody>
+                  <tr>
+                    <td class="icon">
+                      <i class="fa icon-caution" title="Caution"></i>
+                    </td>
+                    <td class="content">
+                      If you have previously visited our website&thinsp;—&thinsp;or any pages this
+                      session&thinsp;—&thinsp;<strong>and</strong> agreed on the use of cookies, you may also have to
+                      <strong>delete</strong> already existing <strong>cookies</strong> by your <strong>browser</strong> in order to clean
+                      all cookies left.
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div -->
+            <!-- div class="paragraph">
+              <p>
+                You are about to <strong>disagree</strong> on cookies used by this site.
+                If you do so, this site is <strong>unable</strong> to offer you any of our
+                <strong>functionalities</strong>, <strong>services</strong> or <strong>support</strong>.
+              </p>
+            </div -->
+          </div>
+        </div>
+        <!-- END Body -->
+        <!-- Footer -->
+        <div class="modal-footer justify-content-center">
+          <a id="revokeCookies" type="button"
+            class="btn btn-flex btn-danger mb-2 mr-2" style="width: 25rem"
+            data-bs-dismiss="modal">
+            <i class="mdi mdi-18px mdi-white mdi-check mr-2"></i>
+            {{cookie_options.buttons.revoke_button_text}}
+          </a>
+          <a id="remainCookies" type="button"
+            class="btn btn-flex btn-primary mb-2 mr-2" style="width: 25rem"
+            data-bs-dismiss="modal">
+            <i class="mdi mdi-18px mdi-white mdi-close mr-2"></i>
+            {{cookie_options.buttons.do_nothing_button_text}}
+          </a>
+        </div> <!-- END Footer -->
+      </div> <!-- END Body -->
+    </div> <!-- END Content -->
+  </div>
+</div> <!-- END Modal -->
+{% comment %} END Modal revoke cookies dialog
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% endcapture %}
+
+{% if production %}
+  {% capture _LINE_FEED %}{% endcapture %}{% if site.compress_html.ignore.envs contains jekyll.environment %}{{ cache | strip_html_comments }}{% else %}{% capture _content %}{{ cache | strip_html_comments }}{% endcapture %}{% assign _profile = site.compress_html.profile %}{% if site.compress_html.endings == "all" %}{% assign _endings = "html head body li dt dd p rt rp optgroup option colgroup caption thead tbody tfoot tr td th" | split: " " %}{% else %}{% assign _endings = site.compress_html.endings %}{% endif %}{% for _element in _endings %}{% capture _end %}</{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _end %}{% endfor %}{% if _profile and _endings %}{% assign _profile_endings = _content | size | plus: 1 %}{% endif %}{% for _element in site.compress_html.startings %}{% capture _start %}<{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _start %}{% endfor %}{% if _profile and site.compress_html.startings %}{% assign _profile_startings = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.comments == "all" %}{% assign _comments = "<!-- -->" | split: " " %}{% else %}{% assign _comments = site.compress_html.comments %}{% endif %}{% if _comments.size == 2 %}{% capture _comment_befores %}.{{ _content }}{% endcapture %}{% assign _comment_befores = _comment_befores | split: _comments.first %}{% for _comment_before in _comment_befores %}{% if forloop.first %}{% continue %}{% endif %}{% capture _comment_outside %}{% if _carry %}{{ _comments.first }}{% endif %}{{ _comment_before }}{% endcapture %}{% capture _comment %}{% unless _carry %}{{ _comments.first }}{% endunless %}{{ _comment_outside | split: _comments.last | first }}{% if _comment_outside contains _comments.last %}{{ _comments.last }}{% assign _carry = false %}{% else %}{% assign _carry = true %}{% endif %}{% endcapture %}{% assign _content = _content | remove_first: _comment %}{% endfor %}{% if _profile %}{% assign _profile_comments = _content | size | plus: 1 %}{% endif %}{% endif %}{% assign _pre_befores = _content | split: "<pre" %}{% assign _content = "" %}{% for _pre_before in _pre_befores %}{% assign _pres = _pre_before | split: "</pre>" %}{% assign _pres_after = "" %}{% if _pres.size != 0 %}{% if site.compress_html.blanklines %}{% assign _lines = _pres.last | split: _LINE_FEED %}{% capture _pres_after %}{% for _line in _lines %}{% assign _trimmed = _line | split: " " | join: " " %}{% if _trimmed != empty or forloop.last %}{% unless forloop.first %}{{ _LINE_FEED }}{% endunless %}{{ _line }}{% endif %}{% endfor %}{% endcapture %}{% else %}{% assign _pres_after = _pres.last | split: " " | join: " " %}{% endif %}{% endif %}{% capture _content %}{{ _content }}{% if _pre_before contains "</pre>" %}<pre{{ _pres.first }}</pre>{% endif %}{% unless _pre_before contains "</pre>" and _pres.size == 1 %}{{ _pres_after }}{% endunless %}{% endcapture %}{% endfor %}{% if _profile %}{% assign _profile_collapse = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.clippings == "all" %}{% assign _clippings = "html head title base link meta style body article section nav aside h1 h2 h3 h4 h5 h6 hgroup header footer address p hr blockquote ol ul li dl dt dd figure figcaption main div table caption colgroup col tbody thead tfoot tr td th" | split: " " %}{% else %}{% assign _clippings = site.compress_html.clippings %}{% endif %}{% for _element in _clippings %}{% assign _edges = " <e;<e; </e>;</e>;</e> ;</e>" | replace: "e", _element | split: ";" %}{% assign _content = _content | replace: _edges[0], _edges[1] | replace: _edges[2], _edges[3] | replace: _edges[4], _edges[5] %}{% endfor %}{% if _profile and _clippings %}{% assign _profile_clippings = _content | size | plus: 1 %}{% endif %}{{ _content }}{% if _profile %} <table id="compress_html_profile_{{ site.time | date: "%Y%m%d" }}" class="compress_html_profile"> <thead> <tr> <td>Step <td>Bytes <tbody> <tr> <td>raw <td>{{ cache | strip_html_comments | size }}{% if _profile_endings %} <tr> <td>endings <td>{{ _profile_endings }}{% endif %}{% if _profile_startings %} <tr> <td>startings <td>{{ _profile_startings }}{% endif %}{% if _profile_comments %} <tr> <td>comments <td>{{ _profile_comments }}{% endif %}{% if _profile_collapse %} <tr> <td>collapse <td>{{ _profile_collapse }}{% endif %}{% if _profile_clippings %} <tr> <td>clippings <td>{{ _profile_clippings }}{% endif %} </table>{% endif %}{% endif %}
+{% else %}
+  {{ cache | pretty_print | remove:'<html><body>' | remove:'</body></html>' | strip_empty_lines }}
+{% endif %}
+{% assign cache = nil %}

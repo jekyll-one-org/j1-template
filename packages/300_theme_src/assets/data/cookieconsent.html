@@ -1,0 +1,263 @@
+---
+regenerate:                             true
+exclude_from_search:                    true
+---
+
+{% capture cache %}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/cookieconsent.html
+ # Liquid PROCEDURE to generate the HTML (data) portion of all modals used
+ # by J1 Cookie Consent module
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #   liquid_var: {{ liquid_var | debug }}
+ #   config: {{ config | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Set global settings
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment     = site.environment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign modules         = site.data.modules %}
+
+{% comment %} Process YML config data
+================================================================================ {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign consent_defaults = modules.defaults.cookieconsent.defaults %}
+{% assign consent_settings = modules.cookieconsent.settings %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign consent_options  = consent_defaults | merge: consent_settings %}
+
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+
+{% comment %} Main
+================================================================================ {% endcomment %}
+<!-- [INFO   ] [~/assets/data/cookiebar.html              ] [ set meta data (robots) to exclude HTML datafiles from index ] -->
+<head>
+  <meta name="robots" content="noindex, nofollow" />
+</head>
+
+{% comment %} i18n: translations
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Modal cookie consent dialog (default: en-EN)
+-------------------------------------------------------------------------------- {% endcomment %}
+<div id="consent-data-en">
+  <div id="modal-consent-en" class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <p class="lead">{{consent_options.modal_settings.title.en}}</p>
+      </div>
+
+      <div class="modal-body">
+        <div class="bccs-body-text" style="font-size: 90%">
+          <p>{{consent_options.modal_settings.body_text.en}}</p>
+        </div>
+        <p>
+          <a href="#bccs-privacy" data-bs-toggle="collapse" class="">Privacy Notice</a>
+          <a href="#bccs-options" data-bs-toggle="collapse" class="float-right">My Settings</a>
+        </p>
+
+        <div id="bccs-privacy" class="collapse">
+          <div class="bccs-body-text" style="font-size: 90%">
+            <p>{{consent_options.modal_settings.privacy_notice.en}}</p>
+          </div>
+        </div>
+
+        <div id="bccs-options" class="collapse">
+          <p class="tagline mt-4 mb-1"><b>Settings</b></p>
+          <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-3"></div>
+
+          <div class="bccs-option" data-name="necessary">
+            <div class="switch">
+              <label>
+                <input id="bccs-checkboxNecessary" type="checkbox" name="bccs-checkboxNecessary" checked disabled>
+                Necessary
+                <span class="bmd-switch-track"></span>
+              </label>
+              <ul>
+                <li class="mt-2" style="list-style-type: none;">Required to run the website</li>
+              </ul>
+            </div>
+          </div>
+          <div class="bccs-option" data-name="analysis">
+            <div class="switch">
+              <label>
+                <input id="bccs-checkboxAnalysis" type="checkbox" name="bccs-checkboxAnalysis" checked>
+                <span class="bmd-switch-track"></span>
+                Analysis
+              </label>
+              <ul>
+                <li class="mt-2" style="list-style-type: none;">Usage monitoring for this site</li>
+                <li style="list-style-type: none;">Optimizing of the performance for this site</li>
+                <li style="list-style-type: none;">Optimizing of content for all visitors</li>
+              </ul>
+            </div>
+          </div>
+          <div class="bccs-option" data-name="personalization">
+            <div class="switch">
+              <label>
+                <input id="bccs-checkboxPersonalization" type="checkbox"  name="bccs-checkboxPersonalization" checked>
+                <span class="bmd-switch-track"></span>
+                Personalization (Persistent Cookies)
+              </label>
+              <ul>
+                <li class="mt-2" style="list-style-type: none;">Collect user feedback for improvements</li>
+                <li style="list-style-type: none;">Storage of personal preferences from previous visits</li>
+                <li style="list-style-type: none;">Translation or comments to exchange visitor's experiences</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="bccs-buttonDoNotAgree" type="button" class="btn btn-outline-secondary mb-1 mr-2" style="min-width: 20rem">
+        I Do not Agree
+        </button>
+        <button id="bccs-buttonAgree" type="button" class="btn btn-primary mb-1 mr-2" style="min-width: 20rem">
+        I Agree
+        </button>
+        <button id="bccs-buttonSave" type="button" class="btn btn-outline-secondary mb-1 mr-2" style="display: none; min-width: 20rem">
+        Save selection
+        </button>
+        <button id="bccs-buttonAgreeAll" type="button" class="btn btn-primary mb-1 mr-2" style="display: none; min-width: 20rem">
+        Agree on all
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+{% comment %} END Modal cookie consent dialog (en-EN)
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Modal cookie consent dialog (de-DE)
+-------------------------------------------------------------------------------- {% endcomment %}
+<div id="consent-data-de">
+  <div id="modal-consent-de" class="modal-dialog modal-frame modal-top modal-notify modal-primary" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <p class="lead">{{consent_options.modal_settings.title.de}}</p>
+      </div>
+
+      <div class="modal-body">
+        <div class="bccs-body-text" style="font-size: 90%">
+          <p>{{consent_options.modal_settings.body_text.de}}</p>
+        </div>
+        <p>
+          <a href="#bccs-privacy" data-bs-toggle="collapse" class="">Datenschutzerklärung</a>
+          <a href="#bccs-options" data-bs-toggle="collapse" class="float-right">Meine Einstellungen</a>
+        </p>
+
+        <div id="bccs-privacy" class="collapse">
+          <div class="bccs-body-text" style="font-size: 90%">
+            <p>{{consent_options.modal_settings.privacy_notice.de}}</p>
+          </div>
+        </div>
+
+        <div id="bccs-options" class="collapse">
+          <p class="tagline mt-4 mb-1"><b>Einstellungen</b></p>
+          <div class="d-inline-block g-width-50 g-height-2 bg-primary mb-3"></div>
+
+          <div class="bccs-option" data-name="necessary">
+            <div class="switch">
+              <label>
+                <input id="bccs-checkboxNecessary" type="checkbox" name="bccs-checkboxNecessary" checked disabled>
+                <span class="bmd-switch-track"></span>
+                Notwendig
+              </label>
+              <ul>
+                <li style="list-style-type: none;">Zum Betrieb der Website erforderlich</li>
+              </ul>
+            </div>
+          </div>
+          <div class="bccs-option" data-name="analysis">
+            <div class="switch">
+              <label>
+                <input id="bccs-checkboxAnalysis" type="checkbox" name="bccs-checkboxAnalysis" checked>
+                <span class="bmd-switch-track"></span>
+                Analysen
+              </label>
+              <ul>
+                <li style="list-style-type: none;">Nutzungsüberwachung für diese Website</li>
+                <li style="list-style-type: none;">Optimierung der Leistung für diese Website</li>
+                <li style="list-style-type: none;">Optimierung des Inhalts für alle Besucher</li>
+              </ul>
+            </div>
+          </div>
+          <div class="bccs-option" data-name="personalization">
+            <div class="switch">
+              <label>
+                <input id="bccs-checkboxPersonalization" type="checkbox"  name="bccs-checkboxPersonalization" checked>
+                <span class="bmd-switch-track"></span>
+                Personalisierung
+              </label>
+              <ul>
+                <li style="list-style-type: none;">Sammeln von Benutzer-Feedback für Verbesserungen</li>
+                <li style="list-style-type: none;">Speicherung Ihrer Präferenzen aus frühreren Besuchen</li>
+                <li style="list-style-type: none;">Übersetzungen oder Kommentare zum Austausch von Erfahrungen der Besucher</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="bccs-buttonDoNotAgree" type="button" class="btn btn-outline-secondary mb-1 mr-2" style="min-width: 20rem">
+        Ich bin nicht einverstanden
+        </button>
+        <button id="bccs-buttonAgree" type="button" class="btn btn-primary mb-1 mr-2" style="min-width: 20rem">
+        Ich bin Einverstanden
+        </button>
+        <button id="bccs-buttonSave" type="button" class="btn btn-outline-secondary mb-1 mr-2" style="display: none; min-width: 20rem">
+        Auswahl speichern
+        </button>
+        <button id="bccs-buttonAgreeAll" type="button" class="btn btn-primary mb-1 mr-2" style="display: none; min-width: 20rem">
+        Allen zustimmen
+        </button>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% comment %} END Modal cookie consent dialog (de-DE)
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% endcapture %}
+
+{% if production %}
+  {% capture _LINE_FEED %}{% endcapture %}{% if site.compress_html.ignore.envs contains jekyll.environment %}{{ cache | strip_html_comments }}{% else %}{% capture _content %}{{ cache | strip_html_comments }}{% endcapture %}{% assign _profile = site.compress_html.profile %}{% if site.compress_html.endings == "all" %}{% assign _endings = "html head body li dt dd p rt rp optgroup option colgroup caption thead tbody tfoot tr td th" | split: " " %}{% else %}{% assign _endings = site.compress_html.endings %}{% endif %}{% for _element in _endings %}{% capture _end %}</{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _end %}{% endfor %}{% if _profile and _endings %}{% assign _profile_endings = _content | size | plus: 1 %}{% endif %}{% for _element in site.compress_html.startings %}{% capture _start %}<{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _start %}{% endfor %}{% if _profile and site.compress_html.startings %}{% assign _profile_startings = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.comments == "all" %}{% assign _comments = "<!-- -->" | split: " " %}{% else %}{% assign _comments = site.compress_html.comments %}{% endif %}{% if _comments.size == 2 %}{% capture _comment_befores %}.{{ _content }}{% endcapture %}{% assign _comment_befores = _comment_befores | split: _comments.first %}{% for _comment_before in _comment_befores %}{% if forloop.first %}{% continue %}{% endif %}{% capture _comment_outside %}{% if _carry %}{{ _comments.first }}{% endif %}{{ _comment_before }}{% endcapture %}{% capture _comment %}{% unless _carry %}{{ _comments.first }}{% endunless %}{{ _comment_outside | split: _comments.last | first }}{% if _comment_outside contains _comments.last %}{{ _comments.last }}{% assign _carry = false %}{% else %}{% assign _carry = true %}{% endif %}{% endcapture %}{% assign _content = _content | remove_first: _comment %}{% endfor %}{% if _profile %}{% assign _profile_comments = _content | size | plus: 1 %}{% endif %}{% endif %}{% assign _pre_befores = _content | split: "<pre" %}{% assign _content = "" %}{% for _pre_before in _pre_befores %}{% assign _pres = _pre_before | split: "</pre>" %}{% assign _pres_after = "" %}{% if _pres.size != 0 %}{% if site.compress_html.blanklines %}{% assign _lines = _pres.last | split: _LINE_FEED %}{% capture _pres_after %}{% for _line in _lines %}{% assign _trimmed = _line | split: " " | join: " " %}{% if _trimmed != empty or forloop.last %}{% unless forloop.first %}{{ _LINE_FEED }}{% endunless %}{{ _line }}{% endif %}{% endfor %}{% endcapture %}{% else %}{% assign _pres_after = _pres.last | split: " " | join: " " %}{% endif %}{% endif %}{% capture _content %}{{ _content }}{% if _pre_before contains "</pre>" %}<pre{{ _pres.first }}</pre>{% endif %}{% unless _pre_before contains "</pre>" and _pres.size == 1 %}{{ _pres_after }}{% endunless %}{% endcapture %}{% endfor %}{% if _profile %}{% assign _profile_collapse = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.clippings == "all" %}{% assign _clippings = "html head title base link meta style body article section nav aside h1 h2 h3 h4 h5 h6 hgroup header footer address p hr blockquote ol ul li dl dt dd figure figcaption main div table caption colgroup col tbody thead tfoot tr td th" | split: " " %}{% else %}{% assign _clippings = site.compress_html.clippings %}{% endif %}{% for _element in _clippings %}{% assign _edges = " <e;<e; </e>;</e>;</e> ;</e>" | replace: "e", _element | split: ";" %}{% assign _content = _content | replace: _edges[0], _edges[1] | replace: _edges[2], _edges[3] | replace: _edges[4], _edges[5] %}{% endfor %}{% if _profile and _clippings %}{% assign _profile_clippings = _content | size | plus: 1 %}{% endif %}{{ _content }}{% if _profile %} <table id="compress_html_profile_{{ site.time | date: "%Y%m%d" }}" class="compress_html_profile"> <thead> <tr> <td>Step <td>Bytes <tbody> <tr> <td>raw <td>{{ cache | strip_html_comments | size }}{% if _profile_endings %} <tr> <td>endings <td>{{ _profile_endings }}{% endif %}{% if _profile_startings %} <tr> <td>startings <td>{{ _profile_startings }}{% endif %}{% if _profile_comments %} <tr> <td>comments <td>{{ _profile_comments }}{% endif %}{% if _profile_collapse %} <tr> <td>collapse <td>{{ _profile_collapse }}{% endif %}{% if _profile_clippings %} <tr> <td>clippings <td>{{ _profile_clippings }}{% endif %} </table>{% endif %}{% endif %}
+{% else %}
+  {{ cache | pretty_print | remove:'<html><body>' | remove:'</body></html>' | strip_empty_lines }}
+{% endif %}
+{% assign cache = nil %}

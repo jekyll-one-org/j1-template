@@ -1,0 +1,501 @@
+---
+regenerate:                             true
+exclude_from_search:                    true
+---
+
+{% capture cache %}
+
+{% comment %}
+ # -----------------------------------------------------------------------------
+ # ~/assets/data/menu.html
+ # Liquid procedure to generate HTML portion of the main menu
+ # for the desktop version
+ # NOTE: Loaded dynamically by J1 NAV Manager module (AJAX)
+ #
+ # Product/Info:
+ # https://jekyll.one
+ #
+ # Copyright (C) 2023 Juergen Adams
+ #
+ # J1 Theme is licensed under the MIT License.
+ # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ # -----------------------------------------------------------------------------
+ # Test data:
+ #    {{ variable | debug }}
+ # -----------------------------------------------------------------------------
+{% endcomment %}
+
+{% comment %} Liquid procedures
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture select_color     %}themes/{{site.template.name}}/procedures/global/select_color.proc{% endcapture %}
+{% capture select_icon_size %}themes/{{site.template.name}}/procedures/global/select_icon_size.proc{% endcapture %}
+
+
+{% comment %} Liquid var initialization
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Set config files
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign template_config       = site.data.j1_config %}
+{% assign modules               = site.data.modules %}
+
+{% comment %} Set config data
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign environment           = site.environment %}
+
+{% assign navigator_settings    = modules.navigator.settings %}
+{% assign navigator_defaults    = modules.defaults.navigator.defaults %}
+{% assign navigator_menu_config = modules.navigator_menu %}
+
+{% assign themer_defaults       = modules.defaults.themer.defaults %}
+{% assign themer_settings       = modules.themer.settings %}
+
+{% assign nav_bar_defaults      = navigator_defaults.nav_bar %}
+{% assign nav_bar_settings      = navigator_settings.nav_bar %}
+{% assign nav_menu_defaults     = navigator_defaults.nav_menu %}
+{% assign nav_menu_settings     = navigator_settings.nav_menu %}
+
+{% comment %} Set config options
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign themer_options        = themer_defaults | merge: themer_settings %}
+{% assign nav_bar_options       = nav_bar_defaults  | merge: nav_bar_settings %}
+{% assign nav_menu_options      = nav_menu_defaults | merge: nav_menu_settings %}
+{% assign theme_preview         = themer_options.preview_page %}
+{% assign nav_menu_id           = nav_menu_options.id %}
+
+{% assign ext = '' %}
+{% if site.permalink == 'none' %}
+  {% assign ext = '.html' %}
+{% endif %}
+
+<!-- [DEBUG  ] [~/assets/data/menu.html         ][detect bs type] -->
+{% assign bs_type  = 'bmd4' %}
+{% if navigator_settings.bs_type == 'bs4' %}
+  {% assign bs_type = 'bs4' %}
+{% endif %}
+
+{% if bs_type == 'bmd4' %}
+  {% assign dropdown_collapse = 'collapse'  %}
+{% elsif bs_type == 'bs4' %}
+  {% assign dropdown_collapse = 'fake-class collapse'  %}
+{% endif %}
+
+<!-- [DEBUG  ] [~/assets/data/menu.html         ][bs type detected: {{bs_type}}] -->
+
+{% comment %} Set navBarOptions
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign nav_bar_position      = nav_bar_options.position %}
+{% assign nav_bar_translation   = nav_bar_options.translation %}
+
+{% comment %} Set navMenuOptions
+{% assign animate_in  = nav_menu_options.dropdown_animate_in %}
+{% assign animate_out = nav_menu_options.dropdown_animate_out %}
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign nav_menu_animation    = nav_menu_options.dropdown_animate %}
+{% if nav_menu_animation %}
+  {% capture animate_in %}animate__{{nav_menu_options.dropdown_animate_in}}{% endcapture %}
+  {% capture animate_out %}animate__{{nav_menu_options.dropdown_animate_out}}{% endcapture %}
+{% endif %}
+
+{% comment %} Set base nav features
+-------------------------------------------------------------------------------- {% endcomment %}
+{% capture nav_menu_position %}dropdown-menu-{{nav_bar_position}}{% endcapture %}
+{% unless nav_menu_animation %} {% assign nav_menu_animation  = false %} {% endunless %}
+
+<!-- [DEBUG  ] [~/assets/data/menu.html         ][initialize default menu properties] -->
+{% if nav_menu_options.raised_level %}
+  {% assign raised_level = nav_menu_options.raised_level %}
+{% else %}
+  {% assign raised_level = 0 %}
+{% endif %}
+
+{% comment %} Set (Google) translation features
+--------------------------------------------------------------------------------
+{% if nav_bar_translation %}
+  {% assign translate = 'translate' %}
+% else %}
+  {% assign translate = 'notranslate' %}
+{% endif %}
+
+<!-- [DEBUG  ] [~/assets/data/menu.html         ][nav_bar_translation:  {{ nav_bar_translation }}] -->
+<!-- [DEBUG  ] [~/assets/data/menu.html         ][translate:  {{ translate }}] -->
+-------------------------------------------------------------------------------- {% endcomment %}
+
+{% comment %} Set base icons and sizes
+-------------------------------------------------------------------------------- {% endcomment %}
+<!-- [DEBUG  ] [~/assets/data/menu.html         ][initialize default menu icon properties] -->
+{% assign nav_menu_icon_family         = nav_menu_options.icon_family %}
+{% assign nav_menu_icon_style          = nav_menu_options.icon_style %}
+{% assign nav_menu_icon_color          = nav_menu_options.icon_color %}
+{% assign nav_menu_icon_size           = nav_menu_options.icon_size %}
+
+{% assign icon_family = nav_menu_icon_family | strip | downcase %}
+
+{% if icon_family == 'fontawesome' or icon_family == 'fontawesome5' %}
+  {% assign nav_menu_icon_family    = 'fa' %}
+  {% assign nav_menu_icon_style     = nav_menu_icon_style %}
+{% elsif icon_family == 'mdi' %}
+  {% assign nav_menu_icon_family    = 'mdi' %}
+  {% assign nav_menu_icon_style     = nav_menu_icon_style %}
+  {% elsif icon_family == 'mdib' %}
+    {% assign nav_menu_icon_family  = 'mdib' %}
+    {% assign nav_menu_icon_style   = nav_menu_icon_style %}
+{% else %}
+  {% assign nav_menu_icon_family    = 'mdib' %}
+  {% assign nav_menu_icon_style     = nav_menu_icon_style %}
+{% endif %}
+
+{% include {{select_color}} color=nav_menu_icon_color fallback="#9E9E9E" %}
+{% assign nav_menu_icon_color = color %}
+
+{% include {{select_icon_size}} family=nav_menu_icon_family size=nav_menu_icon_size %}
+{% assign nav_menu_icon_size = size %}
+
+{% comment %} Detect prod mode
+-------------------------------------------------------------------------------- {% endcomment %}
+{% assign production = false %}
+{% if environment == 'prod' or environment == 'production' %}
+  {% assign production = true %}
+{% endif %}
+
+{% comment %} Main
+See: https://stackoverflow.com/questions/39935447/is-there-any-way-to-exclude-mathjax-processing-from-certain-html-elements
+================================================================================ {% endcomment %}
+<!-- [INFO   ] [~/assets/data/menu.html         ][ set meta data (robots) to exclude HTML datafiles from index ] -->
+<head>
+  <meta name="robots" content="noindex, nofollow" />
+</head>
+
+<!-- [DEBUG  ] [~/assets/data/menu.html         ][collect all nav links for the navigation bar (navbar)] -->
+<!-- div id="{{nav_menu_id}}" class="{{dropdown_collapse}}" -->
+<!-- div class="{{dropdown_collapse}}" -->
+  {% if nav_menu_animation %}
+  <ul id="{{nav_menu_options.xhr_data_element}}" class="nav navbar-nav navigator navbar-{{nav_bar_position}} tex2jax_ignore {{nav_bar_translation}}" data-in="{{animate_in}}" data-out="{{animate_out}}">
+  {% else %}
+  <ul id="{{nav_menu_options.xhr_data_element}}" class="nav navbar-nav navigator navbar-{{nav_bar_position}} tex2jax_ignore {{nav_bar_translation}}" data-in="fadeIn" data-out="fadeOut">
+  {% endif %}
+
+  {% for menu in navigator_menu_config %}
+
+    {% comment %} Identify the menu (item) type
+    ---------------------------------------------------------------------------- {% endcomment %}
+
+    {% if menu.sublevel %}
+      {% assign menu_type = 'sublevel_menu' %}
+    {% elsif menu.megamenu %}
+      {% assign menu_type = 'mega_menu' %}
+    {% elsif menu.auth_client %}
+      {% assign menu_type = 'auth_client' %}
+    {% elsif menu.theme_select %}
+      {% assign menu_type = 'theme_select' %}
+    {% elsif menu.sublevel == null and menu.megamenu == null and menu.login_menu == null and menu.theme_select == null %}
+      {% assign menu_type = 'top_level_item' %}
+    {% endif %}
+
+
+    {% comment %} Process all menu sections
+    ---------------------------------------------------------------------------- {% endcomment %}
+
+    {% case menu_type %}
+
+    {% comment %} Collect items having a SUB menue
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% when 'sublevel_menu' %}
+      <!-- [INFO   ] [~/assets/data/menu.html         ][found menu-type: sub-menue] -->
+      <!-- [INFO   ] [~/assets/data/menu.html         ][submenu level 1 detected] -->
+      <li class="dropdown nav-item">
+        {% if menu.icon == null %}
+          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-hover="dropdown">{{ menu.item }}</a>
+        {% else %}
+          <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-hover="dropdown"> <i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{menu.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i>{{ menu.item }}</a>
+        {% endif %}
+
+        <ul class="dropdown-menu {{nav_menu_position}} raised-z{{raised_level}}">
+        {% for level_1 in menu.sublevel %}
+          {% if level_1.dropdown == null %}
+            {% if level_1.icon == null %}
+              {% if level_1.target == null %}
+                <li class="dropdown-item"><a href="{{ level_1.href }}{{ext}}">{{ level_1.title }}</a></li>
+              {% else %}
+                <li class="dropdown-item"><a href="{{ level_1.href }}{{ext}}" target="{{ level_1.target }}" rel="noopener">{{ level_1.title }}</a></li>
+              {% endif %}
+            {% else %}
+              {% if level_1.target == null %}
+                <li class="dropdown-item"><a href="{{ level_1.href }}{{ext}}"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{level_1.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{ level_1.title }}</a></li>
+              {% else %}
+                <li class="dropdown-item"><a href="{{ level_1.href }}{{ext}}" target="{{ level_1.target }}" rel="noopener"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{level_1.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{ level_1.title }}</a></li>
+              {% endif %}
+            {% endif %}
+          {% endif %}
+          {% if level_1.divider %} <li class="divider"></li> {% endif %}
+          {% if level_1.dropdown %}
+            <!-- [INFO   ] [~/assets/data/menu.html         ][submenu level 2 (dropdown) detected ] -->
+            <li class="dropdown nav-sub-item">
+              {% if level_1.icon == null %}
+                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">{{ level_1.title }}</a>
+              {% else %}
+                <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{level_1.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{ level_1.title }}</a>
+              {% endif %}
+
+              <ul class="dropdown-menu {{nav_menu_position}} raised-z{{raised_level}}">
+                {% for level_2 in level_1.dropdown %}
+                  {% if level_2.dropdown == null %}
+                    {% if level_2.icon == null %}
+                      {% if level_2.target == null %}
+                        <li class="dropdown-item"><a href="{{ level_2.href }}{{ext}}">{{ level_2.title }}</a></li>
+                      {% else %}
+                        <li class="dropdown-item"><a href="{{ level_2.href }}{{ext}}" target="{{ level_2.target }}" rel="noopener">{{ level_2.title }}</a></li>
+                      {% endif %}
+                    {% else %}
+                      {% if level_2.target == null %}
+                        <li class="dropdown-item"><a href="{{ level_2.href }}{{ext}}"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{level_2.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{ level_2.title }}</a></li>
+                      {% else %}
+                        <li class="dropdown-item"><a href="{{ level_2.href }}{{ext}}" target="{{ level_2.target }}" rel="noopener"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{level_2.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{ level_2.title }}</a></li>
+                      {% endif %}
+                    {% endif %}
+                  {% endif %}
+                  {% if level_2.divider %} <li class="divider"></li> {% endif %}
+                  {% if level_2.dropdown %}
+                    <!-- [INFO   ] [~/assets/data/menu.html         ][submenu level 3 detected (last level supported)] -->
+                    <li class="dropdown nav-sub-item">
+                      {% if level_2.icon == null %}
+                        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown">{{ level_2.title }}</a>
+                      {% else %}
+                        <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{level_2.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{ level_2.title }}</a>
+                      {% endif %}
+                      <ul class="dropdown-menu {{nav_menu_position}} raised-z{{raised_level}}">
+                      {% for level_3 in level_2.dropdown %}
+                        {% if level_2.icon == null %}
+                          {% if level_3.target == null %}
+                            <li class="dropdown-item"><a href="{{ level_3.href }}{{ext}}">{{ level_3.title }}</a></li>
+                          {% else %}
+                            <li class="dropdown-item"><a href="{{ level_3.href }}{{ext}}" target="{{ level_3.target }}" rel="noopener">{{ level_3.title }}</a></li>
+                          {% endif %}
+                        {% else %}
+                          {% if level_3.target == null %}
+                            <li class="dropdown-item"><a href="{{ level_3.href }}{{ext}}"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{level_3.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{ level_3.title }}</a></li>
+                          {% else %}
+                            <li class="dropdown-item"><a href="{{ level_3.href }}{{ext}}" target="{{ level_3.target }}" rel="noopener"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{level_3.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{ level_3.title }}</a></li>
+                          {% endif %}
+                        {% endif %}
+                        {% if level_3.divider %} <li class="divider"></li> {% endif %}
+                      {% endfor %} <!-- [INFO   ] [~/assets/data/menu.html         ][end processing: level 3] -->
+                      </ul>
+                    </li>
+                  {% endif %}
+              {% endfor %} <!-- [INFO   ] [~/assets/data/menu.html         ][end processing: level 2] -->
+              </ul>
+            </li>
+          {% endif %}
+        {% endfor %} <!-- [INFO   ] [~/assets/data/menu.html         ][end processing: level 1] -->
+        </ul>
+      </li>
+      <!-- [INFO   ] [~/assets/data/menu.html         ][reset menu_type for next loop] -->
+    {% assign menu_type = '' %}
+
+
+    {% comment %} Collect items having a MEGA menu
+    ---------------------------------------------------------------------------- {% endcomment %}
+    {% when 'mega_menu' %}
+      <!-- [INFO   ] [~/assets/data/menu.html         ][found menu-type: megamenu-menue] -->
+      <!-- calculate size of mm_columns -->
+      {% assign columns = menu.megamenu | size %}
+      {% assign columns_width_md = 12 | divided_by:columns %}
+      <!-- [INFO   ] [~/assets/data/menu.html         ][Calculated size of mm_columns: {{ columns_width_md }}] -->
+
+      <li class="dropdown nav-item megamenu-fw">
+        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">{{menu.item}} </a>
+        <ul class="dropdown-menu megamenu-content raised-z{{raised_level}}" style="max-height: {{nav_menu_options.max_height}}px; overflow-x: hidden; overflow-y: auto;" role="menu">
+          <li>
+            <div class="row">
+            {% for megabox in menu.megamenu %}
+            <div class="col-menu col-md-{{columns_width_md}} col-sm-6">
+              {% if megabox.icon == null %}
+                <div class="megamenu-headline mt-2 mb-3">
+                  <h2 class="title" style="font-size:1.25em !important">{{megabox.title}}</h2>
+                </div>
+              {% else %}
+                <div class="megamenu-headline mt-2 mb-3">
+                  <h2 class="title" style="font-size:1.25em !important"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{megabox.icon}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{megabox.title}}</h2>
+                </div>
+              {% endif %}
+              <div class="content">
+                <ul class="menu-col">
+                {% for links in megabox.column %}
+                  {% if links.icon == null %}
+                    <li class="dropdown-megamenu-item"><a href="{{links.href}}{{ext}}" target="{{ links.target }}" rel="noopener">{{links.title}}</a></li>
+                  {% else %}
+                    <li class="dropdown-megamenu-item"><a href="{{links.href}}{{ext}}" target="{{ links.target }}" rel="noopener"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{links.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{links.title}}</a></li>
+                  {% endif %}
+                {% endfor %}
+                </ul>
+              </div>
+            </div>
+            <!-- [INFO   ] [~/assets/data/menu.html         ][megamenu-menue: end megabox] -->
+            {% endfor %}
+            </div>
+          </li>
+        </ul>
+      </li>
+      <!-- [INFO   ] [~/assets/data/menu.html         ][megamenu-menue: end mega-menu] -->
+      <!-- [INFO   ] [~/assets/data/menu.html         ][reset menu_type for next loop] -->
+      {% assign menu_type = '' %}
+
+
+      {% comment %} Collect TOP-LEVEL items (NO sub-menu)
+      -------------------------------------------------------------------------- {% endcomment %}
+      {% when 'top_level_item' %}
+        <!-- [INFO   ] [~/assets/data/menu.html         ][found menu-type: menu-top-level-only] -->
+        {% if menu.icon == null %}
+          <!-- [INFO   ] [~/assets/data/menu.html         ][no icon for menu-item found -->
+          {% if menu.target == null %}
+            <li class="nav-item"> <a class="nav-link" href="{{ menu.href }}{{ext}}">{{ menu.item }}</a> </li>
+          {% else %}
+            <li class="nav-item"> <a class="nav-link" href="{{ menu.href }}{{ext}}" target="{{ menu.target }}" rel="noopener">{{ menu.item }}</a> </li>
+          {% endif %}
+        {% elsif menu.icon %}
+          <!-- [INFO   ] [~/assets/data/menu.html         ][no icon for menu-item found -->
+          {% if menu.target == null %}
+            <li> <a class="nav-link" href="{{ menu.href }}{{ext}}"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{menu.icon}} {{nav_menu_icon_size}}" style="color:{{nav_menu_icon_color}}"></i> {{ menu.item }}</a> </li>
+          {% else %}
+            <li> <a class="nav-link" href="{{ menu.href }}{{ext}}" target="{{ menu.target }}" rel="noopener"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{menu.icon}} {{nav_menu_icon_size}}" style="color:{{nav_menu_icon_color}}"></i> {{ menu.item }}</a> </li>
+          {% endif %}
+        {% else %}
+          <!-- [FATAL ] [nav_menu.menu-top-level-only       ] [processing menu item failed] -->
+        {% endif %}
+        <!-- [INFO   ] [~/assets/data/menu.html         ][menu-top-level-only: end menu] -->
+        <!-- [INFO   ] [~/assets/data/menu.html         ][reset menu_type for next loop] -->
+        {% assign menu_type = '' %}
+
+
+        {% comment %} Collect items having a LOGIN menu
+        ------------------------------------------------------------------------ {% endcomment %}
+        {% when 'auth_client' %}
+          <!-- [INFO   ] [~/assets/data/menu.html         ][found menu-type: auth_client] -->
+          <li id="menuBarSignInOut" class="dropdown nav-item">
+            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-hover="dropdown">{{menu.item}} </a>
+
+            {% if nav_menu_animation %}
+            <!-- jadams, 2017-11-24: (1) ul class="dropdown-menu {{nav_menu_position}} raised-z{{raised_level}}" style="opacity: 1; display: none;" -->
+            <ul class="dropdown-menu {{nav_menu_position}} raised-z{{raised_level}}" style="display: none;">
+            <!-- ul class="dropdown-menu data-in="{{nav_menu_animation}}" data-out="{{nav_menu_animation}}" -->
+            {% else %}
+            <!-- jadams, 2017-11-24: (2) ul class="dropdown-menu {{nav_menu_position}} raised-z{{raised_level}}" style="opacity: 1; display: none;" -->
+            <ul class="dropdown-menu {{nav_menu_position}} raised-z{{raised_level}}" style="display: none;">
+            {% endif %}
+
+              {% assign item_found = 'false' %}
+              {% for item in menu.auth_client %}
+
+                <!-- [INFO   ] [~/assets/data/menu.html         ][START: check signin] -->
+                {% if item.mode == 'signin' %}
+                  <li class="dropdown-item">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalOmniSignIn"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{item.icon}} {{nav_menu_icon_size}}" style="color:{{nav_menu_icon_color}}"></i>{{item.title}}</a>
+                  </li>
+                  {% assign item_found = 'true' %}
+                {% endif %}
+                <!-- [INFO   ] [~/assets/data/menu.html         ][END: check signin] -->
+
+                <!-- [INFO   ] [~/assets/data/menu.html         ][START: check signout] -->
+                {% if item.mode == 'signout' %}
+                  <li class="dropdown-item">
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#modalOmniSignOut"><i class="{{nav_menu_icon_style}} {{nav_menu_icon_family}}-{{item.icon}} {{nav_menu_icon_size}}" style="color:{{nav_menu_icon_color}}"></i>{{item.title}}</a>
+                  </li>
+                  {% assign item_found = 'true' %}
+                {% endif %}
+                <!-- [INFO   ] [~/assets/data/menu.html         ][END: check signout] -->
+
+                {% if item_found == 'false' %}
+                <!-- [FATAL  ] [~/assets/data/menu.html         ][no valid menu item config found] -->
+                  <li class="dropdown-item">
+                    {% if item.title %}
+                      <a href="#" >Invalid: {{item.title}}</a>
+                    {% else %}
+                      <a href="#" >Item invalid</a>
+                    {% endif %}
+                  </li>
+                {% endif %}
+
+              {% endfor %}
+              <!-- [INFO   ] [~/assets/data/menu.html         ][login_menu: end menu] -->
+            </ul>
+          </li>
+          <!-- [INFO   ] [~/assets/data/menu.html         ][reset menu_type for next loop] -->
+          {% assign menu_type = '' %}
+
+          {% comment %} Collect items having a THEMES menu
+          ---------------------------------------------------------------------- {% endcomment %}
+          {% when 'theme_select' %}
+          {% if themer_options.enabled %}
+            <!-- [INFO   ] [~/assets/data/menu.html         ][found menu-type: theme_select] -->
+            <li id="themes_menu" class="dropdown nav-item" style="display: block">
+              <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" data-hover="dropdown">{{menu.item}} </a>
+              {% if nav_menu_animation %}
+              <ul class="dropdown-menu raised-z{{raised_level}}">
+              <!-- ul class="dropdown-menu data-in="{{nav_menu_animation}}" data-out="{{nav_menu_animation}}" -->
+              {% else %}
+              <ul class="dropdown-menu raised-z{{raised_level}}">
+              {% endif %}
+                {% assign item_found = 'false' %}
+                {% for item in menu.theme_select %}
+                  <!-- check for locally loaded J1 Themes -->
+                  {% if item.local_themes and item.local_themes == 'enabled' %}
+                    <li class="dropdown nav-sub-item">
+                      <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" data-hover="dropdown"><i class="dropdown {{nav_menu_icon_family}} {{nav_menu_icon_family}}-{{item.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{item.title}}</a>
+                      <ul id="local_themes" class="dropdown-menu raised-z{{raised_level}}"></ul>
+                    </li>
+                    {% assign item_found = 'true' %}
+                  {% endif %} <!-- end J1 theme selector -->
+                  <!-- check for remotely loaded (BootSwatch) Themes -->
+                  {% if item.bootswatch_themes and item.bootswatch_themes == 'enabled' %}
+                    <li class="dropdown nav-sub-item">
+                      <a href="#" class="dropdown-toggle" data-bs-toggle="dropdown" data-hover="dropdown"><i class="dropdown {{nav_menu_icon_family}} {{nav_menu_icon_family}}-{{item.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{item.title}}</a>
+                      <ul id="remote_themes" class="dropdown-menu scrollable-menu raised-z{{raised_level}}"></ul>
+                    </li>
+                    {% assign item_found = 'true' %}
+                  {% endif %} <!-- end BootSwatch theme selector -->
+                  {% if item.preview and item.preview == 'enabled' %}
+                    <li class="dropdown-item">
+                      <a href="{{ theme_preview }}" ><i class="dropdown {{nav_menu_icon_family}} {{nav_menu_icon_family}}-{{item.icon}} {{nav_menu_icon_size}} mr-2" style="color:{{nav_menu_icon_color}}"></i> {{item.title}}</a>
+                    </li>
+                    {% assign item_found = 'true' %}
+                    {% endif %} <!-- end theme preview -->
+                     <!-- fallback if no valid config found -->
+                    {% if item_found == 'false' %}
+                    <li>
+                      {% if item.title %}
+                        <a href="#" >Invalid: {{item.title}}</a>
+                      {% else %}
+                        <a href="#" >Item invalid</a>
+                      {% endif %}
+                    </li>
+                  {% endif %} <!-- end fallback -->
+                {% endfor %}
+              </ul>
+            </li>
+            <!-- [INFO   ] [~/assets/data/menu.html         ][reset menu_type for next loop] -->
+          {% endif %}
+          {% assign menu_type = '' %}
+
+
+          {% comment %} Collect items failed
+          ---------------------------------------------------------------------- {% endcomment %}
+          {% else %}
+            <!-- [FATAL  ] [~/assets/data/menu.html         ][detecting menu items|type failed] -->
+        {% assign menu_type = '' %}
+
+    {% endcase %}
+
+  {% endfor %}
+  <!-- [INFO   ] [~/assets/data/menu.html         ][nav_menu_settings: end menu] -->
+  </ul>
+  <!-- [INFO   ] [~/assets/data/menu.html         ][nav_menu_settings: end navbar] -->
+  <!-- [INFO   ] [~/assets/data/menu.html         ][nav_menu_settings: end processing] -->
+{% endcapture %}
+
+{% if production %}
+  {% capture _LINE_FEED %}{% endcapture %}{% if site.compress_html.ignore.envs contains jekyll.environment %}{{ cache | strip_html_comments }}{% else %}{% capture _content %}{{ cache | strip_html_comments }}{% endcapture %}{% assign _profile = site.compress_html.profile %}{% if site.compress_html.endings == "all" %}{% assign _endings = "html head body li dt dd p rt rp optgroup option colgroup caption thead tbody tfoot tr td th" | split: " " %}{% else %}{% assign _endings = site.compress_html.endings %}{% endif %}{% for _element in _endings %}{% capture _end %}</{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _end %}{% endfor %}{% if _profile and _endings %}{% assign _profile_endings = _content | size | plus: 1 %}{% endif %}{% for _element in site.compress_html.startings %}{% capture _start %}<{{ _element }}>{% endcapture %}{% assign _content = _content | remove: _start %}{% endfor %}{% if _profile and site.compress_html.startings %}{% assign _profile_startings = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.comments == "all" %}{% assign _comments = "<!-- -->" | split: " " %}{% else %}{% assign _comments = site.compress_html.comments %}{% endif %}{% if _comments.size == 2 %}{% capture _comment_befores %}.{{ _content }}{% endcapture %}{% assign _comment_befores = _comment_befores | split: _comments.first %}{% for _comment_before in _comment_befores %}{% if forloop.first %}{% continue %}{% endif %}{% capture _comment_outside %}{% if _carry %}{{ _comments.first }}{% endif %}{{ _comment_before }}{% endcapture %}{% capture _comment %}{% unless _carry %}{{ _comments.first }}{% endunless %}{{ _comment_outside | split: _comments.last | first }}{% if _comment_outside contains _comments.last %}{{ _comments.last }}{% assign _carry = false %}{% else %}{% assign _carry = true %}{% endif %}{% endcapture %}{% assign _content = _content | remove_first: _comment %}{% endfor %}{% if _profile %}{% assign _profile_comments = _content | size | plus: 1 %}{% endif %}{% endif %}{% assign _pre_befores = _content | split: "<pre" %}{% assign _content = "" %}{% for _pre_before in _pre_befores %}{% assign _pres = _pre_before | split: "</pre>" %}{% assign _pres_after = "" %}{% if _pres.size != 0 %}{% if site.compress_html.blanklines %}{% assign _lines = _pres.last | split: _LINE_FEED %}{% capture _pres_after %}{% for _line in _lines %}{% assign _trimmed = _line | split: " " | join: " " %}{% if _trimmed != empty or forloop.last %}{% unless forloop.first %}{{ _LINE_FEED }}{% endunless %}{{ _line }}{% endif %}{% endfor %}{% endcapture %}{% else %}{% assign _pres_after = _pres.last | split: " " | join: " " %}{% endif %}{% endif %}{% capture _content %}{{ _content }}{% if _pre_before contains "</pre>" %}<pre{{ _pres.first }}</pre>{% endif %}{% unless _pre_before contains "</pre>" and _pres.size == 1 %}{{ _pres_after }}{% endunless %}{% endcapture %}{% endfor %}{% if _profile %}{% assign _profile_collapse = _content | size | plus: 1 %}{% endif %}{% if site.compress_html.clippings == "all" %}{% assign _clippings = "html head title base link meta style body article section nav aside h1 h2 h3 h4 h5 h6 hgroup header footer address p hr blockquote ol ul li dl dt dd figure figcaption main div table caption colgroup col tbody thead tfoot tr td th" | split: " " %}{% else %}{% assign _clippings = site.compress_html.clippings %}{% endif %}{% for _element in _clippings %}{% assign _edges = " <e;<e; </e>;</e>;</e> ;</e>" | replace: "e", _element | split: ";" %}{% assign _content = _content | replace: _edges[0], _edges[1] | replace: _edges[2], _edges[3] | replace: _edges[4], _edges[5] %}{% endfor %}{% if _profile and _clippings %}{% assign _profile_clippings = _content | size | plus: 1 %}{% endif %}{{ _content }}{% if _profile %} <table id="compress_html_profile_{{ site.time | date: "%Y%m%d" }}" class="compress_html_profile"> <thead> <tr> <td>Step <td>Bytes <tbody> <tr> <td>raw <td>{{ cache | strip_html_comments | size }}{% if _profile_endings %} <tr> <td>endings <td>{{ _profile_endings }}{% endif %}{% if _profile_startings %} <tr> <td>startings <td>{{ _profile_startings }}{% endif %}{% if _profile_comments %} <tr> <td>comments <td>{{ _profile_comments }}{% endif %}{% if _profile_collapse %} <tr> <td>collapse <td>{{ _profile_collapse }}{% endif %}{% if _profile_clippings %} <tr> <td>clippings <td>{{ _profile_clippings }}{% endif %} </table>{% endif %}{% endif %}
+{% else %}
+  {{ cache | pretty_print | remove:'<html><body>' | remove:'</body></html>' | strip_empty_lines }}
+{% endif %}
+{% assign cache = nil %}
