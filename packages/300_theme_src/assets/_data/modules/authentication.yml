@@ -1,0 +1,145 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/authentication.yml
+# User configuration settings for J1 Authentication module
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2023 Juergen Adams
+#
+# J1 Theme is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+#
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description
+#
+description:
+  title:                                Authentication
+  scope:                                User settings
+  location:                             _data/modules/authentication.yml
+
+# ------------------------------------------------------------------------------
+# User settings
+#
+settings:
+  enabled:                              true
+
+  # ----------------------------------------------------------------------------
+  # Provider settings
+  #
+  j1_auth:
+    enabled:                            false
+    ssl:                                false
+
+    content:
+      public:
+        - \W*((?i)assets(?-i))\W*
+        - \W*((?i)public(?-i))\W*
+      protected:
+        - \W*((?i)protected(?-i))\W*
+      private:
+        - \W*((?i)private(?-i))\W*
+
+    providers:
+      activated:                        [ disqus, github ]
+
+      disqus:
+        provider_url:                   https://disqus.com
+        strategy:                       member
+        scope:                          []
+        users:                          [ all ]
+        permissions:                    [ protected ]
+        data_fields:                    []
+        conditions:
+          protected:
+            enabled:                    true
+            users:
+              blacklist:                []
+          private:
+            enabled:                    false
+            users:
+              whitelist:                [ all ]
+              blacklist:                []
+
+      github:
+        provider_url:                   https://github.com
+        strategy:                       member
+        scope:                          []
+        users:                          [ all ]
+        permissions:                    [ protected, private ]
+        data_fields:                    []
+        conditions:
+          protected:
+            enabled:                    true
+            users:
+              blacklist:                []
+          private:
+            enabled:                    true
+            users:
+              whitelist:                [ all ]
+              blacklist:                []
+
+  # ----------------------------------------------------------------------------
+  # Auth CLIENT settings
+  #
+  auth_client:
+    enabled:                            true
+
+    auth_signin_modal:
+      title:                            SignIn
+      # body_text: >
+      #                                   In order to get *signed in*, check one of the options below
+      #                                   and mark a provider for authentication. You'll be *redirected*
+      #                                   to authenticate with the provider *selected*. If signed in
+      #                                   *successfully*, you get back to this site for the page requested.
+      #
+      #
+      #                                   NOTE: To get access to secured pages of this site,
+      #                                   authentication with a provider is needed only *once*.
+
+      body_text: >
+                                        In order to get *signed in*, check one of the options below
+                                        and mark a provider for authentication. You'll be *redirected*
+                                        to authenticate with the provider *selected*. If signed in
+                                        *successfully*, you get back to this site for the page requested.
+
+    auth_disqus:
+      id:                               1
+      title:                            Disqus
+      text: >
+                                        SignIn to Disqus. Get access to all *PROTECTED* content pages of this site.
+    auth_facebook:
+      id:                               2
+      title:                            Facebook
+      text: >
+                                        SignIn to Facebook. Get access to all *PROTECTED* content pages of this site.
+    auth_github:
+      id:                               3
+      title:                            Github
+      text: >
+                                        SignIn to Github. Get access to all *PROTECTED* content pages of this site.
+    auth_patreon:
+      id:                               4
+      title:                            Patreon
+      text: >
+                                        SignIn to Patreon. Get access to all *PROTECTED* and *PRIVATE* content pages of this site.
+    auth_twitter:
+      id:                               5
+      title:                            Twitter
+      text: >
+                                        SignIn to Twitter. Get access to all *PROTECTED* content pages of this site.
+
+    auth_signout_modal:
+      title:                            SignOut
+      body_text: >
+                                        If signing out you'll be *redirected* to the *home page* of this site,
+                                        if the page you're currently visting requires authentication.
+
+
+#                                       NOTE: In order to signing out *completely*, check the switch
+#                                       below to *on*.
+
+# ------------------------------------------------------------------------------
+# END config

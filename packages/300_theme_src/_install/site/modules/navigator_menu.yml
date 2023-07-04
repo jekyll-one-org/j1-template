@@ -635,7 +635,7 @@
         - title:                        cdnJS
           href:                         https://cdnjs.com/
           target:                       _blank
-          icon:                         arrow-down-bold-hexagon-outline
+          icon:                         cloud-outline
 
     - title:                            Knowledge
       icon:                             lightbulb-on

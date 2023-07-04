@@ -2769,6 +2769,10 @@ var j1 = (function (options) {
       var cumulated_lcp = 0;
       const development = ('{{environment}}'.includes('prod')) ? false : true;
 
+      {% comment %} generate code for performance monitor if 'enabled'
+      ------------------------------------------------------------------------ {% endcomment %}
+      {% if template_config.monitor.performance_observer %}
+
       // PerformanceObserver to monitor the 'LCP' of a page load
       // see: https://developer.mozilla.org/en-US/docs/Web/API/LargestContentfulPaint
       //
@@ -2868,6 +2872,8 @@ var j1 = (function (options) {
 
       }); // END performanceObserverCLS
 
+      {% endif %}
+
       // ResizeObserver to monitor the changes on page height (dynamic pages)
       // see: https://stackoverflow.com/questions/14866775/detect-document-height-change
       //
@@ -2962,7 +2968,9 @@ var j1 = (function (options) {
       // run all observers for page monitoring
       // -----------------------------------------------------------------------
 
-      if (performance_monitors_enabled) {
+      {% comment %} generate initializers for performance monitoring if 'enabled'
+      ------------------------------------------------------------------------ {% endcomment %}
+      {% if template_config.monitor.performance_observer %}
         // monitor 'LCP'
         //
         performanceObserverLCP.observe({
@@ -2977,7 +2985,7 @@ var j1 = (function (options) {
            buffered: true
         });
 
-      } // END if 'performance_monitors'
+      {% endif %}
 
       // monitor 'GROWTH'
       resizeObserver.observe(

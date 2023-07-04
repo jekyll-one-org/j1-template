@@ -1,0 +1,152 @@
+# ------------------------------------------------------------------------------
+# ~/_data/modules/particles.yml
+# User configuration for J1 Particles Module
+#
+# Product/Info:
+# https://jekyll.one
+#
+# Copyright (C) 2023 Juergen Adams
+#
+# J1 Theme is licensed under the MIT License.
+# See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# Description (used for J1 CC only)
+#
+description:
+
+  title:                                J1 Particle Module
+  scope:                                User settings
+  location:                             _data/modules/particles.yml
+
+# ------------------------------------------------------------------------------
+# User configuration settings
+#
+settings:
+
+  # ----------------------------------------------------------------------------
+  # GENERAL particle settings
+  #
+  # enabled
+  # ----------------------------------------------------------------------------
+  #   Enables|Disables the use of a gallery
+  #
+  # xhr_data_path
+  # ----------------------------------------------------------------------------
+  #   All data items displayed by a gallery are being read from a
+  #   JSON file automatically generated from that configuration.
+  #   AJAX get method is used to supply the gallery with respective
+  #   the HTML code at the time the gallery is initialized (by the
+  #   J1 Adapter for J1 Particle Module).
+  #
+  #   values:                           string
+  #   default:                          /assets/data/galleries.json
+  #
+  # instance_type
+  # ----------------------------------------------------------------------------
+  #   Specifies if a modules can be run as a single instance
+  #   (only) or run in multiple instances.
+  #
+  #   NOTE: The parameter instance_type controls how MODULE runner
+  #         manages configuration options.
+  #
+  #   values:                           single|multiple
+  #   default:                          single
+  #
+  # rowHeight
+  # ----------------------------------------------------------------------------
+  #   All data items displayed by a gallery are being read from a
+  #   JSON file automatically generated from that configuration.
+  #
+  #   values:                           string
+  #   default:                          /assets/data/galleries.json
+  #
+  enabled:                              true
+  xhr_data_path:                        /assets/data/galleries.json
+  instance_type:                        multiple
+  rowHeight:                            170
+
+  # ----------------------------------------------------------------------------
+  # INSTANCE particle settings
+  #
+  # particle options
+  # ----------------------------------------------------------------------------
+  #
+  #   shape.type
+  #   --------------------------------------------------------------------------
+  #   Specifies the lightbox used with the gallery
+  #
+  #   lb: Lightbox 2
+  #   lg: LightGallery
+  #
+  #   values:                           string or array
+  #   default:                          lb
+  # ----------------------------------------------------------------------------
+
+  particles:
+
+    # ==========================================================================
+    # Particles
+    #
+
+    # --------------------------------------------------------------------------
+    # Example 'particle-snow' (image)
+    #
+    - name:                             Example Particle 1
+      particle:
+        enabled:                        true
+        id:                             particle-snow
+
+        json_data:
+
+          particles:
+
+            number:
+              value:                    150
+
+            shape:
+              type:                     image
+              image:
+                src:                    /assets/themes/j1/modules/particles/css/images/snowflake-1.png
+
+            opacity:
+              value:                    0.5
+              random:                   true
+              anim:
+                enable:                 true
+                speed:                  1
+                opacity_min:            0.1
+
+            size:
+              value:                    10
+              random:                   true
+              anim:
+                enable:                 true
+                speed:                  40
+                size_min:               0.1
+
+            line_linked:
+              enable:                   false
+
+            move:
+              enable:                   true
+              speed:                    1.5
+              direction:                bottom
+
+          interactivity:
+            detect_on:                  canvas
+
+          retina_detect:                true
+
+    # --------------------------------------------------------------------------
+    # Example 'particle-default' (default settings)
+    #
+    - name:                             Example Particle 2
+      particle:
+        enabled:                        true
+        id:                             particle-default
+
+
+# ------------------------------------------------------------------------------
+# END config
