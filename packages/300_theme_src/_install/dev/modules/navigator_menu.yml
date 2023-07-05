@@ -28,13 +28,13 @@
       href:                             /pages/public/learn/where_to_go/
       icon:                             foot-print
 
-    - title:                            Core Web Vitals
-      href:                             /pages/public/learn/core_web_vitals/
-      icon:                             quadcopter
-
-    - title:                            BS Sass Variables
-      href:                             /pages/public/learn/bs_sass_variables/
-      icon:                             code-tags
+    # - title:                            Core Web Vitals
+    #   href:                             /pages/public/learn/core_web_vitals/
+    #   icon:                             quadcopter
+    #
+    # - title:                            BS Sass Variables
+    #   href:                             /pages/public/learn/bs_sass_variables/
+    #   icon:                             code-tags
 
     # --------------------------------------------------------------------------
     # Roundtrip
@@ -120,10 +120,9 @@
           icon:                         rocket-launch
           target:                       _blank
 
-
-        - title:                        Site Development
-          href:                         https://jekyll.one/pages/public/learn/devstart/
-          icon:                         launch
+        # - title:                        Site Development
+        #   href:                         https://jekyll.one/pages/public/learn/devstart/
+        #   icon:                         launch
 
         - title:                        Jekyll In A Day
           icon:                         alpha-j-box
@@ -160,7 +159,7 @@
               target:                   _blank
             - title:                    Factors of Success
               href:                     https://jekyll.one/pages/public/learn/kickstart/learning_seo/success_factors/
-              icon:
+              icon:                     tune
               target:                   _blank
             - title:                    Structured Data
               href:                     https://jekyll.one/pages/public/learn/kickstart/learning_seo/structured_data/
@@ -174,8 +173,8 @@
 # ------------------------------------------------------------------------------
 # TopLevel item FEATURES
 #
-- item:                                 Features
-  href:                                 /#panel_home_intro
+# - item:                                 Features
+#   href:                                 /#panel_home_intro
 
 # ------------------------------------------------------------------------------
 # TopLevel item BLOG

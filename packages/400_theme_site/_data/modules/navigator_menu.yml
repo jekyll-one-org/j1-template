@@ -28,13 +28,13 @@
       href:                             /pages/public/learn/where_to_go/
       icon:                             foot-print
 
-    - title:                            Core Web Vitals
-      href:                             /pages/public/learn/core_web_vitals/
-      icon:                             quadcopter
-
-    - title:                            BS Sass Variables
-      href:                             /pages/public/learn/bs_sass_variables/
-      icon:                             code-tags
+    # - title:                            Core Web Vitals
+    #   href:                             /pages/public/learn/core_web_vitals/
+    #   icon:                             quadcopter
+    #
+    # - title:                            BS Sass Variables
+    #   href:                             /pages/public/learn/bs_sass_variables/
+    #   icon:                             code-tags
 
     # --------------------------------------------------------------------------
     # Roundtrip
