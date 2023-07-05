@@ -82,13 +82,13 @@ lorem:sentences[5]
 ++++
 
 <form class="jotform-form" action="https://submit.jotformeu.com/submit/212574301669356/" method="post" name="form_212574301669356" id="212574301669356" accept-charset="utf-8" autocomplete="on">
-  <input type="hidden" name="formID" value="212574301669356" />
-  <input type="hidden" id="JWTContainer" value="" />
-  <input type="hidden" id="cardinalOrderNumber" value="" />
+  <input type="hidden" name="formID" value="212574301669356">
+  <input type="hidden" id="JWTContainer" value="">
+  <input type="hidden" id="cardinalOrderNumber" value="">
   <div role="main" class="form-all">
-    <link type="text/css" rel="stylesheet" media="all" href="https://cdn.jotfor.ms/wizards/languageWizard/custom-dropdown/css/lang-dd.css?3.3.27670" />
+    <link type="text/css" rel="stylesheet" media="all" href="https://cdn.jotfor.ms/wizards/languageWizard/custom-dropdown/css/lang-dd.css?3.3.27670">
     <div class="cont">
-      <input type="text" id="input_language" name="input_language" style="display:none" />
+      <input type="text" id="input_language" name="input_language" style="display:none">
       <div class="language-dd" id="langDd" style="display:none">
         <div class="dd-placeholder lang-emp">
           Language
@@ -127,13 +127,13 @@ lorem:sentences[5]
             <span class="form-radio-item" style="clear:left">
               <span class="dragger-item">
               </span>
-              <input type="radio" aria-describedby="label_6" class="form-radio" id="input_6_0" name="q6_1Haben" value="Ja" />
+              <input type="radio" aria-describedby="label_6" class="form-radio" id="input_6_0" name="q6_1Haben" value="Ja">
               <label id="label_input_6_0" for="input_6_0"> Ja </label>
             </span>
             <span class="form-radio-item" style="clear:left">
               <span class="dragger-item">
               </span>
-              <input type="radio" aria-describedby="label_6" class="form-radio" id="input_6_1" name="q6_1Haben" value="Nein" />
+              <input type="radio" aria-describedby="label_6" class="form-radio" id="input_6_1" name="q6_1Haben" value="Nein">
               <label id="label_input_6_1" for="input_6_1"> Nein </label>
             </span>
           </div>
@@ -161,13 +161,13 @@ lorem:sentences[5]
             <span class="form-radio-item" style="clear:left">
               <span class="dragger-item">
               </span>
-              <input type="radio" aria-describedby="label_8" class="form-radio" id="input_8_0" name="q8_3Kaufen" value="Ja" />
+              <input type="radio" aria-describedby="label_8" class="form-radio" id="input_8_0" name="q8_3Kaufen" value="Ja">
               <label id="label_input_8_0" for="input_8_0"> Ja </label>
             </span>
             <span class="form-radio-item" style="clear:left">
               <span class="dragger-item">
               </span>
-              <input type="radio" aria-describedby="label_8" class="form-radio" id="input_8_1" name="q8_3Kaufen" value="Nein" />
+              <input type="radio" aria-describedby="label_8" class="form-radio" id="input_8_1" name="q8_3Kaufen" value="Nein">
               <label id="label_input_8_1" for="input_8_1"> Nein </label>
             </span>
           </div>
@@ -180,25 +180,25 @@ lorem:sentences[5]
             <span class="form-radio-item" style="clear:left">
               <span class="dragger-item">
               </span>
-              <input type="radio" aria-describedby="label_9" class="form-radio" id="input_9_0" name="q9_4Wie" value="Unter 18 Jahren" />
+              <input type="radio" aria-describedby="label_9" class="form-radio" id="input_9_0" name="q9_4Wie" value="Unter 18 Jahren">
               <label id="label_input_9_0" for="input_9_0"> Unter 18 Jahren </label>
             </span>
             <span class="form-radio-item" style="clear:left">
               <span class="dragger-item">
               </span>
-              <input type="radio" aria-describedby="label_9" class="form-radio" id="input_9_1" name="q9_4Wie" value="18 - 25" />
+              <input type="radio" aria-describedby="label_9" class="form-radio" id="input_9_1" name="q9_4Wie" value="18 - 25">
               <label id="label_input_9_1" for="input_9_1"> 18 - 25 </label>
             </span>
             <span class="form-radio-item" style="clear:left">
               <span class="dragger-item">
               </span>
-              <input type="radio" aria-describedby="label_9" class="form-radio" id="input_9_2" name="q9_4Wie" value="25 - 45" />
+              <input type="radio" aria-describedby="label_9" class="form-radio" id="input_9_2" name="q9_4Wie" value="25 - 45">
               <label id="label_input_9_2" for="input_9_2"> 25 - 45 </label>
             </span>
             <span class="form-radio-item" style="clear:left">
               <span class="dragger-item">
               </span>
-              <input type="radio" aria-describedby="label_9" class="form-radio" id="input_9_3" name="q9_4Wie" value="45 oder älter." />
+              <input type="radio" aria-describedby="label_9" class="form-radio" id="input_9_3" name="q9_4Wie" value="45 oder älter.">
               <label id="label_input_9_3" for="input_9_3"> 45 oder älter. </label>
             </span>
           </div>
@@ -360,32 +360,32 @@ lorem:sentences[5]
             <span class="form-radio-item" style="clear:left">
               <span class="dragger-item">
               </span>
-              <input type="radio" aria-describedby="label_30" class="form-radio" id="input_30_0" name="q30_17Wie" value="Kreditkarte online" />
+              <input type="radio" aria-describedby="label_30" class="form-radio" id="input_30_0" name="q30_17Wie" value="Kreditkarte online">
               <label id="label_input_30_0" for="input_30_0"> Kreditkarte online </label>
             </span>
             <span class="form-radio-item" style="clear:left">
               <span class="dragger-item">
               </span>
-              <input type="radio" aria-describedby="label_30" class="form-radio" id="input_30_1" name="q30_17Wie" value="Scheck per Post" />
+              <input type="radio" aria-describedby="label_30" class="form-radio" id="input_30_1" name="q30_17Wie" value="Scheck per Post">
               <label id="label_input_30_1" for="input_30_1"> Scheck per Post </label>
             </span>
             <span class="form-radio-item" style="clear:left">
               <span class="dragger-item">
               </span>
-              <input type="radio" aria-describedby="label_30" class="form-radio" id="input_30_2" name="q30_17Wie" value="Paypal" />
+              <input type="radio" aria-describedby="label_30" class="form-radio" id="input_30_2" name="q30_17Wie" value="Paypal">
               <label id="label_input_30_2" for="input_30_2"> Paypal </label>
             </span>
             <span class="form-radio-item" style="clear:left">
               <span class="dragger-item">
               </span>
-              <input type="radio" aria-describedby="label_30" class="form-radio" id="input_30_3" name="q30_17Wie" value="Nochex" />
+              <input type="radio" aria-describedby="label_30" class="form-radio" id="input_30_3" name="q30_17Wie" value="Nochex">
               <label id="label_input_30_3" for="input_30_3"> Nochex </label>
             </span>
             <span class="form-radio-item formRadioOther" style="clear:left">
-              <input type="radio" class="form-radio-other form-radio" name="q30_17Wie" id="other_30" value="other" aria-label="Anderes" />
+              <input type="radio" class="form-radio-other form-radio" name="q30_17Wie" id="other_30" value="other" aria-label="Anderes">
               <label id="label_other_30" style="text-indent:0" for="other_30"> Anderes </label>
               <span id="other_30_input" class="other-input-container" style="display:none">
-                <input type="text" class="form-radio-other-input form-textbox" name="q30_17Wie[other]" data-otherhint="Anderes" size="15" id="input_30" data-placeholder="Please type another option here" placeholder="Please type another option here" />
+                <input type="text" class="form-radio-other-input form-textbox" name="q30_17Wie[other]" data-otherhint="Anderes" size="15" id="input_30" data-placeholder="Please type another option here" placeholder="Please type another option here">
               </span>
             </span>
           </div>
@@ -431,38 +431,38 @@ lorem:sentences[5]
             <span class="form-radio-item" style="clear:left">
               <span class="dragger-item">
               </span>
-              <input type="radio" aria-describedby="label_29" class="form-radio" id="input_29_0" name="q29_21Was" value="Falsche Größe" />
+              <input type="radio" aria-describedby="label_29" class="form-radio" id="input_29_0" name="q29_21Was" value="Falsche Größe">
               <label id="label_input_29_0" for="input_29_0"> Falsche Größe </label>
             </span>
             <span class="form-radio-item" style="clear:left">
               <span class="dragger-item">
               </span>
-              <input type="radio" aria-describedby="label_29" class="form-radio" id="input_29_1" name="q29_21Was" value="Falsche Farbe" />
+              <input type="radio" aria-describedby="label_29" class="form-radio" id="input_29_1" name="q29_21Was" value="Falsche Farbe">
               <label id="label_input_29_1" for="input_29_1"> Falsche Farbe </label>
             </span>
             <span class="form-radio-item" style="clear:left">
               <span class="dragger-item">
               </span>
-              <input type="radio" aria-describedby="label_29" class="form-radio" id="input_29_2" name="q29_21Was" value="Nicht das, was ich bestellt habe" />
+              <input type="radio" aria-describedby="label_29" class="form-radio" id="input_29_2" name="q29_21Was" value="Nicht das, was ich bestellt habe">
               <label id="label_input_29_2" for="input_29_2"> Nicht das, was ich bestellt habe </label>
             </span>
             <span class="form-radio-item" style="clear:left">
               <span class="dragger-item">
               </span>
-              <input type="radio" aria-describedby="label_29" class="form-radio" id="input_29_3" name="q29_21Was" value="Beschädigt" />
+              <input type="radio" aria-describedby="label_29" class="form-radio" id="input_29_3" name="q29_21Was" value="Beschädigt">
               <label id="label_input_29_3" for="input_29_3"> Beschädigt </label>
             </span>
             <span class="form-radio-item" style="clear:left">
               <span class="dragger-item">
               </span>
-              <input type="radio" aria-describedby="label_29" class="form-radio" id="input_29_4" name="q29_21Was" value="Nicht zufrieden mit dem Punkt" />
+              <input type="radio" aria-describedby="label_29" class="form-radio" id="input_29_4" name="q29_21Was" value="Nicht zufrieden mit dem Punkt">
               <label id="label_input_29_4" for="input_29_4"> Nicht zufrieden mit dem Punkt </label>
             </span>
             <span class="form-radio-item formRadioOther" style="clear:left">
-              <input type="radio" class="form-radio-other form-radio" name="q29_21Was" id="other_29" value="other" aria-label="Other" />
+              <input type="radio" class="form-radio-other form-radio" name="q29_21Was" id="other_29" value="other" aria-label="Other">
               <label id="label_other_29" style="text-indent:0" for="other_29"> Other </label>
               <span id="other_29_input" class="other-input-container" style="display:none">
-                <input type="text" class="form-radio-other-input form-textbox" name="q29_21Was[other]" data-otherhint="Other" size="15" id="input_29" data-placeholder="Please type another option here" placeholder="Please type another option here" />
+                <input type="text" class="form-radio-other-input form-textbox" name="q29_21Was[other]" data-otherhint="Other" size="15" id="input_29" data-placeholder="Please type another option here" placeholder="Please type another option here">
               </span>
             </span>
           </div>
@@ -510,23 +510,23 @@ lorem:sentences[5]
                 <label id="label_31_row_0"> Qualität </label>
               </th>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_0_0" class="form-radio" name="q31_23Bitte[0]" value="1 - Nicht wichtig" aria-labelledby="label_31_col_0 label_31_row_0" />
+                <input type="radio" id="input_31_0_0" class="form-radio" name="q31_23Bitte[0]" value="1 - Nicht wichtig" aria-labelledby="label_31_col_0 label_31_row_0">
                 <label for="input_31_0_0" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_0_1" class="form-radio" name="q31_23Bitte[0]" value="2" aria-labelledby="label_31_col_1 label_31_row_0" />
+                <input type="radio" id="input_31_0_1" class="form-radio" name="q31_23Bitte[0]" value="2" aria-labelledby="label_31_col_1 label_31_row_0">
                 <label for="input_31_0_1" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_0_2" class="form-radio" name="q31_23Bitte[0]" value="3 - Vielleicht" aria-labelledby="label_31_col_2 label_31_row_0" />
+                <input type="radio" id="input_31_0_2" class="form-radio" name="q31_23Bitte[0]" value="3 - Vielleicht" aria-labelledby="label_31_col_2 label_31_row_0">
                 <label for="input_31_0_2" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_0_3" class="form-radio" name="q31_23Bitte[0]" value="4" aria-labelledby="label_31_col_3 label_31_row_0" />
+                <input type="radio" id="input_31_0_3" class="form-radio" name="q31_23Bitte[0]" value="4" aria-labelledby="label_31_col_3 label_31_row_0">
                 <label for="input_31_0_3" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_0_4" class="form-radio" name="q31_23Bitte[0]" value="5 - Sehr wichtig" aria-labelledby="label_31_col_4 label_31_row_0" />
+                <input type="radio" id="input_31_0_4" class="form-radio" name="q31_23Bitte[0]" value="5 - Sehr wichtig" aria-labelledby="label_31_col_4 label_31_row_0">
                 <label for="input_31_0_4" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
             </tr>
@@ -535,23 +535,23 @@ lorem:sentences[5]
                 <label id="label_31_row_1"> Kosten </label>
               </th>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_1_0" class="form-radio" name="q31_23Bitte[1]" value="1 - Nicht wichtig" aria-labelledby="label_31_col_0 label_31_row_1" />
+                <input type="radio" id="input_31_1_0" class="form-radio" name="q31_23Bitte[1]" value="1 - Nicht wichtig" aria-labelledby="label_31_col_0 label_31_row_1">
                 <label for="input_31_1_0" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_1_1" class="form-radio" name="q31_23Bitte[1]" value="2" aria-labelledby="label_31_col_1 label_31_row_1" />
+                <input type="radio" id="input_31_1_1" class="form-radio" name="q31_23Bitte[1]" value="2" aria-labelledby="label_31_col_1 label_31_row_1">
                 <label for="input_31_1_1" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_1_2" class="form-radio" name="q31_23Bitte[1]" value="3 - Vielleicht" aria-labelledby="label_31_col_2 label_31_row_1" />
+                <input type="radio" id="input_31_1_2" class="form-radio" name="q31_23Bitte[1]" value="3 - Vielleicht" aria-labelledby="label_31_col_2 label_31_row_1">
                 <label for="input_31_1_2" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_1_3" class="form-radio" name="q31_23Bitte[1]" value="4" aria-labelledby="label_31_col_3 label_31_row_1" />
+                <input type="radio" id="input_31_1_3" class="form-radio" name="q31_23Bitte[1]" value="4" aria-labelledby="label_31_col_3 label_31_row_1">
                 <label for="input_31_1_3" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_1_4" class="form-radio" name="q31_23Bitte[1]" value="5 - Sehr wichtig" aria-labelledby="label_31_col_4 label_31_row_1" />
+                <input type="radio" id="input_31_1_4" class="form-radio" name="q31_23Bitte[1]" value="5 - Sehr wichtig" aria-labelledby="label_31_col_4 label_31_row_1">
                 <label for="input_31_1_4" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
             </tr>
@@ -560,23 +560,23 @@ lorem:sentences[5]
                 <label id="label_31_row_2"> Anzahl </label>
               </th>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_2_0" class="form-radio" name="q31_23Bitte[2]" value="1 - Nicht wichtig" aria-labelledby="label_31_col_0 label_31_row_2" />
+                <input type="radio" id="input_31_2_0" class="form-radio" name="q31_23Bitte[2]" value="1 - Nicht wichtig" aria-labelledby="label_31_col_0 label_31_row_2">
                 <label for="input_31_2_0" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_2_1" class="form-radio" name="q31_23Bitte[2]" value="2" aria-labelledby="label_31_col_1 label_31_row_2" />
+                <input type="radio" id="input_31_2_1" class="form-radio" name="q31_23Bitte[2]" value="2" aria-labelledby="label_31_col_1 label_31_row_2">
                 <label for="input_31_2_1" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_2_2" class="form-radio" name="q31_23Bitte[2]" value="3 - Vielleicht" aria-labelledby="label_31_col_2 label_31_row_2" />
+                <input type="radio" id="input_31_2_2" class="form-radio" name="q31_23Bitte[2]" value="3 - Vielleicht" aria-labelledby="label_31_col_2 label_31_row_2">
                 <label for="input_31_2_2" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_2_3" class="form-radio" name="q31_23Bitte[2]" value="4" aria-labelledby="label_31_col_3 label_31_row_2" />
+                <input type="radio" id="input_31_2_3" class="form-radio" name="q31_23Bitte[2]" value="4" aria-labelledby="label_31_col_3 label_31_row_2">
                 <label for="input_31_2_3" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_2_4" class="form-radio" name="q31_23Bitte[2]" value="5 - Sehr wichtig" aria-labelledby="label_31_col_4 label_31_row_2" />
+                <input type="radio" id="input_31_2_4" class="form-radio" name="q31_23Bitte[2]" value="5 - Sehr wichtig" aria-labelledby="label_31_col_4 label_31_row_2">
                 <label for="input_31_2_4" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
             </tr>
@@ -585,23 +585,23 @@ lorem:sentences[5]
                 <label id="label_31_row_3"> Markenname </label>
               </th>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_3_0" class="form-radio" name="q31_23Bitte[3]" value="1 - Nicht wichtig" aria-labelledby="label_31_col_0 label_31_row_3" />
+                <input type="radio" id="input_31_3_0" class="form-radio" name="q31_23Bitte[3]" value="1 - Nicht wichtig" aria-labelledby="label_31_col_0 label_31_row_3">
                 <label for="input_31_3_0" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_3_1" class="form-radio" name="q31_23Bitte[3]" value="2" aria-labelledby="label_31_col_1 label_31_row_3" />
+                <input type="radio" id="input_31_3_1" class="form-radio" name="q31_23Bitte[3]" value="2" aria-labelledby="label_31_col_1 label_31_row_3">
                 <label for="input_31_3_1" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_3_2" class="form-radio" name="q31_23Bitte[3]" value="3 - Vielleicht" aria-labelledby="label_31_col_2 label_31_row_3" />
+                <input type="radio" id="input_31_3_2" class="form-radio" name="q31_23Bitte[3]" value="3 - Vielleicht" aria-labelledby="label_31_col_2 label_31_row_3">
                 <label for="input_31_3_2" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_3_3" class="form-radio" name="q31_23Bitte[3]" value="4" aria-labelledby="label_31_col_3 label_31_row_3" />
+                <input type="radio" id="input_31_3_3" class="form-radio" name="q31_23Bitte[3]" value="4" aria-labelledby="label_31_col_3 label_31_row_3">
                 <label for="input_31_3_3" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_3_4" class="form-radio" name="q31_23Bitte[3]" value="5 - Sehr wichtig" aria-labelledby="label_31_col_4 label_31_row_3" />
+                <input type="radio" id="input_31_3_4" class="form-radio" name="q31_23Bitte[3]" value="5 - Sehr wichtig" aria-labelledby="label_31_col_4 label_31_row_3">
                 <label for="input_31_3_4" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
             </tr>
@@ -610,23 +610,23 @@ lorem:sentences[5]
                 <label id="label_31_row_4"> Vertrautheit </label>
               </th>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_4_0" class="form-radio" name="q31_23Bitte[4]" value="1 - Nicht wichtig" aria-labelledby="label_31_col_0 label_31_row_4" />
+                <input type="radio" id="input_31_4_0" class="form-radio" name="q31_23Bitte[4]" value="1 - Nicht wichtig" aria-labelledby="label_31_col_0 label_31_row_4">
                 <label for="input_31_4_0" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_4_1" class="form-radio" name="q31_23Bitte[4]" value="2" aria-labelledby="label_31_col_1 label_31_row_4" />
+                <input type="radio" id="input_31_4_1" class="form-radio" name="q31_23Bitte[4]" value="2" aria-labelledby="label_31_col_1 label_31_row_4">
                 <label for="input_31_4_1" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_4_2" class="form-radio" name="q31_23Bitte[4]" value="3 - Vielleicht" aria-labelledby="label_31_col_2 label_31_row_4" />
+                <input type="radio" id="input_31_4_2" class="form-radio" name="q31_23Bitte[4]" value="3 - Vielleicht" aria-labelledby="label_31_col_2 label_31_row_4">
                 <label for="input_31_4_2" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_4_3" class="form-radio" name="q31_23Bitte[4]" value="4" aria-labelledby="label_31_col_3 label_31_row_4" />
+                <input type="radio" id="input_31_4_3" class="form-radio" name="q31_23Bitte[4]" value="4" aria-labelledby="label_31_col_3 label_31_row_4">
                 <label for="input_31_4_3" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
               <td class="form-matrix-values">
-                <input type="radio" id="input_31_4_4" class="form-radio" name="q31_23Bitte[4]" value="5 - Sehr wichtig" aria-labelledby="label_31_col_4 label_31_row_4" />
+                <input type="radio" id="input_31_4_4" class="form-radio" name="q31_23Bitte[4]" value="5 - Sehr wichtig" aria-labelledby="label_31_col_4 label_31_row_4">
                 <label for="input_31_4_4" class="matrix-choice-label matrix-radio-label">  </label>
               </td>
             </tr>
@@ -669,7 +669,7 @@ lorem:sentences[5]
       </li>
       <li style="display:none">
         Should be Empty:
-        <input type="text" name="website" value="" />
+        <input type="text" name="website" value="">
       </li>
     </ul>
   </div>
@@ -679,7 +679,7 @@ lorem:sentences[5]
   <script>
   JotForm.poweredByText = "Powered by JotForm";
   </script>
-  <input type="hidden" class="simple_spc" id="simple_spc" name="simple_spc" value="212574301669356" />
+  <input type="hidden" class="simple_spc" id="simple_spc" name="simple_spc" value="212574301669356">
   <script type="text/javascript">
   var all_spc = document.querySelectorAll("form[id='212574301669356'] .si" + "mple" + "_spc");
 for (var i = 0; i < all_spc.length; i++)

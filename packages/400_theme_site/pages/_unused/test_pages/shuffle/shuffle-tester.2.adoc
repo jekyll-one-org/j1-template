@@ -89,13 +89,13 @@ resource_options:
               </label>
             </div>
             <div class="group">
-              <input class="sr-only peer" type="radio" name="sort-order" value="most-reviews" id="sort-most-reviews" />
+              <input class="sr-only peer" type="radio" name="sort-order" value="most-reviews" id="sort-most-reviews">
               <label class="relative peer-checked:bg-gray-800 hover:bg-gray-700 peer-checked:text-white hover:text-white hover:z-1 peer-checked:z-1 cursor-pointer py-2 px-4 group-first:rounded-l group-last:rounded-r group-first:-mr-px group-last:-ml-px bg-gray-100 border border-gray-800" for="sort-most-reviews">
                 Most reviews
               </label>
             </div>
             <div class="group">
-              <input class="sr-only peer" type="radio" name="sort-order" value="least-reviews" id="sort-least-reviews" />
+              <input class="sr-only peer" type="radio" name="sort-order" value="least-reviews" id="sort-least-reviews">
               <label class="relative peer-checked:bg-gray-800 hover:bg-gray-700 peer-checked:text-white hover:text-white hover:z-1 peer-checked:z-1 cursor-pointer py-2 px-4 group-first:rounded-l group-last:rounded-r group-first:-mr-px group-last:-ml-px bg-gray-100 border border-gray-800" for="sort-least-reviews">
                 Least reviews
               </label>
@@ -113,13 +113,13 @@ resource_options:
               </label>
             </div>
             <div class="group">
-              <input class="sr-only peer" type="radio" name="filter-value" value="odd-reviews" id="filter-odd-reviews" />
+              <input class="sr-only peer" type="radio" name="filter-value" value="odd-reviews" id="filter-odd-reviews">
               <label class="relative peer-checked:bg-gray-800 hover:bg-gray-700 peer-checked:text-white hover:text-white hover:z-1 peer-checked:z-1 cursor-pointer py-2 px-4 group-first:rounded-l group-last:rounded-r group-first:-mr-px group-last:-ml-px bg-gray-100 border border-gray-800" for="filter-odd-reviews">
                 Odd number of reviews
               </label>
             </div>
             <div class="group">
-              <input class="sr-only peer" type="radio" name="filter-value" value="even-reviews" id="sort-even-reviews" />
+              <input class="sr-only peer" type="radio" name="filter-value" value="even-reviews" id="sort-even-reviews">
               <label class="relative peer-checked:bg-gray-800 hover:bg-gray-700 peer-checked:text-white hover:text-white hover:z-1 peer-checked:z-1 cursor-pointer py-2 px-4 group-first:rounded-l group-last:rounded-r group-first:-mr-px group-last:-ml-px bg-gray-100 border border-gray-800" for="sort-even-reviews">
                 Even number of reviews
               </label>

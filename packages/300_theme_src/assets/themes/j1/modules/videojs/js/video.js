@@ -31614,17 +31614,17 @@
         // timeline++ here would treat it like HLS discontuity and content would
         // get appended without gap
         // E.G.
-        //  <S t="0" d="1" />
-        //  <S d="1" />
-        //  <S d="1" />
-        //  <S t="5" d="1" />
+        //  <S t="0" d="1">
+        //  <S d="1">
+        //  <S d="1">
+        //  <S t="5" d="1">
         // would have $Time$ values of [0, 1, 2, 5]
         // should this be appened at time positions [0, 1, 2, 3],(#EXT-X-DISCONTINUITY)
         // or [0, 1, 2, gap, gap, 5]? (#EXT-X-GAP)
         // does the value of sourceDuration consider this when calculating arbitrary
         // negative @r repeat value?
         // E.G. Same elements as above with this added at the end
-        //  <S d="1" r="-1" />
+        //  <S d="1" r="-1">
         //  with a sourceDuration of 10
         // Would the 2 gaps be included in the time duration calculations resulting in
         // 8 segments with $Time$ values of [0, 1, 2, 5, 6, 7, 8, 9] or 10 segments

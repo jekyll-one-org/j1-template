@@ -119,7 +119,7 @@ the following settings can be used:
 	```
 	<div>
 		<a href="...">
-			<img src="..." />
+			<img src="...">
 		</a>
 		<div class="caption">...</div>
 	</div>

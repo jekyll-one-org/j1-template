@@ -70,7 +70,7 @@ resource_options:
     <div class="col-4@sm col-3@md">
       <div class="filters-group">
         <label for="filters-search-input" class="filter-label">Search</label>
-        <input class="textfield filter__search js-shuffle-search" type="search" id="filters-search-input" />
+        <input class="textfield filter__search js-shuffle-search" type="search" id="filters-search-input">
       </div>
     </div>
   </div>
@@ -92,10 +92,10 @@ resource_options:
           <input type="radio" name="sort-value" value="dom" checked /> Default
           </label>
           <label class="btn">
-          <input type="radio" name="sort-value" value="title" /> Title
+          <input type="radio" name="sort-value" value="title"> Title
           </label>
           <label class="btn">
-          <input type="radio" name="sort-value" value="date-created" /> Date Created
+          <input type="radio" name="sort-value" value="date-created"> Date Created
           </label>
         </div>
       </fieldset>
@@ -109,7 +109,7 @@ resource_options:
         <div class="aspect aspect--16x9">
           <div class="aspect__inner">
             <img src="https://images.unsplash.com/photo-1493585552824-131927c85da2?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=6ef0f8984525fc4500d43ffa53fe8190" srcset="https://images.unsplash.com/photo-1493585552824-131927c85da2?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=6ef0f8984525fc4500d43ffa53fe8190 1x, https://images.unsplash.com/photo-1493585552824-131927c85da2?ixlib=rb-0.3.5&auto=format&q=55&fm=jpg&dpr=2&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=6ef0f8984525fc4500d43ffa53fe8190 2x"
-              alt="A deep blue lake sits in the middle of vast hills covered with evergreen trees" />
+              alt="A deep blue lake sits in the middle of vast hills covered with evergreen trees">
           </div>
         </div>
         <div class="picture-item__details">
@@ -121,7 +121,7 @@ resource_options:
     <figure class="col-3@xs col-8@sm col-6@md picture-item picture-item--overlay" data-groups='["city"]' data-date-created="2016-07-01" data-title="Golden Gate Bridge">
       <div class="picture-item__inner">
         <img src="https://images.unsplash.com/photo-1467348733814-f93fc480bec6?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=584&h=329&fit=crop&s=2590c736835ec6555e952e19bb37f06e" srcset="https://images.unsplash.com/photo-1467348733814-f93fc480bec6?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=584&h=329&fit=crop&s=2590c736835ec6555e952e19bb37f06e 1x, https://images.unsplash.com/photo-1467348733814-f93fc480bec6?ixlib=rb-0.3.5&auto=format&q=55&fm=jpg&dpr=2&crop=entropy&cs=tinysrgb&w=584&h=329&fit=crop&s=2590c736835ec6555e952e19bb37f06e 2x"
-          alt="Looking down over one of the pillars of the Golden Gate Bridge to the roadside and water below" />
+          alt="Looking down over one of the pillars of the Golden Gate Bridge to the roadside and water below">
         <div class="picture-item__details">
           <figcaption class="picture-item__title"><a href="https://unsplash.com/photos/RRNbMiPmTZY" target="_blank" rel="noopener">Golden Gate Bridge</a></figcaption>
           <p class="picture-item__tags hidden@xs">city</p>
@@ -133,7 +133,7 @@ resource_options:
         <div class="aspect aspect--16x9">
           <div class="aspect__inner">
             <img src="https://images.unsplash.com/photo-1471005197911-88e9d4a7834d?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=bd8b952c4c983d4bde5e2018c90c9124" srcset="https://images.unsplash.com/photo-1471005197911-88e9d4a7834d?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=bd8b952c4c983d4bde5e2018c90c9124 1x, https://images.unsplash.com/photo-1471005197911-88e9d4a7834d?ixlib=rb-0.3.5&auto=format&q=55&fm=jpg&dpr=2&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=bd8b952c4c983d4bde5e2018c90c9124 2x"
-              alt="A close, profile view of a crocodile looking directly into the camera" />
+              alt="A close, profile view of a crocodile looking directly into the camera">
           </div>
         </div>
         <div class="picture-item__details">
@@ -147,7 +147,7 @@ resource_options:
         <div class="aspect aspect--16x9">
           <div class="aspect__inner">
             <img src="https://images.unsplash.com/photo-1457364559154-aa2644600ebb?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=3d0e3e8d72fc5667fd9fbe354e80957b" srcset="https://images.unsplash.com/photo-1457364559154-aa2644600ebb?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=3d0e3e8d72fc5667fd9fbe354e80957b 1x, https://images.unsplash.com/photo-1457364559154-aa2644600ebb?ixlib=rb-0.3.5&auto=format&q=55&fm=jpg&dpr=2&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=3d0e3e8d72fc5667fd9fbe354e80957b 2x"
-              alt="SpaceX launches a Falcon 9 rocket from Cape Canaveral Air Force Station" />
+              alt="SpaceX launches a Falcon 9 rocket from Cape Canaveral Air Force Station">
           </div>
         </div>
         <div class="picture-item__details">
@@ -162,7 +162,7 @@ resource_options:
         <div class="aspect aspect--16x9">
           <div class="aspect__inner">
             <img src="https://images.unsplash.com/photo-1465447142348-e9952c393450?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=7d97e22d36a9a73beb639a936e6774e9" srcset="https://images.unsplash.com/photo-1465447142348-e9952c393450?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=7d97e22d36a9a73beb639a936e6774e9 1x, https://images.unsplash.com/photo-1465447142348-e9952c393450?ixlib=rb-0.3.5&auto=format&q=55&fm=jpg&dpr=2&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=7d97e22d36a9a73beb639a936e6774e9 2x"
-              alt="A multi-level highway stack interchange in Puxi, Shanghai" />
+              alt="A multi-level highway stack interchange in Puxi, Shanghai">
           </div>
         </div>
         <div class="picture-item__details">
@@ -174,7 +174,7 @@ resource_options:
     <figure class="col-6@xs col-8@sm col-6@md picture-item picture-item--overlay" data-groups='["space","nature"]' data-date-created="2016-06-29" data-title="Milky Way">
       <div class="picture-item__inner">
         <img src="https://images.unsplash.com/photo-1467173572719-f14b9fb86e5f?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=584&h=329&fit=crop&s=e641d6b3c4c2c967e80e998d02a4d03b" srcset="https://images.unsplash.com/photo-1467173572719-f14b9fb86e5f?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=584&h=329&fit=crop&s=e641d6b3c4c2c967e80e998d02a4d03b 1x, https://images.unsplash.com/photo-1467173572719-f14b9fb86e5f?ixlib=rb-0.3.5&auto=format&q=55&fm=jpg&dpr=2&crop=entropy&cs=tinysrgb&w=584&h=329&fit=crop&s=e641d6b3c4c2c967e80e998d02a4d03b 2x"
-          alt="Dimly lit mountains give way to a starry night showing the Milky Way" />
+          alt="Dimly lit mountains give way to a starry night showing the Milky Way">
         <div class="picture-item__details">
           <figcaption class="picture-item__title"><a href="https://unsplash.com/photos/_4Ib-a8g9aA" target="_blank" rel="noopener">Milky Way</a></figcaption>
           <p class="picture-item__tags hidden@xs">space, nature</p>
@@ -186,7 +186,7 @@ resource_options:
         <div class="aspect aspect--16x9">
           <div class="aspect__inner">
             <img src="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=584&h=329&fit=crop&s=f4856588634def31d5885dc396fe9a2e" srcset="https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=584&h=329&fit=crop&s=f4856588634def31d5885dc396fe9a2e 1x, https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?ixlib=rb-0.3.5&auto=format&q=55&fm=jpg&dpr=2&crop=entropy&cs=tinysrgb&w=584&h=329&fit=crop&s=f4856588634def31d5885dc396fe9a2e 2x"
-              alt="NASA Satellite view of Earth" />
+              alt="NASA Satellite view of Earth">
           </div>
         </div>
         <div class="picture-item__details">
@@ -201,7 +201,7 @@ resource_options:
         <div class="aspect aspect--16x9">
           <div class="aspect__inner">
             <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=bc4e1180b6b8789d38c614edc8d0dd01" srcset="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=bc4e1180b6b8789d38c614edc8d0dd01 1x, https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?ixlib=rb-0.3.5&auto=format&q=55&fm=jpg&dpr=2&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=bc4e1180b6b8789d38c614edc8d0dd01 2x"
-              alt="A close up of a turtle underwater" />
+              alt="A close up of a turtle underwater">
           </div>
         </div>
         <div class="picture-item__details">
@@ -216,7 +216,7 @@ resource_options:
         <div class="aspect aspect--16x9">
           <div class="aspect__inner">
             <img src="https://images.unsplash.com/uploads/1413142095961484763cf/d141726c?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=6141097da144d759176d77b4024c064b" srcset="https://images.unsplash.com/uploads/1413142095961484763cf/d141726c?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=6141097da144d759176d77b4024c064b 1x, https://images.unsplash.com/uploads/1413142095961484763cf/d141726c?ixlib=rb-0.3.5&auto=format&q=55&fm=jpg&dpr=2&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=6141097da144d759176d77b4024c064b 2x"
-              alt="Many trees stand alonside a hill which overlooks a pedestrian path, next to the ocean at Stanley Park in Vancouver, Canada" />
+              alt="Many trees stand alonside a hill which overlooks a pedestrian path, next to the ocean at Stanley Park in Vancouver, Canada">
           </div>
         </div>
         <div class="picture-item__details">
@@ -230,7 +230,7 @@ resource_options:
         <div class="aspect aspect--16x9">
           <div class="aspect__inner">
             <img src="https://images.unsplash.com/photo-1484244233201-29892afe6a2c?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=98423596f72d9f0913a4d44f0580a34c" srcset="https://images.unsplash.com/photo-1484244233201-29892afe6a2c?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=98423596f72d9f0913a4d44f0580a34c 1x, https://images.unsplash.com/photo-1484244233201-29892afe6a2c?ixlib=rb-0.3.5&auto=format&q=55&fm=jpg&dpr=2&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=98423596f72d9f0913a4d44f0580a34c 2x"
-              alt="An intrigued cat sits in grass next to a flag planted in front of it with an astronaut space kitty sticker on beige fabric." />
+              alt="An intrigued cat sits in grass next to a flag planted in front of it with an astronaut space kitty sticker on beige fabric.">
           </div>
         </div>
         <div class="picture-item__details">
@@ -242,7 +242,7 @@ resource_options:
     <figure class="col-3@xs col-8@sm col-6@md picture-item picture-item--overlay" data-groups='["city"]' data-date-created="2017-01-19" data-title="San Francisco">
       <div class="picture-item__inner">
         <img src="https://images.unsplash.com/photo-1484851050019-ca9daf7736fb?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=584&h=329&fit=crop&s=05325a7cc678f7f765cbbdcf7159ab89" srcset="https://images.unsplash.com/photo-1484851050019-ca9daf7736fb?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=584&h=329&fit=crop&s=05325a7cc678f7f765cbbdcf7159ab89 1x, https://images.unsplash.com/photo-1484851050019-ca9daf7736fb?ixlib=rb-0.3.5&auto=format&q=55&fm=jpg&dpr=2&crop=entropy&cs=tinysrgb&w=584&h=329&fit=crop&s=05325a7cc678f7f765cbbdcf7159ab89 2x"
-          alt="Pier 14 at night, looking towards downtown San Francisco's brightly lit buildings" />
+          alt="Pier 14 at night, looking towards downtown San Francisco's brightly lit buildings">
         <div class="picture-item__details">
           <figcaption class="picture-item__title"><a href="https://unsplash.com/photos/h3jarbNzlOg" target="_blank" rel="noopener">San Francisco</a></figcaption>
           <p class="picture-item__tags hidden@xs">city</p>
@@ -254,7 +254,7 @@ resource_options:
         <div class="aspect aspect--16x9">
           <div class="aspect__inner">
             <img src="https://images.unsplash.com/photo-1445346366695-5bf62de05412?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=1822bfd69c4021973a3d926e9294b70f" srcset="https://images.unsplash.com/photo-1445346366695-5bf62de05412?ixlib=rb-0.3.5&auto=format&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=1822bfd69c4021973a3d926e9294b70f 1x, https://images.unsplash.com/photo-1445346366695-5bf62de05412?ixlib=rb-0.3.5&auto=format&q=55&fm=jpg&dpr=2&crop=entropy&cs=tinysrgb&w=284&h=160&fit=crop&s=1822bfd69c4021973a3d926e9294b70f 2x"
-              alt="Looking down on central park and the surrounding builds from the Rockefellar Center" />
+              alt="Looking down on central park and the surrounding builds from the Rockefellar Center">
           </div>
         </div>
         <div class="picture-item__details">

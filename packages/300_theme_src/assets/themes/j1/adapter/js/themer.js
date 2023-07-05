@@ -311,7 +311,7 @@ j1.adapter.themer = (function (j1, window) {
                // continue processing if page is ready
                var dependencies_met_theme_loaded = setInterval (function () {
                  if (j1.getState() == 'finished') {
-                   theme_css_html = '<link rel="stylesheet" id="' + id + '" href="' + user_state.theme_css + '" type="text/css" />';
+                   theme_css_html = '<link rel="stylesheet" id="' + id + '" href="' + user_state.theme_css + '" type="text/css">';
                    $('head').append(theme_css_html);
                    clearInterval(dependencies_met_theme_loaded);
                  }
@@ -322,7 +322,7 @@ j1.adapter.themer = (function (j1, window) {
                  logger.warn('\n' + 'themes CSS invalid: ' + user_state.theme_css);
                }
 
-               theme_css_html = '<link rel="stylesheet" id="' + id + '" href="' + default_theme_css + '" type="text/css" />';
+               theme_css_html = '<link rel="stylesheet" id="' + id + '" href="' + default_theme_css + '" type="text/css">';
 
                if (development) {
                  logger.warn('\n' + 'set default theme :' + default_theme_name);

@@ -266,7 +266,7 @@ TIP: Always add the <label> tag for best accessibility practices!
 [source, html]
 ----
   <form action="#">
-      <input type="range" id="input-slider" min="0" max="100" />
+      <input type="range" id="input-slider" min="0" max="100">
   </form>
 ----
 
@@ -275,7 +275,7 @@ TIP: Always add the <label> tag for best accessibility practices!
 
   <div class="col-md-6 ml-1">
     <form action="#">
-      <input type="range" id="input-slider" min="0" max="100" />
+      <input type="range" id="input-slider" min="0" max="100">
     </form>
   </div>
 

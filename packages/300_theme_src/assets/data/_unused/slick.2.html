@@ -69,7 +69,7 @@ exclude_from_search:                    true
 ================================================================================ {% endcomment %}
 <!-- [INFO   ] [~/assets/data/masterslider.html               ]  [ set meta data (robots) to exclude HTML datafiles from index ] -->
 <head>
-  <meta name="robots" content="noindex, nofollow" />
+  <meta name="robots" content="noindex, nofollow">
 </head>
 
 {% comment %} Main
@@ -119,7 +119,7 @@ exclude_from_search:                    true
           <!-- Article item -->
           <div id="{{article.title | downcase | replace: ' ' ,'_'}}" class="article-item article-item--w400">
             <!-- img class="img-fluid img-object--w400" src="{{article.image.path}}" alt="{{article.title}}" -->
-            <img class="{{slider.image_styles}}" src="{{article.image.path}}" alt="{{article.title}}" />
+            <img class="{{slider.image_styles}}" src="{{article.image.path}}" alt="{{article.title}}">
             <div class="article-caption">
               <div class="article-caption-heading">
                 <a class="card-link {{translate}}" href="{{article.url}}" target="{{target}}">{{article.title}}</a>

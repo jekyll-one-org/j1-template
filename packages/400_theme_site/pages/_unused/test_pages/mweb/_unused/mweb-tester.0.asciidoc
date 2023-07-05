@@ -57,11 +57,11 @@ resource_options:
 
 ++++
 
-  <link id="bootstrap-theme" rel="stylesheet" href="static/bootstrap-lumen.min.css" />
-  <link rel="stylesheet" href="static/video-js.min.css" />
-  <link rel="stylesheet" href="static/icons/material-icons.css" />
-  <link rel="stylesheet" href="static/roboto/roboto.css" />
-  <link rel="stylesheet" href="static/index.css" />
+  <link id="bootstrap-theme" rel="stylesheet" href="static/bootstrap-lumen.min.css">
+  <link rel="stylesheet" href="static/video-js.min.css">
+  <link rel="stylesheet" href="static/icons/material-icons.css">
+  <link rel="stylesheet" href="static/roboto/roboto.css">
+  <link rel="stylesheet" href="static/index.css">
 
   <script src="static/jquery.min.js"></script>
   <script src="static/js.cookie.min.js"></script>

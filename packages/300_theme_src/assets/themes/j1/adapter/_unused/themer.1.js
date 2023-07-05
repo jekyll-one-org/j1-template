@@ -268,7 +268,7 @@ j1.adapter.themer = (function (j1, window) {
          var dependencies_met_theme_applied = setInterval (function () {
            if (j1.getState() == 'finished') {
              styleLoaded    = styleSheetLoaded(user_state.theme_css);
-             theme_css_html = '<link rel="stylesheet" id="' + id + '" href="' + user_state.theme_css + '" type="text/css" />';
+             theme_css_html = '<link rel="stylesheet" id="' + id + '" href="' + user_state.theme_css + '" type="text/css">';
 
              // loading theme CSS file except on UNO
              if (!user_state.theme_name.includes('Uno') || !styleLoaded) {

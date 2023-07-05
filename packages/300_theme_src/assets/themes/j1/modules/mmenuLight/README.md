@@ -1,6 +1,6 @@
 ## MMenu light
 
-<img src="https://mmenujs.com/img/preview-mmlight.png" alt="lightweigh mobile menu" width="100%" /> <br>
+<img src="https://mmenujs.com/img/preview-mmlight.png" alt="lightweigh mobile menu" width="100%"> <br>
 
 The (extremely) lightweight alternative to the mmenu.js plugin for creating
 off-canvas mobile menus with the exact look and feel. Find more information

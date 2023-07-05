@@ -1,5 +1,5 @@
 <a href="https://bokeh.org">
-  <img src="https://static.bokeh.org/logos/logotype.svg" height="60" alt="Bokeh logotype" />
+  <img src="https://static.bokeh.org/logos/logotype.svg" height="60" alt="Bokeh logotype">
 </a>
 
 ----
@@ -11,7 +11,7 @@
   <td>Latest Release</td>
   <td>
     <div>
-    <img src="https://badge.fury.io/py/bokeh.svg" alt="pypi version" />
+    <img src="https://badge.fury.io/py/bokeh.svg" alt="pypi version">
     </div>
     <div>
     <img src="https://badge.fury.io/js/%40bokeh%2Fbokehjs.svg" alt="npm version">
@@ -24,13 +24,13 @@
     <div>
     <a href="https://docs.bokeh.org/en/latest/docs/installation.html">
     <img src="https://pyviz.org/_static/cache/bokeh_conda_downloads_badge.svg"
-         alt="Conda downloads per month" />
+         alt="Conda downloads per month">
     </a>
     </div>
     <div>
     <a href="https://docs.bokeh.org/en/latest/docs/installation.html">
     <img src="https://img.shields.io/pypi/dm/bokeh?label=PyPI&style=flat"
-         alt="PyPI downloads per month" />
+         alt="PyPI downloads per month">
     </a>
     </div>
   </td>
@@ -41,14 +41,14 @@
   <td>
     <a href="https://github.com/bokeh/bokeh/blob/master/LICENSE.txt">
     <img src="https://img.shields.io/github/license/bokeh/bokeh.svg"
-         alt="Bokeh license (BSD 3-clause)" />
+         alt="Bokeh license (BSD 3-clause)">
     </a>
   </td>
 
   <td>People</td>
   <td>
     <img src="https://img.shields.io/github/contributors-anon/bokeh/bokeh"
-         alt="GitHub contributors" />
+         alt="GitHub contributors">
   </td>
 </tr>
 
@@ -57,7 +57,7 @@
   <td>
     <a href="http://numfocus.org">
     <img src="https://img.shields.io/badge/powered%20by-NumFOCUS-black.svg?style=flat&colorA=5B5B5B&colorB=007D8A"
-         alt="Powered by NumFOCUS" />
+         alt="Powered by NumFOCUS">
     </a>
   </td>
 
@@ -65,7 +65,7 @@
   <td>
     <a href="https://mybinder.org/v2/gh/bokeh/bokeh-notebooks/master?filepath=tutorial%2F00%20-%20Introduction%20and%20Setup.ipynb">
     <img src="https://mybinder.org/badge_logo.svg"
-         alt="Live Bokeh tutorial notebooks on MyBinder" />
+         alt="Live Bokeh tutorial notebooks on MyBinder">
     </a>
   </td>
 </tr>
@@ -76,13 +76,13 @@
     <div>
     <a href="https://github.com/bokeh/bokeh/actions">
     <img src="https://github.com/bokeh/bokeh/workflows/Bokeh-CI/badge.svg?branch=master"
-         alt="Current github actions build status" />
+         alt="Current github actions build status">
     </a>
     </div>
     <div>
     <a href="https://github.com/bokeh/bokeh/actions">
     <img src="https://github.com/bokeh/bokeh/workflows/BokehJS-CI/badge.svg?branch=master"
-         alt="Current github actions build status" />
+         alt="Current github actions build status">
     </a>
     </div>
   </td>
@@ -107,7 +107,7 @@
   <td>
     <a href="https://discourse.bokeh.org">
     <img src="https://img.shields.io/discourse/https/discourse.bokeh.org/posts.svg"
-         alt="Community Support on discourse.bokeh.org" />
+         alt="Community Support on discourse.bokeh.org">
     </a>
   </td>
 
@@ -116,7 +116,7 @@
   <td>
     <a href="https://twitter.com/bokeh">
     <img src="https://img.shields.io/twitter/follow/bokeh.svg?style=social&label=Follow"
-         alt="Follow Bokeh on Twitter" />
+         alt="Follow Bokeh on Twitter">
     </a>
 
   </td>
@@ -132,43 +132,43 @@
 
   <td>
   <a href="https://docs.bokeh.org/en/latest/docs/gallery/image.html">
-  <img alt="colormapped image plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/image_t.png" />
+  <img alt="colormapped image plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/image_t.png">
   </a>
   </td>
 
   <td>
   <a href="https://docs.bokeh.org/en/latest/docs/gallery/anscombe.html">
-  <img alt="anscombe plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/anscombe_t.png" />
+  <img alt="anscombe plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/anscombe_t.png">
   </a>
   </td>
 
   <td>
   <a href="https://docs.bokeh.org/en/latest/docs/gallery/stocks.html">
-  <img alt="stocks plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/stocks_t.png" />
+  <img alt="stocks plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/stocks_t.png">
   </a>
   </td>
 
   <td>
   <a href="https://docs.bokeh.org/en/latest/docs/gallery/lorenz.html">
-  <img alt="lorenz attractor plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/lorenz_t.png" />
+  <img alt="lorenz attractor plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/lorenz_t.png">
   </a>
   </td>
 
   <td>
   <a href="https://docs.bokeh.org/en/latest/docs/gallery/candlestick.html">
-  <img alt="candlestick plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/candlestick_t.png" />
+  <img alt="candlestick plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/candlestick_t.png">
   </a>
   </td>
 
   <td>
   <a href="https://docs.bokeh.org/en/latest/docs/gallery/color_scatter.html">
-  <img alt="scatter plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/scatter_t.png" />
+  <img alt="scatter plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/scatter_t.png">
   </a>
   </td>
 
   <td>
   <a href="https://docs.bokeh.org/en/latest/docs/gallery/iris_splom.html">
-  <img alt="SPLOM plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/splom_t.png" />
+  <img alt="SPLOM plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/splom_t.png">
   </a>
   </td>
 
@@ -177,43 +177,43 @@
 
   <td>
   <a href="https://docs.bokeh.org/en/latest/docs/gallery/iris.html">
-  <img alt="iris dataset plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/iris_t.png" />
+  <img alt="iris dataset plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/iris_t.png">
   </a>
   </td>
 
   <td>
   <a href="https://docs.bokeh.org/en/latest/docs/gallery/histogram.html">
-  <img alt="histogram plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/histogram_t.png" />
+  <img alt="histogram plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/histogram_t.png">
   </a>
   </td>
 
   <td>
   <a href="https://docs.bokeh.org/en/latest/docs/gallery/periodic.html">
-  <img alt="periodic table plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/periodic_t.png" />
+  <img alt="periodic table plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/periodic_t.png">
   </a>
   </td>
 
   <td>
   <a href="https://docs.bokeh.org/en/latest/docs/gallery/texas.html">
-  <img alt="choropleth plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/choropleth_t.png" />
+  <img alt="choropleth plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/choropleth_t.png">
   </a>
   </td>
 
   <td>
   <a href="https://docs.bokeh.org/en/latest/docs/gallery/burtin.html">
-  <img alt="burtin antibiotic data plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/burtin_t.png" />
+  <img alt="burtin antibiotic data plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/burtin_t.png">
   </a>
   </td>
 
   <td>
   <a href="https://docs.bokeh.org/en/latest/docs/gallery/streamline.html">
-  <img alt="streamline plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/streamline_t.png" />
+  <img alt="streamline plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/streamline_t.png">
   </a>
   </td>
 
   <td>
   <a href="https://docs.bokeh.org/en/latest/docs/gallery/image_rgba.html">
-  <img alt="RGBA image plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/image_rgba_t.png" />
+  <img alt="RGBA image plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/image_rgba_t.png">
   </a>
   </td>
 
@@ -222,43 +222,43 @@
 
   <td>
   <a href="https://docs.bokeh.org/en/latest/docs/gallery/brewer.html">
-  <img alt="stacked bars plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/stacked_t.png" />
+  <img alt="stacked bars plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/stacked_t.png">
   </a>
   </td>
 
   <td>
   <a href="https://docs.bokeh.org/en/latest/docs/gallery/quiver.html">
-  <img alt="quiver plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/quiver_t.png" />
+  <img alt="quiver plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/quiver_t.png">
   </a>
   </td>
 
   <td>
   <a href="https://docs.bokeh.org/en/latest/docs/gallery/elements.html">
-  <img alt="elements data plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/elements_t.png" />
+  <img alt="elements data plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/elements_t.png">
   </a>
   </td>
 
   <td>
   <a href="https://docs.bokeh.org/en/latest/docs/gallery/boxplot.html">
-  <img alt="boxplot thumbnail" src="https://docs.bokeh.org/en/latest/_images/boxplot_t.png" />
+  <img alt="boxplot thumbnail" src="https://docs.bokeh.org/en/latest/_images/boxplot_t.png">
   </a>
   </td>
 
   <td>
   <a href="https://docs.bokeh.org/en/latest/docs/gallery/categorical.html">
-  <img alt="categorical plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/categorical_t.png" />
+  <img alt="categorical plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/categorical_t.png">
   </a>
   </td>
 
   <td>
   <a href="https://docs.bokeh.org/en/latest/docs/gallery/unemployment.html">
-  <img alt="unemployment data plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/unemployment_t.png" />
+  <img alt="unemployment data plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/unemployment_t.png">
   </a>
   </td>
 
   <td>
   <a href="https://docs.bokeh.org/en/latest/docs/gallery/les_mis.html">
-  <img alt="Les Mis co-occurrence plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/les_mis_t.png" />
+  <img alt="Les Mis co-occurrence plot thumbnail" src="https://docs.bokeh.org/en/latest/_images/les_mis_t.png">
   </a>
   </td>
 

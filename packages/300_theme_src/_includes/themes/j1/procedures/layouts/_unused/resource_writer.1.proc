@@ -124,9 +124,9 @@
                     {% endif %}
                 {% when 'css' %}
                   {% if url_detected > 1 %}
-                    <link rel="stylesheet" type="text/css" href="{{file}}" />
+                    <link rel="stylesheet" type="text/css" href="{{file}}">
                   {% else %}
-                    <link rel="stylesheet" type="text/css" href="{{base_path}}/{{file}}" />
+                    <link rel="stylesheet" type="text/css" href="{{base_path}}/{{file}}">
                   {% endif %}
                 {% else %}
                 <!-- [ERROR  ] [j1.layout.resource_writer.proc        ] [ layout: {{layout}}, UNKNOWN resource type detected for: "{{file}} ] -->
@@ -134,9 +134,9 @@
               {% endcase %}
             {% else %}
               {% if url_detected > 1 %}
-                <link rel="stylesheet" type="text/css" href="{{file}}" />
+                <link rel="stylesheet" type="text/css" href="{{file}}">
               {% else %}
-                <link rel="stylesheet" type="text/css" href="{{base_path}}/{{file}}" />
+                <link rel="stylesheet" type="text/css" href="{{base_path}}/{{file}}">
               {% endif %}
             {% endif %}
 
@@ -155,11 +155,11 @@
           {% assign my_location = {{location_source}} %}
 
           {% if environment == 'development' %}
-            {% if location == 'remote' %} <link rel="stylesheet" type="text/css" href="{{my_location}}.css" /> {% endif %}
-            {% if location == 'local'  %} <link rel="stylesheet" type="text/css" href="{{my_location}}.css" /> {% endif %}
+            {% if location == 'remote' %} <link rel="stylesheet" type="text/css" href="{{my_location}}.css"> {% endif %}
+            {% if location == 'local'  %} <link rel="stylesheet" type="text/css" href="{{my_location}}.css"> {% endif %}
           {% else %}
-            {% if location == 'remote' %} <link rel="stylesheet" type="text/css" href="{{my_location}}.min.css" /> {% endif %}
-            {% if location == 'local'  %} <link rel="stylesheet" type="text/css" href="{{my_location}}.min.css" /> {% endif %}
+            {% if location == 'remote' %} <link rel="stylesheet" type="text/css" href="{{my_location}}.min.css"> {% endif %}
+            {% if location == 'local'  %} <link rel="stylesheet" type="text/css" href="{{my_location}}.min.css"> {% endif %}
           {% endif %}
 
         {% endfor %}

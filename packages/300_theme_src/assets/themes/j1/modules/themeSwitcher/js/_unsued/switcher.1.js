@@ -140,7 +140,7 @@
 
       themeName = user_state.theme_name;
       theme_css = user_state.theme_css;
-      var theme_css_html = '<link rel="stylesheet" id="' + id + '" href="' + user_state.theme_css + '" type="text/css" />';
+      var theme_css_html = '<link rel="stylesheet" id="' + id + '" href="' + user_state.theme_css + '" type="text/css">';
 
       $('head').append(theme_css_html);
 

@@ -678,7 +678,7 @@
 		...
 		
 		// append or prepend new items:
-		carouselEl.prepend('<li><a href="#"><img src="images/large/2.jpg" alt="image02" /></a></li>');
+		carouselEl.prepend('<li><a href="#"><img src="images/large/2.jpg" alt="image02"></a></li>');
 
 		// call the add method:
 		es.add();
