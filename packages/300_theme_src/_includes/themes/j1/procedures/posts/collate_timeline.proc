@@ -186,7 +186,7 @@
           {% elsif place_image %}
             <!-- place_image: "{{image}}" -->
             <div class="timeline-heading">
-              <img class="img-fluid" src="{{image}}" alt="Category Image"/>
+              <img class="img-fluid" src="{{image}}" alt="Category Image">
             </div>
             <div class="timeline-body">
               <div class="timeline-tagline">
