@@ -390,7 +390,7 @@ var logText;
             if (user_consent.personalization) {
               var currentDiv = document.getElementById(ad.id);
 
-              if (ad.enabled && ad.layout == layout) {
+              if (currentDiv !== null && ad.enabled && ad.layout == layout) {
                 var ins = document.createElement('ins');
 
                 currentDiv.appendChild(ins);

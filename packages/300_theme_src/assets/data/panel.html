@@ -727,7 +727,7 @@ exclude_from_search:                    true
                     {% if key == 'tagline' %}           {% assign card_tagline          = value | strip_newlines %} {% endif %}
                     {% if key == 'header_translate' %}  {% assign card_header_translate = value %}                  {% endif %}
                     {% if key == 'text' %}              {% assign card_text             = value | strip_newlines %} {% endif %}
-                    {% if key == 'services' %}          {% assign services                      = value %}                  {% endif %}
+                    {% if key == 'services' %}          {% assign services              = value %}                  {% endif %}
                   {% endfor %}
                 {% endfor %}
 
@@ -745,8 +745,13 @@ exclude_from_search:                    true
                       <div class="content mt-4">
 
                         <div class="card-header">
-                          <h6 class="notoc category {{card_header_translate}}">{{card_title}}</h6>
+                          <!--
+                          <h6 class="notoc category {{card_header_translate}} mt-2 mr-2">{{card_title}}</h6>
                           <h4 class="notoc card-title {{card_header_translate}}">{{card_tagline}}</h4>
+                          -->
+                          <div class="notoc category {{card_header_translate}} mt-2 mr-2">{{card_title}}</div>
+                          <div class="notoc card-title {{card_header_translate}}">{{card_tagline}}</div>
+
                         </div>
                         <div class="card-body g-min-height-350 r-text-300 mt-0">{{card_text}}</div>
 

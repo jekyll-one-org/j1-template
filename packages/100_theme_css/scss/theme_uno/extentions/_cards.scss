@@ -150,7 +150,10 @@
 }
 
 .card .card-title:not([class*="text-"]) {
-  color: $gray-100;
+  // color: $darken-800;
+  color: $black;
+  font-size: 1.75rem;
+  font-weight: 500;
 }
 
 a.card-title:hover {
@@ -285,9 +288,11 @@ a.card-title:hover {
 }
 
 .card .category:not([class*="text-"]) {
-  color: $gray-300;
+  // color: $darken-600;
+  color: $black;
+  font-weight: 400;
+  font-size: 1rem;
 }
-
 
 // Base header styles (???)
 // -----------------------------------------------------------------------------

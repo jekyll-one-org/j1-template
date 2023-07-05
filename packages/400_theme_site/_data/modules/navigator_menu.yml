@@ -174,8 +174,8 @@
 # ------------------------------------------------------------------------------
 # TopLevel item FEATURES
 #
-- item:                                 Features
-  href:                                 /#panel_home_intro
+# - item:                                 Features
+#   href:                                 /#panel_home_intro
 
 # ------------------------------------------------------------------------------
 # TopLevel item BLOG
