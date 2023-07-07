@@ -192,7 +192,6 @@ j1.adapter.translator = (function (j1, window) {
         var expires       = '{{cookie_options.expires}}';
         var same_site     = '{{cookie_options.same_site}}';
         var option_domain = '{{cookie_options.domain}}';
-        var translationFeedbackHighlight;
 
         user_consent      = j1.readCookie(cookie_names.user_consent);
 
@@ -296,17 +295,6 @@ j1.adapter.translator = (function (j1, window) {
             xhrDataElement:           translatorOptions.xhrDataElement,             // container for all language-specific dialogs (modals)
             postSelectionCallback:    translatorOptions.google.postSelectionCallback
           });
-
-          // hide the translation feedback
-          //
-          translationFeedbackHighlight  = '<style id="translationFeedbackHighlight">';
-          translationFeedbackHighlight += '  .VIpgJd-yAWNEb-VIpgJd-fmcmS-sn54Q {';
-          translationFeedbackHighlight += '    background-color:  transparent !important;';
-          translationFeedbackHighlight += '    box-shadow: none !important;;';
-          translationFeedbackHighlight += '  }';
-          translationFeedbackHighlight += '</style>';
-
-          $('head').append(translationFeedbackHighlight);
 
           // enable|disable translation (after callback)
           if (user_translate.analysis && user_translate.personalization && user_translate.translationEnabled) {
