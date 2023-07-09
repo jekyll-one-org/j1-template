@@ -567,10 +567,6 @@
           href:                         https://materialdesignicons.com/
           target:                       _blank
           icon:                         google
-        - title:                        Fonts
-          href:                         https://fonts.google.com/
-          target:                       _blank
-          icon:                         google
         - title:                        cdnJS
           href:                         https://cdnjs.com/
           target:                       _blank
@@ -591,8 +587,8 @@
           href:                         https://stackoverflow.com/questions/tagged/jekyll
           target:                       _blank
           icon:                         flask
-        - title:                        BS 4 Stackoverflow
-          href:                         https://stackoverflow.com/questions/tagged/bootstrap-4
+        - title:                        BS 5 Stackoverflow
+          href:                         https://stackoverflow.com/questions/tagged/bootstrap-5
           target:                       _blank
           icon:                         bootstrap
         - title:                        W3 Schools
@@ -609,10 +605,6 @@
           icon:                         language-css3
         - title:                        Asciidoc Language
           href:                         https://docs.asciidoctor.org/asciidoc/latest/
-          target:                       _blank
-          icon:                         format-color-text
-        - title:                        Asciidoc FAQ
-          href:                         http://www.methods.co.nz/asciidoc/faq.html
           target:                       _blank
           icon:                         format-color-text
         - title:                        Asciidoctor Docs
@@ -640,16 +632,10 @@
           href:                         https://www.appdevtools.com/
           target:                       _blank
           icon:                         cached
-
         - title:                        W3C Validator
           href:                         https://validator.w3.org/
           target:                       _blank
           icon:                         language-html5
-        - title:                        Nu Html Checker
-          href:                         https://validator.w3.org/nu/
-          target:                       _blank
-          icon:                         language-html5
-
         - title:                        Closing Tag Checker
           href:                         https://www.aliciaramirez.com/closing-tags-checker/
           target:                       _blank

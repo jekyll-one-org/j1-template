@@ -342,6 +342,7 @@ resources:
   # J1 Core, Main CSS styles and JS API for J1 Theme
   #
   # NOTE Theme CSS loaded via module 'themer'
+  # NOTE: load always 'unolight' as a 'bese' (e.g. for unodark, but should be removed)
   #
   - name:                               J1 Theme Core
     resource:
@@ -358,7 +359,7 @@ resources:
       pass_init_data:                   true
       data:
         css:                            [
-                                          core/css/themes/unolight/bootstrap,   # load always unolight as a 'bese' (e.g. for unodark, but should be removed)
+                                          core/css/themes/unolight/bootstrap,
                                           core/css/icon-fonts/mdib,
                                           core/css/vendor
                                         ]
@@ -419,32 +420,6 @@ resources:
         files:                          [ adapter/js/bmd.js ]
         js:                             [ modules/bmd/js/bmd ]
         init_function:                  [ j1.adapter.bmd.init ]
-
-  # ----------------------------------------------------------------------------
-  # Materialize, responsive JS (Vanilla) UI framework (currently NOT used)
-  #
-  # See: https://materializecss.com/
-  #
-  - name:                               Materialize
-    resource:
-      enabled:                          false
-
-      id:                               materialze
-      comment:                          Module Materialize
-      region:                           head
-      layout:                           [ all ]
-      required:                         ondemand
-      preload:                          false
-      script_load:
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            []
-        files:                          [
-                                          modules/materialize/js/fam.js
-                                        ]
-        js:                             [ modules/materialize/js/cash ]
-        init_function:                  []
 
   # ----------------------------------------------------------------------------
   # Google Analytics OptIn, a browser library to opt-in in Google Analytics
@@ -755,30 +730,6 @@ resources:
                                         ]
         files:                          []
         js:                             [ modules/jquery/js/jquery-ui ]
-        init_function:                  []
-
-  # ----------------------------------------------------------------------------
-  # jqMouseWheel, cross-browser mouse wheel support (currently NOT used)
-  #
-  # See: https://github.com/jquery/jquery-mousewheel
-  #
-  - name:                               jqMouseWheel
-    resource:
-      enabled:                          false
-
-      id:                               jq_mouse_wheel
-      comment:                          Module jqMouseWheel
-      region:                           head
-      layout:                           [ all ]
-      required:                         always
-      preload:                          false
-      script_load:
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            []
-        files:                          []
-        js:                             [ modules/jqMouseWheel/js/jquery.mousewheel ]
         init_function:                  []
 
   # ----------------------------------------------------------------------------
@@ -1121,54 +1072,6 @@ resources:
         init_function:                  [ j1.adapter.lightbox.init ]
 
   # ----------------------------------------------------------------------------
-  # Twitter Emoji Icons, CSS component for using Twitter Emojis
-  #
-  # See: https://twemoji.twitter.com/
-  #
-  - name:                               Twitter Emoji Icons
-    resource:
-      enabled:                          false
-
-      id:                               twemoji
-      comment:                          Module Twitter Emoji Icons
-      layout:                           [ home, page, post, collection, blog_archive ]
-      region:                           head
-      required:                         ondemand
-      preload:                          false
-      script_load:                      defer
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            [ core/css/icon-fonts/twemoji ]
-        files:                          []
-        js:                             []
-        init_function:                  []
-
-  # ----------------------------------------------------------------------------
-  # Twitter Emoji Picker, selection UI for Twitter Emojis
-  #
-  # See: https://github.com/xLs51/Twemoji-Picker
-  #
-  - name:                               Twitter Emoji Picker
-    resource:
-      enabled:                          false
-
-      id:                               twemoji_picker
-      comment:                          Module Twitter Emoji Picker
-      layout:                           [ page ]
-      region:                           head
-      required:                         ondemand
-      preload:                          false
-      script_load:                      defer
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            [ modules/twemoji/css/picker/twemoji-picker ]
-        files:                          []
-        js:                             [ modules/twemoji/js/picker/twemoji-picker ]
-        init_function:                  []
-
-  # ----------------------------------------------------------------------------
   # Iconify Framework, JS API to use Iconify icons
   #
   # See: https://iconify.design/
@@ -1506,31 +1409,7 @@ resources:
         init_function:                  [ j1.adapter.rangeSlider.init ]
 
   # ----------------------------------------------------------------------------
-  # Data tables for J1 Theme (currently NOT used)
-  #
-  # See: https://datatables.net/
-  #
-  - name:                               Datatables
-    resource:
-      enabled:                          false
-
-      id:                               datatables
-      comment:                          Module Datatables
-      region:                           head
-      layout:                           [ all ]
-      required:                         ondemand
-      preload:                          false
-      script_load:                      defer
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            [ modules/datatables/css/datatables ]
-        files:                          [ modules/datatables/css/theme/uno.css ]
-        js:                             [ modules/datatables/js/datatables ]
-        init_function:                  []
-
-  # ----------------------------------------------------------------------------
-  # scroller, JS API to implement infinite scroll
+  # Scroller, JS API to implement infinite scroll
   #
   - name:                               J1 Scroller
     resource:
@@ -1550,55 +1429,6 @@ resources:
         files:                          [ adapter/js/scroller.js ]
         js:                             [ modules/scroller/js/scroller ]
         init_function:                  [ j1.adapter.scroller.init ]
-
-  # ----------------------------------------------------------------------------
-  # deeplAPI, JS Wrapper for the DeepL API
-  #
-  # See: https://www.deepl.com/docs-api/
-  #
-  - name:                               Deepl API
-    resource:
-      enabled:                          false
-
-      id:                               deeplAPI
-      comment:                          Module Deepl API
-      region:                           head
-      layout:                           [ home, page, post, collection, blog_archive ]
-      required:                         ondemand
-      preload:                          false
-      script_load:                      defer
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            []
-        files:                          []
-        js:                             [ modules/cryptoJS/js/aes, modules/deeplAPI/js/deeplAPI ]
-        init_function:                  []
-
-  # ----------------------------------------------------------------------------
-  # Crypto, JS implementation of standard and secure cryptographic
-  # algorithms based on Google's cryptoJS APIs
-  #
-  # See: https://code.google.com/archive/p/crypto-js/
-  #
-  - name:                               Crypto
-    resource:
-      enabled:                          false
-
-      id:                               crypto
-      comment:                          Module Crypto
-      region:                           head
-      layout:                           [ all ]
-      required:                         ondemand
-      preload:                          false
-      script_load:                      defer
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            []
-        files:                          []
-        js:                             [ modules/cryptoJS/js/aes ]
-        init_function:                  []
 
   # ----------------------------------------------------------------------------
   # Advertising, JS implementation to provide Advertising services
@@ -1674,121 +1504,6 @@ resources:
                                         ]
         js:                             []
         init_function:                  [ j1.adapter.dropdowns.init ]
-
-  # ----------------------------------------------------------------------------
-  # J1 NBI, implement nbinteract core JS for J1 Theme
-  #
-  - name:                               J1 NBinteract
-    resource:
-      enabled:                          false
-
-      id:                               nbinteract
-      comment:                          Module J1 NBinteract
-      region:                           head
-      layout:                           [ all ]
-      required:                         ondemand
-      preload:                          false
-      script_load:                      defer
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            [ modules/nbinteract-core/css/theme/uno/nbinteract ]
-        files:                          [
-                                          modules/nbinteract-core/js/nbinteract/j1-nbinteract-core.js,
-                                          adapter/js/nbinteract.js
-                                        ]
-        js:                             []
-        init_function:                  [ j1.adapter.nbinteract.init ]
-
-  # ----------------------------------------------------------------------------
-  # Plotly Open Source Graphing Library
-  # Interactive charts and maps for Python, R, Julia, Javascript,
-  # ggplot2, F#, MATLAB®, and Dash.
-  #
-  # See: https://plotly.com/graphing-libraries/
-  #      https://plotly.com/javascript/getting-started/
-  #
-  - name:                               Plotly
-    resource:
-      enabled:                          false
-
-      id:                               plotly
-      comment:                          Module Plotly Open Source JS
-      region:                           head
-      layout:                           [ all ]
-      required:                         ondemand
-      preload:                          false
-      script_load:                      defer
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            []
-        files:                          []
-        js:                             [
-                                          modules/plotly/js/plotly
-                                        ]
-        init_function:                  []
-
-  # ----------------------------------------------------------------------------
-  # BokehJS - JS Interface for Bokeh Interactive Visualization library
-  # It provides elegant, concise construction of versatile graphics, and
-  # affords high-performance interactivity over large or streaming datasets.
-  #
-  # See: https://github.com/bokeh/bokeh
-  #
-  - name:                               BokehJS
-    resource:
-      enabled:                          false
-
-      id:                               bokeh
-      comment:                          Module BokehJS
-      region:                           head
-      layout:                           [ all ]
-      required:                         ondemand
-      preload:                          false
-      script_load:                      defer
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            []
-        files:                          [ modules/bokeh/js/v2.4.3/bokeh.min.js ]
-        js:                             []
-        init_function:                  []
-
-  # ----------------------------------------------------------------------------
-  # Vega – A Visualization Grammar
-  # Vega is a visualization grammar, a declarative language for creating,
-  # saving, and sharing interactive visualization designs. With Vega you can
-  # describe data visualizations in a JSON format, and generate interactive
-  # views using either HTML5 Canvas or SVG.
-  #
-  # See: https://github.com/vega/vega
-  #      https://github.com/vega/vega-lite
-  #      https://github.com/vega/vega-embed
-  #
-  - name:                               Vega
-    resource:
-      enabled:                          false
-
-      id:                               vega
-      comment:                          Module Vega Visualization Grammar Bundle
-      region:                           head
-      layout:                           [ all ]
-      required:                         ondemand
-      preload:                          false
-      script_load:                      defer
-      dependencies:                     false
-      pass_init_data:                   false
-      data:
-        css:                            []
-        files:                          []
-        js:                             [
-                                          modules/vega/js/vega/vega,
-                                          modules/vega/js/vega/vega-core,
-                                          modules/vega/js/vega-lite/vega-lite,
-                                          modules/vega/js/vega-embed/vega-embed
-                                        ]
-        init_function:                  []
 
   # ----------------------------------------------------------------------------
   # RequireJS
