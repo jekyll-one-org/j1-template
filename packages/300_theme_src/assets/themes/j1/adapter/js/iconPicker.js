@@ -88,6 +88,7 @@ j1.adapter.iconPicker = (function (j1, window) {
 {% comment %} Set global variables
 -------------------------------------------------------------------------------- {% endcomment %}
 var environment           = '{{environment}}';
+var state                 = 'not_started';
 var iconPickerDefaults;
 var iconPickerSettings;
 var iconPickerOptions;
@@ -138,10 +139,8 @@ var logText;
       var dependencies_met_page_ready = setInterval (function (options) {
         var pageState     = $('#no_flicker').css("display");
         var pageVisible   = (pageState == 'block') ? true : false;
-        var atticFinished = (j1.adapter.attic.getState() == 'finished') ? true: false;
 
         if (j1.getState() === 'finished' && pageVisible) {
-//      if (j1.getState() === 'finished' && pageVisible && atticFinished) {
           icon_picker_button_id = '#' + iconPickerDefaults.picker_button_id;
 
           _this.setState('started');
@@ -149,8 +148,9 @@ var logText;
           logger.info('\n' + 'module is being initialized on id: ' + icon_picker_button_id);
 
           icon_picker = new UniversalIconPicker(icon_picker_button_id, {
-            iconLibraries:    iconPickerDefaults.iconLibraries,
-            iconLibrariesCss: iconPickerDefaults.iconLibrariesCss,
+            allowEmpty:       iconPickerOptions.allowEmpty,
+            iconLibraries:    iconPickerOptions.iconLibraries,
+            iconLibrariesCss: iconPickerOptions.iconLibrariesCss,
             onSelect: function(jsonIconData) {
               // copy selected icon to clipboard (iconClass)
               var copyFrom = document.createElement('textarea');
@@ -158,12 +158,20 @@ var logText;
               document.body.appendChild(copyFrom);
               copyFrom.select();
               document.execCommand('copy');
+              // Remove data element from body
               setTimeout(function () {
                 document.body.removeChild(copyFrom);
               }, 500);
-              // console.log(jsonIconData);
             }
           });
+
+          // save config settings into the toccer object for later access
+          //
+          _this['icon_picker']    = icon_picker;
+          _this['moduleOptions']  = iconPickerOptions;
+
+          _this.setState('finished');
+          logger.debug('\n' + 'state: ' + _this.getState());
 
           logger.info('\n' + 'initializing module finished');
           clearInterval(dependencies_met_page_ready);

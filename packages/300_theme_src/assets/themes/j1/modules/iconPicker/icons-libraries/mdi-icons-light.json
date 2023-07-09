@@ -1,7 +1,7 @@
 {
 	"prefix": "mdil mdil-",
 	"icon-style": "mdil-",
-	"list-icon": "mdil mdil-vector-square",
+	"list-icon": "mdil mdil-account",
 	"version": "0.2.63",
 	"icons": [
       "account",

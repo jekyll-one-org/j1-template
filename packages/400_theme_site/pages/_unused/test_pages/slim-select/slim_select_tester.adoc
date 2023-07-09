@@ -1,27 +1,41 @@
 ---
-title:                                  Icon Picker
-tagline:                                Preview Font Icons
-date:                                   2023-05-20 00:00:00
+title:                                  Tester
+tagline:                                SlimSelect Tester
+date:                                   2022-12-11 00:00:00 +100
 description: >
-                                        J1 Theme supports popular icons font sets out-of-the-box.
-                                        The icon sets Material Design Icons (MDI) and FontAwesome
-                                        (FA) are exellent in design and have a rich set of different
-                                        icons for many categories used for the Web.
+                                        Welcome to the pages of J1 Theme. If your here
+                                        first time, a good decision you get on that page first.
+                                        For sure, there is no better place to go.
+keywords: >
+                                        Jekyll, Theme, step, find, project, roundtrip, trip,
 
-categories:                             [ Previewer ]
-tags:                                   [ Icon Sets, FA, MDI ]
+categories:                             [ Info ]
+tags:                                   [ Places, Introduction ]
+
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/j1-starter-mockup-1.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  Photo by Alexander Redl on Unsplash
 
 fab_menu_id:                            default
 
-permalink:                              /pages/public/tools/previewer/icon-picker/
+permalink:                              /pages/public/slim_select_tester/
 regenerate:                             false
 
 resources:                              [ animate, clipboard, iconpicker, slim_select ]
 resource_options:
   - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
       slides:
-        - url:                          /assets/images/pages/roundtrip/icon-fonts-1920x1280-bw.jpg
-          alt:                          Icon Fonts
+        - url:                          /assets/images/modules/attics/1920x1280/j1-starter-mockup-1.jpg
+          alt:                          Photo by Alexander Redl on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Alexander Redl
+            href:                       https://unsplash.com/@alexanderredl
 ---
 
 // Page Initializer
@@ -32,6 +46,7 @@ resource_options:
 // Set (local) page attributes here
 // -----------------------------------------------------------------------------
 // :page--attr:                         <attr-value>
+:url-j1-jupyter-notebooks--where-to-go: /pages/public/jupyter/where-to-go/
 
 //  Load Liquid procedures
 // -----------------------------------------------------------------------------
@@ -40,9 +55,6 @@ resource_options:
 // Load page attributes
 // -----------------------------------------------------------------------------
 {% include {{load_attributes}} scope="global" %}
-
-// Page content
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // Include sub-documents (if any)
 // -----------------------------------------------------------------------------

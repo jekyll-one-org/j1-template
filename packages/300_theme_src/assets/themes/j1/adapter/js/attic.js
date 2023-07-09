@@ -88,6 +88,7 @@ j1.adapter.attic = (function (j1, window) {
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment   = '{{environment}}';
+  var state         = 'not_started';
   var moduleOptions = {};
   var _this;
   var logger;

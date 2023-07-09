@@ -1989,5 +1989,28 @@ resources:
         js:                             []
         init_function:                  [ j1.adapter.lazyLoader.init ]
 
+  # ----------------------------------------------------------------------------
+  # slimSelect
+  # Advanced select dropdown
+  #
+  - name:                               slimSelect
+    resource:
+      enabled:                          true
+
+      id:                               slim_select
+      comment:                          Module slimSelect
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand
+      preload:                          false
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            [ modules/slimSelect/css/select ]
+        files:                          []
+        js:                             [ modules/slimSelect/js/select ]
+        init_function:                  []
+
 # ------------------------------------------------------------------------------
 # END config

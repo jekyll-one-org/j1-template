@@ -1,7 +1,7 @@
 {
 	"prefix": "mdib mdib-",
 	"icon-style": "mdib",
-	"list-icon": "mdib mdib-vector-square",
+	"list-icon": "mdib mdib-account",
 	"version": "7.2.96",
 	"icons": [
     "ab-testing",

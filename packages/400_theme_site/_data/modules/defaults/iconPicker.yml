@@ -24,16 +24,20 @@ description:
 #
 defaults:
   enabled:                              false
+
   picker_button_id:                     icon_picker
+  allowEmpty:                           true
 
   iconLibraries:                        [
                                           mdi-icons-base.min.json,
                                           mdi-icons-light.min.json,
+                                          mdi-icons-regular.min.json,
                                           font-awesome.min.json
                                         ]
 
   iconLibrariesCss:                     [
                                           https://cdn.jsdelivr.net/npm/@mdi/light-font@0.2.63/css/materialdesignicons-light.min.css,
+                                          https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.2.96/css/materialdesignicons.min.css,
                                           https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/7.2.96/css/materialdesignicons.min.css,
                                           https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css
                                         ]
