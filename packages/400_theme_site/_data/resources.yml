@@ -374,7 +374,7 @@ resources:
         init_function:                  [ j1.init ]
 
   # ----------------------------------------------------------------------------
-  # Bootstrap V5 JS components
+  # Bootstrap JS v5.3.0
   #
   # See: https://getbootstrap.com/docs/5.0/getting-started/introduction/
   #
@@ -696,12 +696,11 @@ resources:
       pass_init_data:                   true
       data:
         css:                            []                                      # styles moved to Template CSS
-        files:                          [
-                                          modules/fab/js/cash.js,               # adapted|old (1.3.5) version from Materialize
-                                          modules/fab/js/fab.js,                # modified version for J1 (former: button.js)
-                                          adapter/js/fab.js
+        files:                          [ adapter/js/fab.js ]
+        js:                             [
+                                          modules/fab/js/cash,                  # adapted|old (1.3.5) version from Materialize
+                                          modules/fab/js/fab                    # modified version for J1 (former: button.js)
                                         ]
-        js:                             []
         init_function:                  [ j1.adapter.fab.init ]
 
   # ----------------------------------------------------------------------------
@@ -845,8 +844,8 @@ resources:
       dependencies:                     false
       pass_init_data:                   false
       data:
-        css:                            []
-        files:                          [ modules/msDropdown/css/themes/uno/msDropdown.css ]
+        css:                            [ modules/msDropdown/css/themes/uno/msDropdown ]
+        files:                          []
         js:                             [ modules/msDropdown/js/msDropdown ]
         init_function:                  []
 
@@ -1091,8 +1090,8 @@ resources:
       pass_init_data:                   false
       data:
         css:                            [ core/css/icon-fonts/iconify ]
-        files:                          [ modules/iconifyAPI/js/iconify.min.js ]
-        js:                             []
+        files:                          []
+        js:                             [ modules/iconifyAPI/js/iconify ]
         init_function:                  []
 
   # ----------------------------------------------------------------------------
@@ -1157,24 +1156,21 @@ resources:
       id:                               carousel
       comment:                          Module J1 Carousel
       region:                           head
-      layout:                           [ home, page, post, collection, blog_archive ]
+      layout:                           [ all ]
       required:                         ondemand
       preload:                          false
       script_load:                      defer
       dependencies:                     false
       pass_init_data:                   true
       data:
-        css:                            []
-        files:                          [
-                                          modules/carousel/css/carousel.css,
-                                          modules/carousel/css/carousel_transitions.css,
-                                          modules/carousel/css/theme/uno.css,
-                                          modules/carousel/js/carousel.js,
-                                          adapter/js/carousel.js
+        css:                            [
+                                          modules/carousel/css/carousel,
+                                          modules/carousel/css/carousel_transitions,
+                                          modules/carousel/css/theme/uno
                                         ]
-        js:                             []
+        files:                          [ adapter/js/carousel.js ]
+        js:                             [ modules/carousel/js/carousel ]
         init_function:                  [ j1.adapter.carousel.init ]
-
 
   # ----------------------------------------------------------------------------
   # MasterSlider, lite|free version 2.85.13 - Feb 2022
@@ -1358,8 +1354,8 @@ resources:
       pass_init_data:                   false
       data:
         css:                            []
-        files:                          [ modules/vimeo/froogaloop/js/froogaloop2.min.js ]
-        js:                             []
+        files:                          []
+        js:                             [ modules/vimeo/froogaloop/js/froogaloop2 ]
         init_function:                  []
 
   # ----------------------------------------------------------------------------
@@ -1497,12 +1493,11 @@ resources:
       pass_init_data:                   false
       data:
         css:                            [ modules/dropdowns/css/theme/uno/dropdowns ]
-        files:                          [
-                                          modules/dropdowns/js/cash.js,
-                                          modules/dropdowns/js/dropdowns.js,
-                                          adapter/js/dropdowns.js
+        files:                          [ adapter/js/dropdowns.js ]
+        js:                             [
+                                          modules/dropdowns/js/cash,
+                                          modules/dropdowns/js/dropdowns
                                         ]
-        js:                             []
         init_function:                  [ j1.adapter.dropdowns.init ]
 
   # ----------------------------------------------------------------------------
@@ -1630,7 +1625,7 @@ resources:
       data:
         css:                            [ modules/masonry/css/theme/uno ]
         files:                          [ adapter/js/masonry.js ]
-        js:                             [ modules/masonry/js/masonry.pkgd ]
+        js:                             [ modules/masonry/js/masonry ]
         init_function:                  [ j1.adapter.masonry.init ]
 
   # ----------------------------------------------------------------------------

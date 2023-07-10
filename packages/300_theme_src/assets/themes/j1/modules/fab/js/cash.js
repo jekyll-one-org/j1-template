@@ -14,8 +14,6 @@
  # J1 Theme is licensed under the MIT License.
  # See: https://github.com/fabiospampinato/cash/blob/master/LICENSE.md
  # -----------------------------------------------------------------------------
- # NOTE: cash-dom 1.3.5, https://github.com/kenwheeler/cash
- # -----------------------------------------------------------------------------
 */
 (function (factory) {
   window.cash = factory();

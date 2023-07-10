@@ -1,12 +1,13 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/modules/msDropdown/css/themes/uno/msDropdown.css
- # Provides CSS core styles for MSDropdown
+ # Provides CSS core styles for MSDropdown v4.0.2
  #
  # Product/Info:
  # http://jekyll.one
  # https://www.marghoobsuleman.com/
  #
+ # Copyright (C) 2023 Marghoob Suleman
  # Copyright (C) 2023 Juergen Adams
  #
  # msDropdown is licensed under MIT License.
@@ -20,19 +21,6 @@
  # https://www.marghoobsuleman.com/image-dropdown/advanced-help
  # -----------------------------------------------------------------------------
 */
-
- /*!
- * /**
- *  * MSDropdown - msDropdown.js
- *  * @author: Marghoob Suleman
- *  * @website: https://www.marghoobsuleman.com/
- *  * @version: 4.0.2
- *  * @date: Sun Oct 24 2021 10:46:05 GMT+0200 (GMT+02:00)
- *  * msDropdown is free web component: you can redistribute it and/or modify
- *  * it under the terms of the either the MIT License or the Gnu General Public License (GPL) Version 2
- *  * /
- */
- 
  .ms-pr {
   position: relative
 }

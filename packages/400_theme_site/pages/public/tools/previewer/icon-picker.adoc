@@ -11,10 +11,10 @@ description: >
 categories:                             [ Previewer ]
 tags:                                   [ Font Icons, FA, MDI ]
 
-fab_menu_id:                            default
 compress:                               false
-permalink:                              /pages/public/tools/previewer/icon-picker/
+fab_menu_id:                            default
 regenerate:                             false
+permalink:                              /pages/public/tools/previewer/icon-picker/
 
 resources:                              [ animate, clipboard, iconpicker, slim_select ]
 resource_options:

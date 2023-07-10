@@ -8,13 +8,12 @@
  # http://srobbin.com/jquery-plugins/backstretch/
  #
  # Copyright (C) 2023 Juergen Adams
- # Copyright (C) 2017 Daniel Cohen Gindi
  # Copyright (C) 2012 Scott Robbin
  #
  # J1 Theme is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # Backstretch is licensed under the MIT License.
- # See: https://github.com/danielgindi/jquery-backstretch
+ # See: https://github.com/jquery-backstretch/jquery-backstretch/blob/2.1.16/LICENSE-MIT
  # -----------------------------------------------------------------------------
 */
 
@@ -28,7 +27,6 @@
 /* eslint no-prototype-builtins: "off"                                        */
 /* eslint no-shadow-restricted-names: "off"                                   */
 // -----------------------------------------------------------------------------
-// Version 2.1.16
 
 'use strict';
 (function ($, window, undefined) {

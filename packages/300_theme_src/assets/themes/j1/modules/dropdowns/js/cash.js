@@ -1,20 +1,19 @@
 /*
  # -----------------------------------------------------------------------------
  # ~/assets/themes/j1/modules/fam/js/cash.js
- # MODIFIED old Cash version 1.3.5 from Materialize used by J1 Module FAM
+ # MODIFIED old Cash version v1.3.5 from Materialize used by J1 Module FAMs
  #
  # Product/Info:
  # https://jekyll.one
- # https://github.com/fabiospampinato/cash
+ * https://github.com/fabiospampinato/cash/tree/1.3.5
  #
+ # Copyright (c) 2014 Ken Wheeler
  # Copyright (C) 2023 Juergen Adams
  #
  # Cash is licensed under the MIT License.
  # See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
  # J1 Theme is licensed under the MIT License.
- # See: https://github.com/fabiospampinato/cash/blob/master/LICENSE.md
- # -----------------------------------------------------------------------------
- # NOTE: cash-dom 1.3.5, https://github.com/kenwheeler/cash
+ # See: https://github.com/fabiospampinato/cash/blob/1.3.5/LICENSE.md
  # -----------------------------------------------------------------------------
 */
 (function (factory) {
