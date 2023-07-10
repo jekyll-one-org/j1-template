@@ -1,3 +1,10 @@
+/*!
+ * slim-select.js v2.5.1
+ * https://github.com/brianvoe/slim-select/tree/master
+ *
+ * Licensed MIT © Brian Voelker
+ * https://github.com/brianvoe/slim-select/blob/master/LICENSE
+ */
 (function (global, factory) {
     typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
     typeof define === 'function' && define.amd ? define(factory) :
