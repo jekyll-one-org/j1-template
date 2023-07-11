@@ -69,7 +69,7 @@
           icon:                         theme-light-dark
         - title:                        Highligher
           href:                         /pages/public/learn/roundtrip/rouge/
-          icon:                         format-color-fill
+          icon:                         code-parentheses
         - title:                        Search
           href:                         /pages/public/learn/roundtrip/quicksearch/
           icon:                         magnify
@@ -267,10 +267,6 @@
         - title:                        Range Slider
           href:                         https://jekyll.one/pages/public/manuals/modules/rangeslider/
           icon:                         abacus
-          target:                       _blank
-        - title:                        Code Hightlighter Rouge
-          href:                         https://jekyll.one/pages/public/manuals/rouge/user_guide/
-          icon:                         format-color-fill
           target:                       _blank
         - title:                        Themer
           href:                         https://jekyll.one/pages/public/manuals/modules/themer/

@@ -268,10 +268,6 @@
           href:                         https://jekyll.one/pages/public/manuals/modules/rangeslider/
           icon:                         abacus
           target:                       _blank
-        - title:                        Code Hightlighter Rouge
-          href:                         https://jekyll.one/pages/public/manuals/rouge/user_guide/
-          icon:                         format-color-fill
-          target:                       _blank
         - title:                        Themer
           href:                         https://jekyll.one/pages/public/manuals/modules/themer/
           icon:                         theme-light-dark
