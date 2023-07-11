@@ -95,6 +95,7 @@ var viewport_width    = $(window).width();
 var url               = new liteURL(window.location.href);
 var secure            = (url.protocol.includes('https')) ? true : false;
 var cookie_names      = j1.getCookieNames();
+var state             = 'not_started';
 var user_state        = {};
 var light_theme_css;
 var dark_theme_css;

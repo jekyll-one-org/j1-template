@@ -1,0 +1,19 @@
+/*
+ # -----------------------------------------------------------------------------
+ #  ~/modules/rouge/css/igorpro/theme.min.css
+ #  Rouge theme igorpro
+ #
+ #  Product/Info:
+ #  https://jekyll.one
+ #  https://github.com/rouge-ruby/rouge
+ #
+ #  Copyright (C) 2023 Juergen Adams
+ #  Copyright (c) 2012 Jeanine Adkisson
+ #
+ #  J1 Theme is licensed under the MIT License.
+ #  See: https://github.com/jekyll-one-org/j1-template/blob/main/LICENSE.md
+ #  Rouge is licensed under the MIT License.
+ #  See: https://github.com/rouge-ruby/rouge/blob/master/LICENSE
+ # -----------------------------------------------------------------------------
+*/
+.highlight table td{padding:5px}.highlight table pre{margin:0}.highlight,.highlight .w{color:#444}.highlight .cp{color:#cc00a3}.highlight .cs{color:#cc00a3}.highlight .c,.highlight .cd,.highlight .cm,.highlight .c1{color:red}.highlight .kc{color:#c34e00}.highlight .kd{color:#00f}.highlight .kr{color:#007575}.highlight .k,.highlight .kn,.highlight .kp,.highlight .kt,.highlight .kv{color:#00f}.highlight .s,.highlight .sb,.highlight .sc,.highlight .sd,.highlight .s2,.highlight .se,.highlight .sh,.highlight .si,.highlight .sx,.highlight .sr,.highlight .s1,.highlight .ss{color:#009c00}.highlight .nb,.highlight .bp{color:#c34e00}

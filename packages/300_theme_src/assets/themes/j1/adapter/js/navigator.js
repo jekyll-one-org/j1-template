@@ -155,6 +155,7 @@ j1.adapter.navigator = (function (j1, window) {
   var environment                 = '{{environment}}';
   var dclFinished                 = false;
   var moduleOptions               = {};
+  var state                       = 'not_started';
 
   var nav_menu_id                 = '{{nav_menu_id}}';
   var nav_quicklinks_id           = '{{nav_quicklinks_id}}';

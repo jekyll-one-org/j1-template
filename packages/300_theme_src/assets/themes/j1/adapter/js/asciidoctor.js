@@ -66,6 +66,7 @@ j1.adapter.asciidoctor = (function (j1, window) {
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment   = '{{environment}}';
   var moduleOptions = {};
+  var state         = 'not_started';
   var _this;
   var logger;
   var logText;

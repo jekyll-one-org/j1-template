@@ -84,6 +84,7 @@ j1.adapter.rangeSlider = (function (j1, window) {
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment   = '{{environment}}';
   var instances     = [];
+  var state         = 'not_started';
   var rangeSliderDefaults;
   var rangeSliderSettings;
   var rangeSliderOptions;

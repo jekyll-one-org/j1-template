@@ -120,6 +120,7 @@ j1.adapter.themer = (function (j1, window) {
   var user_state_detected       = false;
   var styleLoaded               = false;
   var id                        = 'default';
+  var state                     = 'not_started';
   var cssExtension              = (development) ? '.css' : '.min.css';
   var default_theme_name        = '{{default_theme.name}}';
   var default_theme_author      = '{{default_theme.author}}';

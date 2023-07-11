@@ -85,11 +85,12 @@ regenerate:                             true
 // -----------------------------------------------------------------------------
 'use strict';
 j1.adapter.cookieConsent = (function (j1, window) {
-  var environment                 = '{{environment}}';
-  var tracking_enabled            = ('{{tracking_enabled}}' === 'true') ? true: false;
-  var tracking_id                 = '{{tracking_id}}';
-  var tracking_id_valid           = (tracking_id.includes('tracking-id')) ? false : true;
-  var stringifiedAttributes       = '';
+  var environment           = '{{environment}}';
+  var tracking_enabled      = ('{{tracking_enabled}}' === 'true') ? true: false;
+  var tracking_id           = '{{tracking_id}}';
+  var tracking_id_valid     = (tracking_id.includes('tracking-id')) ? false : true;
+  var stringifiedAttributes = '';
+  var state                 = 'not_started';
 
   var expireCookiesOnRequiredOnly;
 

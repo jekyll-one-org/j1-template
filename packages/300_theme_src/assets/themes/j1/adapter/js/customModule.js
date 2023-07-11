@@ -87,6 +87,7 @@ j1.adapter.customModule = (function (j1, window) {
   var environment   = '{{environment}}';
   var moduleOptions = {};
   var instances     = [];
+  var state         = 'not_started';
   var frontmatterOptions;
   var _this;
   var logger;

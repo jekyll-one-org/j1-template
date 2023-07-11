@@ -91,6 +91,7 @@ j1.adapter.logger = (function (j1, window) {
   var page_id               = j1.generateId(11);
   var cookie_names          = j1.getCookieNames();
   var loggerRequestCallback = false;
+  var state                 = 'not_started';
   var utilServerOptions     = {};
   var ajaxAppenderOptions   = {};
   var loggerDefaults;

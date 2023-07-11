@@ -59,6 +59,9 @@
         - title:                        Themes
           href:                         /pages/public/learn/roundtrip/themes/
           icon:                         theme-light-dark
+        - title:                        Highligher
+          href:                         /pages/public/learn/roundtrip/rouge/
+          icon:                         format-color-fill
         - title:                        Search
           href:                         /pages/public/learn/roundtrip/quicksearch/
           icon:                         magnify

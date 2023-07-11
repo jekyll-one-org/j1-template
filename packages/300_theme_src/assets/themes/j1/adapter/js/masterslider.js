@@ -84,6 +84,7 @@ j1.adapter.masterslider = (function (j1, window) {
   var lightboxEnabled   = j1.stringToBoolean('{{lightbox_enabled}}');
   var saveSliderConfig  = j1.stringToBoolean('{{save_slider_config}}');
   var newline           = '\n';
+  var state             = 'not_started';
 
   var masterSliderDefaults;
   var masterSliderSettings;

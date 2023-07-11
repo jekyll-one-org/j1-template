@@ -82,6 +82,7 @@ j1.adapter.rtable = (function (j1, window) {
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment   = '{{environment}}';
+  var state         = 'not_started';
   var rtableDefaults;
   var rtableSettings;
   var rtableOptions;

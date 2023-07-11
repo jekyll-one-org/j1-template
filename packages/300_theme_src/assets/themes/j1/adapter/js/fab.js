@@ -90,6 +90,7 @@ j1.adapter.fab = (function (j1, window) {
   var dclFinished   = false;
   var moduleOptions = {};
   var cookie_names  = j1.getCookieNames();
+  var state         = 'not_started';
   var fabDefaults;
   var fabSettings;
   var fabOptions;

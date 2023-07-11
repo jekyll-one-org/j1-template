@@ -129,6 +129,7 @@ var dqApiScript       = document.createElement('script');
 var hvApiScript       = document.createElement('script');
 var hvCallbackScript  = document.createElement('script');
 var comments_headline = '{{comments_headline}}';
+var state             = 'not_started';
 var providerID;
 var validProviderID;
 var commentsDefaults;

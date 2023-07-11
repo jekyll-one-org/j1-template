@@ -77,6 +77,7 @@ j1.adapter.lunr = (function (j1, window) {
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment = '{{environment}}';
+  var state       = 'not_started';
   var searchDefaults;
   var searchSettings;
   var searchOptions;

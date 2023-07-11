@@ -84,6 +84,7 @@ j1.adapter.justifiedGallery = (function (j1, window) {
   {% comment %} Global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment   = '{{environment}}';
+  var state         = 'not_started';
   var justifiedGalleryDefaults;
   var justifiedGallerySettings;
   var justifiedGalleryOptions;

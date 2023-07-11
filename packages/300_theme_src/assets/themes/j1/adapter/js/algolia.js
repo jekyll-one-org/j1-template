@@ -82,6 +82,7 @@ j1.adapter.algolia = (function (j1, window) {
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment   = '{{environment}}';
   var moduleOptions = {};
+  var state         = 'not_started';
   var _this;
   var logger;
   var logText;

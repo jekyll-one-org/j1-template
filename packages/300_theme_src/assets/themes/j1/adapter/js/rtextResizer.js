@@ -87,7 +87,8 @@ j1.adapter.rtextResizer = (function (j1, window) {
 
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
-  var environment       = '{{environment}}';
+  var environment = '{{environment}}';
+  var state       = 'not_started';
   var _this;
   var logger;
   var logText;

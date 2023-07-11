@@ -82,6 +82,7 @@ j1.adapter.rouge = (function (j1, window) {
   var user_state              = {};
   var cookie_names            = j1.getCookieNames();
   var cookie_user_state_name  = cookie_names.user_state;
+  var state                   = 'not_started';
   var user_state_detected;
   var themeCss;
   var _this;
@@ -209,7 +210,7 @@ j1.adapter.rouge = (function (j1, window) {
     addStyle: function (themename) {
       $('<link>').attr('rel','stylesheet')
       .attr('type','text/css')
-      .attr('href','/assets/themes/j1/modules/rouge/css/' +themename+ '/theme.css')
+      .attr('href','/assets/themes/j1/modules/rouge/css/' +themename+ '/theme.min.css')
       .appendTo('head');
     },
 

@@ -90,6 +90,7 @@ regenerate:                             true
 j1.adapter.carousel = (function (j1, window) {
   var environment   = '{{environment}}';
   var dragging      = false;
+  var state         = 'not_started';
   var carouselDefaults;
   var carouselSettings;
   var carouselOptions;

@@ -98,10 +98,10 @@ j1.adapter.justifiedGalleryCustomizer = (function (j1, window) {
   var environment       = '{{environment}}';
   var galleryOptions    = {};
   var customizerOptions = {};
+  var state             = 'not_started';
   var _this;
   var logger;
   var logText;
-
 
   // ---------------------------------------------------------------------------
   // Main object

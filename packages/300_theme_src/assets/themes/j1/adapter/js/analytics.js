@@ -98,6 +98,7 @@ var cookie_names      = j1.getCookieNames();
 var date              = new Date();
 var timestamp_now     = date.toISOString();
 var skipHost          = false;
+var state             = 'not_started';
 var analyticsDefaults;
 var analyticsSettings;
 var analyticsOptions;

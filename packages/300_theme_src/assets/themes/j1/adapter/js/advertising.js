@@ -101,6 +101,7 @@ var gasDiv                = document.createElement('div');
 var gasIns                = document.createElement('ins');
 var adInitializerScript   = document.createElement('script');
 var advertisingProvider   = 'Google Adsense';
+var state                 = 'not_started';
 var layout;
 var advertisingDefaults;
 var advertisingSettings;

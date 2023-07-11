@@ -91,6 +91,7 @@ j1.adapter.scroller = (function (j1, window) {
 var environment   = '{{environment}}';
 var language      = '{{site.language}}';
 var user_agent    = platform.ua;
+var state         = 'not_started';
 var scrollerDefaults;
 var scrollerSettings;
 var scrollerOptions;

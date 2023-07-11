@@ -83,9 +83,10 @@ regenerate:                             true
 // -----------------------------------------------------------------------------
 'use strict';
 j1.adapter.slick = (function (j1, window) {
-  var environment               = '{{environment}}';
-  var responsiveSettings        = [];
+  var environment                 = '{{environment}}';
+  var responsiveSettings          = [];
   var carouselResponsiveSettings  = [];
+  var state                       = 'not_started';
   var _this;
   var logger;
   var logText;

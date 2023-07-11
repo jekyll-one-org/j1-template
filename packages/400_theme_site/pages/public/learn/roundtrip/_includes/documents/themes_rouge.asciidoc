@@ -1,61 +1,71 @@
-== Code Highlighter Rouge
+== Select a Theme
 
-_Rouge_ is a pure Ruby and themeable syntax highlighter. It can highlight
-100+ different languages and output HTML or ANSI 256-color text. Find all
-available themes and examples for several languages of how
-highlighting works using _Rouge_.
-
-For the default theme `Uno` of J1 Theme, the following _Rouge_ themes
+For the default themes `Uno` of J1 Template, the following _Rouge_ themes
 are used:
 
-* light: `igorpro`
-* dark: `monokai.sublime`
+* theme_light: based on theme `igorpro`
+* theme_dark:  based on theme `monokai.sublime`
 
-NOTE: The default themes used for the J1 Theme can be configured with the
-global template config file `~/_data/j1_config.yml`.
+The *default* themes used for the J1 Template can be configured with
+the global *template config* file `~/_data/j1_config.yml`.
 
+[source, yaml]
+----
+# ------------------------------------------------------------------------------
+# HIGHLIGHTERs
+#
+rouge:
 
-=== Apply a theme
+  theme_light:                          uno.light
+  theme_dark:                           uno.dark
+----
 
-Make a selection of a theme below to preview.
+To preview *all* themes supported by *J1 Template*, make your selection
+from the button *AVAILABLE THEMES* below.
 
 ++++
 <div class="btn-group">
   <!-- See: https://stackoverflow.com/questions/47242702/force-bootstrap-dropdown-menu-to-always-display-at-the-bottom-and-allow-it-go-of -->
   <!-- NOTE: control the behaviour of popper.js for positioning -->
   <!-- NOTE: set attribute data-flip="false" to open the SELECT list at the BOTTOM of the BUTTON -->
-  <button class="btn btn-flex btn-lg btn-warning dropdown-toggle" data-flip="false" type="button" data-bs-toggle="dropdown" data-bs-target="#navbarDropdown" aria-haspopup="true" aria-expanded="false">
-  Select Theme<span class="caret"></span>
+  <button
+    class="btn btn-flex btn-lg btn-info dropdown-toggle mt-2 mb-4"
+    data-flip="false" type="button"
+    data-bs-toggle="dropdown"
+    data-bs-target="#navbarDropdown"
+    aria-haspopup="true"
+    aria-expanded="false">
+    Available Themes <span class="ml-2 caret"></span>
   </button>
+
   <ul class="dropdown-menu scrollable-menu" role="menu">
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>base16</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.dark')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>base16.dark</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.light')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>base16.light</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.monokai')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>base16.monokai</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.monokai.dark')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>base16.monokai.dark</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.monokai.light')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>base16.monokai.light</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.solarized')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>base16.solarized</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.solarized.dark')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>base16.solarized.dark</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.solarized.light')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>base16.solarized.light</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('colorful')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>colorful</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('github')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>github</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('gruvbox')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>gruvbox</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('gruvbox.light')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>gruvbox.light</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('igorpro')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>igorpro</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('molokai')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>molokai</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('monokai')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>monokai</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('monokai.sublime')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>monokai.sublime</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('pastie')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>pastie</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('thankful_eyes')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>thankful_eyes</a></li>
-    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('tulip')"> <i class="mdi mdi-view-quilt mdi-18px mr-2" style="color: #9E9E9E"></i>tulip</a></li>
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16')">                 <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>base16</a></li>
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.dark')">            <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>base16.dark</a></li>
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.light')">           <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>base16.light</a></li>
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.monokai')">         <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>base16.monokai</a></li>
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.monokai.dark')">    <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>base16.monokai.dark</a></li>
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.monokai.light')">   <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>base16.monokai.light</a></li>
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.solarized')">       <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>base16.solarized</a></li>
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.solarized.dark')">  <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>base16.solarized.dark</a></li>
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('base16.solarized.light')"> <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>base16.solarized.light</a></li>
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('colorful')">               <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>colorful</a></li>
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('github')">                 <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>github</a></li>
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('gruvbox')">                <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>gruvbox</a></li>
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('gruvbox.light')">          <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>gruvbox.light</a></li>
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('igorpro')">                <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>igorpro</a></li>
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('molokai')">                <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>molokai</a></li>
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('monokai')">                <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>monokai</a></li>
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('monokai.sublime')">        <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>monokai.sublime</a></li>
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('pastie')">                 <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>pastie</a></li>
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('thankful_eyes')">          <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>thankful_eyes</a></li>
+    <li><a class="dropdown-item" onclick="j1.adapter.rouge.reaplyStyles('tulip')">                  <i class="mdib mdib-view-quilt mdib-18px mr-2" style="color: #9E9E9E"></i>tulip</a></li>
   </ul>
 </div>
 <div id="selected" class="mt-1 mb-3"></div>
 ++++
 
-=== Highlight Liquid code
+=== Liquid code
 
-{% raw %}
 [source, liquid]
 ----
 Hello {{ 'now' | date: "%Y %h" }}
@@ -65,9 +75,8 @@ Hello {{ 'now' | date: "%Y %h" }}
   {{ i }}
 {% endfor %}
 ----
-{% endraw %}
 
-=== Highlight Javascript code
+=== Javascript code
 
 [source, javascript]
 ----
@@ -86,7 +95,7 @@ function styleSheetLoaded(styleSheet) {
 }
 ----
 
-=== Highlight Ruby code
+=== Ruby code
 
 [source, ruby]
 ----

@@ -85,6 +85,7 @@ j1.adapter.lazyLoader = (function (j1, window) {
 var environment     = '{{environment}}';
 var cookie_names    = j1.getCookieNames();
 var user_state      = j1.readCookie(cookie_names.user_state);
+var state           = 'not_started';
 var lazyLoaderDefaults;
 var lazyLoaderSettings;
 var lazyLoaderOptions;

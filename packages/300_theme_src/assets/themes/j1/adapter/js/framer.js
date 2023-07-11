@@ -85,6 +85,7 @@ j1.adapter.framer = (function (j1, window) {
   {% comment %} Set global variables
   ------------------------------------------------------------------------------ {% endcomment %}
   var environment   = '{{environment}}';
+  var state         = 'not_started';
   var framerDefaults;
   var framerSettings;
   var framerOptions;
