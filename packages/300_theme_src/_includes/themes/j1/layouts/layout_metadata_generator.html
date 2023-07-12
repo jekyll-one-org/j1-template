@@ -109,6 +109,14 @@
 
 {% comment %} page.robots.index:  {{ page.robots.index | debug }} {% endcomment %}
 
+{% comment %} Check link settings from page (canonical links)
+<link rel="canonical" href="{{site.baseurl/page.url}}">
+-------------------------------------------------------------------------------- {% endcomment %}
+{% if page.canonical %}
+<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ Specify canonical link (URL) ] -->
+<link rel="canonical" href="{{site.url}}{{site.baseurl}}{{page.url | replace: 'index.html', ''}}">
+{% endif %}
+
 {% comment %} Check robot settings from page (or default SCOPE)
 -------------------------------------------------------------------------------- {% endcomment %}
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ Check robot settings from PAGE configuration ] -->

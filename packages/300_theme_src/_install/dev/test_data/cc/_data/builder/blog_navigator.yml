@@ -154,7 +154,7 @@ archive_view:
                                         Below, find articles available this site sorted from the youngest
                                         to the oldest. On the right, a table of contents list all articles
                                         same order.
-                                        <br/><br/>
+                                        <br><br>
                                         From the navigation line, go back to the <b>Navigator</b> page or
                                         go for the <b>Category Viewer</b> to find articles of a specific
                                         <b>topic</b>. You can search articles for keywords by the <b>Tag View</b>
@@ -169,7 +169,7 @@ category_view:
                                         Below, find articles available this site <b>grouped</b> by
                                         <b>categoy</b>. On the right, a table of contents list all
                                         articles same order.
-                                        <br/><br/>
+                                        <br><br>
                                         From the navigation line, go back to the <b>Navigator</b> page
                                         or go for the <b>Date Viewer</b> to find articles by <b>date</b>.
                                         You can search articles for keywords by the <b>Tag View</b> of
@@ -184,7 +184,7 @@ date_view:
                                         Below, find articles available this site <b>grouped</b> by
                                         <b>month</b>. On the right, a table of contents list all
                                         articles same order.
-                                        <br/><br/>
+                                        <br><br>
                                         From the navigation line, go back to the <b>Navigator</b> page or
                                         go for the <b>Category Viewer</b> to find articles of a specific
                                         <b>topic</b>. You can search articles for keywords by the
@@ -198,7 +198,7 @@ tag_view:
                                         Below, find articles available this site <b>grouped</b> by
                                         <b>tag</b>. On the right, a table of contents list all articles
                                         same order.
-                                        <br/><br/>
+                                        <br><br>
                                         From the navigation line, go back to the <b>Navigator</b> page
                                         or go for the <b>Date Viewer</b> to find articles by <b>date</b>.
                                         You can search articles for categories using the <b>Category Viewer</b>

@@ -57,7 +57,7 @@ settings:
               text: >
                                         The Web is everywhere. J1 Theme supports all Hardware.
                                         for best results on PCs, Tablets and SmartPhones.
-                                        <br/><br/>
+                                        <br><br>
                                         <i>Follow Your Visitors</i>
 
               buttons:
@@ -84,7 +84,7 @@ settings:
                                         Excellent Performance.
                                         Present all Content Pages for Products,
                                         Projects, Services at it's best.
-                                        <br/><br/>
+                                        <br><br>
                                         <i>Make your Web Site unique</i>
               buttons:
                 - name:                 Read More
@@ -109,7 +109,7 @@ settings:
                                         No programming is needed. For J1 Theme,
                                         a large number of building blocks are available
                                         to manage the job.
-                                        <br/><br/>
+                                        <br><br>
                                         <i>Configure what needs to be done</i>
               buttons:
                 - name:                 Read More

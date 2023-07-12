@@ -20,7 +20,8 @@ image:
   height:                               1280
   alt:                                  Photo by Mohammad Rahmani on Unsplash
 
-regenerate:                             true
+canonical:                              true
+regenerate:                             false
 permalink:                              /pages/public/learn/roundtrip/rouge/
 
 resources:                              [ animate, clipboard, rouge ]

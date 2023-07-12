@@ -447,7 +447,7 @@ function handleQueryResult(result, err) {
     mediathekTable.clear();
     mediathekTable.draw();
     if (err) {
-        $('#queryInfoLabel').html('Fehler:<br/>' + err.join('<br/>'));
+        $('#queryInfoLabel').html('Fehler:<br>' + err.join('<br>'));
         $('#pagination').empty();
         return;
     }
