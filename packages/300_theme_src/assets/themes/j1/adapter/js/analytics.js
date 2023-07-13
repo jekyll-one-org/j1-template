@@ -160,7 +160,7 @@ var logText;
             // Global variable settings
             // -----------------------------------------------------------------
             _this = j1.adapter.analytics;
-            logger = log4javascript.getLogger('j1.adapter.analytics.google');
+            logger = log4javascript.getLogger('j1.adapter.analytics');
 
             // initialize state flag
             _this.setState('started');
@@ -222,7 +222,7 @@ var logText;
             {% endcase %}
             // [INFO   ] [j1.adapter.analytics                    ] [ end processing ]
           {% else %}
-            logger = log4javascript.getLogger('j1.adapter.analytics.google');
+            logger = log4javascript.getLogger('j1.adapter.analytics');
             logger.info('\n' + 'Google Analytics: disabled');
           {% endif %}
         }
