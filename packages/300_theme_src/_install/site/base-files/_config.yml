@@ -53,7 +53,7 @@ environment:                            development
 # ------------------------------------------------------------------------------
 # Sets the build version of the site
 #
-version:                                2023.4.3
+version:                                2023.4.4
 
 # copyright
 # ------------------------------------------------------------------------------
@@ -681,6 +681,7 @@ defaults:
         follow:                         true
 
       toc:                              true
+      canonical:                        false
       fab_menu_id:                      open_toc
       comments:                         false
       scrollbar:                        false
@@ -725,9 +726,10 @@ defaults:
         follow:                         true
 
       toc:                              true
+      canonical:                        false
       fab_menu_id:                      open_toc
-      comments:                         false
       scrollbar:                        false
+      comments:                         false
       page_navigation:                  true
       personalization:                  false
       exclude_from_search:              false
@@ -764,6 +766,7 @@ defaults:
         follow:                         true
 
       toc:                              true
+      canonical:                        false
       fab_menu_id:                      open_toc
       comments:                         false
       scrollbar:                        false
@@ -788,6 +791,7 @@ defaults:
 
     values:
       layout:                           page
+      canonical:                        false
 
   # ----------------------------------------------------------------------------
   # Book Shelf
@@ -798,6 +802,7 @@ defaults:
 
     values:
       layout:                           page
+      canonical:                        false
 
   - scope:
       type:                             fantasy
@@ -805,6 +810,7 @@ defaults:
 
     values:
       layout:                           page
+      canonical:                        false
 
   - scope:
       type:                             romance
@@ -812,6 +818,7 @@ defaults:
 
     values:
       layout:                           page
+      canonical:                        false
 
 
 # ==============================================================================

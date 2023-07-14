@@ -41,7 +41,6 @@
 {% endif %}
 
 {% if site.url %}
-  <link rel="canonical" href="{{ seo_tag.canonical_url }}">
   <meta property="og:url" content="{{ seo_tag.canonical_url }}">
 {% endif %}
 
@@ -56,9 +55,6 @@
   {% endif %}
   {% if seo_tag.image.width %}
     <meta property="og:image:width" content="{{ seo_tag.image.width }}">
-  {% endif %}
-  {% if seo_tag.image.alt %}
-    <meta property="og:image:alt" content="{{ seo_tag.image.alt }}">
   {% endif %}
 {% endif %}
 

@@ -109,11 +109,10 @@
 
 {% comment %} page.robots.index:  {{ page.robots.index | debug }} {% endcomment %}
 
-{% comment %} Check link settings from page (canonical links)
-<link rel="canonical" href="{{site.baseurl/page.url}}">
+{% comment %} Set page as original (canonical link)
 -------------------------------------------------------------------------------- {% endcomment %}
 {% if page.canonical %}
-<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ Specify canonical link (URL) ] -->
+<!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ Specify content as original (canonical link) ] -->
 <link rel="canonical" href="{{site.url}}{{site.baseurl}}{{page.url | replace: 'index.html', ''}}">
 {% endif %}
 
