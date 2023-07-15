@@ -4,6 +4,8 @@ tagline:                                Creating Responsive Websites
 date:                                   2020-11-03
 #last_modified:                         2023-01-01
 description: >
+                                        J1 Template is a Bootstrap V5 website template for the static
+                                        site generator Jekyll.
                                         A good user experience browsing a Web site is one of the most important
                                         features a website offers as a must, besides excellent content. Presenting
                                         content at its best on all devices for all window sizes makes a great Web

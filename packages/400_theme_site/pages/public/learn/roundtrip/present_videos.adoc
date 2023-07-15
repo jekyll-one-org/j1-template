@@ -4,6 +4,8 @@ tagline:                                Playing Video
 date:                                   2020-11-04
 #last_modified:                         2023-01-01
 description: >
+                                        J1 Template is a Bootstrap V5 website template for the static
+                                        site generator Jekyll.
                                         The J1 Template support playing video on web pages by HTML5 Video,
                                         the new standard of HTML. HTML5 Video implements a pure HTML way
                                         to show video on the web. Modern browsers support the video tag

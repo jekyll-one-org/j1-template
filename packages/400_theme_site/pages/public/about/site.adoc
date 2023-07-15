@@ -4,7 +4,9 @@ tagline:                                About This Site
 date:                                   2022-01-01
 #last_modified:                         2023-01-01
 description: >
-                                        Things you should know about this site, the people, the software
+                                        J1 Template is a Bootstrap V5 website template for the static
+                                        site generator Jekyll. Things you should know about
+                                        this site, the people, the software
                                         and the services provided by this project.
 keywords: >
                                         Jekyll, Theme, JekyllOne, J1, About, Project, Site

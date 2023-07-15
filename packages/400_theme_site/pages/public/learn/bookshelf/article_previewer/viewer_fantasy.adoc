@@ -3,6 +3,8 @@ title:                                  Fantasy
 tagline:                                Fantasy Literature
 date:                                   2023-01-29
 description: >
+                                        J1 Template is a Bootstrap V5 website template for the static
+                                        site generator Jekyll.
                                         Fantasy Literature in the Book Shelf
 
 categories:                             [ Books ]

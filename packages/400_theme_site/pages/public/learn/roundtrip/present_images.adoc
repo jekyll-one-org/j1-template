@@ -4,6 +4,8 @@ tagline:                                Present Images
 date:                                   2020-11-03
 #last_modified:                         2023-01-01
 description: >
+                                        J1 Template is a Bootstrap V5 website template for the static
+                                        site generator Jekyll.
                                         J1 Template support valuable features to manage your image-based
                                         content using lightboxes, carousels, sliders, and galleries.
                                         The image modules of J1 Template offer a wide range of complex

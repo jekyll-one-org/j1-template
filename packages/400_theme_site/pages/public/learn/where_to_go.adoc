@@ -5,6 +5,8 @@ date:                                   2023-01-01
 #last_modified:                         2023-01-01
 
 description: >
+                                        J1 Template is a Bootstrap V5 website template for the static
+                                        site generator Jekyll.
                                         Welcome to the info pages of J1 Template. A good decision
                                         to get on that page first. Certainly, there is no better
                                         place to learn what J1 Template can do and what pages are

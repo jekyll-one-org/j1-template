@@ -4,6 +4,8 @@ tagline:                                Cheatsheet for daily use
 date:                                   2023-05-19
 #last_modified:                         2023-01-01
 description: >
+                                        J1 Template is a Bootstrap V5 website template for the static
+                                        site generator Jekyll.
                                         The Cheatsheet discuss YAML Markups for daily use.
                                         YAML (short for "YAML Ain't Markup Language") is a human-readable data
                                         serialization format. Its simplicity and readability stand out, making it

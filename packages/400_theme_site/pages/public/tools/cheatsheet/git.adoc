@@ -4,6 +4,8 @@ tagline:                                Sheatsheet for daily use
 date:                                   2023-05-19
 #last_modified:                         2023-01-01
 description: >
+                                        J1 Template is a Bootstrap V5 website template for the static
+                                        site generator Jekyll.
                                         The Cheatsheet discuss Git commands for daily use.
                                         Many Git commands available from the command line.
                                         Git offers rich features for version control, collaboration,

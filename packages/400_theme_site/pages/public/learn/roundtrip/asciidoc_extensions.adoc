@@ -4,6 +4,8 @@ tagline:                                Asciidoctor Enhancements
 date:                                   2020-11-07
 #last_modified:                         2023-01-01
 description: >
+                                        J1 Template is a Bootstrap V5 website template for the static
+                                        site generator Jekyll.
                                         J1 Template implements some handy Ruby-based enhancements for Asciidoctor.
                                         Providing extensions for a Jekyll theme is a unique feature of
                                         JekyllOne (J1) compared to other Jekyll themes and templates.

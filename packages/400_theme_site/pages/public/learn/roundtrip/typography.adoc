@@ -4,7 +4,9 @@ tagline:                                Crucial Branding Element
 date:                                   2020-11-05
 #last_modified:                         2023-01-01
 description: >
-                                        The Jekyll Theme JekyllOne places the character font as
+                                        J1 Template is a Bootstrap V5 website template for the static
+                                        site generator Jekyll.
+                                        J1 Template places the character font as
                                         one of the most crucial branding elements for any website.
                                         Typography matters for any media presenting text. The text
                                         will take on an important role of acting not only as plain

@@ -4,6 +4,8 @@ tagline:                                Viewed Best On All Devices
 date:                                   2020-11-09
 #last_modified:                         2023-01-01
 description: >
+                                        J1 Template is a Bootstrap V5 website template for the static
+                                        site generator Jekyll.
                                         The Jekyll Theme JekyllOne supports a new design for
                                         responsive tables based on Bootstrap. The approach
                                         used by J1 Template is based on pure CSS styles on top

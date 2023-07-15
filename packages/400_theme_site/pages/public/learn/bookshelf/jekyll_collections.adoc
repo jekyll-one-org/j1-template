@@ -5,6 +5,8 @@ title:                                  Jekyll Collections
 tagline:                                What Collections Are
 date:                                   2023-01-03
 description: >
+                                        J1 Template is a Bootstrap V5 website template for the static
+                                        site generator Jekyll.
                                         Jekyll Collections Overview
 categories:                             [ Jekyll, Collection ]
 tags:                                   [ Info, Overview ]

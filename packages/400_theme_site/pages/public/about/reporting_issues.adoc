@@ -4,7 +4,9 @@ tagline:                                Report on Failures
 date:                                   2022-01-01
 #last_modified:                         2023-01-01
 description: >
-                                        Please report failures. Although I endeavor to keep this
+                                        J1 Template is a Bootstrap V5 website template for the static
+                                        site generator Jekyll. Please report failures.
+                                        Although I endeavor to keep this
                                         site as up-to-date as possible, even the best sites will
                                         have some bugs. If you spot any typos, factually
                                         outdated or incorrect information, formatting errors, or

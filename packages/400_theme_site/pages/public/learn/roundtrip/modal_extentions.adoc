@@ -4,6 +4,8 @@ tagline:                                Improve Visitor Experience
 date:                                   2020-11-08
 #last_modified:                         2023-01-01
 description: >
+                                        J1 Template is a Bootstrap V5 website template for the static
+                                        site generator Jekyll.
                                         J1 Template supports a large set of advanced Bootstrap Modals
                                         that add dialogs to your web pages for user notifications.
                                         The advanced Modals highlight important information to your

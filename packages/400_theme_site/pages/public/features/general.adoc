@@ -4,6 +4,8 @@ tagline:                                Platforms, Frameworks, and Devices
 date:                                   2021-01-01
 #last_modified:                         2023-01-01
 description: >
+                                        J1 Template is a Bootstrap V5 website template for the static
+                                        site generator Jekyll.
                                         Current software counts. Excellent tools in their latest versions
                                         make the rocket engine for each and every website. J1 Template
                                         is using current software in their latest versions. All of them

@@ -4,6 +4,8 @@ tagline:                                Lunr For J1
 date:                                   2020-11-08
 #last_modified:                         2023-01-01
 description: >
+                                        J1 Template is a Bootstrap V5 website template for the static
+                                        site generator Jekyll.
                                         The search option for the J1 Template is based on the
                                         search engine Lunr and is fully integrated with the template.
                                         Lunr is designed to be lightweight yet full-featured to provide

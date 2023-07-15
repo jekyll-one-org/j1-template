@@ -4,6 +4,8 @@ tagline:                                Your Personal Data
 date:                                   2023-01-01
 #last_modified:                         2023-01-01
 description: >
+                                        J1 Template is a Bootstrap V5 website template for the static
+                                        site generator Jekyll.
                                         The operators of this website take the protection of your personal data
                                         seriously. We treat your data confidentially and protect your data privacy to
                                         the General Data Protection Regulation (GDPR) of the European Union.

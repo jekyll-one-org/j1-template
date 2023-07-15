@@ -4,11 +4,13 @@ tagline:                                Modules, Extensions and Integrations
 date:                                   2021-01-01
 #last_modified:                         2023-01-01
 description: >
+                                        J1 Template is a Bootstrap V5 website template for the static
+                                        site generator Jekyll.
                                         For Jekyll, a huge number of templates are available that cover
                                         all typical use cases for websites. The bad story: most of them
                                         require programming and low-level customization. Deep knowledge
                                         of Jekyll and valuable experience using HTML, CSS, and Javascript
-                                        is required. JekyllOne Theme is different: easy to use, no programming
+                                        is required. J1 Template is different: easy to use, no programming
                                         is needed.
 keywords: >
                                         Jekyll, JekyllOne, Theme, Software, Modules, Extensions, Integrations
