@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "j1-theme",
-  "version": "2023.4.4",
+  "version": "2023.4.5",
   "description": "Gem-based Template for Jekyll",
   "homepage": "https://jekyll.one",
   "author": {
@@ -59,7 +59,6 @@
     "run": "lerna run --parallel",
     "reset": "run-s -s reset:*",
     "ver": "cross-var echo \"Project version: $npm_package_version\" && echo Package versions: && lerna ls && cd ./packages/500_theme_gem && bump current | shx sed \"s/Current version:/Gem version:    /\"",
-    "__bump-local": "lerna run --parallel remove-links && lerna run --parallel setup-links && run-s -s ver && run-s -s bump-version:* && run-s -s ver",
     "bump-local": "run-s -s ver && run-s -s bump-version:* && run-s -s ver",
     "bump-docker": "shx mv package-lock.json .package-lock.json && run-s -s ver && run-s -s bump-version:* && run-s -s ver && shx mv .package-lock.json package-lock.json",
     "bump-version:project": "cross-var npm version $npm_package_config_bumplevel",
@@ -103,7 +102,6 @@
     "child-script": "cross-env if-env BUNDLE_VENDORIZE=true && echo bundle vendorized || echo bundle global"
   },
   "dependencies": {
-    "@migliori/universal-icon-picker": "^1.1.6",
     "command-line-usage": "^6.1.1",
     "cross-env": "^7.0.3",
     "cross-var": "^1.1.0",

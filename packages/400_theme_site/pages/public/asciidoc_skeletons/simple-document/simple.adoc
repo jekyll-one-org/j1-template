@@ -1,7 +1,8 @@
 ---
 title:                                  Simple Document Skeleton
 tagline:                                Create Typical Articles
-date:                                   2022-01-01 00:00:00
+date:                                   2022-01-01
+#last_modified:                         2023-01-01
 description: >
                                         Simple documents are used quite often. If the number
                                         of chapters is about or less than three and the document
@@ -81,7 +82,7 @@ resource_options:
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The Asciidoc skeleton *simple-document* a helper for setting up a base file
 and folder structure for simple-document AsciiDoc pages based on _Jekyll_ and
-_J1 Theme_. You need *both* to use this skeleton creating AsciiDoc
+_J1 Template_. You need *both* to use this skeleton creating AsciiDoc
 documents from it.
 
 Simple documents are used quite often for documents of a website. If the number

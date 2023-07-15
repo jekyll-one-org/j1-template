@@ -1,7 +1,8 @@
 ---
 title:                                  Asciidoctor PDF Themes
 tagline:                                Theming Guide
-date:                                   2022-01-01 00:00:00
+date:                                   2022-01-01
+#last_modified:                         2023-01-01
 description: >
                                         Asciidoctor PDF is a native PDF converter for AsciiDoc that plugs
                                         into the pdf backend. It bypasses the requirement to generate an

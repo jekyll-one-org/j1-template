@@ -3,7 +3,7 @@ layout:                                 page
 
 title:                                  Jekyll Collections
 tagline:                                What Collections Are
-date:                                   2023-01-03 00:00:00
+date:                                   2023-01-03
 description: >
                                         Jekyll Collections Overview
 categories:                             [ Jekyll, Collection ]

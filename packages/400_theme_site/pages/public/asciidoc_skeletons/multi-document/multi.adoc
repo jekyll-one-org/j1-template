@@ -1,7 +1,8 @@
 ---
 title:                                  Multi Document Skeleton
 tagline:                                Manage High Number Of Chapters
-date:                                   2022-01-01 00:00:00
+date:                                   2022-01-01
+#last_modified:                         2023-01-01
 description: >
                                         Multi-chapter documents are used for more complex articles of a website. If
                                         the number of chapters is or exceeds three for an article, it could make sense
@@ -65,7 +66,7 @@ resource_options:
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 The Asciidoc skeleton *multi-document* a helper for setting up a base file and
 folder structure for multi-chapter AsciiDoc projects based on _Jekyll_
-and _J1 Theme_. You need *both* to use this skeleton creating AsciiDoc
+and _J1 Template_. You need *both* to use this skeleton creating AsciiDoc
 documents from it.
 
 Multi-chapter documents are used for more complex articles of a website. If

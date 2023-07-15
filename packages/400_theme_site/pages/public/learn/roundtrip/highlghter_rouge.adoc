@@ -1,7 +1,8 @@
 ---
 title:                                  Rouge
 tagline:                                Code Highlighter
-date:                                   2023-07-08 00:00:00
+date:                                   2023-07-08
+#last_modified:                         2023-01-01
 description: >
                                         Rouge is a native Ruby themeable syntax highlighter fully
                                         integrated width J1 Template. The highlighter supports 100+
@@ -187,7 +188,7 @@ end
 [role="mt-4"]
 == What next
 
-The search option for the J1 Theme is based on the search engine Lunr and
+The search option for the J1 Template is based on the search engine Lunr and
 is fully integrated with the template. Lunr is designed to be lightweight
 yet full-featured to provide users with a great search experience. Using
 Lunr for a Jekyll website, there is no need to integrate complex external,

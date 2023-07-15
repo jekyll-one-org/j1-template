@@ -1,0 +1,73 @@
+---
+title:                                  Flatify
+tagline:                                Use Liquid Variables in front matter
+date:                                   2023-01-01
+# last_modified:                          site.time | date: '%Y-%m-%d %H:%M:%S %:z' | flatify
+#caption:                                "Introduction to {{ site.title }}"
+#bratze:                                 "{{page.date | date: '%Y-%m-%d %:z'}}"
+description: >
+                                        Welcome to the info pages of J1 Template. A good decision
+                                        to get on that page first. Certainly, there is no better
+                                        place to learn what J1 Template can do and what pages are
+                                        available to experience more.
+keywords: >
+                                        Jekyll, Theme, JekyllOne, Info, Introduction, Rocketstart,
+                                        Roundtrip,
+
+categories:                             [ Info ]
+tags:                                   [ Introduction ]
+
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/brigitta-schneiter.jpg
+  width:                                1920
+  height:                               1280
+
+fab_menu_id:                            default
+regenerate:                             false
+permalink:                              /pages/public/learn/liquify/
+
+resources:                              [ animate, comments ]
+resource_options:
+  - attic:
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/brigitta-schneiter.jpg
+          alt:                          Photo by Brigitta Schneiter on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Brigitta Schneiter
+            href:                       https://unsplash.com/de/@brisch27
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="global" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+[role="dropcap"]
+Welcome to the learning pages of JekyllOne, the J1 Template. A good decision to
+get on that page first. Certainly, there is no better place to start learning
+what the J1 Template can do and what pages are available to experience more.
+
+// Include sub-documents (if any) (if any)
+// -----------------------------------------------------------------------------
+
+++++
+<h1>Timestamp at {{ page.last_modified }}</h1>
+<p>
+{{ site.time | date: '%Y-%m-%d %H:%M:%S %:z' | liquify }}
+</p/
+++++

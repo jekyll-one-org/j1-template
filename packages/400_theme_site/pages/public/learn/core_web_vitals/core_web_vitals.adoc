@@ -1,7 +1,7 @@
 ---
 title:                                  Core Web Vitals
 tagline:                                Improve the user experience
-date:                                   2023-06-07 00:00:00 +100
+date:                                   2023-06-07
 description: >
                                         Optimizing the user experience you offer on your website is essential
                                         for the success of any online business. Google does use different user

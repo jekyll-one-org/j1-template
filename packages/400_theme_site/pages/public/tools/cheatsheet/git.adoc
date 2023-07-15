@@ -1,7 +1,8 @@
 ---
 title:                                  Git
 tagline:                                Sheatsheet for daily use
-date:                                   2023-05-19 00:00:00 +100
+date:                                   2023-05-19
+#last_modified:                         2023-01-01
 description: >
                                         The Cheatsheet discuss Git commands for daily use.
                                         Many Git commands available from the command line.
