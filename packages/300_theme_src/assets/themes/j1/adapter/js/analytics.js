@@ -165,7 +165,7 @@ var logText;
             // initialize state flag
             _this.setState('started');
             logger.debug('\n' + 'state: ' + _this.getState());
-            logger.info('\n' + 'module is being initialized');
+            logger.info('\n' + 'module initializing: started');
 
             // remove cookies on invalid GA config or left from a previous
             // session/page view if they exists
@@ -216,7 +216,10 @@ var logText;
               GTagOptIn.register(providerID);
               GTagOptIn.optOut();
             }
-
+            _this.setState('finished');
+            logger.debug('\n' + 'state: ' + _this.getState());
+            logger.info('\n' + 'module initializing: finished');
+            clearInterval(dependencies_met_page_ready);
             {% when "custom" %}
             // [INFO   ] [j1.adapter.analytics                    ] [ place provider: Custom Provider ]
             {% endcase %}
@@ -224,9 +227,9 @@ var logText;
           {% else %}
             logger = log4javascript.getLogger('j1.adapter.analytics');
             logger.info('\n' + 'Google Analytics: disabled');
+            clearInterval(dependencies_met_page_ready);
           {% endif %}
         }
-        clearInterval(dependencies_met_page_ready);
       }, 10);
 
       return;
