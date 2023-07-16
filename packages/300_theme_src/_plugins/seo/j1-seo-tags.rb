@@ -382,7 +382,6 @@ module Jekyll
 
       def date_modified
         @date_modified ||= begin
-#         date = page_seo["date_modified"] || page["last_modified_at"].to_liquid || page["last_modified"].to_liquid || page["date"]
           time_now      = Time.new
           current_time  = time_now.strftime("%Y-%m-%d %H:%M:%S")
           date          = current_time.to_liquid || page["last_modified"].to_liquid
