@@ -216,7 +216,7 @@ doctype:                                html
 # ------------------------------------------------------------------------------
 #
 title:                                  J1 Starter
-title_extention:                        J1 Template, the free Open Source Template for Jekyll and Bootstrap
+title_extention:                        Free Template for Jekyll and Bootstrap
 
 description: >
                                         J1 Template gives web developers and hobbyists a clean
@@ -226,7 +226,7 @@ description: >
                                         free to use, and the modules packed as well.
 keywords: >
                                         open source, free, template, jekyll, jekyllone, web,
-                                        sites, static, jamstack
+                                        sites, static, jamstack, bootstap
 
 # Crawling/Indexing ENABLED for default. Settings managed page-wise using
 # frontmatter defaults or by page default settings to make sure that only
