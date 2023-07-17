@@ -55,6 +55,13 @@
     {% assign ext_js  = 'js' %}
 {% endcase %}
 
+{% if site.keywords %}
+  {% assign keywords = site.keywords  %}
+{% elsif page.keywords %}
+  {% assign keywords = page.keywords %}
+{% endif %}
+
+
 {% comment %} Main
 -------------------------------------------------------------------------------- {% endcomment %}
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ start meta-data processing: place meta tags (taken from site config|page frontmatter) ] -->
@@ -69,7 +76,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ added keyords for backwards compatability ] -->
-<meta name="keywords" content="{{site.keywords}}">
+<meta name="keywords" content="{{keywords}}">
 
 {% if template_config.translation.enabled %}
 <!-- [INFO   ] [j1.layout.meta_data_generator.html    ] [ add google translator meta tag to enable customized translations ] -->

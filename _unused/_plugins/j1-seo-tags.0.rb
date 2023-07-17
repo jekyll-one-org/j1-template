@@ -275,7 +275,7 @@ module Jekyll
     class Drop < Jekyll::Drops::Drop
       include Jekyll::SeoTag::UrlHelper
 
-      TITLE_SEPARATOR = " - "
+      TITLE_SEPARATOR = " | "
       FORMAT_STRING_METHODS = [
         :markdownify, :strip_html, :normalize_whitespace, :escape_once,
       ].freeze
@@ -304,40 +304,40 @@ module Jekyll
       end
 
       def site_title
-        @site_title ||= format_string site["title"]
-      end
-
-      # Page title without site title or description appended
-      def page_title
-        @page_title ||= format_string page["title"]                            # || site_title
+        @site_title ||= format_string(site["title"] || site["name"])
       end
 
       def site_title_extention
-        @site_title_extention ||= format_string site["title_extention"]
-      end
-
-      def page_title_extention
-        @site_title_extention ||= format_string page["title_extention"]
+        @site_title_extention ||= format_string site["tagline"]
       end
 
       def site_description
         @site_description ||= format_string site["description"]
       end
 
-      def title_extention_or_description
-        page_title_extention || site_title_extention || site_description
+      # Page title without site title or description appended
+      def page_title
+        @page_title ||= format_string(page["title"]) || site_title
+      end
+
+      def site_title_extention_or_description
+        site_title_extention || site_description
       end
 
       # Page title with site title or description appended
       # rubocop:disable Metrics/CyclomaticComplexity
       def title
         @title ||= begin
-          if page_title != site_title
-            page_title + TITLE_SEPARATOR + title_extention_or_description
+          if site_title && page_title != site_title
+            page_title + TITLE_SEPARATOR + site_title
+          elsif site_description && site_title
+            site_title + TITLE_SEPARATOR + site_title_extention_or_description
           else
-            site_title + TITLE_SEPARATOR + title_extention_or_description
+            page_title || site_title
           end
         end
+
+        return page_number + @title if page_number
 
         @title
       end

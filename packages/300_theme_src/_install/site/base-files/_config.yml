@@ -53,7 +53,7 @@ environment:                            development
 # ------------------------------------------------------------------------------
 # Sets the build version of the site
 #
-version:                                2023.5.1
+version:                                2023.5.2
 
 # copyright
 # ------------------------------------------------------------------------------
@@ -216,17 +216,18 @@ doctype:                                html
 #   default:                            false
 # ------------------------------------------------------------------------------
 #
-title:                                  Starter
-tagline:                                The Build-In Theme
+title:                                  J1 Starter
+title_extention:                        J1 Template, the free Open Source Template for Jekyll and Bootstrap
+
 description: >
-                                        Jekyll One Starter Theme. This template gives web developers
-                                        and hobbyists a clean implementation in Jekyll for starting
-                                        new projects and combines the best of open source software
-                                        for the Web. Jekyll One is open source and the modules packed
-                                        as well. No pain for private or professional purposes.
+                                        J1 Template gives web developers and hobbyists a clean
+                                        implementation in Jekyll for starting new projects
+                                        based on Bootstap V5. The template combines the best
+                                        software for the Web. Jekyll One is open source,
+                                        free to use, and the modules packed as well.
 keywords: >
-                                        opensource, free, j1, template, jekyll, jekyllone, web, sites,
-                                        static, jamstack
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack
 
 # Crawling/Indexing ENABLED for default. Settings managed page-wise using
 # frontmatter defaults or by page default settings to make sure that only
