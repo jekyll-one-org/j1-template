@@ -1,19 +1,20 @@
 ---
 title:                                  Tables
+title_extention:                        Responsive tables for J1 Template based on Bootstrap
 tagline:                                Viewed Best On All Devices
+
 date:                                   2020-11-09
 #last_modified:                         2023-01-01
 description: >
-                                        J1 Template is a Bootstrap V5 website template for the static
-                                        site generator Jekyll.
-                                        The Jekyll Theme JekyllOne supports a new design for
-                                        responsive tables based on Bootstrap. The approach
-                                        used by J1 Template is based on pure CSS styles on top
-                                        of the classic Bootstrap tags for simplicity and
-                                        portability to be viewed best on all devices and browsers.
+                                        J1 Templatesupports a new design for responsive tables
+                                        based on Bootstrap. The approach used by J1 Template is
+                                        using pure CSS styles on top of the classic Bootstrap
+                                        styles for simplicity and portability to be viewed best
+                                        on all devices and browsers.
 keywords: >
-                                        Jekyll, Theme, JekyllOne, Bootstrap, Tables, Responsive,
-                                        Roundtrip
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        tables, responsive, css styles
 
 categories:                             [ Roundtrip ]
 tags:                                   [ Bootstrap, Tables, Extension ]

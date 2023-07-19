@@ -1,20 +1,21 @@
 ---
 title:                                  Modals
+title_extention:                        Advanced Bootstrap Modal extension for J1 Template
 tagline:                                Improve Visitor Experience
+
 date:                                   2020-11-08
 #last_modified:                         2023-01-01
+
 description: >
-                                        J1 Template is a Bootstrap V5 website template for the static
-                                        site generator Jekyll.
                                         J1 Template supports a large set of advanced Bootstrap Modals
                                         that add dialogs to your web pages for user notifications.
                                         The advanced Modals highlight important information to your
                                         visitors. Modals are positioned over everything else in the
                                         document so that messages get the full user's attention.
-
 keywords: >
-                                        Jekyll, Theme, JekyllOne, Bootstrap, Modals, Advanced, Extension,
-                                        Roundtrip
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        modals, advanced, extension
 
 categories:                             [ Roundtrip ]
 tags:                                   [ Bootstrap, Modal, Extension ]
@@ -27,7 +28,7 @@ image:
 regenerate:                             false
 permalink:                              /pages/public/learn/roundtrip/modals/
 
-resources:                              [ animate ]
+resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
   - attic:
       slides:

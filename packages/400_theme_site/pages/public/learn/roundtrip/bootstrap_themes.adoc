@@ -1,18 +1,21 @@
 ---
 title:                                  Themes
+title_extention:                        Free Bootstrap themes for J1 Template
 tagline:                                Bootstrap Styles
+
 date:                                   2020-11-10
 #last_modified:                         2023-01-01
+
 description: >
-                                        J1 Template is a Bootstrap V5 website template for the static
-                                        site generator Jekyll.
                                         J1 Template offers various unique functionalities compared to other Jekyll
                                         themes and templates. Bootstrap themes for the J1 Template are based on the
                                         free and open-source CSS front-end framework Bootstrap of version V5. The
                                         Bootstrap themes for the J1 enable the presentation of different versions
                                         (skins) of the same site using already prepared Bootstrap CSS templates.
 keywords: >
-                                        Jekyll, Theme, JekyllOne, CSS, Bootstrap, Style, Skin, Roundtrip
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        css, style, theme, skin
 
 categories:                             [ Roundtrip ]
 tags:                                   [ Bootstrap, Module, Theme ]

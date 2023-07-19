@@ -1,11 +1,12 @@
 ---
 title:                                  Search
+title_extention:                        Integrated site search based on Lunr for J1 Template
 tagline:                                Lunr For J1
+
 date:                                   2020-11-08
 #last_modified:                         2023-01-01
+
 description: >
-                                        J1 Template is a Bootstrap V5 website template for the static
-                                        site generator Jekyll.
                                         The search option for the J1 Template is based on the
                                         search engine Lunr and is fully integrated with the template.
                                         Lunr is designed to be lightweight yet full-featured to provide
@@ -14,11 +15,13 @@ description: >
                                         server-sided search engines like Google or Bing.
 
 keywords: >
-                                        Jekyll, Theme, JekyllOne, Lunr, QuickSearch, Find,
-                                        Search, Google, Bing, Roundtrip
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        lunr, site search, quick search, find,
+                                        google, bing
 
 categories:                             [ Roundtrip ]
-tags:                                   [ Module, Quicksearch ]
+tags:                                   [ Module, Site search ]
 
 image:
   path:                                 /assets/images/modules/attics/lunr-1280x800.jpg
@@ -30,8 +33,6 @@ permalink:                              /pages/public/learn/roundtrip/quicksearc
 
 resources:                              [ animate, clipboard, lightbox, rouge ]
 resource_options:
-  - toccer:
-      collapseDepth:                    3
   - attic:
       slides:
         - url:                          /assets/images/modules/attics/lunr-1280x800.jpg

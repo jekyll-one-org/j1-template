@@ -1,19 +1,22 @@
 ---
 title:                                  Typography
+title_extention:                        Crucial branding element for J1 Template
 tagline:                                Crucial Branding Element
+
 date:                                   2020-11-05
 #last_modified:                         2023-01-01
+
 description: >
-                                        J1 Template is a Bootstrap V5 website template for the static
-                                        site generator Jekyll.
                                         J1 Template places the character font as
                                         one of the most crucial branding elements for any website.
                                         Typography matters for any media presenting text. The text
                                         will take on an important role of acting not only as plain
                                         text but also as something like images.
 keywords: >
-                                        Jekyll, Theme, JekyllOne, Brand, Typography, Font,
-                                        Roundtrip
+keywords: >
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        brand, typography, font
 
 categories:                             [ Roundtrip ]
 tags:                                   [ Module, Typography ]

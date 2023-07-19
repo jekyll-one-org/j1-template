@@ -1,18 +1,21 @@
 ---
 title:                                  Rouge
+title_extention:                        Ruby themeable syntax highlighter for J1 Template
 tagline:                                Code Highlighter
+
 date:                                   2023-07-08
 #last_modified:                         2023-01-01
 description: >
-                                        J1 Template is a Bootstrap V5 website template for the static
-                                        site generator Jekyll.
+
                                         Rouge is a native Ruby themeable syntax highlighter fully
-                                        integrated width J1 Template. The highlighter supports 100+
+                                        integrated with J1 Template. The highlighter supports 100+
                                         different languages and generates HTML output using standard
                                         ANSI 256-colors displayed by all current browsers.
 
 keywords: >
-                                        Jekyll, Theme, JekyllOne, Highlighter, Rouge, Roundtrip
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        highlighter, rouge
 
 categories:                             [ Roundtrip ]
 tags:                                   [ Module, Rouge ]

@@ -1,5 +1,6 @@
 ---
 title:                                  Where to go
+title_extention:                        Info pages for J1 Template
 tagline:                                Fasten Your Way
 
 date:                                   2023-01-01
@@ -11,8 +12,8 @@ description: >
                                         place to learn what J1 Template can do and what pages are
                                         available to experience more.
 keywords: >
-                                        Jekyll, Theme, JekyllOne, Info, Introduction, Rocketstart,
-                                        Roundtrip,
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap
 
 categories:                             [ Info ]
 tags:                                   [ Introduction ]

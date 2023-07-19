@@ -1,11 +1,12 @@
 ---
 title:                                  Image
+title_extention:                        Lightboxes, Carousels, Sliders, and Galleries for J1 Template
 tagline:                                Present Images
+
 date:                                   2020-11-03
 #last_modified:                         2023-01-01
+
 description: >
-                                        J1 Template is a Bootstrap V5 website template for the static
-                                        site generator Jekyll.
                                         J1 Template support valuable features to manage your image-based
                                         content using lightboxes, carousels, sliders, and galleries.
                                         The image modules of J1 Template offer a wide range of complex
@@ -13,9 +14,10 @@ description: >
                                         Lightbox2, Master Slider, LightGallery, or JustifiedGallery
                                         for high-end, masonry-styled preview maps.
 keywords: >
-                                        Jekyll, Theme, JekyllOne, Images, Lightboxes, Carousels, Sliders,
-                                        Galleries, Lightbox2, Master Slider, LightGallery, JustifiedGallery,
-                                        Roundtrip
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        image, lightbox, carousel, slider, gallery,
+                                        lightbox2, master slider, lightgallery, justifiedgallery
 
 categories:                             [ Roundtrip ]
 tags:                                   [ Module, Carousel, Lightbox, Image, Slider, Slick ]

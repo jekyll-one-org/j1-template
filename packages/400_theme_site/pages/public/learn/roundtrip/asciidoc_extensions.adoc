@@ -1,18 +1,21 @@
 ---
 title:                                  Extensions
+title_extention:                        Ruby-based enhancements for Asciidoctor and J1 Template
 tagline:                                Asciidoctor Enhancements
+
 date:                                   2020-11-07
 #last_modified:                         2023-01-01
+
 description: >
-                                        J1 Template is a Bootstrap V5 website template for the static
-                                        site generator Jekyll.
                                         J1 Template implements some handy Ruby-based enhancements for Asciidoctor.
                                         Providing extensions for a Jekyll theme is a unique feature of
-                                        JekyllOne (J1) compared to other Jekyll themes and templates.
+                                        JekyllOne compared to other Jekyll themes and templates.
                                         Most extensions are based on well-documented examples from the
                                         Asciidoctor Extensions Lab.
 keywords: >
-                                        Jekyll, Theme, JekyllOne, Asciidoc, Asciidoctor, Ruby, Extensions, Roundtrip
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        asciidoc, asciidoctor, ruby, extensions
 
 categories:                             [ Roundtrip ]
 tags:                                   [ Asciidoc, Extension ]

@@ -1,11 +1,12 @@
 ---
 title:                                  Icon Fonts
+title_extention:                        J1 Template supports MDI, FontAwesome and Iconify icons
 tagline:                                Popular Icons Sets
+
 date:                                   2020-11-06
 #last_modified:                         2023-01-01
+
 description: >
-                                        J1 Template is a Bootstrap V5 website template for the static
-                                        site generator Jekyll.
                                         J1 Template supports popular icons font sets out-of-the-box.
                                         The icon sets MDI and FA are very good in design and have
                                         a rich set of different icons for many categories used for
@@ -13,8 +14,9 @@ description: >
                                         like MDI or FA. All Iconify icons are loaded over the Internet
                                         using the so-called Unified OpenSource Icon Framework.
 keywords: >
-                                        Jekyll, Theme, JekyllOne, Icon, Fonts, MDI, Fontawesome,
-                                        Iconify, Roundtrip
+                                        open source, free, template, jekyll, jekyllone, web,
+                                        sites, static, jamstack, bootstrap,
+                                        icon, fonts, mdi, fontawesome, iconify
 
 categories:                             [ Roundtrip ]
 tags:                                   [ Module, Icon ]
