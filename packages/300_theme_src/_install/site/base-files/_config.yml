@@ -681,10 +681,10 @@ defaults:
   #
 
   # ----------------------------------------------------------------------------
-  # PUBLIC - FEATURED
+  # PUBLIC
   #
   - scope:
-      path:                             posts/public/featured
+      path:                             posts/public
       type:                             posts
 
     values:
@@ -715,44 +715,6 @@ defaults:
       personalization:                  false
       exclude_from_search:              false
       series:                           false
-
-      resource_options:
-        - toccer:
-            collapseDepth:              3
-
-  # ----------------------------------------------------------------------------
-  # PUBLIC - SERIES
-  #
-  - scope:
-      type:                             posts
-      path:                             posts/public/series
-
-    values:
-      layout:                           post
-      compress:                         true
-
-      author:
-        name:                           Juergen Adams
-        url:                            https://jekyll.one/
-
-      logo:                             /assets/images/icons/j1/j1-512x512.png
-      image:
-        path:                           /assets/images/promo/home/screenshot.jpg
-        width:                          1200
-        height:                         800
-
-      robots:
-        index:                          true
-        follow:                         true
-
-      toc:                              true
-      canonical:                        false
-      fab_menu_id:                      open_toc
-      comments:                         false
-      scrollbar:                        false
-      page_navigation:                  true
-      personalization:                  false
-      exclude_from_search:              false
 
       resource_options:
         - toccer:
