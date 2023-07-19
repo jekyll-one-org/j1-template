@@ -229,7 +229,7 @@ collections:
 
 This tells Jekyll to look in the `cupcakes` and `cookies` folders
 for documents, and to read them into the appropriate collection, including
-http://jekyllrb.com/docs/front matter/[YAML front matter, {browser-window--new}],
+http://jekyllrb.com/docs/frontmatter/[YAML front matter, {browser-window--new}],
 just as it would posts (but again, without the date, because collection
 documents aren't date specific).
 
