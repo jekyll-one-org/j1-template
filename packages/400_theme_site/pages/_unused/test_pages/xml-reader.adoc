@@ -1,0 +1,97 @@
+---
+title:                                  XML Tester
+tagline:                                XML Fetch Tester
+date:                                   2022-12-11 00:00:00 +100
+description: >
+                                        Welcome to the pages of J1 Theme. If your here
+                                        first time, a good decision you get on that page first.
+                                        For sure, there is no better place to go.
+keywords: >
+                                        Jekyll, Theme, step, find, project, roundtrip, trip,
+
+categories:                             [ Info ]
+tags:                                   [ Places, Introduction ]
+
+image:
+  path:                                 /assets/images/modules/attics/1920x1280/j1-starter-mockup-1.jpg
+  width:                                1920
+  height:                               1280
+  alt:                                  Photo by Alexander Redl on Unsplash
+
+fab_menu_id:                            default
+
+permalink:                              /pages/public/learn/xml_fetch_tester/
+regenerate:                             false
+
+resources:                              [ animate, clipboard ]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/modules/attics/1920x1280/j1-starter-mockup-1.jpg
+          alt:                          Photo by Alexander Redl on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Alexander Redl
+            href:                       https://unsplash.com/@alexanderredl
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="none" %}
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+[role="dropcap"]
+JS fetch() ist die einfachste Methode, um eine XML-Datei vom Server zu
+lesen, denn dafür muss nur der Pfad zur XML-Datei bekannt sein. Die Anfrage
+wird automatisch im Hintergrund ausgeführt und alle Aktionen, die bei beim
+Eintreffen der Antwort anfallen, werden mit einem schlichten then nacheinander
+aufgereiht: Hol das XML und dann mach was damit.
+
+++++
+<script>
+  var dependencies_met_page_ready = setInterval (function (options) {
+    var xmlURL              = '/sitemap.xml';
+    var urlArray            = [];
+    var pageState           = $('#no_flicker').css("display");
+    var pageVisible         = (pageState == 'block') ? true : false;
+    var urls;
+
+    if (j1.getState() === 'finished' && pageVisible) {
+
+      $.ajax({
+          type: "GET",
+          url: xmlURL,
+          cache: false,
+          dataType: "xml",
+          success: function(xml) {
+            $(xml).find('loc').each(function() {
+              var docURL = $(this).text();
+              console.log(docURL);
+            });
+          }
+      });
+
+      clearInterval(dependencies_met_page_ready);
+    }
+  }, 10);
+
+</script>
+++++
