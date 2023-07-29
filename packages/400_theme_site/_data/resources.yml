@@ -410,7 +410,7 @@ resources:
       comment:                          Module BMD
       region:                           head
       layout:                           [ all ]
-      required:                         always
+      required:                         ondemand
       preload:                          false
       script_load:
       dependencies:                     false
@@ -1720,6 +1720,29 @@ resources:
         css:                            [ modules/slimSelect/css/select ]
         files:                          []
         js:                             [ modules/slimSelect/js/select ]
+        init_function:                  []
+
+  # ----------------------------------------------------------------------------
+  # slimSelect
+  # Advanced select dropdown
+  #
+  - name:                               speak2me
+    resource:
+      enabled:                          true
+
+      id:                               speak2me
+      comment:                          Module speak2me
+      region:                           head
+      layout:                           [ all ]
+      required:                         ondemand
+      preload:                          false
+      script_load:                      defer
+      dependencies:                     false
+      pass_init_data:                   false
+      data:
+        css:                            []
+        files:                          []
+        js:                             [ modules/speak2me/js/speak2me ]
         init_function:                  []
 
 # ------------------------------------------------------------------------------

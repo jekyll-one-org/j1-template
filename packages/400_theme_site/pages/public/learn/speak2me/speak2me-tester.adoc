@@ -1,0 +1,285 @@
+---
+title:                                  Speak2Me Tester
+title_extention:                        jQuery plugin for Speech Synthesise
+tagline:                                Speech synthesise
+
+date:                                   2023-07-26
+#last_modified:                         2023-01-01
+
+description: >
+                                        jQuery plugin, enables developers, with as little as one line
+                                        of code, to create links that allow users to click, sit back,
+                                        and listen to the browser read aloud the important content on
+                                        a Web page.
+
+regenerate:                             true
+permalink:                              /pages/public/learn/s2m_tester/
+
+resources:                              [ animate, clipboard, lightbox, rouge, speak2me]
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
+          alt:                          Photo by Ricardo Gomez Angel on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Ricardo Gomez Angel
+            href:                       https://unsplash.com/@ripato/portfolio
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="none" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// https://github.com/mdn/dom-examples/tree/main/web-speech-api
+// https://mdn.github.io/dom-examples/web-speech-api/speak-easy-synthesis/
+// https://stackoverflow.com/questions/11279291/a-good-text-to-speech-javascript-library
+// https://github.com/acoti/articulate.js
+// https://codepen.io/meetselva/pen/EVaLmP
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+// == Tester
+
+++++
+
+<div class="articulate-area mt-5 mb-5">
+
+  <div class="mt-2 mb-3">
+    <div>
+      <label class="form-label" for="rate">Rate</label>
+      <input id="rate" class="form-range"
+        type="range"
+        min="0.1"
+        max="3"
+        step="0.1"
+        name="rate"
+        value="1.0"
+        oninput="update(this, value)"
+        onchange="update(this, value)"
+      />
+      <span class="val">1.0</span>
+    </div>
+
+    <div>
+      <label for="pitch" class="form-label">Pitch</label>
+      <input id="pitch" type="range" class="form-range" min="0.1" max="2" step="0.1" name="pitch" value="1" oninput="update(this,value)">
+      <span class="val">1.0</span>
+    </div>
+
+    <div>
+      <label for="volume" class="form-label">Volume</label>
+      <input id="volume" type="range" class="form-range" min="0" max="1" step="0.1" name="volume" value="1" oninput="update(this,value)">
+      <span class="val">1.0</span>
+    </div>
+  </div>
+
+	<div id="voiceSelect"></div>
+  <button onclick="create('#voiceSelect')">Create Menu</button>
+  <button onclick="speak('article')">Speak</button>
+  <!-- button onclick="speak('#w3review')">Speak</button -->
+  <button onclick="pause()">Pause</button>
+  <button onclick="resume()">Resume</button>
+  <button onclick="stop()">Stop</button><br>
+  <button onclick="populate()">Populate Table of Voices Below Speech</button>
+</div>
+
+<!-- label for="w3review">Review of W3Schools:</label>
+<textarea id="w3review" name="w3review" rows="14" cols="80">
+  Four score and seven years ago our fathers brought forth on this
+  continent, a new nation, conceived in Liberty, and dedicated to the
+  proposition that all men are created equal.
+
+  Now we are engaged in a great civil war, testing whether that nation,
+  or any nation so conceived and so dedicated, can long endure. We are met
+  on a great battle-field of that war. We have come to dedicate a portion
+  of that field, as a final resting place for those who here gave their
+  lives that that nation might live. It is altogether fitting and proper
+  that we should do this.
+</textarea -->
+
+<article class="mt-4 mb-4">
+  <div class="speech">
+    <p>
+      Seine ungleichen Augen, eines so grün wie die smaragdgrünen Tiefen des
+      Flüsternden Waldes, das andere ein schimmernder blasser Amethyst,
+      starrten in die grenzenlose Weite des schmalen Meeres. Als das Schiff
+      durch die schäumenden Wellen schnitt, peitschte der Wind mit dem salzigen
+      Geruch des Ozeans ihm ins Gesicht und ließ rabenschwarze Haarsträhnen
+      spiralförmig über seine Stirn fliegen.
+      <br>
+      Es war ein böiger Sturm, ähnlich dem wirbelnden Aufruhr, der sein Leben
+      heimgesucht hatte, seit er gezwungen war, von der Küste von Westeros
+      zu fliehen. Das purpurrote Licht der untergehenden Sonne warf einen
+      ätherischen Glanz auf Tyrions Gesicht und betonte die Schatten, die
+      auf seinem Gesicht tanzten, und spiegelte die Dunkelheit wider, die
+      seine Seele viel zu lange beschattet hatte..
+      <br>
+      Tyrion drehte sich zu dem Ritter um und sein Blick traf auf Ser Jorahs
+      durchdringende Augen, sturmgrau und verwittert von einem Leben am Rande
+      der Gefahr.
+      <br>
+      „Ah, Ser Jorah“, antwortete er, in seiner Stimme klang sowohl Resignation als auch Entschlossenheit mit. „Was beunruhigt mich? Natürlich der endlose Tanz zwischen Schicksal und Vermögen. Es scheint, als hätten die Götter mich als Schachfigur in ihrem immer verdrehten Spiel betrachtet. Aber fürchte dich nicht, mein treuer Ritter, denn so leicht werde ich nicht sein von den Fluten des Schicksals hinweggeschwemmt.
+      Das Schiff, dessen Segel von der Kraft des Windes gebläht wurden, setzte seine unerbittliche Reise über die Meerenge fort und trug dabei die Last von Tyrions Vergangenheit und das Versprechen einer ungewissen Zukunft mit sich. Während das schwindende Licht die Welt in feurige Bernstein- und gebrannte Siena-Töne tauchte, blieb Tyrion Lannister, der Kobold, der allen Erwartungen getrotzt hatte, standhaft am Bug, seine Entschlossenheit unnachgiebig, bereit, sich allen tückischen Gewässern zu stellen, die vor ihm lagen.
+      Schuldgefühle, ein unnachgiebiges Gespenst, wickelten sich um Tyrions Herz und verengten sich mit jedem Schlag, als wollten sie ihn für die unverzeihliche Tat bestrafen, die er begangen hatte. Die Erinnerung an diese schicksalhafte Nacht brannte sich in sein Bewusstsein, ein lebendiges Bild, das sich unerbittlich hinter seinen müden Augen abspielte.
+      Der Bolzen der Armbrust, dessen Eisenspitze vor tödlicher Absicht glänzte, hatte mit erschreckender Präzision sein Ziel gefunden und den Kern von Tyrions Existenz durchbohrt. Sein Vater, der mächtige Tywin Lannister, war gefallen und sein Lebenselixier sickerte in den kalten Steinboden des Turms der Hand. Es war ein Moment, der Tyrions Seele für immer befleckte, eine Dunkelheit, der er nie wirklich entkommen konnte.
+      In den Tiefen seines aufgewühlten Geistes flüsterten die Echos von Tywins sterbendem Atem ihren anklagenden Refrain. Die Last dieses letzten Ausatmens, beladen mit Enttäuschung, Verachtung und einem Leben voller unerfüllter Erwartungen, lastete wie ein Amboss auf Tyrions Gewissen. Es war eine Last, die sich seinen Versuchen, sie abzuwerfen, widersetzte, eine Erinnerung an die unumkehrbaren Konsequenzen seines Handelns.
+      Während Schuldgefühle an seinem Geist nagten, sah Tyrion die zerstörten Überreste des Reiches, das er zurückgelassen hatte. Die Sieben Königreiche, einst ein Teppich aus Macht und Einfluss, liegen nun zersplittert und zerbrochen da, ihre Ländereien sind vom unerbittlichen Vormarsch des Krieges und dem Hunger nach Vorherrschaft verunstaltet.
+    </p>
+  </div>
+</article>
+
+<div class="voice-table">
+  <h2>Names and Languages Available</h2>
+  <h3>Use these exact names when setting a voice manually.</h3>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Language</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>
+
+++++
+
+++++
+<script>
+
+  function create(obj) {
+    $().speak2me('getVoices', obj, 'Choose a New Voice');
+  }
+
+  function speak(obj) {
+
+    // Get the parameter values from the input sliders
+    //
+    var r = parseFloat(document.getElementById('rate').value);
+    var p = parseFloat(document.getElementById('pitch').value);
+    var v = parseFloat(document.getElementById('volume').value);
+
+    // Note: Function calls can be perfromed individually or
+    // chained together as demonstrated below
+    //
+    $(obj).speak2me('rate',r).speak2me('pitch',p).speak2me('volume',v);
+    $(obj).speak2me('speak');
+  }
+
+  function pause() {
+    $().speak2me('pause');
+  }
+
+  function resume() {
+    $().speak2me('resume');
+  }
+
+  function stop() {
+    $().speak2me('stop');
+  }
+
+  function populate() {
+    $('div.voice-table').show();
+      var voices = $().speak2me('getVoices');
+      for (var i = 0; i < voices.length; i++) {
+        voiceName = voices[i].name;
+        voiceLang = voices[i].language;
+        row = "<tr><td>" + voiceName + "</td>";
+        row += "<td>" + voiceLang + "</td></tr>";
+        $('table tbody').append(row);
+      }
+    }
+
+  // update the value to the right of the input sliders
+  //
+  function update(obj,value) {
+    var n = parseFloat(value).toFixed(1)
+    $(obj).parent().find('span').text(n);
+  }
+
+</script>
+++++
+
+++++
+<style>
+
+button {
+  margin: 8px 5px 5px 0;
+}
+
+div.speech img {
+  float: left;
+  width: 20%;
+  margin: 5px 10px 5px 0;
+}
+
+div.articulate-area {
+    font-family: monospace;
+    font-size: 14px;
+    padding: 0 0 15px 0;
+    margin: 0 0 20px 0;
+/*  text-align: center; */
+/*  border-bottom: 1px dotted #666; */
+}
+
+div.articulate-area div {
+  margin: 0 0 10px 0;
+}
+
+div.articulate-area input {
+  width: 250px;
+}
+
+div.voice-table {
+  display: none;
+}
+
+table {
+  margin: 30px auto 0 auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+table th {
+  text-align: left;
+  padding: 7px;
+}
+
+table td {
+  padding: 7px 7px 7px 5px;
+}
+
+table td:first-child {
+  padding-right: 40px;
+}
+
+table td:last-child {
+  text-align: center;
+}
+
+table tr:nth-child(odd) td {
+  background-color: #ddd;
+}
+
+</style>
+++++

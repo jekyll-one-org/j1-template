@@ -1,0 +1,212 @@
+---
+title:                                  TTS Tester
+tagline:                                Speech synthesise
+date:                                   2021-10-18 00:00:00
+description: >
+                                        A simple example to demonstrate how the attrchange handler
+                                        function is triggered when a style attribute is changed.
+
+categories:                             [ Tester ]
+tags:                                   [ listen, attribute, changes ]
+
+comments:                               false
+fab_menu_id:                            default
+
+permalink:                              /pages/public/learn/tts_tester/
+regenerate:                             false
+
+resources:                              []
+resource_options:
+  - attic:
+      padding_top:                      400
+      padding_bottom:                   50
+      opacity:                          0.5
+      slides:
+        - url:                          /assets/images/pages/roundtrip/images-1920x1280-bw.jpg
+          alt:                          Photo by Ricardo Gomez Angel on Unsplash
+          badge:
+            type:                       unsplash
+            author:                     Ricardo Gomez Angel
+            href:                       https://unsplash.com/@ripato/portfolio
+---
+
+// Page Initializer
+// =============================================================================
+// Enable the Liquid Preprocessor
+:page-liquid:
+
+// Set (local) page attributes here
+// -----------------------------------------------------------------------------
+// :page--attr:                         <attr-value>
+
+//  Load Liquid procedures
+// -----------------------------------------------------------------------------
+{% capture load_attributes %}themes/{{site.template.name}}/procedures/global/attributes_loader.proc{%endcapture%}
+
+// Load page attributes
+// -----------------------------------------------------------------------------
+{% include {{load_attributes}} scope="none" %}
+
+// Page content
+// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+// https://github.com/mdn/dom-examples/tree/main/web-speech-api
+// https://mdn.github.io/dom-examples/web-speech-api/speak-easy-synthesis/
+// https://stackoverflow.com/questions/11279291/a-good-text-to-speech-javascript-library
+// https://github.com/acoti/articulate.js
+// https://codepen.io/meetselva/pen/EVaLmP
+
+// Include sub-documents (if any)
+// -----------------------------------------------------------------------------
+== TTS Tester
+
+++++
+<!--h1>Speech synthesiser</h1 -->
+
+<p>
+  Enter some text in the input below and press return or the "play" button
+  to hear it. change voices using the dropdown menu.
+</p>
+
+<form>
+  <label for="txt">Enter text</label>
+  <input id="txt" type="text" class="txt" />
+  <div>
+    <label for="rate">Rate</label
+    ><input type="range" min="0.5" max="2" value="1" step="0.1" id="rate" />
+    <div class="rate-value">1</div>
+    <div class="clearfix"></div>
+  </div>
+  <div>
+    <label for="pitch">Pitch</label
+    ><input type="range" min="0" max="2" value="1" step="0.1" id="pitch" />
+    <div class="pitch-value">1</div>
+    <div class="clearfix"></div>
+  </div>
+  <select></select>
+  <div class="controls">
+    <button id="play" type="submit">Play</button>
+  </div>
+</form>
+++++
+
+++++
+<script>
+  $(function () {
+
+    const synth = window.speechSynthesis;
+
+    const inputForm = document.querySelector("form");
+    const inputTxt = document.querySelector(".txt");
+    const voiceSelect = document.querySelector("select");
+    const pitch = document.querySelector("#pitch");
+    const pitchValue = document.querySelector(".pitch-value");
+    const rate = document.querySelector("#rate");
+    const rateValue = document.querySelector(".rate-value");
+
+    let voices = [];
+
+    function populateVoiceList() {
+      voices = synth.getVoices();
+
+      for (let i = 0; i < voices.length; i++) {
+        const option = document.createElement("option");
+        option.textContent = `${voices[i].name} (${voices[i].lang})`;
+
+        if (voices[i].default) {
+          option.textContent += " — DEFAULT";
+        }
+
+        option.setAttribute("data-lang", voices[i].lang);
+        option.setAttribute("data-name", voices[i].name);
+        voiceSelect.appendChild(option);
+      }
+    }
+
+    populateVoiceList();
+    if (speechSynthesis.onvoiceschanged !== undefined) {
+      speechSynthesis.onvoiceschanged = populateVoiceList;
+    }
+
+    inputForm.onsubmit = (event) => {
+      event.preventDefault();
+
+      const utterThis = new SpeechSynthesisUtterance(inputTxt.value);
+      const selectedOption =
+        voiceSelect.selectedOptions[0].getAttribute("data-name");
+      for (let i = 0; i < voices.length; i++) {
+        if (voices[i].name === selectedOption) {
+          utterThis.voice = voices[i];
+        }
+      }
+      utterThis.pitch = pitch.value;
+      utterThis.rate = rate.value;
+      synth.speak(utterThis);
+
+      inputTxt.blur();
+    };
+
+  });
+</script>
+++++
+
+
+++++
+<style>
+
+.txt, select, form > div {
+  display: block;
+  margin: 0 auto;
+  font-family: sans-serif;
+  font-size: 16px;
+  padding: 5px;
+}
+
+.txt {
+  width: 80%;
+}
+
+select {
+  width: 83%;
+}
+
+form > div {
+  width: 81%;
+}
+
+.txt, form > div {
+  margin-bottom: 10px;
+  overflow: auto;
+}
+
+.clearfix {
+  clear: both;
+}
+
+label {
+  float: left;
+  width: 10%;
+  line-height: 1.5;
+}
+
+.rate-value, .pitch-value {
+  float: right;
+  width: 5%;
+  line-height: 1.5;
+}
+
+#rate, #pitch {
+  float: right;
+  width: 81%;
+}
+
+.controls {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.controls button {
+  padding: 10px;
+}
+
+</style>
+++++

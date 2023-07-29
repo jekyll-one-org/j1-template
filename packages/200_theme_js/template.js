@@ -46,6 +46,7 @@ window.yaml                             = require('js-yaml');
 window.log4javascript                   = require('log4javascript');
 window.liteURL                          = require('lite-url');
 window.platform                         = require('platform');
+// window.articulate                       = require('./js/speak2me/articulate.js');
 
 // Core Libraries - build|required from SOURCE
 // -----------------------------------------------------------------------------

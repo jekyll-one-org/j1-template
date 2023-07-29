@@ -63,9 +63,9 @@ gem 'jekyll', '~> 4.0'
 # ------------------------------------------------------------------------------
 # Install Webrick GEM (internally used Web Server) if Ruby V3 is used
 #
-install_if -> { RUBY_VERSION =~ /3/ } do
-  gem 'webrick', '~> 1.7'
-end
+# install_if -> { RUBY_VERSION =~ /3/ } do
+#   gem 'webrick', '~> 2.2.8'
+# end
 
 # ------------------------------------------------------------------------------
 # Code Highlighter Rouge

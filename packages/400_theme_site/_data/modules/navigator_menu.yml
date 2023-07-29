@@ -28,6 +28,10 @@
       href:                             /pages/public/learn/where_to_go/
       icon:                             foot-print
 
+    - title:                            Speak2Me
+      href:                             /pages/public/learn/s2m_tester/
+      icon:                             speaker
+
 #   - title:                            Core Web Vitals
 #     href:                             /pages/public/learn/core_web_vitals/
 #     icon:                             quadcopter
@@ -224,6 +228,10 @@
     - title:                            Modules
       icon:                             alpha-j-box
       dropdown:
+
+        - title:                        Speak2Me
+          href:                         /pages/public/learn/speak2me/
+          icon:                         speaker
 
         - title:                        Master Header
           href:                         https://jekyll.one/pages/public/manuals/modules/attic/
